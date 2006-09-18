@@ -826,12 +826,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Enter one URL <b>per line</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Enter one user email address <b>per line</b> to reserve the user email address.
 enter-one-user-id-per-line-to-reserve-the-user-id=Enter one user ID <b>per line</b> to reserve the user ID.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=공중과 개인 페이지 모두에의해 이용할 것이다 친절한url에 들어가십시요.
+enter-the-name,-image,-and-priority-level-in-descending-order=내림 차순안에 이름, 심상, 및 우선 순위에 들어가십시요. 최우선에 실은 낮은 우선권에 실의 앞에 보인다. 이름은 우선권의 전시 이름 이다. 심상은 우선권의 표시 화상 이고 주제에 관하여 완전한URL또는 경로 이을 수 있는다.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=공중 및 개인 친절할URL에 지도로 나타낼 것이다 개인 사실상 주인 및 공중에 들어가십시요.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=사용자의 타당성을 시험하기 위하여 사용될 것이다 수색 여과기에 들어가십시요. 토큰@company_id@,@email_address@, 및@user_id은 정확한 가치에 런타임에@대체된다.
 enterprise-logo=기업 로고

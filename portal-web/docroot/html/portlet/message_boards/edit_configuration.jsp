@@ -266,11 +266,65 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("thread-priorities") %>'>
-		<%= LanguageUtil.get(pageContext, "enter-priority-and-level-pairs-per-line") %>
+		<%= LanguageUtil.get(pageContext, "enter-the-name,-image,-and-priority-level-in-descending-order") %>
 
 		<br><br>
 
-		<textarea class="form-text" name="<portlet:namespace />priorities" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues("priorities", new String[0]), StringPool.NEW_LINE) %></textarea><br>
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "name") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<%= LanguageUtil.get(pageContext, "image") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<%= LanguageUtil.get(pageContext, "priority") %>
+			</td>
+		</tr>
+
+		<%
+		priorities = prefs.getValues("priorities", new String[0]);
+
+		for (int i = 0; i < 10; i++) {
+			String name = StringPool.BLANK;
+			String image = StringPool.BLANK;
+			String value = StringPool.BLANK;
+
+			if (priorities.length > i) {
+				String[] priority = StringUtil.split(priorities[i]);
+
+				name = priority[0];
+				image = priority[1];
+				value = priority[2];
+
+				if (Validator.isNull(name) && Validator.isNull(image)) {
+					value = StringPool.BLANK;
+				}
+			}
+		%>
+
+			<tr>
+				<td>
+					<input class="form-text" name="<portlet:namespace />priorityName<%= i %>" size="20" type="text" value="<%= name %>">
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<input class="form-text" name="<portlet:namespace />priorityImage<%= i %>" size="50" type="text" value="<%= image %>">
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<input class="form-text" name="<portlet:namespace />priorityValue<%= i %>" size="4" type="text" value="<%= value %>">
+				</td>
+			</tr>
+
+		<%
+		}
+		%>
+
+		</table>
 	</c:when>
 	<c:when test='<%= tabs2.equals("user-ranks") %>'>
 		<%= LanguageUtil.get(pageContext, "enter-rank-and-minimum-post-pairs-per-line") %>

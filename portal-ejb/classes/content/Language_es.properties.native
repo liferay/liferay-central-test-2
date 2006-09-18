@@ -826,12 +826,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Introduzca una URL <b>por línea</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Introduzca una dirección de correo de usuario <b>por línea</b> para reservar esa dirección.
 enter-one-user-id-per-line-to-reserve-the-user-id=Introduzca un identificador de usuario <b>por línea</b> para reservar ese identificador.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Introduzca los nombres de roles (uno <b>por línea</b>) que serán asignados por defecto a los nuevos usuarios. 
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Introduzca la URL amigable que será utilizada por las páginas tanto públicas como privadas.
+enter-the-name,-image,-and-priority-level-in-descending-order=Incorpore el nombre, la imagen, y el nivel de la prioridad en orden descendente. Los hilos de rosca con una prioridad más alta se exhiben antes de hilos de rosca con una prioridad más baja. El nombre es el nombre de la exhibición de la prioridad. La imagen es la imagen de exhibición de la prioridad y puede ser un URL completo o una trayectoria concerniente al tema.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Inscriba al público y a anfitrión virtual privado que traz al público y al URL amistoso privado.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Entre en el filtro de la búsqueda que será utilizado para probar la validez de un usuario. El @company_id@, el @email_address@, y el @user_id del símbolo @ se substituyen en el tiempo de pasada por los valores correctos.
 enterprise-logo=Logo de la empresa

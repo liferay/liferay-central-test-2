@@ -816,7 +816,6 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=أدخل رابط تشعبي في <b>السطر الواحد</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=أدخل عنوان بريد إلكتروني لمستخدم في <b>السطر الواحد</b> لحجز العنوان.
 enter-one-user-id-per-line-to-reserve-the-user-id=أدخل رمز تعريفي للمستخدم في <b>السطر الواحد</b> لحجز الرمز التعريفي.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء المجموعات الإعتيادية والتي سترتبط بالمستخدمين الجدد وذلك أسماً بالسطر الواحد. 
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء الأدوار الإعتادية التي سيرتبط المستخدمون الجدد بها <b>إسما في السطر الواحد</b>.

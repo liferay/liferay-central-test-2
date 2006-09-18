@@ -825,12 +825,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Εισαγωγή ενός URL <b>ανά γραμμή</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Εισαγωγή ενός email address <b>ανα γραμμή</b> για την προκράτηση του email address.
 enter-one-user-id-per-line-to-reserve-the-user-id=Εισαγωγή ενός user ID <b>ανα γραμμή</b> για την προκράτηση του user ID.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Εισάγετε το φιλικό url που θα χρησιμοποιηθεί και από τις δημόσιες και ιδιωτικές σελίδες.
+enter-the-name,-image,-and-priority-level-in-descending-order=Εισάγετε το όνομα, την εικόνα, και το επίπεδο προτεραιότητας με την κατιούσα σειρά. Τα νήματα με μια πιό υψηλή προτεραιότητα επιδεικνύονται πριν από τα νήματα με μια χαμηλότερη προτεραιότητα. Το όνομα είναι το όνομα επίδειξης της προτεραιότητας. Η εικόνα είναι η εικόνα επίδειξης της προτεραιότητας και μπορεί να είναι ένα πλήρες URL ή μια πορεία σχετικά με το θέμα.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Εισάγετε το δημόσιο και ιδιωτικό εικονικό οικοδεσπότη που θα χαρτογραφήσει στο δημόσιο και ιδιωτικό φιλικό URL.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Εισάγετε το φίλτρο αναζήτησης που θα χρησιμοποιηθεί για να εξετάσει την ισχύ ενός χρήστη. Τα σημεία @company_id@, @email_address@, και @user_id@ αντικαθίστανται στο χρόνο εκτέλεσης με τις σωστές τιμές.
 enterprise-logo=Επιχειρηματικό λογότυπο

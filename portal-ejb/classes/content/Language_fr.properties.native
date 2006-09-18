@@ -826,12 +826,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Entrez une URL <b>par ligne</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Entrez une adresse courril <b>par ligne</b> afin de réserver l'adresse.
 enter-one-user-id-per-line-to-reserve-the-user-id=Enter one user ID <b>per line</b> to reserve the user ID.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Écrivez le URL amical qui sera employé par les pages publiques et privées.
+enter-the-name,-image,-and-priority-level-in-descending-order=Écrivez le nom, l'image, et le niveau prioritaire dans l'ordre décroissant. Des fils avec une priorité plus élevée sont montrés avant des fils avec une priorité inférieure. Le nom est le nom d'affichage de la priorité. L'image est l'image d'affichage de la priorité et peut être un URL complet ou un chemin relativement au thème.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Présentez le public et l'hôte virtuel privé qui traceront au public et au URL amical privé.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Entrez dans le filtre de recherche qui sera utilisé pour examiner la validité d'un utilisateur. Le @company_id@, le @email_address@, et le @user_id de marque @ sont remplacés au temps d'exécution avec les valeurs correctes.
 enterprise-logo=Logo D'Entreprise

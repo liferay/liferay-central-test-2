@@ -826,12 +826,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=Eine URL <b>pro Zeile</b> eingeben.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=Eine E-Mail Adresse <b>pro Zeile</b> eingeben um die Nutzer E-Mail Adresse zu reservieren.
 enter-one-user-id-per-line-to-reserve-the-user-id=Eine Nutzer ID <b>pro Zeile</b> eingeben um die Nutzer ID zu reservieren.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Geben Sie <b>eine</b> Gemeinschaft <b>pro Zeile</b> ein, die mit neu angelegten Nutzern verknüpft werden soll.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Geben Sie <b>einen</b> Rollennamen <b>pro Zeile</b> ein, der mit neu angelegten Nutzern verknüpft werden soll.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Geben Sie den URL ein, der in den öffentlichen und privaten Seiten benutzt wird.
+enter-the-name,-image,-and-priority-level-in-descending-order=Tragen Sie den Namen, das Bild und das Priorität Niveau in absteigende Folge ein. Gewinde mit einer höheren Priorität werden vor Gewinden mit einer niedrigeren Priorität angezeigt. Der Name ist der Anzeige Name der Priorität. Das Bild ist die graphische Darstellung der Priorität und kann ein komplettes URL oder ein Weg im Verhältnis zu dem Thema sein.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Melden Sie die Öffentlichkeit und den privaten virtuellen Wirt an, die zur Öffentlichkeit und zum privaten freundlichen URL abbilden.
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Geben Sie den Suchfilter ein, der benutzt wird, um die Gültigkeit eines Benutzers zu prüfen. Die Ausdrücke @company_id@, @email_address@ und @user_id@ werden zur Laufzeit mit den entsprechenden Werten ersetzt.
 enterprise-logo=Firmenlogo

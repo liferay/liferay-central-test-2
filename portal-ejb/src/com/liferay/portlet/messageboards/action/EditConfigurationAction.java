@@ -33,7 +33,9 @@ import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -178,44 +180,23 @@ public class EditConfigurationAction extends PortletAction {
 		}
 	}
 
-	protected void updateThreadPriorities(ActionRequest req, PortletPreferences prefs)
+	protected void updateThreadPriorities(
+			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		// Sort priorities by level
+		List priorities = new ArrayList();
 
-		String[] priorities = StringUtil.split(
-			ParamUtil.getString(req, "priorities"), StringPool.NEW_LINE);
+		for (int i = 0; i < 10; i++) {
+			String name = ParamUtil.getString(req, "priorityName" + i);
+			String image = ParamUtil.getString(req, "priorityImage" + i);
+			double value = ParamUtil.getDouble(req, "priorityValue" + i);
 
-		Map map = new TreeMap();
-
-		for (int i = 0; i < priorities.length; i++) {
-			String[] kvp = StringUtil.split(priorities[i], StringPool.EQUAL);
-
-			String kvpName = kvp[0];
-			Double kvpLevel = new Double(GetterUtil.getDouble(kvp[1]));
-
-			map.put(kvpLevel, kvpName);
+			priorities.add(
+				name + StringPool.COMMA + image + StringPool.COMMA + value);
 		}
 
-		priorities = new String[map.size()];
-
-		int count = 0;
-
-		Iterator itr = map.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			Double kvpLevel = (Double)entry.getKey();
-			String kvpName = (String)entry.getValue();
-
-			priorities[count++] =
-				kvpName + StringPool.EQUAL + kvpLevel.toString();
-		}
-
-		// Set priorities
-
-		prefs.setValues("priorities", priorities);
+		prefs.setValues(
+			"priorities", (String[])priorities.toArray(new String[0]));
 	}
 
 	protected void updateUserRanks(ActionRequest req, PortletPreferences prefs)

@@ -262,12 +262,16 @@ portletURL.setParameter("categoryId", categoryId);
 
 				StringBuffer sb = new StringBuffer();
 
-				String threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority());
+				String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
 
-				if (Validator.isNotNull(threadPriority)) {
-					sb.append("<b>");
-					sb.append(threadPriority);
-					sb.append(": </b>");
+				if (threadPriority != null) {
+					sb.append("<img align=\"left\" alt=\"");
+					sb.append(threadPriority[0]);
+					sb.append("\" border=\"0\" src=\"");
+					sb.append(threadPriority[1]);
+					sb.append("\" title=\"");
+					sb.append(threadPriority[0]);
+					sb.append("\" >");
 				}
 
 				sb.append(message.getSubject());
@@ -423,12 +427,16 @@ portletURL.setParameter("categoryId", categoryId);
 
 			StringBuffer sb = new StringBuffer();
 
-			String threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority());
+			String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
 
-			if (Validator.isNotNull(threadPriority)) {
-				sb.append("<b>");
-				sb.append(threadPriority);
-				sb.append(": </b>");
+			if (threadPriority != null) {
+				sb.append("<img align=\"left\" alt=\"");
+				sb.append(threadPriority[0]);
+				sb.append("\" border=\"0\" src=\"");
+				sb.append(threadPriority[1]);
+				sb.append("\" title=\"");
+				sb.append(threadPriority[0]);
+				sb.append("\" >");
 			}
 
 			sb.append(message.getSubject());

@@ -826,12 +826,12 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=<b>每行</b>输入一个网址.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=输入使用者电子邮件地址 <b>每行</b> 以保留使用者电子邮件地址.
 enter-one-user-id-per-line-to-reserve-the-user-id=输入使用者 ID <b>每行</b> 以保留使用者编号.
-enter-priority-and-level-pairs-per-line=Enter priority and level pairs <b>per line</b>. Threads will be sorted based on the priority level in descending order.
 enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=输入缺省的和新建用户关联的<b>每行</b>社区名.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=输入缺省的和新建用户关联的<b>每行</b>角色名.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=进入将由公共和私有页使用的友好的url 。
+enter-the-name,-image,-and-priority-level-in-descending-order=输入名字、图象, 和优先级别在递减次序。螺纹以重要性被显示在螺纹之前以低优先级。名字是优先权的显示名字。图象是优先权的复显图象, 可能是完全URL 或道路相对题材。
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=进入将映射对公众和私有友好的URL 的公众和私有真正主人。
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=进入将被使用测试用户的有效性的查寻过滤器。象征@company_id@ 、@email_address@, 和@user_id @ 被替换在运行时间用正确价值。
 enterprise-logo=企业商标

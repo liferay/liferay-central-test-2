@@ -23,6 +23,7 @@
 package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.LiferayWindowState;
@@ -31,6 +32,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -276,29 +278,30 @@ public class MBUtil {
 		}
 	}
 
-	public static String getThreadPriority(
-			PortletPreferences prefs, double level)
+	public static String[] getThreadPriority(
+			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
 		throws Exception {
-
-		String priority = StringPool.BLANK;
 
 		String[] priorities = prefs.getValues("priorities", new String[0]);
 
 		for (int i = 0; i < priorities.length; i++) {
-			String[] kvp = StringUtil.split(priorities[i], StringPool.EQUAL);
+			String[] priority = StringUtil.split(priorities[i]);
 
-			String kvpName = kvp[0];
-			double kvpLevel = GetterUtil.getDouble(kvp[1]);
+			String priorityName = priority[0];
+			String priorityImage = priority[1];
+			double priorityValue = GetterUtil.getDouble(priority[2]);
 
-			if (level >= kvpLevel) {
-				priority = kvpName;
-			}
-			else {
-				break;
+			if (value == priorityValue) {
+				if (!priorityImage.startsWith(Http.HTTP)) {
+					priorityImage =
+						themeDisplay.getPathThemeImage() + priorityImage;
+				}
+
+				return new String[] {priorityName, priorityImage};
 			}
 		}
 
-		return priority;
+		return null;
 	}
 
 	public static String getUserRank(PortletPreferences prefs, int posts)

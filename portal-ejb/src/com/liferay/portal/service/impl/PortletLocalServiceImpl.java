@@ -97,6 +97,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	public Portlet getPortletById(String companyId, String portletId)
 		throws SystemException {
 
+		portletId = PortalUtil.getJsSafePortletName(portletId);
+
 		if (companyId.equals(User.DEFAULT)) {
 			throw new SystemException();
 		}
@@ -335,6 +337,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	public Portlet updatePortlet(
 			String companyId, String portletId, String roles, boolean active)
 		throws PortalException, SystemException {
+
+		portletId = PortalUtil.getJsSafePortletName(portletId);
 
 		// Primary key should be reordered to companyId, portletId FIX ME
 
