@@ -47,7 +47,7 @@ public class LayoutSetServiceImpl
         String groupId = Layout.getGroupId(ownerId);
 
 		GroupPermission.check(
-			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutSetLocalServiceUtil.updateLookAndFeel(
 			ownerId, themeId, colorSchemeId);
