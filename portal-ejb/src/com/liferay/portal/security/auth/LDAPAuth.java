@@ -294,6 +294,8 @@ public class LDAPAuth implements Authenticator {
 				try {
 					env.put(Context.SECURITY_PRINCIPAL, userId);
 					env.put(Context.SECURITY_CREDENTIALS, password);
+
+					ctx = new InitialLdapContext(env, null);
 				}
 				catch (Exception e) {
 					_log.error(
@@ -307,8 +309,11 @@ public class LDAPAuth implements Authenticator {
 			// Make sure the user has a portal account
 
 			try {
-				UserLocalServiceUtil.getUserByEmailAddress(
+				User user = UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, emailAddress);
+
+				UserLocalServiceUtil.updatePassword(
+					userId, password, password, user.isPasswordReset());
 			}
 			catch (NoSuchUserException nsue) {
 				UserLocalServiceUtil.addUser(
