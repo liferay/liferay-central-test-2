@@ -289,6 +289,8 @@ public class WebKeys {
 
 	public static final String USERS_NOTIFIED = "USERS_NOTIFIED";
 
+	public static final String VM_VARIABLES = "VM_VARIABLES";
+
 	public static final String WEBSITE = "WEBSITE";
 
 	public static final String WIKI_NODE = "WIKI_NODE";

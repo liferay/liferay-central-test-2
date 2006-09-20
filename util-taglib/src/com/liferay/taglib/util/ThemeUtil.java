@@ -39,11 +39,15 @@ import com.liferay.util.GetterUtil_IW;
 import com.liferay.util.StaticFieldGetter;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil_IW;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.velocity.VelocityContextPool;
 import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.StringWriter;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -258,6 +262,25 @@ public class ThemeUtil {
 		// Helper utilities
 
 		_setHelperUtilities(vc);
+
+		// Insert custom vm variables
+
+		Map vmVariables = (Map)req.getAttribute(WebKeys.VM_VARIABLES);
+
+		if (vmVariables != null) {
+			Iterator itr = vmVariables.entrySet().iterator();
+			
+			while (itr.hasNext()) {
+				Map.Entry entry = (Map.Entry)itr.next();
+
+				String key = (String)entry.getKey();
+				Object value = entry.getValue();
+
+				if (Validator.isNotNull(key)) {
+					vc.put(key, value);
+				}
+			}
+		}
 
 		// Merge templates
 
