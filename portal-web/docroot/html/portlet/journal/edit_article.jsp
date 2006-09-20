@@ -609,7 +609,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		</tr>
 	</c:when>
 	<c:otherwise>
-		<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>">
+		<tr>
+			<td colspan="3">
+				<input name="<portlet:namespace />languageId" type="hidden" value="<%= defaultLanguageId %>">
+			</td>
+		</tr>
 	</c:otherwise>
 </c:choose>
 
