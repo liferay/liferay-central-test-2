@@ -22,9 +22,15 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Http;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
+import java.io.InputStream;
+import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -32,6 +38,9 @@ import javax.portlet.PortletURL;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
+import org.alfresco.webservice.accesscontrol.AccessControlServiceSoapBindingStub;
+import org.alfresco.webservice.accesscontrol.AccessStatus;
+import org.alfresco.webservice.accesscontrol.HasPermissionsResult;
 import org.alfresco.webservice.content.Content;
 import org.alfresco.webservice.content.ContentServiceSoapBindingStub;
 import org.alfresco.webservice.repository.QueryResult;
@@ -262,7 +271,84 @@ public class AlfrescoContentUtil {
 
 		return sb.toString();
 	}
+	
+	public static boolean hasPermission(String login, String password,
+		String uuid, String action) {
+		
+		AccessControlServiceSoapBindingStub accessControlService = WebServiceFactory
+			.getAccessControlService();
 
+		boolean hasPerm = false;
+
+		try {
+			
+			AuthenticationUtils.startSession(login, password);
+
+			Reference reference = new Reference(_SPACES_STORE, uuid, null);
+
+			Predicate predicate = new Predicate(new Reference[] { reference },
+				_SPACES_STORE, null);
+
+			HasPermissionsResult[] results = accessControlService
+				.hasPermissions(predicate, new String[] { Constants.WRITE });
+
+			if ((results.length == 1)
+				&& results[0].getPermission().equals(Constants.WRITE)
+				&& results[0].getAccessStatus().equals(AccessStatus.acepted)) {
+
+				hasPerm = true;
+			}
+		}
+		catch (Exception e) {
+			hasPerm = false;
+
+			_log.warn("Could not start session: \n" + e.getMessage());
+		}
+		finally {
+			AuthenticationUtils.endSession();
+		}
+
+		return hasPerm;
+	}
+	
+    public static String getEndpointAddress() {
+		String endPoint = _DEFAULT_ENDPOINT_ADDRESS;
+		ClassLoader cl = AlfrescoContentUtil.class.getClassLoader();
+		InputStream is = cl.getResourceAsStream(_PROPERTY_FILE_NAME);
+		
+		if (is != null) {
+
+			Properties props = new Properties();
+
+			try {
+				props.load(is);
+
+				endPoint = props.getProperty(_REPO_LOCATION);
+
+				if (_log.isDebugEnabled() == true) {
+					_log.debug("Using endpoint " + endPoint);
+				}
+			}
+			catch (Exception e) {
+				if (_log.isDebugEnabled() == true) {
+					_log.debug(
+						"Unable to file web service client proerties file.  Using default.");
+				}
+			}
+		}
+
+		return endPoint;
+	}
+    	
+    private static final String _DEFAULT_ENDPOINT_ADDRESS = 
+    	"http://localhost:8080";
+
+    private static final String _PROPERTY_FILE_NAME = 
+    	"alfresco/webserviceclient.properties";
+
+    private static final String _REPO_LOCATION = 
+    	"repository.location";
+    
 	private static final Store _SPACES_STORE =
 		new Store(StoreEnum.workspace, "SpacesStore");
 

@@ -51,8 +51,25 @@ String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 	</table>
 </c:if>
 
-<%--<c:if test="<%= !preview && Validator.isNotNull(nodeUuid) && themeDisplay.isSignedIn() && PortletPermission.contains(permissionChecker, plid, PortletKeys.ALFRESCO_CONTENT, ActionKeys.CONFIGURATION) %>">
+<c:if test="<%= themeDisplay.isSignedIn() %>">
 	<br>
 
-	<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'/alfresco/navigate/showDocDetails/workspace/SpacesStore/" + nodeUuid + "\'); void(\'\');" %>' />
-</c:if>--%>
+	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
+		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
+	</c:if>
+<%
+	String login = StringPool.BLANK;
+	
+	if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
+		login = user.getEmailAddress();
+	}
+	else {
+		login = user.getUserId();
+	}
+
+%>
+	<c:if test="<%= !preview && Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(login, PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
+		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "\'); void(\'\');" %>' />
+	</c:if>
+
+</c:if>
