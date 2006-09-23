@@ -34,9 +34,7 @@ uuid = (String)renderRequest.getAttribute("uuid");
 
 %>
 <c:if test="<%= preview %>">
-	<table border="2" bordercolor="#FF0000" cellpadding="8" cellspacing="0" width="100%">
-	<tr>
-		<td>
+	<div style="border: 2px solid #ff0000"; padding: 8px">
 </c:if>
 
 <c:choose>
@@ -49,9 +47,7 @@ uuid = (String)renderRequest.getAttribute("uuid");
 </c:choose>
 
 <c:if test="<%= preview %>">
-		</td>
-	</tr>
-	</table>
+	</div>
 </c:if>
 
 <c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
