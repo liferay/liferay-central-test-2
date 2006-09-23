@@ -229,10 +229,7 @@ public class AlfrescoContentUtil {
 			return null;
 		}
 
-		content = content.replaceAll("%28", "(");
-		content = content.replaceAll("%29", ")");
-
-		Pattern p = Pattern.compile("\"/c/portal/\\$link=\\((.*)\\)\"");
+		Pattern p = Pattern.compile("\"workspace://SpacesStore/link/([\\w\\-]*)\"");
 
 		Matcher m = p.matcher(content);
 
@@ -240,21 +237,11 @@ public class AlfrescoContentUtil {
 
 		try {
 			while (m.find()) {
-				String[] rawPath = m.group(1).split("/");
-
-				String path = "/app:company_home";
-
-				for (int i = 0; i < rawPath.length; i++) {
-					if (Validator.isNull(rawPath[i])) {
-						continue;
-					}
-
-					path = path + "/cm:" + rawPath[i];
-				}
+				String uuid = m.group(1);
 
 				PortletURL portletURL = res.createRenderURL();
 
-				portletURL.setParameter("path", path);
+				portletURL.setParameter("uuid", uuid);
 
 				if (maximizeLinks) {
 					portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -269,7 +256,32 @@ public class AlfrescoContentUtil {
 
 		m.appendTail(sb);
 
-		return sb.toString();
+		content = sb.toString();
+
+		p = Pattern.compile("\"workspace://SpacesStore/([\\w\\-/\\.]*)\"");
+		
+		m = p.matcher(content);
+
+		sb = new StringBuffer();
+		
+		try {
+			while (m.find()) {
+				String imagePath = m.group(1);
+
+				m.appendReplacement(sb, "\"" + getEndpointAddress()
+					+ "/alfresco/download/direct/workspace/SpacesStore/"
+					+ imagePath + "?guest=true" + "\"");
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		m.appendTail(sb);
+
+		content = sb.toString();
+		
+		return content;
 	}
 	
 	public static boolean hasPermission(String login, String password,

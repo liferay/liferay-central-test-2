@@ -62,11 +62,7 @@ public class ViewAction extends PortletAction {
 		boolean maximizeLinks = GetterUtil.getBoolean(
 			prefs.getValue("maximize-links", StringPool.BLANK));
 
-		boolean preview = ParamUtil.getBoolean(req, "preview");
-
-		if (preview) {
-			uuid = ParamUtil.getString(req, "uuid");
-		}
+		uuid = ParamUtil.getString(req, "uuid", uuid);
 		
 		req.setAttribute("uuid", uuid);
 		
@@ -89,6 +85,7 @@ public class ViewAction extends PortletAction {
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
+		boolean preview = ParamUtil.getBoolean(req, "preview");
 
 		if (!preview) {
 			return mapping.findForward("portlet.alfresco_content.view_1");
