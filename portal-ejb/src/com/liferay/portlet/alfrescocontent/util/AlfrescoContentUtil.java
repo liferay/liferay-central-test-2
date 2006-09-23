@@ -22,11 +22,7 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.InputStream;
@@ -62,8 +58,8 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="AlfrescoContentUtil.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Michael Young
  * @author Brian Wing Shun Chan
- * @author Raymond Auge
  *
  */
 public class AlfrescoContentUtil {
