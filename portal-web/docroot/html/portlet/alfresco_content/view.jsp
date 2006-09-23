@@ -25,11 +25,14 @@
 <%@ include file="/html/portlet/alfresco_content/init.jsp" %>
 
 <%
-boolean preview = Validator.isNotNull(request.getParameter("previewURL"));
 
 String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
-%>
 
+boolean preview = ParamUtil.getBoolean(renderRequest, "preview");
+
+uuid = (String)renderRequest.getAttribute("uuid");
+
+%>
 <c:if test="<%= preview %>">
 	<table border="2" bordercolor="#FF0000" cellpadding="8" cellspacing="0" width="100%">
 	<tr>
@@ -51,25 +54,26 @@ String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 	</table>
 </c:if>
 
-<c:if test="<%= themeDisplay.isSignedIn() %>">
+<c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
 	<br>
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
 		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
 	</c:if>
 <%
-	String login = StringPool.BLANK;
-	
-	if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
-		login = user.getEmailAddress();
-	}
-	else {
-		login = user.getUserId();
-	}
+
+String login = StringPool.BLANK;
+
+if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
+	login = user.getEmailAddress();
+}
+else {
+	login = user.getUserId();
+}
 
 %>
-	<c:if test="<%= !preview && Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(login, PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
-		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "\'); void(\'\');" %>' />
+	<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(login, PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
+		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "\'); void(\'\');" %>' />
 	</c:if>
 
 </c:if>

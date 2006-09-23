@@ -62,6 +62,14 @@ public class ViewAction extends PortletAction {
 		boolean maximizeLinks = GetterUtil.getBoolean(
 			prefs.getValue("maximize-links", StringPool.BLANK));
 
+		boolean preview = ParamUtil.getBoolean(req, "preview");
+
+		if (preview) {
+			uuid = ParamUtil.getString(req, "uuid");
+		}
+		
+		req.setAttribute("uuid", uuid);
+		
 		String content = null;
 
 		try {
@@ -81,12 +89,13 @@ public class ViewAction extends PortletAction {
 
 		req.setAttribute(WebKeys.ALFRESCO_CONTENT, content);
 
-		//if (Validator.isNull(previewURL)) {
+
+		if (!preview) {
 			return mapping.findForward("portlet.alfresco_content.view_1");
-		/*}
+		}
 		else {
 			return mapping.findForward("portlet.alfresco_content.view_2");
-		}*/
+		}					
 	}
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
