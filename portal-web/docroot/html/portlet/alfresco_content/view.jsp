@@ -67,9 +67,15 @@ else {
 	login = user.getUserId();
 }
 
+String ssoSimulateParam = StringPool.BLANK;
+
+if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE))) {
+	ssoSimulateParam = "user=" + login + "&";
+}
+
 %>
 	<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(login, PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
-		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "\'); void(\'\');" %>' />
+		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "&" + ssoSimulateParam + "\'); void(\'\');" %>' />
 	</c:if>
 
 </c:if>

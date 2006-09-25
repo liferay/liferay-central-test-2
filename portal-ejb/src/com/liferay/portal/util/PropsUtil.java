@@ -540,6 +540,10 @@ public class PropsUtil {
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_BODY = "admin.email.password.sent.body";
 
+	// Alfresco Portlet
+
+	public static final String ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE = "alfresco.content.one.step.edit.sso.simulate";
+
 	// Calendar Portlet
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";
