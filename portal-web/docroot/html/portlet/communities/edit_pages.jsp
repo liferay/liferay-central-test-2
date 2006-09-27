@@ -836,7 +836,7 @@ portletURL.setParameter("groupId", groupId);
 
 				<br><br>
 
-				<input class="form-text" name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= Time.getShortTimestamp() %>.lar">
+				<input class="form-text" name="<portlet:namespace />exportFileName" size="50" type="text" value="<%= StringUtil.replace(rootNodeName, " ", "_") %>-<%= Time.getShortTimestamp() %>.lar">
 
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "export") %>' onClick="self.location = '<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/communities/export_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>&<portlet:namespace />exportFileName=' + document.<portlet:namespace />fm.<portlet:namespace />exportFileName.value;">
 			</c:when>
