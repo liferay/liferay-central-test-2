@@ -240,11 +240,9 @@ createAccountURL.setParameter("struts_action", "/my_account/create_account");
 
 		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "send-new-password") %>">
 
-		</fm>
+		</form>
 	</liferay-ui:section>
 </liferay-ui:tabs>
-
-</form>
 
 <script type="text/javascript">
 	<c:choose>
