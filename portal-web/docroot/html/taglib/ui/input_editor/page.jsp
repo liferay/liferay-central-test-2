@@ -37,6 +37,7 @@ else {
 }
 
 String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMethod");
+String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
 
@@ -44,6 +45,10 @@ String editorURL = themeDisplay.getPathJavaScript() + "/editor/editor.jsp?p_l_id
 
 if (Validator.isNotNull(initMethod)) {
 	editorURL += "&initMethod=" + initMethod;
+}
+
+if (Validator.isNotNull(onChangeMethod)) {
+	editorURL += "&onChangeMethod=" + onChangeMethod;
 }
 %>
 
