@@ -61,6 +61,7 @@ public class PortletInstanceFactory {
 		throws PortletException {
 
 		String poolId = PortletInstanceFactory.class.getName();
+
 		if (!portlet.isWARFile()) {
 			poolId += "." + portlet.getCompanyId();
 		}

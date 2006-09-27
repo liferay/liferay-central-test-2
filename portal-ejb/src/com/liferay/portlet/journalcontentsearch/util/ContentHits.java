@@ -27,8 +27,6 @@ import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServi
 import com.liferay.util.Time;
 import com.liferay.util.lucene.Hits;
 
-import java.io.IOException;
-
 import java.util.ArrayList;
 import java.util.List;
 

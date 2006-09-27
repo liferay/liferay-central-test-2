@@ -22,13 +22,9 @@
 
 package com.liferay.portlet.messageboards.util;
 
-import com.liferay.portal.SystemException;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.Hits;
-
-import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
