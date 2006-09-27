@@ -50,6 +50,7 @@ import org.alfresco.webservice.types.Store;
 import org.alfresco.webservice.types.StoreEnum;
 import org.alfresco.webservice.util.AuthenticationUtils;
 import org.alfresco.webservice.util.Constants;
+import org.alfresco.webservice.util.ContentUtils;
 import org.alfresco.webservice.util.WebServiceFactory;
 
 import org.apache.commons.logging.Log;
@@ -123,10 +124,10 @@ public class AlfrescoContentUtil {
 
 			Content[] contents = contentService.read(
 				predicate, Constants.PROP_CONTENT);
+			
+			String content = ContentUtils.getContentAsString(contents[0]);
 
-			String ticket = AuthenticationUtils.getCurrentTicket();
-
-			return Http.URLtoString(contents[0].getUrl() + "?ticket=" + ticket);
+			return content;
 		}
 		finally {
 			AuthenticationUtils.endSession();
@@ -225,9 +226,7 @@ public class AlfrescoContentUtil {
 			return null;
 		}
 
-		Pattern p = Pattern.compile("\"workspace://SpacesStore/link/([\\w\\-]*)\"");
-
-		Matcher m = p.matcher(content);
+		Matcher m = _PROXY_URL_PATTERN.matcher(content);
 
 		StringBuffer sb = new StringBuffer();
 
@@ -254,9 +253,7 @@ public class AlfrescoContentUtil {
 
 		content = sb.toString();
 
-		p = Pattern.compile("\"workspace://SpacesStore/([\\w\\-/\\.]*)\"");
-		
-		m = p.matcher(content);
+		m = _RESOURCE_URL_PATTERN.matcher(content);
 
 		sb = new StringBuffer();
 		
@@ -265,7 +262,6 @@ public class AlfrescoContentUtil {
 				String imagePath = m.group(1);
 
 				m.appendReplacement(sb, "\"" + getEndpointAddress()
-					+ "/alfresco/download/direct/workspace/SpacesStore/"
 					+ imagePath + "?guest=true" + "\"");
 			}
 		}
@@ -348,6 +344,12 @@ public class AlfrescoContentUtil {
 		return endPoint;
 	}
     	
+    private static final Pattern _PROXY_URL_PATTERN = Pattern.compile(
+		"\"workspace://SpacesStore/link/([\\w\\-]*)\"");
+
+    private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
+		"\"/?(?:\\.\\.)?(?:/\\.\\.)*(/alfresco/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
+
     private static final String _DEFAULT_ENDPOINT_ADDRESS = 
     	"http://localhost:8080";
 
