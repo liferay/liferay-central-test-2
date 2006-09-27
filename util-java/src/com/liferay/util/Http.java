@@ -32,7 +32,9 @@ import java.net.URLConnection;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -41,18 +43,23 @@ import javax.portlet.RenderRequest;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.httpclient.Cookie;
+import org.apache.commons.httpclient.Credentials;
 import org.apache.commons.httpclient.Header;
 import org.apache.commons.httpclient.HostConfiguration;
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.HttpMethod;
 import org.apache.commons.httpclient.HttpState;
+import org.apache.commons.httpclient.NTCredentials;
 import org.apache.commons.httpclient.SimpleHttpConnectionManager;
 import org.apache.commons.httpclient.URI;
 import org.apache.commons.httpclient.UsernamePasswordCredentials;
+import org.apache.commons.httpclient.auth.AuthPolicy;
 import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Http.java.html"><b><i>View Source</i></b></a>
@@ -76,8 +83,17 @@ public class Http {
 
 	public static final int HTTPS_PORT = 443;
 
+	public static final String PROXY_AUTH_TYPE = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.auth.type"));
+
 	public static final String PROXY_HOST = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.host"));
+
+	public static final String PROXY_NTLM_DOMAIN = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.ntlm.domain"));
+
+	public static final String PROXY_NTLM_HOST = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.ntlm.host"));
 
 	public static final int PROXY_PORT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".proxy.port"));
@@ -87,7 +103,7 @@ public class Http {
 
 	public static final String PROXY_PASSWORD = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.password"));
-
+	
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
@@ -331,13 +347,37 @@ public class Http {
 				hostConfig.setProxy(PROXY_HOST, PROXY_PORT);
 
 				if (Validator.isNotNull(PROXY_USERNAME)) {
+					Credentials credentials = null;
+					
+					if (PROXY_AUTH_TYPE.equals("username-password")) {
+						credentials = new UsernamePasswordCredentials(
+							PROXY_USERNAME, PROXY_PASSWORD); 
+					}
+					else if (PROXY_AUTH_TYPE.equals("ntlm")) {
+						credentials = new NTCredentials(
+							PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
+							PROXY_NTLM_DOMAIN);
+							
+						List authPrefs = new ArrayList();
+
+						authPrefs.add(AuthPolicy.NTLM);
+						authPrefs.add(AuthPolicy.BASIC);
+						authPrefs.add(AuthPolicy.DIGEST);
+
+						client.getParams().setParameter(
+							AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
+					}
+					
 					client.getState().setProxyCredentials(
-						new AuthScope(PROXY_HOST, PROXY_PORT, null),
-						new UsernamePasswordCredentials(
-							PROXY_USERNAME, PROXY_PASSWORD));
+						new AuthScope(PROXY_HOST, PROXY_PORT, null), 
+							credentials);
 				}
 			}
-
+			
+			if (_log.isDebugEnabled()) {
+				_log.debug("Location is " + location);
+			}
+ 
 			client.setHostConfiguration(hostConfig);
 			client.setConnectionTimeout(TIMEOUT);
 			client.setTimeout(TIMEOUT);
@@ -457,5 +497,6 @@ public class Http {
 
 		return xml;
 	}
-
+	
+	private static Log _log = LogFactory.getLog(Http.class);
 }
