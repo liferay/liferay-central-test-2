@@ -23,9 +23,11 @@
 %>
 
 <%@ page import="com.liferay.util.ParamUtil" %>
+<%@ page import="com.liferay.util.Validator" %>
 
 <%
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
+String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 %>
 
 <html>
@@ -35,11 +37,11 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 	<script src="../util.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function getHTML() {
-			return textArea.value;
+			return document.getElementById("textArea").value;
 		}
 
 		function setHTML(value) {
-			textArea.value = value;
+			document.getElementById("textArea").value = value;
 		}
 
 		function initEditor() {
@@ -53,7 +55,19 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 <table bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" height="100%" width="100%">
 <tr>
 	<td bgcolor="#FFFFFF" height="100%">
-		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"></textarea>
+		<textarea style="font-family: monospace; height: 100%; width: 100%;" id="textArea" name="textArea"
+
+		<%
+		if (Validator.isNotNull(onChangeMethod)) {
+		%>
+
+			onChange="parent.<%= onChangeMethod %>(this.value)"
+
+		<%
+		}
+		%>
+
+		></textarea>
 	</td>
 </tr>
 </table>

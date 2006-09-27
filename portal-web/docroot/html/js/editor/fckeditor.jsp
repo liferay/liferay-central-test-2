@@ -23,11 +23,13 @@
 %>
 
 <%@ page import="com.liferay.util.ParamUtil" %>
+<%@ page import="com.liferay.util.Validator" %>
 
 <%
 String plid = ParamUtil.getString(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
+String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
 // Add custom configuration to fckeditor/fckconfig.jsp. Copy
@@ -75,6 +77,26 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 			fckEditor.ReplaceTextarea();
 		}
 
+		function onChangeCallback() {
+
+			<%
+			if (Validator.isNotNull(onChangeMethod)) {
+			%>
+
+				var dirty = FCKeditorAPI.GetInstance("FCKeditor1").IsDirty();
+
+				if (dirty) {
+					parent.<%= onChangeMethod %>(getText());
+
+					FCKeditorAPI.GetInstance("FCKeditor1").ResetIsDirty();
+				}
+
+			<%
+			}
+			%>
+
+		}
+
 		window.onload = function() {
 			if (document.all) {
 
@@ -85,11 +107,13 @@ String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METH
 				}
 
 				setTimeout("initFckArea()", 500 * parent.fckEditorCount);
+				setTimeout("setInterval('onChangeCallback()', 300)", 550 * parent.fckEditorCount)
 
 				parent.fckEditorCount++;
 			}
 			else {
 				initFckArea();
+				setTimeout("setInterval('onChangeCallback()', 300)", 300);
 			}
 		}
 	</script>

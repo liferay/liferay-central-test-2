@@ -23,9 +23,11 @@
 %>
 
 <%@ page import="com.liferay.util.ParamUtil" %>
+<%@ page import="com.liferay.util.Validator" %>
 
 <%
 String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
+String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 %>
 
 <html>
@@ -35,6 +37,8 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 	<script src="../util.js" type="text/javascript"></script>
 	<script src="tinymce/tiny_mce.js" type="text/javascript"></script>
 	<script type="text/javascript">
+		var onChangeCallbackCounter = 0;
+
 		tinyMCE.init({
 			mode : "textareas",
 			theme : "advanced",
@@ -49,11 +53,9 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 			theme_advanced_toolbar_align : "left",
 			theme_advanced_toolbar_location : "top",
 			theme_advanced_path_location : "bottom",
-			file_browser_callback : "fileBrowserCallBack"
+			file_browser_callback : "fileBrowserCallback",
+			onchange_callback : "onChangeCallback"
 		});
-
-		function fileBrowserCallBack(field_name, url, type) {
-		}
 
 		function init(value) {
 			setHTML(decodeURIComponent(value));
@@ -69,6 +71,38 @@ String initMethod = ParamUtil.get(request, "initMethod", DEFAULT_INIT_METHOD);
 
 		function initEditor() {
 			init(parent.<%= initMethod %>());
+		}
+
+		function fileBrowserCallback(field_name, url, type) {
+		}
+
+		function onChangeCallback(tinyMCE) {
+
+			// This purposely ignores the first callback event because each call
+			// to setContent triggers an undo level which fires the callback
+			// when no changes have yet been made.
+
+			// setContent is not really the correct way of initializing this
+			// editor with content. The content should be placed statically
+			// (from the editor's perspective) within the textarea. This is a
+			// problem from the portal's perspective because it's passing the
+			// content via a javascript method (initMethod).
+
+			if (onChangeCallbackCounter > 0) {
+
+				<%
+				if (Validator.isNotNull(onChangeMethod)) {
+				%>
+
+					parent.<%= onChangeMethod %>(getHTML());
+
+				<%
+				}
+				%>
+
+			}
+
+			onChangeCallbackCounter++;
 		}
 	</script>
 </head>
