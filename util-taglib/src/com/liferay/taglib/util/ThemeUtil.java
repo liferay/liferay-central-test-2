@@ -269,7 +269,7 @@ public class ThemeUtil {
 
 		if (vmVariables != null) {
 			Iterator itr = vmVariables.entrySet().iterator();
-			
+
 			while (itr.hasNext()) {
 				Map.Entry entry = (Map.Entry)itr.next();
 

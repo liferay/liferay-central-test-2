@@ -26,6 +26,7 @@ import com.liferay.util.Http;
 import com.liferay.util.Validator;
 
 import java.io.InputStream;
+
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -123,10 +124,10 @@ public class AlfrescoContentUtil {
 
 			Content[] contents = contentService.read(
 				predicate, Constants.PROP_CONTENT);
-			
+
 			String ticket = AuthenticationUtils.getCurrentTicket();
 
-			String content = Http.URLtoString(contents[0].getUrl() + 
+			String content = Http.URLtoString(contents[0].getUrl() +
 				"?ticket=" + ticket);
 
 			return content;
@@ -258,7 +259,7 @@ public class AlfrescoContentUtil {
 		m = _RESOURCE_URL_PATTERN.matcher(content);
 
 		sb = new StringBuffer();
-		
+
 		try {
 			while (m.find()) {
 				String imagePath = m.group(1);
@@ -274,20 +275,20 @@ public class AlfrescoContentUtil {
 		m.appendTail(sb);
 
 		content = sb.toString();
-		
+
 		return content;
 	}
-	
+
 	public static boolean hasPermission(String login, String password,
 		String uuid, String action) {
-		
+
 		AccessControlServiceSoapBindingStub accessControlService = WebServiceFactory
 			.getAccessControlService();
 
 		boolean hasPerm = false;
 
 		try {
-			
+
 			AuthenticationUtils.startSession(login, password);
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, null);
@@ -316,12 +317,12 @@ public class AlfrescoContentUtil {
 
 		return hasPerm;
 	}
-	
+
     public static String getEndpointAddress() {
 		String endPoint = _DEFAULT_ENDPOINT_ADDRESS;
 		ClassLoader cl = AlfrescoContentUtil.class.getClassLoader();
 		InputStream is = cl.getResourceAsStream(_PROPERTY_FILE_NAME);
-		
+
 		if (is != null) {
 
 			Properties props = new Properties();
@@ -345,22 +346,22 @@ public class AlfrescoContentUtil {
 
 		return endPoint;
 	}
-    	
+
     private static final Pattern _PROXY_URL_PATTERN = Pattern.compile(
 		"\"workspace://SpacesStore/([\\w\\-]*)\"");
 
     private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
 		"\"(?:\\.\\.)?(?:/\\.\\.)*(/alfresco/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
 
-    private static final String _DEFAULT_ENDPOINT_ADDRESS = 
+    private static final String _DEFAULT_ENDPOINT_ADDRESS =
     	"http://localhost:8080";
 
-    private static final String _PROPERTY_FILE_NAME = 
+    private static final String _PROPERTY_FILE_NAME =
     	"alfresco/webserviceclient.properties";
 
-    private static final String _REPO_LOCATION = 
+    private static final String _REPO_LOCATION =
     	"repository.location";
-    
+
 	private static final Store _SPACES_STORE =
 		new Store(StoreEnum.workspace, "SpacesStore");
 

@@ -83,11 +83,20 @@ public class Http {
 
 	public static final int HTTPS_PORT = 443;
 
+	public static final String PROXY_HOST = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.host"));
+
+	public static final int PROXY_PORT = GetterUtil.getInteger(
+		SystemProperties.get(Http.class.getName() + ".proxy.port"));
+
 	public static final String PROXY_AUTH_TYPE = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.auth.type"));
 
-	public static final String PROXY_HOST = GetterUtil.getString(
-		SystemProperties.get(Http.class.getName() + ".proxy.host"));
+	public static final String PROXY_USERNAME = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.username"));
+
+	public static final String PROXY_PASSWORD = GetterUtil.getString(
+		SystemProperties.get(Http.class.getName() + ".proxy.password"));
 
 	public static final String PROXY_NTLM_DOMAIN = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.ntlm.domain"));
@@ -95,15 +104,6 @@ public class Http {
 	public static final String PROXY_NTLM_HOST = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.ntlm.host"));
 
-	public static final int PROXY_PORT = GetterUtil.getInteger(
-		SystemProperties.get(Http.class.getName() + ".proxy.port"));
-
-	public static final String PROXY_USERNAME = GetterUtil.getString(
-		SystemProperties.get(Http.class.getName() + ".proxy.username"));
-
-	public static final String PROXY_PASSWORD = GetterUtil.getString(
-		SystemProperties.get(Http.class.getName() + ".proxy.password"));
-	
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
 
@@ -348,16 +348,16 @@ public class Http {
 
 				if (Validator.isNotNull(PROXY_USERNAME)) {
 					Credentials credentials = null;
-					
+
 					if (PROXY_AUTH_TYPE.equals("username-password")) {
 						credentials = new UsernamePasswordCredentials(
-							PROXY_USERNAME, PROXY_PASSWORD); 
+							PROXY_USERNAME, PROXY_PASSWORD);
 					}
 					else if (PROXY_AUTH_TYPE.equals("ntlm")) {
 						credentials = new NTCredentials(
 							PROXY_USERNAME, PROXY_PASSWORD, PROXY_NTLM_HOST,
 							PROXY_NTLM_DOMAIN);
-							
+
 						List authPrefs = new ArrayList();
 
 						authPrefs.add(AuthPolicy.NTLM);
@@ -367,17 +367,17 @@ public class Http {
 						client.getParams().setParameter(
 							AuthPolicy.AUTH_SCHEME_PRIORITY, authPrefs);
 					}
-					
+
 					client.getState().setProxyCredentials(
-						new AuthScope(PROXY_HOST, PROXY_PORT, null), 
-							credentials);
+						new AuthScope(PROXY_HOST, PROXY_PORT, null),
+						credentials);
 				}
 			}
-			
+
 			if (_log.isDebugEnabled()) {
 				_log.debug("Location is " + location);
 			}
- 
+
 			client.setHostConfiguration(hostConfig);
 			client.setConnectionTimeout(TIMEOUT);
 			client.setTimeout(TIMEOUT);
@@ -497,6 +497,7 @@ public class Http {
 
 		return xml;
 	}
-	
+
 	private static Log _log = LogFactory.getLog(Http.class);
+
 }

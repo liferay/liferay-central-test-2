@@ -64,9 +64,9 @@ public class ViewAction extends PortletAction {
 			prefs.getValue("maximize-links", StringPool.BLANK));
 
 		uuid = ParamUtil.getString(req, "uuid", uuid);
-		
+
 		req.setAttribute("uuid", uuid);
-		
+
 		String content = null;
 
 		try {
@@ -93,7 +93,7 @@ public class ViewAction extends PortletAction {
 		}
 		else {
 			return mapping.findForward("portlet.alfresco_content.view_2");
-		}					
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
