@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.io.UnsupportedEncodingException;
 
@@ -98,18 +99,22 @@ public class Encryptor {
 			if ((ServerDetector.isWebSphere()) &&
 				(PROVIDER_CLASS.equals(SUN_PROVIDER_CLASS))) {
 
-				_log.warn(
-					"WebSphere does not have " + SUN_PROVIDER_CLASS +
-						", using " + IBM_PROVIDER_CLASS + " instead");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"WebSphere does not have " + SUN_PROVIDER_CLASS +
+							", using " + IBM_PROVIDER_CLASS + " instead");
+				}
 
 				providerClass = Class.forName(IBM_PROVIDER_CLASS);
 			}
 			else if (System.getProperty("java.vm.vendor").equals(
 						"IBM Corporation")) {
 
-				_log.warn(
-					"IBM JVM does not have " + SUN_PROVIDER_CLASS + ", using " +
-						IBM_PROVIDER_CLASS + " instead");
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"IBM JVM does not have " + SUN_PROVIDER_CLASS +
+							", using " + IBM_PROVIDER_CLASS + " instead");
+				}
 
 				providerClass = Class.forName(IBM_PROVIDER_CLASS);
 			}
@@ -155,15 +160,17 @@ public class Encryptor {
 			mDigest.update(text.getBytes(ENCODING));
 		}
 		catch (NoSuchAlgorithmException nsae) {
-			nsae.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(nsae));
 		}
 		catch (UnsupportedEncodingException uee) {
-			uee.printStackTrace();
+			_log.error(StackTraceUtil.getStackTrace(uee));
 		}
 
-		byte raw[] = mDigest.digest();
+		byte[] raw = mDigest.digest();
 
-		return (new BASE64Encoder()).encode(raw);
+		BASE64Encoder encoder = new BASE64Encoder();
+
+		return encoder.encode(raw);
 	}
 
 	public static String encrypt(Key key, String plainText)

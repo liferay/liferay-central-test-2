@@ -20,7 +20,7 @@
 		</path>
 
 		<path id="portal-client.classpath">
-			<pathelement path="${project.dir}/lib/development/activation.jar;${project.dir}/lib/development/mail.jar;${project.dir}/lib/portal/axis.jar;${project.dir}/lib/portal/commons-discovery.jar;${project.dir}/lib/portal/commons-logging.jar;${project.dir}/lib/portal/concurrent.jar;${project.dir}/lib/portal/jaxrpc.jar;${project.dir}/lib/portal/saaj.jar;${project.dir}/lib/portal/trove.jar;${project.dir}/lib/portal/wsdl4j.jar;${project.dir}/portal-client/portal-client.jar" />
+			<pathelement path="${project.dir}/lib/development/activation.jar;${project.dir}/lib/development/mail.jar;${project.dir}/lib/portal/axis.jar;${project.dir}/lib/portal/commons-discovery.jar;${project.dir}/lib/portal/commons-logging.jar;${project.dir}/lib/portal/concurrent.jar;${project.dir}/lib/portal/jaxrpc.jar;${project.dir}/lib/portal/saaj.jar;${project.dir}/lib/portal/trove.jar;${project.dir}/lib/portal/wsdl4j.jar;${project.dir}/portal-client/portal-client.jar;${project.dir}/util-java/util-java.jar" />
 			<path refid="junit.classpath" />
 		</path>
 

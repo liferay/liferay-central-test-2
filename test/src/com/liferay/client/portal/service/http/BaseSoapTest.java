@@ -23,6 +23,7 @@
 package com.liferay.client.portal.service.http;
 
 import com.liferay.test.TestProps;
+import com.liferay.util.Encryptor;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -48,7 +49,7 @@ public class BaseSoapTest extends TestCase {
 
 		if (authenticated) {
 			String userId = TestProps.get("soap.user.id");
-			String password = TestProps.get("soap.password");
+			String password = Encryptor.digest(TestProps.get("soap.password"));
 
 			url =
 				"http://" + userId + ":" + password +
