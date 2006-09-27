@@ -70,6 +70,12 @@ SearchContainer searchContainer = new SearchContainer(renderRequest, null, null,
 
 Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, categoryIdsArray, threadId, keywords);
 
+ThreadHits threadHits = new ThreadHits();
+
+threadHits.recordHits(hits);
+
+hits = threadHits;
+
 Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 int total = hits.getLength();
 

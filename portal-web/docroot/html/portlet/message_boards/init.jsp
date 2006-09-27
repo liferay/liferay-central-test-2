@@ -50,6 +50,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %><%--
 
 --%><%@ page import="org.apache.lucene.document.Document" %><%--

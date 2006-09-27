@@ -20,10 +20,11 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journalcontentsearch.util;
+package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.Hits;
 
@@ -31,34 +32,34 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.lucene.document.Document;
 
 /**
- * <a href="ContentHits.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThreadHits.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
+ * @author  Brian Wing Shun Chan
  *
  */
-public class ContentHits extends Hits {
+public class ThreadHits extends Hits {
 
-	public ContentHits() {
+	public ThreadHits() {
 		super();
 	}
 
-	public void recordHits(Hits hits, String ownerId) throws SystemException {
-
-		// This can later be optimized according to LEP-915.
+	public void recordHits(Hits hits) {
+		Set threadIds = CollectionFactory.getHashSet();
 
 		List docs = new ArrayList(hits.getLength());
 		List scores = new ArrayList(hits.getLength());
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
-			String articleId = doc.get("articleId");
+			String threadId = doc.get("threadId");
 
-			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
-					ownerId, articleId) > 0) {
+			if (!threadIds.contains(threadId)) {
+				threadIds.add(threadId);
 
 				docs.add(hits.doc(i));
 				scores.add(new Float(hits.score(i)));
