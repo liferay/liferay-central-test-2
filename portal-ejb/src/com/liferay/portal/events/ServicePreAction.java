@@ -24,6 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -33,6 +34,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -43,8 +45,10 @@ import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
+import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -272,7 +276,7 @@ public class ServicePreAction extends Action {
 			}
 
 			if (layout == null) {
-				Object[] defaultLayout = getDefaultLayout(user, signedIn);
+				Object[] defaultLayout = getDefaultLayout(req, user, signedIn);
 
 				layout = (Layout)defaultLayout[0];
 				layouts = (List)defaultLayout[1];
@@ -457,8 +461,7 @@ public class ServicePreAction extends Action {
 
 			themeDisplay.setURLPortal(protocol + company.getPortalURL());
 			themeDisplay.setURLSignIn(mainPath + "/portal/login");
-			themeDisplay.setURLSignOut(
-				mainPath + "/portal/logout?referer=" + mainPath);
+			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 			req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
@@ -626,8 +629,33 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected Object[] getDefaultLayout(User user, boolean signedIn)
+	protected Object[] getDefaultLayout(
+			HttpServletRequest req, User user, boolean signedIn)
 		throws PortalException, SystemException {
+
+		// Check the virtual host
+
+		LayoutSet layoutSet = null;
+
+		String host = PortalUtil.getHost(req);
+
+		try {
+			if (isValidHost(user.getActualCompanyId(), host)) {
+				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
+					user.getActualCompanyId(), host);
+
+				List layouts = LayoutLocalServiceUtil.getLayouts(
+					layoutSet.getOwnerId(), Layout.DEFAULT_PARENT_LAYOUT_ID);
+
+				if (layouts.size() > 0) {
+					Layout layout = (Layout)layouts.get(0);
+
+					return new Object[] {layout, layouts};
+				}
+			}
+		}
+		catch (NoSuchLayoutSetException nslse) {
+		}
 
 		Layout layout = null;
 		List layouts = null;
@@ -745,6 +773,20 @@ public class ServicePreAction extends Action {
 		}
 
 		return new Object[] {layout, layouts};
+	}
+
+	protected boolean isValidHost(String companyId, String host)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(host)) {
+			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+
+			if (company.getPortalURL().indexOf(host) == -1) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	protected boolean isViewableCommunity(User user, String ownerId)
