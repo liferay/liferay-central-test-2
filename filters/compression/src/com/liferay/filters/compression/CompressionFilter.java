@@ -99,9 +99,9 @@ public class CompressionFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (useCompressionFilter && _isCompress(httpReq) &&
-			!_isInclude(httpReq) && BrowserSniffer.acceptsGzip(httpReq) &&
-			!_isAlreadyFiltered(httpReq)) {
+    	if (useCompressionFilter && isCompress(httpReq) &&
+			!isInclude(httpReq) && BrowserSniffer.acceptsGzip(httpReq) &&
+			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Compressing " + completeURL);
@@ -128,7 +128,7 @@ public class CompressionFilter implements Filter {
 	public void destroy() {
 	}
 
-	private boolean _isAlreadyFiltered(HttpServletRequest req) {
+	protected boolean isAlreadyFiltered(HttpServletRequest req) {
 		if (req.getAttribute(_ALREADY_FILTERED) != null) {
 			return true;
 		}
@@ -137,7 +137,7 @@ public class CompressionFilter implements Filter {
 		}
 	}
 
-	private boolean _isCompress(HttpServletRequest req) {
+	protected boolean isCompress(HttpServletRequest req) {
 		if (!ParamUtil.get(req, _COMPRESS, true)) {
 			return false;
 		}
@@ -159,7 +159,7 @@ public class CompressionFilter implements Filter {
 		}
 	}
 
-	private boolean _isInclude(HttpServletRequest req) {
+	protected boolean isInclude(HttpServletRequest req) {
 		String uri = (String)req.getAttribute(_INCLUDE);
 
 		if (uri == null) {

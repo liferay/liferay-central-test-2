@@ -114,9 +114,9 @@ public class LayoutCacheFilter implements Filter {
 
 		httpReq.setCharacterEncoding(ENCODING);
 
-		if (USE_LAYOUT_CACHE_FILTER && !_isPortletRequest(httpReq) &&
-			_isLayout(httpReq) && !_isSignedIn(httpReq) &&
-			!_isInclude(httpReq) && !_isAlreadyFiltered(httpReq)) {
+		if (USE_LAYOUT_CACHE_FILTER && !isPortletRequest(httpReq) &&
+			isLayout(httpReq) && !isSignedIn(httpReq) &&
+			!isInclude(httpReq) && !isAlreadyFiltered(httpReq)) {
 
 			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
 
@@ -126,7 +126,7 @@ public class LayoutCacheFilter implements Filter {
 				LayoutCacheUtil.getLayoutCacheResponseData(_companyId, key);
 
 			if (data == null) {
-				if (!_isCacheable(httpReq)) {
+				if (!isCacheable(httpReq)) {
 					if (_log.isDebugEnabled()) {
 						_log.debug("Layout is not cacheable " + key);
 					}
@@ -235,7 +235,7 @@ public class LayoutCacheFilter implements Filter {
 		return key.trim().toUpperCase();
 	}
 
-	private String _getPlid(
+	protected String getPlid(
 		String pathInfo, String servletPath, String defaultPlid) {
 
 		if (_pattern == _PATTERN_LAYOUT) {
@@ -325,7 +325,7 @@ public class LayoutCacheFilter implements Filter {
 		return layout.getPlid();
 	}
 
-	private boolean _isAlreadyFiltered(HttpServletRequest req) {
+	protected boolean isAlreadyFiltered(HttpServletRequest req) {
 		if (req.getAttribute(_ALREADY_FILTERED) != null) {
 			return true;
 		}
@@ -334,13 +334,13 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isCacheable(HttpServletRequest req) {
+	protected boolean isCacheable(HttpServletRequest req) {
 		if (_pattern == _PATTERN_RESOURCE) {
 			return true;
 		}
 
 		try {
-			String plid = _getPlid(
+			String plid = getPlid(
 				req.getPathInfo(), req.getServletPath(),
 				ParamUtil.getString(req, "p_l_id"));
 
@@ -386,7 +386,7 @@ public class LayoutCacheFilter implements Filter {
 		return true;
 	}
 
-	private boolean _isInclude(HttpServletRequest req) {
+	protected boolean isInclude(HttpServletRequest req) {
 		String uri = (String)req.getAttribute(_INCLUDE);
 
 		if (uri == null) {
@@ -397,7 +397,7 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isLayout(HttpServletRequest req) {
+	protected boolean isLayout(HttpServletRequest req) {
 		if ((_pattern == _PATTERN_FRIENDLY) ||
 			(_pattern == _PATTERN_RESOURCE)) {
 
@@ -415,7 +415,7 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isPortletRequest(HttpServletRequest req) {
+	protected boolean isPortletRequest(HttpServletRequest req) {
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		if (Validator.isNull(portletId)) {
@@ -426,7 +426,7 @@ public class LayoutCacheFilter implements Filter {
 		}
 	}
 
-	private boolean _isSignedIn(HttpServletRequest req) {
+	protected boolean isSignedIn(HttpServletRequest req) {
 		String userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 

@@ -96,12 +96,12 @@ public class VirtualHostFilter implements Filter {
 
 		String redirect = null;
 
-		if (USE_VIRTUAL_HOST_FILTER && _isValidFriendlyURL(friendlyURL)) {
+		if (USE_VIRTUAL_HOST_FILTER && isValidFriendlyURL(friendlyURL)) {
 			String host = PortalUtil.getHost(httpReq);
 			String mainPath = (String)_ctx.getAttribute(WebKeys.MAIN_PATH);
 
 			try {
-				if (_isValidHost(host)) {
+				if (isValidHost(host)) {
 					LayoutSet layoutSet =
 						LayoutSetLocalServiceUtil.getLayoutSet(
 							_companyId, host);
@@ -140,7 +140,7 @@ public class VirtualHostFilter implements Filter {
 	public void destroy() {
 	}
 
-	private boolean _isValidFriendlyURL(String friendlyURL) {
+	protected boolean isValidFriendlyURL(String friendlyURL) {
 		if (LayoutFriendlyURLException.validate(friendlyURL) > -1) {
 			return false;
 		}
@@ -155,7 +155,7 @@ public class VirtualHostFilter implements Filter {
 		return true;
 	}
 
-	private boolean _isValidHost(String host)
+	protected boolean isValidHost(String host)
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(host)) {

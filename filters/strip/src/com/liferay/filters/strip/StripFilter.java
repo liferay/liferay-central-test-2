@@ -80,8 +80,8 @@ public class StripFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (USE_STRIP_FILTER && _isStrip(httpReq) && !_isInclude(httpReq) &&
-			!_isAlreadyFiltered(httpReq)) {
+    	if (USE_STRIP_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
+			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Stripping " + completeURL);
@@ -272,7 +272,7 @@ public class StripFilter implements Filter {
 	public void destroy() {
 	}
 
-	private boolean _isAlreadyFiltered(HttpServletRequest req) {
+	protected boolean isAlreadyFiltered(HttpServletRequest req) {
 		if (req.getAttribute(_ALREADY_FILTERED) != null) {
 			return true;
 		}
@@ -281,7 +281,7 @@ public class StripFilter implements Filter {
 		}
 	}
 
-	private boolean _isInclude(HttpServletRequest req) {
+	protected boolean isInclude(HttpServletRequest req) {
 		String uri = (String)req.getAttribute(_INCLUDE);
 
 		if (uri == null) {
@@ -292,7 +292,7 @@ public class StripFilter implements Filter {
 		}
 	}
 
-	private boolean _isStrip(HttpServletRequest req) {
+	protected boolean isStrip(HttpServletRequest req) {
 		if (!ParamUtil.get(req, _STRIP, true)) {
 			return false;
 		}
