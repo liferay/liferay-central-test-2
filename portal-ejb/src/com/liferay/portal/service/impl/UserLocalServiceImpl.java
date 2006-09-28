@@ -89,6 +89,7 @@ import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
+import com.liferay.util.Base64;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -102,8 +103,12 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.mail.MailMessage;
 
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
 import java.rmi.RemoteException;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -1167,6 +1172,35 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 				if (user.getPassword().equals(encPwd)) {
 					authResult = Authenticator.SUCCESS;
+				}
+				else if (GetterUtil.getBoolean(PropsUtil.get(
+							PropsUtil.AUTH_MAC_ALLOW))) {
+
+					try {
+						MessageDigest digester = MessageDigest.getInstance(
+							PropsUtil.get(PropsUtil.AUTH_MAC_ALGORITHM));
+
+						digester.update(login.getBytes("UTF8"));
+
+						String shardKey =
+							PropsUtil.get(PropsUtil.AUTH_MAC_SHARED_KEY);
+
+						encPwd = Base64.encode(
+							digester.digest(shardKey.getBytes("UTF8")));
+
+						if (password.equals(encPwd)) {
+							authResult = Authenticator.SUCCESS;
+						}
+						else {
+							authResult = Authenticator.FAILURE;
+						}
+					}
+					catch (NoSuchAlgorithmException nsae) {
+						throw new SystemException(nsae);
+					}
+					catch (UnsupportedEncodingException uee) {
+						throw new SystemException(uee);
+					}
 				}
 				else {
 					authResult = Authenticator.FAILURE;

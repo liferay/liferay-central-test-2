@@ -252,6 +252,14 @@ public class PropsUtil {
 
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
+	// SSO with MAC
+
+	public static final String AUTH_MAC_ALLOW = "auth.mac.allow";
+
+	public static final String AUTH_MAC_ALGORITHM = "auth.mac.algorithm";
+
+	public static final String AUTH_MAC_SHARED_KEY = "auth.mac.shared.key";
+
 	// Passwords
 
 	public static final String PASSWORDS_ENCRYPTED = "passwords.encrypted";
