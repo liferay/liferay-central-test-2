@@ -264,8 +264,8 @@ public class AlfrescoContentUtil {
 			while (m.find()) {
 				String imagePath = m.group(1);
 
-				m.appendReplacement(sb, "\"" + getEndpointAddress()
-					+ imagePath + "?guest=true" + "\"");
+				m.appendReplacement(sb, "\"" + getEndpointAddress() + 
+					"/alfresco" + imagePath + "?guest=true" + "\"");
 			}
 		}
 		catch (Exception e) {
@@ -351,7 +351,7 @@ public class AlfrescoContentUtil {
 		"\"workspace://SpacesStore/([\\w\\-]*)\"");
 
     private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
-		"\"(?:\\.\\.)?(?:/\\.\\.)*(/alfresco/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
+		"\"(?:\\.\\.)?(?:/\\.\\.)*(/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
 
     private static final String _DEFAULT_ENDPOINT_ADDRESS =
     	"http://localhost:8080";
