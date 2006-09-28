@@ -264,7 +264,7 @@ public class AlfrescoContentUtil {
 			while (m.find()) {
 				String imagePath = m.group(1);
 
-				m.appendReplacement(sb, "\"" + getEndpointAddress() + 
+				m.appendReplacement(sb, "\"" + getEndpointAddress() +
 					"/alfresco" + imagePath + "?guest=true" + "\"");
 			}
 		}
