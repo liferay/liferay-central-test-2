@@ -42,8 +42,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.PageContext;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -102,8 +100,5 @@ public class GetMessageAttachmentAction extends PortletAction {
 
 		ServletResponseUtil.sendFile(res, fileName, is);
 	}
-
-	private static Log _log =
-		LogFactory.getLog(GetMessageAttachmentAction.class);
 
 }
