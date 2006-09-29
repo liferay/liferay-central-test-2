@@ -33,7 +33,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 // has both the Journal and Journal Content portlets and the user edits an
 // article through the Journal Content portlet and then hits cancel.
 
-if (redirect.indexOf("p_p_id=" + PortletKeys.JOURNAL_CONTENT) != -1) {
+/*if (redirect.indexOf("p_p_id=" + PortletKeys.JOURNAL_CONTENT) != -1) {
 	if (layoutTypePortlet.hasPortletId(PortletKeys.JOURNAL)) {
 		PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -42,6 +42,15 @@ if (redirect.indexOf("p_p_id=" + PortletKeys.JOURNAL_CONTENT) != -1) {
 
 		redirect = portletURL.toString();
 	}
+}*/
+
+String originalRedirect = ParamUtil.getString(request, "originalRedirect", StringPool.BLANK);
+
+if (originalRedirect.equals(StringPool.BLANK)) {
+	originalRedirect = redirect;
+}
+else {
+	redirect = originalRedirect;
 }
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
@@ -144,9 +153,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 %>
 
 <script type="text/javascript">
-	var count = 0;
-	var documentLibraryInput = null;
-	var imageGalleryInput = null;
+	var <portlet:namespace />count = 0;
+	var <portlet:namespace />documentLibraryInput = null;
+	var <portlet:namespace />imageGalleryInput = null;
+	var <portlet:namespace />contentChangedFlag = false;
 
 	function <portlet:namespace />approveArticle() {
 		<portlet:namespace />saveArticle("<%= Constants.APPROVE %>");
@@ -154,12 +164,34 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 	<c:if test="<%= article != null %>">
 		function <portlet:namespace />changeLanguageView() {
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= article == null ? Constants.ADD : Constants.UPDATE %>";
+			if (<portlet:namespace />contentChangedFlag) {
+				if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
+					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+				}
+				else {
+					if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
+						var languageIdOptions = document.<portlet:namespace />fm.<portlet:namespace />languageId.options;
+
+						for (var i = 0; i < languageIdOptions.length; i++) {
+							if (languageIdOptions[i].value == "<%= languageId %>") {
+								languageIdOptions[i].selected = true;
+							}
+						}
+
+						return;
+					}
+				}
+			}
+
 			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 			submitForm(document.<portlet:namespace />fm);
 		}
 	</c:if>
+
+	function <portlet:namespace />contentChanged() {
+		<portlet:namespace />contentChangedFlag = true;
+	}
 
 	function <portlet:namespace />deleteArticle() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>")) {
@@ -184,6 +216,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<portlet:namespace />resetForm();
 	}
 
+	function <portlet:namespace />editorContentChanged(text) {
+		<portlet:namespace />contentChanged();
+	}
+
 	function <portlet:namespace />expireArticle() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.EXPIRE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -197,8 +233,9 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			<c:otherwise>
 				var stillLocalized = false;
 
-				for (var i = 0; i < count; i++) {
+				for (var i = 0; i < <portlet:namespace />count; i++) {
 					var elLanguage = document.getElementById("<portlet:namespace />structure_el" + i + "_localized");
+
 					if (elLanguage.value != "false") {
 						stillLocalized = true;
 					}
@@ -328,6 +365,16 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		</c:choose>
 	}
 
+	function <portlet:namespace />getChoice(value) {
+		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
+			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value == value) {
+				return document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].index;
+			}
+		}
+
+		return null;
+	}
+
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
@@ -339,6 +386,14 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		document.<portlet:namespace />fm.target = "_blank";
 		document.<portlet:namespace />fm.submit();
 		<portlet:namespace />resetForm();
+	}
+
+	function <portlet:namespace />removeArticleLocale() {
+		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
+			submitForm(document.<portlet:namespace />fm);
+		}
 	}
 
 	function <portlet:namespace />removeStructure() {
@@ -373,11 +428,11 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	}
 
 	function <portlet:namespace />selectDocumentLibrary(url) {
-		document.getElementById(documentLibraryInput).value = url;
+		document.getElementById(<portlet:namespace />documentLibraryInput).value = url;
 	}
 
 	function <portlet:namespace />selectImageGallery(url) {
-		document.getElementById(imageGalleryInput).value = url;
+		document.getElementById(<portlet:namespace />imageGalleryInput).value = url;
 	}
 
 	function <portlet:namespace />selectStructure(structureId) {
@@ -391,16 +446,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		document.<portlet:namespace />fm.<portlet:namespace />templateId.value = templateId;
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />getChoice(value) {
-		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />languageId.length; i++) {
-			if (document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].value == value) {
-				return document.<portlet:namespace />fm.<portlet:namespace />languageId.options[i].index;
-			}
-		}
-
-		return null;
 	}
 
 	function <portlet:namespace />setImageDeleteState(button, hidden, img, file) {
@@ -425,6 +470,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>">
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>">
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>">
 <input name="<portlet:namespace />content" type="hidden" value="">
@@ -605,6 +651,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 					%>
 
 				</select>
+
+				<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
+					<input class="portlet-form-button" type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
+				</c:if>
 			</td>
 		</tr>
 	</c:when>
@@ -832,7 +882,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 <c:choose>
 	<c:when test="<%= structure == null %>">
-		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
+		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" onChangeMethod='<%= renderResponse.getNamespace() + "editorOnChangeCallBack" %>' width="100%" />
 	</c:when>
 	<c:otherwise>
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -892,6 +942,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		%>
 
 				<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>"/>
+
+				<script type="text/javascript">
+					document.<portlet:namespace />fm.<portlet:namespace />removeArticleLocaleButton.disabled = true;
+				</script>
 
 		<%
 			}

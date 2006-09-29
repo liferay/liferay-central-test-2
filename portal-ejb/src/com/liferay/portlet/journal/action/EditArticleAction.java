@@ -101,6 +101,9 @@ public class EditArticleAction extends PortletAction {
 			else if (cmd.equals(Constants.EXPIRE)) {
 				expireArticles(req);
 			}
+			else if (cmd.equals("removeArticlesLocale")) {
+				removeArticlesLocale(req);
+			}
 
 			if (Validator.isNotNull(cmd)) {
 				sendRedirect(req, res);
@@ -242,6 +245,26 @@ public class EditArticleAction extends PortletAction {
 		}
 
 		return images;
+	}
+
+	protected void removeArticlesLocale(ActionRequest req) throws Exception {
+		String companyId = PortalUtil.getCompanyId(req);
+
+		String[] removeArticleLocaleIds = StringUtil.split(
+			ParamUtil.getString(req, "deleteArticleIds"));
+
+		for (int i = 0; i < removeArticleLocaleIds.length; i++) {
+			int pos = removeArticleLocaleIds[i].lastIndexOf(VERSION_SEPARATOR);
+
+			String articleId = removeArticleLocaleIds[i].substring(0, pos);
+			double version = GetterUtil.getDouble(
+				removeArticleLocaleIds[i].substring(
+					pos + VERSION_SEPARATOR.length()));
+			String languageId = ParamUtil.getString(req, "languageId");
+
+			JournalArticleServiceUtil.removeArticleLocale(
+				companyId, articleId, version, languageId);
+		}
 	}
 
 	protected void updateArticle(ActionRequest req) throws Exception {
