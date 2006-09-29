@@ -26,6 +26,8 @@ import com.liferay.util.ParamUtil;
 
 import javax.portlet.RenderRequest;
 
+import javax.servlet.http.HttpServletRequest;
+
 /**
  * <a href="DisplayTerms.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,10 @@ import javax.portlet.RenderRequest;
 public class DisplayTerms {
 
 	public static final String AND_OPERATOR = "and_operator";
+
+	public DisplayTerms(HttpServletRequest req) {
+		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);
+	}
 
 	public DisplayTerms(RenderRequest req) {
 		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);

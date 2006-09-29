@@ -41,6 +41,9 @@ public class InputDateTag extends IncludeTag {
 	public int doStartTag() throws JspException {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute(
+			"liferay-ui:input-date:disableNamespace",
+			String.valueOf(_disableNamespace));
 		req.setAttribute("liferay-ui:input-date:formName", _formName);
 		req.setAttribute("liferay-ui:input-date:monthParam", _monthParam);
 		req.setAttribute(
@@ -77,6 +80,10 @@ public class InputDateTag extends IncludeTag {
 			"liferay-ui:input-date:disabled", String.valueOf(_disabled));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setDisableNamespace(boolean disableNamespace) {
+		_disableNamespace = disableNamespace;
 	}
 
 	public void setFormName(String formName) {
@@ -149,6 +156,7 @@ public class InputDateTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/input_date/page.jsp";
 
+	private boolean _disableNamespace;
 	private String _formName = "fm";
 	private String _monthParam;
 	private int _monthValue;

@@ -27,6 +27,10 @@
 <%
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
+if (!GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disableNamespace"))) {
+	namespace = StringPool.BLANK;
+}
+
 String formName = namespace + request.getAttribute("liferay-ui:input-date:formName");
 String monthParam = namespace + request.getAttribute("liferay-ui:input-date:monthParam");
 int monthValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:monthValue"));
