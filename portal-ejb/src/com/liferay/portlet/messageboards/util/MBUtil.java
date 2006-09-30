@@ -287,17 +287,21 @@ public class MBUtil {
 		for (int i = 0; i < priorities.length; i++) {
 			String[] priority = StringUtil.split(priorities[i]);
 
-			String priorityName = priority[0];
-			String priorityImage = priority[1];
-			double priorityValue = GetterUtil.getDouble(priority[2]);
+			try {
+				String priorityName = priority[0];
+				String priorityImage = priority[1];
+				double priorityValue = GetterUtil.getDouble(priority[2]);
 
-			if (value == priorityValue) {
-				if (!priorityImage.startsWith(Http.HTTP)) {
-					priorityImage =
-						themeDisplay.getPathThemeImage() + priorityImage;
+				if (value == priorityValue) {
+					if (!priorityImage.startsWith(Http.HTTP)) {
+						priorityImage =
+							themeDisplay.getPathThemeImage() + priorityImage;
+					}
+
+					return new String[] {priorityName, priorityImage};
 				}
-
-				return new String[] {priorityName, priorityImage};
+			}
+			catch (Exception e) {
 			}
 		}
 

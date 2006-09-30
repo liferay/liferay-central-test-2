@@ -296,9 +296,13 @@ String redirect = ParamUtil.getString(request, "redirect");
 			if (priorities.length > i) {
 				String[] priority = StringUtil.split(priorities[i]);
 
-				name = priority[0];
-				image = priority[1];
-				value = priority[2];
+				try {
+					name = priority[0];
+					image = priority[1];
+					value = priority[2];
+				}
+				catch (Exception e) {
+				}
 
 				if (Validator.isNull(name) && Validator.isNull(image)) {
 					value = StringPool.BLANK;

@@ -286,11 +286,16 @@ if (message != null) {
 				<%
 				for (int i = 0; i < priorities.length; i++) {
 					String[] kvp = StringUtil.split(priorities[i]);
+
+					try {
 				%>
 
-					<option value="<%= kvp[2] %>"><%= kvp[0] %></option>
+						<option value="<%= kvp[2] %>"><%= kvp[0] %></option>
 
 				<%
+					}
+					catch (Exception e) {
+					}
 				}
 				%>
 
