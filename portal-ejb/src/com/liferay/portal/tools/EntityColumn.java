@@ -35,35 +35,24 @@ import com.liferay.util.Validator;
 public class EntityColumn implements Cloneable {
 
 	public EntityColumn(String name) {
-		this(name, null, null);
-	}
-
-	public EntityColumn(String name, String dbName, String type) {
-		this(name, dbName, type, false, null, null, null, null, null);
+		this(name, null, null, false, null, null, null, true, true, null,
+			 null, null, true);
 	}
 
 	public EntityColumn(String name, String dbName, String type,
 						boolean primary, String ejbName, String mappingKey,
-						String mappingTable, String idType, String idParam) {
+						String mappingTable, String idType, String idParam,
+						boolean convertNull) {
 
 		this(name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			 true, true, null, idType, idParam);
+			 true, true, null, idType, idParam, convertNull);
 	}
 
 	public EntityColumn(String name, String dbName, String type,
 						boolean primary, String ejbName, String mappingKey,
 						String mappingTable, boolean caseSensitive,
-						boolean orderByAscending, String comparator) {
-
-		this(name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-				caseSensitive, orderByAscending, comparator, null, null);
-	}
-
-	public EntityColumn(String name, String dbName, String type,
-			boolean primary, String ejbName, String mappingKey,
-			String mappingTable, boolean caseSensitive,
-			boolean orderByAscending, String comparator, String idType,
-			String idParam) {
+						boolean orderByAscending, String comparator,
+						String idType, String idParam, boolean convertNull) {
 
 		_name = name;
 		_dbName = dbName;
@@ -78,6 +67,7 @@ public class EntityColumn implements Cloneable {
 		_comparator = comparator;
 		_idType = idType;
 		_idParam = idParam;
+		_convertNull = convertNull;
 	}
 
 	public String getName() {
@@ -182,11 +172,20 @@ public class EntityColumn implements Cloneable {
 		_idParam = idParam;
 	}
 
+	public boolean isConvertNull() {
+		return _convertNull;
+	}
+
+	public void setConvertNull(boolean convertNull) {
+		_convertNull = convertNull;
+	}
+
 	public Object clone() {
 		return new EntityColumn(
 			getName(), getDBName(), getType(), isPrimary(), getEJBName(),
 			getMappingKey(), getMappingTable(), isCaseSensitive(),
-			isOrderByAscending(), getComparator());
+			isOrderByAscending(), getComparator(), getIdType(), getIdParam(),
+			isConvertNull());
 	}
 
 	public boolean equals(Object obj) {
@@ -215,5 +214,6 @@ public class EntityColumn implements Cloneable {
 	private String _comparator;
 	private String _idType;
 	private String _idParam;
+	private boolean _convertNull;
 
 }

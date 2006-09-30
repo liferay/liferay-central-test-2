@@ -244,6 +244,10 @@ In this implementation, a create sequence SQL statement is created based on
 the id-param value (stored in /sql/sequences.sql). This sequence is then 
 accessed to generate a unique identifier whenever an insert occurs. This
 implementation is only supported by DB2, Oracle, PostgreSQL, and SAP DB.
+
+The convert-null value specifies whether or not the column value is
+automatically converted to a non null value if it is null. This only applies if
+the type value is String. The default value is true.
 -->
 <!ATTLIST column
 	name CDATA #REQUIRED
@@ -255,6 +259,7 @@ implementation is only supported by DB2, Oracle, PostgreSQL, and SAP DB.
 	mapping-table CDATA #IMPLIED
 	id-type CDATA #IMPLIED
 	id-param CDATA #IMPLIED
+	convert-null CDATA #IMPLIED
 >
 
 <!--

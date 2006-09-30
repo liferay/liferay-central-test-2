@@ -432,10 +432,13 @@ public class ServiceBuilder {
 					String mappingTable = column.attributeValue("mapping-table");
 					String idType = column.attributeValue("id-type");
 					String idParam = column.attributeValue("id-param");
+					boolean convertNull = GetterUtil.getBoolean(
+						column.attributeValue("convert-null"), true);
 
 					EntityColumn col = new EntityColumn(
 						columnName, columnDBName, columnType, primary,
-						collectionEntity, mappingKey, mappingTable, idType, idParam);
+						collectionEntity, mappingKey, mappingTable, idType,
+						idParam, convertNull);
 
 					if (primary) {
 						pkList.add(col);
@@ -1521,7 +1524,7 @@ public class ServiceBuilder {
 
 			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
 
-			if (colType.equals("String")) {
+			if (colType.equals("String") && col.isConvertNull()) {
 				sb.append("return GetterUtil.getString(_" + col.getName() + ");");
 			}
 			else {
