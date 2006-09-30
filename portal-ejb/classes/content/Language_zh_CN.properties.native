@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 天
+1-month=1 个月
+1-week=1 个星期
+1-year=1 年
 1024-by-768-pixels=1024*768个象素
+2-months=2 个月
+2-weeks=2 个星期
+3-days=3 天
+6-months=6 个月
 800-by-600-pixels=800*600个象素
 INBOX=收件箱
 a-map-could-not-be-found-for-the-address=此地址找不到地图:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=发生了系统错误。
 and=并且
 anniversary=周年纪念
 anonymous=匿名
+any-day=任何天
 any-priority=任何优先权
 any-relationship=任何关系
 any-status=任何状态
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=进入将被使用测试用户的有效性的查寻过滤器。象征@company_id@ 、@email_address@, 和@user_id @ 被替换在运行时间用正确价值。
 enterprise-logo=企业商标
 enterprise=企业
+entire-message=整个消息
 entries=项目
 entry-information=项目信息
 entry=词条
@@ -1599,6 +1609,7 @@ recent-entries=最近词条
 recent-images=最近图象
 recent-posts=最近岗位
 recent=最近
+recipient=接收者
 recur-every=重复每
 references-only=参考唯一
 refresh-rate=更新率
@@ -2192,6 +2203,7 @@ wide-column=宽列
 wide=宽
 width=宽度
 wikis=Wikis
+within=在之内
 word-search=词语搜寻
 worm=蠕虫
 would-you-like-to-save-the-changes-made-to-this-language=您要不要保存变动做对这种语言?

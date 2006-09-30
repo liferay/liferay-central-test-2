@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 giorno
+1-month=1 mese
+1-week=1 settimana
+1-year=1 anno
 1024-by-768-pixels=1024 x 768 Pixels
+2-months=2 mesi
+2-weeks=2 settimane
+3-days=3 giorni
+6-months=6 mesi
 800-by-600-pixels=800 x 600 Pixels
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=Programma non trovato all�indirizzo:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=Si � verificato un errore di sistema inatt
 and=And
 anniversary=Anniversario
 anonymous=Anonimo
+any-day=Qualsiasi Giorno
 any-priority=Ogni Priorit�
 any-relationship=Ogni Relazione
 any-status=Ogni Stato
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Entri nel filtro di ricerca che sar� utilizzato per verificare la validit� di un utente. Il @company_id@, il @email_address@ ed il @user_id del segno @ sono sostituiti a tempo di esecuzione con i valori corretti.
 enterprise-logo=Logo Ente Enterprise
 enterprise=Enterprise
+entire-message=Intero Messaggio
 entries=Entrate
 entry-information=Entrata Informazioni
 entry=Entrata
@@ -1600,6 +1610,7 @@ recent-entries=Entrate Recenti
 recent-images=Immagini Recenti
 recent-posts=Alberini Recenti
 recent=Recenti
+recipient=Destinatario
 recur-every=Ogni Ripetizione
 references-only=Solo Riferimenti
 refresh-rate=Frequenza di Aggiornamento
@@ -2194,6 +2205,7 @@ wide-column=Colonna Larga
 wide=Largo
 width=Larghezza
 wikis=Wikis
+within=Entro
 word-search=Parola da Ricercare
 worm=Worm
 would-you-like-to-save-the-changes-made-to-this-language=gradite conservare i cambiamenti fatti a questa lingua?

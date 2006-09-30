@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 Ημέρα
+1-month=1 Μήνας
+1-week=1 Εβδομάδα
+1-year=1 Έτος
 1024-by-768-pixels=1024 από 768 εικονοκύτταρα
+2-months=2 Μήνες
+2-weeks=2 Εβδομάδες
+3-days=3 Ημέρες
+6-months=6 Μήνες
 800-by-600-pixels=800 από 600 εικονοκύτταρα
 INBOX=Αλληλογραφία
 a-map-could-not-be-found-for-the-address=Ένας χάρτης δεν θα μπορούσε να βρεθεί για τη διεύθυνση:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=Εμφανίστηκε απρόσμενο σ
 and=και
 anniversary=Επέτειος
 anonymous=Ανώνυμος
+any-day=Οποιαδήποτε ημέρα
 any-priority=Οποιαδήποτε Προτεραιότητα
 any-relationship=Οποιαδήποτε σχέση
 any-status=Οποιαδήποτε Κατάσταση
@@ -837,6 +846,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Εισάγετε το φίλτρο αναζήτησης που θα χρησιμοποιηθεί για να εξετάσει την ισχύ ενός χρήστη. Τα σημεία @company_id@, @email_address@, και @user_id@ αντικαθίστανται στο χρόνο εκτέλεσης με τις σωστές τιμές.
 enterprise-logo=Επιχειρηματικό λογότυπο
 enterprise=Επιχείρηση
+entire-message=Ολόκληρο μήνυμα
 entries=Καταχωρήσεις
 entry-information=Πληροφορίες Καταχώρησης
 entry=Είσοδος
@@ -1598,6 +1608,7 @@ recent-entries=Πρόσφατες καταχωρήσεις
 recent-images=Πρόσφατες εικόνες
 recent-posts=Πρόσφατες θέσεις
 recent=Πρόσφατος
+recipient=Παραλήπτης
 recur-every=Επανάληψη κάθε
 references-only=Μόνον Αναφορές
 refresh-rate=Ρύθμος Ανανέωσης
@@ -2192,6 +2203,7 @@ wide-column=Φαρδιά Στήλη
 wide=Φαρδύ
 width=Πλάτος
 wikis=Wikis
+within=Μέσα
 word-search=Αναζήτηση Λέξης
 worm=Σκουλήκι
 would-you-like-to-save-the-changes-made-to-this-language=Θα επιθυμούσατε να σώσετε τις αλλαγές που γίνονται σε αυτήν την γλώσσα;

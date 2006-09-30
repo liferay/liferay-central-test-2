@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 Dag
+1-month=1 Maand
+1-week=1 Week
+1-year=1 Jaar
 1024-by-768-pixels=1024 door 768 Pixel
+2-months=2 Maanden
+2-weeks=2 Weken
+3-days=3 Dagen
+6-months=6 Maanden
 800-by-600-pixels=800 door 600 Pixel
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=Een kaart kon niet voor het adres worden gevonden:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=Een onverwachte systeemfout kwam voor.
 and=En
 anniversary=Verjaardag
 anonymous=Anoniem
+any-day=Om het even welke Dag
 any-priority=Om het even welke Prioriteit
 any-relationship=Om het even welke Verhouding
 any-status=Om het even welke Status
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Ga de onderzoeksfilter in die zal worden gebruikt om de geldigheid van een gebruiker te testen. De tekenen @company_id@, @email_address@, worden en @user_id@ vervangen bij runtime met de correcte waarden.
 enterprise-logo=Het Embleem van de onderneming
 enterprise=Onderneming
+entire-message=Volledig Bericht
 entries=Ingangen
 entry-information=De Informatie van de ingang
 entry=Ingang
@@ -1600,6 +1610,7 @@ recent-entries=Recente Ingangen
 recent-images=Recente Beelden
 recent-posts=Recente Posten
 recent=Recent
+recipient=Ontvanger
 recur-every=Kom elk terug
 references-only=Slechts verwijzingen
 refresh-rate=Verfris Tarief
@@ -2194,6 +2205,7 @@ wide-column=Brede Kolom
 wide=Wijd
 width=Breedte
 wikis=Wikis
+within=Binnen
 word-search=Het Onderzoek van Word
 worm=Worm
 would-you-like-to-save-the-changes-made-to-this-language=Zou u de veranderingen die aan deze taal worden aangebracht willen bewaren?

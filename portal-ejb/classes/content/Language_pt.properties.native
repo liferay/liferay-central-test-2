@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 dia
+1-month=1 mês
+1-week=1 semana
+1-year=1 ano
 1024-by-768-pixels=1024 por 768 pixels
+2-months=2 meses
+2-weeks=2 semanas
+3-days=3 dias
+6-months=6 meses
 800-by-600-pixels=800 por 600 pixels
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=Um mapa não podia ser encontrado para o endereço:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=Um erro de sistema inesperado ocorreu.
 and=E
 anniversary=Anniversary
 anonymous=Anonymous
+any-day=Algum Dia
 any-priority=Alguma Prioridade
 any-relationship=Algum Relacionamento
 any-status=Algum Status
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Entre no filtro da busca que será usado testar a validez de um usuário. O @company_id@, o @email_address@, e o @user_id do símbolo @ são substituídos no runtime com os valores corretos.
 enterprise-logo=Logo Da Empresa
 enterprise=Empresa
+entire-message=Mensagem Inteira
 entries=Entradas
 entry-information=Informação Da Entrada
 entry=Entrada
@@ -1600,6 +1610,7 @@ recent-entries=Entradas Recentes
 recent-images=Imagens Recentes
 recent-posts=Bornes Recentes
 recent=Recente
+recipient=Receptor
 recur-every=Retorne cada
 references-only=Referências Somente
 refresh-rate=Refresque A Taxa
@@ -2194,6 +2205,7 @@ wide-column=Coluna Larga
 wide=Largamente
 width=Largura
 wikis=Wikis
+within=Dentro
 word-search=Busca Da Palavra
 worm=Sem-fim
 would-you-like-to-save-the-changes-made-to-this-language=você gosta de conservar as mudanças feitas a esta língua?

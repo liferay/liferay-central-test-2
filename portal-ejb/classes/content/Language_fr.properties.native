@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 jour
+1-month=1 mois
+1-week=1 semaine
+1-year=1 an
 1024-by-768-pixels=1024 par 768 Pixel
+2-months=2 mois
+2-weeks=2 semaines
+3-days=3 jours
+6-months=6 mois
 800-by-600-pixels=800 par 600 Pixel
 INBOX=Messages reçus
 a-map-could-not-be-found-for-the-address=Aucune carte n'a pu être trouvée pour l'adresse :
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=Une erreur système inattendue s'est produit
 and=Et
 anniversary=Anniversaire
 anonymous=Anonyme
+any-day=Tout Jour
 any-priority=Toute priorité
 any-relationship=Tout rapport
 any-status=Tout statut
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=Entrez dans le filtre de recherche qui sera utilisé pour examiner la validité d'un utilisateur. Le @company_id@, le @email_address@, et le @user_id de marque @ sont remplacés au temps d'exécution avec les valeurs correctes.
 enterprise-logo=Logo D'Entreprise
 enterprise=Entreprise
+entire-message=Message Entier
 entries=Entrées
 entry-information=Information du champ
 entry=Entrée
@@ -1600,6 +1610,7 @@ recent-entries=Entrées Récentes
 recent-images=Images Récentes
 recent-posts=Poteaux Récents
 recent=Récent
+recipient=Destinataire
 recur-every=Reproduire chaque
 references-only=Références seules
 refresh-rate=Vitesse de rafraîchissement
@@ -2194,6 +2205,7 @@ wide-column=Grande colonne
 wide=large
 width=Taille
 wikis=Wikis
+within=Dans
 word-search=Recherche de mots
 worm=Ver
 would-you-like-to-save-the-changes-made-to-this-language=aimez-vous sauver les changements faits à cette langue ?

@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 日
+1-month=1 か月
+1-week=1 週
+1-year=1 年
 1024-by-768-pixels=768 のピクセルによって1024 年
+2-months=2 か月
+2-weeks=2 週
+3-days=3 日
+6-months=6 か月
 800-by-600-pixels=600 のピクセルによって800
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=地図は住所のために見つけることができなかった:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=予想外のシステム誤差は発生し�
 and=そして
 anniversary=記念日
 anonymous=匿名
+any-day=日
 any-priority=優先順位
 any-relationship=関係
 any-status=状態
@@ -836,6 +845,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=ユーザーの妥当性をテストするのに使用される調査フィルターに入りなさい。トークン@company_id@ 、@email_address@ 、および@user_id は正しい価値とランタイムに@ 取り替えられる。
 enterprise-logo=企業のロゴ
 enterprise=企業
+entire-message=全体のメッセージ
 entries=記入項目
 entry-information=記入項目情報
 entry=記入項目
@@ -1597,6 +1607,7 @@ recent-entries=最近の記入項目
 recent-images=最近のイメージ
 recent-posts=最近のポスト
 recent=最近
+recipient=受け手
 recur-every=あらゆる繰り返しなさい
 references-only=唯一の参照
 refresh-rate=率を新たになりなさい
@@ -2190,6 +2201,7 @@ wide-column=広いコラム
 wide=広く
 width=幅
 wikis=Wikis
+within=の中では
 word-search=単語の調査
 worm=みみず
 would-you-like-to-save-the-changes-made-to-this-language=行なわれているこの言語への変更を救いたいと思うか。

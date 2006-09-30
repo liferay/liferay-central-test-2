@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 일
+1-month=1 달
+1-week=1 주
+1-year=1 년
 1024-by-768-pixels=768의 화소에 의하여1024년
+2-months=2 달
+2-weeks=2 주
+3-days=3 일
+6-months=6 달
 800-by-600-pixels=600의 화소에 의하여800
 INBOX=Inbox
 a-map-could-not-be-found-for-the-address=지도는 주소를 위해 발견될 수 없었다:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=의외 체계 과실은 일어났다.
 and=그리고
 anniversary=기념일
 anonymous=익명
+any-day=어떤 일
 any-priority=어떤 우선권
 any-relationship=어떤 관계
 any-status=어떤 상태
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=사용자의 타당성을 시험하기 위하여 사용될 것이다 수색 여과기에 들어가십시요. 토큰@company_id@,@email_address@, 및@user_id은 정확한 가치에 런타임에@대체된다.
 enterprise-logo=기업 로고
 enterprise=기업
+entire-message=전체 메시지
 entries=입장
 entry-information=입장 정보
 entry=입장
@@ -1599,6 +1609,7 @@ recent-entries=최근 입장
 recent-images=최근 심상
 recent-posts=최근 지점
 recent=최근
+recipient=수령인
 recur-every=각 재발하십시요
 references-only=다만의 참조
 refresh-rate=비율을 상쾌하게 하십시요
@@ -2192,6 +2203,7 @@ wide-column=넓은 란
 wide=넓게
 width=폭
 wikis=Wikis
+within=안에
 word-search=낱말 수색
 worm=벌레
 would-you-like-to-save-the-changes-made-to-this-language=너는 수정하는가 이 언어에 저장하고는가 싶는가 하고자 했는가?

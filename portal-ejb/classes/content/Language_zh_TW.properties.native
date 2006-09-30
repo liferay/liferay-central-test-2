@@ -214,7 +214,15 @@ layout.types.url=URL
 ## Messages
 ##
 
+1-day=1 天
+1-month=1 個月
+1-week=1 個星期
+1-year=1 年
 1024-by-768-pixels=1024 年由768 個映像點
+2-months=2 個月
+2-weeks=2 個星期
+3-days=3 天
+6-months=6 個月
 800-by-600-pixels=800 由600 個映像點
 INBOX=收信匣
 a-map-could-not-be-found-for-the-address=此地址找不到地圖:
@@ -350,6 +358,7 @@ an-unexpected-system-error-occurred=系統例外錯誤發生。
 and=並且
 anniversary=週年紀念
 anonymous=匿名
+any-day=任何天
 any-priority=任何優先權
 any-relationship=任何關係
 any-status=任何狀態
@@ -838,6 +847,7 @@ enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-privat
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=進入將被使用測試用戶的有效性的查尋過濾器。象徵@company_id@ 、@email_address@, 和@user_id @ 被替換在運行時間用正確價值。
 enterprise-logo=企業商標
 enterprise=企業
+entire-message=整個消息
 entries=項目
 entry-information=項目資訊
 entry=詞條
@@ -1600,6 +1610,7 @@ recent-entries=最近詞條
 recent-images=最近圖像
 recent-posts=最近崗位
 recent=最近
+recipient=接收者
 recur-every=重複每
 references-only=參考唯一
 refresh-rate=更新率
@@ -2194,6 +2205,7 @@ wide-column=寬專欄
 wide=寬
 width=寬度
 wikis=Wikis
+within=在之內
 word-search=詞語搜尋
 worm=蠕蟲
 would-you-like-to-save-the-changes-made-to-this-language=您要不要保存變動做對這種語言?
