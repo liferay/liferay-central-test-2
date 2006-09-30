@@ -600,7 +600,7 @@ String mailLineColor = "#B3B6B0";
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<select name="<portlet:namespace /><%= MailDisplayTerms.AND_OPERATOR %>">
+						<select name="<%= MailDisplayTerms.AND_OPERATOR %>">
 							<option value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
 							<option selected="selected" value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
 						</select>
