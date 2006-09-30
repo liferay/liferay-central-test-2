@@ -40,6 +40,7 @@ import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
 import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.model.RemoteMailAttachment;
+import com.liferay.portlet.mail.search.MailDisplayTerms;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.StringPool;
@@ -54,6 +55,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
@@ -68,6 +70,7 @@ import javax.activation.DataHandler;
 import javax.activation.DataSource;
 
 import javax.mail.Address;
+import javax.mail.AuthenticationFailedException;
 import javax.mail.BodyPart;
 import javax.mail.FetchProfile;
 import javax.mail.Flags.Flag;
@@ -85,6 +88,15 @@ import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
 import javax.mail.internet.MimeMultipart;
+import javax.mail.search.AndTerm;
+import javax.mail.search.BodyTerm;
+import javax.mail.search.DateTerm;
+import javax.mail.search.FromStringTerm;
+import javax.mail.search.OrTerm;
+import javax.mail.search.RecipientStringTerm;
+import javax.mail.search.SearchTerm;
+import javax.mail.search.SentDateTerm;
+import javax.mail.search.SubjectTerm;
 import javax.mail.util.ByteArrayDataSource;
 
 import javax.naming.NamingException;
@@ -92,6 +104,7 @@ import javax.naming.NamingException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -336,32 +349,41 @@ public class MailUtil {
 		}
 	}
 
-	public static void deleteMessages(HttpSession ses, long[] messageIds)
+	public static void deleteMessages(HttpSession ses, MultiHashMap msgMap)
 		throws FolderException, StoreException {
 
-		deleteMessages(ses, messageIds, false);
+		deleteMessages(ses, msgMap, false);
 	}
 
 	public static void deleteMessages(
-			HttpSession ses, long[] messageIds, boolean permanently)
+			HttpSession ses, MultiHashMap msgMap, boolean permanently)
 		throws FolderException, StoreException {
 
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			IMAPFolder folder = _getFolder(ses);
+			for (Iterator itr = msgMap.keySet().iterator(); itr.hasNext(); ) {
+				String key = (String)itr.next();
 
-			String folderName = _getResolvedFolderName(folder.getName());
+				IMAPFolder folder = _getFolder(ses);
 
-			if (permanently || folderName.equals(MAIL_TRASH_NAME)) {
-				Message[] messages = folder.getMessagesByUID(messageIds);
+				String folderName = _getResolvedFolderName(folder.getName());
 
-				folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
+				if (permanently || folderName.equals(MAIL_TRASH_NAME)) {
+					Message[] messages =
+						folder.getMessagesByUID(_getMessageIds(msgMap, key));
 
-				folder.expunge();
+					folder.setFlags(
+						messages, new Flags(Flags.Flag.DELETED), true);
+
+					folder.expunge();
+
+					msgMap.remove(key);
+				}
 			}
-			else {
-				moveMessages(ses, messageIds, MAIL_TRASH_NAME);
+
+			if (!msgMap.isEmpty()) {
+				moveMessages(ses, msgMap, MAIL_TRASH_NAME);
 			}
 		}
 		catch (MessagingException me) {
@@ -399,7 +421,11 @@ public class MailUtil {
 					ids[i] = folder.getUID(msgs[i]);
 				}
 
-				deleteMessages(ses, ids, true);
+				Message[] messages = folder.getMessagesByUID(ids);
+
+				folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
+
+				folder.expunge();
 			}
 			catch (MessagingException me) {
 				throw new FolderException(me);
@@ -471,67 +497,7 @@ public class MailUtil {
 
 			folder.fetch(messages, fetchProfile);
 
-			for (int i = 0; i < messages.length; i++) {
-				Message message = messages[i];
-
-				if (message.isExpunged()) {
-					continue;
-				}
-
-				MailEnvelope mailEnvelope = new MailEnvelope();
-
-				mailEnvelope.setMessageId(folder.getUID(message));
-
-				if (MAIL_SENT_NAME.equals(folderName) ||
-					MAIL_DRAFTS_NAME.equals(folderName)) {
-
-					Address[] recipients = message.getAllRecipients();
-
-					StringBuffer sb = new StringBuffer();
-
-					if (!Validator.isNull(recipients)) {
-						for (int j = 0; j < recipients.length; j++) {
-							InternetAddress address =
-								(InternetAddress)recipients[j];
-
-							String recipient = GetterUtil.getString(
-								address.getPersonal(), address.getAddress());
-
-							sb.append(recipient);
-
-							if (j < (recipients.length - 1)) {
-								sb.append(", ");
-							}
-						}
-					}
-
-					if (sb.length() > 0) {
-						mailEnvelope.setRecipient(sb.toString());
-					}
-				}
-				else {
-					Address[] from = message.getFrom();
-
-					if (from.length > 0) {
-						InternetAddress address = (InternetAddress)from[0];
-
-						String recipient = GetterUtil.getString(
-							address.getPersonal(), address.getAddress());
-
-						mailEnvelope.setRecipient(recipient);
-					}
-				}
-
-				mailEnvelope.setSubject(message.getSubject());
-				mailEnvelope.setDate(message.getSentDate());
-				mailEnvelope.setSize(
-					(int)(message.getSize() * _ENCODING_FACTOR));
-				mailEnvelope.setRead(message.isSet(Flag.SEEN));
-				mailEnvelope.setFlagged(message.isSet(Flag.FLAGGED));
-				mailEnvelope.setAnswered(message.isSet(Flag.ANSWERED));
-
-				envelopes.add(mailEnvelope);
-			}
+			_convertEnvelopes(folder, folderName, messages, envelopes);
 
 			return envelopes;
 		}
@@ -719,7 +685,7 @@ public class MailUtil {
 	}
 
 	public static void moveMessages(
-			HttpSession ses, long[] messageIds, String toFolderName)
+			HttpSession ses, MultiHashMap msgMap, String toFolderName)
 		throws FolderException, StoreException {
 
 		IMAPFolder toFolder = null;
@@ -729,34 +695,40 @@ public class MailUtil {
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			IMAPFolder folder = _getFolder(ses);
+			for (Iterator itr = msgMap.keySet().iterator(); itr.hasNext(); ) {
+				String folderName = (String)itr.next();
 
-			String folderName = _getResolvedFolderName(folder.getName());
+				long[] messageIds = _getMessageIds(msgMap, folderName);
 
-			if (folderName.equals(toFolderName)) {
-				return;
+				IMAPFolder folder = _getFolder(ses, folderName);
+
+				folderName = _getResolvedFolderName(folder.getName());
+
+				if (folderName.equals(toFolderName)) {
+					continue;
+				}
+
+				if ((folderName.equals(MAIL_DRAFTS_NAME) ||
+						toFolderName.equals(MAIL_DRAFTS_NAME)) &&
+					(!toFolderName.equals(MAIL_TRASH_NAME))) {
+
+					continue;
+				}
+
+				Store store = _getStore(ses);
+
+				toFolder = (IMAPFolder)store.getFolder(toFolderName);
+
+				toFolder.open(IMAPFolder.READ_WRITE);
+
+				Message[] messages = folder.getMessagesByUID(messageIds);
+
+				folder.copyMessages(messages, toFolder);
+
+				folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
+
+				folder.expunge();
 			}
-
-			if ((folderName.equals(MAIL_DRAFTS_NAME) ||
-					toFolderName.equals(MAIL_DRAFTS_NAME)) &&
-				(!toFolderName.equals(MAIL_TRASH_NAME))) {
-
-				throw new FolderException();
-			}
-
-			Store store = _getStore(ses);
-
-			toFolder = (IMAPFolder)store.getFolder(toFolderName);
-
-			toFolder.open(IMAPFolder.READ_WRITE);
-
-			Message[] messages = folder.getMessagesByUID(messageIds);
-
-			folder.copyMessages(messages, toFolder);
-
-			folder.setFlags(messages, new Flags(Flags.Flag.DELETED), true);
-
-			folder.expunge();
 		}
 		catch (MessagingException me) {
 			throw new FolderException(me);
@@ -887,6 +859,37 @@ public class MailUtil {
 		}
 	}
 
+	public static Set search(
+			HttpSession ses, MailDisplayTerms displayTerms,
+			Comparator comparator)
+		throws FolderException, StoreException {
+
+		Set results = new TreeSet(comparator);
+
+		if (Validator.isNotNull(displayTerms.getFolderName())) {
+			_search(ses, displayTerms, results);
+		}
+		else {
+			List folders = getFolders(ses);
+			for (Iterator itr = folders.iterator(); itr.hasNext(); ) {
+				MailFolder mf = (MailFolder)itr.next();
+
+				String resolvedName = _getResolvedFolderName(mf.getName());
+				if (resolvedName.equals(MAIL_SPAM_NAME) ||
+					resolvedName.equals(MAIL_TRASH_NAME)) {
+
+					continue;
+				}
+
+				displayTerms.setFolderName(mf.getName());
+
+				_search(ses, displayTerms, results);
+			}
+		}
+
+		return results;
+	}
+
 	public static void setFolder(HttpSession ses, String folderName)
 		throws FolderException, StoreException {
 
@@ -919,6 +922,21 @@ public class MailUtil {
 		}
 	}
 
+	private static SearchTerm _appendSearchTerm(
+			SearchTerm fullTerm, SearchTerm term, boolean isAndOperator) {
+
+		if (fullTerm == null) {
+			return term;
+		}
+
+		if (isAndOperator) {
+			return new AndTerm(fullTerm, term);
+		}
+		else {
+			return new OrTerm(fullTerm, term);
+		}
+	}
+
 	private static void _closeFolder(HttpSession ses) {
 		IMAPFolder folder = (IMAPFolder)ses.getAttribute(WebKeys.MAIL_FOLDER);
 
@@ -933,6 +951,75 @@ public class MailUtil {
 			}
 
 			ses.removeAttribute(WebKeys.MAIL_FOLDER);
+		}
+	}
+
+	private static void _convertEnvelopes(
+			IMAPFolder folder, String folderName, Message[] messages,
+			Set envelopes)
+		throws MessagingException {
+
+		for (int i = 0; i < messages.length; i++) {
+			Message message = messages[i];
+
+			if (message.isExpunged()) {
+				continue;
+			}
+
+			MailEnvelope mailEnvelope = new MailEnvelope();
+
+			mailEnvelope.setMessageId(folder.getUID(message));
+			mailEnvelope.setFolderName(folder.getName());
+
+			if (MAIL_SENT_NAME.equals(folderName) ||
+				MAIL_DRAFTS_NAME.equals(folderName)) {
+
+				Address[] recipients = message.getAllRecipients();
+
+				StringBuffer sb = new StringBuffer();
+
+				if (!Validator.isNull(recipients)) {
+					for (int j = 0; j < recipients.length; j++) {
+						InternetAddress address =
+							(InternetAddress)recipients[j];
+
+						String recipient = GetterUtil.getString(
+							address.getPersonal(), address.getAddress());
+
+						sb.append(recipient);
+
+						if (j < (recipients.length - 1)) {
+							sb.append(", ");
+						}
+					}
+				}
+
+				if (sb.length() > 0) {
+					mailEnvelope.setRecipient(sb.toString());
+				}
+			}
+			else {
+				Address[] from = message.getFrom();
+
+				if (from.length > 0) {
+					InternetAddress address = (InternetAddress)from[0];
+
+					String recipient = GetterUtil.getString(
+						address.getPersonal(), address.getAddress());
+
+					mailEnvelope.setRecipient(recipient);
+				}
+			}
+
+			mailEnvelope.setSubject(message.getSubject());
+			mailEnvelope.setDate(message.getSentDate());
+			mailEnvelope.setSize(
+				(int)(message.getSize() * _ENCODING_FACTOR));
+			mailEnvelope.setRead(message.isSet(Flag.SEEN));
+			mailEnvelope.setFlagged(message.isSet(Flag.FLAGGED));
+			mailEnvelope.setAnswered(message.isSet(Flag.ANSWERED));
+
+			envelopes.add(mailEnvelope);
 		}
 	}
 
@@ -1129,6 +1216,12 @@ public class MailUtil {
 			if (folder == null) {
 				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
 
+				if (GetterUtil.getBoolean(
+						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
+
+					userId = StringUtil.replace(userId, ".", "_");
+				}
+
 				String serviceName = userId + StringPool.COLON +
 					WebKeys.MAIL_FOLDER + StringPool.PERIOD + folderName;
 
@@ -1173,6 +1266,22 @@ public class MailUtil {
 				_getFolders(list, folder.list());
 			}
 		}
+	}
+
+	private static long[] _getMessageIds(
+			MultiHashMap msgMap, String folderName) {
+
+		Collection messages = msgMap.getCollection(folderName);
+
+		long[] messageIds = new long[messages.size()];
+
+		Iterator msgItr = messages.iterator();
+
+		for (int i = 0; msgItr.hasNext(); i++) {
+			messageIds[i] = Long.parseLong((String)msgItr.next());
+		}
+
+		return messageIds;
 	}
 
 	private static RemoteMailAttachment _getRemoteAttachment(
@@ -1221,6 +1330,14 @@ public class MailUtil {
 	private static Store _getStore(HttpSession ses)
 		throws FolderException, StoreException {
 
+		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+		if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
+
+			userId = StringUtil.replace(userId, ".", "_");
+		}
+
 		try {
 			Store store = (Store)ses.getAttribute(WebKeys.MAIL_STORE);
 
@@ -1239,19 +1356,11 @@ public class MailUtil {
 
 				String imapHost = session.getProperty("mail.imap.host");
 
-				String userId = (String)ses.getAttribute(WebKeys.USER_ID);
+				String password =
+					(String)ses.getAttribute(WebKeys.USER_PASSWORD);
 
 				String serviceName =
 					userId + StringPool.COLON + WebKeys.MAIL_STORE;
-
-				if (GetterUtil.getBoolean(
-						PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-
-					userId = StringUtil.replace(userId, ".", "_");
-				}
-
-				String password = (String)ses.getAttribute(
-					WebKeys.USER_PASSWORD);
 
 				store = session.getStore("imap");
 
@@ -1290,6 +1399,14 @@ public class MailUtil {
 			}
 
 			return store;
+		}
+		catch (AuthenticationFailedException afe) {
+			if (_log.isErrorEnabled()) {
+				_log.error(
+					"Failed to authenticate the userId '" + userId + "'");
+			}
+
+			throw new StoreException(afe);
 		}
 		catch (MessagingException me) {
 			throw new StoreException(me);
@@ -1447,6 +1564,97 @@ public class MailUtil {
 		}
 
 		return addresses;
+	}
+
+	private static void _search(
+			HttpSession ses, MailDisplayTerms displayTerms, Set results)
+		throws FolderException, StoreException {
+
+		Store store = _getStore(ses);
+
+		SearchTerm fullTerm = null;
+
+		if (Validator.isNotNull(displayTerms.getFrom())) {
+			fullTerm = new FromStringTerm(displayTerms.getFrom());
+		}
+
+		if (Validator.isNotNull(displayTerms.getTo())) {
+			SearchTerm to = new RecipientStringTerm(
+				Message.RecipientType.TO, displayTerms.getTo());
+			SearchTerm cc = new RecipientStringTerm(
+				Message.RecipientType.CC, displayTerms.getTo());
+			SearchTerm bcc = new RecipientStringTerm(
+				Message.RecipientType.BCC, displayTerms.getTo());
+
+			SearchTerm term = to;
+			term = _appendSearchTerm(term, cc, false);
+			term = _appendSearchTerm(term, bcc, false);
+
+			fullTerm = _appendSearchTerm(
+				fullTerm, term, displayTerms.isAndOperator());
+		}
+
+		if (Validator.isNotNull(displayTerms.getSubject())) {
+			SearchTerm term = new SubjectTerm(displayTerms.getSubject());
+
+			fullTerm = _appendSearchTerm(
+				fullTerm, term, displayTerms.isAndOperator());
+		}
+
+		if (Validator.isNotNull(displayTerms.getEntireMessage())) {
+			String em = displayTerms.getEntireMessage();
+
+			SearchTerm from = new FromStringTerm(em);
+			SearchTerm to = new RecipientStringTerm(
+				Message.RecipientType.TO, em);
+			SearchTerm cc = new RecipientStringTerm(
+				Message.RecipientType.CC, em);
+			SearchTerm bcc = new RecipientStringTerm(
+				Message.RecipientType.BCC, em);
+			SearchTerm subject = new SubjectTerm(em);
+			SearchTerm body = new BodyTerm(em);
+
+			SearchTerm term = from;
+			term = _appendSearchTerm(term, to, false);
+			term = _appendSearchTerm(term, cc, false);
+			term = _appendSearchTerm(term, bcc, false);
+			term = _appendSearchTerm(term, subject, false);
+			term = _appendSearchTerm(term, body, false);
+
+			fullTerm = _appendSearchTerm(
+				fullTerm, term, displayTerms.isAndOperator());
+		}
+
+		if (displayTerms.hasDate()) {
+			SearchTerm startDate =
+				new SentDateTerm(DateTerm.GE, displayTerms.getStartDate());
+			SearchTerm endDate =
+				new SentDateTerm(DateTerm.LE, displayTerms.getEndDate());
+
+			SearchTerm term = startDate;
+			term = _appendSearchTerm(term, endDate, true);
+
+			fullTerm = _appendSearchTerm(
+				fullTerm, term, displayTerms.isAndOperator());
+		}
+
+		if (fullTerm != null) {
+			try {
+				IMAPFolder folder = (IMAPFolder)store.getFolder(
+					_getResolvedFolderName(displayTerms.getFolderName()));
+
+				folder.open(IMAPFolder.READ_ONLY);
+
+				Message [] messages = folder.search(fullTerm);
+
+				_convertEnvelopes(
+					folder, displayTerms.getFolderName(), messages, results);
+
+			}
+			catch (MessagingException me) {
+				throw new FolderException(me);
+			}
+		}
 	}
 
 	private static final String[] _HTML_START_TAGS = new String[] {

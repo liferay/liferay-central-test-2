@@ -1,10 +1,11 @@
-function MailSummaryObject(state, sender, subject, date, size, id, read, index) {
+function MailSummaryObject(state, sender, subject, date, size, id, read, folderId, index) {
 	this.next = null;
 	this.prev = null;
 	this.selected = false;
 	this.state = state;
 	this.id = id;
 	this.index = index;
+	this.folderId = folderId;
 	this.selectedIndex = -1;
 	this.read = read;
 	this.head = sender;
@@ -28,6 +29,7 @@ function MailSummaryObject(state, sender, subject, date, size, id, read, index) 
 
 
 var Mail = {
+	logger : LogFactory.getLog("mail.js"),
 	INBOX_NAME : null,
 	DRAFTS_NAME : null,
 	SENT_NAME : null,
@@ -47,6 +49,8 @@ var Mail = {
 	lastSelected : null,
 	mailObject : null,
 	messageTimer : null,
+	searchResults : false,
+	searchCount : 0,
 	selectedArray : null,
 	scrollTimer : null,
 	sortBy : null,
@@ -142,15 +146,25 @@ var Mail = {
 	
 	deleteSelectedMessages : function(skipConfirm) {
 		clearTimeout(Mail.messageTimer);
-		
+
+		var folderName;
+		if (Mail.searchResults) {
+			folderName = "search results";
+		}
+		else {
+			folderName = Mail.currentFolder.name;
+		}
+
 		var deleteList = Mail.getSelectedMessages();
+
 		var confirmMsg = "Delete " + deleteList.length + " message" +
-			(deleteList.length > 1 ? "s" : "") + " from " + Mail.currentFolder.name + "?";
-		
+			(deleteList.length > 1 ? "s" : "") + " from " + folderName + "?";
+
 		if (deleteList.length > 0 && (skipConfirm || confirm(confirmMsg))) {
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&folderId=" + Mail.currentFolder.id + "&messages=" + deleteList);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&messages=" + deleteList, Mail.getFolders);
+
 			Mail.removeSelectedMessages();
-			Mail.getFolders();
+			Mail.searchCount -= deleteList.length;
 		}
 	},
 
@@ -248,15 +262,15 @@ var Mail = {
 	submitCompose : function(action, form) {
 		var selList = Mail.getSelectedMessages();
 		
-		if (selList > 0) {
+		if (selList.length == 1) {
 			document.getElementById("portlet-mail-compose-action").value = action;
-			document.getElementById("portlet-mail-message-id").value = Mail.currentMessageId;
-			document.getElementById("portlet-mail-folder-id").value = Mail.currentFolder.id;
+			document.getElementById("portlet-mail-folder-id").value = selList[0][0];
+			document.getElementById("portlet-mail-message-id").value = selList[0][1];
 
 			submitForm(form);
 		}
 		else {
-			alert("Please select a message");
+			alert("Please select a single message");
 		}
 	},
 	
@@ -266,14 +280,22 @@ var Mail = {
 		var folderDiv = document.createElement("div");
 		var totalDiv = document.createElement("div");
 		var unreadDiv = document.createElement("div");
-		
-		folderDiv.innerHTML = Mail.currentFolder.name;
-		folderDiv.style.fontWeight = "bold";
-		folderDiv.className = "font-xx-large";
-		if (Mail.currentFolder.newCount > 0) {
-			unreadDiv.innerHTML = Mail.currentFolder.newCount + "&nbsp;Unread";
+
+		if (Mail.searchResults) {
+			folderDiv.innerHTML = "Search Results";
+			folderDiv.style.fontWeight = "bold";
+			folderDiv.className = "font-xx-large";
+			totalDiv.innerHTML = Mail.searchCount + "&nbsp;Total";
 		}
-		totalDiv.innerHTML = Mail.currentFolder.totalCount + "&nbsp;Total";
+		else {
+			folderDiv.innerHTML = Mail.currentFolder.name;
+			folderDiv.style.fontWeight = "bold";
+			folderDiv.className = "font-xx-large";
+			if (Mail.currentFolder.newCount > 0) {
+				unreadDiv.innerHTML = Mail.currentFolder.newCount + "&nbsp;Unread";
+			}
+			totalDiv.innerHTML = Mail.currentFolder.totalCount + "&nbsp;Total";
+		}
 
 		detailsFrame.src = "";
 		mailHeader.innerHTML = "";
@@ -331,7 +353,9 @@ var Mail = {
 			folderPane.removeChild(list[0]);
 		}
 
-		selectedFolder = folders[0];
+		if (!Mail.searchResults) {
+			selectedFolder = folders[0];
+		}
 		
 		for (var i = 0; i < folders.length; i++) {
 			var folder = folders[i];
@@ -403,21 +427,22 @@ var Mail = {
 		
 		folderPane.appendChild(folderList);
 		
-		if (Mail.currentFolder == null ||
-			Mail.currentFolder.id != selectedFolder.id ||
-			checkMail) {
+		if (Mail.searchResults == true) {
+			Mail.getFolderDetails();
+		}
+		else if (Mail.currentFolder == null ||
+			Mail.currentFolderId != selectedFolder.id || checkMail) {
+			
 			Mail.setCurrentFolder(selectedFolder);
 			Mail.getPreview();
 		}
 	},
 
-	getMessageDetails : function(messageId) {
-		
+	getMessageDetails : function(messageId, folderId) {
 		if (!Mail.currentMessage || messageId != Mail.currentMessageId) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action",
-				"cmd=getMessage&messageId=" + messageId + "&folderId=" + Mail.currentFolder.id,
+				"cmd=getMessage&messageId=" + messageId + "&folderId=" + folderId,
 				Mail.getMessageDetailsReturn, messageId);
-				
 		}
 	},
 
@@ -463,7 +488,7 @@ var Mail = {
 		Mail.clearPreview();
 		
 		loadPage(themeDisplay.getPathMain() + "/mail/action",
-			"cmd=getPreview&folderId=" + Mail.currentFolder.id +
+			"cmd=getPreview&folderId=" + Mail.currentFolderId +
 			"&sortBy=" + Mail.sortBy.value +
 			"&asc=" + Mail.sortBy.asc,
 			Mail.getPreviewReturn);
@@ -473,13 +498,29 @@ var Mail = {
 	getPreviewReturn : function(xmlHttpReq) {
 		var mailObject = createJSONObject(xmlHttpReq.responseText);
 
+		Mail.searchResults = false;
+
 		if (mailObject.folderId == Mail.currentFolderId &&
 			mailObject.headers.length > 0) {
 			Mail.mailObject = mailObject;
 			Mail.renderPreviewSection();
 		}
 	},
-	
+
+	getSearchReturn : function(xmlHttpReq) {
+		var mailObject = createJSONObject(xmlHttpReq.responseText);
+
+		Mail.currentMessageId = null;
+		Mail.mailObject = mailObject;
+		Mail.searchResults = true;
+		Mail.searchCount = mailObject.headers.length;
+		Mail.setCurrentFolder();
+		Mail.clearPreview();
+		Mail.renderPreviewSection(0);
+		Mail.summaryUnhighlightAll();
+		Mail.getFolderDetails();
+	},
+
 	getSelectedMessages : function(processFunction) {
 		var msObj;
 		var msgArray = new Array();
@@ -491,7 +532,7 @@ var Mail = {
 				msObj = sArray[i];
 				
 				if (msObj != null && msObj.selected) {
-					msgArray.push(msObj.id);
+					msgArray.push(new Array(msObj.folderId, msObj.id));
 					
 					if (processFunction) {
 						processFunction(msObj);
@@ -625,11 +666,12 @@ var Mail = {
 				(moveList.length > 1 ? "s" : "") + " to " + folderId + "?";
 
 			if (confirm(confirmMsg)) {
-				Mail.removeSelectedMessages();
 				loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=moveMessages&folderId=" + folderId + "&messages=" + moveList);
+
+				Mail.removeSelectedMessages();
+				Mail.searchCount -= moveList.length;
+				Mail.getFolders();
 			}
-			
-			Mail.getFolders();
 		}
 
 	},
@@ -692,7 +734,8 @@ var Mail = {
 	onFolderSelect : function() {
 		var folder = this.parentNode.folder;
 
-		if (Mail.currentFolder.id != folder.id) {
+		if (Mail.currentFolderId != folder.id) {
+			Mail.searchResults = false;
 			Mail.currentMessage = null;
 			Mail.currentMessageId = null;
 			
@@ -717,7 +760,7 @@ var Mail = {
 		}
 		/*
 		event.altKey
-		event.ctrlKey
+		event.ctrlKey || event.metaKey
 		event.shiftKey 
 		*/
 
@@ -777,7 +820,7 @@ var Mail = {
 			Mail.summaryUnhighlightAll();
 			Mail.getFolderDetails();
 		}
-		else if (event.ctrlKey) {
+		else if (event.ctrlKey || event.metaKey) {
 			if (keycode == Key.A) {
 				Mail.summaryHighlightAll();
 				return false;
@@ -827,6 +870,7 @@ var Mail = {
 	
 	onSummaryMouseDown : function(event) {
 		event = mousePos.update(event);
+
 		var obj = this;
 		var msObj = obj.parent;
 		
@@ -835,9 +879,10 @@ var Mail = {
 		
 		document.onmousemove = Mail.onSummaryMouseMove;
 		document.onmouseup = Mail.onSummaryMouseUp;
-		
+
 		Mail.dragStart = new Coordinate(mousePos.x, mousePos.y);
 		Mail.checkFolderLocation(mousePos, true);
+
 		return false;
 	},
 	
@@ -880,7 +925,7 @@ var Mail = {
 		}
 		
 		if (Mail.lastSelected.pendingHighlight) {
-			if (event.ctrlKey) {
+			if (event.ctrlKey || event.metaKey) {
 				if (Mail.lastSelected.selected) {
 					/* Toggle if selected */
 					Mail.summaryUnhighlight(Mail.lastSelected);
@@ -977,7 +1022,7 @@ var Mail = {
 		var msgsSize = document.getElementById("portlet-mail-msgs-size");
 		var summaryList = Mail.summaryList;
 		
-		var SECTION_SIZE = 10;
+		var SECTION_SIZE = 25;
 		var begin = Math.pow(count, 3);
 		if (count == 0) {
 			count++;
@@ -987,7 +1032,7 @@ var Mail = {
 		if (end > (totalMsgs - 1)) {
 			end = totalMsgs - 1;
 		}
-		
+
 		for (var i = begin; i <= end; i++) { 
 			var header = mailObject.headers[i];
 			var state = document.createElement("div");
@@ -996,13 +1041,17 @@ var Mail = {
 			var subject = document.createElement("div");
 			var date = document.createElement("div");
 			var size = document.createElement("div");
-			var msObj = new MailSummaryObject(state, sender, subject, date, size, header.id, header.read, i);
+			var msObj = new MailSummaryObject(state, sender, subject, date, size, header.id, header.read, header.folderId, i);
 
 			stateImg.src = themeDisplay.getPathThemeImage() + "/mail/read.gif";
 			sender.innerHTML = header.email;
-			subject.innerHTML = header.subject;
 			date.innerHTML = header.date;
 			size.innerHTML = header.size;
+			subject.innerHTML = header.subject;
+
+			if (Mail.searchResults) {
+				subject.innerHTML = "<span class='portlet-mail-folder-text'>" + header.folderId + "</span>" + subject.innerHTML;
+			}
 			
 			if (!header.read) {
 				stateImg.src = themeDisplay.getPathThemeImage() + "/mail/unread.gif";
@@ -1075,8 +1124,14 @@ var Mail = {
 
 	setCurrentFolder : function(folder) {
 		Mail.currentFolder = folder;
-		Mail.currentFolderId = folder.id;
-		Mail.getFolderDetails();
+
+		if (folder != null) {
+			Mail.currentFolderId = folder.id;
+			Mail.getFolderDetails();
+		}
+		else {
+			Mail.currentFolderId = null;
+		}
 		
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");
@@ -1087,7 +1142,7 @@ var Mail = {
 			if (folderItem.id == "folder_management") {
 				continue;
 			}
-			else if (Mail.currentFolder.id == folderItem.folder.id) {
+			else if (Mail.currentFolderId == folderItem.folder.id) {
 				folderItem.style.backgroundColor = Mail.colorSelected;
 				Mail.currentFolder.li = folderItem;
 			}
@@ -1101,17 +1156,24 @@ var Mail = {
 		var mainToolbar = document.getElementById("portlet-mail-main-toolbar");
 		var draftsToolbar = document.getElementById("portlet-mail-drafts-toolbar");
 		var emptyFolder = document.getElementById("portlet-mail-empty-folder");
-		
-		if (Mail.currentFolder.id == Mail.SENT_NAME || Mail.currentFolder.id == Mail.DRAFTS_NAME) {
+
+		if (folder == null) {
+			fromTitle[0].style.display = "none";
+			fromTitle[1].style.display = "none";
+			fromTitle[2].style.display = "";
+		}
+		else if (Mail.currentFolderId == Mail.SENT_NAME || Mail.currentFolderId == Mail.DRAFTS_NAME) {
 			fromTitle[0].style.display = "none";
 			fromTitle[1].style.display = "";
+			fromTitle[2].style.display = "none";
 		}
 		else {
 			fromTitle[0].style.display = "";
 			fromTitle[1].style.display = "none";
+			fromTitle[2].style.display = "none";
 		}
 		
-		if (Mail.currentFolder.id == Mail.DRAFTS_NAME) {
+		if (Mail.currentFolderId == Mail.DRAFTS_NAME) {
 			mainToolbar.style.display = "none";
 			draftsToolbar.style.display = "block";
 		}
@@ -1144,15 +1206,15 @@ var Mail = {
 			msObj.selected = true;
 			setColor = Mail.colorHighlight;
 			Mail.lastSelected = msObj;
-			
+
 			if (Mail.selectedArray == null) {
 				Mail.selectedArray = new Array();
 			}
 
 			msObj.selectedIndex = (Mail.selectedArray.push(msObj)) - 1;
-			
+
 			if (!skipDetails) {
-				Mail.messageTimer = setTimeout("Mail.getMessageDetails("+msObj.id+")", 500);
+				Mail.messageTimer = setTimeout("Mail.getMessageDetails("+msObj.id+",'"+msObj.folderId+"')", 500);
 			}
 		}
 		

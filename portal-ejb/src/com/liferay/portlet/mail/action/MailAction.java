@@ -23,6 +23,7 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.JSONAction;
@@ -34,6 +35,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
 import com.liferay.portlet.mail.model.MailMessage;
+import com.liferay.portlet.mail.search.MailDisplayTerms;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.comparator.DateComparator;
 import com.liferay.portlet.mail.util.comparator.RecipientComparator;
@@ -49,6 +51,7 @@ import com.liferay.util.TextFormatter;
 import java.text.DateFormat;
 
 import java.util.Calendar;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Locale;
@@ -60,6 +63,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.collections.MultiHashMap;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
@@ -105,6 +109,9 @@ public class MailAction extends JSONAction {
 			else if (cmd.equals("getPreview")) {
 				return getPreview(req);
 			}
+			else if (cmd.equals("getSearch")) {
+				return getSearch(req);
+			}
 			else if (cmd.equals("moveMessages")) {
 				moveMessages(req);
 			}
@@ -138,8 +145,7 @@ public class MailAction extends JSONAction {
 	protected void deleteMessages(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
-		long[] messages = StringUtil.split(
-			ParamUtil.getString(req, "messages"), ",", -1L);
+		MultiHashMap messages = _convertMessages(req);
 
 		MailUtil.deleteMessages(ses, messages);
 	}
@@ -158,35 +164,29 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected Set getEnvelopes(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
-		String folderId = ParamUtil.getString(req, "folderId");
+	protected Comparator getComparator(HttpServletRequest req) throws Exception {
 		String sortBy = ParamUtil.getString(req, "sortBy");
 		boolean asc = ParamUtil.getBoolean(req, "asc");
 
-		MailUtil.setFolder(ses, folderId);
-
-		Set envelopes = null;
+		Comparator comparator;
 
 		if (sortBy.equals("state")) {
-			envelopes = MailUtil.getEnvelopes(ses, new StateComparator(asc));
+			comparator = new StateComparator(asc);
 		}
 		else if (sortBy.equals("name")) {
-			envelopes = MailUtil.getEnvelopes(
-				ses, new RecipientComparator(asc));
+			comparator = new RecipientComparator(asc);
 		}
 		else if (sortBy.equals("subject")) {
-			envelopes = MailUtil.getEnvelopes(ses, new SubjectComparator(asc));
+			comparator = new SubjectComparator(asc);
 		}
 		else if (sortBy.equals("size")) {
-			envelopes = MailUtil.getEnvelopes(ses, new SizeComparator(asc));
+			comparator = new SizeComparator(asc);
 		}
 		else {
-			envelopes = MailUtil.getEnvelopes(ses, new DateComparator(asc));
+			comparator = new DateComparator(asc);
 		}
 
-		return envelopes;
+		return comparator;
 	}
 
 	protected String getFolders(HttpServletRequest req) throws Exception {
@@ -263,78 +263,32 @@ public class MailAction extends JSONAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		User user = themeDisplay.getUser();
-		Locale locale = themeDisplay.getLocale();
-		TimeZone timeZone = themeDisplay.getTimeZone();
+		MailUtil.setFolder(req.getSession(), folderId);
 
-		Date today = new Date();
+		Set envelopes =
+			MailUtil.getEnvelopes(req.getSession(), getComparator(req));
 
-		Calendar cal = Calendar.getInstance(timeZone, locale);
-
-		cal.setTime(today);
-		cal.add(Calendar.DATE, -1);
-
-		Date yesterday = cal.getTime();
-
-		DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-		DateFormat dateFormatDateTime = DateFormats.getDateTime(
-			locale, timeZone);
-		DateFormat dateFormatTime = DateFormats.getTime(locale, timeZone);
-
-		String todayString = dateFormatDate.format(today);
-		String yesterdayString = dateFormatDate.format(yesterday);
-
-		JSONArray jsonEnvelopes = new JSONArray();
-
-		Iterator itr = getEnvelopes(req).iterator();
-
-		while (itr.hasNext()) {
-			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
-
-			JSONObject jsonEnvelope = new JSONObject();
-
-			String recipient = GetterUtil.getString(
-				mailEnvelope.getRecipient(), StringPool.NBSP);
-
-			String subject = GetterUtil.getString(
-				mailEnvelope.getSubject(), StringPool.NBSP);
-
-			String dateString = StringPool.NBSP;
-
-			if (mailEnvelope.getDate() != null) {
-				dateString = dateFormatDate.format(mailEnvelope.getDate());
-
-				if (dateString.equals(todayString)) {
-					dateString =
-						LanguageUtil.get(user, "today") + StringPool.SPACE +
-							dateFormatTime.format(mailEnvelope.getDate());
-				}
-				else if (dateString.equals(yesterdayString)) {
-					dateString =
-						LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
-							dateFormatTime.format(mailEnvelope.getDate());
-				}
-				else {
-					dateString =
-						dateFormatDateTime.format(mailEnvelope.getDate());
-				}
-			}
-
-			jsonEnvelope.put("id", mailEnvelope.getMessageId());
-			jsonEnvelope.put("email", recipient);
-			jsonEnvelope.put("subject", subject);
-			jsonEnvelope.put("date", dateString);
-			jsonEnvelope.put(
-				"size",
-				TextFormatter.formatKB(mailEnvelope.getSize(), locale) + "k");
-			jsonEnvelope.put("read", mailEnvelope.isRead());
-			jsonEnvelope.put("replied", mailEnvelope.isAnswered());
-			jsonEnvelope.put("flagged", mailEnvelope.isFlagged());
-
-			jsonEnvelopes.put(jsonEnvelope);
-		}
+		JSONArray jsonEnvelopes = _convertEnvelopes(envelopes, themeDisplay);
 
 		jsonObj.put("folderId", folderId);
+		jsonObj.put("headers", jsonEnvelopes);
+
+		return jsonObj.toString();
+	}
+
+	protected String getSearch(HttpServletRequest req) throws Exception {
+		JSONObject jsonObj = new JSONObject();
+
+		MailDisplayTerms displayTerms = new MailDisplayTerms(req);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Set envelopes =
+			MailUtil.search(req.getSession(), displayTerms, getComparator(req));
+
+		JSONArray jsonEnvelopes = _convertEnvelopes(envelopes, themeDisplay);
+
 		jsonObj.put("headers", jsonEnvelopes);
 
 		return jsonObj.toString();
@@ -343,8 +297,8 @@ public class MailAction extends JSONAction {
 	protected void moveMessages(HttpServletRequest req) throws Exception {
 		HttpSession ses = req.getSession();
 
-		long[] messages = StringUtil.split(
-			ParamUtil.getString(req, "messages"), ",", -1L);
+		MultiHashMap messages = _convertMessages(req);
+
 		String folderId = ParamUtil.getString(req, "folderId");
 
 		MailUtil.moveMessages(ses, messages, folderId);
@@ -357,6 +311,102 @@ public class MailAction extends JSONAction {
 		String newFolderId = ParamUtil.getString(req, "newFolderId");
 
 		MailUtil.renameFolder(ses, folderId, newFolderId);
+	}
+
+	private JSONArray _convertEnvelopes(
+			Set envelopes, ThemeDisplay themeDisplay)
+		throws LanguageException {
+
+		JSONArray jsonEnvelopes = new JSONArray();
+
+		for (Iterator itr = envelopes.iterator(); itr.hasNext(); ) {
+			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
+
+			JSONObject jsonEnvelope = new JSONObject();
+
+			String recipient = GetterUtil.getString(
+				mailEnvelope.getRecipient(), StringPool.NBSP);
+
+			String subject = GetterUtil.getString(
+				mailEnvelope.getSubject(), StringPool.NBSP);
+
+			jsonEnvelope.put("id", mailEnvelope.getMessageId());
+			jsonEnvelope.put("folderId", mailEnvelope.getFolderName());
+			jsonEnvelope.put("email", recipient);
+			jsonEnvelope.put("subject", subject);
+			jsonEnvelope.put("date",
+				_getDateString(themeDisplay, mailEnvelope.getDate()));
+			jsonEnvelope.put(
+				"size",
+				TextFormatter.formatKB(
+					mailEnvelope.getSize(), themeDisplay.getLocale()) + "k");
+			jsonEnvelope.put("read", mailEnvelope.isRead());
+			jsonEnvelope.put("replied", mailEnvelope.isAnswered());
+			jsonEnvelope.put("flagged", mailEnvelope.isFlagged());
+
+			jsonEnvelopes.put(jsonEnvelope);
+		}
+		return jsonEnvelopes;
+	}
+
+	private MultiHashMap _convertMessages(HttpServletRequest req) {
+		String[] messagesArray = StringUtil.split(
+			ParamUtil.getString(req, "messages"), ",");
+
+		MultiHashMap messages = new MultiHashMap();
+
+		for (int i = 0; i < messagesArray.length; i += 2) {
+			messages.put(messagesArray[i], messagesArray[i+1]);
+		}
+		return messages;
+	}
+
+	private String _getDateString(ThemeDisplay themeDisplay, Date date)
+		throws LanguageException {
+
+		String dateString = StringPool.NBSP;
+
+		if (date != null) {
+			User user = themeDisplay.getUser();
+			Locale locale = themeDisplay.getLocale();
+			TimeZone timeZone = themeDisplay.getTimeZone();
+
+			Date today = new Date();
+
+			Calendar cal = Calendar.getInstance(timeZone, locale);
+
+			cal.setTime(today);
+			cal.add(Calendar.DATE, -1);
+
+			Date yesterday = cal.getTime();
+
+			DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+			DateFormat dateFormatDateTime = DateFormats.getDateTime(
+				locale, timeZone);
+			DateFormat dateFormatTime = DateFormats.getTime(locale, timeZone);
+
+			String todayString = dateFormatDate.format(today);
+			String yesterdayString = dateFormatDate.format(yesterday);
+
+			dateString = dateFormatDate.format(date);
+
+			if (dateString.equals(todayString)) {
+				dateString =
+					LanguageUtil.get(user, "today") + StringPool.SPACE +
+						dateFormatTime.format(date);
+			}
+			else if (dateString.equals(yesterdayString)) {
+				dateString =
+					LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
+						dateFormatTime.format(date);
+			}
+			else {
+				dateString =
+					dateFormatDateTime.format(date);
+			}
+		}
+
+		return dateString;
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);

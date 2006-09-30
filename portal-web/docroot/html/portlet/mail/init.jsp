@@ -32,6 +32,7 @@
 --%><%@ page import="com.liferay.portlet.mail.model.MailFolder" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.MailMessage" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.RemoteMailAttachment" %><%--
+--%><%@ page import="com.liferay.portlet.mail.search.MailDisplayTerms" %><%--
 --%><%@ page import="com.liferay.portlet.mail.util.MailUtil" %><%--
 --%><%@ page import="com.liferay.portlet.mail.util.comparator.DateComparator" %><%--
 

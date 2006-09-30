@@ -40,6 +40,14 @@ public class MailEnvelope {
 		_messageId = messageId;
 	}
 
+	public String getFolderName() {
+		return _folderName;
+	}
+
+	public void setFolderName(String folderName) {
+		_folderName = folderName;
+	}
+
 	public String getRecipient() {
 		return _recipient;
 	}
@@ -97,6 +105,7 @@ public class MailEnvelope {
 	}
 
 	private long _messageId;
+	private String _folderName;
 	private String _recipient;
 	private String _subject;
 	private Date _date;
