@@ -280,19 +280,40 @@ if (message != null) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
+
+			<%
+			double threadPriority = 0.0;
+
+			try {
+				MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
+
+				threadPriority = thread.getPriority();
+			}
+			catch (NoSuchThreadException nste) {
+			}
+
+			threadPriority = ParamUtil.getDouble(request, "priority", threadPriority);
+			%>
+
 			<select name="<portlet:namespace />priority">
 				<option value=""></option>
 
 				<%
 				for (int i = 0; i < priorities.length; i++) {
-					String[] kvp = StringUtil.split(priorities[i]);
+					String[] priority = StringUtil.split(priorities[i]);
 
 					try {
+						String priorityName = priority[0];
+						String priorityImage = priority[1];
+						double priorityValue = GetterUtil.getDouble(priority[2]);
+
+						if (priorityValue > 0) {
 				%>
 
-						<option value="<%= kvp[2] %>"><%= kvp[0] %></option>
+							<option <%= (threadPriority == priorityValue) ? "selected" : "" %> value="<%= priorityValue %>"><%= priorityName %></option>
 
 				<%
+						}
 					}
 					catch (Exception e) {
 					}

@@ -264,7 +264,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 				String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
 
-				if (threadPriority != null) {
+				if ((threadPriority != null) && (thread.getPriority() > 0)) {
 					sb.append("<img align=\"left\" alt=\"");
 					sb.append(threadPriority[0]);
 					sb.append("\" border=\"0\" src=\"");
@@ -429,7 +429,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			String[] threadPriority = MBUtil.getThreadPriority(portletSetup, thread.getPriority(), themeDisplay);
 
-			if (threadPriority != null) {
+			if ((threadPriority != null) && (thread.getPriority() > 0)) {
 				sb.append("<img align=\"left\" alt=\"");
 				sb.append(threadPriority[0]);
 				sb.append("\" border=\"0\" src=\"");
