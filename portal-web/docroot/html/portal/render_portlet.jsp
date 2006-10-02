@@ -56,6 +56,9 @@ catch (NoSuchResourceException nsre) {
 	else if (portletId.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
 		addDefaultResource = true;
 	}
+	else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
+		addDefaultResource = true;
+	}
 	else if (portletId.equals(PortletKeys.SEARCH)) {
 		addDefaultResource = true;
 	}
@@ -75,9 +78,6 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
-		}
-		else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
-			addDefaultResource = true;
 		}
 		else if (portletId.equals(PortletKeys.MY_PLACES)) {
 			addDefaultResource = true;
