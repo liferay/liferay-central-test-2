@@ -76,7 +76,12 @@
 	<td>
 		<liferay-ui:input-field model="<%= Contact.class %>" bean="<%= contact2 %>" field="skypeSn" />
 	</td>
-	<td colspan="2"></td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<c:if test="<%= Validator.isNotNull(contact2.getSkypeSn()) %>">
+			<a href="callto://<%= contact2.getSkypeSn() %>"><img src="http://mystatus.skype.com/smallicon/<%= contact2.getSkypeSn() %>"></a>
+		</c:if>
+	</td>
 </tr>
 <tr>
 	<td>
