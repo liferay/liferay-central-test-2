@@ -244,14 +244,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.mail.util.ConnectionListener">
-		<priority value="INFO" />
-	</category>
-
-	<category name="com.liferay.portlet.mail.util.MailUtil">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
 		<priority value="ERROR" />
 	</category>

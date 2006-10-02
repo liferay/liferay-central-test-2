@@ -492,7 +492,6 @@ var Mail = {
 			"&sortBy=" + Mail.sortBy.value +
 			"&asc=" + Mail.sortBy.asc,
 			Mail.getPreviewReturn);
-			
 	},
 	
 	getPreviewReturn : function(xmlHttpReq) {
@@ -516,7 +515,7 @@ var Mail = {
 		Mail.searchCount = mailObject.headers.length;
 		Mail.setCurrentFolder();
 		Mail.clearPreview();
-		Mail.renderPreviewSection(0);
+		Mail.renderPreviewSection();
 		Mail.summaryUnhighlightAll();
 		Mail.getFolderDetails();
 	},
@@ -855,10 +854,20 @@ var Mail = {
 		if (Mail.sortBy == this) {
 			this.asc = this.asc ? false : true;
 		}
-	
+
 		Mail.sortBy = this;
-		Mail.getPreview();
 		Mail.updateSortArrow();
+
+		if (Mail.searchResults == true) {
+			loadPage(themeDisplay.getPathMain() + "/mail/action", 
+				"cmd=getSearchCached" +
+				"&sortBy=" + Mail.sortBy.value +
+				"&asc=" + Mail.sortBy.asc,
+				Mail.getSearchReturn);
+		}
+		else {
+			Mail.getPreview();
+		}
 	},
 	
 	onSummaryDblclick : function() {

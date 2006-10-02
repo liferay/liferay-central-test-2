@@ -177,6 +177,8 @@ public class WebKeys {
 
 	public static final String MAIL_MESSAGE_SUBJECT = "MAIL_MESSAGE_SUBJECT";
 
+	public static final String MAIL_SEARCH_RESULTS = "MAIL_SEARCH_RESULTS";
+
 	public static final String MAIL_STORE = "MAIL_STORE";
 
 	public static final String MESSAGE_BOARDS_CATEGORY = "MESSAGE_BOARDS_CATEGORY";

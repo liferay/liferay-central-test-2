@@ -513,6 +513,10 @@ public class MailUtil {
 		throws FolderException, MessagingException, StoreException {
 
 		try {
+			// Make sure a store has been retrieved first
+
+			_getStore(ses);
+
 			MailSessionLock.lock(ses.getId());
 
 			IMAPFolder folder = _getFolder(ses);
@@ -1649,7 +1653,6 @@ public class MailUtil {
 
 				_convertEnvelopes(
 					folder, displayTerms.getFolderName(), messages, results);
-
 			}
 			catch (MessagingException me) {
 				throw new FolderException(me);

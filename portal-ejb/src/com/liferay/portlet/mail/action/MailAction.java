@@ -24,13 +24,11 @@ package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.language.LanguageException;
-import com.liferay.portal.language.LanguageUtil;
-import com.liferay.portal.model.User;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PrettyDateFormat;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
@@ -48,15 +46,10 @@ import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 
-import java.text.DateFormat;
-
-import java.util.Calendar;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.Iterator;
-import java.util.Locale;
 import java.util.Set;
-import java.util.TimeZone;
+import java.util.TreeSet;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -111,6 +104,9 @@ public class MailAction extends JSONAction {
 			}
 			else if (cmd.equals("getSearch")) {
 				return getSearch(req);
+			}
+			else if (cmd.equals("getSearchCached")) {
+				return getSearchCached(req);
 			}
 			else if (cmd.equals("moveMessages")) {
 				moveMessages(req);
@@ -194,33 +190,7 @@ public class MailAction extends JSONAction {
 
 		JSONObject jsonObj = new JSONObject();
 
-		JSONArray jsonFolders = new JSONArray();
-
-		int count = 1;
-
-		Iterator itr = MailUtil.getFolders(ses).iterator();
-
-		while (itr.hasNext()) {
-			MailFolder folder = (MailFolder)itr.next();
-
-			JSONObject jsonFolder = new JSONObject();
-
-			String name = folder.getName();
-
-			jsonFolder.put("name", name);
-			jsonFolder.put("id", name);
-			jsonFolder.put("newCount", folder.getUnreadMessageCount());
-			jsonFolder.put("totalCount", folder.getMessageCount());
-
-			if (name.equals(MailUtil.MAIL_INBOX_NAME)) {
-				jsonFolders.put(0, jsonFolder);
-			}
-			else {
-				jsonFolders.put(count++, jsonFolder);
-			}
-		}
-
-		jsonObj.put("folders", jsonFolders);
+		_getFolders(ses, jsonObj);
 
 		return jsonObj.toString();
 	}
@@ -279,13 +249,37 @@ public class MailAction extends JSONAction {
 	protected String getSearch(HttpServletRequest req) throws Exception {
 		JSONObject jsonObj = new JSONObject();
 
+		HttpSession ses = req.getSession();
+
 		MailDisplayTerms displayTerms = new MailDisplayTerms(req);
+
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+		Set envelopes = MailUtil.search(ses, displayTerms, getComparator(req));
+
+		ses.setAttribute(WebKeys.MAIL_SEARCH_RESULTS, envelopes);
+
+		JSONArray jsonEnvelopes = _convertEnvelopes(envelopes, themeDisplay);
+
+		jsonObj.put("headers", jsonEnvelopes);
+
+		return jsonObj.toString();
+	}
+
+	protected String getSearchCached(HttpServletRequest req) throws Exception {
+		JSONObject jsonObj = new JSONObject();
+
+		HttpSession ses = req.getSession();
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Set envelopes =
-			MailUtil.search(req.getSession(), displayTerms, getComparator(req));
+		Set envelopes = new TreeSet(getComparator(req));
+
+		envelopes.addAll((Set)ses.getAttribute(WebKeys.MAIL_SEARCH_RESULTS));
+
+		ses.setAttribute(WebKeys.MAIL_SEARCH_RESULTS, envelopes);
 
 		JSONArray jsonEnvelopes = _convertEnvelopes(envelopes, themeDisplay);
 
@@ -317,6 +311,10 @@ public class MailAction extends JSONAction {
 			Set envelopes, ThemeDisplay themeDisplay)
 		throws LanguageException {
 
+		PrettyDateFormat dateFormat =
+			new PrettyDateFormat(themeDisplay.getCompanyId(),
+				themeDisplay.getLocale(), themeDisplay.getTimeZone());
+
 		JSONArray jsonEnvelopes = new JSONArray();
 
 		for (Iterator itr = envelopes.iterator(); itr.hasNext(); ) {
@@ -334,8 +332,7 @@ public class MailAction extends JSONAction {
 			jsonEnvelope.put("folderId", mailEnvelope.getFolderName());
 			jsonEnvelope.put("email", recipient);
 			jsonEnvelope.put("subject", subject);
-			jsonEnvelope.put("date",
-				_getDateString(themeDisplay, mailEnvelope.getDate()));
+			jsonEnvelope.put("date", dateFormat.format(mailEnvelope.getDate()));
 			jsonEnvelope.put(
 				"size",
 				TextFormatter.formatKB(
@@ -346,6 +343,7 @@ public class MailAction extends JSONAction {
 
 			jsonEnvelopes.put(jsonEnvelope);
 		}
+
 		return jsonEnvelopes;
 	}
 
@@ -361,52 +359,41 @@ public class MailAction extends JSONAction {
 		return messages;
 	}
 
-	private String _getDateString(ThemeDisplay themeDisplay, Date date)
-		throws LanguageException {
+	private void _getFolders(HttpSession ses, JSONObject jsonObj)
+		throws Exception {
 
-		String dateString = StringPool.NBSP;
+		long start = System.currentTimeMillis();
 
-		if (date != null) {
-			User user = themeDisplay.getUser();
-			Locale locale = themeDisplay.getLocale();
-			TimeZone timeZone = themeDisplay.getTimeZone();
+		JSONArray jsonFolders = new JSONArray();
 
-			Date today = new Date();
+		int count = 1;
 
-			Calendar cal = Calendar.getInstance(timeZone, locale);
+		Iterator itr = MailUtil.getFolders(ses).iterator();
 
-			cal.setTime(today);
-			cal.add(Calendar.DATE, -1);
+		while (itr.hasNext()) {
+			MailFolder folder = (MailFolder)itr.next();
 
-			Date yesterday = cal.getTime();
+			JSONObject jsonFolder = new JSONObject();
 
-			DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-			DateFormat dateFormatDateTime = DateFormats.getDateTime(
-				locale, timeZone);
-			DateFormat dateFormatTime = DateFormats.getTime(locale, timeZone);
+			String name = folder.getName();
 
-			String todayString = dateFormatDate.format(today);
-			String yesterdayString = dateFormatDate.format(yesterday);
+			jsonFolder.put("name", name);
+			jsonFolder.put("id", name);
+			jsonFolder.put("newCount", folder.getUnreadMessageCount());
+			jsonFolder.put("totalCount", folder.getMessageCount());
 
-			dateString = dateFormatDate.format(date);
-
-			if (dateString.equals(todayString)) {
-				dateString =
-					LanguageUtil.get(user, "today") + StringPool.SPACE +
-						dateFormatTime.format(date);
-			}
-			else if (dateString.equals(yesterdayString)) {
-				dateString =
-					LanguageUtil.get(user, "yesterday") + StringPool.SPACE +
-						dateFormatTime.format(date);
+			if (name.equals(MailUtil.MAIL_INBOX_NAME)) {
+				jsonFolders.put(0, jsonFolder);
 			}
 			else {
-				dateString =
-					dateFormatDateTime.format(date);
+				jsonFolders.put(count++, jsonFolder);
 			}
 		}
 
-		return dateString;
+		jsonObj.put("folders", jsonFolders);
+
+		_log.info(
+			"Total ms to get folders: " + (System.currentTimeMillis() - start));
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);
