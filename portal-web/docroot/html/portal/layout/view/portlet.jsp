@@ -55,7 +55,7 @@ List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
 
 			column = document.getElementById("layout-column_<%= column %>");
 
-			if (column) {
+			if (column && column.childNodes) {
 				DragDrop.makeListContainer(column, "g1", true);
 				column.columnId = "<%= column %>";
 			}
