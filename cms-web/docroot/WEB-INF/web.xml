@@ -7,7 +7,6 @@
 	</context-param>
 	<servlet>
 		<servlet-name>CMSServlet</servlet-name>
-		<display-name>CMSServlet</display-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalServletWrapper</servlet-class>
 		<init-param>
 			<param-name>servlet-class</param-name>

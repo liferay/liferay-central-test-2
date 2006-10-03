@@ -97,10 +97,6 @@ public class ElementComparator implements Comparator {
 		return 0;
 	}
 
-	public boolean shouldJoinChildren(Element element) {
-		return false;
-	}
-
 	private int _compare(List list, Object obj, Comparator comparator) {
 		int firstValue = -1;
 

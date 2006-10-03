@@ -31,8 +31,10 @@
 		<servlet-name>ApplicationServlet</servlet-name>
 		<url-pattern>/app</url-pattern>
 	</servlet-mapping>
-	<taglib>
-		<taglib-uri>http://java.sun.com/portlet</taglib-uri>
-		<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
-	</taglib>
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://java.sun.com/portlet</taglib-uri>
+			<taglib-location>/WEB-INF/tld/liferay-portlet.tld</taglib-location>
+		</taglib>
+	</jsp-config>
 </web-app>

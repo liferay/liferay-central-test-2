@@ -101,6 +101,7 @@ public class XMLFormatter {
 
 		if (x != -1) {
 			x = content.indexOf(">", x) + 1;
+
 			content = content.substring(0, x) + "\n" +
 				content.substring(x, content.length());
 		}

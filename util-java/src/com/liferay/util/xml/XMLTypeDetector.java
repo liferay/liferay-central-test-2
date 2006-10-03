@@ -26,7 +26,8 @@ import com.liferay.util.xml.descriptor.PortletAppDescriptor;
 import com.liferay.util.xml.descriptor.StrictXMLDescriptor;
 import com.liferay.util.xml.descriptor.StrutsConfigDescriptor;
 import com.liferay.util.xml.descriptor.TilesDefsDescriptor;
-import com.liferay.util.xml.descriptor.WebXMLDescriptor;
+import com.liferay.util.xml.descriptor.WebXML23Descriptor;
+import com.liferay.util.xml.descriptor.WebXML24Descriptor;
 import com.liferay.util.xml.descriptor.XMLDescriptor;
 
 import org.dom4j.Document;
@@ -41,7 +42,8 @@ public class XMLTypeDetector {
 
 	public static final XMLDescriptor[] REGISTERED_DESCRIPTORS = {
 		new PortletAppDescriptor(), new StrutsConfigDescriptor(),
-		new TilesDefsDescriptor(), new WebXMLDescriptor()
+		new TilesDefsDescriptor(), new WebXML23Descriptor(),
+		new WebXML24Descriptor()
 	};
 
 	public static XMLDescriptor determineType(String doctype, Document root) {

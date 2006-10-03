@@ -36,9 +36,13 @@ import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
 
 import java.io.File;
+import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="BaseDeployer.java.html"><b><i>View Source</i></b></a>
@@ -231,9 +235,21 @@ public class BaseDeployer {
 		int pos = content.indexOf("<web-app");
 		pos = content.indexOf(">", pos) + 1;
 
+		double webXmlVersion = 2.3;
+
+		SAXReader reader = new SAXReader();
+
+		Document webXmlDoc = reader.read(new StringReader(content));
+
+		Element webXmlRoot = webXmlDoc.getRootElement();
+
+		webXmlVersion = GetterUtil.getDouble(
+			webXmlRoot.attributeValue("version"), webXmlVersion);
+
 		// Merge extra content
 
-		String extraContent = getExtraContent(srcFile, displayName);
+		String extraContent = getExtraContent(
+			webXmlVersion, srcFile, displayName);
 
 		String newContent =
 			content.substring(0, pos) + extraContent +
@@ -253,7 +269,8 @@ public class BaseDeployer {
 
 		FileUtil.write(webXML, newContent, true);
 
-		System.out.println("  Modifying " + webXML);
+		System.out.println(
+			"  Modifying Servlet " + webXmlVersion + " " + webXML );
 
 		if (!baseDir.equals(destDir)) {
 			String includes = StringPool.BLANK;
@@ -314,11 +331,28 @@ public class BaseDeployer {
 		return displayName.substring(0, displayName.length() - 4);
 	}
 
-	protected String getExtraContent(File srcFile, String displayName)
+	protected String getExtraContent(
+			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
 		String extraContent =
 			"<display-name>" + displayName + "</display-name>";
+
+		boolean hasTaglib = false;
+
+		if (Validator.isNotNull(portletTaglibDTD) ||
+			Validator.isNotNull(portletExtTaglibDTD) ||
+			Validator.isNotNull(securityTaglibDTD) ||
+			Validator.isNotNull(themeTaglibDTD) ||
+			Validator.isNotNull(uiTaglibDTD) ||
+			Validator.isNotNull(utilTaglibDTD)) {
+
+			hasTaglib = true;
+		}
+
+		if (hasTaglib && (webXmlVersion > 2.3)) {
+			extraContent += "<jsp-config>";
+		}
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
 			extraContent +=
@@ -378,6 +412,10 @@ public class BaseDeployer {
 				"/WEB-INF/tld/liferay-util.tld" +
 				"</taglib-location>" +
 				"</taglib>";
+		}
+
+		if (hasTaglib && (webXmlVersion > 2.3)) {
+			extraContent += "</jsp-config>";
 		}
 
 		return extraContent;

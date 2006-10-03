@@ -118,7 +118,9 @@ public class XMLMergerRunner {
 			   IllegalAccessException, InstantiationException, IOException {
 
 		int pos = masterXml.indexOf("<!DOCTYPE");
+
 		String masterDoctype = "";
+
 		if (pos >= 0) {
 			masterDoctype = masterXml.substring(
 				pos, masterXml.indexOf(">", pos) + 1);
@@ -126,7 +128,9 @@ public class XMLMergerRunner {
 		}
 
 		pos = slaveXml.indexOf("<!DOCTYPE");
+		
 		String slaveDoctype = "";
+		
 		if (pos >= 0) {
 			slaveDoctype = slaveXml.substring(
 				pos, slaveXml.indexOf(">", pos) + 1);
@@ -134,6 +138,7 @@ public class XMLMergerRunner {
 		}
 
 		String doctype = null;
+
 		if (Validator.isNotNull(masterDoctype)) {
 			doctype = masterDoctype;
 		}
@@ -147,6 +152,7 @@ public class XMLMergerRunner {
 		Document slaveDoc = reader.read(new StringReader(slaveXml));
 
 		XMLDescriptor descriptor = null;
+
 		if (_descriptorClassName.equals(_AUTO_DESCRIPTOR)) {
 			descriptor = XMLTypeDetector.determineType(doctype, masterDoc);
 		}

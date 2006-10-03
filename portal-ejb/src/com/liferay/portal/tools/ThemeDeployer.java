@@ -74,10 +74,12 @@ public class ThemeDeployer extends BaseDeployer {
 		}
 	}
 
-	protected String getExtraContent(File srcFile, String displayName)
+	protected String getExtraContent(
+			double webXmlVersion, File srcFile, String displayName)
 		throws Exception {
 
-		String extraContent = super.getExtraContent(srcFile, displayName);
+		String extraContent = super.getExtraContent(
+			webXmlVersion, srcFile, displayName);
 
 		extraContent +=
 			"<listener>" +

@@ -27,12 +27,12 @@ import com.liferay.util.xml.ElementIdentifier;
 import org.dom4j.Document;
 
 /**
- * <a href="WebXMLDescriptor.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebXML23Descriptor.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
  *
  */
-public class WebXMLDescriptor extends SimpleXMLDescriptor {
+public class WebXML23Descriptor extends SimpleXMLDescriptor {
 
 	public boolean canHandleType(String doctype, Document root) {
 		if (doctype.indexOf("web-app") != -1) {
@@ -77,10 +77,11 @@ public class WebXMLDescriptor extends SimpleXMLDescriptor {
 	private static final ElementIdentifier[] _ELEMENTS_IDENTIFIED_BY_CHILD = {
 		new ElementIdentifier("context-param", "param-name"),
 		new ElementIdentifier("filter", "filter-name"),
-		//new ElementIdentifier("filter-mapping", "filter-name"),
+		new ElementIdentifier("filter-mapping", "filter-name"),
 		new ElementIdentifier("servlet", "servlet-name"),
 		new ElementIdentifier("servlet-mapping", "servlet-name"),
 		new ElementIdentifier("init-param", "param-name"),
+		new ElementIdentifier("taglib", "taglib-uri"),
 		new ElementIdentifier("resource-env-ref", "res-env-ref-name"),
 		new ElementIdentifier("resource-ref", "res-ref-name"),
 		new ElementIdentifier("ejb-local-ref", "ejb-ref-name")

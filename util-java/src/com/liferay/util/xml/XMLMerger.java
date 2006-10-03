@@ -63,6 +63,7 @@ public class XMLMerger {
 			Element el2 = (Element)children.get(i);
 
 			Element el2Clone = (Element)el2.clone();
+
 			el2Clone.detach();
 
 			root1.add(el2Clone);
@@ -137,7 +138,7 @@ public class XMLMerger {
 				Element child = (Element)children.get(i);
 
 				if (_containsObjectEqualTo(child, originals, comparator)) {
-					if (comparator.shouldJoinChildren(child)) {
+					if (_descriptor.canJoinChildren(child)) {
 						Element first =
 							_findObjectEqualTo(child, originals, comparator);
 
