@@ -161,7 +161,8 @@ var Mail = {
 			(deleteList.length > 1 ? "s" : "") + " from " + folderName + "?";
 
 		if (deleteList.length > 0 && (skipConfirm || confirm(confirmMsg))) {
-			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&messages=" + deleteList, Mail.getFolders);
+			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteMessages&messages=" + deleteList);
+			Mail.getFolders();
 
 			Mail.removeSelectedMessages();
 			Mail.searchCount -= deleteList.length;
@@ -763,51 +764,75 @@ var Mail = {
 		event.shiftKey 
 		*/
 
-		var keycode = event.keyCode
+		var keycode = event.keyCode;
 		
 		if ((keycode == Key.UP || keycode == Key.DOWN) &&
 			 Mail.summaryList.head != null) {
 			 
 			var lastObj = Mail.lastSelected;
 			var nextObj;
+			var prevObj;
 			
 			if (Mail.lastSelected == null) {
-				Mail.lastSelected = Mail.summaryList.head;
-				nextObj = Mail.lastSelected;
+				Mail.lastSelected = Mail.groupStart = Mail.summaryList.head;
+				nextObj = prevObj = Mail.lastSelected;
 			}
 			else if (keycode == Key.DOWN) {
 				nextObj = lastObj.next;
+				prevObj = lastObj.prev;
 			}
 			else if (keycode == Key.UP) {
 				nextObj = lastObj.prev;
+				prevObj = lastObj.next;
 			}
 			
-			if (nextObj) {
+			if (Mail.groupStart == null) {
+				Mail.groupStart = Mail.lastSelected;
+			}
+
+
+				
 				if (event.shiftKey) {
-					if (nextObj.index <= Mail.groupStart.index) {
+					var action = "";
+					
+					if (Mail.lastSelected.index < Mail.groupStart.index) {
 						if (keycode == Key.DOWN) {
-							Mail.summaryUnhighlight(Mail.lastSelected, true);
+							action = "unhl";
+							//Mail.summaryUnhighlight(Mail.lastSelected, true);
 						}
 						else {
-							Mail.summaryHighlight(nextObj, true);
+							action = "hl";
+							//Mail.summaryHighlight(nextObj, true);
 						}
 					}
-					if (nextObj.index >= Mail.groupStart.index) {
+					else if (Mail.lastSelected.index > Mail.groupStart.index) {
 						if (keycode == Key.UP) {
-							Mail.summaryUnhighlight(Mail.lastSelected, true);
+							action = "unhl";
+							//Mail.summaryUnhighlight(Mail.lastSelected, true);
 						}
 						else {
-							Mail.summaryHighlight(nextObj, true);
+							action = "hl"
+							//Mail.summaryHighlight(nextObj, true);
 						}
+					}
+					else {
+						action = "hl"
+					}
+					
+					if (action == "hl" && nextObj) {
+						Mail.summaryHighlight(nextObj, true);
+					}
+					else if (action == "unhl") {
+						Mail.summaryUnhighlight(Mail.lastSelected);
+						Mail.lastSelected = nextObj;
 					}
 					
 				}
-				else {
+				else if (nextObj) {
 					Mail.summaryUnhighlightAll();
 					Mail.summaryHighlight(nextObj, event.shiftKey);
+					Mail.groupStart = Mail.lastSelected;
 				}
-				Mail.groupStart = Mail.lastSelected;
-			}
 			
 			Mail.scrollToSelected();
 			return false;
