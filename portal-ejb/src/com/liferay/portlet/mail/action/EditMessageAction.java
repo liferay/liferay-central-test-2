@@ -245,6 +245,12 @@ public class EditMessageAction extends PortletAction {
 				WebKeys.MAIL_MESSAGE_ATTACHMENTS, getRemoteAttachments(req));
 		}
 		else {
+			String to = ParamUtil.getString(req, "to");
+
+			String[] recipients =
+				new String[] {to, StringPool.BLANK, StringPool.BLANK};
+
+			req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
 			req.setAttribute(WebKeys.MAIL_MESSAGE_BODY, signature);
 		}
 

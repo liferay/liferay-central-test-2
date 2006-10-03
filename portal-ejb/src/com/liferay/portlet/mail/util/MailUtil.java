@@ -872,6 +872,10 @@ public class MailUtil {
 			body = body.replaceAll(_LINK_REGEXP[i], _LINK_REPLACEMENT[i]);
 		}
 
+		body = body.replaceAll(
+			"(<a href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)",
+			"<a href=\"javascript: parent.compose('$2')");
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body after replacing links\n" + body);
 		}
@@ -1683,12 +1687,12 @@ public class MailUtil {
 
 	private static final String[] _LINK_REGEXP = {
 		"([^]_a-z0-9-=\"'/])" +
-	    	"((https?|ftp|gopher|news|telnet)://|www\\.)" +
-	    	"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
-	    	"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
-	    "<a href=\"www\\."
+			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
+			"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
+			"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
+		"<a href=\"www\\."
 	};
-	
+
 	private static String[] _LINK_REPLACEMENT = {
 		"$1<a href=\"$2$4$5\" target=\"_blank\">$2$4$5</a>",
 		"<a href=\"http://www."

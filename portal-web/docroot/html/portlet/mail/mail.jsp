@@ -154,6 +154,10 @@ String mailLineColor = "#B3B6B0";
 				advSearch.style.display = "none";
 			}
 
+			function compose(to) {
+				window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>&to=' + to;
+			}
+
 			function showAdvancedSearch(filter) {
 				var search = document.getElementById("portlet-mail-toolbar-search");
 				var searchInput = document.getElementById("portlet-mail-toolbar-search-input");
