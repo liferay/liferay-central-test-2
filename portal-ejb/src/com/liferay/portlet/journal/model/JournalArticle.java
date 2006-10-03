@@ -25,7 +25,19 @@ package com.liferay.portlet.journal.model;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.Validator;
+
+import java.io.StringReader;
+
+import java.util.Locale;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Document;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="JournalArticle.java.html"><b><i>View Source</i></b></a>
@@ -60,6 +72,34 @@ public class JournalArticle extends JournalArticleModel {
 		return listener.onXml(getContent());
 	}
 
+	public String getDefaultLocale() {
+		String xml = getContent();
+
+		String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+
+		if ((Validator.isNull(xml)) ||
+			(xml.indexOf("<dynamic-element name=\"") == -1)) {
+
+			return defaultLanguageId;
+		}
+
+		try {
+			SAXReader reader = new SAXReader();
+
+			Document doc = reader.read(new StringReader(xml));
+
+			Element root = doc.getRootElement();
+
+			return root.attributeValue("default-locale", defaultLanguageId);
+
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return defaultLanguageId;
+	}
+
 	public boolean isTemplateDriven() {
 		if (Validator.isNull(getStructureId())) {
 			return false;
@@ -68,5 +108,7 @@ public class JournalArticle extends JournalArticleModel {
 			return true;
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(JournalArticle.class);
 
 }

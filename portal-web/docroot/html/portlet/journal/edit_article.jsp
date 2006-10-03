@@ -124,7 +124,19 @@ if (structure != null) {
 String templateId = BeanParamUtil.getString(article, request, "templateId");
 
 String languageId = LanguageUtil.getLanguageId(request);
-String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+
+String defaultLanguageId = ParamUtil.getString(request, "defaultLanguageId");
+
+if (article == null) {
+	defaultLanguageId = languageId;
+}
+else {
+	if (Validator.isNull(defaultLanguageId)) {
+		defaultLanguageId =	article.getDefaultLocale();
+	}
+}
+
+Locale defaultLocale = LocaleUtil.fromLanguageId(defaultLanguageId);
 
 String content = null;
 
@@ -162,7 +174,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<portlet:namespace />saveArticle("<%= Constants.APPROVE %>");
 	}
 
-	<c:if test="<%= article != null %>">
 		function <portlet:namespace />changeLanguageView() {
 			if (<portlet:namespace />contentChangedFlag) {
 				if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
@@ -187,7 +198,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 			submitForm(document.<portlet:namespace />fm);
 		}
-	</c:if>
 
 	function <portlet:namespace />contentChanged() {
 		<portlet:namespace />contentChangedFlag = true;
@@ -628,33 +638,121 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	</td>
 </tr>
 
+<%
+SAXReader reader = new SAXReader();
+
+Document contentDoc = null;
+
+Element contentEl = null;
+
+String[] availableLocales = null;
+%>
+
+<c:if test="<%= structure != null %>">
+
+
+</c:if>
+
 <c:choose>
-	<c:when test="<%= (article != null) && (structure != null) %>">
+	<c:when test="<%= (structure != null) %>">
 		<tr>
 			<td>
 				<%= LanguageUtil.get(pageContext, "language") %>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<select name="<portlet:namespace />languageId" <%= (article == null) ? "disabled" : "" %> onChange="<portlet:namespace />changeLanguageView();">
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />changeLanguageView();">
 
-					<%
-					Locale[] locales = LanguageUtil.getAvailableLocales();
+							<%
+							Locale[] locales = LanguageUtil.getAvailableLocales();
 
-					for (int i = 0; i < locales.length; i++) {
-					%>
+							for (int i = 0; i < locales.length; i++) {
+							%>
 
-						<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+								<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
 
-					<%
-					}
-					%>
+							<%
+							}
+							%>
 
-				</select>
+						</select>
 
-				<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
-					<input class="portlet-form-button" type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
-				</c:if>
+						<c:if test="<%= (article != null) && !languageId.equals(defaultLanguageId) %>">
+							<input class="portlet-form-button" type="button" name="<portlet:namespace />removeArticleLocaleButton" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeArticleLocale();">
+						</c:if>
+					</td>
+					<td style="padding-left: 30px;"></td>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0">
+
+						<%
+						contentDoc = null;
+
+						try {
+							contentDoc = reader.read(new StringReader(content));
+
+							contentEl = contentDoc.getRootElement();
+
+							availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
+						}
+						catch (Exception e) {
+							contentDoc = null;
+						}
+						%>
+
+						<tr>
+							<td>
+								<%= LanguageUtil.get(pageContext, "default-language") %>
+							</td>
+							<td style="padding-left: 10px;"></td>
+							<td>
+								<select name="<portlet:namespace />defaultLanguageId" onChange="<portlet:namespace />changeLanguageView();">
+
+									<%
+									if ((availableLocales != null) && (availableLocales.length > 0)) {
+										boolean wasLanguageId = false;
+
+										for (int i = 0; i < availableLocales.length; i++) {
+											if (availableLocales[i].equals(languageId)) {
+												wasLanguageId = true;
+											}
+
+											Locale availableLocale = LocaleUtil.fromLanguageId(availableLocales[i]);
+									%>
+
+											<option <%= (availableLocales[i].equals(defaultLanguageId)) ? "selected" : "" %> value="<%= availableLocales[i] %>"><%= availableLocale.getDisplayName(availableLocale) %></option>
+
+									<%
+										}
+
+										if (!wasLanguageId) {
+											Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
+									%>
+
+											<option value="<%= languageId %>"><%= languageLocale.getDisplayName(languageLocale) %></option>
+
+									<%
+										}
+									}
+									else  {
+									%>
+
+										<option value="<%= defaultLanguageId %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
+
+									<%
+									}
+									%>
+
+								</select>
+							</td>
+						</tr>
+						</table>
+					</td>
+				</tr>
+				</table>
 			</td>
 		</tr>
 	</c:when>
@@ -827,13 +925,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 							templateWindow.focus();
 						}"
 					>
-
-				<%--
-				<input <%= Validator.isNull(structureId) ? "disabled" : "" %> class="portlet-form-button" id="<portlet:namespace />removeStructureButton" type="button" value='<%= LanguageUtil.get(pageContext, "remove") %>' onClick="<portlet:namespace />removeStructure();">
-
-				<%= LanguageUtil.get(pageContext, "please-select-a-structure-to-choose-a-template") %>
-				--%>
-
 			</c:when>
 			<c:otherwise>
 				<liferay-ui:table-iterator
@@ -890,24 +981,15 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<input name="<portlet:namespace />available_locales" type="hidden" value="">
 
 		<%
-		SAXReader reader = new SAXReader();
-
 		Document xsdDoc = reader.read(new StringReader(structure.getXsd()));
 
-		Document contentDoc = null;
-
-		try {
-			contentDoc = reader.read(new StringReader(content));
+		if (contentDoc != null) {
 		%>
 
 			<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>"/>
 
 		<%
-			Element contentEl = contentDoc.getRootElement();
-
 			boolean languageFound = false;
-
-			String[] availableLocales = StringUtil.split(contentEl.attributeValue("available-locales"));
 
 			if ((availableLocales != null) && (availableLocales.length > 0)) {
 				for (int i = 0; i < availableLocales.length ;i++) {
@@ -950,7 +1032,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<%
 			}
 		}
-		catch (Exception e) {
+		else {
 			DocumentFactory docFactory = DocumentFactory.getInstance();
 
 			contentDoc = docFactory.createDocument(docFactory.createElement("root"));
