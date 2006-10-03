@@ -122,13 +122,24 @@ public class RolePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role) throws SystemException {
+		return update(role, false);
+	}
+
+	public com.liferay.portal.model.Role update(
+		com.liferay.portal.model.Role role, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (role.isNew()) {
-				session.save(role);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(role);
+			}
+			else {
+				if (role.isNew()) {
+					session.save(role);
+				}
 			}
 
 			session.flush();

@@ -144,6 +144,45 @@ public class ImageUtil {
 		return image;
 	}
 
+	public static com.liferay.portal.model.Image update(
+		com.liferay.portal.model.Image image, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = image.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(image);
+			}
+			else {
+				listener.onBeforeUpdate(image);
+			}
+		}
+
+		image = getPersistence().update(image, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(image);
+			}
+			else {
+				listener.onAfterUpdate(image);
+			}
+		}
+
+		return image;
+	}
+
 	public static com.liferay.portal.model.Image findByPrimaryKey(
 		java.lang.String imageId)
 		throws com.liferay.portal.NoSuchImageException, 

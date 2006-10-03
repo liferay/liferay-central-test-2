@@ -109,13 +109,24 @@ public class BlogsEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws SystemException {
+		return update(blogsEntry, false);
+	}
+
+	public com.liferay.portlet.blogs.model.BlogsEntry update(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (blogsEntry.isNew()) {
-				session.save(blogsEntry);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(blogsEntry);
+			}
+			else {
+				if (blogsEntry.isNew()) {
+					session.save(blogsEntry);
+				}
 			}
 
 			session.flush();

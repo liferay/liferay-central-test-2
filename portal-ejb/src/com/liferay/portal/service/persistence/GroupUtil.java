@@ -144,6 +144,45 @@ public class GroupUtil {
 		return group;
 	}
 
+	public static com.liferay.portal.model.Group update(
+		com.liferay.portal.model.Group group, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = group.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(group);
+			}
+			else {
+				listener.onBeforeUpdate(group);
+			}
+		}
+
+		group = getPersistence().update(group, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(group);
+			}
+			else {
+				listener.onAfterUpdate(group);
+			}
+		}
+
+		return group;
+	}
+
 	public static com.liferay.portal.model.Group findByPrimaryKey(
 		java.lang.String groupId)
 		throws com.liferay.portal.NoSuchGroupException, 

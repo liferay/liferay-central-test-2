@@ -125,13 +125,24 @@ public class PermissionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission)
 		throws SystemException {
+		return update(permission, false);
+	}
+
+	public com.liferay.portal.model.Permission update(
+		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (permission.isNew()) {
-				session.save(permission);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(permission);
+			}
+			else {
+				if (permission.isNew()) {
+					session.save(permission);
+				}
 			}
 
 			session.flush();

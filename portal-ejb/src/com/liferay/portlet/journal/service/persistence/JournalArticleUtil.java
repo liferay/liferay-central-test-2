@@ -145,6 +145,45 @@ public class JournalArticleUtil {
 		return journalArticle;
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle update(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = journalArticle.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalArticle);
+			}
+			else {
+				listener.onBeforeUpdate(journalArticle);
+			}
+		}
+
+		journalArticle = getPersistence().update(journalArticle, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalArticle);
+			}
+			else {
+				listener.onAfterUpdate(journalArticle);
+			}
+		}
+
+		return journalArticle;
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK)
 		throws com.liferay.portlet.journal.NoSuchArticleException, 

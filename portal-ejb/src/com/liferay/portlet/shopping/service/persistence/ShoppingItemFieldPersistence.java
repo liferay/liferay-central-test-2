@@ -111,13 +111,24 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingItemField update(
 		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws SystemException {
+		return update(shoppingItemField, false);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingItemField update(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (shoppingItemField.isNew()) {
-				session.save(shoppingItemField);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(shoppingItemField);
+			}
+			else {
+				if (shoppingItemField.isNew()) {
+					session.save(shoppingItemField);
+				}
 			}
 
 			session.flush();

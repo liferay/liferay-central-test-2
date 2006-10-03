@@ -145,6 +145,46 @@ public class OrgGroupPermissionUtil {
 		return orgGroupPermission;
 	}
 
+	public static com.liferay.portal.model.OrgGroupPermission update(
+		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = orgGroupPermission.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(orgGroupPermission);
+			}
+			else {
+				listener.onBeforeUpdate(orgGroupPermission);
+			}
+		}
+
+		orgGroupPermission = getPersistence().update(orgGroupPermission,
+				saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(orgGroupPermission);
+			}
+			else {
+				listener.onAfterUpdate(orgGroupPermission);
+			}
+		}
+
+		return orgGroupPermission;
+	}
+
 	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
 		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 

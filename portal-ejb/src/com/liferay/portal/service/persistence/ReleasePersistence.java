@@ -101,13 +101,24 @@ public class ReleasePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Release update(
 		com.liferay.portal.model.Release release) throws SystemException {
+		return update(release, false);
+	}
+
+	public com.liferay.portal.model.Release update(
+		com.liferay.portal.model.Release release, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (release.isNew()) {
-				session.save(release);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(release);
+			}
+			else {
+				if (release.isNew()) {
+					session.save(release);
+				}
 			}
 
 			session.flush();

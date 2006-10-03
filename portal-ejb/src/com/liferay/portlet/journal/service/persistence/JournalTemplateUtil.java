@@ -145,6 +145,45 @@ public class JournalTemplateUtil {
 		return journalTemplate;
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate update(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = journalTemplate.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalTemplate);
+			}
+			else {
+				listener.onBeforeUpdate(journalTemplate);
+			}
+		}
+
+		journalTemplate = getPersistence().update(journalTemplate, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalTemplate);
+			}
+			else {
+				listener.onAfterUpdate(journalTemplate);
+			}
+		}
+
+		return journalTemplate;
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalTemplatePK journalTemplatePK)
 		throws com.liferay.portlet.journal.NoSuchTemplateException, 

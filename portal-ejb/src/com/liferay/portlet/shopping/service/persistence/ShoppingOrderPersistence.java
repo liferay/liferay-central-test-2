@@ -110,13 +110,24 @@ public class ShoppingOrderPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingOrder update(
 		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws SystemException {
+		return update(shoppingOrder, false);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingOrder update(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (shoppingOrder.isNew()) {
-				session.save(shoppingOrder);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(shoppingOrder);
+			}
+			else {
+				if (shoppingOrder.isNew()) {
+					session.save(shoppingOrder);
+				}
 			}
 
 			session.flush();

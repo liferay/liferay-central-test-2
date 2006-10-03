@@ -142,6 +142,45 @@ public class RoleUtil {
 		return role;
 	}
 
+	public static com.liferay.portal.model.Role update(
+		com.liferay.portal.model.Role role, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = role.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(role);
+			}
+			else {
+				listener.onBeforeUpdate(role);
+			}
+		}
+
+		role = getPersistence().update(role, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(role);
+			}
+			else {
+				listener.onAfterUpdate(role);
+			}
+		}
+
+		return role;
+	}
+
 	public static com.liferay.portal.model.Role findByPrimaryKey(
 		java.lang.String roleId)
 		throws com.liferay.portal.NoSuchRoleException, 

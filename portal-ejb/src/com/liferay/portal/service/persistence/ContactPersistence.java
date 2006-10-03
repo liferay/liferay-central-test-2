@@ -106,13 +106,24 @@ public class ContactPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact) throws SystemException {
+		return update(contact, false);
+	}
+
+	public com.liferay.portal.model.Contact update(
+		com.liferay.portal.model.Contact contact, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (contact.isNew()) {
-				session.save(contact);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(contact);
+			}
+			else {
+				if (contact.isNew()) {
+					session.save(contact);
+				}
 			}
 
 			session.flush();

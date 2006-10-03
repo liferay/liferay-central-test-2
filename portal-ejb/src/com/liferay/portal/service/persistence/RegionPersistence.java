@@ -106,13 +106,24 @@ public class RegionPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Region update(
 		com.liferay.portal.model.Region region) throws SystemException {
+		return update(region, false);
+	}
+
+	public com.liferay.portal.model.Region update(
+		com.liferay.portal.model.Region region, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (region.isNew()) {
-				session.save(region);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(region);
+			}
+			else {
+				if (region.isNew()) {
+					session.save(region);
+				}
 			}
 
 			session.flush();

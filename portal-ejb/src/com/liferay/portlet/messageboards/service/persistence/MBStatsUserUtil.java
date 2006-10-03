@@ -145,6 +145,45 @@ public class MBStatsUserUtil {
 		return mbStatsUser;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBStatsUser update(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = mbStatsUser.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(mbStatsUser);
+			}
+			else {
+				listener.onBeforeUpdate(mbStatsUser);
+			}
+		}
+
+		mbStatsUser = getPersistence().update(mbStatsUser, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(mbStatsUser);
+			}
+			else {
+				listener.onAfterUpdate(mbStatsUser);
+			}
+		}
+
+		return mbStatsUser;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBStatsUser findByPrimaryKey(
 		com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK mbStatsUserPK)
 		throws com.liferay.portlet.messageboards.NoSuchStatsUserException, 

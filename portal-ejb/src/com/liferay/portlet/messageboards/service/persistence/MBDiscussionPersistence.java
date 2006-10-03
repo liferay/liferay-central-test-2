@@ -108,13 +108,24 @@ public class MBDiscussionPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBDiscussion update(
 		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion)
 		throws SystemException {
+		return update(mbDiscussion, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBDiscussion update(
+		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbDiscussion.isNew()) {
-				session.save(mbDiscussion);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbDiscussion);
+			}
+			else {
+				if (mbDiscussion.isNew()) {
+					session.save(mbDiscussion);
+				}
 			}
 
 			session.flush();

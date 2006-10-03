@@ -108,13 +108,24 @@ public class DLFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws SystemException {
+		return update(dlFolder, false);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder update(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (dlFolder.isNew()) {
-				session.save(dlFolder);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(dlFolder);
+			}
+			else {
+				if (dlFolder.isNew()) {
+					session.save(dlFolder);
+				}
 			}
 
 			session.flush();

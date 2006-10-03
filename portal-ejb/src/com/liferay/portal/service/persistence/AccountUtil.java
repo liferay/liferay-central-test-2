@@ -144,6 +144,45 @@ public class AccountUtil {
 		return account;
 	}
 
+	public static com.liferay.portal.model.Account update(
+		com.liferay.portal.model.Account account, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = account.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(account);
+			}
+			else {
+				listener.onBeforeUpdate(account);
+			}
+		}
+
+		account = getPersistence().update(account, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(account);
+			}
+			else {
+				listener.onAfterUpdate(account);
+			}
+		}
+
+		return account;
+	}
+
 	public static com.liferay.portal.model.Account findByPrimaryKey(
 		java.lang.String accountId)
 		throws com.liferay.portal.NoSuchAccountException, 

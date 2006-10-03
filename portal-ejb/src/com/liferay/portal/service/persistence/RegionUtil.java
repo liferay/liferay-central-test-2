@@ -144,6 +144,45 @@ public class RegionUtil {
 		return region;
 	}
 
+	public static com.liferay.portal.model.Region update(
+		com.liferay.portal.model.Region region, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = region.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(region);
+			}
+			else {
+				listener.onBeforeUpdate(region);
+			}
+		}
+
+		region = getPersistence().update(region, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(region);
+			}
+			else {
+				listener.onAfterUpdate(region);
+			}
+		}
+
+		return region;
+	}
+
 	public static com.liferay.portal.model.Region findByPrimaryKey(
 		java.lang.String regionId)
 		throws com.liferay.portal.NoSuchRegionException, 

@@ -110,13 +110,24 @@ public class ShoppingCouponPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCoupon update(
 		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws SystemException {
+		return update(shoppingCoupon, false);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCoupon update(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (shoppingCoupon.isNew()) {
-				session.save(shoppingCoupon);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(shoppingCoupon);
+			}
+			else {
+				if (shoppingCoupon.isNew()) {
+					session.save(shoppingCoupon);
+				}
 			}
 
 			session.flush();

@@ -145,6 +145,45 @@ public class PollsChoiceUtil {
 		return pollsChoice;
 	}
 
+	public static com.liferay.portlet.polls.model.PollsChoice update(
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = pollsChoice.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(pollsChoice);
+			}
+			else {
+				listener.onBeforeUpdate(pollsChoice);
+			}
+		}
+
+		pollsChoice = getPersistence().update(pollsChoice, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(pollsChoice);
+			}
+			else {
+				listener.onAfterUpdate(pollsChoice);
+			}
+		}
+
+		return pollsChoice;
+	}
+
 	public static com.liferay.portlet.polls.model.PollsChoice findByPrimaryKey(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 

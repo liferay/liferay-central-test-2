@@ -145,6 +145,45 @@ public class MBMessageFlagUtil {
 		return mbMessageFlag;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = mbMessageFlag.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(mbMessageFlag);
+			}
+			else {
+				listener.onBeforeUpdate(mbMessageFlag);
+			}
+		}
+
+		mbMessageFlag = getPersistence().update(mbMessageFlag, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(mbMessageFlag);
+			}
+			else {
+				listener.onAfterUpdate(mbMessageFlag);
+			}
+		}
+
+		return mbMessageFlag;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag findByPrimaryKey(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK)
 		throws com.liferay.portlet.messageboards.NoSuchMessageFlagException, 

@@ -110,13 +110,24 @@ public class MBMessageFlagPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws SystemException {
+		return update(mbMessageFlag, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessageFlag update(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbMessageFlag.isNew()) {
-				session.save(mbMessageFlag);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbMessageFlag);
+			}
+			else {
+				if (mbMessageFlag.isNew()) {
+					session.save(mbMessageFlag);
+				}
 			}
 
 			session.flush();

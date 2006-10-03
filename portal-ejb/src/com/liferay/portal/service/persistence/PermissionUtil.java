@@ -145,6 +145,45 @@ public class PermissionUtil {
 		return permission;
 	}
 
+	public static com.liferay.portal.model.Permission update(
+		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = permission.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(permission);
+			}
+			else {
+				listener.onBeforeUpdate(permission);
+			}
+		}
+
+		permission = getPersistence().update(permission, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(permission);
+			}
+			else {
+				listener.onAfterUpdate(permission);
+			}
+		}
+
+		return permission;
+	}
+
 	public static com.liferay.portal.model.Permission findByPrimaryKey(
 		java.lang.String permissionId)
 		throws com.liferay.portal.NoSuchPermissionException, 

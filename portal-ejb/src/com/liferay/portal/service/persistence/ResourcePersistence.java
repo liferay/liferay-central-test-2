@@ -106,13 +106,24 @@ public class ResourcePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource) throws SystemException {
+		return update(resource, false);
+	}
+
+	public com.liferay.portal.model.Resource update(
+		com.liferay.portal.model.Resource resource, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (resource.isNew()) {
-				session.save(resource);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(resource);
+			}
+			else {
+				if (resource.isNew()) {
+					session.save(resource);
+				}
 			}
 
 			session.flush();

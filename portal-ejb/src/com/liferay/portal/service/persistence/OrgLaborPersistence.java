@@ -106,13 +106,24 @@ public class OrgLaborPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor) throws SystemException {
+		return update(orgLabor, false);
+	}
+
+	public com.liferay.portal.model.OrgLabor update(
+		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (orgLabor.isNew()) {
-				session.save(orgLabor);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(orgLabor);
+			}
+			else {
+				if (orgLabor.isNew()) {
+					session.save(orgLabor);
+				}
 			}
 
 			session.flush();

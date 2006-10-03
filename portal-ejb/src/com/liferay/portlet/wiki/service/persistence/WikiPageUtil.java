@@ -145,6 +145,45 @@ public class WikiPageUtil {
 		return wikiPage;
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPage update(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = wikiPage.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(wikiPage);
+			}
+			else {
+				listener.onBeforeUpdate(wikiPage);
+			}
+		}
+
+		wikiPage = getPersistence().update(wikiPage, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(wikiPage);
+			}
+			else {
+				listener.onAfterUpdate(wikiPage);
+			}
+		}
+
+		return wikiPage;
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage findByPrimaryKey(
 		com.liferay.portlet.wiki.service.persistence.WikiPagePK wikiPagePK)
 		throws com.liferay.portlet.wiki.NoSuchPageException, 

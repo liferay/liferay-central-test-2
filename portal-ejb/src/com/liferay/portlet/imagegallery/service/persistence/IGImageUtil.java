@@ -145,6 +145,45 @@ public class IGImageUtil {
 		return igImage;
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage update(
+		com.liferay.portlet.imagegallery.model.IGImage igImage,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = igImage.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(igImage);
+			}
+			else {
+				listener.onBeforeUpdate(igImage);
+			}
+		}
+
+		igImage = getPersistence().update(igImage, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(igImage);
+			}
+			else {
+				listener.onAfterUpdate(igImage);
+			}
+		}
+
+		return igImage;
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK)
 		throws com.liferay.portlet.imagegallery.NoSuchImageException, 

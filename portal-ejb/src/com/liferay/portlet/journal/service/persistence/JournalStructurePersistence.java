@@ -111,13 +111,24 @@ public class JournalStructurePersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalStructure update(
 		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws SystemException {
+		return update(journalStructure, false);
+	}
+
+	public com.liferay.portlet.journal.model.JournalStructure update(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (journalStructure.isNew()) {
-				session.save(journalStructure);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(journalStructure);
+			}
+			else {
+				if (journalStructure.isNew()) {
+					session.save(journalStructure);
+				}
 			}
 
 			session.flush();

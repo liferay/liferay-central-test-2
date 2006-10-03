@@ -109,13 +109,24 @@ public class EmailAddressPersistence extends BasePersistence {
 	public com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws SystemException {
+		return update(emailAddress, false);
+	}
+
+	public com.liferay.portal.model.EmailAddress update(
+		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (emailAddress.isNew()) {
-				session.save(emailAddress);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(emailAddress);
+			}
+			else {
+				if (emailAddress.isNew()) {
+					session.save(emailAddress);
+				}
 			}
 
 			session.flush();

@@ -144,6 +144,45 @@ public class ReleaseUtil {
 		return release;
 	}
 
+	public static com.liferay.portal.model.Release update(
+		com.liferay.portal.model.Release release, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = release.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(release);
+			}
+			else {
+				listener.onBeforeUpdate(release);
+			}
+		}
+
+		release = getPersistence().update(release, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(release);
+			}
+			else {
+				listener.onAfterUpdate(release);
+			}
+		}
+
+		return release;
+	}
+
 	public static com.liferay.portal.model.Release findByPrimaryKey(
 		java.lang.String releaseId)
 		throws com.liferay.portal.NoSuchReleaseException, 

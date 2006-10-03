@@ -104,13 +104,24 @@ public class DataTrackerPersistence extends BasePersistence {
 	public com.liferay.portal.model.DataTracker update(
 		com.liferay.portal.model.DataTracker dataTracker)
 		throws SystemException {
+		return update(dataTracker, false);
+	}
+
+	public com.liferay.portal.model.DataTracker update(
+		com.liferay.portal.model.DataTracker dataTracker, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (dataTracker.isNew()) {
-				session.save(dataTracker);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(dataTracker);
+			}
+			else {
+				if (dataTracker.isNew()) {
+					session.save(dataTracker);
+				}
 			}
 
 			session.flush();

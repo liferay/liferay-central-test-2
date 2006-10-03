@@ -108,13 +108,24 @@ public class CalEventPersistence extends BasePersistence {
 	public com.liferay.portlet.calendar.model.CalEvent update(
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws SystemException {
+		return update(calEvent, false);
+	}
+
+	public com.liferay.portlet.calendar.model.CalEvent update(
+		com.liferay.portlet.calendar.model.CalEvent calEvent,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (calEvent.isNew()) {
-				session.save(calEvent);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(calEvent);
+			}
+			else {
+				if (calEvent.isNew()) {
+					session.save(calEvent);
+				}
 			}
 
 			session.flush();

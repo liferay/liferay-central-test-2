@@ -110,13 +110,24 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 	public com.liferay.portal.model.OrgGroupPermission update(
 		com.liferay.portal.model.OrgGroupPermission orgGroupPermission)
 		throws SystemException {
+		return update(orgGroupPermission, false);
+	}
+
+	public com.liferay.portal.model.OrgGroupPermission update(
+		com.liferay.portal.model.OrgGroupPermission orgGroupPermission,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (orgGroupPermission.isNew()) {
-				session.save(orgGroupPermission);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(orgGroupPermission);
+			}
+			else {
+				if (orgGroupPermission.isNew()) {
+					session.save(orgGroupPermission);
+				}
 			}
 
 			session.flush();

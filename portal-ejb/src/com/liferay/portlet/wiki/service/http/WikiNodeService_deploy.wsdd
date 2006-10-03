@@ -1,34 +1,34 @@
 <?xml version="1.0"?>
 
-<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">  
-	<service name="Portlet_Wiki_WikiNodeService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.wiki.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="WikiNodeServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,http://model.wiki.portlet.liferay.com"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Wiki_WikiNodeService"/>  
-		<parameter name="className" value="com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap"/>  
-		<parameter name="wsdlPortType" value="WikiNodeServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getNode" qname="operNS:getNode" returnQName="getNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addNode" qname="operNS:addNode" returnQName="addNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="deleteNode" qname="operNS:deleteNode" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="updateNode" qname="operNS:updateNode" returnQName="updateNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="deleteNode updateNode getNode addNode"/>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.wiki.portlet.liferay.com" qname="ns:WikiNodeModel" type="java:com.liferay.portlet.wiki.model.WikiNodeModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service> 
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portlet_Wiki_WikiNodeService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.wiki.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="WikiNodeServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="http://model.portal.liferay.com,http://model.wiki.portlet.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portlet_Wiki_WikiNodeService"/>
+		<parameter name="className" value="com.liferay.portlet.wiki.service.http.WikiNodeServiceSoap"/>
+		<parameter name="wsdlPortType" value="WikiNodeServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="getNode" qname="operNS:getNode" returnQName="getNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="addNode" qname="operNS:addNode" returnQName="addNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" name="deleteNode" qname="operNS:deleteNode" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.wiki.portlet.liferay.com" xmlns:rtns="http://model.wiki.portlet.liferay.com" name="updateNode" qname="operNS:updateNode" returnQName="updateNodeReturn" returnType="rtns:WikiNodeModel" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="nodeId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="deleteNode updateNode getNode addNode"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.wiki.portlet.liferay.com" qname="ns:WikiNodeModel" type="java:com.liferay.portlet.wiki.model.WikiNodeModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
 </deployment>

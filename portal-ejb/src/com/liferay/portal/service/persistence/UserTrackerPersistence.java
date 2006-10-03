@@ -109,13 +109,24 @@ public class UserTrackerPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserTracker update(
 		com.liferay.portal.model.UserTracker userTracker)
 		throws SystemException {
+		return update(userTracker, false);
+	}
+
+	public com.liferay.portal.model.UserTracker update(
+		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (userTracker.isNew()) {
-				session.save(userTracker);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(userTracker);
+			}
+			else {
+				if (userTracker.isNew()) {
+					session.save(userTracker);
+				}
 			}
 
 			session.flush();

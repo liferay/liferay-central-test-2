@@ -144,6 +144,45 @@ public class LayoutUtil {
 		return layout;
 	}
 
+	public static com.liferay.portal.model.Layout update(
+		com.liferay.portal.model.Layout layout, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = layout.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(layout);
+			}
+			else {
+				listener.onBeforeUpdate(layout);
+			}
+		}
+
+		layout = getPersistence().update(layout, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(layout);
+			}
+			else {
+				listener.onAfterUpdate(layout);
+			}
+		}
+
+		return layout;
+	}
+
 	public static com.liferay.portal.model.Layout findByPrimaryKey(
 		com.liferay.portal.service.persistence.LayoutPK layoutPK)
 		throws com.liferay.portal.NoSuchLayoutException, 

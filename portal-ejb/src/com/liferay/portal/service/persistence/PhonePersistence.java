@@ -106,13 +106,24 @@ public class PhonePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone) throws SystemException {
+		return update(phone, false);
+	}
+
+	public com.liferay.portal.model.Phone update(
+		com.liferay.portal.model.Phone phone, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (phone.isNew()) {
-				session.save(phone);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(phone);
+			}
+			else {
+				if (phone.isNew()) {
+					session.save(phone);
+				}
 			}
 
 			session.flush();

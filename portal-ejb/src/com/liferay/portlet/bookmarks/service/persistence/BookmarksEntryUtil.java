@@ -145,6 +145,45 @@ public class BookmarksEntryUtil {
 		return bookmarksEntry;
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = bookmarksEntry.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(bookmarksEntry);
+			}
+			else {
+				listener.onBeforeUpdate(bookmarksEntry);
+			}
+		}
+
+		bookmarksEntry = getPersistence().update(bookmarksEntry, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(bookmarksEntry);
+			}
+			else {
+				listener.onAfterUpdate(bookmarksEntry);
+			}
+		}
+
+		return bookmarksEntry;
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry findByPrimaryKey(
 		java.lang.String entryId)
 		throws com.liferay.portlet.bookmarks.NoSuchEntryException, 

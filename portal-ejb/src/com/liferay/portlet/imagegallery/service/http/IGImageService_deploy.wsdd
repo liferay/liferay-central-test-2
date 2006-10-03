@@ -1,25 +1,25 @@
 <?xml version="1.0"?>
 
-<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">  
-	<service name="Portlet_Image_Gallery_IGImageService" provider="java:RPC" style="rpc" use="encoded"> 
-		<parameter name="wsdlTargetNamespace" value="urn:http.service.imagegallery.portlet.liferay.com"/>  
-		<parameter name="wsdlServiceElement" value="IGImageServiceSoapService"/>  
-		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com,http://model.portal.liferay.com,http://persistence.service.imagegallery.portlet.liferay.com"/>  
-		<parameter name="wsdlServicePort" value="Portlet_Image_Gallery_IGImageService"/>  
-		<parameter name="className" value="com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap"/>  
-		<parameter name="wsdlPortType" value="IGImageServiceSoap"/>  
-		<parameter name="typeMappingVersion" value="1.2"/>  
-		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" name="deleteImage" qname="operNS:deleteImage" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter> 
-		</operation>  
-		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getImage" qname="operNS:getImage" returnQName="getImageReturn" returnType="rtns:IGImageModel" soapAction="">  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>  
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter> 
-		</operation>  
-		<parameter name="allowedMethods" value="getImage deleteImage"/>  
-		<typeMapping xmlns:ns="http://persistence.service.imagegallery.portlet.liferay.com" qname="ns:IGImagePK" type="java:com.liferay.portlet.imagegallery.service.persistence.IGImagePK" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.imagegallery.portlet.liferay.com" qname="ns:IGImageModel" type="java:com.liferay.portlet.imagegallery.model.IGImageModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>  
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping> 
-	</service> 
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portlet_Image_Gallery_IGImageService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.imagegallery.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="IGImageServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="http://model.imagegallery.portlet.liferay.com,http://model.portal.liferay.com,http://persistence.service.imagegallery.portlet.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portlet_Image_Gallery_IGImageService"/>
+		<parameter name="className" value="com.liferay.portlet.imagegallery.service.http.IGImageServiceSoap"/>
+		<parameter name="wsdlPortType" value="IGImageServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" name="deleteImage" qname="operNS:deleteImage" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.imagegallery.portlet.liferay.com" xmlns:rtns="http://model.imagegallery.portlet.liferay.com" name="getImage" qname="operNS:getImage" returnQName="getImageReturn" returnType="rtns:IGImageModel" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="companyId" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="imageId" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getImage deleteImage"/>
+		<typeMapping xmlns:ns="http://persistence.service.imagegallery.portlet.liferay.com" qname="ns:IGImagePK" type="java:com.liferay.portlet.imagegallery.service.persistence.IGImagePK" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.imagegallery.portlet.liferay.com" qname="ns:IGImageModel" type="java:com.liferay.portlet.imagegallery.model.IGImageModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
 </deployment>

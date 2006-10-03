@@ -124,13 +124,24 @@ public class UserPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user) throws SystemException {
+		return update(user, false);
+	}
+
+	public com.liferay.portal.model.User update(
+		com.liferay.portal.model.User user, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (user.isNew()) {
-				session.save(user);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(user);
+			}
+			else {
+				if (user.isNew()) {
+					session.save(user);
+				}
 			}
 
 			session.flush();

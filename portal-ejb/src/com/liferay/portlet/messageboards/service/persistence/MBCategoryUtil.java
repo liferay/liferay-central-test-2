@@ -145,6 +145,45 @@ public class MBCategoryUtil {
 		return mbCategory;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory update(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = mbCategory.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(mbCategory);
+			}
+			else {
+				listener.onBeforeUpdate(mbCategory);
+			}
+		}
+
+		mbCategory = getPersistence().update(mbCategory, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(mbCategory);
+			}
+			else {
+				listener.onAfterUpdate(mbCategory);
+			}
+		}
+
+		return mbCategory;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory findByPrimaryKey(
 		java.lang.String categoryId)
 		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 

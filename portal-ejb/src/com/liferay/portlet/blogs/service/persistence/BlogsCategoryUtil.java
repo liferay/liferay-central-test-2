@@ -145,6 +145,45 @@ public class BlogsCategoryUtil {
 		return blogsCategory;
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategory update(
+		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = blogsCategory.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(blogsCategory);
+			}
+			else {
+				listener.onBeforeUpdate(blogsCategory);
+			}
+		}
+
+		blogsCategory = getPersistence().update(blogsCategory, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(blogsCategory);
+			}
+			else {
+				listener.onAfterUpdate(blogsCategory);
+			}
+		}
+
+		return blogsCategory;
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
 		java.lang.String categoryId)
 		throws com.liferay.portlet.blogs.NoSuchCategoryException, 

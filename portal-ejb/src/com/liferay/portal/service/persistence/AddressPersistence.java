@@ -106,13 +106,24 @@ public class AddressPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Address update(
 		com.liferay.portal.model.Address address) throws SystemException {
+		return update(address, false);
+	}
+
+	public com.liferay.portal.model.Address update(
+		com.liferay.portal.model.Address address, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (address.isNew()) {
-				session.save(address);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(address);
+			}
+			else {
+				if (address.isNew()) {
+					session.save(address);
+				}
 			}
 
 			session.flush();

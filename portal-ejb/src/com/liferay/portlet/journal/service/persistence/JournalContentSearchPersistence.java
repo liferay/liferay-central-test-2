@@ -113,13 +113,24 @@ public class JournalContentSearchPersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws SystemException {
+		return update(journalContentSearch, false);
+	}
+
+	public com.liferay.portlet.journal.model.JournalContentSearch update(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (journalContentSearch.isNew()) {
-				session.save(journalContentSearch);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(journalContentSearch);
+			}
+			else {
+				if (journalContentSearch.isNew()) {
+					session.save(journalContentSearch);
+				}
 			}
 
 			session.flush();

@@ -145,6 +145,45 @@ public class UserTrackerUtil {
 		return userTracker;
 	}
 
+	public static com.liferay.portal.model.UserTracker update(
+		com.liferay.portal.model.UserTracker userTracker, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = userTracker.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(userTracker);
+			}
+			else {
+				listener.onBeforeUpdate(userTracker);
+			}
+		}
+
+		userTracker = getPersistence().update(userTracker, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(userTracker);
+			}
+			else {
+				listener.onAfterUpdate(userTracker);
+			}
+		}
+
+		return userTracker;
+	}
+
 	public static com.liferay.portal.model.UserTracker findByPrimaryKey(
 		java.lang.String userTrackerId)
 		throws com.liferay.portal.NoSuchUserTrackerException, 

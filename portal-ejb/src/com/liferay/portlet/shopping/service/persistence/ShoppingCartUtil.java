@@ -145,6 +145,45 @@ public class ShoppingCartUtil {
 		return shoppingCart;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCart update(
+		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = shoppingCart.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(shoppingCart);
+			}
+			else {
+				listener.onBeforeUpdate(shoppingCart);
+			}
+		}
+
+		shoppingCart = getPersistence().update(shoppingCart, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(shoppingCart);
+			}
+			else {
+				listener.onAfterUpdate(shoppingCart);
+			}
+		}
+
+		return shoppingCart;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCart findByPrimaryKey(
 		java.lang.String cartId)
 		throws com.liferay.portlet.shopping.NoSuchCartException, 

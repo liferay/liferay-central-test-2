@@ -145,6 +145,45 @@ public class DLFileRankUtil {
 		return dlFileRank;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileRank update(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = dlFileRank.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(dlFileRank);
+			}
+			else {
+				listener.onBeforeUpdate(dlFileRank);
+			}
+		}
+
+		dlFileRank = getPersistence().update(dlFileRank, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(dlFileRank);
+			}
+			else {
+				listener.onAfterUpdate(dlFileRank);
+			}
+		}
+
+		return dlFileRank;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank findByPrimaryKey(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileRankException, 

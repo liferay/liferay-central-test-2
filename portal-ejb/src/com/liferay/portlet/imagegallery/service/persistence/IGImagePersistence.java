@@ -108,13 +108,24 @@ public class IGImagePersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws SystemException {
+		return update(igImage, false);
+	}
+
+	public com.liferay.portlet.imagegallery.model.IGImage update(
+		com.liferay.portlet.imagegallery.model.IGImage igImage,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (igImage.isNew()) {
-				session.save(igImage);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(igImage);
+			}
+			else {
+				if (igImage.isNew()) {
+					session.save(igImage);
+				}
 			}
 
 			session.flush();

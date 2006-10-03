@@ -110,13 +110,24 @@ public class DLFileEntryPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry update(
 		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws SystemException {
+		return update(dlFileEntry, false);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry update(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (dlFileEntry.isNew()) {
-				session.save(dlFileEntry);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(dlFileEntry);
+			}
+			else {
+				if (dlFileEntry.isNew()) {
+					session.save(dlFileEntry);
+				}
 			}
 
 			session.flush();

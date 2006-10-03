@@ -101,13 +101,24 @@ public class CompanyPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company) throws SystemException {
+		return update(company, false);
+	}
+
+	public com.liferay.portal.model.Company update(
+		com.liferay.portal.model.Company company, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (company.isNew()) {
-				session.save(company);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(company);
+			}
+			else {
+				if (company.isNew()) {
+					session.save(company);
+				}
 			}
 
 			session.flush();

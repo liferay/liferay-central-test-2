@@ -109,13 +109,24 @@ public class PasswordTrackerPersistence extends BasePersistence {
 	public com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws SystemException {
+		return update(passwordTracker, false);
+	}
+
+	public com.liferay.portal.model.PasswordTracker update(
+		com.liferay.portal.model.PasswordTracker passwordTracker,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (passwordTracker.isNew()) {
-				session.save(passwordTracker);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(passwordTracker);
+			}
+			else {
+				if (passwordTracker.isNew()) {
+					session.save(passwordTracker);
+				}
 			}
 
 			session.flush();

@@ -145,6 +145,45 @@ public class MBDiscussionUtil {
 		return mbDiscussion;
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBDiscussion update(
+		com.liferay.portlet.messageboards.model.MBDiscussion mbDiscussion,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = mbDiscussion.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(mbDiscussion);
+			}
+			else {
+				listener.onBeforeUpdate(mbDiscussion);
+			}
+		}
+
+		mbDiscussion = getPersistence().update(mbDiscussion, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(mbDiscussion);
+			}
+			else {
+				listener.onAfterUpdate(mbDiscussion);
+			}
+		}
+
+		return mbDiscussion;
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
 		java.lang.String discussionId)
 		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 

@@ -108,13 +108,24 @@ public class IGFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.imagegallery.model.IGFolder update(
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws SystemException {
+		return update(igFolder, false);
+	}
+
+	public com.liferay.portlet.imagegallery.model.IGFolder update(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (igFolder.isNew()) {
-				session.save(igFolder);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(igFolder);
+			}
+			else {
+				if (igFolder.isNew()) {
+					session.save(igFolder);
+				}
 			}
 
 			session.flush();

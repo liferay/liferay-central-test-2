@@ -125,13 +125,24 @@ public class OrganizationPersistence extends BasePersistence {
 	public com.liferay.portal.model.Organization update(
 		com.liferay.portal.model.Organization organization)
 		throws SystemException {
+		return update(organization, false);
+	}
+
+	public com.liferay.portal.model.Organization update(
+		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (organization.isNew()) {
-				session.save(organization);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(organization);
+			}
+			else {
+				if (organization.isNew()) {
+					session.save(organization);
+				}
 			}
 
 			session.flush();

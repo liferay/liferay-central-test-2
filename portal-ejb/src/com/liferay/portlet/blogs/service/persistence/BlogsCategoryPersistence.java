@@ -110,13 +110,24 @@ public class BlogsCategoryPersistence extends BasePersistence {
 	public com.liferay.portlet.blogs.model.BlogsCategory update(
 		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory)
 		throws SystemException {
+		return update(blogsCategory, false);
+	}
+
+	public com.liferay.portlet.blogs.model.BlogsCategory update(
+		com.liferay.portlet.blogs.model.BlogsCategory blogsCategory,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (blogsCategory.isNew()) {
-				session.save(blogsCategory);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(blogsCategory);
+			}
+			else {
+				if (blogsCategory.isNew()) {
+					session.save(blogsCategory);
+				}
 			}
 
 			session.flush();

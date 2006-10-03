@@ -111,13 +111,24 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 	public com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws SystemException {
+		return update(shoppingCategory, false);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCategory update(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (shoppingCategory.isNew()) {
-				session.save(shoppingCategory);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(shoppingCategory);
+			}
+			else {
+				if (shoppingCategory.isNew()) {
+					session.save(shoppingCategory);
+				}
 			}
 
 			session.flush();

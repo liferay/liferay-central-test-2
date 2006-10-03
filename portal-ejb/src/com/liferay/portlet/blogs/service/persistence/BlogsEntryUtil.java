@@ -145,6 +145,45 @@ public class BlogsEntryUtil {
 		return blogsEntry;
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsEntry update(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = blogsEntry.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(blogsEntry);
+			}
+			else {
+				listener.onBeforeUpdate(blogsEntry);
+			}
+		}
+
+		blogsEntry = getPersistence().update(blogsEntry, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(blogsEntry);
+			}
+			else {
+				listener.onAfterUpdate(blogsEntry);
+			}
+		}
+
+		return blogsEntry;
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByPrimaryKey(
 		java.lang.String entryId)
 		throws com.liferay.portlet.blogs.NoSuchEntryException, 

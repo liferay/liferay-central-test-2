@@ -145,6 +145,45 @@ public class DLFileEntryUtil {
 		return dlFileEntry;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry update(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = dlFileEntry.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(dlFileEntry);
+			}
+			else {
+				listener.onBeforeUpdate(dlFileEntry);
+			}
+		}
+
+		dlFileEntry = getPersistence().update(dlFileEntry, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(dlFileEntry);
+			}
+			else {
+				listener.onAfterUpdate(dlFileEntry);
+			}
+		}
+
+		return dlFileEntry;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 

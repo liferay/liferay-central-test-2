@@ -145,6 +145,45 @@ public class CalEventUtil {
 		return calEvent;
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent update(
+		com.liferay.portlet.calendar.model.CalEvent calEvent,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = calEvent.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(calEvent);
+			}
+			else {
+				listener.onBeforeUpdate(calEvent);
+			}
+		}
+
+		calEvent = getPersistence().update(calEvent, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(calEvent);
+			}
+			else {
+				listener.onAfterUpdate(calEvent);
+			}
+		}
+
+		return calEvent;
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent findByPrimaryKey(
 		java.lang.String eventId)
 		throws com.liferay.portlet.calendar.NoSuchEventException, 

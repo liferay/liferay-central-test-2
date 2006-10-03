@@ -108,13 +108,24 @@ public class MBThreadPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBThread update(
 		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws SystemException {
+		return update(mbThread, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBThread update(
+		com.liferay.portlet.messageboards.model.MBThread mbThread,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbThread.isNew()) {
-				session.save(mbThread);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbThread);
+			}
+			else {
+				if (mbThread.isNew()) {
+					session.save(mbThread);
+				}
 			}
 
 			session.flush();

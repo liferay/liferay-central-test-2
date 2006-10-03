@@ -101,13 +101,24 @@ public class ImagePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Image update(
 		com.liferay.portal.model.Image image) throws SystemException {
+		return update(image, false);
+	}
+
+	public com.liferay.portal.model.Image update(
+		com.liferay.portal.model.Image image, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (image.isNew()) {
-				session.save(image);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(image);
+			}
+			else {
+				if (image.isNew()) {
+					session.save(image);
+				}
 			}
 
 			session.flush();

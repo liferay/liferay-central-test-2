@@ -109,13 +109,24 @@ public class DLFileRankPersistence extends BasePersistence {
 	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
 		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws SystemException {
+		return update(dlFileRank, false);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileRank update(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (dlFileRank.isNew()) {
-				session.save(dlFileRank);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(dlFileRank);
+			}
+			else {
+				if (dlFileRank.isNew()) {
+					session.save(dlFileRank);
+				}
 			}
 
 			session.flush();

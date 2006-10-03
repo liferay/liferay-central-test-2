@@ -110,13 +110,24 @@ public class PollsChoicePersistence extends BasePersistence {
 	public com.liferay.portlet.polls.model.PollsChoice update(
 		com.liferay.portlet.polls.model.PollsChoice pollsChoice)
 		throws SystemException {
+		return update(pollsChoice, false);
+	}
+
+	public com.liferay.portlet.polls.model.PollsChoice update(
+		com.liferay.portlet.polls.model.PollsChoice pollsChoice,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (pollsChoice.isNew()) {
-				session.save(pollsChoice);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(pollsChoice);
+			}
+			else {
+				if (pollsChoice.isNew()) {
+					session.save(pollsChoice);
+				}
 			}
 
 			session.flush();

@@ -106,13 +106,24 @@ public class ListTypePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.ListType update(
 		com.liferay.portal.model.ListType listType) throws SystemException {
+		return update(listType, false);
+	}
+
+	public com.liferay.portal.model.ListType update(
+		com.liferay.portal.model.ListType listType, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (listType.isNew()) {
-				session.save(listType);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(listType);
+			}
+			else {
+				if (listType.isNew()) {
+					session.save(listType);
+				}
 			}
 
 			session.flush();

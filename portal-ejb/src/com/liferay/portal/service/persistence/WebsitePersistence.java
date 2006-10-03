@@ -106,13 +106,24 @@ public class WebsitePersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website) throws SystemException {
+		return update(website, false);
+	}
+
+	public com.liferay.portal.model.Website update(
+		com.liferay.portal.model.Website website, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (website.isNew()) {
-				session.save(website);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(website);
+			}
+			else {
+				if (website.isNew()) {
+					session.save(website);
+				}
 			}
 
 			session.flush();

@@ -145,6 +145,45 @@ public class DLFileVersionUtil {
 		return dlFileVersion;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileVersion update(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = dlFileVersion.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(dlFileVersion);
+			}
+			else {
+				listener.onBeforeUpdate(dlFileVersion);
+			}
+		}
+
+		dlFileVersion = getPersistence().update(dlFileVersion, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(dlFileVersion);
+			}
+			else {
+				listener.onAfterUpdate(dlFileVersion);
+			}
+		}
+
+		return dlFileVersion;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByPrimaryKey(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 

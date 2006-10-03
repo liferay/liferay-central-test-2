@@ -110,13 +110,24 @@ public class PortletPreferencesPersistence extends BasePersistence {
 	public com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws SystemException {
+		return update(portletPreferences, false);
+	}
+
+	public com.liferay.portal.model.PortletPreferences update(
+		com.liferay.portal.model.PortletPreferences portletPreferences,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (portletPreferences.isNew()) {
-				session.save(portletPreferences);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(portletPreferences);
+			}
+			else {
+				if (portletPreferences.isNew()) {
+					session.save(portletPreferences);
+				}
 			}
 
 			session.flush();

@@ -108,13 +108,24 @@ public class WikiNodePersistence extends BasePersistence {
 	public com.liferay.portlet.wiki.model.WikiNode update(
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws SystemException {
+		return update(wikiNode, false);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiNode update(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (wikiNode.isNew()) {
-				session.save(wikiNode);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(wikiNode);
+			}
+			else {
+				if (wikiNode.isNew()) {
+					session.save(wikiNode);
+				}
 			}
 
 			session.flush();

@@ -125,13 +125,24 @@ public class GroupPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Group update(
 		com.liferay.portal.model.Group group) throws SystemException {
+		return update(group, false);
+	}
+
+	public com.liferay.portal.model.Group update(
+		com.liferay.portal.model.Group group, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (group.isNew()) {
-				session.save(group);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(group);
+			}
+			else {
+				if (group.isNew()) {
+					session.save(group);
+				}
 			}
 
 			session.flush();

@@ -145,6 +145,46 @@ public class ShoppingOrderItemUtil {
 		return shoppingOrderItem;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingOrderItem update(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = shoppingOrderItem.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(shoppingOrderItem);
+			}
+			else {
+				listener.onBeforeUpdate(shoppingOrderItem);
+			}
+		}
+
+		shoppingOrderItem = getPersistence().update(shoppingOrderItem,
+				saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(shoppingOrderItem);
+			}
+			else {
+				listener.onAfterUpdate(shoppingOrderItem);
+			}
+		}
+
+		return shoppingOrderItem;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
 		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 

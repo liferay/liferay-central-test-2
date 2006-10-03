@@ -145,6 +145,46 @@ public class JournalStructureUtil {
 		return journalStructure;
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure update(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = journalStructure.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalStructure);
+			}
+			else {
+				listener.onBeforeUpdate(journalStructure);
+			}
+		}
+
+		journalStructure = getPersistence().update(journalStructure,
+				saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalStructure);
+			}
+			else {
+				listener.onAfterUpdate(journalStructure);
+			}
+		}
+
+		return journalStructure;
+	}
+
 	public static com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
 		throws com.liferay.portlet.journal.NoSuchStructureException, 

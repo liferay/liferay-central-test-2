@@ -121,13 +121,24 @@ public class UserGroupPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.UserGroup update(
 		com.liferay.portal.model.UserGroup userGroup) throws SystemException {
+		return update(userGroup, false);
+	}
+
+	public com.liferay.portal.model.UserGroup update(
+		com.liferay.portal.model.UserGroup userGroup, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (userGroup.isNew()) {
-				session.save(userGroup);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(userGroup);
+			}
+			else {
+				if (userGroup.isNew()) {
+					session.save(userGroup);
+				}
 			}
 
 			session.flush();

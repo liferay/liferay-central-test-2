@@ -145,6 +145,45 @@ public class ShoppingItemUtil {
 		return shoppingItem;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingItem update(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = shoppingItem.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(shoppingItem);
+			}
+			else {
+				listener.onBeforeUpdate(shoppingItem);
+			}
+		}
+
+		shoppingItem = getPersistence().update(shoppingItem, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(shoppingItem);
+			}
+			else {
+				listener.onAfterUpdate(shoppingItem);
+			}
+		}
+
+		return shoppingItem;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingItem findByPrimaryKey(
 		java.lang.String itemId)
 		throws com.liferay.portlet.shopping.NoSuchItemException, 

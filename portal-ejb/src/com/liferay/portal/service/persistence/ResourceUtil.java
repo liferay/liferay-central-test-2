@@ -144,6 +144,45 @@ public class ResourceUtil {
 		return resource;
 	}
 
+	public static com.liferay.portal.model.Resource update(
+		com.liferay.portal.model.Resource resource, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = resource.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(resource);
+			}
+			else {
+				listener.onBeforeUpdate(resource);
+			}
+		}
+
+		resource = getPersistence().update(resource, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(resource);
+			}
+			else {
+				listener.onAfterUpdate(resource);
+			}
+		}
+
+		return resource;
+	}
+
 	public static com.liferay.portal.model.Resource findByPrimaryKey(
 		java.lang.String resourceId)
 		throws com.liferay.portal.NoSuchResourceException, 

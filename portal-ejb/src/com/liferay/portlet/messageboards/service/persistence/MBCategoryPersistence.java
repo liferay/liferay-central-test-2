@@ -109,13 +109,24 @@ public class MBCategoryPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws SystemException {
+		return update(mbCategory, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBCategory update(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbCategory.isNew()) {
-				session.save(mbCategory);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbCategory);
+			}
+			else {
+				if (mbCategory.isNew()) {
+					session.save(mbCategory);
+				}
 			}
 
 			session.flush();

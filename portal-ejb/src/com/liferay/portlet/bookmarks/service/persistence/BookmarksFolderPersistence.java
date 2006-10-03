@@ -110,13 +110,24 @@ public class BookmarksFolderPersistence extends BasePersistence {
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws SystemException {
+		return update(bookmarksFolder, false);
+	}
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder update(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (bookmarksFolder.isNew()) {
-				session.save(bookmarksFolder);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(bookmarksFolder);
+			}
+			else {
+				if (bookmarksFolder.isNew()) {
+					session.save(bookmarksFolder);
+				}
 			}
 
 			session.flush();

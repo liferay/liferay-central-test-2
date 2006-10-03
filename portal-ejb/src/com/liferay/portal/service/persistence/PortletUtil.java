@@ -144,6 +144,45 @@ public class PortletUtil {
 		return portlet;
 	}
 
+	public static com.liferay.portal.model.Portlet update(
+		com.liferay.portal.model.Portlet portlet, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = portlet.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(portlet);
+			}
+			else {
+				listener.onBeforeUpdate(portlet);
+			}
+		}
+
+		portlet = getPersistence().update(portlet, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(portlet);
+			}
+			else {
+				listener.onAfterUpdate(portlet);
+			}
+		}
+
+		return portlet;
+	}
+
 	public static com.liferay.portal.model.Portlet findByPrimaryKey(
 		com.liferay.portal.service.persistence.PortletPK portletPK)
 		throws com.liferay.portal.NoSuchPortletException, 

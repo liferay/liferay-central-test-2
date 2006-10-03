@@ -145,6 +145,45 @@ public class DLFolderUtil {
 		return dlFolder;
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = dlFolder.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(dlFolder);
+			}
+			else {
+				listener.onBeforeUpdate(dlFolder);
+			}
+		}
+
+		dlFolder = getPersistence().update(dlFolder, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(dlFolder);
+			}
+			else {
+				listener.onAfterUpdate(dlFolder);
+			}
+		}
+
+		return dlFolder;
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder findByPrimaryKey(
 		java.lang.String folderId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 

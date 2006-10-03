@@ -145,6 +145,46 @@ public class PortletPreferencesUtil {
 		return portletPreferences;
 	}
 
+	public static com.liferay.portal.model.PortletPreferences update(
+		com.liferay.portal.model.PortletPreferences portletPreferences,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = portletPreferences.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(portletPreferences);
+			}
+			else {
+				listener.onBeforeUpdate(portletPreferences);
+			}
+		}
+
+		portletPreferences = getPersistence().update(portletPreferences,
+				saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(portletPreferences);
+			}
+			else {
+				listener.onAfterUpdate(portletPreferences);
+			}
+		}
+
+		return portletPreferences;
+	}
+
 	public static com.liferay.portal.model.PortletPreferences findByPrimaryKey(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK)
 		throws com.liferay.portal.NoSuchPortletPreferencesException, 

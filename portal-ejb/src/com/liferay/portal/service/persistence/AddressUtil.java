@@ -144,6 +144,45 @@ public class AddressUtil {
 		return address;
 	}
 
+	public static com.liferay.portal.model.Address update(
+		com.liferay.portal.model.Address address, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = address.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(address);
+			}
+			else {
+				listener.onBeforeUpdate(address);
+			}
+		}
+
+		address = getPersistence().update(address, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(address);
+			}
+			else {
+				listener.onAfterUpdate(address);
+			}
+		}
+
+		return address;
+	}
+
 	public static com.liferay.portal.model.Address findByPrimaryKey(
 		java.lang.String addressId)
 		throws com.liferay.portal.NoSuchAddressException, 

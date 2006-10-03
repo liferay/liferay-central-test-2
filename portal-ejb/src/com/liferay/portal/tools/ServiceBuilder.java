@@ -1936,11 +1936,20 @@ public class ServiceBuilder {
 		// Update method
 
 		sb.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ") throws SystemException {");
+		sb.append("return update(" + entity.getVarName() + ", false);");
+		sb.append("}");
+
+		sb.append("public " + _packagePath + ".model." + entity.getName() + " update(" + _packagePath + ".model." + entity.getName() + " " + entity.getVarName() + ", boolean saveOrUpdate) throws SystemException {");
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
+		sb.append("if (saveOrUpdate) {");
+		sb.append("session.saveOrUpdate(" + entity.getVarName() + ");");
+		sb.append("}");
+		sb.append("else {");
 		sb.append("if (" + entity.getVarName() + ".isNew()) {");
 		sb.append("session.save(" + entity.getVarName() + ");");
+		sb.append("}");
 		sb.append("}");
 		sb.append("session.flush();");
 		sb.append(entity.getVarName() + ".setNew(false);");

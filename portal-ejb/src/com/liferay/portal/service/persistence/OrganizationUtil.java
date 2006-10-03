@@ -145,6 +145,45 @@ public class OrganizationUtil {
 		return organization;
 	}
 
+	public static com.liferay.portal.model.Organization update(
+		com.liferay.portal.model.Organization organization, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = organization.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(organization);
+			}
+			else {
+				listener.onBeforeUpdate(organization);
+			}
+		}
+
+		organization = getPersistence().update(organization, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(organization);
+			}
+			else {
+				listener.onAfterUpdate(organization);
+			}
+		}
+
+		return organization;
+	}
+
 	public static com.liferay.portal.model.Organization findByPrimaryKey(
 		java.lang.String organizationId)
 		throws com.liferay.portal.NoSuchOrganizationException, 

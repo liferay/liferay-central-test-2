@@ -145,6 +145,45 @@ public class DataTrackerUtil {
 		return dataTracker;
 	}
 
+	public static com.liferay.portal.model.DataTracker update(
+		com.liferay.portal.model.DataTracker dataTracker, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = dataTracker.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(dataTracker);
+			}
+			else {
+				listener.onBeforeUpdate(dataTracker);
+			}
+		}
+
+		dataTracker = getPersistence().update(dataTracker, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(dataTracker);
+			}
+			else {
+				listener.onAfterUpdate(dataTracker);
+			}
+		}
+
+		return dataTracker;
+	}
+
 	public static com.liferay.portal.model.DataTracker findByPrimaryKey(
 		java.lang.String dataTrackerId)
 		throws com.liferay.portal.NoSuchDataTrackerException, 

@@ -144,6 +144,45 @@ public class WebsiteUtil {
 		return website;
 	}
 
+	public static com.liferay.portal.model.Website update(
+		com.liferay.portal.model.Website website, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = website.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(website);
+			}
+			else {
+				listener.onBeforeUpdate(website);
+			}
+		}
+
+		website = getPersistence().update(website, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(website);
+			}
+			else {
+				listener.onAfterUpdate(website);
+			}
+		}
+
+		return website;
+	}
+
 	public static com.liferay.portal.model.Website findByPrimaryKey(
 		java.lang.String websiteId)
 		throws com.liferay.portal.NoSuchWebsiteException, 

@@ -145,6 +145,45 @@ public class UserIdMapperUtil {
 		return userIdMapper;
 	}
 
+	public static com.liferay.portal.model.UserIdMapper update(
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = userIdMapper.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(userIdMapper);
+			}
+			else {
+				listener.onBeforeUpdate(userIdMapper);
+			}
+		}
+
+		userIdMapper = getPersistence().update(userIdMapper, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(userIdMapper);
+			}
+			else {
+				listener.onAfterUpdate(userIdMapper);
+			}
+		}
+
+		return userIdMapper;
+	}
+
 	public static com.liferay.portal.model.UserIdMapper findByPrimaryKey(
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
 		throws com.liferay.portal.NoSuchUserIdMapperException, 

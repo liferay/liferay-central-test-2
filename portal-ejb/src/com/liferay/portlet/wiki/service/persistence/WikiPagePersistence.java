@@ -108,13 +108,24 @@ public class WikiPagePersistence extends BasePersistence {
 	public com.liferay.portlet.wiki.model.WikiPage update(
 		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws SystemException {
+		return update(wikiPage, false);
+	}
+
+	public com.liferay.portlet.wiki.model.WikiPage update(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (wikiPage.isNew()) {
-				session.save(wikiPage);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(wikiPage);
+			}
+			else {
+				if (wikiPage.isNew()) {
+					session.save(wikiPage);
+				}
 			}
 
 			session.flush();

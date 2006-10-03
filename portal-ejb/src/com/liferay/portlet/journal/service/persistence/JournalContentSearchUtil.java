@@ -145,6 +145,46 @@ public class JournalContentSearchUtil {
 		return journalContentSearch;
 	}
 
+	public static com.liferay.portlet.journal.model.JournalContentSearch update(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = journalContentSearch.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(journalContentSearch);
+			}
+			else {
+				listener.onBeforeUpdate(journalContentSearch);
+			}
+		}
+
+		journalContentSearch = getPersistence().update(journalContentSearch,
+				saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(journalContentSearch);
+			}
+			else {
+				listener.onAfterUpdate(journalContentSearch);
+			}
+		}
+
+		return journalContentSearch;
+	}
+
 	public static com.liferay.portlet.journal.model.JournalContentSearch findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalContentSearchPK journalContentSearchPK)
 		throws com.liferay.portlet.journal.NoSuchContentSearchException, 

@@ -144,6 +144,45 @@ public class OrgLaborUtil {
 		return orgLabor;
 	}
 
+	public static com.liferay.portal.model.OrgLabor update(
+		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = orgLabor.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(orgLabor);
+			}
+			else {
+				listener.onBeforeUpdate(orgLabor);
+			}
+		}
+
+		orgLabor = getPersistence().update(orgLabor, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(orgLabor);
+			}
+			else {
+				listener.onAfterUpdate(orgLabor);
+			}
+		}
+
+		return orgLabor;
+	}
+
 	public static com.liferay.portal.model.OrgLabor findByPrimaryKey(
 		java.lang.String orgLaborId)
 		throws com.liferay.portal.NoSuchOrgLaborException, 

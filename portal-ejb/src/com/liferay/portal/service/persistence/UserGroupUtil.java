@@ -144,6 +144,45 @@ public class UserGroupUtil {
 		return userGroup;
 	}
 
+	public static com.liferay.portal.model.UserGroup update(
+		com.liferay.portal.model.UserGroup userGroup, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = userGroup.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(userGroup);
+			}
+			else {
+				listener.onBeforeUpdate(userGroup);
+			}
+		}
+
+		userGroup = getPersistence().update(userGroup, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(userGroup);
+			}
+			else {
+				listener.onAfterUpdate(userGroup);
+			}
+		}
+
+		return userGroup;
+	}
+
 	public static com.liferay.portal.model.UserGroup findByPrimaryKey(
 		java.lang.String userGroupId)
 		throws com.liferay.portal.NoSuchUserGroupException, 

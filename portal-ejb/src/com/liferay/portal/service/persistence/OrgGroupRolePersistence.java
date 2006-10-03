@@ -109,13 +109,24 @@ public class OrgGroupRolePersistence extends BasePersistence {
 	public com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws SystemException {
+		return update(orgGroupRole, false);
+	}
+
+	public com.liferay.portal.model.OrgGroupRole update(
+		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (orgGroupRole.isNew()) {
-				session.save(orgGroupRole);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(orgGroupRole);
+			}
+			else {
+				if (orgGroupRole.isNew()) {
+					session.save(orgGroupRole);
+				}
 			}
 
 			session.flush();

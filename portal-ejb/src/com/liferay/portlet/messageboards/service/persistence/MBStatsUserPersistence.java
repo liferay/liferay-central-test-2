@@ -110,13 +110,24 @@ public class MBStatsUserPersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBStatsUser update(
 		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws SystemException {
+		return update(mbStatsUser, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBStatsUser update(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbStatsUser.isNew()) {
-				session.save(mbStatsUser);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbStatsUser);
+			}
+			else {
+				if (mbStatsUser.isNew()) {
+					session.save(mbStatsUser);
+				}
 			}
 
 			session.flush();

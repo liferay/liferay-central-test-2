@@ -109,13 +109,24 @@ public class UserTrackerPathPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws SystemException {
+		return update(userTrackerPath, false);
+	}
+
+	public com.liferay.portal.model.UserTrackerPath update(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (userTrackerPath.isNew()) {
-				session.save(userTrackerPath);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(userTrackerPath);
+			}
+			else {
+				if (userTrackerPath.isNew()) {
+					session.save(userTrackerPath);
+				}
 			}
 
 			session.flush();

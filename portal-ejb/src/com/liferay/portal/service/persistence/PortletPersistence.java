@@ -106,13 +106,24 @@ public class PortletPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Portlet update(
 		com.liferay.portal.model.Portlet portlet) throws SystemException {
+		return update(portlet, false);
+	}
+
+	public com.liferay.portal.model.Portlet update(
+		com.liferay.portal.model.Portlet portlet, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (portlet.isNew()) {
-				session.save(portlet);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(portlet);
+			}
+			else {
+				if (portlet.isNew()) {
+					session.save(portlet);
+				}
 			}
 
 			session.flush();

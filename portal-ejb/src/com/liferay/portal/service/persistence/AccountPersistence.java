@@ -101,13 +101,24 @@ public class AccountPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Account update(
 		com.liferay.portal.model.Account account) throws SystemException {
+		return update(account, false);
+	}
+
+	public com.liferay.portal.model.Account update(
+		com.liferay.portal.model.Account account, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (account.isNew()) {
-				session.save(account);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(account);
+			}
+			else {
+				if (account.isNew()) {
+					session.save(account);
+				}
 			}
 
 			session.flush();

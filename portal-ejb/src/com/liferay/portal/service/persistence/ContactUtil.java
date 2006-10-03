@@ -144,6 +144,45 @@ public class ContactUtil {
 		return contact;
 	}
 
+	public static com.liferay.portal.model.Contact update(
+		com.liferay.portal.model.Contact contact, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = contact.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(contact);
+			}
+			else {
+				listener.onBeforeUpdate(contact);
+			}
+		}
+
+		contact = getPersistence().update(contact, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(contact);
+			}
+			else {
+				listener.onAfterUpdate(contact);
+			}
+		}
+
+		return contact;
+	}
+
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
 		java.lang.String contactId)
 		throws com.liferay.portal.NoSuchContactException, 

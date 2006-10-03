@@ -109,13 +109,24 @@ public class MBMessagePersistence extends BasePersistence {
 	public com.liferay.portlet.messageboards.model.MBMessage update(
 		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws SystemException {
+		return update(mbMessage, false);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage update(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (mbMessage.isNew()) {
-				session.save(mbMessage);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(mbMessage);
+			}
+			else {
+				if (mbMessage.isNew()) {
+					session.save(mbMessage);
+				}
 			}
 
 			session.flush();

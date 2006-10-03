@@ -109,13 +109,24 @@ public class UserIdMapperPersistence extends BasePersistence {
 	public com.liferay.portal.model.UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws SystemException {
+		return update(userIdMapper, false);
+	}
+
+	public com.liferay.portal.model.UserIdMapper update(
+		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (userIdMapper.isNew()) {
-				session.save(userIdMapper);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(userIdMapper);
+			}
+			else {
+				if (userIdMapper.isNew()) {
+					session.save(userIdMapper);
+				}
 			}
 
 			session.flush();

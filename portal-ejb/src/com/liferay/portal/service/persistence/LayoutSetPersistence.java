@@ -105,13 +105,24 @@ public class LayoutSetPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.LayoutSet update(
 		com.liferay.portal.model.LayoutSet layoutSet) throws SystemException {
+		return update(layoutSet, false);
+	}
+
+	public com.liferay.portal.model.LayoutSet update(
+		com.liferay.portal.model.LayoutSet layoutSet, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (layoutSet.isNew()) {
-				session.save(layoutSet);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(layoutSet);
+			}
+			else {
+				if (layoutSet.isNew()) {
+					session.save(layoutSet);
+				}
 			}
 
 			session.flush();

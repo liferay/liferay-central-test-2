@@ -145,6 +145,45 @@ public class ShoppingCouponUtil {
 		return shoppingCoupon;
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCoupon update(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = shoppingCoupon.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(shoppingCoupon);
+			}
+			else {
+				listener.onBeforeUpdate(shoppingCoupon);
+			}
+		}
+
+		shoppingCoupon = getPersistence().update(shoppingCoupon, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(shoppingCoupon);
+			}
+			else {
+				listener.onAfterUpdate(shoppingCoupon);
+			}
+		}
+
+		return shoppingCoupon;
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon findByPrimaryKey(
 		java.lang.String couponId)
 		throws com.liferay.portlet.shopping.NoSuchCouponException, 

@@ -106,13 +106,24 @@ public class CountryPersistence extends BasePersistence {
 
 	public com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country) throws SystemException {
+		return update(country, false);
+	}
+
+	public com.liferay.portal.model.Country update(
+		com.liferay.portal.model.Country country, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (country.isNew()) {
-				session.save(country);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(country);
+			}
+			else {
+				if (country.isNew()) {
+					session.save(country);
+				}
 			}
 
 			session.flush();

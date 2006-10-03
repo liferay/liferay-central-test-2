@@ -144,6 +144,45 @@ public class CompanyUtil {
 		return company;
 	}
 
+	public static com.liferay.portal.model.Company update(
+		com.liferay.portal.model.Company company, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = company.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(company);
+			}
+			else {
+				listener.onBeforeUpdate(company);
+			}
+		}
+
+		company = getPersistence().update(company, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(company);
+			}
+			else {
+				listener.onAfterUpdate(company);
+			}
+		}
+
+		return company;
+	}
+
 	public static com.liferay.portal.model.Company findByPrimaryKey(
 		java.lang.String companyId)
 		throws com.liferay.portal.NoSuchCompanyException, 

@@ -144,6 +144,45 @@ public class ListTypeUtil {
 		return listType;
 	}
 
+	public static com.liferay.portal.model.ListType update(
+		com.liferay.portal.model.ListType listType, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = listType.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(listType);
+			}
+			else {
+				listener.onBeforeUpdate(listType);
+			}
+		}
+
+		listType = getPersistence().update(listType, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(listType);
+			}
+			else {
+				listener.onAfterUpdate(listType);
+			}
+		}
+
+		return listType;
+	}
+
 	public static com.liferay.portal.model.ListType findByPrimaryKey(
 		java.lang.String listTypeId)
 		throws com.liferay.portal.NoSuchListTypeException, 

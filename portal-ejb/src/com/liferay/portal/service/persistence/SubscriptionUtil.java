@@ -145,6 +145,45 @@ public class SubscriptionUtil {
 		return subscription;
 	}
 
+	public static com.liferay.portal.model.Subscription update(
+		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = null;
+
+		if (Validator.isNotNull(LISTENER)) {
+			try {
+				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		boolean isNew = subscription.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(subscription);
+			}
+			else {
+				listener.onBeforeUpdate(subscription);
+			}
+		}
+
+		subscription = getPersistence().update(subscription, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(subscription);
+			}
+			else {
+				listener.onAfterUpdate(subscription);
+			}
+		}
+
+		return subscription;
+	}
+
 	public static com.liferay.portal.model.Subscription findByPrimaryKey(
 		java.lang.String subscriptionId)
 		throws com.liferay.portal.NoSuchSubscriptionException, 

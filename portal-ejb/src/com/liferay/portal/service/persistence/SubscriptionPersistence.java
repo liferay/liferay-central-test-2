@@ -109,13 +109,24 @@ public class SubscriptionPersistence extends BasePersistence {
 	public com.liferay.portal.model.Subscription update(
 		com.liferay.portal.model.Subscription subscription)
 		throws SystemException {
+		return update(subscription, false);
+	}
+
+	public com.liferay.portal.model.Subscription update(
+		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
+		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (subscription.isNew()) {
-				session.save(subscription);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(subscription);
+			}
+			else {
+				if (subscription.isNew()) {
+					session.save(subscription);
+				}
 			}
 
 			session.flush();

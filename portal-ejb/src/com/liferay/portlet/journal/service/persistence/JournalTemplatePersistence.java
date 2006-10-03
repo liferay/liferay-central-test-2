@@ -110,13 +110,24 @@ public class JournalTemplatePersistence extends BasePersistence {
 	public com.liferay.portlet.journal.model.JournalTemplate update(
 		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws SystemException {
+		return update(journalTemplate, false);
+	}
+
+	public com.liferay.portlet.journal.model.JournalTemplate update(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate,
+		boolean saveOrUpdate) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			if (journalTemplate.isNew()) {
-				session.save(journalTemplate);
+			if (saveOrUpdate) {
+				session.saveOrUpdate(journalTemplate);
+			}
+			else {
+				if (journalTemplate.isNew()) {
+					session.save(journalTemplate);
+				}
 			}
 
 			session.flush();
