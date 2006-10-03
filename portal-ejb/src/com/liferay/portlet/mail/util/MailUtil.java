@@ -863,6 +863,22 @@ public class MailUtil {
 		}
 	}
 
+	public static String replaceLinks(String body) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Body before replacing links\n" + body);
+		}
+
+		for (int i = 0; i < _LINK_REGEXP.length; i++) {
+			body = body.replaceAll(_LINK_REGEXP[i], _LINK_REPLACEMENT[i]);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Body after replacing links\n" + body);
+		}
+
+		return body;
+	}
+
 	public static Set search(
 			HttpSession ses, MailDisplayTerms displayTerms,
 			Comparator comparator)
@@ -1060,9 +1076,6 @@ public class MailUtil {
 				}
 			}
 		}
-
-		// TODO: create new window on hyperlink clicks and replace mailto with
-		// action to compose new message
 
 		return html.trim();
 	}
@@ -1666,6 +1679,19 @@ public class MailUtil {
 
 	private static final String[] _HTML_END_TAGS = new String[] {
 		"</html>", "</head>", "</body>"
+	};
+
+	private static final String[] _LINK_REGEXP = {
+		"([^]_a-z0-9-=\"'/])" +
+	    	"((https?|ftp|gopher|news|telnet)://|www\\.)" +
+	    	"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
+	    	"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
+	    "<a href=\"www\\."
+	};
+	
+	private static String[] _LINK_REPLACEMENT = {
+		"$1<a href=\"$2$4$5\" target=\"_blank\">$2$4$5</a>",
+		"<a href=\"http://www."
 	};
 
 	private static final double _ENCODING_FACTOR = 0.65;
