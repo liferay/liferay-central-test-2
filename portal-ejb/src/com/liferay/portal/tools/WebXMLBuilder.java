@@ -23,8 +23,8 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ant.CopyTask;
 import com.liferay.util.xml.XMLFormatter;
@@ -38,8 +38,8 @@ import java.io.StringReader;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
-import org.dom4j.io.SAXReader;
 import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 
 /**
  * <a href="WebXMLBuilder.java.html"><b><i>View Source</i></b></a>
@@ -71,7 +71,7 @@ public class WebXMLBuilder {
 		version = GetterUtil.getDouble(root.attributeValue("version"), version);
 
 		XMLMerger merger = null;
-		
+
 		if (version == 2.3) {
 			merger = new XMLMerger(new WebXML23Descriptor());
 		}

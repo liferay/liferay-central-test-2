@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.util;
 
 import com.liferay.portal.language.LanguageException;
@@ -46,8 +47,6 @@ public class PrettyDateFormat extends DateFormat {
 			String companyId, Locale locale, TimeZone timeZone)
 		throws LanguageException {
 
-		super();
-
 		_companyId = companyId;
 		_locale = locale;
 		_timeZone = timeZone;
@@ -55,9 +54,7 @@ public class PrettyDateFormat extends DateFormat {
 		_yesterdayString = LanguageUtil.get(_companyId, _locale, "yesterday");
 	}
 
-	public StringBuffer format(
-		Date date, StringBuffer toAppendTo, FieldPosition fieldPosition) {
-
+	public StringBuffer format(Date date, StringBuffer sb, FieldPosition pos) {
 		String dateString = StringPool.NBSP;
 
 		if (date != null) {
@@ -70,12 +67,10 @@ public class PrettyDateFormat extends DateFormat {
 
 			Date yesterday = cal.getTime();
 
-			DateFormat dateFormatDate =
-				DateFormats.getDate(_locale, _timeZone);
+			DateFormat dateFormatDate = DateFormats.getDate(_locale, _timeZone);
 			DateFormat dateFormatDateTime =
 				DateFormats.getDateTime(_locale, _timeZone);
-			DateFormat dateFormatTime =
-				DateFormats.getTime(_locale, _timeZone);
+			DateFormat dateFormatTime = DateFormats.getTime(_locale, _timeZone);
 
 			dateString = dateFormatDate.format(date);
 
@@ -90,17 +85,15 @@ public class PrettyDateFormat extends DateFormat {
 						dateFormatTime.format(date);
 			}
 			else {
-				dateString =
-					dateFormatDateTime.format(date);
+				dateString = dateFormatDateTime.format(date);
 			}
 		}
 
-		return toAppendTo.append(dateString);
+		return sb.append(dateString);
 	}
 
 	public Date parse(String source, ParsePosition pos) {
-		DateFormat dateFormatDate =
-			DateFormats.getDate(_locale, _timeZone);
+		DateFormat dateFormatDate = DateFormats.getDate(_locale, _timeZone);
 
 		DateFormat dateFormatDateTime =
 			DateFormats.getDateTime(_locale, _timeZone);

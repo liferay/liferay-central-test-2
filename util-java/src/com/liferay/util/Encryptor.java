@@ -180,6 +180,7 @@ public class Encryptor {
 			Security.addProvider(getProvider());
 
 			Cipher cipher = Cipher.getInstance(key.getAlgorithm());
+
 			cipher.init(Cipher.ENCRYPT_MODE, key);
 
 			byte[] decryptedBytes = plainText.getBytes(ENCODING);

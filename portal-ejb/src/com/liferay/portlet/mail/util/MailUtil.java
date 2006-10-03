@@ -362,7 +362,9 @@ public class MailUtil {
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			for (Iterator itr = msgMap.keySet().iterator(); itr.hasNext(); ) {
+			Iterator itr = msgMap.keySet().iterator();
+
+			while (itr.hasNext()) {
 				String key = (String)itr.next();
 
 				IMAPFolder folder = _getFolder(ses);
@@ -699,7 +701,9 @@ public class MailUtil {
 		try {
 			MailSessionLock.lock(ses.getId());
 
-			for (Iterator itr = msgMap.keySet().iterator(); itr.hasNext(); ) {
+			Iterator itr = msgMap.keySet().iterator();
+
+			while (itr.hasNext()) {
 				String folderName = (String)itr.next();
 
 				long[] messageIds = _getMessageIds(msgMap, folderName);
@@ -895,17 +899,22 @@ public class MailUtil {
 		}
 		else {
 			List folders = getFolders(ses);
-			for (Iterator itr = folders.iterator(); itr.hasNext(); ) {
-				MailFolder mf = (MailFolder)itr.next();
 
-				String resolvedName = _getResolvedFolderName(mf.getName());
+			Iterator itr = folders.iterator();
+
+			while (itr.hasNext()) {
+				MailFolder mailFolder = (MailFolder)itr.next();
+
+				String resolvedName =
+					_getResolvedFolderName(mailFolder.getName());
+
 				if (resolvedName.equals(MAIL_SPAM_NAME) ||
 					resolvedName.equals(MAIL_TRASH_NAME)) {
 
 					continue;
 				}
 
-				displayTerms.setFolderName(mf.getName());
+				displayTerms.setFolderName(mailFolder.getName());
 
 				_search(ses, displayTerms, results);
 			}

@@ -128,9 +128,9 @@ public class XMLMergerRunner {
 		}
 
 		pos = slaveXml.indexOf("<!DOCTYPE");
-		
+
 		String slaveDoctype = "";
-		
+
 		if (pos >= 0) {
 			slaveDoctype = slaveXml.substring(
 				pos, slaveXml.indexOf(">", pos) + 1);

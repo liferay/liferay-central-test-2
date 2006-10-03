@@ -317,7 +317,9 @@ public class MailAction extends JSONAction {
 
 		JSONArray jsonEnvelopes = new JSONArray();
 
-		for (Iterator itr = envelopes.iterator(); itr.hasNext(); ) {
+		Iterator itr = envelopes.iterator();
+
+		while (itr.hasNext()) {
 			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
 
 			JSONObject jsonEnvelope = new JSONObject();

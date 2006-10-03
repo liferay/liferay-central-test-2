@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.mail.search;
 
 import com.liferay.portal.PortalException;
@@ -44,15 +45,8 @@ import javax.servlet.http.HttpServletRequest;
 public class MailDisplayTerms extends DisplayTerms {
 
 	public static String[] DATE_RANGE_OPTIONS = new String[] {
-		"any-day",
-		"1-day",
-		"3-days",
-		"1-week",
-		"2-weeks",
-		"1-month",
-		"2-months",
-		"6-months",
-		"1-year"
+		"any-day", "1-day", "3-days", "1-week", "2-weeks", "1-month",
+		"2-months", "6-months", "1-year"
 	};
 
 	public static String FOLDER_NAME =
@@ -103,6 +97,7 @@ public class MailDisplayTerms extends DisplayTerms {
 				Calendar endCal = (Calendar)startCal.clone();
 
 				int ordinal = GetterUtil.getInteger(range.substring(0, 1));
+
 				if (ordinal > 0) {
 					if (range.indexOf("day") != -1) {
 						startCal.add(Calendar.DATE, -ordinal);
@@ -155,7 +150,12 @@ public class MailDisplayTerms extends DisplayTerms {
 	}
 
 	public boolean hasDate() {
-		return startDate != null;
+		if (startDate != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public Date getStartDate() {

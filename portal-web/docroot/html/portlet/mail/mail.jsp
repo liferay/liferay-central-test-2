@@ -80,6 +80,7 @@ String mailLineColor = "#B3B6B0";
 		<br><br>
 
 		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+
 		<%
 		int count = 0;
 
@@ -128,6 +129,7 @@ String mailLineColor = "#B3B6B0";
 			}
 		}
 		%>
+
 		</table>
 
 		<c:if test="<%= count < folder.getUnreadMessageCount() %>">
@@ -135,7 +137,6 @@ String mailLineColor = "#B3B6B0";
 
 			<html:link page="/mail/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more" /></html:link> &raquo;
 		</c:if>
-
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
@@ -143,6 +144,7 @@ String mailLineColor = "#B3B6B0";
 		<script type="text/javascript">
 			function changeRange(range) {
 				var input = document.getElementById("portlet-mail-toolbar-advanced-search-dates-input");
+
 				input.style.display = (range == "any-day") ? "none" : "";
 			}
 
@@ -167,6 +169,7 @@ String mailLineColor = "#B3B6B0";
 				advSearch.style.display = "";
 
 				var dates = document.getElementById("portlet-mail-toolbar-advanced-search-dates");
+
 				dates.style.display = filter ? "none" : "";
 			}
 		</script>
@@ -480,36 +483,32 @@ String mailLineColor = "#B3B6B0";
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;" width="90%" />
 			<td style="background-color: <%= mailBgColor %>; border: 0px; cursor: default; padding-left: 0px; padding-right: 0px;">
 				<form method="post" name="<portlet:namespace />search" onSubmit='loadForm(document.<portlet:namespace />search, themeDisplay.getPathMain() + "/mail/action?sortBy=" + Mail.sortBy.value + "&asc=" + Mail.sortBy.asc, null, Mail.getSearchReturn); return false;'>
-					<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
+				<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
-					<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-search">
-					<tr>
-						<td>
-							<table border="0" cellpadding="0" cellspacing="0">
-							<tr>
-								<td>
-									<input class="form-text font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
-								</td>
-							</tr>
-							<tr>
-								<td style="cursor: pointer; text-align: right;">
-									<span onclick="showAdvancedSearch()"><%= LanguageUtil.get(pageContext, "advanced") %></span>
-<!--
-									&nbsp;|&nbsp;
-									<span onclick="showAdvancedSearch(true)"><%= LanguageUtil.get(pageContext, "add-filter") %></span>
--->
-								</td>
-							</tr>
-							</table>
-						</td>
-						<td width="5px">
-							&nbsp;
-						</td>
-						<td>
-							<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="Search" type="image">
-						</td>
-					</tr>
-					</table>
+				<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-search">
+				<tr>
+					<td>
+						<table border="0" cellpadding="0" cellspacing="0">
+						<tr>
+							<td>
+								<input class="form-text font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+							</td>
+						</tr>
+						<tr>
+							<td style="cursor: pointer; text-align: right;">
+								<span onclick="showAdvancedSearch()"><%= LanguageUtil.get(pageContext, "advanced") %></span>
+							</td>
+						</tr>
+						</table>
+					</td>
+					<td width="5px">
+						&nbsp;
+					</td>
+					<td>
+						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="Search" type="image">
+					</td>
+				</tr>
+				</table>
 
 				</form>
 			</td>
@@ -531,126 +530,127 @@ String mailLineColor = "#B3B6B0";
 		</table>
 
 		<form method="post" name="<portlet:namespace />advSearch" onSubmit='loadForm(document.<portlet:namespace />advSearch, themeDisplay.getPathMain() + "/mail/action?sortBy=" + Mail.sortBy.value + "&asc=" + Mail.sortBy.asc, null, Mail.getSearchReturn); return false;'>
-			<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
+		<input name="<%= Constants.CMD %>" type="hidden" value="getSearch" />
 
-			<div id="portlet-mail-toolbar-advanced-search" style="display: none;" width="100%">
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<%= LanguageUtil.get(pageContext, "from") %>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<%= LanguageUtil.get(pageContext, "to") %>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<%= LanguageUtil.get(pageContext, "subject") %>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<%= LanguageUtil.get(pageContext, "entire-message") %>
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<input class="form-text" name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<input class="form-text" name="<%= MailDisplayTerms.TO %>" size="20" type="text">
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<input class="form-text" name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<input class="form-text" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
-					</td>
-				</tr>
-				</table>
+		<div id="portlet-mail-toolbar-advanced-search" style="display: none;" width="100%">
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "from") %>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<%= LanguageUtil.get(pageContext, "to") %>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<%= LanguageUtil.get(pageContext, "subject") %>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<%= LanguageUtil.get(pageContext, "entire-message") %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<input class="form-text" name="<%= MailDisplayTerms.FROM %>" size="20" type="text">
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<input class="form-text" name="<%= MailDisplayTerms.TO %>" size="20" type="text">
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<input class="form-text" name="<%= MailDisplayTerms.SUBJECT %>" size="20" type="text">
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<input class="form-text" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
+				</td>
+			</tr>
+			</table>
 
-				<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-advanced-search-dates">
-				<tr>
-					<td colspan="5">
-						<br />
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<%= LanguageUtil.get(pageContext, "within") %>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<select name="dateRange" onchange="changeRange(this.value)">
-							<%
-							for (int i = 0; i < MailDisplayTerms.DATE_RANGE_OPTIONS.length; i++) {
-							%>
-								<option value="<%= MailDisplayTerms.DATE_RANGE_OPTIONS[i] %>" <%= (i == 0) ? "selected=\"selected\"" : "" %>>
-									<%= LanguageUtil.get(pageContext, MailDisplayTerms.DATE_RANGE_OPTIONS[i]) %>
-								</option>
-							<%
-							}
-							%>
-						</select>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<div id="portlet-mail-toolbar-advanced-search-dates-input">
-							<%= LanguageUtil.get(pageContext, "of") %>
+			<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-advanced-search-dates">
+			<tr>
+				<td colspan="5">
+					<br />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "within") %>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<select name="dateRange" onchange="changeRange(this.value)">
+						<%
+						for (int i = 0; i < MailDisplayTerms.DATE_RANGE_OPTIONS.length; i++) {
+						%>
+							<option value="<%= MailDisplayTerms.DATE_RANGE_OPTIONS[i] %>" <%= (i == 0) ? "selected=\"selected\"" : "" %>>
+								<%= LanguageUtil.get(pageContext, MailDisplayTerms.DATE_RANGE_OPTIONS[i]) %>
+							</option>
+						<%
+						}
+						%>
+					</select>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<div id="portlet-mail-toolbar-advanced-search-dates-input">
+						<%= LanguageUtil.get(pageContext, "of") %>
 
-							<span style="padding-left: 5px;" />
+						<span style="padding-left: 5px;" />
 
-							<%
-							Calendar cal = new GregorianCalendar(timeZone, locale);
-							%>
-							<liferay-ui:input-date
-								disableNamespace="<%= true %>"
-								formName='<%= renderResponse.getNamespace() + "advSearch" %>'
-								monthParam="dateMonth"
-								monthValue="<%= cal.get(Calendar.MONTH) %>"
-								dayParam="dateDay"
-								dayValue="<%= cal.get(Calendar.DATE) %>"
-								yearParam="dateYear"
-								yearValue="<%= cal.get(Calendar.YEAR) %>"
-								yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
-								yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
-								firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
-								disabled="<%= false %>"
-							/>
-						</div>
-					</td>
-				</tr>
-				</table>
+						<%
+						Calendar cal = new GregorianCalendar(timeZone, locale);
+						%>
+						<liferay-ui:input-date
+							disableNamespace="<%= true %>"
+							formName='<%= renderResponse.getNamespace() + "advSearch" %>'
+							monthParam="dateMonth"
+							monthValue="<%= cal.get(Calendar.MONTH) %>"
+							dayParam="dateDay"
+							dayValue="<%= cal.get(Calendar.DATE) %>"
+							yearParam="dateYear"
+							yearValue="<%= cal.get(Calendar.YEAR) %>"
+							yearRangeStart="<%= cal.get(Calendar.YEAR) - 100 %>"
+							yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
+							firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
+							disabled="<%= false %>"
+						/>
+					</div>
+				</td>
+			</tr>
+			</table>
 
-				<br />
+			<br />
 
-				<table border="0" cellpadding="0" cellspacing="0">
-				<tr>
-					<td>
-						<select name="<%= MailDisplayTerms.AND_OPERATOR %>">
-							<option selected="selected" value="true"><%= LanguageUtil.get(pageContext, "and") %></option>
-							<option value="false"><%= LanguageUtil.get(pageContext, "or") %></option>
-						</select>
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
-					</td>
-					<td style="padding-left: 5px;"></td>
-					<td>
-						<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onclick="hideAdvancedSearch()">
-					</td>
-				</tr>
-				</table>
-			</div>
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<select name="<%= MailDisplayTerms.AND_OPERATOR %>">
+						<option selected="selected" value="true"><%= LanguageUtil.get(pageContext, "and") %></option>
+						<option value="false"><%= LanguageUtil.get(pageContext, "or") %></option>
+					</select>
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+				</td>
+				<td style="padding-left: 5px;"></td>
+				<td>
+					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onclick="hideAdvancedSearch()">
+				</td>
+			</tr>
+			</table>
+		</div>
+
 		</form>
 
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm">
-			<input name="<portlet:namespace /><%= Constants.CMD %>" id="portlet-mail-compose-action" type="hidden" />
-			<input name="<portlet:namespace />messageId" id="portlet-mail-message-id" type="hidden" />
-			<input name="<portlet:namespace />folderId" id="portlet-mail-folder-id" type="hidden" />
+		<input name="<portlet:namespace /><%= Constants.CMD %>" id="portlet-mail-compose-action" type="hidden" />
+		<input name="<portlet:namespace />messageId" id="portlet-mail-message-id" type="hidden" />
+		<input name="<portlet:namespace />folderId" id="portlet-mail-folder-id" type="hidden" />
 		</form>
 
 		<table border="0" cellpadding="0" cellspacing="0" style="background-color: <%= colorScheme.getPortletBg() %>;">
