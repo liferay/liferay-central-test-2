@@ -138,8 +138,6 @@ public class LuceneFileExtractor {
 				if (_log.isInfoEnabled()) {
 					_log.info("No filter found for extension " + fileExt);
 				}
-
-				text = StringPool.BLANK;
 			}
 		}
 		catch (Exception e) {
@@ -148,6 +146,10 @@ public class LuceneFileExtractor {
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Filter returned text:\n\n" + text);
+		}
+
+		if (text == null) {
+			text = StringPool.BLANK;
 		}
 
 		return LuceneFields.getText(field, text);
