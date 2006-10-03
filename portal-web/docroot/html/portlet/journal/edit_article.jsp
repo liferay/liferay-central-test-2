@@ -648,11 +648,6 @@ Element contentEl = null;
 String[] availableLocales = null;
 %>
 
-<c:if test="<%= structure != null %>">
-
-
-</c:if>
-
 <c:choose>
 	<c:when test="<%= (structure != null) %>">
 		<tr>
