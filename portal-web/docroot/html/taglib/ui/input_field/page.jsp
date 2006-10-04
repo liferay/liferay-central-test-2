@@ -174,6 +174,17 @@ Map hints = ModelHintsUtil.getHints(model, field);
 
 			<c:choose>
 				<c:when test='<%= displayHeight.equals(ModelHintsDefaults.TEXT_DISPLAY_HEIGHT) %>'>
+
+					<%
+					if (Validator.isNotNull(value)) {
+						int maxLengthInt = GetterUtil.getInteger(maxLength);
+
+						if (value.length() > maxLengthInt) {
+							value = value.substring(0, maxLengthInt);
+						}
+					}
+					%>
+
 					<input class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="checkMaxLength(this, <%= maxLength %>);">
 				</c:when>
 				<c:otherwise>
