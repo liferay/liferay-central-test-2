@@ -156,10 +156,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<select name="<portlet:namespace />autoLogin">
-							<option <%= (company.isAutoLogin()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-							<option <%= (!company.isAutoLogin()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-						</select>
+						<liferay-ui:input-select param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
 					</td>
 				</tr>
 				<tr>
@@ -168,10 +165,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<select name="<portlet:namespace />sendPassword">
-							<option <%= (company.isSendPassword()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-							<option <%= (!company.isSendPassword()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-						</select>
+						<liferay-ui:input-select param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
 					</td>
 				</tr>
 				<tr>
@@ -180,10 +174,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<select name="<portlet:namespace />strangers">
-							<option <%= (company.isStrangers()) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-							<option <%= (!company.isStrangers()) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-						</select>
+						<liferay-ui:input-select param="strangers" defaultValue="<%= company.isStrangers() %>" />
 					</td>
 				</tr>
 				</table>
