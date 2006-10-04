@@ -45,7 +45,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class SendmailHook implements Hook {
 
-	public void addForward(String userId, List emailAddresses) {
+	public void addForward(
+		String userId, List emailAddresses, boolean leaveCopy) {
+
 		try {
 			if (emailAddresses != null) {
 				String home = PropsUtil.get(PropsUtil.MAIL_HOOK_SENDMAIL_HOME);

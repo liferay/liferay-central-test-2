@@ -25,6 +25,7 @@ package com.liferay.mail.service.impl;
 import com.liferay.mail.service.jms.MailProducer;
 import com.liferay.mail.service.spring.MailService;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
@@ -41,7 +42,8 @@ import java.util.List;
  */
 public class MailServiceImpl implements MailService {
 
-	public void addForward(String userId, List emailAddresses)
+	public void addForward(
+			String userId, List emailAddresses, boolean leaveCopy)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
@@ -52,7 +54,9 @@ public class MailServiceImpl implements MailService {
 		}
 
 		MethodWrapper methodWrapper = new MethodWrapper(
-			hookImpl, "addForward", new Object[] {userId, emailAddresses});
+			hookImpl, "addForward",
+			new Object[] {userId, emailAddresses,
+			new BooleanWrapper(leaveCopy)});
 
 		MailProducer.produce(methodWrapper);
 	}

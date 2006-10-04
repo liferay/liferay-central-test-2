@@ -32,7 +32,8 @@ import java.util.List;
  */
 public class DummyHook implements Hook {
 
-	public void addForward(String userId, List emailAddresses) {
+	public void addForward(
+		String userId, List emailAddresses, boolean leaveCopy) {
 	}
 
 	public void addUser(

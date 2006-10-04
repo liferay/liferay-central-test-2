@@ -54,10 +54,11 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 		return (MailService)ctx.getBean(CLASS_NAME);
 	}
 
-	public void addForward(String userId, List emailAddresses)
+	public void addForward(
+			String userId, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException {
 
-		getService().addForward(userId, emailAddresses);
+		getService().addForward(userId, emailAddresses, leaveCopy);
 	}
 
 	public void addUser(

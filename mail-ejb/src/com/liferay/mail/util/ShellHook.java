@@ -43,7 +43,9 @@ public class ShellHook implements Hook {
 	public static String SHELL_SCRIPT =
 		PropsUtil.get(PropsUtil.MAIL_HOOK_SHELL_SCRIPT);
 
-	public void addForward(String userId, List emailAddresses) {
+	public void addForward(
+		String userId, List emailAddresses, boolean leaveCopy) {
+
 		_execute(
 			new String[] {
 				SHELL_SCRIPT, "addForward", userId,

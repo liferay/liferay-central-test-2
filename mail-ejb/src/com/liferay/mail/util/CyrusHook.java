@@ -49,7 +49,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CyrusHook implements Hook {
 
-	public void addForward(String userId, List emailAddresses) {
+	public void addForward(
+		String userId, List emailAddresses, boolean leaveCopy) {
+
 		try {
 			if (emailAddresses != null) {
 				String home = PropsUtil.get(PropsUtil.MAIL_HOOK_CYRUS_HOME);
@@ -58,6 +60,12 @@ public class CyrusHook implements Hook {
 
 				if (emailAddresses.size() > 0) {
 					StringBuffer sb = new StringBuffer();
+
+					if (leaveCopy) {
+						sb.append(":0 c\n");
+						sb.append("| $DELIVER -e -a $USER -m user.$USER");
+					}
+
 					sb.append(":0\n");
 					sb.append("!");
 

@@ -32,7 +32,8 @@ import java.util.List;
  */
 public interface Hook {
 
-	public void addForward(String userId, List emailAddresses);
+	public void addForward(
+		String userId, List emailAddresses, boolean leaveCopy);
 
 	public void addUser(
 		String userId, String password, String firstName, String middleName,
