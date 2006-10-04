@@ -87,6 +87,7 @@ javax.portlet.title.88=Τοποθετήσεις σελίδων
 javax.portlet.title.8=Ημερολόγιο
 javax.portlet.title.90=Πύλη
 javax.portlet.title.91=Υπαίθριος περιεχόμενο
+javax.portlet.title.93=Ροή της δουλειάς
 javax.portlet.title.9=Διαχείρηση
 
 ##
@@ -113,6 +114,7 @@ category.test=Δοκιμή
 category.tools=Εργαλεία
 category.undefined=Απροσδιόριστη
 category.wiki=Wiki
+category.workflow=Ροή της δουλειάς
 category.wsrp=WSRP
 
 ##
@@ -1106,6 +1108,7 @@ launch=Έναρξη
 layer-type=Τύπος Στρώματος
 layout=Διάταξη
 ldap=LDAP
+leave-a-copy-of-the-forwarded-message=Αφήστε ένα αντίγραφο του διαβιβασμένου μηνύματος;
 leave-edit-preferences=Αφήστε την επεξεργασία των προτιμήσεων
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* Αφήστε κενό στους τομείς του ονόματος και κωδικού πρόσβασης χρηστών για να χρησιμοποιήσετε τις τρέχουσες πληροφορίες σύνδεσής.
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Αφήστε αυτό το κενό εάν το Κουπόνι δεν ελέγχει για το SKU είδους.

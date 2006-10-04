@@ -87,6 +87,7 @@ javax.portlet.title.88=页面设置
 javax.portlet.title.8=日历
 javax.portlet.title.90=门户
 javax.portlet.title.91=Alfresco 内容
+javax.portlet.title.93=工作流
 javax.portlet.title.9=管理
 
 ##
@@ -113,6 +114,7 @@ category.test=测试
 category.tools=工具
 category.undefined=未定义
 category.wiki=Wiki
+category.workflow=工作流
 category.wsrp=WSRP
 
 ##
@@ -1107,6 +1109,7 @@ launch=发射
 layer-type=层类型
 layout=版面
 ldap=LDAP
+leave-a-copy-of-the-forwarded-message=留下批转的消息的拷贝?
 leave-edit-preferences=离开编辑惯用选项
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* 要使用您当前的信息，用户名和密码留空。
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=如果优惠券不检查项目SKU此项留空 。

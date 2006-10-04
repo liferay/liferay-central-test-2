@@ -87,6 +87,7 @@ javax.portlet.title.88=페이지 조정
 javax.portlet.title.8=달력
 javax.portlet.title.90=문맥
 javax.portlet.title.91=야외 내용
+javax.portlet.title.93=작업 흐름
 javax.portlet.title.9=Admin
 
 ##
@@ -113,6 +114,7 @@ category.test=시험
 category.tools=공구
 category.undefined=확정되지 않는
 category.wiki=Wiki
+category.workflow=작업 흐름
 category.wsrp=WSRP
 
 ##
@@ -1106,6 +1108,7 @@ launch=발사
 layer-type=층 유형
 layout=배치
 ldap=LDAP
+leave-a-copy-of-the-forwarded-message=발송한 메시지의 사본을 남겨두십시요?
 leave-edit-preferences=허가는 특혜를 편집한다
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* 너의 현재 로그인 정보를 사용하기 위하여
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=쿠폰이 품목SKU을 검사하지 않으면 이 공백을 남겨두십시요.

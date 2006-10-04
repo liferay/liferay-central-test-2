@@ -99,13 +99,14 @@ public class EditPreferencesAction extends PortletAction {
 				forwardAddress = StringPool.BLANK;
 			}
 
-			prefs.setValue("forward-address", forwardAddress);
+			boolean leaveCopy = ParamUtil.getBoolean(req, "leaveCopy");
 
-			res.setRenderParameter("forwardAddress", forwardAddress);
+			prefs.setValue("forward-address", forwardAddress);
+			prefs.setValue("leave-copy", Boolean.toString(leaveCopy));
 
 			try {
 				MailServiceUtil.addForward(
-					req.getRemoteUser(), forwardAddressList);
+					req.getRemoteUser(), forwardAddressList, leaveCopy);
 			}
 			catch (SystemException se) {
 				throw new PortletException(se);

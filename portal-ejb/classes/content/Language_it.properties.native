@@ -87,6 +87,7 @@ javax.portlet.title.88=Configurazione Pagina
 javax.portlet.title.8=Calendario
 javax.portlet.title.90=Portale
 javax.portlet.title.91=Soddisfare Alfresco
+javax.portlet.title.93=Workflow
 javax.portlet.title.9=Amministrazione
 
 ##
@@ -113,6 +114,7 @@ category.test=Prova
 category.tools=Strumenti
 category.undefined=Non definito
 category.wiki=Wiki
+category.workflow=Workflow
 category.wsrp=WSRP
 
 ##
@@ -1107,6 +1109,7 @@ launch=Launc
 layer-type=Tipo di Layer
 layout=Layout
 ldap=LDAP
+leave-a-copy-of-the-forwarded-message=Lasci una copia del messaggio spedito?
 leave-edit-preferences=Lascia le preferenze di editazione
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* Lascia spazio bianco nei campi di nome utente e password
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=Lascia questo spazio in bianco se il buono non controlla se c�� l�articolo SKU.
