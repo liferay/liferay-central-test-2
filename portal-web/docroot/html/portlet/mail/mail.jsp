@@ -79,50 +79,25 @@ String mailLineColor = "#B3B6B0";
 
 		<br><br>
 
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-
 		<%
 		int count = 0;
 
 		Set envelopes = MailUtil.getEnvelopes(request.getSession(), new DateComparator(false));
 
-		PrettyDateFormat dateFormat = new PrettyDateFormat(PortalUtil.getCompanyId(request), locale, timeZone);
-
 		Iterator itr = envelopes.iterator();
 
-		while (itr.hasNext() && (count < 10) && (count < folder.getUnreadMessageCount())) {
+		while (itr.hasNext() && (count < 10)) {
 			MailEnvelope mailEnvelope = (MailEnvelope)itr.next();
 
-			String recipient = GetterUtil.getString(
-				mailEnvelope.getRecipient(), StringPool.NBSP);
-
-			String subject = GetterUtil.getString(
-				mailEnvelope.getSubject(), StringPool.NBSP);
-
-			String date = dateFormat.format(mailEnvelope.getDate());
+			String recipient = GetterUtil.getString(mailEnvelope.getRecipient(), StringPool.NBSP);
+			String subject = GetterUtil.getString(mailEnvelope.getSubject(), StringPool.NBSP);
 
 			if (!mailEnvelope.isRead()) {
 		%>
 
-				<tr>
-					<td style="font-weight: bold; white-space: nowrap;" valign="top">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
-							<%= recipient %>
-						</a>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td width="90%" valign="top">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
-							<%= subject %>
-						</a>
-					</td>
-					<td style="padding-left: 10px;"></td>
-					<td style="white-space: nowrap;" valign="top">
-						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
-							<%= date %>
-						</a>
-					</td>
-				</tr>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="messageId" value="<%= String.valueOf(mailEnvelope.getMessageId()) %>" /><portlet:param name="folderId" value="<%= MailUtil.MAIL_INBOX_NAME %>" /></portlet:renderURL>">
+				<span style="font-weight: bold"><%= recipient %></span> - <%= subject %><br />
+				</a>
 
 		<%
 				count++;
@@ -130,13 +105,6 @@ String mailLineColor = "#B3B6B0";
 		}
 		%>
 
-		</table>
-
-		<c:if test="<%= count < folder.getUnreadMessageCount() %>">
-			<br>
-
-			<html:link page="/mail/view?windowState=maximized&portletMode=view&actionURL=0"><bean:message key="more" /></html:link> &raquo;
-		</c:if>
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portlet/mail.js" type="text/javascript"></script>
@@ -148,16 +116,16 @@ String mailLineColor = "#B3B6B0";
 				input.style.display = (range == "any-day") ? "none" : "";
 			}
 
+			function compose(to) {
+				window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>&to=' + to;
+			}
+
 			function hideAdvancedSearch() {
 				var search = document.getElementById("portlet-mail-toolbar-search");
 				var advSearch = document.getElementById("portlet-mail-toolbar-advanced-search");
 
 				search.style.display = "";
 				advSearch.style.display = "none";
-			}
-
-			function compose(to) {
-				window.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/mail/edit_message" /></portlet:renderURL>&to=' + to;
 			}
 
 			function showAdvancedSearch(filter) {
@@ -488,24 +456,15 @@ String mailLineColor = "#B3B6B0";
 				<table border="0" cellpadding="0" cellspacing="0" id="portlet-mail-toolbar-search">
 				<tr>
 					<td>
-						<table border="0" cellpadding="0" cellspacing="0">
-						<tr>
-							<td>
-								<input class="form-text font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
-							</td>
-						</tr>
-						<tr>
-							<td style="cursor: pointer; text-align: right;">
-								<span onclick="showAdvancedSearch()"><%= LanguageUtil.get(pageContext, "advanced") %></span>
-							</td>
-						</tr>
-						</table>
+						<input class="form-text font-small" name="<%= MailDisplayTerms.ENTIRE_MESSAGE %>" size="20" type="text">
 					</td>
-					<td width="5px">
-						&nbsp;
-					</td>
+					<td style="padding-left: 5px;"></td>
 					<td>
 						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="Search" type="image">
+					</td>
+					<td style="padding-left: 5px;"></td>
+					<td style="cursor: pointer; text-align: right;">
+						<span onClick="showAdvancedSearch();"><%= LanguageUtil.get(pageContext, "advanced") %></span>
 					</td>
 				</tr>
 				</table>
@@ -639,7 +598,7 @@ String mailLineColor = "#B3B6B0";
 				</td>
 				<td style="padding-left: 5px;"></td>
 				<td>
-					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onclick="hideAdvancedSearch()">
+					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="hideAdvancedSearch();">
 				</td>
 			</tr>
 			</table>

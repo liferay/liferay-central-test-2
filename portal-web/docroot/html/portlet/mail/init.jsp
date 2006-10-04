@@ -26,7 +26,6 @@
 
 --%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
 --%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.util.PrettyDateFormat" %><%--
 --%><%@ page import="com.liferay.portlet.mail.ContentException" %><%--
 --%><%@ page import="com.liferay.portlet.mail.RecipientException" %><%--
 --%><%@ page import="com.liferay.portlet.mail.model.MailEnvelope" %><%--
