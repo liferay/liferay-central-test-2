@@ -174,7 +174,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 
 			<c:choose>
 				<c:when test='<%= displayHeight.equals(ModelHintsDefaults.TEXT_DISPLAY_HEIGHT) %>'>
-					<input class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" maxlength="<%= maxLength %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>">
+					<input class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="checkMaxLength(this, <%= maxLength %>);">
 				</c:when>
 				<c:otherwise>
 					<textarea class="form-text" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= field %>" name="<%= fieldParam %>" style="height: <%= displayHeight %>px; width: <%= displayWidth %>px;" wrap="soft" onKeyDown="<%= checkTab ? "checkTab(this); " : "" %> disableEsc();" onKeyPress="checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
