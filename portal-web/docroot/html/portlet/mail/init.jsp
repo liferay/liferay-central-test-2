@@ -43,6 +43,7 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String forwardAddress = prefs.getValue("forward-address", StringPool.BLANK);
+boolean leaveCopy = GetterUtil.getBoolean(prefs.getValue("leave-copy", StringPool.BLANK));
 String signature = prefs.getValue("signature", StringPool.BLANK);
 String vacationMessage = prefs.getValue("vacation-message", StringPool.BLANK);
 

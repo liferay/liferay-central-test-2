@@ -89,6 +89,22 @@ portletURL.setParameter("tabs1", tabs1);
 		<br><br>
 
 		<textarea class="form-text" name="<portlet:namespace />forwardAddress" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= forwardAddress %></textarea>
+
+		<br><br>
+
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "leave-a-copy-of-the-forwarded-message") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<liferay-ui:input-select param="leaveCopy" defaultValue="<%= leaveCopy %>" />
+			</td>
+		</tr>
+		</table>
+
+		<br>
 	</c:when>
 	<c:when test='<%= tabs1.equals("signature") || tabs1.equals("vacation-message") %>'>
 		<c:choose>
@@ -105,10 +121,10 @@ portletURL.setParameter("tabs1", tabs1);
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
 		<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+
+		<br><br>
 	</c:when>
 </c:choose>
-
-<br><br>
 
 <input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />savePreferences();">
 
