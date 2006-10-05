@@ -144,21 +144,21 @@ public class Portlet extends PortletModel {
 				   String configurationPath, String portletClass,
 				   String indexerClass, String schedulerClass,
 				   String portletURLClass, String friendlyURLPluginClass,
-				   String defaultPreferences, String prefsValidator,
-				   boolean prefsCompanyWide, boolean prefsUniquePerLayout,
-				   boolean prefsOwnedByGroup, boolean useDefaultTemplate,
-				   boolean showPortletAccessDenied, boolean showPortletInactive,
-				   boolean restoreCurrentView, boolean maximizeEdit,
-				   boolean maximizeHelp, boolean maximizePrint,
-				   boolean layoutCacheable, boolean instanceable,
-				   boolean privateRequestAttributes, int renderWeight,
-				   String roles, Set unlinkedRoles, Map roleMappers,
-				   boolean system, boolean active, boolean include,
-				   Map initParams, Integer expCache, Map portletModes,
-				   Set supportedLocales, String resourceBundle,
-				   PortletInfo portletInfo, Set userAttributes,
-				   Map customUserAttributes, boolean warFile,
-				   List servletURLPatterns) {
+				   String portletDataHandlerClass, String defaultPreferences,
+				   String prefsValidator, boolean prefsCompanyWide,
+				   boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
+				   boolean useDefaultTemplate, boolean showPortletAccessDenied,
+				   boolean showPortletInactive, boolean restoreCurrentView,
+				   boolean maximizeEdit, boolean maximizeHelp,
+				   boolean maximizePrint, boolean layoutCacheable,
+				   boolean instanceable, boolean privateRequestAttributes,
+				   int renderWeight, String roles, Set unlinkedRoles,
+				   Map roleMappers, boolean system, boolean active,
+				   boolean include, Map initParams, Integer expCache,
+				   Map portletModes, Set supportedLocales,
+				   String resourceBundle, PortletInfo portletInfo,
+				   Set userAttributes, Map customUserAttributes,
+				   boolean warFile, List servletURLPatterns) {
 
 		setPortletId(portletId);
 		setCompanyId(companyId);
@@ -169,6 +169,7 @@ public class Portlet extends PortletModel {
 		_schedulerClass = schedulerClass;
 		_portletURLClass = portletURLClass;
 		_friendlyURLPluginClass = friendlyURLPluginClass;
+		_portletDataHandlerClass = portletDataHandlerClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -352,6 +353,25 @@ public class Portlet extends PortletModel {
 	 */
 	public void setFriendlyURLPluginClass(String friendlyURLPluginClass) {
 		_friendlyURLPluginClass = friendlyURLPluginClass;
+	}
+
+	/**
+	 * Gets the name of the portlet data handler class of the portlet.
+	 *
+	 * @return		the name of the portlet data handler class of the portlet
+	 */
+	public String getPortletDataHandlerClass() {
+		return _portletDataHandlerClass;
+	}
+
+	/**
+	 * Sets the name of the portlet data handler class of the portlet.
+	 *
+	 * @param		portletDataHandlerClass the name of portlet data handler
+	 *				class of the portlet
+	 */
+	public void setPortletDataHandlerClass(String portletDataHandlerClass) {
+		_portletDataHandlerClass = portletDataHandlerClass;
 	}
 
 	/**
@@ -1424,35 +1444,36 @@ public class Portlet extends PortletModel {
 	/**
 	 * Creates and returns a copy of this object.
 	 *
-     * @return		a copy of this object
+	 * @return		a copy of this object
 	 */
 	public Object clone() {
 		return new Portlet(
 			getPortletId(), getCompanyId(), getStrutsPath(),
 			getConfigurationPath(), getPortletClass(), getIndexerClass(),
 			getSchedulerClass(), getPortletURLClass(),
-			getFriendlyURLPluginClass(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(), getRenderWeight(),
-			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
-			isActive(), isInclude(), getInitParams(), getExpCache(),
-			getPortletModes(), getSupportedLocales(), getResourceBundle(),
-			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
-			isWARFile(), getServletURLPatterns());
+			getFriendlyURLPluginClass(), getPortletDataHandlerClass(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
+			isPrivateRequestAttributes(), getRenderWeight(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
+			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
+			getUserAttributes(), getCustomUserAttributes(), isWARFile(),
+			getServletURLPatterns());
 	}
 
 	/**
 	 * Compares this portlet to the specified object.
 	 *
-     * @param		obj the object to compare this portlet against
-     * @return		the value 0 if the argument portlet is equal to this
-     *				portlet; a value less than -1 if this portlet is less than
-     *				the portlet argument; and 1 if this portlet is greater than
-     *				the portlet argument
+	 * @param		obj the object to compare this portlet against
+	 * @return		the value 0 if the argument portlet is equal to this
+	 *				portlet; a value less than -1 if this portlet is less than
+	 *				the portlet argument; and 1 if this portlet is greater than
+	 *				the portlet argument
 	 */
 	public int compareTo(Object obj) {
 		Portlet portlet = (Portlet)obj;
@@ -1500,6 +1521,11 @@ public class Portlet extends PortletModel {
 	 */
 	private String _friendlyURLPluginClass;
 
+ 	/**
+	 * The name of the portlet data handler class of the portlet.
+	 */
+	private String _portletDataHandlerClass;
+
 	/**
 	 * The default preferences of the portlet.
 	 */
@@ -1528,43 +1554,43 @@ public class Portlet extends PortletModel {
 
 	/**
 	 * True if the portlet uses the default template.
-     */
+	 */
 	private boolean _useDefaultTemplate = true;
 
 	/**
 	 * True if users are shown that they do not have access to the portlet.
-     */
+	 */
 	private boolean _showPortletAccessDenied = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_ACCESS_DENIED));
 
 	/**
 	 * True if users are shown that the portlet is inactive.
-     */
+	 */
 	private boolean _showPortletInactive = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
 
 	/**
 	 * True if the portlet restores to the current view from the maximized
 	 * state.
-     */
+	 */
 	private boolean _restoreCurrentView = true;
 
 	/**
 	 * True if the portlet goes into the maximized state when the user goes into
 	 * the edit mode.
-     */
+	 */
 	private boolean _maximizeEdit;
 
 	/**
 	 * True if the portlet goes into the maximized state when the user goes into
 	 * the help mode.
-     */
+	 */
 	private boolean _maximizeHelp;
 
 	/**
 	 * True if the portlet goes into the maximized state when the user goes into
 	 * the print mode.
-     */
+	 */
 	private boolean _maximizePrint;
 
 	/**
@@ -1574,13 +1600,13 @@ public class Portlet extends PortletModel {
 
 	/**
 	 * True if the portlet can be added multiple times to a layout.
-     */
+	 */
 	private boolean _instanceable;
 
 	/**
 	 * True if the portlet does not share request attributes with any other
 	 * portlet.
-     */
+	 */
 	private boolean _privateRequestAttributes = true;
 
 	/**

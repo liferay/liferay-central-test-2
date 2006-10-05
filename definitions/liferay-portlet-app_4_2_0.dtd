@@ -18,12 +18,12 @@ The portlet element contains the declarative data of a portlet.
 -->
 <!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
 indexer-class?, scheduler-class?, portlet-url-class?,
-friendly-url-plugin-class?, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-restore-current-view?, maximize-edit?, maximize-help?, maximize-print?,
-layout-cacheable?, instanceable?, private-request-attributes?, render-weight?,
-system?, active?, include?)>
+friendly-url-plugin-class?, portlet-data-handler-class?,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, restore-current-view?, maximize-edit?, maximize-help?,
+maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
+render-weight?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -100,6 +100,13 @@ See:
 http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
 -->
 <!ELEMENT friendly-url-plugin-class (#PCDATA)>
+
+<!--
+The portlet-data-handler-class value must be a class that implements
+com.liferay.portal.lar.PortletDataHandler and is called when archiving tasks are
+run.
+-->
+<!ELEMENT portlet-data-handler-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

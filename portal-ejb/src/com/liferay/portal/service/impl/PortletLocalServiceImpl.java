@@ -74,6 +74,7 @@ import org.dom4j.io.XMLWriter;
  * <a href="PortletLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Raymond Auge
  *
  */
 public class PortletLocalServiceImpl implements PortletLocalService {
@@ -903,6 +904,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 						portletId, portletModel.getFriendlyURLPluginClass());
 				}
 
+				portletModel.setPortletDataHandlerClass(GetterUtil.getString(
+					portlet.elementText("portlet-data-handler-class"),
+					portletModel.getPortletDataHandlerClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

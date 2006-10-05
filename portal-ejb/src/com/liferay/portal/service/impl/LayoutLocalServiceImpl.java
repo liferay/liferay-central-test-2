@@ -33,6 +33,7 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.lar.PortletDataHandler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -333,9 +334,32 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			Element el = root.addElement("portlet-preferences");
 
-			el.addAttribute("portlet-id", prefs.getPortletId());
-			el.addAttribute("layout-id", prefs.getLayoutId());
+			String portletId = prefs.getPortletId();
+			String layoutId = prefs.getLayoutId();
+
+			el.addAttribute("portlet-id", portletId);
+			el.addAttribute("layout-id", layoutId);
 			el.addElement("preferences").addCDATA(prefs.getPreferences());
+
+			// Portlet data
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				layoutSet.getCompanyId(), portletId);
+
+			String className = portlet.getPortletDataHandlerClass();
+
+			if (Validator.isNotNull(className)) {
+				PortletDataHandler portletDataHandler =
+					(PortletDataHandler)InstancePool.get(className);
+
+				String data = portletDataHandler.exportData(
+					layoutSet.getCompanyId(), layoutSet.getGroupId());
+
+				el = root.addElement("portlet-data");
+				el.addAttribute("portlet-id", portletId);
+
+				el.addElement("data").addCDATA(data);
+			}
 		}
 
 		// XML file
@@ -529,6 +553,32 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			prefs.setPreferences(preferences);
 
 			PortletPreferencesUtil.update(prefs);
+		}
+
+		// Portlet data
+
+		itr = root.elements("portlet-data").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String portletId = el.attributeValue("portlet-id");
+			String data = el.elementText("data");
+
+			// Portlet data
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				layoutSet.getCompanyId(), portletId);
+
+			String className = portlet.getPortletDataHandlerClass();
+
+			if (Validator.isNotNull(className)) {
+				PortletDataHandler portletDataHandler =
+					(PortletDataHandler)InstancePool.get(className);
+
+				portletDataHandler.importData(
+					layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
+			}
 		}
 
 		// Page count
