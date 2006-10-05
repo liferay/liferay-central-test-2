@@ -1,0 +1,14 @@
+2006.10.05 16:55:40 Wildfire 3.0.1 [Oct 5, 2006 4:55:40 PM]
+2006.10.05 16:55:41 Starting Coyote HTTP/1.1 on http-8080
+2006.10.05 16:55:41 JK: ajp13 listening on /0.0.0.0:8009
+2006.10.05 16:55:41 Jk running ID=0 time=0/47  config=null
+2006.10.05 16:55:41 Find registry server-registry.xml at classpath resource
+2006.10.05 16:55:41 Server startup in 32000 ms
+2006.10.05 16:56:04 Missing database schema for wildfire. Attempting to install...
+2006.10.05 16:56:04 Database update successful.
+2006.10.05 16:56:21 Publish-Subscribe domain: pubsub.localhost
+2006.10.05 16:56:21 Started server (unencrypted) socket on port: 5269
+2006.10.05 16:56:21 Started plain (unencrypted) socket on port: 5222
+2006.10.05 16:56:21 Started SSL (encrypted) socket on port: 5223
+2006.10.05 16:56:21 Multi User Chat domain: conference.localhost
+2006.10.05 16:56:42 Wildfire stopped

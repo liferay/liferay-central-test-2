@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+
+<project name="wildfire-web" basedir="." default="war">
+	<import file="../build-common-web.xml" />
+
+	<property name="war.file" value="${ant.project.name}" />
+
+	<target name="war">
+	</target>
+
+	<target name="deploy" depends="build-common-web.deploy">
+		<copy todir="${app.server.dir}/wildfireHome">
+			<fileset dir="wildfireHome" />
+		</copy>
+	</target>
+</project>
