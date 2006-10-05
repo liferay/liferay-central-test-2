@@ -137,6 +137,7 @@
 		<configuration-path>/journal/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
 		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
+		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandler</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -706,6 +707,14 @@
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>0</render-weight>
 		<system>true</system>
+	</portlet>
+	<portlet>
+		<portlet-name>93</portlet-name>
+		<struts-path>workflow</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<render-weight>0</render-weight>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
