@@ -79,7 +79,7 @@ Secure FTP 1.6.3
 Servicemix 2.0.2
 Simple Java Captcha 0.03 (patched for debug and additional properties)
 SLF4J 1.0.2
-Smack 2.2.0
+Smack 2.2.1
 Spring 2.0
 SSHTerm 0.2.2
 SSHVnc 0.1.3
@@ -89,6 +89,7 @@ TextMining 0.4
 Trove 1.1b4
 Velocity 1.4
 WebDAV Servlet 1.2
+Wildfire 3.0.1
 WSDL4J 1.5.1
 WSRP4J 0.3
 WSS4J 1.0.0
