@@ -39,7 +39,6 @@ import javax.servlet.ServletException;
  * <a href="LiferayServletContext.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
- * @version $Revision: $
  *
  */
 public class LiferayServletContext implements ServletContext {

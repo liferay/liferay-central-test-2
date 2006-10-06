@@ -47,7 +47,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  * @author Michael Young
  * @author Brian Myunghun Kim
- * @version $Revision: $
  *
  */
 public class LiferayRequestDispatcher implements RequestDispatcher {
