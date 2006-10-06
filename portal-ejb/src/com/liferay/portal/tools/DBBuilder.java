@@ -42,11 +42,18 @@ import java.io.StringReader;
 public class DBBuilder {
 
 	public static void main(String[] args) {
-		new DBBuilder();
+		if (args.length == 1) {
+			new DBBuilder(args[0]);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
-	public DBBuilder() {
+	public DBBuilder(String databaseName) {
 		try {
+			_databaseName = databaseName;
+
 			_buildSQL("portal");
 			_buildSQL("indexes");
 			_buildSQL("sequences");
@@ -78,9 +85,9 @@ public class DBBuilder {
 
 		StringBuffer sb = new StringBuffer();
 
-		sb.append("drop database lportal;\n");
-		sb.append("create database lportal;\n");
-		sb.append("connect to lportal;\n");
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
+		sb.append("connect to " + _databaseName + ";\n");
 		sb.append(FileUtil.read("../sql/portal/portal-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
@@ -95,9 +102,9 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("drop database lportal;\n");
-		sb.append("create database lportal;\n");
-		sb.append("connect to lportal;\n");
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
+		sb.append("connect to " + _databaseName + ";\n");
 		sb.append(FileUtil.read("../sql/portal/portal-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
@@ -112,8 +119,12 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("create database 'lportal.gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sb.append("connect 'lportal.gdb' user 'sysdba' password 'masterkey';\n");
+		sb.append(
+			"create database '" + _databaseName +
+				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
+		sb.append(
+			"connect '" + _databaseName +
+				".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
 			_readSQL("../sql/portal/portal-firebird.sql", _FIREBIRD[0], ";\n"));
 
@@ -125,10 +136,12 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("drop database if exists lportal;\n");
-		sb.append("create database lportal character set utf8;\n");
-		sb.append("use lportal;\n");
-		sb.append("\n");
+		sb.append("drop database if exists " + _databaseName + ";\n");
+		sb.append(
+			"create database " + _databaseName + " character set utf8;\n");
+		sb.append("use ");
+		sb.append(_databaseName);
+		sb.append(";\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
@@ -165,10 +178,10 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("drop database lportal;\n");
-		sb.append("create database lportal encoding = 'UNICODE';\n");
-		sb.append("\\c lportal;\n");
-		sb.append("\n");
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append(
+			"create database " + _databaseName + " encoding = 'UNICODE';\n");
+		sb.append("\\c " + _databaseName + ";\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-postgresql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
@@ -183,13 +196,12 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("drop database lportal;\n");
-		sb.append("create database lportal;\n");
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
 		sb.append("\n");
 		sb.append("go\n");
 		sb.append("\n");
-		sb.append("use lportal;\n");
-		sb.append("\n");
+		sb.append("use " + _databaseName + ";\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-sql-server.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
@@ -204,8 +216,7 @@ public class DBBuilder {
 
 		sb = new StringBuffer();
 
-		sb.append("use lportal\n");
-		sb.append("\n");
+		sb.append("use " + _databaseName + "\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
@@ -1070,5 +1081,7 @@ public class DBBuilder {
 		" int", " datetime", " float", " int", " varchar(1000)", " text",
 		" varchar", "  identity(1,1)", "go"
 	};
+
+	private String _databaseName;
 
 }

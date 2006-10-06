@@ -16,7 +16,9 @@
 			fork="true"
 			maxmemory="256m"
 			newenvironment="true"
-		/>
+		>
+			<arg value="${database.name}" />
+		</java>
 	</target>
 
 	<target name="export-oracle">
