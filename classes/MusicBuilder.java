@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2005 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -42,7 +42,6 @@ import javax.xml.transform.stream.StreamSource;
  * <a href="MusicBuilder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
- * @version $Revision: 1.13 $
  *
  */
 public class MusicBuilder {
