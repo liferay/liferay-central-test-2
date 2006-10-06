@@ -53,6 +53,31 @@ MBCategory category = (MBCategory)row.getObject();
 
 <liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&categoryId=" + category.getCategoryId() %>' target="_blank" />
 
+<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.SUBSCRIBE) %>">
+	<c:choose>
+		<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBCategory.class.getName(), category.getCategoryId()) %>">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:param name="struts_action" value="/message_boards/edit_category" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="unsubscribe" url="<%= portletURL %>" />
+		</c:when>
+		<c:otherwise>
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+				<portlet:param name="struts_action" value="/message_boards/edit_category" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
+			</portlet:actionURL>
+
+			<liferay-ui:icon image="subscribe" url="<%= portletURL %>" />
+		</c:otherwise>
+	</c:choose>
+</c:if>
+
 <c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 		<portlet:param name="struts_action" value="/message_boards/edit_category" />

@@ -160,39 +160,44 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 </div>
 
 <div>
-	<input name="<portlet:namespace />messageScroll0" type="hidden" value="0">
-
-	<table border="0" cellpadding="4" cellspacing="0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
 
 	<%
-	TreeWalker treeWalker = messageDisplay.getTreeWalker();
-
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
-	request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+	List messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), request.getRemoteUser(), new MessageCreateDateComparator(true));
 	%>
 
-	<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+	<c:if test="<%= messages.size() > 1 %>">
+		<input name="<portlet:namespace />messageScroll0" type="hidden" value="0">
 
-	</table>
+		<table border="0" cellpadding="1" cellspacing="0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
+
+		<%
+		TreeWalker treeWalker = messageDisplay.getTreeWalker();
+
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, new Boolean(false));
+		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+		%>
+
+		<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+
+		</table>
+	</c:if>
 
 	<%
 	boolean editable = true;
 
 	int depth = 0;
 
-	List messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), request.getRemoteUser(), new MessageCreateDateComparator(true));
-
-	for (int j = 0; j < messages.size(); j++) {
-		message = (MBMessage)messages.get(j);
+	for (int i = 0; i < messages.size(); i++) {
+		message = (MBMessage)messages.get(i);
 
 		String className = "portlet-section-alternate";
 		String classHoverName = "portlet-section-alternate-hover";
 
-		if (MathUtil.isOdd(j)) {
+		if (MathUtil.isOdd(i)) {
 			className = "portlet-section-body";
 			classHoverName = "portlet-section-body-hover";
 		}

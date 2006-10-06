@@ -328,8 +328,8 @@
 					<c:if test="<%= fileNames != null %>">
 
 						<%
-						for (int i = 0; i < fileNames.length; i++) {
-							String fileName = FileUtil.getShortFileName(fileNames[i]);
+						for (int j = 0; j < fileNames.length; j++) {
+							String fileName = FileUtil.getShortFileName(fileNames[j]);
 
 							if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
 						%>
@@ -352,9 +352,9 @@
 							<td>
 
 								<%
-								for (int i = 0; i < fileNames.length; i++) {
-									String fileName = FileUtil.getShortFileName(fileNames[i]);
-									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[i]);
+								for (int j = 0; j < fileNames.length; j++) {
+									String fileName = FileUtil.getShortFileName(fileNames[j]);
+									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[j]);
 								%>
 
 									<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;

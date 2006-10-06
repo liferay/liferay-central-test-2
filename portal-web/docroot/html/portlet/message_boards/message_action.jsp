@@ -53,6 +53,8 @@ MBMessage message = (MBMessage)row.getObject();
 	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
 </c:if>
 
+<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&threadId=" + message.getThreadId() %>' target="_blank" />
+
 <c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.SUBSCRIBE) %>">
 	<c:choose>
 		<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
