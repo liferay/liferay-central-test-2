@@ -57,7 +57,7 @@ public class HotDeployUtil {
 
 	private HotDeployUtil() {
 		if (_log.isInfoEnabled()) {
-			_log.info("Creating hot deploy manager " + this.hashCode());
+			_log.info("Initializing hot deploy manager " + this.hashCode());
 		}
 
 		_listeners = new Vector();

@@ -30,7 +30,6 @@ import javax.servlet.ServletContextListener;
  * <a href="TunnelContextListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class TunnelContextListener implements ServletContextListener {
