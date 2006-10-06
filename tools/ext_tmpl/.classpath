@@ -132,6 +132,8 @@
 	<classpathentry kind="lib" path="lib/portal/xercesImpl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xml-apis.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
+	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
+	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ym.jar"/>
 	<classpathentry kind="lib" path="web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
