@@ -223,7 +223,7 @@ public class EARXMLBuilder {
 
 		sb.append(path.substring(3, path.length())).append(".war</module-name>\n");
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document doc = reader.read(new File(filePath));
 
