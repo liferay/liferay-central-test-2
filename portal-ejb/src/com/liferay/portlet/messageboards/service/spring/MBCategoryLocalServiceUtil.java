@@ -161,4 +161,20 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.updateCategory(categoryId,
 			parentCategoryId, name, description, mergeWithParentCategory);
 	}
+
+	public static void subscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.subscribeCategory(userId, categoryId);
+	}
+
+	public static void unsubscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.unsubscribeCategory(userId, categoryId);
+	}
 }

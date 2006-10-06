@@ -83,6 +83,30 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
+	public static void subscribeCategory(java.lang.String categoryId)
+		throws RemoteException {
+		try {
+			MBCategoryServiceUtil.subscribeCategory(categoryId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void unsubscribeCategory(java.lang.String categoryId)
+		throws RemoteException {
+		try {
+			MBCategoryServiceUtil.unsubscribeCategory(categoryId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategoryModel updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,

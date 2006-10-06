@@ -57,6 +57,20 @@ public class MBCategoryServiceUtil {
 		return mbCategoryService.getCategory(categoryId);
 	}
 
+	public static void subscribeCategory(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
+		mbCategoryService.subscribeCategory(categoryId);
+	}
+
+	public static void unsubscribeCategory(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBCategoryService mbCategoryService = MBCategoryServiceFactory.getService();
+		mbCategoryService.unsubscribeCategory(categoryId);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,

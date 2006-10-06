@@ -308,7 +308,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		// Subscriptions
 
-		notifySubscribers(message, prefs, false);
+		notifySubscribers(category, message, prefs, false);
 
 		start = logAddMessage(messageId, start, 7);
 
@@ -577,7 +577,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return MBMessageFinder.countByCategoryIds(categoryIds);
 	}
 
-	public String getCategoryMessagesCountRSS(
+	public String getCategoryMessagesRSS(
 			String categoryId, int begin, int end, double version, String url)
 		throws PortalException, SystemException {
 
@@ -586,7 +586,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		List messages = MBMessageUtil.findByCategoryId(categoryId, begin, end);
 
 		return exportToRSS(
-			category.getName(), category.getName(), version, url, messages);
+			category.getName(), category.getDescription(), version, url,
+			messages);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
@@ -766,6 +767,25 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return MBMessageUtil.countByThreadId(threadId);
 	}
 
+	public String getThreadMessagesRSS(
+			String threadId, int begin, int end, double version, String url)
+		throws PortalException, SystemException {
+
+		List messages = MBMessageUtil.findByThreadId(threadId, begin, end);
+
+		String name = StringPool.BLANK;
+		String description = StringPool.BLANK;
+
+		if (messages.size() > 0) {
+			MBMessage message = (MBMessage)messages.get(0);
+
+			name = message.getSubject();
+			description = message.getSubject();
+		}
+
+		return exportToRSS(name, description, version, url, messages);
+	}
+
 	public void subscribeMessage(String userId, String messageId)
 		throws PortalException, SystemException {
 
@@ -865,7 +885,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		// Subscriptions
 
-		notifySubscribers(message, prefs, true);
+		notifySubscribers(category, message, prefs, true);
 
 		// Thread
 
@@ -1055,7 +1075,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 	}
 
 	protected void notifySubscribers(
-			MBMessage message, PortletPreferences prefs, boolean update)
+			MBCategory category, MBMessage message, PortletPreferences prefs,
+			boolean update)
 		throws PortalException, SystemException {
 
 		try {
@@ -1074,6 +1095,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				message.getCompanyId());
 
 			User user = UserUtil.findByPrimaryKey(message.getUserId());
+
+			List categoryIds = new ArrayList();
+
+			MBCategoryLocalServiceUtil.getSubcategoryIds(
+				categoryIds, category.getGroupId(), category.getCategoryId());
+
+			categoryIds.add(category.getCategoryId());
 
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.MESSAGE_BOARDS, user);
@@ -1138,7 +1166,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			MBMessageProducer.produce(
 				new String[] {
 					message.getCompanyId(), message.getUserId(),
-					message.getThreadId(), fromName, fromAddress, subject, body
+					StringUtil.merge(categoryIds), message.getThreadId(),
+					fromName, fromAddress, subject, body
 				});
 		}
 		catch (IOException ioe) {

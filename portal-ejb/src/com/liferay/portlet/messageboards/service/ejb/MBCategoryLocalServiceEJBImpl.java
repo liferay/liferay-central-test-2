@@ -155,6 +155,20 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 			description, mergeWithParentCategory);
 	}
 
+	public void subscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().subscribeCategory(userId, categoryId);
+	}
+
+	public void unsubscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().unsubscribeCategory(userId, categoryId);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

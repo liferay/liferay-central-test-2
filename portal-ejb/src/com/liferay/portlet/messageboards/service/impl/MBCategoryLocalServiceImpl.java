@@ -32,6 +32,7 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.service.spring.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -507,6 +508,20 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		}
 
 		MBCategoryUtil.remove(fromCategory.getCategoryId());
+	}
+
+	public void subscribeCategory(String userId, String categoryId)
+		throws PortalException, SystemException {
+
+		SubscriptionLocalServiceUtil.addSubscription(
+			userId, MBCategory.class.getName(), categoryId);
+	}
+
+	public void unsubscribeCategory(String userId, String categoryId)
+		throws PortalException, SystemException {
+
+		SubscriptionLocalServiceUtil.deleteSubscription(
+			userId, MBCategory.class.getName(), categoryId);
 	}
 
 	protected void validate(String name) throws PortalException {

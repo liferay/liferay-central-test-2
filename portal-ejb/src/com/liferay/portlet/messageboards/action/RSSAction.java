@@ -28,6 +28,8 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
 import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -74,6 +76,7 @@ public class RSSAction extends Action {
 
 		String plid = ParamUtil.getString(req, "p_l_id");
 		String categoryId = ParamUtil.getString(req, "categoryId");
+		String threadId = ParamUtil.getString(req, "threadId");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
@@ -81,8 +84,16 @@ public class RSSAction extends Action {
 				"/message_boards/find_message?p_l_id=" + plid + "&categoryId=" +
 					categoryId;
 
-		String rss = MBMessageLocalServiceUtil.getCategoryMessagesCountRSS(
-			categoryId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+		String rss = StringPool.BLANK;
+
+		if (Validator.isNotNull(categoryId)) {
+			rss = MBMessageLocalServiceUtil.getCategoryMessagesRSS(
+				categoryId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+		}
+		else {
+			rss = MBMessageLocalServiceUtil.getThreadMessagesRSS(
+				threadId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+		}
 
 		return rss.getBytes();
 	}

@@ -199,6 +199,7 @@ action.PRINT=Stampa
 action.SUBSCRIBE=Sottoscrizioni
 action.UPDATE=Aggiornamento
 action.UPDATE_DISCUSSION=Aggiorna Discussione 
+action.UPDATE_THREAD_PRIORITY=Priorità Del Filetto Dell'Aggiornamento
 action.UPDATE_USER=Aggiorna Utente
 action.VIEW=Visualizza
 action.VIEW_USER=Visualizza Utente

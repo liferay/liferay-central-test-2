@@ -73,6 +73,24 @@ public class MBCategoryServiceImpl
 		return MBCategoryLocalServiceUtil.getCategory(categoryId);
 	}
 
+	public void subscribeCategory(String categoryId)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
+
+		MBCategoryLocalServiceUtil.subscribeCategory(getUserId(), categoryId);
+	}
+
+	public void unsubscribeCategory(String categoryId)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.SUBSCRIBE);
+
+		MBCategoryLocalServiceUtil.unsubscribeCategory(getUserId(), categoryId);
+	}
+
 	public MBCategory updateCategory(
 			String categoryId, String parentCategoryId, String name,
 			String description, boolean mergeWithParentCategory)

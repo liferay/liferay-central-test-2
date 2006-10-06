@@ -199,6 +199,7 @@ action.PRINT=Τυπωμένη ύλη
 action.SUBSCRIBE=Προσυπογράψτε
 action.UPDATE=Αναπροσαρμογή
 action.UPDATE_DISCUSSION=Συζήτηση αναπροσαρμογών
+action.UPDATE_THREAD_PRIORITY=Προτεραιότητα νημάτων αναπροσαρμογών
 action.UPDATE_USER=Χρήστης αναπροσαρμογών
 action.VIEW=Αποψη
 action.VIEW_USER=Χρήστης άποψης

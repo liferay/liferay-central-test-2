@@ -27,11 +27,14 @@ import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
 import com.liferay.util.mail.MailMessage;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -92,20 +95,52 @@ public class MBMessageConsumer implements MessageListener {
 	private void _onMessage(String[] array) throws Exception {
 		String companyId = array[0];
 		String userId = array[1];
-		String threadId = array[2];
-		String fromName = array[3];
-		String fromAddress = array[4];
-		String subject = array[5];
-		String body = array[6];
+		String[] categoryIds = StringUtil.split(array[2]);
+		String threadId = array[3];
+		String fromName = array[4];
+		String fromAddress = array[5];
+		String subject = array[6];
+		String body = array[7];
+
+		Set sent = CollectionFactory.getHashSet();
+
+		// Threads
 
 		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 			companyId, MBThread.class.getName(), threadId);
+
+		_sendEmail(
+			userId, fromName, fromAddress, subject, body, subscriptions, sent);
+
+		// Categories
+
+		for (int i = 0; i < categoryIds.length; i++) {
+			subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
+				companyId, MBCategory.class.getName(), categoryIds[i]);
+
+			_sendEmail(
+				userId, fromName, fromAddress, subject, body, subscriptions,
+				sent);
+		}
+	}
+
+	private void _sendEmail(
+			String userId, String fromName, String fromAddress, String subject,
+			String body, List subscriptions, Set sent)
+		throws Exception {
 
 		for (int i = 0; i < subscriptions.size(); i++) {
 			Subscription subscription = (Subscription)subscriptions.get(i);
 
 			if (subscription.getUserId().equals(userId)) {
-				return;
+				continue;
+			}
+
+			if (sent.contains(userId)) {
+				continue;
+			}
+			else {
+				sent.add(userId);
 			}
 
 			User user = UserLocalServiceUtil.getUserById(

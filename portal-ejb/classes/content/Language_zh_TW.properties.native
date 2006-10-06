@@ -199,6 +199,7 @@ action.PRINT=印刷品
 action.SUBSCRIBE=訂閱
 action.UPDATE=更新
 action.UPDATE_DISCUSSION=更新討論
+action.UPDATE_THREAD_PRIORITY=更新螺紋優先權
 action.UPDATE_USER=更新用戶
 action.VIEW=看法
 action.VIEW_USER=看法用戶

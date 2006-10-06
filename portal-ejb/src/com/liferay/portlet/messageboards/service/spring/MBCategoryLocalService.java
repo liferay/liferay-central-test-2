@@ -99,4 +99,14 @@ public interface MBCategoryLocalService {
 		boolean mergeWithParentCategory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
+
+	public void subscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void unsubscribeCategory(java.lang.String userId,
+		java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 }

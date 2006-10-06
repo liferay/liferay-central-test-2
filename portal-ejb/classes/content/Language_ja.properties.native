@@ -199,6 +199,7 @@ action.PRINT=印刷物
 action.SUBSCRIBE=予約購読しなさい
 action.UPDATE=更新
 action.UPDATE_DISCUSSION=更新の議論
+action.UPDATE_THREAD_PRIORITY=更新の糸優先順位
 action.UPDATE_USER=更新のユーザー
 action.VIEW=眺め
 action.VIEW_USER=眺めのユーザー

@@ -199,6 +199,7 @@ action.PRINT=Druk
 action.SUBSCRIBE=Teken in
 action.UPDATE=Update
 action.UPDATE_DISCUSSION=De Bespreking van de update
+action.UPDATE_THREAD_PRIORITY=De Prioriteit van de Draad van de update
 action.UPDATE_USER=De Gebruiker van de update
 action.VIEW=Mening
 action.VIEW_USER=De Gebruiker van de mening

@@ -162,12 +162,12 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 		return getService().getCategoriesMessagesCount(categoryIds);
 	}
 
-	public java.lang.String getCategoryMessagesCountRSS(
+	public java.lang.String getCategoryMessagesRSS(
 		java.lang.String categoryId, int begin, int end, double version,
 		java.lang.String url)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getCategoryMessagesCountRSS(categoryId, begin, end,
+		return getService().getCategoryMessagesRSS(categoryId, begin, end,
 			version, url);
 	}
 
@@ -226,6 +226,14 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 	public int getThreadMessagesCount(java.lang.String threadId)
 		throws com.liferay.portal.SystemException {
 		return getService().getThreadMessagesCount(threadId);
+	}
+
+	public java.lang.String getThreadMessagesRSS(java.lang.String threadId,
+		int begin, int end, double version, java.lang.String url)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getThreadMessagesRSS(threadId, begin, end, version,
+			url);
 	}
 
 	public void subscribeMessage(java.lang.String userId,

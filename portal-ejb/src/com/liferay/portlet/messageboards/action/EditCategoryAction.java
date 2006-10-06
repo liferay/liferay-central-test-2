@@ -68,6 +68,12 @@ public class EditCategoryAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteCategory(req);
 			}
+			else if (cmd.equals(Constants.SUBSCRIBE)) {
+				subscribeCategory(req);
+			}
+			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
+				unsubscribeCategory(req);
+			}
 
 			sendRedirect(req, res);
 		}
@@ -119,6 +125,18 @@ public class EditCategoryAction extends PortletAction {
 		String categoryId = ParamUtil.getString(req, "categoryId");
 
 		MBCategoryServiceUtil.deleteCategory(categoryId);
+	}
+
+	protected void subscribeCategory(ActionRequest req) throws Exception {
+		String categoryId = ParamUtil.getString(req, "categoryId");
+
+		MBCategoryServiceUtil.subscribeCategory(categoryId);
+	}
+
+	protected void unsubscribeCategory(ActionRequest req) throws Exception {
+		String categoryId = ParamUtil.getString(req, "categoryId");
+
+		MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 	}
 
 	protected void updateCategory(ActionRequest req) throws Exception {

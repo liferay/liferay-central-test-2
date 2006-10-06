@@ -77,6 +77,20 @@ public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean 
 		return getService().getCategory(categoryId);
 	}
 
+	public void subscribeCategory(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().subscribeCategory(categoryId);
+	}
+
+	public void unsubscribeCategory(java.lang.String categoryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().unsubscribeCategory(categoryId);
+	}
+
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,

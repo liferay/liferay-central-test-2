@@ -106,7 +106,7 @@ public interface MBMessageLocalService {
 	public int getCategoriesMessagesCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.lang.String getCategoryMessagesCountRSS(
+	public java.lang.String getCategoryMessagesRSS(
 		java.lang.String categoryId, int begin, int end, double version,
 		java.lang.String url)
 		throws com.liferay.portal.PortalException, 
@@ -149,6 +149,11 @@ public interface MBMessageLocalService {
 
 	public int getThreadMessagesCount(java.lang.String threadId)
 		throws com.liferay.portal.SystemException;
+
+	public java.lang.String getThreadMessagesRSS(java.lang.String threadId,
+		int begin, int end, double version, java.lang.String url)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
 
 	public void subscribeMessage(java.lang.String userId,
 		java.lang.String messageId)

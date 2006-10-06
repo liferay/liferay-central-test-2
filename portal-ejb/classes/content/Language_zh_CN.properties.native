@@ -199,6 +199,7 @@ action.PRINT=打印
 action.SUBSCRIBE=订阅
 action.UPDATE=更新
 action.UPDATE_DISCUSSION=更新讨论
+action.UPDATE_THREAD_PRIORITY=更新螺纹优先权
 action.UPDATE_USER=更新用户
 action.VIEW=查看
 action.VIEW_USER=查看用户
