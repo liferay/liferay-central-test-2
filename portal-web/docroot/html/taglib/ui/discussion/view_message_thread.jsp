@@ -65,9 +65,7 @@ if (treeWalker.isOdd()) {
 				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
 				%>
 
-				<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-					<a href="<%= rowHREF %>">
-				</c:if>
+				<a href="<%= rowHREF %>">
 
 				<%
 				boolean readFlag = false;
@@ -87,18 +85,14 @@ if (treeWalker.isOdd()) {
 					</b>
 				</c:if>
 
-				<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-					</a>
-				</c:if>
+				</a>
 			</td>
 		</tr>
 		</table>
 	</td>
 	<td></td>
 	<td nowrap>
-		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-			<a href="<%= rowHREF %>">
-		</c:if>
+		<a href="<%= rowHREF %>">
 
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
@@ -109,21 +103,13 @@ if (treeWalker.isOdd()) {
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-			</a>
-		</c:if>
+		</a>
 	</td>
 	<td></td>
 	<td nowrap>
-		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-			<a href="<%= rowHREF %>">
-		</c:if>
-
+		<a href="<%= rowHREF %>">
 		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
-
-		<c:if test="<%= !selMessage.getMessageId().equals(message.getMessageId()) %>">
-			</a>
-		</c:if>
+		</a>
 	</td>
 </tr>
 

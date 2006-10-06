@@ -43,7 +43,77 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
+<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+	<td width="90%">
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td style="padding-left: <%= depth * 10 %>px;"></td>
+			<td>
+				<c:if test="<%= !message.isRoot() %>">
+					<c:choose>
+						<c:when test="<%= !lastNode %>">
+							<img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/t.gif">
+						</c:when>
+						<c:otherwise>
+							<img src="<%= themeDisplay.getPathThemeImage() %>/message_boards/l.gif">
+						</c:otherwise>
+					</c:choose>
+				</c:if>
+			</td>
+			<td style="padding-left: 5px;"></td>
+			<td>
+
+				<%
+				String rowHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView(" + message.getMessageId() + ");";
+				%>
+
+				<a href="<%= rowHREF %>">
+
+				<%
+				boolean readFlag = false;
+
+				if (themeDisplay.isSignedIn()) {
+					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), request.getRemoteUser());
+				}
+				%>
+
+				<c:if test="<%= !readFlag %>">
+					<b>
+				</c:if>
+
+				<%= message.getSubject() %>
+
+				<c:if test="<%= !readFlag %>">
+					</b>
+				</c:if>
+
+				</a>
+			</td>
+		</tr>
+		</table>
+	</td>
+	<td></td>
+	<td nowrap>
+		<a href="<%= rowHREF %>">
+
+		<c:choose>
+			<c:when test="<%= message.isAnonymous() %>">
+				<%= LanguageUtil.get(pageContext, "anonymous") %>
+			</c:when>
+			<c:otherwise>
+				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
+			</c:otherwise>
+		</c:choose>
+
+		</a>
+	</td>
+	<td></td>
+	<td nowrap>
+		<a href="<%= rowHREF %>">
+		<%= dateFormatDateTime.format(message.getModifiedDate()) %>
+		</a>
+	</td>
+</tr>
 
 <%
 List messages = treeWalker.getMessages();

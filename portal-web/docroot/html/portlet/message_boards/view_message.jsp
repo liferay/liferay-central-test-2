@@ -54,6 +54,12 @@ boolean isLastThread = messageDisplay.isLastThread();
 boolean threadView = ParamUtil.get(request, "threadView", true);
 %>
 
+<script type="text/javascript">
+	function <portlet:namespace />scrollIntoView(messageId) {
+		eval("document.<portlet:namespace />fm.<portlet:namespace />messageScroll" + messageId + ".scrollIntoView();");
+	}
+</script>
+
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= category.getCategoryId() %>">
 <input name="<portlet:namespace />breadcrumbsMessageId" type="hidden" value="<%= message.getMessageId() %>">
@@ -154,6 +160,9 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 </div>
 
 <div>
+	<input name="<portlet:namespace />messageScroll0" type="hidden" value="0">
+
+	<table border="0" cellpadding="4" cellspacing="0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
 
 	<%
 	TreeWalker treeWalker = messageDisplay.getTreeWalker();
@@ -167,6 +176,38 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	%>
 
 	<liferay-util:include page="/html/portlet/message_boards/view_message_thread.jsp" />
+
+	</table>
+
+	<%
+	boolean editable = true;
+
+	int depth = 0;
+
+	List messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), request.getRemoteUser(), new MessageCreateDateComparator(true));
+
+	for (int j = 0; j < messages.size(); j++) {
+		message = (MBMessage)messages.get(j);
+
+		String className = "portlet-section-alternate";
+		String classHoverName = "portlet-section-alternate-hover";
+
+		if (MathUtil.isOdd(j)) {
+			className = "portlet-section-body";
+			classHoverName = "portlet-section-body-hover";
+		}
+	%>
+
+		<%@ include file="/html/portlet/message_boards/view_message_thread_message.jsp" %>
+
+	<%
+	}
+	%>
+
 </div>
 
 </form>
+
+<%!
+private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message.jsp");
+%>

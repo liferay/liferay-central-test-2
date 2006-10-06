@@ -23,6 +23,8 @@
 %>
 
 <div style="margin: 5px 0px 0px <%= depth * 10 %>px; border: 1px solid <%= colorScheme.getPortletFontDim() %>; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
+	<input name="<portlet:namespace />messageScroll<%= message.getMessageId() %>" type="hidden" value="<%= message.getMessageId() %>">
+
 	<table cellpadding="0" cellspacing="0" style="table-layout: fixed;" width="100%">
 	<tr>
 		<td class="<%= className %>" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>; vertical-align: top;" width="100">
@@ -107,37 +109,51 @@
 					</span>
 				</div>
 
-				<c:if test="<%= editable && MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
+				<c:if test="<%= editable %>">
 					<div style="float: right;">
 						<table border="0" cellpadding="0" cellspacing="0">
 						<tr>
+							<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
+								<td>
+									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
+										<portlet:param name="struts_action" value="/message_boards/edit_message" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
+										<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
+										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
+									</portlet:renderURL>
+
+									<liferay-ui:icon image="reply" url="<%= replyURL %>" />
+
+									<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
+								</td>
+								<td style="padding-left: 15px;"></td>
+								<td>
+									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
+										<portlet:param name="struts_action" value="/message_boards/edit_message" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
+										<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
+										<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
+										<portlet:param name="quote" value="true" />
+									</portlet:renderURL>
+
+									<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
+
+									<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
+								</td>
+								<td style="padding-left: 15px;"></td>
+							</c:if>
+
 							<td>
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="replyURL">
-									<portlet:param name="struts_action" value="/message_boards/edit_message" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
-									<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
-									<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
-								</portlet:renderURL>
 
-								<liferay-ui:icon image="reply" url="<%= replyURL %>" />
+								<%
+								String topHREF = "javascript: " + renderResponse.getNamespace() + "scrollIntoView('0');";
+								%>
 
-								<a href="<%= replyURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply") %></a>
-							</td>
-							<td style="padding-left: 15px;"></td>
-							<td>
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="quoteURL">
-									<portlet:param name="struts_action" value="/message_boards/edit_message" />
-									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="categoryId" value="<%= message.getCategoryId() %>" />
-									<portlet:param name="threadId" value="<%= message.getThreadId() %>" />
-									<portlet:param name="parentMessageId" value="<%= message.getMessageId() %>" />
-									<portlet:param name="quote" value="true" />
-								</portlet:renderURL>
+								<liferay-ui:icon image="top" url="<%= topHREF %>" />
 
-								<liferay-ui:icon image="quote" url="<%= quoteURL %>" />
-
-								<a href="<%= quoteURL.toString() %>"><%= LanguageUtil.get(pageContext, "reply-with-quote") %></a>
+								<a href="<%= topHREF %>"><%= LanguageUtil.get(pageContext, "top") %></a>
 							</td>
 						</tr>
 						</table>

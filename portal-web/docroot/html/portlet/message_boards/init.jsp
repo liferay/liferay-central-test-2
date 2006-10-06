@@ -52,6 +52,7 @@
 --%><%@ page import="com.liferay.portlet.messageboards.util.MBUtil" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.ThreadHits" %><%--
 --%><%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %><%--
+--%><%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %><%--
 
 --%><%@ page import="org.apache.lucene.document.Document" %><%--
 
