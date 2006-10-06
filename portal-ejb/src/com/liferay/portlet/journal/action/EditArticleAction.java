@@ -274,6 +274,14 @@ public class EditArticleAction extends PortletAction {
 
 		String companyId = PortalUtil.getCompanyId(req);
 
+		String plid = layout.getPlid();
+
+		String groupId = ParamUtil.getString(req, "groupId");
+
+		if (Validator.isNotNull(groupId)) {
+			plid = Layout.PUBLIC + groupId + ".1";
+		}
+
 		String articleId = ParamUtil.getString(req, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(req, "autoArticleId");
 
@@ -346,14 +354,14 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				articleId, autoArticleId, layout.getPlid(), title, description,
-				content, type, structureId, templateId, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, expirationDateMonth, expirationDateDay,
-				expirationDateYear, expirationDateHour, expirationDateMinute,
-				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
-				reviewDateHour, reviewDateMinute, neverReview, images,
-				articleURL, req.getPreferences(), addCommunityPermissions,
+				articleId, autoArticleId, plid, title, description, content,
+				type, structureId, templateId, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, images, articleURL,
+				req.getPreferences(), addCommunityPermissions,
 				addGuestPermissions);
 		}
 		else {
