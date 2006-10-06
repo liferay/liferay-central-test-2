@@ -35,7 +35,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 import com.liferay.util.xml.XMLFormatter;
 
 import com.thoughtworks.xstream.XStream;
-import com.thoughtworks.xstream.io.xml.Dom4JDriver;
 
 import java.io.StringReader;
 
@@ -118,6 +117,8 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
 
+			XStream xStream = new XStream();
+
 			Document doc = reader.read(new StringReader(data));
 
 			Element root = doc.getRootElement();
@@ -129,8 +130,6 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 			Document tempDoc = DocumentHelper.createDocument();
 
 			tempDoc.content().add(el.createCopy());
-
-			XStream xStream = new XStream(new Dom4JDriver());
 
 			List articles = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
@@ -153,8 +152,6 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			xStream = new XStream(new Dom4JDriver());
-
 			List structures = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
 
@@ -175,8 +172,6 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 			tempDoc = DocumentHelper.createDocument();
 
 			tempDoc.content().add(el.createCopy());
-
-			xStream = new XStream(new Dom4JDriver());
 
 			List templates = (List)xStream.fromXML(
 				XMLFormatter.toString(tempDoc));
