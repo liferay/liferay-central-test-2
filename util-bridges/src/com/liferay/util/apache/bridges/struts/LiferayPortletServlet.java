@@ -32,7 +32,6 @@ import org.apache.portals.bridges.struts.PortletServlet;
  * <a href="LiferayPortletServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class LiferayPortletServlet extends PortletServlet {
