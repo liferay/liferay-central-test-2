@@ -1284,6 +1284,13 @@
 			<forward name="portlet.words.view" path="portlet.words.view" />
 		</action>
 
+		<!-- Workflow -->
+
+		<action path="/workflow/view" type="com.liferay.portlet.workflow.action.ViewAction">
+			<forward name="portlet.workflow.error" path="portlet.workflow.error" />
+			<forward name="portlet.workflow.view" path="portlet.workflow.view" />
+		</action>
+
 		<!-- WSRP Consumer -->
 
 		<action path="/wsrp/edit" forward="/portlet/wsrp/edit.jsp" />
