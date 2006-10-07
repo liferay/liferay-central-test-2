@@ -191,5 +191,21 @@
 				</then>
 			</elseif>
 		</if>
+
+		<if>
+			<equals arg1="${war.file}" arg2="tunnel-web" />
+			<then>
+				<java
+					classname="com.liferay.portal.tools.WSDDMerger"
+					classpathref="project.classpath"
+					fork="true"
+					maxmemory="256m"
+					newenvironment="true"
+				>
+					<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
+					<arg value="${war.file.dest}/WEB-INF/server-config.wsdd" />
+				</java>
+			</then>
+		</if>
 	</target>
 </project>
