@@ -25,9 +25,11 @@ package com.liferay.jbi.util;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
 
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.URLEncoder;
 
 import java.util.Iterator;
 
@@ -73,7 +75,13 @@ public class URLTransformComponent extends TransformComponentSupport {
 			url.append("&");
 			url.append(key);
 			url.append("=");
-			url.append(value);
+
+			try {
+				url.append(URLEncoder.encode(value, "utf-8"));
+			}
+			catch (UnsupportedEncodingException uee) {
+				throw new MessagingException(uee.getMessage());
+			}
 		}
 
 		StringBuffer result = new StringBuffer();
