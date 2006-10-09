@@ -2765,17 +2765,30 @@ public class ServiceBuilder {
 		}
 
 		sb.append("public List findAll() throws SystemException {");
+		sb.append("return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);");
+		sb.append("}");
+
+		sb.append("public List findAll(int begin, int end) throws SystemException {");
+		sb.append("return findAll(begin, end, null);");
+		sb.append("}");
+
+		sb.append("public List findAll(int begin, int end, OrderByComparator obc) throws SystemException {");
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
 		sb.append("StringBuffer query = new StringBuffer();");
 		sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + " \");");
 
+		sb.append("if (obc != null) {");
+		sb.append("query.append(\"ORDER BY \" + obc.getOrderBy());");
+		sb.append("}");
+
 		EntityOrder order = entity.getOrder();
 
 		if (order != null) {
 			List orderList = order.getColumns();
 
+			sb.append("else {");
 			sb.append("query.append(\"ORDER BY \");");
 
 			for (int j = 0; j < orderList.size(); j++) {
@@ -2790,11 +2803,13 @@ public class ServiceBuilder {
 					sb.append(";");
 				}
 			}
+
+			sb.append("}");
 		}
 
 		sb.append("Query q = session.createQuery(query.toString());");
 		sb.append("q.setCacheable(true);");
-		sb.append("return q.list();");
+		sb.append("return QueryUtil.list(q, getDialect(), begin, end);");
 		sb.append("}");
 		sb.append("catch (HibernateException he) {");
 		sb.append("throw new SystemException(he);");

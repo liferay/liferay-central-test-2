@@ -1051,6 +1051,15 @@ public class WikiPagePersistence extends BasePersistence {
 	}
 
 	public List findAll() throws SystemException {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List findAll(int begin, int end) throws SystemException {
+		return findAll(begin, end, null);
+	}
+
+	public List findAll(int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -1058,15 +1067,21 @@ public class WikiPagePersistence extends BasePersistence {
 
 			StringBuffer query = new StringBuffer();
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage ");
-			query.append("ORDER BY ");
-			query.append("nodeId ASC").append(", ");
-			query.append("title ASC").append(", ");
-			query.append("version ASC");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("nodeId ASC").append(", ");
+				query.append("title ASC").append(", ");
+				query.append("version ASC");
+			}
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
-			return q.list();
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

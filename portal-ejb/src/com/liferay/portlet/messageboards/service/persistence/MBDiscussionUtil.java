@@ -215,6 +215,17 @@ public class MBDiscussionUtil {
 		return getPersistence().findAll();
 	}
 
+	public static java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end);
+	}
+
+	public static java.util.List findAll(int begin, int end,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end, obc);
+	}
+
 	public static void removeByC_C(java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 

@@ -450,6 +450,15 @@ public class PermissionPersistence extends BasePersistence {
 	}
 
 	public List findAll() throws SystemException {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List findAll(int begin, int end) throws SystemException {
+		return findAll(begin, end, null);
+	}
+
+	public List findAll(int begin, int end, OrderByComparator obc)
+		throws SystemException {
 		Session session = null;
 
 		try {
@@ -458,10 +467,14 @@ public class PermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append("FROM com.liferay.portal.model.Permission ");
 
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
-			return q.list();
+			return QueryUtil.list(q, getDialect(), begin, end);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
