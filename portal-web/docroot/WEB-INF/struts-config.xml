@@ -578,6 +578,14 @@
 
 		<action path="/google/view" forward="portlet.google.view" />
 
+		<!-- Google AdSense -->
+
+		<action path="/google_adsense/edit_configuration" type="com.liferay.portlet.googleadsense.action.EditConfigurationAction">
+			<forward name="portlet.google_adsense.edit_configuration" path="portlet.google_adsense.edit_configuration" />
+		</action>
+
+		<action path="/google_adsense/view" forward="portlet.google_adsense.view" />
+
 		<!-- IFrame -->
 
 		<action path="/iframe/edit_configuration" type="com.liferay.portlet.iframe.action.EditConfigurationAction">

@@ -488,6 +488,20 @@
 		<put name="portlet_content" value="/portlet/google/view.jsp" />
 	</definition>
 
+	<!-- Google AdSense -->
+
+	<definition name="portlet.google_adsense" extends="portlet">
+		<put name="portlet_decorate" value="true" />
+	</definition>
+
+	<definition name="portlet.google_adsense.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/google_adsense/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.google_adsense.view" extends="portlet.google_adsense">
+		<put name="portlet_content" value="/portlet/google_adsense/view.jsp" />
+	</definition>
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

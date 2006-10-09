@@ -1974,6 +1974,64 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>94</portlet-name>
+		<display-name>Google AdSense</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/google_adsense/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>ad-format</name>
+				<value>2</value>
+			</preference>
+			<preference>
+				<name>ad-type</name>
+				<value>3</value>
+			</preference>
+			<preference>
+				<name>ad-client</name>
+				<value>test</value>
+			</preference>
+			<preference>
+				<name>ad-channel</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>color-border</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>color-bg</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>color-link</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>color-text</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>color-url</name>
+				<value></value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>
