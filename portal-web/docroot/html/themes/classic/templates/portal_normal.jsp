@@ -28,12 +28,12 @@
 
 <head>
 	<title><%= company.getName() + " - " + title %></title>
-	<liferay-util:include page='<%= Constants.TEXT_HTML_DIR + "/common/themes/top_head.jsp" %>' />
+	<liferay-util:include page="/html/common/themes/top_head.jsp" />
 </head>
 
 <body>
 
-<liferay-util:include page="/html/common/themes/top_warning.jsp" />
+<liferay-util:include page="/html/common/themes/top_messages.jsp" />
 
 <%@ include file="top.jsp" %>
 
@@ -67,7 +67,6 @@
 
 <liferay-util:include page="/html/common/themes/bottom-ext.jsp" />
 <liferay-util:include page="/html/common/themes/session_timeout.jsp" />
-<liferay-util:include page="/html/common/themes/sound_alerts.jsp" />
 
 </body>
 

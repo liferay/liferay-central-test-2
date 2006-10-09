@@ -22,19 +22,8 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %>
-
-<%--
 <%
-Boolean gotMail = (Boolean)request.getAttribute(WebKeys.MAIL_GOT_MAIL);
 
-if ((gotMail != null) && (gotMail.booleanValue() == true)) {
-	PortletPreferences mailPrefs = com.liferay.portlet.mail.util.MailUtil.getPreferences(request);
+// This file is deprecated.
+
 %>
-
-	<embed autostart="true" hidden="true" loop="false" src="<%= themeDisplay.getPathSound() %>/mail/new_mail_<%= mailPrefs.getValue("new-mail-notification", StringPool.BLANK) %>.wav">
-
-<%
-}
-%>
---%>

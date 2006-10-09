@@ -33,7 +33,7 @@
 
 <body id="body-bg">
 
-$taglibLiferay.include("/html/common/themes/top_warning.jsp")
+$taglibLiferay.include("/html/common/themes/top_messages.jsp")
 
 #parse("$fullTemplatesPath/top.vm")
 
@@ -62,7 +62,6 @@ $taglibLiferay.include("/html/common/themes/top_warning.jsp")
 
 $taglibLiferay.include("/html/common/themes/bottom-ext.jsp")
 $taglibLiferay.include("/html/common/themes/session_timeout.jsp")
-$taglibLiferay.include("/html/common/themes/sound_alerts.jsp")
 
 </body>
 

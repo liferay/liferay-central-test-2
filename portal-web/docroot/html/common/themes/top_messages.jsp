@@ -66,3 +66,293 @@
 	</tr>
 	</table>
 </c:if>
+
+
+
+
+
+
+<style type="text/css">
+	#alert-table {
+		margin:auto;
+		margin-top:100px;
+		background:white;
+		width:300px;
+		border:1px solid black;
+	}
+
+	#warning {
+		filter:progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/common/grey.png', sizingMethod='scale');
+	}
+</style>
+
+<script type="text/javascript">
+	function killAlert(action) {
+		document.getElementById("warning").style.display = "none";
+
+		function() {action};
+	}
+
+function fireMessageBox(modal, message, okAction, cancelAction) {
+	var background = document.createElement("div");
+
+	background.setAttribute("id", "warning");
+	background.style.width = "100%";
+	background.style.position = "absolute";
+	background.style.top = "0";
+	background.style.left = "0";
+	background.style.zIndex = "99";
+
+	var height1 = document.getElementById("layout-outer-side-decoration").offsetHeight;
+	var height2 = document.body.clientHeight;
+
+	if (height1 > height2) {
+		background.style.height=height1;
+	}
+	else {
+		background.style.height=height2;
+	}
+
+	if (modal == true) {
+		if (navigator.appName != "Microsoft Internet Explorer") {
+			background.style.background = "url('<%= themeDisplay.getPathThemeImage() %>/common/grey.png')";
+		}
+
+		if (document.getElementsByTagName("body")) {
+				var body    = document.getElementsByTagName("body")[0];
+				mytable     = document.createElement("table");
+				mytable.setAttribute("id","alert-table");
+		        mytablebody = document.createElement("tbody");
+		
+		// Message Row Start
+		
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.setAttribute("align","center");
+		        mycurrent_cell.colSpan="2";
+		        
+		        mycurrent_cell.innerHTML=message;
+		        mycurrent_row.appendChild(mycurrent_cell);
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		// Message Row End
+		
+		// Button Row Start        
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.width="50%";
+
+				var ok = "<input type='button' value='<%= LanguageUtil.get(pageContext, "ok") %>' onClick='killAlert(\" "+okAction+" \");' /> ";
+				
+				
+				mycurrent_cell.innerHTML=ok;
+				
+				mycurrent_row.appendChild(mycurrent_cell);
+				
+				var mycurrent_cell2 = document.createElement("td");
+				
+				var cancel = "<input type='button' value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick='killAlert(\" "+cancelAction+" \");' /> ";
+				
+				mycurrent_cell2.innerHTML=cancel;
+				
+				mycurrent_row.setAttribute('align','center');
+		        mycurrent_row.appendChild(mycurrent_cell2);
+		
+		        mytablebody.appendChild(mycurrent_row);
+		
+		// Button Row End        
+		        
+		        mytable.appendChild(mytablebody);
+		        mytable.setAttribute("border","0");
+					
+		        background.appendChild(mytable);
+				
+				body.appendChild(background);
+				
+			}
+		}
+
+if (modal == false) {
+	if (document.getElementsByTagName("body")) {
+				var body    = document.getElementsByTagName("body")[0];
+				mytable     = document.createElement("table");
+				mytable.setAttribute("id","alert-table");
+		        mytablebody = document.createElement("tbody");
+		
+		// Message Row Start
+		
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.setAttribute("align","center");
+		        mycurrent_cell.colSpan="2";
+		        
+		        mycurrent_cell.innerHTML=message;
+		        mycurrent_row.appendChild(mycurrent_cell);
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		// Message Row End
+		
+		// Button Row Start        
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.width="50%";
+
+				var ok = "<input type='button' value='<%= LanguageUtil.get(pageContext, "ok") %>' onClick='killAlert(\" "+okAction+" \");' /> ";
+				
+				
+				mycurrent_cell.innerHTML=ok;
+				
+				mycurrent_row.appendChild(mycurrent_cell);
+				
+				var mycurrent_cell2 = document.createElement("td");
+				
+				var cancel = "<input type='button' value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick='killAlert(\" "+cancelAction+" \");' /> ";
+				
+				mycurrent_cell2.innerHTML=cancel;
+				
+				mycurrent_row.setAttribute('align','center');
+		        mycurrent_row.appendChild(mycurrent_cell2);
+		
+		        mytablebody.appendChild(mycurrent_row);
+		
+		// Button Row End        
+		        
+		        mytable.appendChild(mytablebody);
+		        mytable.setAttribute("border","0");
+					
+		        background.appendChild(mytable);
+				
+				body.appendChild(background);
+				
+			}
+		}
+	}
+
+function firePopup(modal, message, okAction) {
+	
+var background = document.createElement("div");
+background.setAttribute("id","warning");
+background.style.width="100%";
+background.style.position="absolute";
+background.style.top="0";
+background.style.left="0";
+background.style.zIndex="99";
+	
+var height1 = document.getElementById('layout-outer-side-decoration').offsetHeight;
+var height2 = document.body.clientHeight;
+
+if (height1 > height2) {
+	background.style.height=height1;
+}
+else {
+	background.style.height=height2;
+}
+
+if (modal == true) {
+	
+	if (navigator.appName != "Microsoft Internet Explorer") {
+			background.style.background="url('/html/common/themes/images/grey.png')";
+	}
+	
+		if (document.getElementsByTagName("body")) {
+				var body    = document.getElementsByTagName("body")[0];
+				mytable     = document.createElement("table");
+				mytable.setAttribute("id","alert-table");
+		        mytablebody = document.createElement("tbody");
+		
+		// Message Row Start
+		
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.setAttribute("align","center");
+		        
+		        mycurrent_cell.innerHTML=message;
+		        mycurrent_row.appendChild(mycurrent_cell);
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		// Message Row End
+		
+		// Button Row Start        
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        
+		        var ok = document.createElement('input');
+				ok.setAttribute('type','button');
+				ok.setAttribute('name','Ok');
+				ok.setAttribute('value','Ok');
+				var ok = "<input type='button' value='<%= LanguageUtil.get(pageContext, "ok") %>' onClick='killAlert(\" "+okAction+" \");' /> ";
+				
+				mycurrent_cell.innerHTML=ok;
+				
+				mycurrent_row.appendChild(mycurrent_cell);
+				
+				mycurrent_row.setAttribute('align','center');
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		
+		// Button Row End        
+		        
+		        mytable.appendChild(mytablebody);
+		        background.appendChild(mytable);
+		        
+		        mytable.setAttribute("border","0");
+				
+				body.appendChild(background);
+				
+			}
+		}
+
+if (modal == false) {
+	
+	var killAlert = "document.getElementById('warning').style.display='none';";
+	
+		if (document.getElementsByTagName("body")) {
+				var body    = document.getElementsByTagName("body")[0];
+				mytable     = document.createElement("table");
+				mytable.setAttribute("id","alert-table");
+		        mytablebody = document.createElement("tbody");
+		
+		// Message Row Start
+		
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        mycurrent_cell.setAttribute("colspan","2");
+		        mycurrent_cell.setAttribute("align","center");
+		        
+		        mycurrent_cell.innerHTML=message;
+		        mycurrent_row.appendChild(mycurrent_cell);
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		// Message Row End
+		
+		// Button Row Start        
+		        mycurrent_row  = document.createElement("tr");
+		        mycurrent_cell = document.createElement("td");
+		        
+		        var ok = document.createElement('input');
+				ok.setAttribute('type','button');
+				ok.setAttribute('name','Ok');
+				ok.setAttribute('value','Ok');
+				var ok = "<input type='button' value='<%= LanguageUtil.get(pageContext, "ok") %>' onClick='killAlert(\" "+okAction+" \");' /> ";
+				
+				mycurrent_cell.innerHTML=ok;
+				
+				mycurrent_row.appendChild(mycurrent_cell);
+				
+				mycurrent_row.setAttribute('align','center');
+		        
+		        mytablebody.appendChild(mycurrent_row);
+		
+		// Button Row End   
+		        
+		        mytable.appendChild(mytablebody);
+		        background.appendChild(mytable);
+		        
+		        mytable.setAttribute("border","0");	
+				
+				body.appendChild(background);
+				
+			}
+		}
+	}
+</script>
