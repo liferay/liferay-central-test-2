@@ -423,6 +423,11 @@
 		<struts-path>workflow</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>94</portlet-name>
+		<struts-path>google_adsense</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
