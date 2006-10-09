@@ -89,7 +89,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		prefs.setValue("src", src);
 
-		prefs.setValue("auth", Boolean.toString(auth));
+		prefs.setValue("auth", String.valueOf(auth));
 		prefs.setValue("auth-type", authType);
 		prefs.setValue("form-method", formMethod);
 		prefs.setValue("user-name", userName);

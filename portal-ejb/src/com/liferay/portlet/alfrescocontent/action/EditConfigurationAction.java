@@ -73,7 +73,7 @@ public class EditConfigurationAction extends PortletAction {
 		prefs.setValue("user-id", userId);
 		prefs.setValue("password", password);
 		prefs.setValue("uuid", uuid);
-		prefs.setValue("maximize-links", Boolean.toString(maximizeLinks));
+		prefs.setValue("maximize-links", String.valueOf(maximizeLinks));
 
 		prefs.store();
 
