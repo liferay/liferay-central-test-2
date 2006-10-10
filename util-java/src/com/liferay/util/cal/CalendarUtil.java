@@ -188,6 +188,7 @@ public class CalendarUtil {
 		int year = cal.get(Calendar.YEAR) - 1600;
 
 		int month = cal.get(Calendar.MONTH) + 1;
+
 		if (month < 3) {
 			month += 12;
 		}

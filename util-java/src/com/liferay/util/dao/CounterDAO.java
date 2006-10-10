@@ -56,6 +56,7 @@ public class CounterDAO {
 			con = DataAccess.getConnection(location);
 
 			StringBuffer query = new StringBuffer();
+
 			query.append(
 				"SELECT currentId FROM " + tableName + " WHERE name = ?");
 
@@ -71,7 +72,7 @@ public class CounterDAO {
 
 			if (currentId == 0) {
 				ps = con.prepareStatement(
-						"INSERT INTO " + tableName +
+					"INSERT INTO " + tableName +
 						" (name, currentId) VALUES (?, ?)");
 
 				ps.setString(1, rowName);
@@ -81,7 +82,7 @@ public class CounterDAO {
 			}
 			else {
 				ps = con.prepareStatement(
-						"UPDATE " + tableName +
+					"UPDATE " + tableName +
 						" SET currentId = ? WHERE name = ?");
 
 				ps.setLong(1, ++currentId);
@@ -118,6 +119,7 @@ public class CounterDAO {
 			con = DataAccess.getConnection(location);
 
 			StringBuffer update = new StringBuffer();
+
 			update.append("DELETE FROM " + tableName + " WHERE name = ?");
 
 			ps = con.prepareStatement(update.toString());
