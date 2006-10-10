@@ -63,7 +63,7 @@ public class CyrusHook implements Hook {
 
 					if (leaveCopy) {
 						sb.append(":0 c\n");
-						sb.append("| $DELIVER -e -a $USER -m user.$USER");
+						sb.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
 					}
 
 					sb.append(":0\n");
