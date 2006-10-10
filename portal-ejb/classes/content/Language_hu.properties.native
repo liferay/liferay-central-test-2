@@ -120,6 +120,7 @@ warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, y
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
 x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} is not approved, does not have any content, or no longer exists.
 x-users-were-successfully-notified={0} users were successfully notified.
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=You can email users that have been manually added to the database. These users should all have {0} as their password. Launching users will reset those new users with a random password and will notify them of their new account status on the portal.
 you-can-now-check-for-new-messages-in-your-x=You can now check for new messages in your {0}.
 you-cannot-edit-this-page-because-it-was-locked-by-x-on-x=You cannot edit this page because it was locked by {0} on {1}.

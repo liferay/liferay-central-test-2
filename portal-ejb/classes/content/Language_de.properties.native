@@ -2265,6 +2265,7 @@ years=Jahre
 yes=Ja
 yesterday=Gestern
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Sie können eine E-Mail an Nutzer verschicken, die Sie manuell zur Datenbank hinzugefügt haben. Die Nutzer müssen alle {0} als Passwort haben. Durch Inbetriebnahme der Konten wird ein zufällig generiertes Passwort eingesetzt und der Nutzer wird über den neuen Status seines Kontos informiert.
 you-can-now-check-for-new-messages-in-your-x=Sie können jetzt nach neuen Nachrichten in Ihrer {0} schauen.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=Sie können keinen Vorlagenbasierten Artikel hinzufügen, wenn der Artikel mit einer Struktur ohne Templates verknüpft wird. Bitte wählen Sie eine andere Struktur oder fügen Sie eine Vorlage zur gewählten Stuktur hinzu.

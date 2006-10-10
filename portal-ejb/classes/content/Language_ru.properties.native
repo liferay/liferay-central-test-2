@@ -2057,6 +2057,7 @@ years=Лет
 yes=Да
 yesterday=Вчера
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Вы можете отправить email пользователям, которые были добавлены вручную. Эти пользователи будут иметь {0} как их пароль. Пользователи с обнуленным или сгенерированным паролем будут уведомлены о своем новом статусе профиля на портале.
 you-can-now-check-for-new-messages-in-your-x=Вы можете сейчас проверить новые сообщения в вашем {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=Вы не можете добавить шаблон на статью если статья ассоциирована со структурой, которая не имеет шаблонов. Пожалуйста выберите другую структуру и добавьте шаблон к выбранной структуре.

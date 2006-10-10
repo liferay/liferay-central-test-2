@@ -2172,6 +2172,7 @@ years=سنوات
 yes=نعم
 yesterday=أمس
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=يمكنك المراسلة إلكترونيا للمستخدمين المضافين يدويا إلى قاعدة البيانات. يجب أن تكون كلمة السر لهؤلاء المستخدمون ة. عند إقلاع المستخدمون سيتم تغيير كلمة السر عشوائيا وإعلامهم بحالة حسابهم من خلال الموقع.
 you-can-now-check-for-new-messages-in-your-x=يمكنك الآن متابعة رسائلك الجديدة في {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=لا يمكنك إضافة مقال معتمد على قالب إذا كان المقال مربوط بهيكل غير محتوي علي قوالب. الرجاء إختيار هيكل آخر أو إضافة قالب للهيكل المختار.

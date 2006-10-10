@@ -2261,6 +2261,7 @@ years=年
 yes=はい
 yesterday=昨日
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=You can email users that have been manually added to the database. These users should all have {0} as their password. Launching users will reset those new users with a random password and will notify them of their new account status on the portal.
 you-can-now-check-for-new-messages-in-your-x=You can now check for new messages in your {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=記事が型板がない構造と関連付けられれば型板によって運転される記事を加えることができない。別の構造を選ぶか、またはあなたの指定構造に型板を加えなさい。

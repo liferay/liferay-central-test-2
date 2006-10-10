@@ -2263,6 +2263,7 @@ years=년
 yes=그렇다
 yesterday=어제
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=You can email users that have been manually added to the database. These users should all have {0} as their password. Launching users will reset those new users with a random password and will notify them of their new account status on the portal.
 you-can-now-check-for-new-messages-in-your-x=You can now check for new messages in your {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=기사가 템플렛이 있지 않는 구조에는에 회합되면 너는 템플렛에 의하여 몰는 기사를 추가할. 다른 구조를 선택하나 너의 선정한 구조에 템플렛을 추가하십시요.

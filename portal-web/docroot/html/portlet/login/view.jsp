@@ -24,86 +24,100 @@
 
 <%@ include file="/html/portlet/login/init.jsp" %>
 
-<c:if test="<%= !themeDisplay.isSignedIn() %>">
+<c:choose>
+	<c:when test="<%= themeDisplay.isSignedIn() %>">
 
-	<%
-	String login = LoginAction.getLogin(request, "login", company);
-	String password = StringPool.BLANK;
-	boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-	%>
+		<%
+		String signedInAs = user.getFullName();
 
-	<form action="<portlet:actionURL><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-	<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>">
+		if (themeDisplay.isShowMyAccountIcon()) {
+			signedInAs = "<a href=\"" + themeDisplay.getURLMyAccount().toString() + "\">" + signedInAs + "</a>";
+		}
+		%>
 
-	<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
-	<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
-	<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
-	<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
-	<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
+		<%= LanguageUtil.format(pageContext, "you-are-signed-in-as-x", signedInAs) %>
+	</c:when>
+	<c:otherwise>
 
-	<table border="0" cellpadding="0" cellspacing="0">
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "login") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<input class="form-text" name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "password") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<input class="form-text" name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
-		</td>
-	</tr>
+		<%
+		String login = LoginAction.getLogin(request, "login", company);
+		String password = StringPool.BLANK;
+		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
+		%>
 
-	<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+		<form action="<portlet:actionURL><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>">
+
+		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
+		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />
+		<liferay-ui:error exception="<%= NoSuchUserException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= UserEmailAddressException.class %>" message="please-enter-a-valid-login" />
+		<liferay-ui:error exception="<%= UserPasswordException.class %>" message="please-enter-a-valid-password" />
+
+		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<span style="font-size: xx-small;">
-				<%= LanguageUtil.get(pageContext, "remember-me") %>
-				</span>
+				<%= LanguageUtil.get(pageContext, "login") %>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input <%= rememberMe ? "checked" : "" %> type="checkbox"
-					onClick="
-						if (this.checked) {
-							document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'on';
-						}
-						else {
-							document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'off';
-						}"
-				>
+				<input class="form-text" name="<portlet:namespace />login" style="width: 120px;" type="text" value="<%= login %>">
 			</td>
 		</tr>
-	</c:if>
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "password") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<input class="form-text" name="<portlet:namespace />password" style="width: 120px;" type="password" value="<%= password %>">
+			</td>
+		</tr>
 
-	</table>
+		<c:if test="<%= company.isAutoLogin() && !request.isSecure() %>">
+			<tr>
+				<td>
+					<span style="font-size: xx-small;">
+					<%= LanguageUtil.get(pageContext, "remember-me") %>
+					</span>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<input <%= rememberMe ? "checked" : "" %> type="checkbox"
+						onClick="
+							if (this.checked) {
+								document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'on';
+							}
+							else {
+								document.<portlet:namespace />fm.<portlet:namespace />rememberMe.value = 'off';
+							}"
+					>
+				</td>
+			</tr>
+		</c:if>
 
-	<br>
+		</table>
 
-	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
+		<br>
 
-	<c:if test="<%= company.isStrangers() %>">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.MY_ACCOUNT %>"><liferay-portlet:param name="struts_action" value="/my_account/create_account" /></liferay-portlet:renderURL>';">
-	</c:if>
+		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
-	<c:if test="<%= company.isSendPassword() %>">
-		<br><br>
+		<c:if test="<%= company.isStrangers() %>">
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.MY_ACCOUNT %>"><liferay-portlet:param name="struts_action" value="/my_account/create_account" /></liferay-portlet:renderURL>';">
+		</c:if>
 
-		<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
-		<%= LanguageUtil.get(pageContext, "forgot-password") %>?
-		</a>
-	</c:if>
+		<c:if test="<%= company.isSendPassword() %>">
+			<br><br>
 
-	</form>
+			<a href="<%= themeDisplay.getPathMain() %>/portal/login?tabs1=forgot-password" style="font-size: xx-small;">
+			<%= LanguageUtil.get(pageContext, "forgot-password") %>?
+			</a>
+		</c:if>
 
-	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />login.focus();
-	</script>
-</c:if>
+		</form>
+
+		<script type="text/javascript">
+			document.<portlet:namespace />fm.<portlet:namespace />login.focus();
+		</script>
+	</c:otherwise>
+</c:choose>

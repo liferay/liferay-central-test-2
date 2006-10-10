@@ -2263,6 +2263,7 @@ years=几年
 yes=是
 yesterday=昨天
 ym=雅虎即时通讯
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=您可以发邮件给资料库中的使用者. 这些使用者应该有 {0} 当作他们的新密码. 新使用者会重设随机密码, 且通知他们新帐号的状态.
 you-can-now-check-for-new-messages-in-your-x=您现在可以在 {0} 检查您的新消息.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=您无法新增模板驱动的文章如果文章同没有模板的结构联系在一起。请选择其它结构或新增模板来您选择的结构。

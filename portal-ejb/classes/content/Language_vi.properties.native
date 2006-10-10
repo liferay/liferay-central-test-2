@@ -1537,6 +1537,7 @@ years=Năm
 yes=Có
 yesterday=Hôm qua
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Bạn có thể mail tới người dùng mà bạn đã thêm vào cơ sở dữ liệu.Người dùng sẽ có tất cả {0} như : mật khẩu. 
 you-can-now-check-for-new-messages-in-your-x=Bạn có thể kiểm tra hòm thư trong  {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=Bạn không thể thêm bài viết kèm mẫu nếu bài viết kết hợp với cấu trúc mà không có mẫu. Xin chọn cấu trúc khác hoặc thêm mẫu vào cấu trúc lựa chọn.

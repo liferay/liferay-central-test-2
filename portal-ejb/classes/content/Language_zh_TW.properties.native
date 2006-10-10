@@ -2265,6 +2265,7 @@ years=幾年
 yes=是
 yesterday=昨天
 ym=雅虎即時通訊
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=您可以電郵給資料庫中的使用者. 這些使用者應該有 {0} 當作他們的新密碼. 新使用者會重設隨機密碼, 且通知他們新帳號的狀態.
 you-can-now-check-for-new-messages-in-your-x=您現在可以在 {0} 檢查您的新訊息.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=您無法新增範本被駕駛的文章如果文章同沒有範本的結構聯繫在一起。請選擇其它結構或新增範本來您選擇的結構。

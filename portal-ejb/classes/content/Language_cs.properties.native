@@ -1543,6 +1543,7 @@ years=Roky
 yes=Ano
 yesterday=Včera
 ym=YM
+you-are-signed-in-as-x=You are signed in as {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=Můžete obeslat uživatele kteří byli automaticky přidání do databáze. Tito uživatelé mají {0} jako jejich heslo. Zprovoznění těchto uživatelů zresetuje nové uživatele s náhodným heslem a informuje je o jejich novém účtu v portálu.
 you-can-now-check-for-new-messages-in-your-x=Nyní můžete zkontrolovat nové zprávy ve Vašem  {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=nemůžete přidat článek založený na šabloně pokud je článek asociován se strukturou která nemá žádné šablony. Prosím vyberte jinou strukturu nebo přidejte šablonu do zvolené struktury.
