@@ -39,17 +39,23 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId
 
 <%= content %><br>
 
-<%
-for (int i = 0; i < hitLayoutIds.size(); i++) {
-	String hitLayoutId = (String)hitLayoutIds.get(i);
+<c:if test="<%= hitLayoutIds.size() > 0 %>">
+	<span style="font-size: xx-small;">
 
-	Layout hitLayout = LayoutLocalServiceUtil.getLayout(hitLayoutId, hitOwnerId);
+	<%
+	for (int i = 0; i < hitLayoutIds.size(); i++) {
+		String hitLayoutId = (String)hitLayoutIds.get(i);
 
-	String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
-%>
+		Layout hitLayout = LayoutLocalServiceUtil.getLayout(hitLayoutId, hitOwnerId);
 
-	<br><a href="<%= hitLayoutURL %>"><%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+		String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
+	%>
 
-<%
-}
-%>
+		<br><a href="<%= hitLayoutURL %>"><%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+
+	<%
+	}
+	%>
+
+	</span>
+</c:if>

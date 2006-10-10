@@ -95,6 +95,8 @@ for (int i = 0; i < results.getLength(); i++) {
 
 	String url = rowURL.toString();
 
+	String[] urls = null;
+
 	if (Validator.isNotNull(portlet.getIndexerClass())) {
 		Indexer indexer = (Indexer)InstancePool.get(portlet.getIndexerClass());
 
@@ -106,17 +108,43 @@ for (int i = 0; i < results.getLength(); i++) {
 
 		if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
 			String articleId = doc.get("articleId");
-			String version = doc.get("version");
 
-			StringBuffer sb = new StringBuffer();
+			List contentSearches = JournalContentSearchLocalServiceUtil.getArticleContentSearches(company.getCompanyId(), articleId);
 
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/journal_articles/view_article_content?articleId=");
-			sb.append(articleId);
-			sb.append("&version=");
-			sb.append(version);
+			if (contentSearches.size() > 0) {
+				List urlsList = new ArrayList();
 
-			url = sb.toString();
+				for (int j = 0; j < contentSearches.size(); j++) {
+					JournalContentSearch contentSearch = (JournalContentSearch)contentSearches.get(j);
+
+					Layout contentSearchLayout = LayoutLocalServiceUtil.getLayout(contentSearch.getLayoutId(), contentSearch.getOwnerId());
+
+					String contentSearchUrl = PortalUtil.getLayoutURL(contentSearchLayout, themeDisplay);
+
+					urlsList.add(contentSearchUrl);
+
+					if (i == 0) {
+						url = contentSearchUrl;
+					}
+				}
+
+				if (urlsList.size() > 0) {
+					urls = (String[])urlsList.toArray(new String[0]);
+				}
+			}
+			else {
+				String version = doc.get("version");
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/journal_articles/view_article_content?articleId=");
+				sb.append(articleId);
+				sb.append("&version=");
+				sb.append(version);
+
+				url = sb.toString();
+			}
 		}
 	}
 	else {
@@ -140,11 +168,29 @@ for (int i = 0; i < results.getLength(); i++) {
 	sb.append("<i>");
 	sb.append(title);
 	sb.append("</i>");
-	sb.append("<br>");
-	sb.append("<span style=\"font-size: xx-small;\">");
+	sb.append("<br><br>");
+	//sb.append("<span style=\"font-size: x-small;\">");
 	sb.append(content);
-	sb.append("</span>");
-	sb.append("</a>");
+	//sb.append("</span>");
+	sb.append("</a><br>");
+
+	if (urls != null) {
+		sb.append("<span style=\"font-size: xx-small;\">");
+
+		for (int j = 0; j < urls.length; j++) {
+			sb.append("<br>");
+			sb.append("<a href=\"");
+			sb.append(urls[j]);
+			sb.append("\">");
+			sb.append(Http.getProtocol(request));
+			sb.append("://");
+			sb.append(company.getPortalURL());
+			sb.append(StringUtil.shorten(urls[j], 100));
+			sb.append("</a>");
+		}
+
+		sb.append("</span>");
+	}
 
 	row.addText(sb.toString());
 
