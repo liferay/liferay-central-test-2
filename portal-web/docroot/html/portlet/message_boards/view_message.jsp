@@ -166,7 +166,16 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	%>
 
 	<c:if test="<%= messages.size() > 1 %>">
-		<table border="0" cellpadding="1" cellspacing="0" id="<portlet:namespace />messageScroll0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
+		<div id="<portlet:namespace />messageScroll0" style="margin: 5px 0px 0px 0px;">
+			<liferay-ui:toggle
+				id="toggle_id_message_boards_view_message_thread"
+				onImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %>'
+				offImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %>'
+				defaultOn="true"
+			/>
+		</div>
+
+		<table border="0" cellpadding="1" cellspacing="0" id="toggle_id_message_boards_view_message_thread" width="100%" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />; margin: 5px 0px 0px 0px;">
 
 		<%
 		TreeWalker treeWalker = messageDisplay.getTreeWalker();

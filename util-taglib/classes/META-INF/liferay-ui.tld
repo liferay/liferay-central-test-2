@@ -1130,6 +1130,16 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>toggle-value</name>
+		<tagclass>com.liferay.taglib.ui.ToggleValueTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>id</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>upload-progress</name>
 		<tagclass>com.liferay.taglib.ui.UploadProgressTag</tagclass>
 		<bodycontent>JSP</bodycontent>

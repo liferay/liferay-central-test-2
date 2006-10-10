@@ -22,7 +22,7 @@
  */
 %>
 
-<div style="margin: 5px 0px 0px <%= depth * 10 %>px; border: 1px solid <%= colorScheme.getPortletFontDim() %>; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
+<div style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; margin: 5px 0px 0px <%= depth * 10 %>px; <%= BrowserSniffer.is_ie(request) ? "width: 100%;" : "" %>">
 	<table cellpadding="0" cellspacing="0" id="<portlet:namespace />messageScroll<%= message.getMessageId() %>" style="table-layout: fixed;" width="100%">
 	<tr>
 		<td class="<%= className %>" rowspan="2" style="border-right: 1px solid <%= colorScheme.getPortletFontDim() %>; vertical-align: top;" width="100">
@@ -44,7 +44,7 @@
 								String rank = MBUtil.getUserRank(portletSetup, posts);
 							%>
 
-								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width:75%;"><br>
+								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br>
 
 								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
 									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
