@@ -42,6 +42,10 @@ public interface JournalContentSearchLocalService {
 	public void deleteOwnerContentSearches(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List getArticleContentSearches(
+		java.lang.String companyId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getLayoutIds(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException;
 

@@ -145,6 +145,12 @@ public class JournalContentSearchLocalServiceImpl
 		JournalContentSearchUtil.removeByOwnerId(ownerId);
 	}
 
+	public List getArticleContentSearches(String companyId, String articleId)
+		throws SystemException {
+
+		return JournalContentSearchUtil.findByC_A(companyId, articleId);
+	}
+
 	public List getLayoutIds(String ownerId, String articleId)
 		throws SystemException {
 

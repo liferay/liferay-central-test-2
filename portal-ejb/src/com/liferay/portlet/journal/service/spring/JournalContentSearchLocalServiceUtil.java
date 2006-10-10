@@ -57,6 +57,15 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.deleteOwnerContentSearches(ownerId);
 	}
 
+	public static java.util.List getArticleContentSearches(
+		java.lang.String companyId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getArticleContentSearches(companyId,
+			articleId);
+	}
+
 	public static java.util.List getLayoutIds(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();

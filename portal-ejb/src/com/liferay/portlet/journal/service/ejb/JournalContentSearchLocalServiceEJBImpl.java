@@ -70,6 +70,12 @@ public class JournalContentSearchLocalServiceEJBImpl
 		getService().deleteOwnerContentSearches(ownerId);
 	}
 
+	public java.util.List getArticleContentSearches(
+		java.lang.String companyId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
+		return getService().getArticleContentSearches(companyId, articleId);
+	}
+
 	public java.util.List getLayoutIds(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return getService().getLayoutIds(ownerId, articleId);
