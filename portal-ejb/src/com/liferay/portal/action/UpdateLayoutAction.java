@@ -25,8 +25,10 @@ package com.liferay.portal.action;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -66,13 +68,18 @@ public class UpdateLayoutAction extends Action {
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		boolean updateLayout = true;
+		boolean deletePortletResource = false;
 
 		if (cmd.equals(Constants.ADD)) {
 			portletId = layoutTypePortlet.addPortletId(
 				req.getRemoteUser(), portletId);
 		}
 		else if (cmd.equals(Constants.DELETE)) {
-			layoutTypePortlet.removePortletId(portletId);
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				deletePortletResource = true;
+
+				layoutTypePortlet.removePortletId(portletId);
+			}
 		}
 		else if (cmd.equals("minimize")) {
 			boolean restore = ParamUtil.getBoolean(req, "p_p_restore");
@@ -106,6 +113,18 @@ public class UpdateLayoutAction extends Action {
 			LayoutServiceUtil.updateLayout(
 				layout.getLayoutId(), layout.getOwnerId(),
 				layout.getTypeSettings());
+
+			// See LEP-1411. Delay the delete of extraneous portlet resources
+			// only after the user has proven that he has the valid permissions.
+
+			if (deletePortletResource) {
+				String rootPortletId = Portlet.getRootPortletId(portletId);
+
+				ResourceLocalServiceUtil.deleteResource(
+					layout.getCompanyId(), rootPortletId, Resource.TYPE_CLASS,
+					Resource.SCOPE_INDIVIDUAL,
+					layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId);
+			}
 		}
 
 		if (ParamUtil.getBoolean(req, "refresh")) {
