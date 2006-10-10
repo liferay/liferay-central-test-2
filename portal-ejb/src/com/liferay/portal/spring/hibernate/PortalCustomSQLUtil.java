@@ -22,36 +22,24 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.StringUtil;
 
 /**
- * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalCustomSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CustomSQLUtil {
+public class PortalCustomSQLUtil
+	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
-	public static String get(String id) {
-		return _instance.get(id);
+	public PortalCustomSQLUtil() {
+		super(PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
 	}
 
-	public static String replaceAndOperator(String sql, boolean andOperator) {
-		return _instance.replaceAndOperator(sql, andOperator);
+	protected String[] getConfigs() {
+		return StringUtil.split(PropsUtil.get(PropsUtil.CUSTOM_SQL_CONFIGS));
 	}
-
-	public static String replaceIsNull(String sql) {
-		return _instance.replaceIsNull(sql);
-	}
-
-	public static String removeOrderBy(String sql) {
-		return _instance.removeOrderBy(sql);
-	}
-
-	public static String replaceOrderBy(String sql, OrderByComparator obc) {
-		return _instance.replaceOrderBy(sql, obc);
-	}
-
-	private static PortalCustomSQLUtil _instance = new PortalCustomSQLUtil();
 
 }
