@@ -27,6 +27,7 @@ import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.deploy.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.HotDeployException;
 import com.liferay.portal.kernel.deploy.HotDeployListener;
+import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.util.ClassUtil;
@@ -162,6 +163,14 @@ public class HotDeployPortletListener implements HotDeployListener {
 						portlet.getSchedulerClass()).newInstance();
 				}
 
+				PortletDataHandler portletDataHandler = null;
+
+				if (Validator.isNotNull(portlet.getPortletDataHandlerClass())) {
+					portletDataHandler =
+						(PortletDataHandler)portletClassLoader.loadClass(
+							portlet.getPortletDataHandlerClass()).newInstance();
+				}
+
 				PreferencesValidator prefsValidator = null;
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -230,8 +239,8 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
-					indexerInstance, schedulerInstance, prefsValidator,
-					resourceBundles, customUserAttributes);
+					indexerInstance, schedulerInstance, portletDataHandler,
+					prefsValidator, resourceBundles, customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}

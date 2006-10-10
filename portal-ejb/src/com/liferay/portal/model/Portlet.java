@@ -22,12 +22,16 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.servlet.PortletContextPool;
+import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.CachePortlet;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.InstancePool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -353,6 +357,28 @@ public class Portlet extends PortletModel {
 	 */
 	public void setFriendlyURLPluginClass(String friendlyURLPluginClass) {
 		_friendlyURLPluginClass = friendlyURLPluginClass;
+	}
+
+	/**
+	 * Gets the portlet data handler of the portlet.
+	 *
+	 * @return		the portlet data handler of the portlet
+	 */
+	public PortletDataHandler getPortletDataHandler() {
+		if (Validator.isNotNull(getPortletDataHandlerClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getPortletDataHandler();
+			}
+			else {
+				return (PortletDataHandler)InstancePool.get(
+					getPortletDataHandlerClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**

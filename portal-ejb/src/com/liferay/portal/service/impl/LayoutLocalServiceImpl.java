@@ -33,7 +33,8 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataException;
+import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -346,14 +347,19 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				layoutSet.getCompanyId(), portletId);
 
-			String className = portlet.getPortletDataHandlerClass();
+			PortletDataHandler portletDataHandler =
+				portlet.getPortletDataHandler();
 
-			if (Validator.isNotNull(className)) {
-				PortletDataHandler portletDataHandler =
-					(PortletDataHandler)InstancePool.get(className);
+			if (portletDataHandler != null) {
+				String data = StringPool.BLANK;
 
-				String data = portletDataHandler.exportData(
-					layoutSet.getCompanyId(), layoutSet.getGroupId());
+				try {
+					data = portletDataHandler.exportData(
+						layoutSet.getCompanyId(), layoutSet.getGroupId());
+				}
+				catch (PortletDataException pde) {
+					throw new PortalException(pde);
+				}
 
 				el = root.addElement("portlet-data");
 				el.addAttribute("portlet-id", portletId);
@@ -570,14 +576,17 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				layoutSet.getCompanyId(), portletId);
 
-			String className = portlet.getPortletDataHandlerClass();
+			PortletDataHandler portletDataHandler =
+				portlet.getPortletDataHandler();
 
-			if (Validator.isNotNull(className)) {
-				PortletDataHandler portletDataHandler =
-					(PortletDataHandler)InstancePool.get(className);
-
-				portletDataHandler.importData(
-					layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
+			if (portletDataHandler != null) {
+				try {
+					portletDataHandler.importData(
+						layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
+				}
+				catch (PortletDataException pde) {
+					throw new PortalException(pde);
+				}
 			}
 		}
 

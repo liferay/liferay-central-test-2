@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.journal.lar;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.lar.PortletDataHandler;
+import com.liferay.portal.kernel.lar.PortletDataException;
+import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -55,7 +54,7 @@ import org.dom4j.io.SAXReader;
 public class JournalPortletDataHandler implements PortletDataHandler {
 
 	public String exportData(String companyId, String groupId)
-		throws PortalException, SystemException {
+		throws PortletDataException {
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -107,12 +106,12 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 			return XMLFormatter.toString(doc);
 		}
 		catch (Exception e) {
-			throw new SystemException(e);
+			throw new PortletDataException(e);
 		}
 	}
 
 	public void importData(String companyId, String groupId, String data)
-		throws PortalException, SystemException {
+		throws PortletDataException {
 
 		try {
 			SAXReader reader = SAXReaderFactory.getInstance();
@@ -187,7 +186,7 @@ public class JournalPortletDataHandler implements PortletDataHandler {
 			}
 		}
 		catch (Exception e) {
-			throw new SystemException(e);
+			throw new PortletDataException(e);
 		}
 	}
 
