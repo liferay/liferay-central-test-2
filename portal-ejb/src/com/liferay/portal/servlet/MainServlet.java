@@ -340,7 +340,7 @@ public class MainServlet extends ActionServlet {
 
 					String className = portlet.getSchedulerClass();
 
-					if (portlet.isActive() && className != null) {
+					if (portlet.isActive() && (className != null)) {
 						Scheduler scheduler =
 							(Scheduler)InstancePool.get(className);
 
