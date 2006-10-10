@@ -23,10 +23,9 @@
 %>
 
 <tr>
-	<td>
+	<td id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
 		<br>
 
-		<input name="<%= namespace %>messageScroll<%= message.getMessageId() %>" type="hidden" value="<%= message.getMessageId() %>">
 		<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>">
 		<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>">
 	</td>
@@ -117,7 +116,7 @@
 			<c:if test="<%= i > 0 %>">
 
 				<%
-				topHREF = "javascript: " + namespace + "scrollIntoView('" + rootMessage.getMessageId() + "');";
+				topHREF = "javascript: " + namespace + "scrollIntoView('0');";
 				%>
 
 				<td style="padding-left: 15px;"></td>

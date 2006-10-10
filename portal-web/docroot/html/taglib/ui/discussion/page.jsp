@@ -75,7 +75,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 	}
 
 	function <%= namespace %>scrollIntoView(messageId) {
-		eval("document.<%= formName %>.<%= namespace %>messageScroll" + messageId + ".scrollIntoView();");
+		document.getElementById("<%= namespace %>messageScroll" + messageId).scrollIntoView();
 	}
 
 	function <%= namespace %>updateMessage(i) {
@@ -102,9 +102,7 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 <input name="<%= namespace %>subject" type="hidden" value="">
 <input name="<%= namespace %>body" type="hidden" value="">
 
-<input name="<%= namespace %>messageIdtop" type="hidden" value="">
-
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<table border="0" cellpadding="0" cellspacing="0" id="<%= namespace %>messageScroll0" width="100%">
 
 <%
 int i = 0;

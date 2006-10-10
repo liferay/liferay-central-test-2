@@ -56,7 +56,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 <script type="text/javascript">
 	function <portlet:namespace />scrollIntoView(messageId) {
-		eval("document.<portlet:namespace />fm.<portlet:namespace />messageScroll" + messageId + ".scrollIntoView();");
+		document.getElementById("<portlet:namespace />messageScroll" + messageId).scrollIntoView(true);
 	}
 </script>
 
@@ -166,9 +166,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	%>
 
 	<c:if test="<%= messages.size() > 1 %>">
-		<input name="<portlet:namespace />messageScroll0" type="hidden" value="0">
-
-		<table border="0" cellpadding="1" cellspacing="0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
+		<table border="0" cellpadding="1" cellspacing="0" id="<portlet:namespace />messageScroll0" width="100%" style="margin: 5px 0px 0px 0px; border: 1px solid <%= colorScheme.getPortletFontDim() %>;">
 
 		<%
 		TreeWalker treeWalker = messageDisplay.getTreeWalker();
