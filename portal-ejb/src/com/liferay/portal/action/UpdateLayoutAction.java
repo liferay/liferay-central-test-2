@@ -65,6 +65,8 @@ public class UpdateLayoutAction extends Action {
 
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
+		boolean updateLayout = true;
+
 		if (cmd.equals(Constants.ADD)) {
 			portletId = layoutTypePortlet.addPortletId(
 				req.getRemoteUser(), portletId);
@@ -80,6 +82,10 @@ public class UpdateLayoutAction extends Action {
 			}
 			else {
 				layoutTypePortlet.addStateMinPortletId(portletId);
+
+				if (layout.isShared()) {
+					updateLayout = false;
+				}
 			}
 		}
 		else if (cmd.equals("move")) {
@@ -96,9 +102,11 @@ public class UpdateLayoutAction extends Action {
 			layoutTypePortlet.setLayoutTemplateId(layoutTemplateId);
 		}
 
-		LayoutServiceUtil.updateLayout(
-			layout.getLayoutId(), layout.getOwnerId(),
-			layout.getTypeSettings());
+		if (updateLayout) {
+			LayoutServiceUtil.updateLayout(
+				layout.getLayoutId(), layout.getOwnerId(),
+				layout.getTypeSettings());
+		}
 
 		if (ParamUtil.getBoolean(req, "refresh")) {
 			return mapping.findForward(Constants.COMMON_REFERER);
