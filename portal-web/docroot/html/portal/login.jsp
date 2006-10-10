@@ -125,7 +125,7 @@ createAccountURL.setParameter("struts_action", "/my_account/create_account");
 
 		<%
 		String login = LoginAction.getLogin(request, "login", company);
-		String password = ParamUtil.getString(request, SessionParameters.get(request, "password"));
+		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 		%>
 

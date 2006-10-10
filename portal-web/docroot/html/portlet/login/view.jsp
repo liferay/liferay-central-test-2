@@ -28,7 +28,7 @@
 
 	<%
 	String login = LoginAction.getLogin(request, "login", company);
-	String password = ParamUtil.getString(request, "password");
+	String password = StringPool.BLANK;
 	boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
 	%>
 
