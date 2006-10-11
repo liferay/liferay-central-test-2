@@ -49,6 +49,11 @@ public class MBMessageFlagLocalServiceEJBImpl
 		return (MBMessageFlagLocalService)ctx.getBean(CLASS_NAME);
 	}
 
+	public void addReadFlags(java.util.List messages, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
+		getService().addReadFlags(messages, userId);
+	}
+
 	public void deleteFlags(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		getService().deleteFlags(userId);

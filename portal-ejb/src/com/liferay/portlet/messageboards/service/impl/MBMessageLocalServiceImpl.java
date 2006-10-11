@@ -47,13 +47,11 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
-import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFinder;
-import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
@@ -656,25 +654,6 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(
 			message.getCategoryId());
 
-		// Message flags are now tracked by TreeWalker
-
-		/*if (userId != null) {
-			MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
-				message.getTopicId(), message.getMessageId(), userId);
-
-			try {
-				MBMessageFlagUtil.findByPrimaryKey(messageFlagPK);
-			}
-			catch (NoSuchMessageFlagException nsmfe) {
-				MBMessageFlag messageFlag =
-					MBMessageFlagUtil.create(messageFlagPK);
-
-				messageFlag.setFlag(MBMessageFlag.READ_FLAG);
-
-				MBMessageFlagUtil.update(messageFlag);
-			}
-		}*/
-
 		MBMessage parentMessage = null;
 
 		if (message.isReply()) {
@@ -735,28 +714,6 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws SystemException {
 
 		List messages = MBMessageUtil.findByThreadId(threadId);
-
-		if (userId != null) {
-			Iterator itr = messages.iterator();
-
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
-
-				MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
-					message.getTopicId(), message.getMessageId(), userId);
-
-				MBMessageFlag messageFlag =
-					MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);
-
-				if (messageFlag == null) {
-					messageFlag = MBMessageFlagUtil.create(messageFlagPK);
-
-					messageFlag.setFlag(MBMessageFlag.READ_FLAG);
-
-					MBMessageFlagUtil.update(messageFlag);
-				}
-			}
-		}
 
 		Collections.sort(messages, comparator);
 

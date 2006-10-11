@@ -162,7 +162,13 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 <div>
 
 	<%
-	List messages = MBMessageLocalServiceUtil.getThreadMessages(message.getThreadId(), request.getRemoteUser(), new MessageCreateDateComparator(true));
+	TreeWalker treeWalker = messageDisplay.getTreeWalker();
+
+	List messages = new ArrayList();
+
+	messages.addAll(treeWalker.getMessages());
+
+	Collections.sort(messages, new MessageCreateDateComparator(true));
 	%>
 
 	<c:if test="<%= messages.size() > 1 %>">
@@ -178,8 +184,6 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		<table border="0" cellpadding="1" cellspacing="0" id="toggle_id_message_boards_view_message_thread" width="100%" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />; margin: 5px 0px 0px 0px;">
 
 		<%
-		TreeWalker treeWalker = messageDisplay.getTreeWalker();
-
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
 		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
@@ -219,6 +223,10 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 </div>
 
 </form>
+
+<%
+MBMessageFlagLocalServiceUtil.addReadFlags(messages, request.getRemoteUser());
+%>
 
 <%!
 private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message.jsp");

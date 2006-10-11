@@ -29,6 +29,12 @@ package com.liferay.portlet.messageboards.service.spring;
  *
  */
 public class MBMessageFlagLocalServiceUtil {
+	public static void addReadFlags(java.util.List messages,
+		java.lang.String userId) throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+		mbMessageFlagLocalService.addReadFlags(messages, userId);
+	}
+
 	public static void deleteFlags(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();

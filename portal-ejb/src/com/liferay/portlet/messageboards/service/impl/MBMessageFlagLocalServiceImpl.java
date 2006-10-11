@@ -29,6 +29,9 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
 
+import java.util.Iterator;
+import java.util.List;
+
 /**
  * <a href="MBMessageFlagLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -38,6 +41,32 @@ import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServic
  */
 public class MBMessageFlagLocalServiceImpl
 	implements MBMessageFlagLocalService {
+
+	public void addReadFlags(List messages, String userId)
+		throws SystemException {
+
+		if (userId != null) {
+			Iterator itr = messages.iterator();
+
+			while (itr.hasNext()) {
+				MBMessage message = (MBMessage)itr.next();
+
+				MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
+					message.getTopicId(), message.getMessageId(), userId);
+
+				MBMessageFlag messageFlag =
+					MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);
+
+				if (messageFlag == null) {
+					messageFlag = MBMessageFlagUtil.create(messageFlagPK);
+
+					messageFlag.setFlag(MBMessageFlag.READ_FLAG);
+
+					MBMessageFlagUtil.update(messageFlag);
+				}
+			}
+		}
+	}
 
 	public void deleteFlags(String userId) throws SystemException {
 		MBMessageFlagUtil.removeByUserId(userId);
