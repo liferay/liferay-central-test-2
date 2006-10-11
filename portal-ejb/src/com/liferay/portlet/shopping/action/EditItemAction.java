@@ -39,8 +39,11 @@ import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -168,7 +171,8 @@ public class EditItemAction extends PortletAction {
 			String fieldDescription = ParamUtil.getString(
 				uploadReq, "fieldDescription" + i);
 
-			ShoppingItemField itemField = new ShoppingItemField();
+			ShoppingItemField itemField = ShoppingItemFieldUtil.create(
+				StringPool.BLANK);
 
 			itemField.setName(fieldName);
 			itemField.setValues(fieldValues);
@@ -208,7 +212,8 @@ public class EditItemAction extends PortletAction {
 				status = ShoppingItemPrice.STATUS_INACTIVE;
 			}
 
-			ShoppingItemPrice itemPrice = new ShoppingItemPrice();
+			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(
+				StringPool.BLANK);
 
 			itemPrice.setMinQuantity(minQuantity);
 			itemPrice.setMaxQuantity(maxQuantity);

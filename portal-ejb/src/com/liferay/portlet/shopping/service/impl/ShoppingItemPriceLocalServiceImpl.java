@@ -29,6 +29,7 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService;
+import com.liferay.util.StringPool;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -53,9 +54,9 @@ public class ShoppingItemPriceLocalServiceImpl
 		if (itemPrices.size() == 0) {
 			itemPrices = new ArrayList();
 
-			ShoppingItemPrice itemPrice = new ShoppingItemPrice();
+			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(
+				StringPool.BLANK);
 
-			itemPrice.setItemPriceId(null);
 			itemPrice.setItemId(itemId);
 			itemPrice.setMinQuantity(item.getMinQuantity());
 			itemPrice.setMaxQuantity(item.getMaxQuantity());

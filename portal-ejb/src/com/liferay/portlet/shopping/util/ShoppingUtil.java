@@ -40,6 +40,7 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
+import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceUtil;
@@ -1050,7 +1051,7 @@ public class ShoppingUtil {
 		}
 
 		if (itemPrice == null) {
-			return new ShoppingItemPrice();
+			return ShoppingItemPriceUtil.create(StringPool.BLANK);
 		}
 
 		return itemPrice;

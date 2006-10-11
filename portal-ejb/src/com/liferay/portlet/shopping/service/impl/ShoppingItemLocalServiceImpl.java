@@ -112,7 +112,8 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 				double shipping = 0.0;
 				boolean useShippingFormula = true;
 
-				ShoppingItemPrice itemPrice = new ShoppingItemPrice();
+				ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(
+					StringPool.BLANK);
 
 				itemPrice.setMinQuantity(minQuantity);
 				itemPrice.setMaxQuantity(maxQuantity);
