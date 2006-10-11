@@ -43,7 +43,7 @@ if (treeWalker.isOdd()) {
 }
 %>
 
-<tr class="<%= className %>" style="font-size: xx-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 	<td width="90%">
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
@@ -70,7 +70,7 @@ if (treeWalker.isOdd()) {
 				<a href="<%= rowHREF %>">
 
 				<%
-				boolean readFlag = false;
+				boolean readFlag = true;
 
 				if (themeDisplay.isSignedIn()) {
 					readFlag = MBMessageFlagLocalServiceUtil.hasReadFlag(message.getMessageId(), request.getRemoteUser());
@@ -96,6 +96,10 @@ if (treeWalker.isOdd()) {
 	<td nowrap>
 		<a href="<%= rowHREF %>">
 
+		<c:if test="<%= !readFlag %>">
+			<b>
+		</c:if>
+
 		<c:choose>
 			<c:when test="<%= message.isAnonymous() %>">
 				<%= LanguageUtil.get(pageContext, "anonymous") %>
@@ -104,6 +108,10 @@ if (treeWalker.isOdd()) {
 				<%= PortalUtil.getUserName(message.getUserId(), message.getUserName()) %>
 			</c:otherwise>
 		</c:choose>
+
+		<c:if test="<%= !readFlag %>">
+			</b>
+		</c:if>
 
 		</a>
 	</td>
