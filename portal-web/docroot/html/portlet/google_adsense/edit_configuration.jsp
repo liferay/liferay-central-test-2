@@ -79,7 +79,7 @@
 			for (int i = 1; i < adFormats.length; i++) {
 			%>
 
-				<option <%= (adType == GetterUtil.getInteger(adFormats[i][0])) ? "selected" : "" %> value="<%= adFormats[i][0] %>"><%= adFormats[i][3] %></option>
+				<option <%= (adFormat == GetterUtil.getInteger(adFormats[i][0])) ? "selected" : "" %> value="<%= adFormats[i][0] %>"><%= adFormats[i][3] %></option>
 
 			<%
 			}
