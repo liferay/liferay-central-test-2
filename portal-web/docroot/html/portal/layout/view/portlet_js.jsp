@@ -39,7 +39,23 @@ var themeDisplay = {
 };
 
 function addPortlet(plid, portletId) {
-	var refreshPortletList = "";
+	var refreshPortletList = ",";
+
+	<%
+	List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
+
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		if (!portlet.isAjaxable()) {
+	%>
+
+			refreshPortletList += "<%= portlet.getPortletId() %>,";
+
+	<%
+		}
+	}
+	%>
 
 	if (refreshPortletList.match("," + portletId + ",")) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&#p_" + portletId) + "&refresh=1";

@@ -23,7 +23,7 @@ preferences-company-wide?, preferences-unique-per-layout?,
 preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
 show-portlet-inactive?, restore-current-view?, maximize-edit?, maximize-help?,
 maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
-render-weight?, system?, active?, include?)>
+render-weight?, ajaxable?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -258,8 +258,18 @@ The default value of render-weight is 1. If set to a value less than 1, the
 portlet is rendered in parallel. If set to a value of 1 or greater, then the
 portlet is rendered serially. Portlets with a greater render weight have greater
 priority and will be rendered before portlets with a lower render weight.
+
+If the ajaxable value is set to false, then render-weight is always set to 1
+if it is set to a value less than 1. This means ajaxable can override
+render-weight if ajaxable is set to false.
 -->
 <!ELEMENT render-weight (#PCDATA)>
+
+<!--
+The default value of ajaxable is true. If set to false, then this portlet can
+never be displayed via Ajax.
+-->
+<!ELEMENT ajaxable (#PCDATA)>
 
 <!--
 Set the system value to true if the portlet is a system portlet that a user

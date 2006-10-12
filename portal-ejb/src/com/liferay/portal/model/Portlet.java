@@ -156,10 +156,10 @@ public class Portlet extends PortletModel {
 				   boolean maximizeEdit, boolean maximizeHelp,
 				   boolean maximizePrint, boolean layoutCacheable,
 				   boolean instanceable, boolean privateRequestAttributes,
-				   int renderWeight, String roles, Set unlinkedRoles,
-				   Map roleMappers, boolean system, boolean active,
-				   boolean include, Map initParams, Integer expCache,
-				   Map portletModes, Set supportedLocales,
+				   int renderWeight, boolean ajaxable, String roles,
+				   Set unlinkedRoles, Map roleMappers, boolean system,
+				   boolean active, boolean include, Map initParams,
+				   Integer expCache, Map portletModes, Set supportedLocales,
 				   String resourceBundle, PortletInfo portletInfo,
 				   Set userAttributes, Map customUserAttributes,
 				   boolean warFile, List servletURLPatterns) {
@@ -190,6 +190,7 @@ public class Portlet extends PortletModel {
 		_instanceable = instanceable;
 		_privateRequestAttributes = privateRequestAttributes;
 		_renderWeight = renderWeight;
+		_ajaxable = ajaxable;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
@@ -874,6 +875,34 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Returns true if the portlet can be displayed via Ajax.
+	 *
+	 * @return		true if the portlet can be displayed via Ajax
+	 */
+	public boolean getAjaxable() {
+		return _ajaxable;
+	}
+
+	/**
+	 * Returns true if the portlet can be displayed via Ajax.
+	 *
+	 * @return		true if the portlet can be displayed via Ajax
+	 */
+	public boolean isAjaxable() {
+		return _ajaxable;
+	}
+
+	/**
+	 * Sets to true if the portlet can be displayed via Ajax.
+	 *
+	 * @param		ajaxable boolean value for whether the portlet can be
+	 *				displayed via Ajax
+	 */
+	public void setAjaxable(boolean ajaxable) {
+		_ajaxable = ajaxable;
+	}
+
+	/**
 	 * Sets a string of ordered comma delimited portlet ids.
 	 *
 	 * @param		roles a string of ordered comma delimited portlet ids
@@ -1484,12 +1513,12 @@ public class Portlet extends PortletModel {
 			isShowPortletAccessDenied(), isShowPortletInactive(),
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), getRenderWeight(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
-			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(), isWARFile(),
-			getServletURLPatterns());
+			isPrivateRequestAttributes(), getRenderWeight(), isAjaxable(),
+			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
+			isActive(), isInclude(), getInitParams(), getExpCache(),
+			getPortletModes(), getSupportedLocales(), getResourceBundle(),
+			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
+			isWARFile(), getServletURLPatterns());
 	}
 
 	/**
@@ -1639,6 +1668,11 @@ public class Portlet extends PortletModel {
 	 * Render weight of the portlet.
 	 */
 	private int _renderWeight = 1;
+
+	/**
+	 * True if the portlet can be displayed via Ajax.
+	 */
+	private boolean _ajaxable = true;
 
 	/**
 	 * An array of required roles of the portlet.

@@ -725,6 +725,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<ajaxable>false</ajaxable>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

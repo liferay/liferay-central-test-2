@@ -950,6 +950,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setRenderWeight(GetterUtil.getInteger(
 					portlet.elementText("render-weight"),
 					portletModel.getRenderWeight()));
+				portletModel.setAjaxable(GetterUtil.getBoolean(
+					portlet.elementText("ajaxable"),
+					portletModel.isAjaxable()));
 				portletModel.setSystem(GetterUtil.getBoolean(
 					portlet.elementText("system"),
 					portletModel.isSystem()));
@@ -959,6 +962,12 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setInclude(GetterUtil.getBoolean(
 					portlet.elementText("include"),
 					portletModel.isInclude()));
+
+				if (!portletModel.isAjaxable() &&
+					(portletModel.getRenderWeight() < 1)) {
+
+					portletModel.setRenderWeight(1);
+				}
 
 				portletModel.getRoleMappers().putAll(roleMappers);
 				portletModel.linkRoles();
