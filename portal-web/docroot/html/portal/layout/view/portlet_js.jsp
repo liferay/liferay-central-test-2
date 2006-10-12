@@ -85,7 +85,6 @@ function addPortletReturn(xmlHttpReq) {
 	if (window.location.hash) {
 		window.location.hash = "p_" + portletId;
 	}
-
 }
 
 function addPortletHTML(html, container, placeHolder) {
@@ -116,9 +115,11 @@ function addPortletHTML(html, container, placeHolder) {
 
 	container.insertBefore(portletBound, placeHolder);
 
-	var handle = DragDrop.findHandle(portletBound);
+	//if (!portletBound.isStatic) {
+		var handle = DragDrop.findHandle(portletBound);
 
-	DragDrop.makeItemDragable(portletBound, handle);
+		DragDrop.makeItemDragable(portletBound, handle);
+	//}
 
 	executeLoadedScript(portletBound);
 

@@ -333,13 +333,7 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 
 <div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
 	<a name="p_<%= portletId %>"></a>
-	<script type="text/javascript">
-		var portletEl = document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>");
-		portletEl.portletId = "<%= portletId %>";
-		portletEl.isStatic = <%= portlet.isStatic() || !showMoveIcon %>;
-		portletEl.isStaticStart = <%= portlet.isStaticStart() %>;
-		portletEl.isStaticEnd = <%= portlet.isStaticEnd() %>;
-	</script>
+	
 	<c:choose>
 		<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
 		</c:when>
@@ -447,6 +441,14 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 		</c:otherwise>
 	</c:choose>
 </div>
+
+<script type="text/javascript">
+	var portletEl = document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>");
+	portletEl.portletId = "<%= portletId %>";
+	portletEl.isStatic = <%= portlet.isStatic() || !showMoveIcon %>;
+	portletEl.isStaticStart = <%= portlet.isStaticStart() %>;
+	portletEl.isStaticEnd = <%= portlet.isStaticEnd() %>;
+</script>
 
 <%
 RenderRequestFactory.recycle(renderRequestImpl);
