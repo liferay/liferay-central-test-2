@@ -103,7 +103,7 @@
 		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "sign-in") %>">
 
 		<c:if test="<%= company.isStrangers() %>">
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" portletName="<%= PortletKeys.MY_ACCOUNT %>"><liferay-portlet:param name="struts_action" value="/my_account/create_account" /></liferay-portlet:renderURL>';">
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "create-account") %>' onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';">
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">

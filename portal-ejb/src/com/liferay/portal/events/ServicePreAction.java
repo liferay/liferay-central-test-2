@@ -400,6 +400,17 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowSignInIcon(!signedIn);
 			themeDisplay.setShowSignOutIcon(signedIn);
 
+			PortletURL createAccountURL = new PortletURLImpl(
+				req, PortletKeys.MY_ACCOUNT, plid, true);
+
+			createAccountURL.setWindowState(WindowState.MAXIMIZED);
+			createAccountURL.setPortletMode(PortletMode.VIEW);
+
+			createAccountURL.setParameter(
+				"struts_action", "/my_account/create_account");
+
+			themeDisplay.setURLCreateAccount(createAccountURL);
+
 			themeDisplay.setURLHome(protocol + company.getHomeURL());
 
 			if (layout != null) {

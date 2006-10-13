@@ -41,12 +41,7 @@ if (company.isStrangers()) {
 	tabs1Names += ",create-account";
 }
 
-PortletURL createAccountURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid, false);
-
-createAccountURL.setWindowState(WindowState.MAXIMIZED);
-createAccountURL.setPortletMode(PortletMode.VIEW);
-
-createAccountURL.setParameter("struts_action", "/my_account/create_account");
+PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 %>
 
 <liferay-ui:tabs

@@ -425,6 +425,14 @@ public class ThemeDisplay {
 		_urlAddContent = urlAddContent;
 	}
 
+	public PortletURL getURLCreateAccount() {
+		return _urlCreateAccount;
+	}
+
+	public void setURLCreateAccount(PortletURL urlCreateAccount) {
+		_urlCreateAccount = urlCreateAccount;
+	}
+
 	public String getURLHome() {
 		return _urlHome;
 	}
@@ -525,6 +533,7 @@ public class ThemeDisplay {
 		_showSignInIcon = false;
 		_showSignOutIcon = false;
 		_urlAddContent = null;
+		_urlCreateAccount = null;
 		_urlHome = null;
 		_urlMyAccount = null;
 		_urlPageSettings = null;
@@ -584,6 +593,7 @@ public class ThemeDisplay {
 	private boolean _showSignInIcon;
 	private boolean _showSignOutIcon;
 	private String _urlAddContent = null;
+	private PortletURL _urlCreateAccount = null;
 	private String _urlHome = null;
 	private PortletURL _urlMyAccount = null;
 	private PortletURL _urlPageSettings = null;

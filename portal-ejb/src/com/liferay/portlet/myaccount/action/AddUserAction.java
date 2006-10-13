@@ -42,6 +42,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -75,8 +76,12 @@ public class AddUserAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		String cmd = ParamUtil.getString(req, Constants.CMD);
+
 		try {
-			addUser(req, res);
+			if (cmd.equals(Constants.ADD)) {
+				addUser(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof CaptchaTextException ||
