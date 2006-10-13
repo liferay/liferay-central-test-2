@@ -14,7 +14,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByGroupId">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT DLFileEntry.folderId, DLFileEntry.name) AS COUNT_VALUE
+				COUNT(*) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			INNER JOIN
@@ -27,7 +27,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByG_U">
 		<![CDATA[
 			SELECT
-				COUNT(DISTINCT DLFileEntry.folderId, DLFileEntry.name) AS COUNT_VALUE
+				COUNT(*) AS COUNT_VALUE
 			FROM
 				DLFileEntry
 			INNER JOIN
@@ -41,7 +41,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByGroupId">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
 				DLFileEntry
 			INNER JOIN
@@ -56,7 +56,7 @@
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.findByG_U">
 		<![CDATA[
 			SELECT
-				DISTINCT {DLFileEntry.*}
+				{DLFileEntry.*}
 			FROM
 				DLFileEntry
 			INNER JOIN
