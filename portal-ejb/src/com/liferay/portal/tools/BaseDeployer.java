@@ -34,7 +34,7 @@ import com.liferay.util.ant.DeleteTask;
 import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
-
+import com.liferay.util.xml.XMLFormatter;
 import java.io.File;
 import java.io.StringReader;
 
@@ -229,49 +229,11 @@ public class BaseDeployer {
 		copyJars(srcFile);
 		copyTlds(srcFile);
 
+		updateGeronimoWebXML(srcFile, displayName);
+
 		File webXML = new File(srcFile + "/WEB-INF/web.xml");
 
-		String content = FileUtil.read(webXML);
-
-		int pos = content.indexOf("<web-app");
-		pos = content.indexOf(">", pos) + 1;
-
-		double webXmlVersion = 2.3;
-
-		SAXReader reader = new SAXReader();
-
-		Document webXmlDoc = reader.read(new StringReader(content));
-
-		Element webXmlRoot = webXmlDoc.getRootElement();
-
-		webXmlVersion = GetterUtil.getDouble(
-			webXmlRoot.attributeValue("version"), webXmlVersion);
-
-		// Merge extra content
-
-		String extraContent = getExtraContent(
-			webXmlVersion, srcFile, displayName);
-
-		String newContent =
-			content.substring(0, pos) + extraContent +
-			content.substring(pos, content.length());
-
-		// Replace old package names
-
-		newContent = StringUtil.replace(
-			newContent, "com.liferay.portal.servlet.",
-			"com.liferay.portal.kernel.servlet.");
-
-		newContent = StringUtil.replace(
-			newContent, "com.liferay.portal.shared.",
-			"com.liferay.portal.kernel.");
-
-		newContent = WebXMLBuilder.organizeWebXML(newContent);
-
-		FileUtil.write(webXML, newContent, true);
-
-		System.out.println(
-			"  Modifying Servlet " + webXmlVersion + " " + webXML );
+		updateWebXML(webXML, srcFile, displayName);
 
 		if (!baseDir.equals(destDir)) {
 			String includes = StringPool.BLANK;
@@ -420,6 +382,87 @@ public class BaseDeployer {
 		}
 
 		return extraContent;
+	}
+
+	protected void updateGeronimoWebXML(File srcFile, String displayName)
+		throws Exception {
+
+		File geronimoWebXML = new File(srcFile + "/WEB-INF/geronimo-web.xml");
+
+		if (geronimoWebXML.exists()) {
+			return;
+		}
+
+		String content = "";
+
+		content +=
+			"<web-app " +
+				"xmlns=\"http://geronimo.apache.org/xml/ns/j2ee/web-1.1\">";
+		content += "<environment>";
+		content += "<moduleId>";
+		content += "<artifactId>" + displayName + "</artifactId>";
+		content += "</moduleId>";
+		content += "<dependencies>";
+		content += "<dependency>";
+		content += "<groupId>liferay</groupId>";
+		content += "<artifactId>liferay-portal-tomcat</artifactId>";
+		content += "</dependency>";
+		content += "</dependencies>";
+		content += "</environment>";
+		content += "</web-app>";
+
+		content = XMLFormatter.toString(content);
+
+		FileUtil.write(geronimoWebXML, content);
+
+		System.out.println("  Adding Geronimo " + geronimoWebXML);
+	}
+
+	protected void updateWebXML(
+			File webXML, File srcFile, String displayName)
+		throws Exception {
+
+		String content = FileUtil.read(webXML);
+
+		int pos = content.indexOf("<web-app");
+		pos = content.indexOf(">", pos) + 1;
+
+		double webXmlVersion = 2.3;
+
+		SAXReader reader = new SAXReader();
+
+		Document webXmlDoc = reader.read(new StringReader(content));
+
+		Element webXmlRoot = webXmlDoc.getRootElement();
+
+		webXmlVersion = GetterUtil.getDouble(
+			webXmlRoot.attributeValue("version"), webXmlVersion);
+
+		// Merge extra content
+
+		String extraContent = getExtraContent(
+			webXmlVersion, srcFile, displayName);
+
+		String newContent =
+			content.substring(0, pos) + extraContent +
+			content.substring(pos, content.length());
+
+		// Replace old package names
+
+		newContent = StringUtil.replace(
+			newContent, "com.liferay.portal.servlet.",
+			"com.liferay.portal.kernel.servlet.");
+
+		newContent = StringUtil.replace(
+			newContent, "com.liferay.portal.shared.",
+			"com.liferay.portal.kernel.");
+
+		newContent = WebXMLBuilder.organizeWebXML(newContent);
+
+		FileUtil.write(webXML, newContent, true);
+
+		System.out.println(
+			"  Modifying Servlet " + webXmlVersion + " " + webXML );
 	}
 
 	protected String baseDir;
