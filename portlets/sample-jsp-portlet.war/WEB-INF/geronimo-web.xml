@@ -7,17 +7,11 @@
 		</moduleId>
 		<dependencies>
 			<dependency>
-				<groupId>portlet-api</groupId>
-				<artifactId>portlet-api</artifactId>
-				<type>jar</type>
-			</dependency>
-			<dependency>
 				<groupId>liferay</groupId>
-				<artifactId>portal-kernel</artifactId>
-				<type>jar</type>
+				<artifactId>liferay-portal-tomcat</artifactId>
 			</dependency>
 		</dependencies>
-		<hidden-classes/>
-		<non-overridable-classes/>
+		<hidden-classes />
+		<non-overridable-classes />
 	</environment>
 </web-app>

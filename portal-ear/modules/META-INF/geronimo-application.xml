@@ -3,7 +3,10 @@
 <application xmlns="http://geronimo.apache.org/xml/ns/j2ee/application-1.1">
 	<environment>
 		<moduleId>
-			<artifactId>liferay-geronimo</artifactId>
+			<groupId>liferay</groupId>
+			<artifactId>liferay-portal-tomcat</artifactId>
+			<version>4.2.0</version>
+			<type>car</type>
 		</moduleId>
 		<dependencies>
 			<dependency>
@@ -34,19 +37,9 @@
 				<import>classes</import>
 			</dependency>
 			<dependency>
-				<groupId>portlet-api</groupId>
-				<artifactId>portlet-api</artifactId>
-				<type>jar</type>
-			</dependency>
-			<dependency>
 				<groupId>liferay</groupId>
-				<artifactId>portal-kernel</artifactId>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>console.dbpool</groupId>
-				<artifactId>LiferayPool</artifactId>
-				<type>rar</type>
+				<artifactId>liferay-pool</artifactId>
+				<type>car</type>
 			</dependency>
 		</dependencies>
 		<hidden-classes />
@@ -56,6 +49,18 @@
 		<ejb>counter-ejb.jar</ejb>
 		<openejb-jar xmlns="http://www.openejb.org/xml/ns/openejb-jar-2.1">
 			<enterprise-beans>
+				<session>
+					<ejb-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/CounterLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
 				<session>
 					<ejb-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-name>
 					<jndi-name>com_liferay_counter_service_ejb_CounterServiceEJB</jndi-name>

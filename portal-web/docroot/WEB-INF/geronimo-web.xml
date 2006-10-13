@@ -3,7 +3,10 @@
 <web-app xmlns="http://geronimo.apache.org/xml/ns/j2ee/web-1.1">
 	<environment>
 		<moduleId>
-			<artifactId>liferay-portal</artifactId>
+			<groupId>liferay</groupId>
+			<artifactId>liferay-portal-tomcat</artifactId>
+			<version>4.2.0</version>
+			<type>car</type>
 		</moduleId>
 		<dependencies>
 			<dependency>
@@ -34,33 +37,23 @@
 				<import>classes</import>
 			</dependency>
 			<dependency>
-				<groupId>portlet-api</groupId>
-				<artifactId>portlet-api</artifactId>
-				<type>jar</type>
-			</dependency>
-			<dependency>
 				<groupId>liferay</groupId>
-				<artifactId>portal-kernel</artifactId>
-				<type>jar</type>
-			</dependency>
-			<dependency>
-				<groupId>console.dbpool</groupId>
-				<artifactId>LiferayPool</artifactId>
-				<type>rar</type>
+				<artifactId>liferay-pool</artifactId>
+				<type>car</type>
 			</dependency>
 		</dependencies>
-		<hidden-classes/>
-		<non-overridable-classes/>
+		<hidden-classes />
+		<non-overridable-classes />
 	</environment>
 	<context-root>/</context-root>
 	<security-realm-name>PortalRealm</security-realm-name>
 	<security>
 		<default-principal>
-			<principal name="anonymous" class="com.liferay.portal.security.jaas.PortalPrincipal"/>
+			<principal name="anonymous" class="com.liferay.portal.security.jaas.PortalPrincipal" />
 		</default-principal>
 		<role-mappings>
 			<role role-name="users">
-				<principal class="com.liferay.portal.security.jaas.PortalRole" name="users"/>
+				<principal class="com.liferay.portal.security.jaas.PortalRole" name="users" />
 			</role>
 		</role-mappings>
 	</security>
