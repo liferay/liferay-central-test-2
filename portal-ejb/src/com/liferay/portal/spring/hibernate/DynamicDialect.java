@@ -22,6 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.dao.DataAccess;
 
@@ -82,7 +83,7 @@ public class DynamicDialect extends Dialect {
 			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 		finally {
 			DataAccess.cleanUp(con);

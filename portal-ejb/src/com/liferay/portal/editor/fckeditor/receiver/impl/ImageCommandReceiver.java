@@ -24,6 +24,9 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
@@ -31,6 +34,7 @@ import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceUtil;
 import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.spring.IGImageServiceUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
@@ -51,8 +55,11 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 	protected String createFolder(CommandArgument arg) {
 		try {
+			Group group = GroupServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
+
 			IGFolder folder = _getFolder(
-				arg.getGroupId(), "/" + arg.getCurrentFolder());
+				group.getGroupId(), "/" + arg.getCurrentFolder());
 
 			IGFolderServiceUtil.addFolder(
 				arg.getPlid(), folder.getFolderId(), arg.getNewFolder(),
@@ -69,8 +76,11 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		CommandArgument arg, String fileName, File file, String extension) {
 
 		try {
+			Group group = GroupServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
+
 			IGFolder folder = _getFolder(
-				arg.getGroupId(), arg.getCurrentFolder());
+				group.getGroupId(), arg.getCurrentFolder());
 
 			IGImageServiceUtil.addImage(
 				folder.getFolderId(), fileName, file, extension, true, true);
@@ -110,24 +120,29 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(filesEl);
 
-		IGFolder folder = _getFolder(
-			arg.getGroupId(), arg.getCurrentFolder());
+		if (!arg.getCurrentGroupName().equals("")) {
+			Group group = GroupServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
-		List images = IGImageLocalServiceUtil.getImages(
-			folder.getFolderId());
+			IGFolder folder = _getFolder(
+				group.getGroupId(), arg.getCurrentFolder());
 
-		for (int i = 0; i < images.size(); i++) {
-			IGImage image = (IGImage)images.get(i);
+			List images = IGImageLocalServiceUtil.getImages(
+				folder.getFolderId());
 
-			Element fileEl = doc.createElement("File");
+			for (int i = 0; i < images.size(); i++) {
+				IGImage image = (IGImage)images.get(i);
 
-			filesEl.appendChild(fileEl);
+				Element fileEl = doc.createElement("File");
 
-			fileEl.setAttribute("name", image.getImageId());
-			fileEl.setAttribute("desc", image.getDescription());
-			fileEl.setAttribute("size", getSize(image.getSize()));
-			fileEl.setAttribute(
-				"url", "/image/image_gallery?img_id=" + image.getImageId());
+				filesEl.appendChild(fileEl);
+
+				fileEl.setAttribute("name", image.getImageId());
+				fileEl.setAttribute("desc", image.getDescription());
+				fileEl.setAttribute("size", getSize(image.getSize()));
+				fileEl.setAttribute(
+					"url", "/image/image_gallery?img_id=" + image.getImageId());
+			}
 		}
 	}
 
@@ -169,20 +184,39 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(foldersEl);
 
-		IGFolder folder = _getFolder(
-			arg.getGroupId(), arg.getCurrentFolder());
+		if (arg.getCurrentFolder().equals("/")) {
+			List groups = GroupLocalServiceUtil.search(arg.getCompanyId(),
+				null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		List folders = IGFolderLocalServiceUtil.getFolders(
-			arg.getGroupId(), folder.getFolderId());
+			for (int i = 0; i < groups.size(); ++i) {
+				Group group = (Group) groups.get(i);
 
-		for (int i = 0; i < folders.size(); i++) {
-			folder = (IGFolder)folders.get(i);
+				Element folderEl = doc.createElement("Folder");
 
-			Element folderEl = doc.createElement("Folder");
+				foldersEl.appendChild(folderEl);
 
-			foldersEl.appendChild(folderEl);
+				folderEl.setAttribute("name", group.getName());
+			}
+		}
+		else {
+			Group group = GroupServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
-			folderEl.setAttribute("name", folder.getName());
+			IGFolder folder = _getFolder(
+				group.getGroupId(), arg.getCurrentFolder());
+
+			List folders = IGFolderLocalServiceUtil.getFolders(
+				group.getGroupId(), folder.getFolderId());
+
+			for (int i = 0; i < folders.size(); i++) {
+				folder = (IGFolder) folders.get(i);
+
+				Element folderEl = doc.createElement("Folder");
+
+				foldersEl.appendChild(folderEl);
+
+				folderEl.setAttribute("name", folder.getName());
+			}
 		}
 	}
 

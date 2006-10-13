@@ -23,6 +23,9 @@
 package com.liferay.portal.editor.fckeditor.command;
 
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.util.StringPool;
+
+import java.util.StringTokenizer;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -74,8 +77,15 @@ public class CommandArgument {
 		return _themeDisplay.getCompanyId();
 	}
 
-	public String getGroupId() {
-		return _themeDisplay.getPortletGroupId();
+	public String getCurrentGroupName() {
+		if (_currentFolder.equals("/")) {
+			return StringPool.BLANK;
+		}
+		else {
+			StringTokenizer st = new StringTokenizer(_currentFolder, "/");
+
+			return st.nextToken();
+		}
 	}
 
 	public String getUserId() {

@@ -24,6 +24,8 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
@@ -34,6 +36,7 @@ import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.StringPool;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
@@ -54,8 +57,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 	protected String createFolder(CommandArgument arg) {
 		try {
+			Group group = GroupLocalServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
+
 			DLFolder folder = _getFolder(
-				arg.getGroupId(), "/" + arg.getCurrentFolder());
+				group.getGroupId(), "/" + arg.getCurrentFolder());
 
 			DLFolderServiceUtil.addFolder(
 				arg.getPlid(), folder.getFolderId(), arg.getNewFolder(),
@@ -72,8 +78,11 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		CommandArgument arg, String fileName, File file, String extension) {
 
 		try {
+			Group group = GroupLocalServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
+
 			DLFolder folder = _getFolder(
-				arg.getGroupId(), arg.getCurrentFolder());
+				group.getGroupId(), arg.getCurrentFolder());
 
 			DLFileEntryServiceUtil.addFileEntry(
 				folder.getFolderId(), fileName, fileName, StringPool.BLANK,
@@ -114,34 +123,39 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(filesEl);
 
-		DLFolder folder = _getFolder(
-			arg.getGroupId(), arg.getCurrentFolder());
+		if (!arg.getCurrentGroupName().equals("")) {
+			Group group = GroupLocalServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
-		List files = DLFileEntryLocalServiceUtil.getFileEntries(
-			folder.getFolderId());
+			DLFolder folder = _getFolder(
+				group.getGroupId(), arg.getCurrentFolder());
 
-		for (int i = 0; i < files.size(); i++) {
-			DLFileEntry fileEntry = (DLFileEntry)files.get(i);
+			List files = DLFileEntryLocalServiceUtil.getFileEntries(
+				folder.getFolderId());
 
-			Element fileEl = doc.createElement("File");
+			for (int i = 0; i < files.size(); i++) {
+				DLFileEntry fileEntry = (DLFileEntry)files.get(i);
 
-			filesEl.appendChild(fileEl);
+				Element fileEl = doc.createElement("File");
 
-			fileEl.setAttribute("name", fileEntry.getName());
-			fileEl.setAttribute("desc", fileEntry.getName());
-			fileEl.setAttribute("size", getSize(fileEntry.getSize()));
+				filesEl.appendChild(fileEl);
 
-			StringBuffer url = new StringBuffer();
+				fileEl.setAttribute("name", fileEntry.getName());
+				fileEl.setAttribute("desc", fileEntry.getName());
+				fileEl.setAttribute("size", getSize(fileEntry.getSize()));
 
-			ThemeDisplay themeDisplay = arg.getThemeDisplay();
+				StringBuffer url = new StringBuffer();
 
-			url.append(themeDisplay.getPathMain());
-			url.append("/document_library/get_file?folderId=");
-			url.append(fileEntry.getFolderId());
-			url.append("&name=");
-			url.append(Http.encodeURL(fileEntry.getName()));
+				ThemeDisplay themeDisplay = arg.getThemeDisplay();
 
-			fileEl.setAttribute("url", url.toString());
+				url.append(themeDisplay.getPathMain());
+				url.append("/document_library/get_file?folderId=");
+				url.append(fileEntry.getFolderId());
+				url.append("&name=");
+				url.append(Http.encodeURL(fileEntry.getName()));
+
+				fileEl.setAttribute("url", url.toString());
+			}
 		}
 	}
 
@@ -183,20 +197,40 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(foldersEl);
 
-		DLFolder folder = _getFolder(
-			arg.getGroupId(), arg.getCurrentFolder());
+		if (arg.getCurrentFolder().equals("/")) {
+			List groups = GroupLocalServiceUtil.search(
+				arg.getCompanyId(), null, null, null, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 
-		List folders = DLFolderLocalServiceUtil.getFolders(
-			arg.getGroupId(), folder.getFolderId());
+			for (int i = 0; i < groups.size(); ++i) {
+				Group group = (Group) groups.get(i);
 
-		for (int i = 0; i < folders.size(); i++) {
-			folder = (DLFolder)folders.get(i);
+				Element folderEl = doc.createElement("Folder");
 
-			Element folderEl = doc.createElement("Folder");
+				foldersEl.appendChild(folderEl);
 
-			foldersEl.appendChild(folderEl);
+				folderEl.setAttribute("name", group.getName());
+			}
+		}
+		else {
+			Group group = GroupLocalServiceUtil.getGroup(
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
-			folderEl.setAttribute("name", folder.getName());
+			DLFolder folder = _getFolder(
+				group.getGroupId(), arg.getCurrentFolder());
+
+			List folders = DLFolderLocalServiceUtil.getFolders(
+				group.getGroupId(), folder.getFolderId());
+
+			for (int i = 0; i < folders.size(); i++) {
+				folder = (DLFolder) folders.get(i);
+
+				Element folderEl = doc.createElement("Folder");
+
+				foldersEl.appendChild(folderEl);
+
+				folderEl.setAttribute("name", folder.getName());
+			}
 		}
 	}
 

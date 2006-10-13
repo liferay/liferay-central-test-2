@@ -30,7 +30,6 @@ import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -39,7 +38,6 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.StringTokenizer;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -81,17 +79,6 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
-		}
-	}
-
-	private String _getGroupName(String folderName) {
-		if (folderName.equals("/")) {
-			return StringPool.BLANK;
-		}
-		else {
-			StringTokenizer st = new StringTokenizer(folderName, "/");
-
-			return st.nextToken();
 		}
 	}
 
@@ -159,16 +146,14 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 			root.appendChild(filesEl);
 
-			String groupName = _getGroupName(arg.getCurrentFolder());
+			Group group = GroupServiceUtil.getGroup(arg.getCompanyId(), arg
+					.getCurrentGroupName());
 
-			Group group = GroupServiceUtil.getGroup(
-				arg.getCompanyId(), groupName);
+			List layouts = LayoutLocalServiceUtil.getLayouts(Layout.PUBLIC
+					+ group.getGroupId(), Layout.DEFAULT_PARENT_LAYOUT_ID);
 
-			List layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.PUBLIC + group.getGroupId(),
-				Layout.DEFAULT_PARENT_LAYOUT_ID);
-
-			if (("/" + groupName + "/").equals(arg.getCurrentFolder())) {
+			if (("/" + arg.getCurrentGroupName() + "/").equals(arg
+					.getCurrentFolder())) {
 				for (int i = 0; i < layouts.size(); i++) {
 					Layout layout = (Layout)layouts.get(i);
 
@@ -179,9 +164,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 					fileEl.setAttribute("name", _getLayoutName(layout));
 					fileEl.setAttribute("desc", _getLayoutName(layout));
 					fileEl.setAttribute("size", "");
-					fileEl.setAttribute(
-						"url",
-						PortalUtil.getLayoutURL(layout, arg.getThemeDisplay()));
+					fileEl.setAttribute("url", PortalUtil.getLayoutURL(layout,
+							arg.getThemeDisplay()));
 				}
 			}
 			else {
@@ -247,16 +231,16 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			}
 		}
 		else {
-			String groupName = _getGroupName(arg.getCurrentFolder());
-
 			Group group = GroupServiceUtil.getGroup(
-				arg.getCompanyId(), groupName);
+				arg.getCompanyId(), arg.getCurrentGroupName());
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
 				Layout.PUBLIC + group.getGroupId(),
 				Layout.DEFAULT_PARENT_LAYOUT_ID);
 
-			if (("/" + groupName + "/").equals(arg.getCurrentFolder())) {
+			if (("/" + arg.getCurrentGroupName() + "/").equals(
+					arg.getCurrentFolder())) {
+
 				for (int i = 0; i < layouts.size(); i++) {
 					Layout layout = (Layout)layouts.get(i);
 
