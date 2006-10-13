@@ -52,20 +52,25 @@ import java.util.List;
 public class DBLoader {
 
 	public static void main(String[] args) {
-		if (args.length == 1) {
-			new DBLoader(args[0]);
+		if (args.length == 2) {
+			new DBLoader(args[0], args[1]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public DBLoader(String databaseName) {
+	public DBLoader(String databaseType, String databaseName) {
 		try {
+			_databaseType = databaseType;
 			_databaseName = databaseName;
 
-			_loadDerby();
-			_loadHypersonic();
+			if (_databaseType.equals("derby")) {
+				_loadDerby();
+			}
+			else if (_databaseType.equals("hypersonic")) {
+				_loadHypersonic();
+			}
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -319,6 +324,7 @@ public class DBLoader {
 		br.close();
 	}
 
+	private String _databaseType;
 	private String _databaseName;
 
 }

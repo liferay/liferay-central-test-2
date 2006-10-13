@@ -23,31 +23,11 @@
 		</exec>
 	</target>
 
-	<target name="load-db">
-		<if>
-			<equals arg1="${load.db}" arg2="on" />
-			<then>
-				<delete dir="${database.name}" failonerror="false" />
-				<delete file="${database.name}.properties" failonerror="false" />
-				<delete file="${database.name}.script" failonerror="false" />
-
-				<java
-					classname="com.liferay.portal.tools.DBLoader"
-					classpathref="project.classpath"
-					fork="true"
-					maxmemory="256m"
-					newenvironment="true"
-				>
-					<arg value="${database.name}" />
-					<jvmarg value="-Dfile.encoding=UTF-8" />
-				</java>
-			</then>
-		</if>
-	</target>
-
 	<target name="rebuild-all">
 		<antcall target="rebuild-db2" />
+		<antcall target="rebuild-derby" />
 		<antcall target="rebuild-firebird" />
+		<antcall target="rebuild-hypersonic" />
 		<antcall target="rebuild-mysql" />
 		<antcall target="rebuild-oracle" />
 		<antcall target="rebuild-postgresql" />
@@ -69,14 +49,68 @@
 		</antcall>
 	</target>
 
+	<target name="rebuild-derby">
+		<delete dir="${database.name}" failonerror="false" />
+
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<arg value="derby" />
+			<arg value="${database.name}" />
+			<jvmarg value="-Dfile.encoding=UTF-8" />
+		</java>
+
+		<delete dir="tmp" />
+
+		<mkdir dir="tmp/geronimo/var/derby" />
+
+		<move todir="tmp/geronimo/var/derby">
+			<fileset dir="${database.name}" />
+		</move>
+
+		<jar
+			basedir="tmp"
+			jarfile="${database.name}.jar"
+		/>
+
+		<mkdir dir="${database.name}" />
+
+		<move todir="${database.name}">
+			<fileset dir="tmp/geronimo/var/derby" />
+		</move>
+
+		<delete dir="tmp" />
+	</target>
+
 	<target name="rebuild-firebird">
-		<delete file="lportal.gdb" failonerror="false" />
+		<delete file="${database.name}.gdb" failonerror="false" />
 
 		<antcall target="rebuild-database">
 			<param name="executable" value="${firebird.executable}" />
 			<param name="arg.line" value="${firebird.arg.line}" />
 			<param name="log" value="${firebird.log}" />
 		</antcall>
+	</target>
+
+	<target name="rebuild-hypersonic">
+		<delete file="${database.name}.properties" failonerror="false" />
+		<delete file="${database.name}.script" failonerror="false" />
+
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<arg value="hypersonic" />
+			<arg value="${database.name}" />
+			<jvmarg value="-Dfile.encoding=UTF-8" />
+		</java>
 	</target>
 
 	<target name="rebuild-mysql">

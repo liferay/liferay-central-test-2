@@ -489,8 +489,8 @@
 		<antcall target="build-releaseinfo" />
 	</target>
 
-	<target name="load-db">
-		<ant dir="../sql" target="load-db" />
+	<target name="rebuild-hypersonic">
+		<ant dir="../sql" target="rebuild-hypersonic" />
 	</target>
 
 	<target name="tcpmon">
