@@ -333,7 +333,7 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 
 <div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
 	<a name="p_<%= portletId %>"></a>
-	
+
 	<c:choose>
 		<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
 		</c:when>
