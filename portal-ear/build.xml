@@ -39,7 +39,6 @@
 		/>
 
 		<copy todir="modules/lib">
-			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
@@ -61,13 +60,14 @@
 
 		<copy todir="pro-war/WEB-INF/lib">
 			<fileset dir="modules" includes="*-ejb.jar" />
-			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
 			<fileset dir="${project.dir}/filters/compression" includes="compression-filter.jar" />
 			<fileset dir="${project.dir}/filters/secure" includes="secure-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
+			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 			<fileset dir="${project.dir}/lib/development" includes="activation.jar,jms.jar,jta.jar,mail.jar" />
+			<fileset dir="${project.dir}/lib/global" includes="portlet.jar" />
 			<fileset dir="${project.dir}/lib/portal" />
 		</copy>
 
@@ -120,6 +120,20 @@
 		<war
 			basedir="pro-war"
 			destfile="liferay-portal.war"
+			excludes="WEB-INF/lib/portal-kernel.jar,WEB-INF/lib/portlet.jar,WEB-INF/web.xml"
+			webxml="pro-war/WEB-INF/web.xml"
+			update="yes"
+		/>
+
+		<copy
+			file="modules/portal-web.war"
+			tofile="liferay-portal-geronimo-tomcat.war"
+			overwrite="yes"
+		/>
+
+		<war
+			basedir="pro-war"
+			destfile="liferay-portal-geronimo-tomcat.war"
 			excludes="WEB-INF/web.xml"
 			webxml="pro-war/WEB-INF/web.xml"
 			update="yes"
