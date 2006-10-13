@@ -18,6 +18,10 @@
 	<property file="${project.dir}/release.${env.COMPUTERNAME}.properties" />
 	<property file="${project.dir}/release.properties" />
 
+	<property file="${project.dir}/sql/sql.${user.name}.properties" />
+	<property file="${project.dir}/sql/sql.${env.COMPUTERNAME}.properties" />
+	<property file="${project.dir}/sql/sql.properties" />
+
 	<path id="lib.classpath">
 		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
@@ -32,6 +36,7 @@
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/portal-kernel/classes" />
 		<fileset dir="${project.dir}/lib/development" includes="servlet.jar" />
+		<fileset dir="${project.dir}/lib/global" includes="portlet.jar" />
 		<fileset dir="docroot/WEB-INF/lib" includes="*.jar" />
 		<path refid="web-lib.classpath" />
 	</path>

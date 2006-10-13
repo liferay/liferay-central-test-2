@@ -78,15 +78,15 @@
 			</or>
 			<then>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/nt" includes="test.*" />
+					<fileset dir="${app.server.bin.dir}/nt" includes="${database.name}.*" />
 				</delete>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/unix" includes="test.*" />
+					<fileset dir="${app.server.bin.dir}/unix" includes="${database.name}.*" />
 				</delete>
 			</then>
 			<else>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}" includes="test.*" />
+					<fileset dir="${app.server.bin.dir}" includes="${database.name}.*" />
 				</delete>
 			</else>
 		</if>
@@ -248,19 +248,19 @@
 			<then>
 				<copy todir="${app.server.bin.dir}/nt">
 					<fileset dir="sql">
-						<include name="test.*" />
+						<include name="${database.name}.*" />
 					</fileset>
 				</copy>
 				<copy todir="${app.server.bin.dir}/unix">
 					<fileset dir="sql">
-						<include name="test.*" />
+						<include name="${database.name}.*" />
 					</fileset>
 				</copy>
 			</then>
 			<else>
 				<copy todir="${app.server.bin.dir}">
 					<fileset dir="sql">
-						<include name="test.*" />
+						<include name="${database.name}.*" />
 					</fileset>
 				</copy>
 			</else>

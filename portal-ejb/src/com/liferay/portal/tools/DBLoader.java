@@ -22,16 +22,26 @@
 
 package com.liferay.portal.tools;
 
+import Zql.ZConstant;
+import Zql.ZInsert;
+import Zql.ZStatement;
+import Zql.ZqlParser;
+
 import com.liferay.util.FileUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
+import java.sql.Timestamp;
+
+import java.util.List;
 
 /**
  * <a href="DBLoader.java.html"><b><i>View Source</i></b></a>
@@ -42,44 +52,229 @@ import java.sql.Statement;
 public class DBLoader {
 
 	public static void main(String[] args) {
-		new DBLoader();
+		if (args.length == 1) {
+			new DBLoader(args[0]);
+		}
+		else {
+			throw new IllegalArgumentException();
+		}
 	}
 
-	public DBLoader() {
+	public DBLoader(String databaseName) {
 		try {
-			Class.forName("org.hsqldb.jdbcDriver");
+			_databaseName = databaseName;
 
-			Connection con = DriverManager.getConnection(
-				"jdbc:hsqldb:test", "sa", "");
-
-			_loadSQL(con, "../sql/portal/portal-hypersonic.sql");
-			_loadSQL(con, "../sql/indexes.sql");
-
-			// Shutdown Hypersonic
-
-            Statement statement = con.createStatement();
-
-			statement.execute("SHUTDOWN COMPACT");
-
-			statement.close();
-
-			con.close();
-
-			// Hypersonic will encode unicode characters twice, this will undo
-			// it
-
-			String content = FileUtil.read("test.script");
-
-			content = StringUtil.replace(content, "\\u005cu", "\\u");
-
-			FileUtil.write("test.script", content);
+			_loadDerby();
+			_loadHypersonic();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
 
-	private void _loadSQL(Connection con, String fileName) throws Exception {
+	private PreparedStatement _getStatementDerby(Connection con, String sql)
+		throws Exception {
+
+		sql = StringUtil.replace(
+			sql, "current timestamp", "'current timestamp'");
+
+		sql += ";";
+
+		ZqlParser zParser = new ZqlParser(
+			new ByteArrayInputStream(sql.getBytes()));
+
+		ZStatement zStatement = zParser.readStatement();
+
+		ZInsert zInsert = (ZInsert)zStatement;
+
+		sql = "insert into " + zInsert.getTable() + " (";
+
+		List columns = zInsert.getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			sql += columns.get(i);
+
+			if ((i + 1) < columns.size()) {
+				sql += ", ";
+			}
+		}
+
+		sql += ") values (";
+
+		for (int i = 0; i < columns.size(); i++) {
+			sql += "?";
+
+			if ((i + 1) < columns.size()) {
+				sql += ", ";
+			}
+		}
+
+		sql += ")";
+
+		PreparedStatement ps = con.prepareStatement(sql);
+
+		List values = zInsert.getValues();
+
+		for (int i = 0; i < values.size(); i++) {
+			ZConstant zConstant = (ZConstant)values.get(i);
+
+			int pos = i + 1;
+
+			String value = (String)zConstant.getValue();
+
+			if (value.equals("current timestamp")) {
+				ps.setTimestamp(
+					pos, new Timestamp(System.currentTimeMillis()));
+			}
+			else if (value.length() < 32000) {
+				ps.setString(pos, zConstant.getValue());
+			}
+			else {
+				ps.setCharacterStream(
+					pos, new StringReader(value), value.length());
+			}
+		}
+
+		return ps;
+	}
+
+	private void _loadDerby() throws Exception {
+		Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
+
+		Connection con = DriverManager.getConnection(
+			"jdbc:derby:" + _databaseName + ";create=true", "", "");
+
+		_loadDerby(con, "../sql/portal/portal-db2.sql");
+		_loadDerby(con, "../sql/indexes.sql");
+	}
+
+	private void _loadDerby(Connection con, String fileName)
+		throws Exception {
+
+		StringBuffer sb = new StringBuffer();
+
+		BufferedReader br = new BufferedReader(
+			new StringReader(FileUtil.read(fileName)));
+
+		String line = null;
+
+		while ((line = br.readLine()) != null) {
+			if (!line.startsWith("--")) {
+				sb.append(line);
+
+				if (line.endsWith(";")) {
+					String sql = sb.toString();
+
+					sql =
+						StringUtil.replace(
+							sql,
+							new String[] {
+								"\\'",
+								"\\\"",
+								"\\\\",
+								"\\n",
+								"\\r"
+							},
+							new String[] {
+								"''",
+								"\"",
+								"\\",
+								"\n",
+								"\r"
+							});
+
+					sql = sql.substring(0, sql.length() - 1);
+
+					sb = new StringBuffer();
+
+					try {
+						if (sql.startsWith("commit")) {
+						}
+						else if (sql.startsWith("insert into Image") ||
+								 sql.startsWith("insert into JournalArticle")) {
+
+							// Derby isn't able to process long inserts. Zql
+							// parses the SQL statement so that we can manually
+							// set the insert statement. Zql also isn't able to
+							// properly parse certain unicode characters.
+
+							sql = StringUtil.replace(
+								sql,
+								new String[] {
+									"\u0161",
+									"\u017e",
+									"\u2013",
+									"\u2014",
+									"\u2019",
+									"\u2022",
+									"\u201c"
+								},
+								new String[] {
+									StringPool.BLANK,
+									StringPool.BLANK,
+									StringPool.BLANK,
+									StringPool.BLANK,
+									StringPool.BLANK,
+									StringPool.BLANK,
+									StringPool.BLANK
+								});
+
+							PreparedStatement ps = _getStatementDerby(con, sql);
+
+							ps.executeUpdate();
+
+							ps.close();
+						}
+						else {
+							PreparedStatement ps = con.prepareStatement(sql);
+
+							ps.executeUpdate();
+
+							ps.close();
+						}
+					}
+					catch (Exception e) {
+						System.out.println(e.getMessage());
+					}
+				}
+			}
+		}
+
+		br.close();
+	}
+
+	private void _loadHypersonic() throws Exception {
+		Class.forName("org.hsqldb.jdbcDriver");
+
+		Connection con = DriverManager.getConnection(
+			"jdbc:hsqldb:" + _databaseName, "sa", "");
+
+		_loadHypersonic(con, "../sql/portal/portal-hypersonic.sql");
+		_loadHypersonic(con, "../sql/indexes.sql");
+
+		// Shutdown Hypersonic
+
+		Statement statement = con.createStatement();
+
+		statement.execute("SHUTDOWN COMPACT");
+
+		statement.close();
+
+		con.close();
+
+		// Hypersonic will encode unicode characters twice, this will undo
+		// it
+
+		String content = FileUtil.read(_databaseName + ".script");
+
+		content = StringUtil.replace(content, "\\u005cu", "\\u");
+
+		FileUtil.write(_databaseName + ".script", content);
+	}
+
+	private void _loadHypersonic(Connection con, String fileName)
+		throws Exception {
+
 		StringBuffer sb = new StringBuffer();
 
 		BufferedReader br = new BufferedReader(
@@ -101,7 +296,8 @@ public class DBLoader {
 								"\\\"",
 								"\\\\",
 								"\\n",
-								"\\r"},
+								"\\r"
+							},
 							new String[] {
 								"\"",
 								"\\",
@@ -122,5 +318,7 @@ public class DBLoader {
 
 		br.close();
 	}
+
+	private String _databaseName;
 
 }

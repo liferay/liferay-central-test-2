@@ -318,7 +318,7 @@ public class DBBuilder {
 		jDataStore = _rewordFirebird(jDataStore);
 		jDataStore = StringUtil.replace(
 			jDataStore,
-			new String[] {"\\'", "\\\"","\\\\",  "\\n", "\\r"},
+			new String[] {"\\'", "\\\"", "\\\\",  "\\n", "\\r"},
 			new String[] {"''", "\"", "\\", "\n", "\r"});
 
 		FileUtil.write(
@@ -1009,14 +1009,14 @@ public class DBBuilder {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
 		" smallint", " timestamp", " double", " integer", " long varchar",
-		" long varchar", " varchar", " generated always as identity", "commit"
+		" clob", " varchar", " generated always as identity", "commit"
 	};
 
 	private static String[] _DERBY = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
 		" smallint", " timestamp", " double", " integer", " long varchar",
-		" long varchar", " varchar", " generated always as identity", "commit"
+		" clob", " varchar", " generated always as identity", "commit"
 	};
 
 	private static String[] _FIREBIRD = {

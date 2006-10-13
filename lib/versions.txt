@@ -25,6 +25,7 @@ Commons Pool 1.2
 Commons Validator 1.1.4
 Compass 1.1m1
 Concurrent 1.3.4
+Derby 10.1.1.0
 Display Tag Library 1.1
 dom4j 1.6.1
 EasyConf 0.9
