@@ -35,6 +35,7 @@ import com.liferay.util.ant.ExpandTask;
 import com.liferay.util.ant.UpToDateTask;
 import com.liferay.util.ant.WarTask;
 import com.liferay.util.xml.XMLFormatter;
+
 import java.io.File;
 import java.io.StringReader;
 
