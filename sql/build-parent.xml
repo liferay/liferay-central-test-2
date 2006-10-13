@@ -24,20 +24,25 @@
 	</target>
 
 	<target name="load-db">
-		<delete dir="${database.name}" failonerror="false" />
-		<delete file="${database.name}.properties" failonerror="false" />
-		<delete file="${database.name}.script" failonerror="false" />
+		<if>
+			<equals arg1="${load.db}" arg2="on" />
+			<then>
+				<delete dir="${database.name}" failonerror="false" />
+				<delete file="${database.name}.properties" failonerror="false" />
+				<delete file="${database.name}.script" failonerror="false" />
 
-		<java
-			classname="com.liferay.portal.tools.DBLoader"
-			classpathref="project.classpath"
-			fork="true"
-			maxmemory="256m"
-			newenvironment="true"
-		>
-			<arg value="${database.name}" />
-			<jvmarg value="-Dfile.encoding=UTF-8" />
-		</java>
+				<java
+					classname="com.liferay.portal.tools.DBLoader"
+					classpathref="project.classpath"
+					fork="true"
+					maxmemory="256m"
+					newenvironment="true"
+				>
+					<arg value="${database.name}" />
+					<jvmarg value="-Dfile.encoding=UTF-8" />
+				</java>
+			</then>
+		</if>
 	</target>
 
 	<target name="rebuild-all">
