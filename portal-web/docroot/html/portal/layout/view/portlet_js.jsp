@@ -115,13 +115,14 @@ function addPortletHTML(html, container, placeHolder) {
 
 	container.insertBefore(portletBound, placeHolder);
 
-	//if (!portletBound.isStatic) {
+	executeLoadedScript(addDiv);
+	executeLoadedScript(portletBound);
+	
+	if (!portletBound.isStatic) {
 		var handle = DragDrop.findHandle(portletBound);
 
 		DragDrop.makeItemDragable(portletBound, handle);
-	//}
-
-	executeLoadedScript(portletBound);
+	}
 
 	return portletId;
 }
