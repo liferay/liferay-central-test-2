@@ -197,12 +197,15 @@ portletURL.setParameter("groupId", groupId);
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td valign="top">
+		<div id="<%= renderResponse.getNamespace() %>tree-output"></div>
 		<%@ include file="/html/portlet/communities/tree_js.jsp" %>
 
 		<script type="text/javascript">
 			var layoutsTree = new Tree("layoutsTree", layoutsArray, layoutsIcons, "gamma");
 
 			layoutsTree.create("<%= SessionTreeJSClicks.getOpenNodes(request, "layoutsTree") %>");
+			
+			document.getElementById("<%= renderResponse.getNamespace() %>tree-output").innerHTML = layoutsTree.getHTML();
 		</script>
 	</td>
 	<td style="padding-left: 10px;"></td>

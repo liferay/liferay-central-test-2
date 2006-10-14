@@ -4,6 +4,7 @@ function Tree(treeId, nodes, icons, className) {
     this.icons = icons;
 	this.className = className;
 	this.openNodes = new Array();
+	this.treeHTML = "";
 
     this.addNode = Tree_addNode;
     this.create = Tree_create;
@@ -11,6 +12,7 @@ function Tree(treeId, nodes, icons, className) {
     this.isNodeOpen = Tree_isNodeOpen;
     this.setOpenNodes = Tree_setOpenNodes;
     this.toggle = Tree_toggle;
+    this.getHTML = Tree_getHTML;
 }
 
 function Tree_create(openNodes) {
@@ -21,10 +23,10 @@ function Tree_create(openNodes) {
 
 		var nodeValues = this.nodes[0].split("|");
 
-		document.write("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
-		document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
-		document.write("<font class=\"" + this.className + "\" size=\"1\">&nbsp;" + nodeValues[4] + "</font>");
-		document.write("</a><br>");
+		this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
+		this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
+		this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;" + nodeValues[4] + "</font>");
+		this.treeHTML += ("</a><br>");
 
 		var recursedNodes = new Array();
 		//this.addNode(0, recursedNodes);
@@ -47,10 +49,10 @@ function Tree_addNode(parentNode, recursedNodes) {
 
 			for (var j = 0; j < recursedNodes.length; j++) {
 				if (recursedNodes[j] != 1) {
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[1] + "\" vspace=\"0\" width=\"19\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[1] + "\" vspace=\"0\" width=\"19\">");
 				}
 				else {
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[2] + "\" vspace=\"0\" width=\"19\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[2] + "\" vspace=\"0\" width=\"19\">");
 				}
 			}
 
@@ -67,79 +69,79 @@ function Tree_addNode(parentNode, recursedNodes) {
 
 			if (hcn) {
 				if (ls) {
-					document.write("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 1);\" style=\"text-decoration: none;\">");
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
+					this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 1);\" style=\"text-decoration: none;\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
 
 					if (ino) {
-						document.write(this.icons[6]);	// minus_bottom.gif
+						this.treeHTML += (this.icons[6]);	// minus_bottom.gif
 					}
 					else {
-						document.write(this.icons[8]);	// plus_bottom.gif
+						this.treeHTML += (this.icons[8]);	// plus_bottom.gif
 					}
 
-					document.write("\" vspace=\"0\" width=\"19\"></a>");
+					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
 				}
 				else {
-					document.write("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 0);\" style=\"text-decoration: none;\">");
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
+					this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"javascript: " + this.treeId + ".toggle('" + this.treeId + "', " + nodeValues[0] + ", 0);\" style=\"text-decoration: none;\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "join" + nodeValues[0] + "\" src=\"");
 
 					if (ino) {
-						document.write(this.icons[5]);	// minus.gif
+						this.treeHTML += (this.icons[5]);	// minus.gif
 					}
 					else {
-						document.write(this.icons[7]);	// plus.gif
+						this.treeHTML += (this.icons[7]);	// plus.gif
 					}
 
-					document.write("\" vspace=\"0\" width=\"19\"></a>");
+					this.treeHTML += ("\" vspace=\"0\" width=\"19\"></a>");
 				}
 			}
 			else {
 				if (ls) {
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[3] + "\" vspace=\"0\" width=\"19\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[3] + "\" vspace=\"0\" width=\"19\">");
 				}
 				else {
-					document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[4] + "\" vspace=\"0\" width=\"19\">");
+					this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[4] + "\" vspace=\"0\" width=\"19\">");
 				}
 			}
 
 			// Link
 
-			document.write("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
+			this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
 
 			if (hcn) {
-				document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"")
+				this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"")
 
 				if (ino) {
-					document.write(this.icons[10]); // folder_open.gif
+					this.treeHTML += (this.icons[10]); // folder_open.gif
 				}
 				else {
-					document.write(this.icons[9]);	// folder.gif
+					this.treeHTML += (this.icons[9]);	// folder.gif
 				}
 
-				document.write("\" vspace=\"0\" width=\"19\">");
+				this.treeHTML += ("\" vspace=\"0\" width=\"19\">");
 			}
 			else {
-				document.write("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
+				this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" id=\"" + this.treeId + "icon" + nodeValues[0] + "\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
 			}
 
-			document.write("<font class=\"" + this.className + "\" size=\"1\">&nbsp;");
-			document.write(nodeValues[4]);
-			document.write("</font></a><br>");
+			this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;");
+			this.treeHTML += (nodeValues[4]);
+			this.treeHTML += ("</font></a><br>");
 
 			// Recurse if node has children
 
 			if (hcn) {
-				document.write("<div id=\"" + this.treeId + "div" + nodeValues[0] + "\"");
+				this.treeHTML += ("<div id=\"" + this.treeId + "div" + nodeValues[0] + "\"");
 
 				if (!ino) {
-					document.write(" style=\"display: none;\"");
+					this.treeHTML += (" style=\"display: none;\"");
 				}
 
-				document.write(">");
+				this.treeHTML += (">");
 
 				this.addNode(nodeValues[0], recursedNodes);
 
-				document.write("</div>");
+				this.treeHTML += ("</div>");
 			}
 
 			// Pop last line or empty icon
@@ -161,6 +163,10 @@ function Tree_hasChildNode(parentNode) {
 	}
 
 	return false;
+}
+
+function Tree_getHTML() {
+	return this.treeHTML;
 }
 
 function Tree_isNodeOpen(node) {
