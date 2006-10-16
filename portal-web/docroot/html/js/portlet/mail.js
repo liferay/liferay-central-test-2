@@ -55,7 +55,17 @@ var Mail = {
 	scrollTimer : null,
 	sortBy : null,
 	summaryList : { head : null, tail : null },
-		
+
+	buildChain : function(chain, link) {
+		if (chain == null) {
+			return new Array(link);
+		}
+		else {
+			chain[chain.length] = link;
+			return chain;
+		}
+	},
+	
 	checkFolderLocation : function(coord, update) {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = folderPane.getElementsByTagName("li");
@@ -579,35 +589,35 @@ var Mail = {
 		
 		var mailBottomHandle = document.getElementById("portlet-mail-bottom-handle");
 		
-		var mainMailGroup = Resize.createHandle(folderHandle);
+		var mainMailGroup = Resize.createHandle(folderHandle, null, Mail.updateFolderWidth);
 		mainMailGroup.addRule(new ResizeRule(folderPane, Resize.HORIZONTAL, Resize.ADD));
 		mainMailGroup.addRule(new ResizeRule(previewBox, Resize.HORIZONTAL, Resize.SUBTRACT));
 		mainMailGroup.addRule(new ResizeRule(detailedPane, Resize.HORIZONTAL, Resize.SUBTRACT));
 		mainMailGroup.addRule(new ResizeRule(msgHeader, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
-		var msgsGroup = Resize.createHandle(previewHandle);
+		var msgsGroup = Resize.createHandle(previewHandle, null, Mail.updatePreviewHeight);
 		msgsGroup.addRule(new ResizeRule(previewPane, Resize.VERTICAL, Resize.ADD));
 		msgsGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.SUBTRACT));
 		
-		var fromGroup = Resize.createHandle(msgsTitleFromHandle);
+		var fromGroup = Resize.createHandle(msgsTitleFromHandle, null, Mail.updateFromWidth);
 		fromGroup.addRule(new ResizeRule(msgsTitleFrom, Resize.HORIZONTAL, Resize.ADD));
 		fromGroup.addRule(new ResizeRule(msgsFrom, Resize.HORIZONTAL, Resize.ADD));
 		fromGroup.addRule(new ResizeRule(msgsTitleSubject, Resize.HORIZONTAL, Resize.SUBTRACT));
 		fromGroup.addRule(new ResizeRule(msgsSubject, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
-		var subjectGroup = Resize.createHandle(msgsTitleSubjectHandle);
+		var subjectGroup = Resize.createHandle(msgsTitleSubjectHandle, null, Mail.updateSubjectWidth);
 		subjectGroup.addRule(new ResizeRule(msgsTitleSubject, Resize.HORIZONTAL, Resize.ADD));
 		subjectGroup.addRule(new ResizeRule(msgsSubject, Resize.HORIZONTAL, Resize.ADD));
 		subjectGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		subjectGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
-		var receivedGroup = Resize.createHandle(msgsTitleReceivedHandle);
+		var receivedGroup = Resize.createHandle(msgsTitleReceivedHandle, null, Mail.updateReceivedWidth);
 		receivedGroup.addRule(new ResizeRule(msgsTitleReceived, Resize.HORIZONTAL, Resize.ADD));
 		receivedGroup.addRule(new ResizeRule(msgsReceived, Resize.HORIZONTAL, Resize.ADD));
 		receivedGroup.addRule(new ResizeRule(msgsTitleSize, Resize.HORIZONTAL, Resize.SUBTRACT));
 		receivedGroup.addRule(new ResizeRule(msgsSize, Resize.HORIZONTAL, Resize.SUBTRACT));
 		
-		var bottomGroup = Resize.createHandle(mailBottomHandle);
+		var bottomGroup = Resize.createHandle(mailBottomHandle, null, Mail.updateDetailedHeight);
 		bottomGroup.addRule(new ResizeRule(detailedFrame, Resize.VERTICAL, Resize.ADD));
 		
 		msgsTitleState.asc = true;
@@ -790,49 +800,47 @@ var Mail = {
 				Mail.groupStart = Mail.lastSelected;
 			}
 
-
+			if (event.shiftKey) {
+				var action = "";
 				
-				if (event.shiftKey) {
-					var action = "";
-					
-					if (Mail.lastSelected.index < Mail.groupStart.index) {
-						if (keycode == Key.DOWN) {
-							action = "unhl";
-							//Mail.summaryUnhighlight(Mail.lastSelected, true);
-						}
-						else {
-							action = "hl";
-							//Mail.summaryHighlight(nextObj, true);
-						}
+				if (Mail.lastSelected.index < Mail.groupStart.index) {
+					if (keycode == Key.DOWN) {
+						action = "unhl";
+						//Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
-					else if (Mail.lastSelected.index > Mail.groupStart.index) {
-						if (keycode == Key.UP) {
-							action = "unhl";
-							//Mail.summaryUnhighlight(Mail.lastSelected, true);
-						}
-						else {
-							action = "hl"
-							//Mail.summaryHighlight(nextObj, true);
-						}
+					else {
+						action = "hl";
+						//Mail.summaryHighlight(nextObj, true);
+					}
+				}
+				else if (Mail.lastSelected.index > Mail.groupStart.index) {
+					if (keycode == Key.UP) {
+						action = "unhl";
+						//Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
 					else {
 						action = "hl"
+						//Mail.summaryHighlight(nextObj, true);
 					}
-					
-					if (action == "hl" && nextObj) {
-						Mail.summaryHighlight(nextObj, true);
-					}
-					else if (action == "unhl") {
-						Mail.summaryUnhighlight(Mail.lastSelected);
-						Mail.lastSelected = nextObj;
-					}
-					
 				}
-				else if (nextObj) {
-					Mail.summaryUnhighlightAll();
-					Mail.summaryHighlight(nextObj, event.shiftKey);
-					Mail.groupStart = Mail.lastSelected;
+				else {
+					action = "hl"
 				}
+				
+				if (action == "hl" && nextObj) {
+					Mail.summaryHighlight(nextObj, true);
+				}
+				else if (action == "unhl") {
+					Mail.summaryUnhighlight(Mail.lastSelected);
+					Mail.lastSelected = nextObj;
+				}
+				
+			}
+			else if (nextObj) {
+				Mail.summaryUnhighlightAll();
+				Mail.summaryHighlight(nextObj, event.shiftKey);
+				Mail.groupStart = Mail.lastSelected;
+			}
 			
 			Mail.scrollToSelected();
 			return false;
@@ -1285,6 +1293,52 @@ var Mail = {
 		Mail.selectedArray = null;
 	},
 	
+	updateDetailedHeight : function(keychain, valuechain) {
+		var detailedFrame = document.getElementById("portlet-mail-msg-detailed-frame");
+
+		keychain = Mail.buildChain(keychain, "detailed-frame-height");
+		valuechain = Mail.buildChain(valuechain, detailedFrame.style.height);
+		
+		Mail.updatePreference(keychain, valuechain);
+	},
+
+	updateFolderWidth : function() {
+		var folderPane = document.getElementById("portlet-mail-folder-pane");
+		Mail.updatePreference("folder-pane-width", folderPane.style.width);
+	},
+
+	updateFromWidth : function() {
+		var fromTitle = document.getElementById("portlet-mail-msgs-title-from");
+		Mail.updateSubjectWidth(new Array("from-title-width"), new Array(fromTitle.style.width));
+	},
+	
+	updateSubjectWidth : function(keychain, valuechain) {
+		var subjectTitle = document.getElementById("portlet-mail-msgs-title-subject");
+
+		keychain = Mail.buildChain(keychain, "subject-title-width");
+		valuechain = Mail.buildChain(valuechain, subjectTitle.style.width);
+
+		Mail.updateReceivedWidth(keychain, valuechain);
+	},
+	
+	updateReceivedWidth : function(keychain, valuechain) {
+		var receivedTitle = document.getElementById("portlet-mail-msgs-title-received");
+
+		keychain = Mail.buildChain(keychain, "received-title-width");
+		valuechain = Mail.buildChain(valuechain, receivedTitle.style.width);
+
+		Mail.updatePreference(keychain, valuechain);
+	},
+
+	updatePreference : function(key, value) {
+		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=updatePreference&key=" + key + "&value=" + value);
+	},
+	
+	updatePreviewHeight : function() {
+		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
+		Mail.updateDetailedHeight(new Array("preview-pane-height"), new Array(previewPane.style.height));
+	},
+
 	updateSortArrow : function() {
 		var sortTitles = new Array();
 		sortTitles[0] = document.getElementById("portlet-mail-msgs-title-from");

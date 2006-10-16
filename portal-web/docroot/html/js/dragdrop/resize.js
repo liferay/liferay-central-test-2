@@ -54,7 +54,7 @@ var Resize = {
 		
 	},
 	
-	createHandle : function(group, disableStop) {
+	createHandle : function(group, disableStop, func) {
 		group.onmousedown = Resize.onMouseDown;
 		group.addRule = Resize.addRule;
 		group.listHead = null;
@@ -64,7 +64,9 @@ var Resize = {
 		group.onResizeStart = new Function();
 		group.onResize = new Function();
 		group.onResizeEnd = new Function();
-		
+
+		group.func = func;
+
 		return group;
 	},
 	
@@ -210,7 +212,11 @@ var Resize = {
 		document.getElementsByTagName("body")[0].style.cursor = "auto";
 		Resize.group = null;
 
+		if (group.func != null) {
+			group.func();
+		}
+
 		return false;
 	}
-	
+
 };

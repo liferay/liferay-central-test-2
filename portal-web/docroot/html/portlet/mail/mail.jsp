@@ -27,6 +27,14 @@
 <%
 String mailBgColor = "#F4F5EB";
 String mailLineColor = "#B3B6B0";
+
+String folderPaneWidth = prefs.getValue("folder-pane-width", "115px");
+String previewPaneHeight = prefs.getValue("preview-pane-height", "200px");
+String detailedFrameHeight = prefs.getValue("detailed-frame-height", "auto");
+
+String fromTitleWidth = prefs.getValue("from-title-width", "125px");
+String subjectTitleWidth = prefs.getValue("subject-title-width", "250px");
+String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 %>
 
 <style>
@@ -185,7 +193,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-folder-pane {
 				overflow: hidden;
-				width: 115px;
+				width: <%= folderPaneWidth %>;
 			}
 
 			#portlet-mail-msgs-pane {
@@ -211,7 +219,7 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msgs-preview-pane {
-				height: 200px;
+				height: <%= previewPaneHeight %>;
 				width: 100%;
 				<c:choose>
 					<c:when test="<%= BrowserSniffer.is_ie(request) %>">
@@ -255,7 +263,7 @@ String mailLineColor = "#B3B6B0";
 			}
 
 			#portlet-mail-msg-detailed-frame {
-				height: auto;
+				height: <%= detailedFrameHeight %>;
 			}
 
 			.portlet-mail-title-text span {
@@ -273,16 +281,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-from {
 				overflow: hidden;
-				width: 16px;
-			}
-
-			#portlet-mail-msgs-title-from div {
-				padding: 2px 0 2px 5px;
-			}
-
-			#portlet-mail-msgs-title-from {
-				overflow: hidden;
-				width: 125px;
+				width: <%= fromTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-title-from div {
@@ -291,7 +290,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-subject {
 				overflow: hidden;
-				width: 250px;
+				width: <%= subjectTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-title-subject div {
@@ -300,7 +299,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-title-received {
 				overflow: hidden;
-				width: 125px;
+				width: <%= receivedTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-title-received div {
@@ -357,7 +356,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-from {
 				overflow: hidden;
-				width: 125px;
+				width: <%= fromTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-from div {
@@ -370,7 +369,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-subject {
 				overflow: hidden;
-				width: 250px;
+				width: <%= subjectTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-subject div {
@@ -383,7 +382,7 @@ String mailLineColor = "#B3B6B0";
 
 			#portlet-mail-msgs-received {
 				overflow: hidden;
-				width: 125px;
+				width: <%= receivedTitleWidth %>;
 			}
 
 			#portlet-mail-msgs-received div {
