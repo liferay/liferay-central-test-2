@@ -461,7 +461,8 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 					<td>
 						<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="Search" type="image">
 					</td>
-					<td style="padding-left: 5px;"></td>
+				</tr>
+				<tr>
 					<td style="cursor: pointer; text-align: right;">
 						<span onClick="showAdvancedSearch();"><%= LanguageUtil.get(pageContext, "advanced") %></span>
 					</td>
