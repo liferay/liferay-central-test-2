@@ -78,9 +78,9 @@ public class WebXML24Descriptor extends SimpleXMLDescriptor {
 	private static final ElementIdentifier[] _ELEMENTS_IDENTIFIED_BY_CHILD = {
 		new ElementIdentifier("context-param", "param-name"),
 		new ElementIdentifier("filter", "filter-name"),
-		new ElementIdentifier("filter-mapping", "filter-name"),
+		//new ElementIdentifier("filter-mapping", "filter-name"),
 		new ElementIdentifier("servlet", "servlet-name"),
-		new ElementIdentifier("servlet-mapping", "servlet-name"),
+		//new ElementIdentifier("servlet-mapping", "servlet-name"),
 		new ElementIdentifier("init-param", "param-name"),
 		new ElementIdentifier("taglib", "taglib-uri"),
 		new ElementIdentifier("resource-env-ref", "res-env-ref-name"),
