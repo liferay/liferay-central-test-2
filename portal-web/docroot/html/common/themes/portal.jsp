@@ -26,6 +26,20 @@
 
 <tiles:useAttribute id="tilesPopUp" name="pop_up" classname="java.lang.String" ignore="true" />
 
+<script language="JavaScript">
+	var themeDisplay = {
+		getPathThemeRoot : function() {
+			return("<%= themeDisplay.getPathThemeRoot() %>");
+		},
+		getPathThemeImage : function() {
+			return("<%= themeDisplay.getPathThemeImage() %>");
+		},
+		getPathMain : function() {
+			return("<%= themeDisplay.getPathMain() %>");
+		}
+	};
+</script>
+
 <%
 boolean popUp = GetterUtil.getBoolean(tilesPopUp);
 String scroll = ParamUtil.getString(request, "scroll");

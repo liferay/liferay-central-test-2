@@ -26,18 +26,6 @@ var loadingAnimation = new Image();
 
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif";
 
-var themeDisplay = {
-	getPathThemeRoot : function() {
-		return("<%= themeDisplay.getPathThemeRoot() %>");
-	},
-	getPathThemeImage : function() {
-		return("<%= themeDisplay.getPathThemeImage() %>");
-	},
-	getPathMain : function() {
-		return("<%= themeDisplay.getPathMain() %>");
-	}
-};
-
 function addPortlet(plid, portletId) {
 	var refreshPortletList = ",";
 

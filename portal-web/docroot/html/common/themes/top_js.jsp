@@ -43,8 +43,9 @@
 		<script src="<%= themeDisplay.getPathJavaScript() %>/util.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/validation.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portal.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/tabs.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/ajax.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/alerts.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/tabs.js" type="text/javascript"></script>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/calendar/calendar_stripped.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/calendar/calendar-setup_stripped.js" type="text/javascript"></script>

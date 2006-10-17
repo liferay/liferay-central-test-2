@@ -32,6 +32,7 @@
 	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
 	Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
+
 	sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeout * (int)Time.MINUTE);
 	%>
 
@@ -46,6 +47,6 @@
 	}
 
 	function openSessionWarning() {
-		window.open("<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>", "session", "directories=no,height=150,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=300");
+		Alerts.fireMessageBox(true, "<font class=\"bg\" size=\"2\"><span class=\"bg-neg-alert\" id=\"session_warning_text\"><%= LanguageUtil.format(pageContext, "warning-due-to-inactivity-your-session-will-expire", new Object[] {new Integer(sessionTimeoutWarning), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale).format(Time.getDate(sessionTimeoutCal)), timeZone.getDisplayName(false, TimeZone.SHORT, locale), new Integer(sessionTimeout)}, false) %></span></font>", "extendSession();", "");
 	}
 </script>
