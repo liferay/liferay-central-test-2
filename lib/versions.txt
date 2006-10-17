@@ -28,7 +28,7 @@ Concurrent 1.3.4
 Derby 10.1.1.0
 Display Tag Library 1.1
 dom4j 1.6.1
-EasyConf 0.9
+EasyConf 0.9.5
 Ehcache 1.1
 FCKeditor 2.2
 Friki 2.1.1
