@@ -142,7 +142,7 @@
 </tr>
 <tr>
 	<td>
-		<div id="<portlet:namespace />javaScript" style="display: none;">
+		<div id="<portlet:namespace />javascript" style="display: none;">
 			<br>
 
 			<%= LanguageUtil.get(pageContext, "javascript-1") %><br>
