@@ -56,7 +56,7 @@ body {
 	border: 0;
 	margin: 0;
 	padding: 0;
-	text-align: center;
+	text-align: left;
 	font-family: Tahoma, Arial;
 	font-size: 76%;
 }
@@ -312,8 +312,11 @@ FONT.bg {
 /******************************************************************************/
 
 #layout-outer-side-decoration {
-	margin-left: auto;
-	margin-right: auto;
+	text-align: center;
+}
+
+#layout-inner-side-decoration {
+	margin: 0 auto 0 auto;
 }
 
 #layout-box {

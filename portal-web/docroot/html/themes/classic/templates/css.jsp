@@ -24,7 +24,7 @@
 
 <%@ include file="init.jsp" %>
 
-#layout-outer-side-decoration {
+#layout-inner-side-decoration {
 	width: <%= (themeDisplay.getResolution() > 0) ?
 				(themeDisplay.getResolution() + "px") :
 				("99%") %>;
