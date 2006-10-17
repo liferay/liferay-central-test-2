@@ -206,10 +206,10 @@ public class Validator {
 
 		// Unix based email addresses cannot be longer than 24 characters.
 		// However, many Windows based email addresses can be longer than 24,
-		// so we will set the maximum at 48.
+		// so we will set the maximum at 96.
 
 		//int maxEmailLength = 24;
-		int maxEmailLength = 48;
+		int maxEmailLength = 96;
 
         if ((at > maxEmailLength) || (at == -1) || (at == 0) ||
 			((at <= eaLength) && (at > eaLength - 5))) {
@@ -247,17 +247,14 @@ public class Validator {
 		for (int i = 0; i < name.length; i++) {
 			if ((!isChar(name[i])) &&
 				(!isDigit(name[i])) &&
-				(name[i] != '.') &&
-				(name[i] != '-') &&
-				(name[i] != '_')) {
+				(!isEmailAddressSpecialChar(name[i]))) {
 
 				return false;
 			}
 		}
 
-		if ((name[0] == '.') || (name[name.length - 1] == '.') ||
-			(name[0] == '-') || (name[name.length - 1] == '-') ||
-			(name[0] == '_')) { // || (name[name.length - 1] == '_')) {
+		if (isEmailAddressSpecialChar(name[0]) ||
+			isEmailAddressSpecialChar(name[name.length - 1])) {
 
 			// .joe.@joe.com
 			// -joe-@joe.com
@@ -271,15 +268,14 @@ public class Validator {
 		for (int i = 0; i < host.length; i++) {
 			if ((!isChar(host[i])) &&
 				(!isDigit(host[i])) &&
-				(host[i] != '.') &&
-				(host[i] != '-')) {
+				(!isEmailAddressSpecialChar(host[i]))) {
 
 				return false;
 			}
 		}
 
-		if ((host[0] == '.') || (host[host.length - 1] == '.') ||
-			(host[0] == '-') || (host[host.length - 1] == '-')) {
+		if (isEmailAddressSpecialChar(host[0]) ||
+			isEmailAddressSpecialChar(host[host.length - 1])) {
 
 			// joe@.joe.com.
 			// joe@-joe.com-
@@ -300,6 +296,19 @@ public class Validator {
 		}
 
         return true;
+	}
+
+	public static boolean isEmailAddressSpecialChar(char c) {
+
+		// See LEP-1445
+
+		for (int i = 0; i < _EMAIL_ADDRESS_SPECIAL_CHAR.length; i++) {
+			if (c == _EMAIL_ADDRESS_SPECIAL_CHAR[i]) {
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	/**
@@ -400,5 +409,10 @@ public class Validator {
 	public static boolean isPhoneNumber(String phoneNumber) {
 		return isNumber(StringUtil.extractDigits(phoneNumber));
 	}
+
+	private static char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
+		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
+		'_', '`', '{', '|', '}', '~'
+	};
 
 }
