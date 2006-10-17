@@ -30,7 +30,7 @@
 
 		<!-- Order -->
 
-		<order by="desc">
+		<order by="asc">
 			<order-column name="folderId" />
 			<order-column name="name" />
 		</order>

@@ -322,14 +322,12 @@ public class DLFileEntryModel extends BaseModel {
 		DLFileEntry dlFileEntry = (DLFileEntry)obj;
 		int value = 0;
 		value = getFolderId().compareTo(dlFileEntry.getFolderId());
-		value = value * -1;
 
 		if (value != 0) {
 			return value;
 		}
 
 		value = getName().compareTo(dlFileEntry.getName());
-		value = value * -1;
 
 		if (value != 0) {
 			return value;

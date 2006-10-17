@@ -254,7 +254,7 @@ portletURL.setParameter("folderId", folderId);
 
 				String rowHREF = sb.toString();
 
-				// Title
+				// Title and description
 
 				sb = new StringBuffer();
 
@@ -264,6 +264,13 @@ portletURL.setParameter("folderId", folderId);
 				sb.append(DLUtil.getFileExtension(fileEntry.getName()));
 				sb.append(".gif\">");
 				sb.append(fileEntry.getTitle());
+
+				if (Validator.isNotNull(fileEntry.getDescription())) {
+					sb.append("<br>");
+					sb.append("<span style=\"font-size: xx-small;\">");
+					sb.append(fileEntry.getDescription());
+					sb.append("</span>");
+				}
 
 				row.addText(sb.toString(), rowHREF);
 
@@ -375,7 +382,7 @@ portletURL.setParameter("folderId", folderId);
 
 			String rowHREF = sb.toString();
 
-			// Title
+			// Title and description
 
 			sb = new StringBuffer();
 
@@ -385,6 +392,13 @@ portletURL.setParameter("folderId", folderId);
 			sb.append(DLUtil.getFileExtension(fileEntry.getName()));
 			sb.append(".gif\">");
 			sb.append(fileEntry.getTitle());
+
+			if (Validator.isNotNull(fileEntry.getDescription())) {
+				sb.append("<br>");
+				sb.append("<span style=\"font-size: xx-small;\">");
+				sb.append(fileEntry.getDescription());
+				sb.append("</span>");
+			}
 
 			row.addText(sb.toString(), rowHREF);
 

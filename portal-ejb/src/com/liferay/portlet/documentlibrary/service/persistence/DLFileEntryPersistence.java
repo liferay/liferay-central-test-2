@@ -197,8 +197,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			query.append(" ");
 			query.append("ORDER BY ");
-			query.append("folderId DESC").append(", ");
-			query.append("name DESC");
+			query.append("folderId ASC").append(", ");
+			query.append("name ASC");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
@@ -249,8 +249,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -335,8 +335,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -389,8 +389,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ORDER BY ");
-				query.append("folderId DESC").append(", ");
-				query.append("name DESC");
+				query.append("folderId ASC").append(", ");
+				query.append("name ASC");
 			}
 
 			Query q = session.createQuery(query.toString());
