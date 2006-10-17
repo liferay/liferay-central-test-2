@@ -99,22 +99,25 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int authenticateByEmailAddress(java.lang.String companyId,
-		java.lang.String emailAddress, java.lang.String password)
+		java.lang.String emailAddress, java.lang.String password,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.authenticateByEmailAddress(companyId,
-			emailAddress, password);
+			emailAddress, password, parameterMap);
 	}
 
 	public static int authenticateByUserId(java.lang.String companyId,
-		java.lang.String userId, java.lang.String password)
+		java.lang.String userId, java.lang.String password,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.authenticateByUserId(companyId, userId, password);
+		return userLocalService.authenticateByUserId(companyId, userId,
+			password, parameterMap);
 	}
 
 	public static boolean authenticateForJAAS(java.lang.String userId,

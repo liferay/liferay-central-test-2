@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.auth;
 
+import java.util.Map;
+
 /**
  * <a href="Authenticator.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,11 +39,12 @@ public interface Authenticator {
 	public static final int DNE = 0;
 
 	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password)
+			String companyId, String emailAddress, String password,
+			Map parameterMap)
 		throws AuthException;
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password)
+			String companyId, String userId, String password, Map parameterMap)
 		throws AuthException;
 
 }

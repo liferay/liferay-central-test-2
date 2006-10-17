@@ -115,14 +115,14 @@ public class LoginAction extends Action {
 
 		if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
-				company.getCompanyId(), login, password);
+				company.getCompanyId(), login, password, req.getParameterMap());
 
 			userId = UserLocalServiceUtil.getUserId(
 				company.getCompanyId(), login);
 		}
 		else {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), login, password);
+				company.getCompanyId(), login, password, req.getParameterMap());
 		}
 
 		try {

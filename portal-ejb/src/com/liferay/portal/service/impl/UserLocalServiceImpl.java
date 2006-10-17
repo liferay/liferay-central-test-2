@@ -395,17 +395,19 @@ public class UserLocalServiceImpl implements UserLocalService {
 	}
 
 	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password)
+			String companyId, String emailAddress, String password,
+			Map parameterMap)
 		throws PortalException, SystemException {
 
-		return authenticate(companyId, emailAddress, password, true);
+		return authenticate(
+			companyId, emailAddress, password, true, parameterMap);
 	}
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password)
+			String companyId, String userId, String password, Map parameterMap)
 		throws PortalException, SystemException {
 
-		return authenticate(companyId, userId, password, false);
+		return authenticate(companyId, userId, password, false, parameterMap);
 	}
 
 	public boolean authenticateForJAAS(String userId, String encPwd)
@@ -1102,7 +1104,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 	protected int authenticate(
 			String companyId, String login, String password,
-			boolean byEmailAddress)
+			boolean byEmailAddress, Map parameterMap)
 		throws PortalException, SystemException {
 
 		login = login.trim().toLowerCase();
@@ -1127,13 +1129,13 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		if (byEmailAddress) {
 			authResult = AuthPipeline.authenticateByEmailAddress(
-				PropsUtil.getArray(
-					PropsUtil.AUTH_PIPELINE_PRE), companyId, login, password);
+				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE), companyId,
+				login, password, parameterMap);
 		}
 		else {
 			authResult = AuthPipeline.authenticateByUserId(
-				PropsUtil.getArray(
-					PropsUtil.AUTH_PIPELINE_PRE), companyId, login, password);
+				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE), companyId,
+				login, password, parameterMap);
 		}
 
 		User user = null;
@@ -1211,27 +1213,27 @@ public class UserLocalServiceImpl implements UserLocalService {
 		if (authResult == Authenticator.SUCCESS) {
 			if (byEmailAddress) {
 				authResult = AuthPipeline.authenticateByEmailAddress(
-					PropsUtil.getArray(
-						PropsUtil.AUTH_PIPELINE_POST), companyId, login,
-						password);
+					PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST), companyId,
+					login, password, parameterMap);
 			}
 			else {
 				authResult = AuthPipeline.authenticateByUserId(
-					PropsUtil.getArray(
-						PropsUtil.AUTH_PIPELINE_POST), companyId, login,
-						password);
+					PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST), companyId,
+					login, password, parameterMap);
 			}
 		}
 
 		if (authResult == Authenticator.FAILURE) {
 			try {
 				if (byEmailAddress) {
-					AuthPipeline.onFailureByEmailAddress(PropsUtil.getArray(
-						PropsUtil.AUTH_FAILURE), companyId, login);
+					AuthPipeline.onFailureByEmailAddress(
+						PropsUtil.getArray(PropsUtil.AUTH_FAILURE), companyId,
+						login, parameterMap);
 				}
 				else {
-					AuthPipeline.onFailureByUserId(PropsUtil.getArray(
-						PropsUtil.AUTH_FAILURE), companyId, login);
+					AuthPipeline.onFailureByUserId(
+						PropsUtil.getArray(PropsUtil.AUTH_FAILURE), companyId,
+						login, parameterMap);
 				}
 
 				int failedLoginAttempts = user.getFailedLoginAttempts();
@@ -1249,12 +1251,14 @@ public class UserLocalServiceImpl implements UserLocalService {
 					if (byEmailAddress) {
 						AuthPipeline.onMaxFailuresByEmailAddress(
 							PropsUtil.getArray(
-								PropsUtil.AUTH_MAX_FAILURES), companyId, login);
+								PropsUtil.AUTH_MAX_FAILURES),
+							companyId, login, parameterMap);
 					}
 					else {
 						AuthPipeline.onMaxFailuresByUserId(
 							PropsUtil.getArray(
-								PropsUtil.AUTH_MAX_FAILURES), companyId, login);
+								PropsUtil.AUTH_MAX_FAILURES),
+							companyId, login, parameterMap);
 					}
 				}
 			}

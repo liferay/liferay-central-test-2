@@ -109,18 +109,21 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	}
 
 	public int authenticateByEmailAddress(java.lang.String companyId,
-		java.lang.String emailAddress, java.lang.String password)
+		java.lang.String emailAddress, java.lang.String password,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().authenticateByEmailAddress(companyId, emailAddress,
-			password);
+			password, parameterMap);
 	}
 
 	public int authenticateByUserId(java.lang.String companyId,
-		java.lang.String userId, java.lang.String password)
+		java.lang.String userId, java.lang.String password,
+		java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().authenticateByUserId(companyId, userId, password);
+		return getService().authenticateByUserId(companyId, userId, password,
+			parameterMap);
 	}
 
 	public boolean authenticateForJAAS(java.lang.String userId,

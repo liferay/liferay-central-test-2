@@ -25,6 +25,8 @@ package com.liferay.portal.security.auth;
 import com.liferay.util.InstancePool;
 import com.liferay.util.Validator;
 
+import java.util.Map;
+
 /**
  * <a href="AuthPipeline.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,50 +37,55 @@ public class AuthPipeline {
 
     public static int authenticateByEmailAddress(
 			String[] classes, String companyId, String emailAddress,
-			String password)
+			String password, Map parameterMap)
     	throws AuthException {
 
-		return _authenticate(classes, companyId, emailAddress, password, true);
+		return _authenticate(
+			classes, companyId, emailAddress, password, true, parameterMap);
 	}
 
     public static int authenticateByUserId(
-			String[] classes, String companyId, String userId, String password)
+			String[] classes, String companyId, String userId, String password,
+			Map parameterMap)
     	throws AuthException {
 
-		return _authenticate(classes, companyId, userId, password, false);
+		return _authenticate(
+			classes, companyId, userId, password, false, parameterMap);
 	}
 
 	public static void onFailureByEmailAddress(
-			String[] classes, String companyId, String emailAddress)
+			String[] classes, String companyId, String emailAddress,
+			Map parameterMap)
 		throws AuthException {
 
-		_onFailure(classes, companyId, emailAddress, true);
+		_onFailure(classes, companyId, emailAddress, true, parameterMap);
 	}
 
 	public static void onFailureByUserId(
-			String[] classes, String companyId, String userId)
+			String[] classes, String companyId, String userId, Map parameterMap)
 		throws AuthException {
 
-		_onFailure(classes, companyId, userId, false);
+		_onFailure(classes, companyId, userId, false, parameterMap);
 	}
 
 	public static void onMaxFailuresByEmailAddress(
-			String[] classes, String companyId, String emailAddress)
+			String[] classes, String companyId, String emailAddress,
+			Map parameterMap)
 		throws AuthException {
 
-		onFailureByEmailAddress(classes, companyId, emailAddress);
+		onFailureByEmailAddress(classes, companyId, emailAddress, parameterMap);
 	}
 
 	public static void onMaxFailuresByUserId(
-			String[] classes, String companyId, String userId)
+			String[] classes, String companyId, String userId, Map parameterMap)
 		throws AuthException {
 
-		onFailureByUserId(classes, companyId, userId);
+		onFailureByUserId(classes, companyId, userId, parameterMap);
 	}
 
     private static int _authenticate(
 			String[] classes, String companyId, String login, String password,
-			boolean byEmailAddress)
+			boolean byEmailAddress, Map parameterMap)
     	throws AuthException {
 
 		if ((classes == null) || (classes.length == 0)) {
@@ -97,11 +104,11 @@ public class AuthPipeline {
 
 					if (byEmailAddress) {
 						authResult = auth.authenticateByEmailAddress(
-							companyId, login, password);
+							companyId, login, password, parameterMap);
 					}
 					else {
 						authResult = auth.authenticateByUserId(
-							companyId, login, password);
+							companyId, login, password, parameterMap);
 					}
 
 					if (authResult != Authenticator.SUCCESS) {
@@ -122,7 +129,7 @@ public class AuthPipeline {
 
 	private static void _onFailure(
 			String[] classes, String companyId, String login,
-			boolean byEmailAddress)
+			boolean byEmailAddress, Map parameterMap)
 		throws AuthException {
 
 		if ((classes == null) || (classes.length == 0)) {
@@ -138,10 +145,12 @@ public class AuthPipeline {
 
 				try {
 					if (byEmailAddress) {
-						authFailure.onFailureByEmailAddress(companyId, login);
+						authFailure.onFailureByEmailAddress(
+							companyId, login, parameterMap);
 					}
 					else {
-						authFailure.onFailureByUserId(companyId, login);
+						authFailure.onFailureByUserId(
+							companyId, login, parameterMap);
 					}
 				}
 				catch (AuthException ae) {

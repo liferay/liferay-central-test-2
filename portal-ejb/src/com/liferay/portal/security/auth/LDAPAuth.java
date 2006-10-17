@@ -41,6 +41,7 @@ import java.io.StringWriter;
 
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.Map;
 import java.util.Properties;
 
 import javax.naming.Binding;
@@ -74,7 +75,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByEmailAddress(
-			String companyId, String emailAddress, String password)
+			String companyId, String emailAddress, String password,
+			Map parameterMap)
 		throws AuthException {
 
 		try {
@@ -89,7 +91,7 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password)
+			String companyId, String userId, String password, Map parameterMap)
 		throws AuthException {
 
 		try {

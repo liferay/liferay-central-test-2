@@ -22,6 +22,8 @@
 
 package com.liferay.portal.security.auth;
 
+import java.util.Map;
+
 /**
  * <a href="LoginFailure.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,11 +32,13 @@ package com.liferay.portal.security.auth;
  */
 public class LoginFailure implements AuthFailure {
 
-	public void onFailureByEmailAddress(String companyId, String emailAddress)
+	public void onFailureByEmailAddress(
+			String companyId, String emailAddress, Map parameterMap)
 		throws AuthException {
 	}
 
-	public void onFailureByUserId(String companyId, String userId)
+	public void onFailureByUserId(
+			String companyId, String userId, Map parameterMap)
 		throws AuthException {
 	}
 
