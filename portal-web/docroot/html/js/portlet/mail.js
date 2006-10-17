@@ -1299,12 +1299,12 @@ var Mail = {
 		keychain = Mail.buildChain(keychain, "detailed-frame-height");
 		valuechain = Mail.buildChain(valuechain, detailedFrame.style.height);
 		
-		Mail.updatePreference(keychain, valuechain);
+		Mail.updatePreferences(keychain, valuechain);
 	},
 
 	updateFolderWidth : function() {
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
-		Mail.updatePreference("folder-pane-width", folderPane.style.width);
+		Mail.updatePreferences("folder-pane-width", folderPane.style.width);
 	},
 
 	updateFromWidth : function() {
@@ -1327,11 +1327,11 @@ var Mail = {
 		keychain = Mail.buildChain(keychain, "received-title-width");
 		valuechain = Mail.buildChain(valuechain, receivedTitle.style.width);
 
-		Mail.updatePreference(keychain, valuechain);
+		Mail.updatePreferences(keychain, valuechain);
 	},
 
-	updatePreference : function(key, value) {
-		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=updatePreference&key=" + key + "&value=" + value);
+	updatePreferences : function(key, value) {
+		loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=updatePreferences&key=" + key + "&value=" + value);
 	},
 	
 	updatePreviewHeight : function() {

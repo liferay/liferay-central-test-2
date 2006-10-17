@@ -117,7 +117,7 @@ function addPortletHTML(html, container, placeHolder) {
 
 	executeLoadedScript(addDiv);
 	executeLoadedScript(portletBound);
-	
+
 	if (!portletBound.isStatic) {
 		var handle = DragDrop.findHandle(portletBound);
 

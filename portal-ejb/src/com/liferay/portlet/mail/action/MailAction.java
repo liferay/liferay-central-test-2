@@ -52,6 +52,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -115,8 +116,8 @@ public class MailAction extends JSONAction {
 			else if (cmd.equals("renameFolder")) {
 				renameFolder(req);
 			}
-			else if (cmd.equals("updatePreference")) {
-				updatePreference(req);
+			else if (cmd.equals("updatePreferences")) {
+				updatePreferences(req);
 			}
 		}
 		catch (Exception e) {
@@ -311,7 +312,7 @@ public class MailAction extends JSONAction {
 		MailUtil.renameFolder(ses, folderId, newFolderId);
 	}
 
-	protected void updatePreference(HttpServletRequest req) throws Exception {
+	protected void updatePreferences(HttpServletRequest req) throws Exception {
 		PortletPreferences prefs = PortalUtil.getPreferences(req);
 
 		String[] keys = StringUtil.split(ParamUtil.getString(req, "key"));

@@ -8,30 +8,11 @@ function Tree(treeId, nodes, icons, className) {
 
     this.addNode = Tree_addNode;
     this.create = Tree_create;
+    this.getHTML = Tree_getHTML;
     this.hasChildNode = Tree_hasChildNode;
     this.isNodeOpen = Tree_isNodeOpen;
     this.setOpenNodes = Tree_setOpenNodes;
     this.toggle = Tree_toggle;
-    this.getHTML = Tree_getHTML;
-}
-
-function Tree_create(openNodes) {
-	if (this.nodes.length > 0) {
-		if (openNodes != null) {
-			this.setOpenNodes(openNodes);
-		}
-
-		var nodeValues = this.nodes[0].split("|");
-
-		this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
-		this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
-		this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;" + nodeValues[4] + "</font>");
-		this.treeHTML += ("</a><br>");
-
-		var recursedNodes = new Array();
-		//this.addNode(0, recursedNodes);
-		this.addNode(1, recursedNodes);
-	}
 }
 
 function Tree_addNode(parentNode, recursedNodes) {
@@ -151,6 +132,29 @@ function Tree_addNode(parentNode, recursedNodes) {
 	}
 }
 
+function Tree_create(openNodes) {
+	if (this.nodes.length > 0) {
+		if (openNodes != null) {
+			this.setOpenNodes(openNodes);
+		}
+
+		var nodeValues = this.nodes[0].split("|");
+
+		this.treeHTML += ("<a class=\"" + this.className + "\" onClick=\"getMousePos(event)\" href=\"" + nodeValues[6] + "\" style=\"text-decoration: none;\">");
+		this.treeHTML += ("<img align=\"absmiddle\" border=\"0\" height=\"20\" hspace=\"0\" src=\"" + this.icons[nodeValues[5]] + "\" vspace=\"0\" width=\"19\">");
+		this.treeHTML += ("<font class=\"" + this.className + "\" size=\"1\">&nbsp;" + nodeValues[4] + "</font>");
+		this.treeHTML += ("</a><br>");
+
+		var recursedNodes = new Array();
+		//this.addNode(0, recursedNodes);
+		this.addNode(1, recursedNodes);
+	}
+}
+
+function Tree_getHTML() {
+	return this.treeHTML;
+}
+
 function Tree_hasChildNode(parentNode) {
 	if (parentNode >= this.nodes.length) {
 		return false;
@@ -163,10 +167,6 @@ function Tree_hasChildNode(parentNode) {
 	}
 
 	return false;
-}
-
-function Tree_getHTML() {
-	return this.treeHTML;
 }
 
 function Tree_isNodeOpen(node) {
