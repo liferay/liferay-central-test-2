@@ -197,7 +197,7 @@ public class EditMessageAction extends PortletAction {
 
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_BODY,
-				getBody(req, mailMessage) + signature);
+				signature + getBody(req, mailMessage));
 		}
 		else if (cmd.equals(Constants.EDIT)) {
 			MailUtil.setFolder(httpSes, folderId);
