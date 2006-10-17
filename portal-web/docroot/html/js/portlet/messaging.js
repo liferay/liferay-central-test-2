@@ -73,7 +73,11 @@ var Messaging = {
 	},
 
 	getUpdates : function() {
-		AjaxTracker.sendPendRequest(themeDisplay.getPathMain() + "/messaging/action", "cmd=getUpdates", Messaging.getUpdatesReturn);
+		Ajax.request(themeDisplay.getPathMain() + "/messaging/action?cmd=getUpdates",
+			{
+				onComplete: Messaging.getUpdatesReturn,
+				reverseAjax: true
+			});
 	},
 	
 	getUpdatesReturn : function(xmlHttpReq) {

@@ -35,7 +35,7 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 
 					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
 					if (ajaxId && ajaxId != "") {
-						AjaxTracker.remove(parseInt(ajaxId));
+						Ajax.remove(parseInt(ajaxId));
 					}
 				}
 			}
@@ -58,68 +58,92 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 	};
 }
 
-var AjaxTracker = {
+var Ajax = {
 	counter : 1,
 	requests : new Array(),
 	
-	add : function(path, queryString, returnFunction, returnArgs, reverseAjax) {
-		var ajaxId = reverseAjax ? 0 : AjaxTracker.getNextId();
-		var request = new AjaxRequest(returnFunction, returnArgs, ajaxId);
+	request : function(url, options) {
+		var opts = (options == null) ? (new Object()) : options;
+		
+		var ajaxId = (opts.reverseAjax) ? 0 : Ajax.getNextId();
+		var returnFunction = opts.onComplete;
+		var returnArgs = (opts.returnArgs == null) ? opts : opts.returnArgs;
+		var request = new AjaxRequest(opts.onComplete, returnArgs, ajaxId);
 		var xmlHttpReq = request.getRequest();
 		
-		AjaxTracker.requests[ajaxId] = request;
+		Ajax.requests[ajaxId] = request;
 		
-		if (queryString == null) {
-			queryString = "";
+		if (url.indexOf("?") < 0) {
+			url += "?";
+		}
+		else {
+			url += "&";
 		}
 	
-		if (!endsWith(queryString, "&")) {
-			queryString += "&";
-		}
-	
-		queryString += "no_cache=" + random() + "&ajax_id=" + ajaxId;
+		url += "no_cache=" + random() + "&ajax_id=" + ajaxId;
+		
+		var urlArray = url.split("?");
+		var path = urlArray[0];
+		var query = urlArray[1];
 
 		try {
 			if (false) {
-				xmlHttpReq.open("GET", path + "?" + queryString, true);
+				xmlHttpReq.open("GET", url, true);
 			}
 			else {
 				xmlHttpReq.open("POST", path, true);
 				xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
 				xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xmlHttpReq.send(queryString);
+				xmlHttpReq.send(query);
 			}
 		}
 		catch (e) {
 		}
 		
 		if (returnFunction == null) {
-			AjaxTracker.remove(ajaxId);
+			Ajax.remove(ajaxId);
+		}
+	},
+	
+	update : function(url, id) {
+		var element = document.getElementById(id);
+
+		if (element) {
+			var options = new Object();
+			
+			options.element = element;
+			
+			options.onComplete = function (xmlHttpReq, options){
+				var element = options.element;
+				
+				if (element) {
+					element.innerHTML = xmlHttpReq.responseText;
+					executeLoadedScript(element);
+				}
+			}
+			
+			Ajax.request(url, options);
 		}
 	},
 	
 	getNextId : function() {
-		var id = AjaxTracker.counter++;
+		var id = Ajax.counter++;
 
-		if (AjaxTracker.counter > 20) {
+		if (Ajax.counter > 20) {
 			/* Reset array in a round-robin fashion */
 			/* Reserve index 0 for reverse ajax requests */
-			AjaxTracker.counter = 1;
+			Ajax.counter = 1;
 		}
 
 		return id;
 	},
 	
 	remove : function(id) {
-		var request = AjaxTracker.requests[id];
+		var request = Ajax.requests[id];
 		if (id && request) {
 			request.cleanUp();
 			request = null;
 		}
-	},
-	
-	sendPendRequest : function(path, queryString, returnFunction, returnArgs) {
-		AjaxTracker.add(path, queryString, returnFunction, returnArgs, true);
 	}
 }
 
@@ -200,8 +224,15 @@ function loadForm(form, action, elId, returnFunction) {
 	loadPage(path, queryString, returnFunction);
 }
 
+/*
+ * NOTE: loadPage() has been depricated.  Use Ajax.request() instead
+ */
 function loadPage(path, queryString, returnFunction, returnArgs) {
-	AjaxTracker.add(path, queryString, returnFunction, returnArgs);
+	
+	Ajax.request(path + "?" + queryString, {
+			onComplete: returnFunction,
+			returnArgs: returnArgs
+		});
 }
 
 function printJSON(data) {

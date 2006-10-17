@@ -28,6 +28,7 @@
 
 <%
 boolean popUp = GetterUtil.getBoolean(tilesPopUp);
+String scroll = ParamUtil.getString(request, "scroll");
 %>
 
 <c:choose>
@@ -36,24 +37,20 @@ boolean popUp = GetterUtil.getBoolean(tilesPopUp);
 	</c:when>
 	<c:otherwise>
 		<liferay-theme:include page="portal_normal.jsp" />
+		
+		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
+			<script language="JavaScript">
+				Messaging.init("<%= request.getRemoteUser() %>");
+			</script>
+		</c:if>
+		
+		<c:if test="<%= Validator.isNotNull(scroll) %>">
+			<script language="JavaScript" event="onLoad()" for="window">
+				document.getElementById("<%= scroll %>").scrollIntoView();
+			</script>
+		</c:if>
 	</c:otherwise>
 </c:choose>
-
-<%
-String scroll = ParamUtil.getString(request, "scroll");
-%>
-
-<c:if test="<%= Validator.isNotNull(scroll) %>">
-	<script language="JavaScript" event="onLoad()" for="window">
-		document.getElementById("<%= scroll %>").scrollIntoView();
-	</script>
-</c:if>
-
-<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-	<script language="JavaScript">
-		Messaging.init("<%= request.getRemoteUser() %>");
-	</script>
-</c:if>
 
 <%
 SessionMessages.clear(request);
