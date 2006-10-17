@@ -11,7 +11,7 @@
 		<antcall target="compile" />
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
-		<ant dir="sql" target="load-db" inheritAll="false" />
+		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
 		
 		<ant dir="portal-ejb" target="build-newscategories" inheritAll="false" />
 		<ant dir="portal-ejb" target="build-reverendfun" inheritAll="false" />
@@ -572,7 +572,7 @@ auto.deploy.dest.dir=../webapps</echo>
 		<mkdir dir="${lp.ext.dir}/servers/tomcat" />
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
-		<ant dir="sql" target="load-db" inheritAll="false" />
+		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
 
 		<copy todir="${lp.ext.dir}/sql" overwrite="yes">
 			<fileset dir="sql">
