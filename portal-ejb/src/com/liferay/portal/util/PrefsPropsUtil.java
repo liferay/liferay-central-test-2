@@ -112,7 +112,7 @@ public class PrefsPropsUtil {
 			return value;
 		}
 		else {
-			return ContentUtil.get(CompanyPropsUtil.get(companyId, name));
+			return ContentUtil.get(PropsUtil.get(name));
 		}
 	}
 
@@ -223,7 +223,7 @@ public class PrefsPropsUtil {
 	public static String getString(
 		PortletPreferences prefs, String companyId, String name) {
 
-		String value = CompanyPropsUtil.get(companyId, name);
+		String value = PropsUtil.get(name);
 
 		return prefs.getValue(name, value);
 	}
@@ -248,7 +248,7 @@ public class PrefsPropsUtil {
 			PortletPreferences prefs, String companyId, String name)
 		throws PortalException, SystemException {
 
-		String value = CompanyPropsUtil.get(companyId, name);
+		String value = PropsUtil.get(name);
 
 		return StringUtil.split(prefs.getValue(name, value), "\n");
 	}

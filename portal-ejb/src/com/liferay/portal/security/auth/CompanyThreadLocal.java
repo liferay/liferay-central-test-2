@@ -20,54 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.security.auth;
 
-import com.liferay.util.ExtPropertiesLoader;
-import com.liferay.util.StringUtil;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CompanyPropsUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompanyThreadLocal.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CompanyPropsUtil {
+public class CompanyThreadLocal {
 
-	public static boolean containsKey(String companyId, String key) {
-		if (get(companyId, key) != null) {
-			return true;
+	public static String getCompanyId() {
+		String companyId = (String)_threadLocal.get();
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("getCompanyId " + companyId);
 		}
-		else {
-			return false;
-		}
+
+		return companyId;
 	}
 
-	public static String get(String companyId, String key) {
-		String value = null;
-
-		if (companyId != null) {
-			ExtPropertiesLoader propsFromFile =
-				ExtPropertiesLoader.getInstance(PropsFiles.PORTAL, companyId);
-
-			value = propsFromFile.get(key);
+	public static void setCompanyId(String companyId) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("setCompanyId " + companyId);
 		}
 
-		if (value == null) {
-			value = PropsUtil.get(key);
-		}
-
-		return value;
+		_threadLocal.set(companyId);
 	}
 
-	public static String[] getArray(String companyId, String key) {
-		String value = get(companyId,  key);
+	private static Log _log = LogFactory.getLog(CompanyThreadLocal.class);
 
-		if (value == null) {
-			return new String[0];
-		}
-		else {
-			return StringUtil.split(value);
-		}
-	}
+	private static ThreadLocal _threadLocal = new ThreadLocal();
 
 }

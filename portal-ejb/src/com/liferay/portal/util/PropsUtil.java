@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.germinus.easyconf.ComponentProperties;
 
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.util.ExtPropertiesLoader;
 
 import java.util.Properties;
@@ -773,7 +774,15 @@ public class PropsUtil {
 	}
 
 	private static ExtPropertiesLoader _getInstance() {
-		return ExtPropertiesLoader.getInstance(PropsFiles.PORTAL);
+		String companyId = CompanyThreadLocal.getCompanyId();
+
+		if (companyId != null) {
+			return ExtPropertiesLoader.getInstance(
+				PropsFiles.PORTAL, companyId);
+		}
+		else {
+			return ExtPropertiesLoader.getInstance(PropsFiles.PORTAL);
+		}
 	}
 
 }

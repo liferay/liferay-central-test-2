@@ -42,7 +42,6 @@ import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.CompanyPropsUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -364,9 +363,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		if ((user != null) && (!user.isAgreedToTermsOfUse())) {
 			boolean termsOfUseRequired = GetterUtil.getBoolean(
-				CompanyPropsUtil.get(
-					companyId, PropsUtil.TERMS_OF_USE_REQUIRED),
-				true);
+				PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
 
 			if (termsOfUseRequired) {
 				return _PATH_PORTAL_TERMS_OF_USE;
