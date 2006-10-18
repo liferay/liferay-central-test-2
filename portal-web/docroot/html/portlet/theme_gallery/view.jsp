@@ -113,7 +113,7 @@ for (int i = 0; i < entries.size(); i++) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="http://content.liferay.com/4.0.0/images/<%= entry.getImageLarge() %>" target="_blank"><img border="0" src="http://content.liferay.com/4.0.0/images/<%= entry.getImageSmall() %>"></a>
+			<a href="http://content.liferay.com/4/images/<%= entry.getImageLarge() %>" target="_blank"><img border="0" src="http://content.liferay.com/4/images/<%= entry.getImageSmall() %>"></a>
 		</td>
 	</tr>
 

@@ -47,7 +47,7 @@ com.liferay.portal.struts.PortletAction.
 
 See:
 
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/messageboards/action/EditConfigurationAction.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/action/EditConfigurationAction.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT configuration-path (#PCDATA)>
@@ -59,8 +59,8 @@ for the portlet.
 
 See:
 
-http://content.liferay.com/4.0.0/docs/api/util-java/com/liferay/util/lucene/Indexer.html
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/messageboards/util/Indexer.html
+http://content.liferay.com/4/docs/api/util-java/com/liferay/util/lucene/Indexer.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -72,8 +72,8 @@ portlet.
 
 See:
 
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portal/job/Scheduler.html
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/calendar/job/Scheduler.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/job/Scheduler.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/calendar/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -85,7 +85,7 @@ default portlet URL implementation.
 
 See:
 
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -97,7 +97,7 @@ example of its uses.
 
 See:
 
-http://content.liferay.com/4.0.0/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/enterpriseadmin/EnterpriseAdminPortletURL.html
 -->
 <!ELEMENT friendly-url-plugin-class (#PCDATA)>
 
