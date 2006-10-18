@@ -47,6 +47,17 @@
 	}
 
 	function openSessionWarning() {
-		Alerts.fireMessageBox(true, "<font class=\"bg\" size=\"2\"><span class=\"bg-neg-alert\" id=\"session_warning_text\"><%= LanguageUtil.format(pageContext, "warning-due-to-inactivity-your-session-will-expire", new Object[] {new Integer(sessionTimeoutWarning), DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.SHORT, locale).format(Time.getDate(sessionTimeoutCal)), timeZone.getDisplayName(false, TimeZone.SHORT, locale), new Integer(sessionTimeout)}, false) %></span></font>", "extendSession();", "");
+		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
+
+		var message = Alerts.fireMessageBox({
+				modal: true,
+				height: 100,
+				width: 300
+			});
+			
+		Ajax.update(url, message);
+			
+		message.style.background = "<%= colorScheme.getBodyBg() %>";
+		message.style.border = "1px solid <%= colorScheme.getPortletMsgAlert() %>";
 	}
 </script>

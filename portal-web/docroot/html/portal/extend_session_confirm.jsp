@@ -33,18 +33,6 @@ Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
 sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutWarningMinute);
 %>
 
-<script language="JavaScript" event="onLoad()" for="window">
-	setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
-</script>
-
-<script type="text/javascript">
-	function sessionHasExpired() {
-		document.getElementById("session_warning_text").innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
-		document.getElementById("session_btns").innerHTML = "";
-
-		loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
-	}
-</script>
 
 <form name="fm">
 
@@ -66,9 +54,9 @@ sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutWarningMinute);
 		</tr>
 		<tr>
 			<td align="center" id="session_btns">
-				<input name="ok_btn" type="button" value="<%= LanguageUtil.get(pageContext, "ok") %>" onClick="opener.extendSession(); self.close();">
+				<input name="ok_btn" type="button" value="<%= LanguageUtil.get(pageContext, "ok") %>" onClick="extendSession(); Alerts.killAlert();">
 
-				<input name="cancel_btn" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">
+				<input name="cancel_btn" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="Alerts.killAlert();">
 			</td>
 		</tr>
 		</table>
@@ -77,3 +65,14 @@ sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutWarningMinute);
 </table>
 
 </form>
+
+<script type="text/javascript">
+	function sessionHasExpired() {
+		document.getElementById("session_warning_text").innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
+		document.getElementById("session_btns").innerHTML = "";
+
+		loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
+	}
+	
+	setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
+</script>
