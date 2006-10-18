@@ -63,9 +63,17 @@ var Ajax = {
 	requests : new Array(),
 	
 	request : function(url, options) {
+		/*
+		 * OPTIONS:
+		 * onComplete (function) - function to call after response is received
+		 * returnArgs (object) - object to pass to return function
+		 * reverseAjax (boolean) - use reverse ajax. (only one at a time)
+		 * method (string) - use "get" or "post". Default is post.
+		 */
 		var opts = (options == null) ? (new Object()) : options;
 		
 		var ajaxId = (opts.reverseAjax) ? 0 : Ajax.getNextId();
+		var method = opts.method;
 		var returnFunction = opts.onComplete;
 		var returnArgs = (opts.returnArgs == null) ? opts : opts.returnArgs;
 		var request = new AjaxRequest(opts.onComplete, returnArgs, ajaxId);
@@ -87,7 +95,7 @@ var Ajax = {
 		var query = urlArray[1];
 
 		try {
-			if (false) {
+			if (method == "get") {
 				xmlHttpReq.open("GET", url, true);
 			}
 			else {
