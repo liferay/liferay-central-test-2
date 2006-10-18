@@ -23,4 +23,5 @@
 %>
 
 <%@ include file="/html/taglib/init.jsp" %>
-<br/>
+
+<br>
