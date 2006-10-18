@@ -257,7 +257,7 @@ var Messaging = {
 			}
 		}
 
-		addUnloadEvent(Messaging.onPageUnload);
+		addEventHandler(window, "onunload", Messaging.onPageUnload);
 
 		this.mainDiv = mainDiv;
 		this.initialized = true;
