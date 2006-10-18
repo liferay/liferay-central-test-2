@@ -22,6 +22,19 @@
 
 var submitCountdown = 0;
 
+function $(id) {
+	var item = null;
+	
+    if(typeof(id) == "string") {
+    	item = document.getElementById(id);
+	}
+    else if(typeof(id) == "object") {
+    	item = id;
+	}
+	
+	return item;
+}
+
 function addItem(box, text, value, sort) {
 	box[box.length] = new Option(text, value);
 
@@ -53,34 +66,25 @@ if (!Array.prototype.pop) {
 	Array.prototype.pop = array_pop;
 }
 
-function addLoadEvent(func) {
-    var oldonload = window.onload;
+function addEventHandler(obj, type, func) {
+    var temp = obj[type];
 
-	if (typeof window.onload != "function") {
-        window.onload = func;
+	if (typeof obj[type] != "function") {
+        obj[type] = func;
     }
 	else {
-        window.onload = function() {
-            oldonload();
+        obj[type] = function() {
+        	if (temp) {
+	            temp();
+        	}
 
 			func();
         }
     }
 }
 
-function addUnloadEvent(func) {
-    var oldonunload = window.onunload;
-
-	if (typeof window.onunload != "function") {
-        window.onunload = func;
-    }
-	else {
-        window.onunload = function() {
-            oldonunload();
-
-			func();
-        }
-    }
+function addLoadEvent(func) {
+	addEventHandler(window, "onload", func);
 }
 
 function autoComplete(box, text) {
@@ -1064,3 +1068,7 @@ function trimString(str) {
 }
 
 String.prototype.trim = trimString;
+
+var ZINDEX = {
+	ALERT: 100
+}
