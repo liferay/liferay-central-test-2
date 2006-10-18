@@ -46,12 +46,12 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="JournalPortletDataHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Raymond Auge
  *
  */
-public class JournalPortletDataHandler implements PortletDataHandler {
+public class PortletDataHandlerImpl implements PortletDataHandler {
 
 	public String exportData(String companyId, String groupId)
 		throws PortletDataException {
