@@ -128,6 +128,7 @@
 	<classpathentry kind="lib" path="lib/portal/spring.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
+	<classpathentry kind="lib" path="lib/portal/subetha-smtp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/textmining.jar"/>
 	<classpathentry kind="lib" path="lib/portal/trove.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>

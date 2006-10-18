@@ -505,6 +505,12 @@ public class PropsUtil {
 
 	public static final String JCR_JACKRABBIT_CREDENTIALS_PASSWORD = "jcr.jackrabbit.credentials.password";
 
+	// SMTP
+
+	public static final String SMTP_SERVER_ENABLED = "smtp.server.enabled";
+
+	public static final String SMTP_SERVER_PORT = "smtp.server.port";
+
 	// Web Server
 
 	public static final String WEB_SERVER_HTTP_PORT = "web.server.http.port";

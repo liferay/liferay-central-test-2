@@ -19,11 +19,12 @@ The portlet element contains the declarative data of a portlet.
 <!ELEMENT portlet (portlet-name, struts-path?, configuration-path?,
 indexer-class?, scheduler-class?, portlet-url-class?,
 friendly-url-plugin-class?, portlet-data-handler-class?,
-preferences-company-wide?, preferences-unique-per-layout?,
-preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
-show-portlet-inactive?, restore-current-view?, maximize-edit?, maximize-help?,
-maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
-render-weight?, ajaxable?, system?, active?, include?)>
+smtp-message-listener-class?, preferences-company-wide?,
+preferences-unique-per-layout?, preferences-owned-by-group?,
+use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
+restore-current-view?, maximize-edit?, maximize-help?, maximize-print?,
+layout-cacheable?, instanceable?, private-request-attributes?, render-weight?,
+ajaxable?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -105,8 +106,25 @@ http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/enterprisea
 The portlet-data-handler-class value must be a class that implements
 com.liferay.portal.kernel.lar.PortletDataHandler and is called when archiving
 tasks are run.
+
+See:
+
+http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
+
+<!--
+The smtp-message-listener-class value must be a class that implements
+com.liferay.portal.kernel.smtp.MessageListener and is called when processing
+emails.
+
+See:
+
+http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/smtp/MessageListener.html
+http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/smtp/MessageListenerImpl.html
+-->
+<!ELEMENT smtp-message-listener-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

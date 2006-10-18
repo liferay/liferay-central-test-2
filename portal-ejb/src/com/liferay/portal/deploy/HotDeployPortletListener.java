@@ -30,12 +30,14 @@ import com.liferay.portal.kernel.deploy.HotDeployListener;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
+import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
+import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebAppPool;
@@ -171,6 +173,19 @@ public class HotDeployPortletListener implements HotDeployListener {
 							portlet.getPortletDataHandlerClass()).newInstance();
 				}
 
+				MessageListener smtpMessageListener = null;
+
+				if (Validator.isNotNull(
+						portlet.getSmtpMessageListenerClass())) {
+
+					smtpMessageListener =
+						(MessageListener)portletClassLoader.loadClass(
+							portlet.getSmtpMessageListenerClass()).
+								newInstance();
+
+					SMTPServerUtil.addListener(smtpMessageListener);
+				}
+
 				PreferencesValidator prefsValidator = null;
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -240,7 +255,8 @@ public class HotDeployPortletListener implements HotDeployListener {
 				PortletContextWrapper pcw = new PortletContextWrapper(
 					portlet.getPortletId(), ctx, portletInstance,
 					indexerInstance, schedulerInstance, portletDataHandler,
-					prefsValidator, resourceBundles, customUserAttributes);
+					smtpMessageListener, prefsValidator, resourceBundles,
+					customUserAttributes);
 
 				PortletContextPool.put(portlet.getPortletId(), pcw);
 			}
@@ -329,6 +345,9 @@ public class HotDeployPortletListener implements HotDeployListener {
 
 				while (itr.hasNext()) {
 					Portlet portlet = (Portlet)itr.next();
+
+					SMTPServerUtil.deleteListener(
+						portlet.getSmtpMessageListener());
 
 					PortletInstanceFactory.destroy(portlet);
 

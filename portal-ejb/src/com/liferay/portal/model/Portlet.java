@@ -23,6 +23,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
@@ -148,7 +149,8 @@ public class Portlet extends PortletModel {
 				   String configurationPath, String portletClass,
 				   String indexerClass, String schedulerClass,
 				   String portletURLClass, String friendlyURLPluginClass,
-				   String portletDataHandlerClass, String defaultPreferences,
+				   String portletDataHandlerClass,
+				   String smtpMessageListenerClass, String defaultPreferences,
 				   String prefsValidator, boolean prefsCompanyWide,
 				   boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
 				   boolean useDefaultTemplate, boolean showPortletAccessDenied,
@@ -174,6 +176,7 @@ public class Portlet extends PortletModel {
 		_portletURLClass = portletURLClass;
 		_friendlyURLPluginClass = friendlyURLPluginClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
+		_smtpMessageListenerClass = smtpMessageListenerClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -399,6 +402,47 @@ public class Portlet extends PortletModel {
 	 */
 	public void setPortletDataHandlerClass(String portletDataHandlerClass) {
 		_portletDataHandlerClass = portletDataHandlerClass;
+	}
+
+	/**
+	 * Gets the SMTP message listener of the portlet.
+	 *
+	 * @return		the SMTP message listener of the portlet
+	 */
+	public MessageListener getSmtpMessageListener() {
+		if (Validator.isNotNull(getSmtpMessageListenerClass())) {
+			if (isWARFile()) {
+				PortletContextWrapper pcw =
+					PortletContextPool.get(getRootPortletId());
+
+				return pcw.getSmtpMessageListener();
+			}
+			else {
+				return (MessageListener)InstancePool.get(
+					getSmtpMessageListenerClass());
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the name of the SMTP message listener class of the portlet.
+	 *
+	 * @return		the name of the SMTP message listener class of the portlet
+	 */
+	public String getSmtpMessageListenerClass() {
+		return _smtpMessageListenerClass;
+	}
+
+	/**
+	 * Sets the name of the SMTP message listener class of the portlet.
+	 *
+	 * @param		smtpMessageListenerClass the name of the SMTP message
+	 *				listener class of the portlet
+	 */
+	public void setSmtpMessageListenerClass(String smtpMessageListenerClass) {
+		_smtpMessageListenerClass = smtpMessageListenerClass;
 	}
 
 	/**
@@ -1507,15 +1551,15 @@ public class Portlet extends PortletModel {
 			getConfigurationPath(), getPortletClass(), getIndexerClass(),
 			getSchedulerClass(), getPortletURLClass(),
 			getFriendlyURLPluginClass(), getPortletDataHandlerClass(),
-			getDefaultPreferences(), getPreferencesValidator(),
-			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
-			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
-			isShowPortletAccessDenied(), isShowPortletInactive(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), getRenderWeight(), isAjaxable(),
-			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
-			isActive(), isInclude(), getInitParams(), getExpCache(),
+			getSmtpMessageListenerClass(), getDefaultPreferences(),
+			getPreferencesValidator(), isPreferencesCompanyWide(),
+			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
+			isUseDefaultTemplate(), isShowPortletAccessDenied(),
+			isShowPortletInactive(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
+			isInstanceable(), isPrivateRequestAttributes(), getRenderWeight(),
+			isAjaxable(), getRoles(), getUnlinkedRoles(), getRoleMappers(),
+			isSystem(), isActive(), isInclude(), getInitParams(), getExpCache(),
 			getPortletModes(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
 			isWARFile(), getServletURLPatterns());
@@ -1580,6 +1624,11 @@ public class Portlet extends PortletModel {
 	 * The name of the portlet data handler class of the portlet.
 	 */
 	private String _portletDataHandlerClass;
+
+ 	/**
+	 * The name of the SMTP message listener class of the portlet.
+	 */
+	private String _smtpMessageListenerClass;
 
 	/**
 	 * The default preferences of the portlet.

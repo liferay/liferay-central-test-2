@@ -172,6 +172,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.smtp.SubEthaMessageListenerImpl">
+		<priority value="DEBUG" />
+	</category>
+
 	<category name="com.liferay.portal.spring">
 		<priority value="ERROR" />
 	</category>
@@ -246,6 +250,10 @@
 
 	<category name="com.liferay.portlet.messageboards.service.impl.MBMessageLocalServiceImpl">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portlet.messageboards.smtp.MessageListenerImpl">
+		<priority value="DEBUG" />
 	</category>
 
 	<category name="com.liferay.portlet.wsrp">

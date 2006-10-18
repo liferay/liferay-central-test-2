@@ -907,6 +907,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setPortletDataHandlerClass(GetterUtil.getString(
 					portlet.elementText("portlet-data-handler-class"),
 					portletModel.getPortletDataHandlerClass()));
+				portletModel.setSmtpMessageListenerClass(GetterUtil.getString(
+					portlet.elementText("smtp-message-listener-class"),
+					portletModel.getSmtpMessageListenerClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

@@ -33,6 +33,7 @@ import com.liferay.portal.kernel.deploy.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.AutoDeployUtil;
 import com.liferay.portal.kernel.deploy.HotDeployUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -110,6 +111,19 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+
+		// SMTP server
+
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.SMTP_SERVER_ENABLED))) {
+
+			int port = GetterUtil.getInteger(PropsUtil.get(
+				PropsUtil.SMTP_SERVER_PORT));
+
+			SMTPServerUtil.setPort(port);
+
+			SMTPServerUtil.start();
 		}
 	}
 

@@ -27,6 +27,7 @@ import com.httpbridge.webproxy.http.TaskController;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
+import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
@@ -40,6 +41,7 @@ import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.smtp.SMTPServerUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
@@ -340,11 +342,38 @@ public class MainServlet extends ActionServlet {
 
 					String className = portlet.getSchedulerClass();
 
-					if (portlet.isActive() && (className != null)) {
+					if (portlet.isActive() && Validator.isNotNull(className)) {
 						Scheduler scheduler =
 							(Scheduler)InstancePool.get(className);
 
 						scheduler.schedule();
+					}
+				}
+			}
+			catch (ObjectAlreadyExistsException oaee) {
+			}
+			catch (Exception e) {
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+
+			// SMTP message listener
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("SMTP message listener");
+			}
+
+			try {
+				Iterator itr = PortletLocalServiceUtil.getPortlets(
+					_companyId).iterator();
+
+				while (itr.hasNext()) {
+					Portlet portlet = (Portlet)itr.next();
+
+					MessageListener smtpMessageListener =
+						portlet.getSmtpMessageListener();
+
+					if (portlet.isActive() && (smtpMessageListener != null)) {
+						SMTPServerUtil.addListener(smtpMessageListener);
 					}
 				}
 			}
