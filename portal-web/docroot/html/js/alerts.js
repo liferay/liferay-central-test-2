@@ -1,21 +1,47 @@
 var Alerts = {
+	
+	background: null,
+	message: null,
 
-	killAlert : function(action) {
-		document.getElementById("alert-warning").style.display = "none";
-
-		function() {action};
+	hideAlert : function(action) {
+		if (Alerts.message && Alerts.background) {
+			Alerts.message.style.display = "none";
+			Alerts.background.style.display = "none";
+		}
 	},
 
-	fireMessageBox : function (modal, message, okAction, cancelAction) {
+	killAlert : function(action) {
+		if (Alerts.message && Alerts.background) {
+			var body = document.getElementsByTagName("body")[0];
+			
+			body.removeChild(Alerts.message);
+			body.removeChild(Alerts.background);
+			
+			Alerts.message = null;
+			Alerts.background = null;
+		}
+	},
+
+	fireMessageBox : function (options) {
 		if (document.getElementsByTagName("body")) {
+			
+			if (options == null) {
+				options = new Object();
+			}
+			
+			var modal = options.modal;
+			var myMessage = options.message;
+			var msgHeight = options.height;
+			var msgWidth = options.width;
+			
 			var background = document.createElement("div");
 
-			background.setAttribute("id", "alert-warning");
+			background.id = "alert-message";
 			background.style.width = "100%";
 			background.style.position = "absolute";
 			background.style.top = "0";
 			background.style.left = "0";
-			background.style.zIndex = "99";
+			background.style.zIndex = ZINDEX.ALERT;
 
 			var height1 = document.getElementById('layout-outer-side-decoration').offsetHeight;
 			var height2 = document.body.clientHeight;
@@ -28,141 +54,76 @@ var Alerts = {
 			}
 
 			var body = document.getElementsByTagName("body")[0];
-
-			mytable = document.createElement("table");
-			mytable.setAttribute("id", "alert-table");
-			mytablebody = document.createElement("tbody");
-
-			// Message Row Start
-
-			mycurrent_row = document.createElement("tr");
-			mycurrent_cell = document.createElement("td");
-			mycurrent_cell.setAttribute("align", "center");
-			mycurrent_cell.colSpan = "2";
-
-			mycurrent_cell.innerHTML=message;
-			mycurrent_row.appendChild(mycurrent_cell);
-
-			mytablebody.appendChild(mycurrent_row);
-
-			// Message Row End
-
-			// Button Row Start
-
-			mycurrent_row = document.createElement("tr");
-			mycurrent_cell = document.createElement("td");
-			mycurrent_cell.width = "50%";
-
-			var ok = "<input type='button' value='Ok' onClick='Alerts.killAlert(\" " + okAction + " \");' /> ";
-
-			mycurrent_cell.innerHTML = ok;
-
-			mycurrent_row.appendChild(mycurrent_cell);
-
-			var mycurrent_cell2 = document.createElement("td");
-
-			var cancel = "<input type='button' value='Cancel' onClick='Alerts.killAlert(\" " + cancelAction + " \");' /> ";
-
-			mycurrent_cell2.innerHTML=cancel;
-
-			mycurrent_row.setAttribute('align','center');
-			mycurrent_row.appendChild(mycurrent_cell2);
-
-			mytablebody.appendChild(mycurrent_row);
-
-			// Button Row End
-
-			mytable.appendChild(mytablebody);
-			mytable.setAttribute("border", "0");
-
-			background.appendChild(mytable);
-
-			body.appendChild(background);
-		}
-
-		if (modal == true) {
-			if (!is_ie) {
-				background.style.background = "url('" + themeDisplay.getPathThemeImage() + "/common/grey.png')";
+			var message = document.createElement("div");
+			
+			message.style.position = "absolute";
+			message.style.top = 0;
+			message.style.left = 0;
+			message.style.zIndex = ZINDEX.ALERT + 1;
+			
+			if (myMessage) {
+				message.innerHTML = myMessage;
 			}
+			if (msgHeight) {
+				message.style.height = msgHeight + "px";
+			}
+			if (msgWidth) {
+				message.style.width = msgWidth + "px";
+			}
+			if (modal) {
+				background.style.backgroundColor = "#000000";
+				changeOpacity(background, 50);
+			}
+			
+			body.appendChild(background);
+			body.appendChild(message);
+			
+			Alerts.message = message;
+			Alerts.background = background;
+			Alerts.center(msgHeight, msgWidth);
 		}
+
+		return message;
 	},
+	
+	center : function(height, width) {
+        var message = Alerts.message;
+        
+        if (message) {
+            var body = document.getElementsByTagName("body")[0];
+            width = width == null ? message.offsetWidth : width;
+            height = height == null ? message.offsetHeight : height;
 
-	firePopup : function (modal, message, okAction) {
-		if (document.getElementsByTagName("body")) {
-			var background = document.createElement("div");
+            var centerLeft;
+            var centerTop;
 
-			background.setAttribute("id", "alert-warning");
-			background.style.width = "100%";
-			background.style.position = "absolute";
-			background.style.top = "0";
-			background.style.left = "0";
-			background.style.zIndex = "99";
+            if (!is_safari) {
+                var centerLeft = (body.clientWidth - width) / 2;
+                var centerTop = body.scrollTop + ((body.clientHeight - height) / 2);
+            }
+            else {
+                var centerLeft = (body.offsetWidth - width) / 2;
+                var centerTop = (body.offsetHeight - height) / 2;
+            }
 
-			var height1 = document.getElementById('layout-outer-side-decoration').offsetHeight;
-			var height2 = document.body.clientHeight;
+            message.style.top = centerTop + "px";
+            message.style.left = centerLeft + "px";
+        }
+	},
+	
+    resize: function() {
+        var background = Alerts.background;
+        var body = document.getElementsByTagName("body")[0];
 
-			if (height1 > height2) {
-				background.style.height=height1;
-			}
-			else {
-				background.style.height=height2;
-			}
-
-			var body = document.getElementsByTagName("body")[0];
-
-			mytable = document.createElement("table");
-			mytable.setAttribute("id", "alert-table");
-			mytablebody = document.createElement("tbody");
-
-			// Message Row Start
-
-			mycurrent_row = document.createElement("tr");
-			mycurrent_cell = document.createElement("td");
-			mycurrent_cell.setAttribute("align", "center");
-
-			mycurrent_cell.innerHTML=message;
-			mycurrent_row.appendChild(mycurrent_cell);
-
-			mytablebody.appendChild(mycurrent_row);
-
-			// Message Row End
-
-			// Button Row Start
-
-			mycurrent_row = document.createElement("tr");
-			mycurrent_cell = document.createElement("td");
-
-			var ok = document.createElement('input');
-
-			ok.setAttribute('type','button');
-			ok.setAttribute('name','Ok');
-			ok.setAttribute('value','Ok');
-
-			var ok = "<input type='button' value='Ok' onClick='Alerts.killAlert(\" " + okAction + " \");' /> ";
-
-			mycurrent_cell.innerHTML = ok;
-
-			mycurrent_row.appendChild(mycurrent_cell);
-
-			mycurrent_row.setAttribute('align', 'center');
-
-			mytablebody.appendChild(mycurrent_row);
-
-			// Button Row End
-
-			mytable.appendChild(mytablebody);
-			background.appendChild(mytable);
-
-			mytable.setAttribute("border", "0");
-
-			body.appendChild(background);
-		}
-
-		if (modal == true) {
-			if (!is_ie) {
-				background.style.background = "url('" + themeDisplay.getPathThemeImage() + "/common/grey.png')";
-			}
-		}
-	}
-
+        if (background) {
+            if (!is_safari) {
+                background.style.height = body.scrollHeight + "px";
+                background.style.width = body.scrollWidth + "px";
+            }
+            else {
+                background.style.height = body.offsetHeight + "px";
+                background.style.width = body.offsetWidth + "px";
+            }
+        }
+    }
 }

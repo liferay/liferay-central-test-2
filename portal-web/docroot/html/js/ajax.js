@@ -106,7 +106,7 @@ var Ajax = {
 	},
 	
 	update : function(url, id) {
-		var element = document.getElementById(id);
+		var element = $(id);
 
 		if (element) {
 			var options = new Object();
