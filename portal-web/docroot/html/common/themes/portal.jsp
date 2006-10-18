@@ -26,6 +26,12 @@
 
 <tiles:useAttribute id="tilesPopUp" name="pop_up" classname="java.lang.String" ignore="true" />
 
+<%
+boolean popUp = GetterUtil.getBoolean(tilesPopUp);
+
+String scroll = ParamUtil.getString(request, "scroll");
+%>
+
 <script language="JavaScript">
 	var themeDisplay = {
 		getPathThemeRoot : function() {
@@ -40,24 +46,19 @@
 	};
 </script>
 
-<%
-boolean popUp = GetterUtil.getBoolean(tilesPopUp);
-String scroll = ParamUtil.getString(request, "scroll");
-%>
-
 <c:choose>
 	<c:when test="<%= popUp || themeDisplay.isStatePopUp() %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />
 	</c:when>
 	<c:otherwise>
 		<liferay-theme:include page="portal_normal.jsp" />
-		
+
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 			<script language="JavaScript">
 				Messaging.init("<%= request.getRemoteUser() %>");
 			</script>
 		</c:if>
-		
+
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
 			<script language="JavaScript" event="onLoad()" for="window">
 				document.getElementById("<%= scroll %>").scrollIntoView();

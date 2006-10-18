@@ -52,14 +52,14 @@
 				modal: true,
 				width: 300
 			});
-			
+
 		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
-		
+
 		Ajax.update(url, message);
-			
+
 		message.style.background = "<%= colorScheme.getBodyBg() %>";
 		message.style.border = "1px solid <%= colorScheme.getPortletMsgAlert() %>";
-		
+
 		setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
 	}
 
@@ -70,5 +70,4 @@
 
 		loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
 	}
-	
 </script>
