@@ -28,7 +28,9 @@
 
 	<%
 	int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
+	sessionTimeout = 2;
 	int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
+	int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
 
 	Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
@@ -47,17 +49,27 @@
 	}
 
 	function openSessionWarning() {
-		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
-
 		var message = Alerts.fireMessageBox({
 				modal: true,
-				height: 100,
 				width: 300
 			});
 			
+		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
+		
 		Ajax.update(url, message);
 			
 		message.style.background = "<%= colorScheme.getBodyBg() %>";
 		message.style.border = "1px solid <%= colorScheme.getPortletMsgAlert() %>";
+		
+		setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
 	}
+
+	function sessionHasExpired() {
+		document.getElementById("session_warning_text").innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
+		document.getElementById("ok_btn").onclick = Alerts.killAlert;
+		document.getElementById("cancel_btn").style.display = "none";
+
+		loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
+	}
+	
 </script>
