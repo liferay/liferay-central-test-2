@@ -23,6 +23,13 @@ var Alerts = {
 	},
 
 	fireMessageBox : function (options) {
+		/*
+		 * OPTIONS:
+		 * modal (boolean) - show shaded background
+		 * message (string) - default HTML to display
+		 * height (int) - starting height of message box
+		 * width (int) - starting width of message box
+		 */
 		if (document.getElementsByTagName("body")) {
 			
 			if (options == null) {
