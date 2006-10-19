@@ -85,7 +85,12 @@ request.setAttribute(WebKeys.LAYOUT_LISTER_LIST, layoutList);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+if (themeDisplay.isStatePopUp()) {
+	portletURL.setWindowState(LiferayWindowState.POP_UP);
+}
+else {
+	portletURL.setWindowState(WindowState.MAXIMIZED);
+}
 
 portletURL.setParameter("struts_action", "/communities/edit_pages");
 portletURL.setParameter("tabs2", tabs2);

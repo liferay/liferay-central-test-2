@@ -32,8 +32,8 @@
 	refererURL.setParameter("updateLayout", "true");
 	%>
 
-	<div id="portal_add_content" style="display: <%= ParamUtil.getBoolean(request, "updateLayout") ? "" : "none" %>; position: absolute; z-index: 9;" onClick="LayoutConfiguration.resize();">
-		<div class="portal-add-content" style="position: relative; z-index: 10;">
+	<div id="portal_add_content">
+		<div class="portal-add-content">
 			<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>&cmd=template&refresh=true" method="post" name="<portlet:namespace />fm">
 			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>">
 
@@ -135,19 +135,11 @@
 						</td>
 					</tr>
 					</table>
-
-					<br>
-
-					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "finished") %>" onClick="document.getElementById('portal_add_content').style.display = 'none';">
 				</td>
 			</tr>
 			</table>
 
 			</form>
 		</div>
-
-		<c:if test="<%= BrowserSniffer.is_ie(request) %>">
-			<iframe frameborder="0" style="position: absolute; top: 0; left: 0; z-index: 9;"></iframe>
-		</c:if>
 	</div>
 </c:if>

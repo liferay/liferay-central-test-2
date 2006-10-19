@@ -113,13 +113,17 @@ var Ajax = {
 		}
 	},
 	
-	update : function(url, id) {
+	update : function(url, id, options) {
 		var element = $(id);
 
 		if (element) {
-			var options = new Object();
-			
+			if (options == null) {
+				options = new Object();
+			}
+
 			options.element = element;
+
+			var origFunc = options.onComplete;
 			
 			options.onComplete = function (xmlHttpReq, options){
 				var element = options.element;
@@ -127,6 +131,10 @@ var Ajax = {
 				if (element) {
 					element.innerHTML = xmlHttpReq.responseText;
 					executeLoadedScript(element);
+				}
+				
+				if (origFunc) {
+					origFunc();
 				}
 			}
 			

@@ -9,107 +9,65 @@ var LayoutConfiguration = {
 	portlets : new Array(),
 	showTimer : 0,
 	
-	init : function (xmlHttpReq) {
-		var addDiv = document.createElement("div");
+	init : function () {
 		var arrow1 = new Image();
 		var arrow2 = new Image();
-		arrow1.src = this.imagePath + "/arrows/01_down.gif";
-		arrow2.src = this.imagePath + "/arrows/01_right.gif";
+		arrow1.src = themeDisplay.getPathThemeImage() + "/arrows/01_down.gif";
+		arrow2.src = themeDisplay.getPathThemeImage() + "/arrows/01_right.gif";
 		
-		var body = document.getElementsByTagName("body")[0];
+		var menu = document.getElementById("portal_add_content");
+		LayoutConfiguration.menu = menu;
 		
-		if (this.loadingImage) {
-			body.removeChild(this.loadingImage);
-			this.loadingImage = null;
-		}
-		
-		addDiv.style.textAlign = "left";
-		addDiv.style.zIndex = "9";
-		addDiv.style.position = "relative";
-		addDiv.innerHTML = xmlHttpReq.responseText;
-		body.insertBefore(addDiv, body.childNodes[0]);
-		this.menu = document.getElementById("portal_add_content");
-		
-		if (this.menu != null) {
-			var list = this.menu.childNodes;
+		if (menu != null) {
+			var list = menu.childNodes;
 			
 			for (var i = 0; i < list.length; i++) {
 				if (list[i].className != null && list[i].className.match("portal-add-content")) {
-					this.menuDiv = list[i];
+					LayoutConfiguration.menuDiv = list[i];
 				}
 				if (list[i].nodeName != null && list[i].nodeName.toLowerCase().match("iframe")) {
-					this.menuIframe = list[i];
+					LayoutConfiguration.menuIframe = list[i];
 				}
 			}
 
-			var elems = this.menu.getElementsByTagName("div");
+			var elems = menu.getElementsByTagName("div");
 
 			for (var i = 0; i < elems.length; i++) {
 				if (elems[i].className == "layout_configuration_portlet") {
-					this.portlets.push(elems[i]);
+					LayoutConfiguration.portlets.push(elems[i]);
 				}
 				else if (elems[i].className == "layout_configuration_category") {
-					this.categories.push(elems[i]);
+					LayoutConfiguration.categories.push(elems[i]);
 				}
 			}
 
-			Drag.makeDraggable(this.menu);
-			this.initialized = true;
-			this.toggle();
+			LayoutConfiguration.initialized = true;
 			
 			// Double foucus for IE bug
 			if (is_ie) {
 				document.getElementById("layout_configuration_content").focus();
 			}
 		}
-	},
-	
+	},	
+
 	toggle : function (ppid, plid,  mainPath, imagePath) {
-		var menu = document.getElementById("portal_add_content");
-		
-		if (!this.initialized) {
-			this.imagePath = imagePath
-			this.loadingImage = document.createElement("div");
-			var image = document.createElement("img");
-			
-			this.loadingImage.className = "portal-add-content";
-			this.loadingImage.style.position = "absolute";
-			this.loadingImage.style.top = document.getElementsByTagName("body")[0].scrollTop + "px";
-			this.loadingImage.style.left = "0";
-			this.loadingImage.style.zIndex = "9";
-			
-			image.src = this.imagePath + "/progress_bar/loading_animation.gif";
-			this.loadingImage.appendChild(image);
-			document.getElementsByTagName("body")[0].appendChild(this.loadingImage);
-			
-			loadPage(mainPath + "/portal/render_portlet", "p_p_id=" + ppid + "&p_l_id=" + plid, LayoutConfiguration.returnPortlet);
+		if (!LayoutConfiguration.menu) {
+			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_p_id=" + ppid + "&p_l_id=" + plid;
+			var popup = Alerts.fireMessageBox({
+					width: 250,
+					noCenter: true,
+					title: "Add Content",
+					onClose: function() {
+						LayoutConfiguration.menu = null;
+					}
+				});
+			Ajax.update(url, popup, {onComplete: LayoutConfiguration.init});
 		}
 		else {
-			if (this.menu.style.display == "none") {
-				yPos = document.getElementsByTagName("body")[0].scrollTop;
-				this.menu.style["top"] = yPos + "px";
-				this.menu.style.display = "block";
-				this.menu.style.zIndex = "9";
-				this.resize();
+			Alerts.killAlert();
+		}
+	},
 
-				document.getElementById("layout_configuration_content").focus();
-			}
-			else {
-				this.menu.style.display = "none";
-			}
-		}
-	},
-	
-	resize : function () {
-		if (this.menuIframe != null) {
-			this.menuIframe.height = this.menuDiv.offsetHeight;
-			this.menuIframe.width = this.menuDiv.offsetWidth;
-		}
-		if (!is_ie) {
-			document.getElementById("layout_configuration_content").focus();
-		}
-	},
-	
 	returnPortlet : function (xmlHttpReq) {
 		LayoutConfiguration.init(xmlHttpReq);
 	},
@@ -164,8 +122,6 @@ var LayoutConfiguration = {
 				}
 			}
 		}
-
-		this.resize();
 	},
 
 	showCategories : function (categories, name) {
@@ -195,22 +151,23 @@ var LayoutConfiguration = {
 		var data = parent.rows[1].cells[0];
 		var pane = getElementByClassName(data, "layout_configuration_category_pane");
 		var image = obj.getElementsByTagName("img")[0];
+		var imagePath = themeDisplay.getPathThemeImage();
 		
 		if (display) {
 			pane.style.display = display;
 			if (display.toLowerCase().match("block")) {
-				image.src = this.imagePath + "/arrows/01_down.gif";
+				image.src = imagePath + "/arrows/01_down.gif";
 			}
 			else {
-				image.src = this.imagePath + "/arrows/01_right.gif";
+				image.src = imagePath + "/arrows/01_right.gif";
 			}
 		}
 		else {
 			if (toggleByObject(pane, true)) {
-				image.src = this.imagePath + "/arrows/01_down.gif";
+				image.src = imagePath + "/arrows/01_down.gif";
 			}
 			else {
-				image.src = this.imagePath + "/arrows/01_right.gif";
+				image.src = imagePath + "/arrows/01_right.gif";
 			}
 		}
 	}
