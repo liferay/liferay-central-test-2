@@ -39,7 +39,7 @@ var Alerts = {
 		
 		cell1.className = "pop-up-close";
 		cell1.width = "1%";
-		cell1.innerHTML = "<a href=\"javascript:Alerts.killAlert()\"><img border=\"0\" src=\"" + themeDisplay.getPathThemeImage() + "/portlet/close.gif\"/></a>"
+		cell1.innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Alerts.killAlert(this)\"><img border=\"0\" src=\"" + themeDisplay.getPathThemeImage() + "/portlet/close.gif\"/></a>"
 		
 		inner.appendChild(heading);
 		inner.appendChild(message);
@@ -52,26 +52,39 @@ var Alerts = {
 		return outer;
 	},
 
-	killAlert : function() {
-		if (Alerts.message) {
-			var body = document.getElementsByTagName("body")[0];
-			var options = Alerts.message.options;
+	killAlert : function(oLink) {
+		if (oLink) {
+			var wrapper = oLink;
 			
-			body.removeChild(Alerts.message.wrapper);
-			Alerts.messageArray.pop();
+			while (wrapper.parentNode) {
+				if (wrapper.className && wrapper.className.match("pop-up-outer")) {
+					break;
+				}
+				wrapper = wrapper.parentNode;
+			}
+			
+			var body = document.getElementsByTagName("body")[0];
+			var options = wrapper.options;
+			var background = null;
+			
+			Alerts.remove(wrapper);
+			body.removeChild(wrapper);
 			
 			if (Alerts.messageArray.length > 0) {
 				Alerts.message = Alerts.messageArray[Alerts.messageArray.length - 1];
-				Alerts.message.wrapper.style.zIndex = ZINDEX.ALERT + 1;
+				Alerts.message.style.zIndex = ZINDEX.ALERT + 1;
 				Alerts.showSelects(Alerts.message);
+				background = wrapper.background;
 			}
 			else {
-				if (Alerts.background) {
-					body.removeChild(Alerts.background);
-				}
 				Alerts.message = null;
-				Alerts.background = null;
 				Alerts.showSelects();
+				background = Alerts.background;
+			}
+			
+			if (background) {
+				body.removeChild(background);
+				Alerts.background = null;
 			}
 			
 			if (options && options.onClose) options.onClose();
@@ -101,7 +114,6 @@ var Alerts = {
 			
 
 			var message = document.createElement("div");
-			message.options = options;
 			message.align = "left";
 			
 			var wrapper = Alerts.createWrapper(message, title);
@@ -109,6 +121,7 @@ var Alerts = {
 			wrapper.style.top = 0;
 			wrapper.style.left = 0;
 			wrapper.style.zIndex = ZINDEX.ALERT + 1;
+			wrapper.options = options;
 			
 			if (myMessage) {
 				message.innerHTML = myMessage;
@@ -124,12 +137,7 @@ var Alerts = {
 			}
 			
 			if (msgWidth) {
-				if (is_ie) {
-					wrapper.style.width = msgWidth + "px";
-				}
-				else {
-					wrapper.style.minWidth = msgWidth + "px";
-				}
+				wrapper.style.width = msgWidth + "px";
 			}
 			else {
 				wrapper.style.width = "100%";
@@ -149,6 +157,7 @@ var Alerts = {
 				background.style.zIndex = ZINDEX.ALERT;
 				
 				Alerts.background = background;
+				wrapper.background = background;
 				
 				background.style.backgroundColor = "#000000";
 				changeOpacity(background, 50);
@@ -159,14 +168,14 @@ var Alerts = {
 			
 			if (Alerts.messageArray.length > 0) {
 				var lastMsg = Alerts.messageArray[Alerts.messageArray.length - 1];
-				lastMsg.wrapper.style.zIndex = ZINDEX.ALERT - 1;
+				lastMsg.style.zIndex = ZINDEX.ALERT - 1;
 				Alerts.hideSelects(lastMsg);
 			}
 
 			Alerts.showSelects(message);
 			
 			Alerts.message = message;
-			Alerts.messageArray.push(message);
+			Alerts.messageArray.push(wrapper);
 			
 			Alerts.resize();
 			addEventHandler(window, "onresize", Alerts.resize)
@@ -194,7 +203,7 @@ var Alerts = {
 		
 		iframe.src = url;
 		iframe.frameBorder = 0;
-		if (msgHeight) iframe.height = "100%";
+		if (msgHeight) iframe.height = (msgHeight - 35) + "px";
 		if (msgWidth) iframe.width = "100%";
 		
 		message.appendChild(iframe);
@@ -263,6 +272,17 @@ var Alerts = {
 			for (var i = 0; i < selects.length; i++) {
 				selects[i].style.visibility = "";
 			}
+    	}
+    },
+    
+    remove: function(obj) {
+    	var msgArray = Alerts.messageArray;
+    	
+    	for (var i = 0; i < msgArray.length; i++) {
+    		if (msgArray[i] == obj) {
+    			msgArray.splice(i, 1);
+    			break;
+    		}
     	}
     }
 }

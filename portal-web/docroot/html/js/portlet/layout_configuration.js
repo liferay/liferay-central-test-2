@@ -1,6 +1,5 @@
 var LayoutConfiguration = {
 	categories : new Array(),
-	imagePath : "",
 	initialized : false,
 	loadingImage : null,
 	menu : null,
@@ -50,7 +49,7 @@ var LayoutConfiguration = {
 		}
 	},	
 
-	toggle : function (ppid, plid,  mainPath, imagePath) {
+	toggle : function (ppid, plid) {
 		if (!LayoutConfiguration.menu) {
 			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_p_id=" + ppid + "&p_l_id=" + plid;
 			var popup = Alerts.fireMessageBox({
@@ -63,15 +62,8 @@ var LayoutConfiguration = {
 				});
 			Ajax.update(url, popup, {onComplete: LayoutConfiguration.init});
 		}
-		else {
-			Alerts.killAlert();
-		}
 	},
 
-	returnPortlet : function (xmlHttpReq) {
-		LayoutConfiguration.init(xmlHttpReq);
-	},
-	
 	startShowTimer : function (word) {
 		if (this.showTimer) {
 			clearTimeout(this.showTimer);

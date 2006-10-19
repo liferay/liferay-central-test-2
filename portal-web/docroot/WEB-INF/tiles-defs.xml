@@ -30,9 +30,7 @@
 		<put name="content" value="/portal/error.jsp" />
 	</definition>
 
-	<definition name="portal.extend_session_confirm" extends="portal">
-		<put name="content" value="/portal/extend_session_confirm.jsp" />
-	</definition>
+	<definition name="portal.extend_session_confirm" path="/portal/extend_session_confirm.jsp" />
 
 	<definition name="portal.j_login_error" extends="portal">
 		<put name="title" value="error" />

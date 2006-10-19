@@ -429,8 +429,7 @@ public class ServicePreAction extends Action {
 					themeDisplay.setURLAddContent(
 						"LayoutConfiguration.toggle('" +
 							PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
-								"', '" + mainPath + "','" +
-									themeDisplay.getPathThemeImage() + "');");
+								"');");
 				}
 
 				if (hasManageLayoutsPermission) {
@@ -439,7 +438,7 @@ public class ServicePreAction extends Action {
 					PortletURL pageSettingsURL = new PortletURLImpl(
 						req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
 
-					pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
+					pageSettingsURL.setWindowState(LiferayWindowState.POP_UP);
 					pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
 					pageSettingsURL.setParameter(

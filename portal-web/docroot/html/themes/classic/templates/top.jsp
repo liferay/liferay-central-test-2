@@ -43,11 +43,11 @@
 								<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /><br />
 
 								<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
-									<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
+									<a href="javascript:<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
 								</c:if>
 
 								<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-									- <a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
+									- <a href="javascript: Alerts.popupIframe('<%= themeDisplay.getURLPageSettings().toString() %>', {height:400,width:700,modal:true,title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>'})"><bean:message key="page-settings" /></a>
 								</c:if>
 
 								<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
