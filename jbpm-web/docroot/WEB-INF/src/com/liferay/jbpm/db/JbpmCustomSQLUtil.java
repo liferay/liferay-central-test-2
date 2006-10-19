@@ -20,54 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.servlet;
+package com.liferay.jbpm.db;
 
-import com.liferay.jbpm.WorkflowComponent;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.jbpm.util.JbpmWebProps;
+import com.liferay.util.StringUtil;
 
 /**
- * <a href="JBPMServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="JbpmCustomSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class JBPMServlet extends HttpServlet {
+public class JbpmCustomSQLUtil
+	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		WorkflowComponent workflow = new WorkflowComponent();
-
-		String result = workflow.process(req);
-
-		res.setContentType("text/xml");
-
-		ServletOutputStream out = res.getOutputStream();
-
-		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
-		}
-		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
-		}
-		finally {
-			out.flush();
-			out.close();
-		}
+	public JbpmCustomSQLUtil() {
+		super(JbpmWebProps.get("custom.sql.function.isnull"));
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JBPMServlet.class);
+	protected String[] getConfigs() {
+		return StringUtil.split(JbpmWebProps.get("custom.sql.configs"));
+	}
 
 }

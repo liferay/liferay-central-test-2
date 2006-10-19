@@ -20,54 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.servlet;
+package com.liferay.jbpm.util;
 
-import com.liferay.jbpm.WorkflowComponent;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.germinus.easyconf.ComponentProperties;
 
-import java.io.IOException;
+import com.liferay.util.ExtPropertiesLoader;
 
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.util.Properties;
 
 /**
- * <a href="JBPMServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="JbpmWebProps.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class JBPMServlet extends HttpServlet {
+public class JbpmWebProps {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		WorkflowComponent workflow = new WorkflowComponent();
-
-		String result = workflow.process(req);
-
-		res.setContentType("text/xml");
-
-		ServletOutputStream out = res.getOutputStream();
-
-		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
-		}
-		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
-		}
-		finally {
-			out.flush();
-			out.close();
-		}
+	public static boolean containsKey(String key) {
+		return _getInstance().containsKey(key);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JBPMServlet.class);
+	public static String get(String key) {
+		return _getInstance().get(key);
+	}
+
+	public static void set(String key, String value) {
+		_getInstance().set(key, value);
+	}
+
+	public static String[] getArray(String key) {
+		return _getInstance().getArray(key);
+	}
+
+	public static Properties getProperties() {
+		return _getInstance().getProperties();
+	}
+
+	public static ComponentProperties getComponentProperties() {
+		return _getInstance().getComponentProperties();
+	}
+
+	private static ExtPropertiesLoader _getInstance() {
+		return ExtPropertiesLoader.getInstance("jbpm-web");
+	}
 
 }

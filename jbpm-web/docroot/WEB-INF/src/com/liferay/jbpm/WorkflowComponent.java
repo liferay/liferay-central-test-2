@@ -22,8 +22,45 @@
 
 package com.liferay.jbpm;
 
+import com.liferay.jbpm.db.GraphSession;
+import com.liferay.jbpm.util.TaskFormElement;
+import com.liferay.jbpm.util.WorkflowUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.Validator;
+import com.liferay.util.xml.DocUtil;
+
+import java.text.SimpleDateFormat;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TimeZone;
+
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Document;
+import org.dom4j.DocumentHelper;
+import org.dom4j.Element;
+
+import org.jbpm.JbpmConfiguration;
+import org.jbpm.JbpmContext;
+import org.jbpm.context.def.VariableAccess;
+import org.jbpm.db.TaskMgmtSession;
+import org.jbpm.graph.def.ProcessDefinition;
+import org.jbpm.graph.def.Transition;
+import org.jbpm.graph.exe.ProcessInstance;
+import org.jbpm.graph.exe.Token;
+import org.jbpm.taskmgmt.exe.TaskInstance;
 
 /**
  * <a href="WorkflowComponent.java.html"><b><i>View Source</i></b></a>
@@ -33,22 +70,911 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WorkflowComponent {
 
-    public String process(HttpServletRequest req, HttpServletResponse res) {
-    	String cmd = req.getParameter("cmd");
+	public WorkflowComponent() {
+	}
 
-    	String results = "";
+	public String process(HttpServletRequest req) {
+		String result = null;
 
-    	if (cmd.equals("deployXml")) {
-    		results = "<results><definitionId>1</definitionId></results>";
-    	}
-    	else if (cmd.equals("getDefinitions")) {
-    		results = "<results />";
-    	}
-    	else if (cmd.equals("getDefinitionsSize")) {
-    		results = "<results><size>0</size></results>";
-    	}
+		try {
+			userId = ParamUtil.getString(req, "userId");
+			timeZoneId = ParamUtil.getString(req, "timeZoneId");
+			timeZone = TimeZone.getTimeZone(timeZoneId);
+			jbpmContext = JbpmConfiguration.getInstance().createJbpmContext();
+			graphSession = new GraphSession(userId, timeZoneId, jbpmContext);
+			taskMgmtSession = jbpmContext.getTaskMgmtSession();
 
-    	return results;
+			String cmd = ParamUtil.getString(req, "cmd");
+
+			if (cmd.equals("deploy")) {
+				String xml = ParamUtil.getString(req, "xml");
+
+				result = deploy(xml);
+			}
+			else if (cmd.equals("getDefinitionsCountXml")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+				String name = ParamUtil.getString(req, "name");
+
+				result = getDefinitionsCountXml(definitionId, name);
+			}
+			else if (cmd.equals("getDefinitionsXml")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+				String name = ParamUtil.getString(req, "name");
+				int begin = ParamUtil.getInteger(req, "begin");
+				int end = ParamUtil.getInteger(req, "end");
+
+				result = getDefinitionsXml(definitionId, name, begin, end);
+			}
+			else if (cmd.equals("getInstancesCountXml")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				String workflowName = ParamUtil.getString(req, "workflowName");
+				String workflowVersion = ParamUtil.getString(
+					req, "workflowVersion");
+				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
+				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
+				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
+				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				boolean hideEndedTasks = ParamUtil.getBoolean(
+					req, "hideEndedTasks");
+				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
+
+				result = getInstancesCountXml(
+					definitionId, instanceId, workflowName, workflowVersion,
+					gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+					hideEndedTasks, andOperator);
+			}
+			else if (cmd.equals("getInstancesXml")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				String workflowName = ParamUtil.getString(req, "workflowName");
+				String workflowVersion = ParamUtil.getString(
+					req, "workflowVersion");
+				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
+				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
+				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
+				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				boolean hideEndedTasks = ParamUtil.getBoolean(
+					req, "hideEndedTasks");
+				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
+				int begin = ParamUtil.getInteger(req, "begin");
+				int end = ParamUtil.getInteger(req, "end");
+
+				result = getInstancesXml(
+					definitionId, instanceId, workflowName, workflowVersion,
+					gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+					hideEndedTasks, andOperator, begin, end);
+			}
+			else if (cmd.equals("getTaskFormElementsXml")) {
+				long taskId = ParamUtil.getLong(req, "taskId");
+
+				result = getTaskFormElementsXml(taskId);
+			}
+			else if (cmd.equals("getTaskTransitionsXml")) {
+				long taskId = ParamUtil.getLong(req, "taskId");
+
+				result = getTaskTransitionsXml(taskId);
+			}
+			else if (cmd.equals("getUserTasksCountXml")) {
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				String taskName = ParamUtil.getString(req, "taskName");
+				String workflowName = ParamUtil.getString(req, "workflowName");
+				String assignedTo = ParamUtil.getString(req, "assignedTo");
+				String gtCreateDate = ParamUtil.getString(req, "gtCreateDate");
+				String ltCreateDate = ParamUtil.getString(req, "ltCreateDate");
+				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
+				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
+				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
+				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				boolean hideEndedTasks = ParamUtil.getBoolean(
+					req, "hideEndedTasks");
+				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
+
+				result = getUserTasksCountXml(
+					instanceId, taskName, workflowName, assignedTo,
+					gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
+					gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+			}
+			else if (cmd.equals("getUserTasksXml")) {
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				String taskName = ParamUtil.getString(req, "taskName");
+				String workflowName = ParamUtil.getString(req, "workflowName");
+				String assignedTo = ParamUtil.getString(req, "assignedTo");
+				String gtCreateDate = ParamUtil.getString(req, "gtCreateDate");
+				String ltCreateDate = ParamUtil.getString(req, "ltCreateDate");
+				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
+				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
+				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
+				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				boolean hideEndedTasks = ParamUtil.getBoolean(
+					req, "hideEndedTasks");
+				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
+				int begin = ParamUtil.getInteger(req, "begin");
+				int end = ParamUtil.getInteger(req, "end");
+
+				result = getUserTasksXml(
+					instanceId, taskName, workflowName, assignedTo,
+					gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
+					gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin,
+					end);
+			}
+			else if (cmd.equals("signalInstance")) {
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+
+				signalInstance(instanceId);
+			}
+			else if (cmd.equals("signalToken")) {
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				long tokenId = ParamUtil.getLong(req, "tokenId");
+
+				signalToken(instanceId, tokenId);
+			}
+			else if (cmd.equals("startWorkflow")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+
+				result = startWorkflow(definitionId);
+			}
+			else if (cmd.equals("updateTaskXml")) {
+				long taskId = ParamUtil.getLong(req, "taskId");
+				String transition = ParamUtil.getString(req, "transition");
+
+				result = updateTaskXml(
+					taskId, transition, req.getParameterMap());
+			}
+		}
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+		}
+		finally {
+			try {
+				jbpmContext.close();
+			}
+			catch (Exception e) {
+			}
+
+			try {
+				graphSession.close();
+			}
+			catch (Exception e) {
+			}
+		}
+
+		if (Validator.isNull(result)) {
+			result = "<result />";
+		}
+
+		return result;
     }
+
+	public String deploy(String xml) {
+		ProcessDefinition definition = ProcessDefinition.parseXmlString(xml);
+
+		jbpmContext.deployProcessDefinition(definition);
+
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("<result>");
+		sb.append("<definitionId>");
+		sb.append(definition.getId());
+		sb.append("</definitionId>");
+		sb.append("</result>");
+
+		return sb.toString();
+    }
+
+	public List getDefinitions(
+		long definitionId, String name, int begin, int end) {
+
+		List definitions = new ArrayList();
+
+		if (definitionId > 0) {
+			ProcessDefinition definition =
+				graphSession.loadProcessDefinition(definitionId);
+
+			WorkflowUtil.initDefinition(definition);
+
+			definitions.add(definition);
+		}
+		else {
+			definitions =
+				graphSession.findProcessDefinitionsByName(name, begin, end);
+		}
+
+		return definitions;
+    }
+
+	public String getDefinitionsXml(
+		long definitionId, String name, int begin, int end) {
+
+		List definitions = getDefinitions(definitionId, name, begin, end);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		for (int i = 0; i < definitions.size(); i++) {
+			ProcessDefinition definition =
+				(ProcessDefinition)definitions.get(i);
+
+			createElement(definition, root);
+		}
+
+		return doc.asXML();
+    }
+
+	public long getDefinitionsCount(long definitionId, String name) {
+		long count = 0;
+
+		if (definitionId > 0) {
+			count = 1;
+		}
+		else {
+			count = graphSession.countProcessDefinitionsByName(name);
+		}
+
+		return count;
+    }
+
+	public String getDefinitionsCountXml(long definitionId, String name) {
+		long count = getDefinitionsCount(definitionId, name);
+
+		return getCountXml(count);
+    }
+
+	public List getInstances(
+		long definitionId, long instanceId, String workflowName,
+		String workflowVersion, String gtStartDate, String ltStartDate,
+		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) {
+
+		List instances = new ArrayList();
+
+		if (definitionId > 0){
+			ProcessDefinition processDefinition =
+				graphSession.loadProcessDefinition(definitionId);
+
+			instances = graphSession.findProcessInstances(
+				processDefinition.getId());
+
+			WorkflowUtil.initInstances(instances);
+		}
+		else if (instanceId > 0){
+			ProcessInstance instance =
+				graphSession.loadProcessInstance(instanceId);
+
+			WorkflowUtil.initInstance(instance);
+
+			instances.add(instance);
+		}
+		else {
+			instances = graphSession.findProcessInstancesBySearchTerms(
+				workflowName, workflowVersion, gtStartDate, ltStartDate,
+				gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
+		}
+
+		return instances;
+	}
+
+	public long getInstancesCount(
+		long definitionId, long instanceId, String workflowName,
+		String workflowVersion, String gtStartDate, String ltStartDate,
+		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator) {
+
+		if (definitionId > 0){
+			return 1;
+		}
+		else if (instanceId > 0){
+			return 1;
+		}
+		else {
+			return graphSession.countProcessInstancesBySearchTerms(
+				workflowName, workflowVersion, gtStartDate, ltStartDate,
+				gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+		}
+	}
+
+	public String getInstancesCountXml(
+		long definitionId, long instanceId, String workflowName,
+		String workflowVersion, String gtStartDate, String ltStartDate,
+		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator) {
+
+		long count = getInstancesCount(
+			definitionId, instanceId, workflowName, workflowVersion,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator);
+
+		return getCountXml(count);
+    }
+
+	public String getInstancesXml(
+		long definitionId, long instanceId, String workflowName,
+		String workflowVersion, String gtStartDate, String ltStartDate,
+		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) {
+
+		List instances = getInstances(
+			definitionId, instanceId, workflowName, workflowVersion,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator, begin, end);
+
+		    Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		for (int i = 0; i < instances.size(); i++) {
+			ProcessInstance instance = (ProcessInstance)instances.get(i);
+
+			createElement(instance, root, true);
+		}
+
+		return doc.asXML();
+	}
+
+	public List getTaskFormElements(long taskId) {
+		List taskFormElements = new ArrayList();
+
+		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
+
+		Map variableInstances = task.getVariables();
+
+		List variableAccesses =
+			task.getTask().getTaskController().getVariableAccesses();
+
+		Iterator itr = variableAccesses.iterator();
+
+		while (itr.hasNext()) {
+			VariableAccess variableAccess = (VariableAccess)itr.next();
+
+			String value = (String)variableInstances.get(
+				variableAccess.getVariableName());
+
+			TaskFormElement taskFormElement =
+				new TaskFormElement(variableAccess, value);
+
+			taskFormElements.add(taskFormElement);
+		}
+
+		return taskFormElements;
+	}
+
+	public String getTaskFormElementsXml(long taskId) {
+		List taskFormElements = getTaskFormElements(taskId);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		for (int i = 0; i < taskFormElements.size(); i++) {
+			TaskFormElement taskFormElement =
+				(TaskFormElement)taskFormElements.get(i);
+
+			createElement(taskFormElement, root);
+		}
+
+		return doc.asXML();
+	}
+
+	public List getTaskTransitions(long taskId) {
+		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
+
+		return task.getAvailableTransitions();
+	}
+
+	public String getTaskTransitionsXml(long taskId) {
+		List transitions = getTaskTransitions(taskId);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		for (int i = 0; i < transitions.size(); i++) {
+			Transition transition = (Transition)transitions.get(i);
+
+			DocUtil.add(root, "transition", transition.getName());
+		}
+
+		return doc.asXML();
+	}
+
+	public List getUserTasks(
+		long instanceId, String taskName, String workflowName,
+		String assignedTo, String gtCreateDate, String ltCreateDate,
+		String gtStartDate, String ltStartDate, String gtEndDate,
+		String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+		int begin, int end) {
+
+		List tasks = new ArrayList();
+
+		if (Validator.isNull(taskName) && Validator.isNull(workflowName) &&
+			Validator.isNull(assignedTo) && Validator.isNull(gtCreateDate) &&
+			Validator.isNull(ltCreateDate) && Validator.isNull(gtStartDate) &&
+			Validator.isNull(ltStartDate) && Validator.isNull(gtEndDate) &&
+			Validator.isNull(ltEndDate)) {
+
+			List taskInstances = taskMgmtSession.findTaskInstances(userId);
+
+			taskInstances.addAll(
+				taskMgmtSession.findPooledTaskInstances(userId));
+
+			Iterator itr = taskInstances.iterator();
+
+			while (itr.hasNext()) {
+				TaskInstance task = (TaskInstance)itr.next();
+
+				ProcessInstance instance = task.getToken().getProcessInstance();
+
+				if (instance.getId() == instanceId) {
+					WorkflowUtil.initTask(task);
+
+					tasks.add(task);
+				}
+			}
+		}
+		else {
+			tasks = graphSession.findTaskInstancesBySearchTerms(
+				taskName, workflowName, assignedTo,	gtCreateDate, ltCreateDate,
+				gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+				andOperator, begin, end);
+
+			WorkflowUtil.initTasks(tasks);
+		}
+
+	    return tasks;
+	}
+
+	public long getUserTasksCount(
+		long instanceId, String taskName, String workflowName,
+		String assignedTo, String gtCreateDate, String ltCreateDate,
+		String gtStartDate, String ltStartDate, String gtEndDate,
+		String ltEndDate, boolean hideEndedTasks, boolean andOperator) {
+
+		return graphSession.countTaskInstancesBySearchTerms(
+			taskName, workflowName, assignedTo,	gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator);
+	}
+
+	public String getUserTasksCountXml(
+		long instanceId, String taskName, String workflowName,
+		String assignedTo, String gtCreateDate, String ltCreateDate,
+		String gtStartDate, String ltStartDate, String gtEndDate,
+		String ltEndDate, boolean hideEndedTasks, boolean andOperator) {
+
+		long count = getUserTasksCount(
+			instanceId, taskName, workflowName, assignedTo, gtCreateDate,
+			ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+			hideEndedTasks, andOperator);
+
+		return getCountXml(count);
+	}
+
+	public String getUserTasksXml(
+		long instanceId, String taskName, String workflowName,
+		String assignedTo, String gtCreateDate, String ltCreateDate,
+		String gtStartDate, String ltStartDate, String gtEndDate,
+		String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+		int begin, int end) {
+
+		List tasks = getUserTasks(
+			instanceId, taskName, workflowName, assignedTo, gtCreateDate,
+			ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+			hideEndedTasks, andOperator, begin, end);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		for (int i = 0; i < tasks.size(); i++) {
+			TaskInstance task = (TaskInstance)tasks.get(i);
+
+			createElement(task, root);
+		}
+
+		return doc.asXML();
+	}
+
+	public void signalInstance(long instanceId) {
+		ProcessInstance instance = jbpmContext.loadProcessInstance(instanceId);
+
+		instance.signal();
+
+		jbpmContext.save(instance);
+	}
+
+	public void signalToken(long instanceId, long tokenId) {
+		ProcessInstance instance = jbpmContext.loadProcessInstance(instanceId);
+
+		Token token = instance.getRootToken();
+
+		if (token.getId() == tokenId) {
+			token.signal();
+		}
+		else {
+			Map activeChildren = instance.getRootToken().getActiveChildren();
+
+			Iterator itr = activeChildren.values().iterator();
+
+			while (itr.hasNext()) {
+				token = (Token)itr.next();
+
+				if (token.getId() == tokenId) {
+					token.signal();
+
+					break;
+				}
+			}
+		}
+	}
+
+	public String startWorkflow(long definitionId) {
+		ProcessDefinition definition =
+			graphSession.loadProcessDefinition(definitionId);
+
+		ProcessInstance instance = new ProcessInstance(definition);
+
+		// After creating process instance, assign the currently authenticated
+		// user to the first task if it exists
+
+		if (instance.getTaskMgmtInstance().getTaskMgmtDefinition().
+				getStartTask() != null) {
+
+			jbpmContext.setActorId(userId);
+
+			instance.getTaskMgmtInstance().createStartTaskInstance();
+		}
+
+		jbpmContext.save(instance);
+
+		WorkflowUtil.initInstance(instance);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		createElement(instance, root, false);
+
+		return doc.asXML();
+    }
+
+	public Map updateTask(long taskId, String transition, Map parameterMap) {
+	    List taskFormElements = getTaskFormElements(taskId);
+
+		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
+
+		String actorId = task.getActorId();
+
+		try {
+			task.start();
+
+			if (actorId == null) {
+				task.setActorId(userId);
+			}
+		}
+		catch (Exception e) {
+			_log.error("Task has already started");
+		}
+
+		Map variables = new HashMap();
+		Map errors = new HashMap();
+
+	    Iterator itr = taskFormElements.iterator();
+
+		while (itr.hasNext()) {
+			TaskFormElement taskFormElement = (TaskFormElement)itr.next();
+
+			String name = taskFormElement.getDisplayName();
+
+			if (taskFormElement.isWritable()) {
+				String value = getParamValue(parameterMap, name);
+
+				variables.put(taskFormElement.getVariableName(), value);
+
+				String error = validate(taskFormElement, parameterMap);
+
+				if (error != null) {
+					errors.put(name, error);
+				}
+			}
+		}
+
+	    task.addVariables(variables);
+
+	    if (errors.size() == 0) {
+			try {
+				task.end(transition);
+			}
+			catch (Exception e) {
+				_log.error("Task has already ended");
+			}
+	    }
+
+		ProcessInstance instance = task.getToken().getProcessInstance();
+
+		WorkflowUtil.initInstance(instance);
+
+		jbpmContext.save(instance);
+
+		return errors;
+	}
+
+	public String updateTaskXml(
+		long taskId, String transition, Map parameterMap) {
+
+		Map errors = updateTask(taskId, transition, parameterMap);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("results");
+
+		Iterator itr = errors.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String name = (String)entry.getKey();
+			String code = (String)entry.getValue();
+
+			Element el = root.addElement("error");
+
+			DocUtil.add(el, "name", name);
+			DocUtil.add(el, "code", code);
+		}
+
+		return doc.asXML();
+	}
+
+	protected void createElement(ProcessDefinition definition, Element root) {
+		Element el = root.addElement("definition");
+
+		DocUtil.add(el, "definitionId", definition.getId());
+		DocUtil.add(el, "name", definition.getName());
+		DocUtil.add(el, "version", definition.getVersion());
+	}
+
+	protected void createElement(
+		ProcessInstance instance, Element root, boolean includeToken) {
+
+		Element el = root.addElement("instance");
+
+		DocUtil.add(el, "instanceId", instance.getId());
+		DocUtil.add(el, "startDate", formatDate(instance.getStart()));
+		DocUtil.add(el, "endDate", formatDate(instance.getEnd()));
+
+        if (instance.hasEnded()) {
+			DocUtil.add(el, "ended", "true");
+        }
+        else {
+			DocUtil.add(el, "ended", "false");
+        }
+
+        createElement(instance.getProcessDefinition(), el);
+
+        if (includeToken) {
+			createElement(instance.getRootToken(), el, true);
+        }
+	}
+
+	protected void createElement(TaskInstance task, Element root) {
+		Element el = root.addElement("task");
+
+		DocUtil.add(el, "taskId", task.getId());
+		DocUtil.add(el, "name", task.getName());
+		DocUtil.add(el, "assignedUserId", task.getActorId());
+		DocUtil.add(el, "createDate", formatDate(task.getCreate()));
+		DocUtil.add(el, "startDate", formatDate(task.getStart()));
+		DocUtil.add(el, "endDate", formatDate(task.getEnd()));
+
+        createElement(task.getToken().getProcessInstance(), el, false);
+	}
+
+	private void createElement(TaskFormElement taskFormElement, Element root) {
+		Element el = root.addElement("taskFormElement");
+
+		DocUtil.add(el, "type", taskFormElement.getType());
+		DocUtil.add(el, "displayName", taskFormElement.getDisplayName());
+		DocUtil.add(el, "variableName", taskFormElement.getVariableName());
+		DocUtil.add(el, "value", taskFormElement.getValue());
+		DocUtil.add(el, "readable", taskFormElement.isReadable());
+		DocUtil.add(el, "writable", taskFormElement.isWritable());
+		DocUtil.add(el, "required", taskFormElement.isRequired());
+
+		List values = taskFormElement.getValueList();
+
+		Element valuesEl = el.addElement("values");
+
+		for (int i = 0; i < values.size(); i++) {
+			String value = (String)values.get(i);
+
+			DocUtil.add(valuesEl, "value", value);
+		}
+	}
+
+	protected void createElement(
+		Token token, Element root, boolean checkChildren) {
+
+		Element tokenEl = root.addElement("token");
+
+		DocUtil.add(tokenEl, "tokenId", token.getId());
+		DocUtil.add(tokenEl, "name", token.getNode().getName());
+
+        if (token.getNode().toString().startsWith("Join")) {
+			DocUtil.add(tokenEl, "type", "join");
+        }
+		else {
+			DocUtil.add(tokenEl, "type", "default");
+        }
+
+        List tasks = getCurrentTasks(
+			token.getProcessInstance().getId(), token.getId());
+
+		if (tasks == null) {
+        	Element task = tokenEl.addElement("task");
+
+			task.addElement("taskId").addText("null");
+        }
+        else {
+	        for (int i = 0; i < tasks.size(); i++) {
+	        	TaskInstance task = (TaskInstance)tasks.get(i);
+
+				createElement(task, tokenEl);
+	        }
+        }
+
+        if (checkChildren) {
+	        Map activeChildren = getActiveChildren(
+				token.getProcessInstance().getId());
+
+			if (hasActiveChildren(activeChildren)) {
+				Iterator itr = activeChildren.values().iterator();
+
+				while (itr.hasNext()) {
+					Token child = (Token)itr.next();
+
+					createElement(child, tokenEl, false);
+				}
+			}
+        }
+	}
+
+	protected String formatDate(Date date) {
+		if (date == null) {
+			return StringPool.BLANK;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm a");
+
+		sdf.setTimeZone(timeZone);
+
+		return sdf.format(date);
+	}
+
+	protected Map getActiveChildren(long instanceId) {
+		ProcessInstance processInstance =
+			jbpmContext.loadProcessInstance(instanceId);
+
+		Map activeChildren = processInstance.getRootToken().getActiveChildren();
+
+		WorkflowUtil.initTokens(new ArrayList(activeChildren.values()));
+
+		return activeChildren;
+	}
+
+	protected String getCountXml(long count) {
+		StringBuffer sb = new StringBuffer();
+
+		sb.append("<result>");
+		sb.append("<count>");
+		sb.append(count);
+		sb.append("</count>");
+		sb.append("</result>");
+
+		return sb.toString();
+    }
+
+	protected List getCurrentTasks(long instanceId, long tokenId) {
+		List userTasks = getUserTasks(
+			instanceId, null, null, null, null, null, null, null, null, null,
+			false, false, 0, 0);
+
+		List currentTasks = new ArrayList();
+
+		List tokenTasks = taskMgmtSession.findTaskInstancesByToken(tokenId);
+
+		if (tokenTasks.size() == 0) {
+			currentTasks = null;
+		}
+		else {
+			Iterator itr = tokenTasks.iterator();
+
+			Set tokenTaskIds = new HashSet();
+
+			while (itr.hasNext()) {
+				TaskInstance task = (TaskInstance)itr.next();
+
+				tokenTaskIds.add(new Long(task.getId()));
+			}
+
+			itr = userTasks.iterator();
+
+			while (itr.hasNext()) {
+				TaskInstance task = (TaskInstance)itr.next();
+
+				if (tokenTaskIds.contains(new Long(task.getId()))) {
+					currentTasks.add(task);
+				}
+			}
+		}
+
+		// At this point, if currentTasks is null, then that means no tasks
+		// exist for this token, and the instance must be signaled to continue.
+		// If currentTasks is just empty, then that means the current token
+		// has tasks, but the current user cannot manage them.
+
+		return currentTasks;
+	}
+
+	protected String getParamValue(Map parameterMap, String name) {
+		String value = StringPool.BLANK;
+
+		String[] values = (String[])parameterMap.get(name);
+
+		if ((values != null) && (values.length > 0)) {
+			value = values[0];
+		}
+
+		return value;
+	}
+
+	protected boolean hasActiveChildren(Map activeChildren) {
+		Iterator itr = activeChildren.values().iterator();
+
+		while (itr.hasNext()) {
+			Token token = (Token)itr.next();
+
+			if (!token.getNode().toString().startsWith("Join")) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	protected String validate(
+		TaskFormElement taskFormElement, Map parameterMap) {
+
+		String error = null;
+
+		String type = taskFormElement.getType();
+		String name = taskFormElement.getDisplayName();
+		String value = getParamValue(parameterMap, name);
+
+		if (type.equals(TaskFormElement.TYPE_DATE)) {
+		}
+		else if (taskFormElement.isRequired() && Validator.isNull(value)) {
+			error = "2";
+		}
+		else if (type.equals("email") && !Validator.isEmailAddress(value)) {
+			error = "3";
+		}
+		else if (type.equals("phone") && !Validator.isPhoneNumber(value)) {
+			error = "4";
+		}
+		else if (type.equals("number") && !Validator.isNumber(value)) {
+			error = "5";
+		}
+
+		return error;
+	}
+
+	protected String userId;
+	protected String timeZoneId;
+	protected TimeZone timeZone;
+	protected JbpmContext jbpmContext;
+	protected GraphSession graphSession;
+	protected TaskMgmtSession taskMgmtSession;
+
+	private static final Log _log = LogFactory.getLog(WorkflowComponent.class);
 
 }

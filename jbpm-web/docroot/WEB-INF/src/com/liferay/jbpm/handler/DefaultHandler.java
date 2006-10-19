@@ -20,54 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.servlet;
+package com.liferay.jbpm.handler;
 
-import com.liferay.jbpm.WorkflowComponent;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.jbpm.util.JbpmWebProps;
+import com.liferay.util.Encryptor;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
- * <a href="JBPMServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
  *
  */
-public class JBPMServlet extends HttpServlet {
+public class DefaultHandler {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		WorkflowComponent workflow = new WorkflowComponent();
-
-		String result = workflow.process(req);
-
-		res.setContentType("text/xml");
-
-		ServletOutputStream out = res.getOutputStream();
-
-		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
-		}
-		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
-		}
-		finally {
-			out.flush();
-			out.close();
-		}
+	protected URL getURL(String serviceName) throws MalformedURLException {
+		return getURL(serviceName, true);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JBPMServlet.class);
+	protected URL getURL(String serviceName, boolean authenticated)
+		throws MalformedURLException {
+
+		String url = JbpmWebProps.get("soap.url");
+
+		if (authenticated) {
+			String userId = JbpmWebProps.get("soap.user.id");
+			String password = Encryptor.digest(
+				JbpmWebProps.get("soap.password"));
+
+			int pos = url.indexOf("://");
+
+			String protocol = url.substring(0, pos + 3);
+			String host = url.substring(pos + 3, url.length());
+
+			url =
+				protocol + userId + ":" + password + "@" + host +
+					"/tunnel-web/secure/axis/" + serviceName;
+		}
+		else {
+			url += "/tunnel-web/axis/" + serviceName;
+		}
+
+		return new URL(url);
+	}
 
 }

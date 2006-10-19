@@ -20,54 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.servlet;
+package com.liferay.util.xml;
 
-import com.liferay.jbpm.WorkflowComponent;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.util.GetterUtil;
 
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import org.dom4j.Element;
 
 /**
- * <a href="JBPMServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="DocUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class JBPMServlet extends HttpServlet {
+public class DocUtil {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		WorkflowComponent workflow = new WorkflowComponent();
-
-		String result = workflow.process(req);
-
-		res.setContentType("text/xml");
-
-		ServletOutputStream out = res.getOutputStream();
-
-		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
-		}
-		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
-		}
-		finally {
-			out.flush();
-			out.close();
-		}
+	public static void add(Element el, String name, boolean text) {
+		add(el, name, String.valueOf(text));
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JBPMServlet.class);
+	public static void add(Element el, String name, double text) {
+		add(el, name, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, float text) {
+		add(el, name, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, int text) {
+		add(el, name, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, long text) {
+		add(el, name, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, short text) {
+		add(el, name, String.valueOf(text));
+	}
+
+	public static void add(Element el, String name, String text) {
+		el.addElement(name).addText(GetterUtil.getString(text));
+	}
 
 }

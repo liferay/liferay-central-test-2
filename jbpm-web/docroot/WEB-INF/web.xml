@@ -6,8 +6,17 @@
 		<servlet-class>com.liferay.jbpm.servlet.JBPMServlet</servlet-class>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
+	<servlet>
+    	<servlet-name>SchedulerServlet</servlet-name>
+    	<servlet-class>org.jbpm.scheduler.impl.SchedulerServlet</servlet-class>
+    	<load-on-startup>2</load-on-startup>
+	</servlet>
 	<servlet-mapping>
 		<servlet-name>JBPMServlet</servlet-name>
 		<url-pattern>/servlet/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+    	<servlet-name>SchedulerServlet</servlet-name>
+    	<url-pattern>/scheduler</url-pattern>
 	</servlet-mapping>
 </web-app>

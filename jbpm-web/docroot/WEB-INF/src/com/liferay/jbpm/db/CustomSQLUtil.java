@@ -20,54 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.servlet;
+package com.liferay.jbpm.db;
 
-import com.liferay.jbpm.WorkflowComponent;
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
-
-import java.io.IOException;
-
-import javax.servlet.ServletException;
-import javax.servlet.ServletOutputStream;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
- * <a href="JBPMServlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class JBPMServlet extends HttpServlet {
+public class CustomSQLUtil {
 
-	public void service(HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
-
-		WorkflowComponent workflow = new WorkflowComponent();
-
-		String result = workflow.process(req);
-
-		res.setContentType("text/xml");
-
-		ServletOutputStream out = res.getOutputStream();
-
-		try {
-			if (!res.isCommitted()) {
-				out.print(result);
-			}
-		}
-		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
-		}
-		finally {
-			out.flush();
-			out.close();
-		}
+	public static String get(String id) {
+		return _instance.get(id);
 	}
 
-	private static Log _log = LogFactoryUtil.getLog(JBPMServlet.class);
+	public static String replaceAndOperator(String sql, boolean andOperator) {
+		return _instance.replaceAndOperator(sql, andOperator);
+	}
+
+	public static String replaceIsNull(String sql) {
+		return _instance.replaceIsNull(sql);
+	}
+
+	public static String removeOrderBy(String sql) {
+		return _instance.removeOrderBy(sql);
+	}
+
+	public static String replaceOrderBy(String sql, OrderByComparator obc) {
+		return _instance.replaceOrderBy(sql, obc);
+	}
+
+	private static JbpmCustomSQLUtil _instance = new JbpmCustomSQLUtil();
 
 }
