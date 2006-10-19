@@ -1,6 +1,10 @@
-function AjaxRequest(returnFunction, returnArgs, ajaxId) {
+function AjaxRequest(url, options) {
 	
 	var xmlHttpReq;
+	var opts = options;
+	var returnArgs = (opts.returnArgs == null) ? opts : opts.returnArgs;
+	var method = opts.method;
+	var ajaxId = opts.ajaxId;
 
 	if (window.XMLHttpRequest) {
 		xmlHttpReq = new XMLHttpRequest();
@@ -27,12 +31,17 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 		}
 	}
 	
-	xmlHttpReq.onreadystatechange = function() {
-		if (xmlHttpReq.readyState == 4) {
-			if (xmlHttpReq.status == 200) {
-				if (returnFunction) {
-					returnFunction(xmlHttpReq, returnArgs);
-
+	var urlArray = url.split("?");
+	var path = urlArray[0];
+	var query = urlArray[1];
+	var onComplete = opts.onComplete;
+	var returnFunction = function() {
+			if (xmlHttpReq.readyState == 4) {
+				if (xmlHttpReq.status == 200) {
+					if (onComplete) {
+						onComplete(xmlHttpReq, opts);
+					}
+	
 					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
 					if (ajaxId && ajaxId != "") {
 						Ajax.remove(parseInt(ajaxId));
@@ -40,14 +49,50 @@ function AjaxRequest(returnFunction, returnArgs, ajaxId) {
 				}
 			}
 		}
+
+	try {
+		if (method == "get") {
+			xmlHttpReq.open("GET", url, true);
+			xmlHttpReq.onreadystatechange = returnFunction;
+			xmlHttpReq.send("");
+		}
+		else {
+			xmlHttpReq.open("POST", path, true);
+			xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
+			xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
+			xmlHttpReq.onreadystatechange = returnFunction;
+			xmlHttpReq.send(query);
+		}
+	}
+	catch (e) {
+	}
+
+	this.resend = function(url, options) {
+		opts = options;
+		onComplete = opts.onComplete;
+		
+		var method = opts.method;
+		var urlArray = url.split("?");
+		var path = urlArray[0];
+		var query = urlArray[1];
+		var ajaxId = opts.ajaxId;
+		
+		if (method == "get") {
+			xmlHttpReq.open("GET", url, true);
+			xmlHttpReq.send("");
+		}
+		else {
+			xmlHttpReq.open("POST", path, true);
+			xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
+			xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
+			xmlHttpReq.send(query);
+		}
 	};
 	
 	this.getId = function() {
 		return ajaxId;
-	};
-
-	this.getRequest = function() {
-		return xmlHttpReq;
 	};
 	
 	this.cleanUp = function() {
@@ -71,44 +116,21 @@ var Ajax = {
 		 * method (string) - use "get" or "post". Default is post.
 		 */
 		var opts = (options == null) ? (new Object()) : options;
-		
 		var ajaxId = (opts.reverseAjax) ? 0 : Ajax.getNextId();
-		var method = opts.method;
-		var returnFunction = opts.onComplete;
-		var returnArgs = (opts.returnArgs == null) ? opts : opts.returnArgs;
-		var request = new AjaxRequest(opts.onComplete, returnArgs, ajaxId);
-		var xmlHttpReq = request.getRequest();
+		opts.ajaxId = ajaxId;
 		
-		Ajax.requests[ajaxId] = request;
+		var request;
 		
-		if (url.indexOf("?") < 0) {
-			url += "?";
+		if (ajaxId == 0 && Ajax.requests[0]) {
+			request = Ajax.requests[0];
+			request.resend(url, opts);
 		}
 		else {
-			url += "&";
-		}
-	
-		url += "no_cache=" + random() + "&ajax_id=" + ajaxId;
-		
-		var urlArray = url.split("?");
-		var path = urlArray[0];
-		var query = urlArray[1];
-
-		try {
-			if (method == "get") {
-				xmlHttpReq.open("GET", url, true);
-			}
-			else {
-				xmlHttpReq.open("POST", path, true);
-				xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
-				xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-				xmlHttpReq.send(query);
-			}
-		}
-		catch (e) {
+			request = new AjaxRequest(url, opts);
+			Ajax.requests[ajaxId] = request;
 		}
 		
-		if (returnFunction == null) {
+		if (!opts.onComplete) {
 			Ajax.remove(ajaxId);
 		}
 	},
@@ -153,7 +175,7 @@ var Ajax = {
 
 		return id;
 	},
-	
+
 	remove : function(id) {
 		var request = Ajax.requests[id];
 		if (id && request) {

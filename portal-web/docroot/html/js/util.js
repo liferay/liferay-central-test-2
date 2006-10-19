@@ -67,6 +67,10 @@ if (!Array.prototype.pop) {
 }
 
 function addEventHandler(obj, type, func) {
+	if (type.indexOf("on") != 0) {
+		type = "on" + type;
+	}
+	
     var temp = obj[type];
 
 	if (typeof obj[type] != "function") {

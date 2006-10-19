@@ -266,7 +266,7 @@ var Messaging = {
 	},
 	
 	onPageUnload : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=unload");
+		Ajax.request(themeDisplay.getPathMain() + "/messaging/action?cmd=unload", {reverseAjax:true});
 	},
 
 	removeChat : function(obj) {
