@@ -78,15 +78,15 @@
 			</or>
 			<then>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/nt" includes="${database.name}.*" />
+					<fileset dir="${app.server.bin.dir}/nt" includes="${database.name}.script,${database.name}.properties" />
 				</delete>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/unix" includes="${database.name}.*" />
+					<fileset dir="${app.server.bin.dir}/unix" includes="${database.name}.script,${database.name}.properties" />
 				</delete>
 			</then>
 			<else>
 				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}" includes="${database.name}.*" />
+					<fileset dir="${app.server.bin.dir}" includes="${database.name}.script,${database.name}.properties" />
 				</delete>
 			</else>
 		</if>
@@ -248,19 +248,19 @@
 			<then>
 				<copy todir="${app.server.bin.dir}/nt">
 					<fileset dir="sql">
-						<include name="${database.name}.*" />
+						<include name="${database.name}.script,${database.name}.properties" />
 					</fileset>
 				</copy>
 				<copy todir="${app.server.bin.dir}/unix">
 					<fileset dir="sql">
-						<include name="${database.name}.*" />
+						<include name="${database.name}.script,${database.name}.properties" />
 					</fileset>
 				</copy>
 			</then>
 			<else>
 				<copy todir="${app.server.bin.dir}">
 					<fileset dir="sql">
-						<include name="${database.name}.*" />
+						<include name="${database.name}.script,${database.name}.properties" />
 					</fileset>
 				</copy>
 			</else>
