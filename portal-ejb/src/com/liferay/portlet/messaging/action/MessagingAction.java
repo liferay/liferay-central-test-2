@@ -153,7 +153,7 @@ public class MessagingAction extends JSONAction {
 
 			if (msgWait != null) {
 				jabberSes.setMessageWait(null);
-				msgWait.notify();
+				msgWait.expire();
 			}
 
 			msgWait = new MessageWait();
