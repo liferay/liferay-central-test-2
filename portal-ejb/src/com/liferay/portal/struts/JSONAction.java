@@ -50,12 +50,11 @@ public abstract class JSONAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		String ajaxId = req.getParameter("ajax_id");
-
 		String callback = ParamUtil.getString(req, "callback");
 		String instance = ParamUtil.getString(req, "inst");
 
 		String json = null;
+		String ajaxId = req.getHeader("Ajax-ID");
 
 		try {
 			json = getJSON(mapping, form, req, res);
@@ -78,7 +77,7 @@ public abstract class JSONAction extends Action {
 			res.setContentType(Constants.TEXT_JAVASCRIPT);
 			res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
 
-			if (ajaxId != null) {
+			if (ajaxId != null && !ajaxId.equals("")) {
 				res.setHeader("Ajax-ID", ajaxId);
 			}
 

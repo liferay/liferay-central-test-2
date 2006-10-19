@@ -48,7 +48,7 @@ public abstract class AJAXAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		String ajaxId = req.getParameter("ajax_id");
+		String ajaxId = req.getHeader("Ajax-ID");
 
 		String xml = null;
 
