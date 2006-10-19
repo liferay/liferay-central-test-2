@@ -28,7 +28,6 @@
 
 	<%
 	int sessionTimeout = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
-	sessionTimeout = 2;
 	int sessionTimeoutWarning = GetterUtil.getInteger(PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
 	int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 	int timeoutDiff = (sessionTimeout - sessionTimeoutWarning) * (int)Time.MINUTE;
