@@ -36,7 +36,7 @@ Hessian 2.1.12
 Hibernate 3.2
 HiveMind 1.1
 HttpBridge 0.9.6 (patched)
-Hypersonic 1.8.0.4
+Hypersonic 1.8.0.7
 Informa 0.6.5
 Jackrabbit 1.0.1
 JAIMBot 1.4
