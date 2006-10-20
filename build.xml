@@ -5,7 +5,11 @@
 
 	<import file="build-common.xml" />
 
-	<target name="all" depends="clean,start,deploy" />
+    <target name="all">
+        <antcall target="clean" />
+        <antcall target="start" />
+        <antcall target="deploy" />
+    </target>
 
 	<target name="start">
 		<antcall target="compile" />
