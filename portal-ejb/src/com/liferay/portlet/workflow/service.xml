@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_2_0.dtd">
+
+<service-builder root-dir=".." package-path="com.liferay.portlet">
+	<portlet name="Workflow" short-name="Workflow" />
+	<entity name="WorkflowComponent" local-service="false" remote-service="true" />
+</service-builder>

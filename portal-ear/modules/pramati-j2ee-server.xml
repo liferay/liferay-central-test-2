@@ -8087,6 +8087,22 @@
 				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
+			<local-jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
 	</ejb-module>
 	<web-module>
 		<name>/cms</name>

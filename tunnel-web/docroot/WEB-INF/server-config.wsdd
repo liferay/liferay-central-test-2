@@ -1826,6 +1826,15 @@
 		<typeMapping xmlns:ns="http://persistence.service.wiki.portlet.liferay.com" qname="ns:WikiPagePK" type="java:com.liferay.portlet.wiki.service.persistence.WikiPagePK" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
+	<service name="Portlet_Workflow_WorkflowComponentService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.workflow.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="WorkflowComponentServiceSoapService"/>
+		<parameter name="wsdlServicePort" value="Portlet_Workflow_WorkflowComponentService"/>
+		<parameter name="className" value="com.liferay.portlet.workflow.service.http.WorkflowComponentServiceSoap"/>
+		<parameter name="wsdlPortType" value="WorkflowComponentServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<parameter name="allowedMethods" value="*"/>
+	</service>
 	<service name="Version" provider="java:RPC">
 		<parameter name="allowedMethods" value="getVersion"/>
 		<parameter name="className" value="org.apache.axis.Version"/>

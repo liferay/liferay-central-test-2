@@ -678,6 +678,13 @@
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceHome</home>
+		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.counter.service.ejb.CounterServiceHome</home>

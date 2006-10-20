@@ -22,4 +22,7 @@
  */
 %><%--
 
---%><%@ include file="/html/portlet/init.jsp" %>
+--%><%@ include file="/html/portlet/init.jsp" %><%--
+
+--%><%@ page import="com.liferay.portlet.workflow.model.WorkflowDefinition" %><%--
+--%><%@ page import="com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil" %>

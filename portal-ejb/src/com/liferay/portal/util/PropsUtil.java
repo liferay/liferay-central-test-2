@@ -487,6 +487,10 @@ public class PropsUtil {
 
 	public static final String JABBER_XMPP_HEARTBEAT = "jabber.xmpp.heartbeat";
 
+	// JBI
+
+	public static final String JBI_WORKFLOW_URL = "jbi.workflow.url";
+
 	// JCR
 
 	public static final String JCR_INITIALIZE_ON_STARTUP = "jcr.initialize.on.startup";

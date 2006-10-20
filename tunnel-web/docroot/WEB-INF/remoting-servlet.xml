@@ -530,4 +530,16 @@
 		<property name="service" ref="com.liferay.portlet.wiki.service.spring.WikiPageService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.spring.WikiPageService" />
 	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.spring.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.spring.WorkflowComponentService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.spring.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.spring.WorkflowComponentService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.spring.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.spring.WorkflowComponentService" />
+	</bean>
 </beans>

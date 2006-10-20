@@ -398,7 +398,7 @@ public class Http {
 				method = new GetMethod(location);
 			}
 
-			method.setFollowRedirects(true);
+			//method.setFollowRedirects(true);
 
 			client.executeMethod(method);
 

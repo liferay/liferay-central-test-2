@@ -22,7 +22,7 @@
 
 package com.liferay.jbpm.servlet;
 
-import com.liferay.jbpm.WorkflowComponent;
+import com.liferay.jbpm.WorkflowComponentImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -46,9 +46,10 @@ public class JBPMServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		WorkflowComponent workflow = new WorkflowComponent();
+		WorkflowComponentImpl workflowComponentImpl =
+			new WorkflowComponentImpl();
 
-		String result = workflow.process(req);
+		String result = workflowComponentImpl.process(req);
 
 		res.setContentType("text/xml");
 

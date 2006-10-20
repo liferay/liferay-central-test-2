@@ -25,6 +25,8 @@ package com.liferay.jbpm;
 import com.liferay.jbpm.db.GraphSession;
 import com.liferay.jbpm.util.TaskFormElement;
 import com.liferay.jbpm.util.WorkflowUtil;
+import com.liferay.portal.kernel.jbi.WorkflowComponent;
+import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -63,14 +65,14 @@ import org.jbpm.graph.exe.Token;
 import org.jbpm.taskmgmt.exe.TaskInstance;
 
 /**
- * <a href="WorkflowComponent.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowComponentImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
  *
  */
-public class WorkflowComponent {
+public class WorkflowComponentImpl implements WorkflowComponent {
 
-	public WorkflowComponent() {
+	public WorkflowComponentImpl() {
 	}
 
 	public String process(HttpServletRequest req) {
@@ -246,7 +248,7 @@ public class WorkflowComponent {
 		return result;
     }
 
-	public String deploy(String xml) {
+	public String deploy(String xml) throws WorkflowComponentException {
 		ProcessDefinition definition = ProcessDefinition.parseXmlString(xml);
 
 		jbpmContext.deployProcessDefinition(definition);
@@ -263,7 +265,8 @@ public class WorkflowComponent {
     }
 
 	public List getDefinitions(
-		long definitionId, String name, int begin, int end) {
+			long definitionId, String name, int begin, int end)
+		throws WorkflowComponentException {
 
 		List definitions = new ArrayList();
 
@@ -284,7 +287,8 @@ public class WorkflowComponent {
     }
 
 	public String getDefinitionsXml(
-		long definitionId, String name, int begin, int end) {
+			long definitionId, String name, int begin, int end)
+		throws WorkflowComponentException {
 
 		List definitions = getDefinitions(definitionId, name, begin, end);
 
@@ -302,7 +306,9 @@ public class WorkflowComponent {
 		return doc.asXML();
     }
 
-	public long getDefinitionsCount(long definitionId, String name) {
+	public long getDefinitionsCount(long definitionId, String name)
+		throws WorkflowComponentException {
+
 		long count = 0;
 
 		if (definitionId > 0) {
@@ -315,17 +321,20 @@ public class WorkflowComponent {
 		return count;
     }
 
-	public String getDefinitionsCountXml(long definitionId, String name) {
+	public String getDefinitionsCountXml(long definitionId, String name)
+		throws WorkflowComponentException {
+
 		long count = getDefinitionsCount(definitionId, name);
 
 		return getCountXml(count);
     }
 
 	public List getInstances(
-		long definitionId, long instanceId, String workflowName,
-		String workflowVersion, String gtStartDate, String ltStartDate,
-		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) {
+			long definitionId, long instanceId, String workflowName,
+			String workflowVersion, String gtStartDate, String ltStartDate,
+			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			boolean andOperator, int begin, int end)
+		throws WorkflowComponentException {
 
 		List instances = new ArrayList();
 
@@ -356,10 +365,11 @@ public class WorkflowComponent {
 	}
 
 	public long getInstancesCount(
-		long definitionId, long instanceId, String workflowName,
-		String workflowVersion, String gtStartDate, String ltStartDate,
-		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
-		boolean andOperator) {
+			long definitionId, long instanceId, String workflowName,
+			String workflowVersion, String gtStartDate, String ltStartDate,
+			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			boolean andOperator)
+		throws WorkflowComponentException {
 
 		if (definitionId > 0){
 			return 1;
@@ -375,10 +385,11 @@ public class WorkflowComponent {
 	}
 
 	public String getInstancesCountXml(
-		long definitionId, long instanceId, String workflowName,
-		String workflowVersion, String gtStartDate, String ltStartDate,
-		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
-		boolean andOperator) {
+			long definitionId, long instanceId, String workflowName,
+			String workflowVersion, String gtStartDate, String ltStartDate,
+			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			boolean andOperator)
+		throws WorkflowComponentException {
 
 		long count = getInstancesCount(
 			definitionId, instanceId, workflowName, workflowVersion,
@@ -389,10 +400,11 @@ public class WorkflowComponent {
     }
 
 	public String getInstancesXml(
-		long definitionId, long instanceId, String workflowName,
-		String workflowVersion, String gtStartDate, String ltStartDate,
-		String gtEndDate, String ltEndDate, boolean hideEndedTasks,
-		boolean andOperator, int begin, int end) {
+			long definitionId, long instanceId, String workflowName,
+			String workflowVersion, String gtStartDate, String ltStartDate,
+			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			boolean andOperator, int begin, int end)
+		throws WorkflowComponentException {
 
 		List instances = getInstances(
 			definitionId, instanceId, workflowName, workflowVersion,
@@ -412,7 +424,9 @@ public class WorkflowComponent {
 		return doc.asXML();
 	}
 
-	public List getTaskFormElements(long taskId) {
+	public List getTaskFormElements(long taskId)
+		throws WorkflowComponentException {
+
 		List taskFormElements = new ArrayList();
 
 		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
@@ -439,7 +453,9 @@ public class WorkflowComponent {
 		return taskFormElements;
 	}
 
-	public String getTaskFormElementsXml(long taskId) {
+	public String getTaskFormElementsXml(long taskId)
+		throws WorkflowComponentException {
+
 		List taskFormElements = getTaskFormElements(taskId);
 
 		Document doc = DocumentHelper.createDocument();
@@ -456,13 +472,17 @@ public class WorkflowComponent {
 		return doc.asXML();
 	}
 
-	public List getTaskTransitions(long taskId) {
+	public List getTaskTransitions(long taskId)
+		throws WorkflowComponentException {
+
 		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
 
 		return task.getAvailableTransitions();
 	}
 
-	public String getTaskTransitionsXml(long taskId) {
+	public String getTaskTransitionsXml(long taskId)
+		throws WorkflowComponentException {
+
 		List transitions = getTaskTransitions(taskId);
 
 		Document doc = DocumentHelper.createDocument();
@@ -479,11 +499,12 @@ public class WorkflowComponent {
 	}
 
 	public List getUserTasks(
-		long instanceId, String taskName, String workflowName,
-		String assignedTo, String gtCreateDate, String ltCreateDate,
-		String gtStartDate, String ltStartDate, String gtEndDate,
-		String ltEndDate, boolean hideEndedTasks, boolean andOperator,
-		int begin, int end) {
+			long instanceId, String taskName, String workflowName,
+			String assignedTo, String gtCreateDate, String ltCreateDate,
+			String gtStartDate, String ltStartDate, String gtEndDate,
+			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			int begin, int end)
+		throws WorkflowComponentException {
 
 		List tasks = new ArrayList();
 
@@ -525,10 +546,11 @@ public class WorkflowComponent {
 	}
 
 	public long getUserTasksCount(
-		long instanceId, String taskName, String workflowName,
-		String assignedTo, String gtCreateDate, String ltCreateDate,
-		String gtStartDate, String ltStartDate, String gtEndDate,
-		String ltEndDate, boolean hideEndedTasks, boolean andOperator) {
+			long instanceId, String taskName, String workflowName,
+			String assignedTo, String gtCreateDate, String ltCreateDate,
+			String gtStartDate, String ltStartDate, String gtEndDate,
+			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		throws WorkflowComponentException {
 
 		return graphSession.countTaskInstancesBySearchTerms(
 			taskName, workflowName, assignedTo,	gtCreateDate, ltCreateDate,
@@ -537,10 +559,11 @@ public class WorkflowComponent {
 	}
 
 	public String getUserTasksCountXml(
-		long instanceId, String taskName, String workflowName,
-		String assignedTo, String gtCreateDate, String ltCreateDate,
-		String gtStartDate, String ltStartDate, String gtEndDate,
-		String ltEndDate, boolean hideEndedTasks, boolean andOperator) {
+			long instanceId, String taskName, String workflowName,
+			String assignedTo, String gtCreateDate, String ltCreateDate,
+			String gtStartDate, String ltStartDate, String gtEndDate,
+			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		throws WorkflowComponentException {
 
 		long count = getUserTasksCount(
 			instanceId, taskName, workflowName, assignedTo, gtCreateDate,
@@ -551,11 +574,12 @@ public class WorkflowComponent {
 	}
 
 	public String getUserTasksXml(
-		long instanceId, String taskName, String workflowName,
-		String assignedTo, String gtCreateDate, String ltCreateDate,
-		String gtStartDate, String ltStartDate, String gtEndDate,
-		String ltEndDate, boolean hideEndedTasks, boolean andOperator,
-		int begin, int end) {
+			long instanceId, String taskName, String workflowName,
+			String assignedTo, String gtCreateDate, String ltCreateDate,
+			String gtStartDate, String ltStartDate, String gtEndDate,
+			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			int begin, int end)
+		throws WorkflowComponentException {
 
 		List tasks = getUserTasks(
 			instanceId, taskName, workflowName, assignedTo, gtCreateDate,
@@ -575,7 +599,9 @@ public class WorkflowComponent {
 		return doc.asXML();
 	}
 
-	public void signalInstance(long instanceId) {
+	public void signalInstance(long instanceId)
+		throws WorkflowComponentException {
+
 		ProcessInstance instance = jbpmContext.loadProcessInstance(instanceId);
 
 		instance.signal();
@@ -583,7 +609,9 @@ public class WorkflowComponent {
 		jbpmContext.save(instance);
 	}
 
-	public void signalToken(long instanceId, long tokenId) {
+	public void signalToken(long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
 		ProcessInstance instance = jbpmContext.loadProcessInstance(instanceId);
 
 		Token token = instance.getRootToken();
@@ -608,7 +636,9 @@ public class WorkflowComponent {
 		}
 	}
 
-	public String startWorkflow(long definitionId) {
+	public String startWorkflow(long definitionId)
+		throws WorkflowComponentException {
+
 		ProcessDefinition definition =
 			graphSession.loadProcessDefinition(definitionId);
 
@@ -638,8 +668,10 @@ public class WorkflowComponent {
 		return doc.asXML();
     }
 
-	public Map updateTask(long taskId, String transition, Map parameterMap) {
-	    List taskFormElements = getTaskFormElements(taskId);
+	public Map updateTask(long taskId, String transition, Map parameterMap)
+		throws WorkflowComponentException {
+
+		List taskFormElements = getTaskFormElements(taskId);
 
 		TaskInstance task = taskMgmtSession.loadTaskInstance(taskId);
 
@@ -700,7 +732,8 @@ public class WorkflowComponent {
 	}
 
 	public String updateTaskXml(
-		long taskId, String transition, Map parameterMap) {
+			long taskId, String transition, Map parameterMap)
+		throws WorkflowComponentException {
 
 		Map errors = updateTask(taskId, transition, parameterMap);
 
@@ -734,7 +767,8 @@ public class WorkflowComponent {
 	}
 
 	protected void createElement(
-		ProcessInstance instance, Element root, boolean includeToken) {
+			ProcessInstance instance, Element root, boolean includeToken)
+		throws WorkflowComponentException {
 
 		Element el = root.addElement("instance");
 
@@ -756,7 +790,9 @@ public class WorkflowComponent {
         }
 	}
 
-	protected void createElement(TaskInstance task, Element root) {
+	protected void createElement(TaskInstance task, Element root)
+		throws WorkflowComponentException {
+
 		Element el = root.addElement("task");
 
 		DocUtil.add(el, "taskId", task.getId());
@@ -769,7 +805,9 @@ public class WorkflowComponent {
         createElement(task.getToken().getProcessInstance(), el, false);
 	}
 
-	private void createElement(TaskFormElement taskFormElement, Element root) {
+	protected void createElement(
+		TaskFormElement taskFormElement, Element root) {
+
 		Element el = root.addElement("taskFormElement");
 
 		DocUtil.add(el, "type", taskFormElement.getType());
@@ -792,7 +830,8 @@ public class WorkflowComponent {
 	}
 
 	protected void createElement(
-		Token token, Element root, boolean checkChildren) {
+			Token token, Element root, boolean checkChildren)
+		throws WorkflowComponentException {
 
 		Element tokenEl = root.addElement("token");
 
@@ -873,7 +912,9 @@ public class WorkflowComponent {
 		return sb.toString();
     }
 
-	protected List getCurrentTasks(long instanceId, long tokenId) {
+	protected List getCurrentTasks(long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
 		List userTasks = getUserTasks(
 			instanceId, null, null, null, null, null, null, null, null, null,
 			false, false, 0, 0);
@@ -975,6 +1016,7 @@ public class WorkflowComponent {
 	protected GraphSession graphSession;
 	protected TaskMgmtSession taskMgmtSession;
 
-	private static final Log _log = LogFactory.getLog(WorkflowComponent.class);
+	private static final Log _log =
+		LogFactory.getLog(WorkflowComponentImpl.class);
 
 }

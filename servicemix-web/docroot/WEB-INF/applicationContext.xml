@@ -3,12 +3,12 @@
 <beans xmlns="http://xbean.org/schemas/spring/1.0" xmlns:spring="http://xbean.org/schemas/spring/1.0" xmlns:servicemix="http://servicemix.org/config/1.0" xmlns:liferay="http://www.liferay.com/servicemix/">
 	<servicemix:container spring:id="jbi" rootDir="../wdir" useMBeanServer="true" createMBeanServer="true" installationDirPath="../install" deploymentDirPath="../deploy" monitorInstallationDirectory="true" dumpStats="true" statsInterval="10" transactionManager="#transactionManager">
 		<servicemix:activationSpecs>
-			<servicemix:activationSpec componentName="httpInOutBinding" service="liferay:httpInOutBinding" destinationService="liferay:workflow">
+			<servicemix:activationSpec componentName="workflowInbound" service="liferay:workflowInbound" destinationService="liferay:workflowOutbound">
 				<servicemix:component>
 					<bean class="com.liferay.jbi.util.HttpInOutBinding" />
 				</servicemix:component>
 			</servicemix:activationSpec>
-			<servicemix:activationSpec componentName="workflow" service="liferay:workflow">
+			<servicemix:activationSpec componentName="workflowOutbound" service="liferay:workflowOutbound">
 				<servicemix:component>
 					<bean class="com.liferay.jbi.util.URLTransformComponent">
 						<property name="url" value="http://localhost:8080/jbpm-web/servlet" />

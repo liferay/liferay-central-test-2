@@ -23,3 +23,9 @@
 %>
 
 <%@ include file="/html/portlet/workflow/init.jsp" %>
+
+<%
+List definitions = WorkflowComponentServiceUtil.getDefinitions(0, "%", 0, 20);
+%>
+
+<%= definitions.size() %>

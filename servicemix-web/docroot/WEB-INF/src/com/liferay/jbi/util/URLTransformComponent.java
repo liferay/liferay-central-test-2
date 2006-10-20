@@ -22,13 +22,11 @@
 
 package com.liferay.jbi.util;
 
-import java.io.BufferedReader;
+import com.liferay.util.Http;
+
 import java.io.IOException;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
 
-import java.net.URL;
-import java.net.URLConnection;
 import java.net.URLEncoder;
 
 import java.util.Iterator;
@@ -84,29 +82,12 @@ public class URLTransformComponent extends TransformComponentSupport {
 			}
 		}
 
-		StringBuffer result = new StringBuffer();
-
 		try {
-	        URL urlObj = new URL(url.toString());
-
-			URLConnection con = urlObj.openConnection();
-
-			BufferedReader br = new BufferedReader(
-				new InputStreamReader(con.getInputStream()));
-
-	        String s = null;
-
-			while ((s = br.readLine()) != null) {
-				result.append(s);
-			}
-
-	        br.close();
+			return Http.URLtoString(url.toString(), true);
 		}
 		catch (IOException ioe) {
 			throw new MessagingException(ioe.getMessage());
 		}
-
-        return result.toString();
 	}
 
 	public boolean transform(

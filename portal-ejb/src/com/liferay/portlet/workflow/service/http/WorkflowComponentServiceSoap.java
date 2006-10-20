@@ -1,0 +1,413 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.workflow.service.http;
+
+import com.liferay.portal.kernel.util.StackTraceUtil;
+
+import com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import java.rmi.RemoteException;
+
+/**
+ * <a href="WorkflowComponentServiceSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class WorkflowComponentServiceSoap {
+	public static java.lang.String deploy(java.lang.String xml)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.deploy(xml);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.List getDefinitions(long definitionId,
+		java.lang.String name, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getDefinitions(definitionId,
+					name, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getDefinitionsXml(long definitionId,
+		java.lang.String name, int begin, int end) throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsXml(definitionId,
+					name, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static long getDefinitionsCount(long definitionId,
+		java.lang.String name) throws RemoteException {
+		try {
+			long returnValue = WorkflowComponentServiceUtil.getDefinitionsCount(definitionId,
+					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getDefinitionsCountXml(long definitionId,
+		java.lang.String name) throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsCountXml(definitionId,
+					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.List getInstances(long definitionId,
+		long instanceId, java.lang.String workflowName,
+		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getInstances(definitionId,
+					instanceId, workflowName, workflowVersion, gtStartDate,
+					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+					andOperator, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static long getInstancesCount(long definitionId, long instanceId,
+		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String gtStartDate, java.lang.String ltStartDate,
+		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		boolean hideEndedTasks, boolean andOperator) throws RemoteException {
+		try {
+			long returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
+					instanceId, workflowName, workflowVersion, gtStartDate,
+					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+					andOperator);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getInstancesCountXml(long definitionId,
+		long instanceId, java.lang.String workflowName,
+		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesCountXml(definitionId,
+					instanceId, workflowName, workflowVersion, gtStartDate,
+					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+					andOperator);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getInstancesXml(long definitionId,
+		long instanceId, java.lang.String workflowName,
+		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesXml(definitionId,
+					instanceId, workflowName, workflowVersion, gtStartDate,
+					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+					andOperator, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.List getTaskFormElements(long taskId)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getTaskFormElements(taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getTaskFormElementsXml(long taskId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getTaskFormElementsXml(taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.List getTaskTransitions(long taskId)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getTaskTransitions(taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getTaskTransitionsXml(long taskId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getTaskTransitionsXml(taskId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.List getUserTasks(long instanceId,
+		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String assignedTo, java.lang.String gtCreateDate,
+		java.lang.String ltCreateDate, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getUserTasks(instanceId,
+					taskName, workflowName, assignedTo, gtCreateDate,
+					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
+					ltEndDate, hideEndedTasks, andOperator, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static long getUserTasksCount(long instanceId,
+		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String assignedTo, java.lang.String gtCreateDate,
+		java.lang.String ltCreateDate, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		throws RemoteException {
+		try {
+			long returnValue = WorkflowComponentServiceUtil.getUserTasksCount(instanceId,
+					taskName, workflowName, assignedTo, gtCreateDate,
+					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
+					ltEndDate, hideEndedTasks, andOperator);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getUserTasksCountXml(long instanceId,
+		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String assignedTo, java.lang.String gtCreateDate,
+		java.lang.String ltCreateDate, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksCountXml(instanceId,
+					taskName, workflowName, assignedTo, gtCreateDate,
+					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
+					ltEndDate, hideEndedTasks, andOperator);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getUserTasksXml(long instanceId,
+		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String assignedTo, java.lang.String gtCreateDate,
+		java.lang.String ltCreateDate, java.lang.String gtStartDate,
+		java.lang.String ltStartDate, java.lang.String gtEndDate,
+		java.lang.String ltEndDate, boolean hideEndedTasks,
+		boolean andOperator, int begin, int end) throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksXml(instanceId,
+					taskName, workflowName, assignedTo, gtCreateDate,
+					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
+					ltEndDate, hideEndedTasks, andOperator, begin, end);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void signalInstance(long instanceId)
+		throws RemoteException {
+		try {
+			WorkflowComponentServiceUtil.signalInstance(instanceId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void signalToken(long instanceId, long tokenId)
+		throws RemoteException {
+		try {
+			WorkflowComponentServiceUtil.signalToken(instanceId, tokenId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String startWorkflow(long definitionId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.startWorkflow(definitionId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.util.Map updateTask(long taskId,
+		java.lang.String transition, java.util.Map parameterMap)
+		throws RemoteException {
+		try {
+			java.util.Map returnValue = WorkflowComponentServiceUtil.updateTask(taskId,
+					transition, parameterMap);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String updateTaskXml(long taskId,
+		java.lang.String transition, java.util.Map parameterMap)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.updateTaskXml(taskId,
+					transition, parameterMap);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(WorkflowComponentServiceSoap.class);
+}

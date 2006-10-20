@@ -13,16 +13,16 @@
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
 	<servlet>
-		<servlet-name>BindingServlet</servlet-name>
+		<servlet-name>Workflow Inbound Servlet</servlet-name>
 		<servlet-class>org.servicemix.components.http.SpringBindingServlet</servlet-class>
 		<init-param>
 			<param-name>endpoint</param-name>
-			<param-value>httpInOutBinding</param-value>
+			<param-value>workflowInbound</param-value>
 		</init-param>
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>BindingServlet</servlet-name>
-		<url-pattern>/jbi/*</url-pattern>
+		<servlet-name>Workflow Inbound Servlet</servlet-name>
+		<url-pattern>/workflow/*</url-pattern>
 	</servlet-mapping>
 </web-app>

@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.countProcessDefinitionsByName">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				org.jbpm.graph.def.ProcessDefinition AS pd
+			WHERE
+				lower(pd.name) LIKE :name
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.countProcessInstancesBySearchTerms">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				org.jbpm.graph.exe.ProcessInstance AS pi
+			WHERE
+				(lower(pi.processDefinition.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(pi.processDefinition.version = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				((pi.start >= ? [$AND_OR_NULL_CHECK$]) AND (pi.start <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				[$END_DATE_CHECK$]
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.countTaskInstancesByActor">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT JBPM_TaskInstance.ID_) AS COUNT_VALUE
+			FROM
+				JBPM_TaskInstance
+			INNER JOIN
+				JBPM_Token ON
+					JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
+			INNER JOIN
+        		JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+			INNER JOIN
+        		JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+			WHERE
+			(
+			    (lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+			    [$END_DATE_CHECK$]
+			) AND
+			(JBPM_TaskInstance.ACTORID_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.countTaskInstancesByPool">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT JBPM_TaskInstance.ID_) AS COUNT_VALUE
+			FROM
+				JBPM_PooledActor
+			INNER JOIN
+				JBPM_TaskActorPool ON JBPM_PooledActor.ID_ = JBPM_TaskActorPool.POOLEDACTOR_
+			INNER JOIN
+				JBPM_TaskInstance ON JBPM_TaskInstance.ID_ = JBPM_TaskActorPool.TASKINSTANCE_
+			INNER JOIN
+				JBPM_Token ON JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
+			INNER JOIN
+				JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+			INNER JOIN
+				JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+			WHERE
+			(
+				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+			    [$END_DATE_CHECK$]
+			) AND
+			(JBPM_PooledActor.ACTORID_ = ? AND JBPM_TaskInstance.ACTORID_ IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.findProcessDefinitionsByName">
+		<![CDATA[
+			SELECT
+				pd
+			FROM
+				org.jbpm.graph.def.ProcessDefinition AS pd
+			WHERE
+				lower(pd.name) LIKE :name
+			ORDER BY
+				pd.name,
+				pd.version DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.findProcessInstancesBySearchTerms">
+		<![CDATA[
+			SELECT
+				pi
+			FROM
+				org.jbpm.graph.exe.ProcessInstance AS pi
+			WHERE
+				(lower(pi.processDefinition.name) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(pi.processDefinition.version = ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				((pi.start >= ? [$AND_OR_NULL_CHECK$]) AND (pi.start <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				[$END_DATE_CHECK$]
+			ORDER BY
+				pi.processDefinition.name,
+				pi.start DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.findTaskInstancesByActor">
+		<![CDATA[
+			SELECT
+				DISTINCT (JBPM_TaskInstance.ID_) AS taskId, JBPM_TaskInstance.ACTORID_ AS taskActorId, JBPM_TaskInstance.CREATE_ AS taskCreate
+			FROM
+				JBPM_TaskInstance
+			INNER JOIN
+				JBPM_Token ON
+					JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
+			INNER JOIN
+        		JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+			INNER JOIN
+        		JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+			WHERE
+			(
+			    (lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+			    [$END_DATE_CHECK$]
+			) AND
+			(JBPM_TaskInstance.ACTORID_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.jbpm.db.GraphSession.findTaskInstancesByPool">
+		<![CDATA[
+			SELECT
+				DISTINCT (JBPM_TaskInstance.ID_) AS taskId, JBPM_TaskInstance.ACTORID_ AS taskActorId, JBPM_TaskInstance.CREATE_ AS taskCreate
+			FROM
+				JBPM_PooledActor
+			INNER JOIN
+				JBPM_TaskActorPool ON JBPM_PooledActor.ID_ = JBPM_TaskActorPool.POOLEDACTOR_
+			INNER JOIN
+				JBPM_TaskInstance ON JBPM_TaskInstance.ID_ = JBPM_TaskActorPool.TASKINSTANCE_
+			INNER JOIN
+				JBPM_Token ON JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
+			INNER JOIN
+				JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+			INNER JOIN
+				JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+			WHERE
+			(
+				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+			    [$END_DATE_CHECK$]
+			) AND
+			(JBPM_PooledActor.ACTORID_ = ? AND JBPM_TaskInstance.ACTORID_ IS NULL)
+		]]>
+	</sql>
+</custom-sql>

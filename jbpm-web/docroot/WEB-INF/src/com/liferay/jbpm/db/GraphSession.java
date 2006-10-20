@@ -113,7 +113,9 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 	public long countProcessDefinitionsByName(String name) {
 		try {
-			Query q = _session.createQuery(COUNT_PROCESS_DEFINITIONS_BY_NAME);
+			String sql = CustomSQLUtil.get(COUNT_PROCESS_DEFINITIONS_BY_NAME);
+
+			Query q = _session.createQuery(sql);
 
 			q.setString("name", name);
 
@@ -159,7 +161,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
 			}
 
-			String sql = COUNT_PROCESS_INSTANCES_BY_SEARCH_TERMS;
+			String sql = CustomSQLUtil.get(
+				COUNT_PROCESS_INSTANCES_BY_SEARCH_TERMS);
 
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -215,19 +218,23 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			int index = 0;
 
 			if (Validator.isNull(assignedTo) || assignedTo.equals("all")) {
-				sql = "(" + COUNT_TASK_INSTANCES_BY_ACTOR + ") ";
+				sql += "(";
+				sql += CustomSQLUtil.get(COUNT_TASK_INSTANCES_BY_ACTOR);
+				sql += ") ";
 				sql += "UNION ";
-				sql += "(" + COUNT_TASK_INSTANCES_BY_POOL + ") ";
+				sql += "(";
+				sql += CustomSQLUtil.get(COUNT_TASK_INSTANCES_BY_POOL);
+				sql += ") ";
 
 				index = 2;
 			}
 			else if (assignedTo.equals("me")) {
-				sql = COUNT_TASK_INSTANCES_BY_ACTOR;
+				sql += CustomSQLUtil.get(COUNT_TASK_INSTANCES_BY_ACTOR);
 
 				index = 1;
 			}
 			else if (assignedTo.equals("pool")) {
-				sql = COUNT_TASK_INSTANCES_BY_POOL;
+				sql += CustomSQLUtil.get(COUNT_TASK_INSTANCES_BY_POOL);
 
 				index = 1;
 			}
@@ -299,7 +306,9 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 	public List findProcessDefinitionsByName(String name, int begin, int end) {
 		try {
-			Query q = _session.createQuery(FIND_PROCESS_DEFINITIONS_BY_NAME);
+			String sql = CustomSQLUtil.get(FIND_PROCESS_DEFINITIONS_BY_NAME);
+
+			Query q = _session.createQuery(sql);
 
 			q.setString("name", name);
 
@@ -337,7 +346,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
 			}
 
-			String sql = FIND_PROCESS_INSTANCES_BY_SEARCH_TERMS;
+			String sql = CustomSQLUtil.get(
+				FIND_PROCESS_INSTANCES_BY_SEARCH_TERMS);
 
 			sql = StringUtil.replace(sql, "[$END_DATE_CHECK$]", endDateCheck);
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -393,19 +403,23 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			int index = 0;
 
 			if (Validator.isNull(assignedTo) || assignedTo.equals("all")) {
-				sql = "(" + FIND_TASK_INSTANCES_BY_ACTOR + ") ";
+				sql += "(";
+				sql += CustomSQLUtil.get(FIND_TASK_INSTANCES_BY_ACTOR);
+				sql += ") ";
 				sql += "UNION ";
-				sql += "(" + FIND_TASK_INSTANCES_BY_POOL + ") ";
+				sql += "(";
+				sql += CustomSQLUtil.get(FIND_TASK_INSTANCES_BY_POOL);
+				sql += ") ";
 
 				index = 2;
 			}
 			else if (assignedTo.equals("me")) {
-				sql = FIND_TASK_INSTANCES_BY_ACTOR;
+				sql += CustomSQLUtil.get(FIND_TASK_INSTANCES_BY_ACTOR);
 
 				index = 1;
 			}
 			else if (assignedTo.equals("pool")) {
-				sql = FIND_TASK_INSTANCES_BY_POOL;
+				sql += CustomSQLUtil.get(FIND_TASK_INSTANCES_BY_POOL);
 
 				index = 1;
 			}
