@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,12 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+package com.liferay.portlet.workflow.search;
 
---%><%@ page import="com.liferay.portlet.workflow.model.WorkflowDefinition" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearch" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil" %>
+import com.liferay.util.ParamUtil;
+import com.liferay.util.dao.search.DisplayTerms;
+
+import java.util.Date;
+
+import javax.portlet.RenderRequest;
+
+/**
+ * <a href="DefinitionDisplayTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class DefinitionDisplayTerms extends DisplayTerms {
+
+	public static final String DEFINITION_ID = "definitionId";
+
+	public static final String NAME = "name";
+
+	public DefinitionDisplayTerms(RenderRequest req) {
+		super(req);
+
+		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
+		name = ParamUtil.getString(req, NAME);
+	}
+
+	public long getDefinitionId() {
+		return definitionId;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	protected long definitionId;
+	protected String name;
+
+}

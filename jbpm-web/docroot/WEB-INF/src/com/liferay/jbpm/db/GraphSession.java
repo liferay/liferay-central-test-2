@@ -111,7 +111,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 		}
 	}
 
-	public long countProcessDefinitionsByName(String name) {
+	public int countProcessDefinitionsByName(String name) {
 		try {
 			String sql = CustomSQLUtil.get(COUNT_PROCESS_DEFINITIONS_BY_NAME);
 
@@ -122,10 +122,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Integer count = (Integer)itr.next();
 
 				if (count != null) {
-					return count.longValue();
+					return count.intValue();
 				}
 			}
 
@@ -138,7 +138,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 		}
 	}
 
-	public long countProcessInstancesBySearchTerms(
+	public int countProcessInstancesBySearchTerms(
 		String workflowName, String workflowVersion, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator) {
@@ -190,10 +190,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Integer count = (Integer)itr.next();
 
 				if (count != null) {
-					return count.longValue();
+					return count.intValue();
 				}
 			}
 
@@ -206,7 +206,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 		}
 	}
 
-	public long countTaskInstancesBySearchTerms(
+	public int countTaskInstancesBySearchTerms(
 		String taskName, String workflowName, String assignedTo,
 		String gtCreateDate, String ltCreateDate, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
@@ -283,7 +283,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(_userId);
 			}
 
-			long count = 0;
+			int count = 0;
 
 			Iterator itr = q.list().iterator();
 
@@ -291,7 +291,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				Long l = (Long)itr.next();
 
 				if (l != null) {
-					count += l.longValue();
+					count += l.intValue();
 				}
 			}
 

@@ -25,7 +25,112 @@
 <%@ include file="/html/portlet/workflow/init.jsp" %>
 
 <%
-List definitions = WorkflowComponentServiceUtil.getDefinitions(0, "%", 0, 20);
+String tabs1 = ParamUtil.getString(request, "tabs1", "definitions");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/workflow/view");
+portletURL.setParameter("tabs1", tabs1);
 %>
 
-<%= definitions.size() %>
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
+
+<liferay-ui:tabs
+	names="definitions,instances,tasks"
+	url="<%= portletURL.toString() %>"
+/>
+
+<c:choose>
+	<c:when test='<%= tabs1.equals("definitions") %>'>
+
+		<%
+		DefinitionSearch searchContainer = new DefinitionSearch(renderRequest, portletURL);
+		%>
+
+		<liferay-ui:search-form
+			page="/html/portlet/workflow/definition_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
+
+		<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+
+			<%
+			DefinitionSearchTerms searchTerms = (DefinitionSearchTerms)searchContainer.getSearchTerms();
+
+			int total = WorkflowComponentServiceUtil.getDefinitionsCount(searchTerms.getDefinitionId(), searchTerms.getName());
+
+			searchContainer.setTotal(total);
+
+			List results = WorkflowComponentServiceUtil.getDefinitions(searchTerms.getDefinitionId(), searchTerms.getName(), searchContainer.getStart(), searchContainer.getEnd());
+
+			searchContainer.setResults(results);
+			%>
+
+			<br><div class="beta-separator"></div><br>
+
+			<%--<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_TEMPLATE) %>">
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+			</c:if>
+
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteDefinitions();">
+
+			<br><br>--%>
+
+			<%
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				WorkflowDefinition definition = (WorkflowDefinition)results.get(i);
+
+				String definitionId = String.valueOf(definition.getDefinitionId());
+
+				ResultRow row = new ResultRow(definition, definitionId, i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/workflow/edit_definition");
+				//rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("definitionId", definitionId);
+
+				row.setParameter("rowHREF", rowURL.toString());
+
+				// Definition id
+
+				row.addText(definitionId, rowURL);
+
+				// Name, description, and image
+
+				//row.addJSP("/html/portlet/journal/definition_description.jsp");
+
+				// Action
+
+				//row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/definition_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</c:if>
+
+		<%--
+		List definitions = WorkflowComponentServiceUtil.getDefinitions(0, "%", 0, 20);
+		%>
+
+		<%= definitions.size() %>--%>
+	</c:when>
+	<c:when test='<%= tabs1.equals("instances") %>'>
+	</c:when>
+	<c:when test='<%= tabs1.equals("tasks") %>'>
+	</c:when>
+</c:choose>
+
+</form>

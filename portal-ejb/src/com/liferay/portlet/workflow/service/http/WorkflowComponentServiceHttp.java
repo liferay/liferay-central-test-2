@@ -169,7 +169,7 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
-	public static long getDefinitionsCount(HttpPrincipal httpPrincipal,
+	public static int getDefinitionsCount(HttpPrincipal httpPrincipal,
 		long definitionId, java.lang.String name)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -200,7 +200,7 @@ public class WorkflowComponentServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return ((Long)returnObj).longValue();
+			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
 			String stackTrace = StackTraceUtil.getStackTrace(se);
@@ -334,7 +334,7 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
-	public static long getInstancesCount(HttpPrincipal httpPrincipal,
+	public static int getInstancesCount(HttpPrincipal httpPrincipal,
 		long definitionId, long instanceId, java.lang.String workflowName,
 		java.lang.String workflowVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -405,7 +405,7 @@ public class WorkflowComponentServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return ((Long)returnObj).longValue();
+			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
 			String stackTrace = StackTraceUtil.getStackTrace(se);
@@ -817,7 +817,7 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
-	public static long getUserTasksCount(HttpPrincipal httpPrincipal,
+	public static int getUserTasksCount(HttpPrincipal httpPrincipal,
 		long instanceId, java.lang.String taskName,
 		java.lang.String workflowName, java.lang.String assignedTo,
 		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
@@ -908,7 +908,7 @@ public class WorkflowComponentServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return ((Long)returnObj).longValue();
+			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
 			String stackTrace = StackTraceUtil.getStackTrace(se);

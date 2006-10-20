@@ -43,7 +43,7 @@ public interface WorkflowComponent {
 			long definitionId, String name, int begin, int end)
 		throws WorkflowComponentException;
 
-	public long getDefinitionsCount(long definitionId, String name)
+	public int getDefinitionsCount(long definitionId, String name)
 		throws WorkflowComponentException;
 
 	public String getDefinitionsCountXml(long definitionId, String name)
@@ -56,7 +56,7 @@ public interface WorkflowComponent {
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException;
 
-	public long getInstancesCount(
+	public int getInstancesCount(
 			long definitionId, long instanceId, String workflowName,
 			String workflowVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
@@ -97,7 +97,7 @@ public interface WorkflowComponent {
 			int begin, int end)
 		throws WorkflowComponentException;
 
-	public long getUserTasksCount(
+	public int getUserTasksCount(
 			long instanceId, String taskName, String workflowName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,

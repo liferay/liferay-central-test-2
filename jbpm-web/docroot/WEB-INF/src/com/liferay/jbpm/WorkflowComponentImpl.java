@@ -306,10 +306,10 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		return doc.asXML();
     }
 
-	public long getDefinitionsCount(long definitionId, String name)
+	public int getDefinitionsCount(long definitionId, String name)
 		throws WorkflowComponentException {
 
-		long count = 0;
+		int count = 0;
 
 		if (definitionId > 0) {
 			count = 1;
@@ -324,7 +324,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 	public String getDefinitionsCountXml(long definitionId, String name)
 		throws WorkflowComponentException {
 
-		long count = getDefinitionsCount(definitionId, name);
+		int count = getDefinitionsCount(definitionId, name);
 
 		return getCountXml(count);
     }
@@ -364,7 +364,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		return instances;
 	}
 
-	public long getInstancesCount(
+	public int getInstancesCount(
 			long definitionId, long instanceId, String workflowName,
 			String workflowVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
@@ -391,7 +391,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			boolean andOperator)
 		throws WorkflowComponentException {
 
-		long count = getInstancesCount(
+		int count = getInstancesCount(
 			definitionId, instanceId, workflowName, workflowVersion,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator);
@@ -545,7 +545,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 	    return tasks;
 	}
 
-	public long getUserTasksCount(
+	public int getUserTasksCount(
 			long instanceId, String taskName, String workflowName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
@@ -565,7 +565,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException {
 
-		long count = getUserTasksCount(
+		int count = getUserTasksCount(
 			instanceId, taskName, workflowName, assignedTo, gtCreateDate,
 			ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
 			hideEndedTasks, andOperator);
@@ -900,7 +900,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		return activeChildren;
 	}
 
-	protected String getCountXml(long count) {
+	protected String getCountXml(int count) {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<result>");

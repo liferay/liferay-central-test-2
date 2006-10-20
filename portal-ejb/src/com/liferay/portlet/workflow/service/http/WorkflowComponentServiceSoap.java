@@ -82,10 +82,10 @@ public class WorkflowComponentServiceSoap {
 		}
 	}
 
-	public static long getDefinitionsCount(long definitionId,
+	public static int getDefinitionsCount(long definitionId,
 		java.lang.String name) throws RemoteException {
 		try {
-			long returnValue = WorkflowComponentServiceUtil.getDefinitionsCount(definitionId,
+			int returnValue = WorkflowComponentServiceUtil.getDefinitionsCount(definitionId,
 					name);
 
 			return returnValue;
@@ -133,13 +133,13 @@ public class WorkflowComponentServiceSoap {
 		}
 	}
 
-	public static long getInstancesCount(long definitionId, long instanceId,
+	public static int getInstancesCount(long definitionId, long instanceId,
 		java.lang.String workflowName, java.lang.String workflowVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator) throws RemoteException {
 		try {
-			long returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
+			int returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
 					instanceId, workflowName, workflowVersion, gtStartDate,
 					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 					andOperator);
@@ -273,7 +273,7 @@ public class WorkflowComponentServiceSoap {
 		}
 	}
 
-	public static long getUserTasksCount(long instanceId,
+	public static int getUserTasksCount(long instanceId,
 		java.lang.String taskName, java.lang.String workflowName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
@@ -281,7 +281,7 @@ public class WorkflowComponentServiceSoap {
 		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws RemoteException {
 		try {
-			long returnValue = WorkflowComponentServiceUtil.getUserTasksCount(instanceId,
+			int returnValue = WorkflowComponentServiceUtil.getUserTasksCount(instanceId,
 					taskName, workflowName, assignedTo, gtCreateDate,
 					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
 					ltEndDate, hideEndedTasks, andOperator);

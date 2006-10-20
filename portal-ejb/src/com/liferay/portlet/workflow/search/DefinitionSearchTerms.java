@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,12 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+package com.liferay.portlet.workflow.search;
 
---%><%@ page import="com.liferay.portlet.workflow.model.WorkflowDefinition" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearch" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil" %>
+import com.liferay.util.ParamUtil;
+import com.liferay.util.dao.DAOParamUtil;
+
+import java.util.Date;
+
+import javax.portlet.RenderRequest;
+
+/**
+ * <a href="DefinitionSearchTerms.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class DefinitionSearchTerms extends DefinitionDisplayTerms {
+
+	public DefinitionSearchTerms(RenderRequest req) {
+		super(req);
+
+		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
+		name = DAOParamUtil.getLike(req, NAME);
+	}
+
+}

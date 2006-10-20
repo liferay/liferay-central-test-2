@@ -76,7 +76,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		return getService().getDefinitionsXml(definitionId, name, begin, end);
 	}
 
-	public long getDefinitionsCount(long definitionId, java.lang.String name)
+	public int getDefinitionsCount(long definitionId, java.lang.String name)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -107,7 +107,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			ltEndDate, hideEndedTasks, andOperator, begin, end);
 	}
 
-	public long getInstancesCount(long definitionId, long instanceId,
+	public int getInstancesCount(long definitionId, long instanceId,
 		java.lang.String workflowName, java.lang.String workflowVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
@@ -197,7 +197,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
 	}
 
-	public long getUserTasksCount(long instanceId, java.lang.String taskName,
+	public int getUserTasksCount(long instanceId, java.lang.String taskName,
 		java.lang.String workflowName, java.lang.String assignedTo,
 		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,

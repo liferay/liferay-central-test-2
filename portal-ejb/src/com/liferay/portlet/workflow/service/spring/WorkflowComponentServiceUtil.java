@@ -57,7 +57,7 @@ public class WorkflowComponentServiceUtil {
 			begin, end);
 	}
 
-	public static long getDefinitionsCount(long definitionId,
+	public static int getDefinitionsCount(long definitionId,
 		java.lang.String name)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
@@ -91,7 +91,7 @@ public class WorkflowComponentServiceUtil {
 			ltEndDate, hideEndedTasks, andOperator, begin, end);
 	}
 
-	public static long getInstancesCount(long definitionId, long instanceId,
+	public static int getInstancesCount(long definitionId, long instanceId,
 		java.lang.String workflowName, java.lang.String workflowVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
@@ -184,7 +184,7 @@ public class WorkflowComponentServiceUtil {
 			begin, end);
 	}
 
-	public static long getUserTasksCount(long instanceId,
+	public static int getUserTasksCount(long instanceId,
 		java.lang.String taskName, java.lang.String workflowName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,

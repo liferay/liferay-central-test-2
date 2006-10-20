@@ -113,13 +113,13 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		}
 	}
 
-	public long getDefinitionsCount(long definitionId, String name)
+	public int getDefinitionsCount(long definitionId, String name)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getDefinitionsCountXml(definitionId, name);
 
-			return parseLong(xml, "count");
+			return parseInt(xml, "count");
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
@@ -163,7 +163,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		}
 	}
 
-	public long getInstancesCount(
+	public int getInstancesCount(
 			long definitionId, long instanceId, String workflowName,
 			String workflowVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
@@ -176,7 +176,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 				gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 				andOperator);
 
-			return parseLong(xml, "count");
+			return parseInt(xml, "count");
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
@@ -322,7 +322,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		}
 	}
 
-	public long getUserTasksCount(
+	public int getUserTasksCount(
 			long instanceId, String taskName, String workflowName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
@@ -335,7 +335,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 				ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
 				hideEndedTasks, andOperator);
 
-			return parseLong(xml, "count");
+			return parseInt(xml, "count");
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
@@ -587,6 +587,12 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		return instances;
 	}
 
+	protected int parseInt(String xml, String name)
+		throws DocumentException {
+
+		return GetterUtil.getInteger(parseString(xml, name));
+	}
+
 	protected List parseList(String xml, String name)
 		throws DocumentException, ParseException {
 
@@ -614,12 +620,6 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		else {
 			throw new DocumentException("List name " + name + " not valid");
 		}
-	}
-
-	protected long parseLong(String xml, String name)
-		throws DocumentException {
-
-		return GetterUtil.getLong(parseString(xml, name));
 	}
 
 	protected String parseString(String xml, String name)

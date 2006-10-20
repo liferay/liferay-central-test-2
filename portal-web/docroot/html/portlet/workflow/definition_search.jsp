@@ -20,12 +20,35 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/workflow/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.workflow.model.WorkflowDefinition" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearch" %><%--
---%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil" %>
+<%
+DefinitionSearch searchContainer = (DefinitionSearch)request.getAttribute("liferay-ui:search:searchContainer");
+
+DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.getDisplayTerms();
+%>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "name") %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<input class="form-text" name="<portlet:namespace /><%= DefinitionDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
+	</td>
+</tr>
+</table>
+
+<br>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+	</td>
+</tr>
+</table>
