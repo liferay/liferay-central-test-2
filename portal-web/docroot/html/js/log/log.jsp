@@ -22,58 +22,45 @@
  */
 %>
 
-<script type="text/javascript">
-	var LogFactory = {
-		<c:choose>
-			<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
-				appender : null,
+var LogFactory = {
+	<c:choose>
+		<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
+			appender : null,
 
-				getLog : function(name) {
-					var log;
+			getLog : function(name) {
+				var log;
 
-					if (name == null || name == "") {
-						name = "[default]";
-					}
-
-					log = log4javascript.getLogger(name);
-
-					if (LogFactory.appender == null) {
-						LogFactory.appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
-
-						LogFactory.appender.setWidth(800);
-						LogFactory.appender.setHeight(200);
-					}
-
-					log.addAppender(LogFactory.appender);
-
-					return log;
+				if (name == null || name == "") {
+					name = "[default]";
 				}
-			</c:when>
-			<c:otherwise>
-				getLog : function(name) {
-					return new LogFactory.DummyLogger();
-				},
 
-				DummyLogger : function () {
-					this.trace = function(message, exception) {
-					};
+				log = log4javascript.getLogger(name);
 
-					this.debug = function(message, exception) {
-					};
+				if (LogFactory.appender == null) {
+					LogFactory.appender = new log4javascript.PopUpAppender(new log4javascript.PatternLayout("%d{HH:mm:ss} %-5p [%c] %m%n"));
 
-					this.info = function(message, exception) {
-					};
-
-					this.warn = function(message, exception) {
-					};
-
-					this.error = function(message, exception) {
-					};
-
-					this.fatal = function(message, exception) {
-					};
+					LogFactory.appender.setWidth(800);
+					LogFactory.appender.setHeight(200);
 				}
-			</c:otherwise>
-		</c:choose>
-	}
-</script>
+
+				log.addAppender(LogFactory.appender);
+
+				return log;
+			}
+		</c:when>
+		<c:otherwise>
+			getLog : function(name) {
+				return new LogFactory.DummyLogger();
+			},
+
+			DummyLogger : function () {
+				this.trace = function(message, exception) {};
+				this.debug = function(message, exception) {};
+				this.info = function(message, exception) {};
+				this.warn = function(message, exception) {};
+				this.error = function(message, exception) {};
+				this.fatal = function(message, exception) {};
+			}
+		</c:otherwise>
+	</c:choose>
+}

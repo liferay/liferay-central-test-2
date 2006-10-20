@@ -22,6 +22,22 @@
  */
 %>
 
+<script type="text/javascript">
+	var themeDisplay = {
+		getPathThemeRoot : function() {
+			return("<%= themeDisplay.getPathThemeRoot() %>");
+		},
+		getPathThemeImage : function() {
+			return("<%= themeDisplay.getPathThemeImage() %>");
+		},
+		getPathMain : function() {
+			return("<%= themeDisplay.getPathMain() %>");
+		}
+	};
+	
+	var mainPath = themeDisplay.getPathMain();
+</script>
+
 <c:choose>
 	<c:when test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_FAST_LOAD)) %>">
 
@@ -66,4 +82,9 @@
 	</c:otherwise>
 </c:choose>
 
-<%@ include file="/html/js/log/log.jsp" %>
+<script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
+
+<script type="text/javascript">
+	<%@ include file="/html/js/log/log.jsp" %>
+	<liferay-theme:include page="javascript.jsp" />
+</script>
