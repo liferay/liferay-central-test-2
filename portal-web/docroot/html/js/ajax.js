@@ -177,10 +177,13 @@ var Ajax = {
 	},
 
 	remove : function(id) {
-		var request = Ajax.requests[id];
-		if (id && request) {
-			request.cleanUp();
-			request = null;
+		if (id) {
+			var request = Ajax.requests[id];
+			
+			if (request) {
+				request.cleanUp();
+				request = null;
+			}
 		}
 	}
 }

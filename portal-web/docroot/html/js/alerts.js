@@ -201,9 +201,10 @@ var Alerts = {
 		var message = Alerts.fireMessageBox(options);
 		var iframe = document.createElement("iframe");
 		
+		message.height = "";
 		iframe.src = url;
 		iframe.frameBorder = 0;
-		if (msgHeight) iframe.height = (msgHeight - 35) + "px";
+		if (msgHeight) iframe.height = msgHeight + "px";
 		if (msgWidth) iframe.width = "100%";
 		
 		message.appendChild(iframe);
