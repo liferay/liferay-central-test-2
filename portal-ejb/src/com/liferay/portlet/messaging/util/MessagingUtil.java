@@ -22,20 +22,6 @@
 
 package com.liferay.portlet.messaging.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.chat.model.RosterUpdateListener;
-import com.liferay.portlet.messaging.model.JabberSession;
-import com.liferay.portlet.messaging.model.MessageListener;
-import com.liferay.portlet.messaging.model.MessageWait;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
-
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.AccountManager;
@@ -49,6 +35,21 @@ import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
+import org.json.JSONObject;
+
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.chat.model.RosterUpdateListener;
+import com.liferay.portlet.messaging.model.JabberSession;
+import com.liferay.portlet.messaging.model.MessageListener;
+import com.liferay.portlet.messaging.model.MessageWait;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -67,10 +68,11 @@ public class MessagingUtil {
 	public static String USER_PASSWORD = GetterUtil.getString(
 		PropsUtil.get(PropsUtil.JABBER_XMPP_USER_PASSWORD), "liferayllc");
 
-	public static void addRosterEntry(
+	public static JSONObject addRosterEntry(
 			HttpSession ses, String companyId, String emailAddress)
 		throws PortalException, SystemException, XMPPException {
-
+		
+		JSONObject jo = new JSONObject();
 		Roster roster = getRoster(ses);
 
 		User user = UserLocalServiceUtil.getUserByEmailAddress(
@@ -80,6 +82,12 @@ public class MessagingUtil {
 		String name = user.getFullName();
 
 		roster.createEntry(smackId, name, null);
+		
+		jo.put("name", name);
+		jo.put("user", smackId);
+		jo.put("status", "success");
+		
+		return jo;
 	}
 
 	public static void closeXMPPConnection(HttpSession ses) {
@@ -149,7 +157,7 @@ public class MessagingUtil {
 
 			Roster roster = con.getRoster();
 
-			roster.setSubscriptionMode(Roster.SUBSCRIPTION_ACCEPT_ALL);
+			//roster.setSubscriptionMode(Roster.SUBSCRIPTION_ACCEPT_ALL);
 
 			RosterUpdateListener rosterListener = new RosterUpdateListener(ses);
 
