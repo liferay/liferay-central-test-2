@@ -87,6 +87,7 @@ create index MBMessageFlag_ix_T_U on MBMessageFlag (topicId, userId);
 create index MBMessageFlag_ix_TopicId on MBMessageFlag (topicId);
 create index MBMessageFlag_ix_UserId on MBMessageFlag (userId);
 
+create index MBMessage_ix_C_T on MBMessage (categoryId, threadId);
 create index MBMessage_ix_CategoryId on MBMessage (categoryId);
 create index MBMessage_ix_T_P on MBMessage (threadId, parentMessageId);
 create index MBMessage_ix_ThreadId on MBMessage (threadId);

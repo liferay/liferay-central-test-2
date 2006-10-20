@@ -112,6 +112,10 @@
 		<finder name="ThreadId" return-type="Collection">
 			<finder-column name="threadId" />
 		</finder>
+		<finder name="C_T" return-type="Collection">
+			<finder-column name="categoryId" />
+			<finder-column name="threadId" />
+		</finder>
 		<finder name="T_P" return-type="Collection">
 			<finder-column name="threadId" />
 			<finder-column name="parentMessageId" />

@@ -281,6 +281,50 @@ public class MBMessageUtil {
 			threadId, obc);
 	}
 
+	public static java.util.List findByC_T(java.lang.String categoryId,
+		java.lang.String threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T(categoryId, threadId);
+	}
+
+	public static java.util.List findByC_T(java.lang.String categoryId,
+		java.lang.String threadId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T(categoryId, threadId, begin, end);
+	}
+
+	public static java.util.List findByC_T(java.lang.String categoryId,
+		java.lang.String threadId, int begin, int end,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_T(categoryId, threadId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByC_T_First(
+		java.lang.String categoryId, java.lang.String threadId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_First(categoryId, threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage findByC_T_Last(
+		java.lang.String categoryId, java.lang.String threadId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_Last(categoryId, threadId, obc);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessage[] findByC_T_PrevAndNext(
+		com.liferay.portlet.messageboards.service.persistence.MBMessagePK mbMessagePK,
+		java.lang.String categoryId, java.lang.String threadId,
+		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		throws com.liferay.portlet.messageboards.NoSuchMessageException, 
+			com.liferay.portal.SystemException {
+		return getPersistence().findByC_T_PrevAndNext(mbMessagePK, categoryId,
+			threadId, obc);
+	}
+
 	public static java.util.List findByT_P(java.lang.String threadId,
 		java.lang.String parentMessageId)
 		throws com.liferay.portal.SystemException {
@@ -353,6 +397,11 @@ public class MBMessageUtil {
 		getPersistence().removeByThreadId(threadId);
 	}
 
+	public static void removeByC_T(java.lang.String categoryId,
+		java.lang.String threadId) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_T(categoryId, threadId);
+	}
+
 	public static void removeByT_P(java.lang.String threadId,
 		java.lang.String parentMessageId)
 		throws com.liferay.portal.SystemException {
@@ -367,6 +416,11 @@ public class MBMessageUtil {
 	public static int countByThreadId(java.lang.String threadId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByThreadId(threadId);
+	}
+
+	public static int countByC_T(java.lang.String categoryId,
+		java.lang.String threadId) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_T(categoryId, threadId);
 	}
 
 	public static int countByT_P(java.lang.String threadId,

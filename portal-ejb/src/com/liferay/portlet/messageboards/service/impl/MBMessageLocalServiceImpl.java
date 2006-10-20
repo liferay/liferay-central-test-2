@@ -862,8 +862,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			// Messages
 
-			Iterator itr = MBMessageUtil.findByCategoryId(
-				oldCategoryId).iterator();
+			Iterator itr = MBMessageUtil.findByC_T(
+				oldCategoryId, thread.getThreadId()).iterator();
 
 			while (itr.hasNext()) {
 				MBMessage curMessage = (MBMessage)itr.next();
@@ -871,19 +871,28 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				curMessage.setCategoryId(category.getCategoryId());
 
 				MBMessageUtil.update(curMessage);
+
+				// Lucene
+
+				try {
+					if (!category.isDiscussion()) {
+						Indexer.updateMessage(
+							curMessage.getCompanyId(), category.getGroupId(),
+							category.getCategoryId(), curMessage.getThreadId(),
+							curMessage.getMessageId(), curMessage.getSubject(),
+							curMessage.getBody());
+					}
+				}
+				catch (IOException ioe) {
+					_log.error(ioe.getMessage());
+				}
 			}
 
-			// Threads
+			// Thread
 
-			itr = MBThreadUtil.findByCategoryId(oldCategoryId).iterator();
+			thread.setCategoryId(category.getCategoryId());
 
-			while (itr.hasNext()) {
-				MBThread curThread = (MBThread)itr.next();
-
-				curThread.setCategoryId(category.getCategoryId());
-
-				MBThreadUtil.update(curThread);
-			}
+			MBThreadUtil.update(thread);
 		}
 
 		// Lucene
