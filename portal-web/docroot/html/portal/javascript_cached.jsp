@@ -28,20 +28,6 @@
 response.setContentType(Constants.TEXT_JAVASCRIPT);
 %>
 
-var themeDisplay = {
-	getPathThemeRoot : function() {
-		return("<%= themeDisplay.getPathThemeRoot() %>");
-	},
-	getPathThemeImage : function() {
-		return("<%= themeDisplay.getPathThemeImage() %>");
-	},
-	getPathMain : function() {
-		return("<%= themeDisplay.getPathMain() %>");
-	}
-};
-
-var mainPath = "<%= themeDisplay.getPathMain() %>";
-
 function submitFormAlert(countdown) {
 	var msg = "<%= UnicodeLanguageUtil.get(pageContext, "this-form-has-already-been-submitted-try-again") %>";
 
