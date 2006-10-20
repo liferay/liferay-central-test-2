@@ -33,7 +33,7 @@ String redirect = (String)request.getAttribute("liferay-ui:upload-progress:redir
 <script src="<%= themeDisplay.getPathJavaScript() %>/upload_progress.js" type="text/javascript"></script>
 
 <script type="text/javascript">
-	var <%= id %> = new UploadProgress("<%= id %>", "<%= themeDisplay.getPathMain() %>", "<%= Http.encodeURL(redirect) %>");
+	var <%= id %> = new UploadProgress("<%= id %>", "<%= Http.encodeURL(redirect) %>");
 </script>
 
 <iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe>

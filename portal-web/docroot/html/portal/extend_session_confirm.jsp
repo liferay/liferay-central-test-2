@@ -31,6 +31,8 @@ int sessionTimeoutWarningMinute = sessionTimeoutWarning * (int)Time.MINUTE;
 
 Calendar sessionTimeoutCal = new GregorianCalendar(timeZone);
 sessionTimeoutCal.add(Calendar.MILLISECOND, sessionTimeoutWarningMinute);
+
+response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 %>
 
 <table border="0" cellpadding="8" cellspacing="0" height="100%" width="100%">

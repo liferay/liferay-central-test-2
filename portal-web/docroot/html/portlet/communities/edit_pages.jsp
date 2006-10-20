@@ -159,6 +159,16 @@ portletURL.setParameter("groupId", groupId);
 
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	<c:if test="<%= themeDisplay.isStatePopUp() %>">
+		function <portlet:namespace />resizeParent() {
+			var box = document.getElementById("p_p_id_<%= portletDisplay.getId() %>_");
+			parent.Alerts.resizeIframe({height: box.scrollHeight});
+		}
+		
+		addEventHandler(window, "onload", <portlet:namespace />resizeParent);
+		addEventHandler(document, "onclick", <portlet:namespace />resizeParent);
+	</c:if>
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">

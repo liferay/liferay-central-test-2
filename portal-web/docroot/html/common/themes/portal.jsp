@@ -32,20 +32,6 @@ boolean popUp = GetterUtil.getBoolean(tilesPopUp);
 String scroll = ParamUtil.getString(request, "scroll");
 %>
 
-<script language="JavaScript">
-	var themeDisplay = {
-		getPathThemeRoot : function() {
-			return("<%= themeDisplay.getPathThemeRoot() %>");
-		},
-		getPathThemeImage : function() {
-			return("<%= themeDisplay.getPathThemeImage() %>");
-		},
-		getPathMain : function() {
-			return("<%= themeDisplay.getPathMain() %>");
-		}
-	};
-</script>
-
 <c:choose>
 	<c:when test="<%= popUp || themeDisplay.isStatePopUp() %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />

@@ -254,6 +254,24 @@ var Alerts = {
     	}
     },
     
+    resizeIframe: function(options) {
+    	if (Alerts.message && options) {
+    		var iframe = Alerts.message.getElementsByTagName("iframe")[0];
+    		
+    		if (iframe) {
+	    		if (options.height) {
+	    			iframe.height = options.height;
+	    		}
+    		
+	    		if (options.width) {
+	    			iframe.width = options.width;
+	    		}
+    		}
+    	}
+    	
+    	Alerts.resize();
+    },
+    
     hideSelects: function(obj) {
     	if (is_ie) {
 	    	obj = (obj == null) ? document : obj;

@@ -1,6 +1,5 @@
-function UploadProgress(uploadProgressId, mainPath, redirect) {
+function UploadProgress(uploadProgressId, redirect) {
 	this.uploadProgressId = uploadProgressId;
-	this.mainPath = mainPath;
 	this.redirect = decodeURIComponent(redirect);
 	this.count = 0;
 	this.currentPercent = 0;
@@ -94,5 +93,5 @@ function UploadProgress_updateIFrame(height) {
 function UploadProgress_updateProgress() {
 	var uploadProgressPoller = document.getElementById(this.uploadProgressId + "-poller");
 
-	uploadProgressPoller.src = this.mainPath + "/portal/upload_progress_poller?uploadProgressId=" + this.uploadProgressId;
+	uploadProgressPoller.src = themeDisplay.getPathMain() + "/portal/upload_progress_poller?uploadProgressId=" + this.uploadProgressId;
 }
