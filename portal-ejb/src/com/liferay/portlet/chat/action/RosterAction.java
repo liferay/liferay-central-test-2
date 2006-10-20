@@ -82,9 +82,7 @@ public class RosterAction extends JSONAction {
 			String email = ParamUtil.getString(req, "email");
 			String companyId = PortalUtil.getCompanyId(req);
 
-			MessagingUtil.addRosterEntry(req.getSession(), companyId, email);
-
-			jo.put("status", "success");
+			jo = MessagingUtil.addRosterEntry(req.getSession(), companyId, email);
 		}
 		catch (Exception e) {
 			jo.put("status", "failure");

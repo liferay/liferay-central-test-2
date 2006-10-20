@@ -65,7 +65,6 @@ var Messaging = {
 		
 		chatArea.scrollTop = chatArea.scrollHeight;
 		typeArea.focus();
-		
 	},
 	
 	getChats : function() {
@@ -379,11 +378,43 @@ var MessagingRoster = {
 				alert("No such user exists");
 			}
 			else {
+				var rosterDiv = document.getElementById("portlet-chat-roster-list");
+				var entryRow = MessagingRoster.createEntryRow(msg.user, msg.name);
+				
+				rosterDiv.appendChild(entryRow);
 				MessagingRoster.toggleEmail();
 			}
 		}
 		catch (err) {
 		}
+	},
+	
+	createEntryRow : function (userId, userName, online) {
+			var tempDiv = document.createElement("div");
+			var tempImg = document.createElement("img");
+			var tempLink = document.createElement("a");
+			tempImg.align = "absmiddle";
+			tempImg.style.marginRight = "5px";
+			
+			if (online) {
+				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_online.gif";
+			}
+			else {
+				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_offline.gif";
+			}
+			
+			tempLink.innerHTML = userName;
+			tempLink.href = "javascript: void(0)";
+			tempLink.onclick = MessagingRoster.onEntryLinkClick;
+			
+			tempDiv.appendChild(tempImg);
+			tempDiv.appendChild(tempLink);
+			tempDiv.onclick = MessagingRoster.onEntryClick;
+			tempDiv.userId = userId;
+			tempDiv.userName = userName;
+			tempDiv.style.cursor = "pointer";
+			
+			return tempDiv;
 	},
 	
 	deleteEntries : function () {
@@ -437,29 +468,12 @@ var MessagingRoster = {
 		
 		for (var i = 0; i < roster.length; i++) {
 			var entry = roster[i];
-			var tempDiv = document.createElement("div");
-			var tempImg = document.createElement("img");
-			var tempLink = document.createElement("a");
-			tempImg.align = "absmiddle";
-			tempImg.style.marginRight = "5px";
-			
-			if (entry.status == "available") {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_online.gif";
-			}
-			else {
-				tempImg.src = themeDisplay.getPathThemeImage() + "/chat/user_offline.gif";
-			}
-			
-			tempLink.innerHTML = entry.name;
-			tempLink.href = "javascript: void(0)";
-			tempLink.onclick = MessagingRoster.onEntryLinkClick;
-			
-			tempDiv.appendChild(tempImg);
-			tempDiv.appendChild(tempLink);
-			tempDiv.onclick = MessagingRoster.onEntryClick;
-			tempDiv.userId = entry.user;
-			tempDiv.userName = entry.name;
-			tempDiv.style.cursor = "pointer";
+			var tempDiv =
+				MessagingRoster.createEntryRow(
+					entry.user,
+					entry.name,
+					entry.status == "available"
+				);
 			rosterDiv.appendChild(tempDiv);
 		}
 	},
