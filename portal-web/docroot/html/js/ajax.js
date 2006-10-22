@@ -38,11 +38,12 @@ function AjaxRequest(url, options) {
 	var returnFunction = function() {
 			if (xmlHttpReq.readyState == 4) {
 				if (xmlHttpReq.status == 200) {
+					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
+					alert(ajaxId);
 					if (onComplete) {
 						onComplete(xmlHttpReq, opts);
 					}
 	
-					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
 					if (ajaxId && ajaxId != "") {
 						Ajax.remove(parseInt(ajaxId));
 					}
