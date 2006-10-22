@@ -39,7 +39,6 @@ function AjaxRequest(url, options) {
 			if (xmlHttpReq.readyState == 4) {
 				if (xmlHttpReq.status == 200) {
 					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-					alert(ajaxId);
 					if (onComplete) {
 						onComplete(xmlHttpReq, opts);
 					}
