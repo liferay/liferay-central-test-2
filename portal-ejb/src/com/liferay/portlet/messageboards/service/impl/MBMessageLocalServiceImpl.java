@@ -28,6 +28,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
@@ -43,6 +44,7 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
+import com.liferay.portlet.messageboards.smtp.MessageListenerImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -1075,8 +1077,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			String fromName = MBUtil.getEmailFromName(prefs);
 			String fromAddress = MBUtil.getEmailFromAddress(prefs);
-			String mailingListAddress = category.getCategoryId() + "@mb." +
-					company.getCompanyId();
+			String mailingListAddress = MBUtil.getMailingListAddress(
+					message.getCategoryId(), company.getCompanyId());
 			String replyToAddress = mailingListAddress;
 			String messageId = MBUtil.getMailId(message.getMessageId(),
 					company.getCompanyId());

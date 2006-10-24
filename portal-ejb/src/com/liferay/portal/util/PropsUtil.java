@@ -515,6 +515,8 @@ public class PropsUtil {
 
 	public static final String SMTP_SERVER_PORT = "smtp.server.port";
 
+	public static final String SMTP_SERVER_SUBDOMAIN = "smtp.server.subdomain";
+
 	// Web Server
 
 	public static final String WEB_SERVER_HTTP_PORT = "web.server.http.port";

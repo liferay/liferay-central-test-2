@@ -53,6 +53,7 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public class MBUtil {
+	public static final String PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
 			String categoryId, String messageId, PageContext pageContext,
@@ -334,5 +335,10 @@ public class MBUtil {
 
 	public static String getMailId(String messageId, String companyId) {
 		return "<" + messageId + "@mb." + companyId + ">";
+	}
+
+	public static String getMailingListAddress(String categoryId, String companyId) {
+		return PORTLET_PREFIX + categoryId + "@" +
+				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + "." + companyId;
 	}
 }

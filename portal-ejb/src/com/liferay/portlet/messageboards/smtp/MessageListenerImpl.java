@@ -32,10 +32,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.documentlibrary.FileNameException;
 
 import java.io.InputStream;
@@ -63,8 +65,10 @@ import org.apache.commons.logging.LogFactory;
 public class MessageListenerImpl implements MessageListener {
 
 	public boolean accept(String from, String recipient) {
-		String categoryId = recipient.substring(0, recipient.indexOf('@'));
-		String companyId = recipient.substring(recipient.indexOf('@') + "mb.".length() + 1);
+		String categoryId = recipient.substring(MBUtil.PORTLET_PREFIX.length(),
+				recipient.indexOf('@'));
+		String companyId = recipient.substring(recipient.indexOf('@') +
+				(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + ".").length() + 1);
 
 		try {
 			// Check that the company exists
@@ -100,8 +104,10 @@ public class MessageListenerImpl implements MessageListener {
 
 	public void deliver(String from, String recipient, InputStream data)
 		throws MessageListenerException {
-		String categoryId = recipient.substring(0, recipient.indexOf('@'));
-		String companyId = recipient.substring(recipient.indexOf('@') + "mb.".length() + 1);
+		String categoryId = recipient.substring(MBUtil.PORTLET_PREFIX.length(),
+				recipient.indexOf('@'));
+		String companyId = recipient.substring(recipient.indexOf('@') +
+				(PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + ".").length() + 1);
 		_log.debug("Deliver message from " + from + " to MB category " + categoryId);
 
 		try {
