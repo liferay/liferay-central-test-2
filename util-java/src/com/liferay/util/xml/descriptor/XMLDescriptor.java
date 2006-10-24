@@ -28,7 +28,7 @@ import org.dom4j.Element;
 /**
  * <a href="XMLDescriptor.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author  Jorge Ferrer
  *
  */
 public interface XMLDescriptor {

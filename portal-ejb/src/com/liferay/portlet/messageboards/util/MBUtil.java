@@ -53,7 +53,8 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public class MBUtil {
-	public static final String PORTLET_PREFIX = "mb.";
+
+	public static final String SMTP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
 			String categoryId, String messageId, PageContext pageContext,
@@ -279,6 +280,20 @@ public class MBUtil {
 		}
 	}
 
+	public static String getMailId(String messageId, String companyId) {
+		return StringPool.LESS_THAN + messageId + StringPool.AT +
+			SMTP_PORTLET_PREFIX + StringPool.PERIOD + companyId +
+				StringPool.GREATER_THAN;
+	}
+
+	public static String getMailingListAddress(
+		String categoryId, String companyId) {
+
+		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
+			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
+				companyId;
+	}
+
 	public static String[] getThreadPriority(
 			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
 		throws Exception {
@@ -333,12 +348,4 @@ public class MBUtil {
 		return rank;
 	}
 
-	public static String getMailId(String messageId, String companyId) {
-		return "<" + messageId + "@mb." + companyId + ">";
-	}
-
-	public static String getMailingListAddress(String categoryId, String companyId) {
-		return PORTLET_PREFIX + categoryId + "@" +
-				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + "." + companyId;
-	}
 }

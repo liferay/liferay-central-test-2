@@ -113,6 +113,33 @@ portletURL.setParameter("groupId", groupId);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL><portlet:param name="struts_action" value="/communities/import_pages" /><portlet:param name="ownerId" value="<%= ownerId %>" /></portlet:actionURL>");
 	}
 
+	<c:if test="<%= themeDisplay.isStatePopUp() %>">
+		function <portlet:namespace />resizeParent() {
+			var box = document.getElementById("p_p_id_<%= portletDisplay.getId() %>_");
+			parent.Alerts.resizeIframe({height: box.scrollHeight});
+		}
+
+		addEventHandler(window, "onload", <portlet:namespace />resizeParent);
+		addEventHandler(document, "onclick", <portlet:namespace />resizeParent);
+	</c:if>
+
+	function <portlet:namespace />savePage() {
+		<c:choose>
+			<c:when test='<%= tabs3.equals("virtual-host") %>'>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
+			</c:when>
+			<c:otherwise>
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
+			</c:otherwise>
+		</c:choose>
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />languageId) {
+			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
@@ -142,33 +169,6 @@ portletURL.setParameter("groupId", groupId);
 
 		submitForm(document.<portlet:namespace />fm);
 	}
-
-	function <portlet:namespace />savePage() {
-		<c:choose>
-			<c:when test='<%= tabs3.equals("virtual-host") %>'>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
-			</c:when>
-			<c:otherwise>
-				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= tabs3.equals("children") ? Constants.ADD : Constants.UPDATE %>';
-			</c:otherwise>
-		</c:choose>
-
-		if (document.<portlet:namespace />fm.<portlet:namespace />languageId) {
-			document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value += "&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	<c:if test="<%= themeDisplay.isStatePopUp() %>">
-		function <portlet:namespace />resizeParent() {
-			var box = document.getElementById("p_p_id_<%= portletDisplay.getId() %>_");
-			parent.Alerts.resizeIframe({height: box.scrollHeight});
-		}
-		
-		addEventHandler(window, "onload", <portlet:namespace />resizeParent);
-		addEventHandler(document, "onclick", <portlet:namespace />resizeParent);
-	</c:if>
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_pages" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePage(); return false;">

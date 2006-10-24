@@ -132,7 +132,7 @@ public class MailMessage implements Serializable {
 	}
 
 	public void setReplyTo(InternetAddress[] replyTo) {
-		this._replyTo = replyTo;
+		_replyTo = replyTo;
 	}
 
 	public String getMessageId() {
@@ -140,7 +140,7 @@ public class MailMessage implements Serializable {
 	}
 
 	public void setMessageId(String messageId) {
-		this._messageId = messageId;
+		_messageId = messageId;
 	}
 
 	public String getInReplyTo() {
@@ -148,7 +148,7 @@ public class MailMessage implements Serializable {
 	}
 
 	public void setInReplyTo(String inReplyTo) {
-		this._inReplyTo = inReplyTo;
+		_inReplyTo = inReplyTo;
 	}
 
 	private InternetAddress _from;
@@ -158,8 +158,8 @@ public class MailMessage implements Serializable {
 	private String _subject;
 	private String _body;
 	private boolean _htmlFormat;
-
 	private InternetAddress[] _replyTo;
 	private String _messageId;
 	private String _inReplyTo;
+
 }

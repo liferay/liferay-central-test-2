@@ -22,21 +22,6 @@
 
 package com.liferay.portlet.messaging.util;
 
-import javax.servlet.http.HttpSession;
-
-import org.jivesoftware.smack.AccountManager;
-import org.jivesoftware.smack.Chat;
-import org.jivesoftware.smack.PacketCollector;
-import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.XMPPConnection;
-import org.jivesoftware.smack.XMPPException;
-import org.jivesoftware.smack.filter.PacketFilter;
-import org.jivesoftware.smack.filter.PacketTypeFilter;
-import org.jivesoftware.smack.packet.Message;
-import org.jivesoftware.smack.packet.Presence;
-import org.json.JSONObject;
-
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
@@ -50,6 +35,22 @@ import com.liferay.portlet.messaging.model.MessageWait;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+
+import javax.servlet.http.HttpSession;
+
+import org.jivesoftware.smack.AccountManager;
+import org.jivesoftware.smack.Chat;
+import org.jivesoftware.smack.PacketCollector;
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.XMPPConnection;
+import org.jivesoftware.smack.XMPPException;
+import org.jivesoftware.smack.filter.PacketFilter;
+import org.jivesoftware.smack.filter.PacketTypeFilter;
+import org.jivesoftware.smack.packet.Message;
+import org.jivesoftware.smack.packet.Presence;
+
+import org.json.JSONObject;
 
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -71,7 +72,7 @@ public class MessagingUtil {
 	public static JSONObject addRosterEntry(
 			HttpSession ses, String companyId, String emailAddress)
 		throws PortalException, SystemException, XMPPException {
-		
+
 		JSONObject jo = new JSONObject();
 		Roster roster = getRoster(ses);
 
@@ -82,11 +83,11 @@ public class MessagingUtil {
 		String name = user.getFullName();
 
 		roster.createEntry(smackId, name, null);
-		
+
 		jo.put("name", name);
 		jo.put("user", smackId);
 		jo.put("status", "success");
-		
+
 		return jo;
 	}
 

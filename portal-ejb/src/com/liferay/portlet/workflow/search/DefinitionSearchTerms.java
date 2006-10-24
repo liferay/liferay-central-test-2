@@ -25,8 +25,6 @@ package com.liferay.portlet.workflow.search;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
-import java.util.Date;
-
 import javax.portlet.RenderRequest;
 
 /**

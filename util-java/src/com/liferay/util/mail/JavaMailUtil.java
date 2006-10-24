@@ -22,7 +22,14 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.util.FileUtil;
+
+import java.io.IOException;
+import java.io.InputStream;
+
 import javax.mail.Address;
+import javax.mail.MessagingException;
+import javax.mail.Part;
 import javax.mail.internet.InternetAddress;
 
 /**
@@ -32,6 +39,19 @@ import javax.mail.internet.InternetAddress;
  *
  */
 public class JavaMailUtil {
+
+	public static byte[] getBytes(Part part)
+		throws IOException, MessagingException {
+
+		InputStream is = part.getInputStream();
+
+		try {
+			return FileUtil.getBytes(is);
+		}
+		finally {
+			is.close();
+		}
+	}
 
 	public static String toUnicodeString(Address[] addresses) {
 		return toUnicodeString((InternetAddress[])addresses);

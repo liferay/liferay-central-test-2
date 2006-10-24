@@ -28,7 +28,6 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
@@ -44,7 +43,6 @@ import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.RequiredMessageException;
-import com.liferay.portlet.messageboards.smtp.MessageListenerImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -1074,46 +1072,46 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.MESSAGE_BOARDS, user);
 
-
 			String fromName = MBUtil.getEmailFromName(prefs);
 			String fromAddress = MBUtil.getEmailFromAddress(prefs);
 			String mailingListAddress = MBUtil.getMailingListAddress(
-					message.getCategoryId(), company.getCompanyId());
+				message.getCategoryId(), company.getCompanyId());
 			String replyToAddress = mailingListAddress;
-			String messageId = MBUtil.getMailId(message.getMessageId(),
-					company.getCompanyId());
+			String messageId = MBUtil.getMailId(
+				message.getMessageId(), company.getCompanyId());
 
 			fromName = StringUtil.replace(
 				fromName,
 				new String[] {
-					"[$MESSAGE_USER_NAME$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$PORTLET_NAME$]",
+					"[$COMPANY_ID$]",
 					"[$MAILING_LIST_ADDRESS$]",
-					"[$COMPANY_ID$]"
+					"[$MESSAGE_USER_ADDRESS$]",
+					"[$MESSAGE_USER_NAME$]",
+					"[$PORTLET_NAME$]"
 				},
 				new String[] {
-					user.getFullName(),
-					user.getEmailAddress(),
-					portletName,
+					company.getCompanyId(),
 					mailingListAddress,
-					company.getCompanyId()
+					user.getEmailAddress(),
+					user.getFullName(),
+					portletName
 				});
+
 			fromAddress = StringUtil.replace(
 				fromAddress,
 				new String[] {
-					"[$MESSAGE_USER_NAME$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$PORTLET_NAME$]",
+					"[$COMPANY_ID$]",
 					"[$MAILING_LIST_ADDRESS$]",
-					"[$COMPANY_ID$]"
+					"[$MESSAGE_USER_ADDRESS$]",
+					"[$MESSAGE_USER_NAME$]",
+					"[$PORTLET_NAME$]"
 				},
 				new String[] {
-					user.getFullName(),
-					user.getEmailAddress(),
-					portletName,
+					company.getCompanyId(),
 					mailingListAddress,
-					company.getCompanyId()
+					user.getEmailAddress(),
+					user.getFullName(),
+					portletName
 				});
 
 			String subject = null;
@@ -1123,8 +1121,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			if (update) {
 				subject = MBUtil.getEmailMessageUpdatedSubject(prefs);
 				body = MBUtil.getEmailMessageUpdatedBody(prefs);
-				inReplyTo = MBUtil.getMailId(message.getParentMessageId(),
-					company.getCompanyId());
+				inReplyTo = MBUtil.getMailId(
+					message.getParentMessageId(), company.getCompanyId());
 			}
 			else {
 				subject = MBUtil.getEmailMessageAddedSubject(prefs);
@@ -1134,59 +1132,59 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			subject = StringUtil.replace(
 				subject,
 				new String[] {
+					"[$CATEGORY_NAME$]",
+					"[$COMPANY_ID$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
+  					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_BODY$]",
 					"[$MESSAGE_SUBJECT$]",
-					"[$MESSAGE_CATEGORY_NAME$]",
-					"[$MESSAGE_USER_NAME$]",
 					"[$MESSAGE_USER_ADDRESS$]",
+					"[$MESSAGE_USER_NAME$]",
 					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]",
-  					"[$MAILING_LIST_ADDRESS$]",
-					"[$COMPANY_ID$]"
+					"[$PORTLET_NAME$]"
 				},
 				new String[] {
+					category.getName(),
+					company.getCompanyId(),
 					fromAddress,
 					fromName,
+					mailingListAddress,
 					message.getBody(),
 					message.getSubject(),
-					message.getCategory().getName(),
-					user.getFullName(),
 					user.getEmailAddress(),
+					user.getFullName(),
 					company.getPortalURL(),
-					portletName,
-					mailingListAddress,
-					company.getCompanyId()
+					portletName
 				});
 
 			body = StringUtil.replace(
 				body,
 				new String[] {
+					"[$CATEGORY_NAME$]",
+					"[$COMPANY_ID$]",
 					"[$FROM_ADDRESS$]",
 					"[$FROM_NAME$]",
+  					"[$MAILING_LIST_ADDRESS$]",
 					"[$MESSAGE_BODY$]",
 					"[$MESSAGE_SUBJECT$]",
-					"[$MESSAGE_CATEGORY_NAME$]",
-					"[$MESSAGE_USER_NAME$]",
+					"[$MESSAGE_USER_ADDRESS$]",
 					"[$MESSAGE_USER_NAME$]",
 					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]",
-					"[$MAILING_LIST_ADDRESS$]",
-  				  	"[$COMPANY_ID$]"
+					"[$PORTLET_NAME$]"
 				},
 				new String[] {
+					category.getName(),
+					company.getCompanyId(),
 					fromAddress,
 					fromName,
+					mailingListAddress,
 					message.getBody(),
 					message.getSubject(),
-					message.getCategory().getName(),
-					user.getFullName(),
 					user.getEmailAddress(),
+					user.getFullName(),
 					company.getPortalURL(),
-					portletName,
-					mailingListAddress,
-					company.getCompanyId()
+					portletName
 				});
 
 			MBMessageProducer.produce(

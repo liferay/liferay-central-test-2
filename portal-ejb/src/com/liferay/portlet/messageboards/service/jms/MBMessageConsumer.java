@@ -114,7 +114,7 @@ public class MBMessageConsumer implements MessageListener {
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-				replyToAddress, messageId, inReplyTo);
+			replyToAddress, messageId, inReplyTo);
 
 		// Categories
 
@@ -180,13 +180,16 @@ public class MBMessageConsumer implements MessageListener {
 						user.getEmailAddress()
 					});
 
+				InternetAddress replyTo = new InternetAddress(
+					replyToAddress, replyToAddress);
+
 				MailMessage message = new MailMessage(
 					from, to, curSubject, curBody, true);
-				InternetAddress replyTo = new InternetAddress(
-						replyToAddress, replyToAddress);
+
 				message.setReplyTo(new InternetAddress[]{replyTo});
 				message.setMessageId(messageId);
 				message.setInReplyTo(inReplyTo);
+
 				MailServiceUtil.sendEmail(message);
 			}
 			catch (Exception e) {

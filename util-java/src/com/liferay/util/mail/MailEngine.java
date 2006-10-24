@@ -50,6 +50,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author  Brian Wing Shun Chan
  * @author  Brian Myunghun Kim
+ * @author  Jorge Ferrer
  *
  */
 public class MailEngine {
@@ -103,7 +104,8 @@ public class MailEngine {
 		throws MailEngineException {
 
 		send(
-			from, new InternetAddress[] {to}, null, null, subject, body, false, null, null, null);
+			from, new InternetAddress[] {to}, null, null, subject, body, false,
+			null, null, null);
 	}
 
 	public static void send(
@@ -224,9 +226,11 @@ public class MailEngine {
 			if (replyTo != null) {
 				msg.setReplyTo(replyTo);
 			}
+
 			if (messageId != null) {
 				msg.setHeader("Message-ID", messageId);
 			}
+
 			if (inReplyTo!= null) {
 				msg.setHeader("In-Reply-To", inReplyTo);
 			}

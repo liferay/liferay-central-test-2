@@ -22,25 +22,33 @@
 
 package com.liferay.util.mail;
 
-import javax.mail.Session;
 import javax.mail.MessagingException;
+import javax.mail.Session;
 import javax.mail.internet.MimeMessage;
 
 /**
  * <a href="LiferayMimeMessage.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author  Jorge Ferrer
+ *
  */
 public class LiferayMimeMessage extends MimeMessage {
+
 	public LiferayMimeMessage(Session session) {
 		super(session);
 	}
 
 	protected void updateMessageID() throws MessagingException {
 		String[] messageIds = getHeader("Message-ID");
+
 		if ((messageIds != null) && (messageIds.length > 0)) {
-			return; // keep current value
+
+			// Keep current value
+
+			return;
 		}
+
 		super.updateMessageID();
 	}
+
 }

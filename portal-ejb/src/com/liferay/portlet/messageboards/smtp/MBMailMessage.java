@@ -22,39 +22,35 @@
 
 package com.liferay.portlet.messageboards.smtp;
 
-import com.liferay.util.ObjectValuePair;
-import com.liferay.util.Validator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
+import com.liferay.util.ObjectValuePair;
+import com.liferay.util.Validator;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="MBMailMessage.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author  Jorge Ferrer
  */
-class MBMailMessage {
-	String _htmlBody;
-	String _plainBody;
-	List files = new ArrayList();
+public class MBMailMessage {
 
 	public void addFile(String fileName, byte[] data) {
-		files.add(new ObjectValuePair(fileName, data));
+		_files.add(new ObjectValuePair(fileName, data));
 	}
 
 	public List getFiles() {
-		return files;
+		return _files;
 	}
-
 
 	public String getHtmlBody() {
 		return _htmlBody;
 	}
 
 	public void setHtmlBody(String htmlBody) {
-		this._htmlBody = htmlBody;
+		_htmlBody = htmlBody;
 	}
 
 	public String getPlainBody() {
@@ -62,7 +58,7 @@ class MBMailMessage {
 	}
 
 	public void setPlainBody(String plainBody) {
-		this._plainBody = plainBody;
+		_plainBody = plainBody;
 	}
 
 	public String getBody() {
@@ -75,4 +71,9 @@ class MBMailMessage {
 			return "--";
 		}
 	}
+
+	private String _htmlBody;
+	private String _plainBody;
+	private List _files = new ArrayList();
+
 }

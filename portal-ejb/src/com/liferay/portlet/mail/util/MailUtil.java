@@ -46,13 +46,12 @@ import com.liferay.util.Http;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.mail.JavaMailUtil;
 import com.liferay.util.mail.MailEngine;
 
 import com.sun.mail.imap.IMAPFolder;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -1118,28 +1117,9 @@ public class MailUtil {
 			throw new ContentPathException();
 		}
 
-		InputStream is = part.getInputStream();
+		byte[] byteArray = JavaMailUtil.getBytes(part);
 
-
-		try {
-			ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-			byte[] buffer = new byte[8192];
-			int count = 0;
-
-			while ((count = is.read(buffer)) >= 0) {
-				baos.write(buffer,0,count);
-			}
-			Object[] parts = new Object[] {
-				baos.toByteArray(), part.getContentType()
-			};
-
-			return parts;
-		}
-		finally {
-			is.close();
-		}
-
+		return new Object[] {byteArray, part.getContentType()};
 	}
 
 	private static String _getAttachmentURL(HttpServletRequest req) {

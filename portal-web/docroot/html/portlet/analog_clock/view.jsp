@@ -28,13 +28,13 @@
     <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
         codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=8,0,0,0"
         width="100" height="100">
-        
+
         <param name="movie" value="<%= themeDisplay.getPathFlash() %>/analogclock.swf" />
         <param name="menu" value="false" />
         <param name="quality" value="high" />
         <param name="bgcolor" value="#ffffff" />
         <param name="wmode" value="transparent" />
-        
+
 	    <embed src="<%= themeDisplay.getPathFlash() %>/analogclock.swf"
 		    menu="false"
 		    quality="high"
