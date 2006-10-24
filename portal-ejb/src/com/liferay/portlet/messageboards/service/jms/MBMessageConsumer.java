@@ -101,6 +101,9 @@ public class MBMessageConsumer implements MessageListener {
 		String fromAddress = array[5];
 		String subject = array[6];
 		String body = array[7];
+		String replyToAddress = array[8];
+		String messageId = array[9];
+		String inReplyTo = array[10];
 
 		Set sent = CollectionFactory.getHashSet();
 
@@ -110,7 +113,8 @@ public class MBMessageConsumer implements MessageListener {
 			companyId, MBThread.class.getName(), threadId);
 
 		_sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent);
+			userId, fromName, fromAddress, subject, body, subscriptions, sent,
+				replyToAddress, messageId, inReplyTo);
 
 		// Categories
 
@@ -120,13 +124,14 @@ public class MBMessageConsumer implements MessageListener {
 
 			_sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,
-				sent);
+				sent, replyToAddress, messageId, inReplyTo);
 		}
 	}
 
 	private void _sendEmail(
 			String userId, String fromName, String fromAddress, String subject,
-			String body, List subscriptions, Set sent)
+			String body, List subscriptions, Set sent, String replyToAddress,
+			String messageId, String inReplyTo)
 		throws Exception {
 
 		for (int i = 0; i < subscriptions.size(); i++) {
@@ -177,7 +182,11 @@ public class MBMessageConsumer implements MessageListener {
 
 				MailMessage message = new MailMessage(
 					from, to, curSubject, curBody, true);
-
+				InternetAddress replyTo = new InternetAddress(
+						replyToAddress, replyToAddress);
+				message.setReplyTo(new InternetAddress[]{replyTo});
+				message.setMessageId(messageId);
+				message.setInReplyTo(inReplyTo);
 				MailServiceUtil.sendEmail(message);
 			}
 			catch (Exception e) {

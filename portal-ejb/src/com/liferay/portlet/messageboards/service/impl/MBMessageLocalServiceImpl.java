@@ -1072,15 +1072,57 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.MESSAGE_BOARDS, user);
 
+
 			String fromName = MBUtil.getEmailFromName(prefs);
 			String fromAddress = MBUtil.getEmailFromAddress(prefs);
+			String mailingListAddress = category.getCategoryId() + "@mb." +
+					company.getCompanyId();
+			String replyToAddress = mailingListAddress;
+			String messageId = MBUtil.getMailId(message.getMessageId(),
+					company.getCompanyId());
+
+			fromName = StringUtil.replace(
+				fromName,
+				new String[] {
+					"[$MESSAGE_USER_NAME$]",
+					"[$MESSAGE_USER_ADDRESS$]",
+					"[$PORTLET_NAME$]",
+					"[$MAILING_LIST_ADDRESS$]",
+					"[$COMPANY_ID$]"
+				},
+				new String[] {
+					user.getFullName(),
+					user.getEmailAddress(),
+					portletName,
+					mailingListAddress,
+					company.getCompanyId()
+				});
+			fromAddress = StringUtil.replace(
+				fromAddress,
+				new String[] {
+					"[$MESSAGE_USER_NAME$]",
+					"[$MESSAGE_USER_ADDRESS$]",
+					"[$PORTLET_NAME$]",
+					"[$MAILING_LIST_ADDRESS$]",
+					"[$COMPANY_ID$]"
+				},
+				new String[] {
+					user.getFullName(),
+					user.getEmailAddress(),
+					portletName,
+					mailingListAddress,
+					company.getCompanyId()
+				});
 
 			String subject = null;
 			String body = null;
+			String inReplyTo = null;
 
 			if (update) {
 				subject = MBUtil.getEmailMessageUpdatedSubject(prefs);
 				body = MBUtil.getEmailMessageUpdatedBody(prefs);
+				inReplyTo = MBUtil.getMailId(message.getParentMessageId(),
+					company.getCompanyId());
 			}
 			else {
 				subject = MBUtil.getEmailMessageAddedSubject(prefs);
@@ -1094,18 +1136,26 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					"[$FROM_NAME$]",
 					"[$MESSAGE_BODY$]",
 					"[$MESSAGE_SUBJECT$]",
+					"[$MESSAGE_CATEGORY_NAME$]",
 					"[$MESSAGE_USER_NAME$]",
+					"[$MESSAGE_USER_ADDRESS$]",
 					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
+					"[$PORTLET_NAME$]",
+  					"[$MAILING_LIST_ADDRESS$]",
+					"[$COMPANY_ID$]"
 				},
 				new String[] {
 					fromAddress,
 					fromName,
 					message.getBody(),
 					message.getSubject(),
+					message.getCategory().getName(),
 					user.getFullName(),
+					user.getEmailAddress(),
 					company.getPortalURL(),
-					portletName
+					portletName,
+					mailingListAddress,
+					company.getCompanyId()
 				});
 
 			body = StringUtil.replace(
@@ -1115,25 +1165,34 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					"[$FROM_NAME$]",
 					"[$MESSAGE_BODY$]",
 					"[$MESSAGE_SUBJECT$]",
+					"[$MESSAGE_CATEGORY_NAME$]",
+					"[$MESSAGE_USER_NAME$]",
 					"[$MESSAGE_USER_NAME$]",
 					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
+					"[$PORTLET_NAME$]",
+					"[$MAILING_LIST_ADDRESS$]",
+  				  	"[$COMPANY_ID$]"
 				},
 				new String[] {
 					fromAddress,
 					fromName,
 					message.getBody(),
 					message.getSubject(),
+					message.getCategory().getName(),
 					user.getFullName(),
+					user.getEmailAddress(),
 					company.getPortalURL(),
-					portletName
+					portletName,
+					mailingListAddress,
+					company.getCompanyId()
 				});
 
 			MBMessageProducer.produce(
 				new String[] {
 					message.getCompanyId(), message.getUserId(),
 					StringUtil.merge(categoryIds), message.getThreadId(),
-					fromName, fromAddress, subject, body
+					fromName, fromAddress, subject, body, replyToAddress,
+					messageId, inReplyTo
 				});
 		}
 		catch (IOException ioe) {

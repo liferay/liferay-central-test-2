@@ -79,7 +79,9 @@ public class MailEngine {
 		send(
 			mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getCC(),
 			mailMessage.getBCC(), mailMessage.getSubject(),
-			mailMessage.getBody(), mailMessage.isHTMLFormat());
+			mailMessage.getBody(), mailMessage.isHTMLFormat(),
+			mailMessage.getReplyTo(), mailMessage.getMessageId(),
+			mailMessage.getInReplyTo());
 	}
 
 	public static void send(String from, String to, String subject, String body)
@@ -101,7 +103,7 @@ public class MailEngine {
 		throws MailEngineException {
 
 		send(
-			from, new InternetAddress[] {to}, null, null, subject, body, false);
+			from, new InternetAddress[] {to}, null, null, subject, body, false, null, null, null);
 	}
 
 	public static void send(
@@ -111,7 +113,7 @@ public class MailEngine {
 
 		send(
 			from, new InternetAddress[] {to}, null, null, subject, body,
-			htmlFormat);
+			htmlFormat, null, null, null);
 	}
 
 	public static void send(
@@ -119,7 +121,7 @@ public class MailEngine {
 			String body)
 		throws MailEngineException {
 
-		send(from, to, null, null, subject, body, false);
+		send(from, to, null, null, subject, body, false, null, null, null);
 	}
 
 	public static void send(
@@ -127,7 +129,7 @@ public class MailEngine {
 			String body, boolean htmlFormat)
 		throws MailEngineException {
 
-		send(from, to, null, null, subject, body, htmlFormat);
+		send(from, to, null, null, subject, body, htmlFormat, null, null, null);
 	}
 
 	public static void send(
@@ -135,7 +137,7 @@ public class MailEngine {
 			String subject, String body)
 		throws MailEngineException {
 
-		send(from, to, cc, null, subject, body, false);
+		send(from, to, cc, null, subject, body, false, null, null, null);
 	}
 
 	public static void send(
@@ -143,7 +145,7 @@ public class MailEngine {
 			String subject, String body, boolean htmlFormat)
 		throws MailEngineException {
 
-		send(from, to, cc, null, subject, body, htmlFormat);
+		send(from, to, cc, null, subject, body, htmlFormat, null, null, null);
 	}
 
 	public static void send(
@@ -151,13 +153,14 @@ public class MailEngine {
 			InternetAddress[] bcc, String subject, String body)
 		throws MailEngineException {
 
-		send(from, to, cc, bcc, subject, body, false);
+		send(from, to, cc, bcc, subject, body, false, null, null, null);
 	}
 
 	public static void send(
 			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
 			InternetAddress[] bcc, String subject, String body,
-			boolean htmlFormat)
+			boolean htmlFormat, InternetAddress[] replyTo, String messageId,
+			String inReplyTo)
 		throws MailEngineException {
 
 		long start = 0;
@@ -172,12 +175,15 @@ public class MailEngine {
 			_log.debug("Subject: " + subject);
 			_log.debug("Body: " + body);
 			_log.debug("HTML Format: " + htmlFormat);
+			_log.debug("Reply to: " + replyTo);
+			_log.debug("Message ID: " + messageId);
+			_log.debug("In Reply To: " + inReplyTo);
 		}
 
 		try {
 			Session session = getSession();
 
-			Message msg = new MimeMessage(session);
+			Message msg = new LiferayMimeMessage(session);
 
 			msg.setFrom(from);
 			msg.setRecipients(Message.RecipientType.TO, to);
@@ -214,6 +220,16 @@ public class MailEngine {
 			}
 
 			msg.setSentDate(new Date());
+
+			if (replyTo != null) {
+				msg.setReplyTo(replyTo);
+			}
+			if (messageId != null) {
+				msg.setHeader("Message-ID", messageId);
+			}
+			if (inReplyTo!= null) {
+				msg.setHeader("In-Reply-To", inReplyTo);
+			}
 
 			_send(session, msg);
 		}

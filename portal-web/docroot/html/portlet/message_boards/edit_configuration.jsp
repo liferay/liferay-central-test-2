@@ -117,6 +117,60 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 		</tr>
 		</table>
+
+		<br>
+
+		<b><%= LanguageUtil.get(pageContext, "definition-of-terms") %></b>
+
+		<br><br>
+
+		<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<td>
+					<b>[$MESSAGE_USER_NAME$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The user who added the message
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>[$MESSAGE_USER_ADDRESS$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The e-mail address of the user who added the message
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>[$PORTLET_NAME$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<%= ((RenderResponseImpl)renderResponse).getTitle() %>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>[$MAILING_LIST_ADDRESS$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The e-mail address of the mailing list
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<b>[$COMPANY_ID$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The id of the company associated with the message board
+				</td>
+			</tr>
+		</table>
 	</c:when>
 	<c:when test='<%= tabs2.startsWith("message-") %>'>
 		<table border="0" cellpadding="0" cellspacing="0">
@@ -220,6 +274,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
+				<b>[$MESSAGE_CATEGORY_NAME$]</b>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				The category in which the message has been posted
+			</td>
+		</tr>
+		<tr>
+			<td>
 				<b>[$MESSAGE_USER_NAME$]</b>
 			</td>
 			<td style="padding-left: 10px;"></td>
@@ -227,6 +290,15 @@ String redirect = ParamUtil.getString(request, "redirect");
 				The user who added the message
 			</td>
 		</tr>
+			<tr>
+				<td>
+					<b>[$MESSAGE_USER_ADDRESS$]</b>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					The e-mail address of the user who added the message
+				</td>
+			</tr>
 		<tr>
 			<td>
 				<b>[$PORTAL_URL$]</b>
@@ -261,6 +333,24 @@ String redirect = ParamUtil.getString(request, "redirect");
 			<td style="padding-left: 10px;"></td>
 			<td>
 				The name of the email recipient
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$MAILING_LIST_ADDRESS$]</b>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				The e-mail address of the mailing list
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<b>[$COMPANY_ID$]</b>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				The id of the company associated with the message board
 			</td>
 		</tr>
 		</table>

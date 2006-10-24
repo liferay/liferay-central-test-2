@@ -332,4 +332,7 @@ public class MBUtil {
 		return rank;
 	}
 
+	public static String getMailId(String messageId, String companyId) {
+		return "<" + messageId + "@mb." + companyId + ">";
+	}
 }

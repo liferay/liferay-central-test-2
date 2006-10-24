@@ -1120,22 +1120,26 @@ public class MailUtil {
 
 		InputStream is = part.getInputStream();
 
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		byte[] buffer = new byte[8192];
-		int count = 0;
+		try {
+			ByteArrayOutputStream baos = new ByteArrayOutputStream();
 
-		while ((count = is.read(buffer)) >= 0) {
-			baos.write(buffer,0,count);
+			byte[] buffer = new byte[8192];
+			int count = 0;
+
+			while ((count = is.read(buffer)) >= 0) {
+				baos.write(buffer,0,count);
+			}
+			Object[] parts = new Object[] {
+				baos.toByteArray(), part.getContentType()
+			};
+
+			return parts;
+		}
+		finally {
+			is.close();
 		}
 
-		is.close();
-
-		Object[] parts = new Object[] {
-			baos.toByteArray(), part.getContentType()
-		};
-
-		return parts;
 	}
 
 	private static String _getAttachmentURL(HttpServletRequest req) {

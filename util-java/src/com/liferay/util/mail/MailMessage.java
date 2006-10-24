@@ -127,6 +127,30 @@ public class MailMessage implements Serializable {
 		_htmlFormat = htmlFormat;
 	}
 
+	public InternetAddress[] getReplyTo() {
+		return _replyTo;
+	}
+
+	public void setReplyTo(InternetAddress[] replyTo) {
+		this._replyTo = replyTo;
+	}
+
+	public String getMessageId() {
+		return _messageId;
+	}
+
+	public void setMessageId(String messageId) {
+		this._messageId = messageId;
+	}
+
+	public String getInReplyTo() {
+		return _inReplyTo;
+	}
+
+	public void setInReplyTo(String inReplyTo) {
+		this._inReplyTo = inReplyTo;
+	}
+
 	private InternetAddress _from;
 	private InternetAddress[] _to;
 	private InternetAddress[] _cc;
@@ -135,4 +159,7 @@ public class MailMessage implements Serializable {
 	private String _body;
 	private boolean _htmlFormat;
 
+	private InternetAddress[] _replyTo;
+	private String _messageId;
+	private String _inReplyTo;
 }
