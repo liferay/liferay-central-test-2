@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
@@ -51,6 +52,9 @@ public class PermissionFinder {
 	public static String COUNT_BY_GROUPS_ROLES =
 		PermissionFinder.class.getName() + ".countByGroupsRoles";
 
+	public static String COUNT_BY_ROLES_PERMISSIONS =
+		PermissionFinder.class.getName() + ".countByRolesPermissions";
+
 	public static String COUNT_BY_USERS_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByUsersPermissions";
 
@@ -72,7 +76,7 @@ public class PermissionFinder {
 	public static String FIND_BY_U_A_R =
 		PermissionFinder.class.getName() + ".findByU_A_R";
 
-	public static boolean containsPermissions(
+	public static boolean containsPermissions_2(
 			List permissions, String userId, List groups)
 		throws SystemException {
 
@@ -83,25 +87,17 @@ public class PermissionFinder {
 
 			String sql = "";
 
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
-			sql += ") ";
-
-			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
-
-			sql += "UNION ALL ";
-
-			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_ROLES);
-			sql += ") ";
-
-			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
-
 			if (groups.size() > 0) {
+				sql += "(";
+				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES);
+				sql += ") ";
+
+				sql = StringUtil.replace(
+					sql, "[$PERMISSION_IDS$]",
+					_getPermissionIds(permissions, "Roles_Permissions"));
+				sql = StringUtil.replace(
+					sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
+
 				sql += "UNION ALL ";
 
 				sql += "(";
@@ -116,17 +112,25 @@ public class PermissionFinder {
 					_getGroupIds(groups, "Groups_Permissions"));
 
 				sql += "UNION ALL ";
-
-				sql += "(";
-				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_ROLES);
-				sql += ") ";
-
-				sql = StringUtil.replace(
-					sql, "[$PERMISSION_IDS$]",
-					_getPermissionIds(permissions, "Roles_Permissions"));
-				sql = StringUtil.replace(
-					sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
 			}
+
+			sql += "(";
+			sql += CustomSQLUtil.get(COUNT_BY_USERS_ROLES);
+			sql += ") ";
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Roles_Permissions"));
+
+			sql += "UNION ALL ";
+
+			sql += "(";
+			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
+			sql += ") ";
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -136,17 +140,107 @@ public class PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			_setPermissionIds(qPos, permissions);
-			qPos.add(userId);
-			_setPermissionIds(qPos, permissions);
-			qPos.add(userId);
-
 			if (groups.size() > 0) {
 				_setPermissionIds(qPos, permissions);
 				_setGroupIds(qPos, groups);
 				_setPermissionIds(qPos, permissions);
 				_setGroupIds(qPos, groups);
 			}
+
+			_setPermissionIds(qPos, permissions);
+			qPos.add(userId);
+			_setPermissionIds(qPos, permissions);
+			qPos.add(userId);
+
+			Iterator itr = q.list().iterator();
+
+			while (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if ((count != null) && (count.intValue() > 0)) {
+					return true;
+				}
+			}
+
+			return false;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static boolean containsPermissions_4(
+			List permissions, String userId, List groups, List roles)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = "";
+
+			if (groups.size() > 0) {
+				sql += "(";
+				sql += CustomSQLUtil.get(COUNT_BY_GROUPS_PERMISSIONS);
+				sql += ") ";
+
+				sql = StringUtil.replace(
+					sql, "[$PERMISSION_IDS$]",
+					_getPermissionIds(permissions, "Groups_Permissions"));
+				sql = StringUtil.replace(
+					sql, "[$GROUP_IDS$]",
+					_getGroupIds(groups, "Groups_Permissions"));
+
+				sql += "UNION ALL ";
+			}
+
+			if (roles.size() > 0) {
+				sql += "(";
+				sql += CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
+				sql += ") ";
+
+				sql = StringUtil.replace(
+					sql, "[$PERMISSION_IDS$]",
+					_getPermissionIds(permissions, "Roles_Permissions"));
+				sql = StringUtil.replace(
+					sql, "[$ROLE_IDS$]",
+					_getRoleIds(roles, "Roles_Permissions"));
+
+				sql += "UNION ALL ";
+			}
+
+			sql += "(";
+			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
+			sql += ") ";
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Users_Permissions"));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (groups.size() > 0) {
+				_setPermissionIds(qPos, permissions);
+				_setGroupIds(qPos, groups);
+			}
+
+			if (roles.size() > 0) {
+				_setPermissionIds(qPos, permissions);
+				_setRoleIds(qPos, roles);
+			}
+
+			_setPermissionIds(qPos, permissions);
+			qPos.add(userId);
 
 			Iterator itr = q.list().iterator();
 
@@ -242,6 +336,53 @@ public class PermissionFinder {
 
 			_setPermissionIds(qPos, permissions);
 			_setGroupIds(qPos, groups);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByRolesPermissions(List permissions, List roles)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_ROLES_PERMISSIONS);
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Roles_Permissions"));
+			sql = StringUtil.replace(
+				sql, "[$ROLE_IDS$]", _getRoleIds(roles, "Roles_Permissions"));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			_setPermissionIds(qPos, permissions);
+			_setRoleIds(qPos, roles);
 
 			Iterator itr = q.list().iterator();
 
@@ -575,6 +716,21 @@ public class PermissionFinder {
 		return sb.toString();
 	}
 
+	private static String _getRoleIds(List roles, String table) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < roles.size(); i++) {
+			sb.append(table);
+			sb.append(".roleId = ?");
+
+			if ((i + 1) < roles.size()) {
+				sb.append(" OR ");
+			}
+		}
+
+		return sb.toString();
+	}
+
 	private static void _setGroupIds(QueryPos qPos, List groups) {
 		for (int i = 0; i < groups.size(); i++) {
 			Group group = (Group)groups.get(i);
@@ -596,6 +752,14 @@ public class PermissionFinder {
 			String resourceId = resourceIds[i];
 
 			qPos.add(resourceId);
+		}
+	}
+
+	private static void _setRoleIds(QueryPos qPos, List roles) {
+		for (int i = 0; i < roles.size(); i++) {
+			Role role = (Role)roles.get(i);
+
+			qPos.add(role.getRoleId());
 		}
 	}
 

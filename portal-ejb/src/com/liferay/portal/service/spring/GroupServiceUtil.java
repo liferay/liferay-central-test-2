@@ -89,6 +89,14 @@ public class GroupServiceUtil {
 		return groupService.getUserGroupsGroups(userGroups);
 	}
 
+	public static boolean hasUserGroup(java.lang.String userId,
+		java.lang.String groupId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.hasUserGroup(userId, groupId);
+	}
+
 	public static void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 

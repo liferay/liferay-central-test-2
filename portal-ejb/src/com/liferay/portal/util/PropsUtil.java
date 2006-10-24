@@ -281,6 +281,8 @@ public class PropsUtil {
 
 	public static final String PERMISSIONS_CHECKER = "permissions.checker";
 
+	public static final String PERMISSIONS_USER_CHECK_ALGORITHM = "permissions.user.check.algorithm";
+
 	// Captcha
 
 	public static final String CAPTCHA_MAX_CHALLENGES = "captcha.max.challenges";

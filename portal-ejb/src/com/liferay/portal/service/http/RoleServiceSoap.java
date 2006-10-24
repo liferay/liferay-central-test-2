@@ -109,6 +109,22 @@ public class RoleServiceSoap {
 		}
 	}
 
+	public static com.liferay.portal.model.RoleModel[] getUserRelatedRoles(
+		java.lang.String userId, java.util.List groups)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
+					groups);
+
+			return (com.liferay.portal.model.Role[])returnValue.toArray(new com.liferay.portal.model.Role[0]);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portal.model.RoleModel[] getUserRoles(
 		java.lang.String userId) throws RemoteException {
 		try {

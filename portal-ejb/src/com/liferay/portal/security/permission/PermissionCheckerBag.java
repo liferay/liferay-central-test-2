@@ -30,7 +30,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
@@ -57,13 +56,21 @@ public class PermissionCheckerBag implements Serializable {
 	public PermissionCheckerBag() {
 	}
 
-	public PermissionCheckerBag(String userId, List userOrgs,
-								List userOrgGroups, List userUserGroupGroups) {
+	public PermissionCheckerBag(String userId, List userGroups, List userOrgs,
+								List userOrgGroups, List userUserGroupGroups,
+								List groups, List roles) {
 
 		_userId = userId;
+		_userGroups = userGroups;
 		_userOrgs = userOrgs;
 		_userOrgGroups = userOrgGroups;
 		_userUserGroupGroups = userUserGroupGroups;
+		_groups = groups;
+		_roles = roles;
+	}
+
+	public List getUserGroups() {
+		return _userGroups;
 	}
 
 	public List getUserOrgs() {
@@ -78,21 +85,12 @@ public class PermissionCheckerBag implements Serializable {
 		return _userUserGroupGroups;
 	}
 
-	public boolean hasGroup(String groupId)
-		throws PortalException, SystemException {
+	public List getGroups() {
+		return _groups;
+	}
 
-		String key = groupId;
-
-		Boolean value = (Boolean)_hasGroup.get(key);
-
-		if (value == null) {
-			value = new Boolean(
-				GroupLocalServiceUtil.hasUserGroup(_userId, groupId));
-
-			_hasGroup.put(key, value);
-		}
-
-		return value.booleanValue();
+	public List getRoles() {
+		return _roles;
 	}
 
 	public boolean isCompanyAdmin(String companyId)
@@ -172,10 +170,12 @@ public class PermissionCheckerBag implements Serializable {
 	}
 
 	private String _userId;
+	private List _userGroups;
 	private List _userOrgs;
 	private List _userOrgGroups;
 	private List _userUserGroupGroups;
-	private Map _hasGroup = CollectionFactory.getHashMap();
+	private List _groups;
+	private List _roles;
 	private Map _isCompanyAdmin = CollectionFactory.getHashMap();
 	private Map _isCommunityAdmin = CollectionFactory.getHashMap();
 

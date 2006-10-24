@@ -340,6 +340,46 @@ public class GroupServiceHttp {
 		}
 	}
 
+	public static boolean hasUserGroup(HttpPrincipal httpPrincipal,
+		java.lang.String userId, java.lang.String groupId)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = userId;
+
+			if (userId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = groupId;
+
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
+					"hasUserGroup", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Boolean)returnObj).booleanValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void setRoleGroups(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 

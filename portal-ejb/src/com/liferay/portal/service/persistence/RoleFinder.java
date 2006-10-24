@@ -24,6 +24,7 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -51,6 +52,9 @@ public class RoleFinder {
 
 	public static String FIND_BY_C_N =
 		RoleFinder.class.getName() + ".findByC_N";
+
+	public static String FIND_BY_U_G =
+		RoleFinder.class.getName() + ".findByU_G";
 
 	public static String FIND_BY_C_N_D =
 		RoleFinder.class.getName() + ".findByC_N_D";
@@ -144,6 +148,40 @@ public class RoleFinder {
 				name + "}");
 	}
 
+	public static List findByU_G(String userId, List groups)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_U_G);
+
+			sql = StringUtil.replace(
+				sql, "[$GROUP_IDS$]", _getGroupIds(groups, "Groups_Roles"));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Role_", Role.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			_setGroupIds(qPos, groups);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public static List findByC_N_D(
 			String companyId, String name, String description, int begin,
 			int end)
@@ -180,6 +218,29 @@ public class RoleFinder {
 		}
 		finally {
 			HibernateUtil.closeSession(session);
+		}
+	}
+
+	private static String _getGroupIds(List groups, String table) {
+		StringBuffer sb = new StringBuffer();
+
+		for (int i = 0; i < groups.size(); i++) {
+			sb.append(table);
+			sb.append(".groupId = ?");
+
+			if ((i + 1) < groups.size()) {
+				sb.append(" OR ");
+			}
+		}
+
+		return sb.toString();
+	}
+
+	private static void _setGroupIds(QueryPos qPos, List groups) {
+		for (int i = 0; i < groups.size(); i++) {
+			Group group = (Group)groups.get(i);
+
+			qPos.add(group.getGroupId());
 		}
 	}
 

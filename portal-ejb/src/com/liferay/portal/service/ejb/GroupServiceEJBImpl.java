@@ -106,6 +106,14 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		return getService().getUserGroupsGroups(userGroups);
 	}
 
+	public boolean hasUserGroup(java.lang.String userId,
+		java.lang.String groupId)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().hasUserGroup(userId, groupId);
+	}
+
 	public void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds)
 		throws com.liferay.portal.PortalException, 

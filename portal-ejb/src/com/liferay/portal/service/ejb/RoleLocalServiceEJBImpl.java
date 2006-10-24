@@ -94,6 +94,13 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		return getService().getRole(companyId, name);
 	}
 
+	public java.util.List getUserRelatedRoles(java.lang.String userId,
+		java.util.List groups)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getUserRelatedRoles(userId, groups);
+	}
+
 	public java.util.List getUserRoles(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -91,6 +91,12 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		return GroupLocalServiceUtil.getUserGroupsGroups(userGroups);
 	}
 
+	public boolean hasUserGroup(String userId, String groupId)
+		throws SystemException {
+
+		return GroupLocalServiceUtil.hasUserGroup(userId, groupId);
+	}
+
 	public void setRoleGroups(String roleId, String[] groupIds)
 		throws PortalException, SystemException {
 

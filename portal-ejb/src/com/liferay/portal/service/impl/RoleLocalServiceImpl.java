@@ -144,6 +144,12 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		return RoleFinder.findByC_N(companyId, name);
 	}
 
+	public List getUserRelatedRoles(String userId, List groups)
+		throws PortalException, SystemException {
+
+		return RoleFinder.findByU_G(userId, groups);
+	}
+
 	public List getUserRoles(String userId)
 		throws PortalException, SystemException {
 

@@ -33,13 +33,17 @@ import com.liferay.portal.service.spring.GroupServiceUtil;
 import com.liferay.portal.service.spring.OrganizationServiceUtil;
 import com.liferay.portal.service.spring.PermissionServiceUtil;
 import com.liferay.portal.service.spring.ResourceServiceUtil;
+import com.liferay.portal.service.spring.RoleServiceUtil;
 import com.liferay.portal.service.spring.UserGroupServiceUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -57,6 +61,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class PermissionChecker {
 
+	public static final int USER_CHECK_ALGORITHM = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.PERMISSIONS_USER_CHECK_ALGORITHM));
+
 	public PermissionChecker() {
 	}
 
@@ -70,7 +77,7 @@ public class PermissionChecker {
 		user = null;
 		signedIn = false;
 		checkGuest = false;
-		permissionCheckerBag = null;
+		bags.clear();
 		results.clear();
 		resetValues();
 	}
@@ -121,8 +128,28 @@ public class PermissionChecker {
 			start = System.currentTimeMillis();
 		}
 
-		if (signedIn && (permissionCheckerBag == null)) {
+		PermissionCheckerBag bag = getBag(groupId);
+
+		if (signedIn && (bag == null)) {
 			try {
+
+				// If we are checking permissions an object that belongs to a
+				// community, then it's only necessary to check the group that
+				// represents the community and not all the groups that the user
+				// belongs to. This is so because an object cannot belong to
+				// more than one community.
+
+				List userGroups = new ArrayList();
+				//List userGroups = UserUtil.getGroups(userId);
+
+				if (Validator.isNotNull(groupId)) {
+					if (GroupServiceUtil.hasUserGroup(
+						user.getUserId(), groupId)) {
+
+						userGroups.add(GroupServiceUtil.getGroup(groupId));
+					}
+				}
+
 				List userOrgs =
 					OrganizationServiceUtil.getUserOrganizations(
 						user.getUserId());
@@ -136,9 +163,40 @@ public class PermissionChecker {
 				List userUserGroupGroups =
 					GroupServiceUtil.getUserGroupsGroups(userUserGroups);
 
-				permissionCheckerBag = new PermissionCheckerBag(
-					user.getUserId(), userOrgs, userOrgGroups,
-					userUserGroupGroups);
+				List groups = new ArrayList(
+					userGroups.size() + userOrgGroups.size() +
+						userUserGroupGroups.size());
+
+				groups.addAll(userGroups);
+				groups.addAll(userOrgGroups);
+				groups.addAll(userUserGroupGroups);
+
+				List roles = null;
+
+				if ((USER_CHECK_ALGORITHM == 3) ||
+					(USER_CHECK_ALGORITHM == 4)) {
+
+					roles = RoleServiceUtil.getUserRelatedRoles(
+							user.getUserId(), groups);
+				}
+				else {
+					roles = new ArrayList();
+				}
+
+				if (_log.isDebugEnabled()) {
+					long end = System.currentTimeMillis();
+
+					_log.debug(
+						"Creating bag for " + groupId + " " + name + " " +
+							primKey + " " + actionId + " takes " +
+								(end - start) + " ms");
+				}
+
+				bag = new PermissionCheckerBag(
+					user.getUserId(), userGroups, userOrgs, userOrgGroups,
+					userUserGroupGroups, groups, roles);
+
+				putBag(groupId, bag);
 			}
 			catch (Exception e) {
 				_log.error(StackTraceUtil.getStackTrace(e));
@@ -154,21 +212,6 @@ public class PermissionChecker {
 		Boolean resultsValue = (Boolean)results.get(resultsKey);
 
 		if (resultsValue == null) {
-			try {
-
-				// Cache the check to see if a user belongs to a group to
-				// improve performance
-
-				if (signedIn) {
-					if (Validator.isNotNull(groupId)) {
-						permissionCheckerBag.hasGroup(groupId);
-					}
-				}
-			}
-			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
-			}
-
 			resultsValue = new Boolean(
 				hasPermissionImpl(groupId, name, primKey, actionId));
 
@@ -185,6 +228,12 @@ public class PermissionChecker {
 		}
 
 		return resultsValue.booleanValue();
+	}
+
+	protected PermissionCheckerBag getBag(String groupId) {
+		groupId = GetterUtil.getString(groupId);
+
+		return (PermissionCheckerBag)bags.get(groupId);
 	}
 
 	protected String getResultsKey(
@@ -364,9 +413,10 @@ public class PermissionChecker {
 		// individual class, then for the group that the class may belong
 		// to, and then for the company that the class belongs to.
 
+		PermissionCheckerBag bag = getBag(groupId);
+
 		boolean value = PermissionServiceUtil.hasUserPermissions(
-			user.getUserId(), groupId, actionId, resourceIds,
-			permissionCheckerBag);
+			user.getUserId(), groupId, actionId, resourceIds, bag);
 
 		start = logHasUserPermission(
 			groupId, name, primKey, actionId, start, 5);
@@ -377,11 +427,17 @@ public class PermissionChecker {
 	protected boolean isAdmin(String companyId, String groupId, String name)
 		throws PortalException, RemoteException, SystemException {
 
-		if (permissionCheckerBag.isCompanyAdmin(companyId)) {
+		PermissionCheckerBag bag = getBag(groupId);
+
+		if (bag == null) {
+			_log.error("Bag should never be null");
+		}
+
+		if (bag.isCompanyAdmin(companyId)) {
 			return true;
 		}
 
-		if (permissionCheckerBag.isCommunityAdmin(companyId, groupId, name)) {
+		if (bag.isCommunityAdmin(companyId, groupId, name)) {
 			return true;
 		}
 
@@ -410,12 +466,18 @@ public class PermissionChecker {
 		return end;
 	}
 
+	protected void putBag(String groupId, PermissionCheckerBag bag) {
+		groupId = GetterUtil.getString(groupId);
+
+		bags.put(groupId, bag);
+	}
+
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";
 
 	protected User user;
 	protected boolean signedIn;
 	protected boolean checkGuest;
-	protected PermissionCheckerBag permissionCheckerBag;
+	protected Map bags = CollectionFactory.getHashMap();
 	protected Map results = CollectionFactory.getHashMap();
 
 	private static Log _log = LogFactory.getLog(PermissionChecker.class);

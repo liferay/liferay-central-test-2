@@ -34,6 +34,7 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
@@ -281,6 +282,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		throws PortalException, SystemException {
 
 		long start = 0;
+		int block = 1;
 
 		if (_log.isDebugEnabled()) {
 			start = System.currentTimeMillis();
@@ -306,46 +308,19 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		String resourceId = resourceIds[0];
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 1);
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
 
-		// Is the user directly connected to one of the permissions?
-
-		/*
-		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
-
-			return true;
-		}
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 2);*/
-
-		// If we are checking permissions an object that belongs to a community,
-		// then it's only necessary to check the group that represents the
-		// community and not all the groups that the user belongs to. This is so
-		// because an object cannot belong to more than one community.
-
-		List userGroups = new ArrayList();
-		//List userGroups = UserUtil.getGroups(userId);
-
-		if (Validator.isNotNull(groupId)) {
-			if (permissionCheckerBag.hasGroup(groupId)) {
-				userGroups.add(GroupUtil.findByPrimaryKey(groupId));
-			}
-		}
-
+		List userGroups = permissionCheckerBag.getUserGroups();
 		List userOrgs = permissionCheckerBag.getUserOrgs();
 		List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
 		List userUserGroupGroups =
 			permissionCheckerBag.getUserUserGroupGroups();
+		List groups = permissionCheckerBag.getGroups();
+		List roles = permissionCheckerBag.getRoles();
 
-		List groups = new ArrayList(
-			userGroups.size() + userOrgGroups.size() +
-				userUserGroupGroups.size());
-
-		groups.addAll(userGroups);
-		groups.addAll(userOrgGroups);
-		groups.addAll(userUserGroupGroups);
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 3);
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
 
 		// Check the organization and community intersection table. Break out of
 		// this method if the user has one of the permissions set at the
@@ -355,44 +330,29 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			return true;
 		}
 
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 4);
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
 
-		// Call countByUsersPermissions, countByUsersRoles,
-		// countByGroupsPermissions, and countByGroupsRoles in one method
-
-		if (PermissionFinder.containsPermissions(permissions, userId, groups)) {
-			return true;
+		if (PermissionChecker.USER_CHECK_ALGORITHM == 1) {
+			return hasUserPermissions_1(
+				userId, actionId, resourceId, permissions, groups, start,
+				block);
 		}
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 5);
-
-		// Is the user associated with groups or organizations that are directly
-		// connected to one of the permissions?
-
-		/*if (groups.size() > 0) {
-			if (PermissionFinder.countByGroupsPermissions(
-					permissions, groups) > 0) {
-
-				return true;
-			}
+		else if (PermissionChecker.USER_CHECK_ALGORITHM == 2) {
+			return hasUserPermissions_2(
+				userId, actionId, resourceId, permissions, groups, start,
+				block);
 		}
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 6);*/
-
-		// Is the user connected to one of the permissions via user, group, or
-		// organization roles?
-
-		/*if (PermissionFinder.countByUsersRoles(permissions, userId) > 0) {
-			return true;
+		else if (PermissionChecker.USER_CHECK_ALGORITHM == 3) {
+			return hasUserPermissions_3(
+				userId, actionId, resourceId, permissions, groups, roles, start,
+				block);
 		}
-
-		if (groups.size() > 0) {
-			if (PermissionFinder.countByGroupsRoles(permissions, groups) > 0) {
-				return true;
-			}
+		else if (PermissionChecker.USER_CHECK_ALGORITHM == 4) {
+			return hasUserPermissions_4(
+				userId, actionId, resourceId, permissions, groups, roles, start,
+				block);
 		}
-
-		start = logHasUserPermissions(userId, actionId, resourceId, start, 7);*/
 
 		return false;
 	}
@@ -653,6 +613,143 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		throw new NoSuchPermissionException(
 			"User has a permission in OrgGroupPermission that does not match");
+	}
+
+	protected boolean hasUserPermissions_1(
+			String userId, String actionId, String resourceId, List permissions,
+			List groups, long start, int block)
+		throws PortalException, SystemException {
+
+		// Is the user connected to one of the permissions via group or
+		// organization roles?
+
+		if (groups.size() > 0) {
+			if (PermissionFinder.countByGroupsRoles(permissions, groups) > 0) {
+				return true;
+			}
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		// Is the user associated with groups or organizations that are directly
+		// connected to one of the permissions?
+
+		if (groups.size() > 0) {
+			if (PermissionFinder.countByGroupsPermissions(
+					permissions, groups) > 0) {
+
+				return true;
+			}
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		// Is the user connected to one of the permissions via user roles?
+
+		if (PermissionFinder.countByUsersRoles(permissions, userId) > 0) {
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		// Is the user directly connected to one of the permissions?
+
+		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		return false;
+	}
+
+	protected boolean hasUserPermissions_2(
+			String userId, String actionId, String resourceId, List permissions,
+			List groups, long start, int block)
+		throws PortalException, SystemException {
+
+		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
+		// and countByUsersPermissions in one method
+
+		if (PermissionFinder.containsPermissions_2(
+				permissions, userId, groups)) {
+
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		return false;
+	}
+
+	protected boolean hasUserPermissions_3(
+			String userId, String actionId, String resourceId, List permissions,
+			List groups, List roles, long start, int block)
+		throws PortalException, SystemException {
+
+		// Is the user associated with groups or organizations that are directly
+		// connected to one of the permissions?
+
+		if (groups.size() > 0) {
+			if (PermissionFinder.countByGroupsPermissions(
+					permissions, groups) > 0) {
+
+				return true;
+			}
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		// Is the user associated with a role that is directly connected to one
+		// of the permissions?
+
+		if (roles.size() > 0) {
+			if (PermissionFinder.countByRolesPermissions(
+					permissions, roles) > 0) {
+
+				return true;
+			}
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		// Is the user directly connected to one of the permissions?
+
+		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		return false;
+	}
+
+	protected boolean hasUserPermissions_4(
+			String userId, String actionId, String resourceId, List permissions,
+			List groups, List roles, long start, int block)
+		throws PortalException, SystemException {
+
+		// Call countByGroupsPermissions, countByRolesPermissions, and
+		// countByUsersPermissions in one method
+
+		if (PermissionFinder.containsPermissions_4(
+				permissions, userId, groups, roles)) {
+
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
+		return false;
 	}
 
 	protected long logHasUserPermissions(

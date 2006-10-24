@@ -314,7 +314,21 @@
 				([$GROUP_IDS$])
         ]]>
     </sql>
-    <sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersPermissions">
+    <sql id="com.liferay.portal.service.persistence.PermissionFinder.countByRolesPermissions">
+        <![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Permission_
+					INNER JOIN
+						Roles_Permissions ON
+							(Roles_Permissions.permissionId = Permission_.permissionId)
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				([$ROLE_IDS$])
+        ]]>
+    </sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersPermissions">
         <![CDATA[
 			SELECT
 				COUNT(*) AS COUNT_VALUE
@@ -450,6 +464,33 @@
                 (lower(Role_.name) = ?)
         ]]>
     </sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByU_G">
+		<![CDATA[
+			(
+				SELECT
+					{Role_.*}
+	            FROM
+		            Role_
+				INNER JOIN
+					Users_Roles ON
+						(Users_Roles.roleId = Role_.roleId)
+				WHERE
+					(Users_Roles.userId = ?)
+			)
+			UNION ALL
+			(
+				SELECT
+					{Role_.*}
+	            FROM
+		            Role_
+				INNER JOIN
+					Groups_Roles ON
+						(Groups_Roles.roleId = Role_.roleId)
+				WHERE
+					([$GROUP_IDS$])
+			)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByC_N_D">
 		<![CDATA[
 			SELECT
@@ -474,7 +515,7 @@
 				User_
 			INNER JOIN
 				Contact_ ON
-					Contact_.contactId = User_.userId
+					(Contact_.contactId = User_.userId)
 			[$JOIN$]
 			WHERE
 				(User_.companyId = ?) AND
@@ -495,7 +536,7 @@
 				User_
 			INNER JOIN
 				Contact_ ON
-					Contact_.contactId = User_.userId
+					(Contact_.contactId = User_.userId)
 			[$JOIN$]
 			WHERE
 				(User_.companyId = ?) AND

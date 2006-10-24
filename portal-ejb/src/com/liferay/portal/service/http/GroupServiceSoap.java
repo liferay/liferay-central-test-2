@@ -136,6 +136,20 @@ public class GroupServiceSoap {
 		}
 	}
 
+	public static boolean hasUserGroup(java.lang.String userId,
+		java.lang.String groupId) throws RemoteException {
+		try {
+			boolean returnValue = GroupServiceUtil.hasUserGroup(userId, groupId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void setRoleGroups(java.lang.String roleId,
 		java.lang.String[] groupIds) throws RemoteException {
 		try {
