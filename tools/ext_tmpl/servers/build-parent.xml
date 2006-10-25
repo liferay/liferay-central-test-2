@@ -15,17 +15,30 @@
 	<target name="install-server">
 		<antcall target="setproxy" />
 
-		<get
-			src="${app.server.zip.url}"
-			dest="${downloads.dir}/${app.server.zip.name}"
-			usetimestamp="true"
-			verbose="true"
-		/>
+		<if>
+			<http url="${app.server.zip.url}" />
+			<then>
+				<get
+					src="${app.server.zip.url}"
+					dest="${downloads.dir}/${app.server.zip.name}"
+					usetimestamp="true"
+					verbose="true"
+				/>
+			</then>
+		</if>
 
-		<unzip
-			src="${downloads.dir}/${app.server.zip.name}"
-			dest="${app.server.dest}"
-		/>
+		<if>
+			<available file="${downloads.dir}/${app.server.zip.name}" />
+			<then>
+				<unzip
+					src="${downloads.dir}/${app.server.zip.name}"
+					dest="${app.server.dest}"
+				/>
+			</then>
+			<else>
+				<echo message="Please manually download ${app.server.zip.url} to ${downloads.dir}/${app.server.zip.name}." />
+			</else>
+		</if>
 	</target>
 
 	<target name="install-jboss-jetty">
