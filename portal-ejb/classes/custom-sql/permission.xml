@@ -164,7 +164,7 @@
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgGroupPermissions">
-        <![CDATA[
+		<![CDATA[
 			SELECT
 				COUNT(OrgGroupPermission.permissionId) AS COUNT_VALUE
 			FROM 
@@ -182,7 +182,7 @@
 				(Resource_.scope = 'individual') AND
 				(Permission_.actionId = ?)
 		]]>
-    </sql>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgPermission">
 		<![CDATA[
 			SELECT 

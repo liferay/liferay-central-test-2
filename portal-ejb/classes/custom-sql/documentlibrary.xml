@@ -91,7 +91,7 @@
 				DLFileRank
 			INNER JOIN
 				DLFolder ON
-			    	(DLFolder.folderId = DLFileRank.folderId)
+					(DLFolder.folderId = DLFileRank.folderId)
 			WHERE
 				(DLFolder.groupId = ?) AND
 				(DLFileRank.userId = ?)

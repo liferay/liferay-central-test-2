@@ -34,16 +34,16 @@
 				JBPM_Token ON
 					JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
 			INNER JOIN
-        		JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+				JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
 			INNER JOIN
-        		JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+				JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
 			WHERE
 			(
-			    (lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
 				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
-			    [$END_DATE_CHECK$]
+				[$END_DATE_CHECK$]
 			) AND
 			(JBPM_TaskInstance.ACTORID_ = ?)
 		]]>
@@ -68,9 +68,9 @@
 			(
 				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
 				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
-			    [$END_DATE_CHECK$]
+				[$END_DATE_CHECK$]
 			) AND
 			(JBPM_PooledActor.ACTORID_ = ? AND JBPM_TaskInstance.ACTORID_ IS NULL)
 		]]>
@@ -114,16 +114,16 @@
 				JBPM_Token ON
 					JBPM_Token.ID_ = JBPM_TaskInstance.TOKEN_
 			INNER JOIN
-        		JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
+				JBPM_ProcessInstance ON JBPM_ProcessInstance.ID_ = JBPM_Token.PROCESSINSTANCE_
 			INNER JOIN
-        		JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
+				JBPM_ProcessDefinition ON JBPM_ProcessDefinition.ID_ = JBPM_ProcessInstance.PROCESSDEFINITION_
 			WHERE
 			(
-			    (lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
 				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
-			    [$END_DATE_CHECK$]
+				[$END_DATE_CHECK$]
 			) AND
 			(JBPM_TaskInstance.ACTORID_ = ?)
 		]]>
@@ -148,9 +148,9 @@
 			(
 				(lower(JBPM_TaskInstance.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 				(lower(JBPM_ProcessDefinition.NAME_) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-			    ((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
+				((JBPM_TaskInstance.CREATE_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.CREATE_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
 				((JBPM_TaskInstance.START_ >= ? [$AND_OR_NULL_CHECK$]) AND (JBPM_TaskInstance.START_ <= ? [$AND_OR_NULL_CHECK$])) [$AND_OR_CONNECTOR$]
-			    [$END_DATE_CHECK$]
+				[$END_DATE_CHECK$]
 			) AND
 			(JBPM_PooledActor.ACTORID_ = ? AND JBPM_TaskInstance.ACTORID_ IS NULL)
 		]]>
