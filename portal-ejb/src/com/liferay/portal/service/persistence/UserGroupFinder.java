@@ -82,6 +82,7 @@ public class UserGroupFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -175,6 +176,7 @@ public class UserGroupFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -225,19 +227,74 @@ public class UserGroupFinder {
 	}
 
 	private static String _getJoin(String key) {
-		StringBuffer sb = new StringBuffer();
+		String join = StringPool.BLANK;
 
 		if (key.equals("permissionsResourceId")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS));
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
 		}
 		else if (key.equals("userGroupsGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USER_GROUPS_GROUPS));
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_GROUPS);
 		}
 		else if (key.equals("userGroupsRoles")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USER_GROUPS_ROLES));
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_ROLES);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(0, pos);
+			}
+		}
+
+		return join;
+	}
+
+	private static String _getWhere(Map params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBuffer sb = new StringBuffer();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (value != null) {
+				sb.append(_getWhere(key));
+			}
 		}
 
 		return sb.toString();
+	}
+
+	private static String _getWhere(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("permissionsResourceId")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
+		}
+		else if (key.equals("userGroupsGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_GROUPS);
+		}
+		else if (key.equals("userGroupsRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUPS_ROLES);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(pos + 5, join.length()) + " AND ";
+			}
+		}
+
+		return join;
 	}
 
 	private static void _setJoin(QueryPos qPos, Map params) {

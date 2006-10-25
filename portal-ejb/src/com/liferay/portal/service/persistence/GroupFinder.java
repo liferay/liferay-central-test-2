@@ -259,6 +259,7 @@ public class GroupFinder {
 			sql = "(";
 			sql += CustomSQLUtil.get(FIND_BY_C_N_D);
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params1));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params1));
 			sql += ")";
 
 			if (Validator.isNotNull(userId)) {
@@ -267,6 +268,7 @@ public class GroupFinder {
 				sql += "(";
 				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params2));
+				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params2));
 				sql += ")";
 
 				sql += " UNION ";
@@ -274,6 +276,7 @@ public class GroupFinder {
 				sql += "(";
 				sql += CustomSQLUtil.get(FIND_BY_C_N_D);
 				sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params3));
+				sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params3));
 				sql += ")";
 			}
 
@@ -340,6 +343,7 @@ public class GroupFinder {
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
 
 		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -373,6 +377,7 @@ public class GroupFinder {
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
 
 		sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+		sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -426,28 +431,92 @@ public class GroupFinder {
 	}
 
 	private static String _getJoin(String key) {
-		StringBuffer sb = new StringBuffer();
+		String join = StringPool.BLANK;
 
 		if (key.equals("groupsOrgs")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS));
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS);
 		}
 		else if (key.equals("groupsRoles")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES));
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES);
 		}
 		else if (key.equals("groupsUserGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS));
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS);
 		}
 		else if (key.equals("layoutSet")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_LAYOUT_SET));
+			join = CustomSQLUtil.get(JOIN_BY_LAYOUT_SET);
 		}
 		else if (key.equals("rolePermissions")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS));
+			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
 		}
 		else if (key.equals("usersGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS));
+			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(0, pos);
+			}
+		}
+
+		return join;
+	}
+
+	private static String _getWhere(Map params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBuffer sb = new StringBuffer();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (value != null) {
+				sb.append(_getWhere(key));
+			}
 		}
 
 		return sb.toString();
+	}
+
+	private static String _getWhere(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("groupsOrgs")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ORGS);
+		}
+		else if (key.equals("groupsRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_ROLES);
+		}
+		else if (key.equals("groupsUserGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_USER_GROUPS);
+		}
+		else if (key.equals("layoutSet")) {
+			join = CustomSQLUtil.get(JOIN_BY_LAYOUT_SET);
+		}
+		else if (key.equals("rolePermissions")) {
+			join = CustomSQLUtil.get(JOIN_BY_ROLE_PERMISSIONS);
+		}
+		else if (key.equals("usersGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(pos + 5, join.length()) + " AND ";
+			}
+		}
+
+		return join;
 	}
 
 	private static void _setJoin(QueryPos qPos, Map params) {

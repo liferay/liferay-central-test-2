@@ -90,6 +90,7 @@ public class UserFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_C_FN_MN_LN_EA_A);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -151,6 +152,7 @@ public class UserFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_FN_MN_LN_EA_A);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);
 
@@ -208,25 +210,86 @@ public class UserFinder {
 	}
 
 	private static String _getJoin(String key) {
-		StringBuffer sb = new StringBuffer();
+		String join = StringPool.BLANK;
 
 		if (key.equals("permission")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_PERMISSION));
+			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
 		}
 		else if (key.equals("usersGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_GROUPS));
+			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
 		else if (key.equals("usersOrgs")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_ORGS));
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
 		}
 		else if (key.equals("usersRoles")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_ROLES));
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
 		else if (key.equals("usersUserGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS));
+			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(0, pos);
+			}
+		}
+
+		return join;
+	}
+
+	private static String _getWhere(Map params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBuffer sb = new StringBuffer();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (value != null) {
+				sb.append(_getWhere(key));
+			}
 		}
 
 		return sb.toString();
+	}
+
+	private static String _getWhere(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("permission")) {
+			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
+		}
+		else if (key.equals("usersGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
+		}
+		else if (key.equals("usersOrgs")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ORGS);
+		}
+		else if (key.equals("usersRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
+		}
+		else if (key.equals("usersUserGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(pos + 5, join.length()) + " AND ";
+			}
+		}
+
+		return join;
 	}
 
 	private static void _setJoin(QueryPos qPos, Map params) {

@@ -101,6 +101,7 @@ public class OrganizationFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -193,6 +194,7 @@ public class OrganizationFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
 
 			sql = StringUtil.replace(sql, "[$JOIN$]", _getJoin(params));
+			sql = StringUtil.replace(sql, "[$WHERE$]", _getWhere(params));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -272,7 +274,9 @@ public class OrganizationFinder {
 			sql = "(";
 			sql += CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS));
+				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
+			sql = StringUtil.replace(
+				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
 			sql += ")";
 
 			sql += " UNION ";
@@ -280,8 +284,9 @@ public class OrganizationFinder {
 			sql += "(";
 			sql += CustomSQLUtil.get(COUNT_BY_C_PO_N_S_C_Z_R_C);
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]",
-				CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION));
+				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
+			sql = StringUtil.replace(
+				sql, "[$WHERE$]", _getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -367,7 +372,9 @@ public class OrganizationFinder {
 			sql = "(";
 			sql += CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]", CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS));
+				sql, "[$JOIN$]", _getJoin("groupsPermissions"));
+			sql = StringUtil.replace(
+				sql, "[$WHERE$]", _getWhere("groupsPermissions"));
 			sql += ")";
 
 			sql += " UNION ";
@@ -375,8 +382,9 @@ public class OrganizationFinder {
 			sql += "(";
 			sql += CustomSQLUtil.get(FIND_BY_C_PO_N_S_C_Z_R_C);
 			sql = StringUtil.replace(
-				sql, "[$JOIN$]",
-				CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION));
+				sql, "[$JOIN$]", _getJoin("orgGroupPermission"));
+			sql = StringUtil.replace(
+				sql, "[$WHERE$]", _getWhere("orgGroupPermission"));
 			sql = StringUtil.replace(
 				sql, "[$PARENT_ORGANIZATION_ID_COMPARATOR$]",
 				parentOrganizationComparator);
@@ -472,16 +480,80 @@ public class OrganizationFinder {
 	}
 
 	private static String _getJoin(String key) {
-		StringBuffer sb = new StringBuffer();
+		String join = StringPool.BLANK;
 
-		if (key.equals("organizationsGroups")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS));
+		if (key.equals("groupsPermissions")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
+		}
+		else if (key.equals("organizationsGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS);
 		}
 		else if (key.equals("organizationsRoles")) {
-			sb.append(CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES));
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
+		}
+		else if (key.equals("orgGroupPermission")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(0, pos);
+			}
+		}
+
+		return join;
+	}
+
+	private static String _getWhere(Map params) {
+		if (params == null) {
+			return StringPool.BLANK;
+		}
+
+		StringBuffer sb = new StringBuffer();
+
+		Iterator itr = params.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (value != null) {
+				sb.append(_getWhere(key));
+			}
 		}
 
 		return sb.toString();
+	}
+
+	private static String _getWhere(String key) {
+		String join = StringPool.BLANK;
+
+		if (key.equals("groupsPermissions")) {
+			join = CustomSQLUtil.get(JOIN_BY_GROUPS_PERMISSIONS);
+		}
+		else if (key.equals("organizationsGroups")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_GROUPS);
+		}
+		else if (key.equals("organizationsRoles")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORGANIZATIONS_ROLES);
+		}
+		else if (key.equals("orgGroupPermission")) {
+			join = CustomSQLUtil.get(JOIN_BY_ORG_GROUP_PERMISSION);
+		}
+
+		if (Validator.isNotNull(join)) {
+			int pos = join.indexOf("WHERE");
+
+			if (pos != -1) {
+				join = join.substring(pos + 5, join.length()) + " AND ";
+			}
+		}
+
+		return join;
 	}
 
 	private static void _setJoin(QueryPos qPos, Map params) {
