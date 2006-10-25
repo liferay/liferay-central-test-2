@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.spring.UserTrackerLocalServiceUtil;
@@ -73,10 +72,6 @@ public class PortalSessionListener implements HttpSessionListener {
 		MessagingUtil.closeXMPPConnection(ses);
 
 		PortalSessionContext.remove(ses.getId());
-
-		if (ServerDetector.isWebLogic()) {
-			PortletSessionPool.remove(ses.getId());
-		}
 
 		try {
 			String companyId = (String)ses.getAttribute(WebKeys.COMPANY_ID);

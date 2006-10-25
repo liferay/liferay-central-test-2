@@ -68,7 +68,8 @@ public class FlashTag extends IncludeTag {
 		throws IOException, ServletException {
 
 		req.setAttribute("liferay-ui:flash:align", align);
-		req.setAttribute("liferay-ui:flash:allowScriptAccess", allowScriptAccess);
+		req.setAttribute(
+			"liferay-ui:flash:allowScriptAccess", allowScriptAccess);
 		req.setAttribute("liferay-ui:flash:base", base);
 		req.setAttribute("liferay-ui:flash:bgcolor", bgcolor);
 		req.setAttribute("liferay-ui:flash:devicefont", devicefont);

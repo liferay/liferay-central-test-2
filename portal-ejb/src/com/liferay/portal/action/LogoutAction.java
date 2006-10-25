@@ -23,15 +23,10 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.servlet.PortletSessionPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringPool;
-
-import java.util.Iterator;
-import java.util.Map;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -74,23 +69,6 @@ public class LogoutAction extends Action {
 			cookie.setPath("/");
 
 			CookieKeys.addCookie(res, cookie);
-
-			if (ServerDetector.isWebLogic()) {
-				Map sessions = PortletSessionPool.remove(ses.getId());
-
-				if (sessions != null) {
-					Iterator itr = sessions.entrySet().iterator();
-
-					while (itr.hasNext()) {
-						Map.Entry entry = (Map.Entry)itr.next();
-
-						HttpSession portletSession =
-							(HttpSession)entry.getValue();
-
-						portletSession.invalidate();
-					}
-				}
-			}
 
 			try {
 				ses.invalidate();

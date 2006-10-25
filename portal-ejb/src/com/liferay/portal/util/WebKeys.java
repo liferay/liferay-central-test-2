@@ -221,6 +221,8 @@ public class WebKeys {
 
 	public static final String PORTLET_RENDER_PARAMETERS = "PORTLET_RENDER_PARAMETERS";
 
+	public static final String PORTLET_SESSION_TRACKER = "PORTLET_SESSION_TRACKER";
+
 	public static final String PORTLET_STRUTS_ACTION = "PORTLET_STRUTS_ACTION";
 
 	public static final String PORTLET_STRUTS_ATTRIBUTES = "PORTLET_STRUTS_ATTRIBUTES";

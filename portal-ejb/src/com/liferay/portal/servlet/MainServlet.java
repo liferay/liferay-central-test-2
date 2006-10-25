@@ -27,6 +27,7 @@ import com.httpbridge.webproxy.http.TaskController;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
+import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.lastmodified.LastModifiedAction;
@@ -569,6 +570,14 @@ public class MainServlet extends ActionServlet {
 					}
 				}
 			}
+		}
+
+		// Portlet session tracker
+
+		if (ses.getAttribute(WebKeys.PORTLET_SESSION_TRACKER) == null ) {
+			ses.setAttribute(
+				WebKeys.PORTLET_SESSION_TRACKER,
+				PortletSessionTracker.getInstance());
 		}
 
 		// WebKeys.COMPANY_ID variable

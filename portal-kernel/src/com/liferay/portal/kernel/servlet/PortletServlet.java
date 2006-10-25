@@ -41,6 +41,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="PortletServlet.java.html"><b><i>View Source</i></b></a>
@@ -73,7 +74,11 @@ public class PortletServlet extends HttpServlet {
 		LiferayPortletSession portletSes =
 			(LiferayPortletSession)portletReq.getPortletSession();
 
-		portletSes.setHttpSession(req.getSession());
+		HttpSession ses = req.getSession();
+
+		PortletSessionTracker.add(ses);
+
+		portletSes.setHttpSession(ses);
 
 		try {
 			if (portletReq instanceof ActionRequest) {
