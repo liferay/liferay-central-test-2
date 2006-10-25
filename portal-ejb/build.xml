@@ -43,6 +43,26 @@
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
+
+		<!--
+		SubEtha SMTP requires JDK 5.0. We use Retroweaver to convert the JAR to
+		be compatible with JDK 1.4 . However, Jikes 1.21, which works with JDK
+		1.4, can't properly compile classes that use the SubEtha classes. We fix
+		this by separately compiling classes that require SubEtha with the
+		regular JDK compiler.
+		-->
+
+		<javac
+			classpathref="project.classpath"
+			compiler="modern"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="classes"
+			includes="**/portal/smtp/SMTPServerUtil.java"
+			fork="${javac.fork}"
+			nowarn="${javac.nowarn}"
+			srcdir="src"
+		/>
 	</target>
 
 	<target name="compile-tools">
