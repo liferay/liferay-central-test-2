@@ -49,41 +49,22 @@ String wmode = GetterUtil.getString(flashAttributesProps.getProperty("wmode"), "
 flashVariables = StringUtil.replace(flashVariables, "\n", ";");
 %>
 
-<object align="<%= align %>" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" height="<%= height %>" width="<%= width %>">
-	<param name="allowScriptAccess" value="<%= allowScriptAccess %>" />
-	<param name="base" value="<%= base %>" />
-	<param name="bgcolor" value="<%= bgcolor %>" />
-	<param name="devicefont" value="<%= devicefont %>" />
-	<param name="flashvars" value="<%= flashVariables %>" />
-	<param name="loop" value="<%= loop %>" />
-	<param name="menu" value="<%= menu %>" />
-	<param name="movie" value="<%= movie %>" />
-	<param name="play" value="<%= play %>" />
-	<param name="quality" value="<%= quality %>" />
-	<param name="salign" value="<%= salign %>" />
-	<param name="scale" value="<%= scale %>" />
-	<param name="swliveconnect" value="<%= swliveconnect %>" />
-	<param name="wmode" value="<%= wmode %>" />
-
-	<embed
-		align="<%= align %>"
-		allowScriptAccess="<%= allowScriptAccess %>"
-		base="<%= base %>"
-		bgcolor="<%= bgcolor %>"
-		devicefont="<%= devicefont %>"
-		flashvars="<%= flashVariables %>"
-		height="<%= height %>"
-		loop="<%= loop %>"
-		menu="<%= menu %>"
-		play="<%= play %>"
-		pluginspage="http://www.macromedia.com/go/getflashplayer"
-		quality="<%= quality %>"
-		salign="<%= salign %>"
-		scale="<%= scale %>"
-		src="<%= movie %>"
-		swliveconnect="<%= swliveconnect %>"
-		type="application/x-shockwave-flash"
-		width="<%= width %>"
-		wmode="<%= wmode %>">
-	</embed>
-</object>
+<liferay-ui:flash
+	align="<%= align %>"
+	allowScriptAccess="<%= allowScriptAccess %>"
+	base="<%= base %>"
+	bgcolor="<%= bgcolor %>"
+	devicefont="<%= devicefont %>"
+	flashvars="<%= flashVariables %>"
+	height="<%= height %>"
+	loop="<%= loop %>"
+	menu="<%= menu %>"
+	movie="<%= movie %>"
+	play="<%= play %>"
+	quality="<%= quality %>"
+	salign="<%= salign %>"
+	scale="<%= scale %>"
+	swliveconnect="<%= swliveconnect %>"
+	width="<%= width %>"
+	wmode="<%= wmode %>"
+/>

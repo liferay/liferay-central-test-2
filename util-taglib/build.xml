@@ -21,5 +21,16 @@
 		<copy todir="${project.dir}/portal-web/docroot/WEB-INF/tld">
 			<fileset dir="classes/META-INF" />
 		</copy>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="tomcat" />
+			<then>
+				<copy file="${jar.file}.jar" todir="${app.server.deploy.dir}/ROOT/WEB-INF/lib" />
+
+				<copy todir="${app.server.deploy.dir}/ROOT/WEB-INF/tld">
+					<fileset dir="classes/META-INF" />
+				</copy>
+			</then>
+		</if>
 	</target>
 </project>
