@@ -4,10 +4,22 @@
 <weblogic-ejb-jar>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<local-jndi-name>ejb/liferay/CounterLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<jndi-name>com_liferay_counter_service_ejb_CounterServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 </weblogic-ejb-jar>

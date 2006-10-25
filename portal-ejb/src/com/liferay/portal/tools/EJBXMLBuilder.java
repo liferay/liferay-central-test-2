@@ -431,6 +431,13 @@ public class EJBXMLBuilder {
 
 			String displayName = entity.elementText("display-name");
 
+			sb.append("\t\t<reference-descriptor>\n");
+			sb.append("\t\t\t<resource-description>\n");
+			sb.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+			sb.append("\t\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+			sb.append("\t\t\t</resource-description>\n");
+			sb.append("\t\t</reference-descriptor>\n");
+
 			if (displayName.endsWith("LocalServiceEJB")) {
 				sb.append("\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
 			}

@@ -4,6 +4,12 @@
 <weblogic-ejb-jar>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<jndi-name>com_liferay_lock_service_ejb_LockServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 </weblogic-ejb-jar>
