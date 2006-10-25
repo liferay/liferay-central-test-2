@@ -49,7 +49,7 @@ public class EARXMLBuilder {
 	};
 
 	public static String[] WEB_PATHS = {
-		"../cms-web", "../laszlo-web", "../portal-web-complete", "../tunnel-web"
+		"../cms-web", "../laszlo-web", "../portal-web", "../tunnel-web"
 	};
 
 	public static void main(String[] args) {
@@ -234,7 +234,7 @@ public class EARXMLBuilder {
 
 			sb.append("\t\t<ejb-local-ref>\n");
 			sb.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("</ejb-link>\n");
+			sb.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
 			sb.append("\t\t</ejb-local-ref>\n");
 		}
 

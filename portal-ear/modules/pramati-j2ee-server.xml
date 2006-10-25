@@ -8113,255 +8113,255 @@
 		<module-name>laszlo-web.war</module-name>
 	</web-module>
 	<web-module>
-		<name>/</name>
-		<module-name>portal-web-complete.war</module-name>
+		<name>/portal</name>
+		<module-name>portal-web.war</module-name>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_AccountLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_AccountLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_GroupLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_GroupLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ImageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ImageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_LayoutLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserGroupLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BlogsCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BlogsEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BookmarksEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BookmarksFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CalEventLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/IGFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/IGImageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalArticleLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalContentSearchLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalStructureLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalTemplateLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsChoiceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsVoteLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WikiPageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<resource-mapping>
 			<resource-name>jdbc/LiferayPool</resource-name>
@@ -8379,251 +8379,251 @@
 		<module-name>tunnel-web.war</module-name>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_AccountLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_AccountLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_GroupLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_GroupLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ImageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ImageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_LayoutLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserGroupLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BlogsCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BlogsEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BookmarksEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/BookmarksFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CalEventLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/IGFolderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/IGImageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalArticleLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalContentSearchLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalStructureLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/JournalTemplateLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBMessageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBMessageFlagLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBStatsUserLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/MBThreadLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsChoiceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsQuestionLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/PollsVoteLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCartLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCategoryLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingCouponLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingOrderLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/WikiPageLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
-			<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</ejb-link>
+			<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 		</ejb-local-ref>
 	</web-module>
 	<role-mapping>
@@ -8662,7 +8662,7 @@
 		<role-link>everybody</role-link>
 	</role-mapping>
 	<role-mapping>
-		<module-name>portal-web-complete.war</module-name>
+		<module-name>portal-web.war</module-name>
 		<role-name>users</role-name>
 		<role-link>everybody</role-link>
 	</role-mapping>
