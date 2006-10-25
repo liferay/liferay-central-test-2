@@ -32,6 +32,7 @@ import java.io.IOException;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.TimeZone;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,12 +45,23 @@ import org.apache.commons.logging.LogFactory;
  */
 public abstract class JBIRequestURL {
 
+	public JBIRequestURL() {
+		this(null);
+	}
+
 	public JBIRequestURL(User user) {
-		_user = user;
 		_params = new LinkedHashMap();
 
-		_params.put("userId", _user.getUserId());
-		_params.put("timeZoneId", _user.getTimeZone().getID());
+		if (user != null) {
+			_user = user;
+
+			_params.put("userId", _user.getUserId());
+			_params.put("timeZoneId", _user.getTimeZone().getID());
+		}
+		else {
+			_params.put("userId", "unknown");
+			_params.put("timeZoneId", TimeZone.getDefault().getID());
+		}
 	}
 
 	public void addParameterMap(Map parameterMap) {

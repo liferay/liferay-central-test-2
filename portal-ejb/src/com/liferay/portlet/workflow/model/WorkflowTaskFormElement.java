@@ -44,6 +44,8 @@ public class WorkflowTaskFormElement implements Serializable {
 
 	public static final String TYPE_PHONE = "phone";
 
+	public static final String TYPE_PASSWORD = "password";
+
 	public static final String TYPE_RADIO = "radio";
 
 	public static final String TYPE_SELECT = "select";

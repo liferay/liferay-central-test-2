@@ -93,6 +93,12 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 				result = deploy(xml);
 			}
+			else if (cmd.equals("getCurrentTasksXml")) {
+				long instanceId = ParamUtil.getLong(req, "instanceId");
+				long tokenId = ParamUtil.getLong(req, "tokenId");
+
+				result = getCurrentTasksXml(instanceId, tokenId);
+			}
 			else if (cmd.equals("getDefinitionsCountXml")) {
 				long definitionId = ParamUtil.getLong(req, "definitionId");
 				String name = ParamUtil.getString(req, "name");
@@ -263,6 +269,70 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 		return sb.toString();
     }
+
+	public List getCurrentTasks(long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
+		List userTasks = getUserTasks(
+			instanceId, null, null, null, null, null, null, null, null, null,
+			false, false, 0, 0);
+
+		List currentTasks = new ArrayList();
+
+		List tokenTasks = taskMgmtSession.findTaskInstancesByToken(tokenId);
+
+		if (tokenTasks.size() == 0) {
+			currentTasks = null;
+		}
+		else {
+			Iterator itr = tokenTasks.iterator();
+
+			Set tokenTaskIds = new HashSet();
+
+			while (itr.hasNext()) {
+				TaskInstance task = (TaskInstance)itr.next();
+
+				tokenTaskIds.add(new Long(task.getId()));
+			}
+
+			itr = userTasks.iterator();
+
+			while (itr.hasNext()) {
+				TaskInstance task = (TaskInstance)itr.next();
+
+				if (tokenTaskIds.contains(new Long(task.getId()))) {
+					currentTasks.add(task);
+				}
+			}
+		}
+
+		// At this point, if currentTasks is null, then that means no tasks
+		// exist for this token, and the instance must be signaled to continue.
+		// If currentTasks is just empty, then that means the current token
+		// has tasks, but the current user cannot manage them.
+
+		return currentTasks;
+	}
+
+	public String getCurrentTasksXml(long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
+		List tasks = getCurrentTasks(instanceId, tokenId);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		if (tasks != null) {
+			for (int i = 0; i < tasks.size(); i++) {
+				TaskInstance task = (TaskInstance)tasks.get(i);
+
+				createElement(task, root);
+			}
+		}
+
+		return doc.asXML();
+	}
 
 	public List getDefinitions(
 			long definitionId, String name, int begin, int end)
@@ -911,50 +981,6 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 		return sb.toString();
     }
-
-	protected List getCurrentTasks(long instanceId, long tokenId)
-		throws WorkflowComponentException {
-
-		List userTasks = getUserTasks(
-			instanceId, null, null, null, null, null, null, null, null, null,
-			false, false, 0, 0);
-
-		List currentTasks = new ArrayList();
-
-		List tokenTasks = taskMgmtSession.findTaskInstancesByToken(tokenId);
-
-		if (tokenTasks.size() == 0) {
-			currentTasks = null;
-		}
-		else {
-			Iterator itr = tokenTasks.iterator();
-
-			Set tokenTaskIds = new HashSet();
-
-			while (itr.hasNext()) {
-				TaskInstance task = (TaskInstance)itr.next();
-
-				tokenTaskIds.add(new Long(task.getId()));
-			}
-
-			itr = userTasks.iterator();
-
-			while (itr.hasNext()) {
-				TaskInstance task = (TaskInstance)itr.next();
-
-				if (tokenTaskIds.contains(new Long(task.getId()))) {
-					currentTasks.add(task);
-				}
-			}
-		}
-
-		// At this point, if currentTasks is null, then that means no tasks
-		// exist for this token, and the instance must be signaled to continue.
-		// If currentTasks is just empty, then that means the current token
-		// has tasks, but the current user cannot manage them.
-
-		return currentTasks;
-	}
 
 	protected String getParamValue(Map parameterMap, String name) {
 		String value = StringPool.BLANK;

@@ -51,6 +51,14 @@ public class WorkflowDefinition implements Serializable {
 		_name = name;
 	}
 
+	public String getType() {
+		return _type;
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
 	public double getVersion() {
 		return _version;
 	}
@@ -61,6 +69,7 @@ public class WorkflowDefinition implements Serializable {
 
 	private long _definitionId;
 	private String _name;
+	private String _type;
 	private double _version;
 
 }

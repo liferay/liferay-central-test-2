@@ -35,6 +35,12 @@ public interface WorkflowComponent {
 
 	public String deploy(String xml) throws WorkflowComponentException;
 
+	public List getCurrentTasks(long instanceId, long tokenId)
+		throws WorkflowComponentException;
+
+	public String getCurrentTasksXml(long instanceId, long tokenId)
+		throws WorkflowComponentException;
+
 	public List getDefinitions(
 			long definitionId, String name, int begin, int end)
 		throws WorkflowComponentException;

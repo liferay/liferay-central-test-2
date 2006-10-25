@@ -49,6 +49,8 @@ public class TaskFormElement implements Serializable {
 
 	public static final String TYPE_NUMBER = "number";
 
+	public static final String TYPE_PASSWORD = "password";
+
 	public static final String TYPE_PHONE = "phone";
 
 	public static final String TYPE_RADIO = "radio";

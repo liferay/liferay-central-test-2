@@ -22,8 +22,11 @@
 
 package com.liferay.portlet.workflow.service.impl;
 
+import com.liferay.documentlibrary.service.spring.DLServiceUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -36,9 +39,12 @@ import com.liferay.portlet.workflow.model.WorkflowToken;
 import com.liferay.portlet.workflow.service.spring.WorkflowComponentService;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;
+
+import java.rmi.RemoteException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -65,14 +71,76 @@ import org.dom4j.io.SAXReader;
 public class WorkflowComponentServiceImpl extends PrincipalBean
 	implements WorkflowComponentService, WorkflowComponent {
 
+	public List getCurrentTasks(
+			long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
+		try {
+			String xml = getCurrentTasksXml(instanceId, tokenId);
+
+			return parseList(xml, "tasks");
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
+	public String getCurrentTasksXml(
+			long instanceId, long tokenId)
+		throws WorkflowComponentException {
+
+		try {
+			WorkflowURL url = getWorkflowURL();
+
+			url.setParameter(Constants.CMD, "getCurrentTasksXml");
+			url.setParameter("instanceId", instanceId);
+			url.setParameter("tokenId", tokenId);
+
+			return url.getContent();
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
 	public String deploy(String xml) throws WorkflowComponentException {
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
+
+			xml = StringUtil.replace(
+				xml,
+				new String[] {
+					"\n", "\r", "\t"
+				},
+				new String[] {
+					"", "", ""
+				});
 
 			url.setParameter(Constants.CMD, "deploy");
 			url.setParameter("xml", xml);
 
-			return url.getContent();
+			String content = url.getContent();
+
+			String definitionId = parseString(content, "definitionId");
+
+			String companyId = getUser().getCompanyId();
+			String portletId = Company.SYSTEM;
+			String groupId = Group.DEFAULT_PARENT_GROUP_ID;
+			String repositoryId = Company.SYSTEM;
+			String dirName = "workflow/" + definitionId;
+			String fileName = dirName  + "/" + "processdefinition.xml";
+
+			try {
+				DLServiceUtil.addDirectory(companyId, repositoryId, dirName);
+
+				DLServiceUtil.addFile(
+					companyId, portletId, groupId, repositoryId, fileName,
+					xml.getBytes());
+			}
+			catch (RemoteException re) {
+			}
+
+			return definitionId;
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
@@ -98,7 +166,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getDefinitionsXml");
 			url.setParameter("definitionId", definitionId);
@@ -130,7 +198,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getDefinitionsCountXml");
 			url.setParameter("definitionId", definitionId);
@@ -191,7 +259,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getInstancesCountXml");
 			url.setParameter("definitionId", definitionId);
@@ -220,7 +288,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getInstancesXml");
 			url.setParameter("definitionId", definitionId);
@@ -260,7 +328,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getTaskFormElementsXml");
 			url.setParameter("taskId", taskId);
@@ -289,7 +357,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getTaskTransitionsXml");
 			url.setParameter("taskId", taskId);
@@ -350,7 +418,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getUserTasksCountXml");
 			url.setParameter("instanceId", instanceId);
@@ -382,7 +450,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "getUserTasksXml");
 			url.setParameter("instanceId", instanceId);
@@ -411,7 +479,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "signalInstance");
 			url.setParameter("instanceId", instanceId);
@@ -427,7 +495,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "signalToken");
 			url.setParameter("instanceId", instanceId);
@@ -444,7 +512,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "startWorkflow");
 			url.setParameter("definitionId", definitionId);
@@ -474,7 +542,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		throws WorkflowComponentException {
 
 		try {
-			WorkflowURL url = new WorkflowURL(getUser());
+			WorkflowURL url = getWorkflowURL();
 
 			url.setParameter(Constants.CMD, "updateTaskXml");
 			url.setParameter("taskId", taskId);
@@ -486,6 +554,19 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
 		}
+	}
+
+	protected WorkflowURL getWorkflowURL() {
+		WorkflowURL url = null;
+
+		try {
+			url = new WorkflowURL(getUser());
+		}
+		catch (Exception e) {
+			url = new WorkflowURL();
+		}
+
+		return url;
 	}
 
 	protected Date parseDate(String date) throws ParseException {
@@ -509,12 +590,14 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			long definitionId = GetterUtil.getLong(
 				el.elementText("definitionId"));
 			String name = el.elementText("name");
+			String type = el.elementText("type");
 			double version = GetterUtil.getDouble(el.elementText("version"));
 
 			WorkflowDefinition definition = new WorkflowDefinition();
 
 			definition.setDefinitionId(definitionId);
 			definition.setName(name);
+			definition.setType(type);
 			definition.setVersion(version);
 
 			definitions.add(definition);
@@ -616,6 +699,9 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		}
 		else if (name.equals("taskTransitions")) {
 			return parseTaskTransitions(root);
+		}
+		else if (name.equals("tokens")) {
+			return parseTokens(root);
 		}
 		else {
 			throw new DocumentException("List name " + name + " not valid");

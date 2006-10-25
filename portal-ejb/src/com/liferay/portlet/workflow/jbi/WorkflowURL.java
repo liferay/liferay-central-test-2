@@ -34,6 +34,10 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class WorkflowURL extends JBIRequestURL {
 
+	public WorkflowURL() {
+		super();
+	}
+
 	public WorkflowURL(User user) {
 		super(user);
 	}
