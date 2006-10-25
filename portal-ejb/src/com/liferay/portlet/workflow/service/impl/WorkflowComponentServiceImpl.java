@@ -127,8 +127,8 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			String portletId = Company.SYSTEM;
 			String groupId = Group.DEFAULT_PARENT_GROUP_ID;
 			String repositoryId = Company.SYSTEM;
-			String dirName = "workflow/" + definitionId;
-			String fileName = dirName  + "/" + "processdefinition.xml";
+			String dirName = "workflow/definitions";
+			String fileName = dirName  + "/" + definitionId + ".xml";
 
 			try {
 				DLServiceUtil.addDirectory(companyId, repositoryId, dirName);
