@@ -3,9 +3,9 @@
 <custom-sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByAdminRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Roles.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Roles
 			INNER JOIN
 				User_ ON
@@ -16,7 +16,7 @@
 			INNER JOIN
 				Role_ ON
 					Role_.roleId = Users_Roles.roleId
-			WHERE 
+			WHERE
 				(User_.companyId = ?) AND
 				(Role_.name = 'Administrator') AND
 				(
@@ -29,9 +29,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByGroupPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Groups.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Groups
 			INNER JOIN
 				User_ ON
@@ -46,12 +46,12 @@
 				Groups_Permissions ON
 					Groups_Permissions.groupId = Group_.groupId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Groups_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(Resource_.primKey = ?) AND
@@ -67,9 +67,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByGroupRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Groups.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Groups
 			INNER JOIN
 				User_ ON
@@ -90,12 +90,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
@@ -120,9 +120,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgGroupPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Orgs.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Orgs
 			INNER JOIN
 				User_ ON
@@ -130,7 +130,7 @@
 			INNER JOIN
 				Contact_ ON
 					Contact_.contactId = Users_Orgs.userId
-			INNER JOIN 
+			INNER JOIN
 				Organization_ ON
 					Organization_.organizationId = Users_Orgs.organizationId
 			INNER JOIN
@@ -144,67 +144,8 @@
 					(OrgGroupPermission.organizationId = Organization_.organizationId) AND
 					(OrgGroupPermission.groupId = Group_.groupId)
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = OrgGroupPermission.permissionId
-			INNER JOIN
-				Resource_ ON
-					Resource_.resourceId = Permission_.resourceId
-			WHERE 
-				(Resource_.companyId = ?) AND
-				(Resource_.name = ?) AND
-				(Resource_.primKey = ?) AND
-				(Resource_.scope = 'individual') AND
-				(Permission_.actionId = ?) AND
-				(
-					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgGroupPermissions">
-		<![CDATA[
-			SELECT
-				COUNT(OrgGroupPermission.permissionId) AS COUNT_VALUE
-			FROM 
-				OrgGroupPermission
-			INNER JOIN 
-				Permission_	ON
-					Permission_.permissionId = OrgGroupPermission.permissionId
-			INNER JOIN
-				Resource_ ON
-					Resource_.resourceId = Permission_.resourceId
-			WHERE 
-				(Resource_.companyId = ?) AND
-				(Resource_.name = ?) AND
-				(Resource_.primKey = ?) AND
-				(Resource_.scope = 'individual') AND
-				(Permission_.actionId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgPermission">
-		<![CDATA[
-			SELECT 
-				COUNT(DISTINCT Users_Orgs.userId) AS COUNT_VALUE
-			FROM 
-				Users_Orgs
-			INNER JOIN
-				User_ ON
-					User_.userId = Users_Orgs.userId
-			INNER JOIN
-				Contact_ ON
-					Contact_.contactId = Users_Orgs.userId
-			INNER JOIN
-				Group_ ON
-					(Group_.classPK = Users_Orgs.organizationId) AND
-					(Group_.className = 'com.liferay.portal.model.Organization')
-			INNER JOIN
-				Groups_Permissions ON
-					Groups_Permissions.groupId = Group_.groupId
-			INNER JOIN
-				Permission_ ON 
-					Permission_.permissionId = Groups_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
@@ -222,11 +163,31 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgRole">
+	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgGroupPermissions">
 		<![CDATA[
-			SELECT 
+			SELECT
+				COUNT(OrgGroupPermission.permissionId) AS COUNT_VALUE
+			FROM
+				OrgGroupPermission
+			INNER JOIN
+				Permission_	ON
+					Permission_.permissionId = OrgGroupPermission.permissionId
+			INNER JOIN
+				Resource_ ON
+					Resource_.resourceId = Permission_.resourceId
+			WHERE
+				(Resource_.companyId = ?) AND
+				(Resource_.name = ?) AND
+				(Resource_.primKey = ?) AND
+				(Resource_.scope = 'individual') AND
+				(Permission_.actionId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgPermission">
+		<![CDATA[
+			SELECT
 				COUNT(DISTINCT Users_Orgs.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Orgs
 			INNER JOIN
 				User_ ON
@@ -236,8 +197,46 @@
 					Contact_.contactId = Users_Orgs.userId
 			INNER JOIN
 				Group_ ON
-					(Group_.classPK = Users_Orgs.organizationId) AND
-					(Group_.className = 'com.liferay.portal.model.Organization')
+					Group_.classPK = Users_Orgs.organizationId
+			INNER JOIN
+				Groups_Permissions ON
+					Groups_Permissions.groupId = Group_.groupId
+			INNER JOIN
+				Permission_ ON
+					Permission_.permissionId = Groups_Permissions.permissionId
+			INNER JOIN
+				Resource_ ON
+					Resource_.resourceId = Permission_.resourceId
+			WHERE
+				(Resource_.companyId = ?) AND
+				(Resource_.name = ?) AND
+				(Resource_.primKey = ?) AND
+				(Resource_.scope = 'individual') AND
+				(Permission_.actionId = ?) AND
+				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(
+					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByOrgRole">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT Users_Orgs.userId) AS COUNT_VALUE
+			FROM
+				Users_Orgs
+			INNER JOIN
+				User_ ON
+					User_.userId = Users_Orgs.userId
+			INNER JOIN
+				Contact_ ON
+					Contact_.contactId = Users_Orgs.userId
+			INNER JOIN
+				Group_ ON
+					Group_.classPK = Users_Orgs.organizationId
 			INNER JOIN
 				Groups_Roles ON
 					Groups_Roles.groupId = Group_.groupId
@@ -248,12 +247,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
@@ -268,6 +267,7 @@
 					)
 				) AND
 				(Permission_.actionId = ?) AND
+				(Group_.className = 'com.liferay.portal.model.Organization') AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -278,9 +278,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByUserPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Permissions.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Permissions
 			INNER JOIN
 				User_ ON
@@ -289,12 +289,12 @@
 				Contact_ ON
 					Contact_.contactId = Users_Permissions.userId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Users_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(Resource_.primKey = ?) AND
@@ -310,9 +310,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.countByUserRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				COUNT(DISTINCT Users_Roles.userId) AS COUNT_VALUE
-			FROM 
+			FROM
 				Users_Roles
 			INNER JOIN
 				User_ ON
@@ -327,12 +327,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
@@ -357,9 +357,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByAdminRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Roles.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Roles
 			INNER JOIN
 				User_ ON
@@ -370,7 +370,7 @@
 			INNER JOIN
 				Role_ ON
 					Role_.roleId = Users_Roles.roleId
-			WHERE 
+			WHERE
 				(User_.companyId = ?) AND
 				(Role_.name = 'Administrator') AND
 				(
@@ -383,9 +383,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByGroupPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Groups.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Groups
 			INNER JOIN
 				User_ ON
@@ -400,12 +400,12 @@
 				Groups_Permissions ON
 					Groups_Permissions.groupId = Group_.groupId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Groups_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(Resource_.primKey = ?) AND
@@ -421,9 +421,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByGroupRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Groups.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Groups
 			INNER JOIN
 				User_ ON
@@ -444,12 +444,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
@@ -474,9 +474,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByOrgGroupPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Orgs.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Orgs
 			INNER JOIN
 				User_ ON
@@ -484,7 +484,7 @@
 			INNER JOIN
 				Contact_ ON
 					Contact_.contactId = Users_Orgs.userId
-			INNER JOIN 
+			INNER JOIN
 				Organization_ ON
 					Organization_.organizationId = Users_Orgs.organizationId
 			INNER JOIN
@@ -498,47 +498,8 @@
 					(OrgGroupPermission.organizationId = Organization_.organizationId) AND
 					(OrgGroupPermission.groupId = Group_.groupId)
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = OrgGroupPermission.permissionId
-			INNER JOIN
-				Resource_ ON
-					Resource_.resourceId = Permission_.resourceId
-			WHERE 
-				(Resource_.companyId = ?) AND
-				(Resource_.name = ?) AND
-				(Resource_.primKey = ?) AND
-				(Resource_.scope = 'individual') AND
-				(Permission_.actionId = ?) AND
-				(
-					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
-					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
-				)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByOrgPermission">
-		<![CDATA[
-			SELECT 
-				DISTINCT(Users_Orgs.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
-				Users_Orgs
-			INNER JOIN
-				User_ ON
-					User_.userId = Users_Orgs.userId
-			INNER JOIN
-				Contact_ ON
-					Contact_.contactId = Users_Orgs.userId
-			INNER JOIN
-				Group_ ON
-					(Group_.classPK = Users_Orgs.organizationId) AND
-					(Group_.className = 'com.liferay.portal.model.Organization')
-			INNER JOIN
-				Groups_Permissions ON
-					Groups_Permissions.groupId = Group_.groupId
-			INNER JOIN
-				Permission_ ON 
-					Permission_.permissionId = Groups_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
@@ -556,11 +517,11 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByOrgRole">
+	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByOrgPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Orgs.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Orgs
 			INNER JOIN
 				User_ ON
@@ -570,8 +531,46 @@
 					Contact_.contactId = Users_Orgs.userId
 			INNER JOIN
 				Group_ ON
-					(Group_.classPK = Users_Orgs.organizationId) AND
-					(Group_.className = 'com.liferay.portal.model.Organization')
+					Group_.classPK = Users_Orgs.organizationId
+			INNER JOIN
+				Groups_Permissions ON
+					Groups_Permissions.groupId = Group_.groupId
+			INNER JOIN
+				Permission_ ON
+					Permission_.permissionId = Groups_Permissions.permissionId
+			INNER JOIN
+				Resource_ ON
+					Resource_.resourceId = Permission_.resourceId
+			WHERE
+				(Resource_.companyId = ?) AND
+				(Resource_.name = ?) AND
+				(Resource_.primKey = ?) AND
+				(Resource_.scope = 'individual') AND
+				(Permission_.actionId = ?) AND
+				(Group_.className = 'com.liferay.portal.model.Organization') AND
+				(
+					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(Contact_.lastName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
+					(lower(User_.emailAddress) LIKE ? [$AND_OR_NULL_CHECK$])
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByOrgRole">
+		<![CDATA[
+			SELECT
+				DISTINCT(Users_Orgs.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
+			FROM
+				Users_Orgs
+			INNER JOIN
+				User_ ON
+					User_.userId = Users_Orgs.userId
+			INNER JOIN
+				Contact_ ON
+					Contact_.contactId = Users_Orgs.userId
+			INNER JOIN
+				Group_ ON
+					Group_.classPK = Users_Orgs.organizationId
 			INNER JOIN
 				Groups_Roles ON
 					Groups_Roles.groupId = Group_.groupId
@@ -582,12 +581,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
@@ -602,6 +601,7 @@
 					)
 				) AND
 				(Permission_.actionId = ?) AND
+				(Group_.className = 'com.liferay.portal.model.Organization') AND
 				(
 					(lower(Contact_.firstName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
 					(lower(Contact_.middleName) LIKE ? [$AND_OR_NULL_CHECK$]) [$AND_OR_CONNECTOR$]
@@ -612,9 +612,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByUserPermission">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Permissions.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Permissions
 			INNER JOIN
 				User_ ON
@@ -623,12 +623,12 @@
 				Contact_ ON
 					Contact_.contactId = Users_Permissions.userId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Users_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(Resource_.primKey = ?) AND
@@ -644,9 +644,9 @@
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionUserFinder.findByUserRole">
 		<![CDATA[
-			SELECT 
+			SELECT
 				DISTINCT(Users_Roles.userId) AS userId, (Contact_.firstName) AS firstName, (Contact_.middleName) AS middleName, (Contact_.lastName) AS lastName
-			FROM 
+			FROM
 				Users_Roles
 			INNER JOIN
 				User_ ON
@@ -661,12 +661,12 @@
 				Roles_Permissions ON
 					Roles_Permissions.roleId = Role_.roleId
 			INNER JOIN
-				Permission_ ON 
+				Permission_ ON
 					Permission_.permissionId = Roles_Permissions.permissionId
 			INNER JOIN
 				Resource_ ON
 					Resource_.resourceId = Permission_.resourceId
-			WHERE 
+			WHERE
 				(Resource_.companyId = ?) AND
 				(Resource_.name = ?) AND
 				(
