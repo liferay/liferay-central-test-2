@@ -69,6 +69,8 @@ public class PortalSessionListener implements HttpSessionListener {
 	public void sessionDestroyed(HttpSessionEvent event) {
 		HttpSession ses = event.getSession();
 
+		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+
 		MessagingUtil.closeXMPPConnection(ses);
 
 		PortalSessionContext.remove(ses.getId());
