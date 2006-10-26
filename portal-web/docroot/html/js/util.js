@@ -66,6 +66,18 @@ if (!Array.prototype.pop) {
 	Array.prototype.pop = array_pop;
 }
 
+function Array_iterate (func, options) {
+	if (typeof(func) == "function") {
+		for (var i = 0; i < this.length; i++) {
+			if (func(this[i], i, options)) {
+				break;
+			}
+		}
+	}
+}
+
+Array.prototype.foreach = Array_iterate;
+
 function addEventHandler(obj, type, func) {
 	if (type.indexOf("on") != 0) {
 		type = "on" + type;
@@ -178,22 +190,6 @@ function autoFill(fromBox, toBox) {
 		}
 	}
 }
-
-function blink() {
-	if (document.all) {
-		var blinkArray = document.all.tags("blink");
-
-		for (var i = 0; i < blinkArray.length; i++) {
-			blinkArray[i].style.visibility = blinkArray[i].style.visibility == "" ? "hidden" : "";
-		}
-	}
-}
-
-/*
-if (document.all) {
-	setInterval("blink()", 750);
-}
-*/
 
 function changeOpacity (object, opacity) {
 	opacity = (opacity >= 100) ? 99.999 : opacity;
@@ -849,6 +845,19 @@ function setBox(oldBox, newBox) {
 	oldBox.options[0].selected = true;
 }
 
+function setCursorPosition(oInput,oStart,oEnd) {
+   if( oInput.setSelectionRange ) {
+         oInput.setSelectionRange(oStart,oEnd);
+     } 
+     else if( oInput.createTextRange ) {
+        var range = oInput.createTextRange();
+        range.collapse(true);
+        range.moveEnd('character',oEnd);
+        range.moveStart('character',oStart);
+        range.select();
+     }
+}
+
 function setSelectedValue(col, value) {
 	for (var i = 0; i < col.length; i++) {
 		if ((col[i].value != "") && (col[i].value == value)) {
@@ -1072,6 +1081,21 @@ function trimString(str) {
 }
 
 String.prototype.trim = trimString;
+
+document.getElementsByClassName = function(className, parentElement) {
+	var children = ($(parentElement) || document.body).getElementsByTagName('*');
+	var elements = new Array();
+	
+	for (var i = 0; i < children.length; i++) {
+		var child = children[i];
+		if (child.className.match(new RegExp("(^|\\s)" + className + "(\\s|$)"))) {
+			elements.push(child);
+		}
+	}
+	
+	return elements;
+}
+
 
 var ZINDEX = {
 	ALERT: 100

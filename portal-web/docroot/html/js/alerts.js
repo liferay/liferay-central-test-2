@@ -3,6 +3,7 @@ var Alerts = {
 	background: null,
 	message: null,
 	messageArray: new Array(),
+	fadeTimer: 0,
 
 	createWrapper: function(message, title) {
 		var outer = document.createElement("div");

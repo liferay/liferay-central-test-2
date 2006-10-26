@@ -33,15 +33,17 @@ var Drag = {
 		group.minY = null;
 		group.maxX = null;
 		group.maxY = null;
-		group.threshold = 0;
-		group.thresholdY = 0;
-		group.thresholdX = 0;
+		group.threshold = 1;
+		group.thresholdY = 1;
+		group.thresholdX = 1;
+		group.disableDrag = false;
 
 		group.onDragStart = new Function();
 		group.onDragEnd = new Function();
 		group.onDrag = new Function();
 		
 		// TODO: use element.prototype.myFunc
+		group.setAutoCorrect = function () { this.autoCorrect = true };
 		group.setDragHandle = Drag.setDragHandle;
 		group.setDragThreshold = Drag.setDragThreshold;
 		group.setDragThresholdX = Drag.setDragThresholdX;
@@ -107,6 +109,11 @@ var Drag = {
 		Drag.group = this.group;
 
 		var group = this.group;
+		
+		if (group.disableDrag) {
+			return;
+		}
+		
 		var mouse = mousePos;
 		var nwPosition = Coordinates.northwestPosition(group);
 		var nwOffset = Coordinates.northwestOffset(group, true);
@@ -237,16 +244,23 @@ var Drag = {
 		// correct the error here
 		//
 		// changed to be recursive/use absolute offset for corrections
-		var offsetBefore = Coordinates.northwestOffset(group, true);
-		group.onDrag(nwPosition, sePosition, nwOffset, seOffset);
-		var offsetAfter = Coordinates.northwestOffset(group, true);
 
-		if (!offsetBefore.equals(offsetAfter)) {
-			// Position of the group has changed after the onDrag call.
-			// Move element to the current mouse position
-			var errorDelta = offsetBefore.minus(offsetAfter);
-			nwPosition = Coordinates.northwestPosition(group).plus(errorDelta);
+		if (group.autoCorrect) {
+			var offsetBefore = Coordinates.northwestOffset(group, true);
+			group.onDrag(nwPosition, sePosition, nwOffset, seOffset);
+			var offsetAfter = Coordinates.northwestOffset(group, true);
+
+			if (!offsetBefore.equals(offsetAfter)) {
+				// Position of the group has changed after the onDrag call.
+				// Move element to the current mouse position
+				var errorDelta = offsetBefore.minus(offsetAfter);
+				nwPosition = Coordinates.northwestPosition(group).plus(errorDelta);
+				nwPosition.reposition(group);
+			}
+		}
+		else {
 			nwPosition.reposition(group);
+			group.onDrag(nwPosition, sePosition, nwOffset, seOffset);
 		}
 
 		return false;

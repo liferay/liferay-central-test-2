@@ -119,6 +119,13 @@ Coordinate.prototype.inside = function(northwest, southeast) {
 	}
 }
 
+Coordinate.prototype.insideObject = function(obj, recurse) {
+	var nwOffset = Coordinates.northwestOffset(obj, recurse);
+	var seOffset = nwOffset.plus(new Coordinate(obj.offsetWidth, obj.offsetHeight));
+	
+	return this.inside(nwOffset, seOffset);
+}
+
 // getMousePos(event) has been depricated.  Use mousePos.update(event) instead.
 function getMousePos(event) {
     mousePos.update(event);

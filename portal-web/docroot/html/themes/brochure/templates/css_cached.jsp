@@ -357,10 +357,7 @@ FONT.bg {
 	right: 20px;
 	top: 45px;
 	z-index: 3;
-	width: 50%;
 }
-
-#layout-my-places form { text-align: right; }
 
 #layout-my-places ul {
 	background-color: <%= colorScheme.getLayoutBg() %>;
@@ -803,3 +800,8 @@ FONT.bg {
 TR.even { background-color: <%= colorScheme.getPortletMenuBg() %>; color: #000000; }
 
 TR.odd { background-color: <%= colorScheme.getPortletBg() %>; color: #000000; }
+
+.message-board-thread-body A {
+    text-decoration: underline;
+}
+

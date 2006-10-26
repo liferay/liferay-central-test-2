@@ -195,3 +195,16 @@ function minimizePortlet(plid, portletId, restore) {
 function movePortlet(plid, portletId, columnId, columnPos) {
 	loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=" + columnId + "&p_p_col_pos=" + columnPos + "&<%= Constants.CMD %>=move");
 }
+
+function showPageSettings() {
+	Alerts.popupIframe("<%= themeDisplay.getURLPageSettings().toString() %>",
+		{
+			height: 400,
+			width: 700,
+			modal: true,
+			title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
+			onClose: function() {
+					window.location.reload(false);
+				}
+		});
+}

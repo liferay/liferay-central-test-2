@@ -58,9 +58,7 @@
 							</c:if>
 
 							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-								-
-
-								<a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
+								- <a href="<%= themeDisplay.getURLPageSettings().toString() %>"><bean:message key="page-settings" /></a>
 							</c:if>
 						</c:if>
 					</div>

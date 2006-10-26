@@ -354,8 +354,7 @@ FONT.bg {
 
 #layout-my-places {
 	position: relative;
-	right: 0;
-	width: 200px;
+	text-align: right;
 }
 
 #layout-my-places ul {
@@ -378,26 +377,26 @@ FONT.bg {
 	right: 5px;
 }
 
-#layout-nav-more-menu {
-	background-color: <%= colorScheme.getLayoutBg() %>;
-	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	position: absolute;
-	text-align: left;
-	left: 0px;
-	top: 26px;
-	margin: 0;
-	width: 80px;
-}
-
 #layout-nav-more-menu li {
 	padding: 2px 2px 2px 5px;
 }
 
 #layout-nav-container {
-	background: <%= colorScheme.getLayoutBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_menu_bg_gradient.gif) scroll repeat-x bottom left;
-	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	position: relative;
 	z-index: 2;
+}
+
+#layout-nav-divider {
+	clear: both;
+	font-size: 0;
+	height: 5px;
+	margin-bottom: 10px;
+}
+
+.layout-nav-divider {
+	background-color: <%= colorScheme.getLayoutTabBg() %>;
+}
+.layout-nav-selected  {
+	background-color: <%= colorScheme.getPortletMenuBg() %>;
 }
 
 .layout-nav-tabs-box {
@@ -405,32 +404,42 @@ FONT.bg {
 	position: relative;
 }
 
-.layout-tab, .layout-tab-selected {
-	border-right: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	color: <%= colorScheme.getLayoutTabText() %>;
+.layout-tab, #layout-tab-add {
+	background-color: <%= colorScheme.getLayoutTabBg() %>;
 	float: left;
+	font-weight: bold;
 	height: 27px;
+	margin-right: 1px;
+	margin-top: 1px;
 	position: relative;
-	width: 80px;
+	text-align: right;
 }
 
-.layout-tab-selected {
+.layout-tab a {
+	color: <%= colorScheme.getLayoutTabText() %>;
+}
+
+#layout-tab-add, #layout-tab-add a {
+	background-color: #f0f0f0;
+	color: <%= colorScheme.getLayoutTabText() %>;
+	font-weight: normal;
+}
+
+#layout-tab-selected, #layout-tab-selected a {
 	background: <%= colorScheme.getLayoutTabSelectedBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_gradient.gif) scroll repeat-x center;
 	color: <%= colorScheme.getLayoutTabSelectedText() %>;
 }
-
-.layout-tab span, .layout-tab-selected span {
-	position: relative;
-	top: 5px;
+.layout-tab-text {
+	padding: 6px 20px 0 20px;
 }
 
-.layout-tab-separator {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_y.gif) repeat-y;
-	font-size: 0;
-	float: left;
-	height: 15px;
-	margin-top: 5px;
-	width: 1px;
+.layout-tab-text * {
+	white-space: nowrap;
+}
+
+.layout-tab-edit {
+	border: 1px solid #606060;
+	margin: 5px 0 0 0;
 }
 
 #layout-content-outer-decoration {

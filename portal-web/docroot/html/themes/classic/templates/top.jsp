@@ -47,7 +47,7 @@
 								</c:if>
 
 								<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-									- <a href="javascript: Alerts.popupIframe('<%= themeDisplay.getURLPageSettings().toString() %>', {height:400,width:700,modal:true,title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>'})"><bean:message key="page-settings" /></a>
+									- <a href="javascript: showPageSettings()"><bean:message key="page-settings" /></a>
 								</c:if>
 
 								<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
@@ -59,3 +59,6 @@
 					</div>
 				</div>
 			</div>
+		<div id="layout-global-search">
+			<liferay-ui:journal-content-search />
+		</div>
