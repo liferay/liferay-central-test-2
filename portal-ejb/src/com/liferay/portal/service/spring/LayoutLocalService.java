@@ -98,6 +98,12 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portal.model.Layout updateLayoutTitle(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String title, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)

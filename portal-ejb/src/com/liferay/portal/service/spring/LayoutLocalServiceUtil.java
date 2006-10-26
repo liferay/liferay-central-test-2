@@ -154,6 +154,17 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.updateLayout(layoutId, ownerId, typeSettings);
 	}
 
+	public static com.liferay.portal.model.Layout updateLayoutTitle(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String title, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateLayoutTitle(layoutId, ownerId, title,
+			languageId);
+	}
+
 	public static com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)

@@ -706,6 +706,20 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		return layout;
 	}
 
+	public Layout updateLayoutTitle(
+			String layoutId, String ownerId, String title, String languageId)
+		throws PortalException, SystemException {
+
+		Layout layout = LayoutUtil.findByPrimaryKey(
+			new LayoutPK(layoutId, ownerId));
+
+		layout.setName(title, LocaleUtil.fromLanguageId(languageId));
+
+		LayoutUtil.update(layout);
+
+		return layout;
+	}
+
 	public Layout updateLookAndFeel(
 			String layoutId, String ownerId, String themeId,
 			String colorSchemeId)

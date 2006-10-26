@@ -757,13 +757,7 @@
 
 	<!-- My Places -->
 
-	<definition name="portlet.my_places" extends="portlet">
-		<put name="portlet_decorate" value="false" />
-	</definition>
-
-	<definition name="portlet.my_places.view" extends="portlet.my_places">
-		<put name="portlet_content" value="/portlet/my_places/view.jsp" />
-	</definition>
+	<definition name="portlet.my_places.view" path="/portlet/my_places/view.jsp" />
 
 	<!-- Navigation -->
 

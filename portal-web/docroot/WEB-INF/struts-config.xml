@@ -738,6 +738,8 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/layout_management/update_page" type="com.liferay.portlet.communities.action.UpdatePageAction" />
+
 		<action path="/layout_management/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction" />
 
 		<!-- Location Admin -->
