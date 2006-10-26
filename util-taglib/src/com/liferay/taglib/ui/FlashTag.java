@@ -210,7 +210,7 @@ public class FlashTag extends IncludeTag {
 
 	public void setVersion(String version) {
 		if (Validator.isNotNull(version)) {
-			_width = version;
+			_version = version;
 		}
 	}
 
