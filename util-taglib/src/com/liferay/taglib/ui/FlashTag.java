@@ -45,26 +45,26 @@ public class FlashTag extends IncludeTag {
 
 	public static void doTag(
 			String align, String allowScriptAccess, String base, String bgcolor,
-			String devicefont, String flashvars, String height, String loop,
-			String menu, String movie, String play, String quality,
-			String salign, String scale, String swliveconnect, String width,
-			String wmode, ServletContext ctx, HttpServletRequest req,
+			String devicefont, String flashvars, String height, String id,
+			String loop, String menu, String movie, String play, String quality,
+			String salign, String scale, String swliveconnect, String version,
+			String width, String wmode, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res)
 		throws IOException, ServletException {
 
 		doTag(
 			_PAGE, align, allowScriptAccess, base, bgcolor, devicefont,
-			flashvars, height, loop, menu, movie, play, quality, salign, scale,
-			swliveconnect, width, wmode, ctx, req, res);
+			flashvars, height, id, loop, menu, movie, play, quality, salign,
+			scale, swliveconnect, version, width, wmode, ctx, req, res);
 	}
 
 	public static void doTag(
 			String page, String align, String allowScriptAccess, String base,
 			String bgcolor, String devicefont, String flashvars, String height,
-			String loop, String menu, String movie, String play, String quality,
-			String salign, String scale, String swliveconnect, String width,
-			String wmode, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String id, String loop, String menu, String movie, String play,
+			String quality, String salign, String scale, String swliveconnect,
+			String version, String width, String wmode, ServletContext ctx,
+			HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
 		req.setAttribute("liferay-ui:flash:align", align);
@@ -75,6 +75,7 @@ public class FlashTag extends IncludeTag {
 		req.setAttribute("liferay-ui:flash:devicefont", devicefont);
 		req.setAttribute("liferay-ui:flash:flashvars", flashvars);
 		req.setAttribute("liferay-ui:flash:height", height);
+		req.setAttribute("liferay-ui:flash:id", id);
 		req.setAttribute("liferay-ui:flash:loop", loop);
 		req.setAttribute("liferay-ui:flash:menu", menu);
 		req.setAttribute("liferay-ui:flash:movie", movie);
@@ -83,6 +84,7 @@ public class FlashTag extends IncludeTag {
 		req.setAttribute("liferay-ui:flash:salign", salign);
 		req.setAttribute("liferay-ui:flash:scale", scale);
 		req.setAttribute("liferay-ui:flash:swliveconnect", swliveconnect);
+		req.setAttribute("liferay-ui:flash:version", version);
 		req.setAttribute("liferay-ui:flash:width", width);
 		req.setAttribute("liferay-ui:flash:wmode", wmode);
 
@@ -99,8 +101,9 @@ public class FlashTag extends IncludeTag {
 
 			doTag(
 				_align, _allowScriptAccess, _base, _bgcolor, _devicefont,
-				_flashvars, _height, _loop, _menu, _movie, _play, _quality,
-				_salign, _scale, _swliveconnect, _width, _wmode, ctx, req, res);
+				_flashvars, _height, _id, _loop, _menu, _movie, _play, _quality,
+				_salign, _scale, _swliveconnect, _version, _width, _wmode, ctx,
+				req, res);
 
 			pageContext.getOut().print(res.getString());
 
@@ -153,6 +156,12 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
+	public void setId(String id) {
+		if (Validator.isNotNull(id)) {
+			_id = id;
+		}
+	}
+
 	public void setLoop(String loop) {
 		if (Validator.isNotNull(loop)) {
 			_loop = loop;
@@ -199,6 +208,12 @@ public class FlashTag extends IncludeTag {
 		}
 	}
 
+	public void setVersion(String version) {
+		if (Validator.isNotNull(version)) {
+			_width = version;
+		}
+	}
+
 	public void setWidth(String width) {
 		if (Validator.isNotNull(width)) {
 			_width = width;
@@ -224,6 +239,7 @@ public class FlashTag extends IncludeTag {
 	private String _devicefont = "true";
 	private String _flashvars = "";
 	private String _height = "500";
+	private String _id = "";
 	private String _loop = "true";
 	private String _menu = "false";
 	private String _movie = "";
@@ -232,6 +248,7 @@ public class FlashTag extends IncludeTag {
 	private String _salign = "";
 	private String _scale = "showall";
 	private String _swliveconnect = "false";
+	private String _version = "7";
 	private String _width = "100%";
 	private String _wmode = "opaque";
 
