@@ -21,18 +21,3 @@
  * SOFTWARE.
  */
 %>
-
-function displayMenu(elem1) {
-	if (document.getElementById) {
-		var item;
-
-		if (item = document.getElementById(elem1)) {
-			if (item.style.display == 'block') {
-				hidePopUp(elem1)
-			}
-			else {
-				showPopUp(elem1);
-			}
-		}
-	}
-}
