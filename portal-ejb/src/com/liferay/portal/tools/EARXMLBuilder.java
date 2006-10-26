@@ -207,11 +207,8 @@ public class EARXMLBuilder {
 		String contextRoot = path.substring(2, path.length() - 4);
 		String filePath = path + "/docroot/WEB-INF/web.xml";
 
-		if (path.endsWith("-complete")) {
+		if (path.endsWith("portal-web")) {
 			contextRoot = "/";
-			filePath =
-				path.substring(0, path.length() - 9) +
-				"/docroot/WEB-INF/web.xml";
 		}
 
 		StringBuffer sb = new StringBuffer();

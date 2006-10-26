@@ -8113,7 +8113,7 @@
 		<module-name>laszlo-web.war</module-name>
 	</web-module>
 	<web-module>
-		<name>/portal</name>
+		<name>/</name>
 		<module-name>portal-web.war</module-name>
 		<ejb-local-ref>
 			<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
