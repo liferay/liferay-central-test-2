@@ -114,9 +114,18 @@
 	}
 	%>
 
-	<a href="javascript: toggleById('layout-my-places-menu');"><%= LanguageUtil.get(pageContext, "my-places") %></a> &raquo; <%= selectedTitle %>
+	<table border="0" cellspacing="0" cellpadding="0" onclick="MyPlaces.show()">
+	<tr>
+		<td class="layout-my-places">
+			<%= selectedTitle %>
+		</td>
+		<td class="layout-my-places-arrow">
+			<img style="vertical-align: middle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.gif" />
+		</td>
+	</tr>
+	</table>
 	
-	<ul id="layout-my-places-menu" style="display: none;">
+	<ul id="layout-my-places-menu" style="display: none">
 		<%
 		for (int i = 0; i < links.size(); i++) {
 			%>
@@ -127,5 +136,25 @@
 		}
 		%>
 	</ul>
+	
+	<script type="text/javascript">
+	var MyPlaces = {
+		showing: false,
+		
+		show: function() {
+			if (!MyPlaces.showing) {
+				$("layout-my-places-menu").style.display = "";
+				setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
+				MyPlaces.showing = true;
+			}
+		},
+		
+		hide: function() {
+			$("layout-my-places-menu").style.display = "none";
+			MyPlaces.showing = false;
+			document.onclick = function() {};
+		}
+	}
+	</script>
 	
 </c:if>

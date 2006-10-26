@@ -25,13 +25,17 @@
 <div id="layout-outer-side-decoration">
 	<div id="layout-inner-side-decoration">
 		<div id="layout-box">
-			<div id="layout-top-banner">
-				<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
+			<table border="0" cellspacing="0" cellpadding="0" width="100%" id="layout-top-banner">
+			<tr>
+				<td valign="top" width="100%">
+					<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
+				</td>
+				<td id="layout-global-search" valign="top" align="right">
+					<liferay-ui:journal-content-search />
+				</td>
+				<td valign="top" align="right">
+					<span style="font-weight: bold;"><%= user.getGreeting() %></span><br />
 
-				<div id="layout-user-menu" style="text-align: right;">
-					<span style="font-weight: bold;"><%= user.getGreeting() %></span>
-
-					<div class="font-small" style="margin-top: 5px;">
 						<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -
 
 						<c:choose>
@@ -50,15 +54,15 @@
 									- <a href="javascript: showPageSettings()"><bean:message key="page-settings" /></a>
 								</c:if>
 
-								<div id="layout-my-places"><liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" /></div>
+								<div id="layout-my-places">
+									<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
+									<div style="clear: both; font-size: 0"></div>
+								</div>
 							</c:when>
 							<c:otherwise>
 								<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
 							</c:otherwise>
 						</c:choose>
-					</div>
-				</div>
-			</div>
-		<div id="layout-global-search">
-			<liferay-ui:journal-content-search />
-		</div>
+				</td>
+			</tr>
+			</table>

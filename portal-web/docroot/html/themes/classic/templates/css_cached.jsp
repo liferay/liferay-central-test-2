@@ -339,42 +339,53 @@ FONT.bg {
 	z-index: 3;
 }
 
+#layout-top-banner * {
+	white-space: nowrap;
+}
 
 #layout-user-menu {
-	position: absolute;
-	text-align: right;
-	top: 0px;
-	right: 0px;
-}
-
-#layout-user-menu form {
-	margin-top: 5px;
-	text-align: right;
-}
-
-#layout-my-places {
 	position: relative;
 	text-align: right;
 }
 
+.layout-my-places {
+	border: 1px solid #CCCCCC;
+	padding: 2px;
+}
+
+.layout-my-places-arrow {
+	background-color: #CCCCCC;
+	padding: 2px;
+}
+
+#layout-my-places {
+	cursor: default;
+	padding-top: 2px;
+	position: relative;
+	text-align: right;
+}
+
+#layout-my-places table {
+	float: right;
+}
+
 #layout-my-places ul {
 	background-color: <%= colorScheme.getLayoutBg() %>;
-	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
+	border: 1px solid <%= colorScheme.getLayoutText() %>;
 	position: absolute;
 	text-align: left;
 	right: 0;
-	top: 0;
+	top: 20px;
 	margin: 0;
 }
 
 #layout-my-places ul li {
 	padding: 2px;
+	white-space: nowrap;
 }
 
 #layout-global-search {
-	position: absolute;
-	top: 5px;
-	right: 5px;
+	padding-right: 10px;
 }
 
 #layout-nav-more-menu li {
