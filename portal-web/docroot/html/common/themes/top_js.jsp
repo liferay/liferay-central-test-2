@@ -67,7 +67,6 @@
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/coordinates.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/drag.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdropzone.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdrop.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/resize.js" type="text/javascript"></script>
 
