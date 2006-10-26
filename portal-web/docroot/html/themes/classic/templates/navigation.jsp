@@ -36,6 +36,7 @@
 	String ancestorLayoutId = "";
 	List layoutIds = new ArrayList();
 	List hiddenIds = new ArrayList();
+	boolean newPage = ParamUtil.getBoolean(request, "newPage");
 	
 	if (layout != null) {
 		ancestorLayoutId = layout.getAncestorLayoutId();
@@ -72,7 +73,7 @@
 			if (isSelectedTab) {
 				%>
 				<div id="layout-tab-selected" class="layout-tab">
-					<div class="layout-tab-text"><span class="layout-tab-text-edit" style="cursor: text"><%= tabName %></span></div>
+					<div class="layout-tab-text"><span id="layout-tab-text-edit" style="cursor: text"><%= tabName %></span></div>
 				</div>
 				<%
 			}
@@ -115,22 +116,25 @@ function enterPressed(event) {
 
 var LayoutTab = {
 	editing: null,
+	newPage: <%= newPage %>,
+	
 	layoutIds: [<%
-	for (int i = 0; i < layoutIds.size(); i++) {
-		out.print((String)(layoutIds.get(i)));
-		if (i < layoutIds.size() - 1) {
-			out.print(",");
+		for (int i = 0; i < layoutIds.size(); i++) {
+			out.print((String)(layoutIds.get(i)));
+			if (i < layoutIds.size() - 1) {
+				out.print(",");
+			}
 		}
-	}
-	%>],
+		%>],
+	
 	hiddenIds: [<%
-	for (int i = 0; i < hiddenIds.size(); i++) {
-		out.print((String)(hiddenIds.get(i)));
-		if (i < hiddenIds.size() - 1) {
-			out.print(",");
+		for (int i = 0; i < hiddenIds.size(); i++) {
+			out.print((String)(hiddenIds.get(i)));
+			if (i < hiddenIds.size() - 1) {
+				out.print(",");
+			}
 		}
-	}
-	%>],
+		%>],
 	
 	add: function() {
 		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
@@ -142,14 +146,14 @@ var LayoutTab = {
 		Ajax.request(url, {
 				onComplete: function(xmlHttpReq) {
 					var jo = createJSONObject(xmlHttpReq.responseText);
-					window.location = jo.url;
+					window.location = jo.url + "&newPage=1";
 				}
 			});
 	},
 	
 	deletePage: function() {
 		var tab = document.getElementById("layout-tab-selected")
-		var tabText = document.getElementsByClassName("layout-tab-text-edit", tab)[0].innerHTML;
+		var tabText = $("layout-tab-text-edit").innerHTML;
 		
 		if (confirm("<bean:message key="remove" /> \"" + tabText + "\"?")) {
 			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=delete" +
@@ -164,10 +168,12 @@ var LayoutTab = {
 		}
 	},
 	
-	edit: function(obj) {
+	edit: function() {
+		var tabText = $("layout-tab-text-edit");
+
 		if (!LayoutTab.editing) {
 			var input = document.createElement("input");
-			var textDiv = obj.parentNode;
+			var textDiv = tabText.parentNode;
 			var tab = textDiv.parentNode;
 			var spans = tab.getElementsByTagName("span");
 			var width = 20;
@@ -183,8 +189,9 @@ var LayoutTab = {
 			
 			input.className = "layout-tab-edit";
 			input.width = width;
-			input.style.width = width + "px";
-			input.value = obj.innerHTML;
+			input.style.width = (width - 2) + "px";
+			input.style.marginRight = "2px";
+			input.value = tabText.innerHTML;
 			input.onmouseover = function() {
 				document.onclick = function() {};
 			}
@@ -207,7 +214,7 @@ var LayoutTab = {
 			tab.appendChild(input);
 			input.focus();
 			
-			LayoutTab.editing = obj;
+			LayoutTab.editing = tabText;
 		}
 	},
 	
@@ -324,9 +331,10 @@ var LayoutTab = {
 		}
 		else {
 			// Not dragged.  Treat as click.
-			tabText = document.getElementsByClassName("layout-tab-text-edit")[0];
+			var tabText = $("layout-tab-text-edit");
+			
 			if (mousePos.inside(Coordinates.northwestOffset(tabText,true), Coordinates.southeastOffset(tabText,true))) {
-				LayoutTab.edit(tabText);
+				LayoutTab.edit();
 			}
 		}
 		
@@ -336,6 +344,7 @@ var LayoutTab = {
 	init: function() {
 		var nav = $("layout-nav-container");
 		var selectedTab = document.getElementById("layout-tab-selected");
+		var tabText = $("layout-tab-text-edit");
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		
 		Drag.makeDraggable(selectedTab);
@@ -348,6 +357,17 @@ var LayoutTab = {
 		tabs.foreach(function(item, index) {
 			item.layoutId = LayoutTab.layoutIds[index];
 		});
+		
+		tabText.onmouseover = function() {
+			this.style.backgroundColor = "#FFFFFF";
+		};
+		tabText.onmouseout = function() {
+			this.style.backgroundColor = "transparent";
+		};
+		
+		if (LayoutTab.newPage) {
+			LayoutTab.edit();
+		}
 	}
 }
 
