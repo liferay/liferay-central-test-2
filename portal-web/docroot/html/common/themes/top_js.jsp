@@ -55,13 +55,12 @@
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/menu.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/rollovers.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/util.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/validation.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portal.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/ajax.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/alerts.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/tabs.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/swfobject.js" type="text/javascript"></script>
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/calendar/calendar_stripped.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/calendar/calendar-setup_stripped.js" type="text/javascript"></script>
@@ -70,6 +69,7 @@
 
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/coordinates.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/drag.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdropzone.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/dragdrop.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/dragdrop/resize.js" type="text/javascript"></script>
 
@@ -85,6 +85,21 @@
 <script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
 
 <script type="text/javascript">
+	<c:if test="<%= themeDisplay.isSignedIn() %>">
+		function showPageSettings() {
+			Alerts.popupIframe("<%= themeDisplay.getURLPageSettings().toString() %>",
+				{
+					height: 400,
+					width: 700,
+					modal: true,
+					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
+					onClose: function() {
+							window.location.reload(false);
+						}
+				});
+		}
+	</c:if>
+	
 	<%@ include file="/html/js/log/log.jsp" %>
 
 	<liferay-theme:include page="javascript.jsp" />
