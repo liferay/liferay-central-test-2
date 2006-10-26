@@ -54,7 +54,6 @@
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/menu.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/util.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portal.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/ajax.js" type="text/javascript"></script>

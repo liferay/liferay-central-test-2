@@ -1,11 +1,5 @@
 
-var agent=navigator.userAgent.toLowerCase();var is_ie=(agent.indexOf("msie")!=-1);var is_ie_4=(is_ie&&(agent.indexOf("msie 4")!=-1));var is_ie_5=(is_ie&&(agent.indexOf("msie 5.0")!=-1));var is_ie_5_up=(is_ie&&!is_ie_4);var is_ie_5_5=(is_ie&&(agent.indexOf("msie 5.5")!=-1));var is_ie_5_5_up=(is_ie&&!is_ie_4&&!is_ie_5);var is_mozilla=((agent.indexOf("mozilla")!=-1)&&(agent.indexOf("spoofer")==-1)&&(agent.indexOf("compatible")==-1)&&(agent.indexOf("opera")==-1)&&(agent.indexOf("webtv")==-1)&&(agent.indexOf("hotjava")==-1));var is_mozilla_1_3_up=(is_mozilla&&(navigator.productSub>20030210));var is_ns_4=(!is_ie&&(agent.indexOf("mozilla/4.")!=-1));var is_rtf=(is_ie_5_5_up||is_mozilla_1_3_up);var is_safari=(agent.indexOf("safari")!=-1);var previousMenuId=null;function fixPopUp(id){var popUpEl=document.getElementById(id);var bodyEl=document.getElementsByTagName("BODY")[0];popUpEl.parentNode.removeChild(popUpEl);bodyEl.insertBefore(popUpEl,bodyEl.childNodes[0]);}
-function hidePopUp(id){var el=document.getElementById(id);el.style.display="none";}
-function showPopUp(id){var previousEl=document.getElementById(previousMenuId);if(previousEl!=null){hidePopUp(previousMenuId);}
-previousMenuId=id;var el=document.getElementById(id);if(is_mozilla){el.style.left=mousePos.x;el.style.top=mousePos.y;}
-else{el.style.pixelLeft=mousePos.x;el.style.pixelTop=mousePos.y;}
-el.style.display="block";}
-var submitCountdown=0;function $(id){var item=null;if(typeof(id)=="string"){item=document.getElementById(id);}
+var agent=navigator.userAgent.toLowerCase();var is_ie=(agent.indexOf("msie")!=-1);var is_ie_4=(is_ie&&(agent.indexOf("msie 4")!=-1));var is_ie_5=(is_ie&&(agent.indexOf("msie 5.0")!=-1));var is_ie_5_up=(is_ie&&!is_ie_4);var is_ie_5_5=(is_ie&&(agent.indexOf("msie 5.5")!=-1));var is_ie_5_5_up=(is_ie&&!is_ie_4&&!is_ie_5);var is_mozilla=((agent.indexOf("mozilla")!=-1)&&(agent.indexOf("spoofer")==-1)&&(agent.indexOf("compatible")==-1)&&(agent.indexOf("opera")==-1)&&(agent.indexOf("webtv")==-1)&&(agent.indexOf("hotjava")==-1));var is_mozilla_1_3_up=(is_mozilla&&(navigator.productSub>20030210));var is_ns_4=(!is_ie&&(agent.indexOf("mozilla/4.")!=-1));var is_rtf=(is_ie_5_5_up||is_mozilla_1_3_up);var is_safari=(agent.indexOf("safari")!=-1);var submitCountdown=0;function $(id){var item=null;if(typeof(id)=="string"){item=document.getElementById(id);}
 else if(typeof(id)=="object"){item=id;}
 return item;}
 function addItem(box,text,value,sort){box[box.length]=new Option(text,value);if(sort==true){sortBox(box);}}
