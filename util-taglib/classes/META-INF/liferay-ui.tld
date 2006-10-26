@@ -237,6 +237,11 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
+			<name>id</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
 			<name>loop</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
@@ -276,6 +281,11 @@
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>		
+		<attribute>
+			<name>version</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 		<attribute>
 			<name>width</name>
 			<required>false</required>

@@ -32,6 +32,7 @@ String bgcolor = (String)request.getAttribute("liferay-ui:flash:bgcolor");
 String devicefont = (String)request.getAttribute("liferay-ui:flash:devicefont");
 String flashvars = (String)request.getAttribute("liferay-ui:flash:flashvars");
 String height = (String)request.getAttribute("liferay-ui:flash:height");
+String id = (String)request.getAttribute("liferay-ui:flash:id");
 String loop = (String)request.getAttribute("liferay-ui:flash:loop");
 String menu = (String)request.getAttribute("liferay-ui:flash:menu");
 String movie = (String)request.getAttribute("liferay-ui:flash:movie");
@@ -40,45 +41,26 @@ String quality = (String)request.getAttribute("liferay-ui:flash:quality");
 String salign = (String)request.getAttribute("liferay-ui:flash:salign");
 String scale = (String)request.getAttribute("liferay-ui:flash:scale");
 String swliveconnect = (String)request.getAttribute("liferay-ui:flash:swliveconnect");
+String version = (String)request.getAttribute("liferay-ui:flash:version");
 String width = (String)request.getAttribute("liferay-ui:flash:width");
 String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 %>
 
-<object align="<%= align %>" classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=7,0,0,0" height="<%= height %>" width="<%= width %>">
-	<param name="allowScriptAccess" value="<%= allowScriptAccess %>" />
-	<param name="base" value="<%= base %>" />
-	<param name="bgcolor" value="<%= bgcolor %>" />
-	<param name="devicefont" value="<%= devicefont %>" />
-	<param name="flashvars" value="<%= flashvars %>" />
-	<param name="loop" value="<%= loop %>" />
-	<param name="menu" value="<%= menu %>" />
-	<param name="movie" value="<%= movie %>" />
-	<param name="play" value="<%= play %>" />
-	<param name="quality" value="<%= quality %>" />
-	<param name="salign" value="<%= salign %>" />
-	<param name="scale" value="<%= scale %>" />
-	<param name="swliveconnect" value="<%= swliveconnect %>" />
-	<param name="wmode" value="<%= wmode %>" />
+<div id="<portlet:namespace />flashcontent" style="width: <%= width %>; height: <%= height %>"></div>
 
-	<embed
-		align="<%= align %>"
-		allowScriptAccess="<%= allowScriptAccess %>"
-		base="<%= base %>"
-		bgcolor="<%= bgcolor %>"
-		devicefont="<%= devicefont %>"
-		flashvars="<%= flashvars %>"
-		height="<%= height %>"
-		loop="<%= loop %>"
-		menu="<%= menu %>"
-		play="<%= play %>"
-		pluginspage="http://www.macromedia.com/go/getflashplayer"
-		quality="<%= quality %>"
-		salign="<%= salign %>"
-		scale="<%= scale %>"
-		src="<%= movie %>"
-		swliveconnect="<%= swliveconnect %>"
-		type="application/x-shockwave-flash"
-		width="<%= width %>"
-		wmode="<%= wmode %>">
-	</embed>
-</object>
+<script type="text/javascript">
+	var <portlet:namespace />so = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
+	<portlet:namespace />so.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
+	<portlet:namespace />so.addParam("base", "<%= base %>");
+	<portlet:namespace />so.addParam("devicefont", "<%= devicefont %>");
+	<portlet:namespace />so.addParam("flashvars", "<%= flashvars %>");
+	<portlet:namespace />so.addParam("loop", "<%= loop %>");
+	<portlet:namespace />so.addParam("menu", "<%= menu %>");
+	<portlet:namespace />so.addParam("play", "<%= play %>");
+	<portlet:namespace />so.addParam("quality", "<%= quality %>");
+	<portlet:namespace />so.addParam("salign", "<%= salign %>");
+	<portlet:namespace />so.addParam("scale", "<%= scale %>");
+	<portlet:namespace />so.addParam("swliveconnect", "<%= swliveconnect %>");
+	<portlet:namespace />so.addParam("wmode", "<%= wmode %>");
+	<portlet:namespace />so.write("<portlet:namespace />flashcontent");
+</script>

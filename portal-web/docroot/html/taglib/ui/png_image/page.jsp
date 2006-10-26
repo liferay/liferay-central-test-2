@@ -30,8 +30,7 @@ String height = (String)request.getAttribute("liferay-ui:png_image:height");
 String width = (String)request.getAttribute("liferay-ui:png_image:width");
 %>
 
-<div
-	style="
+<div style="
 		<c:choose>
 			<c:when test="<%= BrowserSniffer.is_ie_5_5_up(request) %>">
 				filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= image %>', sizingMethod='scale');
@@ -41,5 +40,4 @@ String width = (String)request.getAttribute("liferay-ui:png_image:width");
 			</c:otherwise>
 		</c:choose>
 
-		height: <%= height %>; width: <%= width %>;"
-/>
+		height: <%= height %>; width: <%= width %>;"></div>
