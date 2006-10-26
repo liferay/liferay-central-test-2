@@ -133,13 +133,15 @@ public class EditConfigurationAction extends PortletAction {
 
 		String emailMessageAddedEnabled = ParamUtil.getString(
 			req, "emailMessageAddedEnabled");
-		String emailMessageAddedSubject = ParamUtil.getString(
-			req, "emailMessageAddedSubject");
+		String emailMessageAddedSubjectPrefix = ParamUtil.getString(
+			req, "emailMessageAddedSubjectPrefix");
 		String emailMessageAddedBody = ParamUtil.getString(
 			req, "emailMessageAddedBody");
+		String emailMessageAddedSignature = ParamUtil.getString(
+			req, "emailMessageAddedSignature");
 
-		if (Validator.isNull(emailMessageAddedSubject)) {
-			SessionErrors.add(req, "emailMessageAddedSubject");
+		if (Validator.isNull(emailMessageAddedSubjectPrefix)) {
+			SessionErrors.add(req, "emailMessageAddedSubjectPrefix");
 		}
 		else if (Validator.isNull(emailMessageAddedBody)) {
 			SessionErrors.add(req, "emailMessageAddedBody");
@@ -148,8 +150,10 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-message-added-enabled", emailMessageAddedEnabled);
 			prefs.setValue(
-				"email-message-added-subject", emailMessageAddedSubject);
+				"email-message-added-subject-prefix", emailMessageAddedSubjectPrefix);
 			prefs.setValue("email-message-added-body", emailMessageAddedBody);
+			prefs.setValue(
+				"email-message-added-signature", emailMessageAddedSignature);
 		}
 	}
 
@@ -159,13 +163,15 @@ public class EditConfigurationAction extends PortletAction {
 
 		String emailMessageUpdatedEnabled = ParamUtil.getString(
 			req, "emailMessageUpdatedEnabled");
-		String emailMessageUpdatedSubject = ParamUtil.getString(
-			req, "emailMessageUpdatedSubject");
+		String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(
+			req, "emailMessageUpdatedSubjectPrefix");
 		String emailMessageUpdatedBody = ParamUtil.getString(
 			req, "emailMessageUpdatedBody");
+		String emailMessageUpdatedSignature = ParamUtil.getString(
+			req, "emailMessageUpdatedSignature");
 
-		if (Validator.isNull(emailMessageUpdatedSubject)) {
-			SessionErrors.add(req, "emailMessageUpdatedSubject");
+		if (Validator.isNull(emailMessageUpdatedSubjectPrefix)) {
+			SessionErrors.add(req, "emailMessageUpdatedSubjectPrefix");
 		}
 		else if (Validator.isNull(emailMessageUpdatedBody)) {
 			SessionErrors.add(req, "emailMessageUpdatedBody");
@@ -174,9 +180,11 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-message-updated-enabled", emailMessageUpdatedEnabled);
 			prefs.setValue(
-				"email-message-updated-subject", emailMessageUpdatedSubject);
+				"email-message-updated-subject-prefix", emailMessageUpdatedSubjectPrefix);
 			prefs.setValue(
 				"email-message-updated-body", emailMessageUpdatedBody);
+			prefs.setValue(
+				"email-message-updated-signature", emailMessageUpdatedSignature);
 		}
 	}
 

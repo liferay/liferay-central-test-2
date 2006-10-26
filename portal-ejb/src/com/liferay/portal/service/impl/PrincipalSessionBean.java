@@ -104,6 +104,30 @@ public class PrincipalSessionBean {
 		return name;
 	}
 
+	public static void setThreadValues(User user, boolean signedIn,
+									   boolean  checkGuest) {
+		String userId = user.getUserId();
+
+		PrincipalThreadLocal.setName(userId);
+
+		try {
+			PermissionChecker permissionChecker =
+				PermissionThreadLocal.getPermissionChecker();
+
+			if (permissionChecker == null) {
+				permissionChecker = (PermissionChecker)Class.forName(
+					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
+
+				permissionChecker.init(user, signedIn, checkGuest);
+
+				PermissionThreadLocal.setPermissionChecker(permissionChecker);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+	}
+
 	public static void setThreadValues(SessionContext sc) {
 		String userId = null;
 

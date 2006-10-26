@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.smtp.MessageListenerException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -34,6 +36,7 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.StringPool;
@@ -105,6 +108,7 @@ public class MessageListenerImpl implements MessageListener {
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, from);
 
+
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);
 
@@ -113,14 +117,10 @@ public class MessageListenerImpl implements MessageListener {
 			MBMessage prevMessage = null;
 
 			if ((inReplyToHeaders != null) && (inReplyToHeaders.length > 0)) {
-				int x = inReplyToHeaders[0].indexOf("<") + 1;
-				int y = inReplyToHeaders[0].indexOf("@");
+				String prevMessageId = MBUtil.getMessageId(inReplyToHeaders[0]);
 
 				try {
-					if ((x > 0 ) && (y != -1)) {
-						String prevMessageId =
-							inReplyToHeaders[0].substring(x, y);
-
+					if (prevMessageId != null) {
 						prevMessage = MBMessageLocalServiceUtil.getMessage(
 							prevMessageId);
 					}
@@ -137,19 +137,26 @@ public class MessageListenerImpl implements MessageListener {
 
 			_collectPartContent(message, collector);
 
+			PrincipalSessionBean.setThreadValues(user, true, false);
 			if (prevMessage == null) {
-				MBMessageLocalServiceUtil.addMessage(
-					user.getUserId(), categoryId, message.getSubject(),
+				MBMessageServiceUtil.addMessage(
+					categoryId, message.getSubject(),
 					collector.getBody(), collector.getFiles(), false, 0.0, null,
 					true, true);
 			}
 			else {
-				MBMessageLocalServiceUtil.addMessage(
-					user.getUserId(), categoryId, prevMessage.getThreadId(),
+				MBMessageServiceUtil.addMessage(
+					categoryId, prevMessage.getThreadId(),
 					prevMessage.getMessageId(), message.getSubject(),
 					collector.getBody(), collector.getFiles(), false, 0.0, null,
 					true, true);
 			}
+		}
+		catch (PrincipalException pe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Prevented unauthorized post from " + from);
+			}
+			throw new MessageListenerException(pe);
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));

@@ -32,11 +32,13 @@ PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(request, po
 String emailFromName = ParamUtil.getString(request, "emailFromName", MBUtil.getEmailFromName(prefs));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUtil.getEmailFromAddress(prefs));
 
-String emailMessageAddedSubject = ParamUtil.getString(request, "emailMessageAddedSubject", MBUtil.getEmailMessageAddedSubject(prefs));
+String emailMessageAddedSubjectPrefix = ParamUtil.getString(request, "emailMessageAddedSubjectPrefix", MBUtil.getEmailMessageAddedSubjectPrefix(prefs));
 String emailMessageAddedBody = ParamUtil.getString(request, "emailMessageAddedBody", MBUtil.getEmailMessageAddedBody(prefs));
+String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAddedSignature", MBUtil.getEmailMessageAddedSignature(prefs));
 
-String emailMessageUpdatedSubject = ParamUtil.getString(request, "emailMessageUpdatedSubject", MBUtil.getEmailMessageUpdatedSubject(prefs));
+String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
+String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
 
 String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
 
@@ -51,26 +53,37 @@ String redirect = ParamUtil.getString(request, "redirect");
 <script type="text/javascript">
 
 	<%
-	String editorParam = "";
-	String editorContent = "";
+	String bodyEditorParam = "";
+	String bodyEditorContent = "";
+	String signatureEditorParam = "";
+	String signatureEditorContent = "";
 
 	if (tabs2.equals("message-added-email")) {
-		editorParam = "emailMessageAddedBody";
-		editorContent = emailMessageAddedBody;
+		bodyEditorParam = "emailMessageAddedBody";
+		bodyEditorContent = emailMessageAddedBody;
+		signatureEditorParam = "emailMessageAddedSignature";
+		signatureEditorContent = emailMessageAddedSignature;
 	}
 	else if (tabs2.equals("message-updated-email")) {
-		editorParam = "emailMessageUpdatedBody";
-		editorContent = emailMessageUpdatedBody;
+		bodyEditorParam = "emailMessageUpdatedBody";
+		bodyEditorContent = emailMessageUpdatedBody;
+		signatureEditorParam = "emailMessageUpdatedSignature";
+		signatureEditorContent = emailMessageUpdatedSignature;
 	}
 	%>
 
-	function initEditor() {
-		return "<%= UnicodeFormatter.toString(editorContent) %>";
+	function initBodyEditor() {
+		return "<%= UnicodeFormatter.toString(bodyEditorContent) %>";
+	}
+
+	function initSignatureEditor() {
+		return "<%= UnicodeFormatter.toString(signatureEditorContent) %>";
 	}
 
 	function <portlet:namespace />saveConfiguration() {
 		<c:if test='<%= tabs2.startsWith("message-") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= editorParam %>.value = parent.<portlet:namespace />editor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= bodyEditorParam %>.value = parent.<portlet:namespace />bodyEditor.getHTML();
+			document.<portlet:namespace />fm.<portlet:namespace /><%= signatureEditorParam %>.value = parent.<portlet:namespace />signatureEditor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
@@ -91,9 +104,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 <liferay-ui:error key="emailFromAddress" message="please-enter-a-valid-email-address" />
 <liferay-ui:error key="emailFromName" message="please-enter-a-valid-name" />
 <liferay-ui:error key="emailMessageAddedBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailMessageAddedSubject" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="emailMessageAddedSignature" message="please-enter-a-valid-signature" />
+<liferay-ui:error key="emailMessageAddedSubjectPrefix" message="please-enter-a-valid-subject" />
 <liferay-ui:error key="emailMessageUpdatedBody" message="please-enter-a-valid-body" />
-<liferay-ui:error key="emailMessageUpdatedSubject" message="please-enter-a-valid-subject" />
+<liferay-ui:error key="emailMessageUpdatedSignature" message="please-enter-a-valid-signature" />
+<liferay-ui:error key="emailMessageUpdatedSubjectPrefix" message="please-enter-a-valid-subject" />
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("email-from") %>'>
@@ -131,7 +146,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The company id associated with the message board
+				<%= LanguageUtil.get(pageContext, "the-company-id-associated-with-the-message-board") %>
 			</td>
 		</tr>
 		<tr>
@@ -140,7 +155,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The email address of the mailing list
+				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-mailing-list") %>
 			</td>
 		</tr>
 		<tr>
@@ -149,7 +164,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The email address of the user who added the message
+				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-user-who-added-the-message") %>
 			</td>
 		</tr>
 		<tr>
@@ -158,7 +173,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The user who added the message
+				<%= LanguageUtil.get(pageContext, "the-user-who-added-the-message") %>
 			</td>
 		</tr>
 		<tr>
@@ -197,16 +212,16 @@ String redirect = ParamUtil.getString(request, "redirect");
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "subject") %>
+				<%= LanguageUtil.get(pageContext, "subject-prefix") %>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:choose>
 					<c:when test='<%= tabs2.equals("message-added-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageAddedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailMessageAddedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageAddedSubjectPrefix %>">
 					</c:when>
 					<c:when test='<%= tabs2.equals("message-updated-email") %>'>
-						<input class="form-text" name="<portlet:namespace />emailMessageUpdatedSubject" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubject %>">
+						<input class="form-text" name="<portlet:namespace />emailMessageUpdatedSubjectPrefix" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailMessageUpdatedSubjectPrefix %>">
 					</c:when>
 				</c:choose>
 			</td>
@@ -222,11 +237,28 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+				<liferay-ui:input-editor
+					initMethod="initBodyEditor"
+					name='<%= renderResponse.getNamespace() + "bodyEditor" %>'
+					editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-				<input name="<portlet:namespace /><%= editorParam %>" type="hidden" value="">
+				<input name="<portlet:namespace /><%= bodyEditorParam %>" type="hidden" value="">
 			</td>
 		</tr>
+			<tr>
+				<td>
+					<%= LanguageUtil.get(pageContext, "signature") %>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<liferay-ui:input-editor
+						initMethod="initSignatureEditor"
+						name='<%= renderResponse.getNamespace() + "signatureEditor" %>'
+						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+
+					<input name="<portlet:namespace /><%= signatureEditorParam %>" type="hidden" value="">
+				</td>
+			</tr>
 		</table>
 
 		<br>
@@ -242,7 +274,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The category in which the message has been posted
+				<%= LanguageUtil.get(pageContext, "the-category-in-which-the-message-has-been-posted") %>The category in which the message has been posted
 			</td>
 		</tr>
 		<tr>
@@ -251,7 +283,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The company id associated with the message board
+				<%= LanguageUtil.get(pageContext, "the-company-id-associated-with-the-message-board") %>
 			</td>
 		</tr>
 		<tr>
@@ -278,7 +310,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The email address of the mailing list
+				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-mailing-list") %>
 			</td>
 		</tr>
 		<tr>
@@ -287,7 +319,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The message body
+				<%= LanguageUtil.get(pageContext, "the-message-body") %>The message body
 			</td>
 		</tr>
 		<tr>
@@ -305,7 +337,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The email address of the user who added the message
+				<%= LanguageUtil.get(pageContext, "the-email-address-of-the-user-who-added-the-message") %>
 			</td>
 		</tr>
 		<tr>
@@ -314,7 +346,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The user who added the message
+				<%= LanguageUtil.get(pageContext, "the-user-who-added-the-message") %>
 			</td>
 		</tr>
 		<tr>
@@ -341,7 +373,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The address of the email recipient
+				<%= LanguageUtil.get(pageContext, "the-address-of-the-email-recipient") %>
 			</td>
 		</tr>
 		<tr>
@@ -350,7 +382,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				The name of the email recipient
+				<%= LanguageUtil.get(pageContext, "the-name-of-the-email-recipient") %>
 			</td>
 		</tr>
 		</table>

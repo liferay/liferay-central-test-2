@@ -53,7 +53,6 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public class MBUtil {
-
 	public static final String SMTP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
@@ -220,18 +219,34 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageAddedSubject(PortletPreferences prefs)
+	public static String getEmailMessageAddedSignature(PortletPreferences prefs)
 		throws IOException {
 
-		String emailMessageAddedSubject = prefs.getValue(
-			"email-message-added-subject", StringPool.BLANK);
+		String emailMessageAddedSignature = prefs.getValue(
+			"email-message-added-signature", StringPool.BLANK);
 
-		if (Validator.isNotNull(emailMessageAddedSubject)) {
-			return emailMessageAddedSubject;
+		if (Validator.isNotNull(emailMessageAddedSignature)) {
+			return emailMessageAddedSignature;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT));
+				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE));
+		}
+	}
+
+	public static String getEmailMessageAddedSubjectPrefix(
+		PortletPreferences prefs)
+		throws IOException {
+
+		String emailMessageAddedSubjectPrefix = prefs.getValue(
+			"email-message-added-subject-prefix", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageAddedSubjectPrefix)) {
+			return emailMessageAddedSubjectPrefix;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX));
 		}
 	}
 
@@ -265,25 +280,43 @@ public class MBUtil {
 		}
 	}
 
-	public static String getEmailMessageUpdatedSubject(PortletPreferences prefs)
+	public static String getEmailMessageUpdatedSignature(
+		PortletPreferences prefs)
+		throws IOException {
+
+		String emailMessageUpdatedSignature = prefs.getValue(
+			"email-message-updated-signature", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageUpdatedSignature)) {
+			return emailMessageUpdatedSignature;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE));
+		}
+	}
+
+	public static String getEmailMessageUpdatedSubjectPrefix(
+		PortletPreferences prefs)
 		throws IOException {
 
 		String emailMessageUpdatedSubject = prefs.getValue(
-			"email-message-updated-subject", StringPool.BLANK);
+			"email-message-updated-subject-prefix", StringPool.BLANK);
 
 		if (Validator.isNotNull(emailMessageUpdatedSubject)) {
 			return emailMessageUpdatedSubject;
 		}
 		else {
 			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT));
+				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX));
 		}
 	}
 
 	public static String getMailId(String messageId, String companyId) {
-		return StringPool.LESS_THAN + messageId + StringPool.AT +
-			SMTP_PORTLET_PREFIX + StringPool.PERIOD + companyId +
-				StringPool.GREATER_THAN;
+		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
+			SMTP_PORTLET_PREFIX + StringPool.AT +
+			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
+			companyId + StringPool.GREATER_THAN;
 	}
 
 	public static String getMailingListAddress(
@@ -292,6 +325,18 @@ public class MBUtil {
 		return SMTP_PORTLET_PREFIX + categoryId + StringPool.AT +
 			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
 				companyId;
+	}
+
+	public static String getMessageId(String mailId) {
+		int x = mailId.indexOf(StringPool.LESS_THAN) + 1;
+		int y = mailId.indexOf(StringPool.PERIOD);
+
+		if ((x > 0 ) && (y != -1)) {
+			return mailId.substring(x, y);
+		}
+		else {
+			return null;
+		}
 	}
 
 	public static String[] getThreadPriority(

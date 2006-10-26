@@ -1114,23 +1114,31 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					portletName
 				});
 
-			String subject = null;
+			String subjectPrefix = null;
 			String body = null;
+			String signature = null;
 			String inReplyTo = null;
 
 			if (update) {
-				subject = MBUtil.getEmailMessageUpdatedSubject(prefs);
+				subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
+					prefs);
 				body = MBUtil.getEmailMessageUpdatedBody(prefs);
+				signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
 				inReplyTo = MBUtil.getMailId(
 					message.getParentMessageId(), company.getCompanyId());
 			}
 			else {
-				subject = MBUtil.getEmailMessageAddedSubject(prefs);
+				subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);
 				body = MBUtil.getEmailMessageAddedBody(prefs);
+				signature = MBUtil.getEmailMessageAddedSignature(prefs);
+			}
+			if (Validator.isNotNull(signature)) {
+				body +=  "\n--\n" + signature;
 			}
 
-			subject = StringUtil.replace(
-				subject,
+			
+			subjectPrefix = StringUtil.replace(
+				subjectPrefix,
 				new String[] {
 					"[$CATEGORY_NAME$]",
 					"[$COMPANY_ID$]",
@@ -1186,6 +1194,11 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					company.getPortalURL(),
 					portletName
 				});
+			
+			String subject = message.getSubject();
+			if (subject.indexOf(subjectPrefix) == -1) {
+				subject = subjectPrefix + subject;
+			}
 
 			MBMessageProducer.produce(
 				new String[] {

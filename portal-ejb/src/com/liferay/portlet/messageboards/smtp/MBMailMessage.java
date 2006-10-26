@@ -68,7 +68,7 @@ public class MBMailMessage {
 		else if (Validator.isNotNull(_htmlBody)) {
 			return Html.stripHtml(_htmlBody);
 		} else {
-			return "--";
+			return "-";
 		}
 	}
 
