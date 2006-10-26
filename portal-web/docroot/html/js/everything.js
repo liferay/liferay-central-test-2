@@ -171,9 +171,6 @@ return str;}
 String.prototype.trim=trimString;document.getElementsByClassName=function(className,parentElement){var children=($(parentElement)||document.body).getElementsByTagName('*');var elements=new Array();for(var i=0;i<children.length;i++){var child=children[i];if(child.className.match(new RegExp("(^|\\s)"+className+"(\\s|$)"))){elements.push(child);}}
 return elements;}
 var ZINDEX={ALERT:100}
-function validateImageFileName(fileName){if(fileName==null||fileName==""){return false;}
-if(fileName.toLowerCase().indexOf(".gif")==fileName.length-4||fileName.toLowerCase().indexOf(".jpg")==fileName.length-4||fileName.toLowerCase().indexOf(".png")==fileName.length-4){return true;}
-return false;}
 function changeBackground(path,extension){var bodyWidth;if(is_safari){bodyWidth=self.innerWidth;}
 else{bodyWidth=document.body.clientWidth;}
 if(extension!=null){if(bodyWidth<=1024){document.body.style.backgroundImage="url("+path+"."+extension+")";}
