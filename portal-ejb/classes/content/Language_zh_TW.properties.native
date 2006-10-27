@@ -89,6 +89,7 @@ javax.portlet.title.90=門
 javax.portlet.title.91=Alfresco 內容
 javax.portlet.title.93=工作流
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Google 小配件
 javax.portlet.title.9=管理者
 
 ##
@@ -501,6 +502,7 @@ bold=大膽
 book-and-chapter=書和章節
 book=書
 boolean-flag=布爾旗子
+border=疆界
 breakfast=早餐
 browse-blogs=瀏覽部落格
 browse-categories=瀏覽類別
@@ -970,6 +972,7 @@ full-name=全名
 full-screen=全熒光屏
 full=充分
 future=未來
+gadget=小配件
 gender=性別
 general=一般
 generate=產生

@@ -89,6 +89,7 @@ javax.portlet.title.90=Portique
 javax.portlet.title.91=Contenu En plein air
 javax.portlet.title.93=Déroulement des opérations
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Instrument De Google
 javax.portlet.title.9=Administrateur
 
 ##
@@ -501,6 +502,7 @@ bold="bold"
 book-and-chapter=Livre et chapitre
 book=Livre
 boolean-flag=Drapeau Booléen
+border=Frontière
 breakfast=Petit déjeuner
 browse-blogs=Parcourir les blogs
 browse-categories=Parcourir les catégories
@@ -970,6 +972,7 @@ full-name=Nom et prénoms
 full-screen=Plein Écran
 full=Complet
 future=Futur
+gadget=Instrument
 gender=Genre
 general=Généralités
 generate=Générez

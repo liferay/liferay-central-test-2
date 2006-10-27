@@ -89,6 +89,7 @@ javax.portlet.title.90=Porta
 javax.portlet.title.91=Contenido Alfresco
 javax.portlet.title.93=Workflow
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Adminículo De Google
 javax.portlet.title.9=Administración
 
 ##
@@ -501,6 +502,7 @@ bold=Negrita
 book-and-chapter=Libro y capítulo
 book=Libro
 boolean-flag=Bandera Boleana
+border=Borde
 breakfast=Desayuno
 browse-blogs=Revisar Blogs
 browse-categories=Examinar categorias
@@ -970,6 +972,7 @@ full-name=Nombre completo
 full-screen=Pantalla completa
 full=Completo
 future=Futuro
+gadget=Adminículo
 gender=Género
 general=General
 generate=Generar

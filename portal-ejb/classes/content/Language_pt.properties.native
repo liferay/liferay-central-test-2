@@ -89,6 +89,7 @@ javax.portlet.title.90=Portal
 javax.portlet.title.91=Índice Alfresco
 javax.portlet.title.93=Workflow
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Dispositivo De Google
 javax.portlet.title.9=Admin
 
 ##
@@ -501,6 +502,7 @@ bold=Bold(realce)
 book-and-chapter=Livro e capítulo
 book=Livro
 boolean-flag=Bandeira Booleana
+border=Beira
 breakfast=Pequeno almoço
 browse-blogs=Browse Blogs
 browse-categories=Browse Categorias
@@ -970,6 +972,7 @@ full-name=Nome Cheio
 full-screen=Tela Cheia
 full=Completamente
 future=Futuro
+gadget=Dispositivo
 gender=Gender
 general=Geral
 generate=Gere

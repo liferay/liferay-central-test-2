@@ -89,6 +89,7 @@ javax.portlet.title.90=Portal
 javax.portlet.title.91=Alfresco Inhalt
 javax.portlet.title.93=Workflow
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Google Gerät
 javax.portlet.title.9=Admin
 
 ##
@@ -501,6 +502,7 @@ bold=Fett
 book-and-chapter=Buch und Kapitel
 book=Buch
 boolean-flag=Boolesche Markierungsfahne
+border=Rand
 breakfast=Frühstück
 browse-blogs=Blogs browsen
 browse-categories=Kategorien browsen
@@ -970,6 +972,7 @@ full-name=Ganzer Name
 full-screen=Voller Schirm
 full=Ganz
 future=Zukunft
+gadget=Gerät
 gender=Geschlecht
 general=Generell
 generate=Generieren

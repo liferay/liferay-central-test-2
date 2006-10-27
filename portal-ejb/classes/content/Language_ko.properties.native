@@ -89,6 +89,7 @@ javax.portlet.title.90=문맥
 javax.portlet.title.91=야외 내용
 javax.portlet.title.93=작업 흐름
 javax.portlet.title.94=GoogleAdSense
+javax.portlet.title.95=Google부속품
 javax.portlet.title.9=Admin
 
 ##
@@ -501,6 +502,7 @@ bold=대담한
 book-and-chapter=책과 지부
 book=책
 boolean-flag=부울 논리 연산 깃발
+border=국경
 breakfast=조반
 browse-blogs=Blogs을 찾아보십시요
 browse-categories=종류를 찾아보십시요
@@ -969,6 +971,7 @@ full-name=성명
 full-screen=화면 전체
 full=충분히
 future=미래
+gadget=부속품
 gender=성
 general=일반
 generate=생성하십시요

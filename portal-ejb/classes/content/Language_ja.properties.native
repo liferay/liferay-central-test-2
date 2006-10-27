@@ -89,6 +89,7 @@ javax.portlet.title.90=門脈
 javax.portlet.title.91=野外の内容
 javax.portlet.title.93=ワークフロー
 javax.portlet.title.94=Google AdSense
+javax.portlet.title.95=Google の小道具
 javax.portlet.title.9=Admin
 
 ##
@@ -500,6 +501,7 @@ bold=大胆
 book-and-chapter=本と章
 book=本
 boolean-flag=ブール旗
+border=ボーダー
 breakfast=朝食
 browse-blogs=Blogs を拾い読みしなさい
 browse-categories=部門を拾い読みしなさい
@@ -968,6 +970,7 @@ full-name=フルネーム
 full-screen=全画面
 full=十分に
 future=未来
+gadget=小道具
 gender=性
 general=一般的
 generate=発生させなさい
