@@ -68,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
 public class PortletURLImpl implements PortletURL {
 
 	public static final boolean APPEND_PARAMETERS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.TCK_PORTLET_URL_APPEND_PARAMETERS));
+		PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));
 
 	public PortletURLImpl(ActionRequestImpl req, String portletName,
 						  String plid, boolean action) {
@@ -492,7 +492,9 @@ public class PortletURLImpl implements PortletURL {
 			sb.append(StringPool.AMPERSAND + WebKeys.ENCRYPT + "=1");
 		}
 
-		if (!BrowserSniffer.is_ns_4(_req)) {
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.PORTLET_URL_ANCHOR_ENABLE))) {
+
 			if (_anchor && (_windowState != null) &&
 				(!_windowState.equals(WindowState.MAXIMIZED)) &&
 				(!_windowState.equals(LiferayWindowState.EXCLUSIVE)) &&

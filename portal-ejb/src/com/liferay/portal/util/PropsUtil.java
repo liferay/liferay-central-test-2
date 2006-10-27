@@ -69,8 +69,6 @@ public class PropsUtil {
 
 	public static final String TCK_URL = "tck.url";
 
-	public static final String TCK_PORTLET_URL_APPEND_PARAMETERS = "tck.portlet.url.append.parameters";
-
 	// Upgrade
 
 	public static final String UPGRADE_PROCESSES = "upgrade.processes";
@@ -396,6 +394,12 @@ public class PropsUtil {
 	public static final String LAYOUT_TEMPLATE_RESTRICTIONS = "layout.template.restrictions";
 
 	public static final String LAYOUT_PARALLEL_RENDER_ENABLE = "layout.parallel.render.enable";
+
+	// Portlet URL
+
+	public static final String PORTLET_URL_APPEND_PARAMETERS = "portlet.url.append.parameters";
+
+	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";
 
 	// Preferences
 
