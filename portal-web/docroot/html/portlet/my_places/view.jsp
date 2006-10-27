@@ -29,16 +29,17 @@
 	<%
 	PortletURL portletURL = renderResponse.createActionURL();
 	portletURL.setParameter("struts_action", "/my_places/view");
-	
-	String displayTitle;
+
+	String displayTitle = null;
 	String selectedStyle = "style=\"background: " + colorScheme.getPortletMenuBg() + "; color: " + colorScheme.getPortletMenuText() + ";\" ";
 	String selectedTitle = "";
 	boolean selectedPlace = false;
+
 	Group userGroup = user.getGroup();
-	
+
 	List links = new ArrayList();
 	List titles = new ArrayList();
-	
+
 	if ((userGroup != null) && user.hasPublicLayouts()) {
 		selectedPlace = !layout.isPrivateLayout() && layout.getGroupId().equals(userGroup.getGroupId());
 		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "public") + ")";
@@ -48,12 +49,12 @@
 		}
 		else {
 			portletURL.setParameter("ownerId", Layout.PUBLIC + userGroup.getGroupId());
-		
+
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
 		}
 	}
-		
+
 	Map groupParams = new HashMap();
 
 	groupParams.put("usersGroups", user.getUserId());
@@ -72,12 +73,12 @@
 		}
 		else {
 			portletURL.setParameter("ownerId", Layout.PUBLIC + community.getGroupId());
-		
+
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
 		}
 	}
-	
+
 	if ((userGroup != null) && user.hasPrivateLayouts()) {
 		selectedPlace = layout.isPrivateLayout() && layout.getGroupId().equals(userGroup.getGroupId());
 		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "private") + ")";
@@ -87,7 +88,7 @@
 		}
 		else {
 			portletURL.setParameter("ownerId", Layout.PRIVATE + userGroup.getGroupId());
-			
+
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
 		}
@@ -107,14 +108,14 @@
 		}
 		else {
 			portletURL.setParameter("ownerId", Layout.PRIVATE + community.getGroupId());
-			
+
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
 		}
 	}
 	%>
 
-	<table border="0" cellspacing="0" cellpadding="0" onclick="MyPlaces.show()">
+	<table border="0" cellspacing="0" cellpadding="0" onclick="MyPlaces.show();">
 	<tr>
 		<td class="layout-my-places">
 			<%= selectedTitle %>
@@ -124,37 +125,38 @@
 		</td>
 	</tr>
 	</table>
-	
+
 	<ul id="layout-my-places-menu" style="display: none">
+
 		<%
 		for (int i = 0; i < links.size(); i++) {
 			%>
-			
+
 			<li><a href="<%= (String)(links.get(i)) %>"><%= (String)(titles.get(i)) %></a></li>
-			
+
 			<%
 		}
 		%>
+
 	</ul>
-	
+
 	<script type="text/javascript">
-	var MyPlaces = {
-		showing: false,
-		
-		show: function() {
-			if (!MyPlaces.showing) {
-				$("layout-my-places-menu").style.display = "";
-				setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
-				MyPlaces.showing = true;
+		var MyPlaces = {
+			showing: false,
+
+			show: function() {
+				if (!MyPlaces.showing) {
+					$("layout-my-places-menu").style.display = "";
+					setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
+					MyPlaces.showing = true;
+				}
+			},
+
+			hide: function() {
+				$("layout-my-places-menu").style.display = "none";
+				MyPlaces.showing = false;
+				document.onclick = function() {};
 			}
-		},
-		
-		hide: function() {
-			$("layout-my-places-menu").style.display = "none";
-			MyPlaces.showing = false;
-			document.onclick = function() {};
 		}
-	}
 	</script>
-	
 </c:if>

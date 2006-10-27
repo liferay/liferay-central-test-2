@@ -62,12 +62,12 @@
 
 	function sessionHasExpired() {
 		var warningText = document.getElementById("session_warning_text");
-		
+
 		if (warningText) {
 			warningText.innerHTML = "<%= UnicodeLanguageUtil.get(pageContext, "warning-due-to-inactivity-your-session-has-expired") %>";
 			document.getElementById("ok_btn").onclick = function() { Alerts.killAlert(this); };
 			document.getElementById("cancel_btn").style.display = "none";
-	
+
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/expire_session");
 		}
 	}

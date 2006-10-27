@@ -34,40 +34,42 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DefinitionSearch.java.html"><b><i>View Source</i></b></a>
+ * <a href="InstanceSearch.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class DefinitionSearch extends SearchContainer {
+public class InstanceSearch extends SearchContainer {
 
 	static List headerNames = new ArrayList();
 
 	static {
 		headerNames.add("id");
-		headerNames.add("name");
-		headerNames.add("type");
-		headerNames.add("version");
+		headerNames.add("workflow-name");
+		headerNames.add("workflow-version");
+		headerNames.add("start-date");
+		headerNames.add("end-date");
+		headerNames.add("state");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-definitions-were-found";
+		"no-instances-were-found";
 
-	public DefinitionSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new DefinitionDisplayTerms(req),
-			  new DefinitionSearchTerms(req), DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			  iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
+	public InstanceSearch(RenderRequest req, PortletURL iteratorURL) {
+		super(req, new InstanceDisplayTerms(req), new InstanceSearchTerms(req),
+			  DEFAULT_CUR_PARAM, DEFAULT_DELTA, iteratorURL, headerNames,
+			  EMPTY_RESULTS_MESSAGE);
 
-		DefinitionDisplayTerms displayTerms =
-			(DefinitionDisplayTerms)getDisplayTerms();
+		InstanceDisplayTerms displayTerms =
+			(InstanceDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			DefinitionDisplayTerms.DEFINITION_ID,
-			String.valueOf(displayTerms.getDefinitionId()));
+			InstanceDisplayTerms.WORKFLOW_NAME, displayTerms.getWorkflowName());
 		iteratorURL.setParameter(
-			DefinitionDisplayTerms.NAME, displayTerms.getName());
+			InstanceDisplayTerms.WORKFLOW_VERSION,
+			String.valueOf(displayTerms.getWorkflowVersion()));
 	}
 
-	private static Log _log = LogFactory.getLog(DefinitionSearch.class);
+	private static Log _log = LogFactory.getLog(InstanceSearch.class);
 
 }

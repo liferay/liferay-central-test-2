@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.communities.action;
 
-import javax.portlet.ActionRequest;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.json.JSONObject;
-
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
@@ -42,6 +34,14 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONObject;
+
 /**
  * <a href="UpdatePageAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -49,28 +49,32 @@ import com.liferay.util.StringUtil;
  *
  */
 public class UpdatePageAction extends JSONAction {
-	
-	public String getJSON(ActionMapping mapping, ActionForm form,
-		HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
+
+	public String getJSON(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
-		JSONObject jo = new JSONObject();
-		
-		if ("add".equals(cmd)) {
+
+		JSONObject jsonObj = new JSONObject();
+
+		if (cmd.equals("add")) {
 			String url = addPage(req);
-			jo.put("url", url);
+
+			jsonObj.put("url", url);
 		}
-		else if ("delete".equals(cmd)) {
+		else if (cmd.equals("delete")) {
 			deletePage(req);
 		}
-		else if ("reorder".equals(cmd)) {
+		else if (cmd.equals("reorder")) {
 			updateDisplayOrder(req);
 		}
-		else if ("title".equals(cmd)) {
+		else if (cmd.equals("title")) {
 			updateTitle(req);
 		}
-		
-		return jo.toString();
+
+		return jsonObj.toString();
 	}
 
 	protected String addPage(HttpServletRequest req) throws Exception {
@@ -78,12 +82,12 @@ public class UpdatePageAction extends JSONAction {
 		boolean privateLayout = ParamUtil.getBoolean(req, "private");
 		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");
-		
+
 		String type = Layout.TYPE_PORTLET;
 		String friendlyURL = StringPool.BLANK;
 		boolean hidden = false;
 		String name = "New Page";
-		
+
 		Layout layout = LayoutServiceUtil.addLayout(
 			groupId, privateLayout, parentLayoutId, name, type, hidden,
 			friendlyURL);
@@ -97,7 +101,7 @@ public class UpdatePageAction extends JSONAction {
 		LayoutServiceUtil.updateLayout(
 			layout.getLayoutId(), layout.getOwnerId(),
 			layout.getTypeSettings());
-		
+
 		return PortalUtil.getLayoutActualURL(layout, mainPath);
 	}
 
@@ -106,15 +110,6 @@ public class UpdatePageAction extends JSONAction {
 		String ownerId = ParamUtil.getString(req, "ownerId");
 
 		LayoutServiceUtil.deleteLayout(layoutId, ownerId);
-	}
-	
-	protected void updateTitle(HttpServletRequest req) throws Exception {
-		String language = ParamUtil.getString(req, "language");
-		String ownerId = ParamUtil.getString(req, "ownerId");
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String title = ParamUtil.getString(req, "title");
-		
-		LayoutLocalServiceUtil.updateLayoutTitle(layoutId, ownerId, title, language);
 	}
 
 	protected void updateDisplayOrder(HttpServletRequest req) throws Exception {
@@ -125,6 +120,15 @@ public class UpdatePageAction extends JSONAction {
 			ParamUtil.getString(req, "layoutIds"));
 
 		LayoutServiceUtil.setLayouts(ownerId, parentLayoutId, layoutIds);
+	}
+
+	protected void updateTitle(HttpServletRequest req) throws Exception {
+		String language = ParamUtil.getString(req, "language");
+		String ownerId = ParamUtil.getString(req, "ownerId");
+		String layoutId = ParamUtil.getString(req, "layoutId");
+		String title = ParamUtil.getString(req, "title");
+
+		LayoutLocalServiceUtil.updateTitle(layoutId, ownerId, title, language);
 	}
 
 }

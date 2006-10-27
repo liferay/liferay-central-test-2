@@ -48,8 +48,8 @@ public class FlashTag extends IncludeTag {
 			String devicefont, String flashvars, String height, String id,
 			String loop, String menu, String movie, String play, String quality,
 			String salign, String scale, String swliveconnect, String version,
-			String width, String wmode, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String width, String wmode, ServletContext ctx,
+			HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
 		doTag(

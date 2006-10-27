@@ -36,33 +36,33 @@
 				<td valign="top" align="right">
 					<span style="font-weight: bold;"><%= user.getGreeting() %></span><br />
 
-						<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -
+					<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -
 
-						<c:choose>
-							<c:when test="<%= themeDisplay.isSignedIn() %>">
-								<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
-									<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
-								</c:if>
+					<c:choose>
+						<c:when test="<%= themeDisplay.isSignedIn() %>">
+							<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
+								<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
+							</c:if>
 
-								<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /><br />
+							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /><br />
 
-								<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
-									<a href="javascript:<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
-								</c:if>
+							<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+								<a href="javascript:<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
+							</c:if>
 
-								<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-									- <a href="javascript: showPageSettings()"><bean:message key="page-settings" /></a>
-								</c:if>
+							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+								- <a href="javascript: showPageSettings()"><bean:message key="page-settings" /></a>
+							</c:if>
 
-								<div id="layout-my-places">
-									<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
-									<div style="clear: both; font-size: 0"></div>
-								</div>
-							</c:when>
-							<c:otherwise>
-								<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
-							</c:otherwise>
-						</c:choose>
+							<div id="layout-my-places">
+								<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
+								<div style="clear: both; font-size: 0"></div>
+							</div>
+						</c:when>
+						<c:otherwise>
+							<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
+						</c:otherwise>
+					</c:choose>
 				</td>
 			</tr>
 			</table>

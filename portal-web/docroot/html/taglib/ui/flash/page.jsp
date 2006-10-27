@@ -25,6 +25,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+
 String align = (String)request.getAttribute("liferay-ui:flash:align");
 String allowScriptAccess = (String)request.getAttribute("liferay-ui:flash:allowScriptAccess");
 String base = (String)request.getAttribute("liferay-ui:flash:base");
@@ -46,21 +48,22 @@ String width = (String)request.getAttribute("liferay-ui:flash:width");
 String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 %>
 
-<div id="<portlet:namespace />flashcontent" style="width: <%= width %>; height: <%= height %>"></div>
+<div id="<portlet:namespace />flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
 
 <script type="text/javascript">
-	var <portlet:namespace />so = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
-	<portlet:namespace />so.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
-	<portlet:namespace />so.addParam("base", "<%= base %>");
-	<portlet:namespace />so.addParam("devicefont", "<%= devicefont %>");
-	<portlet:namespace />so.addParam("flashvars", "<%= flashvars %>");
-	<portlet:namespace />so.addParam("loop", "<%= loop %>");
-	<portlet:namespace />so.addParam("menu", "<%= menu %>");
-	<portlet:namespace />so.addParam("play", "<%= play %>");
-	<portlet:namespace />so.addParam("quality", "<%= quality %>");
-	<portlet:namespace />so.addParam("salign", "<%= salign %>");
-	<portlet:namespace />so.addParam("scale", "<%= scale %>");
-	<portlet:namespace />so.addParam("swliveconnect", "<%= swliveconnect %>");
-	<portlet:namespace />so.addParam("wmode", "<%= wmode %>");
-	<portlet:namespace />so.write("<portlet:namespace />flashcontent");
+	var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
+
+	<%= randomNamespace %>swfObj.addParam("allowScriptAccess", "<%= allowScriptAccess %>");
+	<%= randomNamespace %>swfObj.addParam("base", "<%= base %>");
+	<%= randomNamespace %>swfObj.addParam("devicefont", "<%= devicefont %>");
+	<%= randomNamespace %>swfObj.addParam("flashvars", "<%= flashvars %>");
+	<%= randomNamespace %>swfObj.addParam("loop", "<%= loop %>");
+	<%= randomNamespace %>swfObj.addParam("menu", "<%= menu %>");
+	<%= randomNamespace %>swfObj.addParam("play", "<%= play %>");
+	<%= randomNamespace %>swfObj.addParam("quality", "<%= quality %>");
+	<%= randomNamespace %>swfObj.addParam("salign", "<%= salign %>");
+	<%= randomNamespace %>swfObj.addParam("scale", "<%= scale %>");
+	<%= randomNamespace %>swfObj.addParam("swliveconnect", "<%= swliveconnect %>");
+	<%= randomNamespace %>swfObj.addParam("wmode", "<%= wmode %>");
+	<%= randomNamespace %>swfObj.write("<portlet:namespace />flashcontent");
 </script>

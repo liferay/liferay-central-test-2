@@ -36,8 +36,8 @@ import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.mail.JavaMailUtil;
@@ -107,7 +107,6 @@ public class MessageListenerImpl implements MessageListener {
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, from);
-
 
 			MimeMessage message = new MimeMessage(
 				MailEngine.getSession(), data);

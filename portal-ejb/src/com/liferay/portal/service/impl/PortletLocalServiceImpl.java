@@ -125,8 +125,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		if ((portlet == null) &&
 			(!portletId.equals(PortletKeys.LIFERAY_PORTAL))) {
 
-			if (_log.isErrorEnabled()) {
-				_log.error(
+			if (_log.isWarnEnabled()) {
+				_log.warn(
 					"Portlet not found for " + companyId + " " + portletId);
 			}
 		}

@@ -20,71 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.workflow.search;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.dao.search.DisplayTerms;
 
 import java.util.Date;
 
+import javax.portlet.RenderRequest;
+
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="InstanceDisplayTerms.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class InstanceDisplayTerms extends DisplayTerms {
 
-	static String name = "Liferay Portal";
+	public static final String WORKFLOW_NAME = "workflowName";
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public static final String WORKFLOW_VERSION = "workflowVersion";
+
+	public static final String GT_START_DATE = "gtStartDate";
+
+	public static final String LT_START_DATE = "ltStartDate";
+
+	public static final String GT_END_DATE = "gtEndDate";
+
+	public static final String LT_END_DATE = "ltEndDate";
+
+	public InstanceDisplayTerms(RenderRequest req) {
+		super(req);
+
+		workflowName = ParamUtil.getString(req, WORKFLOW_NAME);
+		workflowVersion = ParamUtil.getDouble(req, WORKFLOW_VERSION);
 	}
 
-	static String version = "4.1.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3282";
-
-	static String date = "October 26, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public String getWorkflowName() {
+		return workflowName;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public double getWorkflowVersion() {
+		return workflowVersion;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	protected String workflowName;
+	protected double workflowVersion;
+	protected Date gtStartDate;
+	protected Date ltStartDate;
+	protected Date gtEndDate;
+	protected Date ltEndDate;
 
 }

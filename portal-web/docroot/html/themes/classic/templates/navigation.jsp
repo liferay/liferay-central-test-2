@@ -37,7 +37,7 @@
 	List layoutIds = new ArrayList();
 	List hiddenIds = new ArrayList();
 	boolean newPage = ParamUtil.getBoolean(request, "newPage");
-	
+
 	if (layout != null) {
 		ancestorLayoutId = layout.getAncestorLayoutId();
 	}
@@ -69,7 +69,7 @@
 		}
 		else {
 			layoutIds.add(curLayout.getLayoutId());
-			
+
 			if (isSelectedTab) {
 				%>
 				<div id="layout-tab-selected" class="layout-tab">
@@ -87,13 +87,13 @@
 		}
 	}
 	%>
-	
+
 	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 		<div id="layout-tab-add">
 			<div class="layout-tab-text"><a href="javascript: LayoutTab.add()"><bean:message key="add-page" /></a></div>
 		</div>
 	</c:if>
-	
+
 	</div>
 	<div id="layout-nav-divider" class="layout-nav-<%= selectable ? "selected" : "divider" %>"></div>
 
@@ -105,7 +105,7 @@ function enterPressed(event) {
 		event = window.event;
 	}
 	var keycode = event.keyCode;
-	
+
 	if (keycode == 13) {
 		return true;
 	}
@@ -117,7 +117,7 @@ function enterPressed(event) {
 var LayoutTab = {
 	editing: null,
 	newPage: <%= newPage %>,
-	
+
 	layoutIds: [<%
 		for (int i = 0; i < layoutIds.size(); i++) {
 			out.print((String)(layoutIds.get(i)));
@@ -126,7 +126,7 @@ var LayoutTab = {
 			}
 		}
 		%>],
-	
+
 	hiddenIds: [<%
 		for (int i = 0; i < hiddenIds.size(); i++) {
 			out.print((String)(hiddenIds.get(i)));
@@ -135,14 +135,14 @@ var LayoutTab = {
 			}
 		}
 		%>],
-	
+
 	add: function() {
 		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
 			"&groupId=<%= layout.getGroupId() %>" +
 			"&private=<%= layout.isPrivateLayout() %>" +
 			"&parent=<%= layout.getParentLayoutId() %>" +
 			"&mainPath=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>");
-			
+
 		Ajax.request(url, {
 				onComplete: function(xmlHttpReq) {
 					var jo = createJSONObject(xmlHttpReq.responseText);
@@ -150,16 +150,16 @@ var LayoutTab = {
 				}
 			});
 	},
-	
+
 	deletePage: function() {
 		var tab = document.getElementById("layout-tab-selected")
 		var tabText = $("layout-tab-text-edit").innerHTML;
-		
+
 		if (confirm("<bean:message key="remove" /> \"" + tabText + "\"?")) {
 			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=delete" +
 				"&ownerId=<%= Layout.getOwnerId(plid) %>" +
 				"&layoutId=<%= layout.getLayoutId() %>";
-				
+
 			Ajax.request(url, {
 				onComplete: function() {
 					window.location = "<%= themeDisplay.getURLHome() %>";
@@ -167,7 +167,7 @@ var LayoutTab = {
 			});
 		}
 	},
-	
+
 	edit: function() {
 		var tabText = $("layout-tab-text-edit");
 
@@ -178,15 +178,15 @@ var LayoutTab = {
 			var spans = tab.getElementsByTagName("span");
 			var width = 20;
 			var delLink = document.createElement("a");
-			
+
 			tab.disableDrag = true;
-			
+
 			for (var i = 0; i < spans.length; i++) {
 				width += spans[i].offsetWidth;
 			}
-			
+
 			tab.style.width = tab.offsetWidth;
-			
+
 			input.className = "layout-tab-edit";
 			input.width = width;
 			input.style.width = (width - 2) + "px";
@@ -203,21 +203,21 @@ var LayoutTab = {
 					LayoutTab.editDone();
 				}
 			}
-			
+
 			delLink.innerHTML = "X";
 			delLink.href = "javascript:LayoutTab.deletePage()";
 			delLink.style.marginRight = "5px";
 			delLink.className = "layout-tab-close";
-			
+
 			textDiv.style.display = "none";
 			tab.appendChild(delLink);
 			tab.appendChild(input);
 			input.focus();
-			
+
 			LayoutTab.editing = tabText;
 		}
 	},
-	
+
 	editDone: function() {
 		if (LayoutTab.editing) {
 			var text = LayoutTab.editing;
@@ -227,11 +227,11 @@ var LayoutTab = {
 			var delLinks = tab.getElementsByTagName("a");
 			var delLink = delLinks[delLinks.length - 1];
 			var title = input.value;
-			
+
 			if (title == "") {
 				title = "(untitled)";
 			}
-			
+
 			tab.removeChild(input);
 			//tab.removeChild(delLink);
 			delLink.style.display = "none";
@@ -239,30 +239,30 @@ var LayoutTab = {
 			textDiv.style.display = "";
 			document.onclick = function() {};
 			LayoutTab.editing = null;
-			
+
 			tab.disableDrag = false;
-			
+
 			if (text.innerHTML != title) {
 				text.innerHTML = title;
-				
+
 				var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=title&title=" + encodeURIComponent(title) +
 					"&ownerId=<%= Layout.getOwnerId(plid) %>" +
 					"&language=<%= LanguageUtil.getLanguageId(request) %>" +
 					"&layoutId=<%= layout.getLayoutId() %>";
-					
+
 				Ajax.request(url);
 			}
 		}
 	},
-	
+
 	move: function(from, to) {
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var selectedTab = document.getElementById("layout-tab-selected");
 		var nav = document.getElementById("layout-nav-container");
 		var target;
-		
+
 		nav.removeChild(selectedTab);
-		
+
 		if (from > to) {
 			target = tabs[to];
 			nav.insertBefore(selectedTab, target);
@@ -277,21 +277,21 @@ var LayoutTab = {
 				nav.insertBefore(selectedTab, target);
 			}
 		}
-		
+
 		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var reordered = new Array();
 		for (var i = 0; i < tabs.length; i++) {
 			reordered[i] = tabs[i].layoutId;
 		}
-		
+
 		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=reorder" +
 			"&ownerId=<%= Layout.getOwnerId(plid) %>" +
 			"&parent=<%= layout.getParentLayoutId() %>" +
 			"&layoutIds=" + reordered.concat(LayoutTab.hiddenIds);
-			
+
 		Ajax.request(url);
 	},
-	
+
 	onDragStart: function(nwPosition, sePosition, nwOffset, seOffset) {
 		var item = this;
 		item.dragged = false;
@@ -308,10 +308,10 @@ var LayoutTab = {
 			from: -1,
 			to: -1
 		}
-		
+
 		if (item.dragged) {
 			var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-			
+
 			tabs.foreach(function(tab, index, options) {
 					if (tab == item) {
 						options.from = index;
@@ -322,7 +322,7 @@ var LayoutTab = {
 						}
 					}
 				}, options);
-			
+
 			if (options.to >= 0) {
 				LayoutTab.move(options.from, options.to);
 			}
@@ -332,39 +332,39 @@ var LayoutTab = {
 		else {
 			// Not dragged.  Treat as click.
 			var tabText = $("layout-tab-text-edit");
-			
+
 			if (mousePos.inside(Coordinates.northwestOffset(tabText,true), Coordinates.southeastOffset(tabText,true))) {
 				LayoutTab.edit();
 			}
 		}
-		
+
 		item.dragged = false;
 	},
-	
+
 	init: function() {
 		var nav = $("layout-nav-container");
 		var selectedTab = document.getElementById("layout-tab-selected");
 		var tabText = $("layout-tab-text-edit");
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		
+
 		Drag.makeDraggable(selectedTab);
 		selectedTab.onDragStart = LayoutTab.onDragStart;
 		selectedTab.onDrag = LayoutTab.onDrag;
 		selectedTab.onDragEnd = LayoutTab.onDragEnd;
 		selectedTab.threshold = 3;
 		selectedTab.style.cursor = "move";
-		
+
 		tabs.foreach(function(item, index) {
 			item.layoutId = LayoutTab.layoutIds[index];
 		});
-		
+
 		tabText.onmouseover = function() {
 			this.style.backgroundColor = "#FFFFFF";
 		};
 		tabText.onmouseout = function() {
 			this.style.backgroundColor = "transparent";
 		};
-		
+
 		if (LayoutTab.newPage) {
 			LayoutTab.edit();
 		}

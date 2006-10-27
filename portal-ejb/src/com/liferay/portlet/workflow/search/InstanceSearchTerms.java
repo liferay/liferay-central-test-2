@@ -22,52 +22,24 @@
 
 package com.liferay.portlet.workflow.search;
 
-import com.liferay.util.dao.search.SearchContainer;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.dao.DAOParamUtil;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
- * <a href="DefinitionSearch.java.html"><b><i>View Source</i></b></a>
+ * <a href="InstanceSearchTerms.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class DefinitionSearch extends SearchContainer {
+public class InstanceSearchTerms extends InstanceDisplayTerms {
 
-	static List headerNames = new ArrayList();
+	public InstanceSearchTerms(RenderRequest req) {
+		super(req);
 
-	static {
-		headerNames.add("id");
-		headerNames.add("name");
-		headerNames.add("type");
-		headerNames.add("version");
+		workflowName = DAOParamUtil.getString(req, WORKFLOW_NAME);
+		workflowVersion = ParamUtil.getDouble(req, WORKFLOW_VERSION);
 	}
-
-	public static final String EMPTY_RESULTS_MESSAGE =
-		"no-definitions-were-found";
-
-	public DefinitionSearch(RenderRequest req, PortletURL iteratorURL) {
-		super(req, new DefinitionDisplayTerms(req),
-			  new DefinitionSearchTerms(req), DEFAULT_CUR_PARAM, DEFAULT_DELTA,
-			  iteratorURL, headerNames, EMPTY_RESULTS_MESSAGE);
-
-		DefinitionDisplayTerms displayTerms =
-			(DefinitionDisplayTerms)getDisplayTerms();
-
-		iteratorURL.setParameter(
-			DefinitionDisplayTerms.DEFINITION_ID,
-			String.valueOf(displayTerms.getDefinitionId()));
-		iteratorURL.setParameter(
-			DefinitionDisplayTerms.NAME, displayTerms.getName());
-	}
-
-	private static Log _log = LogFactory.getLog(DefinitionSearch.class);
 
 }

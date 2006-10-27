@@ -102,13 +102,17 @@ portletURL.setParameter("tabs1", tabs1);
 
 				row.addText(definitionId, rowURL);
 
-				// Name, description, and image
+				// Name
 
-				//row.addJSP("/html/portlet/journal/definition_description.jsp");
+				row.addText(definition.getName(), rowURL);
 
-				// Action
+				// Type
 
-				//row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/journal/definition_action.jsp");
+				row.addText(GetterUtil.getString(definition.getType()), rowURL);
+
+				// Version
+
+				row.addText(String.valueOf(definition.getVersion()), rowURL);
 
 				// Add result row
 
@@ -120,12 +124,6 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:if>
-
-		<%--
-		List definitions = WorkflowComponentServiceUtil.getDefinitions(0, "%", 0, 20);
-		%>
-
-		<%= definitions.size() %>--%>
 	</c:when>
 	<c:when test='<%= tabs1.equals("instances") %>'>
 	</c:when>

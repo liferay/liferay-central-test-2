@@ -1136,7 +1136,6 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				body +=  "\n--\n" + signature;
 			}
 
-			
 			subjectPrefix = StringUtil.replace(
 				subjectPrefix,
 				new String[] {
@@ -1194,7 +1193,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					company.getPortalURL(),
 					portletName
 				});
-			
+
 			String subject = message.getSubject();
 			if (subject.indexOf(subjectPrefix) == -1) {
 				subject = subjectPrefix + subject;
