@@ -150,7 +150,8 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-message-added-enabled", emailMessageAddedEnabled);
 			prefs.setValue(
-				"email-message-added-subject-prefix", emailMessageAddedSubjectPrefix);
+				"email-message-added-subject-prefix",
+				emailMessageAddedSubjectPrefix);
 			prefs.setValue("email-message-added-body", emailMessageAddedBody);
 			prefs.setValue(
 				"email-message-added-signature", emailMessageAddedSignature);
@@ -180,11 +181,13 @@ public class EditConfigurationAction extends PortletAction {
 			prefs.setValue(
 				"email-message-updated-enabled", emailMessageUpdatedEnabled);
 			prefs.setValue(
-				"email-message-updated-subject-prefix", emailMessageUpdatedSubjectPrefix);
+				"email-message-updated-subject-prefix",
+				emailMessageUpdatedSubjectPrefix);
 			prefs.setValue(
 				"email-message-updated-body", emailMessageUpdatedBody);
 			prefs.setValue(
-				"email-message-updated-signature", emailMessageUpdatedSignature);
+				"email-message-updated-signature",
+				emailMessageUpdatedSignature);
 		}
 	}
 

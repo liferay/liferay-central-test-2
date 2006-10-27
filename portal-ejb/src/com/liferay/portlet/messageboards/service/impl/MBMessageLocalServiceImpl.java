@@ -1132,6 +1132,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				body = MBUtil.getEmailMessageAddedBody(prefs);
 				signature = MBUtil.getEmailMessageAddedSignature(prefs);
 			}
+
 			if (Validator.isNotNull(signature)) {
 				body +=  "\n--\n" + signature;
 			}
@@ -1195,6 +1196,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				});
 
 			String subject = message.getSubject();
+
 			if (subject.indexOf(subjectPrefix) == -1) {
 				subject = subjectPrefix + subject;
 			}

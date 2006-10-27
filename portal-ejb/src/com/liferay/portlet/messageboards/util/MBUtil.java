@@ -53,6 +53,7 @@ import javax.servlet.jsp.PageContext;
  *
  */
 public class MBUtil {
+
 	public static final String SMTP_PORTLET_PREFIX = "mb.";
 
 	public static String getBreadcrumbs(
@@ -235,7 +236,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageAddedSubjectPrefix(
-		PortletPreferences prefs)
+			PortletPreferences prefs)
 		throws IOException {
 
 		String emailMessageAddedSubjectPrefix = prefs.getValue(
@@ -281,7 +282,7 @@ public class MBUtil {
 	}
 
 	public static String getEmailMessageUpdatedSignature(
-		PortletPreferences prefs)
+			PortletPreferences prefs)
 		throws IOException {
 
 		String emailMessageUpdatedSignature = prefs.getValue(
@@ -315,8 +316,8 @@ public class MBUtil {
 	public static String getMailId(String messageId, String companyId) {
 		return StringPool.LESS_THAN + messageId + StringPool.PERIOD +
 			SMTP_PORTLET_PREFIX + StringPool.AT +
-			PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) + StringPool.PERIOD +
-			companyId + StringPool.GREATER_THAN;
+				PropsUtil.get(PropsUtil.SMTP_SERVER_SUBDOMAIN) +
+					StringPool.PERIOD + companyId + StringPool.GREATER_THAN;
 	}
 
 	public static String getMailingListAddress(

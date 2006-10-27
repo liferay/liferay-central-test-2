@@ -240,7 +240,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 				<liferay-ui:input-editor
 					initMethod="initBodyEditor"
 					name='<%= renderResponse.getNamespace() + "bodyEditor" %>'
-					editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+					editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
+				/>
 
 				<input name="<portlet:namespace /><%= bodyEditorParam %>" type="hidden" value="">
 			</td>
@@ -254,7 +255,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<liferay-ui:input-editor
 						initMethod="initSignatureEditor"
 						name='<%= renderResponse.getNamespace() + "signatureEditor" %>'
-						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
+						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
+					/>
 
 					<input name="<portlet:namespace /><%= signatureEditorParam %>" type="hidden" value="">
 				</td>

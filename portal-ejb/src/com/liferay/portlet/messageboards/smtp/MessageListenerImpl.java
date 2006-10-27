@@ -136,12 +136,12 @@ public class MessageListenerImpl implements MessageListener {
 
 			_collectPartContent(message, collector);
 
-			PrincipalSessionBean.setThreadValues(user, true, false);
+			PrincipalSessionBean.setThreadValues(user);
+
 			if (prevMessage == null) {
 				MBMessageServiceUtil.addMessage(
-					categoryId, message.getSubject(),
-					collector.getBody(), collector.getFiles(), false, 0.0, null,
-					true, true);
+					categoryId, message.getSubject(), collector.getBody(),
+					collector.getFiles(), false, 0.0, null, true, true);
 			}
 			else {
 				MBMessageServiceUtil.addMessage(
@@ -155,6 +155,7 @@ public class MessageListenerImpl implements MessageListener {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Prevented unauthorized post from " + from);
 			}
+
 			throw new MessageListenerException(pe);
 		}
 		catch (Exception e) {
