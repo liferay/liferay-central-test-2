@@ -22,9 +22,9 @@ friendly-url-plugin-class?, portlet-data-handler-class?,
 smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-restore-current-view?, maximize-edit?, maximize-help?, maximize-print?,
-layout-cacheable?, instanceable?, private-request-attributes?, render-weight?,
-ajaxable?, system?, active?, include?)>
+action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
+maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
+render-weight?, ajaxable?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -219,6 +219,13 @@ portal.properties.
 http://www.liferay.com/page/guest/documentation/development/properties
 -->
 <!ELEMENT show-portlet-inactive (#PCDATA)>
+
+<!--
+Set the action-url-redirect value to true if an action URL for this portlet
+should cause an auto redirect. This helps prevent double submits. The default
+value is false.
+-->
+<!ELEMENT action-url-redirect (#PCDATA)>
 
 <!--
 Set the restore-current-view value to true if the portlet restores to the

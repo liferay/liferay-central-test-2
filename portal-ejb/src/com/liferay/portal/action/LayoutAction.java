@@ -41,14 +41,19 @@ import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
 import javax.servlet.ServletContext;
@@ -83,7 +88,7 @@ public class LayoutAction extends Action {
 		if (Validator.isNotNull(plid)) {
 			try {
 				if (action.equals("1")) {
-					_processActionRequest(req, res);
+					Portlet portlet = _processActionRequest(req, res);
 
 					ActionResponseImpl actionResponseImpl =
 						(ActionResponseImpl)req.getAttribute(
@@ -100,6 +105,11 @@ public class LayoutAction extends Action {
 
 					if (LiferayWindowState.isExclusive(req)) {
 						return null;
+					}
+
+					if (portlet.isActionURLRedirect()) {
+						_redirectActionURL(
+							req, res, actionResponseImpl, portlet);
 					}
 				}
 				else if (action.equals("0")) {
@@ -179,7 +189,7 @@ public class LayoutAction extends Action {
 		req.setAttribute(WebKeys.FORWARD_URL, forwardURL);
 	}
 
-	private void _processPortletRequest(
+	private Portlet _processPortletRequest(
 			HttpServletRequest req, HttpServletResponse res, boolean action)
 		throws Exception {
 
@@ -241,20 +251,57 @@ public class LayoutAction extends Action {
 
 			PortalUtil.updatePortletMode(portletId, user, layout, portletMode);
 		}
+
+		return portlet;
 	}
 
-	private void _processActionRequest(
+	private Portlet _processActionRequest(
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		_processPortletRequest(req, res, true);
+		return _processPortletRequest(req, res, true);
 	}
 
-	private void _processRenderRequest(
+	private Portlet _processRenderRequest(
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		_processPortletRequest(req, res, false);
+		return _processPortletRequest(req, res, false);
+	}
+
+	private void _redirectActionURL(
+			HttpServletRequest req, HttpServletResponse res,
+			ActionResponseImpl actionResponseImpl, Portlet portlet)
+		throws Exception {
+
+		ActionRequestImpl actionRequestImpl =
+			(ActionRequestImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		PortletURL portletURL = new PortletURLImpl(
+			actionRequestImpl, actionRequestImpl.getPortletName(),
+			layout.getLayoutId(), false);
+
+		Map renderParameters = actionResponseImpl.getRenderParameters();
+
+		Iterator itr = renderParameters.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			Object value = entry.getValue();
+
+			if (value instanceof String) {
+				portletURL.setParameter(key, (String)value);
+			}
+			else if (value instanceof String[]) {
+				portletURL.setParameter(key, (String[])value);
+			}
+		}
+
+		res.sendRedirect(portletURL.toString());
 	}
 
 	private static Log _log = LogFactory.getLog(LayoutAction.class);

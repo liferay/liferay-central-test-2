@@ -155,14 +155,15 @@ public class Portlet extends PortletModel {
 				   String prefsValidator, boolean prefsCompanyWide,
 				   boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
 				   boolean useDefaultTemplate, boolean showPortletAccessDenied,
-				   boolean showPortletInactive, boolean restoreCurrentView,
-				   boolean maximizeEdit, boolean maximizeHelp,
-				   boolean maximizePrint, boolean layoutCacheable,
-				   boolean instanceable, boolean privateRequestAttributes,
-				   int renderWeight, boolean ajaxable, String roles,
-				   Set unlinkedRoles, Map roleMappers, boolean system,
-				   boolean active, boolean include, Map initParams,
-				   Integer expCache, Map portletModes, Set supportedLocales,
+				   boolean showPortletInactive, boolean actionURLRedirect,
+				   boolean restoreCurrentView, boolean maximizeEdit,
+				   boolean maximizeHelp, boolean maximizePrint,
+				   boolean layoutCacheable, boolean instanceable,
+				   boolean privateRequestAttributes, int renderWeight,
+				   boolean ajaxable, String roles, Set unlinkedRoles,
+				   Map roleMappers, boolean system, boolean active,
+				   boolean include, Map initParams, Integer expCache,
+				   Map portletModes, Set supportedLocales,
 				   String resourceBundle, PortletInfo portletInfo,
 				   Set userAttributes, Map customUserAttributes,
 				   boolean warFile, List servletURLPatterns) {
@@ -187,6 +188,7 @@ public class Portlet extends PortletModel {
 		_useDefaultTemplate = useDefaultTemplate;
 		_showPortletAccessDenied = showPortletAccessDenied;
 		_showPortletInactive = showPortletInactive;
+		_actionURLRedirect = actionURLRedirect;
 		_restoreCurrentView = restoreCurrentView;
 		_maximizeEdit = maximizeEdit;
 		_maximizeHelp = maximizeHelp;
@@ -698,6 +700,39 @@ public class Portlet extends PortletModel {
 	 */
 	public void setShowPortletInactive(boolean showPortletInactive) {
 		_showPortletInactive = showPortletInactive;
+	}
+
+	/**
+	 * Returns true if an action URL for this portlet should cause an auto
+	 * redirect.
+	 *
+	 * @return		true if an action URL for this portlet should cause an auto
+	 *				redirect
+	 */
+	public boolean getActionURLRedirect() {
+		return _actionURLRedirect;
+	}
+
+	/**
+	 * Returns true if an action URL for this portlet should cause an auto
+	 * redirect.
+	 *
+	 * @return		true if an action URL for this portlet should cause an auto
+	 *				redirect
+	 */
+	public boolean isActionURLRedirect() {
+		return _actionURLRedirect;
+	}
+
+	/**
+	 * Sets to true if an action URL for this portlet should cause an auto
+	 * redirect.
+	 *
+	 * @param		actionURLRedirect boolean value for whether an action URL
+	 *				for this portlet should cause an auto redirect
+	 */
+	public void setActionURLRedirect(boolean actionURLRedirect) {
+		_actionURLRedirect = actionURLRedirect;
 	}
 
 	/**
@@ -1575,11 +1610,12 @@ public class Portlet extends PortletModel {
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
-			isInstanceable(), isPrivateRequestAttributes(), getRenderWeight(),
-			isAjaxable(), getRoles(), getUnlinkedRoles(), getRoleMappers(),
-			isSystem(), isActive(), isInclude(), getInitParams(), getExpCache(),
+			isShowPortletInactive(), isActionURLRedirect(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
+			isPrivateRequestAttributes(), getRenderWeight(), isAjaxable(),
+			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
+			isActive(), isInclude(), getInitParams(), getExpCache(),
 			getPortletModes(), getSupportedLocales(), getResourceBundle(),
 			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
 			isWARFile(), getServletURLPatterns());
@@ -1697,6 +1733,11 @@ public class Portlet extends PortletModel {
 	 */
 	private boolean _showPortletInactive = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAYOUT_SHOW_PORTLET_INACTIVE));
+
+	/**
+	 * True if an action URL for this portlet should cause an auto redirect.
+	 */
+	private boolean _actionURLRedirect;
 
 	/**
 	 * True if the portlet restores to the current view from the maximized

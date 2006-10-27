@@ -209,8 +209,6 @@ public class WebKeys {
 
 	public static final String PORTAL_PREFERENCES = "PORTAL_PREFERENCES";
 
-	public static final String PORTLET = "PORTLET";
-
 	public static final String PORTLET_CATEGORY = "PORTLET_CATEGORY";
 
 	public static final String PORTLET_CATEGORY_PATH = "PORTLET_CATEGORY_PATH";

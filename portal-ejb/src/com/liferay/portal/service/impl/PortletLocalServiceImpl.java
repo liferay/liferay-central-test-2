@@ -932,6 +932,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setShowPortletInactive(GetterUtil.getBoolean(
 					portlet.elementText("show-portlet-inactive"),
 					portletModel.isShowPortletInactive()));
+				portletModel.setActionURLRedirect(GetterUtil.getBoolean(
+					portlet.elementText("action-url-redirect"),
+					portletModel.isActionURLRedirect()));
 				portletModel.setRestoreCurrentView(GetterUtil.getBoolean(
 					portlet.elementText("restore-current-view"),
 					portletModel.isRestoreCurrentView()));
