@@ -62,9 +62,8 @@ public class EditConfigurationAction extends PortletAction {
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, true, true);
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
 
 		prefs.setValue("display-style", displayStyle);
 

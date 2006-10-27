@@ -72,9 +72,8 @@ public class EditConfigurationAction extends PortletAction {
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, true, true);
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
 
 		prefs.setValue("ad-format", String.valueOf(adFormat));
 		prefs.setValue("ad-type", String.valueOf(adType));

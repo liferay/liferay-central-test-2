@@ -25,4 +25,4 @@
 
 <%@ include file="/html/portlet/google_gadget/init.jsp" %>
 
-<script src="http://gmodules.com/ig/ifr?url=<%=gadgetURL%>&<%=gadgetSpecificParams%>&synd=open&w=<%=width%>&h=<%=height%>&title=<%=URLEncoder.encode(title, "UTF-8")%>&border=<%=URLEncoder.encode(border, "UTF-8")%>&output=js"></script>
+<script src="http://gmodules.com/ig/ifr?url=<%= gadgetURL %>&<%= gadgetParams %>&synd=open&w=<%= width %>&h=<%= height %>&title=&border=none&output=js"></script>

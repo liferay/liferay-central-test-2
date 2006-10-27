@@ -428,6 +428,11 @@
 		<struts-path>google_adsense</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>95</portlet-name>
+		<struts-path>google_gadget</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

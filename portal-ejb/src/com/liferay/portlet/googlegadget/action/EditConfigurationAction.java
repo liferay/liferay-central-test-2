@@ -24,14 +24,20 @@ package com.liferay.portlet.googlegadget.action;
 
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
-import com.liferay.portlet.PortletPreferencesFactory;
-import org.apache.struts.action.ActionMapping;
+
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
-
-import javax.portlet.*;
+import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="EditConfigurationAction.java.html"><b><i>View Source</i></b></a>
@@ -39,8 +45,7 @@ import javax.portlet.*;
  * @author  Jorge Ferrer
  *
  */
-public class EditConfigurationAction
-	extends PortletAction {
+public class EditConfigurationAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -53,24 +58,18 @@ public class EditConfigurationAction
 			return;
 		}
 
-		String title = ParamUtil.getString(req, "title");
+		String gadgetId = ParamUtil.getString(req, "gadgetId");
 		String width = ParamUtil.getString(req, "width");
 		String height = ParamUtil.getString(req, "height");
-		String borderId = ParamUtil.getString(req, "borderId");
-		String gadgetId = ParamUtil.getString(req, "gadgetId");
 
-		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+		String portletResource = ParamUtil.getString(req, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, true, true);
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, true, true);
 
-		prefs.setValue("title", title);
+		prefs.setValue("gadget-id", gadgetId);
 		prefs.setValue("width", width);
 		prefs.setValue("height", height);
-		prefs.setValue("border-id", borderId);
-		prefs.setValue("gadget-id", gadgetId);
 
 		prefs.store();
 

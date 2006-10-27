@@ -33,31 +33,22 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String title = prefs.getValue("title", StringPool.BLANK);
+String gadgetId = prefs.getValue("gadget-id", StringPool.BLANK);
 String width = prefs.getValue("width", StringPool.BLANK);
 String height = prefs.getValue("height", StringPool.BLANK);
-String borderId = prefs.getValue("border-id", StringPool.BLANK);
-String gadgetId = prefs.getValue("gadget-id", StringPool.BLANK); 
-%>
+%><%--
 
-<%@ include file="register_gadgets.jsp" %>
+--%><%@ include file="/html/portlet/google_gadget/register_gadgets.jsp" %><%--
 
-<%
-int gadgetSelected = 0;
+--%><%
+int gadgetIdPos = 0;
+
 for (int i = 0; i < gadgets.length; i++) {
 	if (gadgets[i][0].equals(gadgetId)) {
-		gadgetSelected = i;
+		gadgetIdPos = i;
 	}
 }
-String gadgetURL = gadgets[gadgetSelected][4];
-String gadgetSpecificParams = gadgets[gadgetSelected][5];
 
-int borderSelected = 0;
-for (int i = 0; i < borders.length; i++) {
-	if (borders[i][0].equals(borderId)) {
-		borderSelected = i;
-	}
-}
-String border = borders[borderSelected][2];
-
+String gadgetURL = gadgets[gadgetIdPos][4];
+String gadgetParams = gadgets[gadgetIdPos][5];
 %>

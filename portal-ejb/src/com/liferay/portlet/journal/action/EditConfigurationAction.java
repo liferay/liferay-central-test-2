@@ -63,9 +63,8 @@ public class EditConfigurationAction extends PortletAction {
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
 
-		PortletPreferences prefs =
-			PortletPreferencesFactory.getPortletSetup(
-				req, portletResource, false, true);
+		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+			req, portletResource, false, true);
 
 		String tabs2 = ParamUtil.getString(req, "tabs2");
 

@@ -2047,8 +2047,8 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
-				<name>title</name>
-				<value></value>
+				<name>gadget-id</name>
+				<value>geoiptool</value>
 			</preference>
 			<preference>
 				<name>width</name>
@@ -2056,15 +2056,7 @@
 			</preference>
 			<preference>
 				<name>height</name>
-				<value>136</value>
-			</preference>
-			<preference>
-				<name>border-id</name>
-				<value>none</value>
-			</preference>
-			<preference>
-				<name>gadget-id</name>
-				<value>datetime</value>
+				<value>290</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>

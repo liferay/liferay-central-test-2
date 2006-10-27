@@ -27,11 +27,9 @@
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
-
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
@@ -39,28 +37,19 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<select name="<portlet:namespace />gadgetId" id="<portlet:namespace />gadgetId">
+				<select name="<portlet:namespace />gadgetId" onChange="<portlet:namespace />setRecommendedGadgetSize();">
 
 					<%
 					for (int i = 0; i < gadgets.length; i++) {
 					%>
 
-						<option <%= (gadgetSelected == i) ? "selected" : "" %> value="<%= gadgets[i][0] %>"><%= gadgets[i][1] %></option>
+						<option <%= (gadgetIdPos == i) ? "selected" : "" %> value="<%= gadgets[i][0] %>"><%= gadgets[i][1] %></option>
 
 					<%
 					}
 					%>
 
 				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "title") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<input class="form-text" name="<portlet:namespace />title" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= title %>">
 			</td>
 		</tr>
 		<tr>
@@ -69,7 +58,7 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />width"  size="4" type="text" value="<%= width %>"> px
+				<input class="form-text" name="<portlet:namespace />width" size="4" type="text" value="<%= width %>">
 			</td>
 		</tr>
 		<tr>
@@ -78,41 +67,14 @@
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<input class="form-text" name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<%= LanguageUtil.get(pageContext, "border") %>
-			</td>
-			<td style="padding-left: 10px;"></td>
-			<td>
-				<select name="<portlet:namespace />borderId">
-
-					<%
-					for (int i = 0; i < borders.length; i++) {
-					%>
-
-						<option <%= (borderSelected == i) ? "selected" : "" %> value="<%= borders[i][0] %>"><%= borders[i][1] %></option>
-
-					<%
-					}
-					%>
-
-				</select>
+				<input class="form-text" name="<portlet:namespace />height" size="4" type="text" value="<%= height %>">
 			</td>
 		</tr>
 		</table>
 	</td>
-	<td>
-		<div style="height: 150px; margin: auto; overflow: auto; width: 50%">
-			<div style="margin: 3px; width: 100%">
-				<%--<liferay-portlet:runtime portletName="<%= portletConfig.getPortletName() %>" />--%>
-			</div>
-		</div>
-	</td>
 </tr>
 </table>
+
 <br>
 
 <input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
@@ -120,35 +82,34 @@
 </form>
 
 <script type="text/javascript">
-function <portlet:namespace />setRecommendedGadgetSize() {
-	var widthMatrix = new Array();
-	<%
-	for (int i = 0; i < gadgets.length; i++) {
-	%>
+	function <portlet:namespace />setRecommendedGadgetSize() {
+		var <portlet:namespace />widthMatrix = new Array();
 
-		widthMatrix[<%=i%>] = "<%= gadgets[i][2] %>";
+		<%
+		for (int i = 0; i < gadgets.length; i++) {
+		%>
 
-	<%
+			<portlet:namespace />widthMatrix[<%= i %>] = "<%= gadgets[i][2] %>";
+
+		<%
+		}
+		%>
+
+		var <portlet:namespace />heightMatrix = new Array();
+
+		<%
+		for (int i = 0; i < gadgets.length; i++) {
+		%>
+
+			<portlet:namespace />heightMatrix[<%= i %>] = "<%= gadgets[i][3] %>";
+
+		<%
+		}
+		%>
+
+		var index = document.<portlet:namespace />fm.<portlet:namespace />gadgetId.selectedIndex;
+
+		document.<portlet:namespace />fm.<portlet:namespace />width.value = <portlet:namespace />widthMatrix[index];
+		document.<portlet:namespace />fm.<portlet:namespace />height.value = <portlet:namespace />heightMatrix[index];
 	}
-	%>
-
-	var heightMatrix = new Array();
-	<%
-	for (int i = 0; i < gadgets.length; i++) {
-	%>
-
-		heightMatrix[<%=i%>] = "<%= gadgets[i][3] %>";
-
-	<%
-	}
-	%>
-
-	var index = document.<portlet:namespace />fm.<portlet:namespace />gadgetId.selectedIndex;
-	document.<portlet:namespace />fm.<portlet:namespace />width.value = widthMatrix[index];
-	document.<portlet:namespace />fm.<portlet:namespace />height.value = heightMatrix[index];
-}
-
-document.<portlet:namespace />fm.<portlet:namespace />gadgetId.focus();
-document.<portlet:namespace />fm.<portlet:namespace />gadgetId.onchange=<portlet:namespace />setRecommendedGadgetSize;
-	
 </script>
