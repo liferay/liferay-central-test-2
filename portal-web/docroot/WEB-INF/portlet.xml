@@ -2032,6 +2032,48 @@
 			<role-name>user</role-name>
 		</security-role-ref>
 	</portlet>
+	<portlet>
+		<portlet-name>95</portlet-name>
+		<display-name>Google Gadget</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/google_gadget/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>title</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>width</name>
+				<value>320</value>
+			</preference>
+			<preference>
+				<name>height</name>
+				<value>136</value>
+			</preference>
+			<preference>
+				<name>border-id</name>
+				<value>none</value>
+			</preference>
+			<preference>
+				<name>gadget-id</name>
+				<value>datetime</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
 	<custom-window-state>
 		<window-state>exclusive</window-state>
 	</custom-window-state>

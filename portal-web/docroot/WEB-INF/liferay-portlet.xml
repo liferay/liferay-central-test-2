@@ -728,6 +728,17 @@
 		<render-weight>1</render-weight>
 		<ajaxable>false</ajaxable>
 	</portlet>
+	<portlet>
+		<portlet-name>95</portlet-name>
+		<struts-path>google_gadget</struts-path>
+		<configuration-path>/google_gadget/edit_configuration</configuration-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<render-weight>1</render-weight>
+		<ajaxable>false</ajaxable>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

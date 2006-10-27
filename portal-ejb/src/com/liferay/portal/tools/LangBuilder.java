@@ -126,7 +126,6 @@ public class LangBuilder {
 				}
 
 				if (translatedText == null || translatedText.equals("")) {
-					System.out.println(languageId + " " + key);
 
 					if (line.indexOf("{") != -1 || line.indexOf("<") != -1) {
 						translatedText = value;
@@ -248,6 +247,8 @@ public class LangBuilder {
 		String toText = null;
 
 		try {
+			System.out.println("Translating to " + translationId + " the text "
+				+ fromText);
 			WebCacheable wc =
 				new TranslationConverter(translationId, fromText);
 

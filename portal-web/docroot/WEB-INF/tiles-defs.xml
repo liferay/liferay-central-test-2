@@ -500,6 +500,20 @@
 		<put name="portlet_content" value="/portlet/google_adsense/view.jsp" />
 	</definition>
 
+	<!-- Google Gadget -->
+
+	<definition name="portlet.google_gadget" extends="portlet">
+		<put name="portlet_decorate" value="true" />
+	</definition>
+
+	<definition name="portlet.google_gadget.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/google_gadget/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.google_gadget.view" extends="portlet.google_gadget">
+		<put name="portlet_content" value="/portlet/google_gadget/view.jsp" />
+	</definition>
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />
