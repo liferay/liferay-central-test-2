@@ -146,9 +146,10 @@ public class Portlet extends PortletModel {
 	 * Constructs a portlet with the specified parameters.
 	 */
 	public Portlet(String portletId, String companyId, String strutsPath,
-				   String configurationPath, String portletClass,
-				   String indexerClass, String schedulerClass,
-				   String portletURLClass, String friendlyURLPluginClass,
+				   String configurationPath, String displayName,
+				   String portletClass, String indexerClass,
+				   String schedulerClass, String portletURLClass,
+				   String friendlyURLPluginClass,
 				   String portletDataHandlerClass,
 				   String smtpMessageListenerClass, String defaultPreferences,
 				   String prefsValidator, boolean prefsCompanyWide,
@@ -170,6 +171,7 @@ public class Portlet extends PortletModel {
 		setCompanyId(companyId);
 		_strutsPath = strutsPath;
 		_configurationPath = configurationPath;
+		_displayName = displayName;
 		_portletClass = portletClass;
 		_indexerClass = indexerClass;
 		_schedulerClass = schedulerClass;
@@ -268,6 +270,24 @@ public class Portlet extends PortletModel {
 	 */
 	public void setConfigurationPath(String configurationPath) {
 		_configurationPath = configurationPath;
+	}
+
+	/**
+	 * Gets the display name of the portlet.
+	 *
+	 * @return		the display name of the portlet
+	 */
+	public String getDisplayName() {
+		return _displayName;
+	}
+
+	/**
+	 * Sets the display name of the portlet.
+	 *
+	 * @param		displayName the display name of the portlet
+	 */
+	public void setDisplayName(String displayName) {
+		_displayName = displayName;
 	}
 
 	/**
@@ -1548,8 +1568,8 @@ public class Portlet extends PortletModel {
 	public Object clone() {
 		return new Portlet(
 			getPortletId(), getCompanyId(), getStrutsPath(),
-			getConfigurationPath(), getPortletClass(), getIndexerClass(),
-			getSchedulerClass(), getPortletURLClass(),
+			getConfigurationPath(), getDisplayName(), getPortletClass(),
+			getIndexerClass(), getSchedulerClass(), getPortletURLClass(),
 			getFriendlyURLPluginClass(), getPortletDataHandlerClass(),
 			getSmtpMessageListenerClass(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
@@ -1594,6 +1614,11 @@ public class Portlet extends PortletModel {
 	 * The configuration path of the portlet.
 	 */
 	private String _configurationPath;
+
+	/**
+	 * The display name of the portlet.
+	 */
+	private String _displayName;
 
 	/**
 	 * The name of the portlet class of the portlet.

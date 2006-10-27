@@ -544,6 +544,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setServletURLPatterns(servletURLPatterns);
 			}
 
+			portletModel.setDisplayName(GetterUtil.getString(
+				portlet.elementText("display-name"),
+				portletModel.getDisplayName()));
 			portletModel.setPortletClass(portlet.elementText("portlet-class"));
 
 			Iterator itr2 = portlet.elements("init-param").iterator();

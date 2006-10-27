@@ -59,9 +59,23 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("portletId", portlet.getPortletId());
 
-	// Name
+	// Name and description
 
-	row.addText(PortalUtil.getPortletTitle(portlet, application, locale), rowURL);
+	StringBuffer sb = new StringBuffer();
+
+	String title = PortalUtil.getPortletTitle(portlet, application, locale);
+	String displayName = portlet.getDisplayName();
+
+	sb.append(title);
+
+	if (Validator.isNotNull(displayName) && !title.equals(displayName)) {
+		sb.append("<br>");
+		sb.append("<span style=\"font-size: xx-small;\">");
+		sb.append(portlet.getDisplayName());
+		sb.append("</span>");
+	}
+
+	row.addText(sb.toString(), rowURL);
 
 	// Active
 
