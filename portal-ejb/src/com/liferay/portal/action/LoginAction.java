@@ -57,6 +57,12 @@ import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.SessionParameters;
 
+import java.util.ArrayList;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -113,16 +119,40 @@ public class LoginAction extends Action {
 
 		Company company = PortalUtil.getCompany(req);
 
+		Map headerMap = new HashMap();
+
+		Enumeration enu1 = req.getHeaderNames();
+
+		while (enu1.hasMoreElements()) {
+			String name = (String)enu1.nextElement();
+
+			Enumeration enu2 = req.getHeaders(name);
+
+			List headers = new ArrayList();
+
+			while (enu2.hasMoreElements()) {
+				String value = (String)enu2.nextElement();
+
+				headers.add(value);
+			}
+
+			headerMap.put(name, (String[])headers.toArray(new String[0]));
+		}
+
+		Map parameterMap = req.getParameterMap();
+
 		if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
-				company.getCompanyId(), login, password, req.getParameterMap());
+				company.getCompanyId(), login, password, headerMap,
+				parameterMap);
 
 			userId = UserLocalServiceUtil.getUserId(
 				company.getCompanyId(), login);
 		}
 		else {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
-				company.getCompanyId(), login, password, req.getParameterMap());
+				company.getCompanyId(), login, password, headerMap,
+				parameterMap);
 		}
 
 		try {

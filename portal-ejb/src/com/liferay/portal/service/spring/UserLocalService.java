@@ -74,13 +74,13 @@ public interface UserLocalService {
 
 	public int authenticateByEmailAddress(java.lang.String companyId,
 		java.lang.String emailAddress, java.lang.String password,
-		java.util.Map parameterMap)
+		java.util.Map headerMap, java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public int authenticateByUserId(java.lang.String companyId,
 		java.lang.String userId, java.lang.String password,
-		java.util.Map parameterMap)
+		java.util.Map headerMap, java.util.Map parameterMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

@@ -76,7 +76,7 @@ public class LDAPAuth implements Authenticator {
 
 	public int authenticateByEmailAddress(
 			String companyId, String emailAddress, String password,
-			Map parameterMap)
+			Map headerMap, Map parameterMap)
 		throws AuthException {
 
 		try {
@@ -91,7 +91,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByUserId(
-			String companyId, String userId, String password, Map parameterMap)
+			String companyId, String userId, String password, Map headerMap,
+			Map parameterMap)
 		throws AuthException {
 
 		try {

@@ -33,11 +33,12 @@ import java.util.Map;
 public interface AuthFailure {
 
 	public void onFailureByEmailAddress(
-			String companyId, String emailAddress, Map parameterMap)
+			String companyId, String emailAddress, Map headerMap,
+			Map parameterMap)
 		throws AuthException;
 
 	public void onFailureByUserId(
-			String companyId, String userId, Map parameterMap)
+			String companyId, String userId, Map headerMap, Map parameterMap)
 		throws AuthException;
 
 }
