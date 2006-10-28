@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/analog_clock/init.jsp" %>
 
-<div style="text-align: center;">
+<div align="center">
 	<liferay-ui:flash
 		align="center"
 		height="100"

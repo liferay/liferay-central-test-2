@@ -442,15 +442,34 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 	</c:choose>
 </div>
 
-<script type="text/javascript">
-	var portletEl = document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>");
-	portletEl.portletId = "<%= portletId %>";
-	portletEl.isStatic = <%= portlet.isStatic() || !showMoveIcon %>;
-	portletEl.isStaticStart = <%= portlet.isStaticStart() %>;
-	portletEl.isStaticEnd = <%= portlet.isStaticEnd() %>;
-</script>
-
 <%
+
+if (themeDisplay.isSignedIn()) {
+	String staticVar = "no";
+	
+	if (portlet.isStatic() || !showMoveIcon) {
+		staticVar = "yes";
+		
+		if (portlet.isStaticStart()) {
+			staticVar = "start";
+		}
+		
+		if (portlet.isStaticEnd()) {
+			staticVar = "end";
+		}
+	}
+	%>
+
+	<script type="text/javascript">
+		$("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletId %>";
+		<c:if test="<%= !staticVar.equals("no") %>">
+			$("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+		</c:if>
+	</script>
+	
+	<%
+}
+
 RenderRequestFactory.recycle(renderRequestImpl);
 RenderResponseFactory.recycle(renderResponseImpl);
 %>

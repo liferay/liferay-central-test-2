@@ -1096,6 +1096,8 @@
 			<forward name="portlet.portlet_configuration.edit_permissions" path="portlet.portlet_configuration.edit_permissions" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
+		
+		<action path="/portlet_configuration/update_title" type="com.liferay.portlet.portletconfiguration.action.UpdateTitleAction" />
 
 		<!-- Recent Documents -->
 

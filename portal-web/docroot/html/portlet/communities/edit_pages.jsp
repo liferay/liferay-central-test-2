@@ -119,8 +119,8 @@ portletURL.setParameter("groupId", groupId);
 			parent.Alerts.resizeIframe({height: box.scrollHeight});
 		}
 
-		addEventHandler(window, "onload", <portlet:namespace />resizeParent);
-		addEventHandler(document, "onclick", <portlet:namespace />resizeParent);
+		Event.addHandler(window, "onload", <portlet:namespace />resizeParent);
+		Event.addHandler(document, "onclick", <portlet:namespace />resizeParent);
 	</c:if>
 
 	function <portlet:namespace />savePage() {

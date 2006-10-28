@@ -122,8 +122,13 @@ Coordinate.prototype.inside = function(northwest, southeast) {
 Coordinate.prototype.insideObject = function(obj, recurse) {
 	var nwOffset = Coordinates.northwestOffset(obj, recurse);
 	var seOffset = nwOffset.plus(new Coordinate(obj.offsetWidth, obj.offsetHeight));
+	var rt = null
 	
-	return this.inside(nwOffset, seOffset);
+	if (this.inside(nwOffset, seOffset)) {
+		rt = this.minus(nwOffset);
+	}
+	
+	return rt;
 }
 
 // getMousePos(event) has been depricated.  Use mousePos.update(event) instead.

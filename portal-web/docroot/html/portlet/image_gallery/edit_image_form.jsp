@@ -165,9 +165,7 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
 
-	function updateIFrame() {
+	Event.addHandler(window, "onload", function() {
 		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
-	}
-
-	addLoadEvent(updateIFrame);
+	});
 </script>

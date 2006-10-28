@@ -355,8 +355,18 @@ FONT.bg {
 #layout-my-places {
 	position: absolute;
 	right: 20px;
-	top: 45px;
+	top: 43px;
 	z-index: 3;
+}
+
+.layout-my-places {
+	border: 1px solid #909090;
+	padding: 2px;
+}
+
+.layout-my-places-arrow {
+	background-color: #909090;
+	padding: 2px;
 }
 
 #layout-my-places ul {
@@ -371,6 +381,7 @@ FONT.bg {
 
 #layout-my-places ul li {
 	padding: 2px;
+	white-space: nowrap;
 }
 
 #layout-nav-container {

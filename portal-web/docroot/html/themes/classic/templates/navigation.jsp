@@ -100,24 +100,9 @@
 <c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 <script type="text/javascript">
 
-function enterPressed(event) {
-	if (!event) {
-		event = window.event;
-	}
-	var keycode = event.keyCode;
-
-	if (keycode == 13) {
-		return true;
-	}
-	else {
-		return false;
-	}
-}
-
 var LayoutTab = {
 	editing: null,
-	newPage: <%= newPage %>,
-
+	
 	layoutIds: [<%
 		for (int i = 0; i < layoutIds.size(); i++) {
 			out.print((String)(layoutIds.get(i)));
@@ -317,7 +302,7 @@ var LayoutTab = {
 						options.from = index;
 					}
 					else {
-						if (mousePos.insideObject(tab)) {
+						if (mousePos.insideObject(tab, true)) {
 							options.to = index;
 						}
 					}
@@ -357,17 +342,10 @@ var LayoutTab = {
 		tabs.foreach(function(item, index) {
 			item.layoutId = LayoutTab.layoutIds[index];
 		});
-
-		tabText.onmouseover = function() {
-			this.style.backgroundColor = "#FFFFFF";
-		};
-		tabText.onmouseout = function() {
-			this.style.backgroundColor = "transparent";
-		};
-
-		if (LayoutTab.newPage) {
+		
+		<c:if test="<%= newPage %>">
 			LayoutTab.edit();
-		}
+		</c:if>
 	}
 }
 

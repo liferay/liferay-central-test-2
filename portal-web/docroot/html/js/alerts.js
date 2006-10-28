@@ -74,12 +74,12 @@ var Alerts = {
 			if (Alerts.messageArray.length > 0) {
 				Alerts.message = Alerts.messageArray[Alerts.messageArray.length - 1];
 				Alerts.message.style.zIndex = ZINDEX.ALERT + 1;
-				Alerts.showSelects(Alerts.message);
+				setSelectVisibility("visible", Alerts.message);
 				background = wrapper.background;
 			}
 			else {
 				Alerts.message = null;
-				Alerts.showSelects();
+				setSelectVisibility("visible");
 				background = Alerts.background;
 			}
 			
@@ -165,25 +165,25 @@ var Alerts = {
 				body.appendChild(background);
 
 			}
-			Alerts.hideSelects();
+			setSelectVisibility("hidden");
 			
 			if (Alerts.messageArray.length > 0) {
 				var lastMsg = Alerts.messageArray[Alerts.messageArray.length - 1];
 				lastMsg.style.zIndex = ZINDEX.ALERT - 1;
-				Alerts.hideSelects(lastMsg);
+				setSelectVisibility("hidden", lastMsg);
 			}
 
-			Alerts.showSelects(message);
+			setSelectVisibility("visibile", message);
 			
 			Alerts.message = message;
 			Alerts.messageArray.push(wrapper);
 			
 			Alerts.resize();
-			addEventHandler(window, "onresize", Alerts.resize)
+			Event.addHandler(window, "onresize", Alerts.resize)
 			
 			if (!noCenter) {
 				Alerts.center(msgHeight, msgWidth);
-				addEventHandler(window, "onresize", Alerts.center)
+				Event.addHandler(window, "onresize", Alerts.center)
 			}
 			else {
 				wrapper.style.top = 0;
@@ -272,29 +272,7 @@ var Alerts = {
     	
     	Alerts.resize();
     },
-    
-    hideSelects: function(obj) {
-    	if (is_ie) {
-	    	obj = (obj == null) ? document : obj;
-			var selects = obj.getElementsByTagName("select");
-			
-			for (var i = 0; i < selects.length; i++) {
-				selects[i].style.visibility = "hidden";
-			}
-    	}
-    },
-    
-    showSelects: function(obj) {
-    	if (is_ie) {
-	    	obj = (obj == null) ? document : obj;
-			var selects = obj.getElementsByTagName("select");
-			
-			for (var i = 0; i < selects.length; i++) {
-				selects[i].style.visibility = "";
-			}
-    	}
-    },
-    
+
     remove: function(obj) {
     	var msgArray = Alerts.messageArray;
     	

@@ -78,29 +78,11 @@ function Array_iterate (func, options) {
 
 Array.prototype.foreach = Array_iterate;
 
-function addEventHandler(obj, type, func) {
-	if (type.indexOf("on") != 0) {
-		type = "on" + type;
-	}
-	
-    var temp = obj[type];
-
-	if (typeof obj[type] != "function") {
-        obj[type] = func;
-    }
-	else {
-        obj[type] = function() {
-        	if (temp) {
-	            temp();
-        	}
-
-			func();
-        }
-    }
-}
-
+/*
+ * Depricated.  Use Event.addHandler
+ */
 function addLoadEvent(func) {
-	addEventHandler(window, "onload", func);
+	Event.addHandler(window, "onload", func);
 }
 
 function autoComplete(box, text) {
@@ -292,6 +274,17 @@ function checkTab(box) {
 	}
 }
 
+function cloneObject(obj, recurse) {
+
+    for (i in obj) {
+        if (typeof obj[i] == 'object' && recurse) {
+            this[i] = new cloneObject(obj[i], true);
+        }
+        else
+            this[i] = obj[i];
+    }
+}
+
 var Cookie = {
 	create : function(name, value, days) {
 		if (days) {
@@ -374,9 +367,87 @@ function disableFields(fields) {
 	}
 }
 
+var Element = {
+	addClassName: function(element, className) {
+		if (className && !this.hasClassName(element, className)) {
+			var classArray = element.className.split(" ");
+			classArray.push(className);
+			element.className = classArray.join(" ");
+		}
+	},
+	
+	removeClassName: function(element, className) {
+		if (className && this.hasClassName(element, className)) {
+			var classArray = element.className.split(new RegExp("(^|\\s)" + className + "(\\s|$)"));
+			element.className = classArray.join(" ");
+		}
+	},
+	
+	hasClassName: function(element, className) {
+		var rt = false;
+	
+		if (element.className && className) {
+			rt = element.className.match(new RegExp("(^|\\s)" + className + "(\\s|$)"));
+		}
+	
+		return rt;
+	}
+}
+
 function enableFields(fields) {
 	for (var i = 0; i < fields.length; i++) {
 		fields[i].disabled = false;
+	}
+}
+
+function enterPressed(event) {
+	if (!event) {
+		event = window.event;
+	}
+	var keycode = event.keyCode;
+	
+	if (keycode == 13) {
+		return true;
+	}
+	else {
+		return false;
+	}
+}
+
+var Event = {
+	addHandler: function(obj, type, func) {
+		if (type.indexOf("on") != 0) {
+			type = "on" + type;
+		}
+		
+	    var temp = obj[type];
+	
+		if (typeof obj[type] != "function") {
+	        obj[type] = func;
+	    }
+		else {
+	        obj[type] = function() {
+	        	if (temp) {
+		            temp();
+	        	}
+	
+				func();
+	        }
+	    }
+	},
+	
+	enterPressed: function(event) {
+		if (!event) {
+			event = window.event;
+		}
+		var keycode = event.keyCode;
+		
+		if (keycode == 13) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 }
 
@@ -868,6 +939,22 @@ function setSelectedValue(col, value) {
 	}
 }
 
+function setSelectVisibility(mode, obj) {
+	if (is_ie) {
+		if (obj) {
+			obj = $(obj);
+		}
+		else {
+			obj = document.getElementsByTagName("body")[0];
+		}
+		
+		selectList = obj.getElementsByTagName("select");
+		for (var i = 0; i < selectList.length; i++) {
+			selectList[i].style.visibility = mode;
+		}
+	}
+}
+
 function slideMaximize(id, height, speed) {
 	var obj = document.getElementById(id);
 	var reference = obj.getElementsByTagName("DIV")[0];
@@ -1088,7 +1175,7 @@ document.getElementsByClassName = function(className, parentElement) {
 	
 	for (var i = 0; i < children.length; i++) {
 		var child = children[i];
-		if (child.className.match(new RegExp("(^|\\s)" + className + "(\\s|$)"))) {
+		if (Element.hasClassName(child, className)){
 			elements.push(child);
 		}
 	}

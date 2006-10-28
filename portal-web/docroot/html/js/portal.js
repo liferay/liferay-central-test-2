@@ -60,6 +60,102 @@ var DynamicSelect = {
 	}
 }
 
+var LayoutColumns = {
+	columns: new Array(),
+	layoutMaximized: "",
+	plid: "",
+	
+	init: function(colArray) {
+		for (var i = 0; i < colArray.length; i++) {
+			var column =  $("layout-column_" + colArray[i]);
+			
+			if (column) {
+				column.columnId = colArray[i];
+				
+				DropZone.add(column, {
+					onDrop: LayoutColumns.onDrop,
+					inheritParent: true
+					});
+					
+				LayoutColumns.columns.push(column, {onDrop:LayoutColumns.onDrop});
+				
+				var boxes = document.getElementsByClassName("portlet-boundary", column);
+				
+				boxes.foreach(function(item, index) {
+					if (!item.isStatic) {
+						LayoutColumns.initPortlet(item);
+					}
+				});
+			}
+		}
+	},
+	
+	initPortlet: function(portlet) {
+		portlet = $(portlet);
+		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
+		
+		DragDrop.create(portlet, {
+			revert: true,
+			handle: handle,
+			highlightDropzones: true});
+	},
+	
+	onDrop: function(item) {
+		var dropOptions = this;
+		var container = dropOptions.dropItem;
+		var childList = container.childNodes;
+		var insertBox = null;
+
+		item.dragOptions.clone.isStatic = "yes";
+		
+		for (var i = 0; i < childList.length; i++){
+			var box = childList[i];
+			
+			if (Element.hasClassName(box, "portlet-boundary")) {
+				if (!box.isStatic) {
+					var nwOffset = Coordinates.northwestOffset(box, true);
+					var midY = nwOffset.y + (box.offsetHeight / 2);
+					
+					if (mousePos.y < midY) {
+						insertBox = box;
+						break;
+					}
+				}
+				else if (box.isStatic.match("end")) {
+					insertBox = box;
+					break;
+				}
+			}
+		}
+		
+		item.parentNode.removeChild(item);
+		container.insertBefore(item, insertBox);
+		
+		item.dragOptions.revert = false;
+		item.style.position = "";
+		item.style.left = "";
+		item.style.top = "";
+		item.style.height = "";
+		item.style.width = "100%";
+		
+		// Find new position
+		var newPosition = 0;
+		
+		for (var i = 0; i < childList.length; i++){
+			var box = childList[i];
+			if (Element.hasClassName(box, "portlet-boundary")) {
+				if (!box.isStatic) {
+					if (box == item) {
+						break;
+					}
+					newPosition++;
+				}
+			}
+		}
+		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition);
+	}
+}
+
 var PortletHeaderBar = {
 
 	fadeIn : function (id) {
@@ -213,4 +309,89 @@ var Tabs = {
 		}
 	}
 
+}
+
+var QuickEdit = {
+	curentInput: null,
+	
+	create: function(id, options) {
+		/* OPTIONS
+		 * dragId: specify drag ID to disable drag during editing
+		 */
+		 
+		var item = $(id);
+		item.editOptions = options;
+		item.onclick = function() { QuickEdit.edit(this); };
+	},
+	
+	edit: function(textObj) {
+		var opts = textObj.editOptions;
+		var wasClicked = true;
+		
+		if (opts.dragId) {
+			wasClicked = $(opts.dragId).wasClicked;
+		}
+
+		if (!textObj.editing && wasClicked) {
+			var input = document.createElement("input");
+			var textDiv = textObj.parentNode;
+			var inputWidth = textObj.offsetWidth;
+			
+			input.className = "portlet-form-input-field";
+			input.style.width = (inputWidth + 10) + "px";
+			input.style.marginLeft = "5px";
+			input.value = textObj.innerHTML;
+			input.textObj = textObj;
+			input.onmouseover = function() {
+				document.onclick = function() {};
+			}
+			input.onmouseout = function() {
+				document.onclick = QuickEdit.done;
+			}
+			input.onkeydown = function(event) {
+				if (enterPressed(event)) {
+					QuickEdit.done();
+				}
+			}
+			
+			textObj.style.display = "none";
+			textDiv.appendChild(input);
+			input.focus();
+			
+			QuickEdit.curentInput = input;
+			
+			if (opts.dragId) {
+				$(opts.dragId).disableDrag = true;
+			}
+			
+			textObj.editing = true;
+		}
+	},
+	
+	done: function() {
+		var input = QuickEdit.curentInput;
+		if (input) {
+			document.onclick = function() {};
+			
+			var textObj = input.textObj;
+			var newText = input.value;
+			var opts = textObj.editOptions;
+			
+			if (newText != textObj.innerHTML) {
+				textObj.innerHTML = newText;
+				if (opts.onComplete) {
+					opts.onComplete(newText);
+				}
+			}
+			
+			input.parentNode.removeChild(input);
+			textObj.style.display = "";
+			textObj.editing = false;
+			QuickEdit.curentInput = null;
+			
+			if (opts.dragId) {
+				$(opts.dragId).disableDrag = false;
+			}
+		}
+	}
 }

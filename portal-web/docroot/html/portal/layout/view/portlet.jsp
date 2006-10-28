@@ -38,33 +38,26 @@ else {
 	RuntimePortletUtil.processTemplate(application, pageContext, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content);
 }
 
-List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
+if (themeDisplay.isSignedIn()) {
+	List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
+	%>
+
+		<script type="text/javascript">
+		    LayoutColumns.layoutMaximized = <%= layoutMaximized %>;
+		    LayoutColumns.plid = "<%= plid %>";
+		
+			<c:if test="<%= !layoutMaximized %>">
+				LayoutColumns.init([<%
+					for (int i = 0; i < columns.size(); i++) {
+						out.print("\"" + (String)columns.get(i) + "\"");
+						if (i < columns.size() - 1) {
+							out.print(",");
+						}
+					}
+					%>]);
+			</c:if>
+		</script>
+
+		<%
+}
 %>
-
-<script type="text/javascript">
-    DragDrop.layoutMaximized = <%= layoutMaximized %>;
-    DragDrop.plid = "<%= plid %>";
-
-	function initDragDrop() {
-		var column = null;
-
-		<%
-		for (int i = 0; i < columns.size(); i++) {
-			String column = (String)columns.get(i);
-		%>
-
-			column = document.getElementById("layout-column_<%= column %>");
-
-			if (column && column.childNodes) {
-				DragDrop.makeListContainer(column, "g1", true);
-				column.columnId = "<%= column %>";
-			}
-
-		<%
-		}
-		%>
-
-	}
-
-	initDragDrop();
-</script>

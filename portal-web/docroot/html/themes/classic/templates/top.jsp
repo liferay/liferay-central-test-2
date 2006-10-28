@@ -33,7 +33,7 @@
 				<td id="layout-global-search" valign="top" align="right">
 					<liferay-ui:journal-content-search />
 				</td>
-				<td valign="top" align="right">
+				<td valign="top" align="right" class="font-small">
 					<span style="font-weight: bold;"><%= user.getGreeting() %></span><br />
 
 					<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -

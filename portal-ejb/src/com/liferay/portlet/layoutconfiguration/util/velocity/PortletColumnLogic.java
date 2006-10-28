@@ -112,7 +112,6 @@ public class PortletColumnLogic extends RuntimeLogic {
 				columnId, columnPos, columnCount, path);
 		}
 
-		sb.append("<div class=\"layout-blank-portlet\"></div>");
 		sb.append("</div>");
 	}
 

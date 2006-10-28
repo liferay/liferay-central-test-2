@@ -107,9 +107,7 @@ function addPortletHTML(html, container, placeHolder) {
 	executeLoadedScript(portletBound);
 
 	if (!portletBound.isStatic) {
-		var handle = DragDrop.findHandle(portletBound);
-
-		DragDrop.makeItemDragable(portletBound, handle);
+		LayoutColumns.initPortlet(portletBound);
 	}
 
 	return portletId;
@@ -132,7 +130,7 @@ function closePortlet(plid, portletId) {
 			LayoutConfiguration.initialized = false;
 		}
 
-		if (DragDrop.layoutMaximized) {
+		if (LayoutColumns.layoutMaximized) {
 			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid) + "&refresh=1";
 		}
 		else {
@@ -145,7 +143,7 @@ function closePortlet(plid, portletId) {
 }
 
 function minimizePortlet(plid, portletId, restore) {
-	if (DragDrop.layoutMaximized) {
+	if (LayoutColumns.layoutMaximized) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid) + "&refresh=1";
 	}
 	else {

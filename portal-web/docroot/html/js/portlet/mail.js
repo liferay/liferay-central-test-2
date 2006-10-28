@@ -640,7 +640,7 @@ var Mail = {
 		previewPane.onmousedown = function() {this.focus(); return false;} // mozilla
 
 		/* Memory cleanup */
-		addEventHandler(window, "onunload", Mail.clearPreview);
+		Event.addHandler(window, "onunload", Mail.clearPreview);
 		
 		Mail.getFolders();
 	},

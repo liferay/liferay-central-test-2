@@ -31,11 +31,15 @@
 			onmouseout="PortletHeaderBar.hide(this.id)"
 		</c:if>
 		>
-		<c:if test="<%= Validator.isNotNull(portletDisplay.getTitle()) %>">
-			<div class="portlet-wrap-title">
-				<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletDisplay.getTitle() %></span>
-			</div>
-		</c:if>
+		
+		<%
+		String portletTitle = Validator.isNotNull(portletDisplay.getTitle()) ? portletDisplay.getTitle() : "    ";
+		%>
+		
+		<div class="portlet-wrap-title">
+			<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletTitle %></span>
+		</div>
+		
 
 		<div class="portlet-small-icon-bar" style="<%= portletDisplay.isShowBackIcon() ? "display: block" : "display: none" %>;">
 			<c:choose>
@@ -63,6 +67,16 @@
 		</div>
 	</div>
 
+		<script type="text/javascript">
+		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
+			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
+			onComplete: function(newText) {
+					var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title?portletId=<%= portletDisplay.getId() %>&title=" + newText;
+					Ajax.request(url);
+				}
+			});
+		</script>
+		
 	<div class="portlet-box">
 		<div class="portlet-minimum-height">
 			<div id="p_p_body_<%= portletDisplay.getId() %>" <%= (portletDisplay.isStateMin()) ? "style=\"display: none;\"" : "" %>>
