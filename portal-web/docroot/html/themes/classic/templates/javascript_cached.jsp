@@ -23,3 +23,5 @@
 %>
 
 <%@ include file="init.jsp" %>
+
+LayoutColumns.highlight = "<%= colorScheme.getBodyBg() %>";

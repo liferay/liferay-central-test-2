@@ -141,7 +141,7 @@ var LayoutConfiguration = {
 		}
 		
 		var data = parent.rows[1].cells[0];
-		var pane = getElementByClassName(data, "layout_configuration_category_pane");
+		var pane = document.getElementsByClassName("layout_configuration_category_pane", data)[0];
 		var image = obj.getElementsByTagName("img")[0];
 		var imagePath = themeDisplay.getPathThemeImage();
 		

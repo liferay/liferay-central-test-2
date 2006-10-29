@@ -67,6 +67,7 @@
 		</div>
 	</div>
 
+	<c:if test="<%= themeDisplay.isSignedIn() %>">
 		<script type="text/javascript">
 		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
 			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
@@ -76,6 +77,7 @@
 				}
 			});
 		</script>
+	</c:if>
 		
 	<div class="portlet-box">
 		<div class="portlet-minimum-height">

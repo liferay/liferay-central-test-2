@@ -62,6 +62,7 @@ var DynamicSelect = {
 
 var LayoutColumns = {
 	columns: new Array(),
+	highlight: "transparent",
 	layoutMaximized: "",
 	plid: "",
 	
@@ -73,6 +74,7 @@ var LayoutColumns = {
 				column.columnId = colArray[i];
 				
 				DropZone.add(column, {
+					accept: ["portlet-boundary"],
 					onDrop: LayoutColumns.onDrop,
 					inheritParent: true
 					});
@@ -97,7 +99,7 @@ var LayoutColumns = {
 		DragDrop.create(portlet, {
 			revert: true,
 			handle: handle,
-			highlightDropzones: true});
+			highlightDropzones: LayoutColumns.highlight});
 	},
 	
 	onDrop: function(item) {
@@ -220,7 +222,7 @@ var PortletHeaderBar = {
 	
 	init : function (bar) {
 		if (!bar.iconBar) {
-			bar.iconBar = getElementByClassName(bar, "portlet-small-icon-bar");
+			bar.iconBar = document.getElementsByClassName("portlet-small-icon-bar", bar)[0];
 		}
 			
 		if (!bar.iconList) {
@@ -338,7 +340,7 @@ var QuickEdit = {
 			var inputWidth = textObj.offsetWidth;
 			
 			input.className = "portlet-form-input-field";
-			input.style.width = (inputWidth + 10) + "px";
+			input.style.width = (inputWidth) + "px";
 			input.style.marginLeft = "5px";
 			input.value = textObj.innerHTML;
 			input.textObj = textObj;
@@ -349,7 +351,7 @@ var QuickEdit = {
 				document.onclick = QuickEdit.done;
 			}
 			input.onkeydown = function(event) {
-				if (enterPressed(event)) {
+				if (Event.enterPressed(event)) {
 					QuickEdit.done();
 				}
 			}

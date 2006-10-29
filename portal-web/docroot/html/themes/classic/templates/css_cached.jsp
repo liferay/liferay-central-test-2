@@ -54,9 +54,10 @@ a:hover {
 body {
 	background-color: <%= colorScheme.getBodyBg() %>;
 	border: 0;
+	height: 100%;
 	margin: 0;
 	padding: 0;
-	text-align: left;
+	text-align: center;
 	font-family: Tahoma, Arial;
 	font-size: 76%;
 }
@@ -318,19 +319,18 @@ FONT.bg {
 /******************************************************************************/
 
 #layout-outer-side-decoration {
+	background-color: <%= colorScheme.getLayoutBg() %>;
+	height: 100%;
+	margin: 0 auto 0 auto;
 	text-align: center;
 }
 
 #layout-inner-side-decoration {
-	margin: 0 auto 0 auto;
+	padding: 10px;
+	text-align: left;
 }
 
-#layout-box {
-	background-color: <%= colorScheme.getLayoutBg() %>;
-	margin-top: 10px;
-	text-align: center;
-	width: 100%;
-}
+#layout-box { }
 
 #layout-top-banner {
 	height: 75px;
@@ -349,6 +349,7 @@ FONT.bg {
 }
 
 .layout-my-places {
+	background-color: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid #CCCCCC;
 	padding: 2px;
 }
@@ -370,8 +371,8 @@ FONT.bg {
 }
 
 #layout-my-places ul {
-	background-color: <%= colorScheme.getLayoutBg() %>;
-	border: 1px solid <%= colorScheme.getLayoutText() %>;
+	background-color: <%= colorScheme.getPortletBg() %>;
+	border: 1px solid <%= colorScheme.getPortletFont() %>;
 	position: absolute;
 	text-align: left;
 	right: 0;
@@ -393,13 +394,14 @@ FONT.bg {
 }
 
 #layout-nav-container {
+	float: left;
 	z-index: 2;
 }
 
 #layout-nav-divider {
 	clear: both;
 	font-size: 0;
-	height: 5px;
+	height: 8px;
 	margin-bottom: 10px;
 }
 
@@ -407,7 +409,7 @@ FONT.bg {
 	background-color: <%= colorScheme.getLayoutTabBg() %>;
 }
 .layout-nav-selected  {
-	background-color: <%= colorScheme.getPortletMenuBg() %>;
+	background-color: <%= colorScheme.getLayoutTabSelectedBg() %>;
 }
 
 .layout-nav-tabs-box {
@@ -431,13 +433,13 @@ FONT.bg {
 }
 
 #layout-tab-add, #layout-tab-add a {
-	background-color: #f0f0f0;
-	color: <%= colorScheme.getLayoutTabText() %>;
+	background-color: <%= colorScheme.getLayoutBg() %>;
+	color: <%= colorScheme.getLayoutText() %>;
 	font-weight: normal;
 }
 
 #layout-tab-selected, #layout-tab-selected a {
-	background: <%= colorScheme.getLayoutTabSelectedBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_title_bg_gradient.gif) scroll repeat-x center;
+	background-color: <%= colorScheme.getLayoutTabSelectedBg() %>;
 	color: <%= colorScheme.getLayoutTabSelectedText() %>;
 }
 .layout-tab-text {
@@ -578,67 +580,9 @@ FONT.bg {
 	right: 2px;
 }
 
-.portlet-top-decoration {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_corner_ul.gif) no-repeat top left;
-	height: 5px;
-}
-
-.portlet-top-decoration DIV {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_corner_ur.gif) no-repeat top right;
-	height: 5px;
-}
-
-.portlet-top-decoration DIV DIV {
-	background: <%= colorScheme.getPortletBg() %>;
-	border-top: 1px solid <%= colorScheme.getPortletTitleBg() %>;
+.portlet-spacer {
 	font-size: 0;
-	height: 5px;
-	margin: 0 5px 0 5px;
-}
-
-
-.portlet-inner-top {
-	margin: 0 auto 0 auto;
-}
-
-.portlet-bottom-blank {
-	margin-bottom: 5px;
-}
-
-.portlet-bottom-decoration {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_corner_bl.gif) no-repeat top left;
-	height: 5px;
-}
-
-.portlet-bottom-decoration DIV {
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/portlet_corner_br.gif) no-repeat top right;
-	height: 5px;
-}
-
-.portlet-bottom-decoration DIV DIV {
-	background: <%= colorScheme.getPortletBg() %>;
-	border-bottom: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	font-size: 0;
-	height: 5px;
-	margin: 0 5px 0 5px;
-}
-
-.portlet-bottom-decoration-2 {
-	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/middle.gif) scroll repeat-x top;
-	margin-bottom: 5px;
-	width: 100%;
-}
-
-.portlet-bottom-decoration-2 DIV {
-	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/left.gif) scroll no-repeat top left;
-	width: 100%;
-}
-
-.portlet-bottom-decoration-2 DIV DIV {
-	background: transparent url(<%= themeDisplay.getPathThemeImage() %>/shadow/right.gif) scroll no-repeat top right;
-	font-size: 0;
-	height: 6px;
-	width: 100%;
+	height: 10px;
 }
 
 /* Fonts */

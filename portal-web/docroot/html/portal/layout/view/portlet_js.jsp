@@ -86,7 +86,7 @@ function addPortletHTML(html, container, placeHolder) {
 	addDiv.style.display = "none";
 	addDiv.innerHTML = html;
 
-	var portletBound = getElementByClassName(addDiv, "portlet-boundary");
+	var portletBound = document.getElementsByClassName("portlet-boundary", addDiv)[0];
 
 	portletBound.parentNode.removeChild(portletBound);
 

@@ -28,14 +28,13 @@ var DropZone = {
 
 		DropZone.checkInit();
 
-		var item;
-		if(typeof(itemId) == "string") { item = document.getElementById(itemId); }
-		else if(typeof(itemId) == "object") { item = itemId; }
-		else { return; }
-
-		item.dropOptions = dropOptions ? dropOptions : new Object();
-		item.dropOptions.dropItem = item;
-		DropZone.dropList.push(item);
+		var item = $(itemId);
+		
+		if (item) {
+			item.dropOptions = dropOptions || new Object();
+			item.dropOptions.dropItem = item;
+			DropZone.dropList.push(item);
+		}
 	},
 	
 	init : function() {
@@ -156,6 +155,8 @@ var DragDrop = {
 
 			clone.style.left = "";
 			clone.style.top = "";
+			clone.style.zIndex = 0;
+			
 			if (!opts.showClone) {
 				clone.style.height = item.offsetHeight + "px";
 				clone.style.width = item.offsetWidth + "px";
@@ -172,7 +173,7 @@ var DragDrop = {
 			}
 
 			item.style.position = "absolute";
-			item.style.zIndex = ZINDEX.dragItem;
+			item.style.zIndex = ZINDEX.DRAGITEM;
 			item.style.left = (itemNw.x - opts.scrollOffset.x) + "px";
 			item.style.top = (itemNw.y - opts.scrollOffset.y) + "px";
 
@@ -196,10 +197,6 @@ var DragDrop = {
 				
 				dropOptions.northwestOffset = Coordinates.northwestOffset(dropContainer, true);
 				dropOptions.southeastOffset = Coordinates.southeastOffset(dropContainer, true);
-				
-				if (opts.highlightDropzones) {
-					Element.addClassName(dropContainer, dropOptions.hoverclass);
-				}
 			}
 
 			item.initialized = true;
@@ -223,7 +220,13 @@ var DragDrop = {
 			var isInsideContainer = mousePos.inside(
 				dropContainer.dropOptions.northwestOffset, 
 				dropContainer.dropOptions.southeastOffset);
-
+			
+			if (opts.highlightDropzones) {
+				if (DragDrop.accepts(item, dropContainer)) {
+					dropContainer.style.backgroundColor = opts.highlightDropzones;
+				}
+			}
+			
 			if (isInsideContainer) {
 				DragDrop.currentContainer = dropContainer;
 			}
@@ -269,14 +272,14 @@ var DragDrop = {
 			var dropItem = DragDrop.currentContainer;
 			if (dropItem && typeof(dropItem.dropOptions.onDrop) != "undefined") {
 				var dropOptions = dropItem.dropOptions;
-
+				
 				if (DragDrop.accepts(item, dropItem)) {
 					dropOptions.onDrop(item, nwPosition, sePosition, nwOffset, seOffset);
 					dropItem.className = dropOptions.origClassName;
 					Element.removeClassName(dropItem, dropItem.dropOptions.hoverclass);
 				}
 				else {
-					dropOptions.onDrop(item, nwPosition, sePosition, nwOffset, seOffset);
+					//dropOptions.onDrop(item, nwPosition, sePosition, nwOffset, seOffset);
 				}
 				
 				if (dropOptions.inheritParent) {
@@ -284,12 +287,6 @@ var DragDrop = {
 				}
 			}
 			
-			if (item.dragOptions.highlightDropzones) {
-				DropZone.dropList.foreach(function(item, index) {
-					Element.removeClassName(item, item.dropOptions.hoverclass);
-				})
-			}
-
 			var clone = DragDrop.clone;
 			var container = clone.parentNode;
 
@@ -325,6 +322,10 @@ var DragDrop = {
 			}
 			
 			// restore original options (if changed)
+			DropZone.dropList.foreach(function(item) {
+					item.style.backgroundColor = "transparent";
+				});
+				
 			opts.revert = opts.origRevert;
 			item.initialized = false;
 			item.wasClicked = false;

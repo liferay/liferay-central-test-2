@@ -81,27 +81,27 @@
 		</settings>
 		<color-scheme id="01" name="Blue">
 			<![CDATA[
-				body-bg=#FFFFFF
+				body-bg=#e9eff5
 				
-				layout-bg=#FFFFFF
+				layout-bg=#ffffff
 				layout-text=#000000
 
-				layout-tab-bg=#E0E0E0
-				layout-tab-text=#000000
+				layout-tab-bg=#1f5698
+				layout-tab-text=#ffffff
 
-				layout-tab-selected-bg=#6699CC
-				layout-tab-selected-text=#4A517D
+				layout-tab-selected-bg=#c9d6e6
+				layout-tab-selected-text=#000000
 
-				portlet-title-bg=#6699CC
-				portlet-title-text=#4A517D
+				portlet-title-bg=#9fb7d3
+				portlet-title-text=#000000
 
-				portlet-menu-bg=#B6CBEB
+				portlet-menu-bg=#90abcc
 				portlet-menu-text=#000000
 
-				portlet-bg=#FFFFFF
+				portlet-bg=#ffffff
 
 				portlet-font=#000000
-				portlet-font-dim=#C4C4C4
+				portlet-font-dim=#000080
 
 				portlet-msg-status=#000000
 				portlet-msg-info=#000000
@@ -109,29 +109,29 @@
 				portlet-msg-alert=#FF0000
 				portlet-msg-success=#007F00
 
-				portlet-section-header=#596171
-				portlet-section-header-bg=#AFBEDA
+				portlet-section-header=#000000
+				portlet-section-header-bg=#acb5d1
 
-				portlet-section-subheader=#405278
-				portlet-section-subheader-bg=#91AEE8
+				portlet-section-subheader=#000000
+				portlet-section-subheader-bg=#e0e1ed
 
-				portlet-section-body=#3F3F3F
-				portlet-section-body-bg=#EAF2FF
+				portlet-section-body=#000000
+				portlet-section-body-bg=#e7edf4
 
-				portlet-section-body-hover=#FFFFFF
-				portlet-section-body-hover-bg=#5274AE
+				portlet-section-body-hover=#000000
+				portlet-section-body-hover-bg=#e7edf4
 
-				portlet-section-alternate=#3F3F3F
-				portlet-section-alternate-bg=#DBE1ED
+				portlet-section-alternate=#000000
+				portlet-section-alternate-bg=#d3deeb
 
-				portlet-section-alternate-hover=#FFFFFF
-				portlet-section-alternate-hover-bg=#5274AE
+				portlet-section-alternate-hover=#000000
+				portlet-section-alternate-hover-bg=#d3deeb
 
-				portlet-section-selected=#7AA0EC
-				portlet-section-selected-bg=#FAFCFE
+				portlet-section-selected=#000000
+				portlet-section-selected-bg=#e0f0fc
 
-				portlet-section-selected-hover=#00329A
-				portlet-section-selected-hover-bg=#C0D2F7
+				portlet-section-selected-hover=#000000
+				portlet-section-selected-hover-bg=#e0f0fc
 			]]>
 		</color-scheme>
 		<color-scheme id="02" name="Jason's">

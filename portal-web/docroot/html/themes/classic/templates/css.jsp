@@ -24,10 +24,16 @@
 
 <%@ include file="init.jsp" %>
 
-#layout-inner-side-decoration {
+#layout-outer-side-decoration {
+	width: <%= (themeDisplay.getResolution() > 0) ?
+				((themeDisplay.getResolution() + 20) + "px") :
+				("100%") %>;
+}
+
+#layout-box {
 	width: <%= (themeDisplay.getResolution() > 0) ?
 				(themeDisplay.getResolution() + "px") :
-				("99%") %>;
+				("100%") %>;
 }
 
 <c:if test="<%= themeDisplay.isStatePopUp() %>">

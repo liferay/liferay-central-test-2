@@ -35,14 +35,6 @@ function $(id) {
 	return item;
 }
 
-function addItem(box, text, value, sort) {
-	box[box.length] = new Option(text, value);
-
-	if (sort == true) {
-		sortBox(box);
-	}
-}
-
 if (!Array.prototype.push) {
 	function array_push() {
 		for(var i = 0; i < arguments.length; i++) {
@@ -78,101 +70,6 @@ function Array_iterate (func, options) {
 
 Array.prototype.foreach = Array_iterate;
 
-/*
- * Depricated.  Use Event.addHandler
- */
-function addLoadEvent(func) {
-	Event.addHandler(window, "onload", func);
-}
-
-function autoComplete(box, text) {
-	var prevStartPos;
-	var prevMidPos;
-	var prevEndPos;
-
-	if ((box.length > 0) && (text != "")) {
-
-		// The character '*' is ordered differently between Java and JavaScript
-
-		text = text.toLowerCase().replace(/\*/g, "");
-
-		// Use binary search to find the first instance of the selection
-
-		var startPos = 0;
-		var midPos = Math.floor(box.length / 2);
-		var endPos = box.length;
-
-		for (;;) {
-			var sText = trimString(box.options[midPos].text.toLowerCase().replace(/\*/g, ""));
-
-			if (midPos > 0) {
-				var prevSText = trimString(box.options[midPos - 1].text.toLowerCase().replace(/\*/g, ""));
-
-				if ((sText.indexOf(text) == 0) &&
-					(prevSText.indexOf(text) != 0)) {
-
-					box.selectedIndex = midPos;
-
-					break;
-				}
-			}
-			else {
-				if (sText.indexOf(text) == 0) {
-					box.selectedIndex = midPos;
-
-					break;
-				}
-			}
-
-			box.selectedIndex = -1;
-
-			if (text < sText) {
-				endPos = midPos;
-				midPos = (Math.floor((endPos - startPos) / 2)) + startPos;
-			}
-			else if (text > sText) {
-				startPos = midPos;
-				midPos = (Math.floor((endPos - midPos) / 2)) + midPos;
-			}
-
-			if ((prevStartPos != null) && (prevMidPos != null) && (prevEndPos != null)) {
-
-				// Break out of the loop when all positions repeat
-
-				if ((prevStartPos == startPos) && (prevMidPos == midPos) && (prevEndPos == endPos)) {
-					break;
-				}
-			}
-
-			prevStartPos = startPos;
-			prevMidPos = midPos;
-			prevEndPos = endPos;
-		}
-	}
-	else {
-		box.selectedIndex = -1;
-	}
-}
-
-function autoFill(fromBox, toBox) {
-	i = fromBox.selectedIndex;
-
-	if (i != -1) {
-		s = fromBox.options[i].value;
-
-		if (s != "") {
-			to = toBox.value;
-
-			if (to == "") {
-				toBox.value = s;
-			}
-			else {
-				toBox.value = to + ", " + s;
-			}
-		}
-	}
-}
-
 function changeOpacity (object, opacity) {
 	opacity = (opacity >= 100) ? 99.999 : opacity;
 	opacity = (opacity < 0) ? 0 : opacity;
@@ -181,84 +78,6 @@ function changeOpacity (object, opacity) {
 	object.style.MozOpacity = (opacity / 100);
 	object.style.KhtmlOpacity = (opacity / 100);
 	object.style.filter = "alpha(opacity=" + opacity + ")";
-}
-
-function check(form, name, checked) {
-	for (var i = 0; i < form.elements.length; i++) {
-		var e = form.elements[i];
-
-		if ((e.name == name) && (e.type == "checkbox")) {
-			e.checked = checked;
-		}
-	}
-}
-
-function checkAll(form, name, allBox) {
-	if (isArray(name)) {
-		for (var i = 0; i < form.elements.length; i++) {
-			var e = form.elements[i];
-
-			if (e.type == "checkbox") {
-				for (var j = 0; j < name.length; j++) {
-					if (e.name == name[j]) {
-						e.checked = allBox.checked;
-					}
-				}
-			}
-		}
-	}
-	else {
-		for (var i = 0; i < form.elements.length; i++) {
-			var e = form.elements[i];
-
-			if ((e.name == name) && (e.type == "checkbox")) {
-				e.checked = allBox.checked;
-			}
-		}
-	}
-}
-
-function checkAllBox(form, name, allBox) {
-	var totalBoxes = 0;
-	var totalOn = 0;
-
-	if (isArray(name)) {
-		for (var i = 0; i < form.elements.length; i++) {
-			var e = form.elements[i];
-
-			if ((e.name != allBox.name) && (e.type == "checkbox")) {
-				for (var j = 0; j < name.length; j++) {
-					if (e.name == name[j]) {
-						totalBoxes++;
-
-						if (e.checked) {
-							totalOn++;
-						}
-					}
-				}
-			}
-		}
-	}
-	else {
-		for (var i = 0; i < form.elements.length; i++) {
-			var e = form.elements[i];
-
-			if ((e.name != allBox.name) && (e.name == name) && (e.type == "checkbox")) {
-				totalBoxes++;
-
-				if (e.checked) {
-					totalOn++;
-				}
-			}
-		}
-	}
-
-	if (totalBoxes == totalOn) {
-		allBox.checked = true;
-	}
-	else {
-		allBox.checked = false;
-	}
 }
 
 function checkMaxLength(box, maxLength) {
@@ -275,7 +94,6 @@ function checkTab(box) {
 }
 
 function cloneObject(obj, recurse) {
-
     for (i in obj) {
         if (typeof obj[i] == 'object' && recurse) {
             this[i] = new cloneObject(obj[i], true);
@@ -326,44 +144,21 @@ var Cookie = {
 	}
 }
 
-function createElement(tag, name) {
+document.createInputElement = function(name) {
 	if (is_ie) {
-		var entry = document.createElement("<" + tag + " name='" + name + "'></" + tag + ">");
+		var entry = document.createElement("<input name='" + name + "'></input>");
 	}
 	else {
-		var entry = document.createElement(tag);
+		var entry = document.createElement("input");
 		entry.name = name;
 	}
 	
 	return entry;
 }
 
-function count(s, text) {
-	if ((s == null) || (text == null)) {
-		return 0;
-	}
-
-	var count = 0;
-
-	var pos = s.indexOf(text);
-
-	while (pos != -1) {
-		pos = s.indexOf(text, pos + text.length);
-		count++;
-	}
-
-	return count;
-}
-
 function disableEsc() {
 	if ((document.all) && (event.keyCode == 27)) {
 		event.returnValue = false;
-	}
-}
-
-function disableFields(fields) {
-	for (var i = 0; i < fields.length; i++) {
-		fields[i].disabled = true;
 	}
 }
 
@@ -391,26 +186,6 @@ var Element = {
 		}
 	
 		return rt;
-	}
-}
-
-function enableFields(fields) {
-	for (var i = 0; i < fields.length; i++) {
-		fields[i].disabled = false;
-	}
-}
-
-function enterPressed(event) {
-	if (!event) {
-		event = window.event;
-	}
-	var keycode = event.keyCode;
-	
-	if (keycode == 13) {
-		return true;
-	}
-	else {
-		return false;
 	}
 }
 
@@ -451,28 +226,18 @@ var Event = {
 	}
 }
 
-function getElementByClassName (obj, className, nodeName) {
-	if (nodeName == null) {
-		nodeName = "div";
+document.getElementsByClassName = function(className, parentElement) {
+	var children = ($(parentElement) || document.body).getElementsByTagName('*');
+	var elements = new Array();
+	
+	for (var i = 0; i < children.length; i++) {
+		var child = children[i];
+		if (Element.hasClassName(child, className)){
+			elements.push(child);
+		}
 	}
 	
-	var list = obj.getElementsByTagName(nodeName);
-	for (var i = 0; i <  list.length; i++) {
-		if (list[i].className && list[i].className.match(className)) {
-			return list[i];
-		}
-	}
-	return null;
-}
-
-function getIndex(col, value) {
-	for (var i = 0; i < col.length; i++) {
-		if (col[i].value == value) {
-			return i;
-		}
-	}
-
-	return -1;
+	return elements;
 }
 
 function getSelectedIndex(col) {
@@ -516,62 +281,6 @@ function getSelectedRadioValue(col) {
 	}
 	else {
 		return col[i].value;
-	}
-}
-
-function hasItemWithText(box, text) {
-	for (var i = 0; i < box.length; i ++) {
-		if (box.options[i].text.toLowerCase() == text.toLowerCase()) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-function hasItemWithValue(box, value) {
-	for (var i = 0; i < box.length; i ++) {
-		if (box.options[i].value.toLowerCase() == value.toLowerCase()) {
-			return true;
-		}
-	}
-
-	return false;
-}
-
-function isArray(object) {
-	if (!window.Array) {
-		return false;
-	}
-	else {
-		return object.constructor == window.Array;
-	}
-}
-
-function isEven(x) {
-	if ((x % 2) == 0) {
-		return true;
-	}
-
-	return false;
-}
-
-function isOdd(x) {
-	return !isEven(x);
-}
-
-function isRadioChecked(col) {
-	var i = getSelectedIndex(col);
-
-	return col[i].checked;
-}
-
-function isSelected(box) {
-	if (box.selectedIndex >= 0) {
-		return true;
-	}
-	else {
-		return false;
 	}
 }
 
@@ -628,31 +337,6 @@ function listSelect(box, delimeter) {
 	}
 }
 
-function listSelected(box, delimeter) {
-	var s = "";
-
-	if (delimeter == null) {
-		delimeter = ",";
-	}
-
-	if (box == null) {
-		return "";
-	}
-
-	for (var i = 0; i < box.length; i++) {
-    	if ((box.options[i].value > "") && (box.options[i].selected)) {
-			s += box.options[i].value + delimeter;
-		}
-	}
-
-	if (s == ".none,") {
-		return "";
-	}
-	else {
-		return s;
-	}
-}
-
 function listUnchecked(form) {
 	var s = "";
 
@@ -679,10 +363,6 @@ function listUncheckedExcept(form, except) {
 	}
 
 	return s;
-}
-
-function mathRound(n, places) {
-	return (Math.round(n * Math.pow(10, places))) / Math.pow(10, places);
 }
 
 function moveItem(fromBox, toBox, sort) {
@@ -720,39 +400,9 @@ function moveItem(fromBox, toBox, sort) {
 	}
 }
 
-function printCheck() {
-	if (window.print) {
-		return 1;
-	}
-
-	return 0;
-}
-
-function printWindow() {
-	if (window.print) {
-		window.print();
-	}
-}
-
 function processTab(id) {
 	document.all[id].selection.text = String.fromCharCode(9);
 	document.all[id].focus();
-}
-
-function random() {
-	return randomMinMax(0, 4294967296);
-};
-
-function randomMinMax(min, max) {
-	return (Math.round(Math.random() * (max - min))) + min;
-}
-
-function redirect(form) {
-	var url = form.options[form.options.selectedIndex].value;
-
-	if (url != "null") {
-		self.location = url;
-	}
 }
 
 function reelHome(id, startPosX, startPosY, duration, count, c) {
@@ -1028,10 +678,6 @@ function sortByDescending(a, b) {
 	}
 }
 
-function stripCarriageReturn(s) {
-	return s.replace(/\r|\n|\r\n/g, " ");
-}
-
 function submitForm(form, action, singleSubmit) {
 	if (submitCountdown == 0) {
 		submitCountdown = 10;
@@ -1169,21 +815,7 @@ function trimString(str) {
 
 String.prototype.trim = trimString;
 
-document.getElementsByClassName = function(className, parentElement) {
-	var children = ($(parentElement) || document.body).getElementsByTagName('*');
-	var elements = new Array();
-	
-	for (var i = 0; i < children.length; i++) {
-		var child = children[i];
-		if (Element.hasClassName(child, className)){
-			elements.push(child);
-		}
-	}
-	
-	return elements;
-}
-
-
 var ZINDEX = {
-	ALERT: 100
+	ALERT: 100,
+	DRAGITEM: 10
 }

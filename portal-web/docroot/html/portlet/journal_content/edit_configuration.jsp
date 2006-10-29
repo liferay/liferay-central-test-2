@@ -66,7 +66,7 @@ type = ParamUtil.getString(request, "type", type);
 
 		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
 
-		var input = createElement("input", "<portlet:namespace />article" + <portlet:namespace />articleIndex);
+		var input = document.createInputElement("<portlet:namespace />article" + <portlet:namespace />articleIndex);
 
 		input.type = "hidden";
 		input.value = articleId;
