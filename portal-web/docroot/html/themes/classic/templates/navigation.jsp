@@ -209,7 +209,9 @@ var Navigation = {
 		});
 		
 		<c:if test="<%= newPage %>">
-			$("layout-tab-text-edit").onclick();
+			var opts =  $("layout-tab-text-edit").editOptions;
+			$(opts.dragId).wasClicked = true;
+			QuickEdit.edit($("layout-tab-text-edit"));
 		</c:if>
 	},
 	
@@ -245,7 +247,7 @@ var Navigation = {
 		clone.style.backgroundColor = "transparent";
 		clone.layoutId = item.layoutId;
 		
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
 
 		tabs.foreach(function(tab, index) {
 				if (tab == clone) {

@@ -330,7 +330,7 @@ var QuickEdit = {
 	},
 	
 	edit: function(textObj) {
-		var opts = textObj.editOptions;
+		var opts = textObj.editOptions || new Object();
 		var wasClicked = true;
 		
 		if (opts.dragId) {
