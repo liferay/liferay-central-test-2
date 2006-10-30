@@ -33,7 +33,7 @@
 #layout-box {
 	width: <%= (themeDisplay.getResolution() > 0) ?
 				(themeDisplay.getResolution() + "px") :
-				("100%") %>;
+				("98%") %>;
 }
 
 <c:if test="<%= themeDisplay.isStatePopUp() %>">

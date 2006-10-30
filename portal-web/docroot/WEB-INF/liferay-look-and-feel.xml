@@ -86,11 +86,11 @@
 				layout-bg=#ffffff
 				layout-text=#000000
 
-				layout-tab-bg=#1f5698
-				layout-tab-text=#ffffff
+				layout-tab-bg=#c9d6e6
+				layout-tab-text=#000000
 
-				layout-tab-selected-bg=#c9d6e6
-				layout-tab-selected-text=#000000
+				layout-tab-selected-bg=#1f5698
+				layout-tab-selected-text=#ffffff
 
 				portlet-title-bg=#9fb7d3
 				portlet-title-text=#000000
@@ -119,44 +119,44 @@
 				portlet-section-body-bg=#e7edf4
 
 				portlet-section-body-hover=#000000
-				portlet-section-body-hover-bg=#e7edf4
+				portlet-section-body-hover-bg=#f1f7fe
 
 				portlet-section-alternate=#000000
 				portlet-section-alternate-bg=#d3deeb
 
 				portlet-section-alternate-hover=#000000
-				portlet-section-alternate-hover-bg=#d3deeb
+				portlet-section-alternate-hover-bg=#f1f7fe
 
 				portlet-section-selected=#000000
 				portlet-section-selected-bg=#e0f0fc
 
 				portlet-section-selected-hover=#000000
-				portlet-section-selected-hover-bg=#e0f0fc
+				portlet-section-selected-hover-bg=#f1f7fe
 			]]>
 		</color-scheme>
-		<color-scheme id="02" name="Jason's">
+		<color-scheme id="02" name="Green">
 			<![CDATA[
-				body-bg=#FFFFFF
+				body-bg=#eff5ef
 
 				layout-bg=#FFFFFF
-				layout-text=#00135A
+				layout-text=#000000
 
-				layout-tab-bg=#F9F9F9
-				layout-tab-text=#00135A
+				layout-tab-bg=#d6e6d6
+				layout-tab-text=#000000
 
-				layout-tab-selected-bg=#3F833E
-				layout-tab-selected-text=#FFF6EF
+				layout-tab-selected-bg=#8db838
+				layout-tab-selected-text=#ffffff
 
-				portlet-title-bg=#3F833E
-				portlet-title-text=#F9F9F9
+				portlet-title-bg=#b7d3b7
+				portlet-title-text=#000000
 
-				portlet-menu-bg=#3F833E
-				portlet-menu-text=#00135A
+				portlet-menu-bg=#abccab
+				portlet-menu-text=#000000
 
 				portlet-bg=#FFFFFF
 
-				portlet-font=#00135A
-				portlet-font-dim=#001CA5
+				portlet-font=#000000
+				portlet-font-dim=#00002e
 
 				portlet-msg-status=#00135A
 				portlet-msg-info=#00135A
@@ -164,109 +164,54 @@
 				portlet-msg-alert=#FF0000
 				portlet-msg-success=#007F00
 
-				portlet-section-header=#FFFFFF
-				portlet-section-header-bg=#3F833E
+				portlet-section-header=#000000
+				portlet-section-header-bg=#c0d2b3
 
-				portlet-section-subheader=#001CA5
-				portlet-section-subheader-bg=#FFFFE7
+				portlet-section-subheader=#000000
+				portlet-section-subheader-bg=#e8ede1
 
-				portlet-section-body=#001CA5
-				portlet-section-body-bg=#FFFFE7
+				portlet-section-body=#000000
+				portlet-section-body-bg=#edf4ed
 
-				portlet-section-body-hover=#00135A
-				portlet-section-body-hover-bg=#FFF3B8
+				portlet-section-body-hover=#000000
+				portlet-section-body-hover-bg=#f7fef7
 
-				portlet-section-alternate=#001CA5
-				portlet-section-alternate-bg=#FFFFE7
+				portlet-section-alternate=#000000
+				portlet-section-alternate-bg=#deebde
 
-				portlet-section-alternate-hover=#00135A
-				portlet-section-alternate-hover-bg=#FFF3B8
+				portlet-section-alternate-hover=#000000
+				portlet-section-alternate-hover-bg=#f7fef7
 
-				portlet-section-selected=#FFF3B8
-				portlet-section-selected-bg=#FFFFE7
+				portlet-section-selected=#000000
+				portlet-section-selected-bg=#e8f6fa
 
-				portlet-section-selected-hover=#FFF3B8
-				portlet-section-selected-hover-bg=#FFFFE7
+				portlet-section-selected-hover=#000000
+				portlet-section-selected-hover-bg=#f7fef7
 			]]>
 		</color-scheme>
 		<color-scheme id="03" name="Orange">
 			<![CDATA[
-				body-bg=#FFFFFF
+				body-bg=#fff7e9
 				
 				layout-bg=#FFFFFF
-				layout-text=#757556
+				layout-text=#000000
 
-				layout-tab-bg=#F9F9F9
-				layout-tab-text=#7D4A20
+				layout-tab-bg=#ffe7cc
+				layout-tab-text=#000000
 
-				layout-tab-selected-bg=#FF7B00
-				layout-tab-selected-text=#FFF6EF
+				layout-tab-selected-bg=#ffb63e
+				layout-tab-selected-text=#ffffff
 
-				portlet-title-bg=#FFAB6B
-				portlet-title-text=#3F504B
+				portlet-title-bg=#ffd3aa
+				portlet-title-text=#000000
 
-				portlet-menu-bg=#FFEB9A
+				portlet-menu-bg=#ffcb9e
 				portlet-menu-text=#000000
 
 				portlet-bg=#FFFFFF
 
 				portlet-font=#000000
-				portlet-font-dim=#C4C4C4
-
-				portlet-msg-status=#000000
-				portlet-msg-info=#000000
-				portlet-msg-error=#FF0000
-				portlet-msg-alert=#FF0000
-				portlet-msg-success=#007F00
-
-				portlet-section-header=#FFFFFF
-				portlet-section-header-bg=#9A9987
-
-				portlet-section-subheader=#405278
-				portlet-section-subheader-bg=#91AEE8
-
-				portlet-section-body=#757556
-				portlet-section-body-bg=#EAE9DC
-
-				portlet-section-body-hover=#FFFFFF
-				portlet-section-body-hover-bg=#F58F3E
-
-				portlet-section-alternate=#757556
-				portlet-section-alternate-bg=#F9F9F9
-
-				portlet-section-alternate-hover=#FFFFFF
-				portlet-section-alternate-hover-bg=#F58F3E
-
-				portlet-section-selected=#7AA0EC
-				portlet-section-selected-bg=#FAFCFE
-
-				portlet-section-selected-hover=#00329A
-				portlet-section-selected-hover-bg=#C0D2F7
-			]]>
-		</color-scheme>
-		<color-scheme id="04" name="Silver">
-			<![CDATA[
-				body-bg=#FFFFFF
-				
-				layout-bg=#FFFFFF
-				layout-text=#000000
-
-				layout-tab-bg=#FFFFFF
-				layout-tab-text=#9F9F9F
-
-				layout-tab-selected-bg=#3F3F3F
-				layout-tab-selected-text=#FFFFFF
-
-				portlet-title-bg=#010101
-				portlet-title-text=#FFFFFF
-
-				portlet-menu-bg=#666666
-				portlet-menu-text=#FFFFFF
-
-				portlet-bg=#FFFFFF
-
-				portlet-font=#000000
-				portlet-font-dim=#C4C4C4
+				portlet-font-dim=#000038
 
 				portlet-msg-status=#000000
 				portlet-msg-info=#000000
@@ -275,28 +220,83 @@
 				portlet-msg-success=#007F00
 
 				portlet-section-header=#000000
-				portlet-section-header-bg=#AAAAAA
+				portlet-section-header-bg=#ffd2a6
 
 				portlet-section-subheader=#000000
-				portlet-section-subheader-bg=#FFFFFF
+				portlet-section-subheader-bg=#ffefda
 
 				portlet-section-body=#000000
-				portlet-section-body-bg=#F4F4F4
+				portlet-section-body-bg=#fff6e8
 
-				portlet-section-body-hover=#FFFFFF
-				portlet-section-body-hover-bg=#808080
+				portlet-section-body-hover=#000000
+				portlet-section-body-hover-bg=#fffff2
 
 				portlet-section-alternate=#000000
-				portlet-section-alternate-bg=#FCFCFC
+				portlet-section-alternate-bg=#ffedd7
 
-				portlet-section-alternate-hover=#FFFFFF
-				portlet-section-alternate-hover-bg=#808080
+				portlet-section-alternate-hover=#000000
+				portlet-section-alternate-hover-bg=#fffff2
 
 				portlet-section-selected=#000000
-				portlet-section-selected-bg=#FFFFFF
+				portlet-section-selected-bg=#fff9f9
 
 				portlet-section-selected-hover=#000000
-				portlet-section-selected-hover-bg=#FFFFFF
+				portlet-section-selected-hover-bg=#fffff2
+			]]>
+		</color-scheme>
+		<color-scheme id="04" name="Silver">
+			<![CDATA[
+				body-bg=#f5f5f5
+				
+				layout-bg=#ffffff
+				layout-text=#000000
+
+				layout-tab-bg=#e6e6e6
+				layout-tab-text=#000000
+
+				layout-tab-selected-bg=#a0a0a0
+				layout-tab-selected-text=#ffffff
+
+				portlet-title-bg=#d3d3d3
+				portlet-title-text=#000000
+
+				portlet-menu-bg=#cccccc
+				portlet-menu-text=#000000
+
+				portlet-bg=#FFFFFF
+
+				portlet-font=#000000
+				portlet-font-dim=#404040
+
+				portlet-msg-status=#000000
+				portlet-msg-info=#000000
+				portlet-msg-error=#FF0000
+				portlet-msg-alert=#FF0000
+				portlet-msg-success=#007F00
+
+				portlet-section-header=#000000
+				portlet-section-header-bg=#d5d5d5
+
+				portlet-section-subheader=#000000
+				portlet-section-subheader-bg=#efefef
+
+				portlet-section-body=#000000
+				portlet-section-body-bg=#f4f4f4
+
+				portlet-section-body-hover=#000000
+				portlet-section-body-hover-bg=#fefefe
+
+				portlet-section-alternate=#000000
+				portlet-section-alternate-bg=#ebebeb
+
+				portlet-section-alternate-hover=#000000
+				portlet-section-alternate-hover-bg=#fefefe
+
+				portlet-section-selected=#000000
+				portlet-section-selected-bg=#f6f6f6
+
+				portlet-section-selected-hover=#000000
+				portlet-section-selected-hover-bg=#fefefe
 			]]>
 		</color-scheme>
 	</theme>

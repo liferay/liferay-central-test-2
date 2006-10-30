@@ -43,7 +43,7 @@ String fontXXL = "1.3em";
 %>
 
 a {
-	color: <%= colorScheme.getPortletFont() %>;
+	color: <%= colorScheme.getPortletFontDim() %>;
 	text-decoration: none;
 }
 
@@ -403,7 +403,7 @@ FONT.bg {
 #layout-nav-divider {
 	clear: both;
 	font-size: 0;
-	height: 8px;
+	height: 10px;
 	margin-bottom: 10px;
 }
 
@@ -551,7 +551,7 @@ FONT.bg {
 
 .portlet-header-bar {
 	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
-	background: url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.gif) scroll repeat-x center left;
+	background: <%= colorScheme.getPortletTitleBg() %> url(<%= themeDisplay.getPathColorSchemeImage() %>/button_gradient.gif) scroll repeat-x center left;
 	position: relative;
 }
 

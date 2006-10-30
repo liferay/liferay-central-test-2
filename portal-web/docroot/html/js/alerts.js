@@ -127,6 +127,9 @@ var Alerts = {
 			if (myMessage) {
 				message.innerHTML = myMessage;
 			}
+			else {
+				message.innerHTML = "<div class=\"portlet-loading\"></div>";
+			}
 			
 			if (msgHeight) {
 				if (is_ie) {
@@ -258,6 +261,11 @@ var Alerts = {
     resizeIframe: function(options) {
     	if (Alerts.message && options) {
     		var iframe = Alerts.message.getElementsByTagName("iframe")[0];
+			var loading = document.getElementsByClassName("portlet-loading", Alerts.message);
+			
+			if (loading.length > 0) {
+				loading[0].parentNode.removeChild(loading[0]);
+			}
     		
     		if (iframe) {
 	    		if (options.height) {

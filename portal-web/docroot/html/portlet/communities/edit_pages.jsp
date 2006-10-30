@@ -820,7 +820,7 @@ portletURL.setParameter("groupId", groupId);
 												</td>
 											</tr>
 											<tr>
-												<td bgcolor="<%= tableIteratorObj.getLayoutBg() %>">
+												<td bgcolor="<%= tableIteratorObj.getBodyBg() %>">
 													<font color="<%= tableIteratorObj.getLayoutText() %>" face="Tahoma, Verdana, Arial" size="2">&nbsp;Page Background&nbsp;<br></font>
 												</td>
 											</tr>
