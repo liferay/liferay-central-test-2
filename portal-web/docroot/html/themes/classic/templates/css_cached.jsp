@@ -533,9 +533,90 @@ FONT.bg {
 	text-align: left;
 }
 
+.portlet-shadow-tl div {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tl.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tl.png);
+	</c:if>
+	font-size: 0;
+	height: 3px;
+	width: 4px;
+}
+
+.portlet-shadow-tc {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tc.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tc.png);
+	</c:if>
+}
+
+.portlet-shadow-tr div {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tr.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tr.png);
+	</c:if>
+	font-size: 0;
+	height: 3px;
+	width: 4px;
+}
+
+.portlet-shadow-ml  {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png) repeat-y;
+	</c:if>
+}
+
+.portlet-shadow-mr  {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png) repeat-y;
+	</c:if>
+}
+
+.portlet-shadow-bl div {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bl.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bl.png);
+	</c:if>
+	font-size: 0;
+	height: 7;
+	width: 8px;
+}
+.portlet-shadow-bc {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bc.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bc.png) repeat-x;
+	</c:if>
+}
+.portlet-shadow-br div {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-br.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-br.png) repeat-x;
+	</c:if>
+	font-size: 0;
+	height: 7px;
+	width: 8px;
+}
+
 .portlet-container {
 	background-color: <%= colorScheme.getPortletBg() %>;
-	position: relative;
 }
 
 .portlet-box {

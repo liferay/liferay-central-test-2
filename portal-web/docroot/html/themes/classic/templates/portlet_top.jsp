@@ -24,6 +24,17 @@
 
 <%@ include file="init.jsp" %>
 
+<table border="0" cellpadding="0" cellspacing="0" width="100%">
+<tr>
+	<td class="portlet-shadow-tl"><div></div></td>
+	<td class="portlet-shadow-tc" width="100%"></td>
+	<td class="portlet-shadow-tr"><div></div></td>
+</tr>
+<tr>
+	<td class="portlet-shadow-ml">
+	</td>
+	<td width="100%">
+	
 <div class="portlet-container">
 	<div class="portlet-header-bar" id="portlet-header-bar_<%= portletDisplay.getId() %>"
 		<c:if test="<%= !portletDisplay.isShowBackIcon() %>">

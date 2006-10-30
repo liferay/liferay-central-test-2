@@ -86,7 +86,7 @@
 		function showPageSettings() {
 			Alerts.popupIframe("<%= themeDisplay.getURLPageSettings().toString() %>",
 				{
-					height: 400,
+					height: 0,
 					width: 700,
 					modal: true,
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
