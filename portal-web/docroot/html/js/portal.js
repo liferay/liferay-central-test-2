@@ -318,7 +318,10 @@ var QuickEdit = {
 	
 	create: function(id, options) {
 		/* OPTIONS
-		 * dragId: specify drag ID to disable drag during editing
+		 * dragId: (string|object) specify drag ID to disable drag during editing
+		 * fixParent: (boolean) fix width of parent element
+		 * onEdit: (function) executes when going into edit mode
+		 * onComplete: (function) executes after editing is done
 		 */
 		 
 		var item = $(id);
@@ -337,11 +340,12 @@ var QuickEdit = {
 		if (!textObj.editing && wasClicked) {
 			var input = document.createElement("input");
 			var textDiv = textObj.parentNode;
-			var inputWidth = textObj.offsetWidth;
+			
+			if (opts.fixParent) {
+				textDiv.style.width = textDiv.offsetWidth + "px";
+			}
 			
 			input.className = "portlet-form-input-field";
-			input.style.width = (inputWidth) + "px";
-			input.style.marginLeft = "5px";
 			input.value = textObj.innerHTML;
 			input.textObj = textObj;
 			input.onmouseover = function() {
@@ -356,10 +360,15 @@ var QuickEdit = {
 				}
 			}
 			
+			var textWidth = textObj.offsetWidth
 			textObj.style.display = "none";
 			textDiv.appendChild(input);
-			input.focus();
 			
+			if (opts.onEdit) {
+				opts.onEdit(input, textWidth);
+			}
+			
+			input.focus();
 			QuickEdit.curentInput = input;
 			
 			if (opts.dragId) {
@@ -376,14 +385,15 @@ var QuickEdit = {
 			document.onclick = function() {};
 			
 			var textObj = input.textObj;
+			var textDiv = textObj.parentNode;
 			var newText = input.value;
+			var oldText = textObj.innerHTML;
 			var opts = textObj.editOptions;
 			
-			if (newText != textObj.innerHTML) {
-				textObj.innerHTML = newText;
-				if (opts.onComplete) {
-					opts.onComplete(newText);
-				}
+			textObj.innerHTML = newText;
+			
+			if (opts.onComplete) {
+				opts.onComplete(textObj, oldText);
 			}
 			
 			input.parentNode.removeChild(input);
@@ -393,6 +403,10 @@ var QuickEdit = {
 			
 			if (opts.dragId) {
 				$(opts.dragId).disableDrag = false;
+			}
+			
+			if (opts.fixParent) {
+				textDiv.style.width = "auto";
 			}
 		}
 	}

@@ -23,7 +23,8 @@
 %>
 
 <c:if test="<%= (layouts != null) && (layouts.size() > 0) %>">
-	<div id="layout-nav-container">
+
+<div id="layout-nav-container">
 
 	<%
 	int tabNameMaxLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.LAYOUT_NAME_MAX_LENGTH));
@@ -73,7 +74,7 @@
 			if (isSelectedTab) {
 				%>
 				<div id="layout-tab-selected" class="layout-tab">
-					<div class="layout-tab-text"><span id="layout-tab-text-edit" style="cursor: text"><%= tabName %></span></div>
+					<div class="layout-tab-text" id="layout-tab-text-edit" style="cursor: text"><%= tabName %></div>
 				</div>
 				<%
 			}
@@ -90,19 +91,18 @@
 
 	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 		<div id="layout-tab-add">
-			<div class="layout-tab-text"><a href="javascript: LayoutTab.add()"><bean:message key="add-page" /></a></div>
+			<div class="layout-tab-text"><a href="javascript: Navigation.addPage()"><bean:message key="add-page" /></a></div>
 		</div>
 	</c:if>
+</div>
 
-	</div>
-	<div id="layout-nav-divider" class="layout-nav-<%= selectable ? "selected" : "divider" %>"></div>
+<div id="layout-nav-divider" class="layout-nav-<%= selectable ? "selected" : "divider" %>"></div>
 
 <c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 <script type="text/javascript">
 
-var LayoutTab = {
-	editing: null,
-	
+<c:if test="<%= selectable %>">
+var Navigation = {
 	layoutIds: [<%
 		for (int i = 0; i < layoutIds.size(); i++) {
 			out.print((String)(layoutIds.get(i)));
@@ -120,8 +120,11 @@ var LayoutTab = {
 			}
 		}
 		%>],
-
-	add: function() {
+		
+	lastMoved: null,
+	reordered: null,
+	
+	addPage: function() {
 		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
 			"&groupId=<%= layout.getGroupId() %>" +
 			"&private=<%= layout.isPrivateLayout() %>" +
@@ -135,9 +138,9 @@ var LayoutTab = {
 				}
 			});
 	},
-
-	deletePage: function() {
-		var tab = document.getElementById("layout-tab-selected")
+	
+	removePage: function() {
+		var tab = $("layout-tab-selected");
 		var tabText = $("layout-tab-text-edit").innerHTML;
 
 		if (confirm("<bean:message key="remove" /> \"" + tabText + "\"?")) {
@@ -152,97 +155,67 @@ var LayoutTab = {
 			});
 		}
 	},
+	
+	init: function() {
+		QuickEdit.create("layout-tab-text-edit", {
+			dragId: "layout-tab-selected",
+			fixParent: true,
+			onEdit:
+				function(input, textWidth) {
+					var parent = input.parentNode;
+					var delLink = document.createElement("a");
+					
+					delLink.innerHTML = "X";
+					delLink.href = "javascript:Navigation.removePage()";
+					delLink.className = "layout-tab-close";
+					
+					input.style.width = (textWidth - 20) + "px";
+					Element.addClassName(input, "layout-tab-input");
+					
+					parent.insertBefore(delLink, input);
+				},
+			onComplete:
+				function(newTextObj, oldText) {
+					var delLinks = document.getElementsByClassName("layout-tab-close", newTextObj.parentNode);
+					var delLink = delLinks[delLinks.length - 1];
+					var newText = newTextObj.innerHTML;
+					
+					delLink.style.display = "none";
+					if (oldText != newText) {
+						var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=title&title=" + encodeURIComponent(newText) +
+						"&ownerId=<%= Layout.getOwnerId(plid) %>" +
+						"&language=<%= LanguageUtil.getLanguageId(request) %>" +
+						"&layoutId=<%= layout.getLayoutId() %>";
 
-	edit: function() {
-		var tabText = $("layout-tab-text-edit");
-
-		if (!LayoutTab.editing) {
-			var input = document.createElement("input");
-			var textDiv = tabText.parentNode;
-			var tab = textDiv.parentNode;
-			var spans = tab.getElementsByTagName("span");
-			var width = 20;
-			var delLink = document.createElement("a");
-
-			tab.disableDrag = true;
-
-			for (var i = 0; i < spans.length; i++) {
-				width += spans[i].offsetWidth;
-			}
-
-			tab.style.width = tab.offsetWidth;
-
-			input.className = "layout-tab-edit";
-			input.width = width;
-			input.style.width = (width - 2) + "px";
-			input.style.marginRight = "2px";
-			input.value = tabText.innerHTML;
-			input.onmouseover = function() {
-				document.onclick = function() {};
-			}
-			input.onmouseout = function() {
-				document.onclick = LayoutTab.editDone;
-			}
-			input.onkeydown = function(event) {
-				if (enterPressed(event)) {
-					LayoutTab.editDone();
+						Ajax.request(url);
+					}
 				}
-			}
-
-			delLink.innerHTML = "X";
-			delLink.href = "javascript:LayoutTab.deletePage()";
-			delLink.style.marginRight = "5px";
-			delLink.className = "layout-tab-close";
-
-			textDiv.style.display = "none";
-			tab.appendChild(delLink);
-			tab.appendChild(input);
-			input.focus();
-
-			LayoutTab.editing = tabText;
-		}
-	},
-
-	editDone: function() {
-		if (LayoutTab.editing) {
-			var text = LayoutTab.editing;
-			var textDiv = text.parentNode;
-			var tab = textDiv.parentNode;
-			var input = tab.getElementsByTagName("input")[0];
-			var delLinks = tab.getElementsByTagName("a");
-			var delLink = delLinks[delLinks.length - 1];
-			var title = input.value;
-
-			if (title == "") {
-				title = "(untitled)";
-			}
-
-			tab.removeChild(input);
-			//tab.removeChild(delLink);
-			delLink.style.display = "none";
-			tab.style.width = "";
-			textDiv.style.display = "";
-			document.onclick = function() {};
-			LayoutTab.editing = null;
-
-			tab.disableDrag = false;
-
-			if (text.innerHTML != title) {
-				text.innerHTML = title;
-
-				var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=title&title=" + encodeURIComponent(title) +
-					"&ownerId=<%= Layout.getOwnerId(plid) %>" +
-					"&language=<%= LanguageUtil.getLanguageId(request) %>" +
-					"&layoutId=<%= layout.getLayoutId() %>";
-
-				Ajax.request(url);
-			}
-		}
-	},
-
-	move: function(from, to) {
+			});
+		
+		DropZone.add("layout-nav-container", {
+			accept: ["layout-tab"],
+			onHoverOver: Navigation.onDrag,
+			onDrop: Navigation.onDrop
+			});
+		
+		DragDrop.create("layout-tab-selected", {
+			revert: true,
+			forceLastDrop: true
+			});
+			
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		var selectedTab = document.getElementById("layout-tab-selected");
+		tabs.foreach(function(item, index) {
+			item.layoutId = Navigation.layoutIds[index];
+		});
+		
+		<c:if test="<%= newPage %>">
+			$("layout-tab-text-edit").onclick();
+		</c:if>
+	},
+	
+	move: function(obj, from, to) {
+		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		var selectedTab = obj;
 		var nav = document.getElementById("layout-nav-container");
 		var target;
 
@@ -250,106 +223,75 @@ var LayoutTab = {
 
 		if (from > to) {
 			target = tabs[to];
-			nav.insertBefore(selectedTab, target);
 		}
 		else {
 			if (to == tabs.length - 1) {
-				var addPage = $("layout-tab-add");
-				nav.insertBefore(selectedTab, addPage);
+				target = $("layout-tab-add");
 			}
 			else {
 				target = tabs[to + 1];
-				nav.insertBefore(selectedTab, target);
 			}
 		}
+		
+		nav.insertBefore(selectedTab, target);
+	},
+	
+	onDrag: function(item) {
+		var dragOptions = item.dragOptions;
+		var clone = dragOptions.clone;
+		var fromIndex = -1;
+		var toIndex = -1;
+		
+		clone.style.backgroundColor = "transparent";
+		clone.layoutId = item.layoutId;
+		
+		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 
+		tabs.foreach(function(tab, index) {
+				if (tab == clone) {
+					fromIndex = index;
+				}
+
+				if (mousePos.insideObject(tab, true)) {
+					if (tab != clone) {
+						if (tab != Navigation.lastMoved) {
+							toIndex = index;
+							Navigation.lastMoved = tab;
+						}
+					}
+					else {
+						Navigation.lastMoved = null;
+					}
+				}
+			});
+
+		if (fromIndex >= 0 && toIndex >= 0) {
+			Navigation.move(clone, fromIndex, toIndex);
+		}
+	},
+	
+	onDrop: function(item) {
 		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var reordered = new Array();
 		for (var i = 0; i < tabs.length; i++) {
 			reordered[i] = tabs[i].layoutId;
 		}
-
-		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=reorder" +
-			"&ownerId=<%= Layout.getOwnerId(plid) %>" +
-			"&parent=<%= layout.getParentLayoutId() %>" +
-			"&layoutIds=" + reordered.concat(LayoutTab.hiddenIds);
-
-		Ajax.request(url);
-	},
-
-	onDragStart: function(nwPosition, sePosition, nwOffset, seOffset) {
-		var item = this;
-		item.dragged = false;
-	},
-
-	onDrag: function(nwPosition, sePosition, nwOffset, seOffset) {
-		var item = this;
-		item.dragged = true;
-	},
-
-	onDragEnd: function(nwPosition, sePosition, nwOffset, seOffset) {
-		var item = this;
-		var options = {
-			from: -1,
-			to: -1
+		Navigation.reordered = reordered;
+		if (Navigation.reordered) {
+			var reordered = Navigation.reordered;
+			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=reorder" +
+				"&ownerId=<%= Layout.getOwnerId(plid) %>" +
+				"&parent=<%= layout.getParentLayoutId() %>" +
+				"&layoutIds=" + reordered.concat(Navigation.hiddenIds);
+	
+			Ajax.request(url);
 		}
-
-		if (item.dragged) {
-			var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-
-			tabs.foreach(function(tab, index, options) {
-					if (tab == item) {
-						options.from = index;
-					}
-					else {
-						if (mousePos.insideObject(tab, true)) {
-							options.to = index;
-						}
-					}
-				}, options);
-
-			if (options.to >= 0) {
-				LayoutTab.move(options.from, options.to);
-			}
-			item.style.left = "";
-			item.style.top = "";
-		}
-		else {
-			// Not dragged.  Treat as click.
-			var tabText = $("layout-tab-text-edit");
-
-			if (mousePos.inside(Coordinates.northwestOffset(tabText,true), Coordinates.southeastOffset(tabText,true))) {
-				LayoutTab.edit();
-			}
-		}
-
-		item.dragged = false;
-	},
-
-	init: function() {
-		var nav = $("layout-nav-container");
-		var selectedTab = document.getElementById("layout-tab-selected");
-		var tabText = $("layout-tab-text-edit");
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-
-		Drag.makeDraggable(selectedTab);
-		selectedTab.onDragStart = LayoutTab.onDragStart;
-		selectedTab.onDrag = LayoutTab.onDrag;
-		selectedTab.onDragEnd = LayoutTab.onDragEnd;
-		selectedTab.threshold = 3;
-		selectedTab.style.cursor = "move";
-
-		tabs.foreach(function(item, index) {
-			item.layoutId = LayoutTab.layoutIds[index];
-		});
-		
-		<c:if test="<%= newPage %>">
-			LayoutTab.edit();
-		</c:if>
 	}
 }
 
-LayoutTab.init();
+Navigation.init();
+</c:if>
+	
 </script>
 </c:if>
 

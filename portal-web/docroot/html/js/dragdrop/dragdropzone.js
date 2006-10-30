@@ -60,6 +60,7 @@ var DragDrop = {
 	instance : 0,
 	lastContainer : null,
 	track : null,
+	lastOnDrop : null,
 	lastSelected : null,
 
 	accepts : function(item, dropItem) {
@@ -88,6 +89,7 @@ var DragDrop = {
 	create : function(itemId, dragOptions) {
 		/* Options
 		 * container: (Object) container which may have scroll bars. Needed to correct offset.
+		 * forceLastDrop: (boolean) force onDrop of last container
 		 * ghost: (boolean) make the dragging element transparent?
 		 * handle: (Object) handle for drag obj
 		 * highlightDropzones: (boolean) highlight dropzones
@@ -198,7 +200,8 @@ var DragDrop = {
 				dropOptions.northwestOffset = Coordinates.northwestOffset(dropContainer, true);
 				dropOptions.southeastOffset = Coordinates.southeastOffset(dropContainer, true);
 			}
-
+			
+			DragDrop.lastOnDrop = null;
 			item.initialized = true;
 		}
 		else {
@@ -229,6 +232,7 @@ var DragDrop = {
 			
 			if (isInsideContainer) {
 				DragDrop.currentContainer = dropContainer;
+				DragDrop.lastOnDrop = dropContainer.dropOptions.onDrop;
 			}
 		}
 
@@ -248,8 +252,6 @@ var DragDrop = {
 				if (typeof(last.dropOptions.onHoverOut) != "undefined") {
 					last.dropOptions.onHoverOut(item);
 				}
-
-				DragDrop.lastContainer = null;
 			}
 			if (cur) {
 				if (cur.dropOptions.hoverclass && cur != item &&
@@ -285,6 +287,9 @@ var DragDrop = {
 				if (dropOptions.inheritParent) {
 					dropItem.style.height = "";
 				}
+			}
+			else if (opts.forceLastDrop && DragDrop.lastOnDrop) {
+				DragDrop.lastOnDrop();
 			}
 			
 			var clone = DragDrop.clone;

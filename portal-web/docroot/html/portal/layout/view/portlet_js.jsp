@@ -59,16 +59,14 @@ function addPortlet(plid, portletId) {
 		}
 
 		loadingDiv.className = "portlet-loading";
-		loadingDiv.id = "portlet-loading-placeholder";
 
-		container.insertBefore(loadingDiv, container.endPlaceholder);
+		container.insertBefore(loadingDiv, null);
 	}
 }
 
 function addPortletReturn(xmlHttpReq) {
 	var container = document.getElementById("layout-column_column-1");
-
-	var portletId = addPortletHTML(xmlHttpReq.responseText, container, container.endPlaceholder);
+	var portletId = addPortletHTML(xmlHttpReq.responseText, container, null);
 
 	if (window.location.hash) {
 		window.location.hash = "p_" + portletId;
@@ -81,7 +79,7 @@ function addPortletHTML(html, container, placeHolder) {
 	}
 
 	var addDiv = document.createElement("div");
-	var loadingDiv = document.getElementById("portlet-loading-placeholder");
+	var loadingDiv = document.getElementsByClassName("portlet-loading", container)[0];
 
 	addDiv.style.display = "none";
 	addDiv.innerHTML = html;

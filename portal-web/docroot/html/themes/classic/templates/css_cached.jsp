@@ -52,7 +52,6 @@ a:hover {
 }
 
 body {
-	background-color: <%= colorScheme.getBodyBg() %>;
 	border: 0;
 	height: 100%;
 	margin: 0;
@@ -125,7 +124,7 @@ textarea { font-family: Arial; font-size: <%= fontDefault %>; }
 
 .pop-up-outer { border: 1px solid #383838; background-color: #FFFFFF; }
 .pop-up-inner { border: 1px solid #747474; }
-.pop-up-header { background-color: #000000; height: 30px; }
+.pop-up-header { background-color: #000000; height: 25px; }
 .pop-up-title { color: #FFFFFF; font-weight: bold; padding-left: 10px; }
 .pop-up-close a { color: #FFFFFF; margin-right: 7px; white-space: nowrap; text-decoration: underline; }
 
@@ -319,18 +318,21 @@ FONT.bg {
 /******************************************************************************/
 
 #layout-outer-side-decoration {
-	background-color: <%= colorScheme.getLayoutBg() %>;
+	background-color: <%= colorScheme.getBodyBg() %>;
 	height: 100%;
-	margin: 0 auto 0 auto;
-	text-align: center;
 }
 
 #layout-inner-side-decoration {
-	padding: 10px;
-	text-align: left;
+	background-color: <%= colorScheme.getLayoutBg() %>;
+	height: 100%;
+	margin: 0 auto 0 auto;
 }
 
-#layout-box { }
+#layout-box {
+	padding: 10px 0 10px 0;
+	margin: 0 auto 0 auto;
+	text-align: left;
+}
 
 #layout-top-banner {
 	height: 75px;
@@ -433,7 +435,7 @@ FONT.bg {
 }
 
 #layout-tab-add, #layout-tab-add a {
-	background-color: <%= colorScheme.getLayoutBg() %>;
+	background-color: #F6F6F6;
 	color: <%= colorScheme.getLayoutText() %>;
 	font-weight: normal;
 }
@@ -450,9 +452,12 @@ FONT.bg {
 	white-space: nowrap;
 }
 
-.layout-tab-edit {
-	border: 1px solid #606060;
-	margin: 5px 0 0 0;
+.layout-tab-close {
+	margin: 6px 3px 0 0;
+}
+
+.layout-tab-input {
+	margin: 6px 2px 0 0;
 }
 
 #layout-content-outer-decoration {

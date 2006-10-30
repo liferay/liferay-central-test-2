@@ -71,9 +71,18 @@
 		<script type="text/javascript">
 		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
 			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
-			onComplete: function(newText) {
-					var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title?portletId=<%= portletDisplay.getId() %>&title=" + newText;
-					Ajax.request(url);
+			onEdit: 
+				function(input, textWidth) {
+					input.style.width = (textWidth) + "px";
+					input.style.marginLeft = "5px";
+				},
+			onComplete:
+				function(newTextObj, oldText) {
+					var newText = newTextObj.innerHTML;
+					if (oldText != newText) {
+						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title?portletId=<%= portletDisplay.getId() %>&title=" + newText;
+						Ajax.request(url);
+					}
 				}
 			});
 		</script>
