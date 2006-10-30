@@ -25,11 +25,11 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 

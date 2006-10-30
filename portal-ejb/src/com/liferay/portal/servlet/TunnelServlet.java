@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.util.ObjectValuePair;
@@ -61,7 +61,7 @@ public class TunnelServlet extends HttpServlet {
 	public void doPost(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		PermissionChecker permissionChecker = null;
+		PermissionCheckerImpl permissionChecker = null;
 
 		try {
 			ObjectInputStream ois = new ObjectInputStream(req.getInputStream());

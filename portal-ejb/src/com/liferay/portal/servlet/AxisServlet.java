@@ -25,8 +25,8 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 
@@ -50,7 +50,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		PermissionChecker permissionChecker = null;
+		PermissionCheckerImpl permissionChecker = null;
 
 		try {
 			String remoteUser = req.getRemoteUser();

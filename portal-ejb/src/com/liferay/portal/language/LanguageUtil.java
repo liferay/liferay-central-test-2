@@ -196,10 +196,24 @@ public class LanguageUtil {
 	}
 
 	public static String get(User user, String key) throws LanguageException {
-		return get(user.getActualCompanyId(), user.getLocale(), key);
+		return get(user, key, key);
+	}
+
+	public static String get(User user, String key, String defaultValue)
+		throws LanguageException {
+
+		return get(
+			user.getActualCompanyId(), user.getLocale(), key, defaultValue);
 	}
 
 	public static String get(String companyId, Locale locale, String key)
+		throws LanguageException {
+
+		return get(companyId, locale, key, key);
+	}
+
+	public static String get(
+			String companyId, Locale locale, String key, String defaultValue)
 		throws LanguageException {
 
 		String value = null;
@@ -215,7 +229,7 @@ public class LanguageUtil {
 		}
 
 		if (value == null) {
-			value = key;
+			value = defaultValue;
 		}
 
 		return value;

@@ -36,6 +36,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 String modelResource = ParamUtil.getString(request, "modelResource");
 
 String portletResourceName = null;
+
 if (Validator.isNotNull(portletResource)) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 

@@ -36,6 +36,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.deploy.HotDeployPortletListener">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.editor">
 		<priority value="ERROR" />
 	</category>
@@ -100,7 +104,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.security.permission.PermissionChecker">
+	<category name="com.liferay.portal.security.permission.PermissionCheckerImpl">
 		<priority value="ERROR" />
 	</category>
 

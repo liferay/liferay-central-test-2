@@ -26,7 +26,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -120,11 +120,11 @@ public class PrincipalSessionBean {
 		}
 
 		try {
-			PermissionChecker permissionChecker =
+			PermissionCheckerImpl permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			if (permissionChecker == null) {
-				permissionChecker = (PermissionChecker)Class.forName(
+				permissionChecker = (PermissionCheckerImpl)Class.forName(
 					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
 
 				User user = null;
@@ -152,11 +152,11 @@ public class PrincipalSessionBean {
 		PrincipalThreadLocal.setName(userId);
 
 		try {
-			PermissionChecker permissionChecker =
+			PermissionCheckerImpl permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			if (permissionChecker == null) {
-				permissionChecker = (PermissionChecker)Class.forName(
+				permissionChecker = (PermissionCheckerImpl)Class.forName(
 					PropsUtil.get(PropsUtil.PERMISSIONS_CHECKER)).newInstance();
 
 				boolean signedIn = false;

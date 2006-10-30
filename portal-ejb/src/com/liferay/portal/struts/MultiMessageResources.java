@@ -80,9 +80,11 @@ public class MultiMessageResources extends PropertyMessageResources {
 
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
+
 			if (localeKey.length() > 0) {
 				name += "_" + localeKey;
 			}
+
 			name += ".properties";
 
 			_loadProps(name, localeKey, false);
@@ -90,9 +92,11 @@ public class MultiMessageResources extends PropertyMessageResources {
 
 		for (int i = 0; i < names.length; i++) {
 			String name = names[i];
+
 			if (localeKey.length() > 0) {
 				name += "_" + localeKey;
 			}
+
 			name += ".properties";
 
 			_loadProps(name, localeKey, true);
@@ -142,8 +146,8 @@ public class MultiMessageResources extends PropertyMessageResources {
 			while (names.hasMoreElements()) {
 				String key = (String)names.nextElement();
 
-				messages.put(messageKey(localeKey, key),
-							 props.getProperty(key));
+				messages.put(
+					messageKey(localeKey, key), props.getProperty(key));
 			}
 		}
 	}

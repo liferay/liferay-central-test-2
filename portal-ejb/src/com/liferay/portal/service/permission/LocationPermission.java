@@ -24,11 +24,12 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
 
 /**
@@ -54,6 +55,9 @@ public class LocationPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
+		PermissionCheckerImpl permissionCheckerImpl =
+			(PermissionCheckerImpl)permissionChecker;
+
 		if (permissionChecker.hasPermission(
 				null, "com.liferay.portal.model.Location", locationId,
 				actionId)) {
@@ -61,7 +65,7 @@ public class LocationPermission {
 			return true;
 		}
 		else if (actionId.equals(ActionKeys.VIEW)) {
-			User user = permissionChecker.getUser();
+			User user = permissionCheckerImpl.getUser();
 
 			Organization location = user.getLocation();
 

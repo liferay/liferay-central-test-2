@@ -25,6 +25,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-permissions-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-portal-client-portlet" />
 		</antcall>
 
@@ -66,6 +70,10 @@
 
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-jsp-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-permissions-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
@@ -116,6 +124,10 @@
 
 		<antcall target="war-module">
 			<param name="module.name" value="sample-jsp-portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample-permissions-portlet" />
 		</antcall>
 
 		<antcall target="war-module">

@@ -29,8 +29,10 @@ import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
@@ -71,8 +73,19 @@ public class ResourceActionsUtil {
 		String companyId, Locale locale, String action) {
 
 		try {
-			return LanguageUtil.get(
-				companyId, locale, ACTION_NAME_PREFIX + action);
+			String key = ACTION_NAME_PREFIX + action;
+
+			String value = LanguageUtil.get(companyId, locale, key, null);
+
+			if (value == null) {
+				value = PortletResourceBundles.getString(locale, key);
+			}
+
+			if (value == null) {
+				value = key;
+			}
+
+			return value;
 		}
 		catch (LanguageException le) {
 			return action;
@@ -81,7 +94,19 @@ public class ResourceActionsUtil {
 
 	public static String getAction(PageContext pageContext, String action) {
 		try {
-			return LanguageUtil.get(pageContext, ACTION_NAME_PREFIX + action);
+			String key = ACTION_NAME_PREFIX + action;
+
+			String value = LanguageUtil.get(pageContext, key, null);
+
+			if (value == null) {
+				value = PortletResourceBundles.getString(pageContext, key);
+			}
+
+			if (value == null) {
+				value = key;
+			}
+
+			return value;
 		}
 		catch (LanguageException le) {
 			return action;
@@ -122,8 +147,19 @@ public class ResourceActionsUtil {
 		String companyId, Locale locale, String name) {
 
 		try {
-			return LanguageUtil.get(
-				companyId, locale, MODEL_RESOURCE_NAME_PREFIX + name);
+			String key = MODEL_RESOURCE_NAME_PREFIX + name;
+
+			String value = LanguageUtil.get(companyId, locale, key, null);
+
+			if (value == null) {
+				value = PortletResourceBundles.getString(locale, key);
+			}
+
+			if (value == null) {
+				value = key;
+			}
+
+			return value;
 		}
 		catch (LanguageException le) {
 			return name;
@@ -134,8 +170,19 @@ public class ResourceActionsUtil {
 		PageContext pageContext, String name) {
 
 		try {
-			return LanguageUtil.get(
-				pageContext, MODEL_RESOURCE_NAME_PREFIX + name);
+			String key = MODEL_RESOURCE_NAME_PREFIX + name;
+
+			String value = LanguageUtil.get(pageContext, key, null);
+
+			if (value == null) {
+				value = PortletResourceBundles.getString(pageContext, key);
+			}
+
+			if (value == null) {
+				value = key;
+			}
+
+			return value;
 		}
 		catch (LanguageException le) {
 			return name;
@@ -220,6 +267,13 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
+	public static void read(
+			String servletContextName, ClassLoader classLoader, String source)
+		throws Exception {
+
+		_instance._read(servletContextName, classLoader, source);
+	}
+
 	private ResourceActionsUtil() {
 		_portletModelResources = CollectionFactory.getHashMap();
 		_portletResourceActions = CollectionFactory.getHashMap();
@@ -240,7 +294,7 @@ public class ResourceActionsUtil {
 				PropsUtil.get(PropsUtil.RESOURCE_ACTIONS_CONFIGS));
 
 			for (int i = 0; i < configs.length; i++) {
-				_read(classLoader, configs[i]);
+				_read(null, classLoader, configs[i]);
 			}
 		}
 		catch (Exception e) {
@@ -309,6 +363,8 @@ public class ResourceActionsUtil {
 	}
 
 	private List _getPortletModelResources(String portletName) {
+		portletName = Portlet.getRootPortletId(portletName);
+
 		Set resources = (Set)_portletModelResources.get(portletName);
 
 		if (resources == null) {
@@ -321,6 +377,8 @@ public class ResourceActionsUtil {
 
 	private List _getPortletResourceActions(String companyId, String name)
 		throws SystemException {
+
+		name = Portlet.getRootPortletId(name);
 
 		List actions = _getActions(_portletResourceActions, name);
 
@@ -383,6 +441,8 @@ public class ResourceActionsUtil {
 		// _getPortletResourceGuestDefaultActions and
 		// _getPortletResourceGuestDefaultActions may not work either.
 
+		name = Portlet.getRootPortletId(name);
+
 		List communityDefaultActions = _getActions(
 			_portletResourceCommunityDefaultActions, name);
 
@@ -396,16 +456,21 @@ public class ResourceActionsUtil {
 	private List _getPortletResourceGuestDefaultActions(String name)
 		throws SystemException {
 
+		name = Portlet.getRootPortletId(name);
+
 		return _getActions(_portletResourceGuestDefaultActions, name);
 	}
 
 	private List _getPortletResourceGuestUnsupportedActions(String name)
 		throws SystemException {
 
+		name = Portlet.getRootPortletId(name);
+
 		return _getActions(_portletResourceGuestUnsupportedActions, name);
 	}
 
-	private void _read(ClassLoader classLoader, String source)
+	private void _read(
+			String servletContextName, ClassLoader classLoader, String source)
 		throws Exception {
 
 		String xml = null;
@@ -438,7 +503,7 @@ public class ResourceActionsUtil {
 
 			String file = resource.attributeValue("file");
 
-			_read(classLoader, file);
+			_read(servletContextName, classLoader, file);
 		}
 
 		itr1 = root.elements("portlet-resource").iterator();
@@ -447,6 +512,12 @@ public class ResourceActionsUtil {
 			Element resource = (Element)itr1.next();
 
 			String name = resource.elementText("portlet-name");
+
+			if (servletContextName != null) {
+				name = name + Portlet.WAR_SEPARATOR + servletContextName;
+			}
+
+			name = PortalUtil.getJsSafePortletName(name);
 
 			// Actions
 
@@ -546,6 +617,15 @@ public class ResourceActionsUtil {
 				Element portletName = (Element)itr2.next();
 
 				String portletNameString = portletName.getText();
+
+				if (servletContextName != null) {
+					portletNameString =
+						portletNameString + Portlet.WAR_SEPARATOR +
+							servletContextName;
+				}
+
+				portletNameString = PortalUtil.getJsSafePortletName(
+					portletNameString);
 
 				Set modelResources = (Set)_portletModelResources.get(
 					portletNameString);

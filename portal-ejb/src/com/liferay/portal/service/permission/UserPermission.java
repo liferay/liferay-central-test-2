@@ -22,11 +22,12 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.util.Validator;
 
 /**
@@ -54,13 +55,16 @@ public class UserPermission {
 		PermissionChecker permissionChecker, String userId,
 		String organizationId, String locationId, String actionId) {
 
+		PermissionCheckerImpl permissionCheckerImpl =
+			(PermissionCheckerImpl)permissionChecker;
+
 		String organizationActionId = actionId + "_USER";
 
 		if (actionId.equals(ActionKeys.ADD_USER)) {
 			organizationActionId = actionId;
 		}
 
-		if (permissionChecker.getUser().getUserId().equals(userId)) {
+		if (permissionCheckerImpl.getUser().getUserId().equals(userId)) {
 			return true;
 		}
 		else if (permissionChecker.hasPermission(

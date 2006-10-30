@@ -24,8 +24,8 @@ package com.liferay.portlet.blogs.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;

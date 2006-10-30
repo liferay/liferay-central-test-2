@@ -102,6 +102,10 @@ public class CollectionFactory {
 			getHashMap(capacity), new WriterPreferenceReadWriteLock());
 	}
 
+	public static Map getSyncHashMap(Map map) {
+		return new SyncMap(map, new WriterPreferenceReadWriteLock());
+	}
+
 	public static Set getSyncHashSet() {
 		return new SyncSet(getHashSet(), new WriterPreferenceReadWriteLock());
 	}
@@ -109,6 +113,10 @@ public class CollectionFactory {
 	public static Set getSyncHashSet(int capacity) {
 		return new SyncSet(
 			getHashSet(capacity), new WriterPreferenceReadWriteLock());
+	}
+
+	public static Set getSyncHashSet(Set set) {
+		return new SyncSet(set, new WriterPreferenceReadWriteLock());
 	}
 
 }

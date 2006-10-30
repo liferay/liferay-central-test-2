@@ -40,7 +40,7 @@ import org.apache.commons.pool.impl.StackObjectPool;
  */
 public class PermissionCheckerFactory {
 
-	public static PermissionChecker create(
+	public static PermissionCheckerImpl create(
 			User user, boolean signedIn, boolean checkGuest)
 		throws Exception {
 
@@ -50,15 +50,15 @@ public class PermissionCheckerFactory {
 					_instance._pool.getNumActive());
 		}
 
-		PermissionChecker permissionChecker =
-			(PermissionChecker)_instance._pool.borrowObject();
+		PermissionCheckerImpl permissionChecker =
+			(PermissionCheckerImpl)_instance._pool.borrowObject();
 
 		permissionChecker.init(user, signedIn, checkGuest);
 
 		return permissionChecker;
 	}
 
-	public static void recycle(PermissionChecker permissionChecker)
+	public static void recycle(PermissionCheckerImpl permissionChecker)
 		throws Exception {
 
 		if (permissionChecker == null) {
@@ -100,7 +100,8 @@ public class PermissionCheckerFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			PermissionChecker permissionChecker = (PermissionChecker)obj;
+			PermissionCheckerImpl permissionChecker =
+				(PermissionCheckerImpl)obj;
 
 			permissionChecker.recycle();
 		}

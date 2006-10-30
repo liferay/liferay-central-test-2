@@ -32,8 +32,10 @@ import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -44,13 +46,19 @@ import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
+import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.ObjectValuePair;
+import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.Indexer;
+
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
 
 import java.util.HashSet;
 import java.util.Iterator;
@@ -58,6 +66,7 @@ import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.MissingResourceException;
+import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
@@ -294,6 +303,36 @@ public class HotDeployPortletListener implements HotDeployListener {
 				}
 			}
 
+			// Portlet properties
+
+			String portletPropsName = ctx.getInitParameter(
+				"portlet_properties");
+
+			if (Validator.isNotNull(portletPropsName)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Loading portlet properties " + portletPropsName);
+				}
+
+				Properties portletProps = new Properties();
+
+				PropertiesUtil.load(
+					portletProps,
+					StringUtil.read(portletClassLoader, portletPropsName));
+
+				if (_log.isDebugEnabled()) {
+					ByteArrayOutputStream baos = new ByteArrayOutputStream();
+					PrintStream ps = new PrintStream(baos);
+
+					portletProps.list(ps);
+
+					_log.debug(baos.toString());
+				}
+
+				processProperties(
+					servletContextName, portletClassLoader, portletProps);
+			}
+
 			// Variables
 
 			_vars.put(
@@ -367,6 +406,8 @@ public class HotDeployPortletListener implements HotDeployListener {
 				}
 			}
 
+			PortletResourceBundles.remove(servletContextName);
+
 			if (_log.isInfoEnabled()) {
 				_log.info(
 					"Portlets for " + servletContextName +
@@ -376,6 +417,36 @@ public class HotDeployPortletListener implements HotDeployListener {
 		catch (Exception e) {
 			throw new HotDeployException(
 				"Error unregistering portlets for " + servletContextName, e);
+		}
+	}
+
+	protected void processProperties(
+			String servletContextName, ClassLoader portletClassLoader,
+			Properties portletProps)
+		throws Exception {
+
+		String languageBundleName = portletProps.getProperty("language.bundle");
+
+		if (Validator.isNotNull(languageBundleName)) {
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (int i = 0; i < locales.length; i++) {
+				ResourceBundle bundle = ResourceBundle.getBundle(
+					languageBundleName, locales[i], portletClassLoader);
+
+				PortletResourceBundles.put(
+					servletContextName, LocaleUtil.toLanguageId(locales[i]),
+					bundle);
+			}
+		}
+
+		String[] resourceActionConfigs = StringUtil.split(
+			portletProps.getProperty("resource.actions.configs"));
+
+		for (int i = 0; i < resourceActionConfigs.length; i++) {
+			ResourceActionsUtil.read(
+				servletContextName, portletClassLoader,
+				resourceActionConfigs[i]);
 		}
 	}
 

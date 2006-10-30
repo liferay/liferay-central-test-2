@@ -28,6 +28,7 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.ColorScheme;
@@ -39,8 +40,8 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
@@ -166,10 +167,13 @@ public class ServicePreAction extends Action {
 
 			// Permission checker
 
-			PermissionChecker permissionChecker =
+			PermissionCheckerImpl permissionChecker =
 				PermissionCheckerFactory.create(user, signedIn, true);
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
+
+			req.setAttribute(
+				PermissionChecker.REQUEST_ATTRIBUTE_NAME, permissionChecker);
 
 			// Locale
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
@@ -81,11 +81,11 @@ public class StrutsPortlet extends LiferayPortlet {
 
 			// Call processAction of com.liferay.portal.struts.PortletAction
 
-			PermissionChecker checker =
+			PermissionCheckerImpl permissionChecker =
 				PermissionThreadLocal.getPermissionChecker();
 
 			try {
-				checker.setValues(req);
+				permissionChecker.setValues(req);
 
 				// Process action
 
@@ -98,7 +98,7 @@ public class StrutsPortlet extends LiferayPortlet {
 				throw new PortletException(se);
 			}
 			finally {
-				checker.resetValues();
+				permissionChecker.resetValues();
 			}
 		}
 
@@ -211,11 +211,11 @@ public class StrutsPortlet extends LiferayPortlet {
 
 		// Process render
 
-		PermissionChecker checker =
+		PermissionCheckerImpl permissionChecker =
 			PermissionThreadLocal.getPermissionChecker();
 
 		try {
-			checker.setValues(req);
+			permissionChecker.setValues(req);
 
 			PortletRequestProcessor processor =
 				_getPortletRequestProcessor(req);
@@ -229,7 +229,7 @@ public class StrutsPortlet extends LiferayPortlet {
 			throw new PortletException(se);
 		}
 		finally {
-			checker.resetValues();
+			permissionChecker.resetValues();
 
 			if (_portletConfig.isWARFile()) {
 

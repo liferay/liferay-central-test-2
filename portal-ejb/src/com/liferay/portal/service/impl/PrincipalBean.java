@@ -24,11 +24,11 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;

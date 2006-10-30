@@ -25,6 +25,7 @@ package com.liferay.portal.security.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
@@ -53,18 +54,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="PermissionChecker.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionCheckerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
  * @author  Brian Wing Shun Chan
  *
  */
-public class PermissionChecker {
+public class PermissionCheckerImpl implements PermissionChecker {
 
 	public static final int USER_CHECK_ALGORITHM = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.PERMISSIONS_USER_CHECK_ALGORITHM));
 
-	public PermissionChecker() {
+	public PermissionCheckerImpl() {
 	}
 
 	public void init(User user, boolean signedIn, boolean checkGuest) {
@@ -480,6 +481,6 @@ public class PermissionChecker {
 	protected Map bags = CollectionFactory.getHashMap();
 	protected Map results = CollectionFactory.getHashMap();
 
-	private static Log _log = LogFactory.getLog(PermissionChecker.class);
+	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);
 
 }

@@ -34,8 +34,8 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
@@ -333,22 +333,22 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		start = logHasUserPermissions(
 			userId, actionId, resourceId, start, block++);
 
-		if (PermissionChecker.USER_CHECK_ALGORITHM == 1) {
+		if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 1) {
 			return hasUserPermissions_1(
 				userId, actionId, resourceId, permissions, groups, start,
 				block);
 		}
-		else if (PermissionChecker.USER_CHECK_ALGORITHM == 2) {
+		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 2) {
 			return hasUserPermissions_2(
 				userId, actionId, resourceId, permissions, groups, start,
 				block);
 		}
-		else if (PermissionChecker.USER_CHECK_ALGORITHM == 3) {
+		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 3) {
 			return hasUserPermissions_3(
 				userId, actionId, resourceId, permissions, groups, roles, start,
 				block);
 		}
-		else if (PermissionChecker.USER_CHECK_ALGORITHM == 4) {
+		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 4) {
 			return hasUserPermissions_4(
 				userId, actionId, resourceId, permissions, groups, roles, start,
 				block);

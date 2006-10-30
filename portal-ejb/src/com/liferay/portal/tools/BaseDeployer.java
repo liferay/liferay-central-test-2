@@ -22,6 +22,7 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
@@ -430,7 +431,7 @@ public class BaseDeployer {
 
 		double webXmlVersion = 2.3;
 
-		SAXReader reader = new SAXReader();
+		SAXReader reader = SAXReaderFactory.getInstance(false);
 
 		Document webXmlDoc = reader.read(new StringReader(content));
 

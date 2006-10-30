@@ -46,7 +46,6 @@
 --%><%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %><%--
 --%><%@ page import="com.liferay.portal.service.permission.PortalPermission" %><%--
 --%><%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %><%--
---%><%@ page import="com.liferay.portlet.communities.search.UserPermissionChecker" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationGroupChecker" %><%--

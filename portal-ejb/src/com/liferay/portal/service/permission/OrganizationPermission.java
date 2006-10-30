@@ -22,11 +22,12 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
 
 /**
  * <a href="OrganizationPermission.java.html"><b><i>View Source</i></b></a>
@@ -50,13 +51,16 @@ public class OrganizationPermission {
 		PermissionChecker permissionChecker, String organizationId,
 		String actionId) {
 
+		PermissionCheckerImpl permissionCheckerImpl =
+			(PermissionCheckerImpl)permissionChecker;
+
 		if (permissionChecker.hasPermission(
 				null, Organization.class.getName(), organizationId, actionId)) {
 
 			return true;
 		}
 		else if (actionId.equals(ActionKeys.VIEW)) {
-			User user = permissionChecker.getUser();
+			User user = permissionCheckerImpl.getUser();
 
 			Organization organization = user.getOrganization();
 

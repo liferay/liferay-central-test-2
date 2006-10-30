@@ -22,12 +22,12 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
