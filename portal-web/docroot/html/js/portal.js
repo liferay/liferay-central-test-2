@@ -20,6 +20,26 @@ function changeBackground(path, extension) {
 	} 
 }
 
+var DragLink = {
+	create: function(item, dragId) {
+		item.dragId = $(dragId);
+		item.clickLink = item.href;
+		item.href = "javascript:void(0)";
+		item.onclick = DragLink.onLinkClick;
+	},
+	
+	onLinkClick: function() {
+		if (this.dragId.wasClicked) {
+			if (is_ie) {
+				setTimeout("window.location = \"" + this.clickLink + "\";", 0);
+			}
+			else {
+				window.location = this.clickLink;
+			}
+		}
+	}
+}
+
 var DynamicSelect = {
 	create : function(url, source, target, callback, query) {
 		var returnObj = new Object();
@@ -255,14 +275,27 @@ var Navigation = {
 			onDrop: Navigation.onDrop
 			});
 		
+		/*
 		DragDrop.create("layout-tab-selected", {
 			revert: true,
 			forceLastDrop: true
 			});
+		*/
 			
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		tabs.foreach(function(item, index) {
+			DragDrop.create(item, {
+					revert: true,
+					forceLastDrop: true
+				});
+				
 			item.layoutId = Navigation.params.layoutIds[index];
+			item.style.cursor = "move";
+			
+			var links = item.getElementsByTagName("a");
+			if (links.length > 0) {
+				DragLink.create(links[0], item);
+			}
 		});
 		
 		if (Navigation.params.newPage) {
