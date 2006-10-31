@@ -88,16 +88,6 @@ portletURL.setParameter("name", name);
 
 <br><br>
 
-<%
-String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE)) / 1024);
-%>
-
-<c:if test='<%= !fileMaxSize.equals("0") %>'>
-	<%= LanguageUtil.format(pageContext, "upload-documents-no-larger-than-x-k", fileMaxSize, false) %>
-
-	<br><br>
-</c:if>
-
 <c:if test="<%= fileEntry != null %>">
 	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
