@@ -50,16 +50,7 @@ catch (NoSuchResourceException nsre) {
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
-	else if (portletId.equals(PortletKeys.JOURNAL)) {
-		addDefaultResource = true;
-	}
-	else if (portletId.equals(PortletKeys.JOURNAL_CONTENT_SEARCH)) {
-		addDefaultResource = true;
-	}
-	else if (portletId.equals(PortletKeys.MY_ACCOUNT)) {
-		addDefaultResource = true;
-	}
-	else if (portletId.equals(PortletKeys.SEARCH)) {
+	else if (portlet.isAddDefaultResource()) {
 		addDefaultResource = true;
 	}
 	else if (themeDisplay.isSignedIn()) {
@@ -78,12 +69,6 @@ catch (NoSuchResourceException nsre) {
 					addDefaultResource = true;
 				}
 			}
-		}
-		else if (portletId.equals(PortletKeys.MY_PLACES)) {
-			addDefaultResource = true;
-		}
-		else if (portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-			addDefaultResource = true;
 		}
 	}
 

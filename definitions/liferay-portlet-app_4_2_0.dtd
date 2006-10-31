@@ -24,7 +24,7 @@ preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
 maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
-render-weight?, ajaxable?, system?, active?, include?)>
+render-weight?, ajaxable?, add-default-resource?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -295,6 +295,17 @@ The default value of ajaxable is true. If set to false, then this portlet can
 never be displayed via Ajax.
 -->
 <!ELEMENT ajaxable (#PCDATA)>
+
+<!--
+If the add-default-resource value is set to false, and the portlet does not
+belong to the page but has been dynamically added, then the user will see that
+he does not have permissions to view the portlet. If the add-default-resource
+value is set to true, the default portlet resources and permissions are added to
+the page. The user can then view the portlet. Most portlets are harmless and can
+benefit from this flexibility. However, to prevent security loop holes, the
+default value is false.
+-->
+<!ELEMENT add-default-resource (#PCDATA)>
 
 <!--
 Set the system value to true if the portlet is a system portlet that a user

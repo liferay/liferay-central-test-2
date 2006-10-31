@@ -962,6 +962,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setAjaxable(GetterUtil.getBoolean(
 					portlet.elementText("ajaxable"),
 					portletModel.isAjaxable()));
+				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
+					portlet.elementText("add-default-resource"),
+					portletModel.isAddDefaultResource()));
 				portletModel.setSystem(GetterUtil.getBoolean(
 					portlet.elementText("system"),
 					portletModel.isSystem()));

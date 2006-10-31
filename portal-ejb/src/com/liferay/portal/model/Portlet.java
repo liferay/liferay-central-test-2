@@ -160,10 +160,10 @@ public class Portlet extends PortletModel {
 				   boolean maximizeHelp, boolean maximizePrint,
 				   boolean layoutCacheable, boolean instanceable,
 				   boolean privateRequestAttributes, int renderWeight,
-				   boolean ajaxable, String roles, Set unlinkedRoles,
-				   Map roleMappers, boolean system, boolean active,
-				   boolean include, Map initParams, Integer expCache,
-				   Map portletModes, Set supportedLocales,
+				   boolean ajaxable, boolean addDefaultResource, String roles,
+				   Set unlinkedRoles, Map roleMappers, boolean system,
+				   boolean active, boolean include, Map initParams,
+				   Integer expCache, Map portletModes, Set supportedLocales,
 				   String resourceBundle, PortletInfo portletInfo,
 				   Set userAttributes, Map customUserAttributes,
 				   boolean warFile, List servletURLPatterns) {
@@ -198,6 +198,7 @@ public class Portlet extends PortletModel {
 		_privateRequestAttributes = privateRequestAttributes;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
+		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
 		_roleMappers = roleMappers;
@@ -1002,6 +1003,36 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Returns true if default resources for the portlet are added to a page.
+	 *
+	 * @return		true if default resources for the portlet are added to a
+	 *				page
+	 */
+	public boolean getAddDefaultResource() {
+		return _addDefaultResource;
+	}
+
+	/**
+	 * Returns true if default resources for the portlet are added to a page.
+	 *
+	 * @return		true if default resources for the portlet are added to a
+	 *				page
+	 */
+	public boolean isAddDefaultResource() {
+		return _addDefaultResource;
+	}
+
+	/**
+	 * Sets to true if default resources for the portlet are added to a page.
+	 *
+	 * @param		addDefaultResource boolean value for whether or not default
+	 *				resources for the portlet are added to a page
+	 */
+	public void setAddDefaultResource(boolean addDefaultResource) {
+		_addDefaultResource = addDefaultResource;
+	}
+
+	/**
 	 * Sets a string of ordered comma delimited portlet ids.
 	 *
 	 * @param		roles a string of ordered comma delimited portlet ids
@@ -1614,11 +1645,12 @@ public class Portlet extends PortletModel {
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
 			isPrivateRequestAttributes(), getRenderWeight(), isAjaxable(),
-			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
-			isActive(), isInclude(), getInitParams(), getExpCache(),
-			getPortletModes(), getSupportedLocales(), getResourceBundle(),
-			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
-			isWARFile(), getServletURLPatterns());
+			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
+			getRoleMappers(), isSystem(), isActive(), isInclude(),
+			getInitParams(), getExpCache(), getPortletModes(),
+			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
+			getUserAttributes(), getCustomUserAttributes(), isWARFile(),
+			getServletURLPatterns());
 	}
 
 	/**
@@ -1788,6 +1820,11 @@ public class Portlet extends PortletModel {
 	 * True if the portlet can be displayed via Ajax.
 	 */
 	private boolean _ajaxable = true;
+
+	/**
+	 * True if default resources for the portlet are added to a page.
+	 */
+	private boolean _addDefaultResource;
 
 	/**
 	 * An array of required roles of the portlet.

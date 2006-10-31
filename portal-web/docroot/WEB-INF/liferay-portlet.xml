@@ -21,6 +21,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -30,6 +31,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>4</portlet-name>
@@ -143,6 +145,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>16</portlet-name>
@@ -415,6 +418,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
 	<portlet>
@@ -590,6 +594,7 @@
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>79</portlet-name>
@@ -655,6 +660,7 @@
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>0</render-weight>
+		<add-default-resource>true</add-default-resource>
 		<system>true</system>
 	</portlet>
 	<portlet>
