@@ -29,10 +29,13 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEGORY);
 
+String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/view");
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("categoryId", categoryId);
 %>
 
 <liferay-ui:tabs
@@ -70,8 +73,6 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("categories") %>'>
 
 		<%
-		String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
-
 		List categoryIds = new ArrayList();
 
 		BlogsCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, categoryId);
