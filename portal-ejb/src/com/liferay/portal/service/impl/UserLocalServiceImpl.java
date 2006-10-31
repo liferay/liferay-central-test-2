@@ -78,6 +78,7 @@ import com.liferay.portal.service.spring.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalService;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -146,7 +147,48 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		UserGroupUtil.addUsers(userGroupId, userIds);
 	}
+	
+	public User addUser(
+			String creatorUserId, String companyId, boolean autoUserId,
+			String userId, boolean autoPassword, String password1,
+			String password2, boolean passwordReset, String emailAddress,
+			Locale locale, String firstName, String middleName, String lastName,
+			String nickName, String prefixId, String suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, String organizationId, String locationId,
+			boolean sendEmail, boolean checkExists) 
+		throws PortalException, SystemException {
 
+		User user = null;
+		boolean create = true;
+		
+		if (checkExists) {
+			try {
+				getUserByEmailAddress(companyId, emailAddress);
+				create = false;
+			}
+			catch (NoSuchUserException nsue) {
+				// user does not exist so create
+			}
+		}
+		
+		if (create) {
+			try {
+				user = UserLocalServiceUtil.addUser(
+					creatorUserId, companyId, autoUserId, userId, autoPassword,
+					password1, password2, passwordReset, emailAddress, locale,
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId, sendEmail);
+			}
+			catch (Exception e){
+				_log.error(
+					"Could not create user with userId and email address", e);
+			}
+		}
+		
+		return user;
+	}
 	public User addUser(
 			String creatorUserId, String companyId, boolean autoUserId,
 			String userId, boolean autoPassword, String password1,
