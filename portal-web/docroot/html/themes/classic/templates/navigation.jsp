@@ -116,7 +116,7 @@
 					}
 				}
 				%>],
-	
+
 			hiddenIds: [<%
 				for (int i = 0; i < hiddenIds.size(); i++) {
 					out.print((String)(hiddenIds.get(i)));

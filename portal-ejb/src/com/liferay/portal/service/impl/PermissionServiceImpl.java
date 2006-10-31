@@ -35,7 +35,6 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
@@ -218,11 +217,7 @@ public class PermissionServiceImpl
 			String portletId = primKey.substring(
 				pos + Portlet.LAYOUT_SEPARATOR.length() , primKey.length());
 
-			if (!GroupPermission.contains(
-					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS) &&
-				!LayoutPermission.contains(
-					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE) &&
-				!PortletPermission.contains(
+			if (!PortletPermission.contains(
 					permissionChecker, plid, portletId,
 					ActionKeys.CONFIGURATION)) {
 

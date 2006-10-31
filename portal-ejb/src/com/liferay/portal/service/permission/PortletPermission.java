@@ -22,10 +22,13 @@
 
 package com.liferay.portal.service.permission;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 
 /**
  * <a href="PortletPermission.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +41,7 @@ public class PortletPermission {
 	public static void check(
 			PermissionChecker permissionChecker, String portletId,
 			String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, portletId, actionId)) {
 			throw new PrincipalException();
@@ -48,7 +51,7 @@ public class PortletPermission {
 	public static void check(
 			PermissionChecker permissionChecker, String plid, String portletId,
 			String actionId)
-		throws PrincipalException {
+		throws PortalException, SystemException {
 
 		if (!contains(permissionChecker, plid, portletId, actionId)) {
 			throw new PrincipalException();
@@ -56,26 +59,35 @@ public class PortletPermission {
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String portletId,
-		String actionId) {
+			PermissionChecker permissionChecker, String portletId,
+			String actionId)
+		throws PortalException, SystemException {
 
 		return contains(permissionChecker, null, portletId, actionId);
 	}
 
 	public static boolean contains(
-		PermissionChecker permissionChecker, String plid, String portletId,
-		String actionId) {
+			PermissionChecker permissionChecker, String plid, String portletId,
+			String actionId)
+		throws PortalException, SystemException {
 
 		String groupId = null;
 		String name = null;
 		String primKey = null;
 
 		if (plid != null) {
+			String layoutId = Layout.getLayoutId(plid);
 			String ownerId = Layout.getOwnerId(plid);
 
 			groupId = Layout.getGroupId(ownerId);
 			name = Portlet.getRootPortletId(portletId);
 			primKey = plid + Portlet.LAYOUT_SEPARATOR + portletId;
+
+			if (LayoutPermission.contains(
+					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE)) {
+
+				return true;
+			}
 		}
 		else {
 			name = portletId;

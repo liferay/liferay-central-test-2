@@ -34,7 +34,7 @@
 	<td class="portlet-shadow-ml">
 	</td>
 	<td width="100%">
-	
+
 <div class="portlet-container">
 	<div class="portlet-header-bar" id="portlet-header-bar_<%= portletDisplay.getId() %>"
 		<c:if test="<%= !portletDisplay.isShowBackIcon() %>">
@@ -42,15 +42,15 @@
 			onmouseout="PortletHeaderBar.hide(this.id)"
 		</c:if>
 		>
-		
+
 		<%
 		String portletTitle = Validator.isNotNull(portletDisplay.getTitle()) ? portletDisplay.getTitle() : "    ";
 		%>
-		
+
 		<div class="portlet-wrap-title">
 			<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletTitle %></span>
 		</div>
-		
+
 
 		<div class="portlet-small-icon-bar" style="<%= portletDisplay.isShowBackIcon() ? "display: block" : "display: none" %>;">
 			<c:choose>
@@ -82,7 +82,7 @@
 		<script type="text/javascript">
 		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
 			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
-			onEdit: 
+			onEdit:
 				function(input, textWidth) {
 					input.style.width = (textWidth) + "px";
 					input.style.marginLeft = "5px";
@@ -99,7 +99,7 @@
 			});
 		</script>
 	</c:if>
-		
+
 	<div class="portlet-box">
 		<div class="portlet-minimum-height">
 			<div id="p_p_body_<%= portletDisplay.getId() %>" <%= (portletDisplay.isStateMin()) ? "style=\"display: none;\"" : "" %>>

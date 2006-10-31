@@ -28,8 +28,6 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -327,12 +325,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				PermissionChecker permissionChecker =
 					themeDisplay.getPermissionChecker();
 
-				if (!GroupPermission.contains(
-						permissionChecker, layout.getGroupId(),
-						ActionKeys.MANAGE_LAYOUTS) &&
-					!LayoutPermission.contains(
-						permissionChecker, layout, ActionKeys.UPDATE) &&
-					!PortletPermission.contains(
+				if (!PortletPermission.contains(
 						permissionChecker, layout.getPlid(),
 						portlet.getPortletId(), ActionKeys.VIEW)) {
 

@@ -40,24 +40,25 @@ else {
 
 if (themeDisplay.isSignedIn()) {
 	List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
-	%>
+%>
 
-		<script type="text/javascript">
-		    LayoutColumns.layoutMaximized = <%= layoutMaximized %>;
-		    LayoutColumns.plid = "<%= plid %>";
-		
-			<c:if test="<%= !layoutMaximized %>">
-				LayoutColumns.init([<%
-					for (int i = 0; i < columns.size(); i++) {
-						out.print("\"" + (String)columns.get(i) + "\"");
-						if (i < columns.size() - 1) {
-							out.print(",");
-						}
+	<script type="text/javascript">
+		LayoutColumns.layoutMaximized = <%= layoutMaximized %>;
+		LayoutColumns.plid = "<%= plid %>";
+
+		<c:if test="<%= !layoutMaximized %>">
+			LayoutColumns.init([<%
+				for (int i = 0; i < columns.size(); i++) {
+					out.print("\"" + (String)columns.get(i) + "\"");
+
+					if (i < columns.size() - 1) {
+						out.print(",");
 					}
-					%>]);
-			</c:if>
-		</script>
+				}
+				%>]);
+		</c:if>
+	</script>
 
-		<%
+<%
 }
 %>

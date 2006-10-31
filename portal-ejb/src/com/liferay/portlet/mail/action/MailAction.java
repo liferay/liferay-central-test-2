@@ -124,7 +124,7 @@ public class MailAction extends JSONAction {
 			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 
-		return StringPool.BLANK;
+		return null;
 	}
 
 	protected void addFolder(HttpServletRequest req) throws Exception {

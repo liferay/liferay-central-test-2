@@ -22,17 +22,22 @@
 
 package com.liferay.portlet.portletconfiguration.action;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortletPermission;
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.util.ParamUtil;
+
 import javax.portlet.PortletPreferences;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 
 /**
  * <a href="UpdateTitleAction.java.html"><b><i>View Source</i></b></a>
@@ -41,22 +46,38 @@ import com.liferay.util.StringPool;
  *
  */
 public class UpdateTitleAction extends JSONAction {
-	
-	public String getJSON(ActionMapping mapping, ActionForm form,
-		HttpServletRequest req, HttpServletResponse res) throws Exception {
-		
-		String title = ParamUtil.getString(req, "title");
+
+	public String getJSON(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
 		String portletId = ParamUtil.getString(req, "portletId");
-		
+
+		if (!PortletPermission.contains(
+				permissionChecker, themeDisplay.getPlid(), portletId,
+				ActionKeys.CONFIGURATION)) {
+
+			return null;
+		}
+
+		String title = ParamUtil.getString(req, "title");
+
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
 				req, portletId, true, true);
-		
 
 		portletSetup.setValue("portlet-setup-title", title);
 
 		portletSetup.store();
-		
-		return StringPool.BLANK;
+
+		return null;
 	}
+
 }

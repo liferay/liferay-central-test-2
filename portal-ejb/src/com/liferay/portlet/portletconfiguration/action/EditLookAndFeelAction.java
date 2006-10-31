@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.permission.LayoutPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -239,13 +237,7 @@ public class EditLookAndFeelAction extends PortletAction {
 
 		String portletId = ParamUtil.getString(req, "portletResource");
 
-		if (!GroupPermission.contains(
-				permissionChecker, themeDisplay.getPortletGroupId(),
-				ActionKeys.MANAGE_LAYOUTS) &&
-			!LayoutPermission.contains(
-				permissionChecker, themeDisplay.getLayout(),
-				ActionKeys.UPDATE) &&
-			!PortletPermission.contains(
+		if (!PortletPermission.contains(
 				permissionChecker, themeDisplay.getPlid(), portletId,
 				ActionKeys.CONFIGURATION)) {
 

@@ -22,14 +22,19 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -54,6 +59,21 @@ public class UpdatePageAction extends JSONAction {
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PermissionChecker permissionChecker =
+			themeDisplay.getPermissionChecker();
+
+		String portletId = ParamUtil.getString(req, "portletId");
+
+		if (!PortletPermission.contains(
+				permissionChecker, themeDisplay.getPlid(), portletId,
+				ActionKeys.CONFIGURATION)) {
+
+			return null;
+		}
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 

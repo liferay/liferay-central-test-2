@@ -427,7 +427,7 @@ public class ServicePreAction extends Action {
 					LayoutPermission.contains(
 						permissionChecker, layout, ActionKeys.UPDATE);
 
-				if (hasManageLayoutsPermission || hasUpdateLayoutPermission) {
+				if (hasUpdateLayoutPermission) {
 					themeDisplay.setShowAddContentIcon(true);
 
 					themeDisplay.setURLAddContent(

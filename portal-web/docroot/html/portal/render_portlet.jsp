@@ -99,10 +99,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access =
-	GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
-	LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-	PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW);
+boolean access = PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);
@@ -193,19 +190,13 @@ boolean showMoveIcon = !stateMax;
 boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
-	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
-		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-		PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
-
+	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.CONFIGURATION)) {
 		showConfigurationIcon = true;
 	}
 }
 
 if (portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.EDIT)) {
-	if (GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) ||
-		LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE) ||
-		PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
-
+	if (PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.PREFERENCES)) {
 		showEditIcon = true;
 	}
 }
@@ -216,13 +207,11 @@ if (portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMo
 	}
 }
 
-// Unauthenticated users, users without MANAGE_LAYOUTS permission for the
-// community, and users without UPDATE permission for the layout cannot modify
-// the layout
+// Unauthenticated users and users without UPDATE permission for the layout
+// cannot modify the layout
 
 if (!themeDisplay.isSignedIn() ||
-	(!GroupPermission.contains(permissionChecker, portletGroupId, ActionKeys.MANAGE_LAYOUTS) &&
-	 !LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE))) {
+	!LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
 
 	showCloseIcon = false;
 	showMaxIcon = GetterUtil.getBoolean(PropsUtil.get(PropsUtil.LAYOUT_GUEST_SHOW_MAX_ICON));
@@ -443,31 +432,31 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 </div>
 
 <%
-
 if (themeDisplay.isSignedIn()) {
 	String staticVar = "no";
-	
+
 	if (portlet.isStatic() || !showMoveIcon) {
 		staticVar = "yes";
-		
+
 		if (portlet.isStaticStart()) {
 			staticVar = "start";
 		}
-		
+
 		if (portlet.isStaticEnd()) {
 			staticVar = "end";
 		}
 	}
-	%>
+%>
 
 	<script type="text/javascript">
 		$("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletId %>";
-		<c:if test="<%= !staticVar.equals("no") %>">
+
+		<c:if test='<%= !staticVar.equals("no") %>'>
 			$("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
 		</c:if>
 	</script>
-	
-	<%
+
+<%
 }
 
 RenderRequestFactory.recycle(renderRequestImpl);
