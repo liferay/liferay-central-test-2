@@ -109,7 +109,7 @@ var DragDrop = {
 		item.onDragStart = DragDrop.onDragStart;
 		item.onDrag = DragDrop.onDrag;
 		item.onDragEnd = DragDrop.onDragEnd;
-		item.threshold = 3;
+		item.threshold = 0;
 	},
 
 	onDragStart : function(nwPosition, sePosition, nwOffset, seOffset) {
@@ -128,7 +128,7 @@ var DragDrop = {
 			var body = document.getElementsByTagName("body")[0];
 			var itemContainer = item.parentNode;
 			var clone = DragDrop.clone;
-			var itemNw = Coordinates.northwestOffset(item, true);
+			//var itemNw = Coordinates.northwestOffset(item, true);
 			
 			if (is_ie) {
 				setSelectVisibility("hidden");
@@ -138,14 +138,10 @@ var DragDrop = {
 			opts.origHeight = item.style.height;
 			opts.origPosition = item.style.position;
 			opts.origRevert = opts.revert;
+			opts.scrollOffset = new Coordinate(0,0);
 
 			if (opts.container) {
-				var container;
-
-				if(typeof(opts.container) == "string") {
-					container = document.getElementById(opts.container); }
-				else if(typeof(opts.container) == "object") {
-					container = opts.container; }
+				var container = $(opts.container);
 
 				opts.scrollOffset.x = container.scrollLeft;
 				opts.scrollOffset.y = container.scrollTop;
@@ -176,93 +172,88 @@ var DragDrop = {
 
 			item.style.position = "absolute";
 			item.style.zIndex = ZINDEX.DRAGITEM;
-			item.style.left = (itemNw.x - opts.scrollOffset.x) + "px";
-			item.style.top = (itemNw.y - opts.scrollOffset.y) + "px";
+			item.style.left = (nwOffset.x - opts.scrollOffset.x) + "px";
+			item.style.top = (nwOffset.y - opts.scrollOffset.y) + "px";
 
 			body.appendChild(item);
 
 			var dropList = DropZone.dropList;
-
-			for (var i = 0; i < dropList.length; i++) {
-				var dropContainer = dropList[i];
-				if (typeof(dropContainer) == "undefined" || !dropContainer.parentNode) {
-					dropList.splice(i, 1);
-					i--;
-					continue;
-				}
-
-				var dropOptions = dropContainer.dropOptions;
-				
-				if (dropOptions.inheritParent) {
-					dropContainer.style.height = dropContainer.parentNode.offsetHeight;
-				}
-				
-				dropOptions.northwestOffset = Coordinates.northwestOffset(dropContainer, true);
-				dropOptions.southeastOffset = Coordinates.southeastOffset(dropContainer, true);
-			}
 			
+			dropList.foreach(function(item) {
+				if (item.dropOptions.inheritParent) {
+					item.style.height = item.parentNode.offsetHeight;
+				}
+			});
+
+			DragDrop.currentContainer = clone;
 			DragDrop.lastOnDrop = null;
 			item.initialized = true;
+			
+			/*================================================================================
+			 * Initialization done
+			 *================================================================================*/
 		}
 		else {
 			item.style.left = (parseInt(item.style.left) - opts.scrollOffset.x) + "px";
 			item.style.top = (parseInt(item.style.top) - opts.scrollOffset.y) + "px";
-		}
-
-		/*================================================================================
-		 * Initialization done
-		 *================================================================================*/
 		 
-		/*
-		 * Find current DropZone container
-		 */
-		var dropList = DropZone.dropList;
-		DragDrop.currentContainer = null;
-		for (var i = 0; i < dropList.length; i++) {
-			var dropContainer = dropList[i];
-			var isInsideContainer = mousePos.inside(
-				dropContainer.dropOptions.northwestOffset, 
-				dropContainer.dropOptions.southeastOffset);
-			
-			if (opts.highlightDropzones) {
-				if (DragDrop.accepts(item, dropContainer)) {
-					dropContainer.style.backgroundColor = opts.highlightDropzones;
+			/*
+			 * Find current DropZone container
+			 */
+			var dropList = DropZone.dropList;
+			DragDrop.currentContainer = null;
+			for (var i = 0; i < dropList.length; i++) {
+				var dropContainer = dropList[i];
+				
+				// make sure container is still part of document
+				if (!dropContainer.parentNode || typeof(dropContainer) == "undefined") {
+					dropList.splice(i, 1);
+					i--;
+					continue;
+				}
+				
+				var isInsideContainer = mousePos.insideObject(dropContainer, true);
+				
+				if (opts.highlightDropzones) {
+					if (DragDrop.accepts(item, dropContainer)) {
+						dropContainer.style.backgroundColor = opts.highlightDropzones;
+					}
+				}
+				
+				if (isInsideContainer) {
+					DragDrop.currentContainer = dropContainer;
+					DragDrop.lastOnDrop = dropContainer.dropOptions.onDrop;
 				}
 			}
-			
-			if (isInsideContainer) {
-				DragDrop.currentContainer = dropContainer;
-				DragDrop.lastOnDrop = dropContainer.dropOptions.onDrop;
-			}
-		}
-
-		var cur = DragDrop.currentContainer;
-		var last = DragDrop.lastContainer;
-
-		if (cur) {
-			if (typeof(cur.dropOptions.onHoverOver) != "undefined") {
-				cur.dropOptions.onHoverOver(item);
-			}
-		}
-
-		if (cur != last) {
-			if (last) {
-				Element.removeClassName(last, last.dropOptions.hoverclass);
-
-				if (typeof(last.dropOptions.onHoverOut) != "undefined") {
-					last.dropOptions.onHoverOut(item);
-				}
-			}
+	
+			var cur = DragDrop.currentContainer;
+			var last = DragDrop.lastContainer;
+	
 			if (cur) {
-				if (cur.dropOptions.hoverclass && cur != item &&
-					DragDrop.accepts(item, cur)) {
-					Element.addClassName(cur, cur.dropOptions.hoverclass);
+				if (typeof(cur.dropOptions.onHoverOver) != "undefined") {
+					cur.dropOptions.onHoverOver(item);
 				}
-
 			}
+	
+			if (cur != last) {
+				if (last) {
+					Element.removeClassName(last, last.dropOptions.hoverclass);
+	
+					if (typeof(last.dropOptions.onHoverOut) != "undefined") {
+						last.dropOptions.onHoverOut(item);
+					}
+				}
+				if (cur) {
+					if (cur.dropOptions.hoverclass && cur != item &&
+						DragDrop.accepts(item, cur)) {
+						Element.addClassName(cur, cur.dropOptions.hoverclass);
+					}
+	
+				}
+			}
+	
+			DragDrop.lastContainer = DragDrop.currentContainer;
 		}
-
-		DragDrop.lastContainer = DragDrop.currentContainer;
 	},
 
 	onDragEnd : function(nwPosition, sePosition, nwOffset, seOffset) {

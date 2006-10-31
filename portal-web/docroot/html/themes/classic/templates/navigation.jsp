@@ -98,202 +98,34 @@
 
 <div id="layout-nav-divider" class="layout-nav-<%= selectable ? "selected" : "divider" %>"></div>
 
-<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && selectable %>">
 <script type="text/javascript">
-
-<c:if test="<%= selectable %>">
-var Navigation = {
-	layoutIds: [<%
-		for (int i = 0; i < layoutIds.size(); i++) {
-			out.print((String)(layoutIds.get(i)));
-			if (i < layoutIds.size() - 1) {
-				out.print(",");
-			}
-		}
-		%>],
-
-	hiddenIds: [<%
-		for (int i = 0; i < hiddenIds.size(); i++) {
-			out.print((String)(hiddenIds.get(i)));
-			if (i < hiddenIds.size() - 1) {
-				out.print(",");
-			}
-		}
-		%>],
-		
-	lastMoved: null,
-	reordered: null,
-	
-	addPage: function() {
-		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
-			"&groupId=<%= layout.getGroupId() %>" +
-			"&private=<%= layout.isPrivateLayout() %>" +
-			"&parent=<%= layout.getParentLayoutId() %>" +
-			"&mainPath=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>");
-
-		Ajax.request(url, {
-				onComplete: function(xmlHttpReq) {
-					var jo = createJSONObject(xmlHttpReq.responseText);
-					window.location = jo.url + "&newPage=1";
-				}
-			});
-	},
-	
-	removePage: function() {
-		var tab = $("layout-tab-selected");
-		var tabText = $("layout-tab-text-edit").innerHTML;
-
-		if (confirm("<bean:message key="remove" /> \"" + tabText + "\"?")) {
-			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=delete" +
-				"&ownerId=<%= Layout.getOwnerId(plid) %>" +
-				"&layoutId=<%= layout.getLayoutId() %>";
-
-			Ajax.request(url, {
-				onComplete: function() {
-					window.location = "<%= themeDisplay.getURLHome() %>";
-				}
-			});
-		}
-	},
-	
-	init: function() {
-		QuickEdit.create("layout-tab-text-edit", {
-			dragId: "layout-tab-selected",
-			fixParent: true,
-			onEdit:
-				function(input, textWidth) {
-					var parent = input.parentNode;
-					var delLink = document.createElement("a");
-					
-					delLink.innerHTML = "X";
-					delLink.href = "javascript:Navigation.removePage()";
-					delLink.className = "layout-tab-close";
-					
-					input.style.width = (textWidth - 20) + "px";
-					Element.addClassName(input, "layout-tab-input");
-					
-					parent.insertBefore(delLink, input);
-				},
-			onComplete:
-				function(newTextObj, oldText) {
-					var delLinks = document.getElementsByClassName("layout-tab-close", newTextObj.parentNode);
-					var delLink = delLinks[delLinks.length - 1];
-					var newText = newTextObj.innerHTML;
-					
-					delLink.style.display = "none";
-					if (oldText != newText) {
-						var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=title&title=" + encodeURIComponent(newText) +
-						"&ownerId=<%= Layout.getOwnerId(plid) %>" +
-						"&language=<%= LanguageUtil.getLanguageId(request) %>" +
-						"&layoutId=<%= layout.getLayoutId() %>";
-
-						Ajax.request(url);
+	Navigation.init({
+			groupId: "<%= layout.getGroupId() %>",
+			language: "<%= LanguageUtil.getLanguageId(request) %>",
+			layoutId: "<%= layout.getLayoutId() %>",
+			newPage: <%= newPage %>,
+			ownerId: "<%= Layout.getOwnerId(plid) %>",
+			isPrivate: <%= layout.isPrivateLayout() %>,
+			parent: "<%= layout.getParentLayoutId() %>",
+			layoutIds: [<%
+				for (int i = 0; i < layoutIds.size(); i++) {
+					out.print((String)(layoutIds.get(i)));
+					if (i < layoutIds.size() - 1) {
+						out.print(",");
 					}
 				}
-			});
-		
-		DropZone.add("layout-nav-container", {
-			accept: ["layout-tab"],
-			onHoverOver: Navigation.onDrag,
-			onDrop: Navigation.onDrop
-			});
-		
-		DragDrop.create("layout-tab-selected", {
-			revert: true,
-			forceLastDrop: true
-			});
-			
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		tabs.foreach(function(item, index) {
-			item.layoutId = Navigation.layoutIds[index];
-		});
-		
-		<c:if test="<%= newPage %>">
-			var opts =  $("layout-tab-text-edit").editOptions;
-			$(opts.dragId).wasClicked = true;
-			QuickEdit.edit($("layout-tab-text-edit"));
-		</c:if>
-	},
+				%>],
 	
-	move: function(obj, from, to) {
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		var selectedTab = obj;
-		var nav = document.getElementById("layout-nav-container");
-		var target;
-
-		nav.removeChild(selectedTab);
-
-		if (from > to) {
-			target = tabs[to];
-		}
-		else {
-			if (to == tabs.length - 1) {
-				target = $("layout-tab-add");
-			}
-			else {
-				target = tabs[to + 1];
-			}
-		}
-		
-		nav.insertBefore(selectedTab, target);
-	},
-	
-	onDrag: function(item) {
-		var dragOptions = item.dragOptions;
-		var clone = dragOptions.clone;
-		var fromIndex = -1;
-		var toIndex = -1;
-		
-		clone.style.backgroundColor = "transparent";
-		clone.layoutId = item.layoutId;
-		
-		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
-
-		tabs.foreach(function(tab, index) {
-				if (tab == clone) {
-					fromIndex = index;
-				}
-
-				if (mousePos.insideObject(tab, true)) {
-					if (tab != clone) {
-						if (tab != Navigation.lastMoved) {
-							toIndex = index;
-							Navigation.lastMoved = tab;
-						}
-					}
-					else {
-						Navigation.lastMoved = null;
+			hiddenIds: [<%
+				for (int i = 0; i < hiddenIds.size(); i++) {
+					out.print((String)(hiddenIds.get(i)));
+					if (i < hiddenIds.size() - 1) {
+						out.print(",");
 					}
 				}
-			});
-
-		if (fromIndex >= 0 && toIndex >= 0) {
-			Navigation.move(clone, fromIndex, toIndex);
-		}
-	},
-	
-	onDrop: function(item) {
-		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		var reordered = new Array();
-		for (var i = 0; i < tabs.length; i++) {
-			reordered[i] = tabs[i].layoutId;
-		}
-		Navigation.reordered = reordered;
-		if (Navigation.reordered) {
-			var reordered = Navigation.reordered;
-			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=reorder" +
-				"&ownerId=<%= Layout.getOwnerId(plid) %>" +
-				"&parent=<%= layout.getParentLayoutId() %>" +
-				"&layoutIds=" + reordered.concat(Navigation.hiddenIds);
-	
-			Ajax.request(url);
-		}
-	}
-}
-
-Navigation.init();
-</c:if>
-	
+				%>]
+	});
 </script>
 </c:if>
 

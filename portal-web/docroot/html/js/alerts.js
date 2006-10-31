@@ -4,6 +4,45 @@ var Alerts = {
 	message: null,
 	messageArray: new Array(),
 	fadeTimer: 0,
+	OPACITY: 51,
+	STEPS: 3,
+
+	bgFadeIn: function(max, steps, opacity) {
+		var background = Alerts.background;
+		var delta = max/steps
+		
+		if (opacity == null) {
+			opacity = delta;
+		}
+		
+		if (background && opacity <= max) {
+			changeOpacity(background, opacity);
+			opacity += delta;
+			setTimeout("Alerts.bgFadeIn(" + max + "," + steps + "," + opacity + ")", 0);
+		}
+	},
+
+	bgFadeOut: function(max, steps, opacity) {
+		var background = Alerts.background;
+		if (background) {
+			var delta = max/steps
+			
+			if (opacity == null) {
+				opacity = max - delta;
+			}
+			
+			if (opacity >= 0) {
+				changeOpacity(background, opacity);
+				opacity -= delta;
+				setTimeout("Alerts.bgFadeOut(" + max + "," + steps + "," + opacity + ")", 0);
+			}
+			else {
+				background.parentNode.removeChild(background);
+				setSelectVisibility("visible", Alerts.message);
+				Alerts.background = null;
+			}
+		}
+	},
 
 	createWrapper: function(message, title) {
 		var outer = document.createElement("div");
@@ -67,6 +106,7 @@ var Alerts = {
 			var body = document.getElementsByTagName("body")[0];
 			var options = wrapper.options;
 			var background = null;
+			var showSelects = false;
 			
 			Alerts.remove(wrapper);
 			body.removeChild(wrapper);
@@ -79,13 +119,14 @@ var Alerts = {
 			}
 			else {
 				Alerts.message = null;
-				setSelectVisibility("visible");
+				//setSelectVisibility("visible");
 				background = Alerts.background;
 			}
 			
 			if (background) {
-				body.removeChild(background);
-				Alerts.background = null;
+				//body.removeChild(background);
+				//Alerts.background = null;
+				Alerts.bgFadeOut(Alerts.OPACITY, Alerts.STEPS);
 			}
 			
 			if (options && options.onClose) options.onClose();
@@ -154,7 +195,6 @@ var Alerts = {
 			if (!Alerts.background && modal) {
 				var background = document.createElement("div");
 				background.id = "alert-message";
-				background.style.width = "100%";
 				background.style.position = "absolute";
 				background.style.top = "0";
 				background.style.left = "0";
@@ -164,9 +204,9 @@ var Alerts = {
 				wrapper.background = background;
 				
 				background.style.backgroundColor = "#000000";
-				changeOpacity(background, 50);
+				changeOpacity(background, 0);
 				body.appendChild(background);
-
+				Alerts.bgFadeIn(Alerts.OPACITY, Alerts.STEPS);
 			}
 			setSelectVisibility("hidden");
 			
@@ -208,10 +248,10 @@ var Alerts = {
 		message.height = "";
 		iframe.src = url;
 		iframe.frameBorder = 0;
-		if (msgHeight) iframe.height = msgHeight + "px";
-		if (msgWidth) iframe.width = "100%";
+		if (msgWidth) iframe.style.width = "100%";
 		
 		message.appendChild(iframe);
+		Alerts.center(msgHeight, msgWidth);
 	},
 	
 	center : function(height, width) {
@@ -219,8 +259,9 @@ var Alerts = {
         if (Alerts.message) {
 	        var message = Alerts.message.wrapper;
             var body = document.getElementsByTagName("body")[0];
-            width = width == null ? message.offsetWidth : width;
-            height = height == null ? message.offsetHeight : height;
+            
+            width = width || message.offsetWidth;
+            height = height || message.offsetHeight;
 
             var centerLeft;
             var centerTop;
@@ -249,7 +290,8 @@ var Alerts = {
 	        	var clientHeight = body.clientHeight;
 	        	
 	            background.style.height = (scrollHeight > clientHeight ? scrollHeight : clientHeight) + "px";
-	            background.style.width = (body.offsetWidth > body.clientWidth ? body.offsetWidth : body.clientWidth) + "px";
+	            //background.style.width = (body.offsetWidth > body.clientWidth ? body.offsetWidth : body.clientWidth) + "px";
+	            background.style.width = "100%";
 	        }
 	        else {
 	            background.style.height = body.offsetHeight + "px";

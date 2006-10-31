@@ -191,18 +191,18 @@
 		</color-scheme>
 		<color-scheme id="03" name="Orange">
 			<![CDATA[
-				body-bg=#fff7e9
+				body-bg=#ffffeb
 				
 				layout-bg=#FFFFFF
 				layout-text=#000000
 
-				layout-tab-bg=#ffe7cc
+				layout-tab-bg=#ffe7b0
 				layout-tab-text=#000000
 
-				layout-tab-selected-bg=#ffb63e
+				layout-tab-selected-bg=#ff8300
 				layout-tab-selected-text=#ffffff
 
-				portlet-title-bg=#ffd3aa
+				portlet-title-bg=#ffbe6b
 				portlet-title-text=#000000
 
 				portlet-menu-bg=#ffcb9e
@@ -211,7 +211,7 @@
 				portlet-bg=#FFFFFF
 
 				portlet-font=#000000
-				portlet-font-dim=#000038
+				portlet-font-dim=#4e2400
 
 				portlet-msg-status=#000000
 				portlet-msg-info=#000000
@@ -220,19 +220,19 @@
 				portlet-msg-success=#007F00
 
 				portlet-section-header=#000000
-				portlet-section-header-bg=#ffd2a6
+				portlet-section-header-bg=#ffbc62
 
 				portlet-section-subheader=#000000
-				portlet-section-subheader-bg=#ffefda
+				portlet-section-subheader-bg=#fff7cc
 
 				portlet-section-body=#000000
-				portlet-section-body-bg=#fff6e8
+				portlet-section-body-bg=#ffffe9
 
 				portlet-section-body-hover=#000000
 				portlet-section-body-hover-bg=#fffff2
 
 				portlet-section-alternate=#000000
-				portlet-section-alternate-bg=#ffedd7
+				portlet-section-alternate-bg=#fff3c6
 
 				portlet-section-alternate-hover=#000000
 				portlet-section-alternate-hover-bg=#fffff2

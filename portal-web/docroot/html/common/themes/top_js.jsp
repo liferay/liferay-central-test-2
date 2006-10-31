@@ -32,6 +32,9 @@
 		},
 		getPathMain : function() {
 			return("<%= themeDisplay.getPathMain() %>");
+		},
+		getURLHome : function() {
+			return("<%= themeDisplay.getURLHome() %>");
 		}
 	};
 
@@ -86,7 +89,7 @@
 		function showPageSettings() {
 			Alerts.popupIframe("<%= themeDisplay.getURLPageSettings().toString() %>",
 				{
-					height: 0,
+					height: 200,
 					width: 700,
 					modal: true,
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',

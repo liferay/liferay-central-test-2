@@ -158,6 +158,197 @@ var LayoutColumns = {
 	}
 }
 
+var Navigation = {
+		
+	params: new Object(),
+	lastMoved: null,
+	reordered: null,
+	
+	addPage: function() {
+		var params = Navigation.params;
+		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
+			"&groupId=" + params.groupId +
+			"&private=" + params.isPrivate +
+			"&parent=" + params.parent +
+			"&mainPath=" + encodeURIComponent(themeDisplay.getPathMain());
+
+		Ajax.request(url, {
+				onComplete: function(xmlHttpReq) {
+					var jo = createJSONObject(xmlHttpReq.responseText);
+					window.location = jo.url + "&newPage=1";
+				}
+			});
+	},
+	
+	removePage: function() {
+		var tab = $("layout-tab-selected");
+		var tabText = $("layout-tab-text-edit").innerHTML;
+		var params = Navigation.params;
+
+		if (confirm("Remove " + tabText + "\"?")) {
+			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=delete" +
+				"&ownerId=" + params.ownerId +
+				"&layoutId=" + params.layoutId;
+
+			Ajax.request(url, {
+				onComplete: function() {
+					window.location = themeDisplay.getURLHome();
+				}
+			});
+		}
+	},
+	
+	init: function(params) {
+		/* REQUIRED PARAMETERS
+		 * groupId: (String) layout.getGroupId()
+		 * hiddenIds: (Array) List of hidden layout IDs
+		 * isPrivate: (boolean) layout.isPrivateLayout()
+		 * language: (String) LanguageUtil.getLanguageId(request)
+		 * layoutId: (String) layout.getLayoutId()
+		 * layoutIds: (Array) List of displayable layout IDs
+		 * newPage: (boolean) Is this a newly added page?
+		 * ownerId: (String) Layout.getOwnerId(plid)
+		 * parent: (String) layout.getParentLayoutId()
+		 */
+		 
+		Navigation.params = params;
+		
+		QuickEdit.create("layout-tab-text-edit", {
+			dragId: "layout-tab-selected",
+			fixParent: true,
+			onEdit:
+				function(input, textWidth) {
+					var parent = input.parentNode;
+					var delLink = document.createElement("a");
+					
+					delLink.innerHTML = "X";
+					delLink.href = "javascript:Navigation.removePage()";
+					delLink.className = "layout-tab-close";
+					
+					input.style.width = (textWidth - 20) + "px";
+					Element.addClassName(input, "layout-tab-input");
+					
+					parent.insertBefore(delLink, input);
+				},
+			onComplete:
+				function(newTextObj, oldText) {
+					var delLinks = document.getElementsByClassName("layout-tab-close", newTextObj.parentNode);
+					var delLink = delLinks[delLinks.length - 1];
+					var newText = newTextObj.innerHTML;
+					
+					delLink.style.display = "none";
+					if (oldText != newText) {
+						var params = Navigation.params;
+						var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=title&title=" + encodeURIComponent(newText) +
+						"&ownerId=" + params.ownerId +
+						"&language=" + params.language +
+						"&layoutId=" + params.layoutId;
+
+						Ajax.request(url);
+					}
+				}
+			});
+		
+		DropZone.add("layout-nav-container", {
+			accept: ["layout-tab"],
+			onHoverOver: Navigation.onDrag,
+			onDrop: Navigation.onDrop
+			});
+		
+		DragDrop.create("layout-tab-selected", {
+			revert: true,
+			forceLastDrop: true
+			});
+			
+		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		tabs.foreach(function(item, index) {
+			item.layoutId = Navigation.params.layoutIds[index];
+		});
+		
+		if (Navigation.params.newPage) {
+			var opts =  $("layout-tab-text-edit").editOptions;
+			$(opts.dragId).wasClicked = true;
+			QuickEdit.edit($("layout-tab-text-edit"));
+		}
+	},
+	
+	move: function(obj, from, to) {
+		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		var selectedTab = obj;
+		var nav = document.getElementById("layout-nav-container");
+		var target;
+
+		nav.removeChild(selectedTab);
+
+		if (from > to) {
+			target = tabs[to];
+		}
+		else {
+			if (to == tabs.length - 1) {
+				target = $("layout-tab-add");
+			}
+			else {
+				target = tabs[to + 1];
+			}
+		}
+		
+		nav.insertBefore(selectedTab, target);
+	},
+	
+	onDrag: function(item) {
+		var dragOptions = item.dragOptions;
+		var clone = dragOptions.clone;
+		var fromIndex = -1;
+		var toIndex = -1;
+		
+		clone.style.backgroundColor = "transparent";
+		clone.layoutId = item.layoutId;
+		
+		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
+
+		tabs.foreach(function(tab, index) {
+				if (tab == clone) {
+					fromIndex = index;
+				}
+
+				if (mousePos.insideObject(tab, true)) {
+					if (tab != clone) {
+						if (tab != Navigation.lastMoved) {
+							toIndex = index;
+							Navigation.lastMoved = tab;
+						}
+					}
+					else {
+						Navigation.lastMoved = null;
+					}
+				}
+			});
+
+		if (fromIndex >= 0 && toIndex >= 0) {
+			Navigation.move(clone, fromIndex, toIndex);
+		}
+	},
+	
+	onDrop: function(item) {
+		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		var reordered = new Array();
+		for (var i = 0; i < tabs.length; i++) {
+			reordered[i] = tabs[i].layoutId;
+		}
+		Navigation.reordered = reordered;
+		if (Navigation.reordered) {
+			var reordered = Navigation.reordered;
+			var params = Navigation.params;
+			var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=reorder" +
+				"&ownerId=" + params.ownerId +
+				"&parent=" + params.parent +
+				"&layoutIds=" + reordered.concat(Navigation.params.hiddenIds);
+	
+			Ajax.request(url);
+		}
+	}
+}
+
 var PortletHeaderBar = {
 
 	fadeIn : function (id) {

@@ -28,9 +28,7 @@
 	}
 </script>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
+<div style="float: left; padding-right: 10px">
 
 		<%
 		int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
@@ -58,10 +56,8 @@
 			headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG) %>"
 			data="<%= data %>"
 		/>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td valign="top" width="99%">
-		<%@ include file="/html/portlet/calendar/event_iterator.jsp" %>
-	</td>
-</tr>
-</table>
+</div>
+<div style="float: left">
+	<%@ include file="/html/portlet/calendar/event_iterator.jsp" %>
+</div>
+<div style="clear: both"></div>

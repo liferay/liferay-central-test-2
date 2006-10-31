@@ -33,9 +33,9 @@ var Drag = {
 		group.minY = null;
 		group.maxX = null;
 		group.maxY = null;
-		group.threshold = 1;
-		group.thresholdY = 1;
-		group.thresholdX = 1;
+		group.threshold = 0;
+		group.thresholdY = 0;
+		group.thresholdX = 0;
 		group.disableDrag = false;
 
 		group.onDragStart = new Function();

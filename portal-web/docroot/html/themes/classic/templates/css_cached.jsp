@@ -203,7 +203,7 @@ A.beta:hover {
 	text-decoration: underline;
 }
 
-FONT.beta {
+.beta {
 	background: none;
 	color: <%= colorScheme.getPortletMenuText() %>;
 }
