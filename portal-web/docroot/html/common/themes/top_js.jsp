@@ -85,7 +85,7 @@
 <script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
 
 <script type="text/javascript">
-	<c:if test="<%= themeDisplay.isSignedIn() %>">
+	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 		function showPageSettings() {
 			Alerts.popupIframe("<%= themeDisplay.getURLPageSettings().toString() %>",
 				{
