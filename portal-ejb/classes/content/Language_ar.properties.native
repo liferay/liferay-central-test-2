@@ -35,9 +35,9 @@ javax.portlet.title.2=حسابي
 javax.portlet.title.30=أدوات الشبكات
 javax.portlet.title.31=معرض الصور
 javax.portlet.title.32=اليوم في تاريخ المسيحية
-javax.portlet.title.33=المفكرات الشخصية
+javax.portlet.title.33=المدوّنات الشخصية
 javax.portlet.title.34=التسوق
-javax.portlet.title.35=Google
+javax.portlet.title.35=غوغل
 javax.portlet.title.36=ويكي
 javax.portlet.title.37=كلمات
 javax.portlet.title.38=معرض السمات
@@ -87,6 +87,9 @@ javax.portlet.title.88=إعدادات الصفحة
 javax.portlet.title.8=الرزنامة
 javax.portlet.title.90=الموقع
 javax.portlet.title.91=محتوى Alfresco
+javax.portlet.title.93=تدفق العمل
+javax.portlet.title.94=إعلانات غوغل
+javax.portlet.title.95=أدوات غوغل
 javax.portlet.title.9=إدارة الموقع
 
 ##
@@ -101,6 +104,7 @@ category.community=مجتمع
 category.development=تطوير
 category.entertainment=تسلية
 category.finance=مالية
+category.google=غوغل
 category.journal=صحيفة
 category.library=مكتبة
 category.news=أخبار ومستجدات
@@ -108,10 +112,12 @@ category.polls=إستطلاعات الرأي
 category.religion=دين
 category.science=علوم
 category.shopping=تسوق
+category.spring=سبرنغ
 category.test=تجريبي
 category.tools=أدوات
 category.undefined=غير معرّف
 category.wiki=ويكي
+category.workflow=تدفق العمل
 category.wsrp=WSRP
 
 ##
@@ -196,6 +202,7 @@ action.PRINT=إطبع
 action.SUBSCRIBE=سجّل
 action.UPDATE=حدّث
 action.UPDATE_DISCUSSION=حدّث نقاش
+action.UPDATE_THREAD_PRIORITY=حدّث أولوية النقاش
 action.UPDATE_USER=حدّث مستخدم
 action.VIEW=إعرض
 action.VIEW_USER=إعرض مستخدم
@@ -213,7 +220,15 @@ layout.types.url=رابط تشعبي
 ## Messages
 ##
 
+1-day=يوم واحد
+1-month=شهر واحد
+1-week=أسبوع واحد
+1-year=سنة واحدة
 1024-by-768-pixels=1024 على 768 بكسل
+2-months=شهران
+2-weeks=أسبوعان
+3-days=ثلاثة أيام
+6-months=ستة أشهر
 800-by-600-pixels=800 على 600 بكسل
 INBOX=صندوق الواردات
 a-map-could-not-be-found-for-the-address=لا توجد خريطة لهذا العنوان:
@@ -231,6 +246,10 @@ active=مفعّل
 actual-duration=المدة الفعلية
 actual-end-date=تاريخ الإنتهاء الفعلي
 actual=فعلي
+ad-channel=قناة الإعلان
+ad-client=زبون الإعلان
+ad-format=هيئة الإعلان
+ad-type=نوع الإعلان
 add-address=أضف عنوان
 add-all-isbn-numbers-separated-by-spaces=اضافة كل أرقام ال (ISBN) بينها مسافات.
 add-all-ticker-symbols-separated-by-spaces=أضف جميع رموز التكر مفصولة بمسافات بينها.
@@ -303,6 +322,7 @@ advanced=متقدم
 age=العمر
 aim=AIM
 albanian=ألباني
+alfresco-web-client-url=Alfresco Web Client URL
 all-articles=جميع المقالات
 all-blogs=جميع الصحف الشخصية
 all-categories=جميع التصانيف
@@ -323,8 +343,9 @@ all-topics=جميع المواضيع
 all-words=جميع الكلمات
 all=ليك ألباني
 allow-simple-articles=إسمح بالمقالات البسيطة
-allow-strangers-to-create-accounts=إسمح للغرباء بإنشاء حسابات
-allow-users-to-automatically-login=إسمح للمستخدمين بالدخول تلقائيا
+allow-strangers-to-create-accounts=إسمح للغرباء بإنشاء حسابات؟
+allow-users-to-automatically-login=إسمح للمستخدمين بالدخول تلقائيا؟
+allow-users-to-request-forgotten-passwords=إسمح للمستخدمين بطلب كلمات السر المنسية؟
 alpha=ألفا
 already-registered=مسجل مسبقا
 alternative-shipping-calculation=حسبة طريقة الإرسال الأخرى
@@ -346,7 +367,9 @@ an-unexpected-sign-in-error-occurred=حدث خطأ غير متوقع عند مح
 an-unexpected-system-error-occurred=حدث خطأ غير متوقع.
 and=و
 anniversary=مناسبة سنوية
+announcements=إعلانات
 anonymous=مجهول الهوية
+any-day=أي يوم
 any-priority=أية أولوية
 any-relationship=أية علاقة
 any-status=أية حالة
@@ -363,6 +386,7 @@ arabic=عربي
 are-you-sure-you-want-to-block-the-selected-senders=هل أنت متأكد من طلب حجب هذا المرسل؟ إذا حجبت المرسل لن تتمكن من إستقبال أي رسالة منه مستقبلا.
 are-you-sure-you-want-to-deactivate-the-selected-users=هل أنت متأكد من طلب تعطيل المستخدمين المختارين؟
 are-you-sure-you-want-to-deactivate-this-article=هل أنت متأكد من طلب تعطيل هذه المقالة؟
+are-you-sure-you-want-to-deactivate-this-language=هل أنت متأكد من طلب تعطيل هذه اللغة؟
 are-you-sure-you-want-to-deactivate-this=هل أنت متأكد من طلب التعطيل لهذا؟
 are-you-sure-you-want-to-delete-the-selected-articles=هل أنت متأكد من طلب حذف المقالات المختارة؟
 are-you-sure-you-want-to-delete-the-selected-category-and-all-its-items=هل أنت متأكد من طلب حذف التصانيف المختارة و ما تحتويه؟
@@ -408,6 +432,7 @@ are-you-sure-you-want-to-move-selected-messages-to=هل أنت متأكد من �
 are-you-sure-you-want-to-notify-new-users=هل أنت متأكد من طلب إعلام المستخدمين الجدد؟
 are-you-sure-you-want-to-permanently-delete-the-selected-users=هل أنت متأكد من طلب حذف المستخدمين المختارين وبشكل نهائي؟
 are-you-sure-you-want-to-remove-this-component=هل أنت متأكد من طلب حذف هذه المكون؟
+are-you-sure-you-want-to-switch-the-languages-view=هل أنت متأكد من طلب تغيير اللغة؟ لن يتم حفظ التغييرات على هذه اللغة
 are-you-sure-you-want-to-update-this-order=هل أنت متأكد من طلب تحديث هذا الترتيب؟
 area=مساحة
 article-approval-denied-email=رسالة إلكترونية لرفض الموافقة على مقالة
@@ -452,6 +477,7 @@ back-to-top=عودة الى الأعلى
 back-to-vote=عودة إلى التصويت
 back=عودة
 bad-request=طلب خاطئ
+banner=لوحة أفقية
 basic-information=معلومات أساسية
 basic=أساسي
 bcc=نسخة مخفية
@@ -470,10 +496,13 @@ billing=إصدار فاتورة
 birthday=عيد ميلاد
 block-sender-list=المرسلون المحجوبون:
 block=إحجب
+blogs=مدوّنات
 body=متن
 bold=غامق
 book-and-chapter=كتاب و فصل
 book=كتاب
+boolean-flag=Boolean Flag
+border=إطار
 breakfast=إفطار الصباح
 browse-blogs=تصفح الصحف الشخصية
 browse-categories=تصفح التصانيف
@@ -484,6 +513,7 @@ bullet-style=أسلوب النقاط
 business-address=العنوان التجاري
 business-hours=ساعات العمل
 business=عمل
+button=زر
 by-date-range=بفترة الأيام:
 by-email-address=بواسطة العنوان الإلكتروني
 by-time-frame=بفترة الوقت:
@@ -501,7 +531,7 @@ call=إتصل
 cancel=إلغاء
 cannot-be-found=لم يتم العثور على {0}.
 cart=سلة التسوق
-categories=تصانيف
+categories=تصنيفات
 category-id=الرمز التعريفي للتصنيف
 category-name=اسم التصنيف
 category=تصنيف
@@ -555,11 +585,17 @@ clear-all=أفرغ الكل
 clear-content-cached-across-the-cluster=أفرغ المحتوى المولّد عبر العنقود.
 clear-content-cached-by-this-vm=أفرغ المحتوى المولّد بواسطة هذه الآلة الإفتراضية.
 clear-the-database-cache=أفرغ المحتوي المنسوخ عن قاعدة البيانات.
+clickable-emoticons=أيقونات
 close=أقفل
 club-event=مناسبة في النادي
 code=رمز
+color-background=لوّن الخلفية
+color-border=لوّن الإطار
+color-link=لوّن الوصلة
 color-schemes=تشكيلات الألوان
 color-settings=خاصيات الألوان
+color-text=لوّن النص
+color-url=لوّن الرابط التشعبي
 color=اللون
 colors=ألوان
 column_1=العمود 1
@@ -641,6 +677,7 @@ decade=عقد
 decades=عقود
 decorated=مزيّن
 decoration=الزينة
+default-associations=الإقترانات الإعتادية
 default-colors=الألوان الإعتادية
 default-email-notification=التنبيه الإعتيادي بالرسالة الإلكترونية
 default-language=اللغة الإعتيادية
@@ -648,6 +685,7 @@ default-preferences=التفضيلات الإعتيادية
 default-resolution=الحجم الإعتيادي
 default=الإعتيادي
 definition-of-terms=تعريف البنود
+definitions=التعريفات
 delegate-permissions-for-community=فوّض الرخص لمجتمع
 delegate-permissions-to-a-resource-that-belongs-to-the-x-portlet=فوّض الرخص إلى مورد ينتمي للبورتلت {0}.
 delegate=فوّض
@@ -681,6 +719,7 @@ disclaimer=التنصّل
 discount-type=نوع الخصم
 discount=خصم
 display-date=تاريخ العرض
+display-depth=عمق العرض
 display-of-live-session-data-is-disabled=عرض المعلومات الفعلية معطل. إجعل الخاصية <b>{0}</b> لتفعيلها.
 display-order=ترتيب العرض
 display-per-page=العرض بالصفحة
@@ -689,9 +728,12 @@ display-style=أسلوب العرض
 display-time=توقيت العرض
 display-url=أظهر الرابط التشعبي
 display=العرض
+displaying-article-pages=عرض صفحات المقالات
+displaying-content=عرض المحتوى
 dns-lookup=DNS Lookup
 do-not-repeat-this-event=لا تكرر هذه المناسبة.
 do-not-send-a-reminder=لا ترسل رسالة تذكير.
+document-extensions-does-not-match=إمتدادات المستند غير متطابقة
 document-name=اسم المستند
 document-names-must-end-with-one-of-the-following-extensions=يجب أن ينتهي إسم المستند بأحد الإمتدادات:
 document-path=مكان المستند
@@ -804,9 +846,9 @@ end-by=نهاية عند
 end-date=تاريخ النهاية
 english=إنجليزي
 enter-a-blank-entry-to-disable-email-forwarding=أدخل فراغا لإلغاء إعادة إرسال البريد.
-enter-a-blank-paypal-email-address-to-disable-paypal=Enter a blank PayPal email address to disable PayPal. Select the accepted credit cards to record payments using credit cards. Payments will not be required if PayPal is disabled and there are no accepted credit cards.
+enter-a-blank-paypal-email-address-to-disable-paypal=أدخل بريد إلكتروني فارغ لتعطيل PayPal. إختر بطاقات الإعتماد المقبولة لقبول الدفع عن طريق هذه البطاقات. سيتم تعطيل عملية الدفع و لن تكون مطلوبة إذا كان PayPal معطّل ولم يتم إختيار أي بطاقة إعتماد.
 enter-a-name=أدخل إسما
-enter-a-paypal-email-address-to-send-all-payments-to-paypal=Enter a PayPal email address to send all payments to PayPal.
+enter-a-paypal-email-address-to-send-all-payments-to-paypal=أدخل بريد إلكتروني تابع لـ PayPal لترحيل جميع الدفعات إلى PayPal
 enter-again=أدخل مرة أخرى
 enter-one-city-or-zip-code-per-line=أدخل إسم مدينة أو رمز بريدي واحد في <b>السطر الواحد</b>.
 enter-one-email-address-per-line=أدخل عنوان بريد إلكتروني واحد في <b>السطر الواحد</b>.
@@ -816,14 +858,17 @@ enter-one-role-name-per-line-a-user-must-belong-to-one-of-these-roles-in-order-t
 enter-one-url-per-line=أدخل رابط تشعبي في <b>السطر الواحد</b>.
 enter-one-user-email-address-per-line-to-reserve-the-user-email-address=أدخل عنوان بريد إلكتروني لمستخدم في <b>السطر الواحد</b> لحجز العنوان.
 enter-one-user-id-per-line-to-reserve-the-user-id=أدخل رمز تعريفي للمستخدم في <b>السطر الواحد</b> لحجز الرمز التعريفي.
-enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>per line</b>. Users will be displayed with a rank based on their number of posts.
-enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء المجموعات الإعتيادية والتي سترتبط بالمستخدمين الجدد وذلك أسماً بالسطر الواحد. 
+enter-rank-and-minimum-post-pairs-per-line=أدخل رتبة و العدد الأدنى من المشاركات للحصول على هذه الرتبة. سيتم إظهار رتبة المستخدم بناء على عدد مشاركاته. <b>مدخلا واحدا في السطر الواحد</b>.
+enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء المجموعات الإعتيادية والتي سترتبط بالمستخدمين الجدد وذلك أسماً بالسطر الواحد.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء الأدوار الإعتادية التي سيرتبط المستخدمون الجدد بها <b>إسما في السطر الواحد</b>.
-enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
+enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=أدخل أسماء مجموعات المستخدمين التي سيرتبط المستخدمون الجدد بها <b>إسما في السطر الواحد</b>.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=أدخل الرابط التشعبي الودّي والذي سيستخدم من قبل الصفحات العامة والخاصة.
+enter-the-name,-image,-and-priority-level-in-descending-order=أدخل الإسم، الصورة ومستوى الأولوية بترتيب تنازلي. النقاشات بالأولويات الأعلى ستعرض قبل تلك بالأولويات الأدنى. الإسم هو إسم العرض للأولوية. الصورة هي صورة العرض للأولوية ويمكن أن تكون رابط تشعبي كامل أو رابط تشعبي نسبة للملمح.
+enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=أدخل الموقع الإفتراضي الخاص والعام والذي سيقترن بالرابط التشعبي الودي الخاص والعام
 enter-the-search-filter-that-will-be-used-to-test-the-validity-of-a-user=أدخل فلتر البحث والذي سيستخدم لإختبار صحة شرعية مستخدم. الرموز @company_id@، @email_address@، @user_id@ سيتم إستبدالها بالقيم الصحيحة عند التنفيذ.
 enterprise-logo=شعار المنظمة العليا
 enterprise=المنظمة العليا
+entire-message=كامل الرسالة
 entries=مدخالات
 entry-information=معلومات المدخل
 entry=مدخل
@@ -834,6 +879,7 @@ estimated-end-date=تاريخ الإنتهاء المقدر
 event-information=معلومات المناسبة
 event-location=موقع المناسبة
 event-reminder-email=الرسالة الإلكترونية التذكيرية للمناسبة
+event=مناسبة
 events=مناسبات
 every-weekday=كل نهاية أسبوع
 every=كل
@@ -900,7 +946,7 @@ folders=المجلّدات
 font=الخط
 foot=قدم
 footnotes=ملاحظات أسفل الصفحة
-for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld=For example, if the public virtual host is <b>www.helloworld.com</b> and the friendly URL is <b>/helloworld</b>, then <b>{0}://www.helloworld.com</b> is mapped to <b>{1}/helloworld</b>.
+for-example,-if-the-public-virtual-host-is-www.helloworld.com-and-the-friendly-url-is-/helloworld=مثلا، إذا كان الموقع الإفتراضي العام هو <b>www.helloworld.com</b> وكان الرابط التشعبي الودّي هو <b>/helloworld</b>، فسوف يتم ربط <b>{0}://www.helloworld.com</b> بـ <b>{1}/helloworld</b>.
 forgot-password=نسيت كلمة السر
 form-method=أسلوب النموذج
 form=نموذج
@@ -926,6 +972,7 @@ full-name=الإسم الكامل
 full-screen=كامل الشاشة
 full=كامل
 future=مستقبل
+gadget=أداة
 gender=الجنس
 general=عام
 generate=ولّد
@@ -937,7 +984,7 @@ get-quote=أحصل على إقتباس
 gifts=هدايا
 go-to-paypal-and-set-up-ipn-to-post-to-x=إذهب إلى PayPal و أنشئ IPN لإرسال إلى {0}.
 go=إذهب
-googles-spelling-suggestion-for=إقتراح التهجئة من Google's لـ {0} هو {1}.
+googles-spelling-suggestion-for=إقتراح التهجئة من غوغل لـ {0} هو {1}.
 government=حكومة
 graduation=تخرّج
 greeting=التحية
@@ -947,6 +994,7 @@ groups=مجموعات
 guest-preferences=تفضيلات الضيف
 guest=ضيف
 guestbook=سجل الزوار
+half-banner=لوحة أفقية صغيرة
 handbreath=شبر
 hangman-word-list=قائمة كلمات الرجل المشنوق
 hangman=الرجل المشنوق
@@ -997,12 +1045,12 @@ import-export=إستيراد / تصدير
 import=إستيراد
 in-progress=جاري التنفيذ
 in-stock=في المخازن
-in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-suppliers=In the case where a customer completes an order that contains items from many suppliers: the customer will receive a normal confirmation email, each supplier will receive a confirmation email with the subset of items that belong to that supplier, and all the Shopping Administrators will receive copies of emails that the customer and suppliers receive.
+in-the-case-where-a-customer-completes-an-order-that-contains-items-from-many-suppliers=في حالة قيام زبون بإكمال طلبية تحتوي على أصناف من عدة مورّدين: سيستقبل الزبون رسالة إلكترونية تأكيدية عادية وسيستقبل كل مورّد رسالة إلكترونية تأكيدية تحتوي على قائمة بالأصناف التابعة له وسيستقبل جميع مدراء البيع نسخ من الرسائل الإلكترونية المرسلة إلى الزبون و المورّدين.
 inactive-user=مستخدم غير مفعل
 inactive=غير مفعّل
 inch=إنش
 include-original-text=ضمّن النص الأصلي
-incoming-pop-server=Incoming POP Server
+incoming-pop-server=خادم الـ POP
 increment-version=زدّ الإصدارة
 indexed=مفهرس
 industry=صناعة
@@ -1010,6 +1058,7 @@ inherit-look-and-feel-from-the-private-root-node=ورّث المظهر و الش
 inherit-look-and-feel-from-the-public-root-node=ورّث المظهر و الشكل من العقدة الجذرية العامة؟
 inherit=الوراثة
 inserted-in=مدخل في
+instances=حالات
 instant-messenger-ids=الرموز التعريفية للمراسلات الفورية
 instant-messenger=المراسل الفوري
 insurance-calculation=حساب التأمين
@@ -1037,6 +1086,10 @@ items=الأصناف
 ja_en=ياباني إلى إنجليزي
 jaas-is-not-configured-properly=JAAS غير معرّف بشكل سليم.
 jabber=Jabber
+javascript-1=جافاسكربت 1
+javascript-2=جافاسكربت 2
+javascript-3=جافاسكربت 3
+javascript=جافاسكربت
 jboss-prefix=JBoss Prefix
 job-class=فئة الوظيفة
 job-title=المسمى الوظيفي
@@ -1055,6 +1108,7 @@ language-type=نوع اللغة
 language=اللغة
 large-image-url=الرابط التشعبي للصورة الكبيرة
 large-image=صورة كبيرة
+large-rectangle=مستطيل كبير
 larger=أكبر
 laser=الليزر
 last-checked=آخر مراجعة
@@ -1079,6 +1133,8 @@ launch=إقلاع
 layer-type=نوع الطبقة
 layout=التصميم
 ldap=LDAP
+leaderboard=لوحة أفقية عريضة
+leave-a-copy-of-the-forwarded-message=أترك نسخة من الرسالة المرسلة؟
 leave-edit-preferences=أترك تحرير التفضيلات
 leave-the-user-name-and-password-fields-blank-to-use-your-current-login-information=* أترك حقلي إسم المستخدم وكلمة السر فارغان لإستخدام معلومات الدخول الحالية.
 leave-this-blank-if-the-coupon-does-not-check-for-the-item-sku=أتركه فارغا إذا كان الكوبون لا يراجع رمز الصنف التعريفي.
@@ -1141,7 +1197,10 @@ maximum-memory=الحد الأقصى من الذاكرة
 maximum=أقصى حد
 medium-image-url=الرابط التشعبي للصورة المتوسطة
 medium-image=صورة متوسطة
+medium-rectangle=مستطيل متوسط
 meeting=إجتماع
+merge-with-parent-category=إدمج مع تصنيف علوي
+merge-with-parent-folder=إدمج مع مجلّد علوي
 message-added-email=الرسالة الإلكترونية عند إضافة رسالة
 message-headers=ترويسات الرسالة
 message-list=قائمة الرسالة
@@ -1152,6 +1211,10 @@ message=رسالة
 messages-per-inbox-preview=عدد معاينات الرسائل لكل صندوق واردات
 messages-per-page=رسائل لكل صفحة
 messages=الرسائل
+meta-description=وصف الميتا
+meta-keywords=الكلمات المفتاحية للميتا
+meta-robots=محركات البحث للميتا
+meta-tags=بطاقات الميتا
 meter=متر
 method=طريقة
 microsoft-outlook-csv-file=Microsoft Outlook (.CSV file)
@@ -1187,12 +1250,17 @@ move-column=أنقل العمود
 move-to=أنقل إلى
 movie=فيلم
 msn=MSN
+multi-selection-list=قائمة إختيارات متعددة
 must-cart-quantities-be-a-multiple-of-the-item's-minimum-quantity=هل يجب أن تكون كميات سلة التسوق من مضاعفات الكمية الدنيا للصنف؟
 my-account=حسابي
 my-addresses=عناويني
 my-blog=صحيفتي الشخصية
 my-communities=مجتمعاتي
+my-documents=مستنداتي
+my-entries=مدخلاتي
+my-images=صوري
 my-places=الأماكن المفضلة
+my-posts=مشاركاتي
 n-signifies-narrow-portlets-and-w-signifies-wide-portlets=(ر) تمثل بورتلت رفيعة و (ع) تمثل بورتلت عريضة
 name=الإسم
 narrow-column=العمود الرفيع
@@ -1215,18 +1283,22 @@ news-selections=إختيار الأخبار و المستجدّات
 news=الأخبار و المستجدات
 next-message=الرسالة التالية
 next-month=الشهر التالي
+next-page=الصفحة التالية
 next-thread=النقاش التالي
 next-year=العام التالي
 next=التالي
 nickname=الكنية
 nl_en=هولندي إلى إنجليزي
+no-alfresco-content-was-found=لم يتم العثور على أي محتوى لـAlfresco.
 no-articles-were-found-that-matches-the-given-search-criteria=لم يتم العثور على أي مقالة مطابقة لشروط البحث المعطاة.
 no-articles-were-found-that-matches-the-id=لم يتم العثور على أي مقالة مطابقة للرمز التعريفي:
 no-articles-were-found-that-matches-the-url=لم يتم العثور على أي مقالة مطابقة للرابط التشعبي:
 no-articles-were-found=لم يتم العثور على أي مقالة.
+no-banner=بدون لوحة أفقية
 no-city-and-state-pairs-were-found-associated-with-the-given-zip=لم يتم العثور على أي مدينة و ولاية مرتبطتين بالرمز البريدي المعطى.
 no-communities-were-found=لم يتم العثور على أي مجتمع.
 no-coupons-were-found=لم يتم العثور على أي كوبون.
+no-definitions-were-found=لم يتم العثور على أي تعريف.
 no-documents-were-found-that-matched-the-keywords-x=لم يتم العثور على أي مستند مطابق للكلمات: {0}.
 no-documents-were-found-that-matched-the-keywords=لم يتم العثور على أي مستند مطابق للكلمات:
 no-download=لا يوجد منزلات
@@ -1236,6 +1308,7 @@ no-entries-were-found-that-matched-the-keywords-x=لم يتم العثور عل�
 no-entries-were-found-that-matched-the-keywords=لم يتم العثور على أي مدخل مطابق للكلمات:
 no-groups-were-found=لم يتم العثور على أي مجموعة.
 no-information-was-found-associated-with-the-symbol-x=لم يتم العثور على أي معلومة مرتبطة بالرمز<b>{0}</b>.
+no-instances-were-found=لم يتم العثور على أي حالة.
 no-items-were-found-that-matched-the-keywords=لم يتم العثور على أي صنف مطابق للكلمات:
 no-locations-were-found=لم يتم العثور على أي موقع.
 no-messages-found=لم يتم العثور على أي رسالة.
@@ -1246,6 +1319,7 @@ no-pages-were-found-that-matched-the-keywords-x=لم يتم العثور على 
 no-roles-were-found=لم يتم العثور على أي دور.
 no-structures-were-found-that-matches-the-id=لم يتم العثور على أي هيكل بالرمز التعريفي:
 no-structures-were-found=لم يتم العثور على أي هيكل.
+no-tasks-were-found=لم يتم العثور على أي مهمة.
 no-templates-were-found-that-matches-the-id=لم يتم العثور على أي قالب بالرمز التعريفي:
 no-templates-were-found=لم يتم العثور على أي قالب.
 no-user-groups-were-found=لم يتم العثور على أي مجموعة.
@@ -1335,6 +1409,7 @@ pager=المنادي الآلي
 pages=الصفحات
 paint=الرسم
 parent-category=تصنيف علوي
+parent-folder=مجلّد علوي
 parent=الأصل
 party=حفلة
 passage-comparison=Passage Comparison
@@ -1395,6 +1470,7 @@ please-enter-a-unique-friendly-url=الرجاء إدخال رابط تشعبي �
 please-enter-a-unique-id=الرجاء إدخال رمز تعريفي مميّز.
 please-enter-a-unique-name=الرجاء إدخال إسم مميّز.
 please-enter-a-unique-project-code=الرجاء إدخال رمز مشروع مميّز.
+please-enter-a-unique-virtual-host=الرجاء إدخال موقع إفتراضي مميّز.
 please-enter-a-valid-actual-end-date=الرجاء إدخال تاريخ النهاية الفعلي صحيح.
 please-enter-a-valid-body=الرجاء إدخال متن صحيح.
 please-enter-a-valid-category-name=الرجاء إدخال إسم تصنيف صحيح.
@@ -1448,6 +1524,7 @@ please-enter-a-valid-question-description=الرجاء إدخال وصف للس�
 please-enter-a-valid-question=الرجاء إدخال سؤال صحيح.
 please-enter-a-valid-repository-name=الرجاء إدخال إسم مستودع صحيح.
 please-enter-a-valid-script-template=الرجاء إدخال قالب مخطوطة صحيح.
+please-enter-a-valid-signature=الرجاء إدخال توقيع صحيح.
 please-enter-a-valid-start-date=الرجاء إدخال تاريخ بداية صحيح.
 please-enter-a-valid-starting-address=الرجاء إدخال عنوان صحيح.
 please-enter-a-valid-state=الرجاء إدخال إسم ولاية صحيح.
@@ -1517,6 +1594,7 @@ preview=معاينة
 previous-close=الإغلاق السابق
 previous-message=الرسالة السابقة
 previous-month=الشهر السابق
+previous-page=الصفحة السابقة
 previous-thread=النقاش السابق
 previous-year=السنة السابقة
 previous=السابق
@@ -1533,6 +1611,7 @@ print=إطبع
 priority=أولوية
 private-node=عقدة خاصة
 private-nodes=عقد خاصة
+private-virtual-host=موقع إفتراضي خاص
 private=خاص
 proceed-to-the-next-step-to-delegate-permissions-to-the-x-portlet-itself=تابع إلى الخطوة التالية لتفويض الرخص للبورتلت {0} نفسها.
 processing-login=جاري الدخول
@@ -1547,6 +1626,7 @@ props=الخصائص
 pt_en=برتغالي إلى إنجليزي
 public-node=عقدة عامة
 public-nodes=عقد عامة
+public-virtual-host=موقع إفتراضي عام
 public=عام
 publisher=الناشر
 quantity=الكمية
@@ -1558,9 +1638,13 @@ rank=الترتيب
 read-more=إقرأ المزيد
 read-roles=إقرأ القواعد
 receiver-email-address=عنوان البريد الإلكتروني للمستقبل
-recent-changes=التغيرات الحالية
+recent-changes=التغيرات الحديثة
+recent-documents=المستندات الحديثة
+recent-entries=المدخلات الحديثة
+recent-images=الصور الحديثة
 recent-posts=المشاركات الحديثة
-recent=الحالي
+recent=الحديث
+recipient=المستقبل
 recur-every=إرجع كل
 references-only=التفضيلات فقط
 refresh-rate=نسبة الإنعاش
@@ -1628,8 +1712,10 @@ role-name=إسم الدور
 role=دور
 roles=الأدوار
 romanian=روماني
+root-layout=التصميم الرئيسي
 root=الجذر
 rounded-edges=حواف مدوّرة
+rss=RSS
 ru_en=روسي إلى إنجليزي
 run-the-garbage-collector-to-free-up-memory=أطلق منظف الذاكرة للحصول على مزيد من الذاكرة من خلال تفريغ الأجزاء المهملة.
 russian=روسي
@@ -1697,6 +1783,7 @@ selected-user=المستخدم المختار
 selected=مختار
 selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates=إختيار هيكل جديد سيؤدي لتغيير حقول الإدخال المتاحة والقوالب المتاحة. هل تريد المتابعة؟
 selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates=إختيار قالب سيؤدي لتغيير الهيكل وحقول الإدخال المتاحة والقوالب المتاحة. هل تريد المتابعة؟
+selection-list=قائمة الإختيارات
 send-approval-denied-email-to-users=أرسل رسالة إلكترونية لرفض الموافقة للمستخدمين؟
 send-approval-granted-email-to-users=أرسل رسالة إلكترونية لإعطاء الموافقة للمستخدمين؟
 send-approval-requested-email-to-users=أرسل رسالة إلكترونية لطلب الموافقة للمستخدمين؟
@@ -1767,9 +1854,12 @@ size=الحجم
 sku=رمز الصنف التعريفي
 skus=رموز الأصناف التعريفية
 skype=Skype
+skyscraper=لوحة رأسية
 slovak=سلوفاني
 small-image-url=الرابط التشعبي للصورة الصغيرة
 small-image=صورة صغيرة
+small-rectangle=مستطيل صغير
+small-square=مربع صغير
 sms-messenger-id=الرمز التعريفي لمرسل SMS
 sms=SMS
 sound-settings=إعدادات الصوت
@@ -1788,6 +1878,7 @@ square-meter=متر مربع
 square-mile=ميل مربع
 square-millimeter=مليمتر مربع
 square-yard=ذراع مربع
+square=مربع
 ssh=SSH
 start-date=تاريخ البداية
 start-from=البداية من
@@ -1809,6 +1900,9 @@ structure-id=الرمز التعريفي للهيكل
 structure=هيكل
 structures=الهياكل
 style=الأسلوب
+subcategories=التصنيفات الفرعية
+subfolders=المجلّدات الفرعية
+subject-prefix=بادئة الموضوع
 subject=موضوع
 submit=أرسل
 subscribe=إشترك
@@ -1842,6 +1936,9 @@ template=قالب
 templates=القوالب
 terms-of-use=شروط الإستخدام
 test=تجريبي
+text-and-image=نص وصورة
+text-area=صندوق النص (HTML)
+text-box=صندوق النص
 text-verification-failed=التحقق من النص قد فشل.
 text-verification=التحقق من النص
 text=كتابة
@@ -1849,17 +1946,21 @@ thank-you-for-creating-an-account=شكرا لك لإنشاء حساب. لقد ت
 thank-you-for-signing-our-guestbook=شكرا لتوقيعك في سجل الزوار.
 thank-you-for-your-purchase=شكرا لك على عملية الشراء.
 thank-you-for-your-vote=شكرا لك على التصويت.
+the-address-of-the-email-recipient=عنوان البريد الإلكتروني للمستقبل
 the-article-could-not-be-found=لم يتم العثور على المقالة.
 the-article-with-the-title-x-was-found-that-matches-the-id=وجد أن المقالة المعنونة بـ{0} مطابقة للرمز التعريفي:
 the-article-with-the-title-x-was-found-that-matches-the-url=وجد أن المقالة المعنونة بـ{0} مطابقة للرابط التشعبي:
 the-category-could-not-be-found=لم يتم العثور على التصنيف.
+the-category-in-which-the-message-has-been-posted=التصنيف الذي أضيفت إلية الرسالة
 the-combination-of-first-name-last-name-and-email-address-is-already-taken=هذه التركيبة من الإسم الأول، الإسم الأخير و عنوان البريد الإلكتروني مأخوذة.
 the-comic-could-not-be-found=لم يتم العثور على الكاريكاتير.
 the-comments-could-not-be-found=لم يتم العثور على الملاحظات.
 the-community-could-not-be-found=لم يتم العثور على المجتمع.
+the-company-id-associated-with-the-message-board=رمز الشركة التعريفي المقترن بالمنتدى
 the-coupon-could-not-be-found=لم يتم العثور على الكوبون.
 the-default-preferences-are-invalid=التفضيلات الإعتادية غير صحيحة.
 the-document-could-not-be-found=لم يتم العثور على المستند.
+the-email-address-of-the-user-who-added-the-message=عنوان البريد الإلكتروني للمستخدم الذي أضاف الرسالة
 the-email-address-you-requested-is-already-taken=عنوان البريد الإلكتروني المطلوب مأخوذ.
 the-email-address-you-requested-is-not-registered-in-our-database=عنوان البريد الإلكتروني المطلوب غير مسجّل.
 the-email-address-you-requested-is-reserved=عنوان البريد الإلكتروني المطلوب محجوز.
@@ -1893,8 +1994,10 @@ the-item-sku-you-requested-is-already-taken=السلع التي طلبتها م�
 the-ldap-url-format-is=صيغة عنوان الـLDAP هي <i>ldap://host:port/searchdn</i> بحيث <i>searchdn</i> تحدد مجال البحث الأولي. على سبيل المثال:  ldap://localhost:389/ou=Users,o=Example
 the-link-could-not-be-found=لم يتم العثور على الرابط.
 the-message-board-is-empty=قائمة الرسائل فارغة.
+the-message-body=متن الرسالة
 the-message-could-not-be-found=لم يتم العثور على الرسالة.
 the-message-object-has-expired-and-is-no-longer-available=انتهت مدة صلاحية الرسالة وأصبحت غير متوفرة. يرجى {0} كتابتك.
+the-name-of-the-email-recipient=إسم مستقبل الرسالة الإلكترونية
 the-node-could-not-be-found=لم يتم العثور على العقدة.
 the-node-you-selected-does-not-have-pages-configured=العقدة المختارة لا تحتوي صفحات معدّة.
 the-order-could-not-be-found=لم يتم العثور على الطلبية.
@@ -1933,6 +2036,8 @@ the-total-size-of-all-files-attached-to-a-message-may-not-exceed-x-k=فشل ال
 the-user-could-not-be-found=لم يتم العثور على المستخدم.
 the-user-id-you-requested-is-already-taken=الرمز التعريفي للمستخدم الذي طلبته مستعمل.
 the-user-id-you-requested-is-reserved=الرمز التعريفي للمستخدم الذي طلبته محجوز.
+the-user-who-added-the-message=المستخدم الذي أضاف الرسالة
+the-vacation-message-notifies-others-of-your-absence=رسالة الإجازة تعلم الآخرين بغيابك
 the-verse-could-not-be-found=لم يتم العثور على الترنيمة.
 the=الـ
 themes=الملامح
@@ -1981,13 +2086,14 @@ this-email-address-will-also-serve-as-your-login=هذا البريد الإلك�
 this-event-does-not-repeat=هذه المناسبة لا تتكرر.
 this-feature-requires-internet-explorer-5.5-and-above=هذه الميزة تتطلب Internet Explorer 5.5 أو أحدث.
 this-folder-is-empty=هذا المجلّد فارغ.
-this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
+this-form-has-already-been-submitted=تم تسليم هذا النموذج بالفعل. سيتم تفعيل الإرسال خلال {0} ثانية.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=هذه الوظيفة تفعّل في حالة أن محرر النصوص في هيئة النص الغني، هل تريد تفعيل هيئة النص الغني؟
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=هذه الصفحة تعرض آخر {0} مقلات، هياكل و قوالب قمت بزيارتها.
 this-page-is-part-of-an-inactive-portlet=هذه الصفحة جزء من بورتليت معطلة.
 this-portlet-is-inactive=هذه البورتلت معطلة.
 this-topic-is-empty=هذا  العنوان الرئيسي فارغ.
 this-topic=هذا العنوان الرئيسي
+thread-priorities=أولوية النقاش
 thread=نقاش
 threaded-replies=ردود تابعة لنقاش
 threads=نقاشات
@@ -2038,6 +2144,7 @@ ukrainian=أوكراني
 unassociate=فك الإتباط
 unchecking-this-field-will-remove-localized-data-for-languages-not-shown-in-this-view=عدم إختيار هذا الحقل سيزيل بيانات مترجمة من لغات غير ظاهرة هنا. هل تريد المتابعة؟
 undefined=غير معرف
+unlimited=غير محدد
 unlock=فك قفل
 unpack-war=Unpack WAR
 unread-messages=عكس قراءة الرسائل
@@ -2083,6 +2190,7 @@ user-id=الرمز التعريفي للمستخدم
 user-name=اسم المستخدم
 user-portrait=صورة شخصية للمستخدم
 user-profile=ملخص المستخدم
+user-ranks=رتب المستخدم
 user=مستخدم
 users=المستخدمين
 vacation-message=رسالة الإجازة
@@ -2091,6 +2199,7 @@ values=قيم
 verification-number=رقم التأكيد
 version-history=تارخ النسخ
 version=النسخة
+vertical-banner=لوحة رأسية
 vertical-bar=الشريط الرأسي
 view-all=عرض الجميع
 view-article=عرض المقالة
@@ -2098,7 +2207,7 @@ view-articles=عرض المقالات
 view-associated-articles=عرض المقالات المرتبطة
 view-associated-structures=عرض الهياكل المرتبطة
 view-associated-templates=عرض القوالب المرتبطة
-view-blogs=BLOGS عرض الصحف الشخصية
+view-blogs=عرض المدوّنات الشخصية
 view-bookmarks=عرض الأدلة المسجلة
 view-entries=عرض المدخلات
 view-folder=عرض المجلّد
@@ -2117,6 +2226,7 @@ view-user-profile=عرض ملخص عن مستخدم
 view-users=عرض المستخدمين
 view=عرض
 views=مشاهدات
+virtual-host=الموقع الإفتراضي
 visited-link=وصلات تم زيارتها
 visits=زيارات
 vnc=VNC
@@ -2140,11 +2250,14 @@ welcome=مرحبا
 when=متى
 whois=من هو
 wide-column=العمود العريض
+wide-skyscraper=لوحة رأسية عريضة
 wide=عريض
 width=عرض
 wikis=ويكي
+within=خلال
 word-search=بحث بالكلمة
 worm=دودة
+would-you-like-to-save-the-changes-made-to-this-language=هل تود حفظ التغييرات على هذه اللغة؟
 write-roles=أدوار الكتابة
 wsrp-markup-endpoint=Markup Endpoint
 wsrp-portlet-management-endpoint=Portlet Management Endpoint
@@ -2172,7 +2285,7 @@ years=سنوات
 yes=نعم
 yesterday=أمس
 ym=YM
-you-are-signed-in-as-x=You are signed in as {0}.
+you-are-signed-in-as-x=لقد تم دخولك بإسم {0}.
 you-can-email-users-that-have-been-manually-added-to-the-database=يمكنك المراسلة إلكترونيا للمستخدمين المضافين يدويا إلى قاعدة البيانات. يجب أن تكون كلمة السر لهؤلاء المستخدمون ة. عند إقلاع المستخدمون سيتم تغيير كلمة السر عشوائيا وإعلامهم بحالة حسابهم من خلال الموقع.
 you-can-now-check-for-new-messages-in-your-x=يمكنك الآن متابعة رسائلك الجديدة في {0}.
 you-cannot-add-a-template-driven-article-if-the-article-is-associated-with-a-structure-that-has-no-templates=لا يمكنك إضافة مقال معتمد على قالب إذا كان المقال مربوط بهيكل غير محتوي علي قوالب. الرجاء إختيار هيكل آخر أو إضافة قالب للهيكل المختار.
