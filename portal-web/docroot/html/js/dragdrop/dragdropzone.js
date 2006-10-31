@@ -89,7 +89,7 @@ var DragDrop = {
 	create : function(itemId, dragOptions) {
 		/* Options
 		 * container: (Object) container which may have scroll bars. Needed to correct offset.
-		 * forceLastDrop: (boolean) force onDrop of last container
+		 * forceDrop: (Object) force onDrop of most recent dropZone, starting with this
 		 * ghost: (boolean) make the dragging element transparent?
 		 * handle: (Object) handle for drag obj
 		 * highlightDropzones: (boolean) highlight dropzones
@@ -185,7 +185,10 @@ var DragDrop = {
 				}
 			});
 
-			DragDrop.currentContainer = clone;
+			if (opts.forceDrop) {
+				DragDrop.currentContainer = $(opts.forceDrop);
+			}
+			
 			DragDrop.lastOnDrop = null;
 			item.initialized = true;
 			
@@ -279,7 +282,7 @@ var DragDrop = {
 					dropItem.style.height = "";
 				}
 			}
-			else if (opts.forceLastDrop && DragDrop.lastOnDrop) {
+			else if (opts.forceDrop && DragDrop.lastOnDrop) {
 				DragDrop.lastOnDrop();
 			}
 			

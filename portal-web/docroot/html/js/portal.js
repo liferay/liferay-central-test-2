@@ -275,18 +275,11 @@ var Navigation = {
 			onDrop: Navigation.onDrop
 			});
 		
-		/*
-		DragDrop.create("layout-tab-selected", {
-			revert: true,
-			forceLastDrop: true
-			});
-		*/
-			
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		tabs.foreach(function(item, index) {
 			DragDrop.create(item, {
-					revert: true,
-					forceLastDrop: true
+					forceDrop: "layout-nav-container",
+					revert: true
 				});
 				
 			item.layoutId = Navigation.params.layoutIds[index];
