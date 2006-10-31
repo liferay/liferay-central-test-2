@@ -30,25 +30,29 @@ UserSearch searchContainer = (UserSearch)request.getAttribute("liferay-ui:search
 UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerms();
 %>
 
-<div style="float: left; padding-right: 5px">
-	<%= LanguageUtil.get(pageContext, "first-name") %><br/>
+<div style="float: left; padding-right: 5px;">
+	<%= LanguageUtil.get(pageContext, "first-name") %><br />
 	<input class="form-text" name="<portlet:namespace /><%= UserDisplayTerms.FIRST_NAME %>" size="20" type="text" value="<%= displayTerms.getFirstName() %>">
 </div>
-<div style="float: left; padding-right: 5px">
-	<%= LanguageUtil.get(pageContext, "middle-name") %><br/>
+
+<div style="float: left; padding-right: 5px;">
+	<%= LanguageUtil.get(pageContext, "middle-name") %><br />
 	<input class="form-text" name="<portlet:namespace /><%= UserDisplayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= displayTerms.getMiddleName() %>">
 </div>
-<div style="float: left; padding-right: 5px">
-	<%= LanguageUtil.get(pageContext, "last-name") %><br/>
+
+<div style="float: left; padding-right: 5px;">
+	<%= LanguageUtil.get(pageContext, "last-name") %><br />
 	<input class="form-text" name="<portlet:namespace /><%= UserDisplayTerms.LAST_NAME %>" size="20" type="text" value="<%= displayTerms.getLastName() %>">
 </div>
-<div style="float: left; padding-right: 5px">
-	<%= LanguageUtil.get(pageContext, "email-address") %><br/>
+
+<div style="float: left; padding-right: 5px;">
+	<%= LanguageUtil.get(pageContext, "email-address") %><br />
 	<input class="form-text" name="<portlet:namespace /><%= UserDisplayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= displayTerms.getEmailAddress() %>">
 </div>
+
 <div style="float: left;">
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
-		<%= LanguageUtil.get(pageContext, "active") %><br/>
+		<%= LanguageUtil.get(pageContext, "active") %><br />
 		<select name="<portlet:namespace /><%= UserDisplayTerms.ACTIVE %>">
 			<option <%= displayTerms.isActive() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
 			<option <%= !displayTerms.isActive() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
@@ -56,7 +60,7 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</c:if>
 </div>
 
-<table border="0" cellpadding="0" cellspacing="0" style="clear: both; margin-top: 5px">
+<table border="0" cellpadding="0" cellspacing="0" style="clear: both; margin-top: 5px;">
 <tr>
 	<td>
 		<select name="<portlet:namespace /><%= UserDisplayTerms.AND_OPERATOR %>">

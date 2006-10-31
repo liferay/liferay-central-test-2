@@ -28,36 +28,38 @@
 	}
 </script>
 
-<div style="float: left; padding-right: 10px">
+<div style="float: left; padding-right: 10px;">
 
-		<%
-		int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
+	<%
+	int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
 
-		Set data = new HashSet();
+	Set data = new HashSet();
 
-		for (int i = 1; i <= maxDayOfMonth; i++) {
-			Calendar tempCal = (Calendar)selCal.clone();
-			tempCal.set(Calendar.MONTH, selMonth);
-			tempCal.set(Calendar.DATE, i);
-			tempCal.set(Calendar.YEAR, selYear);
+	for (int i = 1; i <= maxDayOfMonth; i++) {
+		Calendar tempCal = (Calendar)selCal.clone();
+		tempCal.set(Calendar.MONTH, selMonth);
+		tempCal.set(Calendar.DATE, i);
+		tempCal.set(Calendar.YEAR, selYear);
 
-			boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId, tempCal, eventType);
+		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId, tempCal, eventType);
 
-			if (hasEvents) {
-				data.add(new Integer(i));
-			}
+		if (hasEvents) {
+			data.add(new Integer(i));
 		}
-		%>
+	}
+	%>
 
-		<liferay-ui:calendar
-			month="<%= selMonth %>"
-			day="<%= selDay %>"
-			year="<%= selYear %>"
-			headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG) %>"
-			data="<%= data %>"
-		/>
+	<liferay-ui:calendar
+		month="<%= selMonth %>"
+		day="<%= selDay %>"
+		year="<%= selYear %>"
+		headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG) %>"
+		data="<%= data %>"
+	/>
 </div>
+
 <div style="float: left">
 	<%@ include file="/html/portlet/calendar/event_iterator.jsp" %>
 </div>
+
 <div style="clear: both"></div>

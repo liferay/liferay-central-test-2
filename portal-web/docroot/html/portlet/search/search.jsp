@@ -192,7 +192,7 @@ for (int i = 0; i < results.getLength(); i++) {
 		sb.append("</span>");
 	}
 
-	row.addText(sb.toString());
+	row.addText(StringUtil.highlight(sb.toString(), keywords));
 
 	// Score
 

@@ -25,11 +25,17 @@
 <%@ include file="/html/portlet/journal_content_search/init.jsp" %>
 
 <%
+String keywords = ParamUtil.getString(request, "keywords");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Document doc = (Document)row.getObject();
 
-String content = StringUtil.shorten((String)doc.get(LuceneFields.CONTENT), 200);
+String content = (String)doc.get(LuceneFields.CONTENT);
+
+content = StringUtil.shorten(content, 200);
+content = StringUtil.highlight(content, keywords);
+
 String articleId = (String)doc.get("articleId");
 
 String hitOwnerId = layout.getOwnerId();

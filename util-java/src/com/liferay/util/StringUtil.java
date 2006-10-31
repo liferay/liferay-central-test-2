@@ -30,6 +30,7 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 
 /**
  * <a href="StringUtil.java.html"><b><i>View Source</i></b></a>
@@ -202,6 +203,49 @@ public class StringUtil {
 				return null;
 			}
 		}
+	}
+
+	public static String highlight(String s, String keywords) {
+		return highlight(s, keywords, "<b>", "</b>");
+	}
+
+	public static String highlight(
+		String s, String keywords, String highlight1, String highlight2) {
+
+		if (s == null) {
+			return null;
+		}
+
+		// The problem with using a regexp is that it searches the text in a
+		// case insenstive manner but doens't replace the text in a case
+		// insenstive manner. So the search results actually get messed up. The
+		// best way is to actually parse the results.
+
+		//return s.replaceAll(
+		//	"(?i)" + keywords, highlight1 + keywords + highlight2);
+
+		StringBuffer sb = new StringBuffer(StringPool.SPACE);
+
+		StringTokenizer st = new StringTokenizer(s);
+
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+
+			if (token.equalsIgnoreCase(keywords)) {
+				sb.append(highlight1);
+				sb.append(token);
+				sb.append(highlight2);
+			}
+			else {
+				sb.append(token);
+			}
+
+			if (st.hasMoreTokens()) {
+				sb.append(StringPool.SPACE);
+			}
+		}
+
+		return sb.toString();
 	}
 
 	public static String lowerCase(String s) {
