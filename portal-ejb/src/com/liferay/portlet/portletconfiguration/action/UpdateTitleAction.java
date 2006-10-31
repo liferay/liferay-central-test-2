@@ -68,10 +68,12 @@ public class UpdateTitleAction extends JSONAction {
 		}
 
 		String title = ParamUtil.getString(req, "title");
+		String layoutId = ParamUtil.getString(req, "layoutId");
+		String ownerId = ParamUtil.getString(req, "ownerId");
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
-				req, portletId, true, true);
+				portletId, layoutId, ownerId);
 
 		portletSetup.setValue("portlet-setup-title", title);
 

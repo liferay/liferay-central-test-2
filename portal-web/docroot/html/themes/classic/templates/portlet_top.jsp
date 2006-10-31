@@ -91,7 +91,11 @@
 				function(newTextObj, oldText) {
 					var newText = newTextObj.innerHTML;
 					if (oldText != newText) {
-						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title?portletId=<%= portletDisplay.getId() %>&title=" + encodeURIComponent(newText);
+						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
+						"?portletId=<%= portletDisplay.getId() %>" +
+						"&title=" + encodeURIComponent(newText) +
+						"&layoutId=<%= layout.getLayoutId() %>" +
+						"&ownerId=<%= Layout.getOwnerId(plid) %>";
 
 						Ajax.request(url);
 					}

@@ -22,6 +22,13 @@
 
 package com.liferay.portlet;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PreferencesValidator;
+import javax.portlet.RenderRequest;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
@@ -30,6 +37,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
@@ -43,14 +51,6 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.portlet.RenderRequestWrapper;
-
-import javax.portlet.ActionRequest;
-import javax.portlet.PortletPreferences;
-import javax.portlet.PreferencesValidator;
-import javax.portlet.RenderRequest;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 /**
  * <a href="PortletPreferencesFactory.java.html"><b><i>View Source</i></b></a>
@@ -267,6 +267,19 @@ public class PortletPreferencesFactory {
 
 		return new PortletPreferencesPK(portletId, layoutId, ownerId);
 	}
+
+	public static PortletPreferences getPortletSetup(
+		String portletId, String layoutId, String ownerId)
+		throws PortalException, SystemException {
+	
+		Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
+	
+		PortletPreferencesPK pk = new PortletPreferencesPK( portletId, layoutId,
+			ownerId);
+	
+		return PortletPreferencesLocalServiceUtil.getPreferences(
+			layout.getCompanyId(), pk);
+	}	
 
 	public static PortletPreferences getPortletSetup(
 			HttpServletRequest req, String portletId, boolean uniquePerLayout,
