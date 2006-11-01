@@ -80,6 +80,84 @@ function changeOpacity (object, opacity) {
 	object.style.filter = "alpha(opacity=" + opacity + ")";
 }
 
+function check(form, name, checked) {
+	for (var i = 0; i < form.elements.length; i++) {
+		var e = form.elements[i];
+
+		if ((e.name == name) && (e.type == "checkbox")) {
+			e.checked = checked;
+		}
+	}
+}
+
+function checkAll(form, name, allBox) {
+	if (isArray(name)) {
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if (e.type == "checkbox") {
+				for (var j = 0; j < name.length; j++) {
+					if (e.name == name[j]) {
+						e.checked = allBox.checked;
+					}
+				}
+			}
+		}
+	}
+	else {
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if ((e.name == name) && (e.type == "checkbox")) {
+				e.checked = allBox.checked;
+			}
+		}
+	}
+}
+
+function checkAllBox(form, name, allBox) {
+	var totalBoxes = 0;
+	var totalOn = 0;
+
+	if (isArray(name)) {
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if ((e.name != allBox.name) && (e.type == "checkbox")) {
+				for (var j = 0; j < name.length; j++) {
+					if (e.name == name[j]) {
+						totalBoxes++;
+
+						if (e.checked) {
+							totalOn++;
+						}
+					}
+				}
+			}
+		}
+	}
+	else {
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if ((e.name != allBox.name) && (e.name == name) && (e.type == "checkbox")) {
+				totalBoxes++;
+
+				if (e.checked) {
+					totalOn++;
+				}
+			}
+		}
+	}
+
+	if (totalBoxes == totalOn) {
+		allBox.checked = true;
+	}
+	else {
+		allBox.checked = false;
+	}
+}
+
 function checkMaxLength(box, maxLength) {
 	if ((box.value.length) >= maxLength) {
 		box.value = box.value.substring(0, maxLength - 1);
@@ -282,6 +360,78 @@ function getSelectedRadioValue(col) {
 	else {
 		return col[i].value;
 	}
+}
+
+function isArray(object) {
+	if (!window.Array) {
+		return false;
+	}
+	else {
+		return object.constructor == window.Array;
+	}
+}
+
+function LinkedList() {
+	this.head = null;
+	this.tail = null;
+}
+
+LinkedList.prototype.add = function(obj) {
+	obj.listInfo = new Object();
+	var tail = this.tail;
+	var head = this.head;
+	
+	if (this.head == null) {
+		this.head = obj;
+		this.tail = obj;
+	}
+	else {
+		this.tail.listInfo.next = obj;
+		obj.listInfo.prev = this.tail;
+		this.tail = obj;
+	}
+}
+
+LinkedList.prototype.remove = function(obj) {
+	if (this.head) {
+		var next = obj.listInfo.next;
+		var prev = obj.listInfo.prev;
+	
+		if (next) {
+			next.listInfo.prev = prev;
+		}
+		if (prev) {
+			prev.listInfo.next = next;
+		}
+		if (this.head = obj) {
+			this.head = next;
+		}
+		if (this.tail = obj) {
+			this.tail = prev;
+		}
+	}
+}
+
+LinkedList.prototype.foreach = function(func) {
+	var cur = this.head;
+	var count = 0;
+	
+	while (cur){
+		count++;
+		var next = cur.listInfo.next;
+		
+		if (func) {
+			func(cur);
+		}
+		
+		cur = next;
+	}
+	
+	return count;
+}
+
+LinkedList.prototype.size = function() {
+	return this.foreach();
 }
 
 function listChecked(form) {
