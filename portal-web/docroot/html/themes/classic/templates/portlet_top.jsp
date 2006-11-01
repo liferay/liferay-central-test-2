@@ -85,7 +85,7 @@
 			onEdit:
 				function(input, textWidth) {
 					input.style.width = (textWidth) + "px";
-					input.style.marginLeft = "5px";
+					input.style.margin = "1px 0 0 5px";
 				},
 			onComplete:
 				function(newTextObj, oldText) {

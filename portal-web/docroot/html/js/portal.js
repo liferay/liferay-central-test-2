@@ -96,6 +96,7 @@ var LayoutColumns = {
 				DropZone.add(column, {
 					accept: ["portlet-boundary"],
 					onDrop: LayoutColumns.onDrop,
+					onHoverOver: LayoutColumns.onHoverOver,
 					inheritParent: true
 					});
 					
@@ -115,6 +116,7 @@ var LayoutColumns = {
 	initPortlet: function(portlet) {
 		portlet = $(portlet);
 		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
+		handle.style.cursor = "move";
 		
 		DragDrop.create(portlet, {
 			revert: true,
@@ -175,6 +177,9 @@ var LayoutColumns = {
 			}
 		}
 		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition);
+	},
+	
+	onHoverOver: function(item) {
 	}
 }
 
@@ -278,7 +283,7 @@ var Navigation = {
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		tabs.foreach(function(item, index) {
 			DragDrop.create(item, {
-					forceDrop: "layout-nav-container",
+					forceDrop: true,
 					revert: true
 				});
 				
@@ -527,11 +532,10 @@ var Tabs = {
 			}
 		}
 	}
-
 }
 
 var QuickEdit = {
-	curentInput: null,
+	inputList: new LinkedList(),
 	
 	create: function(id, options) {
 		/* OPTIONS
@@ -544,6 +548,7 @@ var QuickEdit = {
 		var item = $(id);
 		item.editOptions = options;
 		item.onclick = function() { QuickEdit.edit(this); };
+		item.style.cursor = "text";
 	},
 	
 	edit: function(textObj) {
@@ -569,11 +574,11 @@ var QuickEdit = {
 				document.onclick = function() {};
 			}
 			input.onmouseout = function() {
-				document.onclick = QuickEdit.done;
+				document.onclick = function() {QuickEdit.inputList.foreach(QuickEdit.onDone)};
 			}
 			input.onkeydown = function(event) {
 				if (Event.enterPressed(event)) {
-					QuickEdit.done();
+					QuickEdit.inputList.foreach(QuickEdit.onDone);
 				}
 			}
 			
@@ -586,8 +591,8 @@ var QuickEdit = {
 			}
 			
 			input.focus();
-			QuickEdit.curentInput = input;
-			
+			QuickEdit.inputList.add(input);
+
 			if (opts.dragId) {
 				$(opts.dragId).disableDrag = true;
 			}
@@ -596,8 +601,7 @@ var QuickEdit = {
 		}
 	},
 	
-	done: function() {
-		var input = QuickEdit.curentInput;
+	onDone: function(input) {
 		if (input) {
 			document.onclick = function() {};
 			
@@ -616,7 +620,6 @@ var QuickEdit = {
 			input.parentNode.removeChild(input);
 			textObj.style.display = "";
 			textObj.editing = false;
-			QuickEdit.curentInput = null;
 			
 			if (opts.dragId) {
 				$(opts.dragId).disableDrag = false;
@@ -625,6 +628,8 @@ var QuickEdit = {
 			if (opts.fixParent) {
 				textDiv.style.width = "auto";
 			}
+			
+			QuickEdit.inputList.remove(input);
 		}
 	}
 }

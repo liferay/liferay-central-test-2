@@ -185,10 +185,6 @@ var DragDrop = {
 				}
 			});
 
-			if (opts.forceDrop) {
-				DragDrop.currentContainer = $(opts.forceDrop);
-			}
-			
 			DragDrop.lastOnDrop = null;
 			item.initialized = true;
 			
