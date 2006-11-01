@@ -109,7 +109,7 @@ var DragDrop = {
 		item.onDragStart = DragDrop.onDragStart;
 		item.onDrag = DragDrop.onDrag;
 		item.onDragEnd = DragDrop.onDragEnd;
-		item.threshold = 0;
+		item.threshold = 3;
 	},
 
 	onDragStart : function(nwPosition, sePosition, nwOffset, seOffset) {
