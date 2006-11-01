@@ -255,7 +255,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			list[i].disabled = "true";
 		}
 
-		list = portlet.getElementsByTagName("div");
+		list = portlet.getElementsByTagName("*");
 
 		// Initialize to empty preview div
 
@@ -263,29 +263,31 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		this.content = defaultPreview.style;
 		this.header = defaultPreview.style;
 		this.title = defaultPreview.style;
-
+		
 		for (var i = 0; i < list.length; i++) {
-			if (list[i].className.match("portlet-borderless-container")) {
-				this.container = list[i].style;
-				this.content = list[i].style;
+			var item = list[i];
+			
+			if (Element.hasClassName(item, "portlet-borderless-container")) {
+				this.container = item.style;
+				this.content = item.style;
 
 				break;
 			}
 
-			if (list[i].className.match("portlet-container")) {
-				this.container = list[i].style;
+			if (Element.hasClassName(item, "portlet-container")) {
+				this.container = item.style;
 			}
 
-			if (list[i].className.match("portlet-box")) {
-				this.content = list[i].style;
+			if (Element.hasClassName(item, "portlet-box")) {
+				this.content = item.style;
 			}
 
-			if (list[i].className.match("portlet-header-bar")) {
-				this.header = list[i].style;
+			if (Element.hasClassName(item, "portlet-header-bar")) {
+				this.header = item.style;
 			}
 
-			if (list[i].className.match("portlet-title")) {
-				this.title = list[i].style;
+			if (Element.hasClassName(item, "portlet-title")) {
+				this.title = item.style;
 			}
 		}
 

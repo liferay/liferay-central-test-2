@@ -261,6 +261,10 @@ var Navigation = {
 					var delLink = delLinks[delLinks.length - 1];
 					var newText = newTextObj.innerHTML;
 					
+					if (newText == "") {
+						newTextObj.innerHTML = newText = "(UNTITLED)";
+					}
+					
 					delLink.style.display = "none";
 					if (oldText != newText) {
 						var params = Navigation.params;
@@ -332,7 +336,6 @@ var Navigation = {
 		var fromIndex = -1;
 		var toIndex = -1;
 		
-		clone.style.backgroundColor = "transparent";
 		clone.layoutId = item.layoutId;
 		
 		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");

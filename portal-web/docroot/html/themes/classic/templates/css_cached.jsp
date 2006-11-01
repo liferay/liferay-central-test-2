@@ -53,12 +53,16 @@ a:hover {
 
 body {
 	border: 0;
-	height: 100%;
 	margin: 0;
 	padding: 0;
 	text-align: center;
 	font-family: Tahoma, Arial;
 	font-size: 76%;
+}
+
+body#portal-body {
+	background-color: <%= colorScheme.getBodyBg() %>;
+	height: 100%;
 }
 
 body * { font-size: <%= fontDefault %>; }
@@ -538,7 +542,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tl.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tl.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tl.png);
 	</c:if>
 	font-size: 0;
 	height: 3px;
@@ -550,7 +554,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tc.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tc.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tc.png);
 	</c:if>
 }
 
@@ -559,7 +563,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tr.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tr.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-tr.png);
 	</c:if>
 	font-size: 0;
 	height: 3px;
@@ -571,7 +575,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png) repeat-y;
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png);
 	</c:if>
 }
 
@@ -580,7 +584,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png) repeat-y;
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png);
 	</c:if>
 }
 
@@ -589,7 +593,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bl.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bl.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bl.png);
 	</c:if>
 	font-size: 0;
 	height: 7;
@@ -600,7 +604,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bc.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bc.png) repeat-x;
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-bc.png);
 	</c:if>
 }
 .portlet-shadow-br div {
@@ -608,7 +612,7 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/shadow/shade-br.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-br.png) repeat-x;
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-br.png);
 	</c:if>
 	font-size: 0;
 	height: 7px;

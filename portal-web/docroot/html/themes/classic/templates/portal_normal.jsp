@@ -31,7 +31,7 @@
 	<liferay-util:include page="/html/common/themes/top_head.jsp" />
 </head>
 
-<body>
+<body id="portal-body">
 
 <liferay-util:include page="/html/common/themes/top_messages.jsp" />
 

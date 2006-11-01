@@ -148,6 +148,10 @@ var DragDrop = {
 			}
 
 			clone = DragDrop.clone = item.cloneNode(opts.showClone ? true : false);
+			
+			if (!opts.showClone) {
+				clone.style.backgroundColor = "transparent";
+			}
 
 			clone.dragOptions = new cloneObject(opts);
 
@@ -213,15 +217,14 @@ var DragDrop = {
 				
 				var isInsideContainer = mousePos.insideObject(dropContainer, true);
 				
-				if (opts.highlightDropzones) {
-					if (DragDrop.accepts(item, dropContainer)) {
+				if (DragDrop.accepts(item, dropContainer)) {
+					if (opts.highlightDropzones) {
 						dropContainer.style.backgroundColor = opts.highlightDropzones;
 					}
-				}
-				
-				if (isInsideContainer) {
-					DragDrop.currentContainer = dropContainer;
-					DragDrop.lastOnDrop = dropContainer.dropOptions.onDrop;
+					if (isInsideContainer) {
+						DragDrop.currentContainer = dropContainer;
+						DragDrop.lastOnDrop = dropContainer.dropOptions.onDrop;
+					}
 				}
 			}
 	

@@ -31,7 +31,7 @@
 	<liferay-util:include page="/html/common/themes/top_head.jsp" />
 </head>
 
-<body>
+<body id="popup-body">
 
 <liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesContent %>" />
 
