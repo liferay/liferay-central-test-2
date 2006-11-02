@@ -65,7 +65,7 @@ public class DefineObjectsTag extends TagSupport {
 	}
 
 	private static final String _TAG_CLASS =
-		"com.liferay.portlet.DefineObjectsTagUtil";
+		"com.liferay.portal.servlet.taglib.portlet.DefineObjectsTagUtil";
 
 	private static final String _TAG_DO_START_METHOD = "doStartTag";
 

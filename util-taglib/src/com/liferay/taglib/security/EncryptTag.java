@@ -22,26 +22,16 @@
 
 package com.liferay.taglib.security;
 
-import com.liferay.portal.model.Company;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Encryptor;
-import com.liferay.util.EncryptorException;
-import com.liferay.util.Http;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.Validator;
-
-import java.security.Key;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.StringTokenizer;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.tagext.TagSupport;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="EncryptTag.java.html"><b><i>View Source</i></b></a>
@@ -52,111 +42,53 @@ import org.apache.commons.logging.LogFactory;
 public class EncryptTag extends TagSupport {
 
 	public int doStartTag() throws JspException {
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
 		try {
-			StringBuffer sb = new StringBuffer();
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 
-			// Open anchor
+			MethodWrapper methodWrapper = new MethodWrapper(
+				_TAG_CLASS, _TAG_DO_START_METHOD,
+				new Object[] {
+					pageContext, _className, _style, _protocol,
+					_unencryptedParamsSet, _url, _target
+				});
 
-			sb.append("<a ");
-
-			// Class
-
-			if (Validator.isNotNull(_className)) {
-				sb.append("class=\"");
-				sb.append(_className);
-				sb.append("\" ");
-			}
-
-			// HREF
-
-			sb.append("href=\"").append(_protocol).append("://");
-
-			int pos = _url.indexOf("?");
-
-			if (pos == -1) {
-				sb.append(_url);
-			}
-			else {
-				sb.append(_url.substring(0, pos)).append("?");
-
-				Company company = PortalUtil.getCompany(
-					(HttpServletRequest)pageContext.getRequest());
-
-				Key key = company.getKeyObj();
-
-				StringTokenizer st = new StringTokenizer(
-					_url.substring(pos + 1, _url.length()), "&");
-
-				while (st.hasMoreTokens()) {
-					String paramAndValue = st.nextToken();
-
-					int x = paramAndValue.indexOf("=");
-
-					String param = paramAndValue.substring(0, x);
-					String value = paramAndValue.substring(
-						x + 1, paramAndValue.length());
-
-					sb.append(param).append("=");
-
-					if (_unencryptedParamsSet.contains(param)) {
-						sb.append(Http.encodeURL(value));
-					}
-					else {
-						try {
-							sb.append(Http.encodeURL(
-								Encryptor.encrypt(key, value)));
-						}
-						catch (EncryptorException ee) {
-							_log.error(ee.getMessage());
-						}
-
-						if (st.hasMoreTokens()) {
-							sb.append("&");
-						}
-					}
-				}
-
-				sb.append("&shuo=1");
-			}
-
-			sb.append("\" ");
-
-			// Style
-
-			if (Validator.isNotNull(_style)) {
-				sb.append("style=\"");
-				sb.append(_style);
-				sb.append("\" ");
-			}
-
-			// Target
-
-			if (Validator.isNotNull(_target)) {
-				sb.append("target=\"" + _target + "\"");
-			}
-
-			// Close anchor
-
-			sb.append(">");
-
-			pageContext.getOut().print(sb.toString());
-
-			return EVAL_BODY_INCLUDE;
+			MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		return EVAL_BODY_INCLUDE;
 	}
 
 	public int doEndTag() throws JspException {
-		try {
-			pageContext.getOut().print("</a>");
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
 
-			return EVAL_PAGE;
+		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+
+			MethodWrapper methodWrapper = new MethodWrapper(
+				_TAG_CLASS, _TAG_DO_END_METHOD, new Object[] {pageContext});
+
+			MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
 			throw new JspException(e);
 		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		return EVAL_PAGE;
 	}
 
 	public void setClassName(String className) {
@@ -189,7 +121,12 @@ public class EncryptTag extends TagSupport {
 		_target = target;
 	}
 
-	private static Log _log = LogFactory.getLog(EncryptTag.class);
+	private static final String _TAG_CLASS =
+		"com.liferay.portal.servlet.taglib.security.EncryptTagUtil";
+
+	private static final String _TAG_DO_START_METHOD = "doStartTag";
+
+	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
 	private String _className;
 	private String _style;

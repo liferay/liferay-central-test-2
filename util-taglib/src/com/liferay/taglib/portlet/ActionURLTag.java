@@ -173,7 +173,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	}
 
 	private static final String _TAG_CLASS =
-		"com.liferay.portlet.ActionURLTagUtil";
+		"com.liferay.portal.servlet.taglib.portlet.ActionURLTagUtil";
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
