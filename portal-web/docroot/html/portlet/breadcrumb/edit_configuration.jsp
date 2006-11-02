@@ -24,6 +24,13 @@
 
 <%@ include file="/html/portlet/breadcrumb/init.jsp" %>
 
+<liferay-portlet:preview
+	portletName="<%= portletResource %>"
+	queryString="struts_action=/breadcrumb/view"
+/>
+
+<br><div class="beta-separator"></div><br>
+
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 
