@@ -211,12 +211,37 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>preview</name>
+		<tagclass>com.liferay.taglib.portletext.PreviewTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>portletName</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>queryString</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>width</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>runtime</name>
 		<tagclass>com.liferay.taglib.portletext.RuntimeTag</tagclass>
 		<bodycontent>JSP</bodycontent>
 		<attribute>
 			<name>portletName</name>
 			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>queryString</name>
+			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 	</tag>

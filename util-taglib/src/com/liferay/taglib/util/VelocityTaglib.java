@@ -171,9 +171,15 @@ public class VelocityTaglib {
 	public String runtime(String portletName)
 		throws Exception {
 
+		return runtime(portletName, null);
+	}
+
+	public String runtime(String portletName, String queryString)
+		throws Exception {
+
 		_res.recycle();
 
-		RuntimeTag.doTag(portletName, null, _ctx, _req, _res);
+		RuntimeTag.doTag(portletName, queryString, null, _ctx, _req, _res);
 
 		return _res.getString();
 	}

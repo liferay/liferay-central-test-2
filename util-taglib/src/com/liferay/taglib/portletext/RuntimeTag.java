@@ -56,6 +56,14 @@ public class RuntimeTag extends TagSupport {
 			HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
+		doTag(portletName, null, pageContext, ctx, req, res);
+	}
+
+	public static void doTag(
+			String portletName, String queryString, PageContext pageContext,
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws Exception {
+
 		PortletRequest portletRequest =
 			(PortletRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
 
@@ -88,7 +96,7 @@ public class RuntimeTag extends TagSupport {
 
 			RuntimePortletUtil.processPortlet(
 				renderPortletSB, ctx, req, res, renderRequest, renderResponse,
-				rootPortletId, instanceId);
+				rootPortletId, instanceId, queryString);
 		}
 		finally {
 			req.removeAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
@@ -122,7 +130,7 @@ public class RuntimeTag extends TagSupport {
 			HttpServletResponse res =
 				(HttpServletResponse)pageContext.getResponse();
 
-			doTag(_portletName, pageContext, ctx, req, res);
+			doTag(_portletName, _queryString, pageContext, ctx, req, res);
 
 			return EVAL_PAGE;
 		}
@@ -137,8 +145,13 @@ public class RuntimeTag extends TagSupport {
 		_portletName = portletName;
 	}
 
+	public void setQueryString(String queryString) {
+		_queryString = queryString;
+	}
+
 	private static Log _log = LogFactory.getLog(RuntimeTag.class);
 
 	private String _portletName;
+	private String _queryString;
 
 }
