@@ -68,6 +68,7 @@ public class PortletLogic extends RuntimeLogic {
 
 		String portletId = (String)attributes.get("name");
 		String instanceId = (String)attributes.get("instance");
+		String queryString = (String)attributes.get("queryString");
 
 		if (portletId == null) {
 			portletId = _portletId;
@@ -76,7 +77,7 @@ public class PortletLogic extends RuntimeLogic {
 
 		RuntimePortletUtil.processPortlet(
 			sb, _ctx, _req, _res, _renderRequest, _renderResponse, portletId,
-			instanceId);
+			instanceId, queryString);
 	}
 
 	private ServletContext _ctx;

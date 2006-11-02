@@ -986,28 +986,32 @@ public class PortalUtil {
 
 	public static void renderPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet)
-		throws IOException, ServletException {
-
-		renderPortlet(sb, ctx, req, res, portlet, null, null, null);
-	}
-
-	public static void renderPortlet(
-			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String columnId,
-			Integer columnPos, Integer columnCount)
+			HttpServletResponse res, Portlet portlet, String queryString)
 		throws IOException, ServletException {
 
 		renderPortlet(
-			sb, ctx, req, res, portlet, columnId, columnPos, columnCount, null);
+			sb, ctx, req, res, portlet, queryString, null, null, null);
 	}
 
 	public static void renderPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res, Portlet portlet, String columnId,
-			Integer columnPos, Integer columnCount, String path)
+			HttpServletResponse res, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount)
 		throws IOException, ServletException {
 
+		renderPortlet(
+			sb, ctx, req, res, portlet, queryString, columnId, columnPos,
+			columnCount, null);
+	}
+
+	public static void renderPortlet(
+			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res, Portlet portlet, String queryString,
+			String columnId, Integer columnPos, Integer columnCount,
+			String path)
+		throws IOException, ServletException {
+
+		queryString = GetterUtil.getString(queryString);
 		columnId = GetterUtil.getString(columnId);
 
 		if (columnPos == null) {
@@ -1019,6 +1023,7 @@ public class PortalUtil {
 		}
 
 		req.setAttribute(WebKeys.RENDER_PORTLET, portlet);
+		req.setAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING, queryString);
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID, columnId);
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS, columnPos);
 		req.setAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT, columnCount);

@@ -67,32 +67,34 @@ public class RuntimePortletUtil {
 	public static void processPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
-			RenderResponse renderResponse, String portletId, String instanceId)
+			RenderResponse renderResponse, String portletId, String instanceId,
+			String queryString)
 		throws Exception {
 
 		processPortlet(
 			sb, ctx, req, res, renderRequest, renderResponse, portletId,
-			instanceId, null, null, null);
+			instanceId, queryString, null, null, null);
 	}
 
 	public static void processPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
-			String columnId, Integer columnPos, Integer columnCount)
+			String queryString, String columnId, Integer columnPos,
+			Integer columnCount)
 		throws Exception {
 
 		processPortlet(
 			sb, ctx, req, res, renderRequest, renderResponse, portletId,
-			instanceId, columnId, columnPos, columnCount, null);
+			instanceId, queryString, columnId, columnPos, columnCount, null);
 	}
 
 	public static void processPortlet(
 			StringBuffer sb, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res, RenderRequest renderRequest,
 			RenderResponse renderResponse, String portletId, String instanceId,
-			String columnId, Integer columnPos, Integer columnCount,
-			String path)
+			String queryString, String columnId, Integer columnPos,
+			Integer columnCount, String path)
 		throws Exception {
 
 		ThemeDisplay themeDisplay =
@@ -141,8 +143,8 @@ public class RuntimePortletUtil {
 
 		try {
 			PortalUtil.renderPortlet(
-				sb, ctx, req, res, portlet, columnId, columnPos, columnCount,
-				path);
+				sb, ctx, req, res, portlet, queryString, columnId, columnPos,
+				columnCount, path);
 		}
 		finally {
 			portletDisplay.copyFrom(portletDisplayClone);
@@ -222,15 +224,16 @@ public class RuntimePortletUtil {
 
 			String rootPortletId = (String)value[0];
 			String instanceId = (String)value[1];
-			String columnId = (String)value[2];
-			Integer columnPos = (Integer)value[3];
-			Integer columnCount = (Integer)value[4];
+			String queryString = (String)value[2];
+			String columnId = (String)value[3];
+			Integer columnPos = (Integer)value[4];
+			Integer columnCount = (Integer)value[5];
 
 			StringBuffer sb = new StringBuffer();
 
 			RuntimePortletUtil.processPortlet(
 				sb, ctx, req, res, null, null, rootPortletId, instanceId,
-				columnId, columnPos, columnCount);
+				queryString, columnId, columnPos, columnCount);
 
 			output = StringUtil.replace(
 				output, "[$TEMPLATE_PORTLET_" + portlet.getPortletId() + "$]",

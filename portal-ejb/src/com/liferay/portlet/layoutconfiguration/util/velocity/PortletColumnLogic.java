@@ -90,6 +90,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 
 			String rootPortletId = portlet.getRootPortletId();
 			String instanceId = portlet.getInstanceId();
+			String queryString = null;
 			Integer columnPos = new Integer(i);
 			Integer columnCount = new Integer(portlets.size());
 			String path = null;
@@ -101,15 +102,15 @@ public class PortletColumnLogic extends RuntimeLogic {
 					_portletsMap.put(
 						portlet,
 						new Object[] {
-							rootPortletId, instanceId, columnId, columnPos,
-							columnCount
+							rootPortletId, instanceId, queryString, columnId,
+							columnPos, columnCount
 						});
 				}
 			}
 
 			RuntimePortletUtil.processPortlet(
 				sb, _ctx, _req, _res, null, null, rootPortletId, instanceId,
-				columnId, columnPos, columnCount, path);
+				queryString, columnId, columnPos, columnCount, path);
 		}
 
 		sb.append("</div>");
