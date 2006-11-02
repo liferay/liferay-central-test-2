@@ -863,6 +863,7 @@ enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
+enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server=Incorpore o algoritmo do encryption usado para as senhas armazenadas no usuário de LDAP.
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=Incorpore o URL amigável que será usado  por páginas públicas e confidenciais.
 enter-the-name,-image,-and-priority-level-in-descending-order=Incorpore o nome, a imagem, e o nível da prioridade a ordem descendente. As linhas com uma prioridade mais elevada são indicadas antes das linhas com uma prioridade mais baixa. O nome é o nome da exposição da prioridade. A imagem é a imagem de exposição da prioridade e pode ser um URL completo ou um trajeto relativo ao tema.
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=Inscreva o público e o anfitrião virtual confidencial que traçarão ao público e ao URL amigável confidencial.

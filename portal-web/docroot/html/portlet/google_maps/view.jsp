@@ -23,3 +23,5 @@
 %>
 
 <%@ include file="/html/portlet/google_maps/init.jsp" %>
+
+HELLO

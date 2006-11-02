@@ -216,6 +216,8 @@ public class EditUsersAction extends PortletAction {
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
 		String searchFilter = ParamUtil.getString(req, "searchFilter");
+		String passwordEncryptionAlgorithm = ParamUtil.getString(
+			req, "passwordEncryptionAlgorithm");
 		String userMappings = ParamUtil.getString(req, "userMappings");
 
 		try {
@@ -256,6 +258,9 @@ public class EditUsersAction extends PortletAction {
 		prefs.setValue(
 			PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS, credentials);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER, searchFilter);
+		prefs.setValue(
+			PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM,
+			passwordEncryptionAlgorithm);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS, userMappings);
 
 		prefs.store();

@@ -107,6 +107,31 @@
 
 				<br><br>
 
+				<%= LanguageUtil.get(pageContext, "enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server") %>
+
+				<br><br>
+
+				<select name="<portlet:namespace />passwordEncryptionAlgorithm">
+					<option value=""></option>
+
+					<%
+					String passwordEncryptionAlgorithm = PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+
+					String[] algorithmTypes = PropsUtil.getArray(PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM_TYPES);
+
+					for (int i = 0; i < algorithmTypes.length; i++) {
+					%>
+
+						<option <%= passwordEncryptionAlgorithm.equals(algorithmTypes[i]) ? "selected" : "" %> value="<%= algorithmTypes[i] %>"><%= algorithmTypes[i] %></option>
+
+					<%
+					}
+					%>
+
+				</select>
+
+				<br><br>
+
 				<%= LanguageUtil.get(pageContext, "if-the-user-is-valid-and-the-user-exists-in-the-ldap-server-but-not-in-liferay") %>
 
 				<br><br>

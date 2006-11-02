@@ -861,6 +861,7 @@ enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=Enter the default community names <b>per line</b> that are associated with newly created users.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=Enter the default role names <b>per line</b> that are associated with newly created users.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
+enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server=LDAP サーバーで貯えられるパスワードに使用する暗号化のアルゴリズムを入れなさい。
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=公共及び私用ページによって使用される友好的なurl を書き入れなさい。
 enter-the-name,-image,-and-priority-level-in-descending-order=降順で名前、イメージ、および優先レベルを入れなさい。重要性の糸は低い優先順位の糸の前に表示される。名前は優先順位の表示名前である。イメージは優先順位の表示イメージ、主題に関連して完全なURL または道のどれである場合もある。
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=公衆および私用友好的なURL に地図を描く私用事実上のホストおよび公衆を参加させなさい。

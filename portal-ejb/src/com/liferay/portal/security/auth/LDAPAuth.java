@@ -29,6 +29,7 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
+import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LDAPUtil;
 import com.liferay.util.PropertiesUtil;
@@ -284,11 +285,22 @@ public class LDAPAuth implements Authenticator {
 				String ldapPassword =
 					new String((byte[])userPassword.get());
 
-				if (!ldapPassword.equals(password)) {
+				String encryptedPassword = password;
+
+				String algorithm = PrefsPropsUtil.getString(
+					PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+
+				if (Validator.isNotNull(algorithm)) {
+					encryptedPassword =
+						"{" + algorithm + "}" +
+							Encryptor.digest(algorithm, password);
+				}
+
+				if (!ldapPassword.equals(encryptedPassword)) {
 					_log.error(
 						"LDAP password " + ldapPassword +
-							" does not match with given password " + password +
-								" for user id " + userId);
+							" does not match with given password " +
+								encryptedPassword + " for user id " + userId);
 
 					return FAILURE;
 				}

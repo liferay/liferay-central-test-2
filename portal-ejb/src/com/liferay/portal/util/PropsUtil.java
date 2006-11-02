@@ -231,6 +231,10 @@ public class PropsUtil {
 
 	public static final String AUTH_IMPL_LDAP_SEARCH_FILTER = "auth.impl.ldap.search.filter";
 
+	public static final String AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM = "auth.impl.ldap.password.encryption.algorithm";
+
+	public static final String AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM_TYPES = "auth.impl.ldap.password.encryption.algorithm.types";
+
 	public static final String AUTH_IMPL_LDAP_USER_MAPPINGS = "auth.impl.ldap.user.mappings";
 
 	public static final String AUTH_FAILURE = "auth.failure";

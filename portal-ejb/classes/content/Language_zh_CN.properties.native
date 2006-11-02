@@ -863,6 +863,7 @@ enter-rank-and-minimum-post-pairs-per-line=Enter rank and minimum post pairs <b>
 enter-the-default-community-names-per-line-that-are-associated-with-newly-created-users=输入缺省的和新建用户关联的<b>每行</b>社区名.
 enter-the-default-role-names-per-line-that-are-associated-with-newly-created-users=输入缺省的和新建用户关联的<b>每行</b>角色名.
 enter-the-default-user-group-names-per-line-that-are-associated-with-newly-created-users=Enter the default user group names <b>per line</b> that are associated with newly created users.
+enter-the-encryption-algorithm-used-for-passwords-stored-in-the-ldap-server=进入编成密码算法被使用为密码被存放在LDAP 服务器。
 enter-the-friendly-url-that-will-be-used-by-both-public-and-private-pages=进入将由公共和私有页使用的友好的url 。
 enter-the-name,-image,-and-priority-level-in-descending-order=输入名字、图象, 和优先级别在递减次序。螺纹以重要性被显示在螺纹之前以低优先级。名字是优先权的显示名字。图象是优先权的复显图象, 可能是完全URL 或道路相对题材。
 enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url=进入将映射对公众和私有友好的URL 的公众和私有真正主人。
