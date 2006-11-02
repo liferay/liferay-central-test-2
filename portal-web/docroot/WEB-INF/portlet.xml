@@ -2048,15 +2048,19 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
-				<name>address</name>
+				<name>source-address</name>
 				<value>1600 Pennsylvania Ave., Washington D.C.</value>
 			</preference>
 			<preference>
-				<name>show-source</name>
+				<name>destination-address</name>
+				<value>48 N. Rotary Road, Arlington, Virginia</value>
+			</preference>
+			<preference>
+				<name>show-source-input</name>
 				<value>true</value>
 			</preference>
 			<preference>
-				<name>show-destination</name>
+				<name>show-destination-input</name>
 				<value>true</value>
 			</preference>
 		</portlet-preferences>

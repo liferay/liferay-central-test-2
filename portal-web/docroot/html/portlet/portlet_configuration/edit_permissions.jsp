@@ -25,6 +25,12 @@
 <%@ include file="/html/portlet/portlet_configuration/init.jsp" %>
 
 <%
+WindowState windowState = WindowState.MAXIMIZED;
+
+if (themeDisplay.isStatePopUp()) {
+	windowState = LiferayWindowState.POP_UP;
+}
+
 String tabs2 = ParamUtil.getString(request, "tabs2", "users");
 String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
@@ -74,7 +80,7 @@ catch (NoSuchResourceException nsre) {
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+portletURL.setWindowState(windowState);
 
 portletURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 portletURL.setParameter("tabs2", tabs2);
@@ -87,11 +93,21 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 %>
 
 <script type="text/javascript">
+	<c:if test="<%= themeDisplay.isStatePopUp() %>">
+		function <portlet:namespace />resizeParent() {
+			var box = document.getElementById("p_p_id_<%= portletDisplay.getId() %>_");
+			parent.Alerts.resizeIframe({height: box.scrollHeight});
+		}
+
+		Event.addHandler(window, "onload", <portlet:namespace />resizeParent);
+		Event.addHandler(document, "onclick", <portlet:namespace />resizeParent);
+	</c:if>
+
 	function <portlet:namespace />saveGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= portletURL.toString() %>";
 		document.<portlet:namespace />fm.<portlet:namespace />groupIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />saveOrganizationPermissions(organizationIdsPos, organizationIdsPosValue) {
@@ -114,7 +130,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = organizationIds;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIdsPosValue.value = organizationIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />saveUserGroupPermissions(userGroupIdsPos, userGroupIdsPosValue) {
@@ -137,7 +153,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroupIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdsPosValue.value = userGroupIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />saveUserPermissions(userIdsPos, userIdsPosValue) {
@@ -160,7 +176,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateOrganizationPermissions() {

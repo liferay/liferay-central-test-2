@@ -25,6 +25,8 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
+
 String portletResource = (String)request.getAttribute("liferay-portlet:preview:portletName");
 String queryString = (String)request.getAttribute("liferay-portlet:preview:queryString");
 String width = (String)request.getAttribute("liferay-portlet:preview:width");
@@ -36,7 +38,7 @@ if (Validator.isNull(width)) {
 }
 %>
 
-<div style="height: 150px; margin: auto; overflow: auto; width: 95%">
+<div id="<%= randomNamespace %>" style="height: 150px; margin: auto; overflow: auto; width: 95%">
 	<div style="margin: 3px; width: <%= Validator.isNotNull(previewWidth) ? ((GetterUtil.getInteger(previewWidth) + 20) + "px") : "100%" %>;">
 		<liferay-portlet:runtime
 			portletName="<%= portletResource %>"
@@ -44,3 +46,7 @@ if (Validator.isNull(width)) {
 		/>
 	</div>
 </div>
+
+<script type="text/javascript">
+	Element.disable("<%= randomNamespace %>");
+</script>

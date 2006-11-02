@@ -202,7 +202,7 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 		var list = portlet.getElementsByTagName("a");
 		var anchors = list;
-		
+
 		for (var i = 0; i < list.length; i++) {
 			list[i].href = "javascript: void(0);";
 			list[i].style.cursor = "default";

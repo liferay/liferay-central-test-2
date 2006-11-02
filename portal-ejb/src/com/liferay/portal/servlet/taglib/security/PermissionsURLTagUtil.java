@@ -27,6 +27,7 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.PortletURLUtil;
 import com.liferay.util.Validator;
@@ -65,15 +66,14 @@ public class PermissionsURLTagUtil extends TagSupport {
 
 			Layout layout = themeDisplay.getLayout();
 
+			RenderRequest renderRequest =
+				(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+
+			RenderResponse renderResponse =
+				(RenderResponse)req.getAttribute(
+					WebKeys.JAVAX_PORTLET_RESPONSE);
+
 			if (Validator.isNull(redirect)) {
-				RenderRequest renderRequest =
-					(RenderRequest)req.getAttribute(
-						WebKeys.JAVAX_PORTLET_REQUEST);
-
-				RenderResponse renderResponse =
-					(RenderResponse)req.getAttribute(
-						WebKeys.JAVAX_PORTLET_RESPONSE);
-
 				redirect = PortletURLUtil.getCurrent(
 					renderRequest, renderResponse).toString();
 			}
@@ -82,7 +82,12 @@ public class PermissionsURLTagUtil extends TagSupport {
 				req, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
 				false);
 
-			portletURL.setWindowState(WindowState.MAXIMIZED);
+			if (themeDisplay.isStatePopUp()) {
+				portletURL.setWindowState(LiferayWindowState.POP_UP);
+			}
+			else {
+				portletURL.setWindowState(WindowState.MAXIMIZED);
+			}
 
 			portletURL.setParameter(
 				"struts_action", "/portlet_configuration/edit_permissions");
