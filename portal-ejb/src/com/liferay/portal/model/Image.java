@@ -34,6 +34,7 @@ import java.io.IOException;
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
+import javax.imageio.ImageReader;
 import javax.imageio.stream.MemoryCacheImageInputStream;
 
 import org.apache.commons.logging.Log;
@@ -89,18 +90,20 @@ public class Image extends ImageModel {
 
 				_type = null;
 
-				if (itr.hasNext()) {
-					Object obj = itr.next();
+				while (itr.hasNext()) {
+					ImageReader reader = (ImageReader)itr.next();
 
-					if (obj instanceof GIFImageReader) {
+					if (reader instanceof GIFImageReader) {
 						_type = "gif";
 					}
-					else if (obj instanceof JPEGImageReader) {
+					else if (reader instanceof JPEGImageReader) {
 						_type = "jpeg";
 					}
-					else if (obj instanceof PNGImageReader) {
+					else if (reader instanceof PNGImageReader) {
 						_type = "png";
 					}
+
+					reader.dispose();
 				}
 			}
 			finally {
