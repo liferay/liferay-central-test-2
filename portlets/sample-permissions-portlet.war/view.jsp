@@ -22,19 +22,73 @@
  */
 %>
 
+<%@ taglib uri="http://java.sun.com/jstl/core_rt" prefix="c" %>
+
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
+
+<%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
 
 <%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
 
 <portlet:defineObjects />
 
-HELLO
-
 <%
-PermissionChecker permissionChecker = (PermissionChecker)request.getAttribute(PermissionChecker.REQUEST_ATTRIBUTE_NAME);
+PermissionChecker permissionChecker = (PermissionChecker)request.getAttribute(PermissionChecker.INSTANCE);
+
+String groupId = (String)request.getAttribute(PermissionChecker.GROUP_ID);
+String name = portletConfig.getPortletName();
+String primKey = (String)request.getAttribute(PermissionChecker.PORTLET_PRIMARY_KEY);
+String actionId = "VIEW";
 %>
 
-	<!--public boolean hasPermission(
-		String groupId, String name, String primKey, String actionId);-->
+Do you have the VIEW permission for this portlet?
 
-<%= permissionChecker.hasPermission("groupId", "name", "primKey", "actionId") %>
+<b>
+
+<c:choose>
+	<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId) %>">
+		Yes
+	</c:when>
+	<c:otherwise>
+		No
+	</c:otherwise>
+</c:choose>
+
+</b>
+
+<br><br>
+
+<%
+name = "com.sample.permissions.model.Something";
+primKey = "1";
+actionId = "DELETE";
+%>
+
+Does you have the DELETE permission for the model <%= name %> with the primary key <%= primKey %>?
+
+<b>
+
+<c:choose>
+	<c:when test="<%= permissionChecker.hasPermission(groupId, name, primKey, actionId) %>">
+		Yes
+	</c:when>
+	<c:otherwise>
+		No
+	</c:otherwise>
+</c:choose>
+
+</b>
+
+<br><br>
+
+<portlet:renderURL var="redirectURL" />
+
+<liferay-security:permissionsURL
+	redirect="<%= redirectURL %>"
+	modelResource="<%= name %>"
+	modelResourceDescription='<%= "Hello World" %>'
+	resourcePrimKey="<%= primKey %>"
+	var="permissionsURL"
+/>
+
+Click <a href="<%= permissionsURL %>">here</a> to edit the permissions for the above model.
