@@ -269,9 +269,14 @@ var Element = {
 			if (nodeName == "a") {
 				item.href = "javascript: void(0)";
 			}
-			if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
+			else if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
 				item.disabled = "true";
 			}
+			else if (nodeName == "form") {
+				item.action = "";
+				item.onsubmit = function() { return false; };
+			}
+			
 			item.style.cursor = "default";
 		}
 	},
