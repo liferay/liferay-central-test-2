@@ -248,7 +248,34 @@ var Element = {
 			element.className = classArray.join(" ");
 		}
 	},
-	
+
+	disable: function(element) {
+		element = $(element);
+		var items = element.getElementsByTagName("*");
+		
+		for (var i = 0; i < items.length; i++) {
+			var item = items[i];
+			var nodeName = item.nodeName.toLowerCase();
+
+			item.onclick = function() {};
+			item.onmouseover = function() {};
+			item.onmouseout = function() {};
+			
+			if (is_ie) {
+				item.onmouseenter = function() {};
+				item.onmouseleave = function() {};
+			}
+			
+			if (nodeName == "a") {
+				item.href = "javascript: void(0)";
+			}
+			if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
+				item.disabled = "true";
+			}
+			item.style.cursor = "default";
+		}
+	},
+
 	removeClassName: function(element, className) {
 		if (className && this.hasClassName(element, className)) {
 			var classArray = element.className.split(new RegExp("(^|\\s)" + className + "(\\s|$)"));
@@ -264,6 +291,14 @@ var Element = {
 		}
 	
 		return rt;
+	},
+	
+	remove: function(element) {
+		element = $(element);
+		if (element) {
+			element.parentNode.removeChild(element);
+		}
+		return(element);
 	}
 }
 
@@ -967,5 +1002,6 @@ String.prototype.trim = trimString;
 
 var ZINDEX = {
 	ALERT: 100,
-	DRAGITEM: 10
+	DRAG_ITEM: 10,
+	DRAG_ARROW: 9
 }

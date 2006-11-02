@@ -197,11 +197,12 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		var self = this;
 		var defaultPreview = document.getElementById("default-preview-portlet");
 
+		Element.disable(portlet);
 		this.hoverStyles = new Array();
 
 		var list = portlet.getElementsByTagName("a");
 		var anchors = list;
-
+		
 		for (var i = 0; i < list.length; i++) {
 			list[i].href = "javascript: void(0);";
 			list[i].style.cursor = "default";
@@ -242,19 +243,6 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			};
 		}
 
-		list = portlet.getElementsByTagName("input");
-
-		for (var i = 0; i < list.length; i++) {
-			list[i].disabled = "true";
-			list[i].style.cursor = "default";
-		}
-
-		list = portlet.getElementsByTagName("script");
-
-		for (var i = 0; i < list.length; i++) {
-			list[i].disabled = "true";
-		}
-
 		list = portlet.getElementsByTagName("*");
 
 		// Initialize to empty preview div
@@ -270,7 +258,6 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 			if (Element.hasClassName(item, "portlet-borderless-container")) {
 				this.container = item.style;
 				this.content = item.style;
-
 				break;
 			}
 
