@@ -514,6 +514,20 @@
 		<put name="portlet_content" value="/portlet/google_gadget/view.jsp" />
 	</definition>
 
+	<!-- Google Maps -->
+
+	<definition name="portlet.google_maps" extends="portlet">
+		<put name="portlet_decorate" value="true" />
+	</definition>
+
+	<definition name="portlet.google_maps.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/google_maps/edit_configuration.jsp" />
+	</definition>
+
+	<definition name="portlet.google_maps.view" extends="portlet.google_maps">
+		<put name="portlet_content" value="/portlet/google_maps/view.jsp" />
+	</definition>
+
 	<!-- IFrame -->
 
 	<definition name="portlet.iframe" extends="portlet" />

@@ -1,4 +1,3 @@
-<%@ page import="java.net.URLEncoder" %>
 <%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.

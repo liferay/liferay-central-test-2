@@ -1166,9 +1166,6 @@
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1280,9 +1277,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1302,9 +1296,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1326,9 +1317,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1349,9 +1337,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1371,9 +1356,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1414,9 +1396,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1677,9 +1656,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1700,9 +1676,6 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1722,9 +1695,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1935,9 +1905,6 @@
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>
-			<role-name>guest</role-name>
-		</security-role-ref>
-		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -2057,6 +2024,40 @@
 			<preference>
 				<name>height</name>
 				<value>290</value>
+			</preference>
+		</portlet-preferences>
+		<security-role-ref>
+			<role-name>power-user</role-name>
+		</security-role-ref>
+		<security-role-ref>
+			<role-name>user</role-name>
+		</security-role-ref>
+	</portlet>
+	<portlet>
+		<portlet-name>96</portlet-name>
+		<display-name>Google Maps</display-name>
+		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
+		<init-param>
+			<name>view-action</name>
+			<value>/google_maps/view</value>
+		</init-param>
+		<expiration-cache>0</expiration-cache>
+		<supports>
+			<mime-type>text/html</mime-type>
+		</supports>
+		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<portlet-preferences>
+			<preference>
+				<name>address</name>
+				<value>1600 Pennsylvania Ave., Washington D.C.</value>
+			</preference>
+			<preference>
+				<name>show-source</name>
+				<value>true</value>
+			</preference>
+			<preference>
+				<name>show-destination</name>
+				<value>true</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>

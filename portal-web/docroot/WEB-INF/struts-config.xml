@@ -594,6 +594,18 @@
 
 		<action path="/google_gadget/view" forward="portlet.google_gadget.view" />
 
+		<!-- Google Maps -->
+
+		<action path="/google_maps/edit_configuration" type="com.liferay.portlet.googlemaps.action.EditConfigurationAction">
+			<forward name="portlet.google_maps.edit_configuration" path="portlet.google_maps.edit_configuration" />
+		</action>
+		
+		<action path="/google_maps/save_source_address" type="com.liferay.portlet.googlemaps.action.SaveSourceAddressAction" />
+
+		<action path="/google_maps/save_dest_address" type="com.liferay.portlet.googlemaps.action.SaveDestAddressAction" />
+
+		<action path="/google_maps/view" forward="portlet.google_maps.view"  /> 
+
 		<!-- IFrame -->
 
 		<action path="/iframe/edit_configuration" type="com.liferay.portlet.iframe.action.EditConfigurationAction">

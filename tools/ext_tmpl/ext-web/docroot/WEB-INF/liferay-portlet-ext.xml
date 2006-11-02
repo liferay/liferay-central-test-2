@@ -433,6 +433,11 @@
 		<struts-path>google_gadget</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>96</portlet-name>
+		<struts-path>google_maps</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>
