@@ -26,6 +26,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.spring.LayoutServiceUtil;
 import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
@@ -123,7 +124,8 @@ public class UpdateLayoutAction extends Action {
 				ResourceLocalServiceUtil.deleteResource(
 					layout.getCompanyId(), rootPortletId, Resource.TYPE_CLASS,
 					Resource.SCOPE_INDIVIDUAL,
-					layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId);
+					PortletPermission.getPrimaryKey(
+						layout.getPlid(), portletId));
 			}
 		}
 

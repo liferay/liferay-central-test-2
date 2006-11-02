@@ -237,6 +237,10 @@ public class PortletURLImpl implements PortletURL {
 		_toString = null;
 	}
 
+	public Map getParameterMap() {
+		return _params;
+	}
+
 	public void setSecure(boolean secure) throws PortletSecurityException {
 		_secure = secure;
 
@@ -324,10 +328,6 @@ public class PortletURLImpl implements PortletURL {
 		else {
 			return null;
 		}
-	}
-
-	protected Map getParams() {
-		return _params;
 	}
 
 	protected Portlet getPortlet() {

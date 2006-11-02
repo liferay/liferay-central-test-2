@@ -44,6 +44,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -773,8 +774,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		try {
 			String name = Portlet.getRootPortletId(portletId);
-			String primKey =
-				layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId;
+			String primKey = PortletPermission.getPrimaryKey(
+				layout.getPlid(), portletId);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), name, Resource.TYPE_CLASS,
@@ -898,8 +899,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		Element el = parentEl.element(elName);
 
 		String name = Portlet.getRootPortletId(portletId);
-		String primKey =
-			layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletId;
+		String primKey = PortletPermission.getPrimaryKey(
+			layout.getPlid(), portletId);
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			layout.getCompanyId(), name);

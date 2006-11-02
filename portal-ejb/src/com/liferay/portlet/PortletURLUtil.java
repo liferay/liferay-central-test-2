@@ -70,7 +70,7 @@ public class PortletURLUtil {
 		newURL.setWindowState(portletURLImpl.getWindowState());
 		newURL.setPortletMode(portletURLImpl.getPortletMode());
 
-		newURL.setParameters(portletURLImpl.getParams());
+		newURL.setParameters(portletURLImpl.getParameterMap());
 
 		return newURL;
 	}

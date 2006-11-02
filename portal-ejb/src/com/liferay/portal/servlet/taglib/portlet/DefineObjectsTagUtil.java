@@ -20,9 +20,10 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigImpl;
 
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;

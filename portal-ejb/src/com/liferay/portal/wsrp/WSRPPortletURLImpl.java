@@ -125,7 +125,7 @@ public class WSRPPortletURLImpl extends PortletURLImpl {
 	}
 
 	private String _getEncodedParameters() {
-		Map renderParams = getParams();
+		Map renderParams = getParameterMap();
 		Map params = new HashMap();
 
 		String[] plid = {getPlid()};

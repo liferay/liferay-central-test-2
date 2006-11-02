@@ -172,8 +172,7 @@ public class ServicePreAction extends Action {
 
 			PermissionThreadLocal.setPermissionChecker(permissionChecker);
 
-			req.setAttribute(
-				PermissionChecker.REQUEST_ATTRIBUTE_NAME, permissionChecker);
+			req.setAttribute(PermissionChecker.INSTANCE, permissionChecker);
 
 			// Locale
 
@@ -322,6 +321,8 @@ public class ServicePreAction extends Action {
 			}
 
 			String portletGroupId = PortalUtil.getPortletGroupId(plid);
+
+			req.setAttribute(PermissionChecker.GROUP_ID, portletGroupId);
 
 			// Theme and color scheme
 

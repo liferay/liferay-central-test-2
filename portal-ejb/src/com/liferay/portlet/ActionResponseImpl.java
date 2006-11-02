@@ -318,7 +318,7 @@ public class ActionResponseImpl implements ActionResponse {
 		}
 	}
 
-	protected Map getParams() {
+	protected Map getParameterMap() {
 		return _params;
 	}
 

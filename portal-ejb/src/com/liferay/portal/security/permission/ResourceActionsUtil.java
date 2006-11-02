@@ -35,11 +35,11 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
+import com.liferay.util.UniqueList;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -114,7 +114,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static List getActions(List permissions) {
-		List actions = new ArrayList();
+		List actions = new UniqueList();
 
 		Iterator itr = permissions.iterator();
 
@@ -128,7 +128,7 @@ public class ResourceActionsUtil {
 	}
 
 	public static List getActionsNames(PageContext pageContext, List actions) {
-		List list = new ArrayList();
+		List list = new UniqueList();
 
 		Iterator itr = actions.iterator();
 
@@ -338,7 +338,7 @@ public class ResourceActionsUtil {
 		List actions = (List)map.get(name);
 
 		if (actions == null) {
-			actions = new ArrayList();
+			actions = new UniqueList();
 
 			map.put(name, actions);
 		}
@@ -368,7 +368,7 @@ public class ResourceActionsUtil {
 		Set resources = (Set)_portletModelResources.get(portletName);
 
 		if (resources == null) {
-			return new ArrayList();
+			return new UniqueList();
 		}
 		else {
 			return Collections.list(Collections.enumeration(resources));

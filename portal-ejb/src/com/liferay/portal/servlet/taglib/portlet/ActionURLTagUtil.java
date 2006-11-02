@@ -20,9 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.MapUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -114,7 +117,7 @@ public class ActionURLTagUtil {
 			}
 
 			if (params != null) {
-				MapUtil.merge(portletURL.getParams(), params);
+				MapUtil.merge(portletURL.getParameterMap(), params);
 
 				portletURL.setParameters(params);
 			}

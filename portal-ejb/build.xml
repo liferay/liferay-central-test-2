@@ -6,7 +6,10 @@
 	<property name="jar.file" value="${ant.project.name}" />
 	<property name="service.file" value="service.xml" />
 
-	<target name="compile" depends="compile-common,build-common-java.compile">
+	<target name="compile">
+        <antcall target="compile-common" />
+        <antcall target="build-common-java.compile" />
+
 		<copy todir="classes/com/liferay/portal/definitions">
 			<fileset dir="${project.dir}/definitions" />
 		</copy>

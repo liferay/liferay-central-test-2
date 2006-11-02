@@ -81,7 +81,7 @@ public class PortletPermission {
 
 			groupId = Layout.getGroupId(ownerId);
 			name = Portlet.getRootPortletId(portletId);
-			primKey = plid + Portlet.LAYOUT_SEPARATOR + portletId;
+			primKey = getPrimaryKey(plid, portletId);
 
 			if (LayoutPermission.contains(
 					permissionChecker, layoutId, ownerId, ActionKeys.UPDATE)) {
@@ -96,6 +96,10 @@ public class PortletPermission {
 
 		return permissionChecker.hasPermission(
 			groupId, name, primKey, actionId);
+	}
+
+	public static String getPrimaryKey(String plid, String portletId) {
+		return plid + Portlet.LAYOUT_SEPARATOR + portletId;
 	}
 
 }
