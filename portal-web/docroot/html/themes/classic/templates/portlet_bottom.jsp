@@ -36,7 +36,7 @@
 </tr>
 <tr>
 	<td colspan="3">
-		<table border="0" cellspacing="0" cellpadding="0">
+		<table border="0" cellspacing="0" cellpadding="0" width="100%">
 		<tr>
 			<td class="portlet-shadow-bl"><div></div></td>
 			<td class="portlet-shadow-bc" width="100%"></td>
