@@ -246,29 +246,11 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "user-id") %>
+				<%= LanguageUtil.get(pageContext, "email-address") %>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<c:choose>
-					<c:when test="<%= user2 == null %>">
-						<c:choose>
-							<c:when test="<%= company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
-								<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
-							</c:when>
-							<c:otherwise>
-								<%= LanguageUtil.get(pageContext, "not-available") %>
-							</c:otherwise>
-						</c:choose>
-					</c:when>
-					<c:otherwise>
-						<%= user2.getUserId() %>
-					</c:otherwise>
-				</c:choose>
-
-				<c:if test="<%= !company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
-					<input name="<portlet:namespace />autoUserId" type="hidden" value="1">
-				</c:if>
+				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
 			</td>
 		</tr>
 		</table>
@@ -278,11 +260,22 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		<table border="0" cellpadding="0" cellspacing="0">
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "email-address") %>
+				<%= LanguageUtil.get(pageContext, "user-id") %>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="emailAddress" />
+				<c:choose>
+					<c:when test="<%= user2 == null %>">
+						<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="userId" />
+
+						<liferay-ui:input-checkbox param="autoUserId" defaultValue="<%= true %>" />
+
+						<%= LanguageUtil.get(pageContext, "autogenerate-id") %>
+					</c:when>
+					<c:otherwise>
+						<%= user2.getUserId() %>
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 
