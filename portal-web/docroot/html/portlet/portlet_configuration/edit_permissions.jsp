@@ -65,6 +65,17 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 
+String ownerId = layout.getOwnerId();
+String groupId = layout.getGroupId();
+
+if (modelResource.equals(Layout.class.getName())) {
+	int x = resourcePrimKey.indexOf("ownerId=");
+	int y = resourcePrimKey.indexOf("}", x);
+
+	ownerId = resourcePrimKey.substring(x + 8, y);
+	groupId = Layout.getGroupId(ownerId);
+}
+
 Resource resource = null;
 
 try {
@@ -73,7 +84,7 @@ try {
 catch (NoSuchResourceException nsre) {
 	boolean portletActions = Validator.isNull(modelResource);
 
-	ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), null, selResource, resourcePrimKey, portletActions, true, true);
+	ResourceLocalServiceUtil.addResources(company.getCompanyId(), groupId, null, selResource, resourcePrimKey, portletActions, true, true);
 
 	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
@@ -232,12 +243,6 @@ if (modelResource.equals(Organization.class.getName()) || modelResource.equals("
 	tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 }
 else if (modelResource.equals(Layout.class.getName())) {
-	int x = resourcePrimKey.indexOf("ownerId=");
-	int y = resourcePrimKey.indexOf("}", x);
-
-	String ownerId = resourcePrimKey.substring(x + 8, y);
-	String groupId = Layout.getGroupId(ownerId);
-
 	Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 	// User layouts should not have community assignments
@@ -479,7 +484,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				if (tabs3.equals("current")) {
 					organizationParams.put("permissionsResourceId", resource.getResourceId());
-					organizationParams.put("permissionsGroupId", layout.getGroupId());
+					organizationParams.put("permissionsGroupId", groupId);
 				}
 
 				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
@@ -538,7 +543,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
 					if (permissions.size() == 0) {
-						permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), layout.getGroupId(), resource.getResourceId());
+						permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
 						if (permissions.size() > 0) {
 							organizationIntersection = true;
@@ -583,7 +588,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
 
 				if (permissions.size() == 0) {
-					permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), layout.getGroupId(), resource.getResourceId());
+					permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
 
 					if (permissions.size() > 0) {
 						organizationIntersection = true;
@@ -839,7 +844,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		Group group = null;
 
 		if (tabs2.equals("community")) {
-			group = GroupLocalServiceUtil.getGroup(layout.getGroupId());
+			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 		else {
 			group = GroupLocalServiceUtil.getGroup(company.getCompanyId(), Group.GUEST);
@@ -962,11 +967,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), layout.getGroupId(), modelResource, resourcePrimKey, selectedActionId, searchTerms);
+		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms);
 
 		searchContainer.setTotal(total);
 
-		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), layout.getGroupId(), modelResource, resourcePrimKey, selectedActionId, searchTerms, searchContainer.getStart(), searchContainer.getEnd());
+		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>
