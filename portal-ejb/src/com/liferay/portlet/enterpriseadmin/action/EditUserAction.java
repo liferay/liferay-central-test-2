@@ -33,6 +33,7 @@ import com.liferay.portal.ReservedUserEmailAddressException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.UserIdException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -136,6 +137,7 @@ public class EditUserAction extends PortletAction {
 					 e instanceof RequiredUserException ||
 					 e instanceof ReservedUserEmailAddressException ||
 					 e instanceof UserEmailAddressException ||
+					 e instanceof UserIdException ||
 					 e instanceof UserPasswordException ||
 					 e instanceof UserSmsException) {
 
