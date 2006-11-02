@@ -263,10 +263,10 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		this.content = defaultPreview.style;
 		this.header = defaultPreview.style;
 		this.title = defaultPreview.style;
-		
+
 		for (var i = 0; i < list.length; i++) {
 			var item = list[i];
-			
+
 			if (Element.hasClassName(item, "portlet-borderless-container")) {
 				this.container = item.style;
 				this.content = item.style;
