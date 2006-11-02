@@ -48,14 +48,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class Image extends ImageModel {
 
+	public static final String TYPE_GIF = "gif";
+
+	public static final String TYPE_JPEG = "jpeg";
+
+	public static final String TYPE_PNG = "png";
+
+	public static final String TYPE_NOT_AVAILABLE = "na";
+
 	public Image() {
-	}
-
-	public void setText(String text) {
-		_textObj = null;
-		_type = null;
-
-		super.setText(text);
 	}
 
 	public byte[] getTextObj() {
@@ -68,75 +69,86 @@ public class Image extends ImageModel {
 
 	public void setTextObj(byte[] textObj) {
 		_textObj = textObj;
-		_type = null;
+
+		setTypeFromTextObj(textObj);
 
 		super.setText(Base64.objectToString(textObj));
 	}
 
-	public String getType() {
-		if (_textObj == null) {
-			getTextObj();
+	public void setTypeFromTextObj(byte[] textObj) {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Attempt to detect type for " + getImageId());
 		}
 
-		if ((_type == null) && (_textObj != null)) {
-			ByteArrayInputStream bais = null;
-			MemoryCacheImageInputStream mcis = null;
-
-			try {
-				bais = new ByteArrayInputStream(_textObj);
-				mcis = new MemoryCacheImageInputStream(bais);
-
-				Iterator itr = ImageIO.getImageReaders(mcis);
-
-				_type = null;
-
-				while (itr.hasNext()) {
-					ImageReader reader = (ImageReader)itr.next();
-
-					if (reader instanceof GIFImageReader) {
-						_type = "gif";
-					}
-					else if (reader instanceof JPEGImageReader) {
-						_type = "jpeg";
-					}
-					else if (reader instanceof PNGImageReader) {
-						_type = "png";
-					}
-
-					reader.dispose();
-				}
+		if (textObj == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Abort attempt to detect type because image is null");
 			}
-			finally {
-				if (bais != null) {
-					try {
-						bais.close();
-					}
-					catch (IOException ioe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(ioe);
-						}
-					}
+
+			return;
+		}
+
+		String type = TYPE_NOT_AVAILABLE;
+
+		ByteArrayInputStream bais = null;
+		MemoryCacheImageInputStream mcis = null;
+
+		try {
+			bais = new ByteArrayInputStream(textObj);
+			mcis = new MemoryCacheImageInputStream(bais);
+
+			Iterator itr = ImageIO.getImageReaders(mcis);
+
+			while (itr.hasNext()) {
+				ImageReader reader = (ImageReader)itr.next();
+
+				if (reader instanceof GIFImageReader) {
+					type = TYPE_GIF;
+				}
+				else if (reader instanceof JPEGImageReader) {
+					type = TYPE_JPEG;
+				}
+				else if (reader instanceof PNGImageReader) {
+					type = TYPE_PNG;
 				}
 
-				if (mcis != null) {
-					try {
-						mcis.close();
-					}
-					catch (IOException ioe) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(ioe);
-						}
+				reader.dispose();
+			}
+		}
+		finally {
+			if (bais != null) {
+				try {
+					bais.close();
+				}
+				catch (IOException ioe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioe);
 					}
 				}
 			}
+
+			if (mcis != null) {
+				try {
+					mcis.close();
+				}
+				catch (IOException ioe) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(ioe);
+					}
+				}
+			}
 		}
 
-		return _type;
+		if (_log.isDebugEnabled()) {
+			_log.debug("Detected type " + type);
+		}
+
+		super.setType(type);
 	}
 
 	private static Log _log = LogFactory.getLog(Image.class);
 
 	private byte[] _textObj;
-	private String _type;
 
 }

@@ -245,9 +245,11 @@ public class ImageServlet extends HttpServlet {
 		String imageId = getImageId(req);
 
 		if (Validator.isNull(imageId)) {
-			_log.warn(
-				"Image id should never be null or empty, path is " +
-					req.getPathInfo());
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Image id should never be null or empty, path is " +
+						req.getPathInfo());
+			}
 
 			return;
 		}
@@ -255,16 +257,20 @@ public class ImageServlet extends HttpServlet {
 		Image image = ImageLocalUtil.get(imageId);
 
 		if (image == null) {
-			_log.warn("Get a default image for " + imageId);
+			if (_log.isWarnEnabled()) {
+				_log.warn("Get a default image for " + imageId);
+			}
 
 			image = getDefaultImage(req, imageId);
 		}
 
 		if (image == null) {
-			_log.warn("No default image exists for " + imageId);
+			if (_log.isWarnEnabled()) {
+				_log.warn("No default image exists for " + imageId);
+			}
 		}
 		else {
-			if (Validator.isNotNull(image.getType())) {
+			if (!image.getType().equals(Image.TYPE_NOT_AVAILABLE)) {
 				res.setContentType("image/" + image.getType());
 			}
 
@@ -276,7 +282,9 @@ public class ImageServlet extends HttpServlet {
 				}
 			}
 			catch (Exception e) {
-				_log.warn(StackTraceUtil.getStackTrace(e));
+				if (_log.isWarnEnabled()) {
+					_log.warn(StackTraceUtil.getStackTrace(e));
+				}
 			}
 			finally {
 				out.flush();

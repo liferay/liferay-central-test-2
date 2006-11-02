@@ -48,6 +48,9 @@ public class ImageModel extends BaseModel {
 	public static boolean XSS_ALLOW_TEXT = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Image.text"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Image.type"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ImageModel"));
 
@@ -108,11 +111,28 @@ public class ImageModel extends BaseModel {
 		}
 	}
 
+	public String getType() {
+		return GetterUtil.getString(_type);
+	}
+
+	public void setType(String type) {
+		if (((type == null) && (_type != null)) ||
+				((type != null) && (_type == null)) ||
+				((type != null) && (_type != null) && !type.equals(_type))) {
+			if (!XSS_ALLOW_TYPE) {
+				type = XSSUtil.strip(type);
+			}
+
+			_type = type;
+		}
+	}
+
 	public Object clone() {
 		Image clone = new Image();
 		clone.setImageId(getImageId());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setText(getText());
+		clone.setType(getType());
 
 		return clone;
 	}
@@ -164,4 +184,5 @@ public class ImageModel extends BaseModel {
 	private String _imageId;
 	private Date _modifiedDate;
 	private String _text;
+	private String _type;
 }

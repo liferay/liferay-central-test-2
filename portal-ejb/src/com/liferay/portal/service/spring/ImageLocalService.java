@@ -41,6 +41,11 @@ public interface ImageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public java.util.List getImages() throws com.liferay.portal.SystemException;
+
+	public java.util.List getImages(int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List search(java.lang.String imageId)
 		throws com.liferay.portal.SystemException;
 

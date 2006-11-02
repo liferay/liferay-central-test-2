@@ -153,6 +153,7 @@
 		</id>
 		<property name="modifiedDate" />
 		<property name="text" column="text_" />
+		<property name="type" column="type_" />
 	</class>
 	<class name="com.liferay.portal.model.Layout" table="Layout">
 		<cache usage="read-write" />

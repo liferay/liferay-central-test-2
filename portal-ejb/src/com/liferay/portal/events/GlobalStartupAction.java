@@ -39,6 +39,7 @@ import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.InstancePool;
 
 import java.io.File;
 
@@ -125,6 +126,19 @@ public class GlobalStartupAction extends SimpleAction {
 
 			SMTPServerUtil.start();
 		}
+
+		// Other required events
+
+		runEvent(FixOracleAction.class.getName(), ids);
+		runEvent(FixImageAction.class.getName(), ids);
+	}
+
+	protected void runEvent(String className, String[] ids)
+		throws ActionException {
+
+		SimpleAction action = (SimpleAction)InstancePool.get(className);
+
+		action.run(ids);
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

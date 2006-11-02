@@ -52,6 +52,20 @@ public class ImageLocalServiceUtil {
 		return imageLocalService.getImage(imageId);
 	}
 
+	public static java.util.List getImages()
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getImages();
+	}
+
+	public static java.util.List getImages(int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.getImages(begin, end);
+	}
+
 	public static java.util.List search(java.lang.String imageId)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();

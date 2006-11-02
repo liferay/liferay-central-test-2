@@ -159,6 +159,7 @@
 		<field name="text" type="String">
 			<hint-collection name="CLOB" />
 		</field>
+		<field name="type" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Layout">
 		<field name="layoutId" type="String" />

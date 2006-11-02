@@ -96,6 +96,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.model.Image">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.model.ModelHintsUtil">
 		<priority value="ERROR" />
 	</category>

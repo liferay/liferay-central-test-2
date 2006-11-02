@@ -65,6 +65,15 @@ public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean 
 		return getService().getImage(imageId);
 	}
 
+	public java.util.List getImages() throws com.liferay.portal.SystemException {
+		return getService().getImages();
+	}
+
+	public java.util.List getImages(int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getService().getImages(begin, end);
+	}
+
 	public java.util.List search(java.lang.String imageId)
 		throws com.liferay.portal.SystemException {
 		return getService().search(imageId);

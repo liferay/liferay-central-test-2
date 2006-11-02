@@ -63,23 +63,15 @@ public class ImageLocalServiceImpl implements ImageLocalService {
 	public Image getImage(String imageId)
 		throws PortalException, SystemException {
 
-		/*Image image = null;
-
-		try {
-			image = ImageUtil.findByPrimaryKey(imageId);
-		}
-		catch (NoSuchImageException nsie) {
-			image = ImageUtil.create(imageId);
-
-			image.setModifiedDate(new Date());
-			image.setTextObj(ImageLocalUtil.getDefaultSpacer().getTextObj());
-
-			ImageUtil.update(image);
-		}
-
-		return image;*/
-
 		return ImageUtil.findByPrimaryKey(imageId);
+	}
+
+	public List getImages() throws SystemException {
+		return ImageUtil.findAll();
+	}
+
+	public List getImages(int begin, int end) throws SystemException {
+		return ImageUtil.findAll(begin, end);
 	}
 
 	public List search(String imageId) throws SystemException {
