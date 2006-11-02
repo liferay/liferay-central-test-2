@@ -233,6 +233,8 @@ insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('2
 insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('227', 'Zambia', 'ZM', 'ZMB', '894', '260', TRUE);
 insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('228', 'Zimbabwe', 'ZW', 'ZWE', '716', '263', TRUE);
 
+alter table Image add type_ VARCHAR(75) null;
+
 alter table JournalArticle add description STRING null;
 
 drop table JournalContentSearch;

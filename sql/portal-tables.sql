@@ -322,7 +322,8 @@ create table IGImage (
 create table Image (
 	imageId VARCHAR(200) not null primary key,
 	modifiedDate DATE null,
-	text_ TEXT null
+	text_ TEXT null,
+	type_ VARCHAR(75) null
 );
 
 create table JournalArticle (

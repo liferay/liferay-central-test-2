@@ -4,4 +4,5 @@ into table Image
 fields terminated by "," optionally enclosed by '\''
 (imageId,
  modifiedDate Date 'YYYYMMDD',
- text_ char(1000000))
+ text_ char(1000000),
+ type_)
