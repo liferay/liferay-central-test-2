@@ -22,7 +22,7 @@ var DropZone = {
 		 * accept: array of class names that are allowed
 		 * inheritParent: inherit dimensions of the parent element
 		 * onDrop: executes when dropped
-		 * onHoverOver: executes when drag item hovers over container
+		 * onHoverOver: continuously executes as item drags over container.
 		 * onHoverOut: executes when drag item leaves container
 		 */
 
@@ -33,6 +33,11 @@ var DropZone = {
 		if (item) {
 			item.dropOptions = dropOptions || new Object();
 			item.dropOptions.dropItem = item;
+
+            if (typeof(dropOptions.accept) == "string") {
+                dropOptions.accept = dropOptions.accept.split(" ");
+            }
+			
 			DropZone.dropList.push(item);
 		}
 	},
@@ -175,7 +180,7 @@ var DragDrop = {
 			}
 
 			item.style.position = "absolute";
-			item.style.zIndex = ZINDEX.DRAGITEM;
+			item.style.zIndex = ZINDEX.DRAG_ITEM;
 			item.style.left = (nwOffset.x - opts.scrollOffset.x) + "px";
 			item.style.top = (nwOffset.y - opts.scrollOffset.y) + "px";
 
@@ -273,13 +278,6 @@ var DragDrop = {
 					dropItem.className = dropOptions.origClassName;
 					Element.removeClassName(dropItem, dropItem.dropOptions.hoverclass);
 				}
-				else {
-					//dropOptions.onDrop(item, nwPosition, sePosition, nwOffset, seOffset);
-				}
-				
-				if (dropOptions.inheritParent) {
-					dropItem.style.height = "";
-				}
 			}
 			else if (opts.forceDrop && DragDrop.lastOnDrop) {
 				DragDrop.lastOnDrop();
@@ -322,6 +320,10 @@ var DragDrop = {
 			// restore original options (if changed)
 			DropZone.dropList.foreach(function(item) {
 					item.style.backgroundColor = "transparent";
+					
+					if (item.dropOptions.inheritParent) {
+						item.style.height = "";
+				}
 				});
 				
 			opts.revert = opts.origRevert;

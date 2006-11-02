@@ -123,6 +123,12 @@ ul {
 	z-index: 10;
 }
 
+.pop-up-outer { border: 1px solid #383838; background-color: #FFFFFF; }
+.pop-up-inner { border: 1px solid #747474; }
+.pop-up-header { background-color: #000000; height: 25px; }
+.pop-up-title { color: #FFFFFF; font-weight: bold; padding-left: 10px; }
+.pop-up-close a { color: #FFFFFF; margin-right: 7px; white-space: nowrap; text-decoration: underline; }
+
 /* Alpha */
 
 .alpha {

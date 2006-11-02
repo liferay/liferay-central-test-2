@@ -443,7 +443,7 @@ public class ServicePreAction extends Action {
 					PortletURL pageSettingsURL = new PortletURLImpl(
 						req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
 
-					pageSettingsURL.setWindowState(LiferayWindowState.POP_UP);
+					pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
 					pageSettingsURL.setPortletMode(PortletMode.VIEW);
 
 					pageSettingsURL.setParameter(

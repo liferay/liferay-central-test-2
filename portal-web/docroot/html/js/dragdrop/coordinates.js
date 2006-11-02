@@ -126,6 +126,8 @@ Coordinate.prototype.insideObject = function(obj, recurse) {
 	
 	if (this.inside(nwOffset, seOffset)) {
 		rt = this.minus(nwOffset);
+		rt.nwOffset = nwOffset;
+		rt.seOffset = seOffset;
 	}
 	
 	return rt;

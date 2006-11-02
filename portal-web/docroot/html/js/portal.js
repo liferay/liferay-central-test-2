@@ -85,6 +85,50 @@ var LayoutColumns = {
 	highlight: "transparent",
 	layoutMaximized: "",
 	plid: "",
+	arrow: null,
+	
+	displayArrow: function(mode, left, top) {
+
+		var arrow = LayoutColumns.arrow
+		
+		if (!arrow) {
+			arrow = new Object();
+			var arrowUp = document.createElement("div");
+			arrowUp.style.zIndex = ZINDEX.DRAG_ARROW;
+			arrowUp.style.display = "none";
+			arrowUp.className = "layout-column-arrow-up";
+			
+			var arrowDown = document.createElement("div");
+			arrowDown.style.zIndex = ZINDEX.DRAG_ARROW;
+			arrowDown.style.display = "none";
+			arrowDown.className = "layout-column-arrow-down";
+			
+			document.body.appendChild(arrowUp);
+			document.body.appendChild(arrowDown);
+			
+			arrow.up = arrowUp;
+			arrow.down = arrowDown;
+			
+			LayoutColumns.arrow = arrow;
+		}
+		
+		if (mode == "up") {
+			arrow.up.style.top = top + "px";
+			arrow.up.style.left = left + "px";
+			arrow.up.style.display = "";
+			arrow.down.style.display = "none";
+		}
+		else if (mode == "down") {
+			arrow.down.style.top = top + "px";
+			arrow.down.style.left = left + "px";
+			arrow.down.style.display = "";
+			arrow.up.style.display = "none";
+		}
+		else if (mode == "none") {
+			arrow.down.style.display = "none";
+			arrow.up.style.display = "none";
+		}
+	},
 	
 	init: function(colArray) {
 		for (var i = 0; i < colArray.length; i++) {
@@ -97,6 +141,9 @@ var LayoutColumns = {
 					accept: ["portlet-boundary"],
 					onDrop: LayoutColumns.onDrop,
 					onHoverOver: LayoutColumns.onHoverOver,
+					onHoverOut: function() {
+						LayoutColumns.displayArrow("none");
+					},
 					inheritParent: true
 					});
 					
@@ -152,7 +199,7 @@ var LayoutColumns = {
 			}
 		}
 		
-		item.parentNode.removeChild(item);
+		Element.remove(item);
 		container.insertBefore(item, insertBox);
 		
 		item.dragOptions.revert = false;
@@ -176,10 +223,83 @@ var LayoutColumns = {
 				}
 			}
 		}
+		
+		LayoutColumns.displayArrow("none");
+		
 		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition);
 	},
 	
 	onHoverOver: function(item) {
+		var dropOptions = this;
+		var container = dropOptions.dropItem;
+		var childList = container.childNodes;
+		var insertBox = null;
+		var bottom = true;
+		var inside;
+		var lastBox;
+
+		for (var i = 0; i < childList.length; i++){
+			var box = childList[i];
+
+			if (Element.hasClassName(box, "portlet-boundary")) {
+				if (!box.isStatic) {
+					lastBox = box;
+					inside = mousePos.insideObject(box, true);
+					
+					if (inside) {
+						var midY = box.offsetHeight / 2;
+	
+						if (inside.y <= midY || box == item.dragOptions.clone) {
+							bottom = false;
+						}
+						else {
+							bottom = true;
+						}
+						
+						insertBox = box;
+						break;
+					}
+				}
+				else if (box.isStatic.match("end")) {
+					insertBox = box;
+					break;
+				}
+			}
+		}
+
+		var top;
+		var left;
+		
+		if (insertBox) {
+			left = inside.nwOffset.x + 20;
+			
+			if (bottom) {
+				top = inside.nwOffset.y + insertBox.offsetHeight - 50;
+				
+				LayoutColumns.displayArrow("down", left, top);
+			}
+			else {
+				top = inside.nwOffset.y;
+				
+				LayoutColumns.displayArrow("up", left, top);
+			}
+		}
+		else {
+			if (lastBox) {
+				var nwOffset = Coordinates.northwestOffset(lastBox, true);
+				top = nwOffset.y + lastBox.offsetHeight - 50;
+				left = nwOffset.x + 20;
+			
+				LayoutColumns.displayArrow("down", left, top);
+			}
+			else {
+				var nwOffset = Coordinates.northwestOffset(container, true);
+				top = nwOffset.y;
+				left = nwOffset.x + 20;
+				
+				LayoutColumns.displayArrow("up", left, top);
+			}
+		}
 	}
 }
 
@@ -313,7 +433,7 @@ var Navigation = {
 		var nav = document.getElementById("layout-nav-container");
 		var target;
 
-		nav.removeChild(selectedTab);
+		Element.remove(selectedTab);
 
 		if (from > to) {
 			target = tabs[to];
@@ -588,11 +708,11 @@ var QuickEdit = {
 			var textWidth = textObj.offsetWidth
 			textObj.style.display = "none";
 			textDiv.appendChild(input);
-			
+
 			if (opts.onEdit) {
 				opts.onEdit(input, textWidth);
 			}
-			
+
 			input.focus();
 			QuickEdit.inputList.add(input);
 
@@ -620,7 +740,7 @@ var QuickEdit = {
 				opts.onComplete(textObj, oldText);
 			}
 			
-			input.parentNode.removeChild(input);
+			Element.remove(input);
 			textObj.style.display = "";
 			textObj.editing = false;
 			

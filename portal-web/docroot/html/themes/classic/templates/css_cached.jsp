@@ -439,7 +439,7 @@ FONT.bg {
 }
 
 #layout-tab-add, #layout-tab-add a {
-	background-color: #F6F6F6;
+	background-color: <%= colorScheme.getLayoutBg() %>;
 	color: <%= colorScheme.getLayoutText() %>;
 	font-weight: normal;
 }
@@ -479,6 +479,33 @@ FONT.bg {
 
 .portal-add-content {
 	padding: 8px;
+}
+
+.layout-column-arrow-up {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrow/arrow-up.png);
+	</c:if>
+	font-size: 0;
+	position: absolute;
+	height: 53px;
+	width: 44px;
+}
+
+.layout-column-arrow-down {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-down.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrow/arrow-down.png);
+	</c:if>
+	font-size: 0;
+	position: absolute;
+	height: 53px;
+	width: 44px;
+}
 }
 
 #layout-column_column-1,

@@ -17,7 +17,6 @@
  **********************************************************/
 
 var Drag = {
-	BIG_Z_INDEX : 100,
 	group : null,
 	isDragging : false,
 
@@ -232,7 +231,6 @@ var Drag = {
 			}
 
 			Drag.isDragging = true;
-			group.style["zIndex"] = Drag.BIG_Z_INDEX;
 		}
 
 		nwPosition.reposition(group);
