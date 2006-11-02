@@ -58,6 +58,7 @@
 --%><%@ page import="com.liferay.lock.service.spring.LockServiceUtil" %><%--
 --%><%@ page import="com.liferay.portal.NoSuchUserException" %><%--
 --%><%@ page import="com.liferay.portal.captcha.CaptchaTextException" %><%--
+--%><%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %><%--
 --%><%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %><%--
 --%><%@ page import="com.liferay.portal.kernel.util.IntegerWrapper" %><%--
 --%><%@ page import="com.liferay.portal.kernel.util.ServerDetector" %><%--

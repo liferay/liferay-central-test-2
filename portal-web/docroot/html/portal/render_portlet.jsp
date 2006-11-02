@@ -35,10 +35,14 @@ String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID)
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 
+String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
+
+request.setAttribute(PermissionChecker.PORTLET_PRIMARY_KEY, portletPrimaryKey);
+
 boolean denyAccess = false;
 
 try {
-	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, plid + Portlet.LAYOUT_SEPARATOR + portletId);
+	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, portletPrimaryKey);
 }
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;
@@ -78,7 +82,7 @@ catch (NoSuchResourceException nsre) {
 	}
 
 	if (addDefaultResource) {
-		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), null, rootPortletId, plid + Portlet.LAYOUT_SEPARATOR + portletId, true, true, true);
+		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), null, rootPortletId, portletPrimaryKey, true, true, true);
 	}
 	else {
 		denyAccess = true;

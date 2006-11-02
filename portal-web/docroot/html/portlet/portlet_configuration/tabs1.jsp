@@ -71,7 +71,7 @@ permissionsURL.setWindowState(WindowState.MAXIMIZED);
 permissionsURL.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 permissionsURL.setParameter("redirect", redirect);
 permissionsURL.setParameter("portletResource", portletResource);
-permissionsURL.setParameter("resourcePrimKey", layout.getPlid() + Portlet.LAYOUT_SEPARATOR + portletResource);
+permissionsURL.setParameter("resourcePrimKey", PortletPermission.getPrimaryKey(layout.getPlid(), portletResource));
 permissionsURL.setParameter("previewWidth", previewWidth);
 %>
 
