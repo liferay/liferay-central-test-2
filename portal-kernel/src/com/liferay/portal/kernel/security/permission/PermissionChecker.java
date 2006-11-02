@@ -30,8 +30,12 @@ package com.liferay.portal.kernel.security.permission;
  */
 public interface PermissionChecker {
 
-	public static final String REQUEST_ATTRIBUTE_NAME =
-		PermissionChecker.class.getName();
+	public static final String INSTANCE = PermissionChecker.class.getName();
+
+	public static final String GROUP_ID = INSTANCE + ".GROUP_ID";
+
+	public static final String PORTLET_PRIMARY_KEY =
+		INSTANCE + ".PORTLET_PRIMARY_KEY";
 
 	public boolean hasPermission(
 		String groupId, String name, String primKey, String actionId);

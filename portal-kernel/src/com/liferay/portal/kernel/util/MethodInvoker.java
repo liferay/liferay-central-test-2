@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -60,6 +63,12 @@ public class MethodInvoker {
 		List parameterTypes = new ArrayList();
 
 		for (int i = 0; i < args.length; i++) {
+			if (args[i] == null) {
+				_log.error(
+					"Cannot invoke " + className + " " + methodName +
+						" on position " + i + " because it is null");
+			}
+
 			Class argClass = args[i].getClass();
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
@@ -143,5 +152,7 @@ public class MethodInvoker {
 
 		return returnObj;
 	}
+
+	private static Log _log = LogFactoryUtil.getLog(MethodInvoker.class);
 
 }
