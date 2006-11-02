@@ -29,11 +29,15 @@ import com.sun.imageio.plugins.jpeg.JPEGImageReader;
 import com.sun.imageio.plugins.png.PNGImageReader;
 
 import java.io.ByteArrayInputStream;
+import java.io.IOException;
 
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.imageio.stream.MemoryCacheImageInputStream;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="Image.java.html"><b><i>View Source</i></b></a>
@@ -74,30 +78,60 @@ public class Image extends ImageModel {
 		}
 
 		if ((_type == null) && (_textObj != null)) {
-			MemoryCacheImageInputStream mcis = new MemoryCacheImageInputStream(
-				new ByteArrayInputStream(_textObj));
+			ByteArrayInputStream bais = null;
+			MemoryCacheImageInputStream mcis = null;
 
-			Iterator itr = ImageIO.getImageReaders(mcis);
+			try {
+				bais = new ByteArrayInputStream(_textObj);
+				mcis = new MemoryCacheImageInputStream(bais);
 
-			_type = null;
+				Iterator itr = ImageIO.getImageReaders(mcis);
 
-			if (itr.hasNext()) {
-				Object obj = itr.next();
+				_type = null;
 
-				if (obj instanceof GIFImageReader) {
-					_type = "gif";
+				if (itr.hasNext()) {
+					Object obj = itr.next();
+
+					if (obj instanceof GIFImageReader) {
+						_type = "gif";
+					}
+					else if (obj instanceof JPEGImageReader) {
+						_type = "jpeg";
+					}
+					else if (obj instanceof PNGImageReader) {
+						_type = "png";
+					}
 				}
-				else if (obj instanceof JPEGImageReader) {
-					_type = "jpeg";
+			}
+			finally {
+				if (bais != null) {
+					try {
+						bais.close();
+					}
+					catch (IOException ioe) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(ioe);
+						}
+					}
 				}
-				else if (obj instanceof PNGImageReader) {
-					_type = "png";
+
+				if (mcis != null) {
+					try {
+						mcis.close();
+					}
+					catch (IOException ioe) {
+						if (_log.isWarnEnabled()) {
+							_log.warn(ioe);
+						}
+					}
 				}
 			}
 		}
 
 		return _type;
 	}
+
+	private static Log _log = LogFactory.getLog(Image.class);
 
 	private byte[] _textObj;
 	private String _type;
