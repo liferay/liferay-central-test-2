@@ -528,11 +528,12 @@ public class ExportAction extends Action {
 
 			if (insert) {
 				sb.append("insert into Image (");
-				sb.append("imageId, modifiedDate, text_");
+				sb.append("imageId, modifiedDate, text_, type_");
 				sb.append(") values (");
 				addColumn(sb, image.getImageId());
 				addColumn(sb, image.getModifiedDate());
 				addColumn(sb, image.getText(), false);
+				addColumn(sb, image.getType());
 				removeTrailingComma(sb);
 				sb.append(");\n");
 			}
