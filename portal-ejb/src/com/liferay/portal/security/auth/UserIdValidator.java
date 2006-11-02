@@ -20,23 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.security.auth;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
+import com.liferay.util.Validator;
 
 /**
- * <a href="UserIdGenerator.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserIdValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserIdGenerator {
+public class UserIdValidator {
 
-	public String generate(String companyId) throws Exception {
-		return companyId + "." + Long.toString(
-			CounterLocalServiceUtil.increment(
-				User.class.getName() + "." + companyId));
+	public boolean validate(String userId, String companyId) {
+		if (Validator.isNull(userId) ||
+			Validator.isNumber(userId) ||
+			Validator.isEmailAddress(userId) ||
+			(userId.equalsIgnoreCase("cyrus")) ||
+			(userId.equalsIgnoreCase("postfix")) ||
+			(userId.indexOf(User.DEFAULT) != -1) ||
+			(userId.indexOf(companyId) != -1) ||
+			(userId.indexOf("_") != -1)) {
+
+			return false;
+		}
+		else {
+			return true;
+		}
 	}
 
 }

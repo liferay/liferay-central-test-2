@@ -20,29 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.User;
 import com.liferay.util.Validator;
 
 /**
- * <a href="UserIdValidator.java.html"><b><i>View Source</i></b></a>
+ * <a href="LiberalUserIdValidator.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserIdValidator {
+public class LiberalUserIdValidator extends UserIdValidator {
 
 	public boolean validate(String userId, String companyId) {
-		if (Validator.isNull(userId) ||
-			Validator.isNumber(userId) ||
-			Validator.isEmailAddress(userId) ||
-			(userId.equalsIgnoreCase("cyrus")) ||
-			(userId.equalsIgnoreCase("postfix")) ||
-			(userId.indexOf(User.DEFAULT) != -1) ||
-			(userId.indexOf(companyId) != -1) ||
-			(userId.indexOf("_") != -1)) {
-
+		if (Validator.isNull(userId)) {
 			return false;
 		}
 		else {
