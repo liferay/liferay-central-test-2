@@ -90,7 +90,7 @@
 			var url = "<%= themeDisplay.getURLPageSettings().toString() %>";
 
 			url = url.replace(/p_p_state=maximized/,"p_p_state=pop_up");
-			
+
 			Alerts.popupIframe(url,
 				{
 					height: 200,

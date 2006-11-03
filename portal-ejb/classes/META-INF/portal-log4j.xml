@@ -104,11 +104,11 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.security.ldap">
+	<category name="com.liferay.portal.security.auth.LDAPAuth">
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.security.auth.LDAPAuth">
+	<category name="com.liferay.portal.security.ldap">
 		<priority value="ERROR" />
 	</category>
 

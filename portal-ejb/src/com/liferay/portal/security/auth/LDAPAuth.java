@@ -125,18 +125,17 @@ public class LDAPAuth implements Authenticator {
 
 		Properties env = new Properties();
 
+		String providerURL = PrefsPropsUtil.getString(
+			PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL);
+
+		String ldapContext = PrefsPropsUtil.getString(
+			PropsUtil.AUTH_IMPL_LDAP_CONTEXT);
+
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
-
-		String completeProviderURL = PrefsPropsUtil.getString(
-			PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL) + StringPool.SLASH + 
-			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_CONTEXT); 
-
 		env.put(
-			Context.PROVIDER_URL,
-			completeProviderURL);
-
+			Context.PROVIDER_URL, providerURL + StringPool.SLASH + ldapContext);
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(
@@ -242,9 +241,9 @@ public class LDAPAuth implements Authenticator {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 				String fullName = LDAPUtil.getAttributeValue(
 					attrs, userMappings.getProperty("fullName"));
-				
-				String names[] = LDAPUtil.splitFullName(fullName);
-				
+
+				String[] names = LDAPUtil.splitFullName(fullName);
+
 				firstName = names[0];
 				middleName = names[1];
 				lastName = names[2];
@@ -309,13 +308,13 @@ public class LDAPAuth implements Authenticator {
 			}
 
 			// Make sure the user has a portal account
-			LDAPImportUtil.addOrUpdateUser(creatorUserId,
-				companyId, autoUserId, userId, autoPassword, password1,
-				password2, passwordReset, emailAddress, locale,
-				firstName, middleName, lastName, nickName, prefixId,
-				suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId,
-				sendEmail, true, false);
+
+			LDAPImportUtil.addOrUpdateUser(
+				creatorUserId, companyId, autoUserId, userId, autoPassword,
+				password1, password2, passwordReset, emailAddress, locale,
+				firstName, middleName, lastName, nickName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				organizationId, locationId, sendEmail, true, false);
 		}
 		else {
 			if (_log.isDebugEnabled()) {

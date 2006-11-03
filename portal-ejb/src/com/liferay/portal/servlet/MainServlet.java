@@ -157,24 +157,6 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.COMPANY_ID, _companyId);
 
-			// LDAP Import
-			
-			try {
-				if (PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ENABLED) &&
-					PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
-					
-					try {
-						LDAPImportUtil.importLDAP(_companyId);
-					}
-					catch (Exception e) {
-						_log.error("LDAP Import failed");
-					}
-				}
-			}
-			catch (Exception e){
-				_log.error(StackTraceUtil.getStackTrace(e));
-			}
-			
 			// Paths
 
 			if (_log.isDebugEnabled()) {
@@ -399,6 +381,20 @@ public class MainServlet extends ActionServlet {
 			catch (ObjectAlreadyExistsException oaee) {
 			}
 			catch (Exception e) {
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+
+			// LDAP Import
+
+			try {
+				if (PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ENABLED) &&
+					PrefsPropsUtil.getBoolean(
+						PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
+
+					LDAPImportUtil.importLDAP(_companyId);
+				}
+			}
+			catch (Exception e){
 				_log.error(StackTraceUtil.getStackTrace(e));
 			}
 

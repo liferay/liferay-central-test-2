@@ -39,6 +39,7 @@ import com.liferay.util.Validator;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Properties;
@@ -58,13 +59,11 @@ import org.apache.commons.logging.LogFactory;
  * <a href="LDAPImportUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class LDAPImportUtil {
 
 	public static void importLDAP(String companyId) throws Exception {
-		
 		Properties env = new Properties();
 
 		env.put(
@@ -102,10 +101,9 @@ public class LDAPImportUtil {
 
 			return;
 		}
-		
+
 		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
+			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -116,8 +114,7 @@ public class LDAPImportUtil {
 		}
 
 		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
+			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -129,21 +126,21 @@ public class LDAPImportUtil {
 		try {
 			String filter = PrefsPropsUtil.getString(
 				PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
-			
+
 			String context = PrefsPropsUtil.getString(
 				PropsUtil.LDAP_IMPORT_CONTEXT);
-			
-			NamingEnumeration enu = ctx.search(context, filter, null);	
-			
+
+			NamingEnumeration enu = ctx.search(context, filter, null);
+
 			while (enu.hasMore()) {
 				SearchResult result = (SearchResult) enu.next();
-				
+
 				String userCN = result.getName();
-				
+
 				if (_log.isDebugEnabled()) {
-					_log.debug("User CN: " + userCN);
+					_log.debug("User CN " + userCN);
 				}
-				
+
 				Attributes attrs = result.getAttributes();
 
 				String creatorUserId = null;
@@ -171,9 +168,9 @@ public class LDAPImportUtil {
 					|| Validator.isNull(lastName)) {
 					String fullName = LDAPUtil.getAttributeValue(
 						attrs, userMappings.getProperty("fullName"));
-					
+
 					String names[] = LDAPUtil.splitFullName(fullName);
-					
+
 					firstName = names[0];
 					middleName = names[1];
 					lastName = names[2];
@@ -191,7 +188,7 @@ public class LDAPImportUtil {
 				String organizationId = null;
 				String locationId = null;
 				boolean sendEmail = false;
-				
+
 				addOrUpdateUser(creatorUserId,
 					companyId, autoUserId, userId, autoPassword, password1,
 					password2, passwordReset, emailAddress, locale,
@@ -202,39 +199,39 @@ public class LDAPImportUtil {
 
 				// Import and add user to group
 				Attribute attr = attrs.get(userMappings.getProperty("group"));
-				
+
 				for (int i = 0; i < attr.size(); i++) {
 
 					String groupDN = (String)attr.get(i);
-					
+
 					Attributes groupAttrs = ctx.getAttributes(groupDN);
-					
-					String groupName = LDAPUtil.getAttributeValue(groupAttrs, 
+
+					String groupName = LDAPUtil.getAttributeValue(groupAttrs,
 						groupMappings.getProperty("groupName"));
-					String description = LDAPUtil.getAttributeValue(groupAttrs, 
+					String description = LDAPUtil.getAttributeValue(groupAttrs,
 						groupMappings.getProperty("description"));
-					
+
 					Group group = null;
-					
+
 					try {
-						group = GroupLocalServiceUtil.getGroup(companyId, 
+						group = GroupLocalServiceUtil.getGroup(companyId,
 							groupName);
 					}
 					catch (NoSuchGroupException nsge) {
 						group = GroupLocalServiceUtil.addGroup(
-							User.getDefaultUserId(companyId), StringPool.BLANK, 
-							StringPool.BLANK, groupName, description, 
+							User.getDefaultUserId(companyId), StringPool.BLANK,
+							StringPool.BLANK, groupName, description,
 							StringPool.BLANK, StringPool.BLANK);
 					}
-					
+
 					if (_log.isDebugEnabled()) {
 						_log.debug(
 							"Adding " + userCN + " to group: " + groupDN);
 					}
-					
+
 					String[] userIds = {userId};
 
-					UserLocalServiceUtil.addGroupUsers(group.getGroupId(), 
+					UserLocalServiceUtil.addGroupUsers(group.getGroupId(),
 						userIds);
 				}
 			}
@@ -248,7 +245,7 @@ public class LDAPImportUtil {
 			}
 		}
 	}
-	
+
 	public static void addOrUpdateUser(
 		String creatorUserId, String companyId, boolean autoUserId,
 		String userId, boolean autoPassword, String password1,
@@ -257,28 +254,28 @@ public class LDAPImportUtil {
 		String nickName, String prefixId, String suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
 		String jobTitle, String organizationId, String locationId,
-		boolean sendEmail, boolean checkExists, boolean updatePassword) 
+		boolean sendEmail, boolean checkExists, boolean updatePassword)
 	throws PortalException, SystemException {
 
 		boolean create = true;
-		
+
 		if (checkExists) {
 			try {
-				UserLocalServiceUtil.getUserByEmailAddress(companyId, 
+				UserLocalServiceUtil.getUserByEmailAddress(companyId,
 					emailAddress);
-	
+
 				if (updatePassword) {
 					UserLocalServiceUtil.updatePassword(
 						userId, password1, password2, passwordReset);
 				}
-				
+
 				create = false;
 			}
 			catch (NoSuchUserException nsue) {
 				// user does not exist so create
 			}
 		}
-		
+
 		if (create) {
 			try {
 				UserLocalServiceUtil.addUser(
@@ -296,5 +293,5 @@ public class LDAPImportUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(LDAPImportUtil.class);
-	
+
 }

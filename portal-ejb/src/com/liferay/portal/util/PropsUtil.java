@@ -210,11 +210,11 @@ public class PropsUtil {
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";
 
 	// LDAP Import
-	
+
 	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";
-	
+
 	public static final String LDAP_IMPORT_ON_STARTUP = "ldap.import.on.startup";
-	
+
 	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
 
     public static final String LDAP_IMPORT_PROVIDER_URL = "ldap.import.provider.url";
@@ -486,7 +486,7 @@ public class PropsUtil {
 	public static final String INDEX_WITH_THREAD = "index.with.thread";
 
 	public static final String LUCENE_STORE_TYPE= "lucene.store.type";
-	
+
 	public static final String LUCENE_STORE_JDBC_DIALECT = "lucene.store.jdbc.dialect.";
 
 	public static final String LUCENE_DIR = "lucene.dir";
@@ -658,25 +658,25 @@ public class PropsUtil {
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_ENABLED = "journal.email.article.approval.denied.enabled";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_SUBJECT = "journal.email.article.approval.denied.subject";
-	
+
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_DENIED_BODY = "journal.email.article.approval.denied.body";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_ENABLED = "journal.email.article.approval.granted.enabled";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_SUBJECT = "journal.email.article.approval.granted.subject";
-	
+
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_GRANTED_BODY = "journal.email.article.approval.granted.body";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_ENABLED = "journal.email.article.approval.requested.enabled";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_SUBJECT = "journal.email.article.approval.requested.subject";
-	
+
 	public static final String JOURNAL_EMAIL_ARTICLE_APPROVAL_REQUESTED_BODY = "journal.email.article.approval.requested.body";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_ENABLED = "journal.email.article.review.enabled";
 
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_SUBJECT = "journal.email.article.review.subject";
-	
+
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_BODY = "journal.email.article.review.body";
 
 	// Journal Articles Portlet
@@ -782,13 +782,13 @@ public class PropsUtil {
 	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_ENABLED = "shopping.email.order.confirmation.enabled";
 
 	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_SUBJECT = "shopping.email.order.confirmation.subject";
-	
+
 	public static final String SHOPPING_EMAIL_ORDER_CONFIRMATION_BODY = "shopping.email.order.confirmation.body";
 
 	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_ENABLED = "shopping.email.order.shipping.enabled";
 
 	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_SUBJECT = "shopping.email.order.shipping.subject";
-	
+
 	public static final String SHOPPING_EMAIL_ORDER_SHIPPING_BODY = "shopping.email.order.shipping.body";
 
 	// Translator Portlet

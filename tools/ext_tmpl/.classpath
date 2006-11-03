@@ -24,6 +24,7 @@
 	<classpathentry kind="lib" path="lib/development/jsf-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsse.jar"/>
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
+	<classpathentry kind="lib" path="lib/development/junit.jar"/>
 	<classpathentry kind="lib" path="lib/development/mail.jar"/>
 	<classpathentry kind="lib" path="lib/development/myfaces.jar"/>
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
