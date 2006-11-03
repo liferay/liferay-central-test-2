@@ -40,11 +40,7 @@ import com.liferay.portlet.mail.util.comparator.RecipientComparator;
 import com.liferay.portlet.mail.util.comparator.SizeComparator;
 import com.liferay.portlet.mail.util.comparator.StateComparator;
 import com.liferay.portlet.mail.util.comparator.SubjectComparator;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
-import com.liferay.util.TextFormatter;
+import com.liferay.util.*;
 
 import java.util.Comparator;
 import java.util.Iterator;

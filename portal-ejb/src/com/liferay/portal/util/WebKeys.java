@@ -163,6 +163,8 @@ public class WebKeys {
 
 	public static final String LAST_PATH = "LAST_PATH";
 
+	public static final String MAIL_CURRENT_ACCOUNT = "MAIL_CURRENT_ACCOUNT";
+
 	public static final String MAIL_FOLDER = "MAIL_FOLDER";
 
 	public static final String MAIL_MESSAGE_ATTACHMENTS = "MAIL_MESSAGE_ATTACHMENTS";

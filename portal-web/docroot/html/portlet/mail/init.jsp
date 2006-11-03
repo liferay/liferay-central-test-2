@@ -47,4 +47,6 @@ String signature = prefs.getValue("signature", StringPool.BLANK);
 String vacationMessage = prefs.getValue("vacation-message", StringPool.BLANK);
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+
+MailUtil.setAccount(request);
 %>

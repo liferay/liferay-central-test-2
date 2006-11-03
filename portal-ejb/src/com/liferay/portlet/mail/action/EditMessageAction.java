@@ -37,6 +37,8 @@ import com.liferay.portlet.mail.model.MailAttachment;
 import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.model.RemoteMailAttachment;
 import com.liferay.portlet.mail.util.MailUtil;
+import com.liferay.portlet.mail.util.multiaccount.MailAccount;
+import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
@@ -283,8 +285,9 @@ public class EditMessageAction extends PortletAction {
 		MailMessage mailMessage = new MailMessage();
 
 		try {
+			MailAccount account = MailAccounts.getCurrentAccount(req);
 			mailMessage.setFrom(new InternetAddress(
-				user.getEmailAddress(), user.getFullName()));
+				account.getEmailAddress(), user.getFullName()));
 			mailMessage.setTo(to);
 			mailMessage.setCc(cc);
 			mailMessage.setBcc(bcc);

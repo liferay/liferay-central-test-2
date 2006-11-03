@@ -52,6 +52,8 @@ public interface Constants {
 
 	public static final String LOCK = "lock";
 
+	public static final String MAIL_ACCOUNT = "mail_account";
+
 	public static final String PREVIEW = "preview";
 
 	public static final String REJECT = "reject";
