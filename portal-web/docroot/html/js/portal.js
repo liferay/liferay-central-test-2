@@ -673,6 +673,7 @@ var QuickEdit = {
 		/* OPTIONS
 		 * dragId: (string|object) specify drag ID to disable drag during editing
 		 * fixParent: (boolean) fix width of parent element
+		 * inputType: (text|textarea) specify type of input field
 		 * onEdit: (function) executes when going into edit mode
 		 * onComplete: (function) executes after editing is done
 		 */
@@ -686,21 +687,33 @@ var QuickEdit = {
 	edit: function(textObj) {
 		var opts = textObj.editOptions || new Object();
 		var wasClicked = true;
+		var isTextarea = false;
 		
 		if (opts.dragId) {
 			wasClicked = $(opts.dragId).wasClicked;
 		}
+		
+		if (opts.inputType && opts.inputType == "textarea") {
+			isTextarea = true;
+		}
 
 		if (!textObj.editing && wasClicked) {
-			var input = document.createElement("input");
+			var input;
 			var textDiv = textObj.parentNode;
-			
+
+			if (isTextarea) {
+				input = document.createElement("textarea");
+			}
+			else {
+				input = document.createElement("input");
+			}
+
 			if (opts.fixParent) {
 				textDiv.style.width = textDiv.offsetWidth + "px";
 			}
 			
 			input.className = "portlet-form-input-field";
-			input.value = textObj.innerHTML;
+			input.value = toText(textObj.innerHTML);
 			input.textObj = textObj;
 			input.onmouseover = function() {
 				document.onclick = function() {};
@@ -709,17 +722,18 @@ var QuickEdit = {
 				document.onclick = function() {QuickEdit.inputList.foreach(QuickEdit.onDone)};
 			}
 			input.onkeydown = function(event) {
-				if (Event.enterPressed(event)) {
+				if (!isTextarea && Event.enterPressed(event)) {
 					QuickEdit.inputList.foreach(QuickEdit.onDone);
 				}
 			}
 			
-			var textWidth = textObj.offsetWidth
+			var textWidth = textObj.offsetWidth;
+			var textHeight = textObj.offsetHeight;
 			textObj.style.display = "none";
 			textDiv.appendChild(input);
 
 			if (opts.onEdit) {
-				opts.onEdit(input, textWidth);
+				opts.onEdit(input, textWidth, textHeight);
 			}
 
 			input.focus();
@@ -739,7 +753,7 @@ var QuickEdit = {
 			
 			var textObj = input.textObj;
 			var textDiv = textObj.parentNode;
-			var newText = input.value;
+			var newText = toHTML(input.value);
 			var oldText = textObj.innerHTML;
 			var opts = textObj.editOptions;
 			

@@ -935,6 +935,24 @@ function endsWith(str, x) {
 	}
 }
 
+function toHTML(s) {
+	s = s.replace(/\&/g, "&amp;");
+	s = s.replace(/</g, "&lt;");
+	s = s.replace(/>/g, "&gt;");
+	s = s.replace(/\n/g, "<br>");
+	s = s.replace(/  /g, "&nbsp; ");
+	return s;
+}
+
+function toText(s) {
+	s = s.replace(/\&nbsp;/g, " ");
+	s = s.replace(/<br>/g,"\n");
+	s = s.replace(/&gt;/g,">");
+	s = s.replace(/\&lt;/g,"<");
+	s = s.replace(/\&amp;/g,"&");
+	return s;
+}
+
 function toggleById(id, returnState, displayType) {
 	var obj = document.getElementById(id);
 
