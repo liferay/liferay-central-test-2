@@ -91,6 +91,7 @@ javax.portlet.title.93=Ροή της δουλειάς
 javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Συσκευή Google
 javax.portlet.title.96=Χάρτες Google
+javax.portlet.title.97=Γρήγορη σημείωση
 javax.portlet.title.9=Διαχείρηση
 
 ##
@@ -586,6 +587,7 @@ clear-all=Καθαρισμός Όλων
 clear-content-cached-across-the-cluster=Περιεχόμενο που εναποθηκεύεται σαφές σε ολόκληρη τη συστάδα.
 clear-content-cached-by-this-vm=Περιεχόμενο που εναποθηκεύεται σαφές από αυτό το VM.
 clear-the-database-cache=Καθαρίστε την κρύπτη βάσεων δεδομένων.
+click-to-edit-me=Χτυπήστε για να με εκδώσετε...
 clickable-emoticons=Clickable Emoticons
 close=Κλείστε
 club-event=Γεγονός Ομίλου

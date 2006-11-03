@@ -91,6 +91,7 @@ javax.portlet.title.93=Workflow
 javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Dispositivo De Google
 javax.portlet.title.96=Mapas De Google
+javax.portlet.title.97=Nota Rápida
 javax.portlet.title.9=Admin
 
 ##
@@ -586,6 +587,7 @@ clear-all=Cancele Tudo
 clear-content-cached-across-the-cluster=Índice desobstruído cached através do conjunto.
 clear-content-cached-by-this-vm=Índice desobstruído cached por este VM.
 clear-the-database-cache=Cancele o esconderijo da base de dados.
+click-to-edit-me=Estale para editar-me...
 clickable-emoticons=Emoticons De Clickable
 close=Fim
 club-event=Evento Do Clube

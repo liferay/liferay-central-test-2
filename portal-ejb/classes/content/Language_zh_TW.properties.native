@@ -91,6 +91,7 @@ javax.portlet.title.93=工作流
 javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Google 小配件
 javax.portlet.title.96=Google 地圖
+javax.portlet.title.97=快的筆記
 javax.portlet.title.9=管理者
 
 ##
@@ -586,6 +587,7 @@ clear-all=清除所有
 clear-content-cached-across-the-cluster=清楚的內容被貯藏橫跨群。
 clear-content-cached-by-this-vm=清楚的內容由這VM 貯藏。
 clear-the-database-cache=清除資料庫高速緩存。
+click-to-edit-me=點擊編輯我...
 clickable-emoticons=Clickable 意思號
 close=關閉
 club-event=俱樂部事項

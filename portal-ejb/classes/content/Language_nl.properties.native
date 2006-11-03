@@ -91,6 +91,7 @@ javax.portlet.title.93=Workflow
 javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Het Gadget van Google
 javax.portlet.title.96=De Kaarten van Google
+javax.portlet.title.97=Snelle Nota
 javax.portlet.title.9=Beheerder
 
 ##
@@ -586,6 +587,7 @@ clear-all=Wis alles
 clear-content-cached-across-the-cluster=Wis bewaarde inhoud van de cluster.
 clear-content-cached-by-this-vm=Wis door deze VM bewaarde inhoud.
 clear-the-database-cache=Wis het bewaarde gegevensbestand.
+click-to-edit-me=Klik om me uit te geven...
 clickable-emoticons=Klikbare Emoticons
 close=Sluiten
 club-event=Club evenement

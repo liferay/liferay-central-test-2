@@ -438,6 +438,11 @@
 		<struts-path>google_maps</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>97</portlet-name>
+		<struts-path>quick_note</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

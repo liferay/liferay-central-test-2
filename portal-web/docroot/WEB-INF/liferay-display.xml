@@ -99,6 +99,7 @@
 		<portlet id="70" />
 		<portlet id="81" />
 		<portlet id="82" />
+		<portlet id="97" />
 	</category>
 	<category name="category.wiki">
 		<portlet id="36" />

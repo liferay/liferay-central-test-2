@@ -872,6 +872,15 @@
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_look_and_feel.jsp" />
 	</definition>
 
+	<!-- Quick Note -->
+
+	<definition name="portlet.quick_note" extends="portlet" />
+
+	<definition name="portlet.quick_note.view" extends="portlet.quick_note">
+		<put name="portlet_content" value="/portlet/quick_note/view.jsp" />
+		<put name="portlet_decorate" value="false" />
+	</definition>
+
 	<!-- Recent Documents -->
 
 	<definition name="portlet.recent_documents" extends="portlet" />

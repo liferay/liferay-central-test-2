@@ -91,6 +91,7 @@ javax.portlet.title.93=ワークフロー
 javax.portlet.title.94=Google AdSense
 javax.portlet.title.95=Google の小道具
 javax.portlet.title.96=Google は地図を描く
+javax.portlet.title.97=速いノート
 javax.portlet.title.9=Admin
 
 ##
@@ -585,6 +586,7 @@ clear-all=すべてを取り除きなさい
 clear-content-cached-across-the-cluster=集りを渡って貯蔵される明確な内容。
 clear-content-cached-by-this-vm=このVM によって貯蔵される明確な内容。
 clear-the-database-cache=データベース隠し場所を取り除きなさい。
+click-to-edit-me=私を編集するために... かちりと鳴らしなさい
 clickable-emoticons=Clickable のEmoticons
 close=終わり
 club-event=クラブでき事
