@@ -160,6 +160,10 @@
 		</antcall>
 	</target>
 
+	<target name="deploy-properties">
+		<ant dir=".." target="deploy-properties" inheritAll="false" />
+	</target>
+
 	<target name="build-ejbxml">
 		<java
 			classname="com.liferay.portal.tools.EJBXMLBuilder"

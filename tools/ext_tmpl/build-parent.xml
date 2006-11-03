@@ -123,66 +123,7 @@
 			</else>
 		</if>
 
-		<if>
-			<not>
-				<equals arg1="${app.server.type}" arg2="orion" />
-			</not>
-			<then>
-				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-					<fileset dir="ext-ejb/classes">
-						<include name="*-ext.properties" />
-					</fileset>
-				</copy>
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jetty" />
-						<equals arg1="${app.server.type}" arg2="resin" />
-						<equals arg1="${app.server.type}" arg2="tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-							<replacetoken>portal.release=enterprise</replacetoken>
-							<replacevalue>portal.release=professional</replacevalue>
-						</replace>
-					</then>
-				</if>
-
-				<if>
-					<or>
-						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-					</or>
-					<then>
-						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-							<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
-						</replace>
-					</then>
-					<elseif>
-						<or>
-							<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-							<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-						</or>
-						<then>
-							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
-							</replace>
-						</then>
-					</elseif>
-					<elseif>
-						<equals arg1="${app.server.type}" arg2="resin" />
-						<then>
-							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
-								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-								<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
-							</replace>
-						</then>
-					</elseif>
-				</if>
-			</then>
-		</if>
+		<antcall target="deploy-properties" />
 
 		<copy todir="${app.server.lib.global.dir}">
 			<fileset dir="ext-lib/global" />
@@ -310,6 +251,69 @@
 					<delete file="${app.server.dir}/extra/ext/hsqldb.jar" />
 				</then>
 			</elseif>
+		</if>
+	</target>
+
+	<target name="deploy-properties">
+		<if>
+			<not>
+				<equals arg1="${app.server.type}" arg2="orion" />
+			</not>
+			<then>
+				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
+					<fileset dir="ext-ejb/classes">
+						<include name="*-ext.properties" />
+					</fileset>
+				</copy>
+
+				<if>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jetty" />
+						<equals arg1="${app.server.type}" arg2="resin" />
+						<equals arg1="${app.server.type}" arg2="tomcat" />
+					</or>
+					<then>
+						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+							<replacetoken>portal.release=enterprise</replacetoken>
+							<replacevalue>portal.release=professional</replacevalue>
+						</replace>
+					</then>
+				</if>
+
+				<if>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<then>
+						<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+							<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+							<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
+						</replace>
+					</then>
+					<elseif>
+						<or>
+							<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+							<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+						</or>
+						<then>
+							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+								<replacevalue>auto.deploy.dest.dir=../../webapps/autoload</replacevalue>
+							</replace>
+						</then>
+					</elseif>
+					<elseif>
+						<equals arg1="${app.server.type}" arg2="resin" />
+						<then>
+							<replace file="${app.server.classes.portal.dir}/portal-ext.properties">
+								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+								<replacevalue>auto.deploy.dest.dir=webapps</replacevalue>
+							</replace>
+						</then>
+					</elseif>
+				</if>
+			</then>
 		</if>
 	</target>
 </project>

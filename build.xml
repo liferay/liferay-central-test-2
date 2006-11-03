@@ -270,8 +270,8 @@
 			</else>
 		</if>
 
-		<antcall target="deploy-portal-ext-properties" />
-		
+		<antcall target="deploy-properties" />
+
 		<copy todir="${app.server.lib.global.dir}">
 			<fileset dir="lib/development" includes="hsql.jar" />
 			<fileset dir="lib/global" />
@@ -399,8 +399,8 @@
 		</if>
 	</target>
 
-	<target name="deploy-portal-ext-properties">
-			<if>
+	<target name="deploy-properties">
+		<if>
 			<not>
 				<equals arg1="${app.server.type}" arg2="orion" />
 			</not>
