@@ -59,6 +59,8 @@ public class EditConfigurationAction extends PortletAction {
 		}
 
 		String gadgetId = ParamUtil.getString(req, "gadgetId");
+		String title = ParamUtil.getString(req, "title");
+		String borderId = ParamUtil.getString(req, "borderId");
 		String width = ParamUtil.getString(req, "width");
 		String height = ParamUtil.getString(req, "height");
 
@@ -68,6 +70,8 @@ public class EditConfigurationAction extends PortletAction {
 			req, portletResource, true, true);
 
 		prefs.setValue("gadget-id", gadgetId);
+		prefs.setValue("title", title);
+		prefs.setValue("border-id", borderId);
 		prefs.setValue("width", width);
 		prefs.setValue("height", height);
 
