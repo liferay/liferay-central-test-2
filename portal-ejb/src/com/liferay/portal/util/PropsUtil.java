@@ -209,6 +209,28 @@ public class PropsUtil {
 
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";
 
+	// LDAP Import
+	
+	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";
+	
+	public static final String LDAP_IMPORT_ON_STARTUP = "ldap.import.on.startup";
+	
+	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
+
+    public static final String LDAP_IMPORT_PROVIDER_URL = "ldap.import.provider.url";
+
+    public static final String LDAP_IMPORT_CONTEXT = "ldap.import.context";
+
+	public static final String LDAP_IMPORT_SECURITY_PRINCIPAL = "ldap.import.security.principal";
+
+	public static final String LDAP_IMPORT_SECURITY_CREDENTIALS = "ldap.import.security.credentials";
+
+	public static final String LDAP_IMPORT_SEARCH_FILTER = "ldap.import.search.filter";
+
+	public static final String LDAP_IMPORT_USER_MAPPINGS = "ldap.import.user.mappings";
+
+	public static final String LDAP_IMPORT_GROUP_MAPPINGS = "ldap.import.group.mappings";
+
 	// Authentication Pipeline
 
 	public static final String AUTH_PIPELINE_PRE = "auth.pipeline.pre";
@@ -224,6 +246,8 @@ public class PropsUtil {
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
     public static final String AUTH_IMPL_LDAP_PROVIDER_URL = "auth.impl.ldap.provider.url";
+
+    public static final String AUTH_IMPL_LDAP_CONTEXT = "auth.impl.ldap.context";
 
 	public static final String AUTH_IMPL_LDAP_SECURITY_PRINCIPAL = "auth.impl.ldap.security.principal";
 

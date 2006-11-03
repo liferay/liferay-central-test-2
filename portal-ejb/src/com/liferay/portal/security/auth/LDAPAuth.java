@@ -25,12 +25,12 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.ldap.LDAPImportUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.Encryptor;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.LDAPUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
@@ -128,9 +128,15 @@ public class LDAPAuth implements Authenticator {
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
 			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+
+		String completeProviderURL = PrefsPropsUtil.getString(
+			PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL) + StringPool.SLASH + 
+			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_CONTEXT); 
+
 		env.put(
 			Context.PROVIDER_URL,
-			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL));
+			completeProviderURL);
+
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(
@@ -236,31 +242,12 @@ public class LDAPAuth implements Authenticator {
 			if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 				String fullName = LDAPUtil.getAttributeValue(
 					attrs, userMappings.getProperty("fullName"));
-
-				if (Validator.isNotNull(fullName)) {
-					String[] name = StringUtil.split(fullName, " ");
-
-					firstName = name[0];
-					lastName = name[name.length - 1];
-
-					if (name.length > 2) {
-						for (int i = 1; i < name.length - 1; i++) {
-							if (Validator.isNull(name[i].trim())) {
-								continue;
-							}
-
-							if (i != 1) {
-								middleName += " ";
-							}
-
-							middleName += name[i].trim();
-						}
-					}
-				}
-				else {
-					firstName = GetterUtil.getString(firstName, lastName);
-					lastName = firstName;
-				}
+				
+				String names[] = LDAPUtil.splitFullName(fullName);
+				
+				firstName = names[0];
+				middleName = names[1];
+				lastName = names[2];
 			}
 
 			String nickName = null;
@@ -322,22 +309,13 @@ public class LDAPAuth implements Authenticator {
 			}
 
 			// Make sure the user has a portal account
-
-			try {
-				User user = UserLocalServiceUtil.getUserByEmailAddress(
-					companyId, emailAddress);
-
-				UserLocalServiceUtil.updatePassword(
-					userId, password, password, user.isPasswordReset());
-			}
-			catch (NoSuchUserException nsue) {
-				UserLocalServiceUtil.addUser(
-					creatorUserId, companyId, autoUserId, userId, autoPassword,
-					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, organizationId, locationId, sendEmail);
-			}
+			LDAPImportUtil.addOrUpdateUser(creatorUserId,
+				companyId, autoUserId, userId, autoPassword, password1,
+				password2, passwordReset, emailAddress, locale,
+				firstName, middleName, lastName, nickName, prefixId,
+				suffixId, male, birthdayMonth, birthdayDay,
+				birthdayYear, jobTitle, organizationId, locationId,
+				sendEmail, true, false);
 		}
 		else {
 			if (_log.isDebugEnabled()) {

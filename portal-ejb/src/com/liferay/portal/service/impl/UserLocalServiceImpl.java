@@ -154,51 +154,6 @@ public class UserLocalServiceImpl implements UserLocalService {
 			Locale locale, String firstName, String middleName, String lastName,
 			String nickName, String prefixId, String suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
-			String jobTitle, String organizationId, String locationId,
-			boolean sendEmail, boolean checkExists)
-		throws PortalException, SystemException {
-
-		User user = null;
-
-		boolean create = true;
-
-		if (checkExists) {
-			try {
-				getUserByEmailAddress(companyId, emailAddress);
-
-				create = false;
-			}
-			catch (NoSuchUserException nsue) {
-
-				// User does not exist so create
-
-			}
-		}
-
-		if (create) {
-			try {
-				user = addUser(
-					creatorUserId, companyId, autoUserId, userId, autoPassword,
-					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, organizationId, locationId, sendEmail);
-			}
-			catch (Exception e){
-				_log.error(e);
-			}
-		}
-
-		return user;
-	}
-
-	public User addUser(
-			String creatorUserId, String companyId, boolean autoUserId,
-			String userId, boolean autoPassword, String password1,
-			String password2, boolean passwordReset, String emailAddress,
-			Locale locale, String firstName, String middleName, String lastName,
-			String nickName, String prefixId, String suffixId, boolean male,
-			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId)
 		throws PortalException, SystemException {
 

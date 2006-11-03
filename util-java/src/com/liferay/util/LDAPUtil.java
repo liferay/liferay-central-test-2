@@ -37,7 +37,7 @@ public class LDAPUtil {
 	public static String getAttributeValue(Attributes attrs, String id)
 		throws NamingException {
 
-		return getAttributeValue(attrs, id, id);
+		return getAttributeValue(attrs, id, StringPool.BLANK);
 	}
 
 	public static String getAttributeValue(
@@ -54,6 +54,41 @@ public class LDAPUtil {
 		catch (NullPointerException npe) {
 			return defaultValue;
 		}
+	}
+	
+	public static String[] splitFullName(String fullName) {
+		
+		String firstName = StringPool.BLANK;
+		String lastName = StringPool.BLANK;
+		String middleName = StringPool.BLANK;
+
+		if (Validator.isNotNull(fullName)) {
+			String[] name = StringUtil.split(fullName, " ");
+
+			firstName = name[0];
+			lastName = name[name.length - 1];
+			middleName = StringPool.BLANK;
+			
+			if (name.length > 2) {
+				for (int j = 1; j < name.length - 1; j++) {
+					if (Validator.isNull(name[j].trim())) {
+						continue;
+					}
+
+					if (j != 1) {
+						middleName += " ";
+					}
+
+					middleName += name[j].trim();
+				}
+			}
+		}
+		else {
+			firstName = GetterUtil.getString(firstName, lastName);
+			lastName = firstName;
+		}
+		
+		return new String[] {firstName, middleName, lastName};
 	}
 
 }

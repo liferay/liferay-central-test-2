@@ -1,5 +1,4 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -37,6 +36,7 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.ldap.LDAPImportUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
@@ -157,6 +157,24 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.COMPANY_ID, _companyId);
 
+			// LDAP Import
+			
+			try {
+				if (PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ENABLED) &&
+					PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
+					
+					try {
+						LDAPImportUtil.importLDAP(_companyId);
+					}
+					catch (Exception e) {
+						_log.error("LDAP Import failed");
+					}
+				}
+			}
+			catch (Exception e){
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+			
 			// Paths
 
 			if (_log.isDebugEnabled()) {
