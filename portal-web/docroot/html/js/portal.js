@@ -151,7 +151,7 @@ var LayoutColumns = {
 				
 				var boxes = document.getElementsByClassName("portlet-boundary", column);
 				
-				boxes.foreach(function(item, index) {
+				boxes.each(function(item, index) {
 					if (!item.isStatic) {
 						LayoutColumns.initPortlet(item);
 					}
@@ -182,7 +182,7 @@ var LayoutColumns = {
 		for (var i = 0; i < childList.length; i++){
 			var box = childList[i];
 			
-			if (Element.hasClassName(box, "portlet-boundary")) {
+			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
 				if (!box.isStatic) {
 					var nwOffset = Coordinates.northwestOffset(box, true);
 					var midY = nwOffset.y + (box.offsetHeight / 2);
@@ -214,7 +214,7 @@ var LayoutColumns = {
 		
 		for (var i = 0; i < childList.length; i++){
 			var box = childList[i];
-			if (Element.hasClassName(box, "portlet-boundary")) {
+			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
 				if (!box.isStatic) {
 					if (box == item) {
 						break;
@@ -241,7 +241,7 @@ var LayoutColumns = {
 		for (var i = 0; i < childList.length; i++){
 			var box = childList[i];
 
-			if (Element.hasClassName(box, "portlet-boundary")) {
+			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
 				if (!box.isStatic) {
 					lastBox = box;
 					inside = mousePos.insideObject(box, true);
@@ -317,7 +317,7 @@ var Navigation = {
 			"&parent=" + params.parent +
 			"&mainPath=" + encodeURIComponent(themeDisplay.getPathMain());
 
-		Ajax.request(url, {
+		AjaxUtil.request(url, {
 				onComplete: function(xmlHttpReq) {
 					var jo = createJSONObject(xmlHttpReq.responseText);
 					window.location = jo.url + "&newPage=1";
@@ -335,7 +335,7 @@ var Navigation = {
 				"&ownerId=" + params.ownerId +
 				"&layoutId=" + params.layoutId;
 
-			Ajax.request(url, {
+			AjaxUtil.request(url, {
 				onComplete: function() {
 					window.location = themeDisplay.getURLHome();
 				}
@@ -397,7 +397,7 @@ var Navigation = {
 						"&language=" + params.language +
 						"&layoutId=" + params.layoutId;
 
-						Ajax.request(url);
+						AjaxUtil.request(url);
 					}
 				}
 			});
@@ -409,7 +409,7 @@ var Navigation = {
 			});
 		
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		tabs.foreach(function(item, index) {
+		tabs.each(function(item, index) {
 			var link = item.getElementsByTagName("a");
 			if (link.length > 0) {
 				link[0].style.cursor = "pointer";
@@ -469,7 +469,7 @@ var Navigation = {
 		
 		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
 
-		tabs.foreach(function(tab, index) {
+		tabs.each(function(tab, index) {
 				if (tab == clone) {
 					fromIndex = index;
 				}
@@ -507,7 +507,7 @@ var Navigation = {
 				"&parent=" + params.parent +
 				"&layoutIds=" + reordered.concat(Navigation.params.hiddenIds);
 	
-			Ajax.request(url);
+			AjaxUtil.request(url);
 		}
 	}
 }
@@ -531,7 +531,7 @@ var PortletHeaderBar = {
 
 		bar.opac += 20;
 		for (var i = 0; i < bar.iconList.length; i++) {
-			changeOpacity(bar.iconList[i], bar.opac);
+			Element.changeOpacity(bar.iconList[i], bar.opac);
 		}
 		bar.iconBar.style.display = "block";
 		
@@ -561,7 +561,7 @@ var PortletHeaderBar = {
 		
 		bar.opac -= 20;
 		for (var i = 0; i < bar.iconList.length; i++) {
-			changeOpacity(bar.iconList[i], bar.opac);
+			Element.changeOpacity(bar.iconList[i], bar.opac);
 		}
 		bar.iconBar.style.display = "block";
 		if (bar.opac > 0) {
@@ -719,11 +719,11 @@ var QuickEdit = {
 				document.onclick = function() {};
 			}
 			input.onmouseout = function() {
-				document.onclick = function() {QuickEdit.inputList.foreach(QuickEdit.onDone)};
+				document.onclick = function() {QuickEdit.inputList.each(QuickEdit.onDone)};
 			}
 			input.onkeydown = function(event) {
 				if (!isTextarea && Event.enterPressed(event)) {
-					QuickEdit.inputList.foreach(QuickEdit.onDone);
+					QuickEdit.inputList.each(QuickEdit.onDone);
 				}
 			}
 			

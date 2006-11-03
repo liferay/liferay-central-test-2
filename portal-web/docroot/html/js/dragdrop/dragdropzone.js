@@ -176,7 +176,7 @@ var DragDrop = {
 			itemContainer.removeChild(item);
 
 			if (opts.showClone || opts.ghosting) {
-				changeOpacity(item, 75);
+				Element.changeOpacity(item, 75);
 			}
 
 			item.style.position = "absolute";
@@ -188,7 +188,7 @@ var DragDrop = {
 
 			var dropList = DropZone.dropList;
 			
-			dropList.foreach(function(item) {
+			dropList.each(function(item) {
 				if (item.dropOptions.inheritParent) {
 					item.style.height = item.parentNode.offsetHeight;
 				}
@@ -308,7 +308,7 @@ var DragDrop = {
 				}
 				container.removeChild(clone);
 			}
-			changeOpacity(item, 100);
+			Element.changeOpacity(item, 100);
 			item.style.zIndex = "";
 
 			opts.scrollOffset = new Coordinate(0,0);
@@ -318,7 +318,7 @@ var DragDrop = {
 			}
 			
 			// restore original options (if changed)
-			DropZone.dropList.foreach(function(item) {
+			DropZone.dropList.each(function(item) {
 					item.style.backgroundColor = "transparent";
 					
 					if (item.dropOptions.inheritParent) {

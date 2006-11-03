@@ -97,7 +97,7 @@
 						"&layoutId=<%= layout.getLayoutId() %>" +
 						"&ownerId=<%= Layout.getOwnerId(plid) %>";
 
-						Ajax.request(url);
+						AjaxUtil.request(url);
 					}
 				}
 			});

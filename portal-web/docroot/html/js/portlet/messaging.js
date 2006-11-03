@@ -72,7 +72,7 @@ var Messaging = {
 	},
 
 	getUpdates : function() {
-		Ajax.request(themeDisplay.getPathMain() + "/messaging/action?cmd=getUpdates",
+		AjaxUtil.request(themeDisplay.getPathMain() + "/messaging/action?cmd=getUpdates",
 			{
 				onComplete: Messaging.getUpdatesReturn,
 				reverseAjax: true
@@ -265,7 +265,7 @@ var Messaging = {
 	},
 	
 	onPageUnload : function() {
-		Ajax.request(themeDisplay.getPathMain() + "/messaging/action?cmd=unload", {reverseAjax:true});
+		AjaxUtil.request(themeDisplay.getPathMain() + "/messaging/action?cmd=unload", {reverseAjax:true});
 	},
 
 	removeChat : function(obj) {

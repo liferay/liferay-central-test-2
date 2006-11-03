@@ -16,7 +16,7 @@ var Alerts = {
 		}
 		
 		if (background && opacity <= max) {
-			changeOpacity(background, opacity);
+			Element.changeOpacity(background, opacity);
 			opacity += delta;
 			setTimeout("Alerts.bgFadeIn(" + max + "," + steps + "," + opacity + ")", 0);
 		}
@@ -32,7 +32,7 @@ var Alerts = {
 			}
 			
 			if (opacity >= 0) {
-				changeOpacity(background, opacity);
+				Element.changeOpacity(background, opacity);
 				opacity -= delta;
 				setTimeout("Alerts.bgFadeOut(" + max + "," + steps + "," + opacity + ")", 0);
 			}
@@ -204,7 +204,7 @@ var Alerts = {
 				wrapper.background = background;
 				
 				background.style.backgroundColor = "#000000";
-				changeOpacity(background, 0);
+				Element.changeOpacity(background, 0);
 				body.appendChild(background);
 				Alerts.bgFadeIn(Alerts.OPACITY, Alerts.STEPS);
 			}

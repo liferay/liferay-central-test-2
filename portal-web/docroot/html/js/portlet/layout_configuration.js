@@ -60,7 +60,7 @@ var LayoutConfiguration = {
 						LayoutConfiguration.menu = null;
 					}
 				});
-			Ajax.update(url, popup, {onComplete: LayoutConfiguration.init});
+			AjaxUtil.update(url, popup, {onComplete: LayoutConfiguration.init});
 		}
 	},
 

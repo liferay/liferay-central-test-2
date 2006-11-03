@@ -22,64 +22,6 @@
 
 var submitCountdown = 0;
 
-function $(id) {
-	var item = null;
-	
-    if(typeof(id) == "string") {
-    	item = document.getElementById(id);
-	}
-    else if(typeof(id) == "object") {
-    	item = id;
-	}
-	
-	return item;
-}
-
-if (!Array.prototype.push) {
-	function array_push() {
-		for(var i = 0; i < arguments.length; i++) {
-			this[this.length] = arguments[i];
-		}
-
-		return this.length;
-	}
-
-	Array.prototype.push = array_push;
-}
-
-if (!Array.prototype.pop) {
-	function array_pop(){
-		lastElement = this[this.length - 1];
-		this.length = Math.max(this.length - 1, 0);
-
-		return lastElement;
-	}
-
-	Array.prototype.pop = array_pop;
-}
-
-function Array_iterate (func, options) {
-	if (typeof(func) == "function") {
-		for (var i = 0; i < this.length; i++) {
-			if (func(this[i], i, options)) {
-				break;
-			}
-		}
-	}
-}
-
-Array.prototype.foreach = Array_iterate;
-
-function changeOpacity (object, opacity) {
-	opacity = (opacity >= 100) ? 99.999 : opacity;
-	opacity = (opacity < 0) ? 0 : opacity;
-    
-	object.style.opacity = (opacity / 100);
-	object.style.MozOpacity = (opacity / 100);
-	object.style.KhtmlOpacity = (opacity / 100);
-	object.style.filter = "alpha(opacity=" + opacity + ")";
-}
-
 function check(form, name, checked) {
 	for (var i = 0; i < form.elements.length; i++) {
 		var e = form.elements[i];
@@ -240,123 +182,88 @@ function disableEsc() {
 	}
 }
 
-var Element = {
-	addClassName: function(element, className) {
-		if (className && !this.hasClassName(element, className)) {
-			var classArray = element.className.split(" ");
-			classArray.push(className);
-			element.className = classArray.join(" ");
-		}
-	},
+if (!Element) Element = new Object();
 
-	disable: function(element) {
-		element = $(element);
-		var items = element.getElementsByTagName("*");
+Element.disable = function(element) {
+	element = $(element);
+	var items = element.getElementsByTagName("*");
+	
+	for (var i = 0; i < items.length; i++) {
+		var item = items[i];
+		var nodeName = item.nodeName.toLowerCase();
+
+		item.onclick = function() {};
+		item.onmouseover = function() {};
+		item.onmouseout = function() {};
 		
-		for (var i = 0; i < items.length; i++) {
-			var item = items[i];
-			var nodeName = item.nodeName.toLowerCase();
-
-			item.onclick = function() {};
-			item.onmouseover = function() {};
-			item.onmouseout = function() {};
-			
-			if (is_ie) {
-				item.onmouseenter = function() {};
-				item.onmouseleave = function() {};
-			}
-			
-			if (nodeName == "a") {
-				item.href = "javascript: void(0)";
-			}
-			else if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
-				item.disabled = "true";
-			}
-			else if (nodeName == "form") {
-				item.action = "";
-				item.onsubmit = function() { return false; };
-			}
-			
-			item.style.cursor = "default";
+		if (is_ie) {
+			item.onmouseenter = function() {};
+			item.onmouseleave = function() {};
 		}
-	},
-
-	removeClassName: function(element, className) {
-		if (className && this.hasClassName(element, className)) {
-			var classArray = element.className.split(new RegExp("(^|\\s)" + className + "(\\s|$)"));
-			element.className = classArray.join(" ");
+		
+		if (nodeName == "a") {
+			item.href = "javascript: void(0)";
 		}
-	},
-	
-	hasClassName: function(element, className) {
-		var rt = false;
-	
-		if (element.className && className) {
-			rt = element.className.match(new RegExp("(^|\\s)" + className + "(\\s|$)"));
+		else if (nodeName == "input" || nodeName == "select" || nodeName == "script") {
+			item.disabled = "true";
 		}
-	
-		return rt;
-	},
-	
-	remove: function(element) {
-		element = $(element);
-		if (element) {
-			element.parentNode.removeChild(element);
+		else if (nodeName == "form") {
+			item.action = "";
+			item.onsubmit = function() { return false; };
 		}
-		return(element);
+		
+		item.style.cursor = "default";
 	}
 }
 
-var Event = {
-	addHandler: function(obj, type, func) {
-		if (type.indexOf("on") != 0) {
-			type = "on" + type;
-		}
-		
-	    var temp = obj[type];
+Element.changeOpacity = function(object, opacity) {
+	opacity = (opacity >= 100) ? 99.999 : opacity;
+	opacity = (opacity < 0) ? 0 : opacity;
+    
+	object.style.opacity = (opacity / 100);
+	object.style.MozOpacity = (opacity / 100);
+	object.style.KhtmlOpacity = (opacity / 100);
+	object.style.filter = "alpha(opacity=" + opacity + ")";
+}
+
+
+if (!Event) Event = new Object();
+
+Event.addHandler = function(obj, type, func) {
+	if (type.indexOf("on") != 0) {
+		type = "on" + type;
+	}
 	
-		if (typeof obj[type] != "function") {
-	        obj[type] = func;
-	    }
-		else {
-	        obj[type] = function() {
-	        	if (temp) {
-		            temp();
-	        	}
+    var temp = obj[type];
+
+	if (typeof obj[type] != "function") {
+        obj[type] = func;
+    }
+	else {
+        obj[type] = function() {
+        	if (temp) {
+	            temp();
+        	}
+
+			func();
+        }
+    }
+}
 	
-				func();
-	        }
-	    }
-	},
+Event.enterPressed = function(event) {
+	if (!event) {
+		event = window.event;
+	}
+	var keycode = event.keyCode;
 	
-	enterPressed: function(event) {
-		if (!event) {
-			event = window.event;
-		}
-		var keycode = event.keyCode;
-		
-		if (keycode == 13) {
-			return true;
-		}
-		else {
-			return false;
-		}
+	if (keycode == 13) {
+		return true;
+	}
+	else {
+		return false;
 	}
 }
 
-document.getElementsByClassName = function(className, parentElement) {
-	var children = ($(parentElement) || document.body).getElementsByTagName('*');
-	var elements = new Array();
-	
-	for (var i = 0; i < children.length; i++) {
-		var child = children[i];
-		if (Element.hasClassName(child, className)){
-			elements.push(child);
-		}
-	}
-	
-	return elements;
-}
 
 function getSelectedIndex(col) {
 	for (var i = 0; i < col.length; i++) {
@@ -452,7 +359,7 @@ LinkedList.prototype.remove = function(obj) {
 	}
 }
 
-LinkedList.prototype.foreach = function(func) {
+LinkedList.prototype.each = function(func) {
 	var cur = this.head;
 	var count = 0;
 	
@@ -471,7 +378,7 @@ LinkedList.prototype.foreach = function(func) {
 }
 
 LinkedList.prototype.size = function() {
-	return this.foreach();
+	return this.each();
 }
 
 function listChecked(form) {

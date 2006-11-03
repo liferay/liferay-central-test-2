@@ -44,7 +44,7 @@ function AjaxRequest(url, options) {
 					}
 	
 					if (ajaxId && ajaxId != "") {
-						Ajax.remove(parseInt(ajaxId));
+						AjaxUtil.remove(parseInt(ajaxId));
 					}
 				}
 			}
@@ -103,7 +103,7 @@ function AjaxRequest(url, options) {
 	};
 }
 
-var Ajax = {
+var AjaxUtil = {
 	counter : 1,
 	requests : new Array(),
 	
@@ -116,22 +116,22 @@ var Ajax = {
 		 * method (string) - use "get" or "post". Default is post.
 		 */
 		var opts = (options == null) ? (new Object()) : options;
-		var ajaxId = (opts.reverseAjax) ? 0 : Ajax.getNextId();
+		var ajaxId = (opts.reverseAjax) ? 0 : AjaxUtil.getNextId();
 		opts.ajaxId = ajaxId;
 		
 		var request;
 		
-		if (ajaxId == 0 && Ajax.requests[0]) {
-			request = Ajax.requests[0];
+		if (ajaxId == 0 && AjaxUtil.requests[0]) {
+			request = AjaxUtil.requests[0];
 			request.resend(url, opts);
 		}
 		else {
 			request = new AjaxRequest(url, opts);
-			Ajax.requests[ajaxId] = request;
+			AjaxUtil.requests[ajaxId] = request;
 		}
 		
 		if (!opts.onComplete) {
-			Ajax.remove(ajaxId);
+			AjaxUtil.remove(ajaxId);
 		}
 	},
 	
@@ -160,17 +160,17 @@ var Ajax = {
 				}
 			}
 			
-			Ajax.request(url, options);
+			AjaxUtil.request(url, options);
 		}
 	},
 	
 	getNextId : function() {
-		var id = Ajax.counter++;
+		var id = AjaxUtil.counter++;
 
-		if (Ajax.counter > 20) {
+		if (AjaxUtil.counter > 20) {
 			/* Reset array in a round-robin fashion */
 			/* Reserve index 0 for reverse ajax requests */
-			Ajax.counter = 1;
+			AjaxUtil.counter = 1;
 		}
 
 		return id;
@@ -178,7 +178,7 @@ var Ajax = {
 
 	remove : function(id) {
 		if (id) {
-			var request = Ajax.requests[id];
+			var request = AjaxUtil.requests[id];
 			
 			if (request) {
 				request.cleanUp();
@@ -266,11 +266,11 @@ function loadForm(form, action, elId, returnFunction) {
 }
 
 /*
- * NOTE: loadPage() has been depricated.  Use Ajax.request() instead
+ * NOTE: loadPage() has been depricated.  Use AjaxUtil.request() instead
  */
 function loadPage(path, queryString, returnFunction, returnArgs) {
 	
-	Ajax.request(path + "?" + queryString, {
+	AjaxUtil.request(path + "?" + queryString, {
 			onComplete: returnFunction,
 			returnArgs: returnArgs
 		});

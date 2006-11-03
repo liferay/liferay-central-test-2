@@ -55,7 +55,7 @@
 
 		var url = "<%= themeDisplay.getPathMain() %>/portal/extend_session_confirm?p_p_state=<%= LiferayWindowState.POP_UP %>";
 
-		Ajax.update(url, message);
+		AjaxUtil.update(url, message);
 
 		setTimeout("sessionHasExpired()", <%= sessionTimeoutWarningMinute %>);
 	}
