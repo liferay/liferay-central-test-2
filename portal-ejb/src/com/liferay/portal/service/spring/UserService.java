@@ -56,6 +56,20 @@ public interface UserService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portal.model.User addUser(java.lang.String companyId,
+		boolean autoUserId, java.lang.String userId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String nickName, java.lang.String prefixId,
+		java.lang.String suffixId, boolean male, int birthdayMonth,
+		int birthdayDay, int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId,
+		boolean sendEmail)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void deleteRoleUser(java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

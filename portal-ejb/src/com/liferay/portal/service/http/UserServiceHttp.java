@@ -313,6 +313,155 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static com.liferay.portal.model.User addUser(
+		HttpPrincipal httpPrincipal, java.lang.String companyId,
+		boolean autoUserId, java.lang.String userId, boolean autoPassword,
+		java.lang.String password1, java.lang.String password2,
+		boolean passwordReset, java.lang.String emailAddress,
+		java.util.Locale locale, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String nickName, java.lang.String prefixId,
+		java.lang.String suffixId, boolean male, int birthdayMonth,
+		int birthdayDay, int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId,
+		boolean sendEmail)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = companyId;
+
+			if (companyId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new BooleanWrapper(autoUserId);
+			Object paramObj2 = userId;
+
+			if (userId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(autoPassword);
+			Object paramObj4 = password1;
+
+			if (password1 == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = password2;
+
+			if (password2 == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = new BooleanWrapper(passwordReset);
+			Object paramObj7 = emailAddress;
+
+			if (emailAddress == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = locale;
+
+			if (locale == null) {
+				paramObj8 = new NullWrapper("java.util.Locale");
+			}
+
+			Object paramObj9 = firstName;
+
+			if (firstName == null) {
+				paramObj9 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj10 = middleName;
+
+			if (middleName == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = lastName;
+
+			if (lastName == null) {
+				paramObj11 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj12 = nickName;
+
+			if (nickName == null) {
+				paramObj12 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj13 = prefixId;
+
+			if (prefixId == null) {
+				paramObj13 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj14 = suffixId;
+
+			if (suffixId == null) {
+				paramObj14 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj15 = new BooleanWrapper(male);
+			Object paramObj16 = new IntegerWrapper(birthdayMonth);
+			Object paramObj17 = new IntegerWrapper(birthdayDay);
+			Object paramObj18 = new IntegerWrapper(birthdayYear);
+			Object paramObj19 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj19 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj20 = organizationId;
+
+			if (organizationId == null) {
+				paramObj20 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj21 = locationId;
+
+			if (locationId == null) {
+				paramObj21 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj22 = new BooleanWrapper(sendEmail);
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"addUser",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.User)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteRoleUser(HttpPrincipal httpPrincipal,
 		java.lang.String roleId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
