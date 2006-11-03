@@ -389,9 +389,10 @@ public class MainServlet extends ActionServlet {
 			// LDAP Import
 
 			try {
-				if (PrefsPropsUtil.getBoolean(PropsUtil.LDAP_IMPORT_ENABLED) &&
+				if (PrefsPropsUtil.getBoolean(
+						_companyId, PropsUtil.LDAP_IMPORT_ENABLED) &&
 					PrefsPropsUtil.getBoolean(
-						PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
+						_companyId, PropsUtil.LDAP_IMPORT_ON_STARTUP)) {
 
 					LDAPImportUtil.importLDAP(_companyId);
 				}

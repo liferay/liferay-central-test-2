@@ -215,6 +215,8 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_ON_STARTUP = "ldap.import.on.startup";
 
+	public static final String LDAP_IMPORT_INTERVAL = "ldap.import.interval";
+
 	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
 
     public static final String LDAP_IMPORT_PROVIDER_URL = "ldap.import.provider.url";

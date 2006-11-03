@@ -83,6 +83,7 @@
 	<portlet>
 		<portlet-name>9</portlet-name>
 		<struts-path>admin</struts-path>
+		<scheduler-class>com.liferay.portlet.admin.job.Scheduler</scheduler-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

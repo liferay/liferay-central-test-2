@@ -27,8 +27,10 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -42,6 +44,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 
 import java.util.Calendar;
+import java.util.List;
 import java.util.Locale;
 import java.util.Properties;
 
@@ -111,6 +114,21 @@ public class LDAPImportUtil {
 		}
 	}
 
+	public static void importLDAP() throws Exception {
+		List companies = CompanyLocalServiceUtil.getCompanies();
+		
+		for (int i = 0; i < companies.size(); i++) {
+			Company company = (Company) companies.get(i);
+			String companyId = company.getCompanyId();
+			
+			if (PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.LDAP_IMPORT_ENABLED)) {
+				
+				importLDAP(company.getCompanyId());
+			}
+		}
+	}
+	
 	public static void importLDAP(String companyId) throws Exception {
 		Properties env = new Properties();
 
