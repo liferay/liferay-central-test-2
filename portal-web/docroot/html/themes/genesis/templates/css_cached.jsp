@@ -599,6 +599,32 @@ FONT.bg {
 	vertical-align: bottom;
 }
 
+.layout-column-arrow-up {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png);
+	</c:if>
+	font-size: 0;
+	position: absolute;
+	height: 48px;
+	width: 40px;
+}
+
+.layout-column-arrow-down {
+	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
+		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-down.png', sizingMethod='scale');
+	</c:if>
+	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-down.png);
+	</c:if>
+	font-size: 0;
+	position: absolute;
+	height: 48px;
+	width: 40px;
+}
+
 #layout-column_column-1,
 #layout-column_column-2,
 #layout-column_column-3,

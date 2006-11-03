@@ -513,7 +513,6 @@ FONT.bg {
 	height: 48px;
 	width: 40px;
 }
-}
 
 #layout-column_column-1,
 #layout-column_column-2,
