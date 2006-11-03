@@ -91,7 +91,7 @@ public class EditUsersAction extends PortletAction {
 			updateEmails(req, prefs);
 		}
 		else if (cmd.equals("updateLdap")) {
-			updateLdap(req);
+			updateLdap(req, prefs);
 		}
 		else if (cmd.equals("updateMailHostNames")) {
 			updateMailHostNames(req, prefs);
@@ -207,8 +207,8 @@ public class EditUsersAction extends PortletAction {
 		}
 	}
 
-	protected void updateLdap(ActionRequest req) throws Exception {
-		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
+	protected void updateLdap(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		boolean required = ParamUtil.getBoolean(req, "required");
@@ -267,8 +267,6 @@ public class EditUsersAction extends PortletAction {
 
 		LDAPAuth ldapAuth = (LDAPAuth)InstancePool.get(
 			LDAPAuth.class.getName());
-
-		ldapAuth.setEnabled(enabled);
 	}
 
 	protected void updateMailHostNames(

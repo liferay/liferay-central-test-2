@@ -65,16 +65,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LDAPAuth implements Authenticator {
 
-	public LDAPAuth() {
-		try {
-			_enabled = PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTH_IMPL_LDAP_ENABLED);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
-
 	public int authenticateByEmailAddress(
 			String companyId, String emailAddress, String password,
 			Map headerMap, Map parameterMap)
@@ -111,7 +101,10 @@ public class LDAPAuth implements Authenticator {
 			String password)
 		throws Exception {
 
-		if (!_enabled) {
+		boolean enabled = PrefsPropsUtil.getBoolean(
+			companyId, PropsUtil.AUTH_IMPL_LDAP_ENABLED);
+
+		if (!enabled) {
 			if (_log.isDebugEnabled()) {
 				_log.debug("Authenticator is not enabled");
 			}
@@ -126,24 +119,25 @@ public class LDAPAuth implements Authenticator {
 		Properties env = new Properties();
 
 		String providerURL = PrefsPropsUtil.getString(
-			PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL);
+			companyId, PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL);
 
 		String ldapContext = PrefsPropsUtil.getString(
-			PropsUtil.AUTH_IMPL_LDAP_CONTEXT);
+			companyId, PropsUtil.AUTH_IMPL_LDAP_CONTEXT);
 
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
-			PrefsPropsUtil.getString(PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
 		env.put(
 			Context.PROVIDER_URL, providerURL + StringPool.SLASH + ldapContext);
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(
-				PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL));
+				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL));
 		env.put(
 			Context.SECURITY_CREDENTIALS,
 			PrefsPropsUtil.getString(
-				PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
+				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -167,7 +161,7 @@ public class LDAPAuth implements Authenticator {
 		}
 
 		String filter = PrefsPropsUtil.getString(
-			PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER);
+			companyId, PropsUtil.AUTH_IMPL_LDAP_SEARCH_FILTER);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter before transformation " + filter);
@@ -202,7 +196,7 @@ public class LDAPAuth implements Authenticator {
 
 			Properties userMappings = PropertiesUtil.load(
 				PrefsPropsUtil.getString(
-					PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
+					companyId, PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
 
 			if (_log.isDebugEnabled()) {
 				StringWriter sw = new StringWriter();
@@ -274,6 +268,7 @@ public class LDAPAuth implements Authenticator {
 				String encryptedPassword = password;
 
 				String algorithm = PrefsPropsUtil.getString(
+					companyId,
 					PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
 
 				if (Validator.isNotNull(algorithm)) {
@@ -321,7 +316,9 @@ public class LDAPAuth implements Authenticator {
 				_log.debug("Search filter did not return any results");
 			}
 
-			if (PrefsPropsUtil.getBoolean(PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
+			if (PrefsPropsUtil.getBoolean(
+					companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
+
 				if (Validator.isNotNull(userId)) {
 					if (OmniadminUtil.isOmniadmin(userId)) {
 						return SUCCESS;
@@ -347,16 +344,6 @@ public class LDAPAuth implements Authenticator {
 		return SUCCESS;
 	}
 
-	public boolean isEnabled() {
-		return _enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		_enabled = enabled;
-	}
-
 	private static Log _log = LogFactory.getLog(LDAPAuth.class);
-
-	private boolean _enabled;
 
 }
