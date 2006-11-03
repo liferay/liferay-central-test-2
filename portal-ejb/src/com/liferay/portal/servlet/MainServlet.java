@@ -1,4 +1,5 @@
 /**
+ * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -34,6 +35,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalFinder;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.ldap.LDAPImportUtil;
@@ -608,6 +610,8 @@ public class MainServlet extends ActionServlet {
 
 		req.setAttribute(WebKeys.COMPANY_ID, companyId);
 
+		CompanyThreadLocal.setCompanyId(companyId);
+
 		// ROOT_PATH variable
 
 		String rootPath = (String)ctx.getAttribute(WebKeys.ROOT_PATH);
@@ -892,6 +896,10 @@ public class MainServlet extends ActionServlet {
 
 			res.addHeader(
 				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
+
+			// Clear the company id associated with this thread
+
+			CompanyThreadLocal.setCompanyId(null);
 
 			// Clear the principal associated with this thread
 

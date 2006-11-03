@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
@@ -63,6 +64,53 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LDAPImportUtil {
 
+	public static void addOrUpdateUser(
+			String creatorUserId, String companyId, boolean autoUserId,
+			String userId, boolean autoPassword, String password1,
+			String password2, boolean passwordReset, String emailAddress,
+			Locale locale, String firstName, String middleName, String lastName,
+			String nickName, String prefixId, String suffixId, boolean male,
+			int birthdayMonth, int birthdayDay, int birthdayYear,
+			String jobTitle, String organizationId, String locationId,
+			boolean sendEmail, boolean checkExists, boolean updatePassword)
+		throws PortalException, SystemException {
+
+		boolean create = true;
+
+		if (checkExists) {
+			try {
+				UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+
+				if (updatePassword) {
+					UserLocalServiceUtil.updatePassword(
+						userId, password1, password2, passwordReset);
+				}
+
+				create = false;
+			}
+			catch (NoSuchUserException nsue) {
+
+				// User does not exist so create
+
+			}
+		}
+
+		if (create) {
+			try {
+				UserLocalServiceUtil.addUser(
+					creatorUserId, companyId, autoUserId, userId, autoPassword,
+					password1, password2, passwordReset, emailAddress, locale,
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId, sendEmail);
+			}
+			catch (Exception e){
+				_log.error(StackTraceUtil.getStackTrace(e));
+			}
+		}
+	}
+
 	public static void importLDAP(String companyId) throws Exception {
 		Properties env = new Properties();
 
@@ -74,8 +122,7 @@ public class LDAPImportUtil {
 			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_PROVIDER_URL));
 		env.put(
 			Context.SECURITY_PRINCIPAL,
-			PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_SECURITY_PRINCIPAL));
+			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_SECURITY_PRINCIPAL));
 		env.put(
 			Context.SECURITY_CREDENTIALS,
 			PrefsPropsUtil.getString(
@@ -133,107 +180,10 @@ public class LDAPImportUtil {
 			NamingEnumeration enu = ctx.search(context, filter, null);
 
 			while (enu.hasMore()) {
-				SearchResult result = (SearchResult) enu.next();
+				SearchResult result = (SearchResult)enu.next();
 
-				String userCN = result.getName();
-
-				if (_log.isDebugEnabled()) {
-					_log.debug("User CN " + userCN);
-				}
-
-				Attributes attrs = result.getAttributes();
-
-				String creatorUserId = null;
-				boolean autoUserId = false;
-				String userId = LDAPUtil.getAttributeValue(
-						attrs, userMappings.getProperty("userId"));
-
-				boolean autoPassword = true;
-				String password1 = StringPool.BLANK;
-				String password2 = StringPool.BLANK;
-				boolean passwordReset = false;
-
-				String emailAddress = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("emailAddress"));
-
-				Locale locale = Locale.US;
-				String firstName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("firstName"));
-				String middleName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("middleName"));
-				String lastName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("lastName"));
-
-				if (Validator.isNull(firstName)
-					|| Validator.isNull(lastName)) {
-					String fullName = LDAPUtil.getAttributeValue(
-						attrs, userMappings.getProperty("fullName"));
-
-					String names[] = LDAPUtil.splitFullName(fullName);
-
-					firstName = names[0];
-					middleName = names[1];
-					lastName = names[2];
-				}
-
-				String nickName = null;
-				String prefixId = null;
-				String suffixId = null;
-				boolean male = true;
-				int birthdayMonth = Calendar.JANUARY;
-				int birthdayDay = 1;
-				int birthdayYear = 1970;
-				String jobTitle = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("jobTitle"));
-				String organizationId = null;
-				String locationId = null;
-				boolean sendEmail = false;
-
-				addOrUpdateUser(creatorUserId,
-					companyId, autoUserId, userId, autoPassword, password1,
-					password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay,
-					birthdayYear, jobTitle, organizationId, locationId,
-					sendEmail, true, false);
-
-				// Import and add user to group
-				Attribute attr = attrs.get(userMappings.getProperty("group"));
-
-				for (int i = 0; i < attr.size(); i++) {
-
-					String groupDN = (String)attr.get(i);
-
-					Attributes groupAttrs = ctx.getAttributes(groupDN);
-
-					String groupName = LDAPUtil.getAttributeValue(groupAttrs,
-						groupMappings.getProperty("groupName"));
-					String description = LDAPUtil.getAttributeValue(groupAttrs,
-						groupMappings.getProperty("description"));
-
-					Group group = null;
-
-					try {
-						group = GroupLocalServiceUtil.getGroup(companyId,
-							groupName);
-					}
-					catch (NoSuchGroupException nsge) {
-						group = GroupLocalServiceUtil.addGroup(
-							User.getDefaultUserId(companyId), StringPool.BLANK,
-							StringPool.BLANK, groupName, description,
-							StringPool.BLANK, StringPool.BLANK);
-					}
-
-					if (_log.isDebugEnabled()) {
-						_log.debug(
-							"Adding " + userCN + " to group: " + groupDN);
-					}
-
-					String[] userIds = {userId};
-
-					UserLocalServiceUtil.addGroupUsers(group.getGroupId(),
-						userIds);
-				}
+				_importLDAP(
+					companyId, ctx, userMappings, groupMappings, result);
 			}
 		}
 		catch (Exception e) {
@@ -246,49 +196,101 @@ public class LDAPImportUtil {
 		}
 	}
 
-	public static void addOrUpdateUser(
-		String creatorUserId, String companyId, boolean autoUserId,
-		String userId, boolean autoPassword, String password1,
-		String password2, boolean passwordReset, String emailAddress,
-		Locale locale, String firstName, String middleName, String lastName,
-		String nickName, String prefixId, String suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		String jobTitle, String organizationId, String locationId,
-		boolean sendEmail, boolean checkExists, boolean updatePassword)
-	throws PortalException, SystemException {
+	private static void _importLDAP(
+			String companyId, LdapContext ctx, Properties userMappings,
+			Properties groupMappings, SearchResult result)
+		throws Exception {
 
-		boolean create = true;
+		String userCN = result.getName();
 
-		if (checkExists) {
-			try {
-				UserLocalServiceUtil.getUserByEmailAddress(companyId,
-					emailAddress);
-
-				if (updatePassword) {
-					UserLocalServiceUtil.updatePassword(
-						userId, password1, password2, passwordReset);
-				}
-
-				create = false;
-			}
-			catch (NoSuchUserException nsue) {
-				// user does not exist so create
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("User CN " + userCN);
 		}
 
-		if (create) {
+		Attributes attrs = result.getAttributes();
+
+		String creatorUserId = null;
+		boolean autoUserId = false;
+		String userId = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("userId"));
+		boolean autoPassword = true;
+		String password1 = StringPool.BLANK;
+		String password2 = StringPool.BLANK;
+		boolean passwordReset = false;
+		String emailAddress = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("emailAddress"));
+		Locale locale = Locale.US;
+		String firstName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		String nickName = null;
+		String prefixId = null;
+		String suffixId = null;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("jobTitle"));
+		String organizationId = null;
+		String locationId = null;
+		boolean sendEmail = false;
+
+		addOrUpdateUser(
+			creatorUserId, companyId, autoUserId, userId, autoPassword,
+			password1, password2, passwordReset, emailAddress, locale,
+			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail, true, false);
+
+		// Import and add user to group
+
+		Attribute attr = attrs.get(userMappings.getProperty("group"));
+
+		for (int i = 0; i < attr.size(); i++) {
+			String groupDN = (String)attr.get(i);
+
+			Attributes groupAttrs = ctx.getAttributes(groupDN);
+
+			String groupName = LDAPUtil.getAttributeValue(
+				groupAttrs, groupMappings.getProperty("groupName"));
+			String description = LDAPUtil.getAttributeValue(
+				groupAttrs, groupMappings.getProperty("description"));
+
+			Group group = null;
+
 			try {
-				UserLocalServiceUtil.addUser(
-					creatorUserId, companyId, autoUserId, userId, autoPassword,
-					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, organizationId, locationId, sendEmail);
+				group = GroupLocalServiceUtil.getGroup(companyId, groupName);
 			}
-			catch (Exception e){
-				_log.error(
-					"Could not create user with userId and email address", e);
+			catch (NoSuchGroupException nsge) {
+				group = GroupLocalServiceUtil.addGroup(
+					User.getDefaultUserId(companyId), StringPool.BLANK,
+					StringPool.BLANK, groupName, description, StringPool.BLANK,
+					StringPool.BLANK);
 			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Adding " + userCN + " to group " + groupDN);
+			}
+
+			UserLocalServiceUtil.addGroupUsers(
+				group.getGroupId(), new String[] {userId});
 		}
 	}
 
