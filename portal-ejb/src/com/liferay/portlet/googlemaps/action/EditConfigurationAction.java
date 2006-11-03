@@ -67,6 +67,7 @@ public class EditConfigurationAction extends PortletAction {
 			req, "destinationAddress");
 		boolean destinationInputEnabled = ParamUtil.getBoolean(
 			req, "destinationInputEnabled");
+		String height = ParamUtil.getString(req, "height");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -80,6 +81,7 @@ public class EditConfigurationAction extends PortletAction {
 		prefs.setValue(
 			"destination-input-enabled",
 			String.valueOf(destinationInputEnabled));
+		prefs.setValue("height", height);
 
 		prefs.store();
 

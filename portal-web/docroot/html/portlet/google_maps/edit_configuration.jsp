@@ -69,6 +69,20 @@
 		<liferay-ui:input-checkbox param="destinationInputEnabled" defaultValue="<%= destinationInputEnabled %>" />
 	</td>
 </tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "height") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="<portlet:namespace />height" size="4" type="text" value="<%= height %>"> px
+	</td>
+</tr>
 </table>
 
 <br>

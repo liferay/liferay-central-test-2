@@ -475,6 +475,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>58</portlet-name>
@@ -574,6 +575,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>73</portlet-name>
@@ -585,6 +587,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>77</portlet-name>
@@ -630,6 +633,7 @@
 		<layout-cacheable>true</layout-cacheable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>83</portlet-name>
@@ -652,6 +656,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>86</portlet-name>
@@ -703,6 +708,7 @@
 		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>
+		<add-default-resource>true</add-default-resource>
 	</portlet>
 	<portlet>
 		<portlet-name>92</portlet-name>

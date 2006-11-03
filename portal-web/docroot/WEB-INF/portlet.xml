@@ -1317,6 +1317,9 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1656,6 +1659,9 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1676,6 +1682,9 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1695,6 +1704,9 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1775,6 +1787,9 @@
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
+		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
 		<security-role-ref>
@@ -1820,6 +1835,9 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1904,6 +1922,9 @@
 				<value>admin</value>
 			</preference>
 		</portlet-preferences>
+		<security-role-ref>
+			<role-name>guest</role-name>
+		</security-role-ref>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -2062,6 +2083,10 @@
 			<preference>
 				<name>destination-input-enabled</name>
 				<value>true</value>
+			</preference>
+			<preference>
+				<name>height</name>
+				<value>300</value>
 			</preference>
 		</portlet-preferences>
 		<security-role-ref>

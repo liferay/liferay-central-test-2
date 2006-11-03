@@ -123,7 +123,7 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 			<br><br>
 		</c:if>
 
-		<div id="<portlet:namespace />map" style="height: 300px; width: 100%;"></div>
+		<div id="<portlet:namespace />map" style="height: <%= height %>px; width: 100%;"></div>
 
 		</form>
 	</c:when>

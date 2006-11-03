@@ -37,4 +37,5 @@ String sourceAddress = prefs.getValue("source-address", StringPool.BLANK);
 boolean sourceInputEnabled = GetterUtil.getBoolean(prefs.getValue("source-input-enabled", StringPool.BLANK));
 String destinationAddress = prefs.getValue("destination-address", StringPool.BLANK);
 boolean destinationInputEnabled = GetterUtil.getBoolean(prefs.getValue("destination-input-enabled", StringPool.BLANK));
+String height = prefs.getValue("height", StringPool.BLANK);
 %>
