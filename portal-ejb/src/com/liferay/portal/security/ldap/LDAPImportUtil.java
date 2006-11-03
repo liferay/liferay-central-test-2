@@ -116,17 +116,20 @@ public class LDAPImportUtil {
 
 		env.put(
 			Context.INITIAL_CONTEXT_FACTORY,
-			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_FACTORY_INITIAL));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_FACTORY_INITIAL));
 		env.put(
 			Context.PROVIDER_URL,
-			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_PROVIDER_URL));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_PROVIDER_URL));
 		env.put(
 			Context.SECURITY_PRINCIPAL,
-			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_SECURITY_PRINCIPAL));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_SECURITY_PRINCIPAL));
 		env.put(
 			Context.SECURITY_CREDENTIALS,
 			PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_SECURITY_CREDENTIALS));
+				companyId, PropsUtil.LDAP_IMPORT_SECURITY_CREDENTIALS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -150,7 +153,8 @@ public class LDAPImportUtil {
 		}
 
 		Properties userMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -161,7 +165,8 @@ public class LDAPImportUtil {
 		}
 
 		Properties groupMappings = PropertiesUtil.load(
-			PrefsPropsUtil.getString(PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
+			PrefsPropsUtil.getString(
+				companyId, PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
 			StringWriter sw = new StringWriter();
@@ -172,10 +177,10 @@ public class LDAPImportUtil {
 		}
 		try {
 			String filter = PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
+				companyId, PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
 
 			String context = PrefsPropsUtil.getString(
-				PropsUtil.LDAP_IMPORT_CONTEXT);
+				companyId, PropsUtil.LDAP_IMPORT_CONTEXT);
 
 			NamingEnumeration enu = ctx.search(context, filter, null);
 
