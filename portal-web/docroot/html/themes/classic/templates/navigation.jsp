@@ -74,7 +74,7 @@
 			if (isSelectedTab) {
 				%>
 				<div id="layout-tab-selected" class="layout-tab">
-					<div class="layout-tab-text" id="layout-tab-text-edit" style="cursor: text"><%= tabName %></div>
+					<div class="layout-tab-text"><span id="layout-tab-text-edit"><%= tabName %></span></div>
 				</div>
 				<%
 			}

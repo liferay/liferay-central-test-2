@@ -370,17 +370,21 @@ var Navigation = {
 					delLink.href = "javascript:Navigation.removePage()";
 					delLink.className = "layout-tab-close";
 					
-					input.style.width = (textWidth - 20) + "px";
+					parent.className = "layout-tab-text-editing";
+					
+					input.style.width = (textWidth + 20) + "px";
 					Element.addClassName(input, "layout-tab-input");
 					
 					parent.insertBefore(delLink, input);
 				},
 			onComplete:
 				function(newTextObj, oldText) {
-					var delLinks = document.getElementsByClassName("layout-tab-close", newTextObj.parentNode);
+					var parent = newTextObj.parentNode;
+					var delLinks = document.getElementsByClassName("layout-tab-close", parent);
 					var delLink = delLinks[delLinks.length - 1];
 					var newText = newTextObj.innerHTML;
 					
+					parent.className = "layout-tab-text";
 					if (newText == "") {
 						newTextObj.innerHTML = newText = "(UNTITLED)";
 					}
@@ -406,6 +410,11 @@ var Navigation = {
 		
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		tabs.foreach(function(item, index) {
+			var link = item.getElementsByTagName("a");
+			if (link.length > 0) {
+				link[0].style.cursor = "pointer";
+			}
+
 			DragDrop.create(item, {
 					forceDrop: true,
 					revert: true

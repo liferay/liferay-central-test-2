@@ -451,9 +451,16 @@ FONT.bg {
 .layout-tab-text {
 	padding: 6px 20px 0 20px;
 }
+.layout-tab-text {
+	padding: 6px 20px 0 20px;
+}
 
 .layout-tab-text * {
 	white-space: nowrap;
+}
+
+.layout-tab-text-editing {
+	padding: 0 0 0 0;
 }
 
 .layout-tab-close {
@@ -486,12 +493,12 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrow/arrow-up.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png);
 	</c:if>
 	font-size: 0;
 	position: absolute;
-	height: 53px;
-	width: 44px;
+	height: 48px;
+	width: 40px;
 }
 
 .layout-column-arrow-down {
@@ -499,12 +506,12 @@ FONT.bg {
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-down.png', sizingMethod='scale');
 	</c:if>
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
-		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrow/arrow-down.png);
+		background-image: url(<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-down.png);
 	</c:if>
 	font-size: 0;
 	position: absolute;
-	height: 53px;
-	width: 44px;
+	height: 48px;
+	width: 40px;
 }
 }
 
