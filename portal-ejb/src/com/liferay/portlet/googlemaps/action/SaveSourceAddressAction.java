@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
  *
@@ -20,21 +19,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+package com.liferay.portlet.googlemaps.action;
 
---%><%
-PortletPreferences prefs = renderRequest.getPreferences();
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.util.ParamUtil;
 
-String portletResource = ParamUtil.getString(request, "portletResource");
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+/**
+ * <a href="SaveSourceAddressAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Mark Wong
+ *
+ */
+public class SaveSourceAddressAction extends JSONAction {
+
+	public String getJSON(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+
+		HttpSession ses = req.getSession();
+
+		String namespace = ParamUtil.getString(req, "namespace");
+		String sourceAddress = ParamUtil.getString(req, "sourceAddress");
+
+		ses.setAttribute(namespace + "sourceAddress", sourceAddress);
+
+		return null;
+	}
+
 }
-
-String sourceAddress = prefs.getValue("source-address", StringPool.BLANK);
-boolean sourceInputEnabled = GetterUtil.getBoolean(prefs.getValue("source-input-enabled", StringPool.BLANK));
-String destinationAddress = prefs.getValue("destination-address", StringPool.BLANK);
-boolean destinationInputEnabled = GetterUtil.getBoolean(prefs.getValue("destination-input-enabled", StringPool.BLANK));
-%>

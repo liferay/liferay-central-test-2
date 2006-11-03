@@ -2052,15 +2052,15 @@
 				<value>1600 Pennsylvania Ave., Washington D.C.</value>
 			</preference>
 			<preference>
+				<name>source-input-enabled</name>
+				<value>true</value>
+			</preference>
+			<preference>
 				<name>destination-address</name>
 				<value>48 N. Rotary Road, Arlington, Virginia</value>
 			</preference>
 			<preference>
-				<name>show-source-input</name>
-				<value>true</value>
-			</preference>
-			<preference>
-				<name>show-destination-input</name>
+				<name>destination-input-enabled</name>
 				<value>true</value>
 			</preference>
 		</portlet-preferences>
