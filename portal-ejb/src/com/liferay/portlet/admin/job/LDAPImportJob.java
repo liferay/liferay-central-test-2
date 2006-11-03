@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -38,15 +38,20 @@ import org.quartz.JobExecutionException;
  * <a href="LDAPImportJob.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
- * @version $Revision: $
  *
  */
 public class LDAPImportJob implements IntervalJob {
 
 	public LDAPImportJob() {
 		try {
-			_interval = PrefsPropsUtil.getLong(PropsUtil.LDAP_IMPORT_INTERVAL) * 
-				Time.MINUTE;
+			long rawInterval = PrefsPropsUtil.getLong(
+				PropsUtil.LDAP_IMPORT_INTERVAL);
+			
+			if (_log.isDebugEnabled()) {
+				_log.debug("Interval: " + rawInterval + " minutes");
+			}
+
+			_interval =  rawInterval * Time.MINUTE;			
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
