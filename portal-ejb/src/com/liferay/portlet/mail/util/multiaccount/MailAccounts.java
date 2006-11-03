@@ -23,11 +23,12 @@
 package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.mail.MailAccountsException;
 import com.liferay.portlet.mail.AccountNotFoundException;
+import com.liferay.portlet.mail.MailAccountsException;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -77,46 +78,20 @@ public class MailAccounts {
 
 	public static void setAccount(HttpSession ses, String accountName)
 		throws MailAccountsException {
+
 		MailAccount account = _getAccount(ses, accountName);
 
-		_log.info("Switched to account " + account);
+		if (_log.isInfoEnabled()) {
+			_log.info("Switched to account " + account);
+		}
 
 		ses.setAttribute(WebKeys.MAIL_CURRENT_ACCOUNT, account);
 	}
 
-
-	private static Collection _findAllAccounts(User user, String password) {
-		Collection cachedAccounts =
-			MailCache.getUserAccounts(user.getUserId());
-
-		if (cachedAccounts != null) {
-			return cachedAccounts;
-		}
-
-		try {
-			AccountFinder accountFinder =
-				AccountFinderLocator.getAccountFinderInstance();
-
-			Collection accounts = accountFinder.findAllAccounts(user, password);
-
-			MailCache.putUserAccounts(user.getUserId(), accounts);
-
-			return accounts;
-		}
-		catch (MailAccountsException mae) {
-			_log.error(
-				"Error trying to get all accounts for user " + user.getUserId(),
-				mae);
-
-			return new ArrayList();
-		}
-	}
-
-	private static MailAccount _getAccount(
-			HttpSession ses, String accountName)
+	private static MailAccount _getAccount(HttpSession ses, String accountName)
 		throws MailAccountsException {
 
-		MailAccount account;
+		MailAccount account = null;
 
 		AccountFinder accountFinder =
 			AccountFinderLocator.getAccountFinderInstance();
@@ -125,9 +100,10 @@ public class MailAccounts {
 		String password = null;
 
 		try {
-			user = UserLocalServiceUtil.getUserById(
-				(String)ses.getAttribute(WebKeys.USER_ID));
-			password = (String)ses.getAttribute(WebKeys.USER_PASSWORD);
+			String userId = PortalUtil.getUserId(ses);
+
+			user = UserLocalServiceUtil.getUserById(userId);
+			password = PortalUtil.getUserPassword(ses);
 
 			account = accountFinder.findAccount(user, password, accountName);
 		}
@@ -164,6 +140,32 @@ public class MailAccounts {
 			AccountFinderLocator.getAccountFinderInstance();
 
 		return accountFinder.getDefaultAccountName();
+	}
+
+	private static Collection _findAllAccounts(User user, String password) {
+		Collection cachedAccounts = MailCache.getUserAccounts(user.getUserId());
+
+		if (cachedAccounts != null) {
+			return cachedAccounts;
+		}
+
+		try {
+			AccountFinder accountFinder =
+				AccountFinderLocator.getAccountFinderInstance();
+
+			Collection accounts = accountFinder.findAllAccounts(user, password);
+
+			MailCache.putUserAccounts(user.getUserId(), accounts);
+
+			return accounts;
+		}
+		catch (MailAccountsException mae) {
+			_log.error(
+				"Error trying to get all accounts for user " + user.getUserId(),
+				mae);
+
+			return new ArrayList();
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(MailAccounts.class);

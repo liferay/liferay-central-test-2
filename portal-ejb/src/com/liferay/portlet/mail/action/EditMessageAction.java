@@ -286,6 +286,7 @@ public class EditMessageAction extends PortletAction {
 
 		try {
 			MailAccount account = MailAccounts.getCurrentAccount(req);
+
 			mailMessage.setFrom(new InternetAddress(
 				account.getEmailAddress(), user.getFullName()));
 			mailMessage.setTo(to);

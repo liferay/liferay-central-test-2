@@ -925,8 +925,12 @@ public class PortalUtil {
 		return userName;
 	}
 
+	public static String getUserPassword(HttpSession ses) {
+		return (String)ses.getAttribute(WebKeys.USER_PASSWORD);
+	}
+
 	public static String getUserPassword(HttpServletRequest req) {
-		return (String)req.getSession().getAttribute(WebKeys.USER_PASSWORD);
+		return getUserPassword(req.getSession());
 	}
 
 	public static String getUserPassword(ActionRequest req) {

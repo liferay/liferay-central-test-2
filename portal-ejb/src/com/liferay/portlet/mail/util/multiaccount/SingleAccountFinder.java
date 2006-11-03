@@ -36,10 +36,12 @@ import java.util.Collection;
  */
 public class SingleAccountFinder implements AccountFinder {
 
-	private static final String IGNORE = ".IGNORE";
+	public String getDefaultAccountName() {
+		return _IGNORE;
+	}
 
-	public MailAccount findAccount(User user, String password,
-								   String accountName)
+	public MailAccount findAccount(
+			User user, String password, String accountName)
 		throws MailAccountsException {
 
 		return new MailAccount(
@@ -56,8 +58,6 @@ public class SingleAccountFinder implements AccountFinder {
 		return result;
 	}
 
-	public String getDefaultAccountName() {
-		return IGNORE;
-	}
+	private static final String _IGNORE = ".IGNORE";
 
 }

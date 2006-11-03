@@ -54,10 +54,12 @@ String gadgetURL = gadgets[gadgetIdPos][4];
 String gadgetParams = gadgets[gadgetIdPos][5];
 
 int borderIdPos = 0;
+
 for (int i = 0; i < borders.length; i++) {
 	if (borders[i][0].equals(borderId)) {
 		borderIdPos = i;
 	}
 }
+
 String border = borders[borderIdPos][2];
 %>

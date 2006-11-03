@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.mail;
 
-import com.liferay.portal.PortalException;
-
 /**
  * <a href="MailAccountsException.java.html"><b><i>View Source</i></b></a>
  *

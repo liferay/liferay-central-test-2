@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
-import com.liferay.util.SimpleCachePool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.SimpleCachePool;
 
 import java.util.Collection;
 import java.util.Iterator;
 
-import javax.mail.Store;
 import javax.mail.MessagingException;
+import javax.mail.Store;
 
 import javax.servlet.http.HttpSession;
 
@@ -44,15 +44,13 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailCache {
 
-	// Stores
-
-	public static Store getStore(
-		HttpSession ses, String accountPrefix) {
+	public static Store getStore(HttpSession ses, String accountPrefix) {
 		return (Store)ses.getAttribute(WebKeys.MAIL_STORE + accountPrefix);
 	}
 
 	public static void putStore(
 		HttpSession ses, String accountPrefix, Store store) {
+
 		ses.setAttribute(WebKeys.MAIL_STORE + accountPrefix, store);
 	}
 
@@ -60,38 +58,40 @@ public class MailCache {
 		ses.removeAttribute(WebKeys.MAIL_STORE + accountPrefix);
 	}
 
-	// Mail accounts
-
 	public static Collection getUserAccounts(String userId) {
-		String userAccountsId =
-			MailCache.class.getName() + ".MAIL_ACCOUNTS." + userId;
+		String userAccountsId = _MAIL_ACCOUNTS + userId;
+
 		return (Collection)SimpleCachePool.get(userAccountsId);
 	}
 
 	public static void putUserAccounts(String userId, Collection accounts) {
-		String userAccountsId =
-			MailCache.class.getName() + ".MAIL_ACCOUNTS." + userId;
+		String userAccountsId = _MAIL_ACCOUNTS + userId;
+
 		SimpleCachePool.put(userAccountsId, accounts);
 	}
 
 	public static void removeUserAccounts(String userId) {
-		String userAccountsId =
-			MailCache.class.getName() + ".MAIL_ACCOUNTS." + userId;
+		String userAccountsId = _MAIL_ACCOUNTS + userId;
+
 		SimpleCachePool.remove(userAccountsId);
 	}
 
-	// Clean up
+	public static void clearCache(HttpSession ses) throws MessagingException {
 
-	public static void clearCache(HttpSession ses)
-		throws MessagingException {
 		String userId = (String) ses.getAttribute(WebKeys.USER_ID);
-		_log.debug("Clearing the mail cache for user " + userId);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Clearing the mail cache for user " + userId);
+		}
 
 		Collection accounts = getUserAccounts(userId);
 
 		if (accounts != null) {
-			_log.debug("User has " + accounts.size() + " accounts that might " +
-				"need to be closed");
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"User has " + accounts.size() + " accounts that might " +
+						"need to be closed");
+			}
 
 			Iterator itr = accounts.iterator();
 
@@ -113,5 +113,9 @@ public class MailCache {
 		}
 	}
 
+ 	public static final String _MAIL_ACCOUNTS =
+		MailCache.class.getName() + ".MAIL_ACCOUNTS.";
+
 	private static Log _log = LogFactory.getLog(MailCache.class);
+
 }

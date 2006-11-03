@@ -1,4 +1,3 @@
-<%@ page import="java.net.URLEncoder" %>
 <%
 /**
  * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
@@ -25,4 +24,4 @@
 
 <%@ include file="/html/portlet/google_gadget/init.jsp" %>
 
-<script src="http://gmodules.com/ig/ifr?url=<%= gadgetURL %>&<%= gadgetParams %>&synd=open&w=<%= width %>&h=<%= height %>&title=<%=URLEncoder.encode(title, "UTF-8")%>&border=<%=URLEncoder.encode(border, "UTF-8")%>&output=js"></script>
+<script src="http://gmodules.com/ig/ifr?url=<%= gadgetURL %>&<%= gadgetParams %>&synd=open&title=<%= Http.encodeURL(title) %>&border=<%= Http.encodeURL(border) %>&w=<%= width %>&h=<%= height %>&output=js"></script>

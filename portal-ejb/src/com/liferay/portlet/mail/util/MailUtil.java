@@ -30,17 +30,27 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.mail.*;
-import com.liferay.portlet.mail.util.multiaccount.MailCache;
-import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
-import com.liferay.portlet.mail.util.multiaccount.MailAccount;
+import com.liferay.portlet.mail.ContentException;
+import com.liferay.portlet.mail.ContentPathException;
+import com.liferay.portlet.mail.FolderException;
+import com.liferay.portlet.mail.MailAccountsException;
+import com.liferay.portlet.mail.RecipientException;
+import com.liferay.portlet.mail.StoreException;
 import com.liferay.portlet.mail.model.MailAttachment;
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
 import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.model.RemoteMailAttachment;
 import com.liferay.portlet.mail.search.MailDisplayTerms;
-import com.liferay.util.*;
+import com.liferay.portlet.mail.util.multiaccount.MailAccount;
+import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
+import com.liferay.portlet.mail.util.multiaccount.MailCache;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.mail.JavaMailUtil;
 import com.liferay.util.mail.MailEngine;
 
@@ -917,17 +927,18 @@ public class MailUtil {
 		return results;
 	}
 
-	public static void setAccount(HttpServletRequest request) {
-		String accountName = ParamUtil.getString(request,
-			Constants.MAIL_ACCOUNT);
+	public static void setAccount(HttpServletRequest req) {
+		String accountName = ParamUtil.getString(req, Constants.MAIL_ACCOUNT);
+
 		try {
 			if (Validator.isNotNull(accountName)) {
-				MailAccounts.setAccount(request.getSession(), accountName);
+				MailAccounts.setAccount(req.getSession(), accountName);
 			}
 		}
 		catch (MailAccountsException e) {
-			_log.warn("Error setting account " + accountName + ". " +
-				e.getMessage());
+			if (_log.isWarnEnabled()) {
+				_log.warn("Error setting account " + accountName, e);
+			}
 		}
 	}
 
@@ -948,7 +959,7 @@ public class MailUtil {
 		try {
 			_closeFolder(ses);
 
-			MailCache.clearCache(ses);			
+			MailCache.clearCache(ses);
 
 			ses.removeAttribute(WebKeys.MAIL_MESSAGE_ID);
 		}
@@ -1056,6 +1067,54 @@ public class MailUtil {
 
 			envelopes.add(mailEnvelope);
 		}
+	}
+
+	private static Store _createStore(HttpSession ses, MailAccount account)
+		throws FolderException, MessagingException, NamingException,
+			   StoreException {
+
+		Session session = MailEngine.getSession();
+
+		Store store = session.getStore("imap");
+
+		String serviceName =
+			account.getUserId() + StringPool.COLON + WebKeys.MAIL_STORE;
+
+		store.addConnectionListener(new ConnectionListener(serviceName));
+
+		String imapHost = session.getProperty("mail.imap.host");
+
+		store.connect(imapHost, account.getUserId(), account.getPassword());
+
+		MailCache.putStore(ses, account.getName(), store);
+
+		List list = getFolders(ses);
+
+		for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
+			boolean exists = false;
+
+			Iterator itr = list.iterator();
+
+			while (itr.hasNext()) {
+				MailFolder mailFolder = (MailFolder)itr.next();
+
+				if (DEFAULT_FOLDERS[i].equals(mailFolder.getName())) {
+					exists = true;
+
+					break;
+				}
+			}
+
+			if (!exists) {
+				createFolder(ses, DEFAULT_FOLDERS[i]);
+			}
+		}
+
+		if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
+			setFolder(ses, MAIL_INBOX_NAME);
+		}
+
+		return store;
 	}
 
 	private static String _customizeHtml(String html) {
@@ -1377,10 +1436,7 @@ public class MailUtil {
 			return store;
 		}
 		catch (AuthenticationFailedException afe) {
-			if (_log.isErrorEnabled()) {
-				_log.error(
-					"Failed to authenticate the userId '" + userId + "'");
-			}
+			_log.error("Failed to authenticate the userId " + userId + "");
 
 			throw new StoreException(afe);
 		}
@@ -1390,58 +1446,6 @@ public class MailUtil {
 		catch (NamingException ne) {
 			throw new StoreException(ne);
 		}
-	}
-
-	private static Store _createStore(HttpSession ses, MailAccount account)
-		throws NamingException, MessagingException, FolderException,
-		StoreException {
-		Store store;
-		Session session = MailEngine.getSession();
-
-		String imapHost = session.getProperty("mail.imap.host");
-
-		String password = account.getPassword();
-//			(String)ses.getAttribute(WebKeys.USER_PASSWORD);
-
-		String serviceName =
-			account.getUserId() + StringPool.COLON + WebKeys.MAIL_STORE;
-
-		store = session.getStore("imap");
-
-		store.addConnectionListener(
-					new ConnectionListener(serviceName));
-
-		store.connect(imapHost, account.getUserId(), password);
-
-		MailCache.putStore(ses, account.getName(), store);
-//		ses.setAttribute(WebKeys.MAIL_STORE, store);
-
-		List list = getFolders(ses);
-
-		for (int i = 0; i < DEFAULT_FOLDERS.length; i++) {
-			boolean exists = false;
-
-			Iterator itr = list.iterator();
-
-			while (itr.hasNext()) {
-				MailFolder mailFolder = (MailFolder)itr.next();
-
-				if (DEFAULT_FOLDERS[i].equals(mailFolder.getName())) {
-					exists = true;
-
-					break;
-				}
-			}
-
-			if (!exists) {
-				createFolder(ses, DEFAULT_FOLDERS[i]);
-			}
-		}
-
-		if (ses.getAttribute(WebKeys.MAIL_FOLDER) == null) {
-			setFolder(ses, MAIL_INBOX_NAME);
-		}
-		return store;
 	}
 
 	private static void _replaceContentIds(

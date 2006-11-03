@@ -44,8 +44,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailAccount {
 
-	public static final long MB = 1024 * 1024;
-
 	public MailAccount(String accountName, String userId, String password,
 					   String emailAddress) {
 
@@ -59,52 +57,33 @@ public class MailAccount {
 		return _name;
 	}
 
-	public String getEmailAddress() {
-		return _emailAddress;
-	}
-
-	public long getFreeSpace() {
-		return Math.max(0, getQuota() - getSize());
-	}
-
-	public long getFreeSpaceInMb() {
-		return Math.round((float) getFreeSpace() / MB);
-	}
-
-	public long getFreeSpaceInPercentage() {
-		return Math.round(((float) getSize() / getQuota()) * 100);
-	}
-
-	public long getQuota() {
-		return _quota;
-	}
-
-	public long getQuotaInMb() {
-		return Math.round((float) getQuota() / MB);
+	public String getUserId() {
+		return _userId;
 	}
 
 	public String getPassword() {
 		return _password;
 	}
 
+	public String getEmailAddress() {
+		return _emailAddress;
+	}
+
 	public String getRole() {
 		return _role;
 	}
 
-	public long getSize() {
-		return _size;
-	}
-
-	public long getSizeInMb() {
-		return _size / MB;
+	public void setRole(String role) {
+		_role = role;
 	}
 
 	public Store getStore() {
 		return _store;
 	}
 
-	public String getUserId() {
-		return _userId;
+	public void setStore(Store store) {
+		_store = store;
+		_size = calculateStoreSize(store);
 	}
 
 	public boolean isActive() {
@@ -115,17 +94,36 @@ public class MailAccount {
 		_active = active;
 	}
 
+	public long getQuota() {
+		return _quota;
+	}
+
 	public void setQuota(long quota) {
 		_quota = quota;
 	}
 
-	public void setRole(String role) {
-		_role = role;
+	public long getQuotaInMb() {
+		return Math.round((float)getQuota() / _MB);
 	}
 
-	public void setStore(Store store) {
-		_store = store;
-		_size = calculateStoreSize(store);
+	public long getSize() {
+		return _size;
+	}
+
+	public long getSizeInMb() {
+		return _size / _MB;
+	}
+
+	public long getFreeSpace() {
+		return Math.max(0, getQuota() - getSize());
+	}
+
+	public long getFreeSpaceInMb() {
+		return Math.round((float)getFreeSpace() / _MB);
+	}
+
+	public long getFreeSpaceInPercentage() {
+		return Math.round(((float)getSize() / getQuota()) * 100);
 	}
 
 	private static long calculateStoreSize(Store store) {
@@ -150,24 +148,28 @@ public class MailAccount {
 			try {
 				Message[] folderMsgs = folder.getMessages();
 
-				for (int i=0; i < folderMsgs.length; i++) {
+				for (int i = 0; i < folderMsgs.length; i++) {
 					int msgSize = folderMsgs[i].getSize();
 
 					if (msgSize != -1) {
 						size += msgSize;
 					}
 					else {
-						_log.warn(
-							"Could not determine the size of message "
-								+ folderMsgs[i].getSubject());
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Could not determine the size of message " +
+									folderMsgs[i].getSubject());
+						}
 					}
 				}
 			}
 			catch (Exception e) {
-				_log.warn(
-					"Error calculating the size of the folder "
-						+ folder.getName(),
-					e);
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"Error calculating the size of the folder " +
+							folder.getName(),
+						e);
+				}
 			}
 			finally {
 				folder.close(false);
@@ -177,7 +179,7 @@ public class MailAccount {
 		if ((folder.getType() & Folder.HOLDS_FOLDERS) != 0) {
 			Folder[] folderChildren = folder.list();
 
-			for (int i=0; i < folderChildren.length; i++) {
+			for (int i = 0; i < folderChildren.length; i++) {
 				size += calculateFolderSize(folderChildren[i]);
 			}
 		}
@@ -189,16 +191,18 @@ public class MailAccount {
 		return ToStringBuilder.reflectionToString(this);
 	}
 
+	public static final long _MB = 1024 * 1024;
+
 	private static Log _log = LogFactory.getLog(MailAccount.class);
 
 	private String _name;
-	private boolean _active = true;
-	private String _emailAddress;
-	private long _quota = 0;
-	private String _password;
-	private String _role = StringPool.BLANK;
-	private long _size = 0;
-	private Store _store;
 	private String _userId;
+	private String _password;
+	private String _emailAddress;
+	private String _role = StringPool.BLANK;
+	private Store _store;
+	private boolean _active = true;
+	private long _quota = 0;
+	private long _size = 0;
 
 }

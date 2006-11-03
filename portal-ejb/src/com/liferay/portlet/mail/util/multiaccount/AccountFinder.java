@@ -22,10 +22,9 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
-import com.liferay.portlet.mail.MailAccountsException;
-import com.liferay.portlet.mail.AccountNotFoundException;
-
 import com.liferay.portal.model.User;
+import com.liferay.portlet.mail.AccountNotFoundException;
+import com.liferay.portlet.mail.MailAccountsException;
 
 import java.util.Collection;
 
