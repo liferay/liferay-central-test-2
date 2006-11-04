@@ -87,7 +87,7 @@ String[] months = CalendarUtil.getMonths(locale);
 
 String[] days = CalendarUtil.getDays(locale);
 
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-DateFormat dateFormatTime = DateFormats.getTime(locale, timeZone);
+DateFormat dateFormatDate = DateFormats.getDate(locale);
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale);
+DateFormat dateFormatTime = DateFormats.getTime(locale);
 %>
