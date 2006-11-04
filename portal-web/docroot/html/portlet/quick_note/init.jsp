@@ -24,9 +24,6 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
---%><%@ page import="com.liferay.portlet.stocks.model.Stocks" %><%--
---%><%@ page import="com.liferay.portlet.stocks.util.StocksUtil" %><%--
-
 --%><%
 PortletPreferences prefs = renderRequest.getPreferences();
 

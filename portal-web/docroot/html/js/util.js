@@ -847,16 +847,16 @@ function toHTML(s) {
 	s = s.replace(/</g, "&lt;");
 	s = s.replace(/>/g, "&gt;");
 	s = s.replace(/\n/g, "<br>");
-	s = s.replace(/  /g, "&nbsp; ");
+	s = s.replace(/  /g, " &nbsp;");
 	return s;
 }
 
 function toText(s) {
-	s = s.replace(/\&nbsp;/g, " ");
-	s = s.replace(/<br>/g,"\n");
-	s = s.replace(/&gt;/g,">");
-	s = s.replace(/\&lt;/g,"<");
-	s = s.replace(/\&amp;/g,"&");
+	s = s.replace(/\&nbsp;/gi, " ");
+	s = s.replace(/<br>/gi,"\n");
+	s = s.replace(/&gt;/gi,">");
+	s = s.replace(/\&lt;/gi,"<");
+	s = s.replace(/\&amp;/gi,"&");
 	return s;
 }
 

@@ -45,10 +45,6 @@
 				},
 			onComplete:
 				function(newTextObj, oldText) {
-					if (newTextObj.offsetHeight < 10) {
-						newTextObj.style.height = "15px";
-					}
-
 					var newText = newTextObj.innerHTML;
 
 					if (oldText != newText) {
@@ -58,7 +54,7 @@
 							"&portletId=<%= portletDisplay.getId() %>" +
 							"&data=" + encodeURIComponent(newText);
 
-						Ajax.request(url);
+						AjaxUtil.request(url);
 					}
 			}
 		});
