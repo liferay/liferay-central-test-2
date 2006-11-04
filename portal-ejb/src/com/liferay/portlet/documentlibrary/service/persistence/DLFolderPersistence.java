@@ -69,12 +69,11 @@ public class DLFolderPersistence extends BasePersistence {
 			if (dlFolder == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFolder exists with the primary key " +
-						folderId.toString());
+						folderId);
 				}
 
 				throw new NoSuchFolderException(
-					"No DLFolder exists with the primary key " +
-					folderId.toString());
+					"No DLFolder exists with the primary key " + folderId);
 			}
 
 			return remove(dlFolder);
@@ -148,12 +147,11 @@ public class DLFolderPersistence extends BasePersistence {
 		if (dlFolder == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFolder exists with the primary key " +
-					folderId.toString());
+					folderId);
 			}
 
 			throw new NoSuchFolderException(
-				"No DLFolder exists with the primary key " +
-				folderId.toString());
+				"No DLFolder exists with the primary key " + folderId);
 		}
 
 		return dlFolder;

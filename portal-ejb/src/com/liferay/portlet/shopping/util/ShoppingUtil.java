@@ -69,6 +69,7 @@ import java.util.Set;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
@@ -564,8 +565,8 @@ public class ShoppingUtil {
 	}
 
 	public static String getBreadcrumbs(
-			String categoryId, PageContext pageContext, RenderResponse res,
-			boolean popUp)
+			String categoryId, PageContext pageContext, RenderRequest req,
+			RenderResponse res)
 		throws Exception {
 
 		ShoppingCategory category = null;
@@ -576,17 +577,19 @@ public class ShoppingUtil {
 		catch (Exception e) {
 		}
 
-		return getBreadcrumbs(category, pageContext, res, popUp);
+		return getBreadcrumbs(category, pageContext, req, res);
 	}
 
 	public static String getBreadcrumbs(
 			ShoppingCategory category, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
 			categoriesURL.setParameter(
@@ -613,7 +616,7 @@ public class ShoppingUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

@@ -68,12 +68,11 @@ public class LayoutPersistence extends BasePersistence {
 			if (layout == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Layout exists with the primary key " +
-						layoutPK.toString());
+						layoutPK);
 				}
 
 				throw new NoSuchLayoutException(
-					"No Layout exists with the primary key " +
-					layoutPK.toString());
+					"No Layout exists with the primary key " + layoutPK);
 			}
 
 			return remove(layout);
@@ -145,12 +144,11 @@ public class LayoutPersistence extends BasePersistence {
 
 		if (layout == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Layout exists with the primary key " +
-					layoutPK.toString());
+				_log.warn("No Layout exists with the primary key " + layoutPK);
 			}
 
 			throw new NoSuchLayoutException(
-				"No Layout exists with the primary key " + layoutPK.toString());
+				"No Layout exists with the primary key " + layoutPK);
 		}
 
 		return layout;

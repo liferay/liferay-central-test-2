@@ -84,7 +84,7 @@ portletURL.setParameter("name", name);
 
 <liferay-ui:tabs names="document" />
 
-<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderResponse, false) %>
+<%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
 
 <br><br>
 

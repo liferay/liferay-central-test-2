@@ -86,6 +86,36 @@
 			<finder-column name="name" />
 		</finder>
 	</entity>
+	<entity name="DLFileShortcut" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="fileShortcutId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="String" />
+		<column name="userId" type="String" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="folderId" type="String" />
+		<column name="toFolderId" type="String" />
+		<column name="toName" type="String" />
+
+		<!-- Finder methods -->
+
+		<finder name="FolderId" return-type="Collection">
+			<finder-column name="folderId" />
+		</finder>
+		<finder name="TF_TN" return-type="Collection">
+			<finder-column name="toFolderId" />
+			<finder-column name="toName" />
+		</finder>
+	</entity>
 	<entity name="DLFileVersion" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -185,6 +215,7 @@
 		</reference>
 	</entity>
 	<exceptions>
+		<exception>FileShortcutPermission</exception>
 		<exception>FolderName</exception>
 	</exceptions>
 </service-builder>

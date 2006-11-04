@@ -428,6 +428,11 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<action path="/document_library/edit_file_shortcut" type="com.liferay.portlet.documentlibrary.action.EditFileShortcutAction">
+			<forward name="portlet.document_library.edit_file_shortcut" path="portlet.document_library.edit_file_shortcut" />
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
 		<action path="/document_library/edit_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
 			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.edit_folder" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
@@ -435,10 +440,17 @@
 
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
+		<action path="/document_library/select_file_entry" type="com.liferay.portlet.documentlibrary.action.ViewAction">
+			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+			<forward name="portlet.document_library.view" path="portlet.document_library.select_file_entry" />
+		</action>
+
 		<action path="/document_library/select_folder" type="com.liferay.portlet.documentlibrary.action.EditFolderAction">
 			<forward name="portlet.document_library.edit_folder" path="portlet.document_library.select_folder" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
+
+		<action path="/document_library/select_group" forward="portlet.document_library.select_group" />
 
 		<action path="/document_library/view" type="com.liferay.portlet.documentlibrary.action.ViewAction">
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />

@@ -114,6 +114,7 @@
 --%><%@ page import="com.liferay.portlet.messaging.util.MessagingUtil" %><%--
 --%><%@ page import="com.liferay.util.ArrayUtil" %><%--
 --%><%@ page import="com.liferay.util.BeanParamUtil" %><%--
+--%><%@ page import="com.liferay.util.BeanUtil" %><%--
 --%><%@ page import="com.liferay.util.BrowserSniffer" %><%--
 --%><%@ page import="com.liferay.util.CollectionFactory" %><%--
 --%><%@ page import="com.liferay.util.CreditCard" %><%--

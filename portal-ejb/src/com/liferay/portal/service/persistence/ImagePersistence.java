@@ -66,12 +66,11 @@ public class ImagePersistence extends BasePersistence {
 			if (image == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Image exists with the primary key " +
-						imageId.toString());
+						imageId);
 				}
 
 				throw new NoSuchImageException(
-					"No Image exists with the primary key " +
-					imageId.toString());
+					"No Image exists with the primary key " + imageId);
 			}
 
 			return remove(image);
@@ -143,12 +142,11 @@ public class ImagePersistence extends BasePersistence {
 
 		if (image == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Image exists with the primary key " +
-					imageId.toString());
+				_log.warn("No Image exists with the primary key " + imageId);
 			}
 
 			throw new NoSuchImageException(
-				"No Image exists with the primary key " + imageId.toString());
+				"No Image exists with the primary key " + imageId);
 		}
 
 		return image;

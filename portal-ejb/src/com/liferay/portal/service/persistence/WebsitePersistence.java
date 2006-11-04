@@ -68,12 +68,11 @@ public class WebsitePersistence extends BasePersistence {
 			if (website == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Website exists with the primary key " +
-						websiteId.toString());
+						websiteId);
 				}
 
 				throw new NoSuchWebsiteException(
-					"No Website exists with the primary key " +
-					websiteId.toString());
+					"No Website exists with the primary key " + websiteId);
 			}
 
 			return remove(website);
@@ -146,12 +145,11 @@ public class WebsitePersistence extends BasePersistence {
 		if (website == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Website exists with the primary key " +
-					websiteId.toString());
+					websiteId);
 			}
 
 			throw new NoSuchWebsiteException(
-				"No Website exists with the primary key " +
-				websiteId.toString());
+				"No Website exists with the primary key " + websiteId);
 		}
 
 		return website;

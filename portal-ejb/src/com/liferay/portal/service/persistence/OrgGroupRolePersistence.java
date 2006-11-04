@@ -69,12 +69,12 @@ public class OrgGroupRolePersistence extends BasePersistence {
 			if (orgGroupRole == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No OrgGroupRole exists with the primary key " +
-						orgGroupRolePK.toString());
+						orgGroupRolePK);
 				}
 
 				throw new NoSuchOrgGroupRoleException(
 					"No OrgGroupRole exists with the primary key " +
-					orgGroupRolePK.toString());
+					orgGroupRolePK);
 			}
 
 			return remove(orgGroupRole);
@@ -149,12 +149,12 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		if (orgGroupRole == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No OrgGroupRole exists with the primary key " +
-					orgGroupRolePK.toString());
+					orgGroupRolePK);
 			}
 
 			throw new NoSuchOrgGroupRoleException(
 				"No OrgGroupRole exists with the primary key " +
-				orgGroupRolePK.toString());
+				orgGroupRolePK);
 		}
 
 		return orgGroupRole;

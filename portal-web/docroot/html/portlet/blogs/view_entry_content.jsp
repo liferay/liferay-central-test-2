@@ -27,7 +27,7 @@
 <c:if test="<%= (category == null) && !entry.getCategoryId().equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<tr>
 		<td>
-			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderResponse, false) %>
+			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>
 
 			<br><br>
 		</td>

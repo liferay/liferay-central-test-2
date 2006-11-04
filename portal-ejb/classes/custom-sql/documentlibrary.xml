@@ -1,6 +1,50 @@
 <?xml version="1.0"?>
 
 <custom-sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.countByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileEntry
+				WHERE
+					[$FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					COUNT(*) AS COUNT_VALUE
+				FROM
+					DLFileShortcut
+				WHERE
+					[$FOLDER_ID$]
+			)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder.findByFolderIds">
+		<![CDATA[
+			(
+				SELECT
+					folderId AS folderId, name AS name, 0 AS fileShortcutId
+				FROM
+					DLFileEntry
+				WHERE
+					[$FOLDER_ID$]
+			)
+			UNION ALL
+			(
+				SELECT
+					toFolderId AS folderId, toName AS name, fileShortcutId AS fileShortcutId
+				FROM
+					DLFileShortcut
+				WHERE
+					[$FOLDER_ID$]
+			)
+			ORDER BY
+				name ASC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByFolderIds">
 		<![CDATA[
 			SELECT

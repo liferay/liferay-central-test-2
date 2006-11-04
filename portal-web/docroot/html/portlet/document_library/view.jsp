@@ -57,7 +57,7 @@ portletURL.setParameter("folderId", folderId);
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
 		<c:if test="<%= folder != null %>">
-			<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, false) %>
+			<%= DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 
 			<br><br>
 		</c:if>
@@ -153,7 +153,7 @@ portletURL.setParameter("folderId", folderId);
 			DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId, curFolder.getFolderId());
 
 			int foldersCount = subfolderIds.size() - 1;
-			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);
+			int fileEntriesCount = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(subfolderIds);
 
 			row.addText(Integer.toString(foldersCount), rowURL);
 			row.addText(Integer.toString(fileEntriesCount), rowURL);
@@ -229,28 +229,53 @@ portletURL.setParameter("folderId", folderId);
 
 			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			total = DLFileEntryLocalServiceUtil.getFileEntriesCount(folder.getFolderId());
+			total = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcutsCount(folder.getFolderId());
 
 			searchContainer.setTotal(total);
 
-			results = DLFileEntryLocalServiceUtil.getFileEntries(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
+			results = DLFileEntryLocalServiceUtil.getFileEntriesAndShortcuts(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 
 			resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
-				DLFileEntry fileEntry = (DLFileEntry)results.get(i);
+				Object result = results.get(i);
 
-				ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
+				String primaryKey = null;
+
+				DLFileEntry fileEntry = null;
+				DLFileShortcut fileShortcut = null;
+
+				if (result instanceof DLFileEntry) {
+					fileEntry = (DLFileEntry)result;
+
+					primaryKey = fileEntry.getPrimaryKey().toString();
+				}
+				else {
+					fileShortcut = (DLFileShortcut)result;
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), fileShortcut.getToName());
+
+					primaryKey = String.valueOf(fileShortcut.getPrimaryKey());
+				}
+
+				ResultRow row = new ResultRow(result, primaryKey, i);
 
 				StringBuffer sb = new StringBuffer();
 
 				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?folderId=");
-				sb.append(folder.getFolderId());
-				sb.append("&name=");
-				sb.append(Http.encodeURL(fileEntry.getName()));
+				sb.append("/document_library/get_file?");
+
+				if (fileShortcut != null) {
+					sb.append("fileShortcutId=");
+					sb.append(fileShortcut.getFileShortcutId());
+				}
+				else {
+					sb.append("folderId=");
+					sb.append(fileEntry.getFolderId());
+					sb.append("&name=");
+					sb.append(Http.encodeURL(fileEntry.getName()));
+				}
 
 				String rowHREF = sb.toString();
 
@@ -295,14 +320,21 @@ portletURL.setParameter("folderId", folderId);
 			}
 
 			boolean showAddFileEntryButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_DOCUMENT);
+			boolean showAddFileShortcutButton = DLFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_SHORTCUT);
 			%>
 
-			<c:if test="<%= showAddFileEntryButton || (results.size() > 0) %>">
+			<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton || (results.size() > 0) %>">
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
-					<c:if test="<%= showAddFileEntryButton %>">
+					<c:if test="<%= showAddFileEntryButton || showAddFileShortcutButton %>">
 						<td>
-							<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-document") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+							<c:if test="<%= showAddFileEntryButton %>">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-document") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+							</c:if>
+
+							<c:if test="<%= showAddFileShortcutButton %>">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-shortcut") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';">
+							</c:if>
 						</td>
 						<td style="padding-left: 30px;"></td>
 					</c:if>

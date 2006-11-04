@@ -146,7 +146,7 @@ public class BeanParamUtil {
 			return ParamUtil.get(req, param, defaultValue);
 		}
 		else {
-			return ParamUtil.get(req, param, beanValue.intValue());
+			return ParamUtil.get(req, param, beanValue.longValue());
 		}
 	}
 

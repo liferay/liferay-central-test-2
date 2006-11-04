@@ -30,12 +30,14 @@ import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.Set;
 
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
@@ -51,7 +53,7 @@ public class DLUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String name, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if (Validator.isNotNull(folderId) && Validator.isNotNull(name)) {
@@ -59,7 +61,7 @@ public class DLUtil {
 				folderId, name);
 
 			return getBreadcrumbs(
-				fileEntry.getFolder(), fileEntry, pageContext, res, popUp);
+				fileEntry.getFolder(), fileEntry, pageContext, req, res);
 		}
 		else {
 			DLFolder folder = null;
@@ -70,14 +72,16 @@ public class DLUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res, popUp);
+			return getBreadcrumbs(folder, null, pageContext, req, res);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			DLFolder folder, DLFileEntry fileEntry, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
+
+		String groupId = ParamUtil.getString(req, "groupId");
 
 		if ((fileEntry != null) && (folder == null)) {
 			folder = fileEntry.getFolder();
@@ -85,11 +89,15 @@ public class DLUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
-			foldersURL.setParameter(
-				"struts_action", "/document_library/select_folder");
+			String strutsAction = ParamUtil.getString(req, "struts_action");
+
+			foldersURL.setParameter("struts_action", strutsAction);
+			foldersURL.setParameter("groupId", groupId);
 		}
 		else {
 			foldersURL.setWindowState(WindowState.MAXIMIZED);
@@ -111,11 +119,14 @@ public class DLUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
-					portletURL.setParameter(
-						"struts_action", "/document_library/select_folder");
+					String strutsAction = ParamUtil.getString(
+						req, "struts_action");
+
+					portletURL.setParameter("struts_action", strutsAction);
+					portletURL.setParameter("groupId", groupId);
 					portletURL.setParameter("folderId", folder.getFolderId());
 				}
 				else {

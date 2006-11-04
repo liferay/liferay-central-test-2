@@ -82,12 +82,11 @@ public class UserGroupPersistence extends BasePersistence {
 			if (userGroup == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserGroup exists with the primary key " +
-						userGroupId.toString());
+						userGroupId);
 				}
 
 				throw new NoSuchUserGroupException(
-					"No UserGroup exists with the primary key " +
-					userGroupId.toString());
+					"No UserGroup exists with the primary key " + userGroupId);
 			}
 
 			return remove(userGroup);
@@ -161,12 +160,11 @@ public class UserGroupPersistence extends BasePersistence {
 		if (userGroup == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No UserGroup exists with the primary key " +
-					userGroupId.toString());
+					userGroupId);
 			}
 
 			throw new NoSuchUserGroupException(
-				"No UserGroup exists with the primary key " +
-				userGroupId.toString());
+				"No UserGroup exists with the primary key " + userGroupId);
 		}
 
 		return userGroup;

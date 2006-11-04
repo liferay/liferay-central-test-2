@@ -168,7 +168,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <liferay-ui:error exception="<%= ItemNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= ItemSKUException.class %>" message="please-enter-a-valid-item-sku" />
 
-<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderResponse, false) %>
+<%= ShoppingUtil.getBreadcrumbs(categoryId, pageContext, renderRequest, renderResponse) %>
 
 <br><br>
 

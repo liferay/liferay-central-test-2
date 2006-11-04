@@ -68,12 +68,11 @@ public class CountryPersistence extends BasePersistence {
 			if (country == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Country exists with the primary key " +
-						countryId.toString());
+						countryId);
 				}
 
 				throw new NoSuchCountryException(
-					"No Country exists with the primary key " +
-					countryId.toString());
+					"No Country exists with the primary key " + countryId);
 			}
 
 			return remove(country);
@@ -146,12 +145,11 @@ public class CountryPersistence extends BasePersistence {
 		if (country == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Country exists with the primary key " +
-					countryId.toString());
+					countryId);
 			}
 
 			throw new NoSuchCountryException(
-				"No Country exists with the primary key " +
-				countryId.toString());
+				"No Country exists with the primary key " + countryId);
 		}
 
 		return country;

@@ -67,12 +67,12 @@ public class DataTrackerPersistence extends BasePersistence {
 			if (dataTracker == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DataTracker exists with the primary key " +
-						dataTrackerId.toString());
+						dataTrackerId);
 				}
 
 				throw new NoSuchDataTrackerException(
 					"No DataTracker exists with the primary key " +
-					dataTrackerId.toString());
+					dataTrackerId);
 			}
 
 			return remove(dataTracker);
@@ -147,12 +147,11 @@ public class DataTrackerPersistence extends BasePersistence {
 		if (dataTracker == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DataTracker exists with the primary key " +
-					dataTrackerId.toString());
+					dataTrackerId);
 			}
 
 			throw new NoSuchDataTrackerException(
-				"No DataTracker exists with the primary key " +
-				dataTrackerId.toString());
+				"No DataTracker exists with the primary key " + dataTrackerId);
 		}
 
 		return dataTracker;

@@ -70,7 +70,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
 <c:if test="<%= !parentFolderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID) %>">
-	<%= BookmarksUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderResponse, false) %>
+	<%= BookmarksUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>
 </c:if>

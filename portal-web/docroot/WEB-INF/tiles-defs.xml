@@ -338,6 +338,10 @@
 		<put name="portlet_padding" value="false" />
 	</definition>
 
+	<definition name="portlet.document_library.edit_file_shortcut" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/edit_file_shortcut.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.edit_file_version" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/edit_file_version.jsp" />
 	</definition>
@@ -354,8 +358,16 @@
 		<put name="portlet_content" value="/portlet/document_library/search.jsp" />
 	</definition>
 
+	<definition name="portlet.document_library.select_file_entry" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/select_file_entry.jsp" />
+	</definition>
+
 	<definition name="portlet.document_library.select_folder" extends="portlet.document_library">
 		<put name="portlet_content" value="/portlet/document_library/select_folder.jsp" />
+	</definition>
+
+	<definition name="portlet.document_library.select_group" extends="portlet.document_library">
+		<put name="portlet_content" value="/portlet/document_library/select_group.jsp" />
 	</definition>
 
 	<definition name="portlet.document_library.view" extends="portlet.document_library">

@@ -68,12 +68,11 @@ public class PortletPersistence extends BasePersistence {
 			if (portlet == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Portlet exists with the primary key " +
-						portletPK.toString());
+						portletPK);
 				}
 
 				throw new NoSuchPortletException(
-					"No Portlet exists with the primary key " +
-					portletPK.toString());
+					"No Portlet exists with the primary key " + portletPK);
 			}
 
 			return remove(portlet);
@@ -146,12 +145,11 @@ public class PortletPersistence extends BasePersistence {
 		if (portlet == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Portlet exists with the primary key " +
-					portletPK.toString());
+					portletPK);
 			}
 
 			throw new NoSuchPortletException(
-				"No Portlet exists with the primary key " +
-				portletPK.toString());
+				"No Portlet exists with the primary key " + portletPK);
 		}
 
 		return portlet;

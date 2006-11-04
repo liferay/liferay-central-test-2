@@ -38,6 +38,7 @@ import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
@@ -46,6 +47,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.Validator;
@@ -54,6 +56,7 @@ import java.io.InputStream;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -223,6 +226,11 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		DLFileRankLocalServiceUtil.deleteFileRanks(
 			fileEntry.getFolderId(), fileEntry.getName());
 
+		// File shortcuts
+
+		DLFileShortcutLocalServiceUtil.deleteFileShortcuts(
+			fileEntry.getFolderId(), fileEntry.getName());
+
 		// File versions
 
 		Iterator itr = DLFileVersionUtil.findByF_N(
@@ -297,6 +305,40 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		throws SystemException {
 
 		return DLFileEntryUtil.findByFolderId(folderId, begin, end);
+	}
+
+	public List getFileEntriesAndShortcuts(String folderId, int begin, int end)
+		throws SystemException {
+
+		List folderIds = new ArrayList();
+
+		folderIds.add(folderId);
+
+		return DLFileEntryAndShortcutFinder.findByFolderIds(
+			folderIds, begin, end);
+	}
+
+	public List getFileEntriesAndShortcuts(List folderIds, int begin, int end)
+		throws SystemException {
+
+		return DLFileEntryAndShortcutFinder.findByFolderIds(
+			folderIds, begin, end);
+	}
+
+	public int getFileEntriesAndShortcutsCount(String folderId)
+		throws SystemException {
+
+		List folderIds = new ArrayList();
+
+		folderIds.add(folderId);
+
+		return DLFileEntryAndShortcutFinder.countByFolderIds(folderIds);
+	}
+
+	public int getFileEntriesAndShortcutsCount(List folderIds)
+		throws SystemException {
+
+		return DLFileEntryAndShortcutFinder.countByFolderIds(folderIds);
 	}
 
 	public int getFileEntriesCount(String folderId) throws SystemException {
@@ -425,6 +467,9 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 				DLFileVersionUtil.remove(fileVersion);
 			}
+
+			DLFileShortcutLocalServiceUtil.updateFileShortcuts(
+				folderId, name, newFolderId, name);
 
 			try {
 				DLServiceUtil.updateFile(

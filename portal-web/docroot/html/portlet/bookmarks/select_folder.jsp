@@ -35,7 +35,7 @@ String folderId = BeanParamUtil.getString(folder, request, "folderId", Bookmarks
 <liferay-ui:tabs names="folders" />
 
 <c:if test="<%= folder != null %>">
-	<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, true) %>
+	<%= BookmarksUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>
 </c:if>

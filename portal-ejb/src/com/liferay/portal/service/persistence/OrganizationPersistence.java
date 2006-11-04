@@ -83,12 +83,12 @@ public class OrganizationPersistence extends BasePersistence {
 			if (organization == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Organization exists with the primary key " +
-						organizationId.toString());
+						organizationId);
 				}
 
 				throw new NoSuchOrganizationException(
 					"No Organization exists with the primary key " +
-					organizationId.toString());
+					organizationId);
 			}
 
 			return remove(organization);
@@ -165,12 +165,12 @@ public class OrganizationPersistence extends BasePersistence {
 		if (organization == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Organization exists with the primary key " +
-					organizationId.toString());
+					organizationId);
 			}
 
 			throw new NoSuchOrganizationException(
 				"No Organization exists with the primary key " +
-				organizationId.toString());
+				organizationId);
 		}
 
 		return organization;

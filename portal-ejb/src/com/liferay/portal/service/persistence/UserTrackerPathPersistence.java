@@ -69,12 +69,12 @@ public class UserTrackerPathPersistence extends BasePersistence {
 			if (userTrackerPath == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserTrackerPath exists with the primary key " +
-						userTrackerPathId.toString());
+						userTrackerPathId);
 				}
 
 				throw new NoSuchUserTrackerPathException(
 					"No UserTrackerPath exists with the primary key " +
-					userTrackerPathId.toString());
+					userTrackerPathId);
 			}
 
 			return remove(userTrackerPath);
@@ -149,12 +149,12 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		if (userTrackerPath == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No UserTrackerPath exists with the primary key " +
-					userTrackerPathId.toString());
+					userTrackerPathId);
 			}
 
 			throw new NoSuchUserTrackerPathException(
 				"No UserTrackerPath exists with the primary key " +
-				userTrackerPathId.toString());
+				userTrackerPathId);
 		}
 
 		return userTrackerPath;

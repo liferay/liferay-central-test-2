@@ -140,6 +140,38 @@ public class DLFileEntryLocalServiceUtil {
 		return dlFileEntryLocalService.getFileEntries(folderId, begin, end);
 	}
 
+	public static java.util.List getFileEntriesAndShortcuts(
+		java.lang.String folderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntriesAndShortcuts(folderId,
+			begin, end);
+	}
+
+	public static java.util.List getFileEntriesAndShortcuts(
+		java.util.List folderIds, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntriesAndShortcuts(folderIds,
+			begin, end);
+	}
+
+	public static int getFileEntriesAndShortcutsCount(java.lang.String folderId)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntriesAndShortcutsCount(folderId);
+	}
+
+	public static int getFileEntriesAndShortcutsCount(java.util.List folderIds)
+		throws com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.getFileEntriesAndShortcutsCount(folderIds);
+	}
+
 	public static int getFileEntriesCount(java.lang.String folderId)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();

@@ -70,12 +70,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No OrgGroupPermission exists with the primary key " +
-						orgGroupPermissionPK.toString());
+						orgGroupPermissionPK);
 				}
 
 				throw new NoSuchOrgGroupPermissionException(
 					"No OrgGroupPermission exists with the primary key " +
-					orgGroupPermissionPK.toString());
+					orgGroupPermissionPK);
 			}
 
 			return remove(orgGroupPermission);
@@ -151,12 +151,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		if (orgGroupPermission == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No OrgGroupPermission exists with the primary key " +
-					orgGroupPermissionPK.toString());
+					orgGroupPermissionPK);
 			}
 
 			throw new NoSuchOrgGroupPermissionException(
 				"No OrgGroupPermission exists with the primary key " +
-				orgGroupPermissionPK.toString());
+				orgGroupPermissionPK);
 		}
 
 		return orgGroupPermission;

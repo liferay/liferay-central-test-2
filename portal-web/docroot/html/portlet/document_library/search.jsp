@@ -37,7 +37,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= breadcrumbsFolderId %>">
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= folderIds %>">
 
-<%= DLUtil.getBreadcrumbs(breadcrumbsFolderId, null, pageContext, renderResponse, false) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+<%= DLUtil.getBreadcrumbs(breadcrumbsFolderId, null, pageContext, renderRequest, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>
 

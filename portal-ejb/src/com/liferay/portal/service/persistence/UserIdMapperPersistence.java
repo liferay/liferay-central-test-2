@@ -69,12 +69,12 @@ public class UserIdMapperPersistence extends BasePersistence {
 			if (userIdMapper == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserIdMapper exists with the primary key " +
-						userIdMapperPK.toString());
+						userIdMapperPK);
 				}
 
 				throw new NoSuchUserIdMapperException(
 					"No UserIdMapper exists with the primary key " +
-					userIdMapperPK.toString());
+					userIdMapperPK);
 			}
 
 			return remove(userIdMapper);
@@ -149,12 +149,12 @@ public class UserIdMapperPersistence extends BasePersistence {
 		if (userIdMapper == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No UserIdMapper exists with the primary key " +
-					userIdMapperPK.toString());
+					userIdMapperPK);
 			}
 
 			throw new NoSuchUserIdMapperException(
 				"No UserIdMapper exists with the primary key " +
-				userIdMapperPK.toString());
+				userIdMapperPK);
 		}
 
 		return userIdMapper;

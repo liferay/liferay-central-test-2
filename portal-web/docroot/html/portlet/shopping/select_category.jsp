@@ -35,7 +35,7 @@ String categoryId = BeanParamUtil.getString(category, request, "categoryId", Sho
 <liferay-ui:tabs names="categories" />
 
 <c:if test="<%= category != null %>">
-	<%= ShoppingUtil.getBreadcrumbs(category, pageContext, renderResponse, true) %>
+	<%= ShoppingUtil.getBreadcrumbs(category, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>
 </c:if>

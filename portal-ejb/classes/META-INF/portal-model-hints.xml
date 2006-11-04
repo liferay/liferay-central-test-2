@@ -531,6 +531,17 @@
 		</field>
 		<field name="createDate" type="Date" />
 	</model>
+	<model name="com.liferay.portlet.documentlibrary.model.DLFileShortcut">
+		<field name="fileShortcutId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="folderId" type="String" />
+		<field name="toFolderId" type="String" />
+		<field name="toName" type="String" />
+	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileVersion">
 		<field name="folderId" type="String" />
 		<field name="name" type="String">

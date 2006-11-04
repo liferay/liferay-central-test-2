@@ -67,7 +67,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 
 <liferay-util:include page="/html/portlet/message_boards/tabs1.jsp" />
 
-<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderResponse, false) %>
+<%= MBUtil.getBreadcrumbs(null, message, pageContext, renderRequest, renderResponse) %>
 
 <br><br>
 

@@ -623,6 +623,26 @@
 		<local-jndi-name>ejb/liferay/DLFileRankLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<local-jndi-name>ejb/liferay/DLFileShortcutLocalServiceHome</local-jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</ejb-name>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
+		<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-name>
 		<reference-descriptor>
 			<resource-description>

@@ -81,12 +81,11 @@ public class UserPersistence extends BasePersistence {
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No User exists with the primary key " +
-						userId.toString());
+					_log.warn("No User exists with the primary key " + userId);
 				}
 
 				throw new NoSuchUserException(
-					"No User exists with the primary key " + userId.toString());
+					"No User exists with the primary key " + userId);
 			}
 
 			return remove(user);
@@ -163,12 +162,11 @@ public class UserPersistence extends BasePersistence {
 
 		if (user == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No User exists with the primary key " +
-					userId.toString());
+				_log.warn("No User exists with the primary key " + userId);
 			}
 
 			throw new NoSuchUserException(
-				"No User exists with the primary key " + userId.toString());
+				"No User exists with the primary key " + userId);
 		}
 
 		return user;

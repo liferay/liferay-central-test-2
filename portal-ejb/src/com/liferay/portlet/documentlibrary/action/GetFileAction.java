@@ -28,8 +28,10 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -65,10 +67,12 @@ public class GetFileAction extends PortletAction {
 			String name = ParamUtil.getString(req, "name");
 			double version = ParamUtil.getDouble(req, "version");
 
+			long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			getFile(folderId, name, version, themeDisplay, res);
+			getFile(folderId, name, version, fileShortcutId, themeDisplay, res);
 
 			return null;
 		}
@@ -88,26 +92,37 @@ public class GetFileAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		double version = ParamUtil.getDouble(req, "version");
 
+		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		HttpServletResponse httpRes =
 			((ActionResponseImpl)res).getHttpServletResponse();
 
-		getFile(folderId, name, version, themeDisplay, httpRes);
+		getFile(folderId, name, version, fileShortcutId, themeDisplay, httpRes);
 	}
 
 	protected void getFile(
-			String folderId, String name, double version,
+			String folderId, String name, double version, long fileShortcutId,
 			ThemeDisplay themeDisplay, HttpServletResponse res)
 		throws Exception {
 
 		String companyId = themeDisplay.getCompanyId();
 		String userId = themeDisplay.getUserId();
 
-		DLFileEntryPermission.check(
-			themeDisplay.getPermissionChecker(), folderId, name,
-			ActionKeys.VIEW);
+		if (fileShortcutId == 0) {
+			DLFileEntryPermission.check(
+				themeDisplay.getPermissionChecker(), folderId, name,
+				ActionKeys.VIEW);
+		}
+		else {
+			DLFileShortcut fileShortcut =
+				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
+
+			folderId = fileShortcut.getToFolderId();
+			name = fileShortcut.getToName();
+		}
 
 		InputStream is = null;
 

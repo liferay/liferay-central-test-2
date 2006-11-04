@@ -70,12 +70,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No PortletPreferences exists with the primary key " +
-						portletPreferencesPK.toString());
+						portletPreferencesPK);
 				}
 
 				throw new NoSuchPortletPreferencesException(
 					"No PortletPreferences exists with the primary key " +
-					portletPreferencesPK.toString());
+					portletPreferencesPK);
 			}
 
 			return remove(portletPreferences);
@@ -151,12 +151,12 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		if (portletPreferences == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No PortletPreferences exists with the primary key " +
-					portletPreferencesPK.toString());
+					portletPreferencesPK);
 			}
 
 			throw new NoSuchPortletPreferencesException(
 				"No PortletPreferences exists with the primary key " +
-				portletPreferencesPK.toString());
+				portletPreferencesPK);
 		}
 
 		return portletPreferences;

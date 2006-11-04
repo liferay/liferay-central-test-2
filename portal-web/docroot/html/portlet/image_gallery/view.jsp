@@ -49,7 +49,7 @@ portletURL.setParameter("folderId", folderId);
 <c:choose>
 	<c:when test='<%= tabs1.equals("folders") %>'>
 		<c:if test="<%= folder != null %>">
-			<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, false) %>
+			<%= IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse) %>
 
 			<br><br>
 		</c:if>

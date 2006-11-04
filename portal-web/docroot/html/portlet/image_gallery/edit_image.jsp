@@ -36,7 +36,7 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 
 <liferay-ui:tabs names="image" />
 
-<%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse, false) %>
+<%= IGUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
 
 <br><br>
 

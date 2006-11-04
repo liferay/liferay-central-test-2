@@ -66,12 +66,11 @@ public class CompanyPersistence extends BasePersistence {
 			if (company == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Company exists with the primary key " +
-						companyId.toString());
+						companyId);
 				}
 
 				throw new NoSuchCompanyException(
-					"No Company exists with the primary key " +
-					companyId.toString());
+					"No Company exists with the primary key " + companyId);
 			}
 
 			return remove(company);
@@ -144,12 +143,11 @@ public class CompanyPersistence extends BasePersistence {
 		if (company == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Company exists with the primary key " +
-					companyId.toString());
+					companyId);
 			}
 
 			throw new NoSuchCompanyException(
-				"No Company exists with the primary key " +
-				companyId.toString());
+				"No Company exists with the primary key " + companyId);
 		}
 
 		return company;

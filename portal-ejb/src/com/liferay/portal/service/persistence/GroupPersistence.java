@@ -82,12 +82,11 @@ public class GroupPersistence extends BasePersistence {
 			if (group == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Group exists with the primary key " +
-						groupId.toString());
+						groupId);
 				}
 
 				throw new NoSuchGroupException(
-					"No Group exists with the primary key " +
-					groupId.toString());
+					"No Group exists with the primary key " + groupId);
 			}
 
 			return remove(group);
@@ -164,12 +163,11 @@ public class GroupPersistence extends BasePersistence {
 
 		if (group == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Group exists with the primary key " +
-					groupId.toString());
+				_log.warn("No Group exists with the primary key " + groupId);
 			}
 
 			throw new NoSuchGroupException(
-				"No Group exists with the primary key " + groupId.toString());
+				"No Group exists with the primary key " + groupId);
 		}
 
 		return group;

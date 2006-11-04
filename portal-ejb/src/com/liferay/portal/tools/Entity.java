@@ -152,6 +152,22 @@ public class Entity {
 		}
 	}
 
+	public boolean hasPrimitivePK() {
+		if (hasCompoundPK()) {
+			return false;
+		}
+		else {
+			EntityColumn col = (EntityColumn)_pkList.get(0);
+
+			if (col.isPrimitiveType()) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
 	public boolean hasCompoundPK() {
 		if (_pkList.size() > 1) {
 			return true;

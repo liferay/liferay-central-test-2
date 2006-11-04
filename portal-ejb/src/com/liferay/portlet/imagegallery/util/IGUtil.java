@@ -49,7 +49,7 @@ public class IGUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String imageId, PageContext pageContext,
-			RenderRequest req, RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if (Validator.isNotNull(imageId)) {
@@ -59,7 +59,7 @@ public class IGUtil {
 				companyId, imageId);
 
 			return getBreadcrumbs(
-				image.getFolder(), image, pageContext, res, popUp);
+				image.getFolder(), image, pageContext, req, res);
 		}
 		else {
 			IGFolder folder = null;
@@ -70,13 +70,13 @@ public class IGUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res, popUp);
+			return getBreadcrumbs(folder, null, pageContext, req, res);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			IGFolder folder, IGImage image, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if ((image != null) && (folder == null)) {
@@ -85,7 +85,9 @@ public class IGUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
 			foldersURL.setParameter(
@@ -111,7 +113,7 @@ public class IGUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

@@ -70,12 +70,12 @@ public class DLFileVersionPersistence extends BasePersistence {
 			if (dlFileVersion == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileVersion exists with the primary key " +
-						dlFileVersionPK.toString());
+						dlFileVersionPK);
 				}
 
 				throw new NoSuchFileVersionException(
 					"No DLFileVersion exists with the primary key " +
-					dlFileVersionPK.toString());
+					dlFileVersionPK);
 			}
 
 			return remove(dlFileVersion);
@@ -150,12 +150,12 @@ public class DLFileVersionPersistence extends BasePersistence {
 		if (dlFileVersion == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileVersion exists with the primary key " +
-					dlFileVersionPK.toString());
+					dlFileVersionPK);
 			}
 
 			throw new NoSuchFileVersionException(
 				"No DLFileVersion exists with the primary key " +
-				dlFileVersionPK.toString());
+				dlFileVersionPK);
 		}
 
 		return dlFileVersion;

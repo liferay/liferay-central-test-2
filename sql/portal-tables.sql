@@ -217,6 +217,18 @@ create table DLFileRank (
 	primary key (companyId, userId, folderId, name)
 );
 
+create table DLFileShortcut (
+	fileShortcutId INTEGER not null primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	folderId VARCHAR(75) null,
+	toFolderId VARCHAR(75) null,
+	toName VARCHAR(75) null
+);
+
 create table DLFileVersion (
 	folderId VARCHAR(75) not null,
 	name VARCHAR(100) not null,

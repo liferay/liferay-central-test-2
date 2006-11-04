@@ -41,6 +41,7 @@ import java.io.IOException;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
@@ -58,13 +59,13 @@ public class MBUtil {
 
 	public static String getBreadcrumbs(
 			String categoryId, String messageId, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if (Validator.isNotNull(messageId)) {
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			return getBreadcrumbs(null, message, pageContext, res, popUp);
+			return getBreadcrumbs(null, message, pageContext, req, res);
 		}
 		else {
 			MBCategory category = null;
@@ -75,13 +76,13 @@ public class MBUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(category, null, pageContext, res, popUp);
+			return getBreadcrumbs(category, null, pageContext, req, res);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			MBCategory category, MBMessage message, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if ((message != null) && (category == null)) {
@@ -90,7 +91,9 @@ public class MBUtil {
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
 			categoriesURL.setParameter(
@@ -118,7 +121,7 @@ public class MBUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

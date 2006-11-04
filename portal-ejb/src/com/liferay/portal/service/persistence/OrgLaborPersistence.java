@@ -68,12 +68,11 @@ public class OrgLaborPersistence extends BasePersistence {
 			if (orgLabor == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No OrgLabor exists with the primary key " +
-						orgLaborId.toString());
+						orgLaborId);
 				}
 
 				throw new NoSuchOrgLaborException(
-					"No OrgLabor exists with the primary key " +
-					orgLaborId.toString());
+					"No OrgLabor exists with the primary key " + orgLaborId);
 			}
 
 			return remove(orgLabor);
@@ -146,12 +145,11 @@ public class OrgLaborPersistence extends BasePersistence {
 		if (orgLabor == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No OrgLabor exists with the primary key " +
-					orgLaborId.toString());
+					orgLaborId);
 			}
 
 			throw new NoSuchOrgLaborException(
-				"No OrgLabor exists with the primary key " +
-				orgLaborId.toString());
+				"No OrgLabor exists with the primary key " + orgLaborId);
 		}
 
 		return orgLabor;

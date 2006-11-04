@@ -57,8 +57,6 @@ public class LayoutFinder {
 			"%<preference><name>" + prefsKey + "</name><value>" + prefsValue +
 				"</value>%";
 
-		List list = new ArrayList();
-
 		Session session = null;
 
 		try {
@@ -80,6 +78,8 @@ public class LayoutFinder {
 			qPos.add(portletId);
 			qPos.add(portletId + "_INSTANCE_%");
 			qPos.add(prefs);
+
+			List list = new ArrayList();
 
 			Iterator itr = q.list().iterator();
 

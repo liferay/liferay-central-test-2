@@ -68,12 +68,11 @@ public class ResourcePersistence extends BasePersistence {
 			if (resource == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Resource exists with the primary key " +
-						resourceId.toString());
+						resourceId);
 				}
 
 				throw new NoSuchResourceException(
-					"No Resource exists with the primary key " +
-					resourceId.toString());
+					"No Resource exists with the primary key " + resourceId);
 			}
 
 			return remove(resource);
@@ -146,12 +145,11 @@ public class ResourcePersistence extends BasePersistence {
 		if (resource == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Resource exists with the primary key " +
-					resourceId.toString());
+					resourceId);
 			}
 
 			throw new NoSuchResourceException(
-				"No Resource exists with the primary key " +
-				resourceId.toString());
+				"No Resource exists with the primary key " + resourceId);
 		}
 
 		return resource;

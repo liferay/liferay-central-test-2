@@ -552,6 +552,20 @@
 		</composite-id>
 		<property name="createDate" />
 	</class>
+	<class name="com.liferay.portlet.documentlibrary.model.DLFileShortcut" table="DLFileShortcut">
+		<cache usage="read-write" />
+		<id name="fileShortcutId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="folderId" />
+		<property name="toFolderId" />
+		<property name="toName" />
+	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.DLFileVersion" table="DLFileVersion">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK">

@@ -81,12 +81,11 @@ public class RolePersistence extends BasePersistence {
 
 			if (role == null) {
 				if (_log.isWarnEnabled()) {
-					_log.warn("No Role exists with the primary key " +
-						roleId.toString());
+					_log.warn("No Role exists with the primary key " + roleId);
 				}
 
 				throw new NoSuchRoleException(
-					"No Role exists with the primary key " + roleId.toString());
+					"No Role exists with the primary key " + roleId);
 			}
 
 			return remove(role);
@@ -161,12 +160,11 @@ public class RolePersistence extends BasePersistence {
 
 		if (role == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Role exists with the primary key " +
-					roleId.toString());
+				_log.warn("No Role exists with the primary key " + roleId);
 			}
 
 			throw new NoSuchRoleException(
-				"No Role exists with the primary key " + roleId.toString());
+				"No Role exists with the primary key " + roleId);
 		}
 
 		return role;

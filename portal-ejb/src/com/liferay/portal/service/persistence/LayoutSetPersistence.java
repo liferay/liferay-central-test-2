@@ -69,12 +69,11 @@ public class LayoutSetPersistence extends BasePersistence {
 			if (layoutSet == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No LayoutSet exists with the primary key " +
-						ownerId.toString());
+						ownerId);
 				}
 
 				throw new NoSuchLayoutSetException(
-					"No LayoutSet exists with the primary key " +
-					ownerId.toString());
+					"No LayoutSet exists with the primary key " + ownerId);
 			}
 
 			return remove(layoutSet);
@@ -147,12 +146,11 @@ public class LayoutSetPersistence extends BasePersistence {
 		if (layoutSet == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No LayoutSet exists with the primary key " +
-					ownerId.toString());
+					ownerId);
 			}
 
 			throw new NoSuchLayoutSetException(
-				"No LayoutSet exists with the primary key " +
-				ownerId.toString());
+				"No LayoutSet exists with the primary key " + ownerId);
 		}
 
 		return layoutSet;

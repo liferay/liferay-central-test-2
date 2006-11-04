@@ -32,6 +32,7 @@ import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
@@ -47,7 +48,7 @@ public class BookmarksUtil {
 
 	public static String getBreadcrumbs(
 			String folderId, String entryId, PageContext pageContext,
-			RenderResponse res, boolean popUp)
+			RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if (Validator.isNotNull(entryId)) {
@@ -55,7 +56,7 @@ public class BookmarksUtil {
 				BookmarksEntryLocalServiceUtil.getEntry(entryId);
 
 			return getBreadcrumbs(
-				entry.getFolder(), entry, pageContext, res, popUp);
+				entry.getFolder(), entry, pageContext, req, res);
 		}
 		else {
 			BookmarksFolder folder = null;
@@ -66,13 +67,13 @@ public class BookmarksUtil {
 			catch (Exception e) {
 			}
 
-			return getBreadcrumbs(folder, null, pageContext, res, popUp);
+			return getBreadcrumbs(folder, null, pageContext, req, res);
 		}
 	}
 
 	public static String getBreadcrumbs(
 			BookmarksFolder folder, BookmarksEntry entry,
-			PageContext pageContext, RenderResponse res, boolean popUp)
+			PageContext pageContext, RenderRequest req, RenderResponse res)
 		throws Exception {
 
 		if ((entry != null) && (folder == null)) {
@@ -81,7 +82,9 @@ public class BookmarksUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
 			foldersURL.setParameter("struts_action", "/bookmarks/select_folder");
@@ -106,7 +109,7 @@ public class BookmarksUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

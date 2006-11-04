@@ -70,12 +70,12 @@ public class DLFileRankPersistence extends BasePersistence {
 			if (dlFileRank == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileRank exists with the primary key " +
-						dlFileRankPK.toString());
+						dlFileRankPK);
 				}
 
 				throw new NoSuchFileRankException(
 					"No DLFileRank exists with the primary key " +
-					dlFileRankPK.toString());
+					dlFileRankPK);
 			}
 
 			return remove(dlFileRank);
@@ -149,12 +149,11 @@ public class DLFileRankPersistence extends BasePersistence {
 		if (dlFileRank == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileRank exists with the primary key " +
-					dlFileRankPK.toString());
+					dlFileRankPK);
 			}
 
 			throw new NoSuchFileRankException(
-				"No DLFileRank exists with the primary key " +
-				dlFileRankPK.toString());
+				"No DLFileRank exists with the primary key " + dlFileRankPK);
 		}
 
 		return dlFileRank;

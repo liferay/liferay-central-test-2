@@ -44,7 +44,7 @@ portletURL.setParameter("folderId", folderId);
 <c:if test="<%= folder != null %>">
 
 	<%
-	String breadcrumbs = IGUtil.getBreadcrumbs(folder, null, pageContext, renderResponse, true);
+	String breadcrumbs = IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse);
 
 	breadcrumbs = StringUtil.replace(breadcrumbs, "image_gallery%2Fselect_folder", "journal%2Fselect_image_gallery");
 	%>

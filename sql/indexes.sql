@@ -29,6 +29,9 @@ create index DLFileEntry_ix_FolderId on DLFileEntry (folderId);
 create index DLFileRank_ix_F_N on DLFileRank (folderId, name);
 create index DLFileRank_ix_UserId on DLFileRank (userId);
 
+create index DLFileShortcut_ix_FolderId on DLFileShortcut (folderId);
+create index DLFileShortcut_ix_TF_TN on DLFileShortcut (toFolderId, toName);
+
 create index DLFileVersion_ix_F_N on DLFileVersion (folderId, name);
 
 create index DLFolder_ix_CompanyId on DLFolder (companyId);

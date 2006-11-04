@@ -70,12 +70,12 @@ public class DLFileEntryPersistence extends BasePersistence {
 			if (dlFileEntry == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No DLFileEntry exists with the primary key " +
-						dlFileEntryPK.toString());
+						dlFileEntryPK);
 				}
 
 				throw new NoSuchFileEntryException(
 					"No DLFileEntry exists with the primary key " +
-					dlFileEntryPK.toString());
+					dlFileEntryPK);
 			}
 
 			return remove(dlFileEntry);
@@ -150,12 +150,11 @@ public class DLFileEntryPersistence extends BasePersistence {
 		if (dlFileEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No DLFileEntry exists with the primary key " +
-					dlFileEntryPK.toString());
+					dlFileEntryPK);
 			}
 
 			throw new NoSuchFileEntryException(
-				"No DLFileEntry exists with the primary key " +
-				dlFileEntryPK.toString());
+				"No DLFileEntry exists with the primary key " + dlFileEntryPK);
 		}
 
 		return dlFileEntry;

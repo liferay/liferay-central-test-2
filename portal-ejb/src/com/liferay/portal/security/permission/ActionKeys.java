@@ -71,6 +71,8 @@ public class ActionKeys {
 
 	public static final String ADD_ROLE = "ADD_ROLE";
 
+	public static final String ADD_SHORTCUT = "ADD_SHORTCUT";
+
 	public static final String ADD_STRUCTURE = "ADD_STRUCTURE";
 
 	public static final String ADD_TEMPLATE = "ADD_TEMPLATE";

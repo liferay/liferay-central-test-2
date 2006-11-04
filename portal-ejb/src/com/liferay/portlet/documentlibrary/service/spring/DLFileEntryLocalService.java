@@ -91,6 +91,19 @@ public interface DLFileEntryLocalService {
 	public java.util.List getFileEntries(java.lang.String folderId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List getFileEntriesAndShortcuts(
+		java.lang.String folderId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getFileEntriesAndShortcuts(java.util.List folderIds,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public int getFileEntriesAndShortcutsCount(java.lang.String folderId)
+		throws com.liferay.portal.SystemException;
+
+	public int getFileEntriesAndShortcutsCount(java.util.List folderIds)
+		throws com.liferay.portal.SystemException;
+
 	public int getFileEntriesCount(java.lang.String folderId)
 		throws com.liferay.portal.SystemException;
 

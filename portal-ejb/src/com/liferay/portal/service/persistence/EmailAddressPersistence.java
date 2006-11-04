@@ -69,12 +69,12 @@ public class EmailAddressPersistence extends BasePersistence {
 			if (emailAddress == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No EmailAddress exists with the primary key " +
-						emailAddressId.toString());
+						emailAddressId);
 				}
 
 				throw new NoSuchEmailAddressException(
 					"No EmailAddress exists with the primary key " +
-					emailAddressId.toString());
+					emailAddressId);
 			}
 
 			return remove(emailAddress);
@@ -149,12 +149,12 @@ public class EmailAddressPersistence extends BasePersistence {
 		if (emailAddress == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No EmailAddress exists with the primary key " +
-					emailAddressId.toString());
+					emailAddressId);
 			}
 
 			throw new NoSuchEmailAddressException(
 				"No EmailAddress exists with the primary key " +
-				emailAddressId.toString());
+				emailAddressId);
 		}
 
 		return emailAddress;

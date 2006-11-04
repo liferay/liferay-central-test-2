@@ -29,6 +29,7 @@ import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceUtil;
 import com.liferay.util.StringPool;
 
 import javax.portlet.PortletURL;
+import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
@@ -43,8 +44,8 @@ import javax.servlet.jsp.PageContext;
 public class BlogsUtil {
 
 	public static String getBreadcrumbs(
-			String categoryId, PageContext pageContext, RenderResponse res,
-			boolean popUp)
+			String categoryId, PageContext pageContext, RenderRequest req,
+			RenderResponse res)
 		throws Exception {
 
 		BlogsCategory category = null;
@@ -55,17 +56,19 @@ public class BlogsUtil {
 		catch (Exception e) {
 		}
 
-		return getBreadcrumbs(category, pageContext, res, popUp);
+		return getBreadcrumbs(category, pageContext, req, res);
 	}
 
 	public static String getBreadcrumbs(
-			BlogsCategory category, PageContext pageContext, RenderResponse res,
-			boolean popUp)
+			BlogsCategory category, PageContext pageContext, RenderRequest req,
+			RenderResponse res)
 		throws Exception {
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		if (popUp) {
+		WindowState windowState = req.getWindowState();
+
+		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
 			categoriesURL.setParameter(
@@ -92,7 +95,7 @@ public class BlogsUtil {
 			for (int i = 0;; i++) {
 				PortletURL portletURL = res.createRenderURL();
 
-				if (popUp) {
+				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

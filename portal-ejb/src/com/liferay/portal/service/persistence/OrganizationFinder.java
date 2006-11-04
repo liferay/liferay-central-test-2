@@ -337,10 +337,10 @@ public class OrganizationFinder {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long i = (Long)itr.next();
+				Long l = (Long)itr.next();
 
-				if (i != null) {
-					count += i.intValue();
+				if (l != null) {
+					count += l.intValue();
 				}
 			}
 

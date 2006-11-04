@@ -624,6 +624,26 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
+			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/DLFileShortcutLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
 			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-name>
 			<jndi-name>ejb/liferay/DLFileVersionLocalServiceHome</jndi-name>
 			<bean-pool>

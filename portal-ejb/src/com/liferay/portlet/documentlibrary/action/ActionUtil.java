@@ -27,8 +27,10 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -82,6 +84,35 @@ public class ActionUtil {
 		}
 
 		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, fileEntry);
+	}
+
+	public static void getFileShortcut(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((ActionRequestImpl)req).getHttpServletRequest();
+
+		getFileShortcut(httpReq);
+	}
+
+	public static void getFileShortcut(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq =
+			((RenderRequestImpl)req).getHttpServletRequest();
+
+		getFileShortcut(httpReq);
+	}
+
+	public static void getFileShortcut(HttpServletRequest req)
+		throws Exception {
+
+		long fileShortcutId = ParamUtil.getLong(req, "fileShortcutId");
+
+		DLFileShortcut fileShortcut = null;
+
+		if (fileShortcutId > 0) {
+			fileShortcut = DLFileShortcutServiceUtil.getFileShortcut(
+				fileShortcutId);
+		}
+
+		req.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT, fileShortcut);
 	}
 
 	public static void getFolder(ActionRequest req) throws Exception {

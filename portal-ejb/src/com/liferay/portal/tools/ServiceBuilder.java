@@ -1312,7 +1312,13 @@ public class ServiceBuilder {
 						sb.append("column=\"" + col.getDBName() + "\" ");
 					}
 
-					sb.append("type=\"java.lang." + col.getType() + "\">\n");
+					sb.append("type=\"");
+					
+					if (!entity.hasPrimitivePK()) {
+						sb.append("java.lang.");
+					}
+
+					sb.append(col.getType() + "\">\n");
 
 					String colIdType = col.getIdType();
 
@@ -1346,28 +1352,7 @@ public class ServiceBuilder {
 
 						if (col.isPrimitiveType()) {
 							sb.append("type=\"com.liferay.util.dao.hibernate.");
-
-							String colType = col.getType();
-
-							if (colType.equals("boolean")) {
-								sb.append("Boolean");
-							}
-							else if (colType.equals("double")) {
-								sb.append("Double");
-							}
-							else if (colType.equals("float")) {
-								sb.append("Float");
-							}
-							else if (colType.equals("int")) {
-								sb.append("Integer");
-							}
-							else if (colType.equals("long")) {
-								sb.append("Long");
-							}
-							else if (colType.equals("short")) {
-								sb.append("Short");
-							}
-
+							sb.append(_getPrimitiveObj(col.getType()));
 							sb.append("Type\" ");
 						}
 
@@ -1653,7 +1638,21 @@ public class ServiceBuilder {
 		}
 		else {
 			sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
-			sb.append("return getPrimaryKey().compareTo(pk);");
+
+			if (entity.hasPrimitivePK()) {
+				sb.append("if (getPrimaryKey() < pk) {");
+				sb.append("return -1;");
+				sb.append("}");
+				sb.append("else if (getPrimaryKey() > pk) {");
+				sb.append("return 1;");
+				sb.append("}");
+				sb.append("else {");
+				sb.append("return 0;");
+				sb.append("}");
+			}
+			else {
+				sb.append("return getPrimaryKey().compareTo(pk);");
+			}
 		}
 
 		sb.append("}");
@@ -1672,7 +1671,14 @@ public class ServiceBuilder {
 		sb.append("return false;");
 		sb.append("}");
 		sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
-		sb.append("if (getPrimaryKey().equals(pk)) {");
+		
+		if (entity.hasPrimitivePK()) {
+			sb.append("if (getPrimaryKey() == pk) {");
+		}
+		else {
+			sb.append("if (getPrimaryKey().equals(pk)) {");
+		}
+
 		sb.append("return true;");
 		sb.append("}");
 		sb.append("else {");
@@ -1683,7 +1689,14 @@ public class ServiceBuilder {
 		// Hash code method
 
 		sb.append("public int hashCode() {");
-		sb.append("return getPrimaryKey().hashCode();");
+
+		if (entity.hasPrimitivePK()) {
+			sb.append("return (int)getPrimaryKey();");
+		}
+		else {
+			sb.append("return getPrimaryKey().hashCode();");
+		}
+
 		sb.append("}");
 
 		// Fields
@@ -1887,12 +1900,26 @@ public class ServiceBuilder {
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
+		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, ");
+
+		if (entity.hasPrimitivePK()) {
+			sb.append("new ");
+			sb.append(_getPrimitiveObj(entity.getPKClassName()));
+			sb.append("(");
+		}
+
+		sb.append(pkVarName);
+
+		if (entity.hasPrimitivePK()) {
+			sb.append(")");
+		}
+		
+		sb.append(");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
 		sb.append("if (_log.isWarnEnabled()) {");
-		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
 		sb.append("}");
-		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
 		sb.append("}");
 		sb.append("return remove(" + entity.getVarName() + ");");
 		sb.append("}");
@@ -1969,9 +1996,9 @@ public class ServiceBuilder {
 		sb.append(entity.getName() + " " + entity.getVarName() + " = fetchByPrimaryKey(" + pkVarName + ");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
 		sb.append("if (_log.isWarnEnabled()) {");
-		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("_log.warn(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
 		sb.append("}");
-		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ".toString());");
+		sb.append("throw new " + _getNoSuchEntityException(entity) + "Exception(\"No " + entity.getName() + " exists with the primary key \" + " + pkVarName + ");");
 		sb.append("}");
 		sb.append("return " + entity.getVarName() + ";");
 		sb.append("}");
@@ -1980,7 +2007,21 @@ public class ServiceBuilder {
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
-		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + ".class, " + pkVarName + ");");
+		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + ".class, ");
+
+		if (entity.hasPrimitivePK()) {
+			sb.append("new ");
+			sb.append(_getPrimitiveObj(entity.getPKClassName()));
+			sb.append("(");
+		}
+
+		sb.append(pkVarName);
+
+		if (entity.hasPrimitivePK()) {
+			sb.append(")");
+		}
+
+		sb.append(");");
 		sb.append("}");
 		sb.append("catch (HibernateException he) {");
 		sb.append("throw new SystemException(he);");
@@ -2131,24 +2172,7 @@ public class ServiceBuilder {
 					String colObjType = colType;
 
 					if (col.isPrimitiveType()) {
-						if (colType.equals("boolean")) {
-							colObjType = "Boolean";
-						}
-						else if (colType.equals("double")) {
-							colObjType = "Double";
-						}
-						else if (colType.equals("float")) {
-							colObjType = "Float";
-						}
-						else if (colType.equals("int")) {
-							colObjType = "Integer";
-						}
-						else if (colType.equals("long")) {
-							colObjType = "Long";
-						}
-						else if (colType.equals("short")) {
-							colObjType = "Short";
-						}
+						colObjType = _getPrimitiveObj(colType);
 					}
 
 					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
@@ -2274,24 +2298,7 @@ public class ServiceBuilder {
 					String colObjType = colType;
 
 					if (col.isPrimitiveType()) {
-						if (colType.equals("boolean")) {
-							colObjType = "Boolean";
-						}
-						else if (colType.equals("double")) {
-							colObjType = "Double";
-						}
-						else if (colType.equals("float")) {
-							colObjType = "Float";
-						}
-						else if (colType.equals("int")) {
-							colObjType = "Integer";
-						}
-						else if (colType.equals("long")) {
-							colObjType = "Long";
-						}
-						else if (colType.equals("short")) {
-							colObjType = "Short";
-						}
+						colObjType = _getPrimitiveObj(colType);
 					}
 
 					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
@@ -2432,24 +2439,7 @@ public class ServiceBuilder {
 					String colObjType = colType;
 
 					if (col.isPrimitiveType()) {
-						if (colType.equals("boolean")) {
-							colObjType = "Boolean";
-						}
-						else if (colType.equals("double")) {
-							colObjType = "Double";
-						}
-						else if (colType.equals("float")) {
-							colObjType = "Float";
-						}
-						else if (colType.equals("int")) {
-							colObjType = "Integer";
-						}
-						else if (colType.equals("long")) {
-							colObjType = "Long";
-						}
-						else if (colType.equals("short")) {
-							colObjType = "Short";
-						}
+						colObjType = _getPrimitiveObj(colType);
 					}
 
 					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
@@ -2696,24 +2686,7 @@ public class ServiceBuilder {
 					String colObjType = colType;
 
 					if (col.isPrimitiveType()) {
-						if (colType.equals("boolean")) {
-							colObjType = "Boolean";
-						}
-						else if (colType.equals("double")) {
-							colObjType = "Double";
-						}
-						else if (colType.equals("float")) {
-							colObjType = "Float";
-						}
-						else if (colType.equals("int")) {
-							colObjType = "Integer";
-						}
-						else if (colType.equals("long")) {
-							colObjType = "Long";
-						}
-						else if (colType.equals("short")) {
-							colObjType = "Short";
-						}
+						colObjType = _getPrimitiveObj(colType);
 					}
 
 					sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
@@ -2956,24 +2929,7 @@ public class ServiceBuilder {
 				String colObjType = colType;
 
 				if (col.isPrimitiveType()) {
-					if (colType.equals("boolean")) {
-						colObjType = "Boolean";
-					}
-					else if (colType.equals("double")) {
-						colObjType = "Double";
-					}
-					else if (colType.equals("float")) {
-						colObjType = "Float";
-					}
-					else if (colType.equals("int")) {
-						colObjType = "Integer";
-					}
-					else if (colType.equals("long")) {
-						colObjType = "Long";
-					}
-					else if (colType.equals("short")) {
-						colObjType = "Short";
-					}
+					colObjType = _getPrimitiveObj(colType);
 				}
 
 				sb.append("q.set" + colObjType + "(queryPos++, " + col.getName());
@@ -5155,6 +5111,30 @@ public class ServiceBuilder {
 		noSuchEntityException = "NoSuch" + noSuchEntityException;
 
 		return noSuchEntityException;
+	}
+
+	private String _getPrimitiveObj(String type) {
+		if (type.equals("boolean")) {
+			return "Boolean";
+		}
+		else if (type.equals("double")) {
+			return "Double";
+		}
+		else if (type.equals("float")) {
+			return "Float";
+		}
+		else if (type.equals("int")) {
+			return "Integer";
+		}
+		else if (type.equals("long")) {
+			return "Long";
+		}
+		else if (type.equals("short")) {
+			return "Short";
+		}
+		else {
+			return null;
+		}
 	}
 
 	private String _getSessionTypeName(int sessionType) {

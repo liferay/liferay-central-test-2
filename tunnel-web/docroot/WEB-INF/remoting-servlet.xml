@@ -338,6 +338,18 @@
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService" />
 	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileShortcutService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileShortcutService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService" />
+	</bean>
+	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFileShortcutService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService" />
+	</bean>
 	<bean name="/com_liferay_portlet_documentlibrary_service_spring_DLFolderService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.documentlibrary.service.spring.DLFolderService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.documentlibrary.service.spring.DLFolderService" />

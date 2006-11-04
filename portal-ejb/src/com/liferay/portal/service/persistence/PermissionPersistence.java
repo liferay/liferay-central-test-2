@@ -83,12 +83,12 @@ public class PermissionPersistence extends BasePersistence {
 			if (permission == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Permission exists with the primary key " +
-						permissionId.toString());
+						permissionId);
 				}
 
 				throw new NoSuchPermissionException(
 					"No Permission exists with the primary key " +
-					permissionId.toString());
+					permissionId);
 			}
 
 			return remove(permission);
@@ -165,12 +165,11 @@ public class PermissionPersistence extends BasePersistence {
 		if (permission == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Permission exists with the primary key " +
-					permissionId.toString());
+					permissionId);
 			}
 
 			throw new NoSuchPermissionException(
-				"No Permission exists with the primary key " +
-				permissionId.toString());
+				"No Permission exists with the primary key " + permissionId);
 		}
 
 		return permission;

@@ -68,12 +68,11 @@ public class ContactPersistence extends BasePersistence {
 			if (contact == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Contact exists with the primary key " +
-						contactId.toString());
+						contactId);
 				}
 
 				throw new NoSuchContactException(
-					"No Contact exists with the primary key " +
-					contactId.toString());
+					"No Contact exists with the primary key " + contactId);
 			}
 
 			return remove(contact);
@@ -146,12 +145,11 @@ public class ContactPersistence extends BasePersistence {
 		if (contact == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Contact exists with the primary key " +
-					contactId.toString());
+					contactId);
 			}
 
 			throw new NoSuchContactException(
-				"No Contact exists with the primary key " +
-				contactId.toString());
+				"No Contact exists with the primary key " + contactId);
 		}
 
 		return contact;

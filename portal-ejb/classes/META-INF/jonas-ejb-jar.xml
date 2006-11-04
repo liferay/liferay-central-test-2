@@ -747,6 +747,30 @@
 		</jonas-resource>
 	</jonas-session>
 	<jonas-session>
+		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-name>
+		<jndi-name>ejb/liferay/DLFileShortcutLocalServiceHome</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
+	<jonas-session>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-name>
 		<jndi-name>ejb/liferay/DLFileVersionLocalServiceHome</jndi-name>
 		<jonas-resource>

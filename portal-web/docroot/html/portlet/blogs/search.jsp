@@ -39,7 +39,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= breadcrumbsCategoryId %>">
 <input name="<portlet:namespace />categoryIds" type="hidden" value="<%= categoryIds %>">
 
-<%= BlogsUtil.getBreadcrumbs(breadcrumbsCategoryId, pageContext, renderResponse, false) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
+<%= BlogsUtil.getBreadcrumbs(breadcrumbsCategoryId, pageContext, renderRequest, renderResponse) %> &raquo; <%= LanguageUtil.get(pageContext, "search") %>
 
 <br><br>
 

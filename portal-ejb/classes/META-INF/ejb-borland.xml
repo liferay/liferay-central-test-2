@@ -252,6 +252,14 @@
 			<bean-local-home-name>ejb/liferay/DLFileRankLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/DLFileShortcutLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</bean-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/DLFileVersionLocalServiceHome</bean-local-home-name>
 		</session>

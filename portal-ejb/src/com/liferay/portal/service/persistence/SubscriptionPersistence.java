@@ -69,12 +69,12 @@ public class SubscriptionPersistence extends BasePersistence {
 			if (subscription == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Subscription exists with the primary key " +
-						subscriptionId.toString());
+						subscriptionId);
 				}
 
 				throw new NoSuchSubscriptionException(
 					"No Subscription exists with the primary key " +
-					subscriptionId.toString());
+					subscriptionId);
 			}
 
 			return remove(subscription);
@@ -149,12 +149,12 @@ public class SubscriptionPersistence extends BasePersistence {
 		if (subscription == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Subscription exists with the primary key " +
-					subscriptionId.toString());
+					subscriptionId);
 			}
 
 			throw new NoSuchSubscriptionException(
 				"No Subscription exists with the primary key " +
-				subscriptionId.toString());
+				subscriptionId);
 		}
 
 		return subscription;

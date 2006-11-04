@@ -69,12 +69,12 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			if (passwordTracker == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PasswordTracker exists with the primary key " +
-						passwordTrackerId.toString());
+						passwordTrackerId);
 				}
 
 				throw new NoSuchPasswordTrackerException(
 					"No PasswordTracker exists with the primary key " +
-					passwordTrackerId.toString());
+					passwordTrackerId);
 			}
 
 			return remove(passwordTracker);
@@ -149,12 +149,12 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		if (passwordTracker == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No PasswordTracker exists with the primary key " +
-					passwordTrackerId.toString());
+					passwordTrackerId);
 			}
 
 			throw new NoSuchPasswordTrackerException(
 				"No PasswordTracker exists with the primary key " +
-				passwordTrackerId.toString());
+				passwordTrackerId);
 		}
 
 		return passwordTracker;

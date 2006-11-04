@@ -68,12 +68,11 @@ public class ListTypePersistence extends BasePersistence {
 			if (listType == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ListType exists with the primary key " +
-						listTypeId.toString());
+						listTypeId);
 				}
 
 				throw new NoSuchListTypeException(
-					"No ListType exists with the primary key " +
-					listTypeId.toString());
+					"No ListType exists with the primary key " + listTypeId);
 			}
 
 			return remove(listType);
@@ -146,12 +145,11 @@ public class ListTypePersistence extends BasePersistence {
 		if (listType == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ListType exists with the primary key " +
-					listTypeId.toString());
+					listTypeId);
 			}
 
 			throw new NoSuchListTypeException(
-				"No ListType exists with the primary key " +
-				listTypeId.toString());
+				"No ListType exists with the primary key " + listTypeId);
 		}
 
 		return listType;

@@ -66,12 +66,11 @@ public class AccountPersistence extends BasePersistence {
 			if (account == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Account exists with the primary key " +
-						accountId.toString());
+						accountId);
 				}
 
 				throw new NoSuchAccountException(
-					"No Account exists with the primary key " +
-					accountId.toString());
+					"No Account exists with the primary key " + accountId);
 			}
 
 			return remove(account);
@@ -144,12 +143,11 @@ public class AccountPersistence extends BasePersistence {
 		if (account == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No Account exists with the primary key " +
-					accountId.toString());
+					accountId);
 			}
 
 			throw new NoSuchAccountException(
-				"No Account exists with the primary key " +
-				accountId.toString());
+				"No Account exists with the primary key " + accountId);
 		}
 
 		return account;

@@ -69,12 +69,12 @@ public class UserTrackerPersistence extends BasePersistence {
 			if (userTracker == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No UserTracker exists with the primary key " +
-						userTrackerId.toString());
+						userTrackerId);
 				}
 
 				throw new NoSuchUserTrackerException(
 					"No UserTracker exists with the primary key " +
-					userTrackerId.toString());
+					userTrackerId);
 			}
 
 			return remove(userTracker);
@@ -149,12 +149,11 @@ public class UserTrackerPersistence extends BasePersistence {
 		if (userTracker == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No UserTracker exists with the primary key " +
-					userTrackerId.toString());
+					userTrackerId);
 			}
 
 			throw new NoSuchUserTrackerException(
-				"No UserTracker exists with the primary key " +
-				userTrackerId.toString());
+				"No UserTracker exists with the primary key " + userTrackerId);
 		}
 
 		return userTracker;

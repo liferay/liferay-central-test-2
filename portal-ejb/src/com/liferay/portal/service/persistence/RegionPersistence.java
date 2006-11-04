@@ -68,12 +68,11 @@ public class RegionPersistence extends BasePersistence {
 			if (region == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No Region exists with the primary key " +
-						regionId.toString());
+						regionId);
 				}
 
 				throw new NoSuchRegionException(
-					"No Region exists with the primary key " +
-					regionId.toString());
+					"No Region exists with the primary key " + regionId);
 			}
 
 			return remove(region);
@@ -145,12 +144,11 @@ public class RegionPersistence extends BasePersistence {
 
 		if (region == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No Region exists with the primary key " +
-					regionId.toString());
+				_log.warn("No Region exists with the primary key " + regionId);
 			}
 
 			throw new NoSuchRegionException(
-				"No Region exists with the primary key " + regionId.toString());
+				"No Region exists with the primary key " + regionId);
 		}
 
 		return region;

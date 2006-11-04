@@ -93,6 +93,7 @@
 			titles.add(displayTitle);
 		}
 	}
+
 	groupParams.put("layoutSet", Boolean.TRUE);
 
 	communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
