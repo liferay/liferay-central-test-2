@@ -779,3 +779,66 @@ var QuickEdit = {
 		}
 	}
 }
+
+var StarRating = Class.create();
+StarRating.prototype = {
+	initialize: function(item, options) {
+	/* OPTIONS
+	 * onComplete: (function) executes when rating is selected
+	 * rating: rating to initialize to
+	 * onState: path to on star image
+	 * offState: path to off star image
+	 * hoverState: path to hover star image
+	 */
+		this.options = options || new Object();
+		this.rating = this.options.rating || 0;
+		var self = this
+		item = $(item);
+		item.onmouseout = this.onHoverOut.bindAsEventListener(this);
+		this.stars = $A(item.getElementsByTagName("img"));
+		this.stars.each(function(image, index) {
+			image.index = index + 1;
+			image.onclick = self.onClick.bindAsEventListener(self);
+			image.onmouseover = self.onHoverOver.bindAsEventListener(self);
+		})
+		
+		this.display(this.rating, "rating");
+	},
+
+	display: function(rating, mode) {
+		var self = this;
+		rating = rating == null ? this.rating : rating;
+		this.stars.each(function(image, index) {
+			if (index < rating) {
+				if (mode == "hover") {
+					image.src = self.options.hoverState;
+				}
+				else {
+					image.src = self.options.onState;
+				}
+			}
+			else {
+				image.src = self.options.offState;
+			}
+		});
+	},
+	
+	onHoverOver: function(event) {
+		var target = Event.element(event);
+		this.display(target.index, "hover");
+	},
+	onHoverOut: function(event) {
+		this.display();
+	},
+	onClick: function(event) {
+		var target = Event.element(event);
+		var newRating = target.index;
+		this.rating = newRating;
+		
+		if (this.options.onComplete) {
+			this.options.onComplete(newRating);
+		}
+		
+		this.display(newRating);
+	}
+}
