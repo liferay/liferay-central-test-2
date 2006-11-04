@@ -116,19 +116,18 @@ public class LDAPImportUtil {
 
 	public static void importLDAP() throws Exception {
 		List companies = CompanyLocalServiceUtil.getCompanies();
-		
+
 		for (int i = 0; i < companies.size(); i++) {
-			Company company = (Company) companies.get(i);
-			String companyId = company.getCompanyId();
-			
+			Company company = (Company)companies.get(i);
+
 			if (PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.LDAP_IMPORT_ENABLED)) {
-				
+					company.getCompanyId(), PropsUtil.LDAP_IMPORT_ENABLED)) {
+
 				importLDAP(company.getCompanyId());
 			}
 		}
 	}
-	
+
 	public static void importLDAP(String companyId) throws Exception {
 		Properties env = new Properties();
 

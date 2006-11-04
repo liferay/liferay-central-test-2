@@ -103,7 +103,7 @@
 							window.location.reload(false);
 						}
 				});
-				
+
 			message.wrapper.style.top = "20px";
 			message.wrapper.style.left = "20px";
 		}
