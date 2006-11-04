@@ -69,12 +69,11 @@ public class WikiPagePersistence extends BasePersistence {
 			if (wikiPage == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WikiPage exists with the primary key " +
-						wikiPagePK.toString());
+						wikiPagePK);
 				}
 
 				throw new NoSuchPageException(
-					"No WikiPage exists with the primary key " +
-					wikiPagePK.toString());
+					"No WikiPage exists with the primary key " + wikiPagePK);
 			}
 
 			return remove(wikiPage);
@@ -148,12 +147,11 @@ public class WikiPagePersistence extends BasePersistence {
 		if (wikiPage == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No WikiPage exists with the primary key " +
-					wikiPagePK.toString());
+					wikiPagePK);
 			}
 
 			throw new NoSuchPageException(
-				"No WikiPage exists with the primary key " +
-				wikiPagePK.toString());
+				"No WikiPage exists with the primary key " + wikiPagePK);
 		}
 
 		return wikiPage;

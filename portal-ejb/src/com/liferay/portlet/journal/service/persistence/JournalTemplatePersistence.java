@@ -70,12 +70,12 @@ public class JournalTemplatePersistence extends BasePersistence {
 			if (journalTemplate == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No JournalTemplate exists with the primary key " +
-						journalTemplatePK.toString());
+						journalTemplatePK);
 				}
 
 				throw new NoSuchTemplateException(
 					"No JournalTemplate exists with the primary key " +
-					journalTemplatePK.toString());
+					journalTemplatePK);
 			}
 
 			return remove(journalTemplate);
@@ -150,12 +150,12 @@ public class JournalTemplatePersistence extends BasePersistence {
 		if (journalTemplate == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No JournalTemplate exists with the primary key " +
-					journalTemplatePK.toString());
+					journalTemplatePK);
 			}
 
 			throw new NoSuchTemplateException(
 				"No JournalTemplate exists with the primary key " +
-				journalTemplatePK.toString());
+				journalTemplatePK);
 		}
 
 		return journalTemplate;

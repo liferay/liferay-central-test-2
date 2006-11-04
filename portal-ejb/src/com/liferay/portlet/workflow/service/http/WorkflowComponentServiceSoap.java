@@ -38,6 +38,36 @@ import java.rmi.RemoteException;
  *
  */
 public class WorkflowComponentServiceSoap {
+	public static java.util.List getCurrentTasks(long instanceId, long tokenId)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = WorkflowComponentServiceUtil.getCurrentTasks(instanceId,
+					tokenId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getCurrentTasksXml(long instanceId,
+		long tokenId) throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getCurrentTasksXml(instanceId,
+					tokenId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static java.lang.String deploy(java.lang.String xml)
 		throws RemoteException {
 		try {
@@ -367,38 +397,6 @@ public class WorkflowComponentServiceSoap {
 		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.startWorkflow(definitionId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static java.util.Map updateTask(long taskId,
-		java.lang.String transition, java.util.Map parameterMap)
-		throws RemoteException {
-		try {
-			java.util.Map returnValue = WorkflowComponentServiceUtil.updateTask(taskId,
-					transition, parameterMap);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static java.lang.String updateTaskXml(long taskId,
-		java.lang.String transition, java.util.Map parameterMap)
-		throws RemoteException {
-		try {
-			java.lang.String returnValue = WorkflowComponentServiceUtil.updateTaskXml(taskId,
-					transition, parameterMap);
 
 			return returnValue;
 		}

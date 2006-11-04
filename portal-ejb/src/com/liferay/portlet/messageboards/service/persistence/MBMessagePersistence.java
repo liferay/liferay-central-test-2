@@ -70,12 +70,11 @@ public class MBMessagePersistence extends BasePersistence {
 			if (mbMessage == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessage exists with the primary key " +
-						mbMessagePK.toString());
+						mbMessagePK);
 				}
 
 				throw new NoSuchMessageException(
-					"No MBMessage exists with the primary key " +
-					mbMessagePK.toString());
+					"No MBMessage exists with the primary key " + mbMessagePK);
 			}
 
 			return remove(mbMessage);
@@ -149,12 +148,11 @@ public class MBMessagePersistence extends BasePersistence {
 		if (mbMessage == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBMessage exists with the primary key " +
-					mbMessagePK.toString());
+					mbMessagePK);
 			}
 
 			throw new NoSuchMessageException(
-				"No MBMessage exists with the primary key " +
-				mbMessagePK.toString());
+				"No MBMessage exists with the primary key " + mbMessagePK);
 		}
 
 		return mbMessage;

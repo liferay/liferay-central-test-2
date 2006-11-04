@@ -70,12 +70,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			if (bookmarksFolder == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BookmarksFolder exists with the primary key " +
-						folderId.toString());
+						folderId);
 				}
 
 				throw new NoSuchFolderException(
 					"No BookmarksFolder exists with the primary key " +
-					folderId.toString());
+					folderId);
 			}
 
 			return remove(bookmarksFolder);
@@ -150,12 +150,11 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		if (bookmarksFolder == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No BookmarksFolder exists with the primary key " +
-					folderId.toString());
+					folderId);
 			}
 
 			throw new NoSuchFolderException(
-				"No BookmarksFolder exists with the primary key " +
-				folderId.toString());
+				"No BookmarksFolder exists with the primary key " + folderId);
 		}
 
 		return bookmarksFolder;

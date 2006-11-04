@@ -70,12 +70,12 @@ public class ShoppingCouponPersistence extends BasePersistence {
 			if (shoppingCoupon == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingCoupon exists with the primary key " +
-						couponId.toString());
+						couponId);
 				}
 
 				throw new NoSuchCouponException(
 					"No ShoppingCoupon exists with the primary key " +
-					couponId.toString());
+					couponId);
 			}
 
 			return remove(shoppingCoupon);
@@ -150,12 +150,11 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		if (shoppingCoupon == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingCoupon exists with the primary key " +
-					couponId.toString());
+					couponId);
 			}
 
 			throw new NoSuchCouponException(
-				"No ShoppingCoupon exists with the primary key " +
-				couponId.toString());
+				"No ShoppingCoupon exists with the primary key " + couponId);
 		}
 
 		return shoppingCoupon;

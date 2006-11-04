@@ -83,12 +83,11 @@ public class ShoppingItemPersistence extends BasePersistence {
 			if (shoppingItem == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingItem exists with the primary key " +
-						itemId.toString());
+						itemId);
 				}
 
 				throw new NoSuchItemException(
-					"No ShoppingItem exists with the primary key " +
-					itemId.toString());
+					"No ShoppingItem exists with the primary key " + itemId);
 			}
 
 			return remove(shoppingItem);
@@ -163,12 +162,11 @@ public class ShoppingItemPersistence extends BasePersistence {
 		if (shoppingItem == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingItem exists with the primary key " +
-					itemId.toString());
+					itemId);
 			}
 
 			throw new NoSuchItemException(
-				"No ShoppingItem exists with the primary key " +
-				itemId.toString());
+				"No ShoppingItem exists with the primary key " + itemId);
 		}
 
 		return shoppingItem;

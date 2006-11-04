@@ -69,12 +69,11 @@ public class IGFolderPersistence extends BasePersistence {
 			if (igFolder == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No IGFolder exists with the primary key " +
-						folderId.toString());
+						folderId);
 				}
 
 				throw new NoSuchFolderException(
-					"No IGFolder exists with the primary key " +
-					folderId.toString());
+					"No IGFolder exists with the primary key " + folderId);
 			}
 
 			return remove(igFolder);
@@ -148,12 +147,11 @@ public class IGFolderPersistence extends BasePersistence {
 		if (igFolder == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No IGFolder exists with the primary key " +
-					folderId.toString());
+					folderId);
 			}
 
 			throw new NoSuchFolderException(
-				"No IGFolder exists with the primary key " +
-				folderId.toString());
+				"No IGFolder exists with the primary key " + folderId);
 		}
 
 		return igFolder;

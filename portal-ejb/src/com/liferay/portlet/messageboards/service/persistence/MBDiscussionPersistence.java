@@ -70,12 +70,12 @@ public class MBDiscussionPersistence extends BasePersistence {
 			if (mbDiscussion == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBDiscussion exists with the primary key " +
-						discussionId.toString());
+						discussionId);
 				}
 
 				throw new NoSuchDiscussionException(
 					"No MBDiscussion exists with the primary key " +
-					discussionId.toString());
+					discussionId);
 			}
 
 			return remove(mbDiscussion);
@@ -150,12 +150,11 @@ public class MBDiscussionPersistence extends BasePersistence {
 		if (mbDiscussion == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBDiscussion exists with the primary key " +
-					discussionId.toString());
+					discussionId);
 			}
 
 			throw new NoSuchDiscussionException(
-				"No MBDiscussion exists with the primary key " +
-				discussionId.toString());
+				"No MBDiscussion exists with the primary key " + discussionId);
 		}
 
 		return mbDiscussion;

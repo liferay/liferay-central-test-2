@@ -70,12 +70,11 @@ public class ShoppingCartPersistence extends BasePersistence {
 			if (shoppingCart == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingCart exists with the primary key " +
-						cartId.toString());
+						cartId);
 				}
 
 				throw new NoSuchCartException(
-					"No ShoppingCart exists with the primary key " +
-					cartId.toString());
+					"No ShoppingCart exists with the primary key " + cartId);
 			}
 
 			return remove(shoppingCart);
@@ -150,12 +149,11 @@ public class ShoppingCartPersistence extends BasePersistence {
 		if (shoppingCart == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingCart exists with the primary key " +
-					cartId.toString());
+					cartId);
 			}
 
 			throw new NoSuchCartException(
-				"No ShoppingCart exists with the primary key " +
-				cartId.toString());
+				"No ShoppingCart exists with the primary key " + cartId);
 		}
 
 		return shoppingCart;

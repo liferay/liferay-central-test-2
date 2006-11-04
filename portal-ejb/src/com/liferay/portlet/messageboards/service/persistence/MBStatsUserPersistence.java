@@ -70,12 +70,12 @@ public class MBStatsUserPersistence extends BasePersistence {
 			if (mbStatsUser == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBStatsUser exists with the primary key " +
-						mbStatsUserPK.toString());
+						mbStatsUserPK);
 				}
 
 				throw new NoSuchStatsUserException(
 					"No MBStatsUser exists with the primary key " +
-					mbStatsUserPK.toString());
+					mbStatsUserPK);
 			}
 
 			return remove(mbStatsUser);
@@ -150,12 +150,11 @@ public class MBStatsUserPersistence extends BasePersistence {
 		if (mbStatsUser == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBStatsUser exists with the primary key " +
-					mbStatsUserPK.toString());
+					mbStatsUserPK);
 			}
 
 			throw new NoSuchStatsUserException(
-				"No MBStatsUser exists with the primary key " +
-				mbStatsUserPK.toString());
+				"No MBStatsUser exists with the primary key " + mbStatsUserPK);
 		}
 
 		return mbStatsUser;

@@ -70,12 +70,11 @@ public class MBCategoryPersistence extends BasePersistence {
 			if (mbCategory == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBCategory exists with the primary key " +
-						categoryId.toString());
+						categoryId);
 				}
 
 				throw new NoSuchCategoryException(
-					"No MBCategory exists with the primary key " +
-					categoryId.toString());
+					"No MBCategory exists with the primary key " + categoryId);
 			}
 
 			return remove(mbCategory);
@@ -149,12 +148,11 @@ public class MBCategoryPersistence extends BasePersistence {
 		if (mbCategory == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBCategory exists with the primary key " +
-					categoryId.toString());
+					categoryId);
 			}
 
 			throw new NoSuchCategoryException(
-				"No MBCategory exists with the primary key " +
-				categoryId.toString());
+				"No MBCategory exists with the primary key " + categoryId);
 		}
 
 		return mbCategory;

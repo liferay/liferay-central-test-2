@@ -73,12 +73,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No JournalContentSearch exists with the primary key " +
-						journalContentSearchPK.toString());
+						journalContentSearchPK);
 				}
 
 				throw new NoSuchContentSearchException(
 					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK.toString());
+					journalContentSearchPK);
 			}
 
 			return remove(journalContentSearch);
@@ -155,12 +155,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"No JournalContentSearch exists with the primary key " +
-					journalContentSearchPK.toString());
+					journalContentSearchPK);
 			}
 
 			throw new NoSuchContentSearchException(
 				"No JournalContentSearch exists with the primary key " +
-				journalContentSearchPK.toString());
+				journalContentSearchPK);
 		}
 
 		return journalContentSearch;

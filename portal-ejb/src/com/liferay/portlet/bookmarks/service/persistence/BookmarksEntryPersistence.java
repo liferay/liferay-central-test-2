@@ -70,12 +70,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			if (bookmarksEntry == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BookmarksEntry exists with the primary key " +
-						entryId.toString());
+						entryId);
 				}
 
 				throw new NoSuchEntryException(
-					"No BookmarksEntry exists with the primary key " +
-					entryId.toString());
+					"No BookmarksEntry exists with the primary key " + entryId);
 			}
 
 			return remove(bookmarksEntry);
@@ -150,12 +149,11 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		if (bookmarksEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No BookmarksEntry exists with the primary key " +
-					entryId.toString());
+					entryId);
 			}
 
 			throw new NoSuchEntryException(
-				"No BookmarksEntry exists with the primary key " +
-				entryId.toString());
+				"No BookmarksEntry exists with the primary key " + entryId);
 		}
 
 		return bookmarksEntry;

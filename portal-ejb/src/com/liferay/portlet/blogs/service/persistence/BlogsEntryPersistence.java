@@ -70,12 +70,11 @@ public class BlogsEntryPersistence extends BasePersistence {
 			if (blogsEntry == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BlogsEntry exists with the primary key " +
-						entryId.toString());
+						entryId);
 				}
 
 				throw new NoSuchEntryException(
-					"No BlogsEntry exists with the primary key " +
-					entryId.toString());
+					"No BlogsEntry exists with the primary key " + entryId);
 			}
 
 			return remove(blogsEntry);
@@ -149,12 +148,11 @@ public class BlogsEntryPersistence extends BasePersistence {
 		if (blogsEntry == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No BlogsEntry exists with the primary key " +
-					entryId.toString());
+					entryId);
 			}
 
 			throw new NoSuchEntryException(
-				"No BlogsEntry exists with the primary key " +
-				entryId.toString());
+				"No BlogsEntry exists with the primary key " + entryId);
 		}
 
 		return blogsEntry;

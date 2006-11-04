@@ -69,12 +69,11 @@ public class MBThreadPersistence extends BasePersistence {
 			if (mbThread == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBThread exists with the primary key " +
-						threadId.toString());
+						threadId);
 				}
 
 				throw new NoSuchThreadException(
-					"No MBThread exists with the primary key " +
-					threadId.toString());
+					"No MBThread exists with the primary key " + threadId);
 			}
 
 			return remove(mbThread);
@@ -148,12 +147,11 @@ public class MBThreadPersistence extends BasePersistence {
 		if (mbThread == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBThread exists with the primary key " +
-					threadId.toString());
+					threadId);
 			}
 
 			throw new NoSuchThreadException(
-				"No MBThread exists with the primary key " +
-				threadId.toString());
+				"No MBThread exists with the primary key " + threadId);
 		}
 
 		return mbThread;

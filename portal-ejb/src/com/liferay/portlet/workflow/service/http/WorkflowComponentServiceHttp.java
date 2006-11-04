@@ -43,6 +43,76 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WorkflowComponentServiceHttp {
+	public static java.util.List getCurrentTasks(HttpPrincipal httpPrincipal,
+		long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(instanceId);
+			Object paramObj1 = new LongWrapper(tokenId);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getCurrentTasks", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static java.lang.String getCurrentTasksXml(
+		HttpPrincipal httpPrincipal, long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(instanceId);
+			Object paramObj1 = new LongWrapper(tokenId);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getCurrentTasksXml", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static java.lang.String deploy(HttpPrincipal httpPrincipal,
 		java.lang.String xml)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 

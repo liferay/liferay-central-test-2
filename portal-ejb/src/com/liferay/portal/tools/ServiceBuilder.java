@@ -5242,6 +5242,7 @@ public class ServiceBuilder {
 			method.getReturnType().getType().getQualifiedName();
 
 		if (returnValueName.startsWith("java.io") ||
+			returnValueName.equals("java.util.Map") ||
 			returnValueName.equals("java.util.Properties") ||
 			returnValueName.startsWith("javax")) {
 
@@ -5266,6 +5267,7 @@ public class ServiceBuilder {
 				 parameterTypeName.startsWith("java.io") ||
 				 //parameterTypeName.startsWith("java.util.List") ||
 				 //parameterTypeName.startsWith("java.util.Locale") ||
+				 parameterTypeName.startsWith("java.util.Map") ||
 				 parameterTypeName.startsWith("java.util.Properties") ||
 				 parameterTypeName.startsWith("javax")) {
 

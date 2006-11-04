@@ -70,12 +70,12 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			if (blogsCategory == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No BlogsCategory exists with the primary key " +
-						categoryId.toString());
+						categoryId);
 				}
 
 				throw new NoSuchCategoryException(
 					"No BlogsCategory exists with the primary key " +
-					categoryId.toString());
+					categoryId);
 			}
 
 			return remove(blogsCategory);
@@ -150,12 +150,11 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		if (blogsCategory == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No BlogsCategory exists with the primary key " +
-					categoryId.toString());
+					categoryId);
 			}
 
 			throw new NoSuchCategoryException(
-				"No BlogsCategory exists with the primary key " +
-				categoryId.toString());
+				"No BlogsCategory exists with the primary key " + categoryId);
 		}
 
 		return blogsCategory;

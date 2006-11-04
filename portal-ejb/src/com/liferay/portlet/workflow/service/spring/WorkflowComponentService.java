@@ -29,6 +29,14 @@ package com.liferay.portlet.workflow.service.spring;
  *
  */
 public interface WorkflowComponentService {
+	public java.util.List getCurrentTasks(long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException;
+
+	public java.lang.String getCurrentTasksXml(long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException;
+
 	public java.lang.String deploy(java.lang.String xml)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException;

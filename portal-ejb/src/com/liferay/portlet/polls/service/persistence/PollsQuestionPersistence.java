@@ -70,12 +70,12 @@ public class PollsQuestionPersistence extends BasePersistence {
 			if (pollsQuestion == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No PollsQuestion exists with the primary key " +
-						questionId.toString());
+						questionId);
 				}
 
 				throw new NoSuchQuestionException(
 					"No PollsQuestion exists with the primary key " +
-					questionId.toString());
+					questionId);
 			}
 
 			return remove(pollsQuestion);
@@ -150,12 +150,11 @@ public class PollsQuestionPersistence extends BasePersistence {
 		if (pollsQuestion == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No PollsQuestion exists with the primary key " +
-					questionId.toString());
+					questionId);
 			}
 
 			throw new NoSuchQuestionException(
-				"No PollsQuestion exists with the primary key " +
-				questionId.toString());
+				"No PollsQuestion exists with the primary key " + questionId);
 		}
 
 		return pollsQuestion;

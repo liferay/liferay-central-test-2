@@ -71,12 +71,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No ShoppingCategory exists with the primary key " +
-						categoryId.toString());
+						categoryId);
 				}
 
 				throw new NoSuchCategoryException(
 					"No ShoppingCategory exists with the primary key " +
-					categoryId.toString());
+					categoryId);
 			}
 
 			return remove(shoppingCategory);
@@ -151,12 +151,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		if (shoppingCategory == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingCategory exists with the primary key " +
-					categoryId.toString());
+					categoryId);
 			}
 
 			throw new NoSuchCategoryException(
 				"No ShoppingCategory exists with the primary key " +
-				categoryId.toString());
+				categoryId);
 		}
 
 		return shoppingCategory;

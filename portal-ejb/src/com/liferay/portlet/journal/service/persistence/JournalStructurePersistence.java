@@ -71,12 +71,12 @@ public class JournalStructurePersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No JournalStructure exists with the primary key " +
-						journalStructurePK.toString());
+						journalStructurePK);
 				}
 
 				throw new NoSuchStructureException(
 					"No JournalStructure exists with the primary key " +
-					journalStructurePK.toString());
+					journalStructurePK);
 			}
 
 			return remove(journalStructure);
@@ -152,12 +152,12 @@ public class JournalStructurePersistence extends BasePersistence {
 		if (journalStructure == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No JournalStructure exists with the primary key " +
-					journalStructurePK.toString());
+					journalStructurePK);
 			}
 
 			throw new NoSuchStructureException(
 				"No JournalStructure exists with the primary key " +
-				journalStructurePK.toString());
+				journalStructurePK);
 		}
 
 		return journalStructure;

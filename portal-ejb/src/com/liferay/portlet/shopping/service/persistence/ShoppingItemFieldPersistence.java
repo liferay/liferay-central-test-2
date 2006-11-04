@@ -71,12 +71,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No ShoppingItemField exists with the primary key " +
-						itemFieldId.toString());
+						itemFieldId);
 				}
 
 				throw new NoSuchItemFieldException(
 					"No ShoppingItemField exists with the primary key " +
-					itemFieldId.toString());
+					itemFieldId);
 			}
 
 			return remove(shoppingItemField);
@@ -151,12 +151,12 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		if (shoppingItemField == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingItemField exists with the primary key " +
-					itemFieldId.toString());
+					itemFieldId);
 			}
 
 			throw new NoSuchItemFieldException(
 				"No ShoppingItemField exists with the primary key " +
-				itemFieldId.toString());
+				itemFieldId);
 		}
 
 		return shoppingItemField;

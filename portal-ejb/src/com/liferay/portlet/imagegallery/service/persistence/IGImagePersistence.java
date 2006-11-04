@@ -69,12 +69,11 @@ public class IGImagePersistence extends BasePersistence {
 			if (igImage == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No IGImage exists with the primary key " +
-						igImagePK.toString());
+						igImagePK);
 				}
 
 				throw new NoSuchImageException(
-					"No IGImage exists with the primary key " +
-					igImagePK.toString());
+					"No IGImage exists with the primary key " + igImagePK);
 			}
 
 			return remove(igImage);
@@ -148,12 +147,11 @@ public class IGImagePersistence extends BasePersistence {
 		if (igImage == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No IGImage exists with the primary key " +
-					igImagePK.toString());
+					igImagePK);
 			}
 
 			throw new NoSuchImageException(
-				"No IGImage exists with the primary key " +
-				igImagePK.toString());
+				"No IGImage exists with the primary key " + igImagePK);
 		}
 
 		return igImage;

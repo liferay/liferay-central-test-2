@@ -69,12 +69,11 @@ public class WikiNodePersistence extends BasePersistence {
 			if (wikiNode == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No WikiNode exists with the primary key " +
-						nodeId.toString());
+						nodeId);
 				}
 
 				throw new NoSuchNodeException(
-					"No WikiNode exists with the primary key " +
-					nodeId.toString());
+					"No WikiNode exists with the primary key " + nodeId);
 			}
 
 			return remove(wikiNode);
@@ -147,12 +146,11 @@ public class WikiNodePersistence extends BasePersistence {
 
 		if (wikiNode == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No WikiNode exists with the primary key " +
-					nodeId.toString());
+				_log.warn("No WikiNode exists with the primary key " + nodeId);
 			}
 
 			throw new NoSuchNodeException(
-				"No WikiNode exists with the primary key " + nodeId.toString());
+				"No WikiNode exists with the primary key " + nodeId);
 		}
 
 		return wikiNode;

@@ -70,12 +70,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			if (mbMessageFlag == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No MBMessageFlag exists with the primary key " +
-						mbMessageFlagPK.toString());
+						mbMessageFlagPK);
 				}
 
 				throw new NoSuchMessageFlagException(
 					"No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK.toString());
+					mbMessageFlagPK);
 			}
 
 			return remove(mbMessageFlag);
@@ -150,12 +150,12 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		if (mbMessageFlag == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No MBMessageFlag exists with the primary key " +
-					mbMessageFlagPK.toString());
+					mbMessageFlagPK);
 			}
 
 			throw new NoSuchMessageFlagException(
 				"No MBMessageFlag exists with the primary key " +
-				mbMessageFlagPK.toString());
+				mbMessageFlagPK);
 		}
 
 		return mbMessageFlag;

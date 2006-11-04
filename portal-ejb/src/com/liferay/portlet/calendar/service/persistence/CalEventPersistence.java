@@ -69,12 +69,11 @@ public class CalEventPersistence extends BasePersistence {
 			if (calEvent == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No CalEvent exists with the primary key " +
-						eventId.toString());
+						eventId);
 				}
 
 				throw new NoSuchEventException(
-					"No CalEvent exists with the primary key " +
-					eventId.toString());
+					"No CalEvent exists with the primary key " + eventId);
 			}
 
 			return remove(calEvent);
@@ -147,13 +146,11 @@ public class CalEventPersistence extends BasePersistence {
 
 		if (calEvent == null) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("No CalEvent exists with the primary key " +
-					eventId.toString());
+				_log.warn("No CalEvent exists with the primary key " + eventId);
 			}
 
 			throw new NoSuchEventException(
-				"No CalEvent exists with the primary key " +
-				eventId.toString());
+				"No CalEvent exists with the primary key " + eventId);
 		}
 
 		return calEvent;

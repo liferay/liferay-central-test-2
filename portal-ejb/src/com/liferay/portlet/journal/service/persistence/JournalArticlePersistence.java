@@ -70,12 +70,12 @@ public class JournalArticlePersistence extends BasePersistence {
 			if (journalArticle == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No JournalArticle exists with the primary key " +
-						journalArticlePK.toString());
+						journalArticlePK);
 				}
 
 				throw new NoSuchArticleException(
 					"No JournalArticle exists with the primary key " +
-					journalArticlePK.toString());
+					journalArticlePK);
 			}
 
 			return remove(journalArticle);
@@ -150,12 +150,12 @@ public class JournalArticlePersistence extends BasePersistence {
 		if (journalArticle == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No JournalArticle exists with the primary key " +
-					journalArticlePK.toString());
+					journalArticlePK);
 			}
 
 			throw new NoSuchArticleException(
 				"No JournalArticle exists with the primary key " +
-				journalArticlePK.toString());
+				journalArticlePK);
 		}
 
 		return journalArticle;

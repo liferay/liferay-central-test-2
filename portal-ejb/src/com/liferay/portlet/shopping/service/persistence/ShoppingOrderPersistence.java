@@ -70,12 +70,11 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			if (shoppingOrder == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn("No ShoppingOrder exists with the primary key " +
-						orderId.toString());
+						orderId);
 				}
 
 				throw new NoSuchOrderException(
-					"No ShoppingOrder exists with the primary key " +
-					orderId.toString());
+					"No ShoppingOrder exists with the primary key " + orderId);
 			}
 
 			return remove(shoppingOrder);
@@ -150,12 +149,11 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		if (shoppingOrder == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No ShoppingOrder exists with the primary key " +
-					orderId.toString());
+					orderId);
 			}
 
 			throw new NoSuchOrderException(
-				"No ShoppingOrder exists with the primary key " +
-				orderId.toString());
+				"No ShoppingOrder exists with the primary key " + orderId);
 		}
 
 		return shoppingOrder;

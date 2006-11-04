@@ -50,6 +50,22 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		return (WorkflowComponentService)ctx.getBean(CLASS_NAME);
 	}
 
+	public java.util.List getCurrentTasks(long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getCurrentTasks(instanceId, tokenId);
+	}
+
+	public java.lang.String getCurrentTasksXml(long instanceId, long tokenId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().getCurrentTasksXml(instanceId, tokenId);
+	}
+
 	public java.lang.String deploy(java.lang.String xml)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
