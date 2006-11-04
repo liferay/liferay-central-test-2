@@ -786,9 +786,6 @@ StarRating.prototype = {
 	/* OPTIONS
 	 * onComplete: (function) executes when rating is selected
 	 * rating: rating to initialize to
-	 * onState: path to on star image
-	 * offState: path to off star image
-	 * hoverState: path to hover star image
 	 */
 		this.options = options || new Object();
 		this.rating = this.options.rating || 0;
@@ -811,14 +808,14 @@ StarRating.prototype = {
 		this.stars.each(function(image, index) {
 			if (index < rating) {
 				if (mode == "hover") {
-					image.src = self.options.hoverState;
+					image.src = image.src.replace(/\bstar_.*\./, "star_hover.");
 				}
 				else {
-					image.src = self.options.onState;
+					image.src = image.src.replace(/\bstar_.*\./, "star_on.");
 				}
 			}
 			else {
-				image.src = self.options.offState;
+				image.src = image.src.replace(/\bstar_.*\./, "star_off.");
 			}
 		});
 	},

@@ -90,18 +90,22 @@
 		function showPageSettings() {
 			var url = "<%= themeDisplay.getURLPageSettings().toString() %>";
 
-			url = url.replace(/p_p_state=maximized/,"p_p_state=pop_up");
+			url = url.replace(/\b=<%= WindowState.MAXIMIZED %>\b/,"=<%= LiferayWindowState.POP_UP %>");
 
-			Alerts.popupIframe(url,
+			var message = Alerts.popupIframe(url,
 				{
 					height: 200,
 					width: 700,
 					modal: true,
+					noCenter: true,
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
 					onClose: function() {
 							window.location.reload(false);
 						}
 				});
+				
+			message.wrapper.style.top = "20px";
+			message.wrapper.style.left = "20px";
 		}
 	</c:if>
 

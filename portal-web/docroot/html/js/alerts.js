@@ -251,7 +251,11 @@ var Alerts = {
 		if (msgWidth) iframe.style.width = "100%";
 		
 		message.appendChild(iframe);
-		Alerts.center(msgHeight, msgWidth);
+		if (!options.noCenter) {
+			Alerts.center(msgHeight, msgWidth);
+		}
+		
+		return message;
 	},
 	
 	center : function(height, width) {
