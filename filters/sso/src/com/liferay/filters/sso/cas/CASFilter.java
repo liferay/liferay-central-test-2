@@ -42,9 +42,10 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
+
 	public static final boolean USE_CAS_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(CASFilter.class.getName()), true);
-	
+		SystemProperties.get(CASFilter.class.getName()));
+
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
