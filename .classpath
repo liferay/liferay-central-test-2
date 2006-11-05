@@ -8,6 +8,7 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="documentlibrary-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/compression/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/secure/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/sso/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="filters/strip/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="lock-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-ejb/src"/>
@@ -59,6 +60,7 @@
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bcprov-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
+	<classpathentry kind="lib" path="lib/portal/casclient.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>

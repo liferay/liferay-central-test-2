@@ -100,3 +100,4 @@ Xerces 2.7.1
 XML Security 1.2.1
 XPP3 Min 1.1.3.4.O
 XStream 1.2
+Yale CAS Client 2.1.1

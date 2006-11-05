@@ -47,6 +47,7 @@
 	<classpathentry kind="lib" path="lib/portal/axis-ant.jar"/>
 	<classpathentry kind="lib" path="lib/portal/bcprov-jdk15.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
+	<classpathentry kind="lib" path="lib/portal/casclient.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>
