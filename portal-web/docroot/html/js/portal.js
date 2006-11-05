@@ -168,6 +168,7 @@ var LayoutColumns = {
 		DragDrop.create(portlet, {
 			revert: true,
 			handle: handle,
+			ghosting: true,
 			highlightDropzones: LayoutColumns.highlight});
 	},
 	
