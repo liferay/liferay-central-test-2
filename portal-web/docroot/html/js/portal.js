@@ -790,12 +790,12 @@ StarRating.prototype = {
 	 */
 		this.options = options || new Object();
 		this.rating = this.options.rating || 0;
+		item = $(item);
+		this.stars = $A(item.getElementsByTagName("img"));
 		
 		if (!this.options.displayOnly) {
 			var self = this
-			item = $(item);
 			item.onmouseout = this.onHoverOut.bindAsEventListener(this);
-			this.stars = $A(item.getElementsByTagName("img"));
 			this.stars.each(function(image, index) {
 				image.index = index + 1;
 				image.onclick = self.onClick.bindAsEventListener(self);
