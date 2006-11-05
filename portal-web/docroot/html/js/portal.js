@@ -793,14 +793,19 @@ StarRating.prototype = {
 		this.rating = this.options.rating || 0;
 		item = $(item);
 		this.stars = $A(item.getElementsByTagName("img"));
+		var self = this
 		
 		if (!this.options.displayOnly) {
-			var self = this
 			item.onmouseout = this.onHoverOut.bindAsEventListener(this);
 			this.stars.each(function(image, index) {
 				image.index = index + 1;
 				image.onclick = self.onClick.bindAsEventListener(self);
 				image.onmouseover = self.onHoverOver.bindAsEventListener(self);
+			})
+		}
+		else {
+			this.stars.each(function(image, index) {
+				image.title = self.rating + " stars";
 			})
 		}
 		
