@@ -62,7 +62,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</span>
 
 		<script type="text/javascript">
-			new StarRating(
+			<%= randomNamespace %>yourRatingObj = new StarRating(
 				"<%= randomNamespace %>yourRating",
 				{
 					rating: <%= yourScore %>,
@@ -80,17 +80,16 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, "votes") %>)<br>
 		</span>
 
-		<span id="averageRating">
+		<span id="<%= randomNamespace %>averageRating">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" />
 		</span>
 
 		<script type="text/javascript">
-			new StarRating(
+			<%= randomNamespace %>averageRatingObj = new StarRating(
 				"<%= randomNamespace %>averageRating",
 				{
-					rating: <%= stats.getAverageScore() %>,
-					onComplete: function(rating) {
-					}
+					displayOnly: true,
+					rating: <%= stats.getAverageScore() %>
 				});
 		</script>
 	</td>

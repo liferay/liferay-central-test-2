@@ -784,20 +784,24 @@ var StarRating = Class.create();
 StarRating.prototype = {
 	initialize: function(item, options) {
 	/* OPTIONS
+	 * displayOnly: (boolean) non-modifiable display
 	 * onComplete: (function) executes when rating is selected
 	 * rating: rating to initialize to
 	 */
 		this.options = options || new Object();
 		this.rating = this.options.rating || 0;
-		var self = this
-		item = $(item);
-		item.onmouseout = this.onHoverOut.bindAsEventListener(this);
-		this.stars = $A(item.getElementsByTagName("img"));
-		this.stars.each(function(image, index) {
-			image.index = index + 1;
-			image.onclick = self.onClick.bindAsEventListener(self);
-			image.onmouseover = self.onHoverOver.bindAsEventListener(self);
-		})
+		
+		if (!this.options.displayOnly) {
+			var self = this
+			item = $(item);
+			item.onmouseout = this.onHoverOut.bindAsEventListener(this);
+			this.stars = $A(item.getElementsByTagName("img"));
+			this.stars.each(function(image, index) {
+				image.index = index + 1;
+				image.onclick = self.onClick.bindAsEventListener(self);
+				image.onmouseover = self.onHoverOver.bindAsEventListener(self);
+			})
+		}
 		
 		this.display(this.rating, "rating");
 	},
