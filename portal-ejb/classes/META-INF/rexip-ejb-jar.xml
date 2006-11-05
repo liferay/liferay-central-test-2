@@ -751,5 +751,26 @@
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
 	</enterprise-beans>
 </rexip-ejb-jar>

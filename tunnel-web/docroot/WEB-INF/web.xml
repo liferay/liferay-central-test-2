@@ -536,6 +536,13 @@
 		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.ratings.service.ejb.RatingsEntryServiceHome</home>
+		<remote>com.liferay.portlet.ratings.service.ejb.RatingsEntryServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
@@ -989,6 +996,20 @@
 		<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
 		<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/RatingsEntryLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.ratings.service.ejb.RatingsEntryLocalServiceHome</local-home>
+		<local>com.liferay.portlet.ratings.service.ejb.RatingsEntryLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.ratings.service.ejb.RatingsStatsLocalServiceHome</local-home>
+		<local>com.liferay.portlet.ratings.service.ejb.RatingsStatsLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>

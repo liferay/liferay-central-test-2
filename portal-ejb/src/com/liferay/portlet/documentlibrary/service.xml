@@ -45,6 +45,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Contact" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference>
 			<![CDATA[
 			<ejb-local-ref>
@@ -115,6 +116,10 @@
 			<finder-column name="toFolderId" />
 			<finder-column name="toName" />
 		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 	<entity name="DLFileVersion" local-service="true" remote-service="false">
 

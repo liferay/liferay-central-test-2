@@ -752,5 +752,26 @@
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
 	</enterprise-beans>
 </jrun-ejb-jar>

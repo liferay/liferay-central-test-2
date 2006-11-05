@@ -554,4 +554,16 @@
 		<property name="service" ref="com.liferay.portlet.workflow.service.spring.WorkflowComponentService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.spring.WorkflowComponentService" />
 	</bean>
+	<bean name="/com_liferay_portlet_ratings_service_spring_RatingsEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.ratings.service.spring.RatingsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.ratings.service.spring.RatingsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_ratings_service_spring_RatingsEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.ratings.service.spring.RatingsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.ratings.service.spring.RatingsEntryService" />
+	</bean>
+	<bean name="/com_liferay_portlet_ratings_service_spring_RatingsEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.ratings.service.spring.RatingsEntryService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.ratings.service.spring.RatingsEntryService" />
+	</bean>
 </beans>

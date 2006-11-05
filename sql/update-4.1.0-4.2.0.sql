@@ -262,3 +262,24 @@ create table JournalContentSearch (
 alter table LayoutSet add virtualHost VARCHAR(75) null;
 
 alter table MBThread add priority DOUBLE;
+
+create table RatingsEntry (
+	entryId INTEGER not null primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	className VARCHAR(75) null,
+	classPK VARCHAR(75) null,
+	score DOUBLE
+);
+
+create table RatingsStats (
+	statsId INTEGER not null primary key,
+	className VARCHAR(75) null,
+	classPK VARCHAR(75) null,
+	totalEntries INTEGER,
+	totalScore DOUBLE,
+	averageScore DOUBLE
+);

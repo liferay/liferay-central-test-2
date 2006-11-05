@@ -933,6 +933,31 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>ratings</name>
+		<tagclass>com.liferay.taglib.ui.RatingsTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>className</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>classPK</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>url</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>search</name>
 		<tagclass>com.liferay.taglib.ui.SearchTag</tagclass>
 		<bodycontent>JSP</bodycontent>

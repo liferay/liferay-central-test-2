@@ -1002,4 +1002,23 @@
 		<field name="format" type="String" />
 		<field name="head" type="boolean" />
 	</model>
+	<model name="com.liferay.portlet.ratings.model.RatingsEntry">
+		<field name="entryId" type="long" />
+		<field name="companyId" type="String" />
+		<field name="userId" type="String" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="className" type="String" />
+		<field name="classPK" type="String" />
+		<field name="score" type="double" />
+	</model>
+	<model name="com.liferay.portlet.ratings.model.RatingsStats">
+		<field name="statsId" type="long" />
+		<field name="className" type="String" />
+		<field name="classPK" type="String" />
+		<field name="totalEntries" type="int" />
+		<field name="totalScore" type="double" />
+		<field name="averageScore" type="double" />
+	</model>
 </model-hints>

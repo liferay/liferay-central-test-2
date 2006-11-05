@@ -438,6 +438,8 @@
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
 		</action>
 
+		<action path="/document_library/rate_file_entry" type="com.liferay.portlet.documentlibrary.action.RateFileEntryAction" />
+
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
 		<action path="/document_library/select_file_entry" type="com.liferay.portlet.documentlibrary.action.ViewAction">

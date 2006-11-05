@@ -2906,4 +2906,87 @@
 			<ref bean="com.liferay.portlet.workflow.service.spring.WorkflowComponentService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService.professional" class="com.liferay.portlet.ratings.service.impl.RatingsEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalServiceFactory" class="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryService.professional" class="com.liferay.portlet.ratings.service.impl.RatingsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsEntryServiceFactory" class="com.liferay.portlet.ratings.service.spring.RatingsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService.professional" class="com.liferay.portlet.ratings.service.impl.RatingsStatsLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceFactory" class="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" class="com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence" />
+		</property>
+	</bean>
 </beans>

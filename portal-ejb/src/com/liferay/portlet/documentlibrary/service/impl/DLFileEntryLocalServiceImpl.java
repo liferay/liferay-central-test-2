@@ -48,6 +48,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalServiceUtil;
+import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.Validator;
@@ -241,6 +242,11 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 			DLFileVersionUtil.remove(fileVersion.getPrimaryKey());
 		}
+
+		// Ratings
+
+		RatingsStatsLocalServiceUtil.deleteStats(
+			DLFileEntry.class.getName(), fileEntry.getPrimaryKey().toString());
 
 		// Resources
 

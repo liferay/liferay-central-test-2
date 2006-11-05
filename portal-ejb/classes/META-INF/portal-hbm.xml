@@ -1016,4 +1016,29 @@
 		<property name="format" />
 		<property name="head" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portlet.ratings.model.RatingsEntry" table="RatingsEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" />
+		<property name="userId" />
+		<property name="userName" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="className" />
+		<property name="classPK" />
+		<property name="score" type="com.liferay.util.dao.hibernate.DoubleType" />
+	</class>
+	<class name="com.liferay.portlet.ratings.model.RatingsStats" table="RatingsStats">
+		<cache usage="read-write" />
+		<id name="statsId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="className" />
+		<property name="classPK" />
+		<property name="totalEntries" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="totalScore" type="com.liferay.util.dao.hibernate.DoubleType" />
+		<property name="averageScore" type="com.liferay.util.dao.hibernate.DoubleType" />
+	</class>
 </hibernate-mapping>

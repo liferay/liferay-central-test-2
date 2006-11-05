@@ -353,6 +353,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-ratings">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/portlet/ratings/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-shopping">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/shopping/service.xml" />
@@ -386,6 +392,7 @@
 		<antcall target="build-service-portlet-journal" />
 		<antcall target="build-service-portlet-messageboards" />
 		<antcall target="build-service-portlet-polls" />
+		<antcall target="build-service-portlet-ratings" />
 		<antcall target="build-service-portlet-shopping" />
 		<antcall target="build-service-portlet-wiki" />
 		<antcall target="build-service-portlet-workflow" />
@@ -474,6 +481,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-wsdd-portlet-ratings">
+		<antcall target="build-wsdd">
+			<param name="service.file" value="src/com/liferay/portlet/ratings/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-wsdd-portlet-shopping">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/shopping/service.xml" />
@@ -507,6 +520,7 @@
 		<antcall target="build-wsdd-portlet-journal" />
 		<antcall target="build-wsdd-portlet-messageboards" />
 		<antcall target="build-wsdd-portlet-polls" />
+		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
 		<antcall target="build-wsdd-portlet-wiki" />
 		<antcall target="build-wsdd-portlet-workflow" />

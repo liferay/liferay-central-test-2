@@ -204,6 +204,16 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="parent.location = '<%= redirect %>';">
 
+<c:if test="<%= fileEntry != null %>">
+	<br><br>
+
+	<liferay-ui:ratings
+		className="<%= DLFileEntry.class.getName() %>"
+		classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(name) %>'
+	/>
+</c:if>
+
 </form>
 
 <script type="text/javascript">

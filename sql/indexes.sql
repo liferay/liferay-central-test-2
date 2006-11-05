@@ -135,6 +135,11 @@ create index PortletPreferences_ix_OwnerId on PortletPreferences (ownerId);
 
 create index Portlet_ix_CompanyId on Portlet (companyId);
 
+create index RatingsEntry_ix_C_C on RatingsEntry (className, classPK);
+create index RatingsEntry_ix_U_C_C on RatingsEntry (userId, className, classPK);
+
+create index RatingsStats_ix_C_C on RatingsStats (className, classPK);
+
 create index Region_ix_Active on Region (active_);
 create index Region_ix_C_A on Region (countryId, active_);
 create index Region_ix_CountryId on Region (countryId);

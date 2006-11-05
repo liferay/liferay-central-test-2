@@ -6399,6 +6399,10 @@
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsStatsLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -6441,6 +6445,10 @@
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsStatsLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
@@ -6515,6 +6523,10 @@
 			<jndi-name>ejb/liferay/DLFileShortcutLocalServiceHome</jndi-name>
 			<local-jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileEntryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
@@ -6546,6 +6558,10 @@
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/ResourceLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/DLFileEntryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
@@ -8106,6 +8122,70 @@
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsStatsLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+			<local-jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsEntryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsStatsLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsStatsLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+		</ejb>
+		<ejb>
+			<name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</name>
+			<max-pool-size>40</max-pool-size>
+			<min-pool-size>20</min-pool-size>
+			<enable-freepool>false</enable-freepool>
+			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<low-activity-interval>20</low-activity-interval>
+			<is-secure>false</is-secure>
+			<is-clustered>true</is-clustered>
+			<jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</jndi-name>
+			<local-jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RatingsEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>ejb/liferay/RatingsEntryLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
 				<ejb-link>ejb/liferay/CounterLocalServiceHome__PRAMATI_LOCAL</ejb-link>
