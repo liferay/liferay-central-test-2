@@ -10,11 +10,11 @@
 		<filter-class>com.liferay.filters.sso.cas.CASFilter</filter-class>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
-			<param-value>https://localhost:8443/cas/login</param-value>
+			<param-value>https://localhost:8443/cas-web/login</param-value>
 		</init-param>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.validateUrl</param-name>
-			<param-value>https://localhost:8443/cas/proxyValidate</param-value>
+			<param-value>https://localhost:8443/cas-web/proxyValidate</param-value>
 		</init-param>
 		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.serviceUrl</param-name>

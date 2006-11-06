@@ -25,6 +25,8 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 
+import edu.yale.its.tp.cas.client.filter.CASFilter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,9 +39,6 @@ import javax.servlet.http.HttpSession;
  */
 public class CASAutoLogin implements AutoLogin {
 
-	public static final String CAS_FILTER_USER =
-		"edu.yale.its.tp.cas.client.filter.user";
-
 	public String[] login(HttpServletRequest req, HttpServletResponse res)
 		throws AutoLoginException {
 
@@ -48,7 +47,7 @@ public class CASAutoLogin implements AutoLogin {
 
 			HttpSession ses = req.getSession();
 
-			String userId = (String)ses.getAttribute(CAS_FILTER_USER);
+			String userId = (String)ses.getAttribute(CASFilter.CAS_FILTER_USER);
 
 			if (userId != null) {
 				User user = UserLocalServiceUtil.getUserById(userId);

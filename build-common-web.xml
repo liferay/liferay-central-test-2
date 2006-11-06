@@ -86,24 +86,7 @@
 			</else>
 		</if>
 
-		<if>
-			<equals arg1="${app.server.type}" arg2="orion" />
-			<then>
-				<copy file="${war.file}.war" todir="${app.server.deploy.dir}" />
-			</then>
-			<else>
-				<unwar src="${war.file}.war" dest="${war.file.dest}" />
-
-				<if>
-					<equals arg1="${war.file}" arg2="portal-web" />
-					<then>
-						<copy todir="${war.file.dest}" overwrite="yes">
-							<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
-						</copy>
-					</then>
-				</if>
-			</else>
-		</if>
+		<antcall target="copy-war" />
 
 		<if>
 			<or>
@@ -141,4 +124,65 @@
 			</elseif>
 		</if>
 	</target>
+	
+	<target name="copy-war">
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
+			</then>
+			<else>
+				<if>
+					<equals arg1="${war.file}" arg2="portal-web" />
+					<then>
+						<if>
+							<equals arg1="${app.server.type}" arg2="jetty" />
+							<then>
+								<property name="war.file.dest" value="${app.server.deploy.dir}/root" />
+							</then>
+							<elseif>
+								<or>
+									<equals arg1="${app.server.type}" arg2="resin" />
+									<equals arg1="${app.server.type}" arg2="tomcat" />
+								</or>
+								<then>
+									<property name="war.file.dest" value="${app.server.deploy.dir}/ROOT" />
+								</then>
+							</elseif>
+							<else>
+								<property name="war.file.dest" value="${app.server.portal.dir}" />
+							</else>
+						</if>
+					</then>
+					<else>
+						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+					</else>
+				</if>
+			</else>
+		</if>
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="orion" />
+			<then>
+				<copy file="${war.file}.war" todir="${app.server.deploy.dir}" />
+			</then>
+			<else>
+				<unwar src="${war.file}.war" dest="${war.file.dest}" />
+
+				<if>
+					<equals arg1="${war.file}" arg2="portal-web" />
+					<then>
+						<copy todir="${war.file.dest}" overwrite="yes">
+							<fileset dir="${project.dir}/web-sites/liferay.com-web/docroot" />
+						</copy>
+					</then>
+				</if>
+			</else>
+		</if>
+	</target>	
 </project>
