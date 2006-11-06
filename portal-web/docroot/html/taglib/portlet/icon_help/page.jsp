@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowHelpIcon() %>">
-	<liferay-ui:icon image="../portlet/help" message="help" url="<%= portletDisplay.getURLHelp() %>" toolTip="false" />
+	<liferay-ui:icon image="../portlet/help" message="help" url="<%= portletDisplay.getURLHelp() %>" toolTip="<%= false %>" />
 </c:if>

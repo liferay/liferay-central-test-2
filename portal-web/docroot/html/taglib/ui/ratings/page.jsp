@@ -50,10 +50,10 @@ catch (NoSuchEntryException nsee) {
 RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 %>
 
-<table border="0" cellpadding="0" cellspacing="0" style="padding-bottom: 10px">
+<table border="0" cellpadding="0" cellspacing="0" style="padding-bottom: 10px;">
 <tr>
 	<td>
-		<div style="font-size: xx-small; padding-bottom: 2px">
+		<div style="font-size: xx-small; padding-bottom: 2px;">
 			<%= LanguageUtil.get(pageContext, "your-rating") %>
 		</div>
 
@@ -63,7 +63,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td>
-		<div style="font-size: xx-small; padding-bottom: 2px">
+		<div style="font-size: xx-small; padding-bottom: 2px;">
 			<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, "votes") %>)
 		</div>
 

@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowPrintIcon() %>">
-	<liferay-ui:icon image="../portlet/print" message="print" url="<%= portletDisplay.getURLPrint() %>" toolTip="false" />
+	<liferay-ui:icon image="../portlet/print" message="print" url="<%= portletDisplay.getURLPrint() %>" toolTip="<%= false %>" />
 </c:if>
