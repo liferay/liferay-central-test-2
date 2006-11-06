@@ -35,4 +35,13 @@ if (message == null) {
 
 String url = (String)request.getAttribute("liferay-ui:icon:url");
 String target = (String)request.getAttribute("liferay-ui:icon:target");
+boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));
+String details;
+
+if (toolTip) {
+	details = "onmousemove=\"ToolTip.show(event, this, '" + Http.encodeURL(LanguageUtil.get(pageContext, message)) + "')\"";
+}
+else {
+	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
+}
 %>

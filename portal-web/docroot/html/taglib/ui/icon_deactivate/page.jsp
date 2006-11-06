@@ -24,4 +24,4 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
-<a href="javascript: if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>')) { self.location= '<%= Http.encodeURL(url) %>'; } else { self.focus(); }"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/deactivate.gif" title="<%= LanguageUtil.get(pageContext, "deactivate") %>"></a>
+<a href="javascript: if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") %>')) { self.location= '<%= Http.encodeURL(url) %>'; } else { self.focus(); }"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/deactivate.gif" onmousemove="ToolTip.show(event, this, '<%= Http.encodeURL(LanguageUtil.get(pageContext, "deactivate")) %>')"></a>

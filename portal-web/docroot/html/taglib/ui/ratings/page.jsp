@@ -50,48 +50,46 @@ catch (NoSuchEntryException nsee) {
 RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 %>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="0" cellspacing="0" style="padding-bottom: 10px">
 <tr>
 	<td>
-		<span style="font-size: xx-small;">
-		<%= LanguageUtil.get(pageContext, "your-rating") %><br>
-		</span>
+		<div style="font-size: xx-small; padding-bottom: 2px">
+			<%= LanguageUtil.get(pageContext, "your-rating") %>
+		</div>
 
-		<span id="<%= randomNamespace %>yourRating">
+		<div id="<%= randomNamespace %>yourRating">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" />
-		</span>
-
-		<script type="text/javascript">
-			<%= randomNamespace %>yourRatingObj = new StarRating(
-				"<%= randomNamespace %>yourRating",
-				{
-					rating: <%= yourScore %>,
-					onComplete: function(rating) {
-						var url = "<%= url %>&score=" + rating;
-
-						AjaxUtil.request(url);
-					}
-				});
-		</script>
+		</div>
 	</td>
 	<td style="padding-left: 30px;"></td>
 	<td>
-		<span style="font-size: xx-small;">
-		<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br>
-		</span>
+		<div style="font-size: xx-small; padding-bottom: 2px">
+			<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, "votes") %>)
+		</div>
 
-		<span id="<%= randomNamespace %>averageRating">
+		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" />
-		</span>
-
-		<script type="text/javascript">
-			<%= randomNamespace %>averageRatingObj = new StarRating(
-				"<%= randomNamespace %>averageRating",
-				{
-					displayOnly: true,
-					rating: <%= stats.getAverageScore() %>
-				});
-		</script>
+		</div>
 	</td>
 </tr>
 </table>
+
+<script type="text/javascript">
+	<%= randomNamespace %>yourRatingObj = new StarRating(
+		"<%= randomNamespace %>yourRating",
+		{
+			rating: <%= yourScore %>,
+			onComplete: function(rating) {
+				var url = "<%= url %>&score=" + rating;
+
+				AjaxUtil.request(url);
+			}
+		});
+
+	<%= randomNamespace %>averageRatingObj = new StarRating(
+		"<%= randomNamespace %>averageRating",
+		{
+			displayOnly: true,
+			rating: <%= stats.getAverageScore() %>
+		});
+</script>

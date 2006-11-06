@@ -24,4 +24,4 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
-<a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/<%= image %>.gif" title="<%= LanguageUtil.get(pageContext, message) %>"></a>
+<a href="<%= url %>" target="<%= target %>"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/<%= image %>.gif" <%= details %> /></a>

@@ -80,6 +80,125 @@ var DynamicSelect = {
 	}
 }
 
+var Bubble = {
+	MODE: {
+		EXP: 0, //expand
+		COL: 1  //collapse
+	},
+	FRAMES: 10,
+	MAX_DIST: 150,
+	
+	count: 0,
+	modeTimer: 0,
+
+	setMode: function(mode) {
+		Bubble.direction = mode;
+
+		if (!Bubble.timer) {
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'))", 1);
+		}
+	},
+
+	collapse: function(obj) {
+		if (Bubble.modeTimer) {
+			clearTimeout(Bubble.modeTimer);
+		}
+
+		Bubble.modeTimer = setTimeout("Bubble.setMode(Bubble.MODE.COL)", 200);
+	},
+
+	expand: function(obj) {
+		if (Bubble.modeTimer) {
+			clearTimeout(Bubble.modeTimer);
+		}
+
+		Bubble.modeTimer = setTimeout("Bubble.setMode(Bubble.MODE.EXP)", 100);
+	},
+
+	animate: function(obj) {
+		var collapse = (Bubble.direction == Bubble.MODE.COL);
+		var count = Bubble.count;
+		var list = obj.getElementsByTagName("div");
+		var angle = 0; // degrees
+		var dur = 100; // percentage
+
+		for (var i = 0; i < list.length; i++) {
+			var item = list[i];
+
+			switch (i) {
+				case 0:
+					angle = 10;
+					dur = 80;
+					break;
+				case 1:
+					angle = 35;
+					dur = 50;
+					break;
+				case 2:
+					angle = 45;
+					dur = 100;
+					break;
+				case 3:
+					angle = 80;
+					dur = 70;
+					break;
+				case 4:
+					angle = 0;
+					dur = 0;
+					break;
+			}
+
+			angle = (angle/360) * 2 * Math.PI;
+			var lastFrame = (dur/100) * Bubble.FRAMES;
+			var ratio = count/lastFrame;
+			var maxRad;
+
+			if (collapse) {
+				maxRad = Math.PI/2 - Math.PI/8;
+
+				if (!item.className.match("selected")) {
+					changeOpacity(item, ratio * 200);
+				}
+			}
+			else {
+				maxRad = Math.PI/2 + Math.PI/8;
+
+				if (count != 0) {
+					item.style.display = "block";
+					changeOpacity(item, ratio * 200);
+				}
+			}
+
+			if (ratio <= 1) {
+				var dist;
+				if (collapse) {
+					dist = Bubble.MAX_DIST * (dur/100) * (1 + Math.sin((ratio * maxRad) - (Math.PI/2)));
+				}
+				else {
+					dist = Bubble.MAX_DIST * (dur/100) * Math.sin(ratio * maxRad);
+				}
+				var x = dist * Math.cos(angle);
+				var y = -dist * Math.sin(angle);
+
+				item.style.left = x + "px";
+				item.style.top = y + "px";
+			}
+		}
+
+		if (collapse && count > 0) {
+			Bubble.count--;
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'),true)", 30);
+		}
+		else if (!collapse && count < Bubble.FRAMES) {
+			Bubble.count++;
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'))", 30);
+		}
+		else {
+			Bubble.timer = 0;
+		}
+	}
+}
+
 var LayoutColumns = {
 	columns: new Array(),
 	highlight: "transparent",
@@ -803,11 +922,6 @@ StarRating.prototype = {
 				image.onmouseover = self.onHoverOver.bindAsEventListener(self);
 			})
 		}
-		else {
-			this.stars.each(function(image, index) {
-				image.title = self.rating + " Stars";
-			})
-		}
 		
 		this.display(this.rating, "rating");
 	},
@@ -849,3 +963,66 @@ StarRating.prototype = {
 		this.display(newRating);
 	}
 }
+
+var ToolTip = {
+	current: null,
+	opacity: 100,
+	
+	show: function(event, obj, text) {
+		var target = obj;
+		var tip = ToolTip.current;
+		
+		target.onmouseout = ToolTip.hide;
+
+		if (!tip) {
+			var tip = document.createElement("div");
+			tip.className = "portal-tool-tip";
+			tip.style.position = "absolute";
+			tip.style.cursor = "default";
+			document.body.appendChild(tip);
+			ToolTip.current = tip;
+		}
+		
+		/*
+		ToolTip.opacity = 100;
+		Element.changeOpacity(tip, 100);
+		*/
+		tip.innerHTML = text;
+		tip.style.display = "";
+		
+		tip.style.top = (Event.pointerY(event) - 15) + "px";
+		tip.style.left = (Event.pointerX(event) + 15) + "px";
+	},
+	
+	hide: function(event) {
+		if (ToolTip.current) {
+			ToolTip.current.style.display = "none";
+		}
+		/*
+		ToolTip.opacity = 99;
+		ToolTip.timeout = setTimeout("ToolTip.fadeOut()", 250);
+		*/
+	},
+	
+	fadeOut: function() {
+		if (ToolTip.current) {
+			var tip = ToolTip.current;
+			var opacity = ToolTip.opacity;
+			
+			if (opacity > 0 && opacity < 100) {
+				ToolTip.opacity -= 20;
+				Element.changeOpacity(tip, ToolTip.opacity);
+				ToolTip.timeout = setTimeout("ToolTip.fadeOut()", 30);
+			}
+			else {
+				Element.changeOpacity(tip, 100);
+				
+				if (opacity <= 0) {
+					ToolTip.current.style.display = "none";
+				}
+			}
+		}
+	}
+}
+
+
