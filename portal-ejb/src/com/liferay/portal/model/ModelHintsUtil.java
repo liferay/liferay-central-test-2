@@ -86,7 +86,12 @@ public class ModelHintsUtil {
 		maxLength = GetterUtil.getInteger(
 			(String)hints.get("max-length"), maxLength);
 
-		return value.substring(0, maxLength);
+		if (value.length() > maxLength) {
+			return value.substring(0, maxLength);
+		}
+		else {
+			return value;
+		}
 	}
 
 	private ModelHintsUtil() {

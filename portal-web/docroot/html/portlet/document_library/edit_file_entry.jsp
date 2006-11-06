@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFileEntry fileEntry = (DLFileEntry)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
@@ -55,6 +57,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/edit_file_entry");
+portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("folderId", folderId);
 portletURL.setParameter("name", name);
@@ -161,6 +164,7 @@ portletURL.setParameter("name", name);
 
 	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
 		<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+		<portlet:param name="tabs2" value="<%= tabs2 %>" />
 		<portlet:param name="redirect" value="<%= redirect %>" />
 		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
 		<portlet:param name="folderId" value="<%= folderId %>" />
@@ -189,73 +193,89 @@ portletURL.setParameter("name", name);
 
 	<br>
 
-	<liferay-ui:tabs names="version-history" />
-
 	<%
-	SearchContainer searchContainer = new SearchContainer();
+	String tabs2Names = "version-history,comments";
 
-	List headerNames = new ArrayList();
-
-	headerNames.add("version");
-	headerNames.add("date");
-	headerNames.add("size");
-	headerNames.add(StringPool.BLANK);
-
-	searchContainer.setHeaderNames(headerNames);
-
-	List results = DLFileVersionLocalServiceUtil.getFileVersions(folderId, name);
-	List resultRows = searchContainer.getResultRows();
-
-	for (int i = 0; i < results.size(); i++) {
-		DLFileVersion fileVersion = (DLFileVersion)results.get(i);
-
-		ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
-
-		StringBuffer sb = new StringBuffer();
-
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/document_library/get_file?folderId=");
-		sb.append(folderId);
-		sb.append("&name=");
-		sb.append(Http.encodeURL(name));
-		sb.append("&version=");
-		sb.append(String.valueOf(fileVersion.getVersion()));
-
-		String rowHREF = sb.toString();
-
-		// Statistics
-
-		row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
-		row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
-		row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	if (!DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION)) {
+		tabs2Names = "version-history";
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:tabs
+		names="<%= tabs2Names %>"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
 
-	<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
-		<liferay-ui:tabs names="comments" />
+	<c:choose>
+		<c:when test='<%= tabs2.equals("version-history") %>'>
 
-		<portlet:actionURL var="discussionURL">
-			<portlet:param name="struts_action" value="/document_library/edit_discussion" />
-		</portlet:actionURL>
+			<%
+			SearchContainer searchContainer = new SearchContainer();
 
-		<liferay-ui:discussion
-			formName="fm2"
-			formAction="<%= discussionURL %>"
-			className="<%= DLFileEntry.class.getName() %>"
-			classPK="<%= fileEntry.getPrimaryKey().toString() %>"
-			userId="<%= fileEntry.getUserId() %>"
-			subject="<%= fileEntry.getTitle() %>"
-			redirect="<%= currentURL %>"
-		/>
-	</c:if>
+			List headerNames = new ArrayList();
+
+			headerNames.add("version");
+			headerNames.add("date");
+			headerNames.add("size");
+			headerNames.add(StringPool.BLANK);
+
+			searchContainer.setHeaderNames(headerNames);
+
+			List results = DLFileVersionLocalServiceUtil.getFileVersions(folderId, name);
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+
+				ResultRow row = new ResultRow(new Object[] {fileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/document_library/get_file?folderId=");
+				sb.append(folderId);
+				sb.append("&name=");
+				sb.append(Http.encodeURL(name));
+				sb.append("&version=");
+				sb.append(String.valueOf(fileVersion.getVersion()));
+
+				String rowHREF = sb.toString();
+
+				// Statistics
+
+				row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
+				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
+				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("comments") %>'>
+			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/document_library/edit_discussion" />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
+					formName="fm2"
+					formAction="<%= discussionURL %>"
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+					userId="<%= fileEntry.getUserId() %>"
+					subject="<%= fileEntry.getTitle() %>"
+					redirect="<%= currentURL %>"
+				/>
+			</c:if>
+		</c:when>
+	</c:choose>
 </c:if>
