@@ -3,6 +3,7 @@
 <project name="servicemix-web" basedir="." default="war">
 	<path id="web-lib.classpath">
 		<fileset dir="../lib/portal" includes="jmx-ri.jar,xml-apis.jar" />
+		<fileset dir="docroot/WEB-INF/lib" includes="*.jar" />
 	</path>
 
 	<import file="../build-common-web.xml" />

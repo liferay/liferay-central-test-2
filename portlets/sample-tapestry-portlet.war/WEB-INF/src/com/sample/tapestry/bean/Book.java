@@ -20,71 +20,76 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.sample.tapestry.bean;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
+import java.io.Serializable;
 
 import java.util.Date;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="Book.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Joseph Shum
  *
  */
-public class ReleaseInfo {
+public class Book implements Serializable {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public Book() {
 	}
 
-	static String version = "4.1.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3342";
-
-	static String date = "November 6, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public Date getAddDate() {
+		return _addDate;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public void setAddDate(Date addDate) {
+		_addDate = addDate;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public String getAuthor() {
+		return _author;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public void setAuthor(String author) {
+		_author = author;
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public String getDescription() {
+		return _description;
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public void setDescription(String description) {
+		_description= description;
 	}
+
+	public boolean isRecommended() {
+		return _recommended;
+	}
+
+	public void setRecommended(boolean recommended) {
+		_recommended = recommended;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+	}
+
+	public int getYear() {
+		return _year;
+	}
+
+	public void setYear(int year) {
+		_year = year;
+	}
+
+	private Date _addDate;
+	private String _author;
+	private String _description;
+	private boolean _recommended;
+	private String _title;
+	private int _year;
 
 }

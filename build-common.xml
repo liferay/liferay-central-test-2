@@ -37,7 +37,6 @@
 		<pathelement location="${project.dir}/portal-kernel/classes" />
 		<fileset dir="${project.dir}/lib/development" includes="servlet.jar" />
 		<fileset dir="${project.dir}/lib/global" includes="portlet.jar" />
-		<fileset dir="docroot/WEB-INF/lib" includes="*.jar" />
 		<path refid="web-lib.classpath" />
 	</path>
 

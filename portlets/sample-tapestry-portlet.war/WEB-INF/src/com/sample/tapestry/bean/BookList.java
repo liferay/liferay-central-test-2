@@ -20,39 +20,35 @@
  * SOFTWARE.
  */
 
-package com.sample.struts.struts.render;
+package com.sample.tapestry.bean;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.struts.action.Action;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="UploadSuccessAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="BookList.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Joseph Shum
  *
  */
-public class UploadSuccessAction extends Action {
+public class BookList {
 
-	public ActionForward execute(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception {
-
-		if (_log.isInfoEnabled()) {
-			_log.info("render " + req.getParameter("file_name"));
-		}
-
-		return mapping.findForward(
-			"portlet.sample_struts_portlet.upload_success");
+	public BookList() {
+		_books = new ArrayList();
 	}
 
-	private static Log _log = LogFactory.getLog(UploadAction.class);
+	public List getBooks() {
+		return _books;
+	}
+
+	public void setBooks(List books) {
+		_books = books;
+	}
+
+	public void addBook(Book book) {
+		_books.add(book);
+	}
+
+	private List _books;
 
 }

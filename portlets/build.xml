@@ -92,16 +92,21 @@
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 
-		<!--<antcall target="compile-module">
+		<antcall target="compile-module">
 			<param name="module.name" value="sample-tapestry-portlet" />
-		</antcall>-->
+		</antcall>
 	</target>
 
 	<target name="compile-module">
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
-		
+
+		<path id="web-lib.classpath">
+			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
+			<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+		</path>
+
 		<javac
-			classpathref="project.classpath"
+			classpathref="web.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"

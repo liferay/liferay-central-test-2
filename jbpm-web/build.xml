@@ -2,6 +2,7 @@
 
 <project name="jbpm-web" basedir="." default="war">
 	<path id="web-lib.classpath">
+		<fileset dir="docroot/WEB-INF/lib" includes="*.jar" />
 	</path>
 
 	<import file="../build-common-web.xml" />

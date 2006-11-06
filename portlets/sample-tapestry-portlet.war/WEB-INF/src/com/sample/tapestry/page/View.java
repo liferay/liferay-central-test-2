@@ -20,40 +20,22 @@
  * SOFTWARE.
  */
 
-package com.sample.struts;
+package com.sample.tapestry.page;
 
-import com.liferay.portlet.CustomUserAttributes;
-import com.liferay.portlet.UserAttributes;
+import java.util.List;
 
-import java.util.Map;
+import org.apache.tapestry.html.BasePage;
 
 /**
- * <a href="SampleUserAttributes.java.html"><b><i>View Source</i></b></a>
+ * <a href="View.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author Joseph Shum
  *
  */
-public class SampleUserAttributes extends CustomUserAttributes {
+public abstract class View extends BasePage {
 
-	public String getValue(String name, Map userInfo) {
-		if (name == null) {
-			return null;
-		}
+	public abstract List getBooks();
 
-		String companyId = (String)userInfo.get(
-			UserAttributes.LIFERAY_COMPANY_ID);
-		String userId = (String)userInfo.get(UserAttributes.LIFERAY_USER_ID);
-
-		if (name.equals("user.name.test")) {
-			return "Test Name";
-		}
-		else {
-			return super.getValue(name, userInfo);
-		}
-	}
-
-	public Object clone() {
-		return new SampleUserAttributes();
-	}
+	public abstract void setBooks(List books);
 
 }
