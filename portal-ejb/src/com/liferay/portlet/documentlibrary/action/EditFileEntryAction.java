@@ -34,9 +34,11 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.form.FileEntryForm;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.PropertiesUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -63,11 +65,13 @@ public class EditFileEntryAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		FileEntryForm fileEntryForm = (FileEntryForm)form;
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateFileEntry(req, res);
+				updateFileEntry(fileEntryForm, req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteFileEntry(req);
@@ -164,7 +168,8 @@ public class EditFileEntryAction extends PortletAction {
 		DLFileEntryServiceUtil.unlockFileEntry(folderId, name);
 	}
 
-	protected void updateFileEntry(ActionRequest req, ActionResponse res)
+	protected void updateFileEntry(
+			FileEntryForm fileEntryForm, ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		UploadPortletRequest uploadReq =
@@ -180,6 +185,9 @@ public class EditFileEntryAction extends PortletAction {
 		String title = ParamUtil.getString(uploadReq, "title");
 		String description = ParamUtil.getString(uploadReq, "description");
 
+		String extraSettings = PropertiesUtil.toString(
+			fileEntryForm.getExtraSettingsProperties());
+
 		byte[] byteArray = FileUtil.getBytes(uploadReq.getFile("file"));
 
 		boolean addCommunityPermissions = ParamUtil.getBoolean(
@@ -192,8 +200,8 @@ public class EditFileEntryAction extends PortletAction {
 			// Add file entry
 
 			DLFileEntryServiceUtil.addFileEntry(
-				folderId, sourceFileName, title, description, byteArray,
-				addCommunityPermissions, addGuestPermissions);
+				folderId, sourceFileName, title, description, extraSettings,
+				byteArray, addCommunityPermissions, addGuestPermissions);
 		}
 		else {
 
@@ -201,7 +209,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryServiceUtil.updateFileEntry(
 				folderId, newFolderId, name, sourceFileName, title, description,
-				byteArray);
+				extraSettings, byteArray);
 		}
 	}
 

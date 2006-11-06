@@ -521,6 +521,9 @@
 		<field name="version" type="double" />
 		<field name="size" type="int" />
 		<field name="readCount" type="int" />
+		<field name="extraSettings" type="String">
+			<hint-collection name="CLOB" />
+		</field>
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFileRank">
 		<field name="companyId" type="String" />

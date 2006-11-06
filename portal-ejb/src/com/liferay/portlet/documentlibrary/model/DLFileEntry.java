@@ -23,6 +23,12 @@
 package com.liferay.portlet.documentlibrary.model;
 
 import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
+import com.liferay.util.NullSafeProperties;
+import com.liferay.util.PropertiesUtil;
+
+import java.io.IOException;
+
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,6 +63,46 @@ public class DLFileEntry extends DLFileEntryModel {
 		return folder;
 	}
 
+	public String getExtraSettings() {
+		if (_extraSettingsProperties == null) {
+			return super.getExtraSettings();
+		}
+		else {
+			return PropertiesUtil.toString(_extraSettingsProperties);
+		}
+	}
+
+	public void setExtraSettings(String extraSettings) {
+		_extraSettingsProperties = null;
+
+		super.setExtraSettings(extraSettings);
+	}
+
+	public Properties getExtraSettingsProperties() {
+		if (_extraSettingsProperties == null) {
+			_extraSettingsProperties = new NullSafeProperties();
+
+			try {
+				PropertiesUtil.load(
+					_extraSettingsProperties, super.getExtraSettings());
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
+
+		return _extraSettingsProperties;
+	}
+
+	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
+		_extraSettingsProperties = extraSettingsProperties;
+
+		super.setExtraSettings(
+			PropertiesUtil.toString(_extraSettingsProperties));
+	}
+
 	private static Log _log = LogFactory.getLog(DLFileEntry.class);
+
+	private Properties _extraSettingsProperties = null;
 
 }

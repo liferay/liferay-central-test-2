@@ -40,12 +40,13 @@ import java.rmi.RemoteException;
 public class DLFileEntryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel addFileEntry(
 		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description, byte[] byteArray,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
-					name, title, description, byteArray,
+					name, title, description, extraSettings, byteArray,
 					addCommunityPermissions, addGuestPermissions);
 
 			return returnValue;
@@ -124,12 +125,13 @@ public class DLFileEntryServiceSoap {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel updateFileEntry(
 		java.lang.String folderId, java.lang.String newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description, byte[] byteArray)
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.updateFileEntry(folderId,
 					newFolderId, name, sourceFileName, title, description,
-					byteArray);
+					extraSettings, byteArray);
 
 			return returnValue;
 		}

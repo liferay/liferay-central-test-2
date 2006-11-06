@@ -31,7 +31,8 @@ package com.liferay.portlet.documentlibrary.service.spring;
 public interface DLFileEntryService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String folderId, java.lang.String name,
-		java.lang.String title, java.lang.String description, byte[] byteArray,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
@@ -61,7 +62,8 @@ public interface DLFileEntryService {
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String folderId, java.lang.String newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
-		java.lang.String title, java.lang.String description, byte[] byteArray)
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException;
 }

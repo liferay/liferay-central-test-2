@@ -541,6 +541,7 @@
 		<property name="version" type="com.liferay.util.dao.hibernate.DoubleType" />
 		<property name="size" column="size_" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="readCount" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="extraSettings" />
 	</class>
 	<class name="com.liferay.portlet.documentlibrary.model.DLFileRank" table="DLFileRank">
 		<cache usage="read-write" />

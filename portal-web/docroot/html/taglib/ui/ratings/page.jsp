@@ -77,7 +77,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	<td style="padding-left: 30px;"></td>
 	<td>
 		<span style="font-size: xx-small;">
-		<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, "votes") %>)<br>
+		<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br>
 		</span>
 
 		<span id="<%= randomNamespace %>averageRating">

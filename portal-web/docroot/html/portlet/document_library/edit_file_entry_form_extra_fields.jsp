@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -19,47 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.communities.form;
-
-import com.liferay.util.NullSafeProperties;
-
-import java.util.Properties;
-
-import org.apache.struts.action.ActionForm;
-
-/**
- * <a href="PageForm.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Javier Bermejo
- *
- */
-public class PageForm extends ActionForm {
-
-	public PageForm() {
-	}
-
-	public Object getTypeSettingsProperties(String key) {
-		if (!_typeSettingsProperties.isEmpty()) {
-			return _typeSettingsProperties.get(key);
-		}
-		else {
-			return null;
-		}
-	}
-
-	public Properties getTypeSettingsProperties() {
-		return _typeSettingsProperties;
-	}
-
-	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
-		_typeSettingsProperties = typeSettingsProperties;
-	}
-
-	public void setTypeSettingsProperties(String key, Object value) {
-		_typeSettingsProperties.put(key, value);
-	}
-
-	private Properties _typeSettingsProperties = new NullSafeProperties();
-
-}
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "author") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />">
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "type") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input class="form-text" name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />">
+	</td>
+</tr>

@@ -45,8 +45,9 @@ public class DLFileEntryServiceHttp {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, byte[] byteArray,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -74,19 +75,25 @@ public class DLFileEntryServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = byteArray;
+			Object paramObj4 = extraSettings;
 
-			if (byteArray == null) {
-				paramObj4 = new NullWrapper("[B");
+			if (extraSettings == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj5 = byteArray;
+
+			if (byteArray == null) {
+				paramObj5 = new NullWrapper("[B");
+			}
+
+			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"addFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 			Object returnObj = null;
 
@@ -350,7 +357,8 @@ public class DLFileEntryServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String folderId,
 		java.lang.String newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, byte[] byteArray)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -390,17 +398,23 @@ public class DLFileEntryServiceHttp {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = byteArray;
+			Object paramObj6 = extraSettings;
+
+			if (extraSettings == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = byteArray;
 
 			if (byteArray == null) {
-				paramObj6 = new NullWrapper("[B");
+				paramObj7 = new NullWrapper("[B");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(DLFileEntryServiceUtil.class.getName(),
 					"updateFileEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 			Object returnObj = null;
 

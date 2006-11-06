@@ -27,6 +27,7 @@
 		<column name="version" type="double" />
 		<column name="size" type="int" />
 		<column name="readCount" type="int" />
+		<column name="extraSettings" type="String" />
 
 		<!-- Order -->
 

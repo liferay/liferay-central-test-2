@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.communities.form;
+package com.liferay.portlet.documentlibrary.form;
 
 import com.liferay.util.NullSafeProperties;
 
@@ -29,37 +29,37 @@ import java.util.Properties;
 import org.apache.struts.action.ActionForm;
 
 /**
- * <a href="PageForm.java.html"><b><i>View Source</i></b></a>
+ * <a href="FileEntryForm.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Javier Bermejo
+ * @author  Brian Wing Shun Chan
  *
  */
-public class PageForm extends ActionForm {
+public class FileEntryForm extends ActionForm {
 
-	public PageForm() {
+	public FileEntryForm() {
 	}
 
-	public Object getTypeSettingsProperties(String key) {
-		if (!_typeSettingsProperties.isEmpty()) {
-			return _typeSettingsProperties.get(key);
+	public Object getExtraSettingsProperties(String key) {
+		if (!_extraSettingsProperties.isEmpty()) {
+			return _extraSettingsProperties.get(key);
 		}
 		else {
 			return null;
 		}
 	}
 
-	public Properties getTypeSettingsProperties() {
-		return _typeSettingsProperties;
+	public Properties getExtraSettingsProperties() {
+		return _extraSettingsProperties;
 	}
 
-	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
-		_typeSettingsProperties = typeSettingsProperties;
+	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
+		_extraSettingsProperties = extraSettingsProperties;
 	}
 
-	public void setTypeSettingsProperties(String key, Object value) {
-		_typeSettingsProperties.put(key, value);
+	public void setExtraSettingsProperties(String key, Object value) {
+		_extraSettingsProperties.put(key, value);
 	}
 
-	private Properties _typeSettingsProperties = new NullSafeProperties();
+	private Properties _extraSettingsProperties = new NullSafeProperties();
 
 }

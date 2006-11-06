@@ -32,15 +32,16 @@ public class DLFileEntryLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, byte[] byteArray,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
-			title, description, byteArray, addCommunityPermissions,
-			addGuestPermissions);
+			title, description, extraSettings, byteArray,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static void addFileEntryResources(java.lang.String folderId,
@@ -220,12 +221,14 @@ public class DLFileEntryLocalServiceUtil {
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, byte[] byteArray)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
 		return dlFileEntryLocalService.updateFileEntry(userId, folderId,
-			newFolderId, name, sourceFileName, title, description, byteArray);
+			newFolderId, name, sourceFileName, title, description,
+			extraSettings, byteArray);
 	}
 }

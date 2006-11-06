@@ -168,6 +168,20 @@ String fileMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(PropsU
 	</td>
 </tr>
 
+<%
+if (fileEntry == null) {
+	request.setAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY, new DLFileEntry());
+}
+%>
+
+<%@ include file="/html/portlet/document_library/edit_file_entry_form_extra_fields.jsp" %>
+
+<%
+if (fileEntry == null) {
+	request.removeAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_ENTRY);
+}
+%>
+
 <c:if test="<%= fileEntry == null %>">
 	<tr>
 		<td colspan="3">

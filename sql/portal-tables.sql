@@ -205,6 +205,7 @@ create table DLFileEntry (
 	version DOUBLE,
 	size_ INTEGER,
 	readCount INTEGER,
+	extraSettings TEXT null,
 	primary key (folderId, name)
 );
 

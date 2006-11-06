@@ -72,7 +72,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description,	byte[] byteArray,
+			String description,	String extraSettings, byte[] byteArray,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -115,6 +115,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		fileEntry.setVersion(DLFileEntry.DEFAULT_VERSION);
 		fileEntry.setSize(byteArray.length);
 		fileEntry.setReadCount(DLFileEntry.DEFAULT_READ_COUNT);
+		fileEntry.setExtraSettings(extraSettings);
 
 		DLFileEntryUtil.update(fileEntry);
 
@@ -393,7 +394,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			byte[] byteArray)
+			String extraSettings, byte[] byteArray)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -410,6 +411,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
+		fileEntry.setExtraSettings(extraSettings);
 
 		DLFileEntryUtil.update(fileEntry);
 
@@ -446,6 +448,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			newFileEntry.setVersion(fileEntry.getVersion());
 			newFileEntry.setSize(fileEntry.getSize());
 			newFileEntry.setReadCount(fileEntry.getReadCount());
+			newFileEntry.setExtraSettings(extraSettings);
 
 			DLFileEntryUtil.update(newFileEntry);
 

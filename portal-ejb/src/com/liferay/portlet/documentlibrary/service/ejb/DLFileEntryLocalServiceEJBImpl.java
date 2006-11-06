@@ -52,12 +52,14 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String title,
-		java.lang.String description, byte[] byteArray,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().addFileEntry(userId, folderId, name, title,
-			description, byteArray, addCommunityPermissions, addGuestPermissions);
+			description, extraSettings, byteArray, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addFileEntryResources(java.lang.String folderId,
@@ -195,11 +197,12 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String newFolderId, java.lang.String name,
 		java.lang.String sourceFileName, java.lang.String title,
-		java.lang.String description, byte[] byteArray)
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().updateFileEntry(userId, folderId, newFolderId,
-			name, sourceFileName, title, description, byteArray);
+			name, sourceFileName, title, description, extraSettings, byteArray);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -72,6 +72,9 @@ public class DLFileEntryModel extends BaseModel {
 	public static boolean XSS_ALLOW_DESCRIPTION = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.description"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_EXTRASETTINGS = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry.extraSettings"),
+			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileEntryModel"));
 
@@ -294,6 +297,23 @@ public class DLFileEntryModel extends BaseModel {
 		}
 	}
 
+	public String getExtraSettings() {
+		return GetterUtil.getString(_extraSettings);
+	}
+
+	public void setExtraSettings(String extraSettings) {
+		if (((extraSettings == null) && (_extraSettings != null)) ||
+				((extraSettings != null) && (_extraSettings == null)) ||
+				((extraSettings != null) && (_extraSettings != null) &&
+				!extraSettings.equals(_extraSettings))) {
+			if (!XSS_ALLOW_EXTRASETTINGS) {
+				extraSettings = XSSUtil.strip(extraSettings);
+			}
+
+			_extraSettings = extraSettings;
+		}
+	}
+
 	public Object clone() {
 		DLFileEntry clone = new DLFileEntry();
 		clone.setFolderId(getFolderId());
@@ -310,6 +330,7 @@ public class DLFileEntryModel extends BaseModel {
 		clone.setVersion(getVersion());
 		clone.setSize(getSize());
 		clone.setReadCount(getReadCount());
+		clone.setExtraSettings(getExtraSettings());
 
 		return clone;
 	}
@@ -378,4 +399,5 @@ public class DLFileEntryModel extends BaseModel {
 	private double _version;
 	private int _size;
 	private int _readCount;
+	private String _extraSettings;
 }

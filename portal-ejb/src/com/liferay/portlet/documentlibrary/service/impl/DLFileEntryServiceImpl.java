@@ -48,16 +48,16 @@ public class DLFileEntryServiceImpl
 
 	public DLFileEntry addFileEntry(
 			String folderId, String name, String title, String description,
-			byte[] byteArray, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String extraSettings, byte[] byteArray,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		DLFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
 
 		return DLFileEntryLocalServiceUtil.addFileEntry(
-			getUserId(), folderId, name, title, description, byteArray,
-			addCommunityPermissions, addGuestPermissions);
+			getUserId(), folderId, name, title, description, extraSettings,
+			byteArray, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void deleteFileEntry(String folderId, String name)
@@ -156,7 +156,7 @@ public class DLFileEntryServiceImpl
 	public DLFileEntry updateFileEntry(
 			String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
-			byte[] byteArray)
+			String extraSettings, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
 
 		User user = getUser();
@@ -180,7 +180,7 @@ public class DLFileEntryServiceImpl
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(
 			getUserId(), folderId, newFolderId, name, sourceFileName, title,
-			description, byteArray);
+			description, extraSettings, byteArray);
 
 		if (!alreadyHasLock) {
 
