@@ -735,6 +735,10 @@ public class MainServlet extends ActionServlet {
 
 		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Content type " + contentType);
+		}
+
 		if ((contentType != null) &&
 			(contentType.startsWith("multipart/form-data"))) {
 
