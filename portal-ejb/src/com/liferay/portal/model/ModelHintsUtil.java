@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.io.StringReader;
@@ -66,6 +67,26 @@ public class ModelHintsUtil {
 
 	public static Map getHints(String model, String field) {
 		return _instance._getHints(model, field);
+	}
+
+	public static String trimString(String model, String field, String value) {
+		if (value == null) {
+			return value;
+		}
+
+		Map hints = getHints(model, field);
+
+		if (hints == null) {
+			return value;
+		}
+
+		int maxLength = GetterUtil.getInteger(
+			ModelHintsDefaults.TEXT_MAX_LENGTH);
+
+		maxLength = GetterUtil.getInteger(
+			(String)hints.get("max-length"), maxLength);
+
+		return value.substring(0, maxLength);
 	}
 
 	private ModelHintsUtil() {

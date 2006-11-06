@@ -30,6 +30,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.CompanyUtil;
@@ -167,6 +168,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+		subject = ModelHintsUtil.trimString(
+			MBMessage.class.getName(), "subject", subject);
 		Date now = new Date();
 
 		validate(subject, body);
@@ -791,6 +794,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBCategory category = getCategory(message, categoryId);
 		String oldCategoryId = message.getCategoryId();
+		subject = ModelHintsUtil.trimString(
+			MBMessage.class.getName(), "subject", subject);
 		Date now = new Date();
 
 		validate(subject, body);
