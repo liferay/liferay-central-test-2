@@ -206,7 +206,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 					DLFileEntryLocalServiceUtil.addFileEntry(
 						userId, subfolderId, name, title, description,
-						byteArray, addCommunityPermissions,
+						StringPool.BLANK, byteArray, addCommunityPermissions,
 						addGuestPermissions);
 				}
 			}

@@ -22,17 +22,12 @@
 
 package com.liferay.portlet.documentlibrary.action;
 
-import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-import com.liferay.portlet.ratings.service.spring.RatingsEntryServiceUtil;
+import com.liferay.portlet.ratings.action.RateEntryAction;
 import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
 
 /**
  * <a href="RateFileEntryAction.java.html"><b><i>View Source</i></b></a>
@@ -40,23 +35,19 @@ import org.apache.struts.action.ActionMapping;
  * @author  Brian Wing Shun Chan
  *
  */
-public class RateFileEntryAction extends JSONAction {
+public class RateFileEntryAction extends RateEntryAction {
 
-	public String getJSON(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception {
+	public String getClassName() {
+		return _CLASS_NAME;
+	}
 
+	public String getClassPK(HttpServletRequest req) {
 		String folderId = ParamUtil.getString(req, "folderId");
 		String name = ParamUtil.getString(req, "name");
-		double score = ParamUtil.getDouble(req, "score");
 
-		String className = DLFileEntry.class.getName();
-		String classPK = new DLFileEntryPK(folderId, name).toString();
-
-		RatingsEntryServiceUtil.updateEntry(className, classPK, score);
-
-		return null;
+		return new DLFileEntryPK(folderId, name).toString();
 	}
+
+	private static final String _CLASS_NAME = DLFileEntry.class.getName();
 
 }

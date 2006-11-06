@@ -86,7 +86,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 
 			DLFileEntryServiceUtil.addFileEntry(
 				folder.getFolderId(), fileName, fileName, StringPool.BLANK,
-				FileUtil.getBytes(file), true, true);
+				StringPool.BLANK, FileUtil.getBytes(file), true, true);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

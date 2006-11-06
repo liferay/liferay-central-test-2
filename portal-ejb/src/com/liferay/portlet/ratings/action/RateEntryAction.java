@@ -20,14 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.action;
+package com.liferay.portlet.ratings.action;
 
-import com.liferay.portal.model.Region;
-import com.liferay.portal.service.spring.RegionServiceUtil;
 import com.liferay.portal.struts.JSONAction;
+import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.spring.RatingsEntryServiceUtil;
+import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceUtil;
 import com.liferay.util.ParamUtil;
-
-import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -35,53 +34,41 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
- * <a href="JSONRegionsAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="RateEntryAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Ming-Gih Lam
+ * @author  Brian Wing Shun Chan
  *
  */
-public class JSONRegionsAction extends JSONAction {
+public abstract class RateEntryAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
 
-		boolean nullable = ParamUtil.getBoolean(req, "nullable");
-		String countryId = ParamUtil.getString(req, "sourceValue");
-		List regions = RegionServiceUtil.getRegions(countryId, true);
+		String className = getClassName();
+		String classPK = getClassPK(req);
+		double score = ParamUtil.getDouble(req, "score");
+
+		RatingsEntryServiceUtil.updateEntry(className, classPK, score);
+
+		RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(
+			className, classPK);
 
 		JSONObject jsonObj = new JSONObject();
 
-		JSONArray jsonArray = new JSONArray();
-
-		if (nullable) {
-			JSONObject option = new JSONObject();
-
-			option.put("name", "");
-			option.put("value", "");
-
-			jsonArray.put(option);
-		}
-
-		for (int i = 0; i < regions.size(); i++) {
-			JSONObject option = new JSONObject();
-
-			Region region = (Region)regions.get(i);
-
-			option.put("name", region.getName());
-			option.put("value", region.getRegionId());
-
-			jsonArray.put(option);
-		}
-
-		jsonObj.put("options", jsonArray);
+		jsonObj.put("totalEntries", stats.getTotalEntries());
+		jsonObj.put("totalScore", stats.getTotalScore());
+		jsonObj.put("averageScore", stats.getAverageScore());
 
 		return jsonObj.toString();
 	}
+
+	public abstract String getClassName();
+
+	public abstract String getClassPK(HttpServletRequest req);
 
 }

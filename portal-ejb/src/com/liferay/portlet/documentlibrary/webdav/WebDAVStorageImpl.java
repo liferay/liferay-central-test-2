@@ -107,8 +107,8 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 		byte[] byteArray = FileUtil.getBytes(content);
 
 		DLFileEntryLocalServiceUtil.addFileEntry(
-			getUserId(), parentFolderId, fileName, fileName, null, byteArray,
-			true, true);
+			getUserId(), parentFolderId, fileName, fileName, null,
+			StringPool.BLANK, byteArray, true, true);
 	}
 
 	protected void deleteObject(String companyId, String groupId, String uri)
