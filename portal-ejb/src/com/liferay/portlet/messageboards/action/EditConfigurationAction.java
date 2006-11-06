@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
@@ -245,7 +246,9 @@ public class EditConfigurationAction extends PortletAction {
 
 		// Set ranks
 
-		prefs.setValues("ranks", ranks);
+		String languageId = ParamUtil.getString(req, "languageId");
+
+		prefs.setValues(MBUtil.getRanksKey(languageId), ranks);
 	}
 
 }

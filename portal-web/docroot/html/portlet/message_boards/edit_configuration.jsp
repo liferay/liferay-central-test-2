@@ -459,7 +459,35 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 		<br><br>
 
-		<textarea class="form-text" name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues("ranks", new String[0]), StringPool.NEW_LINE) %></textarea><br>
+		<%
+		String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+		%>
+
+		<textarea class="form-text" name="<portlet:namespace />ranks" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= StringUtil.merge(prefs.getValues(MBUtil.getRanksKey(languageId), new String[0]), StringPool.NEW_LINE) %></textarea><br>
+
+		<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />getLocalizedRanks();">
+
+			<%
+			Locale[] locales = LanguageUtil.getAvailableLocales();
+
+			for (int i = 0; i < locales.length; i++) {
+			%>
+
+				<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+
+		<br>
+
+		<script type="text/javascript">
+			function <portlet:namespace />getLocalizedRanks() {
+				self.location = '<%= portletURL %>&<portlet:namespace />languageId=' + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+			}
+		</script>
 	</c:when>
 </c:choose>
 

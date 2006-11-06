@@ -41,7 +41,7 @@
 								User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
 								Organization organization = user2.getOrganization();
 								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount();
-								String rank = MBUtil.getUserRank(portletSetup, posts);
+								String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 							%>
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br>

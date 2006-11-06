@@ -33,11 +33,14 @@ import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUt
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
+import com.liferay.util.LocaleUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
+
+import java.util.Locale;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -343,6 +346,18 @@ public class MBUtil {
 		}
 	}
 
+	public static String getRanksKey(String languageId) {
+		String ranksKey = "ranks";
+
+		String defaultLanguageId = LocaleUtil.toLanguageId(Locale.getDefault());
+
+		if (!languageId.equals(defaultLanguageId)) {
+			ranksKey += "_" + languageId;
+		}
+
+		return ranksKey;
+	}
+
 	public static String[] getThreadPriority(
 			PortletPreferences prefs, double value, ThemeDisplay themeDisplay)
 		throws Exception {
@@ -373,12 +388,14 @@ public class MBUtil {
 		return null;
 	}
 
-	public static String getUserRank(PortletPreferences prefs, int posts)
+	public static String getUserRank(
+			PortletPreferences prefs, String languageId, int posts)
 		throws Exception {
 
 		String rank = StringPool.BLANK;
 
-		String[] ranks = prefs.getValues("ranks", new String[0]);
+		String[] ranks = prefs.getValues(
+			getRanksKey(languageId), new String[0]);
 
 		for (int i = 0; i < ranks.length; i++) {
 			String[] kvp = StringUtil.split(ranks[i], StringPool.EQUAL);
