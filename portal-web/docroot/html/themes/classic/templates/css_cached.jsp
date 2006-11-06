@@ -488,6 +488,13 @@ FONT.bg {
 	padding: 8px;
 }
 
+.portal-tool-tip {
+	background-color: #FFFFCC;
+	border: 1px solid #000000;
+	padding: 2px;
+	font-size: <%= fontS %>
+}
+
 .layout-column-arrow-up {
 	<c:if test="<%= BrowserSniffer.is_ie(request) %>">
 		filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(src='<%= themeDisplay.getPathThemeImage() %>/arrows/arrow-up.png', sizingMethod='scale');

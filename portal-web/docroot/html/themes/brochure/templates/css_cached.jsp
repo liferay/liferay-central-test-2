@@ -499,6 +499,13 @@ FONT.bg {
 	padding: 8px;
 }
 
+.portal-tool-tip {
+	background-color: #FFFFCC;
+	border: 1px solid #000000;
+	padding: 2px;
+	font-size: <%= fontS %>
+}
+
 #layout-column_column-1,
 #layout-column_column-2,
 #layout-column_column-3,
