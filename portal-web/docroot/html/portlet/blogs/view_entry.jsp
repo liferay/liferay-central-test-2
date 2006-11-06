@@ -53,20 +53,22 @@ portletURL.setParameter("struts_action", "/blogs/view");
 
 </form>
 
-<br>
+<c:if test="<%= BlogsEntryPermission.contains(permissionChecker, entry, ActionKeys.ADD_DISCUSSION) %>">
+	<br>
 
-<liferay-ui:tabs names="comments" />
+	<liferay-ui:tabs names="comments" />
 
-<portlet:actionURL var="discussionURL">
-	<portlet:param name="struts_action" value="/blogs/edit_discussion" />
-</portlet:actionURL>
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/blogs/edit_discussion" />
+	</portlet:actionURL>
 
-<liferay-ui:discussion
-	formName="fm2"
-	formAction="<%= discussionURL %>"
-	className="<%= BlogsEntry.class.getName() %>"
-	classPK="<%= entry.getPrimaryKey().toString() %>"
-	userId="<%= entry.getUserId() %>"
-	subject="<%= entry.getTitle() %>"
-	redirect="<%= currentURL %>"
-/>
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= BlogsEntry.class.getName() %>"
+		classPK="<%= entry.getPrimaryKey().toString() %>"
+		userId="<%= entry.getUserId() %>"
+		subject="<%= entry.getTitle() %>"
+		redirect="<%= currentURL %>"
+	/>
+</c:if>
