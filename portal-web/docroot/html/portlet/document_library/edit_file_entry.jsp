@@ -145,30 +145,43 @@ portletURL.setParameter("name", name);
 		</td>
 	</tr>
 	</table>
-
-	<br>
 </c:if>
 
-<%
-String uploadProgressId = "dlFileEntryUploadProgress";
-%>
+<c:if test="<%= (fileEntry == null) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 
-<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
-	<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
-	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
-	<portlet:param name="folderId" value="<%= folderId %>" />
-	<portlet:param name="name" value="<%= name %>" />
-</portlet:renderURL>
+	<%
+	String uploadProgressId = "dlFileEntryUploadProgress";
+	%>
 
-<liferay-ui:upload-progress
-	id="<%= uploadProgressId %>"
-	iframeSrc="<%= uploadProgressURL %>"
-	redirect="<%= redirect %>"
-/>
+	<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>" var="uploadProgressURL">
+		<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
+		<portlet:param name="redirect" value="<%= redirect %>" />
+		<portlet:param name="uploadProgressId" value="<%= uploadProgressId %>" />
+		<portlet:param name="folderId" value="<%= folderId %>" />
+		<portlet:param name="name" value="<%= name %>" />
+	</portlet:renderURL>
+
+	<liferay-ui:upload-progress
+		id="<%= uploadProgressId %>"
+		iframeSrc="<%= uploadProgressURL %>"
+		redirect="<%= redirect %>"
+	/>
+
+	<c:if test="<%= fileEntry != null %>">
+		<br>
+	</c:if>
+</c:if>
 
 <c:if test="<%= fileEntry != null %>">
-	<br><br>
+	<br>
+
+	<liferay-ui:ratings
+		className="<%= DLFileEntry.class.getName() %>"
+		classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(name) %>'
+	/>
+
+	<br>
 
 	<liferay-ui:tabs names="version-history" />
 

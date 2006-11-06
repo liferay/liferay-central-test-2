@@ -261,27 +261,25 @@ portletURL.setParameter("folderId", folderId);
 
 				ResultRow row = new ResultRow(result, primaryKey, i);
 
-				StringBuffer sb = new StringBuffer();
+				PortletURL rowURL = renderResponse.createRenderURL();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/document_library/get_file?");
+				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				if (fileShortcut != null) {
-					sb.append("fileShortcutId=");
-					sb.append(fileShortcut.getFileShortcutId());
+					rowURL.setParameter("struts_action", "/document_library/edit_file_shortcut");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("fileShortcutId", String.valueOf(fileShortcut.getFileShortcutId()));
 				}
 				else {
-					sb.append("folderId=");
-					sb.append(fileEntry.getFolderId());
-					sb.append("&name=");
-					sb.append(Http.encodeURL(fileEntry.getName()));
+					rowURL.setParameter("struts_action", "/document_library/edit_file_entry");
+					rowURL.setParameter("redirect", currentURL);
+					rowURL.setParameter("folderId", fileEntry.getFolderId());
+					rowURL.setParameter("name", fileEntry.getName());
 				}
-
-				String rowHREF = sb.toString();
 
 				// Title and description
 
-				sb = new StringBuffer();
+				StringBuffer sb = new StringBuffer();
 
 				sb.append("<img align=\"left\" border=\"0\" src=\"");
 				sb.append(themeDisplay.getPathThemeImage());
@@ -297,18 +295,18 @@ portletURL.setParameter("folderId", folderId);
 					sb.append("</span>");
 				}
 
-				row.addText(sb.toString(), rowHREF);
+				row.addText(sb.toString(), rowURL);
 
 				// Statistics
 
-				row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-				row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
+				row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowURL);
+				row.addText(Integer.toString(fileEntry.getReadCount()), rowURL);
 
 				// Locked
 
 				boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
 
-				row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+				row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowURL);
 
 				// Action
 
@@ -404,19 +402,18 @@ portletURL.setParameter("folderId", folderId);
 
 			ResultRow row = new ResultRow(fileEntry, fileEntry.getPrimaryKey().toString(), i);
 
-			StringBuffer sb = new StringBuffer();
+			PortletURL rowURL = renderResponse.createRenderURL();
 
-			sb.append(themeDisplay.getPathMain());
-			sb.append("/document_library/get_file?folderId=");
-			sb.append(fileEntry.getFolderId());
-			sb.append("&name=");
-			sb.append(Http.encodeURL(fileEntry.getName()));
+			rowURL.setWindowState(WindowState.MAXIMIZED);
 
-			String rowHREF = sb.toString();
+			rowURL.setParameter("struts_action", "/document_library/edit_file_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("folderId", fileEntry.getFolderId());
+			rowURL.setParameter("name", fileEntry.getName());
 
 			// Title and description
 
-			sb = new StringBuffer();
+			StringBuffer sb = new StringBuffer();
 
 			sb.append("<img align=\"left\" border=\"0\" src=\"");
 			sb.append(themeDisplay.getPathThemeImage());
@@ -432,18 +429,18 @@ portletURL.setParameter("folderId", folderId);
 				sb.append("</span>");
 			}
 
-			row.addText(sb.toString(), rowHREF);
+			row.addText(sb.toString(), rowURL);
 
 			// Statistics
 
-			row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowHREF);
-			row.addText(Integer.toString(fileEntry.getReadCount()), rowHREF);
+			row.addText(TextFormatter.formatKB(fileEntry.getSize(), locale) + "k", rowURL);
+			row.addText(Integer.toString(fileEntry.getReadCount()), rowURL);
 
 			// Locked
 
 			boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
 
-			row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
+			row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowURL);
 
 			// Action
 
