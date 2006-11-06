@@ -68,6 +68,17 @@ if ((toGroup == null) && Validator.isNotNull(toGroupId)) {
 if (toGroup != null) {
 	toGroupId = toGroup.getGroupId();
 }
+
+Boolean isLocked = Boolean.TRUE;
+Boolean hasLock = Boolean.FALSE;
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/document_library/edit_file_shortcut");
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
 
 <script type="text/javascript">
@@ -115,7 +126,10 @@ if (toGroup != null) {
 <input name="<portlet:namespace />toFolderId" type="hidden" value="<%= toFolderId %>">
 <input name="<portlet:namespace />toName" type="hidden" value="<%= toName %>">
 
-<liferay-ui:tabs names="shortcut" />
+<liferay-ui:tabs
+	names="shortcut"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= FileShortcutPermissionException.class %>" message="you-do-not-have-permission-to-create-a-shortcut-to-the-selected-document" />
 <liferay-ui:error exception="<%= NoSuchFileEntryException.class %>" message="the-document-could-not-be-found" />
@@ -124,12 +138,51 @@ if (toGroup != null) {
 
 <br><br>
 
-<%= LanguageUtil.get(pageContext, "you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for") %>
-
-<br><br>
-
-<c:if test="<%= toFileEntry != null %>">
+<c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
 	<table border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "name") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>">
+			<%= toFileEntry.getName() %>
+			</a>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "version") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= toFileEntry.getVersion() %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "size") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= TextFormatter.formatKB(toFileEntry.getSize(), locale) %>k
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "downloads") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= toFileEntry.getReadCount() %>
+		</td>
+	</tr>
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "url") %>
@@ -145,6 +198,10 @@ if (toGroup != null) {
 
 	<br>
 </c:if>
+
+<%= LanguageUtil.get(pageContext, "you-can-create-a-shortcut-to-any-document-that-you-have-read-access-for") %>
+
+<br><br>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -162,7 +219,9 @@ if (toGroup != null) {
 		<%= toGroupName %>
 		</span>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
+		<c:if test="<%= (fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
+			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toGroupWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_group" /></portlet:renderURL>', 'toGroup', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toGroupWindow.focus();">
+		</c:if>
 	</td>
 </tr>
 <tr>
@@ -180,7 +239,9 @@ if (toGroup != null) {
 		<%= toFileEntryName %>
 		</span>
 
-		<input class="portlet-form-button" <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
+		<c:if test="<%= (fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
+			<input class="portlet-form-button" <%= (toGroup == null) ? "disabled" : "" %> id="<portlet:namespace />selectToFileEntryButton" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>' onClick="var toFileEntryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/select_file_entry" /></portlet:renderURL>&<portlet:namespace />groupId=' + document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value + '&<portlet:namespace />folderId=' + document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value + '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />toName.value, 'toFileEntry', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); toFileEntryWindow.focus();">
+		</c:if>
 	</td>
 </tr>
 
@@ -203,10 +264,76 @@ if (toGroup != null) {
 
 </table>
 
-<br>
+<c:if test="<%= (fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
+	<br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+	<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+
+	<br>
+</c:if>
+
+<c:if test="<%= (fileShortcut != null) && (toFileEntry != null) %>">
+	<br>
+
+	<liferay-ui:ratings
+		className="<%= DLFileEntry.class.getName() %>"
+		classPK="<%= toFileEntry.getPrimaryKey().toString() %>"
+		url='<%= themeDisplay.getPathMain() + "/document_library/rate_file_entry?folderId=" + toFileEntry.getFolderId() + "&name=" + Http.encodeURL(toFileEntry.getName()) %>'
+	/>
+
+	<br>
+
+	<liferay-ui:tabs names="version-history" />
+
+	<%
+	SearchContainer searchContainer = new SearchContainer();
+
+	List headerNames = new ArrayList();
+
+	headerNames.add("version");
+	headerNames.add("date");
+	headerNames.add("size");
+	headerNames.add(StringPool.BLANK);
+
+	searchContainer.setHeaderNames(headerNames);
+
+	List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
+	List resultRows = searchContainer.getResultRows();
+
+	for (int i = 0; i < results.size(); i++) {
+		DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+
+		ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
+
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(themeDisplay.getPathMain());
+		sb.append("/document_library/get_file?fileShortcutId=");
+		sb.append(fileShortcutId);
+		sb.append("&version=");
+		sb.append(String.valueOf(fileVersion.getVersion()));
+
+		String rowHREF = sb.toString();
+
+		// Statistics
+
+		row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
+		row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
+		row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+		// Action
+
+		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+
+		// Add result row
+
+		resultRows.add(row);
+	}
+	%>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+</c:if>
 
 </form>

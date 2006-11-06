@@ -58,7 +58,7 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 				_log.debug("CAS filter is disabled");
 			}
 		}
-		
+
 		if (USE_CAS_FILTER) {
 			super.doFilter(req, res, chain);
 		}
@@ -66,7 +66,7 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 			chain.doFilter(req, res);
 		}
 	}
-	
+
 	private static Log _log = LogFactory.getLog(CASFilter.class);
 
 }

@@ -326,7 +326,7 @@ if(opts.fixParent){textDiv.style.width="auto";}
 QuickEdit.inputList.remove(input);}}}
 var StarRating=Class.create();StarRating.prototype={initialize:function(item,options){this.options=options||new Object();this.rating=this.options.rating||0;item=$(item);this.stars=$A(item.getElementsByTagName("img"));var self=this
 if(!this.options.displayOnly){item.onmouseout=this.onHoverOut.bindAsEventListener(this);this.stars.each(function(image,index){image.index=index+1;image.onclick=self.onClick.bindAsEventListener(self);image.onmouseover=self.onHoverOver.bindAsEventListener(self);})}
-else{this.stars.each(function(image,index){image.title=self.rating+" stars";})}
+else{this.stars.each(function(image,index){image.title=self.rating+" Stars";})}
 this.display(this.rating,"rating");},display:function(rating,mode){var self=this;rating=rating==null?this.rating:rating;this.stars.each(function(image,index){if(index<rating){if(mode=="hover"){image.src=image.src.replace(/\bstar_.*\./,"star_hover.");}
 else{image.src=image.src.replace(/\bstar_.*\./,"star_on.");}}
 else{image.src=image.src.replace(/\bstar_.*\./,"star_off.");}});},onHoverOver:function(event){var target=Event.element(event);this.display(target.index,"hover");},onHoverOut:function(event){this.display();},onClick:function(event){var target=Event.element(event);var newRating=target.index;this.rating=newRating;if(this.options.onComplete){this.options.onComplete(newRating);}

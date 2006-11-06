@@ -238,7 +238,7 @@ public class DLFileShortcutLocalServiceImpl
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 			toFolderId, toName);
 
-		if (user.getCompanyId().equals(fileEntry.getCompanyId())) {
+		if (!user.getCompanyId().equals(fileEntry.getCompanyId())) {
 			throw new NoSuchFileEntryException();
 		}
 	}

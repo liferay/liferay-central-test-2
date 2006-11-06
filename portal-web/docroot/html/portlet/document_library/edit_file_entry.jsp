@@ -82,7 +82,10 @@ portletURL.setParameter("name", name);
 	<br><br>
 </c:if>
 
-<liferay-ui:tabs names="document" />
+<liferay-ui:tabs
+	names="document"
+	backURL="<%= redirect %>"
+/>
 
 <%= DLUtil.getBreadcrumbs(folderId, null, pageContext, renderRequest, renderResponse) %>
 
@@ -148,6 +151,9 @@ portletURL.setParameter("name", name);
 </c:if>
 
 <c:if test="<%= (fileEntry == null) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+	<c:if test="<%= fileEntry != null %>">
+		<br>
+	</c:if>
 
 	<%
 	String uploadProgressId = "dlFileEntryUploadProgress";

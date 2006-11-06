@@ -805,7 +805,7 @@ StarRating.prototype = {
 		}
 		else {
 			this.stars.each(function(image, index) {
-				image.title = self.rating + " stars";
+				image.title = self.rating + " Stars";
 			})
 		}
 		
