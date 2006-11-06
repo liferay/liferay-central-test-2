@@ -22,7 +22,13 @@
  */
 %>
 
-<tr>
+<%--
+
+// Override this file to add your own custom fields for file entries.
+
+--%>
+
+<%--<tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "author") %>
 	</td>
@@ -39,4 +45,4 @@
 	<td>
 		<input class="form-text" name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />">
 	</td>
-</tr>
+</tr>--%>
