@@ -53,7 +53,7 @@
 		month="<%= selMonth %>"
 		day="<%= selDay %>"
 		year="<%= selYear %>"
-		headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG) %>"
+		headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
 		data="<%= data %>"
 	/>
 </div>
