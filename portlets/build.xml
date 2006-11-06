@@ -9,6 +9,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-jsf-facelets-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-jsf-myfaces-portlet" />
 		</antcall>
 
@@ -54,6 +58,10 @@
 	<target name="compile">
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-dao-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-jsf-facelets-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
@@ -108,6 +116,10 @@
 	<target name="war">
 		<antcall target="war-module">
 			<param name="module.name" value="sample-dao-portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample-jsf-facelets-portlet" />
 		</antcall>
 
 		<antcall target="war-module">
