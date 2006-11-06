@@ -3,6 +3,31 @@
 
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Software Repository" short-name="SR" />
+	<entity name="SRLicense" local-service="false" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="licenseId" type="long" primary="true" />
+
+		<!-- Other fields -->
+
+		<column name="name" type="String" />
+		<column name="openSource" type="boolean" />
+		<column name="url" type="String" />
+		<column name="active" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="name" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="Active" return-type="Collection">
+			<finder-column name="active" />
+		</finder>
+	</entity>
 	<entity name="SRProductEntry" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -25,13 +50,22 @@
 
 		<column name="name" type="String" />
 		<column name="type" type="String" />
-		<column name="description" type="String" />
+		<column name="shortDescription" type="String" />
+		<column name="longDescription" type="String" />
+		<column name="version" type="double" />
+		<column name="changeLog" type="String" />
+		<column name="downloadURL" type="String" />
+		<column name="pageURL" type="String" />
+		<column name="readCount" type="int" />
+
+		<!-- Relationships -->
+
+		<column name="srLicenses" type="Collection" entity="SRLicense" mapping-table="SRLicenses_SRProductEntries" />
 
 		<!-- Order -->
 
 		<order by="asc">
-			<order-column name="folderId" />
-			<order-column name="name" case-sensitive="false" />
+			<order-column name="name" />
 		</order>
 
 		<!-- Finder methods -->
@@ -39,50 +73,44 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="G_P" return-type="Collection">
-			<finder-column name="groupId" />
-			<finder-column name="parentFolderId" />
-		</finder>
 
 		<!-- References -->
 
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 	</entity>
-	<entity name="IGImage" local-service="true" remote-service="true">
+	<entity name="SRProductVersion" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="companyId" type="String" primary="true" />
-		<column name="imageId" type="String" primary="true" />
+		<column name="productVersionId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
 		<column name="userId" type="String" />
+		<column name="userName" type="String" />
 		<column name="createDate" type="Date" />
 		<column name="modifiedDate" type="Date" />
 
 		<!-- Other fields -->
 
-		<column name="folderId" type="String" />
-		<column name="description" type="String" />
-		<column name="height" type="int" />
-		<column name="width" type="int" />
-		<column name="size" type="int" />
+		<column name="productEntryId" type="long" />
+		<column name="version" type="double" />
+		<column name="changeLog" type="String" />
+		<column name="downloadURL" type="String" />
+		<column name="pageURL" type="String" />
 
 		<!-- Order -->
 
-		<order by="asc">
-			<order-column name="imageId" />
+		<order by="desc">
+			<order-column name="name" />
+			<order-column name="version" />
 		</order>
 
 		<!-- Finder methods -->
 
-		<finder name="FolderId" return-type="Collection">
-			<finder-column name="folderId" />
+		<finder name="ProductEntryId" return-type="Collection">
+			<finder-column name="productEntryId" />
 		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
 </service-builder>
