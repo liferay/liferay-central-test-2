@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+
+<project name="cas-web" basedir="." default="war">
+	<path id="web-lib.classpath">
+	</path>
+
+	<import file="../build-common-web.xml" />
+
+	<property name="war.file" value="${ant.project.name}" />
+	
+	<target name="deploy">
+		<antcall target="copy-war" />
+	</target>
+</project>
