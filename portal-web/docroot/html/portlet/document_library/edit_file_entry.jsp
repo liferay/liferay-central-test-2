@@ -240,4 +240,20 @@ portletURL.setParameter("name", name);
 	%>
 
 	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+	<liferay-ui:tabs names="comments" />
+
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/document_library/edit_discussion" />
+	</portlet:actionURL>
+
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= DLFileEntry.class.getName() %>"
+		classPK="<%= fileEntry.getPrimaryKey().toString() %>"
+		userId="<%= fileEntry.getUserId() %>"
+		subject="<%= fileEntry.getTitle() %>"
+		redirect="<%= currentURL %>"
+	/>
 </c:if>

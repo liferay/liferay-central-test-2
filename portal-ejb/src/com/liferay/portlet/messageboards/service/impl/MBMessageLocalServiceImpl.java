@@ -604,8 +604,11 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			message = (MBMessage)messages.get(0);
 		}
 		catch (NoSuchDiscussionException nsde) {
+			String subject = classPK;
+			String body = subject;
+
 			message = MBMessageLocalServiceUtil.addDiscussionMessage(
-				userId, className + "_" + classPK, className + "_" + classPK);
+				userId, subject, body);
 
 			String discussionId = Long.toString(
 				CounterLocalServiceUtil.increment(

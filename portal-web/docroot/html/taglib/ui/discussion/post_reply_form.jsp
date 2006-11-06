@@ -24,7 +24,9 @@
 
 <tr>
 	<td id="<%= namespace %>messageScroll<%= message.getMessageId() %>">
-		<br>
+		<c:if test="<%= i > 0 %>">
+			<br>
+		</c:if>
 
 		<input name="<%= namespace %>messageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>">
 		<input name="<%= namespace %>parentMessageId<%= i %>" type="hidden" value="<%= message.getMessageId() %>">
