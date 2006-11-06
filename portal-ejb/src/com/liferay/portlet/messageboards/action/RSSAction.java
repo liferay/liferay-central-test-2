@@ -27,6 +27,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -80,9 +81,10 @@ public class RSSAction extends Action {
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
-			"http://" + company.getPortalURL() + themeDisplay.getPathMain() +
-				"/message_boards/find_message?p_l_id=" + plid + "&categoryId=" +
-					categoryId;
+			Http.getProtocol(req) + "://" + company.getPortalURL() +
+				themeDisplay.getPathMain() +
+					"/message_boards/find_message?p_l_id=" + plid +
+						"&categoryId=" + categoryId;
 
 		String rss = StringPool.BLANK;
 

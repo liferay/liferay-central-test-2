@@ -27,6 +27,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
+import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -77,8 +78,8 @@ public class RSSAction extends Action {
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
-			"http://" + company.getPortalURL() + themeDisplay.getPathMain() +
-				"/blogs/find_entry?p_l_id=" + plid;
+			Http.getProtocol(req) + "://" + company.getPortalURL() +
+				themeDisplay.getPathMain() + "/blogs/find_entry?p_l_id=" + plid;
 
 		String rss = BlogsEntryLocalServiceUtil.getGroupEntriesRSS(
 			groupId, 0, SearchContainer.DEFAULT_DELTA, version, url);
