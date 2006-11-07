@@ -101,6 +101,7 @@
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
 
 		<path id="web-lib.classpath">
+			<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
 			<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
 		</path>
