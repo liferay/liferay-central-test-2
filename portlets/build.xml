@@ -99,6 +99,7 @@
 
 	<target name="compile-module">
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
+		<mkdir dir="${module.name}.war/WEB-INF/lib" />
 
 		<path id="web-lib.classpath">
 			<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
