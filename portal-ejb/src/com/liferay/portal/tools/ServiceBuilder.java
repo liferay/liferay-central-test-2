@@ -3310,20 +3310,44 @@ public class ServiceBuilder {
 
 				Entity tempEntity = getEntity(col.getEJBName());
 
+				String entitySqlParameterType = "VARCHAR";
+
+				if (entity.hasPrimitivePK()) {
+					entitySqlParameterType = _getPrimitiveSqlType(entity.getPKClassName()).toUpperCase();
+				}
+
+				String pkVarNameWrapper = pkVarName;
+
+				if (entity.hasPrimitivePK()) {
+					pkVarNameWrapper = "new " + _getPrimitiveObj(entity.getPKClassName()) + "(" + pkVarName + ")";
+				}
+
+				String tempEntitySqlParameterType = "VARCHAR";
+
+				if (tempEntity.hasPrimitivePK()) {
+					tempEntitySqlParameterType = _getPrimitiveSqlType(tempEntity.getPKClassName()).toUpperCase();
+				}
+
+				String tempEntityPkVarNameWrapper = tempEntity.getPKVarName();
+
+				if (tempEntity.hasPrimitivePK()) {
+					tempEntityPkVarNameWrapper = "new " + _getPrimitiveObj(tempEntity.getPKClassName()) + "(" + tempEntityPkVarNameWrapper + ")";
+				}
+
 				// containsUser(String pk, String userPK)
 
 				sb.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
 				sb.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 				sb.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
-				sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
-				sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
+				sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
+				sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
 				sb.append("compile();");
 				sb.append("}");
 				sb.append("protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {");
 				sb.append("return new Integer(rs.getInt(\"COUNT_VALUE\"));");
 				sb.append("}");
 				sb.append("protected boolean contains(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-				sb.append("List results = execute(new Object[] {" + pkVarName + ", " + tempEntity.getPKVarName() + "});");
+				sb.append("List results = execute(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
 				sb.append("if (results.size() > 0) {");
 				sb.append("Integer count = (Integer)results.get(0);");
 				sb.append("if (count.intValue() > 0) {");
@@ -3342,13 +3366,13 @@ public class ServiceBuilder {
 					sb.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
 					sb.append("_persistence = persistence;");
-					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
-					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void add(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
 					sb.append("if (!_persistence.contains" + tempEntity.getName() + ".contains(" + pkVarName + ", " + tempEntity.getPKVarName() + ")) {");
-					sb.append("update(new Object[] {" + pkVarName + ", " + tempEntity.getPKVarName() + "});");
+					sb.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
 					sb.append("}");
 					sb.append("}");
 					sb.append("private " + entity.getName() + "Persistence _persistence;");
@@ -3359,11 +3383,11 @@ public class ServiceBuilder {
 					sb.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
 					sb.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void clear(" + pkClassName + " " + pkVarName + ") {");
-					sb.append("update(new Object[] {" + pkVarName + "});");
+					sb.append("update(new Object[] {" + pkVarNameWrapper + "});");
 					sb.append("}");
 					sb.append("}");
 
@@ -3372,12 +3396,12 @@ public class ServiceBuilder {
 					sb.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
 					sb.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
-					sb.append("declareParameter(new SqlParameter(Types.VARCHAR));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void remove(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
-					sb.append("update(new Object[] {" + pkVarName + ", " + tempEntity.getPKVarName() + "});");
+					sb.append("update(new Object[] {" + pkVarNameWrapper + ", " + tempEntityPkVarNameWrapper + "});");
 					sb.append("}");
 					sb.append("}");
 				}
@@ -5131,6 +5155,30 @@ public class ServiceBuilder {
 		}
 		else if (type.equals("short")) {
 			return "Short";
+		}
+		else {
+			return null;
+		}
+	}
+
+	private String _getPrimitiveSqlType(String type) {
+		if (type.equals("boolean")) {
+			return "BOOLEAN";
+		}
+		else if (type.equals("double")) {
+			return "DOUBLE";
+		}
+		else if (type.equals("float")) {
+			return "FLOAT";
+		}
+		else if (type.equals("int")) {
+			return "INTEGER";
+		}
+		else if (type.equals("long")) {
+			return "INTEGER";
+		}
+		else if (type.equals("short")) {
+			return "INTEGER";
 		}
 		else {
 			return null;
