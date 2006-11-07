@@ -64,7 +64,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 	<td style="padding-left: 30px;"></td>
 	<td>
 		<div style="font-size: xx-small; padding-bottom: 2px;">
-			<%= LanguageUtil.get(pageContext, "average") %> (<%= stats.getTotalEntries() %> <%= LanguageUtil.get(pageContext, "votes") %>)
+			<%= LanguageUtil.get(pageContext, "average") %> (<span id="<%= randomNamespace %>totalEntries"><%= stats.getTotalEntries() %></span> <%= LanguageUtil.get(pageContext, (stats.getTotalEntries() == 1) ? "vote" : "votes") %>)<br>
 		</div>
 
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">
@@ -82,7 +82,18 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 			onComplete: function(rating) {
 				var url = "<%= url %>&score=" + rating;
 
-				AjaxUtil.request(url);
+				AjaxUtil.request(url, {
+					onComplete: function(xmlHttpReq) {
+						var resp = createJSONObject(xmlHttpReq.responseText);
+						
+						$("<%= randomNamespace %>totalEntries").innerHTML = resp.totalEntries;
+						$("<%= randomNamespace %>averageRating").onmousemove = function(event) {
+							ToolTip.show(event, this, resp.averageScore + ' Stars');
+						};
+						
+						<%= randomNamespace %>averageRatingObj.display(resp.averageScore);
+					}
+				});
 			}
 		});
 
