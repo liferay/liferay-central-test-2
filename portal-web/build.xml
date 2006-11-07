@@ -182,6 +182,7 @@
 
 		<unjar src="${project.dir}/filters/compression-filter/compression-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/filters/secure-filter/secure-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/sso-filter/sso-filter.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/filters/strip-filter/strip-filter.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
