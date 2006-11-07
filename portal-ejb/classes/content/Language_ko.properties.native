@@ -2291,6 +2291,7 @@ wsrp-service-description-endpoint=서비스 묘사 종점
 wsrp-service-url=WSRP서비스URL
 wsrp-your-service-url-or-endpoints-are-unreachable=너의 서비스URL또는 종점은. 너의 조정을 확인하십시요.
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
+x-is-a-required-system-role=<b>{0}</b> is a required system role.
 x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} is not approved, does not have any content, or no longer exists.
 x-users-were-successfully-notified={0} users were successfully notified.
 xml-feeds=XML은 먹인다

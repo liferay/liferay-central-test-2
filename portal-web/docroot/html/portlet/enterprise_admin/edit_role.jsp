@@ -32,57 +32,67 @@ Role role = (Role)request.getAttribute(WebKeys.ROLE);
 String roleId = BeanParamUtil.getString(role, request, "roleId");
 %>
 
-<script type="text/javascript">
-	function <portlet:namespace />saveRole() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
-	}
-</script>
-
-<form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>">
-
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="roles" />
+	<liferay-util:param name="backURL" value="<%= redirect %>" />
 </liferay-util:include>
 
-<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
-<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
-<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
+<c:choose>
+	<c:when test="<%= (role != null) && PortalUtil.isSystemRole(role.getName()) %>">
+		<%= LanguageUtil.format(pageContext, "x-is-a-required-system-role", role.getName()) %>
+	</c:when>
+	<c:otherwise>
+		<script type="text/javascript">
+			function <portlet:namespace />saveRole() {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= role == null ? Constants.ADD : Constants.UPDATE %>";
+				submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:actionURL>");
+			}
+		</script>
 
-<table border="0" cellpadding="0" cellspacing="0">
+		<form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveRole(); return false;">
+		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+		<input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>">
 
-<c:if test="<%= role != null %>">
-	<tr>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "old-name") %></font>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<font class="portlet-font" style="font-size: x-small;"><%= role.getName() %></font>
-		</td>
-	</tr>
-</c:if>
+		<liferay-ui:error exception="<%= DuplicateRoleException.class %>" message="please-enter-a-unique-name" />
+		<liferay-ui:error exception="<%= RequiredRoleException.class %>" message="old-role-name-is-a-required-system-role" />
+		<liferay-ui:error exception="<%= RoleNameException.class %>" message="please-enter-a-valid-name" />
 
-<tr>
-	<td>
-		<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></font>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
-	</td>
-</tr>
-</table>
+		<table border="0" cellpadding="0" cellspacing="0">
 
-<br>
+		<c:if test="<%= role != null %>">
+			<tr>
+				<td>
+					<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "old-name") %></font>
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<font class="portlet-font" style="font-size: x-small;"><%= role.getName() %></font>
+				</td>
+			</tr>
+		</c:if>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+		<tr>
+			<td>
+				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, ((role != null) ? "new-name" : "name")) %></font>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
+			</td>
+		</tr>
+		</table>
 
-</form>
+		<br>
 
-<script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
-</script>
+		<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+
+		</form>
+
+		<script type="text/javascript">
+			document.<portlet:namespace />fm.<portlet:namespace />name.focus();
+		</script>
+	</c:otherwise>
+</c:choose>

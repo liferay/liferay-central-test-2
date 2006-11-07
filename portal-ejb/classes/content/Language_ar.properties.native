@@ -2268,6 +2268,7 @@ wsrp-service-description-endpoint=Service Description Endpoint
 wsrp-service-url=WSRP Service URL
 wsrp-your-service-url-or-endpoints-are-unreachable=Your service URL or endpoints are unreachable. Please verify your settings.
 x-disables-the-minimum-order-requirement={0} يعطل الحد الأدنى للطلبية.
+x-is-a-required-system-role=<b>{0}</b> is a required system role.
 x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} غير موافق عليه، لا يحتوي على شيء أو غير موجود.
 x-users-were-successfully-notified={0} من المستخدمين تم إعلامهم بنجاح
 xml-feeds=تغذية XML

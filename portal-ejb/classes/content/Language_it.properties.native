@@ -2293,6 +2293,7 @@ wsrp-service-description-endpoint=Punto finale della descrizione del servizio
 wsrp-service-url=URL del Servizio WSRP
 wsrp-your-service-url-or-endpoints-are-unreachable=I vostri URL di servizio o punti finali non sono raggiungibili. Verificare le vostre impostazioni.
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
+x-is-a-required-system-role=<b>{0}</b> is a required system role.
 x-is-not-approved,-does-not-have-any-content,-or-no-longer-exists={0} non � approvato, non hai nessun contenuto, o il contentuo � troppo lungo.
 x-users-were-successfully-notified={0} utenti sono stati avvertiti con successo.
 xml-feeds=Sorgenti XML

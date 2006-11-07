@@ -48,11 +48,14 @@
 	if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 		tabs1Names = StringUtil.replace(tabs1Names, "organizations", "organization");
 	}
+
+	String backURL = ParamUtil.getString(request, "backURL");
 	%>
 
 	<liferay-ui:tabs
 		names="<%= tabs1Names %>"
 		tabsValues="<%= tabs1Values %>"
 		url="<%= tabs1URL.toString() %>"
+		backURL="<%= backURL %>"
 	/>
 </c:if>
