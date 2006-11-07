@@ -22,13 +22,18 @@
 
 package com.liferay.portlet.webproxy;
 
+import com.liferay.portal.util.Constants;
 import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;
 
 import javax.portlet.PortletException;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -45,18 +50,31 @@ public class WebProxyPortlet extends PortletBridgePortlet {
 	public void doView(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
-		super.doView(req, res);
+		PortletPreferences prefs = req.getPreferences();
 
-		RenderResponseImpl resImpl = (RenderResponseImpl)res;
+		String initUrl = prefs.getValue("initUrl", StringPool.BLANK);
 
-		StringServletResponse stringServletRes =
-			(StringServletResponse)resImpl.getHttpServletResponse();
+		if (Validator.isNull(initUrl)) {
+			PortletRequestDispatcher prd =
+				getPortletContext().getRequestDispatcher(
+					Constants.TEXT_HTML_DIR + "/portal/portlet_not_setup.jsp");
 
-		String output = stringServletRes.getString();
+			prd.include(req, res);
+		}
+		else {
+			super.doView(req, res);
 
-		output = StringUtil.replace(output, "//pbhs/", "/pbhs/");
+			RenderResponseImpl resImpl = (RenderResponseImpl)res;
 
-		stringServletRes.setString(output);
+			StringServletResponse stringServletRes =
+				(StringServletResponse)resImpl.getHttpServletResponse();
+
+			String output = stringServletRes.getString();
+
+			output = StringUtil.replace(output, "//pbhs/", "/pbhs/");
+
+			stringServletRes.setString(output);
+		}
 	}
 
 }

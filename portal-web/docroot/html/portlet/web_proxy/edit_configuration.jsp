@@ -137,6 +137,6 @@
 
 <c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />url.focus();
+		document.<portlet:namespace />fm.<portlet:namespace />initUrl.focus();
 	</script>
 </c:if>
