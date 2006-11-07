@@ -37,15 +37,19 @@ function AjaxRequest(url, options) {
 	var onComplete = opts.onComplete;
 	var returnFunction = function() {
 			if (xmlHttpReq.readyState == 4) {
-				if (xmlHttpReq.status == 200) {
-					var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
-					if (onComplete) {
-						onComplete(xmlHttpReq, opts);
+				try {
+					if (xmlHttpReq.status == 200) {
+						var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
+						if (onComplete) {
+							onComplete(xmlHttpReq, opts);
+						}
+		
+						if (ajaxId && ajaxId != "") {
+							AjaxUtil.remove(parseInt(ajaxId));
+						}
 					}
-	
-					if (ajaxId && ajaxId != "") {
-						AjaxUtil.remove(parseInt(ajaxId));
-					}
+				}
+				catch(e) {
 				}
 			}
 		}
