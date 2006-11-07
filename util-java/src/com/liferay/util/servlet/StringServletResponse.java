@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.util.StringPool;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -90,15 +92,22 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	}
 
 	public String getString() throws UnsupportedEncodingException {
-		if (_callGetOutputStream) {
+		if (_string != null) {
+			return _string;
+		}
+		else if (_callGetOutputStream) {
 			return _baos.toString();
 		}
 		else if (_callGetWriter) {
 			return _sw.toString();
 		}
 		else {
-			return "";
+			return StringPool.BLANK;
 		}
+	}
+
+	public void setString(String string) {
+		_string = string;
 	}
 
 	public PrintWriter getWriter() {
@@ -139,6 +148,7 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_pw = new PrintWriter(_sw);
 		_callGetOutputStream = false;
 		_callGetWriter = false;
+		_string = null;
 	}
 
 	private URLEncoder _urlEncoder;
@@ -151,5 +161,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 	private int _bufferSize;
 	private boolean _callGetOutputStream;
 	private boolean _callGetWriter;
+	private String _string = null;
 
 }
