@@ -103,7 +103,6 @@
 		<!-- Order -->
 
 		<order by="desc">
-			<order-column name="name" />
 			<order-column name="version" />
 		</order>
 
