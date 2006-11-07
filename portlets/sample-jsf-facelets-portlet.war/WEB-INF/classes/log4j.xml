@@ -96,11 +96,19 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.model.Image">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.model.ModelHintsUtil">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.security.auth.LDAPAuth">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.security.ldap">
 		<priority value="ERROR" />
 	</category>
 
@@ -356,12 +364,16 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="org.quartz">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="org.pdfbox">
 		<priority value="INFO" />
+	</category>
+
+	<category name="org.portletbridge">
+		<priority value="INFO" />
+	</category>
+
+	<category name="org.quartz">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.springframework">

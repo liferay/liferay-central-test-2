@@ -1041,8 +1041,8 @@
 
 	<!-- Web Proxy -->
 
-	<definition name="portlet.httpbridge.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
-		<put name="portlet_configuration_content" value="/portlet/httpbridge/edit_configuration.jsp" />
+	<definition name="portlet.web_proxy.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/web_proxy/edit_configuration.jsp" />
 	</definition>
 
 	<!-- Westminster Catechism -->

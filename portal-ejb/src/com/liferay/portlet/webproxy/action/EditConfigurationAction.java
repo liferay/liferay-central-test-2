@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.httpbridge.action;
+package com.liferay.portlet.webproxy.action;
 
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -58,7 +58,21 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String src = ParamUtil.getString(req, "src");
+		String initUrl = ParamUtil.getString(req, "initUrl");
+		String scope = ParamUtil.getString(req, "scope");
+		String proxyHost = ParamUtil.getString(req, "proxyHost");
+		String proxyPort = ParamUtil.getString(req, "proxyPort");
+		String proxyAuthentication = ParamUtil.getString(
+			req, "proxyAuthentication");
+		String proxyAuthenticationUsername = ParamUtil.getString(
+			req, "proxyAuthenticationUsername");
+		String proxyAuthenticationPassword = ParamUtil.getString(
+			req, "proxyAuthenticationPassword");
+		String proxyAuthenticationHost = ParamUtil.getString(
+			req, "proxyAuthenticationHost");
+		String proxyAuthenticationDomain = ParamUtil.getString(
+			req, "proxyAuthenticationDomain");
+		String stylesheet = ParamUtil.getString(req, "stylesheet");
 
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
@@ -66,7 +80,18 @@ public class EditConfigurationAction extends PortletAction {
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("src", src);
+		prefs.setValue("initUrl", initUrl);
+		prefs.setValue("scope", scope);
+		prefs.setValue("proxyHost", proxyHost);
+		prefs.setValue("proxyPort", proxyPort);
+		prefs.setValue("proxyAuthentication", proxyAuthentication);
+		prefs.setValue(
+			"proxyAuthenticationUsername", proxyAuthenticationUsername);
+		prefs.setValue(
+			"proxyAuthenticationPassword", proxyAuthenticationPassword);
+		prefs.setValue("proxyAuthenticationHost", proxyAuthenticationHost);
+		prefs.setValue("proxyAuthenticationDomain", proxyAuthenticationDomain);
+		prefs.setValue("stylesheet", stylesheet);
 
 		prefs.store();
 
@@ -78,7 +103,7 @@ public class EditConfigurationAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward("portlet.httpbridge.edit_configuration");
+		return mapping.findForward("portlet.web_proxy.edit_configuration");
 	}
 
 }

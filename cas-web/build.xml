@@ -4,8 +4,4 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
-	
-	<target name="deploy">
-		<antcall target="copy-war" />
-	</target>
 </project>

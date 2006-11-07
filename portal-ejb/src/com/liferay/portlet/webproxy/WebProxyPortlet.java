@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,33 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/httpbridge/init.jsp" %>
+package com.liferay.portlet.webproxy;
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.util.StringUtil;
+import com.liferay.util.servlet.StringServletResponse;
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "url") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="<portlet:namespace />src" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= src %>">
-	</td>
-</tr>
-</table>
+import java.io.IOException;
 
-<br>
+import javax.portlet.PortletException;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+import org.portletbridge.portlet.PortletBridgePortlet;
 
-</form>
+/**
+ * <a href="WebProxyPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class WebProxyPortlet extends PortletBridgePortlet {
 
-<c:if test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		document.<portlet:namespace />fm.<portlet:namespace />src.focus();
-	</script>
-</c:if>
+	public void doView(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		super.doView(req, res);
+
+		RenderResponseImpl resImpl = (RenderResponseImpl)res;
+
+		StringServletResponse stringServletRes =
+			(StringServletResponse)resImpl.getHttpServletResponse();
+
+		String output = stringServletRes.getString();
+
+		output = StringUtil.replace(output, "//pbhs/", "/pbhs/");
+
+		stringServletRes.setString(output);
+	}
+
+}

@@ -530,8 +530,8 @@
 	</portlet>
 	<portlet>
 		<portlet-name>66</portlet-name>
-		<struts-path>httpbridge</struts-path>
-		<configuration-path>/httpbridge/edit_configuration</configuration-path>
+		<struts-path>web_proxy</struts-path>
+		<configuration-path>/web_proxy/edit_configuration</configuration-path>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<render-weight>1</render-weight>

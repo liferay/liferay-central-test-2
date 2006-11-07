@@ -1449,10 +1449,50 @@
 	<portlet>
 		<portlet-name>66</portlet-name>
 		<display-name>Web Proxy</display-name>
-		<portlet-class>com.liferay.portlet.JSPPortlet</portlet-class>
+		<portlet-class>com.liferay.portlet.webproxy.WebProxyPortlet</portlet-class>
 		<init-param>
-			<name>view-jsp</name>
-			<value>/portlet/httpbridge/view.jsp</value>
+			<name>mementoSessionKey</name>
+			<value>mementoSessionKey</value>
+		</init-param>
+		<init-param>
+			<name>parserClassName</name>
+			<value>org.cyberneko.html.parsers.SAXParser</value>
+		</init-param>
+		<init-param>
+			<name>editStylesheet</name>
+			<value>classpath:/org/portletbridge/xsl/pages/edit.xsl</value>
+		</init-param>				
+		<init-param>
+			<name>helpStylesheet</name>
+			<value>classpath:/org/portletbridge/xsl/pages/help.xsl</value>
+		</init-param>
+		<init-param>
+			<name>errorStylesheet</name>
+			<value>classpath:/org/portletbridge/xsl/pages/error.xsl</value>
+		</init-param>
+		<init-param>
+			<name>stylesheetUrl</name>
+			<value>classpath:/org/portletbridge/xsl/default.xsl</value>
+		</init-param>
+		<init-param>
+			<name>cssRegex</name>
+			<value>(?:url\((?:'|")?(.*?)(?:'|")?\))|(?:@import\s+[^url](?:'|")?(.*?)(?:'|")|;|\s+|$)</value>
+		</init-param>
+		<init-param>
+			<name>jsRegex</name>
+			<value>open\('([^']*)'|open\("([^\"]*)"</value>
+		</init-param>
+		<init-param>
+			<name>servletName</name>
+			<value>pbhs</value>
+		</init-param>
+		<init-param>
+			<name>idParamKey</name>
+			<value>id</value>
+		</init-param>
+		<init-param>
+			<name>authenticatorClassName</name>
+			<value>org.portletbridge.portlet.DefaultBridgeAuthenticator</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
@@ -1461,9 +1501,51 @@
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
 		<portlet-preferences>
 			<preference>
-				<name>src</name>
-				<value>http://www.google.com</value>
+				<name>secureEdit</name>
+				<value>false</value>
+				<read-only>true</read-only>
 			</preference>
+			<preference>
+				<name>initUrl</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>scope</name>
+				<value>.*</value>
+			</preference>
+			<preference>
+				<name>proxyHost</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>proxyPort</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>proxyAuthentication</name>
+				<value>none</value>
+			</preference>
+			<preference>
+				<name>proxyAuthenticationUsername</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>proxyAuthenticationPassword</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>proxyAuthenticationHost</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>proxyAuthenticationDomain</name>
+				<value></value>
+			</preference>
+			<preference>
+				<name>stylesheet</name>
+				<value></value>
+			</preference>
+			<preferences-validator>org.portletbridge.portlet.PortletBridgePortletValidator</preferences-validator>
 		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>

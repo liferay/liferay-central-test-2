@@ -364,12 +364,16 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="org.quartz">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="org.pdfbox">
 		<priority value="INFO" />
+	</category>
+
+	<category name="org.portletbridge">
+		<priority value="INFO" />
+	</category>
+
+	<category name="org.quartz">
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.springframework">

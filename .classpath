@@ -88,7 +88,6 @@
 	<classpathentry kind="lib" path="lib/portal/google.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hessian.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hibernate3.jar"/>
-	<classpathentry kind="lib" path="lib/portal/httpbridge.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
 	<classpathentry kind="lib" path="lib/portal/informa.jar"/>
 	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
@@ -122,6 +121,8 @@
 	<classpathentry kind="lib" path="lib/portal/poi-contrib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/poi-scratchpad.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portals-bridges.jar"/>
+	<classpathentry kind="lib" path="lib/portal/portletbridge-core.jar"/>
+	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>

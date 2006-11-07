@@ -22,8 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.httpbridge.webproxy.http.TaskController;
-
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
@@ -421,18 +419,6 @@ public class MainServlet extends ActionServlet {
 			}
 
 			WebAppPool.put(_companyId, WebKeys.CURRENT_USERS, new TreeMap());
-
-			// HttpBridge
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("HttpBridge");
-			}
-
-			TaskController.bridgeUserServicePath = "/httpbridge/home";
-			TaskController.bridgeHttpServicePath = "/httpbridge/http";
-			TaskController.bridgeGotoTag = "(goto)";
-			TaskController.bridgeThenTag = "(then)";
-			TaskController.bridgePostTag = "(post)";
 
 			// Last modified paths
 

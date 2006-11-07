@@ -1258,8 +1258,8 @@
 
 		<!-- Web Proxy -->
 
-		<action path="/httpbridge/edit_configuration" type="com.liferay.portlet.httpbridge.action.EditConfigurationAction">
-			<forward name="portlet.httpbridge.edit_configuration" path="portlet.httpbridge.edit_configuration" />
+		<action path="/web_proxy/edit_configuration" type="com.liferay.portlet.webproxy.action.EditConfigurationAction">
+			<forward name="portlet.web_proxy.edit_configuration" path="portlet.web_proxy.edit_configuration" />
 		</action>
 
 		<!-- Westminster Catechism -->

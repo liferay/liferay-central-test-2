@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -19,14 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%><%--
 
-package com.liferay.portlet.httpbridge.servlet;
+--%><%@ include file="/html/portlet/init.jsp" %><%--
 
-/**
- * <a href="UserService.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- *
- */
-public class UserService extends com.httpbridge.webproxy.ui.UserService {
+--%><%
+PortletPreferences prefs = renderRequest.getPreferences();
+
+String portletResource = ParamUtil.getString(request, "portletResource");
+
+if (Validator.isNotNull(portletResource)) {
+	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
+
+String initUrl = prefs.getValue("initUrl", StringPool.BLANK);
+String scope = prefs.getValue("scope", StringPool.BLANK);
+String proxyHost = prefs.getValue("proxyHost", StringPool.BLANK);
+String proxyPort = prefs.getValue("proxyPort", StringPool.BLANK);
+String proxyAuthentication = prefs.getValue("proxyAuthentication", StringPool.BLANK);
+String proxyAuthenticationUsername = prefs.getValue("proxyAuthenticationUsername", StringPool.BLANK);
+String proxyAuthenticationPassword = prefs.getValue("proxyAuthenticationPassword", StringPool.BLANK);
+String proxyAuthenticationHost = prefs.getValue("proxyAuthenticationHost", StringPool.BLANK);
+String proxyAuthenticationDomain = prefs.getValue("proxyAuthenticationDomain", StringPool.BLANK);
+String stylesheet = prefs.getValue("stylesheet", StringPool.BLANK);
+%>
