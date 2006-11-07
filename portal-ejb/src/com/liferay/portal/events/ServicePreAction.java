@@ -478,6 +478,12 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLSignIn(mainPath + "/portal/login");
 			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
+			if (!user.isActive()) {
+				themeDisplay.setShowAddContentIcon(false);
+				themeDisplay.setShowMyAccountIcon(false);
+				themeDisplay.setShowPageSettingsIcon(false);
+			}
+
 			req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
 			// Parallel render
