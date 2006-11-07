@@ -65,7 +65,7 @@ String emailAddress = BeanParamUtil.getString(user2, request, "emailAddress");
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /><portlet:param name="tabs4" value="<%= tabs4 %>" /></portlet:renderURL>&<portlet:namespace />p_u_e_a=">
-<input name="<portlet:namespace />p_u_e_a" type="hidden" value="<%= emailAddress %>">
+<input name="<portlet:namespace />p_u_e_a" type="hidden" value="<%= (user2 != null) ? user2.getEmailAddress() : emailAddress %>">
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="users" />
