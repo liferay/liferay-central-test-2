@@ -59,13 +59,27 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 
 				<%
 				String emailAddress = (String)SessionMessages.get(request, "user_added");
+				String password = (String)SessionMessages.get(request, "user_added_password");
 				%>
 
 				<span class="portlet-msg-success" style="font-size: xx-small;">
-				<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account", emailAddress) %>
+
+				<c:choose>
+					<c:when test="<%= Validator.isNull(password) %>">
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-has-been-sent-to-x", emailAddress) %>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.format(pageContext, "thank-you-for-creating-an-account-your-password-is-x", new Object[] {password, emailAddress}) %>
+					</c:otherwise>
+				</c:choose>
+
 				</span>
 
 				<br><br>
+
+				<%
+				%>
+
 			</c:if>
 
 			<c:if test="<%= SessionErrors.contains(request, AuthException.class.getName()) %>">
