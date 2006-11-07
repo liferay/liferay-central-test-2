@@ -177,6 +177,8 @@ public class AddUserAction extends PortletAction {
 		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
 
 		SessionMessages.add(httpReq, "user_added", user.getEmailAddress());
+		SessionMessages.add(
+			httpReq, "user_added_password", user.getPasswordUnencrypted());
 
 		// Send redirect
 
