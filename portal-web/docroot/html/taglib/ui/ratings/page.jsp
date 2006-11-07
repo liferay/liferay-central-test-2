@@ -58,7 +58,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</div>
 
 		<div id="<%= randomNamespace %>yourRating">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" />
+			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" />
 		</div>
 	</td>
 	<td style="padding-left: 30px;"></td>
@@ -68,7 +68,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 		</div>
 
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= stats.getAverageScore() %> Stars')">
-			<img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/common/star_off.gif" />
+			<img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" /><img src="<%= themeDisplay.getPathThemeImage() %>/ratings/star_off.gif" />
 		</div>
 	</td>
 </tr>
@@ -84,14 +84,14 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				AjaxUtil.request(url, {
 					onComplete: function(xmlHttpReq) {
-						var resp = createJSONObject(xmlHttpReq.responseText);
+						var res = createJSONObject(xmlHttpReq.responseText);
 
-						$("<%= randomNamespace %>totalEntries").innerHTML = resp.totalEntries;
+						$("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
 						$("<%= randomNamespace %>averageRating").onmousemove = function(event) {
-							ToolTip.show(event, this, resp.averageScore + ' Stars');
+							ToolTip.show(event, this, res.averageScore.toFixed(1) + ' Stars');
 						};
 
-						<%= randomNamespace %>averageRatingObj.display(resp.averageScore);
+						<%= randomNamespace %>averageRatingObj.display(res.averageScore);
 					}
 				});
 			}

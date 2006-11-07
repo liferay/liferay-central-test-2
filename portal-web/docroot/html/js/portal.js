@@ -95,7 +95,7 @@ var Bubble = {
 		Bubble.direction = mode;
 
 		if (!Bubble.timer) {
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'))", 1);
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'))", 1);
 		}
 	},
 
@@ -157,7 +157,7 @@ var Bubble = {
 				maxRad = Math.PI/2 - Math.PI/8;
 
 				if (!item.className.match("selected")) {
-					changeOpacity(item, ratio * 200);
+					Element.changeOpacity(item, ratio * 200);
 				}
 			}
 			else {
@@ -165,7 +165,7 @@ var Bubble = {
 
 				if (count != 0) {
 					item.style.display = "block";
-					changeOpacity(item, ratio * 200);
+					Element.changeOpacity(item, ratio * 200);
 				}
 			}
 
@@ -187,11 +187,11 @@ var Bubble = {
 
 		if (collapse && count > 0) {
 			Bubble.count--;
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'),true)", 30);
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'),true)", 30);
 		}
 		else if (!collapse && count < Bubble.FRAMES) {
 			Bubble.count++;
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('nav'))", 30);
+			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'))", 30);
 		}
 		else {
 			Bubble.timer = 0;
@@ -929,8 +929,12 @@ StarRating.prototype = {
 	display: function(rating, mode) {
 		var self = this;
 		rating = rating == null ? this.rating : rating;
+		
+		var whole = Math.floor(rating);
+		var fraction = rating - whole;
+		
 		this.stars.each(function(image, index) {
-			if (index < rating) {
+			if (index < whole) {
 				if (mode == "hover") {
 					image.src = image.src.replace(/\bstar_.*\./, "star_hover.");
 				}
@@ -939,7 +943,19 @@ StarRating.prototype = {
 				}
 			}
 			else {
-				image.src = image.src.replace(/\bstar_.*\./, "star_off.");
+				if (fraction < 0.25) {
+					image.src = image.src.replace(/\bstar_.*\./, "star_off.");
+				}
+				else if (fraction < 0.50) {
+					image.src = image.src.replace(/\bstar_.*\./, "star_on_quarter.");
+				}
+				else if (fraction < 0.75) {
+					image.src = image.src.replace(/\bstar_.*\./, "star_on_half.");
+				}
+				else if (fraction < 1.00) {
+					image.src = image.src.replace(/\bstar_.*\./, "star_on_threequarters.");
+				}
+				fraction = 0;
 			}
 		});
 	},
@@ -969,6 +985,7 @@ var ToolTip = {
 	opacity: 100,
 	
 	show: function(event, obj, text) {
+		event = event || window.event;
 		var target = obj;
 		var tip = ToolTip.current;
 		

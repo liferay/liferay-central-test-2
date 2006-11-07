@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowConfigurationIcon() %>">
-	<liferay-ui:icon image="../portlet/configuration" message="configuration" url="<%= portletDisplay.getURLConfiguration() %>" />
+	<liferay-ui:icon image="../portlet/configuration" message="configuration" url="<%= portletDisplay.getURLConfiguration() %>" toolTip="false" />
 </c:if>
