@@ -85,12 +85,12 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 				AjaxUtil.request(url, {
 					onComplete: function(xmlHttpReq) {
 						var resp = createJSONObject(xmlHttpReq.responseText);
-						
+
 						$("<%= randomNamespace %>totalEntries").innerHTML = resp.totalEntries;
 						$("<%= randomNamespace %>averageRating").onmousemove = function(event) {
 							ToolTip.show(event, this, resp.averageScore + ' Stars');
 						};
-						
+
 						<%= randomNamespace %>averageRatingObj.display(resp.averageScore);
 					}
 				});

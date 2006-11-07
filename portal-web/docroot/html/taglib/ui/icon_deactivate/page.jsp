@@ -25,9 +25,7 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
-
 String jsUrl = "javascript: if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this") + "')) { self.location= '" + Http.encodeURL(url) + "'; } else { self.focus(); }";
-
 %>
 
 <liferay-ui:icon image="deactivate" url="<%= jsUrl %>" />
