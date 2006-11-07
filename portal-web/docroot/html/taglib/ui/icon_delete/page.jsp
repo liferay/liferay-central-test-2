@@ -24,4 +24,10 @@
 
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
-<a href="javascript: if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) { self.location= '<%= Http.encodeURL(url) %>'; } else { self.focus(); }"><img align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/delete.gif" title="<%= LanguageUtil.get(pageContext, "delete") %>"></a>
+<%
+
+String jsUrl = "javascript: if (confirm('" + UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") + "')) { self.location= '" + Http.encodeURL(url) + "'; } else { self.focus(); }";
+
+%>
+
+<liferay-ui:icon image="delete" url="<%= jsUrl %>" />
