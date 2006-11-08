@@ -56,6 +56,10 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 			super.init(config);
 			
 			_logoutUrl = config.getInitParameter("logout_url");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Logout URL: " + _logoutUrl);
+			}
 		}
 	}
 
