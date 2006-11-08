@@ -474,7 +474,7 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLMyAccount(myAccountURL);
 			}
 
-			if (!user.isActive() && !user.isAgreedToTermsOfUse()) {
+			if (!user.isActive() || !user.isAgreedToTermsOfUse()) {
 				themeDisplay.setShowAddContentIcon(false);
 				themeDisplay.setShowMyAccountIcon(false);
 				themeDisplay.setShowPageSettingsIcon(false);
