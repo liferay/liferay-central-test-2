@@ -2201,6 +2201,7 @@ uptime=稼働時間
 url-information=Url 情報
 url-tracker=Url 追跡者
 url=Url
+use-custom-title=使用習慣のタイトル
 use-default-values=使用省略時の値
 use-large-image=使用大きい像
 use-medium-image=使用媒体の像

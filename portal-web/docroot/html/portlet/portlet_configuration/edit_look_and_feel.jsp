@@ -34,7 +34,9 @@ String previewWidth = ParamUtil.getString(request, "previewWidth");
 
 PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 
-String title = portletSetup.getValue("portlet-setup-title", StringPool.BLANK);
+String languageId = ParamUtil.getString(request, "languageId", LocaleUtil.toLanguageId(locale));
+String title = portletSetup.getValue("portlet-setup-title-" + languageId, StringPool.BLANK);
+boolean useCustomTitle = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-use-custom-title", "false"));
 boolean showBorders = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", "true"));
 
 PortletURL lookAndFeelRedirect = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid, false);
@@ -60,6 +62,17 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br><div class="beta-separator"></div><br>
 
+<script type="text/javascript">
+	function <portlet:namespace />updateLookAndFeel(cmd) {
+		if (cmd != null) {
+			document.<%= formName %>.<portlet:namespace /><%= Constants.CMD %>.value = cmd;
+		}
+
+		document.<%= formName %>.<portlet:namespace />lookAndFeelRedirect.value = document.<%= formName %>.<portlet:namespace />lookAndFeelRedirect.value + '&<portlet:namespace />languageId=' + document.<%= formName %>.<portlet:namespace />languageId.value;
+		submitForm(document.<%= formName %>);
+	}
+</script>
+
 <html:form action="/portlet_configuration/edit_look_and_feel?actionURL=true">
 
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
@@ -77,7 +90,38 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 		<td>
 			<input class="form-text" name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
 		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<input name="<portlet:namespace />curLanguageId" type="hidden" value="<%= languageId %>">
+
+			<select name="<portlet:namespace />languageId" onChange="<portlet:namespace />updateLookAndFeel();">
+
+				<%
+				Locale[] locales = LanguageUtil.getAvailableLocales();
+
+				for (int i = 0; i < locales.length; i++) {
+				%>
+
+					<option <%= (languageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+		<td style="padding-left: 30px;"></td>
+		<td>
+			<%= LanguageUtil.get(pageContext, "use-custom-title") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td colspan="3">
+			<liferay-ui:input-checkbox param="useCustomTitle" defaultValue="<%= useCustomTitle %>" />
+		</td>
 	</tr>
+	</table>
+
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "show-borders") %>
@@ -92,9 +136,9 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 <br>
 
-<input type="button" class="portlet-form-button" value="<%= LanguageUtil.get(pageContext, "save") %>" onclick="submitForm(document.<%= formName %>);">
+<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLookAndFeel();">
 
-<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "reset") %>' onclick="document.<%= formName %>.<portlet:namespace /><%= Constants.CMD %>.value = '<%= Constants.RESET %>'; submitForm(document.<%= formName %>);">
+<input type="button" class="portlet-form-button" value='<%= LanguageUtil.get(pageContext, "reset") %>' onClick="<portlet:namespace />updateLookAndFeel('<%= Constants.RESET %>');">
 
 <br><br>
 
@@ -321,4 +365,19 @@ lookAndFeelRedirect.setParameter("previewWidth", previewWidth);
 
 	var colorPicker = new ColorPicker("<%= themeDisplay.getPathJavaScript() %>/colorpicker/colorscale.png");
 	var preview = new Preview("<%= portletResource %>");
+
+	<%
+	Locale[] locales = LanguageUtil.getAvailableLocales();
+
+	for (int i = 0; i < locales.length; i++) {
+		if (Validator.isNotNull(portletSetup.getValue("portlet-setup-title-" + LocaleUtil.toLanguageId(locales[i]), StringPool.BLANK))) {
+	%>
+
+			document.<%= formName %>.<portlet:namespace />languageId.options[<%= i %>].style.color = "<%= colorScheme.getPortletMsgError() %>";
+
+	<%
+		}
+	}
+	%>
+
 </script>

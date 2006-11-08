@@ -68,7 +68,7 @@ Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-c
 
 // Portlet title
 
-String portletTitle = portletSetup.getValue("portlet-setup-title", StringPool.BLANK);
+String portletTitle = PortletConfigurationUtil.getPortletTitle(portletSetup, LocaleUtil.toLanguageId(locale));
 
 if (portletDisplay.isAccess() && portletDisplay.isActive()) {
 	if (Validator.isNull(portletTitle)) {

@@ -112,6 +112,7 @@
 --%><%@ page import="com.liferay.portlet.RenderResponseFactory" %><%--
 --%><%@ page import="com.liferay.portlet.RenderResponseImpl" %><%--
 --%><%@ page import="com.liferay.portlet.messaging.util.MessagingUtil" %><%--
+--%><%@ page import="com.liferay.portlet.portletconfiguration.util.PortletConfigurationUtil" %><%--
 --%><%@ page import="com.liferay.util.ArrayUtil" %><%--
 --%><%@ page import="com.liferay.util.BeanParamUtil" %><%--
 --%><%@ page import="com.liferay.util.BeanUtil" %><%--

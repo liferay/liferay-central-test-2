@@ -268,13 +268,26 @@ public class EditLookAndFeelAction extends PortletAction {
 			PortletPreferencesFactory.getPortletSetup(
 				req, portletResource, true, true);
 
+		String languageId = ParamUtil.getString(req, "curLanguageId");
 		String title = ParamUtil.getString(req, "title");
+		boolean useCustomTitle = ParamUtil.getBoolean(req, "useCustomTitle");
 		boolean showBorders = ParamUtil.getBoolean(req, "showBorders");
 
 		if (cmd.equals(Constants.RESET)) {
 			form.initialize(mapping);
 
+			Enumeration enu = portletSetup.getNames();
+
+			while (enu.hasMoreElements()) {
+				String name = (String)enu.nextElement();
+
+				if (name.startsWith("portlet-setup-title-")) {
+					portletSetup.setValue(name, StringPool.BLANK);
+				}
+			}
+
 			title = StringPool.BLANK;
+			useCustomTitle = false;
 			showBorders = true;
 		}
 
@@ -296,7 +309,9 @@ public class EditLookAndFeelAction extends PortletAction {
 			}
 		}
 
-		portletSetup.setValue("portlet-setup-title", title);
+		portletSetup.setValue("portlet-setup-title-" + languageId, title);
+		portletSetup.setValue(
+			"portlet-setup-use-custom-title", String.valueOf(useCustomTitle));
 		portletSetup.setValue(
 			"portlet-setup-show-borders", String.valueOf(showBorders));
 		portletSetup.setValue("portlet-setup-css", sb.toString());
