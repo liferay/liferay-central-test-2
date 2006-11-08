@@ -88,8 +88,6 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 				httpSes.invalidate();
 
 				httpRes.sendRedirect(_logoutUrl);
-
-				//chain.doFilter(req, res);
 			}
 			else {
 				super.doFilter(req, res, chain);				
