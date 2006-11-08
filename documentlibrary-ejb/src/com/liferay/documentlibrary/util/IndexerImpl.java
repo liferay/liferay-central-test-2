@@ -33,11 +33,16 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 import java.io.InputStream;
+
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Properties;
 
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
@@ -143,6 +148,22 @@ public class IndexerImpl {
 					sb.append(fileEntry.getTitle());
 					sb.append(StringPool.SPACE);
 					sb.append(fileEntry.getDescription());
+					sb.append(StringPool.SPACE);
+
+					Properties extraSettingsProps =
+						fileEntry.getExtraSettingsProperties();
+
+					Iterator itr =
+						(Iterator)extraSettingsProps.entrySet().iterator();
+
+					while (itr.hasNext()) {
+						Map.Entry entry = (Map.Entry)itr.next();
+
+						String value = GetterUtil.getString(
+							(String)entry.getValue());
+
+						sb.append(value);
+					}
 
 					doc.add(LuceneFields.getText(LuceneFields.PROPERTIES, sb));
 				}
