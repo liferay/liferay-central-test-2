@@ -32,7 +32,7 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 String orderId = BeanParamUtil.getString(order, request, "orderId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrder(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveOrder(); return false;">
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="orders" />
@@ -589,9 +589,7 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
-
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "invoice") %>'>
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invoice") %>'>
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendConfirmationEmail();">
 
@@ -602,3 +600,21 @@ for (int i = 0; itr.hasNext(); i++) {
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
+
+<br>
+
+<liferay-ui:tabs names="comments" />
+
+<portlet:actionURL var="discussionURL">
+	<portlet:param name="struts_action" value="/shopping/edit_order_discussion" />
+</portlet:actionURL>
+
+<liferay-ui:discussion
+	formName="fm2"
+	formAction="<%= discussionURL %>"
+	className="<%= ShoppingOrder.class.getName() %>"
+	classPK="<%= order.getPrimaryKey().toString() %>"
+	userId="<%= order.getUserId() %>"
+	subject="<%= order.getOrderId() %>"
+	redirect="<%= currentURL %>"
+/>

@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
+
 String redirect = ParamUtil.getString(request, "redirect");
 
 DLFileShortcut fileShortcut = (DLFileShortcut)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FILE_SHORTCUT);
@@ -77,6 +79,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/edit_file_shortcut");
+portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 %>
@@ -119,6 +122,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileShortcut(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />fileShortcutId" type="hidden" value="<%= fileShortcutId %>">
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>">
@@ -285,55 +289,88 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 	<br>
 
-	<liferay-ui:tabs names="version-history" />
-
 	<%
-	SearchContainer searchContainer = new SearchContainer();
+	String tabs2Names = "version-history,comments";
 
-	List headerNames = new ArrayList();
-
-	headerNames.add("version");
-	headerNames.add("date");
-	headerNames.add("size");
-	headerNames.add(StringPool.BLANK);
-
-	searchContainer.setHeaderNames(headerNames);
-
-	List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
-	List resultRows = searchContainer.getResultRows();
-
-	for (int i = 0; i < results.size(); i++) {
-		DLFileVersion fileVersion = (DLFileVersion)results.get(i);
-
-		ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
-
-		StringBuffer sb = new StringBuffer();
-
-		sb.append(themeDisplay.getPathMain());
-		sb.append("/document_library/get_file?fileShortcutId=");
-		sb.append(fileShortcutId);
-		sb.append("&version=");
-		sb.append(String.valueOf(fileVersion.getVersion()));
-
-		String rowHREF = sb.toString();
-
-		// Statistics
-
-		row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
-		row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
-		row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
+	if (!DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION)) {
+		tabs2Names = "version-history";
 	}
 	%>
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:tabs
+		names="<%= tabs2Names %>"
+		param="tabs2"
+		url="<%= portletURL.toString() %>"
+	/>
+
+	<c:choose>
+		<c:when test='<%= tabs2.equals("version-history") %>'>
+
+			<%
+			SearchContainer searchContainer = new SearchContainer();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("version");
+			headerNames.add("date");
+			headerNames.add("size");
+			headerNames.add(StringPool.BLANK);
+
+			searchContainer.setHeaderNames(headerNames);
+
+			List results = DLFileVersionLocalServiceUtil.getFileVersions(toFileEntry.getFolderId(), toFileEntry.getName());
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				DLFileVersion fileVersion = (DLFileVersion)results.get(i);
+
+				ResultRow row = new ResultRow(new Object[] {toFileEntry, fileVersion, portletURL, isLocked, hasLock}, fileVersion.getPrimaryKey().toString(), i);
+
+				StringBuffer sb = new StringBuffer();
+
+				sb.append(themeDisplay.getPathMain());
+				sb.append("/document_library/get_file?fileShortcutId=");
+				sb.append(fileShortcutId);
+				sb.append("&version=");
+				sb.append(String.valueOf(fileVersion.getVersion()));
+
+				String rowHREF = sb.toString();
+
+				// Statistics
+
+				row.addText(Double.toString(fileVersion.getVersion()), rowHREF);
+				row.addText(dateFormatDateTime.format(fileVersion.getCreateDate()), rowHREF);
+				row.addText(TextFormatter.formatKB(fileVersion.getSize(), locale) + "k", rowHREF);
+
+				// Action
+
+				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:when>
+		<c:when test='<%= tabs2.equals("comments") %>'>
+			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.ADD_DISCUSSION) %>">
+				<portlet:actionURL var="discussionURL">
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
+				</portlet:actionURL>
+
+				<liferay-ui:discussion
+					formAction="<%= discussionURL %>"
+					className="<%= DLFileEntry.class.getName() %>"
+					classPK="<%= toFileEntry.getPrimaryKey().toString() %>"
+					userId="<%= toFileEntry.getUserId() %>"
+					subject="<%= toFileEntry.getTitle() %>"
+					redirect="<%= currentURL %>"
+				/>
+			</c:if>
+		</c:when>
+	</c:choose>
 </c:if>
 
 </form>

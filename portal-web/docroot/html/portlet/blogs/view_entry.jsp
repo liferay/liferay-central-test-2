@@ -59,7 +59,7 @@ portletURL.setParameter("struts_action", "/blogs/view");
 	<liferay-ui:tabs names="comments" />
 
 	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/blogs/edit_discussion" />
+		<portlet:param name="struts_action" value="/blogs/edit_entry_discussion" />
 	</portlet:actionURL>
 
 	<liferay-ui:discussion

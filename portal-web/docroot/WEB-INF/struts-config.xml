@@ -263,13 +263,13 @@
 			<forward name="portlet.blogs.error" path="portlet.blogs.error" />
 		</action>
 
-		<action path="/blogs/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.blogs.error" />
-		</action>
-
 		<action path="/blogs/edit_entry" type="com.liferay.portlet.blogs.action.EditEntryAction">
 			<forward name="portlet.blogs.edit_entry" path="portlet.blogs.edit_entry" />
 			<forward name="portlet.blogs.error" path="portlet.blogs.error" />
+		</action>
+
+		<action path="/blogs/edit_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.blogs.error" />
 		</action>
 
 		<action path="/blogs/find_entry" type="com.liferay.portlet.blogs.action.FindEntryAction" />
@@ -421,14 +421,14 @@
 
 		<!-- Document Library -->
 
-		<action path="/document_library/edit_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.document_library.error" />
-		</action>
-
 		<action path="/document_library/edit_file_entry" type="com.liferay.portlet.documentlibrary.action.EditFileEntryAction" name="documentLibraryFileEntryForm">
 			<forward name="portlet.document_library.edit_file_entry" path="portlet.document_library.edit_file_entry" />
 			<forward name="portlet.document_library.edit_file_entry_form" path="portlet.document_library.edit_file_entry_form" />
 			<forward name="portlet.document_library.error" path="portlet.document_library.error" />
+		</action>
+
+		<action path="/document_library/edit_file_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.document_library.error" />
 		</action>
 
 		<action path="/document_library/edit_file_shortcut" type="com.liferay.portlet.documentlibrary.action.EditFileShortcutAction">
@@ -1199,6 +1199,10 @@
 		<action path="/shopping/edit_order" type="com.liferay.portlet.shopping.action.EditOrderAction">
 			<forward name="portlet.shopping.edit_order" path="portlet.shopping.edit_order" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
+		</action>
+
+		<action path="/shopping/edit_order_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.shopping.error" />
 		</action>
 
 		<action path="/shopping/select_category" type="com.liferay.portlet.shopping.action.EditCategoryAction">

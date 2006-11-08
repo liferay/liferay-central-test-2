@@ -263,11 +263,10 @@ portletURL.setParameter("name", name);
 		<c:when test='<%= tabs2.equals("comments") %>'>
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.ADD_DISCUSSION) %>">
 				<portlet:actionURL var="discussionURL">
-					<portlet:param name="struts_action" value="/document_library/edit_discussion" />
+					<portlet:param name="struts_action" value="/document_library/edit_file_entry_discussion" />
 				</portlet:actionURL>
 
 				<liferay-ui:discussion
-					formName="fm2"
 					formAction="<%= discussionURL %>"
 					className="<%= DLFileEntry.class.getName() %>"
 					classPK="<%= fileEntry.getPrimaryKey().toString() %>"
