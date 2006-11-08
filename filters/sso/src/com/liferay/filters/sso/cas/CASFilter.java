@@ -58,7 +58,7 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 			_logoutUrl = config.getInitParameter("logout_url");
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Logout URL: " + _logoutUrl);
+				_log.debug("Logout URL " + _logoutUrl);
 			}
 		}
 	}
@@ -77,14 +77,17 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 		}
 
 		if (USE_CAS_FILTER) {
-			HttpServletRequest httpReq = ((HttpServletRequest)req);
+			HttpServletRequest httpReq = (HttpServletRequest)req;
 
 			String pathInfo = httpReq.getPathInfo();
 
-			if (pathInfo.contains("/portal/logout")) {
-				httpReq.getSession().invalidate();
+			if (pathInfo.indexOf("/portal/logout") != -1) {
+				HttpServletResponse httpRes = (HttpServletResponse)res;
+				HttpSession httpSes = httpReq.getSession();
 
-				((HttpServletResponse)res).sendRedirect(_logoutUrl);
+				httpSes.invalidate();
+
+				httpRes.sendRedirect(_logoutUrl);
 
 				//chain.doFilter(req, res);
 			}
@@ -100,4 +103,5 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 	private static Log _log = LogFactory.getLog(CASFilter.class);
 
 	private String _logoutUrl;
+
 }
