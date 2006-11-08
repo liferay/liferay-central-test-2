@@ -28,9 +28,14 @@ import com.liferay.util.SystemProperties;
 import java.io.IOException;
 
 import javax.servlet.FilterChain;
+import javax.servlet.FilterConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,6 +51,14 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 	public static final boolean USE_CAS_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(CASFilter.class.getName()));
 
+	public void init(FilterConfig config) throws ServletException {
+		synchronized (CASFilter.class) {
+			super.init(config);
+			
+			_logoutUrl = config.getInitParameter("logout_url");
+		}
+	}
+
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)
 		throws IOException, ServletException {
@@ -60,7 +73,20 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 		}
 
 		if (USE_CAS_FILTER) {
-			super.doFilter(req, res, chain);
+			HttpServletRequest httpReq = ((HttpServletRequest)req);
+
+			String pathInfo = httpReq.getPathInfo();
+
+			if (pathInfo.contains("/portal/logout")) {
+				httpReq.getSession().invalidate();
+
+				((HttpServletResponse)res).sendRedirect(_logoutUrl);
+
+				//chain.doFilter(req, res);
+			}
+			else {
+				super.doFilter(req, res, chain);				
+			}
 		}
 		else {
 			chain.doFilter(req, res);
@@ -69,4 +95,5 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 
 	private static Log _log = LogFactory.getLog(CASFilter.class);
 
+	private String _logoutUrl;
 }

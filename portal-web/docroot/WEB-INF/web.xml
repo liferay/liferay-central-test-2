@@ -9,6 +9,10 @@
 		<filter-name>CAS Filter</filter-name>
 		<filter-class>com.liferay.filters.sso.cas.CASFilter</filter-class>
 		<init-param>
+			<param-name>logout_url</param-name>
+			<param-value>https://localhost:8443/cas-web/logout</param-value>
+		</init-param>
+		<init-param>
 			<param-name>edu.yale.its.tp.cas.client.filter.loginUrl</param-name>
 			<param-value>https://localhost:8443/cas-web/login</param-value>
 		</init-param>
@@ -83,6 +87,10 @@
 	<filter-mapping>
 		<filter-name>CAS Filter</filter-name>
 		<url-pattern>/c/portal/login</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>CAS Filter</filter-name>
+		<url-pattern>/c/portal/logout</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Auto Login Filter</filter-name>
