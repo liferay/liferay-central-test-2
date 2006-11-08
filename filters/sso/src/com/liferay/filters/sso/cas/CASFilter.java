@@ -29,7 +29,6 @@ import java.io.IOException;
 
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
@@ -54,7 +53,7 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 	public void init(FilterConfig config) throws ServletException {
 		synchronized (CASFilter.class) {
 			super.init(config);
-			
+
 			_logoutUrl = config.getInitParameter("logout_url");
 
 			if (_log.isDebugEnabled()) {
@@ -90,7 +89,7 @@ public class CASFilter extends edu.yale.its.tp.cas.client.filter.CASFilter {
 				httpRes.sendRedirect(_logoutUrl);
 			}
 			else {
-				super.doFilter(req, res, chain);				
+				super.doFilter(req, res, chain);
 			}
 		}
 		else {
