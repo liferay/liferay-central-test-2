@@ -14,7 +14,23 @@
 	</target>
 
 	<target name="ear">
-		<antcall target="jar-jaas" />
+
+		<!-- JAAS -->
+
+		<jar
+			jarfile="liferay-portal-jaas.jar"
+		>
+			<fileset
+				dir="${project.dir}/portal-ejb/classes"
+				includes="**/portal/security/jaas/ext/pramati/PortalUserManager.class,**/portal/security/jaas/ext/sun*/PortalRealm.class,**/portal/security/jaas/ext/websphere/PortalUserRegistry.class,**/portal/util/Constants.class"
+			/>
+			<fileset
+				dir="${project.dir}/util-java/classes"
+				includes="**/util/JNDIUtil.class,**/util/dao/DataAccess.class"
+			/>
+		</jar>
+
+		<!-- EAR -->
 
 		<copy todir="modules" overwrite="yes">
 			<fileset dir="${project.dir}/counter-ejb" includes="counter-ejb.jar" />
@@ -49,8 +65,6 @@
 			<fileset dir="${project.dir}/lib/portal" />
 		</copy>
 
-		<delete file="liferay-portal.ear" failonerror="false" />
-
 		<ear
 			appxml="modules/META-INF/application.xml"
 			basedir="modules"
@@ -58,6 +72,8 @@
 			excludes="META-INF/application.xml"
 			includes="**/*.jar,*.war,pramati*.xml,META-INF/*.xml"
 		/>
+
+		<!-- WAR -->
 
 		<copy todir="pro-war/WEB-INF/lib">
 			<fileset dir="modules" includes="*-ejb.jar" />
@@ -127,6 +143,8 @@
 			update="yes"
 		/>
 
+		<!-- Geronimo WAR -->
+
 		<copy
 			file="modules/portal-web.war"
 			tofile="liferay-portal-geronimo-tomcat.war"
@@ -141,22 +159,73 @@
 			update="yes"
 		/>
 
-		<delete file="velocity.log" failonerror="false" />
-	</target>
+		<!-- Servlet 2.3 WAR -->
 
-	<target name="jar-jaas">
-		<jar
-			jarfile="liferay-portal-jaas.jar"
+		<copy
+			file="modules/portal-web.war"
+			tofile="liferay-portal-servlet23.war"
+			overwrite="yes"
+		/>
+
+		<java
+			classname="com.liferay.portal.tools.WebXML23Converter"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
 		>
-			<fileset
-				dir="${project.dir}/portal-ejb/classes"
-				includes="**/portal/security/jaas/ext/pramati/PortalUserManager.class,**/portal/security/jaas/ext/sun*/PortalRealm.class,**/portal/security/jaas/ext/websphere/PortalUserRegistry.class,**/portal/util/Constants.class"
-			/>
-			<fileset
-				dir="${project.dir}/util-java/classes"
-				includes="**/util/JNDIUtil.class,**/util/dao/DataAccess.class"
-			/>
-		</jar>
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+			<arg value="pro-war/WEB-INF/web.xml" />
+			<arg value="web-servlet23.xml" />
+		</java>
+
+		<war
+			basedir="pro-war"
+			destfile="liferay-portal-servlet23.war"
+			excludes="WEB-INF/web.xml"
+			webxml="web-servlet23.xml"
+			update="yes"
+		/>
+
+		<delete file="web-servlet23.xml" />
+
+		<!-- Servlet 2.3 EAR -->
+
+		<touch file="modules/portal-web.war" datetime="01/01/1990 12:00 am" />
+
+		<java
+			classname="com.liferay.portal.tools.WebXML23Converter"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
+			<arg value="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml" />
+			<arg value="web-servlet23.xml" />
+		</java>
+
+		<war
+			basedir="${project.dir}/web-sites/liferay.com-web/docroot"
+			destfile="modules/portal-web.war"
+			excludes="WEB-INF/web.xml"
+			webxml="web-servlet23.xml"
+			update="yes"
+		/>
+
+		<delete file="web-servlet23.xml" />
+
+		<ear
+			appxml="modules/META-INF/application.xml"
+			basedir="modules"
+			destfile="liferay-portal-servlet23.ear"
+			excludes="META-INF/application.xml"
+			includes="**/*.jar,*.war,pramati*.xml,META-INF/*.xml"
+		/>
+
+		<!-- Cleanup -->
+
+		<delete file="velocity.log" failonerror="false" />
 	</target>
 
 	<target name="deploy">

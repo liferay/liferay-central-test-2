@@ -875,8 +875,11 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 		<ant dir="portal-ear" target="ear" inheritAll="false" />
 
 		<copy file="portal-ear/liferay-portal.ear" tofile="liferay-portal-${lp.version.file.name}.ear" />
-		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
 		<copy file="portal-ear/liferay-portal.war" tofile="liferay-portal-${lp.version.file.name}.war" />
+		<copy file="portal-ear/liferay-portal-geronimo-tomcat.war" tofile="liferay-portal-geronimo-tomcat-${lp.version.file.name}.war" />
+		<copy file="portal-ear/liferay-portal-jaas.jar" tofile="liferay-portal-jaas-${lp.version.file.name}.jar" />
+		<copy file="portal-ear/liferay-portal-servlet23.ear" tofile="liferay-portal-servlet23-${lp.version.file.name}.ear" />
+		<copy file="portal-ear/liferay-portal-servlet23.war" tofile="liferay-portal-servlet23-${lp.version.file.name}.war" />
 
 		<ant dir="layouttpl" target="deploy" inheritAll="false" />
 		<ant dir="portlets" target="deploy" inheritAll="false" />
