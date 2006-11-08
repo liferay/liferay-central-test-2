@@ -474,15 +474,15 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLMyAccount(myAccountURL);
 			}
 
-			themeDisplay.setURLPortal(protocol + company.getPortalURL());
-			themeDisplay.setURLSignIn(mainPath + "/portal/login");
-			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
-
-			if (!user.isActive()) {
+			if (!user.isActive() && !user.isAgreedToTermsOfUse()) {
 				themeDisplay.setShowAddContentIcon(false);
 				themeDisplay.setShowMyAccountIcon(false);
 				themeDisplay.setShowPageSettingsIcon(false);
 			}
+
+			themeDisplay.setURLPortal(protocol + company.getPortalURL());
+			themeDisplay.setURLSignIn(mainPath + "/portal/login");
+			themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 			req.setAttribute(WebKeys.THEME_DISPLAY, themeDisplay);
 
