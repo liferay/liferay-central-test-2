@@ -51,10 +51,10 @@ if (question != null) {
 	choices = PollsChoiceLocalServiceUtil.getChoices(questionId);
 }
 
-int choicesCount = ParamUtil.getInteger(request, "choicesCount", 2);
+int choicesCount = ParamUtil.getInteger(request, "choicesCount", choices.size());
 
-if (choices.size() > 2) {
-	choicesCount = choices.size();
+if (choicesCount < 2) {
+	choicesCount = 2;
 }
 
 int choiceId = ParamUtil.getInteger(request, "choiceId");
@@ -62,7 +62,6 @@ int choiceId = ParamUtil.getInteger(request, "choiceId");
 boolean deleteChoice = false;
 
 if (choiceId > 0) {
-	choicesCount = choicesCount - 2;
 	deleteChoice = true;
 }
 %>
@@ -199,7 +198,7 @@ if (choiceId > 0) {
 						<c:if test="<%= choicesCount > 2 %>">
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount + 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
+								<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="document.<portlet:namespace />fm.<portlet:namespace />choicesCount.value = '<%= choicesCount - 1 %>'; document.<portlet:namespace />fm.<portlet:namespace />choiceId.value = '<%= i %>'; submitForm(document.<portlet:namespace />fm);">
 							</td>
 						</c:if>
 
