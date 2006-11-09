@@ -68,8 +68,18 @@ public class ShoppingOrderServiceImpl
 		}
 	}
 
+	public void sendEmail(String plid, String orderId, String emailType)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SHOPPING,
+			ActionKeys.MANAGE_ORDERS);
+
+		ShoppingOrderLocalServiceUtil.sendEmail(orderId, emailType);
+	}
+
 	public ShoppingOrder updateOrder(
-			String orderId, String plid, String billingFirstName,
+			String plid, String orderId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
 			String billingState, String billingZip, String billingCountry,
@@ -97,7 +107,7 @@ public class ShoppingOrderServiceImpl
 	}
 
 	public ShoppingOrder updateOrder(
-			String orderId, String plid, String ppTxnId, String ppPaymentStatus,
+			String plid, String orderId, String ppTxnId, String ppPaymentStatus,
 			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
 		throws PortalException, SystemException {
 

@@ -38,8 +38,13 @@ public interface ShoppingOrderService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public void sendEmail(java.lang.String plid, java.lang.String orderId,
+		java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -58,7 +63,7 @@ public interface ShoppingOrderService {
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)

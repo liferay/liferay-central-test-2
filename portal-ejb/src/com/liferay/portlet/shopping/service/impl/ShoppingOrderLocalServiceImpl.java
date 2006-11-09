@@ -386,6 +386,14 @@ public class ShoppingOrderLocalServiceImpl
 			andOperator);
 	}
 
+	public void sendEmail(String orderId, String emailType)
+		throws PortalException, SystemException {
+
+		ShoppingOrder order = ShoppingOrderUtil.findByPrimaryKey(orderId);
+
+		sendEmail(order, emailType);
+	}
+
 	public void sendEmail(ShoppingOrder order, String emailType)
 		throws PortalException, SystemException {
 
@@ -523,6 +531,19 @@ public class ShoppingOrderLocalServiceImpl
 				from, to, subject, body, true);
 
 			MailServiceUtil.sendEmail(message);
+
+			if (emailType.equals("confirmation") && order.isSendOrderEmail()) {
+				order.setSendOrderEmail(false);
+
+				ShoppingOrderUtil.update(order);
+			}
+			else if (emailType.equals("shipping") &&
+					 order.isSendShippingEmail()) {
+
+				order.setSendShippingEmail(false);
+
+				ShoppingOrderUtil.update(order);
+			}
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

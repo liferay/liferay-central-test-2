@@ -30,6 +30,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER);
 
 String orderId = BeanParamUtil.getString(order, request, "orderId");
+
+WindowState windowState = renderRequest.getWindowState();
 %>
 
 <script type="text/javascript">
@@ -37,16 +39,40 @@ String orderId = BeanParamUtil.getString(order, request, "orderId");
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
+
+	function <portlet:namespace />sendEmail(emailType) {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "sendEmail";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= currentURL %>";
+		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
+		submitForm(document.<portlet:namespace />fm);
+	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
+<input name="<portlet:namespace />emailType" type="hidden" value="" />
 <input name="<portlet:namespace />deleteOrderIds" type="hidden" value="<%= orderId %>" />
 
-<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
-	<liferay-util:param name="tabs1" value="orders" />
-</liferay-util:include>
+<c:choose>
+	<c:when test="<%= windowState.equals(LiferayWindowState.POP_UP) %>">
+		<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
+
+		<br><br>
+
+		<span style="font-size: small;">
+		<b><%= LanguageUtil.get(pageContext, "invoice") %></b>
+		</span>
+
+		<br><br>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
+			<liferay-util:param name="tabs1" value="orders" />
+		</liferay-util:include>
+	</c:otherwise>
+</c:choose>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -597,34 +623,38 @@ for (int i = 0; itr.hasNext(); i++) {
 </tr>
 </table>
 
-<br>
+<c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
+	<br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invoice") %>'>
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invoice") %>' onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendConfirmationEmail();">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendOrderEmail() ? "" : "re") + "send-confirmation-email") %>' onClick="<portlet:namespace />sendEmail('confirmation');">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendShippingEmail();">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, (order.isSendShippingEmail() ? "" : "re") + "send-shipping-email") %>' onClick="<portlet:namespace />sendEmail('shipping');">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrder();">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "delete") %>' onClick="<portlet:namespace />deleteOrder();">
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
+</c:if>
 
 </form>
 
-<br>
+<c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
+	<br>
 
-<liferay-ui:tabs names="comments" />
+	<liferay-ui:tabs names="comments" />
 
-<portlet:actionURL var="discussionURL">
-	<portlet:param name="struts_action" value="/shopping/edit_order_discussion" />
-</portlet:actionURL>
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/shopping/edit_order_discussion" />
+	</portlet:actionURL>
 
-<liferay-ui:discussion
-	formName="fm2"
-	formAction="<%= discussionURL %>"
-	className="<%= ShoppingOrder.class.getName() %>"
-	classPK="<%= order.getPrimaryKey().toString() %>"
-	userId="<%= order.getUserId() %>"
-	subject="<%= order.getOrderId() %>"
-	redirect="<%= currentURL %>"
-/>
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= ShoppingOrder.class.getName() %>"
+		classPK="<%= order.getPrimaryKey().toString() %>"
+		userId="<%= order.getUserId() %>"
+		subject="<%= order.getOrderId() %>"
+		redirect="<%= currentURL %>"
+	/>
+</c:if>

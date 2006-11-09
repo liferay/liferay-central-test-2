@@ -118,6 +118,14 @@ public class ShoppingOrderLocalServiceUtil {
 			shippingEmailAddress, ppPaymentStatus, andOperator);
 	}
 
+	public static void sendEmail(java.lang.String orderId,
+		java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+		shoppingOrderLocalService.sendEmail(orderId, emailType);
+	}
+
 	public static void sendEmail(
 		com.liferay.portlet.shopping.model.ShoppingOrder order,
 		java.lang.String emailType)

@@ -65,11 +65,8 @@ public class EditOrderAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteOrders(req);
 			}
-			else if (cmd.equals("sendOrderEmail")) {
-				//sendOrderEmail(req);
-			}
-			else if (cmd.equals("sendShippingEmail")) {
-				//sendShippingEmail(req);
+			else if (cmd.equals("sendEmail")) {
+				sendEmail(req);
 			}
 
 			sendRedirect(req, res);
@@ -123,6 +120,17 @@ public class EditOrderAction extends PortletAction {
 			ShoppingOrderServiceUtil.deleteOrder(
 				layout.getPlid(), deleteOrderIds[i]);
 		}
+	}
+
+	protected void sendEmail(ActionRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
+		String orderId = ParamUtil.getString(req, "orderId");
+
+		String emailType = ParamUtil.getString(req, "emailType");
+
+		ShoppingOrderServiceUtil.sendEmail(
+			layout.getPlid(), orderId, emailType);
 	}
 
 	protected void updateOrder(ActionRequest req) throws Exception {

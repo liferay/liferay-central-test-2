@@ -66,8 +66,21 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
+	public static void sendEmail(java.lang.String plid,
+		java.lang.String orderId, java.lang.String emailType)
+		throws RemoteException {
+		try {
+			ShoppingOrderServiceUtil.sendEmail(plid, orderId, emailType);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrderModel updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -84,8 +97,8 @@ public class ShoppingOrderServiceSoap {
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(orderId,
-					plid, billingFirstName, billingLastName,
+			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
+					orderId, billingFirstName, billingLastName,
 					billingEmailAddress, billingCompany, billingStreet,
 					billingCity, billingState, billingZip, billingCountry,
 					billingPhone, shipToBilling, shippingFirstName,
@@ -104,13 +117,13 @@ public class ShoppingOrderServiceSoap {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderModel updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail) throws RemoteException {
 		try {
-			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(orderId,
-					plid, ppTxnId, ppPaymentStatus, ppPaymentGross,
+			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.updateOrder(plid,
+					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
 					ppReceiverEmail, ppPayerEmail);
 
 			return returnValue;

@@ -131,9 +131,59 @@ public class ShoppingOrderServiceHttp {
 		}
 	}
 
+	public static void sendEmail(HttpPrincipal httpPrincipal,
+		java.lang.String plid, java.lang.String orderId,
+		java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = orderId;
+
+			if (orderId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = emailType;
+
+			if (emailType == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
+					"sendEmail",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		HttpPrincipal httpPrincipal, java.lang.String orderId,
-		java.lang.String plid, java.lang.String billingFirstName,
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String orderId, java.lang.String billingFirstName,
 		java.lang.String billingLastName, java.lang.String billingEmailAddress,
 		java.lang.String billingCompany, java.lang.String billingStreet,
 		java.lang.String billingCity, java.lang.String billingState,
@@ -150,15 +200,15 @@ public class ShoppingOrderServiceHttp {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = orderId;
+			Object paramObj0 = plid;
 
-			if (orderId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = plid;
+			Object paramObj1 = orderId;
 
-			if (plid == null) {
+			if (orderId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
@@ -353,22 +403,22 @@ public class ShoppingOrderServiceHttp {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		HttpPrincipal httpPrincipal, java.lang.String orderId,
-		java.lang.String plid, java.lang.String ppTxnId,
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String orderId, java.lang.String ppTxnId,
 		java.lang.String ppPaymentStatus, double ppPaymentGross,
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = orderId;
+			Object paramObj0 = plid;
 
-			if (orderId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = plid;
+			Object paramObj1 = orderId;
 
-			if (plid == null) {
+			if (orderId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 

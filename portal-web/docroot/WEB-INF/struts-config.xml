@@ -1226,11 +1226,6 @@
 		</action>
 
 		<!--
-		<action path="/shopping/edit_order_invoice" type="com.liferay.portlet.shopping.action.EditOrderInvoiceAction">
-			<forward name="/portlet/shopping/edit_order_invoice.jsp" path="/portlet/shopping/edit_order_invoice.jsp" />
-			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
-		</action>
-
 		<action path="/shopping/notify" type="com.liferay.portlet.shopping.action.PayPalNotificationAction" />
 
 		<action path="/shopping/search" forward="portlet.shopping.search" />

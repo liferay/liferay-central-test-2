@@ -46,8 +46,16 @@ public class ShoppingOrderServiceUtil {
 		return shoppingOrderService.getOrder(plid, orderId);
 	}
 
+	public static void sendEmail(java.lang.String plid,
+		java.lang.String orderId, java.lang.String emailType)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+		shoppingOrderService.sendEmail(plid, orderId, emailType);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,
@@ -66,7 +74,7 @@ public class ShoppingOrderServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
-		return shoppingOrderService.updateOrder(orderId, plid,
+		return shoppingOrderService.updateOrder(plid, orderId,
 			billingFirstName, billingLastName, billingEmailAddress,
 			billingCompany, billingStreet, billingCity, billingState,
 			billingZip, billingCountry, billingPhone, shipToBilling,
@@ -77,7 +85,7 @@ public class ShoppingOrderServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
-		java.lang.String orderId, java.lang.String plid,
+		java.lang.String plid, java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail)
@@ -85,7 +93,7 @@ public class ShoppingOrderServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
 
-		return shoppingOrderService.updateOrder(orderId, plid, ppTxnId,
+		return shoppingOrderService.updateOrder(plid, orderId, ppTxnId,
 			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
 	}
 }
