@@ -105,22 +105,22 @@
 			<then>
 				<copy todir="${app.server.bin.dir}/nt">
 					<fileset dir="sql">
-						<include name="${database.name}.script" />
 						<include name="${database.name}.properties" />
+						<include name="${database.name}.script" />
 					</fileset>
 				</copy>
 				<copy todir="${app.server.bin.dir}/unix">
 					<fileset dir="sql">
-						<include name="${database.name}.script" />
 						<include name="${database.name}.properties" />
+						<include name="${database.name}.script" />
 					</fileset>
 				</copy>
 			</then>
 			<else>
 				<copy todir="${app.server.bin.dir}">
 					<fileset dir="sql">
-						<include name="${database.name}.script" />
 						<include name="${database.name}.properties" />
+						<include name="${database.name}.script" />
 					</fileset>
 				</copy>
 			</else>

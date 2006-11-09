@@ -215,22 +215,35 @@ public class ShoppingOrderLocalServiceImpl
 			User user = UserUtil.findByPrimaryKey(userId);
 			Date now = new Date();
 
+			String orderId = getOrderId();
+
 			List pastOrders = ShoppingOrderUtil.findByG_U_PPPS(
 				groupId, userId, ShoppingOrder.STATUS_CHECKOUT, 0, 1);
 
 			if (pastOrders.size() == 1) {
 				ShoppingOrder pastOrder = (ShoppingOrder)pastOrders.get(0);
 
-				order = (ShoppingOrder)pastOrder.clone();
-			}
+				order = ShoppingOrderUtil.create(orderId);
 
-			String orderId = getOrderId();
+				order.setBillingCompany(pastOrder.getBillingCompany());
+				order.setBillingStreet(pastOrder.getBillingStreet());
+				order.setBillingCity(pastOrder.getBillingCity());
+				order.setBillingState(pastOrder.getBillingState());
+				order.setBillingZip(pastOrder.getBillingZip());
+				order.setBillingCountry(pastOrder.getBillingCountry());
+				order.setBillingPhone(pastOrder.getBillingPhone());
+				order.setShipToBilling(pastOrder.isShipToBilling());
+				order.setShippingCompany(pastOrder.getShippingCompany());
+				order.setShippingStreet(pastOrder.getShippingStreet());
+				order.setShippingCity(pastOrder.getShippingCity());
+				order.setShippingState(pastOrder.getShippingState());
+				order.setShippingZip(pastOrder.getShippingZip());
+				order.setShippingCountry(pastOrder.getShippingCountry());
+				order.setShippingPhone(pastOrder.getShippingPhone());
+			}
 
 			if (order == null) {
 				order = ShoppingOrderUtil.create(orderId);
-			}
-			else {
-				order.setOrderId(orderId);
 			}
 
 			order.setGroupId(groupId);

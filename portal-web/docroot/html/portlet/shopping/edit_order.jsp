@@ -32,7 +32,17 @@ ShoppingOrder order = (ShoppingOrder)request.getAttribute(WebKeys.SHOPPING_ORDER
 String orderId = BeanParamUtil.getString(order, request, "orderId");
 %>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveOrder(); return false;">
+<script type="text/javascript">
+	function <portlet:namespace />deleteOrder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+</script>
+
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />deleteOrderIds" type="hidden" value="<%= orderId %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="orders" />
