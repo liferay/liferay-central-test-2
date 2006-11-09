@@ -142,100 +142,98 @@ var Alerts = {
 		 * width (int) - starting width of message box
 		 * onClose (function) - executes after closing
 		 */
-		if (document.getElementsByTagName("body")) {
-			var body = document.getElementsByTagName("body")[0];
-			
-			if (!options) options = new Object();
-			
-			var modal = options.modal;
-			var myMessage = options.message;
-			var msgHeight = options.height;
-			var msgWidth = options.width;
-			var noCenter = options.noCenter == true;
-			var title = options.title;
-			
+		var body = document.body;
+		
+		if (!options) options = new Object();
+		
+		var modal = options.modal;
+		var myMessage = options.message;
+		var msgHeight = options.height;
+		var msgWidth = options.width;
+		var noCenter = options.noCenter == true;
+		var title = options.title;
+		
 
-			var message = document.createElement("div");
-			message.align = "left";
-			
-			var wrapper = Alerts.createWrapper(message, title);
-			wrapper.style.position = "absolute";
-			wrapper.style.top = 0;
-			wrapper.style.left = 0;
-			wrapper.style.zIndex = ZINDEX.ALERT + 1;
-			wrapper.options = options;
-			
-			if (myMessage) {
-				message.innerHTML = myMessage;
+		var message = document.createElement("div");
+		message.align = "left";
+		
+		var wrapper = Alerts.createWrapper(message, title);
+		wrapper.style.position = "absolute";
+		wrapper.style.top = 0;
+		wrapper.style.left = 0;
+		wrapper.style.zIndex = ZINDEX.ALERT + 1;
+		wrapper.options = options;
+		
+		if (myMessage) {
+			message.innerHTML = myMessage;
+		}
+		else {
+			message.innerHTML = "<div class=\"portlet-loading\"></div>";
+		}
+		
+		if (msgHeight) {
+			if (is_ie) {
+				message.style.height = msgHeight + "px";
 			}
 			else {
-				message.innerHTML = "<div class=\"portlet-loading\"></div>";
+				message.style.minHeight = msgHeight + "px";
 			}
+		}
+		
+		if (msgWidth) {
+			wrapper.style.width = msgWidth + "px";
+		}
+		else {
+			wrapper.style.width = "100%";
+		}
+		
+		if (msgWidth == null) {
+			noCenter = true;
+		}
+		
+		if (!Alerts.background && modal) {
+			var background = document.createElement("div");
+			background.id = "alert-message";
+			background.style.position = "absolute";
+			background.style.top = "0";
+			background.style.left = "0";
+			background.style.zIndex = ZINDEX.ALERT;
 			
-			if (msgHeight) {
-				if (is_ie) {
-					message.style.height = msgHeight + "px";
-				}
-				else {
-					message.style.minHeight = msgHeight + "px";
-				}
-			}
+			Alerts.background = background;
+			wrapper.background = background;
 			
-			if (msgWidth) {
-				wrapper.style.width = msgWidth + "px";
-			}
-			else {
-				wrapper.style.width = "100%";
-			}
-			
-			if (msgWidth == null) {
-				noCenter = true;
-			}
-			
-			if (!Alerts.background && modal) {
-				var background = document.createElement("div");
-				background.id = "alert-message";
-				background.style.position = "absolute";
-				background.style.top = "0";
-				background.style.left = "0";
-				background.style.zIndex = ZINDEX.ALERT;
-				
-				Alerts.background = background;
-				wrapper.background = background;
-				
-				background.style.backgroundColor = "#000000";
-				Element.changeOpacity(background, 0);
-				body.appendChild(background);
-				Alerts.bgFadeIn(Alerts.OPACITY, Alerts.STEPS);
-			}
-			setSelectVisibility("hidden");
-			
-			if (Alerts.messageArray.length > 0) {
-				var lastMsg = Alerts.messageArray[Alerts.messageArray.length - 1];
-				lastMsg.style.zIndex = ZINDEX.ALERT - 1;
-				setSelectVisibility("hidden", lastMsg);
-			}
-
-			setSelectVisibility("visibile", message);
-			
-			Alerts.message = message;
-			Alerts.messageArray.push(wrapper);
-			
-			Alerts.resize();
-			Event.addHandler(window, "onresize", Alerts.resize)
-			
-			if (!noCenter) {
-				Alerts.center(msgHeight, msgWidth);
-				Event.addHandler(window, "onresize", Alerts.center)
-			}
-			else {
-				wrapper.style.top = 0;
-				wrapper.style.left = 0;
-			}
-			
-			body.appendChild(wrapper);
+			background.style.backgroundColor = "#000000";
+			Element.changeOpacity(background, 0);
+			body.appendChild(background);
+			Alerts.bgFadeIn(Alerts.OPACITY, Alerts.STEPS);
+		}
+		setSelectVisibility("hidden");
+		
+		if (Alerts.messageArray.length > 0) {
+			var lastMsg = Alerts.messageArray[Alerts.messageArray.length - 1];
+			lastMsg.style.zIndex = ZINDEX.ALERT - 1;
+			setSelectVisibility("hidden", lastMsg);
 		}
 
+		setSelectVisibility("visibile", message);
+		
+		Alerts.message = message;
+		Alerts.messageArray.push(wrapper);
+		
+		Alerts.resize();
+		Event.addHandler(window, "onresize", Alerts.resize)
+		
+		if (!noCenter) {
+			Alerts.center(msgHeight, msgWidth);
+			Event.addHandler(window, "onresize", Alerts.center)
+		}
+		else {
+			wrapper.style.top = 0;
+			wrapper.style.left = 0;
+		}
+		
+		body.appendChild(wrapper);
+		window.focus();
 		return message;
 	},
 	
