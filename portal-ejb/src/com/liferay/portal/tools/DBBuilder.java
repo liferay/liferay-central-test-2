@@ -55,6 +55,7 @@ public class DBBuilder {
 			_databaseName = databaseName;
 
 			_buildSQL("portal");
+			_buildSQL("portal-minimal");
 			_buildSQL("indexes");
 			_buildSQL("sequences");
 			_buildSQL("update-1.7.5-1.8.0");
@@ -96,6 +97,21 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		file = new File("../sql/create-minimal/create-minimal-db2.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
+		sb.append("connect to " + _databaseName + ";\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-db2.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+
+		FileUtil.write(file, sb.toString());
+
 		// Derby
 
 		file = new File("../sql/create/create-derby.sql");
@@ -106,6 +122,21 @@ public class DBBuilder {
 		sb.append("create database " + _databaseName + ";\n");
 		sb.append("connect to " + _databaseName + ";\n");
 		sb.append(FileUtil.read("../sql/portal/portal-derby.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+
+		FileUtil.write(file, sb.toString());
+
+		file = new File("../sql/create-minimal/create-minimal-derby.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
+		sb.append("connect to " + _databaseName + ";\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
 		sb.append("\n\n");
@@ -130,6 +161,21 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		file = new File("../sql/create-minimal/create-minimal-firebird.sql");
+
+		sb = new StringBuffer();
+
+		sb.append(
+			"create database '" + _databaseName +
+				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
+		sb.append(
+			"connect '" + _databaseName +
+				".gdb' user 'sysdba' password 'masterkey';\n");
+		sb.append(
+			_readSQL("../sql/portal-minimal/portal-minimal-firebird.sql", _FIREBIRD[0], ";\n"));
+
+		FileUtil.write(file, sb.toString());
+
 		// MySQL
 
 		file = new File("../sql/create/create-mysql.sql");
@@ -143,6 +189,24 @@ public class DBBuilder {
 		sb.append(_databaseName);
 		sb.append(";\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-mysql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
+
+		FileUtil.write(file, sb.toString());
+
+		file = new File("../sql/create-minimal/create-minimal-mysql.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database if exists " + _databaseName + ";\n");
+		sb.append(
+			"create database " + _databaseName + " character set utf8;\n");
+		sb.append("use ");
+		sb.append(_databaseName);
+		sb.append(";\n\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
 		sb.append("\n\n");
@@ -172,6 +236,26 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		file = new File("../sql/create-minimal/create-minimal-oracle.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop user &1 cascade;\n");
+		sb.append("create user &1 identified by &2;\n");
+		sb.append("grant connect,resource to &1;\n");
+		sb.append("connect &1/&2;\n");
+		sb.append("set define off;\n");
+		sb.append("\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-oracle.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
+		sb.append("\n");
+		sb.append("quit");
+
+		FileUtil.write(file, sb.toString());
+
 		// PostgreSQL
 
 		file = new File("../sql/create/create-postgresql.sql");
@@ -190,6 +274,22 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		file = new File("../sql/create-minimal/create-minimal-postgresql.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append(
+			"create database " + _databaseName + " encoding = 'UNICODE';\n");
+		sb.append("\\c " + _databaseName + ";\n\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-postgresql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+
+		FileUtil.write(file, sb.toString());
+		
 		// SQL Server
 
 		file = new File("../sql/create/create-sql-server.sql");
@@ -210,6 +310,24 @@ public class DBBuilder {
 
 		FileUtil.write(file, sb.toString());
 
+		file = new File("../sql/create-minimal/create-minimal-sql-server.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("drop database " + _databaseName + ";\n");
+		sb.append("create database " + _databaseName + ";\n");
+		sb.append("\n");
+		sb.append("go\n");
+		sb.append("\n");
+		sb.append("use " + _databaseName + ";\n\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-sql-server.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+
+		FileUtil.write(file, sb.toString());
+
 		// Sybase
 
 		file = new File("../sql/create/create-sybase.sql");
@@ -218,6 +336,19 @@ public class DBBuilder {
 
 		sb.append("use " + _databaseName + "\n\n");
 		sb.append(FileUtil.read("../sql/portal/portal-sybase.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
+		sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
+
+		FileUtil.write(file, sb.toString());
+
+		file = new File("../sql/create-minimal/create-minimal-sybase.sql");
+
+		sb = new StringBuffer();
+
+		sb.append("use " + _databaseName + "\n\n");
+		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
@@ -472,7 +603,7 @@ public class DBBuilder {
 
 		String template = FileUtil.read(file);
 
-		if (fileName.equals("portal") ||
+		if (fileName.equals("portal") || fileName.equals("portal-minimal") ||
 			fileName.equals("update-3.6.0-4.0.0")) {
 
 			BufferedReader br = new BufferedReader(new StringReader(template));

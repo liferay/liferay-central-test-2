@@ -23,6 +23,7 @@
 package com.liferay.portlet.helloworld;
 
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.ReleaseInfo;
 
 import java.io.IOException;
 
@@ -50,7 +51,8 @@ public class HelloWorldPortlet extends GenericPortlet {
 
 		res.setContentType(Constants.TEXT_HTML);
 
-		res.getWriter().print("Hello World!");
+		res.getWriter().print("Welcome to " + 
+			ReleaseInfo.getReleaseInfo() + ".");
 	}
 
 }
