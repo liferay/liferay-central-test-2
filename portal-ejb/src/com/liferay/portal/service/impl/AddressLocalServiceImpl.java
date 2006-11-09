@@ -34,9 +34,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.spring.AddressLocalService;
-import com.liferay.portal.service.spring.CountryServiceUtil;
 import com.liferay.portal.service.spring.ListTypeServiceUtil;
-import com.liferay.portal.service.spring.RegionServiceUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -166,14 +164,16 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			throw new AddressZipException();
 		}
 
-		try {
+		// Relax region and country requirement. See LEP-978.
+
+		/*try {
 			RegionServiceUtil.getRegion(regionId);
 
 			CountryServiceUtil.getCountry(countryId);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
-		}
+		}*/
 
 		if (addressId != null) {
 			Address address = AddressUtil.findByPrimaryKey(addressId);
