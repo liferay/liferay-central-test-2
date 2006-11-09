@@ -319,19 +319,13 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter did not return any results");
 				}
 	
-				if (PrefsPropsUtil.getBoolean(
-						companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
-					return authenticateRequired(companyId, userId, emailAddress);
-				}
+				return authenticateRequired(companyId, userId, emailAddress);
 			}
 		}
 		catch (Exception e) {
 			_log.warn("Problem accessing LDAP server");
 
-			if (PrefsPropsUtil.getBoolean(
-					companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
-				return authenticateRequired(companyId, userId, emailAddress);
-			}			
+			return authenticateRequired(companyId, userId, emailAddress);
 		}
 		
 		return SUCCESS;
