@@ -26,18 +26,15 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.util.Randomizer;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
 import org.hibernate.Hibernate;
-import org.hibernate.Query;
 import org.hibernate.SQLQuery;
-import org.hibernate.ScrollableResults;
 import org.hibernate.Session;
 
 /**
@@ -108,36 +105,46 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("(");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				query.append("shoppingItem.categoryId = ? ");
+			if ((categoryIds != null) && (categoryIds.length > 0)) {
+				query.append("(");
 
-				if (i + 1 < categoryIds.length) {
-					query.append("OR ");
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append("ShoppingItem.categoryId = ? ");
+
+					if (i + 1 < categoryIds.length) {
+						query.append("OR ");
+					}
 				}
+
+				query.append(") AND ");
 			}
 
-			query.append(") AND ");
-			query.append("shoppingItem.groupId = ? AND ");
-			query.append("shoppingItem.featured = ? AND ");
-			query.append("shoppingItem.smallImage = ?");
+			query.append("ShoppingItem.featured = ? AND ");
+			query.append("ShoppingItem.smallImage = ?");
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setBoolean(categoryIds.length + 1, true);
-			q.setBoolean(categoryIds.length + 2, true);
+			qPos.add(true);
+			qPos.add(true);
 
 			Iterator itr = q.list().iterator();
 
@@ -170,16 +177,18 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
 
 				for (int i = 0; i < categoryIds.length; i++) {
-					query.append("shoppingItem.categoryId = ? ");
+					query.append("ShoppingItem.categoryId = ? ");
 
 					if (i + 1 < categoryIds.length) {
 						query.append("OR ");
@@ -189,25 +198,29 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("shoppingItem.groupId = ? AND (");
-			query.append("shoppingItem.name LIKE ? OR ");
-			query.append("shoppingItem.description LIKE ? OR ");
-			query.append("shoppingItem.properties LIKE ?)");
+			query.append("ShoppingItem.name LIKE ? OR ");
+			query.append("ShoppingItem.description LIKE ? OR ");
+			query.append("ShoppingItem.properties LIKE ?)");
 
 			keywords = '%' + keywords + '%';
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setString(categoryIds.length + 1, keywords);
-			q.setString(categoryIds.length + 2, keywords);
-			q.setString(categoryIds.length + 3, keywords);
+			qPos.add(keywords);
+			qPos.add(keywords);
+			qPos.add(keywords);
 
 			Iterator itr = q.list().iterator();
 
@@ -239,36 +252,46 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT COUNT(*) FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("(");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				query.append("shoppingItem.categoryId = ? ");
+			if ((categoryIds != null) && (categoryIds.length > 0)) {
+				query.append("(");
 
-				if (i + 1 < categoryIds.length) {
-					query.append("OR ");
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append("ShoppingItem.categoryId = ? ");
+
+					if (i + 1 < categoryIds.length) {
+						query.append("OR ");
+					}
 				}
+
+				query.append(") AND ");
 			}
 
-			query.append(") AND ");
-			query.append("shoppingItem.groupId = ? AND ");
-			query.append("shoppingItem.sale = ? AND ");
-			query.append("shoppingItem.smallImage = ?");
+			query.append("ShoppingItem.sale = ? AND ");
+			query.append("ShoppingItem.smallImage = ?");
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setBoolean(categoryIds.length + 1, true);
-			q.setBoolean(categoryIds.length + 2, true);
+			qPos.add(true);
+			qPos.add(true);
 
 			Iterator itr = q.list().iterator();
 
@@ -294,13 +317,7 @@ public class ShoppingItemFinder {
 			String groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
-		List list = new ArrayList(numOfItems);
-
 		int countByFeatured = countByFeatured(groupId, categoryIds);
-
-		if (countByFeatured == 0) {
-			return list;
-		}
 
 		Session session = null;
 
@@ -309,55 +326,49 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("(");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				query.append("shoppingItem.categoryId = ? ");
+			if ((categoryIds != null) && (categoryIds.length > 0)) {
+				query.append("(");
 
-				if (i + 1 < categoryIds.length) {
-					query.append("OR ");
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append("ShoppingItem.categoryId = ? ");
+
+					if (i + 1 < categoryIds.length) {
+						query.append("OR ");
+					}
 				}
+
+				query.append(") AND ");
 			}
 
-			query.append(") AND ");
-			query.append("shoppingItem.groupId = ? AND ");
-			query.append("shoppingItem.featured = ? AND ");
-			query.append("shoppingItem.smallImage = ?");
+			query.append("ShoppingItem.featured = ? AND ");
+			query.append("ShoppingItem.smallImage = ?");
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addEntity("ShoppingItem", ShoppingItem.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setBoolean(categoryIds.length + 1, true);
-			q.setBoolean(categoryIds.length + 2, true);
+			qPos.add(true);
+			qPos.add(true);
 
-			ScrollableResults sr = q.scroll();
-
-			if (sr.first()) {
-				int[] scrollIds = Randomizer.getInstance().nextInt(
-					countByFeatured, numOfItems);
-
-				for (int i = 0; i < scrollIds.length; i++) {
-					if (sr.scroll(scrollIds[i])) {
-						ShoppingItem item = (ShoppingItem)sr.get(0);
-
-						list.add(item);
-
-						sr.first();
-					}
-				}
-			}
-
-			return list;
+			return QueryUtil.randomList(
+				q, HibernateUtil.getDialect(), countByFeatured, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -379,16 +390,18 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
 			if ((categoryIds != null) && (categoryIds.length > 0)) {
 				query.append("(");
 
 				for (int i = 0; i < categoryIds.length; i++) {
-					query.append("shoppingItem.categoryId = ? ");
+					query.append("ShoppingItem.categoryId = ? ");
 
 					if (i + 1 < categoryIds.length) {
 						query.append("OR ");
@@ -398,43 +411,31 @@ public class ShoppingItemFinder {
 				query.append(") AND ");
 			}
 
-			query.append("shoppingItem.groupId = ? AND (");
-			query.append("shoppingItem.name LIKE ? OR ");
-			query.append("shoppingItem.description LIKE ? OR ");
-			query.append("shoppingItem.properties LIKE ?)");
+			query.append("ShoppingItem.name LIKE ? OR ");
+			query.append("ShoppingItem.description LIKE ? OR ");
+			query.append("ShoppingItem.properties LIKE ?)");
 
 			keywords = '%' + keywords + '%';
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addEntity("ShoppingItem", ShoppingItem.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setString(categoryIds.length + 1, keywords);
-			q.setString(categoryIds.length + 2, keywords);
-			q.setString(categoryIds.length + 3, keywords);
+			qPos.add(keywords);
+			qPos.add(keywords);
+			qPos.add(keywords);
 
-			ScrollableResults sr = q.scroll();
-
-			List list = new ArrayList();
-
-			if (sr.first() && sr.scroll(begin)) {
-				for (int i = begin; i < end; i++) {
-					ShoppingItem item = (ShoppingItem)sr.get(0);
-
-					list.add(item);
-
-					if (!sr.next()) {
-						break;
-					}
-				}
-			}
-
-			return list;
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -448,13 +449,7 @@ public class ShoppingItemFinder {
 			String groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
-		List list = new ArrayList(numOfItems);
-
 		int countBySale = countBySale(groupId, categoryIds);
-
-		if (countBySale == 0) {
-			return list;
-		}
 
 		Session session = null;
 
@@ -463,55 +458,49 @@ public class ShoppingItemFinder {
 
 			StringBuffer query = new StringBuffer();
 
-			query.append("SELECT shoppingItem FROM ");
-			query.append(ShoppingItem.class.getName());
-			query.append(" AS shoppingItem ");
+			query.append("SELECT {ShoppingItem.*} FROM ShoppingItem ");
+			query.append("INNER JOIN ShoppingCategory ON ");
+			query.append("ShoppingCategory.categoryId = ");
+			query.append("ShoppingItem.categoryId ");
 			query.append("WHERE ");
-			query.append("(");
+			query.append("ShoppingCategory.groupId = ? AND (");
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				query.append("shoppingItem.categoryId = ? ");
+			if ((categoryIds != null) && (categoryIds.length > 0)) {
+				query.append("(");
 
-				if (i + 1 < categoryIds.length) {
-					query.append("OR ");
+				for (int i = 0; i < categoryIds.length; i++) {
+					query.append("ShoppingItem.categoryId = ? ");
+
+					if (i + 1 < categoryIds.length) {
+						query.append("OR ");
+					}
 				}
+
+				query.append(") AND ");
 			}
 
-			query.append(") AND ");
-			query.append("shoppingItem.groupId = ? AND ");
-			query.append("shoppingItem.sale = ? AND ");
-			query.append("shoppingItem.smallImage = ?");
+			query.append("ShoppingItem.sale = ? AND ");
+			query.append("ShoppingItem.smallImage = ?");
 
-			Query q = session.createQuery(query.toString());
+			SQLQuery q = session.createSQLQuery(query.toString());
 
 			q.setCacheable(false);
 
+			q.addEntity("ShoppingItem", ShoppingItem.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+
 			for (int i = 0; i < categoryIds.length; i++) {
-				q.setString(i, categoryIds[i]);
+				qPos.add(categoryIds[i]);
 			}
 
-			q.setString(categoryIds.length, groupId);
-			q.setBoolean(categoryIds.length + 1, true);
-			q.setBoolean(categoryIds.length + 2, true);
+			qPos.add(true);
+			qPos.add(true);
 
-			ScrollableResults sr = q.scroll();
-
-			if (sr.first()) {
-				int[] scrollIds = Randomizer.getInstance().nextInt(
-					countBySale, numOfItems);
-
-				for (int i = 0; i < scrollIds.length; i++) {
-					if (sr.scroll(scrollIds[i])) {
-						ShoppingItem item = (ShoppingItem)sr.get(0);
-
-						list.add(item);
-
-						sr.first();
-					}
-				}
-			}
-
-			return list;
+			return QueryUtil.randomList(
+				q, HibernateUtil.getDialect(), countBySale, numOfItems);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

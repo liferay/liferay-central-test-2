@@ -22,6 +22,8 @@
 
 package com.liferay.util.dao.hibernate;
 
+import com.liferay.util.Randomizer;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -77,6 +79,36 @@ public class QueryUtil {
 				return list;
 			}
 		}
+	}
+
+	public static List randomList(
+		Query query, Dialect dialect, int total, int num) {
+
+		if ((total == 0) || (num == 0)) {
+			return new ArrayList();
+		}
+
+		if (num >= total) {
+			return list(query, dialect, ALL_POS, ALL_POS);
+		}
+
+		int[] scrollIds = Randomizer.getInstance().nextInt(total, num);
+
+		List list = new ArrayList();
+
+		ScrollableResults sr = query.scroll();
+
+		for (int i = 0; i < scrollIds.length; i++) {
+			if (sr.scroll(scrollIds[i])) {
+				Object obj = sr.get(0);
+
+				list.add(obj);
+
+				sr.first();
+			}
+		}
+
+		return list;
 	}
 
 	public static Comparable[] getPrevAndNext(

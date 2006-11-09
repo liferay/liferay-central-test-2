@@ -1205,6 +1205,10 @@
 			<forward name="portlet.message_boards.error" path="portlet.shopping.error" />
 		</action>
 
+		<action path="/shopping/notify" type="com.liferay.portlet.shopping.action.PayPalNotificationAction" />
+
+		<action path="/shopping/search" forward="portlet.shopping.search" />
+
 		<action path="/shopping/select_category" type="com.liferay.portlet.shopping.action.EditCategoryAction">
 			<forward name="portlet.shopping.edit_category" path="portlet.shopping.select_category" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
@@ -1224,12 +1228,6 @@
 			<forward name="portlet.shopping.edit_item" path="portlet.shopping.view_item" />
 			<forward name="portlet.shopping.error" path="portlet.shopping.error" />
 		</action>
-
-		<!--
-		<action path="/shopping/notify" type="com.liferay.portlet.shopping.action.PayPalNotificationAction" />
-
-		<action path="/shopping/search" forward="portlet.shopping.search" />
-		-->
 
 		<!-- Site Map -->
 
