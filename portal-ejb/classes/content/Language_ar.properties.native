@@ -2235,6 +2235,7 @@ volume=حجم
 vote-results=نتيجة التصويت
 vote=صوت
 votes=أصوات
+voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-has-expired=تحذيـر! نظرا لخمولك، تم إنهاء جلستك.
 warning-due-to-inactivity-your-session-will-expire=تحذيـر! نظرا لخمولك، سيتم إنهاء جلستك خلال {0} دقيقة في {1} {2}. هل تريد تمديد جلستك لـ {3} دقيقة أخرى؟
 website=موقع إلكتروني

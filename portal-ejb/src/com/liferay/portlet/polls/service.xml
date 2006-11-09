@@ -94,6 +94,7 @@
 		<exception>QuestionChoice</exception>
 		<exception>QuestionDescription</exception>
 		<exception>QuestionExpirationDate</exception>
+		<exception>QuestionExpired</exception>
 		<exception>QuestionTitle</exception>
 	</exceptions>
 </service-builder>

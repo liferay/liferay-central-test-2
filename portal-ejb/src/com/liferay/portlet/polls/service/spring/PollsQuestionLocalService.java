@@ -49,10 +49,6 @@ public interface PollsQuestionLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
-	public void checkQuestions()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException;
-
 	public void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

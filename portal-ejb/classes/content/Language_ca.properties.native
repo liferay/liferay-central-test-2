@@ -2059,6 +2059,7 @@ volume=Volumen
 vote-results=Resultats de la votació
 vote=Vot
 votes=Vots
+voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-has-expired=Atenció! Degut a la inactivitat, la seva sessió ha expirat.
 warning-due-to-inactivity-your-session-will-expire=Atenció! Degut a la inactivitat, la sessió expirarà en {0} minuts el {1} {2}. desitja extendre-la{3} minuts més?
 website=Lloc web

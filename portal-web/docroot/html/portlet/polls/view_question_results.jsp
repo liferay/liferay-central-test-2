@@ -114,3 +114,22 @@ NumberFormat percentFormat = NumberFormat.getPercentInstance(locale);
 <br>
 
 <b><%= LanguageUtil.get(pageContext, "total-votes") %>:</b> <%= numberFormat.format(totalVotes) %>
+
+<c:if test="<%= portletName.equals(PortletKeys.POLLS) %>">
+	<br><br>
+
+	<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
+	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "area") %></a>,
+	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "horizontal-bar") %></a>,
+	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "line") %></a>,
+	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "pie") %></a>,
+	<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "vertical-bar") %></a>
+</c:if>
+
+<c:if test="<%= question.isExpired() %>">
+	<br><br>
+
+	<span style="font-size: xx-small;">
+	<%= LanguageUtil.format(pageContext, "voting-is-disabled-because-this-poll-expired-on-x", dateFormatDateTime.format(question.getExpirationDate())) %>.
+	</span>
+</c:if>

@@ -31,7 +31,7 @@ List choices = PollsChoiceLocalServiceUtil.getChoices(question.getQuestionId());
 
 boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
-if (!hasVoted) {
+if (!question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE)) {
 	String cmd = ParamUtil.getString(request, Constants.CMD);
 
 	if (cmd.equals(Constants.ADD)) {
@@ -52,8 +52,7 @@ if (!hasVoted) {
 		catch (NoSuchChoiceException nsce) {
 			SessionErrors.add(renderRequest, nsce.getClass().getName());
 		}
-		catch (PrincipalException pe) {
-			SessionErrors.add(renderRequest, "vote_requires_user_id");
+		catch (QuestionExpiredException qee) {
 		}
 	}
 }
@@ -73,7 +72,7 @@ if (!hasVoted) {
 <br><br>
 
 <c:choose>
-	<c:when test="<%= !hasVoted %>">
+	<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
 		<table border="0" cellpadding="0" cellspacing="0">
 
 		<%

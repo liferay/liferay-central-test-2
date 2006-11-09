@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/polls/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "vote");
+String redirect = ParamUtil.getString(request, "redirect");
 
 PollsQuestion question = (PollsQuestion)request.getAttribute(WebKeys.POLLS_QUESTION);
 
@@ -53,7 +53,7 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 <br><br>
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("vote") && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
+	<c:when test='<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>'>
 		<table border="0" cellpadding="0" cellspacing="0">
 
 		<%
@@ -87,25 +87,25 @@ boolean hasVoted = PollsUtil.hasVoted(request, question.getQuestionId());
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "vote") %>' onClick="submitForm(document.<portlet:namespace />fm);">
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "see-current-results") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="tabs1" value="results" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "see-current-results") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jsp" %>
 
-		<br><br>
+		<c:choose>
+			<c:when test="<%= !question.isExpired() && !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
+				<br><br>
 
-		<b><%= LanguageUtil.get(pageContext, "charts") %>:</b>
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=area', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "area") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=horizontal_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "horizontal-bar") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=line', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "line") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=pie', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "pie") %></a>,
-		<a href="javascript: var viewChartWindow = window.open('<%= themeDisplay.getPathMain() %>/polls/view_chart?questionId=<%= question.getQuestionId() %>&chartType=vertical_bar', 'viewChart', 'directories=no,height=430,location=no,menubar=no,resizable=no,scrollbars=no,status=no,toolbar=no,width=420'); void(''); viewChartWindow.focus();"><%= LanguageUtil.get(pageContext, "vertical-bar") %></a>
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "back-to-vote") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
+			</c:when>
+			<c:when test="<%= Validator.isNotNull(redirect) %>">
+				<br><br>
 
-		<c:if test="<%= !hasVoted && PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.ADD_VOTE) %>">
-			<br><br>
-
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "back-to-vote") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/polls/view_question" /><portlet:param name="tabs1" value="vote" /><portlet:param name="questionId" value="<%= question.getQuestionId() %>" /></portlet:renderURL>';">
-		</c:if>
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "back") %>' onClick="self.location = '<%= redirect %>';">
+			</c:when>
+		</c:choose>
 	</c:otherwise>
 </c:choose>
 

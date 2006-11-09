@@ -64,13 +64,6 @@ public class PollsQuestionLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public static void checkQuestions()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
-		pollsQuestionLocalService.checkQuestions();
-	}
-
 	public static void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

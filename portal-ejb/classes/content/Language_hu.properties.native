@@ -117,6 +117,7 @@ to-email-joebloggs=* To email joebloggs@{0}, simply enter <i>joebloggs</i>
 upload-a-gif-or-jpeg-that-is-x-pixels-tall-and-x-pixels-wide=Upload a GIF or JPEG that is {0} pixels tall and {1} pixels wide.
 upload-documents-no-larger-than-x-k=Upload documents no larger than {0}k.
 upload-images-no-larger-than-x-k=Upload images no larger than {0}k.
+voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minute(s) on {1} {2}. Would you like to extend your session another {3} minute(s)?
 x-disables-the-minimum-order-requirement={0} disables the minimum order requirement.
 x-is-a-required-system-role=<b>{0}</b> is a required system role.

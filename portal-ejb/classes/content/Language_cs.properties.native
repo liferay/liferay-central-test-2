@@ -1497,6 +1497,7 @@ volume=Hlasitost
 vote-results=Výsledek hlasování
 vote=Hlasuj
 votes=Hlasování
+voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because this poll expired on {0}.
 warning-due-to-inactivity-your-session-has-expired=Varování! během Vaší neaktivity, session vyexpirovala.
 warning-due-to-inactivity-your-session-will-expire=Varování! během Vaší neaktivity, session vyexpiruje během {0} minut v {1} {2}. Přejete si prodloužit Vaši session o dalších {3} minut?
 website=Website

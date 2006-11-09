@@ -20,47 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.polls.job;
+package com.liferay.portlet.polls;
 
-import com.liferay.portal.job.IntervalJob;
-import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil;
-import com.liferay.util.Time;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="CheckQuestionJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="QuestionExpiredException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CheckQuestionJob implements IntervalJob {
+public class QuestionExpiredException extends PortalException {
 
-	public CheckQuestionJob() {
-		_interval = Time.MINUTE * 15;
+	public QuestionExpiredException() {
+		super();
 	}
 
-	public long getInterval() {
-		return _interval;
+	public QuestionExpiredException(String msg) {
+		super(msg);
 	}
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
-		try {
-			PollsQuestionLocalServiceUtil.checkQuestions();
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+	public QuestionExpiredException(String msg, Throwable cause) {
+		super(msg, cause);
 	}
 
-	private static Log _log = LogFactory.getLog(CheckQuestionJob.class);
-
-	private long _interval;
+	public QuestionExpiredException(Throwable cause) {
+		super(cause);
+	}
 
 }

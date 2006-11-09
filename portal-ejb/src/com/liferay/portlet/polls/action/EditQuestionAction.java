@@ -33,6 +33,7 @@ import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.QuestionDescriptionException;
 import com.liferay.portlet.polls.QuestionExpirationDateException;
+import com.liferay.portlet.polls.QuestionExpiredException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
@@ -102,9 +103,12 @@ public class EditQuestionAction extends PortletAction {
 					 e instanceof QuestionChoiceException ||
 					 e instanceof QuestionDescriptionException ||
 					 e instanceof QuestionExpirationDateException ||
+
 					 e instanceof QuestionTitleException) {
 
 				SessionErrors.add(req, e.getClass().getName());
+			}
+			else if (e instanceof QuestionExpiredException) {
 			}
 			else {
 				throw e;

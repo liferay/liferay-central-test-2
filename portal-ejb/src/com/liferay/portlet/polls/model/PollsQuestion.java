@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.polls.model;
 
+import java.util.Date;
+
 /**
  * <a href="PollsQuestion.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,6 +33,17 @@ package com.liferay.portlet.polls.model;
 public class PollsQuestion extends PollsQuestionModel {
 
 	public PollsQuestion() {
+	}
+
+	public boolean isExpired() {
+		Date expirationDate = getExpirationDate();
+
+		if ((expirationDate != null) && (expirationDate.before(new Date()))) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

@@ -28,9 +28,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portlet.polls.QuestionExpiredException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
+import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil;
 import com.liferay.portlet.polls.service.spring.PollsVoteService;
 
@@ -56,8 +58,14 @@ public class PollsVoteServiceImpl extends PrincipalBean
 				PollsQuestion.class.getName() + ".anonymous"));
 		}
 
+		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+
+		if (question.isExpired()) {
+			throw new QuestionExpiredException();
+		}
+
 		PollsQuestionPermission.check(
-			getPermissionChecker(), questionId, ActionKeys.ADD_VOTE);
+			getPermissionChecker(), question, ActionKeys.ADD_VOTE);
 
 		return PollsVoteLocalServiceUtil.addVote(userId, questionId, choiceId);
 	}

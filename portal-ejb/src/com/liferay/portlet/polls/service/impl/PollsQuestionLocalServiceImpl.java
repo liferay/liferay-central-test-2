@@ -141,22 +141,6 @@ public class PollsQuestionLocalServiceImpl
 			addGuestPermissions);
 	}
 
-	public void checkQuestions() throws PortalException, SystemException {
-		Date now = new Date();
-
-		List questions = PollsQuestionUtil.findAll();
-
-		for (int i = 0; i < questions.size(); i++) {
-			PollsQuestion question = (PollsQuestion)questions.get(i);
-
-			if (question.getExpirationDate() != null &&
-				question.getExpirationDate().before(now)) {
-
-				deleteQuestion(question.getQuestionId());
-			}
-		}
-	}
-
 	public void deleteQuestion(String questionId)
 		throws PortalException, SystemException {
 

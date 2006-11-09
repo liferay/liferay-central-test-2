@@ -229,7 +229,6 @@
 	<portlet>
 		<portlet-name>25</portlet-name>
 		<struts-path>polls</struts-path>
-		<scheduler-class>com.liferay.portlet.polls.job.Scheduler</scheduler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

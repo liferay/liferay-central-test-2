@@ -63,6 +63,7 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
 	rowURL.setParameter("struts_action", "/polls/view_question");
+	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("questionId", question.getQuestionId());
 
 	// Title

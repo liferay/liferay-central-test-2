@@ -27,8 +27,10 @@
 --%><%@ page import="com.liferay.portlet.polls.DuplicateVoteException" %><%--
 --%><%@ page import="com.liferay.portlet.polls.NoSuchChoiceException" %><%--
 --%><%@ page import="com.liferay.portlet.polls.NoSuchQuestionException" %><%--
+--%><%@ page import="com.liferay.portlet.polls.QuestionExpiredException" %><%--
 --%><%@ page import="com.liferay.portlet.polls.model.PollsChoice" %><%--
 --%><%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %><%--
 --%><%@ page import="com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil" %><%--
@@ -45,4 +47,6 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 String questionId = prefs.getValue("question-id", StringPool.BLANK);
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

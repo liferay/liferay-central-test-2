@@ -80,12 +80,6 @@ public class PollsQuestionLocalServiceEJBImpl
 			addGuestPermissions);
 	}
 
-	public void checkQuestions()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		getService().checkQuestions();
-	}
-
 	public void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
