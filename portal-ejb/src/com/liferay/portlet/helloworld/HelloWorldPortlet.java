@@ -51,8 +51,8 @@ public class HelloWorldPortlet extends GenericPortlet {
 
 		res.setContentType(Constants.TEXT_HTML);
 
-		res.getWriter().print("Welcome to " + 
-			ReleaseInfo.getReleaseInfo() + ".");
+		res.getWriter().print(
+			"Welcome to " + ReleaseInfo.getReleaseInfo() + ".");
 	}
 
 }

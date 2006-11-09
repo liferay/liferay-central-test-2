@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.util.FileUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.velocity.VelocityUtil;
 
@@ -79,76 +80,86 @@ public class DBBuilder {
 	}
 
 	private void _buildCreate() throws IOException {
+		_buildCreateDb2();
+		_buildCreateDerby();
+		_buildCreateFirebird();
+		_buildCreateMySQL();
+		_buildCreateOracle();
+		_buildCreatePostgreSQL();
+		_buildCreateSQLServer();
+		_buildCreateSybase();
+	}
 
-		// DB2
+	private void _buildCreateDb2() throws IOException {
+		_buildCreateDb2(false);
+		_buildCreateDb2(true);
+	}
 
-		File file = new File("../sql/create/create-db2.sql");
+	private void _buildCreateDb2(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
+
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-db2.sql");
 
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop database " + _databaseName + ";\n");
 		sb.append("create database " + _databaseName + ";\n");
 		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(FileUtil.read("../sql/portal/portal-db2.sql"));
+		sb.append(
+			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
+				minimalSuffix + "-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-db2.sql");
+	private void _buildCreateDerby() throws IOException {
+		_buildCreateDerby(false);
+		_buildCreateDerby(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreateDerby(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-db2.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-derby.sql");
 
-		FileUtil.write(file, sb.toString());
-
-		// Derby
-
-		file = new File("../sql/create/create-derby.sql");
-
-		sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop database " + _databaseName + ";\n");
 		sb.append("create database " + _databaseName + ";\n");
 		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(FileUtil.read("../sql/portal/portal-derby.sql"));
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-derby.sql");
+	private void _buildCreateFirebird() throws IOException {
+		_buildCreateFirebird(false);
+		_buildCreateFirebird(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreateFirebird(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("connect to " + _databaseName + ";\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-derby.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-derby.sql"));
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-firebird.sql");
 
-		FileUtil.write(file, sb.toString());
-
-		// Firebird
-
-		file = new File("../sql/create/create-firebird.sql");
-
-		sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		sb.append(
 			"create database '" + _databaseName +
@@ -157,30 +168,27 @@ public class DBBuilder {
 			"connect '" + _databaseName +
 				".gdb' user 'sysdba' password 'masterkey';\n");
 		sb.append(
-			_readSQL("../sql/portal/portal-firebird.sql", _FIREBIRD[0], ";\n"));
+			_readSQL(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-firebird.sql",
+				_FIREBIRD[0], ";\n"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-firebird.sql");
+	private void _buildCreateMySQL() throws IOException {
+		_buildCreateMySQL(false);
+		_buildCreateMySQL(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreateMySQL(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append(
-			"create database '" + _databaseName +
-				".gdb' page_size 8192 user 'sysdba' password 'masterkey';\n");
-		sb.append(
-			"connect '" + _databaseName +
-				".gdb' user 'sysdba' password 'masterkey';\n");
-		sb.append(
-			_readSQL("../sql/portal-minimal/portal-minimal-firebird.sql", _FIREBIRD[0], ";\n"));
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-mysql.sql");
 
-		FileUtil.write(file, sb.toString());
-
-		// MySQL
-
-		file = new File("../sql/create/create-mysql.sql");
-
-		sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop database if exists " + _databaseName + ";\n");
 		sb.append(
@@ -188,37 +196,31 @@ public class DBBuilder {
 		sb.append("use ");
 		sb.append(_databaseName);
 		sb.append(";\n\n");
-		sb.append(FileUtil.read("../sql/portal/portal-mysql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
-
-		FileUtil.write(file, sb.toString());
-
-		file = new File("../sql/create-minimal/create-minimal-mysql.sql");
-
-		sb = new StringBuffer();
-
-		sb.append("drop database if exists " + _databaseName + ";\n");
 		sb.append(
-			"create database " + _databaseName + " character set utf8;\n");
-		sb.append("use ");
-		sb.append(_databaseName);
-		sb.append(";\n\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-mysql.sql"));
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-mysql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-mysql.sql"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		// Oracle
+	private void _buildCreateOracle() throws IOException {
+		_buildCreateOracle(false);
+		_buildCreateOracle(true);
+	}
 
-		file = new File("../sql/create/create-oracle.sql");
+	private void _buildCreateOracle(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb = new StringBuffer();
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-oracle.sql");
+
+		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop user &1 cascade;\n");
 		sb.append("create user &1 identified by &2;\n");
@@ -226,7 +228,10 @@ public class DBBuilder {
 		sb.append("connect &1/&2;\n");
 		sb.append("set define off;\n");
 		sb.append("\n");
-		sb.append(FileUtil.read("../sql/portal/portal-oracle.sql"));
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-oracle.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
 		sb.append("\n\n");
@@ -235,66 +240,51 @@ public class DBBuilder {
 		sb.append("quit");
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-oracle.sql");
+	private void _buildCreatePostgreSQL() throws IOException {
+		_buildCreatePostgreSQL(false);
+		_buildCreatePostgreSQL(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreatePostgreSQL(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append("drop user &1 cascade;\n");
-		sb.append("create user &1 identified by &2;\n");
-		sb.append("grant connect,resource to &1;\n");
-		sb.append("connect &1/&2;\n");
-		sb.append("set define off;\n");
-		sb.append("\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-oracle.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-oracle.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-oracle.sql"));
-		sb.append("\n");
-		sb.append("quit");
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-postgresql.sql");
 
-		FileUtil.write(file, sb.toString());
-
-		// PostgreSQL
-
-		file = new File("../sql/create/create-postgresql.sql");
-
-		sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop database " + _databaseName + ";\n");
 		sb.append(
 			"create database " + _databaseName + " encoding = 'UNICODE';\n");
 		sb.append("\\c " + _databaseName + ";\n\n");
-		sb.append(FileUtil.read("../sql/portal/portal-postgresql.sql"));
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-postgresql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-postgresql.sql");
+	private void _buildCreateSQLServer() throws IOException {
+		_buildCreateSQLServer(false);
+		_buildCreateSQLServer(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreateSQLServer(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append(
-			"create database " + _databaseName + " encoding = 'UNICODE';\n");
-		sb.append("\\c " + _databaseName + ";\n\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-postgresql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-postgresql.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-postgresql.sql"));
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-sql-server.sql");
 
-		FileUtil.write(file, sb.toString());
-		
-		// SQL Server
-
-		file = new File("../sql/create/create-sql-server.sql");
-
-		sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		sb.append("drop database " + _databaseName + ";\n");
 		sb.append("create database " + _databaseName + ";\n");
@@ -302,53 +292,39 @@ public class DBBuilder {
 		sb.append("go\n");
 		sb.append("\n");
 		sb.append("use " + _databaseName + ";\n\n");
-		sb.append(FileUtil.read("../sql/portal/portal-sql-server.sql"));
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-sql-server.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
 
 		FileUtil.write(file, sb.toString());
+	}
 
-		file = new File("../sql/create-minimal/create-minimal-sql-server.sql");
+	private void _buildCreateSybase() throws IOException {
+		_buildCreateSybase(false);
+		_buildCreateSybase(true);
+	}
 
-		sb = new StringBuffer();
+	private void _buildCreateSybase(boolean minimal) throws IOException {
+		String minimalSuffix = _getMinimalSuffix(minimal);
 
-		sb.append("drop database " + _databaseName + ";\n");
-		sb.append("create database " + _databaseName + ";\n");
-		sb.append("\n");
-		sb.append("go\n");
-		sb.append("\n");
-		sb.append("use " + _databaseName + ";\n\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-sql-server.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sql-server.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sql-server.sql"));
+		File file = new File(
+			"../sql/create" + minimalSuffix + "/create" + minimalSuffix +
+				"-sybase.sql");
 
-		FileUtil.write(file, sb.toString());
-
-		// Sybase
-
-		file = new File("../sql/create/create-sybase.sql");
+		StringBuffer sb = new StringBuffer();
 
 		sb = new StringBuffer();
 
 		sb.append("use " + _databaseName + "\n\n");
-		sb.append(FileUtil.read("../sql/portal/portal-sybase.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
-		sb.append("\n\n");
-		sb.append(FileUtil.read("../sql/sequences/sequences-sybase.sql"));
-
-		FileUtil.write(file, sb.toString());
-
-		file = new File("../sql/create-minimal/create-minimal-sybase.sql");
-
-		sb = new StringBuffer();
-
-		sb.append("use " + _databaseName + "\n\n");
-		sb.append(FileUtil.read("../sql/portal-minimal/portal-minimal-sybase.sql"));
+		sb.append(
+			FileUtil.read(
+				"../sql/portal" + minimalSuffix + "/portal" + minimalSuffix +
+					"-sybase.sql"));
 		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/indexes/indexes-sybase.sql"));
 		sb.append("\n\n");
@@ -709,6 +685,15 @@ public class DBBuilder {
 		template = StringUtil.replace(template, "\n\n\n", "\n\n");
 
 		return template;
+	}
+
+	private String _getMinimalSuffix(boolean minimal) {
+		if (minimal) {
+			return "-minimal";
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	private String _readSQL(String fileName, String comments, String eol)

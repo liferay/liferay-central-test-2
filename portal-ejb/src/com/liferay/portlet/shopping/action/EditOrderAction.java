@@ -65,6 +65,12 @@ public class EditOrderAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteOrders(req);
 			}
+			else if (cmd.equals("sendOrderEmail")) {
+				//sendOrderEmail(req);
+			}
+			else if (cmd.equals("sendShippingEmail")) {
+				//sendShippingEmail(req);
+			}
 
 			sendRedirect(req, res);
 		}

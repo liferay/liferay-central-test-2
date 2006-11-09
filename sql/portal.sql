@@ -8,8 +8,6 @@
 
 @include portal-data-cms-layout.sql
 
-@include portal-data-company-minimal.sql
-
 @include portal-data-company.sql
 
 @include portal-data-company.vm
