@@ -2,7 +2,7 @@ function AjaxRequest(url, options) {
 	
 	var xmlHttpReq;
 	var opts = options;
-	var returnArgs = (opts.returnArgs == null) ? opts : opts.returnArgs;
+	var returnArgs = opts.returnArgs;
 	var method = opts.method;
 	var ajaxId = opts.ajaxId;
 
@@ -41,7 +41,7 @@ function AjaxRequest(url, options) {
 					if (xmlHttpReq.status == 200) {
 						var ajaxId = xmlHttpReq.getResponseHeader("Ajax-ID");
 						if (onComplete) {
-							onComplete(xmlHttpReq, opts);
+							onComplete(xmlHttpReq, returnArgs);
 						}
 		
 						if (ajaxId && ajaxId != "") {
