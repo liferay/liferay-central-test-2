@@ -37,20 +37,24 @@ WindowState windowState = renderRequest.getWindowState();
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= redirect %>";
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />saveOrder() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />sendEmail(emailType) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "sendEmail";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= currentURL %>";
-		document.<portlet:namespace />fm.<portlet:namespace />emailType.value = emailType;
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
 <input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
 <input name="<portlet:namespace />emailType" type="hidden" value="" />
 <input name="<portlet:namespace />deleteOrderIds" type="hidden" value="<%= orderId %>" />
@@ -625,6 +629,10 @@ for (int i = 0; itr.hasNext(); i++) {
 
 <c:if test="<%= !windowState.equals(LiferayWindowState.POP_UP) %>">
 	<br>
+
+	<c:if test="<%= shoppingPrefs.usePayPal() %>">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveOrder();">
+	</c:if>
 
 	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "invoice") %>' onClick="window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /><portlet:param name="orderId" value="<%= orderId %>" /></portlet:renderURL>');">
 

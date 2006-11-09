@@ -29,6 +29,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
+import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -134,18 +135,20 @@ public class EditOrderAction extends PortletAction {
 	}
 
 	protected void updateOrder(ActionRequest req) throws Exception {
-		//Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		String orderId = ParamUtil.getString(req, "orderId");
 
-		String name = ParamUtil.getString(req, "name");
+		String ppTxnId = ParamUtil.getString(req, "ppTxnId");
+		String ppPaymentStatus = ShoppingUtil.getPpPaymentStatus(
+			ParamUtil.getString(req, "ppPaymentStatus"));
+		double ppPaymentGross = ParamUtil.getDouble(req, "ppPaymentGross");
+		String ppReceiverEmail = ParamUtil.getString(req, "ppReceiverEmail");
+		String ppPayerEmail = ParamUtil.getString(req, "ppPayerEmail");
 
-		/*ShoppingOrderServiceUtil.updateOrder(
-			layout.getPlid(), orderId, name, description, startDateMonth,
-			startDateDay, startDateYear, startDateHour, startDateMinute,
-			endDateMonth, endDateDay, endDateYear, endDateHour,
-			endDateMinute, neverExpire, active, limitCategories, limitSkus,
-			minOrder, discount, discountType);*/
+		ShoppingOrderServiceUtil.completeOrder(
+			layout.getPlid(), orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
+			ppReceiverEmail, ppPayerEmail);
 	}
 
 }

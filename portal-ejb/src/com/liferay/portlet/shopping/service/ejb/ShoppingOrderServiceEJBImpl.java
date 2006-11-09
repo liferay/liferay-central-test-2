@@ -50,6 +50,17 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 		return (ShoppingOrderService)ctx.getBean(CLASS_NAME);
 	}
 
+	public void completeOrder(java.lang.String plid, java.lang.String orderId,
+		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
+		double ppPaymentGross, java.lang.String ppReceiverEmail,
+		java.lang.String ppPayerEmail)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		getService().completeOrder(plid, orderId, ppTxnId, ppPaymentStatus,
+			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+	}
+
 	public void deleteOrder(java.lang.String plid, java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

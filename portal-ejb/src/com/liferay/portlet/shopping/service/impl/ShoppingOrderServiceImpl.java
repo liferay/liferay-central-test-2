@@ -41,6 +41,20 @@ import com.liferay.portlet.shopping.service.spring.ShoppingOrderService;
 public class ShoppingOrderServiceImpl
 	extends PrincipalBean implements ShoppingOrderService {
 
+	public void completeOrder(
+			String plid, String orderId, String ppTxnId, String ppPaymentStatus,
+			double ppPaymentGross, String ppReceiverEmail, String ppPayerEmail)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.SHOPPING,
+			ActionKeys.MANAGE_ORDERS);
+
+		ShoppingOrderLocalServiceUtil.completeOrder(
+			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail, false);
+	}
+
 	public void deleteOrder(String plid, String orderId)
 		throws PortalException, SystemException {
 

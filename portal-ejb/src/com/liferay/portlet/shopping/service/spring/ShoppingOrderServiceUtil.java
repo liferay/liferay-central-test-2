@@ -29,6 +29,17 @@ package com.liferay.portlet.shopping.service.spring;
  *
  */
 public class ShoppingOrderServiceUtil {
+	public static void completeOrder(java.lang.String plid,
+		java.lang.String orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ShoppingOrderService shoppingOrderService = ShoppingOrderServiceFactory.getService();
+		shoppingOrderService.completeOrder(plid, orderId, ppTxnId,
+			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+	}
+
 	public static void deleteOrder(java.lang.String plid,
 		java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 

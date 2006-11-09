@@ -38,6 +38,22 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingOrderServiceSoap {
+	public static void completeOrder(java.lang.String plid,
+		java.lang.String orderId, java.lang.String ppTxnId,
+		java.lang.String ppPaymentStatus, double ppPaymentGross,
+		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
+		throws RemoteException {
+		try {
+			ShoppingOrderServiceUtil.completeOrder(plid, orderId, ppTxnId,
+				ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteOrder(java.lang.String plid,
 		java.lang.String orderId) throws RemoteException {
 		try {

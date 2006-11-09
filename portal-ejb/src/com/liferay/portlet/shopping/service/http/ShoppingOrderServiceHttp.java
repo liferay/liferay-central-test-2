@@ -43,6 +43,80 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ShoppingOrderServiceHttp {
+	public static void completeOrder(HttpPrincipal httpPrincipal,
+		java.lang.String plid, java.lang.String orderId,
+		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
+		double ppPaymentGross, java.lang.String ppReceiverEmail,
+		java.lang.String ppPayerEmail)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = orderId;
+
+			if (orderId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = ppTxnId;
+
+			if (ppTxnId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = ppPaymentStatus;
+
+			if (ppPaymentStatus == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new DoubleWrapper(ppPaymentGross);
+			Object paramObj5 = ppReceiverEmail;
+
+			if (ppReceiverEmail == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = ppPayerEmail;
+
+			if (ppPayerEmail == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ShoppingOrderServiceUtil.class.getName(),
+					"completeOrder",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteOrder(HttpPrincipal httpPrincipal,
 		java.lang.String plid, java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
