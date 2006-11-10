@@ -47,6 +47,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.apache.struts.Globals;
 
 /**
@@ -61,6 +64,10 @@ public class LoginPostAction extends Action {
 		throws ActionException {
 
 		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Running " + req.getRemoteUser());
+			}
+
 			HttpSession ses = req.getSession();
 
 			String companyId = PortalUtil.getCompanyId(req);
@@ -167,5 +174,7 @@ public class LoginPostAction extends Action {
 			throw new ActionException(e);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(LoginPostAction.class);
 
 }
