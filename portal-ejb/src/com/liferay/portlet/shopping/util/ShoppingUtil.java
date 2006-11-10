@@ -399,8 +399,6 @@ public class ShoppingUtil {
 
 				prefs = ShoppingPreferences.getInstance(
 					category.getCompanyId(), category.getGroupId());
-
-				break;
 			}
 
 			if (item.isRequiresShipping()) {
