@@ -101,7 +101,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>'>
+						<input class="form-text" name="<portlet:namespace />credentials" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value='<%= ParamUtil.getString(request, "credentials", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS)) %>'>
 					</td>
 				</tr>
 				</table>
