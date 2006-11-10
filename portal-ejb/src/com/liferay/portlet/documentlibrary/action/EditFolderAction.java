@@ -126,10 +126,9 @@ public class EditFolderAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues("guestPermissions");
 
 		if (Validator.isNull(folderId)) {
 
@@ -137,7 +136,7 @@ public class EditFolderAction extends PortletAction {
 
 			DLFolderServiceUtil.addFolder(
 				layout.getPlid(), parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 		}
 		else {
 

@@ -60,6 +60,32 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addFolder(userId, plid, parentFolderId, name,
+			description, communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addFolder(userId, plid, parentFolderId, name,
+			description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
 	public void addFolderResources(java.lang.String folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -75,6 +101,25 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 			com.liferay.portal.SystemException {
 		getService().addFolderResources(folder, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addFolderResources(java.lang.String folderId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addFolderResources(folderId, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addFolderResources(
+		com.liferay.portlet.documentlibrary.model.DLFolder folder,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addFolderResources(folder, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFolder(java.lang.String folderId)

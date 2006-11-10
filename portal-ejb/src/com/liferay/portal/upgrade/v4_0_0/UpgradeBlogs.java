@@ -35,6 +35,7 @@ import com.liferay.util.dao.DataAccess;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -84,7 +85,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 					ResourceActionsUtil.getModelResourceCommunityDefaultActions(
 						BlogsEntry.class.getName());
 
-				String[] communityPermissions = 
+				String[] communityPermissions =
 					(String[])actions.toArray(new String[0]);
 
 				actions =

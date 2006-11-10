@@ -57,6 +57,25 @@ public class DLFolderServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFolderModel addFolder(
+		java.lang.String plid, java.lang.String parentFolderId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.addFolder(plid,
+					parentFolderId, name, description, communityPermissions,
+					guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteFolder(java.lang.String folderId)
 		throws RemoteException {
 		try {

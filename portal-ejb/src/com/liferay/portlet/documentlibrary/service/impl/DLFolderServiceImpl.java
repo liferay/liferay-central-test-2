@@ -54,6 +54,20 @@ public class DLFolderServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public DLFolder addFolder(
+			String plid, String parentFolderId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), plid, parentFolderId,
+			ActionKeys.ADD_FOLDER);
+
+		return DLFolderLocalServiceUtil.addFolder(
+			getUserId(), plid, parentFolderId, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteFolder(String folderId)
 		throws PortalException, SystemException {
 

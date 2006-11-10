@@ -22,19 +22,19 @@
 
 package com.liferay.taglib.ui;
 
-import javax.servlet.ServletRequest;
-
-import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.StringUtil;
+
+import java.util.List;
+
+import javax.servlet.ServletRequest;
 
 /**
  * <a href="InputPermissionsTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  * @author  Wilson S. Man
- * 
+ *
  */
 public class InputPermissionsTag extends IncludeTag {
 
@@ -43,33 +43,33 @@ public class InputPermissionsTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:input-permissions:formName", _formName);
 
-		if(_modelName != null) {
+		if (_modelName != null) {
+			List supportedActions =
+				ResourceActionsUtil.getModelResourceActions(_modelName);
+			List communityDefaultActions =
+				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+					_modelName);
+			List guestDefaultActions =
+				ResourceActionsUtil.getModelResourceGuestDefaultActions(
+					_modelName);
+			List guestUnsupportedActions =
+				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
+					_modelName);
 
 			req.setAttribute(
 				"liferay-ui:input-permissions:modelName", _modelName);
-
 			req.setAttribute(
 				"liferay-ui:input-permissions:supportedActions",
-				StringUtil.merge(ResourceActionsUtil.getModelResourceActions(
-					_modelName)));
-
+				supportedActions);
 			req.setAttribute(
 				"liferay-ui:input-permissions:communityDefaultActions",
-				StringUtil.merge(
-					ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-						_modelName)));
-
+				communityDefaultActions);
 			req.setAttribute(
 				"liferay-ui:input-permissions:guestDefaultActions",
-				StringUtil.merge(
-					ResourceActionsUtil.getModelResourceGuestDefaultActions(
-						_modelName)));
-
+				guestDefaultActions);
 			req.setAttribute(
 				"liferay-ui:input-permissions:guestUnsupportedActions",
-				StringUtil.merge(
-					ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
-						_modelName)));
+				guestUnsupportedActions);
 		}
 
 		return EVAL_BODY_BUFFERED;

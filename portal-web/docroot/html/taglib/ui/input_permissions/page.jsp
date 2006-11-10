@@ -24,176 +24,179 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+
 <%
 String formName = namespace + request.getAttribute("liferay-ui:input-permissions:formName");
-String modelName = (String) request.getAttribute("liferay-ui:input-permissions:modelName");
+String modelName = (String)request.getAttribute("liferay-ui:input-permissions:modelName");
 %>
 
 <c:choose>
-<c:when test="<%= modelName != null %>">
+	<c:when test="<%= modelName != null %>">
 
-	<%
-	String[] communityPermissions = request.getParameterValues("communityPermissions");
-	String[] guestPermissions = request.getParameterValues("guestPermissions");
+		<%
+		List communityPermissions = ListUtil.fromArray(request.getParameterValues("communityPermissions"));
+		List guestPermissions = ListUtil.fromArray(request.getParameterValues("guestPermissions"));
 
-	String supportedActions = (String) request.getAttribute("liferay-ui:input-permissions:supportedActions");
-	String communityDefaultActions = (String) request.getAttribute("liferay-ui:input-permissions:communityDefaultActions");
-	String guestDefaultActions = (String) request.getAttribute("liferay-ui:input-permissions:guestDefaultActions");
-	String guestUnsupportedActions = (String) request.getAttribute("liferay-ui:input-permissions:guestUnsupportedActions");
+		List supportedActions = (List)request.getAttribute("liferay-ui:input-permissions:supportedActions");
+		List communityDefaultActions = (List)request.getAttribute("liferay-ui:input-permissions:communityDefaultActions");
+		List guestDefaultActions = (List)request.getAttribute("liferay-ui:input-permissions:guestDefaultActions");
+		List guestUnsupportedActions = (List)request.getAttribute("liferay-ui:input-permissions:guestUnsupportedActions");
 
-	String[] labels = StringUtil.split(supportedActions);
+		boolean submitted = (request.getParameter("communityPermissions") != null);
 
-	StringBuffer sb = new StringBuffer(labels.length);
+		boolean inputPermissionsShowConfigure = ParamUtil.getBoolean(request, "inputPermissionsShowConfigure");
+		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
+		%>
 
-	for(int i = 0; i < labels.length; i++) {
-
-		sb.append(LanguageUtil.get(pageContext, "action." + labels[i]));
-
-		if(i < labels.length - 1) {
-			sb.append(",");
-		}
-	}
-	%>
-
-	<input type="hidden" name="<%= namespace %>liferay-ui:input-permissions:submitted" value="true" />
-
-	<table cellpadding="3" cellspacing="3" border="0">
-		<tr>
-			<th><%= LanguageUtil.get(pageContext, "actions") %></th>
-			<th><%= LanguageUtil.get(pageContext, "community") %></th>
-			<th><%= LanguageUtil.get(pageContext, "guest") %></th>
+		<table cellpadding="4" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="border-left: 1px solid <%= colorScheme.getPortletMenuBg() %>; border-right: 1px solid <%= colorScheme.getPortletMenuBg() %>; border-top: 1px solid <%= colorScheme.getPortletMenuBg() %>; display: <%= inputPermissionsShowConfigure ? "" : "none" %>;" width="100%">
+		<tr class="portlet-section-header" style="font-weight: bold;">
+			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<%= LanguageUtil.get(pageContext, "action") %>
+			</td>
+			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<%= LanguageUtil.get(pageContext, "community") %>
+			</td>
+			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<%= LanguageUtil.get(pageContext, "guest") %>
+			</td>
 		</tr>
-		<tbody id="<%= namespace %>default_perm">
-		</tbody>
-		<tbody style="display: none;" id="<%= namespace %>others_perm">
-		</tbody>
-		<tbody>
-			<tr>
-				<td colspan="3" style="text-align: right;">
-					<input id="<%= namespace %>advance_button" class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "advance") %>" onClick="<%= namespace %>toggleAdvance();" />
+
+		<%
+		for (int i = 0; i < supportedActions.size(); i++) {
+			String action = (String)supportedActions.get(i);
+
+			boolean communityChecked = communityDefaultActions.contains(action);
+			boolean guestChecked = guestDefaultActions.contains(action);
+			boolean guestDisabled = guestUnsupportedActions.contains(action);
+
+			if (submitted) {
+				communityChecked = communityPermissions.contains(action);
+				guestChecked = guestPermissions.contains(action);
+			}
+
+			if (guestDisabled) {
+				guestChecked = false;
+			}
+
+			boolean showAction = false;
+
+			if (inputPermissionsShowMore || communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
+				showAction = true;
+			}
+		%>
+
+			<tr id="<%= namespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
+				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+					<%= ResourceActionsUtil.getAction(pageContext, action) %>
+				</td>
+				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+					<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
+				</td>
+				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
-		</tbody>
-	</table>
 
-	<script type="text/javascript">
-		function <%= namespace %>contains(permArray, permStr) {
-			for(j = 0; j < permArray.length; j++) {
-				if(permArray[j] == permStr) {
-					return true;
+		<%
+		}
+		%>
+
+		</table>
+
+		<input id="<%= namespace %>inputPermissionsShowConfigure" name="<%= namespace %>inputPermissionsShowConfigure" type="hidden" value="<%= inputPermissionsShowConfigure %>">
+		<input id="<%= namespace %>inputPermissionsShowMore" name="<%= namespace %>inputPermissionsShowMore" type="hidden" value="<%= inputPermissionsShowMore %>">
+
+		<div id="<%= namespace %>inputPermissionsConfigureLink" style="display: <%= inputPermissionsShowConfigure ? "none" : "" %>;">
+		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><%= LanguageUtil.get(pageContext, "configure") %> &raquo;</a>
+		</div>
+
+		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>; padding-top: 5px;">
+		<a href="javascript: <%= namespace %>inputPermissionsMore();"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
+		</div>
+
+		<script type="text/javascript">
+			function <%= namespace %>inputPermissionsConfigure() {
+				document.getElementById("<%= namespace %>inputPermissionsTable").style.display = "";
+				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "";
+
+				<%
+				for (int i = 0; i < supportedActions.size(); i++) {
+					String action = (String)supportedActions.get(i);
+
+					if (communityDefaultActions.contains(action) || guestDefaultActions.contains(action)) {
+				%>
+
+						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
+
+				<%
+					}
+				}
+				%>
+
+				document.getElementById("<%= namespace %>inputPermissionsConfigureLink").style.display = "none";
+				document.getElementById("<%= namespace %>inputPermissionsShowConfigure").value = "true";
+			}
+
+			function <%= namespace %>inputPermissionsMore() {
+
+				<%
+				for (int i = 0; i < supportedActions.size(); i++) {
+					String action = (String)supportedActions.get(i);
+
+					if (!communityDefaultActions.contains(action) && !guestDefaultActions.contains(action)) {
+				%>
+
+						document.getElementById("<%= namespace %>inputPermissionsAction<%= action %>").style.display = "";
+
+				<%
+					}
+				}
+				%>
+
+				document.getElementById("<%= namespace %>inputPermissionsMoreLink").style.display = "none";
+				document.getElementById("<%= namespace %>inputPermissionsShowMore").value = "true";
+			}
+		</script>
+	</c:when>
+	<c:otherwise>
+
+		<%
+		boolean addCommunityPermissions = ParamUtil.getBoolean(request, "addCommunityPermissions", true);
+		boolean addGuestPermissions = ParamUtil.getBoolean(request, "addGuestPermissions", true);
+		%>
+
+		<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>">
+		<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>">
+
+		<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-community") %><br>
+		<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-guest") %><br>
+		<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <%= LanguageUtil.get(pageContext, "only-assign-permissions-to-me") %>
+
+		<script type="text/javascript">
+			function <%= namespace %>checkCommunityAndGuestPermissions() {
+				if (document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked ||
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
+
+					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = false;
+				}
+				else if (!document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked &&
+						 !document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
+
+					document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = true;
 				}
 			}
-			return false;
-		}
 
-		function <%= namespace %>toggleAdvance() {
-			$("<%= namespace %>others_perm").style.display = is_ie ? "block" : "table-row-group";
-			$("<%= namespace %>advance_button").disabled = true;
-		}
-
-		var <%= namespace %>labels = '<%= sb.toString() %>'.split(",");
-
-		var <%= namespace %>selComActions = '<%= ParamUtil.getBoolean(request, "liferay-ui:input-permissions:submitted") ? StringUtil.merge(communityPermissions) : communityDefaultActions %>'.split(",");
-		var <%= namespace %>selGuestActions = '<%= ParamUtil.getBoolean(request, "liferay-ui:input-permissions:submitted") ? StringUtil.merge(guestPermissions) : guestDefaultActions %>'.split(",");
-
-		var <%= namespace %>supportedActions = '<%= supportedActions %>'.split(",");
-		var <%= namespace %>communityDefaultActions = '<%= communityDefaultActions %>'.split(",");
-		var <%= namespace %>guestDefaultActions = '<%= guestDefaultActions %>'.split(",");
-		var <%= namespace %>guestUnsupportedActions = '<%= guestUnsupportedActions %>'.split(",");
-
-		for(i = 0; i < <%= namespace %>supportedActions.length; i++) {
-			newTR = document.createElement("tr");
-
-			if(<%= namespace %>contains(<%= namespace %>communityDefaultActions, <%= namespace %>supportedActions[i]) ||
-				<%= namespace %>contains(<%= namespace %>guestDefaultActions, <%= namespace %>supportedActions[i])) {
-				$("<%= namespace %>default_perm").appendChild(newTR);
-			}
-			else {
-				$("<%= namespace %>others_perm").appendChild(newTR);
-
-				if(<%= namespace %>contains(<%= namespace %>selComActions, <%= namespace %>supportedActions[i]) ||
-					<%= namespace %>contains(<%= namespace %>selGuestActions, <%= namespace %>supportedActions[i])) {
-					<%= namespace %>toggleAdvance();
+			function <%= namespace %>checkUserPermissions() {
+				if (document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked) {
+					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = false;
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = false;
+				}
+				else {
+					document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = true;
+					document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = true;
 				}
 			}
-
-			newTD = document.createElement("td");
-			newTD.align = "right";
-			newTD.className = "portlet-form-label";
-			newTD.innerHTML = <%= namespace %>labels[i];
-			newTR.appendChild(newTD);
-
-			newTD = document.createElement("td");
-			newTD.align = "center";
-			newTR.appendChild(newTD);
-
-			newINPUT = document.createElement("input");
-			newINPUT.type = 'checkbox';
-			newINPUT.name = '<%= namespace %>communityPermissions';
-			newINPUT.value = <%= namespace %>supportedActions[i];
-			newTD.appendChild(newINPUT);
-			if(<%= namespace %>contains(<%= namespace %>selComActions, <%= namespace %>supportedActions[i])) {
-				newINPUT.checked = true;
-			}
-
-			newTD = document.createElement("td");
-			newTD.align = "center";
-			newTR.appendChild(newTD);
-
-			newINPUT = document.createElement("input");
-			newINPUT.type = 'checkbox';
-			newINPUT.name = '<%= namespace %>guestPermissions';
-			newINPUT.value = <%= namespace %>supportedActions[i];
-			newTD.appendChild(newINPUT);
-			if(<%= namespace %>contains(<%= namespace %>guestUnsupportedActions, <%= namespace %>supportedActions[i])) {
-				newINPUT.disabled = true;
-			}
-			else if(<%= namespace %>contains(<%= namespace %>selGuestActions, <%= namespace %>supportedActions[i])) {
-				newINPUT.checked = true;
-			}
-		}
-	</script>
-
-</c:when>
-<c:otherwise>
-
-	<%
-	boolean addCommunityPermissions = ParamUtil.getBoolean(request, "addCommunityPermissions", true);
-	boolean addGuestPermissions = ParamUtil.getBoolean(request, "addGuestPermissions", true);
-	%>
-
-	<input name="<%= namespace %>addCommunityPermissions" type="hidden" value="<%= addCommunityPermissions %>">
-	<input name="<%= namespace %>addGuestPermissions" type="hidden" value="<%= addGuestPermissions %>">
-
-	<input <%= addCommunityPermissions ? "checked" : "" %> name="<%= namespace %>addCommunityPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-community") %><br>
-	<input <%= addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addGuestPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addGuestPermissions.value = this.checked; <%= namespace %>checkCommunityAndGuestPermissions();"> <%= LanguageUtil.get(pageContext, "assign-default-permissions-to-guest") %><br>
-	<input <%= !addCommunityPermissions && !addGuestPermissions ? "checked" : "" %> name="<%= namespace %>addUserPermissionsBox" type="checkbox" onClick="document.<%= formName %>.<%= namespace %>addCommunityPermissions.value = !this.checked; document.<%= formName %>.<%= namespace %>addGuestPermissions.value = !this.checked; <%= namespace %>checkUserPermissions();"> <%= LanguageUtil.get(pageContext, "only-assign-permissions-to-me") %>
-
-	<script type="text/javascript">
-		function <%= namespace %>checkCommunityAndGuestPermissions() {
-			if (document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked ||
-				document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
-
-				document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = false;
-			}
-			else if (!document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked &&
-					 !document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked) {
-
-				document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked = true;
-			}
-		}
-
-		function <%= namespace %>checkUserPermissions() {
-			if (document.<%= formName %>.<%= namespace %>addUserPermissionsBox.checked) {
-				document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = false;
-				document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = false;
-			}
-			else {
-				document.<%= formName %>.<%= namespace %>addCommunityPermissionsBox.checked = true;
-				document.<%= formName %>.<%= namespace %>addGuestPermissionsBox.checked = true;
-			}
-		}
-	</script>
-
-</c:otherwise>
+		</script>
+	</c:otherwise>
 </c:choose>

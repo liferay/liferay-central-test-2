@@ -32,11 +32,8 @@ import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
-import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.spring.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 

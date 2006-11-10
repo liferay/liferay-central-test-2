@@ -22,35 +22,16 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Date;
-import java.util.Iterator;
-import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.index.Term;
-import org.apache.lucene.queryParser.ParseException;
-import org.apache.lucene.search.BooleanClause;
-import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
-import org.apache.lucene.search.TermQuery;
-
 import com.liferay.counter.service.spring.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
-import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
 import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -74,6 +55,23 @@ import com.liferay.util.lucene.Hits;
 
 import de.nava.informa.core.ChannelIF;
 import de.nava.informa.impl.basic.ChannelBuilder;
+
+import java.io.IOException;
+
+import java.net.URL;
+
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.index.Term;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanClause;
+import org.apache.lucene.search.BooleanQuery;
+import org.apache.lucene.search.Searcher;
+import org.apache.lucene.search.TermQuery;
 
 /**
  * <a href="BlogsEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
