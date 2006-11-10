@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
+String tabs1 = ParamUtil.getString(request, "tabs1", "categories");
+
 String tabs1Names = "categories,cart";
 
 if (!user.isDefaultUser()) {
@@ -50,10 +52,19 @@ PortletURL cartURL = renderResponse.createRenderURL();
 cartURL.setWindowState(WindowState.MAXIMIZED);
 
 cartURL.setParameter("struts_action", "/shopping/cart");
+
+if (!tabs1.equals("cart")) {
+	cartURL.setParameter("redirect", currentURL);
+}
+
+// Back URL
+
+String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <liferay-ui:tabs
 	names="<%= tabs1Names %>"
 	url="<%= viewURL.toString() %>"
 	url1="<%= cartURL.toString() %>"
+	backURL="<%= backURL %>"
 />

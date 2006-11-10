@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/shopping/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ShoppingCart cart = ShoppingUtil.getCart(renderRequest);
 
 Map items = cart.getItems();
@@ -97,11 +99,12 @@ boolean minQuantityMultiple = PrefsPropsUtil.getBoolean(company.getCompanyId(), 
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/cart" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveCart(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
-<input name="<portlet:namespace />redirect" type="hidden" value="">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
 <input name="<portlet:namespace />itemIds" type="hidden" value="">
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="cart" />
+	<liferay-util:param name="backURL" value="<%= redirect %>" />
 </liferay-util:include>
 
 <liferay-ui:error exception="<%= CartMinQuantityException.class %>">
