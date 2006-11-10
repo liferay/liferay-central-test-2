@@ -1872,7 +1872,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=The group cann
 the-group-could-not-be-found=The group could not be found.
 the-item-could-not-be-found=The item could not be found.
 the-item-sku-you-requested-is-already-taken=The item SKU you requested is already taken.
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example: ldap://localhost:389 and ou=Users,o=Example
 the-link-could-not-be-found=The link could not be found.
 the-message-board-is-empty=The message board is empty.
 the-message-could-not-be-found=The message could not be found.

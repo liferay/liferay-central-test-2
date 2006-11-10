@@ -23,7 +23,6 @@
 package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.model.Role;
-import com.liferay.portal.security.auth.LDAPAuth;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.spring.CompanyServiceUtil;
 import com.liferay.portal.service.spring.RoleLocalServiceUtil;
@@ -32,7 +31,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.InstancePool;
+import com.liferay.util.LDAPUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
@@ -212,7 +211,8 @@ public class EditUsersAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		boolean required = ParamUtil.getBoolean(req, "required");
-		String url = ParamUtil.getString(req, "url");
+		String baseProviderURL = ParamUtil.getString(req, "base_provider_url");
+		String baseDN = ParamUtil.getString(req, "base_dn");
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
 		String searchFilter = ParamUtil.getString(req, "searchFilter");
@@ -228,7 +228,8 @@ public class EditUsersAction extends PortletAction {
 					Context.INITIAL_CONTEXT_FACTORY,
 					PrefsPropsUtil.getString(
 						PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
-				env.put(Context.PROVIDER_URL, url);
+				env.put(Context.PROVIDER_URL, LDAPUtil.getFullProviderURL(
+					baseProviderURL, baseDN));
 				env.put(Context.SECURITY_PRINCIPAL, principal);
 				env.put(Context.SECURITY_CREDENTIALS, credentials);
 
@@ -253,7 +254,9 @@ public class EditUsersAction extends PortletAction {
 			PropsUtil.AUTH_IMPL_LDAP_ENABLED, Boolean.toString(enabled));
 		prefs.setValue(
 			PropsUtil.AUTH_IMPL_LDAP_REQUIRED, Boolean.toString(required));
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL, url);
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL, 
+			baseProviderURL);
+		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_BASE_DN, baseDN);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL, principal);
 		prefs.setValue(
 			PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS, credentials);
@@ -264,9 +267,6 @@ public class EditUsersAction extends PortletAction {
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS, userMappings);
 
 		prefs.store();
-
-		LDAPAuth ldapAuth = (LDAPAuth)InstancePool.get(
-			LDAPAuth.class.getName());
 	}
 
 	protected void updateMailHostNames(

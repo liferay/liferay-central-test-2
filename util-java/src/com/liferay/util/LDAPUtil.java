@@ -90,4 +90,7 @@ public class LDAPUtil {
 		return new String[] {firstName, middleName, lastName};
 	}
 
+	public static String getFullProviderURL(String baseURL, String baseDN) {
+		return baseURL + StringPool.SLASH + baseDN;
+	}
 }

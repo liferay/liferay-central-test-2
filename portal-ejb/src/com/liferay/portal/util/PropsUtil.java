@@ -219,9 +219,9 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
 
-    public static final String LDAP_IMPORT_PROVIDER_URL = "ldap.import.provider.url";
+    public static final String LDAP_IMPORT_BASE_PROVIDER_URL = "ldap.import.base.provider.url";
 
-    public static final String LDAP_IMPORT_CONTEXT = "ldap.import.context";
+    public static final String LDAP_IMPORT_BASE_DN = "ldap.import.base.dn";
 
 	public static final String LDAP_IMPORT_SECURITY_PRINCIPAL = "ldap.import.security.principal";
 
@@ -247,9 +247,9 @@ public class PropsUtil {
 
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
-    public static final String AUTH_IMPL_LDAP_PROVIDER_URL = "auth.impl.ldap.provider.url";
+    public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
 
-    public static final String AUTH_IMPL_LDAP_CONTEXT = "auth.impl.ldap.context";
+    public static final String AUTH_IMPL_LDAP_BASE_DN = "auth.impl.ldap.base.dn";
 
 	public static final String AUTH_IMPL_LDAP_SECURITY_PRINCIPAL = "auth.impl.ldap.security.principal";
 

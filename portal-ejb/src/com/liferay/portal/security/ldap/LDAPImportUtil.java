@@ -138,7 +138,7 @@ public class LDAPImportUtil {
 		env.put(
 			Context.PROVIDER_URL,
 			PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_PROVIDER_URL));
+				companyId, PropsUtil.LDAP_IMPORT_BASE_PROVIDER_URL));
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(
@@ -197,7 +197,7 @@ public class LDAPImportUtil {
 				companyId, PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
 
 			String context = PrefsPropsUtil.getString(
-				companyId, PropsUtil.LDAP_IMPORT_CONTEXT);
+				companyId, PropsUtil.LDAP_IMPORT_BASE_DN);
 
 			NamingEnumeration enu = ctx.search(context, filter, null);
 

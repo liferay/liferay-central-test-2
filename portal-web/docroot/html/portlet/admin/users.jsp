@@ -70,11 +70,20 @@
 				<table border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td>
-						<%= LanguageUtil.get(pageContext, "url") %>
+						<%= LanguageUtil.get(pageContext, "base-provider-url") %>
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "url", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_PROVIDER_URL)) %>'>
+						<input class="form-text" name="<portlet:namespace />base_provider_url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "base_provider_url", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL)) %>'>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "base-dn") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="<portlet:namespace />base_dn" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "base_dn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_DN)) %>'>
 					</td>
 				</tr>
 				<tr>
