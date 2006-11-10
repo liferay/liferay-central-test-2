@@ -56,14 +56,6 @@ if (entry != null) {
 }
 %>
 
-<style type="text/css">
-	.blogs_entry_section_label {
-		text-align: right;
-		font-weight: bold;
-		vertical-align: top;
-	}
-</style>
-
 <script type="text/javascript">
 	function initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
@@ -85,7 +77,7 @@ if (entry != null) {
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>">
@@ -94,25 +86,25 @@ if (entry != null) {
 
 <liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
-<table border="0" cellpadding="2" cellspacing="3">
+<table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td class="blogs_entry_section_label">
+	<td>
 		<%= LanguageUtil.get(pageContext, "title") %>
 	</td>
-	<td style="padding-left: 3px;"></td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="title" />
 	</td>
 </tr>
 <tr>
-	<td class="blogs_entry_section_label">
+	<td>
 		<%= LanguageUtil.get(pageContext, "category") %>
 	</td>
-	<td style="padding-left: 3px;"></td>
+	<td style="padding-left: 10px;"></td>
 	<td>
 		<input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>">
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/view" /><portlet:param name="tabs1" value="categories" /><portlet:param name="categoryId" value="<%= categoryId %>" /></portlet:renderURL>" id="<portlet:namespace />categoryName">
 		<%= categoryName %>
 		</a>
 
@@ -120,39 +112,62 @@ if (entry != null) {
 	</td>
 </tr>
 <tr>
-	<td class="blogs_entry_section_label">
-		&nbsp;
+	<td colspan="3">
+		<br>
 	</td>
-	<td style="padding-left: 3px;"></td>
-	<td style="background-color: #EFEFDE; text-align: right;">
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "display-date") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
+	</td>
+</tr>
+<tr>
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "content") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" />
 
-		<input name="<portlet:namespace />content" type="hidden" value=""><br /><span class="blogs_entry_section_label" style="vertical-align: middle;"><%= LanguageUtil.get(pageContext, "display-date") %>&nbsp;<liferay-ui:input-field model="<%= BlogsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" /></span>
+		<input name="<portlet:namespace />content" type="hidden" value="">
 	</td>
 </tr>
 
 <c:if test="<%= entry == null %>">
 	<tr>
-		<td class="blogs_entry_section_label">
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
 		</td>
-		<td style="padding-left: 3px;"></td>
+		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions modelName="<%= BlogsEntry.class.getName() %>" />
+			<liferay-ui:input-permissions
+				modelName="<%= BlogsEntry.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>
 
-<tr>
-	<td>
-	</td>
-	<td style="padding-left: 3px;"></td>
-	<td>
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveEntry(); return false;">
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
-	</td>
-</tr>
 </table>
+
+<br>
+
+<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+
+<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 
 </form>
 
