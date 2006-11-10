@@ -782,24 +782,24 @@ var PortletHeaderBar = {
 	}
 }
 
-var PhotoSlider = {
-	TOTAL_FRAMES: 20,
-	count: 0,
-	page: 0,
-	timer: 0,
-	totalPages: 0,
-	windowWidth: 0,
-	slidingWindow: null,
-	start: 0,
-	photos: null,
+var PhotoSlider = Class.create();
+PhotoSlider.prototype = {
 	
-	init: function (options) {
-		this.photos = $(options.photos);
+	initialize: function (slidingWindow, windowWidth, photos, totalPages, varName) {
+		this.TOTAL_FRAMES = 20;
+		this.count = 0;
+		this.page = 0;
+		this.timer = 0;
+		this.start = 0;
+
+		this.photos = $(photos);
 		this.photos.style.position = "relative";
 		this.photos.style.left = "0px";
-		this.slidingWindow = $(options.slidingWindow);
-		this.windowWidth = options.windowWidth;
-		this.totalPages = options.totalPages;
+
+		this.slidingWindow = $(slidingWindow);
+		this.windowWidth = windowWidth;
+		this.totalPages = totalPages;
+		this.varName = varName;
 	},
 	
 	animate: function() {
@@ -810,7 +810,7 @@ var PhotoSlider = {
 			
 			this.photos.style.left = this.start + (delta * ratio2);
 			this.count++;
-			this.timer = setTimeout("PhotoSlider.animate()", 30);
+			this.timer = setTimeout(this.varName + ".animate()", 30);
 		}
 		else {
 			this.timer = 0;
@@ -825,7 +825,7 @@ var PhotoSlider = {
 			this.count = 0;
 			
 			if (!this.timer) {
-				this.timer = setTimeout("PhotoSlider.animate()", 30);
+				this.timer = setTimeout(this.varName + ".animate()", 30);
 			}
 		}
 	},
@@ -838,7 +838,7 @@ var PhotoSlider = {
 			this.count = 0;
 			
 			if (!this.timer) {
-				this.timer = setTimeout("PhotoSlider.animate()", 30);
+				this.timer = setTimeout(this.varName + ".animate()", 30);
 			}
 		}
 	}
