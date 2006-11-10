@@ -85,12 +85,58 @@ var Bubble = {
 		EXP: 0, //expand
 		COL: 1  //collapse
 	},
-	FRAMES: 10,
-	MAX_DIST: 150,
+	
+	ORDER: [0,1,4,5,2,8,6,9,3,12,10,7,13,11,14,15],
+	FRAME_C: 0.08,
 	
 	count: 0,
+	constants: null,
+	dock: null,
+	dockIcons: null,
 	modeTimer: 0,
 
+	init: function() {
+		var constants = new Array();
+			
+		for (var i = 0; i < 4; i++) {
+			for (var j = 0; j < 4; j++) {
+				var box = new Object();
+				var x = j * (-54);
+				var y = i * (54);
+				var h = Math.sqrt(x*x + y*y);
+				box.toString = function() {
+					return("h: " + this.h);
+				}
+				
+				box.h = h;
+				box.x = x;
+				box.y = y;
+				box.lastFrame = h * this.FRAME_C;
+				if (h) {
+					box.sin = y/h;
+					box.cos = x/h;
+				}
+				
+				constants.push(box);
+			}
+		}
+
+		var self = this;
+		var dock = $("portal-dock");
+		var dockIcons = document.getElementsByClassName("portal-dock-box", dock);
+
+		this.dock = dock;
+		this.dockIcons = dockIcons;
+		this.constants = constants;
+		dock.onmouseover = this.expand.bindAsEventListener(this);
+		dock.onmouseout = this.collapse.bindAsEventListener(this);
+
+		dockIcons.each(function(item, index) {
+			item.onmouseout = self.collapse.bindAsEventListener(self);
+			item.constants = self.constants[self.ORDER[index]];
+		});
+	},
+	
 	setMode: function(mode) {
 		Bubble.direction = mode;
 
@@ -99,7 +145,7 @@ var Bubble = {
 		}
 	},
 
-	collapse: function(obj) {
+	collapse: function() {
 		if (Bubble.modeTimer) {
 			clearTimeout(Bubble.modeTimer);
 		}
@@ -107,7 +153,7 @@ var Bubble = {
 		Bubble.modeTimer = setTimeout("Bubble.setMode(Bubble.MODE.COL)", 200);
 	},
 
-	expand: function(obj) {
+	expand: function(event) {
 		if (Bubble.modeTimer) {
 			clearTimeout(Bubble.modeTimer);
 		}
@@ -117,79 +163,62 @@ var Bubble = {
 
 	animate: function(obj) {
 		var collapse = (Bubble.direction == Bubble.MODE.COL);
-		var count = Bubble.count;
-		var list = obj.getElementsByTagName("div");
+		var count = this.count;
+		var list = this.dockIcons;
 		var angle = 0; // degrees
 		var dur = 100; // percentage
+		var updated = false;
 
-		for (var i = 0; i < list.length; i++) {
-			var item = list[i];
-
-			switch (i) {
-				case 0:
-					angle = 10;
-					dur = 80;
-					break;
-				case 1:
-					angle = 35;
-					dur = 50;
-					break;
-				case 2:
-					angle = 45;
-					dur = 100;
-					break;
-				case 3:
-					angle = 80;
-					dur = 70;
-					break;
-				case 4:
-					angle = 0;
-					dur = 0;
-					break;
-			}
-
-			angle = (angle/360) * 2 * Math.PI;
-			var lastFrame = (dur/100) * Bubble.FRAMES;
-			var ratio = count/lastFrame;
-			var maxRad;
-
-			if (collapse) {
-				maxRad = Math.PI/2 - Math.PI/8;
-
-				if (!item.className.match("selected")) {
-					Element.changeOpacity(item, ratio * 200);
-				}
-			}
-			else {
-				maxRad = Math.PI/2 + Math.PI/8;
-
-				if (count != 0) {
-					item.style.display = "block";
-					Element.changeOpacity(item, ratio * 200);
-				}
-			}
-
-			if (ratio <= 1) {
-				var dist;
-				if (collapse) {
-					dist = Bubble.MAX_DIST * (dur/100) * (1 + Math.sin((ratio * maxRad) - (Math.PI/2)));
+		this.dockIcons.each(function(item, index) {
+			item.style.display = "";
+			if (item.constants.h) {
+				if (count <= item.constants.lastFrame) {
+					var ratio = count / item.constants.lastFrame;
+					var dist = item.constants.h * ratio;
+					var maxRad;
+				
+					// Calculate max radian
+					if (collapse) {
+						maxRad = Math.PI/2;
+						distRatio = 1 + Math.sin((ratio * maxRad) - (Math.PI/2));
+		
+						/*
+						if (!item.className.match("selected")) {
+							Element.changeOpacity(item, ratio * 200);
+						}
+						*/
+						item.style.left = (distRatio * (item.constants.x)) + "px";
+						item.style.top = (distRatio * (item.constants.y)) + "px";
+					}
+					else {
+						maxRad = Math.PI/2 + Math.PI/8;
+						distRatio = Math.sin(ratio * maxRad);
+		
+						/*
+						if (count != 0) {
+							item.style.display = "block";
+							Element.changeOpacity(item, ratio * 200);
+						}
+						*/
+						item.style.left = (distRatio * (item.constants.x/Math.sin(maxRad))) + "px";
+						item.style.top = (distRatio * (item.constants.y/Math.sin(maxRad))) + "px";
+					}
+					
+					
+					updated = true;
 				}
 				else {
-					dist = Bubble.MAX_DIST * (dur/100) * Math.sin(ratio * maxRad);
+					item.style.left = (item.constants.x) + "px";
+					item.style.top = (item.constants.y) + "px";
 				}
-				var x = dist * Math.cos(angle);
-				var y = -dist * Math.sin(angle);
-
-				item.style.left = x + "px";
-				item.style.top = y + "px";
 			}
-		}
+		});
 
 		if (collapse && count > 0) {
 			Bubble.count--;
 			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'),true)", 30);
 		}
-		else if (!collapse && count < Bubble.FRAMES) {
+		else if (!collapse && updated) {
 			Bubble.count++;
 			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'))", 30);
 		}
@@ -749,6 +778,68 @@ var PortletHeaderBar = {
 
 			this.init(bar);
 			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 150);
+		}
+	}
+}
+
+var PhotoSlider = {
+	TOTAL_FRAMES: 20,
+	count: 0,
+	page: 0,
+	timer: 0,
+	totalPages: 0,
+	windowWidth: 0,
+	slidingWindow: null,
+	start: 0,
+	photos: null,
+	
+	init: function (options) {
+		this.photos = $(options.photos);
+		this.photos.style.position = "relative";
+		this.photos.style.left = "0px";
+		this.slidingWindow = $(options.slidingWindow);
+		this.windowWidth = options.windowWidth;
+		this.totalPages = options.totalPages;
+	},
+	
+	animate: function() {
+		if (this.count <= this.TOTAL_FRAMES) {
+			var ratio = this.count / this.TOTAL_FRAMES;
+			var ratio2 = Math.sin(ratio * (Math.PI/2))
+			var delta = -(this.page * this.windowWidth) - this.start;
+			
+			this.photos.style.left = this.start + (delta * ratio2);
+			this.count++;
+			this.timer = setTimeout("PhotoSlider.animate()", 30);
+		}
+		else {
+			this.timer = 0;
+		}
+	},
+	
+	left: function() {
+		this.start = parseInt(this.photos.style.left);
+		
+		if (this.page > 0) {
+			this.page--;
+			this.count = 0;
+			
+			if (!this.timer) {
+				this.timer = setTimeout("PhotoSlider.animate()", 30);
+			}
+		}
+	},
+	
+	right: function() {
+		this.start = parseInt(this.photos.style.left);
+		
+		if (this.page < (this.totalPages - 1)) {
+			this.page++
+			this.count = 0;
+			
+			if (!this.timer) {
+				this.timer = setTimeout("PhotoSlider.animate()", 30);
+			}
 		}
 	}
 }
