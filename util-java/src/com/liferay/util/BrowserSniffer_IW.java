@@ -57,6 +57,14 @@ public class BrowserSniffer_IW {
 		return BrowserSniffer.is_ie_5_5_up(req);
 	}
 
+	public boolean is_ie_6(HttpServletRequest req) {
+		return BrowserSniffer.is_ie_6(req);
+	}
+
+	public boolean is_ie_7(HttpServletRequest req) {
+		return BrowserSniffer.is_ie_7(req);
+	}
+
 	public boolean is_linux(HttpServletRequest req) {
 		return BrowserSniffer.is_linux(req);
 	}
