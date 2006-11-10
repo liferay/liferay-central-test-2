@@ -60,7 +60,8 @@ portletURL.setParameter("tabs3", tabs3);
 	}
 
 	function <portlet:namespace />updateDefaultLdap() {
-		var url = "";
+		var baseProviderURL = "";
+		var baseDN = "";
 		var principal = "";
 		var credentials = "";
 		var searchFilter = "";
@@ -69,14 +70,16 @@ portletURL.setParameter("tabs3", tabs3);
 		var ldapType = document.<portlet:namespace />fm.<portlet:namespace />defaultLdap.selectedIndex;
 
 		if (ldapType == 1) {
-			url = "ldap://localhost:10389/dc=example,dc=com";
+			baseProviderURL = "ldap://localhost:10389";
+			baseDN = "dc=example,dc=com";
 			principal = "uid=admin,ou=system";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
 			userMappings = "userId=cn\npassword=userPassword\nemailAddress=mail\nfirstName=givenName\nlastName=sn\njobTitle=title";
 		}
 		else if (ldapType == 2) {
-			url = "ldap://localhost:389/dc=example,dc=com";
+			baseProviderURL = "ldap://localhost:389";
+			baseDN = "dc=example,dc=com";
 			principal = "admin";
 			credentials = "secret";
 			searchFilter = "(&(objectCategory=person)(sAMAccountName=@user_id@))";
@@ -84,6 +87,7 @@ portletURL.setParameter("tabs3", tabs3);
 		}
 		else if (ldapType == 3) {
 			url = "ldap://localhost:389";
+			baseDN = "";
 			principal = "cn=admin,ou=test";
 			credentials = "secret";
 			searchFilter = "(mail=@email_address@)";
@@ -91,7 +95,8 @@ portletURL.setParameter("tabs3", tabs3);
 		}
 
 		if ((ldapType >= 1) && (ldapType <= 3)) {
-			document.<portlet:namespace />fm.<portlet:namespace />url.value = url;
+			document.<portlet:namespace />fm.<portlet:namespace />baseProviderURL.value = baseProviderURL;
+			document.<portlet:namespace />fm.<portlet:namespace />baseDN.value = baseDN;
 			document.<portlet:namespace />fm.<portlet:namespace />principal.value = principal;
 			document.<portlet:namespace />fm.<portlet:namespace />credentials.value = credentials;
 			document.<portlet:namespace />fm.<portlet:namespace />searchFilter.value = searchFilter;

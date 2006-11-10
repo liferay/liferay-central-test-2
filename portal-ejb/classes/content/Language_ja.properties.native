@@ -1710,6 +1710,7 @@ resend-confirmation-email=確認の電子メールを送り直しなさい
 resend-shipping-email=船積みの電子メールを送り直しなさい
 resend=送り直しなさい
 reserved-users=予約ユーザー
+reset-values=調整の価値
 reset=調整
 resolution=決断
 resource=資源
@@ -2017,7 +2018,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=グループ�
 the-group-could-not-be-found=グループは見つけられることができなかった。
 the-item-could-not-be-found=項目は見つけられることができなかった。
 the-item-sku-you-requested-is-already-taken=あなたが要求した項目SKU は既に取られる。
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-link-could-not-be-found=リンクは見つけることができなかった。
 the-message-board-is-empty=メッセージ板は空である。
 the-message-body=本文部

@@ -1712,6 +1712,7 @@ resend-confirmation-email=견진 전자 우편을 다시 보내십시요
 resend-shipping-email=선박 Email 다시 보내십시요
 resend=다시 보내십시요
 reserved-users=보류하는 사용자
+reset-values=리셋 가치
 reset=리셋
 resolution=결의안
 resource=자원
@@ -2019,7 +2020,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=필수 체계 
 the-group-could-not-be-found=그룹은 발견될 수 없었다.
 the-item-could-not-be-found=품목은 발견될 수 없었다.
 the-item-sku-you-requested-is-already-taken=너가 요구한 품목 SKU은 이미 가지고 간다.
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-link-could-not-be-found=연결은 발견될 수 없었다.
 the-message-board-is-empty=메시지 널은 비다.
 the-message-body=메시지 바디

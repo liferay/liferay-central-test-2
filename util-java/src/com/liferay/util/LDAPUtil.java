@@ -56,6 +56,10 @@ public class LDAPUtil {
 		}
 	}
 
+	public static String getFullProviderURL(String baseURL, String baseDN) {
+		return baseURL + StringPool.SLASH + baseDN;
+	}
+
 	public static String[] splitFullName(String fullName) {
 		String firstName = StringPool.BLANK;
 		String lastName = StringPool.BLANK;
@@ -90,7 +94,4 @@ public class LDAPUtil {
 		return new String[] {firstName, middleName, lastName};
 	}
 
-	public static String getFullProviderURL(String baseURL, String baseDN) {
-		return baseURL + StringPool.SLASH + baseDN;
-	}
 }

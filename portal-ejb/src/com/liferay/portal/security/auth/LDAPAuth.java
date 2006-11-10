@@ -129,8 +129,8 @@ public class LDAPAuth implements Authenticator {
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
 		env.put(
-			Context.PROVIDER_URL, LDAPUtil.getFullProviderURL(baseProviderURL,
-				baseDN));
+			Context.PROVIDER_URL,
+			LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
 		env.put(
 			Context.SECURITY_PRINCIPAL,
 			PrefsPropsUtil.getString(

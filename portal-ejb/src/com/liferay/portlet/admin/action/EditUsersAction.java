@@ -211,8 +211,8 @@ public class EditUsersAction extends PortletAction {
 
 		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		boolean required = ParamUtil.getBoolean(req, "required");
-		String baseProviderURL = ParamUtil.getString(req, "base_provider_url");
-		String baseDN = ParamUtil.getString(req, "base_dn");
+		String baseProviderURL = ParamUtil.getString(req, "baseProviderURL");
+		String baseDN = ParamUtil.getString(req, "baseDN");
 		String principal = ParamUtil.getString(req, "principal");
 		String credentials = ParamUtil.getString(req, "credentials");
 		String searchFilter = ParamUtil.getString(req, "searchFilter");
@@ -228,8 +228,9 @@ public class EditUsersAction extends PortletAction {
 					Context.INITIAL_CONTEXT_FACTORY,
 					PrefsPropsUtil.getString(
 						PropsUtil.AUTH_IMPL_LDAP_FACTORY_INITIAL));
-				env.put(Context.PROVIDER_URL, LDAPUtil.getFullProviderURL(
-					baseProviderURL, baseDN));
+				env.put(
+					Context.PROVIDER_URL,
+					LDAPUtil.getFullProviderURL(baseProviderURL, baseDN));
 				env.put(Context.SECURITY_PRINCIPAL, principal);
 				env.put(Context.SECURITY_CREDENTIALS, credentials);
 
@@ -254,8 +255,8 @@ public class EditUsersAction extends PortletAction {
 			PropsUtil.AUTH_IMPL_LDAP_ENABLED, Boolean.toString(enabled));
 		prefs.setValue(
 			PropsUtil.AUTH_IMPL_LDAP_REQUIRED, Boolean.toString(required));
-		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL, 
-			baseProviderURL);
+		prefs.setValue(
+			PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL, baseProviderURL);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_BASE_DN, baseDN);
 		prefs.setValue(PropsUtil.AUTH_IMPL_LDAP_SECURITY_PRINCIPAL, principal);
 		prefs.setValue(

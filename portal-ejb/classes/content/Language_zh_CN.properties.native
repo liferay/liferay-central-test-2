@@ -1712,6 +1712,7 @@ resend-confirmation-email=再寄确认电子邮件
 resend-shipping-email=重寄出货电子邮件
 resend=重寄
 reserved-users=保留用户
+reset-values=重新设置价值
 reset=重新设置
 resolution=分辨率
 resource=资源
@@ -2019,7 +2020,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=小组无法�
 the-group-could-not-be-found=群组找不到。
 the-item-could-not-be-found=项目找不到。
 the-item-sku-you-requested-is-already-taken=您请求的SKU 项目已经被取用。
-the-ldap-url-format-is=LDAP URL 格式是<i>ldap://host:port/searchdn</i>, 其中<i>searchdn</i>描述初始搜索的上下文而且是可选的.如例: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-link-could-not-be-found=链接找不到。
 the-message-board-is-empty=留言簿是空的。
 the-message-body=信息主体

@@ -74,7 +74,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />base_provider_url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "base_provider_url", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL)) %>'>
+						<input class="form-text" name="<portlet:namespace />baseProviderURL" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseProviderURL", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_PROVIDER_URL)) %>'>
 					</td>
 				</tr>
 				<tr>
@@ -83,7 +83,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="form-text" name="<portlet:namespace />base_dn" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "base_dn", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_DN)) %>'>
+						<input class="form-text" name="<portlet:namespace />baseDN" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value='<%= ParamUtil.getString(request, "baseDN", PrefsPropsUtil.getString(company.getCompanyId(), PropsUtil.AUTH_IMPL_LDAP_BASE_DN)) %>'>
 					</td>
 				</tr>
 				<tr>
@@ -161,7 +161,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "Reset Values") %>' onClick="<portlet:namespace />updateDefaultLdap();">
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "reset-values") %>' onClick="<portlet:namespace />updateDefaultLdap();">
 					</td>
 				</tr>
 				</table>

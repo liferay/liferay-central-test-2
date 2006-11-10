@@ -1713,6 +1713,7 @@ resend-confirmation-email=Resend Email di Conferma
 resend-shipping-email=Resend Shipping Email
 resend=Rispedisci
 reserved-users=Utenti Riservati
+reset-values=Ripristini I Valori
 reset=Azzera
 resolution=Risoluzione
 resource=Risorsa
@@ -2020,7 +2021,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=Il gruppo non 
 the-group-could-not-be-found=Il gruppo non � stato trovato.
 the-item-could-not-be-found=L�elemento non � stato trovato.
 the-item-sku-you-requested-is-already-taken=L�elemento SKU che hai richiesto � gi� stato preso.
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-link-could-not-be-found=Il collegamento non ha potuto essere trovato.
 the-message-board-is-empty=La message board � vuota.
 the-message-body=Il corpo di messaggio

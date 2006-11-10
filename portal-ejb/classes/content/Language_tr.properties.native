@@ -869,7 +869,7 @@ the-following-pages-have-at-least-one-link-to=Bunlar bulunan sayfalardaki enaz b
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
 the-group-could-not-be-found=Bu grup bulunamadı.
 the-item-could-not-be-found=Bu madde bulunamadı.
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-message-board-is-empty=İleti tahtası boş.
 the-message-could-not-be-found=İleti bulunamdı.
 the-message-object-has-expired-and-is-no-longer-available=İletinin süresi dolduğundan artık geçerli değil. Lütfen kendiniz yazınız {0}.

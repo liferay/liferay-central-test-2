@@ -1713,6 +1713,7 @@ resend-confirmation-email=再寄確認電子郵件
 resend-shipping-email=重寄出貨電子郵件
 resend=重寄
 reserved-users=保戶之使用者
+reset-values=重新設置價值
 reset=重新設置
 resolution=解析度
 resource=資源
@@ -2020,7 +2021,7 @@ the-group-cannot-be-deleted-because-it-is-a-required-system-group=小組無法�
 the-group-could-not-be-found=群組找不到。
 the-item-could-not-be-found=項目找不到。
 the-item-sku-you-requested-is-already-taken=您請求的SKU 項目已經被取用。
-the-ldap-url-format-is=The LDAP URL format is <i>ldap://host:port/searchdn</i>, where <i>searchdn</i> specifies the initial search context for users and is optional. For example: ldap://localhost:389/ou=Users,o=Example
+the-ldap-url-format-is=The LDAP Base Provider URL format is <i>ldap://host:port</i>. The Base DN specifies the initial search context for users and is optional. For example, use <i>ldap://localhost:389</i> and <i>ou=Users,o=Example</i> for your values.
 the-link-could-not-be-found=鏈接找不到。
 the-message-board-is-empty=留言簿是空的。
 the-message-body=資訊主體
