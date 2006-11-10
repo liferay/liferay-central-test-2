@@ -49,17 +49,17 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
 		%>
 
-		<table cellpadding="4" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="border-left: 1px solid <%= colorScheme.getPortletMenuBg() %>; border-right: 1px solid <%= colorScheme.getPortletMenuBg() %>; border-top: 1px solid <%= colorScheme.getPortletMenuBg() %>; display: <%= inputPermissionsShowConfigure ? "" : "none" %>;" width="100%">
-		<tr class="portlet-section-header" style="font-weight: bold;">
-			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+		<table cellpadding="4" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<tr>
+			<th style="text-align: center;">
 				<%= LanguageUtil.get(pageContext, "action") %>
-			</td>
-			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+			</th>
+			<th style="text-align: center;">
 				<%= LanguageUtil.get(pageContext, "community") %>
-			</td>
-			<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+			</th>
+			<th style="text-align: center;">
 				<%= LanguageUtil.get(pageContext, "guest") %>
-			</td>
+			</th>
 		</tr>
 
 		<%
@@ -87,13 +87,13 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		%>
 
 			<tr id="<%= namespace %>inputPermissionsAction<%= action %>" style="display: <%= showAction ? "" : "none" %>;">
-				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<td style="text-align: right;">
 					<%= ResourceActionsUtil.getAction(pageContext, action) %>
 				</td>
-				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<td style="text-align: center;">
 					<input <%= communityChecked ? "checked" : "" %> name="<%= namespace %>communityPermissions" type="checkbox" value="<%= action %>">
 				</td>
-				<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;">
+				<td style="text-align: center;">
 					<input <%= guestChecked ? "checked" : "" %> <%= guestDisabled ? "disabled" : "" %> name="<%= namespace %>guestPermissions" type="checkbox" value="<%= action %>">
 				</td>
 			</tr>
