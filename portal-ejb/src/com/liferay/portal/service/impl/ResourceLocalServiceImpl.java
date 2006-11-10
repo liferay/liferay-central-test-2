@@ -120,7 +120,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				// community permissions and the given community is the guest
 				// community.
 
-				if (groupId == null ||
+				if ((groupId == null) ||
 					!guestGroup.getGroupId().equals(groupId)) {
 
 					addModelPermissions(

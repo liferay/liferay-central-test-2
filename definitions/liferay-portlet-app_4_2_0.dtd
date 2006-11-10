@@ -23,8 +23,9 @@ smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
-render-weight?, ajaxable?, add-default-resource?, system?, active?, include?)>
+maximize-print?, layout-cacheable?, instanceable?, portal-session-shared?,
+private-request-attributes?, render-weight?, ajaxable?, add-default-resource?,
+system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -271,6 +272,13 @@ page. If set to false, the portlet can only appear once on a page. The default
 value is false.
 -->
 <!ELEMENT instanceable (#PCDATA)>
+
+<!--
+Set the portal-session-shared value to true if the portlet session and the
+portal session are shared. The default value is set in portal.properties under
+the "session.shared" key.
+-->
+<!ELEMENT portal-session-shared (#PCDATA)>
 
 <!--
 Set the private-request-attributes value to true if the portlet does not share

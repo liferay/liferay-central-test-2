@@ -159,6 +159,7 @@ public class Portlet extends PortletModel {
 				   boolean restoreCurrentView, boolean maximizeEdit,
 				   boolean maximizeHelp, boolean maximizePrint,
 				   boolean layoutCacheable, boolean instanceable,
+				   boolean portalSessionShared,
 				   boolean privateRequestAttributes, int renderWeight,
 				   boolean ajaxable, boolean addDefaultResource, String roles,
 				   Set unlinkedRoles, Map roleMappers, boolean system,
@@ -195,6 +196,7 @@ public class Portlet extends PortletModel {
 		_maximizePrint = maximizePrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
+		_portalSessionShared = portalSessionShared;
 		_privateRequestAttributes = privateRequestAttributes;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
@@ -924,6 +926,36 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Returns true if the portlet session and the portal session are shared.
+	 *
+	 * @return		true if the portlet session and the portal session are
+	 *				shared
+	 */
+	public boolean getPortalSessionShared() {
+		return _portalSessionShared;
+	}
+
+	/**
+	 * Returns true if the portlet session and the portal session are shared.
+	 *
+	 * @return		true if the portlet session and the portal session are
+	 *				shared
+	 */
+	public boolean isPortalSessionShared() {
+		return _portalSessionShared;
+	}
+
+	/**
+	 * Sets to true if the portlet session and the portal session are shared.
+	 *
+	 * @param		portalSessionShared boolean value for whether the
+	 *				portlet session and the portal session are shared
+	 */
+	public void setPortalSessionShared(boolean portalSessionShared) {
+		_portalSessionShared = portalSessionShared;
+	}
+
+	/**
 	 * Returns true if the portlet does not share request attributes with any
 	 * other portlet.
 	 *
@@ -1644,10 +1676,10 @@ public class Portlet extends PortletModel {
 			isShowPortletInactive(), isActionURLRedirect(),
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), getRenderWeight(), isAjaxable(),
-			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
-			getRoleMappers(), isSystem(), isActive(), isInclude(),
-			getInitParams(), getExpCache(), getPortletModes(),
+			isPortalSessionShared(), isPrivateRequestAttributes(),
+			getRenderWeight(), isAjaxable(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getUserAttributes(), getCustomUserAttributes(), isWARFile(),
 			getServletURLPatterns());
@@ -1804,6 +1836,12 @@ public class Portlet extends PortletModel {
 	 * True if the portlet can be added multiple times to a layout.
 	 */
 	private boolean _instanceable;
+
+	/**
+	 * True if the portlet session and the portal session are shared.
+	 */
+	private boolean _portalSessionShared = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.SESSION_SHARED));
 
 	/**
 	 * True if the portlet does not share request attributes with any other

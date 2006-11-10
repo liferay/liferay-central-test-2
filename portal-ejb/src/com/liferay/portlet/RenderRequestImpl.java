@@ -31,10 +31,8 @@ import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -79,9 +77,6 @@ import org.apache.struts.Globals;
  *
  */
 public class RenderRequestImpl implements RenderRequest {
-
-	public static final boolean SESSION_SHARED = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.SESSION_SHARED));
 
 	public WindowState getWindowState() {
 		return _windowState;
@@ -488,8 +483,14 @@ public class RenderRequestImpl implements RenderRequest {
 		Map sharedSessionAttributes =
 			SharedSessionUtil.getSharedSessionAttributes(req);
 
+		boolean portalSessionShared = false;
+
+		if (portlet.isWARFile() && portlet.isPortalSessionShared()) {
+			portalSessionShared = true;
+		}
+
 		req = new SharedSessionServletRequest(
-			req, sharedSessionAttributes, SESSION_SHARED);
+			req, sharedSessionAttributes, portalSessionShared);
 
 		DynamicServletRequest dynamicReq = null;
 
