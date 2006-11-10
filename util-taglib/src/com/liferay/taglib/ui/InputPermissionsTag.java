@@ -22,15 +22,19 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.taglib.util.IncludeTag;
-
 import javax.servlet.ServletRequest;
+
+import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="InputPermissionsTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
- *
+ * @author  Wilson S. Man
+ * 
  */
 public class InputPermissionsTag extends IncludeTag {
 
@@ -39,11 +43,44 @@ public class InputPermissionsTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:input-permissions:formName", _formName);
 
+		if(_modelName != null) {
+
+			req.setAttribute(
+				"liferay-ui:input-permissions:modelName", _modelName);
+
+			req.setAttribute(
+				"liferay-ui:input-permissions:supportedActions",
+				StringUtil.merge(ResourceActionsUtil.getModelResourceActions(
+					_modelName)));
+
+			req.setAttribute(
+				"liferay-ui:input-permissions:communityDefaultActions",
+				StringUtil.merge(
+					ResourceActionsUtil.getModelResourceCommunityDefaultActions(
+						_modelName)));
+
+			req.setAttribute(
+				"liferay-ui:input-permissions:guestDefaultActions",
+				StringUtil.merge(
+					ResourceActionsUtil.getModelResourceGuestDefaultActions(
+						_modelName)));
+
+			req.setAttribute(
+				"liferay-ui:input-permissions:guestUnsupportedActions",
+				StringUtil.merge(
+					ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
+						_modelName)));
+		}
+
 		return EVAL_BODY_BUFFERED;
 	}
 
 	public void setFormName(String formName) {
 		_formName = formName;
+	}
+
+	public void setModelName(String modelName) {
+		_modelName = modelName;
 	}
 
 	protected String getDefaultPage() {
@@ -54,5 +91,6 @@ public class InputPermissionsTag extends IncludeTag {
 		"/html/taglib/ui/input_permissions/page.jsp";
 
 	private String _formName = "fm";
+	private String _modelName = null;
 
 }

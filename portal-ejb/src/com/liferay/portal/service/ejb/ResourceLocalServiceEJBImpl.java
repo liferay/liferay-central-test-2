@@ -48,6 +48,17 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		return (ResourceLocalService)ctx.getBean(CLASS_NAME);
 	}
 
+	public void addModelResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String userId,
+		java.lang.String name, java.lang.String primKey,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addModelResources(companyId, groupId, userId, name,
+			primKey, communityPermissions, guestPermissions);
+	}
+
 	public com.liferay.portal.model.Resource addResource(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,

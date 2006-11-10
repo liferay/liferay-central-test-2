@@ -50,9 +50,86 @@ import org.apache.commons.logging.LogFactory;
  * <a href="ResourceLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Wilson S. Man
  *
  */
 public class ResourceLocalServiceImpl implements ResourceLocalService {
+
+	public void addModelResources(
+			String companyId, String groupId, String userId, String name,
+			String primKey, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		validate(companyId, name, false);
+
+		// Company
+
+		addResource(
+			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY,
+			companyId);
+
+		// Guest
+
+		Group guestGroup = GroupLocalServiceUtil.getGroup(
+			companyId, Group.GUEST);
+
+		addResource(
+			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+			guestGroup.getGroupId());
+
+		// Group
+
+		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
+			addResource(
+				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+				groupId);
+		}
+
+		if (primKey != null) {
+
+			// Individual
+
+			Resource resource = addResource(
+				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				primKey);
+
+			// Permissions
+
+			List permissions = PermissionLocalServiceUtil.addPermissions(
+				companyId, name, resource.getResourceId(), false);
+
+			// User permissions
+
+			if (userId != null) {
+				UserUtil.addPermissions(userId, permissions);
+			}
+
+			// Community permissions
+
+			if ((groupId != null) && communityPermissions != null) {
+				addModelPermissions(
+					groupId, resource.getResourceId(), communityPermissions);
+			}
+
+			// Guest permissions
+
+			if (guestPermissions != null) {
+
+				// Don't add guest permissions when you've already added
+				// community permissions and the given community is the guest
+				// community.
+
+				if (groupId == null ||
+					!guestGroup.getGroupId().equals(groupId)) {
+
+					addModelPermissions(
+						guestGroup.getGroupId(), resource.getResourceId(),
+						guestPermissions);
+				}
+			}
+		}
+	}
 
 	public Resource addResource(
 			String companyId, String name, String typeId, String scope,
@@ -331,6 +408,18 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 
 		String[] actionIds = (String[])actions.toArray(new String[0]);
+
+		List permissions = PermissionLocalServiceUtil.getPermissions(
+			group.getCompanyId(), actionIds, resourceId);
+
+		GroupUtil.addPermissions(groupId, permissions);
+	}
+
+	protected void addModelPermissions(
+			String groupId, String resourceId, String[] actionIds)
+		throws PortalException, SystemException {
+
+		Group group = GroupUtil.findByPrimaryKey(groupId);
 
 		List permissions = PermissionLocalServiceUtil.getPermissions(
 			group.getCompanyId(), actionIds, resourceId);

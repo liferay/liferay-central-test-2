@@ -29,6 +29,14 @@ package com.liferay.portal.service.spring;
  *
  */
 public interface ResourceLocalService {
+	public void addModelResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String userId,
+		java.lang.String name, java.lang.String primKey,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Resource addResource(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
