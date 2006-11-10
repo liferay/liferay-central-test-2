@@ -146,21 +146,15 @@ var AjaxUtil = {
 			if (options == null) {
 				options = new Object();
 			}
-
-			options.element = element;
-
-			var origFunc = options.onComplete;
 			
-			options.onComplete = function (xmlHttpReq, options){
-				var element = options.element;
-				
-				if (element) {
-					element.innerHTML = xmlHttpReq.responseText;
-					executeLoadedScript(element);
-				}
-				
-				if (origFunc) {
-					origFunc();
+			var origOnComplete = options.onComplete;
+
+			options.onComplete = function(xmlHttpReq, returnArgs) {
+				element.innerHTML = xmlHttpReq.responseText;
+				executeLoadedScript(element);
+
+				if (origOnComplete) {
+					origOnComplete();
 				}
 			}
 			
