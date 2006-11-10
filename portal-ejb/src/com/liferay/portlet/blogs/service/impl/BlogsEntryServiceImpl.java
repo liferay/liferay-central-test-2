@@ -46,7 +46,7 @@ public class BlogsEntryServiceImpl
 			String plid, String categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermission.check(
@@ -56,7 +56,7 @@ public class BlogsEntryServiceImpl
 		return BlogsEntryLocalServiceUtil.addEntry(
 			getUserId(), plid, categoryId, title, content, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			addCommunityPermissions, addGuestPermissions);
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntry(String entryId)

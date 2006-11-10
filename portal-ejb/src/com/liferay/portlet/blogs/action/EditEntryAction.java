@@ -32,8 +32,11 @@ import com.liferay.portlet.blogs.EntryDisplayDateException;
 import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.NoSuchEntryException;
+import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.spring.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -53,6 +56,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Wilson S. Man
  *
  */
 public class EditEntryAction extends PortletAction {
@@ -145,20 +149,21 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions =
+			req.getParameterValues("communityPermissions");
+
+		String[] guestPermissions =
+			req.getParameterValues("guestPermissions");
 
 		if (Validator.isNull(entryId)) {
 
 			// Add entry
 
 			BlogsEntryServiceUtil.addEntry(
-				layout.getPlid(), categoryId, title, content, displayDateMonth,
-				displayDateDay, displayDateYear, displayDateHour,
-				displayDateMinute, addCommunityPermissions,
-				addGuestPermissions);
+				layout.getPlid(), categoryId, title, content,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

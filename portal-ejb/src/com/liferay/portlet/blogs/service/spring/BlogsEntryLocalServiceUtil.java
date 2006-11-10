@@ -34,34 +34,37 @@ public class BlogsEntryLocalServiceUtil {
 		java.lang.String categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.addEntry(userId, plid, categoryId, title,
 			content, displayDateMonth, displayDateDay, displayDateYear,
-			displayDateHour, displayDateMinute, addCommunityPermissions,
-			addGuestPermissions);
+			displayDateHour, displayDateMinute, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addEntryResources(java.lang.String entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
-		blogsEntryLocalService.addEntryResources(entryId,
-			addCommunityPermissions, addGuestPermissions);
+		blogsEntryLocalService.addEntryResources(entryId, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
-		blogsEntryLocalService.addEntryResources(entry,
-			addCommunityPermissions, addGuestPermissions);
+		blogsEntryLocalService.addEntryResources(entry, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteEntries(java.lang.String groupId)

@@ -42,14 +42,13 @@ public class BlogsEntryServiceSoap {
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		int displayDateMinute, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
 					categoryId, title, content, displayDateMonth,
 					displayDateDay, displayDateYear, displayDateHour,
-					displayDateMinute, addCommunityPermissions,
-					addGuestPermissions);
+					displayDateMinute, communityPermissions, guestPermissions);
 
 			return returnValue;
 		}

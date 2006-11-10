@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.blogs.service.http;
 
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -47,7 +46,8 @@ public class BlogsEntryServiceHttp {
 		java.lang.String categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -80,8 +80,18 @@ public class BlogsEntryServiceHttp {
 			Object paramObj6 = new IntegerWrapper(displayDateYear);
 			Object paramObj7 = new IntegerWrapper(displayDateHour);
 			Object paramObj8 = new IntegerWrapper(displayDateMinute);
-			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
-			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj9 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj9 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj10 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"addEntry",
 					new Object[] {

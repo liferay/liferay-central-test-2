@@ -54,29 +54,32 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		java.lang.String categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return getService().addEntry(userId, plid, categoryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, addCommunityPermissions, addGuestPermissions);
+			displayDateMinute, communityPermissions, guestPermissions);
 	}
 
 	public void addEntryResources(java.lang.String entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEntryResources(entryId, addCommunityPermissions,
-			addGuestPermissions);
+		getService().addEntryResources(entryId, communityPermissions,
+			guestPermissions);
 	}
 
 	public void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEntryResources(entry, addCommunityPermissions,
-			addGuestPermissions);
+		getService().addEntryResources(entry, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteEntries(java.lang.String groupId)

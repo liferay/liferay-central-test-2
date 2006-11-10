@@ -53,15 +53,15 @@ public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean 
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
-		int displayDateMinute, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		int displayDateMinute, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return getService().addEntry(plid, categoryId, title, content,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, addCommunityPermissions, addGuestPermissions);
+			displayDateMinute, communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntry(java.lang.String entryId)

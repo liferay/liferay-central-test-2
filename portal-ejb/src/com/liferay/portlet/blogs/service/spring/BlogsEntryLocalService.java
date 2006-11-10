@@ -34,18 +34,21 @@ public interface BlogsEntryLocalService {
 		java.lang.String categoryId, java.lang.String title,
 		java.lang.String content, int displayDateMonth, int displayDateDay,
 		int displayDateYear, int displayDateHour, int displayDateMinute,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public void addEntryResources(java.lang.String entryId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
 	public void addEntryResources(
 		com.liferay.portlet.blogs.model.BlogsEntry entry,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
