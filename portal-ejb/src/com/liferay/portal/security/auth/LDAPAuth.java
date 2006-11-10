@@ -180,52 +180,52 @@ public class LDAPAuth implements Authenticator {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search filter after transformation " + filter);
 		}
-		
+
 		try {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
-	
+
 			NamingEnumeration enu = ctx.search(StringPool.BLANK, filter, cons);
-	
+
 			if (enu.hasMore()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter returned at least one result");
 				}
-	
+
 				Binding binding = (Binding)enu.next();
-	
+
 				Attributes attrs = ctx.getAttributes(binding.getName());
-	
+
 				Properties userMappings = PropertiesUtil.load(
 					PrefsPropsUtil.getString(
 						companyId, PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
-	
+
 				if (_log.isDebugEnabled()) {
 					StringWriter sw = new StringWriter();
-	
+
 					userMappings.list(new PrintWriter(sw));
-	
+
 					_log.debug(sw.getBuffer().toString());
 				}
-	
+
 				String creatorUserId = null;
 				boolean autoUserId = false;
-	
+
 				if (Validator.isNull(userId)) {
 					userId = LDAPUtil.getAttributeValue(
 						attrs, userMappings.getProperty("userId"));
 				}
-	
+
 				boolean autoPassword = false;
 				String password1 = password;
 				String password2 = password;
 				boolean passwordReset = false;
-	
+
 				if (Validator.isNull(emailAddress)) {
 					emailAddress = LDAPUtil.getAttributeValue(
 						attrs, userMappings.getProperty("emailAddress"));
 				}
-	
+
 				Locale locale = Locale.US;
 				String firstName = LDAPUtil.getAttributeValue(
 					attrs, userMappings.getProperty("firstName"));
@@ -233,18 +233,18 @@ public class LDAPAuth implements Authenticator {
 					attrs, userMappings.getProperty("middleName"));
 				String lastName = LDAPUtil.getAttributeValue(
 					attrs, userMappings.getProperty("lastName"));
-	
+
 				if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
 					String fullName = LDAPUtil.getAttributeValue(
 						attrs, userMappings.getProperty("fullName"));
-	
+
 					String[] names = LDAPUtil.splitFullName(fullName);
-	
+
 					firstName = names[0];
 					middleName = names[1];
 					lastName = names[2];
 				}
-	
+
 				String nickName = null;
 				String prefixId = null;
 				String suffixId = null;
@@ -257,35 +257,35 @@ public class LDAPAuth implements Authenticator {
 				String organizationId = null;
 				String locationId = null;
 				boolean sendEmail = false;
-	
+
 				// Check passwords by either doing a comparison between the
 				// passwords or by binding to the LDAP server
-	
+
 				Attribute userPassword = attrs.get("userPassword");
-	
+
 				if (userPassword != null) {
 					String ldapPassword =
 						new String((byte[])userPassword.get());
-	
+
 					String encryptedPassword = password;
-	
+
 					String algorithm = PrefsPropsUtil.getString(
 						companyId,
 						PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
-	
+
 					if (Validator.isNotNull(algorithm)) {
 						encryptedPassword =
 							"{" + algorithm + "}" +
 								Encryptor.digest(algorithm, password);
 					}
-	
+
 					if (!ldapPassword.equals(encryptedPassword)) {
 						_log.error(
 							"LDAP password " + ldapPassword +
 								" does not match with given password " +
 									encryptedPassword + " for user id " + userId);
-	
-						return authenticateRequired(companyId, userId, 
+
+						return authenticateRequired(companyId, userId,
 							emailAddress);
 					}
 				}
@@ -293,21 +293,21 @@ public class LDAPAuth implements Authenticator {
 					try {
 						env.put(Context.SECURITY_PRINCIPAL, userId);
 						env.put(Context.SECURITY_CREDENTIALS, password);
-	
+
 						ctx = new InitialLdapContext(env, null);
 					}
 					catch (Exception e) {
 						_log.error(
 							"Failed to bind to the LDAP server with " + userId +
 								" " + password, e);
-	
-						return authenticateRequired(companyId, userId, 
+
+						return authenticateRequired(companyId, userId,
 							emailAddress);
 					}
 				}
-	
+
 				// Make sure the user has a portal account
-	
+
 				LDAPImportUtil.addOrUpdateUser(
 					creatorUserId, companyId, autoUserId, userId, autoPassword,
 					password1, password2, passwordReset, emailAddress, locale,
@@ -319,7 +319,7 @@ public class LDAPAuth implements Authenticator {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter did not return any results");
 				}
-	
+
 				return authenticateRequired(companyId, userId, emailAddress);
 			}
 		}
@@ -328,16 +328,16 @@ public class LDAPAuth implements Authenticator {
 
 			return authenticateRequired(companyId, userId, emailAddress);
 		}
-		
+
 		return SUCCESS;
 	}
 
-	public static int authenticateRequired(String companyId, String userId, 
+	public static int authenticateRequired(String companyId, String userId,
 		String emailAddress) throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
 			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
-		
+
 			if (Validator.isNotNull(userId)) {
 				if (OmniadminUtil.isOmniadmin(userId)) {
 					return SUCCESS;
@@ -347,7 +347,7 @@ public class LDAPAuth implements Authenticator {
 				try {
 					User user = UserLocalServiceUtil.getUserByEmailAddress(
 						companyId, emailAddress);
-	
+
 					if (OmniadminUtil.isOmniadmin(user.getUserId())) {
 						return SUCCESS;
 					}
@@ -355,14 +355,14 @@ public class LDAPAuth implements Authenticator {
 				catch (NoSuchUserException nsue) {
 				}
 			}
-	
+
 			return DNE;
 		}
 		else {
 			return SUCCESS;
 		}
 	}
-	
+
 	private static Log _log = LogFactory.getLog(LDAPAuth.class);
 
 }
