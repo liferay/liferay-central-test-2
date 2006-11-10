@@ -780,15 +780,16 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if ((userId != null) && (remoteUser == null)) {
-
-			// WebSphere will not return the remote user unless you are
-			// authenticated AND accessing a protected path. Other servers will
-			// return the remote user for all threads associated with an
-			// authenticated user.
-
 			remoteUser = userId;
-			req = new ProtectedServletRequest(req, userId);
 		}
+
+		// WebSphere will not return the remote user unless you are
+		// authenticated AND accessing a protected path. Other servers will
+		// return the remote user for all threads associated with an
+		// authenticated user. We use ProtectedServletRequest to ensure we get
+		// similar behavior across all servers.
+
+		req = new ProtectedServletRequest(req, remoteUser);
 
 		if ((userId != null) || (remoteUser != null)) {
 

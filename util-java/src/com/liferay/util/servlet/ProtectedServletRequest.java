@@ -39,15 +39,28 @@ public class ProtectedServletRequest extends HttpServletRequestWrapper {
 		super(req);
 
 		_remoteUser = remoteUser;
-		_userPrincipal = new ProtectedPrincipal(remoteUser);
+
+		if (remoteUser != null) {
+			_userPrincipal = new ProtectedPrincipal(remoteUser);
+		}
 	}
 
 	public String getRemoteUser() {
-		return _remoteUser;
+		if (_remoteUser != null) {
+			return _remoteUser;
+		}
+		else {
+			return super.getRemoteUser();
+		}
 	}
 
 	public Principal getUserPrincipal() {
-		return _userPrincipal;
+		if (_userPrincipal != null) {
+			return _userPrincipal;
+		}
+		else {
+			return super.getUserPrincipal();
+		}
 	}
 
 	private String _remoteUser;
