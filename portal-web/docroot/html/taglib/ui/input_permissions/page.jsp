@@ -33,6 +33,9 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 <c:when test="<%= modelName != null %>">
 
 	<%
+	String[] communityPermissions = request.getParameterValues("communityPermissions");
+	String[] guestPermissions = request.getParameterValues("guestPermissions");
+
 	String supportedActions = (String) request.getAttribute("liferay-ui:input-permissions:supportedActions");
 	String communityDefaultActions = (String) request.getAttribute("liferay-ui:input-permissions:communityDefaultActions");
 	String guestDefaultActions = (String) request.getAttribute("liferay-ui:input-permissions:guestDefaultActions");
@@ -51,22 +54,8 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 		}
 	}
 	%>
-	
-	<script type="text/javascript">
-		function <%= namespace %>contains(permArray, permStr) {
-			for(j = 0; j < permArray.length; j++) {
-				if(permArray[j] == permStr) {
-					return true;
-				}
-			}
-			return false;
-		}
 
-		function <%= namespace %>toggleAdvance(button) {
-			$("<%= namespace %>others_perm").style.display = is_ie ? "block" : "table-row-group";
-			button.disabled = true;
-		}
-	</script>
+	<input type="hidden" name="<%= namespace %>liferay-ui:input-permissions:submitted" value="true" />
 
 	<table cellpadding="3" cellspacing="3" border="0">
 		<tr>
@@ -81,14 +70,32 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 		<tbody>
 			<tr>
 				<td colspan="3" style="text-align: right;">
-					<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "advance") %>" onClick="<%= namespace %>toggleAdvance(this);" />
+					<input id="<%= namespace %>advance_button" class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "advance") %>" onClick="<%= namespace %>toggleAdvance();" />
 				</td>
 			</tr>
 		</tbody>
 	</table>
 
 	<script type="text/javascript">
+		function <%= namespace %>contains(permArray, permStr) {
+			for(j = 0; j < permArray.length; j++) {
+				if(permArray[j] == permStr) {
+					return true;
+				}
+			}
+			return false;
+		}
+
+		function <%= namespace %>toggleAdvance() {
+			$("<%= namespace %>others_perm").style.display = is_ie ? "block" : "table-row-group";
+			$("<%= namespace %>advance_button").disabled = true;
+		}
+
 		var <%= namespace %>labels = '<%= sb.toString() %>'.split(",");
+
+		var <%= namespace %>selComActions = '<%= ParamUtil.getBoolean(request, "liferay-ui:input-permissions:submitted") ? StringUtil.merge(communityPermissions) : communityDefaultActions %>'.split(",");
+		var <%= namespace %>selGuestActions = '<%= ParamUtil.getBoolean(request, "liferay-ui:input-permissions:submitted") ? StringUtil.merge(guestPermissions) : guestDefaultActions %>'.split(",");
+
 		var <%= namespace %>supportedActions = '<%= supportedActions %>'.split(",");
 		var <%= namespace %>communityDefaultActions = '<%= communityDefaultActions %>'.split(",");
 		var <%= namespace %>guestDefaultActions = '<%= guestDefaultActions %>'.split(",");
@@ -97,11 +104,17 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 		for(i = 0; i < <%= namespace %>supportedActions.length; i++) {
 			newTR = document.createElement("tr");
 
-			if(<%= namespace %>contains(<%= namespace %>communityDefaultActions, <%= namespace %>supportedActions[i])) {
+			if(<%= namespace %>contains(<%= namespace %>communityDefaultActions, <%= namespace %>supportedActions[i]) ||
+				<%= namespace %>contains(<%= namespace %>guestDefaultActions, <%= namespace %>supportedActions[i])) {
 				$("<%= namespace %>default_perm").appendChild(newTR);
 			}
 			else {
 				$("<%= namespace %>others_perm").appendChild(newTR);
+
+				if(<%= namespace %>contains(<%= namespace %>selComActions, <%= namespace %>supportedActions[i]) ||
+					<%= namespace %>contains(<%= namespace %>selGuestActions, <%= namespace %>supportedActions[i])) {
+					<%= namespace %>toggleAdvance();
+				}
 			}
 
 			newTD = document.createElement("td");
@@ -119,7 +132,7 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 			newINPUT.name = '<%= namespace %>communityPermissions';
 			newINPUT.value = <%= namespace %>supportedActions[i];
 			newTD.appendChild(newINPUT);
-			if(<%= namespace %>contains(<%= namespace %>communityDefaultActions, <%= namespace %>supportedActions[i])) {
+			if(<%= namespace %>contains(<%= namespace %>selComActions, <%= namespace %>supportedActions[i])) {
 				newINPUT.checked = true;
 			}
 
@@ -132,11 +145,11 @@ String modelName = (String) request.getAttribute("liferay-ui:input-permissions:m
 			newINPUT.name = '<%= namespace %>guestPermissions';
 			newINPUT.value = <%= namespace %>supportedActions[i];
 			newTD.appendChild(newINPUT);
-			if(<%= namespace %>contains(<%= namespace %>guestDefaultActions, <%= namespace %>supportedActions[i])) {
-				newINPUT.checked = true;
-			}
 			if(<%= namespace %>contains(<%= namespace %>guestUnsupportedActions, <%= namespace %>supportedActions[i])) {
 				newINPUT.disabled = true;
+			}
+			else if(<%= namespace %>contains(<%= namespace %>selGuestActions, <%= namespace %>supportedActions[i])) {
+				newINPUT.checked = true;
 			}
 		}
 	</script>
