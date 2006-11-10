@@ -42,6 +42,28 @@ public class BlogsEntryServiceSoap {
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.addEntry(plid,
+					categoryId, title, content, displayDateMonth,
+					displayDateDay, displayDateYear, displayDateHour,
+					displayDateMinute, addCommunityPermissions,
+					addGuestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsEntryModel addEntry(
+		java.lang.String plid, java.lang.String categoryId,
+		java.lang.String title, java.lang.String content, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
 		int displayDateMinute, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {

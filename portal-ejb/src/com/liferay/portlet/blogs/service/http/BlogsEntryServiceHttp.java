@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.blogs.service.http;
 
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -41,6 +42,79 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class BlogsEntryServiceHttp {
+	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String categoryId, java.lang.String title,
+		java.lang.String content, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = categoryId;
+
+			if (categoryId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = title;
+
+			if (title == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = content;
+
+			if (content == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = new IntegerWrapper(displayDateMonth);
+			Object paramObj5 = new IntegerWrapper(displayDateDay);
+			Object paramObj6 = new IntegerWrapper(displayDateYear);
+			Object paramObj7 = new IntegerWrapper(displayDateHour);
+			Object paramObj8 = new IntegerWrapper(displayDateMinute);
+			Object paramObj9 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj10 = new BooleanWrapper(addGuestPermissions);
+			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
+					"addEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.blogs.model.BlogsEntry)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		HttpPrincipal httpPrincipal, java.lang.String plid,
 		java.lang.String categoryId, java.lang.String title,

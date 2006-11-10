@@ -146,21 +146,19 @@ public class EditEntryAction extends PortletAction {
 			displayDateHour += 12;
 		}
 
-		String[] communityPermissions =
-			req.getParameterValues("communityPermissions");
-
-		String[] guestPermissions =
-			req.getParameterValues("guestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(entryId)) {
 
 			// Add entry
 
 			BlogsEntryServiceUtil.addEntry(
-				layout.getPlid(), categoryId, title, content,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, communityPermissions,
-				guestPermissions);
+				layout.getPlid(), categoryId, title, content, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, communityPermissions, guestPermissions);
 		}
 		else {
 

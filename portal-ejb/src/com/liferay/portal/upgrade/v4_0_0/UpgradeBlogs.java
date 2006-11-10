@@ -23,20 +23,16 @@
 package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.model.Group;
-import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-
-import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,7 +41,6 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UpgradeBlogs.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
- * @author  Wilson S. Man
  *
  */
 public class UpgradeBlogs extends UpgradeProcess {
@@ -81,19 +76,8 @@ public class UpgradeBlogs extends UpgradeProcess {
 				Group group = GroupLocalServiceUtil.getUserGroup(
 					companyId, userId);
 
-				List actions =
-					ResourceActionsUtil.getModelResourceCommunityDefaultActions(
-						BlogsEntry.class.getName());
-
-				String[] communityPermissions =
-					(String[])actions.toArray(new String[0]);
-
-				actions =
-					ResourceActionsUtil.getModelResourceGuestDefaultActions(
-						BlogsEntry.class.getName());
-
-				String[] guestPermissions =
-					(String[])actions.toArray(new String[0]);
+				boolean addCommunityPermissions = true;
+				boolean addGuestPermissions = true;
 
 				_log.debug("Upgrading entry " + entryId);
 
@@ -105,7 +89,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 				ps.executeUpdate();
 
 				BlogsEntryLocalServiceUtil.addEntryResources(
-					entryId, communityPermissions, guestPermissions);
+					entryId, addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		finally {

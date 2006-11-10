@@ -87,6 +87,34 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			String userId, String plid, String categoryId, String title,
 			String content, int displayDateMonth, int displayDateDay,
 			int displayDateYear, int displayDateHour, int displayDateMinute,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			userId, plid, categoryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public BlogsEntry addEntry(
+			String userId, String plid, String categoryId, String title,
+			String content, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			userId, plid, categoryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			null, null, communityPermissions, guestPermissions);
+	}
+
+	public BlogsEntry addEntry(
+			String userId, String plid, String categoryId, String title,
+			String content, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -124,7 +152,16 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 
 		// Resources
 
-		addEntryResources(entry, communityPermissions, guestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addEntryResources(
+				entry, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addEntryResources(entry, communityPermissions, guestPermissions);
+		}
 
 		// Lucene
 
@@ -138,6 +175,27 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		}
 
 		return entry;
+	}
+
+	public void addEntryResources(
+			String entryId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		BlogsEntry entry = BlogsEntryUtil.findByPrimaryKey(entryId);
+
+		addEntryResources(entry, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addEntryResources(
+			BlogsEntry entry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addResources(
+			entry.getCompanyId(), entry.getGroupId(), entry.getUserId(),
+			BlogsEntry.class.getName(), entry.getPrimaryKey().toString(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEntryResources(

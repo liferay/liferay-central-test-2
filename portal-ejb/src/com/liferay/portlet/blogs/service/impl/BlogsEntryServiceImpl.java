@@ -46,6 +46,23 @@ public class BlogsEntryServiceImpl
 			String plid, String categoryId, String title, String content,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.BLOGS,
+			ActionKeys.ADD_ENTRY);
+
+		return BlogsEntryLocalServiceUtil.addEntry(
+			getUserId(), plid, categoryId, title, content, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public BlogsEntry addEntry(
+			String plid, String categoryId, String title, String content,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
