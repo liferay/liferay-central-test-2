@@ -43,7 +43,7 @@ public class LogoutPreAction extends Action {
 		throws ActionException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Running");
+			_log.debug("Running " + req.getRemoteUser());
 		}
 	}
 

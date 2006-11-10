@@ -38,7 +38,7 @@ if (rowChecker != null) {
 %>
 
 <c:if test="<%= (resultRows.size() > 0) || ((resultRows.size() == 0) && (searchContainer.getEmptyResultsMessage() != null)) %>">
-	<table cellpadding="4" cellspacing="0" style="border:1px solid <%= colorScheme.getPortletMenuBg() %>;" width="100%">
+	<table cellpadding="4" cellspacing="0" style="border: 1px solid <%= colorScheme.getPortletMenuBg() %>;" width="100%">
 	<tr class="portlet-section-header" style="font-weight: bold;">
 
 	<%
@@ -71,7 +71,7 @@ if (rowChecker != null) {
 		}
 	%>
 
-		<td style="border-bottom:1px solid <%= colorScheme.getPortletMenuBg() %>"
+		<td style="border-bottom: 1px solid <%= colorScheme.getPortletMenuBg() %>;"
 
 			<%--
 
