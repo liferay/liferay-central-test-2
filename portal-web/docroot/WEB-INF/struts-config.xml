@@ -781,6 +781,10 @@
 
 		<action path="/layout_management/update_page" type="com.liferay.portlet.communities.action.UpdatePageAction" />
 
+		<!-- Layout Templates -->
+
+		<action path="/portal/layout_templates" forward="portlet.layout_templates.view" />
+
 		<!-- Location Admin -->
 
 		<action path="/location_admin/edit_address" type="com.liferay.portlet.enterpriseadmin.action.EditAddressAction">

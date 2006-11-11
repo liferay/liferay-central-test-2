@@ -108,6 +108,19 @@
 			message.wrapper.style.left = "20px";
 		}
 	</c:if>
+	
+	
+	function showLayoutTemplates() {
+			var message = Alerts.fireMessageBox({
+					width: 700,
+					modal: true,
+					title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
+			});
+			
+			url = "<%= themeDisplay.getPathMain() %>/portal/layout_templates";
+			
+			AjaxUtil.update(url, message);
+	}
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

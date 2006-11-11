@@ -71,7 +71,7 @@
 				
 				<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
 					<div class="portal-dock-box"
-						 onclick=""
+						 onclick="showLayoutTemplates()"
 						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "layout") %>')">
 						 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_layout.png" %>" height="50" width="50" />
 					</div>
@@ -85,7 +85,6 @@
 					</div>
 				</c:if>
 				
-		
 				<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
 					<div class="portal-dock-box"
 						 onclick="<%= themeDisplay.getURLAddContent() %>"
@@ -103,7 +102,6 @@
 				</c:if>
 			</div>
 		</div>
-	</div>
 	</div>
 		
 		<script type="text/javascript">

@@ -150,7 +150,7 @@ var Alerts = {
 		var myMessage = options.message;
 		var msgHeight = options.height;
 		var msgWidth = options.width;
-		var noCenter = options.noCenter == true;
+		var noCenter = options.noCenter;
 		var title = options.title;
 		
 
@@ -183,13 +183,6 @@ var Alerts = {
 		if (msgWidth) {
 			wrapper.style.width = msgWidth + "px";
 		}
-		else {
-			wrapper.style.width = "100%";
-		}
-		
-		if (msgWidth == null) {
-			noCenter = true;
-		}
 		
 		if (!Alerts.background && modal) {
 			var background = document.createElement("div");
@@ -221,16 +214,16 @@ var Alerts = {
 		Alerts.messageArray.push(wrapper);
 		
 		Alerts.resize();
-		Event.addHandler(window, "onresize", Alerts.resize)
+		Event.observe(window, "resize", Alerts.resize)
 		
-		if (!noCenter) {
-			Alerts.center(msgHeight, msgWidth);
-			Event.addHandler(window, "onresize", Alerts.center)
+		if (noCenter) {
+			Alerts.center();
 		}
 		else {
-			wrapper.style.top = 0;
-			wrapper.style.left = 0;
+			Alerts.center(msgHeight, msgWidth);
 		}
+
+		Event.observe(window, "resize", Alerts.center)
 		
 		body.appendChild(wrapper);
 		window.focus();
@@ -261,6 +254,22 @@ var Alerts = {
         if (Alerts.message) {
 	        var message = Alerts.message.wrapper;
             var body = document.getElementsByTagName("body")[0];
+            var mode = message.centerMode;
+            
+            if (!mode) {
+	            if (height && width) {
+	            	mode = message.centerMode = "xy";
+	            }
+	            else if (height && !width) {
+	            	mode = message.centerMode = "y";
+	            }
+	            else if (!height && width) {
+	            	mode = message.centerMode = "x";
+	            }
+	            else {
+	            	mode = message.centerMode = "none";
+	            }
+            }
             
             width = width || message.offsetWidth;
             height = height || message.offsetHeight;
@@ -277,8 +286,19 @@ var Alerts = {
                 var centerTop = (body.offsetHeight - height) / 2;
             }
 
-            message.style.top = centerTop + "px";
-            message.style.left = centerLeft + "px";
+			if (mode == "xy" || mode == "y") {
+	            message.style.top = centerTop + "px";
+            }
+            else {
+	            message.style.top = (body.scrollTop + 50) + "px";
+            }
+            
+            if (mode == "xy" || mode == "x") {
+	            message.style.left = centerLeft + "px";
+            }
+            else {
+	            message.style.left = "50px";
+            }
         }
 	},
 	
