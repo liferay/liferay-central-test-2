@@ -80,10 +80,10 @@ var DynamicSelect = {
 	}
 }
 
-var Bubble = {
+var LiferayDock = {
 	MODE: {
-		EXP: 0, //expand
-		COL: 1  //collapse
+		EXPAND: 0,
+		COLLAPSE: 1
 	},
 	
 	ORDER: [0,1,4,5,2,8,6,9,3,12,10,7,13,11,14,15],
@@ -124,6 +124,7 @@ var Bubble = {
 		var self = this;
 		var dock = $("portal-dock");
 		var dockIcons = document.getElementsByClassName("portal-dock-box", dock);
+		var size = dockIcons.length;
 
 		this.dock = dock;
 		this.dockIcons = dockIcons;
@@ -134,43 +135,77 @@ var Bubble = {
 		dockIcons.each(function(item, index) {
 			item.onmouseout = self.collapse.bindAsEventListener(self);
 			item.constants = self.constants[self.ORDER[index]];
+			item.style.zIndex = size - index;
 		});
+		
+		var myPlaces = $("portal-dock-my-places");
+		myPlaces.getElementsByTagName("table")[0].onmouseover = function() {
+			MyPlaces.show();
+			this.onmouseover = function() {};
+		};
 	},
 	
 	setMode: function(mode) {
-		Bubble.direction = mode;
+		this.direction = mode;
 
-		if (!Bubble.timer) {
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'))", 1);
+		if (!this.timer) {
+			this.timer = setTimeout("LiferayDock.animate()", 1);
+		}
+	},
+	
+	showText: function(text) {
+		var textBox = $("portal-dock-text");
+		this.showObject(textBox);
+		textBox.innerHTML = text;
+	},
+	
+	showObject: function(item) {
+		item = $(item);
+		var helpItems = new Array();
+		helpItems.push($("portal-dock-text"));
+		helpItems.push($("portal-dock-my-places"));
+		helpItems.push($("portal-dock-search"));
+
+		helpItems.each(function(helpItem){
+			if (item.id == helpItem.id) {
+				helpItem.style.display = "";
+			}
+			else {
+				helpItem.style.display = "none";
+			}
+		});
+		
+		if (item.id == "portal-dock-my-places") {
+			item.getElementsByTagName("table")[0].onmouseover = function() {
+				MyPlaces.show();
+				this.onmouseover = function() {};
+			};
 		}
 	},
 
 	collapse: function() {
-		if (Bubble.modeTimer) {
-			clearTimeout(Bubble.modeTimer);
+		if (this.modeTimer) {
+			clearTimeout(this.modeTimer);
 		}
 
-		Bubble.modeTimer = setTimeout("Bubble.setMode(Bubble.MODE.COL)", 200);
+		this.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.COLLAPSE)", 200);
 	},
 
 	expand: function(event) {
-		if (Bubble.modeTimer) {
-			clearTimeout(Bubble.modeTimer);
+		if (this.modeTimer) {
+			clearTimeout(this.modeTimer);
 		}
 
-		Bubble.modeTimer = setTimeout("Bubble.setMode(Bubble.MODE.EXP)", 100);
+		this.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.EXPAND)", 100);
 	},
 
 	animate: function(obj) {
-		var collapse = (Bubble.direction == Bubble.MODE.COL);
+		var collapse = (this.direction == this.MODE.COLLAPSE);
 		var count = this.count;
-		var list = this.dockIcons;
-		var angle = 0; // degrees
-		var dur = 100; // percentage
 		var updated = false;
 
 		this.dockIcons.each(function(item, index) {
-			item.style.display = "";
+			//item.style.display = "";
 			if (item.constants.h) {
 				if (count <= item.constants.lastFrame) {
 					var ratio = count / item.constants.lastFrame;
@@ -215,15 +250,15 @@ var Bubble = {
 		});
 
 		if (collapse && count > 0) {
-			Bubble.count--;
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'),true)", 30);
+			this.count--;
+			this.timer = setTimeout("LiferayDock.animate()", 30);
 		}
 		else if (!collapse && updated) {
-			Bubble.count++;
-			Bubble.timer = setTimeout("Bubble.animate(document.getElementById('portal-dock'))", 30);
+			this.count++;
+			this.timer = setTimeout("LiferayDock.animate()", 30);
 		}
 		else {
-			Bubble.timer = 0;
+			this.timer = 0;
 		}
 	}
 }
@@ -1132,5 +1167,3 @@ var ToolTip = {
 		}
 	}
 }
-
-
