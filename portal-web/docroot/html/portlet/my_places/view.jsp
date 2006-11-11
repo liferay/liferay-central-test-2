@@ -133,7 +133,7 @@
 		for (int i = 0; i < links.size(); i++) {
 			%>
 
-			<li><a href="<%= (String)(links.get(i)) %>"><%= (String)(titles.get(i)) %></a></li>
+			<li onmouseover="this.style.backgroundColor='#cccccc'" onmouseout="this.style.backgroundColor='transparent'" onclick="window.location='<%= (String)(links.get(i)) %>'"><%= (String)(titles.get(i)) %></li>
 
 			<%
 		}

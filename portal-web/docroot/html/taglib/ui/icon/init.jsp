@@ -40,9 +40,9 @@ boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui
 String details = null;
 
 if (toolTip) {
-	details = "onmousemove=\"ToolTip.show(event, this, '" + Http.encodeURL(LanguageUtil.get(pageContext, message)) + "')\"";
+	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
 }
 else {
-	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
+	details = "title=\"" + UnicodeLanguageUtil.get(pageContext, message) + "\"";
 }
 %>

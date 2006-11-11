@@ -40,4 +40,4 @@ String width = (String)request.getAttribute("liferay-ui:png_image:width");
 			</c:otherwise>
 		</c:choose>
 
-		height: <%= height %>; width: <%= width %>;"></div>
+		height: <%= height %>px; width: <%= width %>px;"></div>
