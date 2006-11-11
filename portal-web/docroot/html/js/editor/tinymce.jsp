@@ -35,26 +35,25 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 	<title>Editor</title>
 	<script src="../sniffer.js" type="text/javascript"></script>
 	<script src="../util.js" type="text/javascript"></script>
-	<script src="tinymce/tiny_mce.js" type="text/javascript"></script>
+	<script src="tiny_mce/tiny_mce.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		var onChangeCallbackCounter = 0;
 
 		tinyMCE.init({
 			mode : "textareas",
 			theme : "advanced",
-			plugins : "table,advhr,advimage,advlink,emotions,iespell,insertdatetime,preview,zoom,flash,searchreplace,print,contextmenu",
-			theme_advanced_buttons1_add : "fontselect,fontsizeselect",
-			theme_advanced_buttons2_add : "separator,insertdate,inserttime,preview,zoom,separator,forecolor,backcolor",
-			theme_advanced_buttons2_add_before: "cut,copy,paste,separator,search,replace,separator",
-			theme_advanced_buttons3_add_before : "tablecontrols,separator",
-			theme_advanced_buttons3_add : "emotions,flash,advhr,separator,print",
 			extended_valid_elements : "a[name|href|target|title|onclick],img[class|src|border=0|alt|title|hspace|vspace|width|height|align|onmouseover|onmouseout|name],hr[class|width|size|noshade],font[face|size|color|style],span[class|align|style]",
-			external_image_list_url : "example_data/example_image_list.js",
+			file_browser_callback : "fileBrowserCallback",
+			onchange_callback : "onChangeCallback",
+			plugins : "table,advhr,advimage,advlink,iespell,preview,zoom,flash,searchreplace,print,contextmenu",
+			theme_advanced_buttons1_add_before : "fontselect,fontsizeselect,forecolor,backcolor,separator",
+			theme_advanced_buttons2_add : "separator,flash,advhr,separator,preview,zoom,print",
+			theme_advanced_buttons2_add_before: "cut,copy,paste,search,replace",
+			theme_advanced_buttons3_add_before : "tablecontrols,separator",
+			theme_advanced_disable : "formatselect,styleselect,help",
 			theme_advanced_toolbar_align : "left",
 			theme_advanced_toolbar_location : "top",
-			theme_advanced_path_location : "bottom",
-			file_browser_callback : "fileBrowserCallback",
-			onchange_callback : "onChangeCallback"
+			theme_advanced_path_location : "bottom"
 		});
 
 		function init(value) {
@@ -109,7 +108,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 
 <body leftmargin="0" marginheight="0" marginwidth="0" rightmargin="0" topmargin="0" onLoad="initEditor();">
 
-<textarea cols="100" id="textArea" name="textArea" rows="22"></textarea>
+<textarea id="textArea" name="textArea" style="height: 100%; width: 100%;"></textarea>
 
 </body>
 

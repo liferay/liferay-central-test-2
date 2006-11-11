@@ -88,6 +88,7 @@ Struts 1.2.9 (removed META-INF/MANIFEST.MF)
 SubEtha SMTP 1.1
 Tapestry 4.0.2
 TextMining 0.4
+TinyMCE 2.0.8
 Trove 1.1b4
 Velocity 1.4
 WebDAV Servlet 1.2

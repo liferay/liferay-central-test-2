@@ -28,16 +28,22 @@
 <%@ page import="com.liferay.util.ParamUtil" %>
 
 <%
-String editorImpl = "simple";
+String editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
 
-if (BrowserSniffer.is_rtf(request)) {
-	editorImpl = ParamUtil.get(request, "editorImpl", PropsUtil.get(EDITOR_WYSIWYG_IMPL_KEY));
+if (BrowserSniffer.is_safari(request)) {
+	if (editorImpl.indexOf("simple") == -1) {
+		editorImpl = "tinymcesimple";
+	}
+}
+else if (BrowserSniffer.is_rtf(request)) {
+	editorImpl = "simple";
 }
 
 //editorImpl = "fckeditor";
 //editorImpl = "liferay";
 //editorImpl = "simple";
 //editorImpl = "tinymce";
+//editorImpl = "tinymcesimple";
 
 // Resin won't allow dynamic content inside the jsp:include tag
 
