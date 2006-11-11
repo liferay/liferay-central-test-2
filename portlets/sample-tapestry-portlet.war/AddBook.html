@@ -1,5 +1,4 @@
-<form stateful="false" jwcid="form@Form" success="listener:doSubmit">
-
+<form stateful="false" jwcid="form@Form">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
@@ -39,15 +38,6 @@
 </tr>
 <tr>
 	<td>
-		Add Date
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" jwcid="addDate@DatePicker" value="ognl:book.addDate" />
-	</td>
-</tr>
-<tr>
-	<td>
 		Recommended
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -59,8 +49,7 @@
 
 <br>
 
-<input class="portlet-form-button" type="submit" value="Add Book" />
-
-<input class="portlet-form-button" jwcid="@PageLink" page="View" type="submit" value="Cancel" />
+<input class="portlet-form-button" jwcid="@Submit" listener="listener:doSubmit" type="Submit" value="Add Book" />
+<input class="portlet-form-button" jwcid="@Submit" listener="listener:doCancel" type="Submit" value="Cancel" />
 
 </form>

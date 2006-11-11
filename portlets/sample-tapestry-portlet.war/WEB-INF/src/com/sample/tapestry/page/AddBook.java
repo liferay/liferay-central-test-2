@@ -29,6 +29,7 @@ import java.util.Date;
 
 import org.apache.tapestry.IPage;
 import org.apache.tapestry.engine.IEngineService;
+import org.apache.tapestry.IRequestCycle;
 import org.apache.tapestry.event.PageBeginRenderListener;
 import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.html.BasePage;
@@ -57,12 +58,10 @@ public abstract class AddBook
 	public void pageBeginRender(PageEvent event) {
 		Book book = new Book();
 
-		book.setAddDate(new Date());
-
 		setBook(book);
 	}
 
-	public IPage doSubmit() {
+	public IPage doSubmit(IRequestCycle cycle) {
 		View view = getView();
 
 		Book book = getBook();
@@ -73,10 +72,14 @@ public abstract class AddBook
 
 		view.setBooks(bookList.getBooks());
 
-		// Redirect is broken. See TAPESTRY-1121.
-
-		// return getPageService().getLink(false, view.getPageName());
 		return view;
+
 	}
 
+    public IPage doCancel(IRequestCycle cycle) {
+    	View view = getView();
+    	
+        return view;        
+     }
+    
 }

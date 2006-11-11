@@ -37,14 +37,6 @@ public class Book implements Serializable {
 	public Book() {
 	}
 
-	public Date getAddDate() {
-		return _addDate;
-	}
-
-	public void setAddDate(Date addDate) {
-		_addDate = addDate;
-	}
-
 	public String getAuthor() {
 		return _author;
 	}
@@ -85,7 +77,6 @@ public class Book implements Serializable {
 		_year = year;
 	}
 
-	private Date _addDate;
 	private String _author;
 	private String _description;
 	private boolean _recommended;
