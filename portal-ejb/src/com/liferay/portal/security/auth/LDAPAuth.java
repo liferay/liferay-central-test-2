@@ -285,14 +285,14 @@ public class LDAPAuth implements Authenticator {
 								" does not match with given password " +
 									encryptedPassword + " for user id " + userId);
 
-						return authenticateRequired(companyId, userId,
-							emailAddress, FAILURE);
+						return authenticateRequired(
+							companyId, userId, emailAddress, FAILURE);
 					}
 				}
 				else {
-					try {						
-						String userDN = binding.getName() + StringPool.COMMA +
-							baseDN;
+					try {
+						String userDN =
+							binding.getName() + StringPool.COMMA + baseDN;
 
 						env.put(Context.SECURITY_PRINCIPAL, userDN);
 						env.put(Context.SECURITY_CREDENTIALS, password);
@@ -304,8 +304,8 @@ public class LDAPAuth implements Authenticator {
 							"Failed to bind to the LDAP server with " + userId +
 								" " + password, e);
 
-						return authenticateRequired(companyId, userId,
-							emailAddress, FAILURE);
+						return authenticateRequired(
+							companyId, userId, emailAddress, FAILURE);
 					}
 				}
 
@@ -314,31 +314,34 @@ public class LDAPAuth implements Authenticator {
 				LDAPImportUtil.addOrUpdateUser(
 					creatorUserId, companyId, autoUserId, userId, autoPassword,
 					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId, suffixId,
-					male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
-					organizationId, locationId, sendEmail, true, false);
+					firstName, middleName, lastName, nickName, prefixId,
+					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+					jobTitle, organizationId, locationId, sendEmail, true,
+					false);
 			}
 			else {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter did not return any results");
 				}
 
-				return authenticateRequired(companyId, userId, emailAddress, 
-					DNE);
+				return authenticateRequired(
+					companyId, userId, emailAddress, DNE);
 			}
 		}
 		catch (Exception e) {
 			_log.warn("Problem accessing LDAP server");
 
-			return authenticateRequired(companyId, userId, emailAddress, 
-				FAILURE);
+			return authenticateRequired(
+				companyId, userId, emailAddress, FAILURE);
 		}
 
 		return SUCCESS;
 	}
 
-	public static int authenticateRequired(String companyId, String userId,
-		String emailAddress, int failureCode) throws Exception {
+	public static int authenticateRequired(
+			String companyId, String userId, String emailAddress,
+			int failureCode)
+		throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
 			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
