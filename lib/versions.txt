@@ -30,7 +30,7 @@ Display Tag Library 1.1
 dom4j 1.6.1
 EasyConf 0.9.5
 Ehcache 1.1
-FCKeditor 2.2
+FCKeditor 2.3.1
 Friki 2.1.1
 Hessian 2.1.12
 Hibernate 3.2
