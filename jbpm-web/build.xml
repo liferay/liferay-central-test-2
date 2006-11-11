@@ -8,4 +8,53 @@
 	<import file="../build-common-web.xml" />
 
 	<property name="war.file" value="${ant.project.name}" />
+
+	<target name="deploy">
+		<delete file="jbpm.properties" failonerror="false" />
+		<delete file="jbpm.script" failonerror="false" />
+
+		<java
+			classname="com.liferay.portal.tools.DBLoader"
+			classpathref="project.classpath"
+			fork="true"
+			maxmemory="256m"
+			newenvironment="true"
+		>
+			<arg value="hypersonic" />
+			<arg value="jbpm" />
+			<arg value="docroot/WEB-INF/sql/hsqldb.create.jbpm.3.1.sql" />
+			<jvmarg value="-Dfile.encoding=UTF-8" />
+		</java>
+
+		<if>
+			<or>
+				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+			</or>
+			<then>
+				<copy todir="${app.server.bin.dir}/nt">
+					<fileset dir=".">
+						<include name="jbpm.properties" />
+						<include name="jbpm.script" />
+					</fileset>
+				</copy>
+				<copy todir="${app.server.bin.dir}/unix">
+					<fileset dir=".">
+						<include name="jbpm.properties" />
+						<include name="jbpm.script" />
+					</fileset>
+				</copy>
+			</then>
+			<else>
+				<copy todir="${app.server.bin.dir}">
+					<fileset dir=".">
+						<include name="jbpm.properties" />
+						<include name="jbpm.script" />
+					</fileset>
+				</copy>
+			</else>
+		</if>
+
+		<antcall target="build-common-web.deploy" />
+	</target>
 </project>

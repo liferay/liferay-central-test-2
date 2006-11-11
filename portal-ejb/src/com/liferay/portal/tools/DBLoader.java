@@ -30,6 +30,7 @@ import Zql.ZqlParser;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
@@ -53,17 +54,21 @@ public class DBLoader {
 
 	public static void main(String[] args) {
 		if (args.length == 2) {
-			new DBLoader(args[0], args[1]);
+			new DBLoader(args[0], args[1], StringPool.BLANK);
+		}
+		else if (args.length == 3) {
+			new DBLoader(args[0], args[1], args[2]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public DBLoader(String databaseType, String databaseName) {
+	public DBLoader(String databaseType, String databaseName, String fileName) {
 		try {
 			_databaseType = databaseType;
 			_databaseName = databaseName;
+			_fileName = fileName;
 
 			if (_databaseType.equals("derby")) {
 				_loadDerby();
@@ -149,8 +154,13 @@ public class DBLoader {
 		Connection con = DriverManager.getConnection(
 			"jdbc:derby:" + _databaseName + ";create=true", "", "");
 
-		_loadDerby(con, "../sql/portal/portal-db2.sql");
-		_loadDerby(con, "../sql/indexes.sql");
+		if (Validator.isNull(_fileName)) {
+			_loadDerby(con, "../sql/portal/portal-db2.sql");
+			_loadDerby(con, "../sql/indexes.sql");
+		}
+		else {
+			_loadDerby(con, _fileName);
+		}
 	}
 
 	private void _loadDerby(Connection con, String fileName)
@@ -254,8 +264,13 @@ public class DBLoader {
 		Connection con = DriverManager.getConnection(
 			"jdbc:hsqldb:" + _databaseName, "sa", "");
 
-		_loadHypersonic(con, "../sql/portal/portal-hypersonic.sql");
-		_loadHypersonic(con, "../sql/indexes.sql");
+		if (Validator.isNull(_fileName)) {
+			_loadHypersonic(con, "../sql/portal/portal-hypersonic.sql");
+			_loadHypersonic(con, "../sql/indexes.sql");
+		}
+		else {
+			_loadDerby(con, _fileName);
+		}
 
 		// Shutdown Hypersonic
 
@@ -326,5 +341,6 @@ public class DBLoader {
 
 	private String _databaseType;
 	private String _databaseName;
+	private String _fileName;
 
 }

@@ -49,9 +49,9 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		boolean inputPermissionsShowMore = ParamUtil.getBoolean(request, "inputPermissionsShowMore");
 		%>
 
-		<table cellpadding="4" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
+		<table cellpadding="2" cellspacing="0" id="<%= namespace %>inputPermissionsTable" style="display: <%= inputPermissionsShowConfigure ? "" : "none" %>;">
 		<tr>
-			<th style="text-align: center;">
+			<th style="text-align: right;">
 				<%= LanguageUtil.get(pageContext, "action") %>
 			</th>
 			<th style="text-align: center;">
@@ -111,7 +111,7 @@ String modelName = (String)request.getAttribute("liferay-ui:input-permissions:mo
 		<a href="javascript: <%= namespace %>inputPermissionsConfigure();"><%= LanguageUtil.get(pageContext, "configure") %> &raquo;</a>
 		</div>
 
-		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>; padding-top: 5px;">
+		<div id="<%= namespace %>inputPermissionsMoreLink" style="display: <%= !inputPermissionsShowConfigure || inputPermissionsShowMore ? "none" : "" %>;">
 		<a href="javascript: <%= namespace %>inputPermissionsMore();"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
 		</div>
 

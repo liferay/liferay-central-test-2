@@ -81,16 +81,25 @@
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
 			<then>
-				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/nt" includes="${database.name}.script,${database.name}.properties" />
+				<delete>
+					<fileset
+						dir="${app.server.bin.dir}/nt"
+						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+					/>
 				</delete>
-				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}/unix" includes="${database.name}.script,${database.name}.properties" />
+				<delete>
+					<fileset
+						dir="${app.server.bin.dir}/unix"
+						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+					/>
 				</delete>
 			</then>
 			<else>
-				<delete failonerror="false">
-					<fileset dir="${app.server.bin.dir}" includes="${database.name}.script,${database.name}.properties" />
+				<delete>
+					<fileset
+						dir="${app.server.bin.dir}"
+						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+					/>
 				</delete>
 			</else>
 		</if>

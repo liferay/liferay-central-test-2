@@ -60,6 +60,22 @@
 		<priority value="DEBUG" />
 	</category>
 
+	<category name="com.liferay.portal.events.LoginPostAction">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.events.LoginPreAction">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.events.LogoutPostAction">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.events.LogoutPreAction">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.events.LogSessionIdAction">
 		<priority value="DEBUG" />
 	</category>
