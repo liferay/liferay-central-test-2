@@ -286,12 +286,15 @@ public class LDAPAuth implements Authenticator {
 									encryptedPassword + " for user id " + userId);
 
 						return authenticateRequired(companyId, userId,
-							emailAddress);
+							emailAddress, FAILURE);
 					}
 				}
 				else {
-					try {
-						env.put(Context.SECURITY_PRINCIPAL, userId);
+					try {						
+						String userDN = binding.getName() + StringPool.COMMA +
+							baseDN;
+
+						env.put(Context.SECURITY_PRINCIPAL, userDN);
 						env.put(Context.SECURITY_CREDENTIALS, password);
 
 						ctx = new InitialLdapContext(env, null);
@@ -302,7 +305,7 @@ public class LDAPAuth implements Authenticator {
 								" " + password, e);
 
 						return authenticateRequired(companyId, userId,
-							emailAddress);
+							emailAddress, FAILURE);
 					}
 				}
 
@@ -320,20 +323,22 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter did not return any results");
 				}
 
-				return authenticateRequired(companyId, userId, emailAddress);
+				return authenticateRequired(companyId, userId, emailAddress, 
+					DNE);
 			}
 		}
 		catch (Exception e) {
 			_log.warn("Problem accessing LDAP server");
 
-			return authenticateRequired(companyId, userId, emailAddress);
+			return authenticateRequired(companyId, userId, emailAddress, 
+				FAILURE);
 		}
 
 		return SUCCESS;
 	}
 
 	public static int authenticateRequired(String companyId, String userId,
-		String emailAddress) throws Exception {
+		String emailAddress, int failureCode) throws Exception {
 
 		if (PrefsPropsUtil.getBoolean(
 			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
@@ -356,7 +361,7 @@ public class LDAPAuth implements Authenticator {
 				}
 			}
 
-			return DNE;
+			return failureCode;
 		}
 		else {
 			return SUCCESS;
