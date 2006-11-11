@@ -349,6 +349,34 @@ FONT.bg {
 	white-space: nowrap;
 }
 
+#portal-dock {
+	position: absolute;
+	right: 0px;
+	top: 25px;
+	height: 54px;
+	width: 54px;
+}
+
+#portal-dock-title {
+	text-align: right;
+	height: 25px;
+	z-index: 1px;
+}
+
+.portal-dock-box {
+	cursor: pointer;
+	font-size: 0;
+	height: 54px;
+	padding: 2px;
+	position: absolute;
+	width: 54px;
+	top: 0;
+	left: 0;
+}
+.portal-dock-box div {
+	background-color: <%= colorScheme.getLayoutTabSelectedBg() %>;
+}
+
 #layout-user-menu {
 	position: relative;
 	text-align: right;
@@ -365,18 +393,18 @@ FONT.bg {
 	padding: 2px;
 }
 
-#layout-my-places {
+#portal-dock-my-places {
 	cursor: default;
 	padding-top: 2px;
 	position: relative;
 	text-align: right;
 }
 
-#layout-my-places table {
+#portal-dock-my-places table {
 	float: right;
 }
 
-#layout-my-places ul {
+#portal-dock-my-places ul {
 	background-color: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid <%= colorScheme.getPortletFont() %>;
 	position: absolute;
@@ -386,13 +414,13 @@ FONT.bg {
 	margin: 0;
 }
 
-#layout-my-places ul li {
+#portal-dock-my-places ul li {
+	cursor: pointer;
 	padding: 2px;
 	white-space: nowrap;
 }
 
 #layout-global-search {
-	padding-right: 10px;
 }
 
 #layout-nav-more-menu li {
@@ -492,7 +520,7 @@ FONT.bg {
 	background-color: #FFFFCC;
 	border: 1px solid #000000;
 	padding: 2px;
-	font-size: <%= fontS %>
+	font-size: <%= fontS %>;
 }
 
 .layout-column-arrow-up {

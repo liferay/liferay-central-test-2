@@ -22,47 +22,101 @@
  */
 %>
 
-<div id="layout-outer-side-decoration">
+<div id="layout-outer-side-decoration" style="z-index: 0">
 	<div id="layout-inner-side-decoration">
 		<div id="layout-box">
+		
+	<c:if test="<%= themeDisplay.isSignedIn() %>">
+	<div style="position: relative; z-index: 4;">
+		<div style="position: absolute; top: 0px; right: 10px; z-index: 0;">
+			<div id="portal-dock-title" style="position: relative; z-index: 2">
+				<div class="portal-dock-help" id="portal-dock-text">
+					<%= user.getGreeting() %>
+				</div>
+				<div class="portal-dock-help" id="portal-dock-my-places" style="display: none">
+					<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
+				</div>
+				<div clsss="portal-dock-help" id="portal-dock-search" style="display: none">
+					<liferay-ui:journal-content-search />
+				</div>
+			</div>
+			 
+			<div id="portal-dock" style="position: absolute; z-index: 1;">
+				<div class="portal-dock-box">
+					 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_main.png" %>" height="50" width="50" />
+				</div>
+				
+				<div class="portal-dock-box"
+					 onmouseover="LiferayDock.showObject('portal-dock-my-places')">
+					 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_myPlaces.png" %>" height="50" width="50" />
+				</div>
+				
+				<div class="portal-dock-box"
+					 onclick="window.location='<%= themeDisplay.getURLSignOut() %>'"
+					 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "sign-out") %>')">
+					 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_logout.png" %>" height="50" width="50" />
+				</div>
+				
+				<div class="portal-dock-box"
+					 onclick="window.location='<%= themeDisplay.getURLHome() %>'"
+					 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "home") %>')">
+					 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_home.png" %>" height="50" width="50" />
+				</div>
+				
+				<div class="portal-dock-box"
+					 onclick=""
+					 onmouseover="LiferayDock.showObject('portal-dock-search'); $('portal-dock-search').getElementsByTagName('input')[0].focus()">
+					 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_search.png" %>" height="50" width="50" />
+				</div>
+				
+				<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+					<div class="portal-dock-box"
+						 onclick=""
+						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "layout") %>')">
+						 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_layout.png" %>" height="50" width="50" />
+					</div>
+				</c:if>
+		
+				<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
+					<div class="portal-dock-box"
+						 onclick="window.location='<%= themeDisplay.getURLMyAccount() %>'"
+						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "my-account") %>')">
+						 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_myAccount.png" %>" height="50" width="50" />
+					</div>
+				</c:if>
+				
+		
+				<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+					<div class="portal-dock-box"
+						 onclick="<%= themeDisplay.getURLAddContent() %>"
+						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "add-content") %>')">
+						 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_addContent.png" %>" height="50" width="50" />
+					</div>
+				</c:if>
+		
+				<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
+					<div class="portal-dock-box"
+						 onclick="showPageSettings()"
+						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>')">
+						 <liferay-ui:png-image image="<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_pageSettings.png" %>" height="50" width="50" />
+					</div>
+				</c:if>
+			</div>
+		</div>
+	</div>
+	</div>
+		
+		<script type="text/javascript">
+			LiferayDock.init();
+		</script>
+	</c:if>
+	
 			<table border="0" cellspacing="0" cellpadding="0" width="100%" id="layout-top-banner">
 			<tr>
 				<td valign="top" width="100%">
 					<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
 				</td>
-				<td id="layout-global-search" valign="top" align="right">
-					<liferay-ui:journal-content-search />
-				</td>
-				<td valign="top" align="right" class="font-small">
-					<span style="font-weight: bold;"><%= user.getGreeting() %></span><br />
-
-					<a href="<%= themeDisplay.getURLHome() %>"><bean:message key="home" /></a> -
-
-					<c:choose>
-						<c:when test="<%= themeDisplay.isSignedIn() %>">
-							<c:if test="<%= themeDisplay.isShowMyAccountIcon() %>">
-								<a href="<%= themeDisplay.getURLMyAccount() %>"><bean:message key="my-account" /></a> -
-							</c:if>
-
-							<a href="<%= themeDisplay.getURLSignOut() %>"><bean:message key="sign-out" /><br />
-
-							<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
-								<a href="javascript:<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
-							</c:if>
-
-							<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
-								- <a href="javascript: showPageSettings()"><bean:message key="page-settings" /></a>
-							</c:if>
-
-							<div id="layout-my-places">
-								<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
-								<div style="clear: both; font-size: 0"></div>
-							</div>
-						</c:when>
-						<c:otherwise>
-							<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
-						</c:otherwise>
-					</c:choose>
-				</td>
 			</tr>
 			</table>
+
+			
