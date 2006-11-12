@@ -39,6 +39,7 @@ import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.service.spring.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -1082,8 +1083,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 			String fromName = MBUtil.getEmailFromName(prefs);
 			String fromAddress = MBUtil.getEmailFromAddress(prefs);
-			String mailingListAddress = MBUtil.getMailingListAddress(
-				message.getCategoryId(), company.getCompanyId());
+			String mailingListAddress = StringPool.BLANK;
+			if (GetterUtil.getBoolean
+				(PropsUtil.get(PropsUtil.SMTP_SERVER_ENABLED))) {
+				mailingListAddress = MBUtil.getMailingListAddress(
+					message.getCategoryId(), company.getCompanyId());
+			}
+			
 			String replyToAddress = mailingListAddress;
 			String messageId = MBUtil.getMailId(
 				message.getMessageId(), company.getCompanyId());
