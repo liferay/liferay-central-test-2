@@ -184,7 +184,7 @@ public class MBMessageConsumer implements MessageListener {
 					replyToAddress, replyToAddress);
 
 				MailMessage message = new MailMessage(
-					from, to, curSubject, curBody, true);
+					from, to, curSubject, curBody, false);
 
 				message.setReplyTo(new InternetAddress[]{replyTo});
 				message.setMessageId(messageId);

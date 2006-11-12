@@ -72,25 +72,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 	%>
 
-	function initBodyEditor() {
-		return "<%= UnicodeFormatter.toString(bodyEditorContent) %>";
-	}
-
-	function initSignatureEditor() {
-		return "<%= UnicodeFormatter.toString(signatureEditorContent) %>";
-	}
-
-	function <portlet:namespace />saveConfiguration() {
-		<c:if test='<%= tabs2.startsWith("message-") %>'>
-			document.<portlet:namespace />fm.<portlet:namespace /><%= bodyEditorParam %>.value = parent.<portlet:namespace />bodyEditor.getHTML();
-			document.<portlet:namespace />fm.<portlet:namespace /><%= signatureEditorParam %>.value = parent.<portlet:namespace />signatureEditor.getHTML();
-		</c:if>
-
-		submitForm(document.<portlet:namespace />fm);
-	}
 </script>
 
-<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
@@ -237,13 +221,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<liferay-ui:input-editor
-					initMethod="initBodyEditor"
-					name='<%= renderResponse.getNamespace() + "bodyEditor" %>'
-					editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
-				/>
-
-				<input name="<portlet:namespace /><%= bodyEditorParam %>" type="hidden" value="">
+				<textarea class="form-text" name="<%= bodyEditorParam %>"
+						  style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"
+						  wrap="soft"><%= bodyEditorContent %></textarea>
 			</td>
 		</tr>
 			<tr>
@@ -252,13 +232,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<liferay-ui:input-editor
-						initMethod="initSignatureEditor"
-						name='<%= renderResponse.getNamespace() + "signatureEditor" %>'
-						editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
-					/>
-
-					<input name="<portlet:namespace /><%= signatureEditorParam %>" type="hidden" value="">
+					<textarea class="form-text" name="<%= signatureEditorParam %>" 
+							  style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"
+							  wrap="soft"><%= signatureEditorContent %></textarea>
 				</td>
 			</tr>
 		</table>
