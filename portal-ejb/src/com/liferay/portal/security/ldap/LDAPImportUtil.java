@@ -53,6 +53,7 @@ import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchResult;
+import javax.naming.directory.SearchControls;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
@@ -199,7 +200,10 @@ public class LDAPImportUtil {
 			String context = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_BASE_DN);
 
-			NamingEnumeration enu = ctx.search(context, filter, null);
+			SearchControls cons = new SearchControls(
+				SearchControls.SUBTREE_SCOPE, 0, 0, null, false, false);
+
+			NamingEnumeration enu = ctx.search(context, filter, cons);
 
 			while (enu.hasMore()) {
 				SearchResult result = (SearchResult)enu.next();
