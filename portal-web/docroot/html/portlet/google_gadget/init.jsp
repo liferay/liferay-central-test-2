@@ -33,6 +33,9 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
+String confType = prefs.getValue("conf-type", StringPool.BLANK);
+String gadgetCode = prefs.getValue("gadget-code", StringPool.BLANK);
+
 String gadgetId = prefs.getValue("gadget-id", StringPool.BLANK);
 String title = prefs.getValue("title", StringPool.BLANK);
 String borderId = prefs.getValue("border-id", StringPool.BLANK);
@@ -62,4 +65,6 @@ for (int i = 0; i < borders.length; i++) {
 }
 
 String border = borders[borderIdPos][2];
+
+boolean customConf = confType.equals("custom");
 %>

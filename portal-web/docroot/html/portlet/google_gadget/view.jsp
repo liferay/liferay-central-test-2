@@ -24,4 +24,11 @@
 
 <%@ include file="/html/portlet/google_gadget/init.jsp" %>
 
-<script src="http://gmodules.com/ig/ifr?url=<%= gadgetURL %>&<%= gadgetParams %>&synd=open&title=<%= Http.encodeURL(title) %>&border=<%= Http.encodeURL(border) %>&w=<%= width %>&h=<%= height %>&output=js"></script>
+<c:choose>
+	<c:when test="<%= customConf %>">
+		<%= gadgetCode %>
+	</c:when>
+	<c:otherwise>
+		<script src="http://gmodules.com/ig/ifr?url=<%= gadgetURL %>&<%= gadgetParams %>&synd=open&title=<%= Http.encodeURL(title) %>&border=<%= Http.encodeURL(border) %>&w=<%= width %>&h=<%= height %>&output=js"></script>
+	</c:otherwise>
+</c:choose>
