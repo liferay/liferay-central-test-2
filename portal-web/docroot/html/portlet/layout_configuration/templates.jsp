@@ -72,14 +72,14 @@
 		}
 
 		if (!restrictedTemplate) {
-		%>
+	%>
 
 			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
 				<tr>
 			</c:if>
 
 			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
-				<img onclick="$('layoutTemplateId_<%= i %>').checked=true" style="height: 150px; width: 100px" src="<%= themeDisplay.getPathThemeImage() %>/dock/icons_nav_layout.png" /><br />
+				<img onclick="$('layoutTemplateId_<%= i %>').checked = true;" src="<%= layoutTemplate.getContextPath() %><%= layoutTemplate.getThumbnailPath() %>/thumbnail.gif" /><br />
 				<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
 				<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
 			</td>
@@ -88,7 +88,7 @@
 				</tr>
 			</c:if>
 
-		<%
+	<%
 		}
 	}
 	%>

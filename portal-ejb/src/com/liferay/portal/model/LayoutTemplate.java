@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.Serializable;
@@ -33,6 +35,7 @@ import java.util.List;
  * <a href="LayoutTemplate.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ivica Cardic
+ * @author  Brian Wing Shun Chan
  *
  */
 public class LayoutTemplate implements Comparable, Serializable {
@@ -116,6 +119,44 @@ public class LayoutTemplate implements Comparable, Serializable {
 		_columns = columns;
 	}
 
+	public String getServletContextName() {
+		return _servletContextName;
+	}
+
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+
+		if (Validator.isNotNull(_servletContextName)) {
+			_warFile = true;
+		}
+		else {
+			_warFile = false;
+		}
+	}
+
+	public boolean getWARFile() {
+		return _warFile;
+	}
+
+	public boolean isWARFile() {
+		return _warFile;
+	}
+
+	public String getContextPath() {
+		if (isWARFile()) {
+			return StringPool.SLASH + getServletContextName();
+		}
+		else {
+			String contextPath = PropsUtil.get(PropsUtil.PORTAL_CTX);
+
+			if (contextPath.equals(StringPool.SLASH)) {
+				contextPath = StringPool.BLANK;
+			}
+
+			return contextPath;
+		}
+	}
+
 	public int compareTo(Object obj) {
 		if (obj == null) {
 			return -1;
@@ -158,5 +199,7 @@ public class LayoutTemplate implements Comparable, Serializable {
 	private String _content;
 	private boolean _setContent;
 	private List _columns = new ArrayList();
+	private String _servletContextName;
+	private boolean _warFile;
 
 }

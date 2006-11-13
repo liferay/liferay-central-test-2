@@ -228,6 +228,10 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplates.put(layoutTemplateId, layoutTemplateModel);
 			}
 
+			if (servletContextName != null) {
+				layoutTemplateModel.setServletContextName(servletContextName);
+			}
+
 			layoutTemplateModel.setStandard(standard);
 			layoutTemplateModel.setName(GetterUtil.getString(
 				layoutTemplate.attributeValue("name"),
