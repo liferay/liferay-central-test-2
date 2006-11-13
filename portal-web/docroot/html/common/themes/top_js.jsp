@@ -94,7 +94,7 @@
 				title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
 			});
 
-		url = "<%= themeDisplay.getPathMain() %>/portal/layout_templates";
+		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates";
 
 		AjaxUtil.update(url, message);
 	}
