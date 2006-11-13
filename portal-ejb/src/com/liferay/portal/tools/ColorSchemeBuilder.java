@@ -388,7 +388,7 @@ public class ColorSchemeBuilder {
 
 			String id = theme.attributeValue("id");
 
-			if (id.equals(Theme.DEFAULT_THEME_ID)) {
+			if (id.equals(Theme.getDefaultThemeId())) {
 				classicThemeEl = theme;
 			}
 		}

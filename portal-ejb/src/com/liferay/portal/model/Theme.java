@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.StringPool;
@@ -43,8 +44,10 @@ import java.util.Properties;
  */
 public class Theme implements Comparable, Serializable {
 
-	public static final String DEFAULT_THEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_THEME_ID);
+	public static String getDefaultThemeId() {
+		return PortalUtil.getJsSafePortletName(
+			PropsUtil.get(PropsUtil.DEFAULT_THEME_ID));
+	}
 
 	public Theme() {
 	}

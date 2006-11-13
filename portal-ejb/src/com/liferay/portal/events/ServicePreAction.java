@@ -335,13 +335,10 @@ public class ServicePreAction extends Action {
 			}
 			else {
 				theme = ThemeLocalUtil.getTheme(
-					companyId,
-					PrefsPropsUtil.getString(
-						companyId, PropsUtil.DEFAULT_THEME_ID));
+					companyId, Theme.getDefaultThemeId());
 				colorScheme = ThemeLocalUtil.getColorScheme(
 					companyId, theme.getThemeId(),
-					PrefsPropsUtil.getString(
-						companyId, PropsUtil.DEFAULT_COLOR_SCHEME_ID));
+					ColorScheme.getDefaultColorSchemeId());
 			}
 
 			req.setAttribute(WebKeys.THEME, theme);

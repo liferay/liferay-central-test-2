@@ -30,8 +30,6 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.ThemeCompanyId;
 import com.liferay.portal.model.ThemeCompanyLimit;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PrefsPropsUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.CollectionFactory;
@@ -95,12 +93,11 @@ public class ThemeLocalUtil {
 
 		if (colorScheme == null) {
 			colorScheme = (ColorScheme)colorSchemesMap.get(
-				PrefsPropsUtil.getString(
-					companyId, PropsUtil.DEFAULT_COLOR_SCHEME_ID));
+				ColorScheme.getDefaultColorSchemeId());
 		}
 
 		if (colorScheme == null) {
-			colorScheme = ColorScheme.NULL_COLOR_SCHEME;
+			colorScheme = ColorScheme.getNullColorScheme();
 		}
 
 		return colorScheme;
@@ -114,9 +111,7 @@ public class ThemeLocalUtil {
 		Theme theme = (Theme)_getThemes(companyId).get(themeId);
 
 		if (theme == null) {
-			theme = (Theme)_themes.get(
-				PrefsPropsUtil.getString(
-					companyId, PropsUtil.DEFAULT_THEME_ID));
+			theme = (Theme)_themes.get(Theme.getDefaultThemeId());
 		}
 
 		return theme;

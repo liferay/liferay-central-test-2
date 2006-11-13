@@ -44,9 +44,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ColorScheme implements Comparable, Serializable {
 
-	public static final String DEFAULT_COLOR_SCHEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_COLOR_SCHEME_ID);
-
 	public static final String BODY_BG = "body-bg";
 
 	public static final String LAYOUT_BG = "layout-bg";
@@ -134,8 +131,14 @@ public class ColorScheme implements Comparable, Serializable {
 	public static final String PORTLET_SECTION_SELECTED_HOVER_BG =
 		"portlet-section-selected-hover-bg";
 
-	public static final ColorScheme NULL_COLOR_SCHEME = new ColorScheme(
-		DEFAULT_COLOR_SCHEME_ID, StringPool.BLANK, StringPool.BLANK);
+	public static String getDefaultColorSchemeId() {
+		return PropsUtil.get(PropsUtil.DEFAULT_COLOR_SCHEME_ID);
+	}
+
+	public static ColorScheme getNullColorScheme() {
+		return new ColorScheme(
+			getDefaultColorSchemeId(), StringPool.BLANK, StringPool.BLANK);
+	}
 
 	public ColorScheme() {
 	}
