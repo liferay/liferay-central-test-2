@@ -86,20 +86,35 @@
 <script type="text/javascript" src="<%= themeDisplay.getPathMain() %>/portal/javascript_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&languageId=<%= themeDisplay.getLocale().toString() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>"></script>
 
 <script type="text/javascript">
+	function showLayoutTemplates() {
+		var message = Alerts.fireMessageBox(
+			{
+				width: 700,
+				modal: true,
+				title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
+			});
+
+		url = "<%= themeDisplay.getPathMain() %>/portal/layout_templates";
+
+		AjaxUtil.update(url, message);
+	}
+
 	<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">
 		function showPageSettings() {
 			var url = "<%= themeDisplay.getURLPageSettings().toString() %>";
 
 			url = url.replace(/\b=<%= WindowState.MAXIMIZED %>\b/,"=<%= LiferayWindowState.POP_UP %>");
 
-			var message = Alerts.popupIframe(url,
+			var message = Alerts.popupIframe(
+				url,
 				{
 					height: 200,
 					width: 700,
 					modal: true,
 					noCenter: true,
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
-					onClose: function() {
+					onClose:
+						function() {
 							window.location.reload(false);
 						}
 				});
@@ -108,19 +123,6 @@
 			message.wrapper.style.left = "20px";
 		}
 	</c:if>
-	
-	
-	function showLayoutTemplates() {
-			var message = Alerts.fireMessageBox({
-					width: 700,
-					modal: true,
-					title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
-			});
-			
-			url = "<%= themeDisplay.getPathMain() %>/portal/layout_templates";
-			
-			AjaxUtil.update(url, message);
-	}
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

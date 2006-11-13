@@ -24,8 +24,6 @@ package com.sample.tapestry.bean;
 
 import java.io.Serializable;
 
-import java.util.Date;
-
 /**
  * <a href="Book.java.html"><b><i>View Source</i></b></a>
  *

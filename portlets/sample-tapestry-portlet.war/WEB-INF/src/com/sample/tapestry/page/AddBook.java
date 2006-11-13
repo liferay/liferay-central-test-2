@@ -25,11 +25,9 @@ package com.sample.tapestry.page;
 import com.sample.tapestry.bean.Book;
 import com.sample.tapestry.bean.BookList;
 
-import java.util.Date;
-
 import org.apache.tapestry.IPage;
-import org.apache.tapestry.engine.IEngineService;
 import org.apache.tapestry.IRequestCycle;
+import org.apache.tapestry.engine.IEngineService;
 import org.apache.tapestry.event.PageBeginRenderListener;
 import org.apache.tapestry.event.PageEvent;
 import org.apache.tapestry.html.BasePage;
@@ -78,8 +76,8 @@ public abstract class AddBook
 
     public IPage doCancel(IRequestCycle cycle) {
     	View view = getView();
-    	
-        return view;        
+
+        return view;
      }
-    
+
 }

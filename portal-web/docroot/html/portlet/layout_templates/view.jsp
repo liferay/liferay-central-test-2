@@ -25,76 +25,77 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(Layout.TYPE_PORTLET) %>">
-
 	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>&cmd=template&refresh=true" method="post" name="layoutTemplates">
 
-		<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px">
+	<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px">
 
-			<%
-				int CELLS_PER_ROW = 4; 
-				List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
-				Group group = layout.getGroup();
+	<%
+	int CELLS_PER_ROW = 4;
 
-				String selector1 = StringPool.BLANK;
+	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
 
-				if (group.isUser()) {
-					selector1 = "desktop";
-				}
-				else if (group.isCommunity()) {
-					selector1 = "community";
-				}
-				else if (group.isOrganization()) {
-					selector1 = "organization";
-				}
+	Group group = layout.getGroup();
 
-				String selector2 = StringPool.BLANK;
+	String selector1 = StringPool.BLANK;
 
-				if ((layout.getPriority() == 0) && (layout.getParentLayoutId().equals(Layout.DEFAULT_PARENT_LAYOUT_ID))) {
-					selector2 = "firstLayout";
-				}
+	if (group.isUser()) {
+		selector1 = "desktop";
+	}
+	else if (group.isCommunity()) {
+		selector1 = "community";
+	}
+	else if (group.isOrganization()) {
+		selector1 = "organization";
+	}
 
-				String[] restrictedTemplates = PropsUtil.getComponentProperties().getStringArray(PropsUtil.LAYOUT_TEMPLATE_RESTRICTIONS, Filter.by(selector1, selector2));
+	String selector2 = StringPool.BLANK;
 
-				for (int i = 0; i < layoutTemplates.size(); i++) {
-					LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
+	if ((layout.getPriority() == 0) && (layout.getParentLayoutId().equals(Layout.DEFAULT_PARENT_LAYOUT_ID))) {
+		selector2 = "firstLayout";
+	}
 
-					String layoutTemplateId = layoutTemplate.getLayoutTemplateId();
+	String[] restrictedTemplates = PropsUtil.getComponentProperties().getStringArray(PropsUtil.LAYOUT_TEMPLATE_RESTRICTIONS, Filter.by(selector1, selector2));
 
-					boolean restrictedTemplate = false;
+	for (int i = 0; i < layoutTemplates.size(); i++) {
+		LayoutTemplate layoutTemplate = (LayoutTemplate)layoutTemplates.get(i);
 
-					for (int j = 0; j < restrictedTemplates.length; j++) {
-						if (layoutTemplateId.equals(restrictedTemplates[j])) {
-							restrictedTemplate = true;
+		String layoutTemplateId = layoutTemplate.getLayoutTemplateId();
 
-							break;
-						}
-					}
+		boolean restrictedTemplate = false;
 
-					if (!restrictedTemplate) {
-					%>
-						<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
-							<tr>
-						</c:if>
+		for (int j = 0; j < restrictedTemplates.length; j++) {
+			if (layoutTemplateId.equals(restrictedTemplates[j])) {
+				restrictedTemplate = true;
 
-						<td width="<%= 100/CELLS_PER_ROW %>%" align="center">
-							<img onclick="$('layoutTemplateId_<%= i %>').checked=true" style="height: 150px; width: 100px" src="<%= themeDisplay.getPathThemeImage() %>/dock/icons_nav_layout.png" /><br />
-							<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
-							<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
-						</td>
-						
-						<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
-							</tr>
-						</c:if>
+				break;
+			}
+		}
 
-					<%
-					}
-				}
-				%>
+		if (!restrictedTemplate) {
+		%>
 
+			<c:if test="<%= (i % CELLS_PER_ROW) == 0 %>">
+				<tr>
+			</c:if>
 
-			</table>
+			<td align="center" width="<%= 100 / CELLS_PER_ROW %>%">
+				<img onclick="$('layoutTemplateId_<%= i %>').checked=true" style="height: 150px; width: 100px" src="<%= themeDisplay.getPathThemeImage() %>/dock/icons_nav_layout.png" /><br />
+				<input type="radio" id="layoutTemplateId_<%= i %>" name="layoutTemplateId" <%= layoutTypePortlet.getLayoutTemplateId().equals(layoutTemplate.getLayoutTemplateId()) ? "checked" : "" %> value="<%= layoutTemplate.getLayoutTemplateId() %>" />
+				<label for="layoutTemplateId_<%= i %>"><%= layoutTemplate.getName() %></label>
+			</td>
 
-			<input class="form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>" style="margin: 10px" />
+			<c:if test="<%= (i % CELLS_PER_ROW) == (CELLS_PER_ROW - 1) %>">
+				</tr>
+			</c:if>
+
+		<%
+		}
+	}
+	%>
+
+	</table>
+
+	<input class="form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "save") %>" style="margin: 10px" />
 
 	</form>
 </c:if>

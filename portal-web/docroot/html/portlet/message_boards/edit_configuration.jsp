@@ -221,22 +221,23 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<textarea class="form-text" name="<%= bodyEditorParam %>"
-						  style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"
-						  wrap="soft"><%= bodyEditorContent %></textarea>
+				<textarea class="form-text" name="<%= bodyEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= bodyEditorContent %></textarea>
 			</td>
 		</tr>
-			<tr>
-				<td>
-					<%= LanguageUtil.get(pageContext, "signature") %>
-				</td>
-				<td style="padding-left: 10px;"></td>
-				<td>
-					<textarea class="form-text" name="<%= signatureEditorParam %>" 
-							  style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;"
-							  wrap="soft"><%= signatureEditorContent %></textarea>
-				</td>
-			</tr>
+		<tr>
+			<td colspan="3">
+				<br>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "signature") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<textarea class="form-text" name="<%= signatureEditorParam %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= signatureEditorContent %></textarea>
+			</td>
+		</tr>
 		</table>
 
 		<br>
@@ -252,7 +253,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<%= LanguageUtil.get(pageContext, "the-category-in-which-the-message-has-been-posted") %>The category in which the message has been posted
+				<%= LanguageUtil.get(pageContext, "the-category-in-which-the-message-has-been-posted") %>
 			</td>
 		</tr>
 		<tr>
