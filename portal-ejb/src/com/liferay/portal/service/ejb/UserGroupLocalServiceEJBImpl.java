@@ -76,6 +76,13 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return getService().getUserGroup(userGroupId);
 	}
 
+	public com.liferay.portal.model.UserGroup getUserGroup(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().getUserGroup(companyId, name);
+	}
+
 	public java.util.List getUserUserGroups(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

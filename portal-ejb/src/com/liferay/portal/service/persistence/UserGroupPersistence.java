@@ -28,6 +28,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
+import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -187,6 +188,501 @@ public class UserGroupPersistence extends BasePersistence {
 		}
 	}
 
+	public List findByCompanyId(String companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByCompanyId(String companyId, int begin, int end)
+		throws SystemException {
+		return findByCompanyId(companyId, begin, end, null);
+	}
+
+	public List findByCompanyId(String companyId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroup findByCompanyId_First(String companyId,
+		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
+		List list = findByCompanyId(companyId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroup exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupException(msg);
+		}
+		else {
+			return (UserGroup)list.get(0);
+		}
+	}
+
+	public UserGroup findByCompanyId_Last(String companyId,
+		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
+		int count = countByCompanyId(companyId);
+		List list = findByCompanyId(companyId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroup exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupException(msg);
+		}
+		else {
+			return (UserGroup)list.get(0);
+		}
+	}
+
+	public UserGroup[] findByCompanyId_PrevAndNext(String userGroupId,
+		String companyId, OrderByComparator obc)
+		throws NoSuchUserGroupException, SystemException {
+		UserGroup userGroup = findByPrimaryKey(userGroupId);
+		int count = countByCompanyId(companyId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userGroup);
+			UserGroup[] array = new UserGroup[3];
+			array[0] = (UserGroup)objArray[0];
+			array[1] = (UserGroup)objArray[1];
+			array[2] = (UserGroup)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByC_P(String companyId, String parentUserGroupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (parentUserGroupId == null) {
+				query.append("parentUserGroupId IS NULL");
+			}
+			else {
+				query.append("parentUserGroupId = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (parentUserGroupId != null) {
+				q.setString(queryPos++, parentUserGroupId);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByC_P(String companyId, String parentUserGroupId,
+		int begin, int end) throws SystemException {
+		return findByC_P(companyId, parentUserGroupId, begin, end, null);
+	}
+
+	public List findByC_P(String companyId, String parentUserGroupId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (parentUserGroupId == null) {
+				query.append("parentUserGroupId IS NULL");
+			}
+			else {
+				query.append("parentUserGroupId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (parentUserGroupId != null) {
+				q.setString(queryPos++, parentUserGroupId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroup findByC_P_First(String companyId,
+		String parentUserGroupId, OrderByComparator obc)
+		throws NoSuchUserGroupException, SystemException {
+		List list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroup exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "parentUserGroupId=";
+			msg += parentUserGroupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupException(msg);
+		}
+		else {
+			return (UserGroup)list.get(0);
+		}
+	}
+
+	public UserGroup findByC_P_Last(String companyId, String parentUserGroupId,
+		OrderByComparator obc) throws NoSuchUserGroupException, SystemException {
+		int count = countByC_P(companyId, parentUserGroupId);
+		List list = findByC_P(companyId, parentUserGroupId, count - 1, count,
+				obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroup exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "parentUserGroupId=";
+			msg += parentUserGroupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupException(msg);
+		}
+		else {
+			return (UserGroup)list.get(0);
+		}
+	}
+
+	public UserGroup[] findByC_P_PrevAndNext(String userGroupId,
+		String companyId, String parentUserGroupId, OrderByComparator obc)
+		throws NoSuchUserGroupException, SystemException {
+		UserGroup userGroup = findByPrimaryKey(userGroupId);
+		int count = countByC_P(companyId, parentUserGroupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (parentUserGroupId == null) {
+				query.append("parentUserGroupId IS NULL");
+			}
+			else {
+				query.append("parentUserGroupId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("name ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (parentUserGroupId != null) {
+				q.setString(queryPos++, parentUserGroupId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userGroup);
+			UserGroup[] array = new UserGroup[3];
+			array[0] = (UserGroup)objArray[0];
+			array[1] = (UserGroup)objArray[1];
+			array[2] = (UserGroup)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroup findByC_N(String companyId, String name)
+		throws NoSuchUserGroupException, SystemException {
+		UserGroup userGroup = fetchByC_N(companyId, name);
+
+		if (userGroup == null) {
+			String msg = "No UserGroup exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "name=";
+			msg += name;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg);
+			}
+
+			throw new NoSuchUserGroupException(msg);
+		}
+
+		return userGroup;
+	}
+
+	public UserGroup fetchByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("name ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			List list = q.list();
+
+			if (list.size() == 0) {
+				return null;
+			}
+
+			UserGroup userGroup = (UserGroup)list.get(0);
+
+			return userGroup;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -217,6 +713,203 @@ public class UserGroupPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public void removeByCompanyId(String companyId) throws SystemException {
+		Iterator itr = findByCompanyId(companyId).iterator();
+
+		while (itr.hasNext()) {
+			UserGroup userGroup = (UserGroup)itr.next();
+			remove(userGroup);
+		}
+	}
+
+	public void removeByC_P(String companyId, String parentUserGroupId)
+		throws SystemException {
+		Iterator itr = findByC_P(companyId, parentUserGroupId).iterator();
+
+		while (itr.hasNext()) {
+			UserGroup userGroup = (UserGroup)itr.next();
+			remove(userGroup);
+		}
+	}
+
+	public void removeByC_N(String companyId, String name)
+		throws NoSuchUserGroupException, SystemException {
+		UserGroup userGroup = findByC_N(companyId, name);
+		remove(userGroup);
+	}
+
+	public int countByCompanyId(String companyId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_P(String companyId, String parentUserGroupId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (parentUserGroupId == null) {
+				query.append("parentUserGroupId IS NULL");
+			}
+			else {
+				query.append("parentUserGroupId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (parentUserGroupId != null) {
+				q.setString(queryPos++, parentUserGroupId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_N(String companyId, String name)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserGroup WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -128,7 +128,13 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 		return UserGroupUtil.findByPrimaryKey(userGroupId);
 	}
 
-	public List getUserUserGroups(String userId)
+	public UserGroup getUserGroup(String companyId, String name)
+		throws PortalException, SystemException {
+
+		return UserGroupUtil.fetchByC_N(companyId, name);
+	}
+
+	public List getUserUserGroups(String userId) 
 		throws PortalException, SystemException {
 
 		return UserUtil.getUserGroups(userId);

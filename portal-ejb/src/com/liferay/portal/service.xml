@@ -974,7 +974,7 @@
 
 		<!-- Finder methods -->
 
-		<!--<finder name="CompanyId" return-type="Collection">
+		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
 		<finder name="C_P" return-type="Collection">
@@ -984,7 +984,7 @@
 		<finder name="C_N" return-type="UserGroup">
 			<finder-column name="companyId" />
 			<finder-column name="name" />
-		</finder>-->
+		</finder>
 	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">
 

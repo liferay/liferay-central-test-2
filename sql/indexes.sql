@@ -177,6 +177,10 @@ create index Subscription_ix_C_C_C on Subscription (companyId, className, classP
 create index Subscription_ix_C_U_C_C on Subscription (companyId, userId, className, classPK);
 create index Subscription_ix_UserId on Subscription (userId);
 
+create index UserGroup_ix_C_N on UserGroup (companyId, name);
+create index UserGroup_ix_C_P on UserGroup (companyId, parentUserGroupId);
+create index UserGroup_ix_CompanyId on UserGroup (companyId);
+
 create index UserIdMapper_ix_UserId on UserIdMapper (userId);
 
 create index UserTrackerPath_ix_UserTracker on UserTrackerPath (userTrackerId);
