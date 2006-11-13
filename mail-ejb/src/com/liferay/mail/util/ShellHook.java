@@ -43,8 +43,11 @@ public class ShellHook implements Hook {
 	public static String SHELL_SCRIPT =
 		PropsUtil.get(PropsUtil.MAIL_HOOK_SHELL_SCRIPT);
 
+	public void addFilters(String userId, List filters) {
+	}
+
 	public void addForward(
-		String userId, List emailAddresses, boolean leaveCopy) {
+		String userId, List filters, List emailAddresses, boolean leaveCopy) {
 
 		_execute(
 			new String[] {

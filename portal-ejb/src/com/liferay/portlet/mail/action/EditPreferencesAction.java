@@ -22,12 +22,14 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.spring.MailServiceUtil;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -74,26 +76,48 @@ public class EditPreferencesAction extends PortletAction {
 
 		String tabs1 = ParamUtil.getString(req, "tabs1");
 
-		if (tabs1.equals("forward-address")) {
-			String forwardAddress = ParamUtil.getString(req, "forwardAddress");
+		if (tabs1.equals("filters")) {
+			List filters = new ArrayList();
+			List filterObjects = new ArrayList();
 
-			String[] forwardAddressArray = StringUtil.split(
-				forwardAddress, "\n");
+			for (int i = 0; i < 10; i++) {
+				String emailAddress = ParamUtil.getString(
+					req, "filterEmailAddress" + i);
+				String folder = ParamUtil.getString(req, "filterFolder" + i);
 
-			List forwardAddressList = new ArrayList();
-
-			for (int i = 0; i < forwardAddressArray.length; i++) {
-				if (Validator.isEmailAddress(forwardAddressArray[i])) {
-					forwardAddressList.add(forwardAddressArray[i]);
-				}
+				filters.add(emailAddress + "[$FILTER_SEPARATOR$]" + folder);
+				filterObjects.add(new Filter(emailAddress, folder));
 			}
 
-			if (forwardAddressList.size() > 0) {
-				forwardAddressArray =
-					(String[])forwardAddressList.toArray(new String[0]);
+			prefs.setValues(
+				"filters", (String[])filters.toArray(new String[0]));
 
+			String forwardAddress = GetterUtil.getString(
+				prefs.getValue("forward-address", StringPool.BLANK));
+
+			List emailAddresses = getEmailAddresses(
+				forwardAddress, StringPool.SPACE);
+
+			boolean leaveCopy = GetterUtil.getBoolean(
+				prefs.getValue("leave-copy", StringPool.BLANK));
+
+			try {
+				MailServiceUtil.addForward(
+					req.getRemoteUser(), filterObjects, emailAddresses,
+					leaveCopy);
+			}
+			catch (SystemException se) {
+				throw new PortletException(se);
+			}
+		}
+		else if (tabs1.equals("forward-address")) {
+			String forwardAddress = ParamUtil.getString(req, "forwardAddress");
+
+			List emailAddresses = getEmailAddresses(forwardAddress, "\n");
+
+			if (emailAddresses.size() > 0) {
 				forwardAddress = StringUtil.merge(
-					forwardAddressArray, StringPool.SPACE);
+					emailAddresses, StringPool.SPACE);
 			}
 			else {
 				forwardAddress = StringPool.BLANK;
@@ -104,13 +128,32 @@ public class EditPreferencesAction extends PortletAction {
 			prefs.setValue("forward-address", forwardAddress);
 			prefs.setValue("leave-copy", Boolean.toString(leaveCopy));
 
+			List filterObjects = new ArrayList();
+
+			String[] filters = prefs.getValues("filters", new String[0]);
+
+			for (int i = 0; i < filters.length; i++) {
+				String[] kvp = StringUtil.split(
+					filters[i], "[$FILTER_SEPARATOR$]");
+
+				if (kvp.length == 2) {
+					String emailAddress = kvp[0];
+					String folder = kvp[1];
+
+					filterObjects.add(new Filter(emailAddress, folder));
+				}
+			}
+
 			try {
 				MailServiceUtil.addForward(
-					req.getRemoteUser(), forwardAddressList, leaveCopy);
+					req.getRemoteUser(), filterObjects, emailAddresses,
+					leaveCopy);
 			}
 			catch (SystemException se) {
 				throw new PortletException(se);
 			}
+
+			res.setRenderParameter("forwardAddress", forwardAddress);
 		}
 		else if (tabs1.equals("signature")) {
 			String signature = ParamUtil.getString(req, "signature");
@@ -148,6 +191,21 @@ public class EditPreferencesAction extends PortletAction {
 		throws Exception {
 
 		return mapping.findForward("portlet.mail.edit");
+	}
+
+	protected List getEmailAddresses(String forwardAddress, String delimiter) {
+		String[] forwardAddressArray = StringUtil.split(
+			forwardAddress, delimiter);
+
+		List emailAddresses = new ArrayList();
+
+		for (int i = 0; i < forwardAddressArray.length; i++) {
+			if (Validator.isEmailAddress(forwardAddressArray[i])) {
+				emailAddresses.add(forwardAddressArray[i]);
+			}
+		}
+
+		return emailAddresses;
 	}
 
 }

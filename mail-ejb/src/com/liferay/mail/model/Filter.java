@@ -20,71 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.mail.model;
 
-import com.liferay.util.GetterUtil;
-
-import java.text.DateFormat;
-
-import java.util.Date;
+import java.io.Serializable;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="Filter.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class Filter implements Serializable {
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+	public Filter() {
 	}
 
-	static String version = "4.1.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3374";
-
-	static String date = "November 13, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public Filter(String emailAddress, String folder) {
+		_emailAddress = emailAddress;
+		_folder = folder;
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public String getEmailAddress() {
+		return _emailAddress;
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public void setEmailAddress(String emailAddress) {
+		_emailAddress = emailAddress;
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public String getFolder() {
+		return _folder;
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public void setFolder(String folder) {
+		_folder = folder;
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
-	}
+	private String _emailAddress;
+	private String _folder;
 
 }

@@ -38,7 +38,7 @@ import java.util.List;
 public interface MailService {
 
 	public void addForward(
-			String userId, List emailAddresses, boolean leaveCopy)
+			String userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException;
 
 	public void addUser(

@@ -25,6 +25,7 @@ package com.liferay.mail.util;
 import com.liferay.mail.NoSuchCyrusUserException;
 import com.liferay.mail.model.CyrusUser;
 import com.liferay.mail.model.CyrusVirtual;
+import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
@@ -50,7 +51,7 @@ import org.apache.commons.logging.LogFactory;
 public class CyrusHook implements Hook {
 
 	public void addForward(
-		String userId, List emailAddresses, boolean leaveCopy) {
+		String userId, List filters, List emailAddresses, boolean leaveCopy) {
 
 		try {
 			if (emailAddresses != null) {
@@ -58,8 +59,20 @@ public class CyrusHook implements Hook {
 
 				File file = new File(home + "/" + userId + ".procmail.forward");
 
-				if (emailAddresses.size() > 0) {
+				if ((filters.size() > 0) || (emailAddresses.size() > 0)) {
 					StringBuffer sb = new StringBuffer();
+
+					for (int i = 0; i < filters.size(); i++) {
+						Filter filter = (Filter)filters.get(i);
+
+						sb.append(":0\n");
+						sb.append("* ^(From|Cc|To).*");
+						sb.append(filter.getEmailAddress());
+						sb.append("\n");
+						sb.append("| $DELIVER -e -a $USER -m user.$USER.");
+						sb.append(filter.getFolder());
+						sb.append("\n\n");
+					}
 
 					if (leaveCopy) {
 						sb.append(":0 c\n");

@@ -38,12 +38,12 @@ import java.util.List;
 public class MailServiceUtil {
 
 	public static void addForward(
-			String userId, List emailAddresses, boolean leaveCopy)
+			String userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException {
 
 		MailService mailService = MailServiceFactory.getService();
 
-		mailService.addForward(userId, emailAddresses, leaveCopy);
+		mailService.addForward(userId, filters, emailAddresses, leaveCopy);
 	}
 
 	public static void addUser(

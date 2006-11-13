@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/mail/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1", "forward-address");
+String tabs1 = ParamUtil.getString(request, "tabs1", "filters");
 
 signature = ParamUtil.getString(request, "signature", signature);
 vacationMessage = ParamUtil.getString(request, "vacationMessage", vacationMessage);
@@ -72,11 +72,64 @@ portletURL.setParameter("tabs1", tabs1);
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 
 <liferay-ui:tabs
-	names="forward-address,signature,vacation-message"
+	names="filters,forward-address,signature,vacation-message"
 	url="<%= portletURL.toString() %>"
 />
 
 <c:choose>
+	<c:when test='<%= tabs1.equals("filters") %>'>
+		<%= LanguageUtil.get(pageContext, "set-the-following-values-to-filter-emails-associated-with-an-email-address-to-a-folder") %>
+
+		<br><br>
+
+		<table border="0" cellpadding="0" cellspacing="0">
+		<tr>
+			<td>
+				<%= LanguageUtil.get(pageContext, "email-address") %>
+			</td>
+			<td style="padding-left: 10px;"></td>
+			<td>
+				<%= LanguageUtil.get(pageContext, "folder") %>
+			</td>
+		</tr>
+
+		<%
+		String[] filters = prefs.getValues("filters", new String[0]);
+
+		for (int i = 0; i < 10; i++) {
+			String emailAddress = StringPool.BLANK;
+			String folder = StringPool.BLANK;
+
+			if (filters.length > i) {
+				String[] filter = StringUtil.split(filters[i], "[$FILTER_SEPARATOR$]");
+
+				try {
+					emailAddress = filter[0];
+					folder = filter[1];
+				}
+				catch (Exception e) {
+				}
+			}
+		%>
+
+			<tr>
+				<td>
+					<input class="form-text" name="<portlet:namespace />filterEmailAddress<%= i %>" size="20" type="text" value="<%= emailAddress %>">
+				</td>
+				<td style="padding-left: 10px;"></td>
+				<td>
+					<input class="form-text" name="<portlet:namespace />filterFolder<%= i %>" size="50" type="text" value="<%= folder %>">
+				</td>
+			</tr>
+
+		<%
+		}
+		%>
+
+		</table>
+
+		<br>
+	</c:when>
 	<c:when test='<%= tabs1.equals("forward-address") %>'>
 
 		<%

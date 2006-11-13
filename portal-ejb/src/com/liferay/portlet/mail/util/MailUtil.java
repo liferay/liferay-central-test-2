@@ -1406,17 +1406,9 @@ public class MailUtil {
 	private static Store _getStore(HttpSession ses)
 		throws FolderException, StoreException {
 
-		String userId = (String)ses.getAttribute(WebKeys.USER_ID);
-
-		if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.MAIL_USERNAME_REPLACE))) {
-
-			userId = StringUtil.replace(userId, ".", "_");
-		}
+		MailAccount currentAccount = MailAccounts.getCurrentAccount(ses);
 
 		try {
-			MailAccount currentAccount = MailAccounts.getCurrentAccount(ses);
-
 			Store store = MailCache.getStore(ses, currentAccount.getName());
 
 			if (store != null && !store.isConnected()) {
@@ -1436,7 +1428,9 @@ public class MailUtil {
 			return store;
 		}
 		catch (AuthenticationFailedException afe) {
-			_log.error("Failed to authenticate the userId " + userId + "");
+			_log.error(
+				"Failed to authenticate the userId " +
+					currentAccount.getUserId());
 
 			throw new StoreException(afe);
 		}

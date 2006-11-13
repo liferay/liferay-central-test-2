@@ -43,7 +43,7 @@ import java.util.List;
 public class MailServiceImpl implements MailService {
 
 	public void addForward(
-			String userId, List emailAddresses, boolean leaveCopy)
+			String userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws SystemException {
 
 		String hookImpl = PropsUtil.get(PropsUtil.MAIL_HOOK_IMPL);
@@ -55,8 +55,9 @@ public class MailServiceImpl implements MailService {
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			hookImpl, "addForward",
-			new Object[] {userId, emailAddresses,
-			new BooleanWrapper(leaveCopy)});
+			new Object[] {
+				userId, filters, emailAddresses, new BooleanWrapper(leaveCopy)
+			});
 
 		MailProducer.produce(methodWrapper);
 	}
