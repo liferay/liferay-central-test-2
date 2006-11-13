@@ -193,6 +193,7 @@ public class LDAPImportUtil {
 
 			_log.debug(sw.getBuffer().toString());
 		}
+		
 		try {
 			String filter = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
