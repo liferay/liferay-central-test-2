@@ -108,19 +108,14 @@
 			var message = Alerts.popupIframe(
 				url,
 				{
-					height: 200,
 					width: 700,
 					modal: true,
-					noCenter: true,
 					title: '<%= UnicodeLanguageUtil.get(pageContext, "page-settings") %>',
 					onClose:
 						function() {
 							window.location.reload(false);
 						}
 				});
-
-			message.wrapper.style.top = "20px";
-			message.wrapper.style.left = "20px";
 		}
 	</c:if>
 

@@ -42,12 +42,14 @@
 			</div>
 
 			<div id="portal-dock" style="position: absolute; z-index: 1;">
-				<div class="portal-dock-box">
+			
+				<div class="portal-dock-box"
+					 onmouseover="LiferayDock.showText('<%= UnicodeFormatter.toString(user.getGreeting()) %>')">
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_main.png" %>' height="50" width="50" />
 				</div>
 
 				<div class="portal-dock-box"
-					 onmouseover="LiferayDock.showObject('portal-dock-my-places')">
+					 onmouseover="LiferayDock.showObject('portal-dock-my-places', 10)">
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_myPlaces.png" %>' height="50" width="50" />
 				</div>
 
@@ -65,7 +67,7 @@
 
 				<div class="portal-dock-box"
 					 onclick=""
-					 onmouseover="LiferayDock.showObject('portal-dock-search'); $('portal-dock-search').getElementsByTagName('input')[0].focus()">
+					 onmouseover="LiferayDock.showObject('portal-dock-search', 10); $('portal-dock-search').getElementsByTagName('input')[0].focus()">
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_search.png" %>' height="50" width="50" />
 				</div>
 
@@ -105,7 +107,7 @@
 	</div>
 
 		<script type="text/javascript">
-			LiferayDock.init();
+			LiferayDock.initialize("<%= UnicodeFormatter.toString(user.getGreeting()) %>");
 		</script>
 	</c:if>
 
