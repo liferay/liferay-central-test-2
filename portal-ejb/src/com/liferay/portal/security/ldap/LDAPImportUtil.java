@@ -312,7 +312,7 @@ public class LDAPImportUtil {
 
 		// Import and add user to group
 
-		if (user == null) {
+		if (user != null) {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			for (int i = 0; i < attr.size(); i++) {
