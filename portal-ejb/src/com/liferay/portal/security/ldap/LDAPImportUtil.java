@@ -28,11 +28,9 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -81,6 +79,17 @@ public class LDAPImportUtil {
 			boolean sendEmail, boolean checkExists, boolean updatePassword)
 		throws PortalException, SystemException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"User Id " + userId + " and email address " + emailAddress);
+		}
+		
+		if (userId == null || emailAddress == null) {
+			_log.warn("Cannot add user. User Id and Email Address required.");
+			
+			return;
+		}
+		
 		boolean create = true;
 
 		if (checkExists) {
@@ -112,7 +121,11 @@ public class LDAPImportUtil {
 					jobTitle, organizationId, locationId, sendEmail);
 			}
 			catch (Exception e){
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.warn("Problem adding user " + userId);
+				
+				if (_log.isDebugEnabled()) {
+					_log.debug(StackTraceUtil.getStackTrace(e));
+				}
 			}
 		}
 	}
@@ -317,7 +330,6 @@ public class LDAPImportUtil {
 					User.getDefaultUserId(companyId), companyId, groupName, 
 					description);
 			}
-
 
 			UserLocalServiceUtil.addUserGroupUsers(
 				userGroup.getUserGroupId(), new String[] {userId});
