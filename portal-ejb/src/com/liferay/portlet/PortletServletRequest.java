@@ -31,6 +31,7 @@ import com.liferay.util.StringPool;
 import com.liferay.util.servlet.ProtectedPrincipal;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 import java.security.Principal;
@@ -126,7 +127,12 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getCharacterEncoding() {
-		return null;
+		if (_isUploadRequest()) {
+			return super.getCharacterEncoding();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public void setCharacterEncoding(String encoding)
@@ -134,19 +140,34 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public int getContentLength() {
-		return 0;
+		if (_isUploadRequest()) {
+			return super.getContentLength();
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public String getContentType() {
-		return null;
+		if (_isUploadRequest()) {
+			return super.getContentType();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public String getContextPath() {
 		return _portletRequest.getContextPath();
 	}
 
-	public ServletInputStream getInputStream() {
-		return null;
+	public ServletInputStream getInputStream() throws IOException {
+		if (_isUploadRequest()) {
+			return super.getInputStream();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public Locale getLocale() {
@@ -169,8 +190,13 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _queryString;
 	}
 
-	public BufferedReader getReader() {
-		return null;
+	public BufferedReader getReader() throws IOException {
+		if (_isUploadRequest()) {
+			return super.getReader();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public String getRealPath(String path) {
@@ -226,6 +252,19 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	private boolean _isUploadRequest() {
+		if (!_uploadRequestInvoked) {
+
+			_uploadRequestInvoked = true;
+			
+			if (PortalUtil.getUploadServletRequest(this) != null) {
+				_uploadRequest = true;
+			}	
+		}
+		
+		return _uploadRequest;
+	}
+	
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _req;
@@ -236,5 +275,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _servletPath;
 	private String _remoteUser;
 	private Principal _userPrincipal;
+	private boolean _uploadRequestInvoked;
+	private boolean _uploadRequest;
 
 }
