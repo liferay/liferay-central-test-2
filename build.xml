@@ -294,6 +294,24 @@
 		</copy>
 
 		<if>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				</or>
+				<equals arg1="${app.server.deploy.archive}" arg2="war" />
+			</and>
+			<then>
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="log4j.jar"
+					/>
+				</delete>
+			</then>
+		</if>
+
+		<if>
 			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
 				<copy todir="${app.server.lib.portal.dir}">
@@ -440,6 +458,13 @@ auto.deploy.dest.dir=../webapps</echo>
 
 				<if>
 					<or>
+						<and>
+							<or>
+								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							</or>
+							<equals arg1="${app.server.deploy.archive}" arg2="war" />
+						</and>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<equals arg1="${app.server.type}" arg2="resin" />
 						<equals arg1="${app.server.type}" arg2="tomcat" />
@@ -683,7 +708,7 @@ app.server.jonas-jetty.ejbgen.compile=on</echo>
 	<target name="build-ext-jonas-tomcat">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=jonas-tomcat
 
-app.server.jonas-jetty.ejbgen.compile=on</echo>
+app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		
 		<ant dir="${lp.ext.dir}" target="clean" inheritAll="false" />
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />

@@ -40,12 +40,16 @@
 
 	<property name="java2html.dir" value="${project.dir}/api/${ant.project.name}" />
 	<property name="javadoc.dir" value="${project.dir}/api/${ant.project.name}" />
-	
+
 	<propertycopy name="app.server.dir" from="app.server.${app.server.type}.dir" />
 	<propertycopy name="app.server.bin.dir" from="app.server.${app.server.type}.bin.dir" />
 	<propertycopy name="app.server.classes.global.dir" from="app.server.${app.server.type}.classes.global.dir" />
 	<propertycopy name="app.server.classes.portal.dir" from="app.server.${app.server.type}.classes.portal.dir" />
+	<propertycopy name="app.server.deploy.archive" from="app.server.${app.server.type}.deploy.archive" silent="true" />
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
+	<propertycopy name="app.server.ejbgen.compile" from="app.server.${app.server.type}.ejbgen.compile" silent="true" />
+	<propertycopy name="app.server.ejbgen.protocols" from="app.server.${app.server.type}.ejbgen.protocols" silent="true" />
+	<propertycopy name="app.server.ejbgen.version" from="app.server.${app.server.type}.ejbgen.version" silent="true" />
 	<propertycopy name="app.server.lib.global.dir" from="app.server.${app.server.type}.lib.global.dir" />
 	<propertycopy name="app.server.lib.portal.dir" from="app.server.${app.server.type}.lib.portal.dir" />
 	<propertycopy name="app.server.portal.dir" from="app.server.${app.server.type}.portal.dir" />
@@ -59,10 +63,13 @@
 
 	<target name="deploy-ejb-jar">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				</or>
+				<equals arg1="${app.server.deploy.archive}" arg2="ear" />
+			</and>
 			<then>
 				<unjar src="${modules.dir}${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
@@ -96,8 +103,13 @@
 	<target name="deploy-war">
 		<if>
 			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				<and>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<equals arg1="${app.server.deploy.archive}" arg2="ear" />
+				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 			</or>
@@ -136,7 +148,21 @@
 						</if>
 					</then>
 					<else>
-						<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+						<if>
+							<and>
+								<or>
+									<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+									<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+								</or>
+								<equals arg1="${app.server.deploy.archive}" arg2="war" />
+							</and>
+							<then>
+								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
+							</then>
+							<else>
+								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}" />
+							</else>
+						</if>
 					</else>
 				</if>
 			</else>
@@ -163,6 +189,13 @@
 
 		<if>
 			<or>
+				<and>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<equals arg1="${app.server.deploy.archive}" arg2="war" />
+				</and>
 				<equals arg1="${app.server.type}" arg2="jetty" />
 				<equals arg1="${app.server.type}" arg2="resin" />
 				<equals arg1="${app.server.type}" arg2="tomcat" />

@@ -148,6 +148,25 @@
 			<fileset dir="lib/portal" />
 		</copy>
 
+
+		<if>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				</or>
+				<equals arg1="${app.server.deploy.archive}" arg2="war" />
+			</and>
+			<then>
+				<delete>
+					<fileset
+						dir="${app.server.lib.portal.dir}"
+						includes="log4j.jar"
+					/>
+				</delete>
+			</then>
+		</if>
+
 		<if>
 			<equals arg1="${app.server.type}" arg2="jetty" />
 			<then>
@@ -280,6 +299,13 @@
 
 				<if>
 					<or>
+						<and>
+							<or>
+								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							</or>
+							<equals arg1="${app.server.deploy.archive}" arg2="war" />
+						</and>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<equals arg1="${app.server.type}" arg2="resin" />
 						<equals arg1="${app.server.type}" arg2="tomcat" />

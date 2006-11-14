@@ -6,8 +6,8 @@
 	<target name="jar" depends="compile">
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
-			<attribute name="Genic-Jonas-Version" value="${app.server.jonas-jetty.ejbgen.version}" />
-			<attribute name="Genic-Jonas-protocols" value="${app.server.jonas-jetty.ejbgen.protocols}" />
+			<attribute name="Genic-Jonas-Version" value="${app.server.ejbgen.version}" />
+			<attribute name="Genic-Jonas-protocols" value="${app.server.ejbgen.protocols}" />
 		</manifest>
 
 		<jar
@@ -24,7 +24,7 @@
 
 	<target name="jar-jonas-genic">
 		<if>
-			<equals arg1="${app.server.jonas-jetty.ejbgen.compile}" arg2="on" />
+			<equals arg1="${app.server.ejbgen.compile}" arg2="on" />
 			<then>
 				<tstamp>
 					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
@@ -90,10 +90,13 @@
 
 	<target name="deploy" depends="jar">
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-			</or>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				</or>
+				<equals arg1="${app.server.deploy.archive}" arg2="ear" />
+			</and>
 			<then>
 				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
