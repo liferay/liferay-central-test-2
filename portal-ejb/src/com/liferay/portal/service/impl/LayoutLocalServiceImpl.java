@@ -470,9 +470,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		deleteLayouts(ownerId);
-
 		Iterator itr = root.elements("layout").iterator();
+
+		List newLayoutPKs = new ArrayList();
 
 		while (itr.hasNext()) {
 			Element layoutEl = (Element)itr.next();
@@ -491,7 +491,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			int priority = GetterUtil.getInteger(
 				layoutEl.elementText("priority"));
 
-			Layout layout = LayoutUtil.create(new LayoutPK(layoutId, ownerId));
+			LayoutPK layoutPK = new LayoutPK(layoutId, ownerId);
+
+			newLayoutPKs.add(layoutPK);
+
+			Layout layout = LayoutUtil.fetchByPrimaryKey(layoutPK);
+
+			if (layout == null) {
+				layout = LayoutUtil.create(layoutPK);
+			}
 
 			layout.setCompanyId(user.getActualCompanyId());
 			layout.setParentLayoutId(parentLayoutId);
@@ -540,6 +548,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				}
 			}
 		}
+
+		deleteMissingLayouts(ownerId, newLayoutPKs);
 
 		// Portlet preferences
 
@@ -735,6 +745,31 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutUtil.update(layout);
 
 		return layout;
+	}
+
+	protected void deleteMissingLayouts(String ownerId, List newLayoutPKs)
+		throws SystemException, PortalException {
+
+		// Layouts
+
+		Iterator itr = LayoutUtil.findByO_P(
+			ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID).iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+
+			if (!newLayoutPKs.contains(layout.getPrimaryKey())) {
+				try {
+					deleteLayout(layout, false);
+				}
+				catch (NoSuchLayoutException nsle) {
+				}
+			}
+		}
+
+		// Layout set
+
+		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
 	protected void exportLayoutPermissions(
