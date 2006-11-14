@@ -354,14 +354,12 @@ public class LDAPImportUtil {
 					description);
 			}
 
-			if (userGroup != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + userId + " to group " + groupName);
-				}
-
-				UserLocalServiceUtil.addUserGroupUsers(
-					userGroup.getUserGroupId(), new String[] {userId});
+			if (_log.isDebugEnabled()) {
+				_log.debug("Adding " + userId + " to group " + groupName);
 			}
+
+			UserLocalServiceUtil.addUserGroupUsers(
+				userGroup.getUserGroupId(), new String[] {userId});
 		}
 	}
 
