@@ -191,10 +191,11 @@ public class LDAPImportUtil {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Failed to bind to the LDAP server");
 			}
+
 			if (_log.isDebugEnabled()) {
 				_log.debug(e);
 			}
-			
+
 			return;
 		}
 
@@ -317,42 +318,49 @@ public class LDAPImportUtil {
 			locationId, sendEmail, true, false);
 
 		// Import and add user to group
+
 		if (user != null) {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
 
 			if (attr != null){
-				for (int i = 0; i < attr.size(); i++) {
-					String groupDN = (String)attr.get(i);
+				_importLDAPGroup(companyId, ctx, groupMappings, userId, attr);
+			}
+		}
+	}
 
-					Attributes groupAttrs = ctx.getAttributes(groupDN);
+	private static void _importLDAPGroup(
+		String companyId, LdapContext ctx, Properties groupMappings,
+		String userId, Attribute attr) throws Exception {
 
-					String groupName = LDAPUtil.getAttributeValue(
-						groupAttrs, groupMappings.getProperty("groupName"));
-					String description = LDAPUtil.getAttributeValue(
-						groupAttrs, groupMappings.getProperty("description"));
+		for (int i = 0; i < attr.size(); i++) {
+			String groupDN = (String)attr.get(i);
 
-					UserGroup userGroup = null;
+			Attributes groupAttrs = ctx.getAttributes(groupDN);
 
-					try {
-						userGroup = UserGroupLocalServiceUtil.getUserGroup(
-							companyId, groupName);
-					}
-					catch (NoSuchUserGroupException nsuge) {
-						userGroup = UserGroupLocalServiceUtil.addUserGroup(
-							User.getDefaultUserId(companyId), companyId, 
-							groupName, description);
-					}
+			String groupName = LDAPUtil.getAttributeValue(
+				groupAttrs, groupMappings.getProperty("groupName"));
+			String description = LDAPUtil.getAttributeValue(
+				groupAttrs, groupMappings.getProperty("description"));
 
-					if (userGroup != null) {
-						if (_log.isDebugEnabled()) {
-							_log.debug(
-								"Adding " + userId + " to group " + groupName);
-						}
+			UserGroup userGroup = null;
 
-						UserLocalServiceUtil.addUserGroupUsers(
-							userGroup.getUserGroupId(), new String[] {userId});
-					}
+			try {
+				userGroup = UserGroupLocalServiceUtil.getUserGroup(
+					companyId, groupName);
+			}
+			catch (NoSuchUserGroupException nsuge) {
+				userGroup = UserGroupLocalServiceUtil.addUserGroup(
+					User.getDefaultUserId(companyId), companyId, groupName,
+					description);
+			}
+
+			if (userGroup != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding " + userId + " to group " + groupName);
 				}
+
+				UserLocalServiceUtil.addUserGroupUsers(
+					userGroup.getUserGroupId(), new String[] {userId});
 			}
 		}
 	}
