@@ -34,6 +34,22 @@ public class StringUtil_IW {
 		return _instance;
 	}
 
+	public String shorten(String s) {
+		return StringUtil.shorten(s);
+	}
+
+	public String shorten(String s, int length) {
+		return StringUtil.shorten(s, length);
+	}
+
+	public String shorten(String s, String suffix) {
+		return StringUtil.shorten(s, suffix);
+	}
+
+	public String shorten(String s, int length, String suffix) {
+		return StringUtil.shorten(s, length, suffix);
+	}
+
 	public String[] split(String s) {
 		return StringUtil.split(s);
 	}
