@@ -22,8 +22,8 @@
 
 package com.liferay.portal.security.ldap;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -52,8 +52,8 @@ import javax.naming.Context;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attribute;
 import javax.naming.directory.Attributes;
-import javax.naming.directory.SearchResult;
 import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
 
@@ -80,18 +80,22 @@ public class LDAPImportUtil {
 		throws PortalException, SystemException {
 
 		User user = null;
-		
+
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"User Id " + userId + " and email address " + emailAddress);
 		}
-		
+
 		if (userId == null || emailAddress == null) {
-			_log.warn("Cannot add user. User Id and Email Address required.");
-			
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Cannot add user because user id and email address are " +
+						"required");
+			}
+
 			return user;
 		}
-		
+
 		boolean create = true;
 
 		if (checkExists) {
@@ -123,14 +127,16 @@ public class LDAPImportUtil {
 					jobTitle, organizationId, locationId, sendEmail);
 			}
 			catch (Exception e){
-				_log.warn("Problem adding user " + userId);
-				
+				if (_log.isWarnEnabled()) {
+					_log.warn("Problem adding user " + userId);
+				}
+
 				if (_log.isDebugEnabled()) {
 					_log.debug(StackTraceUtil.getStackTrace(e));
 				}
 			}
 		}
-		
+
 		return user;
 	}
 
@@ -212,7 +218,7 @@ public class LDAPImportUtil {
 
 			_log.debug(sw.getBuffer().toString());
 		}
-		
+
 		try {
 			String filter = PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_SEARCH_FILTER);
@@ -305,36 +311,37 @@ public class LDAPImportUtil {
 			locationId, sendEmail, true, false);
 
 		// Import and add user to group
-		if (user != null) {
+
+		if (user == null) {
 			Attribute attr = attrs.get(userMappings.getProperty("group"));
-	
+
 			for (int i = 0; i < attr.size(); i++) {
 				String groupDN = (String)attr.get(i);
-	
+
 				Attributes groupAttrs = ctx.getAttributes(groupDN);
-	
+
 				String groupName = LDAPUtil.getAttributeValue(
 					groupAttrs, groupMappings.getProperty("groupName"));
 				String description = LDAPUtil.getAttributeValue(
 					groupAttrs, groupMappings.getProperty("description"));
-	
+
 				UserGroup userGroup = null;
-	
+
 				if (_log.isDebugEnabled()) {
 					_log.debug(
 						"Adding " + userId + " to group " + groupName);
 				}
-	
+
 				try {
 					userGroup = UserGroupLocalServiceUtil.getUserGroup(
 						companyId, groupName);
 				}
-				catch (NoSuchGroupException nsge) {
+				catch (NoSuchUserGroupException nsuge) {
 					userGroup = UserGroupLocalServiceUtil.addUserGroup(
-						User.getDefaultUserId(companyId), companyId, groupName, 
+						User.getDefaultUserId(companyId), companyId, groupName,
 						description);
 				}
-	
+
 				UserLocalServiceUtil.addUserGroupUsers(
 					userGroup.getUserGroupId(), new String[] {userId});
 			}
