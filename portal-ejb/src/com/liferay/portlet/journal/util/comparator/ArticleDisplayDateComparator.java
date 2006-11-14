@@ -35,9 +35,9 @@ import com.liferay.util.dao.hibernate.OrderByComparator;
  */
 public class ArticleDisplayDateComparator extends OrderByComparator {
 
-	public static String ORDER_BY_ASC = "displayDate ASC";
+	public static String ORDER_BY_ASC = "displayDate ASC, version ASC";
 
-	public static String ORDER_BY_DESC = "displayDate DESC";
+	public static String ORDER_BY_DESC = "displayDate DESC, version DESC";
 
 	public ArticleDisplayDateComparator() {
 		this(false);
@@ -53,6 +53,15 @@ public class ArticleDisplayDateComparator extends OrderByComparator {
 
 		int value = DateUtil.compareTo(
 			article1.getDisplayDate(), article2.getDisplayDate());
+
+		if (value == 0) {
+			if (article1.getVersion() < article2.getVersion()) {
+				value = -1;
+			}
+			else if (article1.getVersion() > article2.getVersion()) {
+				value = 1;
+			}
+		}
 
 		if (_asc) {
 			return value;
