@@ -470,9 +470,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		User user = UserUtil.findByPrimaryKey(userId);
 
-		Iterator itr = root.elements("layout").iterator();
-
 		List newLayoutPKs = new ArrayList();
+
+		Iterator itr = root.elements("layout").iterator();
 
 		while (itr.hasNext()) {
 			Element layoutEl = (Element)itr.next();
