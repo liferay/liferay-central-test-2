@@ -471,7 +471,12 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLMyAccount(myAccountURL);
 			}
 
-			if (!user.isActive() || !user.isAgreedToTermsOfUse()) {
+			boolean termsOfUseRequired = GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.TERMS_OF_USE_REQUIRED), true);
+
+			if (!user.isActive() ||
+				(termsOfUseRequired && !user.isAgreedToTermsOfUse())) {
+
 				themeDisplay.setShowAddContentIcon(false);
 				themeDisplay.setShowMyAccountIcon(false);
 				themeDisplay.setShowPageSettingsIcon(false);
