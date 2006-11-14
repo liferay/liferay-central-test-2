@@ -68,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LDAPImportUtil {
 
-	public static void addOrUpdateUser(
+	public static User addOrUpdateUser(
 			String creatorUserId, String companyId, boolean autoUserId,
 			String userId, boolean autoPassword, String password1,
 			String password2, boolean passwordReset, String emailAddress,
@@ -79,6 +79,8 @@ public class LDAPImportUtil {
 			boolean sendEmail, boolean checkExists, boolean updatePassword)
 		throws PortalException, SystemException {
 
+		User user = null;
+		
 		if (_log.isDebugEnabled()) {
 			_log.debug(
 				"User Id " + userId + " and email address " + emailAddress);
@@ -87,19 +89,19 @@ public class LDAPImportUtil {
 		if (userId == null || emailAddress == null) {
 			_log.warn("Cannot add user. User Id and Email Address required.");
 			
-			return;
+			return user;
 		}
 		
 		boolean create = true;
 
 		if (checkExists) {
 			try {
-				UserLocalServiceUtil.getUserByEmailAddress(
+				user = UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, emailAddress);
 
 				if (updatePassword) {
 					UserLocalServiceUtil.updatePassword(
-						userId, password1, password2, passwordReset);
+						user.getUserId(), password1, password2, passwordReset);
 				}
 
 				create = false;
@@ -113,7 +115,7 @@ public class LDAPImportUtil {
 
 		if (create) {
 			try {
-				UserLocalServiceUtil.addUser(
+				user = UserLocalServiceUtil.addUser(
 					creatorUserId, companyId, autoUserId, userId, autoPassword,
 					password1, password2, passwordReset, emailAddress, locale,
 					firstName, middleName, lastName, nickName, prefixId,
@@ -128,6 +130,8 @@ public class LDAPImportUtil {
 				}
 			}
 		}
+		
+		return user;
 	}
 
 	public static void importLDAP() throws Exception {
@@ -293,7 +297,7 @@ public class LDAPImportUtil {
 		String locationId = null;
 		boolean sendEmail = false;
 
-		addOrUpdateUser(
+		User user = addOrUpdateUser(
 			creatorUserId, companyId, autoUserId, userId, autoPassword,
 			password1, password2, passwordReset, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
@@ -301,38 +305,39 @@ public class LDAPImportUtil {
 			locationId, sendEmail, true, false);
 
 		// Import and add user to group
-
-		Attribute attr = attrs.get(userMappings.getProperty("group"));
-
-		for (int i = 0; i < attr.size(); i++) {
-			String groupDN = (String)attr.get(i);
-
-			Attributes groupAttrs = ctx.getAttributes(groupDN);
-
-			String groupName = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("groupName"));
-			String description = LDAPUtil.getAttributeValue(
-				groupAttrs, groupMappings.getProperty("description"));
-
-			UserGroup userGroup = null;
-
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Adding " + userId + " to group " + groupName);
+		if (user != null) {
+			Attribute attr = attrs.get(userMappings.getProperty("group"));
+	
+			for (int i = 0; i < attr.size(); i++) {
+				String groupDN = (String)attr.get(i);
+	
+				Attributes groupAttrs = ctx.getAttributes(groupDN);
+	
+				String groupName = LDAPUtil.getAttributeValue(
+					groupAttrs, groupMappings.getProperty("groupName"));
+				String description = LDAPUtil.getAttributeValue(
+					groupAttrs, groupMappings.getProperty("description"));
+	
+				UserGroup userGroup = null;
+	
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Adding " + userId + " to group " + groupName);
+				}
+	
+				try {
+					userGroup = UserGroupLocalServiceUtil.getUserGroup(
+						companyId, groupName);
+				}
+				catch (NoSuchGroupException nsge) {
+					userGroup = UserGroupLocalServiceUtil.addUserGroup(
+						User.getDefaultUserId(companyId), companyId, groupName, 
+						description);
+				}
+	
+				UserLocalServiceUtil.addUserGroupUsers(
+					userGroup.getUserGroupId(), new String[] {userId});
 			}
-
-			try {
-				userGroup = UserGroupLocalServiceUtil.getUserGroup(
-					companyId, groupName);
-			}
-			catch (NoSuchGroupException nsge) {
-				userGroup = UserGroupLocalServiceUtil.addUserGroup(
-					User.getDefaultUserId(companyId), companyId, groupName, 
-					description);
-			}
-
-			UserLocalServiceUtil.addUserGroupUsers(
-				userGroup.getUserGroupId(), new String[] {userId});
 		}
 	}
 
