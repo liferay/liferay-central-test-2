@@ -58,6 +58,30 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addFolder(
+			userId, plid, parentFolderId, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public IGFolder addFolder(
+			String userId, String plid, String parentFolderId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFolder(
+			userId, plid, parentFolderId, name, description, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public IGFolder addFolder(
+			String userId, String plid, String parentFolderId, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -85,8 +109,16 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		// Resources
 
-		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addFolderResources(
+				folder, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addFolderResources(folder, communityPermissions, guestPermissions);
+		}
 
 		return folder;
 	}
@@ -111,6 +143,27 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			IGFolder.class.getName(), folder.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFolderResources(
+			String folderId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+
+		addFolderResources(folder, communityPermissions, guestPermissions);
+	}
+
+	public void addFolderResources(
+			IGFolder folder, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
+			IGFolder.class.getName(), folder.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(String folderId)

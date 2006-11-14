@@ -62,6 +62,34 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 			addGuestPermissions);
 	}
 
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addFileEntry(userId, folderId, name, title,
+			description, extraSettings, byteArray, communityPermissions,
+			guestPermissions);
+	}
+
+	public com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addFileEntry(userId, folderId, name, title,
+			description, extraSettings, byteArray, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
 	public void addFileEntryResources(java.lang.String folderId,
 		java.lang.String name, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -79,6 +107,26 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 			com.liferay.portal.SystemException {
 		getService().addFileEntryResources(folder, fileEntry,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFileEntryResources(java.lang.String folderId,
+		java.lang.String name, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addFileEntryResources(folderId, name,
+			communityPermissions, guestPermissions);
+	}
+
+	public void addFileEntryResources(
+		com.liferay.portlet.documentlibrary.model.DLFolder folder,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addFileEntryResources(folder, fileEntry,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteFileEntries(java.lang.String folderId)

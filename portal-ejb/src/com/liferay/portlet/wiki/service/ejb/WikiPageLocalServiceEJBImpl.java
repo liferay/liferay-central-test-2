@@ -74,6 +74,25 @@ public class WikiPageLocalServiceEJBImpl implements WikiPageLocalService,
 			addGuestPermissions);
 	}
 
+	public void addPageResources(java.lang.String nodeId,
+		java.lang.String title, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addPageResources(nodeId, title, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
+		com.liferay.portlet.wiki.model.WikiPage page,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addPageResources(node, page, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deletePage(java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

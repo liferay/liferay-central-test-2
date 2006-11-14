@@ -80,7 +80,9 @@ String nodeId = BeanParamUtil.getString(node, request, "nodeId");
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= WikiNode.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

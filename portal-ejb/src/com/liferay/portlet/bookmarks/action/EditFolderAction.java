@@ -129,10 +129,10 @@ public class EditFolderAction extends PortletAction {
 		boolean mergeWithParentFolder = ParamUtil.getBoolean(
 			req, "mergeWithParentFolder");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(folderId)) {
 
@@ -140,7 +140,7 @@ public class EditFolderAction extends PortletAction {
 
 			BookmarksFolderServiceUtil.addFolder(
 				layout.getPlid(), parentFolderId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 		}
 		else {
 

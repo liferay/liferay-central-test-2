@@ -36,6 +36,13 @@ public interface BlogsCategoryService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

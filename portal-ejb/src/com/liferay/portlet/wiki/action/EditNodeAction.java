@@ -124,18 +124,18 @@ public class EditNodeAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(nodeId)) {
 
 			// Add node
 
 			WikiNodeServiceUtil.addNode(
-				layout.getPlid(), name, description, addCommunityPermissions,
-				addGuestPermissions);
+				layout.getPlid(), name, description, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

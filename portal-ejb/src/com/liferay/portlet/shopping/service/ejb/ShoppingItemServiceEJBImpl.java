@@ -81,6 +81,30 @@ public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
+		java.lang.String categoryId, java.lang.String sku,
+		java.lang.String name, java.lang.String description,
+		java.lang.String properties, java.lang.String fieldsQuantities,
+		boolean requiresShipping, int stockQuantity, boolean featured,
+		java.lang.Boolean sale, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		boolean mediumImage, java.lang.String mediumImageURL,
+		java.io.File mediumFile, boolean largeImage,
+		java.lang.String largeImageURL, java.io.File largeFile,
+		java.util.List itemFields, java.util.List itemPrices,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addItem(categoryId, sku, name, description,
+			properties, fieldsQuantities, requiresShipping, stockQuantity,
+			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
+			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
+			itemFields, itemPrices, communityPermissions, guestPermissions);
+	}
+
 	public void deleteItem(java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

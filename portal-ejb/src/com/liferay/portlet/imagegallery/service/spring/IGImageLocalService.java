@@ -37,6 +37,25 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addImageResources(java.lang.String folderId,
 		java.lang.String imageId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -47,6 +66,20 @@ public interface IGImageLocalService {
 		com.liferay.portlet.imagegallery.model.IGFolder folder,
 		com.liferay.portlet.imagegallery.model.IGImage image,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addImageResources(java.lang.String folderId,
+		java.lang.String imageId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addImageResources(
+		com.liferay.portlet.imagegallery.model.IGFolder folder,
+		com.liferay.portlet.imagegallery.model.IGImage image,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

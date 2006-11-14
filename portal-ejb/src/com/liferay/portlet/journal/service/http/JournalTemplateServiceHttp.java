@@ -144,6 +144,120 @@ public class JournalTemplateServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		HttpPrincipal httpPrincipal, java.lang.String templateId,
+		boolean autoTemplateId, java.lang.String plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = templateId;
+
+			if (templateId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new BooleanWrapper(autoTemplateId);
+			Object paramObj2 = plid;
+
+			if (plid == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = structureId;
+
+			if (structureId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = name;
+
+			if (name == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = description;
+
+			if (description == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = xsl;
+
+			if (xsl == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(formatXsl);
+			Object paramObj8 = langType;
+
+			if (langType == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = new BooleanWrapper(smallImage);
+			Object paramObj10 = smallImageURL;
+
+			if (smallImageURL == null) {
+				paramObj10 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj11 = smallFile;
+
+			if (smallFile == null) {
+				paramObj11 = new NullWrapper("java.io.File");
+			}
+
+			Object paramObj12 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj12 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj13 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj13 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
+					"addTemplate",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalTemplate)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
 		java.lang.String companyId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 

@@ -196,10 +196,10 @@ public class EditMessageAction extends PortletAction {
 		boolean anonymous = ParamUtil.getBoolean(req, "anonymous");
 		double priority = ParamUtil.getDouble(req, "priority");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		MBMessage message = null;
 
@@ -212,8 +212,8 @@ public class EditMessageAction extends PortletAction {
 
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, subject, body, files, anonymous, priority,
-					req.getPreferences(), addCommunityPermissions,
-					addGuestPermissions);
+					req.getPreferences(), communityPermissions,
+					guestPermissions);
 			}
 			else {
 
@@ -222,7 +222,7 @@ public class EditMessageAction extends PortletAction {
 				message = MBMessageServiceUtil.addMessage(
 					categoryId, threadId, parentMessageId, subject, body, files,
 					anonymous, priority, req.getPreferences(),
-					addCommunityPermissions, addGuestPermissions);
+					communityPermissions, guestPermissions);
 			}
 		}
 		else {

@@ -57,6 +57,28 @@ public class DLFileShortcutLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addFileShortcut(
+			userId, folderId, toFolderId, toName,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public DLFileShortcut addFileShortcut(
+			String userId, String folderId, String toFolderId, String toName,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFileShortcut(
+			userId, folderId, toFolderId, toName, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public DLFileShortcut addFileShortcut(
+			String userId, String folderId, String toFolderId, String toName,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// File shortcut
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -84,8 +106,17 @@ public class DLFileShortcutLocalServiceImpl
 
 		// Resources
 
-		addFileShortcutResources(
-			folder, fileShortcut, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addFileShortcutResources(
+				folder, fileShortcut, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addFileShortcutResources(
+				folder, fileShortcut, communityPermissions, guestPermissions);
+		}
 
 		// Folder
 
@@ -119,6 +150,31 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
 			String.valueOf(fileShortcut.getPrimaryKey()), false,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFileShortcutResources(
+			long fileShortcutId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFileShortcut fileShortcut = DLFileShortcutUtil.findByPrimaryKey(
+			fileShortcutId);
+		DLFolder folder = fileShortcut.getFolder();
+
+		addFileShortcutResources(
+			folder, fileShortcut, communityPermissions, guestPermissions);
+	}
+
+	public void addFileShortcutResources(
+			DLFolder folder, DLFileShortcut fileShortcut,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			fileShortcut.getCompanyId(), folder.getGroupId(),
+			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
+			String.valueOf(fileShortcut.getPrimaryKey()), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)

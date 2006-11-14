@@ -132,6 +132,60 @@ public class JournalArticleLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addArticle(
+			userId, articleId, autoArticleId, plid, title, description, content,
+			type, structureId, templateId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, images, articleURL, prefs,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public JournalArticle addArticle(
+			String userId, String articleId, boolean autoArticleId,
+			String plid, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, Map images, String articleURL,
+			PortletPreferences prefs, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addArticle(
+			userId, articleId, autoArticleId, plid, title, description, content,
+			type, structureId, templateId, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, images, articleURL, prefs, null,
+			null, communityPermissions, guestPermissions);
+	}
+
+	public JournalArticle addArticle(
+			String userId, String articleId, boolean autoArticleId,
+			String plid, String title, String description, String content,
+			String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, Map images, String articleURL,
+			PortletPreferences prefs, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Article
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -201,8 +255,17 @@ public class JournalArticleLocalServiceImpl
 
 		// Resources
 
-		addArticleResources(
-			article, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addArticleResources(
+				article, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addArticleResources(
+				article, communityPermissions, guestPermissions);
+		}
 
 		// Email
 
@@ -232,6 +295,28 @@ public class JournalArticleLocalServiceImpl
 			article.getUserId(), JournalArticle.class.getName(),
 			article.getResourcePK().toString(), false, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addArticleResources(
+			String companyId, String articleId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		JournalArticle article = getLatestArticle(companyId, articleId);
+
+		addArticleResources(article, communityPermissions, guestPermissions);
+	}
+
+	public void addArticleResources(
+			JournalArticle article, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			article.getCompanyId(), article.getGroupId(),
+			article.getUserId(), JournalArticle.class.getName(),
+			article.getResourcePK().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalArticle approveArticle(

@@ -56,6 +56,24 @@ public class DLFileShortcutServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutModel addFileShortcut(
+		java.lang.String folderId, java.lang.String toFolderId,
+		java.lang.String toName, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
+				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
+					toName, communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteFileShortcut(long fileShortcutId)
 		throws RemoteException {
 		try {

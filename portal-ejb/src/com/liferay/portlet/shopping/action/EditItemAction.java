@@ -247,10 +247,10 @@ public class EditItemAction extends PortletAction {
 		String largeImageURL = ParamUtil.getString(uploadReq, "largeImageURL");
 		File largeFile = uploadReq.getFile("largeFile");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(itemId)) {
 
@@ -261,8 +261,8 @@ public class EditItemAction extends PortletAction {
 				fieldsQuantities, requiresShipping, stockQuantity, featured,
 				sale, smallImage, smallImageURL, smallFile, mediumImage,
 				mediumImageURL, mediumFile, largeImage, largeImageURL,
-				largeFile, itemFields, itemPrices, addCommunityPermissions,
-				addGuestPermissions);
+				largeFile, itemFields, itemPrices, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

@@ -57,6 +57,25 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategoryModel addCategory(
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
+					parentCategoryId, name, description, communityPermissions,
+					guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteCategory(java.lang.String categoryId)
 		throws RemoteException {
 		try {

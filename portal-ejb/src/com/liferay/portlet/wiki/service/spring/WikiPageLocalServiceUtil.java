@@ -59,6 +59,28 @@ public class WikiPageLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static void addPageResources(java.lang.String nodeId,
+		java.lang.String title, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.addPageResources(nodeId, title,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addPageResources(
+		com.liferay.portlet.wiki.model.WikiNode node,
+		com.liferay.portlet.wiki.model.WikiPage page,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+		wikiPageLocalService.addPageResources(node, page, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void deletePage(java.lang.String nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException, 

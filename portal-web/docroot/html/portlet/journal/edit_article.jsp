@@ -866,7 +866,9 @@ String[] availableLocales = null;
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= JournalArticle.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

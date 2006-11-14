@@ -55,6 +55,21 @@ public class ShoppingCategoryServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public ShoppingCategory addCategory(
+			String plid, String parentCategoryId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingCategoryPermission.check(
+			getPermissionChecker(), plid, parentCategoryId,
+			ActionKeys.ADD_CATEGORY);
+
+		return ShoppingCategoryLocalServiceUtil.addCategory(
+			getUserId(), plid, parentCategoryId, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteCategory(String categoryId)
 		throws PortalException, SystemException {
 

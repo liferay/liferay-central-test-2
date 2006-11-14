@@ -36,6 +36,24 @@ public interface BookmarksEntryLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addEntryResources(java.lang.String folderId,
 		java.lang.String entryId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -46,6 +64,20 @@ public interface BookmarksEntryLocalService {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addEntryResources(java.lang.String folderId,
+		java.lang.String entryId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addEntryResources(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
+		com.liferay.portlet.bookmarks.model.BookmarksEntry entry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

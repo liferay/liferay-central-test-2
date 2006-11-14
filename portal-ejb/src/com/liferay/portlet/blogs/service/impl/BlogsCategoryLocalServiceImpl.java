@@ -63,6 +63,30 @@ public class BlogsCategoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addCategory(
+			userId, parentCategoryId, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public BlogsCategory addCategory(
+			String userId, String parentCategoryId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addCategory(
+			userId, parentCategoryId, name, description, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public BlogsCategory addCategory(
+			String userId, String parentCategoryId, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Category
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -88,8 +112,17 @@ public class BlogsCategoryLocalServiceImpl
 
 		// Resources
 
-		addCategoryResources(
-			category, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addCategoryResources(
+				category, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addCategoryResources(
+				category, communityPermissions, guestPermissions);
+		}
 
 		return category;
 	}
@@ -114,6 +147,27 @@ public class BlogsCategoryLocalServiceImpl
 			category.getCompanyId(), null, category.getUserId(),
 			BlogsCategory.class.getName(), category.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addCategoryResources(
+			String categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BlogsCategory category = BlogsCategoryUtil.findByPrimaryKey(categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
+			BlogsCategory category, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			category.getCompanyId(), null, category.getUserId(),
+			BlogsCategory.class.getName(), category.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteCategory(String categoryId)

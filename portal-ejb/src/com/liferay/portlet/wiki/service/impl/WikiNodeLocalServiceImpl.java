@@ -72,6 +72,28 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addNode(
+			userId, plid, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public WikiNode addNode(
+			String userId, String plid, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addNode(
+			userId, plid, name, description, null, null, communityPermissions,
+			guestPermissions);
+	}
+
+	public WikiNode addNode(
+			String userId, String plid, String name, String description,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Node
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -98,7 +120,16 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 
 		// Resources
 
-		addNodeResources(node, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addNodeResources(
+				node, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addNodeResources(node, communityPermissions, guestPermissions);
+		}
 
 		return node;
 	}
@@ -122,6 +153,27 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 			node.getCompanyId(), node.getGroupId(), node.getUserId(),
 			WikiNode.class.getName(), node.getPrimaryKey().toString(), false,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addNodeResources(
+			String nodeId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+
+		addNodeResources(node, communityPermissions, guestPermissions);
+	}
+
+	public void addNodeResources(
+			WikiNode node, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			node.getCompanyId(), node.getGroupId(), node.getUserId(),
+			WikiNode.class.getName(), node.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteNode(String nodeId)

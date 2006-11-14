@@ -122,18 +122,18 @@ public class EditCategoryAction extends PortletAction {
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(categoryId)) {
 
 			// Add category
 
 			BlogsCategoryServiceUtil.addCategory(
-				parentCategoryId, name, description, addCommunityPermissions,
-				addGuestPermissions);
+				parentCategoryId, name, description, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

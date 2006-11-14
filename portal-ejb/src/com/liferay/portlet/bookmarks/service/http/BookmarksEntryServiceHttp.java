@@ -106,6 +106,82 @@ public class BookmarksEntryServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		HttpPrincipal httpPrincipal, java.lang.String folderId,
+		java.lang.String name, java.lang.String url, java.lang.String comments,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = folderId;
+
+			if (folderId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = url;
+
+			if (url == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = comments;
+
+			if (comments == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj5 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(BookmarksEntryServiceUtil.class.getName(),
+					"addEntry",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.bookmarks.model.BookmarksEntry)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteEntry(HttpPrincipal httpPrincipal,
 		java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 

@@ -125,6 +125,28 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 			false, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public void addPageResources(
+			String nodeId, String title, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		WikiNode node = WikiNodeUtil.findByPrimaryKey(nodeId);
+		WikiPage page = getPage(nodeId, title);
+
+		addPageResources(node, page, communityPermissions, guestPermissions);
+	}
+
+	public void addPageResources(
+			WikiNode node, WikiPage page, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			page.getCompanyId(), node.getGroupId(), page.getUserId(),
+			WikiPage.class.getName(), page.getResourcePK().toString(),
+			communityPermissions, guestPermissions);
+	}
+
 	public void deletePage(String nodeId, String title)
 		throws PortalException, SystemException {
 

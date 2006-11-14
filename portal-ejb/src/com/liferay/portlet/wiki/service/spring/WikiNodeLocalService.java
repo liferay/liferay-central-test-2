@@ -36,6 +36,23 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.wiki.model.WikiNode addNode(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiNode addNode(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addNodeResources(java.lang.String nodeId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -43,6 +60,18 @@ public interface WikiNodeLocalService {
 
 	public void addNodeResources(com.liferay.portlet.wiki.model.WikiNode node,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addNodeResources(java.lang.String nodeId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addNodeResources(com.liferay.portlet.wiki.model.WikiNode node,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

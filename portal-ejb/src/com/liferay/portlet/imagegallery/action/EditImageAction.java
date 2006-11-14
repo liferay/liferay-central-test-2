@@ -147,18 +147,18 @@ public class EditImageAction extends PortletAction {
 		File file = uploadReq.getFile("file");
 		String contentType = uploadReq.getContentType("file");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			uploadReq, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			uploadReq, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(imageId)) {
 
 			// Add image
 
 			IGImageServiceUtil.addImage(
-				folderId, description, file, contentType,
-				addCommunityPermissions, addGuestPermissions);
+				folderId, description, file, contentType, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

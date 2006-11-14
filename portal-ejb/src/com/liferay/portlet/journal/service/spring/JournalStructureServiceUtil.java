@@ -43,6 +43,21 @@ public class JournalStructureServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructure addStructure(
+		java.lang.String structureId, boolean autoStructureId,
+		java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+
+		return journalStructureService.addStructure(structureId,
+			autoStructureId, plid, name, description, xsd,
+			communityPermissions, guestPermissions);
+	}
+
 	public static void deleteStructure(java.lang.String companyId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 

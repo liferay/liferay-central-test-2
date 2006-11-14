@@ -194,10 +194,10 @@ public class EditTemplateAction extends PortletAction {
 		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
 		File smallFile = uploadReq.getFile("smallFile");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			uploadReq, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			uploadReq, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		JournalTemplate template = null;
 
@@ -208,8 +208,8 @@ public class EditTemplateAction extends PortletAction {
 			template = JournalTemplateServiceUtil.addTemplate(
 				templateId, autoTemplateId, layout.getPlid(), structureId, name,
 				description, xsl, formatXsl, langType, smallImage,
-				smallImageURL, smallFile, addCommunityPermissions,
-				addGuestPermissions);
+				smallImageURL, smallFile, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

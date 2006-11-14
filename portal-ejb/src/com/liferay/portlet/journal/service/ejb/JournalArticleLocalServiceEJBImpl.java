@@ -75,6 +75,63 @@ public class JournalArticleLocalServiceEJBImpl
 			prefs, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.journal.model.JournalArticle addArticle(
+		java.lang.String userId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addArticle(userId, articleId, autoArticleId, plid,
+			title, description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
+			prefs, communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle addArticle(
+		java.lang.String userId, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addArticle(userId, articleId, autoArticleId, plid,
+			title, description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
+			prefs, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
 	public void addArticleResources(java.lang.String companyId,
 		java.lang.String articleId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -91,6 +148,25 @@ public class JournalArticleLocalServiceEJBImpl
 			com.liferay.portal.SystemException {
 		getService().addArticleResources(article, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addArticleResources(java.lang.String companyId,
+		java.lang.String articleId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addArticleResources(companyId, articleId,
+			communityPermissions, guestPermissions);
+	}
+
+	public void addArticleResources(
+		com.liferay.portlet.journal.model.JournalArticle article,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addArticleResources(article, communityPermissions,
+			guestPermissions);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(

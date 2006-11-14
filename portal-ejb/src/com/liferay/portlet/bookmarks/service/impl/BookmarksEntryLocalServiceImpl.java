@@ -61,6 +61,30 @@ public class BookmarksEntryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addEntry(
+			userId, folderId, name, url, comments,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public BookmarksEntry addEntry(
+			String userId, String folderId, String name, String url,
+			String comments, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addEntry(
+			userId, folderId, name, url, comments, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public BookmarksEntry addEntry(
+			String userId, String folderId, String name, String url,
+			String comments, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Entry
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -92,8 +116,17 @@ public class BookmarksEntryLocalServiceImpl
 
 		// Resources
 
-		addEntryResources(
-			folder, entry, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addEntryResources(
+				folder, entry, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addEntryResources(
+				folder, entry, communityPermissions, guestPermissions);
+		}
 
 		return entry;
 	}
@@ -119,6 +152,29 @@ public class BookmarksEntryLocalServiceImpl
 			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
 			BookmarksEntry.class.getName(), entry.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addEntryResources(
+			String folderId, String entryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
+		BookmarksEntry entry = BookmarksEntryUtil.findByPrimaryKey(entryId);
+
+		addEntryResources(
+			folder, entry, communityPermissions, guestPermissions);
+	}
+
+	public void addEntryResources(
+			BookmarksFolder folder, BookmarksEntry entry,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			entry.getCompanyId(), folder.getGroupId(), entry.getUserId(),
+			BookmarksEntry.class.getName(), entry.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteEntries(String folderId)

@@ -71,6 +71,29 @@ public class CalEventServiceEJBImpl implements CalEventService, SessionBean {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.calendar.model.CalEvent addEvent(
+		java.lang.String plid, java.lang.String title,
+		java.lang.String description, int startDateMonth, int startDateDay,
+		int startDateYear, int startDateHour, int startDateMinute,
+		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
+		int durationMinute, boolean allDay, boolean timeZoneSensitive,
+		java.lang.String type, boolean repeating,
+		com.liferay.util.cal.Recurrence recurrence, java.lang.String remindBy,
+		int firstReminder, int secondReminder,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addEvent(plid, title, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, durationHour,
+			durationMinute, allDay, timeZoneSensitive, type, repeating,
+			recurrence, remindBy, firstReminder, secondReminder,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteEvent(java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

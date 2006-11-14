@@ -60,6 +60,30 @@ public class BookmarksFolderLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addFolder(
+			userId, plid, parentFolderId, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public BookmarksFolder addFolder(
+			String userId, String plid, String parentFolderId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFolder(
+			userId, plid, parentFolderId, name, description, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public BookmarksFolder addFolder(
+			String userId, String plid, String parentFolderId, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -87,8 +111,16 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Resources
 
-		addFolderResources(
-			folder, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addFolderResources(
+				folder, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addFolderResources(folder, communityPermissions, guestPermissions);
+		}
 
 		return folder;
 	}
@@ -113,6 +145,27 @@ public class BookmarksFolderLocalServiceImpl
 			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
 			BookmarksFolder.class.getName(), folder.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFolderResources(
+			String folderId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BookmarksFolder folder = BookmarksFolderUtil.findByPrimaryKey(folderId);
+
+		addFolderResources(folder, communityPermissions, guestPermissions);
+	}
+
+	public void addFolderResources(
+			BookmarksFolder folder, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			folder.getCompanyId(), folder.getGroupId(), folder.getUserId(),
+			BookmarksFolder.class.getName(), folder.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteFolder(String folderId)

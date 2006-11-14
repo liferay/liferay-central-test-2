@@ -41,6 +41,18 @@ public class WikiNodeServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode addNode(
+		java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+
+		return wikiNodeService.addNode(plid, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public static void deleteNode(java.lang.String nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

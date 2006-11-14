@@ -56,6 +56,23 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategoryModel addCategory(
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.addCategory(parentCategoryId,
+					name, description, communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteCategory(java.lang.String categoryId)
 		throws RemoteException {
 		try {

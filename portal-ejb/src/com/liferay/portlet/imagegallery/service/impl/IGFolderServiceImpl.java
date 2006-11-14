@@ -54,6 +54,20 @@ public class IGFolderServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public IGFolder addFolder(
+			String plid, String parentFolderId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		IGFolderPermission.check(
+			getPermissionChecker(), plid, parentFolderId,
+			ActionKeys.ADD_FOLDER);
+
+		return IGFolderLocalServiceUtil.addFolder(
+			getUserId(), plid, parentFolderId, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteFolder(String folderId)
 		throws PortalException, SystemException {
 

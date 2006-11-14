@@ -157,7 +157,9 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= MBCategory.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

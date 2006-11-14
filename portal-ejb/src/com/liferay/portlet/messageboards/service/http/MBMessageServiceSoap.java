@@ -95,6 +95,45 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
+					subject, body, files, anonymous, priority,
+					communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+		java.lang.String categoryId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
+					threadId, parentMessageId, subject, body, files, anonymous,
+					priority, communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId) throws RemoteException {

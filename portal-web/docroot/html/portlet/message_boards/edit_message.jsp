@@ -337,7 +337,9 @@ if (message != null) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= MBMessage.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

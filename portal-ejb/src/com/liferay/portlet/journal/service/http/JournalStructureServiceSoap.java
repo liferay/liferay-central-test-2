@@ -58,6 +58,26 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalStructureModel addStructure(
+		java.lang.String structureId, boolean autoStructureId,
+		java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.addStructure(structureId,
+					autoStructureId, plid, name, description, xsd,
+					communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteStructure(java.lang.String companyId,
 		java.lang.String structureId) throws RemoteException {
 		try {

@@ -58,6 +58,21 @@ public class JournalStructureServiceImpl
 			xsd, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public JournalStructure addStructure(
+			String structureId, boolean autoStructureId, String plid,
+			String name, String description, String xsd,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.JOURNAL,
+			ActionKeys.ADD_STRUCTURE);
+
+		return JournalStructureLocalServiceUtil.addStructure(
+			getUserId(), structureId, autoStructureId, plid, name, description,
+			xsd, communityPermissions, guestPermissions);
+	}
+
 	public void deleteStructure(String companyId, String structureId)
 		throws PortalException, SystemException {
 

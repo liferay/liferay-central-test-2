@@ -56,6 +56,23 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel addEntry(
+		java.lang.String folderId, java.lang.String name, java.lang.String url,
+		java.lang.String comments, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
+					name, url, comments, communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteEntry(java.lang.String entryId)
 		throws RemoteException {
 		try {

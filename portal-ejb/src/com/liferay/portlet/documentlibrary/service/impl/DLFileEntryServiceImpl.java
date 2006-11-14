@@ -60,6 +60,20 @@ public class DLFileEntryServiceImpl
 			byteArray, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public DLFileEntry addFileEntry(
+			String folderId, String name, String title, String description,
+			String extraSettings, byte[] byteArray,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
+
+		return DLFileEntryLocalServiceUtil.addFileEntry(
+			getUserId(), folderId, name, title, description, extraSettings,
+			byteArray, communityPermissions, guestPermissions);
+	}
+
 	public void deleteFileEntry(String folderId, String name)
 		throws PortalException, RemoteException, SystemException {
 

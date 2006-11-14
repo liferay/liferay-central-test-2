@@ -144,6 +144,119 @@ public class CalEventServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String title, java.lang.String description,
+		int startDateMonth, int startDateDay, int startDateYear,
+		int startDateHour, int startDateMinute, int endDateMonth,
+		int endDateDay, int endDateYear, int durationHour, int durationMinute,
+		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
+		boolean repeating, com.liferay.util.cal.Recurrence recurrence,
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(startDateMonth);
+			Object paramObj4 = new IntegerWrapper(startDateDay);
+			Object paramObj5 = new IntegerWrapper(startDateYear);
+			Object paramObj6 = new IntegerWrapper(startDateHour);
+			Object paramObj7 = new IntegerWrapper(startDateMinute);
+			Object paramObj8 = new IntegerWrapper(endDateMonth);
+			Object paramObj9 = new IntegerWrapper(endDateDay);
+			Object paramObj10 = new IntegerWrapper(endDateYear);
+			Object paramObj11 = new IntegerWrapper(durationHour);
+			Object paramObj12 = new IntegerWrapper(durationMinute);
+			Object paramObj13 = new BooleanWrapper(allDay);
+			Object paramObj14 = new BooleanWrapper(timeZoneSensitive);
+			Object paramObj15 = type;
+
+			if (type == null) {
+				paramObj15 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj16 = new BooleanWrapper(repeating);
+			Object paramObj17 = recurrence;
+
+			if (recurrence == null) {
+				paramObj17 = new NullWrapper("com.liferay.util.cal.Recurrence");
+			}
+
+			Object paramObj18 = remindBy;
+
+			if (remindBy == null) {
+				paramObj18 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj19 = new IntegerWrapper(firstReminder);
+			Object paramObj20 = new IntegerWrapper(secondReminder);
+			Object paramObj21 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj21 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj22 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj22 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(CalEventServiceUtil.class.getName(),
+					"addEvent",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.calendar.model.CalEvent)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteEvent(HttpPrincipal httpPrincipal,
 		java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 

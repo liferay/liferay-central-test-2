@@ -62,6 +62,18 @@ public class BookmarksEntryServiceEJBImpl implements BookmarksEntryService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
+		java.lang.String folderId, java.lang.String name, java.lang.String url,
+		java.lang.String comments, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addEntry(folderId, name, url, comments,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteEntry(java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

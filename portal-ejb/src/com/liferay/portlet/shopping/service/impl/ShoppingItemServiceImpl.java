@@ -77,6 +77,28 @@ public class ShoppingItemServiceImpl
 			itemPrices, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public ShoppingItem addItem(
+			String categoryId, String sku, String name, String description,
+			String properties, String fieldsQuantities,
+			boolean requiresShipping, int stockQuantity, boolean featured,
+			Boolean sale, boolean smallImage, String smallImageURL,
+			File smallFile, boolean mediumImage, String mediumImageURL,
+			File mediumFile, boolean largeImage, String largeImageURL,
+			File largeFile, List itemFields, List itemPrices,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.ADD_ITEM);
+
+		return ShoppingItemLocalServiceUtil.addItem(
+			getUserId(), categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices, communityPermissions, guestPermissions);
+	}
+
 	public void deleteItem(String itemId)
 		throws PortalException, SystemException {
 

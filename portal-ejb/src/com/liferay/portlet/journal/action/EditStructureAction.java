@@ -168,10 +168,10 @@ public class EditStructureAction extends PortletAction {
 		String description = ParamUtil.getString(req, "description");
 		String xsd = ParamUtil.getString(req, "xsd");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		JournalStructure structure = null;
 
@@ -181,7 +181,7 @@ public class EditStructureAction extends PortletAction {
 
 			structure = JournalStructureServiceUtil.addStructure(
 				structureId, autoStructureId, layout.getPlid(), name,
-				description, xsd, addCommunityPermissions, addGuestPermissions);
+				description, xsd, communityPermissions, guestPermissions);
 		}
 		else {
 

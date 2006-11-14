@@ -124,18 +124,18 @@ public class EditFileShortcutAction extends PortletAction {
 		String toFolderId = ParamUtil.getString(req, "toFolderId");
 		String toName = ParamUtil.getString(req, "toName");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (fileShortcutId == 0) {
 
 			// Add file shortcut
 
 			DLFileShortcutServiceUtil.addFileShortcut(
-				folderId, toFolderId, toName, addCommunityPermissions,
-				addGuestPermissions);
+				folderId, toFolderId, toName, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

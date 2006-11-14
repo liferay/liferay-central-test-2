@@ -144,7 +144,9 @@ String folderId = BeanParamUtil.getString(entry, request, "folderId");
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= BookmarksEntry.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

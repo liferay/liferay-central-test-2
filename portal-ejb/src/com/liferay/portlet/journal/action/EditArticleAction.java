@@ -340,10 +340,10 @@ public class EditArticleAction extends PortletAction {
 
 		String articleURL = ParamUtil.getString(req, "articleURL");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		boolean approve = ParamUtil.getBoolean(req, "approve");
 
@@ -361,8 +361,7 @@ public class EditArticleAction extends PortletAction {
 				expirationDateHour, expirationDateMinute, neverExpire,
 				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 				reviewDateMinute, neverReview, images, articleURL,
-				req.getPreferences(), addCommunityPermissions,
-				addGuestPermissions);
+				req.getPreferences(), communityPermissions, guestPermissions);
 		}
 		else {
 

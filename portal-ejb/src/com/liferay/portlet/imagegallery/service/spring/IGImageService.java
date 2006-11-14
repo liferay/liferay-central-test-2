@@ -36,6 +36,14 @@ public interface IGImageService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String folderId, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void deleteImage(java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;

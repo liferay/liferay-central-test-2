@@ -60,6 +60,32 @@ public class ShoppingCategoryLocalServiceEJBImpl
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addCategory(userId, plid, parentCategoryId, name,
+			description, communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.shopping.model.ShoppingCategory addCategory(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addCategory(userId, plid, parentCategoryId, name,
+			description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
 	public void addCategoryResources(java.lang.String categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -75,6 +101,25 @@ public class ShoppingCategoryLocalServiceEJBImpl
 			com.liferay.portal.SystemException {
 		getService().addCategoryResources(category, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addCategoryResources(java.lang.String categoryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addCategoryResources(categoryId, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addCategoryResources(
+		com.liferay.portlet.shopping.model.ShoppingCategory category,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addCategoryResources(category, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteCategory(java.lang.String categoryId)

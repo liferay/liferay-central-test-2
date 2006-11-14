@@ -80,6 +80,30 @@ public class JournalStructureLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addStructure(
+			userId, structureId, autoStructureId, plid, name, description, xsd,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public JournalStructure addStructure(
+			String userId, String structureId, boolean autoStructureId,
+			String plid, String name, String description, String xsd,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addStructure(
+			userId, structureId, autoStructureId, plid, name, description, xsd,
+			null, null, communityPermissions, guestPermissions);
+	}
+
+	public JournalStructure addStructure(
+			String userId, String structureId, boolean autoStructureId,
+			String plid, String name, String description, String xsd,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Structure
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -125,8 +149,17 @@ public class JournalStructureLocalServiceImpl
 
 		// Resources
 
-		addStructureResources(
-			structure, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addStructureResources(
+				structure, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addStructureResources(
+				structure, communityPermissions, guestPermissions);
+		}
 
 		return structure;
 	}
@@ -153,6 +186,30 @@ public class JournalStructureLocalServiceImpl
 			structure.getUserId(), JournalStructure.class.getName(),
 			structure.getPrimaryKey().toString(), false,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addStructureResources(
+			String companyId, String structureId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
+			new JournalStructurePK(companyId, structureId));
+
+		addStructureResources(
+			structure, communityPermissions, guestPermissions);
+	}
+
+	public void addStructureResources(
+			JournalStructure structure, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			structure.getCompanyId(), structure.getGroupId(),
+			structure.getUserId(), JournalStructure.class.getName(),
+			structure.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void checkNewLine(String companyId, String structureId)

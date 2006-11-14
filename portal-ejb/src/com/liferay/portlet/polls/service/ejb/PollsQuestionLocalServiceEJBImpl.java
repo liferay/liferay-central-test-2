@@ -63,6 +63,39 @@ public class PollsQuestionLocalServiceEJBImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		java.lang.String userId, java.lang.String plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addQuestion(userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		java.lang.String userId, java.lang.String plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return getService().addQuestion(userId, plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
 	public void addQuestionResources(java.lang.String questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -78,6 +111,25 @@ public class PollsQuestionLocalServiceEJBImpl
 			com.liferay.portal.SystemException {
 		getService().addQuestionResources(question, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addQuestionResources(java.lang.String questionId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addQuestionResources(questionId, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addQuestionResources(
+		com.liferay.portlet.polls.model.PollsQuestion question,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		getService().addQuestionResources(question, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteQuestion(java.lang.String questionId)

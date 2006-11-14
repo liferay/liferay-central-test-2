@@ -65,6 +65,27 @@ public class DLFileShortcutServiceImpl
 			addGuestPermissions);
 	}
 
+	public DLFileShortcut addFileShortcut(
+			String folderId, String toFolderId, String toName,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_SHORTCUT);
+
+		try {
+			DLFileEntryPermission.check(
+				getPermissionChecker(), toFolderId, toName, ActionKeys.VIEW);
+		}
+		catch (PrincipalException pe) {
+			throw new FileShortcutPermissionException();
+		}
+
+		return DLFileShortcutLocalServiceUtil.addFileShortcut(
+			getUserId(), folderId, toFolderId, toName, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deleteFileShortcut(long fileShortcutId)
 		throws PortalException, SystemException {
 

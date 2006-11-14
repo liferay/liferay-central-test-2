@@ -43,6 +43,37 @@ public class MBCategoryLocalServiceUtil {
 			addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.addCategory(userId, plid,
+			parentCategoryId, name, description, communityPermissions,
+			guestPermissions);
+	}
+
+	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.addCategory(userId, plid,
+			parentCategoryId, name, description, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
 	public static void addCategoryResources(java.lang.String categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -60,6 +91,27 @@ public class MBCategoryLocalServiceUtil {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 		mbCategoryLocalService.addCategoryResources(category,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addCategoryResources(java.lang.String categoryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.addCategoryResources(categoryId,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addCategoryResources(
+		com.liferay.portlet.messageboards.model.MBCategory category,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+		mbCategoryLocalService.addCategoryResources(category,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteCategories(java.lang.String groupId)

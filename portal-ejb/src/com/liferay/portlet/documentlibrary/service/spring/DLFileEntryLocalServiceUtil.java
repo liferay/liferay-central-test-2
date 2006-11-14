@@ -44,6 +44,39 @@ public class DLFileEntryLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
+			title, description, extraSettings, byteArray, communityPermissions,
+			guestPermissions);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String extraSettings,
+		byte[] byteArray, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		return dlFileEntryLocalService.addFileEntry(userId, folderId, name,
+			title, description, extraSettings, byteArray,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void addFileEntryResources(java.lang.String folderId,
 		java.lang.String name, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -63,6 +96,28 @@ public class DLFileEntryLocalServiceUtil {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 		dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addFileEntryResources(java.lang.String folderId,
+		java.lang.String name, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.addFileEntryResources(folderId, name,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addFileEntryResources(
+		com.liferay.portlet.documentlibrary.model.DLFolder folder,
+		com.liferay.portlet.documentlibrary.model.DLFileEntry fileEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+		dlFileEntryLocalService.addFileEntryResources(folder, fileEntry,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFileEntries(java.lang.String folderId)

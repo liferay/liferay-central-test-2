@@ -63,6 +63,25 @@ public class PollsQuestionServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public PollsQuestion addQuestion(
+			String plid, String title, String description,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, List choices,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.POLLS,
+			ActionKeys.ADD_QUESTION);
+
+		return PollsQuestionLocalServiceUtil.addQuestion(
+			getUserId(), plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deleteQuestion(String questionId)
 		throws PortalException, SystemException {
 

@@ -56,6 +56,23 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNodeModel addNode(
+		java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
+					name, description, communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteNode(java.lang.String nodeId)
 		throws RemoteException {
 		try {

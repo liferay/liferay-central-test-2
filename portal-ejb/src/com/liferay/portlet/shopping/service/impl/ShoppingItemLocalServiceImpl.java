@@ -230,6 +230,46 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addItem(
+			userId, categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public ShoppingItem addItem(
+			String userId, String categoryId, String sku, String name,
+			String description, String properties, String fieldsQuantities,
+			boolean requiresShipping, int stockQuantity, boolean featured,
+			Boolean sale, boolean smallImage, String smallImageURL,
+			File smallFile, boolean mediumImage, String mediumImageURL,
+			File mediumFile, boolean largeImage, String largeImageURL,
+			File largeFile, List itemFields, List itemPrices,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addItem(
+			userId, categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices, null, null, communityPermissions, guestPermissions);
+	}
+
+	public ShoppingItem addItem(
+			String userId, String categoryId, String sku, String name,
+			String description, String properties, String fieldsQuantities,
+			boolean requiresShipping, int stockQuantity, boolean featured,
+			Boolean sale, boolean smallImage, String smallImageURL,
+			File smallFile, boolean mediumImage, String mediumImageURL,
+			File mediumFile, boolean largeImage, String largeImageURL,
+			File largeFile, List itemFields, List itemPrices,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Item
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -355,8 +395,17 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 		// Resources
 
-		addItemResources(
-			category, item, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addItemResources(
+				category, item, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addItemResources(
+				category, item, communityPermissions, guestPermissions);
+		}
 
 		return item;
 	}
@@ -382,6 +431,29 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			item.getCompanyId(), category.getGroupId(), item.getUserId(),
 			ShoppingItem.class.getName(), item.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addItemResources(
+			String itemId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingItem item = ShoppingItemUtil.findByPrimaryKey(itemId);
+		ShoppingCategory category = item.getCategory();
+
+		addItemResources(
+			category, item, communityPermissions, guestPermissions);
+	}
+
+	public void addItemResources(
+			ShoppingCategory category, ShoppingItem item,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			item.getCompanyId(), category.getGroupId(), item.getUserId(),
+			ShoppingItem.class.getName(), item.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteItem(String itemId)

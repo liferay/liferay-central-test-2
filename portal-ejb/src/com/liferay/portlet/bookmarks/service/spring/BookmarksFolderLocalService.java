@@ -37,6 +37,25 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
+		java.lang.String userId, java.lang.String plid,
+		java.lang.String parentFolderId, java.lang.String name,
+		java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addFolderResources(java.lang.String folderId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -45,6 +64,19 @@ public interface BookmarksFolderLocalService {
 	public void addFolderResources(
 		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addFolderResources(java.lang.String folderId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addFolderResources(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder folder,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

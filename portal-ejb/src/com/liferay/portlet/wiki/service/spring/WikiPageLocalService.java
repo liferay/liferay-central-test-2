@@ -46,6 +46,19 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public void addPageResources(java.lang.String nodeId,
+		java.lang.String title, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addPageResources(com.liferay.portlet.wiki.model.WikiNode node,
+		com.liferay.portlet.wiki.model.WikiPage page,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void deletePage(java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;

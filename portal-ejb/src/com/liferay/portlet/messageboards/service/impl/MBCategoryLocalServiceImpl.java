@@ -78,6 +78,30 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addCategory(
+			userId, plid, parentCategoryId, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public MBCategory addCategory(
+			String userId, String plid, String parentCategoryId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addCategory(
+			userId, plid, parentCategoryId, name, description, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public MBCategory addCategory(
+			String userId, String plid, String parentCategoryId, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Category
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -106,8 +130,17 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		// Resources
 
-		addCategoryResources(
-			category, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addCategoryResources(
+				category, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addCategoryResources(
+				category, communityPermissions, guestPermissions);
+		}
 
 		return category;
 	}
@@ -133,6 +166,28 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			category.getUserId(), MBCategory.class.getName(),
 			category.getPrimaryKey().toString(), false, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addCategoryResources(
+			String categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
+			MBCategory category, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			category.getCompanyId(), category.getGroupId(),
+			category.getUserId(), MBCategory.class.getName(),
+			category.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteCategories(String groupId)

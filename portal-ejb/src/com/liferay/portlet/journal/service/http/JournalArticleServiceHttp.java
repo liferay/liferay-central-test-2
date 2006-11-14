@@ -184,6 +184,158 @@ public class JournalArticleServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
+		HttpPrincipal httpPrincipal, java.lang.String articleId,
+		boolean autoArticleId, java.lang.String plid, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = articleId;
+
+			if (articleId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new BooleanWrapper(autoArticleId);
+			Object paramObj2 = plid;
+
+			if (plid == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = title;
+
+			if (title == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = description;
+
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = content;
+
+			if (content == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = type;
+
+			if (type == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = structureId;
+
+			if (structureId == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = templateId;
+
+			if (templateId == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = new IntegerWrapper(displayDateMonth);
+			Object paramObj10 = new IntegerWrapper(displayDateDay);
+			Object paramObj11 = new IntegerWrapper(displayDateYear);
+			Object paramObj12 = new IntegerWrapper(displayDateHour);
+			Object paramObj13 = new IntegerWrapper(displayDateMinute);
+			Object paramObj14 = new IntegerWrapper(expirationDateMonth);
+			Object paramObj15 = new IntegerWrapper(expirationDateDay);
+			Object paramObj16 = new IntegerWrapper(expirationDateYear);
+			Object paramObj17 = new IntegerWrapper(expirationDateHour);
+			Object paramObj18 = new IntegerWrapper(expirationDateMinute);
+			Object paramObj19 = new BooleanWrapper(neverExpire);
+			Object paramObj20 = new IntegerWrapper(reviewDateMonth);
+			Object paramObj21 = new IntegerWrapper(reviewDateDay);
+			Object paramObj22 = new IntegerWrapper(reviewDateYear);
+			Object paramObj23 = new IntegerWrapper(reviewDateHour);
+			Object paramObj24 = new IntegerWrapper(reviewDateMinute);
+			Object paramObj25 = new BooleanWrapper(neverReview);
+			Object paramObj26 = images;
+
+			if (images == null) {
+				paramObj26 = new NullWrapper("java.util.Map");
+			}
+
+			Object paramObj27 = articleURL;
+
+			if (articleURL == null) {
+				paramObj27 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj28 = prefs;
+
+			if (prefs == null) {
+				paramObj28 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj29 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj29 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj30 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj30 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalArticleServiceUtil.class.getName(),
+					"addArticle",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18, paramObj19, paramObj20, paramObj21,
+						paramObj22, paramObj23, paramObj24, paramObj25,
+						paramObj26, paramObj27, paramObj28, paramObj29,
+						paramObj30
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.journal.model.JournalArticle)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle approveArticle(
 		HttpPrincipal httpPrincipal, java.lang.String articleId,
 		double version, java.lang.String plid, java.lang.String articleURL,

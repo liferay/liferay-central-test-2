@@ -71,6 +71,42 @@ public interface MBMessageService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException;
+
 	public void deleteDiscussionMessage(java.lang.String groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId)

@@ -43,6 +43,21 @@ public class DLFileEntryServiceUtil {
 			addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		return dlFileEntryService.addFileEntry(folderId, name, title,
+			description, extraSettings, byteArray, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 

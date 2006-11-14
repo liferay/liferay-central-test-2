@@ -55,6 +55,21 @@ public class MBCategoryServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public MBCategory addCategory(
+			String plid, String parentCategoryId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBCategoryPermission.check(
+			getPermissionChecker(), plid, parentCategoryId,
+			ActionKeys.ADD_CATEGORY);
+
+		return MBCategoryLocalServiceUtil.addCategory(
+			getUserId(), plid, parentCategoryId, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteCategory(String categoryId)
 		throws PortalException, SystemException {
 

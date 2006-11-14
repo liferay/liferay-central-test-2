@@ -61,6 +61,29 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestionModel addQuestion(
+		java.lang.String plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.addQuestion(plid,
+					title, description, expirationDateMonth, expirationDateDay,
+					expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, choices,
+					communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteQuestion(java.lang.String questionId)
 		throws RemoteException {
 		try {

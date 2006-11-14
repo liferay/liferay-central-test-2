@@ -42,6 +42,36 @@ public class IGImageLocalServiceUtil {
 			file, contentType, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.addImage(userId, folderId, description,
+			file, contentType, communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.addImage(userId, folderId, description,
+			file, contentType, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
 	public static void addImageResources(java.lang.String folderId,
 		java.lang.String imageId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -61,6 +91,28 @@ public class IGImageLocalServiceUtil {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 		igImageLocalService.addImageResources(folder, image,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addImageResources(java.lang.String folderId,
+		java.lang.String imageId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.addImageResources(folderId, imageId,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addImageResources(
+		com.liferay.portlet.imagegallery.model.IGFolder folder,
+		com.liferay.portlet.imagegallery.model.IGImage image,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+		igImageLocalService.addImageResources(folder, image,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteImage(java.lang.String companyId,

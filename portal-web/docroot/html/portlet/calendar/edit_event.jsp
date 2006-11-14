@@ -459,7 +459,9 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= CalEvent.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

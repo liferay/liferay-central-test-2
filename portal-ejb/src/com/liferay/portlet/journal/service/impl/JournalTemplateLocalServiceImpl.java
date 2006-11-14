@@ -81,6 +81,36 @@ public class JournalTemplateLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addTemplate(
+			userId, templateId, autoTemplateId, plid, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public JournalTemplate addTemplate(
+			String userId, String templateId, boolean autoTemplateId,
+			String plid, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			String smallImageURL, File smallFile, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addTemplate(
+			userId, templateId, autoTemplateId, plid, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile, null, null, communityPermissions, guestPermissions);
+	}
+
+	public JournalTemplate addTemplate(
+			String userId, String templateId, boolean autoTemplateId,
+			String plid, String structureId, String name, String description,
+			String xsl, boolean formatXsl, String langType, boolean smallImage,
+			String smallImageURL, File smallFile,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Template
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -150,8 +180,17 @@ public class JournalTemplateLocalServiceImpl
 
 		// Resources
 
-		addTemplateResources(
-			template, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addTemplateResources(
+				template, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addTemplateResources(
+				template, communityPermissions, guestPermissions);
+		}
 
 		return template;
 	}
@@ -178,6 +217,29 @@ public class JournalTemplateLocalServiceImpl
 			template.getUserId(), JournalTemplate.class.getName(),
 			template.getPrimaryKey().toString(), false, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addTemplateResources(
+			String companyId, String templateId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
+			new JournalTemplatePK(companyId, templateId));
+
+		addTemplateResources(template, communityPermissions, guestPermissions);
+	}
+
+	public void addTemplateResources(
+			JournalTemplate template, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			template.getCompanyId(), template.getGroupId(),
+			template.getUserId(), JournalTemplate.class.getName(),
+			template.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void checkNewLine(String companyId, String templateId)

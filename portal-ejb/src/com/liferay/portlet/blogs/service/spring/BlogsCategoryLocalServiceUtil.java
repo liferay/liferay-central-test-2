@@ -41,6 +41,35 @@ public class BlogsCategoryLocalServiceUtil {
 			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
+		java.lang.String userId, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.addCategory(userId, parentCategoryId,
+			name, description, communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
+		java.lang.String userId, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.addCategory(userId, parentCategoryId,
+			name, description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
+	}
+
 	public static void addCategoryResources(java.lang.String categoryId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -58,6 +87,27 @@ public class BlogsCategoryLocalServiceUtil {
 		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
 		blogsCategoryLocalService.addCategoryResources(category,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addCategoryResources(java.lang.String categoryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.addCategoryResources(categoryId,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addCategoryResources(
+		com.liferay.portlet.blogs.model.BlogsCategory category,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+		blogsCategoryLocalService.addCategoryResources(category,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteCategory(java.lang.String categoryId)

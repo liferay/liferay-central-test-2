@@ -57,6 +57,19 @@ public class IGImageServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public IGImage addImage(
+			String folderId, String description, File file, String contentType,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		IGFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
+
+		return IGImageLocalServiceUtil.addImage(
+			getUserId(), folderId, description, file, contentType,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteImage(String companyId, String imageId)
 		throws PortalException, SystemException {
 

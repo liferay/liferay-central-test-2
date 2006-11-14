@@ -54,6 +54,19 @@ public class BookmarksEntryServiceImpl
 			addGuestPermissions);
 	}
 
+	public BookmarksEntry addEntry(
+			String folderId, String name, String url, String comments,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BookmarksFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_ENTRY);
+
+		return BookmarksEntryLocalServiceUtil.addEntry(
+			getUserId(), folderId, name, url, comments, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deleteEntry(String entryId)
 		throws PortalException, SystemException {
 

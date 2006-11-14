@@ -74,6 +74,30 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addImage(
+			userId, folderId, description, file, contentType,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public IGImage addImage(
+			String userId, String folderId, String description, File file,
+			String contentType, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addImage(
+			userId, folderId, description, file, contentType, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public IGImage addImage(
+			String userId, String folderId, String description, File file,
+			String contentType, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		try {
 
 			// Image
@@ -113,8 +137,17 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 
 			// Resources
 
-			addImageResources(
-				folder, image, addCommunityPermissions, addGuestPermissions);
+			if ((addCommunityPermissions != null) &&
+				(addGuestPermissions != null)) {
+
+				addImageResources(
+					folder, image, addCommunityPermissions.booleanValue(),
+					addGuestPermissions.booleanValue());
+			}
+			else {
+				addImageResources(
+					folder, image, communityPermissions, guestPermissions);
+			}
 
 			return image;
 		}
@@ -145,6 +178,30 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
 			IGImage.class.getName(), image.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addImageResources(
+			String folderId, String imageId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		IGFolder folder = IGFolderUtil.findByPrimaryKey(folderId);
+		IGImage image = IGImageUtil.findByPrimaryKey(
+			new IGImagePK(folder.getCompanyId(), imageId));
+
+		addImageResources(
+			folder, image, communityPermissions, guestPermissions);
+	}
+
+	public void addImageResources(
+			IGFolder folder, IGImage image, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			image.getCompanyId(), folder.getGroupId(), image.getUserId(),
+			IGImage.class.getName(), image.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteImage(String companyId, String imageId)

@@ -147,7 +147,9 @@ String imageMaxSize = Integer.toString(GetterUtil.getInteger(PropsUtil.get(Props
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= IGImage.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

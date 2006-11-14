@@ -99,6 +99,47 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addEvent(
+			userId, plid, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public CalEvent addEvent(
+			String userId, String plid, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, Recurrence recurrence,
+			String remindBy, int firstReminder, int secondReminder,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addEvent(
+			userId, plid, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, null, null, communityPermissions,
+			guestPermissions);
+	}
+
+	public CalEvent addEvent(
+			String userId, String plid, String title, String description,
+			int startDateMonth, int startDateDay, int startDateYear,
+			int startDateHour, int startDateMinute, int endDateMonth,
+			int endDateDay, int endDateYear, int durationHour,
+			int durationMinute, boolean allDay, boolean timeZoneSensitive,
+			String type, boolean repeating, Recurrence recurrence,
+			String remindBy, int firstReminder, int secondReminder,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Event
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -179,8 +220,16 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 
 		// Resources
 
-		addEventResources(
-			event, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addEventResources(
+				event, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addEventResources(event, communityPermissions, guestPermissions);
+		}
 
 		// Pool
 
@@ -209,6 +258,27 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 			event.getCompanyId(), event.getGroupId(), event.getUserId(),
 			CalEvent.class.getName(), event.getPrimaryKey().toString(), false,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addEventResources(
+			String eventId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		CalEvent event = CalEventUtil.findByPrimaryKey(eventId);
+
+		addEventResources(event, communityPermissions, guestPermissions);
+	}
+
+	public void addEventResources(
+			CalEvent event, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			event.getCompanyId(), event.getGroupId(), event.getUserId(),
+			CalEvent.class.getName(), event.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void checkEvents() throws PortalException, SystemException {

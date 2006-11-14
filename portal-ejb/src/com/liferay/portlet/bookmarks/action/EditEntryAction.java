@@ -125,18 +125,18 @@ public class EditEntryAction extends PortletAction {
 		String url = ParamUtil.getString(req, "url");
 		String comments = ParamUtil.getString(req, "comments");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(entryId)) {
 
 			// Add entry
 
 			BookmarksEntryServiceUtil.addEntry(
-				folderId, name, url, comments, addCommunityPermissions,
-				addGuestPermissions);
+				folderId, name, url, comments, communityPermissions,
+				guestPermissions);
 		}
 		else {
 

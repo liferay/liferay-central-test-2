@@ -41,6 +41,18 @@ public class BlogsCategoryServiceUtil {
 			description, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
+		java.lang.String parentCategoryId, java.lang.String name,
+		java.lang.String description, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		BlogsCategoryService blogsCategoryService = BlogsCategoryServiceFactory.getService();
+
+		return blogsCategoryService.addCategory(parentCategoryId, name,
+			description, communityPermissions, guestPermissions);
+	}
+
 	public static void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

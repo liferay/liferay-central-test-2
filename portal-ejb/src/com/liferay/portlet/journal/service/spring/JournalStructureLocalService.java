@@ -37,6 +37,26 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.journal.model.JournalStructure addStructure(
+		java.lang.String userId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalStructure addStructure(
+		java.lang.String userId, java.lang.String structureId,
+		boolean autoStructureId, java.lang.String plid, java.lang.String name,
+		java.lang.String description, java.lang.String xsd,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addStructureResources(java.lang.String companyId,
 		java.lang.String structureId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -46,6 +66,19 @@ public interface JournalStructureLocalService {
 	public void addStructureResources(
 		com.liferay.portlet.journal.model.JournalStructure structure,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addStructureResources(java.lang.String companyId,
+		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addStructureResources(
+		com.liferay.portlet.journal.model.JournalStructure structure,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

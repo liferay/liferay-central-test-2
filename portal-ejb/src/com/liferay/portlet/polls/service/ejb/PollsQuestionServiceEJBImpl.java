@@ -66,6 +66,23 @@ public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		java.lang.String plid, java.lang.String title,
+		java.lang.String description, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return getService().addQuestion(plid, title, description,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire, choices,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

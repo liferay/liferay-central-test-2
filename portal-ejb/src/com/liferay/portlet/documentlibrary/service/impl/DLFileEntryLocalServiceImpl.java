@@ -72,8 +72,32 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
-			String description,	String extraSettings, byte[] byteArray,
+			String description, String extraSettings, byte[] byteArray,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addFileEntry(
+			userId, folderId, name, title, description, extraSettings,
+			byteArray, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public DLFileEntry addFileEntry(
+			String userId, String folderId, String name, String title,
+			String description, String extraSettings, byte[] byteArray,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addFileEntry(
+			userId, folderId, name, title, description, extraSettings,
+			byteArray, null, null, communityPermissions, guestPermissions);
+	}
+
+	public DLFileEntry addFileEntry(
+			String userId, String folderId, String name, String title,
+			String description,	String extraSettings, byte[] byteArray,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// File entry
@@ -130,8 +154,17 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		// Resources
 
-		addFileEntryResources(
-			folder, fileEntry, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addFileEntryResources(
+				folder, fileEntry, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addFileEntryResources(
+				folder, fileEntry, communityPermissions, guestPermissions);
+		}
 
 		// Folder
 
@@ -165,6 +198,31 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			fileEntry.getUserId(), DLFileEntry.class.getName(),
 			fileEntry.getPrimaryKey().toString(), false,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addFileEntryResources(
+			String folderId, String name, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
+		DLFileEntry fileEntry = DLFileEntryUtil.findByPrimaryKey(
+			new DLFileEntryPK(folderId, name));
+
+		addFileEntryResources(
+			folder, fileEntry, communityPermissions, guestPermissions);
+	}
+
+	public void addFileEntryResources(
+			DLFolder folder, DLFileEntry fileEntry,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			fileEntry.getCompanyId(), folder.getGroupId(),
+			fileEntry.getUserId(), DLFileEntry.class.getName(),
+			fileEntry.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFileEntries(String folderId)

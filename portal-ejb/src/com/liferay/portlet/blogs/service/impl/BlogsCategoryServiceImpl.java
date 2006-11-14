@@ -41,9 +41,8 @@ public class BlogsCategoryServiceImpl
 	extends PrincipalBean implements BlogsCategoryService {
 
 	public BlogsCategory addCategory(
-			String parentCategoryId, String name,
-			String description, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			String parentCategoryId, String name, String description,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		BlogsCategoryPermission.check(
@@ -52,6 +51,19 @@ public class BlogsCategoryServiceImpl
 		return BlogsCategoryLocalServiceUtil.addCategory(
 			getUserId(), parentCategoryId, name, description,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public BlogsCategory addCategory(
+			String parentCategoryId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BlogsCategoryPermission.check(
+			getPermissionChecker(), parentCategoryId, ActionKeys.ADD_CATEGORY);
+
+		return BlogsCategoryLocalServiceUtil.addCategory(
+			getUserId(), parentCategoryId, name, description,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteCategory(String categoryId)

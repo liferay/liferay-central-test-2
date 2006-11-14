@@ -63,6 +63,24 @@ public class JournalTemplateServiceImpl
 			smallFile, addCommunityPermissions, addGuestPermissions);
 	}
 
+	public JournalTemplate addTemplate(
+			String templateId, boolean autoTemplateId, String plid,
+			String structureId, String name, String description, String xsl,
+			boolean formatXsl, String langType, boolean smallImage,
+			String smallImageURL, File smallFile, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.JOURNAL,
+			ActionKeys.ADD_TEMPLATE);
+
+		return JournalTemplateLocalServiceUtil.addTemplate(
+			getUserId(), templateId, autoTemplateId, plid, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile, communityPermissions, guestPermissions);
+	}
+
 	public void deleteTemplate(String companyId, String templateId)
 		throws PortalException, SystemException {
 

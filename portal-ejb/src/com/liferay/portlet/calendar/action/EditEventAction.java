@@ -372,10 +372,10 @@ public class EditEventAction extends PortletAction {
 		int firstReminder = ParamUtil.getInteger(req, "firstReminder");
 		int secondReminder = ParamUtil.getInteger(req, "secondReminder");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(eventId)) {
 
@@ -387,7 +387,7 @@ public class EditEventAction extends PortletAction {
 				endDateMonth, endDateDay, endDateYear, durationHour,
 				durationMinute, allDay, timeZoneSensitive, type, repeating,
 				recurrence, remindBy, firstReminder, secondReminder,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 		}
 		else {
 

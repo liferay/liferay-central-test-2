@@ -47,6 +47,24 @@ public class JournalTemplateServiceUtil {
 			addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		java.lang.String templateId, boolean autoTemplateId,
+		java.lang.String plid, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
+
+		return journalTemplateService.addTemplate(templateId, autoTemplateId,
+			plid, structureId, name, description, xsl, formatXsl, langType,
+			smallImage, smallImageURL, smallFile, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void deleteTemplate(java.lang.String companyId,
 		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 

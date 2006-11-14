@@ -61,6 +61,30 @@ public class ShoppingCategoryLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addCategory(
+			userId, plid, parentCategoryId, name, description,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public ShoppingCategory addCategory(
+			String userId, String plid, String parentCategoryId, String name,
+			String description, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addCategory(
+			userId, plid, parentCategoryId, name, description, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public ShoppingCategory addCategory(
+			String userId, String plid, String parentCategoryId, String name,
+			String description, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Category
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -89,8 +113,17 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Resources
 
-		addCategoryResources(
-			category, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addCategoryResources(
+				category, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addCategoryResources(
+				category, communityPermissions, guestPermissions);
+		}
 
 		return category;
 	}
@@ -117,6 +150,29 @@ public class ShoppingCategoryLocalServiceImpl
 			category.getUserId(), ShoppingCategory.class.getName(),
 			category.getPrimaryKey().toString(), false, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addCategoryResources(
+			String categoryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ShoppingCategory category =
+			ShoppingCategoryUtil.findByPrimaryKey(categoryId);
+
+		addCategoryResources(category, communityPermissions, guestPermissions);
+	}
+
+	public void addCategoryResources(
+			ShoppingCategory category, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			category.getCompanyId(), category.getGroupId(),
+			category.getUserId(), ShoppingCategory.class.getName(),
+			category.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteCategory(String categoryId)

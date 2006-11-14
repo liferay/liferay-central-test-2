@@ -129,10 +129,10 @@ public class EditCategoryAction extends PortletAction {
 		boolean mergeWithParentCategory = ParamUtil.getBoolean(
 			req, "mergeWithParentCategory");
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(categoryId)) {
 
@@ -140,7 +140,7 @@ public class EditCategoryAction extends PortletAction {
 
 			ShoppingCategoryServiceUtil.addCategory(
 				layout.getPlid(), parentCategoryId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 		}
 		else {
 

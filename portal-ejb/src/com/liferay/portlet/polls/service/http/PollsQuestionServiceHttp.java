@@ -117,6 +117,91 @@ public class PollsQuestionServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.polls.model.PollsQuestion addQuestion(
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String title, java.lang.String description,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		java.util.List choices, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(expirationDateMonth);
+			Object paramObj4 = new IntegerWrapper(expirationDateDay);
+			Object paramObj5 = new IntegerWrapper(expirationDateYear);
+			Object paramObj6 = new IntegerWrapper(expirationDateHour);
+			Object paramObj7 = new IntegerWrapper(expirationDateMinute);
+			Object paramObj8 = new BooleanWrapper(neverExpire);
+			Object paramObj9 = choices;
+
+			if (choices == null) {
+				paramObj9 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj10 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj10 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj11 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj11 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(PollsQuestionServiceUtil.class.getName(),
+					"addQuestion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10, paramObj11
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static void deleteQuestion(HttpPrincipal httpPrincipal,
 		java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 

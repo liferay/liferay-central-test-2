@@ -201,10 +201,10 @@ public class EditQuestionAction extends PortletAction {
 			}
 		}
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			req, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			req, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (Validator.isNull(questionId)) {
 
@@ -214,7 +214,7 @@ public class EditQuestionAction extends PortletAction {
 				layout.getPlid(), title, description, expirationDateMonth,
 				expirationDateDay, expirationDateYear, expirationDateHour,
 				expirationDateMinute, neverExpire, choices,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 		}
 		else {
 

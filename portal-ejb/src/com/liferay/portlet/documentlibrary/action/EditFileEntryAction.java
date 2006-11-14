@@ -190,10 +190,10 @@ public class EditFileEntryAction extends PortletAction {
 
 		byte[] byteArray = FileUtil.getBytes(uploadReq.getFile("file"));
 
-		boolean addCommunityPermissions = ParamUtil.getBoolean(
-			uploadReq, "addCommunityPermissions");
-		boolean addGuestPermissions = ParamUtil.getBoolean(
-			uploadReq, "addGuestPermissions");
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -201,7 +201,7 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryServiceUtil.addFileEntry(
 				folderId, sourceFileName, title, description, extraSettings,
-				byteArray, addCommunityPermissions, addGuestPermissions);
+				byteArray, communityPermissions, guestPermissions);
 		}
 		else {
 

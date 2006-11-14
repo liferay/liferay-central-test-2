@@ -57,6 +57,20 @@ public class WikiNodeServiceImpl
 			addGuestPermissions);
 	}
 
+	public WikiNode addNode(
+			String plid, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.WIKI,
+			ActionKeys.ADD_NODE);
+
+		return WikiNodeLocalServiceUtil.addNode(
+			getUserId(), plid, name, description, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deleteNode(String nodeId)
 		throws PortalException, SystemException {
 

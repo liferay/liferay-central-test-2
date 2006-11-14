@@ -47,6 +47,47 @@ public class JournalTemplateLocalServiceUtil {
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		java.lang.String userId, java.lang.String templateId,
+		boolean autoTemplateId, java.lang.String plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.addTemplate(userId, templateId,
+			autoTemplateId, plid, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile,
+			communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate addTemplate(
+		java.lang.String userId, java.lang.String templateId,
+		boolean autoTemplateId, java.lang.String plid,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.addTemplate(userId, templateId,
+			autoTemplateId, plid, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
 	public static void addTemplateResources(java.lang.String companyId,
 		java.lang.String templateId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -65,6 +106,27 @@ public class JournalTemplateLocalServiceUtil {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 		journalTemplateLocalService.addTemplateResources(template,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addTemplateResources(java.lang.String companyId,
+		java.lang.String templateId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.addTemplateResources(companyId, templateId,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addTemplateResources(
+		com.liferay.portlet.journal.model.JournalTemplate template,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+		journalTemplateLocalService.addTemplateResources(template,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void checkNewLine(java.lang.String companyId,

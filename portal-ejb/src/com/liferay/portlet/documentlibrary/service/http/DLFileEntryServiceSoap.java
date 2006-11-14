@@ -58,6 +58,26 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel addFileEntry(
+		java.lang.String folderId, java.lang.String name,
+		java.lang.String title, java.lang.String description,
+		java.lang.String extraSettings, byte[] byteArray,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.addFileEntry(folderId,
+					name, title, description, extraSettings, byteArray,
+					communityPermissions, guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name) throws RemoteException {
 		try {

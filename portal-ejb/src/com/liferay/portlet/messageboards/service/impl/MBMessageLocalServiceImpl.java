@@ -143,13 +143,39 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addMessage(
+			userId, categoryId, subject, body, files, anonymous, priority,
+			prefs, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public MBMessage addMessage(
+			String userId, String categoryId, String subject, String body,
+			List files, boolean anonymous, double priority,
+			PortletPreferences prefs, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			userId, categoryId, subject, body, files, anonymous, priority,
+			prefs, null, null, communityPermissions, guestPermissions);
+	}
+
+	public MBMessage addMessage(
+			String userId, String categoryId, String subject, String body,
+			List files, boolean anonymous, double priority,
+			PortletPreferences prefs, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		String threadId = null;
 		String parentMessageId = null;
 
 		return addMessage(
 			userId, categoryId, threadId, parentMessageId, subject, body, files,
 			anonymous, priority, prefs, addCommunityPermissions,
-			addGuestPermissions);
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public MBMessage addMessage(
@@ -157,6 +183,33 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String parentMessageId, String subject, String body, List files,
 			boolean anonymous, double priority, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			userId, categoryId, threadId, parentMessageId, subject, body, files,
+			anonymous, priority, prefs, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public MBMessage addMessage(
+			String userId, String categoryId, String threadId,
+			String parentMessageId, String subject, String body, List files,
+			boolean anonymous, double priority, PortletPreferences prefs,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addMessage(
+			userId, categoryId, threadId, parentMessageId, subject, body, files,
+			anonymous, priority, prefs, null, null, communityPermissions,
+			guestPermissions);
+	}
+
+	public MBMessage addMessage(
+			String userId, String categoryId, String threadId,
+			String parentMessageId, String subject, String body, List files,
+			boolean anonymous, double priority, PortletPreferences prefs,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		long start = 0;
@@ -292,9 +345,17 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		// Resources
 
 		if (!category.isDiscussion()) {
-			addMessageResources(
-				category, message, addCommunityPermissions,
-				addGuestPermissions);
+			if ((addCommunityPermissions != null) &&
+				(addGuestPermissions != null)) {
+
+				addMessageResources(
+					category, message, addCommunityPermissions.booleanValue(),
+					addGuestPermissions.booleanValue());
+			}
+			else {
+				addMessageResources(
+					category, message, communityPermissions, guestPermissions);
+			}
 		}
 
 		start = logAddMessage(messageId, start, 5);
@@ -384,6 +445,45 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			message.getCompanyId(), category.getGroupId(), message.getUserId(),
 			MBMessage.class.getName(), message.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addMessageResources(
+			String categoryId, String messageId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		addMessageResources(
+			categoryId, null, messageId, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addMessageResources(
+			String categoryId, String topicId, String messageId,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
+
+		if (topicId == null) {
+			topicId = MBMessage.DEPRECATED_TOPIC_ID;
+		}
+
+		MBMessage message = MBMessageUtil.findByPrimaryKey(
+			new MBMessagePK(topicId, messageId));
+
+		addMessageResources(
+			category, message, communityPermissions, guestPermissions);
+	}
+
+	public void addMessageResources(
+			MBCategory category, MBMessage message,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			message.getCompanyId(), category.getGroupId(), message.getUserId(),
+			MBMessage.class.getName(), message.getPrimaryKey().toString(),
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteDiscussionMessage(String messageId)

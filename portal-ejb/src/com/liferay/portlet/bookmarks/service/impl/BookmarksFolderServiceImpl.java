@@ -54,6 +54,20 @@ public class BookmarksFolderServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public BookmarksFolder addFolder(
+			String plid, String parentFolderId, String name, String description,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		BookmarksFolderPermission.check(
+			getPermissionChecker(), plid, parentFolderId,
+			ActionKeys.ADD_FOLDER);
+
+		return BookmarksFolderLocalServiceUtil.addFolder(
+			getUserId(), plid, parentFolderId, name, description,
+			communityPermissions, guestPermissions);
+	}
+
 	public void deleteFolder(String folderId)
 		throws PortalException, SystemException {
 

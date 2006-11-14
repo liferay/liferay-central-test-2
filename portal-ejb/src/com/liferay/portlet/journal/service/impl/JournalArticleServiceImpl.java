@@ -79,6 +79,35 @@ public class JournalArticleServiceImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
+	public JournalArticle addArticle(
+			String articleId, boolean autoArticleId, String plid, String title,
+			String description, String content, String type, String structureId,
+			String templateId, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+			int reviewDateDay, int reviewDateYear, int reviewDateHour,
+			int reviewDateMinute, boolean neverReview, Map images,
+			String articleURL, PortletPreferences prefs,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.JOURNAL,
+			ActionKeys.ADD_ARTICLE);
+
+		return JournalArticleLocalServiceUtil.addArticle(
+			getUserId(), articleId, autoArticleId, plid, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, neverExpire,
+			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+			reviewDateMinute, neverReview, images, articleURL, prefs,
+			communityPermissions, guestPermissions);
+	}
+
 	public JournalArticle approveArticle(
 			String articleId, double version, String plid, String articleURL,
 			PortletPreferences prefs)

@@ -290,7 +290,9 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= ShoppingItem.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

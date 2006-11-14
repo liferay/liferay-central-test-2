@@ -36,6 +36,24 @@ public interface DLFileShortcutLocalService {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String toFolderId, java.lang.String toName,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
+		java.lang.String userId, java.lang.String folderId,
+		java.lang.String toFolderId, java.lang.String toName,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
 	public void addFileShortcutResources(long fileShortcutId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -45,6 +63,20 @@ public interface DLFileShortcutLocalService {
 		com.liferay.portlet.documentlibrary.model.DLFolder folder,
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addFileShortcutResources(long fileShortcutId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException;
+
+	public void addFileShortcutResources(
+		com.liferay.portlet.documentlibrary.model.DLFolder folder,
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut fileShortcut,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException;
 

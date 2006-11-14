@@ -261,7 +261,9 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= DLFileShortcut.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>

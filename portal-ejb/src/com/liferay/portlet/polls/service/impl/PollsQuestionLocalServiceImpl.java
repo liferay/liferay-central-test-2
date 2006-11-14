@@ -64,6 +64,38 @@ public class PollsQuestionLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addQuestion(
+			userId, plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public PollsQuestion addQuestion(
+			String userId, String plid, String title, String description,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, List choices,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addQuestion(
+			userId, plid, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public PollsQuestion addQuestion(
+			String userId, String plid, String title, String description,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, boolean neverExpire, List choices,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
 		// Question
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -100,8 +132,17 @@ public class PollsQuestionLocalServiceImpl
 
 		// Resources
 
-		addQuestionResources(
-			question, addCommunityPermissions, addGuestPermissions);
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addQuestionResources(
+				question, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addQuestionResources(
+				question, communityPermissions, guestPermissions);
+		}
 
 		// Choices
 
@@ -139,6 +180,28 @@ public class PollsQuestionLocalServiceImpl
 			question.getUserId(), PollsQuestion.class.getName(),
 			question.getPrimaryKey().toString(), false, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public void addQuestionResources(
+			String questionId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PollsQuestion question = PollsQuestionUtil.findByPrimaryKey(questionId);
+
+		addQuestionResources(question, communityPermissions, guestPermissions);
+	}
+
+	public void addQuestionResources(
+			PollsQuestion question, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			question.getCompanyId(), question.getGroupId(),
+			question.getUserId(), PollsQuestion.class.getName(),
+			question.getPrimaryKey().toString(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteQuestion(String questionId)

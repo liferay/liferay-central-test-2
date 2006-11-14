@@ -57,6 +57,25 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel addCategory(
+		java.lang.String plid, java.lang.String parentCategoryId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.addCategory(plid,
+					parentCategoryId, name, description, communityPermissions,
+					guestPermissions);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static void deleteCategory(java.lang.String categoryId)
 		throws RemoteException {
 		try {

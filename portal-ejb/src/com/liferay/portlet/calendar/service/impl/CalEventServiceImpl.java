@@ -67,6 +67,30 @@ public class CalEventServiceImpl
 			addGuestPermissions);
 	}
 
+	public CalEvent addEvent(
+			String plid, String title, String description, int startDateMonth,
+			int startDateDay, int startDateYear, int startDateHour,
+			int startDateMinute, int endDateMonth, int endDateDay,
+			int endDateYear, int durationHour, int durationMinute,
+			boolean allDay, boolean timeZoneSensitive, String type,
+			boolean repeating, Recurrence recurrence, String remindBy,
+			int firstReminder, int secondReminder,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		PortletPermission.check(
+			getPermissionChecker(), plid, PortletKeys.CALENDAR,
+			ActionKeys.ADD_EVENT);
+
+		return CalEventLocalServiceUtil.addEvent(
+			getUserId(), plid, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, communityPermissions,
+			guestPermissions);
+	}
+
 	public void deleteEvent(String eventId)
 		throws PortalException, SystemException {
 

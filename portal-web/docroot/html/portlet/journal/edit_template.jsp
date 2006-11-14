@@ -282,7 +282,9 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-permissions />
+			<liferay-ui:input-permissions
+				modelName="<%= JournalTemplate.class.getName() %>"
+			/>
 		</td>
 	</tr>
 </c:if>
