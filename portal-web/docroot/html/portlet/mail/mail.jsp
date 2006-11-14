@@ -80,7 +80,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		</table>
 
 		<%
-		MailFolder folder = MailUtil.getFolder(request.getSession());
+		MailFolder folder = MailUtil.getFolder(request);
 		%>
 
 		<%= LanguageUtil.get(pageContext, "unread-messages") %>: <%= folder.getUnreadMessageCount() %>
@@ -90,7 +90,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		<%
 		int count = 0;
 
-		Set envelopes = MailUtil.getEnvelopes(request.getSession(), new DateComparator(false));
+		Set envelopes = MailUtil.getEnvelopes(request, new DateComparator(false));
 
 		Iterator itr = envelopes.iterator();
 
@@ -757,8 +757,8 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			String messageIdParam = ParamUtil.getString(request, "messageId", null);
 
 			try {
-				String folderId = MailUtil.getFolderName(request.getSession());
-				long messageId = MailUtil.getMessageId(request.getSession());
+				String folderId = MailUtil.getFolderName(request);
+				long messageId = MailUtil.getMessageId(request);
 			%>
 
 				Mail.currentFolderId = "<%= folderId %>";

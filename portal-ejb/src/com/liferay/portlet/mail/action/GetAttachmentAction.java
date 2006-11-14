@@ -29,7 +29,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
 
 import org.apache.struts.action.Action;
@@ -51,12 +50,10 @@ public class GetAttachmentAction extends Action {
 		throws Exception {
 
 		try {
-			HttpSession ses = req.getSession();
-
 			String fileName = ParamUtil.getString(req, "fileName");
 			String contentPath = ParamUtil.getString(req, "contentPath");
 
-			Object[] parts = MailUtil.getAttachment(ses, contentPath);
+			Object[] parts = MailUtil.getAttachment(req, contentPath);
 
 			byte[] content = (byte[])parts[0];
 			String contentType = (String)parts[1];

@@ -23,7 +23,6 @@
 package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -35,6 +34,7 @@ import java.util.Collection;
 
 import javax.portlet.ActionRequest;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
@@ -50,15 +50,17 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailAccounts {
 
-	public static MailAccount getCurrentAccount(HttpSession ses)
+	public static MailAccount getCurrentAccount(HttpServletRequest req)
 		throws MailAccountsException {
 
+		HttpSession ses = req.getSession();
+
 		MailAccount previousAccount =
-			(MailAccount) ses.getAttribute(WebKeys.MAIL_CURRENT_ACCOUNT);
+			(MailAccount)ses.getAttribute(WebKeys.MAIL_CURRENT_ACCOUNT);
 
 		if (previousAccount == null) {
 			MailAccount defaultAccount =
-				_getAccount(ses, _getDefaultAccountName());
+				_getAccount(req, _getDefaultAccountName());
 
 			ses.setAttribute(WebKeys.MAIL_CURRENT_ACCOUNT, defaultAccount);
 
@@ -73,13 +75,15 @@ public class MailAccounts {
 
 		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
-		return getCurrentAccount(reqImpl.getHttpServletRequest().getSession());
+		return getCurrentAccount(reqImpl.getHttpServletRequest());
 	}
 
-	public static void setAccount(HttpSession ses, String accountName)
+	public static void setAccount(HttpServletRequest req, String accountName)
 		throws MailAccountsException {
 
-		MailAccount account = _getAccount(ses, accountName);
+		HttpSession ses = req.getSession();
+
+		MailAccount account = _getAccount(req, accountName);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Switched to account " + account);
@@ -88,8 +92,11 @@ public class MailAccounts {
 		ses.setAttribute(WebKeys.MAIL_CURRENT_ACCOUNT, account);
 	}
 
-	private static MailAccount _getAccount(HttpSession ses, String accountName)
+	private static MailAccount _getAccount(
+			HttpServletRequest req, String accountName)
 		throws MailAccountsException {
+
+		HttpSession ses = req.getSession();
 
 		MailAccount account = null;
 
@@ -100,9 +107,7 @@ public class MailAccounts {
 		String password = null;
 
 		try {
-			String userId = PortalUtil.getUserId(ses);
-
-			user = UserLocalServiceUtil.getUserById(userId);
+			user = PortalUtil.getUser(req);
 			password = PortalUtil.getUserPassword(ses);
 
 			account = accountFinder.findAccount(user, password, accountName);

@@ -26,6 +26,7 @@ import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -40,12 +41,12 @@ public class MailSessionLock {
 		_instance._cleanUp(ses);
 	}
 
-	public static void lock(String sessionId) {
-		_instance._lock(sessionId);
+	public static void lock(HttpServletRequest req) {
+		_instance._lock(req.getSession().getId());
 	}
 
-	public static void unlock(String sessionId) {
-		_instance._unlock(sessionId);
+	public static void unlock(HttpServletRequest req) {
+		_instance._unlock(req.getSession().getId());
 	}
 
 	private MailSessionLock() {

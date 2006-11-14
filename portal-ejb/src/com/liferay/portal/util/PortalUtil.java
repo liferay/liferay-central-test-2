@@ -868,12 +868,10 @@ public class PortalUtil {
 		return getUser(reqImpl.getHttpServletRequest());
 	}
 
-	public static String getUserId(HttpSession ses) {
-		return (String)ses.getAttribute(WebKeys.USER_ID);
-	}
-
 	public static String getUserId(HttpServletRequest req) {
-		return getUserId(req.getSession());
+		HttpSession ses = req.getSession();
+
+		return (String)ses.getAttribute(WebKeys.USER_ID);
 	}
 
 	public static String getUserId(ActionRequest req) {

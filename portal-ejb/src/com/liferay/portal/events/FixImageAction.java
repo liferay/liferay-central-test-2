@@ -32,9 +32,6 @@ import com.liferay.util.Validator;
 
 import java.util.Iterator;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="FixImageAction.java.html"><b><i>View Source</i></b></a>
  *
@@ -75,7 +72,5 @@ public class FixImageAction extends SimpleAction {
 				image.getImageId(), image.getTextObj());
 		}
 	}
-
-	private static Log _log = LogFactory.getLog(FixImageAction.class);
 
 }

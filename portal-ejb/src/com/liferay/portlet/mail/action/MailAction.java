@@ -128,37 +128,29 @@ public class MailAction extends JSONAction {
 	}
 
 	protected void addFolder(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		String folderId = ParamUtil.getString(req, "folderId");
 
-		MailUtil.createFolder(ses, folderId);
+		MailUtil.createFolder(req, folderId);
 	}
 
 	protected void deleteFolder(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		String folderId = ParamUtil.getString(req, "folderId");
 
-		MailUtil.removeFolder(ses, folderId);
+		MailUtil.removeFolder(req, folderId);
 	}
 
 	protected void deleteMessages(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		MultiHashMap messages = _convertMessages(req);
 
-		MailUtil.deleteMessages(ses, messages);
+		MailUtil.deleteMessages(req, messages);
 	}
 
 	protected String emptyFolder(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
 
-		MailUtil.emptyFolder(ses, folderId);
+		MailUtil.emptyFolder(req, folderId);
 
 		jsonObj.put("folderId", folderId);
 
@@ -191,11 +183,9 @@ public class MailAction extends JSONAction {
 	}
 
 	protected String getFolders(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		JSONObject jsonObj = new JSONObject();
 
-		_getFolders(ses, jsonObj);
+		_getFolders(req, jsonObj);
 
 		return jsonObj.toString();
 	}
@@ -203,14 +193,12 @@ public class MailAction extends JSONAction {
 	protected String getMessage(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		HttpSession ses = req.getSession();
-
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
 		long messageId = ParamUtil.getLong(req, "messageId");
 
-		MailUtil.setFolder(ses, folderId);
+		MailUtil.setFolder(req, folderId);
 
 		MailMessage mailMessage = MailUtil.getMessage(req, messageId);
 
@@ -238,10 +226,9 @@ public class MailAction extends JSONAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		MailUtil.setFolder(req.getSession(), folderId);
+		MailUtil.setFolder(req, folderId);
 
-		Set envelopes =
-			MailUtil.getEnvelopes(req.getSession(), getComparator(req));
+		Set envelopes = MailUtil.getEnvelopes(req, getComparator(req));
 
 		JSONArray jsonEnvelopes = _convertEnvelopes(envelopes, themeDisplay);
 
@@ -261,7 +248,7 @@ public class MailAction extends JSONAction {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 				WebKeys.THEME_DISPLAY);
 
-		Set envelopes = MailUtil.search(ses, displayTerms, getComparator(req));
+		Set envelopes = MailUtil.search(req, displayTerms, getComparator(req));
 
 		ses.setAttribute(WebKeys.MAIL_SEARCH_RESULTS, envelopes);
 
@@ -294,22 +281,18 @@ public class MailAction extends JSONAction {
 	}
 
 	protected void moveMessages(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		MultiHashMap messages = _convertMessages(req);
 
 		String folderId = ParamUtil.getString(req, "folderId");
 
-		MailUtil.moveMessages(ses, messages, folderId);
+		MailUtil.moveMessages(req, messages, folderId);
 	}
 
 	protected void renameFolder(HttpServletRequest req) throws Exception {
-		HttpSession ses = req.getSession();
-
 		String folderId = ParamUtil.getString(req, "folderId");
 		String newFolderId = ParamUtil.getString(req, "newFolderId");
 
-		MailUtil.renameFolder(ses, folderId, newFolderId);
+		MailUtil.renameFolder(req, folderId, newFolderId);
 	}
 
 	protected void updatePreferences(HttpServletRequest req) throws Exception {
@@ -379,7 +362,7 @@ public class MailAction extends JSONAction {
 		return messages;
 	}
 
-	private void _getFolders(HttpSession ses, JSONObject jsonObj)
+	private void _getFolders(HttpServletRequest req, JSONObject jsonObj)
 		throws Exception {
 
 		long start = System.currentTimeMillis();
@@ -388,7 +371,7 @@ public class MailAction extends JSONAction {
 
 		int count = 1;
 
-		Iterator itr = MailUtil.getFolders(ses).iterator();
+		Iterator itr = MailUtil.getFolders(req).iterator();
 
 		while (itr.hasNext()) {
 			MailFolder folder = (MailFolder)itr.next();

@@ -71,7 +71,6 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -114,7 +113,6 @@ public class EditMessageAction extends PortletAction {
 		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
 
 		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
-		HttpSession httpSes = httpReq.getSession();
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
@@ -130,7 +128,7 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		if (cmd.equals("forward") || cmd.startsWith("reply")) {
-			MailUtil.setFolder(httpSes, folderId);
+			MailUtil.setFolder(httpReq, folderId);
 
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
@@ -202,7 +200,7 @@ public class EditMessageAction extends PortletAction {
 				signature + getBody(req, mailMessage));
 		}
 		else if (cmd.equals(Constants.EDIT)) {
-			MailUtil.setFolder(httpSes, folderId);
+			MailUtil.setFolder(httpReq, folderId);
 
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
