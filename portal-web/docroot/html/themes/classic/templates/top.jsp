@@ -42,7 +42,7 @@
 			</div>
 
 			<div id="portal-dock" style="position: absolute; z-index: 1;">
-			
+
 				<div class="portal-dock-box"
 					 onmouseover="LiferayDock.showText('<%= UnicodeFormatter.toString(user.getGreeting()) %>')">
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_main.png" %>' height="50" width="50" />
