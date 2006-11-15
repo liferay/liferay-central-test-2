@@ -290,14 +290,14 @@ var Alerts = {
 	            message.style.top = centerTop + "px";
             }
             else {
-	            message.style.top = (body.scrollTop + 50) + "px";
+	            message.style.top = (body.scrollTop + 20) + "px";
             }
             
             if (mode == "xy" || mode == "x") {
 	            message.style.left = centerLeft + "px";
             }
             else {
-	            message.style.left = "50px";
+	            message.style.left = "20px";
             }
         }
 	},
