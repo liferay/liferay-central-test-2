@@ -114,6 +114,25 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
+		// always allow Omniadmin
+		if (Validator.isNotNull(userId)) {
+			if (OmniadminUtil.isOmniadmin(userId)) {
+				return SUCCESS;
+			}
+		}
+		else if (Validator.isNotNull(emailAddress)) {
+			try {
+				User user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, emailAddress);
+
+				if (OmniadminUtil.isOmniadmin(user.getUserId())) {
+					return SUCCESS;
+				}
+			}
+			catch (NoSuchUserException nsue) {
+			}
+		}
+
 		Properties env = new Properties();
 
 		String baseProviderURL = PrefsPropsUtil.getString(
@@ -356,25 +375,7 @@ public class LDAPAuth implements Authenticator {
 
 		if (PrefsPropsUtil.getBoolean(
 			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
-
-			if (Validator.isNotNull(userId)) {
-				if (OmniadminUtil.isOmniadmin(userId)) {
-					return SUCCESS;
-				}
-			}
-			else if (Validator.isNotNull(emailAddress)) {
-				try {
-					User user = UserLocalServiceUtil.getUserByEmailAddress(
-						companyId, emailAddress);
-
-					if (OmniadminUtil.isOmniadmin(user.getUserId())) {
-						return SUCCESS;
-					}
-				}
-				catch (NoSuchUserException nsue) {
-				}
-			}
-
+			
 			return failureCode;
 		}
 		else {
