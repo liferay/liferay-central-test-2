@@ -86,7 +86,7 @@ public class LDAPImportUtil {
 				"User Id " + userId + " and email address " + emailAddress);
 		}
 
-		if (userId == null || emailAddress == null) {
+		if (Validator.isNull(userId) || Validator.isNull(emailAddress)) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Cannot add user because user id and email address are " +
@@ -354,12 +354,14 @@ public class LDAPImportUtil {
 					description);
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Adding " + userId + " to group " + groupName);
-			}
+			if (userGroup != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding " + userId + " to group " + groupName);
+				}
 
-			UserLocalServiceUtil.addUserGroupUsers(
-				userGroup.getUserGroupId(), new String[] {userId});
+				UserLocalServiceUtil.addUserGroupUsers(
+					userGroup.getUserGroupId(), new String[] {userId});
+			}
 		}
 	}
 
