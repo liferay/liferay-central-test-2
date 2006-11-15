@@ -225,7 +225,7 @@ public class LDAPAuth implements Authenticator {
 				
 				if (!authenticated) {
 					return _authenticateRequired(
-						companyId, userId, emailAddress, DNE);		
+						companyId, userId, emailAddress, FAILURE);		
 				}
 
 				_processUser(attrs, userMappings, companyId, emailAddress, 
