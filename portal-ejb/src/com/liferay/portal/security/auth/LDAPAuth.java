@@ -38,9 +38,6 @@ import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import java.io.PrintWriter;
-import java.io.StringWriter;
-
 import java.util.Calendar;
 import java.util.Locale;
 import java.util.Map;
@@ -201,61 +198,6 @@ public class LDAPAuth implements Authenticator {
 					LogUtil.log(_log, userMappings);
 				}
 
-				String creatorUserId = null;
-				boolean autoUserId = false;
-
-				if (Validator.isNull(userId)) {
-					userId = LDAPUtil.getAttributeValue(
-						attrs, userMappings.getProperty("userId"));
-				}
-
-				boolean autoPassword = false;
-				String password1 = password;
-				String password2 = password;
-				boolean passwordReset = false;
-
-				if (Validator.isNull(emailAddress)) {
-					emailAddress = LDAPUtil.getAttributeValue(
-						attrs, userMappings.getProperty("emailAddress"));
-				}
-
-				Locale locale = Locale.US;
-				String firstName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("firstName"));
-				String middleName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("middleName"));
-				String lastName = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("lastName"));
-
-				if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
-					String fullName = LDAPUtil.getAttributeValue(
-						attrs, userMappings.getProperty("fullName"));
-
-					String[] names = LDAPUtil.splitFullName(fullName);
-
-					firstName = names[0];
-					middleName = names[1];
-					lastName = names[2];
-				}
-
-				String nickName = null;
-				String prefixId = null;
-				String suffixId = null;
-				boolean male = true;
-				int birthdayMonth = Calendar.JANUARY;
-				int birthdayDay = 1;
-				int birthdayYear = 1970;
-				String jobTitle = LDAPUtil.getAttributeValue(
-					attrs, userMappings.getProperty("jobTitle"));
-				String organizationId = null;
-				String locationId = null;
-				boolean sendEmail = false;
-
-				// Check passwords by either doing a comparison between the
-				// passwords or by binding to the LDAP server
-
-
-				// Make sure the user has a portal account
 				Attribute userPassword = attrs.get("userPassword");
 				
 				boolean authenticated = 
@@ -264,16 +206,11 @@ public class LDAPAuth implements Authenticator {
 				
 				if (!authenticated) {
 					return _authenticateRequired(
-						companyId, userId, emailAddress, DNE);					
+						companyId, userId, emailAddress, DNE);		
 				}
-				
-				LDAPImportUtil.addOrUpdateUser(
-					creatorUserId, companyId, autoUserId, userId, autoPassword,
-					password1, password2, passwordReset, emailAddress, locale,
-					firstName, middleName, lastName, nickName, prefixId,
-					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-					jobTitle, organizationId, locationId, sendEmail, true,
-					false);
+
+				_processUser(attrs, userMappings, companyId, emailAddress, 
+					userId, password);
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -294,11 +231,77 @@ public class LDAPAuth implements Authenticator {
 		return SUCCESS;
 	}
 
+	private static void _processUser(Attributes attrs, Properties userMappings, 
+			String companyId, String emailAddress, String userId, 
+			String password) 
+		throws Exception {
+
+		String creatorUserId = null;
+		boolean autoUserId = false;
+
+		if (Validator.isNull(userId)) {
+			userId = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("userId"));
+		}
+
+		boolean autoPassword = false;
+		String password1 = password;
+		String password2 = password;
+		boolean passwordReset = false;
+
+		if (Validator.isNull(emailAddress)) {
+			emailAddress = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("emailAddress"));
+		}
+
+		Locale locale = Locale.US;
+		String firstName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("firstName"));
+		String middleName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("middleName"));
+		String lastName = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("lastName"));
+
+		if (Validator.isNull(firstName) || Validator.isNull(lastName)) {
+			String fullName = LDAPUtil.getAttributeValue(
+				attrs, userMappings.getProperty("fullName"));
+
+			String[] names = LDAPUtil.splitFullName(fullName);
+
+			firstName = names[0];
+			middleName = names[1];
+			lastName = names[2];
+		}
+
+		String nickName = null;
+		String prefixId = null;
+		String suffixId = null;
+		boolean male = true;
+		int birthdayMonth = Calendar.JANUARY;
+		int birthdayDay = 1;
+		int birthdayYear = 1970;
+		String jobTitle = LDAPUtil.getAttributeValue(
+			attrs, userMappings.getProperty("jobTitle"));
+		String organizationId = null;
+		String locationId = null;
+		boolean sendEmail = false;
+		
+		LDAPImportUtil.addOrUpdateUser(
+			creatorUserId, companyId, autoUserId, userId, autoPassword,
+			password1, password2, passwordReset, emailAddress, locale,
+			firstName, middleName, lastName, nickName, prefixId,
+			suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
+			jobTitle, organizationId, locationId, sendEmail, true,
+			false);	
+	}
+	
 	private static boolean _authenticate(LdapContext ctx, Properties env, 
 			Binding binding, String baseDN, Attribute userPassword, String password, 
 			String companyId, String userId, String emailAddress) 
 		throws Exception {
 
+		// Check passwords by either doing a comparison between the
+		// passwords or by binding to the LDAP server
 		if (userPassword != null) {
 			String ldapPassword =
 				new String((byte[])userPassword.get());
