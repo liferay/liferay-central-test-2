@@ -32,6 +32,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.LDAPUtil;
+import com.liferay.util.LogUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -141,11 +142,7 @@ public class LDAPAuth implements Authenticator {
 				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
 
 		if (_log.isDebugEnabled()) {
-			StringWriter sw = new StringWriter();
-
-			env.list(new PrintWriter(sw));
-
-			_log.debug(sw.getBuffer().toString());
+			LogUtil.log(_log, env);
 		}
 
 		LdapContext ctx = null;
@@ -201,11 +198,7 @@ public class LDAPAuth implements Authenticator {
 						companyId, PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
 
 				if (_log.isDebugEnabled()) {
-					StringWriter sw = new StringWriter();
-
-					userMappings.list(new PrintWriter(sw));
-
-					_log.debug(sw.getBuffer().toString());
+					LogUtil.log(_log, userMappings);
 				}
 
 				String creatorUserId = null;
@@ -261,56 +254,19 @@ public class LDAPAuth implements Authenticator {
 				// Check passwords by either doing a comparison between the
 				// passwords or by binding to the LDAP server
 
-				Attribute userPassword = attrs.get("userPassword");
-
-				if (userPassword != null) {
-					String ldapPassword =
-						new String((byte[])userPassword.get());
-
-					String encryptedPassword = password;
-
-					String algorithm = PrefsPropsUtil.getString(
-						companyId,
-						PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
-
-					if (Validator.isNotNull(algorithm)) {
-						encryptedPassword =
-							"{" + algorithm + "}" +
-								Encryptor.digest(algorithm, password);
-					}
-
-					if (!ldapPassword.equals(encryptedPassword)) {
-						_log.error(
-							"LDAP password " + ldapPassword +
-								" does not match with given password " +
-									encryptedPassword + " for user id " + userId);
-
-						return authenticateRequired(
-							companyId, userId, emailAddress, FAILURE);
-					}
-				}
-				else {
-					try {
-						String userDN =
-							binding.getName() + StringPool.COMMA + baseDN;
-
-						env.put(Context.SECURITY_PRINCIPAL, userDN);
-						env.put(Context.SECURITY_CREDENTIALS, password);
-
-						ctx = new InitialLdapContext(env, null);
-					}
-					catch (Exception e) {
-						_log.error(
-							"Failed to bind to the LDAP server with " + userId +
-								" " + password, e);
-
-						return authenticateRequired(
-							companyId, userId, emailAddress, FAILURE);
-					}
-				}
 
 				// Make sure the user has a portal account
-
+				Attribute userPassword = attrs.get("userPassword");
+				
+				boolean authenticated = 
+					_authenticate(ctx, env, binding, baseDN, userPassword, 
+						password, companyId, userId, emailAddress);
+				
+				if (!authenticated) {
+					return _authenticateRequired(
+						companyId, userId, emailAddress, DNE);					
+				}
+				
 				LDAPImportUtil.addOrUpdateUser(
 					creatorUserId, companyId, autoUserId, userId, autoPassword,
 					password1, password2, passwordReset, emailAddress, locale,
@@ -324,21 +280,73 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter did not return any results");
 				}
 
-				return authenticateRequired(
+				return _authenticateRequired(
 					companyId, userId, emailAddress, DNE);
 			}
 		}
 		catch (Exception e) {
 			_log.warn("Problem accessing LDAP server");
 
-			return authenticateRequired(
+			return _authenticateRequired(
 				companyId, userId, emailAddress, FAILURE);
 		}
 
 		return SUCCESS;
 	}
 
-	public static int authenticateRequired(
+	private static boolean _authenticate(LdapContext ctx, Properties env, 
+			Binding binding, String baseDN, Attribute userPassword, String password, 
+			String companyId, String userId, String emailAddress) 
+		throws Exception {
+
+		if (userPassword != null) {
+			String ldapPassword =
+				new String((byte[])userPassword.get());
+
+			String encryptedPassword = password;
+
+			String algorithm = PrefsPropsUtil.getString(
+				companyId,
+				PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+
+			if (Validator.isNotNull(algorithm)) {
+				encryptedPassword =
+					"{" + algorithm + "}" +
+						Encryptor.digest(algorithm, password);
+			}
+
+			if (!ldapPassword.equals(encryptedPassword)) {
+				_log.error(
+					"LDAP password " + ldapPassword +
+						" does not match with given password " +
+							encryptedPassword + " for user id " + userId);
+
+				return false;
+			}
+		}
+		else {
+			try {
+				String userDN =
+					binding.getName() + StringPool.COMMA + baseDN;
+
+				env.put(Context.SECURITY_PRINCIPAL, userDN);
+				env.put(Context.SECURITY_CREDENTIALS, password);
+
+				ctx = new InitialLdapContext(env, null);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Failed to bind to the LDAP server with " + userId +
+						" " + password, e);
+
+				return false;
+			}
+		}
+		
+		return true;
+	}
+	
+	private static int _authenticateRequired(
 			String companyId, String userId, String emailAddress,
 			int failureCode)
 		throws Exception {

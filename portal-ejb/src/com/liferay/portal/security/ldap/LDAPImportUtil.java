@@ -36,12 +36,10 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.LDAPUtil;
+import com.liferay.util.LogUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-
-import java.io.PrintWriter;
-import java.io.StringWriter;
 
 import java.util.Calendar;
 import java.util.List;
@@ -175,11 +173,7 @@ public class LDAPImportUtil {
 				companyId, PropsUtil.LDAP_IMPORT_SECURITY_CREDENTIALS));
 
 		if (_log.isDebugEnabled()) {
-			StringWriter sw = new StringWriter();
-
-			env.list(new PrintWriter(sw));
-
-			_log.debug(sw.getBuffer().toString());
+			LogUtil.log(_log, env);
 		}
 
 		LdapContext ctx = null;
@@ -204,11 +198,7 @@ public class LDAPImportUtil {
 				companyId, PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
-			StringWriter sw = new StringWriter();
-
-			userMappings.list(new PrintWriter(sw));
-
-			_log.debug(sw.getBuffer().toString());
+			LogUtil.log(_log, userMappings);
 		}
 
 		Properties groupMappings = PropertiesUtil.load(
@@ -216,11 +206,7 @@ public class LDAPImportUtil {
 				companyId, PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
 
 		if (_log.isDebugEnabled()) {
-			StringWriter sw = new StringWriter();
-
-			groupMappings.list(new PrintWriter(sw));
-
-			_log.debug(sw.getBuffer().toString());
+			LogUtil.log(_log, groupMappings);
 		}
 
 		try {
