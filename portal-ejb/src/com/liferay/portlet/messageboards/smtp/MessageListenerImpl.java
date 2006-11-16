@@ -82,11 +82,15 @@ public class MessageListenerImpl implements MessageListener {
 				return false;
 			}
 
+			if (_log.isDebugEnabled()) {
+				_log.debug("Checking if user exists by email: " + from);
+			}
 			UserLocalServiceUtil.getUserByEmailAddress(companyId, from);
 
 			return true;
 		}
 		catch (Exception e) {
+			_log.warn("Mail rejected because of: " + e.toString());
 			return false;
 		}
 	}
