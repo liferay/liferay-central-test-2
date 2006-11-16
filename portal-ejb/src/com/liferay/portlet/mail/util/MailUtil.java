@@ -185,6 +185,10 @@ public class MailUtil {
 					_resolveAddresses(req, mailMessage.getBcc()));
 			}
 
+			if (!Validator.isNull(mailMessage.getInReplyTo())) {
+				message.setHeader("In-Reply-To", mailMessage.getInReplyTo());
+			}
+
 			message.setSubject(mailMessage.getSubject());
 
 			_replaceEmbeddedImages(req, mailMessage, _getAttachmentURL(req));
@@ -658,6 +662,11 @@ public class MailUtil {
 			mailMessage.setSubject(message.getSubject());
 			mailMessage.setSentDate(message.getSentDate());
 
+			String[] messageIdHeader = message.getHeader("Message-ID");
+			if ((messageIdHeader != null) && (messageIdHeader.length > 0)) {
+				mailMessage.setInReplyTo(messageIdHeader[0]);
+			}
+			
 			String contentPath = RemoteMailAttachment.buildContentPath(
 				folder.getName(), messageId);
 

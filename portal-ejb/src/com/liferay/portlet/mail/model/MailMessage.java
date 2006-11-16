@@ -94,6 +94,14 @@ public class MailMessage {
 		_bcc = InternetAddress.parse(bccs);
 	}
 
+	public String getInReplyTo() {
+		return _inReplyTo;
+	}
+
+	public void setInReplyTo(String inReplyTo) {
+		_inReplyTo = inReplyTo;
+	}
+
 	public Address[] getReplyTo() {
 		return _replyTo;
 	}
@@ -200,6 +208,7 @@ public class MailMessage {
 	private Address[] _to;
 	private Address[] _cc;
 	private Address[] _bcc;
+	private String _inReplyTo;
 	private Address[] _replyTo;
 	private String _subject;
 	private String _plainBody;

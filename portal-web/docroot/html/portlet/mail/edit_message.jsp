@@ -26,6 +26,7 @@
 
 <%
 String originalId = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID), "0");
+String inReplyTo = GetterUtil.getString((String)request.getAttribute(WebKeys.MAIL_MESSAGE_IN_REPLY_TO), null);
 
 String to = StringPool.BLANK;
 String cc = StringPool.BLANK;
@@ -124,6 +125,9 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_render" value="/mail/view" /></portlet:renderURL>">
 <input name="<portlet:namespace />originalId" type="hidden" value="<%= originalId %>" />
+<c:if test="<%= inReplyTo != null %>">
+	<input name="<portlet:namespace />inReplyTo" type="hidden" value="<%= inReplyTo %>" />
+</c:if>
 <input name="<portlet:namespace />body" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= ContentException.class %>" message="please-enter-valid-content" />
