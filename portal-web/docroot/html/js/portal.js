@@ -288,11 +288,11 @@ var LiferayDock = {
 
 		if (collapse && count > 0) {
 			this.count--;
-			this.timer = setTimeout("LiferayDock.animate()", 30);
+			this.timer = setTimeout("LiferayDock.animate()", 25);
 		}
 		else if (!collapse && updated) {
 			this.count++;
-			this.timer = setTimeout("LiferayDock.animate()", 30);
+			this.timer = setTimeout("LiferayDock.animate()", 25);
 		}
 		else {
 			this.timer = 0;

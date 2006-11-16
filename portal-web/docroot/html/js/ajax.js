@@ -31,9 +31,6 @@ function AjaxRequest(url, options) {
 		}
 	}
 	
-	var urlArray = url.split("?");
-	var path = urlArray[0];
-	var query = urlArray[1];
 	var onComplete = opts.onComplete;
 	var returnFunction = function() {
 			if (xmlHttpReq.readyState == 4) {
@@ -54,45 +51,37 @@ function AjaxRequest(url, options) {
 			}
 		}
 
-	try {
-		if (method == "get") {
-			xmlHttpReq.open("GET", url, true);
-			xmlHttpReq.onreadystatechange = returnFunction;
-			xmlHttpReq.send("");
+	var send = function(url) {
+		var urlArray = url.split("?");
+		var path = urlArray[0];
+		var query = urlArray[1];
+		
+		try {
+			if (method == "get") {
+				xmlHttpReq.open("GET", url, true);
+				xmlHttpReq.onreadystatechange = returnFunction;
+				xmlHttpReq.send("");
+			}
+			else {
+				xmlHttpReq.open("POST", path, true);
+				xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
+				xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+				xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
+				xmlHttpReq.onreadystatechange = returnFunction;
+				xmlHttpReq.send(query);
+			}
 		}
-		else {
-			xmlHttpReq.open("POST", path, true);
-			xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
-			xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
-			xmlHttpReq.onreadystatechange = returnFunction;
-			xmlHttpReq.send(query);
+		catch (e) {
 		}
 	}
-	catch (e) {
-	}
+	
+	send(url);
 
 	this.resend = function(url, options) {
 		opts = options;
 		onComplete = opts.onComplete;
 		
-		var method = opts.method;
-		var urlArray = url.split("?");
-		var path = urlArray[0];
-		var query = urlArray[1];
-		var ajaxId = opts.ajaxId;
-		
-		if (method == "get") {
-			xmlHttpReq.open("GET", url, true);
-			xmlHttpReq.send("");
-		}
-		else {
-			xmlHttpReq.open("POST", path, true);
-			xmlHttpReq.setRequestHeader("Method", "POST " + path + " HTTP/1.1");
-			xmlHttpReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-			xmlHttpReq.setRequestHeader("Ajax-ID", ajaxId);
-			xmlHttpReq.send(query);
-		}
+		send(url);
 	};
 	
 	this.getId = function() {

@@ -24,12 +24,12 @@
 
 <div id="layout-outer-side-decoration" style="z-index: 0">
 	<div id="layout-inner-side-decoration">
-		<div id="layout-box">
 
 	<c:if test="<%= themeDisplay.isSignedIn() %>">
 	<div style="position: relative; z-index: 4;">
-		<div style="position: absolute; top: 0px; right: 10px; z-index: 0;">
-			<div id="portal-dock-title" style="position: relative; z-index: 2">
+		<table cellpadding="0" cellspacing="0" border="0" id="portal-dock-title" style="z-index: 2">
+		<tr>
+			<td>
 				<div class="portal-dock-help" id="portal-dock-text">
 					<%= user.getGreeting() %>
 				</div>
@@ -39,7 +39,9 @@
 				<div clsss="portal-dock-help" id="portal-dock-search" style="display: none">
 					<liferay-ui:journal-content-search />
 				</div>
-			</div>
+			</td>
+		</tr>
+		</table>
 
 			<div id="portal-dock" style="position: absolute; z-index: 1;">
 
@@ -103,7 +105,6 @@
 					</div>
 				</c:if>
 			</div>
-		</div>
 	</div>
 
 		<script type="text/javascript">
@@ -111,6 +112,7 @@
 		</script>
 	</c:if>
 
+		<div id="layout-box">
 			<table border="0" cellspacing="0" cellpadding="0" width="100%" id="layout-top-banner">
 			<tr>
 				<td valign="top" width="100%">

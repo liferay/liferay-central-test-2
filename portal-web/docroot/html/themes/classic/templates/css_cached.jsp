@@ -351,7 +351,7 @@ FONT.bg {
 
 #portal-dock {
 	position: absolute;
-	right: 0px;
+	right: 10px;
 	top: 25px;
 	height: 54px;
 	width: 54px;
@@ -360,7 +360,9 @@ FONT.bg {
 #portal-dock-title {
 	text-align: right;
 	height: 25px;
-	z-index: 1px;
+	position: absolute;
+	right: 10px;
+	top: 0;
 }
 
 .portal-dock-box {
@@ -386,6 +388,7 @@ FONT.bg {
 	background-color: <%= colorScheme.getPortletBg() %>;
 	border: 1px solid #CCCCCC;
 	padding: 2px;
+	white-space: nowrap;
 }
 
 .layout-my-places-arrow {
