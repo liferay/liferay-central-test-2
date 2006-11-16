@@ -23,6 +23,7 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_2_0.UpgradeJournal;
+import com.liferay.portal.upgrade.v4_2_0.UpgradeToJsSafeIds;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -46,6 +47,7 @@ public class UpgradeProcess_4_2_0 extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		upgrade(new UpgradeJournal());
+		upgrade(new UpgradeToJsSafeIds());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_2_0.class);
