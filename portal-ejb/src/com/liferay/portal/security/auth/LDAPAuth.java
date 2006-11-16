@@ -114,7 +114,8 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		// always allow Omniadmin
+		// Always allow omniadmin
+
 		if (Validator.isNotNull(userId)) {
 			if (OmniadminUtil.isOmniadmin(userId)) {
 				return SUCCESS;
@@ -157,9 +158,7 @@ public class LDAPAuth implements Authenticator {
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.AUTH_IMPL_LDAP_SECURITY_CREDENTIALS));
 
-		if (_log.isDebugEnabled()) {
-			LogUtil.log(_log, env);
-		}
+		LogUtil.debug(_log, env);
 
 		LdapContext ctx = null;
 
@@ -213,23 +212,22 @@ public class LDAPAuth implements Authenticator {
 					PrefsPropsUtil.getString(
 						companyId, PropsUtil.AUTH_IMPL_LDAP_USER_MAPPINGS));
 
-				if (_log.isDebugEnabled()) {
-					LogUtil.log(_log, userMappings);
-				}
+				LogUtil.debug(_log, userMappings);
 
 				Attribute userPassword = attrs.get("userPassword");
-				
-				boolean authenticated = 
-					_authenticate(ctx, env, binding, baseDN, userPassword, 
-						password, companyId, userId, emailAddress);
-				
+
+				boolean authenticated = _authenticate(
+					ctx, env, binding, baseDN, userPassword,  password,
+					companyId, userId, emailAddress);
+
 				if (!authenticated) {
 					return _authenticateRequired(
-						companyId, userId, emailAddress, FAILURE);		
+						companyId, userId, emailAddress, FAILURE);
 				}
 
-				_processUser(attrs, userMappings, companyId, emailAddress, 
-					userId, password);
+				_processUser(
+					attrs, userMappings, companyId, emailAddress,  userId,
+					password);
 			}
 			else {
 				if (_log.isDebugEnabled()) {
@@ -241,7 +239,9 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		catch (Exception e) {
-			_log.warn("Problem accessing LDAP server");
+			if (_log.isWarnEnabled()) {
+				_log.warn("Problem accessing LDAP server");
+			}
 
 			return _authenticateRequired(
 				companyId, userId, emailAddress, FAILURE);
@@ -250,9 +250,78 @@ public class LDAPAuth implements Authenticator {
 		return SUCCESS;
 	}
 
-	private static void _processUser(Attributes attrs, Properties userMappings, 
-			String companyId, String emailAddress, String userId, 
-			String password) 
+	private static boolean _authenticate(
+			LdapContext ctx, Properties env, Binding binding, String baseDN,
+			Attribute userPassword, String password, String companyId,
+			String userId, String emailAddress)
+		throws Exception {
+
+		// Check passwords by either doing a comparison between the passwords or
+		// by binding to the LDAP server
+
+		if (userPassword != null) {
+			String ldapPassword = new String((byte[])userPassword.get());
+
+			String encryptedPassword = password;
+
+			String algorithm = PrefsPropsUtil.getString(
+				companyId,
+				PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+
+			if (Validator.isNotNull(algorithm)) {
+				encryptedPassword =
+					"{" + algorithm + "}" +
+						Encryptor.digest(algorithm, password);
+			}
+
+			if (!ldapPassword.equals(encryptedPassword)) {
+				_log.error(
+					"LDAP password " + ldapPassword +
+						" does not match with given password " +
+							encryptedPassword + " for user id " + userId);
+
+				return false;
+			}
+		}
+		else {
+			try {
+				String userDN = binding.getName() + StringPool.COMMA + baseDN;
+
+				env.put(Context.SECURITY_PRINCIPAL, userDN);
+				env.put(Context.SECURITY_CREDENTIALS, password);
+
+				ctx = new InitialLdapContext(env, null);
+			}
+			catch (Exception e) {
+				_log.error(
+					"Failed to bind to the LDAP server with " + userId +
+						" " + password, e);
+
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	private static int _authenticateRequired(
+			String companyId, String userId, String emailAddress,
+			int failureCode)
+		throws Exception {
+
+		if (PrefsPropsUtil.getBoolean(
+			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
+
+			return failureCode;
+		}
+		else {
+			return SUCCESS;
+		}
+	}
+
+	private static void _processUser(
+			Attributes attrs, Properties userMappings, String companyId,
+			String emailAddress, String userId, String password)
 		throws Exception {
 
 		String creatorUserId = null;
@@ -304,83 +373,13 @@ public class LDAPAuth implements Authenticator {
 		String organizationId = null;
 		String locationId = null;
 		boolean sendEmail = false;
-		
+
 		LDAPImportUtil.addOrUpdateUser(
 			creatorUserId, companyId, autoUserId, userId, autoPassword,
 			password1, password2, passwordReset, emailAddress, locale,
-			firstName, middleName, lastName, nickName, prefixId,
-			suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			jobTitle, organizationId, locationId, sendEmail, true,
-			false);	
-	}
-	
-	private static boolean _authenticate(LdapContext ctx, Properties env, 
-			Binding binding, String baseDN, Attribute userPassword, String password, 
-			String companyId, String userId, String emailAddress) 
-		throws Exception {
-
-		// Check passwords by either doing a comparison between the
-		// passwords or by binding to the LDAP server
-		if (userPassword != null) {
-			String ldapPassword =
-				new String((byte[])userPassword.get());
-
-			String encryptedPassword = password;
-
-			String algorithm = PrefsPropsUtil.getString(
-				companyId,
-				PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
-
-			if (Validator.isNotNull(algorithm)) {
-				encryptedPassword =
-					"{" + algorithm + "}" +
-						Encryptor.digest(algorithm, password);
-			}
-
-			if (!ldapPassword.equals(encryptedPassword)) {
-				_log.error(
-					"LDAP password " + ldapPassword +
-						" does not match with given password " +
-							encryptedPassword + " for user id " + userId);
-
-				return false;
-			}
-		}
-		else {
-			try {
-				String userDN =
-					binding.getName() + StringPool.COMMA + baseDN;
-
-				env.put(Context.SECURITY_PRINCIPAL, userDN);
-				env.put(Context.SECURITY_CREDENTIALS, password);
-
-				ctx = new InitialLdapContext(env, null);
-			}
-			catch (Exception e) {
-				_log.error(
-					"Failed to bind to the LDAP server with " + userId +
-						" " + password, e);
-
-				return false;
-			}
-		}
-		
-		return true;
-	}
-	
-	private static int _authenticateRequired(
-			String companyId, String userId, String emailAddress,
-			int failureCode)
-		throws Exception {
-
-		if (PrefsPropsUtil.getBoolean(
-			companyId, PropsUtil.AUTH_IMPL_LDAP_REQUIRED)) {
-			
-			return failureCode;
-		}
-		else {
-			return SUCCESS;
-		}
+			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
+			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
+			locationId, sendEmail, true, false);
 	}
 
 	private static Log _log = LogFactory.getLog(LDAPAuth.class);

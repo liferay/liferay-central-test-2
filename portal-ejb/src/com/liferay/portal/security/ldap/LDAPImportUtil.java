@@ -172,9 +172,7 @@ public class LDAPImportUtil {
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_SECURITY_CREDENTIALS));
 
-		if (_log.isDebugEnabled()) {
-			LogUtil.log(_log, env);
-		}
+		LogUtil.debug(_log, env);
 
 		LdapContext ctx = null;
 
@@ -197,17 +195,13 @@ public class LDAPImportUtil {
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_USER_MAPPINGS));
 
-		if (_log.isDebugEnabled()) {
-			LogUtil.log(_log, userMappings);
-		}
+		LogUtil.debug(_log, userMappings);
 
 		Properties groupMappings = PropertiesUtil.load(
 			PrefsPropsUtil.getString(
 				companyId, PropsUtil.LDAP_IMPORT_GROUP_MAPPINGS));
 
-		if (_log.isDebugEnabled()) {
-			LogUtil.log(_log, groupMappings);
-		}
+		LogUtil.debug(_log, groupMappings);
 
 		try {
 			String filter = PrefsPropsUtil.getString(
@@ -340,14 +334,12 @@ public class LDAPImportUtil {
 					description);
 			}
 
-			if (userGroup != null) {
-				if (_log.isDebugEnabled()) {
-					_log.debug("Adding " + userId + " to group " + groupName);
-				}
-
-				UserLocalServiceUtil.addUserGroupUsers(
-					userGroup.getUserGroupId(), new String[] {userId});
+			if (_log.isDebugEnabled()) {
+				_log.debug("Adding " + userId + " to group " + groupName);
 			}
+
+			UserLocalServiceUtil.addUserGroupUsers(
+				userGroup.getUserGroupId(), new String[] {userId});
 		}
 	}
 

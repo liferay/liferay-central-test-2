@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -47,14 +48,16 @@ public class LogUtil {
 
 	public static final boolean REMOVE_UNKNOWN_SOURCE = true;
 
-	public static void log(Log log, Properties props) {
-		StringWriter sw = new StringWriter();
+	public static void debug(Log log, Properties props) {
+		if (log.isDebugEnabled()) {
+			StringWriter sw = new StringWriter();
 
-		props.list(new PrintWriter(sw));
+			props.list(new PrintWriter(sw));
 
-		log.debug(sw.getBuffer().toString());
+			log.debug(sw.getBuffer().toString());
+		}
 	}
-	
+
 	public static void log(Log log, Throwable t) {
 		if (t instanceof JspException) {
 			log(log, (JspException)t);
