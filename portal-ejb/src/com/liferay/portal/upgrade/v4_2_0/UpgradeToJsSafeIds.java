@@ -143,7 +143,7 @@ public class UpgradeToJsSafeIds extends UpgradeProcess {
 				catch (PortalException pe) {
 					_log.error(
 						"Unable to update layout " + layoutId + " " + ownerId,
-						e);
+						pe);
 				}
 			}
 		}
