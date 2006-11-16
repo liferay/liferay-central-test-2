@@ -35,7 +35,7 @@ if (BrowserSniffer.is_safari(request)) {
 		editorImpl = "tinymcesimple";
 	}
 }
-else if (BrowserSniffer.is_rtf(request)) {
+else if (!BrowserSniffer.is_rtf(request)) {
 	editorImpl = "simple";
 }
 
