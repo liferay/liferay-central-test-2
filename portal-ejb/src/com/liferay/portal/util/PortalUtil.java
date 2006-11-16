@@ -1378,7 +1378,8 @@ public class PortalUtil {
 			permissionChecker = PermissionCheckerFactory.create(
 				realUser, signedIn, checkGuest);
 
-			if (UserPermission.contains(
+			if (doAsUser.isDefaultUser() ||
+				UserPermission.contains(
 					permissionChecker, doAsUserId, organizationId, locationId,
 					ActionKeys.IMPERSONATE)) {
 
