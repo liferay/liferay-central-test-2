@@ -83,14 +83,18 @@ public class MessageListenerImpl implements MessageListener {
 			}
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Checking if user exists by email: " + from);
+				_log.debug("Check to see if user " + from + " exists");
 			}
+
 			UserLocalServiceUtil.getUserByEmailAddress(companyId, from);
 
 			return true;
 		}
 		catch (Exception e) {
-			_log.warn("Mail rejected because of: " + e.toString());
+			if (_log.isWarnEnabled()) {
+				_log.warn("Mail rejected", e);
+			}
+
 			return false;
 		}
 	}
@@ -103,8 +107,9 @@ public class MessageListenerImpl implements MessageListener {
 			String categoryId = _getCategoryId(recipient);
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Deliver message from " + from + " to category " +
-					categoryId);
+				_log.debug(
+					"Deliver message from " + from + " to category " +
+						categoryId);
 			}
 
 			Company company = CompanyLocalServiceUtil.getCompany(companyId);
