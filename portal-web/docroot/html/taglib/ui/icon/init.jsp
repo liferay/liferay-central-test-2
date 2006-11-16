@@ -43,6 +43,6 @@ if (toolTip) {
 	details = "onmousemove=\"ToolTip.show(event, this, '" + UnicodeLanguageUtil.get(pageContext, message) + "')\"";
 }
 else {
-	details = "title=\"" + UnicodeLanguageUtil.get(pageContext, message) + "\"";
+	details = "title=\"" + LanguageUtil.get(pageContext, message) + "\"";
 }
 %>
