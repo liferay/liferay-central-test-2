@@ -50,9 +50,9 @@ import org.apache.commons.logging.LogFactory;
 public class EncryptTagUtil {
 
 	public static void doStartTag(
-			PageContext pageContext, String className, String style,
-			String protocol, Set unencryptedParamsSet, String url,
-			String target)
+			String className, String style, String protocol,
+			Set unencryptedParamsSet, String url, String target,
+			PageContext pageContext)
 		throws JspException {
 
 		try {

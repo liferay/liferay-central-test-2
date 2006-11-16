@@ -176,6 +176,12 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 
 		try {
 			defaultUser = UserLocalServiceUtil.getDefaultUser(companyId);
+
+			if (!defaultUser.isAgreedToTermsOfUse()) {
+				defaultUser.setAgreedToTermsOfUse(true);
+
+				UserUtil.update(defaultUser);
+			}
 		}
 		catch (NoSuchUserException nsue) {
 			defaultUser = UserUtil.create(User.getDefaultUserId(companyId));
@@ -192,7 +198,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 				PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_RESOLUTION));
 			defaultUser.setLoginDate(now);
 			defaultUser.setFailedLoginAttempts(0);
-			defaultUser.setAgreedToTermsOfUse(false);
+			defaultUser.setAgreedToTermsOfUse(true);
 			defaultUser.setActive(true);
 
 			UserUtil.update(defaultUser);

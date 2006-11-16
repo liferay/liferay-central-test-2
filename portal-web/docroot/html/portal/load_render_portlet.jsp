@@ -57,6 +57,16 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 				var queryString = "p_l_id=<%= plid %>&p_p_id=<%= portlet.getPortletId() %>&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=<%= columnId %>&p_p_col_pos=<%= columnPos %>&p_p_col_count=<%= columnCount %>";
 
 				<%
+				String doAsUserId = themeDisplay.getDoAsUserId();
+
+				if (Validator.isNotNull(doAsUserId)) {
+				%>
+
+					queryString += "&doAsUserId=<%= Http.encodeURL(doAsUserId) %>";
+
+				<%
+				}
+
 				String ppid = ParamUtil.getString(request, "p_p_id");
 
 				if (ppid.equals(portlet.getPortletId())) {

@@ -66,3 +66,32 @@
 	</tr>
 	</table>
 </c:if>
+
+<c:if test="<%= themeDisplay.isImpersonated() %>">
+	<table border="0" cellpadding="1" cellspacing="0" width="100%">
+	<tr>
+		<td bgcolor="<%= colorScheme.getPortletMsgError() %>">
+			<table border="0" cellpadding="8" cellspacing="0" width="100%">
+			<tr>
+				<td bgcolor="<%= colorScheme.getLayoutBg() %>">
+					<font class="bg" size="2"><span class="bg-neg-alert">
+
+					<c:choose>
+						<c:when test="<%= themeDisplay.isSignedIn() %>">
+							<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-x", new Object[] {realUser.getFullName(), user.getFullName()}) %>
+						</c:when>
+						<c:otherwise>
+							<%= LanguageUtil.format(pageContext, "hi-x-you-are-impersonating-the-guest-user", new Object[] {realUser.getFullName()}) %>
+						</c:otherwise>
+					</c:choose>
+
+					<%= LanguageUtil.format(pageContext, "click-here-to-be-yourself-again", new Object[] {"<a href=\"" + PortalUtil.getLayoutURL(layout, themeDisplay, false) + "\">", "</a>"}) %>
+
+					</span></font>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</c:if>

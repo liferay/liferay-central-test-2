@@ -47,6 +47,7 @@ public class DefineObjectsTag extends TagSupport {
 			pageContext.setAttribute("company", themeDisplay.getCompany());
 			pageContext.setAttribute("account", themeDisplay.getAccount());
 			pageContext.setAttribute("user", themeDisplay.getUser());
+			pageContext.setAttribute("realUser", themeDisplay.getRealUser());
 			pageContext.setAttribute("contact", themeDisplay.getContact());
 
 			if (themeDisplay.getLayout() != null) {

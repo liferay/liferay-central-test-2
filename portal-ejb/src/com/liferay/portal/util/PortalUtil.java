@@ -38,6 +38,10 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
@@ -61,6 +65,7 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.InstancePool;
@@ -113,6 +118,8 @@ import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
 
 import org.hibernate.util.FastHashMap;
@@ -371,13 +378,33 @@ public class PortalUtil {
 	public static String getLayoutURL(Layout layout, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
+		return getLayoutURL(layout, themeDisplay, true);
+	}
+
+	public static String getLayoutURL(
+			Layout layout, ThemeDisplay themeDisplay, boolean doAsUser)
+		throws PortalException, SystemException {
+
 		String layoutFriendlyURL = getLayoutFriendlyURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(layoutFriendlyURL)) {
+			if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				layoutFriendlyURL = Http.addParameter(
+					layoutFriendlyURL, "doAsUserId",
+					themeDisplay.getDoAsUserId());
+			}
+
 			return layoutFriendlyURL;
 		}
 
-		return getLayoutActualURL(layout, themeDisplay);
+		String layoutURL = getLayoutActualURL(layout, themeDisplay);
+
+		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+			layoutURL = Http.addParameter(
+				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
+		}
+
+		return layoutURL;
 	}
 
 	public static String getLayoutActualURL(
@@ -869,9 +896,40 @@ public class PortalUtil {
 	}
 
 	public static String getUserId(HttpServletRequest req) {
+		String userId = (String)req.getAttribute(WebKeys.USER_ID);
+
+		if (userId != null) {
+			return userId;
+		}
+
+		if (!GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) &&
+			GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE))) {
+
+			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
+
+			try {
+				doAsUserId = _getDoAsUserId(req, doAsUserId);
+
+				if (doAsUserId != null) {
+					return doAsUserId;
+				}
+			}
+			catch (Exception e) {
+				_log.error("Unable to impersonate user " + doAsUserId, e);
+			}
+		}
+
 		HttpSession ses = req.getSession();
 
-		return (String)ses.getAttribute(WebKeys.USER_ID);
+		userId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+		if (userId != null) {
+			req.setAttribute(WebKeys.USER_ID, userId);
+		}
+
+		return userId;
 	}
 
 	public static String getUserId(ActionRequest req) {
@@ -1285,6 +1343,66 @@ public class PortalUtil {
 		}
 	}
 
+	private static String _getDoAsUserId(
+			HttpServletRequest req, String doAsUserId)
+		throws Exception {
+
+		if (Validator.isNull(doAsUserId)) {
+			return null;
+		}
+
+		HttpSession ses = req.getSession();
+
+		String realUserId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+		if (realUserId == null) {
+			return null;
+		}
+
+		Company company = getCompany(req);
+
+		doAsUserId = Encryptor.decrypt(company.getKeyObj(), doAsUserId);
+
+		User doAsUser = UserLocalServiceUtil.getUserById(doAsUserId);
+
+		String organizationId = doAsUser.getOrganization().getOrganizationId();
+		String locationId = doAsUser.getLocation().getOrganizationId();
+
+		User realUser = UserLocalServiceUtil.getUserById(realUserId);
+		boolean signedIn = true;
+		boolean checkGuest = true;
+
+		PermissionCheckerImpl permissionChecker = null;
+
+		try {
+			permissionChecker = PermissionCheckerFactory.create(
+				realUser, signedIn, checkGuest);
+
+			if (UserPermission.contains(
+					permissionChecker, doAsUserId, organizationId, locationId,
+					ActionKeys.IMPERSONATE)) {
+
+				req.setAttribute(WebKeys.USER_ID, doAsUserId);
+
+				return doAsUserId;
+			}
+			else {
+				_log.error(
+					"User " + realUserId + " does not have the permission to " +
+						"impersonate " + doAsUserId);
+
+				return null;
+			}
+		}
+		finally {
+			try {
+				PermissionCheckerFactory.recycle(permissionChecker);
+			}
+			catch (Exception e) {
+			}
+		}
+	}
+
 	private PortalUtil() {
 
 		// Groups
@@ -1401,6 +1519,8 @@ public class PortalUtil {
 			return false;
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(PortalUtil.class);
 
 	private static PortalUtil _instance = new PortalUtil();
 

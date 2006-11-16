@@ -20,71 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.taglib.security;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 
-import java.text.DateFormat;
-
-import java.util.Date;
+import javax.servlet.jsp.tagext.TagData;
+import javax.servlet.jsp.tagext.TagExtraInfo;
+import javax.servlet.jsp.tagext.VariableInfo;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="DoAsURLTei.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class DoAsURLTei extends TagExtraInfo {
 
-	static String name = "Liferay Portal";
+	public VariableInfo[] getVariableInfo(TagData data) {
+		String var = data.getAttributeString("var");
 
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
+		if (Validator.isNotNull(var)) {
+			return new VariableInfo[] {
+				new VariableInfo(
+					var, String.class.getName(), true, VariableInfo.AT_END),
+			};
 		}
 		else {
-			name += " Professional";
+			return null;
 		}
-	}
-
-	static String version = "4.1.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3390";
-
-	static String date = "November 15, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
-	}
-
-	public static final String getCodeName() {
-		return codeName;
-	}
-
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
-	}
-
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
-	}
-
-	public static final String getReleaseInfo() {
-		return releaseInfo;
-	}
-
-	public static final String getServerInfo() {
-		return serverInfo;
 	}
 
 }

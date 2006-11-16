@@ -22,20 +22,14 @@
 
 package com.liferay.portal.servlet.taglib.security;
 
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.LiferayWindowState;
-import com.liferay.portlet.PortletURLImpl;
-import com.liferay.portlet.PortletURLUtil;
+import com.liferay.util.Encryptor;
+import com.liferay.util.Http;
 import com.liferay.util.Validator;
-
-import javax.portlet.PortletURL;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
-import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -43,17 +37,16 @@ import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="PermissionsURLTagUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="DoAsURLTagUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class PermissionsURLTagUtil extends TagSupport {
+public class DoAsURLTagUtil extends TagSupport {
 
 	public static String doEndTag(
-			String redirect, String modelResource,
-			String modelResourceDescription, String resourcePrimKey, String var,
-			boolean writeOutput, PageContext pageContext)
+			String doAsUserId, String var, boolean writeOutput,
+			PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -63,52 +56,24 @@ public class PermissionsURLTagUtil extends TagSupport {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
+			Company company = themeDisplay.getCompany();
 			Layout layout = themeDisplay.getLayout();
 
-			RenderRequest renderRequest =
-				(RenderRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+			String doAsURL = PortalUtil.getLayoutURL(
+				layout, themeDisplay, false);
 
-			RenderResponse renderResponse =
-				(RenderResponse)req.getAttribute(
-					WebKeys.JAVAX_PORTLET_RESPONSE);
-
-			if (Validator.isNull(redirect)) {
-				redirect = PortletURLUtil.getCurrent(
-					renderRequest, renderResponse).toString();
-			}
-
-			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
-				false);
-
-			if (themeDisplay.isStatePopUp()) {
-				portletURL.setWindowState(LiferayWindowState.POP_UP);
-			}
-			else {
-				portletURL.setWindowState(WindowState.MAXIMIZED);
-			}
-
-			portletURL.setParameter(
-				"struts_action", "/portlet_configuration/edit_permissions");
-			portletURL.setParameter("redirect", redirect);
-			portletURL.setParameter("portletResource", portletDisplay.getId());
-			portletURL.setParameter("modelResource", modelResource);
-			portletURL.setParameter(
-				"modelResourceDescription", modelResourceDescription);
-			portletURL.setParameter("resourcePrimKey", resourcePrimKey);
-
-			String portletURLToString = portletURL.toString();
+			doAsURL = Http.addParameter(
+				doAsURL, "doAsUserId",
+				Encryptor.encrypt(company.getKeyObj(), doAsUserId));
 
 			if (Validator.isNotNull(var)) {
-				pageContext.setAttribute(var, portletURLToString);
+				pageContext.setAttribute(var, doAsURL);
 			}
 			else if (writeOutput) {
-				pageContext.getOut().print(portletURLToString);
+				pageContext.getOut().print(doAsURL);
 			}
 
-			return portletURL.toString();
+			return doAsURL;
 		}
 		catch (Exception e) {
 			throw new JspException(e);

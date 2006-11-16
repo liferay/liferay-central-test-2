@@ -542,7 +542,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 				if (Validator.isNotNull(portletId)) {
 					portlet = PortletLocalServiceUtil.getPortletById(
-						user.getCompanyId(), portletId);
+						user.getActualCompanyId(), portletId);
 				}
 
 				String strutsPath = path.substring(
@@ -555,7 +555,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				}
 				else {
 					portlet = PortletLocalServiceUtil.getPortletByStrutsPath(
-						user.getCompanyId(), strutsPath);
+						user.getActualCompanyId(), strutsPath);
 				}
 
 				if ((portlet != null) && portlet.isActive()) {

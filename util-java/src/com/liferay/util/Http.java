@@ -34,8 +34,10 @@ import java.net.URLEncoder;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.StringTokenizer;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -106,6 +108,24 @@ public class Http {
 
 	public static final int TIMEOUT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".timeout"), 5000);
+
+	public static String addParameter(String url, String name, String value) {
+		if (url == null) {
+			return null;
+		}
+
+		if (url.indexOf(StringPool.QUESTION) == -1) {
+			url += StringPool.QUESTION;
+		}
+
+		if (!url.endsWith(StringPool.QUESTION) &&
+			!url.endsWith(StringPool.AMPERSAND)) {
+
+			url += StringPool.AMPERSAND;
+		}
+
+		return url + name + StringPool.EQUAL + encodeURL(value);
+	}
 
 	public static String decodeURL(String url) {
 		if (url == null) {
@@ -185,6 +205,56 @@ public class Http {
 		}
 
 		return StringPool.BLANK;
+	}
+
+	public static Map getParameterMap(String queryString) {
+		Map parameterMap = new LinkedHashMap();
+
+		if (Validator.isNull(queryString)) {
+			return parameterMap;
+		}
+
+		StringTokenizer st = new StringTokenizer(
+			queryString, StringPool.AMPERSAND);
+
+		while (st.hasMoreTokens()) {
+			String token = st.nextToken();
+
+			if (Validator.isNotNull(token)) {
+				String[] kvp = StringUtil.split(token, StringPool.EQUAL);
+
+				String key = kvp[0];
+
+				String value = StringPool.BLANK;
+
+				if (kvp.length > 1) {
+					value = kvp[1];
+				}
+
+				List values = (List)parameterMap.get(key);
+
+				if (values == null) {
+					values = new ArrayList();
+
+					parameterMap.put(key, values);
+				}
+
+				values.add(value);
+			}
+		}
+
+		Iterator itr = parameterMap.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry entry = (Map.Entry)itr.next();
+
+			String key = (String)entry.getKey();
+			List values = (List)entry.getValue();
+
+			parameterMap.put(key, (String[])values.toArray(new String[0]));
+		}
+
+		return parameterMap;
 	}
 
 	public static String getProtocol(boolean secure) {

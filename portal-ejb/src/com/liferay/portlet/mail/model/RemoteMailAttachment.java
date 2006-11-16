@@ -32,21 +32,17 @@ import com.liferay.util.StringUtil;
  */
 public class RemoteMailAttachment {
 
-	private static String FOLDER_SEPARATOR = "_MAIL_FOLDER_";
-
-	private static String MESSAGE_SEPARATOR = "_MAIL_MESSAGE_";
-
 	public static String buildContentPath(String folderName, long messageId) {
-		return folderName + FOLDER_SEPARATOR + messageId + MESSAGE_SEPARATOR;
+		return folderName + _FOLDER_SEPARATOR + messageId + _MESSAGE_SEPARATOR;
 	}
 
 	public static String[] parsePath(String contentPath) {
 		String[] path = new String[3];
 
-		String postFolder = StringUtil.split(contentPath, FOLDER_SEPARATOR)[1];
-		String[] msgWrap = StringUtil.split(postFolder, MESSAGE_SEPARATOR);
+		String postFolder = StringUtil.split(contentPath, _FOLDER_SEPARATOR)[1];
+		String[] msgWrap = StringUtil.split(postFolder, _MESSAGE_SEPARATOR);
 
-		path[0] = StringUtil.split(contentPath, FOLDER_SEPARATOR)[0];
+		path[0] = StringUtil.split(contentPath, _FOLDER_SEPARATOR)[0];
 		path[1] = msgWrap[0];
 		path[2] = msgWrap[1];
 
@@ -76,6 +72,10 @@ public class RemoteMailAttachment {
     public void setContentId(String contentId) {
     	_contentId = contentId;
     }
+
+	private static String _FOLDER_SEPARATOR = "_MAIL_FOLDER_";
+
+	private static String _MESSAGE_SEPARATOR = "_MAIL_MESSAGE_";
 
     private String _filename;
     private String _contentPath;

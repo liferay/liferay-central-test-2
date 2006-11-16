@@ -209,6 +209,8 @@ public class PropsUtil {
 
 	public static final String PORTAL_JAAS_IMPL = "portal.jaas.impl";
 
+	public static final String PORTAL_IMPERSONATION_ENABLE = "portal.impersonation.enable";
+
 	// LDAP Import
 
 	public static final String LDAP_IMPORT_ENABLED = "ldap.import.enabled";

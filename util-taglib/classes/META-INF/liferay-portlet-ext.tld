@@ -22,6 +22,9 @@
 
 	Set encrypt to true if you want to encrypt all the parameter values.
 
+	Set doAsUserId to process this URL as if it is accessed by the specified
+	user.
+
 	Set portletConfiguration to true if you want to pass the parameters needed
 	when you are accessing a portlet that is wrapped by the Portlet
 	Configuration portlet.
@@ -69,6 +72,11 @@
 		</attribute>
 		<attribute>
 			<name>encrypt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>doAsUserId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
@@ -139,6 +147,9 @@
 
 	Set encrypt to true if you want to encrypt all the parameter values.
 
+	Set doAsUserId to process this URL as if it is accessed by the specified
+	user.
+
 	Set portletConfiguration to true if you want to pass the parameters needed
 	when you are accessing a portlet that is wrapped by the Portlet
 	Configuration portlet.
@@ -186,6 +197,11 @@
 		</attribute>
 		<attribute>
 			<name>encrypt</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>doAsUserId</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

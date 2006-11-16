@@ -35,9 +35,11 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -102,6 +104,7 @@ public class UpdatePageAction extends JSONAction {
 		boolean privateLayout = ParamUtil.getBoolean(req, "private");
 		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");
+		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
 		String type = Layout.TYPE_PORTLET;
 		String friendlyURL = StringPool.BLANK;
@@ -122,7 +125,13 @@ public class UpdatePageAction extends JSONAction {
 			layout.getLayoutId(), layout.getOwnerId(),
 			layout.getTypeSettings());
 
-		return PortalUtil.getLayoutActualURL(layout, mainPath);
+		String layoutURL = PortalUtil.getLayoutActualURL(layout, mainPath);
+System.out.println("### doAsUserId " + doAsUserId);
+		if (Validator.isNotNull(doAsUserId)) {
+			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
+		}
+
+		return layoutURL;
 	}
 
 	protected void deletePage(HttpServletRequest req) throws Exception {

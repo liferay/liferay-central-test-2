@@ -254,17 +254,16 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	private boolean _isUploadRequest() {
 		if (!_uploadRequestInvoked) {
-
 			_uploadRequestInvoked = true;
-			
+
 			if (PortalUtil.getUploadServletRequest(this) != null) {
 				_uploadRequest = true;
-			}	
+			}
 		}
-		
+
 		return _uploadRequest;
 	}
-	
+
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _req;
@@ -275,7 +274,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _servletPath;
 	private String _remoteUser;
 	private Principal _userPrincipal;
-	private boolean _uploadRequestInvoked;
 	private boolean _uploadRequest;
+	private boolean _uploadRequestInvoked;
 
 }

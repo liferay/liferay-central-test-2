@@ -22,12 +22,14 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.util.MapUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.Map;
@@ -39,6 +41,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="ActionURLTagUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -47,11 +52,11 @@ import javax.servlet.jsp.PageContext;
  */
 public class ActionURLTagUtil {
 
-	public static void doEndTag(
-			PageContext pageContext, boolean action, String windowState,
-			String portletMode, String var, String varImpl, Boolean secure,
-			String portletName, Boolean anchor, Boolean encrypt,
-			boolean portletConfiguration, Map params)
+	public static String doEndTag(
+			boolean action, String windowState, String portletMode, String var,
+			String varImpl, Boolean secure, String portletName, Boolean anchor,
+			Boolean encrypt, String doAsUserId, Boolean portletConfiguration,
+			Map params, boolean writeOutput, PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -69,6 +74,14 @@ public class ActionURLTagUtil {
 			RenderResponseImpl renderResponse =
 				(RenderResponseImpl)req.getAttribute(
 					WebKeys.JAVAX_PORTLET_RESPONSE);
+
+			if (renderResponse == null) {
+				_log.error(
+					"Render response is null because this tag is not being " +
+						"called within the context of a portlet");
+
+				return StringPool.BLANK;
+			}
 
 			PortletURLImpl portletURL = null;
 
@@ -104,7 +117,13 @@ public class ActionURLTagUtil {
 				portletURL.setEncrypt(encrypt.booleanValue());
 			}
 
-			if (portletConfiguration) {
+			if (Validator.isNotNull(doAsUserId)) {
+				portletURL.setDoAsUserId(doAsUserId);
+			}
+
+			if ((portletConfiguration != null) &&
+				portletConfiguration.booleanValue()) {
+
 				String portletResource = ParamUtil.getString(
 					req, "portletResource");
 				String previewWidth = ParamUtil.getString(req, "previewWidth");
@@ -128,13 +147,19 @@ public class ActionURLTagUtil {
 			else if (Validator.isNotNull(varImpl)) {
 				pageContext.setAttribute(varImpl, portletURL);
 			}
-			else {
+			else if (writeOutput) {
 				pageContext.getOut().print(portletURL.toString());
 			}
+
+			return portletURL.toString();
 		}
 		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+
 			throw new JspException(e);
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(ActionURLTagUtil.class);
 
 }

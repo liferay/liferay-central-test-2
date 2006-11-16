@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
 import com.liferay.taglib.portletext.IconConfigurationTag;
@@ -32,12 +33,17 @@ import com.liferay.taglib.portletext.IconMaximizeTag;
 import com.liferay.taglib.portletext.IconMinimizeTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.RuntimeTag;
+import com.liferay.taglib.security.DoAsURLTag;
+import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.ToggleTag;
+import com.liferay.util.Http;
 import com.liferay.util.servlet.StringServletResponse;
+
+import java.util.Map;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -58,6 +64,25 @@ public class VelocityTaglib {
 		_ctx = ctx;
 		_req = req;
 		_res = res;
+		_pageContext = pageContext;
+	}
+
+	public String actionURL(
+			String windowState, String portletMode, Boolean secure,
+			String portletName, Boolean anchor, Boolean encrypt,
+			String doAsUserId, Boolean portletConfiguration, String queryString)
+		throws Exception {
+
+		Map params = Http.getParameterMap(queryString);
+
+		return ActionURLTag.doTag(
+			true, windowState, portletMode, null, null, secure, portletName,
+			anchor, encrypt, doAsUserId, portletConfiguration, params, false,
+			_pageContext);
+	}
+
+	public String doAsURL(String doAsUserId) throws Exception {
+		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
 
 	public String iconBack() throws Exception {
@@ -158,6 +183,16 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String permissionsURL(
+			String redirect, String modelResource,
+			String modelResourceDescription, String resourcePrimKey)
+		throws Exception {
+
+		return PermissionsURLTag.doTag(
+			redirect, modelResource, modelResourceDescription, resourcePrimKey,
+			null, false, _pageContext);
+	}
+
 	public String pngImage(String image, String height, String width)
 		throws Exception {
 
@@ -166,6 +201,20 @@ public class VelocityTaglib {
 		PngImageTag.doTag(image, height, width, _ctx, _req, _res);
 
 		return _res.getString();
+	}
+
+	public String renderURL(
+			String windowState, String portletMode, Boolean secure,
+			String portletName, Boolean anchor, Boolean encrypt,
+			String doAsUserId, Boolean portletConfiguration, String queryString)
+		throws Exception {
+
+		Map params = Http.getParameterMap(queryString);
+
+		return ActionURLTag.doTag(
+			false, windowState, portletMode, null, null, secure, portletName,
+			anchor, encrypt, doAsUserId, portletConfiguration, params, false,
+			_pageContext);
 	}
 
 	public String runtime(String portletName)
@@ -207,5 +256,6 @@ public class VelocityTaglib {
 	private ServletContext _ctx;
 	private HttpServletRequest _req;
 	private StringServletResponse _res;
+	private PageContext _pageContext;
 
 }

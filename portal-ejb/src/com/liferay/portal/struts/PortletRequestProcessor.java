@@ -23,6 +23,7 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
@@ -305,7 +306,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 					WebKeys.JAVAX_PORTLET_CONFIG);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				user.getCompanyId(), portletConfig.getPortletId());
+				user.getActualCompanyId(), portletConfig.getPortletId());
 
 			if (portlet == null) {
 				return false;
@@ -344,6 +345,10 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 			}
 		}
 		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(StackTraceUtil.getStackTrace(e));
+			}
+
 			ForwardConfig forwardConfig =
 				mapping.findForward(_PATH_PORTAL_PORTLET_ACCESS_DENIED);
 
@@ -375,6 +380,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 
 		ActionErrors errors = form.validate(mapping, req);
+
 		if ((errors == null) || errors.isEmpty()) {
 			return true;
 		}
@@ -384,6 +390,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 
 		String input = mapping.getInput();
+
 		if (input == null) {
 			_log.error("Validation failed but no input form is available");
 

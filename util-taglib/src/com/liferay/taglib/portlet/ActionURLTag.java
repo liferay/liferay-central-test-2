@@ -27,11 +27,17 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
+import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
+import com.liferay.util.StringPool;
 
 import java.util.Map;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ActionURLTag.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +47,15 @@ import javax.servlet.jsp.JspException;
  */
 public class ActionURLTag extends ParamAncestorTagImpl {
 
-	public int doEndTag() throws JspException {
+	public static String doTag(
+			boolean action, String windowState, String portletMode, String var,
+			String varImpl, Boolean secure, String portletName, Boolean anchor,
+			Boolean encrypt, String doAsUserId, Boolean portletConfiguration,
+			Map params, boolean writeOutput, PageContext pageContext)
+		throws Exception {
+
+		Object returnObj = null;
+
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
@@ -49,55 +63,68 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
-			Object windowStateWrapper = _windowState;
+			Object windowStateWrapper = windowState;
 
 			if (windowStateWrapper == null) {
 				windowStateWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object portletModeWrapper = _portletMode;
+			Object portletModeWrapper = portletMode;
 
 			if (portletModeWrapper == null) {
 				portletModeWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object varWrapper = _var;
+			Object varWrapper = var;
 
 			if (varWrapper == null) {
 				varWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object varImplWrapper = _varImpl;
+			Object varImplWrapper = varImpl;
 
 			if (varImplWrapper == null) {
 				varImplWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object secureWrapper = _secure;
+			Object secureWrapper = secure;
 
 			if (secureWrapper == null) {
 				secureWrapper = new NullWrapper(Boolean.class.getName());
 			}
 
-			Object portletNameWrapper = _portletName;
+			Object portletNameWrapper = portletName;
 
 			if (portletNameWrapper == null) {
 				portletNameWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object anchorWrapper = _anchor;
+			Object anchorWrapper = anchor;
 
 			if (anchorWrapper == null) {
 				anchorWrapper = new NullWrapper(Boolean.class.getName());
 			}
 
-			Object encryptWrapper = _encrypt;
+			Object encryptWrapper = encrypt;
 
 			if (encryptWrapper == null) {
 				encryptWrapper = new NullWrapper(Boolean.class.getName());
 			}
 
-			Object paramsWrapper = getParams();
+			Object doAsUserIdWrapper = doAsUserId;
+
+			if (doAsUserIdWrapper == null) {
+				doAsUserIdWrapper = new NullWrapper(String.class.getName());
+			}
+
+			Object portletConfigurationWrapper = portletConfiguration;
+
+			if (portletConfigurationWrapper == null) {
+				portletConfigurationWrapper = new NullWrapper(
+					Boolean.class.getName());
+			}
+
+			Object paramsWrapper = params;
 
 			if (paramsWrapper == null) {
 				paramsWrapper = new NullWrapper(Map.class.getName());
@@ -106,14 +133,37 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					pageContext, new BooleanWrapper(isAction()),
-					windowStateWrapper, portletModeWrapper, varWrapper,
-					varImplWrapper, secureWrapper, portletNameWrapper,
-					anchorWrapper, encryptWrapper,
-					new BooleanWrapper(_portletConfiguration), paramsWrapper
+					new BooleanWrapper(action), windowStateWrapper,
+					portletModeWrapper, varWrapper, varImplWrapper,
+					secureWrapper, portletNameWrapper, anchorWrapper,
+					encryptWrapper, doAsUserIdWrapper,
+					portletConfigurationWrapper, paramsWrapper,
+					new BooleanWrapper(writeOutput), pageContext
 				});
 
-			MethodInvoker.invoke(methodWrapper);
+			returnObj = MethodInvoker.invoke(methodWrapper);
+		}
+		catch (Exception e) {
+			_log.error(StackTraceUtil.getStackTrace(e));
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		if (returnObj != null) {
+			return returnObj.toString();
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
+	public int doEndTag() throws JspException {
+		try {
+			doTag(
+				isAction(), _windowState, _portletMode, _var, _varImpl, _secure,
+				_portletName, _anchor, _encrypt, _doAsUserId,
+				_portletConfiguration, getParams(), true, pageContext);
 		}
 		catch (Exception e) {
 			if (e instanceof JspException) {
@@ -125,8 +175,6 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		}
 		finally {
 			clearParams();
-
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 
 		return EVAL_PAGE;
@@ -168,8 +216,12 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		_encrypt = new Boolean(encrypt);
 	}
 
+	public void setDoAsUserId(String doAsUserId) {
+		_doAsUserId = doAsUserId;
+	}
+
 	public void setPortletConfiguration(boolean portletConfiguration) {
-		_portletConfiguration = portletConfiguration;
+		_portletConfiguration = new Boolean(portletConfiguration);
 	}
 
 	private static final String _TAG_CLASS =
@@ -179,6 +231,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 
 	private static final boolean _ACTION = true;
 
+	private static Log _log = LogFactory.getLog(ActionURLTag.class);
+
 	private String _windowState;
 	private String _portletMode;
 	private String _var;
@@ -187,6 +241,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	private String _portletName;
 	private Boolean _anchor;
 	private Boolean _encrypt;
-	private boolean _portletConfiguration;
+	private String _doAsUserId;
+	private Boolean _portletConfiguration;
 
 }

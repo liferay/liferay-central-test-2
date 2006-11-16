@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
@@ -285,6 +286,14 @@ public class PortletURLImpl implements PortletURL {
 		_toString = null;
 	}
 
+	public void setDoAsUserId(String doAsUserId) {
+		_doAsUserId = doAsUserId;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
 	public String toString() {
 		if (_toString != null) {
 			return _toString;
@@ -406,7 +415,9 @@ public class PortletURLImpl implements PortletURL {
 
 		try {
 			if (_encrypt) {
-				key = PortalUtil.getCompany(_req).getKeyObj();
+				Company company = PortalUtil.getCompany(_req);
+
+				key = company.getKeyObj();
 			}
 		}
 		catch (Exception e) {
@@ -465,6 +476,30 @@ public class PortletURLImpl implements PortletURL {
 		sb.append(StringPool.EQUAL);
 		sb.append(_processValue(key, portletDisplay.getColumnCount()));
 		sb.append(StringPool.AMPERSAND);
+
+		if (Validator.isNotNull(_doAsUserId)) {
+			try {
+				Company company = PortalUtil.getCompany(_req);
+
+				sb.append("doAsUserId");
+				sb.append(StringPool.EQUAL);
+				sb.append(_processValue(company.getKeyObj(), _doAsUserId));
+				sb.append(StringPool.AMPERSAND);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+		else {
+			String doAsUserId = themeDisplay.getDoAsUserId();
+
+			if (Validator.isNotNull(doAsUserId)) {
+				sb.append("doAsUserId");
+				sb.append(StringPool.EQUAL);
+				sb.append(_processValue(key, doAsUserId));
+				sb.append(StringPool.AMPERSAND);
+			}
+		}
 
 		Iterator itr = _params.entrySet().iterator();
 
@@ -544,6 +579,7 @@ public class PortletURLImpl implements PortletURL {
 	private boolean _secure;
 	private boolean _anchor = true;
 	private boolean _encrypt = false;
+	private String _doAsUserId;
 	private String _toString;
 
 }

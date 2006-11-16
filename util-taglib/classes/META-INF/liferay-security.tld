@@ -7,6 +7,22 @@
 	<shortname>liferay-security</shortname>
 	<uri>http://liferay.com/tld/security</uri>
 	<tag>
+		<name>doAsURL</name>
+		<tagclass>com.liferay.taglib.security.DoAsURLTag</tagclass>
+		<teiclass>com.liferay.taglib.security.DoAsURLTei</teiclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>doAsUserId</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>var</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>encrypt</name>
 		<tagclass>com.liferay.taglib.security.EncryptTag</tagclass>
 		<bodycontent>JSP</bodycontent>

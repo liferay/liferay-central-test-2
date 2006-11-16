@@ -25,7 +25,6 @@ package com.liferay.portal.events;
 import com.liferay.portal.LayoutPermissionException;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -50,6 +49,7 @@ import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -145,25 +145,28 @@ public class ServicePreAction extends Action {
 
 			// User
 
-			User user = null;
-
-			try {
-				user = PortalUtil.getUser(req);
-			}
-			catch (NoSuchUserException nsue) {
-				return;
-			}
-
-			// Is the user signed in?
+			User user = PortalUtil.getUser(req);
 
 			boolean signedIn = false;
 
 			if (user == null) {
 				user = company.getDefaultUser();
 			}
-			else {
+			else if (!user.isDefaultUser()) {
 				signedIn = true;
 			}
+
+			User realUser = user;
+
+			String realUserId = (String)ses.getAttribute(WebKeys.USER_ID);
+
+			if (realUserId != null) {
+				if (!user.getUserId().equals(realUserId)) {
+					realUser = UserLocalServiceUtil.getUserById(realUserId);
+				}
+			}
+
+			String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
 			// Permission checker
 
@@ -366,6 +369,8 @@ public class ServicePreAction extends Action {
 			themeDisplay.setCompany(company);
 			themeDisplay.setCompanyLogo(companyLogo);
 			themeDisplay.setUser(user);
+			themeDisplay.setRealUser(realUser);
+			themeDisplay.setDoAsUserId(doAsUserId);
 			themeDisplay.setLayout(layout);
 			themeDisplay.setLayouts(layouts);
 			themeDisplay.setPlid(plid);

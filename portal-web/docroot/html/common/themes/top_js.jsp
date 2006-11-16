@@ -24,17 +24,25 @@
 
 <script type="text/javascript">
 	var themeDisplay = {
-		getPathThemeRoot : function() {
-			return("<%= themeDisplay.getPathThemeRoot() %>");
-		},
-		getPathThemeImage : function() {
-			return("<%= themeDisplay.getPathThemeImage() %>");
+		getDoAsUserIdEncoded : function() {
+
+			// Use Java to encode the encrypted user id because IE doesn't
+			// properly encode with encodeURIComponent. It leaves a '+' as a '+'
+			// whereas Firefox correctly encodes a '+' to '%2B'.
+
+			return "<%= Http.encodeURL(themeDisplay.getDoAsUserId()) %>";
 		},
 		getPathMain : function() {
-			return("<%= themeDisplay.getPathMain() %>");
+			return "<%= themeDisplay.getPathMain() %>";
+		},
+		getPathThemeImage : function() {
+			return "<%= themeDisplay.getPathThemeImage() %>";
+		},
+		getPathThemeRoot : function() {
+			return "<%= themeDisplay.getPathThemeRoot() %>";
 		},
 		getURLHome : function() {
-			return("<%= themeDisplay.getURLHome() %>");
+			return "<%= themeDisplay.getURLHome() %>";
 		}
 	};
 

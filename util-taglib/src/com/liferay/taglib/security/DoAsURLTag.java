@@ -22,26 +22,36 @@
 
 package com.liferay.taglib.security;
 
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.util.StringUtil;
-
-import java.util.HashSet;
-import java.util.Set;
+import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.util.StringPool;
 
 import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.PageContext;
 import javax.servlet.jsp.tagext.TagSupport;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * <a href="EncryptTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="DoAsURLTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class EncryptTag extends TagSupport {
+public class DoAsURLTag extends TagSupport {
 
-	public int doStartTag() throws JspException {
+	public static String doTag(
+			String doAsUserId, String var, boolean writeOutput,
+			PageContext pageContext)
+		throws Exception {
+
+		Object returnObj = null;
+
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
@@ -49,90 +59,68 @@ public class EncryptTag extends TagSupport {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
+			Object varWrapper = var;
+
+			if (varWrapper == null) {
+				varWrapper = new NullWrapper(String.class.getName());
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_START_METHOD,
+				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					_className, _style, _protocol, _unencryptedParamsSet, _url,
-					_target, pageContext
+					doAsUserId, varWrapper, new BooleanWrapper(writeOutput),
+					pageContext
 				});
 
-			MethodInvoker.invoke(methodWrapper);
+			returnObj = MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
-			throw new JspException(e);
+			_log.error(StackTraceUtil.getStackTrace(e));
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
 
-		return EVAL_BODY_INCLUDE;
+		if (returnObj != null) {
+			return returnObj.toString();
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public int doEndTag() throws JspException {
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
 		try {
-			Thread.currentThread().setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-
-			MethodWrapper methodWrapper = new MethodWrapper(
-				_TAG_CLASS, _TAG_DO_END_METHOD, new Object[] {pageContext});
-
-			MethodInvoker.invoke(methodWrapper);
+			doTag(_doAsUserId, _var, true, pageContext);
 		}
 		catch (Exception e) {
-			throw new JspException(e);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
+			if (e instanceof JspException) {
+				throw (JspException)e;
+			}
+			else {
+				throw new JspException(e);
+			}
 		}
 
 		return EVAL_PAGE;
 	}
 
-	public void setClassName(String className) {
-		_className = className;
+	public void setDoAsUserId(String doAsUserId) {
+		_doAsUserId = doAsUserId;
 	}
 
-	public void setStyle(String style) {
-		_style = style;
-	}
-
-	public void setProtocol(String protocol) {
-		_protocol = protocol;
-	}
-
-	public void setUnencryptedParams(String unencryptedParams) {
-		_unencryptedParamsSet.clear();
-
-		String[] unencryptedParamsArray = StringUtil.split(unencryptedParams);
-
-		for (int i = 0; i < unencryptedParamsArray.length; i++) {
-			_unencryptedParamsSet.add(unencryptedParamsArray[i]);
-		}
-	}
-
-	public void setUrl(String url) {
-		_url = url;
-	}
-
-	public void setTarget(String target) {
-		_target = target;
+	public void setVar(String var) {
+		_var = var;
 	}
 
 	private static final String _TAG_CLASS =
-		"com.liferay.portal.servlet.taglib.security.EncryptTagUtil";
-
-	private static final String _TAG_DO_START_METHOD = "doStartTag";
+		"com.liferay.portal.servlet.taglib.security.DoAsURLTagUtil";
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
 
-	private String _className;
-	private String _style;
-	private String _protocol;
-	private Set _unencryptedParamsSet = new HashSet();
-	private String _url;
-	private String _target;
+	private static Log _log = LogFactory.getLog(DoAsURLTag.class);
+
+	private String _doAsUserId;
+	private String _var;
 
 }

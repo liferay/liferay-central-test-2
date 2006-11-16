@@ -224,6 +224,7 @@ public class ThemeUtil {
 			vc.put("themeDisplay", themeDisplay);
 			vc.put("company", themeDisplay.getCompany());
 			vc.put("user", themeDisplay.getUser());
+			vc.put("realUser", themeDisplay.getRealUser());
 			vc.put("layout", themeDisplay.getLayout());
 			vc.put("layouts", themeDisplay.getLayouts());
 			vc.put("plid", themeDisplay.getPlid());

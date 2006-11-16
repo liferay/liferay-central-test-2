@@ -105,6 +105,8 @@ public class ActionKeys {
 
 	public static final String HELP = "HELP";
 
+	public static final String IMPERSONATE = "IMPERSONATE";
+
 	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";
 
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";

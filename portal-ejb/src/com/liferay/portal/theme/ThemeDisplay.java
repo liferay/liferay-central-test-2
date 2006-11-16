@@ -94,6 +94,35 @@ public class ThemeDisplay {
 		return _user.getUserId();
 	}
 
+	public User getRealUser() {
+		return _realUser;
+	}
+
+	public void setRealUser(User realUser) {
+		_realUser = realUser;
+	}
+
+	public String getRealUserId() {
+		return _realUser.getUserId();
+	}
+
+	public String getDoAsUserId() {
+		return _doAsUserId;
+	}
+
+	public void setDoAsUserId(String doAsUserId) {
+		_doAsUserId = doAsUserId;
+	}
+
+	public boolean isImpersonated() {
+		if (getUserId().equals(getRealUserId())) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public Contact getContact() {
 		return _contact;
 	}
@@ -497,6 +526,8 @@ public class ThemeDisplay {
 		_company = null;
 		_companyLogo = null;
 		_user = null;
+		_realUser = null;
+		_doAsUserId = null;
 		_layout = null;
 		_layouts = null;
 		_plid = null;
@@ -555,6 +586,8 @@ public class ThemeDisplay {
 	private String _companyLogo;
 	private Account _account;
 	private User _user;
+	private User _realUser;
+	private String _doAsUserId;
 	private Contact _contact;
 	private Layout _layout;
 	private List _layouts;

@@ -536,7 +536,8 @@ var Navigation = {
 			"&groupId=" + params.groupId +
 			"&private=" + params.isPrivate +
 			"&parent=" + params.parent +
-			"&mainPath=" + encodeURIComponent(themeDisplay.getPathMain());
+			"&mainPath=" + encodeURIComponent(themeDisplay.getPathMain()) +
+			"&doAsUserId=" + themeDisplay.getDoAsUserIdEncoded();
 
 		AjaxUtil.request(url, {
 				onComplete: function(xmlHttpReq) {

@@ -62,6 +62,8 @@ public class DefineObjectsTei extends TagExtraInfo {
 			new VariableInfo(
 				"user", User.class.getName(), true, VariableInfo.AT_END),
 			new VariableInfo(
+				"realUser", User.class.getName(), true, VariableInfo.AT_END),
+			new VariableInfo(
 				"contact", Contact.class.getName(), true, VariableInfo.AT_END),
 			new VariableInfo(
 				"layout", Layout.class.getName(), true, VariableInfo.AT_END),

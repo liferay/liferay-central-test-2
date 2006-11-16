@@ -62,6 +62,14 @@
 	</c:if>
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) %>">
+		<c:if test="<%= !GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE)) && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.PORTAL_IMPERSONATION_ENABLE)) && !user.getUserId().equals(user2.getUserId()) && UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.IMPERSONATE) %>">
+			<liferay-security:doAsURL
+				doAsUserId="<%= user2.getUserId() %>"
+				var="impersonateUserURL"
+			/>
+
+			<liferay-ui:icon image="impersonate_user" url="<%= impersonateUserURL %>" target="_blank" />
+		</c:if>
 
 		<%
 		if (searchTerms.isActive() || (!searchTerms.isActive() && GetterUtil.getBoolean(PropsUtil.get(PropsUtil.USERS_DELETE)))) {
