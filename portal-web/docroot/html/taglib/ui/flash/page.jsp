@@ -48,7 +48,7 @@ String width = (String)request.getAttribute("liferay-ui:flash:width");
 String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 %>
 
-<div id="<portlet:namespace />flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
+<div id="<%= randomNamespace %>flashcontent" style="height: <%= height %>; width: <%= width %>;"></div>
 
 <script type="text/javascript">
 	var <%= randomNamespace %>swfObj = new SWFObject("<%= movie %>", "<%= id %>", "<%= width %>", "<%= height %>", "<%= version %>", "<%= bgcolor %>");
@@ -65,5 +65,5 @@ String wmode = (String)request.getAttribute("liferay-ui:flash:wmode");
 	<%= randomNamespace %>swfObj.addParam("scale", "<%= scale %>");
 	<%= randomNamespace %>swfObj.addParam("swliveconnect", "<%= swliveconnect %>");
 	<%= randomNamespace %>swfObj.addParam("wmode", "<%= wmode %>");
-	<%= randomNamespace %>swfObj.write("<portlet:namespace />flashcontent");
+	<%= randomNamespace %>swfObj.write("<%= randomNamespace %>flashcontent");
 </script>
