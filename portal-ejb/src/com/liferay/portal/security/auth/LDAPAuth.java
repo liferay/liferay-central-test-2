@@ -379,7 +379,7 @@ public class LDAPAuth implements Authenticator {
 			password1, password2, passwordReset, emailAddress, locale,
 			firstName, middleName, lastName, nickName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, jobTitle, organizationId,
-			locationId, sendEmail, true, false);
+			locationId, sendEmail, true, true);
 	}
 
 	private static Log _log = LogFactory.getLog(LDAPAuth.class);
