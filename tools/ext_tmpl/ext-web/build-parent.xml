@@ -41,7 +41,6 @@
 		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/google.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/httpbridge.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/informa.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl.jar" dest="${classpath.jsp}" />

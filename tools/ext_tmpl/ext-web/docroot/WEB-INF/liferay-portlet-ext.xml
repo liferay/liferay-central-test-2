@@ -320,7 +320,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>66</portlet-name>
-		<struts-path>httpbridge</struts-path>
+		<struts-path>web_proxy</struts-path>
 		<include>false</include>
 	</portlet>
 	<portlet>
