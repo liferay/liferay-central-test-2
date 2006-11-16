@@ -62,6 +62,10 @@ public class DoAsURLTagUtil extends TagSupport {
 			String doAsURL = PortalUtil.getLayoutURL(
 				layout, themeDisplay, false);
 
+			if (Validator.isNull(doAsUserId)) {
+				doAsUserId = company.getDefaultUser().getUserId();
+			}
+
 			doAsURL = Http.addParameter(
 				doAsURL, "doAsUserId",
 				Encryptor.encrypt(company.getKeyObj(), doAsUserId));

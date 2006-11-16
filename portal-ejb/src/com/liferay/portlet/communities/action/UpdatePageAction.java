@@ -126,7 +126,7 @@ public class UpdatePageAction extends JSONAction {
 			layout.getTypeSettings());
 
 		String layoutURL = PortalUtil.getLayoutActualURL(layout, mainPath);
-System.out.println("### doAsUserId " + doAsUserId);
+
 		if (Validator.isNotNull(doAsUserId)) {
 			layoutURL = Http.addParameter(layoutURL, "doAsUserId", doAsUserId);
 		}

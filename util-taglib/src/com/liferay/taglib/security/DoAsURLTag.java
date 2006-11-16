@@ -59,6 +59,12 @@ public class DoAsURLTag extends TagSupport {
 			Thread.currentThread().setContextClassLoader(
 				PortalClassLoaderUtil.getClassLoader());
 
+			Object doAsUserIdWrapper = doAsUserId;
+
+			if (doAsUserIdWrapper == null) {
+				doAsUserIdWrapper = new NullWrapper(String.class.getName());
+			}
+
 			Object varWrapper = var;
 
 			if (varWrapper == null) {
@@ -68,8 +74,8 @@ public class DoAsURLTag extends TagSupport {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					doAsUserId, varWrapper, new BooleanWrapper(writeOutput),
-					pageContext
+					doAsUserIdWrapper, varWrapper,
+					new BooleanWrapper(writeOutput), pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);

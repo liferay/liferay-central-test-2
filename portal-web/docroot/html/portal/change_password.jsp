@@ -25,7 +25,9 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <form action="<%= themeDisplay.getPathMain() %>/portal/change_password" method="post" name="fm" onSubmit="submitForm(document.fm); return false;">
+<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>">
 <input name="<%= Constants.CMD %>" type="hidden" value="password">
+<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= themeDisplay.getPathMain() %>/portal/layout?doAsUserId=<%= themeDisplay.getDoAsUserId() %>">
 <input name="passwordReset" type="hidden" value="false">
 
 <span class="portlet-msg-error">

@@ -43,6 +43,7 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
+import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -184,6 +185,11 @@ public class LayoutAction extends Action {
 		if (Validator.isNull(forwardURL)) {
 			forwardURL =
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid;
+
+			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
+				forwardURL = Http.addParameter(
+					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
+			}
 		}
 
 		req.setAttribute(WebKeys.FORWARD_URL, forwardURL);
