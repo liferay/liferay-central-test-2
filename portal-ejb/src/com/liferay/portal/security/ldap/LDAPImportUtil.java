@@ -329,17 +329,35 @@ public class LDAPImportUtil {
 					companyId, groupName);
 			}
 			catch (NoSuchUserGroupException nsuge) {
-				userGroup = UserGroupLocalServiceUtil.addUserGroup(
-					User.getDefaultUserId(companyId), companyId, groupName,
-					description);
+				try {
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							"Adding user group" + groupName + " at " + groupDN);
+					}
+					
+					userGroup = UserGroupLocalServiceUtil.addUserGroup(
+						User.getDefaultUserId(companyId), companyId, groupName,
+						description);
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn("Could not create user group " + groupName);
+					}
+				
+					if (_log.isDebugEnabled()) {
+						_log.debug(e);
+					}
+				}
 			}
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Adding " + userId + " to group " + groupName);
-			}
+			if (userGroup != null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Adding " + userId + " to group " + groupName);
+				}
 
-			UserLocalServiceUtil.addUserGroupUsers(
-				userGroup.getUserGroupId(), new String[] {userId});
+				UserLocalServiceUtil.addUserGroupUsers(
+					userGroup.getUserGroupId(), new String[] {userId});
+			}
 		}
 	}
 
