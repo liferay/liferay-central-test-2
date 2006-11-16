@@ -85,11 +85,17 @@ public class Http {
 
 	public static final int HTTPS_PORT = 443;
 
-	public static final String PROXY_HOST = GetterUtil.getString(
+	public static final String LIFERAY_PROXY_HOST = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.host"));
 
-	public static final int PROXY_PORT = GetterUtil.getInteger(
+	public static final int LIFERAY_PROXY_PORT = GetterUtil.getInteger(
 		SystemProperties.get(Http.class.getName() + ".proxy.port"));
+
+	public static final String PROXY_HOST = GetterUtil.getString(
+		SystemProperties.get("http.proxyHost"), LIFERAY_PROXY_HOST);
+
+	public static final int PROXY_PORT = GetterUtil.getInteger(
+		SystemProperties.get("http.proxyPort"), LIFERAY_PROXY_PORT);
 
 	public static final String PROXY_AUTH_TYPE = GetterUtil.getString(
 		SystemProperties.get(Http.class.getName() + ".proxy.auth.type"));
