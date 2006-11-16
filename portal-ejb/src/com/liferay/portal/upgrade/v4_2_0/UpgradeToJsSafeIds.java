@@ -125,15 +125,6 @@ public class UpgradeToJsSafeIds
 
 		PropertiesUtil.load(props, oldTypeSettings);
 
-		// Update layout template id
-		
-		String layoutTemplateId = props.
-			getProperty(LayoutTypePortlet.LAYOUT_TEMPLATE_ID);
-		String newLayoutTemplateId = PortalUtil.
-			getJsSafePortletName(layoutTemplateId);
-		props.setProperty(
-			LayoutTypePortlet.LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
-
 		// Iterate columns guessing their names
 
 		for (int i = 0; i <= 10; i++) {
