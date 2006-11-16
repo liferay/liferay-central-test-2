@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, LLC. All rights reserved.
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -22,27 +22,26 @@
 
 package com.liferay.portal.upgrade.v4_2_0;
 
-import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.UpgradeException;
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.util.dao.DataAccess;
+import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.*;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.util.dao.DataAccess;
 
-import javax.naming.NamingException;
+import java.io.IOException;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 import java.util.*;
-import java.io.IOException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="UpgradeToJsSafeIds.java.html"><b><i>View Source</i></b></a>
@@ -50,11 +49,10 @@ import java.io.IOException;
  * @author  Jorge Ferrer
  *
  */
-public class UpgradeToJsSafeIds
-	extends UpgradeProcess {
+public class UpgradeToJsSafeIds extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
-		_log.info("Upgrading portlet, theme and layout ids to safe values");
+		_log.info("Upgrading");
 
 		try {
 			_upgradeTableColumns();
@@ -65,19 +63,49 @@ public class UpgradeToJsSafeIds
 		}
 	}
 
-	private void _upgradeTableColumns() throws SQLException, NamingException {
-		// Portlets
-		__updateColumnValue("Portlet", "portletId");
-		__updateColumnValue("PortletPreferences", "portletId");
-		__updateColumnValue("JournalContentSearch", "portletId");
+	private String _getNewTypeSettings(String oldTypeSettings)
+		throws Exception {
 
-		// Themes
-		__updateColumnValue("Layout", "themeId");
-		__updateColumnValue("LayoutSet", "themeId");
+		Properties props = new Properties();
+
+		PropertiesUtil.load(props, oldTypeSettings);
+
+		for (int i = 0; i <= 10; i++) {
+			String columnId = "column-" + i;
+
+			String columnPortlets = props.getProperty(columnId);
+
+			if (columnPortlets == null) {
+				continue;
+			}
+
+			String[] ids = StringUtil.split(columnPortlets);
+
+			for (int j = 0; j < ids.length; j++) {
+				ids[j] = PortalUtil.getJsSafePortletName(ids[j]);
+			}
+
+			props.setProperty(columnId, StringUtil.merge(ids));
+		}
+
+		return PropertiesUtil.toString(props);
 	}
 
-	private void _upgradeLayoutTypeSettings()
-		throws SystemException, SQLException, NamingException {
+	private void _upgradeTableColumns() throws Exception {
+
+		// Portlets
+
+		_updateColumnValue("Portlet", "portletId");
+		_updateColumnValue("PortletPreferences", "portletId");
+		_updateColumnValue("JournalContentSearch", "portletId");
+
+		// Themes
+
+		_updateColumnValue("Layout", "themeId");
+		_updateColumnValue("LayoutSet", "themeId");
+	}
+
+	private void _upgradeLayoutTypeSettings() throws Exception {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -94,22 +122,28 @@ public class UpgradeToJsSafeIds
 				String layoutType = rs.getString("type_");
 				String ownerId = rs.getString("ownerId");
 				String oldTypeSettings = rs.getString("typeSettings");
+
 				if (!layoutType.equals(Layout.TYPE_PORTLET)) {
 					continue;
 				}
+
 				try {
 					String newTypeSettings =
-						_getUpdatedSettings(oldTypeSettings);
+						_getNewTypeSettings(oldTypeSettings);
+
 					LayoutLocalServiceUtil.updateLayout(
 						layoutId, ownerId, newTypeSettings);
 				}
-				catch (PortalException e) {
-					_log.warn("Error when updating layout " + layoutId +
-						":" + ownerId, e);
+				catch (IOException ioe) {
+					_log.error(
+						"Unable to read settings for layout " + layoutId + " "
+							+ ownerId,
+						ioe);
 				}
-				catch (IOException e) {
-					_log.warn("Unable to read settings for layout " +
-						layoutId + ":" + ownerId, e);
+				catch (PortalException pe) {
+					_log.error(
+						"Unable to update layout " + layoutId + " " + ownerId,
+						e);
 				}
 			}
 		}
@@ -118,74 +152,62 @@ public class UpgradeToJsSafeIds
 		}
 	}
 
+	private void _updateColumnValue(String table, String column)
+		throws Exception {
 
-	private String _getUpdatedSettings(String oldTypeSettings)
-		throws IOException {
-		Properties props = new Properties();
-
-		PropertiesUtil.load(props, oldTypeSettings);
-
-		// Iterate columns guessing their names
-
-		for (int i = 0; i <= 10; i++) {
-			String columnId = "column-" + i;
-			String columnPortlets = props.getProperty(columnId);
-			if (columnPortlets == null) {
-				continue;
-			}
-			String[] ids = StringUtil.split(columnPortlets);
-
-			for (int j = 0; j < ids.length; j++) {
-				ids[j] = PortalUtil.getJsSafePortletName(ids[j]);
-			}
-
-			props.setProperty(columnId, StringUtil.merge(ids));
-		}
-
-		return PropertiesUtil.toString(props);
-	}
-
-	private void __updateColumnValue(String table, String column)
-		throws SQLException, NamingException {
 		Connection con = null;
-		PreparedStatement selectPs = null;
-		PreparedStatement updatePs = null;
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
 		ResultSet rs = null;
 
 		try {
 			con = DataAccess.getConnection(Constants.DATA_SOURCE);
 
-			selectPs = con.prepareStatement(
-				"select " + column + " from " + table + " where (" + column +
-				" like '%-%' " + "or " + column + " like '% %') " +
-				"group by " + column);
-			updatePs = con.prepareStatement(
-				"update " + table + " set " + column + "=? where " +
-				column + "=?");
+			ps1 = con.prepareStatement(
+				"SELECT " + column + " FROM " + table + " WHERE (" + column +
+					" LIKE '%-%' OR " + column + " LIKE '% %') GROUP BY " +
+						column);
 
-			rs = selectPs.executeQuery();
+			ps2 = con.prepareStatement(
+				"UPDATE " + table + " SET " + column + " = ? WHERE " + column +
+					" = ?");
+
+			rs = ps1.executeQuery();
 
 			while (rs.next()) {
 				String columnValue = rs.getString(column);
-				String safeColumnValue = PortalUtil.
-					getJsSafePortletName(columnValue);
+				String safeColumnValue =
+					PortalUtil.getJsSafePortletName(columnValue);
+
 				if (!columnValue.equals(safeColumnValue)) {
-					updatePs.setString(1, safeColumnValue);
-					updatePs.setString(2, columnValue);
-					_log.debug("Upgrading column value " + columnValue);
-					int rowsUpdated = updatePs.executeUpdate();
+					ps2.setString(1, safeColumnValue);
+					ps2.setString(2, columnValue);
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Upgrading column value " + columnValue);
+					}
+
+					int rowsUpdated = ps2.executeUpdate();
+
 					if (rowsUpdated != 1) {
-						_log.warn("Column value " + columnValue + " not updated");
+						if (_log.isWarnEnabled()) {
+							_log.warn(
+								"Column value " + columnValue + " not updated");
+						}
 					}
 				}
 			}
 		}
 		finally {
-			DataAccess.cleanUp(con, selectPs, rs);
+			try {
+				ps2.close();
+			}
+			catch (Exception e) {
+			}
+
+			DataAccess.cleanUp(con, ps1, rs);
 		}
-
 	}
-
 
 	private static Log _log = LogFactory.getLog(UpgradeToJsSafeIds.class);
 
