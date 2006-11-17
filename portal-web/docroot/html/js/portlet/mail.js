@@ -36,7 +36,6 @@ var Mail = {
 	SPAM_NAME : null,
 	TRASH_NAME : null,
 	DEFAULT_FOLDERS : null,
-	colorHighlight : "#c3d4ee",
 	currentFolder : null,
 	currentFolderId : "",
 	currentMessage : null,
@@ -52,6 +51,7 @@ var Mail = {
 	searchResults : false,
 	searchCount : 0,
 	selectedArray : null,
+	selectedClassName: "portlet-section-selected",
 	scrollTimer : null,
 	sortBy : null,
 	summaryList : { head : null, tail : null },
@@ -85,11 +85,11 @@ var Mail = {
 			
 			if (Mail.isMoveAllowed(folderItem.folder.id)) {
 				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-						folderItem.style.backgroundColor = Mail.colorHighlight;
+						Element.addClassName(folderItem, Mail.selectedClassName);
 						foundInside = true;
 				}
 				else {
-					folderItem.style.backgroundColor = "transparent";
+					Element.removeClassName(folderItem, Mail.selectedClassName);
 				}
 			}
 		}
@@ -405,7 +405,7 @@ var Mail = {
 			if (folder.id == Mail.currentFolderId) {
 				/* Previous folder ID was set */
 				selectedFolder = folder;
-				folderItem.style.backgroundColor = Mail.colorSelected;
+				Element.addClassName(folderItem, Mail.selectedClassName);
 			}
 			
 			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
@@ -806,21 +806,17 @@ var Mail = {
 				if (Mail.lastSelected.index < Mail.groupStart.index) {
 					if (keycode == Key.DOWN) {
 						action = "unhl";
-						//Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
 					else {
 						action = "hl";
-						//Mail.summaryHighlight(nextObj, true);
 					}
 				}
 				else if (Mail.lastSelected.index > Mail.groupStart.index) {
 					if (keycode == Key.UP) {
 						action = "unhl";
-						//Mail.summaryUnhighlight(Mail.lastSelected, true);
 					}
 					else {
 						action = "hl"
-						//Mail.summaryHighlight(nextObj, true);
 					}
 				}
 				else {
@@ -1143,25 +1139,26 @@ var Mail = {
 	},
 
 	scrollToSelected : function() {
-		var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
-		var previewTitle = document.getElementById("portlet-mail-msgs-preview-pane-title");
 		var element = Mail.lastSelected.row[1];
 		
-		var paneTop = Coordinates.southeastOffset(previewTitle, true).y;
-		var paneBottom = paneTop + previewPane.offsetHeight;
-		
-		var elTop = Coordinates.northwestOffset(element, true).y - previewPane.scrollTop;
-		var elBottom = elTop + element.offsetHeight;
-
-		if (elTop < paneTop) {
-			previewPane.scrollTop -= paneTop - elTop;
+		if (element) {
+			var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
+			var previewTitle = document.getElementById("portlet-mail-msgs-preview-pane-title");
+			
+			var paneTop = Coordinates.southeastOffset(previewTitle, true).y;
+			var paneBottom = paneTop + previewPane.offsetHeight;
+			
+			var elTop = Coordinates.northwestOffset(element, true).y - previewPane.scrollTop;
+			var elBottom = elTop + element.offsetHeight;
+	
+			if (elTop < paneTop) {
+				previewPane.scrollTop -= paneTop - elTop;
+			}
+			
+			if (elBottom > paneBottom) {
+				previewPane.scrollTop += (elBottom - paneBottom);
+			}
 		}
-		
-		if (elBottom > paneBottom) {
-			previewPane.scrollTop += (elBottom - paneBottom);
-		}
-		
-		//previewPane.scrollTop = 500;
 	},
 
 	setCurrentFolder : function(folder) {
@@ -1185,11 +1182,11 @@ var Mail = {
 				continue;
 			}
 			else if (Mail.currentFolderId == folderItem.folder.id) {
-				folderItem.style.backgroundColor = Mail.colorSelected;
+				Element.addClassName(folderItem, Mail.selectedClassName);
 				Mail.currentFolder.li = folderItem;
 			}
 			else {
-				folderItem.style.backgroundColor = "transparent";
+				Element.removeClassName(folderItem, Mail.selectedClassName);
 			}
 		}
 
@@ -1226,7 +1223,6 @@ var Mail = {
 	},
 	
 	summaryHighlight : function(msObj, skipDetails, setOff) {
-		var setColor = "transparent";
 		
 		msObj.pendingHighlight = false;
 		
@@ -1246,7 +1242,6 @@ var Mail = {
 		else {
 			/* Highlight & select */
 			msObj.selected = true;
-			setColor = Mail.colorHighlight;
 			Mail.lastSelected = msObj;
 
 			if (Mail.selectedArray == null) {
@@ -1262,7 +1257,12 @@ var Mail = {
 		
 		var row = msObj.row;
 		for (var i = 0; i < row.length; i++) {
-			row[i].style.backgroundColor = setColor;
+			if (setOff) {
+				Element.removeClassName(row[i], Mail.selectedClassName);
+			}
+			else {
+				Element.addClassName(row[i], Mail.selectedClassName);
+			}
 		}
 	},
 	

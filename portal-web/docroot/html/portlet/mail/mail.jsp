@@ -168,7 +168,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				font-weight: bold;
 				padding: 2px 5px 2px 15px;
 				position: absolute;
-				background-color: <%= colorScheme.getLayoutTabSelectedText() %>;
+				background-color: <%= colorScheme.getLayoutTabSelectedBg() %>;
 				cursor: pointer;
 			}
 
@@ -178,7 +178,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			}
 
 			.portlet-mail-folder-selected {
-				background-color: <%= colorScheme.getLayoutTabBg() %>;
+				background-color: <%= colorScheme.getPortletSectionSelectedBg() %>;
 			}
 
 			#portlet-mail-folder-pane ul li {
@@ -769,9 +769,6 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 			catch (Exception e) {
 			}
 			%>
-
-			Mail.highlightColor = "<%= colorScheme.getPortletMenuBg() %>";
-			Mail.colorSelected = "<%= colorScheme.getLayoutTabBg() %>";
 
 			Mail.init("<%= PropsUtil.get(PropsUtil.MAIL_INBOX_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_DRAFTS_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_SENT_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_SPAM_NAME) %>", "<%= PropsUtil.get(PropsUtil.MAIL_TRASH_NAME) %>");
 		</script>
