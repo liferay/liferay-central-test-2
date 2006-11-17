@@ -37,6 +37,7 @@ import com.liferay.portlet.mail.MailAccountsException;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.StoreException;
 import com.liferay.portlet.mail.model.MailAttachment;
+import com.liferay.portlet.mail.model.MailContent;
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
 import com.liferay.portlet.mail.model.MailMessage;
@@ -113,6 +114,9 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * Used as a fascade to the JavaMail API.  All JavaMail objects are wrappered in
+ * model classes and returned out of this utility fascade.
+ *
  * <a href="MailUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
@@ -197,7 +201,7 @@ public class MailUtil {
 
 			BodyPart bodyPart = new MimeBodyPart();
 
-			bodyPart.setContent(mailMessage.getHtmlBody(), Constants.TEXT_HTML);
+			bodyPart.setContent(mailMessage.getBody(), Constants.TEXT_HTML);
 
 			multipart.addBodyPart(bodyPart);
 
@@ -672,9 +676,26 @@ public class MailUtil {
 			String contentPath = RemoteMailAttachment.buildContentPath(
 				folder.getName(), messageId);
 
-			mailMessage = _getContent(message, mailMessage, contentPath);
+			MailContent content = new MailContent();
 
-			_replaceContentIds(mailMessage, _getAttachmentURL(req));
+			mailMessage = _getContent(
+				message, mailMessage, content, contentPath);
+
+			mailMessage.setMailContent(content);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Body before replacing content ids\n" + content);
+			}
+
+			_replaceContentIds(
+				content, mailMessage.getRemoteAttachments(),
+				_getAttachmentURL(req));
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Body after replacing content ids\n" + content);
+			}
+
+			mailMessage.purgeDirtyRemoteAttachments();
 
 			ses.setAttribute(WebKeys.MAIL_MESSAGE_ID, new Long(messageId));
 
@@ -1211,7 +1232,8 @@ public class MailUtil {
 	}
 
 	private static MailMessage _getContent(
-			Part part, MailMessage mailMessage, String contentPath)
+			Part part, MailMessage mailMessage, MailContent content,
+			String contentPath)
 		throws ContentException {
 
 		try {
@@ -1228,7 +1250,7 @@ public class MailUtil {
 					Part curPart = multipart.getBodyPart(i);
 
 					mailMessage = _getContent(
-						curPart, mailMessage,
+						curPart, mailMessage, content,
 						contentPath + StringPool.PERIOD + i);
 				}
 			}
@@ -1236,16 +1258,20 @@ public class MailUtil {
 				attachment = false;
 
 				if (contentType.startsWith(Constants.TEXT_PLAIN)) {
-					mailMessage.appendPlainBody((String)part.getContent());
+					content.appendPlainBody((String)part.getContent());
 				}
 				else if (contentType.startsWith(Constants.TEXT_HTML)) {
-					mailMessage.appendHtmlBody(
+					content.appendHtmlBody(
 						_customizeHtml((String)part.getContent()));
 				}
 				else if (contentType.startsWith(Constants.MESSAGE_RFC822)) {
+					MailContent subContent = new MailContent();
 
-					// FIX ME
+					mailMessage = _getContent(
+						(Part)part.getContent(), mailMessage, subContent,
+						contentPath + StringPool.PERIOD + 0);
 
+					content.appendSubContent(subContent);
 				}
 			}
 
@@ -1469,22 +1495,16 @@ public class MailUtil {
 	}
 
 	private static void _replaceContentIds(
-		MailMessage mailMessage, String url) {
+		MailContent content, List rmas, String url) {
 
-		List list = mailMessage.getRemoteAttachments();
+		String body = content.getHtmlBody();
 
-		String body = mailMessage.getHtmlBody();
+		for (int i = 0; i < rmas.size(); i++) {
+			RemoteMailAttachment rma =
+				(RemoteMailAttachment)rmas.get(i);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Body before replacing content ids\n" + body);
-		}
-
-		for (int i = 0; i < list.size(); i++) {
-			RemoteMailAttachment remoteMailAttachment =
-				(RemoteMailAttachment)list.get(i);
-
-			if (Validator.isNotNull(remoteMailAttachment.getContentId())) {
-				String contentId = remoteMailAttachment.getContentId();
+			if (Validator.isNotNull(rma.getContentId())) {
+				String contentId = rma.getContentId();
 
 				if (contentId.startsWith(StringPool.LESS_THAN) &&
 					contentId.endsWith(StringPool.GREATER_THAN)) {
@@ -1494,22 +1514,21 @@ public class MailUtil {
 				}
 
 				String remotePath =
-					url + "fileName=" + remoteMailAttachment.getFilename() +
-						"&contentPath=" + remoteMailAttachment.getContentPath();
+					url + "fileName=" + rma.getFilename() +
+						"&contentPath=" + rma.getContentPath();
 
 				body = StringUtil.replace(body, contentId, remotePath);
 
-				list.remove(i);
-
-				i--;
+				rma.setDirty(true);
 			}
 		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Body after replacing content ids\n" + body);
-		}
+		content.setHtmlBody(body);
 
-		mailMessage.setHtmlBody(body);
+		for (int i = 0; i < content.getSubContent().size(); i++) {
+			_replaceContentIds(
+				(MailContent)content.getSubContent().get(i), rmas, url);
+		}
 	}
 
 	private static void _replaceEmbeddedImages(
@@ -1523,7 +1542,7 @@ public class MailUtil {
 
 		int count = 0;
 
-		String body = mailMessage.getHtmlBody();
+		String body = mailMessage.getBody();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Body before replacing embedded images\n" + body);
@@ -1570,7 +1589,7 @@ public class MailUtil {
 		}
 
 		if (count > 0) {
-			mailMessage.setHtmlBody(body);
+			mailMessage.setBody(body);
 		}
 
 		if (_log.isDebugEnabled()) {

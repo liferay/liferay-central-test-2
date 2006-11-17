@@ -23,8 +23,6 @@
 package com.liferay.portlet.mail.model;
 
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -122,51 +120,30 @@ public class MailMessage {
     	_subject = subject;
     }
 
-    public String getPlainBody() {
-    	return GetterUtil.getString(_plainBody);
-    }
-
-    public void setPlainBody(String plainBody) {
-    	_plainBody = plainBody;
-    }
-
-    public void appendPlainBody(String plainBody) {
-    	if (Validator.isNull(_plainBody)) {
-    		_plainBody = plainBody;
-    	}
-    	else {
-    		_plainBody += StringPool.NEW_LINE + StringPool.NEW_LINE + plainBody;
-    	}
-    }
-
-    public String getHtmlBody() {
-    	if (Validator.isNotNull(_htmlBody)) {
-        	return _htmlBody;
-    	}
-    	else {
-    		return "<PRE>" + GetterUtil.getString(_plainBody) + "</PRE>";
-    	}
-    }
-
-    public void setHtmlBody(String htmlBody) {
-    	_htmlBody = htmlBody;
-    }
-
-    public void appendHtmlBody(String htmlBody) {
-    	if (Validator.isNull(_htmlBody)) {
-    		_htmlBody = htmlBody;
-    	}
-    	else {
-    		_htmlBody += "<HR/>" + htmlBody;
-    	}
-    }
-
     public Date getSentDate() {
     	return _sentDate;
     }
 
     public void setSentDate(Date sentDate) {
     	_sentDate = sentDate;
+    }
+
+    public String getBody() {
+    	return _content.toString();
+    }
+
+    public void setBody(String body) {
+    	MailContent content = new MailContent(body);
+
+    	_content = content;
+    }
+
+    public MailContent getMailContent() {
+    	return _content;
+    }
+
+    public void setMailContent(MailContent mc) {
+    	_content = mc;
     }
 
 	public List getAttachments() {
@@ -189,18 +166,17 @@ public class MailMessage {
 		_remoteAttachments.add(rma);
 	}
 
-	public boolean isSimple() {
-		if (Validator.isNotNull(_htmlBody) || !_attachments.isEmpty() ||
-			!_remoteAttachments.isEmpty()) {
+	public void purgeDirtyRemoteAttachments() {
+		for (int i = 0; i < _remoteAttachments.size(); i++) {
+			RemoteMailAttachment rma =
+				(RemoteMailAttachment)_remoteAttachments.get(i);
 
-			return false;
+			if (rma.isDirty()) {
+				_remoteAttachments.remove(i);
+
+				i--;
+			}
 		}
-
-		if (Validator.isNull(_plainBody)) {
-			_plainBody = StringPool.BLANK;
-		}
-
-		return true;
 	}
 
 	private long _messageId;
@@ -211,9 +187,8 @@ public class MailMessage {
 	private String _inReplyTo;
 	private Address[] _replyTo;
 	private String _subject;
-	private String _plainBody;
-	private String _htmlBody;
 	private Date _sentDate;
+	private MailContent _content;
 	private List _attachments = new ArrayList();
 	private List _remoteAttachments = new ArrayList();
 

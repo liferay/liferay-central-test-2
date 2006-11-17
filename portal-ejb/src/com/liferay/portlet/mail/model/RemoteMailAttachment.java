@@ -50,35 +50,44 @@ public class RemoteMailAttachment {
 	}
 
 	public String getFilename() {
-        return _filename;
-    }
+		return _filename;
+	}
 
-    public void setFilename(String filename) {
-        _filename = filename;
-    }
+	public void setFilename(String filename) {
+		_filename = filename;
+	}
 
-    public String getContentPath() {
-        return _contentPath;
-    }
+	public String getContentPath() {
+		return _contentPath;
+	}
 
-    public void setContentPath(String contentPath) {
-        _contentPath = contentPath;
-    }
+	public void setContentPath(String contentPath) {
+		_contentPath = contentPath;
+	}
 
-    public String getContentId() {
-        return _contentId;
-    }
+	public String getContentId() {
+		return _contentId;
+	}
 
-    public void setContentId(String contentId) {
-    	_contentId = contentId;
-    }
+	public void setContentId(String contentId) {
+		_contentId = contentId;
+	}
+
+	public boolean isDirty() {
+		return _dirty;
+	}
+
+	public void setDirty(boolean dirty) {
+		_dirty = dirty;
+	}
 
 	private static String _FOLDER_SEPARATOR = "_MAIL_FOLDER_";
 
 	private static String _MESSAGE_SEPARATOR = "_MAIL_MESSAGE_";
 
-    private String _filename;
-    private String _contentPath;
-    private String _contentId;
+	private String _filename;
+	private String _contentPath;
+	private String _contentId;
+	private boolean _dirty = false;
 
 }

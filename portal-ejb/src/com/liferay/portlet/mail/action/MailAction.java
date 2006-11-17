@@ -212,7 +212,7 @@ public class MailAction extends JSONAction {
 			sb, ctx, req, res, "/html/portlet/mail/message_details.jsp");
 
 		jsonObj.put("id", messageId);
-		jsonObj.put("body", mailMessage.getHtmlBody());
+		jsonObj.put("body", mailMessage.getBody());
 		jsonObj.put("header", sb.toString());
 
 		return jsonObj.toString();

@@ -36,5 +36,5 @@ boolean header = ParamUtil.getBoolean(request, "header");
 </c:if>
 
 <c:if test="<%= mailMessage != null %>">
-	<%= MailUtil.replaceLinks(mailMessage.getHtmlBody()) %>
+	<%= MailUtil.replaceLinks(mailMessage.getBody()) %>
 </c:if>

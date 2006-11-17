@@ -223,7 +223,7 @@ public class EditMessageAction extends PortletAction {
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_SUBJECT, mailMessage.getSubject());
 			req.setAttribute(
-				WebKeys.MAIL_MESSAGE_BODY, mailMessage.getHtmlBody());
+				WebKeys.MAIL_MESSAGE_BODY, mailMessage.getBody());
 			req.setAttribute(
 				WebKeys.MAIL_MESSAGE_ATTACHMENTS,
 				mailMessage.getRemoteAttachments());
@@ -301,7 +301,7 @@ public class EditMessageAction extends PortletAction {
 		}
 
 		mailMessage.setSubject(subject);
-		mailMessage.setHtmlBody(body);
+		mailMessage.setBody(body);
 
 		Iterator itr = getAttachments(req).entrySet().iterator();
 
@@ -379,7 +379,7 @@ public class EditMessageAction extends PortletAction {
 		sb.append("border-left: 1px solid rgb(204, 204, 204); ");
 		sb.append("margin: 0pt 0pt 0pt 1ex; ");
 		sb.append("padding-left: 1ex; \">");
-		sb.append(mailMessage.getHtmlBody());
+		sb.append(mailMessage.getBody());
 		sb.append("</div>");
 
 		return sb.toString();
