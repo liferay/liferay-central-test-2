@@ -114,11 +114,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<tr>
 				<td>
-					<input class="form-text" name="<portlet:namespace />filterEmailAddress<%= i %>" size="20" type="text" value="<%= emailAddress %>">
+					<input class="form-text" name="<portlet:namespace />filterEmailAddress<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= emailAddress %>">
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<input class="form-text" name="<portlet:namespace />filterFolder<%= i %>" size="50" type="text" value="<%= folder %>">
+					<input class="form-text" name="<portlet:namespace />filterFolder<%= i %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= folder %>">
 				</td>
 			</tr>
 
