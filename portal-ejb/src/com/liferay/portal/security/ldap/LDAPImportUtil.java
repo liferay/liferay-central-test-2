@@ -334,7 +334,7 @@ public class LDAPImportUtil {
 						_log.debug(
 							"Adding user group" + groupName + " at " + groupDN);
 					}
-					
+
 					userGroup = UserGroupLocalServiceUtil.addUserGroup(
 						User.getDefaultUserId(companyId), companyId, groupName,
 						description);
@@ -343,7 +343,7 @@ public class LDAPImportUtil {
 					if (_log.isWarnEnabled()) {
 						_log.warn("Could not create user group " + groupName);
 					}
-				
+
 					if (_log.isDebugEnabled()) {
 						_log.debug(e);
 					}

@@ -311,6 +311,25 @@ public class LayoutTypePortlet extends LayoutType {
 		}
 	}
 
+	public List getPortlets() throws SystemException {
+		List portletIds = getPortletIds();
+
+		List portlets = new ArrayList(portletIds.size());
+
+		for (int i = 0; i < portletIds.size(); i++) {
+			String portletId = (String)portletIds.get(i);
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				getLayout().getCompanyId(), portletId);
+
+			if (portlet != null) {
+				portlets.add(portlet);
+			}
+		}
+
+		return portlets;
+	}
+
 	public List getPortletIds() {
 		List portletIds = new ArrayList();
 

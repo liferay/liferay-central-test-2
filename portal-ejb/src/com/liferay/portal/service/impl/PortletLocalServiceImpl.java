@@ -537,7 +537,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			}
 
 			if (servletContextName != null) {
-				portletModel.setWARFile(true);
+				portletModel.setServletContextName(servletContextName);
 			}
 
 			if (servletURLPatterns != null) {
@@ -965,6 +965,27 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setAjaxable(GetterUtil.getBoolean(
 					portlet.elementText("ajaxable"),
 					portletModel.isAjaxable()));
+
+				List headerCssList = portletModel.getHeaderCss();
+
+				Iterator itr2 = portlet.elements("header-css").iterator();
+
+				while (itr2.hasNext()) {
+					Element headerCssEl = (Element)itr2.next();
+
+					headerCssList.add(headerCssEl.getText());
+				}
+
+				List headerJavaScriptList = portletModel.getHeaderJavaScript();
+
+				itr2 = portlet.elements("header-javascript").iterator();
+
+				while (itr2.hasNext()) {
+					Element headerJavaScriptEl = (Element)itr2.next();
+
+					headerJavaScriptList.add(headerJavaScriptEl.getText());
+				}
+
 				portletModel.setAddDefaultResource(GetterUtil.getBoolean(
 					portlet.elementText("add-default-resource"),
 					portletModel.isAddDefaultResource()));

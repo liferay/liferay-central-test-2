@@ -5,6 +5,8 @@
 	<portlet>
 		<portlet-name>sample_jsp_portlet</portlet-name>
 		<instanceable>true</instanceable>
+		<header-css>/css/test.css</header-css>
+		<header-javascript>/js/test.js</header-javascript>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

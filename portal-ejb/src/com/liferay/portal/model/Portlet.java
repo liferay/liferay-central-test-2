@@ -133,6 +133,8 @@ public class Portlet extends PortletModel {
 
 		setStrutsPath(pk.portletId);
 		setActive(true);
+		_headerCss = new ArrayList();
+		_headerJavaScript = new ArrayList();
 		_unlinkedRoles = new HashSet();
 		_roleMappers = new LinkedHashMap();
 		_initParams = new HashMap();
@@ -161,13 +163,14 @@ public class Portlet extends PortletModel {
 				   boolean layoutCacheable, boolean instanceable,
 				   boolean portalSessionShared,
 				   boolean privateRequestAttributes, int renderWeight,
-				   boolean ajaxable, boolean addDefaultResource, String roles,
-				   Set unlinkedRoles, Map roleMappers, boolean system,
-				   boolean active, boolean include, Map initParams,
-				   Integer expCache, Map portletModes, Set supportedLocales,
+				   boolean ajaxable, List headerCss, List headerJavaScript,
+				   boolean addDefaultResource, String roles, Set unlinkedRoles,
+				   Map roleMappers, boolean system, boolean active,
+				   boolean include, Map initParams, Integer expCache,
+				   Map portletModes, Set supportedLocales,
 				   String resourceBundle, PortletInfo portletInfo,
 				   Set userAttributes, Map customUserAttributes,
-				   boolean warFile, List servletURLPatterns) {
+				   String servletContextName, List servletURLPatterns) {
 
 		setPortletId(portletId);
 		setCompanyId(companyId);
@@ -200,6 +203,8 @@ public class Portlet extends PortletModel {
 		_privateRequestAttributes = privateRequestAttributes;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
+		_headerCss = headerCss;
+		_headerJavaScript = headerJavaScript;
 		_addDefaultResource = addDefaultResource;
 		setRoles(roles);
 		_unlinkedRoles = unlinkedRoles;
@@ -215,7 +220,7 @@ public class Portlet extends PortletModel {
 		_portletInfo = portletInfo;
 		_userAttributes = userAttributes;
 		_customUserAttributes = customUserAttributes;
-		_warFile = warFile;
+		setServletContextName(servletContextName);
 		_servletURLPatterns = servletURLPatterns;
 
 		if (_instanceable) {
@@ -1035,6 +1040,50 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Gets a list of css files that are referenced from the portal layout's
+	 * header.
+	 *
+	 * @return		a list of css files that are referenced from the portal
+	 *				layout's header
+	 */
+	public List getHeaderCss() {
+		return _headerCss;
+	}
+
+	/**
+	 * Sets a list of css files that are referenced from the portal layout's
+	 * header.
+	 *
+	 * @param		headerCss a list of css files that are referenced from the
+	 *				portal layout's header
+	 */
+	public void setHeaderCss(List headerCss) {
+		_headerCss = headerCss;
+	}
+
+	/**
+	 * Gets a list of JavaScript files that are referenced from the portal
+	 * layout's header.
+	 *
+	 * @return		a list of JavaScript files that are referenced from the
+	 *				portal layout's header
+	 */
+	public List getHeaderJavaScript() {
+		return _headerJavaScript;
+	}
+
+	/**
+	 * Sets a list of JavaScript files that are referenced from the portal
+	 * layout's header.
+	 *
+	 * @param		headerJavaScript a list of JavaScript files that are
+	 *				referenced from the portal layout's header
+	 */
+	public void setHeaderJavaScript(List headerJavaScript) {
+		_headerJavaScript = headerJavaScript;
+	}
+
+	/**
 	 * Returns true if default resources for the portlet are added to a page.
 	 *
 	 * @return		true if default resources for the portlet are added to a
@@ -1453,6 +1502,31 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
+	 * Gets the servlet context name of the portlet.
+	 *
+	 * @return		the servlet context name of the portlet
+	 */
+	public String getServletContextName() {
+		return _servletContextName;
+	}
+
+	/**
+	 * Sets the servlet context name of the portlet.
+	 *
+	 * @param		servletContextName the servlet context name of the portlet
+	 */
+	public void setServletContextName(String servletContextName) {
+		_servletContextName = servletContextName;
+
+		if (Validator.isNotNull(_servletContextName)) {
+			_warFile = true;
+		}
+		else {
+			_warFile = false;
+		}
+	}
+
+	/**
 	 * Returns true if the portlet is found in a WAR file.
 	 *
 	 * @return		true if the portlet is found in a WAR file
@@ -1600,16 +1674,19 @@ public class Portlet extends PortletModel {
 	}
 
 	/**
-	 * The servlet url patterns that are part of this application
+	 * The servlet url patterns that are part of this application.
 	 *
-	 * @return		The servlet url patterns that are part of this application.
+	 * @return		The servlet url patterns that are part of this application
 	 */
 	public List getServletURLPatterns() {
 		return _servletURLPatterns;
 	}
 
 	/**
-	 * The servlet url patterns that are part of this application
+	 * The servlet url patterns that are part of this application.
+	 *
+	 * @param		servletURLPatterns servlet url patterns that are part of
+	 *				this application
 	 */
 	public void setServletURLPatterns(List servletURLPatterns) {
 		_servletURLPatterns = servletURLPatterns;
@@ -1677,12 +1754,13 @@ public class Portlet extends PortletModel {
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
 			isPortalSessionShared(), isPrivateRequestAttributes(),
-			getRenderWeight(), isAjaxable(), isAddDefaultResource(), getRoles(),
+			getRenderWeight(), isAjaxable(), getHeaderCss(),
+			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
 			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
 			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(), isWARFile(),
-			getServletURLPatterns());
+			getUserAttributes(), getCustomUserAttributes(),
+			getServletContextName(), getServletURLPatterns());
 	}
 
 	/**
@@ -1860,6 +1938,17 @@ public class Portlet extends PortletModel {
 	private boolean _ajaxable = true;
 
 	/**
+	 * A list of css files that are referenced from the portal layout's header.
+	 */
+	private List _headerCss;
+
+	/**
+	 * A list of JavaScript files that are referenced from the portal layout's
+	 * header.
+	 */
+	private List _headerJavaScript;
+
+	/**
 	 * True if default resources for the portlet are added to a page.
 	 */
 	private boolean _addDefaultResource;
@@ -1931,6 +2020,11 @@ public class Portlet extends PortletModel {
 	private Map _customUserAttributes;
 
 	/**
+	 * The servlet context name of the portlet.
+	 */
+	private String _servletContextName;
+
+	/**
 	 * True if the portlet is found in a WAR file.
 	 */
 	private boolean _warFile;
@@ -1952,7 +2046,7 @@ public class Portlet extends PortletModel {
 	private boolean _staticPortletStart;
 
 	/**
-	 * The servlet url patterns that are part of this application
+	 * The servlet url patterns that are part of this application.
 	 */
 	private List _servletURLPatterns;
 

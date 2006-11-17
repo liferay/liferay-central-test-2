@@ -32,9 +32,59 @@
 <link href="<%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>" type="text/css" rel="stylesheet" />
 <link href="<%= themeDisplay.getPathJavaScript() %>/calendar/skins/aqua/theme.css" rel="stylesheet" type="text/css" />
 
+<%
+List portlets = null;
+
+if ((layout != null) && layout.getType().equals(Layout.TYPE_PORTLET)) {
+	portlets = layoutTypePortlet.getPortlets();
+}
+%>
+
 <style type="text/css">
 	<liferay-theme:include page="css.jsp" />
 </style>
 
+<c:if test="<%= portlets != null %>">
+
+	<%
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		List headerCssList = portlet.getHeaderCss();
+
+		for (int j = 0; j < headerCssList.size(); j++) {
+			String headerCss = (String)headerCssList.get(j);
+	%>
+
+			<link href="<%= Validator.isNotNull(portlet.getServletContextName()) ? StringPool.SLASH + portlet.getServletContextName() : StringPool.BLANK %><%= headerCss %>" rel="stylesheet" type="text/css" />
+
+	<%
+		}
+	}
+	%>
+
+</c:if>
+
 <%@ include file="/html/common/themes/top_js.jsp" %>
 <%@ include file="/html/common/themes/top_js-ext.jsp" %>
+
+<c:if test="<%= portlets != null %>">
+
+	<%
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
+
+		List headerJavaScriptList = portlet.getHeaderJavaScript();
+
+		for (int j = 0; j < headerJavaScriptList.size(); j++) {
+			String headerJavaScript = (String)headerJavaScriptList.get(j);
+	%>
+
+			<script src="<%= Validator.isNotNull(portlet.getServletContextName()) ? StringPool.SLASH + portlet.getServletContextName() : StringPool.BLANK %><%= headerJavaScript %>" type="text/javascript"></script>
+
+	<%
+		}
+	}
+	%>
+
+</c:if>

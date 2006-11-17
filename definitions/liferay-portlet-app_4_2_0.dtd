@@ -24,8 +24,8 @@ preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
 maximize-print?, layout-cacheable?, instanceable?, portal-session-shared?,
-private-request-attributes?, render-weight?, ajaxable?, add-default-resource?,
-system?, active?, include?)>
+private-request-attributes?, render-weight?, ajaxable?, header-css*,
+header-javascript*, add-default-resource?, system?, active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -303,6 +303,17 @@ The default value of ajaxable is true. If set to false, then this portlet can
 never be displayed via Ajax.
 -->
 <!ELEMENT ajaxable (#PCDATA)>
+
+<!--
+Set the relative path of CSS that is referenced from the portal layout's header.
+-->
+<!ELEMENT header-css (#PCDATA)>
+
+<!--
+Set the relative path of JavaScript that is referenced from the portal layout's
+header.
+-->
+<!ELEMENT header-javascript (#PCDATA)>
 
 <!--
 If the add-default-resource value is set to false, and the portlet does not
