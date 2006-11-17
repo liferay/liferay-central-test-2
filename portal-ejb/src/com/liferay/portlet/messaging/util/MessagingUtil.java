@@ -85,7 +85,7 @@ public class MessagingUtil {
 		roster.createEntry(smackId, name, null);
 
 		jo.put("name", name);
-		jo.put("user", smackId);
+		jo.put("user", user.getUserId());
 		jo.put("status", "success");
 
 		return jo;

@@ -379,9 +379,20 @@ var MessagingRoster = {
 			}
 			else {
 				var rosterDiv = document.getElementById("portlet-chat-roster-list");
-				var entryRow = MessagingRoster.createEntryRow(msg.user, msg.name);
 				
-				rosterDiv.appendChild(entryRow);
+				var entries = document.getElementsByClassName("portlet-chat-roster-entry");
+				var userId = msg.user;
+				
+				var userExists = entries.any(function(item) {
+					return (item.userId == userId);
+				});
+				
+				if (!userExists) {
+					var entryRow = MessagingRoster.createEntryRow(msg.user, msg.name);
+					
+					rosterDiv.appendChild(entryRow);
+				}
+				
 				MessagingRoster.toggleEmail();
 			}
 		}
@@ -413,6 +424,7 @@ var MessagingRoster = {
 			tempDiv.userId = userId;
 			tempDiv.userName = userName;
 			tempDiv.style.cursor = "pointer";
+			tempDiv.className = "portlet-chat-roster-entry";
 			
 			return tempDiv;
 	},
