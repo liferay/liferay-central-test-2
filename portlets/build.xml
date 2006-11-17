@@ -170,7 +170,7 @@
 	<target name="war-alfresco">
 
 		<!--
-		Download Alfresco 1.3.0 from
+		Download Alfresco 1.4.0 from
 		http://www.sourceforge.net/projects/alfresco.
 
 		The WAR must be deployed to the /alfresco context. See the

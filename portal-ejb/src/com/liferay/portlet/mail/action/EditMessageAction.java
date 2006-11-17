@@ -187,11 +187,12 @@ public class EditMessageAction extends PortletAction {
 					StringPool.BLANK
 				};
 
-				req.setAttribute(WebKeys.MAIL_MESSAGE_IN_REPLY_TO,
-					String.valueOf(mailMessage.getInReplyTo()));
 				req.setAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID,
 					String.valueOf(mailMessage.getMessageId()));
 				req.setAttribute(WebKeys.MAIL_MESSAGE_RECIPIENTS, recipients);
+				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_IN_REPLY_TO,
+					String.valueOf(mailMessage.getInReplyTo()));
 				req.setAttribute(
 					WebKeys.MAIL_MESSAGE_SUBJECT,
 					"Re: " + getSubject(mailMessage.getSubject(), "re"));
@@ -279,9 +280,9 @@ public class EditMessageAction extends PortletAction {
 		String to = ParamUtil.getString(req, "to");
 		String cc = ParamUtil.getString(req, "cc");
 		String bcc = ParamUtil.getString(req, "bcc");
+		String inReplyTo = ParamUtil.getString(req, "inReplyTo");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
-		String inReplyTo = ParamUtil.getString(req, "inReplyTo");
 
 		MailMessage mailMessage = new MailMessage();
 
@@ -294,7 +295,6 @@ public class EditMessageAction extends PortletAction {
 			mailMessage.setCc(cc);
 			mailMessage.setBcc(bcc);
 			mailMessage.setInReplyTo(inReplyTo);
-
 		}
 		catch (Exception ex) {
 			throw new RecipientException(ex);

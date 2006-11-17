@@ -659,14 +659,16 @@ public class MailUtil {
 			mailMessage.setCc(message.getRecipients(RecipientType.CC));
 			mailMessage.setBcc(message.getRecipients(RecipientType.BCC));
 			mailMessage.setReplyTo(message.getReplyTo());
-			mailMessage.setSubject(message.getSubject());
-			mailMessage.setSentDate(message.getSentDate());
 
 			String[] messageIdHeader = message.getHeader("Message-ID");
+
 			if ((messageIdHeader != null) && (messageIdHeader.length > 0)) {
 				mailMessage.setInReplyTo(messageIdHeader[0]);
 			}
-			
+
+			mailMessage.setSubject(message.getSubject());
+			mailMessage.setSentDate(message.getSentDate());
+
 			String contentPath = RemoteMailAttachment.buildContentPath(
 				folder.getName(), messageId);
 
