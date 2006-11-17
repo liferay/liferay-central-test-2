@@ -38,12 +38,9 @@ import java.util.List;
 public class MailContent {
 
 	public MailContent() {
-		_subContent = new ArrayList();
 	}
 
 	public MailContent(String body) {
-		this();
-
 		setHtmlBody(body);
 	}
 
@@ -108,6 +105,6 @@ public class MailContent {
 
 	private String _plainBody;
 	private String _htmlBody;
-	private List _subContent;
+	private List _subContent = new ArrayList();
 
 }

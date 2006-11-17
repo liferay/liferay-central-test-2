@@ -1500,8 +1500,7 @@ public class MailUtil {
 		String body = content.getHtmlBody();
 
 		for (int i = 0; i < rmas.size(); i++) {
-			RemoteMailAttachment rma =
-				(RemoteMailAttachment)rmas.get(i);
+			RemoteMailAttachment rma = (RemoteMailAttachment)rmas.get(i);
 
 			if (Validator.isNotNull(rma.getContentId())) {
 				String contentId = rma.getContentId();
@@ -1514,8 +1513,8 @@ public class MailUtil {
 				}
 
 				String remotePath =
-					url + "fileName=" + rma.getFilename() +
-						"&contentPath=" + rma.getContentPath();
+					url + "fileName=" + rma.getFilename() + "&contentPath=" +
+						rma.getContentPath();
 
 				body = StringUtil.replace(body, contentId, remotePath);
 
