@@ -145,6 +145,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));
+
+			throw e;
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
