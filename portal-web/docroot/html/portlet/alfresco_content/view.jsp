@@ -25,16 +25,15 @@
 <%@ include file="/html/portlet/alfresco_content/init.jsp" %>
 
 <%
-
 String content = (String)request.getAttribute(WebKeys.ALFRESCO_CONTENT);
 
 boolean preview = ParamUtil.getBoolean(renderRequest, "preview");
 
 uuid = (String)renderRequest.getAttribute("uuid");
-
 %>
+
 <c:if test="<%= preview %>">
-	<div style="border: 2px solid #ff0000"; padding: 8px">
+	<div style="border: 2px solid #FF0000; padding: 8px">
 </c:if>
 
 <c:choose>
@@ -56,26 +55,16 @@ uuid = (String)renderRequest.getAttribute("uuid");
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
 		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
 	</c:if>
-<%
 
-String login = StringPool.BLANK;
+	<%
+	String ssoSimulateParam = StringPool.BLANK;
 
-if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
-	login = user.getEmailAddress();
-}
-else {
-	login = user.getUserId();
-}
+	if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE))) {
+		ssoSimulateParam = "user=" + user.getLogin() + "&";
+	}
+	%>
 
-String ssoSimulateParam = StringPool.BLANK;
-
-if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE))) {
-	ssoSimulateParam = "user=" + login + "&";
-}
-
-%>
-	<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(login, PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
+	<c:if test="<%= Validator.isNotNull(uuid) && AlfrescoContentUtil.hasPermission(user.getLogin(), PortalUtil.getUserPassword(renderRequest), uuid, org.alfresco.webservice.util.Constants.WRITE) %>">
 		<liferay-ui:icon image="edit" message="edit-content" url='<%= "javascript: window.open(\'" + AlfrescoContentUtil.getEndpointAddress() + "/alfresco/integration/ice?nodeid=workspace://SpacesStore/" + uuid + "&p_p_id=" + renderResponse.getNamespace() + "&" + ssoSimulateParam + "\'); void(\'\');" %>' />
 	</c:if>
-
 </c:if>

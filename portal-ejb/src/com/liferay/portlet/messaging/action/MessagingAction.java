@@ -97,7 +97,7 @@ public class MessagingAction extends JSONAction {
 		while (message != null) {
 			JSONObject jMsg = new JSONObject();
 			String fromId = (String)message.getProperty("fromId");
-			
+
 			jMsg.put("body", message.getBody());
 			jMsg.put("category", message.getProperty("category"));
 			jMsg.put("toId", message.getProperty("toId"));
@@ -108,7 +108,7 @@ public class MessagingAction extends JSONAction {
 				MessagingUtil.getPresence(
 					roster.getPresence(
 						MessagingUtil.getXmppId(fromId))));
-			
+
 			ja.put(jMsg);
 
 			message = MessagingUtil.getNextMessage(collector);

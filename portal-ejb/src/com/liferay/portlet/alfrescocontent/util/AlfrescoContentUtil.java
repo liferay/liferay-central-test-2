@@ -26,9 +26,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Validator;
 
-import java.io.InputStream;
-
-import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -69,8 +66,6 @@ public class AlfrescoContentUtil {
 			String userId, String password, String uuid)
 		throws Exception {
 
-		ResultSetRow[] rows = null;
-
 		try {
 			AuthenticationUtils.startSession(userId, password);
 
@@ -88,30 +83,30 @@ public class AlfrescoContentUtil {
 
 			QueryResult result = repositoryService.queryChildren(reference);
 
-			rows = result.getResultSet().getRows();
+			ResultSetRow[] rows = result.getResultSet().getRows();
+
+			return rows;
 		}
 		finally {
 			AuthenticationUtils.endSession();
 		}
-
-		return rows;
 	}
 
 	public static String getContent(
 			String userId, String password, String uuid, String path)
 		throws Exception {
 
-		if (Validator.isNotNull(path)) {
-			uuid = null;
-		}
-		else if (Validator.isNotNull(uuid)) {
-			path = null;
-		}
-		else {
-			return null;
-		}
-
 		try {
+			if (Validator.isNotNull(path)) {
+				uuid = null;
+			}
+			else if (Validator.isNotNull(uuid)) {
+				path = null;
+			}
+			else {
+				return null;
+			}
+
 			AuthenticationUtils.startSession(userId, password);
 
 			ContentServiceSoapBindingStub contentService =
@@ -127,8 +122,8 @@ public class AlfrescoContentUtil {
 
 			String ticket = AuthenticationUtils.getCurrentTicket();
 
-			String content = Http.URLtoString(contents[0].getUrl() +
-				"?ticket=" + ticket);
+			String content = Http.URLtoString(
+				contents[0].getUrl() + "?ticket=" + ticket);
 
 			return content;
 		}
@@ -164,13 +159,11 @@ public class AlfrescoContentUtil {
 	public static Node getNode(String userId, String password, String uuid)
 		throws Exception {
 
-		if (Validator.isNull(uuid)) {
-			return null;
-		}
-
-		Node[] nodes = null;
-
 		try {
+			if (Validator.isNull(uuid)) {
+				return null;
+			}
+
 			AuthenticationUtils.startSession(userId, password);
 
 			RepositoryServiceSoapBindingStub repositoryService =
@@ -181,20 +174,18 @@ public class AlfrescoContentUtil {
 			Predicate predicate = new Predicate(
 				new Reference[] {reference}, _SPACES_STORE, null);
 
-			nodes = repositoryService.get(predicate);
+			Node[] nodes = repositoryService.get(predicate);
+
+			return nodes[0];
 		}
 		finally {
 			AuthenticationUtils.endSession();
 		}
-
-		return nodes[0];
 	}
 
 	public static ResultSetRow[] getParentNodes(
 			String userId, String password, String uuid)
 		throws Exception {
-
-		ResultSetRow[] rows = null;
 
 		try {
 			AuthenticationUtils.startSession(userId, password);
@@ -213,13 +204,13 @@ public class AlfrescoContentUtil {
 
 			QueryResult result = repositoryService.queryParents(reference);
 
-			rows = result.getResultSet().getRows();
+			ResultSetRow[] rows = result.getResultSet().getRows();
+
+			return rows;
 		}
 		finally {
 			AuthenticationUtils.endSession();
 		}
-
-		return rows;
 	}
 
 	public static String formatContent(
@@ -264,8 +255,10 @@ public class AlfrescoContentUtil {
 			while (m.find()) {
 				String imagePath = m.group(1);
 
-				m.appendReplacement(sb, "\"" + getEndpointAddress() +
-					"/alfresco" + imagePath + "?guest=true" + "\"");
+				m.appendReplacement(
+					sb,
+					"\"" + getEndpointAddress() + "/alfresco" + imagePath +
+						"?guest=true" + "\"");
 			}
 		}
 		catch (Exception e) {
@@ -279,50 +272,47 @@ public class AlfrescoContentUtil {
 		return content;
 	}
 
-	public static boolean hasPermission(String login, String password,
-		String uuid, String action) {
-
-		AccessControlServiceSoapBindingStub accessControlService = WebServiceFactory
-			.getAccessControlService();
-
-		boolean hasPerm = false;
+	public static boolean hasPermission(
+		String login, String password, String uuid, String action) {
 
 		try {
+			AccessControlServiceSoapBindingStub accessControlService =
+				WebServiceFactory.getAccessControlService();
 
 			AuthenticationUtils.startSession(login, password);
 
 			Reference reference = new Reference(_SPACES_STORE, uuid, null);
 
-			Predicate predicate = new Predicate(new Reference[] { reference },
-				_SPACES_STORE, null);
+			Predicate predicate = new Predicate(
+				new Reference[] {reference}, _SPACES_STORE, null);
 
-			HasPermissionsResult[] results = accessControlService
-				.hasPermissions(predicate, new String[] { Constants.WRITE });
+			HasPermissionsResult[] results =
+				accessControlService.hasPermissions(
+					predicate, new String[] {Constants.WRITE});
 
-			if ((results.length == 1)
-				&& results[0].getPermission().equals(Constants.WRITE)
-				&& results[0].getAccessStatus().equals(AccessStatus.acepted)) {
+			if ((results.length == 1) &&
+				(results[0].getPermission().equals(Constants.WRITE)) &&
+				(results[0].getAccessStatus().equals(AccessStatus.acepted))) {
 
-				hasPerm = true;
+				return true;
 			}
 		}
 		catch (Exception e) {
-			hasPerm = false;
-
-			_log.warn("Could not start session: \n" + e.getMessage());
+			if (_log.isWarnEnabled()) {
+				_log.warn("Could not start session", e);
+			}
 		}
 		finally {
 			AuthenticationUtils.endSession();
 		}
 
-		return hasPerm;
+		return false;
 	}
 
     public static String getEndpointAddress() {
-		String endPoint = PropsUtil.get(
-			PropsUtil.ALFRESCO_CONTENT_SERVER_URL);
+		String endPoint = PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_SERVER_URL);
 
-		if (_log.isDebugEnabled() == true) {
+		if (_log.isDebugEnabled()) {
 			_log.debug("Using endpoint " + endPoint);
 		}
 

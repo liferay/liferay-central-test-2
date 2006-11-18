@@ -22,6 +22,8 @@
 
 package com.liferay.portal.model;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
 import com.liferay.portal.service.spring.ContactLocalServiceUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
@@ -152,6 +154,22 @@ public class User extends UserModel {
 		}
 
 		return false;
+	}
+
+	public String getLogin() throws PortalException, SystemException {
+		String login = null;
+
+		Company company =
+			CompanyLocalServiceUtil.getCompany(getCompanyId());
+
+		if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
+			login = getEmailAddress();
+		}
+		else {
+			login = getUserId();
+		}
+
+		return login;
 	}
 
 	public String getPasswordUnencrypted() {

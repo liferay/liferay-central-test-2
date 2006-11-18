@@ -562,7 +562,7 @@ colon=name.lastIndexOf(":");}},toggleCategory:function(obj,display){var parent=o
 var data=parent.rows[1].cells[0];var pane=document.getElementsByClassName("layout_configuration_category_pane",data)[0];var image=obj.getElementsByTagName("img")[0];var imagePath=themeDisplay.getPathThemeImage();if(display){pane.style.display=display;if(display.toLowerCase().match("block")){image.src=imagePath+"/arrows/01_down.gif";}
 else{image.src=imagePath+"/arrows/01_right.gif";}}
 else{if(toggleByObject(pane,true)){image.src=imagePath+"/arrows/01_down.gif";}
-else{image.src=imagePath+"/arrows/01_right.gif";}}}};var Messaging={checkRoster:false,initialized:false,inputCount:1,mainDiv:null,pollTimer:null,userId:null,windowCount:0,zIndex:1,chat:function(toId,toName,fromId,fromName,body,tempId){var chatBox
+else{image.src=imagePath+"/arrows/01_right.gif";}}}};var Messaging={checkRoster:false,initialized:false,inputCount:1,mainDiv:null,pollTimer:null,userId:null,windowCount:0,zIndex:1,chat:function(toId,toName,fromId,fromName,body,status,tempId){var chatBox
 if(tempId!=null){chatBox=document.getElementById("msg-chat-box"+tempId);chatBox.id="msg-chat-box"+toId;}
 else{chatBox=document.getElementById("msg-chat-box"+toId);}
 if(chatBox==null){chatBox=this.createChat(fromId,fromName,toId,toName);}
@@ -575,7 +575,8 @@ chatArea.innerHTML+="<span style='color: #FF0000'>"+initials+": </span>"+body+"<
 this.saveCookie();chatArea.scrollTop=chatArea.scrollHeight;typeArea.focus();},getChats:function(){loadPage(themeDisplay.getPathMain()+"/messaging/action","cmd=getChats",Messaging.getUpdatesReturn);},getUpdates:function(){AjaxUtil.request(themeDisplay.getPathMain()+"/messaging/action?cmd=getUpdates",{onComplete:Messaging.getUpdatesReturn,reverseAjax:true});},getUpdatesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");}
 catch(err){if(Messaging.pollTimer){clearInterval(Messaging.pollTimer);}
 return;}
-var status=msg.status;if(status=="success"){var chatMsg=msg.chat;if(chatMsg&&chatMsg.length>0){for(var i=0;i<chatMsg.length;i++){Messaging.chat(chatMsg[i].fromId,chatMsg[i].fromName,chatMsg[i].toId,chatMsg[i].toName,chatMsg[i].body);}}
+var status=msg.status;if(status=="success"){var chatMsg=msg.chat;if(chatMsg&&chatMsg.length>0){for(var i=0;i<chatMsg.length;i++){Messaging.chat(chatMsg[i].fromId,chatMsg[i].fromName,chatMsg[i].toId,chatMsg[i].toName,chatMsg[i].body,chatMsg[i].status);}
+window.focus();}
 if(msg.roster!=null){MessagingRoster.updateEntries(msg.roster);}
 Messaging.getUpdates();}
 else if(status=="timedOut"){Messaging.getUpdates();}},createChat:function(fromId,fromName,toId,toName){if(!this.initialized){this.init();}
@@ -595,18 +596,19 @@ else{return(findChatBox(obj.parentNode));}}
 var chatBox=findChatBox(obj);if(chatBox){chatBox.parentNode.removeChild(chatBox);}
 this.saveCookie();},saveCookie:function(){var cookieDiv=document.createElement("div");cookieDiv.appendChild(this.mainDiv.cloneNode(true));Cookie.create(this.userId+"_chats",encodeURIComponent(cookieDiv.innerHTML),99);},sendChat:function(obj,e){var keycode;var chatBox=obj.parentNode;var toInput;var toAddr;var typeArea;var chatArea;var query="cmd=sendChat";if(window.event)keycode=window.event.keyCode;else if(e)keycode=e.which;else return;if(keycode==13){var inputList=chatBox.getElementsByTagName("input");for(var i=0;i<inputList.length;i++){if(inputList[i].className){if(inputList[i].className.match("msg-to-input-id"))toInput=inputList[i];if(inputList[i].className.match("msg-to-input-addr"))toAddr=inputList[i];if(inputList[i].className.match("msg-type-area"))typeArea=inputList[i];}}
 if(typeArea.value=="")return;var divList=chatBox.getElementsByTagName("div");for(var i=0;i<divList.length;i++){if(divList[i].className&&divList[i].className.match("msg-chat-area"))chatArea=divList[i];}
-query+="&text="+typeArea.value;if(toAddr!=null){query+="&tempId="+toInput.value+"&toAddr="+toAddr.value;}
+query+="&text="+encodeURIComponent(typeArea.value);if(toAddr!=null){query+="&tempId="+toInput.value+"&toAddr="+toAddr.value;}
 else{query+="&toId="+toInput.value;}
 loadPage(themeDisplay.getPathMain()+"/messaging/action",query,Messaging.sendChatReturn);chatArea.innerHTML+="<span style='color: #0000FF'>Me: </span>"+typeArea.value+"<br/>";typeArea.value="";}},sendChatReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");}
 catch(err){if(Messaging.pollTimer){clearInterval(Messaging.pollTimer);}
 return;}
-if(msg.status=="success"){Messaging.chat(msg.toId,msg.toName,msg.fromId,msg.fromName,msg.body,msg.tempId);}
+if(msg.status=="success"){Messaging.chat(msg.toId,msg.toName,msg.fromId,msg.fromName,msg.body,msg.status,msg.tempId);}
 else{Messaging.error();}}}
 var MessagingRoster={highlightColor:"",lastSelected:null,addEntry:function(){var email=document.getElementById("portlet-chat-roster-email").value;loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=addEntry&email="+email,MessagingRoster.addEntryReturn);},addEntryReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");if(msg.status=="failure"){alert("No such user exists");}
-else{var rosterDiv=document.getElementById("portlet-chat-roster-list");var entryRow=MessagingRoster.createEntryRow(msg.user,msg.name);rosterDiv.appendChild(entryRow);MessagingRoster.toggleEmail();}}
+else{var rosterDiv=document.getElementById("portlet-chat-roster-list");var entries=document.getElementsByClassName("portlet-chat-roster-entry");var userId=msg.user;var userExists=entries.any(function(item){return(item.userId==userId);});if(!userExists||entries.length==0){var entryRow=MessagingRoster.createEntryRow(msg.user,msg.name);rosterDiv.appendChild(entryRow);}
+MessagingRoster.toggleEmail();}}
 catch(err){}},createEntryRow:function(userId,userName,online){var tempDiv=document.createElement("div");var tempImg=document.createElement("img");var tempLink=document.createElement("a");tempImg.align="absmiddle";tempImg.style.marginRight="5px";if(online){tempImg.src=themeDisplay.getPathThemeImage()+"/chat/user_online.gif";}
 else{tempImg.src=themeDisplay.getPathThemeImage()+"/chat/user_offline.gif";}
-tempLink.innerHTML=userName;tempLink.href="javascript: void(0)";tempLink.onclick=MessagingRoster.onEntryLinkClick;tempDiv.appendChild(tempImg);tempDiv.appendChild(tempLink);tempDiv.onclick=MessagingRoster.onEntryClick;tempDiv.userId=userId;tempDiv.userName=userName;tempDiv.style.cursor="pointer";return tempDiv;},deleteEntries:function(){if(MessagingRoster.lastSelected){var userId=MessagingRoster.lastSelected.userId;var lastSelected=MessagingRoster.lastSelected;lastSelected.parentNode.removeChild(lastSelected);MessagingRoster.lastSelected=null;loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=deleteEntries&entries="+userId,MessagingRoster.deleteEntriesReturn);}},deleteEntriesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");}
+tempLink.innerHTML=userName;tempLink.href="javascript: void(0)";tempLink.onclick=MessagingRoster.onEntryLinkClick;tempDiv.appendChild(tempImg);tempDiv.appendChild(tempLink);tempDiv.onclick=MessagingRoster.onEntryClick;tempDiv.userId=userId;tempDiv.userName=userName;tempDiv.style.cursor="pointer";tempDiv.className="portlet-chat-roster-entry";return tempDiv;},deleteEntries:function(){if(MessagingRoster.lastSelected){var userId=MessagingRoster.lastSelected.userId;var lastSelected=MessagingRoster.lastSelected;lastSelected.parentNode.removeChild(lastSelected);MessagingRoster.lastSelected=null;loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=deleteEntries&entries="+userId,MessagingRoster.deleteEntriesReturn);}},deleteEntriesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");}
 catch(err){}},getEntries:function(){loadPage(themeDisplay.getPathMain()+"/chat/roster","cmd=getEntries",MessagingRoster.getEntriesReturn);},getEntriesReturn:function(xmlHttpReq){try{var msg=eval("("+xmlHttpReq.responseText+")");MessagingRoster.updateEntries(msg.roster);}
 catch(err){if(Messaging.pollTimer){clearInterval(Messaging.pollTimer);}
 return;}},updateEntries:function(roster){var rosterDiv=document.getElementById("portlet-chat-roster-list");if(rosterDiv!=null){rosterDiv.innerHTML="";}
