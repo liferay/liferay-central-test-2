@@ -27,14 +27,119 @@
 <%
 MailMessage mailMessage = MailUtil.getMessage(request);
 
+Address from = mailMessage.getFrom();
+Address[] to = mailMessage.getTo();
+Address[] cc = mailMessage.getCc();
+Address[] bcc = mailMessage.getBcc();
+
+Date sentDate = mailMessage.getSentDate();
+
+List attachments = mailMessage.getRemoteAttachments();
+
 boolean header = ParamUtil.getBoolean(request, "header");
 %>
 
-<c:if test="<%= header %>">
-	<liferay-util:include page="/html/portlet/mail/message_details.jsp" />
-	<hr /><br />
-</c:if>
-
 <c:if test="<%= mailMessage != null %>">
-	<%= MailUtil.replaceLinks(mailMessage.getBody()) %>
+
+	<div id="portlet-mail-msg-header-hidden" style="display: none;">
+		<div style="font-weight: bold;">
+			<%= mailMessage.getSubject() %>
+		</div>
+
+		<table cellpadding="0" cellspacing="0" border="0" class="font-small;">
+		<tr>
+			<td align="right" style="padding-right: 5px;" valign="top">
+				<%= LanguageUtil.get(pageContext, "from") %>:&nbsp;
+			</td>
+			<td>
+				<%= Html.escape(from.toString(), false) %>
+			</td>
+		</tr>
+
+		<c:if test="<%= to != null %>">
+			<tr>
+				<td align="right" style="padding-right: 5px;" valign="top">
+					<%= LanguageUtil.get(pageContext, "to") %>:&nbsp;
+				</td>
+				<td>
+					<%= Html.escape(InternetAddressUtil.toString(to), false) %>
+				</td>
+			</tr>
+		</c:if>
+
+		<c:if test="<%= cc != null %>">
+			<tr>
+				<td align="right" style="padding-right: 5px;" valign="top">
+					<%= LanguageUtil.get(pageContext, "cc") %>:&nbsp;
+				</td>
+				<td>
+					<%= Html.escape(InternetAddressUtil.toString(cc), false) %>
+				</td>
+			</tr>
+		</c:if>
+
+		<c:if test="<%= bcc != null %>">
+			<tr>
+				<td align="right" style="padding-right: 5px;" valign="top">
+					<%= LanguageUtil.get(pageContext, "bcc") %>:&nbsp;
+				</td>
+				<td>
+					<%= Html.escape(InternetAddressUtil.toString(bcc), false) %>
+				</td>
+			</tr>
+		</c:if>
+
+		<c:if test="<%= sentDate != null %>">
+			<tr>
+				<td align="right" style="padding-right: 5px;" valign="top">
+					<%= LanguageUtil.get(pageContext, "date") %>:&nbsp;
+				</td>
+				<td>
+					<%= dateFormatDateTime.format(sentDate) %>
+				</td>
+			</tr>
+		</c:if>
+
+		<c:if test="<%= attachments.size() > 0 %>">
+			<tr>
+				<td align="right" style="padding-right: 5px;" valign="top">
+					<img src="<%= themeDisplay.getPathThemeImage() %>/mail/clip.gif" />&nbsp;
+				</td>
+				<td>
+
+					<%
+					for (int i = 0; i < attachments.size(); i++) {
+						RemoteMailAttachment remoteMailAttachment = (RemoteMailAttachment)attachments.get(i);
+
+						String url = themeDisplay.getPathMain() + "/mail/get_attachment?fileName=" + remoteMailAttachment.getFilename() + "&contentPath=" + remoteMailAttachment.getContentPath();
+					%>
+
+						<a href="<%= url %>"><%= remoteMailAttachment.getFilename() %></a><%= (i + 1 < attachments.size()) ? ", " : "" %>
+
+					<%
+					}
+					%>
+
+				</td>
+			</tr>
+		</c:if>
+
+		</table>
+	</div>
+
+	<%= mailMessage.getBody(true, header) %>
+
+	<script type="text/javascript">
+		var hiddenHeader = document.getElementById("portlet-mail-msg-header-hidden");
+
+		<c:choose>
+			<c:when test="<%= header %>">
+				hiddenHeader.innerHTML = hiddenHeader.innerHTML + "<hr /><br />";
+				hiddenHeader.style.display = "block";
+			</c:when>
+			<c:otherwise>
+				parent.setHeader(hiddenHeader.innerHTML);
+			</c:otherwise>
+		</c:choose>
+	</script>
 </c:if>

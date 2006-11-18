@@ -148,6 +148,11 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 				dates.style.display = filter ? "none" : "";
 			}
+			
+			function setHeader(html) {
+				var mailHeader = document.getElementById("portlet-mail-msg-header-div");
+				mailHeader.innerHTML = html;	
+			}
 		</script>
 
 		<style type="text/css">

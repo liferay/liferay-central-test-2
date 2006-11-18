@@ -40,13 +40,13 @@ import javax.mail.internet.InternetAddress;
  */
 public class MailMessage {
 
-    public long getMessageId() {
-    	return _messageId;
-    }
+	public long getMessageId() {
+		return _messageId;
+	}
 
-    public void setMessageId(long messageId) {
-    	_messageId = messageId;
-    }
+	public void setMessageId(long messageId) {
+		_messageId = messageId;
+	}
 
 	public Address getFrom() {
 		return _from;
@@ -113,38 +113,59 @@ public class MailMessage {
 	}
 
 	public String getSubject() {
-    	return GetterUtil.getString(_subject);
-    }
+		return GetterUtil.getString(_subject);
+	}
 
-    public void setSubject(String subject) {
-    	_subject = subject;
-    }
+	public void setSubject(String subject) {
+		_subject = subject;
+	}
 
-    public Date getSentDate() {
-    	return _sentDate;
-    }
+	public Date getSentDate() {
+		return _sentDate;
+	}
 
-    public void setSentDate(Date sentDate) {
-    	_sentDate = sentDate;
-    }
+	public void setSentDate(Date sentDate) {
+		_sentDate = sentDate;
+	}
 
-    public String getBody() {
-    	return _content.toString();
-    }
+	public String getBody() {
+		return getBody(false, false);
+	}
 
-    public void setBody(String body) {
-    	MailContent content = new MailContent(body);
+	public String getBody(boolean replaceLinks, boolean popup) {
+		String body = _content.toString();
 
-    	_content = content;
-    }
+		if (replaceLinks) {
+			for (int i = 0; i < _LINK_REGEXP.length; i++) {
+				body = body.replaceAll(_LINK_REGEXP[i], _LINK_REPLACEMENT[i]);
+			}
 
-    public MailContent getMailContent() {
-    	return _content;
-    }
+			if (popup) {
+				body = body.replaceAll(_MAILTO_REGEXP,
+					"<a href=\"javascript: opener.compose('$2')");
+			}
+			else {
+				body = body.replaceAll(_MAILTO_REGEXP,
+					"<a href=\"javascript: parent.compose('$2')");
+			}
+		}
 
-    public void setMailContent(MailContent mc) {
-    	_content = mc;
-    }
+		return body;
+	}
+
+	public void setBody(String body) {
+		MailContent content = new MailContent(body);
+
+		_content = content;
+	}
+
+	public MailContent getMailContent() {
+		return _content;
+	}
+
+	public void setMailContent(MailContent mc) {
+		_content = mc;
+	}
 
 	public List getAttachments() {
 		return _attachments;
@@ -191,5 +212,21 @@ public class MailMessage {
 	private MailContent _content;
 	private List _attachments = new ArrayList();
 	private List _remoteAttachments = new ArrayList();
+
+	private static final String[] _LINK_REGEXP = {
+		"([^]_a-z0-9-=\"'/])" +
+			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
+			"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
+			"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
+		"<a href=\"www\\."
+	};
+
+	private static String[] _LINK_REPLACEMENT = {
+		"$1<a href=\"$2$4$5\" target=\"_blank\">$2$4$5</a>",
+		"<a href=\"http://www."
+	};
+
+	private static String _MAILTO_REGEXP =
+		"(<a href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)";
 
 }

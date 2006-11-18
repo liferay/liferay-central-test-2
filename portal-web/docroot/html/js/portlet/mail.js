@@ -38,8 +38,8 @@ var Mail = {
 	DEFAULT_FOLDERS : null,
 	currentFolder : null,
 	currentFolderId : "",
-	currentMessage : null,
 	currentMessageId : null,
+	displayingMessage : false,
 	dragging : false,
 	dragIndicator : null,
 	dragStart : null,
@@ -450,7 +450,7 @@ var Mail = {
 	},
 
 	getMessageDetails : function(messageId, folderId) {
-		if (!Mail.currentMessage || messageId != Mail.currentMessageId) {
+		if (!Mail.displayingMessage || messageId != Mail.currentMessageId) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action",
 				"cmd=getMessage&messageId=" + messageId + "&folderId=" + folderId,
 				Mail.getMessageDetailsReturn, messageId);
@@ -458,20 +458,11 @@ var Mail = {
 	},
 
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
-		
-		var messageObj = createJSONObject(xmlHttpReq.responseText);
-		var mailHeader = document.getElementById("portlet-mail-msg-header-div");
-		var tempBody = document.createElement("div");
-		var msgHeader = document.createElement("div");
-		
-		Mail.currentMessage = messageObj;
-		Mail.currentMessageId = messageId;
-		
-		msgHeader.innerHTML = messageObj.header;
-		
-		mailHeader.innerHTML = "";
-		mailHeader.appendChild(msgHeader);
-		
+		var mailObject = createJSONObject(xmlHttpReq.responseText);
+
+		Mail.currentMessageId = mailObject.id;
+		Mail.displayingMessage = true;
+
 		if (Mail.lastSelected != null && !Mail.lastSelected.read) {
 			Mail.decrementCount();
 
@@ -719,7 +710,7 @@ var Mail = {
 				return;
 			}
 		}
-		
+
 		if (confirm("Are you sure you want to delete the folder '" + Mail.currentFolderId + "' and all its messages?")) {
 			loadPage(themeDisplay.getPathMain() + "/mail/action", "cmd=deleteFolder&folderId=" + Mail.currentFolderId, Mail.getFolders);
 			Mail.setCurrentFolder(Mail.foldersList[0]);
@@ -746,7 +737,7 @@ var Mail = {
 
 		if (Mail.currentFolderId != folder.id) {
 			Mail.searchResults = false;
-			Mail.currentMessage = null;
+			Mail.displayingMessage = false;
 			Mail.currentMessageId = null;
 			
 			Mail.setCurrentFolder(folder);
@@ -901,7 +892,7 @@ var Mail = {
 	
 	onSummaryDblclick : function() {
 		msObj = this.parent;
-		if (Mail.currentMessage && (Mail.currentMessage.id == msObj.id )){
+		if (Mail.currentMessageId == msObj.id) {
 			Mail.previewPopup();
 		}
 	},
@@ -1037,7 +1028,7 @@ var Mail = {
 	previewPopup : function() {
 		var popup = null;
 		
-		if (Mail.currentMessage) {
+		if (Mail.currentMessageId) {
 			var frameSrc = themeDisplay.getPathMain() + "/mail/view_message?header=true&messageId=" + Mail.currentMessageId;
 			popup = window.open(frameSrc, "Print", "menubar=yes,width=640,height=480,toolbar=no,resizable=yes,scrollbars=yes");
 		}

@@ -32,7 +32,6 @@ import com.liferay.portal.util.PrettyDateFormat;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.model.MailEnvelope;
 import com.liferay.portlet.mail.model.MailFolder;
-import com.liferay.portlet.mail.model.MailMessage;
 import com.liferay.portlet.mail.search.MailDisplayTerms;
 import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.comparator.DateComparator;
@@ -53,7 +52,6 @@ import java.util.TreeSet;
 
 import javax.portlet.PortletPreferences;
 
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -200,20 +198,10 @@ public class MailAction extends JSONAction {
 
 		MailUtil.setFolder(req, folderId);
 
-		MailMessage mailMessage = MailUtil.getMessage(req, messageId);
-
-		req.setAttribute("mailMessage", mailMessage);
-
-		StringBuffer sb = new StringBuffer();
-
-		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
-
-		PortalUtil.renderPage(
-			sb, ctx, req, res, "/html/portlet/mail/message_details.jsp");
+		MailUtil.setMessageId(req, messageId);
 
 		jsonObj.put("id", messageId);
-		jsonObj.put("body", mailMessage.getBody());
-		jsonObj.put("header", sb.toString());
+		jsonObj.put("folderId", folderId);
 
 		return jsonObj.toString();
 	}
@@ -395,8 +383,8 @@ public class MailAction extends JSONAction {
 
 		jsonObj.put("folders", jsonFolders);
 
-		_log.info(
-			"Total ms to get folders: " + (System.currentTimeMillis() - start));
+		_log.info("Total time to get folders: " +
+			(System.currentTimeMillis() - start) + "ms");
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);

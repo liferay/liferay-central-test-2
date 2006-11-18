@@ -639,6 +639,12 @@ public class MailUtil {
 		}
 	}
 
+	public static void setMessageId(HttpServletRequest req, long messageId) {
+		HttpSession ses = req.getSession();
+
+		ses.setAttribute(WebKeys.MAIL_MESSAGE_ID, new Long(messageId));
+	}
+
 	public static MailMessage getMessage(HttpServletRequest req, long messageId)
 		throws ContentException, FolderException, StoreException {
 
@@ -906,26 +912,6 @@ public class MailUtil {
 		catch (MessagingException me) {
 			throw new FolderException(me);
 		}
-	}
-
-	public static String replaceLinks(String body) {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Body before replacing links\n" + body);
-		}
-
-		for (int i = 0; i < _LINK_REGEXP.length; i++) {
-			body = body.replaceAll(_LINK_REGEXP[i], _LINK_REPLACEMENT[i]);
-		}
-
-		body = body.replaceAll(
-			"(<a href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)",
-			"<a href=\"javascript: parent.compose('$2')");
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Body after replacing links\n" + body);
-		}
-
-		return body;
 	}
 
 	public static Set search(
@@ -1734,19 +1720,6 @@ public class MailUtil {
 
 	private static final String[] _HTML_END_TAGS = new String[] {
 		"</html>", "</head>", "</body>"
-	};
-
-	private static final String[] _LINK_REGEXP = {
-		"([^]_a-z0-9-=\"'/])" +
-			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
-			"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
-			"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
-		"<a href=\"www\\."
-	};
-
-	private static String[] _LINK_REPLACEMENT = {
-		"$1<a href=\"$2$4$5\" target=\"_blank\">$2$4$5</a>",
-		"<a href=\"http://www."
 	};
 
 	private static final double _ENCODING_FACTOR = 0.65;
