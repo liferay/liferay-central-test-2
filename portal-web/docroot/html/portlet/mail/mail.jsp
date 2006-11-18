@@ -308,14 +308,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 			#portlet-mail-msgs-title-size {
 				overflow: hidden;
-				<c:choose>
-					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
-						width: 85px;
-					</c:when>
-					<c:otherwise>
-						width: 100%;
-					</c:otherwise>
-				</c:choose>
+				width: 100%;
 			}
 
 			#portlet-mail-msgs-title-size div {
@@ -395,14 +388,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 
 			#portlet-mail-msgs-size {
 				overflow: hidden;
-				<c:choose>
-					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
-						width: 85px;
-					</c:when>
-					<c:otherwise>
-						width: 100%;
-					</c:otherwise>
-				</c:choose>
+				width: 100%;
 			}
 
 			#portlet-mail-msgs-size div {
@@ -410,7 +396,14 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 				overflow: hidden;
 				padding-left: 5px;
 				position: relative;
-				width: 800px;
+				<c:choose>
+					<c:when test="<%= BrowserSniffer.is_safari(request) %>">
+						width: 100%;
+					</c:when>
+					<c:otherwise>
+						width: 800px;
+					</c:otherwise>
+				</c:choose>
 			}
 
 			#portlet-mail-bottom-handle {
@@ -629,7 +622,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 					<tr>
 						<td class="portlet-mail-msgs-pane-td" width="100%">
 							<div id="portlet-mail-msgs-preview">
-								<table id="portlet-mail-msgs-preview-pane-title" border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
+								<table id="portlet-mail-msgs-preview-pane-title" border="0" cellpadding="0" cellspacing="0" width="100%">
 								<tr>
 									<td class="portlet-mail-msgs-title">
 										<div id="portlet-mail-msgs-title-state">
@@ -673,7 +666,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									<td id="portlet-mail-msgs-received-handle" style="cursor: e-resize;">
 										<div class="portlet-mail-msgs-title-handle"></div>
 									</td>
-									<td class="portlet-mail-msgs-title" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
+									<td class="portlet-mail-msgs-title" width="90%">
 										<div id="portlet-mail-msgs-title-size">
 											<div class="portlet-mail-title-text">
 												<span><%= LanguageUtil.get(pageContext, "size") %></span>
@@ -682,45 +675,45 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 									</td>
 								</tr>
 								</table>
+							</div>
 
-								<div id="portlet-mail-msgs-preview-pane">
-									<table border="0" cellpadding="0" cellspacing="0" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"100%\"" %>>
-									<tr>
-										<td valign="top">
-											<div id="portlet-mail-msgs-state">
-											</div>
-										</td>
-										<td valign="top">
-											<div class="portlet-mail-msgs-title-handle"></div>
-										</td>
-										<td valign="top">
-											<div id="portlet-mail-msgs-from">
-											</div>
-										</td>
-										<td valign="top">
-											<div class="portlet-mail-msgs-title-handle"></div>
-										</td>
-										<td valign="top">
-											<div id="portlet-mail-msgs-subject">
-											</div>
-										</td>
-										<td valign="top">
-											<div class="portlet-mail-msgs-title-handle"></div>
-										</td>
-										<td valign="top">
-											<div id="portlet-mail-msgs-received">
-											</div>
-										</td>
-										<td valign="top">
-											<div class="portlet-mail-msgs-title-handle"></div>
-										</td>
-										<td valign="top" <%= BrowserSniffer.is_safari(request) ? "" : "width=\"90%\"" %>>
-											<div id="portlet-mail-msgs-size">
-											</div>
-										</td>
-									</tr>
-									</table>
-								</div>
+							<div id="portlet-mail-msgs-preview-pane">
+								<table border="0" cellpadding="0" cellspacing="0" width="100%">
+								<tr>
+									<td valign="top">
+										<div id="portlet-mail-msgs-state">
+										</div>
+									</td>
+									<td valign="top">
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
+									<td valign="top">
+										<div id="portlet-mail-msgs-from">
+										</div>
+									</td>
+									<td valign="top">
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
+									<td valign="top">
+										<div id="portlet-mail-msgs-subject">
+										</div>
+									</td>
+									<td valign="top">
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
+									<td valign="top">
+										<div id="portlet-mail-msgs-received">
+										</div>
+									</td>
+									<td valign="top">
+										<div class="portlet-mail-msgs-title-handle"></div>
+									</td>
+									<td valign="top" width="90%">
+										<div id="portlet-mail-msgs-size">
+										</div>
+									</td>
+								</tr>
+								</table>
 							</div>
 						</td>
 					</tr>
