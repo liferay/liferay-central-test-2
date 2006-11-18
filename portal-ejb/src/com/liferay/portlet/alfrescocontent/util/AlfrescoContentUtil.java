@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.alfrescocontent.util;
 
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Validator;
 
@@ -48,7 +49,6 @@ import org.alfresco.webservice.types.Predicate;
 import org.alfresco.webservice.types.Reference;
 import org.alfresco.webservice.types.ResultSetRow;
 import org.alfresco.webservice.types.Store;
-import org.alfresco.webservice.types.StoreEnum;
 import org.alfresco.webservice.util.AuthenticationUtils;
 import org.alfresco.webservice.util.Constants;
 import org.alfresco.webservice.util.WebServiceFactory;
@@ -319,29 +319,11 @@ public class AlfrescoContentUtil {
 	}
 
     public static String getEndpointAddress() {
-		String endPoint = _DEFAULT_ENDPOINT_ADDRESS;
-		ClassLoader cl = AlfrescoContentUtil.class.getClassLoader();
-		InputStream is = cl.getResourceAsStream(_PROPERTY_FILE_NAME);
+		String endPoint = PropsUtil.get(
+			PropsUtil.ALFRESCO_CONTENT_SERVER_URL);
 
-		if (is != null) {
-
-			Properties props = new Properties();
-
-			try {
-				props.load(is);
-
-				endPoint = props.getProperty(_REPO_LOCATION);
-
-				if (_log.isDebugEnabled() == true) {
-					_log.debug("Using endpoint " + endPoint);
-				}
-			}
-			catch (Exception e) {
-				if (_log.isDebugEnabled() == true) {
-					_log.debug(
-						"Unable to file web service client properties file.  Using default.");
-				}
-			}
+		if (_log.isDebugEnabled() == true) {
+			_log.debug("Using endpoint " + endPoint);
 		}
 
 		return endPoint;
@@ -353,17 +335,8 @@ public class AlfrescoContentUtil {
     private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
 		"\"(?:\\.\\.)?(?:/\\.\\.)*(/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
 
-    private static final String _DEFAULT_ENDPOINT_ADDRESS =
-    	"http://localhost:8080";
-
-    private static final String _PROPERTY_FILE_NAME =
-    	"alfresco/webserviceclient.properties";
-
-    private static final String _REPO_LOCATION =
-    	"repository.location";
-
 	private static final Store _SPACES_STORE =
-		new Store(StoreEnum.workspace, "SpacesStore");
+		new Store(Constants.WORKSPACE_STORE, "SpacesStore");
 
 	private static Log _log = LogFactory.getLog(AlfrescoContentUtil.class);
 

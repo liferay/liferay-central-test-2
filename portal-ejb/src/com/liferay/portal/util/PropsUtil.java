@@ -605,6 +605,8 @@ public class PropsUtil {
 
 	public static final String ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE = "alfresco.content.one.step.edit.sso.simulate";
 
+	public static final String ALFRESCO_CONTENT_SERVER_URL = "alfresco.content.server.url";
+
 	// Calendar Portlet
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";
