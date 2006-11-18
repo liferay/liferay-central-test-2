@@ -92,15 +92,23 @@ public class MessagingAction extends JSONAction {
 		PacketCollector collector = MessagingUtil
 			.getCollector(req.getSession());
 		Message message = MessagingUtil.getNextMessage(collector);
+		Roster roster = MessagingUtil.getRoster(req.getSession());
 
 		while (message != null) {
 			JSONObject jMsg = new JSONObject();
+			String fromId = (String)message.getProperty("fromId");
+			
 			jMsg.put("body", message.getBody());
 			jMsg.put("category", message.getProperty("category"));
 			jMsg.put("toId", message.getProperty("toId"));
 			jMsg.put("toName", message.getProperty("toName"));
-			jMsg.put("fromId", message.getProperty("fromId"));
+			jMsg.put("fromId", fromId);
 			jMsg.put("fromName", message.getProperty("fromName"));
+			jMsg.put("status",
+				MessagingUtil.getPresence(
+					roster.getPresence(
+						MessagingUtil.getXmppId(fromId))));
+			
 			ja.put(jMsg);
 
 			message = MessagingUtil.getNextMessage(collector);

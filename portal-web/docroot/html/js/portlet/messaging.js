@@ -8,7 +8,7 @@ var Messaging = {
 	windowCount : 0,
 	zIndex : 1,
 	
-	chat : function(toId, toName, fromId, fromName, body, tempId) {
+	chat : function(toId, toName, fromId, fromName, body, status, tempId) {
 		var chatBox
 		if (tempId != null) {
 			chatBox = document.getElementById("msg-chat-box" + tempId);
@@ -97,8 +97,10 @@ var Messaging = {
 			if (chatMsg && chatMsg.length > 0) {
 				for (var i = 0; i < chatMsg.length; i++) {
 					Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
-						chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body);
+						chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body,
+						chatMsg[i].status);
 				}
+				window.focus();
 			}
 			
 			if (msg.roster != null) {
@@ -324,7 +326,7 @@ var Messaging = {
 				if (divList[i].className && divList[i].className.match("msg-chat-area")) chatArea = divList[i];
 			}
 			
-			query += "&text=" + typeArea.value;
+			query += "&text=" + encodeURIComponent(typeArea.value);
 			
 			if (toAddr != null) {
 				query += "&tempId=" + toInput.value + "&toAddr=" + toAddr.value;
@@ -353,7 +355,7 @@ var Messaging = {
 		
 		if (msg.status == "success") {
 			Messaging.chat(msg.toId, msg.toName,
-				msg.fromId, msg.fromName, msg.body, msg.tempId);
+				msg.fromId, msg.fromName, msg.body, msg.status, msg.tempId);
 		}
 		else {
 			Messaging.error();
@@ -387,7 +389,7 @@ var MessagingRoster = {
 					return (item.userId == userId);
 				});
 				
-				if (!userExists) {
+				if (!userExists || entries.length == 0) {
 					var entryRow = MessagingRoster.createEntryRow(msg.user, msg.name);
 					
 					rosterDiv.appendChild(entryRow);

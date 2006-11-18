@@ -82,6 +82,21 @@ public class MessagingUtil {
 		String smackId = getXmppId(user);
 		String name = user.getFullName();
 
+		try {
+			XMPPConnection con = new XMPPConnection(SERVER_ADDRESS, SERVER_PORT);
+			AccountManager accountManager = con.getAccountManager();
+			
+			try {
+				accountManager.createAccount(user.getUserId(), USER_PASSWORD);
+			}
+			catch (XMPPException xmppe) {
+			}
+			
+			con.close();
+		}
+		catch (XMPPException xmppe) {
+		}
+
 		roster.createEntry(smackId, name, null);
 
 		jo.put("name", name);
