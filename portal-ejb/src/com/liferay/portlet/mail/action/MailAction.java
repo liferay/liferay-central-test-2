@@ -383,8 +383,11 @@ public class MailAction extends JSONAction {
 
 		jsonObj.put("folders", jsonFolders);
 
-		_log.info("Total time to get folders: " +
-			(System.currentTimeMillis() - start) + "ms");
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Total time to get folders " +
+					(System.currentTimeMillis() - start) + "ms");
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(MailAction.class);

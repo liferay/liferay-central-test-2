@@ -639,12 +639,6 @@ public class MailUtil {
 		}
 	}
 
-	public static void setMessageId(HttpServletRequest req, long messageId) {
-		HttpSession ses = req.getSession();
-
-		ses.setAttribute(WebKeys.MAIL_MESSAGE_ID, new Long(messageId));
-	}
-
 	public static MailMessage getMessage(HttpServletRequest req, long messageId)
 		throws ContentException, FolderException, StoreException {
 
@@ -976,6 +970,12 @@ public class MailUtil {
 		finally {
 			MailSessionLock.unlock(req);
 		}
+	}
+
+	public static void setMessageId(HttpServletRequest req, long messageId) {
+		HttpSession ses = req.getSession();
+
+		ses.setAttribute(WebKeys.MAIL_MESSAGE_ID, new Long(messageId));
 	}
 
 	protected static void cleanUp(HttpSession ses) throws StoreException {

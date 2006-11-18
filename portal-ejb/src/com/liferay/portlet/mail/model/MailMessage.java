@@ -200,19 +200,6 @@ public class MailMessage {
 		}
 	}
 
-	private long _messageId;
-	private Address _from;
-	private Address[] _to;
-	private Address[] _cc;
-	private Address[] _bcc;
-	private String _inReplyTo;
-	private Address[] _replyTo;
-	private String _subject;
-	private Date _sentDate;
-	private MailContent _content;
-	private List _attachments = new ArrayList();
-	private List _remoteAttachments = new ArrayList();
-
 	private static final String[] _LINK_REGEXP = {
 		"([^]_a-z0-9-=\"'/])" +
 			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
@@ -228,5 +215,18 @@ public class MailMessage {
 
 	private static String _MAILTO_REGEXP =
 		"(<a href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)";
+
+	private long _messageId;
+	private Address _from;
+	private Address[] _to;
+	private Address[] _cc;
+	private Address[] _bcc;
+	private String _inReplyTo;
+	private Address[] _replyTo;
+	private String _subject;
+	private Date _sentDate;
+	private MailContent _content;
+	private List _attachments = new ArrayList();
+	private List _remoteAttachments = new ArrayList();
 
 }
