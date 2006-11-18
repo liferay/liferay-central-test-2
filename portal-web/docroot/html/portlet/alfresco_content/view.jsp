@@ -32,28 +32,26 @@ boolean preview = ParamUtil.getBoolean(renderRequest, "preview");
 uuid = (String)renderRequest.getAttribute("uuid");
 %>
 
-<c:if test="<%= preview %>">
-	<div style="border: 2px solid #FF0000; padding: 8px">
-</c:if>
-
-<c:choose>
-	<c:when test="<%= Validator.isNotNull(content) %>">
-		<%= content %>
-	</c:when>
-	<c:otherwise>
-		<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
-	</c:otherwise>
-</c:choose>
-
-<c:if test="<%= preview %>">
-	</div>
-</c:if>
+<div
+	<c:if test="<%= preview %>">
+		style="border: 2px solid #FF0000; padding: 8px"
+	</c:if>
+>
+	<c:choose>
+		<c:when test="<%= Validator.isNotNull(content) %>">
+			<%= content %>
+		</c:when>
+		<c:otherwise>
+			<%= LanguageUtil.get(pageContext, "please-contact-the-administrator-to-setup-this-portlet") %>
+		</c:otherwise>
+	</c:choose>
+</div>
 
 <c:if test="<%= themeDisplay.isSignedIn() && !preview %>">
 	<br>
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.CONFIGURATION) %>">
-		<liferay-ui:icon image="configuration" message="select-article" url="<%= portletDisplay.getURLConfiguration() %>" />
+		<liferay-ui:icon image="configuration" message="select-content" url="<%= portletDisplay.getURLConfiguration() %>" />
 	</c:if>
 
 	<%

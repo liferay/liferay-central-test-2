@@ -80,27 +80,27 @@
 
 	<c:if test="<%= themeDisplay.isSignedIn() %>">
 		<script type="text/javascript">
-		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
-			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
-			onEdit:
-				function(input, textWidth) {
-					input.style.width = (textWidth) + "px";
-					input.style.margin = "1px 0 0 5px";
-				},
-			onComplete:
-				function(newTextObj, oldText) {
-					var newText = newTextObj.innerHTML;
-					if (oldText != newText) {
-						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
-						"?portletId=<%= portletDisplay.getId() %>" +
-						"&title=" + encodeURIComponent(newText) +
-						"&layoutId=<%= layout.getLayoutId() %>" +
-						"&ownerId=<%= Layout.getOwnerId(plid) %>";
+			QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
+				dragId: "p_p_id_<%= portletDisplay.getId() %>_",
+				onEdit:
+					function(input, textWidth) {
+						input.style.width = (textWidth) + "px";
+						input.style.margin = "1px 0 0 5px";
+					},
+				onComplete:
+					function(newTextObj, oldText) {
+						var newText = newTextObj.innerHTML;
+						if (oldText != newText) {
+							var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
+							"?layoutId=<%= layout.getLayoutId() %>" +
+							"&ownerId=<%= layout.getOwnerId() %>" +
+							"&portletId=<%= portletDisplay.getId() %>" +
+							"&title=" + encodeURIComponent(newText);
 
-						AjaxUtil.request(url);
+							AjaxUtil.request(url);
+						}
 					}
-				}
-			});
+				});
 		</script>
 	</c:if>
 

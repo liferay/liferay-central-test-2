@@ -23,6 +23,7 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
@@ -67,15 +68,18 @@ public class UpdateTitleAction extends JSONAction {
 			return null;
 		}
 
-		String title = ParamUtil.getString(req, "title");
 		String layoutId = ParamUtil.getString(req, "layoutId");
 		String ownerId = ParamUtil.getString(req, "ownerId");
+
+		String languageId = LanguageUtil.getLanguageId(req);
+		String title = ParamUtil.getString(req, "title");
 
 		PortletPreferences portletSetup =
 			PortletPreferencesFactory.getPortletSetup(
 				portletId, layoutId, ownerId);
 
-		portletSetup.setValue("portlet-setup-title", title);
+		portletSetup.setValue("portlet-setup-title-" + languageId, title);
+		portletSetup.setValue("portlet-setup-use-custom-title", "true");
 
 		portletSetup.store();
 
