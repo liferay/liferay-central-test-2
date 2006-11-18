@@ -42,7 +42,15 @@ public class MetaTagsTag extends com.liferay.taglib.util.IncludeTag {
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		RequestDispatcher rd = ctx.getRequestDispatcher(_PAGE);
+		doTag(_PAGE, ctx, req, res);
+	}
+
+	public static void doTag(
+			String page, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
+		throws IOException, ServletException {
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(page);
 
 		rd.include(req, res);
 	}

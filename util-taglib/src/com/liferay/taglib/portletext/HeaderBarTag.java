@@ -33,12 +33,12 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="IconEditGuestTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="HeaderBarTag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class IconEditGuestTag extends IconTag {
+public class HeaderBarTag extends IconTag {
 
 	public static void doTag(
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
@@ -62,6 +62,6 @@ public class IconEditGuestTag extends IconTag {
 	}
 
 	private static final String _PAGE =
-		"/html/taglib/portlet/icon_edit_guest/page.jsp";
+		"/html/taglib/portlet/header_bar/page.jsp";
 
 }

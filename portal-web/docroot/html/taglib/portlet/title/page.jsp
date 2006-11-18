@@ -22,23 +22,38 @@
  */
 %>
 
-<%@ include file="init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td class="portlet-shadow-tl"><div></div></td>
-	<td class="portlet-shadow-tc" width="100%"></td>
-	<td class="portlet-shadow-tr"><div></div></td>
-</tr>
-<tr>
-	<td class="portlet-shadow-ml">
-	</td>
-	<td width="100%">
+<%
+boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-portlet:title:editable"));
+%>
 
-<div class="portlet-container">
-	<liferay-portlet:header-bar />
+<div class="portlet-wrap-title">
+	<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletDisplay.getTitle() %></span>
+</div>
 
-	<div class="portlet-box">
-		<div class="portlet-minimum-height">
-			<div id="p_p_body_<%= portletDisplay.getId() %>" <%= (portletDisplay.isStateMin()) ? "style=\"display: none;\"" : "" %>>
-    		    <div class="slide-maximize-reference">
+<c:if test="<%= themeDisplay.isSignedIn() && editable %>">
+	<script type="text/javascript">
+		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
+			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
+			onEdit:
+				function(input, textWidth) {
+					input.style.width = (textWidth) + "px";
+					input.style.margin = "1px 0 0 5px";
+				},
+			onComplete:
+				function(newTextObj, oldText) {
+					var newText = newTextObj.innerHTML;
+					if (oldText != newText) {
+						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
+						"?layoutId=<%= layout.getLayoutId() %>" +
+						"&ownerId=<%= layout.getOwnerId() %>" +
+						"&portletId=<%= portletDisplay.getId() %>" +
+						"&title=" + encodeURIComponent(newText);
+
+						AjaxUtil.request(url);
+					}
+				}
+			});
+	</script>
+</c:if>

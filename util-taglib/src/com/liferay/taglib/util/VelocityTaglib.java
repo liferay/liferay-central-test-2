@@ -23,6 +23,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.taglib.portlet.ActionURLTag;
+import com.liferay.taglib.portletext.HeaderBarTag;
 import com.liferay.taglib.portletext.IconBackTag;
 import com.liferay.taglib.portletext.IconCloseTag;
 import com.liferay.taglib.portletext.IconConfigurationTag;
@@ -33,6 +34,7 @@ import com.liferay.taglib.portletext.IconMaximizeTag;
 import com.liferay.taglib.portletext.IconMinimizeTag;
 import com.liferay.taglib.portletext.IconPrintTag;
 import com.liferay.taglib.portletext.RuntimeTag;
+import com.liferay.taglib.portletext.TitleTag;
 import com.liferay.taglib.security.DoAsURLTag;
 import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.MetaTagsTag;
@@ -85,10 +87,34 @@ public class VelocityTaglib {
 		return DoAsURLTag.doTag(doAsUserId, null, false, _pageContext);
 	}
 
+	public String headerBar() throws Exception {
+		_res.recycle();
+
+		HeaderBarTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String headerBar(String page) throws Exception {
+		_res.recycle();
+
+		HeaderBarTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
 	public String iconBack() throws Exception {
 		_res.recycle();
 
 		IconBackTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconBack(String page) throws Exception {
+		_res.recycle();
+
+		IconBackTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}
@@ -101,10 +127,26 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String iconClose(String page) throws Exception {
+		_res.recycle();
+
+		IconCloseTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
 	public String iconConfiguration() throws Exception {
 		_res.recycle();
 
 		IconConfigurationTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconConfiguration(String page) throws Exception {
+		_res.recycle();
+
+		IconConfigurationTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}
@@ -117,10 +159,26 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String iconEdit(String page) throws Exception {
+		_res.recycle();
+
+		IconEditTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
 	public String iconEditGuest() throws Exception {
 		_res.recycle();
 
 		IconEditGuestTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconEditGuest(String page) throws Exception {
+		_res.recycle();
+
+		IconEditGuestTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}
@@ -133,10 +191,26 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String iconHelp(String page) throws Exception {
+		_res.recycle();
+
+		IconHelpTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
 	public String iconMaximize() throws Exception {
 		_res.recycle();
 
 		IconMaximizeTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconMaximize(String page) throws Exception {
+		_res.recycle();
+
+		IconMaximizeTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}
@@ -149,10 +223,26 @@ public class VelocityTaglib {
 		return _res.getString();
 	}
 
+	public String iconMinimize(String page) throws Exception {
+		_res.recycle();
+
+		IconMinimizeTag.doTag(page, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
 	public String iconPrint() throws Exception {
 		_res.recycle();
 
 		IconPrintTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String iconPrint(String page) throws Exception {
+		_res.recycle();
+
+		IconPrintTag.doTag(page, _ctx, _req, _res);
 
 		return _res.getString();
 	}
@@ -237,6 +327,22 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		SearchTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String title() throws Exception {
+		_res.recycle();
+
+		TitleTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String title(boolean editable) throws Exception {
+		_res.recycle();
+
+		TitleTag.doTag(editable, _ctx, _req, _res);
 
 		return _res.getString();
 	}

@@ -87,49 +87,104 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>header-bar</name>
+		<tagclass>com.liferay.taglib.portletext.HeaderBarTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>icon-back</name>
 		<tagclass>com.liferay.taglib.portletext.IconBackTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-close</name>
 		<tagclass>com.liferay.taglib.portletext.IconCloseTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-configuration</name>
 		<tagclass>com.liferay.taglib.portletext.IconConfigurationTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-edit</name>
 		<tagclass>com.liferay.taglib.portletext.IconEditTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-edit-guest</name>
 		<tagclass>com.liferay.taglib.portletext.IconEditGuestTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-help</name>
 		<tagclass>com.liferay.taglib.portletext.IconHelpTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-maximize</name>
 		<tagclass>com.liferay.taglib.portletext.IconMaximizeTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-minimize</name>
 		<tagclass>com.liferay.taglib.portletext.IconMinimizeTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 	<tag>
 		<name>icon-print</name>
 		<tagclass>com.liferay.taglib.portletext.IconPrintTag</tagclass>
 		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
 	</tag>
 
 	<!--
@@ -257,6 +312,21 @@
 		</attribute>
 		<attribute>
 			<name>queryString</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
+		<name>title</name>
+		<tagclass>com.liferay.taglib.portletext.TitleTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>editable</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
