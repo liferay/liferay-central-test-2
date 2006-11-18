@@ -49,9 +49,9 @@ var LayoutConfiguration = {
 		}
 	},	
 
-	toggle : function (ppid, plid) {
+	toggle : function (plid, ppid, doAsUserId) {
 		if (!LayoutConfiguration.menu) {
-			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_p_id=" + ppid + "&p_l_id=" + plid;
+			var url = themeDisplay.getPathMain() + "/portal/render_portlet?p_l_id=" + plid + "&p_p_id=" + ppid + "&doAsUserId=" + doAsUserId;
 			var popup = Alerts.fireMessageBox({
 					width: 250,
 					noCenter: true,

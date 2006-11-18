@@ -25,9 +25,13 @@
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
 <c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(Layout.TYPE_PORTLET) %>">
-	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>&cmd=template&refresh=true" method="post" name="layoutTemplates">
+	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="layoutTemplates">
+	<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>">
+	<input name="<%= Constants.CMD %>" type="hidden" value="template">
+	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= PortalUtil.getLayoutURL(layout, themeDisplay) %>">
+	<input name="refresh" type="hidden" value="true">
 
-	<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px">
+	<table cellpadding="0" cellspacing="10" border="0" width="100%" style="margin-top: 10px;">
 
 	<%
 	int CELLS_PER_ROW = 4;

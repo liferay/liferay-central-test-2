@@ -112,7 +112,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 								<td align="right">
 									<input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "add") %>"
 										onClick="
-											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>');
+											addPortlet('<%= plid %>', '<%= portlet.getPortletId() %>', '<%= themeDisplay.getDoAsUserId() %>');
 
 											if (<%= !portlet.isInstanceable() %>) {
 												var div = document.getElementById('<%= StringUtil.replace(newCategoryPath + ":" + PortalUtil.getPortletTitle(portlet, application, locale), "'", "\\'") %>');

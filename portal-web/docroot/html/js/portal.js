@@ -305,6 +305,7 @@ var LayoutColumns = {
 	highlight: "transparent",
 	layoutMaximized: "",
 	plid: "",
+	doAsUserId: "",
 	arrow: null,
 	
 	displayArrow: function(mode, left, top) {
@@ -447,7 +448,7 @@ var LayoutColumns = {
 		
 		LayoutColumns.displayArrow("none");
 		
-		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition);
+		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition, LayoutColumns.doAsUserId);
 	},
 	
 	onHoverOver: function(item) {

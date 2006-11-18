@@ -104,7 +104,7 @@ portletDisplay.setURLConfiguration("javascript: self.location = '" + Http.encode
 
 // URL close
 
-String urlClose = "javascript: closePortlet('" + plid + "', '" + portletDisplay.getId() + "');";
+String urlClose = "javascript: closePortlet('" + plid + "', '" + portletDisplay.getId() + "', '" + themeDisplay.getDoAsUserId() + "');";
 
 portletDisplay.setURLClose(urlClose.toString());
 
@@ -210,7 +210,7 @@ portletDisplay.setURLMax(urlMax.toString());
 
 // URL min
 
-String urlMin = "javascript: minimizePortlet('" + plid + "', '" + portletDisplay.getId() + "', " + portletDisplay.isStateMin() + ");";
+String urlMin = "javascript: minimizePortlet('" + plid + "', '" + portletDisplay.getId() + "', " + portletDisplay.isStateMin() + ", '" + themeDisplay.getDoAsUserId() + "');";
 
 portletDisplay.setURLMin(urlMin);
 

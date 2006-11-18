@@ -102,7 +102,7 @@
 				title: "<%= UnicodeLanguageUtil.get(pageContext, "layout") %>"
 			});
 
-		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates";
+		url = "<%= themeDisplay.getPathMain() %>/layout_configuration/templates?p_l_id=<%= plid %>&doAsUserId=<%= themeDisplay.getDoAsUserId() %>";
 
 		AjaxUtil.update(url, message);
 	}

@@ -26,7 +26,7 @@ var loadingAnimation = new Image();
 
 loadingAnimation.src =  "<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif";
 
-function addPortlet(plid, portletId) {
+function addPortlet(plid, portletId, doAsUserId) {
 	var refreshPortletList = ",";
 
 	<%
@@ -46,10 +46,10 @@ function addPortlet(plid, portletId) {
 	%>
 
 	if (refreshPortletList.match("," + portletId + ",")) {
-		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&#p_" + portletId) + "&refresh=1";
+		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
-		loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&#p_" + portletId), addPortletReturn);
+		loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>", addPortletReturn);
 
 		var loadingDiv = document.createElement("div");
 		var container = document.getElementById("layout-column_column-1");
@@ -111,7 +111,7 @@ function addPortletHTML(html, container, placeHolder) {
 	return portletId;
 }
 
-function closePortlet(plid, portletId) {
+function closePortlet(plid, portletId, doAsUserId) {
 	if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-remove-this-component") %>')) {
 		var curItem = document.getElementById("p_p_id_" + portletId + "_");
 		var parent = curItem.parentNode;
@@ -129,10 +129,10 @@ function closePortlet(plid, portletId) {
 		}
 
 		if (LayoutColumns.layoutMaximized) {
-			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid) + "&refresh=1";
+			self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 		}
 		else {
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>");
+			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.DELETE %>");
 		}
 	}
 	else {
@@ -140,9 +140,9 @@ function closePortlet(plid, portletId) {
 	}
 }
 
-function minimizePortlet(plid, portletId, restore) {
+function minimizePortlet(plid, portletId, doAsUserId, restore) {
 	if (LayoutColumns.layoutMaximized) {
-		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid) + "&refresh=1";
+		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
 		if (restore) {
@@ -162,7 +162,7 @@ function minimizePortlet(plid, portletId, restore) {
 
 			buttonsEl.innerHTML = html;
 
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&<%= Constants.CMD %>=minimize");
+			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 
 			slideMaximize("p_p_body_" + portletId, 1, 20);
 		}
@@ -183,11 +183,11 @@ function minimizePortlet(plid, portletId, restore) {
 
 			buttonsEl.innerHTML = html;
 
-			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&<%= Constants.CMD %>=minimize");
+			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 		}
 	}
 }
 
-function movePortlet(plid, portletId, columnId, columnPos) {
-	loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=" + columnId + "&p_p_col_pos=" + columnPos + "&<%= Constants.CMD %>=move");
+function movePortlet(plid, portletId, columnId, columnPos, doAsUserId) {
+	loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_col_id=" + columnId + "&p_p_col_pos=" + columnPos + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=move");
 }

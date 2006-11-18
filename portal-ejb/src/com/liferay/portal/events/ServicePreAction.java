@@ -435,8 +435,8 @@ public class ServicePreAction extends Action {
 
 					themeDisplay.setURLAddContent(
 						"LayoutConfiguration.toggle('" +
-							PortletKeys.LAYOUT_CONFIGURATION + "', '" + plid +
-								"');");
+							plid + "', '" +  PortletKeys.LAYOUT_CONFIGURATION +
+								"', '" + doAsUserId + "');");
 				}
 
 				if (hasManageLayoutsPermission) {

@@ -45,6 +45,7 @@ if (themeDisplay.isSignedIn()) {
 	<script type="text/javascript">
 		LayoutColumns.layoutMaximized = <%= layoutMaximized %>;
 		LayoutColumns.plid = "<%= plid %>";
+		LayoutColumns.doAsUserId = "<%= themeDisplay.getDoAsUserId() %>";
 
 		<c:if test="<%= !layoutMaximized %>">
 			LayoutColumns.init([<%
