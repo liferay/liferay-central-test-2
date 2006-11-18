@@ -123,6 +123,7 @@ public class BaseDeployer {
 			!appServerType.equals("jetty") &&
 			!appServerType.equals("oc4j") &&
 			!appServerType.equals("orion") &&
+			!appServerType.equals("pramati") &&
 			!appServerType.equals("resin") &&
 			!appServerType.equals("tomcat") &&
 			!appServerType.equals("weblogic") &&

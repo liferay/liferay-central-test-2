@@ -62,6 +62,7 @@
 				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
 				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />

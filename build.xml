@@ -779,6 +779,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
+		<antcall target="zip-pramati" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -846,6 +847,26 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 			<fileset dir="lib/global" includes="portlet.jar" />
 			<fileset dir="portal-kernel" includes="portal-kernel.jar" />
 		</zip>
+	</target>
+
+	<target name="zip-pramati">
+		<delete file="liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
+
+		<parallel>
+			<exec dir="${app.server.pramati.dir}/server/bin" executable="runliferay.bat" resolveexecutable="true" />
+			<sequential>
+				<sleep seconds="300" />
+
+				<exec dir="${app.server.pramati.dir}/server/bin" executable="remoteshell.bat" resolveexecutable="true">
+					<arg value="-file"/>
+					<arg value="${lp.ext.dir}/servers/pramati/stop.txt" />
+				</exec>
+			</sequential>
+		</parallel>
+
+		<zip zipfile="liferay-portal-pramati-${lp.version.file.name}.zip"
+			basedir="${app.server.pramati.dir}"
+		/>
 	</target>
 
 	<target name="zip-resin">

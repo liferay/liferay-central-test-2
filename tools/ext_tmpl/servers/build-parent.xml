@@ -12,7 +12,7 @@
 		<delete dir="${app.server.orion.dir}/orion" />
 	</target>
 
-	<target name="install-server">
+	<target name="download-server">
 		<antcall target="setproxy" />
 
 		<if>
@@ -26,6 +26,10 @@
 				/>
 			</then>
 		</if>
+	</target>
+
+	<target name="install-server">
+		<antcall target="download-server" />
 
 		<if>
 			<available file="${downloads.dir}/${app.server.zip.name}" />
@@ -121,6 +125,66 @@
 		<delete dir="${app.server.orion.dir}/orion/persistence" />
 
 		<antcall target="configure-orion" />
+	</target>
+
+	<target name="install-pramati">
+		<antcall target="download-server">
+			<param name="app.server.zip.url" value="${app.server.pramati.zip.url}" />
+			<param name="app.server.zip.name" value="${app.server.pramati.zip.name}" />
+			<param name="app.server.dest" value="${app.server.pramati.dir}" />
+		</antcall>
+
+		<copy file="pramati/silent_install.xml.template" tofile="pramati/silent_install.xml" overwrite="yes">
+			<filterset>
+				<filter token="install.path" value="${app.server.pramati.dir}" />
+				<filter token="java.home" value="${env.JAVA_HOME}" />
+			</filterset>
+		</copy>
+
+		<java jar="${downloads.dir}/${app.server.pramati.zip.name}" fork="true">
+			<arg value="-silent"/>
+			<arg value="pramati/silent_install.xml"/>
+		</java>
+
+		<replace
+			file="${app.server.pramati.dir}/server/templates/deploy-config.xml"
+			token="poll-interval-seconds>5"
+			value="poll-interval-seconds>15"
+		/>
+
+		<exec dir="${app.server.pramati.dir}/server/bin" executable="nodecreator.bat" resolveexecutable="true">
+			<arg value="-createj2ee" />
+			<arg value="-name" />
+			<arg value="liferay" />
+			<arg value="-ip" />
+			<arg value="localhost" />
+			<arg value="-namingport" />
+			<arg value="9191" />
+			<arg value="-httpport" />
+			<arg value="8181" />
+		</exec>
+
+		<copy
+			file="${app.server.pramati.dir}/server/bin/runserver.bat"
+			tofile="${app.server.pramati.dir}/server/bin/runliferay.bat"
+		/>
+
+		<replace file="${app.server.pramati.dir}/server/bin/runliferay.bat">
+			<replacefilter
+				token="-server"
+				value="-Xmx512m -XX:MaxPermSize=128m -server"
+			/>
+			<replacefilter
+				token="com.pramati.Server"
+				value="com.pramati.Server -node liferay"
+			/>
+		</replace>
+
+		<copy
+			file="pramati/resource-config.xml.template"
+			tofile="${app.server.pramati.dir}/server/nodes/liferay/config/resource-config.xml"
+			overwrite="yes"
+		/>
 	</target>
 
 	<target name="install-resin">

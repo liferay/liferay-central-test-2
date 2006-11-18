@@ -90,13 +90,16 @@
 
 	<target name="deploy" depends="jar">
 		<if>
-			<and>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
-					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
-				</or>
-				<equals arg1="${app.server.deploy.archive}" arg2="ear" />
-			</and>
+			<or>
+				<and>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<equals arg1="${app.server.deploy.archive}" arg2="ear" />
+				</and>
+				<equals arg1="${app.server.type}" arg2="pramati" />
+			</or>
 			<then>
 				<unjar src="${jar.file}.jar" dest="${app.server.portal.dir}/${jar.file}.jar" />
 			</then>
