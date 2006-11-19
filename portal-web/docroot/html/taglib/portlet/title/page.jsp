@@ -46,7 +46,8 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 					var newText = newTextObj.innerHTML;
 					if (oldText != newText) {
 						var url = "<%= themeDisplay.getPathMain() %>/portlet_configuration/update_title" +
-						"?layoutId=<%= layout.getLayoutId() %>" +
+						"?doAsUserId=<%= themeDisplay.getDoAsUserId() %>" +
+						"&layoutId=<%= layout.getLayoutId() %>" +
 						"&ownerId=<%= layout.getOwnerId() %>" +
 						"&portletId=<%= portletDisplay.getId() %>" +
 						"&title=" + encodeURIComponent(newText);
