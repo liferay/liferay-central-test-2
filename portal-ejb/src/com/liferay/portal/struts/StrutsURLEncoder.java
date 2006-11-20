@@ -107,8 +107,9 @@ public class StrutsURLEncoder implements URLEncoder {
 		String encodedURL = path;
 
 		if (path.startsWith("//") ||
-			path.startsWith(_servletMapping) ||
-			path.startsWith(_contextPath + _servletMapping)) {
+			path.startsWith(_contextPath) ||
+			path.startsWith(_servletMapping)) {
+			//path.startsWith(_contextPath + _servletMapping)) {
 
 			// Struts uses &amp; instead of & to delimit parameter key value
 			// pairs when you set the "name" attribute for html:link.
@@ -137,7 +138,7 @@ public class StrutsURLEncoder implements URLEncoder {
 			String strutsAction = path;
 			String queryString = StringPool.BLANK;
 
-			int pos = strutsAction.indexOf("?");
+			int pos = strutsAction.indexOf(StringPool.QUESTION);
 
 			if (pos != -1) {
 				strutsAction = path.substring(0, pos);
@@ -146,16 +147,29 @@ public class StrutsURLEncoder implements URLEncoder {
 
 			// Set the Struts action
 
-			if (Validator.isNotNull(_contextPath)) {
-				strutsAction = strutsAction.substring(
-					_contextPath.length(), strutsAction.length());
-			}
-
 			if (strutsAction.startsWith("c/")) {
 				strutsAction = strutsAction.substring(1);
 			}
 			else if (strutsAction.startsWith("/c/")) {
 				strutsAction = strutsAction.substring(2);
+			}
+
+			if (Validator.isNotNull(_contextPath)) {
+				strutsAction = strutsAction.substring(
+					_contextPath.length(), strutsAction.length());
+			}
+
+			if (strutsAction.startsWith(_servletMapping)) {
+				strutsAction = strutsAction.substring(
+					_servletMapping.length(), strutsAction.length());
+			}
+
+			if (!strutsAction.startsWith(StringPool.SLASH)) {
+				strutsAction = StringPool.SLASH + strutsAction;
+			}
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Struts action " + strutsAction);
 			}
 
 			_portletURL.setParameter("struts_action", strutsAction);
