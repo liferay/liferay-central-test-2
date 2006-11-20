@@ -75,8 +75,6 @@
 		</action>
 
 		<action path="/sample_struts_portlet/z" forward="portlet.sample_struts_portlet.z" />
-
-		<action path="/sample_struts_portlet/z_with_sub_nav" forward="portlet.sample_struts_portlet.z_with_sub_nav" />
 	</action-mappings>
 
 	<!-- Custom Request Processor -->

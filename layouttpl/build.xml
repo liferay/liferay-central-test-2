@@ -21,18 +21,19 @@
 			classname="com.liferay.portal.tools.LayoutTemplateDeployer"
 			classpathref="project.classpath"
 			fork="true"
-			newenvironment="true">
+			newenvironment="true"
+		>
 
-				<!-- Required Arguments -->
+			<!-- Required Arguments -->
 
-				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-				<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.base.dir=./" />
+			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
 
-				<!-- Specific WARs -->
+			<!-- Specific WARs -->
 
-				<arg line="${deploy.specific.wars}" />
+			<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>

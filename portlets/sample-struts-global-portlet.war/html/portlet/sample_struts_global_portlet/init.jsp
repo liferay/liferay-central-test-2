@@ -22,20 +22,24 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+<%@ taglib uri="http://struts.apache.org/tags-bean" prefix="bean" %>
+<%@ taglib uri="http://struts.apache.org/tags-html" prefix="html" %>
+<%@ taglib uri="http://struts.apache.org/tags-logic" prefix="logic" %>
+<%@ taglib uri="http://struts.apache.org/tags-nested" prefix="nested" %>
+<%@ taglib uri="http://struts.apache.org/tags-tiles" prefix="tiles" %>
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+<%@ page import="com.liferay.portal.theme.PortletDisplay" %>
+<%@ page import="com.liferay.portal.theme.ThemeDisplay" %>
+<%@ page import="com.liferay.portal.util.WebKeys" %>
 
-<br><div class="beta-separator"></div><br>
+<%@ page import="java.util.Enumeration" %>
+<%@ page import="java.util.HashMap" %>
+<%@ page import="java.util.Iterator" %>
+<%@ page import="java.util.Map" %>
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
+<%@ page import="javax.portlet.PortletRequest" %>
+<%@ page import="javax.portlet.PortletSession" %>
 
-<br>
-
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+<portlet:defineObjects />

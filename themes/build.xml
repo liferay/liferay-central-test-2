@@ -8,29 +8,30 @@
 			classname="com.liferay.portal.tools.ThemeDeployer"
 			classpathref="project.classpath"
 			fork="true"
-			newenvironment="true">
+			newenvironment="true"
+		>
 
-				<!-- Required Arguments -->
+			<!-- Required Arguments -->
 
-				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-				<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-theme.tld" />
-				<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-util.tld" />
-				<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.base.dir=./" />
+			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+			<jvmarg value="-Ddeployer.theme.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-theme.tld" />
+			<jvmarg value="-Ddeployer.util.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-util.tld" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
 
-				<!-- Optional Arguments -->
+			<!-- Optional Arguments -->
 
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
 
-				<!-- Dependent Libraries -->
+			<!-- Dependent Libraries -->
 
-				<arg value="${project.dir}/util-java/util-java.jar" />
-				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+			<arg value="${project.dir}/util-java/util-java.jar" />
+			<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 
-				<!-- Specific WARs -->
+			<!-- Specific WARs -->
 
-				<arg line="${deploy.specific.wars}" />
+			<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>

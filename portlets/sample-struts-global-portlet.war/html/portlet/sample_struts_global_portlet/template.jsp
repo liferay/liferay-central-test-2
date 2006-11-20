@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+<%@ include file="/html/portlet/sample_struts_global_portlet/init.jsp" %>
 
 <tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
 
@@ -33,7 +33,7 @@
 <br><div class="beta-separator"></div><br>
 
 <div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
+	<jsp:include page="/html/portlet/sample_struts_global_portlet/nav.jsp" flush="true" />
 </div>
 
 <br>

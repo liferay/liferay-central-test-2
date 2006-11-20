@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,22 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+package com.sample.strutsglobal.struts;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import com.liferay.portal.struts.StrutsUtil;
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+import java.io.IOException;
 
-<br><div class="beta-separator"></div><br>
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
+import org.apache.struts.tiles.TilesRequestProcessor;
 
-<br>
+/**
+ * <a href="SampleRequestProcessor.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class SampleRequestProcessor extends TilesRequestProcessor {
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+	protected void doForward(
+			String uri, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		StrutsUtil.forward(uri, getServletContext(), req, res);
+	}
+
+}

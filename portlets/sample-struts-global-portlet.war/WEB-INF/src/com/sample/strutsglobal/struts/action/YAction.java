@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,22 +19,41 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+package com.sample.strutsglobal.struts.action;
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+import com.liferay.portal.struts.PortletAction;
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
-<br><div class="beta-separator"></div><br>
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
+/**
+ * <a href="YAction.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class YAction extends PortletAction {
 
-<br>
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+		if (_log.isInfoEnabled()) {
+			_log.info("render");
+		}
+
+		return mapping.findForward("portlet.sample_struts_global_portlet.y");
+	}
+
+	private static Log _log = LogFactory.getLog(YAction.class);
+
+}

@@ -22,20 +22,24 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+<%@ include file="/html/portlet/sample_struts_global_portlet/init.jsp" %>
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/sample_struts_global_portlet/upload" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
-
-<br><div class="beta-separator"></div><br>
-
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		File Location
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<input name="<portlet:namespace />file_location" size="30" type="file">
+	</td>
+</tr>
+</table>
 
 <br>
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+<input type="submit" value="Upload File">
+
+</form>

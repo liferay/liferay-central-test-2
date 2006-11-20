@@ -22,20 +22,42 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+<%@ include file="/html/portlet/sample_struts_global_portlet/init.jsp" %>
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+<font class="portlet-font" style="font-size: x-small;">
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+<%
+Map userInfo = (Map)renderRequest.getAttribute(PortletRequest.USER_INFO);
 
-<br><div class="beta-separator"></div><br>
+if (userInfo == null) {
+%>
 
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
+	The user information map is null.
 
-<br>
+<%
+}
+else if (userInfo.size() == 0) {
+%>
 
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+	The user information map is not null but has 0 entries.
+
+<%
+}
+else {
+	Iterator itr = userInfo.entrySet().iterator();
+
+	while (itr.hasNext()) {
+		Map.Entry entry = (Map.Entry)itr.next();
+
+		String key = (String)entry.getKey();
+		String value = (String)entry.getValue();
+%>
+
+		<%= key %>=<%= value %><br>
+
+<%
+	}
+}
+%>
+
+</font>

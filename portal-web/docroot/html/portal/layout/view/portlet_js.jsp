@@ -140,7 +140,7 @@ function closePortlet(plid, portletId, doAsUserId) {
 	}
 }
 
-function minimizePortlet(plid, portletId, doAsUserId, restore) {
+function minimizePortlet(plid, portletId, restore, doAsUserId) {
 	if (LayoutColumns.layoutMaximized) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}

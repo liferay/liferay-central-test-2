@@ -22,20 +22,10 @@
  */
 %>
 
-<%@ include file="/html/portlet/sample_struts_portlet/init.jsp" %>
+<%@ include file="/html/portlet/sample_struts_global_portlet/init.jsp" %>
 
-<tiles:useAttribute id="tilesPortletContent" name="portlet_content" classname="java.lang.String" ignore="true" />
+<b>Page X</b>
 
-<div>
-	<jsp:include page='<%= "/html" + tilesPortletContent %>' flush="true" />
-</div>
+<br><br>
 
-<br><div class="beta-separator"></div><br>
-
-<div>
-	<jsp:include page="/html/portlet/sample_struts_portlet/nav.jsp" flush="true" />
-</div>
-
-<br>
-
-<img hspace="0" src="<%= request.getContextPath() %>/html/image/struts-power.gif" vspace="0">
+<%--<bean:message key="hello-there" />--%>

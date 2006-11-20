@@ -37,6 +37,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-struts-global-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 
@@ -89,6 +93,10 @@
 		</antcall>
 
 		<antcall target="compile-module">
+			<param name="module.name" value="sample-struts-global-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
 			<param name="module.name" value="sample-struts-portlet" />
 		</antcall>
 
@@ -101,11 +109,21 @@
 		<mkdir dir="${module.name}.war/WEB-INF/classes" />
 		<mkdir dir="${module.name}.war/WEB-INF/lib" />
 
-		<path id="web-lib.classpath">
-			<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
-			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
-			<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
-		</path>
+		<if>
+			<equals arg1="${module.name}" arg2="sample-struts-global-portlet" />
+			<then>
+				<path id="web-lib.classpath">
+					<path refid="project.classpath" />
+				</path>
+			</then>
+			<else>
+				<path id="web-lib.classpath">
+					<fileset dir="${project.dir}/lib/portal" includes="commons-logging.jar,log4j.jar" />
+					<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
+					<fileset dir="${module.name}.war/WEB-INF/lib" includes="*.jar" />
+				</path>
+			</else>
+		</if>
 
 		<javac
 			classpathref="web.classpath"
@@ -157,6 +175,10 @@
 			file="sample-spring-portlet.war"
 			tofile="../sample-spring-portlet-${lp.version.file.name}.war"
 		/>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample-struts-global-portlet" />
+		</antcall>
 
 		<antcall target="war-module">
 			<param name="module.name" value="sample-struts-portlet" />
@@ -252,33 +274,34 @@
 			classname="com.liferay.portal.tools.PortletDeployer"
 			classpathref="project.classpath"
 			fork="true"
-			newenvironment="true">
+			newenvironment="true"
+		>
 
-				<!-- Required Arguments -->
+			<!-- Required Arguments -->
 
-				<jvmarg value="-Ddeployer.base.dir=./" />
-				<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
-				<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
-				<jvmarg value="-Ddeployer.portlet.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-portlet.tld" />
-				<jvmarg value="-Ddeployer.unpack.war=true" />
+			<jvmarg value="-Ddeployer.base.dir=./" />
+			<jvmarg value="-Ddeployer.dest.dir=${app.server.deploy.dir}" />
+			<jvmarg value="-Ddeployer.app.server.type=${app.server.type}" />
+			<jvmarg value="-Ddeployer.portlet.taglib.dtd=${project.dir}/util-taglib/classes/META-INF/liferay-portlet.tld" />
+			<jvmarg value="-Ddeployer.unpack.war=true" />
 
-				<!-- Optional Arguments -->
+			<!-- Optional Arguments -->
 
-				<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
+			<jvmarg value="-Ddeployer.tomcat.lib.dir=${app.server.tomcat.lib.global.dir}" />
 
-				<!-- Dependent Libraries -->
+			<!-- Dependent Libraries -->
 
-				<arg value="${project.dir}/util-bridges/util-bridges.jar" />
-				<arg value="${project.dir}/util-java/util-java.jar" />
-				<arg value="${project.dir}/util-taglib/util-taglib.jar" />
+			<arg value="${project.dir}/util-bridges/util-bridges.jar" />
+			<arg value="${project.dir}/util-java/util-java.jar" />
+			<arg value="${project.dir}/util-taglib/util-taglib.jar" />
 
-				<!-- Specific WARs -->
+			<!-- Specific WARs -->
 
-				<!--
-				<arg line="sample-dao-portlet.war sample-jsf-myfaces-portlet.war" />
-				-->
+			<!--
+			<arg line="sample-dao-portlet.war sample-jsf-myfaces-portlet.war" />
+			-->
 
-				<arg line="${deploy.specific.wars}" />
+			<arg line="${deploy.specific.wars}" />
 		</java>
 	</target>
 </project>
