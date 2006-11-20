@@ -45,10 +45,10 @@ Jaxen 1.1b4
 JavaMail 1.4
 Jazzy 0.5
 jBPM 3.1.2
-JCommon 1.0.0
+JCommon 1.0.6
 JCR 1.0
 JDOM 1.0
-JFreeChart 1.0.1 (removed META-INF/MANIFEST.MF)
+JFreeChart 1.0.3
 JGroups 2.2.8
 JMS 1.1
 JMX 1.0.1.04
