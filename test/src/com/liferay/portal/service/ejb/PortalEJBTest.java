@@ -20,25 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.http;
+package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.model.User;
 import com.liferay.test.TestConstants;
 
 import java.util.Calendar;
 import java.util.Locale;
+import com.liferay.portal.service.ejb.UserServiceHome;
+import com.liferay.portal.service.spring.UserService;
+import com.liferay.portal.service.ejb.PortalServiceHome;
+import com.liferay.portal.service.spring.PortalService;
+
+import java.util.Properties;
+
+import javax.naming.InitialContext;
+
+import javax.rmi.PortableRemoteObject;
 
 /**
- * <a href="PortalHttpTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalEJBTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortalHttpTest extends BaseHttpTest {
+public class PortalEJBTest extends BaseEJBTest {
 
 	public void test() {
 		try {
-			PortalServiceHttp.test(getHttpPrincipal());
+			getPortalService().test();
 
 			boolean autoUserId = true;
 			String userId = "";
@@ -46,11 +56,11 @@ public class PortalHttpTest extends BaseHttpTest {
 			String password1 = null;
 			String password2 = null;
 			boolean passwordReset = false;
-			String emailAddress = "UserServiceHttpTest@liferay.com";
+			String emailAddress = "UserServiceEJBTest@liferay.com";
 			Locale locale = Locale.getDefault();
-			String firstName = "UserServiceHttpTest";
+			String firstName = "UserServiceEJBTest";
 			String middleName = "";
-			String lastName = "UserServiceHttpTest";
+			String lastName = "UserServiceEJBTest";
 			String nickName = null;
 			String prefixId = null;
 			String suffixId = null;
@@ -62,18 +72,34 @@ public class PortalHttpTest extends BaseHttpTest {
 			String organizationId = null;
 			String locationId = null;
 
-			User user = UserServiceHttp.addUser(
-				getHttpPrincipal(), TestConstants.COMPANY_ID, autoUserId,
-				userId, autoPassword, password1, password2, passwordReset,
-				emailAddress, locale, firstName, middleName, lastName, nickName,
-				prefixId, suffixId, male, birthdayMonth, birthdayDay,
-				birthdayYear, jobTitle, organizationId, locationId);
+			User user = getUserService().addUser(
+				TestConstants.COMPANY_ID, autoUserId, userId, autoPassword,
+				password1, password2, passwordReset, emailAddress, locale,
+				firstName, middleName, lastName, nickName, prefixId, suffixId,
+				male, birthdayMonth, birthdayDay, birthdayYear, jobTitle,
+				organizationId, locationId);
 
-			UserServiceHttp.deleteUser(getHttpPrincipal(), user.getUserId());
+			getUserService().deleteUser(user.getUserId());
 		}
 		catch (Exception e) {
 			fail(e);
 		}
+	}
+
+	protected PortalService getPortalService() throws Exception {
+		PortalServiceHome home = (PortalServiceHome)lookup(
+			"com_liferay_portal_service_ejb_PortalServiceEJB",
+			PortalServiceHome.class);
+
+		return home.create();
+	}
+
+	protected UserService getUserService() throws Exception {
+		UserServiceHome home = (UserServiceHome)lookup(
+			"com_liferay_portal_service_ejb_UserServiceEJB",
+			UserServiceHome.class);
+
+		return home.create();
 	}
 
 }

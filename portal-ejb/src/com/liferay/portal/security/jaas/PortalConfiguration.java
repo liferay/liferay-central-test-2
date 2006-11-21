@@ -49,12 +49,13 @@ public class PortalConfiguration extends Configuration {
 		AppConfigurationEntry[] aceArray =
 			_config.getAppConfigurationEntry(name);
 
-		if (name != null && !name.equals(Constants.JBOSS_LOGIN_MODULE)) {
+		if ((name != null) && !name.equals(Constants.JBOSS_LOGIN_MODULE)) {
 			if (_log.isDebugEnabled()) {
 				_log.debug(name);
 			}
 
 			Map options = null;
+
 			if (aceArray == null || aceArray.length == 0) {
 				options = new HashMap();
 			}

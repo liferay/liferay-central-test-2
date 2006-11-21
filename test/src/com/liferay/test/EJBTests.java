@@ -20,50 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.client.portal.service.http;
+package com.liferay.test;
 
-import com.liferay.test.TestCase;
-import com.liferay.test.TestProps;
-import com.liferay.util.Encryptor;
+import com.liferay.portal.service.ejb.PortalEJBTest;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import junit.framework.Test;
+import junit.framework.TestSuite;
+
+import junit.textui.TestRunner;
 
 /**
- * <a href="BaseSoapTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EJBTests.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class BaseSoapTest extends TestCase {
+public class EJBTests {
 
-	protected URL getURL(String serviceName) throws MalformedURLException {
-		return getURL(serviceName, true);
+	public static void main(String[] args) {
+		TestRunner runner = new TestRunner(new ResultPrinter(System.out));
+
+		runner.doRun(suite());
 	}
 
-	protected URL getURL(String serviceName, boolean authenticated)
-		throws MalformedURLException {
+	public static Test suite() {
+		TestSuite suite = new TestSuite();
 
-		String url = TestProps.get("soap.url");
+		suite.addTestSuite(PortalEJBTest.class);
 
-		if (authenticated) {
-			String userId = TestProps.get("soap.user.id");
-			String password = Encryptor.digest(TestProps.get("soap.password"));
-
-			int pos = url.indexOf("://");
-
-			String protocol = url.substring(0, pos + 3);
-			String host = url.substring(pos + 3, url.length());
-
-			url =
-				protocol + userId + ":" + password + "@" + host +
-					"/tunnel-web/secure/axis/" + serviceName;
-		}
-		else {
-			url += "/tunnel-web/axis/" + serviceName;
-		}
-
-		return new URL(url);
+		return suite;
 	}
 
 }

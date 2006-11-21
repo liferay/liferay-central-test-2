@@ -40,12 +40,20 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			String parentCategoryId = "-1";
 			String name = "Test Category";
 			String description = "This is a test category.";
-			boolean addCommunityPermissions = true;
-			boolean addGuestPermissions = true;
+
+			String[] communityPermissions = new String[0];
+			String[] guestPermissions = new String[0];
+
+			// Axis 1.4 has a bug where it will try to deserialize a boolean
+			// addCommunityPermissions to an array communityPermissions when the
+			// method names are the same.
+
+			//boolean addCommunityPermissions = true;
+			//boolean addGuestPermissions = true;
 
 			MBCategoryModel category = getMBCategoryService().addCategory(
-				plid, parentCategoryId, name, description,
-				addCommunityPermissions, addGuestPermissions);
+				plid, parentCategoryId, name, description, communityPermissions,
+				guestPermissions);
 
 			String categoryId = category.getCategoryId();
 			String subject = "Test Subject";
@@ -56,14 +64,14 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 
 			MBMessageModel message = getMBMessageService().addMessage(
 				categoryId, subject, body, files, anonymous, priority,
-				addCommunityPermissions, addGuestPermissions);
+				communityPermissions, guestPermissions);
 
 			getMBMessageService().deleteMessage(message.getMessageId());
 
 			getMBCategoryService().deleteCategory(category.getCategoryId());
 		}
 		catch (Exception e) {
-			fail();
+			fail(e);
 		}
 	}
 

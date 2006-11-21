@@ -20,50 +20,41 @@
  * SOFTWARE.
  */
 
-package com.liferay.client.portal.service.http;
+package com.liferay.portal.service.ejb;
+
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.test.TestProps;
 
 import com.liferay.test.TestCase;
-import com.liferay.test.TestProps;
-import com.liferay.util.Encryptor;
+import com.liferay.portal.model.User;
+import com.liferay.test.TestConstants;
 
-import java.net.MalformedURLException;
-import java.net.URL;
+import java.util.Calendar;
+import java.util.Locale;
+import com.liferay.portal.service.ejb.PortalServiceHome;
+import com.liferay.portal.service.spring.PortalService;
+
+import java.util.Properties;
+
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
+
+import javax.rmi.PortableRemoteObject;
 
 /**
- * <a href="BaseSoapTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseEJBTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class BaseSoapTest extends TestCase {
+public class BaseEJBTest extends TestCase {
 
-	protected URL getURL(String serviceName) throws MalformedURLException {
-		return getURL(serviceName, true);
-	}
+	protected Object lookup(String jndiName, Class c) throws NamingException {
+		InitialContext ctx = new InitialContext(TestProps.getProperties());
 
-	protected URL getURL(String serviceName, boolean authenticated)
-		throws MalformedURLException {
+		Object obj = ctx.lookup(jndiName);
 
-		String url = TestProps.get("soap.url");
-
-		if (authenticated) {
-			String userId = TestProps.get("soap.user.id");
-			String password = Encryptor.digest(TestProps.get("soap.password"));
-
-			int pos = url.indexOf("://");
-
-			String protocol = url.substring(0, pos + 3);
-			String host = url.substring(pos + 3, url.length());
-
-			url =
-				protocol + userId + ":" + password + "@" + host +
-					"/tunnel-web/secure/axis/" + serviceName;
-		}
-		else {
-			url += "/tunnel-web/axis/" + serviceName;
-		}
-
-		return new URL(url);
+		return PortableRemoteObject.narrow(obj, c);
 	}
 
 }

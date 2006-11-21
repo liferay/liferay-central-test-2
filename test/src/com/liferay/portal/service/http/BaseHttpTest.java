@@ -23,9 +23,8 @@
 package com.liferay.portal.service.http;
 
 import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.test.TestCase;
 import com.liferay.test.TestProps;
-
-import junit.framework.TestCase;
 
 /**
  * <a href="BaseHttpTest.java.html"><b><i>View Source</i></b></a>

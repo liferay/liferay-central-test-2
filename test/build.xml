@@ -8,6 +8,21 @@
 		<echo message="listening on a host that matches what is set in test.properties." />
 		<echo message="" />
 
+		<path id="ejb.classpath">
+			<fileset dir="${app.server.dir}/lib" includes="*.jar" />
+			<fileset dir="${app.server.dir}/server/default/lib" includes="*.jar" />
+			<path refid="project.classpath" />
+		</path>
+
+		<java
+			classname="com.liferay.test.EJBTests"
+			classpathref="ejb.classpath"
+			fork="true"
+			newenvironment="true"
+		>
+			<jvmarg value="-Djava.security.auth.login.config=${app.server.dir}/client/auth.conf" />
+		</java>
+
 		<java
 			classname="com.liferay.test.HttpTests"
 			classpathref="project.classpath"

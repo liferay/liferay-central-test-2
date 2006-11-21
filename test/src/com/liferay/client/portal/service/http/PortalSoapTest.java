@@ -38,6 +38,8 @@ public class PortalSoapTest extends BaseSoapTest {
 
 	public void test() {
 		try {
+			getPortalService().test();
+
 			boolean autoUserId = true;
 			String userId = "";
 			boolean autoPassword = true;
@@ -70,8 +72,18 @@ public class PortalSoapTest extends BaseSoapTest {
 			getUserService().deleteUser(user.getUserId());
 		}
 		catch (Exception e) {
-			fail();
+			fail(e);
 		}
+	}
+
+	protected PortalServiceSoap getPortalService() throws Exception {
+		PortalServiceSoapServiceLocator locator =
+			new PortalServiceSoapServiceLocator();
+
+		PortalServiceSoap service = locator.getPortal_PortalService(
+			getURL("Portal_PortalService"));
+
+		return service;
 	}
 
 	protected UserServiceSoap getUserService() throws Exception {
