@@ -89,6 +89,7 @@ import javax.mail.Part;
 import javax.mail.Session;
 import javax.mail.Store;
 import javax.mail.Transport;
+import javax.mail.UIDFolder.FetchProfileItem;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeBodyPart;
 import javax.mail.internet.MimeMessage;
@@ -509,8 +510,10 @@ public class MailUtil {
 
 			FetchProfile fetchProfile = new FetchProfile();
 
+			fetchProfile.add(IMAPFolder.FetchProfileItem.SIZE);
 			fetchProfile.add(FetchProfile.Item.ENVELOPE);
 			fetchProfile.add(FetchProfile.Item.FLAGS);
+			fetchProfile.add(FetchProfileItem.UID);
 
 			folder.fetch(messages, fetchProfile);
 

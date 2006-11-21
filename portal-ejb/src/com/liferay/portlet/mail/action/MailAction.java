@@ -207,6 +207,8 @@ public class MailAction extends JSONAction {
 	}
 
 	protected String getPreview(HttpServletRequest req) throws Exception {
+		long start = System.currentTimeMillis();
+
 		JSONObject jsonObj = new JSONObject();
 
 		String folderId = ParamUtil.getString(req, "folderId");
@@ -222,6 +224,12 @@ public class MailAction extends JSONAction {
 
 		jsonObj.put("folderId", folderId);
 		jsonObj.put("headers", jsonEnvelopes);
+
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				"Total time to get preview " +
+					(System.currentTimeMillis() - start) + "ms");
+		}
 
 		return jsonObj.toString();
 	}
