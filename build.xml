@@ -768,6 +768,41 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<ant dir="${lp.ext.dir}" target="deploy" inheritAll="false" />
 	</target>
 
+	<target name="build-ext-pramati">
+		<delete dir="${app.server.pramati.dir}" />
+
+		<ant dir="${lp.ext.dir}/servers" target="install-pramati" inheritAll="false" />
+
+		<echo file="app.server.${env.COMPUTERNAME}.properties">app.server.type=pramati</echo>
+
+		<antcall target="deploy" inheritAll="false" />
+
+		<delete file="app.server.${env.COMPUTERNAME}.properties" />
+
+		<parallel>
+			<exec dir="${app.server.pramati.bin.dir}" executable="runliferay.bat" resolveexecutable="true" />
+
+			<sequential>
+				<sleep seconds="500" />
+
+				<exec dir="${app.server.pramati.bin.dir}" executable="remoteshell.bat" resolveexecutable="true">
+					<arg value="-file"/>
+					<arg value="${lp.ext.dir}/servers/pramati/stop.txt" />
+				</exec>
+
+				<sleep seconds="30" />
+			</sequential>
+		</parallel>
+
+		<delete dir="${app.server.pramati.dir}/server/lf" />
+
+		<copy
+			file="${project.dir}/tools/ext_tmpl/servers/pramati/server/license.key"
+			todir="${app.server.pramati.dir}/server"
+			overwrite="yes"
+		/>
+	</target>
+
 	<target name="build-ext-resin">
 		<echo file="${lp.ext.dir}/app.server.${user.name}.properties">app.server.type=resin</echo>
 		
@@ -905,18 +940,6 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip-pramati">
 		<delete file="liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
-
-		<parallel>
-			<exec dir="${app.server.pramati.dir}/server/bin" executable="runliferay.bat" resolveexecutable="true" />
-			<sequential>
-				<sleep seconds="300" />
-
-				<exec dir="${app.server.pramati.dir}/server/bin" executable="remoteshell.bat" resolveexecutable="true">
-					<arg value="-file"/>
-					<arg value="${lp.ext.dir}/servers/pramati/stop.txt" />
-				</exec>
-			</sequential>
-		</parallel>
 
 		<zip zipfile="liferay-portal-pramati-${lp.version.file.name}.zip"
 			basedir="${app.server.pramati.dir}"
