@@ -132,12 +132,19 @@ public class EARXMLBuilder {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd\">\n");
+		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
 
 		sb.append("\n<pramati-j2ee-server>\n");
 		sb.append("\t<vhost-name>default</vhost-name>\n");
 		sb.append("\t<auto-start>TRUE</auto-start>\n");
 		sb.append("\t<realm-name>PortalRealm</realm-name>\n");
+		sb.append("\t<deployment-properties app-versioning=\"true\" delete-previous-versions=\"false\" forced-deployment=\"false\">\n");
+		sb.append("\t\t<jsp-files pre-compilation=\"true\" />\n");
+		sb.append("\t\t<ejb-files retain-generated-code=\"false\" />\n");
+		sb.append("\t\t<validation>\n");
+		sb.append("\t\t\t<app-validation on-prepare=\"true\" on-start=\"true\" />\n");
+		sb.append("\t\t</validation>\n");
+		sb.append("\t</deployment-properties>\n");
 
 		for (int i = 0; i < EJB_PATHS.length; i++) {
 			sb.append(_buildPramatiXMLEJBModule(EJB_PATHS[i]));
@@ -224,7 +231,18 @@ public class EARXMLBuilder {
 
 		Document doc = reader.read(new File(filePath));
 
-		Iterator itr = doc.getRootElement().elements("ejb-local-ref").iterator();
+		Iterator itr = doc.getRootElement().elements("ejb-ref").iterator();
+
+		while (itr.hasNext()) {
+			Element ejbLocalRef = (Element)itr.next();
+
+			sb.append("\t\t<ejb-ref>\n");
+			sb.append("\t\t\t<ejb-ref-name>").append(ejbLocalRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sb.append("\t\t\t<ejb-link>").append(ejbLocalRef.elementText("ejb-link")).append("__PRAMATI_LOCAL</ejb-link>\n");
+			sb.append("\t\t</ejb-ref>\n");
+		}
+
+		itr = doc.getRootElement().elements("ejb-local-ref").iterator();
 
 		while (itr.hasNext()) {
 			Element ejbLocalRef = (Element)itr.next();

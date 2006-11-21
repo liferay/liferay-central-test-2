@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd">
+<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd">
 
 <pramati-j2ee-server>
 	<vhost-name>default</vhost-name>
@@ -13,11 +13,22 @@
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
 			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_counter_service_ejb_CounterLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
 		</ejb>
 		<ejb>
 			<name>com_liferay_counter_service_ejb_CounterServiceEJB</name>
@@ -25,11 +36,21 @@
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
 			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_counter_service_ejb_CounterServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_counter_service_ejb_CounterServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
 		</ejb>
 	</ejb-module>
 </pramati-j2ee-server>

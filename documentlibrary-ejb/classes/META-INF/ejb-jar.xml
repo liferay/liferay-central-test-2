@@ -26,6 +26,13 @@
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileShortcutLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceHome</local-home>
+				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileVersionLocalServiceHome</local-home>
@@ -79,6 +86,13 @@
 				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceHome</local-home>
 				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFileEntryLocalServiceEJB</local>
 				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileShortcutLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceHome</local-home>
+				<local>com.liferay.portlet.documentlibrary.service.ejb.DLFileShortcutLocalServiceEJB</local>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>

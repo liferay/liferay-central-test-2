@@ -231,7 +231,7 @@ public class EJBXMLBuilder {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd\">\n");
+		sb.append("<!DOCTYPE pramati-j2ee-server PUBLIC \"-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN\" \"http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd\">\n");
 
 		sb.append("\n<pramati-j2ee-server>\n");
 		sb.append("\t<vhost-name>default</vhost-name>\n");
@@ -255,7 +255,7 @@ public class EJBXMLBuilder {
 			sb.append("\t\t\t<min-pool-size>20</min-pool-size>\n");
 			sb.append("\t\t\t<enable-freepool>false</enable-freepool>\n");
 			sb.append("\t\t\t<pool-waittimeout-millis>60000</pool-waittimeout-millis>\n");
-
+			sb.append("\t\t\t<pk-waittimeout-millis/>\n");
 			sb.append("\t\t\t<low-activity-interval>20</low-activity-interval>\n");
 			sb.append("\t\t\t<is-secure>false</is-secure>\n");
 			sb.append("\t\t\t<is-clustered>true</is-clustered>\n");
@@ -264,12 +264,11 @@ public class EJBXMLBuilder {
 
 			if (displayName.endsWith("LocalServiceEJB")) {
 				sb.append("\t\t\t<jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</jndi-name>\n");
+				sb.append("\t\t\t<local-jndi-name>").append(entity.elementText("ejb-name")).append("__PRAMATI_LOCAL").append("</local-jndi-name>\n");
 			}
 			else {
 				sb.append("\t\t\t<jndi-name>").append(entity.elementText("ejb-name")).append("</jndi-name>\n");
 			}
-
-			sb.append("\t\t\t<local-jndi-name>").append(entity.elementText("ejb-name")).append("__PRAMATI_LOCAL").append("</local-jndi-name>\n");
 
 			sb.append(_buildPramatiXMLRefs(entity));
 
@@ -293,16 +292,39 @@ public class EJBXMLBuilder {
 	private String _buildPramatiXMLRefs(Element entity) {
 		StringBuffer sb = new StringBuffer();
 
-		Iterator itr = entity.elements("ejb-local-ref").iterator();
+		Iterator itr = entity.elements("ejb-ref").iterator();
+
+		while (itr.hasNext()) {
+			Element ejbRef = (Element)itr.next();
+
+			sb.append("\t\t\t<ejb-ref>\n");
+			sb.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
+			sb.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("</ejb-link>\n");
+			sb.append("\t\t\t</ejb-ref>\n");
+		}
+
+		itr = entity.elements("ejb-local-ref").iterator();
 
 		while (itr.hasNext()) {
 			Element ejbRef = (Element)itr.next();
 
 			sb.append("\t\t\t<ejb-local-ref>\n");
 			sb.append("\t\t\t\t<ejb-ref-name>").append(ejbRef.elementText("ejb-ref-name")).append("</ejb-ref-name>\n");
-			sb.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-ref-name")).append("__PRAMATI_LOCAL").append("</ejb-link>\n");
+			sb.append("\t\t\t\t<ejb-link>").append(ejbRef.elementText("ejb-link")).append("__PRAMATI_LOCAL").append("</ejb-link>\n");
 			sb.append("\t\t\t</ejb-local-ref>\n");
 		}
+
+		sb.append("\t\t\t<resource-mapping>\n");
+		sb.append("\t\t\t\t<resource-name>jdbc/LiferayPool</resource-name>\n");
+		sb.append("\t\t\t\t<resource-type>javax.sql.DataSource</resource-type>\n");
+		sb.append("\t\t\t\t<resource-link>LiferayPool</resource-link>\n");
+		sb.append("\t\t\t</resource-mapping>\n");
+
+		sb.append("\t\t\t<resource-mapping>\n");
+		sb.append("\t\t\t\t<resource-name>mail/MailSession</resource-name>\n");
+		sb.append("\t\t\t\t<resource-type>javax.mail.Session</resource-type>\n");
+		sb.append("\t\t\t\t<resource-link>mail/MailSession</resource-link>\n");
+		sb.append("\t\t\t</resource-mapping>\n");
 
 		return sb.toString();
 	}

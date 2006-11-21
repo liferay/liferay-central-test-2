@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 3.5 SP5//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_3_5.dtd">
+<!DOCTYPE pramati-j2ee-server PUBLIC "-//Pramati Technologies //DTD Pramati J2ee Server 5.0//EN" "http://www.pramati.com/dtd/pramati-j2ee-server_5_0.dtd">
 
 <pramati-j2ee-server>
 	<vhost-name>default</vhost-name>
@@ -13,11 +13,46 @@
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
 			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB</jndi-name>
 			<local-jndi-name>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileShortcutLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFolderLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
 		</ejb>
 		<ejb>
 			<name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</name>
@@ -25,11 +60,45 @@
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
 			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</jndi-name>
-			<local-jndi-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB__PRAMATI_LOCAL</local-jndi-name>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileEntryLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileRankLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileShortcutLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFileVersionLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DLFolderLocalServiceHome</ejb-ref-name>
+				<ejb-link>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
+			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
 		</ejb>
 	</ejb-module>
 </pramati-j2ee-server>

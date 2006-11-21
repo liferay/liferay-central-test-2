@@ -180,11 +180,11 @@
 			/>
 		</replace>
 
-		<copy
-			file="pramati/resource-config.xml.template"
-			tofile="${app.server.pramati.dir}/server/nodes/liferay/config/resource-config.xml"
-			overwrite="yes"
-		/>
+		<delete dir="${app.server.pramati.dir}/server/lf" />
+
+		<copy todir="${app.server.pramati.dir}/server" overwrite="yes">
+			<fileset dir="pramati/server" />
+		</copy>
 	</target>
 
 	<target name="install-resin">
