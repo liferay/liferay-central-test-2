@@ -179,6 +179,14 @@ public class FileUtil {
 		}
 	}
 
+	public static boolean exists(String fileName) {
+		return exists(new File(fileName));
+	}
+
+	public static boolean exists(File file) {
+		return file.exists();
+	}
+
 	public static byte[] getBytes(File file) throws IOException {
 		if (file == null || !file.exists()) {
 			return null;
@@ -235,12 +243,6 @@ public class FileUtil {
 			fullFileName.substring(pos + 1, fullFileName.length());
 
 		return shortFileName;
-	}
-
-	public static boolean exists(String fileName) {
-		File file = new File(fileName);
-
-		return file.exists();
 	}
 
 	public static String[] listDirs(String fileName) throws IOException {

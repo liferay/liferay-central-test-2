@@ -118,11 +118,11 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="pramati" />
 				<then>
-					<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
-
 					<if>
 						<equals arg1="${war.file}" arg2="portal-web" />
 						<then>
+							<copy file="${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
+
 							<war
 								basedir="${project.dir}/web-sites/liferay.com-web/docroot"
 								destfile="${app.server.portal.dir}/portal-web.war"
@@ -131,6 +131,9 @@
 								update="yes"
 							/>
 						</then>
+						<else>
+							<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
+						</else>
 					</if>
 				</then>
 			</elseif>

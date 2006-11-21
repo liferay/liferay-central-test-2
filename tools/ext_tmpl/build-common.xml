@@ -182,11 +182,11 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="pramati" />
 				<then>
-					<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
-
 					<if>
 						<equals arg1="${war.file}" arg2="ext-web" />
 						<then>
+							<copy file="${modules.dir}${war.file}.war" tofile="${app.server.portal.dir}/portal-web.war" />
+
 							<war
 								basedir="${project.dir}/web-sites/liferay.com-web/docroot"
 								destfile="${app.server.portal.dir}/portal-web.war"
@@ -195,6 +195,9 @@
 								update="yes"
 							/>
 						</then>
+						<else>
+							<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
+						</else>
 					</if>
 				</then>
 			</elseif>
@@ -258,16 +261,56 @@
 		<if>
 			<equals arg1="${war.file}" arg2="tunnel-web" />
 			<then>
-				<java
-					classname="com.liferay.portal.tools.WSDDMerger"
-					classpathref="project.classpath"
-					fork="true"
-					maxmemory="256m"
-					newenvironment="true"
-				>
-					<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
-					<arg value="${war.file.dest}/WEB-INF/server-config.wsdd" />
-				</java>
+				<if>
+					<equals arg1="${app.server.type}" arg2="pramati" />
+					<then>
+						<tstamp>
+							<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+						</tstamp>
+
+						<mkdir dir="${tstamp.dir}" />
+
+						<unjar
+							src="${modules.dir}${war.file}.war"
+							dest="${tstamp.dir}"
+						>
+							<patternset>
+								<include name="**/server-config.wsdd" />
+							</patternset>
+						</unjar>
+
+						<java
+							classname="com.liferay.portal.tools.WSDDMerger"
+							classpathref="project.classpath"
+							fork="true"
+							maxmemory="256m"
+							newenvironment="true"
+						>
+							<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
+							<arg value="${tstamp.dir}/WEB-INF/server-config.wsdd" />
+						</java>
+
+						<jar
+							basedir="${tstamp.dir}"
+							destfile="${app.server.portal.dir}/${war.file}.war"
+							update="yes"
+						/>
+
+						<delete dir="${tstamp.dir}" />
+					</then>
+					<else>
+						<java
+							classname="com.liferay.portal.tools.WSDDMerger"
+							classpathref="project.classpath"
+							fork="true"
+							maxmemory="256m"
+							newenvironment="true"
+						>
+							<arg value="${project.dir}/ext-web/docroot/WEB-INF/server-config.wsdd" />
+							<arg value="${war.file.dest}/WEB-INF/server-config.wsdd" />
+						</java>
+					</else>
+				</if>
 			</then>
 		</if>
 	</target>
