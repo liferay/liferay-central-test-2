@@ -89,6 +89,12 @@
 				</then>
 			</elseif>
 			<elseif>
+				<equals arg1="${app.server.type}" arg2="pramati" />
+				<then>
+					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.portal.dir}" />
+				</then>
+			</elseif>
+			<elseif>
 				<equals arg1="${app.server.type}" arg2="orion" />
 				<then>
 					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.deploy.dir}" />
@@ -173,6 +179,25 @@
 			<then>
 				<copy file="${modules.dir}${war.file}.war" todir="${app.server.deploy.dir}" />
 			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="pramati" />
+				<then>
+					<copy file="${modules.dir}${war.file}.war" todir="${app.server.portal.dir}" />
+
+					<if>
+						<equals arg1="${war.file}" arg2="ext-web" />
+						<then>
+							<war
+								basedir="${project.dir}/web-sites/liferay.com-web/docroot"
+								destfile="${app.server.portal.dir}/portal-web.war"
+								excludes="WEB-INF/web.xml"
+								webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+								update="yes"
+							/>
+						</then>
+					</if>
+				</then>
+			</elseif>
 			<else>
 				<unwar src="${modules.dir}${war.file}.war" dest="${war.file.dest}" />
 

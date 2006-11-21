@@ -89,6 +89,9 @@ public class ServerDetector {
 			else if (ServerDetector.isOrion()) {
 				sd._serverId = "orion";
 			}
+			else if (ServerDetector.isPramati()) {
+				sd._serverId = "pramati";
+			}
 			else if (ServerDetector.isResin()) {
 				sd._serverId = "resin";
 			}

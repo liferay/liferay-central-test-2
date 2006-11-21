@@ -53,6 +53,7 @@
 				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
 				<copy todir="${app.server.portal.dir}">

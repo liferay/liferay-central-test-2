@@ -98,6 +98,13 @@
 	</target>
 
 	<target name="deploy">
+		<if>
+			<equals arg1="${app.server.type}" arg2="pramati" />
+			<then>
+				<delete file="${app.server.portal.dir}" />
+			</then>
+		</if>
+
 		<ant dir="ext-ear" target="deploy" inheritAll="false" />
 		<ant dir="ext-ejb" target="deploy" inheritAll="false" />
 		<ant dir="ext-web" target="deploy" inheritAll="false" />
@@ -283,14 +290,62 @@
 				</then>
 			</elseif>
 		</if>
+
+
+		<if>
+			<equals arg1="${app.server.type}" arg2="pramati" />
+			<then>
+				<tstamp>
+					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+				</tstamp>
+
+				<jar
+					basedir="${app.server.portal.dir}"
+					jarfile="${tstamp.dir}"
+				/>
+
+				<delete dir="${app.server.portal.dir}" />
+
+				<move file="${tstamp.dir}" tofile="${app.server.portal.dir}" />
+			</then>
+		</if>
 	</target>
 
 	<target name="deploy-properties">
 		<if>
-			<not>
-				<equals arg1="${app.server.type}" arg2="orion" />
-			</not>
+			<equals arg1="${app.server.type}" arg2="orion" />
 			<then>
+			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="pramati" />
+				<then>
+					<tstamp>
+						<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+					</tstamp>
+
+					<mkdir dir="${tstamp.dir}" />
+
+					<copy todir="${tstamp.dir}" overwrite="yes">
+						<fileset dir="ext-ejb/classes">
+							<include name="*-ext.properties" />
+						</fileset>
+					</copy>
+
+					<replace file="${tstamp.dir}/portal-ext.properties">
+						<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+						<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
+					</replace>
+
+					<jar
+						basedir="${tstamp.dir}"
+						destfile="${app.server.portal.dir}/portal-ejb.jar"
+						update="yes"
+					/>
+
+					<delete dir="${tstamp.dir}" />
+				</then>
+			</elseif>
+			<else>
 				<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
 					<fileset dir="ext-ejb/classes">
 						<include name="*-ext.properties" />
@@ -351,7 +406,7 @@
 						</then>
 					</elseif>
 				</if>
-			</then>
+			</else>
 		</if>
 	</target>
 </project>

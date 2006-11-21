@@ -62,7 +62,6 @@
 				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
 				<property name="war.file.dest" value="${app.server.portal.dir}/${war.file}.war" />
@@ -116,6 +115,25 @@
 			<then>
 				<copy file="${war.file}.war" todir="${app.server.deploy.dir}" />
 			</then>
+			<elseif>
+				<equals arg1="${app.server.type}" arg2="pramati" />
+				<then>
+					<copy file="${war.file}.war" todir="${app.server.portal.dir}" />
+
+					<if>
+						<equals arg1="${war.file}" arg2="portal-web" />
+						<then>
+							<war
+								basedir="${project.dir}/web-sites/liferay.com-web/docroot"
+								destfile="${app.server.portal.dir}/portal-web.war"
+								excludes="WEB-INF/web.xml"
+								webxml="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/web.xml"
+								update="yes"
+							/>
+						</then>
+					</if>
+				</then>
+			</elseif>
 			<else>
 				<unwar src="${war.file}.war" dest="${war.file.dest}" />
 
