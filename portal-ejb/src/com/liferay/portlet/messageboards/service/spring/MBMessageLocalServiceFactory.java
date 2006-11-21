@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class MBMessageLocalServiceFactory {
 	public static final String CLASS_NAME = MBMessageLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = MBMessageLocalService.class.getName() +
+		".transaction";
 
 	public static MBMessageLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class MBMessageLocalServiceFactory {
 
 	public void setService(MBMessageLocalService service) {
 		_service = service;
+	}
+
+	public static MBMessageLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		MBMessageLocalService service = (MBMessageLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private MBMessageLocalService _service;

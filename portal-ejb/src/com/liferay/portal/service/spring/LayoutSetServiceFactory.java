@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class LayoutSetServiceFactory {
 	public static final String CLASS_NAME = LayoutSetServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = LayoutSetService.class.getName() +
+		".transaction";
 
 	public static LayoutSetService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class LayoutSetServiceFactory {
 
 	public void setService(LayoutSetService service) {
 		_service = service;
+	}
+
+	public static LayoutSetService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		LayoutSetService service = (LayoutSetService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private LayoutSetService _service;

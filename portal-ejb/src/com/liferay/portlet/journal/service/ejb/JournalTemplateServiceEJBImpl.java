@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.journal.service.spring.JournalTemplateService;
+import com.liferay.portlet.journal.service.spring.JournalTemplateServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	SessionBean {
-	public static final String CLASS_NAME = JournalTemplateService.class.getName() +
-		".transaction";
-
-	public static JournalTemplateService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (JournalTemplateService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String templateId, boolean autoTemplateId,
 		java.lang.String plid, java.lang.String structureId,
@@ -62,10 +54,10 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addTemplate(templateId, autoTemplateId, plid,
-			structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile, addCommunityPermissions,
-			addGuestPermissions);
+		return JournalTemplateServiceFactory.getTxImpl().addTemplate(templateId,
+			autoTemplateId, plid, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
@@ -80,10 +72,10 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addTemplate(templateId, autoTemplateId, plid,
-			structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile, communityPermissions,
-			guestPermissions);
+		return JournalTemplateServiceFactory.getTxImpl().addTemplate(templateId,
+			autoTemplateId, plid, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteTemplate(java.lang.String companyId,
@@ -91,7 +83,8 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteTemplate(companyId, templateId);
+		JournalTemplateServiceFactory.getTxImpl().deleteTemplate(companyId,
+			templateId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
@@ -100,7 +93,8 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getTemplate(companyId, templateId);
+		return JournalTemplateServiceFactory.getTxImpl().getTemplate(companyId,
+			templateId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
@@ -113,9 +107,9 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateTemplate(templateId, structureId, name,
-			description, xsl, formatXsl, langType, smallImage, smallImageURL,
-			smallFile);
+		return JournalTemplateServiceFactory.getTxImpl().updateTemplate(templateId,
+			structureId, name, description, xsl, formatXsl, langType,
+			smallImage, smallImageURL, smallFile);
 	}
 
 	public void ejbCreate() throws CreateException {

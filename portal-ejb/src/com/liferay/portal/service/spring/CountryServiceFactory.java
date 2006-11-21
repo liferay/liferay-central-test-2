@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class CountryServiceFactory {
 	public static final String CLASS_NAME = CountryServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = CountryService.class.getName() +
+		".transaction";
 
 	public static CountryService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class CountryServiceFactory {
 
 	public void setService(CountryService service) {
 		_service = service;
+	}
+
+	public static CountryService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		CountryService service = (CountryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private CountryService _service;

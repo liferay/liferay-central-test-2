@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.UserIdMapperLocalService;
+import com.liferay.portal.service.spring.UserIdMapperLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,30 +40,22 @@ import javax.ejb.SessionContext;
  */
 public class UserIdMapperLocalServiceEJBImpl implements UserIdMapperLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = UserIdMapperLocalService.class.getName() +
-		".transaction";
-
-	public static UserIdMapperLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (UserIdMapperLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteUserIdMappers(userId);
+		UserIdMapperLocalServiceFactory.getTxImpl().deleteUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper getUserIdMapper(
 		java.lang.String userId, java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getUserIdMapper(userId, type);
+		return UserIdMapperLocalServiceFactory.getTxImpl().getUserIdMapper(userId,
+			type);
 	}
 
 	public java.util.List getUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		return getService().getUserIdMappers(userId);
+		return UserIdMapperLocalServiceFactory.getTxImpl().getUserIdMappers(userId);
 	}
 
 	public com.liferay.portal.model.UserIdMapper updateUserIdMapper(
@@ -70,8 +63,8 @@ public class UserIdMapperLocalServiceEJBImpl implements UserIdMapperLocalService
 		java.lang.String description, java.lang.String externalUserId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateUserIdMapper(userId, type, description,
-			externalUserId);
+		return UserIdMapperLocalServiceFactory.getTxImpl().updateUserIdMapper(userId,
+			type, description, externalUserId);
 	}
 
 	public void ejbCreate() throws CreateException {

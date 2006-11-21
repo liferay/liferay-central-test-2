@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,28 +41,21 @@ import javax.ejb.SessionContext;
  */
 public class MBMessageFlagLocalServiceEJBImpl
 	implements MBMessageFlagLocalService, SessionBean {
-	public static final String CLASS_NAME = MBMessageFlagLocalService.class.getName() +
-		".transaction";
-
-	public static MBMessageFlagLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MBMessageFlagLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addReadFlags(java.util.List messages, java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().addReadFlags(messages, userId);
+		MBMessageFlagLocalServiceFactory.getTxImpl().addReadFlags(messages,
+			userId);
 	}
 
 	public void deleteFlags(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteFlags(userId);
+		MBMessageFlagLocalServiceFactory.getTxImpl().deleteFlags(userId);
 	}
 
 	public boolean hasReadFlag(java.lang.String messageId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		return getService().hasReadFlag(messageId, userId);
+		return MBMessageFlagLocalServiceFactory.getTxImpl().hasReadFlag(messageId,
+			userId);
 	}
 
 	public void ejbCreate() throws CreateException {

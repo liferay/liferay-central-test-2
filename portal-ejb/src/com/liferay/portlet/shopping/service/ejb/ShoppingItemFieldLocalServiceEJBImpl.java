@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,18 +41,9 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingItemFieldLocalServiceEJBImpl
 	implements ShoppingItemFieldLocalService, SessionBean {
-	public static final String CLASS_NAME = ShoppingItemFieldLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingItemFieldLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingItemFieldLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getItemFields(java.lang.String itemId)
 		throws com.liferay.portal.SystemException {
-		return getService().getItemFields(itemId);
+		return ShoppingItemFieldLocalServiceFactory.getTxImpl().getItemFields(itemId);
 	}
 
 	public void ejbCreate() throws CreateException {

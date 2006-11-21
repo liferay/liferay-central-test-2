@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.AccountService;
+import com.liferay.portal.service.spring.AccountServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -38,15 +39,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class AccountServiceEJBImpl implements AccountService, SessionBean {
-	public static final String CLASS_NAME = AccountService.class.getName() +
-		".transaction";
-
-	public static AccountService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (AccountService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void ejbCreate() throws CreateException {
 	}
 

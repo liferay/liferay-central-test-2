@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.EmailAddressService;
+import com.liferay.portal.service.spring.EmailAddressServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  */
 public class EmailAddressServiceEJBImpl implements EmailAddressService,
 	SessionBean {
-	public static final String CLASS_NAME = EmailAddressService.class.getName() +
-		".transaction";
-
-	public static EmailAddressService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (EmailAddressService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String address, java.lang.String typeId, boolean primary)
@@ -56,15 +48,15 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addEmailAddress(className, classPK, address,
-			typeId, primary);
+		return EmailAddressServiceFactory.getTxImpl().addEmailAddress(className,
+			classPK, address, typeId, primary);
 	}
 
 	public void deleteEmailAddress(java.lang.String emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteEmailAddress(emailAddressId);
+		EmailAddressServiceFactory.getTxImpl().deleteEmailAddress(emailAddressId);
 	}
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
@@ -73,7 +65,7 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getEmailAddress(emailAddressId);
+		return EmailAddressServiceFactory.getTxImpl().getEmailAddress(emailAddressId);
 	}
 
 	public java.util.List getEmailAddresses(java.lang.String className,
@@ -82,7 +74,8 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getEmailAddresses(className, classPK);
+		return EmailAddressServiceFactory.getTxImpl().getEmailAddresses(className,
+			classPK);
 	}
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
@@ -92,8 +85,8 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateEmailAddress(emailAddressId, address, typeId,
-			primary);
+		return EmailAddressServiceFactory.getTxImpl().updateEmailAddress(emailAddressId,
+			address, typeId, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

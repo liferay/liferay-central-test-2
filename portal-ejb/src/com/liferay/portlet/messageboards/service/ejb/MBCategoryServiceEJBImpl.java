@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.messageboards.service.spring.MBCategoryService;
+import com.liferay.portlet.messageboards.service.spring.MBCategoryServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean {
-	public static final String CLASS_NAME = MBCategoryService.class.getName() +
-		".transaction";
-
-	public static MBCategoryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MBCategoryService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		java.lang.String plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
@@ -57,8 +49,9 @@ public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCategory(plid, parentCategoryId, name,
-			description, addCommunityPermissions, addGuestPermissions);
+		return MBCategoryServiceFactory.getTxImpl().addCategory(plid,
+			parentCategoryId, name, description, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory addCategory(
@@ -70,15 +63,16 @@ public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCategory(plid, parentCategoryId, name,
-			description, communityPermissions, guestPermissions);
+		return MBCategoryServiceFactory.getTxImpl().addCategory(plid,
+			parentCategoryId, name, description, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteCategory(categoryId);
+		MBCategoryServiceFactory.getTxImpl().deleteCategory(categoryId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory getCategory(
@@ -87,21 +81,21 @@ public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCategory(categoryId);
+		return MBCategoryServiceFactory.getTxImpl().getCategory(categoryId);
 	}
 
 	public void subscribeCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().subscribeCategory(categoryId);
+		MBCategoryServiceFactory.getTxImpl().subscribeCategory(categoryId);
 	}
 
 	public void unsubscribeCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsubscribeCategory(categoryId);
+		MBCategoryServiceFactory.getTxImpl().unsubscribeCategory(categoryId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBCategory updateCategory(
@@ -112,8 +106,8 @@ public class MBCategoryServiceEJBImpl implements MBCategoryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateCategory(categoryId, parentCategoryId, name,
-			description, mergeWithParentCategory);
+		return MBCategoryServiceFactory.getTxImpl().updateCategory(categoryId,
+			parentCategoryId, name, description, mergeWithParentCategory);
 	}
 
 	public void ejbCreate() throws CreateException {

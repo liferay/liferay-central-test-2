@@ -25,6 +25,7 @@ package com.liferay.portlet.ratings.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.spring.RatingsEntryLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,21 +41,13 @@ import javax.ejb.SessionContext;
  */
 public class RatingsEntryLocalServiceEJBImpl implements RatingsEntryLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = RatingsEntryLocalService.class.getName() +
-		".transaction";
-
-	public static RatingsEntryLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RatingsEntryLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getEntry(userId, className, classPK);
+		return RatingsEntryLocalServiceFactory.getTxImpl().getEntry(userId,
+			className, classPK);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
@@ -62,7 +55,8 @@ public class RatingsEntryLocalServiceEJBImpl implements RatingsEntryLocalService
 		java.lang.String classPK, double score)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateEntry(userId, className, classPK, score);
+		return RatingsEntryLocalServiceFactory.getTxImpl().updateEntry(userId,
+			className, classPK, score);
 	}
 
 	public void ejbCreate() throws CreateException {

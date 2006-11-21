@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFolderLocalServiceFactory {
 	public static final String CLASS_NAME = DLFolderLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFolderLocalService.class.getName() +
+		".transaction";
 
 	public static DLFolderLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFolderLocalServiceFactory {
 
 	public void setService(DLFolderLocalService service) {
 		_service = service;
+	}
+
+	public static DLFolderLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFolderLocalService service = (DLFolderLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFolderLocalService _service;

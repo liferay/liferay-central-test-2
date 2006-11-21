@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.ListTypeService;
+import com.liferay.portal.service.spring.ListTypeServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,36 +40,27 @@ import javax.ejb.SessionContext;
  *
  */
 public class ListTypeServiceEJBImpl implements ListTypeService, SessionBean {
-	public static final String CLASS_NAME = ListTypeService.class.getName() +
-		".transaction";
-
-	public static ListTypeService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ListTypeService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.ListType getListType(
 		java.lang.String listTypeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getListType(listTypeId);
+		return ListTypeServiceFactory.getTxImpl().getListType(listTypeId);
 	}
 
 	public java.util.List getListTypes(java.lang.String type)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getListTypes(type);
+		return ListTypeServiceFactory.getTxImpl().getListTypes(type);
 	}
 
 	public void validate(java.lang.String listTypeId, java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().validate(listTypeId, type);
+		ListTypeServiceFactory.getTxImpl().validate(listTypeId, type);
 	}
 
 	public void ejbCreate() throws CreateException {

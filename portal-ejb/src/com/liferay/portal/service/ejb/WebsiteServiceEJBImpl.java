@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.WebsiteService;
+import com.liferay.portal.service.spring.WebsiteServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
-	public static final String CLASS_NAME = WebsiteService.class.getName() +
-		".transaction";
-
-	public static WebsiteService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (WebsiteService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Website addWebsite(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String url, java.lang.String typeId, boolean primary)
@@ -55,14 +47,15 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addWebsite(className, classPK, url, typeId, primary);
+		return WebsiteServiceFactory.getTxImpl().addWebsite(className, classPK,
+			url, typeId, primary);
 	}
 
 	public void deleteWebsite(java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteWebsite(websiteId);
+		WebsiteServiceFactory.getTxImpl().deleteWebsite(websiteId);
 	}
 
 	public com.liferay.portal.model.Website getWebsite(
@@ -71,7 +64,7 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getWebsite(websiteId);
+		return WebsiteServiceFactory.getTxImpl().getWebsite(websiteId);
 	}
 
 	public java.util.List getWebsites(java.lang.String className,
@@ -80,7 +73,7 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getWebsites(className, classPK);
+		return WebsiteServiceFactory.getTxImpl().getWebsites(className, classPK);
 	}
 
 	public com.liferay.portal.model.Website updateWebsite(
@@ -90,7 +83,8 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateWebsite(websiteId, url, typeId, primary);
+		return WebsiteServiceFactory.getTxImpl().updateWebsite(websiteId, url,
+			typeId, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.WebsiteLocalService;
+import com.liferay.portal.service.spring.WebsiteLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,48 +40,41 @@ import javax.ejb.SessionContext;
  */
 public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = WebsiteLocalService.class.getName() +
-		".transaction";
-
-	public static WebsiteLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (WebsiteLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Website addWebsite(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String url,
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addWebsite(userId, className, classPK, url, typeId,
-			primary);
+		return WebsiteLocalServiceFactory.getTxImpl().addWebsite(userId,
+			className, classPK, url, typeId, primary);
 	}
 
 	public void deleteWebsite(java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteWebsite(websiteId);
+		WebsiteLocalServiceFactory.getTxImpl().deleteWebsite(websiteId);
 	}
 
 	public void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		getService().deleteWebsites(companyId, className, classPK);
+		WebsiteLocalServiceFactory.getTxImpl().deleteWebsites(companyId,
+			className, classPK);
 	}
 
 	public com.liferay.portal.model.Website getWebsite(
 		java.lang.String websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getWebsite(websiteId);
+		return WebsiteLocalServiceFactory.getTxImpl().getWebsite(websiteId);
 	}
 
 	public java.util.List getWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		return getService().getWebsites(companyId, className, classPK);
+		return WebsiteLocalServiceFactory.getTxImpl().getWebsites(companyId,
+			className, classPK);
 	}
 
 	public com.liferay.portal.model.Website updateWebsite(
@@ -88,7 +82,8 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateWebsite(websiteId, url, typeId, primary);
+		return WebsiteLocalServiceFactory.getTxImpl().updateWebsite(websiteId,
+			url, typeId, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

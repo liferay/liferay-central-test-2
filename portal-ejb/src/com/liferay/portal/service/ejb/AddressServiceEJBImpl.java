@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.AddressService;
+import com.liferay.portal.service.spring.AddressServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class AddressServiceEJBImpl implements AddressService, SessionBean {
-	public static final String CLASS_NAME = AddressService.class.getName() +
-		".transaction";
-
-	public static AddressService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (AddressService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Address addAddress(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String street1, java.lang.String street2,
@@ -58,15 +50,16 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addAddress(className, classPK, street1, street2,
-			street3, city, zip, regionId, countryId, typeId, mailing, primary);
+		return AddressServiceFactory.getTxImpl().addAddress(className, classPK,
+			street1, street2, street3, city, zip, regionId, countryId, typeId,
+			mailing, primary);
 	}
 
 	public void deleteAddress(java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteAddress(addressId);
+		AddressServiceFactory.getTxImpl().deleteAddress(addressId);
 	}
 
 	public com.liferay.portal.model.Address getAddress(
@@ -75,7 +68,7 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getAddress(addressId);
+		return AddressServiceFactory.getTxImpl().getAddress(addressId);
 	}
 
 	public java.util.List getAddresses(java.lang.String className,
@@ -84,7 +77,7 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getAddresses(className, classPK);
+		return AddressServiceFactory.getTxImpl().getAddresses(className, classPK);
 	}
 
 	public com.liferay.portal.model.Address updateAddress(
@@ -97,8 +90,9 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateAddress(addressId, street1, street2, street3,
-			city, zip, regionId, countryId, typeId, mailing, primary);
+		return AddressServiceFactory.getTxImpl().updateAddress(addressId,
+			street1, street2, street3, city, zip, regionId, countryId, typeId,
+			mailing, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.PortletPreferencesLocalService;
+import com.liferay.portal.service.spring.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,42 +40,40 @@ import javax.ejb.SessionContext;
  */
 public class PortletPreferencesLocalServiceEJBImpl
 	implements PortletPreferencesLocalService, SessionBean {
-	public static final String CLASS_NAME = PortletPreferencesLocalService.class.getName() +
-		".transaction";
-
-	public static PortletPreferencesLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PortletPreferencesLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		getService().deletePortletPreferences(ownerId);
+		PortletPreferencesLocalServiceFactory.getTxImpl()
+											 .deletePortletPreferences(ownerId);
 	}
 
 	public void deletePortletPreferences(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		getService().deletePortletPreferences(layoutId, ownerId);
+		PortletPreferencesLocalServiceFactory.getTxImpl()
+											 .deletePortletPreferences(layoutId,
+			ownerId);
 	}
 
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getDefaultPreferences(companyId, portletId);
+		return PortletPreferencesLocalServiceFactory.getTxImpl()
+													.getDefaultPreferences(companyId,
+			portletId);
 	}
 
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getPortletPreferences(pk);
+		return PortletPreferencesLocalServiceFactory.getTxImpl()
+													.getPortletPreferences(pk);
 	}
 
 	public java.util.List getPortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		return getService().getPortletPreferences(ownerId);
+		return PortletPreferencesLocalServiceFactory.getTxImpl()
+													.getPortletPreferences(ownerId);
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(
@@ -82,7 +81,8 @@ public class PortletPreferencesLocalServiceEJBImpl
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getPreferences(companyId, pk);
+		return PortletPreferencesLocalServiceFactory.getTxImpl().getPreferences(companyId,
+			pk);
 	}
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
@@ -90,7 +90,8 @@ public class PortletPreferencesLocalServiceEJBImpl
 		com.liferay.portlet.PortletPreferencesImpl prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updatePreferences(pk, prefs);
+		return PortletPreferencesLocalServiceFactory.getTxImpl()
+													.updatePreferences(pk, prefs);
 	}
 
 	public void ejbCreate() throws CreateException {

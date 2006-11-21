@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class OrgLaborServiceFactory {
 	public static final String CLASS_NAME = OrgLaborServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = OrgLaborService.class.getName() +
+		".transaction";
 
 	public static OrgLaborService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class OrgLaborServiceFactory {
 
 	public void setService(OrgLaborService service) {
 		_service = service;
+	}
+
+	public static OrgLaborService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		OrgLaborService service = (OrgLaborService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private OrgLaborService _service;

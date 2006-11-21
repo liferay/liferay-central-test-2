@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,28 +41,20 @@ import javax.ejb.SessionContext;
  */
 public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = DLFileRankLocalService.class.getName() +
-		".transaction";
-
-	public static DLFileRankLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (DLFileRankLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteFileRanks(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteFileRanks(userId);
+		DLFileRankLocalServiceFactory.getTxImpl().deleteFileRanks(userId);
 	}
 
 	public void deleteFileRanks(java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		getService().deleteFileRanks(folderId, name);
+		DLFileRankLocalServiceFactory.getTxImpl().deleteFileRanks(folderId, name);
 	}
 
 	public java.util.List getFileRanks(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		return getService().getFileRanks(groupId, userId);
+		return DLFileRankLocalServiceFactory.getTxImpl().getFileRanks(groupId,
+			userId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
@@ -70,8 +63,8 @@ public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateFileRank(groupId, companyId, userId,
-			folderId, name);
+		return DLFileRankLocalServiceFactory.getTxImpl().updateFileRank(groupId,
+			companyId, userId, folderId, name);
 	}
 
 	public void ejbCreate() throws CreateException {

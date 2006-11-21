@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.polls.service.spring.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  */
 public class PollsQuestionLocalServiceEJBImpl
 	implements PollsQuestionLocalService, SessionBean {
-	public static final String CLASS_NAME = PollsQuestionLocalService.class.getName() +
-		".transaction";
-
-	public static PollsQuestionLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PollsQuestionLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		java.lang.String userId, java.lang.String plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
@@ -57,10 +49,10 @@ public class PollsQuestionLocalServiceEJBImpl
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addQuestion(userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions);
+		return PollsQuestionLocalServiceFactory.getTxImpl().addQuestion(userId,
+			plid, title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -72,10 +64,10 @@ public class PollsQuestionLocalServiceEJBImpl
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addQuestion(userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			communityPermissions, guestPermissions);
+		return PollsQuestionLocalServiceFactory.getTxImpl().addQuestion(userId,
+			plid, title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -89,19 +81,19 @@ public class PollsQuestionLocalServiceEJBImpl
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addQuestion(userId, plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return PollsQuestionLocalServiceFactory.getTxImpl().addQuestion(userId,
+			plid, title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addQuestionResources(java.lang.String questionId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addQuestionResources(questionId, addCommunityPermissions,
-			addGuestPermissions);
+		PollsQuestionLocalServiceFactory.getTxImpl().addQuestionResources(questionId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -109,8 +101,8 @@ public class PollsQuestionLocalServiceEJBImpl
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addQuestionResources(question, addCommunityPermissions,
-			addGuestPermissions);
+		PollsQuestionLocalServiceFactory.getTxImpl().addQuestionResources(question,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addQuestionResources(java.lang.String questionId,
@@ -118,8 +110,8 @@ public class PollsQuestionLocalServiceEJBImpl
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addQuestionResources(questionId, communityPermissions,
-			guestPermissions);
+		PollsQuestionLocalServiceFactory.getTxImpl().addQuestionResources(questionId,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addQuestionResources(
@@ -128,49 +120,50 @@ public class PollsQuestionLocalServiceEJBImpl
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addQuestionResources(question, communityPermissions,
-			guestPermissions);
+		PollsQuestionLocalServiceFactory.getTxImpl().addQuestionResources(question,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteQuestion(questionId);
+		PollsQuestionLocalServiceFactory.getTxImpl().deleteQuestion(questionId);
 	}
 
 	public void deleteQuestion(
 		com.liferay.portlet.polls.model.PollsQuestion question)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteQuestion(question);
+		PollsQuestionLocalServiceFactory.getTxImpl().deleteQuestion(question);
 	}
 
 	public void deleteQuestions(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteQuestions(groupId);
+		PollsQuestionLocalServiceFactory.getTxImpl().deleteQuestions(groupId);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion getQuestion(
 		java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getQuestion(questionId);
+		return PollsQuestionLocalServiceFactory.getTxImpl().getQuestion(questionId);
 	}
 
 	public java.util.List getQuestions(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getQuestions(groupId);
+		return PollsQuestionLocalServiceFactory.getTxImpl().getQuestions(groupId);
 	}
 
 	public java.util.List getQuestions(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().getQuestions(groupId, begin, end);
+		return PollsQuestionLocalServiceFactory.getTxImpl().getQuestions(groupId,
+			begin, end);
 	}
 
 	public int getQuestionsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getQuestionsCount(groupId);
+		return PollsQuestionLocalServiceFactory.getTxImpl().getQuestionsCount(groupId);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -181,10 +174,10 @@ public class PollsQuestionLocalServiceEJBImpl
 		java.util.List choices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateQuestion(userId, questionId, title,
-			description, expirationDateMonth, expirationDateDay,
-			expirationDateYear, expirationDateHour, expirationDateMinute,
-			neverExpire, choices);
+		return PollsQuestionLocalServiceFactory.getTxImpl().updateQuestion(userId,
+			questionId, title, description, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, choices);
 	}
 
 	public void ejbCreate() throws CreateException {

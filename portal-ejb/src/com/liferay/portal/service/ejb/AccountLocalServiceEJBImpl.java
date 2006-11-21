@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.AccountLocalService;
+import com.liferay.portal.service.spring.AccountLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,20 +40,11 @@ import javax.ejb.SessionContext;
  */
 public class AccountLocalServiceEJBImpl implements AccountLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = AccountLocalService.class.getName() +
-		".transaction";
-
-	public static AccountLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (AccountLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Account getAccount(
 		java.lang.String accountId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getAccount(accountId);
+		return AccountLocalServiceFactory.getTxImpl().getAccount(accountId);
 	}
 
 	public void ejbCreate() throws CreateException {

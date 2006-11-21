@@ -25,6 +25,7 @@ package com.liferay.portlet.calendar.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.calendar.service.spring.CalEventLocalService;
+import com.liferay.portlet.calendar.service.spring.CalEventLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  */
 public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = CalEventLocalService.class.getName() +
-		".transaction";
-
-	public static CalEventLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (CalEventLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String userId, java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
@@ -61,12 +53,13 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
-			addCommunityPermissions, addGuestPermissions);
+		return CalEventLocalServiceFactory.getTxImpl().addEvent(userId, plid,
+			title, description, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, endDateMonth, endDateDay,
+			endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
@@ -82,12 +75,13 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
-			communityPermissions, guestPermissions);
+		return CalEventLocalServiceFactory.getTxImpl().addEvent(userId, plid,
+			title, description, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, endDateMonth, endDateDay,
+			endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, communityPermissions,
+			guestPermissions);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(
@@ -105,21 +99,21 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addEvent(userId, plid, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return CalEventLocalServiceFactory.getTxImpl().addEvent(userId, plid,
+			title, description, startDateMonth, startDateDay, startDateYear,
+			startDateHour, startDateMinute, endDateMonth, endDateDay,
+			endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
 	}
 
 	public void addEventResources(java.lang.String eventId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEventResources(eventId, addCommunityPermissions,
-			addGuestPermissions);
+		CalEventLocalServiceFactory.getTxImpl().addEventResources(eventId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(
@@ -127,8 +121,8 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEventResources(event, addCommunityPermissions,
-			addGuestPermissions);
+		CalEventLocalServiceFactory.getTxImpl().addEventResources(event,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addEventResources(java.lang.String eventId,
@@ -136,8 +130,8 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEventResources(eventId, communityPermissions,
-			guestPermissions);
+		CalEventLocalServiceFactory.getTxImpl().addEventResources(eventId,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addEventResources(
@@ -146,76 +140,80 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addEventResources(event, communityPermissions,
-			guestPermissions);
+		CalEventLocalServiceFactory.getTxImpl().addEventResources(event,
+			communityPermissions, guestPermissions);
 	}
 
 	public void checkEvents()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().checkEvents();
+		CalEventLocalServiceFactory.getTxImpl().checkEvents();
 	}
 
 	public void deleteEvent(java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteEvent(eventId);
+		CalEventLocalServiceFactory.getTxImpl().deleteEvent(eventId);
 	}
 
 	public void deleteEvent(com.liferay.portlet.calendar.model.CalEvent event)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteEvent(event);
+		CalEventLocalServiceFactory.getTxImpl().deleteEvent(event);
 	}
 
 	public void deleteEvents(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteEvents(groupId);
+		CalEventLocalServiceFactory.getTxImpl().deleteEvents(groupId);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent getEvent(
 		java.lang.String eventId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getEvent(eventId);
+		return CalEventLocalServiceFactory.getTxImpl().getEvent(eventId);
 	}
 
 	public java.util.List getEvents(java.lang.String groupId,
 		java.lang.String type, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getEvents(groupId, type, begin, end);
+		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, type,
+			begin, end);
 	}
 
 	public java.util.List getEvents(java.lang.String groupId,
 		java.util.Calendar cal) throws com.liferay.portal.SystemException {
-		return getService().getEvents(groupId, cal);
+		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, cal);
 	}
 
 	public java.util.List getEvents(java.lang.String groupId,
 		java.util.Calendar cal, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		return getService().getEvents(groupId, cal, type);
+		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, cal,
+			type);
 	}
 
 	public int getEventsCount(java.lang.String groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
-		return getService().getEventsCount(groupId, type);
+		return CalEventLocalServiceFactory.getTxImpl().getEventsCount(groupId,
+			type);
 	}
 
 	public java.util.List getRepeatingEvents(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getRepeatingEvents(groupId);
+		return CalEventLocalServiceFactory.getTxImpl().getRepeatingEvents(groupId);
 	}
 
 	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
-		return getService().hasEvents(groupId, cal);
+		return CalEventLocalServiceFactory.getTxImpl().hasEvents(groupId, cal);
 	}
 
 	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException {
-		return getService().hasEvents(groupId, cal, type);
+		return CalEventLocalServiceFactory.getTxImpl().hasEvents(groupId, cal,
+			type);
 	}
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(
@@ -229,11 +227,12 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateEvent(userId, eventId, title, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			durationHour, durationMinute, allDay, timeZoneSensitive, type,
-			repeating, recurrence, remindBy, firstReminder, secondReminder);
+		return CalEventLocalServiceFactory.getTxImpl().updateEvent(userId,
+			eventId, title, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, durationHour, durationMinute, allDay,
+			timeZoneSensitive, type, repeating, recurrence, remindBy,
+			firstReminder, secondReminder);
 	}
 
 	public void ejbCreate() throws CreateException {

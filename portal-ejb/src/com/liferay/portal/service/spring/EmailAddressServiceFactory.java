@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class EmailAddressServiceFactory {
 	public static final String CLASS_NAME = EmailAddressServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = EmailAddressService.class.getName() +
+		".transaction";
 
 	public static EmailAddressService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class EmailAddressServiceFactory {
 
 	public void setService(EmailAddressService service) {
 		_service = service;
+	}
+
+	public static EmailAddressService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		EmailAddressService service = (EmailAddressService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private EmailAddressService _service;

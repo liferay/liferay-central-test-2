@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PortletPreferencesLocalServiceFactory {
 	public static final String CLASS_NAME = PortletPreferencesLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PortletPreferencesLocalService.class.getName() +
+		".transaction";
 
 	public static PortletPreferencesLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PortletPreferencesLocalServiceFactory {
 
 	public void setService(PortletPreferencesLocalService service) {
 		_service = service;
+	}
+
+	public static PortletPreferencesLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PortletPreferencesLocalService service = (PortletPreferencesLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PortletPreferencesLocalService _service;

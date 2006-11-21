@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderService;
+import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 	SessionBean {
-	public static final String CLASS_NAME = ShoppingOrderService.class.getName() +
-		".transaction";
-
-	public static ShoppingOrderService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingOrderService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void completeOrder(java.lang.String plid, java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
@@ -57,15 +49,16 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().completeOrder(plid, orderId, ppTxnId, ppPaymentStatus,
-			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		ShoppingOrderServiceFactory.getTxImpl().completeOrder(plid, orderId,
+			ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail);
 	}
 
 	public void deleteOrder(java.lang.String plid, java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteOrder(plid, orderId);
+		ShoppingOrderServiceFactory.getTxImpl().deleteOrder(plid, orderId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
@@ -74,7 +67,7 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getOrder(plid, orderId);
+		return ShoppingOrderServiceFactory.getTxImpl().getOrder(plid, orderId);
 	}
 
 	public void sendEmail(java.lang.String plid, java.lang.String orderId,
@@ -82,7 +75,8 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().sendEmail(plid, orderId, emailType);
+		ShoppingOrderServiceFactory.getTxImpl().sendEmail(plid, orderId,
+			emailType);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -105,14 +99,14 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateOrder(plid, orderId, billingFirstName,
-			billingLastName, billingEmailAddress, billingCompany,
-			billingStreet, billingCity, billingState, billingZip,
-			billingCountry, billingPhone, shipToBilling, shippingFirstName,
-			shippingLastName, shippingEmailAddress, shippingCompany,
-			shippingStreet, shippingCity, shippingState, shippingZip,
-			shippingCountry, shippingPhone, ccName, ccType, ccNumber,
-			ccExpMonth, ccExpYear, ccVerNumber, comments);
+		return ShoppingOrderServiceFactory.getTxImpl().updateOrder(plid,
+			orderId, billingFirstName, billingLastName, billingEmailAddress,
+			billingCompany, billingStreet, billingCity, billingState,
+			billingZip, billingCountry, billingPhone, shipToBilling,
+			shippingFirstName, shippingLastName, shippingEmailAddress,
+			shippingCompany, shippingStreet, shippingCity, shippingState,
+			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
+			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -124,8 +118,9 @@ public class ShoppingOrderServiceEJBImpl implements ShoppingOrderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateOrder(plid, orderId, ppTxnId,
-			ppPaymentStatus, ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		return ShoppingOrderServiceFactory.getTxImpl().updateOrder(plid,
+			orderId, ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail);
 	}
 
 	public void ejbCreate() throws CreateException {

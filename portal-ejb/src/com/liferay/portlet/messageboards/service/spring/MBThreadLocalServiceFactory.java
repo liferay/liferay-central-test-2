@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class MBThreadLocalServiceFactory {
 	public static final String CLASS_NAME = MBThreadLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = MBThreadLocalService.class.getName() +
+		".transaction";
 
 	public static MBThreadLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class MBThreadLocalServiceFactory {
 
 	public void setService(MBThreadLocalService service) {
 		_service = service;
+	}
+
+	public static MBThreadLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		MBThreadLocalService service = (MBThreadLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private MBThreadLocalService _service;

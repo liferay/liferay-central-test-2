@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class BookmarksFolderLocalServiceFactory {
 	public static final String CLASS_NAME = BookmarksFolderLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = BookmarksFolderLocalService.class.getName() +
+		".transaction";
 
 	public static BookmarksFolderLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class BookmarksFolderLocalServiceFactory {
 
 	public void setService(BookmarksFolderLocalService service) {
 		_service = service;
+	}
+
+	public static BookmarksFolderLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		BookmarksFolderLocalService service = (BookmarksFolderLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private BookmarksFolderLocalService _service;

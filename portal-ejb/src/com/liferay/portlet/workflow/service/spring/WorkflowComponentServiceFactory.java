@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class WorkflowComponentServiceFactory {
 	public static final String CLASS_NAME = WorkflowComponentServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = WorkflowComponentService.class.getName() +
+		".transaction";
 
 	public static WorkflowComponentService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class WorkflowComponentServiceFactory {
 
 	public void setService(WorkflowComponentService service) {
 		_service = service;
+	}
+
+	public static WorkflowComponentService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		WorkflowComponentService service = (WorkflowComponentService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private WorkflowComponentService _service;

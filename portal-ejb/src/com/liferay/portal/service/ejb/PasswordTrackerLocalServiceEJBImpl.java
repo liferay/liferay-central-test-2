@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.PasswordTrackerLocalService;
+import com.liferay.portal.service.spring.PasswordTrackerLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,31 +40,24 @@ import javax.ejb.SessionContext;
  */
 public class PasswordTrackerLocalServiceEJBImpl
 	implements PasswordTrackerLocalService, SessionBean {
-	public static final String CLASS_NAME = PasswordTrackerLocalService.class.getName() +
-		".transaction";
-
-	public static PasswordTrackerLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PasswordTrackerLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deletePasswordTrackers(userId);
+		PasswordTrackerLocalServiceFactory.getTxImpl().deletePasswordTrackers(userId);
 	}
 
 	public boolean isValidPassword(java.lang.String userId,
 		java.lang.String password)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().isValidPassword(userId, password);
+		return PasswordTrackerLocalServiceFactory.getTxImpl().isValidPassword(userId,
+			password);
 	}
 
 	public void trackPassword(java.lang.String userId, java.lang.String encPwd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().trackPassword(userId, encPwd);
+		PasswordTrackerLocalServiceFactory.getTxImpl().trackPassword(userId,
+			encPwd);
 	}
 
 	public void ejbCreate() throws CreateException {

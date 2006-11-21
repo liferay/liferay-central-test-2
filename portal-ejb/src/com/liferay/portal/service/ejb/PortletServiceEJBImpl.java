@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.PortletService;
+import com.liferay.portal.service.spring.PortletServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class PortletServiceEJBImpl implements PortletService, SessionBean {
-	public static final String CLASS_NAME = PortletService.class.getName() +
-		".transaction";
-
-	public static PortletService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PortletService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Portlet updatePortlet(
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String roles, boolean active)
@@ -55,7 +47,8 @@ public class PortletServiceEJBImpl implements PortletService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updatePortlet(companyId, portletId, roles, active);
+		return PortletServiceFactory.getTxImpl().updatePortlet(companyId,
+			portletId, roles, active);
 	}
 
 	public void ejbCreate() throws CreateException {

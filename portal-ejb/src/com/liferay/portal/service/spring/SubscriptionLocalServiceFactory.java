@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class SubscriptionLocalServiceFactory {
 	public static final String CLASS_NAME = SubscriptionLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = SubscriptionLocalService.class.getName() +
+		".transaction";
 
 	public static SubscriptionLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class SubscriptionLocalServiceFactory {
 
 	public void setService(SubscriptionLocalService service) {
 		_service = service;
+	}
+
+	public static SubscriptionLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		SubscriptionLocalService service = (SubscriptionLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private SubscriptionLocalService _service;

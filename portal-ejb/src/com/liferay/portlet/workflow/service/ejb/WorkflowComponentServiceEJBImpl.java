@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.workflow.service.spring.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,21 +42,13 @@ import javax.ejb.SessionContext;
  */
 public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService,
 	SessionBean {
-	public static final String CLASS_NAME = WorkflowComponentService.class.getName() +
-		".transaction";
-
-	public static WorkflowComponentService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (WorkflowComponentService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getCurrentTasks(long instanceId, long tokenId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCurrentTasks(instanceId, tokenId);
+		return WorkflowComponentServiceFactory.getTxImpl().getCurrentTasks(instanceId,
+			tokenId);
 	}
 
 	public java.lang.String getCurrentTasksXml(long instanceId, long tokenId)
@@ -63,7 +56,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCurrentTasksXml(instanceId, tokenId);
+		return WorkflowComponentServiceFactory.getTxImpl().getCurrentTasksXml(instanceId,
+			tokenId);
 	}
 
 	public java.lang.String deploy(java.lang.String xml)
@@ -71,7 +65,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().deploy(xml);
+		return WorkflowComponentServiceFactory.getTxImpl().deploy(xml);
 	}
 
 	public java.util.List getDefinitions(long definitionId,
@@ -80,7 +74,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getDefinitions(definitionId, name, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getDefinitions(definitionId,
+			name, begin, end);
 	}
 
 	public java.lang.String getDefinitionsXml(long definitionId,
@@ -89,7 +84,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getDefinitionsXml(definitionId, name, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getDefinitionsXml(definitionId,
+			name, begin, end);
 	}
 
 	public int getDefinitionsCount(long definitionId, java.lang.String name)
@@ -97,7 +93,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getDefinitionsCount(definitionId, name);
+		return WorkflowComponentServiceFactory.getTxImpl().getDefinitionsCount(definitionId,
+			name);
 	}
 
 	public java.lang.String getDefinitionsCountXml(long definitionId,
@@ -106,7 +103,9 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getDefinitionsCountXml(definitionId, name);
+		return WorkflowComponentServiceFactory.getTxImpl()
+											  .getDefinitionsCountXml(definitionId,
+			name);
 	}
 
 	public java.util.List getInstances(long definitionId, long instanceId,
@@ -118,9 +117,10 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getInstances(definitionId, instanceId,
-			workflowName, workflowVersion, gtStartDate, ltStartDate, gtEndDate,
-			ltEndDate, hideEndedTasks, andOperator, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getInstances(definitionId,
+			instanceId, workflowName, workflowVersion, gtStartDate,
+			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
+			begin, end);
 	}
 
 	public int getInstancesCount(long definitionId, long instanceId,
@@ -132,9 +132,9 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getInstancesCount(definitionId, instanceId,
-			workflowName, workflowVersion, gtStartDate, ltStartDate, gtEndDate,
-			ltEndDate, hideEndedTasks, andOperator);
+		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCount(definitionId,
+			instanceId, workflowName, workflowVersion, gtStartDate,
+			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesCountXml(long definitionId,
@@ -146,9 +146,9 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getInstancesCountXml(definitionId, instanceId,
-			workflowName, workflowVersion, gtStartDate, ltStartDate, gtEndDate,
-			ltEndDate, hideEndedTasks, andOperator);
+		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCountXml(definitionId,
+			instanceId, workflowName, workflowVersion, gtStartDate,
+			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesXml(long definitionId, long instanceId,
@@ -160,9 +160,10 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getInstancesXml(definitionId, instanceId,
-			workflowName, workflowVersion, gtStartDate, ltStartDate, gtEndDate,
-			ltEndDate, hideEndedTasks, andOperator, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getInstancesXml(definitionId,
+			instanceId, workflowName, workflowVersion, gtStartDate,
+			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
+			begin, end);
 	}
 
 	public java.util.List getTaskFormElements(long taskId)
@@ -170,7 +171,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getTaskFormElements(taskId);
+		return WorkflowComponentServiceFactory.getTxImpl().getTaskFormElements(taskId);
 	}
 
 	public java.lang.String getTaskFormElementsXml(long taskId)
@@ -178,7 +179,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getTaskFormElementsXml(taskId);
+		return WorkflowComponentServiceFactory.getTxImpl()
+											  .getTaskFormElementsXml(taskId);
 	}
 
 	public java.util.List getTaskTransitions(long taskId)
@@ -186,7 +188,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getTaskTransitions(taskId);
+		return WorkflowComponentServiceFactory.getTxImpl().getTaskTransitions(taskId);
 	}
 
 	public java.lang.String getTaskTransitionsXml(long taskId)
@@ -194,7 +196,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getTaskTransitionsXml(taskId);
+		return WorkflowComponentServiceFactory.getTxImpl()
+											  .getTaskTransitionsXml(taskId);
 	}
 
 	public java.util.List getUserTasks(long instanceId,
@@ -208,9 +211,10 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserTasks(instanceId, taskName, workflowName,
-			assignedTo, gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
-			gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getUserTasks(instanceId,
+			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator, begin, end);
 	}
 
 	public int getUserTasksCount(long instanceId, java.lang.String taskName,
@@ -223,9 +227,10 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserTasksCount(instanceId, taskName,
-			workflowName, assignedTo, gtCreateDate, ltCreateDate, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCount(instanceId,
+			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator);
 	}
 
 	public java.lang.String getUserTasksCountXml(long instanceId,
@@ -238,9 +243,10 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserTasksCountXml(instanceId, taskName,
-			workflowName, assignedTo, gtCreateDate, ltCreateDate, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCountXml(instanceId,
+			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator);
 	}
 
 	public java.lang.String getUserTasksXml(long instanceId,
@@ -254,23 +260,25 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserTasksXml(instanceId, taskName, workflowName,
-			assignedTo, gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
-			gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
+		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksXml(instanceId,
+			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator, begin, end);
 	}
 
 	public void signalInstance(long instanceId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().signalInstance(instanceId);
+		WorkflowComponentServiceFactory.getTxImpl().signalInstance(instanceId);
 	}
 
 	public void signalToken(long instanceId, long tokenId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().signalToken(instanceId, tokenId);
+		WorkflowComponentServiceFactory.getTxImpl().signalToken(instanceId,
+			tokenId);
 	}
 
 	public java.lang.String startWorkflow(long definitionId)
@@ -278,7 +286,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().startWorkflow(definitionId);
+		return WorkflowComponentServiceFactory.getTxImpl().startWorkflow(definitionId);
 	}
 
 	public java.util.Map updateTask(long taskId, java.lang.String transition,
@@ -287,7 +295,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateTask(taskId, transition, parameterMap);
+		return WorkflowComponentServiceFactory.getTxImpl().updateTask(taskId,
+			transition, parameterMap);
 	}
 
 	public java.lang.String updateTaskXml(long taskId,
@@ -296,7 +305,8 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateTaskXml(taskId, transition, parameterMap);
+		return WorkflowComponentServiceFactory.getTxImpl().updateTaskXml(taskId,
+			transition, parameterMap);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.ReleaseLocalService;
+import com.liferay.portal.service.spring.ReleaseLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,25 +40,16 @@ import javax.ejb.SessionContext;
  */
 public class ReleaseLocalServiceEJBImpl implements ReleaseLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = ReleaseLocalService.class.getName() +
-		".transaction";
-
-	public static ReleaseLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ReleaseLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getRelease();
+		return ReleaseLocalServiceFactory.getTxImpl().getRelease();
 	}
 
 	public com.liferay.portal.model.Release updateRelease()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateRelease();
+		return ReleaseLocalServiceFactory.getTxImpl().updateRelease();
 	}
 
 	public void ejbCreate() throws CreateException {

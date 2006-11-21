@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class ImageLocalServiceFactory {
 	public static final String CLASS_NAME = ImageLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = ImageLocalService.class.getName() +
+		".transaction";
 
 	public static ImageLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class ImageLocalServiceFactory {
 
 	public void setService(ImageLocalService service) {
 		_service = service;
+	}
+
+	public static ImageLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		ImageLocalService service = (ImageLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private ImageLocalService _service;

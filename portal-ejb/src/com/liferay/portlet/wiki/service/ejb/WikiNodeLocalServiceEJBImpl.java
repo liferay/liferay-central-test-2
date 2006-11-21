@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.wiki.service.spring.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,23 +41,14 @@ import javax.ejb.SessionContext;
  */
 public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = WikiNodeLocalService.class.getName() +
-		".transaction";
-
-	public static WikiNodeLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (WikiNodeLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String userId, java.lang.String plid, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addNode(userId, plid, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return WikiNodeLocalServiceFactory.getTxImpl().addNode(userId, plid,
+			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
@@ -65,8 +57,8 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addNode(userId, plid, name, description,
-			communityPermissions, guestPermissions);
+		return WikiNodeLocalServiceFactory.getTxImpl().addNode(userId, plid,
+			name, description, communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
@@ -78,25 +70,25 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addNode(userId, plid, name, description,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+		return WikiNodeLocalServiceFactory.getTxImpl().addNode(userId, plid,
+			name, description, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addNodeResources(java.lang.String nodeId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addNodeResources(nodeId, addCommunityPermissions,
-			addGuestPermissions);
+		WikiNodeLocalServiceFactory.getTxImpl().addNodeResources(nodeId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addNodeResources(com.liferay.portlet.wiki.model.WikiNode node,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addNodeResources(node, addCommunityPermissions,
-			addGuestPermissions);
+		WikiNodeLocalServiceFactory.getTxImpl().addNodeResources(node,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addNodeResources(java.lang.String nodeId,
@@ -104,8 +96,8 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addNodeResources(nodeId, communityPermissions,
-			guestPermissions);
+		WikiNodeLocalServiceFactory.getTxImpl().addNodeResources(nodeId,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addNodeResources(com.liferay.portlet.wiki.model.WikiNode node,
@@ -113,59 +105,61 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addNodeResources(node, communityPermissions,
-			guestPermissions);
+		WikiNodeLocalServiceFactory.getTxImpl().addNodeResources(node,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteNode(java.lang.String nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteNode(nodeId);
+		WikiNodeLocalServiceFactory.getTxImpl().deleteNode(nodeId);
 	}
 
 	public void deleteNode(com.liferay.portlet.wiki.model.WikiNode node)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteNode(node);
+		WikiNodeLocalServiceFactory.getTxImpl().deleteNode(node);
 	}
 
 	public void deleteNodes(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteNodes(groupId);
+		WikiNodeLocalServiceFactory.getTxImpl().deleteNodes(groupId);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode getNode(
 		java.lang.String nodeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getNode(nodeId);
+		return WikiNodeLocalServiceFactory.getTxImpl().getNode(nodeId);
 	}
 
 	public java.util.List getNodes(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getNodes(groupId);
+		return WikiNodeLocalServiceFactory.getTxImpl().getNodes(groupId);
 	}
 
 	public java.util.List getNodes(java.lang.String groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getNodes(groupId, begin, end);
+		return WikiNodeLocalServiceFactory.getTxImpl().getNodes(groupId, begin,
+			end);
 	}
 
 	public int getNodesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getNodesCount(groupId);
+		return WikiNodeLocalServiceFactory.getTxImpl().getNodesCount(groupId);
 	}
 
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException {
-		getService().reIndex(ids);
+		WikiNodeLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String[] nodeIds,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		return getService().search(companyId, groupId, nodeIds, keywords);
+		return WikiNodeLocalServiceFactory.getTxImpl().search(companyId,
+			groupId, nodeIds, keywords);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(
@@ -173,7 +167,8 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		java.lang.String description)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateNode(nodeId, name, description);
+		return WikiNodeLocalServiceFactory.getTxImpl().updateNode(nodeId, name,
+			description);
 	}
 
 	public void ejbCreate() throws CreateException {

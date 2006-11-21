@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.LayoutSetService;
+import com.liferay.portal.service.spring.LayoutSetServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
-	public static final String CLASS_NAME = LayoutSetService.class.getName() +
-		".transaction";
-
-	public static LayoutSetService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (LayoutSetService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)
@@ -55,7 +47,8 @@ public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateLookAndFeel(ownerId, themeId, colorSchemeId);
+		return LayoutSetServiceFactory.getTxImpl().updateLookAndFeel(ownerId,
+			themeId, colorSchemeId);
 	}
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(
@@ -64,7 +57,8 @@ public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateVirtualHost(ownerId, virtualHost);
+		return LayoutSetServiceFactory.getTxImpl().updateVirtualHost(ownerId,
+			virtualHost);
 	}
 
 	public void ejbCreate() throws CreateException {

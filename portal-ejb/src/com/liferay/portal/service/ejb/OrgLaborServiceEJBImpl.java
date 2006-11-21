@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.OrgLaborService;
+import com.liferay.portal.service.spring.OrgLaborServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
-	public static final String CLASS_NAME = OrgLaborService.class.getName() +
-		".transaction";
-
-	public static OrgLaborService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (OrgLaborService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.OrgLabor addOrgLabor(
 		java.lang.String organizationId, java.lang.String typeId, int sunOpen,
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
@@ -57,16 +49,17 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addOrgLabor(organizationId, typeId, sunOpen,
-			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
-			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
+		return OrgLaborServiceFactory.getTxImpl().addOrgLabor(organizationId,
+			typeId, sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
+			wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
+			satClose);
 	}
 
 	public void deleteOrgLabor(java.lang.String orgLaborId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteOrgLabor(orgLaborId);
+		OrgLaborServiceFactory.getTxImpl().deleteOrgLabor(orgLaborId);
 	}
 
 	public com.liferay.portal.model.OrgLabor getOrgLabor(
@@ -75,7 +68,7 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getOrgLabor(orgLaborId);
+		return OrgLaborServiceFactory.getTxImpl().getOrgLabor(orgLaborId);
 	}
 
 	public java.util.List getOrgLabors(java.lang.String organizationId)
@@ -83,7 +76,7 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getOrgLabors(organizationId);
+		return OrgLaborServiceFactory.getTxImpl().getOrgLabors(organizationId);
 	}
 
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(
@@ -95,9 +88,9 @@ public class OrgLaborServiceEJBImpl implements OrgLaborService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateOrgLabor(orgLaborId, sunOpen, sunClose,
-			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
-			thuClose, friOpen, friClose, satOpen, satClose);
+		return OrgLaborServiceFactory.getTxImpl().updateOrgLabor(orgLaborId,
+			sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
+			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 
 	public void ejbCreate() throws CreateException {

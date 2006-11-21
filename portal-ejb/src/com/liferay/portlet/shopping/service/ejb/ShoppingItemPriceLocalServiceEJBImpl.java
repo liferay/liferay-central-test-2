@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemPriceLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,19 +41,10 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingItemPriceLocalServiceEJBImpl
 	implements ShoppingItemPriceLocalService, SessionBean {
-	public static final String CLASS_NAME = ShoppingItemPriceLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingItemPriceLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingItemPriceLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getItemPrices(java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getItemPrices(itemId);
+		return ShoppingItemPriceLocalServiceFactory.getTxImpl().getItemPrices(itemId);
 	}
 
 	public void ejbCreate() throws CreateException {

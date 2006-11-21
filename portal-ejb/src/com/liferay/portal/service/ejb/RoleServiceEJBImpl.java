@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.RoleService;
+import com.liferay.portal.service.spring.RoleServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,28 +40,19 @@ import javax.ejb.SessionContext;
  *
  */
 public class RoleServiceEJBImpl implements RoleService, SessionBean {
-	public static final String CLASS_NAME = RoleService.class.getName() +
-		".transaction";
-
-	public static RoleService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RoleService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Role addRole(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addRole(name);
+		return RoleServiceFactory.getTxImpl().addRole(name);
 	}
 
 	public void deleteRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteRole(roleId);
+		RoleServiceFactory.getTxImpl().deleteRole(roleId);
 	}
 
 	public com.liferay.portal.model.Role getGroupRole(
@@ -69,7 +61,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getGroupRole(companyId, groupId);
+		return RoleServiceFactory.getTxImpl().getGroupRole(companyId, groupId);
 	}
 
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
@@ -77,7 +69,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRole(roleId);
+		return RoleServiceFactory.getTxImpl().getRole(roleId);
 	}
 
 	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
@@ -86,7 +78,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRole(companyId, name);
+		return RoleServiceFactory.getTxImpl().getRole(companyId, name);
 	}
 
 	public java.util.List getUserRelatedRoles(java.lang.String userId,
@@ -95,7 +87,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserRelatedRoles(userId, groups);
+		return RoleServiceFactory.getTxImpl().getUserRelatedRoles(userId, groups);
 	}
 
 	public java.util.List getUserRoles(java.lang.String userId)
@@ -103,7 +95,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserRoles(userId);
+		return RoleServiceFactory.getTxImpl().getUserRoles(userId);
 	}
 
 	public com.liferay.portal.model.Role updateRole(java.lang.String roleId,
@@ -112,7 +104,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateRole(roleId, name);
+		return RoleServiceFactory.getTxImpl().updateRole(roleId, name);
 	}
 
 	public void ejbCreate() throws CreateException {

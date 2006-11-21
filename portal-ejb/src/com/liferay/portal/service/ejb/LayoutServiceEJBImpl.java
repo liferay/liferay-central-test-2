@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.LayoutService;
+import com.liferay.portal.service.spring.LayoutServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
-	public static final String CLASS_NAME = LayoutService.class.getName() +
-		".transaction";
-
-	public static LayoutService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (LayoutService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
 		boolean privateLayout, java.lang.String parentLayoutId,
 		java.lang.String name, java.lang.String type, boolean hidden,
@@ -56,15 +48,15 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addLayout(groupId, privateLayout, parentLayoutId,
-			name, type, hidden, friendlyURL);
+		return LayoutServiceFactory.getTxImpl().addLayout(groupId,
+			privateLayout, parentLayoutId, name, type, hidden, friendlyURL);
 	}
 
 	public void deleteLayout(java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteLayout(layoutId, ownerId);
+		LayoutServiceFactory.getTxImpl().deleteLayout(layoutId, ownerId);
 	}
 
 	public java.lang.String getLayoutName(java.lang.String layoutId,
@@ -73,7 +65,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getLayoutName(layoutId, ownerId, languageId);
+		return LayoutServiceFactory.getTxImpl().getLayoutName(layoutId,
+			ownerId, languageId);
 	}
 
 	public com.liferay.portal.model.LayoutReference[] getLayoutReferences(
@@ -82,8 +75,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getLayoutReferences(companyId, portletId, prefsKey,
-			prefsValue);
+		return LayoutServiceFactory.getTxImpl().getLayoutReferences(companyId,
+			portletId, prefsKey, prefsValue);
 	}
 
 	public void setLayouts(java.lang.String ownerId,
@@ -91,7 +84,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutServiceFactory.getTxImpl().setLayouts(ownerId, parentLayoutId,
+			layoutIds);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(
@@ -103,8 +97,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateLayout(layoutId, ownerId, parentLayoutId,
-			name, languageId, type, hidden, friendlyURL);
+		return LayoutServiceFactory.getTxImpl().updateLayout(layoutId, ownerId,
+			parentLayoutId, name, languageId, type, hidden, friendlyURL);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(
@@ -114,7 +108,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateLayout(layoutId, ownerId, typeSettings);
+		return LayoutServiceFactory.getTxImpl().updateLayout(layoutId, ownerId,
+			typeSettings);
 	}
 
 	public com.liferay.portal.model.Layout updateLookAndFeel(
@@ -124,8 +119,8 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateLookAndFeel(layoutId, ownerId, themeId,
-			colorSchemeId);
+		return LayoutServiceFactory.getTxImpl().updateLookAndFeel(layoutId,
+			ownerId, themeId, colorSchemeId);
 	}
 
 	public void ejbCreate() throws CreateException {

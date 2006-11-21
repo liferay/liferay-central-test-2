@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class UserTrackerLocalServiceFactory {
 	public static final String CLASS_NAME = UserTrackerLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = UserTrackerLocalService.class.getName() +
+		".transaction";
 
 	public static UserTrackerLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class UserTrackerLocalServiceFactory {
 
 	public void setService(UserTrackerLocalService service) {
 		_service = service;
+	}
+
+	public static UserTrackerLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		UserTrackerLocalService service = (UserTrackerLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private UserTrackerLocalService _service;

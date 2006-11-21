@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFileShortcutLocalServiceFactory {
 	public static final String CLASS_NAME = DLFileShortcutLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFileShortcutLocalService.class.getName() +
+		".transaction";
 
 	public static DLFileShortcutLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFileShortcutLocalServiceFactory {
 
 	public void setService(DLFileShortcutLocalService service) {
 		_service = service;
+	}
+
+	public static DLFileShortcutLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFileShortcutLocalService service = (DLFileShortcutLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFileShortcutLocalService _service;

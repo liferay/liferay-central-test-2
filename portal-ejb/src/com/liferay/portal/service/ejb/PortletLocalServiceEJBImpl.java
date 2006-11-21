@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.PortletLocalService;
+import com.liferay.portal.service.spring.PortletLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,61 +40,57 @@ import javax.ejb.SessionContext;
  */
 public class PortletLocalServiceEJBImpl implements PortletLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = PortletLocalService.class.getName() +
-		".transaction";
-
-	public static PortletLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PortletLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml)
 		throws org.dom4j.DocumentException, java.io.IOException {
-		return getService().getEARDisplay(xml);
+		return PortletLocalServiceFactory.getTxImpl().getEARDisplay(xml);
 	}
 
 	public com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
 		throws org.dom4j.DocumentException, java.io.IOException {
-		return getService().getWARDisplay(servletContextName, xml);
+		return PortletLocalServiceFactory.getTxImpl().getWARDisplay(servletContextName,
+			xml);
 	}
 
 	public java.util.Map getFriendlyURLPlugins() {
-		return getService().getFriendlyURLPlugins();
+		return PortletLocalServiceFactory.getTxImpl().getFriendlyURLPlugins();
 	}
 
 	public com.liferay.portal.model.Portlet getPortletById(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
-		return getService().getPortletById(companyId, portletId);
+		return PortletLocalServiceFactory.getTxImpl().getPortletById(companyId,
+			portletId);
 	}
 
 	public com.liferay.portal.model.Portlet getPortletByStrutsPath(
 		java.lang.String companyId, java.lang.String strutsPath)
 		throws com.liferay.portal.SystemException {
-		return getService().getPortletByStrutsPath(companyId, strutsPath);
+		return PortletLocalServiceFactory.getTxImpl().getPortletByStrutsPath(companyId,
+			strutsPath);
 	}
 
 	public java.util.List getPortlets(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
-		return getService().getPortlets(companyId);
+		return PortletLocalServiceFactory.getTxImpl().getPortlets(companyId);
 	}
 
 	public java.util.List getPortlets(java.lang.String companyId,
 		boolean showSystem, boolean showPortal)
 		throws com.liferay.portal.SystemException {
-		return getService().getPortlets(companyId, showSystem, showPortal);
+		return PortletLocalServiceFactory.getTxImpl().getPortlets(companyId,
+			showSystem, showPortal);
 	}
 
 	public void initEAR(java.lang.String[] xmls) {
-		getService().initEAR(xmls);
+		PortletLocalServiceFactory.getTxImpl().initEAR(xmls);
 	}
 
 	public java.util.List initWAR(java.lang.String servletContextName,
 		java.lang.String[] xmls) {
-		return getService().initWAR(servletContextName, xmls);
+		return PortletLocalServiceFactory.getTxImpl().initWAR(servletContextName,
+			xmls);
 	}
 
 	public com.liferay.portal.model.Portlet updatePortlet(
@@ -101,7 +98,8 @@ public class PortletLocalServiceEJBImpl implements PortletLocalService,
 		java.lang.String roles, boolean active)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updatePortlet(companyId, portletId, roles, active);
+		return PortletLocalServiceFactory.getTxImpl().updatePortlet(companyId,
+			portletId, roles, active);
 	}
 
 	public void ejbCreate() throws CreateException {

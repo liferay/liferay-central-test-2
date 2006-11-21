@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,47 +41,41 @@ import javax.ejb.SessionContext;
  */
 public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = MBStatsUserLocalService.class.getName() +
-		".transaction";
-
-	public static MBStatsUserLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MBStatsUserLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteStatsUserByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteStatsUserByGroupId(groupId);
+		MBStatsUserLocalServiceFactory.getTxImpl().deleteStatsUserByGroupId(groupId);
 	}
 
 	public void deleteStatsUserByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteStatsUserByUserId(userId);
+		MBStatsUserLocalServiceFactory.getTxImpl().deleteStatsUserByUserId(userId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
 		java.lang.String groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getStatsUser(groupId, userId);
+		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUser(groupId,
+			userId);
 	}
 
 	public java.util.List getStatsUsers(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().getStatsUsers(groupId, begin, end);
+		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUsers(groupId,
+			begin, end);
 	}
 
 	public int getStatsUsersCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getStatsUsersCount(groupId);
+		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUsersCount(groupId);
 	}
 
 	public void updateStatsUser(java.lang.String groupId,
 		java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().updateStatsUser(groupId, userId);
+		MBStatsUserLocalServiceFactory.getTxImpl().updateStatsUser(groupId,
+			userId);
 	}
 
 	public void ejbCreate() throws CreateException {

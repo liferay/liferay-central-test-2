@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingCouponLocalServiceEJBImpl
 	implements ShoppingCouponLocalService, SessionBean {
-	public static final String CLASS_NAME = ShoppingCouponLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingCouponLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingCouponLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String couponId, boolean autoCouponId, java.lang.String name,
@@ -60,45 +52,46 @@ public class ShoppingCouponLocalServiceEJBImpl
 		double minOrder, double discount, java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addCoupon(userId, plid, couponId, autoCouponId,
-			name, description, startDateMonth, startDateDay, startDateYear,
-			startDateHour, startDateMinute, endDateMonth, endDateDay,
-			endDateYear, endDateHour, endDateMinute, neverExpire, active,
-			limitCategories, limitSkus, minOrder, discount, discountType);
+		return ShoppingCouponLocalServiceFactory.getTxImpl().addCoupon(userId,
+			plid, couponId, autoCouponId, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
+			neverExpire, active, limitCategories, limitSkus, minOrder,
+			discount, discountType);
 	}
 
 	public void deleteCoupon(java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteCoupon(couponId);
+		ShoppingCouponLocalServiceFactory.getTxImpl().deleteCoupon(couponId);
 	}
 
 	public void deleteCoupons(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteCoupons(groupId);
+		ShoppingCouponLocalServiceFactory.getTxImpl().deleteCoupons(groupId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
 		java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getCoupon(couponId);
+		return ShoppingCouponLocalServiceFactory.getTxImpl().getCoupon(couponId);
 	}
 
 	public java.util.List search(java.lang.String couponId,
 		java.lang.String plid, java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().search(couponId, plid, companyId, active,
-			discountType, andOperator, begin, end);
+		return ShoppingCouponLocalServiceFactory.getTxImpl().search(couponId,
+			plid, companyId, active, discountType, andOperator, begin, end);
 	}
 
 	public int searchCount(java.lang.String couponId, java.lang.String groupId,
 		java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getService().searchCount(couponId, groupId, companyId, active,
-			discountType, andOperator);
+		return ShoppingCouponLocalServiceFactory.getTxImpl().searchCount(couponId,
+			groupId, companyId, active, discountType, andOperator);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
@@ -112,11 +105,11 @@ public class ShoppingCouponLocalServiceEJBImpl
 		java.lang.String discountType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateCoupon(userId, couponId, name, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
+		return ShoppingCouponLocalServiceFactory.getTxImpl().updateCoupon(userId,
+			couponId, name, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, endDateHour, endDateMinute, neverExpire,
+			active, limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 
 	public void ejbCreate() throws CreateException {

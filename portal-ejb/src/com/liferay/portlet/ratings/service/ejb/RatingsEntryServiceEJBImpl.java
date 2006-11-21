@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.ratings.service.spring.RatingsEntryService;
+import com.liferay.portlet.ratings.service.spring.RatingsEntryServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,22 +42,14 @@ import javax.ejb.SessionContext;
  */
 public class RatingsEntryServiceEJBImpl implements RatingsEntryService,
 	SessionBean {
-	public static final String CLASS_NAME = RatingsEntryService.class.getName() +
-		".transaction";
-
-	public static RatingsEntryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RatingsEntryService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.ratings.model.RatingsEntry updateEntry(
 		java.lang.String className, java.lang.String classPK, double score)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateEntry(className, classPK, score);
+		return RatingsEntryServiceFactory.getTxImpl().updateEntry(className,
+			classPK, score);
 	}
 
 	public void ejbCreate() throws CreateException {

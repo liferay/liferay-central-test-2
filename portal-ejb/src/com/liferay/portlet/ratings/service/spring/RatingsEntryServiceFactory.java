@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class RatingsEntryServiceFactory {
 	public static final String CLASS_NAME = RatingsEntryServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = RatingsEntryService.class.getName() +
+		".transaction";
 
 	public static RatingsEntryService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class RatingsEntryServiceFactory {
 
 	public void setService(RatingsEntryService service) {
 		_service = service;
+	}
+
+	public static RatingsEntryService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		RatingsEntryService service = (RatingsEntryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private RatingsEntryService _service;

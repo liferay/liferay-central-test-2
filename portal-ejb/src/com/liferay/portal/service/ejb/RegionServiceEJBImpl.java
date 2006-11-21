@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.RegionService;
+import com.liferay.portal.service.spring.RegionServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,41 +40,32 @@ import javax.ejb.SessionContext;
  *
  */
 public class RegionServiceEJBImpl implements RegionService, SessionBean {
-	public static final String CLASS_NAME = RegionService.class.getName() +
-		".transaction";
-
-	public static RegionService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RegionService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getRegions()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRegions();
+		return RegionServiceFactory.getTxImpl().getRegions();
 	}
 
 	public java.util.List getRegions(java.lang.String countryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRegions(countryId);
+		return RegionServiceFactory.getTxImpl().getRegions(countryId);
 	}
 
 	public java.util.List getRegions(boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRegions(active);
+		return RegionServiceFactory.getTxImpl().getRegions(active);
 	}
 
 	public java.util.List getRegions(java.lang.String countryId, boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRegions(countryId, active);
+		return RegionServiceFactory.getTxImpl().getRegions(countryId, active);
 	}
 
 	public com.liferay.portal.model.Region getRegion(java.lang.String regionId)
@@ -81,7 +73,7 @@ public class RegionServiceEJBImpl implements RegionService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getRegion(regionId);
+		return RegionServiceFactory.getTxImpl().getRegion(regionId);
 	}
 
 	public void ejbCreate() throws CreateException {

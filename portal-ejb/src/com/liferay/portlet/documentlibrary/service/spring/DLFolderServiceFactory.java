@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFolderServiceFactory {
 	public static final String CLASS_NAME = DLFolderServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFolderService.class.getName() +
+		".transaction";
 
 	public static DLFolderService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFolderServiceFactory {
 
 	public void setService(DLFolderService service) {
 		_service = service;
+	}
+
+	public static DLFolderService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFolderService service = (DLFolderService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFolderService _service;

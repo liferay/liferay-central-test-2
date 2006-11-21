@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.PhoneLocalService;
+import com.liferay.portal.service.spring.PhoneLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -38,47 +39,40 @@ import javax.ejb.SessionContext;
  *
  */
 public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean {
-	public static final String CLASS_NAME = PhoneLocalService.class.getName() +
-		".transaction";
-
-	public static PhoneLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PhoneLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String number, java.lang.String extension,
 		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addPhone(userId, className, classPK, number,
-			extension, typeId, primary);
+		return PhoneLocalServiceFactory.getTxImpl().addPhone(userId, className,
+			classPK, number, extension, typeId, primary);
 	}
 
 	public void deletePhone(java.lang.String phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deletePhone(phoneId);
+		PhoneLocalServiceFactory.getTxImpl().deletePhone(phoneId);
 	}
 
 	public void deletePhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		getService().deletePhones(companyId, className, classPK);
+		PhoneLocalServiceFactory.getTxImpl().deletePhones(companyId, className,
+			classPK);
 	}
 
 	public com.liferay.portal.model.Phone getPhone(java.lang.String phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getPhone(phoneId);
+		return PhoneLocalServiceFactory.getTxImpl().getPhone(phoneId);
 	}
 
 	public java.util.List getPhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		return getService().getPhones(companyId, className, classPK);
+		return PhoneLocalServiceFactory.getTxImpl().getPhones(companyId,
+			className, classPK);
 	}
 
 	public com.liferay.portal.model.Phone updatePhone(
@@ -86,8 +80,8 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 		java.lang.String extension, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updatePhone(phoneId, number, extension, typeId,
-			primary);
+		return PhoneLocalServiceFactory.getTxImpl().updatePhone(phoneId,
+			number, extension, typeId, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

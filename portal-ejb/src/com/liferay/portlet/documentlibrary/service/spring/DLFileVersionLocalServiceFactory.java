@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFileVersionLocalServiceFactory {
 	public static final String CLASS_NAME = DLFileVersionLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFileVersionLocalService.class.getName() +
+		".transaction";
 
 	public static DLFileVersionLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFileVersionLocalServiceFactory {
 
 	public void setService(DLFileVersionLocalService service) {
 		_service = service;
+	}
+
+	public static DLFileVersionLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFileVersionLocalService service = (DLFileVersionLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFileVersionLocalService _service;

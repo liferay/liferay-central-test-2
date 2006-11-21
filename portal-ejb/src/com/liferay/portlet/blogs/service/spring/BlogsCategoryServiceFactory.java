@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class BlogsCategoryServiceFactory {
 	public static final String CLASS_NAME = BlogsCategoryServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = BlogsCategoryService.class.getName() +
+		".transaction";
 
 	public static BlogsCategoryService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class BlogsCategoryServiceFactory {
 
 	public void setService(BlogsCategoryService service) {
 		_service = service;
+	}
+
+	public static BlogsCategoryService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		BlogsCategoryService service = (BlogsCategoryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private BlogsCategoryService _service;

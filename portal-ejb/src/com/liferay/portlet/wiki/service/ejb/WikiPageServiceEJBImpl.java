@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.wiki.service.spring.WikiPageService;
+import com.liferay.portlet.wiki.service.spring.WikiPageServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,29 +41,20 @@ import javax.ejb.SessionContext;
  *
  */
 public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
-	public static final String CLASS_NAME = WikiPageService.class.getName() +
-		".transaction";
-
-	public static WikiPageService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (WikiPageService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addPage(nodeId, title);
+		return WikiPageServiceFactory.getTxImpl().addPage(nodeId, title);
 	}
 
 	public void deletePage(java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deletePage(nodeId, title);
+		WikiPageServiceFactory.getTxImpl().deletePage(nodeId, title);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(
@@ -71,7 +63,7 @@ public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getPage(nodeId, title);
+		return WikiPageServiceFactory.getTxImpl().getPage(nodeId, title);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(
@@ -80,7 +72,7 @@ public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getPage(nodeId, title, version);
+		return WikiPageServiceFactory.getTxImpl().getPage(nodeId, title, version);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(
@@ -89,7 +81,8 @@ public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().revertPage(nodeId, title, version);
+		return WikiPageServiceFactory.getTxImpl().revertPage(nodeId, title,
+			version);
 	}
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(
@@ -99,7 +92,8 @@ public class WikiPageServiceEJBImpl implements WikiPageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updatePage(nodeId, title, content, format);
+		return WikiPageServiceFactory.getTxImpl().updatePage(nodeId, title,
+			content, format);
 	}
 
 	public void ejbCreate() throws CreateException {

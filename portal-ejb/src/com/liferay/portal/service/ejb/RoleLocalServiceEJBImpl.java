@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.RoleLocalService;
+import com.liferay.portal.service.spring.RoleLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -38,20 +39,12 @@ import javax.ejb.SessionContext;
  *
  */
 public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
-	public static final String CLASS_NAME = RoleLocalService.class.getName() +
-		".transaction";
-
-	public static RoleLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RoleLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addRole(userId, companyId, name);
+		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
+			name);
 	}
 
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
@@ -59,90 +52,97 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addRole(userId, companyId, name, className, classPK);
+		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
+			name, className, classPK);
 	}
 
 	public void checkSystemRoles(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().checkSystemRoles(companyId);
+		RoleLocalServiceFactory.getTxImpl().checkSystemRoles(companyId);
 	}
 
 	public void deleteRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteRole(roleId);
+		RoleLocalServiceFactory.getTxImpl().deleteRole(roleId);
 	}
 
 	public com.liferay.portal.model.Role getGroupRole(
 		java.lang.String companyId, java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getGroupRole(companyId, groupId);
+		return RoleLocalServiceFactory.getTxImpl().getGroupRole(companyId,
+			groupId);
 	}
 
 	public com.liferay.portal.model.Role getRole(java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getRole(roleId);
+		return RoleLocalServiceFactory.getTxImpl().getRole(roleId);
 	}
 
 	public com.liferay.portal.model.Role getRole(java.lang.String companyId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getRole(companyId, name);
+		return RoleLocalServiceFactory.getTxImpl().getRole(companyId, name);
 	}
 
 	public java.util.List getUserRelatedRoles(java.lang.String userId,
 		java.util.List groups)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getUserRelatedRoles(userId, groups);
+		return RoleLocalServiceFactory.getTxImpl().getUserRelatedRoles(userId,
+			groups);
 	}
 
 	public java.util.List getUserRoles(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getUserRoles(userId);
+		return RoleLocalServiceFactory.getTxImpl().getUserRoles(userId);
 	}
 
 	public boolean hasUserRole(java.lang.String userId,
 		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().hasUserRole(userId, companyId, name);
+		return RoleLocalServiceFactory.getTxImpl().hasUserRole(userId,
+			companyId, name);
 	}
 
 	public boolean hasUserRoles(java.lang.String userId,
 		java.lang.String companyId, java.lang.String[] names)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().hasUserRoles(userId, companyId, names);
+		return RoleLocalServiceFactory.getTxImpl().hasUserRoles(userId,
+			companyId, names);
 	}
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, name, description, begin, end);
+		return RoleLocalServiceFactory.getTxImpl().search(companyId, name,
+			description, begin, end);
 	}
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
 		java.lang.String description) throws com.liferay.portal.SystemException {
-		return getService().searchCount(companyId, name, description);
+		return RoleLocalServiceFactory.getTxImpl().searchCount(companyId, name,
+			description);
 	}
 
 	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().setUserRoles(userId, roleIds);
+		RoleLocalServiceFactory.getTxImpl().setUserRoles(userId, roleIds);
 	}
 
 	public com.liferay.portal.model.Role updateRole(java.lang.String roleId,
 		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateRole(roleId, name);
+		return RoleLocalServiceFactory.getTxImpl().updateRole(roleId, name);
 	}
 
 	public void ejbCreate() throws CreateException {

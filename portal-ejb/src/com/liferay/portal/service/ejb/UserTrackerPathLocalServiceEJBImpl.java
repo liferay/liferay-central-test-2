@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.UserTrackerPathLocalService;
+import com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,18 +40,11 @@ import javax.ejb.SessionContext;
  */
 public class UserTrackerPathLocalServiceEJBImpl
 	implements UserTrackerPathLocalService, SessionBean {
-	public static final String CLASS_NAME = UserTrackerPathLocalService.class.getName() +
-		".transaction";
-
-	public static UserTrackerPathLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (UserTrackerPathLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getUserTrackerPaths(java.lang.String userTrackerId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getService().getUserTrackerPaths(userTrackerId, begin, end);
+		return UserTrackerPathLocalServiceFactory.getTxImpl()
+												 .getUserTrackerPaths(userTrackerId,
+			begin, end);
 	}
 
 	public void ejbCreate() throws CreateException {

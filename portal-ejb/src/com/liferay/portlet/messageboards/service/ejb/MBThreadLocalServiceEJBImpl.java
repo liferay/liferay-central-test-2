@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
+import com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,80 +41,77 @@ import javax.ejb.SessionContext;
  */
 public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = MBThreadLocalService.class.getName() +
-		".transaction";
-
-	public static MBThreadLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MBThreadLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteThread(java.lang.String threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteThread(threadId);
+		MBThreadLocalServiceFactory.getTxImpl().deleteThread(threadId);
 	}
 
 	public void deleteThread(
 		com.liferay.portlet.messageboards.model.MBThread thread)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteThread(thread);
+		MBThreadLocalServiceFactory.getTxImpl().deleteThread(thread);
 	}
 
 	public void deleteThreads(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteThreads(categoryId);
+		MBThreadLocalServiceFactory.getTxImpl().deleteThreads(categoryId);
 	}
 
 	public int getCategoriesThreadsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoriesThreadsCount(categoryIds);
+		return MBThreadLocalServiceFactory.getTxImpl()
+										  .getCategoriesThreadsCount(categoryIds);
 	}
 
 	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().getGroupThreads(groupId, begin, end);
+		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreads(groupId,
+			begin, end);
 	}
 
 	public java.util.List getGroupThreads(java.lang.String groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getGroupThreads(groupId, userId, begin, end);
+		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreads(groupId,
+			userId, begin, end);
 	}
 
 	public int getGroupThreadsCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		return getService().getGroupThreadsCount(groupId);
+		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreadsCount(groupId);
 	}
 
 	public int getGroupThreadsCount(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
-		return getService().getGroupThreadsCount(groupId, userId);
+		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreadsCount(groupId,
+			userId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBThread getThread(
 		java.lang.String threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getThread(threadId);
+		return MBThreadLocalServiceFactory.getTxImpl().getThread(threadId);
 	}
 
 	public java.util.List getThreads(java.lang.String categoryId, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().getThreads(categoryId, begin, end);
+		return MBThreadLocalServiceFactory.getTxImpl().getThreads(categoryId,
+			begin, end);
 	}
 
 	public int getThreadsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getThreadsCount(categoryId);
+		return MBThreadLocalServiceFactory.getTxImpl().getThreadsCount(categoryId);
 	}
 
 	public boolean hasReadThread(java.lang.String userId,
 		java.lang.String threadId) throws com.liferay.portal.SystemException {
-		return getService().hasReadThread(userId, threadId);
+		return MBThreadLocalServiceFactory.getTxImpl().hasReadThread(userId,
+			threadId);
 	}
 
 	public void ejbCreate() throws CreateException {

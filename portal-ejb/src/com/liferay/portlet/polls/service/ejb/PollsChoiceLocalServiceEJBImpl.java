@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.polls.service.spring.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,18 +41,9 @@ import javax.ejb.SessionContext;
  */
 public class PollsChoiceLocalServiceEJBImpl implements PollsChoiceLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = PollsChoiceLocalService.class.getName() +
-		".transaction";
-
-	public static PollsChoiceLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PollsChoiceLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
-		return getService().getChoices(questionId);
+		return PollsChoiceLocalServiceFactory.getTxImpl().getChoices(questionId);
 	}
 
 	public void ejbCreate() throws CreateException {

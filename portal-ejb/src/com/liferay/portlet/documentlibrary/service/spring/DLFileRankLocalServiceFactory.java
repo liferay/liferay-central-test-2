@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFileRankLocalServiceFactory {
 	public static final String CLASS_NAME = DLFileRankLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFileRankLocalService.class.getName() +
+		".transaction";
 
 	public static DLFileRankLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFileRankLocalServiceFactory {
 
 	public void setService(DLFileRankLocalService service) {
 		_service = service;
+	}
+
+	public static DLFileRankLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFileRankLocalService service = (DLFileRankLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFileRankLocalService _service;

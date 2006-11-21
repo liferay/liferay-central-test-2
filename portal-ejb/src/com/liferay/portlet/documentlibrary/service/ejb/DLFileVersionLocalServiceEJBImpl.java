@@ -25,6 +25,7 @@ package com.liferay.portlet.documentlibrary.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,18 +41,10 @@ import javax.ejb.SessionContext;
  */
 public class DLFileVersionLocalServiceEJBImpl
 	implements DLFileVersionLocalService, SessionBean {
-	public static final String CLASS_NAME = DLFileVersionLocalService.class.getName() +
-		".transaction";
-
-	public static DLFileVersionLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (DLFileVersionLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getFileVersions(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
-		return getService().getFileVersions(folderId, name);
+		return DLFileVersionLocalServiceFactory.getTxImpl().getFileVersions(folderId,
+			name);
 	}
 
 	public void ejbCreate() throws CreateException {

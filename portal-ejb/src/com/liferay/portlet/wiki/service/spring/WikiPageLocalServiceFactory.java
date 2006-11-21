@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class WikiPageLocalServiceFactory {
 	public static final String CLASS_NAME = WikiPageLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = WikiPageLocalService.class.getName() +
+		".transaction";
 
 	public static WikiPageLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class WikiPageLocalServiceFactory {
 
 	public void setService(WikiPageLocalService service) {
 		_service = service;
+	}
+
+	public static WikiPageLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		WikiPageLocalService service = (WikiPageLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private WikiPageLocalService _service;

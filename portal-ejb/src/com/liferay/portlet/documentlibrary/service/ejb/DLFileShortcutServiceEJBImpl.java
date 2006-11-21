@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class DLFileShortcutServiceEJBImpl implements DLFileShortcutService,
 	SessionBean {
-	public static final String CLASS_NAME = DLFileShortcutService.class.getName() +
-		".transaction";
-
-	public static DLFileShortcutService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (DLFileShortcutService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		java.lang.String folderId, java.lang.String toFolderId,
 		java.lang.String toName, boolean addCommunityPermissions,
@@ -58,8 +50,8 @@ public class DLFileShortcutServiceEJBImpl implements DLFileShortcutService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFileShortcut(folderId, toFolderId, toName,
-			addCommunityPermissions, addGuestPermissions);
+		return DLFileShortcutServiceFactory.getTxImpl().addFileShortcut(folderId,
+			toFolderId, toName, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
@@ -70,15 +62,15 @@ public class DLFileShortcutServiceEJBImpl implements DLFileShortcutService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFileShortcut(folderId, toFolderId, toName,
-			communityPermissions, guestPermissions);
+		return DLFileShortcutServiceFactory.getTxImpl().addFileShortcut(folderId,
+			toFolderId, toName, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFileShortcut(long fileShortcutId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteFileShortcut(fileShortcutId);
+		DLFileShortcutServiceFactory.getTxImpl().deleteFileShortcut(fileShortcutId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut getFileShortcut(
@@ -87,7 +79,7 @@ public class DLFileShortcutServiceEJBImpl implements DLFileShortcutService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getFileShortcut(fileShortcutId);
+		return DLFileShortcutServiceFactory.getTxImpl().getFileShortcut(fileShortcutId);
 	}
 
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut updateFileShortcut(
@@ -97,8 +89,8 @@ public class DLFileShortcutServiceEJBImpl implements DLFileShortcutService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateFileShortcut(fileShortcutId, folderId,
-			toFolderId, toName);
+		return DLFileShortcutServiceFactory.getTxImpl().updateFileShortcut(fileShortcutId,
+			folderId, toFolderId, toName);
 	}
 
 	public void ejbCreate() throws CreateException {

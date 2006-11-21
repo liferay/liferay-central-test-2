@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,35 +41,27 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = ShoppingCartLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingCartLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingCartLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteGroupCarts(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteGroupCarts(groupId);
+		ShoppingCartLocalServiceFactory.getTxImpl().deleteGroupCarts(groupId);
 	}
 
 	public void deleteUserCarts(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteUserCarts(userId);
+		ShoppingCartLocalServiceFactory.getTxImpl().deleteUserCarts(userId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart getCart(
 		java.lang.String cartId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getCart(cartId);
+		return ShoppingCartLocalServiceFactory.getTxImpl().getCart(cartId);
 	}
 
 	public java.util.Map getItems(java.lang.String groupId,
 		java.lang.String itemIds) throws com.liferay.portal.SystemException {
-		return getService().getItems(groupId, itemIds);
+		return ShoppingCartLocalServiceFactory.getTxImpl().getItems(groupId,
+			itemIds);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
@@ -77,8 +70,8 @@ public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService
 		java.lang.String couponIds, int altShipping, boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateCart(userId, groupId, cartId, itemIds,
-			couponIds, altShipping, insure);
+		return ShoppingCartLocalServiceFactory.getTxImpl().updateCart(userId,
+			groupId, cartId, itemIds, couponIds, altShipping, insure);
 	}
 
 	public void ejbCreate() throws CreateException {

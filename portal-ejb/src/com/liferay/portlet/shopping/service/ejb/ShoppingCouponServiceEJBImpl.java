@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingCouponService;
+import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingCouponServiceEJBImpl implements ShoppingCouponService,
 	SessionBean {
-	public static final String CLASS_NAME = ShoppingCouponService.class.getName() +
-		".transaction";
-
-	public static ShoppingCouponService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingCouponService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		java.lang.String plid, java.lang.String couponId, boolean autoCouponId,
 		java.lang.String name, java.lang.String description,
@@ -63,18 +55,19 @@ public class ShoppingCouponServiceEJBImpl implements ShoppingCouponService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCoupon(plid, couponId, autoCouponId, name,
-			description, startDateMonth, startDateDay, startDateYear,
-			startDateHour, startDateMinute, endDateMonth, endDateDay,
-			endDateYear, endDateHour, endDateMinute, neverExpire, active,
-			limitCategories, limitSkus, minOrder, discount, discountType);
+		return ShoppingCouponServiceFactory.getTxImpl().addCoupon(plid,
+			couponId, autoCouponId, name, description, startDateMonth,
+			startDateDay, startDateYear, startDateHour, startDateMinute,
+			endDateMonth, endDateDay, endDateYear, endDateHour, endDateMinute,
+			neverExpire, active, limitCategories, limitSkus, minOrder,
+			discount, discountType);
 	}
 
 	public void deleteCoupon(java.lang.String plid, java.lang.String couponId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteCoupon(plid, couponId);
+		ShoppingCouponServiceFactory.getTxImpl().deleteCoupon(plid, couponId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
@@ -83,7 +76,7 @@ public class ShoppingCouponServiceEJBImpl implements ShoppingCouponService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCoupon(plid, couponId);
+		return ShoppingCouponServiceFactory.getTxImpl().getCoupon(plid, couponId);
 	}
 
 	public java.util.List search(java.lang.String couponId,
@@ -93,8 +86,8 @@ public class ShoppingCouponServiceEJBImpl implements ShoppingCouponService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().search(couponId, plid, companyId, active,
-			discountType, andOperator, begin, end);
+		return ShoppingCouponServiceFactory.getTxImpl().search(couponId, plid,
+			companyId, active, discountType, andOperator, begin, end);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon updateCoupon(
@@ -110,11 +103,11 @@ public class ShoppingCouponServiceEJBImpl implements ShoppingCouponService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateCoupon(plid, couponId, name, description,
-			startDateMonth, startDateDay, startDateYear, startDateHour,
-			startDateMinute, endDateMonth, endDateDay, endDateYear,
-			endDateHour, endDateMinute, neverExpire, active, limitCategories,
-			limitSkus, minOrder, discount, discountType);
+		return ShoppingCouponServiceFactory.getTxImpl().updateCoupon(plid,
+			couponId, name, description, startDateMonth, startDateDay,
+			startDateYear, startDateHour, startDateMinute, endDateMonth,
+			endDateDay, endDateYear, endDateHour, endDateMinute, neverExpire,
+			active, limitCategories, limitSkus, minOrder, discount, discountType);
 	}
 
 	public void ejbCreate() throws CreateException {

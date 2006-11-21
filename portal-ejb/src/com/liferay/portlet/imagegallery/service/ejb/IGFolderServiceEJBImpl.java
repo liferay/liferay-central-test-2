@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.imagegallery.service.spring.IGFolderService;
+import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
-	public static final String CLASS_NAME = IGFolderService.class.getName() +
-		".transaction";
-
-	public static IGFolderService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (IGFolderService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
@@ -57,8 +49,9 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFolder(plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return IGFolderServiceFactory.getTxImpl().addFolder(plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
@@ -70,15 +63,16 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFolder(plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+		return IGFolderServiceFactory.getTxImpl().addFolder(plid,
+			parentFolderId, name, description, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFolder(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteFolder(folderId);
+		IGFolderServiceFactory.getTxImpl().deleteFolder(folderId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
@@ -87,7 +81,7 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getFolder(folderId);
+		return IGFolderServiceFactory.getTxImpl().getFolder(folderId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
@@ -98,8 +92,8 @@ public class IGFolderServiceEJBImpl implements IGFolderService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateFolder(folderId, parentFolderId, name,
-			description, mergeWithParentFolder);
+		return IGFolderServiceFactory.getTxImpl().updateFolder(folderId,
+			parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 	public void ejbCreate() throws CreateException {

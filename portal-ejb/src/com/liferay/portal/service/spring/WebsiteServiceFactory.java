@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class WebsiteServiceFactory {
 	public static final String CLASS_NAME = WebsiteServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = WebsiteService.class.getName() +
+		".transaction";
 
 	public static WebsiteService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class WebsiteServiceFactory {
 
 	public void setService(WebsiteService service) {
 		_service = service;
+	}
+
+	public static WebsiteService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		WebsiteService service = (WebsiteService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private WebsiteService _service;

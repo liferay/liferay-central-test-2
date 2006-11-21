@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class AddressLocalServiceFactory {
 	public static final String CLASS_NAME = AddressLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = AddressLocalService.class.getName() +
+		".transaction";
 
 	public static AddressLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class AddressLocalServiceFactory {
 
 	public void setService(AddressLocalService service) {
 		_service = service;
+	}
+
+	public static AddressLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		AddressLocalService service = (AddressLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private AddressLocalService _service;

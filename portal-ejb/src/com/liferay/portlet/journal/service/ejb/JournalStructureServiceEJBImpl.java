@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.journal.service.spring.JournalStructureService;
+import com.liferay.portlet.journal.service.spring.JournalStructureServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class JournalStructureServiceEJBImpl implements JournalStructureService,
 	SessionBean {
-	public static final String CLASS_NAME = JournalStructureService.class.getName() +
-		".transaction";
-
-	public static JournalStructureService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (JournalStructureService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String plid, java.lang.String name,
@@ -59,8 +51,9 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addStructure(structureId, autoStructureId, plid,
-			name, description, xsd, addCommunityPermissions, addGuestPermissions);
+		return JournalStructureServiceFactory.getTxImpl().addStructure(structureId,
+			autoStructureId, plid, name, description, xsd,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure addStructure(
@@ -73,8 +66,9 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addStructure(structureId, autoStructureId, plid,
-			name, description, xsd, communityPermissions, guestPermissions);
+		return JournalStructureServiceFactory.getTxImpl().addStructure(structureId,
+			autoStructureId, plid, name, description, xsd,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteStructure(java.lang.String companyId,
@@ -82,7 +76,8 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteStructure(companyId, structureId);
+		JournalStructureServiceFactory.getTxImpl().deleteStructure(companyId,
+			structureId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
@@ -91,7 +86,8 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getStructure(companyId, structureId);
+		return JournalStructureServiceFactory.getTxImpl().getStructure(companyId,
+			structureId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
@@ -101,7 +97,8 @@ public class JournalStructureServiceEJBImpl implements JournalStructureService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateStructure(structureId, name, description, xsd);
+		return JournalStructureServiceFactory.getTxImpl().updateStructure(structureId,
+			name, description, xsd);
 	}
 
 	public void ejbCreate() throws CreateException {

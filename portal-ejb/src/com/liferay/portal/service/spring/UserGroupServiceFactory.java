@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class UserGroupServiceFactory {
 	public static final String CLASS_NAME = UserGroupServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = UserGroupService.class.getName() +
+		".transaction";
 
 	public static UserGroupService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class UserGroupServiceFactory {
 
 	public void setService(UserGroupService service) {
 		_service = service;
+	}
+
+	public static UserGroupService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		UserGroupService service = (UserGroupService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private UserGroupService _service;

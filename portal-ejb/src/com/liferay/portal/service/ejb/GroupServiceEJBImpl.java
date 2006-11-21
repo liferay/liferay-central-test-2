@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.GroupService;
+import com.liferay.portal.service.spring.GroupServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class GroupServiceEJBImpl implements GroupService, SessionBean {
-	public static final String CLASS_NAME = GroupService.class.getName() +
-		".transaction";
-
-	public static GroupService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (GroupService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Group addGroup(java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String friendlyURL)
@@ -55,7 +47,8 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addGroup(name, description, type, friendlyURL);
+		return GroupServiceFactory.getTxImpl().addGroup(name, description,
+			type, friendlyURL);
 	}
 
 	public void addRoleGroups(java.lang.String roleId,
@@ -63,14 +56,14 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().addRoleGroups(roleId, groupIds);
+		GroupServiceFactory.getTxImpl().addRoleGroups(roleId, groupIds);
 	}
 
 	public void deleteGroup(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteGroup(groupId);
+		GroupServiceFactory.getTxImpl().deleteGroup(groupId);
 	}
 
 	public com.liferay.portal.model.Group getGroup(java.lang.String groupId)
@@ -78,7 +71,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getGroup(groupId);
+		return GroupServiceFactory.getTxImpl().getGroup(groupId);
 	}
 
 	public com.liferay.portal.model.Group getGroup(java.lang.String companyId,
@@ -87,7 +80,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getGroup(companyId, name);
+		return GroupServiceFactory.getTxImpl().getGroup(companyId, name);
 	}
 
 	public java.util.List getOrganizationsGroups(java.util.List organizations)
@@ -95,7 +88,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getOrganizationsGroups(organizations);
+		return GroupServiceFactory.getTxImpl().getOrganizationsGroups(organizations);
 	}
 
 	public java.util.List getUserGroupsGroups(java.util.List userGroups)
@@ -103,7 +96,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getUserGroupsGroups(userGroups);
+		return GroupServiceFactory.getTxImpl().getUserGroupsGroups(userGroups);
 	}
 
 	public boolean hasUserGroup(java.lang.String userId,
@@ -111,7 +104,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().hasUserGroup(userId, groupId);
+		return GroupServiceFactory.getTxImpl().hasUserGroup(userId, groupId);
 	}
 
 	public void setRoleGroups(java.lang.String roleId,
@@ -119,7 +112,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setRoleGroups(roleId, groupIds);
+		GroupServiceFactory.getTxImpl().setRoleGroups(roleId, groupIds);
 	}
 
 	public void unsetRoleGroups(java.lang.String roleId,
@@ -127,7 +120,7 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsetRoleGroups(roleId, groupIds);
+		GroupServiceFactory.getTxImpl().unsetRoleGroups(roleId, groupIds);
 	}
 
 	public com.liferay.portal.model.Group updateGroup(
@@ -138,8 +131,8 @@ public class GroupServiceEJBImpl implements GroupService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateGroup(groupId, name, description, type,
-			friendlyURL);
+		return GroupServiceFactory.getTxImpl().updateGroup(groupId, name,
+			description, type, friendlyURL);
 	}
 
 	public void ejbCreate() throws CreateException {

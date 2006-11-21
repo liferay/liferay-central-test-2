@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class IGFolderLocalServiceFactory {
 	public static final String CLASS_NAME = IGFolderLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = IGFolderLocalService.class.getName() +
+		".transaction";
 
 	public static IGFolderLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class IGFolderLocalServiceFactory {
 
 	public void setService(IGFolderLocalService service) {
 		_service = service;
+	}
+
+	public static IGFolderLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		IGFolderLocalService service = (IGFolderLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private IGFolderLocalService _service;

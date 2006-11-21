@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.PermissionService;
+import com.liferay.portal.service.spring.PermissionServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,21 +40,13 @@ import javax.ejb.SessionContext;
  *
  */
 public class PermissionServiceEJBImpl implements PermissionService, SessionBean {
-	public static final String CLASS_NAME = PermissionService.class.getName() +
-		".transaction";
-
-	public static PermissionService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PermissionService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void checkPermission(java.lang.String groupId,
 		java.lang.String name, java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().checkPermission(groupId, name, primKey);
+		PermissionServiceFactory.getTxImpl().checkPermission(groupId, name,
+			primKey);
 	}
 
 	public boolean hasGroupPermission(java.lang.String groupId,
@@ -62,7 +55,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().hasGroupPermission(groupId, actionId, resourceId);
+		return PermissionServiceFactory.getTxImpl().hasGroupPermission(groupId,
+			actionId, resourceId);
 	}
 
 	public boolean hasUserPermissions(java.lang.String userId,
@@ -73,8 +67,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().hasUserPermissions(userId, groupId, actionId,
-			resourceIds, permissionCheckerBag);
+		return PermissionServiceFactory.getTxImpl().hasUserPermissions(userId,
+			groupId, actionId, resourceIds, permissionCheckerBag);
 	}
 
 	public void setGroupPermissions(java.lang.String groupId,
@@ -82,7 +76,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setGroupPermissions(groupId, actionIds, resourceId);
+		PermissionServiceFactory.getTxImpl().setGroupPermissions(groupId,
+			actionIds, resourceId);
 	}
 
 	public void setGroupPermissions(java.lang.String className,
@@ -91,8 +86,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setGroupPermissions(className, classPK, groupId,
-			actionIds, resourceId);
+		PermissionServiceFactory.getTxImpl().setGroupPermissions(className,
+			classPK, groupId, actionIds, resourceId);
 	}
 
 	public void setOrgGroupPermissions(java.lang.String organizationId,
@@ -101,8 +96,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setOrgGroupPermissions(organizationId, groupId, actionIds,
-			resourceId);
+		PermissionServiceFactory.getTxImpl().setOrgGroupPermissions(organizationId,
+			groupId, actionIds, resourceId);
 	}
 
 	public void setRolePermission(java.lang.String roleId,
@@ -112,8 +107,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setRolePermission(roleId, groupId, name, typeId, scope,
-			primKey, actionId);
+		PermissionServiceFactory.getTxImpl().setRolePermission(roleId, groupId,
+			name, typeId, scope, primKey, actionId);
 	}
 
 	public void setUserPermissions(java.lang.String userId,
@@ -122,7 +117,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().setUserPermissions(userId, groupId, actionIds, resourceId);
+		PermissionServiceFactory.getTxImpl().setUserPermissions(userId,
+			groupId, actionIds, resourceId);
 	}
 
 	public void unsetRolePermission(java.lang.String roleId,
@@ -132,8 +128,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsetRolePermission(roleId, groupId, name, typeId, scope,
-			primKey, actionId);
+		PermissionServiceFactory.getTxImpl().unsetRolePermission(roleId,
+			groupId, name, typeId, scope, primKey, actionId);
 	}
 
 	public void unsetRolePermissions(java.lang.String roleId,
@@ -143,8 +139,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsetRolePermissions(roleId, groupId, name, typeId, scope,
-			actionId);
+		PermissionServiceFactory.getTxImpl().unsetRolePermissions(roleId,
+			groupId, name, typeId, scope, actionId);
 	}
 
 	public void unsetUserPermissions(java.lang.String userId,
@@ -153,7 +149,8 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsetUserPermissions(userId, groupId, actionIds, resourceId);
+		PermissionServiceFactory.getTxImpl().unsetUserPermissions(userId,
+			groupId, actionIds, resourceId);
 	}
 
 	public void ejbCreate() throws CreateException {

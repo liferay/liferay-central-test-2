@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class RoleServiceFactory {
 	public static final String CLASS_NAME = RoleServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = RoleService.class.getName() +
+		".transaction";
 
 	public static RoleService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class RoleServiceFactory {
 
 	public void setService(RoleService service) {
 		_service = service;
+	}
+
+	public static RoleService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		RoleService service = (RoleService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private RoleService _service;

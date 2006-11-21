@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.ResourceLocalService;
+import com.liferay.portal.service.spring.ResourceLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  */
 public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = ResourceLocalService.class.getName() +
-		".transaction";
-
-	public static ResourceLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ResourceLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addModelResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String userId,
 		java.lang.String name, java.lang.String primKey,
@@ -55,8 +47,9 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addModelResources(companyId, groupId, userId, name,
-			primKey, communityPermissions, guestPermissions);
+		ResourceLocalServiceFactory.getTxImpl().addModelResources(companyId,
+			groupId, userId, name, primKey, communityPermissions,
+			guestPermissions);
 	}
 
 	public com.liferay.portal.model.Resource addResource(
@@ -65,14 +58,16 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addResource(companyId, name, typeId, scope, primKey);
+		return ResourceLocalServiceFactory.getTxImpl().addResource(companyId,
+			name, typeId, scope, primKey);
 	}
 
 	public void addResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addResources(companyId, groupId, name, portletActions);
+		ResourceLocalServiceFactory.getTxImpl().addResources(companyId,
+			groupId, name, portletActions);
 	}
 
 	public void addResources(java.lang.String companyId,
@@ -82,20 +77,21 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addResources(companyId, groupId, userId, name, primKey,
-			portletActions, addCommunityPermissions, addGuestPermissions);
+		ResourceLocalServiceFactory.getTxImpl().addResources(companyId,
+			groupId, userId, name, primKey, portletActions,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void deleteResource(java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteResource(resourceId);
+		ResourceLocalServiceFactory.getTxImpl().deleteResource(resourceId);
 	}
 
 	public void deleteResource(com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteResource(resource);
+		ResourceLocalServiceFactory.getTxImpl().deleteResource(resource);
 	}
 
 	public void deleteResource(java.lang.String companyId,
@@ -103,20 +99,21 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteResource(companyId, name, typeId, scope, primKey);
+		ResourceLocalServiceFactory.getTxImpl().deleteResource(companyId, name,
+			typeId, scope, primKey);
 	}
 
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteResources(name);
+		ResourceLocalServiceFactory.getTxImpl().deleteResources(name);
 	}
 
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getResource(resourceId);
+		return ResourceLocalServiceFactory.getTxImpl().getResource(resourceId);
 	}
 
 	public com.liferay.portal.model.Resource getResource(
@@ -125,7 +122,8 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 		java.lang.String primKey)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getResource(companyId, name, typeId, scope, primKey);
+		return ResourceLocalServiceFactory.getTxImpl().getResource(companyId,
+			name, typeId, scope, primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

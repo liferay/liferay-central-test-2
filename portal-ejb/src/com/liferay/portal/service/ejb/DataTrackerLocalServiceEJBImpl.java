@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.DataTrackerLocalService;
+import com.liferay.portal.service.spring.DataTrackerLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  */
 public class DataTrackerLocalServiceEJBImpl implements DataTrackerLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = DataTrackerLocalService.class.getName() +
-		".transaction";
-
-	public static DataTrackerLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (DataTrackerLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void ejbCreate() throws CreateException {
 	}
 

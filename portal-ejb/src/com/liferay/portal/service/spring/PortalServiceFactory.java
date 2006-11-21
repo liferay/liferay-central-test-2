@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PortalServiceFactory {
 	public static final String CLASS_NAME = PortalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PortalService.class.getName() +
+		".transaction";
 
 	public static PortalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PortalServiceFactory {
 
 	public void setService(PortalService service) {
 		_service = service;
+	}
+
+	public static PortalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PortalService service = (PortalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PortalService _service;

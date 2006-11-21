@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class ShoppingOrderItemLocalServiceFactory {
 	public static final String CLASS_NAME = ShoppingOrderItemLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = ShoppingOrderItemLocalService.class.getName() +
+		".transaction";
 
 	public static ShoppingOrderItemLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class ShoppingOrderItemLocalServiceFactory {
 
 	public void setService(ShoppingOrderItemLocalService service) {
 		_service = service;
+	}
+
+	public static ShoppingOrderItemLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		ShoppingOrderItemLocalService service = (ShoppingOrderItemLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private ShoppingOrderItemLocalService _service;

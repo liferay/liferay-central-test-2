@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class ReleaseLocalServiceFactory {
 	public static final String CLASS_NAME = ReleaseLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = ReleaseLocalService.class.getName() +
+		".transaction";
 
 	public static ReleaseLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class ReleaseLocalServiceFactory {
 
 	public void setService(ReleaseLocalService service) {
 		_service = service;
+	}
+
+	public static ReleaseLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		ReleaseLocalService service = (ReleaseLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private ReleaseLocalService _service;

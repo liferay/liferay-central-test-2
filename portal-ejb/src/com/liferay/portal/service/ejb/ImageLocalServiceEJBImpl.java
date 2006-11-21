@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.ImageLocalService;
+import com.liferay.portal.service.spring.ImageLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -38,51 +39,42 @@ import javax.ejb.SessionContext;
  *
  */
 public class ImageLocalServiceEJBImpl implements ImageLocalService, SessionBean {
-	public static final String CLASS_NAME = ImageLocalService.class.getName() +
-		".transaction";
-
-	public static ImageLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ImageLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteImage(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteImage(imageId);
+		ImageLocalServiceFactory.getTxImpl().deleteImage(imageId);
 	}
 
 	public void deleteImages(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteImages(imageId);
+		ImageLocalServiceFactory.getTxImpl().deleteImages(imageId);
 	}
 
 	public com.liferay.portal.model.Image getImage(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getImage(imageId);
+		return ImageLocalServiceFactory.getTxImpl().getImage(imageId);
 	}
 
 	public java.util.List getImages() throws com.liferay.portal.SystemException {
-		return getService().getImages();
+		return ImageLocalServiceFactory.getTxImpl().getImages();
 	}
 
 	public java.util.List getImages(int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().getImages(begin, end);
+		return ImageLocalServiceFactory.getTxImpl().getImages(begin, end);
 	}
 
 	public java.util.List search(java.lang.String imageId)
 		throws com.liferay.portal.SystemException {
-		return getService().search(imageId);
+		return ImageLocalServiceFactory.getTxImpl().search(imageId);
 	}
 
 	public com.liferay.portal.model.Image updateImage(
 		java.lang.String imageId, byte[] bytes)
 		throws com.liferay.portal.SystemException {
-		return getService().updateImage(imageId, bytes);
+		return ImageLocalServiceFactory.getTxImpl().updateImage(imageId, bytes);
 	}
 
 	public void ejbCreate() throws CreateException {

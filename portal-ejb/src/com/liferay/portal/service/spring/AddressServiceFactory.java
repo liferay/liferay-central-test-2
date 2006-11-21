@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class AddressServiceFactory {
 	public static final String CLASS_NAME = AddressServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = AddressService.class.getName() +
+		".transaction";
 
 	public static AddressService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class AddressServiceFactory {
 
 	public void setService(AddressService service) {
 		_service = service;
+	}
+
+	public static AddressService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		AddressService service = (AddressService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private AddressService _service;

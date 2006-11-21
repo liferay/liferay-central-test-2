@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,18 +41,9 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingOrderItemLocalServiceEJBImpl
 	implements ShoppingOrderItemLocalService, SessionBean {
-	public static final String CLASS_NAME = ShoppingOrderItemLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingOrderItemLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingOrderItemLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getOrderItems(java.lang.String orderId)
 		throws com.liferay.portal.SystemException {
-		return getService().getOrderItems(orderId);
+		return ShoppingOrderItemLocalServiceFactory.getTxImpl().getOrderItems(orderId);
 	}
 
 	public void ejbCreate() throws CreateException {

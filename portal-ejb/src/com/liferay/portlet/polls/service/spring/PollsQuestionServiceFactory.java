@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PollsQuestionServiceFactory {
 	public static final String CLASS_NAME = PollsQuestionServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PollsQuestionService.class.getName() +
+		".transaction";
 
 	public static PollsQuestionService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PollsQuestionServiceFactory {
 
 	public void setService(PollsQuestionService service) {
 		_service = service;
+	}
+
+	public static PollsQuestionService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PollsQuestionService service = (PollsQuestionService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PollsQuestionService _service;

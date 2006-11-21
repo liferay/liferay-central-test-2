@@ -25,6 +25,7 @@ package com.liferay.portlet.polls.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.polls.service.spring.PollsVoteLocalService;
+import com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,38 +41,32 @@ import javax.ejb.SessionContext;
  */
 public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = PollsVoteLocalService.class.getName() +
-		".transaction";
-
-	public static PollsVoteLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PollsVoteLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.polls.model.PollsVote addVote(
 		java.lang.String userId, java.lang.String questionId,
 		java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addVote(userId, questionId, choiceId);
+		return PollsVoteLocalServiceFactory.getTxImpl().addVote(userId,
+			questionId, choiceId);
 	}
 
 	public com.liferay.portlet.polls.model.PollsVote getVote(
 		java.lang.String questionId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getVote(questionId, userId);
+		return PollsVoteLocalServiceFactory.getTxImpl().getVote(questionId,
+			userId);
 	}
 
 	public int getVotesCount(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
-		return getService().getVotesCount(questionId);
+		return PollsVoteLocalServiceFactory.getTxImpl().getVotesCount(questionId);
 	}
 
 	public int getVotesCount(java.lang.String questionId,
 		java.lang.String choiceId) throws com.liferay.portal.SystemException {
-		return getService().getVotesCount(questionId, choiceId);
+		return PollsVoteLocalServiceFactory.getTxImpl().getVotesCount(questionId,
+			choiceId);
 	}
 
 	public void ejbCreate() throws CreateException {

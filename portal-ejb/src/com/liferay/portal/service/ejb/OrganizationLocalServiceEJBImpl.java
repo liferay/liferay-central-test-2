@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.OrganizationLocalService;
+import com.liferay.portal.service.spring.OrganizationLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,20 +40,12 @@ import javax.ejb.SessionContext;
  */
 public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = OrganizationLocalService.class.getName() +
-		".transaction";
-
-	public static OrganizationLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (OrganizationLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addGroupOrganizations(groupId, organizationIds);
+		OrganizationLocalServiceFactory.getTxImpl().addGroupOrganizations(groupId,
+			organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization addOrganization(
@@ -61,54 +54,57 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String countryId, java.lang.String statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addOrganization(userId, parentOrganizationId, name,
-			regionId, countryId, statusId, location);
+		return OrganizationLocalServiceFactory.getTxImpl().addOrganization(userId,
+			parentOrganizationId, name, regionId, countryId, statusId, location);
 	}
 
 	public void addOrganizationResources(java.lang.String userId,
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addOrganizationResources(userId, organization);
+		OrganizationLocalServiceFactory.getTxImpl().addOrganizationResources(userId,
+			organization);
 	}
 
 	public void deleteOrganization(java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteOrganization(organizationId);
+		OrganizationLocalServiceFactory.getTxImpl().deleteOrganization(organizationId);
 	}
 
 	public void deleteOrganization(
 		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteOrganization(organization);
+		OrganizationLocalServiceFactory.getTxImpl().deleteOrganization(organization);
 	}
 
 	public com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getOrganization(organizationId);
+		return OrganizationLocalServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
 	public java.util.List getGroupOrganizations(java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getGroupOrganizations(groupId);
+		return OrganizationLocalServiceFactory.getTxImpl()
+											  .getGroupOrganizations(groupId);
 	}
 
 	public java.util.List getUserOrganizations(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getUserOrganizations(userId);
+		return OrganizationLocalServiceFactory.getTxImpl().getUserOrganizations(userId);
 	}
 
 	public boolean hasGroupOrganization(java.lang.String groupId,
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().hasGroupOrganization(groupId, organizationId);
+		return OrganizationLocalServiceFactory.getTxImpl().hasGroupOrganization(groupId,
+			organizationId);
 	}
 
 	public java.util.List search(java.lang.String companyId,
@@ -118,9 +114,9 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String regionId, java.lang.String countryId,
 		java.util.Map params, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getService().search(companyId, parentOrganizationId,
-			parentOrganizationComparator, name, street, city, zip, regionId,
-			countryId, params, andOperator, begin, end);
+		return OrganizationLocalServiceFactory.getTxImpl().search(companyId,
+			parentOrganizationId, parentOrganizationComparator, name, street,
+			city, zip, regionId, countryId, params, andOperator, begin, end);
 	}
 
 	public int searchCount(java.lang.String companyId,
@@ -130,23 +126,25 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String regionId, java.lang.String countryId,
 		java.util.Map params, boolean andOperator)
 		throws com.liferay.portal.SystemException {
-		return getService().searchCount(companyId, parentOrganizationId,
-			parentOrganizationComparator, name, street, city, zip, regionId,
-			countryId, params, andOperator);
+		return OrganizationLocalServiceFactory.getTxImpl().searchCount(companyId,
+			parentOrganizationId, parentOrganizationComparator, name, street,
+			city, zip, regionId, countryId, params, andOperator);
 	}
 
 	public void setGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().setGroupOrganizations(groupId, organizationIds);
+		OrganizationLocalServiceFactory.getTxImpl().setGroupOrganizations(groupId,
+			organizationIds);
 	}
 
 	public void unsetGroupOrganizations(java.lang.String groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().unsetGroupOrganizations(groupId, organizationIds);
+		OrganizationLocalServiceFactory.getTxImpl().unsetGroupOrganizations(groupId,
+			organizationIds);
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
@@ -156,15 +154,17 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		java.lang.String statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateOrganization(companyId, organizationId,
-			parentOrganizationId, name, regionId, countryId, statusId, location);
+		return OrganizationLocalServiceFactory.getTxImpl().updateOrganization(companyId,
+			organizationId, parentOrganizationId, name, regionId, countryId,
+			statusId, location);
 	}
 
 	public com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String organizationId, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateOrganization(organizationId, comments);
+		return OrganizationLocalServiceFactory.getTxImpl().updateOrganization(organizationId,
+			comments);
 	}
 
 	public void ejbCreate() throws CreateException {

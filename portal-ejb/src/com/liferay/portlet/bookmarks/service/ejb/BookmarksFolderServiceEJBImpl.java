@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService;
+import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class BookmarksFolderServiceEJBImpl implements BookmarksFolderService,
 	SessionBean {
-	public static final String CLASS_NAME = BookmarksFolderService.class.getName() +
-		".transaction";
-
-	public static BookmarksFolderService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (BookmarksFolderService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
@@ -58,8 +50,9 @@ public class BookmarksFolderServiceEJBImpl implements BookmarksFolderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFolder(plid, parentFolderId, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return BookmarksFolderServiceFactory.getTxImpl().addFolder(plid,
+			parentFolderId, name, description, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
@@ -71,15 +64,16 @@ public class BookmarksFolderServiceEJBImpl implements BookmarksFolderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addFolder(plid, parentFolderId, name, description,
-			communityPermissions, guestPermissions);
+		return BookmarksFolderServiceFactory.getTxImpl().addFolder(plid,
+			parentFolderId, name, description, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteFolder(java.lang.String folderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteFolder(folderId);
+		BookmarksFolderServiceFactory.getTxImpl().deleteFolder(folderId);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder getFolder(
@@ -88,7 +82,7 @@ public class BookmarksFolderServiceEJBImpl implements BookmarksFolderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getFolder(folderId);
+		return BookmarksFolderServiceFactory.getTxImpl().getFolder(folderId);
 	}
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
@@ -99,8 +93,8 @@ public class BookmarksFolderServiceEJBImpl implements BookmarksFolderService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateFolder(folderId, parentFolderId, name,
-			description, mergeWithParentFolder);
+		return BookmarksFolderServiceFactory.getTxImpl().updateFolder(folderId,
+			parentFolderId, name, description, mergeWithParentFolder);
 	}
 
 	public void ejbCreate() throws CreateException {

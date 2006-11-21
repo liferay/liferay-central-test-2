@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class CalEventLocalServiceFactory {
 	public static final String CLASS_NAME = CalEventLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = CalEventLocalService.class.getName() +
+		".transaction";
 
 	public static CalEventLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class CalEventLocalServiceFactory {
 
 	public void setService(CalEventLocalService service) {
 		_service = service;
+	}
+
+	public static CalEventLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		CalEventLocalService service = (CalEventLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private CalEventLocalService _service;

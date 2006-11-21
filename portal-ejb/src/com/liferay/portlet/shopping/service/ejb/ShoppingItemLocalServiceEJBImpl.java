@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,20 +41,12 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = ShoppingItemLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingItemLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingItemLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addBookItems(java.lang.String userId,
 		java.lang.String categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addBookItems(userId, categoryId, isbns);
+		ShoppingItemLocalServiceFactory.getTxImpl().addBookItems(userId,
+			categoryId, isbns);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -71,11 +64,12 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addItem(userId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
+		return ShoppingItemLocalServiceFactory.getTxImpl().addItem(userId,
+			categoryId, sku, name, description, properties, fieldsQuantities,
+			requiresShipping, stockQuantity, featured, sale, smallImage,
+			smallImageURL, smallFile, mediumImage, mediumImageURL, mediumFile,
+			largeImage, largeImageURL, largeFile, itemFields, itemPrices,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -93,11 +87,12 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addItem(userId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, communityPermissions, guestPermissions);
+		return ShoppingItemLocalServiceFactory.getTxImpl().addItem(userId,
+			categoryId, sku, name, description, properties, fieldsQuantities,
+			requiresShipping, stockQuantity, featured, sale, smallImage,
+			smallImageURL, smallFile, mediumImage, mediumImageURL, mediumFile,
+			largeImage, largeImageURL, largeFile, itemFields, itemPrices,
+			communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -117,20 +112,21 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addItem(userId, categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions,
-			addGuestPermissions, communityPermissions, guestPermissions);
+		return ShoppingItemLocalServiceFactory.getTxImpl().addItem(userId,
+			categoryId, sku, name, description, properties, fieldsQuantities,
+			requiresShipping, stockQuantity, featured, sale, smallImage,
+			smallImageURL, smallFile, mediumImage, mediumImageURL, mediumFile,
+			largeImage, largeImageURL, largeFile, itemFields, itemPrices,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
 	}
 
 	public void addItemResources(java.lang.String itemId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addItemResources(itemId, addCommunityPermissions,
-			addGuestPermissions);
+		ShoppingItemLocalServiceFactory.getTxImpl().addItemResources(itemId,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(
@@ -139,8 +135,8 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addItemResources(category, item, addCommunityPermissions,
-			addGuestPermissions);
+		ShoppingItemLocalServiceFactory.getTxImpl().addItemResources(category,
+			item, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addItemResources(java.lang.String itemId,
@@ -148,8 +144,8 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addItemResources(itemId, communityPermissions,
-			guestPermissions);
+		ShoppingItemLocalServiceFactory.getTxImpl().addItemResources(itemId,
+			communityPermissions, guestPermissions);
 	}
 
 	public void addItemResources(
@@ -159,62 +155,66 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().addItemResources(category, item, communityPermissions,
-			guestPermissions);
+		ShoppingItemLocalServiceFactory.getTxImpl().addItemResources(category,
+			item, communityPermissions, guestPermissions);
 	}
 
 	public void deleteItem(java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteItem(itemId);
+		ShoppingItemLocalServiceFactory.getTxImpl().deleteItem(itemId);
 	}
 
 	public void deleteItem(com.liferay.portlet.shopping.model.ShoppingItem item)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteItem(item);
+		ShoppingItemLocalServiceFactory.getTxImpl().deleteItem(item);
 	}
 
 	public void deleteItems(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteItems(categoryId);
+		ShoppingItemLocalServiceFactory.getTxImpl().deleteItems(categoryId);
 	}
 
 	public int getCategoriesItemsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException {
-		return getService().getCategoriesItemsCount(categoryIds);
+		return ShoppingItemLocalServiceFactory.getTxImpl()
+											  .getCategoriesItemsCount(categoryIds);
 	}
 
 	public java.util.List getFeaturedItems(java.lang.String groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
-		return getService().getFeaturedItems(groupId, categoryId, numOfItems);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getFeaturedItems(groupId,
+			categoryId, numOfItems);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getItem(itemId);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItem(itemId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
 		java.lang.String companyId, java.lang.String sku)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getItem(companyId, sku);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItem(companyId,
+			sku);
 	}
 
 	public java.util.List getItems(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getItems(categoryId);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItems(categoryId);
 	}
 
 	public java.util.List getItems(java.lang.String categoryId, int begin,
 		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
-		return getService().getItems(categoryId, begin, end, obc);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItems(categoryId,
+			begin, end, obc);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
@@ -222,30 +222,34 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		com.liferay.util.dao.hibernate.OrderByComparator obc)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getItemsPrevAndNext(itemId, obc);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItemsPrevAndNext(itemId,
+			obc);
 	}
 
 	public int getItemsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
-		return getService().getItemsCount(categoryId);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getItemsCount(categoryId);
 	}
 
 	public java.util.List getSaleItems(java.lang.String groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
-		return getService().getSaleItems(groupId, categoryId, numOfItems);
+		return ShoppingItemLocalServiceFactory.getTxImpl().getSaleItems(groupId,
+			categoryId, numOfItems);
 	}
 
 	public java.util.List search(java.lang.String groupId,
 		java.lang.String[] categoryIds, java.lang.String keywords, int begin,
 		int end) throws com.liferay.portal.SystemException {
-		return getService().search(groupId, categoryIds, keywords, begin, end);
+		return ShoppingItemLocalServiceFactory.getTxImpl().search(groupId,
+			categoryIds, keywords, begin, end);
 	}
 
 	public int searchCount(java.lang.String groupId,
 		java.lang.String[] categoryIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException {
-		return getService().searchCount(groupId, categoryIds, keywords);
+		return ShoppingItemLocalServiceFactory.getTxImpl().searchCount(groupId,
+			categoryIds, keywords);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -262,11 +266,12 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		java.util.List itemFields, java.util.List itemPrices)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateItem(userId, itemId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices);
+		return ShoppingItemLocalServiceFactory.getTxImpl().updateItem(userId,
+			itemId, categoryId, sku, name, description, properties,
+			fieldsQuantities, requiresShipping, stockQuantity, featured, sale,
+			smallImage, smallImageURL, smallFile, mediumImage, mediumImageURL,
+			mediumFile, largeImage, largeImageURL, largeFile, itemFields,
+			itemPrices);
 	}
 
 	public void ejbCreate() throws CreateException {

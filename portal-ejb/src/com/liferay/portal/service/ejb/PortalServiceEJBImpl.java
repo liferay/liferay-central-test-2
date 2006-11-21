@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.PortalService;
+import com.liferay.portal.service.spring.PortalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,18 +40,9 @@ import javax.ejb.SessionContext;
  *
  */
 public class PortalServiceEJBImpl implements PortalService, SessionBean {
-	public static final String CLASS_NAME = PortalService.class.getName() +
-		".transaction";
-
-	public static PortalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PortalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void test() throws java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().test();
+		PortalServiceFactory.getTxImpl().test();
 	}
 
 	public void ejbCreate() throws CreateException {

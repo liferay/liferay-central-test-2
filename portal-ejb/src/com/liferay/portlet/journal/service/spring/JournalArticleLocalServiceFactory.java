@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class JournalArticleLocalServiceFactory {
 	public static final String CLASS_NAME = JournalArticleLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = JournalArticleLocalService.class.getName() +
+		".transaction";
 
 	public static JournalArticleLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class JournalArticleLocalServiceFactory {
 
 	public void setService(JournalArticleLocalService service) {
 		_service = service;
+	}
+
+	public static JournalArticleLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		JournalArticleLocalService service = (JournalArticleLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private JournalArticleLocalService _service;

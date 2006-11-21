@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.LayoutSetLocalService;
+import com.liferay.portal.service.spring.LayoutSetLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,40 +40,33 @@ import javax.ejb.SessionContext;
  */
 public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = LayoutSetLocalService.class.getName() +
-		".transaction";
-
-	public static LayoutSetLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (LayoutSetLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.LayoutSet addLayoutSet(
 		java.lang.String ownerId, java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addLayoutSet(ownerId, companyId);
+		return LayoutSetLocalServiceFactory.getTxImpl().addLayoutSet(ownerId,
+			companyId);
 	}
 
 	public void deleteLayoutSet(java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteLayoutSet(ownerId);
+		LayoutSetLocalServiceFactory.getTxImpl().deleteLayoutSet(ownerId);
 	}
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getLayoutSet(ownerId);
+		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(ownerId);
 	}
 
 	public com.liferay.portal.model.LayoutSet getLayoutSet(
 		java.lang.String companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getLayoutSet(companyId, virtualHost);
+		return LayoutSetLocalServiceFactory.getTxImpl().getLayoutSet(companyId,
+			virtualHost);
 	}
 
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
@@ -80,21 +74,23 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 		java.lang.String colorSchemeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateLookAndFeel(ownerId, themeId, colorSchemeId);
+		return LayoutSetLocalServiceFactory.getTxImpl().updateLookAndFeel(ownerId,
+			themeId, colorSchemeId);
 	}
 
 	public com.liferay.portal.model.LayoutSet updatePageCount(
 		java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updatePageCount(ownerId);
+		return LayoutSetLocalServiceFactory.getTxImpl().updatePageCount(ownerId);
 	}
 
 	public com.liferay.portal.model.LayoutSet updateVirtualHost(
 		java.lang.String ownerId, java.lang.String virtualHost)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateVirtualHost(ownerId, virtualHost);
+		return LayoutSetLocalServiceFactory.getTxImpl().updateVirtualHost(ownerId,
+			virtualHost);
 	}
 
 	public void ejbCreate() throws CreateException {

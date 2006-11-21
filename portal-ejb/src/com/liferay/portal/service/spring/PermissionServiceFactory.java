@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PermissionServiceFactory {
 	public static final String CLASS_NAME = PermissionServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PermissionService.class.getName() +
+		".transaction";
 
 	public static PermissionService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PermissionServiceFactory {
 
 	public void setService(PermissionService service) {
 		_service = service;
+	}
+
+	public static PermissionService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PermissionService service = (PermissionService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PermissionService _service;

@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class MBCategoryServiceFactory {
 	public static final String CLASS_NAME = MBCategoryServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = MBCategoryService.class.getName() +
+		".transaction";
 
 	public static MBCategoryService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class MBCategoryServiceFactory {
 
 	public void setService(MBCategoryService service) {
 		_service = service;
+	}
+
+	public static MBCategoryService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		MBCategoryService service = (MBCategoryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private MBCategoryService _service;

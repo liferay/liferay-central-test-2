@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PollsChoiceLocalServiceFactory {
 	public static final String CLASS_NAME = PollsChoiceLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PollsChoiceLocalService.class.getName() +
+		".transaction";
 
 	public static PollsChoiceLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PollsChoiceLocalServiceFactory {
 
 	public void setService(PollsChoiceLocalService service) {
 		_service = service;
+	}
+
+	public static PollsChoiceLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PollsChoiceLocalService service = (PollsChoiceLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PollsChoiceLocalService _service;

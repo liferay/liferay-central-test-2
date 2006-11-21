@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.UserTrackerLocalService;
+import com.liferay.portal.service.spring.UserTrackerLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,34 +40,27 @@ import javax.ejb.SessionContext;
  */
 public class UserTrackerLocalServiceEJBImpl implements UserTrackerLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = UserTrackerLocalService.class.getName() +
-		".transaction";
-
-	public static UserTrackerLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (UserTrackerLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.UserTracker addUserTracker(
 		java.lang.String companyId, java.lang.String userId,
 		java.util.Date modifiedDate, java.lang.String remoteAddr,
 		java.lang.String remoteHost, java.lang.String userAgent,
 		java.util.List userTrackerPaths)
 		throws com.liferay.portal.SystemException {
-		return getService().addUserTracker(companyId, userId, modifiedDate,
-			remoteAddr, remoteHost, userAgent, userTrackerPaths);
+		return UserTrackerLocalServiceFactory.getTxImpl().addUserTracker(companyId,
+			userId, modifiedDate, remoteAddr, remoteHost, userAgent,
+			userTrackerPaths);
 	}
 
 	public void deleteUserTracker(java.lang.String userTrackerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteUserTracker(userTrackerId);
+		UserTrackerLocalServiceFactory.getTxImpl().deleteUserTracker(userTrackerId);
 	}
 
 	public java.util.List getUserTrackers(java.lang.String companyId,
 		int begin, int end) throws com.liferay.portal.SystemException {
-		return getService().getUserTrackers(companyId, begin, end);
+		return UserTrackerLocalServiceFactory.getTxImpl().getUserTrackers(companyId,
+			begin, end);
 	}
 
 	public void ejbCreate() throws CreateException {

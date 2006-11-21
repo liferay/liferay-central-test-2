@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,50 +41,52 @@ import javax.ejb.SessionContext;
  */
 public class JournalContentSearchLocalServiceEJBImpl
 	implements JournalContentSearchLocalService, SessionBean {
-	public static final String CLASS_NAME = JournalContentSearchLocalService.class.getName() +
-		".transaction";
-
-	public static JournalContentSearchLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (JournalContentSearchLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void checkContentSearches(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().checkContentSearches(companyId);
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .checkContentSearches(companyId);
 	}
 
 	public void deleteArticleContentSearches(java.lang.String companyId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		getService().deleteArticleContentSearches(companyId, articleId);
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .deleteArticleContentSearches(companyId,
+			articleId);
 	}
 
 	public void deleteLayoutContentSearches(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
-		getService().deleteLayoutContentSearches(layoutId, ownerId);
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .deleteLayoutContentSearches(layoutId,
+			ownerId);
 	}
 
 	public void deleteOwnerContentSearches(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		getService().deleteOwnerContentSearches(ownerId);
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .deleteOwnerContentSearches(ownerId);
 	}
 
 	public java.util.List getArticleContentSearches(
 		java.lang.String companyId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
-		return getService().getArticleContentSearches(companyId, articleId);
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .getArticleContentSearches(companyId,
+			articleId);
 	}
 
 	public java.util.List getLayoutIds(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		return getService().getLayoutIds(ownerId, articleId);
+		return JournalContentSearchLocalServiceFactory.getTxImpl().getLayoutIds(ownerId,
+			articleId);
 	}
 
 	public int getLayoutIdsCount(java.lang.String ownerId,
 		java.lang.String articleId) throws com.liferay.portal.SystemException {
-		return getService().getLayoutIdsCount(ownerId, articleId);
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .getLayoutIdsCount(ownerId,
+			articleId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
@@ -92,8 +95,9 @@ public class JournalContentSearchLocalServiceEJBImpl
 		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateContentSearch(portletId, layoutId, ownerId,
-			companyId, articleId);
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .updateContentSearch(portletId,
+			layoutId, ownerId, companyId, articleId);
 	}
 
 	public java.util.List updateContentSearch(java.lang.String portletId,
@@ -101,8 +105,9 @@ public class JournalContentSearchLocalServiceEJBImpl
 		java.lang.String companyId, java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateContentSearch(portletId, layoutId, ownerId,
-			companyId, articleIds);
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .updateContentSearch(portletId,
+			layoutId, ownerId, companyId, articleIds);
 	}
 
 	public void ejbCreate() throws CreateException {

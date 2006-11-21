@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.LayoutLocalService;
+import com.liferay.portal.service.spring.LayoutLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,94 +40,90 @@ import javax.ejb.SessionContext;
  */
 public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = LayoutLocalService.class.getName() +
-		".transaction";
-
-	public static LayoutLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (LayoutLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
 		java.lang.String userId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addLayout(groupId, userId, privateLayout,
-			parentLayoutId, name, type, hidden, friendlyURL);
+		return LayoutLocalServiceFactory.getTxImpl().addLayout(groupId, userId,
+			privateLayout, parentLayoutId, name, type, hidden, friendlyURL);
 	}
 
 	public void deleteLayout(java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteLayout(layoutId, ownerId);
+		LayoutLocalServiceFactory.getTxImpl().deleteLayout(layoutId, ownerId);
 	}
 
 	public void deleteLayout(com.liferay.portal.model.Layout layout,
 		boolean updateLayoutSet)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteLayout(layout, updateLayoutSet);
+		LayoutLocalServiceFactory.getTxImpl().deleteLayout(layout,
+			updateLayoutSet);
 	}
 
 	public void deleteLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteLayouts(ownerId);
+		LayoutLocalServiceFactory.getTxImpl().deleteLayouts(ownerId);
 	}
 
 	public byte[] exportLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().exportLayouts(ownerId);
+		return LayoutLocalServiceFactory.getTxImpl().exportLayouts(ownerId);
 	}
 
 	public com.liferay.portal.model.Layout getFriendlyURLLayout(
 		java.lang.String ownerId, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getFriendlyURLLayout(ownerId, friendlyURL);
+		return LayoutLocalServiceFactory.getTxImpl().getFriendlyURLLayout(ownerId,
+			friendlyURL);
 	}
 
 	public com.liferay.portal.model.Layout getLayout(
 		java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getLayout(layoutId, ownerId);
+		return LayoutLocalServiceFactory.getTxImpl().getLayout(layoutId, ownerId);
 	}
 
 	public java.util.List getLayouts(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
-		return getService().getLayouts(ownerId);
+		return LayoutLocalServiceFactory.getTxImpl().getLayouts(ownerId);
 	}
 
 	public java.util.List getLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId)
 		throws com.liferay.portal.SystemException {
-		return getService().getLayouts(ownerId, parentLayoutId);
+		return LayoutLocalServiceFactory.getTxImpl().getLayouts(ownerId,
+			parentLayoutId);
 	}
 
 	public java.util.List getLayouts(java.lang.String companyId,
 		java.lang.String portletId, java.lang.String prefsKey,
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
-		return getService().getLayouts(companyId, portletId, prefsKey,
-			prefsValue);
+		return LayoutLocalServiceFactory.getTxImpl().getLayouts(companyId,
+			portletId, prefsKey, prefsValue);
 	}
 
 	public void importLayouts(java.lang.String userId,
 		java.lang.String ownerId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().importLayouts(userId, ownerId, file);
+		LayoutLocalServiceFactory.getTxImpl().importLayouts(userId, ownerId,
+			file);
 	}
 
 	public void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().setLayouts(ownerId, parentLayoutId, layoutIds);
+		LayoutLocalServiceFactory.getTxImpl().setLayouts(ownerId,
+			parentLayoutId, layoutIds);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(
@@ -136,8 +133,8 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateLayout(layoutId, ownerId, parentLayoutId,
-			name, languageId, type, hidden, friendlyURL);
+		return LayoutLocalServiceFactory.getTxImpl().updateLayout(layoutId,
+			ownerId, parentLayoutId, name, languageId, type, hidden, friendlyURL);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(
@@ -145,7 +142,8 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		java.lang.String typeSettings)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateLayout(layoutId, ownerId, typeSettings);
+		return LayoutLocalServiceFactory.getTxImpl().updateLayout(layoutId,
+			ownerId, typeSettings);
 	}
 
 	public com.liferay.portal.model.Layout updateLookAndFeel(
@@ -153,8 +151,8 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		java.lang.String themeId, java.lang.String colorSchemeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateLookAndFeel(layoutId, ownerId, themeId,
-			colorSchemeId);
+		return LayoutLocalServiceFactory.getTxImpl().updateLookAndFeel(layoutId,
+			ownerId, themeId, colorSchemeId);
 	}
 
 	public com.liferay.portal.model.Layout updateTitle(
@@ -162,7 +160,8 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 		java.lang.String title, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateTitle(layoutId, ownerId, title, languageId);
+		return LayoutLocalServiceFactory.getTxImpl().updateTitle(layoutId,
+			ownerId, title, languageId);
 	}
 
 	public void ejbCreate() throws CreateException {

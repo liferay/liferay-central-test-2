@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class UserServiceFactory {
 	public static final String CLASS_NAME = UserServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = UserService.class.getName() +
+		".transaction";
 
 	public static UserService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class UserServiceFactory {
 
 	public void setService(UserService service) {
 		_service = service;
+	}
+
+	public static UserService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		UserService service = (UserService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private UserService _service;

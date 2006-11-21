@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class UserGroupLocalServiceFactory {
 	public static final String CLASS_NAME = UserGroupLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = UserGroupLocalService.class.getName() +
+		".transaction";
 
 	public static UserGroupLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class UserGroupLocalServiceFactory {
 
 	public void setService(UserGroupLocalService service) {
 		_service = service;
+	}
+
+	public static UserGroupLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		UserGroupLocalService service = (UserGroupLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private UserGroupLocalService _service;

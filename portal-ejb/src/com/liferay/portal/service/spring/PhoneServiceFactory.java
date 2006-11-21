@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PhoneServiceFactory {
 	public static final String CLASS_NAME = PhoneServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PhoneService.class.getName() +
+		".transaction";
 
 	public static PhoneService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PhoneServiceFactory {
 
 	public void setService(PhoneService service) {
 		_service = service;
+	}
+
+	public static PhoneService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PhoneService service = (PhoneService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PhoneService _service;

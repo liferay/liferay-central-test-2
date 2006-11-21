@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class WikiNodeLocalServiceFactory {
 	public static final String CLASS_NAME = WikiNodeLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = WikiNodeLocalService.class.getName() +
+		".transaction";
 
 	public static WikiNodeLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class WikiNodeLocalServiceFactory {
 
 	public void setService(WikiNodeLocalService service) {
 		_service = service;
+	}
+
+	public static WikiNodeLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		WikiNodeLocalService service = (WikiNodeLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private WikiNodeLocalService _service;

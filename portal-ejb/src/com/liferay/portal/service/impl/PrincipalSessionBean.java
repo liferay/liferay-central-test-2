@@ -29,6 +29,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalService;
+import com.liferay.portal.service.spring.UserLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.InstancePool;
@@ -134,11 +135,9 @@ public class PrincipalSessionBean {
 
 				if (userId != null) {
 					UserLocalService userLocalService =
-						(UserLocalService)SpringUtil.getContext().getBean(
-							"com.liferay.portal.service.spring.UserLocalService.transaction");
+						UserLocalServiceFactory.getTxImpl();
 
 					user = userLocalService.getUserById(userId);
-					//user = UserUtil.findByPrimaryKey(userId);
 					signedIn = true;
 				}
 

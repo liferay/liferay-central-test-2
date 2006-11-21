@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingItemService;
+import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,21 +42,12 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 	SessionBean {
-	public static final String CLASS_NAME = ShoppingItemService.class.getName() +
-		".transaction";
-
-	public static ShoppingItemService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingItemService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addBookItems(java.lang.String categoryId,
 		java.lang.String[] isbns)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().addBookItems(categoryId, isbns);
+		ShoppingItemServiceFactory.getTxImpl().addBookItems(categoryId, isbns);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -74,11 +66,12 @@ public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addItem(categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, addCommunityPermissions, addGuestPermissions);
+		return ShoppingItemServiceFactory.getTxImpl().addItem(categoryId, sku,
+			name, description, properties, fieldsQuantities, requiresShipping,
+			stockQuantity, featured, sale, smallImage, smallImageURL,
+			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
+			largeImageURL, largeFile, itemFields, itemPrices,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem addItem(
@@ -98,18 +91,19 @@ public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addItem(categoryId, sku, name, description,
-			properties, fieldsQuantities, requiresShipping, stockQuantity,
-			featured, sale, smallImage, smallImageURL, smallFile, mediumImage,
-			mediumImageURL, mediumFile, largeImage, largeImageURL, largeFile,
-			itemFields, itemPrices, communityPermissions, guestPermissions);
+		return ShoppingItemServiceFactory.getTxImpl().addItem(categoryId, sku,
+			name, description, properties, fieldsQuantities, requiresShipping,
+			stockQuantity, featured, sale, smallImage, smallImageURL,
+			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
+			largeImageURL, largeFile, itemFields, itemPrices,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteItem(java.lang.String itemId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteItem(itemId);
+		ShoppingItemServiceFactory.getTxImpl().deleteItem(itemId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(
@@ -118,7 +112,7 @@ public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getItem(itemId);
+		return ShoppingItemServiceFactory.getTxImpl().getItem(itemId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
@@ -137,11 +131,11 @@ public class ShoppingItemServiceEJBImpl implements ShoppingItemService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateItem(itemId, categoryId, sku, name,
-			description, properties, fieldsQuantities, requiresShipping,
-			stockQuantity, featured, sale, smallImage, smallImageURL,
-			smallFile, mediumImage, mediumImageURL, mediumFile, largeImage,
-			largeImageURL, largeFile, itemFields, itemPrices);
+		return ShoppingItemServiceFactory.getTxImpl().updateItem(itemId,
+			categoryId, sku, name, description, properties, fieldsQuantities,
+			requiresShipping, stockQuantity, featured, sale, smallImage,
+			smallImageURL, smallFile, mediumImage, mediumImageURL, mediumFile,
+			largeImage, largeImageURL, largeFile, itemFields, itemPrices);
 	}
 
 	public void ejbCreate() throws CreateException {

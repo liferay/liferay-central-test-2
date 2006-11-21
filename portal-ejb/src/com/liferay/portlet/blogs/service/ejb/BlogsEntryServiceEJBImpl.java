@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.blogs.service.spring.BlogsEntryService;
+import com.liferay.portlet.blogs.service.spring.BlogsEntryServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean {
-	public static final String CLASS_NAME = BlogsEntryService.class.getName() +
-		".transaction";
-
-	public static BlogsEntryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (BlogsEntryService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
@@ -59,9 +51,10 @@ public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addEntry(plid, categoryId, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, addCommunityPermissions, addGuestPermissions);
+		return BlogsEntryServiceFactory.getTxImpl().addEntry(plid, categoryId,
+			title, content, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
@@ -74,16 +67,17 @@ public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addEntry(plid, categoryId, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute, communityPermissions, guestPermissions);
+		return BlogsEntryServiceFactory.getTxImpl().addEntry(plid, categoryId,
+			title, content, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteEntry(java.lang.String entryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteEntry(entryId);
+		BlogsEntryServiceFactory.getTxImpl().deleteEntry(entryId);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry getEntry(
@@ -92,7 +86,7 @@ public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getEntry(entryId);
+		return BlogsEntryServiceFactory.getTxImpl().getEntry(entryId);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsEntry updateEntry(
@@ -104,9 +98,9 @@ public class BlogsEntryServiceEJBImpl implements BlogsEntryService, SessionBean 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateEntry(entryId, categoryId, title, content,
-			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
-			displayDateMinute);
+		return BlogsEntryServiceFactory.getTxImpl().updateEntry(entryId,
+			categoryId, title, content, displayDateMonth, displayDateDay,
+			displayDateYear, displayDateHour, displayDateMinute);
 	}
 
 	public void ejbCreate() throws CreateException {

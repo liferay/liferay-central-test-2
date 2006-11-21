@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLFileEntryServiceFactory {
 	public static final String CLASS_NAME = DLFileEntryServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = DLFileEntryService.class.getName() +
+		".transaction";
 
 	public static DLFileEntryService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class DLFileEntryServiceFactory {
 
 	public void setService(DLFileEntryService service) {
 		_service = service;
+	}
+
+	public static DLFileEntryService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		DLFileEntryService service = (DLFileEntryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private DLFileEntryService _service;

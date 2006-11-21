@@ -25,6 +25,7 @@ package com.liferay.portlet.ratings.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,32 +41,25 @@ import javax.ejb.SessionContext;
  */
 public class RatingsStatsLocalServiceEJBImpl implements RatingsStatsLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = RatingsStatsLocalService.class.getName() +
-		".transaction";
-
-	public static RatingsStatsLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (RatingsStatsLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void deleteStats(java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteStats(className, classPK);
+		RatingsStatsLocalServiceFactory.getTxImpl().deleteStats(className,
+			classPK);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(long statsId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getStats(statsId);
+		return RatingsStatsLocalServiceFactory.getTxImpl().getStats(statsId);
 	}
 
 	public com.liferay.portlet.ratings.model.RatingsStats getStats(
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getStats(className, classPK);
+		return RatingsStatsLocalServiceFactory.getTxImpl().getStats(className,
+			classPK);
 	}
 
 	public void ejbCreate() throws CreateException {

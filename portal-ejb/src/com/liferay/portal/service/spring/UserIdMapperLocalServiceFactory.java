@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class UserIdMapperLocalServiceFactory {
 	public static final String CLASS_NAME = UserIdMapperLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = UserIdMapperLocalService.class.getName() +
+		".transaction";
 
 	public static UserIdMapperLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class UserIdMapperLocalServiceFactory {
 
 	public void setService(UserIdMapperLocalService service) {
 		_service = service;
+	}
+
+	public static UserIdMapperLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		UserIdMapperLocalService service = (UserIdMapperLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private UserIdMapperLocalService _service;

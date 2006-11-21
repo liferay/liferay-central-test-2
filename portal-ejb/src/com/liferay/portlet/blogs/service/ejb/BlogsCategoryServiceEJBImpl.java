@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.blogs.service.spring.BlogsCategoryService;
+import com.liferay.portlet.blogs.service.spring.BlogsCategoryServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class BlogsCategoryServiceEJBImpl implements BlogsCategoryService,
 	SessionBean {
-	public static final String CLASS_NAME = BlogsCategoryService.class.getName() +
-		".transaction";
-
-	public static BlogsCategoryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (BlogsCategoryService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
@@ -58,8 +50,8 @@ public class BlogsCategoryServiceEJBImpl implements BlogsCategoryService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCategory(parentCategoryId, name, description,
-			addCommunityPermissions, addGuestPermissions);
+		return BlogsCategoryServiceFactory.getTxImpl().addCategory(parentCategoryId,
+			name, description, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
@@ -70,15 +62,15 @@ public class BlogsCategoryServiceEJBImpl implements BlogsCategoryService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addCategory(parentCategoryId, name, description,
-			communityPermissions, guestPermissions);
+		return BlogsCategoryServiceFactory.getTxImpl().addCategory(parentCategoryId,
+			name, description, communityPermissions, guestPermissions);
 	}
 
 	public void deleteCategory(java.lang.String categoryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteCategory(categoryId);
+		BlogsCategoryServiceFactory.getTxImpl().deleteCategory(categoryId);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory getCategory(
@@ -87,7 +79,7 @@ public class BlogsCategoryServiceEJBImpl implements BlogsCategoryService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCategory(categoryId);
+		return BlogsCategoryServiceFactory.getTxImpl().getCategory(categoryId);
 	}
 
 	public com.liferay.portlet.blogs.model.BlogsCategory updateCategory(
@@ -97,8 +89,8 @@ public class BlogsCategoryServiceEJBImpl implements BlogsCategoryService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateCategory(categoryId, parentCategoryId, name,
-			description);
+		return BlogsCategoryServiceFactory.getTxImpl().updateCategory(categoryId,
+			parentCategoryId, name, description);
 	}
 
 	public void ejbCreate() throws CreateException {

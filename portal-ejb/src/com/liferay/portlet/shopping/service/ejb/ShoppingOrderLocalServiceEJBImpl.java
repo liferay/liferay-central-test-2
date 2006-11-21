@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.ejb;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService;
+import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,57 +41,50 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingOrderLocalServiceEJBImpl
 	implements ShoppingOrderLocalService, SessionBean {
-	public static final String CLASS_NAME = ShoppingOrderLocalService.class.getName() +
-		".transaction";
-
-	public static ShoppingOrderLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ShoppingOrderLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void completeOrder(java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
 		java.lang.String ppPayerEmail, boolean updateInventory)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().completeOrder(orderId, ppTxnId, ppPaymentStatus,
-			ppPaymentGross, ppReceiverEmail, ppPayerEmail, updateInventory);
+		ShoppingOrderLocalServiceFactory.getTxImpl().completeOrder(orderId,
+			ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail, updateInventory);
 	}
 
 	public void deleteOrder(java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteOrder(orderId);
+		ShoppingOrderLocalServiceFactory.getTxImpl().deleteOrder(orderId);
 	}
 
 	public void deleteOrder(
 		com.liferay.portlet.shopping.model.ShoppingOrder order)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteOrder(order);
+		ShoppingOrderLocalServiceFactory.getTxImpl().deleteOrder(order);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
 		java.lang.String userId, java.lang.String groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getLatestOrder(userId, groupId);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().getLatestOrder(userId,
+			groupId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder getOrder(
 		java.lang.String orderId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getOrder(orderId);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().getOrder(orderId);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder saveLatestOrder(
 		com.liferay.portlet.shopping.model.ShoppingCart cart)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().saveLatestOrder(cart);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().saveLatestOrder(cart);
 	}
 
 	public java.util.List search(java.lang.String orderId,
@@ -103,10 +97,10 @@ public class ShoppingOrderLocalServiceEJBImpl
 		int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().search(orderId, groupId, companyId, userId,
-			billingFirstName, billingLastName, billingEmailAddress,
-			shippingFirstName, shippingLastName, shippingEmailAddress,
-			ppPaymentStatus, andOperator, begin, end);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().search(orderId,
+			groupId, companyId, userId, billingFirstName, billingLastName,
+			billingEmailAddress, shippingFirstName, shippingLastName,
+			shippingEmailAddress, ppPaymentStatus, andOperator, begin, end);
 	}
 
 	public int searchCount(java.lang.String orderId, java.lang.String groupId,
@@ -118,16 +112,17 @@ public class ShoppingOrderLocalServiceEJBImpl
 		java.lang.String ppPaymentStatus, boolean andOperator)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().searchCount(orderId, groupId, companyId, userId,
-			billingFirstName, billingLastName, billingEmailAddress,
-			shippingFirstName, shippingLastName, shippingEmailAddress,
-			ppPaymentStatus, andOperator);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().searchCount(orderId,
+			groupId, companyId, userId, billingFirstName, billingLastName,
+			billingEmailAddress, shippingFirstName, shippingLastName,
+			shippingEmailAddress, ppPaymentStatus, andOperator);
 	}
 
 	public void sendEmail(java.lang.String orderId, java.lang.String emailType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().sendEmail(orderId, emailType);
+		ShoppingOrderLocalServiceFactory.getTxImpl().sendEmail(orderId,
+			emailType);
 	}
 
 	public void sendEmail(
@@ -135,7 +130,7 @@ public class ShoppingOrderLocalServiceEJBImpl
 		java.lang.String emailType)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().sendEmail(order, emailType);
+		ShoppingOrderLocalServiceFactory.getTxImpl().sendEmail(order, emailType);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
@@ -156,8 +151,8 @@ public class ShoppingOrderLocalServiceEJBImpl
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateLatestOrder(userId, groupId,
-			billingFirstName, billingLastName, billingEmailAddress,
+		return ShoppingOrderLocalServiceFactory.getTxImpl().updateLatestOrder(userId,
+			groupId, billingFirstName, billingLastName, billingEmailAddress,
 			billingCompany, billingStreet, billingCity, billingState,
 			billingZip, billingCountry, billingPhone, shipToBilling,
 			shippingFirstName, shippingLastName, shippingEmailAddress,
@@ -183,14 +178,14 @@ public class ShoppingOrderLocalServiceEJBImpl
 		int ccExpYear, java.lang.String ccVerNumber, java.lang.String comments)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateOrder(orderId, billingFirstName,
-			billingLastName, billingEmailAddress, billingCompany,
-			billingStreet, billingCity, billingState, billingZip,
-			billingCountry, billingPhone, shipToBilling, shippingFirstName,
-			shippingLastName, shippingEmailAddress, shippingCompany,
-			shippingStreet, shippingCity, shippingState, shippingZip,
-			shippingCountry, shippingPhone, ccName, ccType, ccNumber,
-			ccExpMonth, ccExpYear, ccVerNumber, comments);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().updateOrder(orderId,
+			billingFirstName, billingLastName, billingEmailAddress,
+			billingCompany, billingStreet, billingCity, billingState,
+			billingZip, billingCountry, billingPhone, shipToBilling,
+			shippingFirstName, shippingLastName, shippingEmailAddress,
+			shippingCompany, shippingStreet, shippingCity, shippingState,
+			shippingZip, shippingCountry, shippingPhone, ccName, ccType,
+			ccNumber, ccExpMonth, ccExpYear, ccVerNumber, comments);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingOrder updateOrder(
@@ -199,8 +194,9 @@ public class ShoppingOrderLocalServiceEJBImpl
 		java.lang.String ppReceiverEmail, java.lang.String ppPayerEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateOrder(orderId, ppTxnId, ppPaymentStatus,
-			ppPaymentGross, ppReceiverEmail, ppPayerEmail);
+		return ShoppingOrderLocalServiceFactory.getTxImpl().updateOrder(orderId,
+			ppTxnId, ppPaymentStatus, ppPaymentGross, ppReceiverEmail,
+			ppPayerEmail);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.AddressLocalService;
+import com.liferay.portal.service.spring.AddressLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  */
 public class AddressLocalServiceEJBImpl implements AddressLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = AddressLocalService.class.getName() +
-		".transaction";
-
-	public static AddressLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (AddressLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Address addAddress(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String street1,
@@ -57,34 +49,36 @@ public class AddressLocalServiceEJBImpl implements AddressLocalService,
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().addAddress(userId, className, classPK, street1,
-			street2, street3, city, zip, regionId, countryId, typeId, mailing,
-			primary);
+		return AddressLocalServiceFactory.getTxImpl().addAddress(userId,
+			className, classPK, street1, street2, street3, city, zip, regionId,
+			countryId, typeId, mailing, primary);
 	}
 
 	public void deleteAddress(java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().deleteAddress(addressId);
+		AddressLocalServiceFactory.getTxImpl().deleteAddress(addressId);
 	}
 
 	public void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		getService().deleteAddresses(companyId, className, classPK);
+		AddressLocalServiceFactory.getTxImpl().deleteAddresses(companyId,
+			className, classPK);
 	}
 
 	public com.liferay.portal.model.Address getAddress(
 		java.lang.String addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getAddress(addressId);
+		return AddressLocalServiceFactory.getTxImpl().getAddress(addressId);
 	}
 
 	public java.util.List getAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
-		return getService().getAddresses(companyId, className, classPK);
+		return AddressLocalServiceFactory.getTxImpl().getAddresses(companyId,
+			className, classPK);
 	}
 
 	public com.liferay.portal.model.Address updateAddress(
@@ -95,8 +89,9 @@ public class AddressLocalServiceEJBImpl implements AddressLocalService,
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateAddress(addressId, street1, street2, street3,
-			city, zip, regionId, countryId, typeId, mailing, primary);
+		return AddressLocalServiceFactory.getTxImpl().updateAddress(addressId,
+			street1, street2, street3, city, zip, regionId, countryId, typeId,
+			mailing, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

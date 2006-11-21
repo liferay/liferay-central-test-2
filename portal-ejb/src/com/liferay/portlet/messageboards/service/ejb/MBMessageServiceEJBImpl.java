@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.messageboards.service.spring.MBMessageService;
+import com.liferay.portlet.messageboards.service.spring.MBMessageServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
-	public static final String CLASS_NAME = MBMessageService.class.getName() +
-		".transaction";
-
-	public static MBMessageService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MBMessageService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String threadId,
@@ -58,8 +50,8 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addDiscussionMessage(groupId, className, classPK,
-			threadId, parentMessageId, subject, body);
+		return MBMessageServiceFactory.getTxImpl().addDiscussionMessage(groupId,
+			className, classPK, threadId, parentMessageId, subject, body);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -71,40 +63,41 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addMessage(categoryId, subject, body, files,
-			anonymous, priority, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, javax.portlet.PortletPreferences prefs,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().addMessage(categoryId, subject, body, files,
-			anonymous, priority, prefs, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String categoryId, java.lang.String threadId,
-		java.lang.String parentMessageId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().addMessage(categoryId, threadId, parentMessageId,
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
 			subject, body, files, anonymous, priority, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, javax.portlet.PortletPreferences prefs,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			subject, body, files, anonymous, priority, prefs,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
@@ -114,9 +107,9 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, prefs,
-			addCommunityPermissions, addGuestPermissions);
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, prefs, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
@@ -128,40 +121,42 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addMessage(categoryId, subject, body, files,
-			anonymous, priority, communityPermissions, guestPermissions);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, javax.portlet.PortletPreferences prefs,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().addMessage(categoryId, subject, body, files,
-			anonymous, priority, prefs, communityPermissions, guestPermissions);
-	}
-
-	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
-		java.lang.String categoryId, java.lang.String threadId,
-		java.lang.String parentMessageId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return getService().addMessage(categoryId, threadId, parentMessageId,
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
 			subject, body, files, anonymous, priority, communityPermissions,
 			guestPermissions);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, javax.portlet.PortletPreferences prefs,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			subject, body, files, anonymous, priority, prefs,
+			communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
+		java.lang.String categoryId, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body, java.util.List files, boolean anonymous,
+		double priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
@@ -172,9 +167,9 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addMessage(categoryId, threadId, parentMessageId,
-			subject, body, files, anonymous, priority, prefs,
-			communityPermissions, guestPermissions);
+		return MBMessageServiceFactory.getTxImpl().addMessage(categoryId,
+			threadId, parentMessageId, subject, body, files, anonymous,
+			priority, prefs, communityPermissions, guestPermissions);
 	}
 
 	public void deleteDiscussionMessage(java.lang.String groupId,
@@ -183,15 +178,15 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteDiscussionMessage(groupId, className, classPK,
-			messageId);
+		MBMessageServiceFactory.getTxImpl().deleteDiscussionMessage(groupId,
+			className, classPK, messageId);
 	}
 
 	public void deleteMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteMessage(messageId);
+		MBMessageServiceFactory.getTxImpl().deleteMessage(messageId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(
@@ -200,21 +195,21 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getMessage(messageId);
+		return MBMessageServiceFactory.getTxImpl().getMessage(messageId);
 	}
 
 	public void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().subscribeMessage(messageId);
+		MBMessageServiceFactory.getTxImpl().subscribeMessage(messageId);
 	}
 
 	public void unsubscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().unsubscribeMessage(messageId);
+		MBMessageServiceFactory.getTxImpl().unsubscribeMessage(messageId);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
@@ -225,8 +220,8 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateDiscussionMessage(groupId, className,
-			classPK, messageId, subject, body);
+		return MBMessageServiceFactory.getTxImpl().updateDiscussionMessage(groupId,
+			className, classPK, messageId, subject, body);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -237,8 +232,8 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateMessage(messageId, categoryId, subject, body,
-			files, priority);
+		return MBMessageServiceFactory.getTxImpl().updateMessage(messageId,
+			categoryId, subject, body, files, priority);
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateMessage(
@@ -249,8 +244,8 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateMessage(messageId, categoryId, subject, body,
-			files, priority, prefs);
+		return MBMessageServiceFactory.getTxImpl().updateMessage(messageId,
+			categoryId, subject, body, files, priority, prefs);
 	}
 
 	public void ejbCreate() throws CreateException {

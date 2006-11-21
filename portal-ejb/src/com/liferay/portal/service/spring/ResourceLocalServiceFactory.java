@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class ResourceLocalServiceFactory {
 	public static final String CLASS_NAME = ResourceLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = ResourceLocalService.class.getName() +
+		".transaction";
 
 	public static ResourceLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class ResourceLocalServiceFactory {
 
 	public void setService(ResourceLocalService service) {
 		_service = service;
+	}
+
+	public static ResourceLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		ResourceLocalService service = (ResourceLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private ResourceLocalService _service;

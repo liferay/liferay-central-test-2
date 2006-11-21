@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.PhoneService;
+import com.liferay.portal.service.spring.PhoneServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
-	public static final String CLASS_NAME = PhoneService.class.getName() +
-		".transaction";
-
-	public static PhoneService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PhoneService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Phone addPhone(java.lang.String className,
 		java.lang.String classPK, java.lang.String number,
 		java.lang.String extension, java.lang.String typeId, boolean primary)
@@ -55,15 +47,15 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addPhone(className, classPK, number, extension,
-			typeId, primary);
+		return PhoneServiceFactory.getTxImpl().addPhone(className, classPK,
+			number, extension, typeId, primary);
 	}
 
 	public void deletePhone(java.lang.String phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deletePhone(phoneId);
+		PhoneServiceFactory.getTxImpl().deletePhone(phoneId);
 	}
 
 	public com.liferay.portal.model.Phone getPhone(java.lang.String phoneId)
@@ -71,7 +63,7 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getPhone(phoneId);
+		return PhoneServiceFactory.getTxImpl().getPhone(phoneId);
 	}
 
 	public java.util.List getPhones(java.lang.String className,
@@ -80,7 +72,7 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getPhones(className, classPK);
+		return PhoneServiceFactory.getTxImpl().getPhones(className, classPK);
 	}
 
 	public com.liferay.portal.model.Phone updatePhone(
@@ -90,8 +82,8 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updatePhone(phoneId, number, extension, typeId,
-			primary);
+		return PhoneServiceFactory.getTxImpl().updatePhone(phoneId, number,
+			extension, typeId, primary);
 	}
 
 	public void ejbCreate() throws CreateException {

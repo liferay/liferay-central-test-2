@@ -23,6 +23,7 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.CompanyLocalService;
+import com.liferay.portal.service.spring.CompanyLocalServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,48 +40,40 @@ import javax.ejb.SessionContext;
  */
 public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 	SessionBean {
-	public static final String CLASS_NAME = CompanyLocalService.class.getName() +
-		".transaction";
-
-	public static CompanyLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (CompanyLocalService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void checkCompany(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().checkCompany(companyId);
+		CompanyLocalServiceFactory.getTxImpl().checkCompany(companyId);
 	}
 
 	public void checkCompanyKey(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().checkCompanyKey(companyId);
+		CompanyLocalServiceFactory.getTxImpl().checkCompanyKey(companyId);
 	}
 
 	public java.util.List getCompanies()
 		throws com.liferay.portal.SystemException {
-		return getService().getCompanies();
+		return CompanyLocalServiceFactory.getTxImpl().getCompanies();
 	}
 
 	public com.liferay.portal.model.Company getCompany(
 		java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().getCompany(companyId);
+		return CompanyLocalServiceFactory.getTxImpl().getCompany(companyId);
 	}
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		return getService().search(companyId, keywords);
+		return CompanyLocalServiceFactory.getTxImpl().search(companyId, keywords);
 	}
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String portletId, java.lang.String groupId,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		return getService().search(companyId, portletId, groupId, keywords);
+		return CompanyLocalServiceFactory.getTxImpl().search(companyId,
+			portletId, groupId, keywords);
 	}
 
 	public com.liferay.portal.model.Company updateCompany(
@@ -92,9 +85,9 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		java.lang.String type, java.lang.String size)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return getService().updateCompany(companyId, portalURL, homeURL, mx,
-			name, legalName, legalId, legalType, sicCode, tickerSymbol,
-			industry, type, size);
+		return CompanyLocalServiceFactory.getTxImpl().updateCompany(companyId,
+			portalURL, homeURL, mx, name, legalName, legalId, legalType,
+			sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public void updateDisplay(java.lang.String companyId,
@@ -102,13 +95,14 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		java.lang.String resolution)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().updateDisplay(companyId, languageId, timeZoneId, resolution);
+		CompanyLocalServiceFactory.getTxImpl().updateDisplay(companyId,
+			languageId, timeZoneId, resolution);
 	}
 
 	public void updateLogo(java.lang.String companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().updateLogo(companyId, file);
+		CompanyLocalServiceFactory.getTxImpl().updateLogo(companyId, file);
 	}
 
 	public void updateSecurity(java.lang.String companyId,
@@ -116,8 +110,8 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		boolean strangers)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		getService().updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers);
+		CompanyLocalServiceFactory.getTxImpl().updateSecurity(companyId,
+			authType, autoLogin, sendPassword, strangers);
 	}
 
 	public void ejbCreate() throws CreateException {

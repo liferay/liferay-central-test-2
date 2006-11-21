@@ -34,6 +34,8 @@ import org.springframework.context.ApplicationContext;
  */
 public class PasswordTrackerLocalServiceFactory {
 	public static final String CLASS_NAME = PasswordTrackerLocalServiceFactory.class.getName();
+	public static final String TRANSACTION_CLASS_NAME = PasswordTrackerLocalService.class.getName() +
+		".transaction";
 
 	public static PasswordTrackerLocalService getService() {
 		ApplicationContext ctx = SpringUtil.getContext();
@@ -44,6 +46,13 @@ public class PasswordTrackerLocalServiceFactory {
 
 	public void setService(PasswordTrackerLocalService service) {
 		_service = service;
+	}
+
+	public static PasswordTrackerLocalService getTxImpl() {
+		ApplicationContext ctx = SpringUtil.getContext();
+		PasswordTrackerLocalService service = (PasswordTrackerLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+
+		return service;
 	}
 
 	private PasswordTrackerLocalService _service;

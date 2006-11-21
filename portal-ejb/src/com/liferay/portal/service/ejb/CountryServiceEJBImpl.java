@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.CountryService;
+import com.liferay.portal.service.spring.CountryServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,27 +40,18 @@ import javax.ejb.SessionContext;
  *
  */
 public class CountryServiceEJBImpl implements CountryService, SessionBean {
-	public static final String CLASS_NAME = CountryService.class.getName() +
-		".transaction";
-
-	public static CountryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (CountryService)ctx.getBean(CLASS_NAME);
-	}
-
 	public java.util.List getCountries()
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCountries();
+		return CountryServiceFactory.getTxImpl().getCountries();
 	}
 
 	public java.util.List getCountries(boolean active)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCountries(active);
+		return CountryServiceFactory.getTxImpl().getCountries(active);
 	}
 
 	public com.liferay.portal.model.Country getCountry(
@@ -68,7 +60,7 @@ public class CountryServiceEJBImpl implements CountryService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getCountry(countryId);
+		return CountryServiceFactory.getTxImpl().getCountry(countryId);
 	}
 
 	public void ejbCreate() throws CreateException {

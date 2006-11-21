@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.polls.service.spring.PollsQuestionService;
+import com.liferay.portlet.polls.service.spring.PollsQuestionServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -41,15 +42,6 @@ import javax.ejb.SessionContext;
  */
 public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 	SessionBean {
-	public static final String CLASS_NAME = PollsQuestionService.class.getName() +
-		".transaction";
-
-	public static PollsQuestionService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PollsQuestionService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
@@ -60,10 +52,10 @@ public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addQuestion(plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			addCommunityPermissions, addGuestPermissions);
+		return PollsQuestionServiceFactory.getTxImpl().addQuestion(plid, title,
+			description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
@@ -77,17 +69,17 @@ public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addQuestion(plid, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices,
-			communityPermissions, guestPermissions);
+		return PollsQuestionServiceFactory.getTxImpl().addQuestion(plid, title,
+			description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices, communityPermissions, guestPermissions);
 	}
 
 	public void deleteQuestion(java.lang.String questionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteQuestion(questionId);
+		PollsQuestionServiceFactory.getTxImpl().deleteQuestion(questionId);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion getQuestion(
@@ -96,7 +88,7 @@ public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getQuestion(questionId);
+		return PollsQuestionServiceFactory.getTxImpl().getQuestion(questionId);
 	}
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(
@@ -108,9 +100,10 @@ public class PollsQuestionServiceEJBImpl implements PollsQuestionService,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateQuestion(questionId, title, description,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire, choices);
+		return PollsQuestionServiceFactory.getTxImpl().updateQuestion(questionId,
+			title, description, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, choices);
 	}
 
 	public void ejbCreate() throws CreateException {

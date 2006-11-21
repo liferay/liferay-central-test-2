@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.ResourceService;
+import com.liferay.portal.service.spring.ResourceServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class ResourceServiceEJBImpl implements ResourceService, SessionBean {
-	public static final String CLASS_NAME = ResourceService.class.getName() +
-		".transaction";
-
-	public static ResourceService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (ResourceService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
@@ -56,7 +48,8 @@ public class ResourceServiceEJBImpl implements ResourceService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getResource(companyId, name, typeId, scope, primKey);
+		return ResourceServiceFactory.getTxImpl().getResource(companyId, name,
+			typeId, scope, primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

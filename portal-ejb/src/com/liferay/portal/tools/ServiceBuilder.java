@@ -3797,6 +3797,7 @@ public class ServiceBuilder {
 
 		sb.append("import " + _springUtilClassName + ";");
 		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
 		sb.append("import javax.ejb.CreateException;");
 		sb.append("import javax.ejb.SessionContext;");
 		sb.append("import javax.ejb.SessionBean;");
@@ -3810,16 +3811,7 @@ public class ServiceBuilder {
 
 		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceEJBImpl implements " + entity.getName() + _getSessionTypeName(sessionType) + "Service, SessionBean {");
 
-		// Fields
-
-		sb.append("public static final String CLASS_NAME = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
-
 		// Methods
-
-		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getService() {");
-		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append("return (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)ctx.getBean(CLASS_NAME);");
-		sb.append("}");
 
 		for (int i = 0; i < methods.size(); i++) {
 			XMethod xMethod = (XMethod)methods.get(i);
@@ -3877,7 +3869,7 @@ public class ServiceBuilder {
 					sb.append("return ");
 				}
 
-				sb.append("getService()." + methodName + "(");
+				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getTxImpl()." + methodName + "(");
 
 				for (int j = 0; j < parameters.size(); j++) {
 					XParameter xParameter = (XParameter)parameters.get(j);
@@ -3949,6 +3941,8 @@ public class ServiceBuilder {
 
 		sb.append("public static final String CLASS_NAME = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
 
+		sb.append("public static final String TRANSACTION_CLASS_NAME = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
+
 		// Methods
 
 		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getService() {");
@@ -3959,6 +3953,12 @@ public class ServiceBuilder {
 
 		sb.append("public void setService(" + entity.getName() + _getSessionTypeName(sessionType) + "Service service) {");
 		sb.append("_service = service;");
+		sb.append("}");
+
+		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
+		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
+		sb.append(entity.getName() + _getSessionTypeName(sessionType) + "Service service = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)ctx.getBean(TRANSACTION_CLASS_NAME);");
+		sb.append("return service;");
 		sb.append("}");
 
 		// Fields

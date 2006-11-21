@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.imagegallery.service.spring.IGImageService;
+import com.liferay.portlet.imagegallery.service.spring.IGImageServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,15 +41,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
-	public static final String CLASS_NAME = IGImageService.class.getName() +
-		".transaction";
-
-	public static IGImageService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (IGImageService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String folderId, java.lang.String description,
 		java.io.File file, java.lang.String contentType,
@@ -57,8 +49,9 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addImage(folderId, description, file, contentType,
-			addCommunityPermissions, addGuestPermissions);
+		return IGImageServiceFactory.getTxImpl().addImage(folderId,
+			description, file, contentType, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
@@ -70,15 +63,16 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addImage(folderId, description, file, contentType,
-			communityPermissions, guestPermissions);
+		return IGImageServiceFactory.getTxImpl().addImage(folderId,
+			description, file, contentType, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteImage(java.lang.String companyId, java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().deleteImage(companyId, imageId);
+		IGImageServiceFactory.getTxImpl().deleteImage(companyId, imageId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImage(
@@ -87,7 +81,7 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().getImage(companyId, imageId);
+		return IGImageServiceFactory.getTxImpl().getImage(companyId, imageId);
 	}
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
@@ -98,8 +92,8 @@ public class IGImageServiceEJBImpl implements IGImageService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateImage(imageId, folderId, description, file,
-			contentType);
+		return IGImageServiceFactory.getTxImpl().updateImage(imageId, folderId,
+			description, file, contentType);
 	}
 
 	public void ejbCreate() throws CreateException {

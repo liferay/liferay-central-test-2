@@ -26,6 +26,7 @@ import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import com.liferay.portlet.polls.service.spring.PollsVoteService;
+import com.liferay.portlet.polls.service.spring.PollsVoteServiceFactory;
 
 import org.springframework.context.ApplicationContext;
 
@@ -40,22 +41,13 @@ import javax.ejb.SessionContext;
  *
  */
 public class PollsVoteServiceEJBImpl implements PollsVoteService, SessionBean {
-	public static final String CLASS_NAME = PollsVoteService.class.getName() +
-		".transaction";
-
-	public static PollsVoteService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (PollsVoteService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portlet.polls.model.PollsVote addVote(
 		java.lang.String questionId, java.lang.String choiceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().addVote(questionId, choiceId);
+		return PollsVoteServiceFactory.getTxImpl().addVote(questionId, choiceId);
 	}
 
 	public void ejbCreate() throws CreateException {

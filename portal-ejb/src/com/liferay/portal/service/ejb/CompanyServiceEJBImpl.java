@@ -24,6 +24,7 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.CompanyService;
+import com.liferay.portal.service.spring.CompanyServiceFactory;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import org.springframework.context.ApplicationContext;
@@ -39,15 +40,6 @@ import javax.ejb.SessionContext;
  *
  */
 public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
-	public static final String CLASS_NAME = CompanyService.class.getName() +
-		".transaction";
-
-	public static CompanyService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (CompanyService)ctx.getBean(CLASS_NAME);
-	}
-
 	public com.liferay.portal.model.Company updateCompany(
 		java.lang.String companyId, java.lang.String portalURL,
 		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
@@ -59,9 +51,9 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return getService().updateCompany(companyId, portalURL, homeURL, mx,
-			name, legalName, legalId, legalType, sicCode, tickerSymbol,
-			industry, type, size);
+		return CompanyServiceFactory.getTxImpl().updateCompany(companyId,
+			portalURL, homeURL, mx, name, legalName, legalId, legalType,
+			sicCode, tickerSymbol, industry, type, size);
 	}
 
 	public void updateDisplay(java.lang.String companyId,
@@ -70,14 +62,15 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().updateDisplay(companyId, languageId, timeZoneId, resolution);
+		CompanyServiceFactory.getTxImpl().updateDisplay(companyId, languageId,
+			timeZoneId, resolution);
 	}
 
 	public void updateLogo(java.lang.String companyId, java.io.File file)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().updateLogo(companyId, file);
+		CompanyServiceFactory.getTxImpl().updateLogo(companyId, file);
 	}
 
 	public void updateSecurity(java.lang.String companyId,
@@ -86,8 +79,8 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		getService().updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers);
+		CompanyServiceFactory.getTxImpl().updateSecurity(companyId, authType,
+			autoLogin, sendPassword, strangers);
 	}
 
 	public void ejbCreate() throws CreateException {
