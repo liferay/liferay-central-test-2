@@ -89,10 +89,17 @@ public class LayoutPermission {
 				layout.getPrimaryKey().toString());
 		}
 		catch (NoSuchResourceException nsre) {
+			boolean addCommunityPermission = true;
+			boolean addGuestPermission = true;
+
+			if (layout.isPrivateLayout()) {
+				addGuestPermission = false;
+			}
+
 			ResourceLocalServiceUtil.addResources(
 				layout.getCompanyId(), layout.getGroupId(), null,
 				Layout.class.getName(), layout.getPrimaryKey().toString(),
-				false, true, true);
+				false, addCommunityPermission, addGuestPermission);
 		}
 
 		return permissionChecker.hasPermission(
