@@ -28,4 +28,4 @@
 
 <br><br>
 
-<%--<bean:message key="hello-there" />--%>
+<bean:message key="hello-there" />

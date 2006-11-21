@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portlet/sample_struts_global_portlet/init.jsp" %>
 
-<b>View <%--<bean:message key="hello-there" />--%></b>
+<b>View <bean:message key="hello-there" /></b>

@@ -8,6 +8,7 @@
 		<use-default-template>true</use-default-template>
 		<restore-current-view>true</restore-current-view>
 		<instanceable>true</instanceable>
+		<private-request-attributes>false</private-request-attributes>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
