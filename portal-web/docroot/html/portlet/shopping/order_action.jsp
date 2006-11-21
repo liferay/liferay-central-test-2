@@ -30,19 +30,19 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 ShoppingOrder order = (ShoppingOrder)row.getObject();
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/shopping/edit_order" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 	<portlet:param name="orderId" value="<%= order.getOrderId() %>" />
 </portlet:renderURL>
 
-<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 	<portlet:param name="struts_action" value="/shopping/edit_order" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 	<portlet:param name="deleteOrderIds" value="<%= order.getOrderId() %>" />
 </portlet:actionURL>
 
-<liferay-ui:icon-delete url="<%= portletURL %>" />
+<liferay-ui:icon-delete url="<%= deleteURL %>" />

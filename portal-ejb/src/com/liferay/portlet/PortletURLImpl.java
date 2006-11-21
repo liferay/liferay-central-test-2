@@ -45,6 +45,7 @@ import java.security.Key;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.io.Serializable;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
@@ -65,7 +66,7 @@ import org.apache.commons.logging.LogFactory;
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortletURLImpl implements PortletURL {
+public class PortletURLImpl implements PortletURL, Serializable {
 
 	public static final boolean APPEND_PARAMETERS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));

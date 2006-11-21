@@ -31,13 +31,13 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 %>
 
 <c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/polls/edit_question" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="questionId" value="<%= question.getQuestionId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
 <c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.PERMISSIONS) %>">
@@ -45,19 +45,19 @@ PollsQuestion question = (PollsQuestion)row.getObject();
 		modelResource="<%= PollsQuestion.class.getName() %>"
 		modelResourceDescription="<%= question.getTitle() %>"
 		resourcePrimKey="<%= question.getPrimaryKey().toString() %>"
-		var="portletURL"
+		var="permissionsURL"
 	/>
 
-	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
 <c:if test="<%= PollsQuestionPermission.contains(permissionChecker, question, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/polls/edit_question" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="questionId" value="<%= question.getQuestionId() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= portletURL %>" />
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 </c:if>

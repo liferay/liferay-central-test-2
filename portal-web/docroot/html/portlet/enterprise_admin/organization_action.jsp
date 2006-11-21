@@ -59,14 +59,14 @@ String addUserURLString = null;
 
 <c:choose>
 	<c:when test="<%= rootOrganization %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToOrganizationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="organizationId" value="<%= organizationId %>" />
 			<portlet:param name="organizationName" value="<%= organization.getName() %>" />
 		</portlet:renderURL>
 
 		<%
-		addUserURLString = addUserURL;
+		addUserURLString = addUserToOrganizationURL;
 		%>
 
 	</c:when>
@@ -76,7 +76,7 @@ String addUserURLString = null;
 		Organization parentOrganizaton = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
 		%>
 
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserURL">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addUserToLocationURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 			<portlet:param name="organizationId" value="<%= parentOrganizaton.getOrganizationId() %>" />
 			<portlet:param name="organizationName" value="<%= parentOrganizaton.getName() %>" />
@@ -85,7 +85,7 @@ String addUserURLString = null;
 		</portlet:renderURL>
 
 		<%
-		addUserURLString = addUserURL;
+		addUserURLString = addUserToLocationURL;
 		%>
 
 	</c:otherwise>
@@ -120,10 +120,10 @@ String addUserURLString = null;
 				modelResource="com.liferay.portal.model.Location"
 				modelResourceDescription="<%= organization.getName() %>"
 				resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
-				var="editOrganizationURL"
+				var="editLocationPermissionsURL"
 			/>
 
-			<liferay-ui:icon image="permissions" url="<%= editOrganizationURL %>" />
+			<liferay-ui:icon image="permissions" url="<%= editLocationPermissionsURL %>" />
 		</c:if>
 
 		<c:if test="<%= LocationPermission.contains(permissionChecker, organizationId, ActionKeys.ADD_USER) %>">
@@ -158,10 +158,10 @@ String addUserURLString = null;
 							modelResource="<%= Organization.class.getName() %>"
 							modelResourceDescription="<%= organization.getName() %>"
 							resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
-							var="editOrganizationURL"
+							var="editRootOrganizationPermissionsURL"
 						/>
 
-						<liferay-ui:icon image="permissions" url="<%= editOrganizationURL %>" />
+						<liferay-ui:icon image="permissions" url="<%= editRootOrganizationPermissionsURL %>" />
 					</c:if>
 				</c:when>
 				<c:otherwise>
@@ -170,10 +170,10 @@ String addUserURLString = null;
 							modelResource="com.liferay.portal.model.Location"
 							modelResourceDescription="<%= organization.getName() %>"
 							resourcePrimKey="<%= organization.getPrimaryKey().toString() %>"
-							var="editOrganizationURL"
+							var="editOrganizationPermissionsURL"
 						/>
 
-						<liferay-ui:icon image="permissions" url="<%= editOrganizationURL %>" />
+						<liferay-ui:icon image="permissions" url="<%= editOrganizationPermissionsURL %>" />
 					</c:if>
 				</c:otherwise>
 			</c:choose>

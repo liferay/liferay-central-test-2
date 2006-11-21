@@ -27,13 +27,15 @@ import com.liferay.util.StringPool;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import java.io.Serializable;
+
 /**
  * <a href="PortletDisplay.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortletDisplay implements Cloneable {
+public class PortletDisplay implements Cloneable, Serializable {
 
 	public String getId() {
 		return _id;

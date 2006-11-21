@@ -44,7 +44,7 @@ public class ServerDetector {
 		"/org/objectweb/jonas/server/Server.class";
 
 	public static final String OC4J_CLASS =
-		"/oracle/jsp/oc4jutil/Oc4jUtil.class";
+		"oracle.oc4j.util.ClassUtils";
 
 	public static final String ORION_CLASS =
 		"/com/evermind/server/ApplicationServer.class";
@@ -200,12 +200,12 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._oc4j == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(OC4J_CLASS) != null) {
+			try {
+				ClassLoader.getSystemClassLoader().
+					loadClass(OC4J_CLASS);
 				sd._oc4j = Boolean.TRUE;
 			}
-			else {
+			catch (ClassNotFoundException e) {
 				sd._oc4j = Boolean.FALSE;
 			}
 		}

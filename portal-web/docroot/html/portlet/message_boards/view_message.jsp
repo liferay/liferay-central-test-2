@@ -106,15 +106,15 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		<tr>
 			<c:if test="<%= MBCategoryPermission.contains(permissionChecker, category, ActionKeys.ADD_MESSAGE) %>">
 				<td>
-					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+					<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addMessageURL">
 						<portlet:param name="struts_action" value="/message_boards/edit_message" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
 						<portlet:param name="categoryId" value="<%= category.getCategoryId() %>" />
 					</portlet:renderURL>
 
-					<liferay-ui:icon image="post" message="post-new-thread" url="<%= portletURL %>" />
+					<liferay-ui:icon image="post" message="post-new-thread" url="<%= addMessageURL %>" />
 
-					<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "post-new-thread") %></a>
+					<a href="<%= addMessageURL.toString() %>"><%= LanguageUtil.get(pageContext, "post-new-thread") %></a>
 				</td>
 			</c:if>
 
@@ -123,28 +123,28 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 				<td>
 					<c:choose>
 						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), MBThread.class.getName(), message.getThreadId()) %>">
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="unsubscribe" url="<%= portletURL %>" />
+							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
 
-							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "unsubscribe") %></a>
+							<a href="<%= unsubscribeURL.toString() %>"><%= LanguageUtil.get(pageContext, "unsubscribe") %></a>
 						</c:when>
 						<c:otherwise>
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
 								<portlet:param name="struts_action" value="/message_boards/edit_message" />
 								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 								<portlet:param name="redirect" value="<%= currentURL %>" />
 								<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 							</portlet:actionURL>
 
-							<liferay-ui:icon image="subscribe" url="<%= portletURL %>" />
+							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
 
-							<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "subscribe") %></a>
+							<a href="<%= subscribeURL.toString() %>"><%= LanguageUtil.get(pageContext, "subscribe") %></a>
 						</c:otherwise>
 					</c:choose>
 				</td>

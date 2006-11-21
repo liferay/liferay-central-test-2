@@ -36,6 +36,7 @@ import com.liferay.util.StringPool;
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.io.Serializable;
 
 import javax.portlet.PortletURL;
 
@@ -48,7 +49,7 @@ import org.apache.commons.logging.LogFactory;
  * @author  Brian Wing Shun Chan
  *
  */
-public class ThemeDisplay {
+public class ThemeDisplay implements Serializable {
 
 	public Company getCompany() {
 		return _company;

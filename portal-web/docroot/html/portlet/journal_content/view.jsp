@@ -156,14 +156,14 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 			<span id="<portlet:namespace />editArticle<%= i %>" >
 				<c:if test="<%= JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE) %>">
-					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletName="<%= PortletKeys.JOURNAL %>">
+					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 						<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 						<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 					</liferay-portlet:renderURL>
 
-					<liferay-ui:icon image="edit" message="edit-article" url="<%= portletURL %>" />
+					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
 				</c:if>
 			</span>
 
@@ -175,13 +175,13 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 	%>
 
 	<c:if test="<%= PortletPermission.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) %>">
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletName="<%= PortletKeys.JOURNAL %>">
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL" portletName="<%= PortletKeys.JOURNAL %>">
 			<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 			<liferay-portlet:param name="portletResource" value="<%= portletDisplay.getId() %>" />
 			<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:renderURL>
 
-		<liferay-ui:icon image="add_article" message="add-article" url="<%= portletURL %>" />
+		<liferay-ui:icon image="add_article" message="add-article" url="<%= addArticleURL %>" />
 	</c:if>
 </c:if>
 

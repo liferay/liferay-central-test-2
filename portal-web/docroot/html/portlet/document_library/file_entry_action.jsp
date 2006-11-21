@@ -43,14 +43,14 @@ else {
 <c:choose>
 	<c:when test="<%= fileEntry != null %>">
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="folderId" value="<%= fileEntry.getFolderId() %>" />
 				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+			<liferay-ui:icon image="edit" url="<%= editURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
@@ -58,14 +58,14 @@ else {
 				modelResource="<%= DLFileEntry.class.getName() %>"
 				modelResourceDescription="<%= fileEntry.getName() %>"
 				resourcePrimKey="<%= fileEntry.getPrimaryKey().toString() %>"
-				var="portletURL"
+				var="permissionsURL"
 			/>
 
-			<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -73,18 +73,18 @@ else {
 				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon-delete url="<%= portletURL %>" />
+			<liferay-ui:icon-delete url="<%= deleteURL %>" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editShortcutURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+			<liferay-ui:icon image="edit" url="<%= editShortcutURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.PERMISSIONS) %>">
@@ -92,21 +92,21 @@ else {
 				modelResource="<%= DLFileShortcut.class.getName() %>"
 				modelResourceDescription="<%= fileShortcut.getToName() %>"
 				resourcePrimKey="<%= String.valueOf(fileShortcut.getPrimaryKey()) %>"
-				var="portletURL"
+				var="shortcutPermissionsURL"
 			/>
 
-			<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+			<liferay-ui:icon image="permissions" url="<%= shortcutPermissionsURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteShortcutURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
 				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon-delete url="<%= portletURL %>" />
+			<liferay-ui:icon-delete url="<%= deleteShortcutURL %>" />
 		</c:if>
 	</c:otherwise>
 </c:choose>

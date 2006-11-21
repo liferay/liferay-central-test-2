@@ -31,13 +31,13 @@ Role role = (Role)row.getObject();
 %>
 
 <c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.UPDATE) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL ">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
 </c:if>
 
 <c:if test="<%= RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.PERMISSIONS) %>">
@@ -45,37 +45,37 @@ Role role = (Role)row.getObject();
 		modelResource="<%= Role.class.getName() %>"
 		modelResourceDescription="<%= role.getName() %>"
 		resourcePrimKey="<%= role.getPrimaryKey().toString() %>"
-		var="portletURL"
+		var="permissionsURL"
 	/>
 
-	<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
 <c:if test="<%= !role.getName().equals(Role.ADMINISTRATOR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ADD_PERMISSIONS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="delegate" url="<%= portletURL %>" />
+	<liferay-ui:icon image="delegate" url="<%= editRolePermissionsURL %>" />
 </c:if>
 
 <c:if test="<%= RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" url="<%= portletURL %>" />
+	<liferay-ui:icon image="assign" url="<%= assignUsersURL %>" />
 </c:if>
 
 <c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:actionURL>
 
-	<liferay-ui:icon-delete url="<%= portletURL %>" />
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
 </c:if>

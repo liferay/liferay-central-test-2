@@ -47,6 +47,7 @@ import java.rmi.RemoteException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.io.Serializable;
 
 import javax.portlet.PortletRequest;
 
@@ -60,7 +61,7 @@ import org.apache.commons.logging.LogFactory;
  * @author  Brian Wing Shun Chan
  *
  */
-public class PermissionCheckerImpl implements PermissionChecker {
+public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	public static final int USER_CHECK_ALGORITHM = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.PERMISSIONS_USER_CHECK_ALGORITHM));

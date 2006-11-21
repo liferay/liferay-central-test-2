@@ -14,13 +14,4 @@
 		<property name="mail.imap.host" value="localhost" />
 		<property name="mail.pop3.host" value="localhost" />
 	</mail-session>
-
-	<user-manager class="com.evermind.sql.DataSourceUserManager">
-		<property name="dataSource" value="jdbc/LiferayPool" />
-		<property name="table" value="User_" />
-		<property name="usernameField" value="userId" />
-		<property name="passwordField" value="password_" />
-		<property name="defaultGroups" value="users" />
-		<property name="staleness" value="0" />
-	</user-manager>
 </orion-application>

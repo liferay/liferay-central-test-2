@@ -375,13 +375,13 @@
 			<td class="<%= className %>" valign="bottom" width="90%">
 				<div class="message-board-thread-bottom" style="padding:3px 5px; text-align:right;">
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.UPDATE) %>">
-						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:renderURL>
 
-						<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+						<liferay-ui:icon image="edit" url="<%= editURL %>" />
 					</c:if>
 
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.PERMISSIONS) %>">
@@ -389,10 +389,10 @@
 							modelResource="<%= MBMessage.class.getName() %>"
 							modelResourceDescription="<%= message.getSubject() %>"
 							resourcePrimKey="<%= message.getPrimaryKey().toString() %>"
-							var="portletURL"
+							var="permissionsURL"
 						/>
 
-						<liferay-ui:icon image="permissions" url="<%= portletURL %>" />
+						<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 					</c:if>
 
 					<c:if test="<%= MBMessagePermission.contains(permissionChecker, message, ActionKeys.DELETE) %>">
@@ -406,14 +406,14 @@
 						categoryURL.setParameter("categoryId", message.getCategoryId());
 						%>
 
-						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 							<portlet:param name="struts_action" value="/message_boards/edit_message" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 							<portlet:param name="redirect" value="<%= categoryURL.toString() %>" />
 							<portlet:param name="messageId" value="<%= message.getMessageId() %>" />
 						</portlet:actionURL>
 
-						<liferay-ui:icon-delete url="<%= portletURL %>" />
+						<liferay-ui:icon-delete url="<%= deleteURL %>" />
 					</c:if>
 				</div>
 			</td>

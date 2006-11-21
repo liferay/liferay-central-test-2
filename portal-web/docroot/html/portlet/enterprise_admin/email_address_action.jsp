@@ -32,19 +32,19 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 EmailAddress emailAddress = (EmailAddress)row.getObject();
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="emailAddressId" value="<%= emailAddress.getEmailAddressId() %>" />
 </portlet:renderURL>
 
-<liferay-ui:icon image="edit" url="<%= portletURL %>" />
+<liferay-ui:icon image="edit" url="<%= editURL %>" />
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
 	<portlet:param name="emailAddressId" value="<%= emailAddress.getEmailAddressId() %>" />
 </portlet:actionURL>
 
-<liferay-ui:icon-delete url="<%= portletURL %>" />
+<liferay-ui:icon-delete url="<%= deleteURL %>" />
