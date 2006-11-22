@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.log;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
@@ -33,8 +33,6 @@ import java.util.Properties;
 
 import javax.servlet.ServletException;
 import javax.servlet.jsp.JspException;
-
-import org.apache.commons.logging.Log;
 
 /**
  * <a href="LogUtil.java.html"><b><i>View Source</i></b></a>

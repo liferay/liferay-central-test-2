@@ -22,9 +22,11 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.LogUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
 
@@ -32,9 +34,6 @@ import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="IncludeTag.java.html"><b><i>View Source</i></b></a>
@@ -98,7 +97,7 @@ public class IncludeTag extends ParamAncestorTagImpl {
 		return null;
 	}
 
-	private static Log _log = LogFactory.getLog(IncludeTag.class);
+	private static Log _log = LogFactoryUtil.getLog(IncludeTag.class);
 
 	private String _page;
 

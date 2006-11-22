@@ -466,5 +466,5 @@ RenderResponseFactory.recycle(renderResponseImpl);
 %>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portal.render_portlet.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portal.render_portlet.jsp");
 %>

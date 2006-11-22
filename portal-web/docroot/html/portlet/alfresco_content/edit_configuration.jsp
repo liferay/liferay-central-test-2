@@ -290,5 +290,5 @@ for (int i = 0; i < childNodes.length; i++) {
 </script>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.alfresco_content.edit_configuration.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.alfresco_content.edit_configuration.jsp");
 %>

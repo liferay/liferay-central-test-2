@@ -58,6 +58,9 @@
 --%><%@ page import="com.liferay.lock.service.spring.LockServiceUtil" %><%--
 --%><%@ page import="com.liferay.portal.NoSuchUserException" %><%--
 --%><%@ page import="com.liferay.portal.captcha.CaptchaTextException" %><%--
+--%><%@ page import="com.liferay.portal.kernel.log.Log" %><%--
+--%><%@ page import="com.liferay.portal.kernel.log.LogFactoryUtil" %><%--
+--%><%@ page import="com.liferay.portal.kernel.log.LogUtil" %><%--
 --%><%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %><%--
 --%><%@ page import="com.liferay.portal.kernel.util.BooleanWrapper" %><%--
 --%><%@ page import="com.liferay.portal.kernel.util.IntegerWrapper" %><%--
@@ -128,7 +131,6 @@
 --%><%@ page import="com.liferay.util.KeyValuePairComparator" %><%--
 --%><%@ page import="com.liferay.util.ListUtil" %><%--
 --%><%@ page import="com.liferay.util.LocaleUtil" %><%--
---%><%@ page import="com.liferay.util.LogUtil" %><%--
 --%><%@ page import="com.liferay.util.MathUtil" %><%--
 --%><%@ page import="com.liferay.util.ObjectValuePair" %><%--
 --%><%@ page import="com.liferay.util.OrderedProperties" %><%--
@@ -217,8 +219,6 @@
 --%><%@ page import="javax.portlet.ValidatorException" %><%--
 --%><%@ page import="javax.portlet.WindowState" %><%--
 
---%><%@ page import="org.apache.commons.logging.Log" %><%--
---%><%@ page import="org.apache.commons.logging.LogFactory" %><%--
 --%><%@ page import="org.apache.struts.Globals" %><%--
 
 --%><liferay-theme:defineObjects /><%--

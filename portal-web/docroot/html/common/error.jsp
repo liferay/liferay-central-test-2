@@ -105,5 +105,5 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.ERROR_STACK_TRACE_PRINT))) {
 </center>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.common.error.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.common.error.jsp");
 %>

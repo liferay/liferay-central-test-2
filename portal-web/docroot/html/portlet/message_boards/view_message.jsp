@@ -229,5 +229,5 @@ MBMessageFlagLocalServiceUtil.addReadFlags(messages, request.getRemoteUser());
 %>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_message.jsp");
 %>

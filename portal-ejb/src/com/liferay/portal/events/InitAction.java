@@ -24,6 +24,7 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
@@ -127,6 +128,10 @@ public class InitAction extends SimpleAction {
 			configureLog4J(
 				classLoader.getResource("META-INF/portal-log4j-ext.xml"));
 		}
+
+		// Java properties
+
+		JavaProps.isJDK5();
 
 		// JAAS
 

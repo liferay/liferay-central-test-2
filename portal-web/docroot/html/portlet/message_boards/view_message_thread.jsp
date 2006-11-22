@@ -153,5 +153,5 @@ for (int i = range[0]; i < range[1]; i++) {
 %>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.view_message_thread.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.view_message_thread.jsp");
 %>

@@ -23,6 +23,9 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPImportUtil;
@@ -32,7 +35,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.LDAPUtil;
-import com.liferay.util.LogUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
@@ -51,9 +53,6 @@ import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LDAPAuth.java.html"><b><i>View Source</i></b></a>
@@ -382,6 +381,6 @@ public class LDAPAuth implements Authenticator {
 			locationId, sendEmail, true, true);
 	}
 
-	private static Log _log = LogFactory.getLog(LDAPAuth.class);
+	private static Log _log = LogFactoryUtil.getLog(LDAPAuth.class);
 
 }

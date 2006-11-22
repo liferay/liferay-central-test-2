@@ -100,6 +100,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.util.JavaProps">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.util.ServerDetector">
 		<priority value="INFO" />
 	</category>
@@ -293,6 +297,10 @@
 	</category>
 
 	<category name="com.liferay.util.dao">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.util.ImageUtil">
 		<priority value="ERROR" />
 	</category>
 

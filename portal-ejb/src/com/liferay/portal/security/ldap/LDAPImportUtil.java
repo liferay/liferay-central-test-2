@@ -26,6 +26,9 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.log.LogUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -36,7 +39,6 @@ import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.LDAPUtil;
-import com.liferay.util.LogUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
@@ -54,9 +56,6 @@ import javax.naming.directory.SearchControls;
 import javax.naming.directory.SearchResult;
 import javax.naming.ldap.InitialLdapContext;
 import javax.naming.ldap.LdapContext;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LDAPImportUtil.java.html"><b><i>View Source</i></b></a>
@@ -361,6 +360,6 @@ public class LDAPImportUtil {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LDAPImportUtil.class);
+	private static Log _log = LogFactoryUtil.getLog(LDAPImportUtil.class);
 
 }

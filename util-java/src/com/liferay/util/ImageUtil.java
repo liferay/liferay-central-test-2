@@ -22,17 +22,23 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.JavaProps;
+
 import com.tjtieto.wap.wapix.WBMPMaster;
 
 import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
+import java.awt.image.DataBuffer;
+import java.awt.image.SampleModel;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
+import javax.imageio.ImageIO;
 
 import net.jmge.gif.Gif89Encoder;
 
@@ -58,16 +64,66 @@ public class ImageUtil {
 	public static void encodeWBMP(BufferedImage image, OutputStream out)
 		throws InterruptedException, IOException {
 
-		WBMPMaster wbmpMaster = new WBMPMaster();
+		if (JavaProps.isJDK5()) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Use JDK 5 WBMP encoder");
+			}
 
-		int height = image.getHeight();
-		int width = image.getWidth();
+			if (image.getType() == BufferedImage.TYPE_BYTE_BINARY) {
+				SampleModel sampleModel = image.getSampleModel();
 
-		int[] pixels = wbmpMaster.grabPixels(image);
-		pixels = WBMPMaster.processPixels(
-			1, pixels, width, height, 128, Color.white, false);
+				int type = sampleModel.getDataType();
 
-		WBMPMaster.encodePixels(out, pixels, width, height);
+				if (!((type < DataBuffer.TYPE_BYTE) ||
+					  (type > DataBuffer.TYPE_INT) ||
+					  (sampleModel.getNumBands() != 1) ||
+					  (sampleModel.getSampleSize(0) != 1))) {
+
+					BufferedImage binaryImage = new BufferedImage(
+						image.getWidth(), image.getHeight(),
+						BufferedImage.TYPE_BYTE_BINARY);
+
+					binaryImage.getGraphics().drawImage(image, 0, 0, null);
+
+					image = binaryImage;
+				}
+			}
+
+			if (!ImageIO.write(image, "wbmp", out)) {
+
+				// See http://www.jguru.com/faq/view.jsp?EID=127723
+
+				out.write(0);
+				out.write(0);
+				out.write(_toMultiByte(image.getWidth()));
+				out.write(_toMultiByte(image.getHeight()));
+
+				DataBuffer dataBuffer = image.getData().getDataBuffer();
+
+				int size = dataBuffer.getSize();
+
+				for (int i = 0; i < size; i++) {
+					out.write((byte)dataBuffer.getElem(i));
+				}
+			}
+		}
+		else {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Use WBMP master encoder");
+			}
+
+			WBMPMaster wbmpMaster = new WBMPMaster();
+
+			int width = image.getWidth();
+			int height = image.getHeight();
+
+			int[] pixels = wbmpMaster.grabPixels(image);
+
+			pixels = WBMPMaster.processPixels(
+				1, pixels, width, height, 128, Color.white, false);
+
+			WBMPMaster.encodePixels(out, pixels, width, height);
+		}
 	}
 
 	public static byte[] read(ClassLoader classLoader, String name) {
@@ -95,7 +151,9 @@ public class ImageUtil {
 			byteArray = baos.toByteArray();
 		}
 		catch (Exception e) {
-			_log.warn(e);
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
 		}
 		finally {
 			try {
@@ -153,6 +211,31 @@ public class ImageUtil {
 		}
 
 		return scale(image, factor);
+	}
+
+	private static byte[] _toMultiByte(int intValue) {
+		int numBits = 32;
+		int mask = 0x80000000;
+
+		while (mask != 0 && (intValue & mask) == 0) {
+			numBits--;
+			mask >>>= 1;
+		}
+
+		int numBitsLeft = numBits;
+		byte[] multiBytes = new byte[(numBitsLeft + 6) / 7];
+
+		int maxIndex = multiBytes.length - 1;
+
+		for (int b = 0; b <= maxIndex; b++) {
+			multiBytes[b] = (byte)((intValue >>> ((maxIndex - b) * 7)) & 0x7f);
+
+			if (b != maxIndex) {
+				multiBytes[b] |= (byte)0x80;
+			}
+		}
+
+		return multiBytes;
 	}
 
 	private static Log _log = LogFactory.getLog(ImageUtil.class);

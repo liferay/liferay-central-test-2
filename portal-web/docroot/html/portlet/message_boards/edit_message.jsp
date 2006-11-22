@@ -391,5 +391,5 @@ if (message != null) {
 </script>
 
 <%!
-private static Log _log = LogFactory.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");
 %>
