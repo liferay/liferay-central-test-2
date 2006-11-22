@@ -65,29 +65,29 @@ String tabs1 = (String)objArray[1];
 </c:if>
 
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageLayoutsURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 		<portlet:param name="struts_action" value="/communities/edit_pages" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="pages" url="<%= manageLayoutsURL %>" />
+	<liferay-ui:icon image="pages" url="<%= pagesURL %>" />
 </c:if>
 
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" url="<%= assignUsersURL %>" />
+	<liferay-ui:icon image="assign" url="<%= assignURL %>" />
 </c:if>
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("current") %>'>
 		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="typeCommunityOpenURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -95,12 +95,12 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="removeUserIds" value="<%= user.getUserId() %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon image="leave" url="<%= typeCommunityOpenURL %>" />
+			<liferay-ui:icon image="leave" url="<%= leaveURL %>" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="typeCommunityOpenURL">
+			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="joinURL">
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -108,7 +108,7 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="addUserIds" value="<%= user.getUserId() %>" />
 			</portlet:actionURL>
 
-			<liferay-ui:icon image="join" url="<%= typeCommunityOpenURL %>" />
+			<liferay-ui:icon image="join" url="<%= joinURL %>" />
 		</c:if>
 	</c:otherwise>
 </c:choose>

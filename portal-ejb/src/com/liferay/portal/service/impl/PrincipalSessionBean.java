@@ -30,7 +30,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.service.spring.UserLocalServiceFactory;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.Validator;

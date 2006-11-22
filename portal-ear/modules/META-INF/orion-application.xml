@@ -8,15 +8,14 @@
 	<library path="mail-ejb.jar" />
 	<library path="portal-ejb.jar" />
 
-	<mail-session location="mail/MailSession" smtp-host="liferay.com">
+	<mail-session location="mail/MailSession" smtp-host="localhost">
 		<property name="mail.transport.protocol" value="smtp" />
-		<property name="mail.imap.host" value="liferay.com" />
+		<property name="mail.imap.host" value="localhost" />
 		<property name="mail.imap.fetchsize" value="32" />
 		<property name="mail.imap.connectiontimeout" value="30000" />
 		<property name="mail.imap.timeout" value="30000" />
 		<property name="mail.imap.connectionpoolsize" value="10" />
 		<property name="mail.imap.connectionpooltimeout" value="30000" />
-		<property name="mail.pop3.host" value="liferay.com" />
+		<property name="mail.pop3.host" value="localhost" />
 	</mail-session>
-
 </orion-application>

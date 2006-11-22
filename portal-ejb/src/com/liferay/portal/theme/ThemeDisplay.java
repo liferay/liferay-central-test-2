@@ -33,10 +33,11 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
 import com.liferay.util.StringPool;
 
+import java.io.Serializable;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.TimeZone;
-import java.io.Serializable;
 
 import javax.portlet.PortletURL;
 

@@ -204,11 +204,11 @@ public class ServerDetector {
 
 		if (sd._oc4j == null) {
 			try {
-				ClassLoader.getSystemClassLoader().
-					loadClass(OC4J_CLASS);
+				ClassLoader.getSystemClassLoader().loadClass(OC4J_CLASS);
+
 				sd._oc4j = Boolean.TRUE;
 			}
-			catch (ClassNotFoundException e) {
+			catch (ClassNotFoundException cnfe) {
 				sd._oc4j = Boolean.FALSE;
 			}
 		}

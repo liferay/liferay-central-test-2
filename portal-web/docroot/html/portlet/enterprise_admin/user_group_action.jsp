@@ -52,12 +52,12 @@ UserGroup userGroup = (UserGroup)row.getObject();
 </c:if>
 
 <c:if test="<%= UserGroupPermission.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_USERS) %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />
 		<portlet:param name="userGroupId" value="<%= userGroup.getUserGroupId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" url="<%= assignUsersURL %>" />
+	<liferay-ui:icon image="assign" url="<%= assignURL %>" />
 </c:if>
 
 <c:if test="<%= UserGroupPermission.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">

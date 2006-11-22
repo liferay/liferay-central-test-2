@@ -40,12 +40,13 @@ import com.liferay.util.Http;
 import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
+import java.io.Serializable;
+
 import java.security.Key;
 
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
-import java.io.Serializable;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
