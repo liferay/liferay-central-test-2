@@ -669,6 +669,10 @@
 
 	<definition name="portlet.journal_content_search" extends="portlet" />
 
+	<definition name="portlet.journal_content_search.edit_configuration" extends="portlet.portlet_configuration.edit_configuration">
+		<put name="portlet_configuration_content" value="/portlet/journal_content_search/edit_configuration.jsp" />
+	</definition>
+
 	<definition name="portlet.journal_content_search.search" extends="portlet.journal_content_search">
 		<put name="portlet_content" value="/portlet/journal_content_search/search.jsp" />
 	</definition>

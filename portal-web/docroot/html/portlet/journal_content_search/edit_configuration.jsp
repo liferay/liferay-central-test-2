@@ -20,27 +20,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
-
---%><%@ include file="/html/portlet/init.jsp" %><%--
-
---%><%@ page import="com.liferay.portlet.journal.model.JournalArticle" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %><%--
---%><%@ page import="com.liferay.util.InstancePool" %><%--
---%><%@ page import="com.liferay.util.lucene.DocumentSummary" %><%--
---%><%@ page import="com.liferay.util.lucene.Indexer" %><%--
-
---%><%@ page import="org.apache.lucene.document.Document" %><%--
-
---%><%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
-}
-
-String type = prefs.getValue("type", StringPool.BLANK);
 %>
+
+<%@ include file="/html/portlet/journal_content_search/init.jsp" %>
+
+<form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+
+<%= LanguageUtil.get(pageContext, "please-select-the-article-type-that-you-would-like-to-limit-the-search-to") %>
+
+<br><br>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "article-type") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<select name="<portlet:namespace />type">
+			<option value=""></option>
+
+			<%
+			for (int i = 0; i < JournalArticle.TYPES.length; i++) {
+			%>
+
+				<option <%= type.equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);">
+
+</form>

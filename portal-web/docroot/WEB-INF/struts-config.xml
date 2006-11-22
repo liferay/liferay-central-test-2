@@ -749,6 +749,10 @@
 		
 		<!-- Journal Content Search -->
 
+		<action path="/journal_content_search/edit_configuration" type="com.liferay.portlet.journalcontentsearch.action.EditConfigurationAction">
+			<forward name="portlet.journal_content_search.edit_configuration" path="portlet.journal_content_search.edit_configuration" />
+		</action>
+
 		<action path="/journal_content_search/search" type="com.liferay.portlet.journalcontentsearch.action.SearchAction">
 			<forward name="portlet.journal_content_search.search" path="portlet.journal_content_search.search" />
 		</action>

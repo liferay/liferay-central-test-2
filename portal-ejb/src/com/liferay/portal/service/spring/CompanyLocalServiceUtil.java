@@ -69,11 +69,11 @@ public class CompanyLocalServiceUtil {
 
 	public static com.liferay.util.lucene.Hits search(
 		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String groupId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.search(companyId, portletId, groupId,
+		return companyLocalService.search(companyId, portletId, groupId, type,
 			keywords);
 	}
 

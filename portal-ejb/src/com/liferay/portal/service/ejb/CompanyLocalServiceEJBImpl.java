@@ -68,9 +68,10 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 
 	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
 		java.lang.String portletId, java.lang.String groupId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String type, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().search(companyId,
-			portletId, groupId, keywords);
+			portletId, groupId, type, keywords);
 	}
 
 	public com.liferay.portal.model.Company updateCompany(

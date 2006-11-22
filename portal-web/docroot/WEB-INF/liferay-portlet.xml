@@ -592,6 +592,7 @@
 	<portlet>
 		<portlet-name>77</portlet-name>
 		<struts-path>journal_content_search</struts-path>
+		<configuration-path>/journal_content_search/edit_configuration</configuration-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
