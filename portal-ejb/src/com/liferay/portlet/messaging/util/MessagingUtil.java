@@ -25,7 +25,6 @@ package com.liferay.portlet.messaging.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.chat.model.RosterUpdateListener;
@@ -69,8 +68,7 @@ public class MessagingUtil {
 	public static String USER_PASSWORD = GetterUtil.getString(
 		PropsUtil.get(PropsUtil.JABBER_XMPP_USER_PASSWORD), "liferayllc");
 
-	public static JSONObject addRosterEntry(
-			HttpSession ses, User user)
+	public static JSONObject addRosterEntry(HttpSession ses, User user)
 		throws PortalException, SystemException, XMPPException {
 
 		JSONObject jo = new JSONObject();

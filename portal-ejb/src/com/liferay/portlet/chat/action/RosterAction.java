@@ -22,22 +22,6 @@
 
 package com.liferay.portlet.chat.action;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.packet.RosterPacket;
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
@@ -48,6 +32,24 @@ import com.liferay.portlet.messaging.util.comparator.NameComparator;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import org.jivesoftware.smack.Roster;
+import org.jivesoftware.smack.RosterEntry;
+import org.jivesoftware.smack.packet.RosterPacket;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 /**
  * <a href="RosterAction.java.html"><b><i>View Source</i></b></a>
@@ -80,10 +82,12 @@ public class RosterAction extends JSONAction {
 		JSONObject jo = new JSONObject();
 
 		try {
-			String email = ParamUtil.getString(req, "email");
-			String userId = ParamUtil.getString(req, "userId");
 			String companyId = PortalUtil.getCompanyId(req);
-			User user;
+
+			String userId = ParamUtil.getString(req, "userId");
+			String email = ParamUtil.getString(req, "email");
+
+			User user = null;
 
 			if (Validator.isNotNull(userId)) {
 				user = UserLocalServiceUtil.getUserById(
@@ -93,7 +97,6 @@ public class RosterAction extends JSONAction {
 				user = UserLocalServiceUtil.getUserByEmailAddress(
 					companyId, email);
 			}
-
 
 			jo = MessagingUtil.addRosterEntry(req.getSession(), user);
 		}
