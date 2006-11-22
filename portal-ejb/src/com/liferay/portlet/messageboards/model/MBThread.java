@@ -30,6 +30,8 @@ package com.liferay.portlet.messageboards.model;
  */
 public class MBThread extends MBThreadModel {
 
+	public static final double PRIORITY_NOT_GIVEN = -1.0;
+
 	public MBThread() {
 	}
 

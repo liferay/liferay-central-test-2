@@ -280,7 +280,10 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		thread.setLastPostDate(now);
-		thread.setPriority(priority);
+
+		if (priority != MBThread.PRIORITY_NOT_GIVEN) {
+			thread.setPriority(priority);
+		}
 
 		start = logAddMessage(messageId, start, 2);
 
@@ -957,7 +960,9 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
-		thread.setPriority(priority);
+		if (priority != MBThread.PRIORITY_NOT_GIVEN) {
+			thread.setPriority(priority);
+		}
 
 		MBThreadUtil.update(thread);
 

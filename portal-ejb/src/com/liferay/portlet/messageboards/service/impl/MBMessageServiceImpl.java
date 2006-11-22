@@ -74,7 +74,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -95,7 +95,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -117,7 +117,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -140,7 +140,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -162,7 +162,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -183,7 +183,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -205,7 +205,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -228,7 +228,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = 0.0;
+			priority = MBThread.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
