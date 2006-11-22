@@ -50,16 +50,7 @@ public class DLFolderUtil {
 		java.lang.String folderId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFolderException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(folderId));
@@ -78,16 +69,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder remove(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(dlFolder);
@@ -105,17 +87,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = dlFolder.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class DLFolderUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder update(
 		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = dlFolder.isNew();
 
 		if (listener != null) {
@@ -397,16 +359,33 @@ public class DLFolderUtil {
 	}
 
 	public static DLFolderPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(DLFolderPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static DLFolderUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (DLFolderUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(DLFolderPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = DLFolderUtil.class.getName();

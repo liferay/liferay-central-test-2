@@ -50,16 +50,7 @@ public class ShoppingCategoryUtil {
 		java.lang.String categoryId)
 		throws com.liferay.portlet.shopping.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(categoryId));
@@ -78,16 +69,7 @@ public class ShoppingCategoryUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory remove(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(shoppingCategory);
@@ -105,17 +87,7 @@ public class ShoppingCategoryUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingCategory.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class ShoppingCategoryUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory update(
 		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingCategory.isNew();
 
 		if (listener != null) {
@@ -323,16 +285,33 @@ public class ShoppingCategoryUtil {
 	}
 
 	public static ShoppingCategoryPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(ShoppingCategoryPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static ShoppingCategoryUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (ShoppingCategoryUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(ShoppingCategoryPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = ShoppingCategoryUtil.class.getName();

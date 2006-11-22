@@ -50,16 +50,7 @@ public class BookmarksEntryUtil {
 		java.lang.String entryId)
 		throws com.liferay.portlet.bookmarks.NoSuchEntryException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(entryId));
@@ -78,16 +69,7 @@ public class BookmarksEntryUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry remove(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(bookmarksEntry);
@@ -105,17 +87,7 @@ public class BookmarksEntryUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = bookmarksEntry.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class BookmarksEntryUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry update(
 		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = bookmarksEntry.isNew();
 
 		if (listener != null) {
@@ -264,16 +226,33 @@ public class BookmarksEntryUtil {
 	}
 
 	public static BookmarksEntryPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(BookmarksEntryPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static BookmarksEntryUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (BookmarksEntryUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(BookmarksEntryPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = BookmarksEntryUtil.class.getName();

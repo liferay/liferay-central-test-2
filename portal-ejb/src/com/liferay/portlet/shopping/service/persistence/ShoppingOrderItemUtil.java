@@ -50,16 +50,7 @@ public class ShoppingOrderItemUtil {
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
 		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(shoppingOrderItemPK));
@@ -78,16 +69,7 @@ public class ShoppingOrderItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(shoppingOrderItem);
@@ -105,17 +87,7 @@ public class ShoppingOrderItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingOrderItem.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class ShoppingOrderItemUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem update(
 		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingOrderItem.isNew();
 
 		if (listener != null) {
@@ -267,16 +229,33 @@ public class ShoppingOrderItemUtil {
 	}
 
 	public static ShoppingOrderItemPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(ShoppingOrderItemPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static ShoppingOrderItemUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (ShoppingOrderItemUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(ShoppingOrderItemPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = ShoppingOrderItemUtil.class.getName();

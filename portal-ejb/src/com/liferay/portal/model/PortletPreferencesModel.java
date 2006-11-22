@@ -36,9 +36,6 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PortletPreferencesModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portal.model.PortletPreferences"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),
 			XSS_ALLOW);

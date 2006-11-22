@@ -50,16 +50,7 @@ public class PollsVoteUtil {
 		com.liferay.portlet.polls.service.persistence.PollsVotePK pollsVotePK)
 		throws com.liferay.portlet.polls.NoSuchVoteException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(pollsVotePK));
@@ -78,16 +69,7 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote remove(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(pollsVote);
@@ -105,17 +87,7 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = pollsVote.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class PollsVoteUtil {
 	public static com.liferay.portlet.polls.model.PollsVote update(
 		com.liferay.portlet.polls.model.PollsVote pollsVote,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = pollsVote.isNew();
 
 		if (listener != null) {
@@ -320,16 +282,33 @@ public class PollsVoteUtil {
 	}
 
 	public static PollsVotePersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(PollsVotePersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static PollsVoteUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (PollsVoteUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(PollsVotePersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = PollsVoteUtil.class.getName();

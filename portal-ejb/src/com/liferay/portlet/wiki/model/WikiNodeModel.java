@@ -37,9 +37,6 @@ import java.util.Date;
  *
  */
 public class WikiNodeModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.wiki.model.WikiNode"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiNode"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(

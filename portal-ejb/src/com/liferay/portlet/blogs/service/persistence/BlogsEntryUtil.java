@@ -50,16 +50,7 @@ public class BlogsEntryUtil {
 		java.lang.String entryId)
 		throws com.liferay.portlet.blogs.NoSuchEntryException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(entryId));
@@ -78,16 +69,7 @@ public class BlogsEntryUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry remove(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(blogsEntry);
@@ -105,17 +87,7 @@ public class BlogsEntryUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = blogsEntry.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class BlogsEntryUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry update(
 		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = blogsEntry.isNew();
 
 		if (listener != null) {
@@ -365,16 +327,33 @@ public class BlogsEntryUtil {
 	}
 
 	public static BlogsEntryPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(BlogsEntryPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static BlogsEntryUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (BlogsEntryUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(BlogsEntryPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = BlogsEntryUtil.class.getName();

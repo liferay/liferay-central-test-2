@@ -37,9 +37,6 @@ import java.util.Date;
  *
  */
 public class BookmarksEntryModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
 			XSS_ALLOW);

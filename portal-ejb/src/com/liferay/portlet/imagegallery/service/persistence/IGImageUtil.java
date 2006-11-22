@@ -50,16 +50,7 @@ public class IGImageUtil {
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK)
 		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(igImagePK));
@@ -78,16 +69,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage remove(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(igImage);
@@ -105,17 +87,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = igImage.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class IGImageUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage update(
 		com.liferay.portlet.imagegallery.model.IGImage igImage,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = igImage.isNew();
 
 		if (listener != null) {
@@ -266,16 +228,33 @@ public class IGImageUtil {
 	}
 
 	public static IGImagePersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(IGImagePersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static IGImageUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (IGImageUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(IGImagePersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = IGImageUtil.class.getName();

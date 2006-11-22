@@ -50,16 +50,7 @@ public class MBCategoryUtil {
 		java.lang.String categoryId)
 		throws com.liferay.portlet.messageboards.NoSuchCategoryException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(categoryId));
@@ -78,16 +69,7 @@ public class MBCategoryUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory remove(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(mbCategory);
@@ -105,17 +87,7 @@ public class MBCategoryUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = mbCategory.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class MBCategoryUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory update(
 		com.liferay.portlet.messageboards.model.MBCategory mbCategory,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = mbCategory.isNew();
 
 		if (listener != null) {
@@ -373,16 +335,33 @@ public class MBCategoryUtil {
 	}
 
 	public static MBCategoryPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(MBCategoryPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static MBCategoryUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (MBCategoryUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(MBCategoryPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = MBCategoryUtil.class.getName();

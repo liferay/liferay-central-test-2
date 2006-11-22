@@ -38,9 +38,6 @@ import java.util.Date;
  *
  */
 public class PollsQuestionModel extends BaseModel {
-	public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-				"value.object.cacheable.com.liferay.portlet.polls.model.PollsQuestion"),
-			VALUE_OBJECT_CACHEABLE);
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
 			XSS_ALLOW);

@@ -50,16 +50,7 @@ public class DLFileShortcutUtil {
 		long fileShortcutId)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileShortcutException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(fileShortcutId));
@@ -78,16 +69,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut remove(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(dlFileShortcut);
@@ -105,17 +87,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = dlFileShortcut.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class DLFileShortcutUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut update(
 		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = dlFileShortcut.isNew();
 
 		if (listener != null) {
@@ -318,16 +280,33 @@ public class DLFileShortcutUtil {
 	}
 
 	public static DLFileShortcutPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(DLFileShortcutPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static DLFileShortcutUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (DLFileShortcutUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(DLFileShortcutPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = DLFileShortcutUtil.class.getName();

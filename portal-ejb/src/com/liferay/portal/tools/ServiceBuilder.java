@@ -1437,8 +1437,6 @@ public class ServiceBuilder {
 
 		// Fields
 
-		sb.append("public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(\"value.object.cacheable." + _packagePath + ".model." + entity.getName() + "\"), VALUE_OBJECT_CACHEABLE);");
-
 		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
 
 		for (int i = 0; i < regularColList.size(); i++) {

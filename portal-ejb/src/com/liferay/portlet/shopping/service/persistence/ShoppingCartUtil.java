@@ -50,16 +50,7 @@ public class ShoppingCartUtil {
 		java.lang.String cartId)
 		throws com.liferay.portlet.shopping.NoSuchCartException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(cartId));
@@ -78,16 +69,7 @@ public class ShoppingCartUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart remove(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(shoppingCart);
@@ -105,17 +87,7 @@ public class ShoppingCartUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart update(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingCart.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class ShoppingCartUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCart update(
 		com.liferay.portlet.shopping.model.ShoppingCart shoppingCart,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = shoppingCart.isNew();
 
 		if (listener != null) {
@@ -313,16 +275,33 @@ public class ShoppingCartUtil {
 	}
 
 	public static ShoppingCartPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(ShoppingCartPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static ShoppingCartUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (ShoppingCartUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(ShoppingCartPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = ShoppingCartUtil.class.getName();

@@ -50,16 +50,7 @@ public class JournalContentSearchUtil {
 		com.liferay.portlet.journal.service.persistence.JournalContentSearchPK journalContentSearchPK)
 		throws com.liferay.portlet.journal.NoSuchContentSearchException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(journalContentSearchPK));
@@ -78,16 +69,7 @@ public class JournalContentSearchUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch remove(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(journalContentSearch);
@@ -105,17 +87,7 @@ public class JournalContentSearchUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = journalContentSearch.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class JournalContentSearchUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch update(
 		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = journalContentSearch.isNew();
 
 		if (listener != null) {
@@ -429,16 +391,33 @@ public class JournalContentSearchUtil {
 	}
 
 	public static JournalContentSearchPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(JournalContentSearchPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static JournalContentSearchUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (JournalContentSearchUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(JournalContentSearchPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = JournalContentSearchUtil.class.getName();

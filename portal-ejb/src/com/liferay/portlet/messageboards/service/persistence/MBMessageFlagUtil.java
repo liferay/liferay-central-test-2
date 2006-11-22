@@ -50,16 +50,7 @@ public class MBMessageFlagUtil {
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK)
 		throws com.liferay.portlet.messageboards.NoSuchMessageFlagException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(mbMessageFlagPK));
@@ -78,16 +69,7 @@ public class MBMessageFlagUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag remove(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(mbMessageFlag);
@@ -105,17 +87,7 @@ public class MBMessageFlagUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = mbMessageFlag.isNew();
 
 		if (listener != null) {
@@ -144,17 +116,7 @@ public class MBMessageFlagUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag update(
 		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = mbMessageFlag.isNew();
 
 		if (listener != null) {
@@ -426,16 +388,33 @@ public class MBMessageFlagUtil {
 	}
 
 	public static MBMessageFlagPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(MBMessageFlagPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static MBMessageFlagUtil _getUtil() {
 		if (_util == null) {
 			ApplicationContext ctx = SpringUtil.getContext();
 			_util = (MBMessageFlagUtil)ctx.getBean(_UTIL);
 		}
 
-		return _util._persistence;
+		return _util;
 	}
 
-	public void setPersistence(MBMessageFlagPersistence persistence) {
-		_persistence = persistence;
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
 	}
 
 	private static final String _UTIL = MBMessageFlagUtil.class.getName();
