@@ -6,7 +6,7 @@ function changeBackground(path, extension) {
 	else { 
 		bodyWidth = document.body.clientWidth; 
 	} 
-	       
+
 	if (extension != null) { 
 		if (bodyWidth <= 1024) { 
 			document.body.style.backgroundImage = "url(" + path + "." + extension + ")";
@@ -27,7 +27,7 @@ var DragLink = {
 		item.href = "javascript:void(0)";
 		item.onclick = DragLink.onLinkClick;
 	},
-	
+
 	onLinkClick: function() {
 		if (this.dragId.wasClicked) {
 			if (is_ie) {
@@ -45,23 +45,23 @@ var DynamicSelect = {
 		var returnObj = new Object();
 		returnObj["callback"] = callback;
 		returnObj["target"] = target;
-		
+
 		source.onchange = function() {
 			loadPage(url, (query ? (query + "&") : "") + "sourceValue=" + this.value, DynamicSelect.returnFunction, returnObj);
 		}
 	},
-	
+
 	returnFunction : function(xmlHttpReq, returnObj) {
 		var select;
 		var target = returnObj["target"];
 		var callback = returnObj["callback"];
-		
+
 		try {
 			select = eval("(" + xmlHttpReq.responseText + ")");
 		}
 		catch (err) {
 		}
-		
+
 		target.length = 0;
 		if (select.options.length > 0) {
 			target.disabled = false;
@@ -73,7 +73,7 @@ var DynamicSelect = {
 		else {
 			target.disabled = true;
 		}
-		
+
 		if (callback != null) {
 			callback();
 		}
@@ -85,10 +85,10 @@ var LiferayDock = {
 		EXPAND: 0,
 		COLLAPSE: 1
 	},
-	
+
 	ORDER: [0,1,4,5,2,8,6,9,3,12,10,7,13,11,14,15],
 	FRAME_C: 0.08,
-	
+
 	cached: null,
 	count: 0,
 	constants: null,
@@ -104,20 +104,20 @@ var LiferayDock = {
 	debug: function() {
 		$("dock_debug").innerHTML = this.dockCoords.toSource();
 	},
-	
+
 	initialize: function(defaultText) {
 		var constants = new Array();
-		
+
 		this.dockCoords[0] = new Array();
 		this.dockCoords[1] = new Array();
-			
+
 		for (var i = 0; i < 4; i++) {
 			for (var j = 0; j < 4; j++) {
 				var box = new Object();
 				var x = j * (-54);
 				var y = i * (54);
 				var h = Math.sqrt(x*x + y*y);
-				
+
 				box.h = h;
 				box.x = x;
 				box.y = y;
@@ -126,12 +126,12 @@ var LiferayDock = {
 					box.sin = y/h;
 					box.cos = x/h;
 				}
-				
+
 				constants.push(box);
-				
+
 			}
 		}
-		
+
 		for (var i = 0; i < 16; i++) {
 			LiferayDock.dockCoords[0][i] = new Array();
 			LiferayDock.dockCoords[1][i] = new Array();
@@ -154,38 +154,38 @@ var LiferayDock = {
 			item.constants = self.constants[self.ORDER[index]];
 			item.style.zIndex = size - index;
 		});
-		
+
 		var myPlaces = $("portal-dock-my-places");
 		myPlaces.getElementsByTagName("table")[0].onmouseover = function() {
 			MyPlaces.show();
 			this.onmouseover = function() {};
 		};
-		
+
 		this.cached = LiferayDockCached;
 	},
-	
+
 	setMode: function(mode) {
 		this.direction = mode;
 
 		if (!this.timer) {
 			this.timer = setTimeout("LiferayDock.animate()", 1);
-			
+
 			clearTimeout(this.defaultTimer);
-			
+
 			if (mode == LiferayDock.MODE.COLLAPSE) {
 				this.defaultTimer = setTimeout("LiferayDock.showText(\"" + this.defaultText + "\", 0)", this.defaultTimeout);
 			}
 		}
 	},
-	
+
 	showText: function(text, defaultTimeout) {
 		var textBox = $("portal-dock-text");
 		this.showObject(textBox);
 		textBox.innerHTML = text;
-		
+
 		this.defaultTimeout = (defaultTimeout || 1) * 1000;
 	},
-	
+
 	showObject: function(item, defaultTimeout) {
 		item = $(item);
 		var helpItems = new Array();
@@ -201,14 +201,14 @@ var LiferayDock = {
 				helpItem.style.display = "none";
 			}
 		});
-		
+
 		if (item.id == "portal-dock-my-places") {
 			item.getElementsByTagName("table")[0].onmouseover = function() {
 				MyPlaces.show();
 				this.onmouseover = function() {};
 			};
 		}
-		
+
 		this.defaultTimeout = (defaultTimeout || 0) * 1000;
 	},
 
@@ -232,51 +232,49 @@ var LiferayDock = {
 		var collapse = (this.direction == this.MODE.COLLAPSE);
 		var count = this.count;
 		var updated = false;
-		var self = this;
 		var cached = this.cached;
 
 		this.dockIcons.each(function(item, index) {
-			//item.style.display = "";
 			if (item.constants.h) {
 				if (count <= item.constants.lastFrame) {
-					if (!self.cached) {
+					if (!cached) {
 						var ratio = count / item.constants.lastFrame;
 						var dist = item.constants.h * ratio;
 						var maxRad;
 					}
-				
+
 					// Calculate max radian
 					if (collapse) {
 						if (cached) {
-							item.style.left = self.cached[1][index][count][0] + "px";
-							item.style.top = self.cached[1][index][count][1] + "px";
+							item.style.left = cached[1][index][count][0] + "px";
+							item.style.top = cached[1][index][count][1] + "px";
 						}
 						else {
 							maxRad = Math.PI/2;
 							distRatio = 1 + Math.sin((ratio * maxRad) - (Math.PI/2));
-		
+
 							item.style.left = (distRatio * (item.constants.x)) + "px";
 							item.style.top = (distRatio * (item.constants.y)) + "px";
-						
-							LiferayDock.dockCoords[1][index][count] = [Math.round(distRatio * (item.constants.x)), Math.round(distRatio * (item.constants.y))];
+
+							//LiferayDock.dockCoords[1][index][count] = [Math.round(distRatio * (item.constants.x)), Math.round(distRatio * (item.constants.y))];
 						}
 					}
 					else {
 						if (cached) {
-							item.style.left = self.cached[0][index][count][0] + "px";
-							item.style.top = self.cached[0][index][count][1] + "px";
+							item.style.left = cached[0][index][count][0] + "px";
+							item.style.top = cached[0][index][count][1] + "px";
 						}
 						else {
 							maxRad = Math.PI/2 + Math.PI/8;
 							distRatio = Math.sin(ratio * maxRad);
-		
+
 							item.style.left = (distRatio * (item.constants.x/Math.sin(maxRad))) + "px";
 							item.style.top = (distRatio * (item.constants.y/Math.sin(maxRad))) + "px";
-						
-							LiferayDock.dockCoords[0][index][count] = [Math.round(distRatio * (item.constants.x/Math.sin(maxRad))), Math.round(distRatio * (item.constants.y/Math.sin(maxRad)))];
+
+							//LiferayDock.dockCoords[0][index][count] = [Math.round(distRatio * (item.constants.x/Math.sin(maxRad))), Math.round(distRatio * (item.constants.y/Math.sin(maxRad)))];
 						}
 					}
-					
+
 					updated = true;
 				}
 				else {
@@ -288,11 +286,11 @@ var LiferayDock = {
 
 		if (collapse && count > 0) {
 			this.count--;
-			this.timer = setTimeout("LiferayDock.animate()", 25);
+			this.timer = setTimeout("LiferayDock.animate()", 30);
 		}
 		else if (!collapse && updated) {
 			this.count++;
-			this.timer = setTimeout("LiferayDock.animate()", 25);
+			this.timer = setTimeout("LiferayDock.animate()", 30);
 		}
 		else {
 			this.timer = 0;
@@ -307,32 +305,32 @@ var LayoutColumns = {
 	plid: "",
 	doAsUserId: "",
 	arrow: null,
-	
+
 	displayArrow: function(mode, left, top) {
 
 		var arrow = LayoutColumns.arrow
-		
+
 		if (!arrow) {
 			arrow = new Object();
 			var arrowUp = document.createElement("div");
 			arrowUp.style.zIndex = ZINDEX.DRAG_ARROW;
 			arrowUp.style.display = "none";
 			arrowUp.className = "layout-column-arrow-up";
-			
+
 			var arrowDown = document.createElement("div");
 			arrowDown.style.zIndex = ZINDEX.DRAG_ARROW;
 			arrowDown.style.display = "none";
 			arrowDown.className = "layout-column-arrow-down";
-			
+
 			document.body.appendChild(arrowUp);
 			document.body.appendChild(arrowDown);
-			
+
 			arrow.up = arrowUp;
 			arrow.down = arrowDown;
-			
+
 			LayoutColumns.arrow = arrow;
 		}
-		
+
 		if (mode == "up") {
 			arrow.up.style.top = top + "px";
 			arrow.up.style.left = left + "px";
@@ -350,14 +348,14 @@ var LayoutColumns = {
 			arrow.up.style.display = "none";
 		}
 	},
-	
+
 	init: function(colArray) {
 		for (var i = 0; i < colArray.length; i++) {
 			var column =  $("layout-column_" + colArray[i]);
-			
+
 			if (column) {
 				column.columnId = colArray[i];
-				
+
 				DropZone.add(column, {
 					accept: ["portlet-boundary"],
 					onDrop: LayoutColumns.onDrop,
@@ -367,11 +365,11 @@ var LayoutColumns = {
 					},
 					inheritParent: true
 					});
-					
+
 				LayoutColumns.columns.push(column, {onDrop:LayoutColumns.onDrop});
-				
+
 				var boxes = document.getElementsByClassName("portlet-boundary", column);
-				
+
 				boxes.each(function(item, index) {
 					if (!item.isStatic) {
 						LayoutColumns.initPortlet(item);
@@ -380,19 +378,19 @@ var LayoutColumns = {
 			}
 		}
 	},
-	
+
 	initPortlet: function(portlet) {
 		portlet = $(portlet);
 		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
 		handle.style.cursor = "move";
-		
+
 		DragDrop.create(portlet, {
 			revert: true,
 			handle: handle,
 			ghosting: true,
 			highlightDropzones: LayoutColumns.highlight});
 	},
-	
+
 	onDrop: function(item) {
 		var dropOptions = this;
 		var container = dropOptions.dropItem;
@@ -400,15 +398,15 @@ var LayoutColumns = {
 		var insertBox = null;
 
 		item.dragOptions.clone.isStatic = "yes";
-		
+
 		for (var i = 0; i < childList.length; i++){
 			var box = childList[i];
-			
+
 			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
 				if (!box.isStatic) {
 					var nwOffset = Coordinates.northwestOffset(box, true);
 					var midY = nwOffset.y + (box.offsetHeight / 2);
-					
+
 					if (mousePos.y < midY) {
 						insertBox = box;
 						break;
@@ -420,20 +418,20 @@ var LayoutColumns = {
 				}
 			}
 		}
-		
+
 		Element.remove(item);
 		container.insertBefore(item, insertBox);
-		
+
 		item.dragOptions.revert = false;
 		item.style.position = "";
 		item.style.left = "";
 		item.style.top = "";
 		item.style.height = "";
 		item.style.width = "100%";
-		
+
 		// Find new position
 		var newPosition = 0;
-		
+
 		for (var i = 0; i < childList.length; i++){
 			var box = childList[i];
 			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
@@ -445,12 +443,12 @@ var LayoutColumns = {
 				}
 			}
 		}
-		
+
 		LayoutColumns.displayArrow("none");
-		
+
 		movePortlet(LayoutColumns.plid, item.portletId, container.columnId, newPosition, LayoutColumns.doAsUserId);
 	},
-	
+
 	onHoverOver: function(item) {
 		var dropOptions = this;
 		var container = dropOptions.dropItem;
@@ -467,17 +465,17 @@ var LayoutColumns = {
 				if (!box.isStatic) {
 					lastBox = box;
 					inside = mousePos.insideObject(box, true);
-					
+
 					if (inside) {
 						var midY = box.offsetHeight / 2;
-	
+
 						if (inside.y <= midY || box == item.dragOptions.clone) {
 							bottom = false;
 						}
 						else {
 							bottom = true;
 						}
-						
+
 						insertBox = box;
 						break;
 					}
@@ -491,18 +489,18 @@ var LayoutColumns = {
 
 		var top;
 		var left;
-		
+
 		if (insertBox) {
 			left = inside.nwOffset.x + 20;
-			
+
 			if (bottom) {
 				top = inside.nwOffset.y + insertBox.offsetHeight - 50;
-				
+
 				LayoutColumns.displayArrow("down", left, top);
 			}
 			else {
 				top = inside.nwOffset.y;
-				
+
 				LayoutColumns.displayArrow("up", left, top);
 			}
 		}
@@ -511,14 +509,14 @@ var LayoutColumns = {
 				var nwOffset = Coordinates.northwestOffset(lastBox, true);
 				top = nwOffset.y + lastBox.offsetHeight - 50;
 				left = nwOffset.x + 20;
-			
+
 				LayoutColumns.displayArrow("down", left, top);
 			}
 			else {
 				var nwOffset = Coordinates.northwestOffset(container, true);
 				top = nwOffset.y;
 				left = nwOffset.x + 20;
-				
+
 				LayoutColumns.displayArrow("up", left, top);
 			}
 		}
@@ -526,11 +524,11 @@ var LayoutColumns = {
 }
 
 var Navigation = {
-		
+
 	params: new Object(),
 	lastMoved: null,
 	reordered: null,
-	
+
 	addPage: function() {
 		var params = Navigation.params;
 		var url = themeDisplay.getPathMain() + "/layout_management/update_page?cmd=add" +
@@ -547,7 +545,7 @@ var Navigation = {
 				}
 			});
 	},
-	
+
 	removePage: function() {
 		var tab = $("layout-tab-selected");
 		var tabText = $("layout-tab-text-edit").innerHTML;
@@ -565,7 +563,7 @@ var Navigation = {
 			});
 		}
 	},
-	
+
 	init: function(params) {
 		/* REQUIRED PARAMETERS
 		 * groupId: (String) layout.getGroupId()
@@ -578,9 +576,9 @@ var Navigation = {
 		 * ownerId: (String) Layout.getOwnerId(plid)
 		 * parent: (String) layout.getParentLayoutId()
 		 */
-		 
+
 		Navigation.params = params;
-		
+
 		QuickEdit.create("layout-tab-text-edit", {
 			dragId: "layout-tab-selected",
 			fixParent: true,
@@ -588,16 +586,16 @@ var Navigation = {
 				function(input, textWidth) {
 					var parent = input.parentNode;
 					var delLink = document.createElement("a");
-					
+
 					delLink.innerHTML = "X";
 					delLink.href = "javascript:Navigation.removePage()";
 					delLink.className = "layout-tab-close";
-					
+
 					parent.className = "layout-tab-text-editing";
-					
+
 					input.style.width = (textWidth + 20) + "px";
 					Element.addClassName(input, "layout-tab-input");
-					
+
 					parent.insertBefore(delLink, input);
 				},
 			onComplete:
@@ -606,12 +604,12 @@ var Navigation = {
 					var delLinks = document.getElementsByClassName("layout-tab-close", parent);
 					var delLink = delLinks[delLinks.length - 1];
 					var newText = newTextObj.innerHTML;
-					
+
 					parent.className = "layout-tab-text";
 					if (newText == "") {
 						newTextObj.innerHTML = newText = "(UNTITLED)";
 					}
-					
+
 					delLink.style.display = "none";
 					if (oldText != newText) {
 						var params = Navigation.params;
@@ -624,13 +622,13 @@ var Navigation = {
 					}
 				}
 			});
-		
+
 		DropZone.add("layout-nav-container", {
 			accept: ["layout-tab"],
 			onHoverOver: Navigation.onDrag,
 			onDrop: Navigation.onDrop
 			});
-		
+
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		tabs.each(function(item, index) {
 			var link = item.getElementsByTagName("a");
@@ -642,23 +640,23 @@ var Navigation = {
 					forceDrop: true,
 					revert: true
 				});
-				
+
 			item.layoutId = Navigation.params.layoutIds[index];
 			item.style.cursor = "move";
-			
+
 			var links = item.getElementsByTagName("a");
 			if (links.length > 0) {
 				DragLink.create(links[0], item);
 			}
 		});
-		
+
 		if (Navigation.params.newPage) {
 			var opts =  $("layout-tab-text-edit").editOptions;
 			$(opts.dragId).wasClicked = true;
 			QuickEdit.edit($("layout-tab-text-edit"));
 		}
 	},
-	
+
 	move: function(obj, from, to) {
 		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var selectedTab = obj;
@@ -678,18 +676,18 @@ var Navigation = {
 				target = tabs[to + 1];
 			}
 		}
-		
+
 		nav.insertBefore(selectedTab, target);
 	},
-	
+
 	onDrag: function(item) {
 		var dragOptions = item.dragOptions;
 		var clone = dragOptions.clone;
 		var fromIndex = -1;
 		var toIndex = -1;
-		
+
 		clone.layoutId = item.layoutId;
-		
+
 		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
 
 		tabs.each(function(tab, index) {
@@ -714,7 +712,7 @@ var Navigation = {
 			Navigation.move(clone, fromIndex, toIndex);
 		}
 	},
-	
+
 	onDrop: function(item) {
 		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var reordered = new Array();
@@ -729,7 +727,7 @@ var Navigation = {
 				"&ownerId=" + params.ownerId +
 				"&parent=" + params.parent +
 				"&layoutIds=" + reordered.concat(Navigation.params.hiddenIds);
-	
+
 			AjaxUtil.request(url);
 		}
 	}
@@ -739,11 +737,11 @@ var PortletHeaderBar = {
 
 	fadeIn : function (id) {
 		var bar = document.getElementById(id);
-		
+
 		// portlet has been removed.  exit.
 		if (bar == null)
 			return;
-			
+
 		if (bar.startOut) {
 			// stop fadeOut prematurely
 			clearTimeout(bar.timerOut);
@@ -757,7 +755,7 @@ var PortletHeaderBar = {
 			Element.changeOpacity(bar.iconList[i], bar.opac);
 		}
 		bar.iconBar.style.display = "block";
-		
+
 		if (bar.opac < 100) {
 			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 50);
 		}
@@ -766,14 +764,14 @@ var PortletHeaderBar = {
 			bar.startIn = false;
 		}
 	},
-	
+
 	fadeOut : function (id) {
 		var bar = document.getElementById(id);
-		
+
 		// portlet has been removed.  exit.
 		if (bar == null)
 			return;
-		
+
 		if (bar.startIn) {
 			// stop fadeIn prematurely
 			clearTimeout(bar.timerIn);
@@ -781,7 +779,7 @@ var PortletHeaderBar = {
 		}
 		bar.startIn = false;
 		bar.startOut = true;		
-		
+
 		bar.opac -= 20;
 		for (var i = 0; i < bar.iconList.length; i++) {
 			Element.changeOpacity(bar.iconList[i], bar.opac);
@@ -796,27 +794,27 @@ var PortletHeaderBar = {
 			bar.startOut = false;
 		}
 	},
-	
+
 	init : function (bar) {
 		if (!bar.iconBar) {
 			bar.iconBar = document.getElementsByClassName("portlet-small-icon-bar", bar)[0];
 		}
-			
+
 		if (!bar.iconList) {
 			bar.iconList = bar.iconBar.getElementsByTagName("img");
 		}
 	},
-	
+
 	hide : function (id) {
 		var bar = document.getElementById(id);
-		
+
 		// If fadeIn timer has been set, but hasn't started, cancel it
 		if (bar.timerIn && !bar.startIn) {
 			// cancel unstarted fadeIn
 			clearTimeout(bar.timerIn);
 			bar.timerIn = 0;
 		}	
-		
+
 		if (!bar.startOut && bar.opac > 0) {
 			if (bar.timerOut) {
 				// reset unstarted fadeOut timer
@@ -828,17 +826,17 @@ var PortletHeaderBar = {
 			bar.timerOut = setTimeout("PortletHeaderBar.fadeOut(\"" + id + "\")", 150);
 		}
 	},
-	
+
 	show : function (id) {
 		var bar = document.getElementById(id);
-		
+
 		// If fadeOut timer has been set, but hasn't started, cancel it
 		if (bar.timerOut && !bar.startOut) {
 			// cancel unstarted fadeOut
 			clearTimeout(bar.timerOut);
 			bar.timerOut = 0;
 		}
-		
+
 		if (!bar.startIn && (!bar.opac || bar.opac < 100)){
 			if (!bar.opac) {
 				bar.opac = 0;
@@ -858,7 +856,7 @@ var PortletHeaderBar = {
 
 var PhotoSlider = Class.create();
 PhotoSlider.prototype = {
-	
+
 	initialize: function (slidingWindow, windowWidth, photos, totalPages, varName) {
 		this.TOTAL_FRAMES = 20;
 		this.count = 0;
@@ -875,13 +873,13 @@ PhotoSlider.prototype = {
 		this.totalPages = totalPages;
 		this.varName = varName;
 	},
-	
+
 	animate: function() {
 		if (this.count <= this.TOTAL_FRAMES) {
 			var ratio = this.count / this.TOTAL_FRAMES;
 			var ratio2 = Math.sin(ratio * (Math.PI/2))
 			var delta = -(this.page * this.windowWidth) - this.start;
-			
+
 			this.photos.style.left = this.start + (delta * ratio2);
 			this.count++;
 			this.timer = setTimeout(this.varName + ".animate()", 30);
@@ -890,27 +888,27 @@ PhotoSlider.prototype = {
 			this.timer = 0;
 		}
 	},
-	
+
 	left: function() {
 		this.start = parseInt(this.photos.style.left);
-		
+
 		if (this.page > 0) {
 			this.page--;
 			this.count = 0;
-			
+
 			if (!this.timer) {
 				this.timer = setTimeout(this.varName + ".animate()", 30);
 			}
 		}
 	},
-	
+
 	right: function() {
 		this.start = parseInt(this.photos.style.left);
-		
+
 		if (this.page < (this.totalPages - 1)) {
 			this.page++
 			this.count = 0;
-			
+
 			if (!this.timer) {
 				this.timer = setTimeout(this.varName + ".animate()", 30);
 			}
@@ -928,7 +926,7 @@ var Tabs = {
 		}
 
 		el = document.getElementById(namespace + id + "TabsSection");
-		
+
 		if (el) {
 			el.style.display = "block";
 		}
@@ -936,7 +934,7 @@ var Tabs = {
 		for (var i = 0; (names.length > 1) && (i < names.length); i++) {
 			if (id != names[i]) {
 				el = document.getElementById(namespace + names[i] + "TabsId");
-				
+
 				if (el) {
 					el.className = "none";
 				}
@@ -953,7 +951,7 @@ var Tabs = {
 
 var QuickEdit = {
 	inputList: new LinkedList(),
-	
+
 	create: function(id, options) {
 		/* OPTIONS
 		 * dragId: (string|object) specify drag ID to disable drag during editing
@@ -962,22 +960,22 @@ var QuickEdit = {
 		 * onEdit: (function) executes when going into edit mode
 		 * onComplete: (function) executes after editing is done
 		 */
-		 
+
 		var item = $(id);
 		item.editOptions = options;
 		item.onclick = function() { QuickEdit.edit(this); };
 		item.style.cursor = "text";
 	},
-	
+
 	edit: function(textObj) {
 		var opts = textObj.editOptions || new Object();
 		var wasClicked = true;
 		var isTextarea = false;
-		
+
 		if (opts.dragId) {
 			wasClicked = $(opts.dragId).wasClicked;
 		}
-		
+
 		if (opts.inputType && opts.inputType == "textarea") {
 			isTextarea = true;
 		}
@@ -996,7 +994,7 @@ var QuickEdit = {
 			if (opts.fixParent) {
 				textDiv.style.width = textDiv.offsetWidth + "px";
 			}
-			
+
 			input.className = "portlet-form-input-field";
 			input.value = toText(textObj.innerHTML);
 			input.textObj = textObj;
@@ -1011,7 +1009,7 @@ var QuickEdit = {
 					QuickEdit.inputList.each(QuickEdit.onDone);
 				}
 			}
-			
+
 			var textWidth = textObj.offsetWidth;
 			var textHeight = textObj.offsetHeight;
 			textObj.style.display = "none";
@@ -1027,39 +1025,39 @@ var QuickEdit = {
 			if (opts.dragId) {
 				$(opts.dragId).disableDrag = true;
 			}
-			
+
 			textObj.editing = true;
 		}
 	},
-	
+
 	onDone: function(input) {
 		if (input) {
 			document.onclick = function() {};
-			
+
 			var textObj = input.textObj;
 			var textDiv = textObj.parentNode;
 			var newText = toHTML(input.value);
 			var oldText = textObj.innerHTML;
 			var opts = textObj.editOptions;
-			
+
 			textObj.innerHTML = newText;
-			
+
 			if (opts.onComplete) {
 				opts.onComplete(textObj, oldText);
 			}
-			
+
 			Element.remove(input);
 			textObj.style.display = "";
 			textObj.editing = false;
-			
+
 			if (opts.dragId) {
 				$(opts.dragId).disableDrag = false;
 			}
-			
+
 			if (opts.fixParent) {
 				textDiv.style.width = "auto";
 			}
-			
+
 			QuickEdit.inputList.remove(input);
 		}
 	}
@@ -1078,7 +1076,7 @@ StarRating.prototype = {
 		item = $(item);
 		this.stars = $A(item.getElementsByTagName("img"));
 		var self = this
-		
+
 		if (!this.options.displayOnly) {
 			item.onmouseout = this.onHoverOut.bindAsEventListener(this);
 			this.stars.each(function(image, index) {
@@ -1087,17 +1085,17 @@ StarRating.prototype = {
 				image.onmouseover = self.onHoverOver.bindAsEventListener(self);
 			})
 		}
-		
+
 		this.display(this.rating, "rating");
 	},
 
 	display: function(rating, mode) {
 		var self = this;
 		rating = rating == null ? this.rating : rating;
-		
+
 		var whole = Math.floor(rating);
 		var fraction = rating - whole;
-		
+
 		this.stars.each(function(image, index) {
 			if (index < whole) {
 				if (mode == "hover") {
@@ -1124,7 +1122,7 @@ StarRating.prototype = {
 			}
 		});
 	},
-	
+
 	onHoverOver: function(event) {
 		var target = Event.element(event);
 		this.display(target.index, "hover");
@@ -1136,11 +1134,11 @@ StarRating.prototype = {
 		var target = Event.element(event);
 		var newRating = target.index;
 		this.rating = newRating;
-		
+
 		if (this.options.onComplete) {
 			this.options.onComplete(newRating);
 		}
-		
+
 		this.display(newRating);
 	}
 }
@@ -1148,12 +1146,12 @@ StarRating.prototype = {
 var ToolTip = {
 	current: null,
 	opacity: 100,
-	
+
 	show: function(event, obj, text) {
 		event = event || window.event;
 		var target = obj;
 		var tip = ToolTip.current;
-		
+
 		target.onmouseout = ToolTip.hide;
 
 		if (!tip) {
@@ -1164,18 +1162,18 @@ var ToolTip = {
 			document.body.appendChild(tip);
 			ToolTip.current = tip;
 		}
-		
+
 		/*
 		ToolTip.opacity = 100;
 		Element.changeOpacity(tip, 100);
 		*/
 		tip.innerHTML = text;
 		tip.style.display = "";
-		
+
 		tip.style.top = (Event.pointerY(event) - 15) + "px";
 		tip.style.left = (Event.pointerX(event) + 15) + "px";
 	},
-	
+
 	hide: function(event) {
 		if (ToolTip.current) {
 			ToolTip.current.style.display = "none";
@@ -1185,12 +1183,12 @@ var ToolTip = {
 		ToolTip.timeout = setTimeout("ToolTip.fadeOut()", 250);
 		*/
 	},
-	
+
 	fadeOut: function() {
 		if (ToolTip.current) {
 			var tip = ToolTip.current;
 			var opacity = ToolTip.opacity;
-			
+
 			if (opacity > 0 && opacity < 100) {
 				ToolTip.opacity -= 20;
 				Element.changeOpacity(tip, ToolTip.opacity);
@@ -1198,7 +1196,7 @@ var ToolTip = {
 			}
 			else {
 				Element.changeOpacity(tip, 100);
-				
+
 				if (opacity <= 0) {
 					ToolTip.current.style.display = "none";
 				}

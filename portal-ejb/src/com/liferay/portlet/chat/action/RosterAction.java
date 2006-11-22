@@ -22,14 +22,6 @@
 
 package com.liferay.portlet.chat.action;
 
-import com.liferay.portal.struts.JSONAction;
-import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.portlet.messaging.util.comparator.NameComparator;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -40,13 +32,22 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
-
 import org.jivesoftware.smack.Roster;
 import org.jivesoftware.smack.RosterEntry;
 import org.jivesoftware.smack.packet.RosterPacket;
-
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.struts.JSONAction;
+import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.Validator;
 
 /**
  * <a href="RosterAction.java.html"><b><i>View Source</i></b></a>
@@ -80,9 +81,21 @@ public class RosterAction extends JSONAction {
 
 		try {
 			String email = ParamUtil.getString(req, "email");
+			String userId = ParamUtil.getString(req, "userId");
 			String companyId = PortalUtil.getCompanyId(req);
+			User user;
 
-			jo = MessagingUtil.addRosterEntry(req.getSession(), companyId, email);
+			if (Validator.isNotNull(userId)) {
+				user = UserLocalServiceUtil.getUserById(
+					companyId, userId);
+			}
+			else {
+				user = UserLocalServiceUtil.getUserByEmailAddress(
+					companyId, email);
+			}
+
+
+			jo = MessagingUtil.addRosterEntry(req.getSession(), user);
 		}
 		catch (Exception e) {
 			jo.put("status", "failure");

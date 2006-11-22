@@ -70,14 +70,11 @@ public class MessagingUtil {
 		PropsUtil.get(PropsUtil.JABBER_XMPP_USER_PASSWORD), "liferayllc");
 
 	public static JSONObject addRosterEntry(
-			HttpSession ses, String companyId, String emailAddress)
+			HttpSession ses, User user)
 		throws PortalException, SystemException, XMPPException {
 
 		JSONObject jo = new JSONObject();
 		Roster roster = getRoster(ses);
-
-		User user = UserLocalServiceUtil.getUserByEmailAddress(
-			companyId, emailAddress);
 
 		String smackId = getXmppId(user);
 		String name = user.getFullName();

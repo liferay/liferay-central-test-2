@@ -172,7 +172,7 @@ document.createInputElement = function(name) {
 		var entry = document.createElement("input");
 		entry.name = name;
 	}
-	
+
 	return entry;
 }
 
@@ -187,7 +187,7 @@ if (!Element) Element = new Object();
 Element.disable = function(element) {
 	element = $(element);
 	var items = element.getElementsByTagName("*");
-	
+
 	for (var i = 0; i < items.length; i++) {
 		var item = items[i];
 		var nodeName = item.nodeName.toLowerCase();
@@ -195,12 +195,12 @@ Element.disable = function(element) {
 		item.onclick = function() {};
 		item.onmouseover = function() {};
 		item.onmouseout = function() {};
-		
+
 		if (is_ie) {
 			item.onmouseenter = function() {};
 			item.onmouseleave = function() {};
 		}
-		
+
 		if (nodeName == "a") {
 			item.href = "javascript: void(0)";
 		}
@@ -211,7 +211,7 @@ Element.disable = function(element) {
 			item.action = "";
 			item.onsubmit = function() { return false; };
 		}
-		
+
 		item.style.cursor = "default";
 	}
 }
@@ -219,7 +219,7 @@ Element.disable = function(element) {
 Element.changeOpacity = function(object, opacity) {
 	opacity = (opacity >= 100) ? 99.999 : opacity;
 	opacity = (opacity < 0) ? 0 : opacity;
-    
+
 	object.style.opacity = (opacity / 100);
 	object.style.MozOpacity = (opacity / 100);
 	object.style.KhtmlOpacity = (opacity / 100);
@@ -233,7 +233,7 @@ Event.addHandler = function(obj, type, func) {
 	if (type.indexOf("on") != 0) {
 		type = "on" + type;
 	}
-	
+
     var temp = obj[type];
 
 	if (typeof obj[type] != "function") {
@@ -249,13 +249,13 @@ Event.addHandler = function(obj, type, func) {
         }
     }
 }
-	
+
 Event.enterPressed = function(event) {
 	if (!event) {
 		event = window.event;
 	}
 	var keycode = event.keyCode;
-	
+
 	if (keycode == 13) {
 		return true;
 	}
@@ -327,7 +327,7 @@ LinkedList.prototype.add = function(obj) {
 	obj.listInfo = new Object();
 	var tail = this.tail;
 	var head = this.head;
-	
+
 	if (this.head == null) {
 		this.head = obj;
 		this.tail = obj;
@@ -343,7 +343,7 @@ LinkedList.prototype.remove = function(obj) {
 	if (this.head) {
 		var next = obj.listInfo.next;
 		var prev = obj.listInfo.prev;
-	
+
 		if (next) {
 			next.listInfo.prev = prev;
 		}
@@ -362,18 +362,18 @@ LinkedList.prototype.remove = function(obj) {
 LinkedList.prototype.each = function(func) {
 	var cur = this.head;
 	var count = 0;
-	
+
 	while (cur){
 		count++;
 		var next = cur.listInfo.next;
-		
+
 		if (func) {
 			func(cur);
 		}
-		
+
 		cur = next;
 	}
-	
+
 	return count;
 }
 
@@ -506,24 +506,24 @@ function reelHome(id, startPosX, startPosY, duration, count, c) {
     if (isNaN(startPosX) || isNaN(startPosY)) {
         return;
 	}
-        
+
 	var obj = document.getElementById(id);
 
 	if (obj == null) {
 		return;
 	}
-	
+
 	var top = parseInt(obj.style.top);
 	var left = parseInt(obj.style.left);
-	
+
 	if (count == null) {
 	    count = 1;
 	}
-	
+
 	if (duration == null) {
 	    duration == 20;
 	}
-	
+
 	if (c == null) {
 
 		// Calculate this constant once to speed up next iteration
@@ -531,15 +531,15 @@ function reelHome(id, startPosX, startPosY, duration, count, c) {
 		c = Math.PI / (2 * duration);
 		obj.style.zIndex = 10;
     }
-	
+
 	if (count < duration) {
 	    var ratio = 1 - Math.sin(count * c);
-	    
+
 	    // Shift cos by -PI/2 and up 1
 
 		obj.style.left = (startPosX * ratio) + "px";
 		obj.style.top = (startPosY * ratio) + "px";
-		
+
 		setTimeout("reelHome(\"" + id + "\"," + startPosX + "," + startPosY + "," + duration + "," + (++count) + "," + c + ")", 16);
 	}
 	else {
@@ -627,7 +627,7 @@ function resubmitCountdown(formName) {
 		if (!is_ns_4) {
 			document.body.style.cursor = "auto";
 		}
-	
+
 		var form = document.forms[formName];
 
 		for (var i = 0; i < form.length; i++){
@@ -694,7 +694,7 @@ function setSelectVisibility(mode, obj) {
 		else {
 			obj = document.getElementsByTagName("body")[0];
 		}
-		
+
 		selectList = obj.getElementsByTagName("select");
 		for (var i = 0; i < selectList.length; i++) {
 			selectList[i].style.visibility = mode;
@@ -780,7 +780,7 @@ function submitForm(form, action, singleSubmit) {
 		submitCountdown = 10;
 
 		setTimeout("resubmitCountdown('" + form.name + "')", 1000);
-		
+
 		if (singleSubmit == null || singleSubmit) {
 			submitCountdown++;
 
@@ -902,7 +902,7 @@ function toggleByObject(obj, returnState, displayType) {
 			hidden = true;
 		}
 	}
-	
+
 	if (returnState) {
 		return hidden;
 	}
@@ -932,6 +932,7 @@ String.prototype.trim = trimString;
 
 var ZINDEX = {
 	ALERT: 100,
+	CHAT_BOX: 11,
 	DRAG_ITEM: 10,
 	DRAG_ARROW: 9
 }

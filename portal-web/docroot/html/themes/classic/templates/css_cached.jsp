@@ -906,30 +906,3 @@ FONT.bg {
 TR.even { background-color: <%= colorScheme.getPortletMenuBg() %>; color: #000000; }
 
 TR.odd { background-color: <%= colorScheme.getPortletBg() %>; color: #000000; }
-
-/******************************************************************************/
-/* Messaging Styles
-/******************************************************************************/
-
-#messaging-main-div {
-	left: 0;
-	position: absolute;
-	text-align: left;
-	top: 0;
-	z-index: 10;
-}
-
-#messaging-main-div div.msg-chat-box {
-	background-color: white;
-	border: 1px solid black;
-	padding: 10px;
-	text-align: left;
-}
-
-#messaging-main-div div.msg-chat-area {
-	border: 1px solid gray;
-	height: 100px;
-	margin: 5px 0 5px 0;
-	padding: 5px;
-}
-
