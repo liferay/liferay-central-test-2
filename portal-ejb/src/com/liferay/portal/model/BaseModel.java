@@ -35,6 +35,12 @@ import java.io.Serializable;
  */
 public abstract class BaseModel implements Cloneable, Comparable, Serializable {
 
+	/**
+	 * @deprecated See LEP-1666.
+	 */	
+	public static boolean VALUE_OBJECT_CACHEABLE = GetterUtil.getBoolean(
+		PropsUtil.get(PropsUtil.VALUE_OBJECT_CACHEABLE));
+
 	public static boolean XSS_ALLOW = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.XSS_ALLOW));
 
