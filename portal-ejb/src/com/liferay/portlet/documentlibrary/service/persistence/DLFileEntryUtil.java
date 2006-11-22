@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileEntryUtil {
-	public static final String CLASS_NAME = DLFileEntryUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileEntry"));
-
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry create(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK) {
 		return getPersistence().create(dlFileEntryPK);
@@ -56,9 +52,9 @@ public class DLFileEntryUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class DLFileEntryUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class DLFileEntryUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class DLFileEntryUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -270,16 +266,22 @@ public class DLFileEntryUtil {
 	}
 
 	public static DLFileEntryPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileEntryUtil util = (DLFileEntryUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (DLFileEntryUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(DLFileEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = DLFileEntryUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileEntry"));
 	private static Log _log = LogFactory.getLog(DLFileEntryUtil.class);
+	private static DLFileEntryUtil _util;
 	private DLFileEntryPersistence _persistence;
 }

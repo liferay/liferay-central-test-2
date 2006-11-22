@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ResourceLocalServiceFactory {
-	public static final String CLASS_NAME = ResourceLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ResourceLocalService.class.getName() +
-		".transaction";
-
 	public static ResourceLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ResourceLocalServiceFactory factory = (ResourceLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ResourceLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ResourceLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ResourceLocalService service) {
 		_service = service;
 	}
 
-	public static ResourceLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ResourceLocalService service = (ResourceLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ResourceLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ResourceLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ResourceLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = ResourceLocalService.class.getName() +
+		".transaction";
+	private static ResourceLocalServiceFactory _factory;
+	private static ResourceLocalService _txImpl;
 	private ResourceLocalService _service;
 }

@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class SubscriptionUtil {
-	public static final String CLASS_NAME = SubscriptionUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Subscription"));
-
 	public static com.liferay.portal.model.Subscription create(
 		java.lang.String subscriptionId) {
 		return getPersistence().create(subscriptionId);
@@ -54,16 +50,7 @@ public class SubscriptionUtil {
 		java.lang.String subscriptionId)
 		throws com.liferay.portal.NoSuchSubscriptionException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(subscriptionId));
@@ -82,16 +69,7 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription remove(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(subscription);
@@ -109,17 +87,7 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription update(
 		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = subscription.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription update(
 		com.liferay.portal.model.Subscription subscription, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = subscription.isNew();
 
 		if (listener != null) {
@@ -364,16 +322,39 @@ public class SubscriptionUtil {
 	}
 
 	public static SubscriptionPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		SubscriptionUtil util = (SubscriptionUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(SubscriptionPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static SubscriptionUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (SubscriptionUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = SubscriptionUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Subscription"));
 	private static Log _log = LogFactory.getLog(SubscriptionUtil.class);
+	private static SubscriptionUtil _util;
 	private SubscriptionPersistence _persistence;
 }

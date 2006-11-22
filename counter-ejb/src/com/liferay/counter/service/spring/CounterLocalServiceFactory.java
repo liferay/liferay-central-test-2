@@ -34,21 +34,42 @@ import org.springframework.context.ApplicationContext;
  */
 public class CounterLocalServiceFactory {
 
-	public static final String NAME =
-		CounterLocalServiceFactory.class.getName();
-
 	public static CounterLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
+		return _getFactory()._service;
+	}
 
-		CounterLocalServiceFactory factory =
-			(CounterLocalServiceFactory)ctx.getBean(NAME);
+	public static CounterLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		return factory._service;
+			_txImpl = (CounterLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(CounterLocalService service) {
 		_service = service;
 	}
+
+	private static CounterLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_factory = (CounterLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY =
+		CounterLocalServiceFactory.class.getName();
+
+	private static final String _TX_IMPL =
+		CounterLocalService.class.getName() + ".transaction";
+
+	private static CounterLocalServiceFactory _factory;
+	private static CounterLocalService _txImpl;
 
 	private CounterLocalService _service;
 

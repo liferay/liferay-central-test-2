@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PermissionUtil {
-	public static final String CLASS_NAME = PermissionUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Permission"));
-
 	public static com.liferay.portal.model.Permission create(
 		java.lang.String permissionId) {
 		return getPersistence().create(permissionId);
@@ -54,16 +50,7 @@ public class PermissionUtil {
 		java.lang.String permissionId)
 		throws com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(permissionId));
@@ -82,16 +69,7 @@ public class PermissionUtil {
 	public static com.liferay.portal.model.Permission remove(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(permission);
@@ -109,17 +87,7 @@ public class PermissionUtil {
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = permission.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class PermissionUtil {
 	public static com.liferay.portal.model.Permission update(
 		com.liferay.portal.model.Permission permission, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = permission.isNew();
 
 		if (listener != null) {
@@ -638,16 +596,39 @@ public class PermissionUtil {
 	}
 
 	public static PermissionPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PermissionUtil util = (PermissionUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(PermissionPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static PermissionUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (PermissionUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = PermissionUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Permission"));
 	private static Log _log = LogFactory.getLog(PermissionUtil.class);
+	private static PermissionUtil _util;
 	private PermissionPersistence _persistence;
 }

@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class BlogsEntryUtil {
-	public static final String CLASS_NAME = BlogsEntryUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.blogs.model.BlogsEntry"));
-
 	public static com.liferay.portlet.blogs.model.BlogsEntry create(
 		java.lang.String entryId) {
 		return getPersistence().create(entryId);
@@ -56,9 +52,9 @@ public class BlogsEntryUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class BlogsEntryUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class BlogsEntryUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class BlogsEntryUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -369,16 +365,22 @@ public class BlogsEntryUtil {
 	}
 
 	public static BlogsEntryPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BlogsEntryUtil util = (BlogsEntryUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (BlogsEntryUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(BlogsEntryPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = BlogsEntryUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.blogs.model.BlogsEntry"));
 	private static Log _log = LogFactory.getLog(BlogsEntryUtil.class);
+	private static BlogsEntryUtil _util;
 	private BlogsEntryPersistence _persistence;
 }

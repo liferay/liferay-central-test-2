@@ -37,8 +37,6 @@ import org.springframework.context.ApplicationContext;
  */
 public class CounterUtil {
 
-	public static final String CLASS_NAME = CounterUtil.class.getName();
-
 	public static List getNames() throws SystemException {
 		return getPersistence().getNames();
 	}
@@ -64,15 +62,26 @@ public class CounterUtil {
 	}
 
 	public static CounterPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CounterUtil util = (CounterUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(CounterPersistence persistence) {
 		_persistence = persistence;
 	}
+
+	private static CounterUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_util = (CounterUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = CounterUtil.class.getName();
+
+	private static CounterUtil _util;
 
 	private CounterPersistence _persistence;
 

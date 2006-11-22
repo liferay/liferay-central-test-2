@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class LayoutSetUtil {
-	public static final String CLASS_NAME = LayoutSetUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.LayoutSet"));
-
 	public static com.liferay.portal.model.LayoutSet create(
 		java.lang.String ownerId) {
 		return getPersistence().create(ownerId);
@@ -54,16 +50,7 @@ public class LayoutSetUtil {
 		java.lang.String ownerId)
 		throws com.liferay.portal.NoSuchLayoutSetException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(ownerId));
@@ -81,16 +68,7 @@ public class LayoutSetUtil {
 	public static com.liferay.portal.model.LayoutSet remove(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(layoutSet);
@@ -108,17 +86,7 @@ public class LayoutSetUtil {
 	public static com.liferay.portal.model.LayoutSet update(
 		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = layoutSet.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class LayoutSetUtil {
 	public static com.liferay.portal.model.LayoutSet update(
 		com.liferay.portal.model.LayoutSet layoutSet, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = layoutSet.isNew();
 
 		if (listener != null) {
@@ -241,16 +199,39 @@ public class LayoutSetUtil {
 	}
 
 	public static LayoutSetPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		LayoutSetUtil util = (LayoutSetUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(LayoutSetPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static LayoutSetUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (LayoutSetUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = LayoutSetUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.LayoutSet"));
 	private static Log _log = LogFactory.getLog(LayoutSetUtil.class);
+	private static LayoutSetUtil _util;
 	private LayoutSetPersistence _persistence;
 }

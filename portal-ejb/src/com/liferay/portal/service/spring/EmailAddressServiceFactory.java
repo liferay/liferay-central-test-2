@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class EmailAddressServiceFactory {
-	public static final String CLASS_NAME = EmailAddressServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = EmailAddressService.class.getName() +
-		".transaction";
-
 	public static EmailAddressService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		EmailAddressServiceFactory factory = (EmailAddressServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static EmailAddressService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (EmailAddressService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(EmailAddressService service) {
 		_service = service;
 	}
 
-	public static EmailAddressService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		EmailAddressService service = (EmailAddressService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static EmailAddressServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (EmailAddressServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = EmailAddressServiceFactory.class.getName();
+	private static final String _TX_IMPL = EmailAddressService.class.getName() +
+		".transaction";
+	private static EmailAddressServiceFactory _factory;
+	private static EmailAddressService _txImpl;
 	private EmailAddressService _service;
 }

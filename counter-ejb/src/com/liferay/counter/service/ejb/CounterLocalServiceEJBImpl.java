@@ -22,7 +22,11 @@
 
 package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.impl.CounterLocalServiceImpl;
+import com.liferay.counter.service.spring.CounterLocalService;
+import com.liferay.counter.service.spring.CounterLocalServiceFactory;
+import com.liferay.portal.SystemException;
+
+import java.util.List;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -35,7 +39,29 @@ import javax.ejb.SessionContext;
  *
  */
 public class CounterLocalServiceEJBImpl
-	extends CounterLocalServiceImpl implements SessionBean {
+	implements CounterLocalService, SessionBean {
+
+	public List getNames() throws SystemException {
+		return CounterLocalServiceFactory.getTxImpl().getNames();
+	}
+
+	public long increment(String name) throws SystemException {
+		return CounterLocalServiceFactory.getTxImpl().increment(name);
+	}
+
+	public long increment(String name, int size)
+		throws SystemException {
+
+		return CounterLocalServiceFactory.getTxImpl().increment(name, size);
+	}
+
+	public void rename(String oldName, String newName) throws SystemException {
+		CounterLocalServiceFactory.getTxImpl().rename(oldName, newName);
+	}
+
+	public void reset(String name) throws SystemException {
+		CounterLocalServiceFactory.getTxImpl().reset(name);
+	}
 
 	public void ejbCreate() throws CreateException {
 	}

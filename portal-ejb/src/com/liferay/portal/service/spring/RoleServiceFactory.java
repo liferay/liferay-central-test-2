@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class RoleServiceFactory {
-	public static final String CLASS_NAME = RoleServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = RoleService.class.getName() +
-		".transaction";
-
 	public static RoleService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RoleServiceFactory factory = (RoleServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static RoleService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (RoleService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(RoleService service) {
 		_service = service;
 	}
 
-	public static RoleService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RoleService service = (RoleService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static RoleServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (RoleServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = RoleServiceFactory.class.getName();
+	private static final String _TX_IMPL = RoleService.class.getName() +
+		".transaction";
+	private static RoleServiceFactory _factory;
+	private static RoleService _txImpl;
 	private RoleService _service;
 }

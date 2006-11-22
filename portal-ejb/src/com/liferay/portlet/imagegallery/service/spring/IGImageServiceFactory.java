@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class IGImageServiceFactory {
-	public static final String CLASS_NAME = IGImageServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = IGImageService.class.getName() +
-		".transaction";
-
 	public static IGImageService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		IGImageServiceFactory factory = (IGImageServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static IGImageService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (IGImageService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(IGImageService service) {
 		_service = service;
 	}
 
-	public static IGImageService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		IGImageService service = (IGImageService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static IGImageServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (IGImageServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = IGImageServiceFactory.class.getName();
+	private static final String _TX_IMPL = IGImageService.class.getName() +
+		".transaction";
+	private static IGImageServiceFactory _factory;
+	private static IGImageService _txImpl;
 	private IGImageService _service;
 }

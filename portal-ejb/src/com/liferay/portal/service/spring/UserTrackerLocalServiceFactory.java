@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class UserTrackerLocalServiceFactory {
-	public static final String CLASS_NAME = UserTrackerLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = UserTrackerLocalService.class.getName() +
-		".transaction";
-
 	public static UserTrackerLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserTrackerLocalServiceFactory factory = (UserTrackerLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static UserTrackerLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (UserTrackerLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(UserTrackerLocalService service) {
 		_service = service;
 	}
 
-	public static UserTrackerLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserTrackerLocalService service = (UserTrackerLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static UserTrackerLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (UserTrackerLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = UserTrackerLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = UserTrackerLocalService.class.getName() +
+		".transaction";
+	private static UserTrackerLocalServiceFactory _factory;
+	private static UserTrackerLocalService _txImpl;
 	private UserTrackerLocalService _service;
 }

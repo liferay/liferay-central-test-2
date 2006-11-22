@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class BlogsEntryLocalServiceFactory {
-	public static final String CLASS_NAME = BlogsEntryLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = BlogsEntryLocalService.class.getName() +
-		".transaction";
-
 	public static BlogsEntryLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BlogsEntryLocalServiceFactory factory = (BlogsEntryLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static BlogsEntryLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (BlogsEntryLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(BlogsEntryLocalService service) {
 		_service = service;
 	}
 
-	public static BlogsEntryLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BlogsEntryLocalService service = (BlogsEntryLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static BlogsEntryLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (BlogsEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = BlogsEntryLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = BlogsEntryLocalService.class.getName() +
+		".transaction";
+	private static BlogsEntryLocalServiceFactory _factory;
+	private static BlogsEntryLocalService _txImpl;
 	private BlogsEntryLocalService _service;
 }

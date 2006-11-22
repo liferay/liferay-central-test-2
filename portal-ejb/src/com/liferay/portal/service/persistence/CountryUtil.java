@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class CountryUtil {
-	public static final String CLASS_NAME = CountryUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Country"));
-
 	public static com.liferay.portal.model.Country create(
 		java.lang.String countryId) {
 		return getPersistence().create(countryId);
@@ -54,16 +50,7 @@ public class CountryUtil {
 		java.lang.String countryId)
 		throws com.liferay.portal.NoSuchCountryException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(countryId));
@@ -81,16 +68,7 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country remove(
 		com.liferay.portal.model.Country country)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(country);
@@ -108,17 +86,7 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = country.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class CountryUtil {
 	public static com.liferay.portal.model.Country update(
 		com.liferay.portal.model.Country country, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = country.isNew();
 
 		if (listener != null) {
@@ -264,16 +222,39 @@ public class CountryUtil {
 	}
 
 	public static CountryPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CountryUtil util = (CountryUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(CountryPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static CountryUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (CountryUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = CountryUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Country"));
 	private static Log _log = LogFactory.getLog(CountryUtil.class);
+	private static CountryUtil _util;
 	private CountryPersistence _persistence;
 }

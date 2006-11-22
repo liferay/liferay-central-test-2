@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class UserTrackerPathUtil {
-	public static final String CLASS_NAME = UserTrackerPathUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserTrackerPath"));
-
 	public static com.liferay.portal.model.UserTrackerPath create(
 		java.lang.String userTrackerPathId) {
 		return getPersistence().create(userTrackerPathId);
@@ -54,16 +50,7 @@ public class UserTrackerPathUtil {
 		java.lang.String userTrackerPathId)
 		throws com.liferay.portal.NoSuchUserTrackerPathException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(userTrackerPathId));
@@ -82,16 +69,7 @@ public class UserTrackerPathUtil {
 	public static com.liferay.portal.model.UserTrackerPath remove(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(userTrackerPath);
@@ -109,17 +87,7 @@ public class UserTrackerPathUtil {
 	public static com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = userTrackerPath.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class UserTrackerPathUtil {
 	public static com.liferay.portal.model.UserTrackerPath update(
 		com.liferay.portal.model.UserTrackerPath userTrackerPath,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = userTrackerPath.isNew();
 
 		if (listener != null) {
@@ -273,16 +231,39 @@ public class UserTrackerPathUtil {
 	}
 
 	public static UserTrackerPathPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserTrackerPathUtil util = (UserTrackerPathUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(UserTrackerPathPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static UserTrackerPathUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (UserTrackerPathUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = UserTrackerPathUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.UserTrackerPath"));
 	private static Log _log = LogFactory.getLog(UserTrackerPathUtil.class);
+	private static UserTrackerPathUtil _util;
 	private UserTrackerPathPersistence _persistence;
 }

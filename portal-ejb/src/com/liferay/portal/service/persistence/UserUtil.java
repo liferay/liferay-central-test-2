@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class UserUtil {
-	public static final String CLASS_NAME = UserUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.User"));
-
 	public static com.liferay.portal.model.User create(java.lang.String userId) {
 		return getPersistence().create(userId);
 	}
@@ -52,16 +48,7 @@ public class UserUtil {
 	public static com.liferay.portal.model.User remove(java.lang.String userId)
 		throws com.liferay.portal.NoSuchUserException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(userId));
@@ -79,16 +66,7 @@ public class UserUtil {
 	public static com.liferay.portal.model.User remove(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(user);
@@ -106,17 +84,7 @@ public class UserUtil {
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = user.isNew();
 
 		if (listener != null) {
@@ -145,17 +113,7 @@ public class UserUtil {
 	public static com.liferay.portal.model.User update(
 		com.liferay.portal.model.User user, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = user.isNew();
 
 		if (listener != null) {
@@ -965,16 +923,39 @@ public class UserUtil {
 	}
 
 	public static UserPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserUtil util = (UserUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(UserPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static UserUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (UserUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = UserUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.User"));
 	private static Log _log = LogFactory.getLog(UserUtil.class);
+	private static UserUtil _util;
 	private UserPersistence _persistence;
 }

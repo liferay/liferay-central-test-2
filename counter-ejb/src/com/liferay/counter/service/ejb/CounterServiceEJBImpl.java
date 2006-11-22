@@ -23,8 +23,8 @@
 package com.liferay.counter.service.ejb;
 
 import com.liferay.counter.service.spring.CounterService;
+import com.liferay.counter.service.spring.CounterServiceFactory;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.util.SpringUtil;
 
 import java.rmi.RemoteException;
 
@@ -34,8 +34,6 @@ import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="CounterServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -44,37 +42,28 @@ import org.springframework.context.ApplicationContext;
  */
 public class CounterServiceEJBImpl implements CounterService, SessionBean {
 
-	public static final String CLASS_NAME =
-		CounterService.class.getName() + ".transaction";
-
-	public static CounterService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (CounterService)ctx.getBean(CLASS_NAME);
-	}
-
 	public List getNames() throws RemoteException, SystemException {
-		return getService().getNames();
+		return CounterServiceFactory.getTxImpl().getNames();
 	}
 
 	public long increment(String name) throws RemoteException, SystemException {
-		return getService().increment(name);
+		return CounterServiceFactory.getTxImpl().increment(name);
 	}
 
 	public long increment(String name, int size)
 		throws RemoteException, SystemException {
 
-		return getService().increment(name, size);
+		return CounterServiceFactory.getTxImpl().increment(name, size);
 	}
 
 	public void rename(String oldName, String newName)
 		throws RemoteException, SystemException {
 
-		getService().rename(oldName, newName);
+		CounterServiceFactory.getTxImpl().rename(oldName, newName);
 	}
 
 	public void reset(String name) throws RemoteException, SystemException {
-		getService().reset(name);
+		CounterServiceFactory.getTxImpl().reset(name);
 	}
 
 	public void ejbCreate() throws CreateException {

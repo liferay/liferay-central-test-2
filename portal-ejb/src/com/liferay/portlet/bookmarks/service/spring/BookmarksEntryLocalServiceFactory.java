@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class BookmarksEntryLocalServiceFactory {
-	public static final String CLASS_NAME = BookmarksEntryLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = BookmarksEntryLocalService.class.getName() +
-		".transaction";
-
 	public static BookmarksEntryLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BookmarksEntryLocalServiceFactory factory = (BookmarksEntryLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static BookmarksEntryLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (BookmarksEntryLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(BookmarksEntryLocalService service) {
 		_service = service;
 	}
 
-	public static BookmarksEntryLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BookmarksEntryLocalService service = (BookmarksEntryLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static BookmarksEntryLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (BookmarksEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = BookmarksEntryLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = BookmarksEntryLocalService.class.getName() +
+		".transaction";
+	private static BookmarksEntryLocalServiceFactory _factory;
+	private static BookmarksEntryLocalService _txImpl;
 	private BookmarksEntryLocalService _service;
 }

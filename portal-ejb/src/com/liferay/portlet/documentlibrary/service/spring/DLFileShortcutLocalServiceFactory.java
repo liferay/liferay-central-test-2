@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileShortcutLocalServiceFactory {
-	public static final String CLASS_NAME = DLFileShortcutLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFileShortcutLocalService.class.getName() +
-		".transaction";
-
 	public static DLFileShortcutLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileShortcutLocalServiceFactory factory = (DLFileShortcutLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFileShortcutLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFileShortcutLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFileShortcutLocalService service) {
 		_service = service;
 	}
 
-	public static DLFileShortcutLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileShortcutLocalService service = (DLFileShortcutLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFileShortcutLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFileShortcutLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFileShortcutLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFileShortcutLocalService.class.getName() +
+		".transaction";
+	private static DLFileShortcutLocalServiceFactory _factory;
+	private static DLFileShortcutLocalService _txImpl;
 	private DLFileShortcutLocalService _service;
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ShoppingCouponServiceFactory {
-	public static final String CLASS_NAME = ShoppingCouponServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ShoppingCouponService.class.getName() +
-		".transaction";
-
 	public static ShoppingCouponService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCouponServiceFactory factory = (ShoppingCouponServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ShoppingCouponService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ShoppingCouponService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ShoppingCouponService service) {
 		_service = service;
 	}
 
-	public static ShoppingCouponService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCouponService service = (ShoppingCouponService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ShoppingCouponServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ShoppingCouponServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ShoppingCouponServiceFactory.class.getName();
+	private static final String _TX_IMPL = ShoppingCouponService.class.getName() +
+		".transaction";
+	private static ShoppingCouponServiceFactory _factory;
+	private static ShoppingCouponService _txImpl;
 	private ShoppingCouponService _service;
 }

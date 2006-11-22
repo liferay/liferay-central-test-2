@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFolderServiceFactory {
-	public static final String CLASS_NAME = DLFolderServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFolderService.class.getName() +
-		".transaction";
-
 	public static DLFolderService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFolderServiceFactory factory = (DLFolderServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFolderService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFolderService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFolderService service) {
 		_service = service;
 	}
 
-	public static DLFolderService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFolderService service = (DLFolderService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFolderServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFolderServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFolderServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFolderService.class.getName() +
+		".transaction";
+	private static DLFolderServiceFactory _factory;
+	private static DLFolderService _txImpl;
 	private DLFolderService _service;
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WorkflowComponentServiceFactory {
-	public static final String CLASS_NAME = WorkflowComponentServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = WorkflowComponentService.class.getName() +
-		".transaction";
-
 	public static WorkflowComponentService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WorkflowComponentServiceFactory factory = (WorkflowComponentServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static WorkflowComponentService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (WorkflowComponentService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(WorkflowComponentService service) {
 		_service = service;
 	}
 
-	public static WorkflowComponentService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WorkflowComponentService service = (WorkflowComponentService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static WorkflowComponentServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (WorkflowComponentServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = WorkflowComponentServiceFactory.class.getName();
+	private static final String _TX_IMPL = WorkflowComponentService.class.getName() +
+		".transaction";
+	private static WorkflowComponentServiceFactory _factory;
+	private static WorkflowComponentService _txImpl;
 	private WorkflowComponentService _service;
 }

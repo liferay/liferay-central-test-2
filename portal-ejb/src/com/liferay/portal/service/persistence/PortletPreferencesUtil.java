@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PortletPreferencesUtil {
-	public static final String CLASS_NAME = PortletPreferencesUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PortletPreferences"));
-
 	public static com.liferay.portal.model.PortletPreferences create(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK) {
 		return getPersistence().create(portletPreferencesPK);
@@ -54,16 +50,7 @@ public class PortletPreferencesUtil {
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK)
 		throws com.liferay.portal.NoSuchPortletPreferencesException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(portletPreferencesPK));
@@ -82,16 +69,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences remove(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(portletPreferences);
@@ -109,17 +87,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = portletPreferences.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class PortletPreferencesUtil {
 	public static com.liferay.portal.model.PortletPreferences update(
 		com.liferay.portal.model.PortletPreferences portletPreferences,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = portletPreferences.isNew();
 
 		if (listener != null) {
@@ -377,16 +335,39 @@ public class PortletPreferencesUtil {
 	}
 
 	public static PortletPreferencesPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletPreferencesUtil util = (PortletPreferencesUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(PortletPreferencesPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static PortletPreferencesUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (PortletPreferencesUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = PortletPreferencesUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.PortletPreferences"));
 	private static Log _log = LogFactory.getLog(PortletPreferencesUtil.class);
+	private static PortletPreferencesUtil _util;
 	private PortletPreferencesPersistence _persistence;
 }

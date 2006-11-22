@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ResourceUtil {
-	public static final String CLASS_NAME = ResourceUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Resource"));
-
 	public static com.liferay.portal.model.Resource create(
 		java.lang.String resourceId) {
 		return getPersistence().create(resourceId);
@@ -54,16 +50,7 @@ public class ResourceUtil {
 		java.lang.String resourceId)
 		throws com.liferay.portal.NoSuchResourceException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(resourceId));
@@ -81,16 +68,7 @@ public class ResourceUtil {
 	public static com.liferay.portal.model.Resource remove(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(resource);
@@ -108,17 +86,7 @@ public class ResourceUtil {
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = resource.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class ResourceUtil {
 	public static com.liferay.portal.model.Resource update(
 		com.liferay.portal.model.Resource resource, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = resource.isNew();
 
 		if (listener != null) {
@@ -480,16 +438,39 @@ public class ResourceUtil {
 	}
 
 	public static ResourcePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ResourceUtil util = (ResourceUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(ResourcePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static ResourceUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (ResourceUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = ResourceUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Resource"));
 	private static Log _log = LogFactory.getLog(ResourceUtil.class);
+	private static ResourceUtil _util;
 	private ResourcePersistence _persistence;
 }

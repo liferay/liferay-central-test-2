@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class JournalTemplateServiceFactory {
-	public static final String CLASS_NAME = JournalTemplateServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = JournalTemplateService.class.getName() +
-		".transaction";
-
 	public static JournalTemplateService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalTemplateServiceFactory factory = (JournalTemplateServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static JournalTemplateService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (JournalTemplateService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(JournalTemplateService service) {
 		_service = service;
 	}
 
-	public static JournalTemplateService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalTemplateService service = (JournalTemplateService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static JournalTemplateServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (JournalTemplateServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = JournalTemplateServiceFactory.class.getName();
+	private static final String _TX_IMPL = JournalTemplateService.class.getName() +
+		".transaction";
+	private static JournalTemplateServiceFactory _factory;
+	private static JournalTemplateService _txImpl;
 	private JournalTemplateService _service;
 }

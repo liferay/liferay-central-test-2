@@ -37,8 +37,6 @@ import org.springframework.context.ApplicationContext;
  */
 public class CyrusUserUtil {
 
-	public static final String CLASS_NAME = CyrusUserUtil.class.getName();
-
 	public static void remove(String userId)
 		throws NoSuchCyrusUserException, SystemException {
 
@@ -56,15 +54,26 @@ public class CyrusUserUtil {
 	}
 
 	public static CyrusUserPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CyrusUserUtil util = (CyrusUserUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(CyrusUserPersistence persistence) {
 		_persistence = persistence;
 	}
+
+	private static CyrusUserUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_util = (CyrusUserUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = CyrusUserUtil.class.getName();
+
+	private static CyrusUserUtil _util;
 
 	private CyrusUserPersistence _persistence;
 

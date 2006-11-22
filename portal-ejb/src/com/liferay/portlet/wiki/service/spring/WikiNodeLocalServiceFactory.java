@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WikiNodeLocalServiceFactory {
-	public static final String CLASS_NAME = WikiNodeLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = WikiNodeLocalService.class.getName() +
-		".transaction";
-
 	public static WikiNodeLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiNodeLocalServiceFactory factory = (WikiNodeLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static WikiNodeLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (WikiNodeLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(WikiNodeLocalService service) {
 		_service = service;
 	}
 
-	public static WikiNodeLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiNodeLocalService service = (WikiNodeLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static WikiNodeLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (WikiNodeLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = WikiNodeLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = WikiNodeLocalService.class.getName() +
+		".transaction";
+	private static WikiNodeLocalServiceFactory _factory;
+	private static WikiNodeLocalService _txImpl;
 	private WikiNodeLocalService _service;
 }

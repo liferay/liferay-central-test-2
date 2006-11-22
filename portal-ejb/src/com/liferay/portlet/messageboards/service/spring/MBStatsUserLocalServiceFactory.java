@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBStatsUserLocalServiceFactory {
-	public static final String CLASS_NAME = MBStatsUserLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = MBStatsUserLocalService.class.getName() +
-		".transaction";
-
 	public static MBStatsUserLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBStatsUserLocalServiceFactory factory = (MBStatsUserLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static MBStatsUserLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (MBStatsUserLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MBStatsUserLocalService service) {
 		_service = service;
 	}
 
-	public static MBStatsUserLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBStatsUserLocalService service = (MBStatsUserLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static MBStatsUserLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (MBStatsUserLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = MBStatsUserLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = MBStatsUserLocalService.class.getName() +
+		".transaction";
+	private static MBStatsUserLocalServiceFactory _factory;
+	private static MBStatsUserLocalService _txImpl;
 	private MBStatsUserLocalService _service;
 }

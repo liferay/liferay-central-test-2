@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBMessageFlagLocalServiceFactory {
-	public static final String CLASS_NAME = MBMessageFlagLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = MBMessageFlagLocalService.class.getName() +
-		".transaction";
-
 	public static MBMessageFlagLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageFlagLocalServiceFactory factory = (MBMessageFlagLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static MBMessageFlagLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (MBMessageFlagLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MBMessageFlagLocalService service) {
 		_service = service;
 	}
 
-	public static MBMessageFlagLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageFlagLocalService service = (MBMessageFlagLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static MBMessageFlagLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (MBMessageFlagLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = MBMessageFlagLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = MBMessageFlagLocalService.class.getName() +
+		".transaction";
+	private static MBMessageFlagLocalServiceFactory _factory;
+	private static MBMessageFlagLocalService _txImpl;
 	private MBMessageFlagLocalService _service;
 }

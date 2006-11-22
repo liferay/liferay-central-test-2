@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PortletPreferencesLocalServiceFactory {
-	public static final String CLASS_NAME = PortletPreferencesLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PortletPreferencesLocalService.class.getName() +
-		".transaction";
-
 	public static PortletPreferencesLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletPreferencesLocalServiceFactory factory = (PortletPreferencesLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PortletPreferencesLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PortletPreferencesLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PortletPreferencesLocalService service) {
 		_service = service;
 	}
 
-	public static PortletPreferencesLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletPreferencesLocalService service = (PortletPreferencesLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PortletPreferencesLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PortletPreferencesLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PortletPreferencesLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = PortletPreferencesLocalService.class.getName() +
+		".transaction";
+	private static PortletPreferencesLocalServiceFactory _factory;
+	private static PortletPreferencesLocalService _txImpl;
 	private PortletPreferencesLocalService _service;
 }

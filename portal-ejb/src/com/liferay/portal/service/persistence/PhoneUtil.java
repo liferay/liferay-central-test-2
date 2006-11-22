@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PhoneUtil {
-	public static final String CLASS_NAME = PhoneUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Phone"));
-
 	public static com.liferay.portal.model.Phone create(
 		java.lang.String phoneId) {
 		return getPersistence().create(phoneId);
@@ -54,16 +50,7 @@ public class PhoneUtil {
 		java.lang.String phoneId)
 		throws com.liferay.portal.NoSuchPhoneException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(phoneId));
@@ -81,16 +68,7 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone remove(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(phone);
@@ -108,17 +86,7 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = phone.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class PhoneUtil {
 	public static com.liferay.portal.model.Phone update(
 		com.liferay.portal.model.Phone phone, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = phone.isNew();
 
 		if (listener != null) {
@@ -499,16 +457,39 @@ public class PhoneUtil {
 	}
 
 	public static PhonePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PhoneUtil util = (PhoneUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(PhonePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static PhoneUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (PhoneUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = PhoneUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Phone"));
 	private static Log _log = LogFactory.getLog(PhoneUtil.class);
+	private static PhoneUtil _util;
 	private PhonePersistence _persistence;
 }

@@ -26,7 +26,7 @@
 		</property>
 	</bean>
 	<bean id="com.liferay.counter.service.spring.CounterLocalService.professional" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.counter.service.spring.CounterLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<!--<bean id="com.liferay.counter.service.spring.CounterLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
@@ -38,14 +38,15 @@
 				<prop key="*">PROPAGATION_REQUIRED</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
+	<alias name="com.liferay.counter.service.spring.CounterLocalService.professional" alias="com.liferay.counter.service.spring.CounterLocalService.transaction" />
 	<bean id="com.liferay.counter.service.spring.CounterLocalServiceFactory" class="com.liferay.counter.service.spring.CounterLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.counter.service.spring.CounterLocalService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.counter.service.spring.CounterService.professional" class="com.liferay.counter.service.impl.CounterServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.counter.service.spring.CounterService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<!--<bean id="com.liferay.counter.service.spring.CounterService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
@@ -57,7 +58,8 @@
 				<prop key="*">PROPAGATION_REQUIRED</prop>
 			</props>
 		</property>
-	</bean>
+	</bean>-->
+	<alias name="com.liferay.counter.service.spring.CounterService.professional" alias="com.liferay.counter.service.spring.CounterService.transaction" />
 	<bean id="com.liferay.counter.service.spring.CounterServiceFactory" class="com.liferay.counter.service.spring.CounterServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.counter.service.spring.CounterService.transaction" />

@@ -37,12 +37,14 @@ import org.springframework.context.ApplicationContext;
  */
 public class JCRFactoryUtil {
 
-	public static final String CLASS_NAME = JCRFactory.class.getName();
-
 	public static JCRFactory getJCRFactory() throws RepositoryException {
-		ApplicationContext ctx = SpringUtil.getContext();
+		if (_jcrFactory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		return (JCRFactory)ctx.getBean(CLASS_NAME);
+			_jcrFactory = (JCRFactory)ctx.getBean(_JCR_FACTORY);
+		}
+
+		return _jcrFactory;
 	}
 
 	public static Session createSession(String workspaceName)
@@ -66,5 +68,9 @@ public class JCRFactoryUtil {
 	public static void shutdown() throws RepositoryException {
 		getJCRFactory().shutdown();
 	}
+
+	private static final String _JCR_FACTORY = JCRFactory.class.getName();
+
+	private static JCRFactory _jcrFactory;
 
 }

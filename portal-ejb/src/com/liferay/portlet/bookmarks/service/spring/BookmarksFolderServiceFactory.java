@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class BookmarksFolderServiceFactory {
-	public static final String CLASS_NAME = BookmarksFolderServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = BookmarksFolderService.class.getName() +
-		".transaction";
-
 	public static BookmarksFolderService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BookmarksFolderServiceFactory factory = (BookmarksFolderServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static BookmarksFolderService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (BookmarksFolderService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(BookmarksFolderService service) {
 		_service = service;
 	}
 
-	public static BookmarksFolderService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BookmarksFolderService service = (BookmarksFolderService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static BookmarksFolderServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (BookmarksFolderServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = BookmarksFolderServiceFactory.class.getName();
+	private static final String _TX_IMPL = BookmarksFolderService.class.getName() +
+		".transaction";
+	private static BookmarksFolderServiceFactory _factory;
+	private static BookmarksFolderService _txImpl;
 	private BookmarksFolderService _service;
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WikiPageLocalServiceFactory {
-	public static final String CLASS_NAME = WikiPageLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = WikiPageLocalService.class.getName() +
-		".transaction";
-
 	public static WikiPageLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiPageLocalServiceFactory factory = (WikiPageLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static WikiPageLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (WikiPageLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(WikiPageLocalService service) {
 		_service = service;
 	}
 
-	public static WikiPageLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiPageLocalService service = (WikiPageLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static WikiPageLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (WikiPageLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = WikiPageLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = WikiPageLocalService.class.getName() +
+		".transaction";
+	private static WikiPageLocalServiceFactory _factory;
+	private static WikiPageLocalService _txImpl;
 	private WikiPageLocalService _service;
 }

@@ -36,13 +36,19 @@ import org.springframework.context.ApplicationContext;
  */
 public class IndexQueueUtil {
 
-	public static String NAME =
+	public static Queue getQueue() {
+		if (_queue == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_queue = (Queue)ctx.getBean(_QUEUE);
+		}
+
+		return _queue;
+	}
+
+	private static final String _QUEUE =
 		"com.liferay.portlet.messageboards.service.jms.IndexQueue";
 
-	public static Queue getQueue() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (Queue)ctx.getBean(NAME);
-	}
+	private static Queue _queue;
 
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class JournalStructureServiceFactory {
-	public static final String CLASS_NAME = JournalStructureServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = JournalStructureService.class.getName() +
-		".transaction";
-
 	public static JournalStructureService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalStructureServiceFactory factory = (JournalStructureServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static JournalStructureService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (JournalStructureService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(JournalStructureService service) {
 		_service = service;
 	}
 
-	public static JournalStructureService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalStructureService service = (JournalStructureService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static JournalStructureServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (JournalStructureServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = JournalStructureServiceFactory.class.getName();
+	private static final String _TX_IMPL = JournalStructureService.class.getName() +
+		".transaction";
+	private static JournalStructureServiceFactory _factory;
+	private static JournalStructureService _txImpl;
 	private JournalStructureService _service;
 }

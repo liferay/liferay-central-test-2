@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class RatingsStatsUtil {
-	public static final String CLASS_NAME = RatingsStatsUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.ratings.model.RatingsStats"));
-
 	public static com.liferay.portlet.ratings.model.RatingsStats create(
 		long statsId) {
 		return getPersistence().create(statsId);
@@ -56,9 +52,9 @@ public class RatingsStatsUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class RatingsStatsUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class RatingsStatsUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class RatingsStatsUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -242,16 +238,22 @@ public class RatingsStatsUtil {
 	}
 
 	public static RatingsStatsPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RatingsStatsUtil util = (RatingsStatsUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (RatingsStatsUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(RatingsStatsPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = RatingsStatsUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.ratings.model.RatingsStats"));
 	private static Log _log = LogFactory.getLog(RatingsStatsUtil.class);
+	private static RatingsStatsUtil _util;
 	private RatingsStatsPersistence _persistence;
 }

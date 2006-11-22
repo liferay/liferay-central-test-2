@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PortletUtil {
-	public static final String CLASS_NAME = PortletUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Portlet"));
-
 	public static com.liferay.portal.model.Portlet create(
 		com.liferay.portal.service.persistence.PortletPK portletPK) {
 		return getPersistence().create(portletPK);
@@ -54,16 +50,7 @@ public class PortletUtil {
 		com.liferay.portal.service.persistence.PortletPK portletPK)
 		throws com.liferay.portal.NoSuchPortletException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(portletPK));
@@ -81,16 +68,7 @@ public class PortletUtil {
 	public static com.liferay.portal.model.Portlet remove(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(portlet);
@@ -108,17 +86,7 @@ public class PortletUtil {
 	public static com.liferay.portal.model.Portlet update(
 		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = portlet.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class PortletUtil {
 	public static com.liferay.portal.model.Portlet update(
 		com.liferay.portal.model.Portlet portlet, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = portlet.isNew();
 
 		if (listener != null) {
@@ -269,16 +227,39 @@ public class PortletUtil {
 	}
 
 	public static PortletPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletUtil util = (PortletUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(PortletPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static PortletUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (PortletUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = PortletUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Portlet"));
 	private static Log _log = LogFactory.getLog(PortletUtil.class);
+	private static PortletUtil _util;
 	private PortletPersistence _persistence;
 }

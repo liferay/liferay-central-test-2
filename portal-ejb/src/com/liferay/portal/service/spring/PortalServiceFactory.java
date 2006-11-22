@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PortalServiceFactory {
-	public static final String CLASS_NAME = PortalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PortalService.class.getName() +
-		".transaction";
-
 	public static PortalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortalServiceFactory factory = (PortalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PortalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PortalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PortalService service) {
 		_service = service;
 	}
 
-	public static PortalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortalService service = (PortalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PortalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PortalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PortalServiceFactory.class.getName();
+	private static final String _TX_IMPL = PortalService.class.getName() +
+		".transaction";
+	private static PortalServiceFactory _factory;
+	private static PortalService _txImpl;
 	private PortalService _service;
 }

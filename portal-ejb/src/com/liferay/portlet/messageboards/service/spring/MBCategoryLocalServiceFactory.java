@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBCategoryLocalServiceFactory {
-	public static final String CLASS_NAME = MBCategoryLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = MBCategoryLocalService.class.getName() +
-		".transaction";
-
 	public static MBCategoryLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBCategoryLocalServiceFactory factory = (MBCategoryLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static MBCategoryLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (MBCategoryLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MBCategoryLocalService service) {
 		_service = service;
 	}
 
-	public static MBCategoryLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBCategoryLocalService service = (MBCategoryLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static MBCategoryLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (MBCategoryLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = MBCategoryLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = MBCategoryLocalService.class.getName() +
+		".transaction";
+	private static MBCategoryLocalServiceFactory _factory;
+	private static MBCategoryLocalService _txImpl;
 	private MBCategoryLocalService _service;
 }

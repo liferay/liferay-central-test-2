@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class IGImageLocalServiceFactory {
-	public static final String CLASS_NAME = IGImageLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = IGImageLocalService.class.getName() +
-		".transaction";
-
 	public static IGImageLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		IGImageLocalServiceFactory factory = (IGImageLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static IGImageLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (IGImageLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(IGImageLocalService service) {
 		_service = service;
 	}
 
-	public static IGImageLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		IGImageLocalService service = (IGImageLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static IGImageLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (IGImageLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = IGImageLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = IGImageLocalService.class.getName() +
+		".transaction";
+	private static IGImageLocalServiceFactory _factory;
+	private static IGImageLocalService _txImpl;
 	private IGImageLocalService _service;
 }

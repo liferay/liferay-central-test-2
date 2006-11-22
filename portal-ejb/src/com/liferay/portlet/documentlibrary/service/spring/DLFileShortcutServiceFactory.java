@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileShortcutServiceFactory {
-	public static final String CLASS_NAME = DLFileShortcutServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFileShortcutService.class.getName() +
-		".transaction";
-
 	public static DLFileShortcutService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileShortcutServiceFactory factory = (DLFileShortcutServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFileShortcutService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFileShortcutService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFileShortcutService service) {
 		_service = service;
 	}
 
-	public static DLFileShortcutService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileShortcutService service = (DLFileShortcutService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFileShortcutServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFileShortcutServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFileShortcutServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFileShortcutService.class.getName() +
+		".transaction";
+	private static DLFileShortcutServiceFactory _factory;
+	private static DLFileShortcutService _txImpl;
 	private DLFileShortcutService _service;
 }

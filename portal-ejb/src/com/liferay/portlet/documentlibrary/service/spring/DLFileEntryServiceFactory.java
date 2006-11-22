@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileEntryServiceFactory {
-	public static final String CLASS_NAME = DLFileEntryServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFileEntryService.class.getName() +
-		".transaction";
-
 	public static DLFileEntryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileEntryServiceFactory factory = (DLFileEntryServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFileEntryService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFileEntryService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFileEntryService service) {
 		_service = service;
 	}
 
-	public static DLFileEntryService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileEntryService service = (DLFileEntryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFileEntryServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFileEntryServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFileEntryServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFileEntryService.class.getName() +
+		".transaction";
+	private static DLFileEntryServiceFactory _factory;
+	private static DLFileEntryService _txImpl;
 	private DLFileEntryService _service;
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class RatingsEntryServiceFactory {
-	public static final String CLASS_NAME = RatingsEntryServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = RatingsEntryService.class.getName() +
-		".transaction";
-
 	public static RatingsEntryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RatingsEntryServiceFactory factory = (RatingsEntryServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static RatingsEntryService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (RatingsEntryService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(RatingsEntryService service) {
 		_service = service;
 	}
 
-	public static RatingsEntryService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RatingsEntryService service = (RatingsEntryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static RatingsEntryServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (RatingsEntryServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = RatingsEntryServiceFactory.class.getName();
+	private static final String _TX_IMPL = RatingsEntryService.class.getName() +
+		".transaction";
+	private static RatingsEntryServiceFactory _factory;
+	private static RatingsEntryService _txImpl;
 	private RatingsEntryService _service;
 }

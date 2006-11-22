@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WebsiteUtil {
-	public static final String CLASS_NAME = WebsiteUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Website"));
-
 	public static com.liferay.portal.model.Website create(
 		java.lang.String websiteId) {
 		return getPersistence().create(websiteId);
@@ -54,16 +50,7 @@ public class WebsiteUtil {
 		java.lang.String websiteId)
 		throws com.liferay.portal.NoSuchWebsiteException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(websiteId));
@@ -81,16 +68,7 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website remove(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(website);
@@ -108,17 +86,7 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = website.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website update(
 		com.liferay.portal.model.Website website, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = website.isNew();
 
 		if (listener != null) {
@@ -499,16 +457,39 @@ public class WebsiteUtil {
 	}
 
 	public static WebsitePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WebsiteUtil util = (WebsiteUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(WebsitePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static WebsiteUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (WebsiteUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = WebsiteUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Website"));
 	private static Log _log = LogFactory.getLog(WebsiteUtil.class);
+	private static WebsiteUtil _util;
 	private WebsitePersistence _persistence;
 }

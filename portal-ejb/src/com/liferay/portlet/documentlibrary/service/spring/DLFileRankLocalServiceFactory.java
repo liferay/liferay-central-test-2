@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileRankLocalServiceFactory {
-	public static final String CLASS_NAME = DLFileRankLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFileRankLocalService.class.getName() +
-		".transaction";
-
 	public static DLFileRankLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileRankLocalServiceFactory factory = (DLFileRankLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFileRankLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFileRankLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFileRankLocalService service) {
 		_service = service;
 	}
 
-	public static DLFileRankLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileRankLocalService service = (DLFileRankLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFileRankLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFileRankLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFileRankLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFileRankLocalService.class.getName() +
+		".transaction";
+	private static DLFileRankLocalServiceFactory _factory;
+	private static DLFileRankLocalService _txImpl;
 	private DLFileRankLocalService _service;
 }

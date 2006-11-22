@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WebsiteServiceFactory {
-	public static final String CLASS_NAME = WebsiteServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = WebsiteService.class.getName() +
-		".transaction";
-
 	public static WebsiteService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WebsiteServiceFactory factory = (WebsiteServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static WebsiteService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (WebsiteService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(WebsiteService service) {
 		_service = service;
 	}
 
-	public static WebsiteService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WebsiteService service = (WebsiteService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static WebsiteServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (WebsiteServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = WebsiteServiceFactory.class.getName();
+	private static final String _TX_IMPL = WebsiteService.class.getName() +
+		".transaction";
+	private static WebsiteServiceFactory _factory;
+	private static WebsiteService _txImpl;
 	private WebsiteService _service;
 }

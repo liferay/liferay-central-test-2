@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBMessageUtil {
-	public static final String CLASS_NAME = MBMessageUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessage"));
-
 	public static com.liferay.portlet.messageboards.model.MBMessage create(
 		com.liferay.portlet.messageboards.service.persistence.MBMessagePK mbMessagePK) {
 		return getPersistence().create(mbMessagePK);
@@ -56,9 +52,9 @@ public class MBMessageUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class MBMessageUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class MBMessageUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class MBMessageUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -434,16 +430,22 @@ public class MBMessageUtil {
 	}
 
 	public static MBMessagePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageUtil util = (MBMessageUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (MBMessageUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(MBMessagePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = MBMessageUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessage"));
 	private static Log _log = LogFactory.getLog(MBMessageUtil.class);
+	private static MBMessageUtil _util;
 	private MBMessagePersistence _persistence;
 }

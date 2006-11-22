@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class OrgLaborUtil {
-	public static final String CLASS_NAME = OrgLaborUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.OrgLabor"));
-
 	public static com.liferay.portal.model.OrgLabor create(
 		java.lang.String orgLaborId) {
 		return getPersistence().create(orgLaborId);
@@ -54,16 +50,7 @@ public class OrgLaborUtil {
 		java.lang.String orgLaborId)
 		throws com.liferay.portal.NoSuchOrgLaborException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(orgLaborId));
@@ -81,16 +68,7 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor remove(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(orgLabor);
@@ -108,17 +86,7 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = orgLabor.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class OrgLaborUtil {
 	public static com.liferay.portal.model.OrgLabor update(
 		com.liferay.portal.model.OrgLabor orgLabor, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = orgLabor.isNew();
 
 		if (listener != null) {
@@ -271,16 +229,39 @@ public class OrgLaborUtil {
 	}
 
 	public static OrgLaborPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		OrgLaborUtil util = (OrgLaborUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(OrgLaborPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static OrgLaborUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (OrgLaborUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = OrgLaborUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.OrgLabor"));
 	private static Log _log = LogFactory.getLog(OrgLaborUtil.class);
+	private static OrgLaborUtil _util;
 	private OrgLaborPersistence _persistence;
 }

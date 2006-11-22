@@ -38,15 +38,21 @@ import org.springframework.context.ApplicationContext;
  */
 public class MailQCFUtil {
 
-	public static String NAME = "com.liferay.mail.service.jms.MailQCF";
-
 	public static QueueConnectionFactory getQCF() {
-		ApplicationContext ctx = SpringUtil.getContext();
+		if (_qcf == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		PooledConnectionFactory pcf =
-			(PooledConnectionFactory)ctx.getBean(NAME);
+			PooledConnectionFactory pcf =
+				(PooledConnectionFactory)ctx.getBean(_QCF);
 
-		return (QueueConnectionFactory)pcf.getConnectionFactory();
+			_qcf = (QueueConnectionFactory)pcf.getConnectionFactory();
+		}
+
+		return _qcf;
 	}
+
+	private static final String _QCF = "com.liferay.mail.service.jms.MailQCF";
+
+	private static QueueConnectionFactory _qcf;
 
 }

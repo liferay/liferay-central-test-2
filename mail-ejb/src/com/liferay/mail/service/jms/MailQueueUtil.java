@@ -36,12 +36,19 @@ import org.springframework.context.ApplicationContext;
  */
 public class MailQueueUtil {
 
-	public static String NAME = "com.liferay.mail.service.jms.MailQueue";
-
 	public static Queue getQueue() {
-		ApplicationContext ctx = SpringUtil.getContext();
+		if (_queue == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		return (Queue)ctx.getBean(NAME);
+			_queue = (Queue)ctx.getBean(_QUEUE);
+		}
+
+		return _queue;
 	}
+
+	private static final String _QUEUE =
+		"com.liferay.mail.service.jms.MailQueue";
+
+	private static Queue _queue;
 
 }

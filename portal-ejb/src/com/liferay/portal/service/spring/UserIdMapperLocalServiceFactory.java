@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class UserIdMapperLocalServiceFactory {
-	public static final String CLASS_NAME = UserIdMapperLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = UserIdMapperLocalService.class.getName() +
-		".transaction";
-
 	public static UserIdMapperLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserIdMapperLocalServiceFactory factory = (UserIdMapperLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static UserIdMapperLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (UserIdMapperLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(UserIdMapperLocalService service) {
 		_service = service;
 	}
 
-	public static UserIdMapperLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserIdMapperLocalService service = (UserIdMapperLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static UserIdMapperLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (UserIdMapperLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = UserIdMapperLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = UserIdMapperLocalService.class.getName() +
+		".transaction";
+	private static UserIdMapperLocalServiceFactory _factory;
+	private static UserIdMapperLocalService _txImpl;
 	private UserIdMapperLocalService _service;
 }

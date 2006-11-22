@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class BlogsCategoryServiceFactory {
-	public static final String CLASS_NAME = BlogsCategoryServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = BlogsCategoryService.class.getName() +
-		".transaction";
-
 	public static BlogsCategoryService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BlogsCategoryServiceFactory factory = (BlogsCategoryServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static BlogsCategoryService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (BlogsCategoryService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(BlogsCategoryService service) {
 		_service = service;
 	}
 
-	public static BlogsCategoryService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		BlogsCategoryService service = (BlogsCategoryService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static BlogsCategoryServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (BlogsCategoryServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = BlogsCategoryServiceFactory.class.getName();
+	private static final String _TX_IMPL = BlogsCategoryService.class.getName() +
+		".transaction";
+	private static BlogsCategoryServiceFactory _factory;
+	private static BlogsCategoryService _txImpl;
 	private BlogsCategoryService _service;
 }

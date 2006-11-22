@@ -39,8 +39,6 @@ import org.springframework.context.ApplicationContext;
  */
 public class CyrusVirtualUtil {
 
-	public static final String CLASS_NAME = CyrusVirtualUtil.class.getName();
-
 	public static void remove(String emailAddress)
 		throws NoSuchCyrusVirtualException, SystemException {
 
@@ -66,15 +64,26 @@ public class CyrusVirtualUtil {
 	}
 
 	public static CyrusVirtualPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CyrusVirtualUtil util = (CyrusVirtualUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(CyrusVirtualPersistence persistence) {
 		_persistence = persistence;
 	}
+
+	private static CyrusVirtualUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_util = (CyrusVirtualUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = CyrusVirtualUtil.class.getName();
+
+	private static CyrusVirtualUtil _util;
 
 	private CyrusVirtualPersistence _persistence;
 

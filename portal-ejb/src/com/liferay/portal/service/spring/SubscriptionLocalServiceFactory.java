@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class SubscriptionLocalServiceFactory {
-	public static final String CLASS_NAME = SubscriptionLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = SubscriptionLocalService.class.getName() +
-		".transaction";
-
 	public static SubscriptionLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		SubscriptionLocalServiceFactory factory = (SubscriptionLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static SubscriptionLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (SubscriptionLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(SubscriptionLocalService service) {
 		_service = service;
 	}
 
-	public static SubscriptionLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		SubscriptionLocalService service = (SubscriptionLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static SubscriptionLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (SubscriptionLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = SubscriptionLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = SubscriptionLocalService.class.getName() +
+		".transaction";
+	private static SubscriptionLocalServiceFactory _factory;
+	private static SubscriptionLocalService _txImpl;
 	private SubscriptionLocalService _service;
 }

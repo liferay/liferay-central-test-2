@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class OrgLaborServiceFactory {
-	public static final String CLASS_NAME = OrgLaborServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = OrgLaborService.class.getName() +
-		".transaction";
-
 	public static OrgLaborService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		OrgLaborServiceFactory factory = (OrgLaborServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static OrgLaborService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (OrgLaborService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(OrgLaborService service) {
 		_service = service;
 	}
 
-	public static OrgLaborService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		OrgLaborService service = (OrgLaborService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static OrgLaborServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (OrgLaborServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = OrgLaborServiceFactory.class.getName();
+	private static final String _TX_IMPL = OrgLaborService.class.getName() +
+		".transaction";
+	private static OrgLaborServiceFactory _factory;
+	private static OrgLaborService _txImpl;
 	private OrgLaborService _service;
 }

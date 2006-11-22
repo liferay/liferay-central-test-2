@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ListTypeServiceFactory {
-	public static final String CLASS_NAME = ListTypeServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ListTypeService.class.getName() +
-		".transaction";
-
 	public static ListTypeService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ListTypeServiceFactory factory = (ListTypeServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ListTypeService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ListTypeService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ListTypeService service) {
 		_service = service;
 	}
 
-	public static ListTypeService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ListTypeService service = (ListTypeService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ListTypeServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ListTypeServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ListTypeServiceFactory.class.getName();
+	private static final String _TX_IMPL = ListTypeService.class.getName() +
+		".transaction";
+	private static ListTypeServiceFactory _factory;
+	private static ListTypeService _txImpl;
 	private ListTypeService _service;
 }

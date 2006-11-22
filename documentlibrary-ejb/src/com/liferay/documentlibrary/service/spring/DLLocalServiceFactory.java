@@ -34,20 +34,28 @@ import org.springframework.context.ApplicationContext;
  */
 public class DLLocalServiceFactory {
 
-	public static final String NAME = DLLocalServiceFactory.class.getName();
-
 	public static DLLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		DLLocalServiceFactory factory =
-			(DLLocalServiceFactory)ctx.getBean(NAME);
-
-		return factory._service;
+		return _getFactory()._service;
 	}
 
 	public void setService(DLLocalService service) {
 		_service = service;
 	}
+
+	private static DLLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_factory = (DLLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY =
+		DLLocalServiceFactory.class.getName();
+
+	private static DLLocalServiceFactory _factory;
 
 	private DLLocalService _service;
 

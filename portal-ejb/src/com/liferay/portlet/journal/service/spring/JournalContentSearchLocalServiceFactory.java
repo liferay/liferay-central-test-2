@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class JournalContentSearchLocalServiceFactory {
-	public static final String CLASS_NAME = JournalContentSearchLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = JournalContentSearchLocalService.class.getName() +
-		".transaction";
-
 	public static JournalContentSearchLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalContentSearchLocalServiceFactory factory = (JournalContentSearchLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static JournalContentSearchLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (JournalContentSearchLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(JournalContentSearchLocalService service) {
 		_service = service;
 	}
 
-	public static JournalContentSearchLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalContentSearchLocalService service = (JournalContentSearchLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static JournalContentSearchLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (JournalContentSearchLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = JournalContentSearchLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = JournalContentSearchLocalService.class.getName() +
+		".transaction";
+	private static JournalContentSearchLocalServiceFactory _factory;
+	private static JournalContentSearchLocalService _txImpl;
 	private JournalContentSearchLocalService _service;
 }

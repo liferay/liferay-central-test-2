@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBThreadLocalServiceFactory {
-	public static final String CLASS_NAME = MBThreadLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = MBThreadLocalService.class.getName() +
-		".transaction";
-
 	public static MBThreadLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBThreadLocalServiceFactory factory = (MBThreadLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static MBThreadLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (MBThreadLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MBThreadLocalService service) {
 		_service = service;
 	}
 
-	public static MBThreadLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBThreadLocalService service = (MBThreadLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static MBThreadLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (MBThreadLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = MBThreadLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = MBThreadLocalService.class.getName() +
+		".transaction";
+	private static MBThreadLocalServiceFactory _factory;
+	private static MBThreadLocalService _txImpl;
 	private MBThreadLocalService _service;
 }

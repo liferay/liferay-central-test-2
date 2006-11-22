@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class RatingsEntryLocalServiceFactory {
-	public static final String CLASS_NAME = RatingsEntryLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = RatingsEntryLocalService.class.getName() +
-		".transaction";
-
 	public static RatingsEntryLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RatingsEntryLocalServiceFactory factory = (RatingsEntryLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static RatingsEntryLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (RatingsEntryLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(RatingsEntryLocalService service) {
 		_service = service;
 	}
 
-	public static RatingsEntryLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RatingsEntryLocalService service = (RatingsEntryLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static RatingsEntryLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (RatingsEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = RatingsEntryLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = RatingsEntryLocalService.class.getName() +
+		".transaction";
+	private static RatingsEntryLocalServiceFactory _factory;
+	private static RatingsEntryLocalService _txImpl;
 	private RatingsEntryLocalService _service;
 }

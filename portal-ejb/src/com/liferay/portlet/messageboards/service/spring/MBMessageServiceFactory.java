@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBMessageServiceFactory {
-	public static final String CLASS_NAME = MBMessageServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = MBMessageService.class.getName() +
-		".transaction";
-
 	public static MBMessageService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageServiceFactory factory = (MBMessageServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static MBMessageService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (MBMessageService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MBMessageService service) {
 		_service = service;
 	}
 
-	public static MBMessageService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageService service = (MBMessageService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static MBMessageServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (MBMessageServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = MBMessageServiceFactory.class.getName();
+	private static final String _TX_IMPL = MBMessageService.class.getName() +
+		".transaction";
+	private static MBMessageServiceFactory _factory;
+	private static MBMessageService _txImpl;
 	private MBMessageService _service;
 }

@@ -34,19 +34,27 @@ import org.springframework.context.ApplicationContext;
  */
 public class LockServiceFactory {
 
-	public static final String NAME = LockServiceFactory.class.getName();
-
 	public static LockService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		LockServiceFactory factory = (LockServiceFactory)ctx.getBean(NAME);
-
-		return factory._service;
+		return _getFactory()._service;
 	}
 
 	public void setService(LockService service) {
 		_service = service;
 	}
+
+	private static LockServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_factory = (LockServiceFactory)ctx.getBean(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY = LockServiceFactory.class.getName();
+
+	private static LockServiceFactory _factory;
 
 	private LockService _service;
 

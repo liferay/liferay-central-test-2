@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class GroupUtil {
-	public static final String CLASS_NAME = GroupUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Group"));
-
 	public static com.liferay.portal.model.Group create(
 		java.lang.String groupId) {
 		return getPersistence().create(groupId);
@@ -54,16 +50,7 @@ public class GroupUtil {
 		java.lang.String groupId)
 		throws com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(groupId));
@@ -81,16 +68,7 @@ public class GroupUtil {
 	public static com.liferay.portal.model.Group remove(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(group);
@@ -108,17 +86,7 @@ public class GroupUtil {
 	public static com.liferay.portal.model.Group update(
 		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = group.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class GroupUtil {
 	public static com.liferay.portal.model.Group update(
 		com.liferay.portal.model.Group group, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = group.isNew();
 
 		if (listener != null) {
@@ -886,16 +844,39 @@ public class GroupUtil {
 	}
 
 	public static GroupPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		GroupUtil util = (GroupUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(GroupPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static GroupUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (GroupUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = GroupUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Group"));
 	private static Log _log = LogFactory.getLog(GroupUtil.class);
+	private static GroupUtil _util;
 	private GroupPersistence _persistence;
 }

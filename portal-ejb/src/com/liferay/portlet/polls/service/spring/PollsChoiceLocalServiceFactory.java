@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PollsChoiceLocalServiceFactory {
-	public static final String CLASS_NAME = PollsChoiceLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PollsChoiceLocalService.class.getName() +
-		".transaction";
-
 	public static PollsChoiceLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PollsChoiceLocalServiceFactory factory = (PollsChoiceLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PollsChoiceLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PollsChoiceLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PollsChoiceLocalService service) {
 		_service = service;
 	}
 
-	public static PollsChoiceLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PollsChoiceLocalService service = (PollsChoiceLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PollsChoiceLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PollsChoiceLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PollsChoiceLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = PollsChoiceLocalService.class.getName() +
+		".transaction";
+	private static PollsChoiceLocalServiceFactory _factory;
+	private static PollsChoiceLocalService _txImpl;
 	private PollsChoiceLocalService _service;
 }

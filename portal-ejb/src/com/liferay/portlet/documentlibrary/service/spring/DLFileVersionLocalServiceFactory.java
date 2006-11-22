@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileVersionLocalServiceFactory {
-	public static final String CLASS_NAME = DLFileVersionLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFileVersionLocalService.class.getName() +
-		".transaction";
-
 	public static DLFileVersionLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileVersionLocalServiceFactory factory = (DLFileVersionLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFileVersionLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFileVersionLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFileVersionLocalService service) {
 		_service = service;
 	}
 
-	public static DLFileVersionLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileVersionLocalService service = (DLFileVersionLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFileVersionLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFileVersionLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFileVersionLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFileVersionLocalService.class.getName() +
+		".transaction";
+	private static DLFileVersionLocalServiceFactory _factory;
+	private static DLFileVersionLocalService _txImpl;
 	private DLFileVersionLocalService _service;
 }

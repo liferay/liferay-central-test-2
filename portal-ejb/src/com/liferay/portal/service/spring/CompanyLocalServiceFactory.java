@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class CompanyLocalServiceFactory {
-	public static final String CLASS_NAME = CompanyLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = CompanyLocalService.class.getName() +
-		".transaction";
-
 	public static CompanyLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CompanyLocalServiceFactory factory = (CompanyLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static CompanyLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (CompanyLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(CompanyLocalService service) {
 		_service = service;
 	}
 
-	public static CompanyLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CompanyLocalService service = (CompanyLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static CompanyLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (CompanyLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = CompanyLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = CompanyLocalService.class.getName() +
+		".transaction";
+	private static CompanyLocalServiceFactory _factory;
+	private static CompanyLocalService _txImpl;
 	private CompanyLocalService _service;
 }

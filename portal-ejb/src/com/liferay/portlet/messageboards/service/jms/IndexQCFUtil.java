@@ -38,16 +38,22 @@ import org.springframework.context.ApplicationContext;
  */
 public class IndexQCFUtil {
 
-	public static String NAME =
+	public static QueueConnectionFactory getQCF() {
+		if (_qcf == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			PooledConnectionFactory pcf =
+				(PooledConnectionFactory)ctx.getBean(_QCF);
+
+			_qcf = (QueueConnectionFactory)pcf.getConnectionFactory();
+		}
+
+		return _qcf;
+	}
+
+	private static final String _QCF =
 		"com.liferay.portlet.messageboards.service.jms.IndexQCF";
 
-	public static QueueConnectionFactory getQCF() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		PooledConnectionFactory pcf =
-			(PooledConnectionFactory)ctx.getBean(NAME);
-
-		return (QueueConnectionFactory)pcf.getConnectionFactory();
-	}
+	private static QueueConnectionFactory _qcf;
 
 }

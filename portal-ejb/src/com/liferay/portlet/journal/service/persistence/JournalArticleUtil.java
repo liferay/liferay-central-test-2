@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class JournalArticleUtil {
-	public static final String CLASS_NAME = JournalArticleUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.journal.model.JournalArticle"));
-
 	public static com.liferay.portlet.journal.model.JournalArticle create(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK) {
 		return getPersistence().create(journalArticlePK);
@@ -56,9 +52,9 @@ public class JournalArticleUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class JournalArticleUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class JournalArticleUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class JournalArticleUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -546,16 +542,22 @@ public class JournalArticleUtil {
 	}
 
 	public static JournalArticlePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalArticleUtil util = (JournalArticleUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (JournalArticleUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(JournalArticlePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = JournalArticleUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.journal.model.JournalArticle"));
 	private static Log _log = LogFactory.getLog(JournalArticleUtil.class);
+	private static JournalArticleUtil _util;
 	private JournalArticlePersistence _persistence;
 }

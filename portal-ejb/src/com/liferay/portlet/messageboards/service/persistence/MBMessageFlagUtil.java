@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class MBMessageFlagUtil {
-	public static final String CLASS_NAME = MBMessageFlagUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessageFlag"));
-
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag create(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK mbMessageFlagPK) {
 		return getPersistence().create(mbMessageFlagPK);
@@ -56,9 +52,9 @@ public class MBMessageFlagUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class MBMessageFlagUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class MBMessageFlagUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class MBMessageFlagUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -430,16 +426,22 @@ public class MBMessageFlagUtil {
 	}
 
 	public static MBMessageFlagPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		MBMessageFlagUtil util = (MBMessageFlagUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (MBMessageFlagUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(MBMessageFlagPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = MBMessageFlagUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.messageboards.model.MBMessageFlag"));
 	private static Log _log = LogFactory.getLog(MBMessageFlagUtil.class);
+	private static MBMessageFlagUtil _util;
 	private MBMessageFlagPersistence _persistence;
 }

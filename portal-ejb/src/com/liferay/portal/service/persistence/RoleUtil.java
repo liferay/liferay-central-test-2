@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class RoleUtil {
-	public static final String CLASS_NAME = RoleUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Role"));
-
 	public static com.liferay.portal.model.Role create(java.lang.String roleId) {
 		return getPersistence().create(roleId);
 	}
@@ -52,16 +48,7 @@ public class RoleUtil {
 	public static com.liferay.portal.model.Role remove(java.lang.String roleId)
 		throws com.liferay.portal.NoSuchRoleException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(roleId));
@@ -79,16 +66,7 @@ public class RoleUtil {
 	public static com.liferay.portal.model.Role remove(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(role);
@@ -106,17 +84,7 @@ public class RoleUtil {
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = role.isNew();
 
 		if (listener != null) {
@@ -145,17 +113,7 @@ public class RoleUtil {
 	public static com.liferay.portal.model.Role update(
 		com.liferay.portal.model.Role role, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = role.isNew();
 
 		if (listener != null) {
@@ -669,16 +627,39 @@ public class RoleUtil {
 	}
 
 	public static RolePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		RoleUtil util = (RoleUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(RolePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static RoleUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (RoleUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = RoleUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Role"));
 	private static Log _log = LogFactory.getLog(RoleUtil.class);
+	private static RoleUtil _util;
 	private RolePersistence _persistence;
 }

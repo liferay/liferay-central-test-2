@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ContactServiceFactory {
-	public static final String CLASS_NAME = ContactServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ContactService.class.getName() +
-		".transaction";
-
 	public static ContactService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ContactServiceFactory factory = (ContactServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ContactService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ContactService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ContactService service) {
 		_service = service;
 	}
 
-	public static ContactService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ContactService service = (ContactService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ContactServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ContactServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ContactServiceFactory.class.getName();
+	private static final String _TX_IMPL = ContactService.class.getName() +
+		".transaction";
+	private static ContactServiceFactory _factory;
+	private static ContactService _txImpl;
 	private ContactService _service;
 }

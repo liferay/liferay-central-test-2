@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ShoppingOrderItemLocalServiceFactory {
-	public static final String CLASS_NAME = ShoppingOrderItemLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ShoppingOrderItemLocalService.class.getName() +
-		".transaction";
-
 	public static ShoppingOrderItemLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingOrderItemLocalServiceFactory factory = (ShoppingOrderItemLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ShoppingOrderItemLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ShoppingOrderItemLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ShoppingOrderItemLocalService service) {
 		_service = service;
 	}
 
-	public static ShoppingOrderItemLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingOrderItemLocalService service = (ShoppingOrderItemLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ShoppingOrderItemLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ShoppingOrderItemLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ShoppingOrderItemLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = ShoppingOrderItemLocalService.class.getName() +
+		".transaction";
+	private static ShoppingOrderItemLocalServiceFactory _factory;
+	private static ShoppingOrderItemLocalService _txImpl;
 	private ShoppingOrderItemLocalService _service;
 }

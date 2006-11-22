@@ -3487,11 +3487,6 @@ public class ServiceBuilder {
 
 		sb.append("public class " + entity.getName() + "Util {");
 
-		// Fields
-
-		sb.append("public static final String CLASS_NAME = " + entity.getName() + "Util.class.getName();");
-		sb.append("public static final String LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
-
 		// Methods
 
 		for (int i = 0; i < methods.size(); i++) {
@@ -3542,18 +3537,7 @@ public class ServiceBuilder {
 			sb.append(" {");
 
 			if (methodName.equals("remove") || methodName.equals("update")) {
-				sb.append("ModelListener listener = null;");
-
-				sb.append("if (Validator.isNotNull(LISTENER)) {");
-
-				sb.append("try {");
-				sb.append("listener = (ModelListener)Class.forName(LISTENER).newInstance();");
-				sb.append("}");
-				sb.append("catch (Exception e) {");
-				sb.append("_log.error(e);");
-				sb.append("}");
-
-				sb.append("}");
+				sb.append("ModelListener listener = _getListener();");
 
 				if (methodName.equals("update")) {
 					sb.append("boolean isNew = " + p0Name + ".isNew();");
@@ -3631,18 +3615,41 @@ public class ServiceBuilder {
 		}
 
 		sb.append("public static " + entity.getName() + "Persistence getPersistence() {");
-		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append(entity.getName() + "Util util = (" + entity.getName() + "Util)ctx.getBean(CLASS_NAME);");
-		sb.append("return util._persistence;");
+		sb.append("return _getUtil()._persistence;");
 		sb.append("}");
 
 		sb.append("public void setPersistence(" + entity.getName() + "Persistence persistence) {");
 		sb.append("_persistence = persistence;");
 		sb.append("}");
 
+		sb.append("private static " + entity.getName() + "Util _getUtil() {");
+		sb.append("if (_util == null) {");
+		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
+		sb.append("_util = (" + entity.getName() + "Util)ctx.getBean(_UTIL);");
+		sb.append("}");
+		sb.append("return _util;");
+		sb.append("}");
+
+		sb.append("private static ModelListener _getListener() {");
+		sb.append("if (Validator.isNotNull(_LISTENER)) {");
+		sb.append("try {");
+		sb.append("return (ModelListener)Class.forName(_LISTENER).newInstance();");
+		sb.append("}");
+		sb.append("catch (Exception e) {");
+		sb.append("_log.error(e);");
+		sb.append("}");
+		sb.append("}");
+		sb.append("return null;");
+		sb.append("}");
+
 		// Fields
 
+		sb.append("private static final String _UTIL = " + entity.getName() + "Util.class.getName();");
+		sb.append("private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(\"value.object.listener." + _packagePath + ".model." + entity.getName() + "\"));");
+
 		sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "Util.class);");
+
+		sb.append("private static " + entity.getName() + "Util _util;");
 
 		sb.append("private " + entity.getName() + "Persistence _persistence;");
 
@@ -3937,31 +3944,39 @@ public class ServiceBuilder {
 
 		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory {");
 
-		// Fields
-
-		sb.append("public static final String CLASS_NAME = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
-
-		sb.append("public static final String TRANSACTION_CLASS_NAME = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
-
 		// Methods
 
 		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getService() {");
+		sb.append("return _getFactory()._service;");
+		sb.append("}");
+
+		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
+		sb.append("if (_txImpl == null) {");
 		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)ctx.getBean(CLASS_NAME);");
-		sb.append("return factory._service;");
+		sb.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)ctx.getBean(_TX_IMPL);");
+		sb.append("}");
+		sb.append("return _txImpl;");
 		sb.append("}");
 
 		sb.append("public void setService(" + entity.getName() + _getSessionTypeName(sessionType) + "Service service) {");
 		sb.append("_service = service;");
 		sb.append("}");
 
-		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
+		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _getFactory() {");
+		sb.append("if (_factory == null) {");
 		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append(entity.getName() + _getSessionTypeName(sessionType) + "Service service = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)ctx.getBean(TRANSACTION_CLASS_NAME);");
-		sb.append("return service;");
+		sb.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)ctx.getBean(_FACTORY);");
+		sb.append("}");
+		sb.append("return _factory;");
 		sb.append("}");
 
 		// Fields
+
+		sb.append("private static final String _FACTORY = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.class.getName();");
+		sb.append("private static final String _TX_IMPL = " + entity.getName() + _getSessionTypeName(sessionType) + "Service.class.getName() + \".transaction\";");
+
+		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _factory;");
+		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "Service _txImpl;");
 
 		sb.append("private " + entity.getName() + _getSessionTypeName(sessionType) + "Service _service;");
 
@@ -4449,7 +4464,6 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType) throws IOException {
-		//XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
 		XClass xClass = _getXClass(_outputPath + "/service/spring/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
 
 		List methods = xClass.getMethods();
@@ -4463,20 +4477,6 @@ public class ServiceBuilder {
 		// Class declaration
 
 		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil {");
-
-		/*// Portlet id field
-
-		String portletKey = TextFormatter.format(_portletName, TextFormatter.A);
-
-		try {
-			PortletKeys portletKeys = new PortletKeys();
-
-			Field field = portletKeys.getClass().getField(portletKey);
-
-			sb.append("public static final String PORTLET_ID = \"" + field.get(portletKeys) + "\";");
-		}
-		catch (Exception e) {
-		}*/
 
 		// Methods
 

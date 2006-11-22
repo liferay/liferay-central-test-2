@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ShoppingOrderUtil {
-	public static final String CLASS_NAME = ShoppingOrderUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingOrder"));
-
 	public static com.liferay.portlet.shopping.model.ShoppingOrder create(
 		java.lang.String orderId) {
 		return getPersistence().create(orderId);
@@ -56,9 +52,9 @@ public class ShoppingOrderUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class ShoppingOrderUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class ShoppingOrderUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class ShoppingOrderUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -280,16 +276,22 @@ public class ShoppingOrderUtil {
 	}
 
 	public static ShoppingOrderPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingOrderUtil util = (ShoppingOrderUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (ShoppingOrderUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(ShoppingOrderPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = ShoppingOrderUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingOrder"));
 	private static Log _log = LogFactory.getLog(ShoppingOrderUtil.class);
+	private static ShoppingOrderUtil _util;
 	private ShoppingOrderPersistence _persistence;
 }

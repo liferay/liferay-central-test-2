@@ -34,19 +34,41 @@ import org.springframework.context.ApplicationContext;
  */
 public class MailServiceFactory {
 
-	public static final String NAME = MailServiceFactory.class.getName();
-
 	public static MailService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
+		return _getFactory()._service;
+	}
 
-		MailServiceFactory factory = (MailServiceFactory)ctx.getBean(NAME);
+	public static MailService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		return factory._service;
+			_txImpl = (MailService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(MailService service) {
 		_service = service;
 	}
+
+	private static MailServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_factory = (MailServiceFactory)ctx.getBean(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY = MailServiceFactory.class.getName();
+
+	private static final String _TX_IMPL =
+		MailService.class.getName() + ".transaction";
+
+	private static MailServiceFactory _factory;
+	private static MailService _txImpl;
 
 	private MailService _service;
 

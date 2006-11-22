@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFileRankUtil {
-	public static final String CLASS_NAME = DLFileRankUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileRank"));
-
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank create(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK dlFileRankPK) {
 		return getPersistence().create(dlFileRankPK);
@@ -56,9 +52,9 @@ public class DLFileRankUtil {
 			com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -84,9 +80,9 @@ public class DLFileRankUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -111,9 +107,9 @@ public class DLFileRankUtil {
 		throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -150,9 +146,9 @@ public class DLFileRankUtil {
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
 		ModelListener listener = null;
 
-		if (Validator.isNotNull(LISTENER)) {
+		if (Validator.isNotNull(_LISTENER)) {
 			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
+				listener = (ModelListener)Class.forName(_LISTENER).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);
@@ -324,16 +320,22 @@ public class DLFileRankUtil {
 	}
 
 	public static DLFileRankPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFileRankUtil util = (DLFileRankUtil)ctx.getBean(CLASS_NAME);
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (DLFileRankUtil)ctx.getBean(_UTIL);
+		}
 
-		return util._persistence;
+		return _util._persistence;
 	}
 
 	public void setPersistence(DLFileRankPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static final String _UTIL = DLFileRankUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.documentlibrary.model.DLFileRank"));
 	private static Log _log = LogFactory.getLog(DLFileRankUtil.class);
+	private static DLFileRankUtil _util;
 	private DLFileRankPersistence _persistence;
 }

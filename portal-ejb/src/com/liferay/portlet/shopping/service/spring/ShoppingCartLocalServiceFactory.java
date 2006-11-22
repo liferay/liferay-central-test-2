@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ShoppingCartLocalServiceFactory {
-	public static final String CLASS_NAME = ShoppingCartLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ShoppingCartLocalService.class.getName() +
-		".transaction";
-
 	public static ShoppingCartLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCartLocalServiceFactory factory = (ShoppingCartLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ShoppingCartLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ShoppingCartLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ShoppingCartLocalService service) {
 		_service = service;
 	}
 
-	public static ShoppingCartLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCartLocalService service = (ShoppingCartLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ShoppingCartLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ShoppingCartLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ShoppingCartLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = ShoppingCartLocalService.class.getName() +
+		".transaction";
+	private static ShoppingCartLocalServiceFactory _factory;
+	private static ShoppingCartLocalService _txImpl;
 	private ShoppingCartLocalService _service;
 }

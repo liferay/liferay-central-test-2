@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class LayoutLocalServiceFactory {
-	public static final String CLASS_NAME = LayoutLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = LayoutLocalService.class.getName() +
-		".transaction";
-
 	public static LayoutLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		LayoutLocalServiceFactory factory = (LayoutLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static LayoutLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (LayoutLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(LayoutLocalService service) {
 		_service = service;
 	}
 
-	public static LayoutLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		LayoutLocalService service = (LayoutLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static LayoutLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (LayoutLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = LayoutLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = LayoutLocalService.class.getName() +
+		".transaction";
+	private static LayoutLocalServiceFactory _factory;
+	private static LayoutLocalService _txImpl;
 	private LayoutLocalService _service;
 }

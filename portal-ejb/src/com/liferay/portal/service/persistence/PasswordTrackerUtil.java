@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PasswordTrackerUtil {
-	public static final String CLASS_NAME = PasswordTrackerUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.PasswordTracker"));
-
 	public static com.liferay.portal.model.PasswordTracker create(
 		java.lang.String passwordTrackerId) {
 		return getPersistence().create(passwordTrackerId);
@@ -54,16 +50,7 @@ public class PasswordTrackerUtil {
 		java.lang.String passwordTrackerId)
 		throws com.liferay.portal.NoSuchPasswordTrackerException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(passwordTrackerId));
@@ -82,16 +69,7 @@ public class PasswordTrackerUtil {
 	public static com.liferay.portal.model.PasswordTracker remove(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(passwordTracker);
@@ -109,17 +87,7 @@ public class PasswordTrackerUtil {
 	public static com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = passwordTracker.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class PasswordTrackerUtil {
 	public static com.liferay.portal.model.PasswordTracker update(
 		com.liferay.portal.model.PasswordTracker passwordTracker,
 		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = passwordTracker.isNew();
 
 		if (listener != null) {
@@ -269,16 +227,39 @@ public class PasswordTrackerUtil {
 	}
 
 	public static PasswordTrackerPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PasswordTrackerUtil util = (PasswordTrackerUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(PasswordTrackerPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static PasswordTrackerUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (PasswordTrackerUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = PasswordTrackerUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.PasswordTracker"));
 	private static Log _log = LogFactory.getLog(PasswordTrackerUtil.class);
+	private static PasswordTrackerUtil _util;
 	private PasswordTrackerPersistence _persistence;
 }

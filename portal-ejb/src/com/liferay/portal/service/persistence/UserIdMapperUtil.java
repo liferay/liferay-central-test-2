@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class UserIdMapperUtil {
-	public static final String CLASS_NAME = UserIdMapperUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserIdMapper"));
-
 	public static com.liferay.portal.model.UserIdMapper create(
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK) {
 		return getPersistence().create(userIdMapperPK);
@@ -54,16 +50,7 @@ public class UserIdMapperUtil {
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
 		throws com.liferay.portal.NoSuchUserIdMapperException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(userIdMapperPK));
@@ -82,16 +69,7 @@ public class UserIdMapperUtil {
 	public static com.liferay.portal.model.UserIdMapper remove(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(userIdMapper);
@@ -109,17 +87,7 @@ public class UserIdMapperUtil {
 	public static com.liferay.portal.model.UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = userIdMapper.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class UserIdMapperUtil {
 	public static com.liferay.portal.model.UserIdMapper update(
 		com.liferay.portal.model.UserIdMapper userIdMapper, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = userIdMapper.isNew();
 
 		if (listener != null) {
@@ -270,16 +228,39 @@ public class UserIdMapperUtil {
 	}
 
 	public static UserIdMapperPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		UserIdMapperUtil util = (UserIdMapperUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(UserIdMapperPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static UserIdMapperUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (UserIdMapperUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = UserIdMapperUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.UserIdMapper"));
 	private static Log _log = LogFactory.getLog(UserIdMapperUtil.class);
+	private static UserIdMapperUtil _util;
 	private UserIdMapperPersistence _persistence;
 }

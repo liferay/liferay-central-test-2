@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class WikiNodeServiceFactory {
-	public static final String CLASS_NAME = WikiNodeServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = WikiNodeService.class.getName() +
-		".transaction";
-
 	public static WikiNodeService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiNodeServiceFactory factory = (WikiNodeServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static WikiNodeService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (WikiNodeService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(WikiNodeService service) {
 		_service = service;
 	}
 
-	public static WikiNodeService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		WikiNodeService service = (WikiNodeService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static WikiNodeServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (WikiNodeServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = WikiNodeServiceFactory.class.getName();
+	private static final String _TX_IMPL = WikiNodeService.class.getName() +
+		".transaction";
+	private static WikiNodeServiceFactory _factory;
+	private static WikiNodeService _txImpl;
 	private WikiNodeService _service;
 }

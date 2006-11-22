@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ShoppingCouponLocalServiceFactory {
-	public static final String CLASS_NAME = ShoppingCouponLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = ShoppingCouponLocalService.class.getName() +
-		".transaction";
-
 	public static ShoppingCouponLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCouponLocalServiceFactory factory = (ShoppingCouponLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static ShoppingCouponLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (ShoppingCouponLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(ShoppingCouponLocalService service) {
 		_service = service;
 	}
 
-	public static ShoppingCouponLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ShoppingCouponLocalService service = (ShoppingCouponLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static ShoppingCouponLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (ShoppingCouponLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = ShoppingCouponLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = ShoppingCouponLocalService.class.getName() +
+		".transaction";
+	private static ShoppingCouponLocalServiceFactory _factory;
+	private static ShoppingCouponLocalService _txImpl;
 	private ShoppingCouponLocalService _service;
 }

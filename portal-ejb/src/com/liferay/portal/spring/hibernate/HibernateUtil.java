@@ -24,6 +24,9 @@ package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.CollectionFactory;
+
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -57,12 +60,36 @@ public class HibernateUtil {
 	public static SessionFactoryImplementor getSessionFactory(
 		String sessionFactoryName) {
 
-		ApplicationContext ctx = SpringUtil.getContext();
+		if (sessionFactoryName.equals(SPRING_HIBERNATE_SESSION_FACTORY)) {
+			if (_sessionFactory == null) {
+				ApplicationContext ctx = SpringUtil.getContext();
 
-		LocalSessionFactoryBean lsfb =
-			(LocalSessionFactoryBean)ctx.getBean(sessionFactoryName);
+				LocalSessionFactoryBean lsfb =
+					(LocalSessionFactoryBean)ctx.getBean(sessionFactoryName);
 
-		return (SessionFactoryImplementor)lsfb.getObject();
+				_sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
+			}
+
+			return _sessionFactory;
+		}
+		else {
+			SessionFactoryImplementor sessionFactory =
+				(SessionFactoryImplementor)_sessionFactories.get(
+					sessionFactoryName);
+
+			if (sessionFactory == null) {
+				ApplicationContext ctx = SpringUtil.getContext();
+
+				LocalSessionFactoryBean lsfb =
+					(LocalSessionFactoryBean)ctx.getBean(sessionFactoryName);
+
+				sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
+
+				_sessionFactories.put(sessionFactoryName, sessionFactory);
+			}
+
+			return sessionFactory;
+		}
 	}
 
 	public static Dialect getDialect() {
@@ -113,5 +140,8 @@ public class HibernateUtil {
 	}
 
 	private static Log _log = LogFactory.getLog(HibernateUtil.class);
+
+	private static SessionFactoryImplementor _sessionFactory;
+	private static Map _sessionFactories = CollectionFactory.getHashMap();
 
 }

@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DLFolderLocalServiceFactory {
-	public static final String CLASS_NAME = DLFolderLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DLFolderLocalService.class.getName() +
-		".transaction";
-
 	public static DLFolderLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFolderLocalServiceFactory factory = (DLFolderLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DLFolderLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DLFolderLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DLFolderLocalService service) {
 		_service = service;
 	}
 
-	public static DLFolderLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DLFolderLocalService service = (DLFolderLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DLFolderLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DLFolderLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DLFolderLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = DLFolderLocalService.class.getName() +
+		".transaction";
+	private static DLFolderLocalServiceFactory _factory;
+	private static DLFolderLocalService _txImpl;
 	private DLFolderLocalService _service;
 }

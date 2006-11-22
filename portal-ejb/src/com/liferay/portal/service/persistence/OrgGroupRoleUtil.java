@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class OrgGroupRoleUtil {
-	public static final String CLASS_NAME = OrgGroupRoleUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.OrgGroupRole"));
-
 	public static com.liferay.portal.model.OrgGroupRole create(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK) {
 		return getPersistence().create(orgGroupRolePK);
@@ -54,16 +50,7 @@ public class OrgGroupRoleUtil {
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
 		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(orgGroupRolePK));
@@ -82,16 +69,7 @@ public class OrgGroupRoleUtil {
 	public static com.liferay.portal.model.OrgGroupRole remove(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(orgGroupRole);
@@ -109,17 +87,7 @@ public class OrgGroupRoleUtil {
 	public static com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = orgGroupRole.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class OrgGroupRoleUtil {
 	public static com.liferay.portal.model.OrgGroupRole update(
 		com.liferay.portal.model.OrgGroupRole orgGroupRole, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = orgGroupRole.isNew();
 
 		if (listener != null) {
@@ -270,16 +228,39 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static OrgGroupRolePersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		OrgGroupRoleUtil util = (OrgGroupRoleUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(OrgGroupRolePersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static OrgGroupRoleUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (OrgGroupRoleUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = OrgGroupRoleUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.OrgGroupRole"));
 	private static Log _log = LogFactory.getLog(OrgGroupRoleUtil.class);
+	private static OrgGroupRoleUtil _util;
 	private OrgGroupRolePersistence _persistence;
 }

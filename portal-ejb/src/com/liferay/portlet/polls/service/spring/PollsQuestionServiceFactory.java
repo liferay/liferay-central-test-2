@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PollsQuestionServiceFactory {
-	public static final String CLASS_NAME = PollsQuestionServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PollsQuestionService.class.getName() +
-		".transaction";
-
 	public static PollsQuestionService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PollsQuestionServiceFactory factory = (PollsQuestionServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PollsQuestionService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PollsQuestionService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PollsQuestionService service) {
 		_service = service;
 	}
 
-	public static PollsQuestionService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PollsQuestionService service = (PollsQuestionService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PollsQuestionServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PollsQuestionServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PollsQuestionServiceFactory.class.getName();
+	private static final String _TX_IMPL = PollsQuestionService.class.getName() +
+		".transaction";
+	private static PollsQuestionServiceFactory _factory;
+	private static PollsQuestionService _txImpl;
 	private PollsQuestionService _service;
 }

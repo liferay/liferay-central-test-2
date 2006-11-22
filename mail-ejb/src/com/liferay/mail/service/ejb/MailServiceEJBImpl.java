@@ -23,8 +23,8 @@
 package com.liferay.mail.service.ejb;
 
 import com.liferay.mail.service.spring.MailService;
+import com.liferay.mail.service.spring.MailServiceFactory;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.util.mail.MailMessage;
 
 import java.rmi.RemoteException;
@@ -35,8 +35,6 @@ import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
 import javax.ejb.SessionContext;
 
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="MailServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,20 +43,12 @@ import org.springframework.context.ApplicationContext;
  */
 public class MailServiceEJBImpl implements MailService, SessionBean {
 
-	public static final String CLASS_NAME =
-		MailService.class.getName() + ".transaction";
-
-	public static MailService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-
-		return (MailService)ctx.getBean(CLASS_NAME);
-	}
-
 	public void addForward(
 			String userId, List filters, List emailAddresses, boolean leaveCopy)
 		throws RemoteException, SystemException {
 
-		getService().addForward(userId, filters, emailAddresses, leaveCopy);
+		MailServiceFactory.getTxImpl().addForward(
+			userId, filters, emailAddresses, leaveCopy);
 	}
 
 	public void addUser(
@@ -66,7 +56,7 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 			String lastName, String emailAddress)
 		throws RemoteException, SystemException {
 
-		getService().addUser(
+		MailServiceFactory.getTxImpl().addUser(
 			userId, password, firstName, middleName, lastName, emailAddress);
 	}
 
@@ -74,43 +64,44 @@ public class MailServiceEJBImpl implements MailService, SessionBean {
 			String userId, String emailAddress, String vacationMessage)
 		throws RemoteException, SystemException {
 
-		getService().addVacationMessage(userId, emailAddress, vacationMessage);
+		MailServiceFactory.getTxImpl().addVacationMessage(
+			userId, emailAddress, vacationMessage);
 	}
 
 	public void deleteEmailAddress(String userId)
 		throws RemoteException, SystemException {
 
-		getService().deleteEmailAddress(userId);
+		MailServiceFactory.getTxImpl().deleteEmailAddress(userId);
 	}
 
 	public void deleteUser(String userId)
 		throws RemoteException, SystemException {
 
-		getService().deleteUser(userId);
+		MailServiceFactory.getTxImpl().deleteUser(userId);
 	}
 
 	public void sendEmail(MailMessage mailMessage)
 		throws RemoteException, SystemException {
 
-		getService().sendEmail(mailMessage);
+		MailServiceFactory.getTxImpl().sendEmail(mailMessage);
 	}
 
 	public void updateBlocked(String userId, List blocked)
 		throws RemoteException, SystemException {
 
-		getService().updateBlocked(userId, blocked);
+		MailServiceFactory.getTxImpl().updateBlocked(userId, blocked);
 	}
 
 	public void updateEmailAddress(String userId, String emailAddress)
 		throws RemoteException, SystemException {
 
-		getService().updateEmailAddress(userId, emailAddress);
+		MailServiceFactory.getTxImpl().updateEmailAddress(userId, emailAddress);
 	}
 
 	public void updatePassword(String userId, String password)
 		throws RemoteException, SystemException {
 
-		getService().updatePassword(userId, password);
+		MailServiceFactory.getTxImpl().updatePassword(userId, password);
 	}
 
 	public void ejbCreate() throws CreateException {

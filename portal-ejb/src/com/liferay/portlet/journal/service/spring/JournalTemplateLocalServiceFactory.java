@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class JournalTemplateLocalServiceFactory {
-	public static final String CLASS_NAME = JournalTemplateLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = JournalTemplateLocalService.class.getName() +
-		".transaction";
-
 	public static JournalTemplateLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalTemplateLocalServiceFactory factory = (JournalTemplateLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static JournalTemplateLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (JournalTemplateLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(JournalTemplateLocalService service) {
 		_service = service;
 	}
 
-	public static JournalTemplateLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		JournalTemplateLocalService service = (JournalTemplateLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static JournalTemplateLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (JournalTemplateLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = JournalTemplateLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = JournalTemplateLocalService.class.getName() +
+		".transaction";
+	private static JournalTemplateLocalServiceFactory _factory;
+	private static JournalTemplateLocalService _txImpl;
 	private JournalTemplateLocalService _service;
 }

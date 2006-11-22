@@ -34,20 +34,42 @@ import org.springframework.context.ApplicationContext;
  */
 public class CounterServiceFactory {
 
-	public static final String NAME = CounterServiceFactory.class.getName();
-
 	public static CounterService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
+		return _getFactory()._service;
+	}
 
-		CounterServiceFactory factory =
-			(CounterServiceFactory)ctx.getBean(NAME);
+	public static CounterService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
 
-		return factory._service;
+			_txImpl = (CounterService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(CounterService service) {
 		_service = service;
 	}
+
+	private static CounterServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+
+			_factory = (CounterServiceFactory)ctx.getBean(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY =
+		CounterServiceFactory.class.getName();
+
+	private static final String _TX_IMPL =
+		CounterService.class.getName() + ".transaction";
+
+	private static CounterServiceFactory _factory;
+	private static CounterService _txImpl;
 
 	private CounterService _service;
 

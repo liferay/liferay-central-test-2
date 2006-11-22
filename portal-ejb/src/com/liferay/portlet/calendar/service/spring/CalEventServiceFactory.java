@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class CalEventServiceFactory {
-	public static final String CLASS_NAME = CalEventServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = CalEventService.class.getName() +
-		".transaction";
-
 	public static CalEventService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CalEventServiceFactory factory = (CalEventServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static CalEventService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (CalEventService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(CalEventService service) {
 		_service = service;
 	}
 
-	public static CalEventService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CalEventService service = (CalEventService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static CalEventServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (CalEventServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = CalEventServiceFactory.class.getName();
+	private static final String _TX_IMPL = CalEventService.class.getName() +
+		".transaction";
+	private static CalEventServiceFactory _factory;
+	private static CalEventService _txImpl;
 	private CalEventService _service;
 }

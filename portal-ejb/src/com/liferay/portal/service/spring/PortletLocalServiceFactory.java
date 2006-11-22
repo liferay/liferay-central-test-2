@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PortletLocalServiceFactory {
-	public static final String CLASS_NAME = PortletLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PortletLocalService.class.getName() +
-		".transaction";
-
 	public static PortletLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletLocalServiceFactory factory = (PortletLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PortletLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PortletLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PortletLocalService service) {
 		_service = service;
 	}
 
-	public static PortletLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PortletLocalService service = (PortletLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PortletLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PortletLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PortletLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = PortletLocalService.class.getName() +
+		".transaction";
+	private static PortletLocalServiceFactory _factory;
+	private static PortletLocalService _txImpl;
 	private PortletLocalService _service;
 }

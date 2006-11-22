@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class EmailAddressUtil {
-	public static final String CLASS_NAME = EmailAddressUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.EmailAddress"));
-
 	public static com.liferay.portal.model.EmailAddress create(
 		java.lang.String emailAddressId) {
 		return getPersistence().create(emailAddressId);
@@ -54,16 +50,7 @@ public class EmailAddressUtil {
 		java.lang.String emailAddressId)
 		throws com.liferay.portal.NoSuchEmailAddressException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(emailAddressId));
@@ -82,16 +69,7 @@ public class EmailAddressUtil {
 	public static com.liferay.portal.model.EmailAddress remove(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(emailAddress);
@@ -109,17 +87,7 @@ public class EmailAddressUtil {
 	public static com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = emailAddress.isNew();
 
 		if (listener != null) {
@@ -148,17 +116,7 @@ public class EmailAddressUtil {
 	public static com.liferay.portal.model.EmailAddress update(
 		com.liferay.portal.model.EmailAddress emailAddress, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = emailAddress.isNew();
 
 		if (listener != null) {
@@ -502,16 +460,39 @@ public class EmailAddressUtil {
 	}
 
 	public static EmailAddressPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		EmailAddressUtil util = (EmailAddressUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(EmailAddressPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static EmailAddressUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (EmailAddressUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = EmailAddressUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.EmailAddress"));
 	private static Log _log = LogFactory.getLog(EmailAddressUtil.class);
+	private static EmailAddressUtil _util;
 	private EmailAddressPersistence _persistence;
 }

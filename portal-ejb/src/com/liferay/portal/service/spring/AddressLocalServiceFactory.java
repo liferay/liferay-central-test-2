@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class AddressLocalServiceFactory {
-	public static final String CLASS_NAME = AddressLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = AddressLocalService.class.getName() +
-		".transaction";
-
 	public static AddressLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		AddressLocalServiceFactory factory = (AddressLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static AddressLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (AddressLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(AddressLocalService service) {
 		_service = service;
 	}
 
-	public static AddressLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		AddressLocalService service = (AddressLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static AddressLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (AddressLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = AddressLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = AddressLocalService.class.getName() +
+		".transaction";
+	private static AddressLocalServiceFactory _factory;
+	private static AddressLocalService _txImpl;
 	private AddressLocalService _service;
 }

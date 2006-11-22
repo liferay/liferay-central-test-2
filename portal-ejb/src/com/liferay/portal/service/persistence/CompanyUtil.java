@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class CompanyUtil {
-	public static final String CLASS_NAME = CompanyUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Company"));
-
 	public static com.liferay.portal.model.Company create(
 		java.lang.String companyId) {
 		return getPersistence().create(companyId);
@@ -54,16 +50,7 @@ public class CompanyUtil {
 		java.lang.String companyId)
 		throws com.liferay.portal.NoSuchCompanyException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(companyId));
@@ -81,16 +68,7 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company remove(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(company);
@@ -108,17 +86,7 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = company.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class CompanyUtil {
 	public static com.liferay.portal.model.Company update(
 		com.liferay.portal.model.Company company, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = company.isNew();
 
 		if (listener != null) {
@@ -216,16 +174,39 @@ public class CompanyUtil {
 	}
 
 	public static CompanyPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		CompanyUtil util = (CompanyUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(CompanyPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static CompanyUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (CompanyUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = CompanyUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Company"));
 	private static Log _log = LogFactory.getLog(CompanyUtil.class);
+	private static CompanyUtil _util;
 	private CompanyPersistence _persistence;
 }

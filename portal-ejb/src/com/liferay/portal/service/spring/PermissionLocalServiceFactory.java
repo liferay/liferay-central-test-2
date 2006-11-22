@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class PermissionLocalServiceFactory {
-	public static final String CLASS_NAME = PermissionLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = PermissionLocalService.class.getName() +
-		".transaction";
-
 	public static PermissionLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PermissionLocalServiceFactory factory = (PermissionLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static PermissionLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (PermissionLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(PermissionLocalService service) {
 		_service = service;
 	}
 
-	public static PermissionLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		PermissionLocalService service = (PermissionLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static PermissionLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (PermissionLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = PermissionLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = PermissionLocalService.class.getName() +
+		".transaction";
+	private static PermissionLocalServiceFactory _factory;
+	private static PermissionLocalService _txImpl;
 	private PermissionLocalService _service;
 }

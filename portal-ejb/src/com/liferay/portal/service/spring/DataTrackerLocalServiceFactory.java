@@ -33,27 +33,36 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class DataTrackerLocalServiceFactory {
-	public static final String CLASS_NAME = DataTrackerLocalServiceFactory.class.getName();
-	public static final String TRANSACTION_CLASS_NAME = DataTrackerLocalService.class.getName() +
-		".transaction";
-
 	public static DataTrackerLocalService getService() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DataTrackerLocalServiceFactory factory = (DataTrackerLocalServiceFactory)ctx.getBean(CLASS_NAME);
+		return _getFactory()._service;
+	}
 
-		return factory._service;
+	public static DataTrackerLocalService getTxImpl() {
+		if (_txImpl == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_txImpl = (DataTrackerLocalService)ctx.getBean(_TX_IMPL);
+		}
+
+		return _txImpl;
 	}
 
 	public void setService(DataTrackerLocalService service) {
 		_service = service;
 	}
 
-	public static DataTrackerLocalService getTxImpl() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		DataTrackerLocalService service = (DataTrackerLocalService)ctx.getBean(TRANSACTION_CLASS_NAME);
+	private static DataTrackerLocalServiceFactory _getFactory() {
+		if (_factory == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_factory = (DataTrackerLocalServiceFactory)ctx.getBean(_FACTORY);
+		}
 
-		return service;
+		return _factory;
 	}
 
+	private static final String _FACTORY = DataTrackerLocalServiceFactory.class.getName();
+	private static final String _TX_IMPL = DataTrackerLocalService.class.getName() +
+		".transaction";
+	private static DataTrackerLocalServiceFactory _factory;
+	private static DataTrackerLocalService _txImpl;
 	private DataTrackerLocalService _service;
 }

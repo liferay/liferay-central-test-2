@@ -41,10 +41,6 @@ import org.springframework.context.ApplicationContext;
  *
  */
 public class ContactUtil {
-	public static final String CLASS_NAME = ContactUtil.class.getName();
-	public static final String LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Contact"));
-
 	public static com.liferay.portal.model.Contact create(
 		java.lang.String contactId) {
 		return getPersistence().create(contactId);
@@ -54,16 +50,7 @@ public class ContactUtil {
 		java.lang.String contactId)
 		throws com.liferay.portal.NoSuchContactException, 
 			com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(findByPrimaryKey(contactId));
@@ -81,16 +68,7 @@ public class ContactUtil {
 	public static com.liferay.portal.model.Contact remove(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
+		ModelListener listener = _getListener();
 
 		if (listener != null) {
 			listener.onBeforeRemove(contact);
@@ -108,17 +86,7 @@ public class ContactUtil {
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = contact.isNew();
 
 		if (listener != null) {
@@ -147,17 +115,7 @@ public class ContactUtil {
 	public static com.liferay.portal.model.Contact update(
 		com.liferay.portal.model.Contact contact, boolean saveOrUpdate)
 		throws com.liferay.portal.SystemException {
-		ModelListener listener = null;
-
-		if (Validator.isNotNull(LISTENER)) {
-			try {
-				listener = (ModelListener)Class.forName(LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
+		ModelListener listener = _getListener();
 		boolean isNew = contact.isNew();
 
 		if (listener != null) {
@@ -267,16 +225,39 @@ public class ContactUtil {
 	}
 
 	public static ContactPersistence getPersistence() {
-		ApplicationContext ctx = SpringUtil.getContext();
-		ContactUtil util = (ContactUtil)ctx.getBean(CLASS_NAME);
-
-		return util._persistence;
+		return _getUtil()._persistence;
 	}
 
 	public void setPersistence(ContactPersistence persistence) {
 		_persistence = persistence;
 	}
 
+	private static ContactUtil _getUtil() {
+		if (_util == null) {
+			ApplicationContext ctx = SpringUtil.getContext();
+			_util = (ContactUtil)ctx.getBean(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = ContactUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portal.model.Contact"));
 	private static Log _log = LogFactory.getLog(ContactUtil.class);
+	private static ContactUtil _util;
 	private ContactPersistence _persistence;
 }
