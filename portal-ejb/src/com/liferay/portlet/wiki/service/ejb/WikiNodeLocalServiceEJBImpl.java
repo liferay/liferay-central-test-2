@@ -22,12 +22,8 @@
 
 package com.liferay.portlet.wiki.service.ejb;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
 import com.liferay.portlet.wiki.service.spring.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceFactory;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

@@ -25,7 +25,6 @@ package com.liferay.portlet.messageboards.smtp;
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.smtp.MessageListenerException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
@@ -112,7 +111,7 @@ public class MessageListenerImpl implements MessageListener {
 						categoryId);
 			}
 
-			Company company = CompanyLocalServiceUtil.getCompany(companyId);
+			CompanyLocalServiceUtil.getCompany(companyId);
 
 			User user = UserLocalServiceUtil.getUserByEmailAddress(
 				companyId, from);

@@ -23,20 +23,12 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.model.User;
+import com.liferay.portal.service.spring.PortalService;
+import com.liferay.portal.service.spring.UserService;
 import com.liferay.test.TestConstants;
 
 import java.util.Calendar;
 import java.util.Locale;
-import com.liferay.portal.service.ejb.UserServiceHome;
-import com.liferay.portal.service.spring.UserService;
-import com.liferay.portal.service.ejb.PortalServiceHome;
-import com.liferay.portal.service.spring.PortalService;
-
-import java.util.Properties;
-
-import javax.naming.InitialContext;
-
-import javax.rmi.PortableRemoteObject;
 
 /**
  * <a href="PortalEJBTest.java.html"><b><i>View Source</i></b></a>

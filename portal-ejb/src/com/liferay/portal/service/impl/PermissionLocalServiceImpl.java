@@ -313,9 +313,9 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		List userGroups = permissionCheckerBag.getUserGroups();
 		List userOrgs = permissionCheckerBag.getUserOrgs();
-		List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
-		List userUserGroupGroups =
-			permissionCheckerBag.getUserUserGroupGroups();
+		//List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
+		//List userUserGroupGroups =
+		//	permissionCheckerBag.getUserUserGroupGroups();
 		List groups = permissionCheckerBag.getGroups();
 		List roles = permissionCheckerBag.getRoles();
 

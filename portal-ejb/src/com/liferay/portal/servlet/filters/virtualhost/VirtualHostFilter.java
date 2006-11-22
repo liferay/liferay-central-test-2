@@ -49,7 +49,6 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -86,7 +85,6 @@ public class VirtualHostFilter implements Filter {
 		}
 
 		HttpServletRequest httpReq = (HttpServletRequest)req;
-		HttpServletResponse httpRes = (HttpServletResponse)res;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Received " + httpReq.getRequestURL());

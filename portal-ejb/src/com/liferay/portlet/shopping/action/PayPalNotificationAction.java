@@ -104,10 +104,6 @@ public class PayPalNotificationAction extends Action {
 
 			br.close();
 
-			if (_log.isDebugEnabled()) {
-				_log.debug("Receiving response from PayPal " + payPalStatus);
-			}
-
 			String itemName = ParamUtil.getString(req, "item_name");
 			String itemNumber = ParamUtil.getString(req, "item_number");
 			invoice = ParamUtil.getString(req, "invoice");
@@ -116,6 +112,18 @@ public class PayPalNotificationAction extends Action {
 			double paymentGross = ParamUtil.getDouble(req, "payment_gross");
 			String receiverEmail = ParamUtil.getString(req, "receiver_email");
 			String payerEmail = ParamUtil.getString(req, "payer_email");
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Receiving response from PayPal");
+				_log.debug("Item name " + itemName);
+				_log.debug("Item number " + itemNumber);
+				_log.debug("Invoice " + invoice);
+				_log.debug("Transaction ID " + txnId);
+				_log.debug("Payment status " + paymentStatus);
+				_log.debug("Payment gross " + paymentGross);
+				_log.debug("Receiver email " + receiverEmail);
+				_log.debug("Payer email " + payerEmail);
+			}
 
 			if (payPalStatus.equals("VERIFIED")) {
 				ShoppingOrderLocalServiceUtil.completeOrder(

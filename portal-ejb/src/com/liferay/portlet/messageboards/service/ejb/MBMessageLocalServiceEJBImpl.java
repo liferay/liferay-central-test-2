@@ -22,12 +22,8 @@
 
 package com.liferay.portlet.messageboards.service.ejb;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalService;
 import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceFactory;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

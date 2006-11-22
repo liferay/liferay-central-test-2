@@ -57,8 +57,6 @@ public class ViewAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		PortletPreferences prefs = req.getPreferences();
-
 		String src = transformSrc(config, req, res);
 
 		if (Validator.isNull(src)) {

@@ -22,12 +22,8 @@
 
 package com.liferay.portlet.journal.service.ejb;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceFactory;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

@@ -30,7 +30,6 @@ import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Country;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
@@ -382,7 +381,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		}
 
 		try {
-			Country country = CountryServiceUtil.getCountry(countryId);
+			CountryServiceUtil.getCountry(countryId);
 
 			ListTypeServiceUtil.validate(
 				statusId, ListType.ORGANIZATION_STATUS);

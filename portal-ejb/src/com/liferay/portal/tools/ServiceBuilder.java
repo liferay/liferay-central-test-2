@@ -3800,13 +3800,15 @@ public class ServiceBuilder {
 
 		// Imports
 
-		sb.append("import " + _springUtilClassName + ";");
 		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
-		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
+
+		for (int i = 0; i < methods.size(); i++) {
+			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
+		}
+
 		sb.append("import javax.ejb.CreateException;");
 		sb.append("import javax.ejb.SessionContext;");
 		sb.append("import javax.ejb.SessionBean;");
-		sb.append("import org.springframework.context.ApplicationContext;");
 
 		if (sessionType == _REMOTE) {
 			sb.append("import com.liferay.portal.service.impl.PrincipalSessionBean;");

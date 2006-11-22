@@ -23,10 +23,6 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.ContactService;
-import com.liferay.portal.service.spring.ContactServiceFactory;
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

@@ -22,12 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
 import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalServiceFactory;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

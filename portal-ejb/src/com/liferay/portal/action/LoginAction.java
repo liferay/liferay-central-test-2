@@ -298,7 +298,7 @@ public class LoginAction extends Action {
 
 		if (cmd.equals("already-registered")) {
 			try {
-				_login(req, res);
+				login(req, res);
 
 				if (GetterUtil.getBoolean(
 						PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE))) {
@@ -332,7 +332,7 @@ public class LoginAction extends Action {
 		}
 		else if (cmd.equals("forgot-password")) {
 			try {
-				_sendPassword(req);
+				sendPassword(req);
 
 				return mapping.findForward("portal.login");
 			}
@@ -357,7 +357,7 @@ public class LoginAction extends Action {
 		}
 	}
 
-	private void _login(HttpServletRequest req, HttpServletResponse res)
+	protected void login(HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
 		String login = ParamUtil.getString(req, "login").toLowerCase();
@@ -368,7 +368,7 @@ public class LoginAction extends Action {
 		login(req, res, login, password, rememberMe);
 	}
 
-	private void _sendPassword(HttpServletRequest req) throws Exception {
+	protected void sendPassword(HttpServletRequest req) throws Exception {
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 
 		String remoteAddr = req.getRemoteAddr();

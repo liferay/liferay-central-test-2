@@ -22,19 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.test.TestProps;
-
 import com.liferay.test.TestCase;
-import com.liferay.portal.model.User;
-import com.liferay.test.TestConstants;
-
-import java.util.Calendar;
-import java.util.Locale;
-import com.liferay.portal.service.ejb.PortalServiceHome;
-import com.liferay.portal.service.spring.PortalService;
-
-import java.util.Properties;
+import com.liferay.test.TestProps;
 
 import javax.naming.InitialContext;
 import javax.naming.NamingException;

@@ -24,9 +24,6 @@ package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.service.spring.PortletPreferencesLocalService;
 import com.liferay.portal.service.spring.PortletPreferencesLocalServiceFactory;
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

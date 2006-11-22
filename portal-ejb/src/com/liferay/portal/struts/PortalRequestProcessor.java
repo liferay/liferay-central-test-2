@@ -603,8 +603,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	protected String getLastPath(HttpServletRequest req) {
 		HttpSession ses = req.getSession();
 
-		String userId = PortalUtil.getUserId(req);
-
 		String portalURL = PortalUtil.getPortalURL(req, req.isSecure());
 		String mainPath = (String)req.getAttribute(WebKeys.MAIN_PATH);
 

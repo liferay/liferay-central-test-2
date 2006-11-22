@@ -1480,7 +1480,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		if (Validator.isNotNull(structureId)) {
-			JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
+			JournalStructureUtil.findByPrimaryKey(
 				new JournalStructurePK(companyId, structureId));
 
 			JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(

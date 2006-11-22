@@ -211,9 +211,6 @@ public class PermissionServiceImpl
 
 			String plid = primKey.substring(0, pos);
 
-			String layoutId = Layout.getLayoutId(plid);
-			String ownerId = Layout.getOwnerId(plid);
-
 			String portletId = primKey.substring(
 				pos + Portlet.LAYOUT_SEPARATOR.length() , primKey.length());
 

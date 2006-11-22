@@ -107,7 +107,6 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 				int maxQuantity = 0;
 				double price = amazonRankings.getListPrice();
 				double discount = 1 - amazonRankings.getOurPrice() / price;
-				boolean suggestedPrice = false;
 				boolean taxable = true;
 				double shipping = 0.0;
 				boolean useShippingFormula = true;

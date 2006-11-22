@@ -155,6 +155,16 @@ public class SourceFormatter {
 
 			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
 
+			ds = new DirectoryScanner();
+			ds.setIncludes(
+				new String[] {
+					"**\\test\\src\\**\\*.java",
+				});
+			ds.setBasedir(basedir);
+			ds.scan();
+
+			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
 			String[] files = (String[])list.toArray(new String[list.size()]);
 
 			for (int i = 0; i < files.length; i++) {
@@ -189,15 +199,6 @@ public class SourceFormatter {
 				}
 
 				if (newContent.indexOf(className + ".java.html") == -1) {
-					String viewSource =
-						"/**\n" +
-						" * <a href=\"" + className +
-							".java.html\"><b><i>View Source</i></b></a>\n" +
-						" *\n" +
-						" * @author  Brian Wing Shun Chan\n" +
-						" *\n" +
-						" */\n";
-
 					System.out.println("Java2HTML: " + files[i]);
 				}
 
@@ -464,7 +465,6 @@ public class SourceFormatter {
 
 		int lineCount = 0;
 
-		String prevLine = "";
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
@@ -483,8 +483,6 @@ public class SourceFormatter {
 			if (((line.length() - 1) > 79) && !line.startsWith("import ")) {
 				System.out.println("> 80: " + fileName + " " + lineCount);
 			}
-
-			prevLine = line;
 		}
 
 		br.close();

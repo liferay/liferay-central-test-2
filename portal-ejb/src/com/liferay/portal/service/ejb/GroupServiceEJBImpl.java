@@ -25,9 +25,6 @@ package com.liferay.portal.service.ejb;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 import com.liferay.portal.service.spring.GroupService;
 import com.liferay.portal.service.spring.GroupServiceFactory;
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

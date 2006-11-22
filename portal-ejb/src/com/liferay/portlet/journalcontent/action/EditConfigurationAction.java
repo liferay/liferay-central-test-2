@@ -24,8 +24,6 @@ package com.liferay.portlet.journalcontent.action;
 
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -145,9 +143,6 @@ public class EditConfigurationAction extends PortletAction {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			themeDisplay.getCompanyId(), portletResource);
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			portletResource, layout.getLayoutId(), layout.getOwnerId(),

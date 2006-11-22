@@ -285,7 +285,6 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 
 		DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
-		String oldFolderId = folder.getParentFolderId();
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(name);
