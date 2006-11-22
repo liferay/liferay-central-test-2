@@ -64,6 +64,15 @@ else {
 			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 		</c:if>
 
+		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+			
+			<%
+			String downloadURL = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
+			%>
+
+			<liferay-ui:icon image="download" url="<%= downloadURL %>" />
+		</c:if>
+
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -96,6 +105,15 @@ else {
 			/>
 
 			<liferay-ui:icon image="permissions" url="<%= shortcutPermissionsURL %>" />
+		</c:if>
+
+		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
+			
+			<%
+			String downloadShortcutURL = themeDisplay.getPathMain() + "/document_library/get_file?fileShortcutId=" + fileShortcut.getFileShortcutId();
+			%>
+
+			<liferay-ui:icon image="download" url="<%= downloadShortcutURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
