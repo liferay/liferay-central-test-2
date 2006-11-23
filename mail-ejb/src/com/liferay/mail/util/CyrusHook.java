@@ -59,7 +59,9 @@ public class CyrusHook implements Hook {
 
 				File file = new File(home + "/" + userId + ".procmail.forward");
 
-				if ((filters.size() > 0) || (emailAddresses.size() > 0)) {
+				if ((filters.size() > 0) || (emailAddresses.size() > 0) ||
+					(leaveCopy)) {
+
 					StringBuffer sb = new StringBuffer();
 
 					for (int i = 0; i < filters.size(); i++) {
@@ -79,17 +81,23 @@ public class CyrusHook implements Hook {
 						sb.append("| $DELIVER -e -a $USER -m user.$USER\n\n");
 					}
 
-					sb.append(":0\n");
-					sb.append("!");
+					if (emailAddresses.size() > 0) {
+						sb.append(":0\n");
+						sb.append("!");
 
-					for (int i = 0; i < emailAddresses.size(); i++) {
-						String emailAddress = (String)emailAddresses.get(i);
-						sb.append(" ").append(emailAddress);
+						for (int i = 0; i < emailAddresses.size(); i++) {
+							String emailAddress = (String)emailAddresses.get(i);
+							sb.append(" ").append(emailAddress);
+						}
 					}
 
-					sb.append("\n");
+					String content = sb.toString();
 
-					FileUtil.write(file, sb.toString());
+					while (content.endsWith("\n")) {
+						content = content.substring(0, content.length() - 1);
+					}
+
+					FileUtil.write(file, content);
 				}
 				else {
 					file.delete();

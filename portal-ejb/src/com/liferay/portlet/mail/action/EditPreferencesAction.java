@@ -85,8 +85,12 @@ public class EditPreferencesAction extends PortletAction {
 					req, "filterEmailAddress" + i);
 				String folder = ParamUtil.getString(req, "filterFolder" + i);
 
-				filters.add(emailAddress + "[$FILTER_SEPARATOR$]" + folder);
-				filterObjects.add(new Filter(emailAddress, folder));
+				if (Validator.isNotNull(emailAddress) &&
+					Validator.isNotNull(folder)) {
+
+					filters.add(emailAddress + "[$FILTER_SEPARATOR$]" + folder);
+					filterObjects.add(new Filter(emailAddress, folder));
+				}
 			}
 
 			prefs.setValues(
@@ -140,7 +144,11 @@ public class EditPreferencesAction extends PortletAction {
 					String emailAddress = kvp[0];
 					String folder = kvp[1];
 
-					filterObjects.add(new Filter(emailAddress, folder));
+					if (Validator.isNotNull(emailAddress) &&
+						Validator.isNotNull(folder)) {
+
+						filterObjects.add(new Filter(emailAddress, folder));
+					}
 				}
 			}
 
