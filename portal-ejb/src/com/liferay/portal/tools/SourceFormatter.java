@@ -280,31 +280,36 @@ public class SourceFormatter {
 				}
 
 				if (newContent.indexOf(";\n/**") != -1) {
-					newContent = StringUtil.replace(newContent,
+					newContent = StringUtil.replace(
+						newContent,
 						";\n/**",
 						";\n\n/**");
 				}
 
 				if (newContent.indexOf("\t/*\n\t *") != -1) {
-					newContent = StringUtil.replace(newContent,
+					newContent = StringUtil.replace(
+						newContent,
 						"\t/*\n\t *",
 						"\t/**\n\t *");
 				}
 
 				if (newContent.indexOf("if(") != -1) {
-					newContent = StringUtil.replace(newContent,
+					newContent = StringUtil.replace(
+						newContent,
 						"if(",
 						"if (");
 				}
 
 				if (newContent.indexOf("while(") != -1) {
-					newContent = StringUtil.replace(newContent,
+					newContent = StringUtil.replace(
+						newContent,
 						"while(",
 						"while (");
 				}
 
 				if (newContent.indexOf("\n\n\n") != -1) {
-					newContent = StringUtil.replace(newContent,
+					newContent = StringUtil.replace(
+						newContent,
 						"\n\n\n",
 						"\n\n");
 				}

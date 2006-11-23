@@ -296,11 +296,15 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.util.dao">
+	<category name="com.liferay.util.JNDIUtil">
 		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.util.ImageUtil">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.util.dao">
 		<priority value="ERROR" />
 	</category>
 

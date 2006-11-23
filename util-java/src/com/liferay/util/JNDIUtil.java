@@ -28,6 +28,9 @@ import java.util.Map;
 import javax.naming.Context;
 import javax.naming.NamingException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="JNDIUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -66,6 +69,10 @@ public class JNDIUtil {
 	private static Object _lookup(Context ctx, String location)
 		throws NamingException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Lookup " + location);
+		}
+
 		Object obj = null;
 
 		try {
@@ -77,15 +84,29 @@ public class JNDIUtil {
 
 			if (location.indexOf("java:comp/env/") != -1) {
 				try {
-					obj = ctx.lookup(
-						StringUtil.replace(location, "java:comp/env/", ""));
+					String newLocation = StringUtil.replace(
+						location, "java:comp/env/", "");
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n1.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 				catch (NamingException n2) {
 
 					// java:comp/env/ObjectName to java:ObjectName
 
-					obj = ctx.lookup(
-						StringUtil.replace(location, "comp/env/", ""));
+					String newLocation = StringUtil.replace(
+						location, "comp/env/", "");
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n2.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 			}
 
@@ -93,14 +114,29 @@ public class JNDIUtil {
 
 			else if (location.indexOf("java:") != -1) {
 				try {
-					obj = ctx.lookup(StringUtil.replace(location, "java:", ""));
+					String newLocation = StringUtil.replace(
+						location, "java:", "");
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n1.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 				catch (NamingException n2) {
 
 					// java:ObjectName to java:comp/env/ObjectName
 
-					obj = ctx.lookup(StringUtil.replace(
-						location, "java:", "java:comp/env/"));
+					String newLocation = StringUtil.replace(
+						location, "java:", "java:comp/env/");
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n2.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 			}
 
@@ -108,13 +144,27 @@ public class JNDIUtil {
 
 			else if (location.indexOf("java:") == -1) {
 				try {
-					obj = ctx.lookup("java:" + location);
+					String newLocation = "java:" + location;
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n1.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 				catch (NamingException n2) {
 
 					// ObjectName to java:comp/env/ObjectName
 
-					obj = ctx.lookup("java:comp/env/" + location);
+					String newLocation = "java:comp/env/" + location;
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(n2.getMessage());
+						_log.debug("Attempt " + newLocation);
+					}
+
+					obj = ctx.lookup(newLocation);
 				}
 			}
 			else {
@@ -124,6 +174,8 @@ public class JNDIUtil {
 
 		return obj;
 	}
+
+	private static Log _log = LogFactory.getLog(JNDIUtil.class);
 
 	private static Map _cache = new HashMap();
 
