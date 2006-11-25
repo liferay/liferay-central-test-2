@@ -32,6 +32,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.bean.BeanLocatorImpl">
+		<priority value="WARN" />
+	</category>
+
 	<category name="com.liferay.portal.deploy">
 		<priority value="INFO" />
 	</category>
