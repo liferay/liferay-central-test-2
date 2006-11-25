@@ -31,8 +31,6 @@ import com.liferay.util.Validator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="SubscriptionUtil.java.html"><b><i>View Source</i></b></a>
  *

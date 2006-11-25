@@ -3478,7 +3478,6 @@ public class ServiceBuilder {
 		sb.append("import com.liferay.util.Validator;");
 		sb.append("import org.apache.commons.logging.Log;");
 		sb.append("import org.apache.commons.logging.LogFactory;");
-		sb.append("import org.springframework.context.ApplicationContext;");
 
 		// Class declaration
 
