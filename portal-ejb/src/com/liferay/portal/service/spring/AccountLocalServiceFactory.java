@@ -22,10 +22,6 @@
 
 package com.liferay.portal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="AccountLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class AccountLocalServiceFactory {
 
 	public static AccountLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (AccountLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (AccountLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class AccountLocalServiceFactory {
 
 	private static AccountLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (AccountLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (AccountLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

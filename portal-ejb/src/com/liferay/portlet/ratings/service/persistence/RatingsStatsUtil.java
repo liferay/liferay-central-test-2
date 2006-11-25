@@ -23,7 +23,6 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -209,8 +208,7 @@ public class RatingsStatsUtil {
 
 	private static RatingsStatsUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (RatingsStatsUtil)ctx.getBean(_UTIL);
+			_util = (RatingsStatsUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,10 +22,6 @@
 
 package com.liferay.portal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="SubscriptionLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class SubscriptionLocalServiceFactory {
 
 	public static SubscriptionLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (SubscriptionLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (SubscriptionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class SubscriptionLocalServiceFactory {
 
 	private static SubscriptionLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (SubscriptionLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (SubscriptionLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.wiki.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="WikiPageLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class WikiPageLocalServiceFactory {
 
 	public static WikiPageLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (WikiPageLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (WikiPageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class WikiPageLocalServiceFactory {
 
 	private static WikiPageLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (WikiPageLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (WikiPageLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

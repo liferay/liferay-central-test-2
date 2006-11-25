@@ -22,10 +22,6 @@
 
 package com.liferay.portal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="OrganizationServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class OrganizationServiceFactory {
 
 	public static OrganizationService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (OrganizationService)ctx.getBean(_TX_IMPL);
+			_txImpl = (OrganizationService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class OrganizationServiceFactory {
 
 	private static OrganizationServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (OrganizationServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (OrganizationServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -22,10 +22,6 @@
 
 package com.liferay.portal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="ListTypeServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class ListTypeServiceFactory {
 
 	public static ListTypeService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (ListTypeService)ctx.getBean(_TX_IMPL);
+			_txImpl = (ListTypeService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class ListTypeServiceFactory {
 
 	private static ListTypeServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (ListTypeServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (ListTypeServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

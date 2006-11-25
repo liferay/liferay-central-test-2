@@ -25,6 +25,8 @@ package com.liferay.portal.events;
 import com.liferay.lock.service.spring.LockServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.spring.ImageLocalServiceUtil;
 import com.liferay.portal.service.spring.ReleaseLocalServiceUtil;
 import com.liferay.portal.struts.ActionException;
@@ -59,6 +61,10 @@ public class StartupAction extends SimpleAction {
 
 			SimpleCachePool.put(
 				StartupAction.class.getName() + ".uptime", new Date());
+
+			// Bean locator
+
+			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 			// Clear locks
 

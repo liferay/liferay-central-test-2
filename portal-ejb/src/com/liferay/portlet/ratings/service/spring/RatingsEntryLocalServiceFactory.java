@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.ratings.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="RatingsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class RatingsEntryLocalServiceFactory {
 
 	public static RatingsEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (RatingsEntryLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (RatingsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class RatingsEntryLocalServiceFactory {
 
 	private static RatingsEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (RatingsEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (RatingsEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

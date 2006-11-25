@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="MBMessageServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class MBMessageServiceFactory {
 
 	public static MBMessageService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (MBMessageService)ctx.getBean(_TX_IMPL);
+			_txImpl = (MBMessageService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class MBMessageServiceFactory {
 
 	private static MBMessageServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (MBMessageServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (MBMessageServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

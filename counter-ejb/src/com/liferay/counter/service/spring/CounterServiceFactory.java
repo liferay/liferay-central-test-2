@@ -22,9 +22,7 @@
 
 package com.liferay.counter.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="CounterServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -40,9 +38,7 @@ public class CounterServiceFactory {
 
 	public static CounterService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_txImpl = (CounterService)ctx.getBean(_TX_IMPL);
+			_txImpl = (CounterService)BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -54,9 +50,7 @@ public class CounterServiceFactory {
 
 	private static CounterServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_factory = (CounterServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (CounterServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

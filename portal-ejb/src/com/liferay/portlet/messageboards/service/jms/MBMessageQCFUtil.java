@@ -22,13 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.jms;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import javax.jms.QueueConnectionFactory;
 
 import org.apache.activemq.pool.PooledConnectionFactory;
-
-import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="MBMessageQCFUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,10 +38,8 @@ public class MBMessageQCFUtil {
 
 	public static QueueConnectionFactory getQCF() {
 		if (_qcf == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
 			PooledConnectionFactory pcf =
-				(PooledConnectionFactory)ctx.getBean(_QCF);
+				(PooledConnectionFactory)BeanLocatorUtil.locate(_QCF);
 
 			_qcf = (QueueConnectionFactory)pcf.getConnectionFactory();
 		}

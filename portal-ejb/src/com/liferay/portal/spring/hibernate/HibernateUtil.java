@@ -22,7 +22,7 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 
@@ -37,7 +37,6 @@ import org.hibernate.SessionFactory;
 import org.hibernate.dialect.Dialect;
 import org.hibernate.engine.SessionFactoryImplementor;
 
-import org.springframework.context.ApplicationContext;
 import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
 
 /**
@@ -62,10 +61,8 @@ public class HibernateUtil {
 
 		if (sessionFactoryName.equals(SPRING_HIBERNATE_SESSION_FACTORY)) {
 			if (_sessionFactory == null) {
-				ApplicationContext ctx = SpringUtil.getContext();
-
 				LocalSessionFactoryBean lsfb =
-					(LocalSessionFactoryBean)ctx.getBean(sessionFactoryName);
+					(LocalSessionFactoryBean)BeanLocatorUtil.locate(sessionFactoryName);
 
 				_sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
 			}
@@ -78,10 +75,8 @@ public class HibernateUtil {
 					sessionFactoryName);
 
 			if (sessionFactory == null) {
-				ApplicationContext ctx = SpringUtil.getContext();
-
 				LocalSessionFactoryBean lsfb =
-					(LocalSessionFactoryBean)ctx.getBean(sessionFactoryName);
+					(LocalSessionFactoryBean)BeanLocatorUtil.locate(sessionFactoryName);
 
 				sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
 

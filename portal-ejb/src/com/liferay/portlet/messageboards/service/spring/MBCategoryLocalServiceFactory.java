@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.messageboards.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="MBCategoryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class MBCategoryLocalServiceFactory {
 
 	public static MBCategoryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (MBCategoryLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (MBCategoryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class MBCategoryLocalServiceFactory {
 
 	private static MBCategoryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (MBCategoryLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (MBCategoryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

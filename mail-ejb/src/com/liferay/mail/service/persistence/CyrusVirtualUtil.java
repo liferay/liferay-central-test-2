@@ -25,11 +25,9 @@ package com.liferay.mail.service.persistence;
 import com.liferay.mail.NoSuchCyrusVirtualException;
 import com.liferay.mail.model.CyrusVirtual;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import java.util.List;
-
-import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="CyrusVirtualUtil.java.html"><b><i>View Source</i></b></a>
@@ -73,9 +71,7 @@ public class CyrusVirtualUtil {
 
 	private static CyrusVirtualUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_util = (CyrusVirtualUtil)ctx.getBean(_UTIL);
+			_util = (CyrusVirtualUtil)BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

@@ -22,9 +22,7 @@
 
 package com.liferay.lock.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="LockServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -44,9 +42,7 @@ public class LockServiceFactory {
 
 	private static LockServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_factory = (LockServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (LockServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

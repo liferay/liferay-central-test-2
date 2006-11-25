@@ -96,6 +96,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.kernel.bean.BeanLocatorUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.deploy">
 		<priority value="INFO" />
 	</category>

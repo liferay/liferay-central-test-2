@@ -23,7 +23,6 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -185,8 +184,7 @@ public class DataTrackerUtil {
 
 	private static DataTrackerUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (DataTrackerUtil)ctx.getBean(_UTIL);
+			_util = (DataTrackerUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

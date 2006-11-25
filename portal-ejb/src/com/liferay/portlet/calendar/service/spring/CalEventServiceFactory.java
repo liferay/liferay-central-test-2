@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.calendar.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="CalEventServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class CalEventServiceFactory {
 
 	public static CalEventService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (CalEventService)ctx.getBean(_TX_IMPL);
+			_txImpl = (CalEventService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class CalEventServiceFactory {
 
 	private static CalEventServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (CalEventServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (CalEventServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

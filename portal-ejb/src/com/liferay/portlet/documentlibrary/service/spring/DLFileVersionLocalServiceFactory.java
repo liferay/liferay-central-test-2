@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="DLFileVersionLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class DLFileVersionLocalServiceFactory {
 
 	public static DLFileVersionLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (DLFileVersionLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (DLFileVersionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class DLFileVersionLocalServiceFactory {
 
 	private static DLFileVersionLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (DLFileVersionLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (DLFileVersionLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

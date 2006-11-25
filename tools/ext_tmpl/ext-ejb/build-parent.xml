@@ -189,7 +189,7 @@
 			<arg value="classes/META-INF/ext-model-hints.xml" />
 			<arg value="classes/META-INF/ext-spring-enterprise.xml" />
 			<arg value="classes/META-INF/ext-spring-professional.xml" />
-			<arg value="com.liferay.portal.spring.util.SpringUtil" />
+			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

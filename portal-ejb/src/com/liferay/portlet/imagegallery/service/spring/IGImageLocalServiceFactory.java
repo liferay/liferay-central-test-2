@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="IGImageLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class IGImageLocalServiceFactory {
 
 	public static IGImageLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (IGImageLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (IGImageLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class IGImageLocalServiceFactory {
 
 	private static IGImageLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (IGImageLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (IGImageLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -23,7 +23,6 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -289,8 +288,7 @@ public class DLFileShortcutUtil {
 
 	private static DLFileShortcutUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (DLFileShortcutUtil)ctx.getBean(_UTIL);
+			_util = (DLFileShortcutUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

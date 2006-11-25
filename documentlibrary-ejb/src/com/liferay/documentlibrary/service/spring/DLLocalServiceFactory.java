@@ -22,9 +22,7 @@
 
 package com.liferay.documentlibrary.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
  * <a href="DLLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
@@ -44,9 +42,7 @@ public class DLLocalServiceFactory {
 
 	private static DLLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_factory = (DLLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (DLLocalServiceFactory)BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

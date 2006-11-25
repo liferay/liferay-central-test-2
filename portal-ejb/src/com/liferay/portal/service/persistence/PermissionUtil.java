@@ -23,7 +23,6 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -605,8 +604,7 @@ public class PermissionUtil {
 
 	private static PermissionUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (PermissionUtil)ctx.getBean(_UTIL);
+			_util = (PermissionUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

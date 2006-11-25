@@ -329,8 +329,8 @@ public class ServiceBuilder {
 
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springEntFileName,
-						  String springProFileName, String sprintUtilClassName,
-						  boolean build) {
+						  String springProFileName,
+						  String beanLocatorUtilClassName, boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -340,7 +340,7 @@ public class ServiceBuilder {
 			_modelHintsFileName = modelHintsFileName;
 			_springEntFileName = springEntFileName;
 			_springProFileName = springProFileName;
-			_springUtilClassName = sprintUtilClassName;
+			_beanLocatorUtilClassName = beanLocatorUtilClassName;
 
 			SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -716,8 +716,8 @@ public class ServiceBuilder {
 
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName,
-				_springEntFileName, _springProFileName, _springUtilClassName,
-				false);
+				_springEntFileName, _springProFileName,
+				_beanLocatorUtilClassName, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -3471,7 +3471,6 @@ public class ServiceBuilder {
 
 		// Imports
 
-		sb.append("import " + _springUtilClassName + ";");
 		sb.append("import com.liferay.portal.model.ModelListener;");
 		sb.append("import com.liferay.portal.util.PropsUtil;");
 		sb.append("import com.liferay.util.GetterUtil;");
@@ -3622,8 +3621,7 @@ public class ServiceBuilder {
 
 		sb.append("private static " + entity.getName() + "Util _getUtil() {");
 		sb.append("if (_util == null) {");
-		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append("_util = (" + entity.getName() + "Util)ctx.getBean(_UTIL);");
+		sb.append("_util = (" + entity.getName() + "Util)" + _beanLocatorUtilClassName + ".locate(_UTIL);");
 		sb.append("}");
 		sb.append("return _util;");
 		sb.append("}");
@@ -3935,11 +3933,6 @@ public class ServiceBuilder {
 
 		sb.append("package " + _packagePath + ".service.spring;");
 
-		// Imports
-
-		sb.append("import " + _springUtilClassName + ";");
-		sb.append("import org.springframework.context.ApplicationContext;");
-
 		// Class declaration
 
 		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory {");
@@ -3952,8 +3945,7 @@ public class ServiceBuilder {
 
 		sb.append("public static " + entity.getName() + _getSessionTypeName(sessionType) + "Service getTxImpl() {");
 		sb.append("if (_txImpl == null) {");
-		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)ctx.getBean(_TX_IMPL);");
+		sb.append("_txImpl = (" + entity.getName() + _getSessionTypeName(sessionType) + "Service)" + _beanLocatorUtilClassName + ".locate(_TX_IMPL);");
 		sb.append("}");
 		sb.append("return _txImpl;");
 		sb.append("}");
@@ -3964,8 +3956,7 @@ public class ServiceBuilder {
 
 		sb.append("private static " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory _getFactory() {");
 		sb.append("if (_factory == null) {");
-		sb.append("ApplicationContext ctx = SpringUtil.getContext();");
-		sb.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)ctx.getBean(_FACTORY);");
+		sb.append("_factory = (" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory)" + _beanLocatorUtilClassName + ".locate(_FACTORY);");
 		sb.append("}");
 		sb.append("return _factory;");
 		sb.append("}");
@@ -5342,7 +5333,7 @@ public class ServiceBuilder {
 	private String _modelHintsFileName;
 	private String _springEntFileName;
 	private String _springProFileName;
-	private String _springUtilClassName;
+	private String _beanLocatorUtilClassName;
 	private String _portalRoot;
 	private String _portletName;
 	private String _portletShortName;

@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.blogs.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="BlogsEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class BlogsEntryLocalServiceFactory {
 
 	public static BlogsEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (BlogsEntryLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (BlogsEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class BlogsEntryLocalServiceFactory {
 
 	private static BlogsEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (BlogsEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (BlogsEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

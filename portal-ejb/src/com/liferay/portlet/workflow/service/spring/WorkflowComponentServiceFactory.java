@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.workflow.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="WorkflowComponentServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class WorkflowComponentServiceFactory {
 
 	public static WorkflowComponentService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (WorkflowComponentService)ctx.getBean(_TX_IMPL);
+			_txImpl = (WorkflowComponentService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class WorkflowComponentServiceFactory {
 
 	private static WorkflowComponentServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (WorkflowComponentServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (WorkflowComponentServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

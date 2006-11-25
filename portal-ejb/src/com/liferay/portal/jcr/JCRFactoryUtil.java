@@ -22,12 +22,10 @@
 
 package com.liferay.portal.jcr;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-
-import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="JCRFactoryUtil.java.html"><b><i>View Source</i></b></a>
@@ -39,9 +37,7 @@ public class JCRFactoryUtil {
 
 	public static JCRFactory getJCRFactory() throws RepositoryException {
 		if (_jcrFactory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_jcrFactory = (JCRFactory)ctx.getBean(_JCR_FACTORY);
+			_jcrFactory = (JCRFactory)BeanLocatorUtil.locate(_JCR_FACTORY);
 		}
 
 		return _jcrFactory;

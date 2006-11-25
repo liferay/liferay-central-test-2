@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="DLFileShortcutLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class DLFileShortcutLocalServiceFactory {
 
 	public static DLFileShortcutLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (DLFileShortcutLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (DLFileShortcutLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class DLFileShortcutLocalServiceFactory {
 
 	private static DLFileShortcutLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (DLFileShortcutLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (DLFileShortcutLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

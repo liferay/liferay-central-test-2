@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.polls.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="PollsQuestionLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class PollsQuestionLocalServiceFactory {
 
 	public static PollsQuestionLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (PollsQuestionLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (PollsQuestionLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class PollsQuestionLocalServiceFactory {
 
 	private static PollsQuestionLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (PollsQuestionLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (PollsQuestionLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

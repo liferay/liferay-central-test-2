@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.bookmarks.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="BookmarksEntryLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class BookmarksEntryLocalServiceFactory {
 
 	public static BookmarksEntryLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (BookmarksEntryLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (BookmarksEntryLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class BookmarksEntryLocalServiceFactory {
 
 	private static BookmarksEntryLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (BookmarksEntryLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (BookmarksEntryLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

@@ -9,26 +9,6 @@
 	<target name="compile">
         <antcall target="compile-common" />
         <antcall target="build-common-java.compile" />
-
-		<copy todir="classes/com/liferay/portal/definitions">
-			<fileset dir="${project.dir}/definitions" />
-		</copy>
-
-		<copy todir="classes">
-			<fileset dir="src">
-				<include name="**/dependencies/**" />
-			</fileset>
-		</copy>
-
-		<copy todir="classes">
-			<fileset dir="src">
-				<include name="**/service.xml" />
-			</fileset>
-		</copy>
-
-		<ant dir="../util-bridges" target="jar" inheritAll="false" />
-		<ant dir="../util-java" target="jar" inheritAll="false" />
-		<ant dir="../util-taglib" target="deploy" inheritAll="false" />
 	</target>
 
 	<target name="compile-common">
@@ -84,6 +64,26 @@
 	</target>
 
 	<target name="jar" depends="compile">
+		<copy todir="classes/com/liferay/portal/definitions">
+			<fileset dir="${project.dir}/definitions" />
+		</copy>
+
+		<copy todir="classes">
+			<fileset dir="src">
+				<include name="**/dependencies/**" />
+			</fileset>
+		</copy>
+
+		<copy todir="classes">
+			<fileset dir="src">
+				<include name="**/service.xml" />
+			</fileset>
+		</copy>
+
+		<ant dir="../util-bridges" target="jar" inheritAll="false" />
+		<ant dir="../util-java" target="jar" inheritAll="false" />
+		<ant dir="../util-taglib" target="deploy" inheritAll="false" />
+
 		<manifest file="classes/META-INF/MANIFEST.MF.JOnAS">
 			<attribute name="Class-Path" value="${classpath.manifest.jonas}" />
 			<attribute name="Genic-Jonas-Version" value="${app.server.ejbgen.version}" />
@@ -291,7 +291,7 @@
 			<arg value="classes/META-INF/portal-model-hints.xml" />
 			<arg value="classes/META-INF/portal-spring-enterprise.xml" />
 			<arg value="classes/META-INF/portal-spring-professional.xml" />
-			<arg value="com.liferay.portal.spring.util.SpringUtil" />
+			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

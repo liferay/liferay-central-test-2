@@ -23,7 +23,6 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -238,8 +237,7 @@ public class ShoppingOrderItemUtil {
 
 	private static ShoppingOrderItemUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (ShoppingOrderItemUtil)ctx.getBean(_UTIL);
+			_util = (ShoppingOrderItemUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

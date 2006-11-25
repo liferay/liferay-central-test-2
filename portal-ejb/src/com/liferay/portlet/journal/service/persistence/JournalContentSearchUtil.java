@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.model.ModelListener;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -400,8 +399,7 @@ public class JournalContentSearchUtil {
 
 	private static JournalContentSearchUtil _getUtil() {
 		if (_util == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_util = (JournalContentSearchUtil)ctx.getBean(_UTIL);
+			_util = (JournalContentSearchUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
 		}
 
 		return _util;

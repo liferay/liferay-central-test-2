@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.journal.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="JournalArticleLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class JournalArticleLocalServiceFactory {
 
 	public static JournalArticleLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (JournalArticleLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (JournalArticleLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class JournalArticleLocalServiceFactory {
 
 	private static JournalArticleLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (JournalArticleLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (JournalArticleLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

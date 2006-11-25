@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.documentlibrary.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="DLFileRankLocalServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class DLFileRankLocalServiceFactory {
 
 	public static DLFileRankLocalService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (DLFileRankLocalService)ctx.getBean(_TX_IMPL);
+			_txImpl = (DLFileRankLocalService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class DLFileRankLocalServiceFactory {
 
 	private static DLFileRankLocalServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (DLFileRankLocalServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (DLFileRankLocalServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

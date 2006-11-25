@@ -22,11 +22,9 @@
 
 package com.liferay.mail.service.jms;
 
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 import javax.jms.Queue;
-
-import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="MailQueueUtil.java.html"><b><i>View Source</i></b></a>
@@ -38,9 +36,7 @@ public class MailQueueUtil {
 
 	public static Queue getQueue() {
 		if (_queue == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-
-			_queue = (Queue)ctx.getBean(_QUEUE);
+			_queue = (Queue)BeanLocatorUtil.locate(_QUEUE);
 		}
 
 		return _queue;

@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.shopping.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="ShoppingItemServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class ShoppingItemServiceFactory {
 
 	public static ShoppingItemService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (ShoppingItemService)ctx.getBean(_TX_IMPL);
+			_txImpl = (ShoppingItemService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class ShoppingItemServiceFactory {
 
 	private static ShoppingItemServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (ShoppingItemServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (ShoppingItemServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;

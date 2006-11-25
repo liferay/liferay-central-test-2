@@ -22,10 +22,6 @@
 
 package com.liferay.portlet.imagegallery.service.spring;
 
-import com.liferay.portal.spring.util.SpringUtil;
-
-import org.springframework.context.ApplicationContext;
-
 /**
  * <a href="IGFolderServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,8 +35,7 @@ public class IGFolderServiceFactory {
 
 	public static IGFolderService getTxImpl() {
 		if (_txImpl == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_txImpl = (IGFolderService)ctx.getBean(_TX_IMPL);
+			_txImpl = (IGFolderService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
 		}
 
 		return _txImpl;
@@ -52,8 +47,7 @@ public class IGFolderServiceFactory {
 
 	private static IGFolderServiceFactory _getFactory() {
 		if (_factory == null) {
-			ApplicationContext ctx = SpringUtil.getContext();
-			_factory = (IGFolderServiceFactory)ctx.getBean(_FACTORY);
+			_factory = (IGFolderServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
 		}
 
 		return _factory;
