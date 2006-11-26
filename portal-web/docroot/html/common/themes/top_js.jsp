@@ -129,13 +129,19 @@
 	
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			//Messaging.init("<%= request.getRemoteUser() %>");
-			Event.observe(window, "load", function() {Messaging.init("<%= request.getRemoteUser() %>");});
+			Event.observe(window, "load", function() {
+				Messaging.init("<%= request.getRemoteUser() %>");
+			});
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
-			Event.observe(window, "load", ReverseAjax.initialize);
-			Event.observe(window, "unload", ReverseAjax.release);
+			Event.observe(window, "load", function() {
+				setTimeout("ReverseAjax.initialize()", 2000);
+			});
+			
+			Event.observe(window, "unload", function() {
+				ReverseAjax.release();
+			});
 		</c:if>
 		
 		<%
