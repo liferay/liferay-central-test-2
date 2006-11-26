@@ -150,6 +150,8 @@
 			<forward name="/portal/render_portlet" path="/portal/render_portlet.jsp" />
 		</action>
 
+		<action path="/portal/reverse_ajax" type="com.liferay.portal.action.ReverseAjaxAction" />
+
 		<action path="/portal/session_click" type="com.liferay.portal.action.SessionClickAction" />
 
 		<action path="/portal/session_tree_js_click" type="com.liferay.portal.action.SessionTreeJSClickAction" />

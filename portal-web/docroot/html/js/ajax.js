@@ -175,6 +175,45 @@ var AjaxUtil = {
 	}
 }
 
+var ReverseAjax = {
+	initialize: function() {
+		Event.observe(window, "unload", function() {ReverseAjax.release();});
+		ReverseAjax.request();
+	},
+	
+	request: function() {
+		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax",
+			{
+				onComplete: ReverseAjax.response,
+				reverseAjax: true
+			});
+	},
+	
+	response: function(xmlHttpRequest) {
+		var res = createJSONObject(xmlHttpRequest.responseText);
+		var status = res.status;
+		
+		if (status && status != "failure") {
+			if (status == "success") {
+				if (res.chatMessages) {
+					Messaging.getChatsReturn(res.chatMessages);
+				}
+				if (res.chatRoster) {
+					MessagingRoster.getEntriesReturn(res.chatRoster);
+				}
+			}
+			else if (status == "timedOut") {
+			}
+
+			ReverseAjax.request();
+		}
+	},
+	
+	release : function() {
+		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax?release=1", {reverseAjax:true});
+	}
+}
+
 function createJSONObject(JSONText) {
 	return eval("(" + JSONText + ")");
 }

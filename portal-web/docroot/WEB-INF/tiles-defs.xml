@@ -17,7 +17,6 @@
 	<definition name="portal" path="/common/themes/portal.jsp">
 		<put name="title" value="" />
 		<put name="selectable" value="false" />
-		<put name="pop_up" value="false" />
 	</definition>
 
 	<definition name="portal.change_password" extends="portal">
@@ -69,10 +68,7 @@
 		<put name="content" value="/portal/test.jsp" />
 	</definition>
 
-	<definition name="portal.upload_progress_poller" extends="portal">
-		<put name="content" value="/portal/upload_progress_poller.jsp" />
-		<put name="pop_up" value="true" />
-	</definition>
+	<definition name="portal.upload_progress_poller" path="/portal/upload_progress_poller.jsp" />
 
 	<!-- Address Book -->
 

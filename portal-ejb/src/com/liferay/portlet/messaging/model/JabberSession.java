@@ -60,14 +60,6 @@ public class JabberSession {
 		_messageListener = messageListener;
 	}
 
-	public MessageWait getMessageWait() {
-		return _messageWait;
-	}
-
-	public void setMessageWait(MessageWait messageWait) {
-		_messageWait = messageWait;
-	}
-
 	public Roster getRoster() {
 		return _roster;
 	}
@@ -87,7 +79,6 @@ public class JabberSession {
 	private XMPPConnection _connection;
 	private PacketCollector _collector;
 	private MessageListener _messageListener;
-	private MessageWait _messageWait;
 	private Roster _roster;
 	private RosterUpdateListener _rosterListener;
 

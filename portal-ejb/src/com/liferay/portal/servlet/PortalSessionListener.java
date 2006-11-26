@@ -70,6 +70,7 @@ public class PortalSessionListener implements HttpSessionListener {
 		HttpSession ses = event.getSession();
 
 		ses.removeAttribute(WebKeys.PORTLET_SESSION_TRACKER);
+		ses.removeAttribute(WebKeys.REVERSE_AJAX);
 
 		MessagingUtil.closeXMPPConnection(ses);
 

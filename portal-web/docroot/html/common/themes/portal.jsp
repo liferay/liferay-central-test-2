@@ -24,32 +24,16 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<tiles:useAttribute id="tilesPopUp" name="pop_up" classname="java.lang.String" ignore="true" />
-
 <%
-boolean popUp = GetterUtil.getBoolean(tilesPopUp);
-
 String scroll = ParamUtil.getString(request, "scroll");
 %>
 
 <c:choose>
-	<c:when test="<%= popUp || themeDisplay.isStatePopUp() %>">
+	<c:when test="<%= themeDisplay.isStatePopUp() %>">
 		<liferay-theme:include page="portal_pop_up.jsp" />
 	</c:when>
 	<c:otherwise>
 		<liferay-theme:include page="portal_normal.jsp" />
-
-		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			<script language="JavaScript">
-				Messaging.init("<%= request.getRemoteUser() %>");
-			</script>
-		</c:if>
-
-		<c:if test="<%= Validator.isNotNull(scroll) %>">
-			<script language="JavaScript" event="onLoad()" for="window">
-				document.getElementById("<%= scroll %>").scrollIntoView();
-			</script>
-		</c:if>
 	</c:otherwise>
 </c:choose>
 

@@ -22,18 +22,10 @@
 
 package com.liferay.portlet.messaging.util;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.chat.model.RosterUpdateListener;
-import com.liferay.portlet.messaging.model.JabberSession;
-import com.liferay.portlet.messaging.model.MessageListener;
-import com.liferay.portlet.messaging.model.MessageWait;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -48,8 +40,22 @@ import org.jivesoftware.smack.filter.PacketFilter;
 import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
-
+import org.jivesoftware.smack.packet.RosterPacket;
+import org.json.JSONArray;
 import org.json.JSONObject;
+
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.chat.model.RosterUpdateListener;
+import com.liferay.portlet.messaging.model.JabberSession;
+import com.liferay.portlet.messaging.model.MessageListener;
+import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringPool;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -68,7 +74,8 @@ public class MessagingUtil {
 	public static String USER_PASSWORD = GetterUtil.getString(
 		PropsUtil.get(PropsUtil.JABBER_XMPP_USER_PASSWORD), "liferayllc");
 
-	public static JSONObject addRosterEntry(HttpSession ses, User user)
+	public static JSONObject addRosterEntry(
+			HttpSession ses, User user)
 		throws PortalException, SystemException, XMPPException {
 
 		JSONObject jo = new JSONObject();
@@ -118,14 +125,6 @@ public class MessagingUtil {
 				con.removePacketListener(jabberSes.getMessageListener());
 
 				con.close();
-
-				MessageWait msgWait = jabberSes.getMessageWait();
-
-				if (msgWait != null) {
-					jabberSes.setMessageWait(null);
-
-					msgWait.notifyWait();
-				}
 
 				ses.removeAttribute(WebKeys.JABBER_XMPP_SESSION);
 			}
@@ -200,6 +199,36 @@ public class MessagingUtil {
 		}
 	}
 
+	public static JSONObject getChatMessages(HttpSession ses) {
+		JSONArray ja = new JSONArray();
+		JSONObject jo = new JSONObject();
+		PacketCollector collector = getCollector(ses);
+		Message message = getNextMessage(collector);
+		Roster roster = getRoster(ses);
+
+		while (message != null) {
+			JSONObject jMsg = new JSONObject();
+			String fromId = (String)message.getProperty("fromId");
+
+			jMsg.put("body", message.getBody());
+			jMsg.put("category", message.getProperty("category"));
+			jMsg.put("toId", message.getProperty("toId"));
+			jMsg.put("toName", message.getProperty("toName"));
+			jMsg.put("fromId", fromId);
+			jMsg.put("fromName", message.getProperty("fromName"));
+			jMsg.put("status", getPresence(roster.getPresence(getXmppId(fromId))));
+
+			ja.put(jMsg);
+
+			message = getNextMessage(collector);
+		}
+
+		jo.put("chat", ja);
+		jo.put("status", "success");
+
+		return jo;
+	}
+
 	public static PacketCollector getCollector(HttpSession ses) {
 		JabberSession jabberSes = (JabberSession)ses.getAttribute(
 			WebKeys.JABBER_XMPP_SESSION);
@@ -235,6 +264,43 @@ public class MessagingUtil {
 			WebKeys.JABBER_XMPP_SESSION);
 
 		return jabberSes.getRoster();
+	}
+
+	public static JSONObject getRosterEntries(HttpSession ses) {
+		JSONObject jo = new JSONObject();
+		Roster roster = getRoster(ses);
+		List rosterList = new ArrayList();
+
+		Iterator rosterEntries = roster.getEntries();
+		JSONArray ja = new JSONArray();
+
+		while (rosterEntries.hasNext()) {
+			RosterEntry entry = (RosterEntry)rosterEntries.next();
+
+			if (entry.getType() != RosterPacket.ItemType.FROM) {
+				rosterList.add(entry);
+			}
+		}
+
+		if (rosterList.size() > 0) {
+			Collections.sort(rosterList, new NameComparator());
+
+			for (int i = 0; i < rosterList.size(); i++) {
+
+				JSONObject jEntry = new JSONObject();
+				RosterEntry entry = (RosterEntry)rosterList.get(i);
+
+				jEntry.put("user", getUserId(entry));
+				jEntry.put("name", entry.getName());
+				jEntry.put("status", getPresence(roster
+					.getPresence(entry.getUser())));
+				ja.put(jEntry);
+			}
+		}
+
+		jo.put("roster", ja);
+
+		return jo;
 	}
 
 	public static String getUserId(RosterEntry entry) {
@@ -276,9 +342,9 @@ public class MessagingUtil {
 			String toName, String bodyText)
 		throws XMPPException {
 
-		XMPPConnection con = MessagingUtil.getConnection(ses);
+		XMPPConnection con = getConnection(ses);
 
-		Chat chat = con.createChat(MessagingUtil.getXmppId(toId));
+		Chat chat = con.createChat(getXmppId(toId));
 
 		Message message = chat.createMessage();
 

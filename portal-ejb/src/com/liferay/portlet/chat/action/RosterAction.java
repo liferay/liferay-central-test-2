@@ -69,7 +69,7 @@ public class RosterAction extends JSONAction {
 			jo = addEntry(req);
 		}
 		else if ("getEntries".equals(cmd)) {
-			jo = getEntries(req);
+			jo = MessagingUtil.getRosterEntries(req.getSession());
 		}
 		else if ("deleteEntries".equals(cmd)) {
 			jo = deleteEntries(req);
@@ -120,43 +120,6 @@ public class RosterAction extends JSONAction {
 		catch (Exception e) {
 			jo.put("status", "failure");
 		}
-
-		return jo;
-	}
-
-	protected JSONObject getEntries(HttpServletRequest req) {
-		JSONObject jo = new JSONObject();
-		Roster roster = MessagingUtil.getRoster(req.getSession());
-		List rosterList = new ArrayList();
-
-		Iterator rosterEntries = roster.getEntries();
-		JSONArray ja = new JSONArray();
-
-		while (rosterEntries.hasNext()) {
-			RosterEntry entry = (RosterEntry)rosterEntries.next();
-
-			if (entry.getType() != RosterPacket.ItemType.FROM) {
-				rosterList.add(entry);
-			}
-		}
-
-		if (rosterList.size() > 0) {
-			Collections.sort(rosterList, new NameComparator());
-
-			for (int i = 0; i < rosterList.size(); i++) {
-
-				JSONObject jEntry = new JSONObject();
-				RosterEntry entry = (RosterEntry)rosterList.get(i);
-
-				jEntry.put("user", MessagingUtil.getUserId(entry));
-				jEntry.put("name", entry.getName());
-				jEntry.put("status", MessagingUtil.getPresence(roster
-					.getPresence(entry.getUser())));
-				ja.put(jEntry);
-			}
-		}
-
-		jo.put("roster", ja);
 
 		return jo;
 	}

@@ -253,6 +253,8 @@ public class WebKeys {
 
 	public static final String RENDER_PORTLET_RESOURCE = "RENDER_PORTLET_RESOURCE";
 
+	public static final String REVERSE_AJAX = "REVERSE_AJAX";
+
 	public static final String ROLE = "ROLE";
 
 	public static final String ROOT_PATH = "ROOT_PATH";

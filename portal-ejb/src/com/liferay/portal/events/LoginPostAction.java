@@ -25,6 +25,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.ReverseAjax;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
 import com.liferay.portal.service.spring.GroupLocalServiceUtil;
@@ -71,6 +72,12 @@ public class LoginPostAction extends Action {
 
 			String companyId = PortalUtil.getCompanyId(req);
 			String userId = PortalUtil.getUserId(req);
+
+			if (GetterUtil.getBoolean(
+				PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED))) {
+
+				ses.setAttribute(WebKeys.REVERSE_AJAX, new ReverseAjax());
+			}
 
 			MessagingUtil.createXMPPConnection(ses, userId);
 

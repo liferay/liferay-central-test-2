@@ -22,37 +22,20 @@
 
 package com.liferay.portlet.messaging.action;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+import org.json.JSONObject;
+
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.messaging.model.JabberSession;
-import com.liferay.portlet.messaging.model.MessageWait;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-import com.liferay.portlet.messaging.util.comparator.NameComparator;
 import com.liferay.util.ParamUtil;
-
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-
-import org.jivesoftware.smack.PacketCollector;
-import org.jivesoftware.smack.Roster;
-import org.jivesoftware.smack.RosterEntry;
-import org.jivesoftware.smack.packet.Message;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
 
 /**
  * <a href="MessagingAction.java.html"><b><i>View Source</i></b></a>
@@ -68,140 +51,14 @@ public class MessagingAction extends JSONAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 		JSONObject jo = new JSONObject();
 
-		if ("getUpdates".equals(cmd)) {
-			jo = getUpdates(req);
-		}
-		else if ("getChats".equals(cmd)) {
-			jo = getChatMessages(req);
-
-			jo.put("status", "success");
+		if ("getChats".equals(cmd)) {
+			jo = MessagingUtil.getChatMessages(req.getSession());
 		}
 		else if ("sendChat".equals(cmd)) {
 			jo = sendMessage(req);
 		}
-		else if ("unload".equals(cmd)) {
-			release(req);
-		}
 
 		return jo.toString();
-	}
-
-	protected JSONObject getChatMessages(HttpServletRequest req) {
-		JSONArray ja = new JSONArray();
-		JSONObject jo = new JSONObject();
-		PacketCollector collector = MessagingUtil
-			.getCollector(req.getSession());
-		Message message = MessagingUtil.getNextMessage(collector);
-		Roster roster = MessagingUtil.getRoster(req.getSession());
-
-		while (message != null) {
-			JSONObject jMsg = new JSONObject();
-			String fromId = (String)message.getProperty("fromId");
-
-			jMsg.put("body", message.getBody());
-			jMsg.put("category", message.getProperty("category"));
-			jMsg.put("toId", message.getProperty("toId"));
-			jMsg.put("toName", message.getProperty("toName"));
-			jMsg.put("fromId", fromId);
-			jMsg.put("fromName", message.getProperty("fromName"));
-			jMsg.put("status",
-				MessagingUtil.getPresence(
-					roster.getPresence(
-						MessagingUtil.getXmppId(fromId))));
-
-			ja.put(jMsg);
-
-			message = MessagingUtil.getNextMessage(collector);
-		}
-
-		jo.put("chat", ja);
-
-		return jo;
-	}
-
-	protected JSONObject getRosterEntries(HttpServletRequest req) {
-		JSONObject jo = new JSONObject();
-		Roster roster = MessagingUtil.getRoster(req.getSession());
-		List rosterList = new ArrayList();
-
-		Iterator rosterEntries = roster.getEntries();
-		JSONArray ja = new JSONArray();
-
-		while (rosterEntries.hasNext()) {
-			rosterList.add(rosterEntries.next());
-		}
-
-		Collections.sort(rosterList, new NameComparator());
-
-		for (int i = 0; i < rosterList.size(); i++) {
-
-			JSONObject jEntry = new JSONObject();
-			RosterEntry entry = (RosterEntry)rosterList.get(i);
-
-			jEntry.put("user", MessagingUtil.getUserId(entry));
-			jEntry.put("name", entry.getName());
-			jEntry.put("status", MessagingUtil.getPresence(roster
-				.getPresence(entry.getUser())));
-			ja.put(jEntry);
-		}
-
-		jo.put("roster", ja);
-
-		return jo;
-	}
-
-	protected JSONObject getUpdates(HttpServletRequest req) {
-		HttpSession ses = req.getSession();
-		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
-		JSONObject jo = new JSONObject();
-		String waitCmd = "";
-
-		try {
-			MessageWait msgWait = jabberSes.getMessageWait();
-
-			if (msgWait != null) {
-				jabberSes.setMessageWait(null);
-				msgWait.expire();
-			}
-
-			msgWait = new MessageWait();
-			msgWait.setSessionId(ses.getId());
-
-			jabberSes.setMessageWait(msgWait);
-
-			msgWait.waitForMessages();
-
-			/* re-grab the session object in case connection was closed */
-
-			jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
-			msgWait = jabberSes.getMessageWait();
-
-			if (msgWait == null) {
-				jo.put("status", "failure");
-			}
-			else if (msgWait.isTimedOut()) {
-				jo.put("status", "timedOut");
-			}
-			else {
-				waitCmd = msgWait.getCmd();
-
-				if ("getRoster".equals(waitCmd)) {
-					jo = getRosterEntries(req);
-				}
-				else if ("getMessages".equals(waitCmd)) {
-					jo = getChatMessages(req);
-				}
-				jo.put("status", "success");
-			}
-		}
-		catch (Exception e) {
-			jo.put("status", "failure");
-		}
-		finally {
-			jabberSes.setMessageWait(null);
-		}
-
-		return jo;
 	}
 
 	protected JSONObject sendMessage(HttpServletRequest req) {
@@ -243,17 +100,6 @@ public class MessagingAction extends JSONAction {
 		}
 
 		return jo;
-	}
-
-	protected void release(HttpServletRequest req) {
-		HttpSession ses = req.getSession();
-		JabberSession jabberSes = (JabberSession) ses.getAttribute(WebKeys.JABBER_XMPP_SESSION);
-		MessageWait msgWait = jabberSes.getMessageWait();
-
-		if (msgWait != null) {
-			jabberSes.setMessageWait(null);
-			msgWait.expire();
-		}
 	}
 
 }

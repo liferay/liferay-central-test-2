@@ -525,8 +525,6 @@ public class PropsUtil {
 
 	public static final String JABBER_XMPP_USER_PASSWORD = "jabber.xmpp.user.password";
 
-	public static final String JABBER_XMPP_HEARTBEAT = "jabber.xmpp.heartbeat";
-
 	// JBI
 
 	public static final String JBI_WORKFLOW_URL = "jbi.workflow.url";
@@ -762,6 +760,12 @@ public class PropsUtil {
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY = "message.boards.email.message.updated.body";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE = "message.boards.email.message.updated.signature";
+
+	// Reverse AJAX
+
+	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
+	
+	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
 
 	// Shopping Portlet
 

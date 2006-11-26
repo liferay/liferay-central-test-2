@@ -3,7 +3,6 @@ var Messaging = {
 	initialized : false,
 	inputCount : 1,
 	mainDiv : null,
-	pollTimer : null,
 	userId : null,
 	windowCount : 0,
 	zIndex : 1,
@@ -82,28 +81,16 @@ var Messaging = {
 	},
 
 	getChats : function() {
-		loadPage(themeDisplay.getPathMain() + "/messaging/action", "cmd=getChats", Messaging.getUpdatesReturn);
-	},
-
-	getUpdates : function() {
-		AjaxUtil.request(themeDisplay.getPathMain() + "/messaging/action?cmd=getUpdates",
-			{
-				onComplete: Messaging.getUpdatesReturn,
-				reverseAjax: true
-			});
-	},
-
-	getUpdatesReturn : function(xmlHttpReq) {
-		try {
-			var msg = eval("(" + xmlHttpReq.responseText + ")");
-		}
-		catch (err) {
-			if (Messaging.pollTimer) {
-				clearInterval(Messaging.pollTimer);
+		var url = themeDisplay.getPathMain() + "/messaging/action?cmd=getChats";
+		AjaxUtil.request(url, {
+			onComplete: function(xmlHttpReq) {
+				var msg = eval("(" + xmlHttpReq.responseText + ")");
+				Messaging.getChatsReturn(msg);
 			}
-			return;
-		}
+		});
+	},
 
+	getChatsReturn : function(msg) {
 		var status = msg.status;
 
 		if (status == "success") {
@@ -116,16 +103,6 @@ var Messaging = {
 				}
 				window.focus();
 			}
-
-			if (msg.roster != null) {
-				MessagingRoster.updateEntries(msg.roster);
-			}
-
-			/* Send next request and wait for response */
-			Messaging.getUpdates();
-		}
-		else if (status == "timedOut") {
-			Messaging.getUpdates();
 		}
 	},
 
@@ -150,8 +127,8 @@ var Messaging = {
 		});
 
 		this.windowCount++;
-		chatBox.onclick = function() { this.style.zIndex = Messaging.zIndex++; };
-		chatBox.setAttribute("onClick", "this.style.zIndex = Messaging.zIndex++");
+		chatBox.onclick = function() { this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++; };
+		chatBox.setAttribute("onClick", "this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++");
 
 		var chatCont = document.createElement("div");
 		chatCont.style.width = "250px";
@@ -297,16 +274,9 @@ var Messaging = {
 			}
 		}
 
-		Event.addHandler(window, "onunload", Messaging.onPageUnload);
-
 		this.mainDiv = mainDiv;
 		this.initialized = true;
 		Messaging.getChats();
-
-	},
-
-	onPageUnload : function() {
-		AjaxUtil.request(themeDisplay.getPathMain() + "/messaging/action?cmd=unload", {reverseAjax:true});
 	},
 
 	removeChat : function(obj) {
@@ -382,15 +352,7 @@ var Messaging = {
 	},
 
 	sendChatReturn : function(xmlHttpReq) {
-		try {
-			var msg = eval("(" + xmlHttpReq.responseText + ")");
-		}
-		catch (err) {
-			if (Messaging.pollTimer) {
-				clearInterval(Messaging.pollTimer);
-			}
-			return;
-		}
+		var msg = eval("(" + xmlHttpReq.responseText + ")");
 
 		if (msg.status == "success") {
 			Messaging.chat(msg.toId, msg.toName,
@@ -502,21 +464,17 @@ var MessagingRoster = {
 	},
 
 	getEntries : function() {
-		loadPage(themeDisplay.getPathMain() + "/chat/roster", "cmd=getEntries", MessagingRoster.getEntriesReturn);
+		var url = themeDisplay.getPathMain() + "/chat/roster?cmd=getEntries";
+		AjaxUtil.request(url, {
+			onComplete: function(xmlHttpReq) {
+				var msg = eval("(" + xmlHttpReq.responseText + ")");
+				MessagingRoster.getEntriesReturn(msg);
+			}
+		});
 	},
 
-	getEntriesReturn : function(xmlHttpReq) {
-		try {
-			var msg = eval("(" + xmlHttpReq.responseText + ")");
-
-			MessagingRoster.updateEntries(msg.roster);
-		}
-		catch (err) {
-			if (Messaging.pollTimer) {
-				clearInterval(Messaging.pollTimer);
-			}
-			return;
-		}
+	getEntriesReturn : function(msg) {
+		MessagingRoster.updateEntries(msg.roster);
 	},
 
 	updateEntries : function(roster) {
