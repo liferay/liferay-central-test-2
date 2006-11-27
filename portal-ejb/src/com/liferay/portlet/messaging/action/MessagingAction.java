@@ -22,20 +22,25 @@
 
 package com.liferay.portlet.messaging.action;
 
+import java.io.PrintWriter;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 import org.json.JSONObject;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messaging.util.MessagingUtil;
+import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 
 /**
  * <a href="MessagingAction.java.html"><b><i>View Source</i></b></a>
@@ -43,7 +48,52 @@ import com.liferay.util.ParamUtil;
  * @author Ming-Gih Lam
  *
  */
-public class MessagingAction extends JSONAction {
+public class MessagingAction extends Action {
+	
+	public ActionForward execute(
+			ActionMapping mapping, ActionForm form, HttpServletRequest req,
+			HttpServletResponse res)
+		throws Exception {
+	
+		String ajaxId = req.getHeader("Ajax-ID");
+	
+		String cmd = ParamUtil.getString(req, "cmd");
+	
+		String json = null;
+		
+		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
+		
+		if ("chatbox".equals(cmd)) {
+			return mapping.findForward("portlet.messaging.chatbox");
+		}
+		else {
+			if (ajaxId != null && !ajaxId.equals("")) {
+				res.setHeader("Ajax-ID", ajaxId);
+			}
+		
+			try {
+				json = getJSON(mapping, form, req, res);
+			}
+			catch (Exception e) {
+				res.sendError(
+					HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e.getMessage());
+		
+				return null;
+			}
+		
+			if (Validator.isNotNull(json)) {
+				res.setContentType(Constants.TEXT_JAVASCRIPT);
+		
+				PrintWriter pw = res.getWriter();
+		
+				pw.write(json);
+		
+				pw.close();
+			}
+		
+			return null;
+		}
+	}
 
 	public String getJSON(ActionMapping mapping, ActionForm form,
 		HttpServletRequest req, HttpServletResponse res) throws Exception {

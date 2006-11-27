@@ -1,5 +1,6 @@
 var Messaging = {
 	checkRoster : false,
+	currentChatBox : null,
 	initialized : false,
 	inputCount : 1,
 	mainDiv : null,
@@ -7,71 +8,46 @@ var Messaging = {
 	windowCount : 0,
 	zIndex : 1,
 
-	chatAreaStyles : {
-			border: "1px solid #d0d0d0",
-			height: "100px",
-			margin: "5px 0 5px 0",
-			padding: "5px"
-		},
-		
-	chatBoxStyles : {
-			backgroundColor: "#ffffff",
-			border: "1px solid #000000",
-			padding: "10px",
-			textAlign: "left"
-		},
+	chat : function(msg) {
+		var chatBox = $("msg-chat-box" + msg.toId);
 
-	chat : function(toId, toName, fromId, fromName, body, status, tempId) {
-		var chatBox
-		if (tempId != null) {
-			chatBox = $("msg-chat-box" + tempId);
-			chatBox.id = "msg-chat-box" + toId;
+		if (!chatBox) {
+			var url = themeDisplay.getPathMain() + "/messaging/action?cmd=chatbox" +
+				"&toId=" + msg.toId +
+				"&toName=" + encodeURIComponent(msg.toName) +
+				"&top=" + (this.windowCount * 15) +
+				"&left=" + (this.windowCount * 15) +
+				"&zIndex=" + (ZINDEX.CHAT_BOX + this.zIndex);
+				
+			if (msg.status && msg.status == "unavailable") {
+				url += "&addUser=1";
+			}
+			
+			AjaxUtil.request(url, {
+				returnArgs: msg,
+				onComplete: function(xmlHttpReq, returnArgs) {
+					var chatBox = Messaging.createChatBox(xmlHttpReq.responseText);
+					Messaging.populateChatBox(chatBox, returnArgs);
+				}
+			});
+		
 		}
 		else {
-			chatBox = $("msg-chat-box" + toId);
+			this.populateChatBox(chatBox, msg);
 		}
+	},
+	
+	populateChatBox : function(chatBox, msg) {
+		var typeArea = document.getElementsByClassName("msg-type-area", chatBox)[0];
+		var chatArea = document.getElementsByClassName("msg-chat-area", chatBox)[0];
 
-		if (chatBox == null) {
-			chatBox = this.createChat(fromId, fromName, toId, toName, status);
-		}
-
-		var toInput;
-		var addrInput;
-		var typeArea;
-		var chatArea;
-		var inputList = chatBox.getElementsByTagName("input");
-
-		for (var i = 0; i < inputList.length ; i++) {
-			if (inputList[i].className) {
-				if (inputList[i].className.match("msg-to-input-id")) toInput = inputList[i];
-				if (inputList[i].className.match("msg-to-input-addr")) addrInput = inputList[i];
-				if (inputList[i].className.match("msg-type-area")) typeArea = inputList[i];
-			}
-		}
-
-		var divList = chatBox.getElementsByTagName("div");
-		for (var i = 0; i < divList.length ; i++) {
-			if (divList[i].className && divList[i].className.match("msg-chat-area")) chatArea = divList[i];
-		}
-
-		if (tempId != null) {
-			var parent = addrInput.parentNode;
-			var titleName = document.createElement("span");
-
-			titleName.innerHTML = toName;
-			titleName.style.fontWeight = "bold";
-
-			toInput.value = toId
-			parent.insertBefore(titleName, addrInput);
-			parent.removeChild(addrInput);	
-		}
-		if (body != null) {
-			var name = toName.split(/[ ,.-]/);
+		if (msg.body != null) {
+			var name = msg.toName.split(/[ ,.-]/);
 			var initials = "";
 			for (var i = 0; i < name.length; i++) {
 				initials += name[i].charAt(0);
 			}
-			chatArea.innerHTML += "<span style='color: #FF0000'>" + initials + ": </span>" + body + "<br/>";
+			chatArea.innerHTML += "<span style='color: #FF0000'>" + initials + ": </span>" + msg.body + "<br/>";
 		}
 
 		this.saveCookie();
@@ -97,131 +73,38 @@ var Messaging = {
 			var chatMsg = msg.chat;
 			if (chatMsg && chatMsg.length > 0) {
 				for (var i = 0; i < chatMsg.length; i++) {
-					Messaging.chat(chatMsg[i].fromId, chatMsg[i].fromName,
-						chatMsg[i].toId, chatMsg[i].toName, chatMsg[i].body,
-						chatMsg[i].status);
+					// swap "from" and "to"
+					var tmpName = chatMsg[i].fromName;
+					var tmpId = chatMsg[i].fromId;
+					chatMsg[i].fromName = chatMsg[i].toName;
+					chatMsg[i].fromId = chatMsg[i].toId;
+					chatMsg[i].toName = tmpName;
+					chatMsg[i].toId = tmpId;
+					
+					Messaging.chat(chatMsg[i]);
 				}
 				window.focus();
 			}
 		}
 	},
 
-	createChat : function(fromId, fromName, toId, toName, status) {
-		if (!this.initialized) {
-			this.init();
-		}
-
-		if (toId == null) {
-			toId = (new Date()).getTime();
-		}
-
-		var chatBox = document.createElement("div");
-		chatBox.id = "msg-chat-box" + toId;
-		chatBox.className = "msg-chat-box";
-		Element.setStyle(chatBox, this.chatBoxStyles);
-		Element.setStyle(chatBox, {
-			position: "absolute",
-			top: (this.windowCount * 15) + "px",
-			left: (this.windowCount * 15) + "px",
-			zIndex: ZINDEX.CHAT_BOX + this.zIndex
-		});
-
-		this.windowCount++;
-		chatBox.onclick = function() { this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++; };
-		chatBox.setAttribute("onClick", "this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++");
-
-		var chatCont = document.createElement("div");
-		chatCont.style.width = "250px";
-
-		var chatTitle = document.createElement("div");
-		chatTitle.className = "msg-chat-title";
-		chatTitle.style.cursor = "move";
-		chatTitle.appendChild(document.createTextNode("Chat with "));
-
-		if (toName == null) {
-			var toAddr = document.createElement("input");
-			toAddr.type = "text";
-			toAddr.className = "msg-to-input-addr form-text";
-			toAddr.tabIndex = this.inputCount++;
-			toAddr.onclick = function() { this.focus(); };
-			toAddr.setAttribute("onClick", "this.focus()");
-
-			chatTitle.appendChild(toAddr);
-		}
-		else {
-			var titleName = document.createElement("span");
-			titleName.innerHTML = toName;
-			titleName.style.fontWeight = "bold";
-			chatTitle.appendChild(titleName);
-		}
-
-		var closeLink = document.createElement("a");
-		closeLink.innerHTML = "close";
-		closeLink.onclick = function() { Messaging.removeChat(this); };
-		closeLink.setAttribute("onClick", "Messaging.removeChat(this)");
-		closeLink.style.paddingLeft = "20px";
-		closeLink.style.cursor = "pointer";
-		closeLink.id = fromId;
-		chatTitle.appendChild(closeLink);
-
-		var toInput = document.createElement("input");
-		toInput.type = "hidden";
-		toInput.value = toId;
-		toInput.className = "msg-to-input-id";
-
-		var chatArea = document.createElement("div");
-		chatArea.className = "msg-chat-area";
-		Element.setStyle(chatArea, this.chatAreaStyles);
-
-		if (is_ie) {
-			chatArea.style.overflowY = "scroll";
-		}
-		else {
-			chatArea.style.overflow = "-moz-scrollbars-vertical";
-		}
-
-		var typeArea = document.createElement("input");
-		typeArea.type = "text";
-		typeArea.className = "msg-type-area form-text";
-		typeArea.tabIndex = this.inputCount++;
-		typeArea.style.width = "100%";
-		typeArea.onkeypress = function(event) {Messaging.sendChat(this, event); };;
-		typeArea.setAttribute("onKeyPress", "Messaging.sendChat(this, event)");
-
-		chatCont.appendChild(chatTitle);
-		chatCont.appendChild(toInput);
-		chatCont.appendChild(chatArea);
-		chatCont.appendChild(typeArea);
-		chatBox.appendChild(chatCont);
-
-		if (status && status == "unavailable") {
-			var addUser = document.createElement("img");
-			addUser.src = themeDisplay.getPathThemeImage() + "/chat/add_user.gif";
-			addUser.style.cursor = "pointer";
-			addUser.style.marginTop = "2px";
-			addUser.toId = toId;
-			addUser.onclick = function() {
-				MessagingRoster.addEntry(this.toId);
-				Element.remove(this);
-			};
-			addUser.setAttribute("onClick", "MessagingRoster.addEntry(\"" + toId + "\"); Element.remove(this)");
-			chatBox.appendChild(addUser);
-		}
-
+	createChatBox: function(boxHTML) {
+		var chatDiv = document.createElement("div");
+		chatDiv.innerHTML = boxHTML;
+		
+		var chatBox = document.getElementsByClassName("msg-chat-box", chatDiv)[0];
+		var chatTitle = document.getElementsByClassName("msg-chat-title", chatBox)[0];
+		
+		
 		Drag.makeDraggable(chatBox, chatTitle);
 		chatBox.onDragEnd = function() { Messaging.saveCookie(); };
 
+		chatDiv.removeChild(chatBox);
 		this.mainDiv.appendChild(chatBox);
-		if (toName == null) {
-			toAddr.focus();
-		}
-		else {
-			typeArea.focus();
-		}
-
+		
 		return chatBox;
 	},
-
+	
 	error : function() {
 		alert("User does not exist");
 	},
@@ -236,43 +119,26 @@ var Messaging = {
 			mainDiv.id = "messaging-main-div";
 			Element.setStyle(mainDiv, {
 				left: 0,
-				position: "relative",
+				position: "absolute",
 				textAlign: "left",
 				top: 0,
+				width: "100%",
 				zIndex: ZINDEX.CHAT_BOX
 			});
 
 			body.insertBefore(mainDiv, body.childNodes[0]);
 		}
 
-		var chatList = mainDiv.childNodes;
-
-		for (var i = 0; i < chatList.length; i++) {
-			var chatBox = chatList[i];
-			if (chatBox.nodeName
-				&& chatBox.nodeName.toLowerCase().match("div")
-				&& chatBox.id
-				&& chatBox.id.match("msg-chat-box")) {
-
-				var chatTitle;
-				var chatArea;
-				var divList = chatBox.getElementsByTagName("div");
-				for (var j = 0; j < divList.length; j++) {
-					var div = divList[j];
-					if (div.className && div.className.match("msg-chat-title")) {
-						chatTitle = div;
-					}
-					if (div.className && div.className.match("msg-chat-area")) {
-						chatArea = div;
-						chatArea.scrollTop = chatArea.scrollHeight;
-						break;
-					}
-				}
-
-				Drag.makeDraggable(chatBox, chatTitle);
-				chatBox.onDragEnd = function() { Messaging.saveCookie(); };
-			}
-		}
+		var chatList = document.getElementsByClassName("msg-chat-box", mainDiv);
+		
+		chatList.each(function(chatBox){
+			var chatTitle = document.getElementsByClassName("msg-chat-title", chatBox)[0];
+			var chatArea = document.getElementsByClassName("msg-chat-area", chatBox)[0];
+			
+			chatArea.scrollTop = chatArea.scrollHeight;
+			Drag.makeDraggable(chatBox, chatTitle);
+			chatBox.onDragEnd = function() { Messaging.saveCookie(); };
+		});
 
 		this.mainDiv = mainDiv;
 		this.initialized = true;
@@ -280,22 +146,16 @@ var Messaging = {
 	},
 
 	removeChat : function(obj) {
-		function findChatBox(obj) {
-			if (!obj) return null;
-
-			if (obj.id && obj.id.match("msg-chat-box")) {
-				return obj;
-			}
-			else {
-				return(findChatBox(obj.parentNode));
-			}
+		var chatBox = obj;
+		
+		while (chatBox && !Element.hasClassName(chatBox, "msg-chat-box")) {
+			chatBox = chatBox.parentNode;
 		}
-
-		var chatBox = findChatBox(obj);
+		
 		if (chatBox) {
-			chatBox.parentNode.removeChild(chatBox);
+			Element.remove(chatBox);
+			this.saveCookie();
 		}
-		this.saveCookie();
 	},
 
 	saveCookie : function() {
@@ -347,6 +207,7 @@ var Messaging = {
 			loadPage(themeDisplay.getPathMain() + "/messaging/action", query, Messaging.sendChatReturn);
 
 			chatArea.innerHTML += "<span style='color: #0000FF'>Me: </span>" + typeArea.value + "<br/>";
+			chatArea.scrollTop = chatArea.scrollHeight;
 			typeArea.value = "";
 		}
 	},
@@ -355,8 +216,7 @@ var Messaging = {
 		var msg = eval("(" + xmlHttpReq.responseText + ")");
 
 		if (msg.status == "success") {
-			Messaging.chat(msg.toId, msg.toName,
-				msg.fromId, msg.fromName, msg.body, msg.status, msg.tempId);
+			Messaging.populateChatBox(msg);
 		}
 		else {
 			Messaging.error();
@@ -524,7 +384,7 @@ var MessagingRoster = {
 
 	onEntryLinkClick : function () {
 		var parent = this.parentNode;
-		Messaging.createChat(null, null, parent.userId, parent.userName);
+		Messaging.chat({toId: parent.userId, toName: parent.userName});
 	},
 
 	toggleEmail : function() {

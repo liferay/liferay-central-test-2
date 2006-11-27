@@ -942,8 +942,10 @@
 		</action>
 
 		<!-- Messaging -->
-		
-		<action path="/messaging/action" type="com.liferay.portlet.messaging.action.MessagingAction" />
+
+		<action path="/messaging/action" type="com.liferay.portlet.messaging.action.MessagingAction">
+			<forward name="portlet.messaging.chatbox" path="portlet.messaging.chatbox" />
+		</action>
 
 		<!-- My Account -->
 

@@ -785,6 +785,10 @@
 		<put name="portlet_content" value="/portlet/message_boards/view_topic.jsp" />
 	</definition>
 
+	<!-- Messaging -->
+
+	<definition name="portlet.messaging.chatbox" path="/portlet/chat/chatbox.jsp" />
+
 	<!-- My Account -->
 
 	<definition name="portlet.my_account" extends="portlet" />
