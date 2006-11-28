@@ -41,6 +41,14 @@ public class RequestWait {
 		_cmd = cmd;
 	}
 
+	public boolean isExpired() {
+		return _expired;
+	}
+
+	public void setExpired(boolean expired) {
+		this._expired = expired;
+	}
+
 	public String getSessionId() {
 		return _sessionId;
 	}
@@ -58,6 +66,9 @@ public class RequestWait {
 	}
 
 	public synchronized void expire() {
+		_timedOut = false;
+		_expired = true;
+
 		notify();
 	}
 
@@ -78,6 +89,7 @@ public class RequestWait {
 
 	private String _cmd;
 	private String _sessionId;
-	private boolean _timedOut;
+	private boolean _expired = false;
+	private boolean _timedOut = false;
 
 }

@@ -61,6 +61,7 @@ public class ReverseAjaxAction extends JSONAction {
 		else {
 			try {
 				RequestWait reqWait = reverseAjax.getRequestWait();
+				boolean missedEvents = true;
 
 				if (reqWait != null) {
 					reverseAjax.setRequestWait(null);
@@ -68,18 +69,16 @@ public class ReverseAjaxAction extends JSONAction {
 				}
 
 				if (!reverseAjax.pendingEvents()) {
+					missedEvents = false;
 					reqWait = new RequestWait();
 					reqWait.setSessionId(ses.getId());
 
 					reverseAjax.setRequestWait(reqWait);
 
 					reqWait.waitForRequest();
-
-					reverseAjax = (ReverseAjax) ses.getAttribute(WebKeys.REVERSE_AJAX);
-					reqWait = reverseAjax.getRequestWait();
 				}
 
-				if (reverseAjax.pendingEvents()) {
+				if (missedEvents || (reverseAjax.pendingEvents() && !reqWait.isExpired())) {
 					if (reverseAjax.isPendingChatMessage()) {
 						jo.put("chatMessages",
 							MessagingUtil.getChatMessages(req.getSession()));
@@ -95,11 +94,11 @@ public class ReverseAjaxAction extends JSONAction {
 
 					jo.put("status", "success");
 				}
-				else if (reqWait == null) {
-						jo.put("status", "failure");
-				}
 				else if (reqWait.isTimedOut()) {
 					jo.put("status", "timedOut");
+				}
+				else {
+					jo.put("status", "failure");
 				}
 			}
 			catch (Exception e) {

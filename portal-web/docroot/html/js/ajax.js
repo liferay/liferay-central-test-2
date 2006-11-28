@@ -202,8 +202,6 @@ var ReverseAjax = {
 					MessagingRoster.getEntriesReturn(res.chatRoster);
 				}
 			}
-			else if (status == "timedOut") {
-			}
 
 			ReverseAjax.request();
 		}

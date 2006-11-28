@@ -135,13 +135,15 @@
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
-			Event.observe(window, "load", function() {
-				setTimeout("ReverseAjax.initialize()", 2000);
-			});
+			if (!is_safari) {
+				Event.observe(window, "load", function() {
+					setTimeout("ReverseAjax.initialize()", 2000);
+				});
 			
-			Event.observe(window, "unload", function() {
-				ReverseAjax.release();
-			});
+				Event.addHandler(window, "unload", function() {
+					ReverseAjax.release();
+				});
+			}
 		</c:if>
 		
 		<%
