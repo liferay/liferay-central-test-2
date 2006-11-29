@@ -3,6 +3,24 @@
 
 <beans>
 	<bean id="com.liferay.mail.service.MailService.professional" class="com.liferay.mail.service.impl.MailServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.mail.service.MailService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.mail.service.MailService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.mail.service.MailServiceFactory" class="com.liferay.mail.service.MailServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.mail.service.MailService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.mail.service.persistence.CyrusUserPersistence" class="com.liferay.mail.service.persistence.CyrusUserPersistence" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
@@ -27,24 +45,6 @@
 	<bean id="com.liferay.mail.service.persistence.CyrusVirtualUtil" class="com.liferay.mail.service.persistence.CyrusVirtualUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.mail.service.persistence.CyrusVirtualPersistence" />
-		</property>
-	</bean>
-	<bean id="com.liferay.mail.service.MailService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.mail.service.MailService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.mail.service.MailServiceFactory" class="com.liferay.mail.service.MailServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.mail.service.MailService.transaction" />
 		</property>
 	</bean>
 </beans>

@@ -39,7 +39,7 @@
 			</props>
 		</property>
 	</bean>-->
-	<alias name="com.liferay.counter.service.CounterLocalService.professional" alias="com.liferay.counter.service.CounterLocalService.transaction" />
+	<alias alias="com.liferay.counter.service.CounterLocalService.transaction" name="com.liferay.counter.service.CounterLocalService.professional" />
 	<bean id="com.liferay.counter.service.CounterLocalServiceFactory" class="com.liferay.counter.service.CounterLocalServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.counter.service.CounterLocalService.transaction" />
@@ -59,7 +59,7 @@
 			</props>
 		</property>
 	</bean>-->
-	<alias name="com.liferay.counter.service.CounterService.professional" alias="com.liferay.counter.service.CounterService.transaction" />
+	<alias alias="com.liferay.counter.service.CounterService.transaction" name="com.liferay.counter.service.CounterService.professional" />
 	<bean id="com.liferay.counter.service.CounterServiceFactory" class="com.liferay.counter.service.CounterServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.counter.service.CounterService.transaction" />
