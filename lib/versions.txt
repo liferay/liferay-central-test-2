@@ -70,6 +70,7 @@ OGNL 2.6.7
 OpenSAML 1.0.1
 ORO 2.0.8
 OSCache 2.3
+QDox 1.6.1
 PDFBox 0.7.1
 POI 2.5.1
 Portals Bridges 1.0
