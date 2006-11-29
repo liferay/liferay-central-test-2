@@ -22,7 +22,7 @@
 
 package com.liferay.lock.service.ejb;
 
-import com.liferay.lock.service.spring.LockService;
+import com.liferay.lock.service.LockService;
 
 import javax.ejb.EJBObject;
 

@@ -23,7 +23,7 @@
 package com.liferay.lock.service.impl;
 
 import com.liferay.lock.model.Lock;
-import com.liferay.lock.service.spring.LockService;
+import com.liferay.lock.service.LockService;
 import com.liferay.lock.util.LockPool;
 import com.liferay.portal.PortalException;
 

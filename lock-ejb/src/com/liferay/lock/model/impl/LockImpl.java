@@ -20,24 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.lock.model;
+package com.liferay.lock.model.impl;
 
-import java.io.Serializable;
+import com.liferay.lock.model.Lock;
 
 import java.lang.Comparable;
 
 import java.util.Date;
 
 /**
- * <a href="Lock.java.html"><b><i>View Source</i></b></a>
+ * <a href="LockImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class Lock implements Comparable, Serializable {
+public class LockImpl implements Lock {
 
-	public Lock(String className, Comparable pk, String companyId,
-				String userId, long expirationTime) {
+	public LockImpl(String className, Comparable pk, String companyId,
+					String userId, long expirationTime) {
 
 		_className = className;
 		_pk = pk;

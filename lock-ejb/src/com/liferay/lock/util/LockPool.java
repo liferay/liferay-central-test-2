@@ -26,6 +26,7 @@ import com.liferay.lock.DuplicateLockException;
 import com.liferay.lock.ExpiredLockException;
 import com.liferay.lock.NoSuchLockException;
 import com.liferay.lock.model.Lock;
+import com.liferay.lock.model.impl.LockImpl;
 import com.liferay.util.CollectionFactory;
 
 import java.lang.Comparable;
@@ -230,7 +231,8 @@ public class LockPool {
 		}
 
 		if (lock == null) {
-			lock = new Lock(className, pk, companyId, userId, expirationTime);
+			lock = new LockImpl(
+				className, pk, companyId, userId, expirationTime);
 
 			locksByPK.put(pk, lock);
 			_getLocksByCompanyId(companyId).add(lock);
