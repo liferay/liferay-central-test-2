@@ -24,6 +24,7 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -34,6 +35,8 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.ActionRequestImpl;
+import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PropertiesUtil;
@@ -56,6 +59,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletContext;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.beanutils.DynaClass;
 import org.apache.struts.action.ActionForm;
@@ -260,7 +265,18 @@ public class EditLookAndFeelAction extends PortletAction {
 			ActionMapping mapping, DynaActionForm form, ActionRequest req)
 		throws Exception {
 
+		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+		HttpServletRequest httpReq = reqImpl.getHttpServletRequest();
+
+		HttpSession httpSes = httpReq.getSession();
+
 		String cmd = ParamUtil.getString(req, Constants.CMD);
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -317,6 +333,9 @@ public class EditLookAndFeelAction extends PortletAction {
 		portletSetup.setValue("portlet-setup-css", sb.toString());
 
 		portletSetup.store();
+
+		CachePortlet.clearResponse(
+			httpSes, layout.getPrimaryKey(), portletResource);
 	}
 
 }

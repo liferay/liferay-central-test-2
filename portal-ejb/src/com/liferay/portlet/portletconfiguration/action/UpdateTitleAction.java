@@ -24,11 +24,13 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.language.LanguageUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.CachePortlet;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
 
@@ -36,6 +38,7 @@ import javax.portlet.PortletPreferences;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -53,8 +56,12 @@ public class UpdateTitleAction extends JSONAction {
 			HttpServletResponse res)
 		throws Exception {
 
+		HttpSession ses = req.getSession();
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
@@ -82,6 +89,8 @@ public class UpdateTitleAction extends JSONAction {
 		portletSetup.setValue("portlet-setup-use-custom-title", "true");
 
 		portletSetup.store();
+
+		CachePortlet.clearResponse(ses, layout.getPrimaryKey(), portletId);
 
 		return null;
 	}
