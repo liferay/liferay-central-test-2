@@ -354,24 +354,26 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				layoutSet.getCompanyId(), portletId);
 
-			PortletDataHandler portletDataHandler =
-				portlet.getPortletDataHandler();
+			if (portlet != null) {
+				PortletDataHandler portletDataHandler =
+					portlet.getPortletDataHandler();
 
-			if (portletDataHandler != null) {
-				String data = StringPool.BLANK;
+				if (portletDataHandler != null) {
+					String data = StringPool.BLANK;
 
-				try {
-					data = portletDataHandler.exportData(
-						layoutSet.getCompanyId(), layoutSet.getGroupId());
+					try {
+						data = portletDataHandler.exportData(
+							layoutSet.getCompanyId(), layoutSet.getGroupId());
+					}
+					catch (PortletDataException pde) {
+						throw new PortalException(pde);
+					}
+
+					el = root.addElement("portlet-data");
+					el.addAttribute("portlet-id", portletId);
+
+					el.addElement("data").addCDATA(data);
 				}
-				catch (PortletDataException pde) {
-					throw new PortalException(pde);
-				}
-
-				el = root.addElement("portlet-data");
-				el.addAttribute("portlet-id", portletId);
-
-				el.addElement("data").addCDATA(data);
 			}
 		}
 
