@@ -22,11 +22,6 @@
 
 package com.liferay.util;
 
-import com.liferay.portal.kernel.util.JavaProps;
-
-import com.tjtieto.wap.wapix.WBMPMaster;
-
-import java.awt.Color;
 import java.awt.geom.AffineTransform;
 import java.awt.image.AffineTransformOp;
 import java.awt.image.BufferedImage;
@@ -64,65 +59,42 @@ public class ImageUtil {
 	public static void encodeWBMP(BufferedImage image, OutputStream out)
 		throws InterruptedException, IOException {
 
-		if (JavaProps.isJDK5()) {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Use JDK 5 WBMP encoder");
-			}
+		if (image.getType() == BufferedImage.TYPE_BYTE_BINARY) {
+			SampleModel sampleModel = image.getSampleModel();
 
-			if (image.getType() == BufferedImage.TYPE_BYTE_BINARY) {
-				SampleModel sampleModel = image.getSampleModel();
+			int type = sampleModel.getDataType();
 
-				int type = sampleModel.getDataType();
+			if (!((type < DataBuffer.TYPE_BYTE) ||
+				  (type > DataBuffer.TYPE_INT) ||
+				  (sampleModel.getNumBands() != 1) ||
+				  (sampleModel.getSampleSize(0) != 1))) {
 
-				if (!((type < DataBuffer.TYPE_BYTE) ||
-					  (type > DataBuffer.TYPE_INT) ||
-					  (sampleModel.getNumBands() != 1) ||
-					  (sampleModel.getSampleSize(0) != 1))) {
+				BufferedImage binaryImage = new BufferedImage(
+					image.getWidth(), image.getHeight(),
+					BufferedImage.TYPE_BYTE_BINARY);
 
-					BufferedImage binaryImage = new BufferedImage(
-						image.getWidth(), image.getHeight(),
-						BufferedImage.TYPE_BYTE_BINARY);
+				binaryImage.getGraphics().drawImage(image, 0, 0, null);
 
-					binaryImage.getGraphics().drawImage(image, 0, 0, null);
-
-					image = binaryImage;
-				}
-			}
-
-			if (!ImageIO.write(image, "wbmp", out)) {
-
-				// See http://www.jguru.com/faq/view.jsp?EID=127723
-
-				out.write(0);
-				out.write(0);
-				out.write(_toMultiByte(image.getWidth()));
-				out.write(_toMultiByte(image.getHeight()));
-
-				DataBuffer dataBuffer = image.getData().getDataBuffer();
-
-				int size = dataBuffer.getSize();
-
-				for (int i = 0; i < size; i++) {
-					out.write((byte)dataBuffer.getElem(i));
-				}
+				image = binaryImage;
 			}
 		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Use WBMP master encoder");
+
+		if (!ImageIO.write(image, "wbmp", out)) {
+
+			// See http://www.jguru.com/faq/view.jsp?EID=127723
+
+			out.write(0);
+			out.write(0);
+			out.write(_toMultiByte(image.getWidth()));
+			out.write(_toMultiByte(image.getHeight()));
+
+			DataBuffer dataBuffer = image.getData().getDataBuffer();
+
+			int size = dataBuffer.getSize();
+
+			for (int i = 0; i < size; i++) {
+				out.write((byte)dataBuffer.getElem(i));
 			}
-
-			WBMPMaster wbmpMaster = new WBMPMaster();
-
-			int width = image.getWidth();
-			int height = image.getHeight();
-
-			int[] pixels = wbmpMaster.grabPixels(image);
-
-			pixels = WBMPMaster.processPixels(
-				1, pixels, width, height, 128, Color.white, false);
-
-			WBMPMaster.encodePixels(out, pixels, width, height);
 		}
 	}
 
