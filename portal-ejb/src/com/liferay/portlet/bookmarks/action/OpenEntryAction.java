@@ -25,7 +25,7 @@ package com.liferay.portlet.bookmarks.action;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 
 import javax.servlet.http.HttpServletRequest;

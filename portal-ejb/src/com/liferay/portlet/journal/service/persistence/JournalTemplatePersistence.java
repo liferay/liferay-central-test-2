@@ -23,13 +23,14 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class JournalTemplatePersistence extends BasePersistence {
 	public JournalTemplate create(JournalTemplatePK journalTemplatePK) {
-		JournalTemplate journalTemplate = new JournalTemplate();
+		JournalTemplate journalTemplate = new JournalTemplateImpl();
 		journalTemplate.setNew(true);
 		journalTemplate.setPrimaryKey(journalTemplatePK);
 
@@ -64,7 +65,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalTemplate journalTemplate = (JournalTemplate)session.get(JournalTemplate.class,
+			JournalTemplate journalTemplate = (JournalTemplate)session.get(JournalTemplateImpl.class,
 					journalTemplatePK);
 
 			if (journalTemplate == null) {
@@ -168,7 +169,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (JournalTemplate)session.get(JournalTemplate.class,
+			return (JournalTemplate)session.get(JournalTemplateImpl.class,
 				journalTemplatePK);
 		}
 		catch (HibernateException he) {
@@ -348,7 +349,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalTemplate);
-			JournalTemplate[] array = new JournalTemplate[3];
+			JournalTemplate[] array = new JournalTemplateImpl[3];
 			array[0] = (JournalTemplate)objArray[0];
 			array[1] = (JournalTemplate)objArray[1];
 			array[2] = (JournalTemplate)objArray[2];
@@ -580,7 +581,7 @@ public class JournalTemplatePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalTemplate);
-			JournalTemplate[] array = new JournalTemplate[3];
+			JournalTemplate[] array = new JournalTemplateImpl[3];
 			array[0] = (JournalTemplate)objArray[0];
 			array[1] = (JournalTemplate)objArray[1];
 			array[2] = (JournalTemplate)objArray[2];

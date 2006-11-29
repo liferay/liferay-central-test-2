@@ -29,9 +29,10 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -77,7 +78,7 @@ public class ActionUtil {
 		String companyId = PortalUtil.getCompanyId(req);
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(
-			req, "version", JournalArticle.DEFAULT_VERSION);
+			req, "version", JournalArticleImpl.DEFAULT_VERSION);
 
 		JournalArticle article = null;
 

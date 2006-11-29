@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;

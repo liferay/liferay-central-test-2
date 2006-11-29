@@ -24,8 +24,8 @@ package com.liferay.portlet.documentlibrary.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -69,16 +69,16 @@ public class DLFileEntryServiceEJBImpl implements DLFileEntryService,
 	}
 
 	public void deleteFileEntry(java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		DLFileEntryServiceFactory.getTxImpl().deleteFileEntry(folderId, name);
 	}
 
 	public void deleteFileEntry(java.lang.String folderId,
 		java.lang.String name, double version)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		DLFileEntryServiceFactory.getTxImpl().deleteFileEntry(folderId, name,
 			version);
@@ -94,15 +94,15 @@ public class DLFileEntryServiceEJBImpl implements DLFileEntryService,
 	}
 
 	public void lockFileEntry(java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		DLFileEntryServiceFactory.getTxImpl().lockFileEntry(folderId, name);
 	}
 
 	public void unlockFileEntry(java.lang.String folderId, java.lang.String name)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		DLFileEntryServiceFactory.getTxImpl().unlockFileEntry(folderId, name);
 	}
@@ -112,8 +112,8 @@ public class DLFileEntryServiceEJBImpl implements DLFileEntryService,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, byte[] byteArray)
-		throws com.liferay.portal.PortalException, java.rmi.RemoteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return DLFileEntryServiceFactory.getTxImpl().updateFileEntry(folderId,

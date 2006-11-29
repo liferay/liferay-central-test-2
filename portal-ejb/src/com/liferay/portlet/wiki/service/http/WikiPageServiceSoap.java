@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.wiki.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.wiki.service.spring.WikiPageServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,14 +37,14 @@ import java.rmi.RemoteException;
  *
  */
 public class WikiPageServiceSoap {
-	public static com.liferay.portlet.wiki.model.WikiPageModel addPage(
+	public static com.liferay.portlet.wiki.model.WikiPageSoap addPage(
 		java.lang.String nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
 					title);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,14 +65,14 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageModel getPage(
+	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
 		java.lang.String nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 					title);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -82,14 +81,14 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageModel getPage(
+	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
 		java.lang.String nodeId, java.lang.String title, double version)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.getPage(nodeId,
 					title, version);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -98,14 +97,14 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageModel revertPage(
+	public static com.liferay.portlet.wiki.model.WikiPageSoap revertPage(
 		java.lang.String nodeId, java.lang.String title, double version)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
 					title, version);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -114,7 +113,7 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageModel updatePage(
+	public static com.liferay.portlet.wiki.model.WikiPageSoap updatePage(
 		java.lang.String nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format)
 		throws RemoteException {
@@ -122,7 +121,7 @@ public class WikiPageServiceSoap {
 			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
 					title, content, format);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -131,5 +130,5 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WikiPageServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(WikiPageServiceSoap.class);
 }

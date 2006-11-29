@@ -23,13 +23,14 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class ShoppingOrderPersistence extends BasePersistence {
 	public ShoppingOrder create(String orderId) {
-		ShoppingOrder shoppingOrder = new ShoppingOrder();
+		ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
 		shoppingOrder.setNew(true);
 		shoppingOrder.setPrimaryKey(orderId);
 
@@ -64,7 +65,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrder.class,
+			ShoppingOrder shoppingOrder = (ShoppingOrder)session.get(ShoppingOrderImpl.class,
 					orderId);
 
 			if (shoppingOrder == null) {
@@ -166,7 +167,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ShoppingOrder)session.get(ShoppingOrder.class, orderId);
+			return (ShoppingOrder)session.get(ShoppingOrderImpl.class, orderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -440,7 +441,7 @@ public class ShoppingOrderPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingOrder);
-			ShoppingOrder[] array = new ShoppingOrder[3];
+			ShoppingOrder[] array = new ShoppingOrderImpl[3];
 			array[0] = (ShoppingOrder)objArray[0];
 			array[1] = (ShoppingOrder)objArray[1];
 			array[2] = (ShoppingOrder)objArray[2];

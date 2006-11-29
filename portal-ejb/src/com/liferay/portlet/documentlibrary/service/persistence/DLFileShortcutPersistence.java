@@ -23,13 +23,14 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileShortcutException;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class DLFileShortcutPersistence extends BasePersistence {
 	public DLFileShortcut create(long fileShortcutId) {
-		DLFileShortcut dlFileShortcut = new DLFileShortcut();
+		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
 		dlFileShortcut.setNew(true);
 		dlFileShortcut.setPrimaryKey(fileShortcutId);
 
@@ -64,7 +65,7 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcut.class,
+			DLFileShortcut dlFileShortcut = (DLFileShortcut)session.get(DLFileShortcutImpl.class,
 					new Long(fileShortcutId));
 
 			if (dlFileShortcut == null) {
@@ -168,7 +169,7 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DLFileShortcut)session.get(DLFileShortcut.class,
+			return (DLFileShortcut)session.get(DLFileShortcutImpl.class,
 				new Long(fileShortcutId));
 		}
 		catch (HibernateException he) {
@@ -340,7 +341,7 @@ public class DLFileShortcutPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
-			DLFileShortcut[] array = new DLFileShortcut[3];
+			DLFileShortcut[] array = new DLFileShortcutImpl[3];
 			array[0] = (DLFileShortcut)objArray[0];
 			array[1] = (DLFileShortcut)objArray[1];
 			array[2] = (DLFileShortcut)objArray[2];
@@ -562,7 +563,7 @@ public class DLFileShortcutPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
-			DLFileShortcut[] array = new DLFileShortcut[3];
+			DLFileShortcut[] array = new DLFileShortcutImpl[3];
 			array[0] = (DLFileShortcut)objArray[0];
 			array[1] = (DLFileShortcut)objArray[1];
 			array[2] = (DLFileShortcut)objArray[2];

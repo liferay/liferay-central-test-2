@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.maps.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.maps.model.MapsAddress;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 
 /**

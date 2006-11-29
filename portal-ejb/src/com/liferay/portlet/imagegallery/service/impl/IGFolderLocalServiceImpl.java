@@ -22,21 +22,22 @@
 
 package com.liferay.portlet.imagegallery.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -196,7 +197,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), IGFolder.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			folder.getPrimaryKey().toString());
 
 		// Folder
@@ -285,7 +286,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		// Merge folders
 
 		if (mergeWithParentFolder && !oldFolderId.equals(parentFolderId) &&
-			!parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			!parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -296,14 +297,14 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 	protected String getParentFolderId(String groupId, String parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 			IGFolder parentFolder =
 				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
 				(!groupId.equals(parentFolder.getGroupId()))) {
 
-				parentFolderId = IGFolder.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -313,7 +314,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 	protected String getParentFolderId(IGFolder folder, String parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 			return parentFolderId;
 		}
 

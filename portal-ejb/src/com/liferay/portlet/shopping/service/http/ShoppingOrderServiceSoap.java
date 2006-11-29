@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -66,14 +65,14 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrderModel getOrder(
+	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap getOrder(
 		java.lang.String plid, java.lang.String orderId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingOrder returnValue = ShoppingOrderServiceUtil.getOrder(plid,
 					orderId);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -95,7 +94,7 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrderModel updateOrder(
+	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
 		java.lang.String plid, java.lang.String orderId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
@@ -123,7 +122,7 @@ public class ShoppingOrderServiceSoap {
 					shippingCountry, shippingPhone, ccName, ccType, ccNumber,
 					ccExpMonth, ccExpYear, ccVerNumber, comments);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -132,7 +131,7 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingOrderModel updateOrder(
+	public static com.liferay.portlet.shopping.model.ShoppingOrderSoap updateOrder(
 		java.lang.String plid, java.lang.String orderId,
 		java.lang.String ppTxnId, java.lang.String ppPaymentStatus,
 		double ppPaymentGross, java.lang.String ppReceiverEmail,
@@ -142,7 +141,7 @@ public class ShoppingOrderServiceSoap {
 					orderId, ppTxnId, ppPaymentStatus, ppPaymentGross,
 					ppReceiverEmail, ppPayerEmail);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingOrderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -151,5 +150,5 @@ public class ShoppingOrderServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ShoppingOrderServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ShoppingOrderServiceSoap.class);
 }

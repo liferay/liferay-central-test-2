@@ -22,22 +22,23 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalService;
 
 import java.util.Date;
 import java.util.Iterator;
@@ -190,7 +191,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			String.valueOf(fileShortcut.getPrimaryKey()));
 
 		// File shortcut
@@ -269,7 +270,7 @@ public class DLFileShortcutLocalServiceImpl
 	protected String getFolderId(String companyId, String folderId)
 		throws PortalException, SystemException {
 
-		if (!folderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			// Ensure folder exists and belongs to the proper company
 
@@ -277,11 +278,11 @@ public class DLFileShortcutLocalServiceImpl
 				DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
 				if (!companyId.equals(folder.getCompanyId())) {
-					folderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				}
 			}
 			catch (NoSuchFolderException nsfe) {
-				folderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 

@@ -31,10 +31,10 @@ import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleService;
 import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalArticleService;
 
 import java.util.Iterator;
 import java.util.Map;

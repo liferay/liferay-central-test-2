@@ -35,11 +35,13 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -47,7 +49,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -137,7 +138,7 @@ public class AddUserAction extends PortletAction {
 		boolean autoUserId = true;
 		String userId = StringPool.BLANK;
 
-		if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
+		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			autoUserId = false;
 			userId = ParamUtil.getString(req, "userId");
 		}
@@ -184,7 +185,7 @@ public class AddUserAction extends PortletAction {
 
 		String redirect = themeDisplay.getPathMain() + "/portal/login?login=";
 
-		if (company.getAuthType().equals(Company.AUTH_TYPE_ID)) {
+		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
 			redirect += user.getUserId();
 		}
 		else {

@@ -23,11 +23,13 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -37,7 +39,6 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.Serializable;
@@ -313,8 +314,8 @@ public class PortletURLImpl implements PortletURL, Serializable {
 	protected Layout getLayout() {
 		if (_layout == null) {
 			try {
-				String layoutId = Layout.getLayoutId(_plid);
-				String ownerId = Layout.getOwnerId(_plid);
+				String layoutId = LayoutImpl.getLayoutId(_plid);
+				String ownerId = LayoutImpl.getOwnerId(_plid);
 
 				_layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
 			}

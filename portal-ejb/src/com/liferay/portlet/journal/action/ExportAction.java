@@ -23,14 +23,16 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.NoSuchPortletPreferencesException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.ImageLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.comparator.LayoutComparator;
 import com.liferay.portlet.PortletPreferencesImpl;
@@ -38,22 +40,23 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
@@ -264,7 +267,7 @@ public class ExportAction extends Action {
 				sb.append(") values (");
 				addColumn(sb, article.getCompanyId());
 				addColumn(sb, article.getArticleId());
-				addColumn(sb, JournalArticle.DEFAULT_VERSION);
+				addColumn(sb, JournalArticleImpl.DEFAULT_VERSION);
 				addColumn(sb, article.getGroupId());
 				//addColumn(sb, article.getUserId());
 				//addColumn(sb, article.getUserName());
@@ -382,7 +385,7 @@ public class ExportAction extends Action {
 		StringBuffer sb = new StringBuffer();
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
-			Layout.PUBLIC + siteGroupId);
+			LayoutImpl.PUBLIC + siteGroupId);
 
 		Collections.sort(layouts, new LayoutComparator(true));
 
@@ -460,7 +463,7 @@ public class ExportAction extends Action {
 						// Add to the journal content search list
 
 						JournalContentSearch journalContentSearch =
-							new JournalContentSearch();
+							new JournalContentSearchImpl();
 
 						journalContentSearch.setPortletId(portletId);
 						journalContentSearch.setLayoutId(layout.getLayoutId());

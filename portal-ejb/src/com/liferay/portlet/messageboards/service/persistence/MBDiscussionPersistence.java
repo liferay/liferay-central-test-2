@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBDiscussionPersistence extends BasePersistence {
 	public MBDiscussion create(String discussionId) {
-		MBDiscussion mbDiscussion = new MBDiscussion();
+		MBDiscussion mbDiscussion = new MBDiscussionImpl();
 		mbDiscussion.setNew(true);
 		mbDiscussion.setPrimaryKey(discussionId);
 
@@ -64,7 +65,7 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussion.class,
+			MBDiscussion mbDiscussion = (MBDiscussion)session.get(MBDiscussionImpl.class,
 					discussionId);
 
 			if (mbDiscussion == null) {
@@ -167,7 +168,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBDiscussion)session.get(MBDiscussion.class, discussionId);
+			return (MBDiscussion)session.get(MBDiscussionImpl.class,
+				discussionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

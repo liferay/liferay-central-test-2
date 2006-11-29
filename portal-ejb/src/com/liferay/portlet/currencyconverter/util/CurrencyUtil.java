@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.currencyconverter.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.WebCachePool;
@@ -29,7 +30,6 @@ import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.SimpleCachePool;
-import com.liferay.util.StringPool;
 
 import java.util.Iterator;
 import java.util.Locale;

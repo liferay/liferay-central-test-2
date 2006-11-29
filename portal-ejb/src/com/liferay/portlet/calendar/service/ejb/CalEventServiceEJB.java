@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.calendar.service.ejb;
 
-import com.liferay.portlet.calendar.service.spring.CalEventService;
+import com.liferay.portlet.calendar.service.CalEventService;
 
 import javax.ejb.EJBObject;
 

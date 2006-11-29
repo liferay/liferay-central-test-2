@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.stocks.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.stocks.model.Stocks;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 
 import java.util.StringTokenizer;

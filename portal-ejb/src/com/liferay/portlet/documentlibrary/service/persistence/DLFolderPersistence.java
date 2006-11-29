@@ -23,13 +23,14 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class DLFolderPersistence extends BasePersistence {
 	public DLFolder create(String folderId) {
-		DLFolder dlFolder = new DLFolder();
+		DLFolder dlFolder = new DLFolderImpl();
 		dlFolder.setNew(true);
 		dlFolder.setPrimaryKey(folderId);
 
@@ -64,7 +65,8 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DLFolder dlFolder = (DLFolder)session.get(DLFolder.class, folderId);
+			DLFolder dlFolder = (DLFolder)session.get(DLFolderImpl.class,
+					folderId);
 
 			if (dlFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +166,7 @@ public class DLFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DLFolder)session.get(DLFolder.class, folderId);
+			return (DLFolder)session.get(DLFolderImpl.class, folderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +347,7 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
-			DLFolder[] array = new DLFolder[3];
+			DLFolder[] array = new DLFolderImpl[3];
 			array[0] = (DLFolder)objArray[0];
 			array[1] = (DLFolder)objArray[1];
 			array[2] = (DLFolder)objArray[2];
@@ -531,7 +533,7 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
-			DLFolder[] array = new DLFolder[3];
+			DLFolder[] array = new DLFolderImpl[3];
 			array[0] = (DLFolder)objArray[0];
 			array[1] = (DLFolder)objArray[1];
 			array[2] = (DLFolder)objArray[2];
@@ -763,7 +765,7 @@ public class DLFolderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, dlFolder);
-			DLFolder[] array = new DLFolder[3];
+			DLFolder[] array = new DLFolderImpl[3];
 			array[0] = (DLFolder)objArray[0];
 			array[1] = (DLFolder)objArray[1];
 			array[2] = (DLFolder)objArray[2];

@@ -23,7 +23,8 @@
 package com.liferay.portlet.myplaces.action;
 
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -61,7 +62,7 @@ public class ViewAction extends PortletAction {
 		String ownerId = ParamUtil.getString(req, "ownerId");
 
 		List layouts = LayoutLocalServiceUtil.getLayouts(
-			ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		String redirect = themeDisplay.getPathMain();
 

@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;

@@ -29,7 +29,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
-import com.liferay.portlet.wiki.service.spring.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;

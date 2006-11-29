@@ -23,13 +23,14 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsVote;
+import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class PollsVotePersistence extends BasePersistence {
 	public PollsVote create(PollsVotePK pollsVotePK) {
-		PollsVote pollsVote = new PollsVote();
+		PollsVote pollsVote = new PollsVoteImpl();
 		pollsVote.setNew(true);
 		pollsVote.setPrimaryKey(pollsVotePK);
 
@@ -64,7 +65,7 @@ public class PollsVotePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			PollsVote pollsVote = (PollsVote)session.get(PollsVote.class,
+			PollsVote pollsVote = (PollsVote)session.get(PollsVoteImpl.class,
 					pollsVotePK);
 
 			if (pollsVote == null) {
@@ -165,7 +166,7 @@ public class PollsVotePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (PollsVote)session.get(PollsVote.class, pollsVotePK);
+			return (PollsVote)session.get(PollsVoteImpl.class, pollsVotePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -334,7 +335,7 @@ public class PollsVotePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsVote);
-			PollsVote[] array = new PollsVote[3];
+			PollsVote[] array = new PollsVoteImpl[3];
 			array[0] = (PollsVote)objArray[0];
 			array[1] = (PollsVote)objArray[1];
 			array[2] = (PollsVote)objArray[2];
@@ -554,7 +555,7 @@ public class PollsVotePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsVote);
-			PollsVote[] array = new PollsVote[3];
+			PollsVote[] array = new PollsVoteImpl[3];
 			array[0] = (PollsVote)objArray[0];
 			array[1] = (PollsVote)objArray[1];
 			array[2] = (PollsVote)objArray[2];

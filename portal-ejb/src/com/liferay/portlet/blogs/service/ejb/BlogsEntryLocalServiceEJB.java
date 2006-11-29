@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.blogs.service.ejb;
 
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 
 import javax.ejb.EJBLocalObject;
 

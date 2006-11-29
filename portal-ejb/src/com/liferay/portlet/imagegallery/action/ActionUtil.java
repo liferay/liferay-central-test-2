@@ -28,8 +28,9 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageServiceUtil;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -66,7 +67,7 @@ public class ActionUtil {
 		IGFolder folder = null;
 
 		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			!folderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = IGFolderServiceUtil.getFolder(folderId);
 		}

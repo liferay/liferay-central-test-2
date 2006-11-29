@@ -24,7 +24,7 @@ package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.shopping.NoSuchOrderException;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 

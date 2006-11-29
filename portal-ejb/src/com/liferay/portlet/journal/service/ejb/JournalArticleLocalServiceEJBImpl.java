@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.service.ejb;
 
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalService;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -272,7 +272,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List getArticles(java.lang.String groupId, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles(groupId,
 			begin, end, obc);
@@ -325,7 +325,7 @@ public class JournalArticleLocalServiceEJBImpl
 
 	public java.util.List getStructureArticles(java.lang.String companyId,
 		java.lang.String structureId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getStructureArticles(companyId,
@@ -348,7 +348,7 @@ public class JournalArticleLocalServiceEJBImpl
 
 	public java.util.List getTemplateArticles(java.lang.String companyId,
 		java.lang.String templateId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getTemplateArticles(companyId,
@@ -385,21 +385,22 @@ public class JournalArticleLocalServiceEJBImpl
 			articleId, version, languageId);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type)
+		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, title, description, content, type);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, org.apache.lucene.search.Sort sort)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String sortField) throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
-			groupId, title, description, content, type, sort);
+			groupId, title, description, content, type, sortField);
 	}
 
 	public java.util.List search(java.lang.String companyId,
@@ -411,7 +412,7 @@ public class JournalArticleLocalServiceEJBImpl
 		java.util.Date displayDateLT, java.lang.Boolean approved,
 		java.lang.Boolean expired, java.util.Date reviewDate,
 		boolean andOperator, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
 			articleId, version, groupId, title, description, content, type,

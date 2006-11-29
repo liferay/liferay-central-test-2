@@ -24,8 +24,8 @@ package com.liferay.portlet.documentlibrary.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

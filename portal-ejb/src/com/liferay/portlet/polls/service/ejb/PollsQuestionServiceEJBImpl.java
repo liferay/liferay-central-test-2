@@ -24,8 +24,8 @@ package com.liferay.portlet.polls.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.polls.service.spring.PollsQuestionService;
-import com.liferay.portlet.polls.service.spring.PollsQuestionServiceFactory;
+import com.liferay.portlet.polls.service.PollsQuestionService;
+import com.liferay.portlet.polls.service.PollsQuestionServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

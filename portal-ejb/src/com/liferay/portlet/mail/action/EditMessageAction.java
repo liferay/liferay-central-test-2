@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.mail.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -42,7 +43,6 @@ import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Html;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.mail.InternetAddressUtil;

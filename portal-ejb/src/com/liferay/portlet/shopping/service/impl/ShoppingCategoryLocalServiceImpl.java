@@ -22,21 +22,22 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalService;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -206,7 +207,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), ShoppingCategory.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			category.getPrimaryKey().toString());
 
 		// Category
@@ -265,7 +266,7 @@ public class ShoppingCategoryLocalServiceImpl
 			parentCategories.add(tempCategory);
 
 			if (tempCategory.getParentCategoryId().equals(
-					ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 				break;
 			}
@@ -323,7 +324,7 @@ public class ShoppingCategoryLocalServiceImpl
 		if (mergeWithParentCategory &&
 			!oldCategoryId.equals(parentCategoryId) &&
 			!parentCategoryId.equals(
-				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
 		}
@@ -336,7 +337,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws SystemException {
 
 		if (!parentCategoryId.equals(
-				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			ShoppingCategory parentCategory =
 				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
@@ -344,7 +345,8 @@ public class ShoppingCategoryLocalServiceImpl
 			if ((parentCategory == null) ||
 				(!groupId.equals(parentCategory.getGroupId()))) {
 
-				parentCategoryId = ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID;
+				parentCategoryId =
+					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
@@ -356,7 +358,7 @@ public class ShoppingCategoryLocalServiceImpl
 		throws SystemException {
 
 		if (parentCategoryId.equals(
-				ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			return parentCategoryId;
 		}

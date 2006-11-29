@@ -23,15 +23,15 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.mail.model.Filter;
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionMessages;

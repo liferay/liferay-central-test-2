@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBMessagePersistence extends BasePersistence {
 	public MBMessage create(MBMessagePK mbMessagePK) {
-		MBMessage mbMessage = new MBMessage();
+		MBMessage mbMessage = new MBMessageImpl();
 		mbMessage.setNew(true);
 		mbMessage.setPrimaryKey(mbMessagePK);
 
@@ -64,7 +65,7 @@ public class MBMessagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBMessage mbMessage = (MBMessage)session.get(MBMessage.class,
+			MBMessage mbMessage = (MBMessage)session.get(MBMessageImpl.class,
 					mbMessagePK);
 
 			if (mbMessage == null) {
@@ -165,7 +166,7 @@ public class MBMessagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBMessage)session.get(MBMessage.class, mbMessagePK);
+			return (MBMessage)session.get(MBMessageImpl.class, mbMessagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -347,7 +348,7 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
-			MBMessage[] array = new MBMessage[3];
+			MBMessage[] array = new MBMessageImpl[3];
 			array[0] = (MBMessage)objArray[0];
 			array[1] = (MBMessage)objArray[1];
 			array[2] = (MBMessage)objArray[2];
@@ -534,7 +535,7 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
-			MBMessage[] array = new MBMessage[3];
+			MBMessage[] array = new MBMessageImpl[3];
 			array[0] = (MBMessage)objArray[0];
 			array[1] = (MBMessage)objArray[1];
 			array[2] = (MBMessage)objArray[2];
@@ -767,7 +768,7 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
-			MBMessage[] array = new MBMessage[3];
+			MBMessage[] array = new MBMessageImpl[3];
 			array[0] = (MBMessage)objArray[0];
 			array[1] = (MBMessage)objArray[1];
 			array[2] = (MBMessage)objArray[2];
@@ -1000,7 +1001,7 @@ public class MBMessagePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
-			MBMessage[] array = new MBMessage[3];
+			MBMessage[] array = new MBMessageImpl[3];
 			array[0] = (MBMessage)objArray[0];
 			array[1] = (MBMessage)objArray[1];
 			array[2] = (MBMessage)objArray[2];

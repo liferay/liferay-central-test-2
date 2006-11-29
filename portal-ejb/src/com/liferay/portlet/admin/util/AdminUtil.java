@@ -24,13 +24,13 @@ package com.liferay.portlet.admin.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.util.StringPool;
 
 import java.rmi.RemoteException;
 

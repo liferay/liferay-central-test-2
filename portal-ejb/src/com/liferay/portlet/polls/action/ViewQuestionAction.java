@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.polls.action;
 
-import com.liferay.portlet.polls.service.spring.PollsVoteServiceUtil;
+import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 import com.liferay.portlet.polls.util.PollsUtil;
 import com.liferay.util.ParamUtil;
 

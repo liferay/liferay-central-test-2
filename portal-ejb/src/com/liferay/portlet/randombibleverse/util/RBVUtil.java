@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.randombibleverse.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.randombibleverse.model.Bible;
 import com.liferay.portlet.randombibleverse.model.Verse;
 import com.liferay.util.Randomizer;
-import com.liferay.util.StringPool;
 
 import java.net.URL;
 

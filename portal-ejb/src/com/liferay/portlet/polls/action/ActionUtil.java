@@ -26,7 +26,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.spring.PollsQuestionServiceUtil;
+import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;

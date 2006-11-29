@@ -29,8 +29,8 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderService;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderService;
 
 /**
  * <a href="ShoppingOrderServiceImpl.java.html"><b><i>View Source</i></b></a>

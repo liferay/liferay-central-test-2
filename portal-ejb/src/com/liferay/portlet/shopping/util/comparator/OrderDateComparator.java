@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.shopping.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.util.DateUtil;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="OrderDateComparator.java.html"><b><i>View Source</i></b></a>

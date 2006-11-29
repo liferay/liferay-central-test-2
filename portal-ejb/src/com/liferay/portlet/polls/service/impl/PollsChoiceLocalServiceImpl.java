@@ -23,8 +23,8 @@
 package com.liferay.portlet.polls.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
-import com.liferay.portlet.polls.service.spring.PollsChoiceLocalService;
 
 import java.util.List;
 

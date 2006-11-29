@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.lucene.IndexerException;
 

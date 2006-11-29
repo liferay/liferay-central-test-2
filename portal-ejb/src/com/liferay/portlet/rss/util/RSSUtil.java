@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.rss.util;
 
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
-import com.liferay.util.ObjectValuePair;
-import com.liferay.util.StringPool;
 
 /**
  * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>

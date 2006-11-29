@@ -23,13 +23,14 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class BookmarksFolderPersistence extends BasePersistence {
 	public BookmarksFolder create(String folderId) {
-		BookmarksFolder bookmarksFolder = new BookmarksFolder();
+		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
 		bookmarksFolder.setNew(true);
 		bookmarksFolder.setPrimaryKey(folderId);
 
@@ -64,7 +65,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolder.class,
+			BookmarksFolder bookmarksFolder = (BookmarksFolder)session.get(BookmarksFolderImpl.class,
 					folderId);
 
 			if (bookmarksFolder == null) {
@@ -167,7 +168,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (BookmarksFolder)session.get(BookmarksFolder.class, folderId);
+			return (BookmarksFolder)session.get(BookmarksFolderImpl.class,
+				folderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -349,7 +351,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
-			BookmarksFolder[] array = new BookmarksFolder[3];
+			BookmarksFolder[] array = new BookmarksFolderImpl[3];
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];
@@ -584,7 +586,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
-			BookmarksFolder[] array = new BookmarksFolder[3];
+			BookmarksFolder[] array = new BookmarksFolderImpl[3];
 			array[0] = (BookmarksFolder)objArray[0];
 			array[1] = (BookmarksFolder)objArray[1];
 			array[2] = (BookmarksFolder)objArray[2];

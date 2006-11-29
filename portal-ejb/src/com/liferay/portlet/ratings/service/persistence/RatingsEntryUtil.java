@@ -45,8 +45,8 @@ public class RatingsEntryUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry remove(
 		long entryId)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class RatingsEntryUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByPrimaryKey(
 		long entryId)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
@@ -164,32 +164,32 @@ public class RatingsEntryUtil {
 
 	public static java.util.List findByC_C(java.lang.String className,
 		java.lang.String classPK, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(className, classPK, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByC_C_First(
 		java.lang.String className, java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByC_C_First(className, classPK, obc);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByC_C_Last(
 		java.lang.String className, java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByC_C_Last(className, classPK, obc);
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry[] findByC_C_PrevAndNext(
 		long entryId, java.lang.String className, java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByC_C_PrevAndNext(entryId, className,
 			classPK, obc);
 	}
@@ -197,8 +197,8 @@ public class RatingsEntryUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry findByU_C_C(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		return getPersistence().findByU_C_C(userId, className, classPK);
 	}
 
@@ -219,7 +219,7 @@ public class RatingsEntryUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -231,8 +231,8 @@ public class RatingsEntryUtil {
 
 	public static void removeByU_C_C(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portlet.ratings.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchEntryException {
 		getPersistence().removeByU_C_C(userId, className, classPK);
 	}
 

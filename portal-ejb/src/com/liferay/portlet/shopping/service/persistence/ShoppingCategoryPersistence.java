@@ -23,13 +23,14 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class ShoppingCategoryPersistence extends BasePersistence {
 	public ShoppingCategory create(String categoryId) {
-		ShoppingCategory shoppingCategory = new ShoppingCategory();
+		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
 		shoppingCategory.setNew(true);
 		shoppingCategory.setPrimaryKey(categoryId);
 
@@ -64,7 +65,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategory.class,
+			ShoppingCategory shoppingCategory = (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
 					categoryId);
 
 			if (shoppingCategory == null) {
@@ -169,7 +170,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ShoppingCategory)session.get(ShoppingCategory.class,
+			return (ShoppingCategory)session.get(ShoppingCategoryImpl.class,
 				categoryId);
 		}
 		catch (HibernateException he) {
@@ -352,7 +353,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
-			ShoppingCategory[] array = new ShoppingCategory[3];
+			ShoppingCategory[] array = new ShoppingCategoryImpl[3];
 			array[0] = (ShoppingCategory)objArray[0];
 			array[1] = (ShoppingCategory)objArray[1];
 			array[2] = (ShoppingCategory)objArray[2];
@@ -587,7 +588,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
-			ShoppingCategory[] array = new ShoppingCategory[3];
+			ShoppingCategory[] array = new ShoppingCategoryImpl[3];
 			array[0] = (ShoppingCategory)objArray[0];
 			array[1] = (ShoppingCategory)objArray[1];
 			array[2] = (ShoppingCategory)objArray[2];

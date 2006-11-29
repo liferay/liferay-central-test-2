@@ -30,8 +30,9 @@ import com.liferay.portal.OrganizationNameException;
 import com.liferay.portal.OrganizationParentException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.OrganizationServiceUtil;
+import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
@@ -169,7 +170,7 @@ public class EditOrganizationAction extends PortletAction {
 
 		String parentOrganizationId = ParamUtil.get(
 			req, "parentOrganizationId",
-			Organization.DEFAULT_PARENT_ORGANIZATION_ID);
+			OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
 		String name = ParamUtil.getString(req, "name");
 		String statusId = ParamUtil.getString(req, "statusId");

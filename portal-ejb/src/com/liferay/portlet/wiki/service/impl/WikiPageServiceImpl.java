@@ -27,10 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageService;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.service.spring.WikiPageService;
 
 /**
  * <a href="WikiPageServiceImpl.java.html"><b><i>View Source</i></b></a>

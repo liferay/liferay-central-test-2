@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.wiki.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.DateUtil;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="PageCreateDateComparator.java.html"><b><i>View Source</i></b></a>

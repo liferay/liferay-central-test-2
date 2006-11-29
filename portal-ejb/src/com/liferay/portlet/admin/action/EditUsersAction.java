@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.admin.action;
 
-import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.CompanyServiceUtil;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.service.CompanyServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -70,7 +70,7 @@ public class EditUsersAction extends PortletAction {
 		String companyId = PortalUtil.getCompanyId(req);
 
 		if (!RoleLocalServiceUtil.hasUserRole(
-				req.getRemoteUser(), companyId, Role.ADMINISTRATOR)) {
+				req.getRemoteUser(), companyId, RoleImpl.ADMINISTRATOR)) {
 
 			SessionErrors.add(req, PrincipalException.class.getName());
 

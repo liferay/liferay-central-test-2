@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.documentlibrary.util;
 
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.lucene.DocumentSummary;
 import com.liferay.util.lucene.IndexerException;

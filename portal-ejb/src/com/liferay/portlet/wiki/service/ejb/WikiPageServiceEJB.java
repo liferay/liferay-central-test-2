@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.wiki.service.ejb;
 
-import com.liferay.portlet.wiki.service.spring.WikiPageService;
+import com.liferay.portlet.wiki.service.WikiPageService;
 
 import javax.ejb.EJBObject;
 

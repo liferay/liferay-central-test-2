@@ -24,20 +24,24 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
-import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
@@ -45,10 +49,7 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutLocalServiceUtil;
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.Validator;
@@ -115,13 +116,10 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			throw new FileSizeException();
 		}
 
-		try {
-			DLLocalServiceUtil.getFileContentNode(
-				user.getCompanyId(), folderId, name, 0);
+		if (DLLocalServiceUtil.hasFileContentNode(
+				user.getCompanyId(), folderId, name, 0)) {
 
 			throw new DuplicateFileException(name);
-		}
-		catch (NoSuchFileException nsfe) {
 		}
 
 		DLFileEntry fileEntry = DLFileEntryUtil.create(
@@ -136,9 +134,9 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		fileEntry.setModifiedDate(now);
 		fileEntry.setTitle(title);
 		fileEntry.setDescription(description);
-		fileEntry.setVersion(DLFileEntry.DEFAULT_VERSION);
+		fileEntry.setVersion(DLFileEntryImpl.DEFAULT_VERSION);
 		fileEntry.setSize(byteArray.length);
-		fileEntry.setReadCount(DLFileEntry.DEFAULT_READ_COUNT);
+		fileEntry.setReadCount(DLFileEntryImpl.DEFAULT_READ_COUNT);
 		fileEntry.setExtraSettings(extraSettings);
 
 		DLFileEntryUtil.update(fileEntry);
@@ -311,7 +309,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			fileEntry.getPrimaryKey().toString());
 
 		// File entry
@@ -482,13 +480,10 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 				throw new NoSuchFolderException();
 			}
 
-			try {
-				DLLocalServiceUtil.getFileContentNode(
-					user.getCompanyId(), newFolderId, name, 0);
+			if (DLLocalServiceUtil.hasFileContentNode(
+					user.getCompanyId(), newFolderId, name, 0)) {
 
 				throw new DuplicateFileException(name);
-			}
-			catch (NoSuchFileException nsfe) {
 			}
 
 			DLFileEntry newFileEntry = DLFileEntryUtil.create(
@@ -611,7 +606,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 	protected String getFolderId(String companyId, String folderId)
 		throws PortalException, SystemException {
 
-		if (!folderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			// Ensure folder exists and belongs to the proper company
 
@@ -619,11 +614,11 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 				DLFolder folder = DLFolderUtil.findByPrimaryKey(folderId);
 
 				if (!companyId.equals(folder.getCompanyId())) {
-					folderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+					folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				}
 			}
 			catch (NoSuchFolderException nsfe) {
-				folderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+				folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.imagegallery.service.ejb;
 
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalService;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 
 import javax.ejb.EJBLocalObject;
 

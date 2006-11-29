@@ -22,18 +22,17 @@
 
 package com.liferay.portlet.calendar.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.servlet.TunnelUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
-import com.liferay.portlet.calendar.service.spring.CalEventServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
 /**
  * <a href="CalEventServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -49,11 +48,11 @@ public class CalEventServiceHttp {
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.util.cal.Recurrence recurrence,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = plid;
 
@@ -95,7 +94,8 @@ public class CalEventServiceHttp {
 			Object paramObj17 = recurrence;
 
 			if (recurrence == null) {
-				paramObj17 = new NullWrapper("com.liferay.util.cal.Recurrence");
+				paramObj17 = new NullWrapper(
+						"com.liferay.portal.kernel.cal.Recurrence");
 			}
 
 			Object paramObj18 = remindBy;
@@ -124,12 +124,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -151,12 +151,12 @@ public class CalEventServiceHttp {
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.util.cal.Recurrence recurrence,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = plid;
 
@@ -198,7 +198,8 @@ public class CalEventServiceHttp {
 			Object paramObj17 = recurrence;
 
 			if (recurrence == null) {
-				paramObj17 = new NullWrapper("com.liferay.util.cal.Recurrence");
+				paramObj17 = new NullWrapper(
+						"com.liferay.portal.kernel.cal.Recurrence");
 			}
 
 			Object paramObj18 = remindBy;
@@ -237,12 +238,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -259,8 +260,8 @@ public class CalEventServiceHttp {
 
 	public static void deleteEvent(HttpPrincipal httpPrincipal,
 		java.lang.String eventId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = eventId;
 
@@ -275,12 +276,12 @@ public class CalEventServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -295,8 +296,8 @@ public class CalEventServiceHttp {
 
 	public static com.liferay.portlet.calendar.model.CalEvent getEvent(
 		HttpPrincipal httpPrincipal, java.lang.String eventId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = eventId;
 
@@ -312,12 +313,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -339,10 +340,10 @@ public class CalEventServiceHttp {
 		int startDateHour, int startDateMinute, int endDateMonth,
 		int endDateDay, int endDateYear, int durationHour, int durationMinute,
 		boolean allDay, boolean timeZoneSensitive, java.lang.String type,
-		boolean repeating, com.liferay.util.cal.Recurrence recurrence,
+		boolean repeating, com.liferay.portal.kernel.cal.Recurrence recurrence,
 		java.lang.String remindBy, int firstReminder, int secondReminder)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = eventId;
 
@@ -384,7 +385,8 @@ public class CalEventServiceHttp {
 			Object paramObj17 = recurrence;
 
 			if (recurrence == null) {
-				paramObj17 = new NullWrapper("com.liferay.util.cal.Recurrence");
+				paramObj17 = new NullWrapper(
+						"com.liferay.portal.kernel.cal.Recurrence");
 			}
 
 			Object paramObj18 = remindBy;
@@ -410,12 +412,12 @@ public class CalEventServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -430,5 +432,5 @@ public class CalEventServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CalEventServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(CalEventServiceHttp.class);
 }

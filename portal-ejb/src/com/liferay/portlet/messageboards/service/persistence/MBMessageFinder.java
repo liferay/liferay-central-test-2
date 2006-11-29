@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -153,7 +153,7 @@ public class MBMessageFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("MBMessage", MBMessage.class);
+			q.addEntity("MBMessage", MBMessageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

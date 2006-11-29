@@ -26,7 +26,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.SearchContainer;

@@ -22,31 +22,33 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService;
-import com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.IndexerImpl;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 
@@ -245,7 +247,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), MBCategory.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			category.getPrimaryKey().toString());
 
 		// Category
@@ -295,7 +297,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	public MBCategory getSystemCategory()
 		throws PortalException, SystemException {
 
-		String categoryId = Company.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM;
 
 		MBCategory category = MBCategoryUtil.fetchByPrimaryKey(categoryId);
 
@@ -363,7 +365,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if (Validator.isNull(keywords)) {
 				return hits;
@@ -417,7 +419,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 			_log.error("Error parsing keywords " + keywords);
 
-			return new Hits();
+			return new HitsImpl();
 		}
 	}
 
@@ -446,7 +448,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		if (mergeWithParentCategory &&
 			!oldCategoryId.equals(parentCategoryId) &&
-			!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			!parentCategoryId.equals(
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			mergeCategories(category, parentCategoryId);
 		}
@@ -458,14 +461,16 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			String groupId, String parentCategoryId)
 		throws SystemException {
 
-		if (!parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (!parentCategoryId.equals(
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+
 			MBCategory parentCategory =
 				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
 				(!groupId.equals(parentCategory.getGroupId()))) {
 
-				parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+				parentCategoryId = MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 
@@ -476,7 +481,9 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			MBCategory category, String parentCategoryId)
 		throws SystemException {
 
-		if (parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (parentCategoryId.equals(
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
+
 			return parentCategoryId;
 		}
 

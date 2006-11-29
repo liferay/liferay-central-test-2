@@ -45,8 +45,8 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats remove(
 		long statsId)
-		throws com.liferay.portlet.ratings.NoSuchStatsException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchStatsException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByPrimaryKey(
 		long statsId)
-		throws com.liferay.portlet.ratings.NoSuchStatsException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByPrimaryKey(statsId);
 	}
 
@@ -153,8 +153,8 @@ public class RatingsStatsUtil {
 
 	public static com.liferay.portlet.ratings.model.RatingsStats findByC_C(
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portlet.ratings.NoSuchStatsException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchStatsException {
 		return getPersistence().findByC_C(className, classPK);
 	}
 
@@ -175,15 +175,15 @@ public class RatingsStatsUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
 	public static void removeByC_C(java.lang.String className,
 		java.lang.String classPK)
-		throws com.liferay.portlet.ratings.NoSuchStatsException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.ratings.NoSuchStatsException {
 		getPersistence().removeByC_C(className, classPK);
 	}
 

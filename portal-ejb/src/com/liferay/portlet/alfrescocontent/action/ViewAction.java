@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.alfrescocontent.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

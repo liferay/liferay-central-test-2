@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 
 import javax.ejb.EJBLocalObject;
 

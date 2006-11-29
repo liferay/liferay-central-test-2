@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Html;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.lucene.DocumentSummary;
 import com.liferay.util.lucene.IndexerException;

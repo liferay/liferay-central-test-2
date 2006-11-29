@@ -28,7 +28,7 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.GroupServiceUtil;
+import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;

@@ -23,7 +23,7 @@
 package com.liferay.portlet.calendar.job;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portlet.calendar.service.spring.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;

@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.journalcontent.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;

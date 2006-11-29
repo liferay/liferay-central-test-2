@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -76,7 +77,7 @@ public class BookmarksFolderPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				folderId, BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+				folderId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);

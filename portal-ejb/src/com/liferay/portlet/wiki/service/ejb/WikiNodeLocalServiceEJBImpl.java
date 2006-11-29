@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.wiki.service.ejb;
 
-import com.liferay.portlet.wiki.service.spring.WikiNodeLocalService;
-import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceFactory;
+import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -151,9 +151,10 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		WikiNodeLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String[] nodeIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String[] nodeIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, nodeIds, keywords);
 	}

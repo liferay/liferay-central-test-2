@@ -22,9 +22,10 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.CompanyUtil;
@@ -61,15 +62,17 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingCartItemImpl;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
+import com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderLocalService;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemFieldLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderLocalService;
 import com.liferay.portlet.shopping.util.ShoppingPreferences;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
@@ -79,7 +82,6 @@ import com.liferay.util.PwdGenerator;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.cal.CalendarUtil;
-import com.liferay.util.mail.MailMessage;
 
 import java.io.IOException;
 
@@ -123,7 +125,7 @@ public class ShoppingOrderLocalServiceImpl
 		// Inventory
 
 		if (updateInventory &&
-			ppPaymentStatus.equals(ShoppingOrder.STATUS_COMPLETED)) {
+			ppPaymentStatus.equals(ShoppingOrderImpl.STATUS_COMPLETED)) {
 
 			List orderItems = ShoppingOrderItemLocalServiceUtil.getOrderItems(
 				order.getOrderId());
@@ -150,7 +152,7 @@ public class ShoppingOrderLocalServiceImpl
 						(ShoppingItemField[])itemFields.toArray(
 							new ShoppingItemField[0]);
 
-					String[] fieldsArray = ShoppingCartItem.getFieldsArray(
+					String[] fieldsArray = ShoppingCartItemImpl.getFieldsArray(
 						ShoppingUtil.getItemFields(orderItem.getItemId()));
 
 					int rowPos = ShoppingUtil.getFieldsQuantitiesPos(
@@ -204,7 +206,7 @@ public class ShoppingOrderLocalServiceImpl
 		throws PortalException, SystemException {
 
 		List orders = ShoppingOrderUtil.findByG_U_PPPS(
-			groupId, userId, ShoppingOrder.STATUS_LATEST, 0, 1);
+			groupId, userId, ShoppingOrderImpl.STATUS_LATEST, 0, 1);
 
 		ShoppingOrder order = null;
 
@@ -218,7 +220,7 @@ public class ShoppingOrderLocalServiceImpl
 			String orderId = getOrderId();
 
 			List pastOrders = ShoppingOrderUtil.findByG_U_PPPS(
-				groupId, userId, ShoppingOrder.STATUS_CHECKOUT, 0, 1);
+				groupId, userId, ShoppingOrderImpl.STATUS_CHECKOUT, 0, 1);
 
 			if (pastOrders.size() == 1) {
 				ShoppingOrder pastOrder = (ShoppingOrder)pastOrders.get(0);
@@ -259,7 +261,7 @@ public class ShoppingOrderLocalServiceImpl
 			order.setShippingLastName(user.getLastName());
 			order.setShippingEmailAddress(user.getEmailAddress());
 			order.setCcName(user.getFullName());
-			order.setPpPaymentStatus(ShoppingOrder.STATUS_LATEST);
+			order.setPpPaymentStatus(ShoppingOrderImpl.STATUS_LATEST);
 			order.setSendOrderEmail(true);
 			order.setSendShippingEmail(true);
 
@@ -293,7 +295,7 @@ public class ShoppingOrderLocalServiceImpl
 
 		order.setCreateDate(now);
 		order.setModifiedDate(now);
-		order.setPpPaymentStatus(ShoppingOrder.STATUS_CHECKOUT);
+		order.setPpPaymentStatus(ShoppingOrderImpl.STATUS_CHECKOUT);
 
 		ShoppingOrderUtil.update(order);
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -179,9 +179,9 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 			groupId, folderId);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String[] folderIds,
-		java.lang.String keywords)
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String[] folderIds, java.lang.String keywords)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().search(companyId,

@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryService;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryService;
 
 /**
  * <a href="MBCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>

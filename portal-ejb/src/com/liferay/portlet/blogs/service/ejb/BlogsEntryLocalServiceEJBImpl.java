@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.blogs.service.ejb;
 
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceFactory;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -186,10 +186,10 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		BlogsEntryLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String[] categoryIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String userId, java.lang.String[] categoryIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, userId, categoryIds, keywords);
 	}

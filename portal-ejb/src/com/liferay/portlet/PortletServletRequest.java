@@ -23,11 +23,11 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.servlet.ProtectedPrincipal;
 
 import java.io.BufferedReader;

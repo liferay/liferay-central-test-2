@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.messageboards.service.ejb;
 
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalService;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceFactory;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -175,10 +175,10 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		MBCategoryLocalServiceFactory.getTxImpl().reIndex(ids);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String[] categoryIds,
-		java.lang.String threadId, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String[] categoryIds, java.lang.String threadId,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, categoryIds, threadId, keywords);
 	}

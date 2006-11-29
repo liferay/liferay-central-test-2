@@ -38,7 +38,8 @@ import com.liferay.portlet.journal.TemplateSmallImageNameException;
 import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalTemplateServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.JS;
 import com.liferay.util.ParamUtil;
@@ -188,7 +189,7 @@ public class EditTemplateAction extends PortletAction {
 		}
 
 		String langType = ParamUtil.getString(
-			uploadReq, "langType", JournalTemplate.LANG_TYPE_XSL);
+			uploadReq, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
 
 		boolean smallImage = ParamUtil.getBoolean(uploadReq, "smallImage");
 		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");

@@ -23,13 +23,14 @@
 package com.liferay.portlet.bookmarks.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class BookmarksEntryPersistence extends BasePersistence {
 	public BookmarksEntry create(String entryId) {
-		BookmarksEntry bookmarksEntry = new BookmarksEntry();
+		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
 		bookmarksEntry.setNew(true);
 		bookmarksEntry.setPrimaryKey(entryId);
 
@@ -64,7 +65,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntry.class,
+			BookmarksEntry bookmarksEntry = (BookmarksEntry)session.get(BookmarksEntryImpl.class,
 					entryId);
 
 			if (bookmarksEntry == null) {
@@ -166,7 +167,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (BookmarksEntry)session.get(BookmarksEntry.class, entryId);
+			return (BookmarksEntry)session.get(BookmarksEntryImpl.class, entryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -348,7 +349,7 @@ public class BookmarksEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksEntry);
-			BookmarksEntry[] array = new BookmarksEntry[3];
+			BookmarksEntry[] array = new BookmarksEntryImpl[3];
 			array[0] = (BookmarksEntry)objArray[0];
 			array[1] = (BookmarksEntry)objArray[1];
 			array[2] = (BookmarksEntry)objArray[2];

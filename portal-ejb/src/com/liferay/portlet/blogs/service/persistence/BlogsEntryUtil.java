@@ -45,8 +45,8 @@ public class BlogsEntryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry remove(
 		java.lang.String entryId)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class BlogsEntryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByPrimaryKey(
 		java.lang.String entryId)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByPrimaryKey(entryId);
 	}
 
@@ -162,32 +162,32 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByGroupId_First(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByGroupId_Last(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByGroupId_PrevAndNext(
 		java.lang.String entryId, java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByGroupId_PrevAndNext(entryId, groupId, obc);
 	}
 
@@ -202,32 +202,32 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByCompanyId_First(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByCompanyId_Last(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByCompanyId_PrevAndNext(
 		java.lang.String entryId, java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCompanyId_PrevAndNext(entryId, companyId,
 			obc);
 	}
@@ -243,32 +243,32 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List findByCategoryId(java.lang.String categoryId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_First(
 		java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCategoryId_First(categoryId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry findByCategoryId_Last(
 		java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCategoryId_Last(categoryId, obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry[] findByCategoryId_PrevAndNext(
 		java.lang.String entryId, java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchEntryException {
 		return getPersistence().findByCategoryId_PrevAndNext(entryId,
 			categoryId, obc);
 	}
@@ -284,7 +284,7 @@ public class BlogsEntryUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

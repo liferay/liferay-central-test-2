@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderService;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderService;
 
 /**
  * <a href="IGFolderServiceImpl.java.html"><b><i>View Source</i></b></a>

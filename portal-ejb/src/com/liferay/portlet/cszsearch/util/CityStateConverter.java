@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.cszsearch.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.cszsearch.model.CSZAddress;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Html;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 

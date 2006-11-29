@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.polls.service.ejb;
 
-import com.liferay.portlet.polls.service.spring.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 
 import javax.ejb.EJBLocalObject;
 

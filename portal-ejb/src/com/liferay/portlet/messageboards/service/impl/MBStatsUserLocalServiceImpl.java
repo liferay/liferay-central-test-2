@@ -24,11 +24,11 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalService;
 
 import java.util.Date;
 import java.util.List;
@@ -83,7 +83,7 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 		throws PortalException, SystemException {
 
 		update(groupId, userId);
-		update(Group.DEFAULT_PARENT_GROUP_ID, userId);
+		update(GroupImpl.DEFAULT_PARENT_GROUP_ID, userId);
 	}
 
 	protected void update(String groupId, String userId)

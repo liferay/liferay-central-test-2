@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCategoryService;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryService;
 
 /**
  * <a href="ShoppingCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>

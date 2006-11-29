@@ -22,6 +22,9 @@
 
 package com.liferay.portlet.calendar.action;
 
+import com.liferay.portal.kernel.cal.DayAndPosition;
+import com.liferay.portal.kernel.cal.Duration;
+import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -34,12 +37,9 @@ import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.NoSuchEventException;
-import com.liferay.portlet.calendar.service.spring.CalEventServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.cal.DayAndPosition;
-import com.liferay.util.cal.Duration;
-import com.liferay.util.cal.Recurrence;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;

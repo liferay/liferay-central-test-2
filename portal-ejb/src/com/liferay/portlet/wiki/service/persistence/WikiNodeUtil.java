@@ -45,8 +45,8 @@ public class WikiNodeUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiNode remove(
 		java.lang.String nodeId)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class WikiNodeUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByPrimaryKey(
 		java.lang.String nodeId)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByPrimaryKey(nodeId);
 	}
 
@@ -162,32 +162,32 @@ public class WikiNodeUtil {
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByGroupId_First(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByGroupId_Last(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode[] findByGroupId_PrevAndNext(
 		java.lang.String nodeId, java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByGroupId_PrevAndNext(nodeId, groupId, obc);
 	}
 
@@ -202,32 +202,32 @@ public class WikiNodeUtil {
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByCompanyId_First(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode findByCompanyId_Last(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode[] findByCompanyId_PrevAndNext(
 		java.lang.String nodeId, java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.wiki.NoSuchNodeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.wiki.NoSuchNodeException {
 		return getPersistence().findByCompanyId_PrevAndNext(nodeId, companyId,
 			obc);
 	}
@@ -243,7 +243,7 @@ public class WikiNodeUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

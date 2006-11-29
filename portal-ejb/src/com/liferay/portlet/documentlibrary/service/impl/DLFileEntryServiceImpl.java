@@ -22,18 +22,19 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.lock.service.spring.LockServiceUtil;
+import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryService;
 
 import java.rmi.RemoteException;
 
@@ -93,7 +94,7 @@ public class DLFileEntryServiceImpl
 
 			LockServiceUtil.lock(
 				DLFileEntry.class.getName(), pk, user.getCompanyId(),
-				user.getUserId(), DLFileEntry.LOCK_EXPIRATION_TIME);
+				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
 		DLFileEntryLocalServiceUtil.deleteFileEntry(folderId, name);
@@ -125,7 +126,7 @@ public class DLFileEntryServiceImpl
 
 			LockServiceUtil.lock(
 				DLFileEntry.class.getName(), pk, user.getCompanyId(),
-				user.getUserId(), DLFileEntry.LOCK_EXPIRATION_TIME);
+				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
 		DLFileEntryLocalServiceUtil.deleteFileEntry(folderId, name, version);
@@ -156,7 +157,7 @@ public class DLFileEntryServiceImpl
 
 		LockServiceUtil.lock(
 			DLFileEntry.class.getName(), pk, user.getCompanyId(),
-			user.getUserId(), DLFileEntry.LOCK_EXPIRATION_TIME);
+			user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 	}
 
 	public void unlockFileEntry(String folderId, String name)
@@ -189,7 +190,7 @@ public class DLFileEntryServiceImpl
 
 			LockServiceUtil.lock(
 				DLFileEntry.class.getName(), pk, user.getCompanyId(),
-				user.getUserId(), DLFileEntry.LOCK_EXPIRATION_TIME);
+				user.getUserId(), DLFileEntryImpl.LOCK_EXPIRATION_TIME);
 		}
 
 		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.updateFileEntry(

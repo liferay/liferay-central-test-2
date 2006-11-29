@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.journal.service.ejb;
 
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 
 import javax.ejb.EJBLocalObject;
 

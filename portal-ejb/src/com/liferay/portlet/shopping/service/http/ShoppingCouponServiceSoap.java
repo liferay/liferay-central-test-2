@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingCouponServiceSoap {
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel addCoupon(
+	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap addCoupon(
 		java.lang.String plid, java.lang.String couponId, boolean autoCouponId,
 		java.lang.String name, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,
@@ -55,7 +54,7 @@ public class ShoppingCouponServiceSoap {
 					endDateHour, endDateMinute, neverExpire, active,
 					limitCategories, limitSkus, minOrder, discount, discountType);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -76,14 +75,14 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel getCoupon(
+	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap getCoupon(
 		java.lang.String plid, java.lang.String couponId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCoupon returnValue = ShoppingCouponServiceUtil.getCoupon(plid,
 					couponId);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -92,7 +91,7 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel[] search(
+	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap[] search(
 		java.lang.String couponId, java.lang.String plid,
 		java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator, int begin, int end)
@@ -102,7 +101,7 @@ public class ShoppingCouponServiceSoap {
 					plid, companyId, active, discountType, andOperator, begin,
 					end);
 
-			return (com.liferay.portlet.shopping.model.ShoppingCoupon[])returnValue.toArray(new com.liferay.portlet.shopping.model.ShoppingCoupon[0]);
+			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -111,7 +110,7 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCouponModel updateCoupon(
+	public static com.liferay.portlet.shopping.model.ShoppingCouponSoap updateCoupon(
 		java.lang.String plid, java.lang.String couponId,
 		java.lang.String name, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,
@@ -128,7 +127,7 @@ public class ShoppingCouponServiceSoap {
 					endDateMinute, neverExpire, active, limitCategories,
 					limitSkus, minOrder, discount, discountType);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -137,5 +136,5 @@ public class ShoppingCouponServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ShoppingCouponServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ShoppingCouponServiceSoap.class);
 }

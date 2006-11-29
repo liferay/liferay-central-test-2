@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.messageboards.action;
 
-import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
-import com.liferay.portal.model.Company;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -95,7 +95,7 @@ public class GetMessageAttachmentAction extends PortletAction {
 		MBMessage message = MBMessageServiceUtil.getMessage(messageId);
 
 		InputStream is = DLLocalServiceUtil.getFileAsStream(
-			message.getCompanyId(), Company.SYSTEM,
+			message.getCompanyId(), CompanyImpl.SYSTEM,
 			message.getAttachmentsDir() + "/" + fileName);
 
 		ServletResponseUtil.sendFile(res, fileName, is);

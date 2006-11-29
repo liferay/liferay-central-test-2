@@ -25,21 +25,22 @@ package com.liferay.portlet.journal.service.impl;
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -72,7 +73,7 @@ public class JournalContentSearchLocalServiceImpl
 
 			// Private layouts
 
-			String ownerId = Layout.PRIVATE + group.getGroupId();
+			String ownerId = LayoutImpl.PRIVATE + group.getGroupId();
 
 			deleteOwnerContentSearches(ownerId);
 
@@ -80,7 +81,7 @@ public class JournalContentSearchLocalServiceImpl
 
 			// Public layouts
 
-			ownerId = Layout.PUBLIC + group.getGroupId();
+			ownerId = LayoutImpl.PUBLIC + group.getGroupId();
 
 			deleteOwnerContentSearches(ownerId);
 
@@ -98,7 +99,7 @@ public class JournalContentSearchLocalServiceImpl
 			for (int j = 0; j < portletIds.size(); j++) {
 				String portletId = (String)portletIds.get(j);
 
-				String rootPortletId = Portlet.getRootPortletId(portletId);
+				String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
 					try {

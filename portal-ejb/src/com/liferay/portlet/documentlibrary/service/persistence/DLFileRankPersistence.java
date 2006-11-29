@@ -23,13 +23,14 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class DLFileRankPersistence extends BasePersistence {
 	public DLFileRank create(DLFileRankPK dlFileRankPK) {
-		DLFileRank dlFileRank = new DLFileRank();
+		DLFileRank dlFileRank = new DLFileRankImpl();
 		dlFileRank.setNew(true);
 		dlFileRank.setPrimaryKey(dlFileRankPK);
 
@@ -64,7 +65,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRank.class,
+			DLFileRank dlFileRank = (DLFileRank)session.get(DLFileRankImpl.class,
 					dlFileRankPK);
 
 			if (dlFileRank == null) {
@@ -166,7 +167,7 @@ public class DLFileRankPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DLFileRank)session.get(DLFileRank.class, dlFileRankPK);
+			return (DLFileRank)session.get(DLFileRankImpl.class, dlFileRankPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +346,7 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank);
-			DLFileRank[] array = new DLFileRank[3];
+			DLFileRank[] array = new DLFileRankImpl[3];
 			array[0] = (DLFileRank)objArray[0];
 			array[1] = (DLFileRank)objArray[1];
 			array[2] = (DLFileRank)objArray[2];
@@ -575,7 +576,7 @@ public class DLFileRankPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank);
-			DLFileRank[] array = new DLFileRank[3];
+			DLFileRank[] array = new DLFileRankImpl[3];
 			array[0] = (DLFileRank)objArray[0];
 			array[1] = (DLFileRank)objArray[1];
 			array[2] = (DLFileRank)objArray[2];

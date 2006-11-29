@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.bookmarks.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class BookmarksFolderServiceSoap {
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolderModel addFolder(
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -48,7 +47,7 @@ public class BookmarksFolderServiceSoap {
 					parentFolderId, name, description, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -57,7 +56,7 @@ public class BookmarksFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolderModel addFolder(
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -67,7 +66,7 @@ public class BookmarksFolderServiceSoap {
 					parentFolderId, name, description, communityPermissions,
 					guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -88,12 +87,12 @@ public class BookmarksFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolderModel getFolder(
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap getFolder(
 		java.lang.String folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.getFolder(folderId);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -102,7 +101,7 @@ public class BookmarksFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksFolderModel updateFolder(
+	public static com.liferay.portlet.bookmarks.model.BookmarksFolderSoap updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentFolder) throws RemoteException {
@@ -110,7 +109,7 @@ public class BookmarksFolderServiceSoap {
 			com.liferay.portlet.bookmarks.model.BookmarksFolder returnValue = BookmarksFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, mergeWithParentFolder);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -119,5 +118,5 @@ public class BookmarksFolderServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BookmarksFolderServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(BookmarksFolderServiceSoap.class);
 }

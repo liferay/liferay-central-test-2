@@ -29,9 +29,9 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryService;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryService;
 
 /**
  * <a href="BlogsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>

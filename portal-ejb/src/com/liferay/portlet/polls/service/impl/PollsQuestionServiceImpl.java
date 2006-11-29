@@ -29,9 +29,9 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
+import com.liferay.portlet.polls.service.PollsQuestionService;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
-import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil;
-import com.liferay.portlet.polls.service.spring.PollsQuestionService;
 
 import java.util.List;
 

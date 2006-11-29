@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -31,10 +31,10 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.polls.QuestionExpiredException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
+import com.liferay.portlet.polls.service.PollsVoteService;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
-import com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil;
-import com.liferay.portlet.polls.service.spring.PollsVoteService;
 
 /**
  * <a href="PollsVoteServiceImpl.java.html"><b><i>View Source</i></b></a>

@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -76,7 +77,7 @@ public class IGFolderPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				folderId, IGFolder.DEFAULT_PARENT_FOLDER_ID)) {
+				folderId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);

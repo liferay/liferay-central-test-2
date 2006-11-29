@@ -24,8 +24,8 @@ package com.liferay.portlet.messageboards.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.messageboards.service.spring.MBMessageService;
-import com.liferay.portlet.messageboards.service.spring.MBMessageServiceFactory;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBMessageServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.job;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
@@ -39,11 +40,11 @@ import com.liferay.portlet.shopping.NoSuchCategoryException;
 import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -203,13 +204,13 @@ public class EditItemAction extends PortletAction {
 			boolean active = ParamUtil.getBoolean(uploadReq, "active" + i);
 			int defaultPrice = ParamUtil.getInteger(uploadReq, "defaultPrice");
 
-			int status = ShoppingItemPrice.STATUS_ACTIVE_DEFAULT;
+			int status = ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT;
 
 			if ((defaultPrice != i) && active) {
-				status = ShoppingItemPrice.STATUS_ACTIVE;
+				status = ShoppingItemPriceImpl.STATUS_ACTIVE;
 			}
 			else if ((defaultPrice != i) && !active) {
-				status = ShoppingItemPrice.STATUS_INACTIVE;
+				status = ShoppingItemPriceImpl.STATUS_INACTIVE;
 			}
 
 			ShoppingItemPrice itemPrice = ShoppingItemPriceUtil.create(

@@ -22,11 +22,12 @@
 
 package com.liferay.portlet.workflow.service.impl;
 
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -36,9 +37,8 @@ import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.model.WorkflowTask;
 import com.liferay.portlet.workflow.model.WorkflowTaskFormElement;
 import com.liferay.portlet.workflow.model.WorkflowToken;
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -124,9 +124,9 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			String definitionId = parseString(content, "definitionId");
 
 			String companyId = getUser().getCompanyId();
-			String portletId = Company.SYSTEM;
-			String groupId = Group.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = Company.SYSTEM;
+			String portletId = CompanyImpl.SYSTEM;
+			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 

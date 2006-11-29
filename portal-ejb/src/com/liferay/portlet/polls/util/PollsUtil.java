@@ -24,6 +24,7 @@ package com.liferay.portlet.polls.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
@@ -31,9 +32,8 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceUtil;
-import com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
+import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 
 import java.util.Iterator;
 

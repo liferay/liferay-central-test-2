@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.admin.util;
 
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import org.apache.commons.logging.Log;
@@ -60,7 +60,7 @@ public class OmniadminUtil {
 				User user = UserLocalServiceUtil.getUserById(userId);
 
 				return RoleLocalServiceUtil.hasUserRole(
-					userId, user.getCompanyId(), Role.ADMINISTRATOR);
+					userId, user.getCompanyId(), RoleImpl.ADMINISTRATOR);
 			}
 			catch (Exception e) {
 				_log.error(e);

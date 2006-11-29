@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

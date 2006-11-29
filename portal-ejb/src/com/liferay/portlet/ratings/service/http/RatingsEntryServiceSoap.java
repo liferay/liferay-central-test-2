@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.ratings.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.ratings.service.spring.RatingsEntryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.ratings.service.RatingsEntryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,14 +37,14 @@ import java.rmi.RemoteException;
  *
  */
 public class RatingsEntryServiceSoap {
-	public static com.liferay.portlet.ratings.model.RatingsEntryModel updateEntry(
+	public static com.liferay.portlet.ratings.model.RatingsEntrySoap updateEntry(
 		java.lang.String className, java.lang.String classPK, double score)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.ratings.model.RatingsEntry returnValue = RatingsEntryServiceUtil.updateEntry(className,
 					classPK, score);
 
-			return returnValue;
+			return com.liferay.portlet.ratings.model.RatingsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -54,5 +53,5 @@ public class RatingsEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RatingsEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(RatingsEntryServiceSoap.class);
 }

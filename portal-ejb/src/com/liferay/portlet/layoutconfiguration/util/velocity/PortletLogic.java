@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
 import java.util.Map;
@@ -48,8 +48,8 @@ public class PortletLogic extends RuntimeLogic {
 
 		this(ctx, req, res, null, null);
 
-		_portletId = Portlet.getRootPortletId(portletId);
-		_instanceId = Portlet.getInstanceId(portletId);
+		_portletId = PortletImpl.getRootPortletId(portletId);
+		_instanceId = PortletImpl.getInstanceId(portletId);
 	}
 
 	public PortletLogic(ServletContext ctx, HttpServletRequest req,

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -62,12 +61,12 @@ public class ShoppingItemServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingItemModel getItem(
+	public static com.liferay.portlet.shopping.model.ShoppingItemSoap getItem(
 		java.lang.String itemId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingItem returnValue = ShoppingItemServiceUtil.getItem(itemId);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingItemSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -76,5 +75,5 @@ public class ShoppingItemServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ShoppingItemServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ShoppingItemServiceSoap.class);
 }

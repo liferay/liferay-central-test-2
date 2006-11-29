@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.imagegallery.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.imagegallery.service.spring.IGImageServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -50,14 +49,14 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGImageModel getImage(
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImage(
 		java.lang.String companyId, java.lang.String imageId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(companyId,
 					imageId);
 
-			return returnValue;
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,5 +65,5 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(IGImageServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(IGImageServiceSoap.class);
 }

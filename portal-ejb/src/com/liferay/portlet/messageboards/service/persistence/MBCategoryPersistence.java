@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBCategoryPersistence extends BasePersistence {
 	public MBCategory create(String categoryId) {
-		MBCategory mbCategory = new MBCategory();
+		MBCategory mbCategory = new MBCategoryImpl();
 		mbCategory.setNew(true);
 		mbCategory.setPrimaryKey(categoryId);
 
@@ -64,7 +65,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBCategory mbCategory = (MBCategory)session.get(MBCategory.class,
+			MBCategory mbCategory = (MBCategory)session.get(MBCategoryImpl.class,
 					categoryId);
 
 			if (mbCategory == null) {
@@ -165,7 +166,7 @@ public class MBCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBCategory)session.get(MBCategory.class, categoryId);
+			return (MBCategory)session.get(MBCategoryImpl.class, categoryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -347,7 +348,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory);
-			MBCategory[] array = new MBCategory[3];
+			MBCategory[] array = new MBCategoryImpl[3];
 			array[0] = (MBCategory)objArray[0];
 			array[1] = (MBCategory)objArray[1];
 			array[2] = (MBCategory)objArray[2];
@@ -534,7 +535,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory);
-			MBCategory[] array = new MBCategory[3];
+			MBCategory[] array = new MBCategoryImpl[3];
 			array[0] = (MBCategory)objArray[0];
 			array[1] = (MBCategory)objArray[1];
 			array[2] = (MBCategory)objArray[2];
@@ -767,7 +768,7 @@ public class MBCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbCategory);
-			MBCategory[] array = new MBCategory[3];
+			MBCategory[] array = new MBCategoryImpl[3];
 			array[0] = (MBCategory)objArray[0];
 			array[1] = (MBCategory)objArray[1];
 			array[2] = (MBCategory)objArray[2];

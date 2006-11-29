@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.ratings.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService;
 
 /**
  * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>

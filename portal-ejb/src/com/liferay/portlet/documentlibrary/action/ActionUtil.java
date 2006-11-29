@@ -29,9 +29,10 @@ import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -135,7 +136,7 @@ public class ActionUtil {
 		DLFolder folder = null;
 
 		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			!folderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = DLFolderServiceUtil.getFolder(folderId);
 		}

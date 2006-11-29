@@ -30,7 +30,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.journal.NoSuchArticleException;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;

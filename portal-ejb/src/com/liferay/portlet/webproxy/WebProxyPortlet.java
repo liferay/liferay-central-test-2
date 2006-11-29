@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.webproxy;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;

@@ -22,21 +22,22 @@
 
 package com.liferay.portlet.bookmarks.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -198,7 +199,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			folder.getPrimaryKey().toString());
 
 		// Folder
@@ -279,7 +280,8 @@ public class BookmarksFolderLocalServiceImpl
 		// Merge folders
 
 		if (mergeWithParentFolder && !oldFolderId.equals(parentFolderId) &&
-			!parentFolderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			!parentFolderId.equals(
+				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			mergeFolders(folder, parentFolderId);
 		}
@@ -290,14 +292,16 @@ public class BookmarksFolderLocalServiceImpl
 	protected String getParentFolderId(String groupId, String parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!parentFolderId.equals(
+				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
 			BookmarksFolder parentFolder =
 				BookmarksFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
 				(!groupId.equals(parentFolder.getGroupId()))) {
 
-				parentFolderId = BookmarksFolder.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -308,7 +312,9 @@ public class BookmarksFolderLocalServiceImpl
 			BookmarksFolder folder, String parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId.equals(
+				BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
+
 			return parentFolderId;
 		}
 

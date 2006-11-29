@@ -31,7 +31,7 @@ import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.NoSuchImageException;
-import com.liferay.portlet.imagegallery.service.spring.IGImageServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;

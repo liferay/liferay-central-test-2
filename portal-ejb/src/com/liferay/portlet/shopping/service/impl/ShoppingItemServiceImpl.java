@@ -27,10 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingItemService;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 import com.liferay.portlet.shopping.service.permission.ShoppingItemPermission;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemService;
 
 import java.io.File;
 

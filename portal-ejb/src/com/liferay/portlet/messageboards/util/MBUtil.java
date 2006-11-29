@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
@@ -29,12 +30,12 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -107,7 +108,7 @@ public class MBUtil {
 
 			categoriesURL.setParameter("struts_action", "/message_boards/view");
 			categoriesURL.setParameter(
-				"categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+				"categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 		}
 
 		String categoriesLink =

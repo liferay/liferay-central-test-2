@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.blogs.model.BlogsCategory;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;

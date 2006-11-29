@@ -165,14 +165,14 @@ public class DLFileVersionUtil {
 
 	public static java.util.List findByF_N(java.lang.String folderId,
 		java.lang.String name, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_First(
 		java.lang.String folderId, java.lang.String name,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByF_N_First(folderId, name, obc);
@@ -180,7 +180,7 @@ public class DLFileVersionUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion findByF_N_Last(
 		java.lang.String folderId, java.lang.String name,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByF_N_Last(folderId, name, obc);
@@ -189,7 +189,7 @@ public class DLFileVersionUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion[] findByF_N_PrevAndNext(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK dlFileVersionPK,
 		java.lang.String folderId, java.lang.String name,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.documentlibrary.NoSuchFileVersionException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByF_N_PrevAndNext(dlFileVersionPK,
@@ -207,7 +207,7 @@ public class DLFileVersionUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

@@ -24,8 +24,8 @@ package com.liferay.portlet.imagegallery.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.imagegallery.service.spring.IGImageService;
-import com.liferay.portlet.imagegallery.service.spring.IGImageServiceFactory;
+import com.liferay.portlet.imagegallery.service.IGImageService;
+import com.liferay.portlet.imagegallery.service.IGImageServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

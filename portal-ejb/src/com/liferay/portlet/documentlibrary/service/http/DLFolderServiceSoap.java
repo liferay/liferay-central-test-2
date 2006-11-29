@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class DLFolderServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFolderModel addFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -48,7 +47,7 @@ public class DLFolderServiceSoap {
 					parentFolderId, name, description, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -57,7 +56,7 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderModel addFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -67,7 +66,7 @@ public class DLFolderServiceSoap {
 					parentFolderId, name, description, communityPermissions,
 					guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -88,12 +87,12 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderModel getFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap getFolder(
 		java.lang.String folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.getFolder(folderId);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -102,7 +101,7 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFolderModel updateFolder(
+	public static com.liferay.portlet.documentlibrary.model.DLFolderSoap updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description)
 		throws RemoteException {
@@ -110,7 +109,7 @@ public class DLFolderServiceSoap {
 			com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -119,5 +118,5 @@ public class DLFolderServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DLFolderServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFolderServiceSoap.class);
 }

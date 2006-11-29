@@ -22,16 +22,17 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ServletResponseUtil;
 
@@ -81,7 +82,7 @@ public class GetTemplateAction extends Action {
 			String script = JournalUtil.getTemplateScript(
 				template, tokens, languageId, transform);
 
-			String extension = JournalTemplate.LANG_TYPE_XSL;
+			String extension = JournalTemplateImpl.LANG_TYPE_XSL;
 
 			if (template.getLangType() != null) {
 				extension = template.getLangType();

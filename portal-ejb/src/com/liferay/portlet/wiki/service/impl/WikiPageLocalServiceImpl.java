@@ -24,20 +24,21 @@ package com.liferay.portlet.wiki.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalService;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.portlet.wiki.util.NodeFilter;
 import com.liferay.portlet.wiki.util.WikiUtil;
@@ -82,7 +83,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		validate(title);
 
 		WikiPagePK pk = new WikiPagePK(
-			nodeId, title, WikiPage.DEFAULT_VERSION);
+			nodeId, title, WikiPageImpl.DEFAULT_VERSION);
 
 		WikiPage page = WikiPageUtil.create(pk);
 
@@ -90,7 +91,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		page.setUserId(user.getUserId());
 		page.setUserName(user.getFullName());
 		page.setCreateDate(now);
-		page.setFormat(WikiPage.DEFAULT_FORMAT);
+		page.setFormat(WikiPageImpl.DEFAULT_FORMAT);
 		page.setHead(true);
 
 		WikiPageUtil.update(page);
@@ -175,8 +176,9 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
-			page.getCompanyId(), WikiPage.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, page.getResourcePK().toString());
+			page.getCompanyId(), WikiPage.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			page.getResourcePK().toString());
 
 		// All versions
 
@@ -203,7 +205,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
 
-			if (page.getFormat().equals(WikiPage.CLASSIC_WIKI_FORMAT)) {
+			if (page.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
 				NodeFilter filter = WikiUtil.getFilter(nodeId);
 
 				try {
@@ -232,7 +234,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		for (int i = 0; i < pages.size(); i++) {
 			WikiPage page = (WikiPage)pages.get(i);
 
-			if (page.getFormat().equals(WikiPage.CLASSIC_WIKI_FORMAT)) {
+			if (page.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
 				NodeFilter filter = WikiUtil.getFilter(nodeId);
 
 				try {
@@ -459,7 +461,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 	protected void validate(String nodeId, String content, String format)
 		throws PortalException {
 
-		if (format.equals(WikiPage.CLASSIC_WIKI_FORMAT)) {
+		if (format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT)) {
 			try {
 				NodeFilter filter = WikiUtil.getFilter(nodeId);
 

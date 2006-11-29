@@ -22,26 +22,27 @@
 
 package com.liferay.portlet.wiki.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiNodeLocalService;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
-import com.liferay.portlet.wiki.service.spring.WikiNodeLocalService;
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceUtil;
 import com.liferay.portlet.wiki.util.Indexer;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 
@@ -206,8 +207,9 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
-			node.getCompanyId(), WikiNode.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, node.getPrimaryKey().toString());
+			node.getCompanyId(), WikiNode.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			node.getPrimaryKey().toString());
 
 		// Node
 
@@ -292,7 +294,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if (Validator.isNull(keywords)) {
 				return hits;

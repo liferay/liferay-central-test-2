@@ -23,13 +23,14 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class ShoppingCouponPersistence extends BasePersistence {
 	public ShoppingCoupon create(String couponId) {
-		ShoppingCoupon shoppingCoupon = new ShoppingCoupon();
+		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
 		shoppingCoupon.setNew(true);
 		shoppingCoupon.setPrimaryKey(couponId);
 
@@ -64,7 +65,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCoupon.class,
+			ShoppingCoupon shoppingCoupon = (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
 					couponId);
 
 			if (shoppingCoupon == null) {
@@ -167,7 +168,8 @@ public class ShoppingCouponPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ShoppingCoupon)session.get(ShoppingCoupon.class, couponId);
+			return (ShoppingCoupon)session.get(ShoppingCouponImpl.class,
+				couponId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -346,7 +348,7 @@ public class ShoppingCouponPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCoupon);
-			ShoppingCoupon[] array = new ShoppingCoupon[3];
+			ShoppingCoupon[] array = new ShoppingCouponImpl[3];
 			array[0] = (ShoppingCoupon)objArray[0];
 			array[1] = (ShoppingCoupon)objArray[1];
 			array[2] = (ShoppingCoupon)objArray[2];

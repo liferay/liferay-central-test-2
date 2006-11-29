@@ -26,12 +26,12 @@ import com.google.soap.search.GoogleSearch;
 import com.google.soap.search.GoogleSearchFault;
 import com.google.soap.search.GoogleSearchResult;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.google.util.GoogleUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

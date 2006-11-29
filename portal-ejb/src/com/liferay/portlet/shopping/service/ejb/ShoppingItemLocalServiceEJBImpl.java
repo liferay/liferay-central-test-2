@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.service.ejb;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalService;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -207,7 +207,7 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 	}
 
 	public java.util.List getItems(java.lang.String categoryId, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().getItems(categoryId,
 			begin, end, obc);
@@ -215,7 +215,7 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 
 	public com.liferay.portlet.shopping.model.ShoppingItem[] getItemsPrevAndNext(
 		java.lang.String itemId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().getItemsPrevAndNext(itemId,

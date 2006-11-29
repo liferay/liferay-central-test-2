@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.polls.service.spring.PollsVoteServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,14 +37,14 @@ import java.rmi.RemoteException;
  *
  */
 public class PollsVoteServiceSoap {
-	public static com.liferay.portlet.polls.model.PollsVoteModel addVote(
+	public static com.liferay.portlet.polls.model.PollsVoteSoap addVote(
 		java.lang.String questionId, java.lang.String choiceId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsVote returnValue = PollsVoteServiceUtil.addVote(questionId,
 					choiceId);
 
-			return returnValue;
+			return com.liferay.portlet.polls.model.PollsVoteSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -54,5 +53,5 @@ public class PollsVoteServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PollsVoteServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(PollsVoteServiceSoap.class);
 }

@@ -23,8 +23,8 @@
 package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalService;
 
 import java.util.List;
 

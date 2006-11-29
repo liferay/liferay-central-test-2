@@ -26,7 +26,7 @@ import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyHomeURLException;
 import com.liferay.portal.CompanyPortalURLException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.CompanyServiceUtil;
+import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;

@@ -24,15 +24,15 @@ package com.liferay.portlet.calendar.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventService;
 import com.liferay.portlet.calendar.service.permission.CalEventPermission;
-import com.liferay.portlet.calendar.service.spring.CalEventLocalServiceUtil;
-import com.liferay.portlet.calendar.service.spring.CalEventService;
-import com.liferay.util.cal.Recurrence;
 
 /**
  * <a href="CalEventServiceImpl.java.html"><b><i>View Source</i></b></a>

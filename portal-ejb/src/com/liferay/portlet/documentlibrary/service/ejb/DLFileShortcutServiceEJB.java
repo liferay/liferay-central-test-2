@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutService;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutService;
 
 import javax.ejb.EJBObject;
 

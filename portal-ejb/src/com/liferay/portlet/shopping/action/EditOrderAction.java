@@ -28,7 +28,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.NoSuchOrderException;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;

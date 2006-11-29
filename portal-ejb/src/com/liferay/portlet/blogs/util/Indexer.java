@@ -25,7 +25,7 @@ package com.liferay.portlet.blogs.util;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.StringUtil;
 import com.liferay.util.lucene.DocumentSummary;

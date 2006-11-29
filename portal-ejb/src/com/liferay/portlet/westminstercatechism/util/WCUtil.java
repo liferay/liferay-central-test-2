@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.westminstercatechism.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.westminstercatechism.model.WCEntry;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.net.URL;

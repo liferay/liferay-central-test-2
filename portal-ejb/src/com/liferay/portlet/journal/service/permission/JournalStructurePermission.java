@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 
 /**
  * <a href="JournalStructurePermission.java.html"><b><i>View Source</i></b></a>

@@ -24,15 +24,16 @@ package com.liferay.portlet.documentlibrary.webdav;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.webdav.AbstractWebDAVStorage;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -62,7 +63,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -89,7 +90,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -116,7 +117,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -150,7 +151,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -190,7 +191,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -231,7 +232,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -278,7 +279,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -303,7 +304,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -334,7 +335,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 
@@ -371,7 +372,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
 		DLFolder parentFolder = null;
 
-		String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+		String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		String[] folderNames = StringUtil.split(uri, StringPool.SLASH);
 

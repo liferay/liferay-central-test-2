@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.messaging.model;
 
+import com.liferay.portal.model.RequestWait;
+import com.liferay.portal.model.ReverseAjax;
+import com.liferay.portal.util.WebKeys;
+
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.PacketListener;
 import org.jivesoftware.smack.packet.Packet;
-
-import com.liferay.portal.model.RequestWait;
-import com.liferay.portal.model.ReverseAjax;
-import com.liferay.portal.util.WebKeys;
 
 /**
  * <a href="MessageListener.java.html"><b><i>View Source</i></b></a>
@@ -44,11 +44,13 @@ public class MessageListener implements PacketListener {
 	}
 
 	public void processPacket(Packet packet) {
-		ReverseAjax reverseAjax = (ReverseAjax) _ses.getAttribute(WebKeys.REVERSE_AJAX);
+		ReverseAjax reverseAjax =
+			(ReverseAjax)_ses.getAttribute(WebKeys.REVERSE_AJAX);
+
 		RequestWait reqWait = reverseAjax.getRequestWait();
 
 		reverseAjax.setPendingChatMessage(true);
-		
+
 		if (reqWait != null) {
 			reqWait.notifyWait();
 		}

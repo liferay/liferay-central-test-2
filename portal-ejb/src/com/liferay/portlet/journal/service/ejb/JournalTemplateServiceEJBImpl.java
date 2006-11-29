@@ -24,8 +24,8 @@ package com.liferay.portlet.journal.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.journal.service.spring.JournalTemplateService;
-import com.liferay.portlet.journal.service.spring.JournalTemplateServiceFactory;
+import com.liferay.portlet.journal.service.JournalTemplateService;
+import com.liferay.portlet.journal.service.JournalTemplateServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

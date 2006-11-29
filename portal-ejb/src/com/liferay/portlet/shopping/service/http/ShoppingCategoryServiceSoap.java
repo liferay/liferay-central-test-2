@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.shopping.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class ShoppingCategoryServiceSoap {
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel addCategory(
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
 		java.lang.String plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -48,7 +47,7 @@ public class ShoppingCategoryServiceSoap {
 					parentCategoryId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -57,7 +56,7 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel addCategory(
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap addCategory(
 		java.lang.String plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -67,7 +66,7 @@ public class ShoppingCategoryServiceSoap {
 					parentCategoryId, name, description, communityPermissions,
 					guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -88,12 +87,12 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel getCategory(
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap getCategory(
 		java.lang.String categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.getCategory(categoryId);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -102,7 +101,7 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.shopping.model.ShoppingCategoryModel updateCategory(
+	public static com.liferay.portlet.shopping.model.ShoppingCategorySoap updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentCategory) throws RemoteException {
@@ -110,7 +109,7 @@ public class ShoppingCategoryServiceSoap {
 			com.liferay.portlet.shopping.model.ShoppingCategory returnValue = ShoppingCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description, mergeWithParentCategory);
 
-			return returnValue;
+			return com.liferay.portlet.shopping.model.ShoppingCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -119,5 +118,5 @@ public class ShoppingCategoryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ShoppingCategoryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ShoppingCategoryServiceSoap.class);
 }

@@ -29,9 +29,9 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeService;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
-import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil;
-import com.liferay.portlet.wiki.service.spring.WikiNodeService;
 
 /**
  * <a href="WikiNodeServiceImpl.java.html"><b><i>View Source</i></b></a>

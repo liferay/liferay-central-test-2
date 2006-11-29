@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringPool;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;

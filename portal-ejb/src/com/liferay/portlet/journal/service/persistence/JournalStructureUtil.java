@@ -45,8 +45,8 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure remove(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
-		throws com.liferay.portlet.journal.NoSuchStructureException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -142,8 +142,8 @@ public class JournalStructureUtil {
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK)
-		throws com.liferay.portlet.journal.NoSuchStructureException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByPrimaryKey(journalStructurePK);
 	}
 
@@ -164,33 +164,33 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByGroupId_First(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchStructureException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure findByGroupId_Last(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchStructureException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure[] findByGroupId_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK,
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchStructureException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
 		return getPersistence().findByGroupId_PrevAndNext(journalStructurePK,
 			groupId, obc);
 	}
@@ -206,7 +206,7 @@ public class JournalStructureUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

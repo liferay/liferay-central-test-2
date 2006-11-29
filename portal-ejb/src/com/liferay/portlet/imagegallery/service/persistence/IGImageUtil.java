@@ -45,8 +45,8 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage remove(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK)
-		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class IGImageUtil {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByPrimaryKey(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK)
-		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByPrimaryKey(igImagePK);
 	}
 
@@ -163,33 +163,33 @@ public class IGImageUtil {
 	}
 
 	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByFolderId_First(
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByFolderId_First(folderId, obc);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage findByFolderId_Last(
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByFolderId_Last(folderId, obc);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage[] findByFolderId_PrevAndNext(
 		com.liferay.portlet.imagegallery.service.persistence.IGImagePK igImagePK,
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.imagegallery.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.imagegallery.NoSuchImageException {
 		return getPersistence().findByFolderId_PrevAndNext(igImagePK, folderId,
 			obc);
 	}
@@ -205,7 +205,7 @@ public class IGImageUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

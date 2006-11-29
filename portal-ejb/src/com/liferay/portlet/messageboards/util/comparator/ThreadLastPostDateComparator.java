@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.messageboards.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.util.DateUtil;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.util.Date;
 

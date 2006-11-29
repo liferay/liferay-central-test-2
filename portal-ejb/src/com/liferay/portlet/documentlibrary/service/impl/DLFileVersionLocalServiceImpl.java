@@ -23,8 +23,8 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService;
 
 import java.util.List;
 

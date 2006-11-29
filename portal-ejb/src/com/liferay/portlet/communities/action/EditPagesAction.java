@@ -36,17 +36,18 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.LayoutSetServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -55,7 +56,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
-import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
@@ -68,6 +68,7 @@ import java.util.Properties;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -243,13 +244,12 @@ public class EditPagesAction extends PortletAction {
 				PortletPreferencesFactory.getPortletPreferencesPK(
 					httpReq, copyPortletId, copyLayout.getPlid());
 
-			PortletPreferencesImpl copyPrefsImpl =
-				(PortletPreferencesImpl)
-					PortletPreferencesLocalServiceUtil.getPreferences(
-						companyId, copyPrefsPK);
+			PortletPreferences copyPrefs =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					companyId, copyPrefsPK);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				prefsPK, copyPrefsImpl);
+				prefsPK, copyPrefs);
 
 			// Copy portlet setup
 
@@ -263,13 +263,12 @@ public class EditPagesAction extends PortletAction {
 				copyPortletId, copyLayout.getLayoutId(),
 				copyLayout.getOwnerId());
 
-			copyPrefsImpl =
-				(PortletPreferencesImpl)
-					PortletPreferencesLocalServiceUtil.getPreferences(
-						companyId, copyPrefsPK);
+			copyPrefs =
+				PortletPreferencesLocalServiceUtil.getPreferences(
+					companyId, copyPrefsPK);
 
 			PortletPreferencesLocalServiceUtil.updatePreferences(
-				prefsPK, copyPrefsImpl);
+				prefsPK, copyPrefs);
 		}
 	}
 
@@ -318,7 +317,7 @@ public class EditPagesAction extends PortletAction {
 				groupId, privateLayout, parentLayoutId, name, type, hidden,
 				friendlyURL);
 
-			if (type.equals(Layout.TYPE_PORTLET)) {
+			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
@@ -338,7 +337,7 @@ public class EditPagesAction extends PortletAction {
 				layoutId, ownerId, parentLayoutId, name, languageId, type,
 				hidden, friendlyURL);
 
-			if (type.equals(Layout.TYPE_PORTLET)) {
+			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((Validator.isNotNull(copyLayoutId)) &&
 					(!copyLayoutId.equals(layout.getLayoutId()))) {
 
@@ -346,7 +345,9 @@ public class EditPagesAction extends PortletAction {
 						Layout copyLayout = LayoutLocalServiceUtil.getLayout(
 							copyLayoutId, ownerId);
 
-						if (copyLayout.getType().equals(Layout.TYPE_PORTLET)) {
+						if (copyLayout.getType().equals(
+								LayoutImpl.TYPE_PORTLET)) {
+
 							LayoutServiceUtil.updateLayout(
 								layoutId, ownerId, copyLayout.getTypeSettings());
 
@@ -435,7 +436,7 @@ public class EditPagesAction extends PortletAction {
 
 		String groupId = ParamUtil.getString(req, "groupId");
 
-		String publicOwnerId = Layout.PUBLIC + groupId;
+		String publicOwnerId = LayoutImpl.PUBLIC + groupId;
 
 		String publicVirtualHost = ParamUtil.getString(
 			req, "publicVirtualHost");
@@ -445,7 +446,7 @@ public class EditPagesAction extends PortletAction {
 
 		// Private virtual host
 
-		String privateOwnerId = Layout.PRIVATE + groupId;
+		String privateOwnerId = LayoutImpl.PRIVATE + groupId;
 
 		String privateVirtualHost = ParamUtil.getString(
 			req, "privateVirtualHost");

@@ -23,13 +23,14 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class WikiNodePersistence extends BasePersistence {
 	public WikiNode create(String nodeId) {
-		WikiNode wikiNode = new WikiNode();
+		WikiNode wikiNode = new WikiNodeImpl();
 		wikiNode.setNew(true);
 		wikiNode.setPrimaryKey(nodeId);
 
@@ -64,7 +65,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			WikiNode wikiNode = (WikiNode)session.get(WikiNode.class, nodeId);
+			WikiNode wikiNode = (WikiNode)session.get(WikiNodeImpl.class, nodeId);
 
 			if (wikiNode == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +163,7 @@ public class WikiNodePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (WikiNode)session.get(WikiNode.class, nodeId);
+			return (WikiNode)session.get(WikiNodeImpl.class, nodeId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -336,7 +337,7 @@ public class WikiNodePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
-			WikiNode[] array = new WikiNode[3];
+			WikiNode[] array = new WikiNodeImpl[3];
 			array[0] = (WikiNode)objArray[0];
 			array[1] = (WikiNode)objArray[1];
 			array[2] = (WikiNode)objArray[2];
@@ -516,7 +517,7 @@ public class WikiNodePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiNode);
-			WikiNode[] array = new WikiNode[3];
+			WikiNode[] array = new WikiNodeImpl[3];
 			array[0] = (WikiNode)objArray[0];
 			array[1] = (WikiNode)objArray[1];
 			array[2] = (WikiNode)objArray[2];

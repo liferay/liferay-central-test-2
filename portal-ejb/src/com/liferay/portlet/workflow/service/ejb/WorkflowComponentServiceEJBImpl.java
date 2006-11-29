@@ -24,8 +24,8 @@ package com.liferay.portlet.workflow.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentService;
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceFactory;
+import com.liferay.portlet.workflow.service.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

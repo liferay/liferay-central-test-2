@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.service.ejb;
 
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalService;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

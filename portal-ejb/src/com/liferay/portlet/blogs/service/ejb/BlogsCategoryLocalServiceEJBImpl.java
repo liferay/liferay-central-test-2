@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.blogs.service.ejb;
 
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceFactory;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

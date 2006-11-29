@@ -23,13 +23,14 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.shopping.NoSuchItemPriceException;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class ShoppingItemPricePersistence extends BasePersistence {
 	public ShoppingItemPrice create(String itemPriceId) {
-		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPrice();
+		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
 		shoppingItemPrice.setNew(true);
 		shoppingItemPrice.setPrimaryKey(itemPriceId);
 
@@ -64,7 +65,7 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPrice.class,
+			ShoppingItemPrice shoppingItemPrice = (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
 					itemPriceId);
 
 			if (shoppingItemPrice == null) {
@@ -169,7 +170,7 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ShoppingItemPrice)session.get(ShoppingItemPrice.class,
+			return (ShoppingItemPrice)session.get(ShoppingItemPriceImpl.class,
 				itemPriceId);
 		}
 		catch (HibernateException he) {
@@ -352,7 +353,7 @@ public class ShoppingItemPricePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItemPrice);
-			ShoppingItemPrice[] array = new ShoppingItemPrice[3];
+			ShoppingItemPrice[] array = new ShoppingItemPriceImpl[3];
 			array[0] = (ShoppingItemPrice)objArray[0];
 			array[1] = (ShoppingItemPrice)objArray[1];
 			array[2] = (ShoppingItemPrice)objArray[2];

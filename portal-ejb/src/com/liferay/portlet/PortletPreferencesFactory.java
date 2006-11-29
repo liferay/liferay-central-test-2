@@ -24,15 +24,17 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -41,7 +43,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.portlet.RenderRequestWrapper;
 
@@ -224,8 +225,8 @@ public class PortletPreferencesFactory {
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
-				layoutId = Layout.getLayoutId(selPlid);
-				ownerId = Layout.getOwnerId(selPlid);
+				layoutId = LayoutImpl.getLayoutId(selPlid);
+				ownerId = LayoutImpl.getOwnerId(selPlid);
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 				}
@@ -233,7 +234,7 @@ public class PortletPreferencesFactory {
 					String userId = PortalUtil.getUserId(req);
 
 					if ((userId == null) || modeEditGuest) {
-						userId = User.getDefaultUserId(
+						userId = UserImpl.getDefaultUserId(
 							themeDisplay.getCompanyId());
 					}
 
@@ -244,18 +245,18 @@ public class PortletPreferencesFactory {
 			}
 			else {
 				layoutId = PortletKeys.PREFS_LAYOUT_ID_SHARED;
-				ownerId = Layout.getOwnerId(selPlid);
+				ownerId = LayoutImpl.getOwnerId(selPlid);
 
 				if (portlet.isPreferencesOwnedByGroup()) {
 					ownerId =
 						PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-							Layout.getGroupId(ownerId);
+							LayoutImpl.getGroupId(ownerId);
 				}
 				else {
 					String userId = PortalUtil.getUserId(req);
 
 					if ((userId == null) || modeEditGuest) {
-						userId = User.getDefaultUserId(
+						userId = UserImpl.getDefaultUserId(
 							themeDisplay.getCompanyId());
 					}
 
@@ -298,7 +299,7 @@ public class PortletPreferencesFactory {
 			if (uniquePerGroup) {
 				ownerId =
 					PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
-						Layout.getGroupId(ownerId);
+						LayoutImpl.getGroupId(ownerId);
 			}
 			else {
 				ownerId =

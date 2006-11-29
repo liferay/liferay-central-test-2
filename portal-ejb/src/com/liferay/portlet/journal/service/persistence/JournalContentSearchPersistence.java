@@ -23,13 +23,14 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -51,7 +52,7 @@ import java.util.List;
 public class JournalContentSearchPersistence extends BasePersistence {
 	public JournalContentSearch create(
 		JournalContentSearchPK journalContentSearchPK) {
-		JournalContentSearch journalContentSearch = new JournalContentSearch();
+		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
 		journalContentSearch.setNew(true);
 		journalContentSearch.setPrimaryKey(journalContentSearchPK);
 
@@ -66,7 +67,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearch.class,
+			JournalContentSearch journalContentSearch = (JournalContentSearch)session.get(JournalContentSearchImpl.class,
 					journalContentSearchPK);
 
 			if (journalContentSearch == null) {
@@ -174,7 +175,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (JournalContentSearch)session.get(JournalContentSearch.class,
+			return (JournalContentSearch)session.get(JournalContentSearchImpl.class,
 				journalContentSearchPK);
 		}
 		catch (HibernateException he) {
@@ -347,7 +348,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearch[3];
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 			array[0] = (JournalContentSearch)objArray[0];
 			array[1] = (JournalContentSearch)objArray[1];
 			array[2] = (JournalContentSearch)objArray[2];
@@ -570,7 +571,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearch[3];
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 			array[0] = (JournalContentSearch)objArray[0];
 			array[1] = (JournalContentSearch)objArray[1];
 			array[2] = (JournalContentSearch)objArray[2];
@@ -793,7 +794,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearch[3];
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 			array[0] = (JournalContentSearch)objArray[0];
 			array[1] = (JournalContentSearch)objArray[1];
 			array[2] = (JournalContentSearch)objArray[2];
@@ -1016,7 +1017,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
-			JournalContentSearch[] array = new JournalContentSearch[3];
+			JournalContentSearch[] array = new JournalContentSearchImpl[3];
 			array[0] = (JournalContentSearch)objArray[0];
 			array[1] = (JournalContentSearch)objArray[1];
 			array[2] = (JournalContentSearch)objArray[2];

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.sitemap.action;
 
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
@@ -64,7 +64,7 @@ public class EditConfigurationAction extends PortletAction {
 		String displayDepth = ParamUtil.getString(req, "displayDepth");
 
 		if (Validator.isNull(rootLayoutId)) {
-			rootLayoutId = Layout.DEFAULT_PARENT_LAYOUT_ID;
+			rootLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 		}
 
 		String portletResource = ParamUtil.getString(req, "portletResource");

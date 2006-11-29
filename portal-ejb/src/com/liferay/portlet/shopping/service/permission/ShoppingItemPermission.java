@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 
 /**
  * <a href="ShoppingItemPermission.java.html"><b><i>View Source</i></b></a>

@@ -30,10 +30,11 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceUtil;
+import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
+import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -70,7 +71,8 @@ public class ActionUtil {
 		ShoppingCategory category = null;
 
 		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			!categoryId.equals(
+				ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = ShoppingCategoryServiceUtil.getCategory(categoryId);
 		}

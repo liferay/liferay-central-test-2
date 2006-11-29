@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.messageboards.service.spring.MBCategoryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class MBCategoryServiceSoap {
-	public static com.liferay.portlet.messageboards.model.MBCategoryModel addCategory(
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
 		java.lang.String plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -48,7 +47,7 @@ public class MBCategoryServiceSoap {
 					parentCategoryId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -57,7 +56,7 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategoryModel addCategory(
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap addCategory(
 		java.lang.String plid, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -67,7 +66,7 @@ public class MBCategoryServiceSoap {
 					parentCategoryId, name, description, communityPermissions,
 					guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -88,12 +87,12 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategoryModel getCategory(
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap getCategory(
 		java.lang.String categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.getCategory(categoryId);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -126,7 +125,7 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBCategoryModel updateCategory(
+	public static com.liferay.portlet.messageboards.model.MBCategorySoap updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentCategory) throws RemoteException {
@@ -134,7 +133,7 @@ public class MBCategoryServiceSoap {
 			com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description, mergeWithParentCategory);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -143,5 +142,5 @@ public class MBCategoryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBCategoryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(MBCategoryServiceSoap.class);
 }

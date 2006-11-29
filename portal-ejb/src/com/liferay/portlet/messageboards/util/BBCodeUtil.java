@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.util.HashMap;

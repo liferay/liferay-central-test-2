@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.ejb;
 
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
 
 import javax.ejb.EJBLocalObject;
 

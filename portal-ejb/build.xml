@@ -20,7 +20,7 @@
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="classes"
-			includes="**/portal/PortalException.java,**/portal/SystemException.java,**/portal/jcr/JCRConstants.java,**/portal/jcr/JCRFactory.java,**/portal/jcr/JCRFactoryUtil.java,**/portal/lucene/Lucene*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java,**/portlet/documentlibrary/model/DLFileEntry.java,**/portlet/documentlibrary/service/spring/DLFileEntryLocalServiceUtil.java"
+			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java"
 			fork="${javac.fork}"
 			memoryMaximumSize="${javac.memoryMaximumSize}"
 			nowarn="${javac.nowarn}"
@@ -282,7 +282,7 @@
 			classname="com.liferay.portal.tools.ServiceBuilder"
 			classpathref="project.classpath"
 			fork="true"
-			maxmemory="512m"
+			maxmemory="256m"
 			newenvironment="true"
 		>
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
@@ -292,6 +292,7 @@
 			<arg value="classes/META-INF/portal-spring-enterprise.xml" />
 			<arg value="classes/META-INF/portal-spring-professional.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
+			<arg value="${project.dir}/portal-service/src" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />

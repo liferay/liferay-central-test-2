@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.bookmarks.service.ejb;
 
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalService;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
 
 import javax.ejb.EJBLocalObject;
 

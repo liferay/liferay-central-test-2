@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.blogs.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class BlogsCategoryServiceSoap {
-	public static com.liferay.portlet.blogs.model.BlogsCategoryModel addCategory(
+	public static com.liferay.portlet.blogs.model.BlogsCategorySoap addCategory(
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
@@ -47,7 +46,7 @@ public class BlogsCategoryServiceSoap {
 					name, description, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -56,7 +55,7 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsCategoryModel addCategory(
+	public static com.liferay.portlet.blogs.model.BlogsCategorySoap addCategory(
 		java.lang.String parentCategoryId, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -64,7 +63,7 @@ public class BlogsCategoryServiceSoap {
 			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.addCategory(parentCategoryId,
 					name, description, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -85,12 +84,12 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsCategoryModel getCategory(
+	public static com.liferay.portlet.blogs.model.BlogsCategorySoap getCategory(
 		java.lang.String categoryId) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.getCategory(categoryId);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -99,7 +98,7 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsCategoryModel updateCategory(
+	public static com.liferay.portlet.blogs.model.BlogsCategorySoap updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description)
 		throws RemoteException {
@@ -107,7 +106,7 @@ public class BlogsCategoryServiceSoap {
 			com.liferay.portlet.blogs.model.BlogsCategory returnValue = BlogsCategoryServiceUtil.updateCategory(categoryId,
 					parentCategoryId, name, description);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -116,5 +115,5 @@ public class BlogsCategoryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BlogsCategoryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(BlogsCategoryServiceSoap.class);
 }

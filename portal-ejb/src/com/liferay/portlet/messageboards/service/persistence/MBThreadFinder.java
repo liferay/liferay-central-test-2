@@ -25,7 +25,7 @@ package com.liferay.portlet.messageboards.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -200,7 +200,7 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("MBThread", MBThread.class);
+			q.addEntity("MBThread", MBThreadImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -231,7 +231,7 @@ public class MBThreadFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("MBThread", MBThread.class);
+			q.addEntity("MBThread", MBThreadImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

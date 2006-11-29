@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -76,7 +77,7 @@ public class DLFolderPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				folderId, DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+				folderId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.DOCUMENT_LIBRARY,

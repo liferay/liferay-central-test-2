@@ -23,13 +23,14 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class DLFileEntryPersistence extends BasePersistence {
 	public DLFileEntry create(DLFileEntryPK dlFileEntryPK) {
-		DLFileEntry dlFileEntry = new DLFileEntry();
+		DLFileEntry dlFileEntry = new DLFileEntryImpl();
 		dlFileEntry.setNew(true);
 		dlFileEntry.setPrimaryKey(dlFileEntryPK);
 
@@ -64,7 +65,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntry.class,
+			DLFileEntry dlFileEntry = (DLFileEntry)session.get(DLFileEntryImpl.class,
 					dlFileEntryPK);
 
 			if (dlFileEntry == null) {
@@ -167,7 +168,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DLFileEntry)session.get(DLFileEntry.class, dlFileEntryPK);
+			return (DLFileEntry)session.get(DLFileEntryImpl.class, dlFileEntryPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -349,7 +350,7 @@ public class DLFileEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
-			DLFileEntry[] array = new DLFileEntry[3];
+			DLFileEntry[] array = new DLFileEntryImpl[3];
 			array[0] = (DLFileEntry)objArray[0];
 			array[1] = (DLFileEntry)objArray[1];
 			array[2] = (DLFileEntry)objArray[2];

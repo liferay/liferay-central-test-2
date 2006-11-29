@@ -23,13 +23,14 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class JournalStructurePersistence extends BasePersistence {
 	public JournalStructure create(JournalStructurePK journalStructurePK) {
-		JournalStructure journalStructure = new JournalStructure();
+		JournalStructure journalStructure = new JournalStructureImpl();
 		journalStructure.setNew(true);
 		journalStructure.setPrimaryKey(journalStructurePK);
 
@@ -64,7 +65,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructure.class,
+			JournalStructure journalStructure = (JournalStructure)session.get(JournalStructureImpl.class,
 					journalStructurePK);
 
 			if (journalStructure == null) {
@@ -170,7 +171,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (JournalStructure)session.get(JournalStructure.class,
+			return (JournalStructure)session.get(JournalStructureImpl.class,
 				journalStructurePK);
 		}
 		catch (HibernateException he) {
@@ -350,7 +351,7 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalStructure);
-			JournalStructure[] array = new JournalStructure[3];
+			JournalStructure[] array = new JournalStructureImpl[3];
 			array[0] = (JournalStructure)objArray[0];
 			array[1] = (JournalStructure)objArray[1];
 			array[2] = (JournalStructure)objArray[2];

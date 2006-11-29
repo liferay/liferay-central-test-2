@@ -22,17 +22,19 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -40,18 +42,18 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.util.Indexer;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import de.nava.informa.core.ChannelIF;
 import de.nava.informa.impl.basic.ChannelBuilder;
@@ -260,7 +262,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			entry.getPrimaryKey().toString());
 
 		// Entry
@@ -387,7 +389,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if (Validator.isNull(keywords)) {
 				return hits;
@@ -489,7 +491,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 	protected String getCategoryId(String companyId, String categoryId)
 		throws PortalException, SystemException {
 
-		if (!categoryId.equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			// Ensure category exists and belongs to the proper company
 
@@ -498,11 +500,11 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 					BlogsCategoryUtil.findByPrimaryKey(categoryId);
 
 				if (!companyId.equals(category.getCompanyId())) {
-					categoryId = BlogsCategory.DEFAULT_PARENT_CATEGORY_ID;
+					categoryId = BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 				}
 			}
 			catch (NoSuchCategoryException nsfe) {
-				categoryId = BlogsCategory.DEFAULT_PARENT_CATEGORY_ID;
+				categoryId = BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 			}
 		}
 

@@ -27,8 +27,9 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -65,7 +66,7 @@ public class ActionUtil {
 		MBCategory category = null;
 
 		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			!categoryId.equals(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = MBCategoryServiceUtil.getCategory(categoryId);
 		}

@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.mail.model;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;

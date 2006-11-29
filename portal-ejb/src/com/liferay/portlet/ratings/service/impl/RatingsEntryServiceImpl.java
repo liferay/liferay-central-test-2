@@ -26,8 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.service.spring.RatingsEntryLocalServiceUtil;
-import com.liferay.portlet.ratings.service.spring.RatingsEntryService;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil;
+import com.liferay.portlet.ratings.service.RatingsEntryService;
 
 /**
  * <a href="RatingsEntryServiceImpl.java.html"><b><i>View Source</i></b></a>

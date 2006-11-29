@@ -23,13 +23,14 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class IGImagePersistence extends BasePersistence {
 	public IGImage create(IGImagePK igImagePK) {
-		IGImage igImage = new IGImage();
+		IGImage igImage = new IGImageImpl();
 		igImage.setNew(true);
 		igImage.setPrimaryKey(igImagePK);
 
@@ -64,7 +65,7 @@ public class IGImagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			IGImage igImage = (IGImage)session.get(IGImage.class, igImagePK);
+			IGImage igImage = (IGImage)session.get(IGImageImpl.class, igImagePK);
 
 			if (igImage == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +165,7 @@ public class IGImagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (IGImage)session.get(IGImage.class, igImagePK);
+			return (IGImage)session.get(IGImageImpl.class, igImagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -342,7 +343,7 @@ public class IGImagePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
-			IGImage[] array = new IGImage[3];
+			IGImage[] array = new IGImageImpl[3];
 			array[0] = (IGImage)objArray[0];
 			array[1] = (IGImage)objArray[1];
 			array[2] = (IGImage)objArray[2];

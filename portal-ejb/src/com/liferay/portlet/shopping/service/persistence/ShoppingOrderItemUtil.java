@@ -45,8 +45,8 @@ public class ShoppingOrderItemUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem remove(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -142,8 +142,8 @@ public class ShoppingOrderItemUtil {
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByPrimaryKey(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByPrimaryKey(shoppingOrderItemPK);
 	}
 
@@ -164,33 +164,33 @@ public class ShoppingOrderItemUtil {
 	}
 
 	public static java.util.List findByOrderId(java.lang.String orderId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_First(
 		java.lang.String orderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByOrderId_First(orderId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem findByOrderId_Last(
 		java.lang.String orderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByOrderId_Last(orderId, obc);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem[] findByOrderId_PrevAndNext(
 		com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK shoppingOrderItemPK,
 		java.lang.String orderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.shopping.NoSuchOrderItemException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.shopping.NoSuchOrderItemException {
 		return getPersistence().findByOrderId_PrevAndNext(shoppingOrderItemPK,
 			orderId, obc);
 	}
@@ -206,7 +206,7 @@ public class ShoppingOrderItemUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

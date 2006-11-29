@@ -24,7 +24,7 @@ package com.liferay.portlet.wiki.util;
 
 import com.efsol.friki.BasicDriver;
 
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;

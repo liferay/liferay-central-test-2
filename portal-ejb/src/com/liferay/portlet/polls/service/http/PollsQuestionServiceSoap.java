@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.polls.service.spring.PollsQuestionServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class PollsQuestionServiceSoap {
-	public static com.liferay.portlet.polls.model.PollsQuestionModel addQuestion(
+	public static com.liferay.portlet.polls.model.PollsQuestionSoap addQuestion(
 		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
@@ -52,7 +51,7 @@ public class PollsQuestionServiceSoap {
 					expirationDateMinute, neverExpire, choices,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -61,7 +60,7 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.polls.model.PollsQuestionModel addQuestion(
+	public static com.liferay.portlet.polls.model.PollsQuestionSoap addQuestion(
 		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
@@ -75,7 +74,7 @@ public class PollsQuestionServiceSoap {
 					expirationDateMinute, neverExpire, choices,
 					communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -96,12 +95,12 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.polls.model.PollsQuestionModel getQuestion(
+	public static com.liferay.portlet.polls.model.PollsQuestionSoap getQuestion(
 		java.lang.String questionId) throws RemoteException {
 		try {
 			com.liferay.portlet.polls.model.PollsQuestion returnValue = PollsQuestionServiceUtil.getQuestion(questionId);
 
-			return returnValue;
+			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -110,7 +109,7 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.polls.model.PollsQuestionModel updateQuestion(
+	public static com.liferay.portlet.polls.model.PollsQuestionSoap updateQuestion(
 		java.lang.String questionId, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
@@ -122,7 +121,7 @@ public class PollsQuestionServiceSoap {
 					expirationDateYear, expirationDateHour,
 					expirationDateMinute, neverExpire, choices);
 
-			return returnValue;
+			return com.liferay.portlet.polls.model.PollsQuestionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -131,5 +130,5 @@ public class PollsQuestionServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PollsQuestionServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(PollsQuestionServiceSoap.class);
 }

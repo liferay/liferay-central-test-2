@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.portletconfiguration.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.Locale;

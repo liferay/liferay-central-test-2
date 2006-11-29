@@ -23,14 +23,15 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class ShoppingItemPersistence extends BasePersistence {
 	public ShoppingItem create(String itemId) {
-		ShoppingItem shoppingItem = new ShoppingItem();
+		ShoppingItem shoppingItem = new ShoppingItemImpl();
 		shoppingItem.setNew(true);
 		shoppingItem.setPrimaryKey(itemId);
 
@@ -77,7 +78,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ShoppingItem shoppingItem = (ShoppingItem)session.get(ShoppingItem.class,
+			ShoppingItem shoppingItem = (ShoppingItem)session.get(ShoppingItemImpl.class,
 					itemId);
 
 			if (shoppingItem == null) {
@@ -179,7 +180,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ShoppingItem)session.get(ShoppingItem.class, itemId);
+			return (ShoppingItem)session.get(ShoppingItemImpl.class, itemId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -358,7 +359,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItem);
-			ShoppingItem[] array = new ShoppingItem[3];
+			ShoppingItem[] array = new ShoppingItemImpl[3];
 			array[0] = (ShoppingItem)objArray[0];
 			array[1] = (ShoppingItem)objArray[1];
 			array[2] = (ShoppingItem)objArray[2];
@@ -658,7 +659,7 @@ public class ShoppingItemPersistence extends BasePersistence {
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("ShoppingItemPrice",
-				com.liferay.portlet.shopping.model.ShoppingItemPrice.class);
+				com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

@@ -23,13 +23,14 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.model.PollsChoice;
+import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class PollsChoicePersistence extends BasePersistence {
 	public PollsChoice create(PollsChoicePK pollsChoicePK) {
-		PollsChoice pollsChoice = new PollsChoice();
+		PollsChoice pollsChoice = new PollsChoiceImpl();
 		pollsChoice.setNew(true);
 		pollsChoice.setPrimaryKey(pollsChoicePK);
 
@@ -64,7 +65,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoice.class,
+			PollsChoice pollsChoice = (PollsChoice)session.get(PollsChoiceImpl.class,
 					pollsChoicePK);
 
 			if (pollsChoice == null) {
@@ -167,7 +168,7 @@ public class PollsChoicePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (PollsChoice)session.get(PollsChoice.class, pollsChoicePK);
+			return (PollsChoice)session.get(PollsChoiceImpl.class, pollsChoicePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -346,7 +347,7 @@ public class PollsChoicePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsChoice);
-			PollsChoice[] array = new PollsChoice[3];
+			PollsChoice[] array = new PollsChoiceImpl[3];
 			array[0] = (PollsChoice)objArray[0];
 			array[1] = (PollsChoice)objArray[1];
 			array[2] = (PollsChoice)objArray[2];

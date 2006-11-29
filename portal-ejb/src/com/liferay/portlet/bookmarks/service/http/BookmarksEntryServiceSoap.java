@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.bookmarks.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class BookmarksEntryServiceSoap {
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel addEntry(
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
 		java.lang.String comments, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
@@ -47,7 +46,7 @@ public class BookmarksEntryServiceSoap {
 					name, url, comments, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -56,7 +55,7 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel addEntry(
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap addEntry(
 		java.lang.String folderId, java.lang.String name, java.lang.String url,
 		java.lang.String comments, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -64,7 +63,7 @@ public class BookmarksEntryServiceSoap {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.addEntry(folderId,
 					name, url, comments, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -85,12 +84,12 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel getEntry(
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap getEntry(
 		java.lang.String entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.getEntry(entryId);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -99,12 +98,12 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel openEntry(
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap openEntry(
 		java.lang.String entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.openEntry(entryId);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -113,7 +112,7 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.bookmarks.model.BookmarksEntryModel updateEntry(
+	public static com.liferay.portlet.bookmarks.model.BookmarksEntrySoap updateEntry(
 		java.lang.String entryId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments)
 		throws RemoteException {
@@ -121,7 +120,7 @@ public class BookmarksEntryServiceSoap {
 			com.liferay.portlet.bookmarks.model.BookmarksEntry returnValue = BookmarksEntryServiceUtil.updateEntry(entryId,
 					folderId, name, url, comments);
 
-			return returnValue;
+			return com.liferay.portlet.bookmarks.model.BookmarksEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -130,5 +129,5 @@ public class BookmarksEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BookmarksEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(BookmarksEntryServiceSoap.class);
 }

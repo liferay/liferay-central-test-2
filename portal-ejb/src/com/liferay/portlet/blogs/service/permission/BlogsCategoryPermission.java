@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.model.BlogsCategory;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceUtil;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -66,7 +67,7 @@ public class BlogsCategoryPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				categoryId, BlogsCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				categoryId, BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, PortletKeys.BLOGS, actionId); // FIX ME

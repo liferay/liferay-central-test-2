@@ -27,10 +27,12 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -107,8 +109,8 @@ public class EditPermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String ownerId = Layout.getOwnerId(themeDisplay.getPlid());
-		String groupId = Layout.getGroupId(ownerId);
+		String ownerId = LayoutImpl.getOwnerId(themeDisplay.getPlid());
+		String groupId = LayoutImpl.getGroupId(ownerId);
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 		String modelResource = ParamUtil.getString(req, "modelResource");
@@ -157,12 +159,12 @@ public class EditPermissionsAction extends PortletAction {
 		PermissionServiceUtil.setGroupPermissions(
 			groupId, actionIds, resourceId);
 
-		if (!Layout.isPrivateLayout(layout.getOwnerId())) {
+		if (!LayoutImpl.isPrivateLayout(layout.getOwnerId())) {
 			Resource resource =
 				ResourceLocalServiceUtil.getResource(resourceId);
 
 			if (resource.getPrimKey().startsWith(
-					layout.getPlid() + Portlet.LAYOUT_SEPARATOR)) {
+					layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR)) {
 
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
 			}

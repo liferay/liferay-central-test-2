@@ -28,10 +28,10 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageService;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageService;
 
 import java.io.File;
 

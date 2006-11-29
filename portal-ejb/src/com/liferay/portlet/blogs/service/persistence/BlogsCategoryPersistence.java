@@ -23,13 +23,14 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class BlogsCategoryPersistence extends BasePersistence {
 	public BlogsCategory create(String categoryId) {
-		BlogsCategory blogsCategory = new BlogsCategory();
+		BlogsCategory blogsCategory = new BlogsCategoryImpl();
 		blogsCategory.setNew(true);
 		blogsCategory.setPrimaryKey(categoryId);
 
@@ -64,7 +65,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			BlogsCategory blogsCategory = (BlogsCategory)session.get(BlogsCategory.class,
+			BlogsCategory blogsCategory = (BlogsCategory)session.get(BlogsCategoryImpl.class,
 					categoryId);
 
 			if (blogsCategory == null) {
@@ -167,7 +168,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (BlogsCategory)session.get(BlogsCategory.class, categoryId);
+			return (BlogsCategory)session.get(BlogsCategoryImpl.class,
+				categoryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -348,7 +350,7 @@ public class BlogsCategoryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsCategory);
-			BlogsCategory[] array = new BlogsCategory[3];
+			BlogsCategory[] array = new BlogsCategoryImpl[3];
 			array[0] = (BlogsCategory)objArray[0];
 			array[1] = (BlogsCategory)objArray[1];
 			array[2] = (BlogsCategory)objArray[2];

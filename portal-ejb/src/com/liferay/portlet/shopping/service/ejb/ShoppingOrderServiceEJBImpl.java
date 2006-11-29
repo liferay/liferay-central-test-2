@@ -24,8 +24,8 @@ package com.liferay.portlet.shopping.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderService;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderServiceFactory;
+import com.liferay.portlet.shopping.service.ShoppingOrderService;
+import com.liferay.portlet.shopping.service.ShoppingOrderServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

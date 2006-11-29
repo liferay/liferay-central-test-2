@@ -22,6 +22,19 @@
 
 package com.liferay.portlet.messaging.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.User;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.chat.model.RosterUpdateListener;
+import com.liferay.portlet.messaging.model.JabberSession;
+import com.liferay.portlet.messaging.model.MessageListener;
+import com.liferay.portlet.messaging.util.comparator.NameComparator;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
@@ -41,21 +54,9 @@ import org.jivesoftware.smack.filter.PacketTypeFilter;
 import org.jivesoftware.smack.packet.Message;
 import org.jivesoftware.smack.packet.Presence;
 import org.jivesoftware.smack.packet.RosterPacket;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.chat.model.RosterUpdateListener;
-import com.liferay.portlet.messaging.model.JabberSession;
-import com.liferay.portlet.messaging.model.MessageListener;
-import com.liferay.portlet.messaging.util.comparator.NameComparator;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
-import com.liferay.util.StringUtil;
 
 /**
  * <a href="MessagingUtil.java.html"><b><i>View Source</i></b></a>
@@ -74,11 +75,11 @@ public class MessagingUtil {
 	public static String USER_PASSWORD = GetterUtil.getString(
 		PropsUtil.get(PropsUtil.JABBER_XMPP_USER_PASSWORD), "liferayllc");
 
-	public static JSONObject addRosterEntry(
-			HttpSession ses, User user)
+	public static JSONObject addRosterEntry(HttpSession ses, User user)
 		throws PortalException, SystemException, XMPPException {
 
 		JSONObject jo = new JSONObject();
+
 		Roster roster = getRoster(ses);
 
 		String smackId = getXmppId(user);
@@ -216,7 +217,8 @@ public class MessagingUtil {
 			jMsg.put("toName", message.getProperty("toName"));
 			jMsg.put("fromId", fromId);
 			jMsg.put("fromName", message.getProperty("fromName"));
-			jMsg.put("status", getPresence(roster.getPresence(getXmppId(fromId))));
+			jMsg.put(
+				"status", getPresence(roster.getPresence(getXmppId(fromId))));
 
 			ja.put(jMsg);
 

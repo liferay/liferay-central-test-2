@@ -25,7 +25,7 @@ package com.liferay.portlet.bookmarks.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksEntryImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -200,7 +200,7 @@ public class BookmarksEntryFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("BookmarksEntry", BookmarksEntry.class);
+			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -231,7 +231,7 @@ public class BookmarksEntryFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("BookmarksEntry", BookmarksEntry.class);
+			q.addEntity("BookmarksEntry", BookmarksEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

@@ -24,8 +24,8 @@ package com.liferay.portlet.imagegallery.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.imagegallery.service.spring.IGFolderService;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceFactory;
+import com.liferay.portlet.imagegallery.service.IGFolderService;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

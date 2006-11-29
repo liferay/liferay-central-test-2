@@ -23,9 +23,9 @@
 package com.liferay.portlet.enterpriseadmin.search;
 
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.util.dao.search.RowChecker;
 
 import javax.portlet.RenderResponse;
@@ -57,8 +57,8 @@ public class GroupPermissionChecker extends RowChecker {
 		try {
 			return PermissionLocalServiceUtil.hasRolePermission(
 				_role.getRoleId(), group.getCompanyId(), _resourceName,
-				Resource.TYPE_CLASS, Resource.SCOPE_GROUP, group.getGroupId(),
-				_actionId);
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+				group.getGroupId(), _actionId);
 		}
 		catch (Exception e){
 			_log.error(e);

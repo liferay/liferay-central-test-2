@@ -29,8 +29,8 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponService;
+import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCouponService;
 
 import java.util.List;
 

@@ -30,9 +30,9 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateService;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateService;
 
 import java.io.File;
 

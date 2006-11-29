@@ -22,25 +22,29 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ImageLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -54,8 +58,11 @@ import com.liferay.portlet.journal.DuplicateArticleIdException;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.service.JournalArticleLocalService;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
@@ -63,21 +70,16 @@ import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalService;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.util.Html;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.MathUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
-import com.liferay.util.lucene.Hits;
-import com.liferay.util.mail.MailMessage;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -226,7 +228,7 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		JournalArticlePK pk = new JournalArticlePK(
-			user.getCompanyId(), articleId, JournalArticle.DEFAULT_VERSION);
+			user.getCompanyId(), articleId, JournalArticleImpl.DEFAULT_VERSION);
 
 		JournalArticle article = JournalArticleUtil.create(pk);
 
@@ -411,7 +413,7 @@ public class JournalArticleLocalServiceImpl
 
 		JournalArticle article =
 			JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-				companyId, articleId, JournalArticle.DEFAULT_VERSION));
+				companyId, articleId, JournalArticleImpl.DEFAULT_VERSION));
 
 		String content = article.getContent();
 
@@ -483,7 +485,7 @@ public class JournalArticleLocalServiceImpl
 
 			ResourceLocalServiceUtil.deleteResource(
 				article.getCompanyId(), JournalArticle.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				article.getResourcePK().toString());
 		}
 
@@ -603,38 +605,39 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_ID,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
 				article.getArticleId());
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_VERSION,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
 				Double.toString(article.getVersion()));
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_TITLE,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
 				article.getTitle());
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_DESCRIPTION,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
 				article.getDescription());
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_CREATE_DATE,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
 				article.getCreateDate().toString());
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_MODIFIED_DATE,
+				root, tokens,
+				JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
 				article.getModifiedDate().toString());
 
 			if (article.getDisplayDate() != null) {
 				JournalUtil.addReservedEl(
 					root, tokens,
-					JournalStructure.RESERVED_ARTICLE_DISPLAY_DATE,
+					JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
 					article.getDisplayDate().toString());
 			}
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_ID,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
 				article.getUserId());
 
 			String userName = StringPool.BLANK;
@@ -652,12 +655,12 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			JournalUtil.addReservedEl(
-				root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_NAME,
+				root, tokens, JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
 				userName);
 
 			JournalUtil.addReservedEl(
 				root, tokens,
-				JournalStructure.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+				JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
 				userEmailAddress);
 
 			if (article.isTemplateDriven()) {
@@ -899,19 +902,18 @@ public class JournalArticleLocalServiceImpl
 			String content, String type)
 		throws SystemException {
 
-		Sort sort = new Sort(new SortField("displayDate", true));
-
 		return search(
-			companyId, groupId, title, description, content, type, sort);
+			companyId, groupId, title, description, content, type,
+			"displayDate");
 	}
 
 	public Hits search(
 			String companyId, String groupId, String title, String description,
-			String content, String type, Sort sort)
+			String content, String type, String sortField)
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if ((Validator.isNull(title)) && (Validator.isNull(content)) &&
 				(Validator.isNull(type))) {
@@ -943,6 +945,8 @@ public class JournalArticleLocalServiceImpl
 			fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 
 			Searcher searcher = LuceneUtil.getSearcher(companyId);
+
+			Sort sort = new Sort(new SortField(sortField, true));
 
 			hits.recordHits(searcher.search(fullQuery, sort));
 
@@ -1239,7 +1243,7 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
-			if ((version > JournalArticle.DEFAULT_VERSION) &&
+			if ((version > JournalArticleImpl.DEFAULT_VERSION) &&
 				(incrementVersion)) {
 
 				Image oldImage = ImageLocalUtil.get(oldImageId);
@@ -1456,7 +1460,7 @@ public class JournalArticleLocalServiceImpl
 
 			try {
 				JournalArticleUtil.findByPrimaryKey(new JournalArticlePK(
-					companyId, articleId, JournalArticle.DEFAULT_VERSION));
+					companyId, articleId, JournalArticleImpl.DEFAULT_VERSION));
 
 				throw new DuplicateArticleIdException();
 			}

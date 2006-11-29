@@ -25,7 +25,7 @@ package com.liferay.portlet.imagegallery.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -200,7 +200,7 @@ public class IGImageFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("IGImage", IGImage.class);
+			q.addEntity("IGImage", IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -231,7 +231,7 @@ public class IGImageFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("IGImage", IGImage.class);
+			q.addEntity("IGImage", IGImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

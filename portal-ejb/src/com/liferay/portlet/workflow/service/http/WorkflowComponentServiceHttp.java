@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.workflow.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
@@ -29,12 +31,9 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.servlet.TunnelUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 
 /**
  * <a href="WorkflowComponentServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -1381,5 +1380,5 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WorkflowComponentServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(WorkflowComponentServiceHttp.class);
 }

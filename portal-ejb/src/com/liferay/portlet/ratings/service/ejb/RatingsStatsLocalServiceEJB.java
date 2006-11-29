@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.ratings.service.ejb;
 
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 
 import javax.ejb.EJBLocalObject;
 

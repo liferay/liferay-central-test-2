@@ -23,21 +23,22 @@
 package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.service.MBThreadLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
-import com.liferay.portlet.messageboards.service.spring.MBThreadLocalService;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.util.Validator;
 
@@ -72,7 +73,7 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		throws PortalException, SystemException {
 
 		MBMessage rootMessage = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID,
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID,
 			thread.getRootMessageId()));
 
 		// Lucene
@@ -91,8 +92,8 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		// File attachments
 
 		String companyId = rootMessage.getCompanyId();
-		String portletId = Company.SYSTEM;
-		String repositoryId = Company.SYSTEM;
+		String portletId = CompanyImpl.SYSTEM;
+		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = thread.getAttachmentsDir();
 
 		try {
@@ -123,7 +124,7 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 			if (!message.isDiscussion()) {
 				ResourceLocalServiceUtil.deleteResource(
 					message.getCompanyId(), MBMessage.class.getName(),
-					Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 					message.getPrimaryKey().toString());
 			}
 

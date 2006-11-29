@@ -23,13 +23,14 @@
 package com.liferay.portlet.imagegallery.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class IGFolderPersistence extends BasePersistence {
 	public IGFolder create(String folderId) {
-		IGFolder igFolder = new IGFolder();
+		IGFolder igFolder = new IGFolderImpl();
 		igFolder.setNew(true);
 		igFolder.setPrimaryKey(folderId);
 
@@ -64,7 +65,8 @@ public class IGFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			IGFolder igFolder = (IGFolder)session.get(IGFolder.class, folderId);
+			IGFolder igFolder = (IGFolder)session.get(IGFolderImpl.class,
+					folderId);
 
 			if (igFolder == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +166,7 @@ public class IGFolderPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (IGFolder)session.get(IGFolder.class, folderId);
+			return (IGFolder)session.get(IGFolderImpl.class, folderId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +347,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
-			IGFolder[] array = new IGFolder[3];
+			IGFolder[] array = new IGFolderImpl[3];
 			array[0] = (IGFolder)objArray[0];
 			array[1] = (IGFolder)objArray[1];
 			array[2] = (IGFolder)objArray[2];
@@ -577,7 +579,7 @@ public class IGFolderPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igFolder);
-			IGFolder[] array = new IGFolder[3];
+			IGFolder[] array = new IGFolderImpl[3];
 			array[0] = (IGFolder)objArray[0];
 			array[1] = (IGFolder)objArray[1];
 			array[2] = (IGFolder)objArray[2];

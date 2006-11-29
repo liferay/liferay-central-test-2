@@ -23,7 +23,7 @@
 package com.liferay.portlet.admin.action;
 
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.PortletServiceUtil;
+import com.liferay.portal.service.PortletServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;

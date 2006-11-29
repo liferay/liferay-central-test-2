@@ -24,6 +24,8 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -34,7 +36,8 @@ import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleCreateDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
@@ -44,10 +47,8 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -765,10 +766,10 @@ public class JournalUtil {
 		if (Validator.isNull(langType)) {
 			output = xml;
 		}
-		else if (langType.equals(JournalTemplate.LANG_TYPE_VM)) {
+		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
 			output = JournalVmUtil.transform(tokens, languageId, xml, script);
 		}
-		else if (langType.equals(JournalTemplate.LANG_TYPE_XSL)) {
+		else if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
 			output = JournalXslUtil.transform(tokens, languageId, xml, script);
 		}
 

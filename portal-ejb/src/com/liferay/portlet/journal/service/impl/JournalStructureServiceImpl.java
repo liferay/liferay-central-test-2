@@ -30,9 +30,9 @@ import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureService;
 import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureService;
 
 /**
  * <a href="JournalStructureServiceImpl.java.html"><b><i>View Source</i></b></a>

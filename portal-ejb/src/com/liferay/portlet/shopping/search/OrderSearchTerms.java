@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.search;
 
-import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
@@ -49,20 +49,20 @@ public class OrderSearchTerms extends OrderDisplayTerms {
 		if (status == null) {
 			return null;
 		}
-		else if (status.equals(ShoppingOrder.STATUSES[0])) {
-			return ShoppingOrder.STATUS_CHECKOUT;
+		else if (status.equals(ShoppingOrderImpl.STATUSES[0])) {
+			return ShoppingOrderImpl.STATUS_CHECKOUT;
 		}
-		else if (status.equals(ShoppingOrder.STATUSES[1])) {
-			return ShoppingOrder.STATUS_COMPLETED;
+		else if (status.equals(ShoppingOrderImpl.STATUSES[1])) {
+			return ShoppingOrderImpl.STATUS_COMPLETED;
 		}
-		else if (status.equals(ShoppingOrder.STATUSES[2])) {
-			return ShoppingOrder.STATUS_DENIED;
+		else if (status.equals(ShoppingOrderImpl.STATUSES[2])) {
+			return ShoppingOrderImpl.STATUS_DENIED;
 		}
-		else if (status.equals(ShoppingOrder.STATUSES[3])) {
-			return ShoppingOrder.STATUS_PENDING;
+		else if (status.equals(ShoppingOrderImpl.STATUSES[3])) {
+			return ShoppingOrderImpl.STATUS_PENDING;
 		}
-		else if (status.equals(ShoppingOrder.STATUSES[4])) {
-			return ShoppingOrder.STATUS_REFUNDED;
+		else if (status.equals(ShoppingOrderImpl.STATUSES[4])) {
+			return ShoppingOrderImpl.STATUS_REFUNDED;
 		}
 		else {
 			return null;

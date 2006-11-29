@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchThreadException;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBThreadPersistence extends BasePersistence {
 	public MBThread create(String threadId) {
-		MBThread mbThread = new MBThread();
+		MBThread mbThread = new MBThreadImpl();
 		mbThread.setNew(true);
 		mbThread.setPrimaryKey(threadId);
 
@@ -64,7 +65,8 @@ public class MBThreadPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBThread mbThread = (MBThread)session.get(MBThread.class, threadId);
+			MBThread mbThread = (MBThread)session.get(MBThreadImpl.class,
+					threadId);
 
 			if (mbThread == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +166,7 @@ public class MBThreadPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBThread)session.get(MBThread.class, threadId);
+			return (MBThread)session.get(MBThreadImpl.class, threadId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +347,7 @@ public class MBThreadPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
-			MBThread[] array = new MBThread[3];
+			MBThread[] array = new MBThreadImpl[3];
 			array[0] = (MBThread)objArray[0];
 			array[1] = (MBThread)objArray[1];
 			array[2] = (MBThread)objArray[2];

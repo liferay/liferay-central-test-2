@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.calendar.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.calendar.service.spring.CalEventServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,16 +37,17 @@ import java.rmi.RemoteException;
  *
  */
 public class CalEventServiceSoap {
-	public static com.liferay.portlet.calendar.model.CalEventModel addEvent(
+	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(
 		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.util.cal.Recurrence recurrence, java.lang.String remindBy,
-		int firstReminder, int secondReminder, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		java.lang.String remindBy, int firstReminder, int secondReminder,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.addEvent(plid,
 					title, description, startDateMonth, startDateDay,
@@ -57,7 +57,7 @@ public class CalEventServiceSoap {
 					recurrence, remindBy, firstReminder, secondReminder,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,15 +66,15 @@ public class CalEventServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEventModel addEvent(
+	public static com.liferay.portlet.calendar.model.CalEventSoap addEvent(
 		java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.util.cal.Recurrence recurrence, java.lang.String remindBy,
-		int firstReminder, int secondReminder,
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		java.lang.String remindBy, int firstReminder, int secondReminder,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -86,7 +86,7 @@ public class CalEventServiceSoap {
 					recurrence, remindBy, firstReminder, secondReminder,
 					communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -107,12 +107,12 @@ public class CalEventServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEventModel getEvent(
+	public static com.liferay.portlet.calendar.model.CalEventSoap getEvent(
 		java.lang.String eventId) throws RemoteException {
 		try {
 			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.getEvent(eventId);
 
-			return returnValue;
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -121,15 +121,16 @@ public class CalEventServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.calendar.model.CalEventModel updateEvent(
+	public static com.liferay.portlet.calendar.model.CalEventSoap updateEvent(
 		java.lang.String eventId, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,
 		int startDateYear, int startDateHour, int startDateMinute,
 		int endDateMonth, int endDateDay, int endDateYear, int durationHour,
 		int durationMinute, boolean allDay, boolean timeZoneSensitive,
 		java.lang.String type, boolean repeating,
-		com.liferay.util.cal.Recurrence recurrence, java.lang.String remindBy,
-		int firstReminder, int secondReminder) throws RemoteException {
+		com.liferay.portal.kernel.cal.Recurrence recurrence,
+		java.lang.String remindBy, int firstReminder, int secondReminder)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.calendar.model.CalEvent returnValue = CalEventServiceUtil.updateEvent(eventId,
 					title, description, startDateMonth, startDateDay,
@@ -138,7 +139,7 @@ public class CalEventServiceSoap {
 					durationMinute, allDay, timeZoneSensitive, type, repeating,
 					recurrence, remindBy, firstReminder, secondReminder);
 
-			return returnValue;
+			return com.liferay.portlet.calendar.model.CalEventSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -147,5 +148,5 @@ public class CalEventServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CalEventServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(CalEventServiceSoap.class);
 }

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.wiki.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.wiki.service.spring.WikiNodeServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class WikiNodeServiceSoap {
-	public static com.liferay.portlet.wiki.model.WikiNodeModel addNode(
+	public static com.liferay.portlet.wiki.model.WikiNodeSoap addNode(
 		java.lang.String plid, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
@@ -47,7 +46,7 @@ public class WikiNodeServiceSoap {
 					name, description, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -56,7 +55,7 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNodeModel addNode(
+	public static com.liferay.portlet.wiki.model.WikiNodeSoap addNode(
 		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -64,7 +63,7 @@ public class WikiNodeServiceSoap {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.addNode(plid,
 					name, description, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -85,12 +84,12 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNodeModel getNode(
+	public static com.liferay.portlet.wiki.model.WikiNodeSoap getNode(
 		java.lang.String nodeId) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.getNode(nodeId);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -99,14 +98,14 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiNodeModel updateNode(
+	public static com.liferay.portlet.wiki.model.WikiNodeSoap updateNode(
 		java.lang.String nodeId, java.lang.String name,
 		java.lang.String description) throws RemoteException {
 		try {
 			com.liferay.portlet.wiki.model.WikiNode returnValue = WikiNodeServiceUtil.updateNode(nodeId,
 					name, description);
 
-			return returnValue;
+			return com.liferay.portlet.wiki.model.WikiNodeSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -115,5 +114,5 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WikiNodeServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(WikiNodeServiceSoap.class);
 }

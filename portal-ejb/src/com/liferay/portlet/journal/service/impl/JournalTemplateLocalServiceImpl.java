@@ -22,14 +22,16 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.DuplicateTemplateIdException;
@@ -42,18 +44,17 @@ import com.liferay.portlet.journal.TemplateSmallImageNameException;
 import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
+import com.liferay.portlet.journal.service.JournalTemplateLocalService;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalService;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.io.File;
 import java.io.IOException;
@@ -120,7 +121,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (langType.equals(JournalTemplate.LANG_TYPE_VM)) {
+				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {
@@ -290,7 +291,7 @@ public class JournalTemplateLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			template.getPrimaryKey().toString());
 
 		// Template
@@ -377,7 +378,7 @@ public class JournalTemplateLocalServiceImpl
 
 		try {
 			if (formatXsl) {
-				if (langType.equals(JournalTemplate.LANG_TYPE_VM)) {
+				if (langType.equals(JournalTemplateImpl.LANG_TYPE_VM)) {
 					xsl = JournalUtil.formatVM(xsl);
 				}
 				else {

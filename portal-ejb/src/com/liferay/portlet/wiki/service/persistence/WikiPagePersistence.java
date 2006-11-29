@@ -23,13 +23,14 @@
 package com.liferay.portlet.wiki.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class WikiPagePersistence extends BasePersistence {
 	public WikiPage create(WikiPagePK wikiPagePK) {
-		WikiPage wikiPage = new WikiPage();
+		WikiPage wikiPage = new WikiPageImpl();
 		wikiPage.setNew(true);
 		wikiPage.setPrimaryKey(wikiPagePK);
 
@@ -64,7 +65,8 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			WikiPage wikiPage = (WikiPage)session.get(WikiPage.class, wikiPagePK);
+			WikiPage wikiPage = (WikiPage)session.get(WikiPageImpl.class,
+					wikiPagePK);
 
 			if (wikiPage == null) {
 				if (_log.isWarnEnabled()) {
@@ -164,7 +166,7 @@ public class WikiPagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (WikiPage)session.get(WikiPage.class, wikiPagePK);
+			return (WikiPage)session.get(WikiPageImpl.class, wikiPagePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +347,7 @@ public class WikiPagePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
-			WikiPage[] array = new WikiPage[3];
+			WikiPage[] array = new WikiPageImpl[3];
 			array[0] = (WikiPage)objArray[0];
 			array[1] = (WikiPage)objArray[1];
 			array[2] = (WikiPage)objArray[2];
@@ -577,7 +579,7 @@ public class WikiPagePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
-			WikiPage[] array = new WikiPage[3];
+			WikiPage[] array = new WikiPageImpl[3];
 			array[0] = (WikiPage)objArray[0];
 			array[1] = (WikiPage)objArray[1];
 			array[2] = (WikiPage)objArray[2];
@@ -782,7 +784,7 @@ public class WikiPagePersistence extends BasePersistence {
 			q.setBoolean(queryPos++, head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
-			WikiPage[] array = new WikiPage[3];
+			WikiPage[] array = new WikiPageImpl[3];
 			array[0] = (WikiPage)objArray[0];
 			array[1] = (WikiPage)objArray[1];
 			array[2] = (WikiPage)objArray[2];
@@ -1033,7 +1035,7 @@ public class WikiPagePersistence extends BasePersistence {
 			q.setBoolean(queryPos++, head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
-			WikiPage[] array = new WikiPage[3];
+			WikiPage[] array = new WikiPageImpl[3];
 			array[0] = (WikiPage)objArray[0];
 			array[1] = (WikiPage)objArray[1];
 			array[2] = (WikiPage)objArray[2];

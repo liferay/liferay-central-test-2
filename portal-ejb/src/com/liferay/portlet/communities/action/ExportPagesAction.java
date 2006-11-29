@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.ParamUtil;

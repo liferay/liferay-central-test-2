@@ -22,14 +22,16 @@
 
 package com.liferay.portlet.shopping.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
 import com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil;
@@ -47,21 +49,20 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.service.ShoppingItemLocalService;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingItemLocalService;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -121,7 +122,8 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 				itemPrice.setTaxable(taxable);
 				itemPrice.setShipping(shipping);
 				itemPrice.setUseShippingFormula(useShippingFormula);
-				itemPrice.setStatus(ShoppingItemPrice.STATUS_ACTIVE_DEFAULT);
+				itemPrice.setStatus(
+					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT);
 
 				boolean requiresShipping = true;
 				int stockQuantity = 0;
@@ -317,7 +319,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
 			if (itemPrice.getStatus() ==
-					ShoppingItemPrice.STATUS_ACTIVE_DEFAULT) {
+					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
 
 				item.setMinQuantity(itemPrice.getMinQuantity());
 				item.setMaxQuantity(itemPrice.getMaxQuantity());
@@ -331,8 +333,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 			if ((sale == null) && (itemPrice.getDiscount() > 0) &&
 				((itemPrice.getStatus() ==
-					ShoppingItemPrice.STATUS_ACTIVE_DEFAULT) ||
-				(itemPrice.getStatus() == ShoppingItemPrice.STATUS_ACTIVE))) {
+					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) ||
+				(itemPrice.getStatus() ==
+					ShoppingItemPriceImpl.STATUS_ACTIVE))) {
 
 				sale = Boolean.TRUE;
 			}
@@ -484,7 +487,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			item.getCompanyId(), ShoppingItem.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			item.getPrimaryKey().toString());
 
 		// Item
@@ -671,7 +674,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
 			if (itemPrice.getStatus() ==
-					ShoppingItemPrice.STATUS_ACTIVE_DEFAULT) {
+					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
 
 				item.setMinQuantity(itemPrice.getMinQuantity());
 				item.setMaxQuantity(itemPrice.getMaxQuantity());
@@ -685,8 +688,9 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 			if ((sale == null) && (itemPrice.getDiscount() > 0) &&
 				((itemPrice.getStatus() ==
-					ShoppingItemPrice.STATUS_ACTIVE_DEFAULT) ||
-				(itemPrice.getStatus() == ShoppingItemPrice.STATUS_ACTIVE))) {
+					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) ||
+				(itemPrice.getStatus() ==
+					ShoppingItemPriceImpl.STATUS_ACTIVE))) {
 
 				sale = Boolean.TRUE;
 			}

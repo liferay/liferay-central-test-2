@@ -27,8 +27,9 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderServiceUtil;
+import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -65,7 +66,7 @@ public class ActionUtil {
 		BookmarksFolder folder = null;
 
 		if (Validator.isNotNull(folderId) &&
-			!folderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID)) {
+			!folderId.equals(BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			folder = BookmarksFolderServiceUtil.getFolder(folderId);
 		}

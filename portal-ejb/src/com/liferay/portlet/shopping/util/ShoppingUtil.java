@@ -24,6 +24,8 @@ package com.liferay.portlet.shopping.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -40,10 +42,14 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
+import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
+import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingOrderItemLocalServiceUtil;
 import com.liferay.portlet.shopping.util.comparator.ItemMinQuantityComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
@@ -52,9 +58,7 @@ import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.MathUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.text.NumberFormat;
 
@@ -239,16 +243,16 @@ public class ShoppingUtil {
 
 		String type = coupon.getDiscountType();
 
-		if (type.equals(ShoppingCoupon.DISCOUNT_TYPE_PERCENTAGE)) {
+		if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_PERCENTAGE)) {
 			discount = actualSubtotal * coupon.getDiscount();
 		}
-		else if (type.equals(ShoppingCoupon.DISCOUNT_TYPE_ACTUAL)) {
+		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_ACTUAL)) {
 			discount = coupon.getDiscount();
 		}
-		else if (type.equals(ShoppingCoupon.DISCOUNT_TYPE_FREE_SHIPPING)) {
+		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_FREE_SHIPPING)) {
 			discount = calculateShipping(items);
 		}
-		else if (type.equals(ShoppingCoupon.DISCOUNT_TYPE_TAX_FREE)) {
+		else if (type.equals(ShoppingCouponImpl.DISCOUNT_TYPE_TAX_FREE)) {
 			if (stateId != null) {
 				discount = calculateTax(items, stateId);
 			}
@@ -659,7 +663,7 @@ public class ShoppingUtil {
 	public static ShoppingCart getCart(
 		String cartId, ThemeDisplay themeDisplay) {
 
-		ShoppingCart cart = new ShoppingCart();
+		ShoppingCart cart = new ShoppingCartImpl();
 
 		cart.setCartId(cartId);
 		cart.setGroupId(themeDisplay.getPortletGroupId());
@@ -941,7 +945,7 @@ public class ShoppingUtil {
 		if ((ppPaymentStatus == null) || (ppPaymentStatus.length() < 2) ||
 			(ppPaymentStatus.equals("checkout"))) {
 
-			return ShoppingOrder.STATUS_CHECKOUT;
+			return ShoppingOrderImpl.STATUS_CHECKOUT;
 		}
 		else {
 			return Character.toUpperCase(ppPaymentStatus.charAt(0)) +
@@ -955,7 +959,7 @@ public class ShoppingUtil {
 
 		String ppPaymentStatus = order.getPpPaymentStatus();
 
-		if (ppPaymentStatus.equals(ShoppingOrder.STATUS_CHECKOUT)) {
+		if (ppPaymentStatus.equals(ShoppingOrderImpl.STATUS_CHECKOUT)) {
 			ppPaymentStatus = "checkout";
 		}
 		else {
@@ -1044,7 +1048,7 @@ public class ShoppingUtil {
 			int maxQty = temp.getMaxQuantity();
 
 			if ((temp.getStatus() !=
-					ShoppingItemPrice.STATUS_INACTIVE) &&
+					ShoppingItemPriceImpl.STATUS_INACTIVE) &&
 				(count >= minQty) && (count < maxQty || maxQty == 0))  {
 
 				itemPrice = temp;

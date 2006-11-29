@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.imagegallery.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import javax.portlet.PortletURL;

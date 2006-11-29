@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderService;
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderService;
 
 /**
  * <a href="DLFolderServiceImpl.java.html"><b><i>View Source</i></b></a>

@@ -45,8 +45,8 @@ public class MBThreadUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBThread remove(
 		java.lang.String threadId)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchThreadException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class MBThreadUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByPrimaryKey(
 		java.lang.String threadId)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByPrimaryKey(threadId);
 	}
 
@@ -162,32 +162,32 @@ public class MBThreadUtil {
 	}
 
 	public static java.util.List findByCategoryId(java.lang.String categoryId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByCategoryId_First(
 		java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByCategoryId_First(categoryId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread findByCategoryId_Last(
 		java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByCategoryId_Last(categoryId, obc);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread[] findByCategoryId_PrevAndNext(
 		java.lang.String threadId, java.lang.String categoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.messageboards.NoSuchThreadException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchThreadException {
 		return getPersistence().findByCategoryId_PrevAndNext(threadId,
 			categoryId, obc);
 	}
@@ -203,7 +203,7 @@ public class MBThreadUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

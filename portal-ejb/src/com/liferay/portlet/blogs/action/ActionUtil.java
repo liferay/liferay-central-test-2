@@ -27,8 +27,9 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryServiceUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryServiceUtil;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.service.BlogsCategoryServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -65,7 +66,7 @@ public class ActionUtil {
 		BlogsCategory category = null;
 
 		if (Validator.isNotNull(categoryId) &&
-			!categoryId.equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+			!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			category = BlogsCategoryServiceUtil.getCategory(categoryId);
 		}

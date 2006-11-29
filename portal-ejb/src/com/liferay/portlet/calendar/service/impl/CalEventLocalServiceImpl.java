@@ -22,23 +22,27 @@
 
 package com.liferay.portlet.calendar.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.im.AIMConnector;
 import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
+import com.liferay.portal.kernel.cal.Recurrence;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -47,18 +51,15 @@ import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
+import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
-import com.liferay.portlet.calendar.service.spring.CalEventLocalService;
 import com.liferay.portlet.calendar.util.CalUtil;
-import com.liferay.util.Base64;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.cal.CalendarUtil;
-import com.liferay.util.cal.Recurrence;
-import com.liferay.util.mail.MailMessage;
 
 import java.text.DateFormat;
 
@@ -342,8 +343,9 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
-			event.getCompanyId(), CalEvent.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, event.getPrimaryKey().toString());
+			event.getCompanyId(), CalEvent.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			event.getPrimaryKey().toString());
 
 		// Event
 
@@ -628,7 +630,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 	protected void remindUser(CalEvent event, User user) {
 		String remindBy = event.getRemindBy();
 
-		if (remindBy.equals(CalEvent.REMIND_BY_NONE)) {
+		if (remindBy.equals(CalEventImpl.REMIND_BY_NONE)) {
 			return;
 		}
 
@@ -655,7 +657,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 			String toName = user.getFullName();
 			String toAddress = user.getEmailAddress();
 
-			if (remindBy.equals(CalEvent.REMIND_BY_SMS)) {
+			if (remindBy.equals(CalEventImpl.REMIND_BY_SMS)) {
 				toAddress = contact.getSmsSn();
 			}
 
@@ -711,8 +713,8 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 					toName,
 				});
 
-			if (remindBy.equals(CalEvent.REMIND_BY_EMAIL) ||
-				remindBy.equals(CalEvent.REMIND_BY_SMS)) {
+			if (remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ||
+				remindBy.equals(CalEventImpl.REMIND_BY_SMS)) {
 
 				InternetAddress from = new InternetAddress(
 					fromAddress, fromName);
@@ -724,22 +726,22 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 
 				MailServiceUtil.sendEmail(message);
 			}
-			else if (remindBy.equals(CalEvent.REMIND_BY_AIM) &&
+			else if (remindBy.equals(CalEventImpl.REMIND_BY_AIM) &&
 					 Validator.isNotNull(contact.getAimSn())) {
 
 				AIMConnector.send(contact.getAimSn(), body);
 			}
-			else if (remindBy.equals(CalEvent.REMIND_BY_ICQ) &&
+			else if (remindBy.equals(CalEventImpl.REMIND_BY_ICQ) &&
 					 Validator.isNotNull(contact.getIcqSn())) {
 
 				ICQConnector.send(contact.getIcqSn(), body);
 			}
-			else if (remindBy.equals(CalEvent.REMIND_BY_MSN) &&
+			else if (remindBy.equals(CalEventImpl.REMIND_BY_MSN) &&
 					 Validator.isNotNull(contact.getMsnSn())) {
 
 				MSNConnector.send(contact.getMsnSn(), body);
 			}
-			else if (remindBy.equals(CalEvent.REMIND_BY_YM) &&
+			else if (remindBy.equals(CalEventImpl.REMIND_BY_YM) &&
 					 Validator.isNotNull(contact.getYmSn())) {
 
 				YMConnector.send(contact.getYmSn(), body);

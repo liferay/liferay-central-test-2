@@ -22,15 +22,15 @@
 
 package com.liferay.portlet.sms;
 
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.JSPPortlet;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-import com.liferay.util.mail.MailMessage;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 

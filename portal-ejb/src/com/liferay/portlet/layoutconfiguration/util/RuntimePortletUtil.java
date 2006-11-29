@@ -23,8 +23,10 @@
 package com.liferay.portlet.layoutconfiguration.util;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -32,7 +34,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -109,7 +110,7 @@ public class RuntimePortletUtil {
 				(instanceId.length() == 4)) {
 
 				portletId +=
-					Portlet.INSTANCE_SEPARATOR + instanceId;
+					PortletImpl.INSTANCE_SEPARATOR + instanceId;
 
 				portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
@@ -135,8 +136,9 @@ public class RuntimePortletUtil {
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
-		PortletDisplay portletDisplayClone =
-			(PortletDisplay)portletDisplay.clone();
+		PortletDisplay portletDisplayClone = PortletDisplayFactory.create();
+
+		portletDisplay.copyTo(portletDisplayClone);
 
 		PortletConfig portletConfig =
 			(PortletConfig)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);

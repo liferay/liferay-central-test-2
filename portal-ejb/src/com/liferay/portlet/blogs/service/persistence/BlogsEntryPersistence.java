@@ -23,13 +23,14 @@
 package com.liferay.portlet.blogs.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.blogs.NoSuchEntryException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class BlogsEntryPersistence extends BasePersistence {
 	public BlogsEntry create(String entryId) {
-		BlogsEntry blogsEntry = new BlogsEntry();
+		BlogsEntry blogsEntry = new BlogsEntryImpl();
 		blogsEntry.setNew(true);
 		blogsEntry.setPrimaryKey(entryId);
 
@@ -64,7 +65,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntry.class,
+			BlogsEntry blogsEntry = (BlogsEntry)session.get(BlogsEntryImpl.class,
 					entryId);
 
 			if (blogsEntry == null) {
@@ -165,7 +166,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (BlogsEntry)session.get(BlogsEntry.class, entryId);
+			return (BlogsEntry)session.get(BlogsEntryImpl.class, entryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -344,7 +345,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
-			BlogsEntry[] array = new BlogsEntry[3];
+			BlogsEntry[] array = new BlogsEntryImpl[3];
 			array[0] = (BlogsEntry)objArray[0];
 			array[1] = (BlogsEntry)objArray[1];
 			array[2] = (BlogsEntry)objArray[2];
@@ -528,7 +529,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
-			BlogsEntry[] array = new BlogsEntry[3];
+			BlogsEntry[] array = new BlogsEntryImpl[3];
 			array[0] = (BlogsEntry)objArray[0];
 			array[1] = (BlogsEntry)objArray[1];
 			array[2] = (BlogsEntry)objArray[2];
@@ -712,7 +713,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
-			BlogsEntry[] array = new BlogsEntry[3];
+			BlogsEntry[] array = new BlogsEntryImpl[3];
 			array[0] = (BlogsEntry)objArray[0];
 			array[1] = (BlogsEntry)objArray[1];
 			array[2] = (BlogsEntry)objArray[2];

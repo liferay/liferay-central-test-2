@@ -45,8 +45,8 @@ public class JournalArticleUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle remove(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class JournalArticleUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByPrimaryKey(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByPrimaryKey(journalArticlePK);
 	}
 
@@ -163,33 +163,33 @@ public class JournalArticleUtil {
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByCompanyId_First(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByCompanyId_Last(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByCompanyId_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByCompanyId_PrevAndNext(journalArticlePK,
 			companyId, obc);
 	}
@@ -205,33 +205,33 @@ public class JournalArticleUtil {
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByGroupId_First(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByGroupId_Last(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByGroupId_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByGroupId_PrevAndNext(journalArticlePK,
 			groupId, obc);
 	}
@@ -249,33 +249,33 @@ public class JournalArticleUtil {
 
 	public static java.util.List findByC_A(java.lang.String companyId,
 		java.lang.String articleId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_A(companyId, articleId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_A_First(
 		java.lang.String companyId, java.lang.String articleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_First(companyId, articleId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_A_Last(
 		java.lang.String companyId, java.lang.String articleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_Last(companyId, articleId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_A_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String companyId, java.lang.String articleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_PrevAndNext(journalArticlePK,
 			companyId, articleId, obc);
 	}
@@ -293,7 +293,7 @@ public class JournalArticleUtil {
 
 	public static java.util.List findByC_S(java.lang.String companyId,
 		java.lang.String structureId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_S(companyId, structureId, begin, end,
 			obc);
@@ -301,26 +301,26 @@ public class JournalArticleUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_S_First(
 		java.lang.String companyId, java.lang.String structureId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_S_First(companyId, structureId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_S_Last(
 		java.lang.String companyId, java.lang.String structureId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_S_Last(companyId, structureId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_S_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String companyId, java.lang.String structureId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_S_PrevAndNext(journalArticlePK,
 			companyId, structureId, obc);
 	}
@@ -338,33 +338,33 @@ public class JournalArticleUtil {
 
 	public static java.util.List findByC_T(java.lang.String companyId,
 		java.lang.String templateId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_T(companyId, templateId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_T_First(
 		java.lang.String companyId, java.lang.String templateId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_T_First(companyId, templateId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_T_Last(
 		java.lang.String companyId, java.lang.String templateId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_T_Last(companyId, templateId, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_T_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String companyId, java.lang.String templateId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_T_PrevAndNext(journalArticlePK,
 			companyId, templateId, obc);
 	}
@@ -384,7 +384,7 @@ public class JournalArticleUtil {
 
 	public static java.util.List findByC_A_A(java.lang.String companyId,
 		java.lang.String articleId, boolean approved, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_A_A(companyId, articleId, approved,
 			begin, end, obc);
@@ -392,18 +392,18 @@ public class JournalArticleUtil {
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_A_A_First(
 		java.lang.String companyId, java.lang.String articleId,
-		boolean approved, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		boolean approved, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_A_First(companyId, articleId,
 			approved, obc);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle findByC_A_A_Last(
 		java.lang.String companyId, java.lang.String articleId,
-		boolean approved, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		boolean approved, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_A_Last(companyId, articleId,
 			approved, obc);
 	}
@@ -411,9 +411,9 @@ public class JournalArticleUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle[] findByC_A_A_PrevAndNext(
 		com.liferay.portlet.journal.service.persistence.JournalArticlePK journalArticlePK,
 		java.lang.String companyId, java.lang.String articleId,
-		boolean approved, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.journal.NoSuchArticleException, 
-			com.liferay.portal.SystemException {
+		boolean approved, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchArticleException {
 		return getPersistence().findByC_A_A_PrevAndNext(journalArticlePK,
 			companyId, articleId, approved, obc);
 	}
@@ -429,7 +429,7 @@ public class JournalArticleUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

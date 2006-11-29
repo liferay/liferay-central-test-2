@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.blogs.model.BlogsCategory;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsCategoryService;
 import com.liferay.portlet.blogs.service.permission.BlogsCategoryPermission;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryService;
 
 /**
  * <a href="BlogsCategoryServiceImpl.java.html"><b><i>View Source</i></b></a>

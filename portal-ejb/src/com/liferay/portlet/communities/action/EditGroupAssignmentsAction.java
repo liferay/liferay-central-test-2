@@ -24,9 +24,9 @@ package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.OrganizationServiceUtil;
-import com.liferay.portal.service.spring.UserGroupServiceUtil;
-import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.service.OrganizationServiceUtil;
+import com.liferay.portal.service.UserGroupServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;

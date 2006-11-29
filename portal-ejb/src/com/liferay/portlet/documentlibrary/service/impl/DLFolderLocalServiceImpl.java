@@ -22,23 +22,24 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
-import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.FolderNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalService;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -197,7 +198,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			folder.getCompanyId(), DLFolder.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			folder.getPrimaryKey().toString());
 
 		// Folder
@@ -302,14 +303,14 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 	protected String getParentFolderId(String groupId, String parentFolderId)
 		throws SystemException {
 
-		if (!parentFolderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (!parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 			DLFolder parentFolder =
 				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
 				(!groupId.equals(parentFolder.getGroupId()))) {
 
-				parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+				parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
 		}
 
@@ -319,7 +320,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 	protected String getParentFolderId(DLFolder folder, String parentFolderId)
 		throws SystemException {
 
-		if (parentFolderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID)) {
+		if (parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 			return parentFolderId;
 		}
 

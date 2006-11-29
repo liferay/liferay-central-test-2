@@ -25,7 +25,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -200,7 +200,7 @@ public class DLFileEntryFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("DLFileEntry", DLFileEntry.class);
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -231,7 +231,7 @@ public class DLFileEntryFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("DLFileEntry", DLFileEntry.class);
+			q.addEntity("DLFileEntry", DLFileEntryImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

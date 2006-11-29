@@ -23,14 +23,14 @@
 package com.liferay.portlet.journalcontentsearch.util;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.Time;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import org.apache.lucene.document.Document;
 
 /**
  * <a href="ContentHits.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ import org.apache.lucene.document.Document;
  * @author  Alexander Chow
  *
  */
-public class ContentHits extends Hits {
+public class ContentHits extends HitsImpl {
 
 	public ContentHits() {
 		super();

@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.ratings.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
@@ -30,10 +30,10 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
-import com.liferay.portlet.ratings.service.spring.RatingsEntryLocalService;
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceUtil;
 
 import java.util.Date;
 

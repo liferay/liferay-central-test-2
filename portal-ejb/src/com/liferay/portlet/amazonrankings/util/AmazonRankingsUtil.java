@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.amazonrankings.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.amazonrankings.model.AmazonRankings;
-import com.liferay.util.StringPool;
 
 import java.util.List;
 import java.util.Vector;

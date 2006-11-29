@@ -28,12 +28,13 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageService;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageService;
-import com.liferay.portlet.messageboards.service.spring.MBThreadLocalServiceUtil;
 
 import java.util.List;
 
@@ -74,7 +75,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -95,7 +96,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -117,7 +118,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -140,7 +141,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -162,7 +163,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -183,7 +184,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -205,7 +206,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(
@@ -228,7 +229,7 @@ public class MBMessageServiceImpl
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
-			priority = MBThread.PRIORITY_NOT_GIVEN;
+			priority = MBThreadImpl.PRIORITY_NOT_GIVEN;
 		}
 
 		return MBMessageLocalServiceUtil.addMessage(

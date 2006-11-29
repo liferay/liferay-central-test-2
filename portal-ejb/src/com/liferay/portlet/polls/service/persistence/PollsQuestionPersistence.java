@@ -23,13 +23,14 @@
 package com.liferay.portlet.polls.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.polls.NoSuchQuestionException;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class PollsQuestionPersistence extends BasePersistence {
 	public PollsQuestion create(String questionId) {
-		PollsQuestion pollsQuestion = new PollsQuestion();
+		PollsQuestion pollsQuestion = new PollsQuestionImpl();
 		pollsQuestion.setNew(true);
 		pollsQuestion.setPrimaryKey(questionId);
 
@@ -64,7 +65,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestion.class,
+			PollsQuestion pollsQuestion = (PollsQuestion)session.get(PollsQuestionImpl.class,
 					questionId);
 
 			if (pollsQuestion == null) {
@@ -167,7 +168,8 @@ public class PollsQuestionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (PollsQuestion)session.get(PollsQuestion.class, questionId);
+			return (PollsQuestion)session.get(PollsQuestionImpl.class,
+				questionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -346,7 +348,7 @@ public class PollsQuestionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsQuestion);
-			PollsQuestion[] array = new PollsQuestion[3];
+			PollsQuestion[] array = new PollsQuestionImpl[3];
 			array[0] = (PollsQuestion)objArray[0];
 			array[1] = (PollsQuestion)objArray[1];
 			array[2] = (PollsQuestion)objArray[2];

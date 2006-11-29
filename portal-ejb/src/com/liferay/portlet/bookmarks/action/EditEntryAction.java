@@ -28,7 +28,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;

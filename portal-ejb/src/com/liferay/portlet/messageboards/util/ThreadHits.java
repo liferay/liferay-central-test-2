@@ -22,15 +22,15 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-
-import org.apache.lucene.document.Document;
 
 /**
  * <a href="ThreadHits.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ import org.apache.lucene.document.Document;
  * @author  Brian Wing Shun Chan
  *
  */
-public class ThreadHits extends Hits {
+public class ThreadHits extends HitsImpl {
 
 	public ThreadHits() {
 		super();

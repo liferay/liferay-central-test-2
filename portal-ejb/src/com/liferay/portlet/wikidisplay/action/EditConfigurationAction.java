@@ -27,7 +27,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.service.spring.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;

@@ -163,14 +163,14 @@ public class PollsChoiceUtil {
 	}
 
 	public static java.util.List findByQuestionId(java.lang.String questionId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId(questionId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsChoice findByQuestionId_First(
 		java.lang.String questionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId_First(questionId, obc);
@@ -178,7 +178,7 @@ public class PollsChoiceUtil {
 
 	public static com.liferay.portlet.polls.model.PollsChoice findByQuestionId_Last(
 		java.lang.String questionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId_Last(questionId, obc);
@@ -187,7 +187,7 @@ public class PollsChoiceUtil {
 	public static com.liferay.portlet.polls.model.PollsChoice[] findByQuestionId_PrevAndNext(
 		com.liferay.portlet.polls.service.persistence.PollsChoicePK pollsChoicePK,
 		java.lang.String questionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portlet.polls.NoSuchChoiceException, 
 			com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId_PrevAndNext(pollsChoicePK,
@@ -205,7 +205,7 @@ public class PollsChoiceUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

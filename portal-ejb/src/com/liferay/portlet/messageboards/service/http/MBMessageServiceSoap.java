@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.messageboards.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.messageboards.service.spring.MBMessageServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class MBMessageServiceSoap {
-	public static com.liferay.portlet.messageboards.model.MBMessageModel addDiscussionMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
@@ -47,7 +46,7 @@ public class MBMessageServiceSoap {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(groupId,
 					className, classPK, threadId, parentMessageId, subject, body);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -56,7 +55,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		double priority, boolean addCommunityPermissions,
@@ -66,7 +65,7 @@ public class MBMessageServiceSoap {
 					subject, body, files, anonymous, priority,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -75,7 +74,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
@@ -86,7 +85,7 @@ public class MBMessageServiceSoap {
 					threadId, parentMessageId, subject, body, files, anonymous,
 					priority, addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -95,7 +94,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
 		double priority, java.lang.String[] communityPermissions,
@@ -105,7 +104,7 @@ public class MBMessageServiceSoap {
 					subject, body, files, anonymous, priority,
 					communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -114,7 +113,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel addMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		java.lang.String categoryId, java.lang.String threadId,
 		java.lang.String parentMessageId, java.lang.String subject,
 		java.lang.String body, java.util.List files, boolean anonymous,
@@ -125,7 +124,7 @@ public class MBMessageServiceSoap {
 					threadId, parentMessageId, subject, body, files, anonymous,
 					priority, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -160,12 +159,12 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel getMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap getMessage(
 		java.lang.String messageId) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.getMessage(messageId);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -198,7 +197,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel updateDiscussionMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateDiscussionMessage(
 		java.lang.String groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String messageId,
 		java.lang.String subject, java.lang.String body)
@@ -207,7 +206,7 @@ public class MBMessageServiceSoap {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 					className, classPK, messageId, subject, body);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -216,7 +215,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.messageboards.model.MBMessageModel updateMessage(
+	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
 		java.lang.String messageId, java.lang.String categoryId,
 		java.lang.String subject, java.lang.String body, java.util.List files,
 		double priority) throws RemoteException {
@@ -224,7 +223,7 @@ public class MBMessageServiceSoap {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
 					categoryId, subject, body, files, priority);
 
-			return returnValue;
+			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -233,5 +232,5 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(MBMessageServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(MBMessageServiceSoap.class);
 }

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileShortcutServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileShortcutServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class DLFileShortcutServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutModel addFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
 		java.lang.String folderId, java.lang.String toFolderId,
 		java.lang.String toName, boolean addCommunityPermissions,
 		boolean addGuestPermissions) throws RemoteException {
@@ -47,7 +46,7 @@ public class DLFileShortcutServiceSoap {
 				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
 					toName, addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -56,7 +55,7 @@ public class DLFileShortcutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutModel addFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap addFileShortcut(
 		java.lang.String folderId, java.lang.String toFolderId,
 		java.lang.String toName, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -65,7 +64,7 @@ public class DLFileShortcutServiceSoap {
 				DLFileShortcutServiceUtil.addFileShortcut(folderId, toFolderId,
 					toName, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -86,13 +85,13 @@ public class DLFileShortcutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutModel getFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap getFileShortcut(
 		long fileShortcutId) throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileShortcut returnValue =
 				DLFileShortcutServiceUtil.getFileShortcut(fileShortcutId);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -101,7 +100,7 @@ public class DLFileShortcutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutModel updateFileShortcut(
+	public static com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap updateFileShortcut(
 		long fileShortcutId, java.lang.String folderId,
 		java.lang.String toFolderId, java.lang.String toName)
 		throws RemoteException {
@@ -110,7 +109,7 @@ public class DLFileShortcutServiceSoap {
 				DLFileShortcutServiceUtil.updateFileShortcut(fileShortcutId,
 					folderId, toFolderId, toName);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileShortcutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -119,5 +118,5 @@ public class DLFileShortcutServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DLFileShortcutServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFileShortcutServiceSoap.class);
 }

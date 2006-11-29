@@ -22,8 +22,8 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.WebKeys;
@@ -53,11 +53,11 @@ public class PortletConfigImpl implements PortletConfig {
 							 Map params, String resourceBundle,
 							 PortletInfo portletInfo) {
 
-		_rootPortletId = Portlet.getRootPortletId(portletName);
+		_rootPortletId = PortletImpl.getRootPortletId(portletName);
 		_portletId = portletName;
 		_portletName = _rootPortletId;
 
-		int pos = _portletName.indexOf(Portlet.WAR_SEPARATOR);
+		int pos = _portletName.indexOf(PortletImpl.WAR_SEPARATOR);
 
 		if (pos != -1) {
 			_portletName = _portletName.substring(0, pos);

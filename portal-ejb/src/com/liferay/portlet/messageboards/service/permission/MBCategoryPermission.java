@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -76,7 +77,7 @@ public class MBCategoryPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				categoryId, MBCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				categoryId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.MESSAGE_BOARDS, actionId);

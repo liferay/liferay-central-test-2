@@ -28,12 +28,12 @@ import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
+import com.liferay.portlet.polls.service.PollsVoteLocalService;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVotePK;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
-import com.liferay.portlet.polls.service.spring.PollsVoteLocalService;
 
 import java.util.Date;
 

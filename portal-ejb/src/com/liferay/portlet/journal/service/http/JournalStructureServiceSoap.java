@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.journal.service.spring.JournalStructureServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class JournalStructureServiceSoap {
-	public static com.liferay.portlet.journal.model.JournalStructureModel addStructure(
+	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
@@ -49,7 +48,7 @@ public class JournalStructureServiceSoap {
 					autoStructureId, plid, name, description, xsd,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -58,7 +57,7 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalStructureModel addStructure(
+	public static com.liferay.portlet.journal.model.JournalStructureSoap addStructure(
 		java.lang.String structureId, boolean autoStructureId,
 		java.lang.String plid, java.lang.String name,
 		java.lang.String description, java.lang.String xsd,
@@ -69,7 +68,7 @@ public class JournalStructureServiceSoap {
 					autoStructureId, plid, name, description, xsd,
 					communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -90,14 +89,14 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalStructureModel getStructure(
+	public static com.liferay.portlet.journal.model.JournalStructureSoap getStructure(
 		java.lang.String companyId, java.lang.String structureId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.getStructure(companyId,
 					structureId);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -106,7 +105,7 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalStructureModel updateStructure(
+	public static com.liferay.portlet.journal.model.JournalStructureSoap updateStructure(
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd)
 		throws RemoteException {
@@ -114,7 +113,7 @@ public class JournalStructureServiceSoap {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(structureId,
 					name, description, xsd);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -123,5 +122,5 @@ public class JournalStructureServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JournalStructureServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalStructureServiceSoap.class);
 }

@@ -24,8 +24,8 @@ package com.liferay.portlet.bookmarks.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryService;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryServiceFactory;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

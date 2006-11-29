@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalService;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalServiceFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

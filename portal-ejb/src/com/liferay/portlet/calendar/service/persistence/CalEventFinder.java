@@ -25,7 +25,7 @@ package com.liferay.portlet.calendar.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 
@@ -70,7 +70,7 @@ public class CalEventFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("CalEvent", CalEvent.class);
+			q.addEntity("CalEvent", CalEventImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -102,11 +102,11 @@ public class CalEventFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("CalEvent", CalEvent.class);
+			q.addEntity("CalEvent", CalEventImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(CalEvent.REMIND_BY_NONE);
+			qPos.add(CalEventImpl.REMIND_BY_NONE);
 
 			return q.list();
 		}

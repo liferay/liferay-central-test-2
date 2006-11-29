@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.workflow.service.ejb;
 
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowComponentService;
 
 import javax.ejb.EJBObject;
 

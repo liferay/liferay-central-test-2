@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.journal.service.spring.JournalTemplateServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -50,14 +49,14 @@ public class JournalTemplateServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplateModel getTemplate(
+	public static com.liferay.portlet.journal.model.JournalTemplateSoap getTemplate(
 		java.lang.String companyId, java.lang.String templateId)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalTemplate returnValue = JournalTemplateServiceUtil.getTemplate(companyId,
 					templateId);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalTemplateSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,5 +65,5 @@ public class JournalTemplateServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JournalTemplateServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalTemplateServiceSoap.class);
 }

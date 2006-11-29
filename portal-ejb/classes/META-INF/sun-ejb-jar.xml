@@ -904,6 +904,36 @@
 			</bean-pool>
 		</ejb>
 		<ejb>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
 			<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-name>
 			<jndi-name>ejb/liferay/ShoppingCartLocalServiceHome</jndi-name>
 			<bean-pool>
@@ -1066,36 +1096,6 @@
 		<ejb>
 			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
-			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
-			<jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
-			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
-			<bean-pool>
-				<steady-pool-size>0</steady-pool-size>
-				<resize-quantity>60</resize-quantity>
-				<max-pool-size>60</max-pool-size>
-				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
-			</bean-pool>
-		</ejb>
-		<ejb>
-			<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
-			<jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</jndi-name>
 			<bean-pool>
 				<steady-pool-size>0</steady-pool-size>
 				<resize-quantity>60</resize-quantity>

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.blogs.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.blogs.service.spring.BlogsEntryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.blogs.service.BlogsEntryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class BlogsEntryServiceSoap {
-	public static com.liferay.portlet.blogs.model.BlogsEntryModel addEntry(
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
@@ -51,7 +50,7 @@ public class BlogsEntryServiceSoap {
 					displayDateMinute, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -60,7 +59,7 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntryModel addEntry(
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap addEntry(
 		java.lang.String plid, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
@@ -72,7 +71,7 @@ public class BlogsEntryServiceSoap {
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute, communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -93,12 +92,12 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntryModel getEntry(
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap getEntry(
 		java.lang.String entryId) throws RemoteException {
 		try {
 			com.liferay.portlet.blogs.model.BlogsEntry returnValue = BlogsEntryServiceUtil.getEntry(entryId);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -107,7 +106,7 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.blogs.model.BlogsEntryModel updateEntry(
+	public static com.liferay.portlet.blogs.model.BlogsEntrySoap updateEntry(
 		java.lang.String entryId, java.lang.String categoryId,
 		java.lang.String title, java.lang.String content, int displayDateMonth,
 		int displayDateDay, int displayDateYear, int displayDateHour,
@@ -118,7 +117,7 @@ public class BlogsEntryServiceSoap {
 					displayDateDay, displayDateYear, displayDateHour,
 					displayDateMinute);
 
-			return returnValue;
+			return com.liferay.portlet.blogs.model.BlogsEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -127,5 +126,5 @@ public class BlogsEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(BlogsEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(BlogsEntryServiceSoap.class);
 }

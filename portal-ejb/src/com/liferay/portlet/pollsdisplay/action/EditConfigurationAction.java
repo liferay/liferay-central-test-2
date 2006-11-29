@@ -26,7 +26,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.polls.NoSuchQuestionException;
-import com.liferay.portlet.polls.service.spring.PollsQuestionServiceUtil;
+import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;

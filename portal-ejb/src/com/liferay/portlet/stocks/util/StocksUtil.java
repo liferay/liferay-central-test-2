@@ -22,10 +22,10 @@
 
 package com.liferay.portlet.stocks.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.stocks.model.Stocks;
-import com.liferay.util.StringPool;
 
 /**
  * <a href="StocksUtil.java.html"><b><i>View Source</i></b></a>

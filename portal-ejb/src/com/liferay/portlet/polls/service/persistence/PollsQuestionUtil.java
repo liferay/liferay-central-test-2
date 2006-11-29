@@ -45,8 +45,8 @@ public class PollsQuestionUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion remove(
 		java.lang.String questionId)
-		throws com.liferay.portlet.polls.NoSuchQuestionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.polls.NoSuchQuestionException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class PollsQuestionUtil {
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByPrimaryKey(
 		java.lang.String questionId)
-		throws com.liferay.portlet.polls.NoSuchQuestionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByPrimaryKey(questionId);
 	}
 
@@ -162,32 +162,32 @@ public class PollsQuestionUtil {
 	}
 
 	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_First(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchQuestionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_Last(
 		java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchQuestionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
 		java.lang.String questionId, java.lang.String groupId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.polls.NoSuchQuestionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_PrevAndNext(questionId, groupId,
 			obc);
 	}
@@ -203,7 +203,7 @@ public class PollsQuestionUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

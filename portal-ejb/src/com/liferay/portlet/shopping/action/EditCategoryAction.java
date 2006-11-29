@@ -29,7 +29,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.NoSuchCategoryException;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCategoryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;

@@ -22,16 +22,15 @@
 
 package com.liferay.portlet.polls.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.servlet.TunnelUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
-import com.liferay.portlet.polls.service.spring.PollsVoteServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.polls.service.PollsVoteServiceUtil;
 
 /**
  * <a href="PollsVoteServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -43,8 +42,8 @@ public class PollsVoteServiceHttp {
 	public static com.liferay.portlet.polls.model.PollsVote addVote(
 		HttpPrincipal httpPrincipal, java.lang.String questionId,
 		java.lang.String choiceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = questionId;
 
@@ -66,12 +65,12 @@ public class PollsVoteServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -86,5 +85,5 @@ public class PollsVoteServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PollsVoteServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(PollsVoteServiceHttp.class);
 }

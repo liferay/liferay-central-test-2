@@ -37,7 +37,7 @@ import com.liferay.portlet.shopping.CouponNameException;
 import com.liferay.portlet.shopping.CouponStartDateException;
 import com.liferay.portlet.shopping.DuplicateCouponIdException;
 import com.liferay.portlet.shopping.NoSuchCouponException;
-import com.liferay.portlet.shopping.service.spring.ShoppingCouponServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;

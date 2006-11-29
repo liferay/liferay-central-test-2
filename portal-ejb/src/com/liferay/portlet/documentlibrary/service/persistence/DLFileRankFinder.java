@@ -25,7 +25,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 
 import java.util.Iterator;
@@ -104,7 +104,7 @@ public class DLFileRankFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("DLFileRank", DLFileRank.class);
+			q.addEntity("DLFileRank", DLFileRankImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

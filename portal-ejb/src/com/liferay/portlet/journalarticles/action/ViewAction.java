@@ -23,9 +23,9 @@
 package com.liferay.portlet.journalarticles.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.util.StringPool;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;

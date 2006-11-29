@@ -23,13 +23,14 @@
 package com.liferay.portlet.documentlibrary.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.documentlibrary.NoSuchFileVersionException;
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class DLFileVersionPersistence extends BasePersistence {
 	public DLFileVersion create(DLFileVersionPK dlFileVersionPK) {
-		DLFileVersion dlFileVersion = new DLFileVersion();
+		DLFileVersion dlFileVersion = new DLFileVersionImpl();
 		dlFileVersion.setNew(true);
 		dlFileVersion.setPrimaryKey(dlFileVersionPK);
 
@@ -64,7 +65,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersion.class,
+			DLFileVersion dlFileVersion = (DLFileVersion)session.get(DLFileVersionImpl.class,
 					dlFileVersionPK);
 
 			if (dlFileVersion == null) {
@@ -168,7 +169,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DLFileVersion)session.get(DLFileVersion.class,
+			return (DLFileVersion)session.get(DLFileVersionImpl.class,
 				dlFileVersionPK);
 		}
 		catch (HibernateException he) {
@@ -403,7 +404,7 @@ public class DLFileVersionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileVersion);
-			DLFileVersion[] array = new DLFileVersion[3];
+			DLFileVersion[] array = new DLFileVersionImpl[3];
 			array[0] = (DLFileVersion)objArray[0];
 			array[1] = (DLFileVersion)objArray[1];
 			array[2] = (DLFileVersion)objArray[2];

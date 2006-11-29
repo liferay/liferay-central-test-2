@@ -28,8 +28,8 @@ import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.spring.WikiNodeServiceUtil;
-import com.liferay.portlet.wiki.service.spring.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 

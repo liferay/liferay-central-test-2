@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchMessageFlagException;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBMessageFlagPersistence extends BasePersistence {
 	public MBMessageFlag create(MBMessageFlagPK mbMessageFlagPK) {
-		MBMessageFlag mbMessageFlag = new MBMessageFlag();
+		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
 		mbMessageFlag.setNew(true);
 		mbMessageFlag.setPrimaryKey(mbMessageFlagPK);
 
@@ -64,7 +65,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlag.class,
+			MBMessageFlag mbMessageFlag = (MBMessageFlag)session.get(MBMessageFlagImpl.class,
 					mbMessageFlagPK);
 
 			if (mbMessageFlag == null) {
@@ -168,7 +169,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBMessageFlag)session.get(MBMessageFlag.class,
+			return (MBMessageFlag)session.get(MBMessageFlagImpl.class,
 				mbMessageFlagPK);
 		}
 		catch (HibernateException he) {
@@ -340,7 +341,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlag[3];
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];
@@ -514,7 +515,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlag[3];
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];
@@ -737,7 +738,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlag[3];
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];
@@ -960,7 +961,7 @@ public class MBMessageFlagPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessageFlag);
-			MBMessageFlag[] array = new MBMessageFlag[3];
+			MBMessageFlag[] array = new MBMessageFlagImpl[3];
 			array[0] = (MBMessageFlag)objArray[0];
 			array[1] = (MBMessageFlag)objArray[1];
 			array[2] = (MBMessageFlag)objArray[2];

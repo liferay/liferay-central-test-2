@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.wiki.service.ejb;
 
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalService;
-import com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceFactory;
+import com.liferay.portlet.wiki.service.WikiPageLocalService;
+import com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

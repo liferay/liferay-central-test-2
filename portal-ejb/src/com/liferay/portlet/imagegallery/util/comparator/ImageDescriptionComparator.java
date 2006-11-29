@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.imagegallery.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="ImageDescriptionComparator.java.html"><b><i>View Source</i></b></a>

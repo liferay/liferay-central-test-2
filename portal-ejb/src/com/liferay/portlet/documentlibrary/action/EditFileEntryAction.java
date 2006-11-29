@@ -35,7 +35,7 @@ import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PropertiesUtil;

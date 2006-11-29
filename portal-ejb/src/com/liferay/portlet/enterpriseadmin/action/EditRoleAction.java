@@ -27,7 +27,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.RoleServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;

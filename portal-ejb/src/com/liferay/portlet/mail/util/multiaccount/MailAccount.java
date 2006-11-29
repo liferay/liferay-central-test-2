@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.mail.util.multiaccount;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import javax.mail.Folder;

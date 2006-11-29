@@ -23,11 +23,11 @@
 package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.security.permission.comparator.ActionComparator;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -146,13 +146,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			String scope = ParamUtil.getString(req, "scope" + actionId);
 
-			if (scope.equals(Resource.SCOPE_COMPANY)) {
+			if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
 				PermissionServiceUtil.setRolePermission(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					Resource.TYPE_CLASS, scope, themeDisplay.getCompanyId(),
+					ResourceImpl.TYPE_CLASS, scope, themeDisplay.getCompanyId(),
 					actionId);
 			}
-			else if (scope.equals(Resource.SCOPE_GROUP)) {
+			else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 				groupScopeActionIds.add(actionId);
 			}
 			else {
@@ -161,11 +161,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					Resource.TYPE_CLASS, Resource.SCOPE_COMPANY, actionId);
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY,
+					actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					Resource.TYPE_CLASS, Resource.SCOPE_GROUP, actionId);
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+					actionId);
 			}
 		}
 
@@ -215,15 +217,15 @@ public class EditRolePermissionsAction extends PortletAction {
 		for (int i = 0; i < addGroupIds.length; i++) {
 			PermissionServiceUtil.setRolePermission(
 				roleId, themeDisplay.getPortletGroupId(), selResource,
-				Resource.TYPE_CLASS, Resource.SCOPE_GROUP, addGroupIds[i],
-				actionId);
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+				addGroupIds[i], actionId);
 		}
 
 		for (int i = 0; i < removeGroupIds.length; i++) {
 			PermissionServiceUtil.unsetRolePermission(
 				roleId, themeDisplay.getPortletGroupId(), selResource,
-				Resource.TYPE_CLASS, Resource.SCOPE_GROUP, removeGroupIds[i],
-				actionId);
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+				removeGroupIds[i], actionId);
 		}
 
 		String redirect = ParamUtil.getString(req, "redirect");

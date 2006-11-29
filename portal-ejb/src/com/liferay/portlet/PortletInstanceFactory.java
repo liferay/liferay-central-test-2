@@ -32,6 +32,7 @@ import java.util.Map;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletException;
+import javax.portlet.UnavailableException;
 
 import javax.servlet.ServletContext;
 
@@ -93,11 +94,11 @@ public class PortletInstanceFactory {
 				PortletContextWrapper pcw =
 					PortletContextPool.get(portlet.getRootPortletId());
 
-				portletInstance = portlet.init(
-					portletConfig, pcw.getPortletInstance());
+				portletInstance = _init(
+					portlet, portletConfig, pcw.getPortletInstance());
 			}
 			else {
-				portletInstance = portlet.init(portletConfig);
+				portletInstance = _init(portlet, portletConfig);
 			}
 
 			portletInstances.put(portlet.getPortletId(), portletInstance);
@@ -147,6 +148,44 @@ public class PortletInstanceFactory {
 
 		PortletConfigFactory.destroy(portlet);
 		PortletContextFactory.destroy(portlet);
+	}
+
+	private CachePortlet _init(Portlet portlet, PortletConfig portletConfig)
+		throws PortletException {
+
+		return _init(portlet, portletConfig, null);
+	}
+
+	private CachePortlet _init(
+			Portlet portlet, PortletConfig portletConfig,
+			javax.portlet.Portlet portletInstance)
+		throws PortletException {
+
+		CachePortlet cachePortlet = null;
+
+		try {
+			if (portletInstance == null) {
+				portletInstance = (javax.portlet.Portlet)
+					Class.forName(portlet.getPortletClass()).newInstance();
+			}
+
+			cachePortlet = new CachePortlet(
+				portletInstance, portletConfig.getPortletContext(),
+				portlet.getExpCache());
+
+			cachePortlet.init(portletConfig);
+		}
+		catch (ClassNotFoundException cnofe) {
+			throw new UnavailableException(cnofe.getMessage());
+		}
+		catch (InstantiationException ie) {
+			throw new UnavailableException(ie.getMessage());
+		}
+		catch (IllegalAccessException iae) {
+			throw new UnavailableException(iae.getMessage());
+		}
+
+		return cachePortlet;
 	}
 
 	private static PortletInstanceFactory _instance =

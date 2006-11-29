@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.journal.service.ejb;
 
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalService;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceFactory;
+import com.liferay.portlet.journal.service.JournalStructureLocalService;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -167,7 +167,7 @@ public class JournalStructureLocalServiceEJBImpl
 		java.lang.String structureId, java.lang.String groupId,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().search(companyId,
 			structureId, groupId, name, description, andOperator, begin, end,

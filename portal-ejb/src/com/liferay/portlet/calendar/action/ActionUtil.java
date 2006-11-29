@@ -26,7 +26,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.service.spring.CalEventServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 

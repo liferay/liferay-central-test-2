@@ -23,7 +23,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.LayoutImportException;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;

@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderService;
 import com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderService;
 
 /**
  * <a href="BookmarksFolderServiceImpl.java.html"><b><i>View Source</i></b></a>

@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.cszsearch.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebCacheable;
-import com.liferay.util.StringPool;
 
 import java.util.List;
 

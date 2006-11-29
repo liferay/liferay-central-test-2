@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.PhoneServiceUtil;
+import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;

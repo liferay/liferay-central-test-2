@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalService;
 
 import java.util.Date;
 import java.util.List;

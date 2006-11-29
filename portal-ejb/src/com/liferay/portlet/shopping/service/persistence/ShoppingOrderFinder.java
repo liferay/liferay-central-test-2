@@ -23,12 +23,12 @@
 package com.liferay.portlet.shopping.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -74,7 +74,7 @@ public class ShoppingOrderFinder {
 				sql = StringUtil.replace(
 					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
 
-				ppPaymentStatus = ShoppingOrder.STATUS_LATEST;
+				ppPaymentStatus = ShoppingOrderImpl.STATUS_LATEST;
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -149,7 +149,7 @@ public class ShoppingOrderFinder {
 				sql = StringUtil.replace(
 					sql, "ppPaymentStatus = ?", "ppPaymentStatus != ?");
 
-				ppPaymentStatus = ShoppingOrder.STATUS_LATEST;
+				ppPaymentStatus = ShoppingOrderImpl.STATUS_LATEST;
 			}
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
@@ -159,7 +159,7 @@ public class ShoppingOrderFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("ShoppingOrder", ShoppingOrder.class);
+			q.addEntity("ShoppingOrder", ShoppingOrderImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

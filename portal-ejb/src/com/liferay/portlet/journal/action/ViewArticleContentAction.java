@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.impl.ImageLocalUtil;
@@ -29,16 +30,15 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.UploadServletRequest;
 
@@ -84,7 +84,7 @@ public class ViewArticleContentAction extends Action {
 			String companyId = themeDisplay.getCompanyId();
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
-				req, "version", JournalArticle.DEFAULT_VERSION);
+				req, "version", JournalArticleImpl.DEFAULT_VERSION);
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
@@ -121,46 +121,50 @@ public class ViewArticleContentAction extends Action {
 				Map tokens = JournalUtil.getTokens(themeDisplay);
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_ID,
+					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
 					articleId);
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_VERSION,
+					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_VERSION,
 					Double.toString(version));
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_TITLE,
+					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_TITLE,
 					title);
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_DESCRIPTION,
+					root, tokens,
+					JournalStructureImpl.RESERVED_ARTICLE_DESCRIPTION,
 					description);
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_CREATE_DATE,
+					root, tokens,
+					JournalStructureImpl.RESERVED_ARTICLE_CREATE_DATE,
 					createDate.toString());
 
 				JournalUtil.addReservedEl(
 					root, tokens,
-					JournalStructure.RESERVED_ARTICLE_MODIFIED_DATE,
+					JournalStructureImpl.RESERVED_ARTICLE_MODIFIED_DATE,
 					modifiedDate.toString());
 
 				JournalUtil.addReservedEl(
 					root, tokens,
-					JournalStructure.RESERVED_ARTICLE_DISPLAY_DATE,
+					JournalStructureImpl.RESERVED_ARTICLE_DISPLAY_DATE,
 					displayDate.toString());
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_ID,
+					root, tokens,
+					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_ID,
 					user.getUserId());
 
 				JournalUtil.addReservedEl(
-					root, tokens, JournalStructure.RESERVED_ARTICLE_AUTHOR_NAME,
+					root, tokens,
+					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_NAME,
 					user.getFullName());
 
 				JournalUtil.addReservedEl(
 					root, tokens,
-					JournalStructure.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
+					JournalStructureImpl.RESERVED_ARTICLE_AUTHOR_EMAIL_ADDRESS,
 					user.getEmailAddress());
 
 				xml = JournalUtil.formatXML(doc);

@@ -45,8 +45,8 @@ public class BlogsCategoryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory remove(
 		java.lang.String categoryId)
-		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchCategoryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class BlogsCategoryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByPrimaryKey(
 		java.lang.String categoryId)
-		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchCategoryException {
 		return getPersistence().findByPrimaryKey(categoryId);
 	}
 
@@ -166,7 +166,7 @@ public class BlogsCategoryUtil {
 
 	public static java.util.List findByParentCategoryId(
 		java.lang.String parentCategoryId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByParentCategoryId(parentCategoryId, begin,
 			end, obc);
@@ -174,27 +174,27 @@ public class BlogsCategoryUtil {
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_First(
 		java.lang.String parentCategoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchCategoryException {
 		return getPersistence().findByParentCategoryId_First(parentCategoryId,
 			obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory findByParentCategoryId_Last(
 		java.lang.String parentCategoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchCategoryException {
 		return getPersistence().findByParentCategoryId_Last(parentCategoryId,
 			obc);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsCategory[] findByParentCategoryId_PrevAndNext(
 		java.lang.String categoryId, java.lang.String parentCategoryId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.blogs.NoSuchCategoryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.blogs.NoSuchCategoryException {
 		return getPersistence().findByParentCategoryId_PrevAndNext(categoryId,
 			parentCategoryId, obc);
 	}
@@ -210,7 +210,7 @@ public class BlogsCategoryUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

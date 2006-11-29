@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.imagegallery.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class IGFolderServiceSoap {
-	public static com.liferay.portlet.imagegallery.model.IGFolderModel addFolder(
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -48,7 +47,7 @@ public class IGFolderServiceSoap {
 					parentFolderId, name, description, addCommunityPermissions,
 					addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -57,7 +56,7 @@ public class IGFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGFolderModel addFolder(
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap addFolder(
 		java.lang.String plid, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
@@ -67,7 +66,7 @@ public class IGFolderServiceSoap {
 					parentFolderId, name, description, communityPermissions,
 					guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -88,12 +87,12 @@ public class IGFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGFolderModel getFolder(
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap getFolder(
 		java.lang.String folderId) throws RemoteException {
 		try {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.getFolder(folderId);
 
-			return returnValue;
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -102,7 +101,7 @@ public class IGFolderServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGFolderModel updateFolder(
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean mergeWithParentFolder) throws RemoteException {
@@ -110,7 +109,7 @@ public class IGFolderServiceSoap {
 			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.updateFolder(folderId,
 					parentFolderId, name, description, mergeWithParentFolder);
 
-			return returnValue;
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -119,5 +118,5 @@ public class IGFolderServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(IGFolderServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(IGFolderServiceSoap.class);
 }

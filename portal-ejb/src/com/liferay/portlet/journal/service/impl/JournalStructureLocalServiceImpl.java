@@ -22,13 +22,15 @@
 
 package com.liferay.portlet.journal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateStructureIdException;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -38,17 +40,16 @@ import com.liferay.portlet.journal.StructureIdException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
+import com.liferay.portlet.journal.service.JournalStructureLocalService;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalService;
 import com.liferay.portlet.journal.util.JournalUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -262,7 +263,7 @@ public class JournalStructureLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			structure.getPrimaryKey().toString());
 
 		// Structure
@@ -418,7 +419,7 @@ public class JournalStructureLocalServiceImpl
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
 			if (Validator.isNull(elName) ||
-				elName.startsWith(JournalStructure.RESERVED)) {
+				elName.startsWith(JournalStructureImpl.RESERVED)) {
 
 				throw new StructureXsdException();
 			}

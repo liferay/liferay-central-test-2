@@ -27,7 +27,7 @@ import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.UserGroupNameException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.UserGroupServiceUtil;
+import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;

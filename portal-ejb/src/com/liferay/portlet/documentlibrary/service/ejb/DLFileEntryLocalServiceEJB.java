@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.ejb;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalService;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 
 import javax.ejb.EJBLocalObject;
 

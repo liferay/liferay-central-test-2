@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.polls.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.polls.QuestionChoiceException;
 import com.liferay.portlet.polls.QuestionDescriptionException;
@@ -36,10 +36,10 @@ import com.liferay.portlet.polls.QuestionExpirationDateException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
-import com.liferay.portlet.polls.service.spring.PollsQuestionLocalService;
 import com.liferay.util.Validator;
 
 import java.util.Date;
@@ -227,7 +227,7 @@ public class PollsQuestionLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			question.getCompanyId(), PollsQuestion.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			question.getPrimaryKey().toString());
 
 		// Question

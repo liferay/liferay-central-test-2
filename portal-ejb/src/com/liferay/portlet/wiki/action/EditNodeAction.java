@@ -29,7 +29,7 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
-import com.liferay.portlet.wiki.service.spring.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;

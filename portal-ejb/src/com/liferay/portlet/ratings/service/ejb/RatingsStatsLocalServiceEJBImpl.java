@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.ratings.service.ejb;
 
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalService;
-import com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceFactory;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

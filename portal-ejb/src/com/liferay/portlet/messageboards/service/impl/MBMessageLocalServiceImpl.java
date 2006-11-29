@@ -22,21 +22,24 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.SubscriptionLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -50,6 +53,15 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBTreeWalker;
+import com.liferay.portlet.messageboards.model.impl.MBMessageDisplayImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
+import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalService;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
 import com.liferay.portlet.messageboards.service.persistence.MBCategoryUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBDiscussionUtil;
@@ -58,20 +70,13 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalService;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
-import com.liferay.portlet.messageboards.util.TreeWalker;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
-import com.liferay.util.ObjectValuePair;
 import com.liferay.util.RSSUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -120,7 +125,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String subject, String body)
 		throws PortalException, SystemException {
 
-		String categoryId = Company.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM;
 		List files = new ArrayList();
 		boolean anonymous = false;
 		double priority = 0.0;
@@ -234,7 +239,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		start = logAddMessage(messageId, start, 1);
 
 		MBMessage message = MBMessageUtil.create(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		message.setCompanyId(user.getCompanyId());
 		message.setUserId(user.getUserId());
@@ -248,7 +253,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			new MBMessagePK(message.getTopicId(), parentMessageId));
 
 		if (parentMessage == null) {
-			parentMessageId = MBMessage.DEFAULT_PARENT_MESSAGE_ID;
+			parentMessageId = MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID;
 		}
 
 		MBThread thread = null;
@@ -258,7 +263,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		}
 
 		if (thread == null ||
-			parentMessageId.equals(MBMessage.DEFAULT_PARENT_MESSAGE_ID)) {
+			parentMessageId.equals(MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID)) {
 
 			threadId = Long.toString(CounterLocalServiceUtil.increment(
 				MBThread.class.getName()));
@@ -281,7 +286,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		thread.setLastPostDate(now);
 
-		if (priority != MBThread.PRIORITY_NOT_GIVEN) {
+		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
 			thread.setPriority(priority);
 		}
 
@@ -301,9 +306,9 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		if (files.size() > 0) {
 			String companyId = message.getCompanyId();
-			String portletId = Company.SYSTEM;
-			String groupId = Group.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = Company.SYSTEM;
+			String portletId = CompanyImpl.SYSTEM;
+			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -429,7 +434,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
 		if (topicId == null) {
-			topicId = MBMessage.DEPRECATED_TOPIC_ID;
+			topicId = MBMessageImpl.DEPRECATED_TOPIC_ID;
 		}
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
@@ -468,7 +473,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
 		if (topicId == null) {
-			topicId = MBMessage.DEPRECATED_TOPIC_ID;
+			topicId = MBMessageImpl.DEPRECATED_TOPIC_ID;
 		}
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
@@ -503,7 +508,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				MBDiscussionUtil.findByC_C(className, classPK);
 
 			List messages = MBMessageUtil.findByT_P(
-				discussion.getThreadId(), MBMessage.DEFAULT_PARENT_MESSAGE_ID);
+				discussion.getThreadId(),
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 			MBMessage message = (MBMessage)messages.get(0);
 
@@ -519,7 +525,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		deleteMessage(message);
 	}
@@ -541,8 +547,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		if (message.isAttachments()) {
 			String companyId = message.getCompanyId();
-			String portletId = Company.SYSTEM;
-			String repositoryId = Company.SYSTEM;
+			String portletId = CompanyImpl.SYSTEM;
+			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -565,8 +571,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			// File attachments
 
 			String companyId = message.getCompanyId();
-			String portletId = Company.SYSTEM;
-			String repositoryId = Company.SYSTEM;
+			String portletId = CompanyImpl.SYSTEM;
+			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
@@ -606,7 +612,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					MBMessage childMessage = (MBMessage)childrenMessages.get(0);
 
 					childMessage.setParentMessageId(
-						MBMessage.DEFAULT_PARENT_MESSAGE_ID);
+						MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 					MBMessageUtil.update(childMessage);
 
@@ -655,7 +661,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		if (!message.isDiscussion()) {
 			ResourceLocalServiceUtil.deleteResource(
 				message.getCompanyId(), MBMessage.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				message.getPrimaryKey().toString());
 		}
 
@@ -706,7 +712,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				className, classPK);
 
 			List messages = MBMessageUtil.findByT_P(
-				discussion.getThreadId(), MBMessage.DEFAULT_PARENT_MESSAGE_ID);
+				discussion.getThreadId(),
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 			message = (MBMessage)messages.get(0);
 		}
@@ -747,7 +754,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws PortalException, SystemException {
 
 		return MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 	}
 
 	public MBMessageDisplay getMessageDisplay(String messageId, String userId)
@@ -777,7 +784,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBThreadUtil.update(thread);
 
-		TreeWalker treeWalker = new TreeWalker(message, userId);
+		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message, userId);
 
 		ThreadLastPostDateComparator comparator =
 			new ThreadLastPostDateComparator(false);
@@ -807,7 +814,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		catch (NoSuchThreadException nste) {
 		}
 
-		return new MBMessageDisplay(
+		return new MBMessageDisplayImpl(
 			message, parentMessage, category, thread, treeWalker,
 			previousThread, nextThread, firstThread, lastThread, userId);
 	}
@@ -857,7 +864,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.addSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
@@ -867,7 +874,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		SubscriptionLocalServiceUtil.deleteSubscription(
 			userId, MBThread.class.getName(), message.getThreadId());
@@ -877,7 +884,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			String messageId, String subject, String body)
 		throws PortalException, SystemException {
 
-		String categoryId = Company.SYSTEM;
+		String categoryId = CompanyImpl.SYSTEM;
 		List files = new ArrayList();
 		double priority = 0.0;
 		PortletPreferences prefs = null;
@@ -894,7 +901,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		// Message
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		MBCategory category = getCategory(message, categoryId);
 		String oldCategoryId = message.getCategoryId();
@@ -908,9 +915,9 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		if (files.size() > 0) {
 			String companyId = message.getCompanyId();
-			String portletId = Company.SYSTEM;
-			String groupId = Group.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = Company.SYSTEM;
+			String portletId = CompanyImpl.SYSTEM;
+			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -960,7 +967,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBThread thread = MBThreadUtil.findByPrimaryKey(message.getThreadId());
 
-		if (priority != MBThread.PRIORITY_NOT_GIVEN) {
+		if (priority != MBThreadImpl.PRIORITY_NOT_GIVEN) {
 			thread.setPriority(priority);
 		}
 
@@ -1033,7 +1040,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		// Message
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		message.setCreateDate(createDate);
 		message.setModifiedDate(modifiedDate);
@@ -1071,7 +1078,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		throws PortalException, SystemException {
 
 		MBMessage message = MBMessageUtil.findByPrimaryKey(
-			new MBMessagePK(MBMessage.DEPRECATED_TOPIC_ID, messageId));
+			new MBMessagePK(MBMessageImpl.DEPRECATED_TOPIC_ID, messageId));
 
 		message.setBody(body);
 

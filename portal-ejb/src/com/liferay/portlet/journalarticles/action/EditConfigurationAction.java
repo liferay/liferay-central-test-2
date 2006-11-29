@@ -23,7 +23,7 @@
 package com.liferay.portlet.journalarticles.action;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;

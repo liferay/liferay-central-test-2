@@ -22,15 +22,16 @@
 
 package com.liferay.portlet.wikidisplay.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.spring.WikiNodeServiceUtil;
-import com.liferay.portlet.wiki.service.spring.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
+import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -59,7 +60,7 @@ public class ViewAction extends PortletAction {
 
 			String nodeId = prefs.getValue("node-id", StringPool.BLANK);
 			String title = ParamUtil.getString(
-				req, "title", WikiPage.FRONT_PAGE);
+				req, "title", WikiPageImpl.FRONT_PAGE);
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 			WikiPage wikiPage = WikiPageServiceUtil.getPage(nodeId, title);

@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -41,9 +42,9 @@ import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -279,7 +280,7 @@ public class EditArticleAction extends PortletAction {
 		String groupId = ParamUtil.getString(req, "groupId");
 
 		if (Validator.isNotNull(groupId)) {
-			plid = Layout.PUBLIC + groupId + ".1";
+			plid = LayoutImpl.PUBLIC + groupId + ".1";
 		}
 
 		String articleId = ParamUtil.getString(req, "articleId");

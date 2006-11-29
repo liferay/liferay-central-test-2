@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.announcements.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.announcements.AnnouncementsContentException;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import javax.portlet.PortletConfig;

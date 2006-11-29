@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,7 +37,7 @@ import java.rmi.RemoteException;
  *
  */
 public class DLFileEntryServiceSoap {
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel addFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, byte[] byteArray,
@@ -49,7 +48,7 @@ public class DLFileEntryServiceSoap {
 					name, title, description, extraSettings, byteArray,
 					addCommunityPermissions, addGuestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -58,7 +57,7 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel addFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap addFileEntry(
 		java.lang.String folderId, java.lang.String name,
 		java.lang.String title, java.lang.String description,
 		java.lang.String extraSettings, byte[] byteArray,
@@ -69,7 +68,7 @@ public class DLFileEntryServiceSoap {
 					name, title, description, extraSettings, byteArray,
 					communityPermissions, guestPermissions);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -102,14 +101,14 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel getFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap getFileEntry(
 		java.lang.String folderId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.documentlibrary.model.DLFileEntry returnValue = DLFileEntryServiceUtil.getFileEntry(folderId,
 					name);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -142,7 +141,7 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.documentlibrary.model.DLFileEntryModel updateFileEntry(
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntrySoap updateFileEntry(
 		java.lang.String folderId, java.lang.String newFolderId,
 		java.lang.String name, java.lang.String sourceFileName,
 		java.lang.String title, java.lang.String description,
@@ -153,7 +152,7 @@ public class DLFileEntryServiceSoap {
 					newFolderId, name, sourceFileName, title, description,
 					extraSettings, byteArray);
 
-			return returnValue;
+			return com.liferay.portlet.documentlibrary.model.DLFileEntrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -162,5 +161,5 @@ public class DLFileEntryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(DLFileEntryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(DLFileEntryServiceSoap.class);
 }

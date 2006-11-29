@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.workflow.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -407,5 +406,5 @@ public class WorkflowComponentServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WorkflowComponentServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(WorkflowComponentServiceSoap.class);
 }

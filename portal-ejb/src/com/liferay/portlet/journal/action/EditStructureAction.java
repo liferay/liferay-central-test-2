@@ -36,7 +36,7 @@ import com.liferay.portlet.journal.StructureIdException;
 import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.service.spring.JournalStructureServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureServiceUtil;
 import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;

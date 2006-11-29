@@ -22,19 +22,20 @@
 
 package com.liferay.portlet.blogs.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portlet.blogs.CategoryNameException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
+import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalService;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Validator;
 
@@ -203,7 +204,7 @@ public class BlogsCategoryLocalServiceImpl
 
 			BlogsEntry entry = (BlogsEntry)itr.next();
 
-			entry.setCategoryId(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
+			entry.setCategoryId(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 			BlogsEntryUtil.update(entry);
 
@@ -224,7 +225,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		ResourceLocalServiceUtil.deleteResource(
 			category.getCompanyId(), BlogsCategory.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			category.getPrimaryKey().toString());
 
 		// Category

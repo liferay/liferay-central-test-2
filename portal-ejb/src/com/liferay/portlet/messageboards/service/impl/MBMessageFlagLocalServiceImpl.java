@@ -25,9 +25,11 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalService;
 
 import java.util.Iterator;
 import java.util.List;
@@ -60,7 +62,7 @@ public class MBMessageFlagLocalServiceImpl
 				if (messageFlag == null) {
 					messageFlag = MBMessageFlagUtil.create(messageFlagPK);
 
-					messageFlag.setFlag(MBMessageFlag.READ_FLAG);
+					messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
 
 					MBMessageFlagUtil.update(messageFlag);
 				}
@@ -83,7 +85,7 @@ public class MBMessageFlagLocalServiceImpl
 		}
 
 		MBMessageFlagPK messageFlagPK = new MBMessageFlagPK(
-			MBMessage.DEPRECATED_TOPIC_ID, messageId, userId);
+			MBMessageImpl.DEPRECATED_TOPIC_ID, messageId, userId);
 
 		MBMessageFlag messageFlag =
 			MBMessageFlagUtil.fetchByPrimaryKey(messageFlagPK);

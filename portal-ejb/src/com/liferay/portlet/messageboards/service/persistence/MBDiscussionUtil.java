@@ -45,8 +45,8 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion remove(
 		java.lang.String discussionId)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByPrimaryKey(
 		java.lang.String discussionId)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().findByPrimaryKey(discussionId);
 	}
 
@@ -154,8 +154,8 @@ public class MBDiscussionUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBDiscussion findByC_C(
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		return getPersistence().findByC_C(className, classPK);
 	}
 
@@ -176,15 +176,15 @@ public class MBDiscussionUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
 	public static void removeByC_C(java.lang.String className,
 		java.lang.String classPK)
-		throws com.liferay.portlet.messageboards.NoSuchDiscussionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.messageboards.NoSuchDiscussionException {
 		getPersistence().removeByC_C(className, classPK);
 	}
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.shopping.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="ItemNameComparator.java.html"><b><i>View Source</i></b></a>

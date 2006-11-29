@@ -23,11 +23,11 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;

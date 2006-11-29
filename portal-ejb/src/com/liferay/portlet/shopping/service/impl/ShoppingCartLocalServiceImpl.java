@@ -38,10 +38,11 @@ import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.impl.ShoppingCartItemImpl;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.util.ShoppingUtil;
 import com.liferay.util.StringUtil;
 
@@ -94,7 +95,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 
 				if (category.getGroupId().equals(groupId)) {
 					ShoppingCartItem cartItem =
-						new ShoppingCartItem(item, fields);
+						new ShoppingCartItemImpl(item, fields);
 
 					Integer count = (Integer)items.get(cartItem);
 

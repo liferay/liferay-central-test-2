@@ -24,8 +24,8 @@ package com.liferay.portlet.ratings.service.ejb;
 
 import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import com.liferay.portlet.ratings.service.spring.RatingsEntryService;
-import com.liferay.portlet.ratings.service.spring.RatingsEntryServiceFactory;
+import com.liferay.portlet.ratings.service.RatingsEntryService;
+import com.liferay.portlet.ratings.service.RatingsEntryServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

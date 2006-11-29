@@ -22,8 +22,8 @@
 
 package com.liferay.portlet.imagegallery.service.ejb;
 
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalService;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceFactory;
+import com.liferay.portlet.imagegallery.service.IGImageLocalService;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -183,7 +183,7 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 	}
 
 	public java.util.List getImages(java.lang.String folderId, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getImages(folderId,
 			begin, end, obc);

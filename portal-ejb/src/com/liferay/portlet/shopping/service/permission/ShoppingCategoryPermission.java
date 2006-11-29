@@ -29,7 +29,8 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.service.spring.ShoppingCategoryLocalServiceUtil;
+import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
+import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 import com.liferay.util.Validator;
 
 /**
@@ -76,7 +77,7 @@ public class ShoppingCategoryPermission {
 		throws PortalException, SystemException {
 
 		if (Validator.equals(
-				categoryId, ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+				categoryId, ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 
 			return PortletPermission.contains(
 				permissionChecker, plid, PortletKeys.SHOPPING, actionId);

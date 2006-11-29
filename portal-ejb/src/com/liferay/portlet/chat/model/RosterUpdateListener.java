@@ -22,15 +22,15 @@
 
 package com.liferay.portlet.chat.model;
 
+import com.liferay.portal.model.RequestWait;
+import com.liferay.portal.model.ReverseAjax;
+import com.liferay.portal.util.WebKeys;
+
 import java.util.Collection;
 
 import javax.servlet.http.HttpSession;
 
 import org.jivesoftware.smack.RosterListener;
-
-import com.liferay.portal.model.RequestWait;
-import com.liferay.portal.model.ReverseAjax;
-import com.liferay.portal.util.WebKeys;
 
 /**
  * <a href="RosterUpdateListener.java.html"><b><i>View Source</i></b></a>
@@ -54,11 +54,13 @@ public class RosterUpdateListener implements RosterListener {
 	}
 
 	public void presenceChanged(String id) {
-		ReverseAjax reverseAjax = (ReverseAjax) _ses.getAttribute(WebKeys.REVERSE_AJAX);
+		ReverseAjax reverseAjax =
+			(ReverseAjax)_ses.getAttribute(WebKeys.REVERSE_AJAX);
+
 		RequestWait reqWait = reverseAjax.getRequestWait();
 
 		reverseAjax.setPendingChatRoster(true);
-		
+
 		if (reqWait != null) {
 			reqWait.notifyWait();
 		}

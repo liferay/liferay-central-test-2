@@ -23,13 +23,14 @@
 package com.liferay.portlet.journal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class JournalArticlePersistence extends BasePersistence {
 	public JournalArticle create(JournalArticlePK journalArticlePK) {
-		JournalArticle journalArticle = new JournalArticle();
+		JournalArticle journalArticle = new JournalArticleImpl();
 		journalArticle.setNew(true);
 		journalArticle.setPrimaryKey(journalArticlePK);
 
@@ -64,7 +65,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			JournalArticle journalArticle = (JournalArticle)session.get(JournalArticle.class,
+			JournalArticle journalArticle = (JournalArticle)session.get(JournalArticleImpl.class,
 					journalArticlePK);
 
 			if (journalArticle == null) {
@@ -168,7 +169,7 @@ public class JournalArticlePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (JournalArticle)session.get(JournalArticle.class,
+			return (JournalArticle)session.get(JournalArticleImpl.class,
 				journalArticlePK);
 		}
 		catch (HibernateException he) {
@@ -351,7 +352,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -538,7 +539,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -771,7 +772,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1005,7 +1006,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1238,7 +1239,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];
@@ -1494,7 +1495,7 @@ public class JournalArticlePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalArticle);
-			JournalArticle[] array = new JournalArticle[3];
+			JournalArticle[] array = new JournalArticleImpl[3];
 			array[0] = (JournalArticle)objArray[0];
 			array[1] = (JournalArticle)objArray[1];
 			array[2] = (JournalArticle)objArray[2];

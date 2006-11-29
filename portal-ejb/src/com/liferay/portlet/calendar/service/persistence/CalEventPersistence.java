@@ -23,13 +23,14 @@
 package com.liferay.portlet.calendar.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.calendar.NoSuchEventException;
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class CalEventPersistence extends BasePersistence {
 	public CalEvent create(String eventId) {
-		CalEvent calEvent = new CalEvent();
+		CalEvent calEvent = new CalEventImpl();
 		calEvent.setNew(true);
 		calEvent.setPrimaryKey(eventId);
 
@@ -64,7 +65,8 @@ public class CalEventPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			CalEvent calEvent = (CalEvent)session.get(CalEvent.class, eventId);
+			CalEvent calEvent = (CalEvent)session.get(CalEventImpl.class,
+					eventId);
 
 			if (calEvent == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +164,7 @@ public class CalEventPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (CalEvent)session.get(CalEvent.class, eventId);
+			return (CalEvent)session.get(CalEventImpl.class, eventId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -342,7 +344,7 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
-			CalEvent[] array = new CalEvent[3];
+			CalEvent[] array = new CalEventImpl[3];
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -574,7 +576,7 @@ public class CalEventPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
-			CalEvent[] array = new CalEvent[3];
+			CalEvent[] array = new CalEventImpl[3];
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];
@@ -779,7 +781,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, repeating);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
-			CalEvent[] array = new CalEvent[3];
+			CalEvent[] array = new CalEventImpl[3];
 			array[0] = (CalEvent)objArray[0];
 			array[1] = (CalEvent)objArray[1];
 			array[2] = (CalEvent)objArray[2];

@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.journal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 
-import com.liferay.portlet.journal.service.spring.JournalArticleServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portlet.journal.service.JournalArticleServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -38,14 +37,14 @@ import java.rmi.RemoteException;
  *
  */
 public class JournalArticleServiceSoap {
-	public static com.liferay.portlet.journal.model.JournalArticleModel getArticle(
+	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
 		java.lang.String companyId, java.lang.String articleId, double version)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(companyId,
 					articleId, version);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,14 +65,14 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.journal.model.JournalArticleModel removeArticleLocale(
+	public static com.liferay.portlet.journal.model.JournalArticleSoap removeArticleLocale(
 		java.lang.String companyId, java.lang.String articleId, double version,
 		java.lang.String languageId) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.removeArticleLocale(companyId,
 					articleId, version, languageId);
 
-			return returnValue;
+			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -82,5 +81,5 @@ public class JournalArticleServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(JournalArticleServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(JournalArticleServiceSoap.class);
 }

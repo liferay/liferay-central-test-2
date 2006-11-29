@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.shopping.service.ejb;
 
-import com.liferay.portlet.shopping.service.spring.ShoppingItemService;
+import com.liferay.portlet.shopping.service.ShoppingItemService;
 
 import javax.ejb.EJBObject;
 

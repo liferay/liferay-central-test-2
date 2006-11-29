@@ -45,8 +45,8 @@ public class DLFileEntryUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry remove(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class DLFileEntryUtil {
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByPrimaryKey(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByPrimaryKey(dlFileEntryPK);
 	}
 
@@ -163,33 +163,33 @@ public class DLFileEntryUtil {
 	}
 
 	public static java.util.List findByFolderId(java.lang.String folderId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_First(
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByFolderId_First(folderId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry findByFolderId_Last(
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByFolderId_Last(folderId, obc);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry[] findByFolderId_PrevAndNext(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK dlFileEntryPK,
 		java.lang.String folderId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portlet.documentlibrary.NoSuchFileEntryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.documentlibrary.NoSuchFileEntryException {
 		return getPersistence().findByFolderId_PrevAndNext(dlFileEntryPK,
 			folderId, obc);
 	}
@@ -205,7 +205,7 @@ public class DLFileEntryUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

@@ -23,13 +23,14 @@
 package com.liferay.portlet.messageboards.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.messageboards.NoSuchStatsUserException;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class MBStatsUserPersistence extends BasePersistence {
 	public MBStatsUser create(MBStatsUserPK mbStatsUserPK) {
-		MBStatsUser mbStatsUser = new MBStatsUser();
+		MBStatsUser mbStatsUser = new MBStatsUserImpl();
 		mbStatsUser.setNew(true);
 		mbStatsUser.setPrimaryKey(mbStatsUserPK);
 
@@ -64,7 +65,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUser.class,
+			MBStatsUser mbStatsUser = (MBStatsUser)session.get(MBStatsUserImpl.class,
 					mbStatsUserPK);
 
 			if (mbStatsUser == null) {
@@ -167,7 +168,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (MBStatsUser)session.get(MBStatsUser.class, mbStatsUserPK);
+			return (MBStatsUser)session.get(MBStatsUserImpl.class, mbStatsUserPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -346,7 +347,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
-			MBStatsUser[] array = new MBStatsUser[3];
+			MBStatsUser[] array = new MBStatsUserImpl[3];
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];
@@ -530,7 +531,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
-			MBStatsUser[] array = new MBStatsUser[3];
+			MBStatsUser[] array = new MBStatsUserImpl[3];
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];
@@ -733,7 +734,7 @@ public class MBStatsUserPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbStatsUser);
-			MBStatsUser[] array = new MBStatsUser[3];
+			MBStatsUser[] array = new MBStatsUserImpl[3];
 			array[0] = (MBStatsUser)objArray[0];
 			array[1] = (MBStatsUser)objArray[1];
 			array[2] = (MBStatsUser)objArray[2];

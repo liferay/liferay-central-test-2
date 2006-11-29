@@ -23,13 +23,14 @@
 package com.liferay.portlet.ratings.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -50,7 +51,7 @@ import java.util.List;
  */
 public class RatingsEntryPersistence extends BasePersistence {
 	public RatingsEntry create(long entryId) {
-		RatingsEntry ratingsEntry = new RatingsEntry();
+		RatingsEntry ratingsEntry = new RatingsEntryImpl();
 		ratingsEntry.setNew(true);
 		ratingsEntry.setPrimaryKey(entryId);
 
@@ -64,7 +65,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			RatingsEntry ratingsEntry = (RatingsEntry)session.get(RatingsEntry.class,
+			RatingsEntry ratingsEntry = (RatingsEntry)session.get(RatingsEntryImpl.class,
 					new Long(entryId));
 
 			if (ratingsEntry == null) {
@@ -166,7 +167,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (RatingsEntry)session.get(RatingsEntry.class,
+			return (RatingsEntry)session.get(RatingsEntryImpl.class,
 				new Long(entryId));
 		}
 		catch (HibernateException he) {
@@ -382,7 +383,7 @@ public class RatingsEntryPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					ratingsEntry);
-			RatingsEntry[] array = new RatingsEntry[3];
+			RatingsEntry[] array = new RatingsEntryImpl[3];
 			array[0] = (RatingsEntry)objArray[0];
 			array[1] = (RatingsEntry)objArray[1];
 			array[2] = (RatingsEntry)objArray[2];
