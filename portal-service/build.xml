@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+
+<project name="portal-service" basedir="." default="compile">
+	<import file="../build-common-java.xml" />
+
+	<property name="deploy.dir" value="${app.server.lib.global.dir}" />
+	<property name="jar.file" value="${ant.project.name}" />
+
+	<target name="compile">
+		<mkdir dir="classes" />
+
+		<path id="web-lib.classpath">
+		</path>
+
+		<javac
+			classpathref="web.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="classes"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="on"
+			srcdir="src"
+		/>
+	</target>
+</project>

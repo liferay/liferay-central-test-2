@@ -1,0 +1,116 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portal.model;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <a href="ReleaseSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class ReleaseSoap implements Serializable {
+	public static ReleaseSoap toSoapModel(Release model) {
+		ReleaseSoap soapModel = new ReleaseSoap();
+		soapModel.setReleaseId(model.getReleaseId());
+		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setModifiedDate(model.getModifiedDate());
+		soapModel.setBuildNumber(model.getBuildNumber());
+		soapModel.setBuildDate(model.getBuildDate());
+
+		return soapModel;
+	}
+
+	public static ReleaseSoap[] toSoapModels(List models) {
+		List soapModels = new ArrayList(models.size());
+
+		for (int i = 0; i < models.size(); i++) {
+			Release model = (Release)models.get(i);
+			soapModels.add(toSoapModel(model));
+		}
+
+		return (ReleaseSoap[])soapModels.toArray(new ReleaseSoap[0]);
+	}
+
+	public ReleaseSoap() {
+	}
+
+	public String getPrimaryKey() {
+		return _releaseId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setReleaseId(pk);
+	}
+
+	public String getReleaseId() {
+		return _releaseId;
+	}
+
+	public void setReleaseId(String releaseId) {
+		_releaseId = releaseId;
+	}
+
+	public Date getCreateDate() {
+		return _createDate;
+	}
+
+	public void setCreateDate(Date createDate) {
+		_createDate = createDate;
+	}
+
+	public Date getModifiedDate() {
+		return _modifiedDate;
+	}
+
+	public void setModifiedDate(Date modifiedDate) {
+		_modifiedDate = modifiedDate;
+	}
+
+	public int getBuildNumber() {
+		return _buildNumber;
+	}
+
+	public void setBuildNumber(int buildNumber) {
+		_buildNumber = buildNumber;
+	}
+
+	public Date getBuildDate() {
+		return _buildDate;
+	}
+
+	public void setBuildDate(Date buildDate) {
+		_buildDate = buildDate;
+	}
+
+	private String _releaseId;
+	private Date _createDate;
+	private Date _modifiedDate;
+	private int _buildNumber;
+	private Date _buildDate;
+}

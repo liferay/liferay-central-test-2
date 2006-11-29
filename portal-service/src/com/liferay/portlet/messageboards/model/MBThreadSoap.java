@@ -1,0 +1,156 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.messageboards.model;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+/**
+ * <a href="MBThreadSoap.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class MBThreadSoap implements Serializable {
+	public static MBThreadSoap toSoapModel(MBThread model) {
+		MBThreadSoap soapModel = new MBThreadSoap();
+		soapModel.setThreadId(model.getThreadId());
+		soapModel.setCategoryId(model.getCategoryId());
+		soapModel.setTopicId(model.getTopicId());
+		soapModel.setRootMessageId(model.getRootMessageId());
+		soapModel.setMessageCount(model.getMessageCount());
+		soapModel.setViewCount(model.getViewCount());
+		soapModel.setLastPostByUserId(model.getLastPostByUserId());
+		soapModel.setLastPostDate(model.getLastPostDate());
+		soapModel.setPriority(model.getPriority());
+
+		return soapModel;
+	}
+
+	public static MBThreadSoap[] toSoapModels(List models) {
+		List soapModels = new ArrayList(models.size());
+
+		for (int i = 0; i < models.size(); i++) {
+			MBThread model = (MBThread)models.get(i);
+			soapModels.add(toSoapModel(model));
+		}
+
+		return (MBThreadSoap[])soapModels.toArray(new MBThreadSoap[0]);
+	}
+
+	public MBThreadSoap() {
+	}
+
+	public String getPrimaryKey() {
+		return _threadId;
+	}
+
+	public void setPrimaryKey(String pk) {
+		setThreadId(pk);
+	}
+
+	public String getThreadId() {
+		return _threadId;
+	}
+
+	public void setThreadId(String threadId) {
+		_threadId = threadId;
+	}
+
+	public String getCategoryId() {
+		return _categoryId;
+	}
+
+	public void setCategoryId(String categoryId) {
+		_categoryId = categoryId;
+	}
+
+	public String getTopicId() {
+		return _topicId;
+	}
+
+	public void setTopicId(String topicId) {
+		_topicId = topicId;
+	}
+
+	public String getRootMessageId() {
+		return _rootMessageId;
+	}
+
+	public void setRootMessageId(String rootMessageId) {
+		_rootMessageId = rootMessageId;
+	}
+
+	public int getMessageCount() {
+		return _messageCount;
+	}
+
+	public void setMessageCount(int messageCount) {
+		_messageCount = messageCount;
+	}
+
+	public int getViewCount() {
+		return _viewCount;
+	}
+
+	public void setViewCount(int viewCount) {
+		_viewCount = viewCount;
+	}
+
+	public String getLastPostByUserId() {
+		return _lastPostByUserId;
+	}
+
+	public void setLastPostByUserId(String lastPostByUserId) {
+		_lastPostByUserId = lastPostByUserId;
+	}
+
+	public Date getLastPostDate() {
+		return _lastPostDate;
+	}
+
+	public void setLastPostDate(Date lastPostDate) {
+		_lastPostDate = lastPostDate;
+	}
+
+	public double getPriority() {
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
+	}
+
+	private String _threadId;
+	private String _categoryId;
+	private String _topicId;
+	private String _rootMessageId;
+	private int _messageCount;
+	private int _viewCount;
+	private String _lastPostByUserId;
+	private Date _lastPostDate;
+	private double _priority;
+}
