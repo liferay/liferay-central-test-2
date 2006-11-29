@@ -27,11 +27,11 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.UserGroupLocalServiceUtil;
+import com.liferay.portal.service.UserGroupService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.permission.UserGroupPermission;
-import com.liferay.portal.service.spring.UserGroupLocalServiceUtil;
-import com.liferay.portal.service.spring.UserGroupService;
 
 import java.util.List;
 

@@ -22,17 +22,17 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.EmailAddress;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.service.EmailAddressLocalService;
+import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.EmailAddressLocalService;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -149,7 +149,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 
 		try {
 			ListTypeServiceUtil.validate(
-				typeId, className + ListType.EMAIL_ADDRESS);
+				typeId, className + ListTypeImpl.EMAIL_ADDRESS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

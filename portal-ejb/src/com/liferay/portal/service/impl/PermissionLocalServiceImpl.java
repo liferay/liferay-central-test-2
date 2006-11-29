@@ -22,11 +22,12 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgGroupPermission;
 import com.liferay.portal.model.Organization;
@@ -34,9 +35,11 @@ import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.security.permission.PermissionCheckerBag;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.PermissionLocalService;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
@@ -48,8 +51,6 @@ import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.PermissionLocalService;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -445,23 +446,23 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
 
-		if (scope.equals(Resource.SCOPE_COMPANY)) {
+		if (scope.equals(ResourceImpl.SCOPE_COMPANY)) {
 
 			// Remove group permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, typeId, Resource.SCOPE_GROUP,
+				roleId, companyId, name, typeId, ResourceImpl.SCOPE_GROUP,
 				actionId);
 		}
-		else if (scope.equals(Resource.SCOPE_GROUP)) {
+		else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
 
 			// Remove company permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, typeId, Resource.SCOPE_COMPANY,
+				roleId, companyId, name, typeId, ResourceImpl.SCOPE_COMPANY,
 				actionId);
 		}
-		else if (scope.equals(Resource.SCOPE_INDIVIDUAL)) {
+		else if (scope.equals(ResourceImpl.SCOPE_INDIVIDUAL)) {
 			throw new NoSuchPermissionException();
 		}
 

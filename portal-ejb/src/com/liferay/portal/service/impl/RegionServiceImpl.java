@@ -25,8 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.service.RegionService;
 import com.liferay.portal.service.persistence.RegionUtil;
-import com.liferay.portal.service.spring.RegionService;
 
 import java.util.List;
 

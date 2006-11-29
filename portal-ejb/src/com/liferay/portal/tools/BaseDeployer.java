@@ -22,10 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;

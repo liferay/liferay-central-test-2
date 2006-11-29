@@ -27,12 +27,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.OrgLaborLocalServiceUtil;
+import com.liferay.portal.service.OrgLaborService;
 import com.liferay.portal.service.permission.LocationPermission;
 import com.liferay.portal.service.permission.OrganizationPermission;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
 import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.spring.OrgLaborLocalServiceUtil;
-import com.liferay.portal.service.spring.OrgLaborService;
 
 import java.util.List;
 

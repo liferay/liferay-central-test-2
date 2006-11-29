@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.GroupServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.GroupServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class GroupServiceSoap {
-	public static com.liferay.portal.model.GroupModel addGroup(
+	public static com.liferay.portal.model.GroupSoap addGroup(
 		java.lang.String name, java.lang.String description,
 		java.lang.String type, java.lang.String friendlyURL)
 		throws RemoteException {
@@ -45,7 +44,7 @@ public class GroupServiceSoap {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.addGroup(name,
 					description, type, friendlyURL);
 
-			return returnValue;
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -78,12 +77,12 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel getGroup(
+	public static com.liferay.portal.model.GroupSoap getGroup(
 		java.lang.String groupId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(groupId);
 
-			return returnValue;
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -92,14 +91,14 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel getGroup(
+	public static com.liferay.portal.model.GroupSoap getGroup(
 		java.lang.String companyId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(companyId,
 					name);
 
-			return returnValue;
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -108,12 +107,12 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel[] getOrganizationsGroups(
+	public static com.liferay.portal.model.GroupSoap[] getOrganizationsGroups(
 		java.util.List organizations) throws RemoteException {
 		try {
 			java.util.List returnValue = GroupServiceUtil.getOrganizationsGroups(organizations);
 
-			return (com.liferay.portal.model.Group[])returnValue.toArray(new com.liferay.portal.model.Group[0]);
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -122,12 +121,12 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel[] getUserGroupsGroups(
+	public static com.liferay.portal.model.GroupSoap[] getUserGroupsGroups(
 		java.util.List userGroups) throws RemoteException {
 		try {
 			java.util.List returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);
 
-			return (com.liferay.portal.model.Group[])returnValue.toArray(new com.liferay.portal.model.Group[0]);
+			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -174,7 +173,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupModel updateGroup(
+	public static com.liferay.portal.model.GroupSoap updateGroup(
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String description, java.lang.String type,
 		java.lang.String friendlyURL) throws RemoteException {
@@ -182,7 +181,7 @@ public class GroupServiceSoap {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 					name, description, type, friendlyURL);
 
-			return returnValue;
+			return com.liferay.portal.model.GroupSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -191,5 +190,5 @@ public class GroupServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(GroupServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(GroupServiceSoap.class);
 }

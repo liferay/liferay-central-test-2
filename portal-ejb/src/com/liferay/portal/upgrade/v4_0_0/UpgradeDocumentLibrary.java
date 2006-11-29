@@ -22,12 +22,13 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.CounterServiceUtil;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
@@ -35,11 +36,11 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
@@ -105,7 +106,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			}
 			catch (NoSuchFolderException nsfe) {
 				String userId = parentFolder.getUserId();
-				String plid = Layout.PUBLIC + parentFolder.getGroupId() + ".1";
+				String plid =
+					LayoutImpl.PUBLIC + parentFolder.getGroupId() + ".1";
 				String parentFolderId = parentFolder.getFolderId();
 				String name = _fixName(folderNames[i]);
 				String description = name;
@@ -236,7 +238,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_FOLDER_1);
 
-			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
+			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 
@@ -247,8 +249,8 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				String userId = rs.getString("userId");
 				String name = _fixName(rs.getString("name"));
 
-				String plid = Layout.PUBLIC + groupId + ".1";
-				String parentFolderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+				String plid = LayoutImpl.PUBLIC + groupId + ".1";
+				String parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 				String description = name;
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;

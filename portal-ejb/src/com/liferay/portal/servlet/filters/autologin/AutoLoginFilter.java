@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.autologin;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.AutoLoginException;
 import com.liferay.portal.security.pwd.PwdEncryptor;
@@ -30,7 +31,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.ProtectedServletRequest;
 

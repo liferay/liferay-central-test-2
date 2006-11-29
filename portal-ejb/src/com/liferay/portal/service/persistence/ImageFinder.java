@@ -23,7 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Image;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -58,7 +58,7 @@ public class ImageFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Image", Image.class);
+			q.addEntity("Image", ImageImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

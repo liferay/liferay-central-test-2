@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PermissionServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -69,7 +68,7 @@ public class PermissionServiceSoap {
 	public static boolean hasUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String actionId,
 		java.lang.String[] resourceIds,
-		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
+		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.hasUserPermissions(userId,
@@ -202,5 +201,5 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PermissionServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(PermissionServiceSoap.class);
 }

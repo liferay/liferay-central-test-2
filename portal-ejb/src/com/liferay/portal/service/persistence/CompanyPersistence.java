@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +48,7 @@ import java.util.List;
  */
 public class CompanyPersistence extends BasePersistence {
 	public Company create(String companyId) {
-		Company company = new Company();
+		Company company = new CompanyImpl();
 		company.setNew(true);
 		company.setPrimaryKey(companyId);
 
@@ -61,7 +62,7 @@ public class CompanyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Company company = (Company)session.get(Company.class, companyId);
+			Company company = (Company)session.get(CompanyImpl.class, companyId);
 
 			if (company == null) {
 				if (_log.isWarnEnabled()) {
@@ -160,7 +161,7 @@ public class CompanyPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Company)session.get(Company.class, companyId);
+			return (Company)session.get(CompanyImpl.class, companyId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -190,7 +191,7 @@ public class GroupFinder {
 
 			q.setCacheable(true);
 
-			q.addEntity("Group_", Group.class);
+			q.addEntity("Group_", GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

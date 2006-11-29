@@ -26,20 +26,23 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.GroupServiceUtil;
-import com.liferay.portal.service.spring.OrganizationServiceUtil;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.service.spring.ResourceServiceUtil;
-import com.liferay.portal.service.spring.RoleServiceUtil;
-import com.liferay.portal.service.spring.UserGroupServiceUtil;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.OrganizationServiceUtil;
+import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.ResourceServiceUtil;
+import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.Serializable;
@@ -195,7 +198,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 								(end - start) + " ms");
 				}
 
-				bag = new PermissionCheckerBag(
+				bag = new PermissionCheckerBagImpl(
 					user.getUserId(), userGroups, userOrgs, userOrgGroups,
 					userUserGroupGroups, groups, roles);
 
@@ -308,12 +311,13 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		String companyId = user.getActualCompanyId();
 
-		Group guestGroup = GroupServiceUtil.getGroup(companyId, Group.GUEST);
+		Group guestGroup = GroupServiceUtil.getGroup(
+			companyId, GroupImpl.GUEST);
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
-				primKey);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			String resourceId = resource.getResourceId();
 
@@ -327,7 +331,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 	protected boolean hasUserPermission(
 			String groupId, String name, String primKey, String actionId)
-		throws PortalException, RemoteException, SystemException {
+		throws Exception {
 
 		long start = 0;
 
@@ -350,8 +354,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			resourceIds[0] = resource.getResourceId();
 		}
@@ -359,8 +363,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						Resource.TYPE_CLASS  + " " + Resource.SCOPE_INDIVIDUAL +
-							" " + primKey + " does not exist");
+						ResourceImpl.TYPE_CLASS  + " " +
+							ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
+								" does not exist");
 			}
 		}
 
@@ -372,8 +377,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		try {
 			if (groupId != null) {
 				Resource resource = ResourceServiceUtil.getResource(
-					companyId, name, Resource.TYPE_CLASS,
-					Resource.SCOPE_GROUP, groupId);
+					companyId, name, ResourceImpl.TYPE_CLASS,
+					ResourceImpl.SCOPE_GROUP, groupId);
 
 				resourceIds[1] = resource.getResourceId();
 			}
@@ -382,8 +387,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						Resource.TYPE_CLASS  + " " + Resource.SCOPE_GROUP +
-							" " + groupId + " does not exist");
+						ResourceImpl.TYPE_CLASS  + " " +
+							ResourceImpl.SCOPE_GROUP + " " + groupId +
+								" does not exist");
 			}
 		}
 
@@ -394,8 +400,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
-				companyId, name, Resource.TYPE_CLASS,
-				Resource.SCOPE_COMPANY, companyId);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_COMPANY, companyId);
 
 			resourceIds[2] = resource.getResourceId();
 		}
@@ -403,8 +409,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						Resource.TYPE_CLASS  + " " + Resource.SCOPE_COMPANY +
-							" " + companyId + " does not exist");
+						ResourceImpl.TYPE_CLASS  + " " +
+							ResourceImpl.SCOPE_COMPANY + " " + companyId +
+								" does not exist");
 			}
 		}
 
@@ -428,7 +435,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean isAdmin(String companyId, String groupId, String name)
-		throws PortalException, RemoteException, SystemException {
+		throws Exception {
 
 		PermissionCheckerBag bag = getBag(groupId);
 

@@ -26,8 +26,8 @@ import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.service.ListTypeService;
 import com.liferay.portal.service.persistence.ListTypeUtil;
-import com.liferay.portal.service.spring.ListTypeService;
 
 import java.util.List;
 

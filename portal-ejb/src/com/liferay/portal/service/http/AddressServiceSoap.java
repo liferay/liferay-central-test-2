@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.AddressServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.AddressServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class AddressServiceSoap {
-	public static com.liferay.portal.model.AddressModel addAddress(
+	public static com.liferay.portal.model.AddressSoap addAddress(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String street1, java.lang.String street2,
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
@@ -49,7 +48,7 @@ public class AddressServiceSoap {
 					classPK, street1, street2, street3, city, zip, regionId,
 					countryId, typeId, mailing, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.AddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -70,12 +69,12 @@ public class AddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.AddressModel getAddress(
+	public static com.liferay.portal.model.AddressSoap getAddress(
 		java.lang.String addressId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Address returnValue = AddressServiceUtil.getAddress(addressId);
 
-			return returnValue;
+			return com.liferay.portal.model.AddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -84,14 +83,14 @@ public class AddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.AddressModel[] getAddresses(
+	public static com.liferay.portal.model.AddressSoap[] getAddresses(
 		java.lang.String className, java.lang.String classPK)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = AddressServiceUtil.getAddresses(className,
 					classPK);
 
-			return (com.liferay.portal.model.Address[])returnValue.toArray(new com.liferay.portal.model.Address[0]);
+			return com.liferay.portal.model.AddressSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -100,7 +99,7 @@ public class AddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.AddressModel updateAddress(
+	public static com.liferay.portal.model.AddressSoap updateAddress(
 		java.lang.String addressId, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, java.lang.String regionId,
@@ -111,7 +110,7 @@ public class AddressServiceSoap {
 					street1, street2, street3, city, zip, regionId, countryId,
 					typeId, mailing, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.AddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -120,5 +119,5 @@ public class AddressServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(AddressServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(AddressServiceSoap.class);
 }

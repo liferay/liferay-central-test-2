@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchWebsiteException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class WebsitePersistence extends BasePersistence {
 	public Website create(String websiteId) {
-		Website website = new Website();
+		Website website = new WebsiteImpl();
 		website.setNew(true);
 		website.setPrimaryKey(websiteId);
 
@@ -63,7 +64,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Website website = (Website)session.get(Website.class, websiteId);
+			Website website = (Website)session.get(WebsiteImpl.class, websiteId);
 
 			if (website == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +163,7 @@ public class WebsitePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Website)session.get(Website.class, websiteId);
+			return (Website)session.get(WebsiteImpl.class, websiteId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -337,7 +338,7 @@ public class WebsitePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
-			Website[] array = new Website[3];
+			Website[] array = new WebsiteImpl[3];
 			array[0] = (Website)objArray[0];
 			array[1] = (Website)objArray[1];
 			array[2] = (Website)objArray[2];
@@ -516,7 +517,7 @@ public class WebsitePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
-			Website[] array = new Website[3];
+			Website[] array = new WebsiteImpl[3];
 			array[0] = (Website)objArray[0];
 			array[1] = (Website)objArray[1];
 			array[2] = (Website)objArray[2];
@@ -742,7 +743,7 @@ public class WebsitePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
-			Website[] array = new Website[3];
+			Website[] array = new WebsiteImpl[3];
 			array[0] = (Website)objArray[0];
 			array[1] = (Website)objArray[1];
 			array[2] = (Website)objArray[2];
@@ -1016,7 +1017,7 @@ public class WebsitePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
-			Website[] array = new Website[3];
+			Website[] array = new WebsiteImpl[3];
 			array[0] = (Website)objArray[0];
 			array[1] = (Website)objArray[1];
 			array[2] = (Website)objArray[2];
@@ -1312,7 +1313,7 @@ public class WebsitePersistence extends BasePersistence {
 			q.setBoolean(queryPos++, primary);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, website);
-			Website[] array = new Website[3];
+			Website[] array = new WebsiteImpl[3];
 			array[0] = (Website)objArray[0];
 			array[1] = (Website)objArray[1];
 			array[2] = (Website)objArray[2];

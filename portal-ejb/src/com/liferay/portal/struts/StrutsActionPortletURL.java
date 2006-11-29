@@ -22,11 +22,11 @@
 
 package com.liferay.portal.struts;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.StringPool;
 
 import java.util.Iterator;
 import java.util.Map;

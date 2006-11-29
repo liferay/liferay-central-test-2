@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.mail.service.spring.MailServiceUtil;
+import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.ContactBirthdayException;
 import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
@@ -44,16 +44,23 @@ import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.UserSmsException;
+import com.liferay.portal.kernel.mail.MailMessage;
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.KeyValuePair;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -62,6 +69,12 @@ import com.liferay.portal.security.auth.UserIdGenerator;
 import com.liferay.portal.security.auth.UserIdValidator;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
+import com.liferay.portal.service.ContactLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
+import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -74,33 +87,21 @@ import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ContactLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.PasswordTrackerLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.UserIdMapperLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalService;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileRankLocalServiceUtil;
-import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
-import com.liferay.portlet.messageboards.service.spring.MBMessageFlagLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
-import com.liferay.util.Base64;
+import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageFlagLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
-import com.liferay.util.KeyValuePair;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
-import com.liferay.util.mail.MailMessage;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -223,7 +224,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		User defaultUser = getDefaultUser(companyId);
 
-		String fullName = User.getFullName(firstName, middleName, lastName);
+		String fullName = UserImpl.getFullName(firstName, middleName, lastName);
 
 		String greeting = null;
 
@@ -290,11 +291,12 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		contact.setCompanyId(user.getCompanyId());
 		contact.setUserId(user.getUserId());
-		contact.setUserName(User.getFullName(firstName, middleName, lastName));
+		contact.setUserName(
+			UserImpl.getFullName(firstName, middleName, lastName));
 		contact.setCreateDate(now);
 		contact.setModifiedDate(now);
 		contact.setAccountId(user.getCompanyId());
-		contact.setParentContactId(Contact.DEFAULT_PARENT_CONTACT_ID);
+		contact.setParentContactId(ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 		contact.setFirstName(firstName);
 		contact.setMiddleName(middleName);
 		contact.setLastName(lastName);
@@ -544,8 +546,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 		// Resources
 
 		ResourceLocalServiceUtil.deleteResource(
-			user.getCompanyId(), User.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, user.getPrimaryKey().toString());
+			user.getCompanyId(), User.class.getName(), ResourceImpl.TYPE_CLASS,
+			ResourceImpl.SCOPE_INDIVIDUAL, user.getPrimaryKey().toString());
 
 		// User
 
@@ -583,7 +585,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 	public User getDefaultUser(String companyId)
 		throws PortalException, SystemException {
 
-		return UserUtil.findByPrimaryKey(User.getDefaultUserId(companyId));
+		return UserUtil.findByPrimaryKey(UserImpl.getDefaultUserId(companyId));
 	}
 
 	public List getGroupUsers(String groupId)
@@ -594,7 +596,9 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 	public List getPermissionUsers(
 			String companyId, String groupId, String name, String primKey,
-			String actionId, UserSearchTerms searchTerms, int begin, int end)
+			String actionId, String firstName, String middleName,
+			String lastName, String emailAddress, boolean andOperator,
+			int begin, int end)
 		throws PortalException, SystemException {
 
 		int orgGroupPermissionsCount =
@@ -603,18 +607,20 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		if (orgGroupPermissionsCount > 0) {
 			return PermissionUserFinder.findByUserAndOrgGroupPermission(
-				companyId, name, primKey, actionId, searchTerms, begin, end);
+				companyId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator, begin, end);
 		}
 		else {
 			return PermissionUserFinder.findByPermissionAndRole(
-				companyId, groupId, name, primKey, actionId, searchTerms, begin,
-				end);
+				companyId, groupId, name, primKey, actionId, firstName,
+				middleName, lastName, emailAddress, andOperator, begin, end);
 		}
 	}
 
 	public int getPermissionUsersCount(
 			String companyId, String groupId, String name, String primKey,
-			String actionId, UserSearchTerms searchTerms)
+			String actionId, String firstName, String middleName,
+			String lastName, String emailAddress, boolean andOperator)
 		throws PortalException, SystemException {
 
 		int orgGroupPermissionsCount =
@@ -623,11 +629,13 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		if (orgGroupPermissionsCount > 0) {
 			return PermissionUserFinder.countByUserAndOrgGroupPermission(
-				companyId, name, primKey, actionId, searchTerms);
+				companyId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator);
 		}
 		else {
 			return PermissionUserFinder.countByPermissionAndRole(
-				companyId, groupId, name, primKey, actionId, searchTerms);
+				companyId, groupId, name, primKey, actionId, firstName,
+				middleName, lastName, emailAddress, andOperator);
 		}
 	}
 
@@ -1066,7 +1074,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 			contact.setUserName(StringPool.BLANK);
 			contact.setCreateDate(now);
 			contact.setAccountId(user.getCompanyId());
-			contact.setParentContactId(Contact.DEFAULT_PARENT_CONTACT_ID);
+			contact.setParentContactId(ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 		}
 
 		contact.setModifiedDate(now);
@@ -1366,7 +1374,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		if (!Validator.isEmailAddress(emailAddress)) {
 			throw new UserEmailAddressException();
 		}
-		else if (!User.isDefaultUser(userId)) {
+		else if (!UserImpl.isDefaultUser(userId)) {
 			try {
 				if (!user.getEmailAddress().equals(emailAddress)) {
 					if (UserUtil.findByC_EA(
@@ -1389,7 +1397,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 			}
 		}
 
-		if (!User.isDefaultUser(userId)) {
+		if (!UserImpl.isDefaultUser(userId)) {
 			if (Validator.isNull(firstName)) {
 				throw new ContactFirstNameException();
 			}

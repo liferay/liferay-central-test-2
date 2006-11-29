@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +48,7 @@ import java.util.List;
  */
 public class ReleasePersistence extends BasePersistence {
 	public Release create(String releaseId) {
-		Release release = new Release();
+		Release release = new ReleaseImpl();
 		release.setNew(true);
 		release.setPrimaryKey(releaseId);
 
@@ -61,7 +62,7 @@ public class ReleasePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Release release = (Release)session.get(Release.class, releaseId);
+			Release release = (Release)session.get(ReleaseImpl.class, releaseId);
 
 			if (release == null) {
 				if (_log.isWarnEnabled()) {
@@ -160,7 +161,7 @@ public class ReleasePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Release)session.get(Release.class, releaseId);
+			return (Release)session.get(ReleaseImpl.class, releaseId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

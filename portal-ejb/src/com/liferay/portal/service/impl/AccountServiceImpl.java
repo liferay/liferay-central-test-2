@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.spring.AccountService;
+import com.liferay.portal.service.AccountService;
 
 /**
  * <a href="AccountServiceImpl.java.html"><b><i>View Source</i></b></a>

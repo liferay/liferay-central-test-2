@@ -22,24 +22,25 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateUserGroupException;
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredUserGroupException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.UserGroupNameException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.UserGroupImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.UserGroupLocalService;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.List;
@@ -74,7 +75,8 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);
 
 		userGroup.setCompanyId(companyId);
-		userGroup.setParentUserGroupId(UserGroup.DEFAULT_PARENT_USER_GROUP_ID);
+		userGroup.setParentUserGroupId(
+			UserGroupImpl.DEFAULT_PARENT_USER_GROUP_ID);
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 
@@ -114,7 +116,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
 		ResourceLocalServiceUtil.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
-			Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 			userGroup.getPrimaryKey().toString());
 
 		// User Group

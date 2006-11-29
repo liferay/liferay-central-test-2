@@ -45,8 +45,8 @@ public class CompanyUtil {
 
 	public static com.liferay.portal.model.Company remove(
 		java.lang.String companyId)
-		throws com.liferay.portal.NoSuchCompanyException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class CompanyUtil {
 
 	public static com.liferay.portal.model.Company findByPrimaryKey(
 		java.lang.String companyId)
-		throws com.liferay.portal.NoSuchCompanyException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCompanyException {
 		return getPersistence().findByPrimaryKey(companyId);
 	}
 
@@ -161,7 +161,7 @@ public class CompanyUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

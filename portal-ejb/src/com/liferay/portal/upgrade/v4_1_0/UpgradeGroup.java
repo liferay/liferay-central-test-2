@@ -25,11 +25,12 @@ package com.liferay.portal.upgrade.v4_1_0;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
@@ -86,8 +87,9 @@ public class UpgradeGroup extends UpgradeProcess {
 					User user = (User)users.get(i);
 
 					Resource resource = ResourceLocalServiceUtil.addResource(
-						companyId, Group.class.getName(), Resource.TYPE_CLASS,
-						Resource.SCOPE_INDIVIDUAL, groupId);
+						companyId, Group.class.getName(),
+						ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+						groupId);
 
 					PermissionLocalServiceUtil.addUserPermissions(
 						user.getUserId(),

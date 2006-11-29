@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.LayoutSetLocalService;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceFactory;
+import com.liferay.portal.service.LayoutSetLocalService;
+import com.liferay.portal.service.LayoutSetLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

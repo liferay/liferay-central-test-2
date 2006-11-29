@@ -45,8 +45,8 @@ public class WebsiteUtil {
 
 	public static com.liferay.portal.model.Website remove(
 		java.lang.String websiteId)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class WebsiteUtil {
 
 	public static com.liferay.portal.model.Website findByPrimaryKey(
 		java.lang.String websiteId)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByPrimaryKey(websiteId);
 	}
 
@@ -161,32 +161,32 @@ public class WebsiteUtil {
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByCompanyId_First(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByCompanyId_Last(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByCompanyId_PrevAndNext(
 		java.lang.String websiteId, java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByCompanyId_PrevAndNext(websiteId,
 			companyId, obc);
 	}
@@ -202,32 +202,32 @@ public class WebsiteUtil {
 	}
 
 	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByUserId_First(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByUserId_Last(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByUserId_PrevAndNext(
 		java.lang.String websiteId, java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByUserId_PrevAndNext(websiteId, userId, obc);
 	}
 
@@ -244,33 +244,33 @@ public class WebsiteUtil {
 
 	public static java.util.List findByC_C(java.lang.String companyId,
 		java.lang.String className, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(companyId, className, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByC_C_First(
 		java.lang.String companyId, java.lang.String className,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_First(companyId, className, obc);
 	}
 
 	public static com.liferay.portal.model.Website findByC_C_Last(
 		java.lang.String companyId, java.lang.String className,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_Last(companyId, className, obc);
 	}
 
 	public static com.liferay.portal.model.Website[] findByC_C_PrevAndNext(
 		java.lang.String websiteId, java.lang.String companyId,
 		java.lang.String className,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_PrevAndNext(websiteId, companyId,
 			className, obc);
 	}
@@ -290,7 +290,7 @@ public class WebsiteUtil {
 
 	public static java.util.List findByC_C_C(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C(companyId, className, classPK,
 			begin, end, obc);
@@ -299,9 +299,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_First(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_First(companyId, className,
 			classPK, obc);
 	}
@@ -309,9 +309,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_Last(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_Last(companyId, className, classPK,
 			obc);
 	}
@@ -319,9 +319,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website[] findByC_C_C_PrevAndNext(
 		java.lang.String websiteId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_PrevAndNext(websiteId, companyId,
 			className, classPK, obc);
 	}
@@ -342,7 +342,7 @@ public class WebsiteUtil {
 
 	public static java.util.List findByC_C_C_P(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK, boolean primary,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C_P(companyId, className, classPK,
 			primary, begin, end, obc);
@@ -351,9 +351,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_P_First(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK, boolean primary,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_P_First(companyId, className,
 			classPK, primary, obc);
 	}
@@ -361,9 +361,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website findByC_C_C_P_Last(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK, boolean primary,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_P_Last(companyId, className,
 			classPK, primary, obc);
 	}
@@ -371,9 +371,9 @@ public class WebsiteUtil {
 	public static com.liferay.portal.model.Website[] findByC_C_C_P_PrevAndNext(
 		java.lang.String websiteId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK, boolean primary,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchWebsiteException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByC_C_C_P_PrevAndNext(websiteId, companyId,
 			className, classPK, primary, obc);
 	}
@@ -389,7 +389,7 @@ public class WebsiteUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

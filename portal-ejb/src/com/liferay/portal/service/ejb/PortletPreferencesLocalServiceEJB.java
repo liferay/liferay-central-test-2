@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalService;
 
 import javax.ejb.EJBLocalObject;
 

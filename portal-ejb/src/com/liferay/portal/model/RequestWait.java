@@ -26,7 +26,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 
 /**
- * <a href="ReverseAjaxWait.java.html"><b><i>View Source</i></b></a>
+ * <a href="RequestWait.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  *

@@ -23,11 +23,11 @@
 package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;

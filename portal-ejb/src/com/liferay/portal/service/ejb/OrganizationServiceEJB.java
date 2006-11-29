@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.OrganizationService;
+import com.liferay.portal.service.OrganizationService;
 
 import javax.ejb.EJBObject;
 

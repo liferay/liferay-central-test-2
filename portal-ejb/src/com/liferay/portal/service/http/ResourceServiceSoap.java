@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.ResourceServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.ResourceServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class ResourceServiceSoap {
-	public static com.liferay.portal.model.ResourceModel getResource(
+	public static com.liferay.portal.model.ResourceSoap getResource(
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey) throws RemoteException {
@@ -45,7 +44,7 @@ public class ResourceServiceSoap {
 			com.liferay.portal.model.Resource returnValue = ResourceServiceUtil.getResource(companyId,
 					name, typeId, scope, primKey);
 
-			return returnValue;
+			return com.liferay.portal.model.ResourceSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -54,5 +53,5 @@ public class ResourceServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ResourceServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ResourceServiceSoap.class);
 }

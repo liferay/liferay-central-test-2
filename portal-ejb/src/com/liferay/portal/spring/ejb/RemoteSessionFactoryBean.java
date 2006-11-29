@@ -22,9 +22,9 @@
 
 package com.liferay.portal.spring.ejb;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.EJBUtil;
-import com.liferay.util.StringPool;
 
 import java.util.Properties;
 

@@ -22,16 +22,15 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.OrgLaborServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.OrgLaborServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="OrgLaborServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -46,8 +45,8 @@ public class OrgLaborServiceHttp {
 		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 		int satClose)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = organizationId;
 
@@ -89,12 +88,12 @@ public class OrgLaborServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -111,8 +110,8 @@ public class OrgLaborServiceHttp {
 
 	public static void deleteOrgLabor(HttpPrincipal httpPrincipal,
 		java.lang.String orgLaborId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = orgLaborId;
 
@@ -127,12 +126,12 @@ public class OrgLaborServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -147,8 +146,8 @@ public class OrgLaborServiceHttp {
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(
 		HttpPrincipal httpPrincipal, java.lang.String orgLaborId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = orgLaborId;
 
@@ -164,12 +163,12 @@ public class OrgLaborServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -186,8 +185,8 @@ public class OrgLaborServiceHttp {
 
 	public static java.util.List getOrgLabors(HttpPrincipal httpPrincipal,
 		java.lang.String organizationId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = organizationId;
 
@@ -203,12 +202,12 @@ public class OrgLaborServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -228,8 +227,8 @@ public class OrgLaborServiceHttp {
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
 		int friClose, int satOpen, int satClose)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = orgLaborId;
 
@@ -265,12 +264,12 @@ public class OrgLaborServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -285,5 +284,5 @@ public class OrgLaborServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OrgLaborServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(OrgLaborServiceHttp.class);
 }

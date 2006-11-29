@@ -26,13 +26,12 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutService;
-
-import java.util.List;
 
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -58,7 +57,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(String layoutId, String ownerId)
 		throws PortalException, SystemException {
 
-		String groupId = Layout.getGroupId(ownerId);
+		String groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
@@ -80,17 +79,15 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String prefsValue)
 		throws SystemException {
 
-		List list = LayoutLocalServiceUtil.getLayouts(
+		return LayoutLocalServiceUtil.getLayouts(
 			companyId, portletId, prefsKey, prefsValue);
-
-		return (LayoutReference[])list.toArray(new LayoutReference[0]);
 	}
 
 	public void setLayouts(
 			String ownerId, String parentLayoutId, String[] layoutIds)
 		throws PortalException, SystemException {
 
-		String groupId = Layout.getGroupId(ownerId);
+		String groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);

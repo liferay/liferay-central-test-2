@@ -24,16 +24,17 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGImageServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
@@ -149,9 +150,9 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 	private IGFolder _getFolder(String groupId, String folderName)
 		throws Exception {
 
-		IGFolder folder = new IGFolder();
+		IGFolder folder = new IGFolderImpl();
 
-		folder.setFolderId(IGFolder.DEFAULT_PARENT_FOLDER_ID);
+		folder.setFolderId(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 		if (!folderName.equals("/")) {
 			StringTokenizer st = new StringTokenizer(folderName, "/");

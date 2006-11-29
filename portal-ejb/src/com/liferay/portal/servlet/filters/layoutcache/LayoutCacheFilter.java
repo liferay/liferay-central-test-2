@@ -23,20 +23,22 @@
 package com.liferay.portal.servlet.filters.layoutcache;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.BrowserSniffer;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
@@ -276,12 +278,12 @@ public class LayoutCacheFilter implements Filter {
 			if (servletPath.startsWith(
 					_LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING)) {
 
-				ownerId = Layout.PRIVATE + group.getGroupId();
+				ownerId = LayoutImpl.PRIVATE + group.getGroupId();
 			}
 			else if (servletPath.startsWith(
 						_LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING)) {
 
-				ownerId = Layout.PUBLIC + group.getGroupId();
+				ownerId = LayoutImpl.PUBLIC + group.getGroupId();
 			}
 		}
 		catch (NoSuchLayoutException nsle) {
@@ -348,12 +350,12 @@ public class LayoutCacheFilter implements Filter {
 				return false;
 			}
 
-			String layoutId = Layout.getLayoutId(plid);
-			String ownerId = Layout.getOwnerId(plid);
+			String layoutId = LayoutImpl.getLayoutId(plid);
+			String ownerId = LayoutImpl.getOwnerId(plid);
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(layoutId, ownerId);
 
-			if (!layout.getType().equals(Layout.TYPE_PORTLET)) {
+			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				return false;
 			}
 
@@ -368,7 +370,7 @@ public class LayoutCacheFilter implements Filter {
 
 				for (int j = 0; j < portlets.length; j++) {
 					String portletId = StringUtil.extractFirst(
-						portlets[j], Portlet.INSTANCE_SEPARATOR);
+						portlets[j], PortletImpl.INSTANCE_SEPARATOR);
 
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(
 						_companyId, portletId);

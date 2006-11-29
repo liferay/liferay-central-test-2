@@ -25,14 +25,15 @@ package com.liferay.portal.service.impl;
 import EDU.oswego.cs.dl.util.concurrent.SyncMap;
 import EDU.oswego.cs.dl.util.concurrent.WriterPreferenceReadWriteLock;
 
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
-import com.liferay.util.ObjectValuePair;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -223,7 +224,7 @@ public class LayoutTemplateLocalUtil {
 				(LayoutTemplate)layoutTemplates.get(layoutTemplateId);
 
 			if (layoutTemplateModel == null) {
-				layoutTemplateModel = new LayoutTemplate(layoutTemplateId);
+				layoutTemplateModel = new LayoutTemplateImpl(layoutTemplateId);
 
 				layoutTemplates.put(layoutTemplateId, layoutTemplateModel);
 			}

@@ -22,16 +22,15 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.AddressServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.AddressServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="AddressServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -47,8 +46,8 @@ public class AddressServiceHttp {
 		java.lang.String city, java.lang.String zip, java.lang.String regionId,
 		java.lang.String countryId, java.lang.String typeId, boolean mailing,
 		boolean primary)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
 
@@ -125,12 +124,12 @@ public class AddressServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -147,8 +146,8 @@ public class AddressServiceHttp {
 
 	public static void deleteAddress(HttpPrincipal httpPrincipal,
 		java.lang.String addressId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = addressId;
 
@@ -163,12 +162,12 @@ public class AddressServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -183,8 +182,8 @@ public class AddressServiceHttp {
 
 	public static com.liferay.portal.model.Address getAddress(
 		HttpPrincipal httpPrincipal, java.lang.String addressId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = addressId;
 
@@ -200,12 +199,12 @@ public class AddressServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -222,8 +221,8 @@ public class AddressServiceHttp {
 
 	public static java.util.List getAddresses(HttpPrincipal httpPrincipal,
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
 
@@ -245,12 +244,12 @@ public class AddressServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -271,8 +270,8 @@ public class AddressServiceHttp {
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
 		java.lang.String regionId, java.lang.String countryId,
 		java.lang.String typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = addressId;
 
@@ -343,12 +342,12 @@ public class AddressServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -363,5 +362,5 @@ public class AddressServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(AddressServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(AddressServiceHttp.class);
 }

@@ -22,15 +22,15 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.pwd.PwdEncryptor;
+import com.liferay.portal.service.PasswordTrackerLocalService;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.PasswordTrackerLocalService;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Time;

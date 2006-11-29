@@ -45,8 +45,8 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country remove(
 		java.lang.String countryId)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCountryException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class CountryUtil {
 
 	public static com.liferay.portal.model.Country findByPrimaryKey(
 		java.lang.String countryId)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByPrimaryKey(countryId);
 	}
 
@@ -161,30 +161,30 @@ public class CountryUtil {
 	}
 
 	public static java.util.List findByActive(boolean active, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Country findByActive_First(
-		boolean active, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_First(active, obc);
 	}
 
 	public static com.liferay.portal.model.Country findByActive_Last(
-		boolean active, com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
+		boolean active, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_Last(active, obc);
 	}
 
 	public static com.liferay.portal.model.Country[] findByActive_PrevAndNext(
 		java.lang.String countryId, boolean active,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchCountryException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchCountryException {
 		return getPersistence().findByActive_PrevAndNext(countryId, active, obc);
 	}
 
@@ -199,7 +199,7 @@ public class CountryUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

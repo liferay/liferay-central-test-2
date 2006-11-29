@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.spring.DataTrackerLocalService;
+import com.liferay.portal.service.DataTrackerLocalService;
 
 /**
  * <a href="DataTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

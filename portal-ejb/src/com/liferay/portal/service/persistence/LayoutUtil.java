@@ -45,8 +45,8 @@ public class LayoutUtil {
 
 	public static com.liferay.portal.model.Layout remove(
 		com.liferay.portal.service.persistence.LayoutPK layoutPK)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class LayoutUtil {
 
 	public static com.liferay.portal.model.Layout findByPrimaryKey(
 		com.liferay.portal.service.persistence.LayoutPK layoutPK)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByPrimaryKey(layoutPK);
 	}
 
@@ -162,33 +162,33 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List findByOwnerId(java.lang.String ownerId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOwnerId(ownerId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByOwnerId_First(
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByOwnerId_First(ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByOwnerId_Last(
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByOwnerId_Last(ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByOwnerId_PrevAndNext(
 		com.liferay.portal.service.persistence.LayoutPK layoutPK,
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByOwnerId_PrevAndNext(layoutPK, ownerId, obc);
 	}
 
@@ -206,7 +206,7 @@ public class LayoutUtil {
 
 	public static java.util.List findByO_P(java.lang.String ownerId,
 		java.lang.String parentLayoutId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByO_P(ownerId, parentLayoutId, begin, end,
 			obc);
@@ -214,34 +214,34 @@ public class LayoutUtil {
 
 	public static com.liferay.portal.model.Layout findByO_P_First(
 		java.lang.String ownerId, java.lang.String parentLayoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByO_P_First(ownerId, parentLayoutId, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByO_P_Last(
 		java.lang.String ownerId, java.lang.String parentLayoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByO_P_Last(ownerId, parentLayoutId, obc);
 	}
 
 	public static com.liferay.portal.model.Layout[] findByO_P_PrevAndNext(
 		com.liferay.portal.service.persistence.LayoutPK layoutPK,
 		java.lang.String ownerId, java.lang.String parentLayoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByO_P_PrevAndNext(layoutPK, ownerId,
 			parentLayoutId, obc);
 	}
 
 	public static com.liferay.portal.model.Layout findByO_F(
 		java.lang.String ownerId, java.lang.String friendlyURL)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		return getPersistence().findByO_F(ownerId, friendlyURL);
 	}
 
@@ -262,7 +262,7 @@ public class LayoutUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -280,8 +280,8 @@ public class LayoutUtil {
 
 	public static void removeByO_F(java.lang.String ownerId,
 		java.lang.String friendlyURL)
-		throws com.liferay.portal.NoSuchLayoutException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutException {
 		getPersistence().removeByO_F(ownerId, friendlyURL);
 	}
 

@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchListTypeException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class ListTypePersistence extends BasePersistence {
 	public ListType create(String listTypeId) {
-		ListType listType = new ListType();
+		ListType listType = new ListTypeImpl();
 		listType.setNew(true);
 		listType.setPrimaryKey(listTypeId);
 
@@ -63,7 +64,8 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			ListType listType = (ListType)session.get(ListType.class, listTypeId);
+			ListType listType = (ListType)session.get(ListTypeImpl.class,
+					listTypeId);
 
 			if (listType == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +164,7 @@ public class ListTypePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (ListType)session.get(ListType.class, listTypeId);
+			return (ListType)session.get(ListTypeImpl.class, listTypeId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -336,7 +338,7 @@ public class ListTypePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, listType);
-			ListType[] array = new ListType[3];
+			ListType[] array = new ListTypeImpl[3];
 			array[0] = (ListType)objArray[0];
 			array[1] = (ListType)objArray[1];
 			array[2] = (ListType)objArray[2];

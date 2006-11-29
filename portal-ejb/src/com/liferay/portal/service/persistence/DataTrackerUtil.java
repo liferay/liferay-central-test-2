@@ -163,7 +163,7 @@ public class DataTrackerUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

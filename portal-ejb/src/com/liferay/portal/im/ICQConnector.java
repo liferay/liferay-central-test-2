@@ -26,8 +26,8 @@ import JOscarLib.Core.OscarConnection;
 
 import JOscarLib.Tool.OscarInterface;
 
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.KeyValuePair;
 
 import java.util.Iterator;
 import java.util.List;

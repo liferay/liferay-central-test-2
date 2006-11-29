@@ -23,7 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;

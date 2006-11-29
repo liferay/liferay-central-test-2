@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.UserTrackerPathLocalService;
-import com.liferay.portal.service.spring.UserTrackerPathLocalServiceFactory;
+import com.liferay.portal.service.UserTrackerPathLocalService;
+import com.liferay.portal.service.UserTrackerPathLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

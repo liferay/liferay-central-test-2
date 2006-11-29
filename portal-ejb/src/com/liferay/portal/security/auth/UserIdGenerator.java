@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.model.User;
 
 /**

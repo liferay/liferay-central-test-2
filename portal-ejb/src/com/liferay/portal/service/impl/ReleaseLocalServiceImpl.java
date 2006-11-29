@@ -26,8 +26,9 @@ import com.liferay.portal.NoSuchReleaseException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Release;
+import com.liferay.portal.model.impl.ReleaseImpl;
+import com.liferay.portal.service.ReleaseLocalService;
 import com.liferay.portal.service.persistence.ReleaseUtil;
-import com.liferay.portal.service.spring.ReleaseLocalService;
 import com.liferay.portal.util.ReleaseInfo;
 
 import java.util.Date;
@@ -44,10 +45,10 @@ public class ReleaseLocalServiceImpl implements ReleaseLocalService {
 		Release release = null;
 
 		try {
-			release = ReleaseUtil.findByPrimaryKey(Release.DEFAULT_ID);
+			release = ReleaseUtil.findByPrimaryKey(ReleaseImpl.DEFAULT_ID);
 		}
 		catch (NoSuchReleaseException nsre) {
-			release = ReleaseUtil.create(Release.DEFAULT_ID);
+			release = ReleaseUtil.create(ReleaseImpl.DEFAULT_ID);
 
 			Date now = new Date();
 

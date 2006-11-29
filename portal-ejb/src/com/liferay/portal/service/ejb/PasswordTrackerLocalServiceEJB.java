@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PasswordTrackerLocalService;
+import com.liferay.portal.service.PasswordTrackerLocalService;
 
 import javax.ejb.EJBLocalObject;
 

@@ -22,11 +22,11 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.util.StringPool;
 
 import java.io.IOException;
 

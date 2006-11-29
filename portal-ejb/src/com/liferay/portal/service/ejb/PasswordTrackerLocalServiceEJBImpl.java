@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PasswordTrackerLocalService;
-import com.liferay.portal.service.spring.PasswordTrackerLocalServiceFactory;
+import com.liferay.portal.service.PasswordTrackerLocalService;
+import com.liferay.portal.service.PasswordTrackerLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

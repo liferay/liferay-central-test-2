@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.UserTrackerLocalService;
+import com.liferay.portal.service.UserTrackerLocalService;
 
 import javax.ejb.EJBLocalObject;
 

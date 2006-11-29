@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgGroupRole;
+import com.liferay.portal.model.impl.OrgGroupRoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class OrgGroupRolePersistence extends BasePersistence {
 	public OrgGroupRole create(OrgGroupRolePK orgGroupRolePK) {
-		OrgGroupRole orgGroupRole = new OrgGroupRole();
+		OrgGroupRole orgGroupRole = new OrgGroupRoleImpl();
 		orgGroupRole.setNew(true);
 		orgGroupRole.setPrimaryKey(orgGroupRolePK);
 
@@ -63,7 +64,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRole.class,
+			OrgGroupRole orgGroupRole = (OrgGroupRole)session.get(OrgGroupRoleImpl.class,
 					orgGroupRolePK);
 
 			if (orgGroupRole == null) {
@@ -167,7 +168,8 @@ public class OrgGroupRolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (OrgGroupRole)session.get(OrgGroupRole.class, orgGroupRolePK);
+			return (OrgGroupRole)session.get(OrgGroupRoleImpl.class,
+				orgGroupRolePK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -333,7 +335,7 @@ public class OrgGroupRolePersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgGroupRole);
-			OrgGroupRole[] array = new OrgGroupRole[3];
+			OrgGroupRole[] array = new OrgGroupRoleImpl[3];
 			array[0] = (OrgGroupRole)objArray[0];
 			array[1] = (OrgGroupRole)objArray[1];
 			array[2] = (OrgGroupRole)objArray[2];

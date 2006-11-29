@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
@@ -123,7 +124,7 @@ public class RoleFinder {
 
 			q.setCacheable(true);
 
-			q.addEntity("Role_", Role.class);
+			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -165,7 +166,7 @@ public class RoleFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Role_", Role.class);
+			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -201,7 +202,7 @@ public class RoleFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Role_", Role.class);
+			q.addEntity("Role_", RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

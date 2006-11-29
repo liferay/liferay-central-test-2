@@ -22,23 +22,25 @@
 
 package com.liferay.portal.upgrade.v4_1_0;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.CounterServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
@@ -90,8 +92,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			return files;
 		}
 
-		String portletId = Company.SYSTEM;
-		String repositoryId = Company.SYSTEM;
+		String portletId = CompanyImpl.SYSTEM;
+		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = "messageboards/" + topicId + "/" + oldMessageId;
 
 		String[] fileNames = null;
@@ -160,9 +162,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			return;
 		}
 
-		String portletId = Company.SYSTEM;
-		String groupId = Group.DEFAULT_PARENT_GROUP_ID;
-		String repositoryId = Company.SYSTEM;
+		String portletId = CompanyImpl.SYSTEM;
+		String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = "messageboards/" + threadId + "/" + newMessageId;
 
 		try {
@@ -294,7 +296,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_3);
 
 			ps.setString(1, categoryId);
-			ps.setString(2, MBMessage.DEPRECATED_TOPIC_ID);
+			ps.setString(2, MBMessageImpl.DEPRECATED_TOPIC_ID);
 			ps.setString(3, newMessageId);
 			ps.setString(4, topicId);
 			ps.setString(5, oldMessageId);
@@ -303,7 +305,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_4);
 
-			ps.setString(1, MBMessage.DEPRECATED_TOPIC_ID);
+			ps.setString(1, MBMessageImpl.DEPRECATED_TOPIC_ID);
 			ps.setString(2, newMessageId);
 			ps.setString(3, topicId);
 			ps.setString(4, oldMessageId);
@@ -313,7 +315,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_5);
 
 			ps.setString(1, categoryId);
-			ps.setString(2, MBMessage.DEPRECATED_TOPIC_ID);
+			ps.setString(2, MBMessageImpl.DEPRECATED_TOPIC_ID);
 			ps.setString(3, newMessageId);
 			ps.setString(4, topicId);
 			ps.setString(5, oldMessageId);
@@ -331,8 +333,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps.setString(
 				1,
-				"{topicId=" + MBMessage.DEPRECATED_TOPIC_ID + ", messageId=" +
-					newMessageId + "}");
+				"{topicId=" + MBMessageImpl.DEPRECATED_TOPIC_ID +
+					", messageId=" + newMessageId + "}");
 			ps.setString(2, MBMessage.class.getName());
 			ps.setString(
 				3, "{topicId=" + topicId + ", messageId=" + oldMessageId + "}");
@@ -370,7 +372,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 				MBCategory category = null;
 
-				if (topicId.equals(Company.SYSTEM)) {
+				if (topicId.equals(CompanyImpl.SYSTEM)) {
 					category = MBCategoryLocalServiceUtil.getSystemCategory();
 				}
 				else {
@@ -384,7 +386,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 					if (Validator.isNull(parentCategoryId)) {
 						parentCategoryId =
-							MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+							MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 					}
 					else {
 						MBCategory parentCategory =
@@ -395,9 +397,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					}
 
 					if (Validator.isNotNull(groupId) &&
-						!groupId.equals(Group.DEFAULT_PARENT_GROUP_ID)) {
+						!groupId.equals(GroupImpl.DEFAULT_PARENT_GROUP_ID)) {
 
-						String plid = Layout.PUBLIC + groupId + ".1";
+						String plid = LayoutImpl.PUBLIC + groupId + ".1";
 						boolean addCommunityPermissions = true;
 						boolean addGuestPermissions = true;
 

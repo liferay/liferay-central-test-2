@@ -23,8 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.service.UserTrackerPathLocalService;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
-import com.liferay.portal.service.spring.UserTrackerPathLocalService;
 
 import java.util.List;
 

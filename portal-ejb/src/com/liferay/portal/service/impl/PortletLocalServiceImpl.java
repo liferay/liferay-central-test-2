@@ -29,10 +29,11 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
-import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
-import com.liferay.portal.service.spring.PortletLocalService;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -79,16 +80,30 @@ import org.dom4j.io.XMLWriter;
  */
 public class PortletLocalServiceImpl implements PortletLocalService {
 
-	public PortletCategory getEARDisplay(String xml)
-		throws DocumentException, IOException {
-
-		return _readLiferayDisplayXML(xml);
+	public PortletCategory getEARDisplay(String xml) throws SystemException {
+		try {
+			return _readLiferayDisplayXML(xml);
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public PortletCategory getWARDisplay(String servletContextName, String xml)
-		throws DocumentException, IOException {
+		throws SystemException {
 
-		return _readLiferayDisplayXML(servletContextName, xml);
+		try {
+			return _readLiferayDisplayXML(servletContextName, xml);
+		}
+		catch (DocumentException de) {
+			throw new SystemException(de);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public Map getFriendlyURLPlugins() {
@@ -100,7 +115,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		portletId = PortalUtil.getJsSafePortletName(portletId);
 
-		if (companyId.equals(User.DEFAULT)) {
+		if (companyId.equals(UserImpl.DEFAULT)) {
 			throw new SystemException();
 		}
 
@@ -108,7 +123,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		Map companyPortletsPool = _getPortletsPool(companyId);
 
-		String rootPortletId = Portlet.getRootPortletId(portletId);
+		String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
 
@@ -401,7 +416,15 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			SimpleCachePool.put(scpId, portletIds);
 		}
 
-		return (String)portletIds.get(securityPath);
+		String portletId = (String)portletIds.get(securityPath);
+
+		if (Validator.isNull(portletId)) {
+			_log.error(
+				"Struts path " + securityPath + " is not mapped to a portlet " +
+					"in liferay-portlet.xml");
+		}
+
+		return portletId;
 	}
 
 	private Map _getPortletsPool() {
@@ -516,7 +539,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 			if (servletContextName != null) {
 				portletId =
-					portletId + Portlet.WAR_SEPARATOR + servletContextName;
+					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
 			portletId = PortalUtil.getJsSafePortletName(portletId);
@@ -530,7 +553,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			Portlet portletModel = (Portlet)portletsPool.get(portletId);
 
 			if (portletModel == null) {
-				portletModel = new Portlet(
+				portletModel = new PortletImpl(
 					new PortletPK(portletId, _SHARED_KEY));
 
 				portletsPool.put(portletId, portletModel);
@@ -714,7 +737,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 				if (servletContextName != null) {
 					portletId =
-						portletId + Portlet.WAR_SEPARATOR + servletContextName;
+						portletId + PortletImpl.WAR_SEPARATOR +
+							servletContextName;
 				}
 
 				portletId = PortalUtil.getJsSafePortletName(portletId);
@@ -770,14 +794,14 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 			if ((servletContextName != null) && (portlet.isWARFile()) &&
 				(portletId.endsWith(
-					Portlet.WAR_SEPARATOR +
+					PortletImpl.WAR_SEPARATOR +
 						PortalUtil.getJsSafePortletName(servletContextName)) &&
 				(!portletIds.contains(portletId)))) {
 
 				undefinedPortletIds.add(portletId);
 			}
 			else if ((servletContextName == null) && (!portlet.isWARFile()) &&
-					 (portletId.indexOf(Portlet.WAR_SEPARATOR) == -1) &&
+					 (portletId.indexOf(PortletImpl.WAR_SEPARATOR) == -1) &&
 					 (!portletIds.contains(portletId))) {
 
 				undefinedPortletIds.add(portletId);
@@ -863,7 +887,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 			if (servletContextName != null) {
 				portletId =
-					portletId + Portlet.WAR_SEPARATOR + servletContextName;
+					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
 			portletId = PortalUtil.getJsSafePortletName(portletId);

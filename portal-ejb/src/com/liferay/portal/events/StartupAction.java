@@ -22,13 +22,13 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.lock.service.spring.LockServiceUtil;
+import com.liferay.lock.service.LockServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.service.spring.ImageLocalServiceUtil;
-import com.liferay.portal.service.spring.ReleaseLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
+import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.upgrade.UpgradeProcess;

@@ -45,8 +45,8 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet remove(
 		java.lang.String ownerId)
-		throws com.liferay.portal.NoSuchLayoutSetException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet findByPrimaryKey(
 		java.lang.String ownerId)
-		throws com.liferay.portal.NoSuchLayoutSetException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByPrimaryKey(ownerId);
 	}
 
@@ -152,8 +152,8 @@ public class LayoutSetUtil {
 
 	public static com.liferay.portal.model.LayoutSet findByC_V(
 		java.lang.String companyId, java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
 		return getPersistence().findByC_V(companyId, virtualHost);
 	}
 
@@ -174,15 +174,15 @@ public class LayoutSetUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
 	public static void removeByC_V(java.lang.String companyId,
 		java.lang.String virtualHost)
-		throws com.liferay.portal.NoSuchLayoutSetException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
 		getPersistence().removeByC_V(companyId, virtualHost);
 	}
 

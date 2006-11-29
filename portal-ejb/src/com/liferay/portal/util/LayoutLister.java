@@ -25,7 +25,8 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -50,7 +51,7 @@ public class LayoutLister {
 		_list = new ArrayList();
 		_list.add("1|0|0|-1|" + rootNodeName + "|0");
 
-		_createList(Layout.DEFAULT_PARENT_LAYOUT_ID, _nodeId, 0);
+		_createList(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, _nodeId, 0);
 
 		return new LayoutView(_list, _depth);
 	}

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v3_5_0;
 
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;

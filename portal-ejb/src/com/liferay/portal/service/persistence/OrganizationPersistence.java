@@ -24,12 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class OrganizationPersistence extends BasePersistence {
 	public Organization create(String organizationId) {
-		Organization organization = new Organization();
+		Organization organization = new OrganizationImpl();
 		organization.setNew(true);
 		organization.setPrimaryKey(organizationId);
 
@@ -77,7 +78,7 @@ public class OrganizationPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Organization organization = (Organization)session.get(Organization.class,
+			Organization organization = (Organization)session.get(OrganizationImpl.class,
 					organizationId);
 
 			if (organization == null) {
@@ -183,7 +184,8 @@ public class OrganizationPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Organization)session.get(Organization.class, organizationId);
+			return (Organization)session.get(OrganizationImpl.class,
+				organizationId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -361,7 +363,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
-			Organization[] array = new Organization[3];
+			Organization[] array = new OrganizationImpl[3];
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -544,7 +546,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
-			Organization[] array = new Organization[3];
+			Organization[] array = new OrganizationImpl[3];
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -774,7 +776,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					organization);
-			Organization[] array = new Organization[3];
+			Organization[] array = new OrganizationImpl[3];
 			array[0] = (Organization)objArray[0];
 			array[1] = (Organization)objArray[1];
 			array[2] = (Organization)objArray[2];
@@ -1196,7 +1198,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Group_", com.liferay.portal.model.Group.class);
+			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1427,7 +1429,7 @@ public class OrganizationPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("User_", com.liferay.portal.model.User.class);
+			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

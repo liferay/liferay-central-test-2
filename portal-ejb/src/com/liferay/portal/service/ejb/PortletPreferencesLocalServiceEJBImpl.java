@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PortletPreferencesLocalService;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -84,7 +84,7 @@ public class PortletPreferencesLocalServiceEJBImpl
 
 	public com.liferay.portal.model.PortletPreferences updatePreferences(
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk,
-		com.liferay.portlet.PortletPreferencesImpl prefs)
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()

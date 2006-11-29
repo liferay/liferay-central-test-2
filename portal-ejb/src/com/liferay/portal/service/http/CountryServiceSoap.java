@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.CountryServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.CountryServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,12 +36,12 @@ import java.rmi.RemoteException;
  *
  */
 public class CountryServiceSoap {
-	public static com.liferay.portal.model.CountryModel[] getCountries()
+	public static com.liferay.portal.model.CountrySoap[] getCountries()
 		throws RemoteException {
 		try {
 			java.util.List returnValue = CountryServiceUtil.getCountries();
 
-			return (com.liferay.portal.model.Country[])returnValue.toArray(new com.liferay.portal.model.Country[0]);
+			return com.liferay.portal.model.CountrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -51,12 +50,12 @@ public class CountryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.CountryModel[] getCountries(
+	public static com.liferay.portal.model.CountrySoap[] getCountries(
 		boolean active) throws RemoteException {
 		try {
 			java.util.List returnValue = CountryServiceUtil.getCountries(active);
 
-			return (com.liferay.portal.model.Country[])returnValue.toArray(new com.liferay.portal.model.Country[0]);
+			return com.liferay.portal.model.CountrySoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -65,12 +64,12 @@ public class CountryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.CountryModel getCountry(
+	public static com.liferay.portal.model.CountrySoap getCountry(
 		java.lang.String countryId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Country returnValue = CountryServiceUtil.getCountry(countryId);
 
-			return returnValue;
+			return com.liferay.portal.model.CountrySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -79,5 +78,5 @@ public class CountryServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CountryServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(CountryServiceSoap.class);
 }

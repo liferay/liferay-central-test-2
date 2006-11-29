@@ -22,18 +22,18 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Country;
-import com.liferay.portal.model.ListType;
-import com.liferay.portal.model.Region;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
+import com.liferay.portal.model.impl.CountryImpl;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.model.impl.RegionImpl;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.util.StringPool;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -87,8 +87,8 @@ public class UpgradeCompany extends UpgradeProcess {
 				String street3 = StringPool.BLANK;
 				String city = rs.getString("city");
 				String zip = rs.getString("zip");
-				String regionId = Region.DEFAULT_REGION_ID;
-				String countryId = Country.DEFAULT_COUNTRY_ID;
+				String regionId = RegionImpl.DEFAULT_REGION_ID;
+				String countryId = CountryImpl.DEFAULT_COUNTRY_ID;
 				String emailAddress = rs.getString("emailAddress");
 
 				_log.debug("Upgrading company " + companyId);
@@ -102,13 +102,13 @@ public class UpgradeCompany extends UpgradeProcess {
 				AddressLocalServiceUtil.addAddress(
 					account.getUserId(), Account.class.getName(),
 					account.getAccountId(), street1, street2, street3, city,
-					zip, regionId, countryId, ListType.ACCOUNT_ADDRESS_DEFAULT,
-					true, true);
+					zip, regionId, countryId,
+					ListTypeImpl.ACCOUNT_ADDRESS_DEFAULT, true, true);
 
 				EmailAddressLocalServiceUtil.addEmailAddress(
 					account.getUserId(), Account.class.getName(),
 					account.getAccountId(), emailAddress,
-					ListType.ACCOUNT_EMAIL_ADDRESS_DEFAULT, true);
+					ListTypeImpl.ACCOUNT_EMAIL_ADDRESS_DEFAULT, true);
 			}
 		}
 		finally {

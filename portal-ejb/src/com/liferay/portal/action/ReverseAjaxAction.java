@@ -22,14 +22,6 @@
 
 package com.liferay.portal.action;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionMapping;
-import org.json.JSONObject;
-
 import com.liferay.portal.model.RequestWait;
 import com.liferay.portal.model.ReverseAjax;
 import com.liferay.portal.struts.JSONAction;
@@ -37,8 +29,17 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
 import com.liferay.util.ParamUtil;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionMapping;
+
+import org.json.JSONObject;
+
 /**
- * <a href="ReverseAjax.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReverseAjaxAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  *
@@ -50,10 +51,14 @@ public class ReverseAjaxAction extends JSONAction {
 			HttpServletResponse res)
 		throws Exception {
 
-		boolean release = ParamUtil.getBoolean(req, "release");
-		JSONObject jo = new JSONObject();
 		HttpSession ses = req.getSession();
-		ReverseAjax reverseAjax = (ReverseAjax) ses.getAttribute(WebKeys.REVERSE_AJAX);
+
+		ReverseAjax reverseAjax =
+			(ReverseAjax)ses.getAttribute(WebKeys.REVERSE_AJAX);
+
+		JSONObject jo = new JSONObject();
+
+		boolean release = ParamUtil.getBoolean(req, "release");
 
 		if (release) {
 			release(reverseAjax);
@@ -78,7 +83,9 @@ public class ReverseAjaxAction extends JSONAction {
 					reqWait.waitForRequest();
 				}
 
-				if (missedEvents || (reverseAjax.pendingEvents() && !reqWait.isExpired())) {
+				if (missedEvents || (reverseAjax.pendingEvents() &&
+					!reqWait.isExpired())) {
+
 					if (reverseAjax.isPendingChatMessage()) {
 						jo.put("chatMessages",
 							MessagingUtil.getChatMessages(req.getSession()));
@@ -117,6 +124,7 @@ public class ReverseAjaxAction extends JSONAction {
 
 		if (reqWait != null) {
 			reverseAjax.setRequestWait(null);
+
 			reqWait.expire();
 		}
 	}

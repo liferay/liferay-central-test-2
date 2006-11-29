@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
@@ -31,6 +31,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -40,31 +41,34 @@ import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalService;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
-import com.liferay.portlet.calendar.service.spring.CalEventLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
-import com.liferay.portlet.imagegallery.service.spring.IGFolderLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBStatsUserLocalServiceUtil;
-import com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil;
-import com.liferay.portlet.shopping.service.spring.ShoppingCartLocalServiceUtil;
-import com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
+import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
+import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -107,7 +111,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		group.setCompanyId(user.getActualCompanyId());
 		group.setClassName(className);
 		group.setClassPK(classPK);
-		group.setParentGroupId(Group.DEFAULT_PARENT_GROUP_ID);
+		group.setParentGroupId(GroupImpl.DEFAULT_PARENT_GROUP_ID);
 		group.setName(name);
 		group.setDescription(description);
 		group.setType(type);
@@ -118,13 +122,13 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Layout sets
 
 		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PRIVATE + groupId, group.getCompanyId());
+			LayoutImpl.PRIVATE + groupId, group.getCompanyId());
 
 		LayoutSetLocalServiceUtil.addLayoutSet(
-			Layout.PUBLIC + groupId, group.getCompanyId());
+			LayoutImpl.PUBLIC + groupId, group.getCompanyId());
 
 		if (Validator.isNull(className) && Validator.isNull(classPK) &&
-			!User.isDefaultUser(userId)) {
+			!UserImpl.isDefaultUser(userId)) {
 
 			// Resources
 
@@ -160,13 +164,13 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			}
 			catch (NoSuchGroupException nsge) {
 				group = addGroup(
-					User.getDefaultUserId(companyId), null, null,
+					UserImpl.getDefaultUserId(companyId), null, null,
 					systemGroups[i], null, null, null);
 			}
 
-			if (group.getName().equals(Group.GUEST)) {
+			if (group.getName().equals(GroupImpl.GUEST)) {
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					Layout.PUBLIC + group.getGroupId());
+					LayoutImpl.PUBLIC + group.getGroupId());
 
 				if (layoutSet.getPageCount() == 0) {
 					addDefaultLayouts(group);
@@ -186,8 +190,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		// Layout sets
 
-		LayoutSetLocalServiceUtil.deleteLayoutSet(Layout.PRIVATE + groupId);
-		LayoutSetLocalServiceUtil.deleteLayoutSet(Layout.PUBLIC + groupId);
+		LayoutSetLocalServiceUtil.deleteLayoutSet(LayoutImpl.PRIVATE + groupId);
+		LayoutSetLocalServiceUtil.deleteLayoutSet(LayoutImpl.PUBLIC + groupId);
 
 		// Role
 
@@ -244,8 +248,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		// Resources
 
 		Iterator itr = ResourceUtil.findByC_T_S_P(
-			group.getCompanyId(), Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
-			groupId).iterator();
+			group.getCompanyId(), ResourceImpl.TYPE_CLASS,
+			ResourceImpl.SCOPE_GROUP, groupId).iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -258,7 +262,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 			ResourceLocalServiceUtil.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				group.getPrimaryKey().toString());
 		}
 
@@ -429,12 +433,13 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	protected void addDefaultLayouts(Group group)
 		throws PortalException, SystemException {
 
-		String userId = User.getDefaultUserId(group.getCompanyId());
+		String userId = UserImpl.getDefaultUserId(group.getCompanyId());
 		String name = PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_NAME);
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
-			group.getGroupId(), userId, false, Layout.DEFAULT_PARENT_LAYOUT_ID,
-			name, Layout.TYPE_PORTLET, false, StringPool.BLANK);
+			group.getGroupId(), userId, false,
+			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, LayoutImpl.TYPE_PORTLET,
+			false, StringPool.BLANK);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
@@ -464,7 +469,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(friendlyURL)) {
-			int exceptionType = GroupFriendlyURLException.validate(friendlyURL);
+			int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
 
 			if (exceptionType != -1) {
 				throw new GroupFriendlyURLException(exceptionType);

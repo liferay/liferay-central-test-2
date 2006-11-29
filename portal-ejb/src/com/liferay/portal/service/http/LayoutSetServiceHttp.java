@@ -22,15 +22,14 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.LayoutSetServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.LayoutSetServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="LayoutSetServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -42,8 +41,8 @@ public class LayoutSetServiceHttp {
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		HttpPrincipal httpPrincipal, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = ownerId;
 
@@ -72,12 +71,12 @@ public class LayoutSetServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -95,8 +94,8 @@ public class LayoutSetServiceHttp {
 	public static com.liferay.portal.model.LayoutSet updateVirtualHost(
 		HttpPrincipal httpPrincipal, java.lang.String ownerId,
 		java.lang.String virtualHost)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = ownerId;
 
@@ -118,12 +117,12 @@ public class LayoutSetServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -138,5 +137,5 @@ public class LayoutSetServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutSetServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutSetServiceHttp.class);
 }

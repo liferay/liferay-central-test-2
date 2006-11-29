@@ -30,9 +30,9 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.AccountLocalServiceUtil;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.AccountLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
  * <a href="CommonPermission.java.html"><b><i>View Source</i></b></a>

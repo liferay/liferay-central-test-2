@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.OrgGroupPermission;
+import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -60,7 +61,7 @@ public class OrgGroupPermissionFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("OrgGroupPermission", OrgGroupPermission.class);
+			q.addEntity("OrgGroupPermission", OrgGroupPermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

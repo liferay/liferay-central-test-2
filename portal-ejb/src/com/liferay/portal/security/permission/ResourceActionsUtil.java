@@ -28,7 +28,8 @@ import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -363,7 +364,7 @@ public class ResourceActionsUtil {
 	}
 
 	private List _getPortletModelResources(String portletName) {
-		portletName = Portlet.getRootPortletId(portletName);
+		portletName = PortletImpl.getRootPortletId(portletName);
 
 		Set resources = (Set)_portletModelResources.get(portletName);
 
@@ -378,7 +379,7 @@ public class ResourceActionsUtil {
 	private List _getPortletResourceActions(String companyId, String name)
 		throws SystemException {
 
-		name = Portlet.getRootPortletId(name);
+		name = PortletImpl.getRootPortletId(name);
 
 		List actions = _getActions(_portletResourceActions, name);
 
@@ -441,7 +442,7 @@ public class ResourceActionsUtil {
 		// _getPortletResourceGuestDefaultActions and
 		// _getPortletResourceGuestDefaultActions may not work either.
 
-		name = Portlet.getRootPortletId(name);
+		name = PortletImpl.getRootPortletId(name);
 
 		List communityDefaultActions = _getActions(
 			_portletResourceCommunityDefaultActions, name);
@@ -456,7 +457,7 @@ public class ResourceActionsUtil {
 	private List _getPortletResourceGuestDefaultActions(String name)
 		throws SystemException {
 
-		name = Portlet.getRootPortletId(name);
+		name = PortletImpl.getRootPortletId(name);
 
 		return _getActions(_portletResourceGuestDefaultActions, name);
 	}
@@ -464,7 +465,7 @@ public class ResourceActionsUtil {
 	private List _getPortletResourceGuestUnsupportedActions(String name)
 		throws SystemException {
 
-		name = Portlet.getRootPortletId(name);
+		name = PortletImpl.getRootPortletId(name);
 
 		return _getActions(_portletResourceGuestUnsupportedActions, name);
 	}
@@ -514,7 +515,7 @@ public class ResourceActionsUtil {
 			String name = resource.elementText("portlet-name");
 
 			if (servletContextName != null) {
-				name = name + Portlet.WAR_SEPARATOR + servletContextName;
+				name = name + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
 			name = PortalUtil.getJsSafePortletName(name);
@@ -620,7 +621,7 @@ public class ResourceActionsUtil {
 
 				if (servletContextName != null) {
 					portletNameString =
-						portletNameString + Portlet.WAR_SEPARATOR +
+						portletNameString + PortletImpl.WAR_SEPARATOR +
 							servletContextName;
 				}
 

@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.PortalServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PortalServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -48,5 +47,5 @@ public class PortalServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortalServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalServiceSoap.class);
 }

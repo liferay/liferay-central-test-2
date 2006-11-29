@@ -25,23 +25,24 @@ package com.liferay.portal.upgrade.v4_0_0;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.service.spring.DLServiceUtil;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.model.Company;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
+import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
-import com.liferay.portlet.messageboards.service.spring.MBCategoryLocalServiceUtil;
-import com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.File;
@@ -139,7 +140,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 
-			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
+			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 
@@ -147,8 +148,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String groupId = rs.getString("groupId");
 				String userId = rs.getString("userId");
 
-				String plid = Layout.PUBLIC + groupId + ".1";
-				String parentCategoryId = MBCategory.DEFAULT_PARENT_CATEGORY_ID;
+				String plid = LayoutImpl.PUBLIC + groupId + ".1";
+				String parentCategoryId =
+					MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 				String name = "Default Category";
 				String description = name;
 				boolean addCommunityPermissions = true;
@@ -195,7 +197,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String name = rs.getString("name");
 				String description = rs.getString("description");
 
-				String plid = Layout.PUBLIC + groupId + ".1";
+				String plid = LayoutImpl.PUBLIC + groupId + ".1";
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
@@ -269,9 +271,9 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			String companyId, String topicId, String messageId)
 		throws Exception {
 
-		String portletId = Company.SYSTEM;
-		String groupId = Group.DEFAULT_PARENT_GROUP_ID;
-		String repositoryId = Company.SYSTEM;
+		String portletId = CompanyImpl.SYSTEM;
+		String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = "/messageboards/" + topicId + "/" + messageId;
 
 		String[] fileNames = null;

@@ -22,17 +22,17 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.WebsiteURLException;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.WebsiteLocalService;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
-import com.liferay.portal.service.spring.WebsiteLocalService;
 import com.liferay.util.Validator;
 
 import java.net.MalformedURLException;
@@ -154,7 +154,8 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(typeId, className + ListType.WEBSITE);
+			ListTypeServiceUtil.validate(
+				typeId, className + ListTypeImpl.WEBSITE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

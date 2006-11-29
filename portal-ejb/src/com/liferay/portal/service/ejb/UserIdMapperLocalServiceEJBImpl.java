@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.UserIdMapperLocalService;
-import com.liferay.portal.service.spring.UserIdMapperLocalServiceFactory;
+import com.liferay.portal.service.UserIdMapperLocalService;
+import com.liferay.portal.service.UserIdMapperLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

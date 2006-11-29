@@ -22,12 +22,12 @@
 
 package com.liferay.portal.wsrp;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.util.StringPool;
 
 import java.util.HashMap;
 import java.util.Iterator;

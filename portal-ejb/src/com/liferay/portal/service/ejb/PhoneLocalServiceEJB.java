@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PhoneLocalService;
+import com.liferay.portal.service.PhoneLocalService;
 
 import javax.ejb.EJBLocalObject;
 

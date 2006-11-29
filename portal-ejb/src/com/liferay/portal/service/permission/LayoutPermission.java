@@ -27,11 +27,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 
 /**
  * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
@@ -85,7 +85,7 @@ public class LayoutPermission {
 		try {
 			ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 		catch (NoSuchResourceException nsre) {

@@ -27,10 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.RoleService;
 import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.permission.RolePermission;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
-import com.liferay.portal.service.spring.RoleService;
 
 import java.util.List;
 

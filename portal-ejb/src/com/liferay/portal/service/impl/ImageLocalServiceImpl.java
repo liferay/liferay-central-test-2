@@ -26,9 +26,9 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.service.ImageLocalService;
 import com.liferay.portal.service.persistence.ImageFinder;
 import com.liferay.portal.service.persistence.ImageUtil;
-import com.liferay.portal.service.spring.ImageLocalService;
 
 import java.util.Date;
 import java.util.Iterator;

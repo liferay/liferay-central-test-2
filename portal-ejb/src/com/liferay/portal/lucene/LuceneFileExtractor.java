@@ -22,7 +22,7 @@
 
 package com.liferay.portal.lucene;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;

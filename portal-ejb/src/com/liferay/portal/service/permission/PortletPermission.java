@@ -25,8 +25,8 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 
@@ -76,11 +76,11 @@ public class PortletPermission {
 		String primKey = null;
 
 		if (plid != null) {
-			String layoutId = Layout.getLayoutId(plid);
-			String ownerId = Layout.getOwnerId(plid);
+			String layoutId = LayoutImpl.getLayoutId(plid);
+			String ownerId = LayoutImpl.getOwnerId(plid);
 
-			groupId = Layout.getGroupId(ownerId);
-			name = Portlet.getRootPortletId(portletId);
+			groupId = LayoutImpl.getGroupId(ownerId);
+			name = PortletImpl.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
 			if (LayoutPermission.contains(
@@ -99,7 +99,7 @@ public class PortletPermission {
 	}
 
 	public static String getPrimaryKey(String plid, String portletId) {
-		return plid + Portlet.LAYOUT_SEPARATOR + portletId;
+		return plid + PortletImpl.LAYOUT_SEPARATOR + portletId;
 	}
 
 }

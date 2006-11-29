@@ -23,7 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -58,7 +58,7 @@ public class ResourceFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Resource_", Resource.class);
+			q.addEntity("Resource_", ResourceImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

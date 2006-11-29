@@ -23,7 +23,8 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.spring.ImageLocalServiceUtil;
+import com.liferay.portal.model.impl.ImageImpl;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ImageUtil;
 
@@ -94,12 +95,12 @@ public class ImageLocalUtil {
 	private ImageLocalUtil() {
 		ClassLoader classLoader = getClass().getClassLoader();
 
-		_defaultSpacer = new Image();
+		_defaultSpacer = new ImageImpl();
 
 		_defaultSpacer.setTextObj(ImageUtil.read(
 			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_SPACER)));
 
-		_defaultUserPortrait = new Image();
+		_defaultUserPortrait = new ImageImpl();
 
 		_defaultUserPortrait.setTextObj(ImageUtil.read(
 			classLoader, PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_PORTRAIT)));

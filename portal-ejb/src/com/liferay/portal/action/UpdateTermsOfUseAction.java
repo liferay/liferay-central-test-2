@@ -22,7 +22,7 @@
 
 package com.liferay.portal.action;
 
-import com.liferay.portal.service.spring.UserServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.util.Constants;
 
 import javax.servlet.http.HttpServletRequest;

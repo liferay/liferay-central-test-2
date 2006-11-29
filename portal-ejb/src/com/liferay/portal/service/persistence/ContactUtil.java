@@ -45,8 +45,8 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact remove(
 		java.lang.String contactId)
-		throws com.liferay.portal.NoSuchContactException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchContactException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class ContactUtil {
 
 	public static com.liferay.portal.model.Contact findByPrimaryKey(
 		java.lang.String contactId)
-		throws com.liferay.portal.NoSuchContactException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByPrimaryKey(contactId);
 	}
 
@@ -161,32 +161,32 @@ public class ContactUtil {
 	}
 
 	public static java.util.List findByCompanyId(java.lang.String companyId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_First(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchContactException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByCompanyId_First(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact findByCompanyId_Last(
 		java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchContactException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByCompanyId_Last(companyId, obc);
 	}
 
 	public static com.liferay.portal.model.Contact[] findByCompanyId_PrevAndNext(
 		java.lang.String contactId, java.lang.String companyId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchContactException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchContactException {
 		return getPersistence().findByCompanyId_PrevAndNext(contactId,
 			companyId, obc);
 	}
@@ -202,7 +202,7 @@ public class ContactUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

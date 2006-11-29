@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.LayoutLocalService;
-import com.liferay.portal.service.spring.LayoutLocalServiceFactory;
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -100,9 +100,10 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			parentLayoutId);
 	}
 
-	public java.util.List getLayouts(java.lang.String companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
-		java.lang.String prefsValue) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.model.LayoutReference[] getLayouts(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String prefsKey, java.lang.String prefsValue)
+		throws com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().getLayouts(companyId,
 			portletId, prefsKey, prefsValue);
 	}

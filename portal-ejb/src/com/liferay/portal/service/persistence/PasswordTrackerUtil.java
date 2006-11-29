@@ -45,8 +45,8 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker remove(
 		java.lang.String passwordTrackerId)
-		throws com.liferay.portal.NoSuchPasswordTrackerException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordTrackerException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class PasswordTrackerUtil {
 
 	public static com.liferay.portal.model.PasswordTracker findByPrimaryKey(
 		java.lang.String passwordTrackerId)
-		throws com.liferay.portal.NoSuchPasswordTrackerException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByPrimaryKey(passwordTrackerId);
 	}
 
@@ -163,32 +163,32 @@ public class PasswordTrackerUtil {
 	}
 
 	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_First(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPasswordTrackerException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker findByUserId_Last(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPasswordTrackerException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.PasswordTracker[] findByUserId_PrevAndNext(
 		java.lang.String passwordTrackerId, java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPasswordTrackerException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPasswordTrackerException {
 		return getPersistence().findByUserId_PrevAndNext(passwordTrackerId,
 			userId, obc);
 	}
@@ -204,7 +204,7 @@ public class PasswordTrackerUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

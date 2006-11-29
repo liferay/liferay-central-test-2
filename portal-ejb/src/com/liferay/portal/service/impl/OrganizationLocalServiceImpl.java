@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateOrganizationException;
 import com.liferay.portal.NoSuchOrganizationException;
 import com.liferay.portal.OrganizationNameException;
@@ -31,23 +31,24 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredOrganizationException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.CountryServiceUtil;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.OrganizationLocalService;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
-import com.liferay.portal.service.spring.CountryServiceUtil;
-import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
-import com.liferay.portal.service.spring.OrganizationLocalService;
-import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -189,8 +190,9 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		}
 
 		ResourceLocalServiceUtil.deleteResource(
-			organization.getCompanyId(), name, Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, organization.getPrimaryKey().toString());
+			organization.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
+			ResourceImpl.SCOPE_INDIVIDUAL,
+			organization.getPrimaryKey().toString());
 
 		// Organization
 
@@ -305,7 +307,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		throws PortalException, SystemException {
 
 		if (!parentOrganizationId.equals(
-				Organization.DEFAULT_PARENT_ORGANIZATION_ID)) {
+				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			// Ensure parent organization exists and belongs to the proper
 			// company
@@ -316,12 +318,12 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 				if (!companyId.equals(parentOrganization.getCompanyId())) {
 					parentOrganizationId =
-						Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				}
 			}
 			catch (NoSuchOrganizationException nsoe) {
 				parentOrganizationId =
-					Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 			}
 		}
 
@@ -384,7 +386,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			CountryServiceUtil.getCountry(countryId);
 
 			ListTypeServiceUtil.validate(
-				statusId, ListType.ORGANIZATION_STATUS);
+				statusId, ListTypeImpl.ORGANIZATION_STATUS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

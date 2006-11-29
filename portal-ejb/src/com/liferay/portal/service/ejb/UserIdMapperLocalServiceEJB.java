@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.UserIdMapperLocalService;
+import com.liferay.portal.service.UserIdMapperLocalService;
 
 import javax.ejb.EJBLocalObject;
 

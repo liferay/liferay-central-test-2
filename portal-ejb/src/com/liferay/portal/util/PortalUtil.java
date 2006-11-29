@@ -28,6 +28,7 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Company;
@@ -36,19 +37,21 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermission;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.service.spring.UserServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
@@ -71,7 +74,6 @@ import com.liferay.util.Http;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringComparator;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -439,7 +441,7 @@ public class PortalUtil {
 
 		if (Validator.isNull(friendlyURL)) {
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+				ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				layout = (Layout)layouts.get(0);
@@ -673,10 +675,10 @@ public class PortalUtil {
 	}
 
 	public static String getPortletGroupId(String plid) {
-		String ownerId = Layout.getOwnerId(plid);
+		String ownerId = LayoutImpl.getOwnerId(plid);
 
 		return GetterUtil.getString(
-			Layout.getGroupId(ownerId), Group.DEFAULT_PARENT_GROUP_ID);
+			LayoutImpl.getGroupId(ownerId), GroupImpl.DEFAULT_PARENT_GROUP_ID);
 	}
 
 	public static String getPortletGroupId(HttpServletRequest req) {
@@ -1412,19 +1414,19 @@ public class PortalUtil {
 			PropsUtil.getArray(PropsUtil.SYSTEM_GROUPS);
 
 		if (customSystemGroups == null || customSystemGroups.length == 0) {
-			_allSystemGroups = Group.SYSTEM_GROUPS;
+			_allSystemGroups = GroupImpl.SYSTEM_GROUPS;
 		}
 		else {
 			_allSystemGroups = new String[
-				Group.SYSTEM_GROUPS.length + customSystemGroups.length];
+				GroupImpl.SYSTEM_GROUPS.length + customSystemGroups.length];
 
 			System.arraycopy(
-				Group.SYSTEM_GROUPS, 0, _allSystemGroups, 0,
-				Group.SYSTEM_GROUPS.length);
+				GroupImpl.SYSTEM_GROUPS, 0, _allSystemGroups, 0,
+				GroupImpl.SYSTEM_GROUPS.length);
 
 			System.arraycopy(
 				customSystemGroups, 0, _allSystemGroups,
-				Group.SYSTEM_GROUPS.length, customSystemGroups.length);
+				GroupImpl.SYSTEM_GROUPS.length, customSystemGroups.length);
 		}
 
 		_sortedSystemGroups = new String[_allSystemGroups.length];
@@ -1440,19 +1442,19 @@ public class PortalUtil {
 		String customSystemRoles[] = PropsUtil.getArray(PropsUtil.SYSTEM_ROLES);
 
 		if (customSystemRoles == null || customSystemRoles.length == 0) {
-			_allSystemRoles = Role.SYSTEM_ROLES;
+			_allSystemRoles = RoleImpl.SYSTEM_ROLES;
 		}
 		else {
 			_allSystemRoles = new String[
-				Role.SYSTEM_ROLES.length + customSystemRoles.length];
+				RoleImpl.SYSTEM_ROLES.length + customSystemRoles.length];
 
 			System.arraycopy(
-				Role.SYSTEM_ROLES, 0, _allSystemRoles, 0,
-				Role.SYSTEM_ROLES.length);
+				RoleImpl.SYSTEM_ROLES, 0, _allSystemRoles, 0,
+				RoleImpl.SYSTEM_ROLES.length);
 
 			System.arraycopy(
-				customSystemRoles, 0, _allSystemRoles, Role.SYSTEM_ROLES.length,
-				customSystemRoles.length);
+				customSystemRoles, 0, _allSystemRoles,
+				RoleImpl.SYSTEM_ROLES.length, customSystemRoles.length);
 		}
 
 		_sortedSystemRoles = new String[_allSystemRoles.length];

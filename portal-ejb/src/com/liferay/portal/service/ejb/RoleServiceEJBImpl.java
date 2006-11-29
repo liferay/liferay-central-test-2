@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.ejb;
 
+import com.liferay.portal.service.RoleService;
+import com.liferay.portal.service.RoleServiceFactory;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
-import com.liferay.portal.service.spring.RoleService;
-import com.liferay.portal.service.spring.RoleServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

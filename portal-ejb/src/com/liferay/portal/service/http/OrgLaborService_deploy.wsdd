@@ -9,7 +9,7 @@
 		<parameter name="className" value="com.liferay.portal.service.http.OrgLaborServiceSoap"/>
 		<parameter name="wsdlPortType" value="OrgLaborServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addOrgLabor" qname="operNS:addOrgLabor" returnQName="addOrgLaborReturn" returnType="rtns:OrgLaborModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addOrgLabor" qname="operNS:addOrgLabor" returnQName="addOrgLaborReturn" returnType="rtns:OrgLaborSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="typeId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sunOpen" type="tns:int"></parameter>
@@ -30,13 +30,13 @@
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteOrgLabor" qname="operNS:deleteOrgLabor" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrgLabor" qname="operNS:getOrgLabor" returnQName="getOrgLaborReturn" returnType="rtns:OrgLaborModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getOrgLabor" qname="operNS:getOrgLabor" returnQName="getOrgLaborReturn" returnType="rtns:OrgLaborSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getOrgLabors" qname="operNS:getOrgLabors" returnQName="getOrgLaborsReturn" returnType="rtns:ArrayOf_tns2_OrgLaborModel" returnItemType="tns2:OrgLaborModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getOrgLabors" qname="operNS:getOrgLabors" returnQName="getOrgLaborsReturn" returnType="rtns:ArrayOf_tns2_OrgLaborSoap" returnItemType="tns2:OrgLaborSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="organizationId" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateOrgLabor" qname="operNS:updateOrgLabor" returnQName="updateOrgLaborReturn" returnType="rtns:OrgLaborModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateOrgLabor" qname="operNS:updateOrgLabor" returnQName="updateOrgLaborReturn" returnType="rtns:OrgLaborSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="orgLaborId" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sunOpen" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sunClose" type="tns:int"></parameter>
@@ -54,8 +54,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="satClose" type="tns:int"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getOrgLabor deleteOrgLabor addOrgLabor updateOrgLabor getOrgLabors"/>
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:OrgLaborModel" type="java:com.liferay.portal.model.OrgLaborModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_OrgLaborModel" type="java:com.liferay.portal.model.OrgLaborModel[]" innerType="cmp-ns:OrgLaborModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_OrgLaborSoap" type="java:com.liferay.portal.model.OrgLaborSoap[]" innerType="cmp-ns:OrgLaborSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:OrgLaborSoap" type="java:com.liferay.portal.model.OrgLaborSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 </deployment>

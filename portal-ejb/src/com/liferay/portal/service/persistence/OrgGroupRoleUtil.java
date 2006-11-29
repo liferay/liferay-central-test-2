@@ -45,8 +45,8 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole remove(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class OrgGroupRoleUtil {
 
 	public static com.liferay.portal.model.OrgGroupRole findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
 		return getPersistence().findByPrimaryKey(orgGroupRolePK);
 	}
 
@@ -163,33 +163,33 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static java.util.List findByRoleId(java.lang.String roleId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByRoleId(roleId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByRoleId_First(
 		java.lang.String roleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
 		return getPersistence().findByRoleId_First(roleId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole findByRoleId_Last(
 		java.lang.String roleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
 		return getPersistence().findByRoleId_Last(roleId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupRole[] findByRoleId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK,
 		java.lang.String roleId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupRoleException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
 		return getPersistence().findByRoleId_PrevAndNext(orgGroupRolePK,
 			roleId, obc);
 	}
@@ -205,7 +205,7 @@ public class OrgGroupRoleUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

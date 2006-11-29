@@ -35,15 +35,28 @@ import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
@@ -52,22 +65,14 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalService;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
-import com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.InstancePool;
 import com.liferay.util.LocaleUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
@@ -112,10 +117,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		String ownerId = null;
 
 		if (privateLayout) {
-			ownerId = Layout.PRIVATE + groupId;
+			ownerId = LayoutImpl.PRIVATE + groupId;
 		}
 		else {
-			ownerId = Layout.PUBLIC + groupId;
+			ownerId = LayoutImpl.PUBLIC + groupId;
 		}
 
 		String layoutId = getNextLayoutId(ownerId);
@@ -189,7 +194,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		Iterator itr = ResourceFinder.findByC_P(
 			layout.getCompanyId(), layout.getPlid() +
-				Portlet.LAYOUT_SEPARATOR + "%").iterator();
+				PortletImpl.LAYOUT_SEPARATOR + "%").iterator();
 
 		while (itr.hasNext()) {
 			Resource resource = (Resource)itr.next();
@@ -198,8 +203,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 
 		ResourceLocalServiceUtil.deleteResource(
-			layout.getCompanyId(), Layout.class.getName(), Resource.TYPE_CLASS,
-			Resource.SCOPE_INDIVIDUAL, layout.getPrimaryKey().toString());
+			layout.getCompanyId(), Layout.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			layout.getPrimaryKey().toString());
 
 		// Layout
 
@@ -218,7 +224,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		// Layouts
 
 		Iterator itr = LayoutUtil.findByO_P(
-			ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID).iterator();
+			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID).iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
@@ -241,7 +247,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			layoutSet.getCompanyId(), Group.GUEST);
+			layoutSet.getCompanyId(), GroupImpl.GUEST);
 
 		// Build compatibility
 
@@ -300,7 +306,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			// Portlet permissions
 
-			if (layout.getType().equals(Layout.TYPE_PORTLET)) {
+			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
@@ -409,13 +415,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		return LayoutUtil.findByO_P(ownerId, parentLayoutId);
 	}
 
-	public List getLayouts(
+	public LayoutReference[] getLayouts(
 			String companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
 
-		return LayoutFinder.findByC_P_P(
+		List list = LayoutFinder.findByC_P_P(
 			companyId, portletId, prefsKey, prefsValue);
+
+		return (LayoutReference[])list.toArray(new LayoutReference[0]);
 	}
 
 	public void importLayouts(String userId, String ownerId, File file)
@@ -424,7 +432,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			layoutSet.getCompanyId(), Group.GUEST);
+			layoutSet.getCompanyId(), GroupImpl.GUEST);
 
 		// XML file
 
@@ -614,7 +622,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			return;
 		}
 
-		if (parentLayoutId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+		if (parentLayoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 			if (layoutIds.length < 1) {
 				throw new RequiredLayoutException(
 					RequiredLayoutException.AT_LEAST_ONE);
@@ -623,7 +631,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			Layout layout = LayoutUtil.findByPrimaryKey(
 				new LayoutPK(layoutIds[0], ownerId));
 
-			if (!layout.getType().equals(Layout.TYPE_PORTLET)) {
+			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				throw new RequiredLayoutException(
 					RequiredLayoutException.FIRST_LAYOUT_TYPE);
 			}
@@ -753,7 +761,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		// Layouts
 
 		Iterator itr = LayoutUtil.findByO_P(
-			ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID).iterator();
+			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID).iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();
@@ -781,7 +789,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
@@ -808,13 +816,13 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		Element el = parentEl.addElement(elName);
 
 		try {
-			String name = Portlet.getRootPortletId(portletId);
+			String name = PortletImpl.getRootPortletId(portletId);
 			String primKey = PortletPermission.getPrimaryKey(
 				layout.getPlid(), portletId);
 
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			List permissions = PermissionLocalServiceUtil.getGroupPermissions(
 				groupId, resource.getResourceId());
@@ -869,7 +877,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	protected String getParentLayoutId(String ownerId, String parentLayoutId)
 		throws PortalException, SystemException {
 
-		if (!parentLayoutId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+		if (!parentLayoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 
 			// Ensure parent layout exists
 
@@ -878,7 +886,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 					new LayoutPK(parentLayoutId, ownerId));
 			}
 			catch (NoSuchLayoutException nsfe) {
-				parentLayoutId = Layout.DEFAULT_PARENT_LAYOUT_ID;
+				parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 			}
 		}
 
@@ -896,7 +904,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		try {
 			resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 		catch (NoSuchResourceException nsre) {
@@ -907,7 +915,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			resource = ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				layout.getPrimaryKey().toString());
 		}
 
@@ -933,7 +941,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		Element el = parentEl.element(elName);
 
-		String name = Portlet.getRootPortletId(portletId);
+		String name = PortletImpl.getRootPortletId(portletId);
 		String primKey = PortletPermission.getPrimaryKey(
 			layout.getPlid(), portletId);
 
@@ -954,8 +962,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		try {
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 		}
 		catch (NoSuchResourceException nsre) {
 			ResourceLocalServiceUtil.addResources(
@@ -963,8 +971,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				true, true, true);
 
 			resource = ResourceLocalServiceUtil.getResource(
-				layout.getCompanyId(), name, Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, primKey);
+				layout.getCompanyId(), name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 		}
 
 		List actions = new ArrayList();
@@ -1012,7 +1020,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		boolean firstLayout = false;
 
-		if (parentLayoutId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+		if (parentLayoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 			List layouts = LayoutUtil.findByO_P(ownerId, parentLayoutId);
 
 			if (layouts.size() == 0) {
@@ -1043,8 +1051,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 
 		if (Validator.isNotNull(friendlyURL)) {
-			int exceptionType =
-				LayoutFriendlyURLException.validate(friendlyURL);
+			int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
 
 			if (exceptionType != -1) {
 				throw new LayoutFriendlyURLException(exceptionType);
@@ -1061,7 +1068,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			catch (NoSuchLayoutException nsle) {
 			}
 
-			LayoutFriendlyURLException.validateKeyword(friendlyURL);
+			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 
 			Map portletPlugins =
 				PortletLocalServiceUtil.getFriendlyURLPlugins();
@@ -1093,7 +1100,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	protected void validateFirstLayout(String type, boolean hidden)
 		throws PortalException {
 
-		if (!type.equals(Layout.TYPE_PORTLET)) {
+		if (!type.equals(LayoutImpl.TYPE_PORTLET)) {
 			throw new LayoutTypeException(LayoutTypeException.FIRST_LAYOUT);
 		}
 
@@ -1113,7 +1120,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			// Layouts can always be moved to the root level
 
-			if (parentLayoutId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+			if (parentLayoutId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 				return;
 			}
 
@@ -1137,10 +1144,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			// If layout is moved, the new first layout must be valid
 
 			if (layout.getParentLayoutId().equals(
-					Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 
 				List layouts = LayoutUtil.findByO_P(
-					ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+					ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 				// You can only reach this point if there are more than two
 				// layouts at the root level because of the descendant check

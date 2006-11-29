@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.util.Validator;
 
 /**
@@ -39,7 +39,7 @@ public class UserIdValidator {
 			Validator.isEmailAddress(userId) ||
 			(userId.equalsIgnoreCase("cyrus")) ||
 			(userId.equalsIgnoreCase("postfix")) ||
-			(userId.indexOf(User.DEFAULT) != -1) ||
+			(userId.indexOf(UserImpl.DEFAULT) != -1) ||
 			(userId.indexOf(companyId) != -1) ||
 			(userId.indexOf("_") != -1)) {
 

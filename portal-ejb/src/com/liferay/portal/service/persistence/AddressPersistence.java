@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class AddressPersistence extends BasePersistence {
 	public Address create(String addressId) {
-		Address address = new Address();
+		Address address = new AddressImpl();
 		address.setNew(true);
 		address.setPrimaryKey(addressId);
 
@@ -63,7 +64,7 @@ public class AddressPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Address address = (Address)session.get(Address.class, addressId);
+			Address address = (Address)session.get(AddressImpl.class, addressId);
 
 			if (address == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +163,7 @@ public class AddressPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Address)session.get(Address.class, addressId);
+			return (Address)session.get(AddressImpl.class, addressId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -337,7 +338,7 @@ public class AddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];
@@ -516,7 +517,7 @@ public class AddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];
@@ -742,7 +743,7 @@ public class AddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];
@@ -1016,7 +1017,7 @@ public class AddressPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];
@@ -1312,7 +1313,7 @@ public class AddressPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, mailing);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];
@@ -1608,7 +1609,7 @@ public class AddressPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, primary);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, address);
-			Address[] array = new Address[3];
+			Address[] array = new AddressImpl[3];
 			array[0] = (Address)objArray[0];
 			array[1] = (Address)objArray[1];
 			array[2] = (Address)objArray[2];

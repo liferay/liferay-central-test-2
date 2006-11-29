@@ -23,10 +23,10 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.StringPool;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;

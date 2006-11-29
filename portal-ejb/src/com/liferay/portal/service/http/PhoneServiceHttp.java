@@ -22,16 +22,15 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.PhoneServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PhoneServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="PhoneServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -44,8 +43,8 @@ public class PhoneServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String className,
 		java.lang.String classPK, java.lang.String number,
 		java.lang.String extension, java.lang.String typeId, boolean primary)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
 
@@ -90,12 +89,12 @@ public class PhoneServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -112,8 +111,8 @@ public class PhoneServiceHttp {
 
 	public static void deletePhone(HttpPrincipal httpPrincipal,
 		java.lang.String phoneId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = phoneId;
 
@@ -128,12 +127,12 @@ public class PhoneServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -148,8 +147,8 @@ public class PhoneServiceHttp {
 
 	public static com.liferay.portal.model.Phone getPhone(
 		HttpPrincipal httpPrincipal, java.lang.String phoneId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = phoneId;
 
@@ -165,12 +164,12 @@ public class PhoneServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -187,8 +186,8 @@ public class PhoneServiceHttp {
 
 	public static java.util.List getPhones(HttpPrincipal httpPrincipal,
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
 
@@ -210,12 +209,12 @@ public class PhoneServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -234,8 +233,8 @@ public class PhoneServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String phoneId,
 		java.lang.String number, java.lang.String extension,
 		java.lang.String typeId, boolean primary)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = phoneId;
 
@@ -273,12 +272,12 @@ public class PhoneServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -293,5 +292,5 @@ public class PhoneServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PhoneServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(PhoneServiceHttp.class);
 }

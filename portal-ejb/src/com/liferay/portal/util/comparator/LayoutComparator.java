@@ -22,9 +22,9 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="LayoutComparator.java.html"><b><i>View Source</i></b></a>

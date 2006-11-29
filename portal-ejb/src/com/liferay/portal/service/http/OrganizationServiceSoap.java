@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.OrganizationServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.OrganizationServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -50,7 +49,7 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationModel addOrganization(
+	public static com.liferay.portal.model.OrganizationSoap addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
 		java.lang.String regionId, java.lang.String countryId,
 		java.lang.String statusId, boolean location) throws RemoteException {
@@ -58,7 +57,7 @@ public class OrganizationServiceSoap {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.addOrganization(parentOrganizationId,
 					name, regionId, countryId, statusId, location);
 
-			return returnValue;
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -79,12 +78,12 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationModel getOrganization(
+	public static com.liferay.portal.model.OrganizationSoap getOrganization(
 		java.lang.String organizationId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.getOrganization(organizationId);
 
-			return returnValue;
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -93,12 +92,12 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationModel[] getUserOrganizations(
+	public static com.liferay.portal.model.OrganizationSoap[] getUserOrganizations(
 		java.lang.String userId) throws RemoteException {
 		try {
 			java.util.List returnValue = OrganizationServiceUtil.getUserOrganizations(userId);
 
-			return (com.liferay.portal.model.Organization[])returnValue.toArray(new com.liferay.portal.model.Organization[0]);
+			return com.liferay.portal.model.OrganizationSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -133,7 +132,7 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationModel updateOrganization(
+	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
 		java.lang.String countryId, java.lang.String statusId, boolean location)
@@ -143,7 +142,7 @@ public class OrganizationServiceSoap {
 					parentOrganizationId, name, regionId, countryId, statusId,
 					location);
 
-			return returnValue;
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -152,14 +151,14 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrganizationModel updateOrganization(
+	public static com.liferay.portal.model.OrganizationSoap updateOrganization(
 		java.lang.String organizationId, java.lang.String comments)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Organization returnValue = OrganizationServiceUtil.updateOrganization(organizationId,
 					comments);
 
-			return returnValue;
+			return com.liferay.portal.model.OrganizationSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -168,5 +167,5 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OrganizationServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(OrganizationServiceSoap.class);
 }

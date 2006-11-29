@@ -22,9 +22,9 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.io.BufferedReader;

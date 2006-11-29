@@ -24,12 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class PermissionPersistence extends BasePersistence {
 	public Permission create(String permissionId) {
-		Permission permission = new Permission();
+		Permission permission = new PermissionImpl();
 		permission.setNew(true);
 		permission.setPrimaryKey(permissionId);
 
@@ -77,7 +78,7 @@ public class PermissionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Permission permission = (Permission)session.get(Permission.class,
+			Permission permission = (Permission)session.get(PermissionImpl.class,
 					permissionId);
 
 			if (permission == null) {
@@ -182,7 +183,7 @@ public class PermissionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Permission)session.get(Permission.class, permissionId);
+			return (Permission)session.get(PermissionImpl.class, permissionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -350,7 +351,7 @@ public class PermissionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					permission);
-			Permission[] array = new Permission[3];
+			Permission[] array = new PermissionImpl[3];
 			array[0] = (Permission)objArray[0];
 			array[1] = (Permission)objArray[1];
 			array[2] = (Permission)objArray[2];
@@ -637,7 +638,7 @@ public class PermissionPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Group_", com.liferay.portal.model.Group.class);
+			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -872,7 +873,7 @@ public class PermissionPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Role_", com.liferay.portal.model.Role.class);
+			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1103,7 +1104,7 @@ public class PermissionPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("User_", com.liferay.portal.model.User.class);
+			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

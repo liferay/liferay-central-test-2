@@ -22,16 +22,15 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.CountryServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.CountryServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="CountryServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -97,8 +96,8 @@ public class CountryServiceHttp {
 
 	public static com.liferay.portal.model.Country getCountry(
 		HttpPrincipal httpPrincipal, java.lang.String countryId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = countryId;
 
@@ -114,12 +113,12 @@ public class CountryServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -134,5 +133,5 @@ public class CountryServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CountryServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(CountryServiceHttp.class);
 }

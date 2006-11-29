@@ -22,14 +22,25 @@
 
 package com.liferay.portal.model;
 
-
 /**
- * <a href="ReverseAjaxWait.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReverseAjax.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Ming-Gih Lam
  *
  */
 public class ReverseAjax {
+
+	public RequestWait getRequestWait() {
+		return _requestWait;
+	}
+
+	public void setRequestWait(RequestWait requestWait) {
+		_requestWait = requestWait;
+	}
+
+	public boolean pendingEvents() {
+		return (_pendingChatMessage || _pendingChatRoster);
+	}
 
 	public boolean isPendingChatMessage() {
 		return _pendingChatMessage;
@@ -47,20 +58,8 @@ public class ReverseAjax {
 		this._pendingChatRoster = pendingChatRoster;
 	}
 
-	public RequestWait getRequestWait() {
-		return _requestWait;
-	}
-
-	public void setRequestWait(RequestWait requestWait) {
-		_requestWait = requestWait;
-	}
-
-	public boolean pendingEvents() {
-		return (_pendingChatMessage || _pendingChatRoster);
-	}
-
+	private RequestWait _requestWait;
 	private boolean _pendingChatMessage;
 	private boolean _pendingChatRoster;
-	private RequestWait _requestWait;
 
 }

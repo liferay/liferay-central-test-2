@@ -23,9 +23,9 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ListUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import java.io.BufferedReader;
@@ -127,9 +127,12 @@ public class SourceFormatter {
 					"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
 					"**\\UserAttributes.java", "**\\WebKeys.java",
 					"**\\XHTMLComplianceFormatter.java",
-					"**\\model\\*Model.java", "**\\portal\\service\\**",
-					"**\\portal-client\\**", "**\\portlet\\**\\service\\**",
-					"**\\tools\\ext_tmpl\\**", "**\\util-wsrp\\**"
+					"**\\portal-service\\**\\model\\*Model.java",
+					"**\\portal-service\\**\\model\\*Soap.java",
+					"**\\model\\impl\\*ModelImpl.java",
+					"**\\portal\\service\\**", "**\\portal-client\\**",
+					"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
+					"**\\util-wsrp\\**"
 				});
 			ds.setBasedir(basedir);
 			ds.scan();
@@ -144,7 +147,11 @@ public class SourceFormatter {
 					"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
 					"**\\service\\permission\\*.java",
 					"**\\service\\persistence\\BasePersistence.java",
-					"**\\service\\persistence\\*Finder.java"
+					"**\\service\\persistence\\*Finder.java",
+					"**\\portal-service\\**\\liferay\\counter\\**.java",
+					"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
+					"**\\portal-service\\**\\liferay\\lock\\**.java",
+					"**\\portal-service\\**\\liferay\\mail\\**.java"
 				});
 			ds.setExcludes(
 				new String[] {
@@ -171,7 +178,6 @@ public class SourceFormatter {
 				File file = new File(basedir + files[i]);
 
 				String content = FileUtil.read(file);
-				String newContent = _formatJavaContent(files[i], content);
 
 				String className = file.getName();
 				className = className.substring(0, className.length() - 5);
@@ -186,8 +192,19 @@ public class SourceFormatter {
 				packageDir = StringUtil.replace(
 					packageDir, File.separator, StringPool.PERIOD);
 
+				if (packageDir.endsWith(".model")) {
+					if (content.indexOf(
+							"extends " + className + "Model {") != -1) {
+
+						continue;
+					}
+				}
+
+				String newContent = _formatJavaContent(files[i], content);
+
 				if (newContent.indexOf("$\n */") != -1) {
 					System.out.println("*: " + files[i]);
+
 					newContent = StringUtil.replace(
 						newContent, "$\n */", "$\n *\n */");
 				}
@@ -493,6 +510,7 @@ public class SourceFormatter {
 		br.close();
 
 		String newContent = sb.toString();
+
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
 		}

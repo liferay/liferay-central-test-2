@@ -24,12 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class UserPersistence extends BasePersistence {
 	public User create(String userId) {
-		User user = new User();
+		User user = new UserImpl();
 		user.setNew(true);
 		user.setPrimaryKey(userId);
 
@@ -77,7 +78,7 @@ public class UserPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			User user = (User)session.get(User.class, userId);
+			User user = (User)session.get(UserImpl.class, userId);
 
 			if (user == null) {
 				if (_log.isWarnEnabled()) {
@@ -178,7 +179,7 @@ public class UserPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (User)session.get(User.class, userId);
+			return (User)session.get(UserImpl.class, userId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -342,7 +343,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
-			User[] array = new User[3];
+			User[] array = new UserImpl[3];
 			array[0] = (User)objArray[0];
 			array[1] = (User)objArray[1];
 			array[2] = (User)objArray[2];
@@ -641,7 +642,7 @@ public class UserPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
-			User[] array = new User[3];
+			User[] array = new UserImpl[3];
 			array[0] = (User)objArray[0];
 			array[1] = (User)objArray[1];
 			array[2] = (User)objArray[2];
@@ -1068,7 +1069,7 @@ public class UserPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Group_", com.liferay.portal.model.Group.class);
+			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1304,7 +1305,7 @@ public class UserPersistence extends BasePersistence {
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Organization_",
-				com.liferay.portal.model.Organization.class);
+				com.liferay.portal.model.impl.OrganizationImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1537,7 +1538,8 @@ public class UserPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Permission_", com.liferay.portal.model.Permission.class);
+			q.addEntity("Permission_",
+				com.liferay.portal.model.impl.PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1773,7 +1775,7 @@ public class UserPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Role_", com.liferay.portal.model.Role.class);
+			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -2008,7 +2010,8 @@ public class UserPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("UserGroup", com.liferay.portal.model.UserGroup.class);
+			q.addEntity("UserGroup",
+				com.liferay.portal.model.impl.UserGroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PortletLocalService;
-import com.liferay.portal.service.spring.PortletLocalServiceFactory;
+import com.liferay.portal.service.PortletLocalService;
+import com.liferay.portal.service.PortletLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -38,14 +38,13 @@ import javax.ejb.SessionContext;
 public class PortletLocalServiceEJBImpl implements PortletLocalService,
 	SessionBean {
 	public com.liferay.portal.model.PortletCategory getEARDisplay(
-		java.lang.String xml)
-		throws org.dom4j.DocumentException, java.io.IOException {
+		java.lang.String xml) throws com.liferay.portal.SystemException {
 		return PortletLocalServiceFactory.getTxImpl().getEARDisplay(xml);
 	}
 
 	public com.liferay.portal.model.PortletCategory getWARDisplay(
 		java.lang.String servletContextName, java.lang.String xml)
-		throws org.dom4j.DocumentException, java.io.IOException {
+		throws com.liferay.portal.SystemException {
 		return PortletLocalServiceFactory.getTxImpl().getWARDisplay(servletContextName,
 			xml);
 	}

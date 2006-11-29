@@ -27,9 +27,10 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ReverseAjax;
 import com.liferay.portal.model.UserTracker;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.util.PortalUtil;
@@ -74,7 +75,7 @@ public class LoginPostAction extends Action {
 			String userId = PortalUtil.getUserId(req);
 
 			if (GetterUtil.getBoolean(
-				PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED))) {
+					PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED))) {
 
 				ses.setAttribute(WebKeys.REVERSE_AJAX, new ReverseAjax());
 			}
@@ -134,7 +135,7 @@ public class LoginPostAction extends Action {
 					companyId, userId);
 
 				Iterator itr = LayoutLocalServiceUtil.getLayouts(
-					Layout.PRIVATE + group.getGroupId()).iterator();
+					LayoutImpl.PRIVATE + group.getGroupId()).iterator();
 
 				while (itr.hasNext()) {
 					Layout layout = (Layout)itr.next();

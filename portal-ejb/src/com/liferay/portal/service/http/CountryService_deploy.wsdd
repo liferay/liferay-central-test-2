@@ -9,16 +9,15 @@
 		<parameter name="className" value="com.liferay.portal.service.http.CountryServiceSoap"/>
 		<parameter name="wsdlPortType" value="CountryServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getCountry" qname="operNS:getCountry" returnQName="getCountryReturn" returnType="rtns:CountryModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getCountry" qname="operNS:getCountry" returnQName="getCountryReturn" returnType="rtns:CountrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="countryId" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getCountries" qname="operNS:getCountries" returnQName="getCountriesReturn" returnType="rtns:ArrayOf_tns2_CountryModel" returnItemType="tns2:CountryModel" soapAction="">
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getCountries" qname="operNS:getCountries" returnQName="getCountriesReturn" returnType="rtns:ArrayOf_tns2_CountrySoap" returnItemType="tns2:CountrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getCountries" qname="operNS:getCountries" returnQName="getCountriesReturn" returnType="rtns:ArrayOf_tns2_CountryModel" returnItemType="tns2:CountryModel" soapAction=""> </operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getCountries" qname="operNS:getCountries" returnQName="getCountriesReturn" returnType="rtns:ArrayOf_tns2_CountrySoap" returnItemType="tns2:CountrySoap" soapAction=""> </operation>
 		<parameter name="allowedMethods" value="getCountries getCountry"/>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_CountryModel" type="java:com.liferay.portal.model.CountryModel[]" innerType="cmp-ns:CountryModel" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:BaseModel" type="java:com.liferay.portal.model.BaseModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:CountryModel" type="java:com.liferay.portal.model.CountryModel" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:CountrySoap" type="java:com.liferay.portal.model.CountrySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_CountrySoap" type="java:com.liferay.portal.model.CountrySoap[]" innerType="cmp-ns:CountrySoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>
 </deployment>

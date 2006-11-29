@@ -27,15 +27,16 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.impl.ColorSchemeImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetLocalService;
 import com.liferay.util.Validator;
 
 import java.util.Iterator;
@@ -51,9 +52,9 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 	public LayoutSet addLayoutSet(String ownerId, String companyId)
 		throws PortalException, SystemException {
 
-		String groupId = Layout.getGroupId(ownerId);
-		String userId = Layout.getGroupId(ownerId);
-		boolean privateLayout = Layout.isPrivateLayout(ownerId);
+		String groupId = LayoutImpl.getGroupId(ownerId);
+		String userId = LayoutImpl.getGroupId(ownerId);
+		boolean privateLayout = LayoutImpl.isPrivateLayout(ownerId);
 
 		LayoutSet layoutSet = LayoutSetUtil.create(ownerId);
 
@@ -61,8 +62,8 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		layoutSet.setGroupId(groupId);
 		layoutSet.setUserId(userId);
 		layoutSet.setPrivateLayout(privateLayout);
-		layoutSet.setThemeId(Theme.getDefaultThemeId());
-		layoutSet.setColorSchemeId(ColorScheme.getDefaultColorSchemeId());
+		layoutSet.setThemeId(ThemeImpl.getDefaultThemeId());
+		layoutSet.setColorSchemeId(ColorSchemeImpl.getDefaultColorSchemeId());
 
 		LayoutSetUtil.update(layoutSet);
 
@@ -79,7 +80,7 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		// Layouts
 
 		Iterator itr = LayoutUtil.findByO_P(
-			ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID).iterator();
+			ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID).iterator();
 
 		while (itr.hasNext()) {
 			Layout layout = (Layout)itr.next();

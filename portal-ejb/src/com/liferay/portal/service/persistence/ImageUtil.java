@@ -45,8 +45,8 @@ public class ImageUtil {
 
 	public static com.liferay.portal.model.Image remove(
 		java.lang.String imageId)
-		throws com.liferay.portal.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class ImageUtil {
 
 	public static com.liferay.portal.model.Image findByPrimaryKey(
 		java.lang.String imageId)
-		throws com.liferay.portal.NoSuchImageException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchImageException {
 		return getPersistence().findByPrimaryKey(imageId);
 	}
 
@@ -161,7 +161,7 @@ public class ImageUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

@@ -24,11 +24,14 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ColorScheme;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.ThemeCompanyId;
 import com.liferay.portal.model.ThemeCompanyLimit;
+import com.liferay.portal.model.impl.ColorSchemeImpl;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -37,7 +40,6 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -93,11 +95,11 @@ public class ThemeLocalUtil {
 
 		if (colorScheme == null) {
 			colorScheme = (ColorScheme)colorSchemesMap.get(
-				ColorScheme.getDefaultColorSchemeId());
+				ColorSchemeImpl.getDefaultColorSchemeId());
 		}
 
 		if (colorScheme == null) {
-			colorScheme = ColorScheme.getNullColorScheme();
+			colorScheme = ColorSchemeImpl.getNullColorScheme();
 		}
 
 		return colorScheme;
@@ -111,7 +113,7 @@ public class ThemeLocalUtil {
 		Theme theme = (Theme)_getThemes(companyId).get(themeId);
 
 		if (theme == null) {
-			theme = (Theme)_themes.get(Theme.getDefaultThemeId());
+			theme = (Theme)_themes.get(ThemeImpl.getDefaultThemeId());
 		}
 
 		return theme;
@@ -329,7 +331,7 @@ public class ThemeLocalUtil {
 				(ColorScheme)colorSchemes.get(id);
 
 			if (colorSchemeModel == null) {
-				colorSchemeModel = new ColorScheme(id);
+				colorSchemeModel = new ColorSchemeImpl(id);
 			}
 
 			colorSchemeModel.setName(GetterUtil.getString(
@@ -424,7 +426,7 @@ public class ThemeLocalUtil {
 
 			if (servletContextName != null) {
 				themeId =
-					themeId + Portlet.WAR_SEPARATOR + servletContextName;
+					themeId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
 
 			themeId = PortalUtil.getJsSafePortletName(themeId);
@@ -434,7 +436,7 @@ public class ThemeLocalUtil {
 			Theme themeModel = (Theme)_themes.get(themeId);
 
 			if (themeModel == null) {
-				themeModel = new Theme(themeId);
+				themeModel = new ThemeImpl(themeId);
 
 				_themes.put(themeId, themeModel);
 			}

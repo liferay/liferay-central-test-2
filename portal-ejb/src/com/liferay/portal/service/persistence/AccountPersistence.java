@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchAccountException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +48,7 @@ import java.util.List;
  */
 public class AccountPersistence extends BasePersistence {
 	public Account create(String accountId) {
-		Account account = new Account();
+		Account account = new AccountImpl();
 		account.setNew(true);
 		account.setPrimaryKey(accountId);
 
@@ -61,7 +62,7 @@ public class AccountPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Account account = (Account)session.get(Account.class, accountId);
+			Account account = (Account)session.get(AccountImpl.class, accountId);
 
 			if (account == null) {
 				if (_log.isWarnEnabled()) {
@@ -160,7 +161,7 @@ public class AccountPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Account)session.get(Account.class, accountId);
+			return (Account)session.get(AccountImpl.class, accountId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PortletService;
+import com.liferay.portal.service.PortletService;
 
 import javax.ejb.EJBObject;
 

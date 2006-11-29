@@ -23,13 +23,13 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -160,7 +160,7 @@ public class UserFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("User_", User.class);
+			q.addEntity("User_", UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

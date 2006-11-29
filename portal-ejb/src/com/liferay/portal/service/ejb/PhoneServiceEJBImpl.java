@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.ejb;
 
+import com.liferay.portal.service.PhoneService;
+import com.liferay.portal.service.PhoneServiceFactory;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
-import com.liferay.portal.service.spring.PhoneService;
-import com.liferay.portal.service.spring.PhoneServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

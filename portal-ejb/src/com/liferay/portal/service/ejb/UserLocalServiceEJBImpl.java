@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.UserLocalService;
-import com.liferay.portal.service.spring.UserLocalServiceFactory;
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -125,7 +125,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			encPwd);
 	}
 
-	public com.liferay.util.KeyValuePair decryptUserId(
+	public com.liferay.portal.kernel.util.KeyValuePair decryptUserId(
 		java.lang.String companyId, java.lang.String userId,
 		java.lang.String password)
 		throws com.liferay.portal.PortalException, 
@@ -168,22 +168,27 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	public java.util.List getPermissionUsers(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String primKey, java.lang.String actionId,
-		com.liferay.portlet.enterpriseadmin.search.UserSearchTerms searchTerms,
-		int begin, int end)
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getPermissionUsers(companyId,
-			groupId, name, primKey, actionId, searchTerms, begin, end);
+			groupId, name, primKey, actionId, firstName, middleName, lastName,
+			emailAddress, andOperator, begin, end);
 	}
 
 	public int getPermissionUsersCount(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String primKey, java.lang.String actionId,
-		com.liferay.portlet.enterpriseadmin.search.UserSearchTerms searchTerms)
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getPermissionUsersCount(companyId,
-			groupId, name, primKey, actionId, searchTerms);
+			groupId, name, primKey, actionId, firstName, middleName, lastName,
+			emailAddress, andOperator);
 	}
 
 	public java.util.List getRoleUsers(java.lang.String roleId)
@@ -246,7 +251,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
 		boolean active, java.util.Map params, boolean andSearch, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().search(companyId, firstName,
 			middleName, lastName, emailAddress, active, params, andSearch,

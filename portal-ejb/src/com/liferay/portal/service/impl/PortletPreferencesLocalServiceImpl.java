@@ -27,10 +27,11 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalService;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -109,7 +110,7 @@ public class PortletPreferencesLocalServiceImpl
 
 				if (portlet == null) {
 					portletPreferences.setPreferences(
-						Portlet.DEFAULT_PREFERENCES);
+						PortletImpl.DEFAULT_PREFERENCES);
 				}
 				else {
 					portletPreferences.setPreferences(
@@ -129,7 +130,7 @@ public class PortletPreferencesLocalServiceImpl
 	}
 
 	public PortletPreferences updatePreferences(
-			PortletPreferencesPK pk, PortletPreferencesImpl prefs)
+			PortletPreferencesPK pk, javax.portlet.PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		PortletPreferences portletPreferences = null;
@@ -141,7 +142,9 @@ public class PortletPreferencesLocalServiceImpl
 			portletPreferences = PortletPreferencesUtil.create(pk);
 		}
 
-		String xml = PortletPreferencesSerializer.toXML(prefs);
+		PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)prefs;
+
+		String xml = PortletPreferencesSerializer.toXML(prefsImpl);
 
 		portletPreferences.setPreferences(xml);
 

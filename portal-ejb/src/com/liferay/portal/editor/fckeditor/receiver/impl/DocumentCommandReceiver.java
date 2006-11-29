@@ -24,18 +24,19 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.spring.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
-import com.liferay.util.StringPool;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
@@ -162,9 +163,9 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 	private DLFolder _getFolder(String groupId, String folderName)
 		throws Exception {
 
-		DLFolder folder = new DLFolder();
+		DLFolder folder = new DLFolderImpl();
 
-		folder.setFolderId(DLFolder.DEFAULT_PARENT_FOLDER_ID);
+		folder.setFolderId(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 		if (!folderName.equals("/")) {
 			StringTokenizer st = new StringTokenizer(folderName, "/");

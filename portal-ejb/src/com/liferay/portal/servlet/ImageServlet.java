@@ -23,12 +23,13 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -270,7 +271,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 		else {
-			if (!image.getType().equals(Image.TYPE_NOT_AVAILABLE)) {
+			if (!image.getType().equals(ImageImpl.TYPE_NOT_AVAILABLE)) {
 				res.setContentType("image/" + image.getType());
 			}
 

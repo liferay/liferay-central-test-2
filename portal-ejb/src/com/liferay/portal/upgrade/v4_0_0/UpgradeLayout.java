@@ -23,20 +23,20 @@
 package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.PropertiesUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
@@ -171,7 +171,7 @@ public class UpgradeLayout extends UpgradeProcess {
 			}
 		}
 
-		props.put(LayoutTypePortlet.LAYOUT_TEMPLATE_ID, layoutTemplateId);
+		props.put(LayoutTypePortletImpl.LAYOUT_TEMPLATE_ID, layoutTemplateId);
 
 		// Replace "narrow-x" with appropriate "column-x"
 
@@ -271,17 +271,17 @@ public class UpgradeLayout extends UpgradeProcess {
 							_getLookAndFeelByGroupId(groupId);
 
 						LayoutSetLocalServiceUtil.addLayoutSet(
-							Layout.PRIVATE + groupId, companyId);
+							LayoutImpl.PRIVATE + groupId, companyId);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
-							Layout.PRIVATE + groupId, lookAndFeel[0],
+							LayoutImpl.PRIVATE + groupId, lookAndFeel[0],
 							lookAndFeel[1]);
 
 						LayoutSetLocalServiceUtil.addLayoutSet(
-							Layout.PUBLIC + groupId, companyId);
+							LayoutImpl.PUBLIC + groupId, companyId);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
-							Layout.PUBLIC + groupId, lookAndFeel[0],
+							LayoutImpl.PUBLIC + groupId, lookAndFeel[0],
 							lookAndFeel[1]);
 					}
 
@@ -290,13 +290,13 @@ public class UpgradeLayout extends UpgradeProcess {
 					Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 					if (group.getName().equals("Guest")) {
-						newOwnerId = Layout.PUBLIC + groupId;
+						newOwnerId = LayoutImpl.PUBLIC + groupId;
 					}
 					else if (group.getName().equals("General User")) {
 						continue;
 					}
 					else {
-						newOwnerId = Layout.PRIVATE + groupId;
+						newOwnerId = LayoutImpl.PRIVATE + groupId;
 					}
 				}
 				else {
@@ -318,15 +318,15 @@ public class UpgradeLayout extends UpgradeProcess {
 						String[] lookAndFeel = _getLookAndFeelByUserId(userId);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
-							Layout.PRIVATE + groupId, lookAndFeel[0],
+							LayoutImpl.PRIVATE + groupId, lookAndFeel[0],
 							lookAndFeel[1]);
 
 						LayoutSetLocalServiceUtil.updateLookAndFeel(
-							Layout.PUBLIC + groupId, lookAndFeel[0],
+							LayoutImpl.PUBLIC + groupId, lookAndFeel[0],
 							lookAndFeel[1]);
 					}
 
-					newOwnerId = Layout.PRIVATE + group.getGroupId();
+					newOwnerId = LayoutImpl.PRIVATE + group.getGroupId();
 				}
 
 				String newParentLayoutId = _getNewLayoutId(oldParentLayoutId);

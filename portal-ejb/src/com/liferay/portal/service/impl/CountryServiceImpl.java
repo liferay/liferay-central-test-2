@@ -25,8 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.service.CountryService;
 import com.liferay.portal.service.persistence.CountryUtil;
-import com.liferay.portal.service.spring.CountryService;
 
 import java.util.List;
 

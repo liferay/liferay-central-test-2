@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.CompanyLocalService;
-import com.liferay.portal.service.spring.CompanyLocalServiceFactory;
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -61,15 +61,16 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 		return CompanyLocalServiceFactory.getTxImpl().getCompany(companyId);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().search(companyId, keywords);
 	}
 
-	public com.liferay.util.lucene.Hits search(java.lang.String companyId,
-		java.lang.String portletId, java.lang.String groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public com.liferay.portal.kernel.search.Hits search(
+		java.lang.String companyId, java.lang.String portletId,
+		java.lang.String groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return CompanyLocalServiceFactory.getTxImpl().search(companyId,
 			portletId, groupId, type, keywords);
 	}

@@ -26,9 +26,9 @@ import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserIdMapper;
+import com.liferay.portal.service.UserIdMapperLocalService;
 import com.liferay.portal.service.persistence.UserIdMapperPK;
 import com.liferay.portal.service.persistence.UserIdMapperUtil;
-import com.liferay.portal.service.spring.UserIdMapperLocalService;
 
 import java.util.List;
 

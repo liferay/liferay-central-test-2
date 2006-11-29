@@ -23,7 +23,8 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 
 /**
@@ -57,7 +58,7 @@ public class PortletPreferencesListener implements ModelListener {
 	protected void clearCache(BaseModel model) {
 		PortletPreferencesModel prefs = (PortletPreferencesModel)model;
 
-		if (!Layout.isPrivateLayout(prefs.getOwnerId())) {
+		if (!LayoutImpl.isPrivateLayout(prefs.getOwnerId())) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(
 					prefs.getLayoutId(), prefs.getOwnerId());

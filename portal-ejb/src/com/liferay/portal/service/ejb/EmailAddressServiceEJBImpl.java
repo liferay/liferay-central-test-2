@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.ejb;
 
+import com.liferay.portal.service.EmailAddressService;
+import com.liferay.portal.service.EmailAddressServiceFactory;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
-import com.liferay.portal.service.spring.EmailAddressService;
-import com.liferay.portal.service.spring.EmailAddressServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

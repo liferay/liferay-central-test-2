@@ -25,9 +25,10 @@ package com.liferay.portal.action;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -168,7 +169,7 @@ public class LayoutAction extends Action {
 
 	private void _forwardLayout(HttpServletRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		String plid = Layout.DEFAULT_PLID;
+		String plid = LayoutImpl.DEFAULT_PLID;
 		String layoutFriendlyURL = null;
 
 		ThemeDisplay themeDisplay =

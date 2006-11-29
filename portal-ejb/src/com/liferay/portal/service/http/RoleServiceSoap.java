@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.RoleServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.RoleServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,12 +36,12 @@ import java.rmi.RemoteException;
  *
  */
 public class RoleServiceSoap {
-	public static com.liferay.portal.model.RoleModel addRole(
+	public static com.liferay.portal.model.RoleSoap addRole(
 		java.lang.String name) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name);
 
-			return returnValue;
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -63,14 +62,14 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel getGroupRole(
+	public static com.liferay.portal.model.RoleSoap getGroupRole(
 		java.lang.String companyId, java.lang.String groupId)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getGroupRole(companyId,
 					groupId);
 
-			return returnValue;
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -79,12 +78,12 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel getRole(
+	public static com.liferay.portal.model.RoleSoap getRole(
 		java.lang.String roleId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(roleId);
 
-			return returnValue;
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -93,14 +92,14 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel getRole(
+	public static com.liferay.portal.model.RoleSoap getRole(
 		java.lang.String companyId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getRole(companyId,
 					name);
 
-			return returnValue;
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -109,14 +108,14 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel[] getUserRelatedRoles(
+	public static com.liferay.portal.model.RoleSoap[] getUserRelatedRoles(
 		java.lang.String userId, java.util.List groups)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
 					groups);
 
-			return (com.liferay.portal.model.Role[])returnValue.toArray(new com.liferay.portal.model.Role[0]);
+			return com.liferay.portal.model.RoleSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -125,12 +124,12 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel[] getUserRoles(
+	public static com.liferay.portal.model.RoleSoap[] getUserRoles(
 		java.lang.String userId) throws RemoteException {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserRoles(userId);
 
-			return (com.liferay.portal.model.Role[])returnValue.toArray(new com.liferay.portal.model.Role[0]);
+			return com.liferay.portal.model.RoleSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -139,14 +138,14 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleModel updateRole(
+	public static com.liferay.portal.model.RoleSoap updateRole(
 		java.lang.String roleId, java.lang.String name)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.updateRole(roleId,
 					name);
 
-			return returnValue;
+			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -155,5 +154,5 @@ public class RoleServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(RoleServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(RoleServiceSoap.class);
 }

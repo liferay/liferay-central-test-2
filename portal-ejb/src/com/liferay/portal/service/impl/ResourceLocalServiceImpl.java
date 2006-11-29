@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.ResourceActionsException;
@@ -30,15 +30,17 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalService;
 
 import java.util.Iterator;
 import java.util.List;
@@ -66,24 +68,24 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		// Company
 
 		addResource(
-			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY,
-			companyId);
+			companyId, name, ResourceImpl.TYPE_CLASS,
+			ResourceImpl.SCOPE_COMPANY, companyId);
 
 		// Guest
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, Group.GUEST);
+			companyId, GroupImpl.GUEST);
 
 		addResource(
-			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
 			guestGroup.getGroupId());
 
 		// Group
 
 		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
 			addResource(
-				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
-				groupId);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_GROUP, groupId);
 		}
 
 		if (primKey != null) {
@@ -91,8 +93,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
-				primKey);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			// Permissions
 
@@ -184,18 +186,18 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		// Company
 
 		addResource(
-			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY,
-			companyId);
+			companyId, name, ResourceImpl.TYPE_CLASS,
+			ResourceImpl.SCOPE_COMPANY, companyId);
 
 		start = logAddResources(name, primKey, start, 2);
 
 		// Guest
 
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
-			companyId, Group.GUEST);
+			companyId, GroupImpl.GUEST);
 
 		addResource(
-			companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
+			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
 			guestGroup.getGroupId());
 
 		start = logAddResources(name, primKey, start, 3);
@@ -204,8 +206,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
 			addResource(
-				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_GROUP,
-				groupId);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_GROUP, groupId);
 		}
 
 		start = logAddResources(name, primKey, start, 4);
@@ -215,8 +217,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL,
-				primKey);
+				companyId, name, ResourceImpl.TYPE_CLASS,
+				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
 			start = logAddResources(name, primKey, start, 5);
 

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.User;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 
 /**
  * <a href="ContactLastNameComparator.java.html"><b><i>View Source</i></b></a>

@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPortletException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class PortletPersistence extends BasePersistence {
 	public Portlet create(PortletPK portletPK) {
-		Portlet portlet = new Portlet();
+		Portlet portlet = new PortletImpl();
 		portlet.setNew(true);
 		portlet.setPrimaryKey(portletPK);
 
@@ -63,7 +64,7 @@ public class PortletPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Portlet portlet = (Portlet)session.get(Portlet.class, portletPK);
+			Portlet portlet = (Portlet)session.get(PortletImpl.class, portletPK);
 
 			if (portlet == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +163,7 @@ public class PortletPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Portlet)session.get(Portlet.class, portletPK);
+			return (Portlet)session.get(PortletImpl.class, portletPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -327,7 +328,7 @@ public class PortletPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, portlet);
-			Portlet[] array = new Portlet[3];
+			Portlet[] array = new PortletImpl[3];
 			array[0] = (Portlet)objArray[0];
 			array[1] = (Portlet)objArray[1];
 			array[2] = (Portlet)objArray[2];

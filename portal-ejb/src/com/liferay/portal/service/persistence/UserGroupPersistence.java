@@ -24,12 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class UserGroupPersistence extends BasePersistence {
 	public UserGroup create(String userGroupId) {
-		UserGroup userGroup = new UserGroup();
+		UserGroup userGroup = new UserGroupImpl();
 		userGroup.setNew(true);
 		userGroup.setPrimaryKey(userGroupId);
 
@@ -77,7 +78,7 @@ public class UserGroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			UserGroup userGroup = (UserGroup)session.get(UserGroup.class,
+			UserGroup userGroup = (UserGroup)session.get(UserGroupImpl.class,
 					userGroupId);
 
 			if (userGroup == null) {
@@ -178,7 +179,7 @@ public class UserGroupPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (UserGroup)session.get(UserGroup.class, userGroupId);
+			return (UserGroup)session.get(UserGroupImpl.class, userGroupId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -354,7 +355,7 @@ public class UserGroupPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroup);
-			UserGroup[] array = new UserGroup[3];
+			UserGroup[] array = new UserGroupImpl[3];
 			array[0] = (UserGroup)objArray[0];
 			array[1] = (UserGroup)objArray[1];
 			array[2] = (UserGroup)objArray[2];
@@ -583,7 +584,7 @@ public class UserGroupPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroup);
-			UserGroup[] array = new UserGroup[3];
+			UserGroup[] array = new UserGroupImpl[3];
 			array[0] = (UserGroup)objArray[0];
 			array[1] = (UserGroup)objArray[1];
 			array[2] = (UserGroup)objArray[2];
@@ -944,7 +945,7 @@ public class UserGroupPersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("User_", com.liferay.portal.model.User.class);
+			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

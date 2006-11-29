@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.spring.PortalService;
+import com.liferay.portal.service.PortalService;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

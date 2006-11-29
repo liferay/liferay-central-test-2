@@ -45,8 +45,8 @@ public class SubscriptionUtil {
 
 	public static com.liferay.portal.model.Subscription remove(
 		java.lang.String subscriptionId)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class SubscriptionUtil {
 
 	public static com.liferay.portal.model.Subscription findByPrimaryKey(
 		java.lang.String subscriptionId)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByPrimaryKey(subscriptionId);
 	}
 
@@ -163,32 +163,32 @@ public class SubscriptionUtil {
 	}
 
 	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription findByUserId_First(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription findByUserId_Last(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.Subscription[] findByUserId_PrevAndNext(
 		java.lang.String subscriptionId, java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByUserId_PrevAndNext(subscriptionId,
 			userId, obc);
 	}
@@ -208,7 +208,7 @@ public class SubscriptionUtil {
 
 	public static java.util.List findByC_C_C(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C(companyId, className, classPK,
 			begin, end, obc);
@@ -217,9 +217,9 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription findByC_C_C_First(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByC_C_C_First(companyId, className,
 			classPK, obc);
 	}
@@ -227,9 +227,9 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription findByC_C_C_Last(
 		java.lang.String companyId, java.lang.String className,
 		java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByC_C_C_Last(companyId, className, classPK,
 			obc);
 	}
@@ -237,9 +237,9 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription[] findByC_C_C_PrevAndNext(
 		java.lang.String subscriptionId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByC_C_C_PrevAndNext(subscriptionId,
 			companyId, className, classPK, obc);
 	}
@@ -247,8 +247,8 @@ public class SubscriptionUtil {
 	public static com.liferay.portal.model.Subscription findByC_U_C_C(
 		java.lang.String companyId, java.lang.String userId,
 		java.lang.String className, java.lang.String classPK)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		return getPersistence().findByC_U_C_C(companyId, userId, className,
 			classPK);
 	}
@@ -272,7 +272,7 @@ public class SubscriptionUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -291,8 +291,8 @@ public class SubscriptionUtil {
 	public static void removeByC_U_C_C(java.lang.String companyId,
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)
-		throws com.liferay.portal.NoSuchSubscriptionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchSubscriptionException {
 		getPersistence().removeByC_U_C_C(companyId, userId, className, classPK);
 	}
 

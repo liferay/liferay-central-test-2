@@ -22,7 +22,7 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.KeyValuePair;
+import com.liferay.portal.kernel.util.KeyValuePair;
 
 import java.io.InputStream;
 

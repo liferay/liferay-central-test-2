@@ -23,7 +23,7 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.model.Region;
-import com.liferay.portal.service.spring.RegionServiceUtil;
+import com.liferay.portal.service.RegionServiceUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.util.ParamUtil;
 

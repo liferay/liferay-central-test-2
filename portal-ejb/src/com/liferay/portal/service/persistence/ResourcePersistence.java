@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class ResourcePersistence extends BasePersistence {
 	public Resource create(String resourceId) {
-		Resource resource = new Resource();
+		Resource resource = new ResourceImpl();
 		resource.setNew(true);
 		resource.setPrimaryKey(resourceId);
 
@@ -63,7 +64,8 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Resource resource = (Resource)session.get(Resource.class, resourceId);
+			Resource resource = (Resource)session.get(ResourceImpl.class,
+					resourceId);
 
 			if (resource == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +164,7 @@ public class ResourcePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Resource)session.get(Resource.class, resourceId);
+			return (Resource)session.get(ResourceImpl.class, resourceId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -327,7 +329,7 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new Resource[3];
+			Resource[] array = new ResourceImpl[3];
 			array[0] = (Resource)objArray[0];
 			array[1] = (Resource)objArray[1];
 			array[2] = (Resource)objArray[2];
@@ -496,7 +498,7 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new Resource[3];
+			Resource[] array = new ResourceImpl[3];
 			array[0] = (Resource)objArray[0];
 			array[1] = (Resource)objArray[1];
 			array[2] = (Resource)objArray[2];
@@ -806,7 +808,7 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new Resource[3];
+			Resource[] array = new ResourceImpl[3];
 			array[0] = (Resource)objArray[0];
 			array[1] = (Resource)objArray[1];
 			array[2] = (Resource)objArray[2];
@@ -1116,7 +1118,7 @@ public class ResourcePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
-			Resource[] array = new Resource[3];
+			Resource[] array = new ResourceImpl[3];
 			array[0] = (Resource)objArray[0];
 			array[1] = (Resource)objArray[1];
 			array[2] = (Resource)objArray[2];

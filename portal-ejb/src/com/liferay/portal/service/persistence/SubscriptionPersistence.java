@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchSubscriptionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class SubscriptionPersistence extends BasePersistence {
 	public Subscription create(String subscriptionId) {
-		Subscription subscription = new Subscription();
+		Subscription subscription = new SubscriptionImpl();
 		subscription.setNew(true);
 		subscription.setPrimaryKey(subscriptionId);
 
@@ -63,7 +64,7 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Subscription subscription = (Subscription)session.get(Subscription.class,
+			Subscription subscription = (Subscription)session.get(SubscriptionImpl.class,
 					subscriptionId);
 
 			if (subscription == null) {
@@ -167,7 +168,8 @@ public class SubscriptionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Subscription)session.get(Subscription.class, subscriptionId);
+			return (Subscription)session.get(SubscriptionImpl.class,
+				subscriptionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -333,7 +335,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
-			Subscription[] array = new Subscription[3];
+			Subscription[] array = new SubscriptionImpl[3];
 			array[0] = (Subscription)objArray[0];
 			array[1] = (Subscription)objArray[1];
 			array[2] = (Subscription)objArray[2];
@@ -599,7 +601,7 @@ public class SubscriptionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
-			Subscription[] array = new Subscription[3];
+			Subscription[] array = new SubscriptionImpl[3];
 			array[0] = (Subscription)objArray[0];
 			array[1] = (Subscription)objArray[1];
 			array[2] = (Subscription)objArray[2];

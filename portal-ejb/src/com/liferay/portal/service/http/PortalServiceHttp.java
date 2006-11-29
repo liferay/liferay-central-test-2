@@ -22,14 +22,13 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.PortalServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PortalServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="PortalServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -62,5 +61,5 @@ public class PortalServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortalServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(PortalServiceHttp.class);
 }

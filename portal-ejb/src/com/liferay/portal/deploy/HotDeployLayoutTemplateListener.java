@@ -25,10 +25,10 @@ package com.liferay.portal.deploy;
 import com.liferay.portal.kernel.deploy.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.HotDeployException;
 import com.liferay.portal.kernel.deploy.HotDeployListener;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
-import com.liferay.util.ObjectValuePair;
 
 import java.util.Iterator;
 import java.util.List;

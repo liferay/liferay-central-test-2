@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.ResourceLocalService;
+import com.liferay.portal.service.ResourceLocalService;
 
 import javax.ejb.EJBLocalObject;
 

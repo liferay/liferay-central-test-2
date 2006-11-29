@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
@@ -511,7 +512,7 @@ public class PermissionFinder {
 
 			q.setCacheable(true);
 
-			q.addEntity("Permission_", Permission.class);
+			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -542,7 +543,7 @@ public class PermissionFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Permission_", Permission.class);
+			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -573,7 +574,7 @@ public class PermissionFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Permission_", Permission.class);
+			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -605,7 +606,7 @@ public class PermissionFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Permission_", Permission.class);
+			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -641,7 +642,7 @@ public class PermissionFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("Permission_", Permission.class);
+			q.addEntity("Permission_", PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

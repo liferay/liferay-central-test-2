@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +48,7 @@ import java.util.List;
  */
 public class ImagePersistence extends BasePersistence {
 	public Image create(String imageId) {
-		Image image = new Image();
+		Image image = new ImageImpl();
 		image.setNew(true);
 		image.setPrimaryKey(imageId);
 
@@ -61,7 +62,7 @@ public class ImagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Image image = (Image)session.get(Image.class, imageId);
+			Image image = (Image)session.get(ImageImpl.class, imageId);
 
 			if (image == null) {
 				if (_log.isWarnEnabled()) {
@@ -158,7 +159,7 @@ public class ImagePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Image)session.get(Image.class, imageId);
+			return (Image)session.get(ImageImpl.class, imageId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

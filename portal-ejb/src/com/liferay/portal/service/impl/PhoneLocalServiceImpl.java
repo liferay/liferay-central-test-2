@@ -22,17 +22,17 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.PhoneLocalService;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
-import com.liferay.portal.service.spring.PhoneLocalService;
 import com.liferay.util.Validator;
 import com.liferay.util.format.PhoneNumberUtil;
 
@@ -152,7 +152,8 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(typeId, className + ListType.PHONE);
+			ListTypeServiceUtil.validate(
+				typeId, className + ListTypeImpl.PHONE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

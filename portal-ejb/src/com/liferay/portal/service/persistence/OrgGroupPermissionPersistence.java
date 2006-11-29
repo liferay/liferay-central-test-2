@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgGroupPermissionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgGroupPermission;
+import com.liferay.portal.model.impl.OrgGroupPermissionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class OrgGroupPermissionPersistence extends BasePersistence {
 	public OrgGroupPermission create(OrgGroupPermissionPK orgGroupPermissionPK) {
-		OrgGroupPermission orgGroupPermission = new OrgGroupPermission();
+		OrgGroupPermission orgGroupPermission = new OrgGroupPermissionImpl();
 		orgGroupPermission.setNew(true);
 		orgGroupPermission.setPrimaryKey(orgGroupPermissionPK);
 
@@ -63,7 +64,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermission.class,
+			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)session.get(OrgGroupPermissionImpl.class,
 					orgGroupPermissionPK);
 
 			if (orgGroupPermission == null) {
@@ -169,7 +170,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (OrgGroupPermission)session.get(OrgGroupPermission.class,
+			return (OrgGroupPermission)session.get(OrgGroupPermissionImpl.class,
 				orgGroupPermissionPK);
 		}
 		catch (HibernateException he) {
@@ -343,7 +344,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgGroupPermission);
-			OrgGroupPermission[] array = new OrgGroupPermission[3];
+			OrgGroupPermission[] array = new OrgGroupPermissionImpl[3];
 			array[0] = (OrgGroupPermission)objArray[0];
 			array[1] = (OrgGroupPermission)objArray[1];
 			array[2] = (OrgGroupPermission)objArray[2];

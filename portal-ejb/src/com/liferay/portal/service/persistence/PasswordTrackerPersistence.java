@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPasswordTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PasswordTracker;
+import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class PasswordTrackerPersistence extends BasePersistence {
 	public PasswordTracker create(String passwordTrackerId) {
-		PasswordTracker passwordTracker = new PasswordTracker();
+		PasswordTracker passwordTracker = new PasswordTrackerImpl();
 		passwordTracker.setNew(true);
 		passwordTracker.setPrimaryKey(passwordTrackerId);
 
@@ -63,7 +64,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTracker.class,
+			PasswordTracker passwordTracker = (PasswordTracker)session.get(PasswordTrackerImpl.class,
 					passwordTrackerId);
 
 			if (passwordTracker == null) {
@@ -167,7 +168,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (PasswordTracker)session.get(PasswordTracker.class,
+			return (PasswordTracker)session.get(PasswordTrackerImpl.class,
 				passwordTrackerId);
 		}
 		catch (HibernateException he) {
@@ -349,7 +350,7 @@ public class PasswordTrackerPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					passwordTracker);
-			PasswordTracker[] array = new PasswordTracker[3];
+			PasswordTracker[] array = new PasswordTrackerImpl[3];
 			array[0] = (PasswordTracker)objArray[0];
 			array[1] = (PasswordTracker)objArray[1];
 			array[2] = (PasswordTracker)objArray[2];

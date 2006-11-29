@@ -123,8 +123,6 @@ public class PropsUtil {
 
 	// Company
 
-	public static final String COMPANY_TYPES = "company.types";
-
 	public static final String COMPANY_SECURITY_AUTH_TYPE = "company.security.auth.type";
 
 	public static final String COMPANY_SECURITY_AUTO_LOGIN = "company.security.auto.login";
@@ -547,6 +545,12 @@ public class PropsUtil {
 
 	public static final String JCR_JACKRABBIT_CREDENTIALS_PASSWORD = "jcr.jackrabbit.credentials.password";
 
+	// Reverse AJAX
+
+	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
+	
+	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
+
 	// SMTP
 
 	public static final String SMTP_SERVER_ENABLED = "smtp.server.enabled";
@@ -760,12 +764,6 @@ public class PropsUtil {
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY = "message.boards.email.message.updated.body";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE = "message.boards.email.message.updated.signature";
-
-	// Reverse AJAX
-
-	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
-	
-	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
 
 	// Shopping Portlet
 

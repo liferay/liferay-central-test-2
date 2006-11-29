@@ -22,14 +22,14 @@
 
 package com.liferay.portal.upgrade;
 
-import com.liferay.counter.service.spring.CounterServiceUtil;
+import com.liferay.counter.service.CounterServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.ImageLocalServiceUtil;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.Iterator;

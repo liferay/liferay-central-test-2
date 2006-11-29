@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
+import com.liferay.portal.service.EmailAddressService;
 import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
-import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.spring.EmailAddressService;
 
 import java.util.List;
 

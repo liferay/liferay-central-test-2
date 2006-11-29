@@ -22,17 +22,18 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -68,12 +69,13 @@ public class TCKAction extends Action {
 				String[] nameAndWar = StringUtil.split(portletNames[i], "/");
 
 				portletNames[i] = PortalUtil.getJsSafePortletName(
-					nameAndWar[1] + Portlet.WAR_SEPARATOR + nameAndWar[0]);
+					nameAndWar[1] + PortletImpl.WAR_SEPARATOR + nameAndWar[0]);
 			}
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
-				"1", "liferay.com.1", false, Layout.DEFAULT_PARENT_LAYOUT_ID,
-				"TCKAction", Layout.TYPE_PORTLET, false, StringPool.BLANK);
+				"1", "liferay.com.1", false,
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, "TCKAction",
+				LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();

@@ -22,11 +22,11 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.JNDIUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;

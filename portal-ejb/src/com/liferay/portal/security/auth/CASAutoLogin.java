@@ -23,7 +23,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import edu.yale.its.tp.cas.client.filter.CASFilter;
 

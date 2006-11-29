@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.spring.AccountLocalServiceUtil;
+import com.liferay.portal.service.AccountLocalServiceUtil;
 
 /**
  * <a href="AccountPermission.java.html"><b><i>View Source</i></b></a>

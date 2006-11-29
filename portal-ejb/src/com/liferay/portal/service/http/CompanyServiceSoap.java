@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.CompanyServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.CompanyServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class CompanyServiceSoap {
-	public static com.liferay.portal.model.CompanyModel updateCompany(
+	public static com.liferay.portal.model.CompanySoap updateCompany(
 		java.lang.String companyId, java.lang.String portalURL,
 		java.lang.String homeURL, java.lang.String mx, java.lang.String name,
 		java.lang.String legalName, java.lang.String legalId,
@@ -49,7 +48,7 @@ public class CompanyServiceSoap {
 					portalURL, homeURL, mx, name, legalName, legalId,
 					legalType, sicCode, tickerSymbol, industry, type, size);
 
-			return returnValue;
+			return com.liferay.portal.model.CompanySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -86,5 +85,5 @@ public class CompanyServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CompanyServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(CompanyServiceSoap.class);
 }

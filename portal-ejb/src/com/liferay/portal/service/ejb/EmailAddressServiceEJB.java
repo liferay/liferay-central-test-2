@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.EmailAddressService;
+import com.liferay.portal.service.EmailAddressService;
 
 import javax.ejb.EJBObject;
 

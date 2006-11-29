@@ -22,16 +22,17 @@
 
 package com.liferay.portal.upgrade.v4_0_0;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.util.StringPool;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -152,7 +153,7 @@ public class UpgradeUser extends UpgradeProcess {
 						address.isMailing(), address.isPrimary());
 				}
 
-				if (!User.isDefaultUser(userId)) {
+				if (!UserImpl.isDefaultUser(userId)) {
 					GroupLocalServiceUtil.addGroup(
 						user.getUserId(), User.class.getName(),
 						user.getPrimaryKey().toString(), null, null, null,

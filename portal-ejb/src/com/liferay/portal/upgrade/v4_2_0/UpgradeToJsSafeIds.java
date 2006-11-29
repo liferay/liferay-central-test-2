@@ -23,8 +23,8 @@
 package com.liferay.portal.upgrade.v4_2_0;
 
 import com.liferay.portal.PortalException;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
@@ -123,7 +123,7 @@ public class UpgradeToJsSafeIds extends UpgradeProcess {
 				String ownerId = rs.getString("ownerId");
 				String oldTypeSettings = rs.getString("typeSettings");
 
-				if (!layoutType.equals(Layout.TYPE_PORTLET)) {
+				if (!layoutType.equals(LayoutImpl.TYPE_PORTLET)) {
 					continue;
 				}
 

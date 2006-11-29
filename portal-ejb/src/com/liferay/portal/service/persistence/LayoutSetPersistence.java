@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class LayoutSetPersistence extends BasePersistence {
 	public LayoutSet create(String ownerId) {
-		LayoutSet layoutSet = new LayoutSet();
+		LayoutSet layoutSet = new LayoutSetImpl();
 		layoutSet.setNew(true);
 		layoutSet.setPrimaryKey(ownerId);
 
@@ -63,7 +64,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSet.class,
+			LayoutSet layoutSet = (LayoutSet)session.get(LayoutSetImpl.class,
 					ownerId);
 
 			if (layoutSet == null) {
@@ -163,7 +164,7 @@ public class LayoutSetPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (LayoutSet)session.get(LayoutSet.class, ownerId);
+			return (LayoutSet)session.get(LayoutSetImpl.class, ownerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

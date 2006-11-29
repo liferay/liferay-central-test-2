@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PermissionService;
+import com.liferay.portal.service.PermissionService;
 
 import javax.ejb.EJBObject;
 

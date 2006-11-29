@@ -26,8 +26,10 @@ import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -88,10 +90,10 @@ public class RandomLayoutAction extends Action {
 			}
 
 			Group generalGuestGroup = GroupLocalServiceUtil.getGroup(
-				themeDisplay.getCompanyId(), Group.GUEST);
+				themeDisplay.getCompanyId(), GroupImpl.GUEST);
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.PUBLIC + generalGuestGroup.getGroupId());
+				LayoutImpl.PUBLIC + generalGuestGroup.getGroupId());
 
 			if (layouts.size() > 0) {
 				Layout randomLayout = (Layout)layouts.get(

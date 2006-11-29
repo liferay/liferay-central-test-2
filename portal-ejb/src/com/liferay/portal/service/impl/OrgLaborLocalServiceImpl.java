@@ -22,14 +22,14 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.OrgLabor;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.OrgLaborLocalService;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
-import com.liferay.portal.service.spring.OrgLaborLocalService;
 
 import java.rmi.RemoteException;
 
@@ -128,7 +128,8 @@ public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 		throws PortalException, SystemException {
 
 		try {
-			ListTypeServiceUtil.validate(typeId, ListType.ORGANIZATION_SERVICE);
+			ListTypeServiceUtil.validate(
+				typeId, ListTypeImpl.ORGANIZATION_SERVICE);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

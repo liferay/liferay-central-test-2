@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPhoneException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class PhonePersistence extends BasePersistence {
 	public Phone create(String phoneId) {
-		Phone phone = new Phone();
+		Phone phone = new PhoneImpl();
 		phone.setNew(true);
 		phone.setPrimaryKey(phoneId);
 
@@ -63,7 +64,7 @@ public class PhonePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Phone phone = (Phone)session.get(Phone.class, phoneId);
+			Phone phone = (Phone)session.get(PhoneImpl.class, phoneId);
 
 			if (phone == null) {
 				if (_log.isWarnEnabled()) {
@@ -160,7 +161,7 @@ public class PhonePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Phone)session.get(Phone.class, phoneId);
+			return (Phone)session.get(PhoneImpl.class, phoneId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -335,7 +336,7 @@ public class PhonePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
-			Phone[] array = new Phone[3];
+			Phone[] array = new PhoneImpl[3];
 			array[0] = (Phone)objArray[0];
 			array[1] = (Phone)objArray[1];
 			array[2] = (Phone)objArray[2];
@@ -514,7 +515,7 @@ public class PhonePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
-			Phone[] array = new Phone[3];
+			Phone[] array = new PhoneImpl[3];
 			array[0] = (Phone)objArray[0];
 			array[1] = (Phone)objArray[1];
 			array[2] = (Phone)objArray[2];
@@ -740,7 +741,7 @@ public class PhonePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
-			Phone[] array = new Phone[3];
+			Phone[] array = new PhoneImpl[3];
 			array[0] = (Phone)objArray[0];
 			array[1] = (Phone)objArray[1];
 			array[2] = (Phone)objArray[2];
@@ -1014,7 +1015,7 @@ public class PhonePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
-			Phone[] array = new Phone[3];
+			Phone[] array = new PhoneImpl[3];
 			array[0] = (Phone)objArray[0];
 			array[1] = (Phone)objArray[1];
 			array[2] = (Phone)objArray[2];
@@ -1310,7 +1311,7 @@ public class PhonePersistence extends BasePersistence {
 			q.setBoolean(queryPos++, primary);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, phone);
-			Phone[] array = new Phone[3];
+			Phone[] array = new PhoneImpl[3];
 			array[0] = (Phone)objArray[0];
 			array[1] = (Phone)objArray[1];
 			array[2] = (Phone)objArray[2];

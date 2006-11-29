@@ -28,7 +28,7 @@ import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.io.IOException;
 

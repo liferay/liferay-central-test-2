@@ -45,8 +45,8 @@ public class ListTypeUtil {
 
 	public static com.liferay.portal.model.ListType remove(
 		java.lang.String listTypeId)
-		throws com.liferay.portal.NoSuchListTypeException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchListTypeException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class ListTypeUtil {
 
 	public static com.liferay.portal.model.ListType findByPrimaryKey(
 		java.lang.String listTypeId)
-		throws com.liferay.portal.NoSuchListTypeException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchListTypeException {
 		return getPersistence().findByPrimaryKey(listTypeId);
 	}
 
@@ -161,32 +161,32 @@ public class ListTypeUtil {
 	}
 
 	public static java.util.List findByType(java.lang.String type, int begin,
-		int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByType(type, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.ListType findByType_First(
 		java.lang.String type,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchListTypeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchListTypeException {
 		return getPersistence().findByType_First(type, obc);
 	}
 
 	public static com.liferay.portal.model.ListType findByType_Last(
 		java.lang.String type,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchListTypeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchListTypeException {
 		return getPersistence().findByType_Last(type, obc);
 	}
 
 	public static com.liferay.portal.model.ListType[] findByType_PrevAndNext(
 		java.lang.String listTypeId, java.lang.String type,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchListTypeException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchListTypeException {
 		return getPersistence().findByType_PrevAndNext(listTypeId, type, obc);
 	}
 
@@ -201,7 +201,7 @@ public class ListTypeUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

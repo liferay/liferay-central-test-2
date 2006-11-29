@@ -28,17 +28,18 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.RolePermission;
 import com.liferay.portal.service.permission.UserGroupPermission;
 import com.liferay.portal.service.permission.UserPermission;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
-import com.liferay.portal.service.spring.UserService;
 
 import java.util.List;
 import java.util.Locale;
@@ -352,7 +353,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 
 				Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-				if (group.getType().equals(Group.TYPE_COMMUNITY_OPEN)) {
+				if (group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN)) {
 					hasPermission = true;
 				}
 			}

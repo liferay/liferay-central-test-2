@@ -22,8 +22,8 @@
 
 package com.liferay.portal.upgrade.v3_5_0;
 
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.LayoutTypePortletImpl;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -140,7 +140,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				String stateMin = rs.getString("stateMin");
 				String modeEdit = rs.getString("modeEdit");
 				String modeHelp = rs.getString("modeHelp");
-				String type = Layout.TYPE_PORTLET;
+				String type = LayoutImpl.TYPE_PORTLET;
 				int priority = 0;
 
 				_log.debug(
@@ -160,7 +160,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				}
 
 				parentLayoutId = GetterUtil.getString(
-					parentLayoutId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+					parentLayoutId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 				Properties props = new Properties();
 
@@ -172,16 +172,16 @@ public class UpgradeLayout extends UpgradeProcess {
 				props.setProperty("narrow-2", GetterUtil.getString(narrow2));
 				props.setProperty("wide-1", GetterUtil.getString(wide));
 				props.setProperty(
-					LayoutTypePortlet.STATE_MAX,
+					LayoutTypePortletImpl.STATE_MAX,
 					GetterUtil.getString(stateMax));
 				props.setProperty(
-					LayoutTypePortlet.STATE_MIN,
+					LayoutTypePortletImpl.STATE_MIN,
 					GetterUtil.getString(stateMin));
 				props.setProperty(
-					LayoutTypePortlet.MODE_EDIT,
+					LayoutTypePortletImpl.MODE_EDIT,
 					GetterUtil.getString(modeEdit));
 				props.setProperty(
-					LayoutTypePortlet.MODE_HELP,
+					LayoutTypePortletImpl.MODE_HELP,
 					GetterUtil.getString(modeHelp));
 
 				String typeSettings = PropertiesUtil.toString(props);

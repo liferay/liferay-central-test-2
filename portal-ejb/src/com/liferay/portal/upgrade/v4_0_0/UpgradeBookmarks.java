@@ -23,12 +23,12 @@
 package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.model.Group;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.spring.BookmarksFolderLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -99,7 +99,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_FOLDER);
 
-			ps.setString(1, Group.DEFAULT_PARENT_GROUP_ID);
+			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 

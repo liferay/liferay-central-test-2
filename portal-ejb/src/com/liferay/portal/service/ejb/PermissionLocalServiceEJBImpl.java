@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PermissionLocalService;
-import com.liferay.portal.service.spring.PermissionLocalServiceFactory;
+import com.liferay.portal.service.PermissionLocalService;
+import com.liferay.portal.service.PermissionLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -134,7 +134,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	public boolean hasUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String actionId,
 		java.lang.String[] resourceIds,
-		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
+		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PermissionLocalServiceFactory.getTxImpl().hasUserPermissions(userId,

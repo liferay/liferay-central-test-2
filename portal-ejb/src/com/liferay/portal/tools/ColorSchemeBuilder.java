@@ -22,8 +22,8 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.model.ColorScheme;
-import com.liferay.portal.model.Theme;
+import com.liferay.portal.model.impl.ColorSchemeImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.ColorUtil;
 import com.liferay.util.FileUtil;
@@ -388,7 +388,7 @@ public class ColorSchemeBuilder {
 
 			String id = theme.attributeValue("id");
 
-			if (id.equals(Theme.getDefaultThemeId())) {
+			if (id.equals(ThemeImpl.getDefaultThemeId())) {
 				classicThemeEl = theme;
 			}
 		}
@@ -422,8 +422,8 @@ public class ColorSchemeBuilder {
 					outDirectory + id + "/button_gradient.gif");
 				createButton(
 					os,
-					p.getProperty(ColorScheme.PORTLET_MENU_BG),
-					p.getProperty(ColorScheme.PORTLET_TITLE_BG));
+					p.getProperty(ColorSchemeImpl.PORTLET_MENU_BG),
+					p.getProperty(ColorSchemeImpl.PORTLET_TITLE_BG));
 				os.close();
 
 				// Dotted X and Y
@@ -454,16 +454,16 @@ public class ColorSchemeBuilder {
 					outDirectory + id + "/portlet_title_bg_gradient.gif");
 				createGradient(
 					os,
-					p.getProperty(ColorScheme.PORTLET_MENU_BG),
-					p.getProperty(ColorScheme.PORTLET_TITLE_BG));
+					p.getProperty(ColorSchemeImpl.PORTLET_MENU_BG),
+					p.getProperty(ColorSchemeImpl.PORTLET_TITLE_BG));
 				os.close();
 
 				os = new FileOutputStream(
 					outDirectory + id + "/portlet_menu_bg_gradient.gif");
 				createGradient(
 					os,
-					p.getProperty(ColorScheme.LAYOUT_BG),
-					p.getProperty(ColorScheme.PORTLET_MENU_BG));
+					p.getProperty(ColorSchemeImpl.LAYOUT_BG),
+					p.getProperty(ColorSchemeImpl.PORTLET_MENU_BG));
 				os.close();
 			}
 		}

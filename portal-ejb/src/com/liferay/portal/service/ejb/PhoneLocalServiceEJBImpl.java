@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.PhoneLocalService;
-import com.liferay.portal.service.spring.PhoneLocalServiceFactory;
+import com.liferay.portal.service.PhoneLocalService;
+import com.liferay.portal.service.PhoneLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

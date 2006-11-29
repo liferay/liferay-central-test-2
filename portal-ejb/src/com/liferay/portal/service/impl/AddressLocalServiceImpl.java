@@ -22,19 +22,19 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AddressCityException;
 import com.liferay.portal.AddressStreetException;
 import com.liferay.portal.AddressZipException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
-import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ListTypeImpl;
+import com.liferay.portal.service.AddressLocalService;
+import com.liferay.portal.service.ListTypeServiceUtil;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.AddressLocalService;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
 import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
@@ -184,7 +184,8 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		}
 
 		try {
-			ListTypeServiceUtil.validate(typeId, className + ListType.ADDRESS);
+			ListTypeServiceUtil.validate(
+				typeId, className + ListTypeImpl.ADDRESS);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);

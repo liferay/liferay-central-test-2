@@ -22,11 +22,11 @@
 
 package com.liferay.portal.servlet.filters.layoutcache;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.util.CachePolicy;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 

@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchCountryException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class CountryPersistence extends BasePersistence {
 	public Country create(String countryId) {
-		Country country = new Country();
+		Country country = new CountryImpl();
 		country.setNew(true);
 		country.setPrimaryKey(countryId);
 
@@ -63,7 +64,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Country country = (Country)session.get(Country.class, countryId);
+			Country country = (Country)session.get(CountryImpl.class, countryId);
 
 			if (country == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +163,7 @@ public class CountryPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Country)session.get(Country.class, countryId);
+			return (Country)session.get(CountryImpl.class, countryId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -306,7 +307,7 @@ public class CountryPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, country);
-			Country[] array = new Country[3];
+			Country[] array = new CountryImpl[3];
 			array[0] = (Country)objArray[0];
 			array[1] = (Country)objArray[1];
 			array[2] = (Country)objArray[2];

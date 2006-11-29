@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserIdMapper;
+import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class UserIdMapperPersistence extends BasePersistence {
 	public UserIdMapper create(UserIdMapperPK userIdMapperPK) {
-		UserIdMapper userIdMapper = new UserIdMapper();
+		UserIdMapper userIdMapper = new UserIdMapperImpl();
 		userIdMapper.setNew(true);
 		userIdMapper.setPrimaryKey(userIdMapperPK);
 
@@ -63,7 +64,7 @@ public class UserIdMapperPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapper.class,
+			UserIdMapper userIdMapper = (UserIdMapper)session.get(UserIdMapperImpl.class,
 					userIdMapperPK);
 
 			if (userIdMapper == null) {
@@ -167,7 +168,8 @@ public class UserIdMapperPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (UserIdMapper)session.get(UserIdMapper.class, userIdMapperPK);
+			return (UserIdMapper)session.get(UserIdMapperImpl.class,
+				userIdMapperPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -333,7 +335,7 @@ public class UserIdMapperPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userIdMapper);
-			UserIdMapper[] array = new UserIdMapper[3];
+			UserIdMapper[] array = new UserIdMapperImpl[3];
 			array[0] = (UserIdMapper)objArray[0];
 			array[1] = (UserIdMapper)objArray[1];
 			array[2] = (UserIdMapper)objArray[2];

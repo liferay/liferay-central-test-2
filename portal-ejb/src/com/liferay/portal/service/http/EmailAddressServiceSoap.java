@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.EmailAddressServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.EmailAddressServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class EmailAddressServiceSoap {
-	public static com.liferay.portal.model.EmailAddressModel addEmailAddress(
+	public static com.liferay.portal.model.EmailAddressSoap addEmailAddress(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String address, java.lang.String typeId, boolean primary)
 		throws RemoteException {
@@ -45,7 +44,7 @@ public class EmailAddressServiceSoap {
 			com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.addEmailAddress(className,
 					classPK, address, typeId, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.EmailAddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,12 +65,12 @@ public class EmailAddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.EmailAddressModel getEmailAddress(
+	public static com.liferay.portal.model.EmailAddressSoap getEmailAddress(
 		java.lang.String emailAddressId) throws RemoteException {
 		try {
 			com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.getEmailAddress(emailAddressId);
 
-			return returnValue;
+			return com.liferay.portal.model.EmailAddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -80,14 +79,14 @@ public class EmailAddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.EmailAddressModel[] getEmailAddresses(
+	public static com.liferay.portal.model.EmailAddressSoap[] getEmailAddresses(
 		java.lang.String className, java.lang.String classPK)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = EmailAddressServiceUtil.getEmailAddresses(className,
 					classPK);
 
-			return (com.liferay.portal.model.EmailAddress[])returnValue.toArray(new com.liferay.portal.model.EmailAddress[0]);
+			return com.liferay.portal.model.EmailAddressSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -96,14 +95,14 @@ public class EmailAddressServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.EmailAddressModel updateEmailAddress(
+	public static com.liferay.portal.model.EmailAddressSoap updateEmailAddress(
 		java.lang.String emailAddressId, java.lang.String address,
 		java.lang.String typeId, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.updateEmailAddress(emailAddressId,
 					address, typeId, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.EmailAddressSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -112,5 +111,5 @@ public class EmailAddressServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(EmailAddressServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(EmailAddressServiceSoap.class);
 }

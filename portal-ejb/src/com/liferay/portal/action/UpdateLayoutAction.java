@@ -25,11 +25,12 @@ package com.liferay.portal.action;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
-import com.liferay.portal.service.spring.LayoutServiceUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -119,11 +120,11 @@ public class UpdateLayoutAction extends Action {
 			// only after the user has proven that he has the valid permissions.
 
 			if (deletePortletResource) {
-				String rootPortletId = Portlet.getRootPortletId(portletId);
+				String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 				ResourceLocalServiceUtil.deleteResource(
-					layout.getCompanyId(), rootPortletId, Resource.TYPE_CLASS,
-					Resource.SCOPE_INDIVIDUAL,
+					layout.getCompanyId(), rootPortletId,
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 					PortletPermission.getPrimaryKey(
 						layout.getPlid(), portletId));
 			}

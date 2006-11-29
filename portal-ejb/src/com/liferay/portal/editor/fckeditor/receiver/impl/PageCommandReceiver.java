@@ -26,9 +26,10 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.GroupServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -149,8 +150,9 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			Group group = GroupServiceUtil.getGroup(arg.getCompanyId(), arg
 					.getCurrentGroupName());
 
-			List layouts = LayoutLocalServiceUtil.getLayouts(Layout.PUBLIC
-					+ group.getGroupId(), Layout.DEFAULT_PARENT_LAYOUT_ID);
+			List layouts = LayoutLocalServiceUtil.getLayouts(
+				LayoutImpl.PUBLIC + group.getGroupId(),
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (("/" + arg.getCurrentGroupName() + "/").equals(arg
 					.getCurrentFolder())) {
@@ -235,8 +237,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				arg.getCompanyId(), arg.getCurrentGroupName());
 
 			List layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.PUBLIC + group.getGroupId(),
-				Layout.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutImpl.PUBLIC + group.getGroupId(),
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (("/" + arg.getCurrentGroupName() + "/").equals(
 					arg.getCurrentFolder())) {

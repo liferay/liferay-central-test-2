@@ -575,7 +575,7 @@ public class EJBXMLBuilder {
 				serviceName = serviceName.substring(
 					0, serviceName.length() - 7);
 				serviceName = StringUtil.replace(
-					serviceName, ".service.ejb.", ".service.spring.");
+					serviceName, ".service.ejb.", ".service.");
 
 				sb.append("\t<bean name=\"/").append(serviceMapping).append("-burlap\" class=\"org.springframework.remoting.caucho.BurlapServiceExporter\">\n");
 				sb.append("\t\t<property name=\"service\" ref=\"").append(serviceName).append(".professional\" />\n");

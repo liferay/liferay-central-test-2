@@ -31,9 +31,9 @@ import com.liferay.portlet.journal.action.ExportAction;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.service.spring.JournalArticleLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalStructureLocalServiceUtil;
-import com.liferay.portlet.journal.service.spring.JournalTemplateLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.util.GetterUtil;
 
 import java.util.List;

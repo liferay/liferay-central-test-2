@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRegionException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Region;
+import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class RegionPersistence extends BasePersistence {
 	public Region create(String regionId) {
-		Region region = new Region();
+		Region region = new RegionImpl();
 		region.setNew(true);
 		region.setPrimaryKey(regionId);
 
@@ -63,7 +64,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Region region = (Region)session.get(Region.class, regionId);
+			Region region = (Region)session.get(RegionImpl.class, regionId);
 
 			if (region == null) {
 				if (_log.isWarnEnabled()) {
@@ -160,7 +161,7 @@ public class RegionPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Region)session.get(Region.class, regionId);
+			return (Region)session.get(RegionImpl.class, regionId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -335,7 +336,7 @@ public class RegionPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
-			Region[] array = new Region[3];
+			Region[] array = new RegionImpl[3];
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];
@@ -484,7 +485,7 @@ public class RegionPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
-			Region[] array = new Region[3];
+			Region[] array = new RegionImpl[3];
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];
@@ -683,7 +684,7 @@ public class RegionPersistence extends BasePersistence {
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
-			Region[] array = new Region[3];
+			Region[] array = new RegionImpl[3];
 			array[0] = (Region)objArray[0];
 			array[1] = (Region)objArray[1];
 			array[2] = (Region)objArray[2];

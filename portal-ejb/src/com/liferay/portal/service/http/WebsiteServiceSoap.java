@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.WebsiteServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.WebsiteServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class WebsiteServiceSoap {
-	public static com.liferay.portal.model.WebsiteModel addWebsite(
+	public static com.liferay.portal.model.WebsiteSoap addWebsite(
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws RemoteException {
@@ -45,7 +44,7 @@ public class WebsiteServiceSoap {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.addWebsite(className,
 					classPK, url, typeId, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.WebsiteSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -66,12 +65,12 @@ public class WebsiteServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.WebsiteModel getWebsite(
+	public static com.liferay.portal.model.WebsiteSoap getWebsite(
 		java.lang.String websiteId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.getWebsite(websiteId);
 
-			return returnValue;
+			return com.liferay.portal.model.WebsiteSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -80,14 +79,14 @@ public class WebsiteServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.WebsiteModel[] getWebsites(
+	public static com.liferay.portal.model.WebsiteSoap[] getWebsites(
 		java.lang.String className, java.lang.String classPK)
 		throws RemoteException {
 		try {
 			java.util.List returnValue = WebsiteServiceUtil.getWebsites(className,
 					classPK);
 
-			return (com.liferay.portal.model.Website[])returnValue.toArray(new com.liferay.portal.model.Website[0]);
+			return com.liferay.portal.model.WebsiteSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -96,14 +95,14 @@ public class WebsiteServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.WebsiteModel updateWebsite(
+	public static com.liferay.portal.model.WebsiteSoap updateWebsite(
 		java.lang.String websiteId, java.lang.String url,
 		java.lang.String typeId, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.updateWebsite(websiteId,
 					url, typeId, primary);
 
-			return returnValue;
+			return com.liferay.portal.model.WebsiteSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -112,5 +111,5 @@ public class WebsiteServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(WebsiteServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(WebsiteServiceSoap.class);
 }

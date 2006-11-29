@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -135,7 +136,7 @@ public class UserGroupFinder {
 
 			q.setCacheable(true);
 
-			q.addEntity("UserGroup", UserGroup.class);
+			q.addEntity("UserGroup", UserGroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
@@ -182,7 +183,7 @@ public class UserGroupFinder {
 
 			q.setCacheable(false);
 
-			q.addEntity("UserGroup", UserGroup.class);
+			q.addEntity("UserGroup", UserGroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

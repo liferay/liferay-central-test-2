@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.LayoutServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.LayoutServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class LayoutServiceSoap {
-	public static com.liferay.portal.model.LayoutModel addLayout(
+	public static com.liferay.portal.model.LayoutSoap addLayout(
 		java.lang.String groupId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
 		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
@@ -47,7 +46,7 @@ public class LayoutServiceSoap {
 					privateLayout, parentLayoutId, name, type, hidden,
 					friendlyURL);
 
-			return returnValue;
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -114,7 +113,7 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutModel updateLayout(
+	public static com.liferay.portal.model.LayoutSoap updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
 		java.lang.String languageId, java.lang.String type, boolean hidden,
@@ -124,7 +123,7 @@ public class LayoutServiceSoap {
 					ownerId, parentLayoutId, name, languageId, type, hidden,
 					friendlyURL);
 
-			return returnValue;
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -133,14 +132,14 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutModel updateLayout(
+	public static com.liferay.portal.model.LayoutSoap updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String typeSettings) throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
 					ownerId, typeSettings);
 
-			return returnValue;
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -149,7 +148,7 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.LayoutModel updateLookAndFeel(
+	public static com.liferay.portal.model.LayoutSoap updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)
 		throws RemoteException {
@@ -157,7 +156,7 @@ public class LayoutServiceSoap {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(layoutId,
 					ownerId, themeId, colorSchemeId);
 
-			return returnValue;
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -166,5 +165,5 @@ public class LayoutServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(LayoutServiceSoap.class);
 }

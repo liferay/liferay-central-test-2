@@ -30,7 +30,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
 
 /**
  * <a href="LocationPermission.java.html"><b><i>View Source</i></b></a>

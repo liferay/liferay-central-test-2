@@ -45,8 +45,8 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission remove(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -142,8 +142,8 @@ public class OrgGroupPermissionUtil {
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPrimaryKey(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPrimaryKey(orgGroupPermissionPK);
 	}
 
@@ -167,33 +167,33 @@ public class OrgGroupPermissionUtil {
 
 	public static java.util.List findByPermissionId(
 		java.lang.String permissionId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByPermissionId(permissionId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_First(
 		java.lang.String permissionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPermissionId_First(permissionId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission findByPermissionId_Last(
 		java.lang.String permissionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPermissionId_Last(permissionId, obc);
 	}
 
 	public static com.liferay.portal.model.OrgGroupPermission[] findByPermissionId_PrevAndNext(
 		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
 		java.lang.String permissionId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchOrgGroupPermissionException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
 		return getPersistence().findByPermissionId_PrevAndNext(orgGroupPermissionPK,
 			permissionId, obc);
 	}
@@ -209,7 +209,7 @@ public class OrgGroupPermissionUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

@@ -22,15 +22,14 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.PermissionServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PermissionServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="PermissionServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -42,8 +41,8 @@ public class PermissionServiceHttp {
 	public static void checkPermission(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String name,
 		java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = groupId;
 
@@ -71,12 +70,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -92,8 +91,8 @@ public class PermissionServiceHttp {
 	public static boolean hasGroupPermission(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String actionId,
 		java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = groupId;
 
@@ -122,12 +121,12 @@ public class PermissionServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -145,9 +144,9 @@ public class PermissionServiceHttp {
 	public static boolean hasUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String actionId, java.lang.String[] resourceIds,
-		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userId;
 
@@ -177,7 +176,7 @@ public class PermissionServiceHttp {
 
 			if (permissionCheckerBag == null) {
 				paramObj4 = new NullWrapper(
-						"com.liferay.portal.security.permission.PermissionCheckerBag");
+						"com.liferay.portal.kernel.security.permission.PermissionCheckerBag");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
@@ -191,12 +190,12 @@ public class PermissionServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -214,8 +213,8 @@ public class PermissionServiceHttp {
 	public static void setGroupPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = groupId;
 
@@ -243,12 +242,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -265,8 +264,8 @@ public class PermissionServiceHttp {
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String groupId, java.lang.String[] actionIds,
 		java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = className;
 
@@ -308,12 +307,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -329,8 +328,8 @@ public class PermissionServiceHttp {
 	public static void setOrgGroupPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String organizationId, java.lang.String groupId,
 		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = organizationId;
 
@@ -364,12 +363,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -386,8 +385,8 @@ public class PermissionServiceHttp {
 		java.lang.String roleId, java.lang.String groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = roleId;
 
@@ -442,12 +441,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -463,8 +462,8 @@ public class PermissionServiceHttp {
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userId;
 
@@ -498,12 +497,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -520,8 +519,8 @@ public class PermissionServiceHttp {
 		java.lang.String roleId, java.lang.String groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = roleId;
 
@@ -576,12 +575,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -598,8 +597,8 @@ public class PermissionServiceHttp {
 		java.lang.String roleId, java.lang.String groupId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = roleId;
 
@@ -648,12 +647,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -669,8 +668,8 @@ public class PermissionServiceHttp {
 	public static void unsetUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
 		java.lang.String[] actionIds, java.lang.String resourceId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = userId;
 
@@ -704,12 +703,12 @@ public class PermissionServiceHttp {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -722,5 +721,5 @@ public class PermissionServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PermissionServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(PermissionServiceHttp.class);
 }

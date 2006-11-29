@@ -22,8 +22,8 @@
 
 package com.liferay.portal.editor.fckeditor.command;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.util.StringPool;
 
 import java.util.StringTokenizer;
 

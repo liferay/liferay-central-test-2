@@ -22,7 +22,7 @@
 
 package com.liferay.portal.wsrp;
 
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.wsrp.util.WSRPUtil;
 import com.liferay.util.CollectionFactory;
 

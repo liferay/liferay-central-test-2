@@ -45,8 +45,8 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath remove(
 		java.lang.String userTrackerPathId)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserTrackerPathException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath findByPrimaryKey(
 		java.lang.String userTrackerPathId)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByPrimaryKey(userTrackerPathId);
 	}
 
@@ -166,7 +166,7 @@ public class UserTrackerPathUtil {
 
 	public static java.util.List findByUserTrackerId(
 		java.lang.String userTrackerId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserTrackerId(userTrackerId, begin, end,
 			obc);
@@ -174,25 +174,25 @@ public class UserTrackerPathUtil {
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_First(
 		java.lang.String userTrackerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByUserTrackerId_First(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath findByUserTrackerId_Last(
 		java.lang.String userTrackerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByUserTrackerId_Last(userTrackerId, obc);
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath[] findByUserTrackerId_PrevAndNext(
 		java.lang.String userTrackerPathId, java.lang.String userTrackerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserTrackerPathException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserTrackerPathException {
 		return getPersistence().findByUserTrackerId_PrevAndNext(userTrackerPathId,
 			userTrackerId, obc);
 	}
@@ -208,7 +208,7 @@ public class UserTrackerPathUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

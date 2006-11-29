@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.ejb;
 
-import com.liferay.portal.service.spring.RoleLocalService;
-import com.liferay.portal.service.spring.RoleLocalServiceFactory;
+import com.liferay.portal.service.RoleLocalService;
+import com.liferay.portal.service.RoleLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

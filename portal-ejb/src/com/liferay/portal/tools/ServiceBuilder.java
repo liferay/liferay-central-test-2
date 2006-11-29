@@ -23,16 +23,21 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.SimpleCachePool;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
+
+import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.Type;
 
 import de.hunsicker.io.FileFormat;
 import de.hunsicker.jalopy.Jalopy;
@@ -60,14 +65,6 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
-import xjavadoc.Type;
-import xjavadoc.XClass;
-import xjavadoc.XJavaDoc;
-import xjavadoc.XMethod;
-import xjavadoc.XParameter;
-
-import xjavadoc.filesystem.FileSourceSet;
-
 /**
  * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
  *
@@ -80,7 +77,12 @@ public class ServiceBuilder {
 	public static void main(String[] args) {
 		if (args.length == 6) {
 			new ServiceBuilder(
-				args[0], args[1], args[2], args[3], args[4], args[5]);
+				args[0], args[1], args[2], args[3], args[4], args[5],
+				StringPool.BLANK);
+		}
+		else if (args.length == 7) {
+			new ServiceBuilder(
+				args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
 		}
 		else {
 			throw new IllegalArgumentException();
@@ -161,6 +163,8 @@ public class ServiceBuilder {
 
 		String[] checkImports = new String[] {
 			"com.liferay.portal.PortalException",
+			"com.liferay.portal.kernel.log.Log",
+			"com.liferay.portal.kernel.log.LogFactoryUtil",
 			"com.liferay.portal.kernel.util.BooleanWrapper",
 			"com.liferay.portal.kernel.util.DoubleWrapper",
 			"com.liferay.portal.kernel.util.FloatWrapper",
@@ -168,19 +172,18 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.LongWrapper",
 			"com.liferay.portal.kernel.util.MethodWrapper",
 			"com.liferay.portal.kernel.util.NullWrapper",
+			"com.liferay.portal.kernel.util.OrderByComparator",
 			"com.liferay.portal.kernel.util.ShortWrapper",
 			"com.liferay.portal.kernel.util.StackTraceUtil",
+			"com.liferay.portal.kernel.util.StringPool",
 			"com.liferay.portal.security.auth.HttpPrincipal",
+			"com.liferay.portal.service.http.TunnelUtil",
 			"com.liferay.portal.service.impl.PrincipalSessionBean",
-			"com.liferay.portal.servlet.TunnelUtil",
 			"com.liferay.portal.spring.hibernate.HibernateUtil",
 			"com.liferay.portal.util.PropsUtil",
 			"com.liferay.util.DateUtil",
 			"com.liferay.util.GetterUtil",
 			"com.liferay.util.InstancePool",
-			"com.liferay.util.StringPool",
-			"com.liferay.util.ObjectValuePair",
-			"com.liferay.util.dao.hibernate.OrderByComparator",
 			"com.liferay.util.dao.hibernate.QueryPos",
 			"com.liferay.util.dao.hibernate.QueryUtil",
 			"java.rmi.RemoteException",
@@ -320,17 +323,18 @@ public class ServiceBuilder {
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springEntFileName,
 						  String springProFileName,
-						  String sprintUtilClassName) {
+						  String beanLocatorUtilClassName, String serviceDir) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springEntFileName,
-			springProFileName, sprintUtilClassName, true);
+			springProFileName, beanLocatorUtilClassName, serviceDir, true);
 	}
 
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springEntFileName,
 						  String springProFileName,
-						  String beanLocatorUtilClassName, boolean build) {
+						  String beanLocatorUtilClassName, String serviceDir,
+						  boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -341,6 +345,7 @@ public class ServiceBuilder {
 			_springEntFileName = springEntFileName;
 			_springProFileName = springProFileName;
 			_beanLocatorUtilClassName = beanLocatorUtilClassName;
+			_serviceDir = serviceDir;
 
 			SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -363,6 +368,16 @@ public class ServiceBuilder {
 			_outputPath =
 				"src/" + StringUtil.replace(packagePath, ".", "/") + "/" +
 					_portletPackageName;
+
+			if (Validator.isNull(_serviceDir)) {
+				_serviceOutputPath = _outputPath;
+			}
+			else {
+				_serviceOutputPath =
+					_serviceDir + "/" +
+						StringUtil.replace(packagePath, ".", "/") + "/" +
+							_portletPackageName;
+			}
 
 			_packagePath = packagePath + "." + _portletPackageName;
 
@@ -629,8 +644,13 @@ public class ServiceBuilder {
 							_createPersistence(entity);
 							_createPersistenceUtil(entity);
 
+							_createModelImpl(entity);
+							_createExtendedModelImpl(entity);
+
 							_createModel(entity);
 							_createExtendedModel(entity);
+
+							_createModelSoap(entity);
 
 							_createPool(entity);
 
@@ -717,7 +737,7 @@ public class ServiceBuilder {
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName,
 				_springEntFileName, _springProFileName,
-				_beanLocatorUtilClassName, false);
+				_beanLocatorUtilClassName, _serviceDir, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -756,8 +776,8 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sb.append("import com.liferay.portal.kernel.util.StringPool;");
 		sb.append("import com.liferay.util.DateUtil;");
-		sb.append("import com.liferay.util.StringPool;");
 		sb.append("import java.io.Serializable;");
 		sb.append("import java.util.Date;");
 
@@ -961,9 +981,19 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
+		File ejbFile = new File(_serviceOutputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
 
 		writeFile(ejbFile, sb.toString());
+
+		if (Validator.isNotNull(_serviceDir)) {
+			ejbFile = new File(_outputPath + "/service/persistence/" + entity.getPKClassName() + ".java");
+
+			if (ejbFile.exists()) {
+				System.out.println("Relocating " + ejbFile);
+
+				ejbFile.delete();
+			}
+		}
 	}
 
 	private void _createEJBXML() throws IOException {
@@ -1215,28 +1245,130 @@ public class ServiceBuilder {
 			sb.append("\n");
 			sb.append("}");
 
-			File exceptionFile = new File(_outputPath + "/" + exception + "Exception.java");
+			File exceptionFile = new File(_serviceOutputPath + "/" + exception + "Exception.java");
 
 			if (!exceptionFile.exists()) {
 				FileUtil.write(exceptionFile, sb.toString());
+			}
+
+			if (Validator.isNotNull(_serviceDir)) {
+				exceptionFile = new File(_outputPath + "/" + exception + "Exception.java");
+
+				if (exceptionFile.exists()) {
+					System.out.println("Relocating " + exceptionFile);
+
+					exceptionFile.delete();
+				}
 			}
 		}
 	}
 
 	private void _createExtendedModel(Entity entity) throws IOException {
+		JavaClass javaClass = _getJavaClass(_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
+
+		JavaMethod[] methods = javaClass.getMethods();
+
 		StringBuffer sb = new StringBuffer();
 
 		// Package
 
 		sb.append("package " + _packagePath + ".model;");
 
+		// Interface declaration
+
+		sb.append("public interface " + entity.getName() + " extends " + entity.getName() + "Model {");
+
+		// Methods
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			String methodName = javaMethod.getName();
+
+			if (!javaMethod.isConstructor() && !javaMethod.isStatic() && javaMethod.isPublic()) {
+				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
+
+				JavaParameter[] parameters = javaMethod.getParameters();
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(")");
+
+				Type[] thrownExceptions = javaMethod.getExceptions();
+
+				Set newExceptions = new LinkedHashSet();
+
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
+
+					newExceptions.add(thrownException.getValue());
+				}
+
+				if (newExceptions.size() > 0) {
+					sb.append(" throws ");
+
+					Iterator itr = newExceptions.iterator();
+
+					while (itr.hasNext()) {
+						sb.append(itr.next());
+
+						if (itr.hasNext()) {
+							sb.append(", ");
+						}
+					}
+				}
+
+				sb.append(";");
+			}
+		}
+
+		// Interface close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + ".java");
+
+		writeFile(modelFile, sb.toString());
+
+		if (Validator.isNotNull(_serviceDir)) {
+			modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
+
+			if (modelFile.exists()) {
+				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
+	}
+
+	private void _createExtendedModelImpl(Entity entity) throws IOException {
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".model.impl;");
+
+		// Imports
+
+		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + " extends " + entity.getName() + "Model {");
+		sb.append("public class " + entity.getName() + "Impl extends " + entity.getName() + "ModelImpl implements " + entity.getName() + " {");
 
 		// Empty constructor
 
-		sb.append("public " + entity.getName() + "() {");
+		sb.append("public " + entity.getName() + "Impl() {");
 		sb.append("}");
 
 		// Class close brace
@@ -1245,7 +1377,7 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File modelFile = new File(_outputPath + "/model/" + entity.getName() + ".java");
+		File modelFile = new File(_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
 
 		if (!modelFile.exists()) {
 			writeFile(modelFile, sb.toString());
@@ -1282,7 +1414,7 @@ public class ServiceBuilder {
 			List columnList = entity.getColumnList();
 
 			if (entity.hasColumns()) {
-				sb.append("\t<class name=\"" + _packagePath + ".model." + entity.getName() + "\" table=\"" + entity.getTable() + "\">\n");
+				sb.append("\t<class name=\"" + _packagePath + ".model.impl." + entity.getName() + "Impl\" table=\"" + entity.getTable() + "\">\n");
 				sb.append("\t\t<cache usage=\"read-write\" />\n");
 
 				if (entity.hasCompoundPK()) {
@@ -1381,9 +1513,9 @@ public class ServiceBuilder {
 		String newContent = _fixHBMXML(oldContent);
 
 		int firstClass = newContent.indexOf(
-			"<class name=\"" + _packagePath + ".model.");
+			"<class name=\"" + _packagePath + ".model.impl.");
 		int lastClass = newContent.lastIndexOf(
-			"<class name=\"" + _packagePath + ".model.");
+			"<class name=\"" + _packagePath + ".model.impl.");
 
 		if (firstClass == -1) {
 			int x = newContent.indexOf("</hibernate-mapping>");
@@ -1409,7 +1541,6 @@ public class ServiceBuilder {
 	}
 
 	private void _createModel(Entity entity) throws IOException {
-		List pkList = entity.getPKList();
 		List regularColList = entity.getRegularColList();
 
 		StringBuffer sb = new StringBuffer();
@@ -1425,78 +1556,17 @@ public class ServiceBuilder {
 		}
 
 		sb.append("import com.liferay.portal.model.BaseModel;");
-		sb.append("import com.liferay.portal.util.PropsUtil;");
-		sb.append("import com.liferay.util.DateUtil;");
-		sb.append("import com.liferay.util.GetterUtil;");
-		sb.append("import com.liferay.util.XSSUtil;");
 		sb.append("import java.util.Date;");
 
-		// Class declaration
+		// Interface declaration
 
-		sb.append("public class " + entity.getName() + "Model extends BaseModel {");
-
-		// Fields
-
-		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
-
-		for (int i = 0; i < regularColList.size(); i++) {
-			EntityColumn col = (EntityColumn)regularColList.get(i);
-
-			if (col.getType().equals("String")) {
-				sb.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
-			}
-		}
-
-		sb.append("public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(\"lock.expiration.time." + _packagePath + ".model." + entity.getName() + "Model\"));");
-
-		// Empty constructor
-
-		sb.append("public " + entity.getName() + "Model() {");
-		sb.append("}");
+		sb.append("public interface " + entity.getName() + "Model extends BaseModel {");
 
 		// Primary key accessor
 
-		sb.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
+		sb.append("public " + entity.getPKClassName() + " getPrimaryKey();");
 
-		if (entity.hasCompoundPK()) {
-			sb.append("return new " + entity.getPKClassName() + "(");
-
-			for (int i = 0; i < pkList.size(); i++) {
-				EntityColumn col = (EntityColumn)pkList.get(i);
-
-				sb.append("_" + col.getName());
-
-				if ((i + 1) != (pkList.size())) {
-					sb.append(", ");
-				}
-			}
-
-			sb.append(");");
-		}
-		else {
-			EntityColumn col = (EntityColumn)pkList.get(0);
-
-			sb.append("return _" + col.getName() + ";");
-		}
-
-		sb.append("}");
-
-		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
-
-		if (entity.hasCompoundPK()) {
-			for (int i = 0; i < pkList.size(); i++) {
-				EntityColumn col = (EntityColumn)pkList.get(i);
-
-				sb.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
-			}
-		}
-		else {
-			EntityColumn col = (EntityColumn)pkList.get(0);
-
-			sb.append("set" + col.getMethodName() + "(pk);");
-		}
-
-		sb.append("}");
+		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk);");
 
 		// Getter and setter methods
 
@@ -1505,215 +1575,34 @@ public class ServiceBuilder {
 
 			String colType = col.getType();
 
-			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
-
-			if (colType.equals("String") && col.isConvertNull()) {
-				sb.append("return GetterUtil.getString(_" + col.getName() + ");");
-			}
-			else {
-				sb.append("return _" + col.getName() + ";");
-			}
-
-			sb.append("}");
+			sb.append("public " + colType + " get" + col.getMethodName() + "();");
 
 			if (colType.equals("boolean")) {
-				sb.append("public " + colType + " is" + col.getMethodName() + "() {");
-				sb.append("return _" + col.getName() + ";");
-				sb.append("}");
+				sb.append("public " + colType + " is" + col.getMethodName() + "();");
 			}
 
-			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
-			sb.append("if (");
-
-			if (!col.isPrimitiveType()) {
-				sb.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
-				sb.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
-				sb.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
-			}
-			else {
-				sb.append(col.getName() + " != _" + col.getName());
-			}
-
-			sb.append(") {");
-
-			if (colType.equals("String")) {
-				sb.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
-				sb.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
-				sb.append("}");
-			}
-
-			sb.append("_" + col.getName() + " = " + col.getName() + ";");
-			sb.append("}");
-			sb.append("}");
+			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ");");
 		}
 
-		// Clone method
-
-		sb.append("public Object clone() {");
-		sb.append(entity.getName() + " clone = new " + entity.getName() + "();");
-
-		for (int i = 0; i < regularColList.size(); i++) {
-			EntityColumn col = (EntityColumn)regularColList.get(i);
-
-			sb.append("clone.set" + col.getMethodName() + "(");
-
-			if (col.getEJBName() == null) {
-				sb.append("get" + col.getMethodName() + "()");
-			}
-			else {
-				sb.append("(" + col.getEJBName() + ")get" + col.getMethodName() + "().clone()");
-			}
-
-			sb.append(");");
-		}
-
-		sb.append("return clone;");
-		sb.append("}");
-
-		// Compare to method
-
-		sb.append("public int compareTo(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return -1;");
-		sb.append("}");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")obj;");
-
-		if (entity.isOrdered()) {
-			EntityOrder order = entity.getOrder();
-
-			List orderList = order.getColumns();
-
-			sb.append("int value = 0;");
-
-			for (int i = 0; i < orderList.size(); i++) {
-				EntityColumn col = (EntityColumn)orderList.get(i);
-
-				String colType = col.getType(); 
-
-				if (!col.isPrimitiveType()) {
-					if (colType.equals("Date")) {
-						sb.append("value = DateUtil.compareTo(get" + col.getMethodName() + "(), " + entity.getVarName() + ".get" + col.getMethodName() + "());");
-					}
-					else {
-						if (col.isCaseSensitive()) {
-							sb.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
-						}
-						else {
-							sb.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
-						}
-					}
-				}
-				else {
-					String ltComparator = "<";
-					String gtComparator = ">";
-
-					if (colType.equals("boolean")) {
-						ltComparator = "==";
-						gtComparator = "!=";
-					}
-
-					sb.append("if (get" + col.getMethodName() + "() " + ltComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
-					sb.append("value = -1;");
-					sb.append("}");
-					sb.append("else if (get" + col.getMethodName() + "() " + gtComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
-					sb.append("value = 1;");
-					sb.append("}");
-					sb.append("else {");
-					sb.append("value = 0;");
-					sb.append("}");
-				}
-
-				if (!col.isOrderByAscending()) {
-					sb.append("value = value * -1;");
-				}
-
-				sb.append("if (value != 0) {");
-				sb.append("return value;");
-				sb.append("}");
-			}
-
-			sb.append("return 0;");
-		}
-		else {
-			sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
-
-			if (entity.hasPrimitivePK()) {
-				sb.append("if (getPrimaryKey() < pk) {");
-				sb.append("return -1;");
-				sb.append("}");
-				sb.append("else if (getPrimaryKey() > pk) {");
-				sb.append("return 1;");
-				sb.append("}");
-				sb.append("else {");
-				sb.append("return 0;");
-				sb.append("}");
-			}
-			else {
-				sb.append("return getPrimaryKey().compareTo(pk);");
-			}
-		}
-
-		sb.append("}");
-
-		// Equals method
-
-		sb.append("public boolean equals(Object obj) {");
-		sb.append("if (obj == null) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = null;");
-		sb.append("try {");
-		sb.append(entity.getVarName() + " = (" + entity.getName() + ")obj;");
-		sb.append("}");
-		sb.append("catch (ClassCastException cce) {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
-		
-		if (entity.hasPrimitivePK()) {
-			sb.append("if (getPrimaryKey() == pk) {");
-		}
-		else {
-			sb.append("if (getPrimaryKey().equals(pk)) {");
-		}
-
-		sb.append("return true;");
-		sb.append("}");
-		sb.append("else {");
-		sb.append("return false;");
-		sb.append("}");
-		sb.append("}");
-
-		// Hash code method
-
-		sb.append("public int hashCode() {");
-
-		if (entity.hasPrimitivePK()) {
-			sb.append("return (int)getPrimaryKey();");
-		}
-		else {
-			sb.append("return getPrimaryKey().hashCode();");
-		}
-
-		sb.append("}");
-
-		// Fields
-
-		for (int i = 0; i < regularColList.size(); i++) {
-			EntityColumn col = (EntityColumn)regularColList.get(i);
-
-			sb.append("private " + col.getType() + " _" + col.getName() + ";");
-		}
-
-		// Class close brace
+		// Interface close brace
 
 		sb.append("}");
 
 		// Write file
 
-		File modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
+		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
 		writeFile(modelFile, sb.toString());
+
+		if (Validator.isNotNull(_serviceDir)) {
+			modelFile = new File(_outputPath + "/model/" + entity.getName() + "Model.java");
+
+			if (modelFile.exists()) {
+				System.out.println("Relocating " + modelFile);
+
+				modelFile.delete();
+			}
+		}
 	}
 
 	private void _createModelHintsXML() throws IOException {
@@ -1830,6 +1719,452 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createModelImpl(Entity entity) throws IOException {
+		List pkList = entity.getPKList();
+		List regularColList = entity.getRegularColList();
+
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".model.impl;");
+
+		// Imports
+
+		if (entity.hasCompoundPK()) {
+			sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
+		}
+
+		sb.append("import com.liferay.portal.model.impl.BaseModelImpl;");
+		sb.append("import com.liferay.portal.util.PropsUtil;");
+		sb.append("import com.liferay.util.DateUtil;");
+		sb.append("import com.liferay.util.GetterUtil;");
+		sb.append("import com.liferay.util.XSSUtil;");
+		sb.append("import java.util.Date;");
+
+		// Class declaration
+
+		sb.append("public class " + entity.getName() + "ModelImpl extends BaseModelImpl {");
+
+		// Fields
+
+		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			if (col.getType().equals("String")) {
+				sb.append("public static boolean XSS_ALLOW_" + col.getName().toUpperCase() + " = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "." + col.getName() + "\"), XSS_ALLOW_BY_MODEL);");
+			}
+		}
+
+		sb.append("public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(\"lock.expiration.time." + _packagePath + ".model." + entity.getName() + "Model\"));");
+
+		// Empty constructor
+
+		sb.append("public " + entity.getName() + "ModelImpl() {");
+		sb.append("}");
+
+		// Primary key accessor
+
+		sb.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
+
+		if (entity.hasCompoundPK()) {
+			sb.append("return new " + entity.getPKClassName() + "(");
+
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = (EntityColumn)pkList.get(i);
+
+				sb.append("_" + col.getName());
+
+				if ((i + 1) != (pkList.size())) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append(");");
+		}
+		else {
+			EntityColumn col = (EntityColumn)pkList.get(0);
+
+			sb.append("return _" + col.getName() + ";");
+		}
+
+		sb.append("}");
+
+		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
+
+		if (entity.hasCompoundPK()) {
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = (EntityColumn)pkList.get(i);
+
+				sb.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
+			}
+		}
+		else {
+			EntityColumn col = (EntityColumn)pkList.get(0);
+
+			sb.append("set" + col.getMethodName() + "(pk);");
+		}
+
+		sb.append("}");
+
+		// Getter and setter methods
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			String colType = col.getType();
+
+			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
+
+			if (colType.equals("String") && col.isConvertNull()) {
+				sb.append("return GetterUtil.getString(_" + col.getName() + ");");
+			}
+			else {
+				sb.append("return _" + col.getName() + ";");
+			}
+
+			sb.append("}");
+
+			if (colType.equals("boolean")) {
+				sb.append("public " + colType + " is" + col.getMethodName() + "() {");
+				sb.append("return _" + col.getName() + ";");
+				sb.append("}");
+			}
+
+			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
+			sb.append("if (");
+
+			if (!col.isPrimitiveType()) {
+				sb.append("(" + col.getName() + " == null && _" + col.getName() + " != null) ||");
+				sb.append("(" + col.getName() + " != null && _" + col.getName() + " == null) ||");
+				sb.append("(" + col.getName() + " != null && _" + col.getName() + " != null && !" + col.getName() + ".equals(_" + col.getName() + "))");
+			}
+			else {
+				sb.append(col.getName() + " != _" + col.getName());
+			}
+
+			sb.append(") {");
+
+			if (colType.equals("String")) {
+				sb.append("if (!XSS_ALLOW_" + col.getName().toUpperCase() + ") {");
+				sb.append(col.getName() + " = XSSUtil.strip(" + col.getName() + ");");
+				sb.append("}");
+			}
+
+			sb.append("_" + col.getName() + " = " + col.getName() + ";");
+			sb.append("}");
+			sb.append("}");
+		}
+
+		// Clone method
+
+		sb.append("public Object clone() {");
+		sb.append(entity.getName() + "Impl clone = new " + entity.getName() + "Impl();");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			sb.append("clone.set" + col.getMethodName() + "(");
+
+			if (col.getEJBName() == null) {
+				sb.append("get" + col.getMethodName() + "()");
+			}
+			else {
+				sb.append("(" + col.getEJBName() + ")get" + col.getMethodName() + "().clone()");
+			}
+
+			sb.append(");");
+		}
+
+		sb.append("return clone;");
+		sb.append("}");
+
+		// Compare to method
+
+		sb.append("public int compareTo(Object obj) {");
+		sb.append("if (obj == null) {");
+		sb.append("return -1;");
+		sb.append("}");
+		sb.append(entity.getName() + "Impl " + entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
+
+		if (entity.isOrdered()) {
+			EntityOrder order = entity.getOrder();
+
+			List orderList = order.getColumns();
+
+			sb.append("int value = 0;");
+
+			for (int i = 0; i < orderList.size(); i++) {
+				EntityColumn col = (EntityColumn)orderList.get(i);
+
+				String colType = col.getType(); 
+
+				if (!col.isPrimitiveType()) {
+					if (colType.equals("Date")) {
+						sb.append("value = DateUtil.compareTo(get" + col.getMethodName() + "(), " + entity.getVarName() + ".get" + col.getMethodName() + "());");
+					}
+					else {
+						if (col.isCaseSensitive()) {
+							sb.append("value = get" + col.getMethodName() + "().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "());");
+						}
+						else {
+							sb.append("value = get" + col.getMethodName() + "().toLowerCase().compareTo(" + entity.getVarName() + ".get" + col.getMethodName() + "().toLowerCase());");
+						}
+					}
+				}
+				else {
+					String ltComparator = "<";
+					String gtComparator = ">";
+
+					if (colType.equals("boolean")) {
+						ltComparator = "==";
+						gtComparator = "!=";
+					}
+
+					sb.append("if (get" + col.getMethodName() + "() " + ltComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					sb.append("value = -1;");
+					sb.append("}");
+					sb.append("else if (get" + col.getMethodName() + "() " + gtComparator + " " + entity.getVarName() + ".get" + col.getMethodName() + "()) {");
+					sb.append("value = 1;");
+					sb.append("}");
+					sb.append("else {");
+					sb.append("value = 0;");
+					sb.append("}");
+				}
+
+				if (!col.isOrderByAscending()) {
+					sb.append("value = value * -1;");
+				}
+
+				sb.append("if (value != 0) {");
+				sb.append("return value;");
+				sb.append("}");
+			}
+
+			sb.append("return 0;");
+		}
+		else {
+			sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
+
+			if (entity.hasPrimitivePK()) {
+				sb.append("if (getPrimaryKey() < pk) {");
+				sb.append("return -1;");
+				sb.append("}");
+				sb.append("else if (getPrimaryKey() > pk) {");
+				sb.append("return 1;");
+				sb.append("}");
+				sb.append("else {");
+				sb.append("return 0;");
+				sb.append("}");
+			}
+			else {
+				sb.append("return getPrimaryKey().compareTo(pk);");
+			}
+		}
+
+		sb.append("}");
+
+		// Equals method
+
+		sb.append("public boolean equals(Object obj) {");
+		sb.append("if (obj == null) {");
+		sb.append("return false;");
+		sb.append("}");
+		sb.append(entity.getName() + "Impl " + entity.getVarName() + " = null;");
+		sb.append("try {");
+		sb.append(entity.getVarName() + " = (" + entity.getName() + "Impl)obj;");
+		sb.append("}");
+		sb.append("catch (ClassCastException cce) {");
+		sb.append("return false;");
+		sb.append("}");
+		sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
+		
+		if (entity.hasPrimitivePK()) {
+			sb.append("if (getPrimaryKey() == pk) {");
+		}
+		else {
+			sb.append("if (getPrimaryKey().equals(pk)) {");
+		}
+
+		sb.append("return true;");
+		sb.append("}");
+		sb.append("else {");
+		sb.append("return false;");
+		sb.append("}");
+		sb.append("}");
+
+		// Hash code method
+
+		sb.append("public int hashCode() {");
+
+		if (entity.hasPrimitivePK()) {
+			sb.append("return (int)getPrimaryKey();");
+		}
+		else {
+			sb.append("return getPrimaryKey().hashCode();");
+		}
+
+		sb.append("}");
+
+		// Fields
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			sb.append("private " + col.getType() + " _" + col.getName() + ";");
+		}
+
+		// Class close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File modelFile = new File(_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
+
+		writeFile(modelFile, sb.toString());
+	}
+
+	private void _createModelSoap(Entity entity) throws IOException {
+		List pkList = entity.getPKList();
+		List regularColList = entity.getRegularColList();
+
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".model;");
+
+		// Imports
+
+		if (entity.hasCompoundPK()) {
+			sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "PK;");
+		}
+
+		sb.append("import java.io.Serializable;");
+		sb.append("import java.util.ArrayList;");
+		sb.append("import java.util.Date;");
+		sb.append("import java.util.List;");
+
+		// Class declaration
+
+		sb.append("public class " + entity.getName() + "Soap implements Serializable {");
+
+		// Methods
+
+		sb.append("public static " + entity.getName() + "Soap toSoapModel(" + entity.getName() + " model) {");
+		sb.append(entity.getName() + "Soap soapModel = new " + entity.getName() + "Soap();");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			sb.append("soapModel.set" + col.getMethodName() + "(model.get" + col.getMethodName() + "());");
+		}
+
+		sb.append("return soapModel;");
+		sb.append("}");
+
+		sb.append("public static " + entity.getName() + "Soap[] toSoapModels(List models) {");
+		sb.append("List soapModels = new ArrayList(models.size());");
+		sb.append("for (int i = 0; i < models.size(); i++) {");
+		sb.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
+		sb.append("soapModels.add(toSoapModel(model));");
+		sb.append("}");
+		sb.append("return (" + entity.getName() + "Soap[])soapModels.toArray(new " + entity.getName() + "Soap[0]);");
+		sb.append("}");
+
+		// Empty constructor
+
+		sb.append("public " + entity.getName() + "Soap() {");
+		sb.append("}");
+
+		// Primary key accessor
+
+		sb.append("public " + entity.getPKClassName() + " getPrimaryKey() {");
+
+		if (entity.hasCompoundPK()) {
+			sb.append("return new " + entity.getPKClassName() + "(");
+
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = (EntityColumn)pkList.get(i);
+
+				sb.append("_" + col.getName());
+
+				if ((i + 1) != (pkList.size())) {
+					sb.append(", ");
+				}
+			}
+
+			sb.append(");");
+		}
+		else {
+			EntityColumn col = (EntityColumn)pkList.get(0);
+
+			sb.append("return _" + col.getName() + ";");
+		}
+
+		sb.append("}");
+
+		sb.append("public void setPrimaryKey(" + entity.getPKClassName() + " pk) {");
+
+		if (entity.hasCompoundPK()) {
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = (EntityColumn)pkList.get(i);
+
+				sb.append("set" + col.getMethodName() + "(pk." + col.getName() + ");");
+			}
+		}
+		else {
+			EntityColumn col = (EntityColumn)pkList.get(0);
+
+			sb.append("set" + col.getMethodName() + "(pk);");
+		}
+
+		sb.append("}");
+
+		// Getter and setter methods
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			String colType = col.getType();
+
+			sb.append("public " + colType + " get" + col.getMethodName() + "() {");
+			sb.append("return _" + col.getName() + ";");
+			sb.append("}");
+
+			if (colType.equals("boolean")) {
+				sb.append("public " + colType + " is" + col.getMethodName() + "() {");
+				sb.append("return _" + col.getName() + ";");
+				sb.append("}");
+			}
+
+			sb.append("public void set" + col.getMethodName() + "(" + colType + " " + col.getName() + ") {");
+			sb.append("_" + col.getName() + " = " + col.getName() + ";");
+			sb.append("}");
+		}
+
+		// Fields
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			sb.append("private " + col.getType() + " _" + col.getName() + ";");
+		}
+
+		// Class close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File modelFile = new File(_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
+
+		writeFile(modelFile, sb.toString());
+	}
+
 	private void _createPersistence(Entity entity) throws IOException {
 		List columnList = entity.getColumnList();
 		List finderList = entity.getFinderList();
@@ -1847,10 +2182,10 @@ public class ServiceBuilder {
 
 		sb.append("import com.liferay.portal.PortalException;");
 		sb.append("import com.liferay.portal.SystemException;");
+		sb.append("import com.liferay.portal.kernel.util.OrderByComparator;");
+		sb.append("import com.liferay.portal.kernel.util.StringPool;");
 		sb.append("import com.liferay.portal.service.persistence.BasePersistence;");
 		sb.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
-		sb.append("import com.liferay.util.StringPool;");
-		sb.append("import com.liferay.util.dao.hibernate.OrderByComparator;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sb.append("import java.sql.ResultSet;");
@@ -1878,6 +2213,7 @@ public class ServiceBuilder {
 		sb.append("import org.springframework.jdbc.object.SqlUpdate;");
 		sb.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
 		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sb.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 
 		// Class declaration
 
@@ -1886,7 +2222,7 @@ public class ServiceBuilder {
 		// Create method
 
 		sb.append("public " + entity.getName() + " create(" + entity.getPKClassName() + " " + pkVarName + ") {");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "();");
+		sb.append(entity.getName() + " " + entity.getVarName() + " = new " + entity.getName() + "Impl();");
 		sb.append(entity.getVarName() + ".setNew(true);");
 		sb.append(entity.getVarName() + ".setPrimaryKey(" + pkVarName + ");");
 		sb.append("return " + entity.getVarName() + ";");
@@ -1898,7 +2234,7 @@ public class ServiceBuilder {
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
-		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + ".class, ");
+		sb.append(entity.getName() + " " + entity.getVarName() + " = (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
 
 		if (entity.hasPrimitivePK()) {
 			sb.append("new ");
@@ -2005,7 +2341,7 @@ public class ServiceBuilder {
 		sb.append("Session session = null;");
 		sb.append("try {");
 		sb.append("session = openSession();");
-		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + ".class, ");
+		sb.append("return (" + entity.getName() + ")session.get(" + entity.getName() + "Impl.class, ");
 
 		if (entity.hasPrimitivePK()) {
 			sb.append("new ");
@@ -2717,7 +3053,7 @@ public class ServiceBuilder {
 
 				sb.append("Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, " + entity.getVarName() + ");");
 
-				sb.append(entity.getName() + "[] array = new " + entity.getName() + "[3];");
+				sb.append(entity.getName() + "[] array = new " + entity.getName() + "Impl[3];");
 
 				sb.append("array[0] = (" + entity.getName() + ")objArray[0];");
 				sb.append("array[1] = (" + entity.getName() + ")objArray[1];");
@@ -3032,7 +3368,7 @@ public class ServiceBuilder {
 
 				sb.append("SQLQuery q = session.createSQLQuery(sql);");
 				sb.append("q.setCacheable(false);");
-				sb.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model." + tempEntity.getName() + ".class);");
+				sb.append("q.addEntity(\"" + tempEntity.getTable() + "\", " + tempEntity.getPackagePath() + ".model.impl." + tempEntity.getName() + "Impl.class);");
 				sb.append("QueryPos qPos = QueryPos.getInstance(q);");
 				sb.append("qPos.add(pk);");
 				sb.append("return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);");
@@ -3459,9 +3795,9 @@ public class ServiceBuilder {
 	}
 
 	private void _createPersistenceUtil(Entity entity) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/persistence/" + entity.getName() + "Persistence.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
@@ -3485,129 +3821,129 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			sb.append("public static " + xMethod.getReturnType().getType().getQualifiedName() + xMethod.getReturnType().getDimensionAsString() + " " + methodName + "(");
+			if (!javaMethod.isConstructor()) {
+				sb.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
-			List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-			String p0Name = "";
+				String p0Name = "";
 
-			if (parameters.size() > 0) {
-				p0Name = ((XParameter)parameters.get(0)).getName();
-			}
-
-			for (int j = 0; j < parameters.size(); j++) {
-				XParameter xParameter = (XParameter)parameters.get(j);
-
-				sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
-
-				if ((j + 1) != parameters.size()) {
-					sb.append(", ");
+				if (parameters.length > 0) {
+					p0Name = parameters[0].getName();
 				}
-			}
 
-			sb.append(")");
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-			List thrownExceptions = xMethod.getThrownExceptions();
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
-			if (thrownExceptions.size() > 0) {
-				sb.append(" throws ");
-
-				Iterator itr = thrownExceptions.iterator();
-
-				while (itr.hasNext()) {
-					XClass thrownException = (XClass)itr.next();
-
-					sb.append(thrownException.getQualifiedName());
-
-					if (itr.hasNext()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
-			}
 
-			sb.append(" {");
+				sb.append(")");
 
-			if (methodName.equals("remove") || methodName.equals("update")) {
-				sb.append("ModelListener listener = _getListener();");
+				Type[] thrownExceptions = javaMethod.getExceptions();
 
-				if (methodName.equals("update")) {
-					sb.append("boolean isNew = " + p0Name + ".isNew();");
+				if (thrownExceptions.length > 0) {
+					sb.append(" throws ");
+
+					for (int j = 0; j < thrownExceptions.length; j++) {
+						Type thrownException = thrownExceptions[j];
+
+						sb.append(thrownException.getValue());
+
+						if ((j + 1) != thrownExceptions.length) {
+							sb.append(", ");
+						}
+					}
 				}
 
-				sb.append("if (listener != null) {");
+				sb.append(" {");
 
-				if (methodName.equals("remove")) {
-					if (entity.getVarName().equals(p0Name)) {
-						sb.append("listener.onBeforeRemove(" + p0Name + ");");
+				if (methodName.equals("remove") || methodName.equals("update")) {
+					sb.append("ModelListener listener = _getListener();");
+
+					if (methodName.equals("update")) {
+						sb.append("boolean isNew = " + p0Name + ".isNew();");
+					}
+
+					sb.append("if (listener != null) {");
+
+					if (methodName.equals("remove")) {
+						if (entity.getVarName().equals(p0Name)) {
+							sb.append("listener.onBeforeRemove(" + p0Name + ");");
+						}
+						else {
+							sb.append("listener.onBeforeRemove(findByPrimaryKey(" + p0Name + "));");
+						}
 					}
 					else {
-						sb.append("listener.onBeforeRemove(findByPrimaryKey(" + p0Name + "));");
+						sb.append("if (isNew) {");
+						sb.append("listener.onBeforeCreate(" + p0Name + ");");
+						sb.append("}");
+						sb.append("else {");
+						sb.append("listener.onBeforeUpdate(" + p0Name + ");");
+						sb.append("}");
+					}
+
+					sb.append("}");
+
+					if (methodName.equals("remove") && !entity.getVarName().equals(p0Name)) {
+						sb.append(_packagePath + ".model." + entity.getName() + " " + entity.getVarName() + " = ");
+					}
+					else {
+						sb.append(entity.getVarName() + " = ");
 					}
 				}
 				else {
-					sb.append("if (isNew) {");
-					sb.append("listener.onBeforeCreate(" + p0Name + ");");
+					if (!javaMethod.getReturns().getValue().equals("void")) {
+						sb.append("return ");
+					}
+				}
+
+				sb.append("getPersistence()." + methodName + "(");
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					sb.append(javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(");");
+
+				if (methodName.equals("remove") || methodName.equals("update")) {
+					sb.append("if (listener != null) {");
+
+					if (methodName.equals("remove")) {
+						sb.append("listener.onAfterRemove(" + entity.getVarName() + ");");
+					}
+					else {
+						sb.append("if (isNew) {");
+						sb.append("listener.onAfterCreate(" + entity.getVarName() + ");");
+						sb.append("}");
+						sb.append("else {");
+						sb.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
+						sb.append("}");
+					}
+
 					sb.append("}");
-					sb.append("else {");
-					sb.append("listener.onBeforeUpdate(" + p0Name + ");");
-					sb.append("}");
+
+					sb.append("return " + entity.getVarName() + ";");
 				}
 
 				sb.append("}");
-
-				if (methodName.equals("remove") && !entity.getVarName().equals(p0Name)) {
-					sb.append(_packagePath + ".model." + entity.getName() + " " + entity.getVarName() + " = ");
-				}
-				else {
-					sb.append(entity.getVarName() + " = ");
-				}
 			}
-			else {
-				if (!xMethod.getReturnType().getType().getQualifiedName().equals("void")) {
-					sb.append("return ");
-				}
-			}
-
-			sb.append("getPersistence()." + methodName + "(");
-
-			for (int j = 0; j < parameters.size(); j++) {
-				XParameter xParameter = (XParameter)parameters.get(j);
-
-				sb.append(xParameter.getName());
-
-				if ((j + 1) != parameters.size()) {
-					sb.append(", ");
-				}
-			}
-
-			sb.append(");");
-
-			if (methodName.equals("remove") || methodName.equals("update")) {
-				sb.append("if (listener != null) {");
-
-				if (methodName.equals("remove")) {
-					sb.append("listener.onAfterRemove(" + entity.getVarName() + ");");
-				}
-				else {
-					sb.append("if (isNew) {");
-					sb.append("listener.onAfterCreate(" + entity.getVarName() + ");");
-					sb.append("}");
-					sb.append("else {");
-					sb.append("listener.onAfterUpdate(" + entity.getVarName() + ");");
-					sb.append("}");
-				}
-
-				sb.append("}");
-
-				sb.append("return " + entity.getVarName() + ";");
-			}
-
-			sb.append("}");
 		}
 
 		sb.append("public static " + entity.getName() + "Persistence getPersistence() {");
@@ -3670,15 +4006,15 @@ public class ServiceBuilder {
 	}
 
 	private void _createService(Entity entity, int sessionType) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.spring;");
+		sb.append("package " + _packagePath + ".service;");
 
 		// Interface declaration
 
@@ -3686,36 +4022,36 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			if (_isCustomMethod(xMethod) && xMethod.isPublic()) {
-				sb.append("public " + xMethod.getReturnType().getType().getQualifiedName() + xMethod.getReturnType().getDimensionAsString() + " " + methodName + "(");
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
+				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
-				List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
 
 				sb.append(")");
 
-				List thrownExceptions = xMethod.getThrownExceptions();
+				Type[] thrownExceptions = javaMethod.getExceptions();
 
 				Set newExceptions = new LinkedHashSet();
 
-				for (int j = 0; j < thrownExceptions.size(); j++) {
-					XClass thrownException = (XClass)thrownExceptions.get(j);
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
 
-					newExceptions.add(thrownException.getQualifiedName());
+					newExceptions.add(thrownException.getValue());
 				}
 
 				if (sessionType != _LOCAL) {
@@ -3746,9 +4082,17 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
+		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
 
 		writeFile(ejbFile, sb.toString());
+
+		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "Service.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createServiceEJB(Entity entity, int sessionType) throws IOException {
@@ -3760,7 +4104,7 @@ public class ServiceBuilder {
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		if (sessionType == _LOCAL) {
 			sb.append("import javax.ejb.EJBLocalObject;");
@@ -3785,9 +4129,9 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceEJBImpl(Entity entity, int sessionType) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/spring/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
+		JavaClass javaClass = _getJavaClass(_serviceOutputPath + "/service/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
@@ -3797,10 +4141,10 @@ public class ServiceBuilder {
 
 		// Imports
 
-		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
-		for (int i = 0; i < methods.size(); i++) {
-			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
+		if (methods.length > 0) {
+			sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory;");
 		}
 
 		sb.append("import javax.ejb.CreateException;");
@@ -3817,36 +4161,36 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			if (_isCustomMethod(xMethod) && xMethod.isPublic()) {
-				sb.append("public " + xMethod.getReturnType().getType().getQualifiedName() + xMethod.getReturnType().getDimensionAsString() + " " + methodName + "(");
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
+				sb.append("public " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
-				List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
 
 				sb.append(")");
 
-				List thrownExceptions = xMethod.getThrownExceptions();
+				Type[] thrownExceptions = javaMethod.getExceptions();
 
 				Set newExceptions = new LinkedHashSet();
 
-				for (int j = 0; j < thrownExceptions.size(); j++) {
-					XClass thrownException = (XClass)thrownExceptions.get(j);
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
 
-					newExceptions.add(thrownException.getQualifiedName());
+					newExceptions.add(thrownException.getValue());
 				}
 
 				if (newExceptions.size() > 0) {
@@ -3869,18 +4213,18 @@ public class ServiceBuilder {
 					sb.append("PrincipalSessionBean.setThreadValues(_sc);");
 				}
 
-				if (!xMethod.getReturnType().getType().getQualifiedName().equals("void")) {
+				if (!javaMethod.getReturns().getValue().equals("void")) {
 					sb.append("return ");
 				}
 
 				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getTxImpl()." + methodName + "(");
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					sb.append(xParameter.getName());
+					sb.append(javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
@@ -3930,7 +4274,7 @@ public class ServiceBuilder {
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.spring;");
+		sb.append("package " + _packagePath + ".service;");
 
 		// Class declaration
 
@@ -3976,9 +4320,17 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
+		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
 
 		writeFile(ejbFile, sb.toString());
+
+		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createServiceHome(Entity entity, int sessionType) throws IOException {
@@ -4026,9 +4378,9 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceHttp(Entity entity) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
@@ -4038,10 +4390,12 @@ public class ServiceBuilder {
 
 		// Imports
 
-		if (_hasHttpMethods(xClass)) {
-			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + "ServiceUtil;");
+		if (_hasHttpMethods(javaClass)) {
+			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
+		sb.append("import com.liferay.portal.kernel.log.Log;");
+		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
 		sb.append("import com.liferay.portal.kernel.util.BooleanWrapper;");
 		sb.append("import com.liferay.portal.kernel.util.DoubleWrapper;");
 		sb.append("import com.liferay.portal.kernel.util.FloatWrapper;");
@@ -4052,10 +4406,7 @@ public class ServiceBuilder {
 		sb.append("import com.liferay.portal.kernel.util.ShortWrapper;");
 		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import com.liferay.portal.security.auth.HttpPrincipal;");
-		sb.append("import com.liferay.portal.servlet.TunnelUtil;");
-		sb.append("import com.liferay.util.ObjectValuePair;");
-		sb.append("import org.apache.commons.logging.Log;");
-		sb.append("import org.apache.commons.logging.LogFactory;");
+		sb.append("import com.liferay.portal.service.http.TunnelUtil;");
 
 		// Class declaration
 
@@ -4063,43 +4414,43 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			if (_isCustomMethod(xMethod) && xMethod.isPublic()) {
-				XClass returnType = xMethod.getReturnType().getType();
-				String returnTypeName = returnType.getQualifiedName() + xMethod.getReturnType().getDimensionAsString();
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
+				Type returnType = javaMethod.getReturns();
+				String returnTypeName = returnType.getValue() + _getDimensions(returnType);
 
 				sb.append("public static " + returnTypeName + " " + methodName + "(HttpPrincipal httpPrincipal");
 
-				List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
 					if (j == 0) {
 						sb.append(", ");
 					}
 
-					sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
 
 				sb.append(")");
 
-				List thrownExceptions = xMethod.getThrownExceptions();
+				Type[] thrownExceptions = javaMethod.getExceptions();
 
 				Set newExceptions = new LinkedHashSet();
 
-				for (int j = 0; j < thrownExceptions.size(); j++) {
-					XClass thrownException = (XClass)thrownExceptions.get(j);
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
 
-					newExceptions.add(thrownException.getQualifiedName());
+					newExceptions.add(thrownException.getValue());
 				}
 
 				newExceptions.add("com.liferay.portal.SystemException");
@@ -4121,38 +4472,38 @@ public class ServiceBuilder {
 				sb.append("{");
 				sb.append("try {");
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
 					String parameterTypeName =
-						xParameter.getType().getQualifiedName() +
-							xParameter.getDimensionAsString();
+						javaParameter.getType().getValue() +
+							_getDimensions(javaParameter.getType());
 
 					sb.append("Object paramObj" + j + " = ");
 
 					if (parameterTypeName.equals("boolean")) {
-						sb.append("new BooleanWrapper(" + xParameter.getName() + ");");
+						sb.append("new BooleanWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("double")) {
-						sb.append("new DoubleWrapper(" + xParameter.getName() + ");");
+						sb.append("new DoubleWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("float")) {
-						sb.append("new FloatWrapper(" + xParameter.getName() + ");");
+						sb.append("new FloatWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("int")) {
-						sb.append("new IntegerWrapper(" + xParameter.getName() + ");");
+						sb.append("new IntegerWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("long")) {
-						sb.append("new LongWrapper(" + xParameter.getName() + ");");
+						sb.append("new LongWrapper(" + javaParameter.getName() + ");");
 					}
 					else if (parameterTypeName.equals("short")) {
-						sb.append("new ShortWrapper(" + xParameter.getName() + ");");
+						sb.append("new ShortWrapper(" + javaParameter.getName() + ");");
 					}
 					else {
-						sb.append(xParameter.getName() + ";");
+						sb.append(javaParameter.getName() + ";");
 
-						sb.append("if (" + xParameter.getName() + " == null) {");
-						sb.append("paramObj" + j + " = new NullWrapper(\"" + _getClassName(xParameter) + "\");");
+						sb.append("if (" + javaParameter.getName() + " == null) {");
+						sb.append("paramObj" + j + " = new NullWrapper(\"" + _getClassName(javaParameter.getType()) + "\");");
 						sb.append("}");
 					}
 				}
@@ -4161,16 +4512,16 @@ public class ServiceBuilder {
 				sb.append(entity.getName() + "ServiceUtil.class.getName(),");
 				sb.append("\"" + methodName + "\",");
 
-				if (parameters.size() == 0) {
+				if (parameters.length == 0) {
 					sb.append("new Object[0]);");
 				}
 				else {
 					sb.append("new Object[] {");
 
-					for (int j = 0; j < parameters.size(); j++) {
+					for (int j = 0; j < parameters.length; j++) {
 						sb.append("paramObj" + j);
 
-						if ((j + 1) != parameters.size()) {
+						if ((j + 1) != parameters.length) {
 							sb.append(", ");
 						}
 					}
@@ -4242,7 +4593,7 @@ public class ServiceBuilder {
 		// Fields
 
 		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceHttp.class);");
+			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceHttp.class);");
 		}
 
 		// Class close brace
@@ -4269,7 +4620,7 @@ public class ServiceBuilder {
 			sb.append("import com.liferay.portal.service.impl.PrincipalBean;");
 		}
 
-		sb.append("import " + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		// Class declaration
 
@@ -4289,9 +4640,9 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceSoap(Entity entity) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
@@ -4301,14 +4652,14 @@ public class ServiceBuilder {
 
 		// Imports
 
-		if (_hasSoapMethods(xClass)) {
-			sb.append("import " + _packagePath + ".service.spring." + entity.getName() + "ServiceUtil;");
+		if (_hasSoapMethods(javaClass)) {
+			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
+		sb.append("import com.liferay.portal.kernel.log.Log;");
+		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
 		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import java.rmi.RemoteException;");
-		sb.append("import org.apache.commons.logging.Log;");
-		sb.append("import org.apache.commons.logging.LogFactory;");
 
 		// Class declaration
 
@@ -4316,36 +4667,26 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			if (_isCustomMethod(xMethod) && xMethod.isPublic() &&
-				_isSoapMethod(xMethod)) {
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod) && _isSoapMethod(javaMethod)) {
+				String returnValueName = javaMethod.getReturns().getValue();
+				String returnValueDimension = _getDimensions(javaMethod.getReturns());
 
-				String returnValueName =
-					xMethod.getReturnType().getType().getQualifiedName();
-				String returnValueDimension =
-					xMethod.getReturnType().getDimensionAsString();
-
-				String extendedModelName =
-					_packagePath + ".model." + entity.getName();
-				String modelName = extendedModelName + "Model";
+				String extendedModelName = _packagePath + ".model." + entity.getName();
+				String soapModelName = _packagePath + ".model." + entity.getName() + "Soap";
 
 				sb.append("public static ");
 
 				if (returnValueName.equals(extendedModelName)) {
-					if (entity.hasColumns()) {
-						sb.append(modelName + returnValueDimension);
-					}
-					else {
-						sb.append(extendedModelName + returnValueDimension);
-					}
+					sb.append(soapModelName + returnValueDimension);
 				}
 				else if (returnValueName.equals("java.util.List")) {
 					if (entity.hasColumns()) {
-						sb.append(modelName + "[]");
+						sb.append(soapModelName + "[]");
 					}
 					else {
 						sb.append("java.util.List");
@@ -4357,22 +4698,20 @@ public class ServiceBuilder {
 
 				sb.append(" " + methodName + "(");
 
-				List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					String parameterTypeName =
-						xParameter.getType().getQualifiedName() +
-							xParameter.getDimensionAsString();
+					String parameterTypeName = javaParameter.getType().getValue() + _getDimensions(javaParameter.getType());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
 						parameterTypeName = "String";
 					}
 
-					sb.append(parameterTypeName + " " + xParameter.getName());
+					sb.append(parameterTypeName + " " + javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
@@ -4386,24 +4725,24 @@ public class ServiceBuilder {
 
 				sb.append(entity.getName() + "ServiceUtil." + methodName + "(");
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
 					String parameterTypeName =
-						xParameter.getType().getQualifiedName() +
-							xParameter.getDimensionAsString();
+						javaParameter.getType().getValue() +
+							_getDimensions(javaParameter.getType());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
 						sb.append("new java.util.Locale(");
 					}
 
-					sb.append(xParameter.getName());
+					sb.append(javaParameter.getName());
 
 					if (parameterTypeName.equals("java.util.Locale")) {
 						sb.append(")");
 					}
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
@@ -4411,18 +4750,15 @@ public class ServiceBuilder {
 				sb.append(");");
 
 				if (!returnValueName.equals("void")) {
-					sb.append("return ");
-
-					if (entity.hasColumns() &&
-						returnValueName.equals("java.util.List")) {
-
-						sb.append("(" + extendedModelName + "[])returnValue.toArray(new " + extendedModelName + "[0])");
+					if (returnValueName.equals(extendedModelName)) {
+						sb.append("return " + soapModelName + ".toSoapModel(returnValue);");
+					}
+					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
+						sb.append("return " + soapModelName + ".toSoapModels(returnValue);");
 					}
 					else {
-						sb.append("returnValue");
+						sb.append("return returnValue;");
 					}
-
-					sb.append(";");
 				}
 
 				sb.append("}");
@@ -4439,7 +4775,7 @@ public class ServiceBuilder {
 		// Fields
 
 		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactory.getLog(" + entity.getName() + "ServiceSoap.class);");
+			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceSoap.class);");
 		}
 
 		// Class close brace
@@ -4454,15 +4790,15 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType) throws IOException {
-		XClass xClass = _getXClass(_outputPath + "/service/spring/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
+		JavaClass javaClass = _getJavaClass(_serviceOutputPath + "/service/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "Service.java");
 
-		List methods = xClass.getMethods();
+		JavaMethod[] methods = javaClass.getMethods();
 
 		StringBuffer sb = new StringBuffer();
 
 		// Package
 
-		sb.append("package " + _packagePath + ".service.spring;");
+		sb.append("package " + _packagePath + ".service;");
 
 		// Class declaration
 
@@ -4470,36 +4806,36 @@ public class ServiceBuilder {
 
 		// Methods
 
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String methodName = xMethod.getName();
+			String methodName = javaMethod.getName();
 
-			if (_isCustomMethod(xMethod) && xMethod.isPublic()) {
-				sb.append("public static " + xMethod.getReturnType().getType().getQualifiedName() + xMethod.getReturnType().getDimensionAsString() + " " + methodName + "(");
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod)) {
+				sb.append("public static " + javaMethod.getReturns().getValue() + _getDimensions(javaMethod.getReturns()) + " " + methodName + "(");
 
-				List parameters = xMethod.getParameters();
+				JavaParameter[] parameters = javaMethod.getParameters();
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					sb.append(xParameter.getType().getQualifiedName() + xParameter.getDimensionAsString() + " " + xParameter.getName());
+					sb.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
 
 				sb.append(")");
 
-				List thrownExceptions = xMethod.getThrownExceptions();
+				Type[] thrownExceptions = javaMethod.getExceptions();
 
 				Set newExceptions = new LinkedHashSet();
 
-				for (int j = 0; j < thrownExceptions.size(); j++) {
-					XClass thrownException = (XClass)thrownExceptions.get(j);
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
 
-					newExceptions.add(thrownException.getQualifiedName());
+					newExceptions.add(thrownException.getValue());
 				}
 
 				if (newExceptions.size() > 0) {
@@ -4519,18 +4855,18 @@ public class ServiceBuilder {
 				sb.append("{");
 				sb.append(entity.getName() + _getSessionTypeName(sessionType) + "Service " + entity.getVarName() + _getSessionTypeName(sessionType) + "Service = " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory.getService();");
 
-				if (!xMethod.getReturnType().getType().getQualifiedName().equals("void")) {
+				if (!javaMethod.getReturns().getValue().equals("void")) {
 					sb.append("return ");
 				}
 
 				sb.append(entity.getVarName() + _getSessionTypeName(sessionType) + "Service." + methodName + "(");
 
-				for (int j = 0; j < parameters.size(); j++) {
-					XParameter xParameter = (XParameter)parameters.get(j);
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
 
-					sb.append(xParameter.getName());
+					sb.append(javaParameter.getName());
 
-					if ((j + 1) != parameters.size()) {
+					if ((j + 1) != parameters.length) {
 						sb.append(", ");
 					}
 				}
@@ -4546,9 +4882,17 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
+		File ejbFile = new File(_serviceOutputPath + "/service/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
 
 		writeFile(ejbFile, sb.toString());
+
+		ejbFile = new File(_outputPath + "/service/spring/" + entity.getName() + _getSessionTypeName(sessionType) + "ServiceUtil.java");
+
+		if (ejbFile.exists()) {
+			System.out.println("Relocating " + ejbFile);
+
+			ejbFile.delete();
+		}
 	}
 
 	private void _createSpringXML(boolean enterprise) throws IOException {
@@ -4589,29 +4933,16 @@ public class ServiceBuilder {
 		}
 
 		String oldContent = FileUtil.read(xmlFile);
-		String newContent = new String(oldContent);
+		String newContent = _fixSpringXML(oldContent);
 
 		int x = oldContent.indexOf("<beans>");
 		int y = oldContent.lastIndexOf("</beans>");
 
 		int firstSession = newContent.indexOf(
-			"<bean id=\"" +  _packagePath + ".service.spring.", x);
+			"<bean id=\"" +  _packagePath + ".service.", x);
 
-		int lastSession = -1;
-
-		int lastSession1 = newContent.lastIndexOf(
-			"<bean id=\"" +  _packagePath + ".service.spring.", y);
-		int lastSession2 = newContent.lastIndexOf(
-			"<bean id=\"" +  _packagePath + ".service.persistence.", y);
-
-		if (lastSession1 != lastSession2) {
-			if (lastSession1 > lastSession2) {
-				lastSession = lastSession1;
-			}
-			else {
-				lastSession = lastSession2;
-			}
-		}
+		int lastSession = newContent.lastIndexOf(
+			"<bean id=\"" +  _packagePath + ".service.", y);
 
 		if (firstSession == -1 || firstSession > y) {
 			x = newContent.indexOf("</beans>");
@@ -4635,10 +4966,10 @@ public class ServiceBuilder {
 
 	private void _createSpringXMLSession(Entity entity, StringBuffer sb, int sessionType, boolean enterprise) {
 		if (enterprise) {
-			sb.append("\t<bean id=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service.enterprise\" class=\"" + (sessionType == _LOCAL ? "com.liferay.portal.spring.ejb.LocalSessionFactoryBean" : "com.liferay.portal.spring.ejb.RemoteSessionFactoryBean") + "\" lazy-init=\"true\">\n");
+			sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.enterprise\" class=\"" + (sessionType == _LOCAL ? "com.liferay.portal.spring.ejb.LocalSessionFactoryBean" : "com.liferay.portal.spring.ejb.RemoteSessionFactoryBean") + "\" lazy-init=\"true\">\n");
 
 			sb.append("\t\t<property name=\"businessInterface\">\n");
-			sb.append("\t\t\t<value>" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service</value>\n");
+			sb.append("\t\t\t<value>" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service</value>\n");
 			sb.append("\t\t</property>\n");
 
 			sb.append("\t\t<property name=\"jndiName\">\n");
@@ -4655,14 +4986,14 @@ public class ServiceBuilder {
 			sb.append("\t</bean>\n");
 		}
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
+		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" class=\"" + _packagePath + ".service.impl." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl\" lazy-init=\"true\" />\n");
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
+		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.transaction\" class=\"org.springframework.transaction.interceptor.TransactionProxyFactoryBean\" lazy-init=\"true\">\n");
 		sb.append("\t\t<property name=\"transactionManager\">\n");
 		sb.append("\t\t\t<ref bean=\"liferayTransactionManager\" />\n");
 		sb.append("\t\t</property>\n");
 		sb.append("\t\t<property name=\"target\">\n");
-		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
+		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service.professional\" />\n");
 		sb.append("\t\t</property>\n");
 		sb.append("\t\t<property name=\"transactionAttributes\">\n");
 		sb.append("\t\t\t<props>\n");
@@ -4672,9 +5003,9 @@ public class ServiceBuilder {
 		sb.append("\t\t</property>\n");
 		sb.append("\t</bean>\n");
 
-		sb.append("\t<bean id=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" class=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" lazy-init=\"true\">\n");
+		sb.append("\t<bean id=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" class=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "ServiceFactory\" lazy-init=\"true\">\n");
 		sb.append("\t\t<property name=\"service\">\n");
-		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service.spring." + entity.getName() + _getSessionTypeName(sessionType) + "Service." + (enterprise ? "enterprise" : "transaction") + "\" />\n");
+		sb.append("\t\t\t<ref bean=\"" + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service." + (enterprise ? "enterprise" : "transaction") + "\" />\n");
 		sb.append("\t\t</property>\n");
 		sb.append("\t</bean>\n");
 	}
@@ -5063,8 +5394,19 @@ public class ServiceBuilder {
 					new String[] {
 						".model.", "\" table=\""
 					});
+
+				if (line.indexOf(".model.impl.") == -1) {
+					line = StringUtil.replace(
+						line,
+						new String[] {
+							".model.", "\" table=\""
+						},
+						new String[] {
+							".model.impl.", "Impl\" table=\""
+						});
+				}
 			}
-			
+
 			sb.append(line);
 			sb.append('\n');
 		}
@@ -5074,14 +5416,18 @@ public class ServiceBuilder {
 		return sb.toString().trim();
 	}
 
-	private String _getClassName(Type type) {
-		int dimension = type.getDimension();
-		String name = type.getType().getQualifiedName();
+	private String _fixSpringXML(String content) throws IOException {
+		return StringUtil.replace(content, ".service.spring.", ".service.");
+	}
 
-		if (dimension > 0) {
+	private String _getClassName(Type type) {
+		int dimensions = type.getDimensions();
+		String name = type.getValue();
+
+		if (dimensions > 0) {
 			StringBuffer sb = new StringBuffer();
 
-			for (int i = 0; i < dimension; i++) {
+			for (int i = 0; i < dimensions; i++) {
 				sb.append("[");
 			}
 
@@ -5115,6 +5461,30 @@ public class ServiceBuilder {
 		}
 
 		return name;
+	}
+
+	private String _getDimensions(Type type) {
+		String dimensions = "";
+
+		for (int i = 0; i < type.getDimensions(); i++) {
+			dimensions += "[]";
+		}
+
+		return dimensions;
+	}
+
+	private JavaClass _getJavaClass(String fileName) throws IOException {
+		int pos = fileName.indexOf("src/") + 3;
+
+		String srcFile = fileName.substring(pos + 1, fileName.length());
+		String className = StringUtil.replace(
+			srcFile.substring(0, srcFile.length() - 5), "/", ".");
+
+		JavaDocBuilder builder = new JavaDocBuilder();
+
+		builder.addSource(new File(fileName));
+
+		return builder.getClassByName(className);
 	}
 
 	private String _getNoSuchEntityException(Entity entity) {
@@ -5184,54 +5554,14 @@ public class ServiceBuilder {
 		}
 	}
 
-	private XClass _getXClass(String fileName) {
-		XClass xClass = (XClass)SimpleCachePool.get(fileName);
+	private boolean _hasHttpMethods(JavaClass javaClass) {
+		JavaMethod[] methods = javaClass.getMethods();
 
-		if (xClass == null) {
-			int pos = fileName.indexOf("/");
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
 
-			String srcDir = fileName.substring(0, pos);
-			String srcFile = fileName.substring(pos + 1, fileName.length());
-			String className = StringUtil.replace(
-				srcFile.substring(0, srcFile.length() - 5), "/", ".");
-
-			XJavaDoc xJavaDoc = new XJavaDoc();
-
-			xJavaDoc.addSourceSet(
-				new FileSourceSet(new File(srcDir), new String[] {srcFile}));
-
-			xClass = xJavaDoc.getXClass(className);
-
-			// Caching this causes abnormal usage of memory
-
-			//SimpleCachePool.put(fileName, xClass);
-		}
-
-		return xClass;
-	}
-
-	private boolean _hasHttpMethods(XClass xClass) {
-		List methods = xClass.getMethods();
-
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
-
-			if (_isCustomMethod(xMethod) && xMethod.isPublic()) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	private boolean _hasSoapMethods(XClass xClass) {
-		List methods = xClass.getMethods();
-
-		for (int i = 0; i < methods.size(); i++) {
-			XMethod xMethod = (XMethod)methods.get(i);
-
-			if (_isCustomMethod(xMethod) && xMethod.isPublic() &&
-				_isSoapMethod(xMethod)) {
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() &&
+				_isCustomMethod(javaMethod)) {
 
 				return true;
 			}
@@ -5240,7 +5570,23 @@ public class ServiceBuilder {
 		return false;
 	}
 
-	private boolean _isCustomMethod(XMethod method) {
+	private boolean _hasSoapMethods(JavaClass javaClass) {
+		JavaMethod[] methods = javaClass.getMethods();
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() &&
+				_isCustomMethod(javaMethod) && _isSoapMethod(javaMethod)) {
+
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	private boolean _isCustomMethod(JavaMethod method) {
 		String methodName = method.getName();
 
 		if (methodName.equals("hasAdministrator") ||
@@ -5261,12 +5607,12 @@ public class ServiceBuilder {
 			return false;
 		}
 		else if (methodName.equals("getUser") &&
-				 method.getParameters().size() == 0) {
+				 method.getParameters().length == 0) {
 
 			return false;
 		}
 		else if (methodName.equals("getUserId") &&
-				 method.getParameters().size() == 0) {
+				 method.getParameters().length == 0) {
 
 			return false;
 		}
@@ -5275,9 +5621,8 @@ public class ServiceBuilder {
 		}
 	}
 
-	private boolean _isSoapMethod(XMethod method) {
-		String returnValueName =
-			method.getReturnType().getType().getQualifiedName();
+	private boolean _isSoapMethod(JavaMethod method) {
+		String returnValueName = method.getReturns().getValue();
 
 		if (returnValueName.startsWith("java.io") ||
 			returnValueName.equals("java.util.Map") ||
@@ -5287,14 +5632,14 @@ public class ServiceBuilder {
 			return false;
 		}
 
-		List parameters = method.getParameters();
+		JavaParameter[] parameters = method.getParameters();
 
-		for (int i = 0; i < parameters.size(); i++) {
-			XParameter xParameter = (XParameter)parameters.get(i);
+		for (int i = 0; i < parameters.length; i++) {
+			JavaParameter javaParameter = parameters[i];
 
 			String parameterTypeName =
-				xParameter.getType().getQualifiedName() +
-					xParameter.getDimensionAsString();
+				javaParameter.getType().getValue() +
+					_getDimensions(javaParameter.getType());
 
 			if ((parameterTypeName.indexOf(
 					"com.liferay.portal.model.") != -1) ||
@@ -5333,11 +5678,13 @@ public class ServiceBuilder {
 	private String _springEntFileName;
 	private String _springProFileName;
 	private String _beanLocatorUtilClassName;
+	private String _serviceDir;
 	private String _portalRoot;
 	private String _portletName;
 	private String _portletShortName;
 	private String _portletPackageName;
 	private String _outputPath;
+	private String _serviceOutputPath;
 	private String _packagePath;
 	private List _ejbList;
 

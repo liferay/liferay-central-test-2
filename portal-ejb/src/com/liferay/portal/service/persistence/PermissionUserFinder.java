@@ -26,7 +26,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.enterpriseadmin.search.UserSearchTerms;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -104,8 +103,7 @@ public class PermissionUserFinder {
 	public static int COUNT_USERS_TYPE_ROLE = 3;
 
 	public static int countByOrgGroupPermissions(
-			String companyId, String name, String primKey,
-			String actionId)
+			String companyId, String name, String primKey, String actionId)
 		throws SystemException {
 
 		Session session = null;
@@ -149,8 +147,9 @@ public class PermissionUserFinder {
 	}
 
 	public static int countByPermissionAndRole(
-			String companyId, String groupId, String name,
-			String primKey, String actionId, UserSearchTerms searchTerms)
+			String companyId, String groupId, String name, String primKey,
+			String actionId, String firstName, String middleName,
+			String lastName, String emailAddress, boolean andOperator)
 		throws SystemException {
 
 		Session session = null;
@@ -160,38 +159,41 @@ public class PermissionUserFinder {
 
 			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
-				groupId, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_ADMIN);
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
-				groupId, name, primKey, actionId, searchTerms,
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_PERMISSION),
-				companyId, groupId, name, primKey, actionId, searchTerms,
+				companyId, groupId, name, primKey, actionId, firstName,
+				middleName, lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_PERMISSION), companyId,
-				groupId, name, primKey, actionId, searchTerms,
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_ROLE), companyId,
-				groupId, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_ROLE);
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_GROUP_ROLE), companyId,
-				groupId, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_ROLE);
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_ROLE), companyId,
-				groupId, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_ROLE);
+				groupId, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator, COUNT_USERS_TYPE_ROLE);
 
 			return count;
 		}
@@ -204,8 +206,9 @@ public class PermissionUserFinder {
 	}
 
 	public static int countByUserAndOrgGroupPermission(
-			String companyId, String name, String primKey,
-			String actionId, UserSearchTerms searchTerms)
+			String companyId, String name, String primKey, String actionId,
+			String firstName, String middleName, String lastName,
+			String emailAddress, boolean andOperator)
 		throws SystemException {
 
 		Session session = null;
@@ -215,17 +218,18 @@ public class PermissionUserFinder {
 
 			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
-				null, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_ADMIN);
+				null, name, primKey, actionId, firstName, middleName, lastName,
+				emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
-				null, name, primKey, actionId, searchTerms,
-				COUNT_USERS_TYPE_PERMISSION);
+				null, name, primKey, actionId, firstName, middleName, lastName,
+				emailAddress, andOperator, COUNT_USERS_TYPE_PERMISSION);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_GROUP_PERMISSION),
-				companyId, null, name, primKey, actionId, searchTerms,
+				companyId, null, name, primKey, actionId, firstName, middleName,
+				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
 			return count;
@@ -240,12 +244,12 @@ public class PermissionUserFinder {
 
 	public static int countUsers(
 			Session session, String sql, String companyId, String groupId,
-			String name, String primKey, String actionId,
-			UserSearchTerms searchTerms, int countUsersType)
+			String name, String primKey, String actionId, String firstName,
+			String middleName, String lastName, String emailAddress,
+			boolean andOperator, int countUsersType)
 		throws SystemException {
 
-		sql = CustomSQLUtil.replaceAndOperator(
-			sql, searchTerms.isAndOperator());
+		sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 		SQLQuery q = session.createSQLQuery(sql);
 
@@ -271,14 +275,14 @@ public class PermissionUserFinder {
 			qPos.add(actionId);
 		}
 
-		qPos.add(searchTerms.getFirstName());
-		qPos.add(searchTerms.getFirstName());
-		qPos.add(searchTerms.getMiddleName());
-		qPos.add(searchTerms.getMiddleName());
-		qPos.add(searchTerms.getLastName());
-		qPos.add(searchTerms.getLastName());
-		qPos.add(searchTerms.getEmailAddress());
-		qPos.add(searchTerms.getEmailAddress());
+		qPos.add(firstName);
+		qPos.add(firstName);
+		qPos.add(middleName);
+		qPos.add(middleName);
+		qPos.add(lastName);
+		qPos.add(lastName);
+		qPos.add(emailAddress);
+		qPos.add(emailAddress);
 
 		Iterator itr = q.list().iterator();
 
@@ -294,8 +298,9 @@ public class PermissionUserFinder {
 	}
 
 	public static List findByPermissionAndRole(
-			String companyId, String groupId, String name,
-			String primKey, String actionId, UserSearchTerms searchTerms,
+			String companyId, String groupId, String name, String primKey,
+			String actionId, String firstName, String middleName,
+			String lastName, String emailAddress, boolean andOperator,
 			int begin, int end)
 		throws SystemException {
 
@@ -321,8 +326,7 @@ public class PermissionUserFinder {
 			sql += "(" + CustomSQLUtil.get(FIND_BY_ORG_ROLE) + ") ";
 			sql += "ORDER BY lastName ASC, firstName ASC, middleName ASC ";
 
-			sql = CustomSQLUtil.replaceAndOperator(
-				sql, searchTerms.isAndOperator());
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -349,14 +353,14 @@ public class PermissionUserFinder {
 					qPos.add(actionId);
 				}
 
-				qPos.add(searchTerms.getFirstName());
-				qPos.add(searchTerms.getFirstName());
-				qPos.add(searchTerms.getMiddleName());
-				qPos.add(searchTerms.getMiddleName());
-				qPos.add(searchTerms.getLastName());
-				qPos.add(searchTerms.getLastName());
-				qPos.add(searchTerms.getEmailAddress());
-				qPos.add(searchTerms.getEmailAddress());
+				qPos.add(firstName);
+				qPos.add(firstName);
+				qPos.add(middleName);
+				qPos.add(middleName);
+				qPos.add(lastName);
+				qPos.add(lastName);
+				qPos.add(emailAddress);
+				qPos.add(emailAddress);
 			}
 
 			List list = new ArrayList();
@@ -383,9 +387,9 @@ public class PermissionUserFinder {
 	}
 
 	public static List findByUserAndOrgGroupPermission(
-			String companyId, String name, String primKey,
-			String actionId, UserSearchTerms searchTerms,
-			int begin, int end)
+			String companyId, String name, String primKey, String actionId,
+			String firstName, String middleName, String lastName,
+			String emailAddress, boolean andOperator, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -402,8 +406,7 @@ public class PermissionUserFinder {
 			sql += "(" + CustomSQLUtil.get(FIND_BY_ORG_GROUP_PERMISSION) + ") ";
 			sql += "ORDER BY lastName ASC, firstName ASC, middleName ASC ";
 
-			sql = CustomSQLUtil.replaceAndOperator(
-				sql, searchTerms.isAndOperator());
+			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -422,14 +425,14 @@ public class PermissionUserFinder {
 					qPos.add(actionId);
 				}
 
-				qPos.add(searchTerms.getFirstName());
-				qPos.add(searchTerms.getFirstName());
-				qPos.add(searchTerms.getMiddleName());
-				qPos.add(searchTerms.getMiddleName());
-				qPos.add(searchTerms.getLastName());
-				qPos.add(searchTerms.getLastName());
-				qPos.add(searchTerms.getEmailAddress());
-				qPos.add(searchTerms.getEmailAddress());
+				qPos.add(firstName);
+				qPos.add(firstName);
+				qPos.add(middleName);
+				qPos.add(middleName);
+				qPos.add(lastName);
+				qPos.add(lastName);
+				qPos.add(emailAddress);
+				qPos.add(emailAddress);
 			}
 
 			List list = new ArrayList();

@@ -29,6 +29,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -38,18 +39,22 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ColorSchemeImpl;
+import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.struts.Action;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -69,7 +74,6 @@ import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -261,8 +265,8 @@ public class ServicePreAction extends Action {
 
 			String plid = ParamUtil.getString(req, "p_l_id");
 
-			String layoutId = Layout.getLayoutId(plid);
-			String ownerId = Layout.getOwnerId(plid);
+			String layoutId = LayoutImpl.getLayoutId(plid);
+			String ownerId = LayoutImpl.getOwnerId(plid);
 
 			if ((layoutId != null) && (ownerId != null)) {
 				try {
@@ -274,7 +278,7 @@ public class ServicePreAction extends Action {
 					}
 					else {
 						layouts = LayoutLocalServiceUtil.getLayouts(
-							ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+							ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 					}
 				}
 				catch (NoSuchLayoutException nsle) {
@@ -307,7 +311,7 @@ public class ServicePreAction extends Action {
 				// time the user logs in because group layouts are cached in the
 				// session
 
-				layout = (Layout)layout.clone();
+				layout = (Layout)((LayoutImpl)layout).clone();
 			}
 
 			LayoutTypePortlet layoutTypePortlet = null;
@@ -338,10 +342,10 @@ public class ServicePreAction extends Action {
 			}
 			else {
 				theme = ThemeLocalUtil.getTheme(
-					companyId, Theme.getDefaultThemeId());
+					companyId, ThemeImpl.getDefaultThemeId());
 				colorScheme = ThemeLocalUtil.getColorScheme(
 					companyId, theme.getThemeId(),
-					ColorScheme.getDefaultColorSchemeId());
+					ColorSchemeImpl.getDefaultColorSchemeId());
 			}
 
 			req.setAttribute(WebKeys.THEME, theme);
@@ -529,8 +533,8 @@ public class ServicePreAction extends Action {
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			userGroup.getGroupId(), user.getUserId(), true,
-			Layout.DEFAULT_PARENT_LAYOUT_ID, name, Layout.TYPE_PORTLET, false,
-			StringPool.BLANK);
+			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, LayoutImpl.TYPE_PORTLET,
+			false, StringPool.BLANK);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
@@ -562,14 +566,14 @@ public class ServicePreAction extends Action {
 			Group userGroup = user.getGroup();
 
 			LayoutLocalServiceUtil.deleteLayouts(
-				Layout.PRIVATE + userGroup.getGroupId());
+				LayoutImpl.PRIVATE + userGroup.getGroupId());
 		}
 
 		if (user.hasPublicLayouts()) {
 			Group userGroup = user.getGroup();
 
 			LayoutLocalServiceUtil.deleteLayouts(
-				Layout.PUBLIC + userGroup.getGroupId());
+				LayoutImpl.PUBLIC + userGroup.getGroupId());
 		}
 	}
 
@@ -585,7 +589,7 @@ public class ServicePreAction extends Action {
 		Layout layout = themeDisplay.getLayout();
 
 		if ((layout == null) ||
-			(!layout.getType().equals(Layout.TYPE_PORTLET))) {
+			(!layout.getType().equals(LayoutImpl.TYPE_PORTLET))) {
 
 			return;
 		}
@@ -673,7 +677,8 @@ public class ServicePreAction extends Action {
 					user.getActualCompanyId(), host);
 
 				List layouts = LayoutLocalServiceUtil.getLayouts(
-					layoutSet.getOwnerId(), Layout.DEFAULT_PARENT_LAYOUT_ID);
+					layoutSet.getOwnerId(),
+					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 				if (layouts.size() > 0) {
 					Layout layout = (Layout)layouts.get(0);
@@ -695,13 +700,13 @@ public class ServicePreAction extends Action {
 			Group userGroup = user.getGroup();
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.PRIVATE + userGroup.getGroupId(),
-				Layout.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutImpl.PRIVATE + userGroup.getGroupId(),
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() == 0) {
 				layouts = LayoutLocalServiceUtil.getLayouts(
-					Layout.PUBLIC + userGroup.getGroupId(),
-					Layout.DEFAULT_PARENT_LAYOUT_ID);
+					LayoutImpl.PUBLIC + userGroup.getGroupId(),
+					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 			}
 
 			if (layouts.size() > 0) {
@@ -723,13 +728,13 @@ public class ServicePreAction extends Action {
 					Group group = (Group)groups.get(i);
 
 					layouts = LayoutLocalServiceUtil.getLayouts(
-						Layout.PRIVATE + group.getGroupId(),
-						Layout.DEFAULT_PARENT_LAYOUT_ID);
+						LayoutImpl.PRIVATE + group.getGroupId(),
+						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 					if (layouts.size() == 0) {
 						layouts = LayoutLocalServiceUtil.getLayouts(
-							Layout.PUBLIC + group.getGroupId(),
-							Layout.DEFAULT_PARENT_LAYOUT_ID);
+							LayoutImpl.PUBLIC + group.getGroupId(),
+							LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 					}
 
 					if (layouts.size() > 0) {
@@ -745,11 +750,11 @@ public class ServicePreAction extends Action {
 			// Check the guest community
 
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
-				user.getActualCompanyId(), Group.GUEST);
+				user.getActualCompanyId(), GroupImpl.GUEST);
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
-				Layout.PUBLIC + guestGroup.getGroupId(),
-				Layout.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutImpl.PUBLIC + guestGroup.getGroupId(),
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				layout = (Layout)layouts.get(0);
@@ -822,13 +827,13 @@ public class ServicePreAction extends Action {
 
 		// Public layouts are always viewable
 
-		if (!Layout.isPrivateLayout(ownerId)) {
+		if (!LayoutImpl.isPrivateLayout(ownerId)) {
 			return true;
 		}
 
 		// Users can only see their own private layouts
 
-		String groupId = Layout.getGroupId(ownerId);
+		String groupId = LayoutImpl.getGroupId(ownerId);
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 

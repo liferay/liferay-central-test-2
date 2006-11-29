@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerPathException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class UserTrackerPathPersistence extends BasePersistence {
 	public UserTrackerPath create(String userTrackerPathId) {
-		UserTrackerPath userTrackerPath = new UserTrackerPath();
+		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
 		userTrackerPath.setNew(true);
 		userTrackerPath.setPrimaryKey(userTrackerPathId);
 
@@ -63,7 +64,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPath.class,
+			UserTrackerPath userTrackerPath = (UserTrackerPath)session.get(UserTrackerPathImpl.class,
 					userTrackerPathId);
 
 			if (userTrackerPath == null) {
@@ -167,7 +168,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (UserTrackerPath)session.get(UserTrackerPath.class,
+			return (UserTrackerPath)session.get(UserTrackerPathImpl.class,
 				userTrackerPathId);
 		}
 		catch (HibernateException he) {
@@ -337,7 +338,7 @@ public class UserTrackerPathPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTrackerPath);
-			UserTrackerPath[] array = new UserTrackerPath[3];
+			UserTrackerPath[] array = new UserTrackerPathImpl[3];
 			array[0] = (UserTrackerPath)objArray[0];
 			array[1] = (UserTrackerPath)objArray[1];
 			array[2] = (UserTrackerPath)objArray[2];

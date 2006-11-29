@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.AddressService;
 import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.AddressUtil;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
-import com.liferay.portal.service.spring.AddressService;
 
 import java.util.List;
 

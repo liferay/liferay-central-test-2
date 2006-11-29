@@ -22,23 +22,23 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.DuplicateRoleException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.RoleNameException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.RoleLocalService;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.List;
@@ -119,8 +119,9 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 			Validator.isNull(role.getClassPK())) {
 
 			ResourceLocalServiceUtil.deleteResource(
-				role.getCompanyId(), Role.class.getName(), Resource.TYPE_CLASS,
-				Resource.SCOPE_INDIVIDUAL, role.getPrimaryKey().toString());
+				role.getCompanyId(), Role.class.getName(),
+				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+				role.getPrimaryKey().toString());
 		}
 
 		// Role

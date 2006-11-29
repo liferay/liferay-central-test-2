@@ -30,12 +30,14 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.UserEmailAddressException;
 import com.liferay.portal.UserIdException;
 import com.liferay.portal.UserPasswordException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalFinder;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
@@ -50,7 +52,6 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.InstancePool;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.XSSUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -93,7 +94,7 @@ public class LoginAction extends Action {
 				CookieUtil.get(req.getCookies(), CookieKeys.LOGIN));
 
 			if (Validator.isNull(login) &&
-				company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
+				company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
 
 				login = "@" + company.getMx();
 			}
@@ -141,7 +142,7 @@ public class LoginAction extends Action {
 
 		Map parameterMap = req.getParameterMap();
 
-		if (company.getAuthType().equals(Company.AUTH_TYPE_EA)) {
+		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);

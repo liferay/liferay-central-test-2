@@ -30,6 +30,8 @@ import com.liferay.portal.NoSuchCompanyException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
@@ -37,14 +39,18 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.AccountUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.service.spring.CompanyLocalService;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.portal.service.spring.RoleLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Encryptor;
@@ -52,9 +58,8 @@ import com.liferay.util.EncryptorException;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ImageUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.awt.image.BufferedImage;
 
@@ -144,7 +149,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 				CompanyUtil.update(company);
 
 				updateSecurity(
-					companyId, Company.AUTH_TYPE_EA, true, true, true);
+					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true);
 
 				PortletPreferences prefs =
 					PrefsPropsUtil.getPreferences(companyId);
@@ -184,13 +189,13 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			}
 		}
 		catch (NoSuchUserException nsue) {
-			defaultUser = UserUtil.create(User.getDefaultUserId(companyId));
+			defaultUser = UserUtil.create(UserImpl.getDefaultUserId(companyId));
 
-			defaultUser.setCompanyId(User.DEFAULT);
+			defaultUser.setCompanyId(UserImpl.DEFAULT);
 			defaultUser.setCreateDate(now);
 			defaultUser.setModifiedDate(now);
 			defaultUser.setPassword("password");
-			defaultUser.setEmailAddress(User.DEFAULT + "@" + companyMx);
+			defaultUser.setEmailAddress(UserImpl.DEFAULT + "@" + companyMx);
 			defaultUser.setLanguageId(null);
 			defaultUser.setTimeZoneId(null);
 			defaultUser.setGreeting("Welcome!");
@@ -215,7 +220,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			defaultContact.setModifiedDate(now);
 			defaultContact.setAccountId(defaultUser.getCompanyId());
 			defaultContact.setParentContactId(
-				Contact.DEFAULT_PARENT_CONTACT_ID);
+				ContactImpl.DEFAULT_PARENT_CONTACT_ID);
 			defaultContact.setFirstName(StringPool.BLANK);
 			defaultContact.setMiddleName(StringPool.BLANK);
 			defaultContact.setLastName(StringPool.BLANK);
@@ -272,10 +277,10 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 				organizationId, locationId, false);
 
 			Role adminRole = RoleLocalServiceUtil.getRole(
-				companyId, Role.ADMINISTRATOR);
+				companyId, RoleImpl.ADMINISTRATOR);
 
 			Role powerUserRole = RoleLocalServiceUtil.getRole(
-				companyId, Role.POWER_USER);
+				companyId, RoleImpl.POWER_USER);
 
 			String[] roleIds = new String[] {
 				adminRole.getRoleId(), powerUserRole.getRoleId()
@@ -324,7 +329,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if (Validator.isNull(keywords)) {
 				return hits;
@@ -418,8 +423,8 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			account = AccountUtil.create(accountId);
 
 			account.setCreateDate(now);
-			account.setCompanyId(User.DEFAULT);
-			account.setUserId(User.getDefaultUserId(companyId));
+			account.setCompanyId(UserImpl.DEFAULT);
+			account.setUserId(UserImpl.getDefaultUserId(companyId));
 			account.setUserName(StringPool.BLANK);
 		}
 

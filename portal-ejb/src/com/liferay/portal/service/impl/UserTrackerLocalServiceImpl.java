@@ -22,14 +22,14 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.service.spring.CounterLocalServiceUtil;
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.service.UserTrackerLocalService;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
-import com.liferay.portal.service.spring.UserTrackerLocalService;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 

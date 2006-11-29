@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTracker;
+import com.liferay.portal.model.impl.UserTrackerImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class UserTrackerPersistence extends BasePersistence {
 	public UserTracker create(String userTrackerId) {
-		UserTracker userTracker = new UserTracker();
+		UserTracker userTracker = new UserTrackerImpl();
 		userTracker.setNew(true);
 		userTracker.setPrimaryKey(userTrackerId);
 
@@ -63,7 +64,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			UserTracker userTracker = (UserTracker)session.get(UserTracker.class,
+			UserTracker userTracker = (UserTracker)session.get(UserTrackerImpl.class,
 					userTrackerId);
 
 			if (userTracker == null) {
@@ -166,7 +167,7 @@ public class UserTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (UserTracker)session.get(UserTracker.class, userTrackerId);
+			return (UserTracker)session.get(UserTrackerImpl.class, userTrackerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -334,7 +335,7 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
-			UserTracker[] array = new UserTracker[3];
+			UserTracker[] array = new UserTrackerImpl[3];
 			array[0] = (UserTracker)objArray[0];
 			array[1] = (UserTracker)objArray[1];
 			array[2] = (UserTracker)objArray[2];
@@ -505,7 +506,7 @@ public class UserTrackerPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
-			UserTracker[] array = new UserTracker[3];
+			UserTracker[] array = new UserTrackerImpl[3];
 			array[0] = (UserTracker)objArray[0];
 			array[1] = (UserTracker)objArray[1];
 			array[2] = (UserTracker)objArray[2];

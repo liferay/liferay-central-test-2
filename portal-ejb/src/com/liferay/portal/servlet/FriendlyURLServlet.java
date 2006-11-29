@@ -24,16 +24,16 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -172,10 +172,10 @@ public class FriendlyURLServlet extends HttpServlet {
 				_companyId, friendlyURL);
 
 			if (_private) {
-				ownerId = Layout.PRIVATE + group.getGroupId();
+				ownerId = LayoutImpl.PRIVATE + group.getGroupId();
 			}
 			else {
-				ownerId = Layout.PUBLIC + group.getGroupId();
+				ownerId = LayoutImpl.PUBLIC + group.getGroupId();
 			}
 		}
 		catch (NoSuchGroupException nsge) {

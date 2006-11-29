@@ -25,12 +25,12 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.service.ContactLocalService;
+import com.liferay.portal.service.EmailAddressLocalServiceUtil;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
-import com.liferay.portal.service.spring.AddressLocalServiceUtil;
-import com.liferay.portal.service.spring.ContactLocalService;
-import com.liferay.portal.service.spring.EmailAddressLocalServiceUtil;
-import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
-import com.liferay.portal.service.spring.WebsiteLocalServiceUtil;
 
 /**
  * <a href="ContactLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

@@ -29,18 +29,20 @@ import com.liferay.portal.RequiredRoleException;
 import com.liferay.portal.UserActiveException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
-import com.liferay.portal.service.spring.PortletLocalServiceUtil;
-import com.liferay.portal.service.spring.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
@@ -60,7 +62,6 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -625,7 +626,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				defaultPathSB.append(StringPool.QUESTION);
 				defaultPathSB.append("p_l_id");
 				defaultPathSB.append(StringPool.EQUAL);
-				defaultPathSB.append(Layout.DEFAULT_PLID);
+				defaultPathSB.append(LayoutImpl.DEFAULT_PLID);
 			}
 
 			return defaultPathSB.toString();

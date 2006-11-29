@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchOrgLaborException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.OrgLabor;
+import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class OrgLaborPersistence extends BasePersistence {
 	public OrgLabor create(String orgLaborId) {
-		OrgLabor orgLabor = new OrgLabor();
+		OrgLabor orgLabor = new OrgLaborImpl();
 		orgLabor.setNew(true);
 		orgLabor.setPrimaryKey(orgLaborId);
 
@@ -63,7 +64,8 @@ public class OrgLaborPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			OrgLabor orgLabor = (OrgLabor)session.get(OrgLabor.class, orgLaborId);
+			OrgLabor orgLabor = (OrgLabor)session.get(OrgLaborImpl.class,
+					orgLaborId);
 
 			if (orgLabor == null) {
 				if (_log.isWarnEnabled()) {
@@ -162,7 +164,7 @@ public class OrgLaborPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (OrgLabor)session.get(OrgLabor.class, orgLaborId);
+			return (OrgLabor)session.get(OrgLaborImpl.class, orgLaborId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -341,7 +343,7 @@ public class OrgLaborPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, orgLabor);
-			OrgLabor[] array = new OrgLabor[3];
+			OrgLabor[] array = new OrgLaborImpl[3];
 			array[0] = (OrgLabor)objArray[0];
 			array[1] = (OrgLabor)objArray[1];
 			array[2] = (OrgLabor)objArray[2];

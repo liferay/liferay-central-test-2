@@ -24,12 +24,12 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.permission.GroupPermission;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetService;
 
 /**
  * <a href="LayoutSetServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +44,7 @@ public class LayoutSetServiceImpl
 			String ownerId, String themeId, String colorSchemeId)
 		throws PortalException, SystemException {
 
-        String groupId = Layout.getGroupId(ownerId);
+        String groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
@@ -56,7 +56,7 @@ public class LayoutSetServiceImpl
     public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
         throws PortalException, SystemException {
 
-        String groupId = Layout.getGroupId(ownerId);
+        String groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);

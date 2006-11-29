@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class PortletPreferencesPersistence extends BasePersistence {
 	public PortletPreferences create(PortletPreferencesPK portletPreferencesPK) {
-		PortletPreferences portletPreferences = new PortletPreferences();
+		PortletPreferences portletPreferences = new PortletPreferencesImpl();
 		portletPreferences.setNew(true);
 		portletPreferences.setPrimaryKey(portletPreferencesPK);
 
@@ -63,7 +64,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferences.class,
+			PortletPreferences portletPreferences = (PortletPreferences)session.get(PortletPreferencesImpl.class,
 					portletPreferencesPK);
 
 			if (portletPreferences == null) {
@@ -169,7 +170,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (PortletPreferences)session.get(PortletPreferences.class,
+			return (PortletPreferences)session.get(PortletPreferencesImpl.class,
 				portletPreferencesPK);
 		}
 		catch (HibernateException he) {
@@ -342,7 +343,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
-			PortletPreferences[] array = new PortletPreferences[3];
+			PortletPreferences[] array = new PortletPreferencesImpl[3];
 			array[0] = (PortletPreferences)objArray[0];
 			array[1] = (PortletPreferences)objArray[1];
 			array[2] = (PortletPreferences)objArray[2];
@@ -519,7 +520,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
-			PortletPreferences[] array = new PortletPreferences[3];
+			PortletPreferences[] array = new PortletPreferencesImpl[3];
 			array[0] = (PortletPreferences)objArray[0];
 			array[1] = (PortletPreferences)objArray[1];
 			array[2] = (PortletPreferences)objArray[2];
@@ -742,7 +743,7 @@ public class PortletPreferencesPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
-			PortletPreferences[] array = new PortletPreferences[3];
+			PortletPreferences[] array = new PortletPreferencesImpl[3];
 			array[0] = (PortletPreferences)objArray[0];
 			array[1] = (PortletPreferences)objArray[1];
 			array[2] = (PortletPreferences)objArray[2];

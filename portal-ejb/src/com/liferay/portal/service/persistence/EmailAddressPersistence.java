@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchEmailAddressException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class EmailAddressPersistence extends BasePersistence {
 	public EmailAddress create(String emailAddressId) {
-		EmailAddress emailAddress = new EmailAddress();
+		EmailAddress emailAddress = new EmailAddressImpl();
 		emailAddress.setNew(true);
 		emailAddress.setPrimaryKey(emailAddressId);
 
@@ -63,7 +64,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddress.class,
+			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
 					emailAddressId);
 
 			if (emailAddress == null) {
@@ -167,7 +168,8 @@ public class EmailAddressPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (EmailAddress)session.get(EmailAddress.class, emailAddressId);
+			return (EmailAddress)session.get(EmailAddressImpl.class,
+				emailAddressId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -345,7 +347,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
-			EmailAddress[] array = new EmailAddress[3];
+			EmailAddress[] array = new EmailAddressImpl[3];
 			array[0] = (EmailAddress)objArray[0];
 			array[1] = (EmailAddress)objArray[1];
 			array[2] = (EmailAddress)objArray[2];
@@ -526,7 +528,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
-			EmailAddress[] array = new EmailAddress[3];
+			EmailAddress[] array = new EmailAddressImpl[3];
 			array[0] = (EmailAddress)objArray[0];
 			array[1] = (EmailAddress)objArray[1];
 			array[2] = (EmailAddress)objArray[2];
@@ -755,7 +757,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
-			EmailAddress[] array = new EmailAddress[3];
+			EmailAddress[] array = new EmailAddressImpl[3];
 			array[0] = (EmailAddress)objArray[0];
 			array[1] = (EmailAddress)objArray[1];
 			array[2] = (EmailAddress)objArray[2];
@@ -1031,7 +1033,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
-			EmailAddress[] array = new EmailAddress[3];
+			EmailAddress[] array = new EmailAddressImpl[3];
 			array[0] = (EmailAddress)objArray[0];
 			array[1] = (EmailAddress)objArray[1];
 			array[2] = (EmailAddress)objArray[2];
@@ -1329,7 +1331,7 @@ public class EmailAddressPersistence extends BasePersistence {
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					emailAddress);
-			EmailAddress[] array = new EmailAddress[3];
+			EmailAddress[] array = new EmailAddressImpl[3];
 			array[0] = (EmailAddress)objArray[0];
 			array[1] = (EmailAddress)objArray[1];
 			array[2] = (EmailAddress)objArray[2];

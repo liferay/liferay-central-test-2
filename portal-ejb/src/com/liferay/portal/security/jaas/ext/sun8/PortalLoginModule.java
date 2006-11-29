@@ -23,7 +23,7 @@
 package com.liferay.portal.security.jaas.ext.sun8;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import com.sun.enterprise.security.auth.login.PasswordLoginModule;
 

@@ -45,8 +45,8 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences remove(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -142,8 +142,8 @@ public class PortletPreferencesUtil {
 
 	public static com.liferay.portal.model.PortletPreferences findByPrimaryKey(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByPrimaryKey(portletPreferencesPK);
 	}
 
@@ -164,33 +164,33 @@ public class PortletPreferencesUtil {
 	}
 
 	public static java.util.List findByLayoutId(java.lang.String layoutId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByLayoutId(layoutId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByLayoutId_First(
 		java.lang.String layoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByLayoutId_First(layoutId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByLayoutId_Last(
 		java.lang.String layoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByLayoutId_Last(layoutId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences[] findByLayoutId_PrevAndNext(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK,
 		java.lang.String layoutId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByLayoutId_PrevAndNext(portletPreferencesPK,
 			layoutId, obc);
 	}
@@ -206,33 +206,33 @@ public class PortletPreferencesUtil {
 	}
 
 	public static java.util.List findByOwnerId(java.lang.String ownerId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOwnerId(ownerId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByOwnerId_First(
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByOwnerId_First(ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByOwnerId_Last(
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByOwnerId_Last(ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences[] findByOwnerId_PrevAndNext(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK,
 		java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByOwnerId_PrevAndNext(portletPreferencesPK,
 			ownerId, obc);
 	}
@@ -250,33 +250,33 @@ public class PortletPreferencesUtil {
 
 	public static java.util.List findByL_O(java.lang.String layoutId,
 		java.lang.String ownerId, int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByL_O(layoutId, ownerId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByL_O_First(
 		java.lang.String layoutId, java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByL_O_First(layoutId, ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences findByL_O_Last(
 		java.lang.String layoutId, java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByL_O_Last(layoutId, ownerId, obc);
 	}
 
 	public static com.liferay.portal.model.PortletPreferences[] findByL_O_PrevAndNext(
 		com.liferay.portal.service.persistence.PortletPreferencesPK portletPreferencesPK,
 		java.lang.String layoutId, java.lang.String ownerId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchPortletPreferencesException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchPortletPreferencesException {
 		return getPersistence().findByL_O_PrevAndNext(portletPreferencesPK,
 			layoutId, ownerId, obc);
 	}
@@ -292,7 +292,7 @@ public class PortletPreferencesUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

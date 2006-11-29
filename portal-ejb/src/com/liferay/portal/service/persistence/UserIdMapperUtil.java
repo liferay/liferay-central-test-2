@@ -45,8 +45,8 @@ public class UserIdMapperUtil {
 
 	public static com.liferay.portal.model.UserIdMapper remove(
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -141,8 +141,8 @@ public class UserIdMapperUtil {
 
 	public static com.liferay.portal.model.UserIdMapper findByPrimaryKey(
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
 		return getPersistence().findByPrimaryKey(userIdMapperPK);
 	}
 
@@ -163,33 +163,33 @@ public class UserIdMapperUtil {
 	}
 
 	public static java.util.List findByUserId(java.lang.String userId,
-		int begin, int end, com.liferay.util.dao.hibernate.OrderByComparator obc)
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper findByUserId_First(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
 		return getPersistence().findByUserId_First(userId, obc);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper findByUserId_Last(
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
 		return getPersistence().findByUserId_Last(userId, obc);
 	}
 
 	public static com.liferay.portal.model.UserIdMapper[] findByUserId_PrevAndNext(
 		com.liferay.portal.service.persistence.UserIdMapperPK userIdMapperPK,
 		java.lang.String userId,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
-		throws com.liferay.portal.NoSuchUserIdMapperException, 
-			com.liferay.portal.SystemException {
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchUserIdMapperException {
 		return getPersistence().findByUserId_PrevAndNext(userIdMapperPK,
 			userId, obc);
 	}
@@ -205,7 +205,7 @@ public class UserIdMapperUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

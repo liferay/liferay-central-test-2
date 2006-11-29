@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.OrgLaborServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.OrgLaborServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,7 +36,7 @@ import java.rmi.RemoteException;
  *
  */
 public class OrgLaborServiceSoap {
-	public static com.liferay.portal.model.OrgLaborModel addOrgLabor(
+	public static com.liferay.portal.model.OrgLaborSoap addOrgLabor(
 		java.lang.String organizationId, java.lang.String typeId, int sunOpen,
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
@@ -48,7 +47,7 @@ public class OrgLaborServiceSoap {
 					tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
 					friClose, satOpen, satClose);
 
-			return returnValue;
+			return com.liferay.portal.model.OrgLaborSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -69,12 +68,12 @@ public class OrgLaborServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrgLaborModel getOrgLabor(
+	public static com.liferay.portal.model.OrgLaborSoap getOrgLabor(
 		java.lang.String orgLaborId) throws RemoteException {
 		try {
 			com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.getOrgLabor(orgLaborId);
 
-			return returnValue;
+			return com.liferay.portal.model.OrgLaborSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -83,12 +82,12 @@ public class OrgLaborServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrgLaborModel[] getOrgLabors(
+	public static com.liferay.portal.model.OrgLaborSoap[] getOrgLabors(
 		java.lang.String organizationId) throws RemoteException {
 		try {
 			java.util.List returnValue = OrgLaborServiceUtil.getOrgLabors(organizationId);
 
-			return (com.liferay.portal.model.OrgLabor[])returnValue.toArray(new com.liferay.portal.model.OrgLabor[0]);
+			return com.liferay.portal.model.OrgLaborSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -97,7 +96,7 @@ public class OrgLaborServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.OrgLaborModel updateOrgLabor(
+	public static com.liferay.portal.model.OrgLaborSoap updateOrgLabor(
 		java.lang.String orgLaborId, int sunOpen, int sunClose, int monOpen,
 		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
@@ -108,7 +107,7 @@ public class OrgLaborServiceSoap {
 					wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
 					satOpen, satClose);
 
-			return returnValue;
+			return com.liferay.portal.model.OrgLaborSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -117,5 +116,5 @@ public class OrgLaborServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(OrgLaborServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(OrgLaborServiceSoap.class);
 }

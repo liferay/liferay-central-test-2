@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.PortletServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.PortletServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,14 +36,14 @@ import java.rmi.RemoteException;
  *
  */
 public class PortletServiceSoap {
-	public static com.liferay.portal.model.PortletModel updatePortlet(
+	public static com.liferay.portal.model.PortletSoap updatePortlet(
 		java.lang.String companyId, java.lang.String portletId,
 		java.lang.String roles, boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.Portlet returnValue = PortletServiceUtil.updatePortlet(companyId,
 					portletId, roles, active);
 
-			return returnValue;
+			return com.liferay.portal.model.PortletSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -53,5 +52,5 @@ public class PortletServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(PortletServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(PortletServiceSoap.class);
 }

@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.UserServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.UserServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -73,7 +72,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel addUser(
+	public static com.liferay.portal.model.UserSoap addUser(
 		java.lang.String companyId, boolean autoUserId,
 		java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
@@ -92,7 +91,7 @@ public class UserServiceSoap {
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 					jobTitle, organizationId, locationId);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -101,7 +100,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel addUser(
+	public static com.liferay.portal.model.UserSoap addUser(
 		java.lang.String companyId, boolean autoUserId,
 		java.lang.String userId, boolean autoPassword,
 		java.lang.String password1, java.lang.String password2,
@@ -121,7 +120,7 @@ public class UserServiceSoap {
 					suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
 					jobTitle, organizationId, locationId, sendEmail);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -154,12 +153,12 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel[] getGroupUsers(
+	public static com.liferay.portal.model.UserSoap[] getGroupUsers(
 		java.lang.String groupId) throws RemoteException {
 		try {
 			java.util.List returnValue = UserServiceUtil.getGroupUsers(groupId);
 
-			return (com.liferay.portal.model.User[])returnValue.toArray(new com.liferay.portal.model.User[0]);
+			return com.liferay.portal.model.UserSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -168,12 +167,12 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel[] getRoleUsers(
+	public static com.liferay.portal.model.UserSoap[] getRoleUsers(
 		java.lang.String roleId) throws RemoteException {
 		try {
 			java.util.List returnValue = UserServiceUtil.getRoleUsers(roleId);
 
-			return (com.liferay.portal.model.User[])returnValue.toArray(new com.liferay.portal.model.User[0]);
+			return com.liferay.portal.model.UserSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -182,14 +181,14 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel getUserByEmailAddress(
+	public static com.liferay.portal.model.UserSoap getUserByEmailAddress(
 		java.lang.String companyId, java.lang.String emailAddress)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserByEmailAddress(companyId,
 					emailAddress);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -198,12 +197,12 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel getUserById(
+	public static com.liferay.portal.model.UserSoap getUserById(
 		java.lang.String userId) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.getUserById(userId);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -312,13 +311,13 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel updateActive(
+	public static com.liferay.portal.model.UserSoap updateActive(
 		java.lang.String userId, boolean active) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateActive(userId,
 					active);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -327,14 +326,14 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel updateAgreedToTermsOfUse(
+	public static com.liferay.portal.model.UserSoap updateAgreedToTermsOfUse(
 		java.lang.String userId, boolean agreedToTermsOfUse)
 		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateAgreedToTermsOfUse(userId,
 					agreedToTermsOfUse);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -343,7 +342,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel updatePassword(
+	public static com.liferay.portal.model.UserSoap updatePassword(
 		java.lang.String userId, java.lang.String password1,
 		java.lang.String password2, boolean passwordReset)
 		throws RemoteException {
@@ -351,7 +350,7 @@ public class UserServiceSoap {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updatePassword(userId,
 					password1, password2, passwordReset);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -372,7 +371,7 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.UserModel updateUser(
+	public static com.liferay.portal.model.UserSoap updateUser(
 		java.lang.String userId, java.lang.String password,
 		java.lang.String emailAddress, java.lang.String languageId,
 		java.lang.String timeZoneId, java.lang.String greeting,
@@ -394,7 +393,7 @@ public class UserServiceSoap {
 					birthdayDay, birthdayYear, smsSn, aimSn, icqSn, jabberSn,
 					msnSn, skypeSn, ymSn, jobTitle, organizationId, locationId);
 
-			return returnValue;
+			return com.liferay.portal.model.UserSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -403,5 +402,5 @@ public class UserServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UserServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(UserServiceSoap.class);
 }

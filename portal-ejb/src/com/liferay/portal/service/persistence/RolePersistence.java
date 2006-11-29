@@ -24,12 +24,13 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -63,7 +64,7 @@ import java.util.List;
  */
 public class RolePersistence extends BasePersistence {
 	public Role create(String roleId) {
-		Role role = new Role();
+		Role role = new RoleImpl();
 		role.setNew(true);
 		role.setPrimaryKey(roleId);
 
@@ -77,7 +78,7 @@ public class RolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Role role = (Role)session.get(Role.class, roleId);
+			Role role = (Role)session.get(RoleImpl.class, roleId);
 
 			if (role == null) {
 				if (_log.isWarnEnabled()) {
@@ -176,7 +177,7 @@ public class RolePersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Role)session.get(Role.class, roleId);
+			return (Role)session.get(RoleImpl.class, roleId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -350,7 +351,7 @@ public class RolePersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, role);
-			Role[] array = new Role[3];
+			Role[] array = new RoleImpl[3];
 			array[0] = (Role)objArray[0];
 			array[1] = (Role)objArray[1];
 			array[2] = (Role)objArray[2];
@@ -825,7 +826,7 @@ public class RolePersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Group_", com.liferay.portal.model.Group.class);
+			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1056,7 +1057,8 @@ public class RolePersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("Permission_", com.liferay.portal.model.Permission.class);
+			q.addEntity("Permission_",
+				com.liferay.portal.model.impl.PermissionImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);
@@ -1288,7 +1290,7 @@ public class RolePersistence extends BasePersistence {
 
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
-			q.addEntity("User_", com.liferay.portal.model.User.class);
+			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 			qPos.add(pk);

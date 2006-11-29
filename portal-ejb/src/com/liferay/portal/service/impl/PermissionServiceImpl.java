@@ -25,22 +25,22 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionCheckerBag;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
+import com.liferay.portal.service.PermissionService;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
-import com.liferay.portal.service.spring.PermissionLocalServiceUtil;
-import com.liferay.portal.service.spring.PermissionService;
-import com.liferay.portal.service.spring.ResourceLocalServiceUtil;
-import com.liferay.portal.service.spring.UserLocalServiceUtil;
 import com.liferay.util.StringUtil;
 
 /**
@@ -205,14 +205,14 @@ public class PermissionServiceImpl
 				user.getLocation().getOrganizationId(), ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
-				 (primKey.indexOf(Portlet.LAYOUT_SEPARATOR) != -1)) {
+				 (primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR) != -1)) {
 
-			int pos = primKey.indexOf(Portlet.LAYOUT_SEPARATOR);
+			int pos = primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR);
 
 			String plid = primKey.substring(0, pos);
 
 			String portletId = primKey.substring(
-				pos + Portlet.LAYOUT_SEPARATOR.length() , primKey.length());
+				pos + PortletImpl.LAYOUT_SEPARATOR.length() , primKey.length());
 
 			if (!PortletPermission.contains(
 					permissionChecker, plid, portletId,

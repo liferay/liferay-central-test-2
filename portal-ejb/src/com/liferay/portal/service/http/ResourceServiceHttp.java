@@ -22,15 +22,14 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.service.spring.ResourceServiceUtil;
-import com.liferay.portal.servlet.TunnelUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.ResourceServiceUtil;
+import com.liferay.portal.service.http.TunnelUtil;
 
 /**
  * <a href="ResourceServiceHttp.java.html"><b><i>View Source</i></b></a>
@@ -43,8 +42,8 @@ public class ResourceServiceHttp {
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
 		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = companyId;
 
@@ -87,12 +86,12 @@ public class ResourceServiceHttp {
 				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				if (e instanceof com.liferay.portal.SystemException) {
 					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -107,5 +106,5 @@ public class ResourceServiceHttp {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ResourceServiceHttp.class);
+	private static Log _log = LogFactoryUtil.getLog(ResourceServiceHttp.class);
 }

@@ -24,11 +24,12 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -49,7 +50,7 @@ import java.util.List;
  */
 public class LayoutPersistence extends BasePersistence {
 	public Layout create(LayoutPK layoutPK) {
-		Layout layout = new Layout();
+		Layout layout = new LayoutImpl();
 		layout.setNew(true);
 		layout.setPrimaryKey(layoutPK);
 
@@ -63,7 +64,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			Layout layout = (Layout)session.get(Layout.class, layoutPK);
+			Layout layout = (Layout)session.get(LayoutImpl.class, layoutPK);
 
 			if (layout == null) {
 				if (_log.isWarnEnabled()) {
@@ -161,7 +162,7 @@ public class LayoutPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (Layout)session.get(Layout.class, layoutPK);
+			return (Layout)session.get(LayoutImpl.class, layoutPK);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -339,7 +340,7 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
-			Layout[] array = new Layout[3];
+			Layout[] array = new LayoutImpl[3];
 			array[0] = (Layout)objArray[0];
 			array[1] = (Layout)objArray[1];
 			array[2] = (Layout)objArray[2];
@@ -568,7 +569,7 @@ public class LayoutPersistence extends BasePersistence {
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
-			Layout[] array = new Layout[3];
+			Layout[] array = new LayoutImpl[3];
 			array[0] = (Layout)objArray[0];
 			array[1] = (Layout)objArray[1];
 			array[2] = (Layout)objArray[2];

@@ -25,8 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.persistence.AccountUtil;
-import com.liferay.portal.service.spring.AccountLocalService;
 
 /**
  * <a href="AccountLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

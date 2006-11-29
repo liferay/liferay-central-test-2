@@ -25,6 +25,7 @@ package com.liferay.portal.service.persistence;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.impl.LayoutSetImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.StringUtil;
@@ -62,7 +63,7 @@ public class LayoutSetFinder {
 
 			q.setCacheable(true);
 
-			q.addEntity("LayoutSet", LayoutSet.class);
+			q.addEntity("LayoutSet", LayoutSetImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

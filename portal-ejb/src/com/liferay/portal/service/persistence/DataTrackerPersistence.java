@@ -24,10 +24,11 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchDataTrackerException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.model.DataTracker;
+import com.liferay.portal.model.impl.DataTrackerImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -47,7 +48,7 @@ import java.util.List;
  */
 public class DataTrackerPersistence extends BasePersistence {
 	public DataTracker create(String dataTrackerId) {
-		DataTracker dataTracker = new DataTracker();
+		DataTracker dataTracker = new DataTrackerImpl();
 		dataTracker.setNew(true);
 		dataTracker.setPrimaryKey(dataTrackerId);
 
@@ -61,7 +62,7 @@ public class DataTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			DataTracker dataTracker = (DataTracker)session.get(DataTracker.class,
+			DataTracker dataTracker = (DataTracker)session.get(DataTrackerImpl.class,
 					dataTrackerId);
 
 			if (dataTracker == null) {
@@ -164,7 +165,7 @@ public class DataTrackerPersistence extends BasePersistence {
 		try {
 			session = openSession();
 
-			return (DataTracker)session.get(DataTracker.class, dataTrackerId);
+			return (DataTracker)session.get(DataTrackerImpl.class, dataTrackerId);
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

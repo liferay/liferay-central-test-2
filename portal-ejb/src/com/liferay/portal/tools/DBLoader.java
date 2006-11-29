@@ -27,8 +27,8 @@ import Zql.ZInsert;
 import Zql.ZStatement;
 import Zql.ZqlParser;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.FileUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 

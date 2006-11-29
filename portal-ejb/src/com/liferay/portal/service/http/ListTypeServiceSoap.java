@@ -22,11 +22,10 @@
 
 package com.liferay.portal.service.http;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.service.spring.ListTypeServiceUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.service.ListTypeServiceUtil;
 
 import java.rmi.RemoteException;
 
@@ -37,12 +36,12 @@ import java.rmi.RemoteException;
  *
  */
 public class ListTypeServiceSoap {
-	public static com.liferay.portal.model.ListTypeModel getListType(
+	public static com.liferay.portal.model.ListTypeSoap getListType(
 		java.lang.String listTypeId) throws RemoteException {
 		try {
 			com.liferay.portal.model.ListType returnValue = ListTypeServiceUtil.getListType(listTypeId);
 
-			return returnValue;
+			return com.liferay.portal.model.ListTypeSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -51,12 +50,12 @@ public class ListTypeServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.ListTypeModel[] getListTypes(
+	public static com.liferay.portal.model.ListTypeSoap[] getListTypes(
 		java.lang.String type) throws RemoteException {
 		try {
 			java.util.List returnValue = ListTypeServiceUtil.getListTypes(type);
 
-			return (com.liferay.portal.model.ListType[])returnValue.toArray(new com.liferay.portal.model.ListType[0]);
+			return com.liferay.portal.model.ListTypeSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -77,5 +76,5 @@ public class ListTypeServiceSoap {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(ListTypeServiceSoap.class);
+	private static Log _log = LogFactoryUtil.getLog(ListTypeServiceSoap.class);
 }

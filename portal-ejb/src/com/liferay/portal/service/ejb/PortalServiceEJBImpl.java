@@ -22,9 +22,9 @@
 
 package com.liferay.portal.service.ejb;
 
+import com.liferay.portal.service.PortalService;
+import com.liferay.portal.service.PortalServiceFactory;
 import com.liferay.portal.service.impl.PrincipalSessionBean;
-import com.liferay.portal.service.spring.PortalService;
-import com.liferay.portal.service.spring.PortalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;

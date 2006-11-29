@@ -30,8 +30,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.service.spring.CompanyLocalServiceUtil;
-import com.liferay.portal.service.spring.LayoutSetLocalServiceUtil;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
@@ -139,12 +140,12 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (LayoutFriendlyURLException.validate(friendlyURL) > -1) {
+		if (LayoutImpl.validateFriendlyURL(friendlyURL) > -1) {
 			return false;
 		}
 
 		try {
-			LayoutFriendlyURLException.validateKeyword(friendlyURL);
+			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 		}
 		catch (LayoutFriendlyURLException lfurle) {
 			return false;

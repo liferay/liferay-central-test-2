@@ -45,8 +45,8 @@ public class AccountUtil {
 
 	public static com.liferay.portal.model.Account remove(
 		java.lang.String accountId)
-		throws com.liferay.portal.NoSuchAccountException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchAccountException {
 		ModelListener listener = _getListener();
 
 		if (listener != null) {
@@ -140,8 +140,8 @@ public class AccountUtil {
 
 	public static com.liferay.portal.model.Account findByPrimaryKey(
 		java.lang.String accountId)
-		throws com.liferay.portal.NoSuchAccountException, 
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchAccountException {
 		return getPersistence().findByPrimaryKey(accountId);
 	}
 
@@ -161,7 +161,7 @@ public class AccountUtil {
 	}
 
 	public static java.util.List findAll(int begin, int end,
-		com.liferay.util.dao.hibernate.OrderByComparator obc)
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.service.PhoneService;
 import com.liferay.portal.service.permission.CommonPermission;
 import com.liferay.portal.service.persistence.PhoneUtil;
-import com.liferay.portal.service.spring.PhoneLocalServiceUtil;
-import com.liferay.portal.service.spring.PhoneService;
 
 import java.util.List;
 

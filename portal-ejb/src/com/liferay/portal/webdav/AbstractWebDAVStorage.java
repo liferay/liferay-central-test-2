@@ -24,10 +24,10 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.spring.GroupLocalServiceUtil;
-import com.liferay.util.StringPool;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -493,7 +493,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 	}
 
 	protected String getPlid(String groupId) {
-		return Layout.PUBLIC + groupId + ".1";
+		return LayoutImpl.PUBLIC + groupId + ".1";
 	}
 
 	protected String[] getURIValues(String uri)

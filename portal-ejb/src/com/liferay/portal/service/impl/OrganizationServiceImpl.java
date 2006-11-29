@@ -26,13 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.OrganizationService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LocationPermission;
 import com.liferay.portal.service.permission.OrganizationPermission;
 import com.liferay.portal.service.permission.PortalPermission;
 import com.liferay.portal.service.persistence.OrganizationUtil;
-import com.liferay.portal.service.spring.OrganizationLocalServiceUtil;
-import com.liferay.portal.service.spring.OrganizationService;
 
 import java.util.List;
 
