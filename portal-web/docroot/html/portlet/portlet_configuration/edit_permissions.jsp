@@ -967,11 +967,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchContainer.getFirstName(), searchContainer.getMiddleName(), searchContainer.getLastName(), searchContainer.getEmailAddress(), searchContainer.isAndOperator());
+		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchContainer.getFirstName(), searchContainer.getMiddleName(), searchContainer.getLastName(), searchContainer.getEmailAddress(), searchContainer.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>

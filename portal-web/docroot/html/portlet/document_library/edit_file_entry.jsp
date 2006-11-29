@@ -68,7 +68,7 @@ portletURL.setParameter("name", name);
 		<c:when test="<%= hasLock.booleanValue() %>">
 
 			<%
-			String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntry.LOCK_EXPIRATION_TIME).toLowerCase();
+			String lockExpirationTime = LanguageUtil.getTimeDescription(pageContext, DLFileEntryImpl.LOCK_EXPIRATION_TIME).toLowerCase();
 			%>
 
 			<span class="portlet-msg-success" style="font-size: xx-small;">

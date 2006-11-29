@@ -41,6 +41,7 @@
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFileShortcut" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %><%--
+--%><%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" %><%--
