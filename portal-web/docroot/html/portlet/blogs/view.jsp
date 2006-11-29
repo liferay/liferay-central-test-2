@@ -29,7 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = BeanParamUtil.getString(category, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

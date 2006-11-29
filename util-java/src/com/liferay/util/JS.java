@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 

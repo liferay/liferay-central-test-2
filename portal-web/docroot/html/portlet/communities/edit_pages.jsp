@@ -34,18 +34,18 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 String groupId = group.getGroupId();
 
-String selPlid = ParamUtil.getString(request, "selPlid", Layout.DEFAULT_PARENT_LAYOUT_ID);
-String layoutId = Layout.getLayoutId(selPlid);
-String ownerId = Layout.getOwnerId(selPlid);
+String selPlid = ParamUtil.getString(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+String layoutId = LayoutImpl.getLayoutId(selPlid);
+String ownerId = LayoutImpl.getOwnerId(selPlid);
 
 boolean privateLayout = tabs2.equals("private");
 
 if (Validator.isNull(ownerId)) {
 	if (privateLayout) {
-		ownerId = Layout.PRIVATE + groupId;
+		ownerId = LayoutImpl.PRIVATE + groupId;
 	}
 	else {
-		ownerId = Layout.PUBLIC + groupId;
+		ownerId = LayoutImpl.PUBLIC + groupId;
 	}
 }
 
@@ -72,7 +72,7 @@ if (selLayout == null) {
 	}
 }
 
-String parentLayoutId = BeanParamUtil.getString(selLayout, request,  "parentLayoutId", Layout.DEFAULT_PARENT_LAYOUT_ID);
+String parentLayoutId = BeanParamUtil.getString(selLayout, request,  "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 LayoutLister layoutLister = new LayoutLister();
 
@@ -381,7 +381,7 @@ portletURL.setParameter("groupId", groupId);
 
 										String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-										String objId = Layout.getLayoutId(nodeValues[3]);
+										String objId = LayoutImpl.getLayoutId(nodeValues[3]);
 										String layoutName = nodeValues[4];
 
 										int depth = 0;
@@ -446,10 +446,10 @@ portletURL.setParameter("groupId", groupId);
 								<select name="<portlet:namespace />type">
 
 									<%
-									for (int i = 0; i < Layout.TYPES.length; i++) {
+									for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
 									%>
 
-										<option <%= type.equals(Layout.TYPES[i]) ? "selected" : "" %> value="<%= Layout.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + Layout.TYPES[i]) %></option>
+										<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
 
 									<%
 									}
@@ -576,7 +576,7 @@ portletURL.setParameter("groupId", groupId);
 				</script>
 			</c:when>
 			<c:when test='<%= tabs3.equals("children") %>'>
-				<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : Layout.DEFAULT_PARENT_LAYOUT_ID %>">
+				<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
 				<input name="<portlet:namespace />layoutIds" type="hidden" value="">
 
 				<%
@@ -608,10 +608,10 @@ portletURL.setParameter("groupId", groupId);
 						<select name="<portlet:namespace />type">
 
 							<%
-							for (int i = 0; i < Layout.TYPES.length; i++) {
+							for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
 							%>
 
-								<option <%= type.equals(Layout.TYPES[i]) ? "selected" : "" %> value="<%= Layout.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + Layout.TYPES[i]) %></option>
+								<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
 
 							<%
 							}
@@ -649,7 +649,7 @@ portletURL.setParameter("groupId", groupId);
 					selLayoutChildren = selLayout.getChildren();
 				}
 				else {
-					selLayoutChildren = LayoutLocalServiceUtil.getLayouts(ownerId, Layout.DEFAULT_PARENT_LAYOUT_ID);
+					selLayoutChildren = LayoutLocalServiceUtil.getLayouts(ownerId, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 				}
 				%>
 
@@ -875,7 +875,7 @@ portletURL.setParameter("groupId", groupId);
 					<td nowrap>
 
 						<%
-						String publicOwnerId = Layout.PUBLIC + Layout.getGroupId(ownerId);
+						String publicOwnerId = LayoutImpl.PUBLIC + LayoutImpl.getGroupId(ownerId);
 
 						LayoutSet publicLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(publicOwnerId);
 
@@ -893,7 +893,7 @@ portletURL.setParameter("groupId", groupId);
 					<td nowrap>
 
 						<%
-						String privateOwnerId = Layout.PRIVATE + Layout.getGroupId(ownerId);
+						String privateOwnerId = LayoutImpl.PRIVATE + LayoutImpl.getGroupId(ownerId);
 
 						LayoutSet privateLayoutSet = LayoutSetLocalServiceUtil.getLayoutSet(privateOwnerId);
 

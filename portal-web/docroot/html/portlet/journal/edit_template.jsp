@@ -48,7 +48,7 @@ if (Validator.isNotNull(structureId)) {
 
 String xsl = BeanParamUtil.getString(template, request, "xsl");
 
-String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplate.LANG_TYPE_XSL);
+String langType = BeanParamUtil.getString(template, request, "langType", JournalTemplateImpl.LANG_TYPE_XSL);
 
 boolean smallImage = BeanParamUtil.getBoolean(template, request, "smallImage");
 String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL");
@@ -216,10 +216,10 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<select name="<portlet:namespace />langType">
 
 			<%
-			for (int i = 0; i < JournalTemplate.LANG_TYPES.length; i++) {
+			for (int i = 0; i < JournalTemplateImpl.LANG_TYPES.length; i++) {
 			%>
 
-				<option <%= langType.equals(JournalTemplate.LANG_TYPES[i]) ? "selected" : "" %> value="<%= JournalTemplate.LANG_TYPES[i] %>"><%= JournalTemplate.LANG_TYPES[i].toUpperCase() %></option>
+				<option <%= langType.equals(JournalTemplateImpl.LANG_TYPES[i]) ? "selected" : "" %> value="<%= JournalTemplateImpl.LANG_TYPES[i] %>"><%= JournalTemplateImpl.LANG_TYPES[i].toUpperCase() %></option>
 
 			<%
 			}

@@ -68,10 +68,10 @@
 			<option value=""><%= LanguageUtil.get(pageContext, "all-events") %></option>
 
 			<%
-			for (int i = 0; i < CalEvent.TYPES.length; i++) {
+			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= eventType.equals(CalEvent.TYPES[i]) ? "selected" : "" %> value="<%= CalEvent.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEvent.TYPES[i]) %></option>
+				<option <%= eventType.equals(CalEventImpl.TYPES[i]) ? "selected" : "" %> value="<%= CalEventImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEventImpl.TYPES[i]) %></option>
 
 			<%
 			}

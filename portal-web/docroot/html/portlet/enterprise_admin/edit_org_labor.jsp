@@ -79,7 +79,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 			<option value=""></option>
 
 			<%
-			List orgLaborTypes = ListTypeServiceUtil.getListTypes(ListType.ORGANIZATION_SERVICE);
+			List orgLaborTypes = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_SERVICE);
 
 			for (int i = 0; i < orgLaborTypes.size(); i++) {
 				ListType suffix = (ListType)orgLaborTypes.get(i);

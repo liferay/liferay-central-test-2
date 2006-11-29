@@ -54,7 +54,7 @@ List layoutList = layoutView.getList();
 
 				String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				String objId = Layout.getLayoutId(nodeValues[3]);
+				String objId = LayoutImpl.getLayoutId(nodeValues[3]);
 				String layoutName = nodeValues[4];
 
 				int depth = 0;

@@ -14,6 +14,7 @@
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="mail-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-ejb/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-kernel/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="portal-service/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="test/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-bridges/src"/>
 	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="util-java/src"/>
@@ -43,10 +44,10 @@
 	<classpathentry kind="lib" path="lib/development/myfaces.jar"/>
 	<classpathentry kind="lib" path="lib/development/netscape.jar"/>
 	<classpathentry kind="lib" path="lib/development/ow_jonas_bootstrap.jar"/>
+	<classpathentry kind="lib" path="lib/development/qdox.jar"/>
 	<classpathentry kind="lib" path="lib/development/saxpath.jar"/>
 	<classpathentry kind="lib" path="lib/development/servlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/smtp.jar"/>
-	<classpathentry kind="lib" path="lib/development/xjavadoc.jar"/>
 	<classpathentry kind="lib" path="lib/development/zql.jar"/>
 	<classpathentry kind="lib" path="lib/global/portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/activemq.jar"/>

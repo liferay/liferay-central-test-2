@@ -22,9 +22,9 @@
 
 package com.liferay.util.servlet;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.security.Key;

@@ -79,7 +79,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input <%= type.equals(Group.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= Group.TYPE_COMMUNITY_OPEN %>" type="checkbox">
+		<input <%= type.equals(GroupImpl.TYPE_COMMUNITY_OPEN) ? "checked" : "" %> name="<portlet:namespace />type" value="<%= GroupImpl.TYPE_COMMUNITY_OPEN %>" type="checkbox">
 	</td>
 </tr>
 </table>

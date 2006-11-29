@@ -31,12 +31,12 @@ BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS
 
 String folderId = BeanParamUtil.getString(folder, request, "folderId");
 
-String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId", BookmarksFolder.DEFAULT_PARENT_FOLDER_ID);
+String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= BookmarksFolder.DEFAULT_PARENT_FOLDER_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
 
@@ -69,7 +69,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentFolderId.equals(BookmarksFolder.DEFAULT_PARENT_FOLDER_ID) %>">
+<c:if test="<%= !parentFolderId.equals(BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID) %>">
 	<%= BookmarksUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>

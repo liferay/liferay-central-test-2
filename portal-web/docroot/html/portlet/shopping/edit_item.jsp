@@ -31,7 +31,7 @@ ShoppingItem item = (ShoppingItem)request.getAttribute(WebKeys.SHOPPING_ITEM);
 
 String itemId = BeanParamUtil.getString(item, request, "itemId");
 
-String categoryId = BeanParamUtil.getString(item, request, "categoryId", ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = BeanParamUtil.getString(item, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 // Fields
 
@@ -477,7 +477,7 @@ for (int i = 0; i < pricesCount; i++) {
 		if (itemPrices[curPriceId] != null) {
 			int status = itemPrices[curPriceId].getStatus();
 
-			if (status == ShoppingItemPrice.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPrice.STATUS_ACTIVE) {
+			if (status == ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT || status == ShoppingItemPriceImpl.STATUS_ACTIVE) {
 				active = true;
 			}
 			else {
@@ -500,7 +500,7 @@ for (int i = 0; i < pricesCount; i++) {
 		if (itemPrices[curPriceId] != null) {
 			int status = itemPrices[curPriceId].getStatus();
 
-			if (status == ShoppingItemPrice.STATUS_ACTIVE_DEFAULT) {
+			if (status == ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
 				defaultPrice = true;
 			}
 			else {

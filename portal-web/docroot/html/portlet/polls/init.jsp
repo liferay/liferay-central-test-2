@@ -35,10 +35,10 @@
 --%><%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %><%--
 --%><%@ page import="com.liferay.portlet.polls.model.PollsVote" %><%--
 --%><%@ page import="com.liferay.portlet.polls.action.EditQuestionAction" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.util.PollsUtil" %><%--
 
 --%><%

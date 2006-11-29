@@ -63,14 +63,14 @@ Resource resource = null;
 
 if (Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource)) {
 	try {
-		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, group.getGroupId());
+		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, group.getGroupId());
 	}
 	catch (com.liferay.portal.NoSuchResourceException nsre) {
 		boolean portletActions = Validator.isNull(modelResource);
 
 		ResourceLocalServiceUtil.addResources(company.getCompanyId(), group.getGroupId(), selResource, portletActions);
 
-		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, group.getGroupId());
+		resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, group.getGroupId());
 	}
 }
 

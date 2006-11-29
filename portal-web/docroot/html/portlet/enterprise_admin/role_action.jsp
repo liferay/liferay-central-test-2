@@ -51,7 +51,7 @@ Role role = (Role)row.getObject();
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 </c:if>
 
-<c:if test="<%= !role.getName().equals(Role.ADMINISTRATOR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ADD_PERMISSIONS) %>">
+<c:if test="<%= !role.getName().equals(RoleImpl.ADMINISTRATOR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ADD_PERMISSIONS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editRolePermissionsURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />

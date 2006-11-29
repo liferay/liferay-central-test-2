@@ -30,7 +30,7 @@ DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER
 String folderId = BeanParamUtil.getString(folder, request, "folderId");
 
 if (Validator.isNull(folderId)) {
-	folderId = DLFolder.DEFAULT_PARENT_FOLDER_ID;
+	folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 }
 
 String groupId = BeanParamUtil.getString(folder, request, "groupId");

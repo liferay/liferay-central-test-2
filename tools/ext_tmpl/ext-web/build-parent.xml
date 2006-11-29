@@ -24,6 +24,7 @@
 		<unjar src="${project.dir}/ext-ear/modules/portal-ejb.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/global/portal-kernel.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/global/portal-service.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/util-java.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/util-wsrp.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib/util-taglib.jar" dest="${classpath.jsp}" />

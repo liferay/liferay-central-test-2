@@ -25,11 +25,11 @@
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPage.HTML_FORMAT) %>">
+		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.HTML_FORMAT) %>">
 			<%= wikiPage.getContent() %>
 		</c:if>
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPage.CLASSIC_WIKI_FORMAT) %>">
+		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) %>">
 
 			<%
 			PortletURL pageURL = renderResponse.createRenderURL();
@@ -40,7 +40,7 @@
 			<%= WikiUtil.convert(WikiUtil.getFilter(pageURL, node.getNodeId()), wikiPage.getContent()) %>
 		</c:if>
 
-		<c:if test="<%= wikiPage.getFormat().equals(WikiPage.PLAIN_TEXT_FORMAT) %>">
+		<c:if test="<%= wikiPage.getFormat().equals(WikiPageImpl.PLAIN_TEXT_FORMAT) %>">
 <pre>
 <%= wikiPage.getContent() %>
 </pre>

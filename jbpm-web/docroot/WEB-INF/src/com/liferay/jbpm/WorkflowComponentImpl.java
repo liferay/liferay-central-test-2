@@ -28,8 +28,8 @@ import com.liferay.jbpm.util.WorkflowUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.DocUtil;
 
@@ -605,7 +605,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 		else {
 			tasks = graphSession.findTaskInstancesBySearchTerms(
-				taskName, workflowName, assignedTo,	gtCreateDate, ltCreateDate,
+				taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
 				gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 				andOperator, begin, end);
 

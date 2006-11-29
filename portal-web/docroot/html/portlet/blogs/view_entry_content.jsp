@@ -24,7 +24,7 @@
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
-<c:if test="<%= (category == null) && !entry.getCategoryId().equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
+<c:if test="<%= (category == null) && !entry.getCategoryId().equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<tr>
 		<td>
 			<%= BlogsUtil.getBreadcrumbs(entry.getCategoryId(), pageContext, renderRequest, renderResponse) %>

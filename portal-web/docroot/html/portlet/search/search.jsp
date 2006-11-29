@@ -82,10 +82,10 @@ for (int i = 0; i < results.getLength(); i++) {
 	String portletLayoutId = null;
 
 	if (layout.isPrivateLayout()) {
-		portletLayoutId = Layout.PRIVATE + groupId + ".1";
+		portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
 	}
 	else {
-		portletLayoutId = Layout.PRIVATE + groupId + ".1";
+		portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
 	}
 
 	PortletURL rowURL = new PortletURLImpl(request, portletId, portletLayoutId, false);

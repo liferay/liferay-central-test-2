@@ -31,12 +31,12 @@ DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER
 
 String folderId = BeanParamUtil.getString(folder, request, "folderId");
 
-String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId", DLFolder.DEFAULT_PARENT_FOLDER_ID);
+String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeFolder() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= DLFolder.DEFAULT_PARENT_FOLDER_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentFolderId.value = "<%= DLFolderImpl.DEFAULT_PARENT_FOLDER_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentFolderName");
 
@@ -69,7 +69,7 @@ String parentFolderId = BeanParamUtil.getString(folder, request, "parentFolderId
 
 <liferay-ui:error exception="<%= FolderNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentFolderId.equals(DLFolder.DEFAULT_PARENT_FOLDER_ID) %>">
+<c:if test="<%= !parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) %>">
 	<%= DLUtil.getBreadcrumbs(parentFolderId, null, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>

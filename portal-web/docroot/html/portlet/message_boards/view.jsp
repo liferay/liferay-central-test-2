@@ -30,7 +30,7 @@ String tabs2 = ParamUtil.getString(request, "tabs2", "general");
 
 MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = BeanParamUtil.getString(category, request, "categoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 List categoryIds = new ArrayList();
 

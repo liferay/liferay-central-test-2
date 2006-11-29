@@ -20,67 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.search;
 
 import java.io.Serializable;
 
 /**
- * <a href="KeyValuePair.java.html"><b><i>View Source</i></b></a>
+ * <a href="Hits.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class KeyValuePair implements Comparable, Serializable {
+public interface Hits extends Serializable {
 
-	public KeyValuePair() {
-		this(null, null);
-	}
+	public long getStart();
 
-	public KeyValuePair(String key, String value) {
-		_key = key;
-		_value = value;
-	}
+	public void setStart(long start);
 
-	public String getKey() {
-		return _key;
-	}
+	public float getSearchTime();
 
-	public void setKey(String key) {
-		_key = key;
-	}
+	public void setSearchTime(float time);
 
-	public String getValue() {
-		return _value;
-	}
+	public Document[] getDocs();
 
-	public void setValue(String value) {
-		_value = value;
-	}
+	public void setDocs(Document[] docs);
 
-	public int compareTo(Object obj) {
-		KeyValuePair kvp = (KeyValuePair)obj;
+	public int getLength();
 
-		return _key.compareTo(kvp.getKey());
-	}
+	public void setLength(int length);
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
+	public float[] getScores();
 
-		KeyValuePair kvp = (KeyValuePair)obj;
+	public void setScores(float[] scores);
 
-		String key = kvp.getKey();
+	public void setScores(Float[] scores);
 
-		if (_key.equals(key)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+	public Document doc(int n);
 
-	private String _key;
-	private String _value;
+	public float score(int n);
+
+	public Hits subset(int begin, int end);
 
 }

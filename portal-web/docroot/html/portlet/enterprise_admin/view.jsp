@@ -332,7 +332,7 @@ portletURL.setParameter("tabs1", tabs1);
 				results.add(user.getLocation());
 			}
 			else {
-				String parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+				String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				String parentOrganizationComparator = StringPool.EQUAL;
 
 				if (!rootOrganization) {
@@ -341,13 +341,13 @@ portletURL.setParameter("tabs1", tabs1);
 						parentOrganizationComparator = StringPool.EQUAL;
 					}
 					else {
-						parentOrganizationId = ParamUtil.getString(request, "parentOrganizationId", Organization.DEFAULT_PARENT_ORGANIZATION_ID);
+						parentOrganizationId = ParamUtil.getString(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
 						if (Validator.isNull(parentOrganizationId)) {
-							parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+							parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 						}
 
-						if (parentOrganizationId.equals(Organization.DEFAULT_PARENT_ORGANIZATION_ID)) {
+						if (parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
 							parentOrganizationComparator = StringPool.NOT_EQUAL;
 						}
 					}

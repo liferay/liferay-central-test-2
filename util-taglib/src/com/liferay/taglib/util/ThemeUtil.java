@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -37,7 +38,6 @@ import com.liferay.util.BrowserSniffer_IW;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.GetterUtil_IW;
 import com.liferay.util.StaticFieldGetter;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil_IW;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;

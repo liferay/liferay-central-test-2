@@ -60,7 +60,7 @@
 				Layout copiableLayout = null;
 
 				try {
-					copiableLayout = LayoutLocalServiceUtil.getLayout(Layout.getLayoutId(objId), Layout.getOwnerId(objId));
+					copiableLayout = LayoutLocalServiceUtil.getLayout(LayoutImpl.getLayoutId(objId), LayoutImpl.getOwnerId(objId));
 				}
 				catch (Exception e) {
 				}

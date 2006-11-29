@@ -20,57 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.search;
 
 import java.io.Serializable;
 
 /**
- * <a href="ObjectValuePair.java.html"><b><i>View Source</i></b></a>
+ * <a href="Document.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ObjectValuePair implements Serializable {
+public interface Document extends Serializable {
 
-	public ObjectValuePair(Object key, Object value) {
-		_key = key;
-		_value = value;
-	}
-
-	public Object getKey() {
-		return _key;
-	}
-
-	public void setKey(Object key) {
-		_key = key;
-	}
-
-	public Object getValue() {
-		return _value;
-	}
-
-	public void setValue(Object value) {
-		_value = value;
-	}
-
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		ObjectValuePair ovp = (ObjectValuePair)obj;
-
-		Object key = ovp.getKey();
-
-		if (_key.equals(key)) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	private Object _key;
-	private Object _value;
+	public String get(String name);
 
 }

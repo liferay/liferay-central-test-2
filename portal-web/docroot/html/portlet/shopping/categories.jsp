@@ -25,7 +25,7 @@
 <%
 ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPPING_CATEGORY);
 
-String categoryId = BeanParamUtil.getString(category, request, "categoryId", ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = BeanParamUtil.getString(category, request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 List categoryIds = new ArrayList();
 

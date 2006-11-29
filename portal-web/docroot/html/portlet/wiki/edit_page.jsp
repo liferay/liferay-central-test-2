@@ -39,14 +39,14 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 <script type="text/javascript">
 	function <portlet:namespace />changeFormat(formatSel) {
-		<c:if test="<%= format.equals(WikiPage.HTML_FORMAT) %>">
+		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = parent.<portlet:namespace />editor.getHTML();
 		</c:if>
 
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	<c:if test="<%= format.equals(WikiPage.HTML_FORMAT) %>">
+	<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 		function initEditor() {
 			return "<%= UnicodeFormatter.toString(content) %>";
 		}
@@ -55,7 +55,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 	function <portlet:namespace />savePage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
 
-		<c:if test="<%= format.equals(WikiPage.HTML_FORMAT) %>">
+		<c:if test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 			document.<portlet:namespace />fm.<portlet:namespace />content.value = parent.<portlet:namespace />editor.getHTML();
 		</c:if>
 
@@ -81,9 +81,9 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<select name="<portlet:namespace />format" onChange="<portlet:namespace />changeFormat(this);">
-			<option <%= format.equals(WikiPage.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><%= LanguageUtil.get(pageContext, "classic-wiki") %></option>
-			<option <%= format.equals(WikiPage.HTML_FORMAT) ? "selected" : "" %> value="html">HTML</option>
-			<option <%= format.equals(WikiPage.PLAIN_TEXT_FORMAT) ? "selected" : "" %> value="plain_text"><%= LanguageUtil.get(pageContext, "plain-text") %></option>
+			<option <%= format.equals(WikiPageImpl.CLASSIC_WIKI_FORMAT) ? "selected" : "" %> value="classic_wiki"><%= LanguageUtil.get(pageContext, "classic-wiki") %></option>
+			<option <%= format.equals(WikiPageImpl.HTML_FORMAT) ? "selected" : "" %> value="html">HTML</option>
+			<option <%= format.equals(WikiPageImpl.PLAIN_TEXT_FORMAT) ? "selected" : "" %> value="plain_text"><%= LanguageUtil.get(pageContext, "plain-text") %></option>
 		</select>
 	</td>
 </tr>
@@ -92,7 +92,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 <br>
 
 <c:choose>
-	<c:when test="<%= format.equals(WikiPage.HTML_FORMAT) %>">
+	<c:when test="<%= format.equals(WikiPageImpl.HTML_FORMAT) %>">
 		<liferay-ui:input-editor editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>" width="100%" />
 
 		<input name="<portlet:namespace />content" type="hidden" value="">
@@ -110,7 +110,7 @@ String format = BeanParamUtil.getString(wikiPage, request, "format");
 
 </form>
 
-<c:if test="<%= !format.equals(WikiPage.HTML_FORMAT) %>">
+<c:if test="<%= !format.equals(WikiPageImpl.HTML_FORMAT) %>">
 	<script type="text/javascript">
 		document.<portlet:namespace />fm.<portlet:namespace />content.focus();
 	</script>

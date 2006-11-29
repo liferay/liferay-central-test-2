@@ -24,7 +24,7 @@ package com.liferay.taglib.portletext;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
@@ -86,8 +86,8 @@ public class RuntimeTag extends TagSupport {
 			renderResponse = (RenderResponse)portletResponse;
 		}
 
-		String rootPortletId = Portlet.getRootPortletId(portletName);
-		String instanceId = Portlet.getInstanceId(portletName);
+		String rootPortletId = PortletImpl.getRootPortletId(portletName);
+		String instanceId = PortletImpl.getInstanceId(portletName);
 
 		StringBuffer renderPortletSB = new StringBuffer();
 

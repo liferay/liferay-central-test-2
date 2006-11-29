@@ -25,16 +25,19 @@
 		<portlet id="73" />
 		<portlet id="85" />
 	</category>
-	<category name="category.community">
+	<category name="category.collaboration">
 		<portlet id="1" />
 		<portlet id="8" />
-		<portlet id="11" />
 		<portlet id="19" />
 		<portlet id="24" />
+		<portlet id="33" />
+		<portlet id="36" />
+		<portlet id="52" />
+	</category>
+	<category name="category.community">
+		<portlet id="11" />
 		<portlet id="28" />
 		<portlet id="29" />
-		<portlet id="33" />
-		<portlet id="52" />
 		<portlet id="83" />
 	</category>
 	<category name="category.entertainment">

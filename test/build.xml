@@ -3,45 +3,92 @@
 <project name="test" basedir="." default="test">
 	<import file="../build-common-java.xml" />
 
-	<target name="test" depends="compile">
+	<path id="web-lib.classpath">
+	</path>
+
+	<path id="test-junit.classpath">
+		<pathelement path="${project.dir}/lib/development/junit.jar" />
+		<pathelement path="${project.dir}/test/classes" />
+	</path>
+
+	<path id="test-ejb.classpath">
+		<path refid="project.classpath" />
+		<fileset dir="${app.server.dir}/lib" includes="*.jar" />
+		<fileset dir="${app.server.dir}/server/default/lib" includes="*.jar" />
+	</path>
+
+	<path id="test-http.classpath">
+		<path refid="project.classpath" />
+	</path>
+
+	<path id="test-soap.classpath">
+		<path refid="web.classpath" />
+		<path refid="test-junit.classpath" />
+		<pathelement path="${project.dir}/lib/development/activation.jar" />
+		<pathelement path="${project.dir}/lib/development/mail.jar" />
+		<pathelement path="${project.dir}/lib/portal/axis.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-discovery.jar" />
+		<pathelement path="${project.dir}/lib/portal/commons-logging.jar" />
+		<pathelement path="${project.dir}/lib/portal/jaxrpc.jar" />
+		<pathelement path="${project.dir}/lib/portal/saaj.jar" />
+		<pathelement path="${project.dir}/lib/portal/wsdl4j.jar" />
+		<pathelement path="${project.dir}/portal-client/portal-client.jar" />
+	</path>
+
+	<target name="compile">
+		<mkdir dir="classes" />
+
+		<path id="test-compile.classpath">
+			<path refid="test-soap.classpath" />
+		</path>
+
+		<javac
+			classpathref="test-compile.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="classes"
+			fork="${javac.fork}"
+			memoryMaximumSize="${javac.memoryMaximumSize}"
+			nowarn="on"
+			srcdir="src"
+		/>
+	</target>
+
+	<target name="test">
 		<echo message="These tests require a running Liferay instance. Make sure that Liferay is" />
 		<echo message="listening on a host that matches what is set in test.properties." />
 		<echo message="" />
 
-		<path id="ejb.classpath">
-			<fileset dir="${app.server.dir}/lib" includes="*.jar" />
-			<fileset dir="${app.server.dir}/server/default/lib" includes="*.jar" />
-			<path refid="project.classpath" />
-		</path>
+		<antcall target="test-ejb" />
+		<antcall target="test-http" />
+		<antcall target="test-soap" />
+	</target>
 
+	<target name="test-ejb" depends="compile">
 		<java
 			classname="com.liferay.test.EJBTests"
-			classpathref="ejb.classpath"
+			classpathref="test-ejb.classpath"
 			fork="true"
 			newenvironment="true"
 		>
 			<jvmarg value="-Djava.security.auth.login.config=${app.server.dir}/client/auth.conf" />
 		</java>
+	</target>
 
+	<target name="test-http" depends="compile">
 		<java
 			classname="com.liferay.test.HttpTests"
-			classpathref="project.classpath"
+			classpathref="test-http.classpath"
 			fork="true"
 			newenvironment="true"
 		/>
+	</target>
 
-		<path id="junit.classpath">
-			<pathelement path="${project.dir}/lib/development/junit.jar;${project.dir}/test/classes" />
-		</path>
-
-		<path id="portal-client.classpath">
-			<pathelement path="${project.dir}/lib/development/activation.jar;${project.dir}/lib/development/mail.jar;${project.dir}/lib/portal/axis.jar;${project.dir}/lib/portal/commons-discovery.jar;${project.dir}/lib/portal/commons-logging.jar;${project.dir}/lib/portal/concurrent.jar;${project.dir}/lib/portal/jaxrpc.jar;${project.dir}/lib/portal/saaj.jar;${project.dir}/lib/portal/trove.jar;${project.dir}/lib/portal/wsdl4j.jar;${project.dir}/portal-client/portal-client.jar;${project.dir}/util-java/util-java.jar" />
-			<path refid="junit.classpath" />
-		</path>
-
+	<target name="test-soap" depends="compile">
 		<java
 			classname="com.liferay.test.SoapTests"
-			classpathref="portal-client.classpath"
+			classpathref="test-soap.classpath"
 			fork="true"
 			newenvironment="true"
 		/>

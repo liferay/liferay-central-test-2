@@ -30,11 +30,11 @@
 --%><%@ page import="com.liferay.portlet.polls.QuestionExpiredException" %><%--
 --%><%@ page import="com.liferay.portlet.polls.model.PollsChoice" %><%--
 --%><%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.polls.service.PollsVoteServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsChoiceLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsQuestionLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsVoteLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.spring.PollsVoteServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.polls.util.PollsUtil" %><%--
 
 --%><%

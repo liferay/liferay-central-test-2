@@ -75,7 +75,7 @@ String typeId = BeanParamUtil.getString(emailAddress, request, "typeId");
 			<option value=""></option>
 
 			<%
-			List emailAddressTypes = ListTypeServiceUtil.getListTypes(className + ListType.EMAIL_ADDRESS);
+			List emailAddressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.EMAIL_ADDRESS);
 
 			for (int i = 0; i < emailAddressTypes.size(); i++) {
 				ListType suffix = (ListType)emailAddressTypes.get(i);

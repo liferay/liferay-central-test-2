@@ -95,10 +95,10 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < JournalArticle.TYPES.length; i++) {
+			for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= displayTerms.getType().equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
+				<option <%= displayTerms.getType().equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
 
 			<%
 			}

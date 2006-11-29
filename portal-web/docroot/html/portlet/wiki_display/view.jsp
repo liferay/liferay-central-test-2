@@ -32,7 +32,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
 	<td>
-		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= WikiPage.FRONT_PAGE %>" /></portlet:renderURL>">
+		<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki_display/view" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
 		<%= node.getName() %>
 		</a>
 

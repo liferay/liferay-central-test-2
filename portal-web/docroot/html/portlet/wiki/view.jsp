@@ -63,7 +63,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	rowURL.setParameter("struts_action", "/wiki/view_page");
 	rowURL.setParameter("nodeId", node.getNodeId());
-	rowURL.setParameter("title", WikiPage.FRONT_PAGE);
+	rowURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
 	// Name
 

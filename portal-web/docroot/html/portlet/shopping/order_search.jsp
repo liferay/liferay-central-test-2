@@ -62,10 +62,10 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < ShoppingOrder.STATUSES.length; i++) {
+			for (int i = 0; i < ShoppingOrderImpl.STATUSES.length; i++) {
 			%>
 
-				<option <%= displayTerms.getStatus().equals(ShoppingOrder.STATUSES[i]) ? "selected" : "" %> value="<%= ShoppingOrder.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrder.STATUSES[i]) %></option>
+				<option <%= displayTerms.getStatus().equals(ShoppingOrderImpl.STATUSES[i]) ? "selected" : "" %> value="<%= ShoppingOrderImpl.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrderImpl.STATUSES[i]) %></option>
 
 			<%
 			}

@@ -31,7 +31,7 @@ BlogsCategory category = (BlogsCategory)request.getAttribute(WebKeys.BLOGS_CATEG
 
 String categoryId = BeanParamUtil.getString(category, request, "categoryId");
 
-String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
+String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <script type="text/javascript">
@@ -51,7 +51,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentCategoryId.equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
+<c:if test="<%= !parentCategoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<%= BlogsUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>

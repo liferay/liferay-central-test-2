@@ -22,7 +22,7 @@
 
 package com.liferay.jbpm.util;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 

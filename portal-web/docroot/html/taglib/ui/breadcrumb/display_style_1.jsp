@@ -52,7 +52,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	Layout layoutParent = null;
 	String layoutParentId = selLayout.getParentLayoutId();
 
-	if (!layoutParentId.equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+	if (!layoutParentId.equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(layoutParentId, selLayout.getOwnerId());
 
 		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sb);

@@ -22,7 +22,7 @@
 
 package com.liferay.util.lucene;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.StringUtil;
 
 /**

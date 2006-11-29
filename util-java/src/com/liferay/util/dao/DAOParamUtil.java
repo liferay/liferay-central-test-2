@@ -22,8 +22,8 @@
 
 package com.liferay.util.dao;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.Validator;
 
 import javax.portlet.PortletRequest;

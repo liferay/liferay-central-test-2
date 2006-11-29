@@ -127,7 +127,7 @@
 				});
 		}
 	</c:if>
-	
+
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 			Event.observe(window, "load", function() {
@@ -140,17 +140,17 @@
 				Event.observe(window, "load", function() {
 					setTimeout("ReverseAjax.initialize()", 2000);
 				});
-			
+
 				Event.addHandler(window, "unload", function() {
 					ReverseAjax.release();
 				});
 			}
 		</c:if>
-		
+
 		<%
 		String scroll = ParamUtil.getString(request, "scroll");
 		%>
-		
+
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
 			Event.observe(window, "load", function() { $("<%= scroll %>").scrollIntoView(); });
 		</c:if>

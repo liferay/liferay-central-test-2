@@ -40,7 +40,7 @@ boolean useEditorApplet = editorType.equals("applet");
 
 String defaultContent = null;
 
-if (langType.equals(JournalTemplate.LANG_TYPE_XSL)) {
+if (langType.equals(JournalTemplateImpl.LANG_TYPE_XSL)) {
 	defaultContent = ContentUtil.get("com/liferay/portlet/journal/dependencies/template.xsl");
 }
 else {

@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
 import javax.servlet.ServletRequest;

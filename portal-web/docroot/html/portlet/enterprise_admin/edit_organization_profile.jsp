@@ -24,7 +24,7 @@
 
 <%
 if ((parentOrganizationId == null) || (parentOrganizationId.equals(StringPool.NULL))) {
-	parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+	parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 
 	if (organization != null) {
 		parentOrganizationId = organization.getParentOrganizationId();
@@ -37,7 +37,7 @@ if (!rootOrganization && portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 
 String parentOrganizationName = ParamUtil.getString(request, "parentOrganizationName");
 
-if (!parentOrganizationId.equals(Organization.DEFAULT_PARENT_ORGANIZATION_ID)) {
+if (!parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
 	try {
 		Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(parentOrganizationId);
 
@@ -111,7 +111,7 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 					<option value=""></option>
 
 					<%
-					List statuses = ListTypeServiceUtil.getListTypes(ListType.ORGANIZATION_STATUS);
+					List statuses = ListTypeServiceUtil.getListTypes(ListTypeImpl.ORGANIZATION_STATUS);
 
 					for (int i = 0; i < statuses.size(); i++) {
 						ListType status = (ListType)statuses.get(i);

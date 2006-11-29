@@ -24,6 +24,7 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
+--%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.CategoryNameException" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.EntryContentException" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.EntryDisplayDateException" %><%--
@@ -32,13 +33,12 @@
 --%><%@ page import="com.liferay.portlet.blogs.NoSuchEntryException" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.model.BlogsCategory" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.model.BlogsEntry" %><%--
+--%><%@ page import="com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl" %><%--
+--%><%@ page import="com.liferay.portlet.blogs.service.BlogsCategoryLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.service.permission.BlogsCategoryPermission" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.service.permission.BlogsEntryPermission" %><%--
---%><%@ page import="com.liferay.portlet.blogs.service.spring.BlogsCategoryLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.blogs.service.spring.BlogsEntryLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.blogs.util.BlogsUtil" %><%--
-
---%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

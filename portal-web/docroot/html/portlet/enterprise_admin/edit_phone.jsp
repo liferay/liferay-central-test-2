@@ -83,7 +83,7 @@ String typeId = BeanParamUtil.getString(phone, request, "typeId");
 			<option value=""></option>
 
 			<%
-			List phoneTypes = ListTypeServiceUtil.getListTypes(className + ListType.PHONE);
+			List phoneTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.PHONE);
 
 			for (int i = 0; i < phoneTypes.size(); i++) {
 				ListType suffix = (ListType)phoneTypes.get(i);

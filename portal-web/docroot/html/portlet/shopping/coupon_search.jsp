@@ -54,10 +54,10 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < ShoppingCoupon.DISCOUNT_TYPES.length; i++) {
+			for (int i = 0; i < ShoppingCouponImpl.DISCOUNT_TYPES.length; i++) {
 			%>
 
-				<option <%= displayTerms.getDiscountType().equals(ShoppingCoupon.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCoupon.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCoupon.DISCOUNT_TYPES[i]) %></option>
+				<option <%= displayTerms.getDiscountType().equals(ShoppingCouponImpl.DISCOUNT_TYPES[i]) ? "selected" : "" %> value="<%= ShoppingCouponImpl.DISCOUNT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingCouponImpl.DISCOUNT_TYPES[i]) %></option>
 
 			<%
 			}

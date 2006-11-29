@@ -270,7 +270,7 @@ if (Validator.isNull(endDateOccurrenceParam) && (event != null)) {
 	}
 }
 
-String remindBy = BeanParamUtil.getString(event, request, "remindBy", CalEvent.REMIND_BY_NONE);
+String remindBy = BeanParamUtil.getString(event, request, "remindBy", CalEventImpl.REMIND_BY_NONE);
 int firstReminder = BeanParamUtil.getInteger(event, request, "firstReminder", (int)Time.MINUTE * 15);
 int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", (int)Time.MINUTE * 5);
 %>
@@ -434,10 +434,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 		<select name="<portlet:namespace />type">
 
 			<%
-			for (int i = 0; i < CalEvent.TYPES.length; i++) {
+			for (int i = 0; i < CalEventImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(CalEvent.TYPES[i]) ? "selected" : "" %> value="<%= CalEvent.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEvent.TYPES[i]) %></option>
+				<option <%= type.equals(CalEventImpl.TYPES[i]) ? "selected" : "" %> value="<%= CalEventImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, CalEventImpl.TYPES[i]) %></option>
 
 			<%
 			}
@@ -694,10 +694,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <select name="<portlet:namespace />firstReminder">
 
 	<%
-	for (int i = 0; i < CalEvent.REMINDERS.length; i++) {
+	for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
 	%>
 
-		<option <%= (firstReminder == CalEvent.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEvent.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEvent.REMINDERS[i]) %></option>
+		<option <%= (firstReminder == CalEventImpl.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></option>
 
 	<%
 	}
@@ -710,10 +710,10 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 <select name="<portlet:namespace />secondReminder">
 
 	<%
-	for (int i = 0; i < CalEvent.REMINDERS.length; i++) {
+	for (int i = 0; i < CalEventImpl.REMINDERS.length; i++) {
 	%>
 
-		<option <%= (secondReminder == CalEvent.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEvent.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEvent.REMINDERS[i]) %></option>
+		<option <%= (secondReminder == CalEventImpl.REMINDERS[i]) ? "selected" : "" %> value="<%= CalEventImpl.REMINDERS[i] %>"><%= LanguageUtil.getTimeDescription(pageContext, CalEventImpl.REMINDERS[i]) %></option>
 
 	<%
 	}
@@ -725,13 +725,13 @@ int secondReminder = BeanParamUtil.getInteger(event, request, "secondReminder", 
 
 <br><br>
 
-<input <%= remindBy.equals(CalEvent.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_NONE %>"> <%= LanguageUtil.get(pageContext, "do-not-send-a-reminder") %><br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_EMAIL %>"> <%= LanguageUtil.get(pageContext, "email-address") %> (<%= user.getEmailAddress() %>)<br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_SMS %>"> <%= LanguageUtil.get(pageContext, "sms") %> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_AIM %>"> <%= LanguageUtil.get(pageContext, "aim") %> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_ICQ %>"> <%= LanguageUtil.get(pageContext, "icq") %> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_MSN %>"> <%= LanguageUtil.get(pageContext, "msn") %> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br>
-<input <%= remindBy.equals(CalEvent.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEvent.REMIND_BY_YM %>"> <%= LanguageUtil.get(pageContext, "ym") %> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_NONE) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_NONE %>"> <%= LanguageUtil.get(pageContext, "do-not-send-a-reminder") %><br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_EMAIL) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_EMAIL %>"> <%= LanguageUtil.get(pageContext, "email-address") %> (<%= user.getEmailAddress() %>)<br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_SMS) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_SMS %>"> <%= LanguageUtil.get(pageContext, "sms") %> <%= Validator.isNotNull(contact.getSmsSn()) ? "(" + contact.getSmsSn() + ")" : "" %><br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_AIM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_AIM %>"> <%= LanguageUtil.get(pageContext, "aim") %> <%= Validator.isNotNull(contact.getAimSn()) ? "(" + contact.getAimSn() + ")" : "" %><br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_ICQ) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_ICQ %>"> <%= LanguageUtil.get(pageContext, "icq") %> <%= Validator.isNotNull(contact.getIcqSn()) ? "(" + contact.getIcqSn() + ")" : "" %><br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_MSN) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_MSN %>"> <%= LanguageUtil.get(pageContext, "msn") %> <%= Validator.isNotNull(contact.getMsnSn()) ? "(" + contact.getMsnSn() + ")" : "" %><br>
+<input <%= remindBy.equals(CalEventImpl.REMIND_BY_YM) ? "checked" : "" %> name="<portlet:namespace />remindBy" type="radio" value="<%= CalEventImpl.REMIND_BY_YM %>"> <%= LanguageUtil.get(pageContext, "ym") %> <%= Validator.isNotNull(contact.getYmSn()) ? "(" + contact.getYmSn() + ")" : "" %>
 
 </form>
 

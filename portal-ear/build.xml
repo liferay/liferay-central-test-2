@@ -82,6 +82,7 @@
 			<fileset dir="${project.dir}/filters/sso" includes="sso-filter.jar" />
 			<fileset dir="${project.dir}/filters/strip" includes="strip-filter.jar" />
 			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
+			<fileset dir="${project.dir}/portal-service" includes="portal-service.jar" />
 			<fileset dir="${project.dir}/util-java" includes="util-java.jar" />
 			<fileset dir="${project.dir}/util-wsrp" includes="util-wsrp.jar" />
 			<fileset dir="${project.dir}/lib/development" includes="activation.jar,jms.jar,jta.jar,mail.jar" />
@@ -138,7 +139,7 @@
 		<war
 			basedir="pro-war"
 			destfile="liferay-portal.war"
-			excludes="WEB-INF/lib/portal-kernel.jar,WEB-INF/lib/portlet.jar,WEB-INF/web.xml"
+			excludes="WEB-INF/lib/portal-kernel.jar,WEB-INF/lib/portal-service.jar,WEB-INF/lib/portlet.jar,WEB-INF/web.xml"
 			webxml="pro-war/WEB-INF/web.xml"
 			update="yes"
 		/>

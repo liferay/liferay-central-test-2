@@ -24,20 +24,20 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
+--%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.NodeNameException" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.NoSuchPageException" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.PageContentException" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.PageTitleException" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.model.WikiNode" %><%--
---%><%@ page import="com.liferay.portlet.wiki.model.WikiPage" %><%--
+--%><%@ page import="com.liferay.portlet.wiki.model.Wik,iPage" %><%--
+--%><%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %><%--
+--%><%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.service.permission.WikiNodePermission" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %><%--
---%><%@ page import="com.liferay.portlet.wiki.service.spring.WikiNodeLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.wiki.service.spring.WikiPageLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %><%--
-
---%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

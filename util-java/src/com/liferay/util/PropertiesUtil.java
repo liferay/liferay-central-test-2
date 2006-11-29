@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.PrintStream;

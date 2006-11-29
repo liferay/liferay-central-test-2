@@ -86,7 +86,7 @@ String tabs1 = (String)objArray[1];
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("current") %>'>
-		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
+		<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="leaveURL">
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
@@ -99,7 +99,7 @@ String tabs1 = (String)objArray[1];
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<c:if test="<%= group.getType().equals(Group.TYPE_COMMUNITY_OPEN) %>">
+		<c:if test="<%= group.getType().equals(GroupImpl.TYPE_COMMUNITY_OPEN) %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="joinURL">
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />

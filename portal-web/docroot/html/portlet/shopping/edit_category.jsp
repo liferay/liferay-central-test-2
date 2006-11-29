@@ -31,12 +31,12 @@ ShoppingCategory category = (ShoppingCategory)request.getAttribute(WebKeys.SHOPP
 
 String categoryId = BeanParamUtil.getString(category, request, "categoryId");
 
-String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID);
+String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
 
@@ -71,7 +71,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentCategoryId.equals(ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
+<c:if test="<%= !parentCategoryId.equals(ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<%= ShoppingUtil.getBreadcrumbs(parentCategoryId, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>

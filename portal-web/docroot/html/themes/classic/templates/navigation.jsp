@@ -105,7 +105,7 @@
 			language: "<%= LanguageUtil.getLanguageId(request) %>",
 			layoutId: "<%= layout.getLayoutId() %>",
 			newPage: <%= newPage %>,
-			ownerId: "<%= Layout.getOwnerId(plid) %>",
+			ownerId: "<%= LayoutImpl.getOwnerId(plid) %>",
 			isPrivate: <%= layout.isPrivateLayout() %>,
 			parent: "<%= layout.getParentLayoutId() %>",
 			layoutIds: [<%

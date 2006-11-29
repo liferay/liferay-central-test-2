@@ -35,7 +35,7 @@ String messageId = BeanParamUtil.getString(message, request, "messageId");
 
 String categoryId = BeanParamUtil.getString(message, request, "categoryId");
 String threadId = BeanParamUtil.getString(message, request, "threadId");
-String parentMessageId = BeanParamUtil.getString(message, request, "parentMessageId", MBMessage.DEFAULT_PARENT_MESSAGE_ID);
+String parentMessageId = BeanParamUtil.getString(message, request, "parentMessageId", MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
 String subject = BeanParamUtil.getString(message, request, "subject");
 

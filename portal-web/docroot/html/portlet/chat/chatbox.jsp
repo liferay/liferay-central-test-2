@@ -34,8 +34,7 @@ int top = ParamUtil.getInteger(request, "top");
 int left = ParamUtil.getInteger(request, "left");
 %>
 
-<div class="msg-chat-box" id="msg-chat-box<%= toId %>" style="border: 1px solid #000000; padding: 10px; z-index: <%= zIndex %>; left: <%= left %>px; position: absolute; top: <%= top %>px; background-color: #ffffff; text-align: left"
-	onClick="this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++">
+<div class="msg-chat-box" id="msg-chat-box<%= toId %>" style="border: 1px solid #000000; padding: 10px; z-index: <%= zIndex %>; left: <%= left %>px; position: absolute; top: <%= top %>px; background-color: #ffffff; text-align: left" onClick="this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++">
 	<div class="msg-chat-box-width" style="WIDTH: 250px">
 		<div class="msg-chat-title" style="cursor: move">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -63,4 +62,3 @@ int left = ParamUtil.getInteger(request, "left");
 		</c:if>
 	</div>
 </div>
-

@@ -88,7 +88,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	String categoryName = LanguageUtil.get(pageContext, "not-available");
 
 	try {
-		if (!categoryId.equals(BlogsCategory.DEFAULT_PARENT_CATEGORY_ID)) {
+		if (!categoryId.equals(BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID)) {
 			BlogsCategory category = BlogsCategoryLocalServiceUtil.getCategory(categoryId);
 
 			categoryName = category.getName();

@@ -20,24 +20,36 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao.hibernate;
+package com.liferay.portal.kernel.security.permission;
 
 import java.io.Serializable;
 
-import java.util.Comparator;
+import java.util.List;
 
 /**
- * <a href="OrderByComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="PermissionCheckerBag.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public abstract class OrderByComparator implements Comparator, Serializable {
+public interface PermissionCheckerBag extends Serializable {
 
-	public String getOrderBy() {
-		return null;
-	}
+	public List getUserGroups();
 
-	public abstract int compare(Object obj1, Object obj2);
+	public List getUserOrgs();
+
+	public List getUserOrgGroups();
+
+	public List getUserUserGroupGroups();
+
+	public List getGroups();
+
+	public List getRoles();
+
+	public boolean isCompanyAdmin(String companyId) throws Exception;
+
+	public boolean isCommunityAdmin(
+			String companyId, String groupId, String name)
+		throws Exception;
 
 }

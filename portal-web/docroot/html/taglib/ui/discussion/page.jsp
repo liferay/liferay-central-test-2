@@ -29,9 +29,9 @@
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessage" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBMessageDisplay" %>
 <%@ page import="com.liferay.portlet.messageboards.model.MBThread" %>
+<%@ page import="com.liferay.portlet.messageboards.model.MBTreeWalker" %>
+<%@ page import="com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission" %>
-<%@ page import="com.liferay.portlet.messageboards.service.spring.MBMessageLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.messageboards.util.TreeWalker" %>
 <%@ page import="com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator" %>
 
 <%
@@ -47,7 +47,7 @@ MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessage
 
 MBCategory category = messageDisplay.getCategory();
 MBThread thread = messageDisplay.getThread();
-TreeWalker treeWalker = messageDisplay.getTreeWalker();
+MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 MBMessage rootMessage = treeWalker.getRoot();
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

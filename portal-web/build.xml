@@ -46,6 +46,7 @@
 		<unjar src="${project.dir}/portal-ejb/portal-ejb.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/portal-kernel/portal-kernel.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/portal-service/portal-service.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/util-java/util-java.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/util-wsrp/util-wsrp.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/util-taglib/util-taglib.jar" dest="${classpath.jsp}" />

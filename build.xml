@@ -30,6 +30,7 @@
 		<ant dir="classes" target="clean" inheritAll="false" />
 
 		<ant dir="portal-kernel" target="clean" inheritAll="false" />
+		<ant dir="portal-service" target="clean" inheritAll="false" />
 
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
 		<ant dir="util-java" target="clean" inheritAll="false" />
@@ -140,6 +141,7 @@
 
 	<target name="compile">
 		<ant dir="portal-kernel" target="compile" inheritAll="false" />
+		<ant dir="portal-service" target="compile" inheritAll="false" />
 
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
 		<ant dir="util-java" target="compile" inheritAll="false" />
@@ -161,6 +163,7 @@
 
 	<target name="jar">
 		<ant dir="portal-kernel" target="jar" inheritAll="false" />
+		<ant dir="portal-service" target="jar" inheritAll="false" />
 
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
@@ -189,6 +192,7 @@
 		<delete dir="api" />
 
 		<ant dir="portal-kernel" target="java2html" inheritAll="false" />
+		<ant dir="portal-service" target="java2html" inheritAll="false" />
 
 		<ant dir="util-bridges" target="java2html" inheritAll="false" />
 		<ant dir="util-java" target="java2html" inheritAll="false" />
@@ -209,6 +213,7 @@
 
 	<target name="javadoc">
 		<ant dir="portal-kernel" target="javadoc" inheritAll="false" />
+		<ant dir="portal-service" target="javadoc" inheritAll="false" />
 
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
@@ -234,6 +239,7 @@
 		</if>
 
 		<ant dir="portal-kernel" target="deploy" inheritAll="false" />
+		<ant dir="portal-service" target="deploy" inheritAll="false" />
 
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />
 		<ant dir="util-java" target="deploy" inheritAll="false" />
@@ -643,11 +649,10 @@ auto.deploy.dest.dir=../webapps</echo>
 
 		<delete file="${lp.ext.dir}/lib/portal/util-jsf.jar" failonerror="false" />
 
-		<copy
-			file="${project.dir}/portal-kernel/portal-kernel.jar"
-			todir="${lp.ext.dir}/lib/global"
-			overwrite="yes"
-		/>
+		<copy todir="${lp.ext.dir}/lib/global" overwrite="yes">
+			<fileset dir="${project.dir}/portal-kernel" includes="portal-kernel.jar" />
+			<fileset dir="${project.dir}/portal-service" includes="portal-service.jar" />
+		</copy>
 
 		<delete file="${lp.ext.dir}/lib/global/portal-shared.jar" failonerror="false" />
 
@@ -925,7 +930,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 		<zip zipfile="liferay-portal-client-${lp.version.file.name}.zip"
 			basedir="."
-			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/concurrent.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/trove.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar,util-java/util-java.jar"
+			includes="lib/development/activation.jar,lib/development/mail.jar,lib/portal/axis.jar,lib/portal/commons-discovery.jar,lib/portal/commons-logging.jar,lib/portal/jaxrpc.jar,lib/portal/saaj.jar,lib/portal/wsdl4j.jar,portal-client/portal-client.jar"
 		/>		
 	</target>
 
@@ -935,6 +940,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<zip zipfile="liferay-portal-dependencies-${lp.version.file.name}.zip">
 			<fileset dir="lib/global" includes="portlet.jar" />
 			<fileset dir="portal-kernel" includes="portal-kernel.jar" />
+			<fileset dir="portal-service" includes="portal-service.jar" />
 		</zip>
 	</target>
 

@@ -22,8 +22,8 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.StringPool;
 
 import java.util.Calendar;
 

@@ -22,9 +22,10 @@
 
 package com.liferay.util.dao.hibernate;
 
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 

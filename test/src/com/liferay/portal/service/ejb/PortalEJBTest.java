@@ -23,8 +23,8 @@
 package com.liferay.portal.service.ejb;
 
 import com.liferay.portal.model.User;
-import com.liferay.portal.service.spring.PortalService;
-import com.liferay.portal.service.spring.UserService;
+import com.liferay.portal.service.PortalService;
+import com.liferay.portal.service.UserService;
 import com.liferay.test.TestConstants;
 
 import java.util.Calendar;

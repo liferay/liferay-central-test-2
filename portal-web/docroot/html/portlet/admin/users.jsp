@@ -179,8 +179,8 @@
 					<td style="padding-left: 10px;"></td>
 					<td>
 						<select name="<portlet:namespace />authType">
-							<option <%= company.getAuthType().equals(Company.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= Company.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
-							<option <%= company.getAuthType().equals(Company.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= Company.AUTH_TYPE_ID %>"><%= LanguageUtil.get(pageContext, "by-user-id") %></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><%= LanguageUtil.get(pageContext, "by-email-address") %></option>
+							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><%= LanguageUtil.get(pageContext, "by-user-id") %></option>
 						</select>
 					</td>
 				</tr>

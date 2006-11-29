@@ -176,7 +176,7 @@ String typeId = BeanParamUtil.getString(address, request, "typeId");
 					<option value=""></option>
 
 					<%
-					List addressTypes = ListTypeServiceUtil.getListTypes(className + ListType.ADDRESS);
+					List addressTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.ADDRESS);
 
 					for (int i = 0; i < addressTypes.size(); i++) {
 						ListType suffix = (ListType)addressTypes.get(i);

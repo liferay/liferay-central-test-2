@@ -258,7 +258,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		String parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+		String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (!rootOrganization) {

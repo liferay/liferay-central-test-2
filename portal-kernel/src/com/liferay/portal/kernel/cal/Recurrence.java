@@ -28,7 +28,7 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.liferay.util.cal;
+package com.liferay.portal.kernel.cal;
 
 import java.io.Serializable;
 
@@ -1237,51 +1237,54 @@ public class Recurrence implements Serializable {
 	 *
 	 */
 	public String toString() {
-		int i;
-		StringBuffer buffer = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-		buffer.append(getClass().getName());
-		buffer.append("[dtStart=");
-		buffer.append((dtStart != null) ? dtStart.toString() : "null");
-		buffer.append(",duration=");
-		buffer.append((duration != null) ? duration.toString() : "null");
-		buffer.append(",frequency=");
-		buffer.append(frequency);
-		buffer.append(",interval=");
-		buffer.append(interval);
-		buffer.append(",until=");
-		buffer.append((until != null) ? until.toString() : "null");
-		buffer.append(",byDay=");
+		sb.append(getClass().getName());
+		sb.append("[dtStart=");
+		sb.append((dtStart != null) ? dtStart.toString() : "null");
+		sb.append(",duration=");
+		sb.append((duration != null) ? duration.toString() : "null");
+		sb.append(",frequency=");
+		sb.append(frequency);
+		sb.append(",interval=");
+		sb.append(interval);
+		sb.append(",until=");
+		sb.append((until != null) ? until.toString() : "null");
+		sb.append(",byDay=");
 
 		if (byDay == null) {
-			buffer.append("null");
+			sb.append("null");
 		}
 		else {
-			buffer.append("[");
+			sb.append("[");
 
-			for (i = 0; i < byDay.length; i++) {
+			for (int i = 0; i < byDay.length; i++) {
 				if (i != 0) {
-					buffer.append(",");
+					sb.append(",");
 				}
 
-				buffer.append((byDay[i] != null)
-							  ? byDay[i].toString() : "null");
+				if (byDay[i] != null) {
+					sb.append(byDay[i].toString());
+				}
+				else {
+					sb.append("null");
+				}
 			}
 
-			buffer.append("]");
+			sb.append("]");
 		}
 
-		buffer.append(",byMonthDay=");
-		buffer.append(stringizeIntArray(byMonthDay));
-		buffer.append(",byYearDay=");
-		buffer.append(stringizeIntArray(byYearDay));
-		buffer.append(",byWeekNo=");
-		buffer.append(stringizeIntArray(byWeekNo));
-		buffer.append(",byMonth=");
-		buffer.append(stringizeIntArray(byMonth));
-		buffer.append(']');
+		sb.append(",byMonthDay=");
+		sb.append(stringizeIntArray(byMonthDay));
+		sb.append(",byYearDay=");
+		sb.append(stringizeIntArray(byYearDay));
+		sb.append(",byWeekNo=");
+		sb.append(stringizeIntArray(byWeekNo));
+		sb.append(",byMonth=");
+		sb.append(stringizeIntArray(byMonth));
+		sb.append(']');
 
-		return buffer.toString();
+		return sb.toString();
 	}
 
 	/**
@@ -1298,22 +1301,21 @@ public class Recurrence implements Serializable {
 			return "null";
 		}
 
-		StringBuffer buffer = new StringBuffer();
-		int i;
+		StringBuffer sb = new StringBuffer();
 
-		buffer.append("[");
+		sb.append("[");
 
-		for (i = 0; i < a.length; i++) {
+		for (int i = 0; i < a.length; i++) {
 			if (i != 0) {
-				buffer.append(",");
+				sb.append(",");
 			}
 
-			buffer.append(a[i]);
+			sb.append(a[i]);
 		}
 
-		buffer.append("]");
+		sb.append("]");
 
-		return buffer.toString();
+		return sb.toString();
 	}
 
 }

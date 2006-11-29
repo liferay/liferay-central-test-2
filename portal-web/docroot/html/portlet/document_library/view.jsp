@@ -29,7 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", DLFolder.DEFAULT_PARENT_FOLDER_ID);
+String folderId = BeanParamUtil.getString(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 List folderIds = new ArrayList();
 

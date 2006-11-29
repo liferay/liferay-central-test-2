@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 

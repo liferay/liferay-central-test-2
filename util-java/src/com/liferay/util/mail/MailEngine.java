@@ -22,6 +22,7 @@
 
 package com.liferay.util.mail;
 
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.JNDIUtil;
 import com.liferay.util.Validator;

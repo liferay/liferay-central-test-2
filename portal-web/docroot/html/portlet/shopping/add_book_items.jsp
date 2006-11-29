@@ -27,7 +27,7 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = ParamUtil.get(request, "categoryId", ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/add_book_items" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); submitForm(this); return false;">

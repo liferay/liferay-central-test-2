@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 /**
  * <a href="CreditCard.java.html"><b><i>View Source</i></b></a>
  *

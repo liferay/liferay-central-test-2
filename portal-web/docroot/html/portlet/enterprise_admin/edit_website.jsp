@@ -75,7 +75,7 @@ String typeId = BeanParamUtil.getString(website, request, "typeId");
 			<option value=""></option>
 
 			<%
-			List websiteTypes = ListTypeServiceUtil.getListTypes(className + ListType.WEBSITE);
+			List websiteTypes = ListTypeServiceUtil.getListTypes(className + ListTypeImpl.WEBSITE);
 
 			for (int i = 0; i < websiteTypes.size(); i++) {
 				ListType suffix = (ListType)websiteTypes.get(i);

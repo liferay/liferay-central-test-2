@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 /**
  * <a href="StringPool.java.html"><b><i>View Source</i></b></a>

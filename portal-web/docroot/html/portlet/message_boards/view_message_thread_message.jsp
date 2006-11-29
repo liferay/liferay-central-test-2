@@ -317,7 +317,7 @@
 					String[] fileNames = null;
 
 					try {
-						fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), Company.SYSTEM, message.getAttachmentsDir());
+						fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), CompanyImpl.SYSTEM, message.getAttachmentsDir());
 					}
 					catch (NoSuchDirectoryException nsde) {
 					}
@@ -352,7 +352,7 @@
 								<%
 								for (int j = 0; j < fileNames.length; j++) {
 									String fileName = FileUtil.getShortFileName(fileNames[j]);
-									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), Company.SYSTEM, fileNames[j]);
+									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, fileNames[j]);
 								%>
 
 									<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= message.getMessageId() %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;

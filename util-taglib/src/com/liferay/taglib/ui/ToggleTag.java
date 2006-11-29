@@ -22,10 +22,10 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.SessionClicks;
 import com.liferay.taglib.util.IncludeTag;
 import com.liferay.util.PwdGenerator;
-import com.liferay.util.StringPool;
 import com.liferay.util.servlet.StringServletResponse;
 
 import java.io.IOException;

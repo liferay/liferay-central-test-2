@@ -24,14 +24,13 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
---%><%@ page import="com.liferay.portlet.journal.model.JournalArticle" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.spring.JournalContentSearchLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
+--%><%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %><%--
+--%><%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %><%--
 --%><%@ page import="com.liferay.util.InstancePool" %><%--
 --%><%@ page import="com.liferay.util.lucene.DocumentSummary" %><%--
 --%><%@ page import="com.liferay.util.lucene.Indexer" %><%--
-
---%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
 PortletPreferences prefs = renderRequest.getPreferences();

@@ -31,7 +31,7 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
 String entryId = BeanParamUtil.getString(entry, request, "entryId");
 
-String categoryId = BeanParamUtil.getString(entry, request, "categoryId", BlogsCategory.DEFAULT_PARENT_CATEGORY_ID);
+String categoryId = BeanParamUtil.getString(entry, request, "categoryId", BlogsCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
 String categoryName = StringPool.BLANK;
 

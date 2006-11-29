@@ -23,8 +23,8 @@
 package com.liferay.client.portlet.messageboards.service.http;
 
 import com.liferay.client.portal.service.http.BaseSoapTest;
-import com.liferay.client.portlet.messageboards.model.MBCategoryModel;
-import com.liferay.client.portlet.messageboards.model.MBMessageModel;
+import com.liferay.client.portlet.messageboards.model.MBCategorySoap;
+import com.liferay.client.portlet.messageboards.model.MBMessageSoap;
 
 /**
  * <a href="MessageBoardsSoapTest.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +51,7 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			//boolean addCommunityPermissions = true;
 			//boolean addGuestPermissions = true;
 
-			MBCategoryModel category = getMBCategoryService().addCategory(
+			MBCategorySoap category = getMBCategoryService().addCategory(
 				plid, parentCategoryId, name, description, communityPermissions,
 				guestPermissions);
 
@@ -62,7 +62,7 @@ public class MessageBoardsSoapTest extends BaseSoapTest {
 			boolean anonymous = false;
 			double priority = 0.0;
 
-			MBMessageModel message = getMBMessageService().addMessage(
+			MBMessageSoap message = getMBMessageService().addMessage(
 				categoryId, subject, body, files, anonymous, priority,
 				communityPermissions, guestPermissions);
 

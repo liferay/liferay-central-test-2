@@ -168,7 +168,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 					<option value=""></option>
 
 					<%
-					List prefixes = ListTypeServiceUtil.getListTypes(ListType.CONTACT_PREFIX);
+					List prefixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_PREFIX);
 
 					for (int i = 0; i < prefixes.size(); i++) {
 						ListType prefix = (ListType)prefixes.get(i);
@@ -220,7 +220,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 					<option value=""></option>
 
 					<%
-					List suffixes = ListTypeServiceUtil.getListTypes(ListType.CONTACT_SUFFIX);
+					List suffixes = ListTypeServiceUtil.getListTypes(ListTypeImpl.CONTACT_SUFFIX);
 
 					for (int i = 0; i < suffixes.size(); i++) {
 						ListType suffix = (ListType)suffixes.get(i);

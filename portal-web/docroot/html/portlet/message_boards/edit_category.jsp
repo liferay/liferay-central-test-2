@@ -31,12 +31,12 @@ MBCategory category = (MBCategory)request.getAttribute(WebKeys.MESSAGE_BOARDS_CA
 
 String categoryId = BeanParamUtil.getString(category, request, "categoryId");
 
-String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", MBCategory.DEFAULT_PARENT_CATEGORY_ID);
+String parentCategoryId = BeanParamUtil.getString(category, request, "parentCategoryId", MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />removeCategory() {
-		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategory.DEFAULT_PARENT_CATEGORY_ID %>";
+		document.<portlet:namespace />fm.<portlet:namespace />parentCategoryId.value = "<%= MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID %>";
 
 		var nameEl = document.getElementById("<portlet:namespace />parentCategoryName");
 
@@ -70,7 +70,7 @@ String parentCategoryId = BeanParamUtil.getString(category, request, "parentCate
 <liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 <liferay-ui:error exception="<%= CategoryNameException.class %>" message="please-enter-a-valid-name" />
 
-<c:if test="<%= !parentCategoryId.equals(MBCategory.DEFAULT_PARENT_CATEGORY_ID) %>">
+<c:if test="<%= !parentCategoryId.equals(MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID) %>">
 	<%= MBUtil.getBreadcrumbs(parentCategoryId, null, pageContext, renderRequest, renderResponse) %>
 
 	<br><br>

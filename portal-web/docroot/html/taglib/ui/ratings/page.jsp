@@ -27,8 +27,8 @@
 <%@ page import="com.liferay.portlet.ratings.NoSuchEntryException" %>
 <%@ page import="com.liferay.portlet.ratings.model.RatingsEntry" %>
 <%@ page import="com.liferay.portlet.ratings.model.RatingsStats" %>
-<%@ page import="com.liferay.portlet.ratings.service.spring.RatingsEntryLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.ratings.service.spring.RatingsStatsLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.ratings.service.RatingsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil" %>
 
 <%
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;

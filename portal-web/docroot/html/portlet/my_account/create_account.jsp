@@ -92,7 +92,7 @@ boolean male = BeanParamUtil.getBoolean(contact2, request, "male", true);
 		</tr>
 
 		<c:choose>
-			<c:when test="<%= company.getAuthType().equals(Company.AUTH_TYPE_ID) %>">
+			<c:when test="<%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) %>">
 				<tr>
 					<td>
 						<%= LanguageUtil.get(pageContext, "user-id") %>

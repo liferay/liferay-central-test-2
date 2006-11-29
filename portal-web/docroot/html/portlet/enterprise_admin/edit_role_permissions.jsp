@@ -178,8 +178,8 @@ if (Validator.isNotNull(modelResource)) {
 
 			ResultRow row = new ResultRow(actionId, actionId, i);
 
-			boolean hasCompanyScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY, actionId);
-			boolean hasGroupScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 
 			row.addText(selResourceName);
 			row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
@@ -198,8 +198,8 @@ if (Validator.isNotNull(modelResource)) {
 				List rolePermissions = new ArrayList();
 
 				rolePermissions.add(selResource);
-				rolePermissions.add(Resource.TYPE_CLASS);
-				rolePermissions.add(Resource.SCOPE_GROUP);
+				rolePermissions.add(ResourceImpl.TYPE_CLASS);
+				rolePermissions.add(ResourceImpl.SCOPE_GROUP);
 				rolePermissions.add(actionId);
 				rolePermissions.add(role.getRoleId());
 
@@ -277,8 +277,8 @@ if (Validator.isNotNull(modelResource)) {
 			List rolePermissions = new ArrayList();
 
 			rolePermissions.add(selResource);
-			rolePermissions.add(Resource.TYPE_CLASS);
-			rolePermissions.add(Resource.SCOPE_GROUP);
+			rolePermissions.add(ResourceImpl.TYPE_CLASS);
+			rolePermissions.add(ResourceImpl.SCOPE_GROUP);
 			rolePermissions.add(actionId);
 			rolePermissions.add(role.getRoleId());
 
@@ -358,8 +358,8 @@ if (Validator.isNotNull(modelResource)) {
 		for (int i = 0; i < actions.size(); i++) {
 			String actionId = (String)actions.get(i);
 
-			boolean hasCompanyScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_COMPANY, actionId);
-			boolean hasGroupScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupScope = PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 		%>
 
 			<tr>
@@ -370,10 +370,10 @@ if (Validator.isNotNull(modelResource)) {
 				<td>
 					<select name="<portlet:namespace />scope<%= actionId %>">
 						<option value=""></option>
-						<option <%= hasCompanyScope ? "selected" : "" %> value="<%= Resource.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
+						<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
 
 						<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-							<option <%= hasGroupScope ? "selected" : "" %> value="<%= Resource.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+							<option <%= hasGroupScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
 						</c:if>
 					</select>
 				</td>

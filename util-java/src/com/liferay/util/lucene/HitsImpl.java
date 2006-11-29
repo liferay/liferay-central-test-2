@@ -22,37 +22,28 @@
 
 package com.liferay.util.lucene;
 
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.util.Time;
 
 import java.io.IOException;
-import java.io.Serializable;
-
-import org.apache.lucene.document.Document;
 
 /**
- * <a href="Hits.java.html"><b><i>View Source</i></b></a>
+ * <a href="HitsImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class Hits implements Serializable {
+public class HitsImpl implements Hits {
 
-	public Hits() {
+	public HitsImpl() {
 		_start = System.currentTimeMillis();
-	}
-
-	public void recordHits(org.apache.lucene.search.Hits hits)
-		throws IOException {
-
-		_hits = hits;
-		_length = hits.length();
-		_docs = new Document[_length];
-		_scores = new float[_length];
 	}
 
 	public long getStart() {
 		return _start;
 	}
+
 	public void setStart(long start) {
 		_start = start;
 	}
@@ -102,7 +93,7 @@ public class Hits implements Serializable {
 	public Document doc(int n) {
 		try {
 			if ((_docs[n] == null) && (_hits != null)) {
-				_docs[n] = _hits.doc(n);
+				_docs[n] = new DocumentImpl(_hits.doc(n));
 			}
 		}
 		catch(IOException ioe) {
@@ -124,12 +115,12 @@ public class Hits implements Serializable {
 	}
 
 	public Hits subset(int begin, int end) {
-		Hits subset = new Hits();
+		Hits subset = new HitsImpl();
 
 		if ((begin > - 1) && (begin <= end)) {
 			subset.setStart(getStart());
 
-			Document[] subsetDocs = new Document[getLength()];
+			Document[] subsetDocs = new DocumentImpl[getLength()];
 			float[] subsetScores = new float[getLength()];
 
 			int j = 0;
@@ -153,10 +144,19 @@ public class Hits implements Serializable {
 		return subset;
 	}
 
+	public void recordHits(org.apache.lucene.search.Hits hits)
+		throws IOException {
+
+		_hits = hits;
+		_length = hits.length();
+		_docs = new DocumentImpl[_length];
+		_scores = new float[_length];
+	}
+
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;
 	private float _searchTime;
-	private Document[] _docs = new Document[0];
+	private Document[] _docs = new DocumentImpl[0];
 	private int _length;
 	private float[] _scores = new float[0];
 

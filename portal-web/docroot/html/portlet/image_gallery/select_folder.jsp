@@ -27,7 +27,7 @@
 <%
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolder.DEFAULT_PARENT_FOLDER_ID);
+String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 %>
 
 <form method="post" name="<portlet:namespace />fm">

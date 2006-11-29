@@ -29,7 +29,7 @@ String tabs1 = ParamUtil.getString(request, "tabs1", "folders");
 
 BookmarksFolder folder = (BookmarksFolder)request.getAttribute(WebKeys.BOOKMARKS_FOLDER);
 
-String folderId = BeanParamUtil.getString(folder, request, "folderId", BookmarksFolder.DEFAULT_PARENT_FOLDER_ID);
+String folderId = BeanParamUtil.getString(folder, request, "folderId", BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 

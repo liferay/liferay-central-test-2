@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.mail;
+package com.liferay.portal.kernel.mail;
 
 import java.io.Serializable;
 

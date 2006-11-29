@@ -20,60 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.util.lucene;
 
-import java.util.Comparator;
+import com.liferay.portal.kernel.search.Document;
 
 /**
- * <a href="KeyValuePairComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="DocumentImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class KeyValuePairComparator implements Comparator {
+public class DocumentImpl implements Document {
 
-	public KeyValuePairComparator() {
-		this(true);
+	public DocumentImpl(org.apache.lucene.document.Document luceneDoc) {
+		_luceneDoc = luceneDoc;
 	}
 
-	public KeyValuePairComparator(boolean asc) {
-		this(true, asc);
+	public String get(String name) {
+		return  _luceneDoc.get(name);
 	}
 
-	public KeyValuePairComparator(boolean byKey, boolean asc) {
-		_byKey = byKey;
-		_asc = asc;
-	}
-
-	public int compare(Object obj1, Object obj2) {
-		KeyValuePair kvp1 = (KeyValuePair)obj1;
-		KeyValuePair kvp2 = (KeyValuePair)obj2;
-
-		if (_byKey) {
-			String key1 = kvp1.getKey();
-			String key2 = kvp2.getKey();
-
-			if (_asc) {
-				return key1.compareTo(key2);
-			}
-			else {
-				return -(key1.compareTo(key2));
-			}
-		}
-		else {
-			String value1 = kvp1.getValue();
-			String value2 = kvp2.getValue();
-
-			if (_asc) {
-				return value1.compareTo(value2);
-			}
-			else {
-				return -(value1.compareTo(value2));
-			}
-		}
-	}
-
-	private boolean _byKey;
-	private boolean _asc;
+	private org.apache.lucene.document.Document _luceneDoc;
 
 }

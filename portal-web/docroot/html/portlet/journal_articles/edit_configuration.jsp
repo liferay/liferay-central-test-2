@@ -69,10 +69,10 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 			<option value=""></option>
 
 			<%
-			for (int i = 0; i < JournalArticle.TYPES.length; i++) {
+			for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
+				<option <%= type.equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
 
 			<%
 			}

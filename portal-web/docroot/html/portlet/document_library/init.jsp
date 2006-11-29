@@ -32,6 +32,7 @@
 --%><%@ page import="com.liferay.documentlibrary.NoSuchDirectoryException" %><%--
 --%><%@ page import="com.liferay.documentlibrary.NoSuchFileException" %><%--
 --%><%@ page import="com.liferay.documentlibrary.SourceFileNameException" %><%--
+--%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.FileShortcutPermissionException" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.FolderNameException" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.NoSuchFileEntryException" %><%--
@@ -40,17 +41,16 @@
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFileShortcut" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFileVersion" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.model.DLFolder" %><%--
+--%><%@ page import="com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl" %><%--
+--%><%@ page import="com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.documentlibrary.service.DLFileVersionLocalServiceUtil" %><%--
+--%><%@ page import="com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFileShortcutPermission" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission" %><%--
---%><%@ page import="com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.documentlibrary.service.spring.DLFileVersionLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.documentlibrary.service.spring.DLFolderLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %><%--
 --%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %><%--
-
---%><%@ page import="org.apache.lucene.document.Document" %><%--
 
 --%><%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

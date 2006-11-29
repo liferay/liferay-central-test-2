@@ -162,7 +162,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 <div>
 
 	<%
-	TreeWalker treeWalker = messageDisplay.getTreeWalker();
+	MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 
 	List messages = new ArrayList();
 

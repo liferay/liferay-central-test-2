@@ -42,7 +42,7 @@ Layout ancestorLayout = layout;
 while (true) {
 	layoutFamilySet.add(ancestorLayout);
 
-	if (!ancestorLayout.getParentLayoutId().equals(Layout.DEFAULT_PARENT_LAYOUT_ID)) {
+	if (!ancestorLayout.getParentLayoutId().equals(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
 		ancestorLayout = LayoutLocalServiceUtil.getLayout(ancestorLayout.getParentLayoutId(), ancestorLayout.getOwnerId());
 	}
 	else {

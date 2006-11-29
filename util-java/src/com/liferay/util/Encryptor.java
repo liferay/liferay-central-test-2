@@ -22,14 +22,11 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.Digester;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StackTraceUtil;
-
-import java.io.UnsupportedEncodingException;
 
 import java.security.Key;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.security.Provider;
 import java.security.SecureRandom;
 import java.security.Security;
@@ -40,8 +37,6 @@ import javax.crypto.KeyGenerator;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import sun.misc.BASE64Encoder;
-
 /**
  * <a href="Encryptor.java.html"><b><i>View Source</i></b></a>
  *
@@ -50,9 +45,7 @@ import sun.misc.BASE64Encoder;
  */
 public class Encryptor {
 
-	public static final String ENCODING = "UTF-8";
-
-	public static final String DIGEST_ALGORITHM = "SHA";
+	public static final String ENCODING = Digester.ENCODING;
 
 	public static final String KEY_ALGORITHM = "DES";
 
@@ -148,29 +141,11 @@ public class Encryptor {
 	}
 
 	public static String digest(String text) {
-		return digest(DIGEST_ALGORITHM, text);
+		return Digester.digest(text);
 	}
 
 	public static String digest(String algorithm, String text) {
-		MessageDigest mDigest = null;
-
-		try{
-			mDigest = MessageDigest.getInstance(algorithm);
-
-			mDigest.update(text.getBytes(ENCODING));
-		}
-		catch (NoSuchAlgorithmException nsae) {
-			_log.error(StackTraceUtil.getStackTrace(nsae));
-		}
-		catch (UnsupportedEncodingException uee) {
-			_log.error(StackTraceUtil.getStackTrace(uee));
-		}
-
-		byte[] raw = mDigest.digest();
-
-		BASE64Encoder encoder = new BASE64Encoder();
-
-		return encoder.encode(raw);
+		return Digester.digest(algorithm, text);
 	}
 
 	public static String encrypt(Key key, String plainText)

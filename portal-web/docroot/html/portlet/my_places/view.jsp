@@ -48,7 +48,7 @@
 			selectedTitle = displayTitle;
 		}
 		else {
-			portletURL.setParameter("ownerId", Layout.PUBLIC + userGroup.getGroupId());
+			portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + userGroup.getGroupId());
 
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
@@ -72,7 +72,7 @@
 			selectedTitle = displayTitle;
 		}
 		else {
-			portletURL.setParameter("ownerId", Layout.PUBLIC + community.getGroupId());
+			portletURL.setParameter("ownerId", LayoutImpl.PUBLIC + community.getGroupId());
 
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
@@ -87,7 +87,7 @@
 			selectedTitle = displayTitle;
 		}
 		else {
-			portletURL.setParameter("ownerId", Layout.PRIVATE + userGroup.getGroupId());
+			portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + userGroup.getGroupId());
 
 			links.add(portletURL.toString());
 			titles.add(displayTitle);
@@ -108,7 +108,7 @@
 			selectedTitle = displayTitle;
 		}
 		else {
-			portletURL.setParameter("ownerId", Layout.PRIVATE + community.getGroupId());
+			portletURL.setParameter("ownerId", LayoutImpl.PRIVATE + community.getGroupId());
 
 			links.add(portletURL.toString());
 			titles.add(displayTitle);

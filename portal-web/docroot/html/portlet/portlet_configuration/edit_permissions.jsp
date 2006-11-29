@@ -73,20 +73,20 @@ if (modelResource.equals(Layout.class.getName())) {
 	int y = resourcePrimKey.indexOf("}", x);
 
 	ownerId = resourcePrimKey.substring(x + 8, y);
-	groupId = Layout.getGroupId(ownerId);
+	groupId = LayoutImpl.getGroupId(ownerId);
 }
 
 Resource resource = null;
 
 try {
-	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, resourcePrimKey);
+	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 catch (NoSuchResourceException nsre) {
 	boolean portletActions = Validator.isNull(modelResource);
 
 	ResourceLocalServiceUtil.addResources(company.getCompanyId(), groupId, null, selResource, resourcePrimKey, portletActions, true, true);
 
-	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, resourcePrimKey);
+	resource = ResourceLocalServiceUtil.getResource(company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 }
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -253,7 +253,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 	// Private layouts should not have guest assignments
 
-	if (Layout.isPrivateLayout(ownerId)) {
+	if (LayoutImpl.isPrivateLayout(ownerId)) {
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 	}
 }
@@ -473,7 +473,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<%
 				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-				String parentOrganizationId = Organization.DEFAULT_PARENT_ORGANIZATION_ID;
+				String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
 				String parentOrganizationComparator = StringPool.EQUAL;
 
 				if (!rootOrganization) {
@@ -847,7 +847,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 		else {
-			group = GroupLocalServiceUtil.getGroup(company.getCompanyId(), Group.GUEST);
+			group = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
 		}
 		%>
 
@@ -967,11 +967,11 @@ else if (modelResource.equals(Layout.class.getName())) {
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms);
+		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchContainer.getFirstName(), searchContainer.getMiddleName(), searchContainer.getLastName(), searchContainer.getEmailAddress(), searchContainer.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms, searchContainer.getStart(), searchContainer.getEnd());
+		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchContainer.getFirstName(), searchContainer.getMiddleName(), searchContainer.getLastName(), searchContainer.getEmailAddress(), searchContainer.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>

@@ -33,7 +33,7 @@
 		&raquo;
 	</c:if>
 
-	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= WikiPage.FRONT_PAGE %>" /></portlet:renderURL>">
+	<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/view_page" /><portlet:param name="nodeId" value="<%= node.getNodeId() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>">
 	<%= node.getName() %>
 	</a>
 </c:if>

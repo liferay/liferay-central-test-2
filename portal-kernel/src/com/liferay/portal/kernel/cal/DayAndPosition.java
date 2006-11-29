@@ -28,7 +28,7 @@
  * ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
  */
 
-package com.liferay.util.cal;
+package com.liferay.portal.kernel.cal;
 
 import java.io.Serializable;
 

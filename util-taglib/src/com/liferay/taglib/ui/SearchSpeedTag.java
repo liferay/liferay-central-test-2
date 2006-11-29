@@ -22,7 +22,7 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.util.lucene.Hits;
+import com.liferay.portal.kernel.search.Hits;
 
 import javax.servlet.ServletRequest;
 

@@ -24,16 +24,17 @@
 
 --%><%@ include file="/html/portlet/init.jsp" %><%--
 
+--%><%@ page import="com.liferay.portal.kernel.cal.DayAndPosition" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.EventDurationException" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.EventEndDateException" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.EventStartDateException" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.EventTitleException" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.NoSuchEventException" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.model.CalEvent" %><%--
+--%><%@ page import="com.liferay.portlet.calendar.model.impl.CalEventImpl" %><%--
+--%><%@ page import="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %><%--
---%><%@ page import="com.liferay.portlet.calendar.service.spring.CalEventLocalServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.calendar.util.CalUtil" %><%--
---%><%@ page import="com.liferay.util.cal.DayAndPosition" %><%--
 
 --%><%
 String monthParam = request.getParameter("month");

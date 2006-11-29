@@ -22,7 +22,7 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.Serializable;
 

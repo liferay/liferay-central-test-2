@@ -42,7 +42,7 @@ request.setAttribute(PermissionChecker.PORTLET_PRIMARY_KEY, portletPrimaryKey);
 boolean denyAccess = false;
 
 try {
-	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, Resource.TYPE_CLASS, Resource.SCOPE_INDIVIDUAL, portletPrimaryKey);
+	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL, portletPrimaryKey);
 }
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;

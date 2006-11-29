@@ -330,10 +330,10 @@ WindowState windowState = renderRequest.getWindowState();
 				<select name="<portlet:namespace />ppPaymentStatus">
 
 					<%
-					for (int i = 0; i < ShoppingOrder.STATUSES.length; i++) {
+					for (int i = 0; i < ShoppingOrderImpl.STATUSES.length; i++) {
 					%>
 
-						<option <%= ShoppingUtil.getPpPaymentStatus(ShoppingOrder.STATUSES[i]).equals(order.getPpPaymentStatus()) ? "selected" : "" %> value="<%= ShoppingOrder.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrder.STATUSES[i]) %></option>
+						<option <%= ShoppingUtil.getPpPaymentStatus(ShoppingOrderImpl.STATUSES[i]).equals(order.getPpPaymentStatus()) ? "selected" : "" %> value="<%= ShoppingOrderImpl.STATUSES[i] %>"><%= LanguageUtil.get(pageContext, ShoppingOrderImpl.STATUSES[i]) %></option>
 
 					<%
 					}

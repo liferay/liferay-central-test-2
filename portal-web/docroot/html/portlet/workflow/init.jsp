@@ -28,4 +28,4 @@
 --%><%@ page import="com.liferay.portlet.workflow.search.DefinitionDisplayTerms" %><%--
 --%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearch" %><%--
 --%><%@ page import="com.liferay.portlet.workflow.search.DefinitionSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.workflow.service.spring.WorkflowComponentServiceUtil" %>
+--%><%@ page import="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil" %>

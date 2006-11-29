@@ -22,7 +22,7 @@
 
 package com.liferay.util.xml;
 
-import com.liferay.util.StringPool;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="CDATAUtil.java.html"><b><i>View Source</i></b></a>

@@ -37,7 +37,7 @@ if (communities.size() > 0) {
 	groupId = group.getGroupId();
 }
 
-String type = JournalArticle.TYPES[0];
+String type = JournalArticleImpl.TYPES[0];
 
 try {
 	if (articleIds.length > 0) {

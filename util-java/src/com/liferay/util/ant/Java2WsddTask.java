@@ -85,6 +85,7 @@ public class Java2WsddTask {
 		Java2WsdlAntTask java2Wsdl = new Java2WsdlAntTask();
 
 		NamespaceMapping mapping = new NamespaceMapping();
+
 		mapping.setNamespace(namespace);
 		mapping.setPackage(mappingPackage);
 

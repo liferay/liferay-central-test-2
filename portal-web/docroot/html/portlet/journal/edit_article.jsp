@@ -58,7 +58,7 @@ JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_AR
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");
 
-double version = BeanParamUtil.getDouble(article, request, "version", JournalArticle.DEFAULT_VERSION);
+double version = BeanParamUtil.getDouble(article, request, "version", JournalArticleImpl.DEFAULT_VERSION);
 boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
 
 Calendar displayDate = new GregorianCalendar(timeZone, locale);
@@ -662,10 +662,10 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<select name="<portlet:namespace />type">
 
 			<%
-			for (int i = 0; i < JournalArticle.TYPES.length; i++) {
+			for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
 			%>
 
-				<option <%= type.equals(JournalArticle.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticle.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticle.TYPES[i]) %></option>
+				<option <%= type.equals(JournalArticleImpl.TYPES[i]) ? "selected" : "" %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
 
 			<%
 			}

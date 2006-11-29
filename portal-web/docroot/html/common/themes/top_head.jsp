@@ -35,7 +35,7 @@
 <%
 List portlets = null;
 
-if ((layout != null) && layout.getType().equals(Layout.TYPE_PORTLET)) {
+if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 	portlets = layoutTypePortlet.getPortlets();
 }
 %>
