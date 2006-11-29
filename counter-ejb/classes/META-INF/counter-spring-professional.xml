@@ -25,13 +25,13 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.counter.service.spring.CounterLocalService.professional" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" lazy-init="true" />
-	<!--<bean id="com.liferay.counter.service.spring.CounterLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.counter.service.CounterLocalService.professional" class="com.liferay.counter.service.impl.CounterLocalServiceImpl" lazy-init="true" />
+	<!--<bean id="com.liferay.counter.service.CounterLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.counter.service.spring.CounterLocalService.professional" />
+			<ref bean="com.liferay.counter.service.CounterLocalService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -39,19 +39,19 @@
 			</props>
 		</property>
 	</bean>-->
-	<alias name="com.liferay.counter.service.spring.CounterLocalService.professional" alias="com.liferay.counter.service.spring.CounterLocalService.transaction" />
-	<bean id="com.liferay.counter.service.spring.CounterLocalServiceFactory" class="com.liferay.counter.service.spring.CounterLocalServiceFactory" lazy-init="true">
+	<alias name="com.liferay.counter.service.CounterLocalService.professional" alias="com.liferay.counter.service.CounterLocalService.transaction" />
+	<bean id="com.liferay.counter.service.CounterLocalServiceFactory" class="com.liferay.counter.service.CounterLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.counter.service.spring.CounterLocalService.transaction" />
+			<ref bean="com.liferay.counter.service.CounterLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.counter.service.spring.CounterService.professional" class="com.liferay.counter.service.impl.CounterServiceImpl" lazy-init="true" />
-	<!--<bean id="com.liferay.counter.service.spring.CounterService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.counter.service.CounterService.professional" class="com.liferay.counter.service.impl.CounterServiceImpl" lazy-init="true" />
+	<!--<bean id="com.liferay.counter.service.CounterService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.counter.service.spring.CounterService.professional" />
+			<ref bean="com.liferay.counter.service.CounterService.professional" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -59,10 +59,10 @@
 			</props>
 		</property>
 	</bean>-->
-	<alias name="com.liferay.counter.service.spring.CounterService.professional" alias="com.liferay.counter.service.spring.CounterService.transaction" />
-	<bean id="com.liferay.counter.service.spring.CounterServiceFactory" class="com.liferay.counter.service.spring.CounterServiceFactory" lazy-init="true">
+	<alias name="com.liferay.counter.service.CounterService.professional" alias="com.liferay.counter.service.CounterService.transaction" />
+	<bean id="com.liferay.counter.service.CounterServiceFactory" class="com.liferay.counter.service.CounterServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.counter.service.spring.CounterService.transaction" />
+			<ref bean="com.liferay.counter.service.CounterService.transaction" />
 		</property>
 	</bean>
 	<bean id="com.liferay.counter.service.persistence.CounterPersistence" class="com.liferay.counter.service.persistence.CounterPersistence" lazy-init="true">

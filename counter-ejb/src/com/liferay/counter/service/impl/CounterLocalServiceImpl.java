@@ -22,8 +22,8 @@
 
 package com.liferay.counter.service.impl;
 
+import com.liferay.counter.service.CounterLocalService;
 import com.liferay.counter.service.persistence.CounterUtil;
-import com.liferay.counter.service.spring.CounterLocalService;
 import com.liferay.portal.SystemException;
 
 import java.util.List;

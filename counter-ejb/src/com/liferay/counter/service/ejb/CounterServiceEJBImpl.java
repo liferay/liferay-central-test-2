@@ -22,8 +22,8 @@
 
 package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterService;
-import com.liferay.counter.service.spring.CounterServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.SystemException;
 
 import java.rmi.RemoteException;

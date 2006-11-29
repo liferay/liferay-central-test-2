@@ -22,7 +22,7 @@
 
 package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterService;
+import com.liferay.counter.service.CounterService;
 
 import javax.ejb.EJBObject;
 

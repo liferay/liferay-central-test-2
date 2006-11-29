@@ -22,8 +22,8 @@
 
 package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterLocalService;
-import com.liferay.counter.service.spring.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.portal.SystemException;
 
 import java.util.List;

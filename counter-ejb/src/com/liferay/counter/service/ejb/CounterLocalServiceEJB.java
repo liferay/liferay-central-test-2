@@ -22,7 +22,7 @@
 
 package com.liferay.counter.service.ejb;
 
-import com.liferay.counter.service.spring.CounterLocalService;
+import com.liferay.counter.service.CounterLocalService;
 
 import javax.ejb.EJBLocalObject;
 
