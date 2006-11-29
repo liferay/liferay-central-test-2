@@ -813,13 +813,13 @@ function submitForm(form, action, singleSubmit) {
 // Netscape 4 functions
 
 if (is_ns_4) {
-	function encodeURIComponent(uri) {
+	encodeURIComponent = new function(uri) {
 		return escape(uri);
-	}
+	};
 
-	function decodeURIComponent(uri) {
+	decodeURIComponent = new function(uri) {
 		return unescape(uri);
-	}
+	};
 }
 
 // String functions
