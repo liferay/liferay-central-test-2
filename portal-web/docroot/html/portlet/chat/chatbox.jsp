@@ -26,6 +26,7 @@
 
 <%
 boolean addUser = ParamUtil.getBoolean(request, "addUser");
+String messages = ParamUtil.getString(request, "messages");
 String toId = ParamUtil.getString(request, "toId");
 String toName = ParamUtil.getString(request, "toName");
 int zIndex = ParamUtil.getInteger(request, "zIndex");
@@ -35,14 +36,25 @@ int left = ParamUtil.getInteger(request, "left");
 
 <div class="msg-chat-box" id="msg-chat-box<%= toId %>" style="border: 1px solid #000000; padding: 10px; z-index: <%= zIndex %>; left: <%= left %>px; position: absolute; top: <%= top %>px; background-color: #ffffff; text-align: left"
 	onClick="this.style.zIndex = ZINDEX.CHAT_BOX + Messaging.zIndex++">
-	<div style="WIDTH: 250px">
+	<div class="msg-chat-box-width" style="WIDTH: 250px">
 		<div class="msg-chat-title" style="cursor: move">
-			Chat with <span style="font-weight: bold"><%= toName %></span><a style="padding-left: 20px; cursor: pointer" onClick="Messaging.removeChat(this)">close</a>
+			<table cellpadding="0" cellspacing="0" border="0" width="100%">
+			<tr>
+				<td>
+					Chat with <span class="msg-to-name" style="font-weight: bold"><%= toName %></span>
+				</td>
+				<td align="right">
+					<a style="cursor: pointer" href="javascript: Messaging.removeChat('msg-chat-box<%= toId %>')"><img src="<%= themeDisplay.getPathThemeImage() %>/portlet/close.gif" /></a>
+				</td>
+			</tr>
+			</table>
 		</div>
 
 		<input class="msg-to-input-id" type=hidden value="<%= toId %>" />
 
-		<div class="msg-chat-area" style="border: #d0d0d0 1px solid; padding: 5px; overflow: auto; margin: 5px 0 5px 0; height: 100px"></div>
+		<div class="msg-chat-area" style="border: #d0d0d0 1px solid; padding: 5px; overflow: auto; margin: 5px 0 5px 0; height: 100px">
+			<%= messages %>
+		</div>
 
 		<input class="msg-type-area form-text" style="width: 100%" tabIndex=1 onKeyPress="Messaging.sendChat(this, event)" />
 

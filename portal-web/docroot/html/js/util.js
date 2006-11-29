@@ -930,6 +930,71 @@ function trimString(str) {
 
 String.prototype.trim = trimString;
 
+var Viewport = {
+	frame: function() {
+		var x,y;
+		if (self.innerHeight) // all except Explorer
+		{
+			x = self.innerWidth;
+			y = self.innerHeight;
+		}
+		else if (document.documentElement && document.documentElement.clientHeight)
+			// Explorer 6 Strict Mode
+		{
+			x = document.documentElement.clientWidth;
+			y = document.documentElement.clientHeight;
+		}
+		else if (document.body) // other Explorers
+		{
+			x = document.body.clientWidth;
+			y = document.body.clientHeight;
+		}
+		
+		return (new Coordinate(x,y));
+	},
+	
+	scroll: function() {
+		var x,y;
+		if (self.pageYOffset) // all except Explorer
+		{
+			x = self.pageXOffset;
+			y = self.pageYOffset;
+		}
+		else if (document.documentElement && document.documentElement.scrollTop)
+			// Explorer 6 Strict
+		{
+			x = document.documentElement.scrollLeft;
+			y = document.documentElement.scrollTop;
+		}
+		else if (document.body) // all other Explorers
+		{
+			x = document.body.scrollLeft;
+			y = document.body.scrollTop;
+		}
+		
+		return (new Coordinate(x,y));
+	},
+	
+	page: function() {
+		var x,y;
+		var test1 = document.body.scrollHeight;
+		var test2 = document.body.offsetHeight
+		if (test1 > test2) // all but Explorer Mac
+		{
+			x = document.body.scrollWidth;
+			y = document.body.scrollHeight;
+		}
+		else // Explorer Mac;
+		     //would also work in Explorer 6 Strict, Mozilla and Safari
+		{
+			x = document.body.offsetWidth;
+			y = document.body.offsetHeight;
+		}
+
+		return (new Coordinate(x,y));
+	}
+}
+
 var ZINDEX = {
 	ALERT: 100,
 	CHAT_BOX: 11,

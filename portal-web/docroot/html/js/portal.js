@@ -540,7 +540,7 @@ var Navigation = {
 
 		AjaxUtil.request(url, {
 				onComplete: function(xmlHttpReq) {
-					var jo = createJSONObject(xmlHttpReq.responseText);
+					var jo = $J(xmlHttpReq.responseText);
 					window.location = jo.url + "&newPage=1";
 				}
 			});

@@ -24,16 +24,6 @@
 
 <%@ include file="/html/common/init.jsp" %>
 
-<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-	<script type="text/javascript">
-		var chatHTML = Cookie.read("<%= request.getRemoteUser() %>_chats");
-
-		if (chatHTML != null)  {
-			document.write(decodeURIComponent(chatHTML));
-		}
-	</script>
-</c:if>
-
 <c:if test="<%= ShutdownUtil.isInProcess() %>">
 	<table border="0" cellpadding="1" cellspacing="0" width="100%">
 	<tr>

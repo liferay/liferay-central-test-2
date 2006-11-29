@@ -194,16 +194,20 @@ var Drag = {
 		// Automatically scroll the page it drags near the top or bottom
 		var scrollZone = 20;
 		var scrollSpeed = 5;
+		var scrollTop = Viewport.scroll().y;
+		var pageHeight = Viewport.page().y;
+		var clientHeight = Viewport.frame().y;
 
-		if (!is_safari) {
-			if ((document.body.scrollTop + document.body.clientHeight + 2 * scrollZone) < document.body.scrollHeight && mousePos.y > (document.body.scrollTop + document.body.clientHeight - scrollZone)) {
-				window.scroll(0, document.body.scrollTop + scrollSpeed);
-				nwPosition.y += scrollSpeed;
-			}
-			if (document.body.scrollTop > 0 && mousePos.y < (document.body.scrollTop + scrollZone)) {
-				window.scroll(0, document.body.scrollTop - scrollSpeed);
-				nwPosition.y -= scrollSpeed;
-			}
+		if ((scrollTop + clientHeight + 2 * scrollZone) < pageHeight
+				&& mousePos.y > (scrollTop + clientHeight - scrollZone)) {
+				
+			window.scroll(0, scrollTop + scrollSpeed);
+			nwPosition.y += scrollSpeed;
+		}
+		if (scrollTop > 0 && mousePos.y < (scrollTop + scrollZone)) {
+		
+			window.scroll(0, scrollTop - scrollSpeed);
+			nwPosition.y -= scrollSpeed;
 		}
 		
 		var adjusted = mouse.constrain(group.mouseMin, group.mouseMax);

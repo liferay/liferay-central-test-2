@@ -190,7 +190,7 @@ var ReverseAjax = {
 	},
 	
 	response: function(xmlHttpRequest) {
-		var res = createJSONObject(xmlHttpRequest.responseText);
+		var res =$J(xmlHttpRequest.responseText);
 		var status = res.status;
 		
 		if (status && status != "failure") {
@@ -212,7 +212,7 @@ var ReverseAjax = {
 	}
 }
 
-function createJSONObject(JSONText) {
+function $J(JSONText) {
 	return eval("(" + JSONText + ")");
 }
 

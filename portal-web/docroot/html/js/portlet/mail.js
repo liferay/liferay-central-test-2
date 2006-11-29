@@ -316,7 +316,7 @@ var Mail = {
 	},
 	
 	emptyFolderReturn : function(xmlHttpReq) {
-		var jsonObj = createJSONObject(xmlHttpReq.responseText);
+		var jsonObj = $J(xmlHttpReq.responseText);
 
 		Mail.getFolders();
 
@@ -347,7 +347,7 @@ var Mail = {
 	},
 	
 	getFoldersReturn : function(xmlHttpReq, checkMail) {
-		var foldersObject = createJSONObject(xmlHttpReq.responseText);
+		var foldersObject = $J(xmlHttpReq.responseText);
 		var folderPane = document.getElementById("portlet-mail-folder-pane");
 		var folderList = document.createElement("ul");
 		var folders = foldersObject.folders;
@@ -458,7 +458,7 @@ var Mail = {
 	},
 
 	getMessageDetailsReturn : function(xmlHttpReq, messageId) {
-		var mailObject = createJSONObject(xmlHttpReq.responseText);
+		var mailObject = $J(xmlHttpReq.responseText);
 
 		Mail.currentMessageId = mailObject.id;
 		Mail.displayingMessage = true;
@@ -497,7 +497,7 @@ var Mail = {
 	},
 	
 	getPreviewReturn : function(xmlHttpReq) {
-		var mailObject = createJSONObject(xmlHttpReq.responseText);
+		var mailObject = $J(xmlHttpReq.responseText);
 
 		Mail.searchResults = false;
 
@@ -509,7 +509,7 @@ var Mail = {
 	},
 
 	getSearchReturn : function(xmlHttpReq) {
-		var mailObject = createJSONObject(xmlHttpReq.responseText);
+		var mailObject = $J(xmlHttpReq.responseText);
 
 		Mail.currentMessageId = null;
 		Mail.mailObject = mailObject;

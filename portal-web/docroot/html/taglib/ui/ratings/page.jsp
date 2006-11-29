@@ -84,7 +84,7 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 
 				AjaxUtil.request(url, {
 					onComplete: function(xmlHttpReq) {
-						var res = createJSONObject(xmlHttpReq.responseText);
+						var res = $J(xmlHttpReq.responseText);
 
 						$("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
 						$("<%= randomNamespace %>averageRating").onmousemove = function(event) {

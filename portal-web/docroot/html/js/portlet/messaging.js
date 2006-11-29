@@ -15,12 +15,16 @@ var Messaging = {
 			var url = themeDisplay.getPathMain() + "/messaging/action?cmd=chatbox" +
 				"&toId=" + msg.toId +
 				"&toName=" + encodeURIComponent(msg.toName) +
-				"&top=" + (this.windowCount * 15) +
-				"&left=" + (this.windowCount * 15) +
-				"&zIndex=" + (ZINDEX.CHAT_BOX + this.zIndex);
+				"&top=" + (msg.top || this.windowCount * 15) +
+				"&left=" + (msg.left || this.windowCount * 15) +
+				"&zIndex=" + (ZINDEX.CHAT_BOX + this.zIndex++);
 				
 			if (msg.status && msg.status == "unavailable") {
 				url += "&addUser=1";
+			}
+			
+			if (msg.messages) {
+				url += "&messages=" + encodeURIComponent(msg.messages);
 			}
 			
 			AjaxUtil.request(url, {
@@ -128,40 +132,66 @@ var Messaging = {
 
 			body.insertBefore(mainDiv, body.childNodes[0]);
 		}
-
-		var chatList = document.getElementsByClassName("msg-chat-box", mainDiv);
 		
-		chatList.each(function(chatBox){
-			var chatTitle = document.getElementsByClassName("msg-chat-title", chatBox)[0];
-			var chatArea = document.getElementsByClassName("msg-chat-area", chatBox)[0];
-			
-			chatArea.scrollTop = chatArea.scrollHeight;
-			Drag.makeDraggable(chatBox, chatTitle);
-			chatBox.onDragEnd = function() { Messaging.saveCookie(); };
-		});
-
 		this.mainDiv = mainDiv;
+
+		var msgJSON = Cookie.read(this.userId + "_chats");
+		
+		if (msgJSON) {
+			var chatArray = $J(decodeURIComponent(msgJSON));
+			
+			chatArray.each(function(item){
+				Messaging.chat(item);
+			});
+		}
+
 		this.initialized = true;
 		Messaging.getChats();
 	},
 
-	removeChat : function(obj) {
-		var chatBox = obj;
+	maximizeChat : function(id) {
+		var chatBox = $(id);
+		var widthDiv = document.getElementsByClassName("msg-chat-box-width")[0];
+		var chatArea = document.getElementsByClassName("msg-chat-area")[0];
 		
-		while (chatBox && !Element.hasClassName(chatBox, "msg-chat-box")) {
-			chatBox = chatBox.parentNode;
-		}
+		chatBox.style.left = Viewport.scroll().x + "px";
+		chatBox.style.top = Viewport.scroll().y + "px";
+		widthDiv.style.width = (Viewport.frame().x - 30) + "px";
+		chatArea.style.height = (Viewport.frame().y - 100) + "px";
+	},
+
+	minimizeChat : function(id) {
+		var chatBox = $(id);
+		var widthDiv = document.getElementsByClassName("msg-chat-box-width")[0];
+		var chatArea = document.getElementsByClassName("msg-chat-area")[0];
 		
-		if (chatBox) {
-			Element.remove(chatBox);
-			this.saveCookie();
-		}
+		widthDiv.style.width = 250 + "px";
+		chatArea.style.height = 100 + "px";
+	},
+
+	removeChat : function(id) {
+		var chatBox = $(id);
+		
+		Element.remove(chatBox);
+		this.saveCookie();
 	},
 
 	saveCookie : function() {
-		var cookieDiv = document.createElement("div");
-		cookieDiv.appendChild(this.mainDiv.cloneNode(true));
-		Cookie.create(this.userId + "_chats", encodeURIComponent(cookieDiv.innerHTML), 99);
+		var chatList = document.getElementsByClassName("msg-chat-box", this.mainDiv);
+		var chatArray = new Array();
+		
+		chatList.each(function(item){
+			var msgObj = new Object();
+			msgObj.toName = document.getElementsByClassName("msg-to-name", item)[0].innerHTML;
+			msgObj.toId = document.getElementsByClassName("msg-to-input-id", item)[0].value;
+			msgObj.top = parseInt(item.style.top);
+			msgObj.left = parseInt(item.style.left);
+			msgObj.messages = document.getElementsByClassName("msg-chat-area", item)[0].innerHTML;
+			
+			chatArray.push(msgObj);
+		})
+		
+		Cookie.create(this.userId + "_chats", encodeURIComponent(chatArray.toJSONString()), 99);
 	},
 
 	sendChat : function(obj, e) {
@@ -209,6 +239,8 @@ var Messaging = {
 			chatArea.innerHTML += "<span style='color: #0000FF'>Me: </span>" + typeArea.value + "<br/>";
 			chatArea.scrollTop = chatArea.scrollHeight;
 			typeArea.value = "";
+			
+			Messaging.saveCookie();
 		}
 	},
 
