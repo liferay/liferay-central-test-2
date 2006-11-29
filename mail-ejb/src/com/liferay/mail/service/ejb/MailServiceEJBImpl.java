@@ -22,10 +22,10 @@
 
 package com.liferay.mail.service.ejb;
 
-import com.liferay.mail.service.spring.MailService;
-import com.liferay.mail.service.spring.MailServiceFactory;
+import com.liferay.mail.service.MailService;
+import com.liferay.mail.service.MailServiceFactory;
 import com.liferay.portal.SystemException;
-import com.liferay.util.mail.MailMessage;
+import com.liferay.portal.kernel.mail.MailMessage;
 
 import java.rmi.RemoteException;
 

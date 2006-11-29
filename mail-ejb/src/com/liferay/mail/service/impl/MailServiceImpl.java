@@ -22,15 +22,15 @@
 
 package com.liferay.mail.service.impl;
 
+import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.jms.MailProducer;
-import com.liferay.mail.service.spring.MailService;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.mail.MailMessage;
 
 import java.util.List;
 
