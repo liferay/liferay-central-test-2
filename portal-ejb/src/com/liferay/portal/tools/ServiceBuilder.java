@@ -1475,6 +1475,8 @@ public class ServiceBuilder {
 				for (int j = 0; j < columnList.size(); j++) {
 					EntityColumn col = (EntityColumn)columnList.get(j);
 
+					String colType = col.getType();
+
 					if (!col.isPrimary() && !col.isCollection() && col.getEJBName() == null) {
 						sb.append("\t\t<property name=\"" + col.getName() + "\" ");
 
@@ -1482,9 +1484,9 @@ public class ServiceBuilder {
 							sb.append("column=\"" + col.getDBName() + "\" ");
 						}
 
-						if (col.isPrimitiveType()) {
+						if (col.isPrimitiveType() || colType.equals("String")) {
 							sb.append("type=\"com.liferay.util.dao.hibernate.");
-							sb.append(_getPrimitiveObj(col.getType()));
+							sb.append(_getPrimitiveObj(colType));
 							sb.append("Type\" ");
 						}
 
@@ -5517,7 +5519,7 @@ public class ServiceBuilder {
 			return "Short";
 		}
 		else {
-			return null;
+			return type;
 		}
 	}
 
