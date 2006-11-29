@@ -32,8 +32,8 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 	<c:when test="<%= Validator.isNotNull(key) %>">
 
 		<%
-		sourceAddress = GetterUtil.getString((String)session.getAttribute(renderResponse.getNamespace() + "sourceAddress"), sourceAddress);
-		destinationAddress = GetterUtil.getString((String)session.getAttribute(renderResponse.getNamespace() + "destinationAddress"), destinationAddress);
+		mapAddress = GetterUtil.getString((String)session.getAttribute(renderResponse.getNamespace() + "mapAddress"), mapAddress);
+		directionsAddress = GetterUtil.getString((String)session.getAttribute(renderResponse.getNamespace() + "directionsAddress"), directionsAddress);
 		%>
 
 		<script src="http://maps.google.com/maps?file=api&amp;v=2&amp;key=<%= key %>" type="text/javascript">
@@ -52,7 +52,7 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 
 					<portlet:namespace />geocoder = new GClientGeocoder();
 
-					<portlet:namespace />getAddress("<%= sourceAddress %>");
+					<portlet:namespace />getAddress("<%= mapAddress %>");
 				}
 			}
 
@@ -64,7 +64,7 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 					address,
 					function (point) {
 						if (!point) {
-							alert(address + " not found");
+							//alert(address + " not found");
 						}
 						else {
 							<portlet:namespace />map.setCenter(point, 13);
@@ -80,47 +80,53 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 			}
 
 			function <portlet:namespace />getDirections() {
-				<portlet:namespace />getMap();
+				var mapAddress = <portlet:namespace />getMap();
 
-				var destinationAddress = document.<portlet:namespace />fm.<portlet:namespace />destinationAddress.value;
+				var directionsAddress = document.<portlet:namespace />fm.<portlet:namespace />directionsAddress.value;
 
-				<portlet:namespace />saveDestinationAddress(destinationAddress);
+				<portlet:namespace />saveDirectionsAddress(directionsAddress);
 
-				window.open("http://maps.google.com/maps?f=q&hl=en&q=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />sourceAddress.value) + "+to+" + encodeURIComponent(destinationAddress));
+				window.open("http://maps.google.com/maps?f=q&hl=en&q=" + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />directionsAddress.value) + "+to+" + encodeURIComponent(mapAddress));
 			}
 
 			function <portlet:namespace />getMap() {
-				var sourceAddress = document.<portlet:namespace />fm.<portlet:namespace />sourceAddress.value;
+				var mapAddress = "<%= mapAddress %>";
 
-				<portlet:namespace />getAddress(sourceAddress);
-				<portlet:namespace />saveSourceAddress(sourceAddress);
+				<c:if test="<%= mapInputEnabled %>">
+					mapAddress = document.<portlet:namespace />fm.<portlet:namespace />mapAddress.value;
+				</c:if>
+
+				<portlet:namespace />getAddress(mapAddress);
+				<portlet:namespace />saveMapAddress(mapAddress);
+
+				return mapAddress;
 			}
 
-			function <portlet:namespace />saveDestinationAddress(address) {
-				loadPage(themeDisplay.getPathMain() + "/google_maps/save_destination_address", "namespace=" + encodeURIComponent("<%= renderResponse.getNamespace() %>") + "&destinationAddress=" + encodeURIComponent(address));
+			function <portlet:namespace />saveDirectionsAddress(address) {
+				loadPage(themeDisplay.getPathMain() + "/google_maps/save_directions_address", "namespace=" + encodeURIComponent("<%= renderResponse.getNamespace() %>") + "&directionsAddress=" + encodeURIComponent(address));
 			}
 
-			function <portlet:namespace />saveSourceAddress(address) {
-				loadPage(themeDisplay.getPathMain() + "/google_maps/save_source_address", "namespace=" + encodeURIComponent("<%= renderResponse.getNamespace() %>") + "&sourceAddress=" + encodeURIComponent(address));
+			function <portlet:namespace />saveMapAddress(address) {
+				loadPage(themeDisplay.getPathMain() + "/google_maps/save_map_address", "namespace=" + encodeURIComponent("<%= renderResponse.getNamespace() %>") + "&mapAddress=" + encodeURIComponent(address));
 			}
 		</script>
 
 		<form name="<portlet:namespace />fm">
 
-		<c:if test="<%= sourceInputEnabled %>">
-			<input class="form-text" name="<portlet:namespace />sourceAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= sourceAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }">
+		<c:if test="<%= mapInputEnabled %>">
+			<input class="form-text" name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getMap(); return false; }">
 
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "get-map") %>' onClick="<portlet:namespace />getMap();">
 		</c:if>
 
-		<c:if test="<%= destinationInputEnabled %>">
-			<input class="form-text" name="<portlet:namespace />destinationAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= destinationAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }">
+		<c:if test="<%= directionsInputEnabled %>">
+			<input class="form-text" name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>" onKeyPress="if (event.keyCode == 13) { <portlet:namespace />getDirections(); return false; }">
 
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "get-directions") %>' onClick="<portlet:namespace />getDirections();">
 		</c:if>
 
-		<c:if test="<%= sourceInputEnabled || destinationInputEnabled %>">
-			<br><br>
+		<c:if test="<%= mapInputEnabled || directionsInputEnabled %>">
+			<div style="padding-top: 5px;"></div>
 		</c:if>
 
 		<div id="<portlet:namespace />map" style="height: <%= height %>px; width: 100%;"></div>

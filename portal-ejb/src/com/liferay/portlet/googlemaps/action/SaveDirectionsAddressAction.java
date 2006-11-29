@@ -33,12 +33,12 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="SaveSourceAddressAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="SaveDirectionsAddressAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Mark Wong
  *
  */
-public class SaveSourceAddressAction extends JSONAction {
+public class SaveDirectionsAddressAction extends JSONAction {
 
 	public String getJSON(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -48,9 +48,10 @@ public class SaveSourceAddressAction extends JSONAction {
 		HttpSession ses = req.getSession();
 
 		String namespace = ParamUtil.getString(req, "namespace");
-		String sourceAddress = ParamUtil.getString(req, "sourceAddress");
+		String directionsAddress = ParamUtil.getString(
+			req, "directionsAddress");
 
-		ses.setAttribute(namespace + "sourceAddress", sourceAddress);
+		ses.setAttribute(namespace + "directionsAddress", directionsAddress);
 
 		return null;
 	}

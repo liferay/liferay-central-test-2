@@ -30,20 +30,20 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "source-address") %>
+		<%= LanguageUtil.get(pageContext, "map-address") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />sourceAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= sourceAddress %>">
+		<input class="form-text" name="<portlet:namespace />mapAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= mapAddress %>">
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "source-input-enabled") %>
+		<%= LanguageUtil.get(pageContext, "map-input-enabled") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-checkbox param="sourceInputEnabled" defaultValue="<%= sourceInputEnabled %>" />
+		<liferay-ui:input-checkbox param="mapInputEnabled" defaultValue="<%= mapInputEnabled %>" />
 	</td>
 </tr>
 <tr>
@@ -53,20 +53,20 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "destination-address") %>
+		<%= LanguageUtil.get(pageContext, "directions-address") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace />destinationAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= destinationAddress %>">
+		<input class="form-text" name="<portlet:namespace />directionsAddress" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= directionsAddress %>">
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "destination-input-enabled") %>
+		<%= LanguageUtil.get(pageContext, "directions-input-enabled") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<liferay-ui:input-checkbox param="destinationInputEnabled" defaultValue="<%= destinationInputEnabled %>" />
+		<liferay-ui:input-checkbox param="directionsInputEnabled" defaultValue="<%= directionsInputEnabled %>" />
 	</td>
 </tr>
 <tr>
@@ -92,5 +92,5 @@
 </form>
 
 <script type="text/javascript">
-	document.<portlet:namespace />fm.<portlet:namespace />sourceAddress.focus();
+	document.<portlet:namespace />fm.<portlet:namespace />mapAddress.focus();
 </script>

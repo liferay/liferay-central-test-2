@@ -33,9 +33,21 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String sourceAddress = prefs.getValue("source-address", StringPool.BLANK);
-boolean sourceInputEnabled = GetterUtil.getBoolean(prefs.getValue("source-input-enabled", StringPool.BLANK));
-String destinationAddress = prefs.getValue("destination-address", StringPool.BLANK);
-boolean destinationInputEnabled = GetterUtil.getBoolean(prefs.getValue("destination-input-enabled", StringPool.BLANK));
+String mapAddress = prefs.getValue("map-address", StringPool.BLANK);
+boolean mapInputEnabled = GetterUtil.getBoolean(prefs.getValue("map-input-enabled", StringPool.BLANK));
+String directionsAddress = prefs.getValue("directions-address", StringPool.BLANK);
+boolean directionsInputEnabled = GetterUtil.getBoolean(prefs.getValue("directions-input-enabled", StringPool.BLANK));
 String height = prefs.getValue("height", StringPool.BLANK);
+
+String sesMapAddress = (String)session.getAttribute(renderResponse.getNamespace() + "mapAddress");
+
+if (sesMapAddress != null) {
+	mapAddress = sesMapAddress;
+}
+
+String sesDirectionsAddress = (String)session.getAttribute(renderResponse.getNamespace() + "directionsAddress");
+
+if (sesDirectionsAddress != null) {
+	directionsAddress = sesDirectionsAddress;
+}
 %>

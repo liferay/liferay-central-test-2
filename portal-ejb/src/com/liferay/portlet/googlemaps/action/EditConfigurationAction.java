@@ -60,13 +60,12 @@ public class EditConfigurationAction extends PortletAction {
 			return;
 		}
 
-		String sourceAddress = ParamUtil.getString(req, "sourceAddress");
-		boolean sourceInputEnabled = ParamUtil.getBoolean(
-			req, "sourceInputEnabled");
-		String destinationAddress = ParamUtil.getString(
-			req, "destinationAddress");
-		boolean destinationInputEnabled = ParamUtil.getBoolean(
-			req, "destinationInputEnabled");
+		String mapAddress = ParamUtil.getString(req, "mapAddress");
+		boolean mapInputEnabled = ParamUtil.getBoolean(req, "mapInputEnabled");
+		String directionsAddress = ParamUtil.getString(
+			req, "directionsAddress");
+		boolean directionsInputEnabled = ParamUtil.getBoolean(
+			req, "directionsInputEnabled");
 		String height = ParamUtil.getString(req, "height");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
@@ -74,13 +73,11 @@ public class EditConfigurationAction extends PortletAction {
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletResource, true, true);
 
-		prefs.setValue("source-address", sourceAddress);
+		prefs.setValue("map-address", mapAddress);
+		prefs.setValue("map-input-enabled", String.valueOf(mapInputEnabled));
+		prefs.setValue("directions-address", directionsAddress);
 		prefs.setValue(
-			"source-input-enabled", String.valueOf(sourceInputEnabled));
-		prefs.setValue("destination-address", destinationAddress);
-		prefs.setValue(
-			"destination-input-enabled",
-			String.valueOf(destinationInputEnabled));
+			"directions-input-enabled", String.valueOf(directionsInputEnabled));
 		prefs.setValue("height", height);
 
 		prefs.store();
@@ -88,7 +85,12 @@ public class EditConfigurationAction extends PortletAction {
 		PortletSession ses = req.getPortletSession();
 
 		ses.removeAttribute(
-			PortalUtil.getPortletNamespace(portletResource) + "sourceAddress",
+			PortalUtil.getPortletNamespace(portletResource) + "mapAddress",
+			PortletSession.APPLICATION_SCOPE);
+
+		ses.removeAttribute(
+			PortalUtil.getPortletNamespace(portletResource) +
+				"directionsAddress",
 			PortletSession.APPLICATION_SCOPE);
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
