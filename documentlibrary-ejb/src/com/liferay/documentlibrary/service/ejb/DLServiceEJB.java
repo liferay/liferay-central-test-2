@@ -22,7 +22,7 @@
 
 package com.liferay.documentlibrary.service.ejb;
 
-import com.liferay.documentlibrary.service.spring.DLService;
+import com.liferay.documentlibrary.service.DLService;
 
 import javax.ejb.EJBObject;
 

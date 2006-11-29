@@ -23,18 +23,17 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.service.impl.DLServiceImpl;
-import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.service.spring.DLFileEntryLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
@@ -96,7 +95,7 @@ public class IndexerImpl {
 			try {
 				session = JCRFactoryUtil.createSession();
 
-				Node contentNode = DLLocalServiceUtil.getFileContentNode(
+				Node contentNode = DLUtil.getFileContentNode(
 					session, companyId, repositoryId, fileName, 0);
 
 				is = contentNode.getProperty(JCRConstants.JCR_DATA).getStream();

@@ -23,27 +23,25 @@
 package com.liferay.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.NoSuchFileException;
-import com.liferay.documentlibrary.service.spring.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.util.DLUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Hits;
+import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
 
 import javax.jcr.Node;
-import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-import javax.jcr.version.Version;
-import javax.jcr.version.VersionHistory;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
@@ -79,7 +77,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		try {
 			session = JCRFactoryUtil.createSession();
 
-			Node contentNode = getFileContentNode(
+			Node contentNode = DLUtil.getFileContentNode(
 				session, companyId, repositoryId, fileName, versionNumber);
 
 			Property data = contentNode.getProperty(JCRConstants.JCR_DATA);
@@ -98,66 +96,20 @@ public class DLLocalServiceImpl implements DLLocalService {
 		return is;
 	}
 
-	public Node getFileContentNode(
+	public boolean hasFileContentNode(
 			String companyId, String repositoryId, String fileName,
 			double versionNumber)
 		throws PortalException, SystemException {
 
-		Node contentNode = null;
-
-		Session session = null;
-
 		try {
-			session = JCRFactoryUtil.createSession();
-
-			contentNode = getFileContentNode(
-				session, companyId, repositoryId, fileName, versionNumber);
+			DLUtil.getFileContentNode(
+				companyId, repositoryId, fileName, versionNumber);
 		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-		finally {
-			if (session != null) {
-				session.logout();
-			}
+		catch (NoSuchFileException nsfe) {
+			return false;
 		}
 
-		return contentNode;
-	}
-
-	public Node getFileContentNode(
-			Session session, String companyId, String repositoryId,
-			String fileName, double versionNumber)
-		throws PortalException, SystemException {
-
-		String versionLabel = String.valueOf(versionNumber);
-
-		Node contentNode = null;
-
-		try {
-			Node rootNode = DLUtil.getRootNode(session, companyId);
-			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
-			Node fileNode = repositoryNode.getNode(fileName);
-			contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
-
-			if (versionNumber > 0) {
-				VersionHistory versionHistory =
-					contentNode.getVersionHistory();
-
-				Version version = versionHistory.getVersionByLabel(
-					versionLabel);
-
-				contentNode = version.getNode(JCRConstants.JCR_FROZEN_NODE);
-			}
-		}
-		catch (PathNotFoundException pnfe) {
-			throw new NoSuchFileException(fileName);
-		}
-		catch (RepositoryException re) {
-			throw new SystemException(re);
-		}
-
-		return contentNode;
+		return true;
 	}
 
 	public Hits search(
@@ -166,7 +118,7 @@ public class DLLocalServiceImpl implements DLLocalService {
 		throws SystemException {
 
 		try {
-			Hits hits = new Hits();
+			HitsImpl hits = new HitsImpl();
 
 			if (Validator.isNull(keywords)) {
 				return hits;

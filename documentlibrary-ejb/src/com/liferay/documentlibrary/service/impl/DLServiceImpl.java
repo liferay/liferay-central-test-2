@@ -30,18 +30,18 @@ import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.SourceFileNameException;
-import com.liferay.documentlibrary.service.spring.DLLocalServiceUtil;
-import com.liferay.documentlibrary.service.spring.DLService;
+import com.liferay.documentlibrary.service.DLLocalServiceUtil;
+import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.util.DLUtil;
 import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.StringPool;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.IndexerException;
@@ -450,7 +450,7 @@ public class DLServiceImpl implements DLService {
 		try {
 			session = JCRFactoryUtil.createSession();
 
-			Node contentNode = DLLocalServiceUtil.getFileContentNode(
+			Node contentNode = DLUtil.getFileContentNode(
 				session, companyId, repositoryId, fileName, 0);
 
 			size = contentNode.getProperty(JCRConstants.JCR_DATA).getLength();

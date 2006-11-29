@@ -2,16 +2,16 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="com.liferay.documentlibrary.service.spring.DLLocalService.professional" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.documentlibrary.service.spring.DLLocalServiceFactory" class="com.liferay.documentlibrary.service.spring.DLLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.documentlibrary.service.DLLocalService.professional" class="com.liferay.documentlibrary.service.impl.DLLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.documentlibrary.service.DLLocalServiceFactory" class="com.liferay.documentlibrary.service.DLLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.documentlibrary.service.spring.DLLocalService.professional" />
+			<ref bean="com.liferay.documentlibrary.service.DLLocalService.professional" />
 		</property>
 	</bean>
-	<bean id="com.liferay.documentlibrary.service.spring.DLService.professional" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.documentlibrary.service.spring.DLServiceFactory" class="com.liferay.documentlibrary.service.spring.DLServiceFactory" lazy-init="true">
+	<bean id="com.liferay.documentlibrary.service.DLService.professional" class="com.liferay.documentlibrary.service.impl.DLServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.documentlibrary.service.DLServiceFactory" class="com.liferay.documentlibrary.service.DLServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.documentlibrary.service.spring.DLService.professional" />
+			<ref bean="com.liferay.documentlibrary.service.DLService.professional" />
 		</property>
 	</bean>
 </beans>

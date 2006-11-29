@@ -22,12 +22,19 @@
 
 package com.liferay.documentlibrary.util;
 
+import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactory;
+import com.liferay.portal.jcr.JCRFactoryUtil;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.version.Version;
+import javax.jcr.version.VersionHistory;
 
 /**
  * <a href="DLUtil.java.html"><b><i>View Source</i></b></a>
@@ -36,6 +43,68 @@ import javax.jcr.Session;
  *
  */
 public class DLUtil {
+
+	public static Node getFileContentNode(
+			String companyId, String repositoryId, String fileName,
+			double versionNumber)
+		throws PortalException, SystemException {
+
+		Node contentNode = null;
+
+		Session session = null;
+
+		try {
+			session = JCRFactoryUtil.createSession();
+
+			contentNode = getFileContentNode(
+				session, companyId, repositoryId, fileName, versionNumber);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+
+		return contentNode;
+	}
+
+	public static Node getFileContentNode(
+			Session session, String companyId, String repositoryId,
+			String fileName, double versionNumber)
+		throws PortalException, SystemException {
+
+		String versionLabel = String.valueOf(versionNumber);
+
+		Node contentNode = null;
+
+		try {
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+
+			if (versionNumber > 0) {
+				VersionHistory versionHistory =
+					contentNode.getVersionHistory();
+
+				Version version = versionHistory.getVersionByLabel(
+					versionLabel);
+
+				contentNode = version.getNode(JCRConstants.JCR_FROZEN_NODE);
+			}
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+
+		return contentNode;
+	}
 
 	public static Node getFolderNode(Node node, String name)
 		throws RepositoryException {
