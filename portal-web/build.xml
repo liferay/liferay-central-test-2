@@ -55,6 +55,7 @@
 		<unjar src="${project.dir}/lib/development/ejb.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/development/mail.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/global/portlet.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/alfresco-client.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/ant.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-fileupload.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-lang.jar" dest="${classpath.jsp}" />

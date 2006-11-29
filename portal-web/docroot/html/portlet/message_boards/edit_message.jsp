@@ -91,12 +91,21 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 	MBMessage temp = null;
 
 	if (message != null) {
-		temp = (MBMessage)message.clone();
+		temp = message;
 
-		message.setBody(body);
+		message = new MBMessageImpl();
+
+		message.setUserId(temp.getUserId());
+		message.setUserName(temp.getUserName());
+		message.setCreateDate(temp.getCreateDate());
+		message.setModifiedDate(temp.getModifiedDate());
+		message.setThreadId(temp.getThreadId());
+		message.setSubject(temp.getSubject());
+		message.setBody(temp.getBody());
+		message.setAnonymous(temp.isAnonymous());
 	}
 	else {
-		message = new MBMessage();
+		message = new MBMessageImpl();
 
 		message.setUserId(user.getUserId());
 		message.setUserName(user.getFullName());
