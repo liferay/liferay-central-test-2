@@ -30,7 +30,9 @@
 			onmouseover="PortletHeaderBar.show(this.id)"
 			onmouseout="PortletHeaderBar.hide(this.id)"
 		</c:if>
-		><div class="portlet-header-left"><div class="portlet-header-right">
+	>
+	<div class="portlet-header-bar-inner">
+	
 		<c:if test="<%= Validator.isNotNull(portletDisplay.getTitle()) %>">
 			<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletDisplay.getTitle() %></span>
 		</c:if>
@@ -59,8 +61,9 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-
-	</div></div></div><!-- end portlet-header-bar -->
+		
+	</div>
+	</div><!-- end portlet-header-bar -->
 
 	<div class="portlet-box">
 		<div class="portlet-minimum-height">

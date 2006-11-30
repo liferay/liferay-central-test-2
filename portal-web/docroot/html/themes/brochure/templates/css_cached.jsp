@@ -43,12 +43,11 @@ String fontXXL = "1.5em";
 %>
 
 a {
-	color: #1d50aa;
+	color: <%= colorScheme.getPortletFontDim() %>;
 	text-decoration: none;
 }
 
 a:hover {
-	color: #1d50aa;
 	text-decoration: underline;
 }
 
@@ -366,6 +365,7 @@ FONT.bg {
 }
 
 .layout-my-places {
+	cursor: pointer;
 	border: 1px solid #909090;
 	padding: 2px;
 }
@@ -378,6 +378,7 @@ FONT.bg {
 #layout-my-places ul {
 	background-color: <%= colorScheme.getLayoutBg() %>;
 	border: 1px solid <%= colorScheme.getPortletTitleBg() %>;
+	cursor: pointer;
 	list-style-image: none;
 	position: absolute;
 	text-align: left;
@@ -571,14 +572,12 @@ FONT.bg {
 }
 
 .portlet-header-bar {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/header-middle.png) scroll repeat-x;
+	border: 1px solid #4f4f4f;
 }
-.portlet-header-left {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/header-left.png) scroll no-repeat top left;
-}
-.portlet-header-right {
-	background: url(<%= themeDisplay.getPathThemeImage() %>/custom/header-right.png) scroll no-repeat top right;
-	height: 21px;
+
+.portlet-header-bar-inner {
+	background-color: <%= colorScheme.getPortletTitleBg() %>;
+	height: 18px;
 	position: relative;
 }
 
@@ -588,15 +587,15 @@ FONT.bg {
 .portlet-title {
 	color: <%= colorScheme.getPortletTitleText() %>;
 	font-weight: bold;
-	position: absolute;
-	top: 3px;
-	left: 15px;
+	top: 1px;
+	padding-left: 8px;
+	position: relative;
 }
 
 .portlet-small-icon-bar {
 	padding-left: 2px;
 	position: absolute;
-	top: 2px;
+	top: 1px;
 	right: 2px;
 }
 

@@ -15,8 +15,8 @@ var Messaging = {
 			var url = themeDisplay.getPathMain() + "/messaging/action?cmd=chatbox" +
 				"&toId=" + msg.toId +
 				"&toName=" + encodeURIComponent(msg.toName) +
-				"&top=" + (msg.top || this.windowCount * 15) +
-				"&left=" + (msg.left || this.windowCount * 15) +
+				"&top=" + (msg.top || 15 * this.windowCount) +
+				"&left=" + (msg.left || 15 * this.windowCount++) +
 				"&zIndex=" + (ZINDEX.CHAT_BOX + this.zIndex++);
 				
 			if (msg.status && msg.status == "unavailable") {
