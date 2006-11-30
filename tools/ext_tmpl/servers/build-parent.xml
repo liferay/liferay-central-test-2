@@ -49,8 +49,33 @@
 		<antcall target="download-server">
 			<param name="app.server.zip.url" value="${app.server.glassfish.zip.url}" />
 			<param name="app.server.zip.name" value="${app.server.glassfish.zip.name}" />
-			<param name="app.server.dest" value="${app.server.glassfish.dir}" />
 		</antcall>
+
+		<tstamp>
+			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.dir}" />
+
+		<java
+			dir="${tstamp.dir}"
+			fork="true"
+			input="glassfish/input.txt"
+			jar="${downloads.dir}/${app.server.glassfish.zip.name}"
+			maxmemory="256m"
+		>
+			<arg value="-console"/>
+		</java>
+
+		<move file="${tstamp.dir}/glassfish" tofile="${app.server.glassfish.dir}" />
+
+		<delete dir="${tstamp.dir}" />
+
+		<ant antfile="${app.server.glassfish.dir}/setup.xml" inheritAll="false" />
+
+		<copy todir="${app.server.glassfish.dir}/domains" overwrite="yes">
+			<fileset dir="glassfish/domains" />
+		</copy>
 	</target>
 
 	<target name="install-jboss-jetty">
@@ -139,7 +164,6 @@
 		<antcall target="download-server">
 			<param name="app.server.zip.url" value="${app.server.pramati.zip.url}" />
 			<param name="app.server.zip.name" value="${app.server.pramati.zip.name}" />
-			<param name="app.server.dest" value="${app.server.pramati.dir}" />
 		</antcall>
 
 		<copy file="pramati/silent_install.xml.template" tofile="pramati/silent_install.xml" overwrite="yes">

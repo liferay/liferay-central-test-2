@@ -27,24 +27,35 @@
 		</java>
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<copy todir="${app.server.bin.dir}/nt">
-					<fileset dir=".">
-						<include name="jbpm.properties" />
-						<include name="jbpm.script" />
-					</fileset>
-				</copy>
-				<copy todir="${app.server.bin.dir}/unix">
+				<copy todir="${app.server.dir}/domains/domain1/config">
 					<fileset dir=".">
 						<include name="jbpm.properties" />
 						<include name="jbpm.script" />
 					</fileset>
 				</copy>
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<copy todir="${app.server.bin.dir}/nt">
+						<fileset dir=".">
+							<include name="jbpm.properties" />
+							<include name="jbpm.script" />
+						</fileset>
+					</copy>
+					<copy todir="${app.server.bin.dir}/unix">
+						<fileset dir=".">
+							<include name="jbpm.properties" />
+							<include name="jbpm.script" />
+						</fileset>
+					</copy>
+				</then>
+			</elseif>
 			<else>
 				<copy todir="${app.server.bin.dir}">
 					<fileset dir=".">

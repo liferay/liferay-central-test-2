@@ -96,7 +96,10 @@
 				</then>
 			</elseif>
 			<elseif>
-				<equals arg1="${app.server.type}" arg2="pramati" />
+				<or>
+					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<equals arg1="${app.server.type}" arg2="pramati" />
+				</or>
 				<then>
 					<copy file="${modules.dir}${jar.file}.jar" todir="${app.server.portal.dir}" />
 				</then>
@@ -187,7 +190,10 @@
 				<copy file="${modules.dir}${war.file}.war" todir="${app.server.deploy.dir}" />
 			</then>
 			<elseif>
-				<equals arg1="${app.server.type}" arg2="pramati" />
+				<or>
+					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<equals arg1="${app.server.type}" arg2="pramati" />
+				</or>
 				<then>
 					<if>
 						<equals arg1="${war.file}" arg2="ext-web" />
@@ -269,7 +275,10 @@
 			<equals arg1="${war.file}" arg2="tunnel-web" />
 			<then>
 				<if>
-					<equals arg1="${app.server.type}" arg2="pramati" />
+					<or>
+						<equals arg1="${app.server.type}" arg2="glassfish" />
+						<equals arg1="${app.server.type}" arg2="pramati" />
+					</or>
 					<then>
 						<tstamp>
 							<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />

@@ -25,25 +25,37 @@
 			<fileset dir="${app.server.bin.dir}" includes="*.log*,ActiveMQ/**,alf_data/**" />
 		</delete>
 
+
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
 				<delete>
 					<fileset
-						dir="${app.server.bin.dir}/nt"
-						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
-					/>
-				</delete>
-				<delete>
-					<fileset
-						dir="${app.server.bin.dir}/unix"
+						dir="${app.server.dir}/domains/domain1/config"
 						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
 					/>
 				</delete>
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<delete>
+						<fileset
+							dir="${app.server.bin.dir}/nt"
+							includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+						/>
+					</delete>
+					<delete>
+						<fileset
+							dir="${app.server.bin.dir}/unix"
+							includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+						/>
+					</delete>
+				</then>
+			</elseif>
 			<else>
 				<delete>
 					<fileset
@@ -100,7 +112,10 @@
 
 	<target name="deploy">
 		<if>
-			<equals arg1="${app.server.type}" arg2="pramati" />
+			<or>
+				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
+			</or>
 			<then>
 				<delete file="${app.server.portal.dir}" />
 			</then>
@@ -116,24 +131,35 @@
 		<ant dir="themes" target="deploy" inheritAll="false" />
 
 		<if>
-			<or>
-				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-			</or>
+			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<copy todir="${app.server.bin.dir}/nt">
-					<fileset dir="sql">
-						<include name="${database.name}.properties" />
-						<include name="${database.name}.script" />
-					</fileset>
-				</copy>
-				<copy todir="${app.server.bin.dir}/unix">
+				<copy todir="${app.server.dir}/domains/domain1/config">
 					<fileset dir="sql">
 						<include name="${database.name}.properties" />
 						<include name="${database.name}.script" />
 					</fileset>
 				</copy>
 			</then>
+			<elseif>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
+					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
+				</or>
+				<then>
+					<copy todir="${app.server.bin.dir}/nt">
+						<fileset dir="sql">
+							<include name="${database.name}.properties" />
+							<include name="${database.name}.script" />
+						</fileset>
+					</copy>
+					<copy todir="${app.server.bin.dir}/unix">
+						<fileset dir="sql">
+							<include name="${database.name}.properties" />
+							<include name="${database.name}.script" />
+						</fileset>
+					</copy>
+				</then>
+			</elseif>
 			<else>
 				<copy todir="${app.server.bin.dir}">
 					<fileset dir="sql">
@@ -295,7 +321,10 @@
 
 
 		<if>
-			<equals arg1="${app.server.type}" arg2="pramati" />
+			<or>
+				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<equals arg1="${app.server.type}" arg2="pramati" />
+			</or>
 			<then>
 				<tstamp>
 					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
@@ -319,7 +348,10 @@
 			<then>
 			</then>
 			<elseif>
-				<equals arg1="${app.server.type}" arg2="pramati" />
+				<or>
+					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<equals arg1="${app.server.type}" arg2="pramati" />
+				</or>
 				<then>
 					<tstamp>
 						<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
@@ -333,10 +365,24 @@
 						</fileset>
 					</copy>
 
-					<replace file="${tstamp.dir}/portal-ext.properties">
-						<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
-						<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
-					</replace>
+					<if>
+						<equals arg1="${app.server.type}" arg2="glassfish" />
+						<then>
+							<replace file="${tstamp.dir}/portal-ext.properties">
+								<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+								<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
+							</replace>
+						</then>
+						<elseif>
+							<equals arg1="${app.server.type}" arg2="pramati" />
+							<then>
+								<replace file="${tstamp.dir}/portal-ext.properties">
+									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+									<replacevalue>auto.deploy.dest.dir=../nodes/liferay/archives/autodeploy</replacevalue>
+								</replace>
+							</then>
+						</elseif>
+					</if>
 
 					<jar
 						basedir="${tstamp.dir}"

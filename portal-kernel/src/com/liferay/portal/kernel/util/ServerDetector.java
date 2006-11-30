@@ -36,6 +36,9 @@ public class ServerDetector {
 	public static final String GERONIMO_CLASS =
 		"/org/apache/geronimo/system/main/Daemon.class";
 
+	public static final String GLASSFISH_CLASS =
+		"/com/sun/appserv/ClassLoaderUtil.class";
+
 	public static final String JBOSS_CLASS = "/org/jboss/Main.class";
 
 	public static final String JETTY_CLASS = "/org/mortbay/jetty/Server.class";
@@ -77,6 +80,9 @@ public class ServerDetector {
 			if (ServerDetector.isGeronimo()) {
 				sd._serverId = "geronimo";
 			}
+			else if (ServerDetector.isGlassfish()) {
+				sd._serverId = "glassfish";
+			}
 			else if (ServerDetector.isJBoss()) {
 				sd._serverId = "jboss";
 			}
@@ -102,20 +108,22 @@ public class ServerDetector {
 				sd._serverId = "websphere";
 			}
 
-			if (ServerDetector.isJetty()) {
-				if (sd._serverId == null) {
-					sd._serverId = "jetty";
+			if (!ServerDetector.isGlassfish()) {
+				if (ServerDetector.isJetty()) {
+					if (sd._serverId == null) {
+						sd._serverId = "jetty";
+					}
+					else {
+						sd._serverId += "-jetty";
+					}
 				}
-				else {
-					sd._serverId += "-jetty";
-				}
-			}
-			else if (ServerDetector.isTomcat()) {
-				if (sd._serverId == null) {
-					sd._serverId = "tomcat";
-				}
-				else {
-					sd._serverId += "-tomcat";
+				else if (ServerDetector.isTomcat()) {
+					if (sd._serverId == null) {
+						sd._serverId = "tomcat";
+					}
+					else {
+						sd._serverId += "-tomcat";
+					}
 				}
 			}
 
@@ -146,6 +154,23 @@ public class ServerDetector {
 		}
 
 		return sd._geronimo.booleanValue();
+	}
+
+	public static boolean isGlassfish() {
+		ServerDetector sd = _instance;
+
+		if (sd._glassfish == null) {
+			Class c = sd.getClass();
+
+			if (c.getResource(GLASSFISH_CLASS) != null) {
+				sd._glassfish = Boolean.TRUE;
+			}
+			else {
+				sd._glassfish = Boolean.FALSE;
+			}
+		}
+
+		return sd._glassfish.booleanValue();
 	}
 
 	public static boolean isJBoss() {
@@ -387,6 +412,7 @@ public class ServerDetector {
 
 	private String _serverId;
 	private Boolean _geronimo;
+	private Boolean _glassfish;
 	private Boolean _jBoss;
 	private Boolean _jetty;
 	private Boolean _jonas;
