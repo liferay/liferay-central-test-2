@@ -1,6 +1,6 @@
 package com.ext.portlet.reports.service.ejb;
 
-import com.ext.portlet.reports.service.spring.ReportsEntryService;
+import com.ext.portlet.reports.service.ReportsEntryService;
 
 import javax.ejb.EJBObject;
 

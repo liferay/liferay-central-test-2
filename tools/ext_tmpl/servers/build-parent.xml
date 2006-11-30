@@ -45,6 +45,14 @@
 		</if>
 	</target>
 
+	<target name="install-glassfish">
+		<antcall target="download-server">
+			<param name="app.server.zip.url" value="${app.server.glassfish.zip.url}" />
+			<param name="app.server.zip.name" value="${app.server.glassfish.zip.name}" />
+			<param name="app.server.dest" value="${app.server.glassfish.dir}" />
+		</antcall>
+	</target>
+
 	<target name="install-jboss-jetty">
 		<antcall target="install-server">
 			<param name="app.server.zip.url" value="${app.server.jboss-jetty.zip.url}" />

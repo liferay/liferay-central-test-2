@@ -2,16 +2,16 @@
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping default-lazy="false">
-	<class name="com.ext.portlet.reports.model.ReportsEntry" table="ReportsEntry">
+	<class name="com.ext.portlet.reports.model.impl.ReportsEntryImpl" table="ReportsEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="companyId" />
-		<property name="userId" />
-		<property name="userName" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="name" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

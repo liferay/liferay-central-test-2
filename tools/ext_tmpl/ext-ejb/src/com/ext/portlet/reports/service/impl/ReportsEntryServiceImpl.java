@@ -1,6 +1,6 @@
 package com.ext.portlet.reports.service.impl;
 
-import com.ext.portlet.reports.service.spring.ReportsEntryService;
+import com.ext.portlet.reports.service.ReportsEntryService;
 
 import com.liferay.portal.service.impl.PrincipalBean;
 

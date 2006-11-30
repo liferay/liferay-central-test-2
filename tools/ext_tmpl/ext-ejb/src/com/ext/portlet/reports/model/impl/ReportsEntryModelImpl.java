@@ -1,6 +1,6 @@
-package com.ext.portlet.reports.model;
+package com.ext.portlet.reports.model.impl;
 
-import com.liferay.portal.model.BaseModel;
+import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.util.GetterUtil;
@@ -9,10 +9,7 @@ import com.liferay.util.XSSUtil;
 import java.util.Date;
 
 
-public class ReportsEntryModel extends BaseModel {
-    public static boolean CACHEABLE = GetterUtil.get(PropsUtil.get(
-                "value.object.cacheable.com.ext.portlet.reports.model.ReportsEntry"),
-            VALUE_OBJECT_CACHEABLE);
+public class ReportsEntryModelImpl extends BaseModelImpl {
     public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
                 "xss.allow.com.ext.portlet.reports.model.ReportsEntry"),
             XSS_ALLOW);
@@ -41,7 +38,7 @@ public class ReportsEntryModel extends BaseModel {
     private Date _modifiedDate;
     private String _name;
 
-    public ReportsEntryModel() {
+    public ReportsEntryModelImpl() {
     }
 
     public String getPrimaryKey() {
@@ -163,7 +160,7 @@ public class ReportsEntryModel extends BaseModel {
     }
 
     public Object clone() {
-        ReportsEntry clone = new ReportsEntry();
+        ReportsEntryImpl clone = new ReportsEntryImpl();
         clone.setEntryId(getEntryId());
         clone.setCompanyId(getCompanyId());
         clone.setUserId(getUserId());
@@ -180,7 +177,7 @@ public class ReportsEntryModel extends BaseModel {
             return -1;
         }
 
-        ReportsEntry reportsEntry = (ReportsEntry) obj;
+        ReportsEntryImpl reportsEntry = (ReportsEntryImpl) obj;
         int value = 0;
         value = getName().toLowerCase().compareTo(reportsEntry.getName()
                                                               .toLowerCase());
@@ -197,10 +194,10 @@ public class ReportsEntryModel extends BaseModel {
             return false;
         }
 
-        ReportsEntry reportsEntry = null;
+        ReportsEntryImpl reportsEntry = null;
 
         try {
-            reportsEntry = (ReportsEntry) obj;
+            reportsEntry = (ReportsEntryImpl) obj;
         } catch (ClassCastException cce) {
             return false;
         }

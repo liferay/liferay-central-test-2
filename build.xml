@@ -853,17 +853,19 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 			/>
 		</copy>
 
-		<copy
-			file="${lp.ext.dir}/ext-web/docroot/WEB-INF/remoting-servlet-ext.xml"
-			todir="tools/ext_tmpl/ext-web/docroot/WEB-INF"
-			overwrite="yes"
-		/>
+		<copy todir="tools/ext_tmpl/ext-service" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-service"
+				includes="**/*.java"
+			/>
+		</copy>
 
-		<copy
-			file="${lp.ext.dir}/ext-web/docroot/WEB-INF/server-config.wsdd"
-			todir="tools/ext_tmpl/ext-web/docroot/WEB-INF"
-			overwrite="yes"
-		/>
+		<copy todir="tools/ext_tmpl/ext-web/docroot/WEB-INF" overwrite="yes">
+			<fileset
+				dir="${lp.ext.dir}/ext-web/docroot/WEB-INF"
+				includes="*.xml,*.wsdd"
+			/>
+		</copy>
 	</target>
 
 	<target name="zip">

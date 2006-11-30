@@ -2,12 +2,13 @@ package com.ext.portlet.reports.service.persistence;
 
 import com.ext.portlet.reports.NoSuchEntryException;
 import com.ext.portlet.reports.model.ReportsEntry;
+import com.ext.portlet.reports.model.impl.ReportsEntryImpl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.StringPool;
-import com.liferay.util.dao.hibernate.OrderByComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -25,7 +26,7 @@ public class ReportsEntryPersistence extends BasePersistence {
     private static Log _log = LogFactory.getLog(ReportsEntryPersistence.class);
 
     public ReportsEntry create(String entryId) {
-        ReportsEntry reportsEntry = new ReportsEntry();
+        ReportsEntry reportsEntry = new ReportsEntryImpl();
         reportsEntry.setNew(true);
         reportsEntry.setPrimaryKey(entryId);
 
@@ -39,18 +40,17 @@ public class ReportsEntryPersistence extends BasePersistence {
         try {
             session = openSession();
 
-            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntry.class,
+            ReportsEntry reportsEntry = (ReportsEntry) session.get(ReportsEntryImpl.class,
                     entryId);
 
             if (reportsEntry == null) {
                 if (_log.isWarnEnabled()) {
                     _log.warn("No ReportsEntry exists with the primary key " +
-                        entryId.toString());
+                        entryId);
                 }
 
                 throw new NoSuchEntryException(
-                    "No ReportsEntry exists with the primary key " +
-                    entryId.toString());
+                    "No ReportsEntry exists with the primary key " + entryId);
             }
 
             return remove(reportsEntry);
@@ -81,13 +81,23 @@ public class ReportsEntryPersistence extends BasePersistence {
     public com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws SystemException {
+        return update(reportsEntry, false);
+    }
+
+    public com.ext.portlet.reports.model.ReportsEntry update(
+        com.ext.portlet.reports.model.ReportsEntry reportsEntry,
+        boolean saveOrUpdate) throws SystemException {
         Session session = null;
 
         try {
             session = openSession();
 
-            if (reportsEntry.isNew()) {
-                session.save(reportsEntry);
+            if (saveOrUpdate) {
+                session.saveOrUpdate(reportsEntry);
+            } else {
+                if (reportsEntry.isNew()) {
+                    session.save(reportsEntry);
+                }
             }
 
             session.flush();
@@ -108,12 +118,11 @@ public class ReportsEntryPersistence extends BasePersistence {
         if (reportsEntry == null) {
             if (_log.isWarnEnabled()) {
                 _log.warn("No ReportsEntry exists with the primary key " +
-                    entryId.toString());
+                    entryId);
             }
 
             throw new NoSuchEntryException(
-                "No ReportsEntry exists with the primary key " +
-                entryId.toString());
+                "No ReportsEntry exists with the primary key " + entryId);
         }
 
         return reportsEntry;
@@ -126,7 +135,7 @@ public class ReportsEntryPersistence extends BasePersistence {
         try {
             session = openSession();
 
-            return (ReportsEntry) session.get(ReportsEntry.class, entryId);
+            return (ReportsEntry) session.get(ReportsEntryImpl.class, entryId);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {
@@ -292,7 +301,7 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
                     reportsEntry);
-            ReportsEntry[] array = new ReportsEntry[3];
+            ReportsEntry[] array = new ReportsEntryImpl[3];
             array[0] = (ReportsEntry) objArray[0];
             array[1] = (ReportsEntry) objArray[1];
             array[2] = (ReportsEntry) objArray[2];
@@ -463,7 +472,7 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
                     reportsEntry);
-            ReportsEntry[] array = new ReportsEntry[3];
+            ReportsEntry[] array = new ReportsEntryImpl[3];
             array[0] = (ReportsEntry) objArray[0];
             array[1] = (ReportsEntry) objArray[1];
             array[2] = (ReportsEntry) objArray[2];
@@ -477,6 +486,15 @@ public class ReportsEntryPersistence extends BasePersistence {
     }
 
     public List findAll() throws SystemException {
+        return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+    }
+
+    public List findAll(int begin, int end) throws SystemException {
+        return findAll(begin, end, null);
+    }
+
+    public List findAll(int begin, int end, OrderByComparator obc)
+        throws SystemException {
         Session session = null;
 
         try {
@@ -484,13 +502,18 @@ public class ReportsEntryPersistence extends BasePersistence {
 
             StringBuffer query = new StringBuffer();
             query.append("FROM com.ext.portlet.reports.model.ReportsEntry ");
-            query.append("ORDER BY ");
-            query.append("name ASC");
+
+            if (obc != null) {
+                query.append("ORDER BY " + obc.getOrderBy());
+            } else {
+                query.append("ORDER BY ");
+                query.append("name ASC");
+            }
 
             Query q = session.createQuery(query.toString());
             q.setCacheable(true);
 
-            return q.list();
+            return QueryUtil.list(q, getDialect(), begin, end);
         } catch (HibernateException he) {
             throw new SystemException(he);
         } finally {

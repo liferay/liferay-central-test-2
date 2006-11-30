@@ -13,15 +13,25 @@
 			<min-pool-size>20</min-pool-size>
 			<enable-freepool>false</enable-freepool>
 			<pool-waittimeout-millis>60000</pool-waittimeout-millis>
+			<pk-waittimeout-millis/>
 			<low-activity-interval>20</low-activity-interval>
 			<is-secure>false</is-secure>
 			<is-clustered>true</is-clustered>
 			<jndi-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</jndi-name>
-			<local-jndi-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB__PRAMATI_LOCAL</local-jndi-name>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
-				<ejb-link>ejb/liferay/UserLocalServiceHome__PRAMATI_LOCAL</ejb-link>
+				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB__PRAMATI_LOCAL</ejb-link>
 			</ejb-local-ref>
+			<resource-mapping>
+				<resource-name>jdbc/LiferayPool</resource-name>
+				<resource-type>javax.sql.DataSource</resource-type>
+				<resource-link>LiferayPool</resource-link>
+			</resource-mapping>
+			<resource-mapping>
+				<resource-name>mail/MailSession</resource-name>
+				<resource-type>javax.mail.Session</resource-type>
+				<resource-link>mail/MailSession</resource-link>
+			</resource-mapping>
 		</ejb>
 	</ejb-module>
 </pramati-j2ee-server>

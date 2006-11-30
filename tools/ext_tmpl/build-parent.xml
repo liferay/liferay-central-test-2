@@ -4,6 +4,7 @@
 	<import file="build-common.xml" />
 
 	<target name="clean">
+		<ant dir="ext-service" target="clean" inheritAll="false" />
 		<ant dir="ext-ear" target="clean" inheritAll="false" />
 		<ant dir="ext-ejb" target="clean" inheritAll="false" />
 		<ant dir="ext-web" target="clean" inheritAll="false" />
@@ -105,6 +106,7 @@
 			</then>
 		</if>
 
+		<ant dir="ext-service" target="deploy" inheritAll="false" />
 		<ant dir="ext-ear" target="deploy" inheritAll="false" />
 		<ant dir="ext-ejb" target="deploy" inheritAll="false" />
 		<ant dir="ext-web" target="deploy" inheritAll="false" />

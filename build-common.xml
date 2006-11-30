@@ -36,10 +36,8 @@
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/portal-kernel/classes" />
 		<pathelement location="${project.dir}/portal-service/classes" />
-		<fileset dir="${project.dir}/lib/development" includes="ejb.jar" />
-		<fileset dir="${project.dir}/lib/development" includes="mail.jar" />
-		<fileset dir="${project.dir}/lib/development" includes="servlet.jar" />
-		<fileset dir="${project.dir}/lib/global" includes="portlet.jar" />
+		<fileset dir="${project.dir}/lib/development" includes="ejb.jar,mail.jar,servlet.jar" />
+		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 		<path refid="web-lib.classpath" />
 	</path>
 

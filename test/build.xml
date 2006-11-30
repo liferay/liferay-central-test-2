@@ -40,6 +40,7 @@
 
 		<path id="test-compile.classpath">
 			<path refid="test-soap.classpath" />
+			<pathelement path="${project.dir}/portal-ejb/classes" />
 		</path>
 
 		<javac
