@@ -32,6 +32,7 @@ import com.liferay.portal.theme.PortletDisplayFactory;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.layoutconfiguration.util.velocity.TemplateProcessor;
 import com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic;
 import com.liferay.util.StringUtil;
@@ -183,15 +184,17 @@ public class RuntimePortletUtil {
 		TemplateProcessor processor =
 			new TemplateProcessor(ctx, req, res, portletId);
 
-		VelocityContext context = new VelocityContext();
+		VelocityContext vc = new VelocityContext();
 
-		context.put("processor", processor);
+		vc.put("processor", processor);
+
+		VelocityVariables.insertVariables(vc, ctx, req, pageContext);
 
 		StringWriter sw = new StringWriter();
 
 		try {
 			Velocity.evaluate(
-				context, sw, RuntimePortletUtil.class.getName(), content);
+				vc, sw, RuntimePortletUtil.class.getName(), content);
 		}
 		catch (Exception e) {
 			_log.error(StackTraceUtil.getStackTrace(e));

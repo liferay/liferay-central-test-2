@@ -23,36 +23,14 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.language.LanguageUtil_IW;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil_IW;
-import com.liferay.portal.util.PropsUtil_IW;
-import com.liferay.portal.util.ServiceLocator;
-import com.liferay.portal.util.SessionClicks_IW;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.PortletURLFactory;
-import com.liferay.util.ArrayUtil_IW;
-import com.liferay.util.BrowserSniffer_IW;
+import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.GetterUtil_IW;
-import com.liferay.util.StaticFieldGetter;
-import com.liferay.util.StringUtil_IW;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.velocity.VelocityContextPool;
 import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.StringWriter;
-
-import java.util.Iterator;
-import java.util.Map;
-
-import javax.portlet.PortletRequest;
-import javax.portlet.PortletResponse;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -62,8 +40,6 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.struts.taglib.tiles.ComponentConstants;
-import org.apache.struts.tiles.ComponentContext;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -176,80 +152,9 @@ public class ThemeUtil {
 
 		VelocityContext vc = new VelocityContext();
 
-		// Request
+		// Velocity variables
 
-		vc.put("request", req);
-
-		// Page context
-
-		vc.put("pageContext", pageContext);
-
-		// Portlet config
-
-		PortletConfigImpl portletConfig =
-			(PortletConfigImpl)req.getAttribute(WebKeys.JAVAX_PORTLET_CONFIG);
-
-		if (portletConfig != null) {
-			vc.put("portletConfig", portletConfig);
-		}
-
-		// Render request
-
-		PortletRequest portletRequest =
-			(PortletRequest)req.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
-
-		if (portletRequest != null) {
-			if (portletRequest instanceof RenderRequest) {
-				vc.put("renderRequest", portletRequest);
-			}
-		}
-
-		// Render response
-
-		PortletResponse portletResponse =
-			(PortletResponse)req.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
-
-		if (portletResponse != null) {
-			if (portletResponse instanceof RenderResponse) {
-				vc.put("renderResponse", portletResponse);
-			}
-		}
-
-		// Theme display
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		if (themeDisplay != null) {
-			vc.put("themeDisplay", themeDisplay);
-			vc.put("company", themeDisplay.getCompany());
-			vc.put("user", themeDisplay.getUser());
-			vc.put("realUser", themeDisplay.getRealUser());
-			vc.put("layout", themeDisplay.getLayout());
-			vc.put("layouts", themeDisplay.getLayouts());
-			vc.put("plid", themeDisplay.getPlid());
-			vc.put("layoutTypePortlet", themeDisplay.getLayoutTypePortlet());
-			vc.put("portletGroupId", themeDisplay.getPortletGroupId());
-			vc.put("locale", themeDisplay.getLocale());
-			vc.put("timeZone", themeDisplay.getTimeZone());
-			vc.put("theme", themeDisplay.getTheme());
-			vc.put("colorScheme", themeDisplay.getColorScheme());
-			vc.put("portletDisplay", themeDisplay.getPortletDisplay());
-		}
-
-		// Tiles attributes
-
-		_setTilesAttribute(pageContext, vc, "tilesTitle", "title");
-		_setTilesAttribute(pageContext, vc, "tilesSubNav", "sub_nav");
-		_setTilesAttribute(pageContext, vc, "tilesContent", "content");
-		_setTilesAttribute(pageContext, vc, "tilesSelectable", "selectable");
-
-		// Full templates path
-
-		vc.put(
-			"fullTemplatesPath",
-			ctxName + VelocityResourceListener.SERVLET_SEPARATOR +
-				theme.getTemplatesPath());
+		VelocityVariables.insertVariables(vc, ctx, req, pageContext);
 
 		// liferay:include tag library
 
@@ -260,29 +165,6 @@ public class ThemeUtil {
 			"taglibLiferay",
 			new VelocityTaglib(ctx, req, stringServletResponse, pageContext));
 
-		// Helper utilities
-
-		_setHelperUtilities(vc);
-
-		// Insert custom vm variables
-
-		Map vmVariables = (Map)req.getAttribute(WebKeys.VM_VARIABLES);
-
-		if (vmVariables != null) {
-			Iterator itr = vmVariables.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				String key = (String)entry.getKey();
-				Object value = entry.getValue();
-
-				if (Validator.isNotNull(key)) {
-					vc.put(key, value);
-				}
-			}
-		}
-
 		// Merge templates
 
 		template.merge(vc, sw);
@@ -290,72 +172,6 @@ public class ThemeUtil {
 		// Print output
 
 		pageContext.getOut().print(sw.toString());
-	}
-
-	private static void _setHelperUtilities(VelocityContext vc) {
-
-		// Array util
-
-		vc.put("arrayUtil", ArrayUtil_IW.getInstance());
-
-		// Browser sniffer
-
-		vc.put(
-			"browserSniffer", BrowserSniffer_IW.getInstance());
-
-		// Getter util
-
-		vc.put("getterUtil", GetterUtil_IW.getInstance());
-
-		// Language
-
-		vc.put("languageUtil", LanguageUtil_IW.getInstance());
-
-		// Portal util
-
-		vc.put("portalUtil", PortalUtil_IW.getInstance());
-
-		// Props util
-
-		vc.put("propsUtil", PropsUtil_IW.getInstance());
-
-		// Portlet URL factory
-
-		vc.put("portletURLFactory", PortletURLFactory.getInstance());
-
-		// Service locator
-
-		vc.put("serviceLocator", ServiceLocator.getInstance());
-
-		// Session clicks
-
-		vc.put("sessionClicks", SessionClicks_IW.getInstance());
-
-		// Static field getter
-
-		vc.put("staticFieldGetter", StaticFieldGetter.getInstance());
-
-		// String util
-
-		vc.put("stringUtil", StringUtil_IW.getInstance());
-	}
-
-	private static void _setTilesAttribute(
-		PageContext pageContext, VelocityContext vc, String attributeId,
-		String attributeName) {
-
-		ComponentContext componentContext =
-			(ComponentContext)pageContext.getAttribute(
-				ComponentConstants.COMPONENT_CONTEXT,
-				PageContext.REQUEST_SCOPE);
-
-		if (componentContext != null) {
-			Object value = componentContext.getAttribute(attributeName);
-
-			if (value != null) {
-				vc.put(attributeId, value);
-			}
-		}
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeUtil.class);
