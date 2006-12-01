@@ -48,14 +48,13 @@ public class SystemEnv {
 
 			String osName = System.getProperty("os.name").toLowerCase();
 
-			if (osName.indexOf("windows 9") > -1) {
-				process = runtime.exec("command.com /c set");
-			}
-			else if ((osName.indexOf("nt") > -1) ||
-					 (osName.indexOf("windows 2") > -1) ||
-					 (osName.indexOf("windows xp") > -1) ) {
-
-				process = runtime.exec("cmd.exe /c set");
+			if (osName.indexOf("windows ") > -1) {
+				if (osName.indexOf("windows 9") > -1) {
+					process = runtime.exec("command.com /c set");
+				}
+				else {
+					process = runtime.exec("cmd.exe /c set");
+				}
 			}
 			else {
 				process = runtime.exec("env");
