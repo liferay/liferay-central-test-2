@@ -59,24 +59,22 @@ public class ImageUtil {
 	public static void encodeWBMP(BufferedImage image, OutputStream out)
 		throws InterruptedException, IOException {
 
-		if (image.getType() == BufferedImage.TYPE_BYTE_BINARY) {
-			SampleModel sampleModel = image.getSampleModel();
+		SampleModel sampleModel = image.getSampleModel();
 
-			int type = sampleModel.getDataType();
+		int type = sampleModel.getDataType();
 
-			if (!((type < DataBuffer.TYPE_BYTE) ||
-				  (type > DataBuffer.TYPE_INT) ||
-				  (sampleModel.getNumBands() != 1) ||
-				  (sampleModel.getSampleSize(0) != 1))) {
+		if ((image.getType() != BufferedImage.TYPE_BYTE_BINARY) ||
+			(type < DataBuffer.TYPE_BYTE) || (type > DataBuffer.TYPE_INT) ||
+			(sampleModel.getNumBands() != 1) ||
+			(sampleModel.getSampleSize(0) != 1)) {
 
-				BufferedImage binaryImage = new BufferedImage(
-					image.getWidth(), image.getHeight(),
-					BufferedImage.TYPE_BYTE_BINARY);
+			BufferedImage binaryImage = new BufferedImage(
+				image.getWidth(), image.getHeight(),
+				BufferedImage.TYPE_BYTE_BINARY);
 
-				binaryImage.getGraphics().drawImage(image, 0, 0, null);
+			binaryImage.getGraphics().drawImage(image, 0, 0, null);
 
-				image = binaryImage;
-			}
+			image = binaryImage;
 		}
 
 		if (!ImageIO.write(image, "wbmp", out)) {
