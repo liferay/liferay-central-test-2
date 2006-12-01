@@ -240,7 +240,6 @@ public class BaseDeployer {
 		updateWebXML(webXML, srcFile, displayName);
 
 		if (!baseDir.equals(destDir)) {
-			String includes = StringPool.BLANK;
 			String excludes = StringPool.BLANK;
 
 			if (appServerType.equals("tomcat")) {
@@ -255,8 +254,22 @@ public class BaseDeployer {
 				WarTask.war(srcFile, deployDir, "WEB-INF/web.xml", webXML);
 			}
 			else {
+
+				// The deployer only copies files that have been modified.
+				// However, the deployer always copies and overwrites web.xml
+				// after the other files have been copied because application
+				// servers usually detect that a WAR has been modified based on
+				// the web.xml time stamp.
+
+				excludes += "**/WEB-INF/web.xml";
+
 				CopyTask.copyDirectory(
-					srcFile, deployDir, includes, excludes, true, false);
+					srcFile, deployDir, StringPool.BLANK, excludes, false,
+					true);
+
+				CopyTask.copyDirectory(
+					srcFile, deployDir, "**/WEB-INF/web.xml", StringPool.BLANK,
+					true, false);
 
 				if (appServerType.equals("tomcat")) {
 
@@ -279,7 +292,10 @@ public class BaseDeployer {
 			return;
 		}
 
-		DeleteTask.deleteDirectory(deployDir);
+		// Don't delete the deploy directory because it can cause problems in
+		// certain application servers
+
+		//DeleteTask.deleteDirectory(deployDir);
 
 		File tempDir = new File(
 			SystemProperties.get(SystemProperties.TMP_DIR) + File.separator +
