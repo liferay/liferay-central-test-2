@@ -396,14 +396,15 @@ public class ExportAction extends Action {
 
 			sb.append("insert into Layout (");
 			sb.append("layoutId, ownerId, companyId, parentLayoutId, name, ");
-			sb.append("type_, typeSettings, hidden_, friendlyURL, themeId, ");
-			sb.append("colorSchemeId, priority");
+			sb.append("title, type_, typeSettings, hidden_, friendlyURL, ");
+			sb.append("themeId, colorSchemeId, priority");
 			sb.append(") values (");
 			addColumn(sb, layout.getLayoutId());
 			addColumn(sb, layout.getOwnerId());
 			addColumn(sb, layout.getCompanyId());
 			addColumn(sb, layout.getParentLayoutId());
 			addColumn(sb, layout.getName());
+			addColumn(sb, layout.getTitle());
 			addColumn(sb, layout.getType());
 			addColumn(sb, layout.getTypeSettings());
 			addColumn(sb, layout.getHidden());

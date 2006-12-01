@@ -40,11 +40,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
 		java.lang.String userId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().addLayout(groupId, userId,
-			privateLayout, parentLayoutId, name, type, hidden, friendlyURL);
+			privateLayout, parentLayoutId, name, title, type, hidden,
+			friendlyURL);
 	}
 
 	public void deleteLayout(java.lang.String layoutId, java.lang.String ownerId)
@@ -127,12 +129,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	public com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return LayoutLocalServiceFactory.getTxImpl().updateLayout(layoutId,
-			ownerId, parentLayoutId, name, languageId, type, hidden, friendlyURL);
+			ownerId, parentLayoutId, name, title, languageId, type, hidden,
+			friendlyURL);
 	}
 
 	public com.liferay.portal.model.Layout updateLayout(
@@ -153,13 +156,13 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			ownerId, themeId, colorSchemeId);
 	}
 
-	public com.liferay.portal.model.Layout updateTitle(
+	public com.liferay.portal.model.Layout updateName(
 		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String title, java.lang.String languageId)
+		java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return LayoutLocalServiceFactory.getTxImpl().updateTitle(layoutId,
-			ownerId, title, languageId);
+		return LayoutLocalServiceFactory.getTxImpl().updateName(layoutId,
+			ownerId, name, languageId);
 	}
 
 	public void ejbCreate() throws CreateException {

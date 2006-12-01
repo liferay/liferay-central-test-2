@@ -412,6 +412,7 @@ create table Layout (
 	companyId VARCHAR(75) not null,
 	parentLayoutId VARCHAR(75) null,
 	name STRING null,
+	title STRING null,
 	type_ VARCHAR(75) null,
 	typeSettings TEXT null,
 	hidden_ BOOLEAN,

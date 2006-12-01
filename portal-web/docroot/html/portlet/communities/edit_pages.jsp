@@ -346,11 +346,19 @@ portletURL.setParameter("groupId", groupId);
 			<c:when test='<%= tabs3.equals("page") %>'>
 
 				<%
-				String name = request.getParameter("name");
 				String languageId = LanguageUtil.getLanguageId(request);
+				Locale languageLocale = LocaleUtil.fromLanguageId(languageId);
+
+				String name = request.getParameter("name");
 
 				if (Validator.isNull(name)) {
-					name = selLayout.getName(LocaleUtil.fromLanguageId(languageId));
+					name = selLayout.getName(languageLocale);
+				}
+
+				String title = request.getParameter("title");
+
+				if (Validator.isNull(title)) {
+					title = selLayout.getTitle(languageLocale);
 				}
 
 				String type = BeanParamUtil.getString(selLayout, request, "type");
@@ -405,6 +413,11 @@ portletURL.setParameter("groupId", groupId);
 							</td>
 						</tr>
 						<tr>
+							<td colspan="3">
+								<br>
+							</td>
+						</tr>
+						<tr>
 							<td>
 								<%= LanguageUtil.get(pageContext, "name") %>
 							</td>
@@ -435,6 +448,20 @@ portletURL.setParameter("groupId", groupId);
 									</td>
 								</tr>
 								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<%= LanguageUtil.get(pageContext, "html-title") %>
+							</td>
+							<td style="padding-left: 10px;"></td>
+							<td>
+								<input class="form-text" name="<portlet:namespace />title" size="30" type="text" value="<%= title %>">
+							</td>
+						</tr>
+						<tr>
+							<td colspan="3">
+								<br>
 							</td>
 						</tr>
 						<tr>
@@ -597,6 +624,11 @@ portletURL.setParameter("groupId", groupId);
 					<td style="padding-left: 10px;"></td>
 					<td>
 						<input class="form-text" name="<portlet:namespace />name" size="30" type="text" value="<%= name %>">
+					</td>
+				</tr>
+				<tr>
+					<td colspan="3">
+						<br>
 					</td>
 				</tr>
 				<tr>

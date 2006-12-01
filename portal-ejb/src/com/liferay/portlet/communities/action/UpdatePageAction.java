@@ -107,13 +107,14 @@ public class UpdatePageAction extends JSONAction {
 		String mainPath = ParamUtil.getString(req, "mainPath");
 		String doAsUserId = ParamUtil.getString(req, "doAsUserId");
 
-		String type = LayoutImpl.TYPE_PORTLET;
-		String friendlyURL = StringPool.BLANK;
-		boolean hidden = false;
 		String name = "New Page";
+		String title = StringPool.BLANK;
+		String type = LayoutImpl.TYPE_PORTLET;
+		boolean hidden = false;
+		String friendlyURL = StringPool.BLANK;
 
 		Layout layout = LayoutServiceUtil.addLayout(
-			groupId, privateLayout, parentLayoutId, name, type, hidden,
+			groupId, privateLayout, parentLayoutId, name, title, type, hidden,
 			friendlyURL);
 
 		LayoutTypePortlet layoutTypePortlet =
@@ -158,7 +159,7 @@ public class UpdatePageAction extends JSONAction {
 		String layoutId = ParamUtil.getString(req, "layoutId");
 		String title = ParamUtil.getString(req, "title");
 
-		LayoutLocalServiceUtil.updateTitle(layoutId, ownerId, title, language);
+		LayoutLocalServiceUtil.updateName(layoutId, ownerId, title, language);
 	}
 
 }

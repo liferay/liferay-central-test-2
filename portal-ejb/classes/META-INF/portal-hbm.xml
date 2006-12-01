@@ -164,6 +164,7 @@
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="parentLayoutId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="typeSettings" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="hidden" column="hidden_" type="com.liferay.util.dao.hibernate.BooleanType" />

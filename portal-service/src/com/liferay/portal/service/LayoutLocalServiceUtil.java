@@ -32,14 +32,14 @@ public class LayoutLocalServiceUtil {
 	public static com.liferay.portal.model.Layout addLayout(
 		java.lang.String groupId, java.lang.String userId,
 		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.addLayout(groupId, userId, privateLayout,
-			parentLayoutId, name, type, hidden, friendlyURL);
+			parentLayoutId, name, title, type, hidden, friendlyURL);
 	}
 
 	public static void deleteLayout(java.lang.String layoutId,
@@ -135,14 +135,14 @@ public class LayoutLocalServiceUtil {
 	public static com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
 		return layoutLocalService.updateLayout(layoutId, ownerId,
-			parentLayoutId, name, languageId, type, hidden, friendlyURL);
+			parentLayoutId, name, title, languageId, type, hidden, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
@@ -166,14 +166,13 @@ public class LayoutLocalServiceUtil {
 			colorSchemeId);
 	}
 
-	public static com.liferay.portal.model.Layout updateTitle(
+	public static com.liferay.portal.model.Layout updateName(
 		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String title, java.lang.String languageId)
+		java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.updateTitle(layoutId, ownerId, title,
-			languageId);
+		return layoutLocalService.updateName(layoutId, ownerId, name, languageId);
 	}
 }

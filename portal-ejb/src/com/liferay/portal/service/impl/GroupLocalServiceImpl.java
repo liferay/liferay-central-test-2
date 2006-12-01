@@ -438,8 +438,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
 			group.getGroupId(), userId, false,
-			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, LayoutImpl.TYPE_PORTLET,
-			false, StringPool.BLANK);
+			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
+			LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();

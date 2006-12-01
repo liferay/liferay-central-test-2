@@ -55,6 +55,16 @@ public interface Layout extends LayoutModel {
 
 	public void setName(java.lang.String name, java.util.Locale locale);
 
+	public java.lang.String getTitle(java.util.Locale locale);
+
+	public java.lang.String getTitle(java.lang.String localeLanguageId);
+
+	public java.lang.String getHTMLTitle(java.util.Locale locale);
+
+	public java.lang.String getHTMLTitle(java.lang.String localeLanguageId);
+
+	public void setTitle(java.lang.String title, java.util.Locale locale);
+
 	public com.liferay.portal.model.LayoutType getLayoutType();
 
 	public java.lang.String getTypeSettings();

@@ -13,15 +13,15 @@
 		<copy todir="${project.dir}/portal-ejb/classes/com/liferay/portal/deploy/dependencies">
 			<fileset dir="classes/META-INF" />
 		</copy>
-	</target>
 
-	<target name="deploy" depends="jar">
 		<copy file="${jar.file}.jar" todir="${project.dir}/portal-web/docroot/WEB-INF/lib" />
 
 		<copy todir="${project.dir}/portal-web/docroot/WEB-INF/tld">
 			<fileset dir="classes/META-INF" />
 		</copy>
+	</target>
 
+	<target name="deploy" depends="jar">
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>

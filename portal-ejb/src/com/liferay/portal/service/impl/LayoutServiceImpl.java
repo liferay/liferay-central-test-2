@@ -43,15 +43,16 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout addLayout(
 			String groupId, boolean privateLayout, String parentLayoutId,
-			String name, String type, boolean hidden, String friendlyURL)
+			String name, String title, String type, boolean hidden,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return LayoutLocalServiceUtil.addLayout(
-			groupId, getUserId(), privateLayout, parentLayoutId, name, type,
-			hidden, friendlyURL);
+			groupId, getUserId(), privateLayout, parentLayoutId, name, title,
+			type, hidden, friendlyURL);
 	}
 
 	public void deleteLayout(String layoutId, String ownerId)
@@ -97,15 +98,16 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout updateLayout(
 			String layoutId, String ownerId, String parentLayoutId, String name,
-			String languageId, String type, boolean hidden, String friendlyURL)
+			String title, String languageId, String type, boolean hidden,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
 		LayoutPermission.check(
 			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
 
 		return LayoutLocalServiceUtil.updateLayout(
-			layoutId, ownerId, parentLayoutId, name, languageId, type, hidden,
-			friendlyURL);
+			layoutId, ownerId, parentLayoutId, name, title, languageId, type,
+			hidden, friendlyURL);
 	}
 
 	public Layout updateLayout(
@@ -129,6 +131,17 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.updateLookAndFeel(
 			layoutId, ownerId, themeId, colorSchemeId);
+	}
+
+	public Layout updateName(
+			String layoutId, String ownerId, String name, String languageId)
+		throws PortalException, SystemException {
+
+		LayoutPermission.check(
+			getPermissionChecker(), layoutId, ownerId, ActionKeys.UPDATE);
+
+		return LayoutLocalServiceUtil.updateName(
+			layoutId, ownerId, name, languageId);
 	}
 
 }

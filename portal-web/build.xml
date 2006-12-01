@@ -9,6 +9,7 @@
 		<delete dir="classes" />
 		<delete dir="docroot/html/skin/color" />
 		<delete dir="docroot/html/themes/classic/color_schemes" />
+		<delete dir="docroot/WEB-INF/lib" />
 
 		<delete>
 			<fileset dir="docroot" includes="**/Thumbs.db" />

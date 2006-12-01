@@ -42,8 +42,8 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout addLayout(
 		HttpPrincipal httpPrincipal, java.lang.String groupId,
 		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -66,24 +66,30 @@ public class LayoutServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = type;
+			Object paramObj4 = title;
 
-			if (type == null) {
+			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(hidden);
-			Object paramObj6 = friendlyURL;
+			Object paramObj5 = type;
+
+			if (type == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = new BooleanWrapper(hidden);
+			Object paramObj7 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"addLayout",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 			Object returnObj = null;
 
@@ -313,8 +319,9 @@ public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, java.lang.String layoutId,
 		java.lang.String ownerId, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String languageId,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -342,30 +349,36 @@ public class LayoutServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = languageId;
+			Object paramObj4 = title;
 
-			if (languageId == null) {
+			if (title == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = type;
+			Object paramObj5 = languageId;
 
-			if (type == null) {
+			if (languageId == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = new BooleanWrapper(hidden);
-			Object paramObj7 = friendlyURL;
+			Object paramObj6 = type;
+
+			if (type == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(hidden);
+			Object paramObj8 = friendlyURL;
 
 			if (friendlyURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
+				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLayout",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 
@@ -479,6 +492,66 @@ public class LayoutServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
 					"updateLookAndFeel",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Layout)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Layout updateName(
+		HttpPrincipal httpPrincipal, java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String name,
+		java.lang.String languageId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = layoutId;
+
+			if (layoutId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = ownerId;
+
+			if (ownerId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = languageId;
+
+			if (languageId == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"updateName",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 			Object returnObj = null;
 

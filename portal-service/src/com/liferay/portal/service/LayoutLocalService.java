@@ -32,7 +32,8 @@ public interface LayoutLocalService {
 	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
 		java.lang.String userId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -88,8 +89,8 @@ public interface LayoutLocalService {
 	public com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -105,9 +106,9 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Layout updateTitle(
+	public com.liferay.portal.model.Layout updateName(
 		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String title, java.lang.String languageId)
+		java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

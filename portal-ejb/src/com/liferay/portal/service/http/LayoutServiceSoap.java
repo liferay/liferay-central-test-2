@@ -39,11 +39,11 @@ public class LayoutServiceSoap {
 	public static com.liferay.portal.model.LayoutSoap addLayout(
 		java.lang.String groupId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
-		throws RemoteException {
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL) throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
-					privateLayout, parentLayoutId, name, type, hidden,
+					privateLayout, parentLayoutId, name, title, type, hidden,
 					friendlyURL);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
@@ -116,12 +116,13 @@ public class LayoutServiceSoap {
 	public static com.liferay.portal.model.LayoutSoap updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL) throws RemoteException {
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
-					ownerId, parentLayoutId, name, languageId, type, hidden,
-					friendlyURL);
+					ownerId, parentLayoutId, name, title, languageId, type,
+					hidden, friendlyURL);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}
@@ -155,6 +156,23 @@ public class LayoutServiceSoap {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLookAndFeel(layoutId,
 					ownerId, themeId, colorSchemeId);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap updateName(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String name, java.lang.String languageId)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateName(layoutId,
+					ownerId, name, languageId);
 
 			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
 		}

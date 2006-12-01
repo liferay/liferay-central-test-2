@@ -302,6 +302,7 @@ public class EditPagesAction extends PortletAction {
 
 		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
 		String name = ParamUtil.getString(req, "name");
+		String title = ParamUtil.getString(req, "title");
 		String languageId = ParamUtil.getString(req, "curLanguageId");
 		String type = ParamUtil.getString(req, "type");
 		boolean hidden = ParamUtil.getBoolean(req, "hidden");
@@ -314,8 +315,8 @@ public class EditPagesAction extends PortletAction {
 			// Add layout
 
 			Layout layout = LayoutServiceUtil.addLayout(
-				groupId, privateLayout, parentLayoutId, name, type, hidden,
-				friendlyURL);
+				groupId, privateLayout, parentLayoutId, name, title, type,
+				hidden, friendlyURL);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
@@ -334,8 +335,8 @@ public class EditPagesAction extends PortletAction {
 			// Update layout
 
 			Layout layout = LayoutServiceUtil.updateLayout(
-				layoutId, ownerId, parentLayoutId, name, languageId, type,
-				hidden, friendlyURL);
+				layoutId, ownerId, parentLayoutId, name, title, languageId,
+				type, hidden, friendlyURL);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((Validator.isNotNull(copyLayoutId)) &&

@@ -75,7 +75,8 @@ public class TCKAction extends Action {
 			Layout layout = LayoutLocalServiceUtil.addLayout(
 				"1", "liferay.com.1", false,
 				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, "TCKAction",
-				LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+				StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
+				StringPool.BLANK);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();

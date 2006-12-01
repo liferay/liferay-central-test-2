@@ -31,8 +31,8 @@ package com.liferay.portal.service;
 public interface LayoutService {
 	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
 		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -58,8 +58,8 @@ public interface LayoutService {
 	public com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -72,6 +72,12 @@ public interface LayoutService {
 	public com.liferay.portal.model.Layout updateLookAndFeel(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public com.liferay.portal.model.Layout updateName(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String name, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

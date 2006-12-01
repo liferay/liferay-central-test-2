@@ -178,7 +178,7 @@
 
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
-		<ant dir="util-taglib" target="deploy" inheritAll="false" />
+		<ant dir="util-taglib" target="jar" inheritAll="false" />
 		<ant dir="util-wsrp" target="jar" inheritAll="false" />
 
 		<ant dir="applets" target="deploy" inheritAll="false" />

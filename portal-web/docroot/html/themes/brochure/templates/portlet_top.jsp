@@ -32,7 +32,7 @@
 		</c:if>
 	>
 	<div class="portlet-header-bar-inner">
-	
+
 		<c:if test="<%= Validator.isNotNull(portletDisplay.getTitle()) %>">
 			<span class="portlet-title" id="portlet-title-bar_<%= portletDisplay.getId() %>"><%= portletDisplay.getTitle() %></span>
 		</c:if>
@@ -61,7 +61,7 @@
 				</c:otherwise>
 			</c:choose>
 		</div>
-		
+
 	</div>
 	</div><!-- end portlet-header-bar -->
 

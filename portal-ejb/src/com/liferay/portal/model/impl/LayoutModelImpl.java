@@ -53,6 +53,9 @@ public class LayoutModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.name"),
 			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TITLE = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portal.model.Layout.title"),
+			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_TYPE = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout.type"),
 			XSS_ALLOW_BY_MODEL);
@@ -164,6 +167,22 @@ public class LayoutModelImpl extends BaseModelImpl {
 			}
 
 			_name = name;
+		}
+	}
+
+	public String getTitle() {
+		return GetterUtil.getString(_title);
+	}
+
+	public void setTitle(String title) {
+		if (((title == null) && (_title != null)) ||
+				((title != null) && (_title == null)) ||
+				((title != null) && (_title != null) && !title.equals(_title))) {
+			if (!XSS_ALLOW_TITLE) {
+				title = XSSUtil.strip(title);
+			}
+
+			_title = title;
 		}
 	}
 
@@ -282,6 +301,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setParentLayoutId(getParentLayoutId());
 		clone.setName(getName());
+		clone.setTitle(getTitle());
 		clone.setType(getType());
 		clone.setTypeSettings(getTypeSettings());
 		clone.setHidden(getHidden());
@@ -356,6 +376,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private String _companyId;
 	private String _parentLayoutId;
 	private String _name;
+	private String _title;
 	private String _type;
 	private String _typeSettings;
 	private boolean _hidden;

@@ -32,13 +32,14 @@ public class LayoutServiceUtil {
 	public static com.liferay.portal.model.Layout addLayout(
 		java.lang.String groupId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		return layoutService.addLayout(groupId, privateLayout, parentLayoutId,
-			name, type, hidden, friendlyURL);
+			name, title, type, hidden, friendlyURL);
 	}
 
 	public static void deleteLayout(java.lang.String layoutId,
@@ -79,14 +80,14 @@ public class LayoutServiceUtil {
 	public static com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String languageId, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
 
 		return layoutService.updateLayout(layoutId, ownerId, parentLayoutId,
-			name, languageId, type, hidden, friendlyURL);
+			name, title, languageId, type, hidden, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
@@ -108,5 +109,15 @@ public class LayoutServiceUtil {
 
 		return layoutService.updateLookAndFeel(layoutId, ownerId, themeId,
 			colorSchemeId);
+	}
+
+	public static com.liferay.portal.model.Layout updateName(
+		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String name, java.lang.String languageId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutService layoutService = LayoutServiceFactory.getService();
+
+		return layoutService.updateName(layoutId, ownerId, name, languageId);
 	}
 }

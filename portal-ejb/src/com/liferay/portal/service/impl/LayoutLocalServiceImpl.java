@@ -87,6 +87,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
@@ -108,8 +109,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 	public Layout addLayout(
 			String groupId, String userId, boolean privateLayout,
-			String parentLayoutId, String name, String type, boolean hidden,
-			String friendlyURL)
+			String parentLayoutId, String name, String title, String type,
+			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -136,6 +137,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		layout.setCompanyId(user.getActualCompanyId());
 		layout.setParentLayoutId(parentLayoutId);
 		layout.setName(name, null);
+		layout.setTitle(title, null);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
@@ -277,6 +279,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			layoutEl.addElement("parent-layout-id").addText(
 				layout.getParentLayoutId());
 			layoutEl.addElement("name").addCDATA(layout.getName());
+			layoutEl.addElement("title").addCDATA(layout.getTitle());
 			layoutEl.addElement("type").addText(layout.getType());
 			layoutEl.addElement("type-settings").addCDATA(
 				layout.getTypeSettings());
@@ -491,6 +494,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			String parentLayoutId = layoutEl.elementText(
 				"parent-layout-id");
 			String name = layoutEl.elementText("name");
+			String title = layoutEl.elementText("title");
 			String type = layoutEl.elementText("type");
 			String typeSettings = layoutEl.elementText("type-settings");
 			boolean hidden = GetterUtil.getBoolean(
@@ -514,6 +518,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			layout.setCompanyId(user.getActualCompanyId());
 			layout.setParentLayoutId(parentLayoutId);
 			layout.setName(name);
+			layout.setTitle(title);
 			layout.setType(type);
 			layout.setTypeSettings(typeSettings);
 			layout.setHidden(hidden);
@@ -685,10 +690,12 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 	public Layout updateLayout(
 			String layoutId, String ownerId, String parentLayoutId, String name,
-			String languageId, String type, boolean hidden, String friendlyURL)
+			String title, String languageId, String type, boolean hidden,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
 		parentLayoutId = getParentLayoutId(ownerId, parentLayoutId);
+		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		validate(
 			layoutId, ownerId, parentLayoutId, name, type, hidden, friendlyURL);
@@ -703,7 +710,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 
 		layout.setParentLayoutId(parentLayoutId);
-		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
+		layout.setName(name, locale);
+		layout.setTitle(title, locale);
 		layout.setType(type);
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
@@ -743,14 +751,14 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		return layout;
 	}
 
-	public Layout updateTitle(
-			String layoutId, String ownerId, String title, String languageId)
+	public Layout updateName(
+			String layoutId, String ownerId, String name, String languageId)
 		throws PortalException, SystemException {
 
 		Layout layout = LayoutUtil.findByPrimaryKey(
 			new LayoutPK(layoutId, ownerId));
 
-		layout.setName(title, LocaleUtil.fromLanguageId(languageId));
+		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
 		LayoutUtil.update(layout);
 
@@ -1041,7 +1049,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			validateFirstLayout(type, hidden);
 		}
 
-		if (Validator.isNull(name) || name.endsWith(StringPool.STAR)) {
+		if (Validator.isNull(name)) {
 			throw new LayoutNameException();
 		}
 

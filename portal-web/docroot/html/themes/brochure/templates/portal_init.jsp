@@ -32,7 +32,7 @@
 String title = LanguageUtil.get(pageContext, tilesTitle);
 
 if (layout != null) {
-	title = LanguageUtil.get(pageContext, tilesTitle, layout.getName(locale));
+	title = LanguageUtil.get(pageContext, tilesTitle, layout.getHTMLTitle(locale));
 }
 
 boolean selectable = GetterUtil.getBoolean(tilesSelectable);
