@@ -202,7 +202,8 @@ public class MailUtil {
 
 			BodyPart bodyPart = new MimeBodyPart();
 
-			bodyPart.setContent(mailMessage.getBody(), Constants.TEXT_HTML);
+			bodyPart.setContent(
+				mailMessage.getBody(), Constants.TEXT_HTML + "; charset=UTF-8");
 
 			multipart.addBodyPart(bodyPart);
 
