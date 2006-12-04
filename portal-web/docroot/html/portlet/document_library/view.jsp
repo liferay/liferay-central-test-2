@@ -42,6 +42,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/document_library/view");
+portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("folderId", folderId);
 %>
 
