@@ -179,6 +179,10 @@ public class PropsUtil {
 
 	public static final String DEFAULT_COLOR_SCHEME_ID = "default.color.scheme.id";
 
+	// Request
+
+	public static final String REQUEST_NAMESPACE_RESERVED_NAMES = "request.namespace.reserved.names";
+
 	// Session
 
 	public static final String SESSION_TIMEOUT = "session.timeout";

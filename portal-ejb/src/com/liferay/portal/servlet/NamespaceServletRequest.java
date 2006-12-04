@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -51,6 +52,9 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		reservedParams.add(WebKeys.JAVAX_PORTLET_REQUEST);
 		reservedParams.add(WebKeys.JAVAX_PORTLET_RESPONSE);
 	}
+
+	public static final String[] CUSTOM_RESERVED_PARAMS = PropsUtil.getArray(
+		PropsUtil.REQUEST_NAMESPACE_RESERVED_NAMES);
 
 	public NamespaceServletRequest(HttpServletRequest req, String portletName) {
 		this(req, portletName, true);
@@ -92,7 +96,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public void setAttribute(String name, Object value) {
-		if (reservedParams.contains(name)) {
+		if (_isReservedParam(name)) {
 			super.setAttribute(name, value);
 		}
 		else {
@@ -112,7 +116,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public void removeAttribute(String name) {
-		if (reservedParams.contains(name)) {
+		if (_isReservedParam(name)) {
 			super.removeAttribute(name);
 		}
 		else {
@@ -132,6 +136,21 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		}
 
 		return value;
+	}
+
+	private boolean _isReservedParam(String name) {
+		if (reservedParams.contains(name)) {
+			return true;
+		}
+		else {
+			for (int i = 0; i < CUSTOM_RESERVED_PARAMS.length; i++) {
+				if (name.startsWith(CUSTOM_RESERVED_PARAMS[i])) {
+					return true;
+				}
+			}
+		}
+
+		return false;
 	}
 
 	private String _portletName;
