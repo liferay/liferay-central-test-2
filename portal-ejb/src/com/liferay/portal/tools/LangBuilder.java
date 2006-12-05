@@ -139,7 +139,7 @@ public class LangBuilder {
 						translatedText = "right";
 					}
 					else {
-						translatedText = _translate(translationId, value);
+						translatedText = _translate(translationId, value, 0);
 					}
 				}
 
@@ -227,7 +227,9 @@ public class LangBuilder {
 		messages.clear();
 	}
 
-	private String _translate(String translationId, String fromText) {
+	private String _translate(
+		String translationId, String fromText, int limit) {
+
 		if (translationId.equals("en_ar") ||
 			translationId.equals("en_ca") ||
 			translationId.equals("en_cs") ||
@@ -240,6 +242,12 @@ public class LangBuilder {
 			// Automatic translator does not support Arabic, Catalan, Czech,
 			// Finnish, Hungarian, Russian, Turkish, or Vietnamese
 
+			return null;
+		}
+
+		// Limit the number of retries to 3
+
+		if (limit == 3) {
 			return null;
 		}
 
@@ -268,7 +276,7 @@ public class LangBuilder {
 		// Keep trying
 
 		if (toText == null) {
-			return _translate(translationId, fromText);
+			return _translate(translationId, fromText, ++limit);
 		}
 
 		return toText;
