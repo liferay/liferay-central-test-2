@@ -1,993 +1,1214 @@
 <?xml version="1.0"?>
+<!DOCTYPE weblogic-ejb-jar PUBLIC "-//BEA Systems, Inc.//DTD WebLogic 8.1.0 EJB//EN" "http://www.bea.com/servers/wls810/dtd/weblogic-ejb-jar.dtd">
 
-<weblogic-ejb-jar xmlns="http://www.bea.com/ns/weblogic/90" xmlns:j2ee="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd">
+<weblogic-ejb-jar>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_AccountLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/AccountLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_AccountServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_AccountServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_AddressLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/AddressLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_AddressServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_AddressServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/CompanyLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_CompanyServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_CompanyServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ContactLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ContactServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_ContactServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_CountryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_CountryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DataTrackerLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/EmailAddressLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_EmailAddressServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_EmailAddressServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_GroupLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/GroupLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_GroupServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_GroupServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ImageLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ImageLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/LayoutLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_LayoutServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_LayoutServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/LayoutSetLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_LayoutSetServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_LayoutSetServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ListTypeServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_ListTypeServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/OrganizationLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_OrganizationServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_OrganizationServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/OrgLaborLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_OrgLaborServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PasswordTrackerLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PermissionLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PermissionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PermissionServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_PermissionServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PhoneLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PhoneServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_PhoneServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PortalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_PortalServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PortletLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PortletServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_PortletServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PortletPreferencesLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_RegionServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_RegionServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ReleaseLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ResourceLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_ResourceServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_ResourceServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/RoleLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_RoleServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_RoleServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/SubscriptionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/UserLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_UserServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/UserGroupLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/UserIdMapperLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/UserTrackerLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/UserTrackerPathLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/WebsiteLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portal_service_ejb_WebsiteServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portal_service_ejb_WebsiteServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/BlogsCategoryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_blogs_service_ejb_BlogsCategoryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsEntryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/BlogsEntryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_blogs_service_ejb_BlogsEntryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_blogs_service_ejb_BlogsEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/BookmarksEntryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/BookmarksFolderLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_bookmarks_service_ejb_BookmarksFolderServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_calendar_service_ejb_CalEventLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/CalEventLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_calendar_service_ejb_CalEventServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_calendar_service_ejb_CalEventServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DLFileEntryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileRankLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DLFileRankLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DLFileShortcutLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileShortcutServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFileVersionLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DLFileVersionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFolderLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/DLFolderLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_documentlibrary_service_ejb_DLFolderServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_documentlibrary_service_ejb_DLFolderServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_imagegallery_service_ejb_IGFolderLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/IGFolderLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_imagegallery_service_ejb_IGFolderServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_imagegallery_service_ejb_IGFolderServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_imagegallery_service_ejb_IGImageLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/IGImageLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_imagegallery_service_ejb_IGImageServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_imagegallery_service_ejb_IGImageServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalArticleLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/JournalArticleLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalArticleServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_journal_service_ejb_JournalArticleServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalContentSearchLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/JournalContentSearchLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalStructureLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/JournalStructureLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalStructureServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_journal_service_ejb_JournalStructureServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalTemplateLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/JournalTemplateLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_journal_service_ejb_JournalTemplateServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/MBCategoryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBCategoryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBMessageLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/MBMessageLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBMessageServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_messageboards_service_ejb_MBMessageServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBMessageFlagLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/MBMessageFlagLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBStatsUserLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/MBStatsUserLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_messageboards_service_ejb_MBThreadLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/MBThreadLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_polls_service_ejb_PollsChoiceLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PollsChoiceLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_polls_service_ejb_PollsQuestionLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PollsQuestionLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_polls_service_ejb_PollsQuestionServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_polls_service_ejb_PollsQuestionServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_polls_service_ejb_PollsVoteLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/PollsVoteLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_polls_service_ejb_PollsVoteServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_polls_service_ejb_PollsVoteServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingCartLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingCategoryLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCategoryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingCouponLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingCouponServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingItemLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemFieldLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingItemFieldLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingItemPriceLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingItemPriceLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingOrderLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/WikiNodeLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<local-jndi-name>ejb/liferay/WikiPageLocalServiceHome</local-jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 	<weblogic-enterprise-bean>
 		<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
-		<resource-description>
-			<res-ref-name>mail/MailSession</res-ref-name>
-			<jndi-name>mail/MailSession</jndi-name>
-		</resource-description>
+		<reference-descriptor>
+			<resource-description>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<jndi-name>mail/MailSession</jndi-name>
+			</resource-description>
+		</reference-descriptor>
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>

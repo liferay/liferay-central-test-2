@@ -475,6 +475,8 @@ public class EJBXMLBuilder {
 				sb.append("\t\t</resource-description>\n");
 			}
 
+			sb.append("\t\t<enable-call-by-reference>true</enable-call-by-reference>\n");
+
 			if (displayName.endsWith("LocalServiceEJB")) {
 				sb.append("\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");
 			}

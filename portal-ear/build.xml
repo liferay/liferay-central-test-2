@@ -192,6 +192,26 @@
 
 		<!-- Servlet 2.3 EAR -->
 
+		<antcall target="replace-servlet23-jar">
+			<param name="module.file" value="counter-ejb" />
+		</antcall>
+
+		<antcall target="replace-servlet23-jar">
+			<param name="module.file" value="documentlibrary-ejb" />
+		</antcall>
+
+		<antcall target="replace-servlet23-jar">
+			<param name="module.file" value="lock-ejb" />
+		</antcall>
+
+		<antcall target="replace-servlet23-jar">
+			<param name="module.file" value="mail-ejb" />
+		</antcall>
+
+		<antcall target="replace-servlet23-jar">
+			<param name="module.file" value="portal-ejb" />
+		</antcall>
+
 		<touch file="modules/portal-web.war" datetime="01/01/1990 12:00 am" />
 
 		<java
@@ -253,5 +273,26 @@
 				</copy>
 			</then>
 		</if>
+	</target>
+
+	<target name="replace-servlet23-jar">
+		<tstamp>
+			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.dir}" />
+
+		<copy
+			file="${project.dir}/${module.file}/classes/META-INF/weblogic-ejb-jar.xml.81"
+			tofile="${tstamp.dir}/META-INF/weblogic-ejb-jar.xml"
+		/>
+
+		<jar
+			basedir="${tstamp.dir}"
+			jarfile="modules/${module.file}.jar"
+			update="yes"
+		/>
+
+		<delete dir="${tstamp.dir}" />
 	</target>
 </project>
