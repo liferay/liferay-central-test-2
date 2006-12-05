@@ -51,8 +51,9 @@ import org.dom4j.io.SAXReader;
  */
 public abstract class CustomSQLUtil {
 
-	public CustomSQLUtil(String functionIsNull) {
+	public CustomSQLUtil(String functionIsNull, String functionIsNotNull) {
 		_functionIsNull = functionIsNull;
+		_functionIsNotNull = functionIsNotNull;
 		_sqlPool = CollectionFactory.getHashMap();
 
 		try {
@@ -104,8 +105,8 @@ public abstract class CustomSQLUtil {
 					"? IS NULL", "? IS NOT NULL"
 				},
 				new String[] {
-					_functionIsNull + "(?, '1') = '1'",
-					_functionIsNull + "(?, '1') = '0'"
+					_functionIsNull,
+					_functionIsNotNull
 				});
 		}
 
@@ -207,6 +208,7 @@ public abstract class CustomSQLUtil {
 	private static Log _log = LogFactory.getLog(CustomSQLUtil.class);
 
 	private String _functionIsNull;
+	private String _functionIsNotNull;
 	private Map _sqlPool;
 
 }

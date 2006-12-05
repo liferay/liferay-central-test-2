@@ -113,6 +113,8 @@ public class PropsUtil {
 
 	public static final String CUSTOM_SQL_FUNCTION_ISNULL = "custom.sql.function.isnull";
 
+	public static final String CUSTOM_SQL_FUNCTION_ISNOTNULL = "custom.sql.function.isnotnull";
+
 	public static final String CUSTOM_SQL_VENDOR_ORACLE = "custom.sql.vendor.oracle";
 
 	// JavaScript
