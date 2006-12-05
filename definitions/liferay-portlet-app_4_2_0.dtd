@@ -275,14 +275,18 @@ value is false.
 
 <!--
 Set the portal-session-shared value to true if the portlet session and the
-portal session are shared. The default value is set in portal.properties under
-the "session.shared" key.
+portal session are shared. The default value is false. The property
+"session.shared.attributes" in portal.properties specifies which session
+attributes are shared when the portal-session-shared value is true.
 -->
 <!ELEMENT portal-session-shared (#PCDATA)>
 
 <!--
 Set the private-request-attributes value to true if the portlet does not share
-request attributes with any other portlet. The default value is true.
+request attributes with any other portlet. The default value is true. The
+property "request.shared.attributes" in portal.properties specifies which
+request attributes are shared even when the private-request-attributes value is
+false.
 -->
 <!ELEMENT private-request-attributes (#PCDATA)>
 

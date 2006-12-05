@@ -1862,9 +1862,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _maximizePrint;
 
 	/**
-	 * False since most portlets should not be layout cacheable.
+	 * True if the portlet can be cached within the layout.
 	 */
-	private boolean _layoutCacheable = false;
+	private boolean _layoutCacheable;
 
 	/**
 	 * True if the portlet can be added multiple times to a layout.
@@ -1874,8 +1874,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * True if the portlet session and the portal session are shared.
 	 */
-	private boolean _portalSessionShared = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.SESSION_SHARED));
+	private boolean _portalSessionShared;
 
 	/**
 	 * True if the portlet does not share request attributes with any other

@@ -22,9 +22,11 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 
+import java.util.Enumeration;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -35,7 +37,8 @@ import org.apache.struts.Globals;
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Michael Weisser
+ * @author  Brian Wing Shun Chan
+ * @author  Brian Myunghun Kim
  *
  */
 public class SharedSessionUtil {
@@ -45,8 +48,11 @@ public class SharedSessionUtil {
 		WebKeys.USER_PASSWORD
 	};
 
+	public static final String[] CUSTOM_SHARED_SESSION_ATTRIBUTES =
+		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
+
 	public static Map getSharedSessionAttributes(HttpServletRequest req) {
-		Map sharedSessionAttributes = CollectionFactory.getSyncHashMap();
+		Map map = CollectionFactory.getSyncHashMap();
 
 		HttpSession ses = req.getSession();
 
@@ -55,11 +61,32 @@ public class SharedSessionUtil {
 			Object attrValue = ses.getAttribute(attrName);
 
 			if (attrValue != null) {
-				sharedSessionAttributes.put(attrName, attrValue);
+				map.put(attrName, attrValue);
 			}
 		}
 
-		return sharedSessionAttributes;
+		Enumeration enu = ses.getAttributeNames();
+
+		while (enu.hasMoreElements()) {
+			String attrName = (String)enu.nextElement();
+			Object attrValue = ses.getAttribute(attrName);
+
+			if (attrValue != null) {
+				for (int i = 0; i < CUSTOM_SHARED_SESSION_ATTRIBUTES.length;
+						i++) {
+
+					if (attrName.startsWith(
+							CUSTOM_SHARED_SESSION_ATTRIBUTES[i])) {
+
+						map.put(attrName, attrValue);
+
+						break;
+					}
+				}
+			}
+		}
+
+		return map;
 	}
 
 }

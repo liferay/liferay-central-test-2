@@ -54,7 +54,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public static final String[] CUSTOM_RESERVED_PARAMS = PropsUtil.getArray(
-		PropsUtil.REQUEST_NAMESPACE_RESERVED_NAMES);
+		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
 
 	public NamespaceServletRequest(HttpServletRequest req, String portletName) {
 		this(req, portletName, true);

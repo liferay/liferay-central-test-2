@@ -181,7 +181,7 @@ public class PropsUtil {
 
 	// Request
 
-	public static final String REQUEST_NAMESPACE_RESERVED_NAMES = "request.namespace.reserved.names";
+	public static final String REQUEST_SHARED_ATTRIBUTES = "request.shared.attributes";
 
 	// Session
 
@@ -189,7 +189,7 @@ public class PropsUtil {
 
 	public static final String SESSION_TIMEOUT_WARNING = "session.timeout.warning";
 
-	public static final String SESSION_SHARED = "session.shared";
+	public static final String SESSION_SHARED_ATTRIBUTES = "session.shared.attributes";
 
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";
 
