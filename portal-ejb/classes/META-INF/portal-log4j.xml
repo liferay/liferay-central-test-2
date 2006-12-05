@@ -264,6 +264,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portlet.CachePortlet">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.RenderRequestFactory">
 		<priority value="ERROR" />
 	</category>

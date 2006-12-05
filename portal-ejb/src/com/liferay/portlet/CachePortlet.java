@@ -56,6 +56,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CachePortlet.java.html"><b><i>View Source</i></b></a>
  *
@@ -145,11 +148,31 @@ public class CachePortlet implements Portlet {
 	public void processAction(ActionRequest req, ActionResponse res)
 		throws IOException, PortletException {
 
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
+
 		_invoke(req, res, true);
+
+		if (_log.isDebugEnabled()) {
+			long end = System.currentTimeMillis();
+
+			_log.debug(
+				"processAction for " + _portletId + " takes " + (end - start) +
+					" ms");
+		}
 	}
 
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
+
+		long start = 0;
+
+		if (_log.isDebugEnabled()) {
+			start = System.currentTimeMillis();
+		}
 
 		String userId = req.getRemoteUser();
 
@@ -201,6 +224,13 @@ public class CachePortlet implements Portlet {
 				resImpl.setTitle(response.getTitle());
 				stringServletRes.getWriter().print(response.getContent());
 			}
+		}
+
+		if (_log.isDebugEnabled()) {
+			long end = System.currentTimeMillis();
+
+			_log.debug(
+				"render for " + _portletId + " takes " + (end - start) + " ms");
 		}
 	}
 
@@ -351,6 +381,8 @@ public class CachePortlet implements Portlet {
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(CachePortlet.class);
 
 	private String _portletId;
 	private Portlet _portlet;
