@@ -25,6 +25,15 @@
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "enabled") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="enabled" defaultValue="<%= PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED) %>" />
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "deploy-directory") %>
 	</td>
 	<td style="padding-left: 10px;"></td>

@@ -89,26 +89,35 @@ public class GlobalStartupAction extends SimpleAction {
 		// Auto deploy
 
 		try {
-			_log.debug("Registering auto deploy directories");
+			if (PrefsPropsUtil.getBoolean(PropsUtil.AUTO_DEPLOY_ENABLED)) {
+				if (_log.isInfoEnabled()) {
+					_log.info("Registering auto deploy directories");
+				}
 
-			File deployDir = new File(
-				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR));
-			File destDir = new File(
-				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR));
-			long interval = PrefsPropsUtil.getLong(
-				PropsUtil.AUTO_DEPLOY_INTERVAL);
+				File deployDir = new File(
+					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR));
+				File destDir = new File(
+					PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEST_DIR));
+				long interval = PrefsPropsUtil.getLong(
+					PropsUtil.AUTO_DEPLOY_INTERVAL);
 
-			List autoDeployListeners = new ArrayList();
+				List autoDeployListeners = new ArrayList();
 
-			autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
-			autoDeployListeners.add(new AutoDeployPortletListener());
-			autoDeployListeners.add(new AutoDeployThemeListener());
+				autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
+				autoDeployListeners.add(new AutoDeployPortletListener());
+				autoDeployListeners.add(new AutoDeployThemeListener());
 
-			AutoDeployDir autoDeployDir = new AutoDeployDir(
-				"defaultAutoDeployDir", deployDir, destDir, interval,
-				autoDeployListeners);
+				AutoDeployDir autoDeployDir = new AutoDeployDir(
+					"defaultAutoDeployDir", deployDir, destDir, interval,
+					autoDeployListeners);
 
-			AutoDeployUtil.registerDir(autoDeployDir);
+				AutoDeployUtil.registerDir(autoDeployDir);
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					_log.info("Not registering auto deploy directories");
+				}
+			}
 		}
 		catch (Exception e) {
 			_log.error(e);

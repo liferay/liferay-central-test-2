@@ -140,6 +140,7 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void autoDeploy(ActionRequest req) throws Exception {
+		boolean enabled = ParamUtil.getBoolean(req, "enabled");
 		String deployDir = ParamUtil.getString(req, "deployDir");
 		String destDir = ParamUtil.getString(req, "destDir");
 		long interval = ParamUtil.getLong(req, "interval");
@@ -148,6 +149,7 @@ public class EditServerAction extends PortletAction {
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
+		prefs.setValue(PropsUtil.AUTO_DEPLOY_ENABLED, String.valueOf(enabled));
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR, deployDir);
 		prefs.setValue(PropsUtil.AUTO_DEPLOY_DEST_DIR, destDir);
 		prefs.setValue(
@@ -167,21 +169,28 @@ public class EditServerAction extends PortletAction {
 
 		AutoDeployUtil.unregisterDir("defaultAutoDeployDir");
 
-		if (_log.isInfoEnabled()) {
-			_log.info("Registering auto deploy directories");
+		if (enabled) {
+			if (_log.isInfoEnabled()) {
+				_log.info("Registering auto deploy directories");
+			}
+
+			List autoDeployListeners = new ArrayList();
+
+			autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
+			autoDeployListeners.add(new AutoDeployPortletListener());
+			autoDeployListeners.add(new AutoDeployThemeListener());
+
+			AutoDeployDir autoDeployDir = new AutoDeployDir(
+				"defaultAutoDeployDir", new File(deployDir), new File(destDir),
+				interval, autoDeployListeners);
+
+			AutoDeployUtil.registerDir(autoDeployDir);
 		}
-
-		List autoDeployListeners = new ArrayList();
-
-		autoDeployListeners.add(new AutoDeployLayoutTemplateListener());
-		autoDeployListeners.add(new AutoDeployPortletListener());
-		autoDeployListeners.add(new AutoDeployThemeListener());
-
-		AutoDeployDir autoDeployDir = new AutoDeployDir(
-			"defaultAutoDeployDir", new File(deployDir), new File(destDir),
-			interval, autoDeployListeners);
-
-		AutoDeployUtil.registerDir(autoDeployDir);
+		else {
+			if (_log.isInfoEnabled()) {
+				_log.info("Not registering auto deploy directories");
+			}
+		}
 	}
 
 	protected void cacheDb() throws Exception {
