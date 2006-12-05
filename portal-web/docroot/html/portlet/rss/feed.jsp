@@ -24,27 +24,20 @@
 
 <%
 try {
-	ObjectValuePair ovp = RSSUtil.getChannel(url);
+	ObjectValuePair ovp = RSSUtil.getFeed(url);
 
-	channel = (ChannelIF)ovp.getValue();
+	feed = (SyndFeed)ovp.getValue();
 }
 catch (Exception e) {
 }
 %>
 
 <c:choose>
-	<c:when test="<%= (url != null) && (channel != null) %>">
-
-		<%
-		ItemIF[] items = (ItemIF[])channel.getItems().toArray(new ItemIF[0]);
-
-		Arrays.sort(items, new ItemComparator());
-		%>
-
+	<c:when test="<%= (url != null) && (feed != null) %>">
 		<tr>
 			<td>
 				<b><a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>">
-				<%= channel.getTitle() %>
+				<%= feed.getTitle() %>
 				</a></b>
 			</td>
 		</tr>
@@ -55,27 +48,31 @@ catch (Exception e) {
 		</tr>
 
 		<%
-		for (int j = 0; j < items.length; j++) {
-			ItemIF item = items[j];
+		List entries = feed.getEntries();
+
+		for (int j = 0; j < entries.size(); j++) {
+			SyndEntry entry = (SyndEntry)entries.get(j);
+
+			SyndContent content = entry.getDescription();
 		%>
 
 			<tr>
 				<td>
-					<a href="<%= item.getLink() %>" target="_blank"><%= item.getTitle() %></a><br>
+					<a href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br>
 
 					<span style="font-size: xx-small;">
 
-					<c:if test="<%= item.getDate() != null %>">
-						<%= dateFormatDateTime.format(item.getDate()) %><br>
+					<c:if test="<%= entry.getPublishedDate() != null %>">
+						<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br>
 					</c:if>
 
-					<%= item.getDescription() %>
+					<%= content.getValue() %>
 
 					</span>
 				</td>
 			</tr>
 
-			<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < itemsPerChannel) %>">
+			<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
 				<tr>
 					<td>
 						<br>
@@ -84,7 +81,7 @@ catch (Exception e) {
 			</c:if>
 
 		<%
-			if ((j + 1) >= itemsPerChannel) {
+			if ((j + 1) >= entriesPerFeed) {
 				break;
 			}
 		}

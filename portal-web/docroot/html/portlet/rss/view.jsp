@@ -26,7 +26,8 @@
 
 <%
 String url = ParamUtil.getString(request, "url");
-ChannelIF channel = null;
+
+SyndFeed feed = null;
 %>
 
 <table border="0" cellpadding="0" cellspacing="0">
@@ -36,10 +37,10 @@ ChannelIF channel = null;
 
 		<%
 		int i = 0;
-		itemsPerChannel = 20;
+		entriesPerFeed = 20;
 		%>
 
-		<%@ include file="/html/portlet/rss/channel.jsp" %>
+		<%@ include file="/html/portlet/rss/feed.jsp" %>
 	</c:when>
 	<c:otherwise>
 
@@ -48,7 +49,7 @@ ChannelIF channel = null;
 			url = urls[i];
 		%>
 
-			<%@ include file="/html/portlet/rss/channel.jsp" %>
+			<%@ include file="/html/portlet/rss/feed.jsp" %>
 
 		<%
 		}

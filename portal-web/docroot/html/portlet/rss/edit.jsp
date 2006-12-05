@@ -69,17 +69,17 @@ urlsString = StringUtil.merge(urls, StringPool.NEW_LINE);
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "num-of-items-per-channel") %>
+		<%= LanguageUtil.get(pageContext, "num-of-entries-per-feed") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<select name="<portlet:namespace />ipc">
+		<select name="<portlet:namespace />entriesPerFeed">
 
 			<%
 			for (int i = 1; i < 10; i++) {
 			%>
 
-				<option <%= (i == itemsPerChannel) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
+				<option <%= (i == entriesPerFeed) ? "selected" : "" %> value="<%= i %>"><%= i %></option>
 
 			<%
 			}

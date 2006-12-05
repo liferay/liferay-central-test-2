@@ -25,10 +25,10 @@
 --%><%@ include file="/html/common/init.jsp" %><%--
 
 --%><%@ page import="com.liferay.portlet.rss.util.RSSUtil" %><%--
---%><%@ page import="com.liferay.portlet.rss.util.comparator.ItemComparator" %><%--
 
---%><%@ page import="de.nava.informa.core.ChannelIF" %><%--
---%><%@ page import="de.nava.informa.core.ItemIF" %><%--
+--%><%@ page import="com.sun.syndication.feed.synd.SyndContent" %><%--
+--%><%@ page import="com.sun.syndication.feed.synd.SyndEntry" %><%--
+--%><%@ page import="com.sun.syndication.feed.synd.SyndFeed" %><%--
 
 --%><portlet:defineObjects /><%--
 
@@ -36,7 +36,7 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String[] urls = prefs.getValues("urls", new String[0]);
-int itemsPerChannel = GetterUtil.getInteger(prefs.getValue("items-per-channel", StringPool.BLANK));
+int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", StringPool.BLANK));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

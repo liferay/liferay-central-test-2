@@ -188,14 +188,14 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static java.lang.String getGroupEntriesRSS(
-		java.lang.String groupId, int begin, int end, double version,
-		java.lang.String url)
+		java.lang.String groupId, int begin, int end, java.lang.String type,
+		double version, java.lang.String url)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.getGroupEntriesRSS(groupId, begin, end,
-			version, url);
+			type, version, url);
 	}
 
 	public static void reIndex(java.lang.String[] ids)

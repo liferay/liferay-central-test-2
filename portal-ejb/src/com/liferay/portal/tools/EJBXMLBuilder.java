@@ -435,9 +435,10 @@ public class EJBXMLBuilder {
 		StringBuffer sb = new StringBuffer();
 
 		sb.append("<?xml version=\"1.0\"?>\n");
-		sb.append("<!DOCTYPE weblogic-ejb-jar PUBLIC \"-//BEA Systems, Inc.//DTD WebLogic 7.0.0 EJB//EN\" \"http://www.bea.com/servers/wls700/dtd/weblogic-ejb-jar.dtd\">\n");
+		//sb.append("<!DOCTYPE weblogic-ejb-jar PUBLIC \"-//BEA Systems, Inc.//DTD WebLogic 7.0.0 EJB//EN\" \"http://www.bea.com/servers/wls700/dtd/weblogic-ejb-jar.dtd\">\n");
 
-		sb.append("\n<weblogic-ejb-jar>\n");
+		//sb.append("\n<weblogic-ejb-jar>\n");
+		sb.append("\n<weblogic-ejb-jar xmlns=\"http://www.bea.com/ns/weblogic/90\" xmlns:j2ee=\"http://java.sun.com/xml/ns/j2ee\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xsi:schemaLocation=\"http://www.bea.com/ns/weblogic/90 http://www.bea.com/ns/weblogic/90/weblogic-ejb-jar.xsd\">\n");
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
@@ -453,12 +454,17 @@ public class EJBXMLBuilder {
 
 			String displayName = entity.elementText("display-name");
 
-			sb.append("\t\t<reference-descriptor>\n");
+			/*sb.append("\t\t<reference-descriptor>\n");
 			sb.append("\t\t\t<resource-description>\n");
 			sb.append("\t\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
 			sb.append("\t\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
 			sb.append("\t\t\t</resource-description>\n");
-			sb.append("\t\t</reference-descriptor>\n");
+			sb.append("\t\t</reference-descriptor>\n");*/
+
+			sb.append("\t\t<resource-description>\n");
+			sb.append("\t\t\t<res-ref-name>mail/MailSession</res-ref-name>\n");
+			sb.append("\t\t\t<jndi-name>mail/MailSession</jndi-name>\n");
+			sb.append("\t\t</resource-description>\n");
 
 			if (displayName.endsWith("LocalServiceEJB")) {
 				sb.append("\t\t<local-jndi-name>ejb/liferay/").append(displayName.substring(0, displayName.length() - 3)).append("Home</local-jndi-name>\n");

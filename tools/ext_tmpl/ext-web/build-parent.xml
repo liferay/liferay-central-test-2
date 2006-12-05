@@ -43,13 +43,13 @@
 		<unjar src="${project.dir}/lib/portal/easyconf.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/friki.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/google.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/informa.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jdom.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/jstl-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/log4j.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/lucene.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/quartz.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/rome.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/struts.jar" dest="${classpath.jsp}" />
 	</target>
 

@@ -22,11 +22,9 @@
 
 package com.liferay.util;
 
-import de.nava.informa.core.ChannelExporterIF;
-import de.nava.informa.core.ChannelIF;
-import de.nava.informa.exporters.RSS_0_91_Exporter;
-import de.nava.informa.exporters.RSS_1_0_Exporter;
-import de.nava.informa.exporters.RSS_2_0_Exporter;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.FeedException;
+import com.sun.syndication.io.SyndFeedOutput;
 
 import java.io.IOException;
 import java.io.StringWriter;
@@ -42,29 +40,24 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RSSUtil {
 
-	public static final String ENCODING = "UTF-8";
+	public static final String RSS = "rss";
 
-	public static String export(ChannelIF channel, double version) {
+	public static final double[] RSS_VERSIONS = new double[] {
+		0.9, 0.91, 0.93, 0.94, 1.0, 2.0
+	};
+
+	public static final String ATOM = "atom";
+
+	public static final double[] ATOM_VERSIONS = new double[] {0.3, 1.0};
+
+	public static String export(SyndFeed feed)
+		throws FeedException, IOException {
+
 		StringWriter writer = new StringWriter();
 
-		try {
-			ChannelExporterIF exporter = null;
+		SyndFeedOutput output = new SyndFeedOutput();
 
-			if (version == 0.91) {
-				exporter = new RSS_0_91_Exporter(writer, ENCODING);
-			}
-			else if (version == 1.0) {
-				exporter = new RSS_1_0_Exporter(writer, ENCODING);
-			}
-			else {
-				exporter = new RSS_2_0_Exporter(writer, ENCODING);
-			}
-
-			exporter.write(channel);
-		}
-		catch (IOException ioe) {
-			_log.error(ioe);
-		}
+		output.output(feed, writer);
 
 		return writer.getBuffer().toString();
 	}

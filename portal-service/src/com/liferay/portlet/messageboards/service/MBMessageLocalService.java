@@ -174,8 +174,8 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getCategoryMessagesRSS(
-		java.lang.String categoryId, int begin, int end, double version,
-		java.lang.String url)
+		java.lang.String categoryId, int begin, int end, java.lang.String type,
+		double version, java.lang.String url)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -218,7 +218,8 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.lang.String getThreadMessagesRSS(java.lang.String threadId,
-		int begin, int end, double version, java.lang.String url)
+		int begin, int end, java.lang.String type, double version,
+		java.lang.String url)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

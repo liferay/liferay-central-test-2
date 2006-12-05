@@ -90,7 +90,6 @@
 	<classpathentry kind="lib" path="lib/portal/hessian.jar"/>
 	<classpathentry kind="lib" path="lib/portal/hibernate3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/icq.jar"/>
-	<classpathentry kind="lib" path="lib/portal/informa.jar"/>
 	<classpathentry kind="lib" path="lib/portal/j2ee-management.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jackrabbit-index-filters.jar"/>
@@ -125,6 +124,7 @@
 	<classpathentry kind="lib" path="lib/portal/portletbridge-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
+	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj.jar"/>
 	<classpathentry kind="lib" path="lib/portal/simplecaptcha.jar"/>
 	<classpathentry kind="lib" path="lib/portal/slf4j-log4j12.jar"/>
