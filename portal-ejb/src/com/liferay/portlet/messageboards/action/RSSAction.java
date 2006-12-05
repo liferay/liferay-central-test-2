@@ -78,6 +78,7 @@ public class RSSAction extends Action {
 		String plid = ParamUtil.getString(req, "p_l_id");
 		String categoryId = ParamUtil.getString(req, "categoryId");
 		String threadId = ParamUtil.getString(req, "threadId");
+		String type = ParamUtil.getString(req, "type");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
@@ -90,11 +91,12 @@ public class RSSAction extends Action {
 
 		if (Validator.isNotNull(categoryId)) {
 			rss = MBMessageLocalServiceUtil.getCategoryMessagesRSS(
-				categoryId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+				categoryId, 0, SearchContainer.DEFAULT_DELTA, type, version,
+				url);
 		}
 		else {
 			rss = MBMessageLocalServiceUtil.getThreadMessagesRSS(
-				threadId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+				threadId, 0, SearchContainer.DEFAULT_DELTA, type, version, url);
 		}
 
 		return rss.getBytes();

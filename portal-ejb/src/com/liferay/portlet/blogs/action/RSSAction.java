@@ -75,6 +75,7 @@ public class RSSAction extends Action {
 
 		String plid = ParamUtil.getString(req, "p_l_id");
 		String groupId = ParamUtil.getString(req, "groupId");
+		String type = ParamUtil.getString(req, "type");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String url =
@@ -82,7 +83,7 @@ public class RSSAction extends Action {
 				themeDisplay.getPathMain() + "/blogs/find_entry?p_l_id=" + plid;
 
 		String rss = BlogsEntryLocalServiceUtil.getGroupEntriesRSS(
-			groupId, 0, SearchContainer.DEFAULT_DELTA, version, url);
+			groupId, 0, SearchContainer.DEFAULT_DELTA, type, version, url);
 
 		return rss.getBytes();
 	}

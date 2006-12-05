@@ -1376,6 +1376,7 @@ ntlm=NTLM
 num-of-articles-per-selection=Anzahl der Artikel pro Auswahl
 num-of-categories=Anzahl der Kategorien
 num-of-documents=Anzahl der Dokumente
+num-of-entries-per-feed=# von den Eintragungen pro Zufuhr
 num-of-entries=Anzahl der Einträge
 num-of-folders=Anzahl der Ordner
 num-of-hits=Anzahl der Treffer

@@ -49,7 +49,6 @@ import javax.servlet.jsp.PageContext;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.struts.Globals;
-import org.apache.struts.config.ModuleConfig;
 
 /**
  * <a href="StrutsUtil.java.html"><b><i>View Source</i></b></a>
@@ -175,11 +174,10 @@ public class StrutsUtil {
 		while (itr.hasNext()) {
 			String attributeName = (String)itr.next();
 
-			req.removeAttribute(attributeName);
+			req.setAttribute(attributeName, null);
         }
 
-		ModuleConfig moduleConfig =
-			(ModuleConfig)portletContext.getAttribute(Globals.MODULE_KEY);
+		Object moduleConfig = portletContext.getAttribute(Globals.MODULE_KEY);
 
 		req.setAttribute(Globals.MODULE_KEY, moduleConfig);
 

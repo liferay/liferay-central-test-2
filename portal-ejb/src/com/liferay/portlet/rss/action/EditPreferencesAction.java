@@ -64,10 +64,10 @@ public class EditPreferencesAction extends PortletAction {
 
 		String[] urls = StringUtil.split(
 			ParamUtil.getString(req, "urls"), "\n");
-		int itemsPerChannel = ParamUtil.get(req, "ipc", 4);
+		int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
 
 		prefs.setValues("urls", urls);
-		prefs.setValue("items-per-channel", Integer.toString(itemsPerChannel));
+		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
 
 		try {
 			prefs.store();

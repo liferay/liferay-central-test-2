@@ -26,9 +26,9 @@ import com.liferay.portal.util.WebCacheable;
 import com.liferay.util.ConverterException;
 import com.liferay.util.Time;
 
-import de.nava.informa.core.ChannelIF;
-import de.nava.informa.impl.basic.ChannelBuilder;
-import de.nava.informa.parsers.FeedParser;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.io.SyndFeedInput;
+import com.sun.syndication.io.XmlReader;
 
 import java.net.URL;
 
@@ -45,10 +45,9 @@ public class RSSConverter implements WebCacheable {
 	}
 
 	public Object convert(String id) throws ConverterException {
-		ChannelIF channel = null;
+		SyndFeed feed = null;
 
 		try {
-			ChannelBuilder builder = new ChannelBuilder();
 
 			// com.liferay.util.Http will break the connection if it spends
 			// more than 5 seconds looking up a location. However, German
@@ -64,13 +63,15 @@ public class RSSConverter implements WebCacheable {
 
 			channel = FeedParser.parse(builder, reader);*/
 
-			channel = FeedParser.parse(builder, new URL(_url));
+			SyndFeedInput input = new SyndFeedInput();
+
+			feed = input.build(new XmlReader(new URL(_url)));
 		}
 		catch (Exception e) {
 			throw new ConverterException(_url + " " + e.toString());
 		}
 
-		return channel;
+		return feed;
 	}
 
 	public long getRefreshTime() {

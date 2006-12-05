@@ -35,6 +35,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
 import com.liferay.portlet.blogs.EntryDisplayDateException;
@@ -55,13 +56,17 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
-import de.nava.informa.core.ChannelIF;
-import de.nava.informa.impl.basic.ChannelBuilder;
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
 
-import java.net.URL;
-
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
@@ -303,7 +308,8 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 	}
 
 	public String getGroupEntriesRSS(
-			String groupId, int begin, int end, double version, String url)
+			String groupId, int begin, int end, String type, double version,
+			String url)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -316,11 +322,16 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			name = user.getFullName();
 		}
 
-		ChannelBuilder builder = new ChannelBuilder();
+		SyndFeed syndFeed = new SyndFeedImpl();
 
-		ChannelIF channel = builder.createChannel(name);
+		syndFeed.setFeedType(type + "_" + version);
 
-		channel.setDescription(name);
+		syndFeed.setTitle(name);
+		syndFeed.setDescription(name);
+
+		List entries = new ArrayList();
+
+		syndFeed.setEntries(entries);
 
 		Iterator itr = BlogsEntryUtil.findByGroupId(
 			groupId, begin, end).iterator();
@@ -328,22 +339,34 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		while (itr.hasNext()) {
 			BlogsEntry entry = (BlogsEntry)itr.next();
 
-			try {
-				String firstLine =
-					StringUtil.shorten(
-						Html.stripHtml(entry.getContent()), 80,
-						StringPool.BLANK);
+			String firstLine = StringUtil.shorten(
+				Html.stripHtml(entry.getContent()), 80, StringPool.BLANK);
 
-				builder.createItem(
-					channel, entry.getTitle(), firstLine,
-					new URL(url + "&entryId=" + entry.getEntryId()));
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			SyndEntry syndEntry = new SyndEntryImpl();
+
+			syndEntry.setTitle(entry.getTitle());
+			syndEntry.setLink(url + "&entryId=" + entry.getEntryId());
+			syndEntry.setPublishedDate(entry.getCreateDate());
+
+			SyndContent syndContent = new SyndContentImpl();
+
+			syndContent.setType(Constants.TEXT_PLAIN);
+			syndContent.setValue(firstLine);
+
+			syndEntry.setDescription(syndContent);
+
+			entries.add(syndEntry);
 		}
 
-		return RSSUtil.export(channel, version);
+		try {
+			return RSSUtil.export(syndFeed);
+		}
+		catch (FeedException fe) {
+			throw new SystemException(fe);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public void reIndex(String[] ids) throws SystemException {

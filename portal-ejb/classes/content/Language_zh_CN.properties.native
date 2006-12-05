@@ -1376,6 +1376,7 @@ ntlm=NTLM
 num-of-articles-per-selection=# 文章每选择
 num-of-categories=# 类别
 num-of-documents=# 文件
+num-of-entries-per-feed=# 词条每饲料
 num-of-entries=# 词条
 num-of-folders=# 文件夹
 num-of-hits=# 点击

@@ -40,6 +40,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.UserUtil;
+import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -80,12 +81,15 @@ import com.liferay.util.RSSUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import de.nava.informa.core.ChannelIF;
-import de.nava.informa.impl.basic.ChannelBuilder;
+import com.sun.syndication.feed.synd.SyndContent;
+import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEntry;
+import com.sun.syndication.feed.synd.SyndEntryImpl;
+import com.sun.syndication.feed.synd.SyndFeed;
+import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
-
-import java.net.URL;
 
 import java.rmi.RemoteException;
 
@@ -689,7 +693,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 	}
 
 	public String getCategoryMessagesRSS(
-			String categoryId, int begin, int end, double version, String url)
+			String categoryId, int begin, int end, String type, double version,
+			String url)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
@@ -697,7 +702,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		List messages = MBMessageUtil.findByCategoryId(categoryId, begin, end);
 
 		return exportToRSS(
-			category.getName(), category.getDescription(), version, url,
+			category.getName(), category.getDescription(), type, version, url,
 			messages);
 	}
 
@@ -842,7 +847,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 	}
 
 	public String getThreadMessagesRSS(
-			String threadId, int begin, int end, double version, String url)
+			String threadId, int begin, int end, String type, double version,
+			String url)
 		throws PortalException, SystemException {
 
 		List messages = MBMessageUtil.findByThreadId(threadId, begin, end);
@@ -857,7 +863,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			description = message.getSubject();
 		}
 
-		return exportToRSS(name, description, version, url, messages);
+		return exportToRSS(name, description, type, version, url, messages);
 	}
 
 	public void subscribeMessage(String userId, String messageId)
@@ -1088,37 +1094,54 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 	}
 
 	protected String exportToRSS(
-			String name, String description, double version, String url,
-			List messages)
+			String name, String description, String type, double version,
+			String url, List messages)
 		throws SystemException {
 
-		ChannelBuilder builder = new ChannelBuilder();
+		SyndFeed syndFeed = new SyndFeedImpl();
 
-		ChannelIF channel = builder.createChannel(name);
+		syndFeed.setFeedType(type + "_" + version);
 
-		channel.setDescription(description);
+		syndFeed.setTitle(name);
+		syndFeed.setDescription(description);
+
+		List entries = new ArrayList();
+
+		syndFeed.setEntries(entries);
 
 		Iterator itr = messages.iterator();
 
 		while (itr.hasNext()) {
 			MBMessage message = (MBMessage)itr.next();
 
-			try {
-				String firstLine =
-					StringUtil.shorten(
-						Html.stripHtml(message.getBody()), 80,
-						StringPool.BLANK);
+			String firstLine = StringUtil.shorten(
+				Html.stripHtml(message.getBody()), 80, StringPool.BLANK);
 
-				builder.createItem(
-					channel, message.getSubject(), firstLine,
-					new URL(url + "&messageId=" + message.getMessageId()));
-			}
-			catch (IOException ioe) {
-				throw new SystemException(ioe);
-			}
+			SyndEntry syndEntry = new SyndEntryImpl();
+
+			syndEntry.setTitle(message.getSubject());
+			syndEntry.setLink(url + "&messageId=" + message.getMessageId());
+			syndEntry.setPublishedDate(message.getCreateDate());
+
+			SyndContent syndContent = new SyndContentImpl();
+
+			syndContent.setType(Constants.TEXT_PLAIN);
+			syndContent.setValue(firstLine);
+
+			syndEntry.setDescription(syndContent);
+
+			entries.add(syndEntry);
 		}
 
-		return RSSUtil.export(channel, version);
+		try {
+			return RSSUtil.export(syndFeed);
+		}
+		catch (FeedException fe) {
+			throw new SystemException(fe);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	protected MBCategory getCategory(MBMessage message, String categoryId)

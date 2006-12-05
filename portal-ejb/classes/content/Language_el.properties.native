@@ -1375,6 +1375,7 @@ ntlm=NTLM
 num-of-articles-per-selection=# Άρθρων ανά Επιλογή
 num-of-categories=# των κατηγοριών
 num-of-documents=# Εγγράφων
+num-of-entries-per-feed=# των καταχωρήσεων ανά τροφή
 num-of-entries=# των καταχωρήσεων
 num-of-folders=# των φακέλλων
 num-of-hits=# Προσπελάσεων

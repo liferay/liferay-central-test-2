@@ -99,10 +99,11 @@ public class CachePortlet implements Portlet {
 	}
 
 	public CachePortlet(Portlet portlet, PortletContext portletCtx,
-						Integer expCache) {
+						boolean privateRequestAttributes, Integer expCache) {
 
 		_portlet = portlet;
 		_portletCtx = (PortletContextImpl)portletCtx;
+		_privateRequestAttributes = privateRequestAttributes;
 		_expCache = expCache;
 
 		if (ClassUtil.isSubclass(_portlet.getClass(), Constants.JSF_MYFACES) ||
@@ -113,6 +114,9 @@ public class CachePortlet implements Portlet {
 
 		_strutsPortlet = ClassUtil.isSubclass(
 			portlet.getClass(), StrutsPortlet.class);
+		_strutsBridgePortlet = ClassUtil.isSubclass(
+			portlet.getClass(),
+			"org.apache.portals.bridges.struts.StrutsPortlet");
 	}
 
 	public void init(PortletConfig config) throws PortletException {
@@ -247,6 +251,10 @@ public class CachePortlet implements Portlet {
 		return _strutsPortlet;
 	}
 
+	public boolean isStrutsBridgePortlet() {
+		return _strutsBridgePortlet;
+	}
+
 	private ClassLoader _getPortletClassLoader() {
 		return (ClassLoader)_portletCtx.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
@@ -348,9 +356,11 @@ public class CachePortlet implements Portlet {
 	private Portlet _portlet;
 	private PortletConfigImpl _portletConfig;
 	private PortletContextImpl _portletCtx;
+	private boolean _privateRequestAttributes;
 	private Integer _expCache;
 	private boolean _destroyable;
 	private boolean _facesPortlet;
 	private boolean _strutsPortlet;
+	private boolean _strutsBridgePortlet;
 
 }

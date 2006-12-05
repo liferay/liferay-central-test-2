@@ -1374,6 +1374,7 @@ ntlm=NTLM
 num-of-articles-per-selection=# 1 選択毎の記事数の
 num-of-categories=# 部門の
 num-of-documents=# 文書の
+num-of-entries-per-feed=# 1 供給毎の記入項目数の
 num-of-entries=# 記入項目の
 num-of-folders=# ホールダーの
 num-of-hits=# 衝突の

@@ -1376,6 +1376,7 @@ ntlm=NTLM
 num-of-articles-per-selection=aantal artikelen per selectie
 num-of-categories=aantal categorie�n
 num-of-documents=aantal documenten
+num-of-entries-per-feed=# van Ingangen per Voer
 num-of-entries=aantal regels
 num-of-folders=aantal mappen
 num-of-hits=aantal hits

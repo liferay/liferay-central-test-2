@@ -1376,6 +1376,7 @@ ntlm=NTLM
 num-of-articles-per-selection=Numero di articoli per selezione
 num-of-categories=Numero di categorie
 num-of-documents=Numero di Documenti
+num-of-entries-per-feed=# delle entrate per alimentazione
 num-of-entries=Numero di entrate
 num-of-folders=Numero di cartelle
 num-of-hits=Numero di hits

@@ -1376,6 +1376,7 @@ ntlm=NTLM
 num-of-articles-per-selection=# dos artigos por a seleção
 num-of-categories=# das categorias
 num-of-documents=# dos originais
+num-of-entries-per-feed=# das entradas por a alimentação
 num-of-entries=# das entradas
 num-of-folders=# dos dobradores
 num-of-hits=# das batidas

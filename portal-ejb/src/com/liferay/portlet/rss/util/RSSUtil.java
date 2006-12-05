@@ -35,7 +35,7 @@ import com.liferay.portal.util.WebCacheable;
  */
 public class RSSUtil {
 
-	public static ObjectValuePair getChannel(String url) {
+	public static ObjectValuePair getFeed(String url) {
 		WebCacheable wc = new RSSConverter(url);
 
 		return new ObjectValuePair(url, WebCachePool.get(

@@ -1375,6 +1375,7 @@ ntlm=NTLM
 num-of-articles-per-selection=# 선택에 의하여 기사의
 num-of-categories=#종류의
 num-of-documents=#문서의
+num-of-entries-per-feed=#급식당 입장의
 num-of-entries=#입장의
 num-of-folders=#폴더의
 num-of-hits=# 명중의

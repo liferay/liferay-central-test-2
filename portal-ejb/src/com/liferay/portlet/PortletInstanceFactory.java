@@ -171,7 +171,7 @@ public class PortletInstanceFactory {
 
 			cachePortlet = new CachePortlet(
 				portletInstance, portletConfig.getPortletContext(),
-				portlet.getExpCache());
+				portlet.isPrivateRequestAttributes(), portlet.getExpCache());
 
 			cachePortlet.init(portletConfig);
 		}

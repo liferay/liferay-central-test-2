@@ -174,11 +174,12 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public java.lang.String getGroupEntriesRSS(java.lang.String groupId,
-		int begin, int end, double version, java.lang.String url)
+		int begin, int end, java.lang.String type, double version,
+		java.lang.String url)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().getGroupEntriesRSS(groupId,
-			begin, end, version, url);
+			begin, end, type, version, url);
 	}
 
 	public void reIndex(java.lang.String[] ids)
