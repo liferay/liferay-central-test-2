@@ -154,7 +154,7 @@ public class UpdateLayoutAction extends Action {
 
 				if (portlet.isPrivateRequestAttributes()) {
 					dynamicReq = new NamespaceServletRequest(
-						req, portlet.getPortletId());
+						req, portlet.getServletContextName());
 				}
 				else {
 					dynamicReq = new DynamicServletRequest(req);

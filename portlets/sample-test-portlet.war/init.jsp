@@ -22,18 +22,8 @@
  */
 %>
 
-<%@ include file="/init.jsp" %>
+<%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
-This is the <b>Sample Test Portlet</b>. This was made to test some portlet features.
+<%@ page import="javax.portlet.PortletSession" %>
 
-<br><br>
-
-<b>Request:</b> <a href="<portlet:renderURL><portlet:param name="jspPage" value="/request/attribute_sharing.jsp" /></portlet:renderURL>">Attribute Sharing</a>
-
-<br><br>
-
-<b>Response:</b> <a href="<portlet:renderURL><portlet:param name="jspPage" value="/response/buffer_size.jsp" /></portlet:renderURL>">Buffer Size</a>
-
-<br><br>
-
-<b>Session:</b> <a href="<portlet:renderURL><portlet:param name="jspPage" value="/session/attribute_sharing.jsp" /></portlet:renderURL>">Attribute Sharing</a>
+<portlet:defineObjects />

@@ -38,7 +38,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequestDispatcher;
 import javax.portlet.RenderRequest;
@@ -63,17 +62,17 @@ import org.apache.struts.Globals;
 public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 	public PortletRequestDispatcherImpl(RequestDispatcher rd,
-										PortletContext portletCtx) {
+										PortletContextImpl portletCtxImpl) {
 
-		this(rd, portletCtx, null);
+		this(rd, portletCtxImpl, null);
 	}
 
 	public PortletRequestDispatcherImpl(RequestDispatcher rd,
-										PortletContext portletCtx,
+										PortletContextImpl portletCtxImpl,
 										String path) {
 
 		_rd = rd;
-		_portletCtx = portletCtx;
+		_portletCtxImpl = portletCtxImpl;
 		_path = path;
 	}
 
@@ -147,7 +146,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 					if (reqImpl.isPrivateRequestAttributes()) {
 						dynamicReq = new NamespaceServletRequest(
-							httpReq, reqImpl.getPortletName());
+							httpReq, _portletCtxImpl.getPortletContextName());
 					}
 					else {
 						dynamicReq = new DynamicServletRequest(httpReq);
@@ -231,7 +230,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				resImpl.setURLEncoder(new StrutsURLEncoder(
 					portletServletReq.getContextPath(),
 					themeDisplay.getPathMain(),
-					(String)_portletCtx.getAttribute(Globals.SERVLET_KEY),
+					(String)_portletCtxImpl.getAttribute(Globals.SERVLET_KEY),
 					(com.liferay.portlet.PortletURLImpl)res.createRenderURL()));
 			}
 
@@ -248,7 +247,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		LogFactory.getLog(PortletRequestDispatcherImpl.class);
 
 	private RequestDispatcher _rd;
-	private PortletContext _portletCtx;
+	private PortletContextImpl _portletCtxImpl;
 	private String _path;
 
 }

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -56,17 +55,19 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	public static final String[] CUSTOM_RESERVED_PARAMS = PropsUtil.getArray(
 		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
 
-	public NamespaceServletRequest(HttpServletRequest req, String portletName) {
-		this(req, portletName, true);
+	public NamespaceServletRequest(HttpServletRequest req,
+								   String servletContextName) {
+
+		this(req, servletContextName, true);
 	}
 
-	public NamespaceServletRequest(HttpServletRequest req, String portletName,
-								   boolean inherit) {
+	public NamespaceServletRequest(HttpServletRequest req,
+								   String servletContextName, boolean inherit) {
 
 		super(req, inherit);
 
-		_portletName = portletName;
-		_namespace = PortalUtil.getPortletNamespace(_portletName);
+		_servletContextName = servletContextName;
+		_namespace = servletContextName;
 	}
 
 	public Object getAttribute(String name) {
@@ -153,7 +154,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return false;
 	}
 
-	private String _portletName;
+	private String _servletContextName;
 	private String _namespace;
 
 }

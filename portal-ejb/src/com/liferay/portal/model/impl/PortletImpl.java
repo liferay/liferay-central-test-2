@@ -930,33 +930,34 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns true if the portlet does not share request attributes with any
-	 * other portlet.
+	 * Returns true if the portlet does not share request attributes with the
+	 * portal or portlets from another WAR.
 	 *
 	 * @return		true if the portlet does not share request attributes with
-	 *				any other portlet
+	 *				the portal or portlets from another WAR
 	 */
 	public boolean getPrivateRequestAttributes() {
 		return _privateRequestAttributes;
 	}
 
 	/**
-	 * Returns true if the portlet does not share request attributes with any
-	 * other portlet.
+	 * Returns true if the portlet does not share request attributes with the
+	 * portal or portlets from another WAR.
 	 *
 	 * @return		true if the portlet does not share request attributes with
-	 *				any other portlet
+	 *				the portal or portlets from another WAR
 	 */
 	public boolean isPrivateRequestAttributes() {
 		return _privateRequestAttributes;
 	}
 
 	/**
-	 * Sets to true if the portlet does not share request attributes with any
-	 * other portlet.
+	 * Sets to true if the portlet does not share request attributes with the
+	 * portal or portlets from another WAR.
 	 *
 	 * @param		privateRequestAttributes boolean value for whether the
-	 *				portlet shares request attributes with any other portlet
+	 *				portlet shares request attributes with the portal or
+	 *				portlets from another WAR
 	 */
 	public void setPrivateRequestAttributes(boolean privateRequestAttributes) {
 		_privateRequestAttributes = privateRequestAttributes;
@@ -1875,8 +1876,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _instanceable;
 
 	/**
-	 * True if the portlet does not share request attributes with any other
-	 * portlet.
+	 * True if the portlet does not share request attributes with the portal or
+	 * portlets from another WAR.
 	 */
 	private boolean _privateRequestAttributes = true;
 

@@ -495,7 +495,8 @@ public class RenderRequestImpl implements RenderRequest {
 		DynamicServletRequest dynamicReq = null;
 
 		if (portlet.isPrivateRequestAttributes()) {
-			dynamicReq = new NamespaceServletRequest(req, _portletName, false);
+			dynamicReq = new NamespaceServletRequest(
+				req, portlet.getServletContextName(), false);
 		}
 		else {
 			dynamicReq = new DynamicServletRequest(req, false);

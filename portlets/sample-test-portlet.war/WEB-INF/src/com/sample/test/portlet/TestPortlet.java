@@ -48,6 +48,10 @@ public class TestPortlet extends GenericPortlet {
 
 		String jspPage = ParamUtil.getString(req, "jspPage", "/view.jsp");
 
+		if (jspPage.equals("/response/buffer_size.jsp")) {
+			testResponseBufferSize(res);
+		}
+
 		include(jspPage, req, res);
 	}
 
@@ -63,6 +67,14 @@ public class TestPortlet extends GenericPortlet {
 		else {
 			prd.include(req, res);
 		}
+	}
+
+	protected void testResponseBufferSize(RenderResponse res) {
+		_log.info("Original buffer size " + res.getBufferSize());
+
+		res.setBufferSize(12345);
+
+		_log.info("New buffer size " + res.getBufferSize());
 	}
 
 	private static Log _log = LogFactory.getLog(TestPortlet.class);
