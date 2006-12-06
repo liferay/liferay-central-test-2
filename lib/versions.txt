@@ -36,7 +36,7 @@ Hessian 2.1.12
 Hibernate 3.2
 HiveMind 1.1
 Hypersonic 1.8.0.7
-Jackrabbit 1.0.1
+Jackrabbit 1.1.1
 JAIMBot 1.4
 Jalopy 1.0b11
 Javassist 3.0
