@@ -485,7 +485,7 @@ public class RenderRequestImpl implements RenderRequest {
 
 		boolean portalSessionShared = false;
 
-		if (portlet.isWARFile() && portlet.isPortalSessionShared()) {
+		if (portlet.isWARFile() && !portlet.isPrivateSessionAttributes()) {
 			portalSessionShared = true;
 		}
 

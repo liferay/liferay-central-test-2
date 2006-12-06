@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Enumeration;
@@ -32,10 +31,8 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
-import org.apache.struts.Globals;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
