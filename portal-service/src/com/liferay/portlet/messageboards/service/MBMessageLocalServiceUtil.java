@@ -270,13 +270,13 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.lang.String getCategoryMessagesRSS(
 		java.lang.String categoryId, int begin, int end, java.lang.String type,
-		double version, java.lang.String url)
+		double version, java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getCategoryMessagesRSS(categoryId, begin,
-			end, type, version, url);
+			end, type, version, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getDiscussionMessageDisplay(
@@ -357,13 +357,13 @@ public class MBMessageLocalServiceUtil {
 
 	public static java.lang.String getThreadMessagesRSS(
 		java.lang.String threadId, int begin, int end, java.lang.String type,
-		double version, java.lang.String url)
+		double version, java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.getThreadMessagesRSS(threadId, begin, end,
-			type, version, url);
+			type, version, feedURL, entryURL);
 	}
 
 	public static void subscribeMessage(java.lang.String userId,

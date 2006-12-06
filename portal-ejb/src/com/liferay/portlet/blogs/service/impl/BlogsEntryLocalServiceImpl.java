@@ -327,6 +327,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		syndFeed.setFeedType(type + "_" + version);
 
 		syndFeed.setTitle(name);
+		syndFeed.setLink(url);
 		syndFeed.setDescription(name);
 
 		List entries = new ArrayList();

@@ -83,7 +83,7 @@ public class RSSAction extends Action {
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);
 
-		String url =
+		String entryURL =
 			Http.getProtocol(req) + "://" + company.getPortalURL() +
 				themeDisplay.getPathMain() +
 					"/message_boards/find_message?p_l_id=" + plid +
@@ -92,13 +92,26 @@ public class RSSAction extends Action {
 		String rss = StringPool.BLANK;
 
 		if (Validator.isNotNull(categoryId)) {
+			String feedURL =
+				Http.getProtocol(req) + "://" + company.getPortalURL() +
+					themeDisplay.getPathMain() +
+						"/message_boards/find_category?p_l_id=" + plid +
+							"&categoryId=" + categoryId;
+
 			rss = MBMessageLocalServiceUtil.getCategoryMessagesRSS(
 				categoryId, 0, SearchContainer.DEFAULT_DELTA, type, version,
-				url);
+				feedURL, entryURL);
 		}
 		else {
+			String feedURL =
+				Http.getProtocol(req) + "://" + company.getPortalURL() +
+					themeDisplay.getPathMain() +
+						"/message_boards/find_thread?p_l_id=" + plid +
+							"&threadId=" + threadId;
+
 			rss = MBMessageLocalServiceUtil.getThreadMessagesRSS(
-				threadId, 0, SearchContainer.DEFAULT_DELTA, type, version, url);
+				threadId, 0, SearchContainer.DEFAULT_DELTA, type, version,
+				feedURL, entryURL);
 		}
 
 		return rss.getBytes();

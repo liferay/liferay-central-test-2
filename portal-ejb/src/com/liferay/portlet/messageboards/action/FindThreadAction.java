@@ -20,13 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.blogs.action;
+package com.liferay.portlet.messageboards.action;
 
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
@@ -42,12 +43,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="FindEntryAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="FindThreadAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class FindEntryAction extends Action {
+public class FindThreadAction extends Action {
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
@@ -56,19 +57,19 @@ public class FindEntryAction extends Action {
 
 		try {
 			String plid = ParamUtil.getString(req, "p_l_id");
-			String entryId = ParamUtil.getString(req, "entryId");
+			String threadId = ParamUtil.getString(req, "threadId");
+
+			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.BLOGS, plid, false);
+				req, PortletKeys.MESSAGE_BOARDS, plid, false);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);
 
-			if (Validator.isNotNull(entryId)) {
-				portletURL.setParameter(
-					"struts_action", "/blogs/view_entry");
-				portletURL.setParameter("entryId", entryId);
-			}
+			portletURL.setParameter(
+				"struts_action", "/message_boards/view_message");
+			portletURL.setParameter("messageId", thread.getRootMessageId());
 
 			res.sendRedirect(portletURL.toString());
 

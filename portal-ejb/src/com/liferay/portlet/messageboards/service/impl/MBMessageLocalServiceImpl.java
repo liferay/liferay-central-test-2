@@ -694,7 +694,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 	public String getCategoryMessagesRSS(
 			String categoryId, int begin, int end, String type, double version,
-			String url)
+			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
@@ -702,8 +702,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		List messages = MBMessageUtil.findByCategoryId(categoryId, begin, end);
 
 		return exportToRSS(
-			category.getName(), category.getDescription(), type, version, url,
-			messages);
+			category.getName(), category.getDescription(), type, version,
+			feedURL, entryURL, messages);
 	}
 
 	public MBMessageDisplay getDiscussionMessageDisplay(
@@ -848,7 +848,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 	public String getThreadMessagesRSS(
 			String threadId, int begin, int end, String type, double version,
-			String url)
+			String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
 		List messages = MBMessageUtil.findByThreadId(threadId, begin, end);
@@ -863,7 +863,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			description = message.getSubject();
 		}
 
-		return exportToRSS(name, description, type, version, url, messages);
+		return exportToRSS(
+			name, description, type, version, feedURL, entryURL, messages);
 	}
 
 	public void subscribeMessage(String userId, String messageId)
@@ -1095,7 +1096,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String url, List messages)
+			String feedURL, String entryURL, List messages)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -1103,6 +1104,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		syndFeed.setFeedType(type + "_" + version);
 
 		syndFeed.setTitle(name);
+		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
 		List entries = new ArrayList();
@@ -1120,7 +1122,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setTitle(message.getSubject());
-			syndEntry.setLink(url + "&messageId=" + message.getMessageId());
+			syndEntry.setLink(
+				entryURL + "&messageId=" + message.getMessageId());
 			syndEntry.setPublishedDate(message.getCreateDate());
 
 			SyndContent syndContent = new SyndContentImpl();
