@@ -262,6 +262,7 @@ portletDisplay.setColumnId(columnId);
 portletDisplay.setColumnPos(columnPos.intValue());
 portletDisplay.setColumnCount(columnCount.intValue());
 
+portletDisplay.setStateExclusive(themeDisplay.isStateExclusive());
 portletDisplay.setStateMax(stateMax);
 portletDisplay.setStateMin(stateMin);
 portletDisplay.setStatePopUp(themeDisplay.isStatePopUp());
@@ -321,119 +322,124 @@ boolean showPortletInactive = portlet.isShowPortletInactive();
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
-	<a name="p_<%= portletId %>"></a>
+<c:if test="<%= !themeDisplay.isStateExclusive() %>">
+	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %>">
+		<a name="p_<%= portletId %>"></a>
+</c:if>
 
-	<c:choose>
-		<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
-		</c:when>
-		<c:when test="<%= !portlet.isActive() && !portlet.isShowPortletInactive() %>">
-		</c:when>
-		<c:otherwise>
+<c:choose>
+	<c:when test="<%= !access && !portlet.isShowPortletAccessDenied() %>">
+	</c:when>
+	<c:when test="<%= !portlet.isActive() && !portlet.isShowPortletInactive() %>">
+	</c:when>
+	<c:otherwise>
 
-			<%
-			boolean useDefaultTemplate = portlet.isUseDefaultTemplate();
-			Boolean useDefaultTemplateObj = renderResponseImpl.getUseDefaultTemplate();
+		<%
+		boolean useDefaultTemplate = portlet.isUseDefaultTemplate();
+		Boolean useDefaultTemplateObj = renderResponseImpl.getUseDefaultTemplate();
 
-			if (useDefaultTemplateObj != null) {
-				useDefaultTemplate = useDefaultTemplateObj.booleanValue();
-			}
+		if (useDefaultTemplateObj != null) {
+			useDefaultTemplate = useDefaultTemplateObj.booleanValue();
+		}
 
-			if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
-				if (!access || portletException) {
-					PortletRequestProcessor portletReqProcessor = (PortletRequestProcessor)portletCtx.getAttribute(WebKeys.PORTLET_STRUTS_PROCESSOR);
+		if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
+			if (!access || portletException) {
+				PortletRequestProcessor portletReqProcessor = (PortletRequestProcessor)portletCtx.getAttribute(WebKeys.PORTLET_STRUTS_PROCESSOR);
 
-					ActionMapping actionMapping = portletReqProcessor.processMapping(request, response, (String)portlet.getInitParams().get("view-action"));
+				ActionMapping actionMapping = portletReqProcessor.processMapping(request, response, (String)portlet.getInitParams().get("view-action"));
 
-					ComponentDefinition definition = null;
+				ComponentDefinition definition = null;
 
-					if (actionMapping != null) {
+				if (actionMapping != null) {
 
-						// See action path /weather/view
+					// See action path /weather/view
 
-						String definitionName = actionMapping.getForward();
+					String definitionName = actionMapping.getForward();
 
-						if (definitionName == null) {
+					if (definitionName == null) {
 
-							// See action path /journal/view_articles
+						// See action path /journal/view_articles
 
-							String[] definitionNames = actionMapping.findForwards();
+						String[] definitionNames = actionMapping.findForwards();
 
-							for (int definitionNamesPos = 0; definitionNamesPos < definitionNames.length; definitionNamesPos++) {
-								if (definitionNames[definitionNamesPos].endsWith("view")) {
-									definitionName = definitionNames[definitionNamesPos];
+						for (int definitionNamesPos = 0; definitionNamesPos < definitionNames.length; definitionNamesPos++) {
+							if (definitionNames[definitionNamesPos].endsWith("view")) {
+								definitionName = definitionNames[definitionNamesPos];
 
-									break;
-								}
-							}
-
-							if (definitionName == null) {
-								definitionName = definitionNames[0];
+								break;
 							}
 						}
 
-						definition = TilesUtil.getDefinition(definitionName, request, application);
+						if (definitionName == null) {
+							definitionName = definitionNames[0];
+						}
 					}
 
-					String templatePath = Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp";
-					if (definition != null) {
-						templatePath = Constants.TEXT_HTML_DIR + definition.getPath();
-					}
-			%>
-
-					<tiles:insert template="<%= templatePath %>" flush="false">
-						<tiles:put name="portlet_content" value="/portal/portlet_error.jsp" />
-					</tiles:insert>
-
-			<%
+					definition = TilesUtil.getDefinition(definitionName, request, application);
 				}
-				else {
-					if (useDefaultTemplate) {
-						renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
-			%>
 
-						<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
-							<tiles:put name="portlet_content" value="<%= StringPool.BLANK %>" />
-						</tiles:insert>
-
-			<%
-					}
-					else {
-						pageContext.getOut().print(stringServletRes.getString());
-					}
+				String templatePath = Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp";
+				if (definition != null) {
+					templatePath = Constants.TEXT_HTML_DIR + definition.getPath();
 				}
+		%>
+
+				<tiles:insert template="<%= templatePath %>" flush="false">
+					<tiles:put name="portlet_content" value="/portal/portlet_error.jsp" />
+				</tiles:insert>
+
+		<%
 			}
 			else {
-				renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+				if (useDefaultTemplate) {
+					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+		%>
 
-				String portletContent = StringPool.BLANK;
+					<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
+						<tiles:put name="portlet_content" value="<%= StringPool.BLANK %>" />
+					</tiles:insert>
 
-				if (portletException) {
-					portletContent = "/portal/portlet_error.jsp";
+		<%
 				}
-			%>
-
-				<c:choose>
-					<c:when test="<%= useDefaultTemplate || portletException %>">
-						<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
-							<tiles:put name="portlet_content" value="<%= portletContent %>" />
-						</tiles:insert>
-					</c:when>
-					<c:otherwise>
-						<%= renderRequestImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
-					</c:otherwise>
-				</c:choose>
-
-			<%
+				else {
+					pageContext.getOut().print(stringServletRes.getString());
+				}
 			}
-			%>
+		}
+		else {
+			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
 
-		</c:otherwise>
-	</c:choose>
-</div>
+			String portletContent = StringPool.BLANK;
+
+			if (portletException) {
+				portletContent = "/portal/portlet_error.jsp";
+			}
+		%>
+
+			<c:choose>
+				<c:when test="<%= useDefaultTemplate || portletException %>">
+					<tiles:insert template='<%= Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
+						<tiles:put name="portlet_content" value="<%= portletContent %>" />
+					</tiles:insert>
+				</c:when>
+				<c:otherwise>
+					<%= renderRequestImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
+				</c:otherwise>
+			</c:choose>
+
+		<%
+		}
+		%>
+
+	</c:otherwise>
+</c:choose>
+
+<c:if test="<%= !themeDisplay.isStateExclusive() %>">
+	</div>
+</c:if>
 
 <%
-if (themeDisplay.isSignedIn()) {
+if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 	String staticVar = "no";
 
 	if (portlet.isStatic() || !showMoveIcon) {

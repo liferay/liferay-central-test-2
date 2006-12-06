@@ -22,36 +22,15 @@
  */
 %>
 
-<c:if test="<%= portletDisplay.isActive() %>">
-	<c:if test="<%= portletDisplay.isAccess() %>">
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
-				<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
-					<%@ include file="/html/common/themes/portlet_messages.jsp" %>
-				</c:if>
+<c:choose>
+	<c:when test="<%= Validator.isNull(tilesPortletContent) %>">
 
-				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
-					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
-				</c:if>
+		<%
+		pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
+		%>
 
-				<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
-
-					<%
-					pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
-					%>
-
-				</c:if>
-			</td>
-		</tr>
-		</table>
-	</c:if>
-
-	<c:if test="<%= !portletDisplay.isAccess() %>">
-		<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
-	</c:if>
-</c:if>
-
-<c:if test="<%= !portletDisplay.isActive() %>">
-	<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
-</c:if>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+	</c:otherwise>
+</c:choose>

@@ -33,12 +33,19 @@ if (!layoutMaximized) {
 	RuntimePortletUtil.processTemplate(application, pageContext, request, response, content);
 }
 else {
-	String content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
+	String content = null;
+
+	if (themeDisplay.isStateExclusive()) {
+		content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
+	}
+	else {
+		content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
+	}
 
 	RuntimePortletUtil.processTemplate(application, pageContext, request, response, StringUtil.split(layoutTypePortlet.getStateMax())[0], content);
 }
 
-if (themeDisplay.isSignedIn()) {
+if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 	List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
 %>
 

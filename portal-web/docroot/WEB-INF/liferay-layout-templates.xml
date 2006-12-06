@@ -3,6 +3,10 @@
 
 <layout-templates>
 	<standard>
+		<layout-template id="exclusive">
+			<template-path>/html/layouttpl/standard/exclusive.tpl</template-path>
+			<thumbnail-path>/html/layouttpl/standard/exclusive</thumbnail-path>
+		</layout-template>
 		<layout-template id="max">
 			<template-path>/html/layouttpl/standard/max.tpl</template-path>
 			<thumbnail-path>/html/layouttpl/standard/max</thumbnail-path>

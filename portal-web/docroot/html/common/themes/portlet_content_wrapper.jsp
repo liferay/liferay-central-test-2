@@ -20,26 +20,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
-
---%><%@ include file="/html/portlet/init.jsp" %><%--
-
---%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
---%><%@ page import="com.liferay.portal.kernel.search.DocumentSummary" %><%--
---%><%@ page import="com.liferay.portal.kernel.search.Indexer" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %><%--
---%><%@ page import="com.liferay.util.InstancePool" %><%--
-
---%><%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
-}
-
-String type = prefs.getValue("type", StringPool.BLANK);
 %>
+
+<c:choose>
+	<c:when test="<%= portletDisplay.isActive() %>">
+		<c:choose>
+			<c:when test="<%= themeDisplay.isStateExclusive() %>">
+				<%@ include file="/html/common/themes/portlet_content.jsp" %>
+			</c:when>
+			<c:when test="<%= portletDisplay.isAccess() %>">
+				<table border="0" cellpadding="0" cellspacing="0" width="100%">
+				<tr>
+					<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
+						<c:if test='<%= !tilesPortletContent.endsWith("/error.jsp") %>'>
+							<%@ include file="/html/common/themes/portlet_messages.jsp" %>
+						</c:if>
+
+						<%@ include file="/html/common/themes/portlet_content.jsp" %>
+					</td>
+				</tr>
+				</table>
+			</c:when>
+			<c:otherwise>
+				<liferay-util:include page="/html/portal/portlet_access_denied.jsp" />
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:otherwise>
+		<liferay-util:include page="/html/portal/portlet_inactive.jsp" />
+	</c:otherwise>
+</c:choose>

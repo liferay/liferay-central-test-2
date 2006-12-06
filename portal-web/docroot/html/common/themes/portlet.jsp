@@ -268,12 +268,34 @@ if (urlBack != null) {
 %>
 
 <c:choose>
-	<c:when test="<%= !portletDisplay.isStatePopUp() %>">
+	<c:when test="<%= themeDisplay.isStateExclusive() %>">
+		<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
+	</c:when>
+	<c:when test="<%= themeDisplay.isStatePopUp() %>">
+		<table border="0" cellpadding="0" cellspacing="0" width="100%">
+		<tr>
+			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
+				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
+					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
+				</c:if>
+
+				<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
+
+					<%
+					pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
+					%>
+
+				</c:if>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:otherwise>
 		<c:choose>
 			<c:when test="<%= portletDecorate %>">
 				<liferay-theme:box top="portlet_top.jsp" bottom="portlet_bottom.jsp">
 					<div id="p_p_content<%= portletDisplay.getNamespace() %>" style="margin-top: 0; margin-bottom: 0;">
-						<%@ include file="/html/common/themes/portlet_content.jsp" %>
+						<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
 					</div>
 				</liferay-theme:box>
 			</c:when>
@@ -295,28 +317,9 @@ if (urlBack != null) {
 						</div>
 					</c:if>
 
-					<%@ include file="/html/common/themes/portlet_content.jsp" %>
+					<%@ include file="/html/common/themes/portlet_content_wrapper.jsp" %>
 				</div>
 			</c:otherwise>
 		</c:choose>
-	</c:when>
-	<c:otherwise>
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td <%= portletPadding ? "style=\"padding: 4px 8px 10px 8px;\"" : "" %>>
-				<c:if test="<%= Validator.isNotNull(tilesPortletContent) %>">
-					<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + tilesPortletContent %>" />
-				</c:if>
-
-				<c:if test="<%= Validator.isNull(tilesPortletContent) %>">
-
-					<%
-					pageContext.getOut().print(renderRequest.getAttribute(WebKeys.PORTLET_CONTENT));
-					%>
-
-				</c:if>
-			</td>
-		</tr>
-		</table>
 	</c:otherwise>
 </c:choose>
