@@ -114,6 +114,14 @@ public class PortletDisplay implements Serializable {
 		_columnCount = columnCount;
 	}
 
+	public boolean isStateExclusive() {
+		return _stateExclusive;
+	}
+
+	public void setStateExclusive(boolean stateExclusive) {
+		_stateExclusive = stateExclusive;
+	}
+
 	public boolean isStateMax() {
 		return _stateMax;
 	}
@@ -374,6 +382,7 @@ public class PortletDisplay implements Serializable {
 		_access = false;
 		_active = false;
 		_columnId = null;
+		_stateExclusive = false;
 		_stateMax = false;
 		_stateMin = false;
 		_statePopUp = false;
@@ -415,6 +424,7 @@ public class PortletDisplay implements Serializable {
 		_access = master.isAccess();
 		_active = master.isActive();
 		_columnId = master.getColumnId();
+		_stateExclusive = master.isStateExclusive();
 		_stateMax = master.isStateMax();
 		_stateMin = master.isStateMin();
 		_statePopUp = master.isStatePopUp();
@@ -456,6 +466,7 @@ public class PortletDisplay implements Serializable {
 		slave.setAccess(_access);
 		slave.setActive(_active);
 		slave.setColumnId(_columnId);
+		slave.setStateExclusive(_stateExclusive);
 		slave.setStateMax(_stateMax);
 		slave.setStateMin(_stateMin);
 		slave.setStatePopUp(_statePopUp);
@@ -500,6 +511,7 @@ public class PortletDisplay implements Serializable {
 	private String _columnId;
 	private int _columnPos;
 	private int _columnCount;
+	private boolean _stateExclusive;
 	private boolean _stateMax;
 	private boolean _stateMin;
 	private boolean _statePopUp;

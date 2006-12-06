@@ -277,6 +277,14 @@ public class ThemeDisplay implements Serializable {
 		_resolution = resolution;
 	}
 
+	public boolean isStateExclusive() {
+		return _stateExclusive;
+	}
+
+	public void setStateExclusive(boolean stateExclusive) {
+		_stateExclusive = stateExclusive;
+	}
+
 	public boolean isStatePopUp() {
 		return _statePopUp;
 	}
@@ -549,6 +557,8 @@ public class ThemeDisplay implements Serializable {
 		_serverPort = 0;
 		_secure = false;
 		_resolution = 0;
+		_stateExclusive = false;
+		_statePopUp = false;
 		_pathApplet = null;
 		_pathCms = null;
 		_pathColorSchemeImage = null;
@@ -604,6 +614,7 @@ public class ThemeDisplay implements Serializable {
 	private int _serverPort;
 	private boolean _secure;
 	private int _resolution;
+	private boolean _stateExclusive;
 	private boolean _statePopUp;
 	private String _pathApplet;
 	private String _pathCms;
