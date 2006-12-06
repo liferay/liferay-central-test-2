@@ -20,30 +20,38 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.lucene;
+package com.liferay.portal.kernel.search;
+
+import javax.portlet.PortletURL;
 
 /**
- * <a href="IndexerException.java.html"><b><i>View Source</i></b></a>
+ * <a href="DocumentSummary.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class IndexerException extends Exception {
+public class DocumentSummary {
 
-	public IndexerException() {
-		super();
+	public DocumentSummary(String title, String content, PortletURL url) {
+		_title = title;
+		_content = content;
+		_url = url;
 	}
 
-	public IndexerException(String msg) {
-		super(msg);
+	public String getTitle() {
+		return _title;
 	}
 
-	public IndexerException(String msg, Throwable cause) {
-		super(msg, cause);
+	public String getContent() {
+		return _content;
 	}
 
-	public IndexerException(Throwable cause) {
-		super(cause);
+	public PortletURL getURL() {
+		return _url;
 	}
+
+	private String _title;
+	private String _content;
+	private PortletURL _url;
 
 }

@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -34,7 +35,6 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -209,7 +209,7 @@ public class IndexerImpl {
 		}
 	}
 
-	public static void reIndex(String[] ids) throws IndexerException {
+	public static void reIndex(String[] ids) throws SearchException {
 		String companyId = ids[0];
 		String portletId = ids[1];
 		String groupId = ids[2];
@@ -238,7 +238,7 @@ public class IndexerImpl {
 			}
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			throw new SearchException(e);
 		}
 		finally {
 			if (session != null) {

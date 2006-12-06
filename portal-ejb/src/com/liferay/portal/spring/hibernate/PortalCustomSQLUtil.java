@@ -35,7 +35,7 @@ public class PortalCustomSQLUtil
 	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
 	public PortalCustomSQLUtil() {
-		super(PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL), 
+		super(PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
 			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
 	}
 

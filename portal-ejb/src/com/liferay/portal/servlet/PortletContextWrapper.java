@@ -24,8 +24,8 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.smtp.MessageListener;
-import com.liferay.util.lucene.Indexer;
 
 import java.util.Locale;
 import java.util.Map;

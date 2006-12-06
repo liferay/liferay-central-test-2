@@ -20,11 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.lucene;
+package com.liferay.portal.kernel.search;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -37,6 +35,6 @@ public interface Indexer {
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL);
 
-	public void reIndex(String[] ids) throws IndexerException;
+	public void reIndex(String[] ids) throws SearchException;
 
 }

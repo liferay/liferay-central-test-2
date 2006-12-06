@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.util.Html;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 
@@ -136,12 +136,12 @@ public class IndexerImpl {
 		}
 	}
 
-	public static void reIndex(String[] ids) throws IndexerException {
+	public static void reIndex(String[] ids) throws SearchException {
 		try {
 			MBCategoryLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			throw new SearchException(e);
 		}
 	}
 

@@ -38,7 +38,6 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseFactory;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.CachePortlet;
-import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactory;
@@ -102,10 +101,6 @@ public class LayoutAction extends Action {
 					if (Validator.isNotNull(redirectLocation)) {
 						res.sendRedirect(redirectLocation);
 
-						return null;
-					}
-
-					if (LiferayWindowState.isExclusive(req)) {
 						return null;
 					}
 

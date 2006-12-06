@@ -56,12 +56,12 @@ http://www.opensymphony.com/quartz
 
 <!--
 The indexer-class value must be a class that implements
-com.liferay.util.lucene.Indexer and is called to create or update a search index
-for the portlet.
+com.liferay.portal.kernel.search.Indexer and is called to create or update a
+search index for the portlet.
 
 See:
 
-http://content.liferay.com/4/docs/api/util-java/com/liferay/util/lucene/Indexer.html
+http://content.liferay.com/4/docs/api/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
 http://content.liferay.com/4/docs/api/portal-ejb/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->

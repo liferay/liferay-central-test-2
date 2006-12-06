@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.messageboards.util;
 
+import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.messageboards.service.jms.IndexProducer;
 import com.liferay.util.StringUtil;
-import com.liferay.util.lucene.DocumentSummary;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 
@@ -35,7 +35,6 @@ import javax.portlet.PortletURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
 import org.apache.lucene.queryParser.ParseException;
 
 /**
@@ -44,7 +43,7 @@ import org.apache.lucene.queryParser.ParseException;
  * @author Brian Wing Shun Chan
  *
  */
-public class Indexer implements com.liferay.util.lucene.Indexer {
+public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addMessage(
 			String companyId, String groupId, String categoryId,
@@ -137,7 +136,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		Document doc, PortletURL portletURL) {
+		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		// Title
 
@@ -159,7 +158,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String[] ids) throws IndexerException {
+	public void reIndex(String[] ids) throws SearchException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "reIndex",
@@ -168,8 +167,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			IndexProducer.produce(methodWrapper);
 		}
 		catch (Exception e) {
-			if (e instanceof IndexerException) {
-				throw (IndexerException)e;
+			if (e instanceof SearchException) {
+				throw (SearchException)e;
 			}
 			else {
 				_log.error(e);

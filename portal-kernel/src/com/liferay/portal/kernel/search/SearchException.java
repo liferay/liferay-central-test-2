@@ -20,38 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.lucene;
-
-import javax.portlet.PortletURL;
+package com.liferay.portal.kernel.search;
 
 /**
- * <a href="DocumentSummary.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class DocumentSummary {
+public class SearchException extends Exception {
 
-	public DocumentSummary(String title, String content, PortletURL url) {
-		_title = title;
-		_content = content;
-		_url = url;
-	}
+    public SearchException() {
+        super();
+    }
 
-	public String getTitle() {
-		return _title;
-	}
+    public SearchException(String msg) {
+        super(msg);
+    }
 
-	public String getContent() {
-		return _content;
-	}
+    public SearchException(Throwable cause) {
+        super(cause);
+    }
 
-	public PortletURL getURL() {
-		return _url;
-	}
-
-	private String _title;
-	private String _content;
-	private PortletURL _url;
+	public SearchException(String msg, Throwable cause) {
+        super(msg, cause);
+    }
 
 }

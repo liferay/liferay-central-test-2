@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.wiki.util;
 
+import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.StringUtil;
-import com.liferay.util.lucene.DocumentSummary;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 
@@ -51,7 +51,7 @@ import org.apache.lucene.search.Searcher;
  * @author  Brian Wing Shun Chan
  *
  */
-public class Indexer implements com.liferay.util.lucene.Indexer {
+public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
@@ -156,7 +156,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		Document doc, PortletURL portletURL) {
+		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		// Title
 
@@ -179,12 +179,12 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String[] ids) throws IndexerException {
+	public void reIndex(String[] ids) throws SearchException {
 		try {
 			WikiNodeLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			throw new SearchException(e);
 		}
 	}
 

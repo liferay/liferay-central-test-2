@@ -23,6 +23,9 @@
 package com.liferay.portlet.documentlibrary.util;
 
 import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.LiferayWindowState;
@@ -30,15 +33,11 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.util.StringUtil;
-import com.liferay.util.lucene.DocumentSummary;
-import com.liferay.util.lucene.IndexerException;
 
 import java.util.List;
 
 import javax.portlet.PortletURL;
 import javax.portlet.WindowStateException;
-
-import org.apache.lucene.document.Document;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -46,7 +45,7 @@ import org.apache.lucene.document.Document;
  * @author  Brian Wing Shun Chan
  *
  */
-public class Indexer implements com.liferay.util.lucene.Indexer {
+public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public DocumentSummary getDocumentSummary(
 		Document doc, PortletURL portletURL) {
@@ -83,7 +82,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String[] ids) throws IndexerException {
+	public void reIndex(String[] ids) throws SearchException {
 		try {
 			String companyId = ids[0];
 
@@ -103,7 +102,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			}
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			throw new SearchException(e);
 		}
 	}
 

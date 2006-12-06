@@ -22,14 +22,14 @@
 
 package com.liferay.portlet.blogs.util;
 
+import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.util.Html;
 import com.liferay.util.StringUtil;
-import com.liferay.util.lucene.DocumentSummary;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 
@@ -46,7 +46,7 @@ import org.apache.lucene.index.Term;
  * @author  Brian Wing Shun Chan
  *
  */
-public class Indexer implements com.liferay.util.lucene.Indexer {
+public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static final String PORTLET_ID = PortletKeys.BLOGS;
 
@@ -120,7 +120,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 	}
 
 	public DocumentSummary getDocumentSummary(
-		Document doc, PortletURL portletURL) {
+		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
 		// Title
 
@@ -142,12 +142,12 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		return new DocumentSummary(title, content, portletURL);
 	}
 
-	public void reIndex(String[] ids) throws IndexerException {
+	public void reIndex(String[] ids) throws SearchException {
 		try {
 			BlogsEntryLocalServiceUtil.reIndex(ids);
 		}
 		catch (Exception e) {
-			throw new IndexerException(e);
+			throw new SearchException(e);
 		}
 	}
 

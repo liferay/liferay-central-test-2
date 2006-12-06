@@ -23,9 +23,10 @@
 package com.liferay.documentlibrary.util;
 
 import com.liferay.documentlibrary.service.jms.IndexProducer;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.util.lucene.DocumentSummary;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.IOException;
 
@@ -33,7 +34,6 @@ import javax.portlet.PortletURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
@@ -41,7 +41,7 @@ import org.apache.lucene.document.Document;
  * @author Brian Wing Shun Chan
  *
  */
-public class Indexer implements com.liferay.util.lucene.Indexer {
+public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addFile(
 			String companyId, String portletId, String groupId,
@@ -119,7 +119,7 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 		return null;
 	}
 
-	public void reIndex(String[] ids) throws IndexerException {
+	public void reIndex(String[] ids) throws SearchException {
 		try {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				IndexerImpl.class.getName(), "reIndex",
@@ -128,8 +128,8 @@ public class Indexer implements com.liferay.util.lucene.Indexer {
 			IndexProducer.produce(methodWrapper);
 		}
 		catch (Exception e) {
-			if (e instanceof IndexerException) {
-				throw (IndexerException)e;
+			if (e instanceof SearchException) {
+				throw (SearchException)e;
 			}
 			else {
 				_log.error(e);

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.deploy.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.HotDeployException;
 import com.liferay.portal.kernel.deploy.HotDeployListener;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.smtp.MessageListener;
@@ -55,7 +56,6 @@ import com.liferay.util.LocaleUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.Indexer;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;

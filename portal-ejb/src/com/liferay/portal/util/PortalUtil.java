@@ -150,19 +150,11 @@ public class PortalUtil {
 	public static void copyRequestParameters(
 		ActionRequest req, ActionResponse res) {
 
-		// Set the request parameters as the render parameters. Skip this step
-		// if the window state is exclusive, because the exclusive window state
-		// is used for streaming binary files and does not have a render phase.
-
 		try {
 			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
 
 			HttpServletRequest originalReq = getOriginalServletRequest(
 				reqImpl.getHttpServletRequest());
-
-			if (LiferayWindowState.isExclusive(originalReq)) {
-				return;
-			}
 
 			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
@@ -1254,8 +1246,7 @@ public class PortalUtil {
 			(LayoutTypePortlet)layout.getLayoutType();
 
 		if ((windowState == null) ||
-			(Validator.isNull(windowState.toString())) ||
-			(windowState.equals(LiferayWindowState.EXCLUSIVE))) {
+			(Validator.isNull(windowState.toString()))) {
 
 			if (layoutType.hasStateMaxPortletId(portletId)) {
 				return WindowState.MAXIMIZED;
@@ -1271,6 +1262,7 @@ public class PortalUtil {
 			boolean updateLayout = false;
 
 			if ((windowState.equals(WindowState.MAXIMIZED)) ||
+				(windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
 				(windowState.equals(LiferayWindowState.POP_UP))) {
 
 				if (layoutType.hasStateMax()) {
@@ -1287,7 +1279,9 @@ public class PortalUtil {
 					/*RenderParametersPool.clear(
 						req, layout.getPlid(), curMaxPortletId);*/
 
-					if (windowState.equals(LiferayWindowState.POP_UP)) {
+					if ((windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
+						(windowState.equals(LiferayWindowState.POP_UP))) {
+
 						String stateMaxPrevious =
 							layoutType.getStateMaxPrevious();
 
@@ -1299,7 +1293,9 @@ public class PortalUtil {
 					}
 				}
 				else {
-					if (windowState.equals(LiferayWindowState.POP_UP)) {
+					if ((windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
+						(windowState.equals(LiferayWindowState.POP_UP))) {
+
 						String stateMaxPrevious =
 							layoutType.getStateMaxPrevious();
 

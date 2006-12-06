@@ -38,13 +38,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.util.lucene.IndexerException;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -473,8 +473,8 @@ public class DLServiceImpl implements DLService {
 
 			indexer.reIndex(ids);
 		}
-		catch (IndexerException ie) {
-			throw new SystemException(ie);
+		catch (SearchException se) {
+			throw new SystemException(se);
 		}
 	}
 

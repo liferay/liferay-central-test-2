@@ -28,6 +28,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.filters.strip">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.jdbc">
 		<priority value="ERROR" />
 	</category>

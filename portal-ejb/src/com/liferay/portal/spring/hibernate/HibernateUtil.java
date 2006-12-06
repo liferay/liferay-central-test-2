@@ -62,7 +62,8 @@ public class HibernateUtil {
 		if (sessionFactoryName.equals(SPRING_HIBERNATE_SESSION_FACTORY)) {
 			if (_sessionFactory == null) {
 				LocalSessionFactoryBean lsfb =
-					(LocalSessionFactoryBean)BeanLocatorUtil.locate(sessionFactoryName);
+					(LocalSessionFactoryBean)BeanLocatorUtil.locate(
+						sessionFactoryName);
 
 				_sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
 			}
@@ -76,7 +77,8 @@ public class HibernateUtil {
 
 			if (sessionFactory == null) {
 				LocalSessionFactoryBean lsfb =
-					(LocalSessionFactoryBean)BeanLocatorUtil.locate(sessionFactoryName);
+					(LocalSessionFactoryBean)BeanLocatorUtil.locate(
+						sessionFactoryName);
 
 				sessionFactory = (SessionFactoryImplementor)lsfb.getObject();
 
