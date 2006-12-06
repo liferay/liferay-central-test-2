@@ -27,7 +27,6 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String emailAddress = request.getParameter("p_u_e_a");
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">

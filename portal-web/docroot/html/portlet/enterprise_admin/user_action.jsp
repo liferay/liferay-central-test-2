@@ -44,7 +44,7 @@
 	<c:if test="<%= UserPermission.contains(permissionChecker, userId, organizationId, locationId, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editUserURL">
 			<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
-			<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
+			<portlet:param name="p_u_i_d" value="<%= user2.getUserId() %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editUserURL %>" />

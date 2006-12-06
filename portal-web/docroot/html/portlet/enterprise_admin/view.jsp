@@ -180,7 +180,7 @@ portletURL.setParameter("tabs1", tabs1);
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/enterprise_admin/edit_user");
-				rowURL.setParameter("p_u_e_a", user2.getEmailAddress());
+				rowURL.setParameter("p_u_i_d", user2.getUserId());
 
 				// Name and job title
 

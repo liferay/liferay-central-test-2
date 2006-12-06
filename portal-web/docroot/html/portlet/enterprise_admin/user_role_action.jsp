@@ -38,7 +38,7 @@ String redirect = (String)objArray[2];
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_user" />
 	<portlet:param name="<%= Constants.CMD %>" value="deleteRole" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" />
+	<portlet:param name="p_u_i_d" value="<%= user2.getUserId() %>" />
 	<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 </portlet:actionURL>
 

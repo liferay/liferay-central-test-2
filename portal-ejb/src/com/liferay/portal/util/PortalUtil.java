@@ -761,13 +761,12 @@ public class PortalUtil {
 	public static User getSelectedUser(HttpServletRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		String emailAddress = ParamUtil.getString(req, "p_u_e_a");
+		String userId = ParamUtil.getString(req, "p_u_i_d");
 
 		User user = null;
 
 		try {
-			user = UserServiceUtil.getUserByEmailAddress(
-				getCompanyId(req), emailAddress);
+			user = UserServiceUtil.getUserById(userId);
 		}
 		catch (NoSuchUserException nsue) {
 		}
@@ -970,7 +969,7 @@ public class PortalUtil {
 				portletURL.setPortletMode(PortletMode.VIEW);
 
 				portletURL.setParameter("struts_action", "/directory/edit_user");
-				portletURL.setParameter("p_u_e_a", user.getEmailAddress());
+				portletURL.setParameter("p_u_i_d", user.getUserId());
 
 				userName =
 					"<a href=\"" + portletURL.toString() + "\">" + userName +

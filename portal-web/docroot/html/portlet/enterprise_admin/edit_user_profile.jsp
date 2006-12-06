@@ -373,7 +373,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 			<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= user2.getUserId() %>"><br>
 
 			<c:if test="<%= editable %>">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_e_a" value="<%= user2.getEmailAddress() %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="p_u_i_d" value="<%= user2.getUserId() %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
 			</c:if>
 		</td>
 	</c:if>

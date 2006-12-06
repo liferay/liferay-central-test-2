@@ -115,8 +115,7 @@ public class EditUserAction extends PortletAction {
 
 			if (user != null) {
 				redirect =
-					ParamUtil.getString(req, "redirect") +
-						user.getEmailAddress();
+					ParamUtil.getString(req, "redirect") + user.getUserId();
 			}
 
 			sendRedirect(req, res, redirect);

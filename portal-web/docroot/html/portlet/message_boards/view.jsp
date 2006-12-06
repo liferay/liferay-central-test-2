@@ -558,7 +558,7 @@ portletURL.setParameter("categoryId", categoryId);
 						rowURL.setPortletMode(PortletMode.VIEW);
 
 						rowURL.setParameter("struts_action", "/directory/edit_user");
-						rowURL.setParameter("p_u_e_a", user2.getEmailAddress());
+						rowURL.setParameter("p_u_i_d", user2.getUserId());
 
 						fullName = user2.getFullName();
 						createDate = user2.getCreateDate();

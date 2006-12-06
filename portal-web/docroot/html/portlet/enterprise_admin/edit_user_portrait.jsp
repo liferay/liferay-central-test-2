@@ -27,12 +27,12 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String emailAddress = request.getParameter("p_u_e_a");
+String userId = request.getParameter("p_u_i_d");
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_portrait" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />p_u_e_a" type="hidden" value="<%= emailAddress %>">
+<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= userId %>">
 
 <liferay-ui:tabs names="user-portrait" />
 
