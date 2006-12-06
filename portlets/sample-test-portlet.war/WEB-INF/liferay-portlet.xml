@@ -5,8 +5,6 @@
 	<portlet>
 		<portlet-name>sample_test_portlet</portlet-name>
 		<instanceable>true</instanceable>
-		<portal-session-shared>true</portal-session-shared>
-		<private-request-attributes>true</private-request-attributes>
 	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>

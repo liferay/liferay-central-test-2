@@ -208,6 +208,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.SharedSessionUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters">
 		<priority value="ERROR" />
 	</category>

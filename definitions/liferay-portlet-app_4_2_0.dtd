@@ -23,8 +23,8 @@ smtp-message-listener-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-maximize-print?, layout-cacheable?, instanceable?, portal-session-shared?,
-private-request-attributes?, render-weight?, ajaxable?, header-css*,
+maximize-print?, layout-cacheable?, instanceable?, private-request-attributes?,
+private-session-attributes?, render-weight?, ajaxable?, header-css*,
 header-javascript*, add-default-resource?, system?, active?, include?)>
 
 <!--
@@ -274,14 +274,6 @@ value is false.
 <!ELEMENT instanceable (#PCDATA)>
 
 <!--
-Set the portal-session-shared value to true if the portlet session and the
-portal session are shared. The default value is false. The property
-"session.shared.attributes" in portal.properties specifies which session
-attributes are shared when the portal-session-shared value is true.
--->
-<!ELEMENT portal-session-shared (#PCDATA)>
-
-<!--
 Set the private-request-attributes value to true if the portlet does not share
 request attributes with any other portlet. The default value is true. The
 property "request.shared.attributes" in portal.properties specifies which
@@ -289,6 +281,14 @@ request attributes are shared even when the private-request-attributes value is
 false.
 -->
 <!ELEMENT private-request-attributes (#PCDATA)>
+
+<!--
+Set the private-session-attributes value to true if the portlet does not share
+session attributes with the portal. The default value is true. The property
+"session.shared.attributes" in portal.properties specifies which session
+attributes are shared even when the private-session-attributes value is false.
+-->
+<!ELEMENT private-session-attributes (#PCDATA)>
 
 <!--
 The default value of render-weight is 1. If set to a value less than 1, the

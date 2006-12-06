@@ -160,8 +160,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 					   boolean restoreCurrentView, boolean maximizeEdit,
 					   boolean maximizeHelp, boolean maximizePrint,
 					   boolean layoutCacheable, boolean instanceable,
-					   boolean portalSessionShared,
-					   boolean privateRequestAttributes, int renderWeight,
+					   boolean privateRequestAttributes,
+					   boolean privateSessionAttributes, int renderWeight,
 					   boolean ajaxable, List headerCss, List headerJavaScript,
 					   boolean addDefaultResource, String roles,
 					   Set unlinkedRoles, Map roleMappers, boolean system,
@@ -198,8 +198,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_maximizePrint = maximizePrint;
 		_layoutCacheable = layoutCacheable;
 		_instanceable = instanceable;
-		_portalSessionShared = portalSessionShared;
 		_privateRequestAttributes = privateRequestAttributes;
+		_privateSessionAttributes = privateSessionAttributes;
 		_renderWeight = renderWeight;
 		_ajaxable = ajaxable;
 		_headerCss = headerCss;
@@ -930,36 +930,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Returns true if the portlet session and the portal session are shared.
-	 *
-	 * @return		true if the portlet session and the portal session are
-	 *				shared
-	 */
-	public boolean getPortalSessionShared() {
-		return _portalSessionShared;
-	}
-
-	/**
-	 * Returns true if the portlet session and the portal session are shared.
-	 *
-	 * @return		true if the portlet session and the portal session are
-	 *				shared
-	 */
-	public boolean isPortalSessionShared() {
-		return _portalSessionShared;
-	}
-
-	/**
-	 * Sets to true if the portlet session and the portal session are shared.
-	 *
-	 * @param		portalSessionShared boolean value for whether the
-	 *				portlet session and the portal session are shared
-	 */
-	public void setPortalSessionShared(boolean portalSessionShared) {
-		_portalSessionShared = portalSessionShared;
-	}
-
-	/**
 	 * Returns true if the portlet does not share request attributes with any
 	 * other portlet.
 	 *
@@ -990,6 +960,39 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setPrivateRequestAttributes(boolean privateRequestAttributes) {
 		_privateRequestAttributes = privateRequestAttributes;
+	}
+
+	/**
+	 * Returns true if the portlet does not share session attributes with the
+	 * portal.
+	 *
+	 * @return		true if the portlet does not share session attributes with
+	 *				the portal
+	 */
+	public boolean getPrivateSessionAttributes() {
+		return _privateSessionAttributes;
+	}
+
+	/**
+	 * Returns true if the portlet does not share session attributes with the
+	 * portal.
+	 *
+	 * @return		true if the portlet does not share session attributes with
+	 *				the portal
+	 */
+	public boolean isPrivateSessionAttributes() {
+		return _privateSessionAttributes;
+	}
+
+	/**
+	 * Sets to true if the portlet does not share session attributes with the
+	 * portal.
+	 *
+	 * @param		privateSessionAttributes boolean value for whether the
+	 *				portlet shares session attributes with the portal
+	 */
+	public void setPrivateSessionAttributes(boolean privateSessionAttributes) {
+		_privateSessionAttributes = privateSessionAttributes;
 	}
 
 	/**
@@ -1709,7 +1712,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			isShowPortletInactive(), isActionURLRedirect(),
 			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
 			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPortalSessionShared(), isPrivateRequestAttributes(),
+			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
 			getRenderWeight(), isAjaxable(), getHeaderCss(),
 			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
 			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
@@ -1872,15 +1875,15 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private boolean _instanceable;
 
 	/**
-	 * True if the portlet session and the portal session are shared.
-	 */
-	private boolean _portalSessionShared;
-
-	/**
 	 * True if the portlet does not share request attributes with any other
 	 * portlet.
 	 */
 	private boolean _privateRequestAttributes = true;
+
+	/**
+	 * True if the portlet does not share session attributes with the portal.
+	 */
+	private boolean _privateSessionAttributes = true;
 
 	/**
 	 * Render weight of the portlet.

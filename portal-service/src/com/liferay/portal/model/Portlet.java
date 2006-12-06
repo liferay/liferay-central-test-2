@@ -166,17 +166,17 @@ public interface Portlet extends PortletModel {
 
 	public void setInstanceable(boolean instanceable);
 
-	public boolean getPortalSessionShared();
-
-	public boolean isPortalSessionShared();
-
-	public void setPortalSessionShared(boolean portalSessionShared);
-
 	public boolean getPrivateRequestAttributes();
 
 	public boolean isPrivateRequestAttributes();
 
 	public void setPrivateRequestAttributes(boolean privateRequestAttributes);
+
+	public boolean getPrivateSessionAttributes();
+
+	public boolean isPrivateSessionAttributes();
+
+	public void setPrivateSessionAttributes(boolean privateSessionAttributes);
 
 	public int getRenderWeight();
 

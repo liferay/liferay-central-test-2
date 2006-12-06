@@ -977,12 +977,12 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setInstanceable(GetterUtil.getBoolean(
 					portlet.elementText("instanceable"),
 					portletModel.isInstanceable()));
-				portletModel.setPortalSessionShared(GetterUtil.getBoolean(
-					portlet.elementText("portal-session-shared"),
-					portletModel.isPortalSessionShared()));
 				portletModel.setPrivateRequestAttributes(GetterUtil.getBoolean(
 					portlet.elementText("private-request-attributes"),
 					portletModel.isPrivateRequestAttributes()));
+				portletModel.setPrivateSessionAttributes(GetterUtil.getBoolean(
+					portlet.elementText("private-session-attributes"),
+					portletModel.isPrivateSessionAttributes()));
 				portletModel.setRenderWeight(GetterUtil.getInteger(
 					portlet.elementText("render-weight"),
 					portletModel.getRenderWeight()));

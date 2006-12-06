@@ -33,6 +33,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.apache.struts.Globals;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
@@ -43,27 +46,13 @@ import org.apache.struts.Globals;
  */
 public class SharedSessionUtil {
 
-	public static String[] SHARED_SESSION_ATTRIBUTES = new String[] {
-		Globals.LOCALE_KEY, WebKeys.COMPANY_ID, WebKeys.USER_ID,
-		WebKeys.USER_PASSWORD
-	};
-
-	public static final String[] CUSTOM_SHARED_SESSION_ATTRIBUTES =
+	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
 
 	public static Map getSharedSessionAttributes(HttpServletRequest req) {
 		Map map = CollectionFactory.getSyncHashMap();
 
 		HttpSession ses = req.getSession();
-
-		for (int i = 0; i < SHARED_SESSION_ATTRIBUTES.length; i++) {
-			String attrName = SHARED_SESSION_ATTRIBUTES[i];
-			Object attrValue = ses.getAttribute(attrName);
-
-			if (attrValue != null) {
-				map.put(attrName, attrValue);
-			}
-		}
 
 		Enumeration enu = ses.getAttributeNames();
 
@@ -72,13 +61,13 @@ public class SharedSessionUtil {
 			Object attrValue = ses.getAttribute(attrName);
 
 			if (attrValue != null) {
-				for (int i = 0; i < CUSTOM_SHARED_SESSION_ATTRIBUTES.length;
-						i++) {
-
-					if (attrName.startsWith(
-							CUSTOM_SHARED_SESSION_ATTRIBUTES[i])) {
-
+				for (int i = 0; i < SHARED_SESSION_ATTRIBUTES.length; i++) {
+					if (attrName.startsWith(SHARED_SESSION_ATTRIBUTES[i])) {
 						map.put(attrName, attrValue);
+
+						if (_log.isDebugEnabled()) {
+							_log.debug("Sharing " + attrName);
+						}
 
 						break;
 					}
@@ -88,5 +77,7 @@ public class SharedSessionUtil {
 
 		return map;
 	}
+
+	private static Log _log = LogFactory.getLog(SharedSessionUtil.class);
 
 }
