@@ -37,8 +37,6 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 
 String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
 
-request.setAttribute(PermissionChecker.PORTLET_PRIMARY_KEY, portletPrimaryKey);
-
 boolean denyAccess = false;
 
 try {
@@ -254,6 +252,7 @@ if (denyAccess) {
 portletDisplay.recycle();
 
 portletDisplay.setId(portletId);
+portletDisplay.setResourcePK(portletPrimaryKey);
 portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portletId));
 
 portletDisplay.setAccess(access);

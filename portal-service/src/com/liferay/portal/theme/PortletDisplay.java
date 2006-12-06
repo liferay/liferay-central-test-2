@@ -50,6 +50,14 @@ public class PortletDisplay implements Serializable {
 		_id = id;
 	}
 
+	public String getResourcePK() {
+		return _resourcePK;
+	}
+
+	public void setResourcePK(String resourcePK) {
+		_resourcePK = resourcePK;
+	}
+
 	public String getNamespace() {
 		return _namespace;
 	}
@@ -360,6 +368,7 @@ public class PortletDisplay implements Serializable {
 		}
 
 		_id = StringPool.BLANK;
+		_resourcePK = null;
 		_namespace = null;
 		_title = null;
 		_access = false;
@@ -400,6 +409,7 @@ public class PortletDisplay implements Serializable {
 
 	public void copyFrom(PortletDisplay master) {
 		_id = master.getId();
+		_resourcePK = master.getResourcePK();
 		_namespace = master.getNamespace();
 		_title = master.getTitle();
 		_access = master.isAccess();
@@ -440,6 +450,7 @@ public class PortletDisplay implements Serializable {
 
 	public void copyTo(PortletDisplay slave) {
 		slave.setId(_id);
+		slave.setResourcePK(_resourcePK);
 		slave.setNamespace(_namespace);
 		slave.setTitle(_title);
 		slave.setAccess(_access);
@@ -481,6 +492,7 @@ public class PortletDisplay implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
 	private String _id = StringPool.BLANK;
+	private String _resourcePK;
 	private String _namespace;
 	private String _title;
 	private boolean _access;
