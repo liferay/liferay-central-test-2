@@ -303,9 +303,10 @@ public class StripFilter implements Filter {
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
+			boolean action = ParamUtil.getBoolean(req, "p_p_action");
 			String windowState = ParamUtil.getString(req, "p_p_state");
 
-			if (windowState.equals("exclusive")) {
+			if (action && windowState.equals("exclusive")) {
 				return false;
 			}
 			else {
