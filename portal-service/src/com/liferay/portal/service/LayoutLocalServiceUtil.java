@@ -83,6 +83,15 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Layout getLayout(
+		java.lang.String plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayout(plid);
+	}
+
+	public static com.liferay.portal.model.Layout getLayout(
 		java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

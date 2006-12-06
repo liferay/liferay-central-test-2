@@ -59,6 +59,10 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Layout getLayout(java.lang.String plid)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Layout getLayout(
 		java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.SystemException, 

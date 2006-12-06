@@ -83,6 +83,12 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 			friendlyURL);
 	}
 
+	public com.liferay.portal.model.Layout getLayout(java.lang.String plid)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().getLayout(plid);
+	}
+
 	public com.liferay.portal.model.Layout getLayout(
 		java.lang.String layoutId, java.lang.String ownerId)
 		throws com.liferay.portal.PortalException, 

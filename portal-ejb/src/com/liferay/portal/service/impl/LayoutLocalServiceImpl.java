@@ -404,6 +404,15 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		return LayoutUtil.findByO_F(ownerId, friendlyURL);
 	}
 
+	public Layout getLayout(String plid)
+		throws PortalException, SystemException {
+
+		String layoutId = LayoutImpl.getLayoutId(plid);
+		String ownerId = LayoutImpl.getOwnerId(plid);
+
+		return getLayout(layoutId, ownerId);
+	}
+
 	public Layout getLayout(String layoutId, String ownerId)
 		throws PortalException, SystemException {
 
