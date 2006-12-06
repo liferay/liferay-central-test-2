@@ -111,8 +111,8 @@ public class DBBuilder {
 			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
 				minimalSuffix + "-db2.sql"));
 		sb.append("\n\n");
-		// sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
-		// sb.append("\n\n");
+		//sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		//sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
 		FileUtil.write(file, sb.toString());

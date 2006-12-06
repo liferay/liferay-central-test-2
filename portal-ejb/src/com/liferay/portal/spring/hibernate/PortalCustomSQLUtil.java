@@ -36,7 +36,7 @@ public class PortalCustomSQLUtil
 
 	public PortalCustomSQLUtil() {
 		super(PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
-			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
+			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL));
 	}
 
 	protected String[] getConfigs() {
