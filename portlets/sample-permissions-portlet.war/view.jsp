@@ -27,17 +27,16 @@
 <%@ taglib uri="http://java.sun.com/portlet" prefix="portlet" %>
 
 <%@ taglib uri="http://liferay.com/tld/security" prefix="liferay-security" %>
-
-<%@ page import="com.liferay.portal.kernel.security.permission.PermissionChecker" %>
+<%@ taglib uri="http://liferay.com/tld/theme" prefix="liferay-theme" %>
 
 <portlet:defineObjects />
 
-<%
-PermissionChecker permissionChecker = (PermissionChecker)request.getAttribute(PermissionChecker.INSTANCE);
+<liferay-theme:defineObjects />
 
-String groupId = (String)request.getAttribute(PermissionChecker.GROUP_ID);
+<%
+String groupId = themeDisplay.getPortletGroupId();
 String name = portletConfig.getPortletName();
-String primKey = (String)request.getAttribute(PermissionChecker.PORTLET_PRIMARY_KEY);
+String primKey = portletDisplay.getResourcePK();
 String actionId = "VIEW";
 %>
 

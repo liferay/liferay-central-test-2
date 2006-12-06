@@ -22,49 +22,24 @@
  */
 %>
 
-<%@ page import="com.liferay.client.portal.model.OrganizationSoap" %>
-<%@ page import="com.liferay.client.portal.service.http.OrganizationServiceSoap" %>
-<%@ page import="com.liferay.client.portal.service.http.OrganizationServiceSoapServiceLocator" %>
+<%@ page import="com.liferay.portal.model.Organization" %>
+<%@ page import="com.liferay.portal.service.OrganizationServiceUtil" %>
 
-<%@ page import="java.net.URL" %>
+<%@ page import="java.util.List" %>
 
 You belong to the following organizations:
 
 <br><br>
 
 <%
-OrganizationServiceSoapServiceLocator locator = new OrganizationServiceSoapServiceLocator();
+List organizations = OrganizationServiceUtil.getUserOrganizations(request.getRemoteUser());
 
-OrganizationServiceSoap soap = locator.getPortal_OrganizationService(_getURL("Portal_OrganizationService"));
-
-OrganizationSoap[] organizations = soap.getUserOrganizations(request.getRemoteUser());
-
-for (int i = 0; i < organizations.length; i++) {
-	OrganizationSoap organization = organizations[i];
+for (int i = 0; i < organizations.size(); i++) {
+	Organization organization = (Organization)organizations.get(i);
 %>
 
 	<%= organization.getName() %><br>
 
 <%
-}
-%>
-
-<%!
-private URL _getURL(String serviceName) throws Exception {
-
-	// Unathenticated url
-
-	String url = "http://localhost:8080/tunnel-web/axis/" + serviceName;
-
-	// Authenticated url
-
-	if (true) {
-		String userId = "liferay.com.1";
-		String password = "qUqP5cyxm6YcTAhz05Hph5gvu9M=";
-
-		url = "http://" + userId + ":" + password + "@localhost:8080/tunnel-web/secure/axis/" + serviceName;
-	}
-
-	return new URL(url);
 }
 %>

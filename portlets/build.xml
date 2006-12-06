@@ -37,6 +37,10 @@
 		</antcall>
 
 		<antcall target="clean-module">
+			<param name="module.name" value="sample-portal-service-portlet" />
+		</antcall>
+
+		<antcall target="clean-module">
 			<param name="module.name" value="sample-struts-global-portlet" />
 		</antcall>
 
@@ -90,6 +94,10 @@
 
 		<antcall target="compile-module">
 			<param name="module.name" value="sample-portal-client-portlet" />
+		</antcall>
+
+		<antcall target="compile-module">
+			<param name="module.name" value="sample-portal-service-portlet" />
 		</antcall>
 
 		<antcall target="compile-module">
@@ -169,6 +177,10 @@
 
 		<antcall target="war-module">
 			<param name="module.name" value="sample-portal-client-portlet" />
+		</antcall>
+
+		<antcall target="war-module">
+			<param name="module.name" value="sample-portal-service-portlet" />
 		</antcall>
 
 		<copy
