@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.calendar.model.impl;
 
+import com.liferay.portal.kernel.cal.DayAndPosition;
+import com.liferay.portal.kernel.cal.Duration;
 import com.liferay.portal.kernel.cal.Recurrence;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.util.PropsUtil;
@@ -78,7 +80,52 @@ public class CalEventImpl extends CalEventModelImpl implements CalEvent {
 			String recurrence = getRecurrence();
 
 			if (Validator.isNotNull(recurrence)) {
-				_recurrenceObj = (Recurrence)Base64.stringToObject(recurrence);
+				Object obj = Base64.stringToObject(recurrence);
+
+				if (obj instanceof Recurrence) {
+					_recurrenceObj = (Recurrence)obj;
+				}
+				else if (obj instanceof com.liferay.util.cal.Recurrence) {
+					com.liferay.util.cal.Recurrence oldRecurrence =
+						(com.liferay.util.cal.Recurrence)obj;
+
+					com.liferay.util.cal.Duration oldDuration =
+						oldRecurrence.getDuration();
+
+					Duration duration = new Duration(
+						oldDuration.getDays(), oldDuration.getHours(),
+						oldDuration.getMinutes(), oldDuration.getSeconds());
+
+					duration.setWeeks(oldDuration.getWeeks());
+					duration.setInterval(oldDuration.getInterval());
+
+					_recurrenceObj = new Recurrence(
+						oldRecurrence.getDtStart(), duration,
+						oldRecurrence.getFrequency());
+
+					com.liferay.util.cal.DayAndPosition[] oldDayPos =
+						oldRecurrence.getByDay();
+
+					DayAndPosition[] dayPos = null;
+
+					if (oldDayPos != null) {
+						dayPos = new DayAndPosition[oldDayPos.length];
+
+						for (int i = 0; i < oldDayPos.length; i++) {
+							dayPos[i] = new DayAndPosition(
+								oldDayPos[i].getDayOfWeek(),
+								oldDayPos[i].getDayPosition());
+						}
+					}
+
+					_recurrenceObj.setByDay(dayPos);
+					_recurrenceObj.setByMonth(oldRecurrence.getByMonth());
+					_recurrenceObj.setByMonthDay(oldRecurrence.getByMonthDay());
+					_recurrenceObj.setInterval(oldRecurrence.getInterval());
+					_recurrenceObj.setOccurrence(oldRecurrence.getOccurrence());
+					_recurrenceObj.setWeekStart(oldRecurrence.getWeekStart());
+					_recurrenceObj.setUntil(oldRecurrence.getUntil());
+				}
 			}
 		}
 

@@ -118,7 +118,7 @@ public class BaseDeployer {
 		}
 
 		if (!appServerType.startsWith("geronimo") &&
-			!appServerType.equals("glassfish") &&
+			!appServerType.startsWith("glassfish") &&
 			!appServerType.startsWith("jboss") &&
 			!appServerType.startsWith("jonas") &&
 			!appServerType.equals("jetty") &&

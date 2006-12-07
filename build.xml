@@ -380,10 +380,31 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="resin" />
 				<then>
+
+					<!--
+					Resin 3.0.19 needs Commons Logging and Log4J in the common
+					class loader or else Resin will break when Commons Logging
+					from one WAR tries to load Log4J from another WAR.
+					-->
+
+					<copy todir="${app.server.lib.global.dir}">
+						<fileset
+							dir="lib/portal"
+							includes="commons-logging.jar,log4j.jar"
+						/>
+					</copy>
+
 					<copy todir="${app.server.lib.global.dir}">
 						<fileset
 							dir="lib/development"
 							includes="activation.jar,mail.jar"
+						/>
+					</copy>
+
+					<copy todir="${app.server.dir}/lib">
+						<fileset
+							dir="lib/portal"
+							includes="xercesImpl.jar,xml-apis.jar"
 						/>
 					</copy>
 				</then>

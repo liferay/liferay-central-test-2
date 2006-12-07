@@ -101,6 +101,15 @@ public class ServerDetector {
 			else if (ServerDetector.isResin()) {
 				sd._serverId = "resin";
 			}
+			else if (ServerDetector.isRexIP()) {
+				sd._serverId = "rexip";
+			}
+			else if (ServerDetector.isSun7()) {
+				sd._serverId = "sun7";
+			}
+			else if (ServerDetector.isSun8()) {
+				sd._serverId = "sun8";
+			}
 			else if (ServerDetector.isWebLogic()) {
 				sd._serverId = "weblogic";
 			}
@@ -108,22 +117,20 @@ public class ServerDetector {
 				sd._serverId = "websphere";
 			}
 
-			if (!ServerDetector.isGlassfish()) {
-				if (ServerDetector.isJetty()) {
-					if (sd._serverId == null) {
-						sd._serverId = "jetty";
-					}
-					else {
-						sd._serverId += "-jetty";
-					}
+			if (ServerDetector.isJetty()) {
+				if (sd._serverId == null) {
+					sd._serverId = "jetty";
 				}
-				else if (ServerDetector.isTomcat()) {
-					if (sd._serverId == null) {
-						sd._serverId = "tomcat";
-					}
-					else {
-						sd._serverId += "-tomcat";
-					}
+				else {
+					sd._serverId += "-jetty";
+				}
+			}
+			else if (ServerDetector.isTomcat()) {
+				if (sd._serverId == null) {
+					sd._serverId = "tomcat";
+				}
+				else {
+					sd._serverId += "-tomcat";
 				}
 			}
 
@@ -143,14 +150,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._geronimo == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(GERONIMO_CLASS) != null) {
-				sd._geronimo = Boolean.TRUE;
-			}
-			else {
-				sd._geronimo = Boolean.FALSE;
-			}
+			sd._geronimo = _detect(GERONIMO_CLASS);
 		}
 
 		return sd._geronimo.booleanValue();
@@ -160,14 +160,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._glassfish == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(GLASSFISH_CLASS) != null) {
-				sd._glassfish = Boolean.TRUE;
-			}
-			else {
-				sd._glassfish = Boolean.FALSE;
-			}
+			sd._glassfish = _detect(GLASSFISH_CLASS);
 		}
 
 		return sd._glassfish.booleanValue();
@@ -177,14 +170,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._jBoss == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(JBOSS_CLASS) != null) {
-				sd._jBoss = Boolean.TRUE;
-			}
-			else {
-				sd._jBoss = Boolean.FALSE;
-			}
+			sd._jBoss = _detect(JBOSS_CLASS);
 		}
 
 		return sd._jBoss.booleanValue();
@@ -194,14 +180,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._jetty == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(JETTY_CLASS) != null) {
-				sd._jetty = Boolean.TRUE;
-			}
-			else {
-				sd._jetty = Boolean.FALSE;
-			}
+			sd._jetty = _detect(JETTY_CLASS);
 		}
 
 		return sd._jetty.booleanValue();
@@ -211,14 +190,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._jonas == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(JONAS_CLASS) != null) {
-				sd._jonas = Boolean.TRUE;
-			}
-			else {
-				sd._jonas = Boolean.FALSE;
-			}
+			sd._jonas = _detect(JONAS_CLASS);
 		}
 
 		return sd._jonas.booleanValue();
@@ -228,14 +200,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._oc4j == null) {
-			try {
-				ClassLoader.getSystemClassLoader().loadClass(OC4J_CLASS);
-
-				sd._oc4j = Boolean.TRUE;
-			}
-			catch (ClassNotFoundException cnfe) {
-				sd._oc4j = Boolean.FALSE;
-			}
+			sd._oc4j = _detect(OC4J_CLASS);
 		}
 
 		return sd._oc4j.booleanValue();
@@ -245,14 +210,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._orion == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(ORION_CLASS) != null) {
-				sd._orion = Boolean.TRUE;
-			}
-			else {
-				sd._orion = Boolean.FALSE;
-			}
+			sd._orion = _detect(ORION_CLASS);
 		}
 
 		return sd._orion.booleanValue();
@@ -262,14 +220,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._pramati == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(PRAMATI_CLASS) != null) {
-				sd._pramati = Boolean.TRUE;
-			}
-			else {
-				sd._pramati = Boolean.FALSE;
-			}
+			sd._pramati = _detect(PRAMATI_CLASS);
 		}
 
 		return sd._pramati.booleanValue();
@@ -279,14 +230,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._resin == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(RESIN_CLASS) != null) {
-				sd._resin = Boolean.TRUE;
-			}
-			else {
-				sd._resin = Boolean.FALSE;
-			}
+			sd._resin = _detect(RESIN_CLASS);
 		}
 
 		return sd._resin.booleanValue();
@@ -296,14 +240,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._rexIP == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(REXIP_CLASS) != null) {
-				sd._rexIP = Boolean.TRUE;
-			}
-			else {
-				sd._rexIP = Boolean.FALSE;
-			}
+			sd._rexIP = _detect(REXIP_CLASS);
 		}
 
 		return sd._rexIP.booleanValue();
@@ -322,14 +259,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._sun7 == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(SUN7_CLASS) != null) {
-				sd._sun7 = Boolean.TRUE;
-			}
-			else {
-				sd._sun7 = Boolean.FALSE;
-			}
+			sd._sun7 = _detect(SUN7_CLASS);
 		}
 
 		return sd._sun7.booleanValue();
@@ -339,14 +269,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._sun8 == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(SUN8_CLASS) != null) {
-				sd._sun8 = Boolean.TRUE;
-			}
-			else {
-				sd._sun8 = Boolean.FALSE;
-			}
+			sd._sun8 = _detect(SUN8_CLASS);
 		}
 
 		return sd._sun8.booleanValue();
@@ -356,14 +279,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._tomcat == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(TOMCAT_CLASS) != null) {
-				sd._tomcat = Boolean.TRUE;
-			}
-			else {
-				sd._tomcat = Boolean.FALSE;
-			}
+			sd._tomcat = _detect(TOMCAT_CLASS);
 		}
 
 		return sd._tomcat.booleanValue();
@@ -373,14 +289,7 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._webLogic == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(WEBLOGIC_CLASS) != null) {
-				sd._webLogic = Boolean.TRUE;
-			}
-			else {
-				sd._webLogic = Boolean.FALSE;
-			}
+			sd._webLogic = _detect(WEBLOGIC_CLASS);
 		}
 
 		return sd._webLogic.booleanValue();
@@ -390,17 +299,30 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._webSphere == null) {
-			Class c = sd.getClass();
-
-			if (c.getResource(WEBSPHERE_CLASS) != null) {
-				sd._webSphere = Boolean.TRUE;
-			}
-			else {
-				sd._webSphere = Boolean.FALSE;
-			}
+			sd._webSphere = _detect(WEBSPHERE_CLASS);
 		}
 
 		return sd._webSphere.booleanValue();
+	}
+
+	private static Boolean _detect(String className) {
+		try {
+			ClassLoader.getSystemClassLoader().loadClass(className);
+
+			return Boolean.TRUE;
+		}
+		catch (ClassNotFoundException cnfe) {
+			ServerDetector sd = _instance;
+
+			Class c = sd.getClass();
+
+			if (c.getResource(className) != null) {
+				return Boolean.TRUE;
+			}
+			else {
+				return Boolean.FALSE;
+			}
+		}
 	}
 
 	private ServerDetector() {

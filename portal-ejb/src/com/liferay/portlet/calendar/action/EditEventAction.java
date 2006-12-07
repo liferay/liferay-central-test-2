@@ -267,8 +267,8 @@ public class EditEventAction extends PortletAction {
 					dayPos.add(new DayAndPosition(Calendar.MONDAY, 0));
 				}
 
-				recurrence.setByDay((DayAndPosition[])dayPos.toArray(
-					new DayAndPosition[0]));
+				recurrence.setByDay(
+					(DayAndPosition[])dayPos.toArray(new DayAndPosition[0]));
 			}
 			else if (recurrenceType == Recurrence.MONTHLY) {
 				int monthlyType = ParamUtil.getInteger(req, "monthlyType");

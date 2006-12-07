@@ -182,15 +182,19 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${project.dir}/filters/compression-filter/compression-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/filters/secure-filter/secure-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/filters/sso-filter/sso-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/filters/strip-filter/strip-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/compression/compression-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/secure/secure-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/sso/sso-filter.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/filters/strip/strip-filter.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/casclient.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-beanutils.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/commons-digester.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/commons-httpclient.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/portletbridge-core.jar" dest="${classpath.jsp}" />
+		<unjar src="${project.dir}/lib/portal/portletbridge-portlet.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/saaj.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/simplecaptcha.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/spring.jar" dest="${classpath.jsp}" />
@@ -307,7 +311,7 @@
 						<then>
 							<antcall target="compile-resin" />
 
-							<copy todir="${app.server.deploy.dir}/WEB-INF/work">
+							<copy todir="${app.server.deploy.dir}/ROOT/WEB-INF/work">
 								<fileset dir="classes/${app.server.type}">
 									<exclude name="**/*.jspc_error" />
 									<exclude name="**/*.java" />
