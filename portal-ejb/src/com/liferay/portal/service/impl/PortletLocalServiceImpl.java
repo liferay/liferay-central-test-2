@@ -225,7 +225,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				String portletId = (String)itr.next();
 
 				if (!liferayPortletIds.contains(portletId)) {
-					_log.warn(
+					_log.error(
 						"Portlet with the name " + portletId +
 							" is described in portlet.xml but does not " +
 								"have a matching entry in liferay-portlet.xml");
@@ -240,7 +240,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				String portletId = (String)itr.next();
 
 				if (!portletIds.contains(portletId)) {
-					_log.warn(
+					_log.error(
 						"Portlet with the name " + portletId +
 							" is described in liferay-portlet.xml but does " +
 								"not have a matching entry in portlet.xml");
@@ -300,7 +300,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				String portletId = (String)itr.next();
 
 				if (!liferayPortletIds.contains(portletId)) {
-					_log.warn(
+					_log.error(
 						"Portlet with the name " + portletId +
 							" is described in portlet.xml but does not " +
 								"have a matching entry in liferay-portlet.xml");
@@ -315,7 +315,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				String portletId = (String)itr.next();
 
 				if (!portletIds.contains(portletId)) {
-					_log.warn(
+					_log.error(
 						"Portlet with the name " + portletId +
 							" is described in liferay-portlet.xml but does " +
 								"not have a matching entry in portlet.xml");
