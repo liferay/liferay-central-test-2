@@ -23,10 +23,9 @@
 package com.liferay.portal.lucene;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.Constants;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.JNDIUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
@@ -39,7 +38,6 @@ import java.sql.Connection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.sql.DataSource;
@@ -193,7 +191,7 @@ public class LuceneUtil {
 			Connection con = null;
 
 			try {
-				con = DataAccess.getConnection(Constants.DATA_SOURCE);
+				con = HibernateUtil.getConnection();
 
 				String url = con.getMetaData().getURL();
 
@@ -239,8 +237,7 @@ public class LuceneUtil {
 				_LUCENE_STORE_TYPE_JDBC)) {
 
 			try {
-				DataSource ds = (DataSource)JNDIUtil.lookup(
-					new InitialContext(), Constants.DATA_SOURCE);
+				DataSource ds = HibernateUtil.getDataSource();
 
 				JdbcDirectory directory = new JdbcDirectory(
 					ds, _dialect, _getTableName(companyId));
@@ -282,8 +279,7 @@ public class LuceneUtil {
 				_LUCENE_STORE_TYPE_JDBC)) {
 
 			try {
-				DataSource ds = (DataSource)JNDIUtil.lookup(
-					new InitialContext(), Constants.DATA_SOURCE);
+				DataSource ds = HibernateUtil.getDataSource();
 
 				directory = new JdbcDirectory(
 					ds, _dialect, _getTableName(companyId));

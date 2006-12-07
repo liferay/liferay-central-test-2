@@ -23,7 +23,6 @@
 package com.liferay.portal.spring.hibernate;
 
 import com.liferay.portal.kernel.util.StackTraceUtil;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.CallableStatement;
@@ -64,7 +63,7 @@ public class DynamicDialect extends Dialect {
 		Connection con = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			DatabaseMetaData metaData = con.getMetaData();
 

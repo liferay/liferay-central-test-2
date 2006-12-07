@@ -26,7 +26,12 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import java.util.Map;
+
+import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -47,10 +52,21 @@ import org.springframework.orm.hibernate3.LocalSessionFactoryBean;
  */
 public class HibernateUtil {
 
+	public static final String SPRING_HIBERNATE_DATA_SOURCE =
+		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_DATA_SOURCE);
+
 	public static final String SPRING_HIBERNATE_SESSION_FACTORY =
 		PropsUtil.get(PropsUtil.SPRING_HIBERNATE_SESSION_FACTORY);
 
 	public static final String COUNT_COLUMN_NAME = "COUNT_VALUE";
+
+	public static Connection getConnection() throws SQLException {
+		return getDataSource().getConnection();
+	}
+
+	public static DataSource getDataSource() {
+		return (DataSource)BeanLocatorUtil.locate(SPRING_HIBERNATE_DATA_SOURCE);
+	}
 
 	public static SessionFactoryImplementor getSessionFactory() {
 		return getSessionFactory(SPRING_HIBERNATE_SESSION_FACTORY);

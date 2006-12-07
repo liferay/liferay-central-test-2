@@ -22,10 +22,11 @@
 
 package com.liferay.test;
 
-import com.liferay.portal.service.CounterServiceTest;
+import com.liferay.counter.service.CounterServiceTest;
 
 import junit.framework.Test;
 import junit.framework.TestSuite;
+
 import junit.textui.TestRunner;
 
 /**

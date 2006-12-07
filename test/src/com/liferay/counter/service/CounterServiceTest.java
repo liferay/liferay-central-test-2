@@ -20,9 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service;
+package com.liferay.counter.service;
 
-import com.liferay.counter.service.CounterServiceUtil;
+import com.liferay.portal.service.BaseServiceTest;
 
 /**
  * <a href="CounterServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -33,12 +33,12 @@ import com.liferay.counter.service.CounterServiceUtil;
 public class CounterServiceTest extends BaseServiceTest {
 
 	public void test() {
-		try {			
+		try {
 			CounterServiceUtil.increment(this.getClass().getName());
 		}
 		catch (Exception e) {
 			fail(e);
 		}
 	}
-	
+
 }

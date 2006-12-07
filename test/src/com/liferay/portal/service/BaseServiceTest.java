@@ -39,26 +39,25 @@ import com.liferay.test.TestProps;
  *
  */
 public class BaseServiceTest extends TestCase {
-	
+
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-		
+
 		String userId = TestProps.get("service.user.id");
-		
+
 		PrincipalThreadLocal.setName(userId);
 
 		User user = UserLocalServiceUtil.getUserById(userId);
-	
-		_permissionChecker =
-			PermissionCheckerFactory.create(user, true, true);
 
-		PermissionThreadLocal.setPermissionChecker(
-			_permissionChecker);					
+		_permissionChecker = PermissionCheckerFactory.create(user, true, true);
+
+		PermissionThreadLocal.setPermissionChecker(_permissionChecker);
 	}
-	
+
 	protected void tearDown() throws Exception {
-		PermissionCheckerFactory.recycle(_permissionChecker);		
+		PermissionCheckerFactory.recycle(_permissionChecker);
 	}
 
 	private PermissionCheckerImpl _permissionChecker = null;
+
 }

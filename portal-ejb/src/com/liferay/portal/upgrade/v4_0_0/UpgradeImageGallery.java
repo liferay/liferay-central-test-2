@@ -24,9 +24,9 @@ package com.liferay.portal.upgrade.v4_0_0;
 
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
@@ -64,7 +64,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_FOLDER);
 
@@ -102,7 +102,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_IMAGE);
 

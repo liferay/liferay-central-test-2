@@ -32,9 +32,9 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.Constants;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -138,7 +138,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_2);
 
@@ -213,7 +213,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		try {
 			List messages = new ArrayList();
 
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_1);
 
@@ -291,7 +291,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		PreparedStatement ps = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_MESSAGE_3);
 
@@ -352,7 +352,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 

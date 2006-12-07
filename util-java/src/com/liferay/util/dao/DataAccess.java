@@ -22,13 +22,14 @@
 
 package com.liferay.util.dao;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.util.JNDIUtil;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+import javax.naming.InitialContext;
 import javax.naming.NamingException;
 
 import javax.sql.DataSource;
@@ -41,12 +42,12 @@ import javax.sql.DataSource;
  */
 public class DataAccess {
 
-	public static final String LIFERAY_DATA_SOURCE = "liferayDataSource";
-
 	public static Connection getConnection(String location)
 		throws NamingException, SQLException {
 
-		DataSource ds = (DataSource)BeanLocatorUtil.locate(LIFERAY_DATA_SOURCE);
+		InitialContext ctx = new InitialContext();
+
+		DataSource ds = (DataSource)JNDIUtil.lookup(ctx, location);
 
 		Connection con = ds.getConnection();
 

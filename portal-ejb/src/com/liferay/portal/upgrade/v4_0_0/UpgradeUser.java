@@ -30,9 +30,9 @@ import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -72,7 +72,7 @@ public class UpgradeUser extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_USER);
 

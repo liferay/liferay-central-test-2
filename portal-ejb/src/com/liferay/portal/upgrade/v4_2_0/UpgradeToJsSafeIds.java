@@ -25,9 +25,9 @@ package com.liferay.portal.upgrade.v4_2_0;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.*;
 import com.liferay.util.dao.DataAccess;
@@ -111,7 +111,7 @@ public class UpgradeToJsSafeIds extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_SELECT_ALL_LAYOUTS);
 
@@ -161,7 +161,7 @@ public class UpgradeToJsSafeIds extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps1 = con.prepareStatement(
 				"SELECT " + column + " FROM " + table + " WHERE (" + column +

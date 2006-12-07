@@ -32,9 +32,9 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.Constants;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -81,7 +81,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_GET_LOOK_AND_FEEL_BY_GROUP_ID);
 
@@ -109,7 +109,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_GET_LOOK_AND_FEEL_BY_USER_ID);
 
@@ -239,7 +239,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		try {
 			Set groupIds = new HashSet();
 
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_LAYOUT_1);
 
@@ -365,7 +365,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		ResultSet rs = null;
 
 		try {
-			con = DataAccess.getConnection(Constants.DATA_SOURCE);
+			con = HibernateUtil.getConnection();
 
 			ps = con.prepareStatement(_UPGRADE_PORTLET_PREFERENCES_1);
 

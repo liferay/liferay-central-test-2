@@ -57,14 +57,14 @@
 	</target>
 
 	<target name="test">
-		<echo message="These tests require a running Liferay instance. Make sure that Liferay is" />
-		<echo message="listening on a host that matches what is set in test.properties." />
+		<echo message="The remoting tests require a running Liferay instance. Make sure that Liferay" />
+		<echo message="is listening on a host that matches what is set in test.properties." />
 		<echo message="" />
 
 		<antcall target="test-ejb" />
 		<antcall target="test-http" />
-		<antcall target="test-soap" />
 		<antcall target="test-services" />
+		<antcall target="test-soap" />
 	</target>
 
 	<target name="test-ejb" depends="compile">
@@ -87,19 +87,19 @@
 		/>
 	</target>
 
-	<target name="test-soap" depends="compile">
+	<target name="test-service" depends="compile">
 		<java
-			classname="com.liferay.test.SoapTests"
-			classpathref="test-soap.classpath"
+			classname="com.liferay.test.ServiceTests"
+			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
 		/>
 	</target>
 
-	<target name="test-service" depends="compile">
+	<target name="test-soap" depends="compile">
 		<java
-			classname="com.liferay.test.ServiceTests"
-			classpathref="project.classpath"
+			classname="com.liferay.test.SoapTests"
+			classpathref="test-soap.classpath"
 			fork="true"
 			newenvironment="true"
 		/>
