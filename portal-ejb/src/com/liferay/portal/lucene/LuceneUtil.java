@@ -249,9 +249,6 @@ public class LuceneUtil {
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
 			}
-			catch (NamingException ne) {
-				throw new RuntimeException(ne);
-			}
 			catch (UnsupportedOperationException uoe) {
 				throw new RuntimeException(uoe);
 			}
@@ -292,9 +289,6 @@ public class LuceneUtil {
 			}
 			catch (IOException ioe) {
 				throw new RuntimeException(ioe);
-			}
-			catch (NamingException ne) {
-				throw new RuntimeException(ne);
 			}
 			catch (UnsupportedOperationException uoe) {
 				throw new RuntimeException(uoe);
