@@ -673,19 +673,36 @@ auto.deploy.dest.dir=../webapps</echo>
 	<target name="build-ext">
 		<available file="${lp.ext.dir}/ext-ear" type="dir" property="lp.ext.dir.available" />
 
-		<antcall target="build-ext-dir-new" />
-		<antcall target="build-ext-dir-update" />
+		<antcall target="build-ext-dir" />
 
 		<copy todir="${lp.ext.dir}" overwrite="yes">
 			<fileset
+				dir="."
+				includes="app.server.properties"
+			/>
+			<fileset
 				dir="tools/ext_tmpl"
-				includes=".classpath,.project,app.server.properties,readme.txt"
+				includes=".classpath,.project,readme.txt"
 			/>
 			<filterset>
 				<filter token="lp.version" value="${lp.version}" />
 				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
 				<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 			</filterset>
+		</copy>
+
+		<copy todir="${lp.ext.dir}" overwrite="true">
+			<fileset
+				dir="tools/ext_tmpl"
+				includes="build.properties,**/build-common.xml,**/build-parent.xml"
+			/>
+		</copy>
+
+		<copy todir="${lp.ext.dir}" overwrite="false">
+			<fileset
+				dir="tools/ext_tmpl"
+				includes="**/build.xml,**/META-INF/application.xml,**/WEB-INF/remoting-servlet-ext.xml,**/WEB-INF/server-config.wsdd"
+			/>
 		</copy>
 
 		<mkdir dir="${lp.ext.dir}/downloads" />
@@ -776,27 +793,11 @@ auto.deploy.dest.dir=../webapps</echo>
 		</copy>
 	</target>
 
-	<target name="build-ext-dir-new" unless="lp.ext.dir.available">
+	<target name="build-ext-dir" unless="lp.ext.dir.available">
 		<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 
 		<copy todir="${lp.ext.dir}" filtering="true">
 			<fileset dir="tools/ext_tmpl" />
-		</copy>
-	</target>
-
-	<target name="build-ext-dir-update" if="lp.ext.dir.available">
-		<copy todir="${lp.ext.dir}" overwrite="true">
-			<fileset
-				dir="tools/ext_tmpl"
-				includes="app.server.properties,build.properties,**/build-common.xml,**/build-parent.xml"
-			/>
-		</copy>
-
-		<copy todir="${lp.ext.dir}" overwrite="false">
-			<fileset
-				dir="tools/ext_tmpl"
-				includes="**/build.xml,**/META-INF/application.xml,**/WEB-INF/remoting-servlet-ext.xml,**/WEB-INF/server-config.wsdd"
-			/>
 		</copy>
 	</target>
 
