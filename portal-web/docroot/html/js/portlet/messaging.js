@@ -4,11 +4,15 @@ var Messaging = {
 	initialized : false,
 	inputCount : 1,
 	mainDiv : null,
+	msgQueue : new Array(),
 	userId : null,
 	windowCount : 0,
 	zIndex : 1,
 
-	chat : function(msg) {
+	chat : function(msgObj) {
+		if (!msgObj && Messaging.msgQueue.length == 0) return; 
+		
+		var msg = msgObj || Messaging.msgQueue.shift();
 		var chatBox = $("msg-chat-box" + msg.toId);
 
 		if (!chatBox) {
@@ -58,6 +62,13 @@ var Messaging = {
 
 		chatArea.scrollTop = chatArea.scrollHeight;
 		typeArea.focus();
+
+		if (is_ie) {
+			// need double focus for IE
+			typeArea.focus();
+		}
+
+		Messaging.chat();
 	},
 
 	getChats : function() {
@@ -84,9 +95,9 @@ var Messaging = {
 					chatMsg[i].fromId = chatMsg[i].toId;
 					chatMsg[i].toName = tmpName;
 					chatMsg[i].toId = tmpId;
-					
-					Messaging.chat(chatMsg[i]);
+					Messaging.msgQueue.push(chatMsg[i]);
 				}
+				Messaging.chat();
 				window.focus();
 			}
 		}
@@ -139,10 +150,11 @@ var Messaging = {
 		
 		if (msgJSON) {
 			var chatArray = $J(decodeURIComponent(msgJSON));
-			
 			chatArray.each(function(item){
-				Messaging.chat(item);
+				Messaging.msgQueue.push(item);
 			});
+			
+			Messaging.chat();
 		}
 
 		this.initialized = true;
