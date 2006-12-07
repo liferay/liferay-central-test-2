@@ -20,74 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao;
+package com.liferay.portal.service;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-
-import javax.naming.NamingException;
-
-import javax.sql.DataSource;
+import com.liferay.portal.model.User;
+import com.liferay.portal.security.auth.PrincipalThreadLocal;
+import com.liferay.portal.security.permission.PermissionCheckerFactory;
+import com.liferay.portal.security.permission.PermissionCheckerImpl;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
+import com.liferay.test.TestCase;
+import com.liferay.test.TestProps;
 
 /**
- * <a href="DataAccess.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseServiceTest.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Michael Young
  *
  */
-public class DataAccess {
+public class BaseServiceTest extends TestCase {
+	
+	protected void setUp() throws Exception {
+		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		
+		String userId = TestProps.get("service.user.id");
+		
+		PrincipalThreadLocal.setName(userId);
 
-	public static final String LIFERAY_DATA_SOURCE = "liferayDataSource";
+		User user = UserLocalServiceUtil.getUserById(userId);
+	
+		_permissionChecker =
+			PermissionCheckerFactory.create(user, true, true);
 
-	public static Connection getConnection(String location)
-		throws NamingException, SQLException {
-
-		DataSource ds = (DataSource)BeanLocatorUtil.locate(LIFERAY_DATA_SOURCE);
-
-		Connection con = ds.getConnection();
-
-		return con;
+		PermissionThreadLocal.setPermissionChecker(
+			_permissionChecker);					
+	}
+	
+	protected void tearDown() throws Exception {
+		PermissionCheckerFactory.recycle(_permissionChecker);		
 	}
 
-	public static void cleanUp(Connection con) {
-		cleanUp(con, null, null);
-	}
-
-	public static void cleanUp(Connection con, Statement s) {
-		cleanUp(con, s, null);
-	}
-
-	public static void cleanUp(Connection con, Statement s, ResultSet rs) {
-		try {
-			if (rs != null) {
-				rs.close();
-			}
-		}
-		catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-
-		try {
-			if (s != null) {
-				s.close();
-			}
-		}
-		catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-
-		try {
-			if (con != null) {
-				con.close();
-			}
-		}
-		catch (SQLException sqle) {
-			sqle.printStackTrace();
-		}
-	}
-
+	private PermissionCheckerImpl _permissionChecker = null;
 }

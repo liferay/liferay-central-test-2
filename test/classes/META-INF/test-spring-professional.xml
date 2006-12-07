@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<bean id="liferayDataSourceTarget" class="org.apache.commons.dbcp.BasicDataSource" lazy-init="true">
+	    <property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+	    <property name="url" value="jdbc:mysql://localhost/lportal"/>
+<!--
+	    <property name="username" value=""/>
+	    <property name="password" value=""/>
+-->
+	</bean>
+</beans>

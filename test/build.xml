@@ -64,6 +64,7 @@
 		<antcall target="test-ejb" />
 		<antcall target="test-http" />
 		<antcall target="test-soap" />
+		<antcall target="test-services" />
 	</target>
 
 	<target name="test-ejb" depends="compile">
@@ -90,6 +91,15 @@
 		<java
 			classname="com.liferay.test.SoapTests"
 			classpathref="test-soap.classpath"
+			fork="true"
+			newenvironment="true"
+		/>
+	</target>
+
+	<target name="test-service" depends="compile">
+		<java
+			classname="com.liferay.test.ServiceTests"
+			classpathref="project.classpath"
 			fork="true"
 			newenvironment="true"
 		/>
