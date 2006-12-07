@@ -196,7 +196,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="log4j.jar"
+						includes="log4j.jar,jmx-remote.jar,jmx-ri.jar"
 					/>
 				</delete>
 			</then>
