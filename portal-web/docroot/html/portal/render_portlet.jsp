@@ -315,9 +315,6 @@ if (portlet.isActive() && access) {
 	SessionMessages.clear(renderRequestImpl);
 	SessionErrors.clear(renderRequestImpl);
 }
-
-boolean showPortletAccessDenied = portlet.isShowPortletAccessDenied();
-boolean showPortletInactive = portlet.isShowPortletInactive();
 %>
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
