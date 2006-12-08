@@ -381,14 +381,18 @@ var LayoutColumns = {
 
 	initPortlet: function(portlet) {
 		portlet = $(portlet);
-		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
-		handle.style.cursor = "move";
 
-		DragDrop.create(portlet, {
-			revert: true,
-			handle: handle,
-			ghosting: true,
-			highlightDropzones: LayoutColumns.highlight});
+		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
+
+		if (handle) {
+			handle.style.cursor = "move";
+
+			DragDrop.create(portlet, {
+				revert: true,
+				handle: handle,
+				ghosting: true,
+				highlightDropzones: LayoutColumns.highlight});
+		}
 	},
 
 	onDrop: function(item) {
