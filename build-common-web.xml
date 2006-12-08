@@ -58,7 +58,7 @@
 						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 					</or>
-					<equals arg1="${app.server.deploy.archive}" arg2="ear" />
+					<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
 				</and>
 				<equals arg1="${app.server.type}" arg2="jonas-jetty" />
 				<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
@@ -96,7 +96,7 @@
 									<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 									<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 								</or>
-								<equals arg1="${app.server.deploy.archive}" arg2="war" />
+								<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
 							</and>
 							<then>
 								<property name="war.file.dest" value="${app.server.deploy.dir}/${war.file}.war" />
@@ -118,6 +118,16 @@
 			<elseif>
 				<or>
 					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<and>
+						<or>
+							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						</or>
+						<and>
+							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
+							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
+						</and>
+					</and>
 					<equals arg1="${app.server.type}" arg2="pramati" />
 				</or>
 				<then>
@@ -141,6 +151,13 @@
 				</then>
 			</elseif>
 			<else>
+				<if>
+					<available file="${war.file.dest}" type="file" />
+					<then>
+						<delete file="${war.file.dest}" />
+					</then>
+				</if>
+
 				<unwar src="${war.file}.war" dest="${war.file.dest}" />
 
 				<if>
@@ -161,7 +178,7 @@
 						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 					</or>
-					<equals arg1="${app.server.deploy.archive}" arg2="war" />
+					<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
 				</and>
 				<equals arg1="${app.server.type}" arg2="jetty" />
 				<equals arg1="${app.server.type}" arg2="resin" />
@@ -195,6 +212,40 @@
 					<delete file="${war.file.dest}/META-INF/context.xml" />
 				</then>
 			</elseif>
+		</if>
+
+		<if>
+			<and>
+				<or>
+					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+				</or>
+				<and>
+					<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
+					<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
+				</and>
+			</and>
+			<then>
+				<if>
+					<not>
+						<equals arg1="${war.file}" arg2="portal-web" />
+					</not>
+					<then>
+						<tstamp>
+							<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+						</tstamp>
+
+						<jar
+							basedir="${war.file.dest}"
+							jarfile="${tstamp.dir}"
+						/>
+
+						<delete dir="${war.file.dest}" />
+
+						<move file="${tstamp.dir}" tofile="${war.file.dest}" />
+					</then>
+				</if>
+			</then>
 		</if>
 	</target>
 </project>

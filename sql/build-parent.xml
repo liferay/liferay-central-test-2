@@ -130,6 +130,8 @@
 	</target>
 
 	<target name="rebuild-hypersonic">
+		<delete file="${database.name}.lck" failonerror="false" />
+		<delete file="${database.name}.log" failonerror="false" />
 		<delete file="${database.name}.properties" failonerror="false" />
 		<delete file="${database.name}.script" failonerror="false" />
 

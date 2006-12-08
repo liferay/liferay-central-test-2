@@ -146,6 +146,7 @@
 
 		<delete dir="${app.server.log.dir}" />
 		<delete dir="${app.server.portal.dir}" />
+		<delete file="${app.server.portal.dir}" />
 		<delete dir="${app.server.temp.dir}" />
 		<delete dir="${app.server.work.dir}" />
 	</target>
@@ -245,9 +246,12 @@
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+				<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
+				<delete dir="${app.server.portal.dir}" />
 				<delete file="${app.server.portal.dir}" />
 			</then>
 		</if>
@@ -337,7 +341,7 @@
 					<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 					<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 				</or>
-				<equals arg1="${app.server.deploy.archive}" arg2="war" />
+				<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
 			</and>
 			<then>
 				<delete>
@@ -490,6 +494,15 @@
 		<if>
 			<or>
 				<equals arg1="${app.server.type}" arg2="glassfish" />
+				<and>
+					<or>
+						<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+						<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+					</or>
+					<and>
+						<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
+					</and>
+				</and>
 				<equals arg1="${app.server.type}" arg2="pramati" />
 			</or>
 			<then>
@@ -517,6 +530,16 @@
 			<elseif>
 				<or>
 					<equals arg1="${app.server.type}" arg2="glassfish" />
+					<and>
+						<or>
+							<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+							<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+						</or>
+						<and>
+							<equals arg1="${app.server.deploy.archive.unpack}" arg2="false" />
+							<equals arg1="${app.server.deploy.archive.type}" arg2="ear" />
+						</and>
+					</and>
 					<equals arg1="${app.server.type}" arg2="pramati" />
 				</or>
 				<then>
@@ -540,6 +563,18 @@
 								<replacevalue>auto.deploy.dest.dir=../domains/domain1/autodeploy</replacevalue>
 							</replace>
 						</then>
+						<elseif>
+							<or>
+								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
+								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
+							</or>
+							<then>
+								<replace file="${tstamp.dir}/portal-ext.properties">
+									<replacetoken>auto.deploy.dest.dir=../webapps</replacetoken>
+									<replacevalue>auto.deploy.dest.dir=../server/default/deploy</replacevalue>
+								</replace>
+							</then>
+						</elseif>
 						<elseif>
 							<equals arg1="${app.server.type}" arg2="pramati" />
 							<then>
@@ -589,7 +624,7 @@ auto.deploy.dest.dir=../webapps</echo>
 								<equals arg1="${app.server.type}" arg2="jboss-jetty" />
 								<equals arg1="${app.server.type}" arg2="jboss-tomcat" />
 							</or>
-							<equals arg1="${app.server.deploy.archive}" arg2="war" />
+							<equals arg1="${app.server.deploy.archive.type}" arg2="war" />
 						</and>
 						<equals arg1="${app.server.type}" arg2="jetty" />
 						<equals arg1="${app.server.type}" arg2="resin" />

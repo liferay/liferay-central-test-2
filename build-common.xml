@@ -51,7 +51,8 @@
 	<propertycopy name="app.server.bin.dir" from="app.server.${app.server.type}.bin.dir" />
 	<propertycopy name="app.server.classes.global.dir" from="app.server.${app.server.type}.classes.global.dir" />
 	<propertycopy name="app.server.classes.portal.dir" from="app.server.${app.server.type}.classes.portal.dir" />
-	<propertycopy name="app.server.deploy.archive" from="app.server.${app.server.type}.deploy.archive" silent="true" />
+	<propertycopy name="app.server.deploy.archive.unpack" from="app.server.${app.server.type}.deploy.archive.unpack" silent="true" />
+	<propertycopy name="app.server.deploy.archive.type" from="app.server.${app.server.type}.deploy.archive.type" silent="true" />
 	<propertycopy name="app.server.deploy.dir" from="app.server.${app.server.type}.deploy.dir" />
 	<propertycopy name="app.server.ejbgen.compile" from="app.server.${app.server.type}.ejbgen.compile" silent="true" />
 	<propertycopy name="app.server.ejbgen.protocols" from="app.server.${app.server.type}.ejbgen.protocols" silent="true" />
