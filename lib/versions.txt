@@ -2,6 +2,7 @@ ActiveMQ 4.0.1
 Alfresco Web Service Client 1.4.0 (removed log4j.properties)
 Ant 1.6.5
 Ant Contrib 0.6
+Antelope 3.2.18
 ANTLR 2.7.6
 Axis 1.4 (removed log4j.properties)
 Bouncy Castle JDK 1.5 1.29

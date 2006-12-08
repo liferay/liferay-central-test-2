@@ -298,6 +298,8 @@
 		<delete file="ServiceBuilder.temp" />
 
 		<antcall target="build-ejbxml" />
+
+		<ant dir="../portal-service" target="compile" inheritAll="false" />
 	</target>
 
 	<target name="build-service-portal">

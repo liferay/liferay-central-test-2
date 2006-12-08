@@ -18,30 +18,6 @@
 	</target>
 
 	<target name="deploy-geronimo-tomcat-derby">
-		<antcall target="rebuild-derby" />
-
-		<tstamp>
-			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
-		</tstamp>
-
-		<mkdir dir="${tstamp.dir}" />
-
-		<unzip
-			src="${app.server.geronimo-tomcat.dir}/repository/tranql/tranql-connector/1.2/tranql-connector-1.2.rar"
-			dest="${tstamp.dir}"
-		/>
-
-		<copy file="${database.name}.jar" todir="${tstamp.dir}" />
-
-		<delete file="geronimo/derby/tranql-connector-1.2.rar" />
-
-		<jar
-			basedir="${tstamp.dir}"
-			jarfile="geronimo/derby/tranql-connector-1.2.rar"
-		/>
-
-		<delete dir="${tstamp.dir}" />
-
 		<java
 			fork="true"
 			jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
@@ -117,6 +93,28 @@
 		<move todir="${database.name}">
 			<fileset dir="${tstamp.dir}/geronimo/var/derby/lportal" />
 		</move>
+
+		<delete dir="${tstamp.dir}" />
+
+		<tstamp>
+			<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
+		</tstamp>
+
+		<mkdir dir="${tstamp.dir}" />
+
+		<unzip
+			src="${app.server.geronimo-tomcat.dir}/repository/tranql/tranql-connector/1.2/tranql-connector-1.2.rar"
+			dest="${tstamp.dir}"
+		/>
+
+		<copy file="${database.name}.jar" todir="${tstamp.dir}" />
+
+		<delete file="geronimo/derby/tranql-connector-1.2.rar" />
+
+		<jar
+			basedir="${tstamp.dir}"
+			jarfile="geronimo/derby/tranql-connector-1.2.rar"
+		/>
 
 		<delete dir="${tstamp.dir}" />
 	</target>

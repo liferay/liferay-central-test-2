@@ -196,6 +196,8 @@
 		<delete file="ServiceBuilder.temp" />
 		
 		<antcall target="build-ejbxml" />
+
+		<ant dir="../ext-service" target="compile" inheritAll="false" />
 	</target>
 
 	<target name="build-webxml">
