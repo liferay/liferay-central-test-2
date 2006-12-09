@@ -45,11 +45,11 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.templateId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.groupId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_TEMPLATEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.templateId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalTemplate.userId"),
@@ -82,11 +82,12 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	}
 
 	public JournalTemplatePK getPrimaryKey() {
-		return new JournalTemplatePK(_companyId, _templateId);
+		return new JournalTemplatePK(_companyId, _groupId, _templateId);
 	}
 
 	public void setPrimaryKey(JournalTemplatePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setTemplateId(pk.templateId);
 	}
 
@@ -107,23 +108,6 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getTemplateId() {
-		return GetterUtil.getString(_templateId);
-	}
-
-	public void setTemplateId(String templateId) {
-		if (((templateId == null) && (_templateId != null)) ||
-				((templateId != null) && (_templateId == null)) ||
-				((templateId != null) && (_templateId != null) &&
-				!templateId.equals(_templateId))) {
-			if (!XSS_ALLOW_TEMPLATEID) {
-				templateId = XSSUtil.strip(templateId);
-			}
-
-			_templateId = templateId;
-		}
-	}
-
 	public String getGroupId() {
 		return GetterUtil.getString(_groupId);
 	}
@@ -138,6 +122,23 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 			}
 
 			_groupId = groupId;
+		}
+	}
+
+	public String getTemplateId() {
+		return GetterUtil.getString(_templateId);
+	}
+
+	public void setTemplateId(String templateId) {
+		if (((templateId == null) && (_templateId != null)) ||
+				((templateId != null) && (_templateId == null)) ||
+				((templateId != null) && (_templateId != null) &&
+				!templateId.equals(_templateId))) {
+			if (!XSS_ALLOW_TEMPLATEID) {
+				templateId = XSSUtil.strip(templateId);
+			}
+
+			_templateId = templateId;
 		}
 	}
 
@@ -318,8 +319,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public Object clone() {
 		JournalTemplateImpl clone = new JournalTemplateImpl();
 		clone.setCompanyId(getCompanyId());
-		clone.setTemplateId(getTemplateId());
 		clone.setGroupId(getGroupId());
+		clone.setTemplateId(getTemplateId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
@@ -380,8 +381,8 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	}
 
 	private String _companyId;
-	private String _templateId;
 	private String _groupId;
+	private String _templateId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

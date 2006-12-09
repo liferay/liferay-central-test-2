@@ -68,7 +68,6 @@ public class UpgradeLayout extends UpgradeProcess {
 			_upgradeLayout();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			throw new UpgradeException(e);
 		}
 	}
@@ -253,7 +252,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				String oldName = rs.getString("name");
 				String oldTypeSettings = rs.getString("typeSettings");
 
-				_log.debug(
+				_log.info(
 					"Upgrading layout " +
 						new LayoutPK(oldLayoutId, oldOwnerId));
 
@@ -378,7 +377,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				String oldPortletId = rs.getString("portletId");
 				String oldPreferences = rs.getString("preferences");
 
-				_log.debug(
+				_log.info(
 					"Upgrading portlet preferences " +
 						new PortletPreferencesPK(
 							oldPortletId, oldLayoutId, oldOwnerId));

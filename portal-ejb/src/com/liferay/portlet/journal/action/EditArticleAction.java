@@ -173,18 +173,20 @@ public class EditArticleAction extends PortletAction {
 	protected void approveArticle(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
+        String groupId = PortalUtil.getPortletGroupId(req);
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(req, "version");
 
 		String articleURL = ParamUtil.getString(req, "articleURL");
 
 		JournalArticleServiceUtil.approveArticle(
-			articleId, version, layout.getPlid(), articleURL,
+			groupId, articleId, version, layout.getPlid(), articleURL,
 			req.getPreferences());
 	}
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String[] deleteArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -198,7 +200,7 @@ public class EditArticleAction extends PortletAction {
 					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.deleteArticle(
-				companyId, articleId, version, null, null);
+				companyId, groupId, articleId, version, null, null);
 
 			JournalUtil.removeRecentArticle(req, deleteArticleIds[i]);
 		}
@@ -206,6 +208,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void expireArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String[] expireArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "expireArticleIds"));
@@ -219,7 +222,7 @@ public class EditArticleAction extends PortletAction {
 					pos + VERSION_SEPARATOR.length()));
 
 			JournalArticleServiceUtil.expireArticle(
-				companyId, articleId, version, null, null);
+				companyId, groupId, articleId, version, null, null);
 		}
 	}
 
@@ -250,6 +253,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String[] removeArticleLocaleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -264,7 +268,7 @@ public class EditArticleAction extends PortletAction {
 			String languageId = ParamUtil.getString(req, "languageId");
 
 			JournalArticleServiceUtil.removeArticleLocale(
-				companyId, articleId, version, languageId);
+				companyId, groupId, articleId, version, languageId);
 		}
 	}
 
@@ -282,6 +286,9 @@ public class EditArticleAction extends PortletAction {
 		if (Validator.isNotNull(groupId)) {
 			plid = LayoutImpl.PUBLIC + groupId + ".1";
 		}
+        else {
+            groupId = PortalUtil.getPortletGroupId(req);
+        }
 
 		String articleId = ParamUtil.getString(req, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(req, "autoArticleId");
@@ -371,12 +378,12 @@ public class EditArticleAction extends PortletAction {
 			if (Validator.isNotNull(structureId)) {
 				JournalArticle curArticle =
 					JournalArticleServiceUtil.getArticle(
-						companyId, articleId, version);
+						companyId, groupId, articleId, version);
 
 				if (Validator.isNotNull(curArticle.getStructureId())) {
 					JournalStructure structure =
 						JournalStructureServiceUtil.getStructure(
-							companyId, structureId);
+							companyId, groupId, structureId);
 
 					content = JournalUtil.mergeLocaleContent(
 						curArticle.getContent(), content, structure.getXsd());
@@ -386,7 +393,7 @@ public class EditArticleAction extends PortletAction {
 			// Update article
 
 			article = JournalArticleServiceUtil.updateArticle(
-				companyId, articleId, version, incrementVersion, title,
+				companyId, groupId, articleId, version, incrementVersion, title,
 				description, content, type, structureId, templateId,
 				displayDateMonth, displayDateDay, displayDateYear,
 				displayDateHour, displayDateMinute, expirationDateMonth,
@@ -398,8 +405,9 @@ public class EditArticleAction extends PortletAction {
 
 		if (approve) {
 			article = JournalArticleServiceUtil.approveArticle(
-				article.getArticleId(), article.getVersion(), layout.getPlid(),
-				articleURL, req.getPreferences());
+				article.getGroupId(), article.getArticleId(),
+				article.getVersion(), layout.getPlid(), articleURL,
+				req.getPreferences());
 		}
 
 		// Recent articles
@@ -434,7 +442,7 @@ public class EditArticleAction extends PortletAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			portletResource, layout.getLayoutId(), layout.getOwnerId(),
-			layout.getCompanyId(), articleId);
+			layout.getCompanyId(), layout.getGroupId(), articleId);
 	}
 
 }

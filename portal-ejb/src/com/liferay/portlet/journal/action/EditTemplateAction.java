@@ -151,13 +151,14 @@ public class EditTemplateAction extends PortletAction {
 
 	protected void deleteTemplates(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String[] deleteTemplateIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteTemplateIds"));
 
 		for (int i = 0; i < deleteTemplateIds.length; i++) {
 			JournalTemplateServiceUtil.deleteTemplate(
-				companyId, deleteTemplateIds[i]);
+				companyId, groupId, deleteTemplateIds[i]);
 
 			JournalUtil.removeRecentTemplate(req, deleteTemplateIds[i]);
 		}
@@ -170,6 +171,8 @@ public class EditTemplateAction extends PortletAction {
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
 		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
+
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String templateId = ParamUtil.getString(uploadReq, "templateId");
 		boolean autoTemplateId = ParamUtil.getBoolean(
@@ -217,8 +220,8 @@ public class EditTemplateAction extends PortletAction {
 			// Update template
 
 			template = JournalTemplateServiceUtil.updateTemplate(
-				templateId, structureId, name, description, xsl, formatXsl,
-				langType, smallImage, smallImageURL, smallFile);
+				groupId, templateId, structureId, name, description, xsl,
+				formatXsl, langType, smallImage, smallImageURL, smallFile);
 		}
 
 		// Recent templates

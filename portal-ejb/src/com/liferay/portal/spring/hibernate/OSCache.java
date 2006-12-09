@@ -106,7 +106,9 @@ public class OSCache implements Cache {
 	}
 
 	public void put(Object key, Object value) throws CacheException {
-		_cache.putInCache(_encodeKey(key), value, _regionGroups);
+		if (CacheRegistry.isActive()) {
+			_cache.putInCache(_encodeKey(key), value, _regionGroups);
+		}
 	}
 
 	public Object read(Object key) throws CacheException {
@@ -125,9 +127,11 @@ public class OSCache implements Cache {
 	}
 
 	public void update(Object key, Object value) throws CacheException {
-		_cache.flushEntry(_encodeKey(key));
+		if (CacheRegistry.isActive()) {
+			_cache.flushEntry(_encodeKey(key));
 
-		put(key, value);
+			put(key, value);
+		}
 	}
 
 	private String _encodeKey(Object key) {

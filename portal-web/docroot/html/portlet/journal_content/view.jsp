@@ -45,6 +45,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 			<div id="<portlet:namespace />content<%= i %>">
 				<%= content[i] %>
 			</div>
+
 		<%
 		}
 		%>
@@ -151,7 +152,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 
 	for (int i = 0; i < articleIds.length; i++) {
 		try {
-			article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[i]);
+			article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[i]);
 	%>
 
 			<span id="<portlet:namespace />editArticle<%= i %>" >

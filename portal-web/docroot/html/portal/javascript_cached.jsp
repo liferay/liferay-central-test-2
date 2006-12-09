@@ -29,7 +29,7 @@ response.setContentType(Constants.TEXT_JAVASCRIPT);
 %>
 
 function submitFormAlert(countdown) {
-	var msg = "<%= UnicodeLanguageUtil.get(pageContext, "this-form-has-already-been-submitted-try-again") %>";
+	var msg = "<%= UnicodeLanguageUtil.get(pageContext, "this-form-has-already-been-submitted") %>";
 
 	alert(msg.replace("{0}", countdown));
 }

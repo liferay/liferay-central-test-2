@@ -245,7 +245,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String oldMessageId = (String)array[2];
 				String newMessageId = (String)array[3];
 
-				_log.debug(
+				_log.info(
 					"Upgrading message " +
 						new MBMessagePK(topicId, oldMessageId));
 
@@ -267,7 +267,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String newMessageId = (String)array[3];
 				List files = (List)array[4];
 
-				_log.debug(
+				_log.info(
 					"Upgrading message " +
 						new MBMessagePK(topicId, oldMessageId));
 
@@ -368,7 +368,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String description = rs.getString("description");
 				Timestamp lastPostDate = rs.getTimestamp("lastPostDate");
 
-				_log.debug("Upgrading topic " + topicId);
+				_log.info("Upgrading topic " + topicId);
 
 				MBCategory category = null;
 

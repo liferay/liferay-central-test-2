@@ -59,30 +59,33 @@ public class JournalStructureServiceUtil {
 	}
 
 	public static void deleteStructure(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String structureId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
+		journalStructureService.deleteStructure(companyId, groupId, structureId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
+		java.lang.String companyId, java.lang.String groupId,
 		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-		journalStructureService.deleteStructure(companyId, structureId);
-	}
 
-	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, java.lang.String structureId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
-
-		return journalStructureService.getStructure(companyId, structureId);
+		return journalStructureService.getStructure(companyId, groupId,
+			structureId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalStructureService journalStructureService = JournalStructureServiceFactory.getService();
 
-		return journalStructureService.updateStructure(structureId, name,
-			description, xsd);
+		return journalStructureService.updateStructure(groupId, structureId,
+			name, description, xsd);
 	}
 }

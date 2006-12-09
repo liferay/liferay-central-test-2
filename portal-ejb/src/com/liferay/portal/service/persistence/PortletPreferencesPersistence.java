@@ -181,6 +181,183 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
+	public List findByPortletId(String portletId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByPortletId(String portletId, int begin, int end)
+		throws SystemException {
+		return findByPortletId(portletId, begin, end, null);
+	}
+
+	public List findByPortletId(String portletId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public PortletPreferences findByPortletId_First(String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		List list = findByPortletId(portletId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No PortletPreferences exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "portletId=";
+			msg += portletId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchPortletPreferencesException(msg);
+		}
+		else {
+			return (PortletPreferences)list.get(0);
+		}
+	}
+
+	public PortletPreferences findByPortletId_Last(String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		int count = countByPortletId(portletId);
+		List list = findByPortletId(portletId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No PortletPreferences exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "portletId=";
+			msg += portletId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchPortletPreferencesException(msg);
+		}
+		else {
+			return (PortletPreferences)list.get(0);
+		}
+	}
+
+	public PortletPreferences[] findByPortletId_PrevAndNext(
+		PortletPreferencesPK portletPreferencesPK, String portletId,
+		OrderByComparator obc)
+		throws NoSuchPortletPreferencesException, SystemException {
+		PortletPreferences portletPreferences = findByPrimaryKey(portletPreferencesPK);
+		int count = countByPortletId(portletId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					portletPreferences);
+			PortletPreferences[] array = new PortletPreferencesImpl[3];
+			array[0] = (PortletPreferences)objArray[0];
+			array[1] = (PortletPreferences)objArray[1];
+			array[2] = (PortletPreferences)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByLayoutId(String layoutId) throws SystemException {
 		Session session = null;
 
@@ -793,6 +970,15 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByPortletId(String portletId) throws SystemException {
+		Iterator itr = findByPortletId(portletId).iterator();
+
+		while (itr.hasNext()) {
+			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
+			remove(portletPreferences);
+		}
+	}
+
 	public void removeByLayoutId(String layoutId) throws SystemException {
 		Iterator itr = findByLayoutId(layoutId).iterator();
 
@@ -818,6 +1004,55 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		while (itr.hasNext()) {
 			PortletPreferences portletPreferences = (PortletPreferences)itr.next();
 			remove(portletPreferences);
+		}
+	}
+
+	public int countByPortletId(String portletId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portal.model.PortletPreferences WHERE ");
+
+			if (portletId == null) {
+				query.append("portletId IS NULL");
+			}
+			else {
+				query.append("portletId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (portletId != null) {
+				q.setString(queryPos++, portletId);
+			}
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

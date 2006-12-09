@@ -101,7 +101,7 @@
 	</category>
 
 	<category name="com.liferay.portal.events.StartupAction">
-		<priority value="ERROR" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.kernel.bean.BeanLocatorUtil">
@@ -249,7 +249,7 @@
 	</category>
 
 	<category name="com.liferay.portal.upgrade">
-		<priority value="DEBUG" />
+		<priority value="INFO" />
 	</category>
 
 	<category name="com.liferay.portal.util">
@@ -409,7 +409,7 @@
 	</category>
 
 	<category name="org.hibernate">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="org.jgroups">

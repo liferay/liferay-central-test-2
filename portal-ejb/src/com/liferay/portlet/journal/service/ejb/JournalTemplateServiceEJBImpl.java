@@ -76,37 +76,38 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	}
 
 	public void deleteTemplate(java.lang.String companyId,
-		java.lang.String templateId)
+		java.lang.String groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		JournalTemplateServiceFactory.getTxImpl().deleteTemplate(companyId,
-			templateId);
+			groupId, templateId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String templateId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return JournalTemplateServiceFactory.getTxImpl().getTemplate(companyId,
-			templateId);
+			groupId, templateId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String templateId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile)
+		java.lang.String groupId, java.lang.String templateId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return JournalTemplateServiceFactory.getTxImpl().updateTemplate(templateId,
-			structureId, name, description, xsl, formatXsl, langType,
-			smallImage, smallImageURL, smallFile);
+		return JournalTemplateServiceFactory.getTxImpl().updateTemplate(groupId,
+			templateId, structureId, name, description, xsl, formatXsl,
+			langType, smallImage, smallImageURL, smallFile);
 	}
 
 	public void ejbCreate() throws CreateException {

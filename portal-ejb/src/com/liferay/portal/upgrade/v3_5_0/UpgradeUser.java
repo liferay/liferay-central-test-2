@@ -69,7 +69,7 @@ public class UpgradeUser extends UpgradeProcess {
 			while (rs.next()) {
 				String userId = rs.getString("userId");
 
-				_log.debug("Upgrading user " + userId);
+				_log.info("Upgrading user " + userId);
 
 				ImageLocalServiceUtil.deleteImages(userId + ".");
 			}

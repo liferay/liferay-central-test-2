@@ -47,18 +47,20 @@ public interface JournalStructureService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void deleteStructure(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, java.lang.String structureId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

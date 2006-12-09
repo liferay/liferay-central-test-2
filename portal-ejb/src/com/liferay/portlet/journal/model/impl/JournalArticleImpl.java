@@ -63,7 +63,7 @@ public class JournalArticleImpl
 
 	public JournalArticlePK getResourcePK() {
 		return new JournalArticlePK(
-			getCompanyId(), getArticleId(), DEFAULT_VERSION);
+			getCompanyId(), getGroupId(), getArticleId(), DEFAULT_VERSION);
 	}
 
 	public String getContentByLocale(String languageId){

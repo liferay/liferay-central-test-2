@@ -109,8 +109,8 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle approveArticle(
-			String articleId, double version, String plid, String articleURL,
-			PortletPreferences prefs)
+			String groupId, String articleId, double version, String plid,
+			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -120,66 +120,71 @@ public class JournalArticleServiceImpl
 			ActionKeys.APPROVE_ARTICLE);
 
 		return JournalArticleLocalServiceUtil.approveArticle(
-			user.getUserId(), articleId, version, articleURL, prefs);
+			user.getUserId(), groupId, articleId, version, articleURL, prefs);
 	}
 
 	public JournalArticle getArticle(
-			String companyId, String articleId, double version)
+			String companyId, String groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.VIEW);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.VIEW);
 
 		return JournalArticleLocalServiceUtil.getArticle(
-			companyId, articleId, version);
+			companyId, groupId, articleId, version);
 	}
 
 	public String getArticleContent(
-			String companyId, String articleId, String languageId,
-			ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.VIEW);
-
-		return JournalArticleLocalServiceUtil.getArticleContent(
-			companyId, articleId, languageId, themeDisplay);
-	}
-
-	public String getArticleContent(
-			String companyId, String articleId, double version,
+			String companyId, String groupId, String articleId,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.VIEW);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.VIEW);
 
 		return JournalArticleLocalServiceUtil.getArticleContent(
-			companyId, articleId, version, languageId, themeDisplay);
+			companyId, groupId, articleId, languageId, themeDisplay);
+	}
+
+	public String getArticleContent(
+			String companyId, String groupId, String articleId, double version,
+			String languageId, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		JournalArticlePermission.check(
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.VIEW);
+
+		return JournalArticleLocalServiceUtil.getArticleContent(
+			companyId, groupId, articleId, version, languageId, themeDisplay);
 	}
 
 	public void deleteArticle(
-			String companyId, String articleId, double version,
+			String companyId, String groupId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.DELETE);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.DELETE);
 
 		JournalArticleLocalServiceUtil.deleteArticle(
-			companyId, articleId, version, articleURL, prefs);
+			companyId, groupId, articleId, version, articleURL, prefs);
 	}
 
 	public void expireArticle(
-			String companyId, String articleId, double version,
+			String companyId, String groupId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.EXPIRE);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.EXPIRE);
 
 		JournalArticleLocalServiceUtil.expireArticle(
-			companyId, articleId, version, articleURL, prefs);
+			companyId, groupId, articleId, version, articleURL, prefs);
 	}
 
 	public void removeArticleLocale(String companyId, String languageId)
@@ -191,25 +196,26 @@ public class JournalArticleServiceImpl
 			JournalArticle article = (JournalArticle)itr.next();
 
 			removeArticleLocale(
-				companyId, article.getArticleId(), article.getVersion(),
-				languageId);
+				companyId, article.getGroupId(), article.getArticleId(),
+				article.getVersion(), languageId);
 		}
 	}
 
 	public JournalArticle removeArticleLocale(
-			String companyId, String articleId, double version,
+			String companyId, String groupId, String articleId, double version,
 			String languageId)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.UPDATE);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.UPDATE);
 
 		return JournalArticleLocalServiceUtil.removeArticleLocale(
-			companyId, articleId, version, languageId);
+			companyId, groupId, articleId, version, languageId);
 	}
 
 	public JournalArticle updateArticle(
-			String companyId, String articleId, double version,
+			String companyId, String groupId, String articleId, double version,
 			boolean incrementVersion, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
@@ -223,10 +229,11 @@ public class JournalArticleServiceImpl
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
-			getPermissionChecker(), companyId, articleId, ActionKeys.UPDATE);
+			getPermissionChecker(), companyId, groupId, articleId,
+			ActionKeys.UPDATE);
 
 		return JournalArticleLocalServiceUtil.updateArticle(
-			getUserId(), articleId, version, incrementVersion, title,
+			getUserId(), groupId, articleId, version, incrementVersion, title,
 			description, content, type, structureId, templateId,
 			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
 			displayDateMinute, expirationDateMonth, expirationDateDay,

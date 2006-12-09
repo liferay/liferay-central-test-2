@@ -103,9 +103,11 @@ public class PropertiesTransformerListener extends TransformerListener {
 			newTokens.put("template_id", _GLOBAL_PROPERTIES);
 
 			String companyId = (String)tokens.get("company_id");
+            String groupId = (String)tokens.get("group_id");
 
 			String script = JournalUtil.getTemplateScript(
-				companyId, _GLOBAL_PROPERTIES, newTokens, getLanguageId());
+				companyId, groupId, _GLOBAL_PROPERTIES, newTokens,
+				getLanguageId());
 
 			PropertiesUtil.load(props, script);
 		}

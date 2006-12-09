@@ -73,38 +73,43 @@ public class JournalStructureServiceImpl
 			xsd, communityPermissions, guestPermissions);
 	}
 
-	public void deleteStructure(String companyId, String structureId)
+	public void deleteStructure(
+			String companyId, String groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
-			getPermissionChecker(), companyId, structureId, ActionKeys.DELETE);
+			getPermissionChecker(), companyId, groupId, structureId,
+			ActionKeys.DELETE);
 
 		JournalStructureLocalServiceUtil.deleteStructure(
-			companyId, structureId);
+			companyId, groupId, structureId);
 	}
 
-	public JournalStructure getStructure(String companyId, String structureId)
+	public JournalStructure getStructure(
+			String companyId, String groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructurePermission.check(
-			getPermissionChecker(), companyId, structureId, ActionKeys.VIEW);
+			getPermissionChecker(), companyId, groupId, structureId,
+			ActionKeys.VIEW);
 
 		return JournalStructureLocalServiceUtil.getStructure(
-			companyId, structureId);
+			companyId, groupId, structureId);
 	}
 
 	public JournalStructure updateStructure(
-			String structureId, String name, String description, String xsd)
+			String groupId, String structureId, String name, String description,
+			String xsd)
 		throws PortalException, SystemException {
 
 		User user = getUser();
 
 		JournalStructurePermission.check(
-			getPermissionChecker(), user.getCompanyId(), structureId,
+			getPermissionChecker(), user.getCompanyId(), groupId, structureId,
 			ActionKeys.UPDATE);
 
 		return JournalStructureLocalServiceUtil.updateStructure(
-			user.getCompanyId(), structureId, name, description, xsd);
+			user.getCompanyId(), groupId, structureId, name, description, xsd);
 	}
 
 }

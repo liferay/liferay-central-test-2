@@ -122,7 +122,7 @@ public class UpgradeUser extends UpgradeProcess {
 				String organizationId = null;
 				String locationId = null;
 
-				_log.debug("Upgrading user " + userId);
+				_log.info("Upgrading user " + userId);
 
 				User user = UserLocalServiceUtil.getUserById(userId);
 

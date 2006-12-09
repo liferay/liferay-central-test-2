@@ -45,11 +45,11 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STRUCTUREID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.structureId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.groupId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_STRUCTUREID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.structureId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure.userId"),
@@ -73,11 +73,12 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	}
 
 	public JournalStructurePK getPrimaryKey() {
-		return new JournalStructurePK(_companyId, _structureId);
+		return new JournalStructurePK(_companyId, _groupId, _structureId);
 	}
 
 	public void setPrimaryKey(JournalStructurePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setStructureId(pk.structureId);
 	}
 
@@ -98,23 +99,6 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getStructureId() {
-		return GetterUtil.getString(_structureId);
-	}
-
-	public void setStructureId(String structureId) {
-		if (((structureId == null) && (_structureId != null)) ||
-				((structureId != null) && (_structureId == null)) ||
-				((structureId != null) && (_structureId != null) &&
-				!structureId.equals(_structureId))) {
-			if (!XSS_ALLOW_STRUCTUREID) {
-				structureId = XSSUtil.strip(structureId);
-			}
-
-			_structureId = structureId;
-		}
-	}
-
 	public String getGroupId() {
 		return GetterUtil.getString(_groupId);
 	}
@@ -129,6 +113,23 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 			}
 
 			_groupId = groupId;
+		}
+	}
+
+	public String getStructureId() {
+		return GetterUtil.getString(_structureId);
+	}
+
+	public void setStructureId(String structureId) {
+		if (((structureId == null) && (_structureId != null)) ||
+				((structureId != null) && (_structureId == null)) ||
+				((structureId != null) && (_structureId != null) &&
+				!structureId.equals(_structureId))) {
+			if (!XSS_ALLOW_STRUCTUREID) {
+				structureId = XSSUtil.strip(structureId);
+			}
+
+			_structureId = structureId;
 		}
 	}
 
@@ -244,8 +245,8 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	public Object clone() {
 		JournalStructureImpl clone = new JournalStructureImpl();
 		clone.setCompanyId(getCompanyId());
-		clone.setStructureId(getStructureId());
 		clone.setGroupId(getGroupId());
+		clone.setStructureId(getStructureId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
@@ -302,8 +303,8 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	}
 
 	private String _companyId;
-	private String _structureId;
 	private String _groupId;
+	private String _structureId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

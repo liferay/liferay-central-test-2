@@ -34,13 +34,16 @@ import java.io.Serializable;
  */
 public class JournalStructurePK implements Comparable, Serializable {
 	public String companyId;
+	public String groupId;
 	public String structureId;
 
 	public JournalStructurePK() {
 	}
 
-	public JournalStructurePK(String companyId, String structureId) {
+	public JournalStructurePK(String companyId, String groupId,
+		String structureId) {
 		this.companyId = companyId;
+		this.groupId = groupId;
 		this.structureId = structureId;
 	}
 
@@ -50,6 +53,14 @@ public class JournalStructurePK implements Comparable, Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getStructureId() {
@@ -68,6 +79,12 @@ public class JournalStructurePK implements Comparable, Serializable {
 		JournalStructurePK pk = (JournalStructurePK)obj;
 		int value = 0;
 		value = companyId.compareTo(pk.companyId);
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = groupId.compareTo(pk.groupId);
 
 		if (value != 0) {
 			return value;
@@ -96,7 +113,7 @@ public class JournalStructurePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) &&
+		if ((companyId.equals(pk.companyId)) && (groupId.equals(pk.groupId)) &&
 				(structureId.equals(pk.structureId))) {
 			return true;
 		}
@@ -106,7 +123,7 @@ public class JournalStructurePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + structureId).hashCode();
+		return (companyId + groupId + structureId).hashCode();
 	}
 
 	public String toString() {
@@ -115,6 +132,11 @@ public class JournalStructurePK implements Comparable, Serializable {
 		sb.append("companyId");
 		sb.append(StringPool.EQUAL);
 		sb.append(companyId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("groupId");
+		sb.append(StringPool.EQUAL);
+		sb.append(groupId);
 		sb.append(StringPool.COMMA);
 		sb.append(StringPool.SPACE);
 		sb.append("structureId");

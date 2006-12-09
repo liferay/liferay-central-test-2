@@ -76,7 +76,7 @@ public class UpgradeCalendar extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading event " + eventId);
+				_log.info("Upgrading event " + eventId);
 
 				CalEventLocalServiceUtil.addEventResources(
 					eventId, addCommunityPermissions, addGuestPermissions);

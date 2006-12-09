@@ -337,7 +337,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		// Portlet preferences
 
-		itr = PortletPreferencesLocalServiceUtil.getPortletPreferences(
+		itr = PortletPreferencesLocalServiceUtil.getPortletPreferencesByOwnerId(
 			ownerId).iterator();
 
 		while (itr.hasNext()) {

@@ -79,12 +79,12 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String groupId, java.lang.String structureId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalServiceFactory.getTxImpl().addStructureResources(companyId,
-			structureId, addCommunityPermissions, addGuestPermissions);
+			groupId, structureId, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addStructureResources(
@@ -97,12 +97,13 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalServiceFactory.getTxImpl().addStructureResources(companyId,
-			structureId, communityPermissions, guestPermissions);
+			groupId, structureId, communityPermissions, guestPermissions);
 	}
 
 	public void addStructureResources(
@@ -116,19 +117,19 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public void checkNewLine(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalServiceFactory.getTxImpl().checkNewLine(companyId,
-			structureId);
+			groupId, structureId);
 	}
 
 	public void deleteStructure(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalServiceFactory.getTxImpl().deleteStructure(companyId,
-			structureId);
+			groupId, structureId);
 	}
 
 	public void deleteStructure(
@@ -139,11 +140,12 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, java.lang.String structureId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().getStructure(companyId,
-			structureId);
+			groupId, structureId);
 	}
 
 	public java.util.List getStructures(java.lang.String groupId)
@@ -183,13 +185,13 @@ public class JournalStructureLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String companyId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().updateStructure(companyId,
-			structureId, name, description, xsd);
+			groupId, structureId, name, description, xsd);
 	}
 
 	public void ejbCreate() throws CreateException {

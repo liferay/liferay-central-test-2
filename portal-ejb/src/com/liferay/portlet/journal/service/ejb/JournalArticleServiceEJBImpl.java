@@ -99,39 +99,30 @@ public class JournalArticleServiceEJBImpl implements JournalArticleService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		java.lang.String articleId, double version, java.lang.String plid,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String groupId, java.lang.String articleId, double version,
+		java.lang.String plid, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return JournalArticleServiceFactory.getTxImpl().approveArticle(articleId,
-			version, plid, articleURL, prefs);
+		return JournalArticleServiceFactory.getTxImpl().approveArticle(groupId,
+			articleId, version, plid, articleURL, prefs);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, java.lang.String articleId, double version)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return JournalArticleServiceFactory.getTxImpl().getArticle(companyId,
-			articleId, version);
+			groupId, articleId, version);
 	}
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String articleId, java.lang.String languageId,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return JournalArticleServiceFactory.getTxImpl().getArticleContent(companyId,
-			articleId, languageId, themeDisplay);
-	}
-
-	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String articleId, double version,
+		java.lang.String groupId, java.lang.String articleId,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
@@ -139,27 +130,39 @@ public class JournalArticleServiceEJBImpl implements JournalArticleService,
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return JournalArticleServiceFactory.getTxImpl().getArticleContent(companyId,
-			articleId, version, languageId, themeDisplay);
+			groupId, articleId, languageId, themeDisplay);
+	}
+
+	public java.lang.String getArticleContent(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String articleId, double version,
+		java.lang.String languageId,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return JournalArticleServiceFactory.getTxImpl().getArticleContent(companyId,
+			groupId, articleId, version, languageId, themeDisplay);
 	}
 
 	public void deleteArticle(java.lang.String companyId,
-		java.lang.String articleId, double version,
+		java.lang.String groupId, java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		JournalArticleServiceFactory.getTxImpl().deleteArticle(companyId,
-			articleId, version, articleURL, prefs);
+			groupId, articleId, version, articleURL, prefs);
 	}
 
 	public void expireArticle(java.lang.String companyId,
-		java.lang.String articleId, double version,
+		java.lang.String groupId, java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		JournalArticleServiceFactory.getTxImpl().expireArticle(companyId,
-			articleId, version, articleURL, prefs);
+			groupId, articleId, version, articleURL, prefs);
 	}
 
 	public void removeArticleLocale(java.lang.String companyId,
@@ -172,41 +175,42 @@ public class JournalArticleServiceEJBImpl implements JournalArticleService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		java.lang.String companyId, java.lang.String articleId, double version,
-		java.lang.String languageId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return JournalArticleServiceFactory.getTxImpl().removeArticleLocale(companyId,
-			articleId, version, languageId);
+			groupId, articleId, version, languageId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String companyId, java.lang.String articleId, double version,
-		boolean incrementVersion, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, int displayDateMonth, int displayDateDay,
-		int displayDateYear, int displayDateHour, int displayDateMinute,
-		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
-		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
-		int reviewDateHour, int reviewDateMinute, boolean neverReview,
-		java.util.Map images, java.lang.String articleURL,
-		javax.portlet.PortletPreferences prefs)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, boolean incrementVersion,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
+		int reviewDateDay, int reviewDateYear, int reviewDateHour,
+		int reviewDateMinute, boolean neverReview, java.util.Map images,
+		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return JournalArticleServiceFactory.getTxImpl().updateArticle(companyId,
-			articleId, version, incrementVersion, title, description, content,
-			type, structureId, templateId, displayDateMonth, displayDateDay,
-			displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, images, articleURL, prefs);
+			groupId, articleId, version, incrementVersion, title, description,
+			content, type, structureId, templateId, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
+			prefs);
 	}
 
 	public void ejbCreate() throws CreateException {

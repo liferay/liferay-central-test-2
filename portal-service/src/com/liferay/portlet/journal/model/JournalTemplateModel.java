@@ -43,13 +43,13 @@ public interface JournalTemplateModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getTemplateId();
-
-	public void setTemplateId(String templateId);
-
 	public String getGroupId();
 
 	public void setGroupId(String groupId);
+
+	public String getTemplateId();
+
+	public void setTemplateId(String templateId);
 
 	public String getUserId();
 

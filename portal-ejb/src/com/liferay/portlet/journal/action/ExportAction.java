@@ -255,20 +255,20 @@ public class ExportAction extends Action {
 
 			if (article.isApproved() &&
 				JournalArticleLocalServiceUtil.isLatestVersion(
-					article.getCompanyId(), article.getArticleId(),
-					article.getVersion())) {
+					article.getCompanyId(), article.getGroupId(),
+					article.getArticleId(), article.getVersion())) {
 
 				sb.append("insert into JournalArticle (");
-				sb.append("companyId, articleId, version, groupId, userId, ");
+				sb.append("companyId, groupId, articleId, version, userId, ");
 				sb.append("userName, createDate, modifiedDate, title, ");
 				sb.append("description, content, type_, structureId, ");
 				sb.append("templateId, displayDate, approved, ");
 				sb.append("approvedByUserId, approvedByUserName, expired");
 				sb.append(") values (");
 				addColumn(sb, article.getCompanyId());
+				addColumn(sb, article.getGroupId());
 				addColumn(sb, article.getArticleId());
 				addColumn(sb, JournalArticleImpl.DEFAULT_VERSION);
-				addColumn(sb, article.getGroupId());
 				//addColumn(sb, article.getUserId());
 				//addColumn(sb, article.getUserName());
 				addColumn(sb, "liferay.com.1");
@@ -304,13 +304,15 @@ public class ExportAction extends Action {
 				(JournalContentSearch)itr.next();
 
 			sb.append("insert into JournalContentSearch (");
-			sb.append("portletId, layoutId, ownerId, articleId, companyId");
+			sb.append("portletId, layoutId, ownerId, articleId, companyId, ");
+			sb.append("groupId");
 			sb.append(") values (");
 			addColumn(sb, contentSearch.getPortletId());
 			addColumn(sb, contentSearch.getLayoutId());
 			addColumn(sb, contentSearch.getOwnerId());
 			addColumn(sb, contentSearch.getArticleId());
 			addColumn(sb, contentSearch.getCompanyId());
+			addColumn(sb, contentSearch.getGroupId());
 			removeTrailingComma(sb);
 			sb.append(");\n");
 		}

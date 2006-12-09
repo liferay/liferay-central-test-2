@@ -40,8 +40,8 @@ public class JournalStructureSoap implements Serializable {
 	public static JournalStructureSoap toSoapModel(JournalStructure model) {
 		JournalStructureSoap soapModel = new JournalStructureSoap();
 		soapModel.setCompanyId(model.getCompanyId());
-		soapModel.setStructureId(model.getStructureId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setStructureId(model.getStructureId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -68,11 +68,12 @@ public class JournalStructureSoap implements Serializable {
 	}
 
 	public JournalStructurePK getPrimaryKey() {
-		return new JournalStructurePK(_companyId, _structureId);
+		return new JournalStructurePK(_companyId, _groupId, _structureId);
 	}
 
 	public void setPrimaryKey(JournalStructurePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setStructureId(pk.structureId);
 	}
 
@@ -84,20 +85,20 @@ public class JournalStructureSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getStructureId() {
-		return _structureId;
-	}
-
-	public void setStructureId(String structureId) {
-		_structureId = structureId;
-	}
-
 	public String getGroupId() {
 		return _groupId;
 	}
 
 	public void setGroupId(String groupId) {
 		_groupId = groupId;
+	}
+
+	public String getStructureId() {
+		return _structureId;
+	}
+
+	public void setStructureId(String structureId) {
+		_structureId = structureId;
 	}
 
 	public String getUserId() {
@@ -157,8 +158,8 @@ public class JournalStructureSoap implements Serializable {
 	}
 
 	private String _companyId;
-	private String _structureId;
 	private String _groupId;
+	private String _structureId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

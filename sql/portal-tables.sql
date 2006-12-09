@@ -341,9 +341,9 @@ create table Image (
 
 create table JournalArticle (
 	companyId VARCHAR(75) not null,
+	groupId VARCHAR(75) not null,
 	articleId VARCHAR(75) not null,
 	version DOUBLE not null,
-	groupId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -362,7 +362,7 @@ create table JournalArticle (
 	expired BOOLEAN,
 	expirationDate DATE null,
 	reviewDate DATE null,
-	primary key (companyId, articleId, version)
+	primary key (companyId, groupId, articleId, version)
 );
 
 create table JournalContentSearch (
@@ -371,13 +371,14 @@ create table JournalContentSearch (
 	ownerId VARCHAR(75) not null,
 	articleId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
+	groupId VARCHAR(75) not null,
 	primary key (portletId, layoutId, ownerId, articleId)
 );
 
 create table JournalStructure (
 	companyId VARCHAR(75) not null,
-	structureId VARCHAR(75) not null,
 	groupId VARCHAR(75) not null,
+	structureId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -385,13 +386,13 @@ create table JournalStructure (
 	name VARCHAR(75) null,
 	description STRING null,
 	xsd TEXT null,
-	primary key (companyId, structureId)
+	primary key (companyId, groupId, structureId)
 );
 
 create table JournalTemplate (
 	companyId VARCHAR(75) not null,
-	templateId VARCHAR(75) not null,
 	groupId VARCHAR(75) not null,
+	templateId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -403,7 +404,7 @@ create table JournalTemplate (
 	langType VARCHAR(75) null,
 	smallImage BOOLEAN,
 	smallImageURL VARCHAR(75) null,
-	primary key (companyId, templateId)
+	primary key (companyId, groupId, templateId)
 );
 
 create table Layout (

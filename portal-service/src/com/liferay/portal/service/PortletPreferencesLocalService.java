@@ -35,18 +35,29 @@ public interface PortletPreferencesLocalService {
 	public void deletePortletPreferences(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException;
 
+	public void deletePortletPreferences(
+		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List getPortletPreferences()
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences getPortletPreferences(
 		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPortletPreferences(java.lang.String ownerId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List getPortletPreferencesByOwnerId(
+		java.lang.String ownerId) throws com.liferay.portal.SystemException;
+
+	public java.util.List getPortletPreferencesByPortletId(
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
 
 	public javax.portlet.PortletPreferences getPreferences(
 		java.lang.String companyId,

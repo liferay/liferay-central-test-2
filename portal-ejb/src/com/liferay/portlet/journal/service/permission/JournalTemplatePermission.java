@@ -39,10 +39,12 @@ public class JournalTemplatePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, String companyId,
-			String templateId, String actionId)
+			String groupId, String templateId, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, companyId, templateId, actionId)) {
+		if (!contains(
+				permissionChecker, companyId, groupId, templateId, actionId)) {
+
 			throw new PrincipalException();
 		}
 	}
@@ -59,11 +61,12 @@ public class JournalTemplatePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, String companyId,
-			String templateId, String actionId)
+			String groupId, String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalTemplate template =
-			JournalTemplateLocalServiceUtil.getTemplate(companyId, templateId);
+			JournalTemplateLocalServiceUtil.getTemplate(
+				companyId, groupId, templateId);
 
 		return contains(permissionChecker, template, actionId);
 	}

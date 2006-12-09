@@ -696,6 +696,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="PortletId" return-type="Collection">
+			<finder-column name="portletId" />
+		</finder>
 		<finder name="LayoutId" return-type="Collection">
 			<finder-column name="layoutId" />
 		</finder>

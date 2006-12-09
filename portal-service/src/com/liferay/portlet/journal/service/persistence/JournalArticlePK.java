@@ -34,14 +34,17 @@ import java.io.Serializable;
  */
 public class JournalArticlePK implements Comparable, Serializable {
 	public String companyId;
+	public String groupId;
 	public String articleId;
 	public double version;
 
 	public JournalArticlePK() {
 	}
 
-	public JournalArticlePK(String companyId, String articleId, double version) {
+	public JournalArticlePK(String companyId, String groupId, String articleId,
+		double version) {
 		this.companyId = companyId;
+		this.groupId = groupId;
 		this.articleId = articleId;
 		this.version = version;
 	}
@@ -52,6 +55,14 @@ public class JournalArticlePK implements Comparable, Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getArticleId() {
@@ -78,6 +89,12 @@ public class JournalArticlePK implements Comparable, Serializable {
 		JournalArticlePK pk = (JournalArticlePK)obj;
 		int value = 0;
 		value = companyId.compareTo(pk.companyId);
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = groupId.compareTo(pk.groupId);
 
 		if (value != 0) {
 			return value;
@@ -120,7 +137,7 @@ public class JournalArticlePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) &&
+		if ((companyId.equals(pk.companyId)) && (groupId.equals(pk.groupId)) &&
 				(articleId.equals(pk.articleId)) && (version == pk.version)) {
 			return true;
 		}
@@ -130,7 +147,7 @@ public class JournalArticlePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + articleId + version).hashCode();
+		return (companyId + groupId + articleId + version).hashCode();
 	}
 
 	public String toString() {
@@ -139,6 +156,11 @@ public class JournalArticlePK implements Comparable, Serializable {
 		sb.append("companyId");
 		sb.append(StringPool.EQUAL);
 		sb.append(companyId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("groupId");
+		sb.append(StringPool.EQUAL);
+		sb.append(groupId);
 		sb.append(StringPool.COMMA);
 		sb.append(StringPool.SPACE);
 		sb.append("articleId");

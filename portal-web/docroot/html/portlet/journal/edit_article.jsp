@@ -107,7 +107,7 @@ String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), portletGroupId, structureId);
 
 		structureName = structure.getName();
 	}
@@ -118,7 +118,7 @@ if (Validator.isNotNull(structureId)) {
 List templates = new ArrayList();
 
 if (structure != null) {
-	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(company.getCompanyId(), structureId);
+	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(company.getCompanyId(), portletGroupId, structureId);
 }
 
 String templateId = BeanParamUtil.getString(article, request, "templateId");
@@ -150,7 +150,7 @@ else {
 boolean disableIncrementVersion = false;
 
 if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION))) {
-	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(company.getCompanyId(), articleId, version));
+	boolean latestVersion = (article == null) || (article != null && JournalArticleLocalServiceUtil.isLatestVersion(company.getCompanyId(), themeDisplay.getPortletGroupId(), articleId, version));
 
 	if (!latestVersion) {
 		incrementVersion = true;
@@ -517,7 +517,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			<select name="<portlet:namespace />groupId">
 
 				<%
-				String groupId = ParamUtil.getString(request, "groupId");
+				String groupId = ParamUtil.getString(request, "groupId", portletGroupId);
 
 				for (int i = 0; i < communities.size(); i++) {
 					Group group = (Group)communities.get(i);

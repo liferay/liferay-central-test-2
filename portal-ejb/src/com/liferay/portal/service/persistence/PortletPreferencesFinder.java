@@ -20,46 +20,58 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.hibernate;
+package com.liferay.portal.service.persistence;
 
-import java.util.ArrayList;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.impl.PortletPreferencesImpl;
+import com.liferay.portal.spring.hibernate.CustomSQLUtil;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.util.dao.hibernate.QueryPos;
+
 import java.util.List;
 
-import org.hibernate.cache.Cache;
+import org.hibernate.SQLQuery;
+import org.hibernate.Session;
 
 /**
- * <a href="CacheRegistry.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletPreferencesFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class CacheRegistry {
+public class PortletPreferencesFinder {
 
-	public static boolean isActive() {
-		return _active;
-	}
+	public static String FIND_BY_PORTLETID =
+		PortletPreferencesFinder.class.getName() + ".findByPortletId";
 
-	public static void setActive(boolean active) {
-		_active = active;
+	public static List findByPortletId(String portletId)
+		throws SystemException {
 
-		if (!active) {
-			clear();
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_PORTLETID);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("PortletPreferences", PortletPreferencesImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(portletId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
 		}
 	}
-
-	public static void clear() {
-		for (int i = 0; i < _registry.size(); i++) {
-			Cache cache = (Cache)_registry.get(i);
-
-			cache.clear();
-		}
-	}
-
-	public static void register(Cache cache) {
-		_registry.add(cache);
-	}
-
-	private static boolean _active = true;
-	private static List _registry = new ArrayList();
 
 }

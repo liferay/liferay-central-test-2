@@ -52,6 +52,7 @@ public class ThreadHits extends HitsImpl {
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
+
 			String threadId = doc.get("threadId");
 
 			if (!threadIds.contains(threadId)) {

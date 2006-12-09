@@ -79,7 +79,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading entry " + entryId);
+				_log.info("Upgrading entry " + entryId);
 
 				ps = con.prepareStatement(_UPGRADE_ENTRY_2);
 

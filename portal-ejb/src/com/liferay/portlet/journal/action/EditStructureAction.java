@@ -144,13 +144,14 @@ public class EditStructureAction extends PortletAction {
 
 	protected void deleteStructures(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String[] deleteStructureIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteStructureIds"));
 
 		for (int i = 0; i < deleteStructureIds.length; i++) {
 			JournalStructureServiceUtil.deleteStructure(
-				companyId, deleteStructureIds[i]);
+				companyId, groupId, deleteStructureIds[i]);
 
 			JournalUtil.removeRecentStructure(req, deleteStructureIds[i]);
 		}
@@ -163,6 +164,8 @@ public class EditStructureAction extends PortletAction {
 
 		String structureId = ParamUtil.getString(req, "structureId");
 		boolean autoStructureId = ParamUtil.getBoolean(req, "autoStructureId");
+
+        String groupId = PortalUtil.getPortletGroupId(req);
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
@@ -188,7 +191,7 @@ public class EditStructureAction extends PortletAction {
 			// Update structure
 
 			structure = JournalStructureServiceUtil.updateStructure(
-				structureId, name, description, xsd);
+				groupId, structureId, name, description, xsd);
 		}
 
 		// Recent structures

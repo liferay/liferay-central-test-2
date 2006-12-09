@@ -77,12 +77,12 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String groupId, java.lang.String structureId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
-		journalStructureLocalService.addStructureResources(companyId,
+		journalStructureLocalService.addStructureResources(companyId, groupId,
 			structureId, addCommunityPermissions, addGuestPermissions);
 	}
 
@@ -97,12 +97,13 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
-		journalStructureLocalService.addStructureResources(companyId,
+		journalStructureLocalService.addStructureResources(companyId, groupId,
 			structureId, communityPermissions, guestPermissions);
 	}
 
@@ -118,19 +119,21 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static void checkNewLine(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
-		journalStructureLocalService.checkNewLine(companyId, structureId);
+		journalStructureLocalService.checkNewLine(companyId, groupId,
+			structureId);
 	}
 
 	public static void deleteStructure(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
-		journalStructureLocalService.deleteStructure(companyId, structureId);
+		journalStructureLocalService.deleteStructure(companyId, groupId,
+			structureId);
 	}
 
 	public static void deleteStructure(
@@ -142,12 +145,14 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, java.lang.String structureId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.getStructure(companyId, structureId);
+		return journalStructureLocalService.getStructure(companyId, groupId,
+			structureId);
 	}
 
 	public static java.util.List getStructures(java.lang.String groupId)
@@ -194,14 +199,14 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String companyId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.updateStructure(companyId,
+		return journalStructureLocalService.updateStructure(companyId, groupId,
 			structureId, name, description, xsd);
 	}
 }

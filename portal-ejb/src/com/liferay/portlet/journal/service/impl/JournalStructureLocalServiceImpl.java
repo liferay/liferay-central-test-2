@@ -123,7 +123,7 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		validate(
-			user.getCompanyId(), structureId, autoStructureId, name,
+			user.getCompanyId(), groupId, structureId, autoStructureId, name,
 			description, xsd);
 
 		if (autoStructureId) {
@@ -132,7 +132,7 @@ public class JournalStructureLocalServiceImpl
 		}
 
 		JournalStructurePK pk = new JournalStructurePK(
-			user.getCompanyId(), structureId);
+			user.getCompanyId(), groupId, structureId);
 
 		JournalStructure structure = JournalStructureUtil.create(pk);
 
@@ -166,12 +166,12 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			String companyId, String structureId,
+			String companyId, String groupId, String structureId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 
 		addStructureResources(
 			structure, addCommunityPermissions, addGuestPermissions);
@@ -190,12 +190,12 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public void addStructureResources(
-			String companyId, String structureId, String[] communityPermissions,
+			String companyId, String groupId, String structureId, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 
 		addStructureResources(
 			structure, communityPermissions, guestPermissions);
@@ -213,11 +213,11 @@ public class JournalStructureLocalServiceImpl
 			guestPermissions);
 	}
 
-	public void checkNewLine(String companyId, String structureId)
+	public void checkNewLine(String companyId, String groupId, String structureId)
 		throws PortalException, SystemException {
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 
 		String xsd = structure.getXsd();
 
@@ -233,13 +233,13 @@ public class JournalStructureLocalServiceImpl
 		}
 	}
 
-	public void deleteStructure(String companyId, String structureId)
+	public void deleteStructure(String companyId, String groupId, String structureId)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 
 		deleteStructure(structure);
 	}
@@ -247,14 +247,14 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructure(JournalStructure structure)
 		throws PortalException, SystemException {
 
-		if (JournalArticleUtil.countByC_S(
-				structure.getCompanyId(), structure.getStructureId()) > 0) {
+		if (JournalArticleUtil.countByC_G_S(
+				structure.getCompanyId(), structure.getGroupId(), structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
 		}
 
-		if (JournalTemplateUtil.countByC_S(
-				structure.getCompanyId(), structure.getStructureId()) > 0) {
+		if (JournalTemplateUtil.countByC_G_S(
+				structure.getCompanyId(), structure.getGroupId(), structure.getStructureId()) > 0) {
 
 			throw new RequiredStructureException();
 		}
@@ -271,13 +271,13 @@ public class JournalStructureLocalServiceImpl
 		JournalStructureUtil.remove(structure.getPrimaryKey());
 	}
 
-	public JournalStructure getStructure(String companyId, String structureId)
+	public JournalStructure getStructure(String companyId, String groupId, String structureId)
 		throws PortalException, SystemException {
 
 		structureId = structureId.trim().toUpperCase();
 
 		return JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 	}
 
 	public List getStructures(String groupId) throws SystemException {
@@ -315,7 +315,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public JournalStructure updateStructure(
-			String companyId, String structureId, String name,
+			String companyId, String groupId, String structureId, String name,
 			String description, String xsd)
 		throws PortalException, SystemException {
 
@@ -334,7 +334,7 @@ public class JournalStructureLocalServiceImpl
 		validate(name, description, xsd);
 
 		JournalStructure structure = JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, structureId));
+			new JournalStructurePK(companyId, groupId, structureId));
 
 		structure.setModifiedDate(new Date());
 		structure.setName(name);
@@ -347,7 +347,7 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String structureId, boolean autoStructureId,
+			String companyId, String groupId, String structureId, boolean autoStructureId,
 			String name, String description, String xsd)
 		throws PortalException, SystemException {
 
@@ -361,7 +361,7 @@ public class JournalStructureLocalServiceImpl
 
 			try {
 				JournalStructureUtil.findByPrimaryKey(
-					new JournalStructurePK(companyId, structureId));
+					new JournalStructurePK(companyId, groupId, structureId));
 
 				throw new DuplicateStructureIdException();
 			}

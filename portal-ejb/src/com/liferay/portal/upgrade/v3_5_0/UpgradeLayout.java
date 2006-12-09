@@ -28,7 +28,6 @@ import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.util.ClusterPool;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -143,8 +142,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				String type = LayoutImpl.TYPE_PORTLET;
 				int priority = 0;
 
-				_log.debug(
-					"Upgrading layout " + new LayoutPK(layoutId, userId));
+				_log.info("Upgrading layout " + new LayoutPK(layoutId, userId));
 
 				String companyId = null;
 
@@ -202,8 +200,6 @@ public class UpgradeLayout extends UpgradeProcess {
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
 		}
-
-		ClusterPool.clear();
 	}
 
 	private static final String _GET_COMPANY_ID_BY_GROUP_ID =

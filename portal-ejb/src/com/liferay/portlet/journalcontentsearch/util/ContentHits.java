@@ -53,10 +53,12 @@ public class ContentHits extends HitsImpl {
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
+
+			String groupId = (String)doc.get("groupId");
 			String articleId = doc.get("articleId");
 
 			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(
-					ownerId, articleId) > 0) {
+					ownerId, groupId, articleId) > 0) {
 
 				docs.add(hits.doc(i));
 				scores.add(new Float(hits.score(i)));

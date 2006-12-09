@@ -630,10 +630,10 @@
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalArticlePK">
 			<key-property name="companyId" />
+			<key-property name="groupId" />
 			<key-property name="articleId" />
 			<key-property name="version" />
 		</composite-id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
@@ -662,14 +662,15 @@
 			<key-property name="articleId" />
 		</composite-id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalStructureImpl" table="JournalStructure">
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalStructurePK">
 			<key-property name="companyId" />
+			<key-property name="groupId" />
 			<key-property name="structureId" />
 		</composite-id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
@@ -682,9 +683,9 @@
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portlet.journal.service.persistence.JournalTemplatePK">
 			<key-property name="companyId" />
+			<key-property name="groupId" />
 			<key-property name="templateId" />
 		</composite-id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />

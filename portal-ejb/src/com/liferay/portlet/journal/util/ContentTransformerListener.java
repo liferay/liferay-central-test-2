@@ -106,6 +106,7 @@ public class ContentTransformerListener extends TransformerListener {
 		Map tokens = getTokens();
 
 		String companyId = (String)tokens.get("company_id");
+        String groupId = (String)tokens.get("group_id");
 
 		Iterator itr = root.elements().iterator();
 
@@ -137,7 +138,7 @@ public class ContentTransformerListener extends TransformerListener {
 
 						JournalArticle article =
 							JournalArticleLocalServiceUtil.getArticle(
-								companyId, articleId);
+								companyId, groupId, articleId);
 
 						dynamicContent.setText(StringPool.BLANK);
 						dynamicContent.addCDATA(

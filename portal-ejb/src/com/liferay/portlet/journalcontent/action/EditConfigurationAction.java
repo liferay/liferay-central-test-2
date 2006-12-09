@@ -35,7 +35,6 @@ import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -77,6 +76,8 @@ public class EditConfigurationAction extends PortletAction {
 
 			String companyId = themeDisplay.getCompanyId();
 
+			String groupId = ParamUtil.getString(req, "groupId");
+
 			String languageId = LanguageUtil.getLanguageId(req);
 
 			List articleIdsList = new ArrayList();
@@ -91,7 +92,8 @@ public class EditConfigurationAction extends PortletAction {
 						req, name).toUpperCase();
 
 					String content = JournalContentUtil.getContent(
-						companyId, articleId, languageId, themeDisplay);
+						companyId, groupId, articleId, languageId,
+						themeDisplay);
 
 					if (Validator.isNull(content)) {
 						throw new NoSuchArticleException();
@@ -111,13 +113,12 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
+			prefs.setValue("group-id", groupId);
 			prefs.setValues("article-id", articleIds);
 
 			prefs.store();
 
 			updateContentSearch(req, portletResource, articleIds);
-
-			SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 
 			res.sendRedirect(ParamUtil.getString(req, "redirect"));
 		}
@@ -146,7 +147,7 @@ public class EditConfigurationAction extends PortletAction {
 
 		JournalContentSearchLocalServiceUtil.updateContentSearch(
 			portletResource, layout.getLayoutId(), layout.getOwnerId(),
-			layout.getCompanyId(), articleIds);
+			layout.getCompanyId(), layout.getGroupId(), articleIds);
 	}
 
 }

@@ -62,6 +62,7 @@ public class GetTemplateAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
+            String groupId = PortalUtil.getPortletGroupId(req);
 			String templateId = getTemplateId(req);
 
 			ThemeDisplay themeDisplay =
@@ -77,7 +78,7 @@ public class GetTemplateAction extends Action {
 
 			JournalTemplate template =
 				JournalTemplateLocalServiceUtil.getTemplate(
-					companyId, templateId);
+					companyId, groupId, templateId);
 
 			String script = JournalUtil.getTemplateScript(
 				template, tokens, languageId, transform);

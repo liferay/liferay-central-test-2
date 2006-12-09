@@ -91,12 +91,12 @@ public class JournalTemplateLocalServiceEJBImpl
 	}
 
 	public void addTemplateResources(java.lang.String companyId,
-		java.lang.String templateId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String groupId, java.lang.String templateId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalServiceFactory.getTxImpl().addTemplateResources(companyId,
-			templateId, addCommunityPermissions, addGuestPermissions);
+			groupId, templateId, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addTemplateResources(
@@ -109,12 +109,13 @@ public class JournalTemplateLocalServiceEJBImpl
 	}
 
 	public void addTemplateResources(java.lang.String companyId,
-		java.lang.String templateId, java.lang.String[] communityPermissions,
+		java.lang.String groupId, java.lang.String templateId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalServiceFactory.getTxImpl().addTemplateResources(companyId,
-			templateId, communityPermissions, guestPermissions);
+			groupId, templateId, communityPermissions, guestPermissions);
 	}
 
 	public void addTemplateResources(
@@ -128,19 +129,19 @@ public class JournalTemplateLocalServiceEJBImpl
 	}
 
 	public void checkNewLine(java.lang.String companyId,
-		java.lang.String templateId)
+		java.lang.String groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalServiceFactory.getTxImpl().checkNewLine(companyId,
-			templateId);
+			groupId, templateId);
 	}
 
 	public void deleteTemplate(java.lang.String companyId,
-		java.lang.String templateId)
+		java.lang.String groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalTemplateLocalServiceFactory.getTxImpl().deleteTemplate(companyId,
-			templateId);
+			groupId, templateId);
 	}
 
 	public void deleteTemplate(
@@ -151,33 +152,36 @@ public class JournalTemplateLocalServiceEJBImpl
 	}
 
 	public java.util.List getStructureTemplates(java.lang.String companyId,
-		java.lang.String structureId) throws com.liferay.portal.SystemException {
-		return JournalTemplateLocalServiceFactory.getTxImpl()
-												 .getStructureTemplates(companyId,
-			structureId);
-	}
-
-	public java.util.List getStructureTemplates(java.lang.String companyId,
-		java.lang.String structureId, int begin, int end)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl()
 												 .getStructureTemplates(companyId,
-			structureId, begin, end);
+			groupId, structureId);
+	}
+
+	public java.util.List getStructureTemplates(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String structureId, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return JournalTemplateLocalServiceFactory.getTxImpl()
+												 .getStructureTemplates(companyId,
+			groupId, structureId, begin, end);
 	}
 
 	public int getStructureTemplatesCount(java.lang.String companyId,
-		java.lang.String structureId) throws com.liferay.portal.SystemException {
+		java.lang.String groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl()
 												 .getStructureTemplatesCount(companyId,
-			structureId);
+			groupId, structureId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String templateId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl().getTemplate(companyId,
-			templateId);
+			groupId, templateId);
 	}
 
 	public java.util.List getTemplates(java.lang.String groupId)
@@ -219,16 +223,17 @@ public class JournalTemplateLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String companyId, java.lang.String templateId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String templateId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl().updateTemplate(companyId,
-			templateId, structureId, name, description, xsl, formatXsl,
-			langType, smallImage, smallImageURL, smallFile);
+			groupId, templateId, structureId, name, description, xsl,
+			formatXsl, langType, smallImage, smallImageURL, smallFile);
 	}
 
 	public void ejbCreate() throws CreateException {

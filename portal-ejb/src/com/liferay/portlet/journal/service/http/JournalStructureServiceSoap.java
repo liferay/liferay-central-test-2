@@ -78,9 +78,11 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static void deleteStructure(java.lang.String companyId,
-		java.lang.String structureId) throws RemoteException {
+		java.lang.String groupId, java.lang.String structureId)
+		throws RemoteException {
 		try {
-			JournalStructureServiceUtil.deleteStructure(companyId, structureId);
+			JournalStructureServiceUtil.deleteStructure(companyId, groupId,
+				structureId);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);
@@ -90,11 +92,11 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap getStructure(
-		java.lang.String companyId, java.lang.String structureId)
-		throws RemoteException {
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.getStructure(companyId,
-					structureId);
+					groupId, structureId);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}
@@ -106,12 +108,12 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap updateStructure(
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsd)
-		throws RemoteException {
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsd) throws RemoteException {
 		try {
-			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(structureId,
-					name, description, xsd);
+			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
+					structureId, name, description, xsd);
 
 			return com.liferay.portlet.journal.model.JournalStructureSoap.toSoapModel(returnValue);
 		}

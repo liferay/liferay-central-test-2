@@ -66,34 +66,35 @@ public class JournalTemplateServiceUtil {
 	}
 
 	public static void deleteTemplate(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String templateId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
+		journalTemplateService.deleteTemplate(companyId, groupId, templateId);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
+		java.lang.String companyId, java.lang.String groupId,
 		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-		journalTemplateService.deleteTemplate(companyId, templateId);
-	}
 
-	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String templateId)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
-
-		return journalTemplateService.getTemplate(companyId, templateId);
+		return journalTemplateService.getTemplate(companyId, groupId, templateId);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String templateId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile)
+		java.lang.String groupId, java.lang.String templateId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
 
-		return journalTemplateService.updateTemplate(templateId, structureId,
-			name, description, xsl, formatXsl, langType, smallImage,
-			smallImageURL, smallFile);
+		return journalTemplateService.updateTemplate(groupId, templateId,
+			structureId, name, description, xsl, formatXsl, langType,
+			smallImage, smallImageURL, smallFile);
 	}
 }

@@ -445,6 +445,16 @@
 				(Permission_.resourceId = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.PortletPreferencesFinder.findByPortletId">
+		<![CDATA[
+			SELECT
+				{PortletPreferences.*}
+			FROM
+				PortletPreferences
+			WHERE
+				portletId LIKE ?
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.ResourceFinder.findByC_P">
 		<![CDATA[
 			SELECT

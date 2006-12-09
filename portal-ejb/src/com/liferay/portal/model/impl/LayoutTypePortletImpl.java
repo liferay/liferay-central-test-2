@@ -90,8 +90,24 @@ public class LayoutTypePortletImpl
 	}
 
 	public LayoutTemplate getLayoutTemplate() {
-		return LayoutTemplateLocalUtil.getLayoutTemplate(
-			getLayoutTemplateId(), false, null);
+		LayoutTemplate layoutTemplate =
+			LayoutTemplateLocalUtil.getLayoutTemplate(
+				getLayoutTemplateId(), false, null);
+
+		if (layoutTemplate == null) {
+			layoutTemplate = new LayoutTemplateImpl(
+				StringPool.BLANK, StringPool.BLANK);
+
+			List columns = new ArrayList();
+
+			for (int i = 1; i <= 10; i++) {
+				columns.add("column-" + i);
+			}
+
+			layoutTemplate.setColumns(columns);
+		}
+
+		return layoutTemplate;
 	}
 
 	public String getLayoutTemplateId() {
@@ -162,14 +178,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public int getNumOfColumns() {
-		LayoutTemplate layoutTemplate = getLayoutTemplate();
-
-		if (layoutTemplate == null) {
-			return 0;
-		}
-		else {
-			return layoutTemplate.getColumns().size();
-		}
+		return getLayoutTemplate().getColumns().size();
 	}
 
 	public List getAllPortlets(String columnId) throws SystemException {
@@ -341,10 +350,6 @@ public class LayoutTypePortletImpl
 
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
 
-		if (layoutTemplate == null) {
-			return portletIds;
-		}
-
 		List columns = layoutTemplate.getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
@@ -363,10 +368,6 @@ public class LayoutTypePortletImpl
 
 	public boolean hasPortletId(String portletId) {
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
-
-		if (layoutTemplate == null) {
-			return false;
-		}
 
 		List columns = layoutTemplate.getColumns();
 

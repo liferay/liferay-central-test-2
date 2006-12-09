@@ -606,11 +606,11 @@
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
 		<field name="companyId" type="String" />
+		<field name="groupId" type="String" />
 		<field name="articleId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
 		<field name="version" type="double" />
-		<field name="groupId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -640,13 +640,14 @@
 		<field name="ownerId" type="String" />
 		<field name="articleId" type="String" />
 		<field name="companyId" type="String" />
+		<field name="groupId" type="String" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
 		<field name="companyId" type="String" />
+		<field name="groupId" type="String" />
 		<field name="structureId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
-		<field name="groupId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />
@@ -661,10 +662,10 @@
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
 		<field name="companyId" type="String" />
+		<field name="groupId" type="String" />
 		<field name="templateId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
-		<field name="groupId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
 		<field name="createDate" type="Date" />

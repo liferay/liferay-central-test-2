@@ -65,6 +65,7 @@ public class CMSServlet extends HttpServlet {
 			ServletContext ctx = getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
+			_groupId = config.getInitParameter("group_id");
 
 			String redirectsConf = config.getInitParameter("redirects_conf");
 
@@ -83,6 +84,12 @@ public class CMSServlet extends HttpServlet {
 
 		if (!PortalInstances.matches()) {
 			return;
+		}
+
+        String groupId = _groupId;
+
+		if (Validator.isNull(groupId)) {
+			groupId = ParamUtil.getString(req, "groupId");
 		}
 
 		String path = GetterUtil.getString(req.getPathInfo());
@@ -116,7 +123,7 @@ public class CMSServlet extends HttpServlet {
 
 		ThemeDisplay themeDisplay = null;
 
-		String content = getContent(path, languageId, themeDisplay);
+		String content = getContent(groupId, path, languageId, themeDisplay);
 
 		if (Validator.isNotNull(content)) {
 			if (_log.isDebugEnabled()) {
@@ -151,15 +158,17 @@ public class CMSServlet extends HttpServlet {
 	}
 
 	protected String getContent(
-		String articleId, String languageId, ThemeDisplay themeDisplay) {
+		String groupId, String articleId, String languageId,
+		ThemeDisplay themeDisplay) {
 
 		return CMSServletUtil.getContent(
-			_companyId, articleId, languageId, themeDisplay);
+			_companyId, groupId, articleId, languageId, themeDisplay);
 	}
 
 	private static Log _log = LogFactory.getLog(CMSServlet.class);
 
 	private String _companyId;
+	private String _groupId;
 	private Properties _redirectProperties;
 	private boolean _redirectsEnabled;
 

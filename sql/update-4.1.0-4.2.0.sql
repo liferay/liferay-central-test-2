@@ -251,13 +251,23 @@ alter table Image add type_ VARCHAR(75) null;
 
 alter table JournalArticle add description STRING null;
 
+alter table JournalArticle drop primary key;
+alter table JournalArticle add primary key (companyId, groupId, articleId, version);
+
+alter table JournalStructure drop primary key;
+alter table JournalStructure add primary key (companyId, groupId, structureId);
+
+alter table JournalTemplate drop primary key;
+alter table JournalTemplate add primary key (companyId, groupId, templateId);
+
 drop table JournalContentSearch;
 create table JournalContentSearch (
 	portletId VARCHAR(75) not null,
 	layoutId VARCHAR(75) not null,
 	ownerId VARCHAR(75) not null,
-	companyId VARCHAR(75) not null,
 	articleId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	groupId VARCHAR(75) not null,
 	primary key (portletId, layoutId, ownerId, articleId)
 );
 

@@ -42,6 +42,14 @@ public class PortletPreferencesLocalServiceUtil {
 			ownerId);
 	}
 
+	public static void deletePortletPreferences(
+		com.liferay.portal.service.persistence.PortletPreferencesPK pk)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+		portletPreferencesLocalService.deletePortletPreferences(pk);
+	}
+
 	public static javax.portlet.PortletPreferences getDefaultPreferences(
 		java.lang.String companyId, java.lang.String portletId)
 		throws com.liferay.portal.PortalException, 
@@ -50,6 +58,13 @@ public class PortletPreferencesLocalServiceUtil {
 
 		return portletPreferencesLocalService.getDefaultPreferences(companyId,
 			portletId);
+	}
+
+	public static java.util.List getPortletPreferences()
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferences();
 	}
 
 	public static com.liferay.portal.model.PortletPreferences getPortletPreferences(
@@ -61,11 +76,18 @@ public class PortletPreferencesLocalServiceUtil {
 		return portletPreferencesLocalService.getPortletPreferences(pk);
 	}
 
-	public static java.util.List getPortletPreferences(java.lang.String ownerId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getPortletPreferencesByOwnerId(
+		java.lang.String ownerId) throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.getPortletPreferences(ownerId);
+		return portletPreferencesLocalService.getPortletPreferencesByOwnerId(ownerId);
+	}
+
+	public static java.util.List getPortletPreferencesByPortletId(
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferencesByPortletId(portletId);
 	}
 
 	public static javax.portlet.PortletPreferences getPreferences(

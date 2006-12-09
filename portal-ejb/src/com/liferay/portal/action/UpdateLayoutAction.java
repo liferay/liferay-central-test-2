@@ -70,7 +70,7 @@ public class UpdateLayoutAction extends Action {
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		boolean updateLayout = true;
-		boolean deletePortletResource = false;
+		boolean deletePortlet = false;
 
 		if (cmd.equals(Constants.ADD)) {
 			portletId = layoutTypePortlet.addPortletId(
@@ -78,7 +78,7 @@ public class UpdateLayoutAction extends Action {
 		}
 		else if (cmd.equals(Constants.DELETE)) {
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				deletePortletResource = true;
+				deletePortlet = true;
 
 				layoutTypePortlet.removePortletId(portletId);
 			}
@@ -119,7 +119,7 @@ public class UpdateLayoutAction extends Action {
 			// See LEP-1411. Delay the delete of extraneous portlet resources
 			// only after the user has proven that he has the valid permissions.
 
-			if (deletePortletResource) {
+			if (deletePortlet) {
 				String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 				ResourceLocalServiceUtil.deleteResource(

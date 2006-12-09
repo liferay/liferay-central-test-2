@@ -45,11 +45,11 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.groupId"),
+			XSS_ALLOW_BY_MODEL);
+	public static boolean XSS_ALLOW_ARTICLEID = GetterUtil.getBoolean(PropsUtil.get(
+				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.articleId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle.userId"),
@@ -88,11 +88,12 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	}
 
 	public JournalArticlePK getPrimaryKey() {
-		return new JournalArticlePK(_companyId, _articleId, _version);
+		return new JournalArticlePK(_companyId, _groupId, _articleId, _version);
 	}
 
 	public void setPrimaryKey(JournalArticlePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setArticleId(pk.articleId);
 		setVersion(pk.version);
 	}
@@ -111,6 +112,23 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			}
 
 			_companyId = companyId;
+		}
+	}
+
+	public String getGroupId() {
+		return GetterUtil.getString(_groupId);
+	}
+
+	public void setGroupId(String groupId) {
+		if (((groupId == null) && (_groupId != null)) ||
+				((groupId != null) && (_groupId == null)) ||
+				((groupId != null) && (_groupId != null) &&
+				!groupId.equals(_groupId))) {
+			if (!XSS_ALLOW_GROUPID) {
+				groupId = XSSUtil.strip(groupId);
+			}
+
+			_groupId = groupId;
 		}
 	}
 
@@ -138,23 +156,6 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public void setVersion(double version) {
 		if (version != _version) {
 			_version = version;
-		}
-	}
-
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
-	}
-
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
-			_groupId = groupId;
 		}
 	}
 
@@ -435,9 +436,9 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public Object clone() {
 		JournalArticleImpl clone = new JournalArticleImpl();
 		clone.setCompanyId(getCompanyId());
+		clone.setGroupId(getGroupId());
 		clone.setArticleId(getArticleId());
 		clone.setVersion(getVersion());
-		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
@@ -521,9 +522,9 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	}
 
 	private String _companyId;
+	private String _groupId;
 	private String _articleId;
 	private double _version;
-	private String _groupId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

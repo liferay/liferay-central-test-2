@@ -44,6 +44,7 @@ public class JournalContentSearchSoap implements Serializable {
 		soapModel.setOwnerId(model.getOwnerId());
 		soapModel.setArticleId(model.getArticleId());
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setGroupId(model.getGroupId());
 
 		return soapModel;
 	}
@@ -114,9 +115,18 @@ public class JournalContentSearchSoap implements Serializable {
 		_companyId = companyId;
 	}
 
+	public String getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		_groupId = groupId;
+	}
+
 	private String _portletId;
 	private String _layoutId;
 	private String _ownerId;
 	private String _articleId;
 	private String _companyId;
+	private String _groupId;
 }

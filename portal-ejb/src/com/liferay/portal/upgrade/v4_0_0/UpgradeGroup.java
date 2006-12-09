@@ -70,7 +70,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			while (rs.next()) {
 				String groupId = rs.getString("groupId");
 
-				_log.debug("Upgrading group " + groupId);
+				_log.info("Upgrading group " + groupId);
 
 				ps = con.prepareStatement(_UPGRADE_GROUP_2);
 

@@ -36,11 +36,12 @@ String content = (String)doc.get(LuceneFields.CONTENT);
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
+String groupId = (String)doc.get("groupId");
 String articleId = (String)doc.get("articleId");
 
 String hitOwnerId = layout.getOwnerId();
 
-List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId, articleId);
+List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(hitOwnerId, groupId, articleId);
 %>
 
 <%= content %><br>

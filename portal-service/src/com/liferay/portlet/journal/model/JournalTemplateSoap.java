@@ -40,8 +40,8 @@ public class JournalTemplateSoap implements Serializable {
 	public static JournalTemplateSoap toSoapModel(JournalTemplate model) {
 		JournalTemplateSoap soapModel = new JournalTemplateSoap();
 		soapModel.setCompanyId(model.getCompanyId());
-		soapModel.setTemplateId(model.getTemplateId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setTemplateId(model.getTemplateId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -72,11 +72,12 @@ public class JournalTemplateSoap implements Serializable {
 	}
 
 	public JournalTemplatePK getPrimaryKey() {
-		return new JournalTemplatePK(_companyId, _templateId);
+		return new JournalTemplatePK(_companyId, _groupId, _templateId);
 	}
 
 	public void setPrimaryKey(JournalTemplatePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setTemplateId(pk.templateId);
 	}
 
@@ -88,20 +89,20 @@ public class JournalTemplateSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getTemplateId() {
-		return _templateId;
-	}
-
-	public void setTemplateId(String templateId) {
-		_templateId = templateId;
-	}
-
 	public String getGroupId() {
 		return _groupId;
 	}
 
 	public void setGroupId(String groupId) {
 		_groupId = groupId;
+	}
+
+	public String getTemplateId() {
+		return _templateId;
+	}
+
+	public void setTemplateId(String templateId) {
+		_templateId = templateId;
 	}
 
 	public String getUserId() {
@@ -197,8 +198,8 @@ public class JournalTemplateSoap implements Serializable {
 	}
 
 	private String _companyId;
-	private String _templateId;
 	private String _groupId;
+	private String _templateId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

@@ -73,7 +73,7 @@ public class UpgradeCompany extends UpgradeProcess {
 				boolean sendPassword = true;
 				boolean strangers = rs.getBoolean("strangers");
 
-				_log.debug("Upgrading company " + companyId);
+				_log.info("Upgrading company " + companyId);
 
 				CompanyLocalServiceUtil.updateSecurity(
 					companyId, authType, autoLogin, sendPassword, strangers);

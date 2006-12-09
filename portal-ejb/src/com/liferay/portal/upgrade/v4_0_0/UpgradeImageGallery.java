@@ -78,7 +78,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading folder " + folderId);
+				_log.info("Upgrading folder " + folderId);
 
 				IGFolderLocalServiceUtil.addFolderResources(
 					folderId, addCommunityPermissions, addGuestPermissions);
@@ -117,7 +117,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug(
+				_log.info(
 					"Upgrading image " + new IGImagePK(companyId, imageId));
 
 				IGImageLocalServiceUtil.addImageResources(

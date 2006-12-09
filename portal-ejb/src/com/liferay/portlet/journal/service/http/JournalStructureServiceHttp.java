@@ -198,7 +198,8 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static void deleteStructure(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String structureId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -208,14 +209,21 @@ public class JournalStructureServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = structureId;
+			Object paramObj1 = groupId;
 
-			if (structureId == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = structureId;
+
+			if (structureId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
-					"deleteStructure", new Object[] { paramObj0, paramObj1 });
+					"deleteStructure",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -241,7 +249,7 @@ public class JournalStructureServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -251,14 +259,21 @@ public class JournalStructureServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = structureId;
+			Object paramObj1 = groupId;
 
-			if (structureId == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = structureId;
+
+			if (structureId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
-					"getStructure", new Object[] { paramObj0, paramObj1 });
+					"getStructure",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {
@@ -286,39 +301,47 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		HttpPrincipal httpPrincipal, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd)
+		HttpPrincipal httpPrincipal, java.lang.String groupId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = structureId;
+			Object paramObj0 = groupId;
 
-			if (structureId == null) {
+			if (groupId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = name;
+			Object paramObj1 = structureId;
 
-			if (name == null) {
+			if (structureId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = xsd;
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = xsd;
 
 			if (xsd == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalStructureServiceUtil.class.getName(),
 					"updateStructure",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 			Object returnObj = null;
 
 			try {

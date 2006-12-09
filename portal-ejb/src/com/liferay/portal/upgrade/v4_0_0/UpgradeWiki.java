@@ -85,7 +85,7 @@ public class UpgradeWiki extends UpgradeProcess {
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
-					_log.debug("Upgrading node " + nodeId);
+					_log.info("Upgrading node " + nodeId);
 
 					WikiNodeLocalServiceUtil.addNodeResources(
 						nodeId, addCommunityPermissions, addGuestPermissions);
@@ -126,7 +126,7 @@ public class UpgradeWiki extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug(
+				_log.info(
 					"Upgrading page " + new WikiPagePK(nodeId, title, version));
 
 				WikiPageLocalServiceUtil.addPageResources(

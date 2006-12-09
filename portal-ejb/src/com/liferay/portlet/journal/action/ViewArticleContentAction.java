@@ -82,6 +82,7 @@ public class ViewArticleContentAction extends Action {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			String companyId = themeDisplay.getCompanyId();
+            String groupId = PortalUtil.getPortletGroupId(req);
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
 				req, "version", JournalArticleImpl.DEFAULT_VERSION);
@@ -173,7 +174,7 @@ public class ViewArticleContentAction extends Action {
 
 				JournalTemplate template =
 					JournalTemplateLocalServiceUtil.getTemplate(
-						companyId, templateId);
+						companyId, groupId, templateId);
 
 				String langType = template.getLangType();
 				String script = template.getXsl();
@@ -183,7 +184,8 @@ public class ViewArticleContentAction extends Action {
 			}
 			else {
 				output = JournalArticleServiceUtil.getArticleContent(
-					companyId, articleId, version, languageId, themeDisplay);
+					companyId, groupId, articleId, version, languageId,
+					themeDisplay);
 			}
 
 			req.setAttribute(WebKeys.JOURNAL_ARTICLE_CONTENT, output);

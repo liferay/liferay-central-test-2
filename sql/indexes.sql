@@ -54,21 +54,21 @@ create index IGFolder_ix_GroupId on IGFolder (groupId);
 
 create index IGImage_ix_FolderId on IGImage (folderId);
 
-create index JournalArticle_ix_C_A on JournalArticle (companyId, articleId);
-create index JournalArticle_ix_C_A_A on JournalArticle (companyId, articleId, approved);
-create index JournalArticle_ix_C_S on JournalArticle (companyId, structureId);
-create index JournalArticle_ix_C_T on JournalArticle (companyId, templateId);
+create index JournalArticle_ix_C_G_A on JournalArticle (companyId, groupId, articleId);
+create index JournalArticle_ix_C_G_A_A on JournalArticle (companyId, groupId, articleId, approved);
+create index JournalArticle_ix_C_G_S on JournalArticle (companyId, groupId, structureId);
+create index JournalArticle_ix_C_G_T on JournalArticle (companyId, groupId, templateId);
 create index JournalArticle_ix_CompanyId on JournalArticle (companyId);
 create index JournalArticle_ix_GroupId on JournalArticle (groupId);
 
-create index JournalContentSearch_ix_C_A on JournalContentSearch (companyId, articleId);
+create index JournalContentSearch_ix_C_G_A on JournalContentSearch (companyId, groupId, articleId);
 create index JournalContentSearch_ix_L_O on JournalContentSearch (layoutId, ownerId);
-create index JournalContentSearch_ix_O_A on JournalContentSearch (ownerId, articleId);
+create index JournalContentSearch_ix_O_G_A on JournalContentSearch (ownerId, groupId, articleId);
 create index JournalContentSearch_ix_OwnerI on JournalContentSearch (ownerId);
 
 create index JournalStructure_ix_GroupId on JournalStructure (groupId);
 
-create index JournalTemplate_ix_C_S on JournalTemplate (companyId, structureId);
+create index JournalTemplate_ix_C_G_S on JournalTemplate (companyId, groupId, structureId);
 create index JournalTemplate_ix_GroupId on JournalTemplate (groupId);
 
 create index LayoutSet_ix_C_V on LayoutSet (companyId, virtualHost);
@@ -132,6 +132,7 @@ create index PollsVote_ix_QuestionId on PollsVote (questionId);
 create index PortletPreferences_ix_L_O on PortletPreferences (layoutId, ownerId);
 create index PortletPreferences_ix_LayoutId on PortletPreferences (layoutId);
 create index PortletPreferences_ix_OwnerId on PortletPreferences (ownerId);
+create index PortletPreferences_ix_PortletI on PortletPreferences (portletId);
 
 create index Portlet_ix_CompanyId on Portlet (companyId);
 

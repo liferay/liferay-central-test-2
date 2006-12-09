@@ -40,9 +40,9 @@ public class JournalArticleSoap implements Serializable {
 	public static JournalArticleSoap toSoapModel(JournalArticle model) {
 		JournalArticleSoap soapModel = new JournalArticleSoap();
 		soapModel.setCompanyId(model.getCompanyId());
+		soapModel.setGroupId(model.getGroupId());
 		soapModel.setArticleId(model.getArticleId());
 		soapModel.setVersion(model.getVersion());
-		soapModel.setGroupId(model.getGroupId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
@@ -80,11 +80,12 @@ public class JournalArticleSoap implements Serializable {
 	}
 
 	public JournalArticlePK getPrimaryKey() {
-		return new JournalArticlePK(_companyId, _articleId, _version);
+		return new JournalArticlePK(_companyId, _groupId, _articleId, _version);
 	}
 
 	public void setPrimaryKey(JournalArticlePK pk) {
 		setCompanyId(pk.companyId);
+		setGroupId(pk.groupId);
 		setArticleId(pk.articleId);
 		setVersion(pk.version);
 	}
@@ -95,6 +96,14 @@ public class JournalArticleSoap implements Serializable {
 
 	public void setCompanyId(String companyId) {
 		_companyId = companyId;
+	}
+
+	public String getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		_groupId = groupId;
 	}
 
 	public String getArticleId() {
@@ -111,14 +120,6 @@ public class JournalArticleSoap implements Serializable {
 
 	public void setVersion(double version) {
 		_version = version;
-	}
-
-	public String getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(String groupId) {
-		_groupId = groupId;
 	}
 
 	public String getUserId() {
@@ -274,9 +275,9 @@ public class JournalArticleSoap implements Serializable {
 	}
 
 	private String _companyId;
+	private String _groupId;
 	private String _articleId;
 	private double _version;
-	private String _groupId;
 	private String _userId;
 	private String _userName;
 	private Date _createDate;

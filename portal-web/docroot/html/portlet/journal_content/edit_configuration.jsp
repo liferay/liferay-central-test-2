@@ -27,21 +27,11 @@
 <%
 String cur = ParamUtil.getString(request, "cur");
 
-String groupId = null;
-
-List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, 0, 1);
-
-if (communities.size() > 0) {
-	Group group = (Group)communities.get(0);
-
-	groupId = group.getGroupId();
-}
-
 String type = JournalArticleImpl.TYPES[0];
 
 try {
 	if (articleIds.length > 0) {
-		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[0]);
+		JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[0]);
 
 		groupId = article.getGroupId();
 		type = article.getType();
@@ -59,7 +49,7 @@ type = ParamUtil.getString(request, "type", type);
 <script type="text/javascript">
 	var <portlet:namespace />articleIndex = 0;
 
-	function <portlet:namespace />addArticle(articleId) {
+	function <portlet:namespace />addArticle(articleId, save) {
 		var table = document.getElementById("<portlet:namespace />articles");
 
 		var newRow = table.insertRow(table.rows.length);
@@ -88,23 +78,30 @@ type = ParamUtil.getString(request, "type", type);
 		newRow.cells[1].style.paddingRight = "10px";
 
 		<portlet:namespace />articleIndex++;
+
+		if (save) {
+			<portlet:namespace />saveArticles();
+		}
 	}
 
 	function <portlet:namespace />removeArticle(id) {
 		var delRow = document.getElementById(id);
 
 		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
+
+		<portlet:namespace />saveArticles();
 	}
 
 	function <portlet:namespace />saveArticles() {
 		document.<portlet:namespace />pages.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-		submitForm(document.<portlet:namespace />pages);
+		loadForm(document.<portlet:namespace />pages, '<liferay-portlet:actionURL portletConfiguration="true" />');
 	}
 </script>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
 <tr>
@@ -119,10 +116,6 @@ type = ParamUtil.getString(request, "type", type);
 </tr>
 </table>
 
-<br>
-
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="<portlet:namespace />saveArticles();">
-
 </form>
 
 <br><div class="beta-separator"></div><br>
@@ -136,6 +129,7 @@ type = ParamUtil.getString(request, "type", type);
 <%
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
 
+dynamicRenderReq.setParameter("type", type);
 dynamicRenderReq.setParameter("groupId", groupId);
 
 ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
@@ -177,7 +171,7 @@ for (int i = 0; i < results.size(); i++) {
 	sb.append(renderResponse.getNamespace());
 	sb.append("addArticle('");
 	sb.append(curArticle.getArticleId());
-	sb.append("');");
+	sb.append("', true);");
 
 	String rowHREF = sb.toString();
 
@@ -219,10 +213,10 @@ for (int i = 0; i < results.size(); i++) {
 	<%
 	for (int i = 0; i < articleIds.length; i++) {
 		try {
-			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), articleIds[i]);
+			JournalArticle article = JournalArticleLocalServiceUtil.getLatestArticle(company.getCompanyId(), groupId, articleIds[i]);
 	%>
 
-			<portlet:namespace />addArticle("<%= article.getArticleId() %>");
+			<portlet:namespace />addArticle("<%= article.getArticleId() %>", false);
 
 	<%
 		}
@@ -231,4 +225,5 @@ for (int i = 0; i < results.size(); i++) {
 	}
 	%>
 
+	<portlet:namespace />saveArticles();
 </script>

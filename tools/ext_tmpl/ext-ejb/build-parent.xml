@@ -155,6 +155,8 @@
 	</target>
 
 	<target name="deploy" depends="jar">
+		<ant dir="../ext-service" target="deploy" inheritAll="false" />
+
 		<antcall target="deploy-ejb-jar">
 			<param name="modules.dir" value="" />
 		</antcall>

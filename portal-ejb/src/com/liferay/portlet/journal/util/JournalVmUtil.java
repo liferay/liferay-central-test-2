@@ -80,11 +80,12 @@ public class JournalVmUtil {
 			}
 
 			String companyId = (String)tokens.get("company_id");
+            String groupId = (String)tokens.get("group_id");
 
 			context.put(
 				"journalTemplatesPath",
 				VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
-					companyId);
+					companyId + StringPool.SLASH + groupId);
 
 			load = Velocity.evaluate(
 				context, output, JournalVmUtil.class.getName(), vmScript);

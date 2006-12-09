@@ -56,13 +56,14 @@ public class GetLatestArticleContentAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
+            String groupId = PortalUtil.getPortletGroupId(req);
 		    String articleId = ParamUtil.getString(req, "articleId");
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
 			JournalArticle article =
 				JournalArticleLocalServiceUtil.getLatestArticle(
-					companyId, articleId, Boolean.TRUE);
+					companyId, groupId, articleId, Boolean.TRUE);
 
 			String fileName = "content.xml";
 			byte[] byteArray =

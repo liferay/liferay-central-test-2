@@ -118,7 +118,7 @@ public class JournalContentSearchLocalServiceImpl
 							updateContentSearch(
 								portletId, layout.getLayoutId(),
 								layout.getOwnerId(), layout.getCompanyId(),
-								articleId);
+								layout.getGroupId(), articleId);
 						}
 					}
 					catch (NoSuchPortletPreferencesException nsppe) {
@@ -128,10 +128,11 @@ public class JournalContentSearchLocalServiceImpl
 		}
 	}
 
-	public void deleteArticleContentSearches(String companyId, String articleId)
+	public void deleteArticleContentSearches(
+			String companyId, String groupId, String articleId)
 		throws SystemException {
 
-		JournalContentSearchUtil.removeByC_A(companyId, articleId);
+		JournalContentSearchUtil.removeByC_G_A(companyId, groupId, articleId);
 	}
 
 	public void deleteLayoutContentSearches(String layoutId, String ownerId)
@@ -146,19 +147,21 @@ public class JournalContentSearchLocalServiceImpl
 		JournalContentSearchUtil.removeByOwnerId(ownerId);
 	}
 
-	public List getArticleContentSearches(String companyId, String articleId)
+	public List getArticleContentSearches(
+			String companyId, String groupId, String articleId)
 		throws SystemException {
 
-		return JournalContentSearchUtil.findByC_A(companyId, articleId);
+		return JournalContentSearchUtil.findByC_G_A(
+			companyId, groupId, articleId);
 	}
 
-	public List getLayoutIds(String ownerId, String articleId)
+	public List getLayoutIds(String ownerId, String groupId, String articleId)
 		throws SystemException {
 
 		List layoutIds = new ArrayList();
 
-		Iterator itr = JournalContentSearchUtil.findByO_A(
-			ownerId, articleId).iterator();
+		Iterator itr = JournalContentSearchUtil.findByO_G_A(
+			ownerId, groupId, articleId).iterator();
 
 		while (itr.hasNext()) {
 			JournalContentSearch contentSearch =
@@ -170,15 +173,17 @@ public class JournalContentSearchLocalServiceImpl
 		return layoutIds;
 	}
 
-	public int getLayoutIdsCount(String ownerId, String articleId)
+	public int getLayoutIdsCount(
+			String ownerId, String groupId, String articleId)
 		throws SystemException {
 
-		return JournalContentSearchUtil.countByO_A(ownerId, articleId);
+		return JournalContentSearchUtil.countByO_G_A(
+			ownerId, groupId, articleId);
 	}
 
 	public JournalContentSearch updateContentSearch(
 			String portletId, String layoutId, String ownerId, String companyId,
-			String articleId)
+			String groupId, String articleId)
 		throws PortalException, SystemException {
 
 		JournalContentSearchPK pk = new JournalContentSearchPK(
@@ -194,6 +199,7 @@ public class JournalContentSearchLocalServiceImpl
 		}
 
 		contentSearch.setCompanyId(companyId);
+		contentSearch.setGroupId(groupId);
 
 		JournalContentSearchUtil.update(contentSearch);
 
@@ -202,14 +208,15 @@ public class JournalContentSearchLocalServiceImpl
 
 	public List updateContentSearch(
 			String portletId, String layoutId, String ownerId, String companyId,
-			String[] articleIds)
+			String groupId, String[] articleIds)
 		throws PortalException, SystemException {
 
 		List contentSearches = new ArrayList();
 
 		for (int i = 0; i < articleIds.length; i++) {
 			JournalContentSearch contentSearch = updateContentSearch(
-				portletId, layoutId, ownerId, companyId, articleIds[i]);
+				portletId, layoutId, ownerId, companyId, groupId,
+				articleIds[i]);
 
 			contentSearches.add(contentSearch);
 		}

@@ -38,7 +38,7 @@ String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), structureId);
+		JournalStructure structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), portletGroupId, structureId);
 
 		structureName = structure.getName();
 	}

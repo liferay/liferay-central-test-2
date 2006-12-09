@@ -65,7 +65,12 @@ public class HibernateUtil {
 	}
 
 	public static DataSource getDataSource() {
-		return (DataSource)BeanLocatorUtil.locate(SPRING_HIBERNATE_DATA_SOURCE);
+		if (_dataSource == null) {
+			_dataSource = (DataSource)BeanLocatorUtil.locate(
+				SPRING_HIBERNATE_DATA_SOURCE);
+		}
+
+		return _dataSource;
 	}
 
 	public static SessionFactoryImplementor getSessionFactory() {
@@ -154,6 +159,7 @@ public class HibernateUtil {
 
 	private static Log _log = LogFactory.getLog(HibernateUtil.class);
 
+	private static DataSource _dataSource;
 	private static SessionFactoryImplementor _sessionFactory;
 	private static Map _sessionFactories = CollectionFactory.getHashMap();
 

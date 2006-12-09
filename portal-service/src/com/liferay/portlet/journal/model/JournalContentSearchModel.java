@@ -56,4 +56,8 @@ public interface JournalContentSearchModel extends BaseModel {
 	public String getCompanyId();
 
 	public void setCompanyId(String companyId);
+
+	public String getGroupId();
+
+	public void setGroupId(String groupId);
 }

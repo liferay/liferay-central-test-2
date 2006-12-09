@@ -156,7 +156,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Adding category to group " + groupId);
+				_log.info("Adding category to group " + groupId);
 
 				MBCategory category = MBCategoryLocalServiceUtil.addCategory(
 					userId, plid, parentCategoryId, name, description,
@@ -201,7 +201,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading topic " + topicId);
+				_log.info("Upgrading topic " + topicId);
 
 				MBCategoryLocalServiceUtil.addCategory(
 					userId, plid, categoryId, name, description,
@@ -239,7 +239,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug(
+				_log.info(
 					"Upgrading message " + new MBMessagePK(topicId, messageId));
 
 				MBMessageLocalServiceUtil.addMessageResources(
@@ -247,7 +247,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					addGuestPermissions);
 
 				if (attachments) {
-					_log.debug(
+					_log.info(
 						"Message " + new MBMessagePK(topicId, messageId) +
 							" has attachments");
 
@@ -304,8 +304,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			byte[] byteArray = _dlGetFile(
 				companyId, repositoryId, fileNames[i]);
 
-			_log.debug(
-				"Migrating message board attachment " + fileNames[i]);
+			_log.info("Migrating message board attachment " + fileNames[i]);
 
 			try {
 				DLServiceUtil.addFile(

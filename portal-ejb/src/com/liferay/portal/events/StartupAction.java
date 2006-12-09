@@ -29,9 +29,11 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
+import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.ActionException;
 import com.liferay.portal.struts.SimpleAction;
 import com.liferay.portal.upgrade.UpgradeProcess;
+import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.util.SimpleCachePool;
@@ -80,6 +82,10 @@ public class StartupAction extends SimpleAction {
 			Runtime.getRuntime().addShutdownHook(
 				new Thread(new ShutdownHook()));
 
+			// Disable database caching before upgrade
+
+			CacheRegistry.setActive(false);
+
 			// Upgrade
 
 			int buildNumber =
@@ -89,7 +95,9 @@ public class StartupAction extends SimpleAction {
 				PropsUtil.getArray(PropsUtil.UPGRADE_PROCESSES);
 
 			for (int i = 0; i < upgradeProcesses.length; i++) {
-				_log.debug("Initializing upgrade " + upgradeProcesses[i]);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Initializing upgrade " + upgradeProcesses[i]);
+				}
 
 				try {
 					UpgradeProcess upgradeProcess =
@@ -99,14 +107,28 @@ public class StartupAction extends SimpleAction {
 					if ((upgradeProcess.getThreshold() == 0) ||
 						(upgradeProcess.getThreshold() >= buildNumber)) {
 
-						_log.debug("Running upgrade " + upgradeProcesses[i]);
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Running upgrade " + upgradeProcesses[i]);
+						}
 
 						upgradeProcess.upgrade();
 
-						_log.debug("Finished upgrade " + upgradeProcesses[i]);
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Finished upgrade " + upgradeProcesses[i]);
+						}
 					}
 					else {
-						_log.debug("Skipping upgrade " + upgradeProcesses[i]);
+						if (_log.isDebugEnabled()) {
+							_log.debug(
+								"Upgrade threshold " +
+									upgradeProcess.getThreshold() +
+										" will not trigger upgrade");
+
+							_log.debug(
+								"Skipping upgrade " + upgradeProcesses[i]);
+						}
 					}
 				}
 				catch (ClassNotFoundException cnfe) {
@@ -118,6 +140,12 @@ public class StartupAction extends SimpleAction {
 			}
 
 			ReleaseLocalServiceUtil.updateRelease();
+
+			// Enable database caching after upgrade
+
+			CacheRegistry.setActive(true);
+
+			ClusterPool.clear();
 
 			// Delete temporary images
 

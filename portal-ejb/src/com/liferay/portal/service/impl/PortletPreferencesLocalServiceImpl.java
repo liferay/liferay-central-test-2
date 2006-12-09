@@ -30,6 +30,7 @@ import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portlet.PortletPreferencesImpl;
@@ -64,6 +65,14 @@ public class PortletPreferencesLocalServiceImpl
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId);
 	}
 
+	public void deletePortletPreferences(PortletPreferencesPK pk)
+		throws PortalException, SystemException {
+
+		PortletPreferencesUtil.remove(pk);
+
+		PortletPreferencesLocalUtil.clearPreferencesPool(pk.ownerId);
+	}
+
 	public javax.portlet.PortletPreferences getDefaultPreferences(
 			String companyId, String portletId)
 		throws PortalException, SystemException {
@@ -75,14 +84,26 @@ public class PortletPreferencesLocalServiceImpl
 			portlet.getDefaultPreferences());
 	}
 
+	public List getPortletPreferences() throws SystemException {
+		return PortletPreferencesUtil.findAll();
+	}
+
 	public PortletPreferences getPortletPreferences(PortletPreferencesPK pk)
 		throws PortalException, SystemException {
 
 		return PortletPreferencesUtil.findByPrimaryKey(pk);
 	}
 
-	public List getPortletPreferences(String ownerId) throws SystemException {
+	public List getPortletPreferencesByOwnerId(String ownerId)
+		throws SystemException {
+
 		return PortletPreferencesUtil.findByOwnerId(ownerId);
+	}
+
+	public List getPortletPreferencesByPortletId(String portletId)
+		throws SystemException {
+
+		return PortletPreferencesFinder.findByPortletId(portletId);
 	}
 
 	public javax.portlet.PortletPreferences getPreferences(

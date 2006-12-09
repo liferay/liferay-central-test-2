@@ -91,7 +91,7 @@ public class UpgradeCompany extends UpgradeProcess {
 				String countryId = CountryImpl.DEFAULT_COUNTRY_ID;
 				String emailAddress = rs.getString("emailAddress");
 
-				_log.debug("Upgrading company " + companyId);
+				_log.info("Upgrading company " + companyId);
 
 				Company company = CompanyLocalServiceUtil.updateCompany(
 					companyId, portalURL, homeURL, mx, name, null, null, null,

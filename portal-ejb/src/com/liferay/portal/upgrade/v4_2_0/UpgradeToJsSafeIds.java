@@ -183,17 +183,13 @@ public class UpgradeToJsSafeIds extends UpgradeProcess {
 					ps2.setString(1, safeColumnValue);
 					ps2.setString(2, columnValue);
 
-					if (_log.isDebugEnabled()) {
-						_log.debug("Upgrading column value " + columnValue);
-					}
+					_log.info("Upgrading column value " + columnValue);
 
 					int rowsUpdated = ps2.executeUpdate();
 
 					if (rowsUpdated != 1) {
-						if (_log.isWarnEnabled()) {
-							_log.warn(
-								"Column value " + columnValue + " not updated");
-						}
+						_log.info(
+							"Column value " + columnValue + " not updated");
 					}
 				}
 			}

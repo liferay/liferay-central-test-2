@@ -60,6 +60,7 @@
 	</target>
 
 	<target name="jar" depends="compile">
+		<ant dir="../portal-service" target="deploy" inheritAll="false" />
 		<ant dir="../util-bridges" target="jar" inheritAll="false" />
 		<ant dir="../util-java" target="jar" inheritAll="false" />
 		<ant dir="../util-taglib" target="deploy" inheritAll="false" />

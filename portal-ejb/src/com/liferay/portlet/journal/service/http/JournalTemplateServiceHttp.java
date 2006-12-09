@@ -258,7 +258,8 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String templateId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -268,14 +269,21 @@ public class JournalTemplateServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = templateId;
+			Object paramObj1 = groupId;
 
-			if (templateId == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = templateId;
+
+			if (templateId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"deleteTemplate", new Object[] { paramObj0, paramObj1 });
+					"deleteTemplate",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -301,7 +309,7 @@ public class JournalTemplateServiceHttp {
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String templateId)
+		java.lang.String groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -311,14 +319,21 @@ public class JournalTemplateServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = templateId;
+			Object paramObj1 = groupId;
 
-			if (templateId == null) {
+			if (groupId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = templateId;
+
+			if (templateId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
-					"getTemplate", new Object[] { paramObj0, paramObj1 });
+					"getTemplate",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 			Object returnObj = null;
 
 			try {
@@ -346,69 +361,77 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String templateId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, java.lang.String xsl, boolean formatXsl,
-		java.lang.String langType, boolean smallImage,
-		java.lang.String smallImageURL, java.io.File smallFile)
+		HttpPrincipal httpPrincipal, java.lang.String groupId,
+		java.lang.String templateId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
+		boolean smallImage, java.lang.String smallImageURL,
+		java.io.File smallFile)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = templateId;
+			Object paramObj0 = groupId;
 
-			if (templateId == null) {
+			if (groupId == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = structureId;
+			Object paramObj1 = templateId;
 
-			if (structureId == null) {
+			if (templateId == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = structureId;
 
-			if (name == null) {
+			if (structureId == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = description;
+			Object paramObj3 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = xsl;
+			Object paramObj4 = description;
 
-			if (xsl == null) {
+			if (description == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new BooleanWrapper(formatXsl);
-			Object paramObj6 = langType;
+			Object paramObj5 = xsl;
+
+			if (xsl == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = new BooleanWrapper(formatXsl);
+			Object paramObj7 = langType;
 
 			if (langType == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
+				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = new BooleanWrapper(smallImage);
-			Object paramObj8 = smallImageURL;
+			Object paramObj8 = new BooleanWrapper(smallImage);
+			Object paramObj9 = smallImageURL;
 
 			if (smallImageURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = smallFile;
+			Object paramObj10 = smallFile;
 
 			if (smallFile == null) {
-				paramObj9 = new NullWrapper("java.io.File");
+				paramObj10 = new NullWrapper("java.io.File");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
 					"updateTemplate",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
 					});
 			Object returnObj = null;
 

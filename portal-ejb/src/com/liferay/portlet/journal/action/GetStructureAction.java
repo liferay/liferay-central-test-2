@@ -53,11 +53,12 @@ public class GetStructureAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
+            String groupId = PortalUtil.getPortletGroupId(req);
 			String structureId = ParamUtil.getString(req, "structureId");
 
 			JournalStructure structure =
 				JournalStructureLocalServiceUtil.getStructure(
-					companyId, structureId);
+					companyId, groupId, structureId);
 
 			String fileName = structure.getStructureId() + ".xml";
 			byte[] byteArray = structure.getXsd().getBytes();

@@ -34,13 +34,15 @@ import java.io.Serializable;
  */
 public class JournalTemplatePK implements Comparable, Serializable {
 	public String companyId;
+	public String groupId;
 	public String templateId;
 
 	public JournalTemplatePK() {
 	}
 
-	public JournalTemplatePK(String companyId, String templateId) {
+	public JournalTemplatePK(String companyId, String groupId, String templateId) {
 		this.companyId = companyId;
+		this.groupId = groupId;
 		this.templateId = templateId;
 	}
 
@@ -50,6 +52,14 @@ public class JournalTemplatePK implements Comparable, Serializable {
 
 	public void setCompanyId(String companyId) {
 		this.companyId = companyId;
+	}
+
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
 
 	public String getTemplateId() {
@@ -68,6 +78,12 @@ public class JournalTemplatePK implements Comparable, Serializable {
 		JournalTemplatePK pk = (JournalTemplatePK)obj;
 		int value = 0;
 		value = companyId.compareTo(pk.companyId);
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = groupId.compareTo(pk.groupId);
 
 		if (value != 0) {
 			return value;
@@ -96,7 +112,7 @@ public class JournalTemplatePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) &&
+		if ((companyId.equals(pk.companyId)) && (groupId.equals(pk.groupId)) &&
 				(templateId.equals(pk.templateId))) {
 			return true;
 		}
@@ -106,7 +122,7 @@ public class JournalTemplatePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (companyId + templateId).hashCode();
+		return (companyId + groupId + templateId).hashCode();
 	}
 
 	public String toString() {
@@ -115,6 +131,11 @@ public class JournalTemplatePK implements Comparable, Serializable {
 		sb.append("companyId");
 		sb.append(StringPool.EQUAL);
 		sb.append(companyId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("groupId");
+		sb.append(StringPool.EQUAL);
+		sb.append(groupId);
 		sb.append(StringPool.COMMA);
 		sb.append(StringPool.SPACE);
 		sb.append("templateId");

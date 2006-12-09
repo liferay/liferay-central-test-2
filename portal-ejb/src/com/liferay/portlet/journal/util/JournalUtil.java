@@ -457,26 +457,29 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			String companyId, String templateId, Map tokens, String languageId)
+			String companyId, String groupId, String templateId, Map tokens,
+			String languageId)
 		throws PortalException, SystemException {
 
 		return getTemplateScript(
-			companyId, templateId, tokens, languageId, true);
+			companyId, groupId, templateId, tokens, languageId, true);
 	}
 
 	public static String getTemplateScript(
-			String companyId, String templateId, Map tokens, String languageId,
-			boolean transform)
+			String companyId, String groupId, String templateId, Map tokens,
+			String languageId, boolean transform)
 		throws PortalException, SystemException {
 
 		JournalTemplate template =
-			JournalTemplateLocalServiceUtil.getTemplate(companyId, templateId);
+			JournalTemplateLocalServiceUtil.getTemplate(
+				companyId, groupId, templateId);
 
 		return getTemplateScript(template, tokens, languageId, transform);
 	}
 
-	public static String getTemplateScript(JournalTemplate template, Map tokens,
-			String languageId, boolean transform)
+	public static String getTemplateScript(
+			JournalTemplate template, Map tokens, String languageId,
+			boolean transform)
 		throws PortalException, SystemException {
 
 		String script = template.getXsl();
@@ -524,6 +527,7 @@ public class JournalUtil {
 		Company company = themeDisplay.getCompany();
 
 		tokens.put("company_id", themeDisplay.getCompanyId());
+        tokens.put("group_id", themeDisplay.getPortletGroupId());
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(

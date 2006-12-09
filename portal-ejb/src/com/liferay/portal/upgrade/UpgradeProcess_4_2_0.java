@@ -46,8 +46,8 @@ public class UpgradeProcess_4_2_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeJournal());
 		upgrade(new UpgradeToJsSafeIds());
+		upgrade(new UpgradeJournal());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_2_0.class);

@@ -77,7 +77,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading entry " + entryId);
+				_log.info("Upgrading entry " + entryId);
 
 				BookmarksEntryLocalServiceUtil.addEntryResources(
 					folderId, entryId, addCommunityPermissions,
@@ -109,7 +109,7 @@ public class UpgradeBookmarks extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading folder " + folderId);
+				_log.info("Upgrading folder " + folderId);
 
 				BookmarksFolderLocalServiceUtil.addFolderResources(
 					folderId, addCommunityPermissions, addGuestPermissions);

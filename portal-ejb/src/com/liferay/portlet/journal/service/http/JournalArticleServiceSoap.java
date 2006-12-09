@@ -38,11 +38,11 @@ import java.rmi.RemoteException;
  */
 public class JournalArticleServiceSoap {
 	public static com.liferay.portlet.journal.model.JournalArticleSoap getArticle(
-		java.lang.String companyId, java.lang.String articleId, double version)
-		throws RemoteException {
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version) throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.getArticle(companyId,
-					articleId, version);
+					groupId, articleId, version);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}
@@ -66,11 +66,12 @@ public class JournalArticleServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleSoap removeArticleLocale(
-		java.lang.String companyId, java.lang.String articleId, double version,
-		java.lang.String languageId) throws RemoteException {
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, java.lang.String languageId)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalArticle returnValue = JournalArticleServiceUtil.removeArticleLocale(companyId,
-					articleId, version, languageId);
+					groupId, articleId, version, languageId);
 
 			return com.liferay.portlet.journal.model.JournalArticleSoap.toSoapModel(returnValue);
 		}

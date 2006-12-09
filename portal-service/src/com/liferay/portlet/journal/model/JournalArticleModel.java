@@ -43,6 +43,10 @@ public interface JournalArticleModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
+	public String getGroupId();
+
+	public void setGroupId(String groupId);
+
 	public String getArticleId();
 
 	public void setArticleId(String articleId);
@@ -50,10 +54,6 @@ public interface JournalArticleModel extends BaseModel {
 	public double getVersion();
 
 	public void setVersion(double version);
-
-	public String getGroupId();
-
-	public void setGroupId(String groupId);
 
 	public String getUserId();
 

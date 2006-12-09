@@ -43,13 +43,13 @@ public interface JournalStructureModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public String getStructureId();
-
-	public void setStructureId(String structureId);
-
 	public String getGroupId();
 
 	public void setGroupId(String groupId);
+
+	public String getStructureId();
+
+	public void setStructureId(String structureId);
 
 	public String getUserId();
 

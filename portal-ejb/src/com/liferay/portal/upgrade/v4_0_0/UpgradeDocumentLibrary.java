@@ -69,7 +69,6 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 			_upgradeFolder();
 		}
 		catch (Exception e) {
-			e.printStackTrace();
 			throw new UpgradeException(e);
 		}
 	}
@@ -202,7 +201,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 					boolean addCommunityPermissions = true;
 					boolean addGuestPermissions = true;
 
-					_log.debug(
+					_log.info(
 						"Migrating file profile " +
 							new DLFileEntryPK(subfolderId, name));
 
@@ -255,7 +254,7 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Migrating repository " + repositoryId);
+				_log.info("Migrating repository " + repositoryId);
 
 				DLFolder folder = DLFolderLocalServiceUtil.addFolder(
 					userId, plid, parentFolderId, name, description,

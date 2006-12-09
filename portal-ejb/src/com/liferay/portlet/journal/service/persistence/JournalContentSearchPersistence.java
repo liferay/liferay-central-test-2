@@ -586,7 +586,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByO_A(String ownerId, String articleId)
+	public List findByO_G_A(String ownerId, String groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -602,6 +602,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -622,6 +631,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -638,13 +651,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByO_A(String ownerId, String articleId, int begin, int end)
-		throws SystemException {
-		return findByO_A(ownerId, articleId, begin, end, null);
+	public List findByO_G_A(String ownerId, String groupId, String articleId,
+		int begin, int end) throws SystemException {
+		return findByO_G_A(ownerId, groupId, articleId, begin, end, null);
 	}
 
-	public List findByO_A(String ownerId, String articleId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
+	public List findByO_G_A(String ownerId, String groupId, String articleId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -659,6 +672,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -683,6 +705,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -699,16 +725,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByO_A_First(String ownerId,
-		String articleId, OrderByComparator obc)
+	public JournalContentSearch findByO_G_A_First(String ownerId,
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByO_A(ownerId, articleId, 0, 1, obc);
+		List list = findByO_G_A(ownerId, groupId, articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			String msg = "No JournalContentSearch exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
 			msg += "ownerId=";
 			msg += ownerId;
+			msg += ", ";
+			msg += "groupId=";
+			msg += groupId;
 			msg += ", ";
 			msg += "articleId=";
 			msg += articleId;
@@ -720,17 +749,21 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByO_A_Last(String ownerId,
-		String articleId, OrderByComparator obc)
+	public JournalContentSearch findByO_G_A_Last(String ownerId,
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		int count = countByO_A(ownerId, articleId);
-		List list = findByO_A(ownerId, articleId, count - 1, count, obc);
+		int count = countByO_G_A(ownerId, groupId, articleId);
+		List list = findByO_G_A(ownerId, groupId, articleId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			String msg = "No JournalContentSearch exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
 			msg += "ownerId=";
 			msg += ownerId;
+			msg += ", ";
+			msg += "groupId=";
+			msg += groupId;
 			msg += ", ";
 			msg += "articleId=";
 			msg += articleId;
@@ -742,12 +775,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch[] findByO_A_PrevAndNext(
+	public JournalContentSearch[] findByO_G_A_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String ownerId,
-		String articleId, OrderByComparator obc)
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByO_A(ownerId, articleId);
+		int count = countByO_G_A(ownerId, groupId, articleId);
 		Session session = null;
 
 		try {
@@ -762,6 +795,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("ownerId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -786,6 +828,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -809,7 +855,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_A(String companyId, String articleId)
+	public List findByC_G_A(String companyId, String groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -825,6 +871,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -845,6 +900,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -861,13 +920,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByC_A(String companyId, String articleId, int begin, int end)
-		throws SystemException {
-		return findByC_A(companyId, articleId, begin, end, null);
+	public List findByC_G_A(String companyId, String groupId, String articleId,
+		int begin, int end) throws SystemException {
+		return findByC_G_A(companyId, groupId, articleId, begin, end, null);
 	}
 
-	public List findByC_A(String companyId, String articleId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List findByC_G_A(String companyId, String groupId, String articleId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -882,6 +941,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -906,6 +974,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -922,16 +994,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByC_A_First(String companyId,
-		String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_G_A_First(String companyId,
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		List list = findByC_A(companyId, articleId, 0, 1, obc);
+		List list = findByC_G_A(companyId, groupId, articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			String msg = "No JournalContentSearch exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
 			msg += "companyId=";
 			msg += companyId;
+			msg += ", ";
+			msg += "groupId=";
+			msg += groupId;
 			msg += ", ";
 			msg += "articleId=";
 			msg += articleId;
@@ -943,17 +1018,21 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch findByC_A_Last(String companyId,
-		String articleId, OrderByComparator obc)
+	public JournalContentSearch findByC_G_A_Last(String companyId,
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
-		int count = countByC_A(companyId, articleId);
-		List list = findByC_A(companyId, articleId, count - 1, count, obc);
+		int count = countByC_G_A(companyId, groupId, articleId);
+		List list = findByC_G_A(companyId, groupId, articleId, count - 1,
+				count, obc);
 
 		if (list.size() == 0) {
 			String msg = "No JournalContentSearch exists with the key ";
 			msg += StringPool.OPEN_CURLY_BRACE;
 			msg += "companyId=";
 			msg += companyId;
+			msg += ", ";
+			msg += "groupId=";
+			msg += groupId;
 			msg += ", ";
 			msg += "articleId=";
 			msg += articleId;
@@ -965,12 +1044,12 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public JournalContentSearch[] findByC_A_PrevAndNext(
+	public JournalContentSearch[] findByC_G_A_PrevAndNext(
 		JournalContentSearchPK journalContentSearchPK, String companyId,
-		String articleId, OrderByComparator obc)
+		String groupId, String articleId, OrderByComparator obc)
 		throws NoSuchContentSearchException, SystemException {
 		JournalContentSearch journalContentSearch = findByPrimaryKey(journalContentSearchPK);
-		int count = countByC_A(companyId, articleId);
+		int count = countByC_G_A(companyId, groupId, articleId);
 		Session session = null;
 
 		try {
@@ -985,6 +1064,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			}
 			else {
 				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
 			}
 
 			query.append(" AND ");
@@ -1009,6 +1097,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -1087,9 +1179,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByO_A(String ownerId, String articleId)
+	public void removeByO_G_A(String ownerId, String groupId, String articleId)
 		throws SystemException {
-		Iterator itr = findByO_A(ownerId, articleId).iterator();
+		Iterator itr = findByO_G_A(ownerId, groupId, articleId).iterator();
 
 		while (itr.hasNext()) {
 			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
@@ -1097,9 +1189,9 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByC_A(String companyId, String articleId)
+	public void removeByC_G_A(String companyId, String groupId, String articleId)
 		throws SystemException {
-		Iterator itr = findByC_A(companyId, articleId).iterator();
+		Iterator itr = findByC_G_A(companyId, groupId, articleId).iterator();
 
 		while (itr.hasNext()) {
 			JournalContentSearch journalContentSearch = (JournalContentSearch)itr.next();
@@ -1219,7 +1311,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByO_A(String ownerId, String articleId)
+	public int countByO_G_A(String ownerId, String groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -1240,6 +1332,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			query.append(" AND ");
 
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
+			query.append(" AND ");
+
 			if (articleId == null) {
 				query.append("articleId IS NULL");
 			}
@@ -1256,6 +1357,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (ownerId != null) {
 				q.setString(queryPos++, ownerId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {
@@ -1282,7 +1387,7 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByC_A(String companyId, String articleId)
+	public int countByC_G_A(String companyId, String groupId, String articleId)
 		throws SystemException {
 		Session session = null;
 
@@ -1303,6 +1408,15 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			query.append(" AND ");
 
+			if (groupId == null) {
+				query.append("groupId IS NULL");
+			}
+			else {
+				query.append("groupId = ?");
+			}
+
+			query.append(" AND ");
+
 			if (articleId == null) {
 				query.append("articleId IS NULL");
 			}
@@ -1319,6 +1433,10 @@ public class JournalContentSearchPersistence extends BasePersistence {
 
 			if (companyId != null) {
 				q.setString(queryPos++, companyId);
+			}
+
+			if (groupId != null) {
+				q.setString(queryPos++, groupId);
 			}
 
 			if (articleId != null) {

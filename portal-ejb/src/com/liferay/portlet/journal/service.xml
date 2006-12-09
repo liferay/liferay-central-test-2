@@ -8,12 +8,9 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
+		<column name="groupId" type="String" primary="true" />
 		<column name="articleId" type="String" primary="true" />
 		<column name="version" type="double" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="String" />
 
 		<!-- Audit fields -->
 
@@ -54,20 +51,24 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_A" return-type="Collection">
+		<finder name="C_G_A" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
-		<finder name="C_S" return-type="Collection">
+		<finder name="C_G_S" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
-		<finder name="C_T" return-type="Collection">
+		<finder name="C_G_T" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="templateId" />
 		</finder>
-		<finder name="C_A_A" return-type="Collection">
+		<finder name="C_G_A_A" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 			<finder-column name="approved" />
 		</finder>
@@ -89,6 +90,7 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
+		<column name="groupId" type="String" />
 
 		<!-- Finder methods -->
 
@@ -99,12 +101,14 @@
 			<finder-column name="layoutId" />
 			<finder-column name="ownerId" />
 		</finder>
-		<finder name="O_A" return-type="Collection">
+		<finder name="O_G_A" return-type="Collection">
 			<finder-column name="ownerId" />
+			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
-		<finder name="C_A" return-type="Collection">
+		<finder name="C_G_A" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="articleId" />
 		</finder>
 	</entity>
@@ -113,11 +117,8 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
+		<column name="groupId" type="String" primary="true" />
 		<column name="structureId" type="String" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="String" />
 
 		<!-- Audit fields -->
 
@@ -153,11 +154,8 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
+		<column name="groupId" type="String" primary="true" />
 		<column name="templateId" type="String" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="String" />
 
 		<!-- Audit fields -->
 
@@ -187,8 +185,9 @@
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
-		<finder name="C_S" return-type="Collection">
+		<finder name="C_G_S" return-type="Collection">
 			<finder-column name="companyId" />
+			<finder-column name="groupId" />
 			<finder-column name="structureId" />
 		</finder>
 

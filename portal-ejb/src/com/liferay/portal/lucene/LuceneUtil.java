@@ -38,8 +38,6 @@ import java.sql.Connection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.naming.NamingException;
-
 import javax.sql.DataSource;
 
 import org.apache.commons.logging.Log;

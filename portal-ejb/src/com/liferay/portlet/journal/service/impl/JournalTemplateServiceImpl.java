@@ -81,27 +81,32 @@ public class JournalTemplateServiceImpl
 			smallFile, communityPermissions, guestPermissions);
 	}
 
-	public void deleteTemplate(String companyId, String templateId)
+	public void deleteTemplate(
+			String companyId, String groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
-			getPermissionChecker(), companyId, templateId, ActionKeys.DELETE);
+			getPermissionChecker(), companyId, groupId, templateId,
+			ActionKeys.DELETE);
 
-		JournalTemplateLocalServiceUtil.deleteTemplate(companyId, templateId);
+		JournalTemplateLocalServiceUtil.deleteTemplate(
+			companyId, groupId, templateId);
 	}
 
-	public JournalTemplate getTemplate(String companyId, String templateId)
+	public JournalTemplate getTemplate(
+			String companyId, String groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
-			getPermissionChecker(), companyId, templateId, ActionKeys.VIEW);
+			getPermissionChecker(), companyId, groupId, templateId,
+			ActionKeys.VIEW);
 
 		return JournalTemplateLocalServiceUtil.getTemplate(
-			companyId, templateId);
+			companyId, groupId, templateId);
 	}
 
 	public JournalTemplate updateTemplate(
-			String templateId, String structureId, String name,
+			String groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
 			boolean smallImage, String smallImageURL, File smallFile)
 		throws PortalException, SystemException {
@@ -109,12 +114,13 @@ public class JournalTemplateServiceImpl
 		User user = getUser();
 
 		JournalTemplatePermission.check(
-			getPermissionChecker(), user.getCompanyId(), templateId,
+			getPermissionChecker(), user.getCompanyId(), groupId, templateId,
 			ActionKeys.UPDATE);
 
 		return JournalTemplateLocalServiceUtil.updateTemplate(
-			user.getCompanyId(), templateId, structureId, name, description,
-			xsl, formatXsl, langType, smallImage, smallImageURL, smallFile);
+			user.getCompanyId(), groupId, templateId, structureId, name,
+			description, xsl, formatXsl, langType, smallImage, smallImageURL,
+			smallFile);
 	}
 
 }

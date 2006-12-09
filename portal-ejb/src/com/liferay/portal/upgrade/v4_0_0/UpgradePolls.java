@@ -76,7 +76,7 @@ public class UpgradePolls extends UpgradeProcess {
 				boolean addCommunityPermissions = true;
 				boolean addGuestPermissions = true;
 
-				_log.debug("Upgrading question " + questionId);
+				_log.info("Upgrading question " + questionId);
 
 				PollsQuestionLocalServiceUtil.addQuestionResources(
 					questionId, addCommunityPermissions, addGuestPermissions);

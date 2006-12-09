@@ -58,8 +58,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String groupId, java.lang.String structureId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -70,7 +70,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public void addStructureResources(java.lang.String companyId,
-		java.lang.String structureId, java.lang.String[] communityPermissions,
+		java.lang.String groupId, java.lang.String structureId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -83,12 +84,12 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public void checkNewLine(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void deleteStructure(java.lang.String companyId,
-		java.lang.String structureId)
+		java.lang.String groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -98,7 +99,8 @@ public interface JournalStructureLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalStructure getStructure(
-		java.lang.String companyId, java.lang.String structureId)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -124,9 +126,9 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		java.lang.String companyId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd)
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }
