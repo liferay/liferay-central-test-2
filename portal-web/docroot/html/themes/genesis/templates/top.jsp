@@ -44,6 +44,7 @@
 
 								<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
 									<a href="javascript: void(0);" onClick="<%= themeDisplay.getURLAddContent() %>"><bean:message key="add-content" /></a>
+									- <a href="javascript: showLayoutTemplates()"><bean:message key="layout" /></a>
 								</c:if>
 
 								<c:if test="<%= themeDisplay.isShowPageSettingsIcon() %>">

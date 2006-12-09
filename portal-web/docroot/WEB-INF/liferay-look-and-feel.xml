@@ -27,8 +27,8 @@
 				layout-tab-selected-bg=#6699CC
 				layout-tab-selected-text=#4A517D
 
-				portlet-title-bg=#132b47
-				portlet-title-text=#FFFFFF
+				portlet-title-bg=#6699CC
+				portlet-title-text=#000000
 
 				portlet-menu-bg=#B6CBEB
 				portlet-menu-text=#000000
@@ -36,7 +36,7 @@
 				portlet-bg=#F2F2F2
 
 				portlet-font=#000000
-				portlet-font-dim=#0879d5
+				portlet-font-dim=#C4C4C4
 
 				portlet-msg-status=#000000
 				portlet-msg-info=#000000

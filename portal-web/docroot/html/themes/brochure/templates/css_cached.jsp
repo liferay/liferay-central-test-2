@@ -43,7 +43,7 @@ String fontXXL = "1.5em";
 %>
 
 a {
-	color: <%= colorScheme.getPortletFontDim() %>;
+	color: #0879d5;
 	text-decoration: none;
 }
 
@@ -576,7 +576,7 @@ FONT.bg {
 }
 
 .portlet-header-bar-inner {
-	background-color: <%= colorScheme.getPortletTitleBg() %>;
+	background-color: #132b47;
 	height: 18px;
 	position: relative;
 }
@@ -585,7 +585,7 @@ FONT.bg {
 .portlet-borderless-bar { text-align: left; font-size: <%= fontXS %>; }
 
 .portlet-title {
-	color: <%= colorScheme.getPortletTitleText() %>;
+	color: #FFFFFF;
 	font-weight: bold;
 	top: 1px;
 	padding-left: 8px;
