@@ -346,6 +346,7 @@
 						<include name="**/*.jsp" />
 						<include name="**/*.png" />
 						<include name="**/*.tld" />
+						<include name="**/*.vm" />
 					</fileset>
 				</copy>
 			</then>

@@ -1160,6 +1160,7 @@ launch-editor=Abrir editor
 launch=Abrir
 layer-type=Tipo de capa
 layout=Disposición
+layouts=Disposiciones
 ldap=LDAP
 leaderboard=Leaderboard
 leave-a-copy-of-the-forwarded-message=¿Dejar una copia del mensaje remitido?

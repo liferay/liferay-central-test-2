@@ -1160,6 +1160,7 @@ launch-editor=发射编辑
 launch=发射
 layer-type=层类型
 layout=版面
+layouts=布局
 ldap=LDAP
 leaderboard=Leaderboard
 leave-a-copy-of-the-forwarded-message=留下批转的消息的拷贝?

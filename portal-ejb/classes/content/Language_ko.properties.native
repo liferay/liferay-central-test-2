@@ -1159,6 +1159,7 @@ launch-editor=발사 편집자
 launch=발사
 layer-type=층 유형
 layout=배치
+layouts=배치
 ldap=LDAP
 leaderboard=Leaderboard
 leave-a-copy-of-the-forwarded-message=발송한 메시지의 사본을 남겨두십시요?

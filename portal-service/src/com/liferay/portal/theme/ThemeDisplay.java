@@ -421,6 +421,14 @@ public class ThemeDisplay implements Serializable {
 		_showHomeIcon = showHomeIcon;
 	}
 
+	public boolean isShowLayoutTemplatesIcon() {
+		return _showLayoutTemplatesIcon;
+	}
+
+	public void setShowLayoutTemplatesIcon(boolean showLayoutTemplatesIcon) {
+		_showLayoutTemplatesIcon = showLayoutTemplatesIcon;
+	}
+
 	public boolean isShowMyAccountIcon() {
 		return _showMyAccountIcon;
 	}
@@ -483,6 +491,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setURLHome(String urlHome) {
 		_urlHome = urlHome;
+	}
+
+	public String getURLLayoutTemplates() {
+		return _urlLayoutTemplates;
+	}
+
+	public void setURLLayoutTemplates(String urlLayoutTemplates) {
+		_urlLayoutTemplates = urlLayoutTemplates;
 	}
 
 	public PortletURL getURLMyAccount() {
@@ -575,6 +591,7 @@ public class ThemeDisplay implements Serializable {
 		_pathThemeRoot = null;
 		_showAddContentIcon = false;
 		_showHomeIcon = false;
+		_showLayoutTemplatesIcon = false;
 		_showMyAccountIcon = false;
 		_showPageSettingsIcon = false;
 		_showPortalIcon = false;
@@ -583,6 +600,7 @@ public class ThemeDisplay implements Serializable {
 		_urlAddContent = null;
 		_urlCreateAccount = null;
 		_urlHome = null;
+		_urlLayoutTemplates = null;
 		_urlMyAccount = null;
 		_urlPageSettings = null;
 		_urlPortal = null;
@@ -632,6 +650,7 @@ public class ThemeDisplay implements Serializable {
 	private String _pathThemeRoot;
 	private boolean _showAddContentIcon;
 	private boolean _showHomeIcon;
+	private boolean _showLayoutTemplatesIcon;
 	private boolean _showMyAccountIcon;
 	private boolean _showPageSettingsIcon;
 	private boolean _showPortalIcon;
@@ -640,6 +659,7 @@ public class ThemeDisplay implements Serializable {
 	private String _urlAddContent = null;
 	private PortletURL _urlCreateAccount = null;
 	private String _urlHome = null;
+	private String _urlLayoutTemplates = null;
 	private PortletURL _urlMyAccount = null;
 	private PortletURL _urlPageSettings = null;
 	private String _urlPortal = null;

@@ -1159,6 +1159,7 @@ launch-editor=Συντάκτης έναρξης
 launch=Έναρξη
 layer-type=Τύπος Στρώματος
 layout=Διάταξη
+layouts=Σχεδιαγράμματα
 ldap=LDAP
 leaderboard=Leaderboard
 leave-a-copy-of-the-forwarded-message=Αφήστε ένα αντίγραφο του διαβιβασμένου μηνύματος;

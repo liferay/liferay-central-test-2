@@ -1160,6 +1160,7 @@ launch-editor=Start editor
 launch=Start
 layer-type=Layer Type
 layout=Lay-out
+layouts=Lay-outs
 ldap=LDAP
 leaderboard=Ranglijst
 leave-a-copy-of-the-forwarded-message=Bewaar een kopie van het doorgezonden bericht?

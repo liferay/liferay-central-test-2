@@ -1158,6 +1158,7 @@ launch-editor=進水の編集者
 launch=進水
 layer-type=層のタイプ
 layout=レイアウト
+layouts=レイアウト
 ldap=LDAP
 leaderboard=Leaderboard
 leave-a-copy-of-the-forwarded-message=進められたメッセージのコピーを残しなさいか。

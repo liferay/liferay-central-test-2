@@ -438,6 +438,9 @@ public class ServicePreAction extends Action {
 						"LayoutConfiguration.toggle('" +
 							plid + "', '" +  PortletKeys.LAYOUT_CONFIGURATION +
 								"', '" + doAsUserId + "');");
+
+					themeDisplay.setURLLayoutTemplates(
+						"showLayoutTemplates();");
 				}
 
 				if (hasManageLayoutsPermission) {

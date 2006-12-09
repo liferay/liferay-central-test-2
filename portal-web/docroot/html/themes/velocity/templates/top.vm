@@ -64,7 +64,7 @@
 						<div id="layout_nav_menu_list">
 							#if ($layout && $themeDisplay.isShowAddContentIcon())
 								<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <a href="javascript: void(0);" onClick="$themeDisplay.getURLAddContent()">$languageUtil.get($pageContext, "add-content")</a>
-								<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <a href="javascript: showLayoutTemplates()">$languageUtil.get($pageContext, "layouts")</a>
+								<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <a href="javascript: void(0);" onClick="$themeDisplay.getURLLayoutTemplates()">$languageUtil.get($pageContext, "layouts")</a>
 							#end
 							#if ($themeDisplay.isShowPageSettingsIcon())
 								&nbsp;<img src="$themeDisplay.getPathThemeImage()/custom/bullet.gif"> <a href="$themeDisplay.getURLPageSettings().toString()">$languageUtil.get($pageContext, "page-settings")</a>
