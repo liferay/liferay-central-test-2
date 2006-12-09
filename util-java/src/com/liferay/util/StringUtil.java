@@ -73,6 +73,23 @@ public class StringUtil {
 		return s;
 	}
 
+	public static String bytesToHexString(byte[] bytes) {
+		StringBuffer sb = new StringBuffer(bytes.length);
+
+		for (int i = 0; i < bytes.length; i++) {
+			String hex = Integer.toHexString(
+				0x0100 + (bytes[i] & 0x00FF)).substring(1);
+
+			if (hex.length() < 2) {
+				sb.append("0");
+			}
+
+			sb.append(hex);
+		}
+
+		return sb.toString();
+	}
+
 	public static boolean contains(String s, String text) {
 		return contains(s, text, StringPool.COMMA);
 	}

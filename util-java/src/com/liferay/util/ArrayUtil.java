@@ -30,6 +30,16 @@ package com.liferay.util;
  */
 public class ArrayUtil {
 
+	public static String[] append(String[] array, String obj) {
+		String[] newArray = new String[array.length + 1];
+
+		System.arraycopy(array, 0, newArray, 0, array.length);
+
+		newArray[newArray.length - 1] = obj;
+
+		return newArray;
+	}
+
 	public static boolean contains(Object[] array, Object obj) {
 		if (array == null) {
 			return false;
