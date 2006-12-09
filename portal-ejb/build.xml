@@ -42,6 +42,18 @@
 			nowarn="${javac.nowarn}"
 			srcdir="src"
 		/>
+
+		<!--<javac
+			classpathref="project.classpath"
+			compiler="${javac.compiler}"
+			debug="${javac.debug}"
+			deprecation="${javac.deprecation}"
+			destdir="classes"
+			includes="**/portal/smtp/SMTPServerUtil.java"
+			fork="${javac.fork}"
+			nowarn="${javac.nowarn}"
+			srcdir="src"
+		/>-->
 	</target>
 
 	<target name="compile-tools">
