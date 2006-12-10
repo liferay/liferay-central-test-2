@@ -92,7 +92,7 @@ public class ExportAction extends Action {
 
 	public static final String DEFAULT_SITE_GROUP_ID = "1";
 
-	public static final String DEFAULT_CMS_GROUP_ID = "2";
+	public static final String DEFAULT_CMS_GROUP_ID = "1";
 
 	public ActionForward execute(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,

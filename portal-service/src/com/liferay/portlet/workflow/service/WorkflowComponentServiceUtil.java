@@ -94,8 +94,8 @@ public class WorkflowComponentServiceUtil {
 	}
 
 	public static java.util.List getInstances(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
@@ -104,12 +104,12 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getInstances(definitionId, instanceId,
-			workflowName, workflowVersion, gtStartDate, ltStartDate, gtEndDate,
-			ltEndDate, hideEndedTasks, andOperator, begin, end);
+			definitionName, definitionVersion, gtStartDate, ltStartDate,
+			gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
 	}
 
 	public static int getInstancesCount(long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator)
@@ -118,13 +118,13 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getInstancesCount(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public static java.lang.String getInstancesCountXml(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -132,13 +132,13 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getInstancesCountXml(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public static java.lang.String getInstancesXml(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
@@ -147,7 +147,7 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getInstancesXml(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
 			begin, end);
 	}
@@ -185,7 +185,7 @@ public class WorkflowComponentServiceUtil {
 	}
 
 	public static java.util.List getUserTasks(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -196,13 +196,13 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getUserTasks(instanceId, taskName,
-			workflowName, assignedTo, gtCreateDate, ltCreateDate, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
-			begin, end);
+			definitionName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator, begin, end);
 	}
 
 	public static int getUserTasksCount(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -212,12 +212,13 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getUserTasksCount(instanceId, taskName,
-			workflowName, assignedTo, gtCreateDate, ltCreateDate, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+			definitionName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator);
 	}
 
 	public static java.lang.String getUserTasksCountXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -227,13 +228,13 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getUserTasksCountXml(instanceId,
-			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator);
 	}
 
 	public static java.lang.String getUserTasksXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -244,9 +245,9 @@ public class WorkflowComponentServiceUtil {
 		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
 
 		return workflowComponentService.getUserTasksXml(instanceId, taskName,
-			workflowName, assignedTo, gtCreateDate, ltCreateDate, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
-			begin, end);
+			definitionName, assignedTo, gtCreateDate, ltCreateDate,
+			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			andOperator, begin, end);
 	}
 
 	public static void signalInstance(long instanceId)

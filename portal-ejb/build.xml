@@ -43,7 +43,7 @@
 			srcdir="src"
 		/>
 
-		<!--<javac
+		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
@@ -53,7 +53,7 @@
 			fork="${javac.fork}"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
-		/>-->
+		/>
 	</target>
 
 	<target name="compile-tools">

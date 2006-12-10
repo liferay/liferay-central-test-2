@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
@@ -39,7 +40,7 @@ public class DefinitionSearchTerms extends DefinitionDisplayTerms {
 		super(req);
 
 		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
-		name = DAOParamUtil.getLike(req, NAME);
+		name = DAOParamUtil.getLike(req, NAME, StringPool.PERCENT);
 	}
 
 }

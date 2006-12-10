@@ -24,7 +24,7 @@ package com.liferay.portlet.workflow.search;
 
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
-
+import com.liferay.portal.kernel.util.StringPool;
 import java.util.Date;
 
 import javax.portlet.RenderRequest;
@@ -37,9 +37,13 @@ import javax.portlet.RenderRequest;
  */
 public class InstanceDisplayTerms extends DisplayTerms {
 
-	public static final String WORKFLOW_NAME = "workflowName";
+	public static final String DEFINITION_ID = "definitionId";
 
-	public static final String WORKFLOW_VERSION = "workflowVersion";
+	public static final String INSTANCE_ID = "instanceId";
+
+	public static final String DEFINITION_NAME = "definitionName";
+
+	public static final String DEFINITION_VERSION = "definitionVersion";
 
 	public static final String GT_START_DATE = "gtStartDate";
 
@@ -49,26 +53,84 @@ public class InstanceDisplayTerms extends DisplayTerms {
 
 	public static final String LT_END_DATE = "ltEndDate";
 
+	public static final String HIDE_ENDED_TASKS = "hideEndedTasks";
+
 	public InstanceDisplayTerms(RenderRequest req) {
 		super(req);
 
-		workflowName = ParamUtil.getString(req, WORKFLOW_NAME);
-		workflowVersion = ParamUtil.getDouble(req, WORKFLOW_VERSION);
+		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
+		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
+		definitionName = ParamUtil.getString(req, DEFINITION_NAME);
+		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
+		gtStartDate = ParamUtil.getString(req, GT_START_DATE);
+		ltStartDate = ParamUtil.getString(req, LT_START_DATE);
+		gtEndDate = ParamUtil.getString(req, GT_END_DATE);
+		ltEndDate = ParamUtil.getString(req, LT_END_DATE);
+		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
 	}
 
-	public String getWorkflowName() {
-		return workflowName;
+	public long getDefinitionId() {
+		return definitionId;
 	}
 
-	public double getWorkflowVersion() {
-		return workflowVersion;
+	public String getDefinitionIdString() {
+		if (definitionId != 0) {
+			return String.valueOf(definitionId);
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
-	protected String workflowName;
-	protected double workflowVersion;
-	protected Date gtStartDate;
-	protected Date ltStartDate;
-	protected Date gtEndDate;
-	protected Date ltEndDate;
+	public long getInstanceId() {
+		return instanceId;
+	}
+
+	public String getInstanceIdString() {
+		if (instanceId != 0) {
+			return String.valueOf(instanceId);
+		}
+		else {
+			return StringPool.BLANK;
+		}
+	}
+
+	public String getDefinitionName() {
+		return definitionName;
+	}
+
+	public String getDefinitionVersion() {
+		return definitionVersion;
+	}
+
+	public String getGtStartDate() {
+		return gtStartDate;
+	}
+
+	public String getLtStartDate() {
+		return ltStartDate;
+	}
+
+	public String getGtEndDate() {
+		return gtEndDate;
+	}
+
+	public String getLtEndDate() {
+		return ltEndDate;
+	}
+
+	public boolean isHideEndedTasks() {
+		return hideEndedTasks;
+	}
+
+	protected long definitionId;
+	protected long instanceId;
+	protected String definitionName;
+	protected String definitionVersion;
+	protected String gtStartDate;
+	protected String ltStartDate;
+	protected String gtEndDate;
+	protected String ltEndDate;
+	protected boolean hideEndedTasks;
 
 }

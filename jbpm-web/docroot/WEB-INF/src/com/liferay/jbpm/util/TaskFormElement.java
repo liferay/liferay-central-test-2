@@ -76,8 +76,6 @@ public class TaskFormElement implements Serializable {
 		if (_type.equals(TYPE_CHECKBOX) || _type.equals(TYPE_RADIO) ||
 			_type.equals(TYPE_SELECT)) {
 
-			_valueList = new ArrayList();
-
 			String[] values = StringUtil.split(
 				dataElements[2], StringPool.COMMA);
 
@@ -174,7 +172,7 @@ public class TaskFormElement implements Serializable {
 	private String _variableName;
 	private String _type;
 	private String _value;
-	private List _valueList;
+	private List _valueList = new ArrayList();
 	private boolean _readable = true;
 	private boolean _writable = true;
 	private boolean _required = true;

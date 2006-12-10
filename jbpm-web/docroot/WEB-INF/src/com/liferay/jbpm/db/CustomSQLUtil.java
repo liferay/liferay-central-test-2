@@ -22,7 +22,7 @@
 
 package com.liferay.jbpm.db;
 
-import com.liferay.util.dao.hibernate.OrderByComparator;
+import com.liferay.portal.kernel.util.OrderByComparator;
 
 /**
  * <a href="CustomSQLUtil.java.html"><b><i>View Source</i></b></a>

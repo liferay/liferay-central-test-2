@@ -36,7 +36,7 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class DisplayTerms {
 
-	public static final String AND_OPERATOR = "and_operator";
+	public static final String AND_OPERATOR = "andOperator";
 
 	public DisplayTerms(HttpServletRequest req) {
 		andOperator = ParamUtil.getBoolean(req, AND_OPERATOR, true);

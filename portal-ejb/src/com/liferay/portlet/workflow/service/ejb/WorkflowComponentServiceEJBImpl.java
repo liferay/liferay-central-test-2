@@ -106,7 +106,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 	}
 
 	public java.util.List getInstances(long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
@@ -115,13 +115,13 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstances(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
 			begin, end);
 	}
 
 	public int getInstancesCount(long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator)
@@ -130,13 +130,13 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCount(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesCountXml(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -144,12 +144,12 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCountXml(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesXml(long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
@@ -158,7 +158,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesXml(definitionId,
-			instanceId, workflowName, workflowVersion, gtStartDate,
+			instanceId, definitionName, definitionVersion, gtStartDate,
 			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
 			begin, end);
 	}
@@ -198,7 +198,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 	}
 
 	public java.util.List getUserTasks(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -209,13 +209,13 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasks(instanceId,
-			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator, begin, end);
 	}
 
 	public int getUserTasksCount(long instanceId, java.lang.String taskName,
-		java.lang.String workflowName, java.lang.String assignedTo,
+		java.lang.String definitionName, java.lang.String assignedTo,
 		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
@@ -225,13 +225,13 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCount(instanceId,
-			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator);
 	}
 
 	public java.lang.String getUserTasksCountXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -241,13 +241,13 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCountXml(instanceId,
-			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator);
 	}
 
 	public java.lang.String getUserTasksXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -258,7 +258,7 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksXml(instanceId,
-			taskName, workflowName, assignedTo, gtCreateDate, ltCreateDate,
+			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
 			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 			andOperator, begin, end);
 	}

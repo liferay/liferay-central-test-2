@@ -110,32 +110,36 @@ public class GetArticlesAction extends Action {
 		String structureId = DAOParamUtil.getString(req, "structureId");
 		String templateId = DAOParamUtil.getString(req, "templateId");
 
-		Date gtDate = null;
+		Date displayDateGT = null;
 
-		String gtDateParam = ParamUtil.getString(req, "gtDate");
+		String displayDateGTParam = ParamUtil.getString(req, "displayDateGT");
 
-		if (Validator.isNotNull(gtDateParam)) {
-			DateFormat gtDateFormat = DateUtil.getISOFormat(gtDateParam);
+		if (Validator.isNotNull(displayDateGTParam)) {
+			DateFormat displayDateGTFormat = DateUtil.getISOFormat(
+				displayDateGTParam);
 
-			gtDate = GetterUtil.getDate(gtDateParam, gtDateFormat);
+			displayDateGT = GetterUtil.getDate(
+				displayDateGTParam, displayDateGTFormat);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("gtDate is " + gtDate);
+			_log.debug("displayDateGT is " + displayDateGT);
 		}
 
-		Date ltDate = null;
+		Date displayDateLT = null;
 
-		String ltDateParam = ParamUtil.getString(req, "ltDate");
+		String displayDateLTParam = ParamUtil.getString(req, "displayDateLT");
 
-		if (Validator.isNotNull(ltDateParam)) {
-			DateFormat ltDateFormat = DateUtil.getISOFormat(ltDateParam);
+		if (Validator.isNotNull(displayDateLTParam)) {
+			DateFormat displayDateLTFormat = DateUtil.getISOFormat(
+				displayDateLTParam);
 
-			ltDate = GetterUtil.getDate(ltDateParam, ltDateFormat);
+			displayDateLT = GetterUtil.getDate(
+				displayDateLTParam, displayDateLTFormat);
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("ltDate is " + ltDate);
+			_log.debug("displayDateLT is " + displayDateLT);
 		}
 
 		Boolean approved = Boolean.TRUE;
@@ -154,8 +158,8 @@ public class GetArticlesAction extends Action {
 
 		return JournalArticleLocalServiceUtil.search(
 			companyId, articleId, version, groupId, title, description, content,
-			type, structureId, templateId, gtDate, ltDate, approved, expired,
-			reviewDate, andOperator, begin, end, obc);
+			type, structureId, templateId, displayDateGT, displayDateLT,
+			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	protected byte[] getContent(HttpServletRequest req, List articles)

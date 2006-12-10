@@ -41,11 +41,24 @@ public class DAOParamUtil {
 	// Servlet Request
 
 	public static String getLike(ServletRequest req, String param) {
-		return getLike(req, param, true);
+		return getLike(req, param, null, true);
+	}
+
+	public static String getLike(
+		ServletRequest req, String param, String defaultValue) {
+
+		return getLike(req, param, defaultValue, true);
 	}
 
 	public static String getLike(
 		ServletRequest req, String param, boolean toLowerCase) {
+
+		return getLike(req, param, null, toLowerCase);
+	}
+
+	public static String getLike(
+		ServletRequest req, String param, String defaultValue,
+		boolean toLowerCase) {
 
 		String value = req.getParameter(param);
 
@@ -58,7 +71,7 @@ public class DAOParamUtil {
 		}
 
 		if (Validator.isNull(value)) {
-			value = null;
+			value = defaultValue;
 		}
 		else {
 			value = StringPool.PERCENT + value + StringPool.PERCENT;
@@ -81,11 +94,24 @@ public class DAOParamUtil {
 	// Portlet Request
 
 	public static String getLike(PortletRequest req, String param) {
-		return getLike(req, param, true);
+		return getLike(req, param, null, true);
+	}
+
+	public static String getLike(
+		PortletRequest req, String param, String defaultValue) {
+
+		return getLike(req, param, defaultValue, true);
 	}
 
 	public static String getLike(
 		PortletRequest req, String param, boolean toLowerCase) {
+
+		return getLike(req, param, null, toLowerCase);
+	}
+
+	public static String getLike(
+		PortletRequest req, String param, String defaultValue,
+		boolean toLowerCase) {
 
 		String value = req.getParameter(param);
 
@@ -98,7 +124,7 @@ public class DAOParamUtil {
 		}
 
 		if (Validator.isNull(value)) {
-			value = null;
+			value = defaultValue;
 		}
 		else {
 			value = StringPool.PERCENT + value + StringPool.PERCENT;

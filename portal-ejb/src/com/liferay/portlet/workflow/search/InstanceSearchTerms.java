@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
@@ -38,8 +39,9 @@ public class InstanceSearchTerms extends InstanceDisplayTerms {
 	public InstanceSearchTerms(RenderRequest req) {
 		super(req);
 
-		workflowName = DAOParamUtil.getString(req, WORKFLOW_NAME);
-		workflowVersion = ParamUtil.getDouble(req, WORKFLOW_VERSION);
+		definitionName = DAOParamUtil.getLike(
+			req, DEFINITION_NAME, StringPool.PERCENT);
+		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
 	}
 
 }

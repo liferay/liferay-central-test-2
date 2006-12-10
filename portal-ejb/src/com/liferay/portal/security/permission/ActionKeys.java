@@ -39,6 +39,8 @@ public class ActionKeys {
 
 	public static final String ADD_COUPON = "ADD_COUPON";
 
+	public static final String ADD_DEFINITION = "ADD_DEFINITION";
+
 	public static final String ADD_DISCUSSION = "ADD_DISCUSSION";
 
 	public static final String ADD_DOCUMENT = "ADD_DOCUMENT";
@@ -52,6 +54,8 @@ public class ActionKeys {
 	public static final String ADD_IMAGE = "ADD_IMAGE";
 
 	public static final String ADD_ITEM = "ADD_ITEM";
+
+	public static final String ADD_INSTANCE = "ADD_INSTANCE";
 
 	public static final String ADD_LOCATION = "ADD_LOCATION";
 
@@ -107,6 +111,8 @@ public class ActionKeys {
 
 	public static final String IMPERSONATE = "IMPERSONATE";
 
+	public static final String MANAGE = "MANAGE";
+
 	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";
 
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";
@@ -120,6 +126,8 @@ public class ActionKeys {
 	public static final String PREFERENCES = "PREFERENCES";
 
 	public static final String PRINT = "PRINT";
+
+	public static final String SIGNAL = "SIGNAL";
 
 	public static final String SUBSCRIBE = "SUBSCRIBE";
 

@@ -320,8 +320,8 @@ public class WorkflowComponentServiceHttp {
 	}
 
 	public static java.util.List getInstances(HttpPrincipal httpPrincipal,
-		long definitionId, long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long definitionId, long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
@@ -330,15 +330,15 @@ public class WorkflowComponentServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
 			Object paramObj1 = new LongWrapper(instanceId);
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = workflowVersion;
+			Object paramObj3 = definitionVersion;
 
-			if (workflowVersion == null) {
+			if (definitionVersion == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
@@ -404,8 +404,8 @@ public class WorkflowComponentServiceHttp {
 	}
 
 	public static int getInstancesCount(HttpPrincipal httpPrincipal,
-		long definitionId, long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long definitionId, long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -413,15 +413,15 @@ public class WorkflowComponentServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
 			Object paramObj1 = new LongWrapper(instanceId);
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = workflowVersion;
+			Object paramObj3 = definitionVersion;
 
-			if (workflowVersion == null) {
+			if (definitionVersion == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
@@ -485,7 +485,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getInstancesCountXml(
 		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator)
@@ -494,15 +494,15 @@ public class WorkflowComponentServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
 			Object paramObj1 = new LongWrapper(instanceId);
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = workflowVersion;
+			Object paramObj3 = definitionVersion;
 
-			if (workflowVersion == null) {
+			if (definitionVersion == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
@@ -566,7 +566,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getInstancesXml(
 		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
@@ -575,15 +575,15 @@ public class WorkflowComponentServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(definitionId);
 			Object paramObj1 = new LongWrapper(instanceId);
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = workflowVersion;
+			Object paramObj3 = definitionVersion;
 
-			if (workflowVersion == null) {
+			if (definitionVersion == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
@@ -786,7 +786,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.List getUserTasks(HttpPrincipal httpPrincipal,
 		long instanceId, java.lang.String taskName,
-		java.lang.String workflowName, java.lang.String assignedTo,
+		java.lang.String definitionName, java.lang.String assignedTo,
 		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
@@ -801,9 +801,9 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
@@ -888,7 +888,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static int getUserTasksCount(HttpPrincipal httpPrincipal,
 		long instanceId, java.lang.String taskName,
-		java.lang.String workflowName, java.lang.String assignedTo,
+		java.lang.String definitionName, java.lang.String assignedTo,
 		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
@@ -903,9 +903,9 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
@@ -988,7 +988,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getUserTasksCountXml(
 		HttpPrincipal httpPrincipal, long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -1003,9 +1003,9 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
@@ -1088,7 +1088,7 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.lang.String getUserTasksXml(
 		HttpPrincipal httpPrincipal, long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -1104,9 +1104,9 @@ public class WorkflowComponentServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = workflowName;
+			Object paramObj2 = definitionName;
 
-			if (workflowName == null) {
+			if (definitionName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 

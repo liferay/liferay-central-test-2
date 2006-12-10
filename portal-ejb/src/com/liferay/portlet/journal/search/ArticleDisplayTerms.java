@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
 
@@ -82,6 +83,15 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public double getVersion() {
 		return version;
+	}
+
+	public String getVersionString() {
+		if (version != 0) {
+			return String.valueOf(version);
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getGroupId() {

@@ -102,4 +102,6 @@ public class PortletKeys {
 
 	public static final String WIKI = "36";
 
+	public static final String WORKFLOW = "93";
+
 }

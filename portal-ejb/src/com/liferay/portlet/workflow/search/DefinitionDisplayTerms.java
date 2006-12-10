@@ -26,6 +26,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
 
 import javax.portlet.RenderRequest;
+import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="DefinitionDisplayTerms.java.html"><b><i>View Source</i></b></a>
@@ -48,6 +49,15 @@ public class DefinitionDisplayTerms extends DisplayTerms {
 
 	public long getDefinitionId() {
 		return definitionId;
+	}
+
+	public String getDefinitionIdString() {
+		if (definitionId != 0) {
+			return String.valueOf(definitionId);
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	public String getName() {

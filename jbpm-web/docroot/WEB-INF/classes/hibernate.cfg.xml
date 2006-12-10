@@ -6,19 +6,19 @@
 
 		<!-- Hypersonic -->
 
-		<!--<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
+		<property name="hibernate.dialect">org.hibernate.dialect.HSQLDialect</property>
 		<property name="hibernate.connection.driver_class">org.hsqldb.jdbcDriver</property>
 		<property name="hibernate.connection.url">jdbc:hsqldb:jbpm</property>
 		<property name="hibernate.connection.username">sa</property>
-		<property name="hibernate.connection.password"></property>-->
+		<property name="hibernate.connection.password"></property>
 
 		<!-- MySQL -->
 		
-		<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
+		<!--<property name="hibernate.dialect">org.hibernate.dialect.MySQLDialect</property>
 		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
 		<property name="hibernate.connection.url">jdbc:mysql://localhost/jbpm?useUnicode=true&amp;characterEncoding=UTF-8</property>
 		<property name="hibernate.connection.username"></property>
-		<property name="hibernate.connection.password"></property>
+		<property name="hibernate.connection.password"></property>-->
 
 		<!-- Mappings -->
 

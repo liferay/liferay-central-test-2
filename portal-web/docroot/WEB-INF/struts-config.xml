@@ -1354,6 +1354,20 @@
 
 		<!-- Workflow -->
 
+		<action path="/workflow/edit_definition" type="com.liferay.portlet.workflow.action.EditDefinitionAction">
+			<forward name="portlet.workflow.edit_definition" path="portlet.workflow.edit_definition" />
+			<forward name="portlet.workflow.error" path="portlet.workflow.error" />
+		</action>
+
+		<action path="/workflow/edit_instance" type="com.liferay.portlet.workflow.action.EditInstanceAction">
+			<forward name="portlet.workflow.error" path="portlet.workflow.error" />
+		</action>
+
+		<action path="/workflow/edit_task" type="com.liferay.portlet.workflow.action.EditTaskAction">
+			<forward name="portlet.workflow.edit_task" path="portlet.workflow.edit_task" />
+			<forward name="portlet.workflow.error" path="portlet.workflow.error" />
+		</action>
+
 		<action path="/workflow/view" type="com.liferay.portlet.workflow.action.ViewAction">
 			<forward name="portlet.workflow.error" path="portlet.workflow.error" />
 			<forward name="portlet.workflow.view" path="portlet.workflow.view" />

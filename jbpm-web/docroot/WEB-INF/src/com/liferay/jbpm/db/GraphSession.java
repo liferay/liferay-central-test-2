@@ -139,18 +139,18 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public int countProcessInstancesBySearchTerms(
-		String workflowName, String workflowVersion, String gtStartDate,
+		String definitionName, String definitionVersion, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator) {
 
 		try {
-			int workflowVersionInt = 0;
+			int definitionVersionInt = 0;
 
-			if (!Validator.isNumber(workflowVersion)) {
-				workflowVersion = null;
+			if (!Validator.isNumber(definitionVersion)) {
+				definitionVersion = null;
 			}
 			else {
-				workflowVersionInt = GetterUtil.getInteger(workflowVersion);
+				definitionVersionInt = GetterUtil.getInteger(definitionVersion);
 			}
 
 			String endDateCheck = "(pi.end IS NULL) ";
@@ -171,10 +171,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(workflowName);
-			qPos.add(workflowName);
-			qPos.add(workflowVersionInt);
-			qPos.add(workflowVersion);
+			qPos.add(definitionName);
+			qPos.add(definitionName);
+			qPos.add(definitionVersionInt);
+			qPos.add(definitionVersion);
 			qPos.add(_getDate(gtStartDate, true));
 			qPos.add(_getDate(gtStartDate, true));
 			qPos.add(_getDate(ltStartDate, false));
@@ -207,7 +207,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public int countTaskInstancesBySearchTerms(
-		String taskName, String workflowName, String assignedTo,
+		String taskName, String definitionName, String assignedTo,
 		String gtCreateDate, String ltCreateDate, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator) {
@@ -239,8 +239,6 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				index = 1;
 			}
 
-			sql += "ORDER BY taskActorId DESC, taskCreate ASC";
-
 			String endDateCheck = "(JBPM_TaskInstance.END_ IS NULL) ";
 
 			if (hideEndedTasks) {
@@ -255,15 +253,13 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			SQLQuery q = _session.createSQLQuery(sql);
 
-			q.addScalar("taskId", Hibernate.LONG);
-
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < index; i++) {
 				qPos.add(taskName);
 				qPos.add(taskName);
-				qPos.add(workflowName);
-				qPos.add(workflowName);
+				qPos.add(definitionName);
+				qPos.add(definitionName);
 				qPos.add(_getDate(gtCreateDate, true));
 				qPos.add(_getDate(gtCreateDate, true));
 				qPos.add(_getDate(ltCreateDate, false));
@@ -288,10 +284,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long l = (Long)itr.next();
+				Integer i = (Integer)itr.next();
 
-				if (l != null) {
-					count += l.intValue();
+				if (i != null) {
+					count += i.intValue();
 				}
 			}
 
@@ -322,20 +318,20 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public List findProcessInstancesBySearchTerms(
-		String workflowName, String workflowVersion, String gtStartDate,
+		String definitionName, String definitionVersion, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end) {
 
 		List list = new ArrayList();
 
 		try {
-			int workflowVersionInt = 0;
+			int definitionVersionInt = 0;
 
-			if (!Validator.isNumber(workflowVersion)) {
-				workflowVersion = null;
+			if (!Validator.isNumber(definitionVersion)) {
+				definitionVersion = null;
 			}
 			else {
-				workflowVersionInt = GetterUtil.getInteger(workflowVersion);
+				definitionVersionInt = GetterUtil.getInteger(definitionVersion);
 			}
 
 			String endDateCheck = "(pi.end IS NULL) ";
@@ -356,10 +352,10 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(workflowName);
-			qPos.add(workflowName);
-			qPos.add(workflowVersionInt);
-			qPos.add(workflowVersion);
+			qPos.add(definitionName);
+			qPos.add(definitionName);
+			qPos.add(definitionVersionInt);
+			qPos.add(definitionVersion);
 			qPos.add(_getDate(gtStartDate, true));
 			qPos.add(_getDate(gtStartDate, true));
 			qPos.add(_getDate(ltStartDate, false));
@@ -390,7 +386,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public List findTaskInstancesBySearchTerms(
-		String taskName, String workflowName, String assignedTo,
+		String taskName, String definitionName, String assignedTo,
 		String gtCreateDate, String ltCreateDate, String gtStartDate,
 		String ltStartDate, String gtEndDate, String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end) {
@@ -447,8 +443,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			for (int i = 0; i < index; i++) {
 				qPos.add(taskName);
 				qPos.add(taskName);
-				qPos.add(workflowName);
-				qPos.add(workflowName);
+				qPos.add(definitionName);
+				qPos.add(definitionName);
 				qPos.add(_getDate(gtCreateDate, true));
 				qPos.add(_getDate(gtCreateDate, true));
 				qPos.add(_getDate(ltCreateDate, false));

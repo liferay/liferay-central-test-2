@@ -22,9 +22,9 @@
 
 package com.liferay.jbpm.handler;
 
-import com.liferay.client.portal.model.GroupModel;
-import com.liferay.client.portal.model.RoleModel;
-import com.liferay.client.portal.model.UserModel;
+import com.liferay.client.portal.model.GroupSoap;
+import com.liferay.client.portal.model.RoleSoap;
+import com.liferay.client.portal.model.UserSoap;
 import com.liferay.client.portal.service.http.GroupServiceSoap;
 import com.liferay.client.portal.service.http.GroupServiceSoapServiceLocator;
 import com.liferay.client.portal.service.http.RoleServiceSoap;
@@ -70,7 +70,7 @@ public class IdentityAssignmentHandler
 					assignable.setActorId(id);
 				}
 				else {
-			        UserModel user =
+			        UserSoap user =
 						userSoap.getUserByEmailAddress(companyId, name);
 
 					assignable.setActorId(user.getUserId());
@@ -78,12 +78,12 @@ public class IdentityAssignmentHandler
 			}
 			else if (type.equals("group")) {
 				if (Validator.isNull(id)) {
-			        GroupModel group = groupSoap.getGroup(companyId, name);
+			        GroupSoap group = groupSoap.getGroup(companyId, name);
 
 					id = group.getGroupId();
 				}
 
-				UserModel[] users = userSoap.getGroupUsers(id);
+				UserSoap[] users = userSoap.getGroupUsers(id);
 
 				String[] actorIds = new String[users.length];
 
@@ -95,12 +95,12 @@ public class IdentityAssignmentHandler
 			}
 			else if (type.equals("role")) {
 				if (Validator.isNull(id)) {
-					RoleModel role = roleSoap.getRole(companyId, name);
+					RoleSoap role = roleSoap.getRole(companyId, name);
 
 					id = role.getRoleId();
 				}
 
-				UserModel[] users = userSoap.getRoleUsers(id);
+				UserSoap[] users = userSoap.getRoleUsers(id);
 
 				String[] actorIds = new String[users.length];
 

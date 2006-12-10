@@ -67,9 +67,18 @@ public class WorkflowDefinition implements Serializable {
 		_version = version;
 	}
 
+	public String getXml() {
+		return _xml;
+	}
+
+	public void setXml(String xml) {
+		_xml = xml;
+	}
+
 	private long _definitionId;
 	private String _name;
 	private String _type;
 	private double _version;
+	private String _xml;
 
 }

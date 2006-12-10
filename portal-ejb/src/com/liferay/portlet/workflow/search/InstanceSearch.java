@@ -44,9 +44,9 @@ public class InstanceSearch extends SearchContainer {
 	static List headerNames = new ArrayList();
 
 	static {
-		headerNames.add("id");
-		headerNames.add("workflow-name");
-		headerNames.add("workflow-version");
+		headerNames.add("instance-id");
+		headerNames.add("definition-name");
+		headerNames.add("definition-version");
 		headerNames.add("start-date");
 		headerNames.add("end-date");
 		headerNames.add("state");
@@ -64,10 +64,11 @@ public class InstanceSearch extends SearchContainer {
 			(InstanceDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
-			InstanceDisplayTerms.WORKFLOW_NAME, displayTerms.getWorkflowName());
+			InstanceDisplayTerms.DEFINITION_NAME,
+			displayTerms.getDefinitionName());
 		iteratorURL.setParameter(
-			InstanceDisplayTerms.WORKFLOW_VERSION,
-			String.valueOf(displayTerms.getWorkflowVersion()));
+			InstanceDisplayTerms.DEFINITION_VERSION,
+			displayTerms.getDefinitionVersion());
 	}
 
 	private static Log _log = LogFactory.getLog(InstanceSearch.class);

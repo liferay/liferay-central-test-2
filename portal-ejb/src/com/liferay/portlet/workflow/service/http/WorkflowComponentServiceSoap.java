@@ -142,14 +142,14 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.util.List getInstances(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end) throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getInstances(definitionId,
-					instanceId, workflowName, workflowVersion, gtStartDate,
+					instanceId, definitionName, definitionVersion, gtStartDate,
 					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 					andOperator, begin, end);
 
@@ -163,13 +163,13 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static int getInstancesCount(long definitionId, long instanceId,
-		java.lang.String workflowName, java.lang.String workflowVersion,
+		java.lang.String definitionName, java.lang.String definitionVersion,
 		java.lang.String gtStartDate, java.lang.String ltStartDate,
 		java.lang.String gtEndDate, java.lang.String ltEndDate,
 		boolean hideEndedTasks, boolean andOperator) throws RemoteException {
 		try {
 			int returnValue = WorkflowComponentServiceUtil.getInstancesCount(definitionId,
-					instanceId, workflowName, workflowVersion, gtStartDate,
+					instanceId, definitionName, definitionVersion, gtStartDate,
 					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 					andOperator);
 
@@ -183,14 +183,14 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.lang.String getInstancesCountXml(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesCountXml(definitionId,
-					instanceId, workflowName, workflowVersion, gtStartDate,
+					instanceId, definitionName, definitionVersion, gtStartDate,
 					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 					andOperator);
 
@@ -204,14 +204,14 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.lang.String getInstancesXml(long definitionId,
-		long instanceId, java.lang.String workflowName,
-		java.lang.String workflowVersion, java.lang.String gtStartDate,
+		long instanceId, java.lang.String definitionName,
+		java.lang.String definitionVersion, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
 		java.lang.String ltEndDate, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end) throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getInstancesXml(definitionId,
-					instanceId, workflowName, workflowVersion, gtStartDate,
+					instanceId, definitionName, definitionVersion, gtStartDate,
 					ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
 					andOperator, begin, end);
 
@@ -281,7 +281,7 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.util.List getUserTasks(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -289,7 +289,7 @@ public class WorkflowComponentServiceSoap {
 		boolean andOperator, int begin, int end) throws RemoteException {
 		try {
 			java.util.List returnValue = WorkflowComponentServiceUtil.getUserTasks(instanceId,
-					taskName, workflowName, assignedTo, gtCreateDate,
+					taskName, definitionName, assignedTo, gtCreateDate,
 					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
 					ltEndDate, hideEndedTasks, andOperator, begin, end);
 
@@ -303,7 +303,7 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static int getUserTasksCount(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -311,7 +311,7 @@ public class WorkflowComponentServiceSoap {
 		throws RemoteException {
 		try {
 			int returnValue = WorkflowComponentServiceUtil.getUserTasksCount(instanceId,
-					taskName, workflowName, assignedTo, gtCreateDate,
+					taskName, definitionName, assignedTo, gtCreateDate,
 					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
 					ltEndDate, hideEndedTasks, andOperator);
 
@@ -325,7 +325,7 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.lang.String getUserTasksCountXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -333,7 +333,7 @@ public class WorkflowComponentServiceSoap {
 		throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksCountXml(instanceId,
-					taskName, workflowName, assignedTo, gtCreateDate,
+					taskName, definitionName, assignedTo, gtCreateDate,
 					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
 					ltEndDate, hideEndedTasks, andOperator);
 
@@ -347,7 +347,7 @@ public class WorkflowComponentServiceSoap {
 	}
 
 	public static java.lang.String getUserTasksXml(long instanceId,
-		java.lang.String taskName, java.lang.String workflowName,
+		java.lang.String taskName, java.lang.String definitionName,
 		java.lang.String assignedTo, java.lang.String gtCreateDate,
 		java.lang.String ltCreateDate, java.lang.String gtStartDate,
 		java.lang.String ltStartDate, java.lang.String gtEndDate,
@@ -355,7 +355,7 @@ public class WorkflowComponentServiceSoap {
 		boolean andOperator, int begin, int end) throws RemoteException {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getUserTasksXml(instanceId,
-					taskName, workflowName, assignedTo, gtCreateDate,
+					taskName, definitionName, assignedTo, gtCreateDate,
 					ltCreateDate, gtStartDate, ltStartDate, gtEndDate,
 					ltEndDate, hideEndedTasks, andOperator, begin, end);
 

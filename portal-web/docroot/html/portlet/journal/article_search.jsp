@@ -54,7 +54,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value='<%= displayTerms.getVersion() != 0 ? String.valueOf(displayTerms.getVersion()) : "" %>'>
+		<input class="form-text" name="<portlet:namespace /><%= ArticleDisplayTerms.VERSION %>" size="20" type="text" value="<%= displayTerms.getVersionString() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>

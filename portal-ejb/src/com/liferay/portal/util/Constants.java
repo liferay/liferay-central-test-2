@@ -54,6 +54,8 @@ public interface Constants {
 
 	public static final String MAIL_ACCOUNT = "mail_account";
 
+	public static final String MANAGE = "manage";
+
 	public static final String PREVIEW = "preview";
 
 	public static final String REJECT = "reject";
@@ -69,6 +71,8 @@ public interface Constants {
 	public static final String SEARCH = "search";
 
 	public static final String SEND = "send";
+
+	public static final String SIGNAL = "signal";
 
 	public static final String SUBSCRIBE = "subscribe";
 

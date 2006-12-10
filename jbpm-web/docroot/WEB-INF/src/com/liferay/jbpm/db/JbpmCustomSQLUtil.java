@@ -35,7 +35,8 @@ public class JbpmCustomSQLUtil
 	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
 	public JbpmCustomSQLUtil() {
-		super(JbpmWebProps.get("custom.sql.function.isnull"));
+		super(JbpmWebProps.get("custom.sql.function.isnull"),
+			  JbpmWebProps.get("custom.sql.function.isnotnull"));
 	}
 
 	protected String[] getConfigs() {

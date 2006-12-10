@@ -56,29 +56,29 @@ public interface WorkflowComponent {
 		throws WorkflowComponentException;
 
 	public List getInstances(
-			long definitionId, long instanceId, String workflowName,
-			String workflowVersion, String gtStartDate, String ltStartDate,
+			long definitionId, long instanceId, String definitionName,
+			String definitionVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException;
 
 	public int getInstancesCount(
-			long definitionId, long instanceId, String workflowName,
-			String workflowVersion, String gtStartDate, String ltStartDate,
+			long definitionId, long instanceId, String definitionName,
+			String definitionVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getInstancesCountXml(
-			long definitionId, long instanceId, String workflowName,
-			String workflowVersion, String gtStartDate, String ltStartDate,
+			long definitionId, long instanceId, String definitionName,
+			String definitionVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getInstancesXml(
-			long definitionId, long instanceId, String workflowName,
-			String workflowVersion, String gtStartDate, String ltStartDate,
+			long definitionId, long instanceId, String definitionName,
+			String definitionVersion, String gtStartDate, String ltStartDate,
 			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException;
@@ -96,7 +96,7 @@ public interface WorkflowComponent {
 		throws WorkflowComponentException;
 
 	public List getUserTasks(
-			long instanceId, String taskName, String workflowName,
+			long instanceId, String taskName, String definitionName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
 			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
@@ -104,21 +104,21 @@ public interface WorkflowComponent {
 		throws WorkflowComponentException;
 
 	public int getUserTasksCount(
-			long instanceId, String taskName, String workflowName,
+			long instanceId, String taskName, String definitionName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
 			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getUserTasksCountXml(
-			long instanceId, String taskName, String workflowName,
+			long instanceId, String taskName, String definitionName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
 			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException;
 
 	public String getUserTasksXml(
-			long instanceId, String taskName, String workflowName,
+			long instanceId, String taskName, String definitionName,
 			String assignedTo, String gtCreateDate, String ltCreateDate,
 			String gtStartDate, String ltStartDate, String gtEndDate,
 			String ltEndDate, boolean hideEndedTasks, boolean andOperator,

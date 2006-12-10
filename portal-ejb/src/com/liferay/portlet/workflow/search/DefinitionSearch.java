@@ -44,10 +44,9 @@ public class DefinitionSearch extends SearchContainer {
 	static List headerNames = new ArrayList();
 
 	static {
-		headerNames.add("id");
-		headerNames.add("name");
-		headerNames.add("type");
-		headerNames.add("version");
+		headerNames.add("definition-id");
+		headerNames.add("definition-name");
+		headerNames.add("definition-version");
 	}
 
 	public static final String EMPTY_RESULTS_MESSAGE =

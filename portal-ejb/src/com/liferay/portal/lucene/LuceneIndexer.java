@@ -110,8 +110,8 @@ public class LuceneIndexer implements Runnable {
 				if (portlet.isActive() && className != null) {
 					long start2 = System.currentTimeMillis();
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Re-indexing with " + className + " started");
 					}
 
@@ -121,8 +121,8 @@ public class LuceneIndexer implements Runnable {
 
 					long end2 = System.currentTimeMillis();
 
-					if (_log.isDebugEnabled()) {
-						_log.debug(
+					if (_log.isInfoEnabled()) {
+						_log.info(
 							"Re-indexing with " + className + " completed in " +
 								((end2 - start2) / Time.SECOND) + " seconds");
 					}

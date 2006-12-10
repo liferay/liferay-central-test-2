@@ -311,6 +311,8 @@ public class WebKeys {
 
 	public static final String WORDS_LIST = "WORDS_LIST";
 
+	public static final String WORKFLOW_DEFINITION = "WORKFLOW_DEFINITION";
+
 	public static final String WSRP_NEW_SESSION = "WSRP_NEW_SESSION";
 
 	public static final String WSRP_PRODUCER = "WSRP_PRODUCER";
