@@ -24,7 +24,10 @@
 
 	<target name="jar-jonas-genic">
 		<if>
-			<equals arg1="${app.server.ejbgen.compile}" arg2="on" />
+			<or>
+				<equals arg1="${app.server.jonas-jetty.ejbgen.compile}" arg2="on" />
+				<equals arg1="${app.server.jonas-tomcat.ejbgen.compile}" arg2="on" />
+			</or>
 			<then>
 				<tstamp>
 					<format property="tstamp.dir" pattern="yyyyMMddkkmmssSSS" />
