@@ -717,7 +717,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			/>
 			<fileset
 				dir="tools/ext_tmpl"
-				includes=".classpath,.project,readme.txt"
+				includes=".classpath,.project,readme.txt,build.properties,**/build-common.xml,**/build-parent.xml"
 			/>
 			<filterset>
 				<filter token="lp.version" value="${lp.version}" />
@@ -726,17 +726,9 @@ auto.deploy.dest.dir=../webapps</echo>
 			</filterset>
 		</copy>
 
-		<copy todir="${lp.ext.dir}" overwrite="true">
+		<copy todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/tld" overwrite="yes">
 			<fileset
-				dir="tools/ext_tmpl"
-				includes="build.properties,**/build-common.xml,**/build-parent.xml"
-			/>
-		</copy>
-
-		<copy todir="${lp.ext.dir}" overwrite="false">
-			<fileset
-				dir="tools/ext_tmpl"
-				includes="**/build.xml,**/META-INF/application.xml,**/WEB-INF/remoting-servlet-ext.xml,**/WEB-INF/server-config.wsdd"
+				dir="web-sites/liferay.com-web/docroot/WEB-INF/tld"
 			/>
 		</copy>
 
@@ -826,6 +818,11 @@ auto.deploy.dest.dir=../webapps</echo>
 				includes="index.html,WEB-INF/lib/*.jar,WEB-INF/tld/*.tld"
 			/>
 		</copy>
+
+		<copy
+			file="util-taglib/util-taglib.jar"
+			todir="${lp.ext.dir}/web-sites/liferay.com-web/docroot/WEB-INF/lib" overwrite="yes"
+		/>
 	</target>
 
 	<target name="build-ext-dir" unless="lp.ext.dir.available">
@@ -981,7 +978,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<copy todir="tools/ext_tmpl/ext-ejb" overwrite="yes">
 			<fileset
 				dir="${lp.ext.dir}/ext-ejb"
-				includes="**/*.java,**/*.wsdd,**/*.xml"
+				includes="**/*.java,**/*.wsdd,**/*.xml,**/*.81"
 			/>
 		</copy>
 
@@ -1002,7 +999,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip">
 		<antcall target="zip-api" />
-		<antcall target="zip-glassfish" />
+		<!--<antcall target="zip-glassfish" />-->
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
@@ -1147,11 +1144,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<antcall target="start" />
 		<antcall target="java2html" />
 		<antcall target="build-ext" />
+		<!--<antcall target="build-ext-glassfish" />-->
 		<antcall target="build-ext-jboss-jetty" />
 		<antcall target="build-ext-jboss-tomcat" />
 		<antcall target="build-ext-jetty" />
 		<antcall target="build-ext-jonas-jetty" />
 		<antcall target="build-ext-jonas-tomcat" />
+		<antcall target="build-ext-pramati" />
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />

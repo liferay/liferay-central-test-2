@@ -7,6 +7,7 @@
 			<res-ref-name>mail/MailSession</res-ref-name>
 			<jndi-name>mail/MailSession</jndi-name>
 		</resource-description>
+		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_ext_portlet_reports_service_ejb_ReportsEntryServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
 </weblogic-ejb-jar>

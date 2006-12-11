@@ -4,8 +4,8 @@
 	<import file="../build-common.xml" />
 
 	<target name="clean">
-		<delete>
-			<fileset dir="." includes="*.war" />
+		<delete includeemptydirs="true" failonerror="false">
+			<fileset dir="." includes="*.war,**-web/**" />
 		</delete>
 	</target>
 
