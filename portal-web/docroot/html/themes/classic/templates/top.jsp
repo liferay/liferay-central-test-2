@@ -73,7 +73,7 @@
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_search.png" %>' height="50" width="50" />
 				</div>
 
-				<c:if test="<%= themeDisplay.isShowAddContentIcon() %>">
+				<c:if test="<%= themeDisplay.isShowLayoutTemplatesIcon() %>">
 					<div class="portal-dock-box"
 						 onclick="showLayoutTemplates()"
 						 onmouseover="LiferayDock.showText('<%= UnicodeLanguageUtil.get(pageContext, "layout") %>')">

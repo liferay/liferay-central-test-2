@@ -422,26 +422,29 @@ public class ServicePreAction extends Action {
 			themeDisplay.setURLHome(protocol + company.getHomeURL());
 
 			if (layout != null) {
+				if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+					boolean hasUpdateLayoutPermission =
+						LayoutPermission.contains(
+							permissionChecker, layout, ActionKeys.UPDATE);
+
+					if (hasUpdateLayoutPermission) {
+						themeDisplay.setShowAddContentIcon(true);
+						themeDisplay.setShowLayoutTemplatesIcon(true);
+
+						themeDisplay.setURLAddContent(
+							"LayoutConfiguration.toggle('" + plid + "', '" +
+								PortletKeys.LAYOUT_CONFIGURATION + "', '" +
+									doAsUserId + "');");
+
+						themeDisplay.setURLLayoutTemplates(
+							"showLayoutTemplates();");
+					}
+				}
+
 				boolean hasManageLayoutsPermission =
 					GroupPermission.contains(
 						permissionChecker, portletGroupId,
 						ActionKeys.MANAGE_LAYOUTS);
-
-				boolean hasUpdateLayoutPermission =
-					LayoutPermission.contains(
-						permissionChecker, layout, ActionKeys.UPDATE);
-
-				if (hasUpdateLayoutPermission) {
-					themeDisplay.setShowAddContentIcon(true);
-
-					themeDisplay.setURLAddContent(
-						"LayoutConfiguration.toggle('" +
-							plid + "', '" +  PortletKeys.LAYOUT_CONFIGURATION +
-								"', '" + doAsUserId + "');");
-
-					themeDisplay.setURLLayoutTemplates(
-						"showLayoutTemplates();");
-				}
 
 				if (hasManageLayoutsPermission) {
 					themeDisplay.setShowPageSettingsIcon(true);

@@ -576,7 +576,7 @@ FONT.bg {
 }
 
 .portlet-header-bar-inner {
-	background-color: #132b47;
+	background-color: <%= colorScheme.getPortletTitleBg() %>;
 	height: 18px;
 	position: relative;
 }
@@ -585,7 +585,7 @@ FONT.bg {
 .portlet-borderless-bar { text-align: left; font-size: <%= fontXS %>; }
 
 .portlet-title {
-	color: #FFFFFF;
+	color: <%= colorScheme.getPortletTitleText() %>;
 	font-weight: bold;
 	top: 1px;
 	padding-left: 8px;
