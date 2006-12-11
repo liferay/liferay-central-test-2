@@ -139,8 +139,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public int countProcessInstancesBySearchTerms(
-		String definitionName, String definitionVersion, String gtStartDate,
-		String ltStartDate, String gtEndDate, String ltEndDate,
+		String definitionName, String definitionVersion, String startDateGT,
+		String startDateLT, String endDateGT, String endDateLT,
 		boolean hideEndedTasks, boolean andOperator) {
 
 		try {
@@ -175,16 +175,16 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(definitionName);
 			qPos.add(definitionVersionInt);
 			qPos.add(definitionVersion);
-			qPos.add(_getDate(gtStartDate, true));
-			qPos.add(_getDate(gtStartDate, true));
-			qPos.add(_getDate(ltStartDate, false));
-			qPos.add(_getDate(ltStartDate, false));
+			qPos.add(_getDate(startDateGT, true));
+			qPos.add(_getDate(startDateGT, true));
+			qPos.add(_getDate(startDateLT, false));
+			qPos.add(_getDate(startDateLT, false));
 
 			if (hideEndedTasks) {
-				qPos.add(_getDate(gtEndDate, true));
-				qPos.add(_getDate(gtEndDate, true));
-				qPos.add(_getDate(ltEndDate, false));
-				qPos.add(_getDate(ltEndDate, false));
+				qPos.add(_getDate(endDateGT, true));
+				qPos.add(_getDate(endDateGT, true));
+				qPos.add(_getDate(endDateLT, false));
+				qPos.add(_getDate(endDateLT, false));
 			}
 
 			Iterator itr = q.list().iterator();
@@ -208,8 +208,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 	public int countTaskInstancesBySearchTerms(
 		String taskName, String definitionName, String assignedTo,
-		String gtCreateDate, String ltCreateDate, String gtStartDate,
-		String ltStartDate, String gtEndDate, String ltEndDate,
+		String createDateGT, String createDateLT, String startDateGT,
+		String startDateLT, String endDateGT, String endDateLT,
 		boolean hideEndedTasks, boolean andOperator) {
 
 		try {
@@ -260,20 +260,20 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(taskName);
 				qPos.add(definitionName);
 				qPos.add(definitionName);
-				qPos.add(_getDate(gtCreateDate, true));
-				qPos.add(_getDate(gtCreateDate, true));
-				qPos.add(_getDate(ltCreateDate, false));
-				qPos.add(_getDate(ltCreateDate, false));
-				qPos.add(_getDate(gtStartDate, true));
-				qPos.add(_getDate(gtStartDate, true));
-				qPos.add(_getDate(ltStartDate, false));
-				qPos.add(_getDate(ltStartDate, false));
+				qPos.add(_getDate(createDateGT, true));
+				qPos.add(_getDate(createDateGT, true));
+				qPos.add(_getDate(createDateLT, false));
+				qPos.add(_getDate(createDateLT, false));
+				qPos.add(_getDate(startDateGT, true));
+				qPos.add(_getDate(startDateGT, true));
+				qPos.add(_getDate(startDateLT, false));
+				qPos.add(_getDate(startDateLT, false));
 
 				if (hideEndedTasks) {
-					qPos.add(_getDate(gtEndDate, true));
-					qPos.add(_getDate(gtEndDate, true));
-					qPos.add(_getDate(ltEndDate, false));
-					qPos.add(_getDate(ltEndDate, false));
+					qPos.add(_getDate(endDateGT, true));
+					qPos.add(_getDate(endDateGT, true));
+					qPos.add(_getDate(endDateLT, false));
+					qPos.add(_getDate(endDateLT, false));
 				}
 
 				qPos.add(_userId);
@@ -318,8 +318,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 	}
 
 	public List findProcessInstancesBySearchTerms(
-		String definitionName, String definitionVersion, String gtStartDate,
-		String ltStartDate, String gtEndDate, String ltEndDate,
+		String definitionName, String definitionVersion, String startDateGT,
+		String startDateLT, String endDateGT, String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end) {
 
 		List list = new ArrayList();
@@ -356,16 +356,16 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(definitionName);
 			qPos.add(definitionVersionInt);
 			qPos.add(definitionVersion);
-			qPos.add(_getDate(gtStartDate, true));
-			qPos.add(_getDate(gtStartDate, true));
-			qPos.add(_getDate(ltStartDate, false));
-			qPos.add(_getDate(ltStartDate, false));
+			qPos.add(_getDate(startDateGT, true));
+			qPos.add(_getDate(startDateGT, true));
+			qPos.add(_getDate(startDateLT, false));
+			qPos.add(_getDate(startDateLT, false));
 
 			if (hideEndedTasks) {
-				qPos.add(_getDate(gtEndDate, true));
-				qPos.add(_getDate(gtEndDate, true));
-				qPos.add(_getDate(ltEndDate, false));
-				qPos.add(_getDate(ltEndDate, false));
+				qPos.add(_getDate(endDateGT, true));
+				qPos.add(_getDate(endDateGT, true));
+				qPos.add(_getDate(endDateLT, false));
+				qPos.add(_getDate(endDateLT, false));
 			}
 
 			list = QueryUtil.list(q, _dialect, begin, end);
@@ -387,8 +387,8 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 	public List findTaskInstancesBySearchTerms(
 		String taskName, String definitionName, String assignedTo,
-		String gtCreateDate, String ltCreateDate, String gtStartDate,
-		String ltStartDate, String gtEndDate, String ltEndDate,
+		String createDateGT, String createDateLT, String startDateGT,
+		String startDateLT, String endDateGT, String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end) {
 
 		List list = new ArrayList();
@@ -445,20 +445,20 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(taskName);
 				qPos.add(definitionName);
 				qPos.add(definitionName);
-				qPos.add(_getDate(gtCreateDate, true));
-				qPos.add(_getDate(gtCreateDate, true));
-				qPos.add(_getDate(ltCreateDate, false));
-				qPos.add(_getDate(ltCreateDate, false));
-				qPos.add(_getDate(gtStartDate, true));
-				qPos.add(_getDate(gtStartDate, true));
-				qPos.add(_getDate(ltStartDate, false));
-				qPos.add(_getDate(ltStartDate, false));
+				qPos.add(_getDate(createDateGT, true));
+				qPos.add(_getDate(createDateGT, true));
+				qPos.add(_getDate(createDateLT, false));
+				qPos.add(_getDate(createDateLT, false));
+				qPos.add(_getDate(startDateGT, true));
+				qPos.add(_getDate(startDateGT, true));
+				qPos.add(_getDate(startDateLT, false));
+				qPos.add(_getDate(startDateLT, false));
 
 				if (hideEndedTasks) {
-					qPos.add(_getDate(gtEndDate, true));
-					qPos.add(_getDate(gtEndDate, true));
-					qPos.add(_getDate(ltEndDate, false));
-					qPos.add(_getDate(ltEndDate, false));
+					qPos.add(_getDate(endDateGT, true));
+					qPos.add(_getDate(endDateGT, true));
+					qPos.add(_getDate(endDateLT, false));
+					qPos.add(_getDate(endDateLT, false));
 				}
 
 				qPos.add(_userId);

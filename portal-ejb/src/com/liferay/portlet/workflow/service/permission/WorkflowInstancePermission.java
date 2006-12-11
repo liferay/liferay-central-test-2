@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
-import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 
 /**
  * <a href="WorkflowInstancePermission.java.html"><b><i>View Source</i></b></a>

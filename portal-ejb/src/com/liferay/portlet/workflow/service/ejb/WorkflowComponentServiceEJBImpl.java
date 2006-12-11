@@ -107,59 +107,59 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 
 	public java.util.List getInstances(long definitionId, long instanceId,
 		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstances(definitionId,
-			instanceId, definitionName, definitionVersion, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
+			instanceId, definitionName, definitionVersion, startDateGT,
+			startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator,
 			begin, end);
 	}
 
 	public int getInstancesCount(long definitionId, long instanceId,
 		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCount(definitionId,
-			instanceId, definitionName, definitionVersion, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+			instanceId, definitionName, definitionVersion, startDateGT,
+			startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesCountXml(long definitionId,
 		long instanceId, java.lang.String definitionName,
-		java.lang.String definitionVersion, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		java.lang.String definitionVersion, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesCountXml(definitionId,
-			instanceId, definitionName, definitionVersion, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+			instanceId, definitionName, definitionVersion, startDateGT,
+			startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator);
 	}
 
 	public java.lang.String getInstancesXml(long definitionId, long instanceId,
 		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getInstancesXml(definitionId,
-			instanceId, definitionName, definitionVersion, gtStartDate,
-			ltStartDate, gtEndDate, ltEndDate, hideEndedTasks, andOperator,
+			instanceId, definitionName, definitionVersion, startDateGT,
+			startDateLT, endDateGT, endDateLT, hideEndedTasks, andOperator,
 			begin, end);
 	}
 
@@ -199,67 +199,67 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 
 	public java.util.List getUserTasks(long instanceId,
 		java.lang.String taskName, java.lang.String definitionName,
-		java.lang.String assignedTo, java.lang.String gtCreateDate,
-		java.lang.String ltCreateDate, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks,
+		java.lang.String assignedTo, java.lang.String createDateGT,
+		java.lang.String createDateLT, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasks(instanceId,
-			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			taskName, definitionName, assignedTo, createDateGT, createDateLT,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator, begin, end);
 	}
 
 	public int getUserTasksCount(long instanceId, java.lang.String taskName,
 		java.lang.String definitionName, java.lang.String assignedTo,
-		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String createDateGT, java.lang.String createDateLT,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCount(instanceId,
-			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			taskName, definitionName, assignedTo, createDateGT, createDateLT,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator);
 	}
 
 	public java.lang.String getUserTasksCountXml(long instanceId,
 		java.lang.String taskName, java.lang.String definitionName,
-		java.lang.String assignedTo, java.lang.String gtCreateDate,
-		java.lang.String ltCreateDate, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		java.lang.String assignedTo, java.lang.String createDateGT,
+		java.lang.String createDateLT, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksCountXml(instanceId,
-			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			taskName, definitionName, assignedTo, createDateGT, createDateLT,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator);
 	}
 
 	public java.lang.String getUserTasksXml(long instanceId,
 		java.lang.String taskName, java.lang.String definitionName,
-		java.lang.String assignedTo, java.lang.String gtCreateDate,
-		java.lang.String ltCreateDate, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks,
+		java.lang.String assignedTo, java.lang.String createDateGT,
+		java.lang.String createDateLT, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return WorkflowComponentServiceFactory.getTxImpl().getUserTasksXml(instanceId,
-			taskName, definitionName, assignedTo, gtCreateDate, ltCreateDate,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			taskName, definitionName, assignedTo, createDateGT, createDateLT,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator, begin, end);
 	}
 

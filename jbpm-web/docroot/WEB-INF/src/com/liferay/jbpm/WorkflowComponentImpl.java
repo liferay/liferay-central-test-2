@@ -120,17 +120,17 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 					req, "definitionName");
 				String definitionVersion = ParamUtil.getString(
 					req, "definitionVersion");
-				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
-				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
-				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
-				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				String startDateGT = ParamUtil.getString(req, "startDateGT");
+				String startDateLT = ParamUtil.getString(req, "startDateLT");
+				String endDateGT = ParamUtil.getString(req, "endDateGT");
+				String endDateLT = ParamUtil.getString(req, "endDateLT");
 				boolean hideEndedTasks = ParamUtil.getBoolean(
 					req, "hideEndedTasks");
 				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
 				result = getInstancesCountXml(
 					definitionId, instanceId, definitionName, definitionVersion,
-					gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+					startDateGT, startDateLT, endDateGT, endDateLT,
 					hideEndedTasks, andOperator);
 			}
 			else if (cmd.equals("getInstancesXml")) {
@@ -140,10 +140,10 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 					req, "definitionName");
 				String definitionVersion = ParamUtil.getString(
 					req, "definitionVersion");
-				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
-				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
-				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
-				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				String startDateGT = ParamUtil.getString(req, "startDateGT");
+				String startDateLT = ParamUtil.getString(req, "startDateLT");
+				String endDateGT = ParamUtil.getString(req, "endDateGT");
+				String endDateLT = ParamUtil.getString(req, "endDateLT");
 				boolean hideEndedTasks = ParamUtil.getBoolean(
 					req, "hideEndedTasks");
 				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
@@ -152,7 +152,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 				result = getInstancesXml(
 					definitionId, instanceId, definitionName, definitionVersion,
-					gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+					startDateGT, startDateLT, endDateGT, endDateLT,
 					hideEndedTasks, andOperator, begin, end);
 			}
 			else if (cmd.equals("getTaskFormElementsXml")) {
@@ -171,20 +171,20 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 				String definitionName = ParamUtil.getString(
 					req, "definitionName");
 				String assignedTo = ParamUtil.getString(req, "assignedTo");
-				String gtCreateDate = ParamUtil.getString(req, "gtCreateDate");
-				String ltCreateDate = ParamUtil.getString(req, "ltCreateDate");
-				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
-				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
-				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
-				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				String createDateGT = ParamUtil.getString(req, "createDateGT");
+				String createDateLT = ParamUtil.getString(req, "createDateLT");
+				String startDateGT = ParamUtil.getString(req, "startDateGT");
+				String startDateLT = ParamUtil.getString(req, "startDateLT");
+				String endDateGT = ParamUtil.getString(req, "endDateGT");
+				String endDateLT = ParamUtil.getString(req, "endDateLT");
 				boolean hideEndedTasks = ParamUtil.getBoolean(
 					req, "hideEndedTasks");
 				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
 
 				result = getUserTasksCountXml(
 					instanceId, taskName, definitionName, assignedTo,
-					gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
-					gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+					createDateGT, createDateLT, startDateGT, startDateLT,
+					endDateGT, endDateLT, hideEndedTasks, andOperator);
 			}
 			else if (cmd.equals("getUserTasksXml")) {
 				long instanceId = ParamUtil.getLong(req, "instanceId");
@@ -192,12 +192,12 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 				String definitionName = ParamUtil.getString(
 					req, "definitionName");
 				String assignedTo = ParamUtil.getString(req, "assignedTo");
-				String gtCreateDate = ParamUtil.getString(req, "gtCreateDate");
-				String ltCreateDate = ParamUtil.getString(req, "ltCreateDate");
-				String gtStartDate = ParamUtil.getString(req, "gtStartDate");
-				String ltStartDate = ParamUtil.getString(req, "ltStartDate");
-				String gtEndDate = ParamUtil.getString(req, "gtEndDate");
-				String ltEndDate = ParamUtil.getString(req, "ltEndDate");
+				String createDateGT = ParamUtil.getString(req, "createDateGT");
+				String createDateLT = ParamUtil.getString(req, "createDateLT");
+				String startDateGT = ParamUtil.getString(req, "startDateGT");
+				String startDateLT = ParamUtil.getString(req, "startDateLT");
+				String endDateGT = ParamUtil.getString(req, "endDateGT");
+				String endDateLT = ParamUtil.getString(req, "endDateLT");
 				boolean hideEndedTasks = ParamUtil.getBoolean(
 					req, "hideEndedTasks");
 				boolean andOperator = ParamUtil.getBoolean(req, "andOperator");
@@ -206,8 +206,8 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 				result = getUserTasksXml(
 					instanceId, taskName, definitionName, assignedTo,
-					gtCreateDate, ltCreateDate, gtStartDate, ltStartDate,
-					gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin,
+					createDateGT, createDateLT, startDateGT, startDateLT,
+					endDateGT, endDateLT, hideEndedTasks, andOperator, begin,
 					end);
 			}
 			else if (cmd.equals("signalInstance")) {
@@ -405,8 +405,8 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public List getInstances(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException {
 
@@ -431,8 +431,8 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 		else {
 			instances = graphSession.findProcessInstancesBySearchTerms(
-				definitionName, definitionVersion, gtStartDate, ltStartDate,
-				gtEndDate, ltEndDate, hideEndedTasks, andOperator, begin, end);
+				definitionName, definitionVersion, startDateGT, startDateLT,
+				endDateGT, endDateLT, hideEndedTasks, andOperator, begin, end);
 		}
 
 		return instances;
@@ -440,8 +440,8 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public int getInstancesCount(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException {
 
@@ -453,21 +453,21 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 		else {
 			return graphSession.countProcessInstancesBySearchTerms(
-				definitionName, definitionVersion, gtStartDate, ltStartDate,
-				gtEndDate, ltEndDate, hideEndedTasks, andOperator);
+				definitionName, definitionVersion, startDateGT, startDateLT,
+				endDateGT, endDateLT, hideEndedTasks, andOperator);
 		}
 	}
 
 	public String getInstancesCountXml(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException {
 
 		int count = getInstancesCount(
 			definitionId, instanceId, definitionName, definitionVersion,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator);
 
 		return getCountXml(count);
@@ -475,14 +475,14 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public String getInstancesXml(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException {
 
 		List instances = getInstances(
 			definitionId, instanceId, definitionName, definitionVersion,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator, begin, end);
 
 		    Document doc = DocumentHelper.createDocument();
@@ -574,19 +574,19 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public List getUserTasks(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator,
 			int begin, int end)
 		throws WorkflowComponentException {
 
 		List tasks = new ArrayList();
 
 		if (Validator.isNull(taskName) && Validator.isNull(definitionName) &&
-			Validator.isNull(assignedTo) && Validator.isNull(gtCreateDate) &&
-			Validator.isNull(ltCreateDate) && Validator.isNull(gtStartDate) &&
-			Validator.isNull(ltStartDate) && Validator.isNull(gtEndDate) &&
-			Validator.isNull(ltEndDate)) {
+			Validator.isNull(assignedTo) && Validator.isNull(createDateGT) &&
+			Validator.isNull(createDateLT) && Validator.isNull(startDateGT) &&
+			Validator.isNull(startDateLT) && Validator.isNull(endDateGT) &&
+			Validator.isNull(endDateLT)) {
 
 			List taskInstances = taskMgmtSession.findTaskInstances(userId);
 
@@ -609,8 +609,8 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 		else {
 			tasks = graphSession.findTaskInstancesBySearchTerms(
-				taskName, definitionName, assignedTo, gtCreateDate,
-				ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+				taskName, definitionName, assignedTo, createDateGT,
+				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
 				hideEndedTasks, andOperator, begin, end);
 
 			WorkflowUtil.initTasks(tasks);
@@ -621,27 +621,27 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public int getUserTasksCount(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException {
 
 		return graphSession.countTaskInstancesBySearchTerms(
-			taskName, definitionName, assignedTo,	gtCreateDate, ltCreateDate,
-			gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+			taskName, definitionName, assignedTo,	createDateGT, createDateLT,
+			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator);
 	}
 
 	public String getUserTasksCountXml(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException {
 
 		int count = getUserTasksCount(
-			instanceId, taskName, definitionName, assignedTo, gtCreateDate,
-			ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+			instanceId, taskName, definitionName, assignedTo, createDateGT,
+			createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
 			hideEndedTasks, andOperator);
 
 		return getCountXml(count);
@@ -649,15 +649,15 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 	public String getUserTasksXml(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator,
 			int begin, int end)
 		throws WorkflowComponentException {
 
 		List tasks = getUserTasks(
-			instanceId, taskName, definitionName, assignedTo, gtCreateDate,
-			ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+			instanceId, taskName, definitionName, assignedTo, createDateGT,
+			createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
 			hideEndedTasks, andOperator, begin, end);
 
 		Document doc = DocumentHelper.createDocument();

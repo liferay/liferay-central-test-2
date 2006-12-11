@@ -22,17 +22,10 @@
 
 package com.liferay.portlet.workflow.action;
 
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.wiki.NoSuchNodeException;
-import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
-import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;

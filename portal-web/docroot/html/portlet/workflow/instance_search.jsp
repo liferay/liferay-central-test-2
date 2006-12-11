@@ -67,6 +67,32 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 </table>
 
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td colspan="3">
+		<%= LanguageUtil.get(pageContext, "start-date-range") %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%--<liferay-ui:input-date
+			monthParam="helloNowMonth"
+			monthNullable="<%= true %>"
+			dayParam="helloNowDay"
+			dayNullable="<%= true %>"
+			yearParam="helloNowYear"
+			yearNullable="<%= true %>"
+			yearRangeStart="<%= cal.get(Calendar.YEAR) - 10 %>"
+			yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
+		/>--%>
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" bean="<%= null %>" field="startDateGT" />
+	</td>
+	<td style="padding-left: 20px;"></td>
+	<td>
+	</td>
+</tr>
+</table>
+
 <br>
 
 <table border="0" cellpadding="0" cellspacing="0">

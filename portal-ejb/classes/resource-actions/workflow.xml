@@ -25,7 +25,6 @@
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_INSTANCE</action-key>
-			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>UPDATE</action-key>
 			<action-key>VIEW</action-key>

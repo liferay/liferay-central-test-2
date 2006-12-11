@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.workflow.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
 
 import javax.portlet.RenderRequest;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="DefinitionDisplayTerms.java.html"><b><i>View Source</i></b></a>

@@ -23,7 +23,6 @@
 package com.liferay.portlet.workflow.search;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;

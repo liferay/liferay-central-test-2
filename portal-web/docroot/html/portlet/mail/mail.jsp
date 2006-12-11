@@ -560,6 +560,7 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 						<%
 						Calendar cal = new GregorianCalendar(timeZone, locale);
 						%>
+
 						<liferay-ui:input-date
 							disableNamespace="<%= true %>"
 							formName='<%= renderResponse.getNamespace() + "advSearch" %>'

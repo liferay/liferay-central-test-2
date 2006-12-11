@@ -1990,6 +1990,7 @@ target=Alvo
 task-id=Tarefa Id
 task-information=Informação Da Tarefa
 task-name=Nome Da Tarefa
+task=Tarefa
 tasks=Tarefas
 tax-free=Imposto Livre
 tax-rate=Taxa De Imposto

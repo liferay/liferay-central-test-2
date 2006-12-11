@@ -22,10 +22,9 @@
 
 package com.liferay.portlet.workflow.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
-import com.liferay.portal.kernel.util.StringPool;
-import java.util.Date;
 
 import javax.portlet.RenderRequest;
 
@@ -45,13 +44,13 @@ public class InstanceDisplayTerms extends DisplayTerms {
 
 	public static final String DEFINITION_VERSION = "definitionVersion";
 
-	public static final String GT_START_DATE = "gtStartDate";
+	public static final String CREATE_START_GT = "startDateGT";
 
-	public static final String LT_START_DATE = "ltStartDate";
+	public static final String CREATE_START_LT = "startDateLT";
 
-	public static final String GT_END_DATE = "gtEndDate";
+	public static final String CREATE_END_GT = "endDateGT";
 
-	public static final String LT_END_DATE = "ltEndDate";
+	public static final String CREATE_END_LT = "endDateLT";
 
 	public static final String HIDE_ENDED_TASKS = "hideEndedTasks";
 
@@ -62,10 +61,10 @@ public class InstanceDisplayTerms extends DisplayTerms {
 		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
 		definitionName = ParamUtil.getString(req, DEFINITION_NAME);
 		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
-		gtStartDate = ParamUtil.getString(req, GT_START_DATE);
-		ltStartDate = ParamUtil.getString(req, LT_START_DATE);
-		gtEndDate = ParamUtil.getString(req, GT_END_DATE);
-		ltEndDate = ParamUtil.getString(req, LT_END_DATE);
+		startDateGT = ParamUtil.getString(req, CREATE_START_GT);
+		startDateLT = ParamUtil.getString(req, CREATE_START_LT);
+		endDateGT = ParamUtil.getString(req, CREATE_END_GT);
+		endDateLT = ParamUtil.getString(req, CREATE_END_LT);
 		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
 	}
 
@@ -103,20 +102,20 @@ public class InstanceDisplayTerms extends DisplayTerms {
 		return definitionVersion;
 	}
 
-	public String getGtStartDate() {
-		return gtStartDate;
+	public String getStartDateGT() {
+		return startDateGT;
 	}
 
-	public String getLtStartDate() {
-		return ltStartDate;
+	public String getStartDateLT() {
+		return startDateLT;
 	}
 
-	public String getGtEndDate() {
-		return gtEndDate;
+	public String getEndDateGT() {
+		return endDateGT;
 	}
 
-	public String getLtEndDate() {
-		return ltEndDate;
+	public String getEndDateLT() {
+		return endDateLT;
 	}
 
 	public boolean isHideEndedTasks() {
@@ -127,10 +126,10 @@ public class InstanceDisplayTerms extends DisplayTerms {
 	protected long instanceId;
 	protected String definitionName;
 	protected String definitionVersion;
-	protected String gtStartDate;
-	protected String ltStartDate;
-	protected String gtEndDate;
-	protected String ltEndDate;
+	protected String startDateGT;
+	protected String startDateLT;
+	protected String endDateGT;
+	protected String endDateLT;
 	protected boolean hideEndedTasks;
 
 }

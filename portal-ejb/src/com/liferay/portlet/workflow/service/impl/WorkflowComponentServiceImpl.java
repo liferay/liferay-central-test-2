@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.workflow.service.impl;
 
+import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
@@ -41,7 +42,7 @@ import com.liferay.portlet.workflow.service.WorkflowComponentService;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
-import com.liferay.documentlibrary.DuplicateDirectoryException;
+
 import java.io.StringReader;
 
 import java.rmi.RemoteException;
@@ -218,15 +219,15 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public List getInstances(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getInstancesXml(
 				definitionId, instanceId, definitionName, definitionVersion,
-				gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+				startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 				andOperator, begin, end);
 
 			return parseList(xml, "instances");
@@ -238,15 +239,15 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public int getInstancesCount(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getInstancesCountXml(
 				definitionId, instanceId, definitionName, definitionVersion,
-				gtStartDate, ltStartDate, gtEndDate, ltEndDate, hideEndedTasks,
+				startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 				andOperator);
 
 			return parseInt(xml, "count");
@@ -258,8 +259,8 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public String getInstancesCountXml(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator)
 		throws WorkflowComponentException {
 
@@ -271,10 +272,10 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			url.setParameter("instanceId", instanceId);
 			url.setParameter("definitionName", definitionName);
 			url.setParameter("definitionVersion", definitionVersion);
-			url.setParameter("gtStartDate", gtStartDate);
-			url.setParameter("ltStartDate", ltStartDate);
-			url.setParameter("gtEndDate", gtEndDate);
-			url.setParameter("ltEndDate", ltEndDate);
+			url.setParameter("startDateGT", startDateGT);
+			url.setParameter("startDateLT", startDateLT);
+			url.setParameter("endDateGT", endDateGT);
+			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("andOperator", andOperator);
 
@@ -287,8 +288,8 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public String getInstancesXml(
 			long definitionId, long instanceId, String definitionName,
-			String definitionVersion, String gtStartDate, String ltStartDate,
-			String gtEndDate, String ltEndDate, boolean hideEndedTasks,
+			String definitionVersion, String startDateGT, String startDateLT,
+			String endDateGT, String endDateLT, boolean hideEndedTasks,
 			boolean andOperator, int begin, int end)
 		throws WorkflowComponentException {
 
@@ -300,10 +301,10 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			url.setParameter("instanceId", instanceId);
 			url.setParameter("definitionName", definitionName);
 			url.setParameter("definitionVersion", definitionVersion);
-			url.setParameter("gtStartDate", gtStartDate);
-			url.setParameter("ltStartDate", ltStartDate);
-			url.setParameter("gtEndDate", gtEndDate);
-			url.setParameter("ltEndDate", ltEndDate);
+			url.setParameter("startDateGT", startDateGT);
+			url.setParameter("startDateLT", startDateLT);
+			url.setParameter("endDateGT", endDateGT);
+			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("andOperator", andOperator);
 			url.setParameter("begin", begin);
@@ -376,16 +377,16 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public List getUserTasks(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator,
 			int begin, int end)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getUserTasksXml(
-				instanceId, taskName, definitionName, assignedTo, gtCreateDate,
-				ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+				instanceId, taskName, definitionName, assignedTo, createDateGT,
+				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
 				hideEndedTasks, andOperator, begin, end);
 
 			return parseList(xml, "tasks");
@@ -397,15 +398,15 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public int getUserTasksCount(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException {
 
 		try {
 			String xml = getUserTasksCountXml(
-				instanceId, taskName, definitionName, assignedTo, gtCreateDate,
-				ltCreateDate, gtStartDate, ltStartDate, gtEndDate, ltEndDate,
+				instanceId, taskName, definitionName, assignedTo, createDateGT,
+				createDateLT, startDateGT, startDateLT, endDateGT, endDateLT,
 				hideEndedTasks, andOperator);
 
 			return parseInt(xml, "count");
@@ -417,9 +418,9 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public String getUserTasksCountXml(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws WorkflowComponentException {
 
 		try {
@@ -430,12 +431,12 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			url.setParameter("taskName", taskName);
 			url.setParameter("definitionName", definitionName);
 			url.setParameter("assignedTo", assignedTo);
-			url.setParameter("gtCreateDate", gtCreateDate);
-			url.setParameter("ltCreateDate", ltCreateDate);
-			url.setParameter("gtStartDate", gtStartDate);
-			url.setParameter("ltStartDate", ltStartDate);
-			url.setParameter("gtEndDate", gtEndDate);
-			url.setParameter("ltEndDate", ltEndDate);
+			url.setParameter("createDateGT", createDateGT);
+			url.setParameter("createDateLT", createDateLT);
+			url.setParameter("startDateGT", startDateGT);
+			url.setParameter("startDateLT", startDateLT);
+			url.setParameter("endDateGT", endDateGT);
+			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("andOperator", andOperator);
 
@@ -448,9 +449,9 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 
 	public String getUserTasksXml(
 			long instanceId, String taskName, String definitionName,
-			String assignedTo, String gtCreateDate, String ltCreateDate,
-			String gtStartDate, String ltStartDate, String gtEndDate,
-			String ltEndDate, boolean hideEndedTasks, boolean andOperator,
+			String assignedTo, String createDateGT, String createDateLT,
+			String startDateGT, String startDateLT, String endDateGT,
+			String endDateLT, boolean hideEndedTasks, boolean andOperator,
 			int begin, int end)
 		throws WorkflowComponentException {
 
@@ -462,12 +463,12 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			url.setParameter("taskName", taskName);
 			url.setParameter("definitionName", definitionName);
 			url.setParameter("assignedTo", assignedTo);
-			url.setParameter("gtCreateDate", gtCreateDate);
-			url.setParameter("ltCreateDate", ltCreateDate);
-			url.setParameter("gtStartDate", gtStartDate);
-			url.setParameter("ltStartDate", ltStartDate);
-			url.setParameter("gtEndDate", gtEndDate);
-			url.setParameter("ltEndDate", ltEndDate);
+			url.setParameter("createDateGT", createDateGT);
+			url.setParameter("createDateLT", createDateLT);
+			url.setParameter("startDateGT", startDateGT);
+			url.setParameter("startDateLT", startDateLT);
+			url.setParameter("endDateGT", endDateGT);
+			url.setParameter("endDateLT", endDateLT);
 			url.setParameter("hideEndedTasks", hideEndedTasks);
 			url.setParameter("andOperator", andOperator);
 			url.setParameter("begin", begin);

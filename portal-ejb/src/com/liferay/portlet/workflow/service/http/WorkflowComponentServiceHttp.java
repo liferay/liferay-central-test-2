@@ -321,9 +321,9 @@ public class WorkflowComponentServiceHttp {
 
 	public static java.util.List getInstances(HttpPrincipal httpPrincipal,
 		long definitionId, long instanceId, java.lang.String definitionName,
-		java.lang.String definitionVersion, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks,
+		java.lang.String definitionVersion, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -342,27 +342,27 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtStartDate;
+			Object paramObj4 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltStartDate;
+			Object paramObj5 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtEndDate;
+			Object paramObj6 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltEndDate;
+			Object paramObj7 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
@@ -405,9 +405,9 @@ public class WorkflowComponentServiceHttp {
 
 	public static int getInstancesCount(HttpPrincipal httpPrincipal,
 		long definitionId, long instanceId, java.lang.String definitionName,
-		java.lang.String definitionVersion, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		java.lang.String definitionVersion, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -425,27 +425,27 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtStartDate;
+			Object paramObj4 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltStartDate;
+			Object paramObj5 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtEndDate;
+			Object paramObj6 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltEndDate;
+			Object paramObj7 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
@@ -486,8 +486,8 @@ public class WorkflowComponentServiceHttp {
 	public static java.lang.String getInstancesCountXml(
 		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
 		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -506,27 +506,27 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtStartDate;
+			Object paramObj4 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltStartDate;
+			Object paramObj5 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtEndDate;
+			Object paramObj6 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltEndDate;
+			Object paramObj7 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
@@ -567,8 +567,8 @@ public class WorkflowComponentServiceHttp {
 	public static java.lang.String getInstancesXml(
 		HttpPrincipal httpPrincipal, long definitionId, long instanceId,
 		java.lang.String definitionName, java.lang.String definitionVersion,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -587,27 +587,27 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtStartDate;
+			Object paramObj4 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltStartDate;
+			Object paramObj5 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtEndDate;
+			Object paramObj6 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltEndDate;
+			Object paramObj7 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
@@ -787,9 +787,9 @@ public class WorkflowComponentServiceHttp {
 	public static java.util.List getUserTasks(HttpPrincipal httpPrincipal,
 		long instanceId, java.lang.String taskName,
 		java.lang.String definitionName, java.lang.String assignedTo,
-		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String createDateGT, java.lang.String createDateLT,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -813,39 +813,39 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtCreateDate;
+			Object paramObj4 = createDateGT;
 
-			if (gtCreateDate == null) {
+			if (createDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltCreateDate;
+			Object paramObj5 = createDateLT;
 
-			if (ltCreateDate == null) {
+			if (createDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtStartDate;
+			Object paramObj6 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltStartDate;
+			Object paramObj7 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = gtEndDate;
+			Object paramObj8 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = ltEndDate;
+			Object paramObj9 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
@@ -889,9 +889,9 @@ public class WorkflowComponentServiceHttp {
 	public static int getUserTasksCount(HttpPrincipal httpPrincipal,
 		long instanceId, java.lang.String taskName,
 		java.lang.String definitionName, java.lang.String assignedTo,
-		java.lang.String gtCreateDate, java.lang.String ltCreateDate,
-		java.lang.String gtStartDate, java.lang.String ltStartDate,
-		java.lang.String gtEndDate, java.lang.String ltEndDate,
+		java.lang.String createDateGT, java.lang.String createDateLT,
+		java.lang.String startDateGT, java.lang.String startDateLT,
+		java.lang.String endDateGT, java.lang.String endDateLT,
 		boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -915,39 +915,39 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtCreateDate;
+			Object paramObj4 = createDateGT;
 
-			if (gtCreateDate == null) {
+			if (createDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltCreateDate;
+			Object paramObj5 = createDateLT;
 
-			if (ltCreateDate == null) {
+			if (createDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtStartDate;
+			Object paramObj6 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltStartDate;
+			Object paramObj7 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = gtEndDate;
+			Object paramObj8 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = ltEndDate;
+			Object paramObj9 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
@@ -989,10 +989,10 @@ public class WorkflowComponentServiceHttp {
 	public static java.lang.String getUserTasksCountXml(
 		HttpPrincipal httpPrincipal, long instanceId,
 		java.lang.String taskName, java.lang.String definitionName,
-		java.lang.String assignedTo, java.lang.String gtCreateDate,
-		java.lang.String ltCreateDate, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks, boolean andOperator)
+		java.lang.String assignedTo, java.lang.String createDateGT,
+		java.lang.String createDateLT, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks, boolean andOperator)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
 		try {
@@ -1015,39 +1015,39 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtCreateDate;
+			Object paramObj4 = createDateGT;
 
-			if (gtCreateDate == null) {
+			if (createDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltCreateDate;
+			Object paramObj5 = createDateLT;
 
-			if (ltCreateDate == null) {
+			if (createDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtStartDate;
+			Object paramObj6 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltStartDate;
+			Object paramObj7 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = gtEndDate;
+			Object paramObj8 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = ltEndDate;
+			Object paramObj9 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 
@@ -1089,10 +1089,10 @@ public class WorkflowComponentServiceHttp {
 	public static java.lang.String getUserTasksXml(
 		HttpPrincipal httpPrincipal, long instanceId,
 		java.lang.String taskName, java.lang.String definitionName,
-		java.lang.String assignedTo, java.lang.String gtCreateDate,
-		java.lang.String ltCreateDate, java.lang.String gtStartDate,
-		java.lang.String ltStartDate, java.lang.String gtEndDate,
-		java.lang.String ltEndDate, boolean hideEndedTasks,
+		java.lang.String assignedTo, java.lang.String createDateGT,
+		java.lang.String createDateLT, java.lang.String startDateGT,
+		java.lang.String startDateLT, java.lang.String endDateGT,
+		java.lang.String endDateLT, boolean hideEndedTasks,
 		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			com.liferay.portal.SystemException {
@@ -1116,39 +1116,39 @@ public class WorkflowComponentServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = gtCreateDate;
+			Object paramObj4 = createDateGT;
 
-			if (gtCreateDate == null) {
+			if (createDateGT == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = ltCreateDate;
+			Object paramObj5 = createDateLT;
 
-			if (ltCreateDate == null) {
+			if (createDateLT == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = gtStartDate;
+			Object paramObj6 = startDateGT;
 
-			if (gtStartDate == null) {
+			if (startDateGT == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = ltStartDate;
+			Object paramObj7 = startDateLT;
 
-			if (ltStartDate == null) {
+			if (startDateLT == null) {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = gtEndDate;
+			Object paramObj8 = endDateGT;
 
-			if (gtEndDate == null) {
+			if (endDateGT == null) {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = ltEndDate;
+			Object paramObj9 = endDateLT;
 
-			if (ltEndDate == null) {
+			if (endDateLT == null) {
 				paramObj9 = new NullWrapper("java.lang.String");
 			}
 

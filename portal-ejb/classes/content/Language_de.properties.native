@@ -1990,6 +1990,7 @@ target=Ziel
 task-id=Aufgabe Identifikation
 task-information=Aufgaben-Information
 task-name=Aufgabenname
+task=Aufgabe
 tasks=Aufgaben
 tax-free=Steuerfrei
 tax-rate=Steuersatz

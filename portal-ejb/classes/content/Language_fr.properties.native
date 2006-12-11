@@ -1990,6 +1990,7 @@ target=Cible
 task-id=Chargez l'IDENTIFICATION
 task-information=Information sur la tâche
 task-name=Nom de tâche
+task=Chargez
 tasks=Tâches
 tax-free=Impôt Librement
 tax-rate=Taux d'imposition fiscal

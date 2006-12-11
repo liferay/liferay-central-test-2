@@ -1990,6 +1990,7 @@ target=Destino
 task-id=Identificación De la Tarea
 task-information=Información de la tarea
 task-name=Nombre de la tarea
+task=Tarea
 tasks=Tareas
 tax-free=Libre de impuestos
 tax-rate=Tipo impositivo

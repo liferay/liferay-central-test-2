@@ -147,11 +147,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			InstanceSearchTerms searchTerms = (InstanceSearchTerms)searchContainer.getSearchTerms();
 
-			int total = WorkflowComponentServiceUtil.getInstancesCount(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getGtStartDate(), searchTerms.getLtStartDate(), searchTerms.getGtEndDate(), searchTerms.getLtEndDate(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
+			int total = WorkflowComponentServiceUtil.getInstancesCount(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = WorkflowComponentServiceUtil.getInstances(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getGtStartDate(), searchTerms.getLtStartDate(), searchTerms.getGtEndDate(), searchTerms.getLtEndDate(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = WorkflowComponentServiceUtil.getInstances(searchTerms.getDefinitionId(), searchTerms.getInstanceId(), searchTerms.getDefinitionName(), searchTerms.getDefinitionVersion(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -245,11 +245,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			TaskSearchTerms searchTerms = (TaskSearchTerms)searchContainer.getSearchTerms();
 
-			int total = WorkflowComponentServiceUtil.getUserTasksCount(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getGtCreateDate(), searchTerms.getLtCreateDate(), searchTerms.getGtStartDate(), searchTerms.getLtStartDate(), searchTerms.getGtEndDate(), searchTerms.getLtEndDate(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
+			int total = WorkflowComponentServiceUtil.getUserTasksCount(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = WorkflowComponentServiceUtil.getUserTasks(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getGtCreateDate(), searchTerms.getLtCreateDate(), searchTerms.getGtStartDate(), searchTerms.getLtStartDate(), searchTerms.getGtEndDate(), searchTerms.getLtEndDate(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = WorkflowComponentServiceUtil.getUserTasks(searchTerms.getInstanceId(), searchTerms.getTaskName(), searchTerms.getDefinitionName(), searchTerms.getAssignedTo(), searchTerms.getCreateDateGT(), searchTerms.getCreateDateLT(), searchTerms.getStartDateGT(), searchTerms.getStartDateLT(), searchTerms.getEndDateGT(), searchTerms.getEndDateLT(), searchTerms.isHideEndedTasks(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>

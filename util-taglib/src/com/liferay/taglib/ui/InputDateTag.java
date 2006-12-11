@@ -159,7 +159,7 @@ public class InputDateTag extends IncludeTag {
 	private boolean _disableNamespace;
 	private String _formName = "fm";
 	private String _monthParam;
-	private int _monthValue;
+	private int _monthValue = -1;
 	private boolean _monthNullable;
 	private String _dayParam;
 	private int _dayValue;

@@ -63,16 +63,50 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				month = cal.get(Calendar.MONTH);
 			}
 
+			boolean monthNullable = false;
+
+			if (hints != null) {
+				monthNullable = GetterUtil.getBoolean((String)hints.get("month-nullable"), monthNullable);
+			}
+
 			int day = ParamUtil.getInteger(request, field + "Day", -1);
 
 			if ((day == -1) && (cal != null)) {
 				day = cal.get(Calendar.DATE);
 			}
 
+			boolean dayNullable = false;
+
+			if (hints != null) {
+				dayNullable = GetterUtil.getBoolean((String)hints.get("day-nullable"), dayNullable);
+			}
+
 			int year = ParamUtil.getInteger(request, field + "Year", -1);
 
 			if ((year == -1) && (cal != null)) {
 				year = cal.get(Calendar.YEAR);
+			}
+
+			boolean yearNullable = false;
+
+			if (hints != null) {
+				yearNullable = GetterUtil.getBoolean((String)hints.get("year-nullable"), yearNullable);
+			}
+
+			int yearRangeStart = year - 10;
+			int yearRangeEnd = year + 10;
+
+			if (year == -1) {
+				Calendar now = new GregorianCalendar(timeZone, locale);
+
+				yearRangeStart = now.get(Calendar.YEAR) - 10;
+				yearRangeEnd = now.get(Calendar.YEAR) + 10;
+			}
+
+			int firstDayOfWeek = Calendar.SUNDAY - 1;
+
+			if (cal != null) {
+				firstDayOfWeek = cal.getFirstDayOfWeek() - 1;
 			}
 
 			int hour = ParamUtil.getInteger(request, field + "Hour", -1);
@@ -103,13 +137,16 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			<liferay-ui:input-date
 				monthParam='<%= field + "Month" %>'
 				monthValue="<%= month %>"
+				monthNullable="<%= monthNullable %>"
 				dayParam='<%= field + "Day" %>'
 				dayValue="<%= day %>"
+				dayNullable="<%= dayNullable %>"
 				yearParam='<%= field + "Year" %>'
 				yearValue="<%= year %>"
-				yearRangeStart="<%= year - 100 %>"
-				yearRangeEnd="<%= year + 100 %>"
-				firstDayOfWeek="<%= cal.getFirstDayOfWeek() - 1 %>"
+				yearNullable="<%= yearNullable %>"
+				yearRangeStart="<%= yearRangeStart %>"
+				yearRangeEnd="<%= yearRangeEnd %>"
+				firstDayOfWeek="<%= firstDayOfWeek %>"
 				disabled="<%= disabled %>"
 			/>
 

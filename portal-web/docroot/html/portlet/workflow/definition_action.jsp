@@ -71,14 +71,3 @@ String definitionId = String.valueOf(definition.getDefinitionId());
 </portlet:renderURL>
 
 <liferay-ui:icon image="view_instances" message="view-instances" url="<%= viewInstancesURL %>" />
-
-<c:if test="<%= WorkflowDefinitionPermission.contains(permissionChecker, definition, ActionKeys.DELETE) %>">
-	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-		<portlet:param name="struts_action" value="/workflow/edit_definition" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="definitionId" value="<%= definitionId %>" />
-	</portlet:actionURL>
-
-	<liferay-ui:icon-delete url="<%= deleteURL %>" />
-</c:if>

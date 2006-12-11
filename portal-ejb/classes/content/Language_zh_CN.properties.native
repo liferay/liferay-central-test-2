@@ -1989,6 +1989,7 @@ target=目标
 task-id=任务身份证
 task-information=任务信息
 task-name=任务名
+task=任务
 tasks=任务
 tax-free=免税
 tax-rate=税率
