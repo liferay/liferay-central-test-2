@@ -578,4 +578,16 @@
 		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
 	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
 </beans>

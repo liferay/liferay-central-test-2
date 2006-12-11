@@ -3896,4 +3896,31 @@
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.enterprise" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.workflow.service.WorkflowInstanceService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowInstanceServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" />
+		</property>
+	</bean>
 </beans>

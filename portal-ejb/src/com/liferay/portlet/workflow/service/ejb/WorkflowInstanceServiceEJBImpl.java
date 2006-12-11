@@ -20,71 +20,53 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portlet.workflow.service.ejb;
 
-import com.liferay.util.GetterUtil;
+import com.liferay.portal.service.impl.PrincipalSessionBean;
 
-import java.text.DateFormat;
+import com.liferay.portlet.workflow.service.WorkflowInstanceService;
+import com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory;
 
-import java.util.Date;
+import javax.ejb.CreateException;
+import javax.ejb.SessionBean;
+import javax.ejb.SessionContext;
 
 /**
- * <a href="ReleaseInfo.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowInstanceServiceEJBImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ReleaseInfo {
+public class WorkflowInstanceServiceEJBImpl implements WorkflowInstanceService,
+	SessionBean {
+	public com.liferay.portlet.workflow.model.WorkflowInstance addInstance(
+		long definitionId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
 
-	static String name = "Liferay Portal";
-
-	static {
-		if (PropsUtil.get(PropsUtil.PORTAL_RELEASE).equals("enterprise")) {
-			name += " Enterprise";
-		}
-		else {
-			name += " Professional";
-		}
+		return WorkflowInstanceServiceFactory.getTxImpl().addInstance(definitionId);
 	}
 
-	static String version = "4.2.0";
-
-	static String codeName = "Cowper";
-
-	static String build = "3482";
-
-	static String date = "December 10, 2006";
-
-	static String releaseInfo =
-		name + " " + version + " (" + codeName + " / Build " + build + " / " +
-			date + ")";
-
-	static String serverInfo = name + " / " + version;
-
-	public static final String getVersion() {
-		return version;
+	public void ejbCreate() throws CreateException {
 	}
 
-	public static final String getCodeName() {
-		return codeName;
+	public void ejbRemove() {
 	}
 
-	public static final int getBuildNumber() {
-		return Integer.parseInt(build);
+	public void ejbActivate() {
 	}
 
-	public static final Date getBuildDate() {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.LONG);
-
-		return GetterUtil.getDate(date, df);
+	public void ejbPassivate() {
 	}
 
-	public static final String getReleaseInfo() {
-		return releaseInfo;
+	public SessionContext getSessionContext() {
+		return _sc;
 	}
 
-	public static final String getServerInfo() {
-		return serverInfo;
+	public void setSessionContext(SessionContext sc) {
+		_sc = sc;
 	}
 
+	private SessionContext _sc;
 }

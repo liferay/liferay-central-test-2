@@ -22,10 +22,13 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
-import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
+import com.liferay.portlet.workflow.model.WorkflowInstance;
+import com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -51,32 +54,34 @@ public class EditInstanceAction extends PortletAction {
 
 		try {
 			if (cmd.equals(Constants.ADD)) {
-				addInstance(req);
+				addInstance(req, res);
 			}
-
-			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			/*if (e instanceof NoSuchDefinitionException ||
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(req, "portlet.workflow.error");
 			}
-			else if (e instanceof DefinitionNameException) {
-				SessionErrors.add(req, e.getClass().getName());
-			}
-			else {*/
+			else {
 				throw e;
-			//}
+			}
 		}
 	}
 
-	protected void addInstance(ActionRequest req) throws Exception {
+	protected void addInstance(ActionRequest req, ActionResponse res)
+		throws Exception {
+
 		long definitionId = ParamUtil.getLong(req, "definitionId");
 
-		WorkflowComponentServiceUtil.startWorkflow(definitionId);
+		WorkflowInstance instance =
+			WorkflowInstanceServiceUtil.addInstance(definitionId);
+
+		String redirect = ParamUtil.getString(req, "redirect");
+
+		redirect += "&instanceId=" + instance.getInstanceId();
+
+		sendRedirect(req, res, redirect);
 	}
 
 }

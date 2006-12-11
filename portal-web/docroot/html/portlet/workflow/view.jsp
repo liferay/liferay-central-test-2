@@ -195,7 +195,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Start date
 
-				row.addText(String.valueOf(instance.getStartDate()), rowURL);
+				row.addText(dateFormatDateTime.format(instance.getStartDate()), rowURL);
 
 				// End date
 
@@ -203,7 +203,7 @@ portletURL.setParameter("tabs1", tabs1);
 					row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
 				}
 				else {
-					row.addText(String.valueOf(instance.getEndDate()), rowURL);
+					row.addText(dateFormatDateTime.format(instance.getEndDate()), rowURL);
 				}
 
 				// State
@@ -300,11 +300,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Assigned to
 
-				row.addText(task.getAssignedUserId(), rowURL);
+				row.addText(PortalUtil.getUserName(task.getAssignedUserId(), task.getAssignedUserId(), request), rowURL);
 
 				// Create date
 
-				row.addText(String.valueOf(task.getCreateDate()), rowURL);
+				row.addText(dateFormatDateTime.format(task.getCreateDate()), rowURL);
 
 				// Start date
 
@@ -312,7 +312,7 @@ portletURL.setParameter("tabs1", tabs1);
 					row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
 				}
 				else {
-					row.addText(String.valueOf(task.getStartDate()), rowURL);
+					row.addText(dateFormatDateTime.format(task.getStartDate()), rowURL);
 				}
 
 				// End date
@@ -321,7 +321,7 @@ portletURL.setParameter("tabs1", tabs1);
 					row.addText(LanguageUtil.get(pageContext, "not-available"), rowURL);
 				}
 				else {
-					row.addText(String.valueOf(task.getEndDate()), rowURL);
+					row.addText(dateFormatDateTime.format(task.getEndDate()), rowURL);
 				}
 
 				// Action

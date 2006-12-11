@@ -779,5 +779,12 @@
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
 	</enterprise-beans>
 </rexip-ejb-jar>

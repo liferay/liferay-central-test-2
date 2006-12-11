@@ -54,10 +54,15 @@ String definitionId = String.valueOf(definition.getDefinitionId());
 </c:if>
 
 <c:if test="<%= WorkflowDefinitionPermission.contains(permissionChecker, definition, ActionKeys.ADD_INSTANCE) %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addInstanceRedirectURL">
+		<portlet:param name="struts_action" value="/workflow/view" />
+		<portlet:param name="tabs1" value="instances" />
+	</portlet:renderURL>
+
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addInstanceURL">
 		<portlet:param name="struts_action" value="/workflow/edit_instance" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="redirect" value="<%= addInstanceRedirectURL %>" />
 		<portlet:param name="definitionId" value="<%= definitionId %>" />
 	</portlet:actionURL>
 

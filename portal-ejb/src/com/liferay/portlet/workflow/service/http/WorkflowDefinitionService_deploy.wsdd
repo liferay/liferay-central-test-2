@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portlet_Workflow_WorkflowDefinitionService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.workflow.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="WorkflowDefinitionServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="http://model.workflow.portlet.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portlet_Workflow_WorkflowDefinitionService"/>
+		<parameter name="className" value="com.liferay.portlet.workflow.service.http.WorkflowDefinitionServiceSoap"/>
+		<parameter name="wsdlPortType" value="WorkflowDefinitionServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://model.workflow.portlet.liferay.com" name="getDefinition" qname="operNS:getDefinition" returnQName="getDefinitionReturn" returnType="rtns:WorkflowDefinitionSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="addDefinition" qname="operNS:addDefinition" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="addDefinition getDefinition"/>
+		<typeMapping xmlns:ns="http://model.workflow.portlet.liferay.com" qname="ns:WorkflowDefinitionSoap" type="java:com.liferay.portlet.workflow.model.WorkflowDefinitionSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<typeMapping xmlns:ns="http://model.workflow.portlet.liferay.com" qname="ns:WorkflowDefinition" type="java:com.liferay.portlet.workflow.model.WorkflowDefinition" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
+</deployment>

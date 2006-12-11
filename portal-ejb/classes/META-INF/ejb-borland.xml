@@ -447,6 +447,10 @@
 			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</bean-home-name>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</bean-home-name>
+		</session>
 	</enterprise-beans>
 	<property>
 		<prop-name>ejb.default_transaction_attribute</prop-name>

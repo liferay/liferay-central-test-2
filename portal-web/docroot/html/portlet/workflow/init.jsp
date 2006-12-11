@@ -42,4 +42,8 @@
 --%><%@ page import="com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil" %><%--
 --%><%@ page import="com.liferay.portlet.workflow.service.permission.WorkflowDefinitionPermission" %><%--
 --%><%@ page import="com.liferay.portlet.workflow.service.permission.WorkflowInstancePermission" %><%--
---%><%@ page import="com.liferay.portlet.workflow.service.permission.WorkflowTaskPermission" %>
+--%><%@ page import="com.liferay.portlet.workflow.service.permission.WorkflowTaskPermission" %><%--
+
+--%><%
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+%>
