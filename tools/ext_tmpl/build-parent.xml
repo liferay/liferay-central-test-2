@@ -298,7 +298,7 @@
 			<then>
 
 				<!--
-				JBoss 4.0.4 defaults to different versions of dom4j, Commons
+				JBoss 4.0.5 defaults to different versions of dom4j, Commons
 				Collections, and Hibernate.
 				-->
 

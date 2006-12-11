@@ -445,7 +445,7 @@
 			<then>
 
 				<!--
-				JBoss 4.0.4 defaults to different versions of dom4j, Commons
+				JBoss 4.0.5 defaults to different versions of dom4j, Commons
 				Collections, and Hibernate.
 				-->
 
@@ -1171,6 +1171,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 		<ant dir="layouttpl" target="war" inheritAll="false" />
 		<ant dir="portlets" target="war" inheritAll="false" />
+
+		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
+		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
+		<copy file="laszlo-web/laszlo-web.war" tofile="liferay-portal-laszlo-${lp.version.file.name}.war" />
+		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
+
+		<copy file="portlets/alfresco.war" tofile="liferay-portal-alfresco-${lp.version.file.name}.war" />
 
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
