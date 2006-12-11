@@ -1230,6 +1230,42 @@
 					</resource-ref>
 				</session>
 				<session>
+					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
+					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
+					<jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</jndi-name>
+					<resource-ref>
+						<ref-name>jdbc/LiferayPool</ref-name>
+						<resource-link>LiferayPool</resource-link>
+					</resource-ref>
+					<resource-ref>
+						<ref-name>mail/MailSession</ref-name>
+						<resource-link>LiferayMailSession</resource-link>
+					</resource-ref>
+				</session>
+				<session>
 					<ejb-name>com_liferay_portlet_shopping_service_ejb_ShoppingCartLocalServiceEJB</ejb-name>
 					<jndi-name>ejb/liferay/ShoppingCartLocalServiceHome</jndi-name>
 					<resource-ref>
@@ -1434,8 +1470,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/RatingsEntryLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1446,8 +1482,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</ejb-name>
-					<jndi-name>com_liferay_portlet_ratings_service_ejb_RatingsEntryServiceEJB</jndi-name>
+					<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
@@ -1458,8 +1494,8 @@
 					</resource-ref>
 				</session>
 				<session>
-					<ejb-name>com_liferay_portlet_ratings_service_ejb_RatingsStatsLocalServiceEJB</ejb-name>
-					<jndi-name>ejb/liferay/RatingsStatsLocalServiceHome</jndi-name>
+					<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
+					<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</jndi-name>
 					<resource-ref>
 						<ref-name>jdbc/LiferayPool</ref-name>
 						<resource-link>LiferayPool</resource-link>
