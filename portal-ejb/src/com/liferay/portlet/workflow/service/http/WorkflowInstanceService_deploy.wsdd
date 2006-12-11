@@ -9,10 +9,17 @@
 		<parameter name="className" value="com.liferay.portlet.workflow.service.http.WorkflowInstanceServiceSoap"/>
 		<parameter name="wsdlPortType" value="WorkflowInstanceServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="signalInstance" qname="operNS:signalInstance" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="signalToken" qname="operNS:signalToken" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tokenId" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://model.workflow.portlet.liferay.com" name="addInstance" qname="operNS:addInstance" returnQName="addInstanceReturn" returnType="rtns:WorkflowInstanceSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="addInstance"/>
+		<parameter name="allowedMethods" value="addInstance signalInstance signalToken"/>
 		<typeMapping xmlns:ns="http://model.workflow.portlet.liferay.com" qname="ns:WorkflowToken" type="java:com.liferay.portlet.workflow.model.WorkflowToken" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.workflow.portlet.liferay.com" qname="ns:WorkflowInstance" type="java:com.liferay.portlet.workflow.model.WorkflowInstance" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 		<typeMapping xmlns:ns="http://model.workflow.portlet.liferay.com" qname="ns:WorkflowInstanceSoap" type="java:com.liferay.portlet.workflow.model.WorkflowInstanceSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

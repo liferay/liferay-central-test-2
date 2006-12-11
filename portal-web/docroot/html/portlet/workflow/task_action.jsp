@@ -34,17 +34,32 @@ String taskId = String.valueOf(task.getTaskId());
 WorkflowInstance instance = task.getInstance();
 
 String instanceId = String.valueOf(instance.getInstanceId());
+
+WorkflowDefinition definition = instance.getDefinition();
 %>
 
 <c:if test="<%= !instance.isEnded() %>">
-	<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.MANAGE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageTaskURL">
-			<portlet:param name="struts_action" value="/workflow/edit_task" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="instanceId" value="<%= instanceId %>" />
-			<portlet:param name="taskId" value="<%= taskId %>" />
-		</portlet:renderURL>
+	<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.PERMISSIONS) %>">
+		<liferay-security:permissionsURL
+			modelResource="<%= WorkflowTask.class.getName() %>"
+			modelResourceDescription='<%= definition.getName() + " " + definition.getVersion() + ", " + LanguageUtil.get(pageContext, "instance") + " " + instance.getInstanceId() + ", " + task.getName() %>'
+			resourcePrimKey="<%= taskId %>"
+			var="permissionsURL"
+		/>
 
-		<liferay-ui:icon image="manage_task" message="manage" url="<%= manageTaskURL %>" />
+		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+	</c:if>
+
+	<c:if test="<%= task.getEndDate() == null %>">
+		<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.MANAGE) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageTaskURL">
+				<portlet:param name="struts_action" value="/workflow/edit_task" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="instanceId" value="<%= instanceId %>" />
+				<portlet:param name="taskId" value="<%= taskId %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="manage_task" message="manage" url="<%= manageTaskURL %>" />
+		</c:if>
 	</c:if>
 </c:if>

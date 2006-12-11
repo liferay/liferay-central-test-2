@@ -38,53 +38,75 @@ List tasks = token.getTasks();
 List children = token.getChildren();
 %>
 
-<%--<%= token.getType() %><br>
-<%= tasks.size() %><br>
-<%= children.size() %>--%>
+<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.PERMISSIONS) %>">
+	<liferay-security:permissionsURL
+		modelResource="<%= WorkflowInstance.class.getName() %>"
+		modelResourceDescription='<%= definition.getName() + " " + definition.getVersion() + ", " + LanguageUtil.get(pageContext, "instance") + " " + instance.getInstanceId() %>'
+		resourcePrimKey="<%= instanceId %>"
+		var="permissionsURL"
+	/>
 
-<c:if test="<%= !instance.isEnded() %>">
-	<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.PERMISSIONS) %>">
-		<liferay-security:permissionsURL
-			modelResource="<%= WorkflowInstance.class.getName() %>"
-			modelResourceDescription="<%= definition.getName() %>"
-			resourcePrimKey="<%= instanceId %>"
-			var="permissionsURL"
-		/>
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+</c:if>
 
-		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
-	</c:if>
-
-	<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.SIGNAL) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="signalInstanceURL">
-			<portlet:param name="struts_action" value="/workflow/edit_instance" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SIGNAL %>" />
-			<portlet:param name="redirect" value="<%= currentURL %>" />
+<c:choose>
+	<c:when test="<%= instance.isEnded() %>">
+	</c:when>
+	<c:when test="<%= tasks.size() > 0 %>">
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewTasksURL">
+			<portlet:param name="struts_action" value="/workflow/view" />
+			<portlet:param name="tabs1" value="tasks" />
 			<portlet:param name="instanceId" value="<%= instanceId %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="signal_instance" message="signal" url="<%= signalInstanceURL %>" />
-	</c:if>
-
-	<%
-	for (int i = 0; i < tasks.size(); i++) {
-		WorkflowTask task = (WorkflowTask)tasks.get(i);
-
-		String taskId = String.valueOf(task.getTaskId());
-	%>
-
-		<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.MANAGE) %>">
-			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="manageTaskURL">
-				<portlet:param name="struts_action" value="/workflow/edit_task" />
+		<liferay-ui:icon image="view_tasks" message="view-tasks" url="<%= viewTasksURL %>" />
+	</c:when>
+	<c:when test="<%= children.size() == 0 %>">
+		<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.SIGNAL) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="signalInstanceURL">
+				<portlet:param name="struts_action" value="/workflow/edit_instance" />
+				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SIGNAL %>" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
 				<portlet:param name="instanceId" value="<%= instanceId %>" />
-				<portlet:param name="taskId" value="<%= taskId %>" />
 			</portlet:renderURL>
 
-			<liferay-ui:icon image="manage_task" message="manage" url="<%= manageTaskURL %>" />
+			<liferay-ui:icon image="signal_instance" message="signal" url="<%= signalInstanceURL %>" />
 		</c:if>
+	</c:when>
+	<c:when test="<%= children.size() > 0 %>">
 
-	<%
-	}
-	%>
+		<%
+		for (int i = 0; i < children.size(); i++) {
+			WorkflowToken childToken = (WorkflowToken)children.get(i);
+		%>
 
-</c:if>
+			<c:choose>
+				<c:when test='<%= childToken.getType().equals("join") %>'>
+					<%= LanguageUtil.get(pageContext, "waiting-on-sibling-tokens-to-complete") %>
+				</c:when>
+				<c:otherwise>
+					<c:if test="<%= WorkflowInstancePermission.contains(permissionChecker, instance, ActionKeys.SIGNAL) %>">
+
+						<%
+						PortletURL signalTokenURL = renderResponse.createRenderURL();
+
+						signalTokenURL.setWindowState(WindowState.MAXIMIZED);
+
+						signalTokenURL.setParameter("struts_action", "/workflow/edit_instance");
+						signalTokenURL.setParameter(Constants.CMD, Constants.SIGNAL);
+						signalTokenURL.setParameter("redirect", currentURL);
+						signalTokenURL.setParameter("instanceId", instanceId);
+						signalTokenURL.setParameter("tokenId", String.valueOf(childToken.getTokenId()));
+						%>
+
+						<liferay-ui:icon image="signal_instance" message="signal" url="<%= signalTokenURL.toString() %>" />
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+
+		<%
+		}
+		%>
+
+	</c:when>
+</c:choose>

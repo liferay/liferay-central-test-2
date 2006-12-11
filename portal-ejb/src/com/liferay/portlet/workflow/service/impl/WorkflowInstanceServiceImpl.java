@@ -65,4 +65,26 @@ public class WorkflowInstanceServiceImpl
 		}
 	}
 
+	public void signalInstance(long instanceId)
+		throws PortalException, SystemException {
+
+		try {
+			WorkflowComponentServiceUtil.signalInstance(instanceId);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
+	}
+
+	public void signalToken(long instanceId, long tokenId)
+		throws PortalException, SystemException {
+
+		try {
+			WorkflowComponentServiceUtil.signalToken(instanceId, tokenId);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
+	}
+
 }

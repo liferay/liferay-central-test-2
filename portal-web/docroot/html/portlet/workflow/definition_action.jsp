@@ -45,7 +45,7 @@ String definitionId = String.valueOf(definition.getDefinitionId());
 <c:if test="<%= WorkflowDefinitionPermission.contains(permissionChecker, definition, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= WorkflowDefinition.class.getName() %>"
-		modelResourceDescription="<%= definition.getName() %>"
+		modelResourceDescription='<%= definition.getName() + " " + definition.getVersion() %>'
 		resourcePrimKey="<%= definitionId %>"
 		var="permissionsURL"
 	/>

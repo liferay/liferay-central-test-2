@@ -29,6 +29,8 @@ import com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.util.Map;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -52,11 +54,20 @@ public class EditTaskAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, "taskCmd");
 
 		try {
 			if (cmd.equals(Constants.UPDATE)) {
-				updateTask(req);
+				Map errors = updateTask(req);
+
+				if (errors.size() > 0) {
+					SessionErrors.add(
+						req, EditTaskAction.class.getName(), errors);
+
+					setForward(req, "portlet.workflow.edit_task");
+
+					return;
+				}
 			}
 
 			sendRedirect(req, res);
@@ -82,12 +93,12 @@ public class EditTaskAction extends PortletAction {
 			getForward(req, "portlet.workflow.edit_task"));
 	}
 
-	protected void updateTask(ActionRequest req) throws Exception {
+	protected Map updateTask(ActionRequest req) throws Exception {
 		long taskId = ParamUtil.getLong(req, "taskId");
 
 		String transition = ParamUtil.getString(req, "transition");
 
-		WorkflowTaskServiceUtil.updateTask(
+		return WorkflowTaskServiceUtil.updateTask(
 			taskId, transition, req.getParameterMap());
 	}
 

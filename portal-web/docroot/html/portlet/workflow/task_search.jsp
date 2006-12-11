@@ -54,7 +54,11 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
-		<input class="form-text" name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>" size="20" type="text" value="<%= displayTerms.getAssignedTo() %>">
+		<select name="<portlet:namespace /><%= TaskDisplayTerms.ASSIGNED_TO %>">
+			<option <%= displayTerms.getAssignedTo().equals("all") ? "selected" : "" %> value="all"><%= LanguageUtil.get(pageContext, "all") %></option>
+			<option <%= displayTerms.getAssignedTo().equals("me") ? "selected" : "" %> value="me"><%= LanguageUtil.get(pageContext, "me") %></option>
+			<option <%= displayTerms.getAssignedTo().equals("pool") ? "selected" : "" %> value="pool"><%= LanguageUtil.get(pageContext, "pool") %></option>
+		</select>
 	</td>
 </tr>
 </table>
@@ -108,6 +112,13 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
+	<td>
+		<select name="<portlet:namespace /><%= TaskDisplayTerms.AND_OPERATOR %>">
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+		</select>
+	</td>
+	<td style="padding-left: 5px;"></td>
 	<td>
 		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>

@@ -51,5 +51,29 @@ public class WorkflowInstanceServiceSoap {
 		}
 	}
 
+	public static void signalInstance(long instanceId)
+		throws RemoteException {
+		try {
+			WorkflowInstanceServiceUtil.signalInstance(instanceId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static void signalToken(long instanceId, long tokenId)
+		throws RemoteException {
+		try {
+			WorkflowInstanceServiceUtil.signalToken(instanceId, tokenId);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	private static Log _log = LogFactoryUtil.getLog(WorkflowInstanceServiceSoap.class);
 }

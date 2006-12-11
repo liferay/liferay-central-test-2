@@ -33,4 +33,12 @@ public interface WorkflowInstanceService {
 		long definitionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void signalInstance(long instanceId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public void signalToken(long instanceId, long tokenId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

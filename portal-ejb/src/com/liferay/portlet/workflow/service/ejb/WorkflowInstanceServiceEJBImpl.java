@@ -48,6 +48,21 @@ public class WorkflowInstanceServiceEJBImpl implements WorkflowInstanceService,
 		return WorkflowInstanceServiceFactory.getTxImpl().addInstance(definitionId);
 	}
 
+	public void signalInstance(long instanceId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		WorkflowInstanceServiceFactory.getTxImpl().signalInstance(instanceId);
+	}
+
+	public void signalToken(long instanceId, long tokenId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		WorkflowInstanceServiceFactory.getTxImpl().signalToken(instanceId,
+			tokenId);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

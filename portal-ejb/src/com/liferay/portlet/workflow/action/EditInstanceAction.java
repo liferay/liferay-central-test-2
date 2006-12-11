@@ -56,6 +56,9 @@ public class EditInstanceAction extends PortletAction {
 			if (cmd.equals(Constants.ADD)) {
 				addInstance(req, res);
 			}
+			else if (cmd.equals(Constants.SIGNAL)) {
+				signalInstance(req, res);
+			}
 		}
 		catch (Exception e) {
 			if (e instanceof PrincipalException) {
@@ -82,6 +85,22 @@ public class EditInstanceAction extends PortletAction {
 		redirect += "&instanceId=" + instance.getInstanceId();
 
 		sendRedirect(req, res, redirect);
+	}
+
+	protected void signalInstance(ActionRequest req, ActionResponse res)
+		throws Exception {
+
+		long instanceId = ParamUtil.getLong(req, "instanceId");
+		long tokenId = ParamUtil.getLong(req, "tokenId");
+
+		if (tokenId == 0) {
+			WorkflowInstanceServiceUtil.signalInstance(instanceId);
+		}
+		else {
+			WorkflowInstanceServiceUtil.signalToken(instanceId, tokenId);
+		}
+
+		sendRedirect(req, res);
 	}
 
 }

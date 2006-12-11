@@ -32,6 +32,8 @@ long instanceId = ParamUtil.getLong(request, "instanceId");
 
 List taskFormElements = WorkflowComponentServiceUtil.getTaskFormElements(taskId);
 List taskTransitions = WorkflowComponentServiceUtil.getTaskTransitions(taskId);
+
+Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName());
 %>
 
 <script language="JavaScript">
@@ -42,7 +44,8 @@ List taskTransitions = WorkflowComponentServiceUtil.getTaskTransitions(taskId);
 </script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/workflow/edit_task" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace />taskCmd" type="hidden" value="<%= Constants.UPDATE %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />taskId" type="hidden" value="<%= taskId %>">
 <input name="<portlet:namespace />instanceId" type="hidden" value="<%= instanceId %>">
 <input name="<portlet:namespace />taskTransition" type="hidden" value="">
@@ -59,7 +62,41 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 	String displayName = taskFormElement.getDisplayName();
 	String value = taskFormElement.getValue();
 	List valueList = taskFormElement.getValueList();
+
+	String errorCode = null;
+
+	if (errors != null) {
+		errorCode = (String)errors.get(displayName);
+	}
 %>
+
+	<c:if test="<%= Validator.isNotNull(errorCode) %>">
+		<tr>
+			<td colspan="3">
+				<span class="portlet-msg-error" style="font-size: xx-small;">
+
+				<c:choose>
+					<c:when test='<%= errorCode.equals("required-value") %>'>
+						<%= LanguageUtil.get(pageContext, "please-enter-a-value") %>
+					</c:when>
+					<c:when test='<%= errorCode.equals("invalid-date") %>'>
+						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-date") %>
+					</c:when>
+					<c:when test='<%= errorCode.equals("invalid-email") %>'>
+						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-email-address") %>
+					</c:when>
+					<c:when test='<%= errorCode.equals("invalid-number") %>'>
+						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-number") %>
+					</c:when>
+					<c:when test='<%= errorCode.equals("invalid-phone") %>'>
+						<%= LanguageUtil.get(pageContext, "please-enter-a-valid-phone-number") %>
+					</c:when>
+				</c:choose>
+
+				</span>
+			</td>
+		</tr>
+	</c:if>
 
 	<tr>
 		<td>
@@ -75,12 +112,30 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 		<td>
 			<c:choose>
 				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-					<input class="form-text" name="" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="">
+					<input class="form-text" name="" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
 				</c:when>
 				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_CHECKBOX) %>">
-					<input type="checkbox">
+					<liferay-ui:input-checkbox
+						param="<%= displayName %>"
+						defaultValue="<%= Validator.isNotNull(value) %>"
+					/>
 				</c:when>
 				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_DATE) %>">
+
+					<%
+					Calendar cal = null;
+
+					if (Validator.isNotNull(value)) {
+						cal.setTime(WorkflowXMLUtil.parseDate(value));
+					}
+					%>
+
+					<liferay-ui:input-field
+						model="<%= WorkflowTask.class %>"
+						field="<%= TaskDisplayTerms.CREATE_DATE_GT %>"
+						fieldParam="<%= displayName %>"
+						defaultValue="<%= cal %>"
+					/>
 				</c:when>
 				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -113,7 +168,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 					</select>
 				</c:when>
 				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-					<textarea class="form-text" name="" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"></textarea>
+					<textarea class="form-text" name="" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
 				</c:when>
 			</c:choose>
 		</td>

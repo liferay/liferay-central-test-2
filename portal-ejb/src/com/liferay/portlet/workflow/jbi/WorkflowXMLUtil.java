@@ -39,8 +39,8 @@ import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -113,7 +113,7 @@ public class WorkflowXMLUtil {
 	}
 
 	public static Map parseErrors(String xml) throws DocumentException {
-		Map errors = new HashMap();
+		Map errors = new LinkedHashMap();
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 

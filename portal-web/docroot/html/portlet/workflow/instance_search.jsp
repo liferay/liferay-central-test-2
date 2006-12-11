@@ -103,6 +103,13 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
+		<select name="<portlet:namespace /><%= InstanceDisplayTerms.AND_OPERATOR %>">
+			<option <%= displayTerms.isAndOperator() ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "and") %></option>
+			<option <%= !displayTerms.isAndOperator() ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "or") %></option>
+		</select>
+	</td>
+	<td style="padding-left: 5px;"></td>
+	<td>
 		<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
 	</td>
 </tr>

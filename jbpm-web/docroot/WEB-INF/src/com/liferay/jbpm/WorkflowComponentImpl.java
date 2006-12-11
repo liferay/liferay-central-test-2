@@ -1052,17 +1052,48 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 		if (type.equals(TaskFormElement.TYPE_DATE)) {
 		}
-		else if (taskFormElement.isRequired() && Validator.isNull(value)) {
-			error = "2";
+		else if (type.equals(TaskFormElement.TYPE_EMAIL)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+			else if (!Validator.isNull(value) &&
+					 !Validator.isEmailAddress(value)) {
+
+				error = "invalid-email";
+			}
 		}
-		else if (type.equals("email") && !Validator.isEmailAddress(value)) {
-			error = "3";
+		else if (type.equals(TaskFormElement.TYPE_NUMBER)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+			else if (!Validator.isNull(value) && !Validator.isNumber(value)) {
+				error = "invalid-number";
+			}
 		}
-		else if (type.equals("phone") && !Validator.isPhoneNumber(value)) {
-			error = "4";
+		else if (type.equals(TaskFormElement.TYPE_PHONE)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+			else if (!Validator.isNull(value) &&
+					 !Validator.isPhoneNumber(value)) {
+
+				error = "invalid-phone";
+			}
 		}
-		else if (type.equals("number") && !Validator.isNumber(value)) {
-			error = "5";
+		else if (type.equals(TaskFormElement.TYPE_RADIO)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+		}
+		else if (type.equals(TaskFormElement.TYPE_SELECT)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+		}
+		else if (type.equals(TaskFormElement.TYPE_TEXT)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
 		}
 
 		return error;
