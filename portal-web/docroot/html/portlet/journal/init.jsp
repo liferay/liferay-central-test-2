@@ -20,62 +20,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.journal.ArticleContentException" %><%--
---%><%@ page import="com.liferay.portlet.journal.ArticleDisplayDateException" %><%--
---%><%@ page import="com.liferay.portlet.journal.ArticleExpirationDateException" %><%--
---%><%@ page import="com.liferay.portlet.journal.ArticleIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.ArticleTitleException" %><%--
---%><%@ page import="com.liferay.portlet.journal.DuplicateArticleIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.DuplicateStructureIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.DuplicateTemplateIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %><%--
---%><%@ page import="com.liferay.portlet.journal.NoSuchStructureException" %><%--
---%><%@ page import="com.liferay.portlet.journal.NoSuchTemplateException" %><%--
---%><%@ page import="com.liferay.portlet.journal.RequiredStructureException" %><%--
---%><%@ page import="com.liferay.portlet.journal.RequiredTemplateException" %><%--
---%><%@ page import="com.liferay.portlet.journal.StructureDescriptionException" %><%--
---%><%@ page import="com.liferay.portlet.journal.StructureIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.StructureNameException" %><%--
---%><%@ page import="com.liferay.portlet.journal.StructureXsdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateDescriptionException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateIdException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateNameException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateSmallImageNameException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateSmallImageSizeException" %><%--
---%><%@ page import="com.liferay.portlet.journal.TemplateXslException" %><%--
---%><%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.JournalArticle" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.JournalStructure" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.ArticleDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.StructureDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.StructureSearch" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.StructureSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.TemplateDisplayTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.TemplateSearch" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.TemplateSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.permission.JournalStructurePermission" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %><%--
---%><%@ page import="com.liferay.portlet.journal.util.JournalUtil" %><%--
+<%@ page import="com.liferay.portlet.journal.ArticleContentException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleDisplayDateException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleExpirationDateException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleIdException" %>
+<%@ page import="com.liferay.portlet.journal.ArticleTitleException" %>
+<%@ page import="com.liferay.portlet.journal.DuplicateArticleIdException" %>
+<%@ page import="com.liferay.portlet.journal.DuplicateStructureIdException" %>
+<%@ page import="com.liferay.portlet.journal.DuplicateTemplateIdException" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchArticleException" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchStructureException" %>
+<%@ page import="com.liferay.portlet.journal.NoSuchTemplateException" %>
+<%@ page import="com.liferay.portlet.journal.RequiredStructureException" %>
+<%@ page import="com.liferay.portlet.journal.RequiredTemplateException" %>
+<%@ page import="com.liferay.portlet.journal.StructureDescriptionException" %>
+<%@ page import="com.liferay.portlet.journal.StructureIdException" %>
+<%@ page import="com.liferay.portlet.journal.StructureNameException" %>
+<%@ page import="com.liferay.portlet.journal.StructureXsdException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateDescriptionException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateIdException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateNameException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateSmallImageNameException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateSmallImageSizeException" %>
+<%@ page import="com.liferay.portlet.journal.TemplateXslException" %>
+<%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalStructure" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalTemplate" %>
+<%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
+<%@ page import="com.liferay.portlet.journal.model.impl.JournalTemplateImpl" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleDisplayTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.StructureDisplayTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.StructureSearch" %>
+<%@ page import="com.liferay.portlet.journal.search.StructureSearchTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.TemplateDisplayTerms" %>
+<%@ page import="com.liferay.portlet.journal.search.TemplateSearch" %>
+<%@ page import="com.liferay.portlet.journal.search.TemplateSearchTerms" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalArticlePermission" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalStructurePermission" %>
+<%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %>
+<%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
 
---%><%@ page import="org.dom4j.Document" %><%--
---%><%@ page import="org.dom4j.DocumentFactory" %><%--
---%><%@ page import="org.dom4j.Element" %><%--
---%><%@ page import="org.dom4j.io.SAXReader" %><%--
+<%@ page import="org.dom4j.Document" %>
+<%@ page import="org.dom4j.DocumentFactory" %>
+<%@ page import="org.dom4j.Element" %>
+<%@ page import="org.dom4j.io.SAXReader" %>
 
---%><%
+<%
 PortalPreferences prefs = PortletPreferencesFactory.getPortalPreferences(request);
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);

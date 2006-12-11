@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.wsrp.util.WSRPUtil" %><%--
+<%@ page import="com.liferay.portal.wsrp.util.WSRPUtil" %>
 
---%><%@ page import="oasis.names.tc.wsrp.v1.types.ServiceDescription" %><%--
---%><%@ page import="oasis.names.tc.wsrp.v1.types.PortletDescription" %><%--
+<%@ page import="oasis.names.tc.wsrp.v1.types.ServiceDescription" %>
+<%@ page import="oasis.names.tc.wsrp.v1.types.PortletDescription" %>
 
---%><%@ page import="org.apache.wsrp4j.consumer.Producer" %>
+<%@ page import="org.apache.wsrp4j.consumer.Producer" %>

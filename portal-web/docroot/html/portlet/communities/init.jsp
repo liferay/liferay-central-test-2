@@ -20,44 +20,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.DuplicateGroupException" %><%--
---%><%@ page import="com.liferay.portal.GroupNameException" %><%--
---%><%@ page import="com.liferay.portal.LayoutFriendlyURLException" %><%--
---%><%@ page import="com.liferay.portal.LayoutHiddenException" %><%--
---%><%@ page import="com.liferay.portal.LayoutImportException" %><%--
---%><%@ page import="com.liferay.portal.LayoutNameException" %><%--
---%><%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %><%--
---%><%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %><%--
---%><%@ page import="com.liferay.portal.LayoutTypeException" %><%--
---%><%@ page import="com.liferay.portal.NoSuchGroupException" %><%--
---%><%@ page import="com.liferay.portal.NoSuchLayoutException" %><%--
---%><%@ page import="com.liferay.portal.RequiredGroupException" %><%--
---%><%@ page import="com.liferay.portal.RequiredLayoutException" %><%--
---%><%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %><%--
---%><%@ page import="com.liferay.portal.service.permission.GroupPermission" %><%--
---%><%@ page import="com.liferay.portal.util.LayoutLister" %><%--
---%><%@ page import="com.liferay.portal.util.LayoutView" %><%--
---%><%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %><%--
---%><%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %><%--
---%><%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %><%--
---%><%@ page import="com.liferay.portal.service.permission.PortalPermission" %><%--
---%><%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationGroupChecker" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupChecker" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupGroupChecker" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %><%--
+<%@ page import="com.liferay.portal.DuplicateGroupException" %>
+<%@ page import="com.liferay.portal.GroupNameException" %>
+<%@ page import="com.liferay.portal.LayoutFriendlyURLException" %>
+<%@ page import="com.liferay.portal.LayoutHiddenException" %>
+<%@ page import="com.liferay.portal.LayoutImportException" %>
+<%@ page import="com.liferay.portal.LayoutNameException" %>
+<%@ page import="com.liferay.portal.LayoutParentLayoutIdException" %>
+<%@ page import="com.liferay.portal.LayoutSetVirtualHostException" %>
+<%@ page import="com.liferay.portal.LayoutTypeException" %>
+<%@ page import="com.liferay.portal.NoSuchGroupException" %>
+<%@ page import="com.liferay.portal.NoSuchLayoutException" %>
+<%@ page import="com.liferay.portal.RequiredGroupException" %>
+<%@ page import="com.liferay.portal.RequiredLayoutException" %>
+<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
+<%@ page import="com.liferay.portal.service.permission.GroupPermission" %>
+<%@ page import="com.liferay.portal.util.LayoutLister" %>
+<%@ page import="com.liferay.portal.util.LayoutView" %>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
+<%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
+<%@ page import="com.liferay.portal.service.permission.PortalPermission" %>
+<%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationGroupChecker" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupChecker" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupGroupChecker" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 
---%><%@ page import="org.dom4j.Document" %><%--
---%><%@ page import="org.dom4j.Element" %><%--
---%><%@ page import="org.dom4j.io.SAXReader" %>
+<%@ page import="org.dom4j.Document" %>
+<%@ page import="org.dom4j.Element" %>
+<%@ page import="org.dom4j.io.SAXReader" %>

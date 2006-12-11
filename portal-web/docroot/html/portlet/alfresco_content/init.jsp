@@ -20,18 +20,18 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil" %><%--
+<%@ page import="com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil" %>
 
---%><%@ page import="org.alfresco.webservice.types.NamedValue" %><%--
---%><%@ page import="org.alfresco.webservice.types.Node" %><%--
---%><%@ page import="org.alfresco.webservice.types.ResultSetRow" %><%--
---%><%@ page import="org.alfresco.webservice.types.ResultSetRowNode" %><%--
+<%@ page import="org.alfresco.webservice.types.NamedValue" %>
+<%@ page import="org.alfresco.webservice.types.Node" %>
+<%@ page import="org.alfresco.webservice.types.ResultSetRow" %>
+<%@ page import="org.alfresco.webservice.types.ResultSetRowNode" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");

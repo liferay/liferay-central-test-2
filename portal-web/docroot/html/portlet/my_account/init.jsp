@@ -20,17 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/common/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.ContactFirstNameException" %><%--
---%><%@ page import="com.liferay.portal.ContactLastNameException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.DuplicateUserIdException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.ReservedUserIdException" %><%--
---%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.UserIdException" %><%--
+<%@ page import="com.liferay.portal.ContactFirstNameException" %>
+<%@ page import="com.liferay.portal.ContactLastNameException" %>
+<%@ page import="com.liferay.portal.DuplicateUserEmailAddressException" %>
+<%@ page import="com.liferay.portal.DuplicateUserIdException" %>
+<%@ page import="com.liferay.portal.ReservedUserEmailAddressException" %>
+<%@ page import="com.liferay.portal.ReservedUserIdException" %>
+<%@ page import="com.liferay.portal.UserEmailAddressException" %>
+<%@ page import="com.liferay.portal.UserIdException" %>
 
---%><portlet:defineObjects />
+<portlet:defineObjects />

@@ -20,19 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/common/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.rss.util.RSSUtil" %><%--
+<%@ page import="com.liferay.portlet.rss.util.RSSUtil" %>
 
---%><%@ page import="com.sun.syndication.feed.synd.SyndContent" %><%--
---%><%@ page import="com.sun.syndication.feed.synd.SyndEntry" %><%--
---%><%@ page import="com.sun.syndication.feed.synd.SyndFeed" %><%--
+<%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
 
---%><portlet:defineObjects /><%--
+<portlet:defineObjects />
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String[] urls = prefs.getValues("urls", new String[0]);

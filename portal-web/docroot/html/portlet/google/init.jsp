@@ -20,15 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.google.soap.search.GoogleSearchFault" %><%--
---%><%@ page import="com.google.soap.search.GoogleSearchResult" %><%--
---%><%@ page import="com.google.soap.search.GoogleSearchResultElement" %><%--
+<%@ page import="com.google.soap.search.GoogleSearchFault" %>
+<%@ page import="com.google.soap.search.GoogleSearchResult" %>
+<%@ page import="com.google.soap.search.GoogleSearchResultElement" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 boolean safeSearch = GetterUtil.getBoolean(prefs.getValue("safe-search", StringPool.BLANK));

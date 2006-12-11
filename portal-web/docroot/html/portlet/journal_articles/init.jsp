@@ -20,25 +20,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.NoSuchGroupException" %><%--
---%><%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.JournalArticle" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %><%--
---%><%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.journal.util.JournalUtil" %><%--
---%><%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %><%--
---%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.ActionURLLogic" %><%--
---%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic" %><%--
---%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %><%--
---%><%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %><%--
+<%@ page import="com.liferay.portal.NoSuchGroupException" %>
+<%@ page import="com.liferay.portlet.journal.action.EditArticleAction" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticle" %>
+<%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearch" %>
+<%@ page import="com.liferay.portlet.journal.search.ArticleSearchTerms" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
+<%@ page import="com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil" %>
+<%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.ActionURLLogic" %>
+<%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.PortletLogic" %>
+<%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RenderURLLogic" %>
+<%@ page import="com.liferay.portlet.layoutconfiguration.util.xml.RuntimeLogic" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");

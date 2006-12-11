@@ -20,23 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.kernel.cal.DayAndPosition" %><%--
---%><%@ page import="com.liferay.portlet.calendar.EventDurationException" %><%--
---%><%@ page import="com.liferay.portlet.calendar.EventEndDateException" %><%--
---%><%@ page import="com.liferay.portlet.calendar.EventStartDateException" %><%--
---%><%@ page import="com.liferay.portlet.calendar.EventTitleException" %><%--
---%><%@ page import="com.liferay.portlet.calendar.NoSuchEventException" %><%--
---%><%@ page import="com.liferay.portlet.calendar.model.CalEvent" %><%--
---%><%@ page import="com.liferay.portlet.calendar.model.impl.CalEventImpl" %><%--
---%><%@ page import="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %><%--
---%><%@ page import="com.liferay.portlet.calendar.util.CalUtil" %><%--
+<%@ page import="com.liferay.portal.kernel.cal.DayAndPosition" %>
+<%@ page import="com.liferay.portlet.calendar.EventDurationException" %>
+<%@ page import="com.liferay.portlet.calendar.EventEndDateException" %>
+<%@ page import="com.liferay.portlet.calendar.EventStartDateException" %>
+<%@ page import="com.liferay.portlet.calendar.EventTitleException" %>
+<%@ page import="com.liferay.portlet.calendar.NoSuchEventException" %>
+<%@ page import="com.liferay.portlet.calendar.model.CalEvent" %>
+<%@ page import="com.liferay.portlet.calendar.model.impl.CalEventImpl" %>
+<%@ page import="com.liferay.portlet.calendar.service.CalEventLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.calendar.service.permission.CalEventPermission" %>
+<%@ page import="com.liferay.portlet.calendar.util.CalUtil" %>
 
---%><%
+<%
 String monthParam = request.getParameter("month");
 String dayParam = request.getParameter("day");
 String yearParam = request.getParameter("year");

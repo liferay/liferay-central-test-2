@@ -20,27 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.polls.DuplicateVoteException" %><%--
---%><%@ page import="com.liferay.portlet.polls.NoSuchChoiceException" %><%--
---%><%@ page import="com.liferay.portlet.polls.NoSuchQuestionException" %><%--
---%><%@ page import="com.liferay.portlet.polls.QuestionChoiceException" %><%--
---%><%@ page import="com.liferay.portlet.polls.QuestionDescriptionException" %><%--
---%><%@ page import="com.liferay.portlet.polls.QuestionExpirationDateException" %><%--
---%><%@ page import="com.liferay.portlet.polls.QuestionTitleException" %><%--
---%><%@ page import="com.liferay.portlet.polls.model.PollsChoice" %><%--
---%><%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %><%--
---%><%@ page import="com.liferay.portlet.polls.model.PollsVote" %><%--
---%><%@ page import="com.liferay.portlet.polls.action.EditQuestionAction" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %><%--
---%><%@ page import="com.liferay.portlet.polls.util.PollsUtil" %><%--
+<%@ page import="com.liferay.portlet.polls.DuplicateVoteException" %>
+<%@ page import="com.liferay.portlet.polls.NoSuchChoiceException" %>
+<%@ page import="com.liferay.portlet.polls.NoSuchQuestionException" %>
+<%@ page import="com.liferay.portlet.polls.QuestionChoiceException" %>
+<%@ page import="com.liferay.portlet.polls.QuestionDescriptionException" %>
+<%@ page import="com.liferay.portlet.polls.QuestionExpirationDateException" %>
+<%@ page import="com.liferay.portlet.polls.QuestionTitleException" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsChoice" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsVote" %>
+<%@ page import="com.liferay.portlet.polls.action.EditQuestionAction" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %>
+<%@ page import="com.liferay.portlet.polls.util.PollsUtil" %>
 
---%><%
+<%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

@@ -20,19 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.bookmarks.EntryURLException" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.FolderNameException" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.NoSuchEntryException" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.NoSuchFolderException" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %><%--
---%><%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.EntryURLException" %>
+<%@ page import="com.liferay.portlet.bookmarks.FolderNameException" %>
+<%@ page import="com.liferay.portlet.bookmarks.NoSuchEntryException" %>
+<%@ page import="com.liferay.portlet.bookmarks.NoSuchFolderException" %>
+<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksEntry" %>
+<%@ page import="com.liferay.portlet.bookmarks.model.BookmarksFolder" %>
+<%@ page import="com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksEntryPermission" %>
+<%@ page import="com.liferay.portlet.bookmarks.service.permission.BookmarksFolderPermission" %>
+<%@ page import="com.liferay.portlet.bookmarks.util.BookmarksUtil" %>

@@ -20,14 +20,14 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.amazonrankings.model.AmazonRankings" %><%--
---%><%@ page import="com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil" %><%--
+<%@ page import="com.liferay.portlet.amazonrankings.model.AmazonRankings" %>
+<%@ page import="com.liferay.portlet.amazonrankings.util.AmazonRankingsUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");

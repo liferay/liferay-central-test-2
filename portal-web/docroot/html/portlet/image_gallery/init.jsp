@@ -20,20 +20,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.imagegallery.FolderNameException" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.ImageNameException" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.ImageSizeException" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.NoSuchFolderException" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.NoSuchImageException" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %><%--
---%><%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>
+<%@ page import="com.liferay.portlet.imagegallery.FolderNameException" %>
+<%@ page import="com.liferay.portlet.imagegallery.ImageNameException" %>
+<%@ page import="com.liferay.portlet.imagegallery.ImageSizeException" %>
+<%@ page import="com.liferay.portlet.imagegallery.NoSuchFolderException" %>
+<%@ page import="com.liferay.portlet.imagegallery.NoSuchImageException" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.IGFolder" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.IGImage" %>
+<%@ page import="com.liferay.portlet.imagegallery.model.impl.IGFolderImpl" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %>
+<%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
+<%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>

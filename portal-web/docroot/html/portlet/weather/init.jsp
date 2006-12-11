@@ -20,15 +20,15 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.unitconverter.util.ConverterUtil" %><%--
---%><%@ page import="com.liferay.portlet.weather.model.Weather" %><%--
---%><%@ page import="com.liferay.portlet.weather.util.WeatherUtil" %><%--
+<%@ page import="com.liferay.portlet.unitconverter.util.ConverterUtil" %>
+<%@ page import="com.liferay.portlet.weather.model.Weather" %>
+<%@ page import="com.liferay.portlet.weather.util.WeatherUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String[] zips = prefs.getValues("zips", new String[0]);

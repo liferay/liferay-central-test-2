@@ -20,16 +20,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.news.model.Article" %><%--
---%><%@ page import="com.liferay.portlet.news.model.Feed" %><%--
---%><%@ page import="com.liferay.portlet.news.model.News" %><%--
---%><%@ page import="com.liferay.portlet.news.util.NewsUtil" %><%--
+<%@ page import="com.liferay.portlet.news.model.Article" %>
+<%@ page import="com.liferay.portlet.news.model.Feed" %>
+<%@ page import="com.liferay.portlet.news.model.News" %>
+<%@ page import="com.liferay.portlet.news.util.NewsUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 int articlesPerNews = GetterUtil.getInteger(prefs.getValue("articles-per-news", StringPool.BLANK));

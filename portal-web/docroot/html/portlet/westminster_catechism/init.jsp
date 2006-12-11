@@ -20,9 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.westminstercatechism.model.WCEntry" %><%--
---%><%@ page import="com.liferay.portlet.westminstercatechism.util.WCUtil" %>
+<%@ page import="com.liferay.portlet.westminstercatechism.model.WCEntry" %>
+<%@ page import="com.liferay.portlet.westminstercatechism.util.WCUtil" %>

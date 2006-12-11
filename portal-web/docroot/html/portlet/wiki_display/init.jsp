@@ -20,19 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %><%--
---%><%@ page import="com.liferay.portlet.wiki.model.WikiNode" %><%--
---%><%@ page import="com.liferay.portlet.wiki.model.WikiPage" %><%--
---%><%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %><%--
---%><%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %><%--
---%><%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %><%--
+<%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
+<%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
+<%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");

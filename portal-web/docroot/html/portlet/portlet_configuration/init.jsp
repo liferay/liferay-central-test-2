@@ -20,19 +20,19 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/common/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.NoSuchResourceException" %><%--
---%><%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %><%--
---%><%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %><%--
---%><%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %><%--
---%><%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %><%--
+<%@ page import="com.liferay.portal.NoSuchResourceException" %>
+<%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
+<%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>
+<%@ page import="com.liferay.portal.util.comparator.ContactLastNameComparator" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.OrganizationSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
+<%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
 
---%><portlet:defineObjects />
+<portlet:defineObjects />

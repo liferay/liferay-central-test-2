@@ -20,17 +20,17 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/common/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.randombibleverse.model.Bible" %><%--
---%><%@ page import="com.liferay.portlet.randombibleverse.model.Verse" %><%--
---%><%@ page import="com.liferay.portlet.randombibleverse.util.RBVUtil" %><%--
+<%@ page import="com.liferay.portlet.randombibleverse.model.Bible" %>
+<%@ page import="com.liferay.portlet.randombibleverse.model.Verse" %>
+<%@ page import="com.liferay.portlet.randombibleverse.util.RBVUtil" %>
 
---%><portlet:defineObjects /><%--
+<portlet:defineObjects />
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String language = prefs.getValue("language", StringPool.BLANK);

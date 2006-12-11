@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.currencyconverter.util.CurrencyUtil" %><%--
+<%@ page import="com.liferay.portlet.currencyconverter.util.CurrencyUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String[] symbols = prefs.getValues("symbols", new String[0]);

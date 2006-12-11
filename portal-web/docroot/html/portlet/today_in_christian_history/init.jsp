@@ -20,9 +20,9 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.todayinchristianhistory.model.Event" %><%--
---%><%@ page import="com.liferay.portlet.todayinchristianhistory.util.TICHUtil" %>
+<%@ page import="com.liferay.portlet.todayinchristianhistory.model.Event" %>
+<%@ page import="com.liferay.portlet.todayinchristianhistory.util.TICHUtil" %>

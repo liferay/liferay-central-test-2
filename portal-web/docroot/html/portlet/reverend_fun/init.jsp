@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.reverendfun.util.ReverendFunUtil" %><%--
+<%@ page import="com.liferay.portlet.reverendfun.util.ReverendFunUtil" %>
 
---%><%
+<%
 DateFormat dateFormat = new SimpleDateFormat("yyyyMMdd");
 
 DecimalFormat decimalFormat = new DecimalFormat("##");

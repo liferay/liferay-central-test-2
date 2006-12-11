@@ -20,11 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");
@@ -41,11 +41,11 @@ String title = prefs.getValue("title", StringPool.BLANK);
 String borderId = prefs.getValue("border-id", StringPool.BLANK);
 String width = prefs.getValue("width", StringPool.BLANK);
 String height = prefs.getValue("height", StringPool.BLANK);
-%><%--
+%>
 
---%><%@ include file="/html/portlet/google_gadget/register_gadgets.jsp" %><%--
+<%@ include file="/html/portlet/google_gadget/register_gadgets.jsp" %>
 
---%><%
+<%
 int gadgetIdPos = 0;
 
 for (int i = 0; i < gadgets.length; i++) {

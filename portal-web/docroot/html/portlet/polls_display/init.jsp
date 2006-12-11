@@ -20,24 +20,24 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.polls.DuplicateVoteException" %><%--
---%><%@ page import="com.liferay.portlet.polls.NoSuchChoiceException" %><%--
---%><%@ page import="com.liferay.portlet.polls.NoSuchQuestionException" %><%--
---%><%@ page import="com.liferay.portlet.polls.QuestionExpiredException" %><%--
---%><%@ page import="com.liferay.portlet.polls.model.PollsChoice" %><%--
---%><%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.PollsVoteServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %><%--
---%><%@ page import="com.liferay.portlet.polls.util.PollsUtil" %><%--
+<%@ page import="com.liferay.portlet.polls.DuplicateVoteException" %>
+<%@ page import="com.liferay.portlet.polls.NoSuchChoiceException" %>
+<%@ page import="com.liferay.portlet.polls.NoSuchQuestionException" %>
+<%@ page import="com.liferay.portlet.polls.QuestionExpiredException" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsChoice" %>
+<%@ page import="com.liferay.portlet.polls.model.PollsQuestion" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.PollsVoteServiceUtil" %>
+<%@ page import="com.liferay.portlet.polls.service.permission.PollsQuestionPermission" %>
+<%@ page import="com.liferay.portlet.polls.util.PollsUtil" %>
 
---%><%
+<%
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String portletResource = ParamUtil.getString(request, "portletResource");

@@ -22,9 +22,9 @@
  */
 %>
 
-<%@ include file="/html/common/init.jsp" %><%--
+<%@ include file="/html/common/init.jsp" %>
 
---%><%
+<%
 RenderRequest renderRequest = (RenderRequest)request.getAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
 
 RenderResponse renderResponse = (RenderResponse)request.getAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
@@ -36,6 +36,6 @@ if (renderRequest != null) {
 	namespace = renderResponse.getNamespace();
 	currentURL = PortletURLUtil.getCurrent(renderRequest, renderResponse).toString();
 }
-%><%--
+%>
 
---%><%@ include file="/html/taglib/init-ext.jsp" %>
+<%@ include file="/html/taglib/init-ext.jsp" %>

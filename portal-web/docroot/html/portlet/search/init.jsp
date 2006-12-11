@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.kernel.search.Document" %><%--
---%><%@ page import="com.liferay.portal.kernel.search.DocumentSummary" %><%--
---%><%@ page import="com.liferay.portal.kernel.search.Indexer" %><%--
---%><%@ page import="com.liferay.portlet.journal.model.JournalContentSearch" %><%--
---%><%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.util.InstancePool" %>
+<%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.DocumentSummary" %>
+<%@ page import="com.liferay.portal.kernel.search.Indexer" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalContentSearch" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %>
+<%@ page import="com.liferay.util.InstancePool" %>

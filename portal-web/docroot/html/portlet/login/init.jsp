@@ -20,13 +20,13 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portal.CookieNotSupportedException" %><%--
---%><%@ page import="com.liferay.portal.NoSuchUserException" %><%--
---%><%@ page import="com.liferay.portal.UserEmailAddressException" %><%--
---%><%@ page import="com.liferay.portal.UserPasswordException" %><%--
---%><%@ page import="com.liferay.portal.action.LoginAction" %><%--
---%><%@ page import="com.liferay.portal.security.auth.AuthException" %>
+<%@ page import="com.liferay.portal.CookieNotSupportedException" %>
+<%@ page import="com.liferay.portal.NoSuchUserException" %>
+<%@ page import="com.liferay.portal.UserEmailAddressException" %>
+<%@ page import="com.liferay.portal.UserPasswordException" %>
+<%@ page import="com.liferay.portal.action.LoginAction" %>
+<%@ page import="com.liferay.portal.security.auth.AuthException" %>
