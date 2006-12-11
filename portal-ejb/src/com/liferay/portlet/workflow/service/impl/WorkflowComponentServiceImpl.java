@@ -22,13 +22,9 @@
 
 package com.liferay.portlet.workflow.service.impl;
 
-import com.liferay.documentlibrary.DuplicateDirectoryException;
-import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.SAXReaderFactory;
@@ -39,13 +35,12 @@ import com.liferay.portlet.workflow.model.WorkflowTask;
 import com.liferay.portlet.workflow.model.WorkflowTaskFormElement;
 import com.liferay.portlet.workflow.model.WorkflowToken;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.io.StringReader;
-
-import java.rmi.RemoteException;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -108,7 +103,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		try {
 			WorkflowURL url = getWorkflowURL();
 
-			xml = StringUtil.replace(
+			String formattedXml = StringUtil.replace(
 				xml,
 				new String[] {
 					"\n", "\r", "\t"
@@ -118,35 +113,29 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 				});
 
 			url.setParameter(Constants.CMD, "deploy");
-			url.setParameter("xml", xml);
+			url.setParameter("xml", formattedXml);
 
 			String content = url.getContent();
 
 			String definitionId = parseString(content, "definitionId");
 
-			String companyId = getUser().getCompanyId();
-			String portletId = CompanyImpl.SYSTEM;
-			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			String repositoryId = CompanyImpl.SYSTEM;
-			String dirName = "workflow/definitions";
-			String fileName = dirName  + "/" + definitionId + ".xml";
-
-			try {
-				try {
-					DLServiceUtil.addDirectory(
-						companyId, repositoryId, dirName);
-				}
-				catch (DuplicateDirectoryException dde) {
-				}
-
-				DLServiceUtil.addFile(
-					companyId, portletId, groupId, repositoryId, fileName,
-					xml.getBytes());
-			}
-			catch (RemoteException re) {
-			}
+			WorkflowDefinitionServiceUtil.addDefinition(
+				GetterUtil.getLong(definitionId), xml);
 
 			return definitionId;
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
+	public Object getDefinition(long definitionId)
+		throws WorkflowComponentException {
+
+		try {
+			String xml = getDefinitionXml(definitionId);
+
+			return parseDefinition(xml);
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);
@@ -209,6 +198,22 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 			url.setParameter(Constants.CMD, "getDefinitionsCountXml");
 			url.setParameter("definitionId", definitionId);
 			url.setParameter("name", name);
+
+			return url.getContent();
+		}
+		catch (Exception e) {
+			throw new WorkflowComponentException(e);
+		}
+	}
+
+	public String getDefinitionXml(long definitionId)
+		throws WorkflowComponentException {
+
+		try {
+			WorkflowURL url = getWorkflowURL();
+
+			url.setParameter(Constants.CMD, "getDefinitionXml");
+			url.setParameter("definitionId", definitionId);
 
 			return url.getContent();
 		}
@@ -585,6 +590,35 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		return sdf.parse(date);
 	}
 
+	protected WorkflowDefinition parseDefinition(String xml)
+		throws DocumentException, ParseException {
+
+		SAXReader reader = SAXReaderFactory.getInstance();
+
+		Document doc = reader.read(new StringReader(xml));
+
+		Element root = doc.getRootElement();
+
+		return parseDefinition(root.element("definition"));
+	}
+
+	protected WorkflowDefinition parseDefinition(Element el) {
+		long definitionId = GetterUtil.getLong(
+			el.elementText("definitionId"));
+		String name = el.elementText("name");
+		String type = el.elementText("type");
+		double version = GetterUtil.getDouble(el.elementText("version"));
+
+		WorkflowDefinition definition = new WorkflowDefinition();
+
+		definition.setDefinitionId(definitionId);
+		definition.setName(name);
+		definition.setType(type);
+		definition.setVersion(version);
+
+		return definition;
+	}
+
 	protected List parseDefinitions(Element root) {
 		List definitions = new ArrayList();
 
@@ -593,18 +627,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		while (itr.hasNext()) {
 			Element el = (Element)itr.next();
 
-			long definitionId = GetterUtil.getLong(
-				el.elementText("definitionId"));
-			String name = el.elementText("name");
-			String type = el.elementText("type");
-			double version = GetterUtil.getDouble(el.elementText("version"));
-
-			WorkflowDefinition definition = new WorkflowDefinition();
-
-			definition.setDefinitionId(definitionId);
-			definition.setName(name);
-			definition.setType(type);
-			definition.setVersion(version);
+			WorkflowDefinition definition = parseDefinition(el);
 
 			definitions.add(definition);
 		}

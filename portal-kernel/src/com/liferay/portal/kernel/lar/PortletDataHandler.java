@@ -34,6 +34,6 @@ public interface PortletDataHandler {
 		throws PortletDataException;
 
 	public void importData(String companyId, String groupId, String data)
-		throws PortletDataException;;
+		throws PortletDataException;
 
 }

@@ -41,6 +41,9 @@ public interface WorkflowComponent {
 	public String getCurrentTasksXml(long instanceId, long tokenId)
 		throws WorkflowComponentException;
 
+	public Object getDefinition(long definitionId)
+		throws WorkflowComponentException;
+
 	public List getDefinitions(
 			long definitionId, String name, int begin, int end)
 		throws WorkflowComponentException;
@@ -53,6 +56,9 @@ public interface WorkflowComponent {
 		throws WorkflowComponentException;
 
 	public String getDefinitionsCountXml(long definitionId, String name)
+		throws WorkflowComponentException;
+
+	public String getDefinitionXml(long definitionId)
 		throws WorkflowComponentException;
 
 	public List getInstances(

@@ -59,6 +59,51 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 </table>
 
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_GT %>" />
+
+		<%= LanguageUtil.get(pageContext, "to") %>
+
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.CREATE_DATE_LT %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_GT %>" />
+
+		<%= LanguageUtil.get(pageContext, "to") %>
+
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.START_DATE_LT %>" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "end-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_GT %>" />
+
+		<%= LanguageUtil.get(pageContext, "to") %>
+
+		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_LT %>" />
+	</td>
+</tr>
+</table>
+
 <br>
 
 <table border="0" cellpadding="0" cellspacing="0">

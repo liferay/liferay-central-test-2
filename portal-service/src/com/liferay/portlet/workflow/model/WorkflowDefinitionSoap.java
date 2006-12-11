@@ -20,32 +20,46 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.lar;
+package com.liferay.portlet.workflow.model;
 
-import com.liferay.portal.PortalException;
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionSoap.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Raymond Auge
+ * @author  Charles May
  *
  */
-public class PortletDataException extends PortalException {
+public class WorkflowDefinitionSoap extends WorkflowDefinition {
 
-    public PortletDataException() {
-        super();
-    }
+	public static WorkflowDefinitionSoap toSoapModel(WorkflowDefinition model) {
+		WorkflowDefinitionSoap soapModel = new WorkflowDefinitionSoap();
 
-    public PortletDataException(String msg) {
-        super(msg);
-    }
+		soapModel.setName(model.getName());
+		soapModel.setType(model.getType());
+		soapModel.setVersion(model.getVersion());
+		soapModel.setXml(model.getXml());
 
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
+		return soapModel;
+	}
 
-	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	public static WorkflowDefinitionSoap[] toSoapModels(List models) {
+		List soapModels = new ArrayList(models.size());
+
+		for (int i = 0; i < models.size(); i++) {
+			WorkflowDefinition model = (WorkflowDefinition)models.get(i);
+
+			soapModels.add(toSoapModel(model));
+		}
+
+		return (WorkflowDefinitionSoap[])soapModels.toArray(
+			new WorkflowDefinitionSoap[0]);
+	}
+
+	public WorkflowDefinitionSoap() {
+	}
 
 }

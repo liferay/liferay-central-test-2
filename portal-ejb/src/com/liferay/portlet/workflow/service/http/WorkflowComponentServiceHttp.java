@@ -151,6 +151,40 @@ public class WorkflowComponentServiceHttp {
 		}
 	}
 
+	public static java.lang.Object getDefinition(HttpPrincipal httpPrincipal,
+		long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(definitionId);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getDefinition", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.Object)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
 	public static java.util.List getDefinitions(HttpPrincipal httpPrincipal,
 		long definitionId, java.lang.String name, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -293,6 +327,40 @@ public class WorkflowComponentServiceHttp {
 			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
 					"getDefinitionsCountXml",
 					new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.kernel.jbi.WorkflowComponentException) {
+					throw (com.liferay.portal.kernel.jbi.WorkflowComponentException)e;
+				}
+
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static java.lang.String getDefinitionXml(
+		HttpPrincipal httpPrincipal, long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(definitionId);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowComponentServiceUtil.class.getName(),
+					"getDefinitionXml", new Object[] { paramObj0 });
 			Object returnObj = null;
 
 			try {

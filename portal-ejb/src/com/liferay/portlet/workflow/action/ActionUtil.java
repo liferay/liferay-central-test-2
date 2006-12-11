@@ -20,15 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.polls.action;
+package com.liferay.portlet.workflow.action;
 
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.PollsQuestionServiceUtil;
+import com.liferay.portlet.workflow.model.WorkflowDefinition;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -43,30 +42,32 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getQuestion(ActionRequest req) throws Exception {
+	public static void getDefinition(ActionRequest req) throws Exception {
 		HttpServletRequest httpReq =
 			((ActionRequestImpl)req).getHttpServletRequest();
 
-		getQuestion(httpReq);
+		getDefinition(httpReq);
 	}
 
-	public static void getQuestion(RenderRequest req) throws Exception {
+	public static void getDefinition(RenderRequest req) throws Exception {
 		HttpServletRequest httpReq =
 			((RenderRequestImpl)req).getHttpServletRequest();
 
-		getQuestion(httpReq);
+		getDefinition(httpReq);
 	}
 
-	public static void getQuestion(HttpServletRequest req) throws Exception {
-		String questionId = ParamUtil.getString(req, "questionId");
+	public static void getDefinition(HttpServletRequest req) throws Exception {
+		long definitionId = ParamUtil.getLong(req, "definitionId");
 
-		PollsQuestion question = null;
+		WorkflowDefinition definition = null;
 
-		if (Validator.isNotNull(questionId)) {
-			question = PollsQuestionServiceUtil.getQuestion(questionId);
+		if (definitionId > 0) {
+			definition =
+				(WorkflowDefinition)WorkflowDefinitionServiceUtil.getDefinition(
+					definitionId);
 		}
 
-		req.setAttribute(WebKeys.POLLS_QUESTION, question);
+		req.setAttribute(WebKeys.WORKFLOW_DEFINITION, definition);
 	}
 
 }

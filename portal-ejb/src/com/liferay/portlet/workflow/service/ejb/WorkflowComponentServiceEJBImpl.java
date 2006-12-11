@@ -65,6 +65,14 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		return WorkflowComponentServiceFactory.getTxImpl().deploy(xml);
 	}
 
+	public java.lang.Object getDefinition(long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return WorkflowComponentServiceFactory.getTxImpl().getDefinition(definitionId);
+	}
+
 	public java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -103,6 +111,14 @@ public class WorkflowComponentServiceEJBImpl implements WorkflowComponentService
 		return WorkflowComponentServiceFactory.getTxImpl()
 											  .getDefinitionsCountXml(definitionId,
 			name);
+	}
+
+	public java.lang.String getDefinitionXml(long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return WorkflowComponentServiceFactory.getTxImpl().getDefinitionXml(definitionId);
 	}
 
 	public java.util.List getInstances(long definitionId, long instanceId,

@@ -20,32 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.lar;
+package com.liferay.portlet.workflow;
 
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchDefinitionException.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Raymond Auge
+ * @author  Brian Wing Shun Chan
  *
  */
-public class PortletDataException extends PortalException {
+public class NoSuchDefinitionException extends PortalException {
 
-    public PortletDataException() {
-        super();
-    }
+	public NoSuchDefinitionException() {
+		super();
+	}
 
-    public PortletDataException(String msg) {
-        super(msg);
-    }
+	public NoSuchDefinitionException(String msg) {
+		super(msg);
+	}
 
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
+	public NoSuchDefinitionException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	public NoSuchDefinitionException(Throwable cause) {
+		super(cause);
+	}
 
 }

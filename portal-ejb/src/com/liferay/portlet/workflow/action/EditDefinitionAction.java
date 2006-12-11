@@ -22,10 +22,13 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -53,29 +56,23 @@ public class EditDefinitionAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateDefinition(req);
-			}
-			else if (cmd.equals(Constants.DELETE)) {
-				deleteDefinition(req);
+			if (cmd.equals(Constants.ADD)) {
+				addDefinition(req);
 			}
 
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			/*if (e instanceof NoSuchDefinitionException ||
+			if (e instanceof NoSuchDefinitionException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(req, "portlet.workflow.error");
 			}
-			else if (e instanceof DefinitionNameException) {
-				SessionErrors.add(req, e.getClass().getName());
-			}
-			else {*/
+			else {
 				throw e;
-			//}
+			}
 		}
 	}
 
@@ -84,7 +81,7 @@ public class EditDefinitionAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		/*try {
+		try {
 			ActionUtil.getDefinition(req);
 		}
 		catch (Exception e) {
@@ -93,24 +90,18 @@ public class EditDefinitionAction extends PortletAction {
 
 				SessionErrors.add(req, e.getClass().getName());
 
-				return mapping.findForward("portlet.wiki.error");
+				return mapping.findForward("portlet.workflow.error");
 			}
 			else {
 				throw e;
 			}
-		}*/
+		}
 
 		return mapping.findForward(
 			getForward(req, "portlet.workflow.edit_definition"));
 	}
 
-	protected void deleteDefinition(ActionRequest req) throws Exception {
-		/*String nodeId = ParamUtil.getString(req, "nodeId");
-
-		WikiDefinitionServiceUtil.deleteDefinition(nodeId);*/
-	}
-
-	protected void updateDefinition(ActionRequest req) throws Exception {
+	protected void addDefinition(ActionRequest req) throws Exception {
 		String xml = ParamUtil.getString(req, "xml");
 
 		WorkflowComponentServiceUtil.deploy(xml);

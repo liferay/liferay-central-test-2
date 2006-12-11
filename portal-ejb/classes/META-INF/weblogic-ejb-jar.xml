@@ -991,4 +991,13 @@
 		<enable-call-by-reference>true</enable-call-by-reference>
 		<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
 	</weblogic-enterprise-bean>
+	<weblogic-enterprise-bean>
+		<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
+		<resource-description>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</resource-description>
+		<enable-call-by-reference>true</enable-call-by-reference>
+		<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</jndi-name>
+	</weblogic-enterprise-bean>
 </weblogic-ejb-jar>

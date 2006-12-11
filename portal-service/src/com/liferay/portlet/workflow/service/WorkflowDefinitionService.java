@@ -20,32 +20,21 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.lar;
-
-import com.liferay.portal.PortalException;
+package com.liferay.portlet.workflow.service;
 
 /**
- * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionService.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Raymond Auge
+ * @author  Brian Wing Shun Chan
  *
  */
-public class PortletDataException extends PortalException {
+public interface WorkflowDefinitionService {
+	public void addDefinition(long definitionId, java.lang.String xml)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-    public PortletDataException() {
-        super();
-    }
-
-    public PortletDataException(String msg) {
-        super(msg);
-    }
-
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
-
-	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
-
+	public com.liferay.portlet.workflow.model.WorkflowDefinition getDefinition(
+		long definitionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

@@ -1137,6 +1137,10 @@
 		<put name="portlet_content" value="/portlet/workflow/edit_task.jsp" />
 	</definition>
 
+	<definition name="portlet.workflow.error" extends="portlet.workflow">
+		<put name="portlet_content" value="/portlet/workflow/error.jsp" />
+	</definition>
+
 	<definition name="portlet.workflow.view" extends="portlet.workflow">
 		<put name="portlet_content" value="/portlet/workflow/view.jsp" />
 	</definition>

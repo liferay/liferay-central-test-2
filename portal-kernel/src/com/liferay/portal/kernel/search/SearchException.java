@@ -22,13 +22,15 @@
 
 package com.liferay.portal.kernel.search;
 
+import com.liferay.portal.PortalException;
+
 /**
  * <a href="SearchException.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class SearchException extends Exception {
+public class SearchException extends PortalException {
 
     public SearchException() {
         super();

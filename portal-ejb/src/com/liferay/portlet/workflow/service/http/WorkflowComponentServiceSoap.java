@@ -81,6 +81,20 @@ public class WorkflowComponentServiceSoap {
 		}
 	}
 
+	public static java.lang.Object getDefinition(long definitionId)
+		throws RemoteException {
+		try {
+			java.lang.Object returnValue = WorkflowComponentServiceUtil.getDefinition(definitionId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
 	public static java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int begin, int end) throws RemoteException {
 		try {
@@ -131,6 +145,20 @@ public class WorkflowComponentServiceSoap {
 		try {
 			java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionsCountXml(definitionId,
 					name);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static java.lang.String getDefinitionXml(long definitionId)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WorkflowComponentServiceUtil.getDefinitionXml(definitionId);
 
 			return returnValue;
 		}

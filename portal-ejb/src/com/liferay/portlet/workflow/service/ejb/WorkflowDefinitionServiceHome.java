@@ -20,32 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.lar;
+package com.liferay.portlet.workflow.service.ejb;
 
-import com.liferay.portal.PortalException;
+import java.rmi.RemoteException;
+
+import javax.ejb.CreateException;
+import javax.ejb.EJBHome;
 
 /**
- * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionServiceHome.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Raymond Auge
+ * @author  Brian Wing Shun Chan
  *
  */
-public class PortletDataException extends PortalException {
-
-    public PortletDataException() {
-        super();
-    }
-
-    public PortletDataException(String msg) {
-        super(msg);
-    }
-
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
-
-	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
-
+public interface WorkflowDefinitionServiceHome extends EJBHome {
+	public WorkflowDefinitionServiceEJB create()
+		throws CreateException, RemoteException;
 }

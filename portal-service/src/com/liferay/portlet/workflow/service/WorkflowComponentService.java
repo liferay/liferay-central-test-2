@@ -41,6 +41,10 @@ public interface WorkflowComponentService {
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException;
 
+	public java.lang.Object getDefinition(long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException;
+
 	public java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -57,6 +61,10 @@ public interface WorkflowComponentService {
 
 	public java.lang.String getDefinitionsCountXml(long definitionId,
 		java.lang.String name)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException;
+
+	public java.lang.String getDefinitionXml(long definitionId)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
 			java.rmi.RemoteException;
 

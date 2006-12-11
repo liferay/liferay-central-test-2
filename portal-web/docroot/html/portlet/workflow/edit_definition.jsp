@@ -34,71 +34,52 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <script type="text/javascript">
 	function <portlet:namespace />saveDefinition() {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= definition == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveDefinition(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />definitionId" type="hidden" value="<%= definitionId %>">
 
 <liferay-ui:tabs names="definition" />
 
-<table border="0" cellpadding="0" cellspacing="0">
-
 <c:if test="<%= definition != null %>">
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "name") %>
+			<%= LanguageUtil.get(pageContext, "name") %>:
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="name" />
+			<%= definition.getName() %>
 		</td>
 	</tr>
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "type") %>
+			<%= LanguageUtil.get(pageContext, "version") %>:
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="type" />
+			<%= definition.getVersion() %>
 		</td>
 	</tr>
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "version") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-			<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="version" />
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
+	</table>
+
+	<br>
 </c:if>
 
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "xml") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="xml" />
-	</td>
-</tr>
+<%= LanguageUtil.get(pageContext, "enter-the-workflow-definition-below-in-xml-format") %>
+
+<br><br>
+
+<liferay-ui:input-field model="<%= WorkflowDefinition.class %>" bean="<%= definition %>" field="xml" /><br>
 
 <c:if test="<%= definition == null %>">
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
+	<br>
+
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
 			<%= LanguageUtil.get(pageContext, "permissions") %>
@@ -110,13 +91,12 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 			/>
 		</td>
 	</tr>
+	</table>
 </c:if>
-
-</table>
 
 <br>
 
-<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save-new-version") %>'>
 
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "cancel") %>' onClick="self.location = '<%= redirect %>';">
 

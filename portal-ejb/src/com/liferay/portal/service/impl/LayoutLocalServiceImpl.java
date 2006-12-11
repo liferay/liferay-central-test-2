@@ -33,7 +33,6 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
@@ -364,13 +363,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				if (portletDataHandler != null) {
 					String data = StringPool.BLANK;
 
-					try {
-						data = portletDataHandler.exportData(
-							layoutSet.getCompanyId(), layoutSet.getGroupId());
-					}
-					catch (PortletDataException pde) {
-						throw new PortalException(pde);
-					}
+					data = portletDataHandler.exportData(
+						layoutSet.getCompanyId(), layoutSet.getGroupId());
 
 					el = root.addElement("portlet-data");
 					el.addAttribute("portlet-id", portletId);
@@ -615,13 +609,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				portlet.getPortletDataHandler();
 
 			if (portletDataHandler != null) {
-				try {
-					portletDataHandler.importData(
-						layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
-				}
-				catch (PortletDataException pde) {
-					throw new PortalException(pde);
-				}
+				portletDataHandler.importData(
+					layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
 			}
 		}
 

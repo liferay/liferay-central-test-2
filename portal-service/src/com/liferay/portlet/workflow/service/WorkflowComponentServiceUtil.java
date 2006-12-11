@@ -54,6 +54,14 @@ public class WorkflowComponentServiceUtil {
 		return workflowComponentService.deploy(xml);
 	}
 
+	public static java.lang.Object getDefinition(long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
+
+		return workflowComponentService.getDefinition(definitionId);
+	}
+
 	public static java.util.List getDefinitions(long definitionId,
 		java.lang.String name, int begin, int end)
 		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
@@ -91,6 +99,14 @@ public class WorkflowComponentServiceUtil {
 
 		return workflowComponentService.getDefinitionsCountXml(definitionId,
 			name);
+	}
+
+	public static java.lang.String getDefinitionXml(long definitionId)
+		throws com.liferay.portal.kernel.jbi.WorkflowComponentException, 
+			java.rmi.RemoteException {
+		WorkflowComponentService workflowComponentService = WorkflowComponentServiceFactory.getService();
+
+		return workflowComponentService.getDefinitionXml(definitionId);
 	}
 
 	public static java.util.List getInstances(long definitionId,

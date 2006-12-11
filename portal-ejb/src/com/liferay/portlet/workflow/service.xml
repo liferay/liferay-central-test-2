@@ -4,4 +4,5 @@
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Workflow" short-name="Workflow" />
 	<entity name="WorkflowComponent" local-service="false" remote-service="true" />
+	<entity name="WorkflowDefinition" local-service="false" remote-service="true" />
 </service-builder>

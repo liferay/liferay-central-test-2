@@ -113,6 +113,11 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 				result = getDefinitionsXml(definitionId, name, begin, end);
 			}
+			else if (cmd.equals("getDefinitionXml")) {
+				long definitionId = ParamUtil.getLong(req, "definitionId");
+
+				result = getDefinitionXml(definitionId);
+			}
 			else if (cmd.equals("getInstancesCountXml")) {
 				long definitionId = ParamUtil.getLong(req, "definitionId");
 				long instanceId = ParamUtil.getLong(req, "instanceId");
@@ -338,6 +343,17 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		return doc.asXML();
 	}
 
+	public Object getDefinition(long definitionId)
+		throws WorkflowComponentException {
+
+		ProcessDefinition definition =
+			graphSession.loadProcessDefinition(definitionId);
+
+		WorkflowUtil.initDefinition(definition);
+
+		return definition;
+	}
+
 	public List getDefinitions(
 			long definitionId, String name, int begin, int end)
 		throws WorkflowComponentException {
@@ -346,9 +362,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 		if (definitionId > 0) {
 			ProcessDefinition definition =
-				graphSession.loadProcessDefinition(definitionId);
-
-			WorkflowUtil.initDefinition(definition);
+				(ProcessDefinition)getDefinition(definitionId);
 
 			definitions.add(definition);
 		}
@@ -401,6 +415,21 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		int count = getDefinitionsCount(definitionId, name);
 
 		return getCountXml(count);
+    }
+
+	public String getDefinitionXml(long definitionId)
+		throws WorkflowComponentException {
+
+		ProcessDefinition definition =
+			(ProcessDefinition)getDefinition(definitionId);
+
+		Document doc = DocumentHelper.createDocument();
+
+		Element root = doc.addElement("result");
+
+		createElement(definition, root);
+
+		return doc.asXML();
     }
 
 	public List getInstances(

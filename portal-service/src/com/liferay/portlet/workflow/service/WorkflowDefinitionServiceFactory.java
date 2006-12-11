@@ -20,30 +20,43 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.exception;
+package com.liferay.portlet.workflow.service;
 
 /**
- * <a href="NestableException.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowDefinitionServiceFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class NestableException extends Exception {
+public class WorkflowDefinitionServiceFactory {
+	public static WorkflowDefinitionService getService() {
+		return _getFactory()._service;
+	}
 
-    public NestableException() {
-        super();
-    }
+	public static WorkflowDefinitionService getTxImpl() {
+		if (_txImpl == null) {
+			_txImpl = (WorkflowDefinitionService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+		}
 
-    public NestableException(String msg) {
-        super(msg);
-    }
+		return _txImpl;
+	}
 
-    public NestableException(Throwable cause) {
-		super(cause);
-    }
+	public void setService(WorkflowDefinitionService service) {
+		_service = service;
+	}
 
-    public NestableException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	private static WorkflowDefinitionServiceFactory _getFactory() {
+		if (_factory == null) {
+			_factory = (WorkflowDefinitionServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+		}
 
+		return _factory;
+	}
+
+	private static final String _FACTORY = WorkflowDefinitionServiceFactory.class.getName();
+	private static final String _TX_IMPL = WorkflowDefinitionService.class.getName() +
+		".transaction";
+	private static WorkflowDefinitionServiceFactory _factory;
+	private static WorkflowDefinitionService _txImpl;
+	private WorkflowDefinitionService _service;
 }

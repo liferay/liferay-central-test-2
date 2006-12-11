@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -19,33 +20,11 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portal.kernel.lar;
+<%@ include file="/html/portlet/workflow/init.jsp" %>
 
-import com.liferay.portal.PortalException;
+<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-/**
- * <a href="PortletDataException.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Raymond Auge
- *
- */
-public class PortletDataException extends PortalException {
-
-    public PortletDataException() {
-        super();
-    }
-
-    public PortletDataException(String msg) {
-        super(msg);
-    }
-
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
-
-	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
-
-}
+<liferay-ui:error exception="<%= NoSuchDefinitionException.class %>" message="the-definition-could-not-be-found" />
+<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
