@@ -219,7 +219,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="xercesImpl.jar,xml-apis.jar"
+						includes="jmx-remote.jar,jmx-ri.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
 			</then>

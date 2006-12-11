@@ -366,7 +366,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.lib.portal.dir}"
-						includes="xercesImpl.jar,xml-apis.jar"
+						includes="jmx-remote.jar,jmx-ri.jar,xercesImpl.jar,xml-apis.jar"
 					/>
 				</delete>
 			</then>
@@ -1018,7 +1018,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
-		<antcall target="zip-pramati" />
+		<!--<antcall target="zip-pramati" />-->
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -1163,7 +1163,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<antcall target="build-ext-jetty" />
 		<antcall target="build-ext-jonas-jetty" />
 		<antcall target="build-ext-jonas-tomcat" />
-		<antcall target="build-ext-pramati" />
+		<!--<antcall target="build-ext-pramati" />-->
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
@@ -1184,6 +1184,9 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<ant dir="layouttpl" target="war" inheritAll="false" />
 		<ant dir="portlets" target="war" inheritAll="false" />
 
+		<ant dir="jbpm-web" target="deploy" inheritAll="false" />
+		<ant dir="servicemix-web" target="deploy" inheritAll="false" />
+
 		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
 		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
 		<copy file="laszlo-web/laszlo-web.war" tofile="liferay-portal-laszlo-${lp.version.file.name}.war" />
@@ -1194,7 +1197,7 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<delete includeemptydirs="true" failonerror="false">
 			<fileset
 				dir="${app.server.deploy.dir}"
-				includes="sample*/**"
+				includes="jbpm-web/**,sample*/**,servicemix-web/**"
 			/>
 		</delete>
 	</target>
