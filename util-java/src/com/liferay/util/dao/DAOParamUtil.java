@@ -23,8 +23,14 @@
 package com.liferay.util.dao;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.DateUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
+
+import java.text.DateFormat;
+
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.portlet.PortletRequest;
 
@@ -39,6 +45,37 @@ import javax.servlet.ServletRequest;
 public class DAOParamUtil {
 
 	// Servlet Request
+
+	public static String getISODate(ServletRequest req, String param) {
+		int month = ParamUtil.getInteger(req, param + "Month");
+		int day = ParamUtil.getInteger(req, param + "Day");
+		int year = ParamUtil.getInteger(req, param + "Year");
+		int hour = ParamUtil.getInteger(req, param + "Hour", -1);
+		int minute = ParamUtil.getInteger(req, param + "Minute", -1);
+		int amPm = ParamUtil.getInteger(req, param + "AmPm");
+
+		if ((month >= 0) && (day > 0) && (year > 0)) {
+			Calendar cal = new GregorianCalendar();
+
+			if ((hour == -1) || (minute == -1)) {
+				cal.set(year, month, day);
+			}
+			else {
+				if (amPm == Calendar.PM) {
+					hour += 12;
+				}
+
+				cal.set(year, month, day, hour, minute, 0);
+			}
+
+			DateFormat isoFormat = DateUtil.getISOFormat();
+
+			return isoFormat.format(cal.getTime());
+		}
+		else {
+			return null;
+		}
+	}
 
 	public static String getLike(ServletRequest req, String param) {
 		return getLike(req, param, null, true);
@@ -92,6 +129,37 @@ public class DAOParamUtil {
 	}
 
 	// Portlet Request
+
+	public static String getISODate(PortletRequest req, String param) {
+		int month = ParamUtil.getInteger(req, param + "Month");
+		int day = ParamUtil.getInteger(req, param + "Day");
+		int year = ParamUtil.getInteger(req, param + "Year");
+		int hour = ParamUtil.getInteger(req, param + "Hour", -1);
+		int minute = ParamUtil.getInteger(req, param + "Minute", -1);
+		int amPm = ParamUtil.getInteger(req, param + "AmPm");
+
+		if ((month >= 0) && (day > 0) && (year > 0)) {
+			Calendar cal = new GregorianCalendar();
+
+			if ((hour == -1) || (minute == -1)) {
+				cal.set(year, month, day);
+			}
+			else {
+				if (amPm == Calendar.PM) {
+					hour += 12;
+				}
+
+				cal.set(year, month, day, hour, minute, 0);
+			}
+
+			DateFormat isoFormat = DateUtil.getISOFormat();
+
+			return isoFormat.format(cal.getTime());
+		}
+		else {
+			return null;
+		}
+	}
 
 	public static String getLike(PortletRequest req, String param) {
 		return getLike(req, param, null, true);

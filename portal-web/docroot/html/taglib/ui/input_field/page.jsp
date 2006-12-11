@@ -93,14 +93,20 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				yearNullable = GetterUtil.getBoolean((String)hints.get("year-nullable"), yearNullable);
 			}
 
-			int yearRangeStart = year - 10;
-			int yearRangeEnd = year + 10;
+			int yearRangeDelta = 5;
+
+			if (hints != null) {
+				yearRangeDelta = GetterUtil.getInteger((String)hints.get("year-range-delta"), yearRangeDelta);
+			}
+
+			int yearRangeStart = year - yearRangeDelta;
+			int yearRangeEnd = year + yearRangeDelta;
 
 			if (year == -1) {
 				Calendar now = new GregorianCalendar(timeZone, locale);
 
-				yearRangeStart = now.get(Calendar.YEAR) - 10;
-				yearRangeEnd = now.get(Calendar.YEAR) + 10;
+				yearRangeStart = now.get(Calendar.YEAR) - yearRangeDelta;
+				yearRangeEnd = now.get(Calendar.YEAR) + yearRangeDelta;
 			}
 
 			int firstDayOfWeek = Calendar.SUNDAY - 1;

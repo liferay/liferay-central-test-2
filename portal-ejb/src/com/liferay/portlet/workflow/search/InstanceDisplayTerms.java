@@ -44,13 +44,13 @@ public class InstanceDisplayTerms extends DisplayTerms {
 
 	public static final String DEFINITION_VERSION = "definitionVersion";
 
-	public static final String CREATE_START_GT = "startDateGT";
+	public static final String START_DATE_GT = "startDateGT";
 
-	public static final String CREATE_START_LT = "startDateLT";
+	public static final String START_DATE_LT = "startDateLT";
 
-	public static final String CREATE_END_GT = "endDateGT";
+	public static final String END_DATE_GT = "endDateGT";
 
-	public static final String CREATE_END_LT = "endDateLT";
+	public static final String END_DATE_LT = "endDateLT";
 
 	public static final String HIDE_ENDED_TASKS = "hideEndedTasks";
 
@@ -61,10 +61,6 @@ public class InstanceDisplayTerms extends DisplayTerms {
 		instanceId = ParamUtil.getLong(req, INSTANCE_ID);
 		definitionName = ParamUtil.getString(req, DEFINITION_NAME);
 		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
-		startDateGT = ParamUtil.getString(req, CREATE_START_GT);
-		startDateLT = ParamUtil.getString(req, CREATE_START_LT);
-		endDateGT = ParamUtil.getString(req, CREATE_END_GT);
-		endDateLT = ParamUtil.getString(req, CREATE_END_LT);
 		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
 	}
 

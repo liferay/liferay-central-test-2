@@ -13,10 +13,36 @@
 	</model>
 	<model name="com.liferay.portlet.workflow.model.WorkflowInstance">
 		<field name="startDateGT" type="Date">
-			<hint-collection name="SEARCHABLE-DATE">
+			<hint-collection name="SEARCHABLE-DATE" />
 		</field>
 		<field name="startDateLT" type="Date">
-			<hint-collection name="SEARCHABLE-DATE">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="endDateGT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="endDateLT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+	</model>
+	<model name="com.liferay.portlet.workflow.model.WorkflowTask">
+		<field name="createDateGT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="createDateLT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="startDateGT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="startDateLT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="endDateGT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
+		</field>
+		<field name="endDateLT" type="Date">
+			<hint-collection name="SEARCHABLE-DATE" />
 		</field>
 	</model>
 </model-hints>

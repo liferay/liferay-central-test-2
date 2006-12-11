@@ -42,6 +42,10 @@ public class InstanceSearchTerms extends InstanceDisplayTerms {
 		definitionName = DAOParamUtil.getLike(
 			req, DEFINITION_NAME, StringPool.PERCENT);
 		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
+		startDateGT = DAOParamUtil.getISODate(req, START_DATE_GT);
+		startDateLT = DAOParamUtil.getISODate(req, START_DATE_LT);
+		endDateGT = DAOParamUtil.getISODate(req, END_DATE_GT);
+		endDateLT = DAOParamUtil.getISODate(req, END_DATE_LT);
 	}
 
 }

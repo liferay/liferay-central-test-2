@@ -41,6 +41,12 @@ public class TaskSearchTerms extends TaskDisplayTerms {
 		taskName = DAOParamUtil.getLike(req, TASK_NAME, StringPool.PERCENT);
 		definitionName = DAOParamUtil.getLike(
 			req, DEFINITION_NAME, StringPool.PERCENT);
+		createDateGT = DAOParamUtil.getISODate(req, CREATE_DATE_GT);
+		createDateLT = DAOParamUtil.getISODate(req, CREATE_DATE_LT);
+		startDateGT = DAOParamUtil.getISODate(req, START_DATE_GT);
+		startDateLT = DAOParamUtil.getISODate(req, START_DATE_LT);
+		endDateGT = DAOParamUtil.getISODate(req, END_DATE_GT);
+		endDateLT = DAOParamUtil.getISODate(req, END_DATE_LT);
 	}
 
 }

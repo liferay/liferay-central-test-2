@@ -69,26 +69,31 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td colspan="3">
-		<%= LanguageUtil.get(pageContext, "start-date-range") %>
+	<td>
+		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
 	</td>
 </tr>
 <tr>
 	<td>
-		<%--<liferay-ui:input-date
-			monthParam="helloNowMonth"
-			monthNullable="<%= true %>"
-			dayParam="helloNowDay"
-			dayNullable="<%= true %>"
-			yearParam="helloNowYear"
-			yearNullable="<%= true %>"
-			yearRangeStart="<%= cal.get(Calendar.YEAR) - 10 %>"
-			yearRangeEnd="<%= cal.get(Calendar.YEAR) %>"
-		/>--%>
-		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" bean="<%= null %>" field="startDateGT" />
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_GT %>" />
+
+		<%= LanguageUtil.get(pageContext, "to") %>
+
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.START_DATE_LT %>" />
 	</td>
-	<td style="padding-left: 20px;"></td>
+</tr>
+<tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "end-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_GT %>" />
+
+		<%= LanguageUtil.get(pageContext, "to") %>
+
+		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_LT %>" />
 	</td>
 </tr>
 </table>
