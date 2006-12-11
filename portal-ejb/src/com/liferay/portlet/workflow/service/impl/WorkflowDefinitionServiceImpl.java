@@ -27,13 +27,16 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionService;
+import com.liferay.util.GetterUtil;
 
 import java.rmi.RemoteException;
 
@@ -47,11 +50,43 @@ import java.rmi.RemoteException;
 public class WorkflowDefinitionServiceImpl
 	extends PrincipalBean implements WorkflowDefinitionService {
 
-	public void addDefinition(long definitionId, String xml)
+	public WorkflowDefinition addDefinition(
+			String xml, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addDefinition(
+			xml, new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public WorkflowDefinition addDefinition(
+			String xml, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addDefinition(
+			xml, null, null, communityPermissions, guestPermissions);
+	}
+
+	public WorkflowDefinition addDefinition(
+			String xml, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		try {
-			String companyId = getUser().getCompanyId();
+
+			// Deploy xml
+
+			User user = getUser();
+
+			long definitionId = GetterUtil.getLong(
+				WorkflowComponentServiceUtil.deploy(xml));
+
+			// File
+
+			String companyId = user.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM;
 			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 			String repositoryId = CompanyImpl.SYSTEM;
@@ -68,10 +103,50 @@ public class WorkflowDefinitionServiceImpl
 			DLServiceUtil.addFile(
 				companyId, portletId, groupId, repositoryId, fileName,
 				xml.getBytes());
+
+			// Resources
+
+			if ((addCommunityPermissions != null) &&
+				(addGuestPermissions != null)) {
+
+				addDefinitionResources(
+					user, definitionId, addCommunityPermissions.booleanValue(),
+					addGuestPermissions.booleanValue());
+			}
+			else {
+				addDefinitionResources(
+					user, definitionId, communityPermissions, guestPermissions);
+			}
+
+			return getDefinition(definitionId);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
 		}
+	}
+
+	public void addDefinitionResources(
+			User user, long definitionId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addResources(
+			user.getCompanyId(), null, user.getUserId(),
+			WorkflowDefinition.class.getName(),
+			String.valueOf(definitionId), false, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addDefinitionResources(
+			User user, long definitionId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			user.getCompanyId(), null, user.getUserId(),
+			WorkflowDefinition.class.getName(),
+			String.valueOf(definitionId), communityPermissions,
+			guestPermissions);
 	}
 
 	public WorkflowDefinition getDefinition(long definitionId)

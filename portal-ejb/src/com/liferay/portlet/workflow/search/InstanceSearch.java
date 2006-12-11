@@ -64,11 +64,20 @@ public class InstanceSearch extends SearchContainer {
 			(InstanceDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			InstanceDisplayTerms.DEFINITION_ID,
+			String.valueOf(displayTerms.getDefinitionId()));
+		iteratorURL.setParameter(
+			InstanceDisplayTerms.INSTANCE_ID,
+			String.valueOf(displayTerms.getInstanceId()));
+		iteratorURL.setParameter(
 			InstanceDisplayTerms.DEFINITION_NAME,
 			displayTerms.getDefinitionName());
 		iteratorURL.setParameter(
 			InstanceDisplayTerms.DEFINITION_VERSION,
 			displayTerms.getDefinitionVersion());
+		iteratorURL.setParameter(
+			InstanceDisplayTerms.HIDE_ENDED_TASKS,
+			String.valueOf(displayTerms.isHideEndedTasks()));
 	}
 
 	private static Log _log = LogFactory.getLog(InstanceSearch.class);

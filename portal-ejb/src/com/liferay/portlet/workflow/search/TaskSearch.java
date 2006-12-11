@@ -64,9 +64,17 @@ public class TaskSearch extends SearchContainer {
 		TaskDisplayTerms displayTerms = (TaskDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			TaskDisplayTerms.INSTANCE_ID,
+			String.valueOf(displayTerms.getInstanceId()));
+		iteratorURL.setParameter(
 			TaskDisplayTerms.TASK_NAME, displayTerms.getTaskName());
 		iteratorURL.setParameter(
 			TaskDisplayTerms.DEFINITION_NAME, displayTerms.getDefinitionName());
+		iteratorURL.setParameter(
+			TaskDisplayTerms.ASSIGNED_TO, displayTerms.getAssignedTo());
+		iteratorURL.setParameter(
+			TaskDisplayTerms.HIDE_ENDED_TASKS,
+			String.valueOf(displayTerms.isHideEndedTasks()));
 	}
 
 	private static Log _log = LogFactory.getLog(TaskSearch.class);

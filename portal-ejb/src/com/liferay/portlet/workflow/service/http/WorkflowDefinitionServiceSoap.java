@@ -37,10 +37,49 @@ import java.rmi.RemoteException;
  *
  */
 public class WorkflowDefinitionServiceSoap {
-	public static void addDefinition(long definitionId, java.lang.String xml)
-		throws RemoteException {
+	public static com.liferay.portlet.workflow.model.WorkflowDefinitionSoap addDefinition(
+		java.lang.String xml, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
-			WorkflowDefinitionServiceUtil.addDefinition(definitionId, xml);
+			com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
+					addCommunityPermissions, addGuestPermissions);
+
+			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.workflow.model.WorkflowDefinitionSoap addDefinition(
+		java.lang.String xml, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
+					communityPermissions, guestPermissions);
+
+			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.workflow.model.WorkflowDefinitionSoap addDefinition(
+		java.lang.String xml, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.workflow.model.WorkflowDefinition returnValue = WorkflowDefinitionServiceUtil.addDefinition(xml,
+					addCommunityPermissions, addGuestPermissions,
+					communityPermissions, guestPermissions);
+
+			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			String stackTrace = StackTraceUtil.getStackTrace(e);

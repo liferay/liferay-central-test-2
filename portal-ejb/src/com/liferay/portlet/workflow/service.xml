@@ -6,4 +6,5 @@
 	<entity name="WorkflowComponent" local-service="false" remote-service="true" />
 	<entity name="WorkflowDefinition" local-service="false" remote-service="true" />
 	<entity name="WorkflowInstance" local-service="false" remote-service="true" />
+	<entity name="WorkflowTask" local-service="false" remote-service="true" />
 </service-builder>

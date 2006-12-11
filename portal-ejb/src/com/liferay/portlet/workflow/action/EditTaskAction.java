@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portlet.workflow.service.WorkflowTaskServiceUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -52,29 +55,21 @@ public class EditTaskAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
+			if (cmd.equals(Constants.UPDATE)) {
 				updateTask(req);
-			}
-			else if (cmd.equals(Constants.DELETE)) {
-				deleteTask(req);
 			}
 
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			/*if (e instanceof NoSuchTaskException ||
-				e instanceof PrincipalException) {
-
+			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.wiki.error");
+				setForward(req, "portlet.workflow.error");
 			}
-			else if (e instanceof TaskNameException) {
-				SessionErrors.add(req, e.getClass().getName());
-			}
-			else {*/
+			else {
 				throw e;
-			//}
+			}
 		}
 	}
 
@@ -83,36 +78,17 @@ public class EditTaskAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		/*try {
-			ActionUtil.getTask(req);
-		}
-		catch (Exception e) {
-			if (e instanceof NoSuchTaskException ||
-				e instanceof PrincipalException) {
-
-				SessionErrors.add(req, e.getClass().getName());
-
-				return mapping.findForward("portlet.wiki.error");
-			}
-			else {
-				throw e;
-			}
-		}*/
-
 		return mapping.findForward(
 			getForward(req, "portlet.workflow.edit_task"));
 	}
 
-	protected void deleteTask(ActionRequest req) throws Exception {
-		/*String nodeId = ParamUtil.getString(req, "nodeId");
-
-		WikiTaskServiceUtil.deleteTask(nodeId);*/
-	}
-
 	protected void updateTask(ActionRequest req) throws Exception {
-		/*String xml = ParamUtil.getString(req, "xml");
+		long taskId = ParamUtil.getLong(req, "taskId");
 
-		WorkflowComponentServiceUtil.deploy(xml);*/
+		String transition = ParamUtil.getString(req, "transition");
+
+		WorkflowTaskServiceUtil.updateTask(
+			taskId, transition, req.getParameterMap());
 	}
 
 }

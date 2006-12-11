@@ -29,8 +29,6 @@ import com.liferay.portal.util.Constants;
 import com.liferay.portlet.workflow.jbi.WorkflowURL;
 import com.liferay.portlet.workflow.jbi.WorkflowXMLUtil;
 import com.liferay.portlet.workflow.service.WorkflowComponentService;
-import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 import java.util.List;
@@ -82,7 +80,7 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 		try {
 			WorkflowURL url = getWorkflowURL();
 
-			String formattedXml = StringUtil.replace(
+			xml = StringUtil.replace(
 				xml,
 				new String[] {
 					"\n", "\r", "\t"
@@ -92,17 +90,11 @@ public class WorkflowComponentServiceImpl extends PrincipalBean
 				});
 
 			url.setParameter(Constants.CMD, "deploy");
-			url.setParameter("xml", formattedXml);
+			url.setParameter("xml", xml);
 
 			String content = url.getContent();
 
-			String definitionId = WorkflowXMLUtil.parseString(
-				content, "definitionId");
-
-			WorkflowDefinitionServiceUtil.addDefinition(
-				GetterUtil.getLong(definitionId), xml);
-
-			return definitionId;
+			return WorkflowXMLUtil.parseString(content, "definitionId");
 		}
 		catch (Exception e) {
 			throw new WorkflowComponentException(e);

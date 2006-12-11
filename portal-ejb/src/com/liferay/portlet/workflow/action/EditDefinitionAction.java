@@ -26,7 +26,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
-import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
+import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -104,7 +104,13 @@ public class EditDefinitionAction extends PortletAction {
 	protected void addDefinition(ActionRequest req) throws Exception {
 		String xml = ParamUtil.getString(req, "xml");
 
-		WorkflowComponentServiceUtil.deploy(xml);
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
+
+		WorkflowDefinitionServiceUtil.addDefinition(
+			xml, communityPermissions, guestPermissions);
 	}
 
 }

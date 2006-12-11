@@ -1346,4 +1346,16 @@
 			<jndi-name>mail/MailSession</jndi-name>
 		</jonas-resource>
 	</jonas-session>
+	<jonas-session>
+		<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
+		<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</jndi-name>
+		<jonas-resource>
+			<res-ref-name>jdbc/LiferayPool</res-ref-name>
+			<jndi-name>jdbc/LiferayPool</jndi-name>
+		</jonas-resource>
+		<jonas-resource>
+			<res-ref-name>mail/MailSession</res-ref-name>
+			<jndi-name>mail/MailSession</jndi-name>
+		</jonas-resource>
+	</jonas-session>
 </jonas-ejb-jar>

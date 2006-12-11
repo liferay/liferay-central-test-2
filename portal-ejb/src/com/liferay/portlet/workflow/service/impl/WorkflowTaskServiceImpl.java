@@ -20,34 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.workflow.search;
+package com.liferay.portlet.workflow.service.impl;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.DAOParamUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portlet.workflow.service.WorkflowComponentServiceUtil;
+import com.liferay.portlet.workflow.service.WorkflowTaskService;
 
-import javax.portlet.RenderRequest;
+import java.rmi.RemoteException;
+
+import java.util.Map;
 
 /**
- * <a href="InstanceSearchTerms.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowTaskServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class InstanceSearchTerms extends InstanceDisplayTerms {
+public class WorkflowTaskServiceImpl
+	extends PrincipalBean implements WorkflowTaskService {
 
-	public InstanceSearchTerms(RenderRequest req) {
-		super(req);
+	public Map updateTask(long taskId, String transition, Map parameterMap)
+		throws PortalException, SystemException {
 
-		definitionId = ParamUtil.getLong(req, DEFINITION_ID);
-		definitionName = DAOParamUtil.getLike(
-			req, DEFINITION_NAME, StringPool.PERCENT);
-		definitionVersion = ParamUtil.getString(req, DEFINITION_VERSION);
-		startDateGT = DAOParamUtil.getISODate(req, START_DATE_GT);
-		startDateLT = DAOParamUtil.getISODate(req, START_DATE_LT);
-		endDateGT = DAOParamUtil.getISODate(req, END_DATE_GT);
-		endDateLT = DAOParamUtil.getISODate(req, END_DATE_LT);
-		hideEndedTasks = ParamUtil.getBoolean(req, HIDE_ENDED_TASKS);
+		try {
+			return WorkflowComponentServiceUtil.updateTask(
+				taskId, transition, parameterMap);
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
 	}
 
 }

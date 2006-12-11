@@ -24,6 +24,7 @@ package com.liferay.portlet.workflow.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -40,20 +41,243 @@ import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
  *
  */
 public class WorkflowDefinitionServiceHttp {
-	public static void addDefinition(HttpPrincipal httpPrincipal,
-		long definitionId, java.lang.String xml)
+	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		HttpPrincipal httpPrincipal, java.lang.String xml,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(definitionId);
-			Object paramObj1 = xml;
+			Object paramObj0 = xml;
 
 			if (xml == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj2 = new BooleanWrapper(addGuestPermissions);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowDefinitionServiceUtil.class.getName(),
+					"addDefinition",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.workflow.model.WorkflowDefinition)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		HttpPrincipal httpPrincipal, java.lang.String xml,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = xml;
+
+			if (xml == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj2 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(WorkflowDefinitionServiceUtil.class.getName(),
-					"addDefinition", new Object[] { paramObj0, paramObj1 });
+					"addDefinition",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.workflow.model.WorkflowDefinition)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		HttpPrincipal httpPrincipal, java.lang.String xml,
+		java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = xml;
+
+			if (xml == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = addCommunityPermissions;
+
+			if (addCommunityPermissions == null) {
+				paramObj1 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj2 = addGuestPermissions;
+
+			if (addGuestPermissions == null) {
+				paramObj2 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj3 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj4 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowDefinitionServiceUtil.class.getName(),
+					"addDefinition",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.workflow.model.WorkflowDefinition)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static void addDefinitionResources(HttpPrincipal httpPrincipal,
+		com.liferay.portal.model.User user, long definitionId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = user;
+
+			if (user == null) {
+				paramObj0 = new NullWrapper("com.liferay.portal.model.User");
+			}
+
+			Object paramObj1 = new LongWrapper(definitionId);
+			Object paramObj2 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj3 = new BooleanWrapper(addGuestPermissions);
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowDefinitionServiceUtil.class.getName(),
+					"addDefinitionResources",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static void addDefinitionResources(HttpPrincipal httpPrincipal,
+		com.liferay.portal.model.User user, long definitionId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = user;
+
+			if (user == null) {
+				paramObj0 = new NullWrapper("com.liferay.portal.model.User");
+			}
+
+			Object paramObj1 = new LongWrapper(definitionId);
+			Object paramObj2 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj2 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj3 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WorkflowDefinitionServiceUtil.class.getName(),
+					"addDefinitionResources",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

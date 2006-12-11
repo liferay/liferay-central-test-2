@@ -39,12 +39,60 @@ import javax.ejb.SessionContext;
  */
 public class WorkflowDefinitionServiceEJBImpl
 	implements WorkflowDefinitionService, SessionBean {
-	public void addDefinition(long definitionId, java.lang.String xml)
+	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		java.lang.String xml, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
-		WorkflowDefinitionServiceFactory.getTxImpl().addDefinition(definitionId,
-			xml);
+
+		return WorkflowDefinitionServiceFactory.getTxImpl().addDefinition(xml,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		java.lang.String xml, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return WorkflowDefinitionServiceFactory.getTxImpl().addDefinition(xml,
+			communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.workflow.model.WorkflowDefinition addDefinition(
+		java.lang.String xml, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return WorkflowDefinitionServiceFactory.getTxImpl().addDefinition(xml,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addDefinitionResources(com.liferay.portal.model.User user,
+		long definitionId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		WorkflowDefinitionServiceFactory.getTxImpl().addDefinitionResources(user,
+			definitionId, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addDefinitionResources(com.liferay.portal.model.User user,
+		long definitionId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		WorkflowDefinitionServiceFactory.getTxImpl().addDefinitionResources(user,
+			definitionId, communityPermissions, guestPermissions);
 	}
 
 	public com.liferay.portlet.workflow.model.WorkflowDefinition getDefinition(
