@@ -481,6 +481,12 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>">
+
+<c:if test="<%= (article != null) %>">
+	<input name="<portlet:namespace />groupId" type="hidden" value="<%= article.getGroupId() %>">
+	<input name="groupId" type="hidden" value="<%= article.getGroupId() %>">
+</c:if>
+
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>">
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>">
 <input name="<portlet:namespace />content" type="hidden" value="">
