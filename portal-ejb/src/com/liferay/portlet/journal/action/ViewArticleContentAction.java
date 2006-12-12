@@ -82,7 +82,7 @@ public class ViewArticleContentAction extends Action {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			String companyId = themeDisplay.getCompanyId();
-            String groupId = PortalUtil.getPortletGroupId(req);
+            String groupId = ParamUtil.getString(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
 				req, "version", JournalArticleImpl.DEFAULT_VERSION);
@@ -119,7 +119,7 @@ public class ViewArticleContentAction extends Action {
 					articleId, version, previewArticleId, companyId, root,
 					PortalUtil.getUploadServletRequest(req));
 
-				Map tokens = JournalUtil.getTokens(themeDisplay);
+				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 				JournalUtil.addReservedEl(
 					root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,

@@ -62,13 +62,13 @@ public class GetTemplateAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
-            String groupId = PortalUtil.getPortletGroupId(req);
+            String groupId = ParamUtil.getString(req, "groupId");
 			String templateId = getTemplateId(req);
 
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Map tokens = JournalUtil.getTokens(themeDisplay);
+			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 			tokens.put("template_id", templateId);
 

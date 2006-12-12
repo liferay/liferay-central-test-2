@@ -517,7 +517,7 @@ public class JournalUtil {
 		return script;
 	}
 
-	public static Map getTokens(ThemeDisplay themeDisplay) {
+	public static Map getTokens(String groupId, ThemeDisplay themeDisplay) {
 		Map tokens = CollectionFactory.getHashMap();
 
 		if (themeDisplay == null) {
@@ -527,7 +527,7 @@ public class JournalUtil {
 		Company company = themeDisplay.getCompany();
 
 		tokens.put("company_id", themeDisplay.getCompanyId());
-        tokens.put("group_id", themeDisplay.getPortletGroupId());
+        tokens.put("group_id", groupId);
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(

@@ -600,7 +600,7 @@ public class JournalArticleLocalServiceImpl
 			return article.getContent();
 		}*/
 
-		Map tokens = JournalUtil.getTokens(themeDisplay);
+		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
 		String xml = article.getContent();
 
