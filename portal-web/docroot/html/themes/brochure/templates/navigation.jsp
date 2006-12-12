@@ -28,41 +28,36 @@
 			<table cellspacing="0" cellpadding="0" border="0" width="100%">
 			<tr>
 
-	<%
-	int tabNameMaxLength = GetterUtil.getInteger(PropsUtil.get(PropsUtil.LAYOUT_NAME_MAX_LENGTH));
-	int tabsPerRow = 10;
-	int totalTabs = layouts.size();
-	int totalTabRows = (totalTabs / tabsPerRow);
-	int tabWidth = 100/totalTabs;
-	int modBucket = 100 % totalTabs;
+<%
+int totalTabs = 0;
+int tabWidth;
+int modBucket;
+boolean isSelectedTab = false;
+String ancestorLayoutId = "";
 
-	if ((totalTabs % tabsPerRow) > 0) {
-		totalTabRows++;
+if (layout != null) {
+	ancestorLayoutId = layout.getAncestorLayoutId();
+}
+
+for (int i = 0; i < layouts.size(); i++) {
+	Layout curLayout = (Layout)layouts.get(i);
+
+	if (!curLayout.isHidden()) {
+		totalTabs++;
 	}
+}
 
-	int rowCounter = 0;
-	int currentTab = 0;
+tabWidth = 100/totalTabs;
+modBucket = 100 % totalTabs;
 
-	boolean isSelectedTab = false;
-	boolean isPrevSelectedTab = false;
-
-	int selectedRow = 0;
-	int selectedTab = 0;
-
-	String rows[][] = new String[totalTabRows][tabsPerRow];
-
-	String ancestorLayoutId = "";
-	if (layout != null) {
-		ancestorLayoutId = layout.getAncestorLayoutId();
-	}
-
-	for (int i = 0; i < layouts.size(); i++) {
-		Layout curLayout = (Layout)layouts.get(i);
-
+for (int i = 0; i < layouts.size(); i++) {
+	Layout curLayout = (Layout)layouts.get(i);
+	
+	if (!curLayout.isHidden()) {
 		String tabName = curLayout.getName(locale);
 		String tabHREF = PortalUtil.getLayoutURL(curLayout, themeDisplay);
-		boolean isGroupTab = true;// FIX ME curLayout.isGroup();
 		isSelectedTab = selectable && (layout != null && (plid.equals(curLayout.getLayoutId()) || curLayout.getLayoutId().equals(ancestorLayoutId)));
+
 		if (isSelectedTab && layoutTypePortlet.hasStateMax()) {
 			String portletId = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
@@ -76,116 +71,29 @@
 		}
 
 		String target = PortalUtil.getLayoutTarget(curLayout);
+		%>
 
-		String tabText = null;
+		<c:if test="<%= i != 0 %>">
+			<td valign="middle" align="center" width="0">
+				<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/custom/nav-spacer.png" />
+			</td>
+		</c:if>
 
-		if (curLayout.isHidden()) {
-			tabText = null;
-		}
-		else if (isSelectedTab) {
-			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
-			selectedRow = rowCounter;
-			selectedTab = currentTab;
-		}
-		else {
-			tabText = "<a href=\"" + tabHREF + "\" " + target + ">" + tabName + "</a>";
-		}
-
-		rows[rowCounter][currentTab] = tabText;
-
-		if (currentTab == tabsPerRow - 1) {
-			rowCounter++;
-			currentTab = 0;
-		}
-		else {
-			currentTab++;
-		}
+		<td class="layout-tab<%= isSelectedTab ? "-selected" : "" %>"
+			valign="middle"
+			align="center"
+			width="<%= modBucket-- > 0 ? tabWidth + 1 : tabWidth %>%"
+			<c:if test="<%= !isSelectedTab %>">
+				onmouseover="this.className = 'layout-tab-hover'"
+				onmouseout="this.className = 'layout-tab<%= isSelectedTab ? "-selected" : "" %>'"
+			</c:if>
+			>
+			<a href=" <%= tabHREF %>" <%= target %>><%= tabName %></a>
+		</td>
+	<%
 	}
-
-	// Reorder the array so the row with the selected tab is on the bottom row
-
-	if (rows.length > 1) {
-		Collections.swap(Arrays.asList(rows), selectedRow, rows.length - 1);
-	}
-		// Render each row
-
-		for (int i = rows.length - 1; i >= 0; i--) {
-
-				// Render the tabs
-
-				if (totalTabRows > 1 && i == rows.length - 2) {
-					%>
-					<td class="layout-tab" style="cursor: pointer;">
-						<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif" onclick="toggleById('layout-nav-more-menu', true)
-							? this.src = '<%= themeDisplay.getPathThemeImage() %>/arrows/01_down.gif'
-							: this.src = '<%= themeDisplay.getPathThemeImage() %>/arrows/01_right.gif'" />
-					<ul id="layout-nav-more-menu" style="position: absolute; display: none;">
-					<%
-				}
-
-				for (int j = 0; j < rows[i].length; j++) {
-					if (rows[i][j] != null) {
-
-						if (i < rows.length - 1) {
-
-							// Create additional tabs menu
-
-							%>
-
-							<li><%= rows[i][j] %></li>
-
-							<%
-						}
-						else {
-
-							// Render active row
-
-							if (selectable && (i == rows.length - 1) && (j == selectedTab)) {
-								isSelectedTab = true;
-							}
-							else {
-								isSelectedTab = false;
-							}
-
-							%>
-
-							<c:if test="<%= j != 0 %>">
-								<td valign="middle" align="center" width="0">
-									<img align="absmiddle" src="<%= themeDisplay.getPathThemeImage() %>/custom/nav-spacer.png" />
-								</td>
-							</c:if>
-							<td class="layout-tab<%= isSelectedTab ? "-selected" : "" %>"
-								valign="middle"
-								align="center"
-								width="<%= modBucket-- > 0 ? tabWidth + 1 : tabWidth %>%"
-								<c:if test="<%= !isSelectedTab %>">
-									onmouseover="this.className = 'layout-tab-hover'"
-									onmouseout="this.className = 'layout-tab<%= isSelectedTab ? "-selected" : "" %>'"
-								</c:if>
-								>
-								<%= rows[i][j] %>
-							</td>
-
-							<%
-						}
-					}
-				}
-
-				if (totalTabRows > 1) {
-					if (i == 0) {
-					%>
-						</ul>
-					</td>
-					<%
-					}
-					else if (i > 0 && i < rows.length - 1){
-					%>
-						<li class="beta-separator"></li>
-					<%
-					}
-				}
-			}
-			%>
+}
+%>
 
 			</tr>
 			</table>
