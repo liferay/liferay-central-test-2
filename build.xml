@@ -82,7 +82,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.dir}/domains/domain1/config"
-						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+						includes="${database.name}.*,jbpm.*"
 					/>
 				</delete>
 			</then>
@@ -95,13 +95,13 @@
 					<delete>
 						<fileset
 							dir="${app.server.bin.dir}/nt"
-							includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+							includes="${database.name}.*,jbpm.*"
 						/>
 					</delete>
 					<delete>
 						<fileset
 							dir="${app.server.bin.dir}/unix"
-							includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+							includes="${database.name}.*,jbpm.*"
 						/>
 					</delete>
 				</then>
@@ -110,7 +110,7 @@
 				<delete>
 					<fileset
 						dir="${app.server.bin.dir}"
-						includes="${database.name}.properties,${database.name}.script,jbpm.properties,jbpm.script"
+						includes="${database.name}.*,jbpm.*"
 					/>
 				</delete>
 			</else>
@@ -1157,13 +1157,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<antcall target="start" />
 		<antcall target="java2html" />
 		<antcall target="build-ext" />
-		<!--<antcall target="build-ext-glassfish" />-->
+		<antcall target="build-ext-glassfish" />
 		<antcall target="build-ext-jboss-jetty" />
 		<antcall target="build-ext-jboss-tomcat" />
 		<antcall target="build-ext-jetty" />
 		<antcall target="build-ext-jonas-jetty" />
 		<antcall target="build-ext-jonas-tomcat" />
-		<!--<antcall target="build-ext-pramati" />-->
+		<antcall target="build-ext-pramati" />
 		<antcall target="build-ext-resin" />
 		<antcall target="build-ext-tomcat" />
 		<antcall target="zip" />
@@ -1187,10 +1187,12 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<ant dir="jbpm-web" target="deploy" inheritAll="false" />
 		<ant dir="servicemix-web" target="deploy" inheritAll="false" />
 
+		<copy file="cas-web/cas-web.war" tofile="liferay-portal-cas-${lp.version.file.name}.war" />
 		<copy file="cms-web/cms-web.war" tofile="liferay-portal-cms-${lp.version.file.name}.war" />
 		<copy file="jbpm-web/jbpm-web.war" tofile="liferay-portal-jbpm-${lp.version.file.name}.war" />
 		<copy file="laszlo-web/laszlo-web.war" tofile="liferay-portal-laszlo-${lp.version.file.name}.war" />
 		<copy file="servicemix-web/servicemix-web.war" tofile="liferay-portal-servicemix-${lp.version.file.name}.war" />
+		<copy file="tunnel-web/tunnel-web.war" tofile="liferay-portal-tunnel-${lp.version.file.name}.war" />
 
 		<copy file="portlets/alfresco.war" tofile="liferay-portal-alfresco-${lp.version.file.name}.war" />
 
