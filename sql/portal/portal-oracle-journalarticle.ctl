@@ -3,9 +3,9 @@ infile 'portal-oracle-journalarticle.csv'
 into table JournalArticle
 fields terminated by "," optionally enclosed by '\''
 (companyId,
+ groupId,
  articleId,
  version,
- groupId,
  userId,
  userName,
  createDate date 'YYYYMMDD',

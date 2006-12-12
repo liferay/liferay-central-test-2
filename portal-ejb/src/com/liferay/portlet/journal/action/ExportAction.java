@@ -313,6 +313,7 @@ public class ExportAction extends Action {
 			addColumn(sb, contentSearch.getArticleId());
 			addColumn(sb, contentSearch.getCompanyId());
 			addColumn(sb, contentSearch.getGroupId());
+
 			removeTrailingComma(sb);
 			sb.append(");\n");
 		}
@@ -472,7 +473,9 @@ public class ExportAction extends Action {
 						journalContentSearch.setLayoutId(layout.getLayoutId());
 						journalContentSearch.setOwnerId(layout.getOwnerId());
 						journalContentSearch.setArticleId(articleId);
-						journalContentSearch.setCompanyId(layout.getCompanyId());
+						journalContentSearch.setCompanyId(
+							layout.getCompanyId());
+						journalContentSearch.setGroupId(layout.getGroupId());
 
 						journalContentSearches.add(journalContentSearch);
 					}
