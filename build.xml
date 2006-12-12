@@ -1012,13 +1012,13 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 
 	<target name="zip">
 		<antcall target="zip-api" />
-		<!--<antcall target="zip-glassfish" />-->
+		<antcall target="zip-glassfish" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
-		<!--<antcall target="zip-pramati" />-->
+		<antcall target="zip-pramati" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -1040,6 +1040,62 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<zip zipfile="liferay-portal-glassfish-${lp.version.file.name}.zip"
 			basedir="${app.server.glassfish.dir}"
 		/>
+
+		<taskdef
+			classname="org.tp23.antinstaller.taskdefs.Installer"
+			classpathref="project.classpath"
+			name="installer"
+		/>
+
+		<delete file="liferay-portal-glassfish-${lp.version.file.name}.jar" failonerror="false" />
+
+		<copy file="installer/glassfish/installer-config.xml.template" tofile="installer/glassfish/installer-config.xml" overwrite="yes">
+			<filterset>
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+			</filterset>
+		</copy>
+
+		<pathconvert
+			property="java.home.path.unix"
+			targetos="unix"
+		>
+			<path>
+				<pathelement location="${env.JAVA_HOME}" />
+			</path>
+		</pathconvert>
+
+		<copy file="installer/glassfish/installer-build.properties.template" tofile="installer/glassfish/installer-build.properties" overwrite="yes">
+			<filterset>
+				<filter token="app.server.glassfish.dir" value="${app.server.glassfish.dir}" />
+				<filter token="java.home" value="${java.home.path.unix}" />
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+			</filterset>
+		</copy>
+
+		<installer
+			antInstallLib="${ant.installer.dir}/lib"
+			antLib="${env.ANT_HOME}/lib"
+			buildFile="installer/glassfish/installer-build.xml"
+			compress="true"
+			extractType="SelfExtractor"
+			failOnError="true"
+			file="liferay-portal-glassfish-${lp.version.file.name}.jar"
+			installConfig="installer/glassfish/installer-config.xml"
+			validateConfig="true"
+		>
+			<fileset dir="installer/glassfish" includes="installer-build.properties" />
+			<fileset dir="." includes="liferay-portal-glassfish-${lp.version.file.name}.zip" />
+		</installer>
+
+		<jar
+			destfile="liferay-portal-glassfish-${lp.version.file.name}.jar"
+			update="yes"
+		>
+			<fileset
+				dir="installer"
+				includes="resources/extract-image.png"
+			/>
+		</jar>
 	</target>
 
 	<target name="zip-jboss">
@@ -1103,6 +1159,62 @@ app.server.jonas-tomcat.ejbgen.compile=on</echo>
 		<zip zipfile="liferay-portal-pramati-${lp.version.file.name}.zip"
 			basedir="${app.server.pramati.dir}"
 		/>
+
+		<taskdef
+			classname="org.tp23.antinstaller.taskdefs.Installer"
+			classpathref="project.classpath"
+			name="installer"
+		/>
+
+		<delete file="liferay-portal-pramati-${lp.version.file.name}.jar" failonerror="false" />
+
+		<copy file="installer/pramati/installer-config.xml.template" tofile="installer/pramati/installer-config.xml" overwrite="yes">
+			<filterset>
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+			</filterset>
+		</copy>
+
+		<pathconvert
+			property="java.home.path.unix"
+			targetos="unix"
+		>
+			<path>
+				<pathelement location="${env.JAVA_HOME}" />
+			</path>
+		</pathconvert>
+
+		<copy file="installer/pramati/installer-build.properties.template" tofile="installer/pramati/installer-build.properties" overwrite="yes">
+			<filterset>
+				<filter token="app.server.pramati.dir" value="${app.server.pramati.dir}" />
+				<filter token="java.home" value="${java.home.path.unix}" />
+				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+			</filterset>
+		</copy>
+
+		<installer
+			antInstallLib="${ant.installer.dir}/lib"
+			antLib="${env.ANT_HOME}/lib"
+			buildFile="installer/pramati/installer-build.xml"
+			compress="true"
+			extractType="SelfExtractor"
+			failOnError="true"
+			file="liferay-portal-pramati-${lp.version.file.name}.jar"
+			installConfig="installer/pramati/installer-config.xml"
+			validateConfig="true"
+		>
+			<fileset dir="installer/pramati" includes="installer-build.properties" />
+			<fileset dir="." includes="liferay-portal-pramati-${lp.version.file.name}.zip" />
+		</installer>
+
+		<jar
+			destfile="liferay-portal-pramati-${lp.version.file.name}.jar"
+			update="yes"
+		>
+			<fileset
+				dir="installer"
+				includes="resources/extract-image.png"
+			/>
+		</jar>
 	</target>
 
 	<target name="zip-resin">

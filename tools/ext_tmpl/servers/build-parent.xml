@@ -76,43 +76,6 @@
 		<copy todir="${app.server.glassfish.dir}/domains" overwrite="yes">
 			<fileset dir="glassfish/domains" />
 		</copy>
-
-		<!--<taskdef classpathref="lib.classpath" name="stringutil" classname="ise.antelope.tasks.StringUtilTask" />
-
-		<stringutil string="${env.JAVA_HOME}" property="JAVA_HOME.back.slash">
-			<replace regex="/" replacement="\\"  />
-		</stringutil>
-
-		<stringutil string="${env.JAVA_HOME}" property="JAVA_HOME.forward.slash">
-			<replace regex="\\" replacement="/"  />
-		</stringutil>
-
-		<stringutil string="${app.server.glassfish.dir}" property="app.server.glassfish.dir.back.slash">
-			<replace regex="/" replacement="\\"  />
-		</stringutil>
-
-		<stringutil string="${app.server.glassfish.dir}" property="app.server.glassfish.dir.forward.slash">
-			<replace regex="\\" replacement="/"  />
-		</stringutil>
-
-		<replace dir="${app.server.glassfish.dir}" includes="**/*.bat">
-			<replacefilter
-				token="${JAVA_HOME.back.slash}"
-				value="%JAVA_HOME%"
-			/>
-			<replacefilter
-				token="${JAVA_HOME.forward.slash}"
-				value="%JAVA_HOME%"
-			/>
-			<replacefilter
-				token="${app.server.glassfish.dir.back.slash}"
-				value="%GLASSFISH_HOME%"
-			/>
-			<replacefilter
-				token="${app.server.glassfish.dir.forward.slash}"
-				value="%GLASSFISH_HOME%"
-			/>
-		</replace>-->
 	</target>
 
 	<target name="install-jboss-jetty">

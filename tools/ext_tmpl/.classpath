@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry kind="src" path="ext-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="ext-ejb/src"/>
+	<classpathentry excluding="**/.svn/**|.svn/" kind="src" path="ext-service/src"/>
 	<classpathentry kind="lib" path="ext-ear/modules/counter-ejb.jar"/>
 	<classpathentry kind="lib" path="ext-ear/modules/documentlibrary-ejb.jar"/>
 	<classpathentry kind="lib" path="ext-ear/modules/lock-ejb.jar"/>

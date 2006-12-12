@@ -1,0 +1,5 @@
+app.server.glassfish.zip=liferay-portal-glassfish-@lp.version.file.name@.zip
+app.server.glassfish.jar=liferay-portal-glassfish-@lp.version.file.name@.jar
+
+app.server.glassfish.java.home=@java.home@
+app.server.glassfish.dir=@app.server.glassfish.dir@
