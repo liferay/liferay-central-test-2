@@ -46,7 +46,21 @@ public class PortletURLUtil {
 			String param = (String)enu.nextElement();
 			String[] values = req.getParameterValues(param);
 
-			portletURL.setParameter(param, values);
+			boolean addParam = true;
+
+			// Don't set paramter values that are over 32 kb. See LEP-1755.
+
+			for (int i = 0; i < values.length; i++) {
+				if (values[i].length() > _CURRENT_URL_PARAMETER_THRESHOLD) {
+					addParam = false;
+
+					break;
+				}
+			}
+
+			if (addParam) {
+				portletURL.setParameter(param, values);
+			}
 		}
 
 		return portletURL;
@@ -74,5 +88,7 @@ public class PortletURLUtil {
 
 		return newURL;
 	}
+
+	private static final int _CURRENT_URL_PARAMETER_THRESHOLD = 32768;
 
 }
