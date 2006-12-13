@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import java.io.BufferedInputStream;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
@@ -188,13 +189,13 @@ public class FileUtil {
 	}
 
 	public static byte[] getBytes(File file) throws IOException {
-		if (file == null || !file.exists()) {
+		if ((file == null) || !file.exists()) {
 			return null;
 		}
 
 		FileInputStream in = new FileInputStream(file);
 
-		byte[] bytes = getBytes(in);
+		byte[] bytes = getBytes(in, (int)file.length());
 
 		in.close();
 
@@ -202,13 +203,41 @@ public class FileUtil {
 	}
 
 	public static byte[] getBytes(InputStream in) throws IOException {
-		ByteArrayOutputStream out = new ByteArrayOutputStream();
+		return getBytes(in, -1);
+	}
 
-		int c = in.read();
+	public static byte[] getBytes(InputStream in, int bufferSize)
+		throws IOException {
 
-		while (c != -1) {
-			out.write(c);
-			c = in.read();
+		ByteArrayOutputStream out = null;
+
+		if (bufferSize <= 0) {
+			out = new ByteArrayOutputStream();
+		}
+		else {
+			out = new ByteArrayOutputStream(bufferSize);
+		}
+
+		boolean createBuffered = false;
+
+		try {
+			if (!(in instanceof BufferedInputStream)) {
+				in = new BufferedInputStream(in);
+
+				createBuffered = true;
+			}
+
+			int c = in.read();
+
+			while (c != -1) {
+				out.write(c);
+				c = in.read();
+			}
+		}
+		finally {
+			if (createBuffered) {
+				in.close();
+			}
 		}
 
 		out.close();
