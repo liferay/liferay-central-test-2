@@ -67,7 +67,7 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="orion" />
 			<then>
-				<delete>
+				<delete failonerror="false">
 					<fileset
 						dir="${app.server.dir}"
 						includes="**/state.ser,**/transaction.state"
@@ -79,7 +79,7 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="glassfish" />
 			<then>
-				<delete>
+				<delete failonerror="false">
 					<fileset
 						dir="${app.server.dir}/domains/domain1/config"
 						includes="${database.name}.*,jbpm.*"
@@ -92,13 +92,13 @@
 					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
 				</or>
 				<then>
-					<delete>
+					<delete failonerror="false">
 						<fileset
 							dir="${app.server.bin.dir}/nt"
 							includes="${database.name}.*,jbpm.*"
 						/>
 					</delete>
-					<delete>
+					<delete failonerror="false">
 						<fileset
 							dir="${app.server.bin.dir}/unix"
 							includes="${database.name}.*,jbpm.*"
@@ -107,7 +107,7 @@
 				</then>
 			</elseif>
 			<else>
-				<delete>
+				<delete failonerror="false">
 					<fileset
 						dir="${app.server.bin.dir}"
 						includes="${database.name}.*,jbpm.*"
