@@ -52,7 +52,7 @@ modBucket = 100 % totalTabs;
 
 for (int i = 0; i < layouts.size(); i++) {
 	Layout curLayout = (Layout)layouts.get(i);
-	
+
 	if (!curLayout.isHidden()) {
 		String tabName = curLayout.getName(locale);
 		String tabHREF = PortalUtil.getLayoutURL(curLayout, themeDisplay);
