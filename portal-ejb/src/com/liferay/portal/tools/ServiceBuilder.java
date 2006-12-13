@@ -5318,7 +5318,7 @@ public class ServiceBuilder {
 				String newCreateTableString = sb.toString();
 
 				_createSQLTables(sqlFile, newCreateTableString, entity, true);
-				_createSQLTables(new File(sqlPath + "/update-4.0.0-4.1.0.sql"), newCreateTableString, entity, false);
+				_createSQLTables(new File(sqlPath + "/update-4.1.0-4.2.0.sql"), newCreateTableString, entity, false);
 			}
 		}
 	}

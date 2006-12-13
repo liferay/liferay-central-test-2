@@ -72,6 +72,7 @@ public class DBBuilder {
 			_buildSQL("update-3.6.0-4.0.0");
 			_buildSQL("update-4.0.0-4.1.0");
 			_buildSQL("update-4.1.0-4.2.0");
+			_buildSQL("update-4.2.0-4.3.0");
 			_buildCreate();
 		}
 		catch (Exception e) {
