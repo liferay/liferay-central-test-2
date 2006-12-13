@@ -49,7 +49,7 @@ public class ReleaseInfo {
 
 	static String version = "4.2.0";
 
-	static String codeName = "Cowper";
+	static String codeName = "Machen";
 
 	static String build = "3500";
 
