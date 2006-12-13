@@ -45,7 +45,7 @@
 
 		<javac
 			classpathref="project.classpath"
-			compiler="${javac.compiler}"
+			compiler="modern"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
 			destdir="classes"
