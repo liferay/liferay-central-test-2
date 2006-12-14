@@ -98,7 +98,7 @@
 
 <div id="layout-nav-divider" class="layout-nav-<%= selectable ? "selected" : "divider" %>"></div>
 
-<c:if test="<%= themeDisplay.isShowPageSettingsIcon() && selectable %>">
+<c:if test="<%= themeDisplay.isShowAddContentIcon() && selectable %>">
 <script type="text/javascript">
 	Navigation.init({
 			groupId: "<%= layout.getGroupId() %>",
