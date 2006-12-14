@@ -136,8 +136,8 @@ public class JournalStructureLocalServiceImpl
 
 		JournalStructure structure = JournalStructureUtil.create(pk);
 
-		structure.setGroupId(groupId);
 		structure.setCompanyId(user.getCompanyId());
+		structure.setGroupId(groupId);
 		structure.setUserId(user.getUserId());
 		structure.setUserName(user.getFullName());
 		structure.setCreateDate(now);

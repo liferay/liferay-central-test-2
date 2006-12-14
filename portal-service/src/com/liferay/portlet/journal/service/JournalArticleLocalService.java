@@ -180,6 +180,9 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getArticles()
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getArticles(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 
@@ -303,6 +306,12 @@ public interface JournalArticleLocalService {
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, java.util.Map images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateContent(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, java.lang.String content)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

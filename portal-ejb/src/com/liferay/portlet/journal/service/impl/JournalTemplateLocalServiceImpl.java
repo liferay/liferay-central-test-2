@@ -158,8 +158,8 @@ public class JournalTemplateLocalServiceImpl
 
 		JournalTemplate template = JournalTemplateUtil.create(pk);
 
-		template.setGroupId(groupId);
 		template.setCompanyId(user.getCompanyId());
+		template.setGroupId(groupId);
 		template.setUserId(user.getUserId());
 		template.setUserName(user.getFullName());
 		template.setCreateDate(now);

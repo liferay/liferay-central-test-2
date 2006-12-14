@@ -283,6 +283,13 @@ public class JournalArticleLocalServiceUtil {
 			articleId, version, languageId, themeDisplay);
 	}
 
+	public static java.util.List getArticles()
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getArticles();
+	}
+
 	public static java.util.List getArticles(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
@@ -523,5 +530,16 @@ public class JournalArticleLocalServiceUtil {
 			expirationDateHour, expirationDateMinute, neverExpire,
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, images, articleURL, prefs);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalArticle updateContent(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, java.lang.String content)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.updateContent(companyId, groupId,
+			articleId, version, content);
 	}
 }

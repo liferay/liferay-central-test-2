@@ -234,11 +234,11 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = JournalArticleUtil.create(pk);
 
 		content = format(
-			articleId, article.getVersion(), false, article.getCompanyId(),
-			content, structureId, images);
+			article.getCompanyId(), groupId, articleId, article.getVersion(),
+			false, content, structureId, images);
 
-		article.setGroupId(groupId);
 		article.setCompanyId(user.getCompanyId());
+		article.setGroupId(groupId);
 		article.setUserId(user.getUserId());
 		article.setUserName(user.getFullName());
 		article.setCreateDate(now);
@@ -481,8 +481,8 @@ public class JournalArticleLocalServiceImpl
 		// Images
 
 		ImageLocalServiceUtil.deleteImages(
-			"%.journal.article." + article.getArticleId() + ".%." +
-				article.getVersion());
+			"%.journal.article." + article.getGroupId() + "." +
+				article.getArticleId() + ".%." + article.getVersion());
 
 		// Resources
 
@@ -606,12 +606,14 @@ public class JournalArticleLocalServiceImpl
 
 		try {
 			Document doc = null;
+
 			Element root = null;
 
 			if (article.isTemplateDriven()) {
 				SAXReader reader = new SAXReader();
 
 				doc = reader.read(new StringReader(xml));
+
 				root = doc.getRootElement();
 			}
 
@@ -710,6 +712,10 @@ public class JournalArticleLocalServiceImpl
 		catch (Exception e) {
 			throw new SystemException(e);
 		}
+	}
+
+	public List getArticles() throws SystemException {
+		return JournalArticleUtil.findAll();
 	}
 
 	public List getArticles(String groupId) throws SystemException {
@@ -1075,8 +1081,8 @@ public class JournalArticleLocalServiceImpl
 
 			article = JournalArticleUtil.create(pk);
 
-			article.setGroupId(oldArticle.getGroupId());
 			article.setCompanyId(user.getCompanyId());
+			article.setGroupId(oldArticle.getGroupId());
 			article.setUserId(user.getUserId());
 			article.setUserName(user.getFullName());
 			article.setCreateDate(now);
@@ -1086,8 +1092,8 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		content = format(
-			articleId, article.getVersion(), incrementVersion,
-			article.getCompanyId(), content, structureId, images);
+			article.getCompanyId(), groupId, articleId, article.getVersion(),
+			incrementVersion, content, structureId, images);
 
 		boolean approved = oldArticle.isApproved();
 
@@ -1141,9 +1147,27 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
+	public JournalArticle updateContent(
+			String companyId, String groupId, String articleId, double version,
+			String content)
+		throws PortalException, SystemException {
+
+		JournalArticlePK pk = new JournalArticlePK(
+			companyId, groupId, articleId, version);
+
+		JournalArticle article = JournalArticleUtil.findByPrimaryKey(pk);
+
+		article.setContent(content);
+
+		JournalArticleUtil.update(article);
+
+		return article;
+	}
+
 	protected String format(
-		String articleId, double version, boolean incrementVersion,
-		String companyId, String content, String structureId, Map images) {
+		String companyId, String groupId, String articleId, double version,
+		boolean incrementVersion, String content, String structureId,
+		Map images) {
 
 		if (Validator.isNotNull(structureId)) {
 			SAXReader reader = new SAXReader();
@@ -1156,8 +1180,8 @@ public class JournalArticleLocalServiceImpl
 				Element root = doc.getRootElement();
 
 				format(
-					articleId, version, incrementVersion, companyId, root,
-					images);
+					companyId, groupId, articleId, version, incrementVersion,
+					root, images);
 
 				content = JournalUtil.formatXML(doc);
 			}
@@ -1173,8 +1197,8 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	protected void format(
-		String articleId, double version, boolean incrementVersion,
-		String companyId, Element root, Map images) {
+		String companyId, String groupId, String articleId, double version,
+		boolean incrementVersion, Element root, Map images) {
 
 		Iterator itr = root.elements().iterator();
 
@@ -1186,8 +1210,8 @@ public class JournalArticleLocalServiceImpl
 
 			if (elType.equals("image")) {
 				formatImage(
-					articleId, version, incrementVersion, companyId, el, elName,
-					images);
+					companyId, groupId, articleId, version, incrementVersion,
+					el, elName, images);
 			}
 			else if (elType.equals("text_area")) {
 				Element dynamicContent = el.element("dynamic-content");
@@ -1200,13 +1224,14 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			format(
-				articleId, version, incrementVersion, companyId, el, images);
+				companyId, groupId, articleId, version, incrementVersion, el,
+				images);
 		}
 	}
 
 	protected void formatImage(
-		String articleId, double version, boolean incrementVersion,
-		String companyId, Element el, String elName, Map images) {
+		String companyId, String groupId, String articleId, double version,
+		boolean incrementVersion, Element el, String elName, Map images) {
 
 		List imageContents = el.elements("dynamic-content");
 
@@ -1223,32 +1248,34 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			String imageId =
-				companyId + ".journal.article." + articleId + "." + elName +
-					elLanguage + "." + version;
+				companyId + ".journal.article." + groupId + "." + articleId +
+					"." + elName + elLanguage + "." + version;
 
 			double oldVersion = MathUtil.format(version - 0.1, 1, 1);
 
 			String oldImageId =
-				companyId + ".journal.article." + articleId + "." + elName +
-					elLanguage + "." + oldVersion;
+				companyId + ".journal.article." + groupId + "." + articleId +
+					"." + elName + elLanguage + "." + oldVersion;
 
 			String elContent =
-				"/image/journal/article?img_id=" + articleId + "." + elName +
-					elLanguage + "&version=" + version;
+				"/image/journal/article?img_id=" + groupId + "." + articleId +
+					"." + elName + elLanguage + "&version=" + version;
 
 			if (dynamicContent.getText().equals("delete")) {
 				dynamicContent.setText(StringPool.BLANK);
 				ImageLocalUtil.remove(imageId);
 
 				String defaultElLanguage = "";
+
 				if (!Validator.isNotNull(elLanguage)) {
 					defaultElLanguage =
 						"_" + LocaleUtil.toLanguageId(Locale.getDefault());
 				}
 
 				String defaultImageId =
-					companyId + ".journal.article." + articleId + "." + elName +
-						defaultElLanguage + "." + version;
+					companyId + ".journal.article." + groupId + "." +
+						articleId + "." + elName + defaultElLanguage + "." +
+							version;
 
 				ImageLocalUtil.remove(defaultImageId);
 
@@ -1300,8 +1327,8 @@ public class JournalArticleLocalServiceImpl
 			}
 
 			String defaultImageId =
-				companyId + ".journal.article." + articleId + "." + elName +
-					defaultElLanguage + "." + version;
+				companyId + ".journal.article." + groupId + "." + articleId +
+					"." + elName + defaultElLanguage + "." + version;
 
 			Image defaultImage = ImageLocalUtil.get(defaultImageId);
 

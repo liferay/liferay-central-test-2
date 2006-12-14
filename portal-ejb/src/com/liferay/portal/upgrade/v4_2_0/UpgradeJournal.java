@@ -280,7 +280,8 @@ public class UpgradeJournal extends UpgradeProcess {
 	}
 
 	private String _findGroupId(
-		String queryString, String companyId, String id) throws Exception {
+			String queryString, String companyId, String id)
+		throws Exception {
 
 		Connection con = null;
 		PreparedStatement ps = null;

@@ -265,6 +265,11 @@ public class JournalArticleLocalServiceEJBImpl
 			groupId, articleId, version, languageId, themeDisplay);
 	}
 
+	public java.util.List getArticles()
+		throws com.liferay.portal.SystemException {
+		return JournalArticleLocalServiceFactory.getTxImpl().getArticles();
+	}
+
 	public java.util.List getArticles(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles(groupId);
@@ -470,6 +475,15 @@ public class JournalArticleLocalServiceEJBImpl
 			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
 			reviewDateHour, reviewDateMinute, neverReview, images, articleURL,
 			prefs);
+	}
+
+	public com.liferay.portlet.journal.model.JournalArticle updateContent(
+		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String articleId, double version, java.lang.String content)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return JournalArticleLocalServiceFactory.getTxImpl().updateContent(companyId,
+			groupId, articleId, version, content);
 	}
 
 	public void ejbCreate() throws CreateException {
