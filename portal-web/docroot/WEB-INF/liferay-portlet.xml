@@ -521,6 +521,7 @@
 		<portlet-name>56</portlet-name>
 		<struts-path>journal_content</struts-path>
 		<configuration-path>/journal_content/edit_configuration</configuration-path>
+		<portlet-data-handler-class>com.liferay.portlet.journal.lar.DefaultJournalContentPortletDataHandler</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

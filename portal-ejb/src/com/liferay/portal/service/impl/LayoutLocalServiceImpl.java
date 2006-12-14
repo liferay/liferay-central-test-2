@@ -33,8 +33,8 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -67,6 +67,8 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portlet.PortletPreferencesImpl;
+import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
@@ -361,15 +363,21 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 					portlet.getPortletDataHandler();
 
 				if (portletDataHandler != null) {
-					String data = StringPool.BLANK;
+					String data = null;
 
-					data = portletDataHandler.exportData(
-						layoutSet.getCompanyId(), layoutSet.getGroupId());
+					try {
+                        PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(prefs.getPreferences());
+						data = portletDataHandler.exportData(
+							layoutSet.getCompanyId(), layoutSet.getGroupId(), portletId, prefsImpl);
+					}
+					catch (PortletDataException pde) {
+						throw new PortalException(pde);
+					}
 
-					el = root.addElement("portlet-data");
-					el.addAttribute("portlet-id", portletId);
-
-					el.addElement("data").addCDATA(data);
+                    Element el2 = el.addElement("portlet-data");
+                    if (data != null) {
+                        el2.addCDATA(data);
+                    }
 				}
 			}
 		}
@@ -585,37 +593,43 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			PortletPreferences prefs = PortletPreferencesUtil.create(
 				new PortletPreferencesPK(portletId, layoutId, ownerId));
 
-			prefs.setPreferences(preferences);
+            prefs.setPreferences(preferences);
+
+            // Check to see if there is any custom portlet data importer...
+            Element portletData = el.element("portlet-data");
+            if (portletData != null) {
+                Portlet portlet = PortletLocalServiceUtil.getPortletById(layoutSet.getCompanyId(), portletId);
+                if (portlet != null) {
+                    PortletDataHandler portletDataHandler = portlet.getPortletDataHandler();
+                    if (portletDataHandler != null) {
+                        try {
+                            PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(preferences);
+                            
+                            prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
+                                layoutSet.getCompanyId(), 
+                                layoutSet.getGroupId(),
+                                portletId,
+                                prefsImpl,
+                                portletData.getText());
+                            if (prefsImpl != null) {
+                                prefs.setPreferences(PortletPreferencesSerializer.toXML(prefsImpl));
+                            }
+                        }
+                        catch (PortletDataException pde) {
+                            throw new PortalException(pde);
+                        }
+                            
+                    }
+                    else {
+                        _log.warn(".LAR contains custom <portlet-data> for portlet Id " + portletId + " but no matching PortletDataHandler found.");
+                    }
+                }
+            }
 
 			PortletPreferencesUtil.update(prefs);
 		}
 
-		// Portlet data
-
-		itr = root.elements("portlet-data").iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
-			String portletId = el.attributeValue("portlet-id");
-			String data = el.elementText("data");
-
-			// Portlet data
-
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				layoutSet.getCompanyId(), portletId);
-
-			PortletDataHandler portletDataHandler =
-				portlet.getPortletDataHandler();
-
-			if (portletDataHandler != null) {
-				portletDataHandler.importData(
-					layoutSet.getCompanyId(), layoutSet.getGroupId(), data);
-			}
-		}
-
 		// Page count
-
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 

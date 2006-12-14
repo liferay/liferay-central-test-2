@@ -22,18 +22,51 @@
 
 package com.liferay.portal.kernel.lar;
 
+import javax.portlet.PortletPreferences;
+
+
 /**
- * <a href="PortletDataHandler.java.html"><b><i>View Source</i></b></a>
+ * A <code>PortletDataHandler</code> is a special class capable of exporting/importing portlet specific data
+ * to a Liferay ARchive file (.lar) when a community layout is exported/imported. <code>PortletDataHandeler</code>s
+ * are defined by placing a <code>&lt;portlet-data-handler-class&gt;<code> element in the <code>&lt;portlet&gt;</code>
+ * section of the <b>WEB-INF/liferay-portlet.xml</b> or <b>WEB-INF/liferay-portlet-ext.xml</b> file.
+ * <p><a href="PortletDataHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Raymond Auge
+ * @author Joel Kozikowski
  *
  */
 public interface PortletDataHandler {
 
-	public String exportData(String companyId, String groupId)
+    /**
+     * Returns a string of data to be placed in the &lt;portlet-data&gt; section of the LAR file. This
+     * data will be passed as the <code>data</code> parameter of <code>importData()</code>
+     * @param companyId The id of the company the layout is part of
+     * @param groupId The id of the group that owns the layout being exported
+     * @param portletId The id of the portlet being exported
+     * @param portletPreferences The current preferences for the portlet
+     * @return A string of data to be placed in the .LAR. MAY be XML, but not necessarily. NULL
+     *    should be returned if no special data is to be written out.
+     * @throws PortletDataException
+     */
+	public String exportData(String companyId, String groupId, String portletId, PortletPreferences portletPreferences)
 		throws PortletDataException;
 
-	public void importData(String companyId, String groupId, String data)
+    /**
+     * Handles any special processing of the data when the portlet is being imported into a new layout.
+     * Can optionally return a modified version of <code>portletPreferences</code> to be saved in the new
+     * portlet.
+     * @param companyId The id of the company that owns the layout set the portlet is being added to
+     * @param groupId The id of the group that owns the layout set the portlet is being added to
+     * @param portletId The id of the portlet being added
+     * @param portletPreferences The preferences of the new portlet
+     * @param data The data that was returned by <code>exportData()</code>
+     * @return A modified version of portletPreferences that should be saved, or NULL if the preferences were unmodified
+     *   by this data handler.
+     * @throws PortletDataException
+     */
+	public PortletPreferences importData(String companyId, String groupId, String portletId, 
+            PortletPreferences portletPreferences, String data)
 		throws PortletDataException;
 
 }
