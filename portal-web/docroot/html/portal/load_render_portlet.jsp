@@ -53,7 +53,7 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 			};
 
 			function <%= namespace %>loadPortlet() {
-				var path = "/c/portal/render_portlet";
+				var path = "<%= themeDisplay.getPathMain() %>/portal/render_portlet";
 				var queryString = "p_l_id=<%= plid %>&p_p_id=<%= portlet.getPortletId() %>&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=<%= columnId %>&p_p_col_pos=<%= columnPos %>&p_p_col_count=<%= columnCount %>";
 
 				<%
