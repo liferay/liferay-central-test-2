@@ -31,6 +31,9 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="RatingsStatsLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -43,7 +46,13 @@ public class RatingsStatsLocalServiceImpl implements RatingsStatsLocalService {
 	public void deleteStats(String className, String classPK)
 		throws PortalException, SystemException {
 
-		RatingsStatsUtil.removeByC_C(className, classPK);
+		try {
+			RatingsStatsUtil.removeByC_C(className, classPK);
+		}
+		catch (NoSuchStatsException nsse) {
+			_log.warn(nsse);
+		}
+
 		RatingsEntryUtil.removeByC_C(className, classPK);
 	}
 
@@ -78,5 +87,8 @@ public class RatingsStatsLocalServiceImpl implements RatingsStatsLocalService {
 
 		return stats;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(RatingsStatsLocalServiceImpl.class);
 
 }

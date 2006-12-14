@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
+import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
@@ -62,6 +63,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -274,6 +278,9 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			DLServiceUtil.deleteFile(
 				fileEntry.getCompanyId(), PortletKeys.DOCUMENT_LIBRARY,
 				fileEntry.getFolderId(), fileEntry.getName());
+		}
+		catch (NoSuchFileException nsfe) {
+			_log.warn(nsfe);
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
@@ -624,5 +631,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		return folderId;
 	}
+
+	private static Log _log =
+		LogFactory.getLog(DLFileEntryLocalServiceImpl.class);
 
 }
