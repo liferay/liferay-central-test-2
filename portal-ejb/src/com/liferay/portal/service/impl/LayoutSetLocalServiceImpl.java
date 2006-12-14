@@ -37,6 +37,8 @@ import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
+import com.liferay.portal.util.PrefsPropsUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
 
 import java.util.Iterator;
@@ -116,6 +118,25 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 
 		LayoutSetUtil.update(layoutSet);
 
+        if (PrefsPropsUtil.getBoolean(PropsUtil.GROUP_THEME_SYNCHRONIZE)) {
+
+            String groupId = LayoutImpl.getGroupId(ownerId);
+            String otherOwnerId;
+            if (LayoutImpl.isPrivateLayout(ownerId)) {
+                otherOwnerId = LayoutImpl.PUBLIC + groupId;
+            }
+            else {
+                otherOwnerId = LayoutImpl.PRIVATE + groupId;
+            }
+
+            LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(otherOwnerId);
+
+            otherLayoutSet.setThemeId(themeId);
+            otherLayoutSet.setColorSchemeId(colorSchemeId);
+
+            LayoutSetUtil.update(otherLayoutSet);
+        }
+        
 		return layoutSet;
 	}
 

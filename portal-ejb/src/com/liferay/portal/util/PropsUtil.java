@@ -159,6 +159,8 @@ public class PropsUtil {
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
+    public static final String GROUP_THEME_SYNCHRONIZE = "group.theme.synchronize";
+    
 	// Languages and Time Zones
 
 	public static final String LOCALES = "locales";
