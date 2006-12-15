@@ -118,25 +118,25 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 
 		LayoutSetUtil.update(layoutSet);
 
-        if (PrefsPropsUtil.getBoolean(PropsUtil.GROUP_THEME_SYNCHRONIZE)) {
+        if (PrefsPropsUtil.getBoolean(PropsUtil.THEME_SYNC_ON_GROUP)) {
+			String otherOwnerId = null;
 
-            String groupId = LayoutImpl.getGroupId(ownerId);
-            String otherOwnerId;
-            if (LayoutImpl.isPrivateLayout(ownerId)) {
-                otherOwnerId = LayoutImpl.PUBLIC + groupId;
+			if (layoutSet.isPrivateLayout()) {
+                otherOwnerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
             }
             else {
-                otherOwnerId = LayoutImpl.PRIVATE + groupId;
+                otherOwnerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
             }
 
-            LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(otherOwnerId);
+            LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(
+				otherOwnerId);
 
             otherLayoutSet.setThemeId(themeId);
             otherLayoutSet.setColorSchemeId(colorSchemeId);
 
             LayoutSetUtil.update(otherLayoutSet);
         }
-        
+
 		return layoutSet;
 	}
 

@@ -159,8 +159,6 @@ public class PropsUtil {
 
 	public static final String TERMS_OF_USE_REQUIRED = "terms.of.use.required";
 
-    public static final String GROUP_THEME_SYNCHRONIZE = "group.theme.synchronize";
-    
 	// Languages and Time Zones
 
 	public static final String LOCALES = "locales";
@@ -184,6 +182,8 @@ public class PropsUtil {
 	public static final String DEFAULT_THEME_ID = "default.theme.id";
 
 	public static final String DEFAULT_COLOR_SCHEME_ID = "default.color.scheme.id";
+
+    public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
 
 	// Request
 
