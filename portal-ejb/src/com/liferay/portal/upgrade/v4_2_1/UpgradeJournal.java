@@ -63,6 +63,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		try {
 			_upgradeJournalArticle();
 			_upgradeJournalArticleImages();
+			_upgradeJournalTemplateImages();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -101,7 +102,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		return groupId;
 	}
 
-	private String _getNewImageId(String oldImageId, String groupId)
+	private String _getNewArticleImageId(String oldImageId, String groupId)
 		throws Exception {
 
 		int x = oldImageId.indexOf(".journal.article.");
@@ -130,6 +131,31 @@ public class UpgradeJournal extends UpgradeProcess {
 		return newImageId;
 	}
 
+	private String _getNewTemplateImageId(String oldImageId) throws Exception {
+		int x = oldImageId.indexOf(".journal.template.");
+
+		String companyId = oldImageId.substring(0, x);
+
+		x = x + 18;
+		int y = oldImageId.indexOf(".", x);
+
+		String templateId = oldImageId.substring(x, y);
+		String suffix = oldImageId.substring(y, oldImageId.length());
+
+		String groupId = _findGroupId(
+			_FIND_JOURNAL_TEMPLATE_GROUP, companyId, templateId);
+
+		String newImageId = null;
+
+		if (groupId != null) {
+			newImageId =
+				companyId + ".journal.template." + groupId + "." + templateId +
+					suffix;
+		}
+
+		return newImageId;
+	}
+
 	private void _updateImageId(String groupId, Element root) throws Exception {
 		Iterator itr1 = root.elements("dynamic-element").iterator();
 
@@ -149,7 +175,7 @@ public class UpgradeJournal extends UpgradeProcess {
 					String content = dynamicContent.getText();
 
 					if (id != null) {
-						String newId = _getNewImageId(id, groupId);
+						String newId = _getNewArticleImageId(id, groupId);
 
 						int x = content.indexOf("?img_id=") + 8;
 
@@ -200,7 +226,26 @@ public class UpgradeJournal extends UpgradeProcess {
 			Image image = (Image)itr.next();
 
 			String oldImageId = image.getImageId();
-			String newImageId = _getNewImageId(oldImageId, null);
+			String newImageId = _getNewArticleImageId(oldImageId, null);
+
+			if (newImageId != null) {
+				ImageLocalServiceUtil.updateImage(
+					newImageId, image.getTextObj());
+			}
+
+			ImageLocalServiceUtil.deleteImage(oldImageId);
+		}
+	}
+
+	private void _upgradeJournalTemplateImages() throws Exception {
+		Iterator itr = ImageLocalServiceUtil.search(
+			"%.journal.template.%").iterator();
+
+		while (itr.hasNext()) {
+			Image image = (Image)itr.next();
+
+			String oldImageId = image.getImageId();
+			String newImageId = _getNewTemplateImageId(oldImageId);
 
 			if (newImageId != null) {
 				ImageLocalServiceUtil.updateImage(
@@ -214,6 +259,10 @@ public class UpgradeJournal extends UpgradeProcess {
 	private static final String _FIND_JOURNAL_ARTICLE_GROUP =
 		"SELECT groupId FROM JournalArticle WHERE companyId = ? AND " +
 			"articleId = ?";
+
+	private static final String _FIND_JOURNAL_TEMPLATE_GROUP =
+		"SELECT groupId FROM JournalTemplate WHERE companyId = ? AND " +
+			"templateId = ?";
 
 	private static Log _log = LogFactory.getLog(UpgradeJournal.class);
 

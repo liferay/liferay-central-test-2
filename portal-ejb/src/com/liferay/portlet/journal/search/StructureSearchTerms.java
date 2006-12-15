@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.journal.search;
 
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
@@ -37,6 +39,8 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 	public StructureSearchTerms(RenderRequest req) {
 		super(req);
 
+		groupId = ParamUtil.getString(
+			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
 		structureId = DAOParamUtil.getLike(req, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(req, NAME);
 		description = DAOParamUtil.getLike(req, DESCRIPTION);

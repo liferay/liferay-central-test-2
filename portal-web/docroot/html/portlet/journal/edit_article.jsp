@@ -55,6 +55,8 @@ else {
 
 JournalArticle article = (JournalArticle)request.getAttribute(WebKeys.JOURNAL_ARTICLE);
 
+String groupId = BeanParamUtil.getString(article, request, "groupId", portletGroupId);
+
 String articleId = BeanParamUtil.getString(article, request, "articleId");
 String newArticleId = ParamUtil.getString(request, "newArticleId");
 
@@ -107,7 +109,7 @@ String structureName = StringPool.BLANK;
 
 if (Validator.isNotNull(structureId)) {
 	try {
-		structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), portletGroupId, structureId);
+		structure = JournalStructureLocalServiceUtil.getStructure(company.getCompanyId(), groupId, structureId);
 
 		structureName = structure.getName();
 	}
@@ -118,7 +120,7 @@ if (Validator.isNotNull(structureId)) {
 List templates = new ArrayList();
 
 if (structure != null) {
-	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(company.getCompanyId(), portletGroupId, structureId);
+	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(company.getCompanyId(), groupId, structureId);
 }
 
 String templateId = BeanParamUtil.getString(article, request, "templateId");
@@ -174,30 +176,30 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 		<portlet:namespace />saveArticle("<%= Constants.APPROVE %>");
 	}
 
-		function <portlet:namespace />changeLanguageView() {
-			if (<portlet:namespace />contentChangedFlag) {
-				if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
-					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
-				}
-				else {
-					if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
-						var languageIdOptions = document.<portlet:namespace />fm.<portlet:namespace />languageId.options;
+	function <portlet:namespace />changeLanguageView() {
+		if (<portlet:namespace />contentChangedFlag) {
+			if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "would-you-like-to-save-the-changes-made-to-this-language") %>")) {
+				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.UPDATE %>";
+			}
+			else {
+				if (!confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-switch-the-languages-view") %>")) {
+					var languageIdOptions = document.<portlet:namespace />fm.<portlet:namespace />languageId.options;
 
-						for (var i = 0; i < languageIdOptions.length; i++) {
-							if (languageIdOptions[i].value == "<%= languageId %>") {
-								languageIdOptions[i].selected = true;
-							}
+					for (var i = 0; i < languageIdOptions.length; i++) {
+						if (languageIdOptions[i].value == "<%= languageId %>") {
+							languageIdOptions[i].selected = true;
 						}
-
-						return;
 					}
+
+					return;
 				}
 			}
-
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
-			document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
-			submitForm(document.<portlet:namespace />fm);
 		}
+
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= groupId %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value;
+		document.<portlet:namespace />fm.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
+		submitForm(document.<portlet:namespace />fm);
+	}
 
 	function <portlet:namespace />contentChanged() {
 		<portlet:namespace />contentChangedFlag = true;
@@ -401,7 +403,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	function <portlet:namespace />removeArticleLocale() {
 		if (confirm("<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-deactivate-this-language") %>")) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "removeArticlesLocale";
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="groupId" value="<%= groupId %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=<%= defaultLanguageId %>";
 			submitForm(document.<portlet:namespace />fm);
 		}
 	}
@@ -481,12 +483,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>">
-
-<c:if test="<%= (article != null) %>">
-	<input name="<portlet:namespace />groupId" type="hidden" value="<%= article.getGroupId() %>">
-	<input name="groupId" type="hidden" value="<%= article.getGroupId() %>">
-</c:if>
-
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />articleId" type="hidden" value="<%= articleId %>">
 <input name="<portlet:namespace />version" type="hidden" value="<%= version %>">
 <input name="<portlet:namespace />content" type="hidden" value="">
@@ -518,18 +515,20 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 
 			<%
 			List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+			if (layout.getGroup().isUser()) {
+				communities.add(user.getGroup());
+			}
 			%>
 
-			<select name="<portlet:namespace />groupId">
+			<select onChange="document.<portlet:namespace />fm.<portlet:namespace />groupId.value = this.value;">
 
 				<%
-				String groupId = ParamUtil.getString(request, "groupId", portletGroupId);
-
 				for (int i = 0; i < communities.size(); i++) {
 					Group group = (Group)communities.get(i);
 				%>
 
-					<option <%= groupId.equals(group.getGroupId()) ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>
+					<option <%= groupId.equals(group.getGroupId()) ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.isUser() ? user.getFullName() : group.getName() %></option>
 
 				<%
 				}
@@ -926,14 +925,14 @@ String[] availableLocales = null;
 	<td>
 		<input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= groupId %>" /><portlet:param name="structureId" value="<%= structureId %>" /></portlet:renderURL>" id="<portlet:namespace />structureName">
 		<%= structureName %>
 		</a>
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
 			onClick="
 				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-new-structure-will-change-the-available-input-fields-and-available-templates") %>')) {
-					var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
+					var structureWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_structure" /><portlet:param name="groupId" value="<%= groupId %>" /></portlet:renderURL>', 'structure', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
 					void('');
 					structureWindow.focus();
 				}"
@@ -960,7 +959,7 @@ String[] availableLocales = null;
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select") %>'
 					onClick="
 						if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "selecting-a-template-will-change-the-structure,-available-input-fields,-and-available-templates") %>')) {
-							var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
+							var templateWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_template" /><portlet:param name="groupId" value="<%= groupId %>" /></portlet:renderURL>', 'template', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680');
 							void('');
 							templateWindow.focus();
 						}"
@@ -989,14 +988,14 @@ String[] availableLocales = null;
 
 					<input <%= templateChecked ? "checked" : "" %> name="<portlet:namespace />templateId" type="radio" value="<%= tableIteratorObj.getTemplateId() %>">
 
-					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
+					<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= tableIteratorObj.getGroupId() %>" /><portlet:param name="templateId" value="<%= tableIteratorObj.getTemplateId() %>" /></portlet:renderURL>">
 					<%= tableIteratorObj.getName() %>
 					</a>
 
 					<c:if test="<%= tableIteratorObj.isSmallImage() %>">
 						<br>
 
-						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getTemplateId() + "&medium=1" %>" vspace="0">
+						<img border="0" hspace="0" src="<%= Validator.isNotNull(tableIteratorObj.getSmallImageURL()) ? tableIteratorObj.getSmallImageURL() : themeDisplay.getPathImage() + "/journal/template?img_id=" + tableIteratorObj.getGroupId() + "." + tableIteratorObj.getTemplateId() + "&small=1" %>" vspace="0">
 					</c:if>
 				</liferay-ui:table-iterator>
 			</c:otherwise>
@@ -1083,7 +1082,7 @@ String[] availableLocales = null;
 		<%
 		}
 
-		_format(contentDoc, xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request);
+		_format(groupId, contentDoc, xsdDoc.getRootElement(), new IntegerWrapper(0), new Integer(-1), pageContext, request);
 		%>
 
 		</table>
@@ -1097,13 +1096,15 @@ String[] availableLocales = null;
 </script>
 
 <%!
-private void _format(Document contentDoc, Element root, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest req) throws Exception {
+private void _format(String groupId, Document contentDoc, Element root, IntegerWrapper count, Integer depth, PageContext pageContext, HttpServletRequest req) throws Exception {
 	depth = new Integer(depth.intValue() + 1);
 
 	Iterator itr = root.elements().iterator();
 
 	while (itr.hasNext()) {
 		Element el = (Element)itr.next();
+
+		req.setAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID, groupId);
 
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL, el);
 		req.setAttribute(WebKeys.JOURNAL_STRUCTURE_EL_COUNT, count);
@@ -1118,7 +1119,7 @@ private void _format(Document contentDoc, Element root, IntegerWrapper count, In
 		String elType = el.attributeValue("type", StringPool.BLANK);
 
 		if (!elType.equals("list") && !elType.equals("multi-list")) {
-			_format(contentDoc, el, count, depth, pageContext, req);
+			_format(groupId, contentDoc, el, count, depth, pageContext, req);
 		}
 	}
 }

@@ -23,7 +23,7 @@
 %>
 
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
-
+<%= groupId %>
 <%
 String cur = ParamUtil.getString(request, "cur");
 
@@ -43,7 +43,7 @@ catch (NoSuchArticleException nsae) {
 groupId = ParamUtil.getString(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
-
+<%= groupId %>
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">
@@ -150,11 +150,11 @@ OrderByComparator orderByComparator = JournalUtil.getArticleOrderByComparator(se
 
 ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getGroupId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator());
+int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator());
 
 searchContainer.setTotal(total);
 
-List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getGroupId(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 searchContainer.setResults(results);
 

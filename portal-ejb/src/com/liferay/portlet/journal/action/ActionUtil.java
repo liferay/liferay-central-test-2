@@ -76,7 +76,7 @@ public class ActionUtil {
 
 	public static void getArticle(HttpServletRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(
 			req, "version", JournalArticleImpl.DEFAULT_VERSION);
@@ -117,7 +117,7 @@ public class ActionUtil {
 
 	public static void getStructure(HttpServletRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 		String structureId = ParamUtil.getString(req, "structureId");
 
 		JournalStructure structure = null;
@@ -156,7 +156,7 @@ public class ActionUtil {
 
 	public static void getTemplate(HttpServletRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 		String templateId = ParamUtil.getString(req, "templateId");
 
 		JournalTemplate template = null;

@@ -57,6 +57,8 @@ public class StructureSearch extends SearchContainer {
 			(StructureDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			StructureDisplayTerms.GROUP_ID, displayTerms.getGroupId());
+		iteratorURL.setParameter(
 			StructureDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());
 		iteratorURL.setParameter(
 			StructureDisplayTerms.NAME, displayTerms.getName());

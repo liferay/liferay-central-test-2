@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
+String groupId = ParamUtil.getString(request, "groupId");
+
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
 String folderId = BeanParamUtil.getString(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
@@ -63,11 +65,11 @@ headerNames.add("num-of-images");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId, folderId);
+int total = IGFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
 searchContainer.setTotal(total);
 
-List results = IGFolderLocalServiceUtil.getFolders(portletGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+List results = IGFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -95,7 +97,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subfolderIds.add(curFolder.getFolderId());
 
-	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId, curFolder.getFolderId());
+	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
 	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);

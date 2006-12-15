@@ -295,23 +295,23 @@ public class JournalStructureLocalServiceImpl
 	}
 
 	public List search(
-			String companyId, String structureId, String groupId, String name,
+			String companyId, String groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalStructureFinder.findByC_S_G_N_D(
-			companyId, structureId, groupId, name, description, andOperator,
+		return JournalStructureFinder.findByC_G_S_N_D(
+			companyId, groupId, structureId, name, description, andOperator,
 			begin, end, obc);
 	}
 
 	public int searchCount(
-			String companyId, String structureId, String groupId, String name,
+			String companyId, String groupId, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
-		return JournalStructureFinder.countByC_S_G_N_D(
-			companyId, structureId, groupId, name, description, andOperator);
+		return JournalStructureFinder.countByC_G_S_N_D(
+			companyId, groupId, structureId, name, description, andOperator);
 	}
 
 	public JournalStructure updateStructure(

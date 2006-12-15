@@ -67,8 +67,8 @@ public class JournalContentUtil {
 		articleId = articleId.trim().toUpperCase();
 
 		String key = _encodeKey(
-			companyId + ARTICLE_SEPARATOR + articleId + LANGUAGE_SEPARATOR +
-			languageId);
+			companyId + ARTICLE_SEPARATOR + groupId + ARTICLE_SEPARATOR +
+				articleId + LANGUAGE_SEPARATOR + languageId);
 
 		try {
 			content = (String)_cache.getFromCache(key, _REFRESH_TIME);

@@ -29,6 +29,8 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
+String groupId = BeanParamUtil.getString(structure, request, "groupId", portletGroupId);
+
 String structureId = BeanParamUtil.getString(structure, request, "structureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
 
@@ -188,6 +190,7 @@ int tabIndex = 1;
 <input name="scroll" type="hidden" value="">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
 <input name="<portlet:namespace />move_up" type="hidden" value="">
 <input name="<portlet:namespace />move_depth" type="hidden" value="">
@@ -294,7 +297,7 @@ int tabIndex = 1;
 <input class="portlet-form-button" type="button" value="<bean:message key="launch-editor" />" onClick="var structureXsdWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure_xsd" /></portlet:renderURL>', 'structureXsd', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); structureXsdWindow.focus();">
 
 <c:if test="<%= structure != null %>">
-	<input class="portlet-form-button" type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?structureId=<%= structure.getStructureId() %>';">
+	<input class="portlet-form-button" type="button" value="<bean:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_structure?groupId=<%= structure.getGroupId() %>&structureId=<%= structure.getStructureId() %>';">
 </c:if>
 
 <br>

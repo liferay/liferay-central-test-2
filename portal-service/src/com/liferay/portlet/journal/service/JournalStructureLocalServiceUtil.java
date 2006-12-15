@@ -177,25 +177,25 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String structureId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.search(companyId, structureId,
-			groupId, name, description, andOperator, begin, end, obc);
+		return journalStructureLocalService.search(companyId, groupId,
+			structureId, name, description, andOperator, begin, end, obc);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String structureId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String structureId,
 		java.lang.String name, java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.searchCount(companyId, structureId,
-			groupId, name, description, andOperator);
+		return journalStructureLocalService.searchCount(companyId, groupId,
+			structureId, name, description, andOperator);
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(

@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String groupId = ParamUtil.getString(request, "groupId");
+
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 String folderId = BeanParamUtil.getString(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
@@ -63,11 +65,11 @@ headerNames.add("num-of-documents");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = DLFolderLocalServiceUtil.getFoldersCount(portletGroupId, folderId);
+int total = DLFolderLocalServiceUtil.getFoldersCount(groupId, folderId);
 
 searchContainer.setTotal(total);
 
-List results = DLFolderLocalServiceUtil.getFolders(portletGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+List results = DLFolderLocalServiceUtil.getFolders(groupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -102,7 +104,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subfolderIds.add(curFolder.getFolderId());
 
-	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId, curFolder.getFolderId());
+	DLFolderLocalServiceUtil.getSubfolderIds(subfolderIds, groupId, curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
 	int fileEntriesCount = DLFileEntryLocalServiceUtil.getFoldersFileEntriesCount(subfolderIds);

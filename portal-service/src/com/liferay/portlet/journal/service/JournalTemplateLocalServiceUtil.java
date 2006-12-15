@@ -216,7 +216,7 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String templateId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int begin, int end,
@@ -224,20 +224,20 @@ public class JournalTemplateLocalServiceUtil {
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.search(companyId, templateId,
-			groupId, structureId, structureIdComparator, name, description,
+		return journalTemplateLocalService.search(companyId, groupId,
+			templateId, structureId, structureIdComparator, name, description,
 			andOperator, begin, end, obc);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String templateId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.searchCount(companyId, templateId,
-			groupId, structureId, structureIdComparator, name, description,
+		return journalTemplateLocalService.searchCount(companyId, groupId,
+			templateId, structureId, structureIdComparator, name, description,
 			andOperator);
 	}
 

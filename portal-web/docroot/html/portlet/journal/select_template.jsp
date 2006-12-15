@@ -48,11 +48,11 @@ searchContainer.setDelta(10);
 <%
 TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-int total = JournalTemplateLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getTemplateId(), portletGroupId, StringPool.BLANK, StringPool.NOT_EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
+int total = JournalTemplateLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), StringPool.BLANK, StringPool.NOT_EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
 
 searchContainer.setTotal(total);
 
-List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getTemplateId(), portletGroupId, StringPool.BLANK, StringPool.NOT_EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), StringPool.BLANK, StringPool.NOT_EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 
 searchContainer.setResults(results);
 %>

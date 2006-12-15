@@ -470,8 +470,8 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static java.util.List search(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
@@ -482,15 +482,15 @@ public class JournalArticleLocalServiceUtil {
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.search(companyId, articleId, version,
-			groupId, title, description, content, type, structureId,
+		return journalArticleLocalService.search(companyId, groupId, articleId,
+			version, title, description, content, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
 			reviewDate, andOperator, begin, end, obc);
 	}
 
 	public static int searchCount(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
@@ -499,8 +499,8 @@ public class JournalArticleLocalServiceUtil {
 		boolean andOperator) throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.searchCount(companyId, articleId,
-			version, groupId, title, description, content, type, structureId,
+		return journalArticleLocalService.searchCount(companyId, groupId,
+			articleId, version, title, description, content, type, structureId,
 			templateId, displayDateGT, displayDateLT, approved, expired,
 			reviewDate, andOperator);
 	}

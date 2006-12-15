@@ -117,11 +117,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-			int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), portletGroupId, searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator());
+			int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), portletGroupId, searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+			List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), searchTerms.getType(), searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), searchTerms.getApprovedObj(), searchTerms.getExpiredObj(), searchTerms.getReviewDate(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 			searchContainer.setResults(results);
 			%>
@@ -152,6 +152,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_article");
 				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", article.getGroupId());
 				rowURL.setParameter("articleId", article.getArticleId());
 				rowURL.setParameter("version", String.valueOf(article.getVersion()));
 
@@ -219,11 +220,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 
-			int total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getStructureId(), portletGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
+			int total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getStructureId(), portletGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+			List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 
 			searchContainer.setResults(results);
 			%>
@@ -252,6 +253,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_structure");
 				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", structure.getGroupId());
 				rowURL.setParameter("structureId", structure.getStructureId());
 
 				// Structure id
@@ -313,11 +315,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			TemplateSearchTerms searchTerms = (TemplateSearchTerms)searchContainer.getSearchTerms();
 
-			int total = JournalTemplateLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getTemplateId(), portletGroupId, searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
+			int total = JournalTemplateLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
 
 			searchContainer.setTotal(total);
 
-			List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getTemplateId(), portletGroupId, searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+			List results = JournalTemplateLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getTemplateId(), searchTerms.getStructureId(), StringPool.EQUAL, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 
 			searchContainer.setResults(results);
 			%>
@@ -346,6 +348,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_template");
 				rowURL.setParameter("redirect", currentURL);
+				rowURL.setParameter("groupId", template.getGroupId());
 				rowURL.setParameter("templateId", template.getTemplateId());
 
 				row.setParameter("rowHREF", rowURL.toString());
@@ -407,7 +410,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="articleId" value="<%= article.getArticleId() %>" /><portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" /></portlet:renderURL>"><%= article.getArticleId() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= article.getGroupId() %>" /><portlet:param name="articleId" value="<%= article.getArticleId() %>" /><portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" /></portlet:renderURL>"><%= article.getArticleId() %></a>
 						</td>
 					</tr>
 
@@ -445,7 +448,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="structureId" value="<%= structure.getStructureId() %>" /></portlet:renderURL>"><%= structure.getName() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= structure.getGroupId() %>" /><portlet:param name="structureId" value="<%= structure.getStructureId() %>" /></portlet:renderURL>"><%= structure.getName() %></a>
 						</td>
 					</tr>
 
@@ -483,7 +486,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="templateId" value="<%= template.getTemplateId() %>" /></portlet:renderURL>"><%= template.getName() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= template.getGroupId() %>" /><portlet:param name="templateId" value="<%= template.getTemplateId() %>" /></portlet:renderURL>"><%= template.getName() %></a>
 						</td>
 					</tr>
 

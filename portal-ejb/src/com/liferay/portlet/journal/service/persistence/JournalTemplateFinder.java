@@ -49,14 +49,14 @@ import org.hibernate.Session;
  */
 public class JournalTemplateFinder {
 
-	public static String COUNT_BY_C_T_G_S_N_D =
-		JournalTemplateFinder.class.getName() + ".countByC_T_G_S_N_D";
+	public static String COUNT_BY_C_G_T_S_N_D =
+		JournalTemplateFinder.class.getName() + ".countByC_G_T_S_N_D";
 
-	public static String FIND_BY_C_T_G_S_N_D =
-		JournalTemplateFinder.class.getName() + ".findByC_T_G_S_N_D";
+	public static String FIND_BY_C_G_T_S_N_D =
+		JournalTemplateFinder.class.getName() + ".findByC_G_T_S_N_D";
 
-	public static int countByC_T_G_S_N_D(
-			String companyId, String templateId, String groupId,
+	public static int countByC_G_T_S_N_D(
+			String companyId, String groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator)
 		throws SystemException {
@@ -70,7 +70,7 @@ public class JournalTemplateFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_T_G_S_N_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_T_S_N_D);
 
 			boolean customSqlVendorOracle = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));
@@ -142,8 +142,8 @@ public class JournalTemplateFinder {
 		}
 	}
 
-	public static List findByC_T_G_S_N_D(
-			String companyId, String templateId, String groupId,
+	public static List findByC_G_T_S_N_D(
+			String companyId, String groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -158,7 +158,7 @@ public class JournalTemplateFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_T_G_S_N_D);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_T_S_N_D);
 
 			boolean customSqlVendorOracle = GetterUtil.getBoolean(
 				PropsUtil.get(PropsUtil.CUSTOM_SQL_VENDOR_ORACLE));

@@ -50,16 +50,16 @@ import org.hibernate.Session;
  */
 public class JournalArticleFinder {
 
-	public static String COUNT_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R =
+	public static String COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
-			".countByC_A_V_G_T_D_C_T_S_T_D_A_E_R";
+			".countByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
-	public static String FIND_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R =
+	public static String FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R =
 		JournalArticleFinder.class.getName() +
-			".findByC_A_V_G_T_D_C_T_S_T_D_A_E_R";
+			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
-	public static int countByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
-			String companyId, String articleId, Double version, String groupId,
+	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			String companyId, String groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
@@ -79,7 +79,7 @@ public class JournalArticleFinder {
 			session = HibernateUtil.openSession();
 
 			String sql = CustomSQLUtil.get(
-				COUNT_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R);
+				COUNT_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
 
 			if (version == null) {
 				sql = StringUtil.replace(
@@ -105,6 +105,8 @@ public class JournalArticleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(groupId);
 			qPos.add(articleId);
 			qPos.add(articleId);
 
@@ -112,8 +114,6 @@ public class JournalArticleFinder {
 				qPos.add(version);
 			}
 
-			qPos.add(groupId);
-			qPos.add(groupId);
 			qPos.add(title);
 			qPos.add(title);
 			qPos.add(description);
@@ -162,8 +162,8 @@ public class JournalArticleFinder {
 		}
 	}
 
-	public static List findByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
-			String companyId, String articleId, Double version, String groupId,
+	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			String companyId, String groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
@@ -183,7 +183,7 @@ public class JournalArticleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_A_V_G_T_D_C_T_S_T_D_A_E_R);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_A_V_T_D_C_T_S_T_D_A_E_R);
 
 			if (version == null) {
 				sql = StringUtil.replace(
@@ -210,6 +210,8 @@ public class JournalArticleFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(groupId);
 			qPos.add(articleId);
 			qPos.add(articleId);
 
@@ -217,8 +219,6 @@ public class JournalArticleFinder {
 				qPos.add(version);
 			}
 
-			qPos.add(groupId);
-			qPos.add(groupId);
 			qPos.add(title);
 			qPos.add(title);
 			qPos.add(description);

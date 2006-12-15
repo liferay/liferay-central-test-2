@@ -151,7 +151,7 @@ public class EditTemplateAction extends PortletAction {
 
 	protected void deleteTemplates(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 
 		String[] deleteTemplateIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteTemplateIds"));
@@ -172,7 +172,7 @@ public class EditTemplateAction extends PortletAction {
 
 		Layout layout = (Layout)uploadReq.getAttribute(WebKeys.LAYOUT);
 
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(uploadReq, "groupId");
 
 		String templateId = ParamUtil.getString(uploadReq, "templateId");
 		boolean autoTemplateId = ParamUtil.getBoolean(

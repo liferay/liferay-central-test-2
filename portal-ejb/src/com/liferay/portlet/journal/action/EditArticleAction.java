@@ -173,7 +173,7 @@ public class EditArticleAction extends PortletAction {
 	protected void approveArticle(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(req, "version");
 
@@ -186,7 +186,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 
 		String[] deleteArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -208,7 +208,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void expireArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 
 		String[] expireArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "expireArticleIds"));
@@ -253,7 +253,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        String groupId = PortalUtil.getPortletGroupId(req);
+        String groupId = ParamUtil.getString(req, "groupId");
 
 		String[] removeArticleLocaleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -423,6 +423,7 @@ public class EditArticleAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
+			prefs.setValue("group-id", article.getGroupId());
 			prefs.setValue("article-id", article.getArticleId());
 
 			prefs.store();

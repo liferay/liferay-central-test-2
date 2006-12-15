@@ -38,11 +38,11 @@ import javax.portlet.RenderRequest;
  */
 public class ArticleDisplayTerms extends DisplayTerms {
 
+	public static final String GROUP_ID = "groupId";
+
 	public static final String ARTICLE_ID = "searchArticleId";
 
 	public static final String VERSION = "version";
-
-	public static final String GROUP_ID = "groupId";
 
 	public static final String TITLE = "name";
 
@@ -65,9 +65,9 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public ArticleDisplayTerms(RenderRequest req) {
 		super(req);
 
+		groupId = ParamUtil.getString(req, GROUP_ID);
 		articleId = ParamUtil.getString(req, ARTICLE_ID);
 		version = ParamUtil.getDouble(req, VERSION);
-		groupId = ParamUtil.getString(req, GROUP_ID);
 		title = ParamUtil.getString(req, TITLE);
 		description = ParamUtil.getString(req, DESCRIPTION);
 		content = ParamUtil.getString(req, CONTENT);
@@ -75,6 +75,10 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		structureId = ParamUtil.getString(req, STRUCTURE_ID);
 		templateId = ParamUtil.getString(req, TEMPLATE_ID);
 		status = ParamUtil.getString(req, STATUS);
+	}
+
+	public String getGroupId() {
+		return groupId;
 	}
 
 	public String getArticleId() {
@@ -92,10 +96,6 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		else {
 			return StringPool.BLANK;
 		}
-	}
-
-	public String getGroupId() {
-		return groupId;
 	}
 
 	public String getTitle() {
@@ -138,9 +138,9 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		this.status = status;
 	}
 
+	protected String groupId;
 	protected String articleId;
 	protected double version;
-	protected String groupId;
 	protected String title;
 	protected String description;
 	protected String content;

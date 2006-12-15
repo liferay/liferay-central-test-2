@@ -989,7 +989,7 @@ public class JournalArticleLocalServiceImpl
 	}
 
 	public List search(
-			String companyId, String articleId, Double version, String groupId,
+			String companyId, String groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
@@ -997,22 +997,22 @@ public class JournalArticleLocalServiceImpl
 			OrderByComparator obc)
 		throws SystemException {
 
-		return JournalArticleFinder.findByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
-			companyId, articleId, version, groupId, title, description, content,
+		return JournalArticleFinder.findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	public int searchCount(
-			String companyId, String articleId, Double version, String groupId,
+			String companyId, String groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
 			Date reviewDate, boolean andOperator)
 		throws SystemException {
 
-		return JournalArticleFinder.countByC_A_V_G_T_D_C_T_S_T_D_A_E_R(
-			companyId, articleId, version, groupId, title, description, content,
+		return JournalArticleFinder.countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator);
 	}
@@ -1376,8 +1376,8 @@ public class JournalArticleLocalServiceImpl
 			User user = UserUtil.findByPrimaryKey(article.getUserId());
 
 			articleURL +=
-				"&articleId=" + article.getArticleId() + "&version=" +
-					article.getVersion();
+				"&groupId=" + article.getGroupId() + "&articleId=" +
+					article.getArticleId() + "&version=" + article.getVersion();
 
 			String portletName = PortalUtil.getPortletTitle(
 				PortletKeys.JOURNAL, user);

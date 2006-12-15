@@ -34,6 +34,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/journal/edit_article" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="groupId" value="<%= article.getGroupId() %>" />
 		<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 		<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 	</portlet:renderURL>
@@ -58,7 +59,9 @@ JournalArticle article = (JournalArticle)row.getObject();
 	StringBuffer sb = new StringBuffer();
 
 	sb.append(themeDisplay.getPathMain());
-	sb.append("/journal/view_article_content?articleId=");
+	sb.append("/journal/view_article_content?groupId=");
+	sb.append(article.getGroupId());
+	sb.append("&articleId=");
 	sb.append(article.getArticleId());
 	sb.append("&version=");
 	sb.append(article.getVersion());
@@ -72,6 +75,7 @@ JournalArticle article = (JournalArticle)row.getObject();
 		<portlet:param name="struts_action" value="/journal/edit_article" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="groupId" value="<%= article.getGroupId() %>" />
 		<portlet:param name="deleteArticleIds" value="<%= article.getArticleId() + EditArticleAction.VERSION_SEPARATOR + article.getVersion() %>" />
 	</portlet:actionURL>
 

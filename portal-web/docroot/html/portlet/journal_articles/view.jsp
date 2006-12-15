@@ -63,11 +63,11 @@ double version = ParamUtil.getDouble(request, "version");
 
 		ArticleSearchTerms searchTerms = (ArticleSearchTerms)searchContainer.getSearchTerms();
 
-		int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), groupId, searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator());
+		int total = JournalArticleLocalServiceUtil.searchCount(company.getCompanyId(), groupId, searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator());
 
 		searchContainer.setTotal(total);
 
-		List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getArticleId(), searchTerms.getVersionObj(), groupId, searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
+		List results = JournalArticleLocalServiceUtil.search(company.getCompanyId(), groupId, searchTerms.getArticleId(), searchTerms.getVersionObj(), searchTerms.getTitle(), searchTerms.getDescription(), searchTerms.getContent(), type, searchTerms.getStructureId(), searchTerms.getTemplateId(), searchTerms.getDisplayDateGT(), searchTerms.getDisplayDateLT(), approved, expired, reviewDate, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), orderByComparator);
 
 		searchContainer.setResults(results);
 
@@ -84,7 +84,9 @@ double version = ParamUtil.getDouble(request, "version");
 				StringBuffer sb = new StringBuffer();
 
 				sb.append(themeDisplay.getPathMain());
-				sb.append("/journal_articles/view_article_content?articleId=");
+				sb.append("/journal_articles/view_article_content?groupId=");
+				sb.append(article.getGroupId());
+				sb.append("&articleId=");
 				sb.append(article.getArticleId());
 				sb.append("&version=");
 				sb.append(article.getVersion());
@@ -92,6 +94,7 @@ double version = ParamUtil.getDouble(request, "version");
 				rowHREF = sb.toString();
 			}
 			else {
+				portletURL.setParameter("groupId", article.getGroupId());
 				portletURL.setParameter("articleId", article.getArticleId());
 				portletURL.setParameter("version", String.valueOf(article.getVersion()));
 

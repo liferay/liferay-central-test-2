@@ -116,8 +116,8 @@ public class ViewArticleContentAction extends Action {
 					PwdGenerator.getPassword(PwdGenerator.KEY3, 10);
 
 				format(
-					articleId, version, previewArticleId, companyId, root,
-					PortalUtil.getUploadServletRequest(req));
+					groupId, articleId, version, previewArticleId, companyId,
+					root, PortalUtil.getUploadServletRequest(req));
 
 				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
 
@@ -200,8 +200,9 @@ public class ViewArticleContentAction extends Action {
 	}
 
 	protected void format(
-			String articleId, double version, String previewArticleId,
-			String companyId, Element root, UploadServletRequest req)
+			String groupId, String articleId, double version,
+			String previewArticleId, String companyId, Element root,
+			UploadServletRequest req)
 		throws Exception {
 
 		Iterator itr = root.elements().iterator();
@@ -241,7 +242,9 @@ public class ViewArticleContentAction extends Action {
 				}
 				else {
 					if (Validator.isNotNull(articleId)) {
-						String imageId = articleId + "." + elName + elLanguage;
+						String imageId =
+							groupId + "." + articleId + "." + elName +
+								elLanguage;
 
 						dynamicContent.setText(
 							"/image/journal/article?img_id=" + imageId +
@@ -250,7 +253,9 @@ public class ViewArticleContentAction extends Action {
 				}
 			}
 
-			format(articleId, version, previewArticleId, companyId, el, req);
+			format(
+				groupId, articleId, version, previewArticleId, companyId, el,
+				req);
 		}
 	}
 

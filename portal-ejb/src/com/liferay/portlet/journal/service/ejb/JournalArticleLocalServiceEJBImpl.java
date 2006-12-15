@@ -420,8 +420,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
@@ -431,14 +431,14 @@ public class JournalArticleLocalServiceEJBImpl
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
-			articleId, version, groupId, title, description, content, type,
+			groupId, articleId, version, title, description, content, type,
 			structureId, templateId, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
 	public int searchCount(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
@@ -446,7 +446,7 @@ public class JournalArticleLocalServiceEJBImpl
 		java.lang.Boolean expired, java.util.Date reviewDate,
 		boolean andOperator) throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().searchCount(companyId,
-			articleId, version, groupId, title, description, content, type,
+			groupId, articleId, version, title, description, content, type,
 			structureId, templateId, displayDateGT, displayDateLT, approved,
 			expired, reviewDate, andOperator);
 	}

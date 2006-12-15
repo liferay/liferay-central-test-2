@@ -57,6 +57,8 @@ public class TemplateSearch extends SearchContainer {
 			(TemplateDisplayTerms)getDisplayTerms();
 
 		iteratorURL.setParameter(
+			TemplateDisplayTerms.GROUP_ID, displayTerms.getGroupId());
+		iteratorURL.setParameter(
 			TemplateDisplayTerms.TEMPLATE_ID, displayTerms.getTemplateId());
 		iteratorURL.setParameter(
 			TemplateDisplayTerms.STRUCTURE_ID, displayTerms.getStructureId());

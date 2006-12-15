@@ -135,7 +135,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String templateId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int begin, int end,
@@ -143,7 +143,7 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId,
-		java.lang.String templateId, java.lang.String groupId,
+		java.lang.String groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description, boolean andOperator)
 		throws com.liferay.portal.SystemException;

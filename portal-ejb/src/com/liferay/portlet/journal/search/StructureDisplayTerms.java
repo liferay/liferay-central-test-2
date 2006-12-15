@@ -35,6 +35,8 @@ import javax.portlet.RenderRequest;
  */
 public class StructureDisplayTerms extends DisplayTerms {
 
+	public static final String GROUP_ID = "groupId";
+
 	public static final String STRUCTURE_ID = "searchStructureId";
 
 	public static final String NAME = "name";
@@ -44,9 +46,14 @@ public class StructureDisplayTerms extends DisplayTerms {
 	public StructureDisplayTerms(RenderRequest req) {
 		super(req);
 
+		groupId = ParamUtil.getString(req, GROUP_ID);
 		structureId = ParamUtil.getString(req, STRUCTURE_ID);
 		name = ParamUtil.getString(req, NAME);
 		description = ParamUtil.getString(req, DESCRIPTION);
+	}
+
+	public String getGroupId() {
+		return groupId;
 	}
 
 	public String getStructureId() {
@@ -61,6 +68,7 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
+	protected String groupId;
 	protected String structureId;
 	protected String name;
 	protected String description;

@@ -46,14 +46,14 @@ import org.hibernate.Session;
  */
 public class JournalStructureFinder {
 
-	public static String COUNT_BY_C_S_G_N_D =
-		JournalStructureFinder.class.getName() + ".countByC_S_G_N_D";
+	public static String COUNT_BY_C_G_S_N_D =
+		JournalStructureFinder.class.getName() + ".countByC_G_S_N_D";
 
-	public static String FIND_BY_C_S_G_N_D =
-		JournalStructureFinder.class.getName() + ".findByC_S_G_N_D";
+	public static String FIND_BY_C_G_S_N_D =
+		JournalStructureFinder.class.getName() + ".findByC_G_S_N_D";
 
-	public static int countByC_S_G_N_D(
-			String companyId, String structureId, String groupId, String name,
+	public static int countByC_G_S_N_D(
+			String companyId, String groupId, String structureId, String name,
 			String description, boolean andOperator)
 		throws SystemException {
 
@@ -66,7 +66,7 @@ public class JournalStructureFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_S_G_N_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_G_S_N_D);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 
@@ -107,8 +107,8 @@ public class JournalStructureFinder {
 		}
 	}
 
-	public static List findByC_S_G_N_D(
-			String companyId, String structureId, String groupId, String name,
+	public static List findByC_G_S_N_D(
+			String companyId, String groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -122,7 +122,7 @@ public class JournalStructureFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_S_G_N_D);
+			String sql = CustomSQLUtil.get(FIND_BY_C_G_S_N_D);
 
 			sql = CustomSQLUtil.replaceAndOperator(sql, andOperator);
 			sql = CustomSQLUtil.replaceOrderBy(sql, obc);

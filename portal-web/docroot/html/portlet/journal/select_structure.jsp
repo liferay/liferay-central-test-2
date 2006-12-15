@@ -48,11 +48,11 @@ searchContainer.setDelta(10);
 <%
 StructureSearchTerms searchTerms = (StructureSearchTerms)searchContainer.getSearchTerms();
 
-int total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getStructureId(), portletGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
+int total = JournalStructureLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator());
 
 searchContainer.setTotal(total);
 
-List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getStructureId(), portletGroupId, searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
+List results = JournalStructureLocalServiceUtil.search(company.getCompanyId(), searchTerms.getGroupId(), searchTerms.getStructureId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), null);
 
 searchContainer.setResults(results);
 %>

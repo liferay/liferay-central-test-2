@@ -152,10 +152,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// URL
 
+		String groupId = doc.get("groupId");
 		String articleId = doc.get("articleId");
 		String version = doc.get("version");
 
 		portletURL.setParameter("struts_action", "/journal/edit_article");
+		portletURL.setParameter("groupId", groupId);
 		portletURL.setParameter("articleId", articleId);
 		portletURL.setParameter("version", version);
 

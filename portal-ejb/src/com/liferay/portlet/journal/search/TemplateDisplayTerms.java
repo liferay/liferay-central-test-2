@@ -35,6 +35,8 @@ import javax.portlet.RenderRequest;
  */
 public class TemplateDisplayTerms extends DisplayTerms {
 
+	public static final String GROUP_ID = "groupId";
+
 	public static final String TEMPLATE_ID = "searchTemplateId";
 
 	public static final String STRUCTURE_ID = "structureId";
@@ -46,10 +48,15 @@ public class TemplateDisplayTerms extends DisplayTerms {
 	public TemplateDisplayTerms(RenderRequest req) {
 		super(req);
 
+		groupId = ParamUtil.getString(req, GROUP_ID);
 		templateId = ParamUtil.getString(req, TEMPLATE_ID);
 		structureId = ParamUtil.getString(req, STRUCTURE_ID);
 		name = ParamUtil.getString(req, NAME);
 		description = ParamUtil.getString(req, DESCRIPTION);
+	}
+
+	public String getGroupId() {
+		return groupId;
 	}
 
 	public String getTemplateId() {
@@ -68,6 +75,7 @@ public class TemplateDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
+	protected String groupId;
 	protected String templateId;
 	protected String structureId;
 	protected String name;

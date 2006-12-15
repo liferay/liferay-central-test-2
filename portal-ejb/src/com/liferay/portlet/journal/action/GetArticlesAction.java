@@ -157,7 +157,7 @@ public class GetArticlesAction extends Action {
 		}
 
 		return JournalArticleLocalServiceUtil.search(
-			companyId, articleId, version, groupId, title, description, content,
+			companyId, groupId, articleId, version, title, description, content,
 			type, structureId, templateId, displayDateGT, displayDateLT,
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}

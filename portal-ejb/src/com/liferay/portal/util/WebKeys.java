@@ -145,6 +145,8 @@ public class WebKeys {
 
 	public static final String JOURNAL_ARTICLE_CONTENT_DOC = "JOURNAL_ARTICLE_CONTENT_DOC";
 
+	public static final String JOURNAL_ARTICLE_GROUP_ID = "JOURNAL_ARTICLE_GROUP_ID";
+
 	public static final String JOURNAL_RECENT_ARTICLES = "JOURNAL_RECENT_ARTICLES";
 
 	public static final String JOURNAL_RECENT_STRUCTURES = "JOURNAL_RECENT_STRUCTURES";

@@ -272,8 +272,8 @@ public interface JournalArticleLocalService {
 		java.lang.String sortField) throws com.liferay.portal.SystemException;
 
 	public java.util.List search(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,
@@ -284,8 +284,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String groupId, java.lang.String title,
+		java.lang.String groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
 		java.lang.String type, java.lang.String structureId,
 		java.lang.String templateId, java.util.Date displayDateGT,

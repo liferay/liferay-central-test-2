@@ -76,6 +76,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringComparator;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
+import com.liferay.util.portlet.PortletRequestWrapper;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.StringServletResponse;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -151,10 +152,8 @@ public class PortalUtil {
 		ActionRequest req, ActionResponse res) {
 
 		try {
-			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
 			HttpServletRequest originalReq = getOriginalServletRequest(
-				reqImpl.getHttpServletRequest());
+				getHttpServletRequest(req));
 
 			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
@@ -223,17 +222,13 @@ public class PortalUtil {
 	public static Company getCompany(ActionRequest req)
 		throws PortalException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getCompany(reqImpl.getHttpServletRequest());
+		return getCompany(getHttpServletRequest(req));
 	}
 
 	public static Company getCompany(RenderRequest req)
 		throws PortalException, SystemException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getCompany(reqImpl.getHttpServletRequest());
+		return getCompany(getHttpServletRequest(req));
 	}
 
 	public static String getCompanyId(HttpServletRequest req) {
@@ -248,9 +243,7 @@ public class PortalUtil {
 	}
 
 	public static String getCompanyId(ActionRequest req) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getCompanyId(reqImpl.getHttpServletRequest());
+		return getCompanyId(getHttpServletRequest(req));
 	}
 
 	public static String getCompanyId(PortletRequest req) {
@@ -267,9 +260,7 @@ public class PortalUtil {
 	}
 
 	public static String getCompanyId(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getCompanyId(reqImpl.getHttpServletRequest());
+		return getCompanyId(getHttpServletRequest(req));
 	}
 
 	public static Date getDate(
@@ -348,15 +339,34 @@ public class PortalUtil {
 	}
 
 	public static String getHost(ActionRequest req) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getHost(reqImpl.getHttpServletRequest());
+		return getHost(getHttpServletRequest(req));
 	}
 
 	public static String getHost(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		return getHost(getHttpServletRequest(req));
+	}
 
-		return getHost(reqImpl.getHttpServletRequest());
+	public static HttpServletRequest getHttpServletRequest(PortletRequest req) {
+		if (req instanceof ActionRequestImpl) {
+			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
+
+			return reqImpl.getHttpServletRequest();
+		}
+		else if (req instanceof RenderRequestImpl) {
+			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+
+			return reqImpl.getHttpServletRequest();
+		}
+		else if (req instanceof PortletRequestWrapper) {
+			PortletRequestWrapper reqWrapper = (PortletRequestWrapper)req;
+
+			return getHttpServletRequest(reqWrapper.getPortletRequest());
+		}
+		else {
+			throw new RuntimeException(
+				"Unable to get the HTTP servlet request from " +
+					req.getClass().getName());
+		}
 	}
 
 	public static String getLayoutEditPage(Layout layout) {
@@ -538,9 +548,7 @@ public class PortalUtil {
 	}
 
 	public static Locale getLocale(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getLocale(reqImpl.getHttpServletRequest());
+		return getLocale(getHttpServletRequest(req));
 	}
 
 	public static HttpServletRequest getOriginalServletRequest(
@@ -680,15 +688,11 @@ public class PortalUtil {
 	}
 
 	public static String getPortletGroupId(ActionRequest req) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getPortletGroupId(reqImpl.getHttpServletRequest());
+		return getPortletGroupId(getHttpServletRequest(req));
 	}
 
 	public static String getPortletGroupId(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getPortletGroupId(reqImpl.getHttpServletRequest());
+		return getPortletGroupId(getHttpServletRequest(req));
 	}
 
 	public static String getPortletNamespace(String portletName) {
@@ -769,17 +773,13 @@ public class PortalUtil {
 	public static User getSelectedUser(ActionRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getSelectedUser(reqImpl.getHttpServletRequest());
+		return getSelectedUser(getHttpServletRequest(req));
 	}
 
 	public static User getSelectedUser(RenderRequest req)
 		throws PortalException, RemoteException, SystemException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getSelectedUser(reqImpl.getHttpServletRequest());
+		return getSelectedUser(getHttpServletRequest(req));
 	}
 
 	public static String[] getSystemGroups() {
@@ -875,17 +875,13 @@ public class PortalUtil {
 	public static User getUser(ActionRequest req)
 		throws PortalException, SystemException {
 
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getUser(reqImpl.getHttpServletRequest());
+		return getUser(getHttpServletRequest(req));
 	}
 
 	public static User getUser(RenderRequest req)
 		throws PortalException, SystemException {
 
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getUser(reqImpl.getHttpServletRequest());
+		return getUser(getHttpServletRequest(req));
 	}
 
 	public static String getUserId(HttpServletRequest req) {
@@ -926,15 +922,11 @@ public class PortalUtil {
 	}
 
 	public static String getUserId(ActionRequest req) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getUserId(reqImpl.getHttpServletRequest());
+		return getUserId(getHttpServletRequest(req));
 	}
 
 	public static String getUserId(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getUserId(reqImpl.getHttpServletRequest());
+		return getUserId(getHttpServletRequest(req));
 	}
 
 	public static String getUserName(String userId, String defaultUserName) {
@@ -983,15 +975,11 @@ public class PortalUtil {
 	}
 
 	public static String getUserPassword(ActionRequest req) {
-		ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-		return getUserPassword(reqImpl.getHttpServletRequest());
+		return getUserPassword(getHttpServletRequest(req));
 	}
 
 	public static String getUserPassword(RenderRequest req) {
-		RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-
-		return getUserPassword(reqImpl.getHttpServletRequest());
+		return getUserPassword(getHttpServletRequest(req));
 	}
 
 	public static boolean isLayoutFriendliable(Layout layout) {

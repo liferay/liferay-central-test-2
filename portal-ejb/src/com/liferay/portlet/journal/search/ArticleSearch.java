@@ -86,12 +86,12 @@ public class ArticleSearch extends SearchContainer {
 		}
 
 		iteratorURL.setParameter(
+			ArticleDisplayTerms.GROUP_ID, displayTerms.getGroupId());
+		iteratorURL.setParameter(
 			ArticleDisplayTerms.ARTICLE_ID, displayTerms.getArticleId());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.VERSION,
 			String.valueOf(displayTerms.getVersion()));
-		iteratorURL.setParameter(
-			ArticleDisplayTerms.GROUP_ID, displayTerms.getGroupId());
 		iteratorURL.setParameter(
 			ArticleDisplayTerms.TITLE, displayTerms.getTitle());
 		iteratorURL.setParameter(
