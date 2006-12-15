@@ -79,7 +79,10 @@ public class JournalContentUtil {
 					companyId, groupId, articleId, languageId, themeDisplay);
 			}
 			catch (Exception e) {
-				_log.warn(e.getMessage());
+				_log.error(
+					"Uanble to get content for " + companyId + " " + groupId +
+						" " + articleId + " " + languageId,
+					e);
 			}
 
 			if (content != null) {
