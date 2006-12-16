@@ -80,6 +80,8 @@ String receivedTitleWidth = prefs.getValue("received-title-width", "125px");
 		</table>
 
 		<%
+		MailUtil.setFolder(request, MailUtil.MAIL_INBOX_NAME);
+
 		MailFolder folder = MailUtil.getFolder(request);
 		%>
 
