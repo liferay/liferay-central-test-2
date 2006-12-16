@@ -94,6 +94,7 @@
 		<field name="suffixId" type="String" />
 		<field name="male" type="boolean" />
 		<field name="birthday" type="Date">
+			<hint name="year-range-delta">37</hint>
 			<hint name="show-time">false</hint>
 		</field>
 		<field name="smsSn" type="String" />
