@@ -30,8 +30,6 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
-
-String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 %>
 
 <c:choose>
@@ -39,20 +37,39 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
-		<div id="p_load<%= namespace %>" style="text-align: left;">
+		<tiles:useAttribute id="tilesPortletDecorate" name="portlet_decorate" classname="java.lang.String" ignore="true" />
+
+		<%
+		portletDisplay.setId(portlet.getPortletId());
+		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
+
+		PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
+
+		boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
+
+		boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(tilesPortletDecorateBoolean)));
+
+		Properties cssProps = PropertiesUtil.load(portletSetup.getValue("portlet-setup-css", StringPool.BLANK));
+		%>
+
+		<c:if test="<%= (cssProps != null) && (cssProps.size() > 0) %>">
+			<%@ include file="/html/common/themes/portlet_css.jsp" %>
+		</c:if>
+
+		<div id="p_load<%= portletDisplay.getNamespace() %>" style="text-align: left;">
 			<img src="<%= themeDisplay.getPathThemeImage() %>/progress_bar/loading_animation.gif" />
 		</div>
 
 		<script type="text/javascript">
-			function <%= namespace %>returnPortlet(xmlHttpReq) {
-				var portletDiv = document.getElementById("p_load<%= namespace %>");
+			function <%= portletDisplay.getNamespace() %>returnPortlet(xmlHttpReq) {
+				var portletDiv = document.getElementById("p_load<%= portletDisplay.getNamespace() %>");
 
 				addPortletHTML(xmlHttpReq.responseText, portletDiv.parentNode, portletDiv);
 
 				portletDiv.parentNode.removeChild(portletDiv);
 			};
 
-			function <%= namespace %>loadPortlet() {
+			function <%= portletDisplay.getNamespace() %>loadPortlet() {
 				var path = "<%= themeDisplay.getPathMain() %>/portal/render_portlet";
 				var queryString = "p_l_id=<%= plid %>&p_p_id=<%= portlet.getPortletId() %>&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=<%= columnId %>&p_p_col_pos=<%= columnPos %>&p_p_col_count=<%= columnCount %>";
 
@@ -90,10 +107,10 @@ String namespace = PortalUtil.getPortletNamespace(portlet.getPortletId());
 				}
 				%>
 
-				loadPage(path, queryString, <%= namespace %>returnPortlet);
+				loadPage(path, queryString, <%= portletDisplay.getNamespace() %>returnPortlet);
 			}
 
-			<%= namespace %>loadPortlet();
+			<%= portletDisplay.getNamespace() %>loadPortlet();
 		</script>
 	</c:otherwise>
 </c:choose>
