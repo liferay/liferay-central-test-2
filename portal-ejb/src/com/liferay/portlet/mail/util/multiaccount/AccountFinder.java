@@ -31,7 +31,7 @@ import java.util.Collection;
 /**
  * AccountFinder represents a class that can find account information.
  *
- * <a href="AccountFinder.java.html"><b><i>View Source</i></b></a>
+ * <p><a href="AccountFinder.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
  *

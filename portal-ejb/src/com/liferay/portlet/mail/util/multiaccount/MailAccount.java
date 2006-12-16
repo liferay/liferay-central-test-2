@@ -40,7 +40,7 @@ import org.apache.commons.logging.LogFactory;
  * MailAccount represents a mail account. It contains all the necessary
  * information to connect to the IMAP server with its credentials.
  *
- * <a href="MailAccount.java.html"><b><i>View Source</i></b></a>
+ * <p><a href="MailAccount.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
  *
