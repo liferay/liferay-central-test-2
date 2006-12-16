@@ -96,12 +96,13 @@ public class PortletKeys {
 
 	public static final String SEARCH = "3";
 
+	public static final String SOFTWARE_REPOSITORY = "98";
+
 	public static final String SHOPPING = "34";
 
 	public static final String STOCKS = "12";
 
 	public static final String WIKI = "36";
-
 	public static final String WORKFLOW = "93";
 
 }

@@ -1133,5 +1133,65 @@
 				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
 			</bean-pool>
 		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/SRProductEntryLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
+			<jndi-name>ejb/liferay/SRProductVersionLocalServiceHome</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
+		<ejb>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</jndi-name>
+			<bean-pool>
+				<steady-pool-size>0</steady-pool-size>
+				<resize-quantity>60</resize-quantity>
+				<max-pool-size>60</max-pool-size>
+				<pool-idle-timeout-in-seconds>900</pool-idle-timeout-in-seconds>
+			</bean-pool>
+		</ejb>
 	</enterprise-beans>
 </sun-ejb-jar>

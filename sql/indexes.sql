@@ -155,6 +155,20 @@ create index Role_ix_C_C_C on Role_ (companyId, className, classPK);
 create index Role_ix_C_N on Role_ (companyId, name);
 create index Role_ix_CompanyId on Role_ (companyId);
 
+create index SRFrameworkVersion_ix_Active on SRFrameworkVersion (active_);
+create index SRFrameworkVersion_ix_CompanyI on SRFrameworkVersion (companyId);
+create index SRFrameworkVersion_ix_G_A on SRFrameworkVersion (groupId, active_);
+create index SRFrameworkVersion_ix_GroupId on SRFrameworkVersion (groupId);
+
+create index SRLicense_ix_A_R on SRLicense (active_, recommended);
+create index SRLicense_ix_Active on SRLicense (active_);
+
+create index SRProductEntry_ix_CompanyId on SRProductEntry (companyId);
+create index SRProductEntry_ix_G_U on SRProductEntry (groupId, userId);
+create index SRProductEntry_ix_GroupId on SRProductEntry (groupId);
+
+create index SRProductVersion_ix_ProductEnt on SRProductVersion (productEntryId);
+
 create index ShoppingCart_ix_GroupId on ShoppingCart (groupId);
 create index ShoppingCart_ix_UserId on ShoppingCart (userId);
 

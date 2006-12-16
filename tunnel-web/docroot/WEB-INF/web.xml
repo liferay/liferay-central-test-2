@@ -565,6 +565,34 @@
 		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseServiceHome</home>
+		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionServiceHome</home>
+		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryServiceHome</home>
+		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionServiceHome</home>
+		<remote>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
@@ -1032,6 +1060,20 @@
 		<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
 		<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/SRProductVersionLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>

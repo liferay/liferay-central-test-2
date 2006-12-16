@@ -254,6 +254,24 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static long[] getLongValues(PortletRequest req, String param) {
+		return getLongValues(req, param, new long[0]);
+	}
+
+	public static long[] getLongValues
+		(PortletRequest req, String param, long[] defaultValue) {
+		String[] stringValues = req.getParameterValues(param);
+		if (stringValues == null) {
+			return defaultValue;
+		}
+
+		long[] values = new long[stringValues.length];
+		for (int i = 0; i < stringValues.length; i++) {
+			values[i] = Long.parseLong(stringValues[i]);
+		}
+		return values;
+	}
+
 	public static short getShort(PortletRequest req, String param) {
 		return GetterUtil.getShort(req.getParameter(param));
 	}

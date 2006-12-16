@@ -858,6 +858,17 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 	</portlet>
+	<portlet>
+		<portlet-name>98</portlet-name>
+		<struts-path>software_repository</struts-path>
+		<indexer-class>com.liferay.portlet.softwarerepository.util.Indexer</indexer-class>
+		<use-default-template>true</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<layout-cacheable>true</layout-cacheable>
+		<instanceable>false</instanceable>
+		<private-request-attributes>false</private-request-attributes>
+		<render-weight>1</render-weight>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

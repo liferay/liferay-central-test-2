@@ -690,6 +690,74 @@ create table Roles_Permissions (
 	primary key (roleId, permissionId)
 );
 
+
+create table SRFrameworkVersion (
+	frameworkVersionId INTEGER not null primary key,
+	groupId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	url VARCHAR(1024) null,
+	active_ BOOLEAN,
+	priority INTEGER
+);
+
+create table SRLicense (
+	licenseId INTEGER not null primary key,
+	name VARCHAR(75) null,
+	openSource BOOLEAN,
+	url VARCHAR(1024) null,
+	active_ BOOLEAN,
+	recommended BOOLEAN
+);
+
+create table SRProductEntry (
+	productEntryId INTEGER not null primary key,
+	groupId VARCHAR(75) not null,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	type_ VARCHAR(75) null,
+	shortDescription STRING null,
+	longDescription STRING null,
+	pageURL VARCHAR(1024) null,
+	repoGroupId VARCHAR(75) null,
+	repoArtifactId VARCHAR(75) null
+);
+
+create table SRLicenses_SRProductEntries (
+	productEntryId INTEGER not null,
+	licenseId INTEGER not null,
+	primary key (productEntryId, licenseId)
+);
+
+create table SRFrameworkVersions_SRProductVersions (
+	productVersionId INTEGER not null,
+	frameworkVersionId INTEGER not null,
+	primary key (productVersionId, frameworkVersionId)
+);
+
+create table SRProductVersion (
+	productVersionId INTEGER not null primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	productEntryId INTEGER,
+	version VARCHAR(75) null,
+	changeLog VARCHAR(75) null,
+	downloadPageURL VARCHAR(75) null,
+	directDownloadURL VARCHAR(75) null,
+	repoStoreArtifact BOOLEAN
+);
+
 create table ShoppingCart (
 	cartId VARCHAR(75) not null primary key,
 	groupId VARCHAR(75) not null,

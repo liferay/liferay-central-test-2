@@ -1044,4 +1044,67 @@
 		<property name="format" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="head" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portlet.softwarerepository.model.impl.SRLicenseImpl" table="SRLicense">
+		<cache usage="read-write" />
+		<id name="licenseId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="openSource" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="recommended" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.portlet.softwarerepository.model.impl.SRFrameworkVersionImpl" table="SRFrameworkVersion">
+		<cache usage="read-write" />
+		<id name="frameworkVersionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.softwarerepository.model.impl.SRProductEntryImpl" table="SRProductEntry">
+		<cache usage="read-write" />
+		<id name="productEntryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="shortDescription" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="longDescription" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="pageURL" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="repoGroupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="repoArtifactId" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.softwarerepository.model.impl.SRProductVersionImpl" table="SRProductVersion">
+		<cache usage="read-write" />
+		<id name="productVersionId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="productEntryId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="version" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="changeLog" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="downloadPageURL" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="directDownloadURL" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="repoStoreArtifact" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
 </hibernate-mapping>

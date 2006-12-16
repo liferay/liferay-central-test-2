@@ -794,5 +794,47 @@
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/SRProductEntryLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/SRProductVersionLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
 	</enterprise-beans>
 </jrun-ejb-jar>

@@ -899,6 +899,48 @@
 		<put name="portlet_decorate" value="false" />
 	</definition>
 
+	<!-- Software Repository-->
+
+	<definition name="portlet.software_repository" extends="portlet" >
+		<put name="portlet_decorate" value="false" />
+	</definition>
+
+	<definition name="portlet.software_repository.view" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.view_product_entry" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view_product_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.edit_product_entry" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/edit_product_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.edit_framework_version" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/edit_framework_version.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.edit_license" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/edit_license.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.view_product_version" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view_product_version.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.edit_product_version" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/edit_product_version.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.error" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/error.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.search" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/search.jsp" />
+	</definition>
+
 	<!-- Recent Documents -->
 
 	<definition name="portlet.recent_documents" extends="portlet" />

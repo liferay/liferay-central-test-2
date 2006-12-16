@@ -87,6 +87,7 @@
 		<portlet id="53" />
 		<portlet id="66" />
 		<portlet id="69" />
+		<portlet id="98" />
 	</category>
 	<category name="category.tools">
 		<portlet id="2" />

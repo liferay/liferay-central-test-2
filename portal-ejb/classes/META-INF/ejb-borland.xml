@@ -455,6 +455,30 @@
 			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</bean-home-name>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SRProductEntryLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductEntryServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SRProductVersionLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</bean-home-name>
+		</session>
 	</enterprise-beans>
 	<property>
 		<prop-name>ejb.default_transaction_attribute</prop-name>
