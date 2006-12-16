@@ -47,18 +47,31 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
+	Set headerCssPortlets = CollectionFactory.getHashSet();
+
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
-		List headerCssList = portlet.getHeaderCss();
+		if (!headerCssPortlets.contains(portlet.getRootPortletId())) {
+			headerCssPortlets.add(portlet.getRootPortletId());
 
-		for (int j = 0; j < headerCssList.size(); j++) {
-			String headerCss = (String)headerCssList.get(j);
+			List headerCssList = portlet.getHeaderCss();
+
+			for (int j = 0; j < headerCssList.size(); j++) {
+				String headerCss = (String)headerCssList.get(j);
+
+				String headerCssPath = headerCss;
+
+				if (Validator.isNotNull(portlet.getServletContextName())) {
+					headerCssPath = StringPool.SLASH + portlet.getServletContextName() + headerCssPath;
+				}
+
 	%>
 
-			<link href="<%= Validator.isNotNull(portlet.getServletContextName()) ? StringPool.SLASH + portlet.getServletContextName() : StringPool.BLANK %><%= headerCss %>" rel="stylesheet" type="text/css" />
+				<link href="<%= headerCssPath %>" rel="stylesheet" type="text/css" />
 
 	<%
+			}
 		}
 	}
 	%>
@@ -71,18 +84,31 @@ if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
+	Set headerJavaScriptPortlets = CollectionFactory.getHashSet();
+
 	for (int i = 0; i < portlets.size(); i++) {
 		Portlet portlet = (Portlet)portlets.get(i);
 
-		List headerJavaScriptList = portlet.getHeaderJavaScript();
+		if (!headerJavaScriptPortlets.contains(portlet.getRootPortletId())) {
+			headerJavaScriptPortlets.add(portlet.getRootPortletId());
 
-		for (int j = 0; j < headerJavaScriptList.size(); j++) {
-			String headerJavaScript = (String)headerJavaScriptList.get(j);
+			List headerJavaScriptList = portlet.getHeaderJavaScript();
+
+			for (int j = 0; j < headerJavaScriptList.size(); j++) {
+				String headerJavaScript = (String)headerJavaScriptList.get(j);
+
+				String headerJavaScriptPath = headerJavaScript;
+
+				if (Validator.isNotNull(portlet.getServletContextName())) {
+					headerJavaScriptPath = StringPool.SLASH + portlet.getServletContextName() + headerJavaScriptPath;
+				}
+
 	%>
 
-			<script src="<%= Validator.isNotNull(portlet.getServletContextName()) ? StringPool.SLASH + portlet.getServletContextName() : StringPool.BLANK %><%= headerJavaScript %>" type="text/javascript"></script>
+				<script src="<%= headerJavaScriptPath %>" type="text/javascript"></script>
 
 	<%
+			}
 		}
 	}
 	%>
