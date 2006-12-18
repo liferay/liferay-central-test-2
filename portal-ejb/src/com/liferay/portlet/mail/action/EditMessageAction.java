@@ -194,6 +194,9 @@ public class EditMessageAction extends PortletAction {
 					WebKeys.MAIL_MESSAGE_IN_REPLY_TO,
 					String.valueOf(mailMessage.getInReplyTo()));
 				req.setAttribute(
+					WebKeys.MAIL_MESSAGE_REFERENCES,
+					String.valueOf(mailMessage.getReferences()));
+				req.setAttribute(
 					WebKeys.MAIL_MESSAGE_SUBJECT,
 					"Re: " + getSubject(mailMessage.getSubject(), "re"));
 			}
@@ -281,6 +284,7 @@ public class EditMessageAction extends PortletAction {
 		String cc = ParamUtil.getString(req, "cc");
 		String bcc = ParamUtil.getString(req, "bcc");
 		String inReplyTo = ParamUtil.getString(req, "inReplyTo");
+		String references = ParamUtil.getString(req, "references");
 		String subject = ParamUtil.getString(req, "subject");
 		String body = ParamUtil.getString(req, "body");
 
@@ -295,6 +299,7 @@ public class EditMessageAction extends PortletAction {
 			mailMessage.setCc(cc);
 			mailMessage.setBcc(bcc);
 			mailMessage.setInReplyTo(inReplyTo);
+			mailMessage.setReferences(references);
 		}
 		catch (Exception ex) {
 			throw new RecipientException(ex);

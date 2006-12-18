@@ -172,26 +172,30 @@ public class MailUtil {
 
 			message.setFrom(mailMessage.getFrom());
 
-			if (!Validator.isNull(mailMessage.getTo())) {
+			if (Validator.isNotNull(mailMessage.getTo())) {
 				message.setRecipients(
 					Message.RecipientType.TO,
 					_resolveAddresses(req, mailMessage.getTo()));
 			}
 
-			if (!Validator.isNull(mailMessage.getCc())) {
+			if (Validator.isNotNull(mailMessage.getCc())) {
 				message.setRecipients(
 					Message.RecipientType.CC,
 					_resolveAddresses(req, mailMessage.getCc()));
 			}
 
-			if (!Validator.isNull(mailMessage.getBcc())) {
+			if (Validator.isNotNull(mailMessage.getBcc())) {
 				message.setRecipients(
 					Message.RecipientType.BCC,
 					_resolveAddresses(req, mailMessage.getBcc()));
 			}
 
-			if (!Validator.isNull(mailMessage.getInReplyTo())) {
+			if (Validator.isNotNull(mailMessage.getInReplyTo())) {
 				message.setHeader("In-Reply-To", mailMessage.getInReplyTo());
+			}
+
+			if (Validator.isNotNull(mailMessage.getReferences())) {
+				message.setHeader("References", mailMessage.getReferences());
 			}
 
 			message.setSubject(mailMessage.getSubject());
@@ -659,7 +663,7 @@ public class MailUtil {
 
 			mailMessage.setMessageId(messageId);
 
-			if (!Validator.isNull(message.getFrom())) {
+			if (Validator.isNotNull(message.getFrom())) {
 				mailMessage.setFrom(message.getFrom()[0]);
 			}
 
@@ -669,9 +673,23 @@ public class MailUtil {
 			mailMessage.setReplyTo(message.getReplyTo());
 
 			String[] messageIdHeader = message.getHeader("Message-ID");
+			String[] referencesHeader = message.getHeader("References");
 
-			if ((messageIdHeader != null) && (messageIdHeader.length > 0)) {
+			if (Validator.isNotNull(messageIdHeader)) {
 				mailMessage.setInReplyTo(messageIdHeader[0]);
+
+				if (Validator.isNull(referencesHeader)) {
+					mailMessage.setReferences(messageIdHeader[0]);
+				}
+				else {
+					mailMessage.setReferences(referencesHeader[0] +
+						StringPool.SPACE + messageIdHeader[0]);
+				}
+			}
+			else {
+				if (Validator.isNotNull(referencesHeader[0])) {
+					mailMessage.setReferences(referencesHeader[0]);
+				}
 			}
 
 			mailMessage.setSubject(message.getSubject());
@@ -1051,7 +1069,7 @@ public class MailUtil {
 
 				StringBuffer sb = new StringBuffer();
 
-				if (!Validator.isNull(recipients)) {
+				if (Validator.isNotNull(recipients)) {
 					for (int j = 0; j < recipients.length; j++) {
 						InternetAddress address =
 							(InternetAddress)recipients[j];
@@ -1074,7 +1092,7 @@ public class MailUtil {
 			else {
 				Address[] from = message.getFrom();
 
-				if (from.length > 0) {
+				if (Validator.isNotNull(from)) {
 					InternetAddress address = (InternetAddress)from[0];
 
 					String recipient = GetterUtil.getString(

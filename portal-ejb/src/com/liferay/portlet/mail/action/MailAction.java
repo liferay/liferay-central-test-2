@@ -155,7 +155,9 @@ public class MailAction extends JSONAction {
 		return jsonObj.toString();
 	}
 
-	protected Comparator getComparator(HttpServletRequest req) throws Exception {
+	protected Comparator getComparator(HttpServletRequest req)
+		throws Exception {
+
 		String sortBy = ParamUtil.getString(req, "sortBy");
 		boolean asc = ParamUtil.getBoolean(req, "asc");
 
@@ -209,7 +211,7 @@ public class MailAction extends JSONAction {
 	protected String getPreview(HttpServletRequest req) throws Exception {
 		long start = 0;
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isInfoEnabled()) {
 			start = System.currentTimeMillis();
 		}
 
@@ -229,8 +231,8 @@ public class MailAction extends JSONAction {
 		jsonObj.put("folderId", folderId);
 		jsonObj.put("headers", jsonEnvelopes);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
+		if (_log.isInfoEnabled()) {
+			_log.info(
 				"Total time to get preview " +
 					(System.currentTimeMillis() - start) + "ms");
 		}
@@ -367,7 +369,7 @@ public class MailAction extends JSONAction {
 
 		long start = 0;
 
-		if (_log.isDebugEnabled()) {
+		if (_log.isInfoEnabled()) {
 			start = System.currentTimeMillis();
 		}
 
@@ -399,8 +401,8 @@ public class MailAction extends JSONAction {
 
 		jsonObj.put("folders", jsonFolders);
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
+		if (_log.isInfoEnabled()) {
+			_log.info(
 				"Total time to get folders " +
 					(System.currentTimeMillis() - start) + "ms");
 		}
