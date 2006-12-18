@@ -25,7 +25,6 @@ package com.liferay.counter.service.persistence;
 import com.liferay.counter.model.Counter;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
