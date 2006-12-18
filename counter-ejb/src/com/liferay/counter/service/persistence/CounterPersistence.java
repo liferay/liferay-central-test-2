@@ -52,7 +52,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = openSession();
 
 			List list = new ArrayList();
 
@@ -74,7 +74,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -94,7 +94,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = openSession();
 
 			Counter counter = (Counter)session.get(Counter.class, name);
 
@@ -111,19 +111,9 @@ public class CounterPersistence extends BasePersistence {
 
 			long currentId = counter.getCurrentId() + size;
 
-			/*System.out.println("Sleep\t" + name);
-
-			try {
-                Thread.sleep(5 * 1000);
-            }
-			catch (Exception e) {
-			}*/
-
 			counter.setCurrentId(currentId);
 
 			session.flush();
-
-			//System.out.println("Return\t" + name + " " + currentId);
 
 			return currentId;
 		}
@@ -131,7 +121,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -141,7 +131,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = openSession();
 
 			Counter counter = (Counter)session.load(Counter.class, oldName);
 
@@ -164,7 +154,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
@@ -172,7 +162,7 @@ public class CounterPersistence extends BasePersistence {
 		Session session = null;
 
 		try {
-			session = HibernateUtil.getSessionFactory().openSession();
+			session = openSession();
 
 			Counter counter = (Counter)session.load(Counter.class, name);
 
@@ -186,7 +176,7 @@ public class CounterPersistence extends BasePersistence {
 			throw new SystemException(he);
 		}
 		finally {
-			session.close();
+			closeSession(session);
 		}
 	}
 
