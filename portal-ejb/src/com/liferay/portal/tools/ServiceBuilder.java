@@ -47,13 +47,9 @@ import de.hunsicker.jalopy.storage.Environment;
 
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -62,7 +58,6 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Set;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -757,17 +752,17 @@ public class ServiceBuilder {
 
 	private void _appendNullLogic(EntityColumn col, StringBuffer sb) {
 		sb.append("if (" + col.getName() + " == null) {");
-			
+
 		if (col.getComparator().equals("=")) {
 			sb.append("query.append(\"" + col.getDBName() + " IS NULL\");");
-		}	
+		}
 		else if (col.getComparator().equals("<>") || col.getComparator().equals("!=")) {
 			sb.append("query.append(\"" + col.getDBName() + " IS NOT NULL\");");
 		}
 		else {
 			sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " null\");");
 		}
-			
+
 		sb.append("} else {");
 	}
 
@@ -951,7 +946,7 @@ public class ServiceBuilder {
 				sb.append(col.getName() + ".toString()");
 			}
 			else {
-				sb.append(col.getName());				
+				sb.append(col.getName());
 			}
 		}
 
@@ -1451,7 +1446,7 @@ public class ServiceBuilder {
 					}
 
 					sb.append("type=\"");
-					
+
 					if (!entity.hasPrimitivePK()) {
 						sb.append("java.lang.");
 					}
@@ -1652,7 +1647,7 @@ public class ServiceBuilder {
 						Element field = ModelHintsUtil.getFieldsEl(_packagePath + ".model." + entity.getName(), col.getName());
 
 						List hints = null;
-						
+
 						if (field != null) {
 							hints = field.elements();
 						}
@@ -1907,7 +1902,7 @@ public class ServiceBuilder {
 			for (int i = 0; i < orderList.size(); i++) {
 				EntityColumn col = (EntityColumn)orderList.get(i);
 
-				String colType = col.getType(); 
+				String colType = col.getType();
 
 				if (!col.isPrimitiveType()) {
 					if (colType.equals("Date")) {
@@ -1988,7 +1983,7 @@ public class ServiceBuilder {
 		sb.append("return false;");
 		sb.append("}");
 		sb.append(entity.getPKClassName() + " pk = " + entity.getVarName() + ".getPrimaryKey();");
-		
+
 		if (entity.hasPrimitivePK()) {
 			sb.append("if (getPrimaryKey() == pk) {");
 		}
@@ -2255,7 +2250,7 @@ public class ServiceBuilder {
 		if (entity.hasPrimitivePK()) {
 			sb.append(")");
 		}
-		
+
 		sb.append(");");
 		sb.append("if (" + entity.getVarName() + " == null) {");
 		sb.append("if (_log.isWarnEnabled()) {");
@@ -2390,7 +2385,7 @@ public class ServiceBuilder {
 						sb.append(", ");
 					}
 				}
-				
+
 				sb.append(") throws " + _getNoSuchEntityException(entity) + "Exception, SystemException {");
 				sb.append(entity.getName() + " " + entity.getVarName() + " = fetchBy" + finder.getName() + "(");
 
@@ -2446,7 +2441,7 @@ public class ServiceBuilder {
 						sb.append(", ");
 					}
 				}
-				
+
 				sb.append(") throws SystemException {");
 				sb.append("Session session = null;");
 				sb.append("try {");
@@ -2460,7 +2455,7 @@ public class ServiceBuilder {
 					if (_requiresNullCheck(col)) {
 						_appendNullLogic(col, sb);
 					}
-						
+
 					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
@@ -2539,7 +2534,7 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
-					
+
 					if (_requiresNullCheck(col)) {
 						sb.append("}");
 					}
@@ -2586,7 +2581,7 @@ public class ServiceBuilder {
 					if (_requiresNullCheck(col)) {
 						_appendNullLogic(col, sb);
 					}
-						
+
 					sb.append("query.append(\"" + col.getDBName() + " " + col.getComparator() + " ?\");");
 
 					if (_requiresNullCheck(col)) {
@@ -2665,7 +2660,7 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
-					
+
 					if (_requiresNullCheck(col)) {
 						sb.append("}");
 					}
@@ -2806,7 +2801,7 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
-				
+
 					if (_requiresNullCheck(col)) {
 						sb.append("}");
 					}
@@ -3053,7 +3048,7 @@ public class ServiceBuilder {
 					}
 
 					sb.append(");");
-				
+
 					if (_requiresNullCheck(col)) {
 						sb.append("}");
 					}
@@ -3321,7 +3316,7 @@ public class ServiceBuilder {
 		}
 
 		// Relationship methods
-		
+
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
 
@@ -3583,7 +3578,7 @@ public class ServiceBuilder {
 		}
 
 		sb.append("protected void initDao() {");
-		
+
 		for (int i = 0; i < columnList.size(); i++) {
 			EntityColumn col = (EntityColumn)columnList.get(i);
 
@@ -4542,11 +4537,11 @@ public class ServiceBuilder {
 				}
 
 				sb.append("try {");
-				
+
 				if (!returnTypeName.equals("void")) {
 					sb.append("returnObj =");
 				}
-				
+
 				sb.append("TunnelUtil.invoke(httpPrincipal, methodWrapper);");
 				sb.append("}");
 				sb.append("catch (Exception e) {");
@@ -5040,11 +5035,13 @@ public class ServiceBuilder {
 	private void _createSQLIndexes() throws IOException {
 		String sqlPath = _portalRoot + "/sql";
 
+		// indexes.sql
+
 		File sqlFile = new File(sqlPath + "/indexes.sql");
-				
-		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
 
 		Map indexSQLs = new TreeMap();
+
+		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
 
 		while (true) {
 			String indexSQL = br.readLine();
@@ -5052,25 +5049,25 @@ public class ServiceBuilder {
 			if (indexSQL == null) {
 				break;
 			}
-			
-			if (Validator.isNull(indexSQL.trim())) {
-				continue;
+
+			if (Validator.isNotNull(indexSQL.trim())) {
+				int pos = indexSQL.indexOf(" on ");
+
+				String indexSpec = indexSQL.substring(pos + 4);
+
+				indexSQLs.put(indexSpec, indexSQL);
 			}
-			
-			int pos = indexSQL.indexOf(" on ");
-			
-			String indexSpec = indexSQL.substring(pos + 4);
-			
-			indexSQLs.put(indexSpec, indexSQL);				
 		}
 
 		br.close();
 
-		File indexMapFile = new File(sqlPath + "/index-map.properties");
+		// indexes.properties
 
-		br = new BufferedReader(new FileReader(indexMapFile));
+		File indexMapFile = new File(sqlPath + "/indexes.properties");
 
 		Map indexMappings = new TreeMap();
+
+		br = new BufferedReader(new FileReader(indexMapFile));
 
 		while (true) {
 			String indexMapping = br.readLine();
@@ -5078,18 +5075,18 @@ public class ServiceBuilder {
 			if (indexMapping == null) {
 				break;
 			}
-			
-			if (Validator.isNull(indexMapping.trim())) {
-				continue;
+
+			if (Validator.isNotNull(indexMapping.trim())) {
+				String[] splitIndexMapping = indexMapping.split("\\=");
+
+				indexMappings.put(splitIndexMapping[1], splitIndexMapping[0]);
 			}
-
-			String[] splitIndexMapping = indexMapping.split("\\,"); 
-
-			indexMappings.put(splitIndexMapping[1], splitIndexMapping[0]);				
 		}
-		
+
 		br.close();
-		
+
+		// indexes.sql
+
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
@@ -5099,39 +5096,41 @@ public class ServiceBuilder {
 				EntityFinder finder = (EntityFinder)finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBuffer indexSpecSb = new StringBuffer(
-						entity.getTable() + " (");
+					StringBuffer sb = new StringBuffer();
+
+					sb.append(entity.getTable() + " (");
 
 					List finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = (EntityColumn)finderColsList.get(k);
 
-						indexSpecSb.append(col.getDBName());
+						sb.append(col.getDBName());
 
 						if ((k + 1) != finderColsList.size()) {
-							indexSpecSb.append(", ");
+							sb.append(", ");
 						}
 					}
 
-					indexSpecSb.append(");");
+					sb.append(");");
 
-					String indexSpec = indexSpecSb.toString();
+					String indexSpec = sb.toString();
 
-					String indexHash = 
+					String indexHash =
 						Integer.toHexString(indexSpec.hashCode()).toUpperCase();
 
 					String indexName = "IX_" + indexHash;
 
-					StringBuffer sb = new StringBuffer();
+					sb = new StringBuffer();
 
-					sb.append("create index " + indexName + " on "); 
+					sb.append("create index " + indexName + " on ");
 					sb.append(indexSpec);
-	
+
 					indexSQLs.put(indexSpec, sb.toString());
-					
-					String finderName = 
-						entity.getTable() + StringPool.PERIOD + finder.getName();
+
+					String finderName =
+						entity.getTable() + StringPool.PERIOD +
+							finder.getName();
 
 					indexMappings.put(finderName, indexName);
 				}
@@ -5143,18 +5142,18 @@ public class ServiceBuilder {
 		Iterator itr = indexSQLs.values().iterator();
 
 		String prevEntityName = null;
-		
-		while (itr.hasNext()) {			
+
+		while (itr.hasNext()) {
 			String indexSQL = (String)itr.next();
 
 			String entityName = indexSQL.split(" ")[4];
 
-			if ((prevEntityName != null) && 
+			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
 				sb.append("\n");
 			}
-			
+
 			sb.append(indexSQL);
 
 			if (itr.hasNext()) {
@@ -5163,29 +5162,31 @@ public class ServiceBuilder {
 
 			prevEntityName = entityName;
 		}
-		
+
 		FileUtil.write(sqlFile, sb.toString(), true);
-		
+
+		// index-map.properties
+
 		sb = new StringBuffer();
 
 		itr = indexMappings.keySet().iterator();
 
 		prevEntityName = null;
-		
-		while (itr.hasNext()) {					
+
+		while (itr.hasNext()) {
 			String finderName = (String)itr.next();
-			
+
 			String indexName = (String)indexMappings.get(finderName);
 
 			String entityName = finderName.split("\\.")[0];
 
-			if ((prevEntityName != null) && 
+			if ((prevEntityName != null) &&
 				(!prevEntityName.equals(entityName))) {
 
 				sb.append("\n");
 			}
-			
-			sb.append(indexName + StringPool.COMMA + finderName);
+
+			sb.append(indexName + StringPool.EQUAL + finderName);
 
 			if (itr.hasNext()) {
 				sb.append("\n");
@@ -5193,7 +5194,7 @@ public class ServiceBuilder {
 
 			prevEntityName = entityName;
 		}
-	
+
 		FileUtil.write(indexMapFile, sb.toString(), true);
 	}
 
@@ -5343,7 +5344,7 @@ public class ServiceBuilder {
 
 						sb.append(" not null");
 
-						if (col.isPrimary() && !entity.hasCompoundPK()) { 
+						if (col.isPrimary() && !entity.hasCompoundPK()) {
 							sb.append(" primary key");
 						}
 					}
@@ -5365,7 +5366,7 @@ public class ServiceBuilder {
 
 					sb.append("\n");
 				}
-				
+
 				if (entity.hasCompoundPK()) {
 					sb.append("\tprimary key (");
 
