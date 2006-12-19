@@ -682,8 +682,9 @@ public class MailUtil {
 					mailMessage.setReferences(messageIdHeader[0]);
 				}
 				else {
-					mailMessage.setReferences(referencesHeader[0] +
-						StringPool.SPACE + messageIdHeader[0]);
+					mailMessage.setReferences(
+						referencesHeader[0] + StringPool.SPACE +
+							messageIdHeader[0]);
 				}
 			}
 			else {

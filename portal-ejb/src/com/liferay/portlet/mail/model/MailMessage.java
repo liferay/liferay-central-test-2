@@ -92,14 +92,6 @@ public class MailMessage {
 		_bcc = InternetAddress.parse(bccs);
 	}
 
-	public String getReferences() {
-		return _references;
-	}
-
-	public void setReferences(String references) {
-		_references = references;
-	}
-
 	public String getInReplyTo() {
 		return _inReplyTo;
 	}
@@ -118,6 +110,14 @@ public class MailMessage {
 
 	public void setReplyTo(Address[] replyTo) {
 		_replyTo = replyTo;
+	}
+
+	public String getReferences() {
+		return _references;
+	}
+
+	public void setReferences(String references) {
+		_references = references;
 	}
 
 	public String getSubject() {
@@ -230,8 +230,8 @@ public class MailMessage {
 	private Address[] _cc;
 	private Address[] _bcc;
 	private String _inReplyTo;
-	private String _references;
 	private Address[] _replyTo;
+	private String _references;
 	private String _subject;
 	private Date _sentDate;
 	private MailContent _content;

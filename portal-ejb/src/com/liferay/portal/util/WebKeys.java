@@ -175,15 +175,15 @@ public class WebKeys {
 
 	public static final String MAIL_MESSAGE_BODY = "MAIL_MESSAGE_BODY";
 
+	public static final String MAIL_MESSAGE_ID = "MAIL_MESSAGE_ID";
+
 	public static final String MAIL_MESSAGE_IN_REPLY_TO = "MAIL_MESSAGE_IN_REPLY_TO";
 
 	public static final String MAIL_MESSAGE_ORIGINAL_ID = "MAIL_MESSAGE_ORIGINAL_ID";
 
-	public static final String MAIL_MESSAGE_REFERENCES = "MAIL_MESSAGE_REFERENCES";
-
-	public static final String MAIL_MESSAGE_ID = "MAIL_MESSAGE_ID";
-
 	public static final String MAIL_MESSAGE_RECIPIENTS = "MAIL_MESSAGE_RECIPIENTS";
+
+	public static final String MAIL_MESSAGE_REFERENCES = "MAIL_MESSAGE_REFERENCES";
 
 	public static final String MAIL_MESSAGE_SUBJECT = "MAIL_MESSAGE_SUBJECT";
 
