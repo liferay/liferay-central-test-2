@@ -29,8 +29,10 @@ import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
 
+import java.util.Collections;
 import java.util.Enumeration;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 
@@ -94,10 +96,11 @@ public class PropertiesUtil {
 
 			p.load(new ByteArrayInputStream(s.getBytes()));
 
-			Enumeration enu = p.propertyNames();
+			List propertyNames = Collections.list(p.propertyNames());
 
-			while (enu.hasMoreElements()) {
-				String key = (String)enu.nextElement();
+			for (int i = 0; i < propertyNames.size(); i++) {
+				String key = (String)propertyNames.get(i);
+
 				String value = p.getProperty(key);
 
 				// Trim values because it may leave a trailing \r in certain
