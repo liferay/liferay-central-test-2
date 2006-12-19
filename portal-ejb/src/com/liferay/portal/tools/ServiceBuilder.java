@@ -47,9 +47,13 @@ import de.hunsicker.jalopy.storage.Environment;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -58,7 +62,9 @@ import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.TreeSet;
 
 import org.dom4j.Document;
@@ -5035,10 +5041,10 @@ public class ServiceBuilder {
 		String sqlPath = _portalRoot + "/sql";
 
 		File sqlFile = new File(sqlPath + "/indexes.sql");
-
-		Set indexSQLs = new TreeSet();
-
+				
 		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
+
+		Map indexSQLs = new TreeMap();
 
 		while (true) {
 			String indexSQL = br.readLine();
@@ -5046,14 +5052,44 @@ public class ServiceBuilder {
 			if (indexSQL == null) {
 				break;
 			}
-
-			if (Validator.isNotNull(indexSQL)) {
-				indexSQLs.add(indexSQL);
+			
+			if (Validator.isNull(indexSQL.trim())) {
+				continue;
 			}
+			
+			int pos = indexSQL.indexOf(" on ");
+			
+			String indexSpec = indexSQL.substring(pos + 4);
+			
+			indexSQLs.put(indexSpec, indexSQL);				
 		}
 
 		br.close();
 
+		File indexMapFile = new File(sqlPath + "/index-map.properties");
+
+		br = new BufferedReader(new FileReader(indexMapFile));
+
+		Map indexMappings = new TreeMap();
+
+		while (true) {
+			String indexMapping = br.readLine();
+
+			if (indexMapping == null) {
+				break;
+			}
+			
+			if (Validator.isNull(indexMapping.trim())) {
+				continue;
+			}
+
+			String[] splitIndexMapping = indexMapping.split("\\,"); 
+
+			indexMappings.put(splitIndexMapping[1], splitIndexMapping[0]);				
+		}
+		
+		br.close();
+		
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = (Entity)_ejbList.get(i);
 
@@ -5063,59 +5099,62 @@ public class ServiceBuilder {
 				EntityFinder finder = (EntityFinder)finderList.get(j);
 
 				if (finder.isDBIndex()) {
-					StringBuffer sb = new StringBuffer();
-
-					String indexName =
-						entity.getName() + "_ix_" + finder.getName();
-
-					if (indexName.length() > 30) {
-						indexName = indexName.substring(0, 30);
-					}
-
-					sb.append("create index " + indexName + " on " + entity.getTable() + " (");
+					StringBuffer indexSpecSb = new StringBuffer(
+						entity.getTable() + " (");
 
 					List finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
 						EntityColumn col = (EntityColumn)finderColsList.get(k);
 
-						sb.append(col.getDBName());
+						indexSpecSb.append(col.getDBName());
 
 						if ((k + 1) != finderColsList.size()) {
-							sb.append(", ");
+							indexSpecSb.append(", ");
 						}
 					}
 
-					sb.append(");");
+					indexSpecSb.append(");");
 
-					String indexSQL = sb.toString();
+					String indexSpec = indexSpecSb.toString();
 
-					if (!indexSQLs.contains(indexSQL)) {
-						indexSQLs.add(indexSQL);
-					}
+					String indexHash = 
+						Integer.toHexString(indexSpec.hashCode()).toUpperCase();
+
+					String indexName = "IX_" + indexHash;
+
+					StringBuffer sb = new StringBuffer();
+
+					sb.append("create index " + indexName + " on "); 
+					sb.append(indexSpec);
+	
+					indexSQLs.put(indexSpec, sb.toString());
+					
+					String finderName = 
+						entity.getTable() + StringPool.PERIOD + finder.getName();
+
+					indexMappings.put(finderName, indexName);
 				}
 			}
 		}
 
 		StringBuffer sb = new StringBuffer();
 
+		Iterator itr = indexSQLs.values().iterator();
+
 		String prevEntityName = null;
-
-		Iterator itr = indexSQLs.iterator();
-
-		while (itr.hasNext()) {
+		
+		while (itr.hasNext()) {			
 			String indexSQL = (String)itr.next();
 
-			int pos = indexSQL.indexOf("_ix_");
-
-			String entityName = indexSQL.substring(0, pos);
+			String entityName = indexSQL.split(" ")[4];
 
 			if ((prevEntityName != null) && 
 				(!prevEntityName.equals(entityName))) {
 
 				sb.append("\n");
 			}
-
+			
 			sb.append(indexSQL);
 
 			if (itr.hasNext()) {
@@ -5124,8 +5163,38 @@ public class ServiceBuilder {
 
 			prevEntityName = entityName;
 		}
-
+		
 		FileUtil.write(sqlFile, sb.toString(), true);
+		
+		sb = new StringBuffer();
+
+		itr = indexMappings.keySet().iterator();
+
+		prevEntityName = null;
+		
+		while (itr.hasNext()) {					
+			String finderName = (String)itr.next();
+			
+			String indexName = (String)indexMappings.get(finderName);
+
+			String entityName = finderName.split("\\.")[0];
+
+			if ((prevEntityName != null) && 
+				(!prevEntityName.equals(entityName))) {
+
+				sb.append("\n");
+			}
+			
+			sb.append(indexName + StringPool.COMMA + finderName);
+
+			if (itr.hasNext()) {
+				sb.append("\n");
+			}
+
+			prevEntityName = entityName;
+		}
+	
+		FileUtil.write(indexMapFile, sb.toString(), true);
 	}
 
 	private void _createSQLSequences() throws IOException {
