@@ -5063,11 +5063,11 @@ public class ServiceBuilder {
 
 		// indexes.properties
 
-		File indexMapFile = new File(sqlPath + "/indexes.properties");
+		File propsFile = new File(sqlPath + "/indexes.properties");
 
-		Map indexMappings = new TreeMap();
+		Map indexProps = new TreeMap();
 
-		br = new BufferedReader(new FileReader(indexMapFile));
+		br = new BufferedReader(new FileReader(propsFile));
 
 		while (true) {
 			String indexMapping = br.readLine();
@@ -5079,7 +5079,7 @@ public class ServiceBuilder {
 			if (Validator.isNotNull(indexMapping.trim())) {
 				String[] splitIndexMapping = indexMapping.split("\\=");
 
-				indexMappings.put(splitIndexMapping[1], splitIndexMapping[0]);
+				indexProps.put(splitIndexMapping[1], splitIndexMapping[0]);
 			}
 		}
 
@@ -5132,7 +5132,7 @@ public class ServiceBuilder {
 						entity.getTable() + StringPool.PERIOD +
 							finder.getName();
 
-					indexMappings.put(finderName, indexName);
+					indexProps.put(finderName, indexName);
 				}
 			}
 		}
@@ -5165,18 +5165,18 @@ public class ServiceBuilder {
 
 		FileUtil.write(sqlFile, sb.toString(), true);
 
-		// index-map.properties
+		// indexes.properties
 
 		sb = new StringBuffer();
 
-		itr = indexMappings.keySet().iterator();
+		itr = indexProps.keySet().iterator();
 
 		prevEntityName = null;
 
 		while (itr.hasNext()) {
 			String finderName = (String)itr.next();
 
-			String indexName = (String)indexMappings.get(finderName);
+			String indexName = (String)indexProps.get(finderName);
 
 			String entityName = finderName.split("\\.")[0];
 
@@ -5195,7 +5195,7 @@ public class ServiceBuilder {
 			prevEntityName = entityName;
 		}
 
-		FileUtil.write(indexMapFile, sb.toString(), true);
+		FileUtil.write(propsFile, sb.toString(), true);
 	}
 
 	private void _createSQLSequences() throws IOException {
