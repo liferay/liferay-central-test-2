@@ -112,8 +112,8 @@ public class DBBuilder {
 			FileUtil.read("../sql/portal" + minimalSuffix + "/portal" +
 				minimalSuffix + "-db2.sql"));
 		sb.append("\n\n");
-		//sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
-		//sb.append("\n\n");
+		sb.append(FileUtil.read("../sql/indexes/indexes-db2.sql"));
+		sb.append("\n\n");
 		sb.append(FileUtil.read("../sql/sequences/sequences-db2.sql"));
 
 		FileUtil.write(file, sb.toString());
@@ -1125,7 +1125,7 @@ public class DBBuilder {
 	private static String[] _DB2 = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double", " integer", " varchar(1000)",
+		" smallint", " timestamp", " double", " integer", " varchar(500)",
 		" clob", " varchar", " generated always as identity", "commit"
 	};
 
