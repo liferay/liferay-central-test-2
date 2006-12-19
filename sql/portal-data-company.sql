@@ -107,7 +107,7 @@ insert into Role_ (roleId, companyId, name) values ('4', 'liferay.com', 'User');
 ##
 
 insert into User_ (userId, companyId, createDate, modifiedDate, password_, passwordEncrypted, passwordReset, emailAddress, greeting, loginDate, failedLoginAttempts, agreedToTermsOfUse, active_) values ('liferay.com.default', 'default', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'password', FALSE, FALSE, 'default@liferay.com', 'Welcome!', CURRENT_TIMESTAMP, 0, TRUE, TRUE);
-insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.default', 'liferay.com', 'liferay.com.default', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'default', '-1', '', '', '', '', TRUE, '01/01/1970');
+insert into Contact_ (contactId, companyId, userId, userName, createDate, modifiedDate, accountId, parentContactId, firstName, middleName, lastName, nickName, male, birthday) values ('liferay.com.default', 'default', 'liferay.com.default', '', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, 'default', '-1', '', '', '', '', TRUE, '01/01/1970');
 
 ##
 ## User (test@liferay.com)

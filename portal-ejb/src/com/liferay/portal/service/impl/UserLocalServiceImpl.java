@@ -258,7 +258,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Resources
 
-		String creatorUserName;
+		String creatorUserName = null;
 
 		if (Validator.isNull(creatorUserId)) {
 			creatorUserId = user.getUserId();
@@ -266,6 +266,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 		else {
 			User creatorUser = UserUtil.findByPrimaryKey(creatorUserId);
+
 			creatorUserName = creatorUser.getFullName();
 		}
 
