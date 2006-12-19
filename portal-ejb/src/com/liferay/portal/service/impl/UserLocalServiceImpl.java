@@ -258,11 +258,15 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Resources
 
-		String creatorUserName = null;
+		String creatorUserName = StringPool.BLANK;
 
 		if (Validator.isNull(creatorUserId)) {
 			creatorUserId = user.getUserId();
-			creatorUserName = user.getFullName();
+
+			// Don't grab the full name from the User object because it doesn't
+			// have a corresponding Contact object yet
+
+			//creatorUserName = user.getFullName();
 		}
 		else {
 			User creatorUser = UserUtil.findByPrimaryKey(creatorUserId);
