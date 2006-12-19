@@ -29,12 +29,14 @@ import com.liferay.portal.LayoutNameException;
 import com.liferay.portal.LayoutParentLayoutIdException;
 import com.liferay.portal.LayoutTypeException;
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchPortletPreferencesException;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredLayoutException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.lar.PortletDataException;
+import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
@@ -48,6 +50,7 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalService;
@@ -66,6 +69,7 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -104,6 +108,7 @@ import org.dom4j.io.SAXReader;
  * <a href="LayoutLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Joel Kozikowski
  *
  */
 public class LayoutLocalServiceImpl implements LayoutLocalService {
@@ -249,8 +254,21 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
+		PortletDataContext context = new PortletDataContext(
+			layoutSet.getCompanyId(), layoutSet.getGroupId(),
+			CollectionFactory.getHashSet());
+
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			layoutSet.getCompanyId(), GroupImpl.GUEST);
+
+		String guestPrefsOwnerId = null;
+
+		if (!layoutSet.isPrivateLayout()) {
+			guestPrefsOwnerId =
+				ownerId + StringPool.PERIOD + PortletKeys.PREFS_OWNER_ID_USER +
+					StringPool.PERIOD +
+						UserImpl.getDefaultUserId(layoutSet.getCompanyId());
+		}
 
 		// Build compatibility
 
@@ -269,10 +287,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		// Layouts
 
-		Iterator itr = getLayouts(ownerId).iterator();
+		Iterator itr1 = getLayouts(ownerId).iterator();
 
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+		while (itr1.hasNext()) {
+			Layout layout = (Layout)itr1.next();
 
 			Element layoutEl = root.addElement("layout");
 
@@ -308,79 +326,61 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 					"guest-actions");
 			}
 
-			// Portlet permissions
-
 			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
-				List portletIds = layoutTypePortlet.getPortletIds();
+				// Portlet permissions
 
-				for (int i = 0; i < portletIds.size(); i++) {
-					String portletId = (String)portletIds.get(i);
+				Iterator itr2 = layoutTypePortlet.getPortletIds().iterator();
 
-					Element portletEl = permissionsEl.addElement("portlet");
+				while (itr2.hasNext()) {
+					String portletId = (String)itr2.next();
 
-					portletEl.addAttribute("portlet-id", portletId);
+					if (layoutTypePortlet.hasPortletId(portletId)) {
+						Element portletEl = permissionsEl.addElement("portlet");
 
-					exportPortletPermissions(
-						portletId, layout, layout.getGroupId(), portletEl,
-						"community-actions");
+						portletEl.addAttribute("portlet-id", portletId);
 
-					if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
 						exportPortletPermissions(
-							portletId, layout, guestGroup.getGroupId(),
-							portletEl, "guest-actions");
+							portletId, layout, layout.getGroupId(), portletEl,
+							"community-actions");
+
+						if (!layout.getGroupId().equals(
+								guestGroup.getGroupId())) {
+
+							exportPortletPermissions(
+								portletId, layout, guestGroup.getGroupId(),
+								portletEl, "guest-actions");
+						}
 					}
 				}
+
+				// Portlet preferences
+
+				exportPortletPreferences(
+					layout.getLayoutId(), ownerId, layoutTypePortlet, layoutEl);
+
+				if (guestPrefsOwnerId != null) {
+					exportPortletPreferences(
+						layout.getLayoutId(), guestPrefsOwnerId,
+						layoutTypePortlet, layoutEl);
+				}
+
+				// Portlet data
+
+				exportPortletData(context, layout, layoutTypePortlet, layoutEl);
 			}
 		}
 
 		// Portlet preferences
 
-		itr = PortletPreferencesLocalServiceUtil.getPortletPreferencesByOwnerId(
-			ownerId).iterator();
+		String groupPrefsOwnerId =
+			PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
+				layoutSet.getGroupId();
 
-		while (itr.hasNext()) {
-			PortletPreferences prefs = (PortletPreferences)itr.next();
-
-			Element el = root.addElement("portlet-preferences");
-
-			String portletId = prefs.getPortletId();
-			String layoutId = prefs.getLayoutId();
-
-			el.addAttribute("portlet-id", portletId);
-			el.addAttribute("layout-id", layoutId);
-			el.addElement("preferences").addCDATA(prefs.getPreferences());
-
-			// Portlet data
-
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(
-				layoutSet.getCompanyId(), portletId);
-
-			if (portlet != null) {
-				PortletDataHandler portletDataHandler =
-					portlet.getPortletDataHandler();
-
-				if (portletDataHandler != null) {
-					String data = null;
-
-					try {
-                        PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(prefs.getPreferences());
-						data = portletDataHandler.exportData(
-							layoutSet.getCompanyId(), layoutSet.getGroupId(), portletId, prefsImpl);
-					}
-					catch (PortletDataException pde) {
-						throw new PortalException(pde);
-					}
-
-                    Element el2 = el.addElement("portlet-data");
-                    if (data != null) {
-                        el2.addCDATA(data);
-                    }
-				}
-			}
-		}
+		exportPortletPreferences(
+			PortletKeys.PREFS_LAYOUT_ID_SHARED, groupPrefsOwnerId, root);
 
 		// XML file
 
@@ -447,6 +447,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
+		PortletDataContext context = new PortletDataContext(
+			layoutSet.getCompanyId(), layoutSet.getGroupId(),
+			CollectionFactory.getHashSet());
+
 		Group guestGroup = GroupLocalServiceUtil.getGroup(
 			layoutSet.getCompanyId(), GroupImpl.GUEST);
 
@@ -496,10 +500,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 		List newLayoutPKs = new ArrayList();
 
-		Iterator itr = root.elements("layout").iterator();
+		Iterator itr1 = root.elements("layout").iterator();
 
-		while (itr.hasNext()) {
-			Element layoutEl = (Element)itr.next();
+		while (itr1.hasNext()) {
+			Element layoutEl = (Element)itr1.next();
 
 			String layoutId = layoutEl.attributeValue("layout-id");
 			String parentLayoutId = layoutEl.elementText(
@@ -556,10 +560,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 			// Portlet permissions
 
-			List portlets = permissionsEl.elements("portlet");
+			Iterator itr2 = permissionsEl.elements("portlet").iterator();
 
-			for (int i = 0; i < portlets.size(); i++) {
-				Element portletEl = (Element)portlets.get(i);
+			while (itr2.hasNext()) {
+				Element portletEl = (Element)itr2.next();
 
 				String portletId = portletEl.attributeValue("portlet-id");
 
@@ -573,63 +577,26 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 						portletEl, "guest-actions");
 				}
 			}
-		}
 
-		deleteMissingLayouts(ownerId, newLayoutPKs);
+			// Portlet preferences
+
+			importPortletPreferences(layoutSet, layoutEl);
+
+			// Portlet data
+
+			importPortletData(context, layout, layoutEl);
+		}
 
 		// Portlet preferences
 
-		PortletPreferencesUtil.removeByOwnerId(ownerId);
+		importPortletPreferences(layoutSet, root);
 
-		itr = root.elements("portlet-preferences").iterator();
+		// Delete missing layouts
 
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
-			String portletId = el.attributeValue("portlet-id");
-			String layoutId = el.attributeValue("layout-id");
-			String preferences = el.elementText("preferences");
-
-			PortletPreferences prefs = PortletPreferencesUtil.create(
-				new PortletPreferencesPK(portletId, layoutId, ownerId));
-
-            prefs.setPreferences(preferences);
-
-            // Check to see if there is any custom portlet data importer...
-            Element portletData = el.element("portlet-data");
-            if (portletData != null) {
-                Portlet portlet = PortletLocalServiceUtil.getPortletById(layoutSet.getCompanyId(), portletId);
-                if (portlet != null) {
-                    PortletDataHandler portletDataHandler = portlet.getPortletDataHandler();
-                    if (portletDataHandler != null) {
-                        try {
-                            PortletPreferencesImpl prefsImpl = (PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(preferences);
-                            
-                            prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
-                                layoutSet.getCompanyId(), 
-                                layoutSet.getGroupId(),
-                                portletId,
-                                prefsImpl,
-                                portletData.getText());
-                            if (prefsImpl != null) {
-                                prefs.setPreferences(PortletPreferencesSerializer.toXML(prefsImpl));
-                            }
-                        }
-                        catch (PortletDataException pde) {
-                            throw new PortalException(pde);
-                        }
-                            
-                    }
-                    else {
-                        _log.warn(".LAR contains custom <portlet-data> for portlet Id " + portletId + " but no matching PortletDataHandler found.");
-                    }
-                }
-            }
-
-			PortletPreferencesUtil.update(prefs);
-		}
+		deleteMissingLayouts(ownerId, newLayoutPKs);
 
 		// Page count
+
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
@@ -830,6 +797,80 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 	}
 
+	protected void exportPortletData(
+			PortletDataContext context, Layout layout,
+			LayoutTypePortlet layoutTypePortlet, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr =
+			PortletPreferencesLocalServiceUtil.getPortletPreferencesByLayout(
+				layout.getLayoutId(), layout.getOwnerId()).iterator();
+
+		while (itr.hasNext()) {
+			PortletPreferences prefs = (PortletPreferences)itr.next();
+
+			String portletId = prefs.getPortletId();
+
+			if (layoutTypePortlet.hasPortletId(portletId)) {
+				exportPortletData(context, portletId, prefs, parentEl);
+			}
+		}
+	}
+
+	protected void exportPortletData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs, Element parentEl)
+		throws PortalException, SystemException {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			context.getCompanyId(), portletId);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not export portlet data for " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return;
+		}
+
+		PortletDataHandler portletDataHandler =
+			portlet.getPortletDataHandler();
+
+		if (portletDataHandler == null) {
+			return;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Exporting data for " + portletId);
+		}
+
+		String data = null;
+
+		PortletPreferencesImpl prefsImpl =
+			(PortletPreferencesImpl)
+				PortletPreferencesSerializer.fromDefaultXML(
+					prefs.getPreferences());
+
+		data = portletDataHandler.exportData(context, portletId, prefsImpl);
+
+		if (data == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Not exporting data for " + portletId +
+						" because null data was returned");
+			}
+
+			return;
+		}
+
+		Element el = parentEl.addElement("portlet-data");
+
+		el.addAttribute("portlet-id", portletId);
+		el.addCDATA(data);
+	}
+
 	protected void exportPortletPermissions(
 			String portletId, Layout layout, String groupId, Element parentEl,
 			String elName)
@@ -859,6 +900,40 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		}
 		catch (NoSuchResourceException nsre) {
 			_log.warn(nsre);
+		}
+	}
+
+	protected void exportPortletPreferences(
+			String layoutId, String ownerId, Element parentEl)
+		throws PortalException, SystemException {
+
+		exportPortletPreferences(layoutId, ownerId, null, parentEl);
+	}
+
+	protected void exportPortletPreferences(
+			String layoutId, String ownerId,
+			LayoutTypePortlet layoutTypePortlet, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr =
+			PortletPreferencesLocalServiceUtil.getPortletPreferencesByLayout(
+				layoutId, ownerId).iterator();
+
+		while (itr.hasNext()) {
+			PortletPreferences prefs = (PortletPreferences)itr.next();
+
+			String portletId = prefs.getPortletId();
+
+			if ((layoutTypePortlet == null) ||
+				(layoutTypePortlet.hasPortletId(portletId))) {
+
+				Element el = parentEl.addElement("portlet-preferences");
+
+				el.addAttribute("portlet-id", portletId);
+				el.addAttribute("layout-id", layoutId);
+				el.addAttribute("owner-id", ownerId);
+				el.addElement("preferences").addCDATA(prefs.getPreferences());
+			}
 		}
 	}
 
@@ -956,6 +1031,83 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			resource.getResourceId());
 	}
 
+	protected void importPortletData(
+			PortletDataContext context, Layout layout, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = parentEl.elements("portlet-data").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String portletId = el.attributeValue("portlet-id");
+
+			PortletPreferencesPK pk = new PortletPreferencesPK(
+				portletId, layout.getLayoutId(), layout.getOwnerId());
+
+			PortletPreferences prefs =
+				PortletPreferencesUtil.findByPrimaryKey(pk);
+
+			String preferences =
+				importPortletData(context, portletId, prefs, el);
+
+			if (preferences != null) {
+				prefs.setPreferences(preferences);
+
+				PortletPreferencesUtil.update(prefs);
+			}
+		}
+	}
+
+	protected String importPortletData(
+			PortletDataContext context, String portletId,
+			PortletPreferences prefs, Element parentEl)
+		throws PortalException, SystemException {
+
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(
+			context.getCompanyId(), portletId);
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not import portlet data for " + portletId +
+						" because the portlet does not exist");
+			}
+
+			return null;
+		}
+
+		PortletDataHandler portletDataHandler = portlet.getPortletDataHandler();
+
+		if (portlet == null) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Do not import portlet data for " + portletId +
+						" because the portlet does not have a " +
+							"PortletDataHandler");
+			}
+
+			return null;
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Importing data for " + portletId);
+		}
+
+		PortletPreferencesImpl prefsImpl =
+			(PortletPreferencesImpl)PortletPreferencesSerializer.fromDefaultXML(
+				prefs.getPreferences());
+
+		prefsImpl = (PortletPreferencesImpl)portletDataHandler.importData(
+			context, portletId, prefsImpl, parentEl.getText());
+
+		if (prefsImpl == null) {
+			return null;
+		}
+
+		return PortletPreferencesSerializer.toXML(prefsImpl);
+	}
+
 	protected void importPortletPermissions(
 			String portletId, Layout layout, String groupId, Element parentEl,
 			String elName)
@@ -1010,6 +1162,55 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		PermissionLocalServiceUtil.setGroupPermissions(
 			groupId, (String[])actions.toArray(new String[0]),
 			resource.getResourceId());
+	}
+
+	protected void importPortletPreferences(
+			LayoutSet layoutSet, Element parentEl)
+		throws PortalException, SystemException {
+
+		Iterator itr = parentEl.elements("portlet-preferences").iterator();
+
+		while (itr.hasNext()) {
+			Element el = (Element)itr.next();
+
+			String portletId = el.attributeValue("portlet-id");
+			String layoutId = el.attributeValue("layout-id");
+			String ownerId = el.attributeValue("owner-id");
+			String preferences = el.elementText("preferences");
+
+			if (ownerId.startsWith(PortletKeys.PREFS_OWNER_ID_GROUP)) {
+				ownerId =
+					PortletKeys.PREFS_OWNER_ID_GROUP + StringPool.PERIOD +
+						layoutSet.getGroupId();
+			}
+			else if (ownerId.indexOf(PortletKeys.PREFS_OWNER_ID_USER) != -1) {
+				ownerId =
+					layoutSet.getOwnerId() + StringPool.PERIOD +
+						PortletKeys.PREFS_OWNER_ID_USER + StringPool.PERIOD +
+							UserImpl.getDefaultUserId(layoutSet.getCompanyId());
+			}
+			else if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
+				ownerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
+			}
+			else if (ownerId.startsWith(LayoutImpl.PRIVATE)) {
+				ownerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
+			}
+
+			PortletPreferencesPK pk = new PortletPreferencesPK(
+				portletId, layoutId, ownerId);
+
+			try {
+				PortletPreferencesLocalServiceUtil.deletePortletPreferences(pk);
+			}
+			catch (NoSuchPortletPreferencesException nsppe) {
+			}
+
+			PortletPreferences prefs = PortletPreferencesUtil.create(pk);
+
+			prefs.setPreferences(preferences);
+
+			PortletPreferencesUtil.update(prefs);
+		}
 	}
 
 	protected boolean isDescendant(Layout layout, String layoutId)

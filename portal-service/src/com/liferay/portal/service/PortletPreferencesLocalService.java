@@ -53,6 +53,10 @@ public interface PortletPreferencesLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getPortletPreferencesByLayout(
+		java.lang.String layoutId, java.lang.String ownerId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getPortletPreferencesByOwnerId(
 		java.lang.String ownerId) throws com.liferay.portal.SystemException;
 

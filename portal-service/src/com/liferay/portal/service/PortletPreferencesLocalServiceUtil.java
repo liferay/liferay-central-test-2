@@ -76,6 +76,15 @@ public class PortletPreferencesLocalServiceUtil {
 		return portletPreferencesLocalService.getPortletPreferences(pk);
 	}
 
+	public static java.util.List getPortletPreferencesByLayout(
+		java.lang.String layoutId, java.lang.String ownerId)
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		return portletPreferencesLocalService.getPortletPreferencesByLayout(layoutId,
+			ownerId);
+	}
+
 	public static java.util.List getPortletPreferencesByOwnerId(
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();

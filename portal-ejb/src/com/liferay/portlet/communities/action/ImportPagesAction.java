@@ -67,7 +67,7 @@ public class ImportPagesAction extends EditPagesAction {
 			SessionMessages.add(req, "request_processed");
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e.getMessage(), e);
 
 			SessionErrors.add(req, LayoutImportException.class.getName());
 		}

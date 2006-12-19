@@ -157,7 +157,7 @@
 	</category>
 
 	<category name="com.liferay.portal.service.impl.LayoutLocalServiceImpl">
-		<priority value="WARN" />
+		<priority value="ERROR" />
 	</category>
 
 	<category name="com.liferay.portal.service.impl.PermissionLocalServiceImpl">
@@ -294,6 +294,10 @@
 
 	<category name="com.liferay.portlet.journal">
 		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl">
+		<priority value="WARN" />
 	</category>
 
 	<category name="com.liferay.portlet.mail">

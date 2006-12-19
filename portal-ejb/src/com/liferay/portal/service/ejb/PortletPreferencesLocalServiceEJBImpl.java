@@ -81,6 +81,14 @@ public class PortletPreferencesLocalServiceEJBImpl
 													.getPortletPreferences(pk);
 	}
 
+	public java.util.List getPortletPreferencesByLayout(
+		java.lang.String layoutId, java.lang.String ownerId)
+		throws com.liferay.portal.SystemException {
+		return PortletPreferencesLocalServiceFactory.getTxImpl()
+													.getPortletPreferencesByLayout(layoutId,
+			ownerId);
+	}
+
 	public java.util.List getPortletPreferencesByOwnerId(
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
 		return PortletPreferencesLocalServiceFactory.getTxImpl()

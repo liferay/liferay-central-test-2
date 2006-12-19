@@ -697,6 +697,8 @@ public class PropsUtil {
 
 	public static final String JOURNAL_EMAIL_ARTICLE_REVIEW_BODY = "journal.email.article.review.body";
 
+	public static final String JOURNAL_LAR_CREATION_STRATEGY = "journal.lar.creation.strategy";
+
 	// Journal Articles Portlet
 
 	public static final String JOURNAL_ARTICLES_PAGE_DELTA_VALUES = "journal.articles.page.delta.values";

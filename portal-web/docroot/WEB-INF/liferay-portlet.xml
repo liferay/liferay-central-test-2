@@ -154,7 +154,7 @@
 		<configuration-path>/journal/edit_configuration</configuration-path>
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
 		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
-		<!--<portlet-data-handler-class>com.liferay.portlet.journal.lar.PortletDataHandlerImpl</portlet-data-handler-class>-->
+		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -521,7 +521,7 @@
 		<portlet-name>56</portlet-name>
 		<struts-path>journal_content</struts-path>
 		<configuration-path>/journal_content/edit_configuration</configuration-path>
-		<portlet-data-handler-class>com.liferay.portlet.journal.lar.DefaultJournalContentPortletDataHandler</portlet-data-handler-class>
+		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

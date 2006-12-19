@@ -94,6 +94,12 @@ public class PortletPreferencesLocalServiceImpl
 		return PortletPreferencesUtil.findByPrimaryKey(pk);
 	}
 
+	public List getPortletPreferencesByLayout(String layoutId, String ownerId)
+		throws SystemException {
+
+		return PortletPreferencesUtil.findByL_O(layoutId, ownerId);
+	}
+
 	public List getPortletPreferencesByOwnerId(String ownerId)
 		throws SystemException {
 
