@@ -258,8 +258,15 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Resources
 
-		if (creatorUserId == null) {
+		String creatorUserName;
+
+		if (Validator.isNull(creatorUserId)) {
 			creatorUserId = user.getUserId();
+			creatorUserName = user.getFullName();
+		}
+		else {
+			User creatorUser = UserUtil.findByPrimaryKey(creatorUserId);
+			creatorUserName = creatorUser.getFullName();
 		}
 
 		ResourceLocalServiceUtil.addResources(
@@ -290,9 +297,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 		Contact contact = ContactUtil.create(contactId);
 
 		contact.setCompanyId(user.getCompanyId());
-		contact.setUserId(user.getUserId());
-		contact.setUserName(
-			UserImpl.getFullName(firstName, middleName, lastName));
+		contact.setUserId(creatorUserId);
+		contact.setUserName(creatorUserName);
 		contact.setCreateDate(now);
 		contact.setModifiedDate(now);
 		contact.setAccountId(user.getCompanyId());

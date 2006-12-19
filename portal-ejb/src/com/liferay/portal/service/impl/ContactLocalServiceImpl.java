@@ -40,8 +40,6 @@ import com.liferay.portal.service.persistence.ContactUtil;
  */
 public class ContactLocalServiceImpl implements ContactLocalService {
 
-	// Business methods
-
 	public Contact getContact(String contactId)
 		throws PortalException, SystemException {
 
