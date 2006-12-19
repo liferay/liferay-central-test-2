@@ -55,7 +55,7 @@ import org.dom4j.io.SAXReader;
 public class JournalVmUtil {
 
 	public static String transform(
-			Map tokens, String languageId, String xml, String vmScript)
+			Map tokens, String languageId, String xml, String script)
 		throws TransformException {
 
 		StringWriter output = new StringWriter();
@@ -88,7 +88,7 @@ public class JournalVmUtil {
 					companyId + StringPool.SLASH + groupId);
 
 			load = Velocity.evaluate(
-				context, output, JournalVmUtil.class.getName(), vmScript);
+				context, output, JournalVmUtil.class.getName(), script);
 		}
 		catch (Exception e) {
 			if (e instanceof DocumentException) {
