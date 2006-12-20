@@ -499,4 +499,14 @@ public class FileUtil {
 		fos.close();
 	}
 
+	public static void write(String fileName, InputStream in)
+		throws IOException {
+
+		write(fileName, getBytes(in));
+	}
+
+	public static void write(File file, InputStream in) throws IOException {
+		write(file, getBytes(in));
+	}
+
 }
