@@ -478,7 +478,7 @@ public class RenderRequestImpl implements RenderRequest {
 
 		_portletName = portlet.getPortletId();
 
-		String prefix = PortalUtil.getPortletNamespace(_portletName);
+		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
 
 		Map sharedSessionAttributes =
 			SharedSessionUtil.getSharedSessionAttributes(req);
@@ -495,8 +495,8 @@ public class RenderRequestImpl implements RenderRequest {
 		DynamicServletRequest dynamicReq = null;
 
 		if (portlet.isPrivateRequestAttributes()) {
-			dynamicReq = new NamespaceServletRequest(
-				req, portlet.getServletContextName(), false);
+			dynamicReq = new NamespaceServletRequest(req, 
+				portlet.getServletContextName(), _portletName, false);
 		}
 		else {
 			dynamicReq = new DynamicServletRequest(req, false);
@@ -547,7 +547,7 @@ public class RenderRequestImpl implements RenderRequest {
 				req, plid, _portletName);
 
 			if (!_portletName.equals(req.getParameter("p_p_id"))) {
-				_putNamespaceParams(req, prefix, plid, renderParameters);
+				_putNamespaceParams(req, portletNamespace, plid, renderParameters);
 			}
 
 			enu = Collections.enumeration(renderParameters.keySet());
@@ -556,9 +556,11 @@ public class RenderRequestImpl implements RenderRequest {
 		while (enu.hasMoreElements()) {
 			String param = (String)enu.nextElement();
 
-			if (param.startsWith(prefix) && !cachePortlet.isFacesPortlet()) {
+			if (param.startsWith(portletNamespace) && 
+				!cachePortlet.isFacesPortlet()) {
+				
 				String newParam =
-					param.substring(prefix.length(), param.length());
+					param.substring(portletNamespace.length(), param.length());
 				String[] values = null;
 
 				if (portletFocus) {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -55,23 +56,23 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	public static final String[] CUSTOM_RESERVED_PARAMS = PropsUtil.getArray(
 		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
 
-	public NamespaceServletRequest(HttpServletRequest req,
-								   String servletContextName) {
+	public NamespaceServletRequest(
+		HttpServletRequest req, String attrNamespace, String paramNamespace) {
 
-		this(req, servletContextName, true);
+		this(req, attrNamespace, paramNamespace, true);
 	}
 
-	public NamespaceServletRequest(HttpServletRequest req,
-								   String servletContextName, boolean inherit) {
+	public NamespaceServletRequest(HttpServletRequest req, 
+		String attrNamespace, String portletName, boolean inherit) {
 
 		super(req, inherit);
 
-		_servletContextName = servletContextName;
-		_namespace = servletContextName;
+		_attrNamespace = attrNamespace;
+		_paramNamespace = PortalUtil.getPortletNamespace(portletName);
 	}
 
 	public Object getAttribute(String name) {
-		Object value = super.getAttribute(_namespace + name);
+		Object value = super.getAttribute(_attrNamespace + name);
 
 		if (value == null) {
 			value = super.getAttribute(name);
@@ -88,8 +89,8 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		while (enu.hasMoreElements()) {
 			String name = (String)enu.nextElement();
 
-			if (name.startsWith(_namespace)) {
-				names.add(name.substring(_namespace.length(), name.length()));
+			if (name.startsWith(_attrNamespace)) {
+				names.add(name.substring(_attrNamespace.length(), name.length()));
 			}
 		}
 
@@ -101,7 +102,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 			super.setAttribute(name, value);
 		}
 		else {
-			super.setAttribute(_namespace + name, value);
+			super.setAttribute(_attrNamespace + name, value);
 		}
 	}
 
@@ -121,7 +122,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 			super.removeAttribute(name);
 		}
 		else {
-			super.removeAttribute(_namespace + name);
+			super.removeAttribute(_attrNamespace + name);
 		}
 	}
 
@@ -133,7 +134,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		String value = super.getParameter(name);
 
 		if (value == null) {
-			value = super.getParameter(_namespace + name);
+			value = super.getParameter(_paramNamespace + name);
 		}
 
 		return value;
@@ -154,7 +155,7 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return false;
 	}
 
-	private String _servletContextName;
-	private String _namespace;
+	private String _attrNamespace;
+	private String _paramNamespace;
 
 }
