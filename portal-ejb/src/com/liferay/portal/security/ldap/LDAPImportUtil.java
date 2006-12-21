@@ -251,7 +251,7 @@ public class LDAPImportUtil {
 		String creatorUserId = null;
 		boolean autoUserId = false;
 		String userId = LDAPUtil.getAttributeValue(
-			attrs, userMappings.getProperty("userId"));
+			attrs, userMappings.getProperty("userId")).toLowerCase();
 		boolean autoPassword = true;
 		String password1 = StringPool.BLANK;
 		String password2 = StringPool.BLANK;

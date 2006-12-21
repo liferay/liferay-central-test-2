@@ -328,7 +328,7 @@ public class LDAPAuth implements Authenticator {
 
 		if (Validator.isNull(userId)) {
 			userId = LDAPUtil.getAttributeValue(
-				attrs, userMappings.getProperty("userId"));
+				attrs, userMappings.getProperty("userId")).toLowerCase();
 		}
 
 		boolean autoPassword = false;
