@@ -345,7 +345,6 @@ public class PortletDeployer extends BaseDeployer {
 	}
 
 	private void _setupJSF(File facesXML, File portletXML) throws Exception {
-		_myFacesPortlet = false;
 		_sunFacesPortlet = false;
 
 		if (!facesXML.exists()) {
@@ -369,12 +368,7 @@ public class PortletDeployer extends BaseDeployer {
 
 			String portletClass = portlet.elementText("portlet-class");
 
-			if (portletClass.equals(Constants.JSF_MYFACES)) {
-				_myFacesPortlet = true;
-
-				break;
-			}
-			else if (portletClass.equals(Constants.JSF_SUN)) {
+			if (portletClass.equals(Constants.JSF_SUN)) {
 				_sunFacesPortlet = true;
 
 				break;
@@ -382,6 +376,10 @@ public class PortletDeployer extends BaseDeployer {
 		}
 
 		// faces-config.xml
+		
+		if (!appServerType.equals("orion") || !_sunFacesPortlet) {
+			return;
+		}
 
 		reader = SAXReaderFactory.getInstance();
 
@@ -391,32 +389,16 @@ public class PortletDeployer extends BaseDeployer {
 
 		Element factoryEl = root.element("factory");
 
-		Element renderKitFactoryEl = null;
-		Element facesContextFactoryEl = null;
-
 		if (factoryEl == null) {
 			factoryEl = root.addElement("factory");
 		}
 
-		renderKitFactoryEl = factoryEl.element("render-kit-factory");
-		facesContextFactoryEl = factoryEl.element("faces-context-factory");
+		Element renderKitFactoryEl = factoryEl.element("render-kit-factory");
 
-		if ((appServerType.equals("orion") && (_sunFacesPortlet) &&
-			(renderKitFactoryEl == null))) {
-
+		if (renderKitFactoryEl == null) {
 			renderKitFactoryEl = factoryEl.addElement("render-kit-factory");
 
 			renderKitFactoryEl.addText(Constants.LIFERAY_RENDER_KIT_FACTORY);
-		}
-		else if (_myFacesPortlet && (facesContextFactoryEl == null)) {
-			facesContextFactoryEl =
-				factoryEl.addElement("faces-context-factory");
-
-			facesContextFactoryEl.addText(Constants.MYFACES_CONTEXT_FACTORY);
-		}
-
-		if (!appServerType.equals("orion") && (_sunFacesPortlet)) {
-			factoryEl.detach();
 		}
 
 		XMLMerger merger = new XMLMerger(new FacesXMLDescriptor());

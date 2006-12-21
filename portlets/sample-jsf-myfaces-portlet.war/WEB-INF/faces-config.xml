@@ -2,9 +2,7 @@
 <!DOCTYPE faces-config PUBLIC "-//Sun Microsystems, Inc.//DTD JavaServer Faces Config 1.1//EN" "http://java.sun.com/dtd/web-facesconfig_1_1.dtd">
 
 <faces-config xmlns="http://java.sun.com/JSF/Configuration">
-	<factory>
-		<faces-context-factory>com.liferay.util.jsf.apache.myfaces.context.MyFacesContextFactoryImpl</faces-context-factory>
-	</factory>
+	<factory/>
 	<managed-bean>
 		<managed-bean-name>user</managed-bean-name>
 		<managed-bean-class>com.sample.jsfmyfaces.bean.UserBean</managed-bean-class>
