@@ -724,7 +724,7 @@ auto.deploy.dest.dir=../webapps</echo>
 		<available file="${lp.ext.dir}/ext-ear" type="dir" property="lp.ext.dir.available" />
 
 		<antcall target="build-ext-dir" />
-		
+
 		<copy todir="${lp.ext.dir}" overwrite="yes">
 			<fileset
 				dir="."
