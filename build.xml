@@ -724,7 +724,7 @@ auto.deploy.dest.dir=../webapps</echo>
 		<available file="${lp.ext.dir}/ext-ear" type="dir" property="lp.ext.dir.available" />
 
 		<antcall target="build-ext-dir" />
-
+		
 		<copy todir="${lp.ext.dir}" overwrite="yes">
 			<fileset
 				dir="."
@@ -765,6 +765,18 @@ auto.deploy.dest.dir=../webapps</echo>
 		<mkdir dir="${lp.ext.dir}/ext-lib/development" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/global" />
 		<mkdir dir="${lp.ext.dir}/ext-lib/portal" />
+
+		<if>
+			<not>
+				<available file="${lp.ext.dir}/ext-service" type="dir" />
+			</not>
+			<then>
+				<mkdir dir="${lp.ext.dir}/ext-service" />
+				<copy todir="${lp.ext.dir}/ext-service" filtering="true">
+					<fileset dir="tools/ext_tmpl/ext-service" />
+				</copy>
+			</then>
+		</if>
 
 		<copy file="lib/readme.txt" todir="${lp.ext.dir}/ext-lib" />
 
