@@ -39,6 +39,9 @@ import javax.servlet.http.HttpServletRequest;
 /**
  * <a href="NamespaceServletRequest.java.html"><b><i>View Source</i></b></a>
  *
+ * This class ensures that portlet attributes and parameters are private to
+ * the portlet. 
+ *
  * @author  Brian Myunghun Kim
  *
  */
@@ -63,12 +66,12 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	public NamespaceServletRequest(HttpServletRequest req, 
-		String attrNamespace, String portletName, boolean inherit) {
+		String attrNamespace, String paramNamespace, boolean inherit) {
 
 		super(req, inherit);
 
 		_attrNamespace = attrNamespace;
-		_paramNamespace = PortalUtil.getPortletNamespace(portletName);
+		_paramNamespace = paramNamespace;
 	}
 
 	public Object getAttribute(String name) {

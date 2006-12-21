@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -145,9 +146,13 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					DynamicServletRequest dynamicReq = null;
 
 					if (reqImpl.isPrivateRequestAttributes()) {
+						String portletNamespace = 
+							PortalUtil.getPortletNamespace(
+								reqImpl.getPortletName());
+
 						dynamicReq = new NamespaceServletRequest(
-							httpReq, _portletCtxImpl.getPortletContextName(),
-							reqImpl.getPortletName());
+							httpReq, portletNamespace,
+							portletNamespace);
 					}
 					else {
 						dynamicReq = new DynamicServletRequest(httpReq);
