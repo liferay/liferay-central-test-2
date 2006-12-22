@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
