@@ -381,6 +381,10 @@ public class JournalContentSearchUtil {
 		getPersistence().removeByC_G_A(companyId, groupId, articleId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByOwnerId(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOwnerId(ownerId);
@@ -401,6 +405,10 @@ public class JournalContentSearchUtil {
 		java.lang.String groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_G_A(companyId, groupId, articleId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

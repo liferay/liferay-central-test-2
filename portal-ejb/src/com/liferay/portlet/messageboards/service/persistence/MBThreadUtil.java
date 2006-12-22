@@ -213,9 +213,17 @@ public class MBThreadUtil {
 		getPersistence().removeByCategoryId(categoryId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCategoryId(categoryId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

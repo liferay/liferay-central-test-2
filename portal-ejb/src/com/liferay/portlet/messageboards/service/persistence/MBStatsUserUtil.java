@@ -311,6 +311,10 @@ public class MBStatsUserUtil {
 		getPersistence().removeByG_M(groupId, messageCount);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
@@ -324,6 +328,10 @@ public class MBStatsUserUtil {
 	public static int countByG_M(java.lang.String groupId, int messageCount)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_M(groupId, messageCount);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

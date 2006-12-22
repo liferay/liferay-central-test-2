@@ -360,6 +360,10 @@ public class MBMessageFlagUtil {
 		getPersistence().removeByT_U(topicId, userId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByTopicId(java.lang.String topicId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByTopicId(topicId);
@@ -378,6 +382,10 @@ public class MBMessageFlagUtil {
 	public static int countByT_U(java.lang.String topicId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByT_U(topicId, userId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

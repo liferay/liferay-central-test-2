@@ -216,9 +216,17 @@ public class ShoppingOrderItemUtil {
 		getPersistence().removeByOrderId(orderId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByOrderId(java.lang.String orderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOrderId(orderId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

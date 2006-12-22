@@ -330,6 +330,10 @@ public class DLFolderUtil {
 		getPersistence().removeByP_N(parentFolderId, name);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
@@ -349,6 +353,10 @@ public class DLFolderUtil {
 	public static int countByP_N(java.lang.String parentFolderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().countByP_N(parentFolderId, name);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

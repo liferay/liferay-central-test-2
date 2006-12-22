@@ -264,6 +264,10 @@ public class PollsVoteUtil {
 		getPersistence().removeByQ_C(questionId, choiceId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByQuestionId(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByQuestionId(questionId);
@@ -272,6 +276,10 @@ public class PollsVoteUtil {
 	public static int countByQ_C(java.lang.String questionId,
 		java.lang.String choiceId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByQ_C(questionId, choiceId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

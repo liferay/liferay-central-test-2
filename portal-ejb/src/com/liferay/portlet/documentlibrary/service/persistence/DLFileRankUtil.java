@@ -264,6 +264,10 @@ public class DLFileRankUtil {
 		getPersistence().removeByF_N(folderId, name);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
@@ -272,6 +276,10 @@ public class DLFileRankUtil {
 	public static int countByF_N(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().countByF_N(folderId, name);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

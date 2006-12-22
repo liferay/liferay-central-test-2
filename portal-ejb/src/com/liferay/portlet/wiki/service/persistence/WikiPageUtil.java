@@ -363,6 +363,10 @@ public class WikiPageUtil {
 		getPersistence().removeByN_T_H(nodeId, title, head);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByNodeId(java.lang.String nodeId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByNodeId(nodeId);
@@ -382,6 +386,10 @@ public class WikiPageUtil {
 		java.lang.String title, boolean head)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByN_T_H(nodeId, title, head);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

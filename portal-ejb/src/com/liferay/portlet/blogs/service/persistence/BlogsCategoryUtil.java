@@ -221,9 +221,17 @@ public class BlogsCategoryUtil {
 		getPersistence().removeByParentCategoryId(parentCategoryId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByParentCategoryId(java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByParentCategoryId(parentCategoryId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

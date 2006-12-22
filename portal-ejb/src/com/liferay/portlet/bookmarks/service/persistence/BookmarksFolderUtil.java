@@ -264,6 +264,10 @@ public class BookmarksFolderUtil {
 		getPersistence().removeByG_P(groupId, parentFolderId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
@@ -273,6 +277,10 @@ public class BookmarksFolderUtil {
 		java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P(groupId, parentFolderId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

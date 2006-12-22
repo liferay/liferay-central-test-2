@@ -224,10 +224,18 @@ public class ShoppingOrderUtil {
 		getPersistence().removeByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByG_U_PPPS(java.lang.String groupId,
 		java.lang.String userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_U_PPPS(groupId, userId, ppPaymentStatus);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

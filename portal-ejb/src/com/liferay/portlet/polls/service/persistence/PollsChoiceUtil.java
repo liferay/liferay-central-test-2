@@ -215,9 +215,17 @@ public class PollsChoiceUtil {
 		getPersistence().removeByQuestionId(questionId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByQuestionId(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByQuestionId(questionId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

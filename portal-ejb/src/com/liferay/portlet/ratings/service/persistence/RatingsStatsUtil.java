@@ -187,9 +187,17 @@ public class RatingsStatsUtil {
 		getPersistence().removeByC_C(className, classPK);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByC_C(java.lang.String className,
 		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C(className, classPK);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

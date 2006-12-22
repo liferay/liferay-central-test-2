@@ -363,6 +363,10 @@ public class MBMessageUtil {
 		getPersistence().removeByT_P(threadId, parentMessageId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCategoryId(categoryId);
@@ -382,6 +386,10 @@ public class MBMessageUtil {
 		java.lang.String parentMessageId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByT_P(threadId, parentMessageId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

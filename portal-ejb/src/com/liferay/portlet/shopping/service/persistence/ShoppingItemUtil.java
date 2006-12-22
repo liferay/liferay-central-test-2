@@ -233,6 +233,10 @@ public class ShoppingItemUtil {
 		getPersistence().removeByC_S(companyId, sku);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCategoryId(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCategoryId(categoryId);
@@ -241,6 +245,10 @@ public class ShoppingItemUtil {
 	public static int countByC_S(java.lang.String companyId,
 		java.lang.String sku) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_S(companyId, sku);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getShoppingItemPrices(java.lang.String pk)
