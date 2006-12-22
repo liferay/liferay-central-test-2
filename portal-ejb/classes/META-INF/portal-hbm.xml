@@ -118,7 +118,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.EmailAddressImpl" table="EmailAddress">
 		<cache usage="read-write" />
-		<id name="emailAddressId" type="java.lang.String">
+		<id name="emailAddressId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />

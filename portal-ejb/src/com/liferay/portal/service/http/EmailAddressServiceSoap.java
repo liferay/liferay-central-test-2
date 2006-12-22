@@ -53,7 +53,7 @@ public class EmailAddressServiceSoap {
 		}
 	}
 
-	public static void deleteEmailAddress(java.lang.String emailAddressId)
+	public static void deleteEmailAddress(long emailAddressId)
 		throws RemoteException {
 		try {
 			EmailAddressServiceUtil.deleteEmailAddress(emailAddressId);
@@ -66,7 +66,7 @@ public class EmailAddressServiceSoap {
 	}
 
 	public static com.liferay.portal.model.EmailAddressSoap getEmailAddress(
-		java.lang.String emailAddressId) throws RemoteException {
+		long emailAddressId) throws RemoteException {
 		try {
 			com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.getEmailAddress(emailAddressId);
 
@@ -96,8 +96,8 @@ public class EmailAddressServiceSoap {
 	}
 
 	public static com.liferay.portal.model.EmailAddressSoap updateEmailAddress(
-		java.lang.String emailAddressId, java.lang.String address,
-		java.lang.String typeId, boolean primary) throws RemoteException {
+		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.EmailAddress returnValue = EmailAddressServiceUtil.updateEmailAddress(emailAddressId,
 					address, typeId, primary);

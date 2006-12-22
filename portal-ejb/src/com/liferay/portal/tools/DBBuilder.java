@@ -1118,84 +1118,84 @@ public class DBBuilder {
 	private static String[] _TEMPLATE = {
 		"##", "TRUE", "FALSE",
 		"'01/01/1970'", "CURRENT_TIMESTAMP",
-		" BOOLEAN", " DATE", " DOUBLE", " INTEGER", " STRING", " TEXT",
+		" BOOLEAN", " DATE", " DOUBLE", " INTEGER", " BIGINT", " STRING", " TEXT",
 		" VARCHAR", " IDENTITY", "COMMIT_TRANSACTION"
 	};
 
 	private static String[] _DB2 = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double", " integer", " varchar(500)",
+		" smallint", " timestamp", " double", " integer", " bigint", " varchar(500)",
 		" clob", " varchar", " generated always as identity", "commit"
 	};
 
 	private static String[] _DERBY = {
 		"--", "1", "0",
 		"'1970-01-01-00.00.00.000000'", "current timestamp",
-		" smallint", " timestamp", " double", " integer", " long varchar",
+		" smallint", " timestamp", " double", " integer", " bigint", " long varchar",
 		" clob", " varchar", " generated always as identity", "commit"
 	};
 
 	private static String[] _FIREBIRD = {
 		"--", "1", "0",
 		"'01/01/1970'", "current_timestamp",
-		" smallint", " timestamp", " double precision", " integer", " varchar(4000)",
+		" smallint", " timestamp", " double precision", " integer", " int64", " varchar(4000)",
 		" blob", " varchar", "", "commit"
 	};
 
 	private static String[] _HYPERSONIC = {
 		"//", "true", "false",
 		"'1970-01-01'", "now()",
-		" bit", " timestamp", " double", " int", " longvarchar", " longvarchar",
+		" bit", " timestamp", " double", " int", " bigint", " longvarchar", " longvarchar",
 		" varchar", "", "commit"
 	};
 
 	private static String[] _JDATASTORE = {
 		"--", "TRUE", "FALSE",
 		"'1970-01-01'", "current_timestamp",
-		" boolean", " date", " double", " integer", " long varchar",
+		" boolean", " date", " double", " integer", " bigint", " long varchar",
 		" long varchar", " varchar", "", "commit"
 	};
 
 	private static String[] _MYSQL = {
 		"##", "1", "0",
 		"'1970-01-01'", "now()",
-		" tinyint", " datetime", " double", " integer", " longtext",
+		" tinyint", " datetime", " double", " integer", " bigint", " longtext",
 		" longtext", " varchar", "  auto_increment", "commit"
 	};
 
 	private static String[] _ORACLE = {
 		"--", "1", "0",
 		"to_date('1970-01-01 00:00:00','YYYY-MM-DD HH24:MI:SS')", "sysdate",
-		" number(1, 0)", " timestamp", " number(30,20)", " number(30,0)",
+		" number(1, 0)", " timestamp", " number(30,20)", " number(30,0)", " number(30,0)",
 		" varchar2(4000)", " clob", " varchar2", "", "commit"
 	};
 
 	private static String[] _POSTGRESQL = {
 		"--", "true", "false",
 		"'01/01/1970'", "current_timestamp",
-		" bool", " timestamp", " double precision", " integer", " text", " text",
+		" bool", " timestamp", " double precision", " integer", " bigint", " text", " text",
 		" varchar", "", "commit"
 	};
 
 	private static String[] _SAP = {
 		"##", "TRUE", "FALSE",
 		"'1970-01-01 00:00:00.000000'", "timestamp",
-		" boolean", " timestamp", " float", " int", " long", " long",
+		" boolean", " timestamp", " float", " int", " bigint", " varchar", " varchar",
 		" varchar", "", "commit"
 	};
 
 	private static String[] _SQL_SERVER = {
 		"--", "1", "0",
 		"'19700101'", "GetDate()",
-		" bit", " datetime", " float", " int", " varchar(1000)", " text",
+		" bit", " datetime", " float", " int", " bigint", " varchar(1000)", " text",
 		" varchar", "  identity(1,1)", "go"
 	};
 
 	private static String[] _SYBASE = {
 		"--", "1", "0",
 		"'19700101'", "getdate()",
-		" int", " datetime", " float", " int", " varchar(1000)", " text",
+		" int", " datetime", " float", " int", " decimal(20,0)", " varchar(1000)", " text",
 		" varchar", "  identity(1,1)", "go"
 	};
 

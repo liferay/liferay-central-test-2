@@ -41,11 +41,18 @@ public class EmailAddressLocalServiceUtil {
 			classPK, address, typeId, primary);
 	}
 
-	public static void deleteEmailAddress(java.lang.String emailAddressId)
+	public static void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 		emailAddressLocalService.deleteEmailAddress(emailAddressId);
+	}
+
+	public static void deleteEmailAddresses()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+		emailAddressLocalService.deleteEmailAddresses();
 	}
 
 	public static void deleteEmailAddresses(java.lang.String companyId,
@@ -57,12 +64,19 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
 		return emailAddressLocalService.getEmailAddress(emailAddressId);
+	}
+
+	public static java.util.List getEmailAddresses()
+		throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getEmailAddresses();
 	}
 
 	public static java.util.List getEmailAddresses(java.lang.String companyId,
@@ -75,8 +89,8 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
-		java.lang.String emailAddressId, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();

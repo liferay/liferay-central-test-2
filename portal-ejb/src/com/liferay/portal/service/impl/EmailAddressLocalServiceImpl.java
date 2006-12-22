@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.PortalException;
@@ -59,11 +60,11 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		Date now = new Date();
 
 		validate(
-			null, user.getCompanyId(), className, classPK, address, typeId,
+			0, user.getCompanyId(), className, classPK, address, typeId,
 			primary);
 
-		String emailAddressId = Long.toString(CounterLocalServiceUtil.increment(
-			EmailAddress.class.getName()));
+		long emailAddressId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
 
@@ -83,10 +84,16 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		return emailAddress;
 	}
 
-	public void deleteEmailAddress(String emailAddressId)
+	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
 		EmailAddressUtil.remove(emailAddressId);
+	}
+
+	public void deleteEmailAddresses()
+		throws PortalException, SystemException {
+
+		EmailAddressUtil.removeAll();
 	}
 
 	public void deleteEmailAddresses(
@@ -96,10 +103,16 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		EmailAddressUtil.removeByC_C_C(companyId, className, classPK);
 	}
 
-	public EmailAddress getEmailAddress(String emailAddressId)
+	public EmailAddress getEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
 		return EmailAddressUtil.findByPrimaryKey(emailAddressId);
+	}
+
+	public List getEmailAddresses()
+		throws SystemException {
+
+		return EmailAddressUtil.findAll();
 	}
 
 	public List getEmailAddresses(
@@ -110,7 +123,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 	}
 
 	public EmailAddress updateEmailAddress(
-			String emailAddressId, String address, String typeId,
+			long emailAddressId, String address, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -130,7 +143,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 	}
 
 	protected void validate(
-			String emailAddressId, String companyId, String className,
+			long emailAddressId, String companyId, String className,
 			String classPK, String address, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -138,7 +151,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			throw new EmailAddressException();
 		}
 
-		if (emailAddressId != null) {
+		if (emailAddressId > 0) {
 			EmailAddress emailAddress =
 				EmailAddressUtil.findByPrimaryKey(emailAddressId);
 
@@ -159,7 +172,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 	}
 
 	protected void validate(
-			String emailAddressId, String companyId, String className,
+			long emailAddressId, String companyId, String className,
 			String classPK, boolean primary)
 		throws PortalException, SystemException {
 
@@ -174,9 +187,8 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			while (itr.hasNext()) {
 				EmailAddress emailAddress = (EmailAddress)itr.next();
 
-				if ((emailAddressId == null) ||
-					(!emailAddress.getEmailAddressId().equals(
-						emailAddressId))) {
+				if ((emailAddressId <= 0) ||
+					(emailAddress.getEmailAddressId() != emailAddressId)) {
 
 					emailAddress.setPrimary(false);
 

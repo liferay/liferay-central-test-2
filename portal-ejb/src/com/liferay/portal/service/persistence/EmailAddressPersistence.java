@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class EmailAddressPersistence extends BasePersistence {
-	public EmailAddress create(String emailAddressId) {
+	public EmailAddress create(long emailAddressId) {
 		EmailAddress emailAddress = new EmailAddressImpl();
 		emailAddress.setNew(true);
 		emailAddress.setPrimaryKey(emailAddressId);
@@ -57,7 +57,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		return emailAddress;
 	}
 
-	public EmailAddress remove(String emailAddressId)
+	public EmailAddress remove(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		Session session = null;
 
@@ -65,7 +65,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			EmailAddress emailAddress = (EmailAddress)session.get(EmailAddressImpl.class,
-					emailAddressId);
+					new Long(emailAddressId));
 
 			if (emailAddress == null) {
 				if (_log.isWarnEnabled()) {
@@ -143,7 +143,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress findByPrimaryKey(String emailAddressId)
+	public EmailAddress findByPrimaryKey(long emailAddressId)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = fetchByPrimaryKey(emailAddressId);
 
@@ -161,7 +161,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		return emailAddress;
 	}
 
-	public EmailAddress fetchByPrimaryKey(String emailAddressId)
+	public EmailAddress fetchByPrimaryKey(long emailAddressId)
 		throws SystemException {
 		Session session = null;
 
@@ -169,7 +169,7 @@ public class EmailAddressPersistence extends BasePersistence {
 			session = openSession();
 
 			return (EmailAddress)session.get(EmailAddressImpl.class,
-				emailAddressId);
+				new Long(emailAddressId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -306,7 +306,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress[] findByCompanyId_PrevAndNext(String emailAddressId,
+	public EmailAddress[] findByCompanyId_PrevAndNext(long emailAddressId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
@@ -487,7 +487,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress[] findByUserId_PrevAndNext(String emailAddressId,
+	public EmailAddress[] findByUserId_PrevAndNext(long emailAddressId,
 		String userId, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
@@ -703,7 +703,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress[] findByC_C_PrevAndNext(String emailAddressId,
+	public EmailAddress[] findByC_C_PrevAndNext(long emailAddressId,
 		String companyId, String className, OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
 		EmailAddress emailAddress = findByPrimaryKey(emailAddressId);
@@ -965,7 +965,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress[] findByC_C_C_PrevAndNext(String emailAddressId,
+	public EmailAddress[] findByC_C_C_PrevAndNext(long emailAddressId,
 		String companyId, String className, String classPK,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {
@@ -1259,7 +1259,7 @@ public class EmailAddressPersistence extends BasePersistence {
 		}
 	}
 
-	public EmailAddress[] findByC_C_C_P_PrevAndNext(String emailAddressId,
+	public EmailAddress[] findByC_C_C_P_PrevAndNext(long emailAddressId,
 		String companyId, String className, String classPK, boolean primary,
 		OrderByComparator obc)
 		throws NoSuchEmailAddressException, SystemException {

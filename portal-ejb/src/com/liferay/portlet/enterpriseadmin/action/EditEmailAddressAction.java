@@ -30,7 +30,6 @@ import com.liferay.portal.service.EmailAddressServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -113,13 +112,13 @@ public class EditEmailAddressAction extends PortletAction {
 	}
 
 	protected void deleteEmailAddress(ActionRequest req) throws Exception {
-		String emailAddressId = ParamUtil.getString(req, "emailAddressId");
+		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
 
 		EmailAddressServiceUtil.deleteEmailAddress(emailAddressId);
 	}
 
 	protected void updateEmailAddress(ActionRequest req) throws Exception {
-		String emailAddressId = ParamUtil.getString(req, "emailAddressId");
+		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
 
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
@@ -128,7 +127,7 @@ public class EditEmailAddressAction extends PortletAction {
 		String typeId = ParamUtil.getString(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
-		if (Validator.isNull(emailAddressId)) {
+		if (emailAddressId <= 0) {
 
 			// Add email address
 

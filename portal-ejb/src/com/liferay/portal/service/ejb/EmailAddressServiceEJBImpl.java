@@ -49,7 +49,7 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 			classPK, address, typeId, primary);
 	}
 
-	public void deleteEmailAddress(java.lang.String emailAddressId)
+	public void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -57,7 +57,7 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 	}
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -76,8 +76,8 @@ public class EmailAddressServiceEJBImpl implements EmailAddressService,
 	}
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		java.lang.String emailAddressId, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

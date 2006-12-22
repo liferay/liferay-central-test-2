@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -103,16 +104,11 @@ public class EmailAddressServiceHttp {
 	}
 
 	public static void deleteEmailAddress(HttpPrincipal httpPrincipal,
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = emailAddressId;
-
-			if (emailAddressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(emailAddressId);
 			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
 					"deleteEmailAddress", new Object[] { paramObj0 });
 
@@ -139,16 +135,11 @@ public class EmailAddressServiceHttp {
 	}
 
 	public static com.liferay.portal.model.EmailAddress getEmailAddress(
-		HttpPrincipal httpPrincipal, java.lang.String emailAddressId)
+		HttpPrincipal httpPrincipal, long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = emailAddressId;
-
-			if (emailAddressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(emailAddressId);
 			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
 					"getEmailAddress", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -224,17 +215,12 @@ public class EmailAddressServiceHttp {
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
-		HttpPrincipal httpPrincipal, java.lang.String emailAddressId,
+		HttpPrincipal httpPrincipal, long emailAddressId,
 		java.lang.String address, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = emailAddressId;
-
-			if (emailAddressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(emailAddressId);
 			Object paramObj1 = address;
 
 			if (address == null) {

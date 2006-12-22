@@ -95,11 +95,11 @@ public class ActionUtil {
 	public static void getEmailAddress(
 		HttpServletRequest req) throws Exception {
 
-		String emailAddressId = ParamUtil.getString(req, "emailAddressId");
+		long emailAddressId = ParamUtil.getLong(req, "emailAddressId");
 
 		EmailAddress emailAddress = null;
 
-		if (Validator.isNotNull(emailAddressId)) {
+		if (emailAddressId > 0) {
 			emailAddress =
 				EmailAddressServiceUtil.getEmailAddress(emailAddressId);
 		}

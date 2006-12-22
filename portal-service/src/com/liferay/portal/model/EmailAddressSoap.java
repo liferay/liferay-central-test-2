@@ -66,19 +66,19 @@ public class EmailAddressSoap implements Serializable {
 	public EmailAddressSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _emailAddressId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEmailAddressId(pk);
 	}
 
-	public String getEmailAddressId() {
+	public long getEmailAddressId() {
 		return _emailAddressId;
 	}
 
-	public void setEmailAddressId(String emailAddressId) {
+	public void setEmailAddressId(long emailAddressId) {
 		_emailAddressId = emailAddressId;
 	}
 
@@ -166,7 +166,7 @@ public class EmailAddressSoap implements Serializable {
 		_primary = primary;
 	}
 
-	private String _emailAddressId;
+	private long _emailAddressId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

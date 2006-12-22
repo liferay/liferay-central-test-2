@@ -205,7 +205,7 @@
 
 		<!-- PK fields -->
 
-		<column name="emailAddressId" type="String" primary="true" />
+		<column name="emailAddressId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

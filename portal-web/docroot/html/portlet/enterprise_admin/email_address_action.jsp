@@ -35,7 +35,7 @@ EmailAddress emailAddress = (EmailAddress)row.getObject();
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="emailAddressId" value="<%= emailAddress.getEmailAddressId() %>" />
+	<portlet:param name="emailAddressId" value="<%= String.valueOf(emailAddress.getEmailAddressId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ EmailAddress emailAddress = (EmailAddress)row.getObject();
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_email_address" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="emailAddressId" value="<%= emailAddress.getEmailAddressId() %>" />
+	<portlet:param name="emailAddressId" value="<%= String.valueOf(emailAddress.getEmailAddressId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

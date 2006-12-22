@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface EmailAddressModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getEmailAddressId();
+	public long getEmailAddressId();
 
-	public void setEmailAddressId(String emailAddressId);
+	public void setEmailAddressId(long emailAddressId);
 
 	public String getCompanyId();
 

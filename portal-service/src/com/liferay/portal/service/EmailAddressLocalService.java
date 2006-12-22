@@ -36,7 +36,11 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEmailAddress(java.lang.String emailAddressId)
+	public void deleteEmailAddress(long emailAddressId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deleteEmailAddresses()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -45,17 +49,20 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List getEmailAddresses()
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		java.lang.String emailAddressId, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

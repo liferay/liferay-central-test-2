@@ -35,12 +35,12 @@ public interface EmailAddressService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteEmailAddress(java.lang.String emailAddressId)
+	public void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.EmailAddress getEmailAddress(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -50,8 +50,8 @@ public interface EmailAddressService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		java.lang.String emailAddressId, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

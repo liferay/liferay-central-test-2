@@ -1,3 +1,7 @@
+alter_column_type Counter currentId BIGINT not null;
+
+alter_column_type EmailAddress emailAddressId BIGINT null;
+
 create table SRFrameworkVersion (
 	frameworkVersionId INTEGER not null primary key,
 	groupId VARCHAR(75) not null,
@@ -68,11 +72,11 @@ create table SRProductVersion (
 insert into SRFrameworkVersion (companyId, groupId, frameworkVersionId, name, url, active_, priority) values ('liferay.com', 15, 1, 'Liferay 4.0', 'http://www.liferay.com', TRUE, 1);
 insert into SRFrameworkVersion (companyId, groupId, frameworkVersionId, name, url, active_, priority) values ('liferay.com', 15, 2, 'Liferay 4.1', 'http://www.liferay.com', TRUE, 2);
 insert into SRFrameworkVersion (companyId, groupId, frameworkVersionId, name, url, active_, priority) values ('liferay.com', 15, 3, 'Liferay 4.2', 'http://www.liferay.com', FALSE, 3);
-insert into counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRFrameworkVersion', 3);
+insert into Counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRFrameworkVersion', 3);
 
 insert into SRLicense (licenseId, name, openSource, url, active_, recommended) values (1, 'GPL', TRUE, 'http://www.opensource.org/licenses/gpl-license.php', TRUE, TRUE);
 insert into SRLicense (licenseId, name, openSource, url, active_, recommended) values (2, 'Proprietary', FALSE, NULL, FALSE, TRUE);
 insert into SRLicense (licenseId, name, openSource, url, active_, recommended) values (3, 'MIT', TRUE, 'http://www.opensource.org/licenses/mit-license.php', TRUE, TRUE);
 insert into SRLicense (licenseId, name, openSource, url, active_, recommended) values (4, 'Artistic', TRUE, 'http://www.opensource.org/licenses/artistic-license.php', TRUE, FALSE);
-insert into counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRLicense', 4);
+insert into Counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRLicense', 4);
 

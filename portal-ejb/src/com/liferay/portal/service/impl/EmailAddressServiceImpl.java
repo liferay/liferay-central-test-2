@@ -54,7 +54,7 @@ public class EmailAddressServiceImpl
 			getUserId(), className, classPK, address, typeId, primary);
 	}
 
-	public void deleteEmailAddress(String emailAddressId)
+	public void deleteEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
 		EmailAddress emailAddress =
@@ -67,7 +67,7 @@ public class EmailAddressServiceImpl
 		EmailAddressLocalServiceUtil.deleteEmailAddress(emailAddressId);
 	}
 
-	public EmailAddress getEmailAddress(String emailAddressId)
+	public EmailAddress getEmailAddress(long emailAddressId)
 		throws PortalException, SystemException {
 
 		EmailAddress emailAddress =
@@ -91,7 +91,7 @@ public class EmailAddressServiceImpl
 	}
 
 	public EmailAddress updateEmailAddress(
-			String emailAddressId, String address, String typeId,
+			long emailAddressId, String address, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 

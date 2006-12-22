@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EmailAddressUtil {
 	public static com.liferay.portal.model.EmailAddress create(
-		java.lang.String emailAddressId) {
+		long emailAddressId) {
 		return getPersistence().create(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress remove(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchEmailAddressException {
 		ModelListener listener = _getListener();
@@ -140,15 +140,14 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress findByPrimaryKey(
-		java.lang.String emailAddressId)
+		long emailAddressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchEmailAddressException {
 		return getPersistence().findByPrimaryKey(emailAddressId);
 	}
 
 	public static com.liferay.portal.model.EmailAddress fetchByPrimaryKey(
-		java.lang.String emailAddressId)
-		throws com.liferay.portal.SystemException {
+		long emailAddressId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(emailAddressId);
 	}
 
@@ -185,7 +184,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress[] findByCompanyId_PrevAndNext(
-		java.lang.String emailAddressId, java.lang.String companyId,
+		long emailAddressId, java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchEmailAddressException {
@@ -226,7 +225,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress[] findByUserId_PrevAndNext(
-		java.lang.String emailAddressId, java.lang.String userId,
+		long emailAddressId, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchEmailAddressException {
@@ -269,7 +268,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_PrevAndNext(
-		java.lang.String emailAddressId, java.lang.String companyId,
+		long emailAddressId, java.lang.String companyId,
 		java.lang.String className,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
@@ -320,7 +319,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_C_PrevAndNext(
-		java.lang.String emailAddressId, java.lang.String companyId,
+		long emailAddressId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
@@ -372,7 +371,7 @@ public class EmailAddressUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress[] findByC_C_C_P_PrevAndNext(
-		java.lang.String emailAddressId, java.lang.String companyId,
+		long emailAddressId, java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 

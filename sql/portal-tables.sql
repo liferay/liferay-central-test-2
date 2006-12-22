@@ -257,7 +257,7 @@ create table DLFolder (
 );
 
 create table EmailAddress (
-	emailAddressId VARCHAR(75) not null primary key,
+	emailAddressId INTEGER not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

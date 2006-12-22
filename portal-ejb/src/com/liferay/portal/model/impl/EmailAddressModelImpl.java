@@ -40,9 +40,6 @@ import java.util.Date;
 public class EmailAddressModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_EMAILADDRESSID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.EmailAddress.emailAddressId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.EmailAddress.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -70,27 +67,20 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	public EmailAddressModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _emailAddressId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setEmailAddressId(pk);
 	}
 
-	public String getEmailAddressId() {
-		return GetterUtil.getString(_emailAddressId);
+	public long getEmailAddressId() {
+		return _emailAddressId;
 	}
 
-	public void setEmailAddressId(String emailAddressId) {
-		if (((emailAddressId == null) && (_emailAddressId != null)) ||
-				((emailAddressId != null) && (_emailAddressId == null)) ||
-				((emailAddressId != null) && (_emailAddressId != null) &&
-				!emailAddressId.equals(_emailAddressId))) {
-			if (!XSS_ALLOW_EMAILADDRESSID) {
-				emailAddressId = XSSUtil.strip(emailAddressId);
-			}
-
+	public void setEmailAddressId(long emailAddressId) {
+		if (emailAddressId != _emailAddressId) {
 			_emailAddressId = emailAddressId;
 		}
 	}
@@ -301,9 +291,9 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = emailAddress.getPrimaryKey();
+		long pk = emailAddress.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -312,10 +302,10 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _emailAddressId;
+	private long _emailAddressId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;
