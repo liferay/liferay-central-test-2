@@ -50,7 +50,14 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 %>
 
 <script type="text/javascript">
+	var <portlet:namespace />saved = false;
 	var <portlet:namespace />fileIndex = 0;
+
+	window.onbeforeunload = function() {
+		if (!<portlet:namespace />saved) {
+			return "Any unsaved text will be discarded.";
+		}
+	}
 
 	function <portlet:namespace />addAttachment(remoteFile, contentPath) {
 		var table = document.getElementById("<portlet:namespace />files");
@@ -112,12 +119,16 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 	}
 
 	function <portlet:namespace />saveMessage() {
+		<portlet:namespace />saved = true;
+
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SAVE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />sendMessage() {
+		<portlet:namespace />saved = true;
+
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.SEND %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = parent.<portlet:namespace />editor.getHTML();
 		submitForm(document.<portlet:namespace />fm);
