@@ -43,7 +43,9 @@ import org.alfresco.webservice.repository.RepositoryServiceSoapBindingStub;
 import org.alfresco.webservice.types.NamedValue;
 import org.alfresco.webservice.types.Node;
 import org.alfresco.webservice.types.Predicate;
+import org.alfresco.webservice.types.Query;
 import org.alfresco.webservice.types.Reference;
+import org.alfresco.webservice.types.ResultSet;
 import org.alfresco.webservice.types.ResultSetRow;
 import org.alfresco.webservice.types.Store;
 import org.alfresco.webservice.util.AuthenticationUtils;
@@ -58,6 +60,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Michael Young
  * @author Brian Wing Shun Chan
+ * @author Jerry Niu
  *
  */
 public class AlfrescoContentUtil {
@@ -213,6 +216,31 @@ public class AlfrescoContentUtil {
 		}
 	}
 
+	public static ResultSetRow[] getSearchResults(
+			String userId, String password, String keywords)
+		throws Exception {
+
+		try {
+			AuthenticationUtils.startSession(userId, password);
+
+			RepositoryServiceSoapBindingStub repositoryService =
+				WebServiceFactory.getRepositoryService();
+
+			Query query = new Query(
+				Constants.QUERY_LANG_LUCENE, "TEXT:'" + keywords + "'");
+
+			QueryResult queryResult = repositoryService.query(
+				_SPACES_STORE, query, false);
+
+			ResultSet resultSet = queryResult.getResultSet();
+
+			return resultSet.getRows();
+		}
+		finally {
+			AuthenticationUtils.endSession();
+		}
+	}
+
 	public static String formatContent(
 		String content, boolean maximizeLinks, RenderResponse res) {
 
@@ -299,7 +327,9 @@ public class AlfrescoContentUtil {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn("Could not start session", e);
+				_log.warn(
+					"Could not start session for " + login + " " + password +
+						" " + uuid + " " + action);
 			}
 		}
 		finally {
