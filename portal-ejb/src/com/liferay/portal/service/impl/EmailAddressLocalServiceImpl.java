@@ -47,6 +47,7 @@ import java.util.List;
  * </a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
