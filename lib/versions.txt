@@ -1,4 +1,4 @@
-ActiveMQ 4.0.1
+ActiveMQ 4.1.0 (core)
 Alfresco Web Service Client 1.4.0 (removed log4j.properties)
 Ant 1.6.5
 Ant Contrib 0.6
@@ -26,6 +26,7 @@ Commons Pool 1.2
 Commons Validator 1.1.4
 Compass 1.1m3
 Concurrent 1.3.4
+Concurrent 2.1 (backport)
 Derby 10.1.1.0
 Display Tag Library 1.1
 dom4j 1.6.1
