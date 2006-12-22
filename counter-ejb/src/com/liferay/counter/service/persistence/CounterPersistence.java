@@ -23,15 +23,21 @@
 package com.liferay.counter.service.persistence;
 
 import com.liferay.counter.model.Counter;
+import com.liferay.counter.model.CounterRegister;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.hibernate.HibernateException;
+import org.hibernate.LockMode;
 import org.hibernate.ObjectNotFoundException;
 import org.hibernate.Query;
 import org.hibernate.Session;
@@ -40,6 +46,7 @@ import org.hibernate.Session;
  * <a href="CounterPersistence.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Harry Mark
  *
  */
 public class CounterPersistence extends BasePersistence {
@@ -77,25 +84,156 @@ public class CounterPersistence extends BasePersistence {
 		}
 	}
 
-	public long increment(String name)
-		throws SystemException {
-
+	public long increment(String name) throws SystemException {
 		return increment(name, _MINIMUM_INCREMENT_SIZE);
 	}
 
-	public synchronized long increment(String name, int size)
+	public long increment(String name, int size)
 		throws SystemException {
 
 		if (size < _MINIMUM_INCREMENT_SIZE) {
 			size = _MINIMUM_INCREMENT_SIZE;
 		}
 
+		CounterRegister register = getCounterRegister(name);
+
+		synchronized (register) {
+			long newValue = register.getCurrentValue() + size;
+
+			if (newValue > register.getDbValue()) {
+				while (newValue > register.getDbValue()) {
+					register.setDbValue(
+						register.getDbValue() + register.getDbIncrement());
+				}
+
+				Session session = null;
+
+				try {
+					session = openSession();
+
+					Counter counter = (Counter)session.get(
+						Counter.class, register.getName(), LockMode.UPGRADE);
+
+					counter.setCurrentId(register.getDbValue());
+
+					session.save(counter);
+
+					session.flush();
+				}
+				catch (HibernateException he) {
+					throw new SystemException(he);
+				}
+				finally {
+					closeSession(session);
+				}
+			}
+
+			register.setCurrentValue(newValue);
+
+			return newValue;
+		}
+	}
+
+	public void rename(String oldName, String newName)
+		throws SystemException {
+
+		CounterRegister register = getCounterRegister(oldName);
+
+		synchronized (register) {
+			if (registerLookup.containsKey(newName)) {
+				throw new SystemException(
+					"Cannot rename " + oldName + " to " + newName);
+			}
+
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Counter counter = (Counter)session.load(Counter.class, oldName);
+
+				long currentId = counter.getCurrentId();
+
+				session.delete(counter);
+
+				counter = new Counter();
+
+				counter.setName(newName);
+				counter.setCurrentId(currentId);
+
+				session.save(counter);
+
+				session.flush();
+			}
+			catch (ObjectNotFoundException onfe) {
+			}
+			catch (HibernateException he) {
+				throw new SystemException(he);
+			}
+			finally {
+				closeSession(session);
+			}
+
+			register.setName(newName);
+
+			registerLookup.put(newName, register);
+			registerLookup.remove(oldName);
+		}
+	}
+
+	public void reset(String name) throws SystemException {
+		CounterRegister register = getCounterRegister(name);
+
+		synchronized (register) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Counter counter = (Counter)session.load(Counter.class, name);
+
+				session.delete(counter);
+
+				session.flush();
+			}
+			catch (ObjectNotFoundException onfe) {
+			}
+			catch (HibernateException he) {
+				throw new SystemException(he);
+			}
+			finally {
+				closeSession(session);
+			}
+
+			registerLookup.remove(name);
+		}
+	}
+
+	protected synchronized CounterRegister getCounterRegister(String name)
+		throws SystemException {
+
+		CounterRegister register = (CounterRegister)registerLookup.get(name);
+
+		if (register == null) {
+			register = createCounterRegister(name);
+
+			registerLookup.put(name, register);
+		}
+
+		return register;
+	}
+
+	protected synchronized CounterRegister createCounterRegister(String name)
+		throws SystemException {
+
+		Counter counter = null;
+
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Counter counter = (Counter)session.get(Counter.class, name);
+			counter = (Counter)session.get(Counter.class, name);
 
 			if (counter == null) {
 				counter = new Counter();
@@ -103,84 +241,30 @@ public class CounterPersistence extends BasePersistence {
 				counter.setName(name);
 				counter.setCurrentId(_DEFAULT_CURRENT_ID);
 
+				session = openSession();
+
 				session.save(counter);
 
 				session.flush();
 			}
-
-			long currentId = counter.getCurrentId() + size;
-
-			counter.setCurrentId(currentId);
-
-			session.flush();
-
-			return currentId;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
 		}
 		finally {
 			closeSession(session);
 		}
-	}
 
-	public synchronized void rename(String oldName, String newName)
-		throws SystemException {
+		CounterRegister register = new CounterRegister(
+			name, counter.getCurrentId(), _COUNTER_INCREMENT);
 
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Counter counter = (Counter)session.load(Counter.class, oldName);
-
-			long currentId = counter.getCurrentId();
-
-			session.delete(counter);
-
-			counter = new Counter();
-
-			counter.setName(newName);
-			counter.setCurrentId(currentId);
-
-			session.save(counter);
-
-			session.flush();
-		}
-		catch (ObjectNotFoundException onfe) {
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public synchronized void reset(String name) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			Counter counter = (Counter)session.load(Counter.class, name);
-
-			session.delete(counter);
-
-			session.flush();
-		}
-		catch (ObjectNotFoundException onfe) {
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
+		return register;
 	}
 
 	private static final int _DEFAULT_CURRENT_ID = 0;
 
 	private static final int _MINIMUM_INCREMENT_SIZE = 1;
+
+	private static final int _COUNTER_INCREMENT = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.COUNTER_INCREMENT), _MINIMUM_INCREMENT_SIZE);
+
+	private static Map registerLookup = new HashMap();
 
 }

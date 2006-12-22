@@ -521,6 +521,10 @@ public class PropsUtil {
 
 	public static final String XSS_ALLOW = "xss.allow";
 
+	// Counter
+
+	public static final String COUNTER_INCREMENT = "counter.increment";
+
 	// Jabber
 
 	public static final String JABBER_XMPP_SERVER_ENABLED = "jabber.xmpp.server.enabled";
