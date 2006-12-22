@@ -29,11 +29,7 @@ package com.liferay.portlet.softwarerepository.model;
  *
  */
 public interface SRProductEntry extends SRProductEntryModel {
-	public java.util.List getLicenseIds()
+	public java.util.List getLicenses()
 		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
-
-	public java.lang.String getLicenseNames()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
+			com.liferay.portal.PortalException;
 }

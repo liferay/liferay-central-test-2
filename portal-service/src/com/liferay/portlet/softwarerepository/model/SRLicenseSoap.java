@@ -38,8 +38,8 @@ public class SRLicenseSoap implements Serializable {
 		SRLicenseSoap soapModel = new SRLicenseSoap();
 		soapModel.setLicenseId(model.getLicenseId());
 		soapModel.setName(model.getName());
-		soapModel.setOpenSource(model.getOpenSource());
 		soapModel.setUrl(model.getUrl());
+		soapModel.setOpenSource(model.getOpenSource());
 		soapModel.setActive(model.getActive());
 		soapModel.setRecommended(model.getRecommended());
 
@@ -84,6 +84,14 @@ public class SRLicenseSoap implements Serializable {
 		_name = name;
 	}
 
+	public String getUrl() {
+		return _url;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
 	public boolean getOpenSource() {
 		return _openSource;
 	}
@@ -94,14 +102,6 @@ public class SRLicenseSoap implements Serializable {
 
 	public void setOpenSource(boolean openSource) {
 		_openSource = openSource;
-	}
-
-	public String getUrl() {
-		return _url;
-	}
-
-	public void setUrl(String url) {
-		_url = url;
 	}
 
 	public boolean getActive() {
@@ -130,8 +130,8 @@ public class SRLicenseSoap implements Serializable {
 
 	private long _licenseId;
 	private String _name;
-	private boolean _openSource;
 	private String _url;
+	private boolean _openSource;
 	private boolean _active;
 	private boolean _recommended;
 }

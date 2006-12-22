@@ -178,7 +178,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 				entryId, title, content);
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Indexing " + entryId, ioe);
 		}
 
 		return entry;
@@ -255,7 +255,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + entry.getEntryId(), ioe);
 		}
 
 		// Message boards
@@ -392,10 +392,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 						content);
 				}
 				catch (Exception e1) {
-
-					// Continue indexing even if one entry fails
-
-					_log.error(e1.getMessage());
+					_log.error("Reindexing " + entryId, e1);
 				}
 			}
 		}
@@ -466,7 +463,9 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			throw new SystemException(pe);
+			_log.error("Parsing keywords " + keywords, pe);
+
+			return new HitsImpl();
 		}
 	}
 
@@ -506,7 +505,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 				entryId, title, content);
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Indexing " + entryId, ioe);
 		}
 
 		return entry;

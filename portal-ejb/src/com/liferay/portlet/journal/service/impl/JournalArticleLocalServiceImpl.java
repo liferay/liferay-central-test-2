@@ -362,7 +362,7 @@ public class JournalArticleLocalServiceImpl
 				article.getDisplayDate());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error("Indexing " + pk, ioe);
 		}
 
 		return article;
@@ -459,7 +459,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error("Deleting index " + article.getPrimaryKey(), ioe);
 		}
 
 		// Email
@@ -889,10 +889,7 @@ public class JournalArticleLocalServiceImpl
 							description, content, type, displayDate);
 					}
 					catch (Exception e1) {
-
-						// Continue indexing even if one article fails
-
-						_log.error(e1);
+						_log.error("Reindexing " + article.getPrimaryKey(), e1);
 					}
 				}
 			}
@@ -984,7 +981,9 @@ public class JournalArticleLocalServiceImpl
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			throw new SystemException(pe);
+			_log.error("Parsing keywords", pe);
+
+			return new HitsImpl();
 		}
 	}
 
@@ -1141,7 +1140,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe);
+			_log.error("Indexing " + article.getPrimaryKey(), ioe);
 		}
 
 		return article;

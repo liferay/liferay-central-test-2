@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -47,15 +46,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getNode(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getNode(httpReq);
 	}
 
 	public static void getNode(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getNode(httpReq);
 	}
@@ -73,15 +70,13 @@ public class ActionUtil {
 	}
 
 	public static void getPage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getPage(httpReq);
 	}
 
 	public static void getPage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getPage(httpReq);
 	}

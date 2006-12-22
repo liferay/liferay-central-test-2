@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.softwarerepository.action;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.softwarerepository.model.SRFrameworkVersion;
 import com.liferay.portlet.softwarerepository.model.SRLicense;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
@@ -48,38 +47,22 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getProductEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+	public static void getFrameworkVersion(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
-		getProductEntry(httpReq);
-	}
-
-	public static void getProductEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
-
-		getProductEntry(httpReq);
-	}
-
-	public static void getProductEntry(HttpServletRequest req)
-		throws Exception {
-		long productEntryId = ParamUtil.getLong(req, "productEntryId", -1);
-
-		SRProductEntry productEntry = null;
-
-		if (productEntryId > 0) {
-			productEntry = SRProductEntryServiceUtil.getProductEntry(
-				productEntryId);
-		}
-
-		req.setAttribute(
-			WebKeys.SOFTWARE_REPOSITORY_PRODUCT_ENTRY, productEntry);
+		getFrameworkVersion(httpReq);
 	}
 
 	public static void getFrameworkVersion(RenderRequest req) throws Exception {
-		long frameworkVersionId = ParamUtil.getLong(
-			req, "frameworkVersionId");
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getFrameworkVersion(httpReq);
+	}
+
+	public static void getFrameworkVersion(HttpServletRequest req)
+		throws Exception {
+
+		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
 
 		SRFrameworkVersion frameworkVersion = null;
 
@@ -93,8 +76,20 @@ public class ActionUtil {
 			WebKeys.SOFTWARE_REPOSITORY_FRAMEWORK_VERSION, frameworkVersion);
 	}
 
+	public static void getLicense(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getLicense(httpReq);
+	}
+
 	public static void getLicense(RenderRequest req) throws Exception {
-		long licenseId = ParamUtil.getLong(req, "licenseId", -1);
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getLicense(httpReq);
+	}
+
+	public static void getLicense(HttpServletRequest req) throws Exception {
+		long licenseId = ParamUtil.getLong(req, "licenseId");
 
 		SRLicense license = null;
 
@@ -105,26 +100,60 @@ public class ActionUtil {
 		req.setAttribute(WebKeys.SOFTWARE_REPOSITORY_LICENSE, license);
 	}
 
+	public static void getProductEntry(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getProductEntry(httpReq);
+	}
+
+	public static void getProductEntry(RenderRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getProductEntry(httpReq);
+	}
+
+	public static void getProductEntry(HttpServletRequest req)
+		throws Exception {
+
+		long productEntryId = ParamUtil.getLong(req, "productEntryId");
+
+		SRProductEntry productEntry = null;
+
+		if (productEntryId > 0) {
+			productEntry = SRProductEntryServiceUtil.getProductEntry(
+				productEntryId);
+		}
+
+		req.setAttribute(
+			WebKeys.SOFTWARE_REPOSITORY_PRODUCT_ENTRY, productEntry);
+	}
+
+	public static void getProductVersion(ActionRequest req) throws Exception {
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getProductVersion(httpReq);
+	}
+
 	public static void getProductVersion(RenderRequest req) throws Exception {
-		long productVersionId = ParamUtil.getLong(req, "productVersionId", -1);
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		getProductVersion(httpReq);
+	}
+
+	public static void getProductVersion(HttpServletRequest req)
+		throws Exception {
+
+		long productVersionId = ParamUtil.getLong(req, "productVersionId");
 
 		SRProductVersion productVersion = null;
-		SRProductEntry productEntry = null;
 
 		if (productVersionId > 0) {
 			productVersion = SRProductVersionServiceUtil.getProductVersion(
 				productVersionId);
-			productEntry = SRProductEntryServiceUtil.getProductEntry(
-				productVersion.getProductEntryId());
-
 		}
 
 		req.setAttribute(
 			WebKeys.SOFTWARE_REPOSITORY_PRODUCT_VERSION, productVersion);
-
-		if (productEntry != null) {
-			req.setAttribute(
-				WebKeys.SOFTWARE_REPOSITORY_PRODUCT_ENTRY, productEntry);
-		}
 	}
+
 }

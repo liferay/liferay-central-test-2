@@ -25,29 +25,28 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	String redirect = ParamUtil.getString(request, "redirect");
+String redirect = ParamUtil.getString(request, "redirect");
 
-	SRFrameworkVersion frameworkVersion = (SRFrameworkVersion) request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_FRAMEWORK_VERSION);
+SRFrameworkVersion frameworkVersion = (SRFrameworkVersion)request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_FRAMEWORK_VERSION);
 
-	long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "frameworkVersionId");
+long frameworkVersionId = BeanParamUtil.getLong(frameworkVersion, request, "frameworkVersionId");
+
+boolean active = BeanParamUtil.getBoolean(frameworkVersion, request, "active", false);
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />saveEntry() {
+	function <portlet:namespace />saveFrameworkVersion() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= frameworkVersion == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
-
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_framework_version" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_framework_version" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFrameworkVersion(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />frameworkVersionId" type="hidden" value="<%= frameworkVersionId %>">
 
 <liferay-ui:tabs names="framework-version" />
-
-<%--<liferay-ui:error exception="<%= EntryURLException.class %>" message="please-enter-a-valid-url" />--%>
 
 <table border="0" cellpadding="0" cellspacing="0">
 
@@ -75,21 +74,28 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<select name="<portlet:namespace/>active">
-			<option <%= ((frameworkVersion != null) && frameworkVersion.getActive())?"selected":"" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= ((frameworkVersion != null) && !frameworkVersion.getActive())?"selected":"" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-		</select>
+		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
 	</td>
 </tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "priority") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<liferay-ui:input-field model="<%= SRFrameworkVersion.class %>" bean="<%= frameworkVersion %>" field="priority" />
-	</td>
-</tr>
+
+<c:if test="<%= frameworkVersion == null %>">
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "permissions") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<liferay-ui:input-permissions
+				modelName="<%= SRFrameworkVersion.class.getName() %>"
+			/>
+		</td>
+	</tr>
+</c:if>
 
 </table>
 

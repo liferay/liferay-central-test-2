@@ -66,6 +66,10 @@ public class LuceneFields {
 
 	public static final String VERSION_LABEL = "versionLabel";
 
+	public static String getUID(String portletId, long field1) {
+		return getUID(portletId, String.valueOf(field1));
+	}
+
 	public static String getUID(String portletId, String field1) {
 		return getUID(portletId, field1, null);
 	}
@@ -136,6 +140,10 @@ public class LuceneFields {
 				PropsUtil.get(PropsUtil.LUCENE_FILE_EXTRACTOR));
 
 		return fileExtractor.getFile(field, file, fileExt);
+	}
+
+	public static Field getKeyword(String field, long keyword) {
+		return getKeyword(field, String.valueOf(keyword));
 	}
 
 	public static Field getKeyword(String field, String keyword) {

@@ -25,16 +25,17 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	ResultRow row =
-		(ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-	SRLicense productEntry = (SRLicense) row.getObject();
+SRLicense license = (SRLicense)row.getObject();
+
+String licenseId = String.valueOf(license.getLicenseId());
 %>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_license" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="licenseId" value="<%= Long.toString(productEntry.getLicenseId()) %>" />
+	<portlet:param name="licenseId" value="<%= licenseId %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -43,7 +44,7 @@
 	<portlet:param name="struts_action" value="/software_repository/edit_license" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="licenseId" value="<%= Long.toString(productEntry.getLicenseId()) %>" />
+	<portlet:param name="licenseId" value="<%= licenseId %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

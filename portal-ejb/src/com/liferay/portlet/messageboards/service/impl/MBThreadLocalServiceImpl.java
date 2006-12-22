@@ -83,10 +83,10 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 				rootMessage.getCompanyId(), thread.getThreadId());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + thread.getThreadId(), ioe);
 		}
 		catch (ParseException pe) {
-			_log.error(pe.getMessage());
+			_log.error("Deleting index " + thread.getThreadId(), pe);
 		}
 
 		// File attachments

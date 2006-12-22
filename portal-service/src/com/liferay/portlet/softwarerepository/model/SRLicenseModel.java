@@ -43,15 +43,15 @@ public interface SRLicenseModel extends BaseModel {
 
 	public void setName(String name);
 
+	public String getUrl();
+
+	public void setUrl(String url);
+
 	public boolean getOpenSource();
 
 	public boolean isOpenSource();
 
 	public void setOpenSource(boolean openSource);
-
-	public String getUrl();
-
-	public void setUrl(String url);
 
 	public boolean getActive();
 

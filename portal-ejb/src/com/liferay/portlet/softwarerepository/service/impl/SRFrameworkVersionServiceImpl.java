@@ -22,117 +22,82 @@
 
 package com.liferay.portlet.softwarerepository.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.User;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarerepository.model.SRFrameworkVersion;
+import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionService;
-import com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionUtil;
-
-import java.util.Date;
-import java.util.List;
+import com.liferay.portlet.softwarerepository.service.permission.SRFrameworkVersionPermission;
 
 /**
- * <a href="SRFrameworkVersionServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SRFrameworkVersionServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
+ * @author  Jorge Ferrer
  * @author  Brian Wing Shun Chan
  *
  */
-public class SRFrameworkVersionServiceImpl extends PrincipalBean
-	implements SRFrameworkVersionService {
+public class SRFrameworkVersionServiceImpl
+	extends PrincipalBean implements SRFrameworkVersionService {
 
 	public SRFrameworkVersion addFrameworkVersion(
-			String userId, String plid, String name, boolean active,
-			int priority, String url)
+			String plid, String name, String url, boolean active, int priority,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
-		Date now = new Date();
+		SRFrameworkVersionPermission.check(
+			getPermissionChecker(), plid, ActionKeys.ADD_FRAMEWORK_VERSION);
 
-		long frameworkVersionId = CounterLocalServiceUtil.increment(
-			SRFrameworkVersion.class.getName());
+		return SRFrameworkVersionLocalServiceUtil.addFrameworkVersion(
+			getUserId(), plid, name, url, active, priority,
+			addCommunityPermissions, addGuestPermissions);
+	}
 
-		SRFrameworkVersion frameworkVersion =
-			SRFrameworkVersionUtil.create(frameworkVersionId);
+	public SRFrameworkVersion addFrameworkVersion(
+			String plid, String name, String url, boolean active, int priority,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
 
-		frameworkVersion.setCompanyId(user.getCompanyId());
-		frameworkVersion.setGroupId(groupId);
-		frameworkVersion.setUserId(user.getUserId());
-		frameworkVersion.setUserName(user.getFullName());
-		frameworkVersion.setCreateDate(now);
-		frameworkVersion.setModifiedDate(now);
+		SRFrameworkVersionPermission.check(
+			getPermissionChecker(), plid, ActionKeys.ADD_FRAMEWORK_VERSION);
 
-		frameworkVersion.setName(name);
-		frameworkVersion.setActive(active);
-		frameworkVersion.setPriority(priority);
-		frameworkVersion.setUrl(url);
-
-		SRFrameworkVersionUtil.update(frameworkVersion);
-
-		return frameworkVersion;
+		return SRFrameworkVersionLocalServiceUtil.addFrameworkVersion(
+			getUserId(), plid, name, url, active, priority,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		SRFrameworkVersion frameworkVersion =
-			SRFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+		SRFrameworkVersionPermission.check(
+			getPermissionChecker(), frameworkVersionId, ActionKeys.DELETE);
 
-		SRFrameworkVersionUtil.remove(frameworkVersion.getFrameworkVersionId());
+		SRFrameworkVersionLocalServiceUtil.deleteFrameworkVersion(
+			frameworkVersionId);
 	}
 
 	public SRFrameworkVersion getFrameworkVersion(long frameworkVersionId)
 		throws PortalException, SystemException {
 
-		return SRFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
-	}
+		SRFrameworkVersionPermission.check(
+			getPermissionChecker(), frameworkVersionId, ActionKeys.VIEW);
 
-	public List getFrameworkVersions(String groupId)
-		throws SystemException {
-
-		return SRFrameworkVersionUtil.findByGroupId(groupId);
-	}
-
-	public List getFrameworkVersions(String groupId, boolean active)
-		throws SystemException {
-
-		return SRFrameworkVersionUtil.findByG_A(groupId, active);
-	}
-
-	public int getFrameworkVersionsCount(String groupId)
-		throws SystemException {
-
-		return SRFrameworkVersionUtil.countByG_A(groupId, true) +
-			SRFrameworkVersionUtil.countByG_A(groupId, false);
-	}
-
-	public int getFrameworkVersionsCount(String groupId, boolean active)
-		throws SystemException {
-
-		return SRFrameworkVersionUtil.countByG_A(groupId, active);
+		return SRFrameworkVersionLocalServiceUtil.getFrameworkVersion(
+			frameworkVersionId);
 	}
 
 	public SRFrameworkVersion updateFrameworkVersion(
-		long frameworkVersionId, String name, boolean active, int priority,
-		String url)
+			long frameworkVersionId, String name, String url, boolean active,
+			int priority)
 		throws PortalException, SystemException {
 
-		SRFrameworkVersion frameworkVersion =
-			SRFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
+		SRFrameworkVersionPermission.check(
+			getPermissionChecker(), frameworkVersionId, ActionKeys.UPDATE);
 
-		frameworkVersion.setName(name);
-		frameworkVersion.setActive(active);
-		frameworkVersion.setPriority(priority);
-		frameworkVersion.setUrl(url);
-
-		SRFrameworkVersionUtil.update(frameworkVersion);
-
-		return frameworkVersion;
+		return SRFrameworkVersionLocalServiceUtil.updateFrameworkVersion(
+			frameworkVersionId, name, url, active, priority);
 	}
 
 }

@@ -62,8 +62,7 @@ public class WorkflowInstancePermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			null, WorkflowInstance.class.getName(), String.valueOf(instanceId),
-			actionId);
+			null, WorkflowInstance.class.getName(), instanceId, actionId);
 	}
 
 	public static boolean contains(

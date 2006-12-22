@@ -41,8 +41,7 @@ import org.apache.struts.action.ActionMapping;
  * @author  Jorge Ferrer
  *
  */
-public class ViewProductVersionAction
-	extends PortletAction {
+public class ViewProductVersionAction extends PortletAction {
 
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,

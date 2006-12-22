@@ -104,8 +104,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteArticle(
-			String companyId, String articleId)
+	public static void deleteArticle(String companyId, String articleId)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {

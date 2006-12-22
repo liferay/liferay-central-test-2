@@ -59,6 +59,17 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 	public void addModelResources(
 			String companyId, String groupId, String userId, String name,
+			long primKey, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		addModelResources(
+			companyId, groupId, userId, name, String.valueOf(primKey),
+			communityPermissions, guestPermissions);
+	}
+
+	public void addModelResources(
+			String companyId, String groupId, String userId, String name,
 			String primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -165,6 +176,17 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		addResources(
 			companyId, groupId, null, name, null, portletActions, false, false);
+	}
+
+	public void addResources(
+			String companyId, String groupId, String userId, String name,
+			long primKey, boolean portletActions,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		addResources(
+			companyId, groupId, userId, name, String.valueOf(primKey),
+			portletActions, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addResources(
@@ -304,6 +326,14 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		// Resource
 
 		ResourceUtil.remove(resource.getResourceId());
+	}
+
+	public void deleteResource(
+			String companyId, String name, String typeId, String scope,
+			long primKey)
+		throws PortalException, SystemException {
+
+		deleteResource(companyId, name, typeId, scope, String.valueOf(primKey));
 	}
 
 	public void deleteResource(

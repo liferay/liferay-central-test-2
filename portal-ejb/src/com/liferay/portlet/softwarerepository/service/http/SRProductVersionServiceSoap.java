@@ -39,14 +39,38 @@ import java.rmi.RemoteException;
 public class SRProductVersionServiceSoap {
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersionSoap addProductVersion(
 		long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact) throws RemoteException {
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRProductVersion returnValue =
 				SRProductVersionServiceUtil.addProductVersion(productEntryId,
-					version, changeLog, frameworkVersionIds, downloadPageURL,
-					directDownloadURL, repoStoreArtifact);
+					version, changeLog, downloadPageURL, directDownloadURL,
+					repoStoreArtifact, frameworkVersionIds,
+					addCommunityPermissions, addGuestPermissions);
+
+			return com.liferay.portlet.softwarerepository.model.SRProductVersionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductVersionSoap addProductVersion(
+		long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.softwarerepository.model.SRProductVersion returnValue =
+				SRProductVersionServiceUtil.addProductVersion(productEntryId,
+					version, changeLog, downloadPageURL, directDownloadURL,
+					repoStoreArtifact, frameworkVersionIds,
+					communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.softwarerepository.model.SRProductVersionSoap.toSoapModel(returnValue);
 		}
@@ -84,45 +108,16 @@ public class SRProductVersionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.softwarerepository.model.SRProductVersionSoap[] getProductVersions(
-		long productEntryId, int begin, int end) throws RemoteException {
-		try {
-			java.util.List returnValue = SRProductVersionServiceUtil.getProductVersions(productEntryId,
-					begin, end);
-
-			return com.liferay.portlet.softwarerepository.model.SRProductVersionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getProductVersionsCount(long productEntryId)
-		throws RemoteException {
-		try {
-			int returnValue = SRProductVersionServiceUtil.getProductVersionsCount(productEntryId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersionSoap updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact) throws RemoteException {
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRProductVersion returnValue =
 				SRProductVersionServiceUtil.updateProductVersion(productVersionId,
-					version, changeLog, frameworkVersionIds, downloadPageURL,
-					directDownloadURL, repoStoreArtifact);
+					version, changeLog, downloadPageURL, directDownloadURL,
+					repoStoreArtifact, frameworkVersionIds);
 
 			return com.liferay.portlet.softwarerepository.model.SRProductVersionSoap.toSoapModel(returnValue);
 		}

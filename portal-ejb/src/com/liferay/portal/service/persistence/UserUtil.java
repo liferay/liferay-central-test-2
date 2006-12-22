@@ -299,6 +299,10 @@ public class UserUtil {
 		getPersistence().removeByC_EA(companyId, emailAddress);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
@@ -318,6 +322,10 @@ public class UserUtil {
 		java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_EA(companyId, emailAddress);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getGroups(java.lang.String pk)

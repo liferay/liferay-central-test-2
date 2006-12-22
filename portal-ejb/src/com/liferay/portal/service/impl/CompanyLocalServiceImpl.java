@@ -382,7 +382,9 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			throw new SystemException(pe);
+			_log.error("Parsing keywords " + keywords, pe);
+
+			return new HitsImpl();
 		}
 	}
 

@@ -216,9 +216,17 @@ public class OrgLaborUtil {
 		getPersistence().removeByOrganizationId(organizationId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByOrganizationId(java.lang.String organizationId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOrganizationId(organizationId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

@@ -41,16 +41,34 @@ public class SRProductVersionServiceEJBImpl implements SRProductVersionService,
 	SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRProductVersionServiceFactory.getTxImpl().addProductVersion(productEntryId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SRProductVersionServiceFactory.getTxImpl().addProductVersion(productEntryId,
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteProductVersion(long productVersionId)
@@ -69,35 +87,18 @@ public class SRProductVersionServiceEJBImpl implements SRProductVersionService,
 		return SRProductVersionServiceFactory.getTxImpl().getProductVersion(productVersionId);
 	}
 
-	public java.util.List getProductVersions(long productEntryId, int begin,
-		int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductVersionServiceFactory.getTxImpl().getProductVersions(productEntryId,
-			begin, end);
-	}
-
-	public int getProductVersionsCount(long productEntryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductVersionServiceFactory.getTxImpl()
-											 .getProductVersionsCount(productEntryId);
-	}
-
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRProductVersionServiceFactory.getTxImpl().updateProductVersion(productVersionId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds);
 	}
 
 	public void ejbCreate() throws CreateException {

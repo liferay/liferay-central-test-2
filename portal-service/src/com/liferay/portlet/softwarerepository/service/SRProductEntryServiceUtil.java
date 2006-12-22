@@ -30,18 +30,35 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public class SRProductEntryServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
-		java.lang.String plid, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name,
-		java.lang.String type, long[] licenseIds,
+		java.lang.String plid, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
 
-		return srProductEntryService.addProductEntry(plid, repoArtifactId,
-			repoGroupId, name, type, licenseIds, shortDescription,
-			longDescription, pageURL);
+		return srProductEntryService.addProductEntry(plid, name, type,
+			shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String plid, java.lang.String name, java.lang.String type,
+		java.lang.String shortDescription, java.lang.String longDescription,
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
+
+		return srProductEntryService.addProductEntry(plid, name, type,
+			shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProductEntry(long productEntryId)
@@ -60,50 +77,17 @@ public class SRProductEntryServiceUtil {
 		return srProductEntryService.getProductEntry(productEntryId);
 	}
 
-	public static java.util.List getProductEntries(java.lang.String groupId,
-		int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
-
-		return srProductEntryService.getProductEntries(groupId, begin, end);
-	}
-
-	public static java.util.List getProductEntriesByUserId(
-		java.lang.String groupId, java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
-
-		return srProductEntryService.getProductEntriesByUserId(groupId, userId,
-			begin, end);
-	}
-
-	public static int getProductEntriesCountByUserId(java.lang.String groupId,
-		java.lang.String userId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
-
-		return srProductEntryService.getProductEntriesCountByUserId(groupId,
-			userId);
-	}
-
-	public static int getProductEntriesCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
-
-		return srProductEntryService.getProductEntriesCount(groupId);
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRProductEntryService srProductEntryService = SRProductEntryServiceFactory.getService();
 
-		return srProductEntryService.updateProductEntry(productEntryId,
-			repoArtifactId, repoGroupId, name, licenseIds, shortDescription,
-			longDescription, pageURL);
+		return srProductEntryService.updateProductEntry(productEntryId, name,
+			type, shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds);
 	}
 }

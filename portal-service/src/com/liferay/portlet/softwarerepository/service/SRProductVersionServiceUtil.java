@@ -31,16 +31,34 @@ package com.liferay.portlet.softwarerepository.service;
 public class SRProductVersionServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRProductVersionService srProductVersionService = SRProductVersionServiceFactory.getService();
 
 		return srProductVersionService.addProductVersion(productEntryId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SRProductVersionService srProductVersionService = SRProductVersionServiceFactory.getService();
+
+		return srProductVersionService.addProductVersion(productEntryId,
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds, communityPermissions,
+			guestPermissions);
 	}
 
 	public static void deleteProductVersion(long productVersionId)
@@ -59,33 +77,17 @@ public class SRProductVersionServiceUtil {
 		return srProductVersionService.getProductVersion(productVersionId);
 	}
 
-	public static java.util.List getProductVersions(long productEntryId,
-		int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductVersionService srProductVersionService = SRProductVersionServiceFactory.getService();
-
-		return srProductVersionService.getProductVersions(productEntryId,
-			begin, end);
-	}
-
-	public static int getProductVersionsCount(long productEntryId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRProductVersionService srProductVersionService = SRProductVersionServiceFactory.getService();
-
-		return srProductVersionService.getProductVersionsCount(productEntryId);
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRProductVersionService srProductVersionService = SRProductVersionServiceFactory.getService();
 
 		return srProductVersionService.updateProductVersion(productVersionId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds);
 	}
 }

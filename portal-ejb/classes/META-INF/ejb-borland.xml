@@ -456,8 +456,16 @@
 			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</bean-home-name>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SRLicenseLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionServiceEJB</ejb-name>

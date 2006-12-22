@@ -168,6 +168,14 @@ public class DataTrackerUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
+	}
+
 	public static void initDao() {
 		getPersistence().initDao();
 	}

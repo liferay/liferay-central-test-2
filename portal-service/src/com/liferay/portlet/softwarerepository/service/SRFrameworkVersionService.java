@@ -30,8 +30,16 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public interface SRFrameworkVersionService {
 	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
-		boolean active, int priority, java.lang.String url)
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -44,23 +52,9 @@ public interface SRFrameworkVersionService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getFrameworkVersionsCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
 	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion updateFrameworkVersion(
-		long frameworkVersionId, java.lang.String name, boolean active,
-		int priority, java.lang.String url)
+		long frameworkVersionId, java.lang.String name, java.lang.String url,
+		boolean active, int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

@@ -13,6 +13,7 @@
 	<resource file="resource-actions/messageboards.xml" />
 	<resource file="resource-actions/polls.xml" />
 	<resource file="resource-actions/shopping.xml" />
+	<resource file="resource-actions/softwarerepository.xml" />
 	<resource file="resource-actions/wiki.xml" />
 	<resource file="resource-actions/workflow.xml" />
 </resource-action-mapping>

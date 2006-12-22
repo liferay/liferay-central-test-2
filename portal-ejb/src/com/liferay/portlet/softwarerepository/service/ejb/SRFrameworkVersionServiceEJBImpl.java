@@ -40,14 +40,28 @@ import javax.ejb.SessionContext;
 public class SRFrameworkVersionServiceEJBImpl
 	implements SRFrameworkVersionService, SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
-		boolean active, int priority, java.lang.String url)
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return SRFrameworkVersionServiceFactory.getTxImpl().addFrameworkVersion(userId,
-			plid, name, active, priority, url);
+		return SRFrameworkVersionServiceFactory.getTxImpl().addFrameworkVersion(plid,
+			name, url, active, priority, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SRFrameworkVersionServiceFactory.getTxImpl().addFrameworkVersion(plid,
+			name, url, active, priority, communityPermissions, guestPermissions);
 	}
 
 	public void deleteFrameworkVersion(long frameworkVersionId)
@@ -66,52 +80,16 @@ public class SRFrameworkVersionServiceEJBImpl
 		return SRFrameworkVersionServiceFactory.getTxImpl().getFrameworkVersion(frameworkVersionId);
 	}
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRFrameworkVersionServiceFactory.getTxImpl()
-											   .getFrameworkVersions(groupId);
-	}
-
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRFrameworkVersionServiceFactory.getTxImpl()
-											   .getFrameworkVersions(groupId,
-			active);
-	}
-
-	public int getFrameworkVersionsCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRFrameworkVersionServiceFactory.getTxImpl()
-											   .getFrameworkVersionsCount(groupId);
-	}
-
-	public int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRFrameworkVersionServiceFactory.getTxImpl()
-											   .getFrameworkVersionsCount(groupId,
-			active);
-	}
-
 	public com.liferay.portlet.softwarerepository.model.SRFrameworkVersion updateFrameworkVersion(
-		long frameworkVersionId, java.lang.String name, boolean active,
-		int priority, java.lang.String url)
+		long frameworkVersionId, java.lang.String name, java.lang.String url,
+		boolean active, int priority)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRFrameworkVersionServiceFactory.getTxImpl()
 											   .updateFrameworkVersion(frameworkVersionId,
-			name, active, priority, url);
+			name, url, active, priority);
 	}
 
 	public void ejbCreate() throws CreateException {

@@ -1211,6 +1211,7 @@ no-messages-were-found-that-matched-the-keywords-x=No messages were found that m
 no-orders-were-found=No s'han trobat ordres.
 no-organizations-were-found=No s'ha trobat cap organització.
 no-pages-were-found-that-matched-the-keywords-x=No s'ha trobat cap pàgina amb les paraules clau: {0}.
+no-products-were-found-that-matched-the-keywords-x=No products were found that matched the keywords: {0}.
 no-roles-were-found=No s'ha trobat cap rol
 no-structures-were-found-that-matches-the-id=No es va trobar cap estructura que coincideixi amb la identificació:
 no-structures-were-found=No s'ha trobat cap estructura.

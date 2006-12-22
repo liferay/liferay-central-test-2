@@ -30,18 +30,95 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public class SRProductEntryLocalServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String repoArtifactId, java.lang.String repoGroupId,
-		java.lang.String name, java.lang.String type, long[] licenseIds,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
-		return srProductEntryLocalService.addProductEntry(userId, plid,
-			repoArtifactId, repoGroupId, name, type, licenseIds,
-			shortDescription, longDescription, pageURL);
+		return srProductEntryLocalService.addProductEntry(userId, plid, name,
+			type, shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+
+		return srProductEntryLocalService.addProductEntry(userId, plid, name,
+			type, shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds, communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+
+		return srProductEntryLocalService.addProductEntry(userId, plid, name,
+			type, shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
+	public static void addProductEntryResources(long productEntryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+		srProductEntryLocalService.addProductEntryResources(productEntryId,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+		srProductEntryLocalService.addProductEntryResources(productEntry,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addProductEntryResources(long productEntryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+		srProductEntryLocalService.addProductEntryResources(productEntryId,
+			communityPermissions, guestPermissions);
+	}
+
+	public static void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+		srProductEntryLocalService.addProductEntryResources(productEntry,
+			communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProductEntry(long productEntryId)
@@ -49,6 +126,14 @@ public class SRProductEntryLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 		srProductEntryLocalService.deleteProductEntry(productEntryId);
+	}
+
+	public static void deleteProductEntry(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
+		srProductEntryLocalService.deleteProductEntry(productEntry);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntry getProductEntry(
@@ -67,13 +152,13 @@ public class SRProductEntryLocalServiceUtil {
 		return srProductEntryLocalService.getProductEntries(groupId, begin, end);
 	}
 
-	public static java.util.List getProductEntriesByUserId(
-		java.lang.String groupId, java.lang.String userId, int begin, int end)
+	public static java.util.List getProductEntries(java.lang.String groupId,
+		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
-		return srProductEntryLocalService.getProductEntriesByUserId(groupId,
-			userId, begin, end);
+		return srProductEntryLocalService.getProductEntries(groupId, userId,
+			begin, end);
 	}
 
 	public static int getProductEntriesCount(java.lang.String groupId)
@@ -83,20 +168,11 @@ public class SRProductEntryLocalServiceUtil {
 		return srProductEntryLocalService.getProductEntriesCount(groupId);
 	}
 
-	public static int getProductEntriesCountByUserId(java.lang.String groupId,
+	public static int getProductEntriesCount(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
-		return srProductEntryLocalService.getProductEntriesCountByUserId(groupId,
-			userId);
-	}
-
-	public static java.util.List getSRLicenses(long productEntryId)
-		throws com.liferay.portlet.softwarerepository.NoSuchProductEntryException, 
-			com.liferay.portal.SystemException {
-		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
-
-		return srProductEntryLocalService.getSRLicenses(productEntryId);
+		return srProductEntryLocalService.getProductEntriesCount(groupId, userId);
 	}
 
 	public static void reIndex(java.lang.String[] ids)
@@ -116,16 +192,16 @@ public class SRProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
 		return srProductEntryLocalService.updateProductEntry(productEntryId,
-			repoArtifactId, repoGroupId, name, licenseIds, shortDescription,
-			longDescription, pageURL);
+			name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds);
 	}
 }

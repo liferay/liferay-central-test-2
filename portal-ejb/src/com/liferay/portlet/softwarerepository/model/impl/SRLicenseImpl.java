@@ -31,6 +31,7 @@ import com.liferay.portlet.softwarerepository.model.SRLicense;
  *
  */
 public class SRLicenseImpl extends SRLicenseModelImpl implements SRLicense {
+
 	public SRLicenseImpl() {
 	}
 

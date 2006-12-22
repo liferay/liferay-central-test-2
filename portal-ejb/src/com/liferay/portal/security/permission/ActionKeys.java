@@ -51,6 +51,8 @@ public class ActionKeys {
 
 	public static final String ADD_FOLDER = "ADD_FOLDER";
 
+	public static final String ADD_FRAMEWORK_VERSION = "ADD_FRAMEWORK_VERSION";
+
 	public static final String ADD_IMAGE = "ADD_IMAGE";
 
 	public static final String ADD_ITEM = "ADD_ITEM";
@@ -68,6 +70,10 @@ public class ActionKeys {
 	public static final String ADD_PAGE = "ADD_PAGE";
 
 	public static final String ADD_PERMISSIONS = "ADD_PERMISSIONS";
+
+	public static final String ADD_PRODUCT_ENTRY = "ADD_PRODUCT_ENTRY";
+
+	public static final String ADD_PRODUCT_VERSION = "ADD_PRODUCT_VERSION";
 
 	public static final String ADD_QUESTION = "ADD_QUESTION";
 

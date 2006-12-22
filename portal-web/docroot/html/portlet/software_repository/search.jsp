@@ -25,113 +25,97 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	String tabs1 = ParamUtil.getString(request, "tabs1", "products");
-
-	PortletURL tabsURL = renderResponse.createRenderURL();
-
-	tabsURL.setWindowState(WindowState.MAXIMIZED);
-
-	tabsURL.setParameter("struts_action", "/software_repository/view");
-%>
-
-<liferay-ui:tabs
-	names="products,my-products,framework-versions,licenses"
-	url="<%= tabsURL.toString() %>"
-	backURL="<%= tabsURL.toString() %>"
-/>
-<%
 String type = ParamUtil.getString(request, "type");
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />searchForm"
-	style="margin-bottom: 15px; float: right;">
-	<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%=keywords%>">
-	<select name="<portlet:namespace/>type">
-		<option value=""><%= LanguageUtil.get(pageContext, "any-type") %></option>
-		<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
-		<option <%= type.equals("theme")? "selected" : "" %> value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
-		<option <%= type.equals("layout")? "selected" : "" %> value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
-		<option <%= type.equals("extension")? "selected" : "" %> value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
-	</select>
-	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-product-entries") %>">
-</form>
-<br clear="both">
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+
+<liferay-util:include page="/html/portlet/software_repository/tabs1.jsp" />
 
 <%
-	PortletURL portletURL = renderResponse.createRenderURL();
+PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setWindowState(WindowState.MAXIMIZED);
+portletURL.setWindowState(WindowState.MAXIMIZED);
 
-	portletURL.setParameter("struts_action", "/software_repository/search");
-	portletURL.setParameter("type", type);
-	portletURL.setParameter("keywords", keywords);
+portletURL.setParameter("struts_action", "/software_repository/search");
+portletURL.setParameter("type", type);
+portletURL.setParameter("keywords", keywords);
 
-	List headerNames = new ArrayList();
+List headerNames = new ArrayList();
 
-	headerNames.add("#");
-	headerNames.add("name");
-	headerNames.add("type");
-	headerNames.add("score");
+headerNames.add("#");
+headerNames.add("name");
+headerNames.add("type");
+headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(
-		renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM,
-		SearchContainer.DEFAULT_DELTA, portletURL, headerNames,
-		LanguageUtil.format(
-			pageContext, "no-product-entries-were-found-that-matched-the-keywords-x",
-			"<b>" + keywords + "</b>"));
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-products-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-	Hits hits = SRProductEntryLocalServiceUtil.search(
-		company.getCompanyId(), portletGroupId, type, keywords);
+Hits hits = SRProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, type, keywords);
 
-	Hits results =
-		hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-	int total = hits.getLength();
+Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 
-	searchContainer.setTotal(total);
+int total = hits.getLength();
 
-	List resultRows = searchContainer.getResultRows();
+searchContainer.setTotal(total);
 
-	for (int i = 0; i < results.getLength(); i++) {
-		Document doc = results.doc(i);
+List resultRows = searchContainer.getResultRows();
 
-		ResultRow row = new ResultRow(doc, String.valueOf(i), i);
+for (int i = 0; i < results.getLength(); i++) {
+	Document doc = results.doc(i);
 
-		// Position
+	ResultRow row = new ResultRow(doc, String.valueOf(i), i);
 
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
+	// Position
 
-		// Name and type
+	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
 
-		String title = doc.get("title");
-		String docType = doc.get("type");
-		String productEntryId = doc.get("productEntryId");
+	// Name and type
 
-		PortletURL rowURL = renderResponse.createRenderURL();
+	String title = doc.get("title");
+	String docType = doc.get("type");
+	String productEntryId = doc.get("productEntryId");
 
-		rowURL.setWindowState(WindowState.MAXIMIZED);
+	PortletURL rowURL = renderResponse.createRenderURL();
 
-		rowURL
-			.setParameter("struts_action", "/software_repository/view_product_entry");
-		rowURL.setParameter("productEntryId", productEntryId);
-		rowURL.setParameter("redirect", currentURL);
+	rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		row.addText(title, rowURL);
-		row.addText(docType, rowURL);
+	rowURL.setParameter("struts_action", "/software_repository/view_product_entry");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("productEntryId", productEntryId);
 
-		// Score
+	row.addText(title, rowURL);
+	row.addText(LanguageUtil.get(pageContext, docType), rowURL);
 
-		row.addText(String.valueOf(hits.score(i)), rowURL);
+	// Score
 
-		// Add result row
+	row.addText(String.valueOf(hits.score(i)), rowURL);
 
-		resultRows.add(row);
-	}
+	// Add result row
+
+	resultRows.add(row);
+}
 %>
+
+<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>">
+
+<select name="<portlet:namespace/>type">
+	<option value=""></option>
+	<option <%= type.equals("portlet")? "selected" : "" %> value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
+	<option <%= type.equals("theme")? "selected" : "" %> value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
+	<option <%= type.equals("layout")? "selected" : "" %> value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
+	<option <%= type.equals("extension")? "selected" : "" %> value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
+</select>
+
+<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-products") %>">
+
+<br><br>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+
+</form>
 
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();

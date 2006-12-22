@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.bookmarks.action;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
@@ -47,15 +46,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getFolder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getFolder(httpReq);
 	}
 
 	public static void getFolder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getFolder(httpReq);
 	}
@@ -75,15 +72,13 @@ public class ActionUtil {
 	}
 
 	public static void getEntry(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEntry(httpReq);
 	}
 
 	public static void getEntry(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEntry(httpReq);
 	}

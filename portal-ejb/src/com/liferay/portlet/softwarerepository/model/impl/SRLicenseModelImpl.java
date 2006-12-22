@@ -84,20 +84,6 @@ public class SRLicenseModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public boolean getOpenSource() {
-		return _openSource;
-	}
-
-	public boolean isOpenSource() {
-		return _openSource;
-	}
-
-	public void setOpenSource(boolean openSource) {
-		if (openSource != _openSource) {
-			_openSource = openSource;
-		}
-	}
-
 	public String getUrl() {
 		return GetterUtil.getString(_url);
 	}
@@ -111,6 +97,20 @@ public class SRLicenseModelImpl extends BaseModelImpl {
 			}
 
 			_url = url;
+		}
+	}
+
+	public boolean getOpenSource() {
+		return _openSource;
+	}
+
+	public boolean isOpenSource() {
+		return _openSource;
+	}
+
+	public void setOpenSource(boolean openSource) {
+		if (openSource != _openSource) {
+			_openSource = openSource;
 		}
 	}
 
@@ -146,8 +146,8 @@ public class SRLicenseModelImpl extends BaseModelImpl {
 		SRLicenseImpl clone = new SRLicenseImpl();
 		clone.setLicenseId(getLicenseId());
 		clone.setName(getName());
-		clone.setOpenSource(getOpenSource());
 		clone.setUrl(getUrl());
+		clone.setOpenSource(getOpenSource());
 		clone.setActive(getActive());
 		clone.setRecommended(getRecommended());
 
@@ -200,8 +200,8 @@ public class SRLicenseModelImpl extends BaseModelImpl {
 
 	private long _licenseId;
 	private String _name;
-	private boolean _openSource;
 	private String _url;
+	private boolean _openSource;
 	private boolean _active;
 	private boolean _recommended;
 }

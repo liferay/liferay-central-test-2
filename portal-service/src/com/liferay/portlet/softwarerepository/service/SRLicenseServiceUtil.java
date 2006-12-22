@@ -30,14 +30,14 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public class SRLicenseServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRLicense addLicense(
-		java.lang.String name, boolean active, boolean openSource,
-		boolean recommended, java.lang.String url)
+		java.lang.String name, java.lang.String url, boolean openSource,
+		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
 
-		return srLicenseService.addLicense(name, active, openSource,
-			recommended, url);
+		return srLicenseService.addLicense(name, url, openSource, active,
+			recommended);
 	}
 
 	public static void deleteLicense(long licenseId)
@@ -56,42 +56,14 @@ public class SRLicenseServiceUtil {
 		return srLicenseService.getLicense(licenseId);
 	}
 
-	public static java.util.List getLicenses()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
-
-		return srLicenseService.getLicenses();
-	}
-
-	public static java.util.List getLicenses(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
-
-		return srLicenseService.getLicenses(active, recommended);
-	}
-
-	public static int getLicensesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
-
-		return srLicenseService.getLicensesCount();
-	}
-
-	public static int getLicensesCount(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
-
-		return srLicenseService.getLicensesCount(active, recommended);
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRLicense updateLicense(
-		long licenseId, java.lang.String name, boolean active,
-		boolean openSource, boolean recommended, java.lang.String url)
+		long licenseId, java.lang.String name, java.lang.String url,
+		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRLicenseService srLicenseService = SRLicenseServiceFactory.getService();
 
-		return srLicenseService.updateLicense(licenseId, name, active,
-			openSource, recommended, url);
+		return srLicenseService.updateLicense(licenseId, name, url, openSource,
+			active, recommended);
 	}
 }

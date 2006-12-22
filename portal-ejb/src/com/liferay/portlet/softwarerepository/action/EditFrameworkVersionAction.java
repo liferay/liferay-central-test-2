@@ -32,7 +32,11 @@ import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionServiceU
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import javax.portlet.*;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -44,8 +48,7 @@ import org.apache.struts.action.ActionMapping;
  * @author  Jorge Ferrer
  *
  */
-public class EditFrameworkVersionAction
-	extends PortletAction {
+public class EditFrameworkVersionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -56,10 +59,10 @@ public class EditFrameworkVersionAction
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateFrameworkVersion(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteFrameworkVersion(req);
 			}
 
 			sendRedirect(req, res);
@@ -103,37 +106,42 @@ public class EditFrameworkVersionAction
 			req, "portlet.software_repository.edit_framework_version"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
+	protected void deleteFrameworkVersion(ActionRequest req) throws Exception {
 		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
 
 		SRFrameworkVersionServiceUtil.deleteFrameworkVersion(
 			frameworkVersionId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
-		Layout layout = (Layout) req.getAttribute(WebKeys.LAYOUT);
-		String userId = (String) req.getAttribute(WebKeys.USER_ID);
+	protected void updateFrameworkVersion(ActionRequest req) throws Exception {
+		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long frameworkVersionId = ParamUtil.getLong(req, "frameworkVersionId");
 
 		String name = ParamUtil.getString(req, "name");
-		boolean active = ParamUtil.getBoolean(req, "active");
 		String url = ParamUtil.getString(req, "url");
+		boolean active = ParamUtil.getBoolean(req, "active");
 		int priority = ParamUtil.getInteger(req, "priority");
+
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
 
 		if (frameworkVersionId == 0) {
 
-			// Add entry
+			// Add framework version
 
 			SRFrameworkVersionServiceUtil.addFrameworkVersion(
-				userId, layout.getPlid(), name, active, priority, url);
+				layout.getPlid(), name, url, active, priority,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
-			// Update entry
+			// Update framework version
 
 			SRFrameworkVersionServiceUtil.updateFrameworkVersion(
-				frameworkVersionId, name, active, priority, url);
+				frameworkVersionId, name, url, active, priority);
 		}
 	}
 

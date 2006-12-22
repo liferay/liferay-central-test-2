@@ -24,16 +24,17 @@ package com.liferay.portlet.softwarerepository.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
 import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.SRProductEntryService;
-
-import java.util.List;
+import com.liferay.portlet.softwarerepository.service.permission.SRProductEntryPermission;
 
 /**
  * <a href="SRProductEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author  Jorge Ferrer
  * @author  Brian Wing Shun Chan
  *
  */
@@ -41,58 +42,67 @@ public class SRProductEntryServiceImpl extends PrincipalBean
 	implements SRProductEntryService {
 
 	public SRProductEntry addProductEntry(
-			String plid, String repoArtifactId, String repoGroupId, String name,
-			String type, long[] licenseIds, String shortDescription,
-			String longDescription, String pageURL)
+			String plid, String name, String type, String shortDescription,
+			String longDescription, String pageURL, String repoGroupId,
+			String repoArtifactId, long[] licenseIds,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		SRProductEntryPermission.check(
+			getPermissionChecker(), plid, ActionKeys.ADD_PRODUCT_ENTRY);
+
 		return SRProductEntryLocalServiceUtil.addProductEntry(
-			getUserId(), plid, repoArtifactId, repoGroupId, name, type,
-			licenseIds, shortDescription, longDescription, pageURL);
+			getUserId(), plid, name, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public SRProductEntry addProductEntry(
+			String plid, String name, String type, String shortDescription,
+			String longDescription, String pageURL, String repoGroupId,
+			String repoArtifactId, long[] licenseIds,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntryPermission.check(
+			getPermissionChecker(), plid, ActionKeys.ADD_PRODUCT_ENTRY);
+
+		return SRProductEntryLocalServiceUtil.addProductEntry(
+			getUserId(), plid, name, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
 		throws PortalException, SystemException {
-	 	SRProductEntryLocalServiceUtil.deleteProductEntry(productEntryId);
+
+		SRProductEntryPermission.check(
+			getPermissionChecker(), productEntryId, ActionKeys.DELETE);
+
+		SRProductEntryLocalServiceUtil.deleteProductEntry(productEntryId);
 	}
 
 	public SRProductEntry getProductEntry(long productEntryId)
 		throws PortalException, SystemException {
+
+		SRProductEntryPermission.check(
+			getPermissionChecker(), productEntryId, ActionKeys.VIEW);
+
 		return SRProductEntryLocalServiceUtil.getProductEntry(productEntryId);
 	}
 
-	public List getProductEntries(String groupId, int begin, int end)
-		throws SystemException {
-		return SRProductEntryLocalServiceUtil.getProductEntries(
-			groupId, begin, end);
-	}
-
-	public List getProductEntriesByUserId(
-		String groupId, String userId, int begin, int end)
-		throws SystemException {
-		return SRProductEntryLocalServiceUtil.getProductEntriesByUserId(
-			groupId, userId, begin, end);
-	}
-
-	public int getProductEntriesCountByUserId(String groupId, String userId)
-		throws SystemException {
-		return SRProductEntryLocalServiceUtil.getProductEntriesCountByUserId(
-			groupId, userId);
-	}
-
-	public int getProductEntriesCount(String groupId)
-		throws SystemException {
-		return SRProductEntryLocalServiceUtil.getProductEntriesCount(groupId);
-	}
-
 	public SRProductEntry updateProductEntry(
-			long productEntryId, String repoArtifactId, String repoGroupId,
-			String name, long[] licenseIds, String shortDescription,
-			String longDescription, String pageURL)
+			long productEntryId, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId, long[] licenseIds)
 		throws PortalException, SystemException {
+
+		SRProductEntryPermission.check(
+			getPermissionChecker(), productEntryId, ActionKeys.UPDATE);
+
 		return SRProductEntryLocalServiceUtil.updateProductEntry(
-			productEntryId, repoArtifactId, repoGroupId, name, licenseIds,
-			shortDescription, longDescription, pageURL);
+			productEntryId, name, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, licenseIds);
 	}
 
 }

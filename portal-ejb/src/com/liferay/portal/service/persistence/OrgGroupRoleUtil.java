@@ -215,9 +215,17 @@ public class OrgGroupRoleUtil {
 		getPersistence().removeByRoleId(roleId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByRoleId(java.lang.String roleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByRoleId(roleId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

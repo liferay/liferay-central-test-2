@@ -38,9 +38,8 @@ import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.WebsiteServiceUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -58,15 +57,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getAddress(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getAddress(httpReq);
 	}
 
 	public static void getAddress(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getAddress(httpReq);
 	}
@@ -84,15 +81,13 @@ public class ActionUtil {
 	}
 
 	public static void getEmailAddress(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEmailAddress(httpReq);
 	}
 
 	public static void getEmailAddress(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEmailAddress(httpReq);
 	}
@@ -113,15 +108,13 @@ public class ActionUtil {
 	}
 
 	public static void getPhone(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getPhone(httpReq);
 	}
 
 	public static void getPhone(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getPhone(httpReq);
 	}
@@ -139,15 +132,13 @@ public class ActionUtil {
 	}
 
 	public static void getOrganization(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrganization(httpReq);
 	}
 
 	public static void getOrganization(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrganization(httpReq);
 	}
@@ -168,15 +159,13 @@ public class ActionUtil {
 	}
 
 	public static void getOrgLabor(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrgLabor(httpReq);
 	}
 
 	public static void getOrgLabor(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrgLabor(httpReq);
 	}
@@ -194,15 +183,13 @@ public class ActionUtil {
 	}
 
 	public static void getRole(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getRole(httpReq);
 	}
 
 	public static void getRole(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getRole(httpReq);
 	}
@@ -222,15 +209,13 @@ public class ActionUtil {
 	}
 
 	public static void getUserGroup(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getUserGroup(httpReq);
 	}
 
 	public static void getUserGroup(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getUserGroup(httpReq);
 	}
@@ -250,15 +235,13 @@ public class ActionUtil {
 	}
 
 	public static void getWebsite(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getWebsite(httpReq);
 	}
 
 	public static void getWebsite(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getWebsite(httpReq);
 	}

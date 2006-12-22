@@ -78,7 +78,7 @@ public class DLFileShortcutPermission {
 
 		return permissionChecker.hasPermission(
 			folder.getGroupId(), DLFileShortcut.class.getName(),
-			String.valueOf(fileShortcut.getPrimaryKey()), actionId);
+			fileShortcut.getPrimaryKey(), actionId);
 	}
 
 }

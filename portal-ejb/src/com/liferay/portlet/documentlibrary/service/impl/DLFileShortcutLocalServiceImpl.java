@@ -149,8 +149,8 @@ public class DLFileShortcutLocalServiceImpl
 		ResourceLocalServiceUtil.addResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
-			String.valueOf(fileShortcut.getPrimaryKey()), false,
-			addCommunityPermissions, addGuestPermissions);
+			fileShortcut.getPrimaryKey(), false, addCommunityPermissions,
+			addGuestPermissions);
 	}
 
 	public void addFileShortcutResources(
@@ -174,7 +174,7 @@ public class DLFileShortcutLocalServiceImpl
 		ResourceLocalServiceUtil.addModelResources(
 			fileShortcut.getCompanyId(), folder.getGroupId(),
 			fileShortcut.getUserId(), DLFileShortcut.class.getName(),
-			String.valueOf(fileShortcut.getPrimaryKey()), communityPermissions,
+			fileShortcut.getPrimaryKey(), communityPermissions,
 			guestPermissions);
 	}
 
@@ -192,7 +192,7 @@ public class DLFileShortcutLocalServiceImpl
 		ResourceLocalServiceUtil.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
 			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-			String.valueOf(fileShortcut.getPrimaryKey()));
+			fileShortcut.getPrimaryKey());
 
 		// File shortcut
 

@@ -186,9 +186,17 @@ public class LayoutSetUtil {
 		getPersistence().removeByC_V(companyId, virtualHost);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByC_V(java.lang.String companyId,
 		java.lang.String virtualHost) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_V(companyId, virtualHost);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

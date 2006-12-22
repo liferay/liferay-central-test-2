@@ -38,6 +38,14 @@ import javax.portlet.PortletURL;
  */
 public class ResultRow {
 
+	public ResultRow(Object obj, long primaryKey, int pos) {
+		this(obj, String.valueOf(primaryKey), pos);
+	}
+
+	public ResultRow(Object obj, long primaryKey, int pos, boolean bold) {
+		this(obj, String.valueOf(primaryKey), pos, bold);
+	}
+
 	public ResultRow(Object obj, String primaryKey, int pos) {
 		this(obj, primaryKey, pos, false);
 	}

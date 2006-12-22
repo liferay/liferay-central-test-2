@@ -836,6 +836,28 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeAll() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("DELETE ");
+			query.append(
+				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion");
+
+			Query q = session.createQuery(query.toString());
+			q.executeUpdate();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public int countByGroupId(String groupId) throws SystemException {
 		Session session = null;
 
@@ -967,6 +989,40 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			}
 
 			q.setBoolean(queryPos++, active);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countAll() throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
 
 			Iterator itr = q.list().iterator();
 

@@ -25,7 +25,8 @@ package com.liferay.portlet.softwarerepository;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="NoSuchFrameworkVersionException.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchFrameworkVersionException.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Brian Wing Shun Chan
  *

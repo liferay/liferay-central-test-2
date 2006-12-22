@@ -359,6 +359,10 @@ public class PortletPreferencesUtil {
 		getPersistence().removeByL_O(layoutId, ownerId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByPortletId(java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByPortletId(portletId);
@@ -377,6 +381,10 @@ public class PortletPreferencesUtil {
 	public static int countByL_O(java.lang.String layoutId,
 		java.lang.String ownerId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByL_O(layoutId, ownerId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

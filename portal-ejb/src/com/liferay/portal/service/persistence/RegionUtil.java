@@ -303,6 +303,10 @@ public class RegionUtil {
 		getPersistence().removeByC_A(countryId, active);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCountryId(java.lang.String countryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCountryId(countryId);
@@ -316,6 +320,10 @@ public class RegionUtil {
 	public static int countByC_A(java.lang.String countryId, boolean active)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_A(countryId, active);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

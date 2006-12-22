@@ -40,18 +40,36 @@ import javax.ejb.SessionContext;
 public class SRProductEntryServiceEJBImpl implements SRProductEntryService,
 	SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
-		java.lang.String plid, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name,
-		java.lang.String type, long[] licenseIds,
+		java.lang.String plid, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRProductEntryServiceFactory.getTxImpl().addProductEntry(plid,
-			repoArtifactId, repoGroupId, name, type, licenseIds,
-			shortDescription, longDescription, pageURL);
+			name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String plid, java.lang.String name, java.lang.String type,
+		java.lang.String shortDescription, java.lang.String longDescription,
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return SRProductEntryServiceFactory.getTxImpl().addProductEntry(plid,
+			name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds, communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
@@ -70,54 +88,18 @@ public class SRProductEntryServiceEJBImpl implements SRProductEntryService,
 		return SRProductEntryServiceFactory.getTxImpl().getProductEntry(productEntryId);
 	}
 
-	public java.util.List getProductEntries(java.lang.String groupId,
-		int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductEntryServiceFactory.getTxImpl().getProductEntries(groupId,
-			begin, end);
-	}
-
-	public java.util.List getProductEntriesByUserId(java.lang.String groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductEntryServiceFactory.getTxImpl()
-										   .getProductEntriesByUserId(groupId,
-			userId, begin, end);
-	}
-
-	public int getProductEntriesCountByUserId(java.lang.String groupId,
-		java.lang.String userId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductEntryServiceFactory.getTxImpl()
-										   .getProductEntriesCountByUserId(groupId,
-			userId);
-	}
-
-	public int getProductEntriesCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRProductEntryServiceFactory.getTxImpl().getProductEntriesCount(groupId);
-	}
-
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRProductEntryServiceFactory.getTxImpl().updateProductEntry(productEntryId,
-			repoArtifactId, repoGroupId, name, licenseIds, shortDescription,
-			longDescription, pageURL);
+			name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds);
 	}
 
 	public void ejbCreate() throws CreateException {

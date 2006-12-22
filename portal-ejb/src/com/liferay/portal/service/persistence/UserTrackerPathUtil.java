@@ -218,9 +218,17 @@ public class UserTrackerPathUtil {
 		getPersistence().removeByUserTrackerId(userTrackerId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByUserTrackerId(java.lang.String userTrackerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserTrackerId(userTrackerId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

@@ -43,43 +43,112 @@ import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionServiceU
  */
 public class SRFrameworkVersionServiceHttp {
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
-		HttpPrincipal httpPrincipal, java.lang.String userId,
-		java.lang.String plid, java.lang.String name, boolean active,
-		int priority, java.lang.String url)
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = userId;
+			Object paramObj0 = plid;
 
-			if (userId == null) {
+			if (plid == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = plid;
+			Object paramObj1 = name;
 
-			if (plid == null) {
+			if (name == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = url;
 
-			if (name == null) {
+			if (url == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
 			Object paramObj3 = new BooleanWrapper(active);
 			Object paramObj4 = new IntegerWrapper(priority);
-			Object paramObj5 = url;
+			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
+					"addFrameworkVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.softwarerepository.model.SRFrameworkVersion)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
+		HttpPrincipal httpPrincipal, java.lang.String plid,
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = plid;
+
+			if (plid == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = url;
 
 			if (url == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new BooleanWrapper(active);
+			Object paramObj4 = new IntegerWrapper(priority);
+			Object paramObj5 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj6 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
 					"addFrameworkVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 			Object returnObj = null;
 
@@ -172,149 +241,10 @@ public class SRFrameworkVersionServiceHttp {
 		}
 	}
 
-	public static java.util.List getFrameworkVersions(
-		HttpPrincipal httpPrincipal, java.lang.String groupId)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static java.util.List getFrameworkVersions(
-		HttpPrincipal httpPrincipal, java.lang.String groupId, boolean active)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new BooleanWrapper(active);
-			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersions",
-					new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static int getFrameworkVersionsCount(HttpPrincipal httpPrincipal,
-		java.lang.String groupId) throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersionsCount", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static int getFrameworkVersionsCount(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, boolean active)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj1 = new BooleanWrapper(active);
-			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
-					"getFrameworkVersionsCount",
-					new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion updateFrameworkVersion(
 		HttpPrincipal httpPrincipal, long frameworkVersionId,
-		java.lang.String name, boolean active, int priority,
-		java.lang.String url)
+		java.lang.String name, java.lang.String url, boolean active,
+		int priority)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -325,14 +255,14 @@ public class SRFrameworkVersionServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new BooleanWrapper(active);
-			Object paramObj3 = new IntegerWrapper(priority);
-			Object paramObj4 = url;
+			Object paramObj2 = url;
 
 			if (url == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = new BooleanWrapper(active);
+			Object paramObj4 = new IntegerWrapper(priority);
 			MethodWrapper methodWrapper = new MethodWrapper(SRFrameworkVersionServiceUtil.class.getName(),
 					"updateFrameworkVersion",
 					new Object[] {

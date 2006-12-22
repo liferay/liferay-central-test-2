@@ -29,11 +29,9 @@ package com.liferay.portlet.softwarerepository.model;
  *
  */
 public interface SRProductVersion extends SRProductVersionModel {
-	public java.util.List getFrameworkVersionIds()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry getProductEntry();
 
-	public java.lang.String getFrameworkVersionNames()
+	public java.util.List getFrameworkVersions()
 		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
+			com.liferay.portal.PortalException;
 }

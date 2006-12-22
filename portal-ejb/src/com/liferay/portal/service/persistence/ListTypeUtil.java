@@ -211,9 +211,17 @@ public class ListTypeUtil {
 		getPersistence().removeByType(type);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByType(java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByType(type);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

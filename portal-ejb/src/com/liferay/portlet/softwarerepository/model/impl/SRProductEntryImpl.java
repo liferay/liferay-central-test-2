@@ -22,15 +22,11 @@
 
 package com.liferay.portlet.softwarerepository.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
-import com.liferay.portlet.softwarerepository.model.SRLicense;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
-import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil;
+import com.liferay.portlet.softwarerepository.service.SRLicenseLocalServiceUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -39,37 +35,15 @@ import java.util.List;
  * @author  Brian Wing Shun Chan
  *
  */
-public class SRProductEntryImpl extends SRProductEntryModelImpl
-	implements SRProductEntry {
+public class SRProductEntryImpl
+	extends SRProductEntryModelImpl implements SRProductEntry {
+
 	public SRProductEntryImpl() {
 	}
 
-	public List getLicenseIds()
-		throws SystemException, NoSuchProductEntryException {
-		List licenses =  SRProductEntryLocalServiceUtil.
-			getSRLicenses(getPrimaryKey());
-		List licenseIds = new ArrayList();
-		for (Iterator iterator = licenses.iterator(); iterator.hasNext();) {
-			SRLicense l = (SRLicense) iterator.next();
-			licenseIds.add(new Long(l.getLicenseId()));
-		}
-		return licenseIds;
-	}
-
-	public String getLicenseNames()
-		throws SystemException, NoSuchProductEntryException {
-		List licenses =  SRProductEntryLocalServiceUtil.
-			getSRLicenses(getPrimaryKey());
-		StringBuffer names = new StringBuffer();
-		for (Iterator iterator = licenses.iterator(); iterator.hasNext();) {
-			SRLicense l = (SRLicense) iterator.next();
-			names.append(l.getName());
-			if (iterator.hasNext()) {
-				names.append(StringPool.COMMA + StringPool.SPACE);
-			}
-		}
-		return names.toString();
-
+	public List getLicenses() throws PortalException, SystemException {
+		return SRLicenseLocalServiceUtil.getProductEntryLicenses(
+			getProductEntryId());
 	}
 
 }

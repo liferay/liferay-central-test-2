@@ -26,50 +26,86 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
-import com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
+import com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
 import com.liferay.portlet.softwarerepository.model.SRProductVersion;
-import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionUtil;
 
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="SRProductVersionLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SRProductVersionLocalServiceImpl.java.html"><b><i>View Source</i>
+ * </b></a>
  *
+ * @author  Jorge Ferrer
  * @author  Brian Wing Shun Chan
  *
  */
 public class SRProductVersionLocalServiceImpl
 	implements SRProductVersionLocalService {
+
 	public SRProductVersion addProductVersion(
 			String userId, long productEntryId, String version,
-			String changeLog, long[] frameworkVersionIds,
-			String downloadPageURL, String directDownloadURL,
-			boolean repoStoreArtifact)
+			String changeLog, String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		return addProductVersion(
+			userId, productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public SRProductVersion addProductVersion(
+			String userId, long productEntryId, String version,
+			String changeLog, String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addProductVersion(
+			userId, productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds, null,
+			null, communityPermissions, guestPermissions);
+	}
+
+	public SRProductVersion addProductVersion(
+			String userId, long productEntryId, String version,
+			String changeLog, String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		// Product version
+
 		User user = UserUtil.findByPrimaryKey(userId);
+		SRProductEntry productEntry = getProductEntry(
+			user.getCompanyId(), productEntryId);
+		productEntryId = productEntry.getProductEntryId();
 		Date now = new Date();
 
 		long productVersionId = CounterLocalServiceUtil.increment(
 			SRProductVersion.class.getName());
 
-		SRProductEntry productEntry = SRProductEntryLocalServiceUtil.
-			getProductEntry(productEntryId);
+		SRProductVersion productVersion = SRProductVersionUtil.create(
+			productVersionId);
 
-		SRProductVersion productVersion = SRProductVersionUtil.
-			create(productVersionId);
-
+		productVersion.setCompanyId(user.getCompanyId());
 		productVersion.setUserId(user.getUserId());
+		productVersion.setUserName(user.getFullName());
 		productVersion.setCreateDate(now);
 		productVersion.setModifiedDate(now);
 		productVersion.setProductEntryId(productEntryId);
-
 		productVersion.setVersion(version);
 		productVersion.setChangeLog(changeLog);
 		productVersion.setDownloadPageURL(downloadPageURL);
@@ -77,21 +113,126 @@ public class SRProductVersionLocalServiceImpl
 		productVersion.setRepoStoreArtifact(repoStoreArtifact);
 
 		SRProductVersionUtil.update(productVersion);
+
+		SRProductEntryUtil.update(productEntry);
+
+		// Resources
+
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addProductVersionResources(
+				productEntry, productVersion,
+				addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addProductVersionResources(
+				productEntry, productVersion, communityPermissions,
+				guestPermissions);
+		}
+
+		// Framework versions
+
 		SRProductVersionUtil.setSRFrameworkVersions(
 			productEntryId, frameworkVersionIds);
 
+		// Product entry
+
 		productEntry.setModifiedDate(now);
-		SRProductEntryUtil.update(productEntry);
+
 		return productVersion;
+	}
+
+	public void addProductVersionResources(
+			long productEntryId, long productVersionId,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+		SRProductVersion productVersion =
+			SRProductVersionUtil.findByPrimaryKey(productVersionId);
+
+		addProductVersionResources(
+			productEntry, productVersion, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addProductVersionResources(
+			SRProductEntry productEntry, SRProductVersion productVersion,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addResources(
+			productVersion.getCompanyId(), productEntry.getGroupId(),
+			productVersion.getUserId(), SRProductVersion.class.getName(),
+			productVersion.getPrimaryKey(), false, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addProductVersionResources(
+			long productEntryId, long productVersionId,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+		SRProductVersion productVersion =
+			SRProductVersionUtil.findByPrimaryKey(productVersionId);
+
+		addProductVersionResources(
+			productEntry, productVersion, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addProductVersionResources(
+			SRProductEntry productEntry, SRProductVersion productVersion,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			productVersion.getCompanyId(), productEntry.getGroupId(),
+			productVersion.getUserId(), SRProductVersion.class.getName(),
+			productVersion.getPrimaryKey(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteProductVersion(long productVersionId)
 		throws PortalException, SystemException {
 
-		SRProductVersion productVersion = SRProductVersionUtil.
-			findByPrimaryKey(productVersionId);
+		SRProductVersion productVersion =
+			SRProductVersionUtil.findByPrimaryKey(productVersionId);
 
-		SRProductVersionUtil.remove(productVersion.getProductVersionId());
+		deleteProductVersion(productVersion);
+	}
+
+	public void deleteProductVersion(SRProductVersion productVersion)
+		throws PortalException, SystemException {
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			productVersion.getCompanyId(), SRProductVersion.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			productVersion.getPrimaryKey());
+
+		// Product version
+
+		SRProductVersionUtil.remove(productVersion.getPrimaryKey());
+	}
+
+	public void deleteProductVersions(long productEntryId)
+		throws PortalException, SystemException {
+
+		Iterator itr = SRProductVersionUtil.findByProductEntryId(
+			productEntryId).iterator();
+
+		while (itr.hasNext()) {
+			SRProductVersion productVersion = (SRProductVersion)itr.next();
+
+			deleteProductVersion(productVersion);
+		}
 	}
 
 	public SRProductVersion getProductVersion(long productVersionId)
@@ -100,8 +241,7 @@ public class SRProductVersionLocalServiceImpl
 		return SRProductVersionUtil.findByPrimaryKey(productVersionId);
 	}
 
-	public List getProductVersions(
-			long productEntryId, int begin, int end)
+	public List getProductVersions(long productEntryId, int begin, int end)
 		throws SystemException {
 
 		return SRProductVersionUtil.findByProductEntryId(
@@ -115,21 +255,19 @@ public class SRProductVersionLocalServiceImpl
 	}
 
 	public SRProductVersion updateProductVersion(
-		long productVersionId, String version,
-		String changeLog, long[] frameworkVersionIds,
-		String downloadPageURL, String directDownloadURL,
-		boolean repoStoreArtifact)
+			long productVersionId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws PortalException, SystemException {
 
-		SRProductVersion productVersion = SRProductVersionUtil.
-			findByPrimaryKey(productVersionId);
-
-		SRProductEntry productEntry = SRProductEntryLocalServiceUtil.
-			getProductEntry(productVersion.getProductEntryId());
+		// Product version
 
 		Date now = new Date();
-		productVersion.setModifiedDate(now);
 
+		SRProductVersion productVersion =
+			SRProductVersionUtil.findByPrimaryKey(productVersionId);
+
+		productVersion.setModifiedDate(now);
 		productVersion.setVersion(version);
 		productVersion.setChangeLog(changeLog);
 		productVersion.setDownloadPageURL(downloadPageURL);
@@ -137,17 +275,38 @@ public class SRProductVersionLocalServiceImpl
 		productVersion.setRepoStoreArtifact(repoStoreArtifact);
 
 		SRProductVersionUtil.update(productVersion);
+
+		// Framework versions
+
 		SRProductVersionUtil.setSRFrameworkVersions(
 			productVersionId, frameworkVersionIds);
 
+		// Product entry
+
+		SRProductEntry productEntry = SRProductEntryUtil.findByPrimaryKey(
+			productVersion.getProductEntryId());
+
 		productEntry.setModifiedDate(now);
+
 		SRProductEntryUtil.update(productEntry);
+
 		return productVersion;
 	}
 
-	public List getSRFrameworkVersions(long productVersionId)
-		throws SystemException, NoSuchProductVersionException {
-		return SRProductVersionUtil.getSRFrameworkVersions(productVersionId);
+	protected SRProductEntry getProductEntry(
+			String companyId, long productEntryId)
+		throws PortalException, SystemException {
+
+		// Ensure product entry exists and belongs to the proper company
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+
+		if (!companyId.equals(productEntry.getCompanyId())) {
+			throw new NoSuchProductEntryException();
+		}
+
+		return productEntry;
 	}
 
 }

@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
@@ -47,15 +46,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getCategory(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCategory(httpReq);
 	}
 
 	public static void getCategory(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCategory(httpReq);
 	}
@@ -75,15 +72,13 @@ public class ActionUtil {
 	}
 
 	public static void getMessage(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getMessage(httpReq);
 	}
 
 	public static void getMessage(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getMessage(httpReq);
 	}

@@ -23,9 +23,8 @@
 package com.liferay.portlet.shopping.action;
 
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
@@ -52,15 +51,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getCategory(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCategory(httpReq);
 	}
 
 	public static void getCategory(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCategory(httpReq);
 	}
@@ -81,15 +78,13 @@ public class ActionUtil {
 	}
 
 	public static void getCoupon(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCoupon(httpReq);
 	}
 
 	public static void getCoupon(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getCoupon(httpReq);
 	}
@@ -111,15 +106,13 @@ public class ActionUtil {
 	}
 
 	public static void getItem(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getItem(httpReq);
 	}
 
 	public static void getItem(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getItem(httpReq);
 	}
@@ -137,15 +130,13 @@ public class ActionUtil {
 	}
 
 	public static void getOrder(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrder(httpReq);
 	}
 
 	public static void getOrder(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getOrder(httpReq);
 	}

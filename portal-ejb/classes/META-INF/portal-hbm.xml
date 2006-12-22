@@ -1050,8 +1050,8 @@
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="openSource" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="openSource" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="active" column="active_" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="recommended" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>

@@ -25,16 +25,132 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	String redirect = ParamUtil.getString(request, "redirect");
-	String tabs1 = ParamUtil.getString(request, "tabs1", "products");
-	String tabs2 = ParamUtil.getString(request, "tabs2", "comments");
+String redirect = ParamUtil.getString(request, "redirect");
 
-	SRProductEntry productEntry = (SRProductEntry) request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_PRODUCT_ENTRY);
+String tabs1 = ParamUtil.getString(request, "tabs1", "comments");
 
-	long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
+SRProductEntry productEntry = (SRProductEntry)request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_PRODUCT_ENTRY);
+
+long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntryId");
+
+PortletURL portletURL = renderResponse.createRenderURL();
+
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
+portletURL.setParameter("struts_action", "/software_repository/view_product_entry");
+portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("redirect", redirect);
+portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+<liferay-ui:tabs
+	names="product"
+	backURL="<%= redirect %>"
+/>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "name") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= productEntry.getName() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "type") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, productEntry.getType()) %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "licenses") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		Iterator itr = productEntry.getLicenses().iterator();
+
+		while (itr.hasNext()) {
+			SRLicense license = (SRLicense)itr.next();
+		%>
+
+			<a href="<%= license.getUrl() %>" target="_blank"><%= license.getName() %></a><c:if test="<%= itr.hasNext() %>">, </c:if>
+
+		<%
+		}
+		%>
+
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "page-url") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<a href="<%= productEntry.getPageURL() %>"><%= productEntry.getPageURL() %></a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "short-description") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= productEntry.getShortDescription() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "long-description") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= productEntry.getLongDescription() %>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<liferay-ui:ratings
+	className="<%= SRProductEntry.class.getName() %>"
+	classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
+	url='<%= themeDisplay.getPathMain() + "/software_repository/rate_product_entry?productEntryId=" + productEntryId %>'
+/>
+
+<liferay-ui:tabs
+	names="comments,version-history"
+	url="<%= portletURL.toString() %>"
+/>
+
+<c:choose>
+	<c:when test='<%= tabs2.equals("comments") %>'>
+		<portlet:actionURL var="discussionURL">
+			<portlet:param name="struts_action" value="/software_repository/edit_product_entry_discussion" />
+		</portlet:actionURL>
+
+		<liferay-ui:discussion
+			formAction="<%= discussionURL %>"
+			className="<%= SRProductEntry.class.getName() %>"
+			classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
+			userId="<%= productEntry.getUserId() %>"
+			subject="<%= productEntry.getName() %>"
+			redirect="<%= currentURL %>"
+		/>
+	</c:when>
+	<c:when test='<%= tabs2.equals("version-history") %>'>
+	</c:when>
+</c:choose>
+
+<%--<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 	<portlet:param name="struts_action" value="/software_repository/view_product_entry" />
 	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
@@ -56,16 +172,10 @@
 	<portlet:param name="struts_action" value="/software_repository/view" />
 </portlet:renderURL>
 
-<liferay-ui:tabs
-	names="products"
-	url="<%= portletURL.toString()%>"
-	backURL="<%=Validator.isNull(redirect)?listURL.toString():redirect%>"
-/>
-
 <div class="product-entry-detail">
 	<h2>
 		<%=productEntry.getName()%>
-		<%=LanguageUtil.get(pageContext, "by")%> <span class="author"><%=productEntry.getUserName()%></span>
+		<%=LanguageUtil.get(pageContext, "by")%> <span class="author"><%= productEntry.getUserName() %></span>
 	</h2>
 	<div class="ratings" style="display: inline; margin-bottom: 35px" align="left">
 		<liferay-ui:ratings
@@ -263,4 +373,4 @@
 
 		</c:when>
 	</c:choose>
-</div>
+</div>--%>

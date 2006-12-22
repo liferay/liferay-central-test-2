@@ -252,11 +252,11 @@
 	<definition name="portlet.calendar.view_event" extends="portlet.calendar">
 		<put name="portlet_content" value="/portlet/calendar/view_event.jsp" />
 	</definition>
-	
+
 	<!-- Chat -->
-	
+
 	<definition name="portlet.chat" extends="portlet" />
-	
+
 	<definition name="portlet.chat.view" extends="portlet.chat">
 		<put name="portlet_content" value="/portlet/chat/view.jsp" />
 	</definition>
@@ -905,18 +905,6 @@
 		<put name="portlet_decorate" value="false" />
 	</definition>
 
-	<definition name="portlet.software_repository.view" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view.jsp" />
-	</definition>
-
-	<definition name="portlet.software_repository.view_product_entry" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view_product_entry.jsp" />
-	</definition>
-
-	<definition name="portlet.software_repository.edit_product_entry" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/edit_product_entry.jsp" />
-	</definition>
-
 	<definition name="portlet.software_repository.edit_framework_version" extends="portlet.software_repository">
 		<put name="portlet_content" value="/portlet/software_repository/edit_framework_version.jsp" />
 	</definition>
@@ -925,8 +913,8 @@
 		<put name="portlet_content" value="/portlet/software_repository/edit_license.jsp" />
 	</definition>
 
-	<definition name="portlet.software_repository.view_product_version" extends="portlet.software_repository">
-		<put name="portlet_content" value="/portlet/software_repository/view_product_version.jsp" />
+	<definition name="portlet.software_repository.edit_product_entry" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/edit_product_entry.jsp" />
 	</definition>
 
 	<definition name="portlet.software_repository.edit_product_version" extends="portlet.software_repository">
@@ -939,6 +927,18 @@
 
 	<definition name="portlet.software_repository.search" extends="portlet.software_repository">
 		<put name="portlet_content" value="/portlet/software_repository/search.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.view" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.view_product_entry" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view_product_entry.jsp" />
+	</definition>
+
+	<definition name="portlet.software_repository.view_product_version" extends="portlet.software_repository">
+		<put name="portlet_content" value="/portlet/software_repository/view_product_version.jsp" />
 	</definition>
 
 	<!-- Recent Documents -->

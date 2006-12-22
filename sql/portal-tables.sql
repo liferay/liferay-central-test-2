@@ -705,13 +705,25 @@ create table SRFrameworkVersion (
 	priority INTEGER
 );
 
+create table SRFrameworkVersions_SRProductVersions (
+	productVersionId INTEGER not null,
+	frameworkVersionId INTEGER not null,
+	primary key (productVersionId, frameworkVersionId)
+);
+
 create table SRLicense (
 	licenseId INTEGER not null primary key,
 	name VARCHAR(75) null,
-	openSource BOOLEAN,
 	url VARCHAR(1024) null,
+	openSource BOOLEAN,
 	active_ BOOLEAN,
 	recommended BOOLEAN
+);
+
+create table SRLicenses_SRProductEntries (
+	productEntryId INTEGER not null,
+	licenseId INTEGER not null,
+	primary key (productEntryId, licenseId)
 );
 
 create table SRProductEntry (
@@ -731,18 +743,6 @@ create table SRProductEntry (
 	repoArtifactId VARCHAR(75) null
 );
 
-create table SRLicenses_SRProductEntries (
-	productEntryId INTEGER not null,
-	licenseId INTEGER not null,
-	primary key (productEntryId, licenseId)
-);
-
-create table SRFrameworkVersions_SRProductVersions (
-	productVersionId INTEGER not null,
-	frameworkVersionId INTEGER not null,
-	primary key (productVersionId, frameworkVersionId)
-);
-
 create table SRProductVersion (
 	productVersionId INTEGER not null primary key,
 	companyId VARCHAR(75) not null,
@@ -752,9 +752,9 @@ create table SRProductVersion (
 	modifiedDate DATE null,
 	productEntryId INTEGER,
 	version VARCHAR(75) null,
-	changeLog VARCHAR(75) null,
-	downloadPageURL VARCHAR(75) null,
-	directDownloadURL VARCHAR(75) null,
+	changeLog STRING null,
+	downloadPageURL VARCHAR(1024) null,
+	directDownloadURL VARCHAR(1024) null,
 	repoStoreArtifact BOOLEAN
 );
 

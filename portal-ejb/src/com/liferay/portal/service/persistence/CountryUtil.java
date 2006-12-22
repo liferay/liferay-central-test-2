@@ -209,9 +209,17 @@ public class CountryUtil {
 		getPersistence().removeByActive(active);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByActive(boolean active)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByActive(active);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

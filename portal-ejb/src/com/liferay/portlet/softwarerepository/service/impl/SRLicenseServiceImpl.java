@@ -22,101 +22,51 @@
 
 package com.liferay.portlet.softwarerepository.service.impl;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.softwarerepository.model.SRLicense;
+import com.liferay.portlet.softwarerepository.service.SRLicenseLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.SRLicenseService;
-import com.liferay.portlet.softwarerepository.service.persistence.SRLicenseUtil;
-
-import java.util.List;
 
 /**
  * <a href="SRLicenseServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
+ * @author  Brian Wing Shun Chan
  *
  */
-public class SRLicenseServiceImpl extends PrincipalBean
-	implements SRLicenseService {
+public class SRLicenseServiceImpl
+	extends PrincipalBean implements SRLicenseService {
+
 	public SRLicense addLicense(
-			String name, boolean active, boolean openSource,
-			boolean recommended, String url)
+			String name, String url, boolean openSource, boolean active,
+			boolean recommended)
 		throws PortalException, SystemException {
 
-		long licenseId = CounterLocalServiceUtil.increment(
-			SRLicense.class.getName());
-
-		SRLicense license = SRLicenseUtil.create(licenseId);
-
-		license.setName(name);
-		license.setActive(active);
-		license.setUrl(url);
-		license.setOpenSource(openSource);
-		license.setRecommended(recommended);
-
-		SRLicenseUtil.update(license);
-
-		return license;
+		return SRLicenseLocalServiceUtil.addLicense(
+			name, url, openSource, active, recommended);
 	}
 
 	public void deleteLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		SRLicense license = SRLicenseUtil.findByPrimaryKey(licenseId);
-
-		SRLicenseUtil.remove(license.getLicenseId());
+		SRLicenseLocalServiceUtil.deleteLicense(licenseId);
 	}
 
 	public SRLicense getLicense(long licenseId)
 		throws PortalException, SystemException {
 
-		return SRLicenseUtil.findByPrimaryKey(licenseId);
-	}
-
-	public List getLicenses()
-		throws SystemException {
-
-		return SRLicenseUtil.findAll();
-	}
-
-	public List getLicenses(boolean active, boolean recommended)
-		throws SystemException {
-
-		return SRLicenseUtil.findByA_R(active, recommended);
-	}
-
-	public int getLicensesCount()
-		throws SystemException {
-
-		return SRLicenseUtil.countByActive(true) +
-			SRLicenseUtil.countByActive(false);
-	}
-
-	public int getLicensesCount(boolean active, boolean recommended)
-		throws SystemException {
-
-		return SRLicenseUtil.countByA_R(active, recommended);
+		return SRLicenseLocalServiceUtil.getLicense(licenseId);
 	}
 
 	public SRLicense updateLicense(
-		long licenseId, String name, boolean active, boolean openSource,
-		boolean recommended, String url)
+			long licenseId, String name, String url, boolean openSource,
+			boolean active, boolean recommended)
 		throws PortalException, SystemException {
 
-		SRLicense license =
-			SRLicenseUtil.findByPrimaryKey(licenseId);
-
-		license.setName(name);
-		license.setActive(active);
-		license.setUrl(url);
-		license.setOpenSource(openSource);
-		license.setRecommended(recommended);
-
-		SRLicenseUtil.update(license);
-
-		return license;
+		return SRLicenseLocalServiceUtil.updateLicense(
+			licenseId, name, url, openSource, active, recommended);
 	}
 
 }

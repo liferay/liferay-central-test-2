@@ -43,7 +43,8 @@ import org.apache.lucene.index.Term;
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author  Jorge Ferrer
+ * @author  Brian Wing Shun Chan
  *
  */
 public class Indexer
@@ -52,14 +53,20 @@ public class Indexer
 	public static final String PORTLET_ID = PortletKeys.SOFTWARE_REPOSITORY;
 
 	public static void addProductEntry(
-		String companyId, long productEntryId, String userName, String groupId,
-		String repoArtifactId, String repoGroupId, String name, String type,
-		String shortDescription, String longDescription, String pageURL)
+			String companyId, String groupId, String userId, String userName,
+			long productEntryId, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {
 			shortDescription = Html.stripHtml(shortDescription);
 			longDescription = Html.stripHtml(longDescription);
+
+			String content =
+				userId + " " + userName + " " + type + " " + shortDescription +
+					" " + longDescription + " " + pageURL + repoGroupId + " " +
+						repoArtifactId;
 
 			IndexWriter writer = LuceneUtil.getWriter(companyId);
 
@@ -68,30 +75,24 @@ public class Indexer
 			doc.add(
 				LuceneFields.getKeyword(
 					LuceneFields.UID,
-					LuceneFields.getUID(
-						PORTLET_ID, Long.toString(productEntryId))));
+					LuceneFields.getUID(PORTLET_ID, productEntryId)));
 
 			doc.add(
 				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
 			doc.add(
 				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
 			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+			doc.add(LuceneFields.getKeyword(LuceneFields.USER_ID, userId));
 
 			doc.add(LuceneFields.getText(LuceneFields.TITLE, name));
-
-			String content = repoArtifactId + " " + repoGroupId + " " + type +
-				" " + shortDescription + " " + longDescription + " " + pageURL +
-				" " + userName;
 			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
 			doc.add(LuceneFields.getDate(LuceneFields.MODIFIED));
 
-			doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
-			doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
-			doc.add(LuceneFields.getKeyword("userName", userName));
+			doc.add(LuceneFields.getKeyword("productEntryId", productEntryId));
 			doc.add(LuceneFields.getKeyword("type", type));
-			doc.add(LuceneFields.getKeyword(
-				"productEntryId", Long.toString(productEntryId)));
+			doc.add(LuceneFields.getKeyword("repoGroupId", repoGroupId));
+			doc.add(LuceneFields.getKeyword("repoArtifactId", repoArtifactId));
 
 			writer.addDocument(doc);
 
@@ -108,11 +109,29 @@ public class Indexer
 			reader.deleteDocuments(
 				new Term(
 					LuceneFields.UID,
-					LuceneFields.getUID(PORTLET_ID,
-						Long.toString(productEntryId))));
+					LuceneFields.getUID(PORTLET_ID, productEntryId)));
 
 			reader.close();
 		}
+	}
+
+	public static void updateProductEntry(
+			String companyId, String groupId, String userId, String userName,
+			long productEntryId, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId)
+		throws IOException {
+
+		try {
+			deleteProductEntry(companyId, productEntryId);
+		}
+		catch (IOException ioe) {
+		}
+
+		addProductEntry(
+			companyId, groupId, userId, userName, productEntryId, name, type,
+			shortDescription, longDescription, pageURL, repoGroupId,
+			repoArtifactId);
 	}
 
 	public DocumentSummary getDocumentSummary(
@@ -132,7 +151,8 @@ public class Indexer
 
 		String productEntryId = doc.get("productEntryId");
 
-		portletURL.setParameter("struts_action", "/software_repository/view_product_entry");
+		portletURL.setParameter(
+			"struts_action", "/software_repository/view_product_entry");
 		portletURL.setParameter("productEntryId", productEntryId);
 
 		return new DocumentSummary(title, content, portletURL);
@@ -145,25 +165,6 @@ public class Indexer
 		catch (Exception e) {
 			throw new SearchException(e);
 		}
-	}
-
-	public static void updateProductEntry(
-		String companyId, long productEntryId, String userName, String groupId,
-		String repoArtifactId, String repoGroupId,
-		String name, String type, String shortDescription,
-		String longDescription, String pageURL)
-		throws IOException {
-
-		try {
-			deleteProductEntry(companyId, productEntryId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addProductEntry(
-			companyId, productEntryId, userName, groupId, repoArtifactId,
-			repoGroupId, name, type, shortDescription, longDescription,
-			pageURL);
 	}
 
 }

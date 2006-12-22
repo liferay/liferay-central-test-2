@@ -31,6 +31,14 @@ package com.liferay.portal.service;
 public interface ResourceLocalService {
 	public void addModelResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String userId,
+		java.lang.String name, long primKey,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addModelResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String userId,
 		java.lang.String name, java.lang.String primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -51,6 +59,13 @@ public interface ResourceLocalService {
 
 	public void addResources(java.lang.String companyId,
 		java.lang.String groupId, java.lang.String userId,
+		java.lang.String name, long primKey, boolean portletActions,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addResources(java.lang.String companyId,
+		java.lang.String groupId, java.lang.String userId,
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -62,6 +77,12 @@ public interface ResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteResource(com.liferay.portal.model.Resource resource)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deleteResource(java.lang.String companyId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		long primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

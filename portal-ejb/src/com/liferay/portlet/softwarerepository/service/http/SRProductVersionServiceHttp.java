@@ -25,7 +25,6 @@ package com.liferay.portlet.softwarerepository.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
-import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -45,8 +44,9 @@ public class SRProductVersionServiceHttp {
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		HttpPrincipal httpPrincipal, long productEntryId,
 		java.lang.String version, java.lang.String changeLog,
-		long[] frameworkVersionIds, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact)
+		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -63,30 +63,118 @@ public class SRProductVersionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = frameworkVersionIds;
-
-			if (frameworkVersionIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = downloadPageURL;
+			Object paramObj3 = downloadPageURL;
 
 			if (downloadPageURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = directDownloadURL;
+
+			if (directDownloadURL == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = directDownloadURL;
+			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj6 = frameworkVersionIds;
 
-			if (directDownloadURL == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+			if (frameworkVersionIds == null) {
+				paramObj6 = new NullWrapper("[J");
 			}
 
-			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj7 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj8 = new BooleanWrapper(addGuestPermissions);
 			MethodWrapper methodWrapper = new MethodWrapper(SRProductVersionServiceUtil.class.getName(),
 					"addProductVersion",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7, paramObj8
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.softwarerepository.model.SRProductVersion)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			String stackTrace = StackTraceUtil.getStackTrace(se);
+			_log.error(stackTrace);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		HttpPrincipal httpPrincipal, long productEntryId,
+		java.lang.String version, java.lang.String changeLog,
+		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(productEntryId);
+			Object paramObj1 = version;
+
+			if (version == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = changeLog;
+
+			if (changeLog == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = downloadPageURL;
+
+			if (downloadPageURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = directDownloadURL;
+
+			if (directDownloadURL == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj6 = frameworkVersionIds;
+
+			if (frameworkVersionIds == null) {
+				paramObj6 = new NullWrapper("[J");
+			}
+
+			Object paramObj7 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj8 = guestPermissions;
+
+			if (guestPermissions == null) {
+				paramObj8 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(SRProductVersionServiceUtil.class.getName(),
+					"addProductVersion",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 			Object returnObj = null;
 
@@ -179,71 +267,11 @@ public class SRProductVersionServiceHttp {
 		}
 	}
 
-	public static java.util.List getProductVersions(
-		HttpPrincipal httpPrincipal, long productEntryId, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(productEntryId);
-			Object paramObj1 = new IntegerWrapper(begin);
-			Object paramObj2 = new IntegerWrapper(end);
-			MethodWrapper methodWrapper = new MethodWrapper(SRProductVersionServiceUtil.class.getName(),
-					"getProductVersions",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static int getProductVersionsCount(HttpPrincipal httpPrincipal,
-		long productEntryId) throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new LongWrapper(productEntryId);
-			MethodWrapper methodWrapper = new MethodWrapper(SRProductVersionServiceUtil.class.getName(),
-					"getProductVersionsCount", new Object[] { paramObj0 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		HttpPrincipal httpPrincipal, long productVersionId,
 		java.lang.String version, java.lang.String changeLog,
-		long[] frameworkVersionIds, java.lang.String downloadPageURL,
-		java.lang.String directDownloadURL, boolean repoStoreArtifact)
+		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
+		boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -260,25 +288,25 @@ public class SRProductVersionServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = frameworkVersionIds;
-
-			if (frameworkVersionIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = downloadPageURL;
+			Object paramObj3 = downloadPageURL;
 
 			if (downloadPageURL == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = directDownloadURL;
+
+			if (directDownloadURL == null) {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = directDownloadURL;
+			Object paramObj5 = new BooleanWrapper(repoStoreArtifact);
+			Object paramObj6 = frameworkVersionIds;
 
-			if (directDownloadURL == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+			if (frameworkVersionIds == null) {
+				paramObj6 = new NullWrapper("[J");
 			}
 
-			Object paramObj6 = new BooleanWrapper(repoStoreArtifact);
 			MethodWrapper methodWrapper = new MethodWrapper(SRProductVersionServiceUtil.class.getName(),
 					"updateProductVersion",
 					new Object[] {

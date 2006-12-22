@@ -227,6 +227,10 @@ public class GroupUtil {
 		getPersistence().removeByC_C_C(companyId, className, classPK);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByC_N(java.lang.String companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
@@ -241,6 +245,10 @@ public class GroupUtil {
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C_C(companyId, className, classPK);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getOrganizations(java.lang.String pk)

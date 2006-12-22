@@ -28,30 +28,38 @@
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 SRProductEntry productEntry = (SRProductEntry)row.getObject();
+
+String productEntryId = String.valueOf(productEntry.getProductEntryId());
 %>
 
+<c:if test="<%= SRProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.UPDATE) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/software_repository/edit_product_entry" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+		<portlet:param name="productEntryId" value="<%= productEntryId %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+</c:if>
 
+<c:if test="<%= SRProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.PERMISSIONS) %>">
 	<liferay-security:permissionsURL
 		modelResource="<%= SRProductEntry.class.getName() %>"
 		modelResourceDescription="<%= productEntry.getName() %>"
-		resourcePrimKey="<%= Long.toString(productEntry.getPrimaryKey()) %>"
+		resourcePrimKey="<%= productEntryId %>"
 		var="permissionsURL"
 	/>
 
 	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+</c:if>
 
+<c:if test="<%= SRProductEntryPermission.contains(permissionChecker, productEntry, ActionKeys.DELETE) %>">
 	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 		<portlet:param name="struts_action" value="/software_repository/edit_product_entry" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+		<portlet:param name="productEntryId" value="<%= productEntryId %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+</c:if>

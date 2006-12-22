@@ -1340,6 +1340,7 @@ no-messages-were-found-that-matched-the-keywords-x=لم يتم العثور عل
 no-orders-were-found=لم يتم العثور على أي طلب.
 no-organizations-were-found=لم يتم العثور على أي منظمة.
 no-pages-were-found-that-matched-the-keywords-x=لم يتم العثور على أي صفحة مطابقة للكلمات: {0}.
+no-products-were-found-that-matched-the-keywords-x=No products were found that matched the keywords: {0}.
 no-roles-were-found=لم يتم العثور على أي دور.
 no-structures-were-found-that-matches-the-id=لم يتم العثور على أي هيكل بالرمز التعريفي:
 no-structures-were-found=لم يتم العثور على أي هيكل.

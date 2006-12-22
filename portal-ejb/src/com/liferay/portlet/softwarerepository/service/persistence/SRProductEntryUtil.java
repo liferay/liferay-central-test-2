@@ -307,6 +307,10 @@ public class SRProductEntryUtil {
 		getPersistence().removeByG_U(groupId, userId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByGroupId(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
@@ -320,6 +324,10 @@ public class SRProductEntryUtil {
 	public static int countByG_U(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_U(groupId, userId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getSRLicenses(long pk)

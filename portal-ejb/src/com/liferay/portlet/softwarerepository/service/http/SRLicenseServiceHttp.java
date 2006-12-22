@@ -42,8 +42,9 @@ import com.liferay.portlet.softwarerepository.service.SRLicenseServiceUtil;
  */
 public class SRLicenseServiceHttp {
 	public static com.liferay.portlet.softwarerepository.model.SRLicense addLicense(
-		HttpPrincipal httpPrincipal, java.lang.String name, boolean active,
-		boolean openSource, boolean recommended, java.lang.String url)
+		HttpPrincipal httpPrincipal, java.lang.String name,
+		java.lang.String url, boolean openSource, boolean active,
+		boolean recommended)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -53,15 +54,15 @@ public class SRLicenseServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new BooleanWrapper(active);
-			Object paramObj2 = new BooleanWrapper(openSource);
-			Object paramObj3 = new BooleanWrapper(recommended);
-			Object paramObj4 = url;
+			Object paramObj1 = url;
 
 			if (url == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = new BooleanWrapper(openSource);
+			Object paramObj3 = new BooleanWrapper(active);
+			Object paramObj4 = new BooleanWrapper(recommended);
 			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
 					"addLicense",
 					new Object[] {
@@ -157,124 +158,10 @@ public class SRLicenseServiceHttp {
 		}
 	}
 
-	public static java.util.List getLicenses(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
-					"getLicenses", new Object[0]);
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static java.util.List getLicenses(HttpPrincipal httpPrincipal,
-		boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new BooleanWrapper(active);
-			Object paramObj1 = new BooleanWrapper(recommended);
-			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
-					"getLicenses", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static int getLicensesCount(HttpPrincipal httpPrincipal)
-		throws com.liferay.portal.SystemException {
-		try {
-			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
-					"getLicensesCount", new Object[0]);
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
-	public static int getLicensesCount(HttpPrincipal httpPrincipal,
-		boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException {
-		try {
-			Object paramObj0 = new BooleanWrapper(active);
-			Object paramObj1 = new BooleanWrapper(recommended);
-			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
-					"getLicensesCount", new Object[] { paramObj0, paramObj1 });
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return ((Integer)returnObj).intValue();
-		}
-		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRLicense updateLicense(
 		HttpPrincipal httpPrincipal, long licenseId, java.lang.String name,
-		boolean active, boolean openSource, boolean recommended,
-		java.lang.String url)
+		java.lang.String url, boolean openSource, boolean active,
+		boolean recommended)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -285,15 +172,15 @@ public class SRLicenseServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new BooleanWrapper(active);
-			Object paramObj3 = new BooleanWrapper(openSource);
-			Object paramObj4 = new BooleanWrapper(recommended);
-			Object paramObj5 = url;
+			Object paramObj2 = url;
 
 			if (url == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = new BooleanWrapper(openSource);
+			Object paramObj4 = new BooleanWrapper(active);
+			Object paramObj5 = new BooleanWrapper(recommended);
 			MethodWrapper methodWrapper = new MethodWrapper(SRLicenseServiceUtil.class.getName(),
 					"updateLicense",
 					new Object[] {

@@ -335,6 +335,10 @@ public class OrganizationUtil {
 		getPersistence().removeByC_N(companyId, name);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
@@ -354,6 +358,10 @@ public class OrganizationUtil {
 	public static int countByC_N(java.lang.String companyId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_N(companyId, name);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getGroups(java.lang.String pk)

@@ -34,17 +34,14 @@ import javax.servlet.http.HttpServletRequest;
  * @author  Jorge Ferrer
  *
  */
-public class RateProductEntryAction
-	extends RateEntryAction {
+public class RateProductEntryAction extends RateEntryAction {
 
 	public String getClassName() {
 		return _CLASS_NAME;
 	}
 
 	public String getClassPK(HttpServletRequest req) {
-		String productEntryId = ParamUtil.getString(req, "productEntryId");
-
-		return productEntryId;
+		return ParamUtil.getString(req, "productEntryId");
 	}
 
 	private static final String _CLASS_NAME = SRProductEntry.class.getName();

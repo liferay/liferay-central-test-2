@@ -25,25 +25,41 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	ResultRow row =
-		(ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-	SRFrameworkVersion productEntry = (SRFrameworkVersion) row.getObject();
+SRFrameworkVersion frameworkVersion = (SRFrameworkVersion)row.getObject();
+
+String frameworkVersionId = String.valueOf(frameworkVersion.getFrameworkVersionId());
 %>
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-	<portlet:param name="struts_action" value="/software_repository/edit_framework_version" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="frameworkVersionId" value="<%= Long.toString(productEntry.getFrameworkVersionId()) %>" />
-</portlet:renderURL>
+<c:if test="<%= SRFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.UPDATE) %>">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+		<portlet:param name="struts_action" value="/software_repository/edit_framework_version" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
+	</portlet:renderURL>
 
-<liferay-ui:icon image="edit" url="<%= editURL %>" />
+	<liferay-ui:icon image="edit" url="<%= editURL %>" />
+</c:if>
 
-<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-	<portlet:param name="struts_action" value="/software_repository/edit_framework_version" />
-	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="frameworkVersionId" value="<%= Long.toString(productEntry.getFrameworkVersionId()) %>" />
-</portlet:actionURL>
+<c:if test="<%= SRFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.PERMISSIONS) %>">
+	<liferay-security:permissionsURL
+		modelResource="<%= SRFrameworkVersion.class.getName() %>"
+		modelResourceDescription="<%= frameworkVersion.getName() %>"
+		resourcePrimKey="<%= frameworkVersionId %>"
+		var="permissionsURL"
+	/>
 
-<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
+</c:if>
+
+<c:if test="<%= SRFrameworkVersionPermission.contains(permissionChecker, frameworkVersion, ActionKeys.DELETE) %>">
+	<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
+		<portlet:param name="struts_action" value="/software_repository/edit_framework_version" />
+		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+		<portlet:param name="redirect" value="<%= currentURL %>" />
+		<portlet:param name="frameworkVersionId" value="<%= frameworkVersionId %>" />
+	</portlet:actionURL>
+
+	<liferay-ui:icon-delete url="<%= deleteURL %>" />
+</c:if>

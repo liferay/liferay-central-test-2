@@ -38,11 +38,11 @@ import java.rmi.RemoteException;
  */
 public class SRLicenseServiceSoap {
 	public static com.liferay.portlet.softwarerepository.model.SRLicenseSoap addLicense(
-		java.lang.String name, boolean active, boolean openSource,
-		boolean recommended, java.lang.String url) throws RemoteException {
+		java.lang.String name, java.lang.String url, boolean openSource,
+		boolean active, boolean recommended) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRLicense returnValue = SRLicenseServiceUtil.addLicense(name,
-					active, openSource, recommended, url);
+					url, openSource, active, recommended);
 
 			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModel(returnValue);
 		}
@@ -78,70 +78,13 @@ public class SRLicenseServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.softwarerepository.model.SRLicenseSoap[] getLicenses()
-		throws RemoteException {
-		try {
-			java.util.List returnValue = SRLicenseServiceUtil.getLicenses();
-
-			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.softwarerepository.model.SRLicenseSoap[] getLicenses(
-		boolean active, boolean recommended) throws RemoteException {
-		try {
-			java.util.List returnValue = SRLicenseServiceUtil.getLicenses(active,
-					recommended);
-
-			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getLicensesCount() throws RemoteException {
-		try {
-			int returnValue = SRLicenseServiceUtil.getLicensesCount();
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getLicensesCount(boolean active, boolean recommended)
-		throws RemoteException {
-		try {
-			int returnValue = SRLicenseServiceUtil.getLicensesCount(active,
-					recommended);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRLicenseSoap updateLicense(
-		long licenseId, java.lang.String name, boolean active,
-		boolean openSource, boolean recommended, java.lang.String url)
+		long licenseId, java.lang.String name, java.lang.String url,
+		boolean openSource, boolean active, boolean recommended)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRLicense returnValue = SRLicenseServiceUtil.updateLicense(licenseId,
-					name, active, openSource, recommended, url);
+					name, url, openSource, active, recommended);
 
 			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModel(returnValue);
 		}

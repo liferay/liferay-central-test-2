@@ -38,16 +38,41 @@ import java.rmi.RemoteException;
  */
 public class SRProductEntryServiceSoap {
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntrySoap addProductEntry(
-		java.lang.String plid, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name,
-		java.lang.String type, long[] licenseIds,
+		java.lang.String plid, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL) throws RemoteException {
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRProductEntry returnValue =
-				SRProductEntryServiceUtil.addProductEntry(plid, repoArtifactId,
-					repoGroupId, name, type, licenseIds, shortDescription,
-					longDescription, pageURL);
+				SRProductEntryServiceUtil.addProductEntry(plid, name, type,
+					shortDescription, longDescription, pageURL, repoGroupId,
+					repoArtifactId, licenseIds, addCommunityPermissions,
+					addGuestPermissions);
+
+			return com.liferay.portlet.softwarerepository.model.SRProductEntrySoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductEntrySoap addProductEntry(
+		java.lang.String plid, java.lang.String name, java.lang.String type,
+		java.lang.String shortDescription, java.lang.String longDescription,
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.softwarerepository.model.SRProductEntry returnValue =
+				SRProductEntryServiceUtil.addProductEntry(plid, name, type,
+					shortDescription, longDescription, pageURL, repoGroupId,
+					repoArtifactId, licenseIds, communityPermissions,
+					guestPermissions);
 
 			return com.liferay.portlet.softwarerepository.model.SRProductEntrySoap.toSoapModel(returnValue);
 		}
@@ -85,76 +110,17 @@ public class SRProductEntryServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.softwarerepository.model.SRProductEntrySoap[] getProductEntries(
-		java.lang.String groupId, int begin, int end) throws RemoteException {
-		try {
-			java.util.List returnValue = SRProductEntryServiceUtil.getProductEntries(groupId,
-					begin, end);
-
-			return com.liferay.portlet.softwarerepository.model.SRProductEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.softwarerepository.model.SRProductEntrySoap[] getProductEntriesByUserId(
-		java.lang.String groupId, java.lang.String userId, int begin, int end)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = SRProductEntryServiceUtil.getProductEntriesByUserId(groupId,
-					userId, begin, end);
-
-			return com.liferay.portlet.softwarerepository.model.SRProductEntrySoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getProductEntriesCountByUserId(java.lang.String groupId,
-		java.lang.String userId) throws RemoteException {
-		try {
-			int returnValue = SRProductEntryServiceUtil.getProductEntriesCountByUserId(groupId,
-					userId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getProductEntriesCount(java.lang.String groupId)
-		throws RemoteException {
-		try {
-			int returnValue = SRProductEntryServiceUtil.getProductEntriesCount(groupId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRProductEntrySoap updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL) throws RemoteException {
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRProductEntry returnValue =
 				SRProductEntryServiceUtil.updateProductEntry(productEntryId,
-					repoArtifactId, repoGroupId, name, licenseIds,
-					shortDescription, longDescription, pageURL);
+					name, type, shortDescription, longDescription, pageURL,
+					repoGroupId, repoArtifactId, licenseIds);
 
 			return com.liferay.portlet.softwarerepository.model.SRProductEntrySoap.toSoapModel(returnValue);
 		}

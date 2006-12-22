@@ -88,8 +88,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 	}
 
-	public static void deleteEntry(
-			String companyId, String entryId)
+	public static void deleteEntry(String companyId, String entryId)
 		throws IOException {
 
 		synchronized (IndexWriter.class) {

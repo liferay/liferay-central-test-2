@@ -215,9 +215,17 @@ public class SRProductVersionUtil {
 		getPersistence().removeByProductEntryId(productEntryId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByProductEntryId(long productEntryId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByProductEntryId(productEntryId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getSRFrameworkVersions(long pk)

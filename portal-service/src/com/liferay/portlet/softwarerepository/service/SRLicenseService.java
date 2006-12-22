@@ -30,8 +30,8 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public interface SRLicenseService {
 	public com.liferay.portlet.softwarerepository.model.SRLicense addLicense(
-		java.lang.String name, boolean active, boolean openSource,
-		boolean recommended, java.lang.String url)
+		java.lang.String name, java.lang.String url, boolean openSource,
+		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -44,21 +44,9 @@ public interface SRLicenseService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getLicenses()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public java.util.List getLicenses(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getLicensesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
-	public int getLicensesCount(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
-
 	public com.liferay.portlet.softwarerepository.model.SRLicense updateLicense(
-		long licenseId, java.lang.String name, boolean active,
-		boolean openSource, boolean recommended, java.lang.String url)
+		long licenseId, java.lang.String name, java.lang.String url,
+		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

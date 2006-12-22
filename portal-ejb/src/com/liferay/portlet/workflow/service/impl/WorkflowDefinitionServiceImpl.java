@@ -132,9 +132,8 @@ public class WorkflowDefinitionServiceImpl
 
 		ResourceLocalServiceUtil.addResources(
 			user.getCompanyId(), null, user.getUserId(),
-			WorkflowDefinition.class.getName(),
-			String.valueOf(definitionId), false, addCommunityPermissions,
-			addGuestPermissions);
+			WorkflowDefinition.class.getName(), definitionId, false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addDefinitionResources(
@@ -144,9 +143,8 @@ public class WorkflowDefinitionServiceImpl
 
 		ResourceLocalServiceUtil.addModelResources(
 			user.getCompanyId(), null, user.getUserId(),
-			WorkflowDefinition.class.getName(),
-			String.valueOf(definitionId), communityPermissions,
-			guestPermissions);
+			WorkflowDefinition.class.getName(), definitionId,
+			communityPermissions, guestPermissions);
 	}
 
 	public WorkflowDefinition getDefinition(long definitionId)

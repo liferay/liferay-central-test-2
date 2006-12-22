@@ -63,8 +63,7 @@ public class WorkflowDefinitionPermission {
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			null, WorkflowDefinition.class.getName(),
-			String.valueOf(definitionId), actionId);
+			null, WorkflowDefinition.class.getName(), definitionId, actionId);
 	}
 
 	public static boolean contains(

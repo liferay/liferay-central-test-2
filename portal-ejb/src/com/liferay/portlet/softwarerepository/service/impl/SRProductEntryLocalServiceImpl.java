@@ -29,11 +29,13 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
 import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService;
+import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil;
 import com.liferay.portlet.softwarerepository.util.Indexer;
 import com.liferay.util.Validator;
@@ -53,19 +55,52 @@ import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 
 /**
- * <a href="SRProductEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SRProductEntryLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Jorge Ferrer
+ * @author  Brian Wing Shun Chan
  *
  */
 public class SRProductEntryLocalServiceImpl
 	implements SRProductEntryLocalService {
 
 	public SRProductEntry addProductEntry(
-		String userId, String plid, String repoArtifactId, String repoGroupId,
-		String name, String type, long[] licenseIds, String shortDescription,
-		String longDescription, String pageURL)
+			String userId, String plid, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
+
+		return addProductEntry(
+			userId, plid, name, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, licenseIds,
+			new Boolean(addCommunityPermissions),
+			new Boolean(addGuestPermissions), null, null);
+	}
+
+	public SRProductEntry addProductEntry(
+			String userId, String plid, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		return addProductEntry(
+			userId, plid, name, type, shortDescription, longDescription,
+			pageURL, repoGroupId, repoArtifactId, licenseIds, null, null,
+			communityPermissions, guestPermissions);
+	}
+
+	public SRProductEntry addProductEntry(
+			String userId, String plid, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId, long[] licenseIds,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		// Product entry
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		String groupId = PortalUtil.getPortletGroupId(plid);
@@ -82,28 +117,96 @@ public class SRProductEntryLocalServiceImpl
 		productEntry.setUserName(user.getFullName());
 		productEntry.setCreateDate(now);
 		productEntry.setModifiedDate(now);
-		productEntry.setRepoArtifactId(repoArtifactId);
-		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setName(name);
 		productEntry.setType(type);
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
+		productEntry.setRepoGroupId(repoGroupId);
+		productEntry.setRepoArtifactId(repoArtifactId);
 
 		SRProductEntryUtil.update(productEntry);
+
+		// Resources
+
+		if ((addCommunityPermissions != null) &&
+			(addGuestPermissions != null)) {
+
+			addProductEntryResources(
+				productEntry, addCommunityPermissions.booleanValue(),
+				addGuestPermissions.booleanValue());
+		}
+		else {
+			addProductEntryResources(
+				productEntry, communityPermissions, guestPermissions);
+		}
+
+		// Licenses
+
 		SRProductEntryUtil.setSRLicenses(productEntryId, licenseIds);
+
+		// Lucene
 
 		try {
 			Indexer.addProductEntry(
-				productEntry.getCompanyId(), productEntryId, user.getFullName(),
-				groupId, repoArtifactId, repoGroupId, name, type,
-				shortDescription, longDescription, pageURL);
+				productEntry.getCompanyId(), groupId, userId,
+				user.getFullName(), productEntryId, name, type,
+				shortDescription, longDescription, pageURL, repoGroupId,
+				repoArtifactId);
 		}
 		catch (IOException ioe) {
-			_log.warn("Error indexing product entry " + productEntryId, ioe);
+			_log.error("Indexing " + productEntryId, ioe);
 		}
 
 		return productEntry;
+	}
+
+	public void addProductEntryResources(
+			long productEntryId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+
+		addProductEntryResources(
+			productEntry, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProductEntryResources(
+			SRProductEntry productEntry, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addResources(
+			productEntry.getCompanyId(), productEntry.getGroupId(),
+			productEntry.getUserId(), SRProductEntry.class.getName(),
+			productEntry.getPrimaryKey(), false, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public void addProductEntryResources(
+			long productEntryId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+
+		addProductEntryResources(
+			productEntry, communityPermissions, guestPermissions);
+	}
+
+	public void addProductEntryResources(
+			SRProductEntry productEntry, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		ResourceLocalServiceUtil.addModelResources(
+			productEntry.getCompanyId(), productEntry.getGroupId(),
+			productEntry.getUserId(), SRProductEntry.class.getName(),
+			productEntry.getPrimaryKey(), communityPermissions,
+			guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
@@ -111,6 +214,37 @@ public class SRProductEntryLocalServiceImpl
 
 		SRProductEntry productEntry =
 			SRProductEntryUtil.findByPrimaryKey(productEntryId);
+
+		deleteProductEntry(productEntry);
+	}
+
+	public void deleteProductEntry(SRProductEntry productEntry)
+		throws PortalException, SystemException {
+
+		// Lucene
+
+		try {
+			Indexer.deleteProductEntry(
+				productEntry.getCompanyId(), productEntry.getProductEntryId());
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Deleting index " + productEntry.getProductEntryId(), ioe);
+		}
+
+		// Product versions
+
+		SRProductVersionLocalServiceUtil.deleteProductVersions(
+			productEntry.getProductEntryId());
+
+		// Resources
+
+		ResourceLocalServiceUtil.deleteResource(
+			productEntry.getCompanyId(), SRProductEntry.class.getName(),
+			ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
+			productEntry.getPrimaryKey());
+
+		// Product entry
 
 		SRProductEntryUtil.remove(productEntry.getProductEntryId());
 	}
@@ -121,15 +255,14 @@ public class SRProductEntryLocalServiceImpl
 		return SRProductEntryUtil.findByPrimaryKey(productEntryId);
 	}
 
-	public List getProductEntries(
-		String groupId, int begin, int end)
+	public List getProductEntries(String groupId, int begin, int end)
 		throws SystemException {
 
 		return SRProductEntryUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public List getProductEntriesByUserId(
-		String groupId, String userId, int begin, int end)
+	public List getProductEntries(
+			String groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		return SRProductEntryUtil.findByG_U(groupId, userId, begin, end);
@@ -141,46 +274,38 @@ public class SRProductEntryLocalServiceImpl
 		return SRProductEntryUtil.countByGroupId(groupId);
 	}
 
-	public int getProductEntriesCountByUserId(String groupId, String userId)
+	public int getProductEntriesCount(String groupId, String userId)
 		throws SystemException {
 
 		return SRProductEntryUtil.countByG_U(groupId, userId);
-	}
-
-	public List getSRLicenses(long productEntryId)
-		throws SystemException, NoSuchProductEntryException {
-		return SRProductEntryUtil.getSRLicenses(productEntryId);
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
 		try {
 			String companyId = ids[0];
 
-			Iterator itr1 = SRProductEntryUtil.findByCompanyId(
+			Iterator itr = SRProductEntryUtil.findByCompanyId(
 				companyId).iterator();
 
-			while (itr1.hasNext()) {
-				SRProductEntry productEntry = (SRProductEntry)itr1.next();
+			while (itr.hasNext()) {
+				SRProductEntry productEntry = (SRProductEntry)itr.next();
 
 				long productEntryId = productEntry.getProductEntryId();
 
 				try {
 					Indexer.addProductEntry(
-						companyId, productEntryId, productEntry.getUserName(),
-						productEntry.getGroupId(),
-						productEntry.getRepoArtifactId(),
-						productEntry.getRepoGroupId(),
-						productEntry.getName(), productEntry.getType(),
+						companyId, productEntry.getGroupId(),
+						productEntry.getUserId(), productEntry.getUserName(),
+						productEntryId, productEntry.getName(),
+						productEntry.getType(),
 						productEntry.getShortDescription(),
 						productEntry.getLongDescription(),
-						productEntry.getPageURL());
+						productEntry.getPageURL(),
+						productEntry.getRepoGroupId(),
+						productEntry.getRepoArtifactId());
 				}
 				catch (Exception e1) {
-
-					// Continue indexing even if one message fails
-
-					_log.warn("Could not index product entry " + productEntryId,
-						e1);
+					_log.error("Reindexing " + productEntryId, e1);
 				}
 			}
 		}
@@ -193,13 +318,13 @@ public class SRProductEntryLocalServiceImpl
 	}
 
 	public Hits search(
-		String companyId, String groupId, String type, String keywords)
+			String companyId, String groupId, String type, String keywords)
 		throws SystemException {
 
 		try {
 			HitsImpl hits = new HitsImpl();
 
-			if (Validator.isNull(keywords) && Validator.isNull(type)) {
+			if (Validator.isNull(type) && Validator.isNull(keywords)) {
 				return hits;
 			}
 
@@ -237,43 +362,49 @@ public class SRProductEntryLocalServiceImpl
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			//throw new SystemException(pe);
-
-			_log.error("Error parsing keywords " + keywords);
+			_log.error("Parsing keywords " + keywords, pe);
 
 			return new HitsImpl();
 		}
 	}
 
 	public SRProductEntry updateProductEntry(
-		long productEntryId, String repoArtifactId, String repoGroupId,
-		String name, long[] licenseIds, String shortDescription,
-		String longDescription, String pageURL)
+			long productEntryId, String name, String type,
+			String shortDescription, String longDescription, String pageURL,
+			String repoGroupId, String repoArtifactId, long[] licenseIds)
 		throws PortalException, SystemException {
 
-		SRProductEntry productEntry = SRProductEntryUtil.
-			findByPrimaryKey(productEntryId);
+		// Product entry
+
+		SRProductEntry productEntry =
+			SRProductEntryUtil.findByPrimaryKey(productEntryId);
 
 		productEntry.setModifiedDate(new Date());
-		productEntry.setRepoArtifactId(repoArtifactId);
-		productEntry.setRepoGroupId(repoGroupId);
 		productEntry.setName(name);
+		productEntry.setType(type);
 		productEntry.setShortDescription(shortDescription);
 		productEntry.setLongDescription(longDescription);
 		productEntry.setPageURL(pageURL);
+		productEntry.setRepoGroupId(repoGroupId);
+		productEntry.setRepoArtifactId(repoArtifactId);
 
 		SRProductEntryUtil.update(productEntry);
+
+		// Licenses
+
 		SRProductEntryUtil.setSRLicenses(productEntryId, licenseIds);
+
+		// Lucene
 
 		try {
 			Indexer.updateProductEntry(
-				productEntry.getCompanyId(), productEntryId,
-				productEntry.getUserName(), productEntry.getGroupId(),
-				repoArtifactId, repoGroupId, name, productEntry.getType(),
-				shortDescription, longDescription, pageURL);
+				productEntry.getCompanyId(), productEntry.getGroupId(),
+				productEntry.getUserId(), productEntry.getUserName(),
+				productEntryId, name, type, shortDescription, longDescription,
+				pageURL, repoGroupId, repoArtifactId);
 		}
 		catch (IOException ioe) {
-			_log.warn("Error indexing product entry " + productEntryId, ioe);
+			_log.error("Indexing " + productEntryId, ioe);
 		}
 
 		return productEntry;

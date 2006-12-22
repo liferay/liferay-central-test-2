@@ -194,10 +194,10 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 			Indexer.deletePages(node.getCompanyId(), node.getNodeId());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + node.getNodeId(), ioe);
 		}
 		catch (ParseException pe) {
-			_log.error(pe.getMessage());
+			_log.error("Deleting index " + node.getNodeId(), pe);
 		}
 
 		// Pages
@@ -273,10 +273,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 							companyId, groupId, nodeId, title, content);
 					}
 					catch (Exception e1) {
-
-						// Continue indexing even if one page fails
-
-						_log.error(e1.getMessage());
+						_log.error("Reindexing " + page.getPrimaryKey(), e1);
 					}
 				}
 			}
@@ -339,7 +336,9 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			throw new SystemException(pe);
+			_log.error("Parsing keywords " + keywords, pe);
+
+			return new HitsImpl();
 		}
 	}
 

@@ -27,13 +27,16 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
 import com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
 import com.liferay.portlet.softwarerepository.service.SRProductVersionServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import javax.portlet.*;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -45,8 +48,7 @@ import org.apache.struts.action.ActionMapping;
  * @author  Jorge Ferrer
  *
  */
-public class EditProductVersionAction
-	extends PortletAction {
+public class EditProductVersionAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -57,16 +59,16 @@ public class EditProductVersionAction
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateProductVersion(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteProductVersion(req);
 			}
 
 			sendRedirect(req, res);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchProductEntryException ||
+			if (e instanceof NoSuchProductVersionException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -85,12 +87,10 @@ public class EditProductVersionAction
 		throws Exception {
 
 		try {
-			ActionUtil.getProductEntry(req);
 			ActionUtil.getProductVersion(req);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchProductEntryException ||
-				e instanceof NoSuchProductVersionException ||
+			if (e instanceof NoSuchProductVersionException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -106,43 +106,50 @@ public class EditProductVersionAction
 			req, "portlet.software_repository.edit_product_version"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
+	protected void deleteProductVersion(ActionRequest req) throws Exception {
 		long productVersionId = ParamUtil.getLong(req, "productVersionId");
 
 		SRProductVersionServiceUtil.deleteProductVersion(productVersionId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
+	protected void updateProductVersion(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long productVersionId = ParamUtil.getLong(req, "productVersionId");
-		long productEntryId = ParamUtil.getLong(req, "productEntryId");
 
+		long productEntryId = ParamUtil.getLong(req, "productEntryId");
 		String version = ParamUtil.getString(req, "version");
 		String changeLog = ParamUtil.getString(req, "changeLog");
-		long[] frameworkVersionIds = ParamUtil.
-			getLongValues(req, "frameworkVersions");
 		String downloadPageURL = ParamUtil.getString(req, "downloadPageURL");
 		String directDownloadURL = ParamUtil.getString(
 			req, "directDownloadURL");
 		boolean repoStoreArtifact = ParamUtil.getBoolean(
 			req, "repoStoreArtifact");
 
-		if (productVersionId <= 0) {
+		long[] frameworkVersionIds = ParamUtil.getLongValues(
+			req, "frameworkVersions");
 
-			// Add entry
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
+
+		if (productVersionId == 0) {
+
+			// Add product version
 
 			SRProductVersionServiceUtil.addProductVersion(
-				productEntryId, version, changeLog, frameworkVersionIds,
-				downloadPageURL, directDownloadURL, repoStoreArtifact);
+				productEntryId, version, changeLog, downloadPageURL,
+				directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
-			// Update entry
+			// Update product version
 
 			SRProductVersionServiceUtil.updateProductVersion(
-				productVersionId, version, changeLog, frameworkVersionIds,
-				downloadPageURL, directDownloadURL, repoStoreArtifact);
+				productVersionId, version, changeLog, downloadPageURL,
+				directDownloadURL, repoStoreArtifact, frameworkVersionIds);
 		}
 	}
 

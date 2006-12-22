@@ -39,14 +39,14 @@ import javax.ejb.SessionContext;
  */
 public class SRLicenseServiceEJBImpl implements SRLicenseService, SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRLicense addLicense(
-		java.lang.String name, boolean active, boolean openSource,
-		boolean recommended, java.lang.String url)
+		java.lang.String name, java.lang.String url, boolean openSource,
+		boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return SRLicenseServiceFactory.getTxImpl().addLicense(name, active,
-			openSource, recommended, url);
+		return SRLicenseServiceFactory.getTxImpl().addLicense(name, url,
+			openSource, active, recommended);
 	}
 
 	public void deleteLicense(long licenseId)
@@ -65,45 +65,15 @@ public class SRLicenseServiceEJBImpl implements SRLicenseService, SessionBean {
 		return SRLicenseServiceFactory.getTxImpl().getLicense(licenseId);
 	}
 
-	public java.util.List getLicenses()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRLicenseServiceFactory.getTxImpl().getLicenses();
-	}
-
-	public java.util.List getLicenses(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRLicenseServiceFactory.getTxImpl().getLicenses(active,
-			recommended);
-	}
-
-	public int getLicensesCount()
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRLicenseServiceFactory.getTxImpl().getLicensesCount();
-	}
-
-	public int getLicensesCount(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		PrincipalSessionBean.setThreadValues(_sc);
-
-		return SRLicenseServiceFactory.getTxImpl().getLicensesCount(active,
-			recommended);
-	}
-
 	public com.liferay.portlet.softwarerepository.model.SRLicense updateLicense(
-		long licenseId, java.lang.String name, boolean active,
-		boolean openSource, boolean recommended, java.lang.String url)
+		long licenseId, java.lang.String name, java.lang.String url,
+		boolean openSource, boolean active, boolean recommended)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return SRLicenseServiceFactory.getTxImpl().updateLicense(licenseId,
-			name, active, openSource, recommended, url);
+			name, url, openSource, active, recommended);
 	}
 
 	public void ejbCreate() throws CreateException {

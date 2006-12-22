@@ -795,8 +795,22 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/SRLicenseLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>

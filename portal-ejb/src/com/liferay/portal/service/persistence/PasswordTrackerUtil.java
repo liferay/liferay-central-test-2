@@ -214,9 +214,17 @@ public class PasswordTrackerUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

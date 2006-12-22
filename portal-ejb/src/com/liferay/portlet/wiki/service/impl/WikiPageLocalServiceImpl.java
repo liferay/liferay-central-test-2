@@ -170,7 +170,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 				page.getCompanyId(), page.getNodeId(), page.getTitle());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + page.getPrimaryKey(), ioe);
 		}
 
 		// Resources
@@ -439,7 +439,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 				node.getCompanyId(), node.getGroupId(), nodeId, title, content);
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Indexing " + page.getPrimaryKey(), ioe);
 		}
 
 		return page;

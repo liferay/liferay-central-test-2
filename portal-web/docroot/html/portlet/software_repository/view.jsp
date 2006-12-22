@@ -25,295 +25,329 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	String tabs1 = ParamUtil.getString(request, "tabs1", "products");
+String tabs1 = ParamUtil.getString(request, "tabs1", "products");
 
-	PortletURL portletURL = renderResponse.createRenderURL();
+PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setWindowState(WindowState.MAXIMIZED);
+portletURL.setWindowState(WindowState.MAXIMIZED);
 
-	portletURL.setParameter("struts_action", "/software_repository/view");
+portletURL.setParameter("struts_action", "/software_repository/view");
+portletURL.setParameter("tabs1", tabs1);
 %>
 
-<liferay-ui:tabs
-	names="products,my-products,framework-versions,licenses"
-	url="<%= portletURL.toString() %>"
-/>
+<liferay-util:include page="/html/portlet/software_repository/tabs1.jsp" />
+
+<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products")%>'>
-	<%
-		if (tabs1.equals("products")) {
-	%>
-		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />searchForm"
-			style="float: right">
-			<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
-			<select name="<portlet:namespace/>type">
-				<option value=""><%= LanguageUtil.get(pageContext, "any-type") %></option>
-				<option value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
-				<option value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
-				<option value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
-				<option value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
-			</select>
-			<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-product-entries") %>">
-		</form>
-	<%
-		} else {
-	%>
-		<p><%=LanguageUtil.get(pageContext, "product-entries-added-by") + " " + user.getFullName() %></p>
-	<%
-		}
-	%>
-		<form method="post" name="<portlet:namespace />">
+	<c:when test='<%= tabs1.equals("products") || tabs1.equals("my-products") %>'>
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("product-name");
-			headerNames.add("type");
-			headerNames.add("licenses");
-			headerNames.add("modified-date");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("type");
+		headerNames.add("licenses");
+		headerNames.add("modified-date");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, "cur1",
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total;
-			if (tabs1.equals("products")) {
-				total = SRProductEntryServiceUtil.getProductEntriesCount(portletGroupId);
-			} else {
-				total = SRProductEntryServiceUtil.getProductEntriesCountByUserId(portletGroupId, user.getUserId());
+		int total = 0;
+
+		if (tabs1.equals("products")) {
+			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId);
+		}
+		else {
+			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId, user.getUserId());
+		}
+
+		searchContainer.setTotal(total);
+
+		List results = null;
+
+		if (tabs1.equals("products")) {
+			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+		}
+		else {
+			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+		}
+
+		searchContainer.setResults(results);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			SRProductEntry productEntry = (SRProductEntry)results.get(i);
+
+			String productEntryId = String.valueOf(productEntry.getProductEntryId());
+
+			ResultRow row = new ResultRow(productEntry, productEntryId, i);
+
+			PortletURL rowURL = renderResponse.createRenderURL();
+
+			rowURL.setWindowState(WindowState.MAXIMIZED);
+
+			rowURL.setParameter("struts_action", "/software_repository/view_product_entry");
+			rowURL.setParameter("redirect", currentURL);
+			rowURL.setParameter("productEntryId", productEntryId);
+
+			// Name and short description
+
+			StringBuffer sb = new StringBuffer();
+
+			sb.append("<b>");
+			sb.append(productEntry.getName());
+			sb.append("</b>");
+
+			if (Validator.isNotNull(productEntry.getShortDescription())) {
+				sb.append("<br>");
+				sb.append("<span style=\"font-size: xx-small;\">");
+				sb.append(productEntry.getShortDescription());
+				sb.append("</span>");
 			}
 
-			searchContainer.setTotal(total);
+			row.addText(sb.toString(), rowURL);
 
-			List results;
-			if (tabs1.equals("products")) {
-				results = SRProductEntryServiceUtil.getProductEntries(
-					portletGroupId, searchContainer.getStart(),
-					searchContainer.getEnd());
-			} else {
-				results = SRProductEntryServiceUtil.getProductEntriesByUserId(
-					portletGroupId, user.getUserId(), searchContainer.getStart(),
-					searchContainer.getEnd());
-			}
+			// Type
 
-			searchContainer.setResults(results);
+			row.addText(LanguageUtil.get(pageContext, productEntry.getType()), rowURL);
 
-			List resultRows = searchContainer.getResultRows();
+			// Licenses
 
-			for (int i = 0; i < results.size(); i++) {
-				SRProductEntry curProductEntry = (SRProductEntry) results.get(i);
+			sb = new StringBuffer();
 
-				ResultRow row = new ResultRow(
-					curProductEntry, Long.toString(curProductEntry.getPrimaryKey()), i);
+			Iterator itr = productEntry.getLicenses().iterator();
 
-				PortletURL rowURL = renderResponse.createRenderURL();
+			while (itr.hasNext()) {
+				SRLicense license = (SRLicense)itr.next();
 
-				rowURL.setWindowState(WindowState.MAXIMIZED);
+				sb.append(license.getName());
 
-				rowURL
-					.setParameter("struts_action", "/software_repository/view_product_entry");
-				rowURL.setParameter(
-					"productEntryId", Long.toString(curProductEntry.getProductEntryId()));
-
-				// Name and description
-
-				StringBuffer sb = new StringBuffer();
-
-				sb.append("<a href=\"");
-				sb.append(rowURL);
-				sb.append("\"><b>");
-				sb.append(curProductEntry.getName());
-				sb.append("</b>");
-
-				if (Validator.isNotNull(curProductEntry.getShortDescription())) {
-					sb.append("<br>");
-					sb.append("<span style=\"font-size: xx-small;\">");
-					sb.append(curProductEntry.getShortDescription());
-					sb.append("</span>");
+				if (itr.hasNext()) {
+					sb.append(", ");
 				}
-
-				sb.append("</a>");
-
-				row.addText(sb.toString());
-
-				row.addText(""+curProductEntry.getType());
-				row.addText(""+curProductEntry.getLicenseNames());
-				row.addText(""+curProductEntry.getModifiedDate());
-
-				// Action
-
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_repository/product_entry_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
 			}
+
+			row.addText(sb.toString(), rowURL);
+
+			// Modified date
+
+			row.addText(dateFormatDateTime.format(productEntry.getModifiedDate()), rowURL);
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_repository/product_entry_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+
+		boolean showAddProductEntryButton = SRProductEntryPermission.contains(permissionChecker, plid, ActionKeys.ADD_PRODUCT_ENTRY);
 		%>
 
-			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-product-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br>
+		<c:if test="<%= showAddProductEntryButton || (results.size() > 0) %>">
+			<table border="0" cellpadding="0" cellspacing="0">
+			<tr>
+				<c:if test="<%= showAddProductEntryButton %>">
+					<td>
+						<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-product") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';">
+					</td>
+					<td style="padding-left: 30px;"></td>
+				</c:if>
+
+				<c:if test='<%= (results.size() > 0) && tabs1.equals("products") %>'>
+					<td>
+						<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text">
+
+						<select name="<portlet:namespace/>type">
+							<option value=""></option>
+							<option value="portlet"><%= LanguageUtil.get(pageContext, "portlet") %></option>
+							<option value="theme"><%= LanguageUtil.get(pageContext, "theme") %></option>
+							<option value="layout"><%= LanguageUtil.get(pageContext, "layout") %></option>
+							<option value="extension"><%= LanguageUtil.get(pageContext, "extension") %></option>
+						</select>
+
+						<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search-products") %>">
+					</td>
+				</c:if>
+			</tr>
+			</table>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br>
 			</c:if>
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-		</form>
 	</c:when>
 	<c:when test='<%= tabs1.equals("framework-versions") %>'>
-		<form method="post" name="<portlet:namespace />">
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("name");
-			headerNames.add("active");
-			headerNames.add("priority");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("url");
+		headerNames.add("active");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, "cur1",
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = SRFrameworkVersionServiceUtil.getFrameworkVersionsCount(portletGroupId);
+		int total = SRFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(portletGroupId);
 
-			searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-			List results = SRFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId);
+		List results = SRFrameworkVersionLocalServiceUtil.getFrameworkVersions(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+		searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				SRFrameworkVersion curFrameworkVersion =
-					(SRFrameworkVersion) results.get(i);
+		for (int i = 0; i < results.size(); i++) {
+			SRFrameworkVersion frameworkVersion = (SRFrameworkVersion)results.get(i);
 
-				ResultRow row = new ResultRow(
-					curFrameworkVersion,
-					Long.toString(curFrameworkVersion.getPrimaryKey()), i);
+			ResultRow row = new ResultRow(frameworkVersion, frameworkVersion.getPrimaryKey(), i);
 
-				// Name and description
+			String rowHREF = frameworkVersion.getUrl();
 
-				StringBuffer sb = new StringBuffer();
+			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, frameworkVersion.getName(), rowHREF, "_blank", frameworkVersion.getName());
 
-				sb.append("<a href=\"");
-				sb.append(curFrameworkVersion.getUrl());
-				sb.append("\"><b>");
-				sb.append(curFrameworkVersion.getName());
-				sb.append("</b>");
-				sb.append("</a>");
+			// Name
 
-				row.addText(sb.toString());
+			row.addText(rowTextEntry);
 
-				row.addText(LanguageUtil.get(pageContext, curFrameworkVersion.getActive()?"yes":"no"));
-				row.addText(Integer.toString(curFrameworkVersion.getPriority()));
+			// URL
 
-				// Action
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_repository/framework_version_action.jsp");
+			rowTextEntry.setName(frameworkVersion.getUrl());
 
-				// Add result row
+			row.addText(rowTextEntry);
 
-				resultRows.add(row);
-			}
+			// Active
+
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+			rowTextEntry.setName(LanguageUtil.get(pageContext, frameworkVersion.isActive() ? "yes" : "no"));
+
+			row.addText(rowTextEntry);
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_repository/framework_version_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
 		%>
 
+		<c:if test="<%= SRFrameworkVersionPermission.contains(permissionChecker, plid, ActionKeys.ADD_FRAMEWORK_VERSION) %>">
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-framework-version") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_framework_version" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br>
 			</c:if>
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-		</form>
 	</c:when>
 	<c:when test='<%= tabs1.equals("licenses") %>'>
-		<form method="post" name="<portlet:namespace />">
 
 		<%
-			List headerNames = new ArrayList();
+		List headerNames = new ArrayList();
 
-			headerNames.add("name");
-			headerNames.add("active");
-			headerNames.add("openSource");
-			headerNames.add("recommended");
-			headerNames.add(StringPool.BLANK);
+		headerNames.add("name");
+		headerNames.add("url");
+		headerNames.add("open-source");
+		headerNames.add("active");
+		headerNames.add("recommended");
+		headerNames.add(StringPool.BLANK);
 
-			SearchContainer searchContainer = new SearchContainer(
-				renderRequest, null, null, "cur1",
-				SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-			int total = SRLicenseServiceUtil.getLicensesCount();
+		int total = SRLicenseLocalServiceUtil.getLicensesCount();
 
-			searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-			List results = SRLicenseServiceUtil.getLicenses();
+		List results = SRLicenseLocalServiceUtil.getLicenses(searchContainer.getStart(), searchContainer.getEnd());
 
-			searchContainer.setResults(results);
+		searchContainer.setResults(results);
 
-			List resultRows = searchContainer.getResultRows();
+		List resultRows = searchContainer.getResultRows();
 
-			for (int i = 0; i < results.size(); i++) {
-				SRLicense curLicense = (SRLicense) results.get(i);
+		for (int i = 0; i < results.size(); i++) {
+			SRLicense license = (SRLicense)results.get(i);
 
-				ResultRow row = new ResultRow(
-					curLicense,
-					Long.toString(curLicense.getPrimaryKey()), i);
+			ResultRow row = new ResultRow(license, license.getPrimaryKey(), i);
 
-				// Name and description
+			String rowHREF = license.getUrl();
 
-				StringBuffer sb = new StringBuffer();
+			TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, license.getName(), rowHREF, "_blank", license.getName());
 
-				sb.append("<a href=\"");
-				sb.append(curLicense.getUrl());
-				sb.append("\"><b>");
-				sb.append(curLicense.getName());
-				sb.append("</b>");
-				sb.append("</a>");
+			// Name
 
-				row.addText(sb.toString());
+			row.addText(rowTextEntry);
 
-				row.addText(LanguageUtil.get(pageContext, curLicense.getActive()?"yes":"no"));
-				row.addText(LanguageUtil.get(pageContext, curLicense.getOpenSource()?"yes":"no"));
-				row.addText(LanguageUtil.get(pageContext, curLicense.getRecommended()?"yes":"no"));
+			// URL
 
-				// Action
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-				row.addJSP(
-					"right", SearchEntry.DEFAULT_VALIGN,
-					"/html/portlet/software_repository/license_action.jsp");
+			rowTextEntry.setName(license.getUrl());
 
-				// Add result row
+			row.addText(rowTextEntry);
 
-				resultRows.add(row);
-			}
+			// Open source
+
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isOpenSource() ? "yes" : "no"));
+
+			row.addText(rowTextEntry);
+
+			// Active
+
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isActive() ? "yes" : "no"));
+
+			row.addText(rowTextEntry);
+
+			// Recommended
+
+			rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
+
+			rowTextEntry.setName(LanguageUtil.get(pageContext, license.isRecommended() ? "yes" : "no"));
+
+			row.addText(rowTextEntry);
+
+			// Action
+
+			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/software_repository/license_action.jsp");
+
+			// Add result row
+
+			resultRows.add(row);
+		}
 		%>
 
+		<c:if test="<%= true %>">
 			<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-license") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_license" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';"><br>
 
 			<c:if test="<%= results.size() > 0 %>">
 				<br>
 			</c:if>
+		</c:if>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-
-		</form>
-	</c:when>
-	<c:when test='<%= tabs1.equals("my-entries")%>'>
-		my-entries
 	</c:when>
 </c:choose>
+
+</form>

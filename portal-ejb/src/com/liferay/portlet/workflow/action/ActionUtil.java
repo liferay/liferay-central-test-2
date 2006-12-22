@@ -22,9 +22,8 @@
 
 package com.liferay.portlet.workflow.action;
 
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -43,15 +42,13 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getDefinition(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getDefinition(httpReq);
 	}
 
 	public static void getDefinition(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getDefinition(httpReq);
 	}

@@ -30,7 +30,11 @@ import com.liferay.portlet.softwarerepository.service.SRLicenseServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import javax.portlet.*;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -42,8 +46,7 @@ import org.apache.struts.action.ActionMapping;
  * @author  Jorge Ferrer
  *
  */
-public class EditLicenseAction
-	extends PortletAction {
+public class EditLicenseAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -54,10 +57,10 @@ public class EditLicenseAction
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateLicense(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteLicense(req);
 			}
 
 			sendRedirect(req, res);
@@ -101,34 +104,34 @@ public class EditLicenseAction
 			getForward(req, "portlet.software_repository.edit_license"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
+	protected void deleteLicense(ActionRequest req) throws Exception {
 		long licenseId = ParamUtil.getLong(req, "licenseId");
 
 		SRLicenseServiceUtil.deleteLicense(licenseId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
+	protected void updateLicense(ActionRequest req) throws Exception {
 		long licenseId = ParamUtil.getLong(req, "licenseId", -1);
 
 		String name = ParamUtil.getString(req, "name");
+		String url = ParamUtil.getString(req, "url");
+		boolean openSource = ParamUtil.getBoolean(req, "openSource");
 		boolean active = ParamUtil.getBoolean(req, "active");
 		boolean recommended = ParamUtil.getBoolean(req, "recommended");
-		boolean openSource = ParamUtil.getBoolean(req, "openSource");
-		String url = ParamUtil.getString(req, "url");
 
 		if (licenseId == 0) {
 
-			// Add entry
+			// Add license
 
 			SRLicenseServiceUtil.addLicense(
-				name, active, openSource, recommended, url);
+				name, url, openSource, active, recommended);
 		}
 		else {
 
-			// Update entry
+			// Update license
 
 			SRLicenseServiceUtil.updateLicense(
-				licenseId, name, active, openSource, recommended, url);
+				licenseId, name, url, openSource, active, recommended);
 		}
 	}
 

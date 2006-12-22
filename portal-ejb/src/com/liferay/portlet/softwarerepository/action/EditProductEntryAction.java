@@ -32,7 +32,11 @@ import com.liferay.portlet.softwarerepository.service.SRProductEntryServiceUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import javax.portlet.*;
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -44,8 +48,7 @@ import org.apache.struts.action.ActionMapping;
  * @author  Jorge Ferrer
  *
  */
-public class EditProductEntryAction
-	extends PortletAction {
+public class EditProductEntryAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -56,10 +59,10 @@ public class EditProductEntryAction
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req);
+				updateProductEntry(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				deleteEntry(req);
+				deleteProductEntry(req);
 			}
 
 			sendRedirect(req, res);
@@ -103,41 +106,48 @@ public class EditProductEntryAction
 			getForward(req, "portlet.software_repository.edit_product_entry"));
 	}
 
-	protected void deleteEntry(ActionRequest req) throws Exception {
+	protected void deleteProductEntry(ActionRequest req) throws Exception {
 		long productEntryId = ParamUtil.getLong(req, "productEntryId");
 
 		SRProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
-	protected void updateEntry(ActionRequest req) throws Exception {
+	protected void updateProductEntry(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long productEntryId = ParamUtil.getLong(req, "productEntryId", -1);
 
-		String repoArtifactId = ParamUtil.getString(req, "repoArtifactId");
-		String repoGroupId = ParamUtil.getString(req, "repoGroupId");
 		String name = ParamUtil.getString(req, "name");
 		String type = ParamUtil.getString(req, "type");
-		long[] licenseIds = ParamUtil.getLongValues(req,"licenses");
 		String shortDescription = ParamUtil.getString(req, "shortDescription");
 		String longDescription = ParamUtil.getString(req, "longDescription");
 		String pageURL = ParamUtil.getString(req, "pageURL");
+		String repoGroupId = ParamUtil.getString(req, "repoGroupId");
+		String repoArtifactId = ParamUtil.getString(req, "repoArtifactId");
 
-		if (productEntryId <= 0) {
+		long[] licenseIds = ParamUtil.getLongValues(req, "licenses");
 
-			// Add entry
+		String[] communityPermissions = req.getParameterValues(
+			"communityPermissions");
+		String[] guestPermissions = req.getParameterValues(
+			"guestPermissions");
+
+		if (productEntryId == 0) {
+
+			// Add product entry
 
 			SRProductEntryServiceUtil.addProductEntry(
-				layout.getPlid(), repoArtifactId, repoGroupId, name, type,
-				licenseIds, shortDescription, longDescription, pageURL);
+				layout.getPlid(), name, type, shortDescription, longDescription,
+				pageURL, repoGroupId, repoArtifactId, licenseIds,
+				communityPermissions, guestPermissions);
 		}
 		else {
 
-			// Update entry
+			// Update product entry
 
 			SRProductEntryServiceUtil.updateProductEntry(
-				productEntryId, repoArtifactId, repoGroupId, name, licenseIds,
-				shortDescription, longDescription, pageURL);
+				productEntryId, name, type, shortDescription, longDescription,
+				pageURL, repoGroupId, repoArtifactId, licenseIds);
 		}
 	}
 

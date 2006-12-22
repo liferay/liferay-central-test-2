@@ -30,8 +30,9 @@ import com.liferay.portlet.softwarerepository.model.SRFrameworkVersion;
  * @author  Brian Wing Shun Chan
  *
  */
-public class SRFrameworkVersionImpl extends SRFrameworkVersionModelImpl
-	implements SRFrameworkVersion {
+public class SRFrameworkVersionImpl
+	extends SRFrameworkVersionModelImpl implements SRFrameworkVersion {
+
 	public SRFrameworkVersionImpl() {
 	}
 

@@ -217,7 +217,7 @@ public class BlogsCategoryLocalServiceImpl
 					entry.getTitle(), entry.getContent());
 			}
 			catch (IOException ioe) {
-				_log.error(ioe.getMessage());
+				_log.error("Indexing " + entry.getEntryId(), ioe);
 			}
 		}
 

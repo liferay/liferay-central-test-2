@@ -39,21 +39,112 @@ public class SRProductVersionLocalServiceEJBImpl
 	implements SRProductVersionLocalService, SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		java.lang.String userId, long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SRProductVersionLocalServiceFactory.getTxImpl()
 												  .addProductVersion(userId,
-			productEntryId, version, changeLog, frameworkVersionIds,
-			downloadPageURL, directDownloadURL, repoStoreArtifact);
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SRProductVersionLocalServiceFactory.getTxImpl()
+												  .addProductVersion(userId,
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			communityPermissions, guestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SRProductVersionLocalServiceFactory.getTxImpl()
+												  .addProductVersion(userId,
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
+	public void addProductVersionResources(long productEntryId,
+		long productVersionId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl()
+										   .addProductVersionResources(productEntryId,
+			productVersionId, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl()
+										   .addProductVersionResources(productEntry,
+			productVersion, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProductVersionResources(long productEntryId,
+		long productVersionId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl()
+										   .addProductVersionResources(productEntryId,
+			productVersionId, communityPermissions, guestPermissions);
+	}
+
+	public void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl()
+										   .addProductVersionResources(productEntry,
+			productVersion, communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductVersion(long productVersionId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductVersionLocalServiceFactory.getTxImpl().deleteProductVersion(productVersionId);
+	}
+
+	public void deleteProductVersion(
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl().deleteProductVersion(productVersion);
+	}
+
+	public void deleteProductVersions(long productEntryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalServiceFactory.getTxImpl().deleteProductVersions(productEntryId);
 	}
 
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion getProductVersion(
@@ -79,22 +170,15 @@ public class SRProductVersionLocalServiceEJBImpl
 
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SRProductVersionLocalServiceFactory.getTxImpl()
 												  .updateProductVersion(productVersionId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
-	}
-
-	public java.util.List getSRFrameworkVersions(long productVersionId)
-		throws com.liferay.portlet.softwarerepository.NoSuchProductVersionException, 
-			com.liferay.portal.SystemException {
-		return SRProductVersionLocalServiceFactory.getTxImpl()
-												  .getSRFrameworkVersions(productVersionId);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds);
 	}
 
 	public void ejbCreate() throws CreateException {

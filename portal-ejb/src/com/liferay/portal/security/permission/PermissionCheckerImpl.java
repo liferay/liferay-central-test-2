@@ -126,6 +126,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	public boolean hasPermission(
+		String groupId, String name, long primKey, String actionId) {
+
+		return hasPermission(groupId, name, String.valueOf(primKey), actionId);
+	}
+
+	public boolean hasPermission(
 		String groupId, String name, String primKey, String actionId) {
 
 		long start = 0;

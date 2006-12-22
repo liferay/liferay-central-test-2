@@ -285,6 +285,10 @@ public class LayoutUtil {
 		getPersistence().removeByO_F(ownerId, friendlyURL);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByOwnerId(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByOwnerId(ownerId);
@@ -299,6 +303,10 @@ public class LayoutUtil {
 	public static int countByO_F(java.lang.String ownerId,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
 		return getPersistence().countByO_F(ownerId, friendlyURL);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

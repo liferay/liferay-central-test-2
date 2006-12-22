@@ -3,7 +3,7 @@
 
 <service-builder root-dir=".." package-path="com.liferay.portlet">
 	<portlet name="Software Repository" short-name="SR" />
-	<entity name="SRLicense" local-service="false" remote-service="true">
+	<entity name="SRLicense" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -12,8 +12,8 @@
 		<!-- Other fields -->
 
 		<column name="name" type="String" />
-		<column name="openSource" type="boolean" />
 		<column name="url" type="String" />
+		<column name="openSource" type="boolean" />
 		<column name="active" type="boolean" />
 		<column name="recommended" type="boolean" />
 
@@ -37,7 +37,7 @@
 
 		<reference package-path="com.liferay.portal" entity="Resource" />
 	</entity>
-	<entity name="SRFrameworkVersion" local-service="false" remote-service="true">
+	<entity name="SRFrameworkVersion" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -169,12 +169,6 @@
 		<column name="downloadPageURL" type="String" />
 		<column name="directDownloadURL" type="String" />
 		<column name="repoStoreArtifact" type="boolean" />
-
-		<!-- Dependencies -->
-		
-		<!--<column name="dependencies" type="Collection" entity="SRDependency" mapping-table="SRProductVersions_SRDependencies" />-->
-		<!--<column name="obsoletes" type="Collection" entity="SRDependency" mapping-table="SRProductVersions_SRObsoletes" />-->
-		<!--<column name="prerequisites" type="Collection" entity="SRPrerequisite" mapping-table="SRProductVersions_SRPrerequisite" />-->
 
 		<!-- Relationships -->
 

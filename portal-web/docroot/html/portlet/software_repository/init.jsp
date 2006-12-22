@@ -20,23 +20,27 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%><%--
+%>
 
---%><%@ include file="/html/portlet/init.jsp" %><%--
+<%@ include file="/html/portlet/init.jsp" %>
 
---%><%@ page import="com.liferay.portlet.softwarerepository.model.SRProductEntry" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.model.SRProductVersion" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.model.SRLicense" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.model.SRFrameworkVersion" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.service.SRProductEntryServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.service.SRProductVersionServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.service.SRLicenseServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.NoSuchLicenseException" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.NoSuchProductEntryException" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.NoSuchProductVersionException" %><%--
---%><%@ page import="com.liferay.portlet.softwarerepository.action.ActionUtil" %><%--
---%><%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portal.kernel.search.Document" %>
+<%@ page import="com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException" %>
+<%@ page import="com.liferay.portlet.softwarerepository.NoSuchLicenseException" %>
+<%@ page import="com.liferay.portlet.softwarerepository.NoSuchProductEntryException" %>
+<%@ page import="com.liferay.portlet.softwarerepository.NoSuchProductVersionException" %>
+<%@ page import="com.liferay.portlet.softwarerepository.model.SRFrameworkVersion" %>
+<%@ page import="com.liferay.portlet.softwarerepository.model.SRLicense" %>
+<%@ page import="com.liferay.portlet.softwarerepository.model.SRProductEntry" %>
+<%@ page import="com.liferay.portlet.softwarerepository.model.SRProductVersion" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.SRLicenseLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.permission.SRFrameworkVersionPermission" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.permission.SRProductEntryPermission" %>
+<%@ page import="com.liferay.portlet.softwarerepository.service.permission.SRProductVersionPermission" %>
 
+<%
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+%>

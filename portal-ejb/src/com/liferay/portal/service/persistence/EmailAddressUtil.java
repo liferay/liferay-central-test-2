@@ -424,6 +424,10 @@ public class EmailAddressUtil {
 		getPersistence().removeByC_C_C_P(companyId, className, classPK, primary);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByCompanyId(java.lang.String companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
@@ -450,6 +454,10 @@ public class EmailAddressUtil {
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C_C_P(companyId, className, classPK,
 			primary);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

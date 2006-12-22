@@ -51,6 +51,19 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static boolean[] getBooleanValues(
+		ServletRequest req, String param) {
+
+		return getBooleanValues(req, param, new boolean[0]);
+	}
+
+	public static boolean[] getBooleanValues(
+		ServletRequest req, String param, boolean[] defaultValue) {
+
+		return GetterUtil.getBooleanValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static Date getDate(
 		ServletRequest req, String param, DateFormat df) {
 
@@ -73,6 +86,17 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static double[] getDoubleValues(ServletRequest req, String param) {
+		return getDoubleValues(req, param, new double[0]);
+	}
+
+	public static double[] getDoubleValues(
+		ServletRequest req, String param, double[] defaultValue) {
+
+		return GetterUtil.getDoubleValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static float getFloat(ServletRequest req, String param) {
 		return GetterUtil.getFloat(req.getParameter(param));
 	}
@@ -81,6 +105,17 @@ public class ParamUtil {
 		ServletRequest req, String param, float defaultValue) {
 
 		return get(req, param, defaultValue);
+	}
+
+	public static float[] getFloatValues(ServletRequest req, String param) {
+		return getFloatValues(req, param, new float[0]);
+	}
+
+	public static float[] getFloatValues(
+		ServletRequest req, String param, float[] defaultValue) {
+
+		return GetterUtil.getFloatValues(
+			req.getParameterValues(param), defaultValue);
 	}
 
 	public static int getInteger(ServletRequest req, String param) {
@@ -93,6 +128,17 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static int[] getIntegerValues(ServletRequest req, String param) {
+		return getIntegerValues(req, param, new int[0]);
+	}
+
+	public static int[] getIntegerValues(
+		ServletRequest req, String param, int[] defaultValue) {
+
+		return GetterUtil.getIntegerValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static long getLong(ServletRequest req, String param) {
 		return GetterUtil.getLong(req.getParameter(param));
 	}
@@ -103,6 +149,17 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static long[] getLongValues(ServletRequest req, String param) {
+		return getLongValues(req, param, new long[0]);
+	}
+
+	public static long[] getLongValues(
+		ServletRequest req, String param, long[] defaultValue) {
+
+		return GetterUtil.getLongValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static short getShort(ServletRequest req, String param) {
 		return GetterUtil.getShort(req.getParameter(param));
 	}
@@ -111,6 +168,17 @@ public class ParamUtil {
 		ServletRequest req, String param, short defaultValue) {
 
 		return get(req, param, defaultValue);
+	}
+
+	public static short[] getShortValues(ServletRequest req, String param) {
+		return getShortValues(req, param, new short[0]);
+	}
+
+	public static short[] getShortValues(
+		ServletRequest req, String param, short[] defaultValue) {
+
+		return GetterUtil.getShortValues(
+			req.getParameterValues(param), defaultValue);
 	}
 
 	public static String getString(ServletRequest req, String param) {
@@ -202,6 +270,19 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static boolean[] getBooleanValues(
+		PortletRequest req, String param) {
+
+		return getBooleanValues(req, param, new boolean[0]);
+	}
+
+	public static boolean[] getBooleanValues(
+		PortletRequest req, String param, boolean[] defaultValue) {
+
+		return GetterUtil.getBooleanValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static Date getDate(
 		PortletRequest req, String param, DateFormat df) {
 
@@ -224,6 +305,17 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static double[] getDoubleValues(PortletRequest req, String param) {
+		return getDoubleValues(req, param, new double[0]);
+	}
+
+	public static double[] getDoubleValues(
+		PortletRequest req, String param, double[] defaultValue) {
+
+		return GetterUtil.getDoubleValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static float getFloat(PortletRequest req, String param) {
 		return GetterUtil.getFloat(req.getParameter(param));
 	}
@@ -234,6 +326,17 @@ public class ParamUtil {
 		return get(req, param, defaultValue);
 	}
 
+	public static float[] getFloatValues(PortletRequest req, String param) {
+		return getFloatValues(req, param, new float[0]);
+	}
+
+	public static float[] getFloatValues(
+		PortletRequest req, String param, float[] defaultValue) {
+
+		return GetterUtil.getFloatValues(
+			req.getParameterValues(param), defaultValue);
+	}
+
 	public static int getInteger(PortletRequest req, String param) {
 		return GetterUtil.getInteger(req.getParameter(param));
 	}
@@ -242,6 +345,17 @@ public class ParamUtil {
 		PortletRequest req, String param, int defaultValue) {
 
 		return get(req, param, defaultValue);
+	}
+
+	public static int[] getIntegerValues(PortletRequest req, String param) {
+		return getIntegerValues(req, param, new int[0]);
+	}
+
+	public static int[] getIntegerValues(
+		PortletRequest req, String param, int[] defaultValue) {
+
+		return GetterUtil.getIntegerValues(
+			req.getParameterValues(param), defaultValue);
 	}
 
 	public static long getLong(PortletRequest req, String param) {
@@ -258,18 +372,11 @@ public class ParamUtil {
 		return getLongValues(req, param, new long[0]);
 	}
 
-	public static long[] getLongValues
-		(PortletRequest req, String param, long[] defaultValue) {
-		String[] stringValues = req.getParameterValues(param);
-		if (stringValues == null) {
-			return defaultValue;
-		}
+	public static long[] getLongValues(
+		PortletRequest req, String param, long[] defaultValue) {
 
-		long[] values = new long[stringValues.length];
-		for (int i = 0; i < stringValues.length; i++) {
-			values[i] = Long.parseLong(stringValues[i]);
-		}
-		return values;
+		return GetterUtil.getLongValues(
+			req.getParameterValues(param), defaultValue);
 	}
 
 	public static short getShort(PortletRequest req, String param) {
@@ -280,6 +387,17 @@ public class ParamUtil {
 		PortletRequest req, String param, short defaultValue) {
 
 		return get(req, param, defaultValue);
+	}
+
+	public static short[] getShortValues(PortletRequest req, String param) {
+		return getShortValues(req, param, new short[0]);
+	}
+
+	public static short[] getShortValues(
+		PortletRequest req, String param, short[] defaultValue) {
+
+		return GetterUtil.getShortValues(
+			req.getParameterValues(param), defaultValue);
 	}
 
 	public static String getString(PortletRequest req, String param) {

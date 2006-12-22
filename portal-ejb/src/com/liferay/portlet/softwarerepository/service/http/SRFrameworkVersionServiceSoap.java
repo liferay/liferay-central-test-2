@@ -38,13 +38,33 @@ import java.rmi.RemoteException;
  */
 public class SRFrameworkVersionServiceSoap {
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
-		boolean active, int priority, java.lang.String url)
-		throws RemoteException {
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRFrameworkVersion returnValue =
-				SRFrameworkVersionServiceUtil.addFrameworkVersion(userId, plid,
-					name, active, priority, url);
+				SRFrameworkVersionServiceUtil.addFrameworkVersion(plid, name,
+					url, active, priority, addCommunityPermissions,
+					addGuestPermissions);
+
+			return com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			String stackTrace = StackTraceUtil.getStackTrace(e);
+			_log.error(stackTrace);
+			throw new RemoteException(stackTrace);
+		}
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap addFrameworkVersion(
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			com.liferay.portlet.softwarerepository.model.SRFrameworkVersion returnValue =
+				SRFrameworkVersionServiceUtil.addFrameworkVersion(plid, name,
+					url, active, priority, communityPermissions,
+					guestPermissions);
 
 			return com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap.toSoapModel(returnValue);
 		}
@@ -82,71 +102,13 @@ public class SRFrameworkVersionServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap[] getFrameworkVersions(
-		java.lang.String groupId) throws RemoteException {
-		try {
-			java.util.List returnValue = SRFrameworkVersionServiceUtil.getFrameworkVersions(groupId);
-
-			return com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap[] getFrameworkVersions(
-		java.lang.String groupId, boolean active) throws RemoteException {
-		try {
-			java.util.List returnValue = SRFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
-					active);
-
-			return com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getFrameworkVersionsCount(java.lang.String groupId)
-		throws RemoteException {
-		try {
-			int returnValue = SRFrameworkVersionServiceUtil.getFrameworkVersionsCount(groupId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
-	public static int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active) throws RemoteException {
-		try {
-			int returnValue = SRFrameworkVersionServiceUtil.getFrameworkVersionsCount(groupId,
-					active);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
-		}
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap updateFrameworkVersion(
-		long frameworkVersionId, java.lang.String name, boolean active,
-		int priority, java.lang.String url) throws RemoteException {
+		long frameworkVersionId, java.lang.String name, java.lang.String url,
+		boolean active, int priority) throws RemoteException {
 		try {
 			com.liferay.portlet.softwarerepository.model.SRFrameworkVersion returnValue =
 				SRFrameworkVersionServiceUtil.updateFrameworkVersion(frameworkVersionId,
-					name, active, priority, url);
+					name, url, active, priority);
 
 			return com.liferay.portlet.softwarerepository.model.SRFrameworkVersionSoap.toSoapModel(returnValue);
 		}

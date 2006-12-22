@@ -24,16 +24,18 @@ package com.liferay.portlet.softwarerepository.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.softwarerepository.model.SRProductVersion;
 import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceUtil;
 import com.liferay.portlet.softwarerepository.service.SRProductVersionService;
-
-import java.util.List;
+import com.liferay.portlet.softwarerepository.service.permission.SRProductEntryPermission;
+import com.liferay.portlet.softwarerepository.service.permission.SRProductVersionPermission;
 
 /**
  * <a href="SRProductVersionServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author  Jorge Ferrer
  * @author  Brian Wing Shun Chan
  *
  */
@@ -41,51 +43,70 @@ public class SRProductVersionServiceImpl extends PrincipalBean
 	implements SRProductVersionService {
 
 	public SRProductVersion addProductVersion(
-		long productEntryId, String version,
-		String changeLog, long[] frameworkVersionIds,
-		String downloadPageURL, String directDownloadURL,
-		boolean repoStoreArtifact)
+			long productEntryId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		SRProductEntryPermission.check(
+			getPermissionChecker(), productEntryId,
+			ActionKeys.ADD_PRODUCT_VERSION);
+
 		return SRProductVersionLocalServiceUtil.addProductVersion(
-			getUserId(), productEntryId, version, changeLog,
-			frameworkVersionIds, downloadPageURL, directDownloadURL,
-			repoStoreArtifact);
+			getUserId(), productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public SRProductVersion addProductVersion(
+			long productEntryId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		SRProductEntryPermission.check(
+			getPermissionChecker(), productEntryId,
+			ActionKeys.ADD_PRODUCT_VERSION);
+
+		return SRProductVersionLocalServiceUtil.addProductVersion(
+			getUserId(), productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductVersion(long productVersionId)
 		throws PortalException, SystemException {
-	 	SRProductVersionLocalServiceUtil.deleteProductVersion(productVersionId);
+
+		SRProductVersionPermission.check(
+			getPermissionChecker(), productVersionId, ActionKeys.DELETE);
+
+		SRProductVersionLocalServiceUtil.deleteProductVersion(productVersionId);
 	}
 
 	public SRProductVersion getProductVersion(long productVersionId)
 		throws PortalException, SystemException {
-		return SRProductVersionLocalServiceUtil.
-			getProductVersion(productVersionId);
-	}
 
-	public List getProductVersions(
-			long productEntryId, int begin, int end)
-		throws SystemException {
-		return SRProductVersionLocalServiceUtil.getProductVersions(
-			productEntryId, begin, end);
-	}
+		SRProductVersionPermission.check(
+			getPermissionChecker(), productVersionId, ActionKeys.VIEW);
 
-	public int getProductVersionsCount(long productEntryId)
-		throws SystemException {
-		return SRProductVersionLocalServiceUtil.
-			getProductVersionsCount(productEntryId);
+		return SRProductVersionLocalServiceUtil.getProductVersion(
+			productVersionId);
 	}
 
 	public SRProductVersion updateProductVersion(
-		long productVersionId, String version,
-		String changeLog, long[] frameworkVersionIds,
-		String downloadPageURL, String directDownloadURL,
-		boolean repoStoreArtifact)
+			long productVersionId, String version, String changeLog,
+			String downloadPageURL, String directDownloadURL,
+			boolean repoStoreArtifact, long[] frameworkVersionIds)
 		throws PortalException, SystemException {
+
+		SRProductVersionPermission.check(
+			getPermissionChecker(), productVersionId, ActionKeys.UPDATE);
+
 		return SRProductVersionLocalServiceUtil.updateProductVersion(
-			productVersionId, version, changeLog, frameworkVersionIds,
-			downloadPageURL, directDownloadURL, repoStoreArtifact);
+			productVersionId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds);
 	}
 
 }

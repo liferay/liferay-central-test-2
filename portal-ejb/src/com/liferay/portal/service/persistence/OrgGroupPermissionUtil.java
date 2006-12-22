@@ -219,9 +219,17 @@ public class OrgGroupPermissionUtil {
 		getPersistence().removeByPermissionId(permissionId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByPermissionId(java.lang.String permissionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByPermissionId(permissionId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

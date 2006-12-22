@@ -22,16 +22,17 @@
 
 package com.liferay.portlet.softwarerepository.model.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
-import com.liferay.portlet.softwarerepository.model.SRFrameworkVersion;
+import com.liferay.portlet.softwarerepository.model.SRProductEntry;
 import com.liferay.portlet.softwarerepository.model.SRProductVersion;
-import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceUtil;
+import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalServiceUtil;
+import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SRProductVersionImpl.java.html"><b><i>View Source</i></b></a>
@@ -39,38 +40,33 @@ import java.util.List;
  * @author  Brian Wing Shun Chan
  *
  */
-public class SRProductVersionImpl extends SRProductVersionModelImpl
-	implements SRProductVersion {
+public class SRProductVersionImpl
+	extends SRProductVersionModelImpl implements SRProductVersion {
+
 	public SRProductVersionImpl() {
 	}
-	public List getFrameworkVersionIds()
-		throws SystemException, NoSuchProductVersionException {
-		List frameworkVersions =  SRProductVersionLocalServiceUtil.
-			getSRFrameworkVersions(getPrimaryKey());
-		List frameworkVersionIds = new ArrayList();
-		for (
-			Iterator iterator = frameworkVersions.iterator();
-			 iterator.hasNext();) {
-			SRFrameworkVersion l = (SRFrameworkVersion) iterator.next();
-			frameworkVersionIds.add(new Long(l.getFrameworkVersionId()));
+
+	public SRProductEntry getProductEntry() {
+		SRProductEntry productEntry = null;
+
+		try {
+			productEntry = SRProductEntryLocalServiceUtil.getProductEntry(
+				getProductEntryId());
 		}
-		return frameworkVersionIds;
+		catch (Exception e) {
+			productEntry = new SRProductEntryImpl();
+
+			_log.error(e);
+		}
+
+		return productEntry;
 	}
 
-	public String getFrameworkVersionNames()
-		throws SystemException, NoSuchProductVersionException {
-		List frameworkVersions =  SRProductVersionLocalServiceUtil.
-			getSRFrameworkVersions(getPrimaryKey());
-		StringBuffer names = new StringBuffer();
-		for (Iterator iterator = frameworkVersions.iterator();
-			 iterator.hasNext();) {
-			SRFrameworkVersion l = (SRFrameworkVersion) iterator.next();
-			names.append(l.getName());
-			if (iterator.hasNext()) {
-				names.append(StringPool.COMMA + StringPool.SPACE);
-			}
-		}
-		return names.toString();
-
+	public List getFrameworkVersions() throws PortalException, SystemException {
+		return SRFrameworkVersionLocalServiceUtil.
+			getProductVersionFrameworkVersions(getProductVersionId());
 	}
+
+	private static Log _log = LogFactory.getLog(SRProductVersionImpl.class);
+
 }

@@ -1252,6 +1252,20 @@
 		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/SRFrameworkVersionLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionLocalServiceHome</local-home>
+		<local>com.liferay.portlet.softwarerepository.service.ejb.SRFrameworkVersionLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRFrameworkVersionLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/SRProductEntryLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductEntryLocalServiceHome</local-home>

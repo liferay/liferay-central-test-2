@@ -31,13 +31,70 @@ package com.liferay.portlet.softwarerepository.service;
 public interface SRProductVersionLocalService {
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		java.lang.String userId, long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductVersionResources(long productEntryId,
+		long productVersionId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductVersionResources(long productEntryId,
+		long productVersionId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void deleteProductVersion(long productVersionId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deleteProductVersion(
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deleteProductVersions(long productEntryId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -54,13 +111,9 @@ public interface SRProductVersionLocalService {
 
 	public com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public java.util.List getSRFrameworkVersions(long productVersionId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductVersionException;
 }

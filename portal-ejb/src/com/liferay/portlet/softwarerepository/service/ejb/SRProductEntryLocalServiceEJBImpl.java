@@ -38,22 +38,99 @@ import javax.ejb.SessionContext;
 public class SRProductEntryLocalServiceEJBImpl
 	implements SRProductEntryLocalService, SessionBean {
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String repoArtifactId, java.lang.String repoGroupId,
-		java.lang.String name, java.lang.String type, long[] licenseIds,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
-			plid, repoArtifactId, repoGroupId, name, type, licenseIds,
-			shortDescription, longDescription, pageURL);
+			plid, name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SRProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
+			plid, name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds, communityPermissions,
+			guestPermissions);
+	}
+
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return SRProductEntryLocalServiceFactory.getTxImpl().addProductEntry(userId,
+			plid, name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds, addCommunityPermissions,
+			addGuestPermissions, communityPermissions, guestPermissions);
+	}
+
+	public void addProductEntryResources(long productEntryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalServiceFactory.getTxImpl().addProductEntryResources(productEntryId,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalServiceFactory.getTxImpl().addProductEntryResources(productEntry,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public void addProductEntryResources(long productEntryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalServiceFactory.getTxImpl().addProductEntryResources(productEntryId,
+			communityPermissions, guestPermissions);
+	}
+
+	public void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalServiceFactory.getTxImpl().addProductEntryResources(productEntry,
+			communityPermissions, guestPermissions);
 	}
 
 	public void deleteProductEntry(long productEntryId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductEntryLocalServiceFactory.getTxImpl().deleteProductEntry(productEntryId);
+	}
+
+	public void deleteProductEntry(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductEntryLocalServiceFactory.getTxImpl().deleteProductEntry(productEntry);
 	}
 
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry getProductEntry(
@@ -69,11 +146,10 @@ public class SRProductEntryLocalServiceEJBImpl
 			begin, end);
 	}
 
-	public java.util.List getProductEntriesByUserId(java.lang.String groupId,
+	public java.util.List getProductEntries(java.lang.String groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return SRProductEntryLocalServiceFactory.getTxImpl()
-												.getProductEntriesByUserId(groupId,
+		return SRProductEntryLocalServiceFactory.getTxImpl().getProductEntries(groupId,
 			userId, begin, end);
 	}
 
@@ -83,17 +159,11 @@ public class SRProductEntryLocalServiceEJBImpl
 												.getProductEntriesCount(groupId);
 	}
 
-	public int getProductEntriesCountByUserId(java.lang.String groupId,
+	public int getProductEntriesCount(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl()
-												.getProductEntriesCountByUserId(groupId,
+												.getProductEntriesCount(groupId,
 			userId);
-	}
-
-	public java.util.List getSRLicenses(long productEntryId)
-		throws com.liferay.portlet.softwarerepository.NoSuchProductEntryException, 
-			com.liferay.portal.SystemException {
-		return SRProductEntryLocalServiceFactory.getTxImpl().getSRLicenses(productEntryId);
 	}
 
 	public void reIndex(java.lang.String[] ids)
@@ -110,15 +180,15 @@ public class SRProductEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl().updateProductEntry(productEntryId,
-			repoArtifactId, repoGroupId, name, licenseIds, shortDescription,
-			longDescription, pageURL);
+			name, type, shortDescription, longDescription, pageURL,
+			repoGroupId, repoArtifactId, licenseIds);
 	}
 
 	public void ejbCreate() throws CreateException {

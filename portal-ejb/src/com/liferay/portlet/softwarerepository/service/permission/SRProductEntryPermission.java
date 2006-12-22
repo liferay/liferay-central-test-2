@@ -29,83 +29,73 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
+import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalServiceUtil;
 
 /**
  * <a href="SRProductEntryPermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
+ * @author  Brian Wing Shun Chan
  *
  */
 public class SRProductEntryPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String plid, String folderId,
-			String actionId)
+			PermissionChecker permissionChecker, String plid, String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, plid, folderId, actionId)) {
+		if (!contains(permissionChecker, plid, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, String folderId,
+			PermissionChecker permissionChecker, long productEntryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, folderId, actionId)) {
+		if (!contains(permissionChecker, productEntryId, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static void check(
-			PermissionChecker permissionChecker, SRProductEntry folder,
+			PermissionChecker permissionChecker, SRProductEntry productEntry,
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (!contains(permissionChecker, folder, actionId)) {
+		if (!contains(permissionChecker, productEntry, actionId)) {
 			throw new PrincipalException();
 		}
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String plid,
-			String productEntryId, String actionId)
+			PermissionChecker permissionChecker, String plid, String actionId)
 		throws PortalException, SystemException {
 
-		// TODO
-//		if (Validator.equals(
-//				productEntryId, SRProductEntry.DEFAULT_PARENT_FOLDER_ID)) {
-
-			return PortletPermission.contains(
-				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);
-//		}
-//		else {
-//			return contains(permissionChecker, productEntryId, actionId);
-//		}
+		return PortletPermission.contains(
+			permissionChecker, plid, PortletKeys.SOFTWARE_REPOSITORY, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String productEntryId,
+			PermissionChecker permissionChecker, long productEntryId,
 			String actionId)
 		throws PortalException, SystemException {
 
-		//TODO
-//		SRProductEntry productEntry =
-//			SRProductEntryLocalServiceUtil.getProductEntry(productEntryId);
-//
-//		return contains(permissionChecker, productEntry, actionId);
-		return false;
+		SRProductEntry productEntry =
+			SRProductEntryLocalServiceUtil.getProductEntry(productEntryId);
+
+		return contains(permissionChecker, productEntry, actionId);
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, SRProductEntry folder,
+			PermissionChecker permissionChecker, SRProductEntry productEntry,
 			String actionId)
 		throws PortalException, SystemException {
 
 		return permissionChecker.hasPermission(
-			folder.getGroupId(), SRProductEntryPermission.class.getName(),
-			Long.toString(folder.getPrimaryKey()), actionId);
+			productEntry.getGroupId(), SRProductEntry.class.getName(),
+			productEntry.getPrimaryKey(), actionId);
 	}
 
 }

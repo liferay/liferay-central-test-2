@@ -233,10 +233,10 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				category.getCompanyId(), category.getCategoryId());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + category.getCategoryId(), ioe);
 		}
 		catch (ParseException pe) {
-			_log.error(pe.getMessage());
+			_log.error("Deleting index " + category.getCategoryId(), pe);
 		}
 
 		// Threads
@@ -343,10 +343,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 							title, content);
 					}
 					catch (Exception e1) {
-
-						// Continue indexing even if one message fails
-
-						_log.error(e1.getMessage());
+						_log.error("Reindexing " + messageId, e1);
 					}
 				}
 			}
@@ -415,9 +412,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			throw new SystemException(ioe);
 		}
 		catch (ParseException pe) {
-			//throw new SystemException(pe);
-
-			_log.error("Error parsing keywords " + keywords);
+			_log.error("Parsing keywords " + keywords, pe);
 
 			return new HitsImpl();
 		}
@@ -564,7 +559,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					}
 				}
 				catch (IOException ioe) {
-					_log.error(ioe.getMessage());
+					_log.error("Indexing " + message.getMessageId(), ioe);
 				}
 			}
 		}

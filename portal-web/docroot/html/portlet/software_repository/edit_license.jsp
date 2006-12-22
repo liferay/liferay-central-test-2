@@ -25,22 +25,26 @@
 <%@ include file="/html/portlet/software_repository/init.jsp" %>
 
 <%
-	String redirect = ParamUtil.getString(request, "redirect");
+String redirect = ParamUtil.getString(request, "redirect");
 
-	SRLicense license = (SRLicense) request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_LICENSE);
+SRLicense license = (SRLicense)request.getAttribute(WebKeys.SOFTWARE_REPOSITORY_LICENSE);
 
-	long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
+long licenseId = BeanParamUtil.getLong(license, request, "licenseId");
+
+boolean openSource = BeanParamUtil.getBoolean(license, request, "openSource", false);
+boolean active = BeanParamUtil.getBoolean(license, request, "active", false);
+boolean recommended = BeanParamUtil.getBoolean(license, request, "recommended", false);
 %>
 
 <script type="text/javascript">
-	function <portlet:namespace />saveEntry() {
+	function <portlet:namespace />saveLicense() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= license == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_license" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
+<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_repository/edit_license" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveLicense(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
 <input name="<portlet:namespace />licenseId" type="hidden" value="<%= licenseId %>">
@@ -69,26 +73,20 @@
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "active") %>
+		<%= LanguageUtil.get(pageContext, "open-source") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<select name="<portlet:namespace/>active">
-			<option <%= ((license != null) && license.getActive())?"selected":"" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= ((license != null) && !license.getActive())?"selected":"" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-		</select>
+		<liferay-ui:input-checkbox param="openSource" defaultValue="<%= openSource %>" />
 	</td>
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "opensource") %>(<%= LanguageUtil.get(pageContext, "osi-approved") %>)
+		<%= LanguageUtil.get(pageContext, "active") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<select name="<portlet:namespace/>openSource">
-			<option <%= ((license != null) && license.getActive())?"selected":"" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= ((license != null) && !license.getActive())?"selected":"" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-		</select>
+		<liferay-ui:input-checkbox param="active" defaultValue="<%= active %>" />
 	</td>
 </tr>
 <tr>
@@ -97,13 +95,9 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<select name="<portlet:namespace/>recommended">
-			<option <%= ((license != null) && license.getActive())?"selected":"" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-			<option <%= ((license != null) && !license.getActive())?"selected":"" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-		</select>
+		<liferay-ui:input-checkbox param="recommended" defaultValue="<%= recommended %>" />
 	</td>
 </tr>
-
 </table>
 
 <br>

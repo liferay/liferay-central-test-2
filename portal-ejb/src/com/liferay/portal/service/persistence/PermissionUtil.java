@@ -234,6 +234,10 @@ public class PermissionUtil {
 		getPersistence().removeByA_R(actionId, resourceId);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByResourceId(java.lang.String resourceId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByResourceId(resourceId);
@@ -242,6 +246,10 @@ public class PermissionUtil {
 	public static int countByA_R(java.lang.String actionId,
 		java.lang.String resourceId) throws com.liferay.portal.SystemException {
 		return getPersistence().countByA_R(actionId, resourceId);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static java.util.List getGroups(java.lang.String pk)

@@ -256,6 +256,10 @@ public class SRLicenseUtil {
 		getPersistence().removeByA_R(active, recommended);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByActive(boolean active)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByActive(active);
@@ -264,6 +268,10 @@ public class SRLicenseUtil {
 	public static int countByA_R(boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByA_R(active, recommended);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

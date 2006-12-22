@@ -30,14 +30,27 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public class SRFrameworkVersionServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
-		java.lang.String userId, java.lang.String plid, java.lang.String name,
-		boolean active, int priority, java.lang.String url)
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
 
-		return srFrameworkVersionService.addFrameworkVersion(userId, plid,
-			name, active, priority, url);
+		return srFrameworkVersionService.addFrameworkVersion(plid, name, url,
+			active, priority, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion addFrameworkVersion(
+		java.lang.String plid, java.lang.String name, java.lang.String url,
+		boolean active, int priority, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
+
+		return srFrameworkVersionService.addFrameworkVersion(plid, name, url,
+			active, priority, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteFrameworkVersion(long frameworkVersionId)
@@ -56,45 +69,14 @@ public class SRFrameworkVersionServiceUtil {
 		return srFrameworkVersionService.getFrameworkVersion(frameworkVersionId);
 	}
 
-	public static java.util.List getFrameworkVersions(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
-
-		return srFrameworkVersionService.getFrameworkVersions(groupId);
-	}
-
-	public static java.util.List getFrameworkVersions(
-		java.lang.String groupId, boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
-
-		return srFrameworkVersionService.getFrameworkVersions(groupId, active);
-	}
-
-	public static int getFrameworkVersionsCount(java.lang.String groupId)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
-
-		return srFrameworkVersionService.getFrameworkVersionsCount(groupId);
-	}
-
-	public static int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active)
-		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
-		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
-
-		return srFrameworkVersionService.getFrameworkVersionsCount(groupId,
-			active);
-	}
-
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion updateFrameworkVersion(
-		long frameworkVersionId, java.lang.String name, boolean active,
-		int priority, java.lang.String url)
+		long frameworkVersionId, java.lang.String name, java.lang.String url,
+		boolean active, int priority)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SRFrameworkVersionService srFrameworkVersionService = SRFrameworkVersionServiceFactory.getService();
 
 		return srFrameworkVersionService.updateFrameworkVersion(frameworkVersionId,
-			name, active, priority, url);
+			name, url, active, priority);
 	}
 }

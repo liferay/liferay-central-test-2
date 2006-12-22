@@ -149,7 +149,7 @@ public class HotDeployPortletListener implements HotDeployListener {
 				Portlet portlet = (Portlet)itr1.next();
 
 				Class portletClass = portletClassLoader.loadClass(
-						portlet.getPortletClass());
+					portlet.getPortletClass());
 
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();

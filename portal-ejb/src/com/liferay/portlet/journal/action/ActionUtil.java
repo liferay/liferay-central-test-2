@@ -24,8 +24,6 @@ package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.ActionRequestImpl;
-import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -51,8 +49,7 @@ import javax.servlet.http.HttpServletRequest;
 public class ActionUtil {
 
 	public static void getArticle(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getArticle(httpReq);
 
@@ -63,8 +60,7 @@ public class ActionUtil {
 	}
 
 	public static void getArticle(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getArticle(httpReq);
 
@@ -92,8 +88,7 @@ public class ActionUtil {
 	}
 
 	public static void getStructure(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getStructure(httpReq);
 
@@ -104,8 +99,7 @@ public class ActionUtil {
 	}
 
 	public static void getStructure(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getStructure(httpReq);
 
@@ -131,8 +125,7 @@ public class ActionUtil {
 	}
 
 	public static void getTemplate(ActionRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((ActionRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getTemplate(httpReq);
 
@@ -143,8 +136,7 @@ public class ActionUtil {
 	}
 
 	public static void getTemplate(RenderRequest req) throws Exception {
-		HttpServletRequest httpReq =
-			((RenderRequestImpl)req).getHttpServletRequest();
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getTemplate(httpReq);
 

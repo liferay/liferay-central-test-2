@@ -31,16 +31,96 @@ package com.liferay.portlet.softwarerepository.service;
 public class SRProductVersionLocalServiceUtil {
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		java.lang.String userId, long productEntryId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
 
 		return srProductVersionLocalService.addProductVersion(userId,
-			productEntryId, version, changeLog, frameworkVersionIds,
-			downloadPageURL, directDownloadURL, repoStoreArtifact);
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+
+		return srProductVersionLocalService.addProductVersion(userId,
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			communityPermissions, guestPermissions);
+	}
+
+	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
+		java.lang.String userId, long productEntryId, java.lang.String version,
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+
+		return srProductVersionLocalService.addProductVersion(userId,
+			productEntryId, version, changeLog, downloadPageURL,
+			directDownloadURL, repoStoreArtifact, frameworkVersionIds,
+			addCommunityPermissions, addGuestPermissions, communityPermissions,
+			guestPermissions);
+	}
+
+	public static void addProductVersionResources(long productEntryId,
+		long productVersionId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.addProductVersionResources(productEntryId,
+			productVersionId, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.addProductVersionResources(productEntry,
+			productVersion, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addProductVersionResources(long productEntryId,
+		long productVersionId, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.addProductVersionResources(productEntryId,
+			productVersionId, communityPermissions, guestPermissions);
+	}
+
+	public static void addProductVersionResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.addProductVersionResources(productEntry,
+			productVersion, communityPermissions, guestPermissions);
 	}
 
 	public static void deleteProductVersion(long productVersionId)
@@ -48,6 +128,21 @@ public class SRProductVersionLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
 		srProductVersionLocalService.deleteProductVersion(productVersionId);
+	}
+
+	public static void deleteProductVersion(
+		com.liferay.portlet.softwarerepository.model.SRProductVersion productVersion)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.deleteProductVersion(productVersion);
+	}
+
+	public static void deleteProductVersions(long productEntryId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+		srProductVersionLocalService.deleteProductVersions(productEntryId);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion getProductVersion(
@@ -76,23 +171,15 @@ public class SRProductVersionLocalServiceUtil {
 
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion updateProductVersion(
 		long productVersionId, java.lang.String version,
-		java.lang.String changeLog, long[] frameworkVersionIds,
-		java.lang.String downloadPageURL, java.lang.String directDownloadURL,
-		boolean repoStoreArtifact)
+		java.lang.String changeLog, java.lang.String downloadPageURL,
+		java.lang.String directDownloadURL, boolean repoStoreArtifact,
+		long[] frameworkVersionIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
 
 		return srProductVersionLocalService.updateProductVersion(productVersionId,
-			version, changeLog, frameworkVersionIds, downloadPageURL,
-			directDownloadURL, repoStoreArtifact);
-	}
-
-	public static java.util.List getSRFrameworkVersions(long productVersionId)
-		throws com.liferay.portlet.softwarerepository.NoSuchProductVersionException, 
-			com.liferay.portal.SystemException {
-		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
-
-		return srProductVersionLocalService.getSRFrameworkVersions(productVersionId);
+			version, changeLog, downloadPageURL, directDownloadURL,
+			repoStoreArtifact, frameworkVersionIds);
 	}
 }

@@ -348,11 +348,11 @@
 		</action>
 
 		<!-- Chat -->
-		
+
 		<action path="/chat/roster" type="com.liferay.portlet.chat.action.RosterAction" />
 
 		<action path="/chat/view" forward="portlet.chat.view" />
-		
+
 		<!-- Communities -->
 
 		<action path="/communities/edit_community" type="com.liferay.portlet.communities.action.EditGroupAction">
@@ -748,7 +748,7 @@
 		<action path="/journal_content/view" type="com.liferay.portlet.journalcontent.action.ViewAction">
 			<forward name="portlet.journal_content.view" path="portlet.journal_content.view" />
 		</action>
-		
+
 		<!-- Journal Content Search -->
 
 		<action path="/journal_content_search/edit_configuration" type="com.liferay.portlet.journalcontentsearch.action.EditConfigurationAction">
@@ -880,7 +880,7 @@
 		<action path="/mail/view" forward="portlet.mail.view" />
 
 		<action path="/mail/view_message" forward="/portlet/mail/view_message.jsp" />
-		
+
 		<!-- Maps -->
 
 		<action path="/maps/view" forward="portlet.maps.view" name="mapsMapsForm" scope="request" />
@@ -1152,23 +1152,6 @@
 
 		<!-- Software Repository -->
 
-		<action path="/software_repository/view" forward="portlet.software_repository.view" />
-		
-		<action path="/software_repository/view_product_entry" type="com.liferay.portlet.softwarerepository.action.ViewProductEntryAction">
-			<forward name="portlet.software_repository.view_product_entry" path="portlet.software_repository.view_product_entry" />
-			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
-		</action>
-
-		<action path="/software_repository/view_product_version" type="com.liferay.portlet.softwarerepository.action.ViewProductVersionAction">
-			<forward name="portlet.software_repository.view_product_version" path="portlet.software_repository.view_product_version" />
-			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
-		</action>
-
-		<action path="/software_repository/edit_product_entry" type="com.liferay.portlet.softwarerepository.action.EditProductEntryAction">
-			<forward name="portlet.software_repository.edit_product_entry" path="portlet.software_repository.edit_product_entry" />
-			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
-		</action>
-
 		<action path="/software_repository/edit_framework_version" type="com.liferay.portlet.softwarerepository.action.EditFrameworkVersionAction">
 			<forward name="portlet.software_repository.edit_framework_version" path="portlet.software_repository.edit_framework_version" />
 			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
@@ -1179,18 +1162,35 @@
 			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
 		</action>
 
+		<action path="/software_repository/edit_product_entry" type="com.liferay.portlet.softwarerepository.action.EditProductEntryAction">
+			<forward name="portlet.software_repository.edit_product_entry" path="portlet.software_repository.edit_product_entry" />
+			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
+		</action>
+
+		<action path="/software_repository/edit_product_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.software_repository.error" />
+		</action>
+
 		<action path="/software_repository/edit_product_version" type="com.liferay.portlet.softwarerepository.action.EditProductVersionAction">
 			<forward name="portlet.software_repository.edit_product_version" path="portlet.software_repository.edit_product_version" />
 			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
 		</action>
 
-		<action path="/software_repository/edit_product_entry_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
-			<forward name="portlet.message_boards.error" path="portlet.document_library.error" />
-		</action>
-
 		<action path="/software_repository/rate_product_entry" type="com.liferay.portlet.softwarerepository.action.RateProductEntryAction" />
 
 		<action path="/software_repository/search" forward="portlet.software_repository.search" />
+
+		<action path="/software_repository/view" forward="portlet.software_repository.view" />
+
+		<action path="/software_repository/view_product_entry" type="com.liferay.portlet.softwarerepository.action.ViewProductEntryAction">
+			<forward name="portlet.software_repository.view_product_entry" path="portlet.software_repository.view_product_entry" />
+			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
+		</action>
+
+		<action path="/software_repository/view_product_version" type="com.liferay.portlet.softwarerepository.action.ViewProductVersionAction">
+			<forward name="portlet.software_repository.view_product_version" path="portlet.software_repository.view_product_version" />
+			<forward name="portlet.software_repository.error" path="portlet.software_repository.error" />
+		</action>
 
 		<!-- Recent Documents -->
 

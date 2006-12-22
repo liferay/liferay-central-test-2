@@ -81,6 +81,7 @@ no-entries-were-found-that-matched-the-keywords-x=No entries were found that mat
 no-information-was-found-associated-with-the-symbol-x=No information was found associated with the symbol <b>{0}</b>.
 no-messages-were-found-that-matched-the-keywords-x=No messages were found that matched the keywords: {0}.
 no-pages-were-found-that-matched-the-keywords-x=No pages were found that matched the keywords: {0}.
+no-products-were-found-that-matched-the-keywords-x=No products were found that matched the keywords: {0}.
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
 only-articles-associated-with-template-x-are-shown=Only articles associated with template {0} are shown.
 only-templates-associated-with-structure-x-are-shown=Only templates associated with structure {0} are shown.

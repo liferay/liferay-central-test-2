@@ -412,7 +412,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Indexing " + messageId, ioe);
 		}
 
 		start = logAddMessage(messageId, start, 9);
@@ -544,7 +544,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				message.getCompanyId(), message.getMessageId());
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Deleting index " + message.getMessageId(), ioe);
 		}
 
 		// File attachments
@@ -1012,7 +1012,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 					}
 				}
 				catch (IOException ioe) {
-					_log.error(ioe.getMessage());
+					_log.error("Indexing " + messageId, ioe);
 				}
 			}
 
@@ -1034,7 +1034,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			}
 		}
 		catch (IOException ioe) {
-			_log.error(ioe.getMessage());
+			_log.error("Indexing " + messageId, ioe);
 		}
 
 		return message;

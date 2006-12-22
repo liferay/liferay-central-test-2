@@ -296,6 +296,10 @@ public class SubscriptionUtil {
 		getPersistence().removeByC_U_C_C(companyId, userId, className, classPK);
 	}
 
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
 	public static int countByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
@@ -312,6 +316,10 @@ public class SubscriptionUtil {
 		java.lang.String classPK) throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_U_C_C(companyId, userId, className,
 			classPK);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
 	}
 
 	public static void initDao() {

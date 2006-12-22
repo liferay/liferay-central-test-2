@@ -30,15 +30,67 @@ package com.liferay.portlet.softwarerepository.service;
  */
 public interface SRProductEntryLocalService {
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
-		java.lang.String userId, java.lang.String plid,
-		java.lang.String repoArtifactId, java.lang.String repoGroupId,
-		java.lang.String name, java.lang.String type, long[] licenseIds,
-		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
+		java.lang.String userId, java.lang.String plid, java.lang.String name,
+		java.lang.String type, java.lang.String shortDescription,
+		java.lang.String longDescription, java.lang.String pageURL,
+		java.lang.String repoGroupId, java.lang.String repoArtifactId,
+		long[] licenseIds, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductEntryResources(long productEntryId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductEntryResources(long productEntryId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addProductEntryResources(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void deleteProductEntry(long productEntryId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void deleteProductEntry(
+		com.liferay.portlet.softwarerepository.model.SRProductEntry productEntry)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -50,19 +102,15 @@ public interface SRProductEntryLocalService {
 	public java.util.List getProductEntries(java.lang.String groupId,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntriesByUserId(java.lang.String groupId,
+	public java.util.List getProductEntries(java.lang.String groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getProductEntriesCount(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int getProductEntriesCountByUserId(java.lang.String groupId,
+	public int getProductEntriesCount(java.lang.String groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException;
-
-	public java.util.List getSRLicenses(long productEntryId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
 
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
@@ -73,10 +121,10 @@ public interface SRProductEntryLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
-		long productEntryId, java.lang.String repoArtifactId,
-		java.lang.String repoGroupId, java.lang.String name, long[] licenseIds,
+		long productEntryId, java.lang.String name, java.lang.String type,
 		java.lang.String shortDescription, java.lang.String longDescription,
-		java.lang.String pageURL)
+		java.lang.String pageURL, java.lang.String repoGroupId,
+		java.lang.String repoArtifactId, long[] licenseIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }
