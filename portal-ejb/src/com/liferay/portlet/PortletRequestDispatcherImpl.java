@@ -146,13 +146,12 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					DynamicServletRequest dynamicReq = null;
 
 					if (reqImpl.isPrivateRequestAttributes()) {
-						String portletNamespace = 
+						String portletNamespace =
 							PortalUtil.getPortletNamespace(
 								reqImpl.getPortletName());
 
 						dynamicReq = new NamespaceServletRequest(
-							httpReq, portletNamespace,
-							portletNamespace);
+							httpReq, portletNamespace, portletNamespace);
 					}
 					else {
 						dynamicReq = new DynamicServletRequest(httpReq);

@@ -772,6 +772,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			</not>
 			<then>
 				<mkdir dir="${lp.ext.dir}/ext-service" />
+
 				<copy todir="${lp.ext.dir}/ext-service" filtering="true">
 					<fileset dir="tools/ext_tmpl/ext-service" />
 				</copy>

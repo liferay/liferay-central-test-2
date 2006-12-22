@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
@@ -37,36 +36,36 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="NamespaceServletRequest.java.html"><b><i>View Source</i></b></a>
+ * This class ensures that portlet attributes and parameters are private to the
+ * portlet.
  *
- * This class ensures that portlet attributes and parameters are private to
- * the portlet. 
+ * <p><a href="NamespaceServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Myunghun Kim
  *
  */
 public class NamespaceServletRequest extends DynamicServletRequest {
 
-	static Set reservedParams = CollectionFactory.getHashSet();
+	static Set reservedAttrs = CollectionFactory.getHashSet();
 
 	static {
-		reservedParams.add(WebKeys.JAVAX_PORTLET_CONFIG);
-		reservedParams.add(WebKeys.JAVAX_PORTLET_PORTLET);
-		reservedParams.add(WebKeys.JAVAX_PORTLET_REQUEST);
-		reservedParams.add(WebKeys.JAVAX_PORTLET_RESPONSE);
+		reservedAttrs.add(WebKeys.JAVAX_PORTLET_CONFIG);
+		reservedAttrs.add(WebKeys.JAVAX_PORTLET_PORTLET);
+		reservedAttrs.add(WebKeys.JAVAX_PORTLET_REQUEST);
+		reservedAttrs.add(WebKeys.JAVAX_PORTLET_RESPONSE);
 	}
 
-	public static final String[] CUSTOM_RESERVED_PARAMS = PropsUtil.getArray(
+	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
 		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
 
-	public NamespaceServletRequest(
-		HttpServletRequest req, String attrNamespace, String paramNamespace) {
+	public NamespaceServletRequest(HttpServletRequest req, String attrNamespace,
+								   String paramNamespace) {
 
 		this(req, attrNamespace, paramNamespace, true);
 	}
 
-	public NamespaceServletRequest(HttpServletRequest req, 
-		String attrNamespace, String paramNamespace, boolean inherit) {
+	public NamespaceServletRequest(HttpServletRequest req, String attrNamespace,
+								   String paramNamespace, boolean inherit) {
 
 		super(req, inherit);
 
@@ -93,7 +92,8 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 			String name = (String)enu.nextElement();
 
 			if (name.startsWith(_attrNamespace)) {
-				names.add(name.substring(_attrNamespace.length(), name.length()));
+				names.add(
+					name.substring(_attrNamespace.length(), name.length()));
 			}
 		}
 
@@ -144,12 +144,12 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 	}
 
 	private boolean _isReservedParam(String name) {
-		if (reservedParams.contains(name)) {
+		if (reservedAttrs.contains(name)) {
 			return true;
 		}
 		else {
-			for (int i = 0; i < CUSTOM_RESERVED_PARAMS.length; i++) {
-				if (name.startsWith(CUSTOM_RESERVED_PARAMS[i])) {
+			for (int i = 0; i < CUSTOM_RESERVED_ATTRS.length; i++) {
+				if (name.startsWith(CUSTOM_RESERVED_ATTRS[i])) {
 					return true;
 				}
 			}

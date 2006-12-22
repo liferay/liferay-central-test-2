@@ -495,8 +495,8 @@ public class RenderRequestImpl implements RenderRequest {
 		DynamicServletRequest dynamicReq = null;
 
 		if (portlet.isPrivateRequestAttributes()) {
-			dynamicReq = new NamespaceServletRequest(req, 
-				portletNamespace, portletNamespace, false);
+			dynamicReq = new NamespaceServletRequest(
+				req, portletNamespace, portletNamespace, false);
 		}
 		else {
 			dynamicReq = new DynamicServletRequest(req, false);
@@ -547,7 +547,8 @@ public class RenderRequestImpl implements RenderRequest {
 				req, plid, _portletName);
 
 			if (!_portletName.equals(req.getParameter("p_p_id"))) {
-				_putNamespaceParams(req, portletNamespace, plid, renderParameters);
+				_putNamespaceParams(
+					req, portletNamespace, plid, renderParameters);
 			}
 
 			enu = Collections.enumeration(renderParameters.keySet());
@@ -556,9 +557,9 @@ public class RenderRequestImpl implements RenderRequest {
 		while (enu.hasMoreElements()) {
 			String param = (String)enu.nextElement();
 
-			if (param.startsWith(portletNamespace) && 
+			if (param.startsWith(portletNamespace) &&
 				!cachePortlet.isFacesPortlet()) {
-				
+
 				String newParam =
 					param.substring(portletNamespace.length(), param.length());
 				String[] values = null;

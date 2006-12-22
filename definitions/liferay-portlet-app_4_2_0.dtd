@@ -275,10 +275,10 @@ value is false.
 
 <!--
 Set the private-request-attributes value to true if the portlet does not share
-request attributes with the portal or portlets from another WAR. The default
-value is true. The property "request.shared.attributes" in portal.properties
-specifies which request attributes are shared even when the
-private-request-attributes value is true.
+request attributes with the portal or any other portlet. The default value is
+true. The property "request.shared.attributes" in portal.properties specifies
+which request attributes are shared even when the private-request-attributes
+value is true.
 -->
 <!ELEMENT private-request-attributes (#PCDATA)>
 

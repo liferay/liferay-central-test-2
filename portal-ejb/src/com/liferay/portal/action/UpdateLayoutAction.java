@@ -153,12 +153,11 @@ public class UpdateLayoutAction extends Action {
 				DynamicServletRequest dynamicReq = null;
 
 				if (portlet.isPrivateRequestAttributes()) {
-					String portletNamespace = 
+					String portletNamespace =
 						PortalUtil.getPortletNamespace(portlet.getPortletId());
-					
+
 					dynamicReq = new NamespaceServletRequest(
-						req, portletNamespace, 
-						portletNamespace);
+						req, portletNamespace, portletNamespace);
 				}
 				else {
 					dynamicReq = new DynamicServletRequest(req);
