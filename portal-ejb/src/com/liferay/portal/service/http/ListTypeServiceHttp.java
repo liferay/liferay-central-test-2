@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -39,16 +40,11 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class ListTypeServiceHttp {
 	public static com.liferay.portal.model.ListType getListType(
-		HttpPrincipal httpPrincipal, java.lang.String listTypeId)
+		HttpPrincipal httpPrincipal, int listTypeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = listTypeId;
-
-			if (listTypeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new IntegerWrapper(listTypeId);
 			MethodWrapper methodWrapper = new MethodWrapper(ListTypeServiceUtil.class.getName(),
 					"getListType", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -110,17 +106,12 @@ public class ListTypeServiceHttp {
 		}
 	}
 
-	public static void validate(HttpPrincipal httpPrincipal,
-		java.lang.String listTypeId, java.lang.String type)
+	public static void validate(HttpPrincipal httpPrincipal, int listTypeId,
+		java.lang.String type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = listTypeId;
-
-			if (listTypeId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new IntegerWrapper(listTypeId);
 			Object paramObj1 = type;
 
 			if (type == null) {

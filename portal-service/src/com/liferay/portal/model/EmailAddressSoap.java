@@ -146,11 +146,11 @@ public class EmailAddressSoap implements Serializable {
 		_address = address;
 	}
 
-	public String getTypeId() {
+	public int getTypeId() {
 		return _typeId;
 	}
 
-	public void setTypeId(String typeId) {
+	public void setTypeId(int typeId) {
 		_typeId = typeId;
 	}
 
@@ -175,6 +175,6 @@ public class EmailAddressSoap implements Serializable {
 	private String _className;
 	private String _classPK;
 	private String _address;
-	private String _typeId;
+	private int _typeId;
 	private boolean _primary;
 }

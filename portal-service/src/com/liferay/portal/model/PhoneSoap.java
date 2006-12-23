@@ -155,11 +155,11 @@ public class PhoneSoap implements Serializable {
 		_extension = extension;
 	}
 
-	public String getTypeId() {
+	public int getTypeId() {
 		return _typeId;
 	}
 
-	public void setTypeId(String typeId) {
+	public void setTypeId(int typeId) {
 		_typeId = typeId;
 	}
 
@@ -185,6 +185,6 @@ public class PhoneSoap implements Serializable {
 	private String _classPK;
 	private String _number;
 	private String _extension;
-	private String _typeId;
+	private int _typeId;
 	private boolean _primary;
 }

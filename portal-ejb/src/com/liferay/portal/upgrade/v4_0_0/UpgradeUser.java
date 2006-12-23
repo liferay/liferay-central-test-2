@@ -100,8 +100,8 @@ public class UpgradeUser extends UpgradeProcess {
 				String resolution = rs.getString("resolution");
 				String comments = rs.getString("comments");
 
-				String prefixId = StringPool.BLANK;
-				String suffixId = StringPool.BLANK;
+				int prefixId = 0;
+				int suffixId = 0;
 
 				Calendar birthdayCal = new GregorianCalendar();
 

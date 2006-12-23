@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -42,8 +43,8 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class WebsiteServiceHttp {
 	public static com.liferay.portal.model.Website addWebsite(
 		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String classPK, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		java.lang.String classPK, java.lang.String url, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -65,12 +66,7 @@ public class WebsiteServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
-
-			if (typeId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(typeId);
 			Object paramObj4 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(WebsiteServiceUtil.class.getName(),
 					"addWebsite",
@@ -214,7 +210,7 @@ public class WebsiteServiceHttp {
 
 	public static com.liferay.portal.model.Website updateWebsite(
 		HttpPrincipal httpPrincipal, long websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -225,12 +221,7 @@ public class WebsiteServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
-
-			if (typeId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new IntegerWrapper(typeId);
 			Object paramObj3 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(WebsiteServiceUtil.class.getName(),
 					"updateWebsite",

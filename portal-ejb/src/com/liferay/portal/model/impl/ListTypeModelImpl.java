@@ -37,9 +37,6 @@ import com.liferay.util.XSSUtil;
 public class ListTypeModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ListType"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_LISTTYPEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.ListType.listTypeId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ListType.name"),
 			XSS_ALLOW_BY_MODEL);
@@ -52,27 +49,20 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	public ListTypeModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public int getPrimaryKey() {
 		return _listTypeId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(int pk) {
 		setListTypeId(pk);
 	}
 
-	public String getListTypeId() {
-		return GetterUtil.getString(_listTypeId);
+	public int getListTypeId() {
+		return _listTypeId;
 	}
 
-	public void setListTypeId(String listTypeId) {
-		if (((listTypeId == null) && (_listTypeId != null)) ||
-				((listTypeId != null) && (_listTypeId == null)) ||
-				((listTypeId != null) && (_listTypeId != null) &&
-				!listTypeId.equals(_listTypeId))) {
-			if (!XSS_ALLOW_LISTTYPEID) {
-				listTypeId = XSSUtil.strip(listTypeId);
-			}
-
+	public void setListTypeId(int listTypeId) {
+		if (listTypeId != _listTypeId) {
 			_listTypeId = listTypeId;
 		}
 	}
@@ -149,9 +139,9 @@ public class ListTypeModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = listType.getPrimaryKey();
+		int pk = listType.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -160,10 +150,10 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _listTypeId;
+	private int _listTypeId;
 	private String _name;
 	private String _type;
 }

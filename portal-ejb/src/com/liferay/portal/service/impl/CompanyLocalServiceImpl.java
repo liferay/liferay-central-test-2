@@ -259,8 +259,8 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 				PropsUtil.DEFAULT_ADMIN_MIDDLE_NAME);
 			String lastName = PropsUtil.get(PropsUtil.DEFAULT_ADMIN_LAST_NAME);
 			String nickName = StringPool.BLANK;
-			String prefixId = StringPool.BLANK;
-			String suffixId = StringPool.BLANK;
+			int prefixId = 0;
+			int suffixId = 0;
 			boolean male = true;
 			int birthdayMonth = Calendar.JANUARY;
 			int birthdayDay = 1;

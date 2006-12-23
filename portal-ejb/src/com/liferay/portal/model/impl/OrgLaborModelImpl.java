@@ -43,9 +43,6 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_ORGANIZATIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor.organizationId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgLabor.typeId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgLaborModel"));
 
@@ -94,19 +91,12 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getTypeId() {
-		return GetterUtil.getString(_typeId);
+	public int getTypeId() {
+		return _typeId;
 	}
 
-	public void setTypeId(String typeId) {
-		if (((typeId == null) && (_typeId != null)) ||
-				((typeId != null) && (_typeId == null)) ||
-				((typeId != null) && (_typeId != null) &&
-				!typeId.equals(_typeId))) {
-			if (!XSS_ALLOW_TYPEID) {
-				typeId = XSSUtil.strip(typeId);
-			}
-
+	public void setTypeId(int typeId) {
+		if (typeId != _typeId) {
 			_typeId = typeId;
 		}
 	}
@@ -287,7 +277,15 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 			return value;
 		}
 
-		value = getTypeId().compareTo(orgLabor.getTypeId());
+		if (getTypeId() < orgLabor.getTypeId()) {
+			value = -1;
+		}
+		else if (getTypeId() > orgLabor.getTypeId()) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -326,7 +324,7 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 
 	private String _orgLaborId;
 	private String _organizationId;
-	private String _typeId;
+	private int _typeId;
 	private int _sunOpen;
 	private int _sunClose;
 	private int _monOpen;

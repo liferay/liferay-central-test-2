@@ -31,7 +31,7 @@ package com.liferay.portal.service;
 public interface EmailAddressService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String address, java.lang.String typeId, boolean primary)
+		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -50,7 +50,7 @@ public interface EmailAddressService {
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

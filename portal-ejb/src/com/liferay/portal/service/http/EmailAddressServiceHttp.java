@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -42,8 +43,8 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class EmailAddressServiceHttp {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String classPK, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		java.lang.String classPK, java.lang.String address, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -65,12 +66,7 @@ public class EmailAddressServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
-
-			if (typeId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(typeId);
 			Object paramObj4 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
 					"addEmailAddress",
@@ -216,7 +212,7 @@ public class EmailAddressServiceHttp {
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
 		HttpPrincipal httpPrincipal, long emailAddressId,
-		java.lang.String address, java.lang.String typeId, boolean primary)
+		java.lang.String address, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -227,12 +223,7 @@ public class EmailAddressServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = typeId;
-
-			if (typeId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new IntegerWrapper(typeId);
 			Object paramObj3 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(EmailAddressServiceUtil.class.getName(),
 					"updateEmailAddress",

@@ -85,7 +85,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			boolean autoPassword, String password1, String password2,
 			boolean passwordReset, String emailAddress, Locale locale,
 			String firstName, String middleName, String lastName,
-			String nickName, String prefixId, String suffixId, boolean male,
+			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId)
 		throws PortalException, SystemException {
@@ -103,7 +103,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			boolean autoPassword, String password1, String password2,
 			boolean passwordReset, String emailAddress, Locale locale,
 			String firstName, String middleName, String lastName,
-			String nickName, String prefixId, String suffixId, boolean male,
+			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId,
 			boolean sendEmail)
@@ -296,7 +296,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			String languageId, String timeZoneId, String greeting,
 			String resolution, String comments, String firstName,
 			String middleName, String lastName, String nickName,
-			String prefixId, String suffixId, boolean male, int birthdayMonth,
+			int prefixId, int suffixId, boolean male, int birthdayMonth,
 			int birthdayDay, int birthdayYear, String smsSn, String aimSn,
 			String icqSn, String jabberSn, String msnSn, String skypeSn,
 			String ymSn, String jobTitle, String organizationId,

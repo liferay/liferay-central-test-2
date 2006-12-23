@@ -36,7 +36,7 @@ String classPK = BeanParamUtil.getString(address, request, "classPK");
 
 String regionId = BeanParamUtil.getString(address, request, "regionId");
 String countryId = BeanParamUtil.getString(address, request, "countryId");
-String typeId = BeanParamUtil.getString(address, request, "typeId");
+int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 %>
 
 <script type="text/javascript">
@@ -182,7 +182,7 @@ String typeId = BeanParamUtil.getString(address, request, "typeId");
 						ListType suffix = (ListType)addressTypes.get(i);
 					%>
 
-						<option <%= suffix.getListTypeId().equals(typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+						<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 					<%
 					}

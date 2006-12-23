@@ -43,7 +43,7 @@ public class WebsiteServiceImpl
 	extends PrincipalBean implements WebsiteService {
 
 	public Website addWebsite(
-			String className, String classPK, String url, String typeId,
+			String className, String classPK, String url, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -89,7 +89,7 @@ public class WebsiteServiceImpl
 	}
 
 	public Website updateWebsite(
-			long websiteId, String url, String typeId, boolean primary)
+			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);

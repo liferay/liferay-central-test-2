@@ -34,8 +34,7 @@ public interface AddressLocalService {
 		java.lang.String classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -63,8 +62,8 @@ public interface AddressLocalService {
 	public com.liferay.portal.model.Address updateAddress(long addressId,
 		java.lang.String street1, java.lang.String street2,
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String typeId, boolean mailing, boolean primary)
+		java.lang.String regionId, java.lang.String countryId, int typeId,
+		boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

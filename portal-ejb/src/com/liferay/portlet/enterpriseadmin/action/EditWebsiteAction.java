@@ -124,7 +124,7 @@ public class EditWebsiteAction extends PortletAction {
 		String classPK = ParamUtil.getString(req, "classPK");
 
 		String url = ParamUtil.getString(req, "url");
-		String typeId = ParamUtil.getString(req, "typeId");
+		int typeId = ParamUtil.getInteger(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
 		if (websiteId <= 0) {

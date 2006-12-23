@@ -34,7 +34,7 @@ long websiteId = BeanParamUtil.getLong(website, request, "websiteId");
 String className = BeanParamUtil.getString(website, request, "className");
 String classPK = BeanParamUtil.getString(website, request, "classPK");
 
-String typeId = BeanParamUtil.getString(website, request, "typeId");
+int typeId = BeanParamUtil.getInteger(website, request, "typeId");
 %>
 
 <script type="text/javascript">
@@ -81,7 +81,7 @@ String typeId = BeanParamUtil.getString(website, request, "typeId");
 				ListType suffix = (ListType)websiteTypes.get(i);
 			%>
 
-				<option <%= suffix.getListTypeId().equals(typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 			<%
 			}

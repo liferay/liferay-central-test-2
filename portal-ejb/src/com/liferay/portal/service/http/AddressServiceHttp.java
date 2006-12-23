@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -45,8 +46,7 @@ public class AddressServiceHttp {
 		java.lang.String classPK, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -104,12 +104,7 @@ public class AddressServiceHttp {
 				paramObj8 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj9 = typeId;
-
-			if (typeId == null) {
-				paramObj9 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj9 = new IntegerWrapper(typeId);
 			Object paramObj10 = new BooleanWrapper(mailing);
 			Object paramObj11 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
@@ -258,8 +253,7 @@ public class AddressServiceHttp {
 		HttpPrincipal httpPrincipal, long addressId, java.lang.String street1,
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+		java.lang.String countryId, int typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -306,12 +300,7 @@ public class AddressServiceHttp {
 				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj8 = typeId;
-
-			if (typeId == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj8 = new IntegerWrapper(typeId);
 			Object paramObj9 = new BooleanWrapper(mailing);
 			Object paramObj10 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),

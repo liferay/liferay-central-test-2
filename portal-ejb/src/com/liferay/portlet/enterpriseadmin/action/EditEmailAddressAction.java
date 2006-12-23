@@ -125,7 +125,7 @@ public class EditEmailAddressAction extends PortletAction {
 		String classPK = ParamUtil.getString(req, "classPK");
 
 		String address = ParamUtil.getString(req, "address");
-		String typeId = ParamUtil.getString(req, "typeId");
+		int typeId = ParamUtil.getInteger(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
 		if (emailAddressId <= 0) {

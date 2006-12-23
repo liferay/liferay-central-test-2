@@ -97,9 +97,9 @@ public interface AddressModel extends BaseModel {
 
 	public void setCountryId(String countryId);
 
-	public String getTypeId();
+	public int getTypeId();
 
-	public void setTypeId(String typeId);
+	public void setTypeId(int typeId);
 
 	public boolean getMailing();
 

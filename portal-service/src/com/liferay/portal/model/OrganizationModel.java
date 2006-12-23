@@ -65,9 +65,9 @@ public interface OrganizationModel extends BaseModel {
 
 	public void setCountryId(String countryId);
 
-	public String getStatusId();
+	public int getStatusId();
 
-	public void setStatusId(String statusId);
+	public void setStatusId(int statusId);
 
 	public String getComments();
 

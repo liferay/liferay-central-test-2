@@ -69,12 +69,6 @@ public class ContactModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_NICKNAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.nickName"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PREFIXID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.prefixId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_SUFFIXID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Contact.suffixId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_SMSSN = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Contact.smsSn"),
 			XSS_ALLOW_BY_MODEL);
@@ -321,36 +315,22 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getPrefixId() {
-		return GetterUtil.getString(_prefixId);
+	public int getPrefixId() {
+		return _prefixId;
 	}
 
-	public void setPrefixId(String prefixId) {
-		if (((prefixId == null) && (_prefixId != null)) ||
-				((prefixId != null) && (_prefixId == null)) ||
-				((prefixId != null) && (_prefixId != null) &&
-				!prefixId.equals(_prefixId))) {
-			if (!XSS_ALLOW_PREFIXID) {
-				prefixId = XSSUtil.strip(prefixId);
-			}
-
+	public void setPrefixId(int prefixId) {
+		if (prefixId != _prefixId) {
 			_prefixId = prefixId;
 		}
 	}
 
-	public String getSuffixId() {
-		return GetterUtil.getString(_suffixId);
+	public int getSuffixId() {
+		return _suffixId;
 	}
 
-	public void setSuffixId(String suffixId) {
-		if (((suffixId == null) && (_suffixId != null)) ||
-				((suffixId != null) && (_suffixId == null)) ||
-				((suffixId != null) && (_suffixId != null) &&
-				!suffixId.equals(_suffixId))) {
-			if (!XSS_ALLOW_SUFFIXID) {
-				suffixId = XSSUtil.strip(suffixId);
-			}
-
+	public void setSuffixId(int suffixId) {
+		if (suffixId != _suffixId) {
 			_suffixId = suffixId;
 		}
 	}
@@ -666,8 +646,8 @@ public class ContactModelImpl extends BaseModelImpl {
 	private String _middleName;
 	private String _lastName;
 	private String _nickName;
-	private String _prefixId;
-	private String _suffixId;
+	private int _prefixId;
+	private int _suffixId;
 	private boolean _male;
 	private Date _birthday;
 	private String _smsSn;

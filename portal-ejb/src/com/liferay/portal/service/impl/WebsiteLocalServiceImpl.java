@@ -55,7 +55,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 
 	public Website addWebsite(
 			String userId, String className, String classPK, String url,
-			String typeId, boolean primary)
+			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -120,7 +120,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 	}
 
 	public Website updateWebsite(
-			long websiteId, String url, String typeId, boolean primary)
+			long websiteId, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		validate(websiteId, null, null, null, url, typeId, primary);
@@ -139,7 +139,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 
 	protected void validate(
 			long websiteId, String companyId, String className,
-			String classPK, String url, String typeId, boolean primary)
+			String classPK, String url, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(url)) {

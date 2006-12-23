@@ -95,11 +95,11 @@ public class OrgLaborSoap implements Serializable {
 		_organizationId = organizationId;
 	}
 
-	public String getTypeId() {
+	public int getTypeId() {
 		return _typeId;
 	}
 
-	public void setTypeId(String typeId) {
+	public void setTypeId(int typeId) {
 		_typeId = typeId;
 	}
 
@@ -217,7 +217,7 @@ public class OrgLaborSoap implements Serializable {
 
 	private String _orgLaborId;
 	private String _organizationId;
-	private String _typeId;
+	private int _typeId;
 	private int _sunOpen;
 	private int _sunClose;
 	private int _monOpen;

@@ -85,13 +85,13 @@ public interface ContactModel extends BaseModel {
 
 	public void setNickName(String nickName);
 
-	public String getPrefixId();
+	public int getPrefixId();
 
-	public void setPrefixId(String prefixId);
+	public void setPrefixId(int prefixId);
 
-	public String getSuffixId();
+	public int getSuffixId();
 
-	public void setSuffixId(String suffixId);
+	public void setSuffixId(int suffixId);
 
 	public boolean getMale();
 

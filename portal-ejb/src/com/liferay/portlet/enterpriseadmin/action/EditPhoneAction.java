@@ -125,7 +125,7 @@ public class EditPhoneAction extends PortletAction {
 
 		String number = ParamUtil.getString(req, "number");
 		String extension = ParamUtil.getString(req, "extension");
-		String typeId = ParamUtil.getString(req, "typeId");
+		int typeId = ParamUtil.getInteger(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
 		if (phoneId <= 0) {

@@ -43,9 +43,9 @@ public interface OrgLaborModel extends BaseModel {
 
 	public void setOrganizationId(String organizationId);
 
-	public String getTypeId();
+	public int getTypeId();
 
-	public void setTypeId(String typeId);
+	public void setTypeId(int typeId);
 
 	public int getSunOpen();
 

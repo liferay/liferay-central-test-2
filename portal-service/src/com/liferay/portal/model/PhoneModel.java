@@ -77,9 +77,9 @@ public interface PhoneModel extends BaseModel {
 
 	public void setExtension(String extension);
 
-	public String getTypeId();
+	public int getTypeId();
 
-	public void setTypeId(String typeId);
+	public void setTypeId(int typeId);
 
 	public boolean getPrimary();
 

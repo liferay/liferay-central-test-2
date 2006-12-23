@@ -44,7 +44,7 @@ public class EmailAddressServiceImpl
 	extends PrincipalBean implements EmailAddressService {
 
 	public EmailAddress addEmailAddress(
-			String className, String classPK, String address, String typeId,
+			String className, String classPK, String address, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -92,8 +92,7 @@ public class EmailAddressServiceImpl
 	}
 
 	public EmailAddress updateEmailAddress(
-			long emailAddressId, String address, String typeId,
-			boolean primary)
+			long emailAddressId, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		EmailAddress emailAddress =

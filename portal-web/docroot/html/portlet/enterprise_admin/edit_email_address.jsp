@@ -34,7 +34,7 @@ String emailAddressId = BeanParamUtil.getString(emailAddress, request, "emailAdd
 String className = BeanParamUtil.getString(emailAddress, request, "className");
 String classPK = BeanParamUtil.getString(emailAddress, request, "classPK");
 
-String typeId = BeanParamUtil.getString(emailAddress, request, "typeId");
+int typeId = BeanParamUtil.getInteger(emailAddress, request, "typeId");
 %>
 
 <script type="text/javascript">
@@ -81,7 +81,7 @@ String typeId = BeanParamUtil.getString(emailAddress, request, "typeId");
 				ListType suffix = (ListType)emailAddressTypes.get(i);
 			%>
 
-				<option <%= suffix.getListTypeId().equals(typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 			<%
 			}

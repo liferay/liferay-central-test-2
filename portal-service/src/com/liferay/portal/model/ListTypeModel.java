@@ -31,13 +31,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface ListTypeModel extends BaseModel {
-	public String getPrimaryKey();
+	public int getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(int pk);
 
-	public String getListTypeId();
+	public int getListTypeId();
 
-	public void setListTypeId(String listTypeId);
+	public void setListTypeId(int listTypeId);
 
 	public String getName();
 

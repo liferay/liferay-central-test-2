@@ -37,10 +37,10 @@ import java.rmi.RemoteException;
  */
 public class OrgLaborServiceSoap {
 	public static com.liferay.portal.model.OrgLaborSoap addOrgLabor(
-		java.lang.String organizationId, java.lang.String typeId, int sunOpen,
-		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
-		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
-		int friClose, int satOpen, int satClose) throws RemoteException {
+		java.lang.String organizationId, int typeId, int sunOpen, int sunClose,
+		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
+		int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
+		int satOpen, int satClose) throws RemoteException {
 		try {
 			com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.addOrgLabor(organizationId,
 					typeId, sunOpen, sunClose, monOpen, monClose, tueOpen,

@@ -119,7 +119,7 @@ public class EditOrgLaborAction extends PortletAction {
 		String orgLaborId = ParamUtil.getString(req, "orgLaborId");
 
 		String organizationId = ParamUtil.getString(req, "organizationId");
-		String typeId = ParamUtil.getString(req, "typeId");
+		int typeId = ParamUtil.getInteger(req, "typeId");
 
 		int sunOpen = ParamUtil.getInteger(req, "sunOpen");
 		int sunClose = ParamUtil.getInteger(req, "sunClose");

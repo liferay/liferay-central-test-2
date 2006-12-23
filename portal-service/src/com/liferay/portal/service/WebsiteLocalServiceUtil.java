@@ -31,8 +31,8 @@ package com.liferay.portal.service;
 public class WebsiteLocalServiceUtil {
 	public static com.liferay.portal.model.Website addWebsite(
 		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		java.lang.String classPK, java.lang.String url, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
@@ -85,8 +85,7 @@ public class WebsiteLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
-		long websiteId, java.lang.String url, java.lang.String typeId,
-		boolean primary)
+		long websiteId, java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();

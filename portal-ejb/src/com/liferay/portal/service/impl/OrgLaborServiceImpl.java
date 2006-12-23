@@ -46,7 +46,7 @@ public class OrgLaborServiceImpl
 	extends PrincipalBean implements OrgLaborService {
 
 	public OrgLabor addOrgLabor(
-			String organizationId, String typeId, int sunOpen, int sunClose,
+			String organizationId, int typeId, int sunOpen, int sunClose,
 			int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 			int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 			int satOpen, int satClose)

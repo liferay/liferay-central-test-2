@@ -173,7 +173,7 @@ public class EditOrganizationAction extends PortletAction {
 			OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
 
 		String name = ParamUtil.getString(req, "name");
-		String statusId = ParamUtil.getString(req, "statusId");
+		int statusId = ParamUtil.getInteger(req, "statusId");
 		String regionId = ParamUtil.getString(req, "regionId");
 		String countryId = ParamUtil.getString(req, "countryId");
 

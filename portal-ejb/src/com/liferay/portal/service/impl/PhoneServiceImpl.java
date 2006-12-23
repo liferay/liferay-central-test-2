@@ -43,7 +43,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 
 	public Phone addPhone(
 			String className, String classPK, String number, String extension,
-			String typeId, boolean primary)
+			int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		CommonPermission.checkPermission(
@@ -89,7 +89,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 	}
 
 	public Phone updatePhone(
-			long phoneId, String number, String extension, String typeId,
+			long phoneId, String number, String extension, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 

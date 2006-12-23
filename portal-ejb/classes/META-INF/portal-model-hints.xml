@@ -58,7 +58,7 @@
 		<field name="zip" type="String" />
 		<field name="regionId" type="String" />
 		<field name="countryId" type="String" />
-		<field name="typeId" type="String" />
+		<field name="typeId" type="int" />
 		<field name="mailing" type="boolean" />
 		<field name="primary" type="boolean" />
 	</model>
@@ -90,8 +90,8 @@
 		<field name="middleName" type="String" />
 		<field name="lastName" type="String" />
 		<field name="nickName" type="String" />
-		<field name="prefixId" type="String" />
-		<field name="suffixId" type="String" />
+		<field name="prefixId" type="int" />
+		<field name="suffixId" type="int" />
 		<field name="male" type="boolean" />
 		<field name="birthday" type="Date">
 			<hint name="year-range-delta">37</hint>
@@ -143,7 +143,7 @@
 		<field name="address" type="String">
 			<hint name="display-width">150</hint>
 		</field>
-		<field name="typeId" type="String" />
+		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Group">
@@ -204,7 +204,7 @@
 		<field name="virtualHost" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.ListType">
-		<field name="listTypeId" type="String" />
+		<field name="listTypeId" type="int" />
 		<field name="name" type="String" />
 		<field name="type" type="String" />
 	</model>
@@ -218,7 +218,7 @@
 		<field name="recursable" type="boolean" />
 		<field name="regionId" type="String" />
 		<field name="countryId" type="String" />
-		<field name="statusId" type="String" />
+		<field name="statusId" type="int" />
 		<field name="comments" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
@@ -236,7 +236,7 @@
 	<model name="com.liferay.portal.model.OrgLabor">
 		<field name="orgLaborId" type="String" />
 		<field name="organizationId" type="String" />
-		<field name="typeId" type="String" />
+		<field name="typeId" type="int" />
 		<field name="sunOpen" type="int" />
 		<field name="sunClose" type="int" />
 		<field name="monOpen" type="int" />
@@ -279,7 +279,7 @@
 		<field name="extension" type="String">
 			<hint name="display-width">20</hint>
 		</field>
-		<field name="typeId" type="String" />
+		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Portlet">
@@ -427,7 +427,7 @@
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="url" type="String" />
-		<field name="typeId" type="String" />
+		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsCategory">

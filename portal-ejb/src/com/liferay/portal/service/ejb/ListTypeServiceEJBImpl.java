@@ -37,8 +37,7 @@ import javax.ejb.SessionContext;
  *
  */
 public class ListTypeServiceEJBImpl implements ListTypeService, SessionBean {
-	public com.liferay.portal.model.ListType getListType(
-		java.lang.String listTypeId)
+	public com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -53,7 +52,7 @@ public class ListTypeServiceEJBImpl implements ListTypeService, SessionBean {
 		return ListTypeServiceFactory.getTxImpl().getListTypes(type);
 	}
 
-	public void validate(java.lang.String listTypeId, java.lang.String type)
+	public void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

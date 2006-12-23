@@ -38,8 +38,8 @@ import java.rmi.RemoteException;
 public class PhoneServiceSoap {
 	public static com.liferay.portal.model.PhoneSoap addPhone(
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary) throws RemoteException {
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.addPhone(className,
 					classPK, number, extension, typeId, primary);
@@ -95,8 +95,8 @@ public class PhoneServiceSoap {
 	}
 
 	public static com.liferay.portal.model.PhoneSoap updatePhone(long phoneId,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary) throws RemoteException {
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Phone returnValue = PhoneServiceUtil.updatePhone(phoneId,
 					number, extension, typeId, primary);

@@ -58,9 +58,6 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_URL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Website.url"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_TYPEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Website.typeId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WebsiteModel"));
 
@@ -212,19 +209,12 @@ public class WebsiteModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getTypeId() {
-		return GetterUtil.getString(_typeId);
+	public int getTypeId() {
+		return _typeId;
 	}
 
-	public void setTypeId(String typeId) {
-		if (((typeId == null) && (_typeId != null)) ||
-				((typeId != null) && (_typeId == null)) ||
-				((typeId != null) && (_typeId != null) &&
-				!typeId.equals(_typeId))) {
-			if (!XSS_ALLOW_TYPEID) {
-				typeId = XSSUtil.strip(typeId);
-			}
-
+	public void setTypeId(int typeId) {
+		if (typeId != _typeId) {
 			_typeId = typeId;
 		}
 	}
@@ -313,6 +303,6 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	private String _className;
 	private String _classPK;
 	private String _url;
-	private String _typeId;
+	private int _typeId;
 	private boolean _primary;
 }

@@ -41,10 +41,9 @@ import com.liferay.portal.service.http.TunnelUtil;
 public class OrgLaborServiceHttp {
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
 		HttpPrincipal httpPrincipal, java.lang.String organizationId,
-		java.lang.String typeId, int sunOpen, int sunClose, int monOpen,
-		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
-		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
-		int satClose)
+		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
+		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
+		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -54,12 +53,7 @@ public class OrgLaborServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = typeId;
-
-			if (typeId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new IntegerWrapper(typeId);
 			Object paramObj2 = new IntegerWrapper(sunOpen);
 			Object paramObj3 = new IntegerWrapper(sunClose);
 			Object paramObj4 = new IntegerWrapper(monOpen);

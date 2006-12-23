@@ -31,8 +31,8 @@ package com.liferay.portal.service;
 public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website addWebsite(
 		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		java.lang.String classPK, java.lang.String url, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -58,7 +58,7 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateWebsite(long websiteId,
-		java.lang.String url, java.lang.String typeId, boolean primary)
+		java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

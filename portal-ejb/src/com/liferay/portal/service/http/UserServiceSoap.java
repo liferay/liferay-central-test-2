@@ -78,11 +78,11 @@ public class UserServiceSoap {
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress, String locale,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName,
-		java.lang.String prefixId, java.lang.String suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId) throws RemoteException {
+		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoUserId, userId, autoPassword, password1, password2,
@@ -106,12 +106,11 @@ public class UserServiceSoap {
 		java.lang.String password1, java.lang.String password2,
 		boolean passwordReset, java.lang.String emailAddress, String locale,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName,
-		java.lang.String prefixId, java.lang.String suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId, boolean sendEmail)
-		throws RemoteException {
+		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId,
+		boolean sendEmail) throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.addUser(companyId,
 					autoUserId, userId, autoPassword, password1, password2,
@@ -377,14 +376,14 @@ public class UserServiceSoap {
 		java.lang.String timeZoneId, java.lang.String greeting,
 		java.lang.String resolution, java.lang.String comments,
 		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String nickName,
-		java.lang.String prefixId, java.lang.String suffixId, boolean male,
-		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
-		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, java.lang.String organizationId,
-		java.lang.String locationId) throws RemoteException {
+		java.lang.String lastName, java.lang.String nickName, int prefixId,
+		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
+		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String icqSn, java.lang.String jabberSn,
+		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle,
+		java.lang.String organizationId, java.lang.String locationId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.User returnValue = UserServiceUtil.updateUser(userId,
 					password, emailAddress, languageId, timeZoneId, greeting,

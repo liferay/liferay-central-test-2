@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ListTypeUtil {
-	public static com.liferay.portal.model.ListType create(
-		java.lang.String listTypeId) {
+	public static com.liferay.portal.model.ListType create(int listTypeId) {
 		return getPersistence().create(listTypeId);
 	}
 
-	public static com.liferay.portal.model.ListType remove(
-		java.lang.String listTypeId)
+	public static com.liferay.portal.model.ListType remove(int listTypeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchListTypeException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class ListTypeUtil {
 	}
 
 	public static com.liferay.portal.model.ListType findByPrimaryKey(
-		java.lang.String listTypeId)
+		int listTypeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchListTypeException {
 		return getPersistence().findByPrimaryKey(listTypeId);
 	}
 
 	public static com.liferay.portal.model.ListType fetchByPrimaryKey(
-		java.lang.String listTypeId) throws com.liferay.portal.SystemException {
+		int listTypeId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(listTypeId);
 	}
 
@@ -183,7 +181,7 @@ public class ListTypeUtil {
 	}
 
 	public static com.liferay.portal.model.ListType[] findByType_PrevAndNext(
-		java.lang.String listTypeId, java.lang.String type,
+		int listTypeId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchListTypeException {

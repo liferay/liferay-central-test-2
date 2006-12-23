@@ -131,11 +131,11 @@ public class OrganizationSoap implements Serializable {
 		_countryId = countryId;
 	}
 
-	public String getStatusId() {
+	public int getStatusId() {
 		return _statusId;
 	}
 
-	public void setStatusId(String statusId) {
+	public void setStatusId(int statusId) {
 		_statusId = statusId;
 	}
 
@@ -154,6 +154,6 @@ public class OrganizationSoap implements Serializable {
 	private boolean _recursable;
 	private String _regionId;
 	private String _countryId;
-	private String _statusId;
+	private int _statusId;
 	private String _comments;
 }

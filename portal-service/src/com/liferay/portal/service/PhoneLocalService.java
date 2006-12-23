@@ -31,8 +31,8 @@ package com.liferay.portal.service;
 public interface PhoneLocalService {
 	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -57,8 +57,8 @@ public interface PhoneLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Phone updatePhone(long phoneId,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

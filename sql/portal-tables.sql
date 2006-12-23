@@ -33,7 +33,7 @@ create table Address (
 	zip VARCHAR(75) null,
 	regionId VARCHAR(75) null,
 	countryId VARCHAR(75) null,
-	typeId VARCHAR(75) null,
+	typeId INTEGER,
 	mailing BOOLEAN,
 	primary_ BOOLEAN
 );
@@ -134,8 +134,8 @@ create table Contact_ (
 	middleName VARCHAR(75) null,
 	lastName VARCHAR(75) null,
 	nickName VARCHAR(75) null,
-	prefixId VARCHAR(75) null,
-	suffixId VARCHAR(75) null,
+	prefixId INTEGER,
+	suffixId INTEGER,
 	male BOOLEAN,
 	birthday DATE null,
 	smsSn VARCHAR(75) null,
@@ -154,7 +154,7 @@ create table Contact_ (
 
 create table Counter (
 	name VARCHAR(75) not null primary key,
-	currentId INTEGER
+	currentId BIGINT
 );
 
 create table Country (
@@ -266,7 +266,7 @@ create table EmailAddress (
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	address VARCHAR(75) null,
-	typeId VARCHAR(75) null,
+	typeId INTEGER,
 	primary_ BOOLEAN
 );
 
@@ -437,7 +437,7 @@ create table LayoutSet (
 );
 
 create table ListType (
-	listTypeId VARCHAR(75) not null primary key,
+	listTypeId INTEGER not null primary key,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null
 );
@@ -517,7 +517,7 @@ create table Organization_ (
 	recursable BOOLEAN,
 	regionId VARCHAR(75) null,
 	countryId VARCHAR(75) null,
-	statusId VARCHAR(75) null,
+	statusId INTEGER,
 	comments STRING null
 );
 
@@ -538,7 +538,7 @@ create table OrgGroupRole (
 create table OrgLabor (
 	orgLaborId VARCHAR(75) not null primary key,
 	organizationId VARCHAR(75) null,
-	typeId VARCHAR(75) null,
+	typeId INTEGER,
 	sunOpen INTEGER,
 	sunClose INTEGER,
 	monOpen INTEGER,
@@ -580,7 +580,7 @@ create table Phone (
 	classPK VARCHAR(75) null,
 	number_ VARCHAR(75) null,
 	extension VARCHAR(75) null,
-	typeId VARCHAR(75) null,
+	typeId INTEGER,
 	primary_ BOOLEAN
 );
 
@@ -1036,7 +1036,7 @@ create table Website (
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	url VARCHAR(75) null,
-	typeId VARCHAR(75) null,
+	typeId INTEGER,
 	primary_ BOOLEAN
 );
 

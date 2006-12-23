@@ -49,8 +49,8 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 
 	public com.liferay.portal.model.Organization addOrganization(
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String statusId, boolean location)
+		java.lang.String regionId, java.lang.String countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -104,7 +104,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 	public com.liferay.portal.model.Organization updateOrganization(
 		java.lang.String organizationId, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String statusId, boolean location)
+		java.lang.String countryId, int statusId, boolean location)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

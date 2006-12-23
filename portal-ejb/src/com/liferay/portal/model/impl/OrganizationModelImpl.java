@@ -55,9 +55,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.countryId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_STATUSID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Organization.statusId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMMENTS = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Organization.comments"),
 			XSS_ALLOW_BY_MODEL);
@@ -192,19 +189,12 @@ public class OrganizationModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getStatusId() {
-		return GetterUtil.getString(_statusId);
+	public int getStatusId() {
+		return _statusId;
 	}
 
-	public void setStatusId(String statusId) {
-		if (((statusId == null) && (_statusId != null)) ||
-				((statusId != null) && (_statusId == null)) ||
-				((statusId != null) && (_statusId != null) &&
-				!statusId.equals(_statusId))) {
-			if (!XSS_ALLOW_STATUSID) {
-				statusId = XSSUtil.strip(statusId);
-			}
-
+	public void setStatusId(int statusId) {
+		if (statusId != _statusId) {
 			_statusId = statusId;
 		}
 	}
@@ -292,6 +282,6 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	private boolean _recursable;
 	private String _regionId;
 	private String _countryId;
-	private String _statusId;
+	private int _statusId;
 	private String _comments;
 }

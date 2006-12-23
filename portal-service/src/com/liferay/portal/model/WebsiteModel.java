@@ -73,9 +73,9 @@ public interface WebsiteModel extends BaseModel {
 
 	public void setUrl(String url);
 
-	public String getTypeId();
+	public int getTypeId();
 
-	public void setTypeId(String typeId);
+	public void setTypeId(int typeId);
 
 	public boolean getPrimary();
 

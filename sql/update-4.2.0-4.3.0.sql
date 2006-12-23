@@ -1,10 +1,22 @@
 alter_column_type Address addressId BIGINT not null;
+alter_column_type Address typeId INTEGER null;
+
+alter_column_type Contact_ prefixId INTEGER null;
+alter_column_type Contact_ suffixId INTEGER null;
 
 alter_column_type Counter currentId BIGINT not null;
 
 alter_column_type EmailAddress emailAddressId BIGINT not null;
+alter_column_type EmailAddress typeId INTEGER null;
+
+alter_column_type ListType listTypeId INTEGER not null;
+
+alter_column_type Organization_ statusId INTEGER null;
+
+alter_column_type OrgLabor typeId INTEGER null;
 
 alter_column_type Phone phoneId BIGINT not null;
+alter_column_type Phone typeId INTEGER null;
 
 alter table Release_ add verified BOOLEAN null;
 update table Release_ set verified = false;
@@ -88,3 +100,4 @@ insert into SRLicense (licenseId, name, openSource, url, active_, recommended) v
 insert into Counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRLicense', 4);
 
 alter_column_type Website websiteId BIGINT not null;
+alter_column_type Website typeId INTEGER null;

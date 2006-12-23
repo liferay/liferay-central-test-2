@@ -284,89 +284,89 @@ insert into Region (regionId, countryId, regionCode, name, active_) values ('52'
 ## List types for accounts
 ##
 
-insert into ListType (listTypeId, name, type_) values ('10000', 'Billing', 'com.liferay.portal.model.Account.address');
-insert into ListType (listTypeId, name, type_) values ('10001', 'Other', 'com.liferay.portal.model.Account.address');
-insert into ListType (listTypeId, name, type_) values ('10002', 'P.O. Box', 'com.liferay.portal.model.Account.address');
-insert into ListType (listTypeId, name, type_) values ('10003', 'Shipping', 'com.liferay.portal.model.Account.address');
+insert into ListType (listTypeId, name, type_) values (10000, 'Billing', 'com.liferay.portal.model.Account.address');
+insert into ListType (listTypeId, name, type_) values (10001, 'Other', 'com.liferay.portal.model.Account.address');
+insert into ListType (listTypeId, name, type_) values (10002, 'P.O. Box', 'com.liferay.portal.model.Account.address');
+insert into ListType (listTypeId, name, type_) values (10003, 'Shipping', 'com.liferay.portal.model.Account.address');
 
-insert into ListType (listTypeId, name, type_) values ('10004', 'E-mail', 'com.liferay.portal.model.Account.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('10005', 'E-mail 2', 'com.liferay.portal.model.Account.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('10006', 'E-mail 3', 'com.liferay.portal.model.Account.emailAddress');
+insert into ListType (listTypeId, name, type_) values (10004, 'E-mail', 'com.liferay.portal.model.Account.emailAddress');
+insert into ListType (listTypeId, name, type_) values (10005, 'E-mail 2', 'com.liferay.portal.model.Account.emailAddress');
+insert into ListType (listTypeId, name, type_) values (10006, 'E-mail 3', 'com.liferay.portal.model.Account.emailAddress');
 
-insert into ListType (listTypeId, name, type_) values ('10007', 'Fax', 'com.liferay.portal.model.Account.phone');
-insert into ListType (listTypeId, name, type_) values ('10008', 'Local', 'com.liferay.portal.model.Account.phone');
-insert into ListType (listTypeId, name, type_) values ('10009', 'Other', 'com.liferay.portal.model.Account.phone');
-insert into ListType (listTypeId, name, type_) values ('10010', 'Toll-Free', 'com.liferay.portal.model.Account.phone');
-insert into ListType (listTypeId, name, type_) values ('10011', 'TTY', 'com.liferay.portal.model.Account.phone');
+insert into ListType (listTypeId, name, type_) values (10007, 'Fax', 'com.liferay.portal.model.Account.phone');
+insert into ListType (listTypeId, name, type_) values (10008, 'Local', 'com.liferay.portal.model.Account.phone');
+insert into ListType (listTypeId, name, type_) values (10009, 'Other', 'com.liferay.portal.model.Account.phone');
+insert into ListType (listTypeId, name, type_) values (10010, 'Toll-Free', 'com.liferay.portal.model.Account.phone');
+insert into ListType (listTypeId, name, type_) values (10011, 'TTY', 'com.liferay.portal.model.Account.phone');
 
-insert into ListType (listTypeId, name, type_) values ('10012', 'Intranet', 'com.liferay.portal.model.Account.website');
-insert into ListType (listTypeId, name, type_) values ('10013', 'Public', 'com.liferay.portal.model.Account.website');
+insert into ListType (listTypeId, name, type_) values (10012, 'Intranet', 'com.liferay.portal.model.Account.website');
+insert into ListType (listTypeId, name, type_) values (10013, 'Public', 'com.liferay.portal.model.Account.website');
 
 ##
 ## List types for contacts
 ##
 
-insert into ListType (listTypeId, name, type_) values ('11000', 'Business', 'com.liferay.portal.model.Contact.address');
-insert into ListType (listTypeId, name, type_) values ('11001', 'Other', 'com.liferay.portal.model.Contact.address');
-insert into ListType (listTypeId, name, type_) values ('11002', 'Personal', 'com.liferay.portal.model.Contact.address');
+insert into ListType (listTypeId, name, type_) values (11000, 'Business', 'com.liferay.portal.model.Contact.address');
+insert into ListType (listTypeId, name, type_) values (11001, 'Other', 'com.liferay.portal.model.Contact.address');
+insert into ListType (listTypeId, name, type_) values (11002, 'Personal', 'com.liferay.portal.model.Contact.address');
 
-insert into ListType (listTypeId, name, type_) values ('11003', 'E-mail', 'com.liferay.portal.model.Contact.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('11004', 'E-mail 2', 'com.liferay.portal.model.Contact.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('11005', 'E-mail 3', 'com.liferay.portal.model.Contact.emailAddress');
+insert into ListType (listTypeId, name, type_) values (11003, 'E-mail', 'com.liferay.portal.model.Contact.emailAddress');
+insert into ListType (listTypeId, name, type_) values (11004, 'E-mail 2', 'com.liferay.portal.model.Contact.emailAddress');
+insert into ListType (listTypeId, name, type_) values (11005, 'E-mail 3', 'com.liferay.portal.model.Contact.emailAddress');
 
-insert into ListType (listTypeId, name, type_) values ('11006', 'Business', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11007', 'Business Fax', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11008', 'Mobile', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11009', 'Other', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11010', 'Pager', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11011', 'Personal', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11012', 'Personal Fax', 'com.liferay.portal.model.Contact.phone');
-insert into ListType (listTypeId, name, type_) values ('11013', 'TTY', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11006, 'Business', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11007, 'Business Fax', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11008, 'Mobile', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11009, 'Other', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11010, 'Pager', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11011, 'Personal', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11012, 'Personal Fax', 'com.liferay.portal.model.Contact.phone');
+insert into ListType (listTypeId, name, type_) values (11013, 'TTY', 'com.liferay.portal.model.Contact.phone');
 
-insert into ListType (listTypeId, name, type_) values ('11014', 'Dr.', 'com.liferay.portal.model.Contact.prefix');
-insert into ListType (listTypeId, name, type_) values ('11015', 'Mr.', 'com.liferay.portal.model.Contact.prefix');
-insert into ListType (listTypeId, name, type_) values ('11016', 'Mrs.', 'com.liferay.portal.model.Contact.prefix');
-insert into ListType (listTypeId, name, type_) values ('11017', 'Ms.', 'com.liferay.portal.model.Contact.prefix');
+insert into ListType (listTypeId, name, type_) values (11014, 'Dr.', 'com.liferay.portal.model.Contact.prefix');
+insert into ListType (listTypeId, name, type_) values (11015, 'Mr.', 'com.liferay.portal.model.Contact.prefix');
+insert into ListType (listTypeId, name, type_) values (11016, 'Mrs.', 'com.liferay.portal.model.Contact.prefix');
+insert into ListType (listTypeId, name, type_) values (11017, 'Ms.', 'com.liferay.portal.model.Contact.prefix');
 
-insert into ListType (listTypeId, name, type_) values ('11020', 'II', 'com.liferay.portal.model.Contact.suffix');
-insert into ListType (listTypeId, name, type_) values ('11021', 'III', 'com.liferay.portal.model.Contact.suffix');
-insert into ListType (listTypeId, name, type_) values ('11022', 'IV', 'com.liferay.portal.model.Contact.suffix');
-insert into ListType (listTypeId, name, type_) values ('11023', 'Jr.', 'com.liferay.portal.model.Contact.suffix');
-insert into ListType (listTypeId, name, type_) values ('11024', 'PhD.', 'com.liferay.portal.model.Contact.suffix');
-insert into ListType (listTypeId, name, type_) values ('11025', 'Sr.', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11020, 'II', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11021, 'III', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11022, 'IV', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11023, 'Jr.', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11024, 'PhD.', 'com.liferay.portal.model.Contact.suffix');
+insert into ListType (listTypeId, name, type_) values (11025, 'Sr.', 'com.liferay.portal.model.Contact.suffix');
 
-insert into ListType (listTypeId, name, type_) values ('11026', 'Blog', 'com.liferay.portal.model.Contact.website');
-insert into ListType (listTypeId, name, type_) values ('11027', 'Business', 'com.liferay.portal.model.Contact.website');
-insert into ListType (listTypeId, name, type_) values ('11028', 'Other', 'com.liferay.portal.model.Contact.website');
-insert into ListType (listTypeId, name, type_) values ('11029', 'Personal', 'com.liferay.portal.model.Contact.website');
+insert into ListType (listTypeId, name, type_) values (11026, 'Blog', 'com.liferay.portal.model.Contact.website');
+insert into ListType (listTypeId, name, type_) values (11027, 'Business', 'com.liferay.portal.model.Contact.website');
+insert into ListType (listTypeId, name, type_) values (11028, 'Other', 'com.liferay.portal.model.Contact.website');
+insert into ListType (listTypeId, name, type_) values (11029, 'Personal', 'com.liferay.portal.model.Contact.website');
 
 ##
 ## List types for organizations
 ##
 
-insert into ListType (listTypeId, name, type_) values ('12000', 'Billing', 'com.liferay.portal.model.Organization.address');
-insert into ListType (listTypeId, name, type_) values ('12001', 'Other', 'com.liferay.portal.model.Organization.address');
-insert into ListType (listTypeId, name, type_) values ('12002', 'P.O. Box', 'com.liferay.portal.model.Organization.address');
-insert into ListType (listTypeId, name, type_) values ('12003', 'Shipping', 'com.liferay.portal.model.Organization.address');
+insert into ListType (listTypeId, name, type_) values (12000, 'Billing', 'com.liferay.portal.model.Organization.address');
+insert into ListType (listTypeId, name, type_) values (12001, 'Other', 'com.liferay.portal.model.Organization.address');
+insert into ListType (listTypeId, name, type_) values (12002, 'P.O. Box', 'com.liferay.portal.model.Organization.address');
+insert into ListType (listTypeId, name, type_) values (12003, 'Shipping', 'com.liferay.portal.model.Organization.address');
 
-insert into ListType (listTypeId, name, type_) values ('12004', 'E-mail', 'com.liferay.portal.model.Organization.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('12005', 'E-mail 2', 'com.liferay.portal.model.Organization.emailAddress');
-insert into ListType (listTypeId, name, type_) values ('12006', 'E-mail 3', 'com.liferay.portal.model.Organization.emailAddress');
+insert into ListType (listTypeId, name, type_) values (12004, 'E-mail', 'com.liferay.portal.model.Organization.emailAddress');
+insert into ListType (listTypeId, name, type_) values (12005, 'E-mail 2', 'com.liferay.portal.model.Organization.emailAddress');
+insert into ListType (listTypeId, name, type_) values (12006, 'E-mail 3', 'com.liferay.portal.model.Organization.emailAddress');
 
-insert into ListType (listTypeId, name, type_) values ('12007', 'Fax', 'com.liferay.portal.model.Organization.phone');
-insert into ListType (listTypeId, name, type_) values ('12008', 'Local', 'com.liferay.portal.model.Organization.phone');
-insert into ListType (listTypeId, name, type_) values ('12009', 'Other', 'com.liferay.portal.model.Organization.phone');
-insert into ListType (listTypeId, name, type_) values ('12010', 'Toll-Free', 'com.liferay.portal.model.Organization.phone');
-insert into ListType (listTypeId, name, type_) values ('12011', 'TTY', 'com.liferay.portal.model.Organization.phone');
+insert into ListType (listTypeId, name, type_) values (12007, 'Fax', 'com.liferay.portal.model.Organization.phone');
+insert into ListType (listTypeId, name, type_) values (12008, 'Local', 'com.liferay.portal.model.Organization.phone');
+insert into ListType (listTypeId, name, type_) values (12009, 'Other', 'com.liferay.portal.model.Organization.phone');
+insert into ListType (listTypeId, name, type_) values (12010, 'Toll-Free', 'com.liferay.portal.model.Organization.phone');
+insert into ListType (listTypeId, name, type_) values (12011, 'TTY', 'com.liferay.portal.model.Organization.phone');
 
-insert into ListType (listTypeId, name, type_) values ('12012', 'Administrative', 'com.liferay.portal.model.Organization.service');
-insert into ListType (listTypeId, name, type_) values ('12013', 'Contracts', 'com.liferay.portal.model.Organization.service');
-insert into ListType (listTypeId, name, type_) values ('12014', 'Donation', 'com.liferay.portal.model.Organization.service');
-insert into ListType (listTypeId, name, type_) values ('12015', 'Retail', 'com.liferay.portal.model.Organization.service');
-insert into ListType (listTypeId, name, type_) values ('12016', 'Training', 'com.liferay.portal.model.Organization.service');
+insert into ListType (listTypeId, name, type_) values (12012, 'Administrative', 'com.liferay.portal.model.Organization.service');
+insert into ListType (listTypeId, name, type_) values (12013, 'Contracts', 'com.liferay.portal.model.Organization.service');
+insert into ListType (listTypeId, name, type_) values (12014, 'Donation', 'com.liferay.portal.model.Organization.service');
+insert into ListType (listTypeId, name, type_) values (12015, 'Retail', 'com.liferay.portal.model.Organization.service');
+insert into ListType (listTypeId, name, type_) values (12016, 'Training', 'com.liferay.portal.model.Organization.service');
 
-insert into ListType (listTypeId, name, type_) values ('12017', 'Full Member', 'com.liferay.portal.model.Organization.status');
-insert into ListType (listTypeId, name, type_) values ('12018', 'Provisional Member', 'com.liferay.portal.model.Organization.status');
+insert into ListType (listTypeId, name, type_) values (12017, 'Full Member', 'com.liferay.portal.model.Organization.status');
+insert into ListType (listTypeId, name, type_) values (12018, 'Provisional Member', 'com.liferay.portal.model.Organization.status');
 
-insert into ListType (listTypeId, name, type_) values ('12019', 'Intranet', 'com.liferay.portal.model.Organization.website');
-insert into ListType (listTypeId, name, type_) values ('12020', 'Public', 'com.liferay.portal.model.Organization.website');
+insert into ListType (listTypeId, name, type_) values (12019, 'Intranet', 'com.liferay.portal.model.Organization.website');
+insert into ListType (listTypeId, name, type_) values (12020, 'Public', 'com.liferay.portal.model.Organization.website');

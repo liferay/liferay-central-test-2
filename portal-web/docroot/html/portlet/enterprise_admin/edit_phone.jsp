@@ -34,7 +34,7 @@ long phoneId = BeanParamUtil.getLong(phone, request, "phoneId");
 String className = BeanParamUtil.getString(phone, request, "className");
 String classPK = BeanParamUtil.getString(phone, request, "classPK");
 
-String typeId = BeanParamUtil.getString(phone, request, "typeId");
+int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 %>
 
 <script type="text/javascript">
@@ -89,7 +89,7 @@ String typeId = BeanParamUtil.getString(phone, request, "typeId");
 				ListType suffix = (ListType)phoneTypes.get(i);
 			%>
 
-				<option <%= suffix.getListTypeId().equals(typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 			<%
 			}

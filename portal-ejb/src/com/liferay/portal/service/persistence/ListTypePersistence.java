@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class ListTypePersistence extends BasePersistence {
-	public ListType create(String listTypeId) {
+	public ListType create(int listTypeId) {
 		ListType listType = new ListTypeImpl();
 		listType.setNew(true);
 		listType.setPrimaryKey(listTypeId);
@@ -57,7 +57,7 @@ public class ListTypePersistence extends BasePersistence {
 		return listType;
 	}
 
-	public ListType remove(String listTypeId)
+	public ListType remove(int listTypeId)
 		throws NoSuchListTypeException, SystemException {
 		Session session = null;
 
@@ -65,7 +65,7 @@ public class ListTypePersistence extends BasePersistence {
 			session = openSession();
 
 			ListType listType = (ListType)session.get(ListTypeImpl.class,
-					listTypeId);
+					new Integer(listTypeId));
 
 			if (listType == null) {
 				if (_log.isWarnEnabled()) {
@@ -140,7 +140,7 @@ public class ListTypePersistence extends BasePersistence {
 		}
 	}
 
-	public ListType findByPrimaryKey(String listTypeId)
+	public ListType findByPrimaryKey(int listTypeId)
 		throws NoSuchListTypeException, SystemException {
 		ListType listType = fetchByPrimaryKey(listTypeId);
 
@@ -157,14 +157,14 @@ public class ListTypePersistence extends BasePersistence {
 		return listType;
 	}
 
-	public ListType fetchByPrimaryKey(String listTypeId)
-		throws SystemException {
+	public ListType fetchByPrimaryKey(int listTypeId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (ListType)session.get(ListTypeImpl.class, listTypeId);
+			return (ListType)session.get(ListTypeImpl.class,
+				new Integer(listTypeId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -299,7 +299,7 @@ public class ListTypePersistence extends BasePersistence {
 		}
 	}
 
-	public ListType[] findByType_PrevAndNext(String listTypeId, String type,
+	public ListType[] findByType_PrevAndNext(int listTypeId, String type,
 		OrderByComparator obc) throws NoSuchListTypeException, SystemException {
 		ListType listType = findByPrimaryKey(listTypeId);
 		int count = countByType(type);

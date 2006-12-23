@@ -40,7 +40,7 @@ import java.util.List;
 public class ListTypeServiceImpl
 	extends PrincipalBean implements ListTypeService {
 
-	public ListType getListType(String listTypeId)
+	public ListType getListType(int listTypeId)
 		throws PortalException, SystemException {
 
 		return ListTypeUtil.findByPrimaryKey(listTypeId);
@@ -50,7 +50,7 @@ public class ListTypeServiceImpl
 		return ListTypeUtil.findByType(type);
 	}
 
-	public void validate(String listTypeId, String type)
+	public void validate(int listTypeId, String type)
 		throws PortalException, SystemException {
 
 		ListType listType = ListTypeUtil.findByPrimaryKey(listTypeId);

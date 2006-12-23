@@ -29,15 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface ListTypeService {
-	public com.liferay.portal.model.ListType getListType(
-		java.lang.String listTypeId)
+	public com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public java.util.List getListTypes(java.lang.String type)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException;
 
-	public void validate(java.lang.String listTypeId, java.lang.String type)
+	public void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

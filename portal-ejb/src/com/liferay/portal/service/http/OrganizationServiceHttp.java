@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -85,7 +86,7 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization addOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String parentOrganizationId,
 		java.lang.String name, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String statusId, boolean location)
+		java.lang.String countryId, int statusId, boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -113,12 +114,7 @@ public class OrganizationServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = statusId;
-
-			if (statusId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj4 = new IntegerWrapper(statusId);
 			Object paramObj5 = new BooleanWrapper(location);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"addOrganization",
@@ -355,8 +351,8 @@ public class OrganizationServiceHttp {
 	public static com.liferay.portal.model.Organization updateOrganization(
 		HttpPrincipal httpPrincipal, java.lang.String organizationId,
 		java.lang.String parentOrganizationId, java.lang.String name,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String statusId, boolean location)
+		java.lang.String regionId, java.lang.String countryId, int statusId,
+		boolean location)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -390,12 +386,7 @@ public class OrganizationServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = statusId;
-
-			if (statusId == null) {
-				paramObj5 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj5 = new IntegerWrapper(statusId);
 			Object paramObj6 = new BooleanWrapper(location);
 			MethodWrapper methodWrapper = new MethodWrapper(OrganizationServiceUtil.class.getName(),
 					"updateOrganization",

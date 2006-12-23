@@ -56,7 +56,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	public Address addAddress(
 			String userId, String className, String classPK, String street1,
 			String street2, String street3, String city, String zip,
-			String regionId, String countryId, String typeId, boolean mailing,
+			String regionId, String countryId, int typeId, boolean mailing,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -131,7 +131,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	public Address updateAddress(
 			long addressId, String street1, String street2, String street3,
 			String city, String zip, String regionId, String countryId,
-			String typeId, boolean mailing, boolean primary)
+			int typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
 		validate(
@@ -160,7 +160,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	protected void validate(
 			long addressId, String companyId, String className,
 			String classPK, String street1, String city, String zip,
-			String regionId, String countryId, String typeId, boolean mailing,
+			String regionId, String countryId, int typeId, boolean mailing,
 			boolean primary)
 		throws PortalException, SystemException {
 

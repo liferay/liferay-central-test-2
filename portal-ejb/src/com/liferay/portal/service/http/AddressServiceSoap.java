@@ -40,9 +40,8 @@ public class AddressServiceSoap {
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String street1, java.lang.String street2,
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String typeId, boolean mailing, boolean primary)
-		throws RemoteException {
+		java.lang.String regionId, java.lang.String countryId, int typeId,
+		boolean mailing, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Address returnValue = AddressServiceUtil.addAddress(className,
 					classPK, street1, street2, street3, city, zip, regionId,
@@ -101,9 +100,8 @@ public class AddressServiceSoap {
 	public static com.liferay.portal.model.AddressSoap updateAddress(
 		long addressId, java.lang.String street1, java.lang.String street2,
 		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String typeId, boolean mailing, boolean primary)
-		throws RemoteException {
+		java.lang.String regionId, java.lang.String countryId, int typeId,
+		boolean mailing, boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Address returnValue = AddressServiceUtil.updateAddress(addressId,
 					street1, street2, street3, city, zip, regionId, countryId,

@@ -55,7 +55,7 @@
 		<column name="zip" type="String" />
 		<column name="regionId" type="String" />
 		<column name="countryId" type="String" />
-		<column name="typeId" type="String" />
+		<column name="typeId" type="int" />
 		<column name="mailing" type="boolean" />
 		<column name="primary" type="boolean" />
 
@@ -130,8 +130,8 @@
 		<column name="middleName" type="String" />
 		<column name="lastName" type="String" />
 		<column name="nickName" type="String" />
-		<column name="prefixId" type="String" />
-		<column name="suffixId" type="String" />
+		<column name="prefixId" type="int" />
+		<column name="suffixId" type="int" />
 		<column name="male" type="boolean" />
 		<column name="birthday" type="Date" />
 		<column name="smsSn" type="String" />
@@ -220,7 +220,7 @@
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="address" type="String" />
-		<column name="typeId" type="String" />
+		<column name="typeId" type="int" />
 		<column name="primary" type="boolean" />
 
 		<!-- Order -->
@@ -418,7 +418,7 @@
 
 		<!-- PK fields -->
 
-		<column name="listTypeId" type="String" primary="true" />
+		<column name="listTypeId" type="int" primary="true" />
 
 		<!-- Other fields -->
 
@@ -454,7 +454,7 @@
 		<column name="recursable" type="boolean" />
 		<column name="regionId" type="String" />
 		<column name="countryId" type="String" />
-		<column name="statusId" type="String" />
+		<column name="statusId" type="int" />
 		<column name="comments" type="String" />
 
 		<!-- Relationships -->
@@ -522,7 +522,7 @@
 		<!-- Other fields -->
 
 		<column name="organizationId" type="String" />
-		<column name="typeId" type="String" />
+		<column name="typeId" type="int" />
 		<column name="sunOpen" type="int" />
 		<column name="sunClose" type="int" />
 		<column name="monOpen" type="int" />
@@ -630,7 +630,7 @@
 		<column name="classPK" type="String" />
 		<column name="number" type="String" />
 		<column name="extension" type="String" />
-		<column name="typeId" type="String" />
+		<column name="typeId" type="int" />
 		<column name="primary" type="boolean" />
 
 		<!-- Order -->
@@ -1073,7 +1073,7 @@
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="url" type="String" />
-		<column name="typeId" type="String" />
+		<column name="typeId" type="int" />
 		<column name="primary" type="boolean" />
 
 		<!-- Order -->

@@ -6,6 +6,6 @@
 		<id name="name" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="currentId" />
+		<property name="currentId" type="long" />
 	</class>
 </hibernate-mapping>

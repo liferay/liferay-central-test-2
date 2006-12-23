@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -43,7 +44,7 @@ public class PhoneServiceHttp {
 	public static com.liferay.portal.model.Phone addPhone(
 		HttpPrincipal httpPrincipal, java.lang.String className,
 		java.lang.String classPK, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -71,12 +72,7 @@ public class PhoneServiceHttp {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = typeId;
-
-			if (typeId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj4 = new IntegerWrapper(typeId);
 			Object paramObj5 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
 					"addPhone",
@@ -221,7 +217,7 @@ public class PhoneServiceHttp {
 
 	public static com.liferay.portal.model.Phone updatePhone(
 		HttpPrincipal httpPrincipal, long phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+		java.lang.String extension, int typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -238,12 +234,7 @@ public class PhoneServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = typeId;
-
-			if (typeId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new IntegerWrapper(typeId);
 			Object paramObj4 = new BooleanWrapper(primary);
 			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
 					"updatePhone",

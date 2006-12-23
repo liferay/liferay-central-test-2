@@ -54,7 +54,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 
 	public EmailAddress addEmailAddress(
 			String userId, String className, String classPK,
-			String address, String typeId, boolean primary)
+			String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -124,7 +124,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 	}
 
 	public EmailAddress updateEmailAddress(
-			long emailAddressId, String address, String typeId,
+			long emailAddressId, String address, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -145,7 +145,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 
 	protected void validate(
 			long emailAddressId, String companyId, String className,
-			String classPK, String address, String typeId, boolean primary)
+			String classPK, String address, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		if (!Validator.isEmailAddress(address)) {

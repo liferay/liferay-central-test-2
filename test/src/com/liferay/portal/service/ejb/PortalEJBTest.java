@@ -54,8 +54,8 @@ public class PortalEJBTest extends BaseEJBTest {
 			String middleName = "";
 			String lastName = "UserServiceEJBTest";
 			String nickName = null;
-			String prefixId = null;
-			String suffixId = null;
+			int prefixId = 0;
+			int suffixId = 0;
 			boolean male = true;
 			int birthdayMonth = Calendar.JANUARY;
 			int birthdayDay = 1;

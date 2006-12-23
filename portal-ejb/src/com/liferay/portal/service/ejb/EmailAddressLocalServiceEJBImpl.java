@@ -39,8 +39,8 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 	SessionBean {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String userId, java.lang.String className,
-		java.lang.String classPK, java.lang.String address,
-		java.lang.String typeId, boolean primary)
+		java.lang.String classPK, java.lang.String address, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return EmailAddressLocalServiceFactory.getTxImpl().addEmailAddress(userId,
@@ -86,7 +86,7 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 	}
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		long emailAddressId, java.lang.String address, java.lang.String typeId,
+		long emailAddressId, java.lang.String address, int typeId,
 		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -71,7 +71,7 @@ public class LDAPImportUtil {
 			String userId, boolean autoPassword, String password1,
 			String password2, boolean passwordReset, String emailAddress,
 			Locale locale, String firstName, String middleName, String lastName,
-			String nickName, String prefixId, String suffixId, boolean male,
+			String nickName, int prefixId, int suffixId, boolean male,
 			int birthdayMonth, int birthdayDay, int birthdayYear,
 			String jobTitle, String organizationId, String locationId,
 			boolean sendEmail, boolean checkExists, boolean updatePassword)
@@ -278,8 +278,8 @@ public class LDAPImportUtil {
 		}
 
 		String nickName = null;
-		String prefixId = null;
-		String suffixId = null;
+		int prefixId = 0;
+		int suffixId = 0;
 		boolean male = true;
 		int birthdayMonth = Calendar.JANUARY;
 		int birthdayDay = 1;

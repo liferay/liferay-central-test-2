@@ -42,7 +42,7 @@
 		<property name="zip" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="regionId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="countryId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="mailing" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
@@ -72,8 +72,8 @@
 		<property name="middleName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="lastName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="nickName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="prefixId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="suffixId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="prefixId" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="suffixId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="male" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="birthday" />
 		<property name="smsSn" type="com.liferay.util.dao.hibernate.StringType" />
@@ -129,7 +129,7 @@
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="address" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.GroupImpl" table="Group_">
@@ -189,7 +189,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.ListTypeImpl" table="ListType">
 		<cache usage="read-write" />
-		<id name="listTypeId" type="java.lang.String">
+		<id name="listTypeId" type="int">
 			<generator class="assigned" />
 		</id>
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
@@ -206,7 +206,7 @@
 		<property name="recursable" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="regionId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="countryId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="statusId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="statusId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="comments" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.OrgGroupPermissionImpl" table="OrgGroupPermission">
@@ -231,7 +231,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="organizationId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="sunOpen" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="sunClose" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="monOpen" type="com.liferay.util.dao.hibernate.IntegerType" />
@@ -279,7 +279,7 @@
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="number" column="number_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="extension" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PortletImpl" table="Portlet">
@@ -437,7 +437,7 @@
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="typeId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl" table="BlogsCategory">

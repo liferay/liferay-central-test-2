@@ -74,7 +74,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 	public Organization addOrganization(
 			String userId, String parentOrganizationId, String name,
-			String regionId, String countryId, String statusId,
+			String regionId, String countryId, int statusId,
 			boolean location)
 		throws PortalException, SystemException {
 
@@ -264,7 +264,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 	public Organization updateOrganization(
 			String companyId, String organizationId,
 			String parentOrganizationId, String name, String regionId,
-			String countryId, String statusId, boolean location)
+			String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		parentOrganizationId = getParentOrganizationId(
@@ -332,7 +332,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 	protected void validate(
 			String companyId, String parentOrganizationId, String name,
-			String countryId, String statusId, boolean location)
+			String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		validate(
@@ -343,7 +343,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 	protected void validate(
 			String companyId, String organizationId,
 			String parentOrganizationId, String name, String countryId,
-			String statusId, boolean location)
+			int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		if (location) {

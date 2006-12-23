@@ -37,7 +37,7 @@ import java.rmi.RemoteException;
  */
 public class ListTypeServiceSoap {
 	public static com.liferay.portal.model.ListTypeSoap getListType(
-		java.lang.String listTypeId) throws RemoteException {
+		int listTypeId) throws RemoteException {
 		try {
 			com.liferay.portal.model.ListType returnValue = ListTypeServiceUtil.getListType(listTypeId);
 
@@ -64,8 +64,8 @@ public class ListTypeServiceSoap {
 		}
 	}
 
-	public static void validate(java.lang.String listTypeId,
-		java.lang.String type) throws RemoteException {
+	public static void validate(int listTypeId, java.lang.String type)
+		throws RemoteException {
 		try {
 			ListTypeServiceUtil.validate(listTypeId, type);
 		}

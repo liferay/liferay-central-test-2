@@ -66,10 +66,10 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		boolean passwordReset, java.lang.String emailAddress,
 		java.util.Locale locale, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, java.lang.String prefixId,
-		java.lang.String suffixId, boolean male, int birthdayMonth,
-		int birthdayDay, int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId)
+		java.lang.String nickName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -87,11 +87,10 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		boolean passwordReset, java.lang.String emailAddress,
 		java.util.Locale locale, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, java.lang.String prefixId,
-		java.lang.String suffixId, boolean male, int birthdayMonth,
-		int birthdayDay, int birthdayYear, java.lang.String jobTitle,
-		java.lang.String organizationId, java.lang.String locationId,
-		boolean sendEmail)
+		java.lang.String nickName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String jobTitle, java.lang.String organizationId,
+		java.lang.String locationId, boolean sendEmail)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -258,10 +257,9 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		java.lang.String greeting, java.lang.String resolution,
 		java.lang.String comments, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String nickName, java.lang.String prefixId,
-		java.lang.String suffixId, boolean male, int birthdayMonth,
-		int birthdayDay, int birthdayYear, java.lang.String smsSn,
-		java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String nickName, int prefixId, int suffixId, boolean male,
+		int birthdayMonth, int birthdayDay, int birthdayYear,
+		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
 		java.lang.String skypeSn, java.lang.String ymSn,
 		java.lang.String jobTitle, java.lang.String organizationId,

@@ -73,9 +73,9 @@ public interface EmailAddressModel extends BaseModel {
 
 	public void setAddress(String address);
 
-	public String getTypeId();
+	public int getTypeId();
 
-	public void setTypeId(String typeId);
+	public void setTypeId(int typeId);
 
 	public boolean getPrimary();
 

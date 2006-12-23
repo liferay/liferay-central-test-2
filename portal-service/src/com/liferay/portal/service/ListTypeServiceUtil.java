@@ -29,8 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public class ListTypeServiceUtil {
-	public static com.liferay.portal.model.ListType getListType(
-		java.lang.String listTypeId)
+	public static com.liferay.portal.model.ListType getListType(int listTypeId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ListTypeService listTypeService = ListTypeServiceFactory.getService();
@@ -45,8 +44,7 @@ public class ListTypeServiceUtil {
 		return listTypeService.getListTypes(type);
 	}
 
-	public static void validate(java.lang.String listTypeId,
-		java.lang.String type)
+	public static void validate(int listTypeId, java.lang.String type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ListTypeService listTypeService = ListTypeServiceFactory.getService();

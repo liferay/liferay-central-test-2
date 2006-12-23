@@ -39,7 +39,7 @@ import javax.ejb.SessionContext;
 public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 	public com.liferay.portal.model.Website addWebsite(
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String url, java.lang.String typeId, boolean primary)
+		java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -73,7 +73,7 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 	}
 
 	public com.liferay.portal.model.Website updateWebsite(long websiteId,
-		java.lang.String url, java.lang.String typeId, boolean primary)
+		java.lang.String url, int typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

@@ -49,7 +49,7 @@ if (!parentOrganizationId.equals(OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID
 
 String regionId = BeanParamUtil.getString(organization, request, "regionId");
 String countryId = BeanParamUtil.getString(organization, request, "countryId");
-String statusId = BeanParamUtil.getString(organization, request, "statusId");
+int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 %>
 
 <script type="text/javascript">
@@ -117,7 +117,7 @@ String statusId = BeanParamUtil.getString(organization, request, "statusId");
 						ListType status = (ListType)statuses.get(i);
 					%>
 
-						<option <%= status.getListTypeId().equals(statusId) ? "selected" : "" %> value="<%= status.getListTypeId() %>"><%= LanguageUtil.get(pageContext, status.getName()) %></option>
+						<option <%= status.getListTypeId() == statusId ? "selected" : "" %> value="<%= String.valueOf(status.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, status.getName()) %></option>
 
 					<%
 					}

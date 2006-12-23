@@ -331,8 +331,8 @@ public class EditUserAction extends PortletAction {
 		String middleName = ParamUtil.getString(req, "middleName");
 		String lastName = ParamUtil.getString(req, "lastName");
 		String nickName = ParamUtil.getString(req, "nickName");
-		String prefixId = ParamUtil.getString(req, "prefixId");
-		String suffixId = ParamUtil.getString(req, "suffixId");
+		int prefixId = ParamUtil.getInteger(req, "prefixId");
+		int suffixId = ParamUtil.getInteger(req, "suffixId");
 		boolean male = ParamUtil.get(req, "male", true);
 		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");

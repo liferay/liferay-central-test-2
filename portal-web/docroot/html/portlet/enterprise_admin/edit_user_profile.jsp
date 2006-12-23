@@ -23,8 +23,8 @@
 %>
 
 <%
-String prefixId = BeanParamUtil.getString(contact2, request, "prefixId");
-String suffixId = BeanParamUtil.getString(contact2, request, "suffixId");
+int prefixId = BeanParamUtil.getInteger(contact2, request, "prefixId");
+int suffixId = BeanParamUtil.getInteger(contact2, request, "suffixId");
 
 Calendar birthday = new GregorianCalendar();
 
@@ -174,7 +174,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 						ListType prefix = (ListType)prefixes.get(i);
 					%>
 
-						<option <%= prefix.getListTypeId().equals(prefixId) ? "selected" : "" %> value="<%= prefix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, prefix.getName()) %></option>
+						<option <%= prefix.getListTypeId() == prefixId ? "selected" : "" %> value="<%= String.valueOf(prefix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, prefix.getName()) %></option>
 
 					<%
 					}
@@ -226,7 +226,7 @@ if (portletName.equals(PortletKeys.LOCATION_ADMIN)) {
 						ListType suffix = (ListType)suffixes.get(i);
 					%>
 
-						<option <%= suffix.getListTypeId().equals(suffixId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+						<option <%= suffix.getListTypeId() == suffixId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 					<%
 					}

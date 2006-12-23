@@ -57,19 +57,19 @@ public class ListTypeSoap implements Serializable {
 	public ListTypeSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public int getPrimaryKey() {
 		return _listTypeId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(int pk) {
 		setListTypeId(pk);
 	}
 
-	public String getListTypeId() {
+	public int getListTypeId() {
 		return _listTypeId;
 	}
 
-	public void setListTypeId(String listTypeId) {
+	public void setListTypeId(int listTypeId) {
 		_listTypeId = listTypeId;
 	}
 
@@ -89,7 +89,7 @@ public class ListTypeSoap implements Serializable {
 		_type = type;
 	}
 
-	private String _listTypeId;
+	private int _listTypeId;
 	private String _name;
 	private String _type;
 }

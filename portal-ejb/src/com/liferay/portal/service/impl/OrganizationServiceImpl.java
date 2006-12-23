@@ -58,7 +58,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization addOrganization(
 			String parentOrganizationId, String name, String regionId,
-			String countryId, String statusId, boolean location)
+			String countryId, int statusId, boolean location)
 		throws PortalException, SystemException {
 
 		if (location) {
@@ -121,7 +121,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 
 	public Organization updateOrganization(
 			String organizationId, String parentOrganizationId, String name,
-			String regionId, String countryId, String statusId,
+			String regionId, String countryId, int statusId,
 			boolean location)
 		throws PortalException, SystemException {
 

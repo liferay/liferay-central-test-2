@@ -32,7 +32,7 @@ OrgLabor orgLabor = (OrgLabor)request.getAttribute(WebKeys.ORG_LABOR);
 String orgLaborId = BeanParamUtil.getString(orgLabor, request, "orgLaborId");
 
 String organizationId = BeanParamUtil.getString(orgLabor, request, "organizationId");
-String typeId = BeanParamUtil.getString(orgLabor, request, "typeId");
+int typeId = BeanParamUtil.getInteger(orgLabor, request, "typeId");
 int sunOpen = BeanParamUtil.getInteger(orgLabor, request, "sunOpen", -1);
 int sunClose = BeanParamUtil.getInteger(orgLabor, request, "sunClose", -1);
 int monOpen = BeanParamUtil.getInteger(orgLabor, request, "monOpen", -1);
@@ -85,7 +85,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 				ListType suffix = (ListType)orgLaborTypes.get(i);
 			%>
 
-				<option <%= suffix.getListTypeId().equals(typeId) ? "selected" : "" %> value="<%= suffix.getListTypeId() %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
+				<option <%= suffix.getListTypeId() == typeId ? "selected" : "" %> value="<%= String.valueOf(suffix.getListTypeId()) %>"><%= LanguageUtil.get(pageContext, suffix.getName()) %></option>
 
 			<%
 			}

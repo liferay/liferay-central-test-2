@@ -38,8 +38,8 @@ import javax.ejb.SessionContext;
 public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean {
 	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PhoneLocalServiceFactory.getTxImpl().addPhone(userId, className,
@@ -81,8 +81,8 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 	}
 
 	public com.liferay.portal.model.Phone updatePhone(long phoneId,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PhoneLocalServiceFactory.getTxImpl().updatePhone(phoneId,

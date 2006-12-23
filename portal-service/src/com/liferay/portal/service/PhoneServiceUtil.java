@@ -31,8 +31,8 @@ package com.liferay.portal.service;
 public class PhoneServiceUtil {
 	public static com.liferay.portal.model.Phone addPhone(
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();
@@ -66,8 +66,8 @@ public class PhoneServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		java.lang.String number, java.lang.String extension, int typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();

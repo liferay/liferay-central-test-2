@@ -53,7 +53,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 
 	public Phone addPhone(
 			String userId, String className, String classPK, String number,
-			String extension, String typeId, boolean primary)
+			String extension, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -121,7 +121,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 	}
 
 	public Phone updatePhone(
-			long phoneId, String number, String extension, String typeId,
+			long phoneId, String number, String extension, int typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -145,7 +145,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 
 	protected void validate(
 			long phoneId, String companyId, String className, String classPK,
-			String number, String typeId, boolean primary)
+			String number, int typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(number)) {

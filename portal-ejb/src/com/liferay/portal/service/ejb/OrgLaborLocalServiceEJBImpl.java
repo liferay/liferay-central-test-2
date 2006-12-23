@@ -38,10 +38,10 @@ import javax.ejb.SessionContext;
 public class OrgLaborLocalServiceEJBImpl implements OrgLaborLocalService,
 	SessionBean {
 	public com.liferay.portal.model.OrgLabor addOrgLabor(
-		java.lang.String organizationId, java.lang.String typeId, int sunOpen,
-		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
-		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
-		int friClose, int satOpen, int satClose)
+		java.lang.String organizationId, int typeId, int sunOpen, int sunClose,
+		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
+		int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
+		int satOpen, int satClose)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrgLaborLocalServiceFactory.getTxImpl().addOrgLabor(organizationId,

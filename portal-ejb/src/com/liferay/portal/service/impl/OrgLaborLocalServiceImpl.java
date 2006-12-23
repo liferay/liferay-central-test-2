@@ -44,7 +44,7 @@ import java.util.List;
 public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 
 	public OrgLabor addOrgLabor(
-			String organizationId, String typeId, int sunOpen, int sunClose,
+			String organizationId, int typeId, int sunOpen, int sunClose,
 			int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,
 			int wedClose, int thuOpen, int thuClose, int friOpen, int friClose,
 			int satOpen, int satClose)
@@ -124,7 +124,7 @@ public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 		return orgLabor;
 	}
 
-	protected void validate(String typeId)
+	protected void validate(int typeId)
 		throws PortalException, SystemException {
 
 		try {
