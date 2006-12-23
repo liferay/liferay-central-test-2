@@ -66,19 +66,19 @@ public class WebsiteSoap implements Serializable {
 	public WebsiteSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _websiteId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setWebsiteId(pk);
 	}
 
-	public String getWebsiteId() {
+	public long getWebsiteId() {
 		return _websiteId;
 	}
 
-	public void setWebsiteId(String websiteId) {
+	public void setWebsiteId(long websiteId) {
 		_websiteId = websiteId;
 	}
 
@@ -166,7 +166,7 @@ public class WebsiteSoap implements Serializable {
 		_primary = primary;
 	}
 
-	private String _websiteId;
+	private long _websiteId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

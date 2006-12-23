@@ -21,8 +21,8 @@
  */
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.Address;
-import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.model.Website;
+import com.liferay.portal.service.WebsiteLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 
@@ -32,41 +32,38 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeWebsite.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class UpgradeAddress extends UpgradeProcess {
+public class UpgradeWebsite extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeAddress();
+			_upgradeWebsite();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeAddress() throws Exception {
-		List addresses = AddressLocalServiceUtil.getAddresses();
+	private void _upgradeWebsite() throws Exception {
+		List websites = WebsiteLocalServiceUtil.getWebsites();
 
-		AddressLocalServiceUtil.deleteAddresses();
+		WebsiteLocalServiceUtil.deleteWebsites();
 
-		for (int i = 0; i < addresses.size(); i++) {
-			Address address = (Address)addresses.get(i);
+		for (int i = 0; i < websites.size(); i++) {
+			Website website = (Website)websites.get(i);
 
-			AddressLocalServiceUtil.addAddress(
-				address.getUserId(), address.getClassName(),
-				address.getClassPK(), address.getStreet1(),
-				address.getStreet2(), address.getStreet3(), address.getCity(),
-				address.getZip(), address.getRegionId(), address.getCountryId(),
-				address.getTypeId(), address.getMailing(),
-				address.getPrimary());
+			WebsiteLocalServiceUtil.addWebsite(
+				website.getUserId(), website.getClassName(),
+				website.getClassPK(), website.getUrl(), website.getTypeId(),
+				website.getPrimary());
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
+	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
 }

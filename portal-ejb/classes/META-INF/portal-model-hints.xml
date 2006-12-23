@@ -418,7 +418,7 @@
 		<field name="pathDate" type="Date" />
 	</model>
 	<model name="com.liferay.portal.model.Website">
-		<field name="websiteId" type="String" />
+		<field name="websiteId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />

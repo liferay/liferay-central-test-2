@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class WebsiteUtil {
-	public static com.liferay.portal.model.Website create(
-		java.lang.String websiteId) {
+	public static com.liferay.portal.model.Website create(long websiteId) {
 		return getPersistence().create(websiteId);
 	}
 
-	public static com.liferay.portal.model.Website remove(
-		java.lang.String websiteId)
+	public static com.liferay.portal.model.Website remove(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website findByPrimaryKey(
-		java.lang.String websiteId)
+		long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
 		return getPersistence().findByPrimaryKey(websiteId);
 	}
 
 	public static com.liferay.portal.model.Website fetchByPrimaryKey(
-		java.lang.String websiteId) throws com.liferay.portal.SystemException {
+		long websiteId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(websiteId);
 	}
 
@@ -183,7 +181,7 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website[] findByCompanyId_PrevAndNext(
-		java.lang.String websiteId, java.lang.String companyId,
+		long websiteId, java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
@@ -224,7 +222,7 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website[] findByUserId_PrevAndNext(
-		java.lang.String websiteId, java.lang.String userId,
+		long websiteId, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
@@ -266,8 +264,7 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website[] findByC_C_PrevAndNext(
-		java.lang.String websiteId, java.lang.String companyId,
-		java.lang.String className,
+		long websiteId, java.lang.String companyId, java.lang.String className,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
@@ -317,8 +314,8 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website[] findByC_C_C_PrevAndNext(
-		java.lang.String websiteId, java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK,
+		long websiteId, java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {
@@ -369,8 +366,8 @@ public class WebsiteUtil {
 	}
 
 	public static com.liferay.portal.model.Website[] findByC_C_C_P_PrevAndNext(
-		java.lang.String websiteId, java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK, boolean primary,
+		long websiteId, java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchWebsiteException {

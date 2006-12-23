@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface WebsiteModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getWebsiteId();
+	public long getWebsiteId();
 
-	public void setWebsiteId(String websiteId);
+	public void setWebsiteId(long websiteId);
 
 	public String getCompanyId();
 

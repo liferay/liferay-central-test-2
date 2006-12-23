@@ -65,5 +65,5 @@ public class UpgradePhone extends UpgradeProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
+	private static Log _log = LogFactory.getLog(UpgradePhone.class);
 }

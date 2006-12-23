@@ -52,7 +52,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Website website = (Website)results.get(i);
 
-	ResultRow row = new ResultRow(website, website.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(website, website.getPrimaryKey(), i);
 
 	row.addText(website.getUrl());
 	row.addText(website.getType().getName());

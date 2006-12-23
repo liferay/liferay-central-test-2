@@ -87,3 +87,4 @@ insert into SRLicense (licenseId, name, openSource, url, active_, recommended) v
 insert into SRLicense (licenseId, name, openSource, url, active_, recommended) values (4, 'Artistic', TRUE, 'http://www.opensource.org/licenses/artistic-license.php', TRUE, FALSE);
 insert into Counter (name, currentId) values ('com.liferay.portlet.softwarerepository.model.SRLicense', 4);
 
+alter_column_type Website websiteId BIGINT not null;

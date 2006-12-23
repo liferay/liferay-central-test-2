@@ -36,26 +36,29 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteWebsite(java.lang.String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void deleteWebsites() throws com.liferay.portal.SystemException;
 
 	public void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List getWebsites()
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Website updateWebsite(long websiteId,
+		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

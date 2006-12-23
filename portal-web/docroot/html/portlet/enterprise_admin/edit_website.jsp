@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Website website = (Website)request.getAttribute(WebKeys.WEBSITE);
 
-String websiteId = BeanParamUtil.getString(website, request, "websiteId");
+long websiteId = BeanParamUtil.getLong(website, request, "websiteId");
 
 String className = BeanParamUtil.getString(website, request, "className");
 String classPK = BeanParamUtil.getString(website, request, "classPK");
@@ -47,7 +47,7 @@ String typeId = BeanParamUtil.getString(website, request, "typeId");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_website" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveWebsite(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />websiteId" type="hidden" value="<%= websiteId %>">
+<input name="<portlet:namespace />websiteId" type="hidden" value="<%= String.valueOf(websiteId) %>">
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>">
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>">
 

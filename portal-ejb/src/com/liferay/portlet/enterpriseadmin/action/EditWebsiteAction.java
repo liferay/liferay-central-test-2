@@ -30,7 +30,6 @@ import com.liferay.portal.service.WebsiteServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -113,13 +112,13 @@ public class EditWebsiteAction extends PortletAction {
 	}
 
 	protected void deleteWebsite(ActionRequest req) throws Exception {
-		String websiteId = ParamUtil.getString(req, "websiteId");
+		long websiteId = ParamUtil.getLong(req, "websiteId");
 
 		WebsiteServiceUtil.deleteWebsite(websiteId);
 	}
 
 	protected void updateWebsite(ActionRequest req) throws Exception {
-		String websiteId = ParamUtil.getString(req, "websiteId");
+		long websiteId = ParamUtil.getLong(req, "websiteId");
 
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
@@ -128,7 +127,7 @@ public class EditWebsiteAction extends PortletAction {
 		String typeId = ParamUtil.getString(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
-		if (Validator.isNull(websiteId)) {
+		if (websiteId <= 0) {
 
 			// Add website
 

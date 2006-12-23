@@ -47,10 +47,14 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 			className, classPK, url, typeId, primary);
 	}
 
-	public void deleteWebsite(java.lang.String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalServiceFactory.getTxImpl().deleteWebsite(websiteId);
+	}
+
+	public void deleteWebsites() throws com.liferay.portal.SystemException {
+		WebsiteLocalServiceFactory.getTxImpl().deleteWebsites();
 	}
 
 	public void deleteWebsites(java.lang.String companyId,
@@ -60,11 +64,15 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 			className, classPK);
 	}
 
-	public com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WebsiteLocalServiceFactory.getTxImpl().getWebsite(websiteId);
+	}
+
+	public java.util.List getWebsites()
+		throws com.liferay.portal.SystemException {
+		return WebsiteLocalServiceFactory.getTxImpl().getWebsites();
 	}
 
 	public java.util.List getWebsites(java.lang.String companyId,
@@ -74,9 +82,8 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 			className, classPK);
 	}
 
-	public com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Website updateWebsite(long websiteId,
+		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return WebsiteLocalServiceFactory.getTxImpl().updateWebsite(websiteId,

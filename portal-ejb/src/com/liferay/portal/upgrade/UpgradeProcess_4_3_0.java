@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -50,6 +51,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 		upgrade(new UpgradeAddress());
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradePhone());
+		upgrade(new UpgradeWebsite());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);

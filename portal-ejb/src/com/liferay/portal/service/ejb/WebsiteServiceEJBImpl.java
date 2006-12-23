@@ -48,15 +48,14 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 			url, typeId, primary);
 	}
 
-	public void deleteWebsite(java.lang.String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		WebsiteServiceFactory.getTxImpl().deleteWebsite(websiteId);
 	}
 
-	public com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -73,9 +72,8 @@ public class WebsiteServiceEJBImpl implements WebsiteService, SessionBean {
 		return WebsiteServiceFactory.getTxImpl().getWebsites(className, classPK);
 	}
 
-	public com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Website updateWebsite(long websiteId,
+		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

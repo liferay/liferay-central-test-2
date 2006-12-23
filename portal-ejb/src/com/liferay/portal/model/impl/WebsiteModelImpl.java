@@ -40,9 +40,6 @@ import java.util.Date;
 public class WebsiteModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Website"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_WEBSITEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Website.websiteId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Website.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -70,27 +67,20 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	public WebsiteModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _websiteId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setWebsiteId(pk);
 	}
 
-	public String getWebsiteId() {
-		return GetterUtil.getString(_websiteId);
+	public long getWebsiteId() {
+		return _websiteId;
 	}
 
-	public void setWebsiteId(String websiteId) {
-		if (((websiteId == null) && (_websiteId != null)) ||
-				((websiteId != null) && (_websiteId == null)) ||
-				((websiteId != null) && (_websiteId != null) &&
-				!websiteId.equals(_websiteId))) {
-			if (!XSS_ALLOW_WEBSITEID) {
-				websiteId = XSSUtil.strip(websiteId);
-			}
-
+	public void setWebsiteId(long websiteId) {
+		if (websiteId != _websiteId) {
 			_websiteId = websiteId;
 		}
 	}
@@ -300,9 +290,9 @@ public class WebsiteModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = website.getPrimaryKey();
+		long pk = website.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -311,10 +301,10 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _websiteId;
+	private long _websiteId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

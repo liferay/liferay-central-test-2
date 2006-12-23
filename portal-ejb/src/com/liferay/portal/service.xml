@@ -1058,7 +1058,7 @@
 
 		<!-- PK fields -->
 
-		<column name="websiteId" type="String" primary="true" />
+		<column name="websiteId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

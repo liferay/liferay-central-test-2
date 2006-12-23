@@ -426,7 +426,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.WebsiteImpl" table="Website">
 		<cache usage="read-write" />
-		<id name="websiteId" type="java.lang.String">
+		<id name="websiteId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />

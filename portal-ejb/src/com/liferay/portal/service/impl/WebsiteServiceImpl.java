@@ -54,7 +54,7 @@ public class WebsiteServiceImpl
 			getUserId(), className, classPK, url, typeId, primary);
 	}
 
-	public void deleteWebsite(String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
@@ -66,7 +66,7 @@ public class WebsiteServiceImpl
 		WebsiteLocalServiceUtil.deleteWebsite(websiteId);
 	}
 
-	public Website getWebsite(String websiteId)
+	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);
@@ -89,7 +89,7 @@ public class WebsiteServiceImpl
 	}
 
 	public Website updateWebsite(
-			String websiteId, String url, String typeId, boolean primary)
+			long websiteId, String url, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		Website website = WebsiteUtil.findByPrimaryKey(websiteId);

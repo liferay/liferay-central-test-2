@@ -1027,7 +1027,7 @@ create table UserTrackerPath (
 );
 
 create table Website (
-	websiteId VARCHAR(75) not null primary key,
+	websiteId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

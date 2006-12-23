@@ -35,12 +35,11 @@ public interface WebsiteService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteWebsite(java.lang.String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -49,9 +48,8 @@ public interface WebsiteService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Website updateWebsite(long websiteId,
+		java.lang.String url, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

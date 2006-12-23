@@ -53,8 +53,7 @@ public class WebsiteServiceSoap {
 		}
 	}
 
-	public static void deleteWebsite(java.lang.String websiteId)
-		throws RemoteException {
+	public static void deleteWebsite(long websiteId) throws RemoteException {
 		try {
 			WebsiteServiceUtil.deleteWebsite(websiteId);
 		}
@@ -66,7 +65,7 @@ public class WebsiteServiceSoap {
 	}
 
 	public static com.liferay.portal.model.WebsiteSoap getWebsite(
-		java.lang.String websiteId) throws RemoteException {
+		long websiteId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.getWebsite(websiteId);
 
@@ -96,8 +95,8 @@ public class WebsiteServiceSoap {
 	}
 
 	public static com.liferay.portal.model.WebsiteSoap updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary) throws RemoteException {
+		long websiteId, java.lang.String url, java.lang.String typeId,
+		boolean primary) throws RemoteException {
 		try {
 			com.liferay.portal.model.Website returnValue = WebsiteServiceUtil.updateWebsite(websiteId,
 					url, typeId, primary);

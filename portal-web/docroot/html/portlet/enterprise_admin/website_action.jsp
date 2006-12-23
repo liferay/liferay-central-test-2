@@ -35,7 +35,7 @@ Website website = (Website)row.getObject();
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_website" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="websiteId" value="<%= website.getWebsiteId() %>" />
+	<portlet:param name="websiteId" value="<%= String.valueOf(website.getWebsiteId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ Website website = (Website)row.getObject();
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_website" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="websiteId" value="<%= website.getWebsiteId() %>" />
+	<portlet:param name="websiteId" value="<%= String.valueOf(website.getWebsiteId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

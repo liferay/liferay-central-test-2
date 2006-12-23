@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -102,17 +103,11 @@ public class WebsiteServiceHttp {
 		}
 	}
 
-	public static void deleteWebsite(HttpPrincipal httpPrincipal,
-		java.lang.String websiteId)
+	public static void deleteWebsite(HttpPrincipal httpPrincipal, long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = websiteId;
-
-			if (websiteId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(websiteId);
 			MethodWrapper methodWrapper = new MethodWrapper(WebsiteServiceUtil.class.getName(),
 					"deleteWebsite", new Object[] { paramObj0 });
 
@@ -139,16 +134,11 @@ public class WebsiteServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Website getWebsite(
-		HttpPrincipal httpPrincipal, java.lang.String websiteId)
+		HttpPrincipal httpPrincipal, long websiteId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = websiteId;
-
-			if (websiteId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(websiteId);
 			MethodWrapper methodWrapper = new MethodWrapper(WebsiteServiceUtil.class.getName(),
 					"getWebsite", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -223,17 +213,12 @@ public class WebsiteServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
-		HttpPrincipal httpPrincipal, java.lang.String websiteId,
-		java.lang.String url, java.lang.String typeId, boolean primary)
+		HttpPrincipal httpPrincipal, long websiteId, java.lang.String url,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = websiteId;
-
-			if (websiteId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(websiteId);
 			Object paramObj1 = url;
 
 			if (url == null) {

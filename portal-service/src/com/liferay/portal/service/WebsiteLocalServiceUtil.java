@@ -41,11 +41,17 @@ public class WebsiteLocalServiceUtil {
 			typeId, primary);
 	}
 
-	public static void deleteWebsite(java.lang.String websiteId)
+	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 		websiteLocalService.deleteWebsite(websiteId);
+	}
+
+	public static void deleteWebsites()
+		throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+		websiteLocalService.deleteWebsites();
 	}
 
 	public static void deleteWebsites(java.lang.String companyId,
@@ -55,13 +61,19 @@ public class WebsiteLocalServiceUtil {
 		websiteLocalService.deleteWebsites(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
 		return websiteLocalService.getWebsite(websiteId);
+	}
+
+	public static java.util.List getWebsites()
+		throws com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		return websiteLocalService.getWebsites();
 	}
 
 	public static java.util.List getWebsites(java.lang.String companyId,
@@ -73,8 +85,8 @@ public class WebsiteLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		long websiteId, java.lang.String url, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();

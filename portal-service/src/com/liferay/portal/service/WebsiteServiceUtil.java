@@ -40,15 +40,14 @@ public class WebsiteServiceUtil {
 			primary);
 	}
 
-	public static void deleteWebsite(java.lang.String websiteId)
+	public static void deleteWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WebsiteService websiteService = WebsiteServiceFactory.getService();
 		websiteService.deleteWebsite(websiteId);
 	}
 
-	public static com.liferay.portal.model.Website getWebsite(
-		java.lang.String websiteId)
+	public static com.liferay.portal.model.Website getWebsite(long websiteId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WebsiteService websiteService = WebsiteServiceFactory.getService();
@@ -66,8 +65,8 @@ public class WebsiteServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
-		java.lang.String websiteId, java.lang.String url,
-		java.lang.String typeId, boolean primary)
+		long websiteId, java.lang.String url, java.lang.String typeId,
+		boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WebsiteService websiteService = WebsiteServiceFactory.getService();

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -61,11 +62,11 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 		Date now = new Date();
 
 		validate(
-			null, user.getCompanyId(), className, classPK, url, typeId,
+			0, user.getCompanyId(), className, classPK, url, typeId,
 			primary);
 
-		String websiteId = Long.toString(CounterLocalServiceUtil.increment(
-			Website.class.getName()));
+		long websiteId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		Website website = WebsiteUtil.create(websiteId);
 
@@ -85,10 +86,14 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 		return website;
 	}
 
-	public void deleteWebsite(String websiteId)
+	public void deleteWebsite(long websiteId)
 		throws PortalException, SystemException {
 
 		WebsiteUtil.remove(websiteId);
+	}
+
+	public void deleteWebsites() throws SystemException {
+		WebsiteUtil.removeAll();
 	}
 
 	public void deleteWebsites(
@@ -98,10 +103,14 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 		WebsiteUtil.removeByC_C_C(companyId, className, classPK);
 	}
 
-	public Website getWebsite(String websiteId)
+	public Website getWebsite(long websiteId)
 		throws PortalException, SystemException {
 
 		return WebsiteUtil.findByPrimaryKey(websiteId);
+	}
+
+	public List getWebsites() throws SystemException {
+		return WebsiteUtil.findAll();
 	}
 
 	public List getWebsites(String companyId, String className, String classPK)
@@ -111,7 +120,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 	}
 
 	public Website updateWebsite(
-			String websiteId, String url, String typeId, boolean primary)
+			long websiteId, String url, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
 		validate(websiteId, null, null, null, url, typeId, primary);
@@ -129,7 +138,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 	}
 
 	protected void validate(
-			String websiteId, String companyId, String className,
+			long websiteId, String companyId, String className,
 			String classPK, String url, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -145,7 +154,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 			}
 		}
 
-		if (websiteId != null) {
+		if (websiteId > 0) {
 			Website website = WebsiteUtil.findByPrimaryKey(websiteId);
 
 			companyId = website.getCompanyId();
@@ -165,7 +174,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 	}
 
 	protected void validate(
-			String websiteId, String companyId, String className,
+			long websiteId, String companyId, String className,
 			String classPK, boolean primary)
 		throws PortalException, SystemException {
 
@@ -179,8 +188,8 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 			while (itr.hasNext()) {
 				Website website = (Website)itr.next();
 
-				if ((websiteId == null) ||
-					(!website.getWebsiteId().equals(websiteId))) {
+				if ((websiteId <= 0) ||
+					(website.getWebsiteId() != websiteId)) {
 
 					website.setPrimary(false);
 

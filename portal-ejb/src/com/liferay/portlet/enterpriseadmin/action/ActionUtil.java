@@ -248,11 +248,11 @@ public class ActionUtil {
 	}
 
 	public static void getWebsite(HttpServletRequest req) throws Exception {
-		String websiteId = ParamUtil.getString(req, "websiteId");
+		long websiteId = ParamUtil.getLong(req, "websiteId");
 
 		Website website = null;
 
-		if (Validator.isNotNull(websiteId)) {
+		if (websiteId > 0) {
 			website = WebsiteServiceUtil.getWebsite(websiteId);
 		}
 

@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class WebsitePersistence extends BasePersistence {
-	public Website create(String websiteId) {
+	public Website create(long websiteId) {
 		Website website = new WebsiteImpl();
 		website.setNew(true);
 		website.setPrimaryKey(websiteId);
@@ -57,14 +57,15 @@ public class WebsitePersistence extends BasePersistence {
 		return website;
 	}
 
-	public Website remove(String websiteId)
+	public Website remove(long websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Website website = (Website)session.get(WebsiteImpl.class, websiteId);
+			Website website = (Website)session.get(WebsiteImpl.class,
+					new Long(websiteId));
 
 			if (website == null) {
 				if (_log.isWarnEnabled()) {
@@ -139,7 +140,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website findByPrimaryKey(String websiteId)
+	public Website findByPrimaryKey(long websiteId)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = fetchByPrimaryKey(websiteId);
 
@@ -156,14 +157,13 @@ public class WebsitePersistence extends BasePersistence {
 		return website;
 	}
 
-	public Website fetchByPrimaryKey(String websiteId)
-		throws SystemException {
+	public Website fetchByPrimaryKey(long websiteId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Website)session.get(WebsiteImpl.class, websiteId);
+			return (Website)session.get(WebsiteImpl.class, new Long(websiteId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -298,7 +298,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website[] findByCompanyId_PrevAndNext(String websiteId,
+	public Website[] findByCompanyId_PrevAndNext(long websiteId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
@@ -478,7 +478,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website[] findByUserId_PrevAndNext(String websiteId, String userId,
+	public Website[] findByUserId_PrevAndNext(long websiteId, String userId,
 		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 		int count = countByUserId(userId);
@@ -690,7 +690,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website[] findByC_C_PrevAndNext(String websiteId, String companyId,
+	public Website[] findByC_C_PrevAndNext(long websiteId, String companyId,
 		String className, OrderByComparator obc)
 		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
@@ -951,9 +951,9 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website[] findByC_C_C_PrevAndNext(String websiteId,
-		String companyId, String className, String classPK,
-		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
+	public Website[] findByC_C_C_PrevAndNext(long websiteId, String companyId,
+		String className, String classPK, OrderByComparator obc)
+		throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
@@ -1243,7 +1243,7 @@ public class WebsitePersistence extends BasePersistence {
 		}
 	}
 
-	public Website[] findByC_C_C_P_PrevAndNext(String websiteId,
+	public Website[] findByC_C_C_P_PrevAndNext(long websiteId,
 		String companyId, String className, String classPK, boolean primary,
 		OrderByComparator obc) throws NoSuchWebsiteException, SystemException {
 		Website website = findByPrimaryKey(websiteId);
