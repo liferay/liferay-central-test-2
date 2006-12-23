@@ -655,23 +655,10 @@ public class IGFolderPersistence extends BasePersistence {
 	}
 
 	public void removeAll() throws SystemException {
-		Session session = null;
+		Iterator itr = findAll().iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("DELETE ");
-			query.append("FROM com.liferay.portlet.imagegallery.model.IGFolder");
-
-			Query q = session.createQuery(query.toString());
-			q.executeUpdate();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			remove((IGFolder)itr.next());
 		}
 	}
 

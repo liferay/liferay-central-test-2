@@ -420,24 +420,10 @@ public class ShoppingOrderItemPersistence extends BasePersistence {
 	}
 
 	public void removeAll() throws SystemException {
-		Session session = null;
+		Iterator itr = findAll().iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("DELETE ");
-			query.append(
-				"FROM com.liferay.portlet.shopping.model.ShoppingOrderItem");
-
-			Query q = session.createQuery(query.toString());
-			q.executeUpdate();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			remove((ShoppingOrderItem)itr.next());
 		}
 	}
 

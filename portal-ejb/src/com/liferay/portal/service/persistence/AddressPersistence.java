@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class AddressPersistence extends BasePersistence {
-	public Address create(String addressId) {
+	public Address create(long addressId) {
 		Address address = new AddressImpl();
 		address.setNew(true);
 		address.setPrimaryKey(addressId);
@@ -57,14 +57,15 @@ public class AddressPersistence extends BasePersistence {
 		return address;
 	}
 
-	public Address remove(String addressId)
+	public Address remove(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Address address = (Address)session.get(AddressImpl.class, addressId);
+			Address address = (Address)session.get(AddressImpl.class,
+					new Long(addressId));
 
 			if (address == null) {
 				if (_log.isWarnEnabled()) {
@@ -139,7 +140,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address findByPrimaryKey(String addressId)
+	public Address findByPrimaryKey(long addressId)
 		throws NoSuchAddressException, SystemException {
 		Address address = fetchByPrimaryKey(addressId);
 
@@ -156,14 +157,13 @@ public class AddressPersistence extends BasePersistence {
 		return address;
 	}
 
-	public Address fetchByPrimaryKey(String addressId)
-		throws SystemException {
+	public Address fetchByPrimaryKey(long addressId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Address)session.get(AddressImpl.class, addressId);
+			return (Address)session.get(AddressImpl.class, new Long(addressId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -298,7 +298,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByCompanyId_PrevAndNext(String addressId,
+	public Address[] findByCompanyId_PrevAndNext(long addressId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
@@ -478,7 +478,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByUserId_PrevAndNext(String addressId, String userId,
+	public Address[] findByUserId_PrevAndNext(long addressId, String userId,
 		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 		int count = countByUserId(userId);
@@ -690,7 +690,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByC_C_PrevAndNext(String addressId, String companyId,
+	public Address[] findByC_C_PrevAndNext(long addressId, String companyId,
 		String className, OrderByComparator obc)
 		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
@@ -951,9 +951,9 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByC_C_C_PrevAndNext(String addressId,
-		String companyId, String className, String classPK,
-		OrderByComparator obc) throws NoSuchAddressException, SystemException {
+	public Address[] findByC_C_C_PrevAndNext(long addressId, String companyId,
+		String className, String classPK, OrderByComparator obc)
+		throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
 		int count = countByC_C_C(companyId, className, classPK);
 		Session session = null;
@@ -1243,7 +1243,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByC_C_C_M_PrevAndNext(String addressId,
+	public Address[] findByC_C_C_M_PrevAndNext(long addressId,
 		String companyId, String className, String classPK, boolean mailing,
 		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
@@ -1539,7 +1539,7 @@ public class AddressPersistence extends BasePersistence {
 		}
 	}
 
-	public Address[] findByC_C_C_P_PrevAndNext(String addressId,
+	public Address[] findByC_C_C_P_PrevAndNext(long addressId,
 		String companyId, String className, String classPK, boolean primary,
 		OrderByComparator obc) throws NoSuchAddressException, SystemException {
 		Address address = findByPrimaryKey(addressId);
@@ -1724,23 +1724,10 @@ public class AddressPersistence extends BasePersistence {
 	}
 
 	public void removeAll() throws SystemException {
-		Session session = null;
+		Iterator itr = findAll().iterator();
 
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("DELETE ");
-			query.append("FROM com.liferay.portal.model.Address");
-
-			Query q = session.createQuery(query.toString());
-			q.executeUpdate();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
+		while (itr.hasNext()) {
+			remove((Address)itr.next());
 		}
 	}
 

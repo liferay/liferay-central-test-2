@@ -3201,20 +3201,9 @@ public class ServiceBuilder {
 		}
 
 		sb.append("public void removeAll() throws SystemException {");
-		sb.append("Session session = null;");
-		sb.append("try {");
-		sb.append("session = openSession();");
-		sb.append("StringBuffer query = new StringBuffer();");
-		sb.append("query.append(\"DELETE \");");
-		sb.append("query.append(\"FROM " + _packagePath + ".model." + entity.getName() + "\");");
-		sb.append("Query q = session.createQuery(query.toString());");
-		sb.append("q.executeUpdate();");
-		sb.append("}");
-		sb.append("catch (HibernateException he) {");
-		sb.append("throw new SystemException(he);");
-		sb.append("}");
-		sb.append("finally {");
-		sb.append("closeSession(session);");
+		sb.append("Iterator itr = findAll().iterator();");
+		sb.append("while (itr.hasNext()) {");
+		sb.append("remove((" + entity.getName() + ")itr.next());");
 		sb.append("}");
 		sb.append("}");
 
