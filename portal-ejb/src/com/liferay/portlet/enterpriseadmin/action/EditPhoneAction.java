@@ -30,7 +30,6 @@ import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -113,13 +112,13 @@ public class EditPhoneAction extends PortletAction {
 	}
 
 	protected void deletePhone(ActionRequest req) throws Exception {
-		String phoneId = ParamUtil.getString(req, "phoneId");
+		long phoneId = ParamUtil.getLong(req, "phoneId");
 
 		PhoneServiceUtil.deletePhone(phoneId);
 	}
 
 	protected void updatePhone(ActionRequest req) throws Exception {
-		String phoneId = ParamUtil.getString(req, "phoneId");
+		long phoneId = ParamUtil.getLong(req, "phoneId");
 
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
@@ -129,7 +128,7 @@ public class EditPhoneAction extends PortletAction {
 		String typeId = ParamUtil.getString(req, "typeId");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
-		if (Validator.isNull(phoneId)) {
+		if (phoneId <= 0) {
 
 			// Add phone
 

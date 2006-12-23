@@ -19,39 +19,51 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.liferay.portal.upgrade.v4_3_0;
 
-package com.liferay.portal.upgrade;
+import com.liferay.portal.model.Phone;
+import com.liferay.portal.service.PhoneLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
-import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
-import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
-import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class UpgradeProcess_4_3_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-
-		// Version 4.2.0 has build number 3500
-
-		return 3500;
-	}
+public class UpgradePhone extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeAddress());
-		upgrade(new UpgradeEmailAddress());
-		upgrade(new UpgradePhone());
+		try {
+			_upgradePhone();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);
+	private void _upgradePhone() throws Exception {
+		List phones = PhoneLocalServiceUtil.getPhones();
 
+		PhoneLocalServiceUtil.deletePhones();
+
+		for (int i = 0; i < phones.size(); i++) {
+			Phone phone = (Phone)phones.get(i);
+
+			PhoneLocalServiceUtil.addPhone(
+				phone.getUserId(), phone.getClassName(), phone.getClassPK(),
+				phone.getNumber(), phone.getExtension(), phone.getTypeId(),
+				phone.getPrimary());
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 }

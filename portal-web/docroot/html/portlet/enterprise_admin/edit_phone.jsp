@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Phone phone = (Phone)request.getAttribute(WebKeys.PHONE);
 
-String phoneId = BeanParamUtil.getString(phone, request, "phoneId");
+long phoneId = BeanParamUtil.getLong(phone, request, "phoneId");
 
 String className = BeanParamUtil.getString(phone, request, "className");
 String classPK = BeanParamUtil.getString(phone, request, "classPK");
@@ -47,7 +47,7 @@ String typeId = BeanParamUtil.getString(phone, request, "typeId");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_phone" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />savePhone(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />phoneId" type="hidden" value="<%= phoneId %>">
+<input name="<portlet:namespace />phoneId" type="hidden" value="<%= String.valueOf(phoneId) %>">
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>">
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>">
 

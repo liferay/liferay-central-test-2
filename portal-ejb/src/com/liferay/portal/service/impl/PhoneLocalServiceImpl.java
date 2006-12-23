@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
@@ -62,11 +63,11 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 		extension = PhoneNumberUtil.strip(extension);
 
 		validate(
-			null, user.getCompanyId(), className, classPK, number, typeId,
+			0, user.getCompanyId(), className, classPK, number, typeId,
 			primary);
 
-		String phoneId = Long.toString(CounterLocalServiceUtil.increment(
-			Phone.class.getName()));
+		long phoneId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		Phone phone = PhoneUtil.create(phoneId);
 
@@ -87,10 +88,14 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 		return phone;
 	}
 
-	public void deletePhone(String phoneId)
+	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 
 		PhoneUtil.remove(phoneId);
+	}
+
+	public void deletePhones() throws SystemException {
+		PhoneUtil.removeAll();
 	}
 
 	public void deletePhones(String companyId, String className, String classPK)
@@ -99,10 +104,14 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 		PhoneUtil.removeByC_C_C(companyId, className, classPK);
 	}
 
-	public Phone getPhone(String phoneId)
+	public Phone getPhone(long phoneId)
 		throws PortalException, SystemException {
 
 		return PhoneUtil.findByPrimaryKey(phoneId);
+	}
+
+	public List getPhones() throws SystemException {
+		return PhoneUtil.findAll();
 	}
 
 	public List getPhones(String companyId, String className, String classPK)
@@ -112,7 +121,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 	}
 
 	public Phone updatePhone(
-			String phoneId, String number, String extension, String typeId,
+			long phoneId, String number, String extension, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 
@@ -135,7 +144,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 	}
 
 	protected void validate(
-			String phoneId, String companyId, String className, String classPK,
+			long phoneId, String companyId, String className, String classPK,
 			String number, String typeId, boolean primary)
 		throws PortalException, SystemException {
 
@@ -143,7 +152,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			throw new PhoneNumberException();
 		}
 
-		if (phoneId != null) {
+		if (phoneId > 0) {
 			Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
 
 			companyId = phone.getCompanyId();
@@ -163,7 +172,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 	}
 
 	protected void validate(
-			String phoneId, String companyId, String className,
+			long phoneId, String companyId, String className,
 			String classPK, boolean primary)
 		throws PortalException, SystemException {
 
@@ -177,8 +186,8 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			while (itr.hasNext()) {
 				Phone phone = (Phone)itr.next();
 
-				if ((phoneId == null) ||
-					(!phone.getPhoneId().equals(phoneId))) {
+				if ((phoneId <= 0) ||
+					(phone.getPhoneId() != phoneId)) {
 
 					phone.setPrimary(false);
 

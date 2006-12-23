@@ -1,8 +1,10 @@
-alter_column_type Address addressId BIGINT null;
+alter_column_type Address addressId BIGINT not null;
 
 alter_column_type Counter currentId BIGINT not null;
 
-alter_column_type EmailAddress emailAddressId BIGINT null;
+alter_column_type EmailAddress emailAddressId BIGINT not null;
+
+alter_column_type Phone phoneId BIGINT not null;
 
 alter table Release_ add verified BOOLEAN null;
 update table Release_ set verified = false;

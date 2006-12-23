@@ -614,7 +614,7 @@
 
 		<!-- PK fields -->
 
-		<column name="phoneId" type="String" primary="true" />
+		<column name="phoneId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

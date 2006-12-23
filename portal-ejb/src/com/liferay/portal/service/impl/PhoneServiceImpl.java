@@ -54,7 +54,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 			primary);
 	}
 
-	public void deletePhone(String phoneId)
+	public void deletePhone(long phoneId)
 		throws PortalException, SystemException {
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
@@ -66,7 +66,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 		PhoneLocalServiceUtil.deletePhone(phoneId);
 	}
 
-	public Phone getPhone(String phoneId)
+	public Phone getPhone(long phoneId)
 		throws PortalException, SystemException {
 
 		Phone phone = PhoneUtil.findByPrimaryKey(phoneId);
@@ -89,7 +89,7 @@ public class PhoneServiceImpl extends PrincipalBean implements PhoneService {
 	}
 
 	public Phone updatePhone(
-			String phoneId, String number, String extension, String typeId,
+			long phoneId, String number, String extension, String typeId,
 			boolean primary)
 		throws PortalException, SystemException {
 

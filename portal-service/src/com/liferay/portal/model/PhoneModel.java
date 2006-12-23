@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface PhoneModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPhoneId();
+	public long getPhoneId();
 
-	public void setPhoneId(String phoneId);
+	public void setPhoneId(long phoneId);
 
 	public String getCompanyId();
 

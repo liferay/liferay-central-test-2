@@ -570,7 +570,7 @@ create table Permission_ (
 );
 
 create table Phone (
-	phoneId VARCHAR(75) not null primary key,
+	phoneId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

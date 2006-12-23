@@ -67,19 +67,19 @@ public class PhoneSoap implements Serializable {
 	public PhoneSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _phoneId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPhoneId(pk);
 	}
 
-	public String getPhoneId() {
+	public long getPhoneId() {
 		return _phoneId;
 	}
 
-	public void setPhoneId(String phoneId) {
+	public void setPhoneId(long phoneId) {
 		_phoneId = phoneId;
 	}
 
@@ -175,7 +175,7 @@ public class PhoneSoap implements Serializable {
 		_primary = primary;
 	}
 
-	private String _phoneId;
+	private long _phoneId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

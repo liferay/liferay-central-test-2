@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class PhonePersistence extends BasePersistence {
-	public Phone create(String phoneId) {
+	public Phone create(long phoneId) {
 		Phone phone = new PhoneImpl();
 		phone.setNew(true);
 		phone.setPrimaryKey(phoneId);
@@ -57,14 +57,14 @@ public class PhonePersistence extends BasePersistence {
 		return phone;
 	}
 
-	public Phone remove(String phoneId)
+	public Phone remove(long phoneId)
 		throws NoSuchPhoneException, SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			Phone phone = (Phone)session.get(PhoneImpl.class, phoneId);
+			Phone phone = (Phone)session.get(PhoneImpl.class, new Long(phoneId));
 
 			if (phone == null) {
 				if (_log.isWarnEnabled()) {
@@ -139,7 +139,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone findByPrimaryKey(String phoneId)
+	public Phone findByPrimaryKey(long phoneId)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = fetchByPrimaryKey(phoneId);
 
@@ -155,13 +155,13 @@ public class PhonePersistence extends BasePersistence {
 		return phone;
 	}
 
-	public Phone fetchByPrimaryKey(String phoneId) throws SystemException {
+	public Phone fetchByPrimaryKey(long phoneId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Phone)session.get(PhoneImpl.class, phoneId);
+			return (Phone)session.get(PhoneImpl.class, new Long(phoneId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -296,9 +296,8 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone[] findByCompanyId_PrevAndNext(String phoneId,
-		String companyId, OrderByComparator obc)
-		throws NoSuchPhoneException, SystemException {
+	public Phone[] findByCompanyId_PrevAndNext(long phoneId, String companyId,
+		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByCompanyId(companyId);
 		Session session = null;
@@ -476,7 +475,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone[] findByUserId_PrevAndNext(String phoneId, String userId,
+	public Phone[] findByUserId_PrevAndNext(long phoneId, String userId,
 		OrderByComparator obc) throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
 		int count = countByUserId(userId);
@@ -688,7 +687,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone[] findByC_C_PrevAndNext(String phoneId, String companyId,
+	public Phone[] findByC_C_PrevAndNext(long phoneId, String companyId,
 		String className, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
@@ -949,7 +948,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone[] findByC_C_C_PrevAndNext(String phoneId, String companyId,
+	public Phone[] findByC_C_C_PrevAndNext(long phoneId, String companyId,
 		String className, String classPK, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);
@@ -1241,7 +1240,7 @@ public class PhonePersistence extends BasePersistence {
 		}
 	}
 
-	public Phone[] findByC_C_C_P_PrevAndNext(String phoneId, String companyId,
+	public Phone[] findByC_C_C_P_PrevAndNext(long phoneId, String companyId,
 		String className, String classPK, boolean primary, OrderByComparator obc)
 		throws NoSuchPhoneException, SystemException {
 		Phone phone = findByPrimaryKey(phoneId);

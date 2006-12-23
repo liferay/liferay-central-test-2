@@ -35,11 +35,11 @@ public interface PhoneService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deletePhone(java.lang.String phoneId)
+	public void deletePhone(long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Phone getPhone(java.lang.String phoneId)
+	public com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -48,9 +48,9 @@ public interface PhoneService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public com.liferay.portal.model.Phone updatePhone(
-		java.lang.String phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Phone updatePhone(long phoneId,
+		java.lang.String number, java.lang.String extension,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 }

@@ -35,7 +35,7 @@ Phone phone = (Phone)row.getObject();
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_phone" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="phoneId" value="<%= phone.getPhoneId() %>" />
+	<portlet:param name="phoneId" value="<%= String.valueOf(phone.getPhoneId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -44,7 +44,7 @@ Phone phone = (Phone)row.getObject();
 	<portlet:param name="struts_action" value="/enterprise_admin/edit_phone" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= redirect %>" />
-	<portlet:param name="phoneId" value="<%= phone.getPhoneId() %>" />
+	<portlet:param name="phoneId" value="<%= String.valueOf(phone.getPhoneId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

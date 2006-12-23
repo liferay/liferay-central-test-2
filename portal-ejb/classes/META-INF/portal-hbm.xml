@@ -267,7 +267,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PhoneImpl" table="Phone">
 		<cache usage="read-write" />
-		<id name="phoneId" type="java.lang.String">
+		<id name="phoneId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />

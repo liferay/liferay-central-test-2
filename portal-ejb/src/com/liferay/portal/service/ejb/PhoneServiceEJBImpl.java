@@ -48,14 +48,14 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 			number, extension, typeId, primary);
 	}
 
-	public void deletePhone(java.lang.String phoneId)
+	public void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		PhoneServiceFactory.getTxImpl().deletePhone(phoneId);
 	}
 
-	public com.liferay.portal.model.Phone getPhone(java.lang.String phoneId)
+	public com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -72,9 +72,9 @@ public class PhoneServiceEJBImpl implements PhoneService, SessionBean {
 		return PhoneServiceFactory.getTxImpl().getPhones(className, classPK);
 	}
 
-	public com.liferay.portal.model.Phone updatePhone(
-		java.lang.String phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Phone updatePhone(long phoneId,
+		java.lang.String number, java.lang.String extension,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

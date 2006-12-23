@@ -265,7 +265,7 @@
 		<field name="resourceId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Phone">
-		<field name="phoneId" type="String" />
+		<field name="phoneId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />

@@ -41,15 +41,14 @@ public class PhoneServiceUtil {
 			typeId, primary);
 	}
 
-	public static void deletePhone(java.lang.String phoneId)
+	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();
 		phoneService.deletePhone(phoneId);
 	}
 
-	public static com.liferay.portal.model.Phone getPhone(
-		java.lang.String phoneId)
+	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();
@@ -66,9 +65,9 @@ public class PhoneServiceUtil {
 		return phoneService.getPhones(className, classPK);
 	}
 
-	public static com.liferay.portal.model.Phone updatePhone(
-		java.lang.String phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
+		java.lang.String number, java.lang.String extension,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PhoneService phoneService = PhoneServiceFactory.getService();

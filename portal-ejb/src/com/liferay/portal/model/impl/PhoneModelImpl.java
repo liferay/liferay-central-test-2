@@ -40,9 +40,6 @@ import java.util.Date;
 public class PhoneModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Phone"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PHONEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Phone.phoneId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Phone.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -73,27 +70,20 @@ public class PhoneModelImpl extends BaseModelImpl {
 	public PhoneModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _phoneId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPhoneId(pk);
 	}
 
-	public String getPhoneId() {
-		return GetterUtil.getString(_phoneId);
+	public long getPhoneId() {
+		return _phoneId;
 	}
 
-	public void setPhoneId(String phoneId) {
-		if (((phoneId == null) && (_phoneId != null)) ||
-				((phoneId != null) && (_phoneId == null)) ||
-				((phoneId != null) && (_phoneId != null) &&
-				!phoneId.equals(_phoneId))) {
-			if (!XSS_ALLOW_PHONEID) {
-				phoneId = XSSUtil.strip(phoneId);
-			}
-
+	public void setPhoneId(long phoneId) {
+		if (phoneId != _phoneId) {
 			_phoneId = phoneId;
 		}
 	}
@@ -322,9 +312,9 @@ public class PhoneModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = phone.getPrimaryKey();
+		long pk = phone.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -333,10 +323,10 @@ public class PhoneModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _phoneId;
+	private long _phoneId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

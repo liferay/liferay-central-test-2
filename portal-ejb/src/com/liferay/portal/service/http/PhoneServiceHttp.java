@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -109,17 +110,11 @@ public class PhoneServiceHttp {
 		}
 	}
 
-	public static void deletePhone(HttpPrincipal httpPrincipal,
-		java.lang.String phoneId)
+	public static void deletePhone(HttpPrincipal httpPrincipal, long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = phoneId;
-
-			if (phoneId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(phoneId);
 			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
 					"deletePhone", new Object[] { paramObj0 });
 
@@ -146,16 +141,11 @@ public class PhoneServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Phone getPhone(
-		HttpPrincipal httpPrincipal, java.lang.String phoneId)
+		HttpPrincipal httpPrincipal, long phoneId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = phoneId;
-
-			if (phoneId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(phoneId);
 			MethodWrapper methodWrapper = new MethodWrapper(PhoneServiceUtil.class.getName(),
 					"getPhone", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -230,18 +220,12 @@ public class PhoneServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(
-		HttpPrincipal httpPrincipal, java.lang.String phoneId,
-		java.lang.String number, java.lang.String extension,
-		java.lang.String typeId, boolean primary)
+		HttpPrincipal httpPrincipal, long phoneId, java.lang.String number,
+		java.lang.String extension, java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = phoneId;
-
-			if (phoneId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(phoneId);
 			Object paramObj1 = number;
 
 			if (number == null) {

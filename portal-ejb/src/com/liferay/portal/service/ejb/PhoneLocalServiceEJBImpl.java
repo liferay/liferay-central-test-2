@@ -46,10 +46,14 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 			classPK, number, extension, typeId, primary);
 	}
 
-	public void deletePhone(java.lang.String phoneId)
+	public void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalServiceFactory.getTxImpl().deletePhone(phoneId);
+	}
+
+	public void deletePhones() throws com.liferay.portal.SystemException {
+		PhoneLocalServiceFactory.getTxImpl().deletePhones();
 	}
 
 	public void deletePhones(java.lang.String companyId,
@@ -59,10 +63,14 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 			classPK);
 	}
 
-	public com.liferay.portal.model.Phone getPhone(java.lang.String phoneId)
+	public com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PhoneLocalServiceFactory.getTxImpl().getPhone(phoneId);
+	}
+
+	public java.util.List getPhones() throws com.liferay.portal.SystemException {
+		return PhoneLocalServiceFactory.getTxImpl().getPhones();
 	}
 
 	public java.util.List getPhones(java.lang.String companyId,
@@ -72,9 +80,9 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 			className, classPK);
 	}
 
-	public com.liferay.portal.model.Phone updatePhone(
-		java.lang.String phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+	public com.liferay.portal.model.Phone updatePhone(long phoneId,
+		java.lang.String number, java.lang.String extension,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return PhoneLocalServiceFactory.getTxImpl().updatePhone(phoneId,

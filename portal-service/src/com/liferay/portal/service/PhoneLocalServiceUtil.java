@@ -41,11 +41,16 @@ public class PhoneLocalServiceUtil {
 			extension, typeId, primary);
 	}
 
-	public static void deletePhone(java.lang.String phoneId)
+	public static void deletePhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 		phoneLocalService.deletePhone(phoneId);
+	}
+
+	public static void deletePhones() throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+		phoneLocalService.deletePhones();
 	}
 
 	public static void deletePhones(java.lang.String companyId,
@@ -55,13 +60,19 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.deletePhones(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Phone getPhone(
-		java.lang.String phoneId)
+	public static com.liferay.portal.model.Phone getPhone(long phoneId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
 		return phoneLocalService.getPhone(phoneId);
+	}
+
+	public static java.util.List getPhones()
+		throws com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		return phoneLocalService.getPhones();
 	}
 
 	public static java.util.List getPhones(java.lang.String companyId,
@@ -72,9 +83,9 @@ public class PhoneLocalServiceUtil {
 		return phoneLocalService.getPhones(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Phone updatePhone(
-		java.lang.String phoneId, java.lang.String number,
-		java.lang.String extension, java.lang.String typeId, boolean primary)
+	public static com.liferay.portal.model.Phone updatePhone(long phoneId,
+		java.lang.String number, java.lang.String extension,
+		java.lang.String typeId, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();

@@ -121,11 +121,11 @@ public class ActionUtil {
 	}
 
 	public static void getPhone(HttpServletRequest req) throws Exception {
-		String phoneId = ParamUtil.getString(req, "phoneId");
+		long phoneId = ParamUtil.getLong(req, "phoneId");
 
 		Phone phone = null;
 
-		if (Validator.isNotNull(phoneId)) {
+		if (phoneId > 0) {
 			phone = PhoneServiceUtil.getPhone(phoneId);
 		}
 
