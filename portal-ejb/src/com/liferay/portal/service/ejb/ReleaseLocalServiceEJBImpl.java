@@ -43,10 +43,10 @@ public class ReleaseLocalServiceEJBImpl implements ReleaseLocalService,
 		return ReleaseLocalServiceFactory.getTxImpl().getRelease();
 	}
 
-	public com.liferay.portal.model.Release updateRelease()
+	public com.liferay.portal.model.Release updateRelease(boolean verified)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return ReleaseLocalServiceFactory.getTxImpl().updateRelease();
+		return ReleaseLocalServiceFactory.getTxImpl().updateRelease(verified);
 	}
 
 	public void ejbCreate() throws CreateException {

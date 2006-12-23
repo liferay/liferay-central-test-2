@@ -122,6 +122,20 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getVerified() {
+		return _verified;
+	}
+
+	public boolean isVerified() {
+		return _verified;
+	}
+
+	public void setVerified(boolean verified) {
+		if (verified != _verified) {
+			_verified = verified;
+		}
+	}
+
 	public Object clone() {
 		ReleaseImpl clone = new ReleaseImpl();
 		clone.setReleaseId(getReleaseId());
@@ -129,6 +143,7 @@ public class ReleaseModelImpl extends BaseModelImpl {
 		clone.setModifiedDate(getModifiedDate());
 		clone.setBuildNumber(getBuildNumber());
 		clone.setBuildDate(getBuildDate());
+		clone.setVerified(getVerified());
 
 		return clone;
 	}
@@ -177,4 +192,5 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	private Date _modifiedDate;
 	private int _buildNumber;
 	private Date _buildDate;
+	private boolean _verified;
 }

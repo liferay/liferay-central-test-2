@@ -56,4 +56,10 @@ public interface ReleaseModel extends BaseModel {
 	public Date getBuildDate();
 
 	public void setBuildDate(Date buildDate);
+
+	public boolean getVerified();
+
+	public boolean isVerified();
+
+	public void setVerified(boolean verified);
 }

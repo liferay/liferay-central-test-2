@@ -285,6 +285,10 @@ public class JournalStructureLocalServiceImpl
 			new JournalStructurePK(companyId, groupId, structureId));
 	}
 
+	public List getStructures() throws SystemException {
+		return JournalStructureUtil.findAll();
+	}
+
 	public List getStructures(String groupId) throws SystemException {
 		return JournalStructureUtil.findByGroupId(groupId);
 	}

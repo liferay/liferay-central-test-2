@@ -309,6 +309,7 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="buildNumber" type="int" />
 		<field name="buildDate" type="Date" />
+		<field name="verified" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Resource">
 		<field name="resourceId" type="String">

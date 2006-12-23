@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
@@ -36,6 +37,8 @@ import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.ClusterPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
+import com.liferay.portal.verify.VerifyProcess;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.SimpleCachePool;
 
 import java.util.Date;
@@ -47,6 +50,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class StartupAction extends SimpleAction {
@@ -88,8 +92,9 @@ public class StartupAction extends SimpleAction {
 
 			// Upgrade
 
-			int buildNumber =
-				ReleaseLocalServiceUtil.getRelease().getBuildNumber();
+			Release release = ReleaseLocalServiceUtil.getRelease();
+
+			int buildNumber = release.getBuildNumber();
 
 			String[] upgradeProcesses =
 				PropsUtil.getArray(PropsUtil.UPGRADE_PROCESSES);
@@ -139,8 +144,6 @@ public class StartupAction extends SimpleAction {
 				}
 			}
 
-			ReleaseLocalServiceUtil.updateRelease();
-
 			// Enable database caching after upgrade
 
 			CacheRegistry.setActive(true);
@@ -150,6 +153,56 @@ public class StartupAction extends SimpleAction {
 			// Delete temporary images
 
 			_deleteTempImages();
+
+			// Verify
+
+			int verifyFrequency = GetterUtil.getInteger(
+				PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));
+			boolean verified = release.isVerified();
+
+			if (verifyFrequency == VerifyProcess.ALWAYS ||
+				(verifyFrequency == VerifyProcess.ONCE && !verified)) {
+
+				String[] verifyProcesses =
+					PropsUtil.getArray(PropsUtil.VERIFY_PROCESSES);
+
+				for (int i = 0; i < verifyProcesses.length; i++) {
+					if (_log.isDebugEnabled()) {
+						_log.debug("Initializing verification " +
+							verifyProcesses[i]);
+					}
+
+					try {
+						VerifyProcess verifyProcess =
+							(VerifyProcess)Class.forName(
+								verifyProcesses[i]).newInstance();
+
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Running verification " + verifyProcesses[i]);
+						}
+
+						verifyProcess.verify();
+
+						if (_log.isInfoEnabled()) {
+							_log.info(
+								"Finished verification " + verifyProcesses[i]);
+						}
+
+						verified = true;
+					}
+					catch (ClassNotFoundException cnfe) {
+						_log.error(verifyProcesses[i] + " cannot be found");
+					}
+					catch (InstantiationException ie) {
+						_log.error(verifyProcesses[i] + " cannot be initiated");
+					}
+				}
+			}
+
+			// Update release
+
+			ReleaseLocalServiceUtil.updateRelease(verified);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);

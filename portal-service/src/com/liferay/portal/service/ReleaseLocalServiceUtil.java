@@ -37,11 +37,12 @@ public class ReleaseLocalServiceUtil {
 		return releaseLocalService.getRelease();
 	}
 
-	public static com.liferay.portal.model.Release updateRelease()
+	public static com.liferay.portal.model.Release updateRelease(
+		boolean verified)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
-		return releaseLocalService.updateRelease();
+		return releaseLocalService.updateRelease(verified);
 	}
 }

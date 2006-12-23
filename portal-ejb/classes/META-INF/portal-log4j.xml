@@ -264,6 +264,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portal.verify">
+		<priority value="INFO" />
+	</category>
+
 	<category name="com.liferay.portal.webdav">
 		<priority value="ERROR" />
 	</category>

@@ -336,6 +336,10 @@ public class JournalTemplateLocalServiceImpl
 			new JournalTemplatePK(companyId, groupId, templateId));
 	}
 
+	public List getTemplates() throws SystemException {
+		return JournalTemplateUtil.findAll();
+	}
+
 	public List getTemplates(String groupId) throws SystemException {
 		return JournalTemplateUtil.findByGroupId(groupId);
 	}

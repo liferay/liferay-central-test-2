@@ -194,6 +194,13 @@ public class JournalTemplateLocalServiceUtil {
 			templateId);
 	}
 
+	public static java.util.List getTemplates()
+		throws com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		return journalTemplateLocalService.getTemplates();
+	}
+
 	public static java.util.List getTemplates(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();

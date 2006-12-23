@@ -319,6 +319,7 @@
 		<property name="modifiedDate" />
 		<property name="buildNumber" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="buildDate" />
+		<property name="verified" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.ResourceImpl" table="Resource_">
 		<cache usage="read-write" />

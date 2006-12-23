@@ -19,21 +19,25 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.liferay.portal.verify;
 
-package com.liferay.portal.service;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ReleaseLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyProcessSuite.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
-public interface ReleaseLocalService {
-	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+public class VerifyProcessSuite extends VerifyProcess {
 
-	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public void verify() throws VerifyException {
+		_log.info("Checking integrity");
+
+		verify(new VerifyJournal());
+	}
+
+	private static Log _log = LogFactory.getLog(VerifyProcessSuite.class);
+
 }

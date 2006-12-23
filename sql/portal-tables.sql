@@ -663,7 +663,8 @@ create table Release_ (
 	createDate DATE null,
 	modifiedDate DATE null,
 	buildNumber INTEGER,
-	buildDate DATE null
+	buildDate DATE null,
+	verified BOOLEAN
 );
 
 create table Resource_ (

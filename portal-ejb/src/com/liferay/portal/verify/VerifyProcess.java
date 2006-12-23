@@ -19,21 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.liferay.portal.service;
+package com.liferay.portal.verify;
 
 /**
- * <a href="ReleaseLocalService.java.html"><b><i>View Source</i></b></a>
+ * This abstract class should be extended for startup processes that verify the
+ * integrity of the database.  They can be added as part of
+ * <code>com.liferay.portal.verify.VerifyProcessSuite</code> or be executed
+ * independently by being set in the portal.properties file.  Each of these
+ * processes should not cause any problems if run multiple times.
  *
- * @author  Brian Wing Shun Chan
+ * <a href="VerifyProcess.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Alexander Chow
  *
  */
-public interface ReleaseLocalService {
-	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+public abstract class VerifyProcess {
 
-	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public static final int ALWAYS = -1;
+
+	public static final int NEVER = 0;
+
+	public static final int ONCE = 1;
+
+	public VerifyProcess() {
+	}
+
+	public abstract void verify() throws VerifyException;
+
+	public void verify(VerifyProcess verifyProcess)
+		throws VerifyException {
+
+		verifyProcess.verify();
+	}
+
 }

@@ -104,6 +104,9 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getStructures()
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getStructures(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 

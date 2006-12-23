@@ -73,16 +73,20 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			String companyId, String actionId, String resourceId)
 		throws PortalException, SystemException {
 
-		String permissionId = Long.toString(CounterLocalServiceUtil.increment(
-			Permission.class.getName()));
+		Permission permission = PermissionUtil.fetchByA_R(actionId, resourceId);
 
-		Permission permission = PermissionUtil.create(permissionId);
+		if (permission == null) {
+			String permissionId = Long.toString(
+				CounterLocalServiceUtil.increment(Permission.class.getName()));
 
-		permission.setCompanyId(companyId);
-		permission.setActionId(actionId);
-		permission.setResourceId(resourceId);
+			permission = PermissionUtil.create(permissionId);
 
-		PermissionUtil.update(permission);
+			permission.setCompanyId(companyId);
+			permission.setActionId(actionId);
+			permission.setResourceId(resourceId);
+
+			PermissionUtil.update(permission);
+		}
 
 		return permission;
 	}
@@ -165,12 +169,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		List permissions = new ArrayList();
 
 		for (int i = 0; i < actionIds.length; i++) {
-			Permission permission = PermissionUtil.fetchByA_R(
-				actionIds[i], resourceId);
-
-			if (permission == null) {
-				permission = addPermission(companyId, actionIds[i], resourceId);
-			}
+			Permission permission =
+				addPermission(companyId, actionIds[i], resourceId);
 
 			permissions.add(permission);
 		}

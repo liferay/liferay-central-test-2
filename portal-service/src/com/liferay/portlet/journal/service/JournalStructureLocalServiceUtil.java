@@ -155,6 +155,13 @@ public class JournalStructureLocalServiceUtil {
 			structureId);
 	}
 
+	public static java.util.List getStructures()
+		throws com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		return journalStructureLocalService.getStructures();
+	}
+
 	public static java.util.List getStructures(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();

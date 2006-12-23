@@ -61,12 +61,15 @@ public class ReleaseLocalServiceImpl implements ReleaseLocalService {
 		return release;
 	}
 
-	public Release updateRelease() throws PortalException, SystemException {
+	public Release updateRelease(boolean verified)
+		throws PortalException, SystemException {
+
 		Release release = getRelease();
 
 		release.setModifiedDate(new Date());
 		release.setBuildNumber(ReleaseInfo.getBuildNumber());
 		release.setBuildDate(ReleaseInfo.getBuildDate());
+		release.setVerified(verified);
 
 		ReleaseUtil.update(release);
 

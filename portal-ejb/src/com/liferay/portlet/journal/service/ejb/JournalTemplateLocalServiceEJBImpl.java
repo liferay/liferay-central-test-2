@@ -184,6 +184,11 @@ public class JournalTemplateLocalServiceEJBImpl
 			groupId, templateId);
 	}
 
+	public java.util.List getTemplates()
+		throws com.liferay.portal.SystemException {
+		return JournalTemplateLocalServiceFactory.getTxImpl().getTemplates();
+	}
+
 	public java.util.List getTemplates(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return JournalTemplateLocalServiceFactory.getTxImpl().getTemplates(groupId);

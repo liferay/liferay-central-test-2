@@ -73,6 +73,12 @@ public class PropsUtil {
 
 	public static final String UPGRADE_PROCESSES = "upgrade.processes";
 
+	// Verify
+
+	public static final String VERIFY_FREQUENCY = "verify.frequency";
+
+	public static final String VERIFY_PROCESSES = "verify.processes";
+
 	// Auto Deploy
 
 	public static final String AUTO_DEPLOY_ENABLED = "auto.deploy.enabled";

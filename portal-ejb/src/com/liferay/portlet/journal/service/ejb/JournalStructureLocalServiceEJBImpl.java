@@ -148,6 +148,11 @@ public class JournalStructureLocalServiceEJBImpl
 			groupId, structureId);
 	}
 
+	public java.util.List getStructures()
+		throws com.liferay.portal.SystemException {
+		return JournalStructureLocalServiceFactory.getTxImpl().getStructures();
+	}
+
 	public java.util.List getStructures(java.lang.String groupId)
 		throws com.liferay.portal.SystemException {
 		return JournalStructureLocalServiceFactory.getTxImpl().getStructures(groupId);

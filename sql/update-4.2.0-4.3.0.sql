@@ -2,6 +2,9 @@ alter_column_type Counter currentId BIGINT not null;
 
 alter_column_type EmailAddress emailAddressId BIGINT null;
 
+alter table Release_ add verified BOOLEAN null;
+update table Release_ set verified = false;
+
 create table SRFrameworkVersion (
 	frameworkVersionId INTEGER not null primary key,
 	groupId VARCHAR(75) not null,

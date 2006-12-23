@@ -20,20 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service;
+package com.liferay.portal.verify;
+
+import com.liferay.portal.PortalException;
 
 /**
- * <a href="ReleaseLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyException.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
-public interface ReleaseLocalService {
-	public com.liferay.portal.model.Release getRelease()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+public class VerifyException extends PortalException {
 
-	public com.liferay.portal.model.Release updateRelease(boolean verified)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
+	public VerifyException() {
+		super();
+	}
+
+	public VerifyException(String msg) {
+		super(msg);
+	}
+
+	public VerifyException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public VerifyException(Throwable cause) {
+		super(cause);
+	}
+
 }

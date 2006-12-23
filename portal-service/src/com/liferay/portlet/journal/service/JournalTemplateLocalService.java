@@ -125,6 +125,9 @@ public interface JournalTemplateLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getTemplates()
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getTemplates(java.lang.String groupId)
 		throws com.liferay.portal.SystemException;
 
