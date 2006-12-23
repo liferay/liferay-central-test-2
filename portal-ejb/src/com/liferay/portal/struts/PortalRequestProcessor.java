@@ -108,17 +108,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		_lastPaths.add(_PATH_PORTAL_LAYOUT);
 
-		for (int i = 0;; i++) {
-			String lastPath =
-				PropsUtil.get(PropsUtil.AUTH_FORWARD_LAST_PATH + i);
-
-			if (lastPath == null) {
-				break;
-			}
-			else {
-				_lastPaths.add(lastPath);
-			}
-		}
+		_addPaths(_lastPaths, PropsUtil.AUTH_FORWARD_LAST_PATH);
 
 		// auth.public.path.
 
@@ -135,17 +125,13 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_LOGIN);
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
+		
+		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATH);
 
-		for (int i = 0;; i++) {
-			String publicPath = PropsUtil.get(PropsUtil.AUTH_PUBLIC_PATH + i);
+		_trackerIgnorePaths = CollectionFactory.getHashSet();
+		
+		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATH);
 
-			if (publicPath == null) {
-				break;
-			}
-			else {
-				_publicPaths.add(publicPath);
-			}
-		}
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse res)
@@ -232,27 +218,15 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		UserTracker userTracker = (UserTracker)currentUsers.get(ses.getId());
 
 		if ((userTracker != null) &&
-			((path != null) &&
-				(!path.equals(_PATH_C)) &&
-				(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
-				(path.indexOf(_PATH_PORTAL_PROTECTED) == -1))) {
-
-			/*Map parameterMap = null;
-
-			if (req instanceof UploadServletRequest) {
-				UploadServletRequest uploadServletReq =
-					(UploadServletRequest)req;
-
-				parameterMap = uploadServletReq.getRequest().getParameterMap();
-			}
-			else {
-				parameterMap = req.getParameterMap();
-			}*/
+			(path != null) &&
+			(!path.equals(_PATH_C)) &&
+			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
+			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
+			(!_trackerIgnorePaths.contains(path))) {
 
 			StringBuffer fullPathSB = new StringBuffer();
 
 			fullPathSB.append(path);
-			//fullPathSB.append(Http.parameterMapToString(parameterMap));
 			fullPathSB.append(StringPool.QUESTION);
 			fullPathSB.append(req.getQueryString());
 
@@ -278,7 +252,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Last path
 
-		if ((path != null) && (_lastPaths.contains(path))) {
+		if ((path != null) && 
+			(_lastPaths.contains(path)) && 
+			(!_trackerIgnorePaths.contains(path))) {
+			
 			boolean saveLastPath = true;
 
 			// /login/view
@@ -746,6 +723,19 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
+	private void _addPaths(Set paths, String propPrefix) {
+		for (int i = 0;; i++) {
+			String path = PropsUtil.get(propPrefix + i);
+
+			if (path == null) {
+				break;
+			}
+			else {
+				paths.add(path);
+			}
+		}		
+	}
+	
 	private static String _PATH_C = "/c";
 
 	private static String _PATH_COMMON = "/common";
@@ -803,5 +793,6 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private Set _lastPaths;
 	private Set _publicPaths;
+	private Set _trackerIgnorePaths;
 
 }

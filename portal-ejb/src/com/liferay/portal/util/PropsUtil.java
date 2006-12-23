@@ -207,6 +207,8 @@ public class PropsUtil {
 
 	public static final String SESSION_TRACKER_PERSISTENCE_ENABLED = "session.tracker.persistence.enabled";
 
+	public static final String SESSION_TRACKER_IGNORE_PATH = "session.tracker.ignore.path";
+
 	// JAAS
 
 	public static final String PRINCIPAL_FINDER = "principal.finder";
