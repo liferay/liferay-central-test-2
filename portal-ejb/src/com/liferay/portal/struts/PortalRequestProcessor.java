@@ -125,13 +125,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		_publicPaths.add(_PATH_PORTAL_LOGIN);
 		_publicPaths.add(_PATH_PORTAL_RENDER_PORTLET);
 		_publicPaths.add(_PATH_PORTAL_TCK);
-		
+
 		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATH);
 
 		_trackerIgnorePaths = CollectionFactory.getHashSet();
-		
-		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATH);
 
+		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATH);
 	}
 
 	public void process(HttpServletRequest req, HttpServletResponse res)
@@ -217,8 +216,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		UserTracker userTracker = (UserTracker)currentUsers.get(ses.getId());
 
-		if ((userTracker != null) &&
-			(path != null) &&
+		if ((userTracker != null) && (path != null) &&
 			(!path.equals(_PATH_C)) &&
 			(path.indexOf(_PATH_J_SECURITY_CHECK) == -1) &&
 			(path.indexOf(_PATH_PORTAL_PROTECTED) == -1) &&
@@ -252,10 +250,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Last path
 
-		if ((path != null) && 
-			(_lastPaths.contains(path)) && 
+		if ((path != null) && (_lastPaths.contains(path)) &&
 			(!_trackerIgnorePaths.contains(path))) {
-			
+
 			boolean saveLastPath = true;
 
 			// /login/view
@@ -733,9 +730,9 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			else {
 				paths.add(path);
 			}
-		}		
+		}
 	}
-	
+
 	private static String _PATH_C = "/c";
 
 	private static String _PATH_COMMON = "/common";
