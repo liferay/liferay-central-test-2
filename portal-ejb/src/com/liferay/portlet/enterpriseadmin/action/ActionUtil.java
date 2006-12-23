@@ -70,11 +70,11 @@ public class ActionUtil {
 	}
 
 	public static void getAddress(HttpServletRequest req) throws Exception {
-		String addressId = ParamUtil.getString(req, "addressId");
+		long addressId = ParamUtil.getLong(req, "addressId");
 
 		Address address = null;
 
-		if (Validator.isNotNull(addressId)) {
+		if (addressId > 0) {
 			address = AddressServiceUtil.getAddress(addressId);
 		}
 

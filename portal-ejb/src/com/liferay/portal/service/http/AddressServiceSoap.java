@@ -57,8 +57,7 @@ public class AddressServiceSoap {
 		}
 	}
 
-	public static void deleteAddress(java.lang.String addressId)
-		throws RemoteException {
+	public static void deleteAddress(long addressId) throws RemoteException {
 		try {
 			AddressServiceUtil.deleteAddress(addressId);
 		}
@@ -70,7 +69,7 @@ public class AddressServiceSoap {
 	}
 
 	public static com.liferay.portal.model.AddressSoap getAddress(
-		java.lang.String addressId) throws RemoteException {
+		long addressId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Address returnValue = AddressServiceUtil.getAddress(addressId);
 
@@ -100,11 +99,11 @@ public class AddressServiceSoap {
 	}
 
 	public static com.liferay.portal.model.AddressSoap updateAddress(
-		java.lang.String addressId, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary) throws RemoteException {
+		long addressId, java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		java.lang.String regionId, java.lang.String countryId,
+		java.lang.String typeId, boolean mailing, boolean primary)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Address returnValue = AddressServiceUtil.updateAddress(addressId,
 					street1, street2, street3, city, zip, regionId, countryId,

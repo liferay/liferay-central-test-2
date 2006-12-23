@@ -18,7 +18,7 @@ create table Account_ (
 );
 
 create table Address (
-	addressId VARCHAR(75) not null primary key,
+	addressId INTEGER not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

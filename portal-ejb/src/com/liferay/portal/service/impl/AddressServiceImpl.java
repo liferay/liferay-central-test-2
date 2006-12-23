@@ -37,6 +37,7 @@ import java.util.List;
  * <a href="AddressServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class AddressServiceImpl
@@ -56,7 +57,7 @@ public class AddressServiceImpl
 			zip, regionId, countryId, typeId, mailing, primary);
 	}
 
-	public void deleteAddress(String addressId)
+	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
@@ -68,7 +69,7 @@ public class AddressServiceImpl
 		AddressLocalServiceUtil.deleteAddress(addressId);
 	}
 
-	public Address getAddress(String addressId)
+	public Address getAddress(long addressId)
 		throws PortalException, SystemException {
 
 		Address address = AddressUtil.findByPrimaryKey(addressId);
@@ -91,7 +92,7 @@ public class AddressServiceImpl
 	}
 
 	public Address updateAddress(
-			String addressId, String street1, String street2, String street3,
+			long addressId, String street1, String street2, String street3,
 			String city, String zip, String regionId, String countryId,
 			String typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {

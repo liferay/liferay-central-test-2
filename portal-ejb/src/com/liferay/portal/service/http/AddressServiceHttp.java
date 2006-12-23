@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -144,17 +145,11 @@ public class AddressServiceHttp {
 		}
 	}
 
-	public static void deleteAddress(HttpPrincipal httpPrincipal,
-		java.lang.String addressId)
+	public static void deleteAddress(HttpPrincipal httpPrincipal, long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = addressId;
-
-			if (addressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(addressId);
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"deleteAddress", new Object[] { paramObj0 });
 
@@ -181,16 +176,11 @@ public class AddressServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Address getAddress(
-		HttpPrincipal httpPrincipal, java.lang.String addressId)
+		HttpPrincipal httpPrincipal, long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = addressId;
-
-			if (addressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(addressId);
 			MethodWrapper methodWrapper = new MethodWrapper(AddressServiceUtil.class.getName(),
 					"getAddress", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -265,20 +255,15 @@ public class AddressServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
-		HttpPrincipal httpPrincipal, java.lang.String addressId,
-		java.lang.String street1, java.lang.String street2,
-		java.lang.String street3, java.lang.String city, java.lang.String zip,
-		java.lang.String regionId, java.lang.String countryId,
-		java.lang.String typeId, boolean mailing, boolean primary)
+		HttpPrincipal httpPrincipal, long addressId, java.lang.String street1,
+		java.lang.String street2, java.lang.String street3,
+		java.lang.String city, java.lang.String zip, java.lang.String regionId,
+		java.lang.String countryId, java.lang.String typeId, boolean mailing,
+		boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = addressId;
-
-			if (addressId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(addressId);
 			Object paramObj1 = street1;
 
 			if (street1 == null) {

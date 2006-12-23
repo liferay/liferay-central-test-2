@@ -73,19 +73,19 @@ public class AddressSoap implements Serializable {
 	public AddressSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _addressId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setAddressId(pk);
 	}
 
-	public String getAddressId() {
+	public long getAddressId() {
 		return _addressId;
 	}
 
-	public void setAddressId(String addressId) {
+	public void setAddressId(long addressId) {
 		_addressId = addressId;
 	}
 
@@ -233,7 +233,7 @@ public class AddressSoap implements Serializable {
 		_primary = primary;
 	}
 
-	private String _addressId;
+	private long _addressId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

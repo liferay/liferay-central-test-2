@@ -33,13 +33,13 @@ import java.util.Date;
  *
  */
 public interface AddressModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getAddressId();
+	public long getAddressId();
 
-	public void setAddressId(String addressId);
+	public void setAddressId(long addressId);
 
 	public String getCompanyId();
 

@@ -45,11 +45,17 @@ public class AddressLocalServiceUtil {
 			mailing, primary);
 	}
 
-	public static void deleteAddress(java.lang.String addressId)
+	public static void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 		addressLocalService.deleteAddress(addressId);
+	}
+
+	public static void deleteAddresses()
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+		addressLocalService.deleteAddresses();
 	}
 
 	public static void deleteAddresses(java.lang.String companyId,
@@ -59,13 +65,19 @@ public class AddressLocalServiceUtil {
 		addressLocalService.deleteAddresses(companyId, className, classPK);
 	}
 
-	public static com.liferay.portal.model.Address getAddress(
-		java.lang.String addressId)
+	public static com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
 		return addressLocalService.getAddress(addressId);
+	}
+
+	public static java.util.List getAddresses()
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.getAddresses();
 	}
 
 	public static java.util.List getAddresses(java.lang.String companyId,
@@ -77,11 +89,10 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
-		java.lang.String addressId, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+		long addressId, java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		java.lang.String regionId, java.lang.String countryId,
+		java.lang.String typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();

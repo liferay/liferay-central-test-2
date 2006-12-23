@@ -43,7 +43,7 @@
 		<default-hints>
 			<hint name="display-width">150</hint>
 		</default-hints>
-		<field name="addressId" type="String" />
+		<field name="addressId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />

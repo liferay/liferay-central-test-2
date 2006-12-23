@@ -39,29 +39,32 @@ public interface AddressLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteAddress(java.lang.String addressId)
+	public void deleteAddress(long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public void deleteAddresses() throws com.liferay.portal.SystemException;
 
 	public void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Address getAddress(
-		java.lang.String addressId)
+	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List getAddresses()
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portal.model.Address updateAddress(
-		java.lang.String addressId, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+	public com.liferay.portal.model.Address updateAddress(long addressId,
+		java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		java.lang.String regionId, java.lang.String countryId,
+		java.lang.String typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

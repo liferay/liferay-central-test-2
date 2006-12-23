@@ -34,7 +34,7 @@
 
 		<!-- PK fields -->
 
-		<column name="addressId" type="String" primary="true" />
+		<column name="addressId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

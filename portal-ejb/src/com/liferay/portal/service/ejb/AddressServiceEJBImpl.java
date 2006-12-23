@@ -52,15 +52,14 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 			mailing, primary);
 	}
 
-	public void deleteAddress(java.lang.String addressId)
+	public void deleteAddress(long addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		AddressServiceFactory.getTxImpl().deleteAddress(addressId);
 	}
 
-	public com.liferay.portal.model.Address getAddress(
-		java.lang.String addressId)
+	public com.liferay.portal.model.Address getAddress(long addressId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -77,12 +76,11 @@ public class AddressServiceEJBImpl implements AddressService, SessionBean {
 		return AddressServiceFactory.getTxImpl().getAddresses(className, classPK);
 	}
 
-	public com.liferay.portal.model.Address updateAddress(
-		java.lang.String addressId, java.lang.String street1,
-		java.lang.String street2, java.lang.String street3,
-		java.lang.String city, java.lang.String zip, java.lang.String regionId,
-		java.lang.String countryId, java.lang.String typeId, boolean mailing,
-		boolean primary)
+	public com.liferay.portal.model.Address updateAddress(long addressId,
+		java.lang.String street1, java.lang.String street2,
+		java.lang.String street3, java.lang.String city, java.lang.String zip,
+		java.lang.String regionId, java.lang.String countryId,
+		java.lang.String typeId, boolean mailing, boolean primary)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

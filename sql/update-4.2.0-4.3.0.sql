@@ -1,3 +1,5 @@
+alter_column_type Address addressId BIGINT null;
+
 alter_column_type Counter currentId BIGINT not null;
 
 alter_column_type EmailAddress emailAddressId BIGINT null;

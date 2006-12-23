@@ -40,9 +40,6 @@ import java.util.Date;
 public class AddressModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_ADDRESSID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Address.addressId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -88,27 +85,20 @@ public class AddressModelImpl extends BaseModelImpl {
 	public AddressModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _addressId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setAddressId(pk);
 	}
 
-	public String getAddressId() {
-		return GetterUtil.getString(_addressId);
+	public long getAddressId() {
+		return _addressId;
 	}
 
-	public void setAddressId(String addressId) {
-		if (((addressId == null) && (_addressId != null)) ||
-				((addressId != null) && (_addressId == null)) ||
-				((addressId != null) && (_addressId != null) &&
-				!addressId.equals(_addressId))) {
-			if (!XSS_ALLOW_ADDRESSID) {
-				addressId = XSSUtil.strip(addressId);
-			}
-
+	public void setAddressId(long addressId) {
+		if (addressId != _addressId) {
 			_addressId = addressId;
 		}
 	}
@@ -440,9 +430,9 @@ public class AddressModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = address.getPrimaryKey();
+		long pk = address.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -451,10 +441,10 @@ public class AddressModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _addressId;
+	private long _addressId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

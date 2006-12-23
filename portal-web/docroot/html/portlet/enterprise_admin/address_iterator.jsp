@@ -69,7 +69,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	Address address = (Address)results.get(i);
 
-	ResultRow row = new ResultRow(address, address.getPrimaryKey().toString(), i);
+	ResultRow row = new ResultRow(address, address.getPrimaryKey(), i);
 
 	// Street
 

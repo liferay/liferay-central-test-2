@@ -52,7 +52,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	EmailAddress emailAddress = (EmailAddress)results.get(i);
 
-	ResultRow row = new ResultRow(emailAddress, Long.toString(emailAddress.getPrimaryKey()), i);
+	ResultRow row = new ResultRow(emailAddress, emailAddress.getPrimaryKey(), i);
 
 	row.addText(emailAddress.getAddress());
 	row.addText(emailAddress.getType().getName());

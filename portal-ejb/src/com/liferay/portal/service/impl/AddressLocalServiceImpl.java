@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AddressCityException;
 import com.liferay.portal.AddressStreetException;
@@ -47,6 +48,7 @@ import java.util.List;
  * <a href="AddressLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class AddressLocalServiceImpl implements AddressLocalService {
@@ -62,11 +64,11 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		Date now = new Date();
 
 		validate(
-			null, user.getCompanyId(), className, classPK, street1, city, zip,
+			0, user.getCompanyId(), className, classPK, street1, city, zip,
 			regionId, countryId, typeId, mailing, primary);
 
-		String addressId = Long.toString(CounterLocalServiceUtil.increment(
-			Address.class.getName()));
+		long addressId = CounterLocalServiceUtil.increment(
+			Counter.class.getName());
 
 		Address address = AddressUtil.create(addressId);
 
@@ -93,10 +95,14 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		return address;
 	}
 
-	public void deleteAddress(String addressId)
+	public void deleteAddress(long addressId)
 		throws PortalException, SystemException {
 
 		AddressUtil.remove(addressId);
+	}
+
+	public void deleteAddresses() throws SystemException {
+		AddressUtil.removeAll();
 	}
 
 	public void deleteAddresses(
@@ -106,10 +112,14 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 		AddressUtil.removeByC_C_C(companyId, className, classPK);
 	}
 
-	public Address getAddress(String addressId)
+	public Address getAddress(long addressId)
 		throws PortalException, SystemException {
 
 		return AddressUtil.findByPrimaryKey(addressId);
+	}
+
+	public List getAddresses() throws SystemException {
+		return AddressUtil.findAll();
 	}
 
 	public List getAddresses(String companyId, String className, String classPK)
@@ -119,7 +129,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	}
 
 	public Address updateAddress(
-			String addressId, String street1, String street2, String street3,
+			long addressId, String street1, String street2, String street3,
 			String city, String zip, String regionId, String countryId,
 			String typeId, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
@@ -148,7 +158,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	}
 
 	protected void validate(
-			String addressId, String companyId, String className,
+			long addressId, String companyId, String className,
 			String classPK, String street1, String city, String zip,
 			String regionId, String countryId, String typeId, boolean mailing,
 			boolean primary)
@@ -175,7 +185,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			throw new SystemException(re);
 		}*/
 
-		if (addressId != null) {
+		if (addressId > 0) {
 			Address address = AddressUtil.findByPrimaryKey(addressId);
 
 			companyId = address.getCompanyId();
@@ -195,7 +205,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 	}
 
 	protected void validate(
-			String addressId, String companyId, String className,
+			long addressId, String companyId, String className,
 			String classPK, boolean mailing, boolean primary)
 		throws PortalException, SystemException {
 
@@ -209,8 +219,8 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			while (itr.hasNext()) {
 				Address address = (Address)itr.next();
 
-				if ((addressId == null) ||
-					(!address.getAddressId().equals(addressId))) {
+				if ((addressId <= 0) ||
+					(address.getAddressId() != addressId)) {
 
 					address.setMailing(false);
 
@@ -229,8 +239,8 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			while (itr.hasNext()) {
 				Address address = (Address)itr.next();
 
-				if ((addressId == null) ||
-					(!address.getAddressId().equals(addressId))) {
+				if ((addressId <= 0) ||
+					(address.getAddressId() != addressId)) {
 
 					address.setPrimary(false);
 

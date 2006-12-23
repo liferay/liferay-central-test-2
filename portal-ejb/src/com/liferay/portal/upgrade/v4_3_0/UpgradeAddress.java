@@ -19,37 +19,54 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+package com.liferay.portal.upgrade.v4_3_0;
 
-package com.liferay.portal.upgrade;
+import com.liferay.portal.model.Address;
+import com.liferay.portal.service.AddressLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.upgrade.UpgradeProcess;
 
-import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
-import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
+import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class UpgradeProcess_4_3_0 extends UpgradeProcess {
-
-	public int getThreshold() {
-
-		// Version 4.2.0 has build number 3500
-
-		return 3500;
-	}
+public class UpgradeAddress extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		upgrade(new UpgradeAddress());
-		upgrade(new UpgradeEmailAddress());
+		try {
+			_upgradeAddress();
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
 	}
 
-	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);
+	private void _upgradeAddress() throws Exception {
+		List addresses = AddressLocalServiceUtil.getAddresses();
 
+		AddressLocalServiceUtil.deleteAddresses();
+
+		for (int i = 0; i < addresses.size(); i++) {
+			Address address = (Address)addresses.get(i);
+
+			AddressLocalServiceUtil.addAddress(
+				address.getUserId(), address.getClassName(),
+				address.getClassPK(), address.getStreet1(),
+				address.getStreet2(), address.getStreet3(), address.getCity(),
+				address.getZip(), address.getRegionId(), address.getCountryId(),
+				address.getTypeId(), address.getMailing(),
+				address.getPrimary());
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 }

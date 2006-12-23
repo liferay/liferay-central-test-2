@@ -34,7 +34,6 @@ import com.liferay.portal.service.AddressServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -121,13 +120,13 @@ public class EditAddressAction extends PortletAction {
 	}
 
 	protected void deleteAddress(ActionRequest req) throws Exception {
-		String addressId = ParamUtil.getString(req, "addressId");
+		long addressId = ParamUtil.getLong(req, "addressId");
 
 		AddressServiceUtil.deleteAddress(addressId);
 	}
 
 	protected void updateAddress(ActionRequest req) throws Exception {
-		String addressId = ParamUtil.getString(req, "addressId");
+		long addressId = ParamUtil.getLong(req, "addressId");
 
 		String className = ParamUtil.getString(req, "className");
 		String classPK = ParamUtil.getString(req, "classPK");
@@ -143,7 +142,7 @@ public class EditAddressAction extends PortletAction {
 		boolean mailing = ParamUtil.getBoolean(req, "mailing");
 		boolean primary = ParamUtil.getBoolean(req, "primary");
 
-		if (Validator.isNull(addressId)) {
+		if (addressId <= 0) {
 
 			// Add address
 

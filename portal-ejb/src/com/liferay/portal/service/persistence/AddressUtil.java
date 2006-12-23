@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class AddressUtil {
-	public static com.liferay.portal.model.Address create(
-		java.lang.String addressId) {
+	public static com.liferay.portal.model.Address create(long addressId) {
 		return getPersistence().create(addressId);
 	}
 
-	public static com.liferay.portal.model.Address remove(
-		java.lang.String addressId)
+	public static com.liferay.portal.model.Address remove(long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address findByPrimaryKey(
-		java.lang.String addressId)
+		long addressId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
 		return getPersistence().findByPrimaryKey(addressId);
 	}
 
 	public static com.liferay.portal.model.Address fetchByPrimaryKey(
-		java.lang.String addressId) throws com.liferay.portal.SystemException {
+		long addressId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(addressId);
 	}
 
@@ -183,7 +181,7 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByCompanyId_PrevAndNext(
-		java.lang.String addressId, java.lang.String companyId,
+		long addressId, java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
@@ -224,7 +222,7 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByUserId_PrevAndNext(
-		java.lang.String addressId, java.lang.String userId,
+		long addressId, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
@@ -266,8 +264,7 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_PrevAndNext(
-		java.lang.String addressId, java.lang.String companyId,
-		java.lang.String className,
+		long addressId, java.lang.String companyId, java.lang.String className,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
@@ -317,8 +314,8 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_PrevAndNext(
-		java.lang.String addressId, java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK,
+		long addressId, java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
@@ -369,8 +366,8 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_M_PrevAndNext(
-		java.lang.String addressId, java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK, boolean mailing,
+		long addressId, java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK, boolean mailing,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
@@ -421,8 +418,8 @@ public class AddressUtil {
 	}
 
 	public static com.liferay.portal.model.Address[] findByC_C_C_P_PrevAndNext(
-		java.lang.String addressId, java.lang.String companyId,
-		java.lang.String className, java.lang.String classPK, boolean primary,
+		long addressId, java.lang.String companyId, java.lang.String className,
+		java.lang.String classPK, boolean primary,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchAddressException {
