@@ -71,6 +71,7 @@ import org.dom4j.io.SAXReader;
  *
  * @author  Brian Wing Shun Chan
  * @author  Charles May
+ * @author  Alexander Chow
  *
  */
 public class ServiceBuilder {
@@ -5339,10 +5340,12 @@ public class ServiceBuilder {
 					}
 					else if (colType.equals("int") ||
 							 colType.equals("Integer") ||
-							 colType.equalsIgnoreCase("long") ||
 							 colType.equalsIgnoreCase("short")) {
 
 						sb.append("INTEGER");
+					}
+					else if (colType.equalsIgnoreCase("long")) {
+						sb.append("BIGINT");
 					}
 					else if (colType.equals("String")) {
 						Map hints = ModelHintsUtil.getHints(_packagePath + ".model." + entity.getName(), colName);

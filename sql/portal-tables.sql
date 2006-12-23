@@ -18,7 +18,7 @@ create table Account_ (
 );
 
 create table Address (
-	addressId INTEGER not null primary key,
+	addressId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -219,7 +219,7 @@ create table DLFileRank (
 );
 
 create table DLFileShortcut (
-	fileShortcutId INTEGER not null primary key,
+	fileShortcutId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -257,7 +257,7 @@ create table DLFolder (
 );
 
 create table EmailAddress (
-	emailAddressId INTEGER not null primary key,
+	emailAddressId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -630,7 +630,7 @@ create table PortletPreferences (
 );
 
 create table RatingsEntry (
-	entryId INTEGER not null primary key,
+	entryId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -642,7 +642,7 @@ create table RatingsEntry (
 );
 
 create table RatingsStats (
-	statsId INTEGER not null primary key,
+	statsId BIGINT not null primary key,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	totalEntries INTEGER,

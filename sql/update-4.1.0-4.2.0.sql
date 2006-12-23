@@ -236,7 +236,7 @@ insert into Country (countryId, name, a2, a3, number_, idd_, active_) values ('2
 alter table DLFileEntry add extraSettings TEXT null;
 
 create table DLFileShortcut (
-	fileShortcutId INTEGER not null primary key,
+	fileShortcutId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -278,7 +278,7 @@ alter table LayoutSet add virtualHost VARCHAR(75) null;
 alter table MBThread add priority DOUBLE;
 
 create table RatingsEntry (
-	entryId INTEGER not null primary key,
+	entryId BIGINT not null primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -290,7 +290,7 @@ create table RatingsEntry (
 );
 
 create table RatingsStats (
-	statsId INTEGER not null primary key,
+	statsId BIGINT not null primary key,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	totalEntries INTEGER,
