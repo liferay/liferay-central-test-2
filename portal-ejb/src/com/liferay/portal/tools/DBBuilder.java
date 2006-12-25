@@ -352,12 +352,20 @@ public class DBBuilder {
 	private static String[] _buildColumnTypeTokens(String line) {
 		String[] words = StringUtil.split(line, " ");
 
+		String nullable = "";
+
 		if (words.length == 6) {
-			words[4] = "not null;";
+			nullable = "not null;";
+		}
+		else if (words.length == 5) {
+			nullable = words[4];
+		}
+		else if (words.length == 4) {
+			nullable = "not null;";
 		}
 
 		String[] template = {
-			words[1], words[2], "", words[3], words[4]
+			words[1], words[2], "", words[3], nullable
 		};
 
 		return template;
