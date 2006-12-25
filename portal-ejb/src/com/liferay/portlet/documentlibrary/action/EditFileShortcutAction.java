@@ -129,7 +129,7 @@ public class EditFileShortcutAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (fileShortcutId == 0) {
+		if (fileShortcutId <= 0) {
 
 			// Add file shortcut
 

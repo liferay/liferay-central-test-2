@@ -132,7 +132,7 @@ public class EditProductEntryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (productEntryId == 0) {
+		if (productEntryId <= 0) {
 
 			// Add product entry
 

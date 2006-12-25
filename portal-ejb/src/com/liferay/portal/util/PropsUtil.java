@@ -75,9 +75,9 @@ public class PropsUtil {
 
 	// Verify
 
-	public static final String VERIFY_FREQUENCY = "verify.frequency";
-
 	public static final String VERIFY_PROCESSES = "verify.processes";
+
+	public static final String VERIFY_FREQUENCY = "verify.frequency";
 
 	// Auto Deploy
 

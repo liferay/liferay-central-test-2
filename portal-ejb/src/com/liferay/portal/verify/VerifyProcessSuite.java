@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.verify;
 
 import org.apache.commons.logging.Log;
@@ -33,7 +34,7 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyProcessSuite extends VerifyProcess {
 
 	public void verify() throws VerifyException {
-		_log.info("Checking integrity");
+		_log.info("Verifying integrity");
 
 		verify(new VerifyJournal());
 	}

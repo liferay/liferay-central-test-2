@@ -94,7 +94,7 @@ public class EditCompanyLogoAction extends PortletAction {
 		File file = uploadReq.getFile("fileName");
 		byte[] bytes = FileUtil.getBytes(file);
 
-		if (bytes == null || bytes.length == 0) {
+		if ((bytes == null) || (bytes.length == 0)) {
 			throw new UploadException();
 		}
 

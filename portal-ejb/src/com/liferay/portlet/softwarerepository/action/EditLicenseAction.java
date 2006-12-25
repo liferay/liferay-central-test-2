@@ -119,7 +119,7 @@ public class EditLicenseAction extends PortletAction {
 		boolean active = ParamUtil.getBoolean(req, "active");
 		boolean recommended = ParamUtil.getBoolean(req, "recommended");
 
-		if (licenseId == 0) {
+		if (licenseId <= 0) {
 
 			// Add license
 

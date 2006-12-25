@@ -128,7 +128,7 @@ public class EditFrameworkVersionAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (frameworkVersionId == 0) {
+		if (frameworkVersionId <= 0) {
 
 			// Add framework version
 

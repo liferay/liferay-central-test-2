@@ -93,7 +93,7 @@ public class EditInstanceAction extends PortletAction {
 		long instanceId = ParamUtil.getLong(req, "instanceId");
 		long tokenId = ParamUtil.getLong(req, "tokenId");
 
-		if (tokenId == 0) {
+		if (tokenId <= 0) {
 			WorkflowInstanceServiceUtil.signalInstance(instanceId);
 		}
 		else {

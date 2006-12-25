@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.Website;
@@ -66,4 +67,5 @@ public class UpgradeWebsite extends UpgradeProcess {
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
+
 }

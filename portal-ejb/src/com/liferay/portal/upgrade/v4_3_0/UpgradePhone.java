@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.Phone;
@@ -32,7 +33,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradePhone.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
@@ -66,4 +67,5 @@ public class UpgradePhone extends UpgradeProcess {
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradePhone.class);
+
 }

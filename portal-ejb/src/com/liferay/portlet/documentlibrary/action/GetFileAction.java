@@ -111,7 +111,7 @@ public class GetFileAction extends PortletAction {
 		String companyId = themeDisplay.getCompanyId();
 		String userId = themeDisplay.getUserId();
 
-		if (fileShortcutId == 0) {
+		if (fileShortcutId <= 0) {
 			DLFileEntryPermission.check(
 				themeDisplay.getPermissionChecker(), folderId, name,
 				ActionKeys.VIEW);

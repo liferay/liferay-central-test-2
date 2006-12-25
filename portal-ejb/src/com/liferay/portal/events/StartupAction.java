@@ -160,16 +160,16 @@ public class StartupAction extends SimpleAction {
 				PropsUtil.get(PropsUtil.VERIFY_FREQUENCY));
 			boolean verified = release.isVerified();
 
-			if (verifyFrequency == VerifyProcess.ALWAYS ||
-				(verifyFrequency == VerifyProcess.ONCE && !verified)) {
+			if ((verifyFrequency == VerifyProcess.ALWAYS) ||
+				((verifyFrequency == VerifyProcess.ONCE) && !verified)) {
 
 				String[] verifyProcesses =
 					PropsUtil.getArray(PropsUtil.VERIFY_PROCESSES);
 
 				for (int i = 0; i < verifyProcesses.length; i++) {
 					if (_log.isDebugEnabled()) {
-						_log.debug("Initializing verification " +
-							verifyProcesses[i]);
+						_log.debug(
+							"Initializing verification " + verifyProcesses[i]);
 					}
 
 					try {

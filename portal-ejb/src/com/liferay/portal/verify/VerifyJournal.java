@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.verify;
 
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -43,23 +44,17 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyJournal extends VerifyProcess {
 
 	public void verify() throws VerifyException {
-		_log.info("Checking integrity");
+		_log.info("Verifying integrity");
 
 		try {
-			_checkJournalPermissions();
+			_verifyJournalPermissions();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	/**
-	 * Used to verify that all entries in the Journal portlet have permissions
-	 * configured for them.
-	 *
-	 * @throws Exception
-	 */
-	private void _checkJournalPermissions() throws Exception {
+	private void _verifyJournalPermissions() throws Exception {
 
 		// Structures
 
@@ -75,7 +70,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions checked for Journal Structures");
+			_log.debug("Permissions verified for Journal structures");
 		}
 
 		// Templates
@@ -92,7 +87,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions checked for Journal Templates");
+			_log.debug("Permissions verified for Journal templates");
 		}
 
 		// Articles
@@ -109,7 +104,7 @@ public class VerifyJournal extends VerifyProcess {
 		}
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Permissions checked for Journal Articles");
+			_log.debug("Permissions verified for Journal articles");
 		}
 	}
 

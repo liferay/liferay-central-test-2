@@ -134,7 +134,7 @@ public class EditProductVersionAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		if (productVersionId == 0) {
+		if (productVersionId <= 0) {
 
 			// Add product version
 

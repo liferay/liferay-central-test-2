@@ -176,7 +176,7 @@ public class EditUserPortraitAction extends PortletAction {
 
 		byte[] bytes = FileUtil.getBytes(uploadReq.getFile("fileName"));
 
-		if (bytes == null || bytes.length == 0) {
+		if ((bytes == null) || (bytes.length == 0)) {
 			throw new UploadException();
 		}
 
