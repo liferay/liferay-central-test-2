@@ -396,7 +396,7 @@
 		<antcall target="build-service-portlet-polls" />
 		<antcall target="build-service-portlet-ratings" />
 		<antcall target="build-service-portlet-shopping" />
-		<!--<antcall target="build-service-portlet-softwarerepository" />-->
+		<antcall target="build-service-portlet-softwarerepository" />
 		<antcall target="build-service-portlet-wiki" />
 		<antcall target="build-service-portlet-workflow" />
 	</target>
@@ -531,7 +531,7 @@
 		<antcall target="build-wsdd-portlet-polls" />
 		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
-		<!--<antcall target="build-wsdd-portlet-softwarerepository" />-->
+		<antcall target="build-wsdd-portlet-softwarerepository" />
 		<antcall target="build-wsdd-portlet-wiki" />
 		<antcall target="build-wsdd-portlet-workflow" />
 	</target>

@@ -155,6 +155,19 @@ create index IX_449A10B9 on Role_ (companyId);
 create index IX_ED284C69 on Role_ (companyId, className, classPK);
 create index IX_EBC931B8 on Role_ (companyId, name);
 
+create index IX_D3AA1BC9 on SRFrameworkVersion (companyId);
+create index IX_4369008B on SRFrameworkVersion (groupId);
+create index IX_2DB6DADE on SRFrameworkVersion (groupId, active_);
+
+create index IX_297FCFE1 on SRLicense (active_);
+create index IX_4DFB798A on SRLicense (active_, recommended);
+
+create index IX_78E10320 on SRProductEntry (companyId);
+create index IX_370FD1A2 on SRProductEntry (groupId);
+create index IX_93BA67DC on SRProductEntry (groupId, userId);
+
+create index IX_E31BA620 on SRProductVersion (productEntryId);
+
 create index IX_C28B41DC on ShoppingCart (groupId);
 create index IX_54101CC8 on ShoppingCart (userId);
 
