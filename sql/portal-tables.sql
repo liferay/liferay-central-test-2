@@ -18,7 +18,7 @@ create table Account_ (
 );
 
 create table Address (
-	addressId BIGINT not null primary key,
+	addressId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -219,7 +219,7 @@ create table DLFileRank (
 );
 
 create table DLFileShortcut (
-	fileShortcutId BIGINT not null primary key,
+	fileShortcutId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -233,7 +233,7 @@ create table DLFileShortcut (
 create table DLFileVersion (
 	folderId VARCHAR(75) not null,
 	name VARCHAR(100) not null,
-	version DOUBLE not null,
+	version DOUBLE,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -257,7 +257,7 @@ create table DLFolder (
 );
 
 create table EmailAddress (
-	emailAddressId BIGINT not null primary key,
+	emailAddressId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -343,7 +343,7 @@ create table JournalArticle (
 	companyId VARCHAR(75) not null,
 	groupId VARCHAR(75) not null,
 	articleId VARCHAR(75) not null,
-	version DOUBLE not null,
+	version DOUBLE,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
@@ -437,7 +437,7 @@ create table LayoutSet (
 );
 
 create table ListType (
-	listTypeId INTEGER not null primary key,
+	listTypeId INTEGER primary key,
 	name VARCHAR(75) null,
 	type_ VARCHAR(75) null
 );
@@ -570,7 +570,7 @@ create table Permission_ (
 );
 
 create table Phone (
-	phoneId BIGINT not null primary key,
+	phoneId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -630,7 +630,7 @@ create table PortletPreferences (
 );
 
 create table RatingsEntry (
-	entryId BIGINT not null primary key,
+	entryId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -642,7 +642,7 @@ create table RatingsEntry (
 );
 
 create table RatingsStats (
-	statsId BIGINT not null primary key,
+	statsId LONG primary key,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	totalEntries INTEGER,
@@ -693,7 +693,7 @@ create table Roles_Permissions (
 
 
 create table SRFrameworkVersion (
-	frameworkVersionId INTEGER not null primary key,
+	frameworkVersionId LONG primary key,
 	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
@@ -707,13 +707,13 @@ create table SRFrameworkVersion (
 );
 
 create table SRFrameworkVersions_SRProductVersions (
-	productVersionId INTEGER not null,
-	frameworkVersionId INTEGER not null,
+	productVersionId LONG,
+	frameworkVersionId LONG,
 	primary key (productVersionId, frameworkVersionId)
 );
 
 create table SRLicense (
-	licenseId INTEGER not null primary key,
+	licenseId LONG primary key,
 	name VARCHAR(75) null,
 	url VARCHAR(1024) null,
 	openSource BOOLEAN,
@@ -722,13 +722,13 @@ create table SRLicense (
 );
 
 create table SRLicenses_SRProductEntries (
-	productEntryId INTEGER not null,
-	licenseId INTEGER not null,
+	productEntryId LONG,
+	licenseId LONG,
 	primary key (productEntryId, licenseId)
 );
 
 create table SRProductEntry (
-	productEntryId INTEGER not null primary key,
+	productEntryId LONG primary key,
 	groupId VARCHAR(75) not null,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
@@ -745,13 +745,13 @@ create table SRProductEntry (
 );
 
 create table SRProductVersion (
-	productVersionId INTEGER not null primary key,
+	productVersionId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	productEntryId INTEGER,
+	productEntryId LONG,
 	version VARCHAR(75) null,
 	changeLog STRING null,
 	downloadPageURL VARCHAR(1024) null,
@@ -1027,7 +1027,7 @@ create table UserTrackerPath (
 );
 
 create table Website (
-	websiteId BIGINT not null primary key,
+	websiteId LONG primary key,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,
@@ -1056,7 +1056,7 @@ create table WikiNode (
 create table WikiPage (
 	nodeId VARCHAR(75) not null,
 	title VARCHAR(75) not null,
-	version DOUBLE not null,
+	version DOUBLE,
 	companyId VARCHAR(75) not null,
 	userId VARCHAR(75) not null,
 	userName VARCHAR(75) null,

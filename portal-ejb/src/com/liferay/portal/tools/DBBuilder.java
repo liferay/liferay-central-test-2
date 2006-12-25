@@ -1120,7 +1120,7 @@ public class DBBuilder {
 		"##", "TRUE", "FALSE",
 		"'01/01/1970'", "CURRENT_TIMESTAMP",
 		" BOOLEAN", " DATE", " DOUBLE",
-		" INTEGER", " BIGINT",
+		" INTEGER", " LONG",
 		" STRING", " TEXT", " VARCHAR",
 		" IDENTITY", "COMMIT_TRANSACTION"
 	};

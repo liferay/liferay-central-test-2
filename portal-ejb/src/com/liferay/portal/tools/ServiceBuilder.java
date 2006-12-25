@@ -5345,7 +5345,7 @@ public class ServiceBuilder {
 						sb.append("INTEGER");
 					}
 					else if (colType.equalsIgnoreCase("long")) {
-						sb.append("BIGINT");
+						sb.append("LONG");
 					}
 					else if (colType.equals("String")) {
 						Map hints = ModelHintsUtil.getHints(_packagePath + ".model." + entity.getName(), colName);
@@ -5378,7 +5378,9 @@ public class ServiceBuilder {
 						colName.equals("companyId") ||
 						colName.equals("userId")) {
 
-						sb.append(" not null");
+						if (!col.isPrimitiveType()) {
+							sb.append(" not null");
+						}
 
 						if (col.isPrimary() && !entity.hasCompoundPK()) {
 							sb.append(" primary key");
@@ -5424,7 +5426,7 @@ public class ServiceBuilder {
 				String newCreateTableString = sb.toString();
 
 				_createSQLTables(sqlFile, newCreateTableString, entity, true);
-				_createSQLTables(new File(sqlPath + "/update-4.1.0-4.2.0.sql"), newCreateTableString, entity, false);
+				_createSQLTables(new File(sqlPath + "/update-4.2.0-4.3.0.sql"), newCreateTableString, entity, false);
 			}
 		}
 	}
