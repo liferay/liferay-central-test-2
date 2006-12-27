@@ -418,6 +418,13 @@
 			<elseif>
 				<equals arg1="${app.server.type}" arg2="tomcat" />
 				<then>
+					<copy todir="${app.server.dir}/common/endorsed">
+						<fileset
+							dir="lib/development"
+							includes="jutf7.jar"
+						/>
+					</copy>
+
 					<copy todir="${app.server.lib.global.dir}">
 						<fileset
 							dir="lib/development"
