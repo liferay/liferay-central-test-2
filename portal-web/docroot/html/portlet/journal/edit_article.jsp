@@ -394,7 +394,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 	function <portlet:namespace />previewArticle() {
 		document.<portlet:namespace />fm.title.value = document.<portlet:namespace />fm.<portlet:namespace />title.value;
 		document.<portlet:namespace />fm.xml.value = <portlet:namespace />getArticleContent();
-		document.<portlet:namespace />fm.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&articleId=<%= Http.encodeURL(articleId) %>&version=<%= version %>&groupId=<%= Http.encodeURL(groupId) %>&languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value + "&templateId=" + getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />templateId);
+		document.<portlet:namespace />fm.action = "<%= themeDisplay.getPathMain() %>/journal/view_article_content?<%= Constants.CMD %>=<%= Constants.PREVIEW %>&groupId=<%= Http.encodeURL(groupId) %>&articleId=<%= Http.encodeURL(articleId) %>&version=<%= version %>&languageId=" + document.<portlet:namespace />fm.<portlet:namespace />languageId.value + "&templateId=" + getSelectedRadioValue(document.<portlet:namespace />fm.<portlet:namespace />templateId);
 		document.<portlet:namespace />fm.target = "_blank";
 		document.<portlet:namespace />fm.submit();
 		<portlet:namespace />resetForm();
