@@ -35,7 +35,7 @@ boolean editable = GetterUtil.getBoolean((String)request.getAttribute("liferay-p
 <c:if test="<%= themeDisplay.isSignedIn() && editable %>">
 	<script type="text/javascript">
 		QuickEdit.create("portlet-title-bar_<%= portletDisplay.getId() %>", {
-			dragId: "p_p_id_<%= portletDisplay.getId() %>_",
+			dragId: $("p_p_id_<%= portletDisplay.getId() %>_").isStatic == "no" ? "p_p_id_<%= portletDisplay.getId() %>_" : null,
 			onEdit:
 				function(input, textWidth) {
 					input.style.width = (textWidth) + "px";
