@@ -396,9 +396,9 @@ public class BBCodeUtil {
 	private static final String[] _HTML_TAGS = {
 		"<b>", "</b>", "<i>", "</i>", "<u>", "</u>", "<strike>", "</strike>",
 		"<img src='", "' />",
-		"<span style='text-align: left'>", "<span style='text-align: center'>",
-		"<span style='text-align: right'>", "<span style='text-indent: 10px'>",
-		"</span>", "</span>", "</span>", "</span>"
+		"<div style='text-align: left'>", "<div style='text-align: center'>",
+		"<div style='text-align: right'>", "<div style='margin-left: 15px'>",
+		"</div>", "</div>", "</div>", "</div>"
 	};
 
 	private static Log _log = LogFactory.getLog(BBCodeUtil.class);
