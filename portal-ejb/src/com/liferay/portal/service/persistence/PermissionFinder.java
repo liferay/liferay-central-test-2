@@ -495,7 +495,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByA_R(String actionId, String[] resourceIds)
+	public static List findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
 		Session session = null;
@@ -529,7 +529,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByG_R(String groupId, String resourceId)
+	public static List findByG_R(String groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -560,7 +560,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByU_R(String userId, String resourceId)
+	public static List findByU_R(String userId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -592,7 +592,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByO_G_R(
-			String organizationId, String groupId, String resourceId)
+			String organizationId, String groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -625,7 +625,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByU_A_R(
-			String userId, String[] actionIds, String resourceId)
+			String userId, String[] actionIds, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -703,7 +703,7 @@ public class PermissionFinder {
 		return sb.toString();
 	}
 
-	private static String _getResourceIds(String[] resourceIds) {
+	private static String _getResourceIds(long[] resourceIds) {
 		StringBuffer sb = new StringBuffer();
 
 		for (int i = 0; i < resourceIds.length; i++) {
@@ -748,9 +748,9 @@ public class PermissionFinder {
 		}
 	}
 
-	private static void _setResourceIds(QueryPos qPos, String[] resourceIds) {
+	private static void _setResourceIds(QueryPos qPos, long[] resourceIds) {
 		for (int i = 0; i < resourceIds.length; i++) {
-			String resourceId = resourceIds[i];
+			long resourceId = resourceIds[i];
 
 			qPos.add(resourceId);
 		}

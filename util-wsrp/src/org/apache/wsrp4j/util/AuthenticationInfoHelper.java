@@ -16,7 +16,7 @@
 
 package org.apache.wsrp4j.util;
 
-import javax.portlet.*;
+import javax.portlet.PortletRequest;
 
 public class AuthenticationInfoHelper {
 	/**

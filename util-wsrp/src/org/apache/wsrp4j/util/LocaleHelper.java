@@ -16,8 +16,8 @@
 
 package org.apache.wsrp4j.util;
 
-import java.util.Locale;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class LocaleHelper {
 	private final static String LOCALE_SEPARATOR = "-";

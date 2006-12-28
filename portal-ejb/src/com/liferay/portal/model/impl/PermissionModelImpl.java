@@ -37,17 +37,11 @@ import com.liferay.util.XSSUtil;
 public class PermissionModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Permission.permissionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.companyId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_ACTIONID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Permission.actionId"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_RESOURCEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Permission.resourceId"),
 			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PermissionModel"));
@@ -55,27 +49,20 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public PermissionModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _permissionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPermissionId(pk);
 	}
 
-	public String getPermissionId() {
-		return GetterUtil.getString(_permissionId);
+	public long getPermissionId() {
+		return _permissionId;
 	}
 
-	public void setPermissionId(String permissionId) {
-		if (((permissionId == null) && (_permissionId != null)) ||
-				((permissionId != null) && (_permissionId == null)) ||
-				((permissionId != null) && (_permissionId != null) &&
-				!permissionId.equals(_permissionId))) {
-			if (!XSS_ALLOW_PERMISSIONID) {
-				permissionId = XSSUtil.strip(permissionId);
-			}
-
+	public void setPermissionId(long permissionId) {
+		if (permissionId != _permissionId) {
 			_permissionId = permissionId;
 		}
 	}
@@ -114,19 +101,12 @@ public class PermissionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getResourceId() {
-		return GetterUtil.getString(_resourceId);
+	public long getResourceId() {
+		return _resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
-		if (((resourceId == null) && (_resourceId != null)) ||
-				((resourceId != null) && (_resourceId == null)) ||
-				((resourceId != null) && (_resourceId != null) &&
-				!resourceId.equals(_resourceId))) {
-			if (!XSS_ALLOW_RESOURCEID) {
-				resourceId = XSSUtil.strip(resourceId);
-			}
-
+	public void setResourceId(long resourceId) {
+		if (resourceId != _resourceId) {
 			_resourceId = resourceId;
 		}
 	}
@@ -147,9 +127,17 @@ public class PermissionModelImpl extends BaseModelImpl {
 		}
 
 		PermissionImpl permission = (PermissionImpl)obj;
-		String pk = permission.getPrimaryKey();
+		long pk = permission.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -166,9 +154,9 @@ public class PermissionModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = permission.getPrimaryKey();
+		long pk = permission.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -177,11 +165,11 @@ public class PermissionModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _permissionId;
+	private long _permissionId;
 	private String _companyId;
 	private String _actionId;
-	private String _resourceId;
+	private long _resourceId;
 }

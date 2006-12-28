@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.StackTraceUtil;
@@ -89,8 +90,7 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean hasGroupPermission(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String actionId,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -106,12 +106,7 @@ public class PermissionServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = resourceId;
-
-			if (resourceId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"hasGroupPermission",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
@@ -143,7 +138,7 @@ public class PermissionServiceHttp {
 
 	public static boolean hasUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
-		java.lang.String actionId, java.lang.String[] resourceIds,
+		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -169,7 +164,7 @@ public class PermissionServiceHttp {
 			Object paramObj3 = resourceIds;
 
 			if (resourceIds == null) {
-				paramObj3 = new NullWrapper("[Ljava.lang.String;");
+				paramObj3 = new NullWrapper("[J");
 			}
 
 			Object paramObj4 = permissionCheckerBag;
@@ -211,8 +206,7 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setGroupPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -228,12 +222,7 @@ public class PermissionServiceHttp {
 				paramObj1 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj2 = resourceId;
-
-			if (resourceId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setGroupPermissions",
 					new Object[] { paramObj0, paramObj1, paramObj2 });
@@ -262,8 +251,7 @@ public class PermissionServiceHttp {
 
 	public static void setGroupPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String className, java.lang.String classPK,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -291,12 +279,7 @@ public class PermissionServiceHttp {
 				paramObj3 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj4 = resourceId;
-
-			if (resourceId == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj4 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setGroupPermissions",
 					new Object[] {
@@ -327,7 +310,7 @@ public class PermissionServiceHttp {
 
 	public static void setOrgGroupPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String organizationId, java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -349,12 +332,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj3 = resourceId;
-
-			if (resourceId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setOrgGroupPermissions",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
@@ -461,7 +439,7 @@ public class PermissionServiceHttp {
 
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -483,12 +461,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj3 = resourceId;
-
-			if (resourceId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"setUserPermissions",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
@@ -667,7 +640,7 @@ public class PermissionServiceHttp {
 
 	public static void unsetUserPermissions(HttpPrincipal httpPrincipal,
 		java.lang.String userId, java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -689,12 +662,7 @@ public class PermissionServiceHttp {
 				paramObj2 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj3 = resourceId;
-
-			if (resourceId == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj3 = new LongWrapper(resourceId);
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),
 					"unsetUserPermissions",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });

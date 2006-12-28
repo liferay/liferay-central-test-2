@@ -325,7 +325,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				companyId, name, ResourceImpl.TYPE_CLASS,
 				ResourceImpl.SCOPE_INDIVIDUAL, primKey);
 
-			String resourceId = resource.getResourceId();
+			long resourceId = resource.getResourceId();
 
 			return PermissionServiceUtil.hasGroupPermission(
 				guestGroup.getGroupId(), actionId, resourceId);
@@ -356,7 +356,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		// Individual
 
-		String[] resourceIds = new String[3];
+		long[] resourceIds = new long[3];
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(

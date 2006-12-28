@@ -1628,7 +1628,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsPermission(String pk, String permissionPK)
+	public boolean containsPermission(String pk, long permissionPK)
 		throws SystemException {
 		try {
 			return containsPermission.contains(pk, permissionPK);
@@ -1647,7 +1647,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermission(String pk, String permissionPK)
+	public void addPermission(String pk, long permissionPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -1670,7 +1670,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void addPermissions(String pk, String[] permissionPKs)
+	public void addPermissions(String pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -1707,7 +1707,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermission(String pk, String permissionPK)
+	public void removePermission(String pk, long permissionPK)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -1730,7 +1730,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void removePermissions(String pk, String[] permissionPKs)
+	public void removePermissions(String pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -1757,7 +1757,7 @@ public class UserPersistence extends BasePersistence {
 		}
 	}
 
-	public void setPermissions(String pk, String[] permissionPKs)
+	public void setPermissions(String pk, long[] permissionPKs)
 		throws NoSuchUserException, 
 			com.liferay.portal.NoSuchPermissionException, SystemException {
 		try {
@@ -2457,7 +2457,7 @@ public class UserPersistence extends BasePersistence {
 		protected ContainsPermission(UserPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
@@ -2466,8 +2466,8 @@ public class UserPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String userId, String permissionId) {
-			List results = execute(new Object[] { userId, permissionId });
+		protected boolean contains(String userId, long permissionId) {
+			List results = execute(new Object[] { userId, new Long(permissionId) });
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -2487,13 +2487,13 @@ public class UserPersistence extends BasePersistence {
 				"INSERT INTO Users_Permissions (userId, permissionId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void add(String userId, String permissionId) {
+		protected void add(String userId, long permissionId) {
 			if (!_persistence.containsPermission.contains(userId, permissionId)) {
-				update(new Object[] { userId, permissionId });
+				update(new Object[] { userId, new Long(permissionId) });
 			}
 		}
 
@@ -2518,12 +2518,12 @@ public class UserPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE userId = ? AND permissionId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void remove(String userId, String permissionId) {
-			update(new Object[] { userId, permissionId });
+		protected void remove(String userId, long permissionId) {
+			update(new Object[] { userId, new Long(permissionId) });
 		}
 	}
 

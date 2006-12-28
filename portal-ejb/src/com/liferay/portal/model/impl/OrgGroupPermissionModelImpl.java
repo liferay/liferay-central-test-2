@@ -45,9 +45,6 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgGroupPermission.groupId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PERMISSIONID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.OrgGroupPermission.permissionId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermissionModel"));
 
@@ -98,19 +95,12 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getPermissionId() {
-		return GetterUtil.getString(_permissionId);
+	public long getPermissionId() {
+		return _permissionId;
 	}
 
-	public void setPermissionId(String permissionId) {
-		if (((permissionId == null) && (_permissionId != null)) ||
-				((permissionId != null) && (_permissionId == null)) ||
-				((permissionId != null) && (_permissionId != null) &&
-				!permissionId.equals(_permissionId))) {
-			if (!XSS_ALLOW_PERMISSIONID) {
-				permissionId = XSSUtil.strip(permissionId);
-			}
-
+	public void setPermissionId(long permissionId) {
+		if (permissionId != _permissionId) {
 			_permissionId = permissionId;
 		}
 	}
@@ -165,5 +155,5 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 
 	private String _organizationId;
 	private String _groupId;
-	private String _permissionId;
+	private long _permissionId;
 }

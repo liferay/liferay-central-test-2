@@ -16,10 +16,10 @@
 
 package org.apache.wsrp4j.consumer.driver;
 
-import org.apache.wsrp4j.consumer.PortletWindowSession;
-import org.apache.wsrp4j.consumer.PortletSession;
-
 import oasis.names.tc.wsrp.v1.types.MarkupContext;
+
+import org.apache.wsrp4j.consumer.PortletSession;
+import org.apache.wsrp4j.consumer.PortletWindowSession;
 
 public class GenericPortletWindowSessionImpl implements PortletWindowSession {
 	// the markup context we store between performBlockingInteraction and getMarkup calls

@@ -47,7 +47,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public boolean hasGroupPermission(java.lang.String groupId,
-		java.lang.String actionId, java.lang.String resourceId)
+		java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -58,7 +58,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 
 	public boolean hasUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String actionId,
-		java.lang.String[] resourceIds,
+		long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -69,7 +69,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void setGroupPermissions(java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -79,7 +79,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 
 	public void setGroupPermissions(java.lang.String className,
 		java.lang.String classPK, java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -88,8 +88,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void setOrgGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -109,8 +108,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void setUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -141,8 +139,7 @@ public class PermissionServiceEJBImpl implements PermissionService, SessionBean 
 	}
 
 	public void unsetUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId)
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

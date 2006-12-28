@@ -31,13 +31,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface PermissionModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getPermissionId();
+	public long getPermissionId();
 
-	public void setPermissionId(String permissionId);
+	public void setPermissionId(long permissionId);
 
 	public String getCompanyId();
 
@@ -47,7 +47,7 @@ public interface PermissionModel extends BaseModel {
 
 	public void setActionId(String actionId);
 
-	public String getResourceId();
+	public long getResourceId();
 
-	public void setResourceId(String resourceId);
+	public void setResourceId(long resourceId);
 }

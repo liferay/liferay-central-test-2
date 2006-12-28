@@ -27,8 +27,6 @@ import com.liferay.lock.service.LockService;
 import com.liferay.lock.util.LockPool;
 import com.liferay.portal.PortalException;
 
-import java.lang.Comparable;
-
 import java.util.Set;
 
 /**

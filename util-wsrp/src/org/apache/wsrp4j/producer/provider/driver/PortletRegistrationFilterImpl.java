@@ -20,15 +20,14 @@
 
 package org.apache.wsrp4j.producer.provider.driver;
 
-import java.util.Iterator;
 import java.util.HashMap;
-
-import org.apache.wsrp4j.producer.provider.PortletRegistrationFilter;
-import org.apache.wsrp4j.producer.provider.PortletRegistrationFilterWriter;
+import java.util.Iterator;
 
 import org.apache.wsrp4j.exception.WSRPException;
 import org.apache.wsrp4j.log.LogManager;
 import org.apache.wsrp4j.log.Logger;
+import org.apache.wsrp4j.producer.provider.PortletRegistrationFilter;
+import org.apache.wsrp4j.producer.provider.PortletRegistrationFilterWriter;
 
 /**
  * This class implements the interfaces PortletRegistrationFilter and

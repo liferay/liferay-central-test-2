@@ -59,7 +59,7 @@ public class PermissionServiceImpl
 	}
 
 	public boolean hasGroupPermission(
-			String groupId, String actionId, String resourceId)
+			String groupId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		return PermissionLocalServiceUtil.hasGroupPermission(
@@ -67,8 +67,8 @@ public class PermissionServiceImpl
 	}
 
 	public boolean hasUserPermissions(
-			String userId, String groupId, String actionId,
-			String[] resourceIds, PermissionCheckerBag permissionCheckerBag)
+			String userId, String groupId, String actionId,	long[] resourceIds,
+			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
 		return PermissionLocalServiceUtil.hasUserPermissions(
@@ -76,7 +76,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setGroupPermissions(
-			String groupId, String[] actionIds, String resourceId)
+			String groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -87,7 +87,7 @@ public class PermissionServiceImpl
 
 	public void setGroupPermissions(
 			String className, String classPK, String groupId,
-			String[] actionIds, String resourceId)
+			String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -98,7 +98,7 @@ public class PermissionServiceImpl
 
 	public void setOrgGroupPermissions(
 			String organizationId, String groupId, String[] actionIds,
-			String resourceId)
+			long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -122,7 +122,7 @@ public class PermissionServiceImpl
 
 	public void setUserPermissions(
 			String userId, String groupId, String[] actionIds,
-			String resourceId)
+			long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -158,7 +158,7 @@ public class PermissionServiceImpl
 
 	public void unsetUserPermissions(
 			String userId, String groupId, String[] actionIds,
-			String resourceId)
+			long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -169,7 +169,7 @@ public class PermissionServiceImpl
 
 	protected void checkPermission(
 			PermissionChecker permissionChecker, String groupId,
-			String resourceId)
+			long resourceId)
 		throws PortalException, SystemException {
 
 		Resource resource = ResourceLocalServiceUtil.getResource(resourceId);

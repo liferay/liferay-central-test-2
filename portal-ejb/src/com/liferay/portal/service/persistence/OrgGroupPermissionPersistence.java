@@ -181,8 +181,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByPermissionId(String permissionId)
-		throws SystemException {
+	public List findByPermissionId(long permissionId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -191,24 +190,14 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
-
-			if (permissionId == null) {
-				query.append("permissionId IS NULL");
-			}
-			else {
-				query.append("permissionId = ?");
-			}
-
+			query.append("permissionId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (permissionId != null) {
-				q.setString(queryPos++, permissionId);
-			}
+			q.setLong(queryPos++, permissionId);
 
 			return q.list();
 		}
@@ -220,12 +209,12 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByPermissionId(String permissionId, int begin, int end)
+	public List findByPermissionId(long permissionId, int begin, int end)
 		throws SystemException {
 		return findByPermissionId(permissionId, begin, end, null);
 	}
 
-	public List findByPermissionId(String permissionId, int begin, int end,
+	public List findByPermissionId(long permissionId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -235,14 +224,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
-
-			if (permissionId == null) {
-				query.append("permissionId IS NULL");
-			}
-			else {
-				query.append("permissionId = ?");
-			}
-
+			query.append("permissionId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -253,10 +235,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (permissionId != null) {
-				q.setString(queryPos++, permissionId);
-			}
+			q.setLong(queryPos++, permissionId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -268,7 +247,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public OrgGroupPermission findByPermissionId_First(String permissionId,
+	public OrgGroupPermission findByPermissionId_First(long permissionId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		List list = findByPermissionId(permissionId, 0, 1, obc);
@@ -286,7 +265,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public OrgGroupPermission findByPermissionId_Last(String permissionId,
+	public OrgGroupPermission findByPermissionId_Last(long permissionId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		int count = countByPermissionId(permissionId);
@@ -306,7 +285,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 	}
 
 	public OrgGroupPermission[] findByPermissionId_PrevAndNext(
-		OrgGroupPermissionPK orgGroupPermissionPK, String permissionId,
+		OrgGroupPermissionPK orgGroupPermissionPK, long permissionId,
 		OrderByComparator obc)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 		OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
@@ -319,14 +298,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
-
-			if (permissionId == null) {
-				query.append("permissionId IS NULL");
-			}
-			else {
-				query.append("permissionId = ?");
-			}
-
+			query.append("permissionId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -337,10 +309,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (permissionId != null) {
-				q.setString(queryPos++, permissionId);
-			}
+			q.setLong(queryPos++, permissionId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					orgGroupPermission);
@@ -394,7 +363,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByPermissionId(String permissionId)
+	public void removeByPermissionId(long permissionId)
 		throws SystemException {
 		Iterator itr = findByPermissionId(permissionId).iterator();
 
@@ -412,8 +381,7 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByPermissionId(String permissionId)
-		throws SystemException {
+	public int countByPermissionId(long permissionId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -423,24 +391,14 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
-
-			if (permissionId == null) {
-				query.append("permissionId IS NULL");
-			}
-			else {
-				query.append("permissionId = ?");
-			}
-
+			query.append("permissionId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (permissionId != null) {
-				q.setString(queryPos++, permissionId);
-			}
+			q.setLong(queryPos++, permissionId);
 
 			Iterator itr = q.list().iterator();
 

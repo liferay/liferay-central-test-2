@@ -290,7 +290,7 @@ create table Groups_Orgs (
 
 create table Groups_Permissions (
 	groupId  VARCHAR(75) not null,
-	permissionId VARCHAR(75) not null,
+	permissionId LONG not null,
 	primary key (groupId, permissionId)
 );
 
@@ -524,7 +524,7 @@ create table Organization_ (
 create table OrgGroupPermission (
 	organizationId VARCHAR(75) not null,
 	groupId VARCHAR(75) not null,
-	permissionId VARCHAR(75) not null,
+	permissionId LONG not null,
 	primary key (organizationId, groupId, permissionId)
 );
 
@@ -563,10 +563,10 @@ create table PasswordTracker (
 );
 
 create table Permission_ (
-	permissionId VARCHAR(75) not null primary key,
+	permissionId LONG primary key,
 	companyId VARCHAR(75) not null,
 	actionId VARCHAR(75) null,
-	resourceId VARCHAR(75) null
+	resourceId LONG
 );
 
 create table Phone (
@@ -668,7 +668,7 @@ create table Release_ (
 );
 
 create table Resource_ (
-	resourceId VARCHAR(25) not null primary key,
+	resourceId LONG primary key,
 	companyId VARCHAR(25) not null,
 	name VARCHAR(75) null,
 	typeId VARCHAR(15) null,
@@ -687,7 +687,7 @@ create table Role_ (
 
 create table Roles_Permissions (
 	roleId VARCHAR(75) not null,
-	permissionId VARCHAR(75) not null,
+	permissionId LONG not null,
 	primary key (roleId, permissionId)
 );
 
@@ -993,7 +993,7 @@ create table Users_Orgs (
 
 create table Users_Permissions (
 	userId VARCHAR(75) not null,
-	permissionId VARCHAR(75) not null,
+	permissionId LONG not null,
 	primary key (userId, permissionId)
 );
 

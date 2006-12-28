@@ -22,19 +22,18 @@
 
 package com.liferay.portal.service.http;
 
-import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.security.auth.HttpPrincipal;
-import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.kernel.util.ObjectValuePair;
-
 import java.io.EOFException;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-
 import java.net.HttpURLConnection;
 import java.net.URL;
+
+import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.portal.security.auth.PrincipalException;
 
 /**
  * <a href="TunnelUtil.java.html"><b><i>View Source</i></b></a>

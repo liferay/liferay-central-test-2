@@ -60,19 +60,19 @@ public class ResourceSoap implements Serializable {
 	public ResourceSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _resourceId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setResourceId(pk);
 	}
 
-	public String getResourceId() {
+	public long getResourceId() {
 		return _resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
+	public void setResourceId(long resourceId) {
 		_resourceId = resourceId;
 	}
 
@@ -116,7 +116,7 @@ public class ResourceSoap implements Serializable {
 		_primKey = primKey;
 	}
 
-	private String _resourceId;
+	private long _resourceId;
 	private String _companyId;
 	private String _name;
 	private String _typeId;

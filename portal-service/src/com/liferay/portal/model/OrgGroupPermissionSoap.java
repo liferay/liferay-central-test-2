@@ -85,15 +85,15 @@ public class OrgGroupPermissionSoap implements Serializable {
 		_groupId = groupId;
 	}
 
-	public String getPermissionId() {
+	public long getPermissionId() {
 		return _permissionId;
 	}
 
-	public void setPermissionId(String permissionId) {
+	public void setPermissionId(long permissionId) {
 		_permissionId = permissionId;
 	}
 
 	private String _organizationId;
 	private String _groupId;
-	private String _permissionId;
+	private long _permissionId;
 }

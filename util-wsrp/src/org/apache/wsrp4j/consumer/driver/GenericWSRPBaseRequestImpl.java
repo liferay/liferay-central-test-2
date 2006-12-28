@@ -16,11 +16,11 @@
 
 package org.apache.wsrp4j.consumer.driver;
 
+import oasis.names.tc.wsrp.v1.types.ClientData;
+
 import org.apache.wsrp4j.consumer.WSRPBaseRequest;
 import org.apache.wsrp4j.log.LogManager;
 import org.apache.wsrp4j.log.Logger;
-
-import oasis.names.tc.wsrp.v1.types.ClientData;
 
 public abstract class GenericWSRPBaseRequestImpl implements WSRPBaseRequest {
 

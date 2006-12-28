@@ -29,8 +29,6 @@ import com.liferay.lock.model.Lock;
 import com.liferay.lock.model.impl.LockImpl;
 import com.liferay.util.CollectionFactory;
 
-import java.lang.Comparable;
-
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.Map;

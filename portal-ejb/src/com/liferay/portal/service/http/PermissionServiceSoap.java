@@ -50,8 +50,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean hasGroupPermission(java.lang.String groupId,
-		java.lang.String actionId, java.lang.String resourceId)
-		throws RemoteException {
+		java.lang.String actionId, long resourceId) throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.hasGroupPermission(groupId,
 					actionId, resourceId);
@@ -67,7 +66,7 @@ public class PermissionServiceSoap {
 
 	public static boolean hasUserPermissions(java.lang.String userId,
 		java.lang.String groupId, java.lang.String actionId,
-		java.lang.String[] resourceIds,
+		long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws RemoteException {
 		try {
@@ -84,7 +83,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setGroupPermissions(java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setGroupPermissions(groupId, actionIds,
@@ -99,7 +98,7 @@ public class PermissionServiceSoap {
 
 	public static void setGroupPermissions(java.lang.String className,
 		java.lang.String classPK, java.lang.String groupId,
-		java.lang.String[] actionIds, java.lang.String resourceId)
+		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setGroupPermissions(className, classPK,
@@ -113,8 +112,8 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setOrgGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId) throws RemoteException {
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		throws RemoteException {
 		try {
 			PermissionServiceUtil.setOrgGroupPermissions(organizationId,
 				groupId, actionIds, resourceId);
@@ -143,8 +142,8 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId) throws RemoteException {
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		throws RemoteException {
 		try {
 			PermissionServiceUtil.setUserPermissions(userId, groupId,
 				actionIds, resourceId);
@@ -188,8 +187,8 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds,
-		java.lang.String resourceId) throws RemoteException {
+		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetUserPermissions(userId, groupId,
 				actionIds, resourceId);

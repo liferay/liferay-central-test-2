@@ -43,10 +43,9 @@ import oasis.names.tc.wsrp.v1.types.UnsupportedWindowStateFault;
 import org.apache.axis.AxisFault;
 import org.apache.axis.utils.XMLUtils;
 import org.apache.wsrp4j.log.Logger;
+import org.apache.wsrp4j.util.Constants;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
-
-import org.apache.wsrp4j.util.Constants;
 
 /**
  * Handles the throwing of exceptions. 

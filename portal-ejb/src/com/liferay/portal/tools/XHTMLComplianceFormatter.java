@@ -22,21 +22,20 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.FileUtil;
-import com.liferay.util.ListUtil;
-import com.liferay.util.StringUtil;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.tools.ant.DirectoryScanner;
+
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.FileUtil;
+import com.liferay.util.ListUtil;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="XHTMLComplianceFormatter.java.html"><b><i>View Source</i></b></a>

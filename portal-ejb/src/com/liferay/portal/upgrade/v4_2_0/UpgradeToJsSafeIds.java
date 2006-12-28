@@ -29,7 +29,8 @@ import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.*;
+import com.liferay.util.PropertiesUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.IOException;
@@ -38,7 +39,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
-import java.util.*;
+import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

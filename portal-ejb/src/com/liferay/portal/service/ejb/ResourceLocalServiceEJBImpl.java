@@ -102,7 +102,7 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void deleteResource(java.lang.String resourceId)
+	public void deleteResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().deleteResource(resourceId);
@@ -132,17 +132,25 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			typeId, scope, primKey);
 	}
 
+	public void deleteResources() throws com.liferay.portal.SystemException {
+		ResourceLocalServiceFactory.getTxImpl().deleteResources();
+	}
+
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().deleteResources(name);
 	}
 
-	public com.liferay.portal.model.Resource getResource(
-		java.lang.String resourceId)
+	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ResourceLocalServiceFactory.getTxImpl().getResource(resourceId);
+	}
+
+	public java.util.List getResources()
+		throws com.liferay.portal.SystemException {
+		return ResourceLocalServiceFactory.getTxImpl().getResources();
 	}
 
 	public com.liferay.portal.model.Resource getResource(

@@ -9,16 +9,27 @@ alter_column_type Counter currentId LONG;
 alter_column_type EmailAddress emailAddressId LONG;
 alter_column_type EmailAddress typeId INTEGER;
 
+alter_column_type Groups_Permissions permissionId LONG;
+
 alter_column_type ListType listTypeId INTEGER;
 
 alter_column_type Organization_ statusId INTEGER;
 
+alter_column_type OrgGroupPermission permissionId LONG;
+
 alter_column_type OrgLabor typeId INTEGER;
+
+alter_column_type Permission_ permissionId LONG;
+alter_column_type Permission_ resourceId LONG;
 
 alter_column_type Phone phoneId LONG;
 alter_column_type Phone typeId INTEGER;
 
 alter table Release_ add verified BOOLEAN;
+
+alter_column_type Resource_ resourceId LONG;
+
+alter_column_type Roles_Permissions permissionId LONG;
 
 create table SRFrameworkVersion (
 	frameworkVersionId LONG primary key,
@@ -86,6 +97,8 @@ create table SRProductVersion (
 	directDownloadURL VARCHAR(1024) null,
 	repoStoreArtifact BOOLEAN
 );
+
+alter_column_type Users_Permissions permissionId LONG;
 
 alter_column_type Website websiteId LONG;
 alter_column_type Website typeId INTEGER;

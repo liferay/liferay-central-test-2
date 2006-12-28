@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
@@ -53,9 +54,13 @@ import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
 
+import java.rmi.RemoteException;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -70,14 +75,14 @@ import org.apache.commons.logging.LogFactory;
 public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 	public Permission addPermission(
-			String companyId, String actionId, String resourceId)
+			String companyId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = PermissionUtil.fetchByA_R(actionId, resourceId);
 
 		if (permission == null) {
-			String permissionId = Long.toString(
-				CounterLocalServiceUtil.increment(Permission.class.getName()));
+			long permissionId =	CounterLocalServiceUtil.increment(
+				Counter.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
@@ -92,7 +97,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public List addPermissions(
-			String companyId, String name, String resourceId,
+			String companyId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -121,7 +126,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void addUserPermissions(
-			String userId, String[] actionIds, String resourceId)
+			String userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -148,14 +153,14 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return actions;
 	}
 
-	public List getGroupPermissions(String groupId, String resourceId)
+	public List getGroupPermissions(String groupId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByG_R(groupId, resourceId);
 	}
 
 	public List getOrgGroupPermissions(
-			String organizationId, String groupId, String resourceId)
+			String organizationId, String groupId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByO_G_R(
@@ -163,7 +168,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public List getPermissions(
-			String companyId, String[] actionIds, String resourceId)
+			String companyId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = new ArrayList();
@@ -178,14 +183,14 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return permissions;
 	}
 
-	public List getUserPermissions(String userId, String resourceId)
+	public List getUserPermissions(String userId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByU_R(userId, resourceId);
 	}
 
 	public boolean hasGroupPermission(
-			String groupId, String actionId, String resourceId)
+			String groupId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = null;
@@ -257,7 +262,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public boolean hasUserPermission(
-			String userId, String actionId, String resourceId)
+			String userId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = null;
@@ -279,7 +284,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 	public boolean hasUserPermissions(
 			String userId, String groupId, String actionId,
-			String[] resourceIds, PermissionCheckerBag permissionCheckerBag)
+			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
 		long start = 0;
@@ -307,7 +312,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		// Record logs with the first resource id
 
-		String resourceId = resourceIds[0];
+		long resourceId = resourceIds[0];
 
 		start = logHasUserPermissions(
 			userId, actionId, resourceId, start, block++);
@@ -358,8 +363,81 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return false;
 	}
 
+	public void renewPermissionIds()
+		throws PortalException, RemoteException, SystemException {
+
+		List permissions = PermissionUtil.findAll();
+
+		// Save old permissions and mappings
+
+		Map orgGroupMap = new HashMap(permissions.size());
+		Map groupMap = new HashMap(permissions.size());
+		Map roleMap = new HashMap(permissions.size());
+		Map userMap = new HashMap(permissions.size());
+
+		for (Iterator itr = permissions.iterator(); itr.hasNext(); ) {
+			Permission permission = (Permission)itr.next();
+
+			long permissionId = permission.getPermissionId();
+			Long wrappedPermissionId = new Long(permissionId);
+
+			groupMap.put(wrappedPermissionId,
+				PermissionUtil.getGroups(permissionId));
+			roleMap.put(wrappedPermissionId,
+				PermissionUtil.getRoles(permissionId));
+			userMap.put(wrappedPermissionId,
+				PermissionUtil.getUsers(permissionId));
+
+			orgGroupMap.put(wrappedPermissionId,
+				OrgGroupPermissionUtil.findByPermissionId(permissionId));
+
+			PermissionUtil.remove(permissionId);
+		}
+
+		// Insert new permissions and mappings
+
+		for (Iterator itr = permissions.iterator(); itr.hasNext(); ) {
+			Permission permission = (Permission)itr.next();
+
+			Long oldPermissionId = new Long(permission.getPermissionId());
+
+			long newPermissionId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
+
+			Permission newPermission = PermissionUtil.create(newPermissionId);
+			newPermission.setActionId(permission.getActionId());
+			newPermission.setCompanyId(permission.getCompanyId());
+			newPermission.setResourceId(permission.getResourceId());
+			PermissionUtil.update(newPermission);
+
+			PermissionUtil.addGroups(newPermissionId,
+				(List)groupMap.get(oldPermissionId));
+			PermissionUtil.addRoles(newPermissionId,
+				(List)roleMap.get(oldPermissionId));
+			PermissionUtil.addUsers(newPermissionId,
+				(List)userMap.get(oldPermissionId));
+
+			List orgGroupList = (List)orgGroupMap.get(oldPermissionId);
+			for (Iterator itr2 = orgGroupList.iterator(); itr2.hasNext(); ) {
+				OrgGroupPermission oldOrgGroupPermission =
+					(OrgGroupPermission)itr2;
+
+				OrgGroupPermission newOrgGroupPermission =
+					OrgGroupPermissionUtil.create(new OrgGroupPermissionPK());
+
+				newOrgGroupPermission.setGroupId(
+					oldOrgGroupPermission.getGroupId());
+				newOrgGroupPermission.setOrganizationId(
+					oldOrgGroupPermission.getOrganizationId());
+				newOrgGroupPermission.setPermissionId(newPermissionId);
+
+				OrgGroupPermissionUtil.update(newOrgGroupPermission);
+			}
+		}
+	}
+
 	public void setGroupPermissions(
-			String groupId, String[] actionIds, String resourceId)
+			String groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -381,7 +459,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 	public void setGroupPermissions(
 			String className, String classPK, String groupId,
-			String[] actionIds, String resourceId)
+			String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		String associatedGroupId = null;
@@ -406,7 +484,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 	public void setOrgGroupPermissions(
 			String organizationId, String groupId, String[] actionIds,
-			String resourceId)
+			long resourceId)
 		throws PortalException, SystemException {
 
 		Organization organization =
@@ -476,8 +554,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 				actionId, resource.getResourceId());
 		}
 		catch (NoSuchPermissionException nspe) {
-			String permissionId = Long.toString(
-				CounterLocalServiceUtil.increment(Permission.class.getName()));
+			long permissionId =	CounterLocalServiceUtil.increment(
+				Counter.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
@@ -492,7 +570,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void setUserPermissions(
-			String userId, String[] actionIds, String resourceId)
+			String userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		User user = UserUtil.findByPrimaryKey(userId);
@@ -550,13 +628,27 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void unsetUserPermissions(
-			String userId, String[] actionIds, String resourceId)
+			String userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		List permissions = PermissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);
 
 		UserUtil.removePermissions(userId, permissions);
+	}
+
+	public void updateResourceId(long oldResourceId, long newResourceId)
+		throws PortalException, SystemException {
+
+		List permissions = PermissionUtil.findByResourceId(oldResourceId);
+
+		for (int i = 0; i < permissions.size(); i++) {
+			Permission permission = (Permission)permissions.get(i);
+
+			permission.setResourceId(newResourceId);
+
+			PermissionUtil.update(permission);
+		}
 	}
 
 	protected boolean checkOrgGroupPermission(
@@ -617,7 +709,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_1(
-			String userId, String actionId, String resourceId, List permissions,
+			String userId, String actionId, long resourceId, List permissions,
 			List groups, long start, int block)
 		throws PortalException, SystemException {
 
@@ -669,7 +761,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_2(
-			String userId, String actionId, String resourceId, List permissions,
+			String userId, String actionId, long resourceId, List permissions,
 			List groups, long start, int block)
 		throws PortalException, SystemException {
 
@@ -689,7 +781,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_3(
-			String userId, String actionId, String resourceId, List permissions,
+			String userId, String actionId, long resourceId, List permissions,
 			List groups, List roles, long start, int block)
 		throws PortalException, SystemException {
 
@@ -734,7 +826,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_4(
-			String userId, String actionId, String resourceId, List permissions,
+			String userId, String actionId, long resourceId, List permissions,
 			List groups, List roles, long start, int block)
 		throws PortalException, SystemException {
 
@@ -754,7 +846,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected long logHasUserPermissions(
-		String userId, String actionId, String resourceId, long start,
+		String userId, String actionId, long resourceId, long start,
 		int block) {
 
 		if (!_log.isDebugEnabled()) {

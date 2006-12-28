@@ -99,7 +99,7 @@ public class ResourceLocalServiceUtil {
 			addGuestPermissions);
 	}
 
-	public static void deleteResource(java.lang.String resourceId)
+	public static void deleteResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
@@ -134,6 +134,12 @@ public class ResourceLocalServiceUtil {
 			primKey);
 	}
 
+	public static void deleteResources()
+		throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+		resourceLocalService.deleteResources();
+	}
+
 	public static void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -141,13 +147,19 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.deleteResources(name);
 	}
 
-	public static com.liferay.portal.model.Resource getResource(
-		java.lang.String resourceId)
+	public static com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
 		return resourceLocalService.getResource(resourceId);
+	}
+
+	public static java.util.List getResources()
+		throws com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getResources();
 	}
 
 	public static com.liferay.portal.model.Resource getResource(

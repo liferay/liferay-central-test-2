@@ -258,12 +258,12 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.PermissionImpl" table="Permission_">
 		<cache usage="read-write" />
-		<id name="permissionId" type="java.lang.String">
+		<id name="permissionId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="actionId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="resourceId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="resourceId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.PhoneImpl" table="Phone">
 		<cache usage="read-write" />
@@ -323,7 +323,7 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.ResourceImpl" table="Resource_">
 		<cache usage="read-write" />
-		<id name="resourceId" type="java.lang.String">
+		<id name="resourceId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />

@@ -151,7 +151,7 @@ public class EditPermissionsAction extends PortletAction {
 	protected void updateGroupPermissions(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String resourceId = ParamUtil.getString(req, "resourceId");
+		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String groupId = ParamUtil.getString(req, "groupId");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "groupIdActionIds"));
@@ -176,7 +176,7 @@ public class EditPermissionsAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String resourceId = ParamUtil.getString(req, "resourceId");
+		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String organizationId = ParamUtil.getString(
 			req, "organizationIdsPosValue");
 		String[] actionIds = StringUtil.split(
@@ -200,7 +200,7 @@ public class EditPermissionsAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-		String resourceId = ParamUtil.getString(req, "resourceId");
+		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String userGroupId = ParamUtil.getString(
 			req, "userGroupIdsPosValue");
 		String[] actionIds = StringUtil.split(
@@ -215,7 +215,7 @@ public class EditPermissionsAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		String resourceId = ParamUtil.getString(req, "resourceId");
+		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));

@@ -31,13 +31,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface ResourceModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getResourceId();
+	public long getResourceId();
 
-	public void setResourceId(String resourceId);
+	public void setResourceId(long resourceId);
 
 	public String getCompanyId();
 

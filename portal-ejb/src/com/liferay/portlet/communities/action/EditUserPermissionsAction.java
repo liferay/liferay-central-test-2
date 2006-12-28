@@ -104,7 +104,7 @@ public class EditUserPermissionsAction extends PortletAction {
 
 	protected void updateUserPermissions(ActionRequest req) throws Exception {
 		String groupId = ParamUtil.getString(req, "groupId");
-		String resourceId = ParamUtil.getString(req, "resourceId");
+		long resourceId = ParamUtil.getLong(req, "resourceId");
 		String userId = ParamUtil.getString(req, "userIdsPosValue");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "userIdActionIds"));

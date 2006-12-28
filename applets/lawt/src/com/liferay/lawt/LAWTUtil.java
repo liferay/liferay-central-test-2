@@ -22,7 +22,9 @@
 
 package com.liferay.lawt;
 
-import java.awt.*;
+import java.awt.Component;
+import java.awt.Image;
+import java.awt.MediaTracker;
 
 /**
  * <a href="LAWTUtil.java.html"><b><i>View Source</i></b></a>

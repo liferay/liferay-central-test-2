@@ -491,7 +491,7 @@
 
 		<column name="organizationId" type="String" primary="true" />
 		<column name="groupId" type="String" primary="true" />
-		<column name="permissionId" type="String" primary="true" />
+		<column name="permissionId" type="long" primary="true" />
 
 		<!-- Finder methods -->
 
@@ -583,7 +583,7 @@
 
 		<!-- PK fields -->
 
-		<column name="permissionId" type="String" primary="true" />
+		<column name="permissionId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -592,7 +592,7 @@
 		<!-- Other fields -->
 
 		<column name="actionId" type="String" />
-		<column name="resourceId" type="String" />
+		<column name="resourceId" type="long" />
 
 		<!-- Relationships -->
 
@@ -763,7 +763,7 @@
 
 		<!-- PK fields -->
 
-		<column name="resourceId" type="String" primary="true" />
+		<column name="resourceId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 

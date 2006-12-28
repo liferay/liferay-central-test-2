@@ -17,8 +17,8 @@
 package org.apache.wsrp4j.producer.provider;
 
 import oasis.names.tc.wsrp.v1.types.BlockingInteractionResponse;
-import oasis.names.tc.wsrp.v1.types.MarkupResponse;
 import oasis.names.tc.wsrp.v1.types.GetMarkup;
+import oasis.names.tc.wsrp.v1.types.MarkupResponse;
 import oasis.names.tc.wsrp.v1.types.PerformBlockingInteraction;
 
 import org.apache.wsrp4j.exception.WSRPException;

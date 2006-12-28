@@ -25,8 +25,6 @@ package com.liferay.lock.service;
 import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 
-import java.lang.Comparable;
-
 import java.rmi.RemoteException;
 
 import java.util.Set;

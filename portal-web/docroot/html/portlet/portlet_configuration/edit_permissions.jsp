@@ -210,7 +210,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
 <input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>">
+<input name="<portlet:namespace />resourceId" type="hidden" value="<%= String.valueOf(resource.getResourceId()) %>">
 
 <c:choose>
 	<c:when test="<%= Validator.isNull(modelResource) %>">
@@ -304,7 +304,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				Map userParams = new HashMap();
 
 				if (tabs3.equals("current")) {
-					userParams.put("permission", resource.getResourceId());
+					userParams.put("permission", String.valueOf(resource.getResourceId()));
 				}
 				else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
 					String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
@@ -483,7 +483,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				Map organizationParams = new HashMap();
 
 				if (tabs3.equals("current")) {
-					organizationParams.put("permissionsResourceId", resource.getResourceId());
+					organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
 					organizationParams.put("permissionsGroupId", groupId);
 				}
 
@@ -714,7 +714,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				Map userGroupParams = new HashMap();
 
 				if (tabs3.equals("current")) {
-					userGroupParams.put("permissionsResourceId", resource.getResourceId());
+					userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));
 				}
 
 				int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);

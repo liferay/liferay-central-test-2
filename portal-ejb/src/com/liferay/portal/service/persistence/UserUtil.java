@@ -592,8 +592,7 @@ public class UserUtil {
 	}
 
 	public static boolean containsPermission(java.lang.String pk,
-		java.lang.String permissionPK)
-		throws com.liferay.portal.SystemException {
+		long permissionPK) throws com.liferay.portal.SystemException {
 		return getPersistence().containsPermission(pk, permissionPK);
 	}
 
@@ -602,8 +601,7 @@ public class UserUtil {
 		return getPersistence().containsPermissions(pk);
 	}
 
-	public static void addPermission(java.lang.String pk,
-		java.lang.String permissionPK)
+	public static void addPermission(java.lang.String pk, long permissionPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -618,8 +616,7 @@ public class UserUtil {
 		getPersistence().addPermission(pk, permission);
 	}
 
-	public static void addPermissions(java.lang.String pk,
-		java.lang.String[] permissionPKs)
+	public static void addPermissions(java.lang.String pk, long[] permissionPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -640,8 +637,7 @@ public class UserUtil {
 		getPersistence().clearPermissions(pk);
 	}
 
-	public static void removePermission(java.lang.String pk,
-		java.lang.String permissionPK)
+	public static void removePermission(java.lang.String pk, long permissionPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -657,7 +653,7 @@ public class UserUtil {
 	}
 
 	public static void removePermissions(java.lang.String pk,
-		java.lang.String[] permissionPKs)
+		long[] permissionPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {
@@ -672,8 +668,7 @@ public class UserUtil {
 		getPersistence().removePermissions(pk, permissions);
 	}
 
-	public static void setPermissions(java.lang.String pk,
-		java.lang.String[] permissionPKs)
+	public static void setPermissions(java.lang.String pk, long[] permissionPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchPermissionException, 
 			com.liferay.portal.NoSuchUserException {

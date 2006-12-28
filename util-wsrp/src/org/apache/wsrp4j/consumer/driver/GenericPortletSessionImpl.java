@@ -20,12 +20,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.apache.wsrp4j.consumer.PortletWindowSession;
+import oasis.names.tc.wsrp.v1.types.SessionContext;
+
 import org.apache.wsrp4j.consumer.PortletSession;
+import org.apache.wsrp4j.consumer.PortletWindowSession;
 import org.apache.wsrp4j.log.LogManager;
 import org.apache.wsrp4j.log.Logger;
-
-import oasis.names.tc.wsrp.v1.types.SessionContext;
 
 public abstract class GenericPortletSessionImpl implements PortletSession {
 	// the session context passed from the producer to store

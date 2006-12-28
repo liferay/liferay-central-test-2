@@ -24,8 +24,6 @@ package com.liferay.lock.model.impl;
 
 import com.liferay.lock.model.Lock;
 
-import java.lang.Comparable;
-
 import java.util.Date;
 
 /**

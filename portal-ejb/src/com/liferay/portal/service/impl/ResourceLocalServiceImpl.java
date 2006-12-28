@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -153,8 +154,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			companyId, name, typeId, scope, primKey);
 
 		if (resource == null) {
-			String resourceId = Long.toString(CounterLocalServiceUtil.increment(
-				Resource.class.getName()));
+			long resourceId = CounterLocalServiceUtil.increment(
+				Counter.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
 			resource.setCompanyId(companyId);
@@ -293,7 +294,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
-	public void deleteResource(String resourceId)
+	public void deleteResource(long resourceId)
 		throws PortalException, SystemException {
 
 		try {
@@ -352,6 +353,10 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
+	public void deleteResources() throws SystemException {
+		ResourceUtil.removeAll();
+	}
+
 	public void deleteResources(String name)
 		throws PortalException, SystemException {
 
@@ -364,10 +369,14 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
-	public Resource getResource(String resourceId)
+	public Resource getResource(long resourceId)
 		throws PortalException, SystemException {
 
 		return ResourceUtil.findByPrimaryKey(resourceId);
+	}
+
+	public List getResources() throws SystemException {
+		return ResourceUtil.findAll();
 	}
 
 	public Resource getResource(
@@ -380,7 +389,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected void addCommunityPermissions(
-			String groupId, String name, String resourceId,
+			String groupId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -422,7 +431,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected void addGuestPermissions(
-			String groupId, String name, String resourceId,
+			String groupId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -448,7 +457,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected void addModelPermissions(
-			String groupId, String resourceId, String[] actionIds)
+			String groupId, long resourceId, String[] actionIds)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -460,7 +469,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected long logAddCommunityPermissions(
-		String groupId, String name, String resourceId, long start, int block) {
+		String groupId, String name, long resourceId, long start, int block) {
 
 		if (!_log.isDebugEnabled()) {
 			return 0;

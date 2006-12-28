@@ -17,8 +17,6 @@
 package org.apache.wsrp4j.producer.provider;
 
 import org.apache.wsrp4j.exception.WSRPException;
-import org.apache.wsrp4j.producer.provider.PortletRegistrationFilterWriter;
-import org.apache.wsrp4j.producer.provider.PortletRegistrationFilter;
 
 public interface Provider {
 

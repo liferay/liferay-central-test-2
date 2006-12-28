@@ -226,7 +226,7 @@
 	<model name="com.liferay.portal.model.OrgGroupPermission">
 		<field name="organizationId" type="String" />
 		<field name="groupId" type="String" />
-		<field name="permissionId" type="String" />
+		<field name="permissionId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.OrgGroupRole">
 		<field name="organizationId" type="String" />
@@ -259,10 +259,10 @@
 		<field name="password" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.Permission">
-		<field name="permissionId" type="String" />
+		<field name="permissionId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="actionId" type="String" />
-		<field name="resourceId" type="String" />
+		<field name="resourceId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.Phone">
 		<field name="phoneId" type="long" />
@@ -312,7 +312,7 @@
 		<field name="verified" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Resource">
-		<field name="resourceId" type="String">
+		<field name="resourceId" type="long">
 			<hint name="max-length">25</hint>
 		</field>
 		<field name="companyId" type="String">

@@ -22,17 +22,16 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
-
 import java.io.File;
-
 import java.util.Iterator;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.util.FileUtil;
+import com.liferay.util.StringUtil;
 
 /**
  * <a href="EJBXMLBuilder.java.html"><b><i>View Source</i></b></a>

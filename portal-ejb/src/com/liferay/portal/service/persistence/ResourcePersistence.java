@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class ResourcePersistence extends BasePersistence {
-	public Resource create(String resourceId) {
+	public Resource create(long resourceId) {
 		Resource resource = new ResourceImpl();
 		resource.setNew(true);
 		resource.setPrimaryKey(resourceId);
@@ -57,7 +57,7 @@ public class ResourcePersistence extends BasePersistence {
 		return resource;
 	}
 
-	public Resource remove(String resourceId)
+	public Resource remove(long resourceId)
 		throws NoSuchResourceException, SystemException {
 		Session session = null;
 
@@ -65,7 +65,7 @@ public class ResourcePersistence extends BasePersistence {
 			session = openSession();
 
 			Resource resource = (Resource)session.get(ResourceImpl.class,
-					resourceId);
+					new Long(resourceId));
 
 			if (resource == null) {
 				if (_log.isWarnEnabled()) {
@@ -140,7 +140,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource findByPrimaryKey(String resourceId)
+	public Resource findByPrimaryKey(long resourceId)
 		throws NoSuchResourceException, SystemException {
 		Resource resource = fetchByPrimaryKey(resourceId);
 
@@ -157,14 +157,15 @@ public class ResourcePersistence extends BasePersistence {
 		return resource;
 	}
 
-	public Resource fetchByPrimaryKey(String resourceId)
+	public Resource fetchByPrimaryKey(long resourceId)
 		throws SystemException {
 		Session session = null;
 
 		try {
 			session = openSession();
 
-			return (Resource)session.get(ResourceImpl.class, resourceId);
+			return (Resource)session.get(ResourceImpl.class,
+				new Long(resourceId));
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);
@@ -293,7 +294,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource[] findByCompanyId_PrevAndNext(String resourceId,
+	public Resource[] findByCompanyId_PrevAndNext(long resourceId,
 		String companyId, OrderByComparator obc)
 		throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
@@ -463,7 +464,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource[] findByName_PrevAndNext(String resourceId, String name,
+	public Resource[] findByName_PrevAndNext(long resourceId, String name,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
 		int count = countByName(name);
@@ -733,7 +734,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource[] findByC_N_T_S_PrevAndNext(String resourceId,
+	public Resource[] findByC_N_T_S_PrevAndNext(long resourceId,
 		String companyId, String name, String typeId, String scope,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);
@@ -1043,7 +1044,7 @@ public class ResourcePersistence extends BasePersistence {
 		}
 	}
 
-	public Resource[] findByC_T_S_P_PrevAndNext(String resourceId,
+	public Resource[] findByC_T_S_P_PrevAndNext(long resourceId,
 		String companyId, String typeId, String scope, String primKey,
 		OrderByComparator obc) throws NoSuchResourceException, SystemException {
 		Resource resource = findByPrimaryKey(resourceId);

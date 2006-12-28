@@ -37,9 +37,6 @@ import com.liferay.util.XSSUtil;
 public class ResourceModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Resource"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_RESOURCEID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Resource.resourceId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Resource.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -61,27 +58,20 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public ResourceModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _resourceId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setResourceId(pk);
 	}
 
-	public String getResourceId() {
-		return GetterUtil.getString(_resourceId);
+	public long getResourceId() {
+		return _resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
-		if (((resourceId == null) && (_resourceId != null)) ||
-				((resourceId != null) && (_resourceId == null)) ||
-				((resourceId != null) && (_resourceId != null) &&
-				!resourceId.equals(_resourceId))) {
-			if (!XSS_ALLOW_RESOURCEID) {
-				resourceId = XSSUtil.strip(resourceId);
-			}
-
+	public void setResourceId(long resourceId) {
+		if (resourceId != _resourceId) {
 			_resourceId = resourceId;
 		}
 	}
@@ -187,9 +177,17 @@ public class ResourceModelImpl extends BaseModelImpl {
 		}
 
 		ResourceImpl resource = (ResourceImpl)obj;
-		String pk = resource.getPrimaryKey();
+		long pk = resource.getPrimaryKey();
 
-		return getPrimaryKey().compareTo(pk);
+		if (getPrimaryKey() < pk) {
+			return -1;
+		}
+		else if (getPrimaryKey() > pk) {
+			return 1;
+		}
+		else {
+			return 0;
+		}
 	}
 
 	public boolean equals(Object obj) {
@@ -206,9 +204,9 @@ public class ResourceModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = resource.getPrimaryKey();
+		long pk = resource.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -217,10 +215,10 @@ public class ResourceModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _resourceId;
+	private long _resourceId;
 	private String _companyId;
 	private String _name;
 	private String _typeId;

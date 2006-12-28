@@ -58,19 +58,19 @@ public class PermissionSoap implements Serializable {
 	public PermissionSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _permissionId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setPermissionId(pk);
 	}
 
-	public String getPermissionId() {
+	public long getPermissionId() {
 		return _permissionId;
 	}
 
-	public void setPermissionId(String permissionId) {
+	public void setPermissionId(long permissionId) {
 		_permissionId = permissionId;
 	}
 
@@ -90,16 +90,16 @@ public class PermissionSoap implements Serializable {
 		_actionId = actionId;
 	}
 
-	public String getResourceId() {
+	public long getResourceId() {
 		return _resourceId;
 	}
 
-	public void setResourceId(String resourceId) {
+	public void setResourceId(long resourceId) {
 		_resourceId = resourceId;
 	}
 
-	private String _permissionId;
+	private long _permissionId;
 	private String _companyId;
 	private String _actionId;
-	private String _resourceId;
+	private long _resourceId;
 }

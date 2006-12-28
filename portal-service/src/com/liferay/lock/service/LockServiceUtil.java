@@ -26,8 +26,6 @@ import com.liferay.lock.model.Lock;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 
-import java.lang.Comparable;
-
 import java.rmi.RemoteException;
 
 import java.util.Set;

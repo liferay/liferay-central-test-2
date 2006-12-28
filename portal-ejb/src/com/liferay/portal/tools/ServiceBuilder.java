@@ -22,36 +22,12 @@
 
 package com.liferay.portal.tools;
 
-import com.liferay.portal.kernel.util.ClassUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.ModelHintsUtil;
-import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.util.FileUtil;
-import com.liferay.util.GetterUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.TextFormatter;
-import com.liferay.util.Time;
-import com.liferay.util.Validator;
-
-import com.thoughtworks.qdox.JavaDocBuilder;
-import com.thoughtworks.qdox.model.JavaClass;
-import com.thoughtworks.qdox.model.JavaMethod;
-import com.thoughtworks.qdox.model.JavaParameter;
-import com.thoughtworks.qdox.model.Type;
-
-import de.hunsicker.io.FileFormat;
-import de.hunsicker.jalopy.Jalopy;
-import de.hunsicker.jalopy.storage.Convention;
-import de.hunsicker.jalopy.storage.ConventionKeys;
-import de.hunsicker.jalopy.storage.Environment;
-
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringReader;
-
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -65,6 +41,28 @@ import java.util.TreeSet;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import com.liferay.portal.kernel.util.ClassUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.TextFormatter;
+import com.liferay.util.Time;
+import com.liferay.util.Validator;
+import com.thoughtworks.qdox.JavaDocBuilder;
+import com.thoughtworks.qdox.model.JavaClass;
+import com.thoughtworks.qdox.model.JavaMethod;
+import com.thoughtworks.qdox.model.JavaParameter;
+import com.thoughtworks.qdox.model.Type;
+
+import de.hunsicker.io.FileFormat;
+import de.hunsicker.jalopy.Jalopy;
+import de.hunsicker.jalopy.storage.Convention;
+import de.hunsicker.jalopy.storage.ConventionKeys;
+import de.hunsicker.jalopy.storage.Environment;
 
 /**
  * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>

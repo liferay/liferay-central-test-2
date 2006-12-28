@@ -44,7 +44,7 @@ public interface OrgGroupPermissionModel extends BaseModel {
 
 	public void setGroupId(String groupId);
 
-	public String getPermissionId();
+	public long getPermissionId();
 
-	public void setPermissionId(String permissionId);
+	public void setPermissionId(long permissionId);
 }

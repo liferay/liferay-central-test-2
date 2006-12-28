@@ -26,15 +26,15 @@ import java.util.Hashtable;
 import oasis.names.tc.wsrp.v1.intf.WSRP_v1_PortletManagement_PortType;
 import oasis.names.tc.wsrp.v1.intf.WSRP_v1_Registration_PortType;
 import oasis.names.tc.wsrp.v1.intf.WSRP_v1_ServiceDescription_PortType;
+import oasis.names.tc.wsrp.v1.types.GetServiceDescription;
 import oasis.names.tc.wsrp.v1.types.InvalidRegistrationFault;
+import oasis.names.tc.wsrp.v1.types.ModifyRegistration;
 import oasis.names.tc.wsrp.v1.types.PortletDescription;
 import oasis.names.tc.wsrp.v1.types.RegistrationContext;
 import oasis.names.tc.wsrp.v1.types.RegistrationData;
 import oasis.names.tc.wsrp.v1.types.RegistrationState;
 import oasis.names.tc.wsrp.v1.types.ReturnAny;
 import oasis.names.tc.wsrp.v1.types.ServiceDescription;
-import oasis.names.tc.wsrp.v1.types.GetServiceDescription;
-import oasis.names.tc.wsrp.v1.types.ModifyRegistration;
 import oasis.names.tc.wsrp.v1.wsdl.WSRPServiceLocator;
 
 import org.apache.wsrp4j.consumer.Producer;

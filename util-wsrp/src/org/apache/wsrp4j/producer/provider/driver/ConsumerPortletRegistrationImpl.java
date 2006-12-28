@@ -20,8 +20,8 @@
 
 package org.apache.wsrp4j.producer.provider.driver;
 
-import java.util.HashSet;
 import java.util.Collection;
+import java.util.HashSet;
 
 /**
  * This class collects the porlet handles for a registered consumer and 

@@ -72,7 +72,7 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteResource(java.lang.String resourceId)
+	public void deleteResource(long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -92,14 +92,18 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void deleteResources() throws com.liferay.portal.SystemException;
+
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Resource getResource(
-		java.lang.String resourceId)
+	public com.liferay.portal.model.Resource getResource(long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public java.util.List getResources()
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource getResource(
 		java.lang.String companyId, java.lang.String name,

@@ -20,9 +20,9 @@
 
 package org.apache.wsrp4j.producer.provider;
 
+import oasis.names.tc.wsrp.v1.types.PortletContext;
 import oasis.names.tc.wsrp.v1.types.RuntimeContext;
 import oasis.names.tc.wsrp.v1.types.UserContext;
-import oasis.names.tc.wsrp.v1.types.PortletContext;
 
 /**
  * <p>This interface provides methods generating URLs or namespacing

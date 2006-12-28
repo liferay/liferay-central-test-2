@@ -24,9 +24,9 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
-import com.liferay.portal.kernel.util.StringPool;
 
 /**
  * <a href="UserAttributes.java.html"><b><i>View Source</i></b></a>

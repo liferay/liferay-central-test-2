@@ -38,13 +38,11 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ResourceUtil {
-	public static com.liferay.portal.model.Resource create(
-		java.lang.String resourceId) {
+	public static com.liferay.portal.model.Resource create(long resourceId) {
 		return getPersistence().create(resourceId);
 	}
 
-	public static com.liferay.portal.model.Resource remove(
-		java.lang.String resourceId)
+	public static com.liferay.portal.model.Resource remove(long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
 		ModelListener listener = _getListener();
@@ -139,14 +137,14 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource findByPrimaryKey(
-		java.lang.String resourceId)
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
 		return getPersistence().findByPrimaryKey(resourceId);
 	}
 
 	public static com.liferay.portal.model.Resource fetchByPrimaryKey(
-		java.lang.String resourceId) throws com.liferay.portal.SystemException {
+		long resourceId) throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(resourceId);
 	}
 
@@ -183,7 +181,7 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource[] findByCompanyId_PrevAndNext(
-		java.lang.String resourceId, java.lang.String companyId,
+		long resourceId, java.lang.String companyId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
@@ -224,7 +222,7 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource[] findByName_PrevAndNext(
-		java.lang.String resourceId, java.lang.String name,
+		long resourceId, java.lang.String name,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
@@ -273,8 +271,8 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource[] findByC_N_T_S_PrevAndNext(
-		java.lang.String resourceId, java.lang.String companyId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		long resourceId, java.lang.String companyId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {
@@ -326,9 +324,8 @@ public class ResourceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource[] findByC_T_S_P_PrevAndNext(
-		java.lang.String resourceId, java.lang.String companyId,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey,
+		long resourceId, java.lang.String companyId, java.lang.String typeId,
+		java.lang.String scope, java.lang.String primKey,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchResourceException {

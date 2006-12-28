@@ -22,8 +22,6 @@
 
 package com.liferay.portlet.workflow.model;
 
-import java.io.Serializable;
-
 import java.util.ArrayList;
 import java.util.List;
 
