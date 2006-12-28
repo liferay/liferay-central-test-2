@@ -39,6 +39,8 @@ import com.liferay.util.servlet.SessionErrors;
 import java.util.ArrayList;
 import java.util.Enumeration;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -80,7 +82,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			List articleIdsList = new ArrayList();
+			Map articleIdsMap = new TreeMap();
 
 			Enumeration enu = req.getParameterNames();
 
@@ -99,12 +101,14 @@ public class EditConfigurationAction extends PortletAction {
 						throw new NoSuchArticleException();
 					}
 
-					articleIdsList.add(articleId);
+					// Use map to ensure it is sorted by user's choice
+
+					articleIdsMap.put(name, articleId);
 				}
 			}
 
 			String[] articleIds =
-				(String[])articleIdsList.toArray(new String[0]);
+				(String[])articleIdsMap.values().toArray(new String[0]);
 
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
