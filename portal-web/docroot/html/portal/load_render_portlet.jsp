@@ -37,15 +37,25 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 		[$TEMPLATE_PORTLET_<%= portlet.getPortletId() %>$]
 	</c:when>
 	<c:otherwise>
-		<tiles:useAttribute id="tilesPortletDecorate" name="portlet_decorate" classname="java.lang.String" ignore="true" />
 
 		<%
+		boolean tilesPortletDecorateBoolean = true;
+
+		try {
+		%>
+
+			<tiles:useAttribute id="tilesPortletDecorate" name="portlet_decorate" classname="java.lang.String" ignore="true" />
+
+		<%
+			tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
+		}
+		catch (Exception e) {
+		}
+
 		portletDisplay.setId(portlet.getPortletId());
 		portletDisplay.setNamespace(PortalUtil.getPortletNamespace(portlet.getPortletId()));
 
 		PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletDisplay.getId(), true, true);
-
-		boolean tilesPortletDecorateBoolean = GetterUtil.getBoolean(tilesPortletDecorate, true);
 
 		boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(tilesPortletDecorateBoolean)));
 

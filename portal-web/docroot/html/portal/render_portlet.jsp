@@ -376,6 +376,7 @@ if (portlet.isActive() && access) {
 				}
 
 				String templatePath = Constants.TEXT_HTML_DIR + "/common/themes/portlet.jsp";
+
 				if (definition != null) {
 					templatePath = Constants.TEXT_HTML_DIR + definition.getPath();
 				}
@@ -439,7 +440,7 @@ if (portlet.isActive() && access) {
 if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 	String staticVar = "no";
 
-	if (portlet.isStatic() || !showMoveIcon) {
+	if (portlet.isStatic() || !portletDisplay.isShowMoveIcon()) {
 		staticVar = "yes";
 
 		if (portlet.isStaticStart()) {
@@ -453,10 +454,10 @@ if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 %>
 
 	<script type="text/javascript">
-		$("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletId %>";
+		$("p_p_id<%= portletDisplay.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
 
 		<c:if test='<%= !staticVar.equals("no") %>'>
-			$("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+			$("p_p_id<%= portletDisplay.getNamespace() %>").isStatic = "<%= staticVar %>";
 		</c:if>
 	</script>
 
