@@ -67,7 +67,7 @@ public class PermissionServiceImpl
 	}
 
 	public boolean hasUserPermissions(
-			String userId, String groupId, String actionId,	long[] resourceIds,
+			String userId, String groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 

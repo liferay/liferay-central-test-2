@@ -210,7 +210,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
 <input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />resourceId" type="hidden" value="<%= String.valueOf(resource.getResourceId()) %>">
+<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>">
 
 <c:choose>
 	<c:when test="<%= Validator.isNull(modelResource) %>">

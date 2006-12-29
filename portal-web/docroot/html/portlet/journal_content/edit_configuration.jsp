@@ -23,6 +23,7 @@
 %>
 
 <%@ include file="/html/portlet/journal_content/init.jsp" %>
+
 <%
 String cur = ParamUtil.getString(request, "cur");
 
@@ -42,6 +43,7 @@ catch (NoSuchArticleException nsae) {
 groupId = ParamUtil.getString(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
+
 <liferay-portlet:renderURL portletConfiguration="true" varImpl="portletURL" />
 
 <script type="text/javascript">

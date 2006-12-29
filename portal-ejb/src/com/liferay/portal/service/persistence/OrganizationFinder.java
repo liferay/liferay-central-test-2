@@ -83,7 +83,7 @@ public class OrganizationFinder {
 			Long resourceId = (Long)params.get("permissionsResourceId");
 			String groupId = (String)params.get("permissionsGroupId");
 
-			if (Validator.isNotNull(groupId) && resourceId != null) {
+			if (Validator.isNotNull(groupId) && (resourceId != null)) {
 				return _countByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, name, street, city, zip,
@@ -174,7 +174,7 @@ public class OrganizationFinder {
 			Long resourceId = (Long)params.get("permissionsResourceId");
 			String groupId = (String)params.get("permissionsGroupId");
 
-			if (Validator.isNotNull(groupId) && resourceId != null) {
+			if (Validator.isNotNull(groupId) && (resourceId != null)) {
 				return _findByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, name, street, city, zip,

@@ -22,17 +22,18 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.util.FileUtil;
+
 import java.io.File;
 import java.io.IOException;
+
 import java.util.Iterator;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
-
-import com.liferay.portal.util.SAXReaderFactory;
-import com.liferay.util.FileUtil;
 
 /**
  * <a href="EARXMLBuilder.java.html"><b><i>View Source</i></b></a>

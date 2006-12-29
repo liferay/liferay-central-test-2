@@ -49,10 +49,7 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
-		// Make sure to update permissions first
-
 		upgrade(new UpgradePermissions());
-
 		upgrade(new UpgradeAddress());
 		upgrade(new UpgradeEmailAddress());
 		upgrade(new UpgradePhone());

@@ -155,7 +155,7 @@ public class PermissionLocalServiceUtil {
 
 	public static void renewPermissionIds()
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 		permissionLocalService.renewPermissionIds();
 	}

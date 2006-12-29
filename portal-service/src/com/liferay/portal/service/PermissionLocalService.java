@@ -95,7 +95,7 @@ public interface PermissionLocalService {
 
 	public void renewPermissionIds()
 		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
+			com.liferay.portal.PortalException;
 
 	public void setGroupPermissions(java.lang.String groupId,
 		java.lang.String[] actionIds, long resourceId)

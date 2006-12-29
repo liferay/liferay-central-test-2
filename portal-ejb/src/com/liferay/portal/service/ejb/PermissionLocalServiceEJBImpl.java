@@ -141,7 +141,7 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 
 	public void renewPermissionIds()
 		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+			com.liferay.portal.SystemException {
 		PermissionLocalServiceFactory.getTxImpl().renewPermissionIds();
 	}
 

@@ -54,8 +54,6 @@ import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
 
-import java.rmi.RemoteException;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -363,32 +361,33 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return false;
 	}
 
-	public void renewPermissionIds()
-		throws PortalException, RemoteException, SystemException {
+	public void renewPermissionIds() throws PortalException, SystemException {
 
 		List permissions = PermissionUtil.findAll();
 
 		// Save old permissions and mappings
 
-		Map orgGroupMap = new HashMap(permissions.size());
 		Map groupMap = new HashMap(permissions.size());
 		Map roleMap = new HashMap(permissions.size());
 		Map userMap = new HashMap(permissions.size());
+		Map orgGroupMap = new HashMap(permissions.size());
 
-		for (Iterator itr = permissions.iterator(); itr.hasNext(); ) {
-			Permission permission = (Permission)itr.next();
+		Iterator itr1 = permissions.iterator();
+
+		while (itr1.hasNext()) {
+			Permission permission = (Permission)itr1.next();
 
 			long permissionId = permission.getPermissionId();
 			Long wrappedPermissionId = new Long(permissionId);
 
-			groupMap.put(wrappedPermissionId,
-				PermissionUtil.getGroups(permissionId));
-			roleMap.put(wrappedPermissionId,
-				PermissionUtil.getRoles(permissionId));
-			userMap.put(wrappedPermissionId,
-				PermissionUtil.getUsers(permissionId));
-
-			orgGroupMap.put(wrappedPermissionId,
+			groupMap.put(
+				wrappedPermissionId, PermissionUtil.getGroups(permissionId));
+			roleMap.put(
+				wrappedPermissionId, PermissionUtil.getRoles(permissionId));
+			userMap.put(
+				wrappedPermissionId, PermissionUtil.getUsers(permissionId));
+			orgGroupMap.put(
+				wrappedPermissionId,
 				OrgGroupPermissionUtil.findByPermissionId(permissionId));
 
 			PermissionUtil.remove(permissionId);
@@ -396,8 +395,10 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		// Insert new permissions and mappings
 
-		for (Iterator itr = permissions.iterator(); itr.hasNext(); ) {
-			Permission permission = (Permission)itr.next();
+		itr1 = permissions.iterator();
+
+		while (itr1.hasNext()) {
+			Permission permission = (Permission)itr1.next();
 
 			Long oldPermissionId = new Long(permission.getPermissionId());
 
@@ -405,30 +406,35 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 				Counter.class.getName());
 
 			Permission newPermission = PermissionUtil.create(newPermissionId);
-			newPermission.setActionId(permission.getActionId());
+
 			newPermission.setCompanyId(permission.getCompanyId());
+			newPermission.setActionId(permission.getActionId());
 			newPermission.setResourceId(permission.getResourceId());
+
 			PermissionUtil.update(newPermission);
 
-			PermissionUtil.addGroups(newPermissionId,
-				(List)groupMap.get(oldPermissionId));
-			PermissionUtil.addRoles(newPermissionId,
-				(List)roleMap.get(oldPermissionId));
-			PermissionUtil.addUsers(newPermissionId,
-				(List)userMap.get(oldPermissionId));
+			PermissionUtil.addGroups(
+				newPermissionId, (List)groupMap.get(oldPermissionId));
+			PermissionUtil.addRoles(
+				newPermissionId, (List)roleMap.get(oldPermissionId));
+			PermissionUtil.addUsers(
+				newPermissionId, (List)userMap.get(oldPermissionId));
 
 			List orgGroupList = (List)orgGroupMap.get(oldPermissionId);
-			for (Iterator itr2 = orgGroupList.iterator(); itr2.hasNext(); ) {
+
+			Iterator itr2 = orgGroupList.iterator();
+
+			while (itr2.hasNext()) {
 				OrgGroupPermission oldOrgGroupPermission =
-					(OrgGroupPermission)itr2;
+					(OrgGroupPermission)itr2.next();
 
 				OrgGroupPermission newOrgGroupPermission =
 					OrgGroupPermissionUtil.create(new OrgGroupPermissionPK());
 
-				newOrgGroupPermission.setGroupId(
-					oldOrgGroupPermission.getGroupId());
 				newOrgGroupPermission.setOrganizationId(
 					oldOrgGroupPermission.getOrganizationId());
+				newOrgGroupPermission.setGroupId(
+					oldOrgGroupPermission.getGroupId());
 				newOrgGroupPermission.setPermissionId(newPermissionId);
 
 				OrgGroupPermissionUtil.update(newOrgGroupPermission);

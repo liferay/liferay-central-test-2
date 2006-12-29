@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portlet_Software_Repository_SRLicenseService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.softwarerepository.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="SRLicenseServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="http://model.softwarerepository.portlet.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portlet_Software_Repository_SRLicenseService"/>
+		<parameter name="className" value="com.liferay.portlet.softwarerepository.service.http.SRLicenseServiceSoap"/>
+		<parameter name="wsdlPortType" value="SRLicenseServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.softwarerepository.portlet.liferay.com" xmlns:rtns="http://model.softwarerepository.portlet.liferay.com" name="addLicense" qname="operNS:addLicense" returnQName="addLicenseReturn" returnType="rtns:SRLicenseSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="openSource" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="recommended" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.softwarerepository.portlet.liferay.com" name="deleteLicense" qname="operNS:deleteLicense" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="licenseId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.softwarerepository.portlet.liferay.com" xmlns:rtns="http://model.softwarerepository.portlet.liferay.com" name="getLicense" qname="operNS:getLicense" returnQName="getLicenseReturn" returnType="rtns:SRLicenseSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="licenseId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.softwarerepository.portlet.liferay.com" xmlns:rtns="http://model.softwarerepository.portlet.liferay.com" name="updateLicense" qname="operNS:updateLicense" returnQName="updateLicenseReturn" returnType="rtns:SRLicenseSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="licenseId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="url" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="openSource" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="active" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="recommended" type="tns:boolean"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="getLicense addLicense updateLicense deleteLicense"/>
+		<typeMapping xmlns:ns="http://model.softwarerepository.portlet.liferay.com" qname="ns:SRLicenseSoap" type="java:com.liferay.portlet.softwarerepository.model.SRLicenseSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
+</deployment>

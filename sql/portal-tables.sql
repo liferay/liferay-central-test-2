@@ -524,7 +524,7 @@ create table Organization_ (
 create table OrgGroupPermission (
 	organizationId VARCHAR(75) not null,
 	groupId VARCHAR(75) not null,
-	permissionId LONG not null,
+	permissionId LONG,
 	primary key (organizationId, groupId, permissionId)
 );
 

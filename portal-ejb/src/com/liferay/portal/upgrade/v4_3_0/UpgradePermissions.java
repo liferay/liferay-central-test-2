@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.model.Resource;
@@ -33,7 +34,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradeAddress.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradePermissions.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
@@ -44,19 +45,19 @@ public class UpgradePermissions extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradePermissions();
-			_upgradeResources();
+			_upgradePermission();
+			_upgradeResource();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradePermissions() throws Exception {
+	private void _upgradePermission() throws Exception {
 		PermissionLocalServiceUtil.renewPermissionIds();
 	}
 
-	private void _upgradeResources() throws Exception {
+	private void _upgradeResource() throws Exception {
 		List resources = ResourceLocalServiceUtil.getResources();
 
 		ResourceLocalServiceUtil.deleteResources();
@@ -69,7 +70,7 @@ public class UpgradePermissions extends UpgradeProcess {
 				oldResource.getTypeId(), oldResource.getScope(),
 				oldResource.getPrimKey());
 
-			// Swap out old resource IDs for new ones in the Permission table
+			// Swap out old resource ids for new ones in the Permission table
 
 			PermissionLocalServiceUtil.updateResourceId(
 				oldResource.getResourceId(), newResource.getResourceId());
@@ -77,4 +78,5 @@ public class UpgradePermissions extends UpgradeProcess {
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradePermissions.class);
+
 }
