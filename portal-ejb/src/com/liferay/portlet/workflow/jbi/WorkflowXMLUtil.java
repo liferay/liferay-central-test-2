@@ -44,6 +44,9 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -237,19 +240,26 @@ public class WorkflowXMLUtil {
 	public static String parseString(String xml, String name)
 		throws DocumentException {
 
-		SAXReader reader = SAXReaderFactory.getInstance();
+		try {
+			SAXReader reader = SAXReaderFactory.getInstance();
 
-		Document doc = reader.read(new StringReader(xml));
+			Document doc = reader.read(new StringReader(xml));
 
-		Element root = doc.getRootElement();
+			Element root = doc.getRootElement();
 
-		Element el = root.element(name);
+			Element el = root.element(name);
 
-		if (el != null) {
-			return el.getText();
+			if (el != null) {
+				return el.getText();
+			}
+			else {
+				return StringPool.BLANK;
+			}
 		}
-		else {
-			return StringPool.BLANK;
+		catch (DocumentException de) {
+			_log.error("Error parsing " + name + " from:\n" + xml);
+
+			throw de;
 		}
     }
 
@@ -385,5 +395,7 @@ public class WorkflowXMLUtil {
 
 		return tokens;
 	}
+
+	private static final Log _log = LogFactory.getLog(WorkflowXMLUtil.class);
 
 }

@@ -94,6 +94,8 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 		<%= LanguageUtil.get(pageContext, "to") %>
 
 		<liferay-ui:input-field model="<%= WorkflowInstance.class %>" field="<%= InstanceDisplayTerms.END_DATE_LT %>" />
+
+		<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <%= LanguageUtil.get(pageContext, "hide-instances-that-have-already-ended") %>
 	</td>
 </tr>
 </table>
@@ -114,3 +116,24 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	</td>
 </tr>
 </table>
+
+<script type="text/javascript">
+	<portlet:namespace />updateEndDates();
+
+	function <portlet:namespace />updateEndDates() {
+		var form = document.<portlet:namespace />fm;
+
+		var hideEndedTasks = form.<portlet:namespace /><%= InstanceDisplayTerms.HIDE_ENDED_TASKS %>.checked;
+
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if (e.name.indexOf("<portlet:namespace />endDate") != -1) {
+				e.disabled = hideEndedTasks;
+			}
+		}
+
+		document.getElementById("<portlet:namespace />endDateGTImageInputId").disabled = hideEndedTasks;
+		document.getElementById("<portlet:namespace />endDateLTImageInputId").disabled = hideEndedTasks;
+	}
+</script>

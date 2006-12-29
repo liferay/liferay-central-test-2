@@ -46,7 +46,15 @@ int yearRangeEnd = GetterUtil.getInteger((String)request.getAttribute("liferay-u
 String monthAndYearParam = namespace + request.getAttribute("liferay-ui:input-date:monthAndYearParam");
 boolean monthAndYearNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:monthAndYearNullable"));
 int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:firstDayOfWeek"));
+String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
+
+if (Validator.isNull(imageInputId)) {
+	imageInputId = randomNamespace + "imageInputId";
+}
+else {
+	imageInputId = namespace + imageInputId;
+}
 %>
 
 <script type="text/javascript">
@@ -98,7 +106,7 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 		}
 
 		<%= randomNamespace %>jsCalendarObj.setDate(date);
-		<%= randomNamespace %>jsCalendarObj.showAtElement(document.getElementById("<%= randomNamespace %>imageInputId"), "br");
+		<%= randomNamespace %>jsCalendarObj.showAtElement(document.getElementById("<%= imageInputId %>"), "br");
 	}
 
 	function <%= randomNamespace %>jsOnClose(cal) {
@@ -235,7 +243,7 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 	</c:otherwise>
 </c:choose>
 
-<img align="absmiddle" border="0" hspace="0" id="<%= randomNamespace %>imageInputId" src="<%= themeDisplay.getPathThemeImage() %>/common/calendar.gif"" vspace="0"
+<img align="absmiddle" border="0" hspace="0" id="<%= imageInputId %>" name="<%= imageInputId %>" src="<%= themeDisplay.getPathThemeImage() %>/common/calendar.gif"" vspace="0"
 	onClick="
 		<c:if test="<%= !disabled %>">
 			<%= randomNamespace %>jsOnClick('<%= randomNamespace %>jsCalendarObj');

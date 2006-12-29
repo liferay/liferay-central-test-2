@@ -325,6 +325,12 @@ public class WebKeys {
 
 	public static final String WORKFLOW_DEFINITION = "WORKFLOW_DEFINITION";
 
+	public static final String WORKFLOW_INSTANCE = "WORKFLOW_INSTANCE";
+
+	public static final String WORKFLOW_TASKS = "WORKFLOW_TASKS";
+
+	public static final String WORKFLOW_TOKEN = "WORKFLOW_TOKEN";
+
 	public static final String WSRP_NEW_SESSION = "WSRP_NEW_SESSION";
 
 	public static final String WSRP_PRODUCER = "WSRP_PRODUCER";

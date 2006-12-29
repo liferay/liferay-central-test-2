@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,24 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/workflow/init.jsp" %>
+package com.liferay.portlet.workflow;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import com.liferay.portal.PortalException;
 
-WorkflowTask task = (WorkflowTask)row.getObject();
+/**
+ * <a href="DefinitionXmlException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class DefinitionXmlException extends PortalException {
 
-WorkflowInstance instance = task.getInstance();
+	public DefinitionXmlException() {
+		super();
+	}
 
-List tasks = new ArrayList();
+	public DefinitionXmlException(String msg) {
+		super(msg);
+	}
 
-tasks.add(task);
+	public DefinitionXmlException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
-request.setAttribute(WebKeys.WORKFLOW_INSTANCE, instance);
-request.setAttribute(WebKeys.WORKFLOW_TOKEN, null);
-request.setAttribute(WebKeys.WORKFLOW_TASKS, tasks);
-%>
+	public DefinitionXmlException(Throwable cause) {
+		super(cause);
+	}
 
-<liferay-util:include page="/html/portlet/workflow/workflow_action.jsp" />
+}

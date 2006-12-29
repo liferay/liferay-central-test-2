@@ -76,6 +76,7 @@ public class InputDateTag extends IncludeTag {
 		req.setAttribute(
 			"liferay-ui:input-date:firstDayOfWeek",
 			String.valueOf(_firstDayOfWeek));
+		req.setAttribute("liferay-ui:input-date:imageInputId", _imageInputId);
 		req.setAttribute(
 			"liferay-ui:input-date:disabled", String.valueOf(_disabled));
 
@@ -146,6 +147,10 @@ public class InputDateTag extends IncludeTag {
 		_firstDayOfWeek = firstDayOfWeek;
 	}
 
+	public void setImageInputId(String imageInputId) {
+		_imageInputId = imageInputId;
+	}
+
 	public void setDisabled(boolean disabled) {
 		_disabled = disabled;
 	}
@@ -172,6 +177,7 @@ public class InputDateTag extends IncludeTag {
 	private String _monthAndYearParam = StringPool.BLANK;
 	private boolean _monthAndYearNullable;
 	private int _firstDayOfWeek = Calendar.SUNDAY - 1;
+	private String _imageInputId;
 	private boolean _disabled;
 
 }

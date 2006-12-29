@@ -142,6 +142,9 @@ if (rowChecker != null) {
 			classHoverName = "portlet-section-body-hover";
 		}
 
+		row.setClassName(className);
+		row.setClassHoverName(classHoverName);
+
 		request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW, row);
 
 		List entries = row.getEntries();

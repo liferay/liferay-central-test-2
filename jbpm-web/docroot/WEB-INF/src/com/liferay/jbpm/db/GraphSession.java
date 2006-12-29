@@ -122,7 +122,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Number count = (Number)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -155,7 +155,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			String endDateCheck = "(pi.end IS NULL) ";
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				endDateCheck =
 					"((pi.end >= ? [$AND_OR_NULL_CHECK$]) AND " +
 						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
@@ -180,7 +180,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(_getDate(startDateLT, false));
 			qPos.add(_getDate(startDateLT, false));
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				qPos.add(_getDate(endDateGT, true));
 				qPos.add(_getDate(endDateGT, true));
 				qPos.add(_getDate(endDateLT, false));
@@ -190,7 +190,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Number count = (Number)itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -241,7 +241,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			String endDateCheck = "(JBPM_TaskInstance.END_ IS NULL) ";
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				endDateCheck =
 					"((JBPM_TaskInstance.END_ >= ? " +
 							"[$AND_OR_NULL_CHECK$]) AND " +
@@ -269,7 +269,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(_getDate(startDateLT, false));
 				qPos.add(_getDate(startDateLT, false));
 
-				if (hideEndedTasks) {
+				if (!hideEndedTasks) {
 					qPos.add(_getDate(endDateGT, true));
 					qPos.add(_getDate(endDateGT, true));
 					qPos.add(_getDate(endDateLT, false));
@@ -284,7 +284,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			Iterator itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Integer i = (Integer)itr.next();
+				Number i = (Number)itr.next();
 
 				if (i != null) {
 					count += i.intValue();
@@ -336,7 +336,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			String endDateCheck = "(pi.end IS NULL) ";
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				endDateCheck =
 					"((pi.end >= ? [$AND_OR_NULL_CHECK$]) AND " +
 						"(pi.end <= ? [$AND_OR_NULL_CHECK$])) ";
@@ -361,7 +361,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			qPos.add(_getDate(startDateLT, false));
 			qPos.add(_getDate(startDateLT, false));
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				qPos.add(_getDate(endDateGT, true));
 				qPos.add(_getDate(endDateGT, true));
 				qPos.add(_getDate(endDateLT, false));
@@ -424,7 +424,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 
 			String endDateCheck = "(JBPM_TaskInstance.END_ IS NULL) ";
 
-			if (hideEndedTasks) {
+			if (!hideEndedTasks) {
 				endDateCheck =
 					"((JBPM_TaskInstance.END_ >= ? " +
 							"[$AND_OR_NULL_CHECK$]) AND " +
@@ -454,7 +454,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 				qPos.add(_getDate(startDateLT, false));
 				qPos.add(_getDate(startDateLT, false));
 
-				if (hideEndedTasks) {
+				if (!hideEndedTasks) {
 					qPos.add(_getDate(endDateGT, true));
 					qPos.add(_getDate(endDateGT, true));
 					qPos.add(_getDate(endDateLT, false));

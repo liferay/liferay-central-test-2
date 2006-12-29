@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,24 +19,37 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/workflow/init.jsp" %>
+package com.liferay.jbpm.handler;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import org.jbpm.context.exe.ContextInstance;
+import org.jbpm.graph.exe.ExecutionContext;
+import org.jbpm.graph.node.DecisionHandler;
 
-WorkflowTask task = (WorkflowTask)row.getObject();
+/**
+ * <a href="WebOrderDecisionHandler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Charles May
+ *
+ */
+public class WebOrderDecisionHandler implements DecisionHandler {
 
-WorkflowInstance instance = task.getInstance();
+	public String decide(ExecutionContext executionContext) throws Exception {
+		ContextInstance contextInstance = executionContext.getContextInstance();
 
-List tasks = new ArrayList();
+		String decision = null;
 
-tasks.add(task);
+		String buyerResponse = (String)contextInstance.getVariable(
+			"radio:perform-another-order:yes,no");
 
-request.setAttribute(WebKeys.WORKFLOW_INSTANCE, instance);
-request.setAttribute(WebKeys.WORKFLOW_TOKEN, null);
-request.setAttribute(WebKeys.WORKFLOW_TASKS, tasks);
-%>
+		if (buyerResponse.equals("yes")) {
+			decision = "another";
+		}
+		else {
+			decision = "finished";
+		}
 
-<liferay-util:include page="/html/portlet/workflow/workflow_action.jsp" />
+		return decision;
+	}
+
+}

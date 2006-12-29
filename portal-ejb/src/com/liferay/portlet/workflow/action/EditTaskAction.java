@@ -96,7 +96,7 @@ public class EditTaskAction extends PortletAction {
 	protected Map updateTask(ActionRequest req) throws Exception {
 		long taskId = ParamUtil.getLong(req, "taskId");
 
-		String transition = ParamUtil.getString(req, "transition");
+		String transition = ParamUtil.getString(req, "taskTransition");
 
 		return WorkflowTaskServiceUtil.updateTask(
 			taskId, transition, req.getParameterMap());

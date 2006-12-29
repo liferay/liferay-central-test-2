@@ -25,16 +25,9 @@ package com.liferay.jbpm.handler;
 import com.liferay.client.portal.model.GroupSoap;
 import com.liferay.client.portal.model.RoleSoap;
 import com.liferay.client.portal.model.UserSoap;
-import com.liferay.client.portal.service.http.GroupServiceSoap;
-import com.liferay.client.portal.service.http.GroupServiceSoapServiceLocator;
-import com.liferay.client.portal.service.http.RoleServiceSoap;
-import com.liferay.client.portal.service.http.RoleServiceSoapServiceLocator;
-import com.liferay.client.portal.service.http.UserServiceSoap;
-import com.liferay.client.portal.service.http.UserServiceSoapServiceLocator;
 import com.liferay.util.Validator;
 
 import org.jbpm.graph.exe.ExecutionContext;
-import org.jbpm.taskmgmt.def.AssignmentHandler;
 import org.jbpm.taskmgmt.exe.Assignable;
 
 /**
@@ -43,47 +36,32 @@ import org.jbpm.taskmgmt.exe.Assignable;
  * @author  Charles May
  *
  */
-public class IdentityAssignmentHandler
-	extends DefaultHandler implements AssignmentHandler {
+public class IdentityAssignmentHandler extends DefaultHandler {
 
 	public void assign(
 		Assignable assignable, ExecutionContext executionContext) {
 
 		try {
-			UserServiceSoapServiceLocator userLocator =
-				new UserServiceSoapServiceLocator();
-			UserServiceSoap userSoap = userLocator.getPortal_UserService(
-				getURL("Portal_UserService"));
-
-			GroupServiceSoapServiceLocator groupLocator =
-				new GroupServiceSoapServiceLocator();
-			GroupServiceSoap groupSoap = groupLocator.getPortal_GroupService(
-				getURL("Portal_GroupService"));
-
-			RoleServiceSoapServiceLocator roleLocator =
-				new RoleServiceSoapServiceLocator();
-			RoleServiceSoap roleSoap = roleLocator.getPortal_RoleService(
-				getURL("Portal_RoleService"));
-
 			if (type.equals("user")) {
 				if (Validator.isNotNull(id)) {
 					assignable.setActorId(id);
 				}
 				else {
 			        UserSoap user =
-						userSoap.getUserByEmailAddress(companyId, name);
+						getUserService().getUserByEmailAddress(companyId, name);
 
 					assignable.setActorId(user.getUserId());
 				}
 			}
 			else if (type.equals("group")) {
 				if (Validator.isNull(id)) {
-			        GroupSoap group = groupSoap.getGroup(companyId, name);
+			        GroupSoap group =
+						getGroupService().getGroup(companyId, name);
 
 					id = group.getGroupId();
 				}
 
-				UserSoap[] users = userSoap.getGroupUsers(id);
+				UserSoap[] users = getUserService().getGroupUsers(id);
 
 				String[] actorIds = new String[users.length];
 
@@ -95,12 +73,12 @@ public class IdentityAssignmentHandler
 			}
 			else if (type.equals("role")) {
 				if (Validator.isNull(id)) {
-					RoleSoap role = roleSoap.getRole(companyId, name);
+					RoleSoap role = getRoleService().getRole(companyId, name);
 
 					id = role.getRoleId();
 				}
 
-				UserSoap[] users = userSoap.getRoleUsers(id);
+				UserSoap[] users = getUserService().getRoleUsers(id);
 
 				String[] actorIds = new String[users.length];
 

@@ -111,64 +111,94 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<c:choose>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-					<input class="form-text" name="" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
+				<c:when test="<%= taskFormElement.isWritable() %>">
+					<c:choose>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_CHECKBOX) %>">
+							<liferay-ui:input-checkbox
+								param="<%= displayName %>"
+								defaultValue="<%= Validator.isNotNull(value) %>"
+							/>
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_DATE) %>">
+
+							<%
+							Calendar cal = null;
+
+							if (Validator.isNotNull(value)) {
+								cal.setTime(WorkflowXMLUtil.parseDate(value));
+							}
+							%>
+
+							<liferay-ui:input-field
+								model="<%= WorkflowTask.class %>"
+								field="<%= TaskDisplayTerms.CREATE_DATE_GT %>"
+								fieldParam="<%= displayName %>"
+								defaultValue="<%= cal %>"
+							/>
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
+							<input class="form-text" name="<%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
+							<input class="form-text" name="<%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
+
+							<%
+							for (int j = 0; j < valueList.size(); j++) {
+								String curValue = (String)valueList.get(j);
+							%>
+
+								<input <%= value.equals(curValue) ? "checked" : "" %> name="<%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br>
+
+							<%
+							}
+							%>
+
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_SELECT) %>">
+							<select name="<%= displayName %>">
+
+								<%
+								for (int j = 0; j < valueList.size(); j++) {
+									String curValue = (String)valueList.get(j);
+								%>
+
+									<option <%= value.equals(curValue) ? "selected" : "" %> value="<%= curValue %>"><%= LanguageUtil.get(pageContext, curValue) %></option>
+
+								<%
+								}
+								%>
+
+							</select>
+						</c:when>
+						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
+							<textarea class="form-text" name="<%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
+						</c:when>
+					</c:choose>
 				</c:when>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_CHECKBOX) %>">
-					<liferay-ui:input-checkbox
-						param="<%= displayName %>"
-						defaultValue="<%= Validator.isNotNull(value) %>"
-					/>
-				</c:when>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_DATE) %>">
+				<c:when test="<%= taskFormElement.isReadable() %>">
 
 					<%
-					Calendar cal = null;
+					value = taskFormElement.getValue();
 
-					if (Validator.isNotNull(value)) {
-						cal.setTime(WorkflowXMLUtil.parseDate(value));
+					if (type.equals(WorkflowTaskFormElement.TYPE_DATE)) {
 					}
-					%>
-
-					<liferay-ui:input-field
-						model="<%= WorkflowTask.class %>"
-						field="<%= TaskDisplayTerms.CREATE_DATE_GT %>"
-						fieldParam="<%= displayName %>"
-						defaultValue="<%= cal %>"
-					/>
-				</c:when>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
-
-					<%
-					for (int j = 0; j < valueList.size(); j++) {
-						String curValue = (String)valueList.get(j);
-					%>
-
-						<input <%= value.equals(curValue) ? "checked" : "" %> name="<%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br>
-
-					<%
-					}
-					%>
-
-				</c:when>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_SELECT) %>">
-					<select name="<%= displayName %>">
-
-						<%
-						for (int j = 0; j < valueList.size(); j++) {
-							String curValue = (String)valueList.get(j);
-						%>
-
-							<option <%= value.equals(curValue) ? "selected" : "" %> value="<%= curValue %>"><%= LanguageUtil.get(pageContext, curValue) %></option>
-
-						<%
+					else if (type.equals(WorkflowTaskFormElement.TYPE_CHECKBOX)) {
+						if (GetterUtil.getBoolean(value)) {
+							value = LanguageUtil.get(pageContext, (String)taskFormElement.getValueList().get(0));
 						}
-						%>
+					}
+					else if (type.equals(WorkflowTaskFormElement.TYPE_RADIO) || type.equals(WorkflowTaskFormElement.TYPE_SELECT)) {
+						value = LanguageUtil.get(pageContext, value);
+					}
 
-					</select>
-				</c:when>
-				<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-					<textarea class="form-text" name="" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
+					if (Validator.isNull(value)) {
+						value = LanguageUtil.get(pageContext, "not-available");
+					}
+					%>
+
+					<%= value %>
 				</c:when>
 			</c:choose>
 		</td>

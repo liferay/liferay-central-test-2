@@ -24,6 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.workflow.DefinitionXmlException" %>
 <%@ page import="com.liferay.portlet.workflow.NoSuchDefinitionException" %>
 <%@ page import="com.liferay.portlet.workflow.action.EditTaskAction" %>
 <%@ page import="com.liferay.portlet.workflow.jbi.WorkflowXMLUtil" %>

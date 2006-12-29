@@ -153,6 +153,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				yearRangeStart="<%= yearRangeStart %>"
 				yearRangeEnd="<%= yearRangeEnd %>"
 				firstDayOfWeek="<%= firstDayOfWeek %>"
+				imageInputId='<%= field + "ImageInputId" %>'
 				disabled="<%= disabled %>"
 			/>
 

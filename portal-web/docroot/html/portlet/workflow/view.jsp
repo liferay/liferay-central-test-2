@@ -106,7 +106,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Definition name
 
-				row.addText(definition.getName(), rowURL);
+				row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
 
 				// Definition version
 
@@ -175,9 +175,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/workflow/edit_instance");
-				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("instanceId", instanceId);
+				rowURL.setParameter("struts_action", "/workflow/view");
+				rowURL.setParameter("tabs1", "definitions");
+				rowURL.setParameter("definitionId", String.valueOf(definition.getDefinitionId()));
 
 				row.setParameter("rowHREF", rowURL.toString());
 
@@ -187,7 +187,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Definition name
 
-				row.addText(definition.getName(), rowURL);
+				row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
 
 				// Definition version
 
@@ -208,7 +208,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// State
 
-				row.addText(String.valueOf(token.getName()), rowURL);
+				row.addText(LanguageUtil.get(pageContext, token.getName()), rowURL);
 
 				// Action
 
@@ -276,9 +276,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setWindowState(WindowState.MAXIMIZED);
 
-				rowURL.setParameter("struts_action", "/workflow/edit_task");
-				rowURL.setParameter("redirect", currentURL);
-				//rowURL.setParameter("instanceId", instanceId);
+				rowURL.setParameter("struts_action", "/workflow/view");
+				rowURL.setParameter("tabs1", "instances");
+				rowURL.setParameter("instanceId", instanceId);
 
 				row.setParameter("rowHREF", rowURL.toString());
 
@@ -288,7 +288,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Task name
 
-				row.addText(task.getName(), rowURL);
+				row.addText(LanguageUtil.get(pageContext, task.getName()), rowURL);
 
 				// Instance id
 
@@ -296,7 +296,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Definition name
 
-				row.addText(definition.getName(), rowURL);
+				row.addText(LanguageUtil.get(pageContext, definition.getName()), rowURL);
 
 				// Assigned to
 

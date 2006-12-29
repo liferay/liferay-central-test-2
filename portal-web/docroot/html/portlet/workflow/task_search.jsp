@@ -66,7 +66,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "start-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
+		<%= LanguageUtil.get(pageContext, "create-date") %> (<%= LanguageUtil.get(pageContext, "range") %>)
 	</td>
 </tr>
 <tr>
@@ -104,6 +104,8 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 		<%= LanguageUtil.get(pageContext, "to") %>
 
 		<liferay-ui:input-field model="<%= WorkflowTask.class %>" field="<%= TaskDisplayTerms.END_DATE_LT %>" />
+
+	<input <%= displayTerms.isHideEndedTasks() ? "checked" : "" %> name="<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>" type="checkbox" onClick="<portlet:namespace />updateEndDates();"> <%= LanguageUtil.get(pageContext, "hide-instances-that-have-already-ended") %>
 	</td>
 </tr>
 </table>
@@ -124,3 +126,24 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 	</td>
 </tr>
 </table>
+
+<script type="text/javascript">
+	<portlet:namespace />updateEndDates();
+
+	function <portlet:namespace />updateEndDates() {
+		var form = document.<portlet:namespace />fm;
+
+		var hideEndedTasks = form.<portlet:namespace /><%= TaskDisplayTerms.HIDE_ENDED_TASKS %>.checked;
+
+		for (var i = 0; i < form.elements.length; i++) {
+			var e = form.elements[i];
+
+			if (e.name.indexOf("<portlet:namespace />endDate") != -1) {
+				e.disabled = hideEndedTasks;
+			}
+		}
+
+		document.getElementById("<portlet:namespace />endDateGTImageInputId").disabled = hideEndedTasks;
+		document.getElementById("<portlet:namespace />endDateLTImageInputId").disabled = hideEndedTasks;
+	}
+</script>

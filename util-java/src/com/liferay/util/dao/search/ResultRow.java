@@ -82,6 +82,22 @@ public class ResultRow {
 		return _bold;
 	}
 
+	public String getClassName() {
+		return _className;
+	}
+
+	public void setClassName(String className) {
+		_className = className;
+	}
+
+	public String getClassHoverName() {
+		return _classHoverName;
+	}
+
+	public void setClassHoverName(String classHoverName) {
+		_classHoverName = classHoverName;
+	}
+
 	public List getEntries() {
 		return _entries;
 	}
@@ -207,6 +223,8 @@ public class ResultRow {
 	private String _primaryKey;
 	private int _pos;
 	private boolean _bold;
+	private String _className;
+	private String _classHoverName;
 	private List _entries;
 	private Map _params;
 

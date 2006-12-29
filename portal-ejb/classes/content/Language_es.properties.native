@@ -1062,6 +1062,7 @@ hi-x-you-are-impersonating-x=Hola {0}. Estás suplantando al usuario {1}.
 hidden-variables=Variables ocultas
 hidden=Oculto
 hide-image=Ocultar imagen
+hide-tasks-that-have-already-ended=Tareas de la piel que han terminado ya
 hide=Ocultar
 hint-for-narrow-portlet=estrecho
 hint-for-wide-portlet=ancho

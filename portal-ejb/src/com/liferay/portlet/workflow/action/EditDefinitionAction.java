@@ -25,6 +25,7 @@ package com.liferay.portlet.workflow.action;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portlet.workflow.DefinitionXmlException;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 import com.liferay.util.ParamUtil;
@@ -71,7 +72,9 @@ public class EditDefinitionAction extends PortletAction {
 				setForward(req, "portlet.workflow.error");
 			}
 			else {
-				throw e;
+				SessionErrors.add(req, DefinitionXmlException.class.getName());
+
+				setForward(req, "portlet.workflow.edit_definition");
 			}
 		}
 	}

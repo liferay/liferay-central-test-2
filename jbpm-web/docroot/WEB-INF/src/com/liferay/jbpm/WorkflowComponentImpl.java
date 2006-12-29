@@ -442,11 +442,10 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		List instances = new ArrayList();
 
 		if (definitionId > 0){
-			ProcessDefinition processDefinition =
+			ProcessDefinition definition =
 				graphSession.loadProcessDefinition(definitionId);
 
-			instances = graphSession.findProcessInstances(
-				processDefinition.getId());
+			instances = graphSession.findProcessInstances(definition.getId());
 
 			WorkflowUtil.initInstances(instances);
 		}
@@ -1050,7 +1049,12 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		String name = taskFormElement.getDisplayName();
 		String value = getParamValue(parameterMap, name);
 
-		if (type.equals(TaskFormElement.TYPE_DATE)) {
+		if (type.equals(TaskFormElement.TYPE_CHECKBOX)) {
+			if (taskFormElement.isRequired() && value.equals("false")) {
+				error = "required-value";
+			}
+		}
+		else if (type.equals(TaskFormElement.TYPE_DATE)) {
 		}
 		else if (type.equals(TaskFormElement.TYPE_EMAIL)) {
 			if (taskFormElement.isRequired() && Validator.isNull(value)) {
@@ -1068,6 +1072,11 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 			else if (!Validator.isNull(value) && !Validator.isNumber(value)) {
 				error = "invalid-number";
+			}
+		}
+		else if (type.equals(TaskFormElement.TYPE_PASSWORD)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
 			}
 		}
 		else if (type.equals(TaskFormElement.TYPE_PHONE)) {
@@ -1091,6 +1100,11 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 		}
 		else if (type.equals(TaskFormElement.TYPE_TEXT)) {
+			if (taskFormElement.isRequired() && Validator.isNull(value)) {
+				error = "required-value";
+			}
+		}
+		else if (type.equals(TaskFormElement.TYPE_TEXTAREA)) {
 			if (taskFormElement.isRequired() && Validator.isNull(value)) {
 				error = "required-value";
 			}

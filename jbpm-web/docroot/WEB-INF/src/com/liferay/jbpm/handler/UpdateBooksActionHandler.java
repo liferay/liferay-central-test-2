@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,24 +19,32 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/workflow/init.jsp" %>
+package com.liferay.jbpm.handler;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
-WorkflowTask task = (WorkflowTask)row.getObject();
+import org.jbpm.graph.def.ActionHandler;
+import org.jbpm.graph.exe.ExecutionContext;
 
-WorkflowInstance instance = task.getInstance();
+/**
+ * <a href="UpdateBooksActionHandler.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Charles May
+ *
+ */
+public class UpdateBooksActionHandler implements ActionHandler {
 
-List tasks = new ArrayList();
+	public void execute(ExecutionContext executionContext) throws Exception {
+		if (_log.isInfoEnabled()) {
+			_log.info("Updating the accounting books");
+		}
 
-tasks.add(task);
+		executionContext.leaveNode();
+	}
 
-request.setAttribute(WebKeys.WORKFLOW_INSTANCE, instance);
-request.setAttribute(WebKeys.WORKFLOW_TOKEN, null);
-request.setAttribute(WebKeys.WORKFLOW_TASKS, tasks);
-%>
+	private static final Log _log =
+		LogFactory.getLog(UpdateBooksActionHandler.class);
 
-<liferay-util:include page="/html/portlet/workflow/workflow_action.jsp" />
+}
