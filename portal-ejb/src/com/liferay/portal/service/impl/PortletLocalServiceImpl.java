@@ -910,6 +910,9 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 				portletModel.setIndexerClass(GetterUtil.getString(
 					portlet.elementText("indexer-class"),
 					portletModel.getIndexerClass()));
+				portletModel.setOpenSearchClass(GetterUtil.getString(
+					portlet.elementText("open-search-class"),
+					portletModel.getOpenSearchClass()));
 				portletModel.setSchedulerClass(GetterUtil.getString(
 					portlet.elementText("scheduler-class"),
 					portletModel.getSchedulerClass()));

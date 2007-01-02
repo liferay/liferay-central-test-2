@@ -53,6 +53,10 @@ public interface Portlet extends PortletModel {
 
 	public void setIndexerClass(java.lang.String indexerClass);
 
+	public java.lang.String getOpenSearchClass();
+
+	public void setOpenSearchClass(java.lang.String openSearchClass);
+
 	public java.lang.String getSchedulerClass();
 
 	public void setSchedulerClass(java.lang.String schedulerClass);

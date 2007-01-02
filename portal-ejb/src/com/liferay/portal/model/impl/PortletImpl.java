@@ -148,8 +148,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public PortletImpl(String portletId, String companyId, String strutsPath,
 					   String configurationPath, String displayName,
 					   String portletClass, String indexerClass,
-					   String schedulerClass, String portletURLClass,
-					   String friendlyURLPluginClass,
+					   String openSearchClass, String schedulerClass,
+					   String portletURLClass, String friendlyURLPluginClass,
 					   String portletDataHandlerClass,
 					   String smtpMessageListenerClass,
 					   String defaultPreferences, String prefsValidator,
@@ -178,6 +178,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_displayName = displayName;
 		_portletClass = portletClass;
 		_indexerClass = indexerClass;
+		_openSearchClass = openSearchClass;
 		_schedulerClass = schedulerClass;
 		_portletURLClass = portletURLClass;
 		_friendlyURLPluginClass = friendlyURLPluginClass;
@@ -333,6 +334,25 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setIndexerClass(String indexerClass) {
 		_indexerClass = indexerClass;
+	}
+
+	/**
+	 * Gets the name of the open search class of the portlet.
+	 *
+	 * @return		the name of the open search class of the portlet
+	 */
+	public String getOpenSearchClass() {
+		return _openSearchClass;
+	}
+
+	/**
+	 * Sets the name of the open search class of the portlet.
+	 *
+	 * @param		openSearchClass the name of the open search class of the
+	 *				portlet
+	 */
+	public void setOpenSearchClass(String openSearchClass) {
+		_openSearchClass = openSearchClass;
 	}
 
 	/**
@@ -1704,22 +1724,22 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		return new PortletImpl(
 			getPortletId(), getCompanyId(), getStrutsPath(),
 			getConfigurationPath(), getDisplayName(), getPortletClass(),
-			getIndexerClass(), getSchedulerClass(), getPortletURLClass(),
-			getFriendlyURLPluginClass(), getPortletDataHandlerClass(),
-			getSmtpMessageListenerClass(), getDefaultPreferences(),
-			getPreferencesValidator(), isPreferencesCompanyWide(),
-			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
-			isUseDefaultTemplate(), isShowPortletAccessDenied(),
-			isShowPortletInactive(), isActionURLRedirect(),
-			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
-			isMaximizePrint(), isLayoutCacheable(), isInstanceable(),
-			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderCss(),
-			getHeaderJavaScript(), isAddDefaultResource(), getRoles(),
-			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
-			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
-			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(),
+			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
+			getPortletURLClass(), getFriendlyURLPluginClass(),
+			getPortletDataHandlerClass(), getSmtpMessageListenerClass(),
+			getDefaultPreferences(), getPreferencesValidator(),
+			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
+			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
+			isShowPortletAccessDenied(), isShowPortletInactive(),
+			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
+			isMaximizeHelp(), isMaximizePrint(), isLayoutCacheable(),
+			isInstanceable(), isPrivateRequestAttributes(),
+			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			getHeaderCss(), getHeaderJavaScript(), isAddDefaultResource(),
+			getRoles(), getUnlinkedRoles(), getRoleMappers(), isSystem(),
+			isActive(), isInclude(), getInitParams(), getExpCache(),
+			getPortletModes(), getSupportedLocales(), getResourceBundle(),
+			getPortletInfo(), getUserAttributes(), getCustomUserAttributes(),
 			getServletContextName(), getServletURLPatterns());
 	}
 
@@ -1767,6 +1787,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the indexer class of the portlet.
 	 */
 	private String _indexerClass;
+
+	/**
+	 * The name of the open search class of the portlet.
+	 */
+	private String _openSearchClass;
 
 	/**
 	 * The name of the scheduler class of the portlet.
