@@ -72,135 +72,138 @@ for (int i = 0; i < results.getLength(); i++) {
 	String portletId = (String)doc.get(LuceneFields.PORTLET_ID);
 
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
-	String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
-	String groupId = (String)doc.get(LuceneFields.GROUP_ID);
+	if (portlet != null) {
+		String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
-	String title = null;
-	String content = null;
+		String groupId = (String)doc.get(LuceneFields.GROUP_ID);
 
-	String portletLayoutId = null;
+		String title = null;
+		String content = null;
 
-	if (layout.isPrivateLayout()) {
-		portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
-	}
-	else {
-		portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
-	}
+		String portletLayoutId = null;
 
-	PortletURL rowURL = new PortletURLImpl(request, portletId, portletLayoutId, false);
+		if (layout.isPrivateLayout()) {
+			portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
+		}
+		else {
+			portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
+		}
 
-	rowURL.setWindowState(WindowState.MAXIMIZED);
-	rowURL.setPortletMode(PortletMode.VIEW);
+		PortletURL rowURL = new PortletURLImpl(request, portletId, portletLayoutId, false);
 
-	String url = rowURL.toString();
+		rowURL.setWindowState(WindowState.MAXIMIZED);
+		rowURL.setPortletMode(PortletMode.VIEW);
 
-	String[] urls = null;
+		String url = rowURL.toString();
 
-	if (Validator.isNotNull(portlet.getIndexerClass())) {
-		Indexer indexer = (Indexer)InstancePool.get(portlet.getIndexerClass());
+		String[] urls = null;
 
-		DocumentSummary docSummary = indexer.getDocumentSummary(doc, rowURL);
+		if (Validator.isNotNull(portlet.getIndexerClass())) {
+			Indexer indexer = (Indexer)InstancePool.get(portlet.getIndexerClass());
 
-		title = docSummary.getTitle();
-		content = docSummary.getContent();
-		url = rowURL.toString();
+			DocumentSummary docSummary = indexer.getDocumentSummary(doc, rowURL);
 
-		if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-			String articleId = doc.get("articleId");
+			title = docSummary.getTitle();
+			content = docSummary.getContent();
+			url = rowURL.toString();
 
-			List contentSearches = JournalContentSearchLocalServiceUtil.getArticleContentSearches(company.getCompanyId(), articleId);
+			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+				String articleId = doc.get("articleId");
 
-			if (contentSearches.size() > 0) {
-				List urlsList = new ArrayList();
+				List contentSearches = JournalContentSearchLocalServiceUtil.getArticleContentSearches(company.getCompanyId(), groupId, articleId);
 
-				for (int j = 0; j < contentSearches.size(); j++) {
-					JournalContentSearch contentSearch = (JournalContentSearch)contentSearches.get(j);
+				if (contentSearches.size() > 0) {
+					List urlsList = new ArrayList();
 
-					Layout contentSearchLayout = LayoutLocalServiceUtil.getLayout(contentSearch.getLayoutId(), contentSearch.getOwnerId());
+					for (int j = 0; j < contentSearches.size(); j++) {
+						JournalContentSearch contentSearch = (JournalContentSearch)contentSearches.get(j);
 
-					String contentSearchUrl = PortalUtil.getLayoutURL(contentSearchLayout, themeDisplay);
+						Layout contentSearchLayout = LayoutLocalServiceUtil.getLayout(contentSearch.getLayoutId(), contentSearch.getOwnerId());
 
-					urlsList.add(contentSearchUrl);
+						String contentSearchUrl = PortalUtil.getLayoutURL(contentSearchLayout, themeDisplay);
 
-					if (i == 0) {
-						url = contentSearchUrl;
+						urlsList.add(contentSearchUrl);
+
+						if (i == 0) {
+							url = contentSearchUrl;
+						}
+					}
+
+					if (urlsList.size() > 0) {
+						urls = (String[])urlsList.toArray(new String[0]);
 					}
 				}
+				else {
+					String version = doc.get("version");
 
-				if (urlsList.size() > 0) {
-					urls = (String[])urlsList.toArray(new String[0]);
+					StringBuffer sb = new StringBuffer();
+
+					sb.append(themeDisplay.getPathMain());
+					sb.append("/journal_articles/view_article_content?articleId=");
+					sb.append(articleId);
+					sb.append("&version=");
+					sb.append(version);
+
+					url = sb.toString();
 				}
 			}
-			else {
-				String version = doc.get("version");
+		}
+		else {
+			title = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
+			content = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
+		}
 
-				StringBuffer sb = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-				sb.append(themeDisplay.getPathMain());
-				sb.append("/journal_articles/view_article_content?articleId=");
-				sb.append(articleId);
-				sb.append("&version=");
-				sb.append(version);
+		sb.append("<a href=\"");
+		sb.append(url);
+		sb.append("\"");
 
-				url = sb.toString();
+		if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+			sb.append(" target=\"_blank\"");
+		}
+
+		sb.append(">");
+		sb.append(portletTitle);
+		sb.append(" &raquo; ");
+		sb.append("<i>");
+		sb.append(title);
+		sb.append("</i>");
+		sb.append("<br><br>");
+		//sb.append("<span style=\"font-size: x-small;\">");
+		sb.append(content);
+		//sb.append("</span>");
+		sb.append("</a><br>");
+
+		if (urls != null) {
+			sb.append("<span style=\"font-size: xx-small;\">");
+
+			for (int j = 0; j < urls.length; j++) {
+				sb.append("<br>");
+				sb.append("<a href=\"");
+				sb.append(urls[j]);
+				sb.append("\">");
+				sb.append(Http.getProtocol(request));
+				sb.append("://");
+				sb.append(company.getPortalURL());
+				sb.append(StringUtil.shorten(urls[j], 100));
+				sb.append("</a>");
 			}
-		}
-	}
-	else {
-		title = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
-		content = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
-	}
 
-	StringBuffer sb = new StringBuffer();
-
-	sb.append("<a href=\"");
-	sb.append(url);
-	sb.append("\"");
-
-	if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-		sb.append(" target=\"_blank\"");
-	}
-
-	sb.append(">");
-	sb.append(portletTitle);
-	sb.append(" &raquo; ");
-	sb.append("<i>");
-	sb.append(title);
-	sb.append("</i>");
-	sb.append("<br><br>");
-	//sb.append("<span style=\"font-size: x-small;\">");
-	sb.append(content);
-	//sb.append("</span>");
-	sb.append("</a><br>");
-
-	if (urls != null) {
-		sb.append("<span style=\"font-size: xx-small;\">");
-
-		for (int j = 0; j < urls.length; j++) {
-			sb.append("<br>");
-			sb.append("<a href=\"");
-			sb.append(urls[j]);
-			sb.append("\">");
-			sb.append(Http.getProtocol(request));
-			sb.append("://");
-			sb.append(company.getPortalURL());
-			sb.append(StringUtil.shorten(urls[j], 100));
-			sb.append("</a>");
+			sb.append("</span>");
 		}
 
-		sb.append("</span>");
+		row.addText(StringUtil.highlight(sb.toString(), keywords));
+
+		// Score
+
+		row.addText(String.valueOf(hits.score(i)));
+
+		// Add result row
+
+		resultRows.add(row);
 	}
-
-	row.addText(StringUtil.highlight(sb.toString(), keywords));
-
-	// Score
-
-	row.addText(String.valueOf(hits.score(i)));
-
-	// Add result row
-
-	resultRows.add(row);
 }
 %>
 
