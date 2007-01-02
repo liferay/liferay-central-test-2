@@ -104,7 +104,7 @@ public class ReleaseInfoBuilder {
 			content = FileUtil.read(file);
 
 			x = content.indexOf("insert into Release_");
-			y = content.indexOf(");", x);
+			y = content.indexOf(", TRUE);", x);
 			x = content.lastIndexOf(" ", y - 1) + 1;
 
 			content =
