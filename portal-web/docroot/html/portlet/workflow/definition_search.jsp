@@ -32,19 +32,19 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td>
+	<%--<td>
 		<%= LanguageUtil.get(pageContext, "definition-id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
+	<td style="padding-left: 5px;"></td>--%>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-name") %>
 	</td>
 </tr>
 <tr>
-	<td>
+	<%--<td>
 		<input class="form-text" name="<portlet:namespace /><%= DefinitionDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
+	<td style="padding-left: 5px;"></td>--%>
 	<td>
 		<input class="form-text" name="<portlet:namespace /><%= DefinitionDisplayTerms.NAME %>" size="20" type="text" value="<%= displayTerms.getName() %>">
 	</td>

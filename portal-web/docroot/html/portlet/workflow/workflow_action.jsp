@@ -73,7 +73,7 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 						<td>
 							<%= LanguageUtil.get(pageContext, displayName) %>
 						</td>
-						<td  align="right" valign="middle">
+						<td align="right" valign="middle">
 				</c:if>
 
 				<c:if test="<%= WorkflowTaskPermission.contains(permissionChecker, task, ActionKeys.PERMISSIONS) %>">
@@ -110,6 +110,17 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 			</c:if>
 		</c:when>
 		<c:otherwise>
+			<c:if test='<%= tabs1.equals("instances") %>'>
+					</td>
+				</tr>
+				<tr class="<%= className %>" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
+					<td colspan="5"></td>
+					<td>
+						<%= LanguageUtil.get(pageContext, token.getName()) %>
+					</td>
+					<td align="right" valign="middle">
+			</c:if>
+
 			<c:choose>
 				<c:when test='<%= token.getType().equals("join") %>'>
 					<%= LanguageUtil.get(pageContext, "waiting-on-sibling-tokens-to-complete") %>
@@ -133,6 +144,11 @@ List tasks = (List)request.getAttribute(WebKeys.WORKFLOW_TASKS);
 					</c:if>
 				</c:otherwise>
 			</c:choose>
+
+			<c:if test='<%= tabs1.equals("instances") %>'>
+					</td>
+				</tr>
+			</c:if>
 		</c:otherwise>
 	</c:choose>
 </c:if>

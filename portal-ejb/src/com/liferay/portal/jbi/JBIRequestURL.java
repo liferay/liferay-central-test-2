@@ -112,7 +112,8 @@ public abstract class JBIRequestURL {
 	}
 
 	public String getContent() throws IOException {
-		return Http.URLtoString(toString(), true);
+		//return Http.URLtoString(toString(), true);
+		return Http.URLtoString(getURL(), null, _params, true);
 	}
 
 	public String toString() {

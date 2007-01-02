@@ -37,6 +37,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -72,6 +74,8 @@ public class EditDefinitionAction extends PortletAction {
 				setForward(req, "portlet.workflow.error");
 			}
 			else {
+				_log.error(e, e);
+
 				SessionErrors.add(req, DefinitionXmlException.class.getName());
 
 				setForward(req, "portlet.workflow.edit_definition");
@@ -115,5 +119,7 @@ public class EditDefinitionAction extends PortletAction {
 		WorkflowDefinitionServiceUtil.addDefinition(
 			xml, communityPermissions, guestPermissions);
 	}
+
+	private static Log _log = LogFactory.getLog(EditDefinitionAction.class);
 
 }

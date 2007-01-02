@@ -32,14 +32,14 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
-	<td>
+	<%--<td>
 		<%= LanguageUtil.get(pageContext, "instance-id") %>
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-id") %>
 	</td>
-	<td style="padding-left: 5px;"></td>
+	<td style="padding-left: 5px;"></td>--%>
 	<td>
 		<%= LanguageUtil.get(pageContext, "definition-name") %>
 	</td>
@@ -49,14 +49,14 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 	</td>
 </tr>
 <tr>
-	<td>
+	<%--<td>
 		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= displayTerms.getInstanceIdString() %>">
 	</td>
 	<td style="padding-left: 5px;"></td>
 	<td>
 		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>">
 	</td>
-	<td style="padding-left: 5px;"></td>
+	<td style="padding-left: 5px;"></td>--%>
 	<td>
 		<input class="form-text" name="<portlet:namespace /><%= InstanceDisplayTerms.DEFINITION_NAME %>" size="20" type="text" value="<%= displayTerms.getDefinitionName() %>">
 	</td>

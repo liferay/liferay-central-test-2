@@ -62,6 +62,9 @@ import org.apache.commons.httpclient.auth.AuthScope;
 import org.apache.commons.httpclient.cookie.CookiePolicy;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.httpclient.methods.PostMethod;
+import org.apache.commons.httpclient.methods.RequestEntity;
+import org.apache.commons.httpclient.methods.multipart.MultipartRequestEntity;
+import org.apache.commons.httpclient.methods.multipart.StringPart;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -378,6 +381,13 @@ public class Http {
 		URLtoByteArray(location, cookies, post);
 	}
 
+	public static void submit(
+			String location, Cookie[] cookies, Map parts, boolean post)
+		throws IOException {
+
+		URLtoByteArray(location, cookies, parts, post);
+	}
+
 	public static byte[] URLtoByteArray(String location)
 		throws IOException {
 
@@ -398,6 +408,13 @@ public class Http {
 
 	public static byte[] URLtoByteArray(
 			String location, Cookie[] cookies, boolean post)
+		throws IOException {
+
+		return URLtoByteArray(location, cookies, null, post);
+	}
+
+	public static byte[] URLtoByteArray(
+			String location, Cookie[] cookies, Map parts, boolean post)
 		throws IOException {
 
 		byte[] byteArray = null;
@@ -471,6 +488,29 @@ public class Http {
 
 			if (post) {
 				method = new PostMethod(location);
+
+				if ((parts != null) && (parts.size() > 0)) {
+					List partsList = new ArrayList();
+
+					Iterator itr = parts.entrySet().iterator();
+
+					while (itr.hasNext()) {
+						Map.Entry entry = (Map.Entry)itr.next();
+
+						String key = (String)entry.getKey();
+						String value = (String)entry.getValue();
+
+						partsList.add(new StringPart(key, value));
+					}
+
+					PostMethod postMethod = (PostMethod)method;
+
+					RequestEntity requestEntity = new MultipartRequestEntity(
+						(StringPart[])partsList.toArray(new StringPart[0]),
+						method.getParams());
+
+					postMethod.setRequestEntity(requestEntity);
+				}
 			}
 			else {
 				method = new GetMethod(location);
@@ -536,11 +576,18 @@ public class Http {
 		return URLtoString(location, null, post);
 	}
 
-	public static String URLtoString(String location, Cookie[] cookies,
-									 boolean post)
+	public static String URLtoString(
+			String location, Cookie[] cookies, boolean post)
 		throws IOException {
 
 		return new String(URLtoByteArray(location, cookies, post));
+	}
+
+	public static String URLtoString(
+			String location, Cookie[] cookies, Map parts, boolean post)
+		throws IOException {
+
+		return new String(URLtoByteArray(location, cookies, parts, post));
 	}
 
 	public static String URLtoString(URL url) throws IOException {
