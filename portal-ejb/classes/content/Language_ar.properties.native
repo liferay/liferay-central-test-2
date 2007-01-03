@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -1798,6 +1798,7 @@ seconds=ثواني
 security=الأمن
 see-current-results=إعرض النتائج الحالية
 see-large-photo=إعرض الصورة الكبيرة
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=إختر مقالة موجودة أو أضف مقالة ليم عرضها في هذه البورتلت.
 select-and-copy=إختر و إنسخ
 select-article=إختر مقالة
@@ -1832,6 +1833,7 @@ send-order-email-to-users=أرسل رسالة إلكترونية تحتوي طل
 send-order-email=أرسل رسالة إلكترونية تحتوي طلب الشراء
 send-shipping-email-to-users=أرسل رسالة إلكترونية تحتوي تفاصيل الشحن إلى المستخدمين؟
 send-shipping-email=أرسل رسالة إلكترونية تحتوي تفاصيل الشحن
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=أرسل رسالة نصية
 send=أرسل
 sent-mail=البريد الإلكتروني المرسل

@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=手机
 celsius=摄氏
 centimeter=厘米
 change-colors=修改配色
+change-frequency=改变频率
 change-layout=修改布局
 change-password=修改密码
 change=更改
@@ -1113,6 +1114,7 @@ inactive-user=非活动中用户
 inactive=非活动中
 inch=英寸
 include-original-text=包含原始內文
+include=包括
 incoming-pop-server=收件POP服务器
 increment-version=累增版本
 indexed=已索引
@@ -1319,7 +1321,6 @@ monthly-payment=月付款
 monthly=每月
 months=几个月
 more-information-about-liferay-is-available-at=更多消息请随时参考{1}.
-more-information=更多信息
 more-options=更多选择
 more=更多
 move-column=移动列
@@ -1485,6 +1486,7 @@ owner=所有者
 page-display-order=页显示次序
 page-history=页历史
 page-links=页链接
+page-priority=页优先权
 page-settings=页面设置
 page-url=页URL
 page=页
@@ -1868,6 +1870,7 @@ seconds=秒
 security=安全
 see-current-results=参见当前结果
 see-large-photo=参见大相片
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=选择一篇现有的文章或增加文章显示在这portlet 。
 select-and-copy=选择和复制
 select-article=选择文章
@@ -1902,7 +1905,7 @@ send-order-email-to-users=发送定单邮件到使用者?
 send-order-email=发送订单邮件
 send-shipping-email-to-users=发送出货邮件到使用者?
 send-shipping-email=发送出货电子邮件
-send-sitemap-information-to=寄发sitemap 信息
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=发送文本信
 send=发送
 sent-mail=已发送邮件
@@ -1963,9 +1966,6 @@ signature=签名
 similar-pages=相似的页
 similar-phrase=相似的词组
 simple=简单
-sitemap-changefreq=改变频率
-sitemap-include=包括在sitemap?
-sitemap-priority=页优先权
 sitemap-protocol=Sitemap 协议
 sitemap=Sitemap
 size=大小

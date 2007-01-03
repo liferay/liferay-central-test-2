@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
+<%
+Layout selLayout = (Layout)request.getAttribute(WebKeys.SEL_LAYOUT);
+%>
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
@@ -31,11 +35,12 @@
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
+
 		<%
-			Layout selLayout = (Layout) request.getAttribute("SEL_LAYOUT");
-			String selectedPlid = selLayout.getTypeSettingsProperties().getProperty("layoutPlid", "");
+		String linkToPlid = selLayout.getTypeSettingsProperties().getProperty("linkToPlid", "");
 		%>
-		<select name="TypeSettingsProperties(layoutPlid)">
+
+		<select name="TypeSettingsProperties(linkToPlid)">
 			<option value=""></option>
 
 			<%
@@ -73,8 +78,7 @@
 				if (copiableLayout != null) {
 			%>
 
-					<option <%=(selectedPlid.equals(copiableLayout.getPlid()))?"selected":""%>
-						value="<%= copiableLayout.getPlid() %>"><%= name %></option>
+					<option <%= linkToPlid.equals(copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
 
 			<%
 				}
@@ -84,5 +88,4 @@
 		</select>
 	</td>
 </tr>
-<tr>
 </table>

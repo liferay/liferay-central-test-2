@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=Cellules
 celsius=Celsius
 centimeter=Centimètre
 change-colors=Personnalisez les couleurs
+change-frequency=Changez La Fréquence
 change-layout=Changez l'affichage
 change-password=Changez le mot de passe
 change=modifiez
@@ -1113,6 +1114,7 @@ inactive-user=Utilisateur inactif
 inactive=Inactif
 inch=Pouce
 include-original-text=Inclure le texte original
+include=Incluez
 incoming-pop-server=Serveur POP entrant
 increment-version=Incrémenter la version
 indexed=Classé
@@ -1319,7 +1321,6 @@ monthly-payment=Paiement Mensuel
 monthly=Mensuel
 months=Mois
 more-information-about-liferay-is-available-at=Toute information supplémentaire concernant Liferay est disponible sur {0}http://www.liferay.com{1}.
-more-information=Plus d'information
 more-options=Plus D'Options
 more=Plus
 move-column=Déplacer la colonne
@@ -1486,6 +1487,7 @@ owner=Propriétaire
 page-display-order=Page d'affichage de la commande
 page-history=Historique de la page
 page-links=Liens de la page
+page-priority=Priorité De Page
 page-settings=Paramètres de la page
 page-url=URL De Page
 page=Page
@@ -1869,6 +1871,7 @@ seconds=Secondes
 security=Sécurité
 see-current-results=Voir les résultats actuels
 see-large-photo=Voir la photo agrandie
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Choisissez un article existant ou ajoutez un article à montrer dans ce portlet.
 select-and-copy=Choisissez Et Copy
 select-article=Choisissez L'Article
@@ -1903,7 +1906,7 @@ send-order-email-to-users=Envoyez l'email de commande aux utilisateurs ?
 send-order-email=Envoyez l'email de commande
 send-shipping-email-to-users=Envoyez l'email d'expédition aux utilisateurs ?
 send-shipping-email=Envoyez l'email d'expédition
-send-sitemap-information-to=Envoyez l'information de sitemap à
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Envoyez un message
 send=Envoyez
 sent-mail=Courrier envoyé
@@ -1964,9 +1967,6 @@ signature=Signature
 similar-pages=Pages similaires
 similar-phrase=Expression similaire
 simple=Simple
-sitemap-changefreq=Changez la fréquence
-sitemap-include=Incluez dans le sitemap ?
-sitemap-priority=Priorité de page
 sitemap-protocol=Protocole de Sitemap
 sitemap=Sitemap
 size=Taille

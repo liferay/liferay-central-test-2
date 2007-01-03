@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -1577,6 +1577,7 @@ seconds=Секунд(а)(ы)
 security=Безопасность
 see-current-results=Посмотреть результаты голосования
 see-large-photo=Смотреть большое фото
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Выберите существующую статью или добавьте статью для показа в этом портлете.
 select-and-copy=Выбрать и Скопировать
 select-article=Выбрать статью
@@ -1608,6 +1609,7 @@ send-order-email-to-users=Отправить пользователям email з
 send-order-email=Отправить email заказа
 send-shipping-email-to-users=Отправить пользователям email доставки?
 send-shipping-email=Отправить email доставки
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Отправить текстовое сообщение
 send=Отправить
 sent-mail=Отправить почту

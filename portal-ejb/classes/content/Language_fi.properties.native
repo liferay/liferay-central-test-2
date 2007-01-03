@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -1803,6 +1803,7 @@ seconds=Sekuntia
 security=Turvallisuus
 see-current-results=Avaa nykyiset tulokset
 see-large-photo=Avaa suuri kuva
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Valitse olemassaoleva artikkeli tai lisää artikkeli näyttääksesi sen tässä portletissa.
 select-and-copy=Valitse ja kopioi
 select-article=Valitse artikkeli
@@ -1837,6 +1838,7 @@ send-order-email-to-users=Lähetä tilaus-sähköposti käyttäjille?
 send-order-email=Lähetä tilaus-sähköposti
 send-shipping-email-to-users=Lähetä toimitus-sähköposti käyttäjille?
 send-shipping-email=Lähetä toimitus-sähköposti
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Lähetä tekstiviesti
 send=Lähetä
 sent-mail=Lähetetyt

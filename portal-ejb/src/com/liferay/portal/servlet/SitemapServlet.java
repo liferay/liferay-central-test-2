@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -70,7 +69,6 @@ public class SitemapServlet extends HttpServlet {
 			}
 
 			_mainPath = rootPath + MainServlet.DEFAULT_MAIN_PATH;
-
 		}
 	}
 
@@ -81,18 +79,20 @@ public class SitemapServlet extends HttpServlet {
 			return;
 		}
 
-		res.setContentType("text/xml; charset=utf-8");
+		res.setContentType("text/xml; charset=UTF-8");
+
 		OutputStreamWriter out = new OutputStreamWriter(res.getOutputStream());
 
 		try {
-
 			String hostName = PortalUtil.getHost(req);
 			String ownerId = req.getParameter("ownerId");
 
 			LayoutSet layoutSet = null;
+
 			if (ownerId != null) {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
-			} else {
+			}
+			else {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
 					_companyId, hostName);
 			}
@@ -100,6 +100,7 @@ public class SitemapServlet extends HttpServlet {
 			if (Validator.isNull(hostName)) {
 				hostName = PortalUtil.getHost(req);
 			}
+
 			String portalURL = PortalUtil.getPortalURL(
 				hostName, req.getServerPort(), req.isSecure());
 
@@ -115,7 +116,7 @@ public class SitemapServlet extends HttpServlet {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(StackTraceUtil.getStackTrace(e));
+				_log.warn(e, e);
 			}
 		}
 		finally {
@@ -124,12 +125,9 @@ public class SitemapServlet extends HttpServlet {
 		}
 	}
 
-	protected String getCompanyId() {
-		return _companyId;
-	}
-
 	private static Log _log = LogFactory.getLog(SitemapServlet.class);
 
 	private String _companyId;
 	private String _mainPath;
+
 }

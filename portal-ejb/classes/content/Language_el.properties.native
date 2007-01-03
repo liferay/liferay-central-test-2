@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=Κελί
 celsius=Κελσίου
 centimeter=Εκατοστόμετρο
 change-colors=Αλλαγή Χρωμάτων
+change-frequency=Συχνότητα αλλαγής
 change-layout=Αλλαγή Διάταξης
 change-password=Αλλαγή κωδικού πρόσβασης
 change=αλλαγή
@@ -1112,6 +1113,7 @@ inactive-user=Μη ενεργός Χρήστης
 inactive=Μη ενεργό
 inch=Ίντσα
 include-original-text=Συμπερίληψη Αρχικού Κειμένου
+include=Περιλάβετε
 incoming-pop-server=Εισερχόμενος pop-server
 increment-version=Αύξηση Έκδοσης
 indexed=Με ευρετήριο
@@ -1318,7 +1320,6 @@ monthly-payment=Μηνιαία πληρωμή
 monthly=Μηνιαία
 months=Μήνες
 more-information-about-liferay-is-available-at=Για περισσότερες πληροφορίες για το Liferay επισκεφτείτε την σελίδα {0}http://www.liferay.com{1}. 
-more-information=Περισσότερες πληροφορίες
 more-options=Περισσότερες επιλογές
 more=Περισσότεροι
 move-column=Μετακίνηση Στήλης
@@ -1484,6 +1485,7 @@ owner=Ιδιοκτήτης
 page-display-order=Σειρά Εμφάνισης Σελίδας
 page-history=Ιστορικό Σελίδας
 page-links=Σύνδεσμοι Σελίδας
+page-priority=Προτεραιότητα σελίδων
 page-settings=Ρυθμίσεις Σελίδας
 page-url=Σελίδα URL
 page=Σελίδα
@@ -1867,6 +1869,7 @@ seconds=Δευτερόλεπτα
 security=Ασφάλεια
 see-current-results=Δείτε τα Τρέχoντα Αποτελέσματα
 see-large-photo=Δείτε Μεγάλη Φωτογραφία
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Επιλέξτε ένα υπάρχον άρθρο ή προσθέστε ένα άρθρο που επιδεικνύεται σε αυτό το portlet.
 select-and-copy=Επιλέξτε και αντιγράψτε
 select-article=Επιλέξτε το άρθρο
@@ -1901,7 +1904,7 @@ send-order-email-to-users=Θελετε να στείλετε email διαταγ�
 send-order-email=Στείλετε email διαταγής
 send-shipping-email-to-users=Θέλετε να στείλετε email αποστολής στους χρήστες;
 send-shipping-email=Στείλετε email αποστολής
-send-sitemap-information-to=Στείλετε sitemap τις πληροφορίες
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Αποστολή Μηνύματος Κινητού
 send=Αποστολή
 sent-mail=Αποστολή Ταχυδρομείου
@@ -1962,9 +1965,6 @@ signature=Υπογραφή
 similar-pages=Παρόμοιες Σελίδες
 similar-phrase=Παρόμοια Φράση
 simple=Απλός
-sitemap-changefreq=Συχνότητα αλλαγής
-sitemap-include=Περιλάβετε στο sitemap;
-sitemap-priority=Προτεραιότητα σελίδων
 sitemap-protocol=Πρωτόκολλο Sitemap
 sitemap=Sitemap
 size=Μέγεθος

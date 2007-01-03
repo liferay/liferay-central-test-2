@@ -23,6 +23,11 @@
 %>
 
 <%@ include file="/html/portal/init.jsp" %>
+
+<%
+Layout selLayout = (Layout)request.getAttribute(WebKeys.SEL_LAYOUT);
+%>
+
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td nowrap>
@@ -163,4 +168,77 @@
 		</div>
 	</td>
 </tr>
+
+<c:if test="<%= PortalUtil.isLayoutSitemapable(selLayout) %>">
+	<tr>
+		<td>
+			<table border="0" cellpadding="4" cellspacing="0" width="100%">
+			<tr>
+				<td class="beta-gradient">
+					<b><%= LanguageUtil.get(pageContext, "sitemap-protocol") %>:</b>
+				</td>
+				<td align="right" class="beta-gradient">
+					<span style="font-size: xx-small;">
+					[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+					</span>
+				</td>
+			</tr>
+			</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<div id="<portlet:namespace />sitemap" style="display: none;">
+				<br>
+
+				<%
+				boolean include = GetterUtil.getBoolean(selLayout.getTypeSettingsProperties().getProperty("sitemap-include"), true);
+				String changeFrequency = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
+				%>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "include") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="TypeSettingsProperties(sitemap-include)">
+							<option <%= (include) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+							<option <%= (!include) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+						</select>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "page-priority") %> (0.0 - 1.0)
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "change-frequency") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<select name="TypeSettingsProperties(sitemap-changefreq)">
+							<option <%= (changeFrequency.equals("always")) ? "selected" : "" %> value="always"><%= LanguageUtil.get(pageContext, "always") %></option>
+							<option <%= (changeFrequency.equals("hourly")) ? "selected" : "" %> value="hourly"><%= LanguageUtil.get(pageContext, "hourly") %></option>
+							<option <%= (changeFrequency.equals("daily")) ? "selected" : "" %> value="daily"><%= LanguageUtil.get(pageContext, "daily") %></option>
+							<option <%= (changeFrequency.equals("weekly")) ? "selected" : "" %> value="weekly"><%= LanguageUtil.get(pageContext, "weekly") %></option>
+							<option <%= (changeFrequency.equals("monthly")) ? "selected" : "" %> value="monthly"><%= LanguageUtil.get(pageContext, "monthly") %></option>
+							<option <%= (changeFrequency.equals("yearly")) ? "selected" : "" %> value="yearly"><%= LanguageUtil.get(pageContext, "yearly") %></option>
+							<option <%= (changeFrequency.equals("never")) ? "selected" : "" %> value="never"><%= LanguageUtil.get(pageContext, "never") %></option>
+						</select>
+					</td>
+				</tr>
+				</table>
+			</div>
+		</td>
+	</tr>
+</c:if>
+
 </table>

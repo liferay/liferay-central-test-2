@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=영창
 celsius=Celsius
 centimeter=센티미터
 change-colors=변경 군기
+change-frequency=변화 주파수
 change-layout=변경 배치
 change-password=변화 암호
 change=변경
@@ -1112,6 +1113,7 @@ inactive-user=비활동성 사용자
 inactive=비활동성
 inch=인치
 include-original-text=원래 원본을 포함하십시요
+include=포함하십시요
 incoming-pop-server=들어오는POP서버
 increment-version=증분 버전
 indexed=색인을 붙이는
@@ -1318,7 +1320,6 @@ monthly-payment=월부금
 monthly=매달
 months=개월
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
-more-information=정보 더
 more-options=선택권 더
 more=더
 move-column=움직임 란
@@ -1485,6 +1486,7 @@ owner=소유자
 page-display-order=페이지 전시 명령
 page-history=페이지 전적
 page-links=페이지는 연결한다
+page-priority=페이지 우선권
 page-settings=페이지 조정
 page-url=페이지URL
 page=페이지
@@ -1868,6 +1870,7 @@ seconds=초
 security=안전
 see-current-results=현재 결과를 보십시요
 see-large-photo=큰 사진을 보십시요
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=기존하는 기사를 선정하나 이portlet안에 보일 것이다 기사를 추가하십시요.
 select-and-copy=선정하고 베끼십시요
 select-article=기사를 선정하십시요
@@ -1902,7 +1905,7 @@ send-order-email-to-users=사용자에게 명령 email 보내십시요?
 send-order-email=명령 Email 보내십시요
 send-shipping-email-to-users=사용자에게 선박 email 보내십시요?
 send-shipping-email=선박 Email 보내십시요
-send-sitemap-information-to=sitemap정보를에 보내십시요
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=원본 메시지를 보내십시요
 send=보내십시요
 sent-mail=보낸 우편물
@@ -1963,9 +1966,6 @@ signature=서명
 similar-pages=동이한 페이지
 similar-phrase=동이한 어구
 simple=간단한
-sitemap-changefreq=변화 주파수
-sitemap-include=sitemap안에 포함하십시요?
-sitemap-priority=페이지 우선권
 sitemap-protocol=Sitemap의정서
 sitemap=Sitemap
 size=규모

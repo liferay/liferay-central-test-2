@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=手機
 celsius=攝氏
 centimeter=厘米
 change-colors=改變配色
+change-frequency=改變頻率
 change-layout=改變佈局
 change-password=改變密碼
 change=更動
@@ -1113,6 +1114,7 @@ inactive-user=非活動中用戶
 inactive=非活動中
 inch=英寸
 include-original-text=包含原始內文
+include=包括
 incoming-pop-server=內送 POP 伺服器
 increment-version=累增版本
 indexed=標註
@@ -1319,7 +1321,6 @@ monthly-payment=月付款
 monthly=每月
 months=幾個月
 more-information-about-liferay-is-available-at=更多訊息請隨時參考 蓓麗美人窩{0}http://www.bellemichelle.com{1}.
-more-information=更多資訊
 more-options=更多選擇
 more=更多
 move-column=搬移專欄
@@ -1486,6 +1487,7 @@ owner=所有者
 page-display-order=頁顯示次序
 page-history=頁歷史
 page-links=頁鏈接
+page-priority=頁優先權
 page-settings=頁設置
 page-url=頁URL
 page=頁
@@ -1869,6 +1871,7 @@ seconds=秒鐘
 security=安全
 see-current-results=參見當前結果
 see-large-photo=參見大相片
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=選擇一篇現有的文章或增加文章被顯示在這portlet 。
 select-and-copy=選擇和複製
 select-article=選擇文章
@@ -1903,7 +1906,7 @@ send-order-email-to-users=傳送訂安電子郵件到使用者?
 send-order-email=傳送訂單電子郵件
 send-shipping-email-to-users=傳送出貨電子郵件到使用者?
 send-shipping-email=傳送出貨電子郵件
-send-sitemap-information-to=寄發sitemap 資訊
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=傳送文本信
 send=傳送
 sent-mail=被傳送郵件
@@ -1964,9 +1967,6 @@ signature=簽名
 similar-pages=相似的頁
 similar-phrase=相似的詞組
 simple=簡單
-sitemap-changefreq=改變頻率
-sitemap-include=包括在sitemap?
-sitemap-priority=頁優先權
 sitemap-protocol=Sitemap 協議
 sitemap=Sitemap
 size=大小

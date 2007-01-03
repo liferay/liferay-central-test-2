@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -579,6 +579,7 @@ cell=細胞
 celsius=摂氏
 centimeter=センチメートル
 change-colors=変更色
+change-frequency=変更の頻度
 change-layout=変更のレイアウト
 change-password=変更パスワード
 change=変更
@@ -1111,6 +1112,7 @@ inactive-user=不活性ユーザー
 inactive=不活性
 inch=インチ
 include-original-text=原本を含みなさい
+include=含みなさい
 incoming-pop-server=入って来るPOP サーバー
 increment-version=増分版
 indexed=指示される
@@ -1317,7 +1319,6 @@ monthly-payment=月払い
 monthly=月例
 months=月
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
-more-information=より多くの情報
 more-options=より多くの選択
 more=多く
 move-column=移動コラム
@@ -1483,6 +1484,7 @@ owner=所有者
 page-display-order=ページの表示順序
 page-history=ページの歴史
 page-links=ページはつながる
+page-priority=ページ優先順位
 page-settings=ページの設定
 page-url=ページのURL
 page=ページ
@@ -1866,6 +1868,7 @@ seconds=秒
 security=保証
 see-current-results=現在の結果を見なさい
 see-large-photo=大きい写真を見なさい
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=既存の記事を選ぶか、またはこのportlet で表示されるべき記事を加えなさい。
 select-and-copy=選び、コピーしなさい
 select-article=記事を選びなさい
@@ -1900,7 +1903,7 @@ send-order-email-to-users=ユーザーへ順序の電子メールを送りなさ
 send-order-email=順序の電子メールを送りなさい
 send-shipping-email-to-users=ユーザーへ船積みの電子メールを送りなさいか.
 send-shipping-email=船積みの電子メールを送りなさい
-send-sitemap-information-to=sitemap 情報をに送りなさい
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=テキストメッセージを送りなさい
 send=送りなさい
 sent-mail=送られた郵便
@@ -1961,9 +1964,6 @@ signature=署名
 similar-pages=類似したページ
 similar-phrase=類似した句
 simple=簡単
-sitemap-changefreq=変更の頻度
-sitemap-include=sitemap に含みなさいか。
-sitemap-priority=ページ優先順位
 sitemap-protocol=Sitemap の議定書
 sitemap=Sitemap
 size=サイズ

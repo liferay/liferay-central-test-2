@@ -994,15 +994,16 @@ public class PortalUtil {
 
 	public static boolean isLayoutParentable(String type) {
 		return PropsUtil.getComponentProperties().getBoolean(
-			PropsUtil.LAYOUT_PARENTABLE,
-			Filter.by(type), true);
+			PropsUtil.LAYOUT_PARENTABLE, Filter.by(type), true);
 	}
 
 	public static boolean isLayoutSitemapable(Layout layout) {
-		boolean sitemapable = PropsUtil.getComponentProperties().getBoolean(
-			PropsUtil.LAYOUT_URL_SITEMAPABLE,
-			Filter.by(layout.getType()), true);
-		return sitemapable;
+		if (layout.isPrivateLayout()) {
+			return false;
+		}
+
+		return PropsUtil.getComponentProperties().getBoolean(
+			PropsUtil.LAYOUT_SITEMAPABLE, Filter.by(layout.getType()), true);
 	}
 
 	public static boolean isReservedParameter(String name) {

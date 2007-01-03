@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -781,6 +781,7 @@ second=Saniye
 security=Güvenlik
 see-current-results=Sonuçları Görüntüle
 see-large-photo=Büyük Resmi Görüntüle 
+see-x-for-more-information=See {0} for more information.
 select-communities-associated-with-the-action-x=Select communities associated with the action {0}.
 select-folder=Klasör Seçiniz
 select-recipients=Alıcı Seçiniz
@@ -789,6 +790,7 @@ select-users-to-associate-with-the-action-x=Select users to associate with the a
 select-users-to-associate-with-the-following-actions-x=Select users to associate with the following actions: {0}
 selected-contact=Seçili Bağlantı
 selected-page=Seçili Sayfa
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Metin İleti Gönder
 send=Gönder
 sent-mail=Gönderilmiş E-Posta

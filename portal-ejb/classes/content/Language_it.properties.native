@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -580,6 +580,7 @@ cell=Cellulare
 celsius=Centigrado
 centimeter=Centimetro
 change-colors=Cambia i Colori
+change-frequency=Cambi La Frequenza
 change-layout=Cambia il Layout
 change-password=Cambia La Password
 change=cambia
@@ -1113,6 +1114,7 @@ inactive-user=Utente Inattivo
 inactive=Inattivo
 inch=Pollice
 include-original-text=Includi il Testo Originale
+include=Includa
 incoming-pop-server=pop server entrante
 increment-version=Versione Aggiornamento
 indexed=Indicizzato
@@ -1319,7 +1321,6 @@ monthly-payment=Pagamento Mensile
 monthly=Mensilmente
 months=Mesi
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
-more-information=Le più informazioni
 more-options=pi� Opzioni
 more=pi�
 move-column=Sposta la Colonna
@@ -1486,6 +1487,7 @@ owner=Proprietario
 page-display-order=Ordine di visualizzazione delle Pagine
 page-history=Storia
 page-links=Collegamenti della Pagina
+page-priority=Priorità Della Pagina
 page-settings=Impostazioni Pagina
 page-url=URL Della Pagina
 page=Pagina
@@ -1869,6 +1871,7 @@ seconds=Secondi
 security=Sicurezza
 see-current-results=Vedere i Risultati correnti
 see-large-photo=Guardare la Foto Grande
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Selezionare un articolo esistente o aggiungere un articolo da visualizzare in questa portlet.
 select-and-copy=Seleziona e Copia
 select-article=Seleziona l�Articolo
@@ -1903,7 +1906,7 @@ send-order-email-to-users=Inviare l�email dell�ordine agli utenti?
 send-order-email=Inviare l�email dell�ordine
 send-shipping-email-to-users=Inviare l�email email shipping agli utenti?
 send-shipping-email=Inviare l�email email shipping
-send-sitemap-information-to=Trasmetta le informazioni del sitemap a
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Inviare il Messaggio di Testo
 send=Inviare
 sent-mail=Invia Mail
@@ -1964,9 +1967,6 @@ signature=Firma
 similar-pages=Pagine simili
 similar-phrase=Frase Simile
 simple=Semplice
-sitemap-changefreq=Cambi la frequenza
-sitemap-include=Includa nel sitemap?
-sitemap-priority=Priorità della pagina
 sitemap-protocol=Protocollo di Sitemap
 sitemap=Sitemap
 size=Formato

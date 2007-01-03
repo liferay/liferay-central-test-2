@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -1155,6 +1155,7 @@ second=Thứ hai
 security=Bảo mật
 see-current-results=Xem kết qủa hiện tại
 see-large-photo=Xem ảnh lớn
+see-x-for-more-information=See {0} for more information.
 select-communities-associated-with-the-action-x=Select communities associated with the action {0}.
 select-content=Chọn nội dung
 select-date=Chọn ngày
@@ -1177,6 +1178,7 @@ send-order-email-to-users=Gửi email đặt hàng đến người dùng ?
 send-order-email=Gửi email đặt hàng
 send-shipping-email-to-users=Gửi email vận chuyển đến người dùng?
 send-shipping-email=Gửi email vận chuyển
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Gửi bản tin text
 send=Gửi 
 sent-mail=Gửi mail

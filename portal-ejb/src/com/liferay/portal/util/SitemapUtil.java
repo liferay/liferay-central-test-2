@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
@@ -40,65 +41,80 @@ import org.dom4j.Element;
 /**
  * <a href="SitemapUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author  Jorge Ferrer
+ *
  */
 public class SitemapUtil {
+
 	public static String getSitemap(String ownerId, String urlPrefix)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
+
 		List layouts = LayoutLocalServiceUtil.getLayouts(ownerId);
+
 		return getSitemap(layouts, urlPrefix);
 	}
 
 	public static String getSitemap(List layouts, String urlPrefix)
-		throws SystemException, PortalException {
+		throws PortalException, SystemException {
+
 		Document doc = DocumentHelper.createDocument();
+
 		doc.setXMLEncoding("UTF-8");
+
 		Element root = doc.addElement(
 			"urlset", "http://www.google.com/schemas/sitemap/0.84");
 
-		visitLayouts(root, layouts, urlPrefix);
+		_visitLayouts(root, layouts, urlPrefix);
 
 		return doc.asXML();
 	}
 
-	private static void visitLayouts(
-		Element element, List layouts, String urlPrefix)
-		throws SystemException, PortalException {
-		for (Iterator iterator = layouts.iterator(); iterator.hasNext();) {
-			Layout layout = (Layout) iterator.next();
+	public static String encodeXML(String input){
+		return StringUtil.replace(
+			input,
+			new String[] {"&", "<", ">", "'", "\""},
+			new String[] {"&amp;", "&lt;", "&gt;", "&apos;", "&quot;"});
+	}
+
+	private static void _visitLayouts(
+			Element element, List layouts, String urlPrefix)
+		throws PortalException, SystemException {
+
+		Iterator itr = layouts.iterator();
+
+		while (itr.hasNext()) {
+			Layout layout = (Layout)itr.next();
+
 			Properties props = layout.getTypeSettingsProperties();
-			if (PortalUtil.isLayoutSitemapable(layout) &&
-				props.getProperty("sitemap-include", "1").equals("1") &&
-				!layout.isHidden()) {
+
+			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
+				GetterUtil.getBoolean(
+					props.getProperty("sitemap-include"), true)) {
 
 				Element url = element.addElement("url");
 
 				String layoutURL = PortalUtil.getLayoutActualURL(
 					layout, urlPrefix);
+
 				url.addElement("loc").addText(encodeXML(layoutURL));
 
 				String changefreq = props.getProperty("sitemap-changefreq");
+
 				if (Validator.isNotNull(changefreq)) {
 					url.addElement("changefreq").addText(changefreq);
 				}
 
 				String priority = props.getProperty("sitemap-priority");
+
 				if (Validator.isNotNull(priority)) {
 					url.addElement("priority").addText(priority);
 				}
 
 				List children = layout.getChildren();
-				visitLayouts(element, children, urlPrefix);
+
+				_visitLayouts(element, children, urlPrefix);
 			}
 		}
 	}
 
-	public static String encodeXML(String input){
-		String result = input;
-		StringUtil.replace(
-			result,
-			new String[]{"&","<",">","'","\""},
-			new String[]{"&amp;","&lt;", "&gt;","&apos;","&quot;"});
-		return result;
-     }
 }

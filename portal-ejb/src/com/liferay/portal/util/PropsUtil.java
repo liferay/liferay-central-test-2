@@ -406,7 +406,7 @@ public class PropsUtil {
 
 	public static final String LAYOUT_PARENTABLE = "layout.parentable";
 
-	public static final String LAYOUT_URL_SITEMAPABLE = "layout.sitemapable";
+	public static final String LAYOUT_SITEMAPABLE = "layout.sitemapable";
 
 	public static final String LAYOUT_STATIC_PORTLETS_START = "layout.static.portlets.start.";
 

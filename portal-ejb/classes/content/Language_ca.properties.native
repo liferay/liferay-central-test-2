@@ -1,4 +1,4 @@
-####
+##
 ## Language settings
 ##
 
@@ -1626,6 +1626,7 @@ seconds=Segons
 security=Seguretat
 see-current-results=Veure els resultats actuals
 see-large-photo=Veure la foto ampliada
+see-x-for-more-information=See {0} for more information.
 select-an-existing-article-or-add-an-article-to-be-displayed-in-this-portlet=Seleccioni un article existent o afegeixi un article que es mostrarà a aquest portlet.
 select-and-copy=Seleccioni i copiï
 select-article=Seleccionar article
@@ -1656,6 +1657,7 @@ send-order-email-to-users=Enviar l'email de la comanda als usuaris?
 send-order-email=Enviar email de comanda
 send-shipping-email-to-users=Enviar email d'enviament als usuaris?
 send-shipping-email=Enviar email d'enviament
+send-sitemap-information-to-preview=Send sitemap information to {0}preview{1}:
 send-text-message=Enviar missatge de texte
 send=Enviar
 sent-mail=Missatges enviats
