@@ -108,6 +108,8 @@ public interface Constants {
 
 	public static final String MULTIPART_ALTERNATIVE = "multipart/alternative";
 
+	public static final String MULTIPART_FORM_DATA = "multipart/form-data";
+
 	public static final String MULTIPART_MIXED = "multipart/mixed";
 
 	public static final String TEXT_CSS = "text/css";

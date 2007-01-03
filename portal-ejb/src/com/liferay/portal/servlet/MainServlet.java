@@ -726,7 +726,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if ((contentType != null) &&
-			(contentType.startsWith("multipart/form-data"))) {
+			(contentType.startsWith(Constants.MULTIPART_FORM_DATA))) {
 
 			req = new UploadServletRequest(req);
 		}

@@ -45,7 +45,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <liferay-ui:tabs names="definition" />
 
-<liferay-ui:error exception="<%= DefinitionXmlException.class %>" message="an-error-was-encountered-while-parsing-your-xml-please-check-the-syntax-of-your-xml" />
+<liferay-ui:error exception="<%= DefinitionXmlException.class %>" message="an-error-occurred-while-parsing-your-xml-please-check-the-syntax-of-your-xml" />
 
 <c:if test="<%= definition != null %>">
 	<table border="0" cellpadding="0" cellspacing="0">

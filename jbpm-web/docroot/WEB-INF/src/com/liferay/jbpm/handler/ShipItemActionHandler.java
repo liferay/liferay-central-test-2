@@ -22,10 +22,9 @@
 
 package com.liferay.jbpm.handler;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.util.StringUtil;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.jbpm.context.exe.ContextInstance;
 import org.jbpm.graph.def.ActionHandler;
@@ -83,6 +82,6 @@ public class ShipItemActionHandler
 	}
 
 	private static final Log _log =
-		LogFactory.getLog(ShipItemActionHandler.class);
+		LogFactoryUtil.getLog(ShipItemActionHandler.class);
 
 }

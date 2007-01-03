@@ -20,31 +20,54 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.handler;
+package com.liferay.jbi.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.util.ContentTypes;
+import com.liferay.util.HttpHeaders;
+import com.liferay.util.servlet.UploadServletRequest;
 
-import org.jbpm.graph.def.ActionHandler;
-import org.jbpm.graph.exe.ExecutionContext;
+import java.io.IOException;
+
+import javax.jbi.JBIException;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * <a href="UpdateBooksActionHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="SpringBindingServlet.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class UpdateBooksActionHandler implements ActionHandler {
+public class SpringBindingServlet
+	extends org.apache.servicemix.components.http.SpringBindingServlet {
 
-	public void execute(ExecutionContext executionContext) throws Exception {
-		if (_log.isInfoEnabled()) {
-			_log.info("Updating the accounting books");
+	protected void doPost(HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Content type " + contentType);
 		}
 
-		executionContext.leaveNode();
+		if ((contentType != null) &&
+			(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
+
+			req = new UploadServletRequest(req);
+		}
+
+		try {
+			getBinding().process(req, res);
+		}
+		catch (JBIException e) {
+			throw new ServletException(e);
+		}
 	}
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(UpdateBooksActionHandler.class);
+	private static Log _log = LogFactoryUtil.getLog(SpringBindingServlet.class);
 
 }

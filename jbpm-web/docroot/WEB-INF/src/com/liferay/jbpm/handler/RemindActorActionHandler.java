@@ -23,9 +23,8 @@
 package com.liferay.jbpm.handler;
 
 import com.liferay.client.portal.model.UserSoap;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 
 import org.jbpm.graph.def.ActionHandler;
 import org.jbpm.graph.exe.ExecutionContext;
@@ -63,6 +62,6 @@ public class RemindActorActionHandler
 	}
 
 	private static final Log _log =
-		LogFactory.getLog(RemindActorActionHandler.class);
+		LogFactoryUtil.getLog(RemindActorActionHandler.class);
 
 }

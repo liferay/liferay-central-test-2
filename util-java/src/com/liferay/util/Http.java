@@ -500,7 +500,7 @@ public class Http {
 						String key = (String)entry.getKey();
 						String value = (String)entry.getValue();
 
-						partsList.add(new StringPart(key, value));
+						partsList.add(new StringPart(key, (String)value));
 					}
 
 					PostMethod postMethod = (PostMethod)method;

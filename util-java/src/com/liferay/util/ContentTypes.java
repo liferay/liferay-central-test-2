@@ -20,31 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbpm.handler;
-
-import com.liferay.portal.kernel.log.Log;
-import com.liferay.portal.kernel.log.LogFactoryUtil;
-
-import org.jbpm.graph.def.ActionHandler;
-import org.jbpm.graph.exe.ExecutionContext;
+package com.liferay.util;
 
 /**
- * <a href="UpdateBooksActionHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="ContentTypes.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
-public class UpdateBooksActionHandler implements ActionHandler {
+public class ContentTypes {
 
-	public void execute(ExecutionContext executionContext) throws Exception {
-		if (_log.isInfoEnabled()) {
-			_log.info("Updating the accounting books");
-		}
+	public static final String MESSAGE_RFC822 = "message/rfc822";
 
-		executionContext.leaveNode();
-	}
+	public static final String MULTIPART_ALTERNATIVE = "multipart/alternative";
 
-	private static final Log _log =
-		LogFactoryUtil.getLog(UpdateBooksActionHandler.class);
+	public static final String MULTIPART_FORM_DATA = "multipart/form-data";
+
+	public static final String MULTIPART_MIXED = "multipart/mixed";
+
+	public static final String TEXT_CSS = "text/css";
+
+	public static final String TEXT_HTML = "text/html";
+
+	public static final String TEXT_JAVASCRIPT = "text/javascript";
+
+	public static final String TEXT_PLAIN = "text/plain";
+
+	public static final String TEXT_WML = "text/wml";
+
+	public static final String TEXT_XML = "text/xml";
 
 }

@@ -23,6 +23,8 @@
 package com.liferay.jbpm.db;
 
 import com.liferay.jbpm.util.WorkflowUtil;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
@@ -40,9 +42,6 @@ import java.util.Calendar;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TimeZone;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.hibernate.Hibernate;
 import org.hibernate.Query;
@@ -518,7 +517,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 		}
 	}
 
-	private static final Log _log = LogFactory.getLog(GraphSession.class);
+	private static final Log _log = LogFactoryUtil.getLog(GraphSession.class);
 
 	private String _userId;
 	private String _timeZoneId;

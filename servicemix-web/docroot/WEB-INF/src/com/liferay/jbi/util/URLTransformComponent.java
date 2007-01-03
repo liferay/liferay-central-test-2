@@ -25,23 +25,23 @@ package com.liferay.jbi.util;
 import com.liferay.util.Http;
 
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 
-import java.net.URLEncoder;
-
+import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Map;
 
 import javax.jbi.messaging.MessageExchange;
 import javax.jbi.messaging.MessagingException;
 import javax.jbi.messaging.NormalizedMessage;
 
-import org.servicemix.components.util.TransformComponentSupport;
-import org.servicemix.jbi.jaxp.StringSource;
+import org.apache.servicemix.components.util.TransformComponentSupport;
+import org.apache.servicemix.jbi.jaxp.StringSource;
 
 /**
  * <a href="URLTransformComponent.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
 public class URLTransformComponent extends TransformComponentSupport {
@@ -55,35 +55,23 @@ public class URLTransformComponent extends TransformComponentSupport {
 	}
 
 	public String getUrlResult(NormalizedMessage in) throws MessagingException {
-		StringBuffer url = new StringBuffer();
-
-		url.append(_url);
-
-		if (_url.indexOf("?") == -1) {
-			url.append("?");
-		}
+		Map parts = new HashMap();
 
 		Iterator itr = in.getPropertyNames().iterator();
 
 		while (itr.hasNext()) {
 			String key = (String)itr.next();
 
-			String value = (String)in.getProperty(key);
+			Object value = (Object)in.getProperty(key);
 
-			url.append("&");
-			url.append(key);
-			url.append("=");
+			if (value instanceof String) {
 
-			try {
-				url.append(URLEncoder.encode(value, "utf-8"));
-			}
-			catch (UnsupportedEncodingException uee) {
-				throw new MessagingException(uee.getMessage());
+				parts.put(key, value);
 			}
 		}
 
 		try {
-			return Http.URLtoString(url.toString(), true);
+			return Http.URLtoString(_url, null, parts, true);
 		}
 		catch (IOException ioe) {
 			throw new MessagingException(ioe.getMessage());

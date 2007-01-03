@@ -26,6 +26,9 @@ import com.liferay.jbpm.WorkflowComponentImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
+import com.liferay.util.ContentTypes;
+import com.liferay.util.HttpHeaders;
+import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.IOException;
 
@@ -45,6 +48,18 @@ public class JBPMServlet extends HttpServlet {
 
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
+
+		String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Content type " + contentType);
+		}
+
+		if ((contentType != null) &&
+			(contentType.startsWith(ContentTypes.MULTIPART_FORM_DATA))) {
+
+			req = new UploadServletRequest(req);
+		}
 
 		WorkflowComponentImpl workflowComponentImpl =
 			new WorkflowComponentImpl();

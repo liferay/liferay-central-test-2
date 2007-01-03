@@ -20,13 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.jbi.util;
+package com.liferay.jbi.http;
 
 import java.io.IOException;
 
 import java.util.Enumeration;
 
 import javax.jbi.JBIException;
+import javax.jbi.messaging.ExchangeStatus;
 import javax.jbi.messaging.InOut;
 import javax.jbi.messaging.NormalizedMessage;
 
@@ -43,7 +44,7 @@ import javax.xml.transform.TransformerException;
  *
  */
 public class HttpInOutBinding
-	extends org.servicemix.components.http.HttpInOutBinding {
+	extends org.apache.servicemix.components.http.HttpInOutBinding {
 
     public void processInOut(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, JBIException, ServletException {
@@ -74,9 +75,18 @@ public class HttpInOutBinding
 			boolean result = getDeliveryChannel().sendSync(exchange);
 
 			if (result) {
-                getMarshaler().toResponse(
+				if (exchange.getStatus() == ExchangeStatus.ERROR) {
+					if (exchange.getError() != null) {
+						throw new ServletException(exchange.getError());
+					}
+					else {
+						throw new ServletException("Exchange status is ERROR");
+					}
+				}
+
+				getMarshaler().toResponse(
 					exchange, exchange.getOutMessage(), res);
-            }
+			}
 
 			done(exchange);
 

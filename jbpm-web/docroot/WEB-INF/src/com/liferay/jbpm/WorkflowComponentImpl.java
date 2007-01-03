@@ -27,6 +27,8 @@ import com.liferay.jbpm.util.TaskFormElement;
 import com.liferay.jbpm.util.WorkflowUtil;
 import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
@@ -46,9 +48,6 @@ import java.util.Set;
 import java.util.TimeZone;
 
 import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -1121,6 +1120,6 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 	protected TaskMgmtSession taskMgmtSession;
 
 	private static final Log _log =
-		LogFactory.getLog(WorkflowComponentImpl.class);
+		LogFactoryUtil.getLog(WorkflowComponentImpl.class);
 
 }

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.jbi;
 
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.util.Http;
 import com.liferay.util.Validator;
@@ -112,53 +111,10 @@ public abstract class JBIRequestURL {
 	}
 
 	public String getContent() throws IOException {
-		//return Http.URLtoString(toString(), true);
 		return Http.URLtoString(getURL(), null, _params, true);
 	}
 
-	public String toString() {
-		if (_toString != null) {
-			return _toString;
-		}
-
-		return generateToString();
-	}
-
 	protected abstract String getURL();
-
-	protected String generateToString() {
-		StringBuffer sb = new StringBuffer();
-
-		String url = getURL();
-
-		sb.append(url);
-
-		if (url.indexOf(StringPool.QUESTION) == -1) {
-			sb.append(StringPool.QUESTION);
-		}
-
-		Iterator itr = _params.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
-
-			sb.append(StringPool.AMPERSAND);
-			sb.append(key);
-			sb.append(StringPool.EQUAL);
-			sb.append(Http.encodeURL(value));
-		}
-
-		_toString = sb.toString();
-
-		if (_log.isDebugEnabled()) {
-			_log.debug(_toString);
-		}
-
-		return _toString;
-	}
 
 	private static Log _log = LogFactory.getLog(JBIRequestURL.class);
 
