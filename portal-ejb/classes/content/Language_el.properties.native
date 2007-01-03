@@ -234,6 +234,7 @@ action.VIEW_USER=Χρήστης άποψης
 
 layout.types.article=Αρθρο
 layout.types.embedded=Ενσωματωμένος
+layout.types.link_to_layout=Σύνδεση με τη σελίδα
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1214,6 +1215,7 @@ license=Αδεια
 licenses=Αδειες
 limits=Όρια
 line=Γραμμή
+link-to-layout=Σύνδεση με τη σελίδα
 link=Σύνδεση
 links=Σύνδεσμοι
 list-all=Λιστά Όλων

@@ -234,6 +234,7 @@ action.VIEW_USER=眺めのユーザー
 
 layout.types.article=記事
 layout.types.embedded=埋め込まれる
+layout.types.link_to_layout=ページへのリンク
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1213,6 +1214,7 @@ license=免許証
 licenses=免許証
 limits=限界
 line=ライン
+link-to-layout=ページへのリンク
 link=リンク
 links=リンク
 list-all=すべてをリストしなさい

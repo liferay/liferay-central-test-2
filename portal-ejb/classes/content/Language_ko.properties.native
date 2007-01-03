@@ -234,6 +234,7 @@ action.VIEW_USER=전망 사용자
 
 layout.types.article=기사
 layout.types.embedded=끼워넣는
+layout.types.link_to_layout=페이지에 연결
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1214,6 +1215,7 @@ license=면허
 licenses=면허
 limits=한계
 line=선
+link-to-layout=페이지에 연결
 link=연결
 links=연결
 list-all=모두를 목록으로 만드십시요

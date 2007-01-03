@@ -234,6 +234,7 @@ action.VIEW_USER=Toon Gebruiker
 
 layout.types.article=Artikel
 layout.types.embedded=Ingebed
+layout.types.link_to_layout=Verbinding met pagina
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1215,6 +1216,7 @@ license=Vergunning
 licenses=Vergunningen
 limits=Grenzen
 line=Lijn
+link-to-layout=Verbinding met pagina
 link=Link
 links=Links
 list-all=Toon allen

@@ -234,6 +234,7 @@ action.VIEW_USER=看法用戶
 
 layout.types.article=文章
 layout.types.embedded=埋置
+layout.types.link_to_layout=頁的鏈接
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1215,6 +1216,7 @@ license=執照
 licenses=執照
 limits=極限
 line=線
+link-to-layout=頁的鏈接
 link=鏈接
 links=鏈接
 list-all=列出所有

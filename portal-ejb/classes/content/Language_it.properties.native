@@ -234,6 +234,7 @@ action.VIEW_USER=Visualizza Utente
 
 layout.types.article=Articolo
 layout.types.embedded=Incorporato
+layout.types.link_to_layout=Collegamento alla pagina
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1215,6 +1216,7 @@ license=Autorizzazione
 licenses=Autorizzazioni
 limits=Limiti
 line=Linea
+link-to-layout=Collegamento alla pagina
 link=Collegamento
 links=Collegamenti
 list-all=Elenca Tutti

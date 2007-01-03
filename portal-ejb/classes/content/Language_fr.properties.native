@@ -234,6 +234,7 @@ action.VIEW_USER=Utilisateur De Vue
 
 layout.types.article=Article
 layout.types.embedded=Incorporé
+layout.types.link_to_layout=Lien à la page
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1215,6 +1216,7 @@ license=Permis
 licenses=Permis
 limits=Limites
 line=Ligne
+link-to-layout=Lien à la page
 link=Lien
 links=Liens
 list-all=Tout Énumérer

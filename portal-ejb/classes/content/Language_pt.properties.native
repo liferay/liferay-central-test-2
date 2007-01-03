@@ -234,6 +234,7 @@ action.VIEW_USER=Usuário Da Vista
 
 layout.types.article=Artigo
 layout.types.embedded=Encaixado
+layout.types.link_to_layout=Ligação à página
 layout.types.portlet=Portlet
 layout.types.url=URL
 
@@ -1215,6 +1216,7 @@ license=Licença
 licenses=Licenças
 limits=Limites
 line=Linha
+link-to-layout=Ligação à página
 link=Ligação
 links=Ligações
 list-all=Aliste Tudo
