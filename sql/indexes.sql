@@ -49,7 +49,7 @@ create index IX_5849ABF2 on Group_ (companyId, className, classPK);
 create index IX_5BDDB872 on Group_ (companyId, friendlyURL);
 create index IX_5AA68501 on Group_ (companyId, name);
 
-create index LIFERAY_001 on Groups_Permissions(permissionId);
+create index LIFERAY_001 on Groups_Permissions (permissionId);
 
 create index IX_206498F8 on IGFolder (groupId);
 create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
@@ -157,7 +157,7 @@ create index IX_449A10B9 on Role_ (companyId);
 create index IX_ED284C69 on Role_ (companyId, className, classPK);
 create index IX_EBC931B8 on Role_ (companyId, name);
 
-create index LIFERAY_002 on Roles_Permissions(permissionId);
+create index LIFERAY_002 on Roles_Permissions (permissionId);
 
 create index IX_D3AA1BC9 on SRFrameworkVersion (companyId);
 create index IX_4369008B on SRFrameworkVersion (groupId);
@@ -211,7 +211,7 @@ create index IX_615E9F7A on User_ (companyId, emailAddress);
 create index IX_765A87C6 on User_ (companyId, password_);
 create index IX_9782AD88 on User_ (companyId, userId);
 
-create index LIFERAY_003 on Users_Permissions(permissionId);
+create index LIFERAY_003 on Users_Permissions (permissionId);
 
 create index IX_96F07007 on Website (companyId);
 create index IX_66A45CAC on Website (companyId, className);
