@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1319,6 +1319,7 @@ monthly-payment=Pagamento Mensile
 monthly=Mensilmente
 months=Mesi
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
+more-information=Le più informazioni
 more-options=pi� Opzioni
 more=pi�
 move-column=Sposta la Colonna
@@ -1788,6 +1789,7 @@ required-roles=Ruoli Richiesti
 required-structures-could-not-be-deleted=Le strutture richieste non hanno potuto essere cancellate.
 required-templates-could-not-be-deleted=I modelli richiesti non hanno potuto essere cancellate.
 required=Richiesto
+requires-login=Richiede l'inizio attività
 requires-shipping=Spedizioni richieste
 resend-confirmation-email=Resend Email di Conferma
 resend-shipping-email=Resend Shipping Email
@@ -1901,6 +1903,7 @@ send-order-email-to-users=Inviare l�email dell�ordine agli utenti?
 send-order-email=Inviare l�email dell�ordine
 send-shipping-email-to-users=Inviare l�email email shipping agli utenti?
 send-shipping-email=Inviare l�email email shipping
+send-sitemap-information-to=Trasmetta le informazioni del sitemap a
 send-text-message=Inviare il Messaggio di Testo
 send=Inviare
 sent-mail=Invia Mail
@@ -1961,6 +1964,11 @@ signature=Firma
 similar-pages=Pagine simili
 similar-phrase=Frase Simile
 simple=Semplice
+sitemap-changefreq=Cambi la frequenza
+sitemap-include=Includa nel sitemap?
+sitemap-priority=Priorità della pagina
+sitemap-protocol=Protocollo di Sitemap
+sitemap=Sitemap
 size=Formato
 sku=SKU
 skus=SKUs
@@ -2143,6 +2151,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Il ruol
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=La struttura selezionata non pu� essere cancellata perch� � richiesto da uno o pi� modelli.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=La template selezionata non pu� essere cancellata perch� � richiesto da uno o pi� articoli.
 the-signature-below-will-be-added-to-each-outgoing-message=La firma qui sotto sar� aggiunta ad ogni messaggio in uscita.
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=Il protocollo del sitemap informa i motori di ricerca della struttura (sitemap) del Web site.
 the-source-file-does-not-have-the-same-extension-as-the-original-file=Il file sorgente non ha la stessa estensione della file originale.
 the-specified-coupon-is-no-longer-available=Il buono specificato non � pi� disponibile.
 the-specified-coupon-is-no-yet-available=Il buono specificato non � ancora disponibile.

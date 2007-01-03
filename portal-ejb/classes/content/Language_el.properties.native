@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1318,6 +1318,7 @@ monthly-payment=Μηνιαία πληρωμή
 monthly=Μηνιαία
 months=Μήνες
 more-information-about-liferay-is-available-at=Για περισσότερες πληροφορίες για το Liferay επισκεφτείτε την σελίδα {0}http://www.liferay.com{1}. 
+more-information=Περισσότερες πληροφορίες
 more-options=Περισσότερες επιλογές
 more=Περισσότεροι
 move-column=Μετακίνηση Στήλης
@@ -1786,6 +1787,7 @@ required-roles=Απαιτούμενοι Ρόλοι
 required-structures-could-not-be-deleted=Οι απαραίτητες δομές δεν θα μπορούσαν να διαγραφούν.
 required-templates-could-not-be-deleted=Τα απαραίτητα πρότυπα δεν θα μπορούσαν να διαγραφούν.
 required=Απαιτούμενος
+requires-login=Απαιτεί τη σύνδεση
 requires-shipping=Απαιτεί Αποστολή
 resend-confirmation-email=Στείλετε εκ νέου το ηλεκτρονικό ταχυδρομείο επιβεβαίωσης
 resend-shipping-email=Στείλετε εκ νέου το ηλεκτρονικό μύνημα αποστολής
@@ -1899,6 +1901,7 @@ send-order-email-to-users=Θελετε να στείλετε email διαταγ�
 send-order-email=Στείλετε email διαταγής
 send-shipping-email-to-users=Θέλετε να στείλετε email αποστολής στους χρήστες;
 send-shipping-email=Στείλετε email αποστολής
+send-sitemap-information-to=Στείλετε sitemap τις πληροφορίες
 send-text-message=Αποστολή Μηνύματος Κινητού
 send=Αποστολή
 sent-mail=Αποστολή Ταχυδρομείου
@@ -1959,6 +1962,11 @@ signature=Υπογραφή
 similar-pages=Παρόμοιες Σελίδες
 similar-phrase=Παρόμοια Φράση
 simple=Απλός
+sitemap-changefreq=Συχνότητα αλλαγής
+sitemap-include=Περιλάβετε στο sitemap;
+sitemap-priority=Προτεραιότητα σελίδων
+sitemap-protocol=Πρωτόκολλο Sitemap
+sitemap=Sitemap
 size=Μέγεθος
 sku=SKU
 skus=SKUs
@@ -2141,6 +2149,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Ο επ
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=Η επιλεγμένη δομή δεν μπορεί να διαγραφεί επειδή απαιτείται από ένα ή περισσότερα πρότυπα.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=Το επιλεγμένο πρότυπο δεν μπορεί να διαγραφεί επειδή απαιτείται από ένα ή περισσότερα άρθρα.
 the-signature-below-will-be-added-to-each-outgoing-message=Η παρακάτω υπογραφή θα προστεθεί σε κάθε εξερχόμενο μήνυμα.
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=Το πρωτόκολλο sitemap δηλώνει τις μηχανές αναζήτησης για τη δομή (sitemap) του ιστοχώρου.
 the-source-file-does-not-have-the-same-extension-as-the-original-file=Το αρχείο πηγής δεν έχει την ίδια επέκταση με το αρχικό αρχείο.
 the-specified-coupon-is-no-longer-available=Το καθορισμένο κουπόνι δεν είναι πλέον διαθέσιμο.
 the-specified-coupon-is-no-yet-available=Το καθορισμένο κουπόνι δεν είναι ακόμα διαθέσιμο.

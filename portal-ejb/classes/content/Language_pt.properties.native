@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1319,6 +1319,7 @@ monthly-payment=Pagamento Mensal
 monthly=Mensal
 months=Meses
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
+more-information=Mais informação
 more-options=Mais Opções
 more=Mais
 move-column=Mova A Coluna
@@ -1788,6 +1789,7 @@ required-roles=Papéis Requeridos
 required-structures-could-not-be-deleted=As estruturas requeridas não podiam ser suprimidas.
 required-templates-could-not-be-deleted=Os moldes requeridos não podiam ser suprimidos.
 required=Requerido
+requires-login=Requer o início de uma sessão
 requires-shipping=Requer O Transporte
 resend-confirmation-email=Resend O Email Da Confirmação
 resend-shipping-email=Resend O Email Do Transporte
@@ -1901,6 +1903,7 @@ send-order-email-to-users=Emita o email da ordem aos usuários?
 send-order-email=Emita O Email Da Ordem
 send-shipping-email-to-users=Emita o email do transporte aos usuários?
 send-shipping-email=Emita O Email Do Transporte
+send-sitemap-information-to=Emita a informação do sitemap a
 send-text-message=Emita A Mensagem Do Texto
 send=Emita
 sent-mail=Correio Emitido
@@ -1961,6 +1964,11 @@ signature=Assinatura
 similar-pages=Páginas similares
 similar-phrase=Frase Similar
 simple=Simples
+sitemap-changefreq=Mude a freqüência
+sitemap-include=Inclua no sitemap?
+sitemap-priority=Prioridade da página
+sitemap-protocol=Protocolo de Sitemap
+sitemap=Sitemap
 size=Tamanho
 sku=SKU
 skus=SKUs
@@ -2143,6 +2151,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=O papel
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=A estrutura selecionada não pode ser suprimida porque é requerido por um ou mais molde.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=O molde selecionado não pode ser suprimido porque é requerido por um ou mais artigo.
 the-signature-below-will-be-added-to-each-outgoing-message=A assinatura abaixo será adicionada a cada mensagem que parte.
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=O protocolo do sitemap notifica os motores de busca da estrutura (sitemap) do Web site.
 the-source-file-does-not-have-the-same-extension-as-the-original-file=A lima de fonte não tem a mesma extensão que a lima original.
 the-specified-coupon-is-no-longer-available=O coupon especificado está um disponível não mais longo.
 the-specified-coupon-is-no-yet-available=O coupon especificado está nenhum contudo disponível.

@@ -61,7 +61,7 @@ if (selLayout != null) {
 	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
 		tabs3 = "page";
 	}
-	else if (tabs3.equals("import-export") || (tabs3.equals("virtual-host"))) {
+	else if (tabs3.equals("import-export") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap")) ) {
 		tabs3 = "page";
 	}
 }
@@ -69,6 +69,9 @@ if (selLayout != null) {
 if (selLayout == null) {
 	if (tabs3.equals("page")) {
 		tabs3 = "children";
+	}
+	if (tabs3.equals("sitemap") && ownerId.startsWith(LayoutImpl.PRIVATE)) {
+		tabs3 = "page";
 	}
 }
 
@@ -223,6 +226,7 @@ portletURL.setParameter("groupId", groupId);
 
 			document.getElementById("<%= renderResponse.getNamespace() %>tree-output").innerHTML = layoutsTree.getHTML();
 		</script>
+
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td valign="top" width="75%">
@@ -254,6 +258,9 @@ portletURL.setParameter("groupId", groupId);
 
 			if (GroupPermission.contains(permissionChecker, groupId, ActionKeys.UPDATE)) {
 				tabs3Names += ",import-export,virtual-host";
+				if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
+					tabs3Names += ",sitemap";
+				}
 			}
 		}
 		%>
@@ -544,6 +551,68 @@ portletURL.setParameter("groupId", groupId);
 							<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(selLayout) %>" />
 						</td>
 					</tr>
+
+					<c:if test="<%= ownerId.startsWith(LayoutImpl.PUBLIC) && (selLayout != null) && PortalUtil.isLayoutSitemapable(selLayout) %>">
+						<tr>
+							<td>
+								<table border="0" cellpadding="4" cellspacing="0" width="100%">
+								<tr>
+									<td class="beta-gradient">
+										<b><%= LanguageUtil.get(pageContext, "sitemap-protocol") %>:</b>
+									</td>
+									<td align="right" class="beta-gradient">
+										<span style="font-size: xx-small;">
+										[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />sitemap'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+										</span>
+									</td>
+								</tr>
+								</table>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<div id="<portlet:namespace />sitemap" style="display: none;">
+									<br>
+
+									<%= LanguageUtil.get(pageContext, "sitemap-include")%><br>
+
+									<%
+										boolean sitemapInclude = selLayout.getTypeSettingsProperties().getProperty("sitemap-include", "1").equals("1");
+									%>
+									<select name="TypeSettingsProperties(sitemap-include)">
+										<option <%= (sitemapInclude) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
+										<option <%= (!sitemapInclude) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
+									</select>
+
+									<br><br>
+
+									<%= LanguageUtil.get(pageContext, "sitemap-priority") %> (0.0 - 1.0)<br>
+
+									<input class="form-text" name="TypeSettingsProperties(sitemap-priority)" size="3" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(sitemap-priority)" />">
+
+									<br><br>
+
+									<%= LanguageUtil.get(pageContext, "sitemap-changefreq") %><br>
+
+									<%
+										String sitemapChangefreq = selLayout.getTypeSettingsProperties().getProperty("sitemap-changefreq", "daily");
+									%>
+									<select name="TypeSettingsProperties(sitemap-changefreq)">
+										<option <%= (sitemapChangefreq.equals("always")) ? "selected" : "" %> value="always"><%= LanguageUtil.get(pageContext, "always") %></option>
+										<option <%= (sitemapChangefreq.equals("hourly")) ? "selected" : "" %> value="hourly"><%= LanguageUtil.get(pageContext, "hourly") %></option>
+										<option <%= (sitemapChangefreq.equals("daily")) ? "selected" : "" %> value="daily"><%= LanguageUtil.get(pageContext, "daily") %></option>
+										<option <%= (sitemapChangefreq.equals("weekly")) ? "selected" : "" %> value="weekly"><%= LanguageUtil.get(pageContext, "weekly") %></option>
+										<option <%= (sitemapChangefreq.equals("monthly")) ? "selected" : "" %> value="monthly"><%= LanguageUtil.get(pageContext, "monthly") %></option>
+										<option <%= (sitemapChangefreq.equals("yearly")) ? "selected" : "" %> value="yearly"><%= LanguageUtil.get(pageContext, "yearly") %></option>
+										<option <%= (sitemapChangefreq.equals("never")) ? "selected" : "" %> value="never"><%= LanguageUtil.get(pageContext, "never") %></option>
+									</select>
+
+								</div>
+							</td>
+						</tr>
+
+					</c:if>
+
 				</c:if>
 
 				</table>
@@ -965,6 +1034,31 @@ portletURL.setParameter("groupId", groupId);
 				<br>
 
 				<input class="portlet-form-button" type="submit" value='<%= LanguageUtil.get(pageContext, "save") %>'>
+			</c:when>
+			<c:when test='<%= tabs3.equals("sitemap") %>'>
+				<%
+					String hostName = PortalUtil.getHost(request);
+
+					String sitemapUrl = PortalUtil.getPortalURL(hostName, request.getServerPort(), request.isSecure()) +
+						themeDisplay.getPathRoot() + "/sitemap.xml";
+
+					LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+					String virtualHost = layoutSet.getVirtualHost();
+					if (!hostName.equals(virtualHost)) {
+						sitemapUrl += "?ownerId=" + ownerId;
+ 					}
+				%>
+				<p>
+				<%=LanguageUtil.get(pageContext, "the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website")%> <a href="http://www.sitemap.org"><%=LanguageUtil.get(pageContext, "more-information")%></a>.
+				</p>
+				<%=LanguageUtil.get(pageContext, "send-sitemap-information-to")%> (<a target="sitemap-xml" href="<%=sitemapUrl%>"><%=LanguageUtil.get(pageContext, "preview")%></a>):
+				<ul>
+				<li><a target="sitemap-notification" href="http://www.google.com/webmasters/sitemaps/ping?sitemap=<%=sitemapUrl%>">Google</a>
+				<li><a target="sitemap-notification" href="https://siteexplorer.search.yahoo.com/submit/ping?sitemap=<%=sitemapUrl%>">Yahoo</a> (<%=LanguageUtil.get(pageContext, "requires-login")%>)
+				<!-- <li><a target="sitemap-notification" href="http://search.live.com/ping?sitemap=<%=sitemapUrl%>">MSN</a> - NOT WORKING YET-->
+				</ul>
+				<br/>
+
 			</c:when>
 		</c:choose>
 	</td>

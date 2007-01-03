@@ -998,6 +998,13 @@ public class PortalUtil {
 			Filter.by(type), true);
 	}
 
+	public static boolean isLayoutSitemapable(Layout layout) {
+		boolean sitemapable = PropsUtil.getComponentProperties().getBoolean(
+			PropsUtil.LAYOUT_URL_SITEMAPABLE,
+			Filter.by(layout.getType()), true);
+		return sitemapable;
+	}
+
 	public static boolean isReservedParameter(String name) {
 		return _instance._reservedParams.contains(name);
 	}

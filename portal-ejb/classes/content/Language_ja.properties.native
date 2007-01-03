@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1317,6 +1317,7 @@ monthly-payment=月払い
 monthly=月例
 months=月
 more-information-about-liferay-is-available-at=More information about Liferay is available at {0}http://www.liferay.com{1}.
+more-information=より多くの情報
 more-options=より多くの選択
 more=多く
 move-column=移動コラム
@@ -1785,6 +1786,7 @@ required-roles=要求された役割
 required-structures-could-not-be-deleted=必須の構造は削除できなかった。
 required-templates-could-not-be-deleted=必須の型板は削除できなかった。
 required=要求される
+requires-login=ログインを要求する
 requires-shipping=船積みを要求する
 resend-confirmation-email=確認の電子メールを送り直しなさい
 resend-shipping-email=船積みの電子メールを送り直しなさい
@@ -1898,6 +1900,7 @@ send-order-email-to-users=ユーザーへ順序の電子メールを送りなさ
 send-order-email=順序の電子メールを送りなさい
 send-shipping-email-to-users=ユーザーへ船積みの電子メールを送りなさいか.
 send-shipping-email=船積みの電子メールを送りなさい
+send-sitemap-information-to=sitemap 情報をに送りなさい
 send-text-message=テキストメッセージを送りなさい
 send=送りなさい
 sent-mail=送られた郵便
@@ -1958,6 +1961,11 @@ signature=署名
 similar-pages=類似したページ
 similar-phrase=類似した句
 simple=簡単
+sitemap-changefreq=変更の頻度
+sitemap-include=sitemap に含みなさいか。
+sitemap-priority=ページ優先順位
+sitemap-protocol=Sitemap の議定書
+sitemap=Sitemap
 size=サイズ
 sku=SKU
 skus=SKUs
@@ -2140,6 +2148,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=それ�
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=指定構造は一つ以上の型板によって必須行うので削除されることができない。
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=指定型板は一つ以上の記事によって必須行うので削除されることができない。
 the-signature-below-will-be-added-to-each-outgoing-message=下署名は各々の発信メッセージへ加えられる。
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap の議定書はウェブサイトの構造(sitemap) の調査エンジンを知らせる。
 the-source-file-does-not-have-the-same-extension-as-the-original-file=原始ファイルに元のファイルと同じ延長がない。
 the-specified-coupon-is-no-longer-available=指定クーポンはもはや利用できない。
 the-specified-coupon-is-no-yet-available=指定クーポンは否けれども利用できる。

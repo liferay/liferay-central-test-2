@@ -384,6 +384,15 @@ public class EditPagesAction extends PortletAction {
 					layoutProperties.setProperty(
 						"javascript-3",
 						formProperties.getProperty("javascript-3"));
+					layoutProperties.setProperty(
+						"sitemap-include",
+						formProperties.getProperty("sitemap-include"));
+					layoutProperties.setProperty(
+						"sitemap-priority",
+						formProperties.getProperty("sitemap-priority"));
+					layoutProperties.setProperty(
+						"sitemap-changefreq",
+						formProperties.getProperty("sitemap-changefreq"));
 
 					LayoutServiceUtil.updateLayout(
 						layoutId, ownerId, layout.getTypeSettings());

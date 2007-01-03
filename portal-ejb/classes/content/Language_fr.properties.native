@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1319,6 +1319,7 @@ monthly-payment=Paiement Mensuel
 monthly=Mensuel
 months=Mois
 more-information-about-liferay-is-available-at=Toute information supplémentaire concernant Liferay est disponible sur {0}http://www.liferay.com{1}.
+more-information=Plus d'information
 more-options=Plus D'Options
 more=Plus
 move-column=Déplacer la colonne
@@ -1788,6 +1789,7 @@ required-roles=Rôles requis
 required-structures-could-not-be-deleted=Des structures exigées n'ont pas pu être supprimées.
 required-templates-could-not-be-deleted=Des calibres exigés n'ont pas pu être supprimés.
 required=Requis
+requires-login=Exige l'ouverture
 requires-shipping=Exige l'expédition
 resend-confirmation-email=Renvoyez L'Email De Confirmation
 resend-shipping-email=Renvoyez l'email d'expédition
@@ -1901,6 +1903,7 @@ send-order-email-to-users=Envoyez l'email de commande aux utilisateurs ?
 send-order-email=Envoyez l'email de commande
 send-shipping-email-to-users=Envoyez l'email d'expédition aux utilisateurs ?
 send-shipping-email=Envoyez l'email d'expédition
+send-sitemap-information-to=Envoyez l'information de sitemap à
 send-text-message=Envoyez un message
 send=Envoyez
 sent-mail=Courrier envoyé
@@ -1961,6 +1964,11 @@ signature=Signature
 similar-pages=Pages similaires
 similar-phrase=Expression similaire
 simple=Simple
+sitemap-changefreq=Changez la fréquence
+sitemap-include=Incluez dans le sitemap ?
+sitemap-priority=Priorité de page
+sitemap-protocol=Protocole de Sitemap
+sitemap=Sitemap
 size=Taille
 sku=SKU
 skus=SKUs
@@ -2143,6 +2151,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Le rôl
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=La structure choisie ne peut pas être supprimée parce qu'elle est exigé par un ou plusieurs modèle de documents.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=Le modèle de document choisi ne peut pas être supprimé parce qu'il est exigé par un ou plusieurs articles.
 the-signature-below-will-be-added-to-each-outgoing-message=La signature ci-dessous sera ajoutée à chaque message envoyé.
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=Le protocole de sitemap informe des moteurs de recherche de la structure (sitemap) du site Web.
 the-source-file-does-not-have-the-same-extension-as-the-original-file=Le fichier source n'a pas la même prolongation que le dossier original.
 the-specified-coupon-is-no-longer-available=Le bon indiqué n'est plus disponible.
 the-specified-coupon-is-no-yet-available=Le bon indiqué est aucun pourtant disponible.

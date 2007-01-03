@@ -1,4 +1,4 @@
-##
+####
 ## Language settings
 ##
 
@@ -1319,6 +1319,7 @@ monthly-payment=月付款
 monthly=每月
 months=几个月
 more-information-about-liferay-is-available-at=更多消息请随时参考{1}.
+more-information=更多信息
 more-options=更多选择
 more=更多
 move-column=移动列
@@ -1787,6 +1788,7 @@ required-roles=必需的角色
 required-structures-could-not-be-deleted=必需的结构不能被删除。
 required-templates-could-not-be-deleted=必需的模板不能被删除。
 required=必需
+requires-login=要求注册
 requires-shipping=需要出货
 resend-confirmation-email=再寄确认电子邮件
 resend-shipping-email=重寄出货电子邮件
@@ -1900,6 +1902,7 @@ send-order-email-to-users=发送定单邮件到使用者?
 send-order-email=发送订单邮件
 send-shipping-email-to-users=发送出货邮件到使用者?
 send-shipping-email=发送出货电子邮件
+send-sitemap-information-to=寄发sitemap 信息
 send-text-message=发送文本信
 send=发送
 sent-mail=已发送邮件
@@ -1960,6 +1963,11 @@ signature=签名
 similar-pages=相似的页
 similar-phrase=相似的词组
 simple=简单
+sitemap-changefreq=改变频率
+sitemap-include=包括在sitemap?
+sitemap-priority=页优先权
+sitemap-protocol=Sitemap 协议
+sitemap=Sitemap
 size=大小
 sku=SKU
 skus=SKUs
@@ -2142,6 +2150,7 @@ the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=选择�
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=选择的结构无法被删除因为它是必需由一个或更多模板。
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=选择的模板无法被删除因为它是必需由一个或更多文章。
 the-signature-below-will-be-added-to-each-outgoing-message=签名信息将附加在所有的外出邮件后。
+the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap 协议通知结构(sitemap 的) 查寻引擎网站。
 the-source-file-does-not-have-the-same-extension-as-the-original-file=源文件和原始的文件的后缀不同。
 the-specified-coupon-is-no-longer-available=指定的优惠券不再是可用的。
 the-specified-coupon-is-no-yet-available=指定的优惠券尚没有可用的。
