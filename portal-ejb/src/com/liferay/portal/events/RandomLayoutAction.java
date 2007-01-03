@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -107,7 +106,7 @@ public class RandomLayoutAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new ActionException(e);
 		}

@@ -22,7 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
@@ -74,7 +73,7 @@ public class PortalPreferences {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

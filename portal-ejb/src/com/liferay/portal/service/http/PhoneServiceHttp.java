@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.PhoneServiceUtil;
 import com.liferay.portal.service.http.TunnelUtil;
@@ -100,8 +99,7 @@ public class PhoneServiceHttp {
 			return (com.liferay.portal.model.Phone)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -130,8 +128,7 @@ public class PhoneServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -164,8 +161,7 @@ public class PhoneServiceHttp {
 			return (com.liferay.portal.model.Phone)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -209,8 +205,7 @@ public class PhoneServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -261,8 +256,7 @@ public class PhoneServiceHttp {
 			return (com.liferay.portal.model.Phone)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
@@ -234,7 +233,7 @@ public class ImageServlet extends HttpServlet {
 			return (modifiedDate.getTime() / 1000) * 1000;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			return -1;
 		}
@@ -284,7 +283,7 @@ public class ImageServlet extends HttpServlet {
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
-					_log.warn(StackTraceUtil.getStackTrace(e));
+					_log.warn(e, e);
 				}
 			}
 			finally {

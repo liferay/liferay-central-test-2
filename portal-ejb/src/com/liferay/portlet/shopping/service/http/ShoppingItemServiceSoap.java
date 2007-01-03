@@ -24,7 +24,6 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.shopping.service.ShoppingItemServiceUtil;
 
@@ -43,9 +42,8 @@ public class ShoppingItemServiceSoap {
 			ShoppingItemServiceUtil.addBookItems(categoryId, isbns);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -55,9 +53,8 @@ public class ShoppingItemServiceSoap {
 			ShoppingItemServiceUtil.deleteItem(itemId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -69,9 +66,8 @@ public class ShoppingItemServiceSoap {
 			return com.liferay.portlet.shopping.model.ShoppingItemSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

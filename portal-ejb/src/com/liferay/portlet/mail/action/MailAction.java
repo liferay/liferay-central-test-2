@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.mail.action;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.struts.JSONAction;
@@ -119,7 +118,7 @@ public class MailAction extends JSONAction {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return null;

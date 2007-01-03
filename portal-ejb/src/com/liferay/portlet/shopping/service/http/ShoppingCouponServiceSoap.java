@@ -24,7 +24,6 @@ package com.liferay.portlet.shopping.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.shopping.service.ShoppingCouponServiceUtil;
 
@@ -57,9 +56,8 @@ public class ShoppingCouponServiceSoap {
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -69,9 +67,8 @@ public class ShoppingCouponServiceSoap {
 			ShoppingCouponServiceUtil.deleteCoupon(plid, couponId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -85,9 +82,8 @@ public class ShoppingCouponServiceSoap {
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -104,9 +100,8 @@ public class ShoppingCouponServiceSoap {
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -130,9 +125,8 @@ public class ShoppingCouponServiceSoap {
 			return com.liferay.portlet.shopping.model.ShoppingCouponSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

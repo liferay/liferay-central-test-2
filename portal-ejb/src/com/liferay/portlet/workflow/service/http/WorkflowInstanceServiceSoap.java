@@ -24,7 +24,6 @@ package com.liferay.portlet.workflow.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.workflow.service.WorkflowInstanceServiceUtil;
 
@@ -45,9 +44,8 @@ public class WorkflowInstanceServiceSoap {
 			return com.liferay.portlet.workflow.model.WorkflowInstanceSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -57,9 +55,8 @@ public class WorkflowInstanceServiceSoap {
 			WorkflowInstanceServiceUtil.signalInstance(instanceId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -69,9 +66,8 @@ public class WorkflowInstanceServiceSoap {
 			WorkflowInstanceServiceUtil.signalToken(instanceId, tokenId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

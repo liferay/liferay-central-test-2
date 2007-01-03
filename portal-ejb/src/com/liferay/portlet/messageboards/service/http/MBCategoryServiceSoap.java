@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.messageboards.service.MBCategoryServiceUtil;
 
@@ -50,9 +49,8 @@ public class MBCategoryServiceSoap {
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -69,9 +67,8 @@ public class MBCategoryServiceSoap {
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -81,9 +78,8 @@ public class MBCategoryServiceSoap {
 			MBCategoryServiceUtil.deleteCategory(categoryId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -95,9 +91,8 @@ public class MBCategoryServiceSoap {
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -107,9 +102,8 @@ public class MBCategoryServiceSoap {
 			MBCategoryServiceUtil.subscribeCategory(categoryId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -119,9 +113,8 @@ public class MBCategoryServiceSoap {
 			MBCategoryServiceUtil.unsubscribeCategory(categoryId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -136,9 +129,8 @@ public class MBCategoryServiceSoap {
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

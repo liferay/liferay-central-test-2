@@ -22,7 +22,6 @@
 
 package com.liferay.portal.model;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
@@ -110,7 +109,7 @@ public class ModelHintsUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

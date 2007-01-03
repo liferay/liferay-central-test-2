@@ -24,7 +24,6 @@ package com.liferay.portlet.workflow.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.workflow.service.WorkflowDefinitionServiceUtil;
 
@@ -47,9 +46,8 @@ public class WorkflowDefinitionServiceSoap {
 			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -63,9 +61,8 @@ public class WorkflowDefinitionServiceSoap {
 			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -82,9 +79,8 @@ public class WorkflowDefinitionServiceSoap {
 			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -96,9 +92,8 @@ public class WorkflowDefinitionServiceSoap {
 			return com.liferay.portlet.workflow.model.WorkflowDefinitionSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

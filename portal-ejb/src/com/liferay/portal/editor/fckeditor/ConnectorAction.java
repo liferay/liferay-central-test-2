@@ -25,7 +25,6 @@ package com.liferay.portal.editor.fckeditor;
 import com.liferay.portal.editor.fckeditor.command.Command;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.command.CommandFactory;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
@@ -77,7 +76,7 @@ public class ConnectorAction extends Action {
 			commandObj.execute(arg, req, res);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return null;

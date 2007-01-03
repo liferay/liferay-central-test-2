@@ -57,10 +57,10 @@ public class Digester {
 			mDigest.update(text.getBytes(ENCODING));
 		}
 		catch (NoSuchAlgorithmException nsae) {
-			_log.error(StackTraceUtil.getStackTrace(nsae));
+			_log.error(nsae, nsae);
 		}
 		catch (UnsupportedEncodingException uee) {
-			_log.error(StackTraceUtil.getStackTrace(uee));
+			_log.error(uee, uee);
 		}
 
 		byte[] raw = mDigest.digest();

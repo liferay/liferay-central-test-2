@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -71,8 +70,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -106,8 +104,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -145,8 +142,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -179,8 +175,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.Object)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -222,8 +217,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -266,8 +260,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -306,8 +299,7 @@ public class WorkflowComponentServiceHttp {
 			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -347,8 +339,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -381,8 +372,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -465,8 +455,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -545,8 +534,7 @@ public class WorkflowComponentServiceHttp {
 			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -626,8 +614,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -710,8 +697,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -744,8 +730,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -778,8 +763,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -812,8 +796,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -846,8 +829,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -948,8 +930,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1048,8 +1029,7 @@ public class WorkflowComponentServiceHttp {
 			return ((Integer)returnObj).intValue();
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1148,8 +1128,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1251,8 +1230,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1282,8 +1260,7 @@ public class WorkflowComponentServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1314,8 +1291,7 @@ public class WorkflowComponentServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1348,8 +1324,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1395,8 +1370,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.util.Map)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -1442,8 +1416,7 @@ public class WorkflowComponentServiceHttp {
 			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.struts;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -92,7 +91,7 @@ public class StrutsUtil {
 				rd.forward(req, res);
 			}
 			catch (IOException ioe1) {
-				_log.warn(StackTraceUtil.getStackTrace(ioe1));
+				_log.warn(ioe1, ioe1);
 			}
 			catch (ServletException se1) {
 				req.setAttribute(PageContext.EXCEPTION, se1.getRootCause());
@@ -110,7 +109,7 @@ public class StrutsUtil {
 					rd.forward(req, res);
 				}
 				catch (IOException ioe2) {
-					_log.warn(StackTraceUtil.getStackTrace(ioe2));
+					_log.warn(ioe2, ioe2);
 				}
 				catch (ServletException se2) {
 					throw se2;
@@ -149,7 +148,7 @@ public class StrutsUtil {
 			rd.include(req, res);
 		}
 		catch (IOException ioe) {
-			_log.warn(StackTraceUtil.getStackTrace(ioe));
+			_log.warn(ioe, ioe);
 		}
 	}
 

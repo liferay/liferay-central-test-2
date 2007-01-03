@@ -22,7 +22,6 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.StringUtil;
 
@@ -71,7 +70,7 @@ public class HibernateConfiguration extends LocalSessionFactoryBean {
 			cfg.setProperties(PropsUtil.getProperties());
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return cfg;

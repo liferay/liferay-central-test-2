@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.smtp;
 
 import com.liferay.portal.kernel.smtp.MessageListener;
 import com.liferay.portal.kernel.smtp.MessageListenerException;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -167,7 +166,7 @@ public class MessageListenerImpl implements MessageListener {
 			throw new MessageListenerException(pe);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new MessageListenerException(e);
 		}

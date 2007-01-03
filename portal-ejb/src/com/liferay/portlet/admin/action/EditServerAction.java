@@ -27,7 +27,6 @@ import com.liferay.portal.deploy.AutoDeployPortletListener;
 import com.liferay.portal.deploy.AutoDeployThemeListener;
 import com.liferay.portal.kernel.deploy.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.AutoDeployUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -355,7 +354,7 @@ public class EditServerAction extends PortletAction {
 				}
 			}
 			catch (Exception e) {
-				_log.debug(StackTraceUtil.getStackTrace(e));
+				_log.debug(e, e);
 			}
 		}
 	}

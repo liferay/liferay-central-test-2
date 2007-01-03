@@ -22,7 +22,6 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.StrutsURLEncoder;
@@ -242,7 +241,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			_rd.include(portletServletReq, portletServletRes);
 		}
 		catch (ServletException se) {
-			_log.error(StackTraceUtil.getStackTrace(se));
+			_log.error(se, se);
 
 			throw new PortletException(se);
 		}

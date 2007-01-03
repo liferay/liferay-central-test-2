@@ -23,7 +23,6 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -346,7 +345,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
-				_log.warn(StackTraceUtil.getStackTrace(e));
+				_log.warn(e, e);
 			}
 
 			ForwardConfig forwardConfig =

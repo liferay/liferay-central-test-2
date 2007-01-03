@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.journal.util;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
@@ -96,7 +95,7 @@ public class ContentTransformerListener extends TransformerListener {
 			xml = JournalUtil.formatXML(doc);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return xml;
@@ -185,7 +184,7 @@ public class ContentTransformerListener extends TransformerListener {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return GetterUtil.getString(content);

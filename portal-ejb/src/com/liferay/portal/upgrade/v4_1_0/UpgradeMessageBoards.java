@@ -27,7 +27,6 @@ import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -75,7 +74,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			_upgradeCategory();
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new UpgradeException(e);
 		}

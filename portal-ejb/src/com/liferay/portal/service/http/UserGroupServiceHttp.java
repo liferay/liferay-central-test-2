@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.http.TunnelUtil;
@@ -74,8 +73,7 @@ public class UserGroupServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -120,8 +118,7 @@ public class UserGroupServiceHttp {
 			return (com.liferay.portal.model.UserGroup)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -156,8 +153,7 @@ public class UserGroupServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -195,8 +191,7 @@ public class UserGroupServiceHttp {
 			return (com.liferay.portal.model.UserGroup)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -234,8 +229,7 @@ public class UserGroupServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -277,8 +271,7 @@ public class UserGroupServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -330,8 +323,7 @@ public class UserGroupServiceHttp {
 			return (com.liferay.portal.model.UserGroup)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}

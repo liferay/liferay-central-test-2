@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.StringUtil;
@@ -56,7 +55,7 @@ public class SessionTreeJSClicks {
 			prefs.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -68,7 +67,7 @@ public class SessionTreeJSClicks {
 			return prefs.getValue(CLASS_NAME, treeId);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			return null;
 		}
@@ -88,7 +87,7 @@ public class SessionTreeJSClicks {
 			prefs.setValue(CLASS_NAME, treeId, openNodesString);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -110,8 +109,7 @@ public class PollsQuestionServiceHttp {
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -195,8 +193,7 @@ public class PollsQuestionServiceHttp {
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -231,8 +228,7 @@ public class PollsQuestionServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -270,8 +266,7 @@ public class PollsQuestionServiceHttp {
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -341,8 +336,7 @@ public class PollsQuestionServiceHttp {
 			return (com.liferay.portlet.polls.model.PollsQuestion)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}

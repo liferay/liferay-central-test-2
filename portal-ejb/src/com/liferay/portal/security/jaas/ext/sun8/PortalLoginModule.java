@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.jaas.ext.sun8;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 import com.sun.enterprise.security.auth.login.PasswordLoginModule;
@@ -65,7 +64,7 @@ public class PortalLoginModule extends PasswordLoginModule {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return null;

@@ -29,7 +29,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.User;
@@ -130,7 +129,7 @@ public class LDAPImportUtil {
 				}
 
 				if (_log.isDebugEnabled()) {
-					_log.debug(StackTraceUtil.getStackTrace(e));
+					_log.debug(e, e);
 				}
 			}
 		}

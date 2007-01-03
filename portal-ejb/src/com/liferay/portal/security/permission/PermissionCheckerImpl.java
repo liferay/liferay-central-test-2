@@ -27,7 +27,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Resource;
@@ -211,7 +210,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				putBag(groupId, bag);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 		}
 
@@ -282,7 +281,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			return false;
 		}

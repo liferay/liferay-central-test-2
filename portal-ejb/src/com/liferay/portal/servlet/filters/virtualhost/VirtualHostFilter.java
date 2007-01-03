@@ -27,7 +27,6 @@ import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -118,7 +117,7 @@ public class VirtualHostFilter implements Filter {
 				_log.warn(nslse);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 		}
 

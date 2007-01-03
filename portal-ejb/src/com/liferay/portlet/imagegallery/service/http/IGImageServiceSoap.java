@@ -24,7 +24,6 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
@@ -43,9 +42,8 @@ public class IGImageServiceSoap {
 			IGImageServiceUtil.deleteImage(companyId, imageId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -59,9 +57,8 @@ public class IGImageServiceSoap {
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

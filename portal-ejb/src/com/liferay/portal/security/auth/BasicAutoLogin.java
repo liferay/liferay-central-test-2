@@ -23,7 +23,6 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.kernel.util.KeyValuePair;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -79,7 +78,7 @@ public class BasicAutoLogin implements AutoLogin {
 			return credentials;
 		}
 		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
+			_log.warn(e, e);
 
 			Cookie cookie = new Cookie(CookieKeys.ID, StringPool.BLANK);
 

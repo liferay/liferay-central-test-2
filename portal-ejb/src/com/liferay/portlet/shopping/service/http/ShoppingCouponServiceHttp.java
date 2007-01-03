@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.DoubleWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.service.http.TunnelUtil;
 
@@ -140,8 +139,7 @@ public class ShoppingCouponServiceHttp {
 			return (com.liferay.portlet.shopping.model.ShoppingCoupon)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -182,8 +180,7 @@ public class ShoppingCouponServiceHttp {
 			}
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -228,8 +225,7 @@ public class ShoppingCouponServiceHttp {
 			return (com.liferay.portlet.shopping.model.ShoppingCoupon)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -295,8 +291,7 @@ public class ShoppingCouponServiceHttp {
 			return (java.util.List)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}
@@ -398,8 +393,7 @@ public class ShoppingCouponServiceHttp {
 			return (com.liferay.portlet.shopping.model.ShoppingCoupon)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
-			String stackTrace = StackTraceUtil.getStackTrace(se);
-			_log.error(stackTrace);
+			_log.error(se, se);
 			throw se;
 		}
 	}

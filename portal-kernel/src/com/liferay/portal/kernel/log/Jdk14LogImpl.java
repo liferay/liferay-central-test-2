@@ -37,52 +37,52 @@ public class Jdk14LogImpl implements Log {
 		_log = log;
 	}
 
-	public void debug(String msg) {
-		_log.log(Level.FINE, msg);
+	public void debug(Object msg) {
+		_log.log(Level.FINE, msg.toString());
 	}
 
 	public void debug(Throwable t) {
 		_log.log(Level.FINE, t.getMessage(), t);
 	}
 
-	public void debug(String msg, Throwable t) {
-		_log.log(Level.FINE, msg, t);
+	public void debug(Object msg, Throwable t) {
+		_log.log(Level.FINE, msg.toString(), t);
 	}
 
-	public void error(String msg) {
-		_log.log(Level.SEVERE, msg);
+	public void error(Object msg) {
+		_log.log(Level.SEVERE, msg.toString());
 	}
 
 	public void error(Throwable t) {
 		_log.log(Level.SEVERE, t.getMessage(), t);
 	}
 
-	public void error(String msg, Throwable t) {
-		_log.log(Level.SEVERE, msg, t);
+	public void error(Object msg, Throwable t) {
+		_log.log(Level.SEVERE, msg.toString(), t);
 	}
 
-	public void fatal(String msg) {
-		_log.log(Level.SEVERE, msg);
+	public void fatal(Object msg) {
+		_log.log(Level.SEVERE, msg.toString());
 	}
 
 	public void fatal(Throwable t) {
 		_log.log(Level.SEVERE, t.getMessage(), t);
 	}
 
-	public void fatal(String msg, Throwable t) {
-		_log.log(Level.SEVERE, msg, t);
+	public void fatal(Object msg, Throwable t) {
+		_log.log(Level.SEVERE, msg.toString(), t);
 	}
 
-	public void info(String msg) {
-		_log.log(Level.INFO, msg);
+	public void info(Object msg) {
+		_log.log(Level.INFO, msg.toString());
 	}
 
 	public void info(Throwable t) {
 		_log.log(Level.INFO, t.getMessage(), t);
 	}
 
-	public void info(String msg, Throwable t) {
-		_log.log(Level.INFO, msg, t);
+	public void info(Object msg, Throwable t) {
+		_log.log(Level.INFO, msg.toString(), t);
 	}
 
 	public boolean isDebugEnabled() {
@@ -109,28 +109,28 @@ public class Jdk14LogImpl implements Log {
 		return _log.isLoggable(Level.WARNING);
 	}
 
-	public void trace(String msg) {
-		_log.log(Level.FINEST, msg);
+	public void trace(Object msg) {
+		_log.log(Level.FINEST, msg.toString());
 	}
 
 	public void trace(Throwable t) {
 		_log.log(Level.FINEST, t.getMessage(), t);
 	}
 
-	public void trace(String msg, Throwable t) {
-		_log.log(Level.FINEST, msg, t);
+	public void trace(Object msg, Throwable t) {
+		_log.log(Level.FINEST, msg.toString(), t);
 	}
 
-	public void warn(String msg) {
-		_log.log(Level.WARNING, msg);
+	public void warn(Object msg) {
+		_log.log(Level.WARNING, msg.toString());
 	}
 
 	public void warn(Throwable t) {
 		_log.log(Level.WARNING, t.getMessage(), t);
 	}
 
-	public void warn(String msg, Throwable t) {
-		_log.log(Level.WARNING, msg, t);
+	public void warn(Object msg, Throwable t) {
+		_log.log(Level.WARNING, msg.toString(), t);
 	}
 
 	private Logger _log;

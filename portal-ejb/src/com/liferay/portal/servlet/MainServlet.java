@@ -27,7 +27,6 @@ import com.liferay.portal.events.StartupAction;
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.smtp.MessageListener;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.Company;
@@ -142,7 +141,7 @@ public class MainServlet extends ActionServlet {
 					true);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Company id
@@ -208,7 +207,7 @@ public class MainServlet extends ActionServlet {
 				PortletLocalServiceUtil.initEAR(xmls);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Initialize display
@@ -238,7 +237,7 @@ public class MainServlet extends ActionServlet {
 					_companyId, WebKeys.PORTLET_CATEGORY, portletCategory);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Initialize layout templates
@@ -258,7 +257,7 @@ public class MainServlet extends ActionServlet {
 				LayoutTemplateLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Initialize look and feel
@@ -278,7 +277,7 @@ public class MainServlet extends ActionServlet {
 				ThemeLocalUtil.init(ctx, xmls);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Check company
@@ -291,7 +290,7 @@ public class MainServlet extends ActionServlet {
 				CompanyLocalServiceUtil.checkCompany(_companyId);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Check journal content search
@@ -308,7 +307,7 @@ public class MainServlet extends ActionServlet {
 						_companyId);
 				}
 				catch (Exception e) {
-					_log.error(StackTraceUtil.getStackTrace(e));
+					_log.error(e, e);
 				}
 			}
 
@@ -325,7 +324,7 @@ public class MainServlet extends ActionServlet {
 				_checkWebSettings(xml);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Scheduler
@@ -354,7 +353,7 @@ public class MainServlet extends ActionServlet {
 			catch (ObjectAlreadyExistsException oaee) {
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// SMTP message listener
@@ -381,7 +380,7 @@ public class MainServlet extends ActionServlet {
 			catch (ObjectAlreadyExistsException oaee) {
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// LDAP Import
@@ -396,7 +395,7 @@ public class MainServlet extends ActionServlet {
 				}
 			}
 			catch (Exception e){
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Message resources
@@ -457,7 +456,7 @@ public class MainServlet extends ActionServlet {
 					new String[] {_companyId});
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			// Portal instance
@@ -521,7 +520,7 @@ public class MainServlet extends ActionServlet {
 				PrefsPropsUtil.getString(_companyId, PropsUtil.PORTAL_CTX));
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		if (portalCtx == null) {
@@ -847,7 +846,7 @@ public class MainServlet extends ActionServlet {
 					PropsUtil.LOGIN_EVENTS_POST), req, res);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 		}
 
@@ -858,7 +857,7 @@ public class MainServlet extends ActionServlet {
 				PropsUtil.SERVLET_SERVICE_EVENTS_PRE), req, res);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			req.setAttribute(PageContext.EXCEPTION, e);
 
@@ -883,7 +882,7 @@ public class MainServlet extends ActionServlet {
 					PropsUtil.SERVLET_SERVICE_EVENTS_POST), req, res);
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			res.addHeader(
@@ -914,7 +913,7 @@ public class MainServlet extends ActionServlet {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		// Process shutdown events
@@ -932,7 +931,7 @@ public class MainServlet extends ActionServlet {
 				new String[] {_companyId});
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		// Parent

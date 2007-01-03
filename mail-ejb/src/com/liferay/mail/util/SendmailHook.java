@@ -23,7 +23,6 @@
 package com.liferay.mail.util;
 
 import com.liferay.portal.kernel.util.ProcessUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -70,7 +69,7 @@ public class SendmailHook implements Hook {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -95,7 +94,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		updatePassword(userId, password);
@@ -130,7 +129,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -166,7 +165,7 @@ public class SendmailHook implements Hook {
 			FileUtil.write(file, sb.toString());
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -206,7 +205,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -235,7 +234,7 @@ public class SendmailHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

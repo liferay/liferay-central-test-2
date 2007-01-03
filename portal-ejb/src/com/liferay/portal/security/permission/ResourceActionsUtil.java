@@ -23,7 +23,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.language.LanguageException;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.Permission;
@@ -299,7 +298,7 @@ public class ResourceActionsUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

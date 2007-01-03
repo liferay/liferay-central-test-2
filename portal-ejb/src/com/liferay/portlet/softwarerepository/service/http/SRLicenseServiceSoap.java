@@ -24,7 +24,6 @@ package com.liferay.portlet.softwarerepository.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import com.liferay.portlet.softwarerepository.service.SRLicenseServiceUtil;
 
@@ -47,9 +46,8 @@ public class SRLicenseServiceSoap {
 			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -58,9 +56,8 @@ public class SRLicenseServiceSoap {
 			SRLicenseServiceUtil.deleteLicense(licenseId);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -72,9 +69,8 @@ public class SRLicenseServiceSoap {
 			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 
@@ -89,9 +85,8 @@ public class SRLicenseServiceSoap {
 			return com.liferay.portlet.softwarerepository.model.SRLicenseSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
-			String stackTrace = StackTraceUtil.getStackTrace(e);
-			_log.error(stackTrace);
-			throw new RemoteException(stackTrace);
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
 		}
 	}
 

@@ -22,7 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portlet.PortalPreferences;
 import com.liferay.portlet.PortletPreferencesFactory;
 
@@ -51,7 +50,7 @@ public class SessionClicks {
 			return prefs.getValue(CLASS_NAME, key, defaultValue);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			return null;
 		}
@@ -65,7 +64,7 @@ public class SessionClicks {
 			prefs.setValue(CLASS_NAME, key, value);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

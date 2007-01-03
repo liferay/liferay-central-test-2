@@ -22,7 +22,6 @@
 
 package com.liferay.portal.cms.servlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -143,7 +142,7 @@ public class CMSServlet extends HttpServlet {
 				}
 			}
 			catch (Exception e) {
-				_log.warn(StackTraceUtil.getStackTrace(e));
+				_log.warn(e, e);
 			}
 			finally {
 				out.flush();

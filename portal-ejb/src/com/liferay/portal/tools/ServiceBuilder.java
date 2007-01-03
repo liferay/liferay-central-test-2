@@ -176,7 +176,6 @@ public class ServiceBuilder {
 			"com.liferay.portal.kernel.util.NullWrapper",
 			"com.liferay.portal.kernel.util.OrderByComparator",
 			"com.liferay.portal.kernel.util.ShortWrapper",
-			"com.liferay.portal.kernel.util.StackTraceUtil",
 			"com.liferay.portal.kernel.util.StringPool",
 			"com.liferay.portal.security.auth.HttpPrincipal",
 			"com.liferay.portal.service.http.TunnelUtil",
@@ -4441,7 +4440,6 @@ public class ServiceBuilder {
 		sb.append("import com.liferay.portal.kernel.util.MethodWrapper;");
 		sb.append("import com.liferay.portal.kernel.util.NullWrapper;");
 		sb.append("import com.liferay.portal.kernel.util.ShortWrapper;");
-		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import com.liferay.portal.security.auth.HttpPrincipal;");
 		sb.append("import com.liferay.portal.service.http.TunnelUtil;");
 
@@ -4619,8 +4617,7 @@ public class ServiceBuilder {
 
 				sb.append("}");
 				sb.append("catch (com.liferay.portal.SystemException se) {");
-				sb.append("String stackTrace = StackTraceUtil.getStackTrace(se);");
-				sb.append("_log.error(stackTrace);");
+				sb.append("_log.error(se, se);");
 				sb.append("throw se;");
 				sb.append("}");
 				sb.append("}");
@@ -4695,7 +4692,6 @@ public class ServiceBuilder {
 
 		sb.append("import com.liferay.portal.kernel.log.Log;");
 		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
-		sb.append("import com.liferay.portal.kernel.util.StackTraceUtil;");
 		sb.append("import java.rmi.RemoteException;");
 
 		// Class declaration
@@ -4801,9 +4797,8 @@ public class ServiceBuilder {
 				sb.append("}");
 
 				sb.append("catch (Exception e) {");
-				sb.append("String stackTrace = StackTraceUtil.getStackTrace(e);");
-				sb.append("_log.error(stackTrace);");
-				sb.append("throw new RemoteException(stackTrace);");
+				sb.append("_log.error(e, e);");
+				sb.append("throw new RemoteException(e.getMessage());");
 				sb.append("}");
 				sb.append("}");
 			}

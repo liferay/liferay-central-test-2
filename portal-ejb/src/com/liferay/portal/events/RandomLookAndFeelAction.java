@@ -22,7 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
@@ -112,7 +111,7 @@ public class RandomLookAndFeelAction extends Action {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new ActionException(e);
 		}

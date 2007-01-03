@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.jaas.ext;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.jaas.PortalPrincipal;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -160,7 +159,7 @@ public class BasicLoginModule implements LoginModule {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return null;

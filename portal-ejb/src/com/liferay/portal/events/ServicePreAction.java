@@ -28,7 +28,6 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.language.LanguageUtil;
 import com.liferay.portal.model.ColorScheme;
@@ -511,7 +510,7 @@ public class ServicePreAction extends Action {
 			fixState(req, themeDisplay);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new ActionException(e);
 		}

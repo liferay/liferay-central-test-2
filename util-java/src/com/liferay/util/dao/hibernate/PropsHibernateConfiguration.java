@@ -22,7 +22,6 @@
 
 package com.liferay.util.dao.hibernate;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.ExtPropertiesLoader;
 import com.liferay.util.StringUtil;
 
@@ -78,7 +77,7 @@ public class PropsHibernateConfiguration extends LocalSessionFactoryBean {
 			cfg.setProperties(extPropsLoader.getProperties());
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		return cfg;

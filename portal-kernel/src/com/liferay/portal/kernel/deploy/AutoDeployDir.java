@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.deploy;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.io.File;
 
@@ -94,7 +93,7 @@ public class AutoDeployDir {
 				}
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 
 				stop();
 
@@ -135,7 +134,7 @@ public class AutoDeployDir {
 						}
 					}
 					catch (Exception e) {
-						_log.error(StackTraceUtil.getStackTrace(e));
+						_log.error(e, e);
 					}
 					finally {
 						if (file.delete()) {

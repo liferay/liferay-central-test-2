@@ -25,7 +25,6 @@ package com.liferay.jbpm.db;
 import com.liferay.jbpm.util.WorkflowUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -131,7 +130,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			return 0;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}
@@ -199,7 +198,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			return 0;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}
@@ -293,7 +292,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			return count;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}
@@ -310,7 +309,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			return QueryUtil.list(q, _dialect, begin, end);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}
@@ -376,7 +375,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}
@@ -477,7 +476,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new RuntimeException(e.getMessage());
 		}

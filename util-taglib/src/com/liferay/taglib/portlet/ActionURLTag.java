@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.taglib.util.ParamAncestorTagImpl;
 
@@ -144,7 +143,7 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 			returnObj = MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw e;
 		}

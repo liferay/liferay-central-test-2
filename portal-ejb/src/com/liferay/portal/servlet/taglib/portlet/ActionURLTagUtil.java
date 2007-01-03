@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
@@ -154,7 +153,7 @@ public class ActionURLTagUtil {
 			return portletURL.toString();
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new JspException(e);
 		}

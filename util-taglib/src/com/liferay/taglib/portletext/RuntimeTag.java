@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.portletext;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.WebKeys;
@@ -135,7 +134,7 @@ public class RuntimeTag extends TagSupport {
 			return EVAL_PAGE;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new JspException(e);
 		}

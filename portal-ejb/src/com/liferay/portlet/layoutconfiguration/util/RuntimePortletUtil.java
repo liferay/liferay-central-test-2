@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.layoutconfiguration.util;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -197,7 +196,7 @@ public class RuntimePortletUtil {
 				vc, sw, RuntimePortletUtil.class.getName(), content);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw e;
 		}

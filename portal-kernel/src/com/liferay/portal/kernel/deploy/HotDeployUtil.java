@@ -24,7 +24,6 @@ package com.liferay.portal.kernel.deploy;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import java.util.Iterator;
 import java.util.List;
@@ -86,7 +85,7 @@ public class HotDeployUtil {
 				listener.invokeDeploy(event);
 			}
 			catch (HotDeployException hde) {
-				_log.error(StackTraceUtil.getStackTrace(hde));
+				_log.error(hde, hde);
 			}
 		}
 	}
@@ -101,7 +100,7 @@ public class HotDeployUtil {
 				listener.invokeUndeploy(event);
 			}
 			catch (HotDeployException hde) {
-				_log.error(StackTraceUtil.getStackTrace(hde));
+				_log.error(hde, hde);
 			}
 		}
 	}
@@ -123,7 +122,7 @@ public class HotDeployUtil {
 					listener.invokeDeploy(event);
 				}
 				catch (HotDeployException hde) {
-					_log.error(StackTraceUtil.getStackTrace(hde));
+					_log.error(hde, hde);
 				}
 			}
 		}

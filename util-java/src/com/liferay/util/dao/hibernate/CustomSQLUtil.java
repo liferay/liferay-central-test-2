@@ -23,7 +23,6 @@
 package com.liferay.util.dao.hibernate;
 
 import com.liferay.portal.kernel.util.OrderByComparator;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.StringUtil;
@@ -66,7 +65,7 @@ public abstract class CustomSQLUtil {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

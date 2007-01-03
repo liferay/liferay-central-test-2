@@ -25,7 +25,6 @@ package com.liferay.jbpm.servlet;
 import com.liferay.jbpm.WorkflowComponentImpl;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.ContentTypes;
 import com.liferay.util.HttpHeaders;
 import com.liferay.util.servlet.UploadServletRequest;
@@ -76,7 +75,7 @@ public class JBPMServlet extends HttpServlet {
 			}
 		}
 		catch (Exception e) {
-			_log.warn(StackTraceUtil.getStackTrace(e));
+			_log.warn(e, e);
 		}
 		finally {
 			out.flush();

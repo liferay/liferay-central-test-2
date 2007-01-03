@@ -23,7 +23,6 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.events.EventsProcessor;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.service.UserTrackerLocalServiceUtil;
 import com.liferay.portal.struts.ActionException;
@@ -62,7 +61,7 @@ public class PortalSessionListener implements HttpSessionListener {
 				PropsUtil.SERVLET_SESSION_CREATE_EVENTS), ses);
 		}
 		catch (ActionException ae) {
-			_log.error(StackTraceUtil.getStackTrace(ae));
+			_log.error(ae, ae);
 		}
 	}
 
@@ -125,7 +124,7 @@ public class PortalSessionListener implements HttpSessionListener {
 			_log.warn("Please upgrade to a servlet 2.4 compliant container");
 		}
 		catch (Exception e2) {
-			_log.error(StackTraceUtil.getStackTrace(e2));
+			_log.error(e2, e2);
 		}
 
 		// Process session destroyed events
@@ -135,7 +134,7 @@ public class PortalSessionListener implements HttpSessionListener {
 				PropsUtil.SERVLET_SESSION_DESTROY_EVENTS), ses);
 		}
 		catch (ActionException ae) {
-			_log.error(StackTraceUtil.getStackTrace(ae));
+			_log.error(ae, ae);
 		}
 	}
 

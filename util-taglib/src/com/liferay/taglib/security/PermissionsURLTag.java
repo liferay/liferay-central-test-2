@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.jsp.JspException;
@@ -83,7 +82,7 @@ public class PermissionsURLTag extends TagSupport {
 			returnObj = MethodInvoker.invoke(methodWrapper);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);

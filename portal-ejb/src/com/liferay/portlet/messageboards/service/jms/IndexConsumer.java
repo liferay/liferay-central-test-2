@@ -24,7 +24,6 @@ package com.liferay.portlet.messageboards.service.jms;
 
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 
 import javax.jms.Message;
 import javax.jms.MessageListener;
@@ -63,7 +62,7 @@ public class IndexConsumer implements MessageListener {
 			con.start();
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -76,7 +75,7 @@ public class IndexConsumer implements MessageListener {
 			_onMessage(methodWrapper);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

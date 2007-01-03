@@ -23,7 +23,6 @@
 package com.liferay.portlet.admin.job;
 
 import com.liferay.portal.job.IntervalJob;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.security.ldap.LDAPImportUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -55,7 +54,7 @@ public class LDAPImportJob implements IntervalJob {
 			_interval =  rawInterval * Time.MINUTE;
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -70,7 +69,7 @@ public class LDAPImportJob implements IntervalJob {
 			LDAPImportUtil.importLDAP();
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

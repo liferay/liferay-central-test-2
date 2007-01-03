@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -73,7 +72,7 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			super.service(req, res);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 		finally {
 			try {

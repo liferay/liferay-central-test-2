@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet.filters.autologin;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.auth.AutoLoginException;
@@ -107,8 +106,7 @@ public class AutoLoginFilter implements Filter {
 					}
 				}
 				catch (AutoLoginException ale) {
-					_log.warn(StackTraceUtil.getStackTrace(ale));
-
+					_log.warn(ale, ale);
 					_log.error(ale.getMessage());
 				}
 			}

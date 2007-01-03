@@ -29,7 +29,6 @@ import com.liferay.mail.model.Filter;
 import com.liferay.mail.service.persistence.CyrusUserUtil;
 import com.liferay.mail.service.persistence.CyrusVirtualUtil;
 import com.liferay.portal.kernel.util.ProcessUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
@@ -105,7 +104,7 @@ public class CyrusHook implements Hook {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -141,7 +140,7 @@ public class CyrusHook implements Hook {
 			ProcessUtil.close(p);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -167,7 +166,7 @@ public class CyrusHook implements Hook {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -176,7 +175,7 @@ public class CyrusHook implements Hook {
 			CyrusVirtualUtil.removeByUserId(userId);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -237,7 +236,7 @@ public class CyrusHook implements Hook {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -270,7 +269,7 @@ public class CyrusHook implements Hook {
 			FileUtil.write(file, sb.toString());
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -283,7 +282,7 @@ public class CyrusHook implements Hook {
 			CyrusVirtualUtil.update(virtual);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 
@@ -297,7 +296,7 @@ public class CyrusHook implements Hook {
 			user = new CyrusUser(userId, password);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 
 		try {
@@ -306,7 +305,7 @@ public class CyrusHook implements Hook {
 			CyrusUserUtil.update(user);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 	}
 

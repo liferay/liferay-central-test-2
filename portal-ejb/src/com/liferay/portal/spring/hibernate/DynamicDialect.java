@@ -22,7 +22,6 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.CallableStatement;
@@ -82,7 +81,7 @@ public class DynamicDialect extends Dialect {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 		finally {
 			DataAccess.cleanUp(con);

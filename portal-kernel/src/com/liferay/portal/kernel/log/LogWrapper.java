@@ -38,7 +38,7 @@ public class LogWrapper implements Log {
 		_log = log;
 	}
 
-	public void debug(String msg) {
+	public void debug(Object msg) {
 		_log.debug(msg);
 	}
 
@@ -46,11 +46,11 @@ public class LogWrapper implements Log {
 		_log.debug(t);
 	}
 
-	public void debug(String msg, Throwable t) {
+	public void debug(Object msg, Throwable t) {
 		_log.debug(msg, t);
 	}
 
-	public void error(String msg) {
+	public void error(Object msg) {
 		_log.error(msg);
 	}
 
@@ -58,11 +58,11 @@ public class LogWrapper implements Log {
 		_log.error(t);
 	}
 
-	public void error(String msg, Throwable t) {
+	public void error(Object msg, Throwable t) {
 		_log.error(msg, t);
 	}
 
-	public void fatal(String msg) {
+	public void fatal(Object msg) {
 		_log.fatal(msg);
 	}
 
@@ -70,11 +70,11 @@ public class LogWrapper implements Log {
 		_log.fatal(t);
 	}
 
-	public void fatal(String msg, Throwable t) {
+	public void fatal(Object msg, Throwable t) {
 		_log.fatal(msg, t);
 	}
 
-	public void info(String msg) {
+	public void info(Object msg) {
 		_log.info(msg);
 	}
 
@@ -82,7 +82,7 @@ public class LogWrapper implements Log {
 		_log.info(t);
 	}
 
-	public void info(String msg, Throwable t) {
+	public void info(Object msg, Throwable t) {
 		_log.info(msg, t);
 	}
 
@@ -110,7 +110,7 @@ public class LogWrapper implements Log {
 		return _log.isWarnEnabled();
 	}
 
-	public void trace(String msg) {
+	public void trace(Object msg) {
 		_log.trace(msg);
 	}
 
@@ -118,11 +118,11 @@ public class LogWrapper implements Log {
 		_log.trace(t);
 	}
 
-	public void trace(String msg, Throwable t) {
+	public void trace(Object msg, Throwable t) {
 		_log.trace(msg, t);
 	}
 
-	public void warn(String msg) {
+	public void warn(Object msg) {
 		_log.warn(msg);
 	}
 
@@ -130,7 +130,7 @@ public class LogWrapper implements Log {
 		_log.warn(t);
 	}
 
-	public void warn(String msg, Throwable t) {
+	public void warn(Object msg, Throwable t) {
 		_log.warn(msg, t);
 	}
 

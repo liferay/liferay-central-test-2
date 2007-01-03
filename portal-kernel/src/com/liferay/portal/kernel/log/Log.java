@@ -30,29 +30,29 @@ package com.liferay.portal.kernel.log;
  */
 public interface Log {
 
-	public void debug(String msg);
+	public void debug(Object msg);
 
 	public void debug(Throwable t);
 
-	public void debug(String msg, Throwable t);
+	public void debug(Object msg, Throwable t);
 
-	public void error(String msg);
+	public void error(Object msg);
 
 	public void error(Throwable t);
 
-	public void error(String msg, Throwable t);
+	public void error(Object msg, Throwable t);
 
-	public void fatal(String msg);
+	public void fatal(Object msg);
 
 	public void fatal(Throwable t);
 
-	public void fatal(String msg, Throwable t);
+	public void fatal(Object msg, Throwable t);
 
-	public void info(String msg);
+	public void info(Object msg);
 
 	public void info(Throwable t);
 
-	public void info(String msg, Throwable t);
+	public void info(Object msg, Throwable t);
 
 	public boolean isDebugEnabled();
 
@@ -66,16 +66,16 @@ public interface Log {
 
 	public boolean isWarnEnabled();
 
-	public void trace(String msg);
+	public void trace(Object msg);
 
 	public void trace(Throwable t);
 
-	public void trace(String msg, Throwable t);
+	public void trace(Object msg, Throwable t);
 
-	public void warn(String msg);
+	public void warn(Object msg);
 
 	public void warn(Throwable t);
 
-	public void warn(String msg, Throwable t);
+	public void warn(Object msg, Throwable t);
 
 }

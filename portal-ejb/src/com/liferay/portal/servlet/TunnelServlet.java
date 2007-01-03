@@ -27,7 +27,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -101,7 +100,7 @@ public class TunnelServlet extends HttpServlet {
 				}
 			}
 			catch (Exception e) {
-				_log.error(StackTraceUtil.getStackTrace(e));
+				_log.error(e, e);
 			}
 
 			if (returnObj != null) {

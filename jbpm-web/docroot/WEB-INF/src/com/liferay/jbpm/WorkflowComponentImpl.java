@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.jbi.WorkflowComponent;
 import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
@@ -239,7 +238,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 		}
 		finally {
 			try {

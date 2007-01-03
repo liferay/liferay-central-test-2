@@ -26,7 +26,6 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.log.LogUtil;
-import com.liferay.portal.kernel.util.StackTraceUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.ldap.LDAPImportUtil;
@@ -72,7 +71,7 @@ public class LDAPAuth implements Authenticator {
 				companyId, emailAddress, StringPool.BLANK, password);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new AuthException(e);
 		}
@@ -87,7 +86,7 @@ public class LDAPAuth implements Authenticator {
 			return authenticate(companyId, StringPool.BLANK, userId, password);
 		}
 		catch (Exception e) {
-			_log.error(StackTraceUtil.getStackTrace(e));
+			_log.error(e, e);
 
 			throw new AuthException(e);
 		}
