@@ -521,7 +521,7 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 			}
 			%>
 
-			<select onChange="document.<portlet:namespace />fm.<portlet:namespace />groupId.value = this.value;">
+			<select onChange="document.<portlet:namespace />fm.<portlet:namespace />groupId.value = this.value; submitForm(document.<portlet:namespace />fm);">
 
 				<%
 				for (int i = 0; i < communities.size(); i++) {
