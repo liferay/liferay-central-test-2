@@ -340,7 +340,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 					try {
 						IndexerImpl.addMessage(
-							companyId, groupId, userName, categoryId, threadId, 
+							companyId, groupId, userName, categoryId, threadId,
 							messageId, title, content);
 					}
 					catch (Exception e1) {
@@ -395,9 +395,9 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 			BooleanQuery searchQuery = new BooleanQuery();
 
+			LuceneUtil.addTerm(searchQuery, LuceneFields.USER_NAME, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
-			LuceneUtil.addTerm(searchQuery, LuceneFields.USERNAME, keywords);
 
 			BooleanQuery fullQuery = new BooleanQuery();
 
@@ -555,8 +555,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					if (!fromCategory.isDiscussion()) {
 						Indexer.updateMessage(
 							message.getCompanyId(), fromCategory.getGroupId(),
-							message.getUserName(), toCategoryId, 
-							message.getThreadId(), message.getMessageId(), 
+							message.getUserName(), toCategoryId,
+							message.getThreadId(), message.getMessageId(),
 							message.getSubject(), message.getBody());
 					}
 				}

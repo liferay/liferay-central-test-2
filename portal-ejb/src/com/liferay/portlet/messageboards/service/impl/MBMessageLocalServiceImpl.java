@@ -406,8 +406,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
-					message.getCompanyId(), category.getGroupId(), 
-					user.getFullName(), category.getCategoryId(), threadId, 
+					message.getCompanyId(), category.getGroupId(),
+					user.getFullName(), category.getCategoryId(), threadId,
 					messageId, subject, body);
 			}
 		}
@@ -1005,9 +1005,9 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				try {
 					if (!category.isDiscussion()) {
 						Indexer.updateMessage(
-							curMessage.getCompanyId(), category.getGroupId(), 
-							curMessage.getUserName(), category.getCategoryId(), 
-							curMessage.getThreadId(), curMessage.getMessageId(), 
+							curMessage.getCompanyId(), category.getGroupId(),
+							curMessage.getUserName(), category.getCategoryId(),
+							curMessage.getThreadId(), curMessage.getMessageId(),
 							curMessage.getSubject(), curMessage.getBody());
 					}
 				}
@@ -1028,8 +1028,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
-					message.getCompanyId(), category.getGroupId(), 
-					message.getUserName(), category.getCategoryId(), 
+					message.getCompanyId(), category.getGroupId(),
+					message.getUserName(), category.getCategoryId(),
 					message.getThreadId(), messageId, subject, body);
 			}
 		}
