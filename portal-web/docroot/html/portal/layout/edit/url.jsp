@@ -22,7 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
+<%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

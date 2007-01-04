@@ -22,11 +22,7 @@
  */
 %>
 
-<%@ include file="/html/portal/init.jsp" %>
-
-<%
-Layout selLayout = (Layout)request.getAttribute(WebKeys.SEL_LAYOUT);
-%>
+<%@ include file="/html/portal/layout/edit/init.jsp" %>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>

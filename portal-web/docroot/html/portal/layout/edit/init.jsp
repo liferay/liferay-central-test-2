@@ -22,18 +22,8 @@
  */
 %>
 
-<%@ include file="/html/portal/layout/edit/init.jsp" %>
+<%@ include file="/html/portal/init.jsp" %>
 
-<table border="0" cellpadding="0" cellspacing="0">
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "article-id") %>
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input class="form-text" name="TypeSettingsProperties(article-id)" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(article-id)" />">
-	</td>
-</tr>
-</table>
-
-<%@ include file="/html/portal/layout/edit/common.jsp" %>
+<%
+Layout selLayout = (Layout)request.getAttribute(WebKeys.SEL_LAYOUT);
+%>
