@@ -92,22 +92,22 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />selectFileEntry(folderId, name) {
+	function <portlet:namespace />selectFileEntry(folderId, name, title) {
 		document.<portlet:namespace />fm.<portlet:namespace />toFolderId.value = folderId;
 		document.<portlet:namespace />fm.<portlet:namespace />toName.value = name;
 
-		var nameEl = document.getElementById("<portlet:namespace />toFileEntryName");
+		var titleEl = document.getElementById("<portlet:namespace />toFileEntryTitle");
 
-		if (name != "") {
-			name += "&nbsp;";
+		if (title != "") {
+			title += "&nbsp;";
 		}
 
-		nameEl.innerHTML = name;
+		titleEl.innerHTML = title;
 	}
 
 	function <portlet:namespace />selectGroup(groupId, groupName) {
 		if (document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value != groupId) {
-			<portlet:namespace />selectFileEntry("", "");
+			<portlet:namespace />selectFileEntry("", "", "");
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace />toGroupId.value = groupId;
@@ -153,7 +153,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?fileShortcutId=<%= fileShortcutId %>">
-			<%= toFileEntry.getName() %>
+			<%= toFileEntry.getTitle() %>
 			</a>
 		</td>
 	</tr>
@@ -238,11 +238,11 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 	<td>
 
 		<%
-		String toFileEntryName = BeanUtil.getString(toFileEntry, "name");
+		String toFileEntryTitle = BeanUtil.getString(toFileEntry, "title");
 		%>
 
-		<span id="<portlet:namespace />toFileEntryName">
-		<%= toFileEntryName %>
+		<span id="<portlet:namespace />toFileEntryTitle">
+		<%= toFileEntryTitle %>
 		</span>
 
 		<c:if test='<%= strutsAction.equals("/document_library/edit_file_shortcut") && ((fileShortcut == null) || DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE)) %>'>

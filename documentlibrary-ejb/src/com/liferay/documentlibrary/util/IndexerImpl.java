@@ -74,18 +74,24 @@ public class IndexerImpl {
 						groupId + " " + repositoryId + " " + fileName);
 			}
 
-			String fileExt = fileName;
+			String fileExt = StringPool.BLANK;
 
-			int fileExtPos = fileExt.indexOf(DLServiceImpl.VERSION);
+			int fileExtVersionPos = fileName.indexOf(DLServiceImpl.VERSION);
 
-			if (fileExtPos != -1) {
-				fileExt = fileExt.substring(
-					fileExt.lastIndexOf(StringPool.PERIOD, fileExtPos),
-						fileExtPos);
+			if (fileExtVersionPos != -1) {
+				int fileExtPos = fileName.lastIndexOf(
+					StringPool.PERIOD, fileExtVersionPos);
+
+				if (fileExtPos != -1) {
+					fileExt = fileName.substring(fileExtPos, fileExtVersionPos);
+				}
 			}
 			else {
-				fileExt = fileExt.substring(
-					fileExt.lastIndexOf(StringPool.PERIOD), fileExt.length());
+				int fileExtPos = fileName.lastIndexOf(StringPool.PERIOD);
+
+				if (fileExtPos != -1) {
+					fileExt = fileName.substring(fileExtPos, fileName.length());
+				}
 			}
 
 			InputStream is = null;

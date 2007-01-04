@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.documentlibrary.service.impl;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
@@ -29,6 +30,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
@@ -115,6 +117,8 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		if (Validator.isNull(title)) {
 			title = name;
 		}
+
+		name = getName(name);
 
 		if ((byteArray == null) || (byteArray.length == 0)) {
 			throw new FileSizeException();
@@ -630,6 +634,25 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		}
 
 		return folderId;
+	}
+
+	protected String getName(String name) throws SystemException {
+		String extension = StringPool.BLANK;
+
+		int pos = name.lastIndexOf(StringPool.PERIOD);
+
+		if (pos != -1) {
+			extension = name.substring(pos + 1, name.length()).toLowerCase();
+		}
+
+		name = Long.toString(CounterLocalServiceUtil.increment(
+			DLFileEntry.class.getName()));
+
+		if (Validator.isNotNull(extension)) {
+			name = "DLFE-" + name + StringPool.PERIOD + extension;
+		}
+
+		return name;
 	}
 
 	private static Log _log =

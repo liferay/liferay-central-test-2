@@ -105,7 +105,7 @@ portletURL.setParameter("name", name);
 		<td style="padding-left: 10px;"></td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>">
-			<%= name %>
+			<%= fileEntry.getTitle() %>
 			</a>
 		</td>
 	</tr>

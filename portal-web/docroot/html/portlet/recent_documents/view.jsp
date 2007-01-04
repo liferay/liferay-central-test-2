@@ -39,20 +39,26 @@ List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId, user.getUse
 		for (int i = 0; i < ranks.size() && i < 5; i++) {
 			DLFileRank rank = (DLFileRank)ranks.get(i);
 
-			PortletURL rowURL = renderResponse.createActionURL();
+			try {
+				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(rank.getFolderId(), rank.getName());
 
-			rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+				PortletURL rowURL = renderResponse.createActionURL();
 
-			rowURL.setParameter("struts_action", "/recent_documents/get_file");
-			rowURL.setParameter("folderId", rank.getFolderId());
-			rowURL.setParameter("name", rank.getName());
+				rowURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+
+				rowURL.setParameter("struts_action", "/recent_documents/get_file");
+				rowURL.setParameter("folderId", rank.getFolderId());
+				rowURL.setParameter("name", rank.getName());
 		%>
 
-			<tr>
-				<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(rank.getName()) %>.gif"><%= rank.getName() %></a></td>
-			</tr>
+				<tr>
+					<td><a href="<%= rowURL.toString() %>"><img align="left" border="0" src="<%= themeDisplay.getPathThemeImage() %>/document_library/<%= DLUtil.getFileExtension(rank.getName()) %>.gif"><%= fileEntry.getTitle() %></a></td>
+				</tr>
 
 		<%
+			}
+			catch (Exception e) {
+			}
 		}
 		%>
 

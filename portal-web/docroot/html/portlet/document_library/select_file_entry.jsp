@@ -160,6 +160,8 @@ for (int i = 0; i < results.size(); i++) {
 		sb.append(fileEntry.getFolderId());
 		sb.append("', '");
 		sb.append(UnicodeFormatter.toString(fileEntry.getName()));
+		sb.append("', '");
+		sb.append(UnicodeFormatter.toString(fileEntry.getTitle()));
 		sb.append("'); window.close();");
 
 		String rowHREF = sb.toString();

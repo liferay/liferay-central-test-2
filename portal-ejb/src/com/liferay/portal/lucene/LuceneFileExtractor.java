@@ -23,6 +23,7 @@
 package com.liferay.portal.lucene;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
 
 import java.io.BufferedInputStream;
 import java.io.ByteArrayInputStream;
@@ -64,7 +65,7 @@ public class LuceneFileExtractor {
 		String text = null;
 
 		try {
-			fileExt = fileExt.toLowerCase();
+			fileExt = GetterUtil.getString(fileExt).toLowerCase();
 
 			PropertyId id = null;
 			PropertyState state = new PropertyState(id, 1, true);
