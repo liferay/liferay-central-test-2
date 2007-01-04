@@ -23,13 +23,11 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutSetException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.SitemapUtil;
-import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
@@ -60,15 +58,6 @@ public class SitemapServlet extends HttpServlet {
 			ServletContext ctx = getServletContext();
 
 			_companyId = ctx.getInitParameter("company_id");
-
-			String rootPath = GetterUtil.getString(
-				ctx.getInitParameter("root_path"), StringPool.SLASH);
-
-			if (rootPath.equals(StringPool.SLASH)) {
-				rootPath = StringPool.BLANK;
-			}
-
-			_mainPath = rootPath + MainServlet.DEFAULT_MAIN_PATH;
 		}
 	}
 
@@ -104,8 +93,10 @@ public class SitemapServlet extends HttpServlet {
 			String portalURL = PortalUtil.getPortalURL(
 				hostName, req.getServerPort(), req.isSecure());
 
+			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
+
 			String sitemap = SitemapUtil.getSitemap(
-				layoutSet.getOwnerId(), portalURL + _mainPath);
+				layoutSet.getOwnerId(), portalURL + mainPath);
 
 			if (!res.isCommitted()) {
 				out.write(sitemap);
@@ -128,6 +119,5 @@ public class SitemapServlet extends HttpServlet {
 	private static Log _log = LogFactory.getLog(SitemapServlet.class);
 
 	private String _companyId;
-	private String _mainPath;
 
 }
