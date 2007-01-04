@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
-
-import com.liferay.util.ParamUtil;
+package com.liferay.portal.kernel.portlet;
 
 import javax.portlet.WindowState;
 
@@ -41,9 +39,9 @@ public class LiferayWindowState extends WindowState {
 	public final static WindowState POP_UP = new WindowState("pop_up");
 
 	public static boolean isExclusive(HttpServletRequest req) {
-		String state = ParamUtil.getString(req, "p_p_state");
+		String state = req.getParameter("p_p_state");
 
-		if (state.equals(EXCLUSIVE.toString())) {
+		if ((state != null) && (state.equals(EXCLUSIVE.toString()))) {
 			return true;
 		}
 		else {
@@ -52,9 +50,9 @@ public class LiferayWindowState extends WindowState {
 	}
 
 	public static boolean isPopUp(HttpServletRequest req) {
-		String state = ParamUtil.getString(req, "p_p_state");
+		String state = req.getParameter("p_p_state");
 
-		if (state.equals(POP_UP.toString())) {
+		if ((state != null) && (state.equals(POP_UP.toString()))) {
 			return true;
 		}
 		else {

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.kernel.portlet;
 
 import javax.portlet.PortletMode;
 

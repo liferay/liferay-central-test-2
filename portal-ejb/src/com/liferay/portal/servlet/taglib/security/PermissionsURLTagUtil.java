@@ -22,12 +22,12 @@
 
 package com.liferay.portal.servlet.taglib.security;
 
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.LiferayWindowState;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.PortletURLUtil;
 import com.liferay.util.Validator;

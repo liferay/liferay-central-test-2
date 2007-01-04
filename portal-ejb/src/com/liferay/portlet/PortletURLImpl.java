@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;

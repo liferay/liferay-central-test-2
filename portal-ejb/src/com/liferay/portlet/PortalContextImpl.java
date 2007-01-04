@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletMode;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.util.ReleaseInfo;
 
 import java.util.ArrayList;
