@@ -78,6 +78,8 @@ public class ServicePostAction extends Action {
 			_log.error(e);
 		}
 
+		req.removeAttribute(WebKeys.THEME_DISPLAY);
+
 		try {
 
 			// Clean up the permission checker

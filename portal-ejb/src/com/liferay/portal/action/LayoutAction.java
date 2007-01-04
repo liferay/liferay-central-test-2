@@ -134,6 +134,8 @@ public class LayoutAction extends Action {
 					_log.error(e);
 				}
 
+				req.removeAttribute(WebKeys.JAVAX_PORTLET_REQUEST);
+
 				try {
 					if (action.equals("1")) {
 						ActionResponseImpl actionResponseImpl =
@@ -146,6 +148,8 @@ public class LayoutAction extends Action {
 				catch (Exception e) {
 					_log.error(e);
 				}
+
+				req.removeAttribute(WebKeys.JAVAX_PORTLET_RESPONSE);
 			}
 		}
 		else {
