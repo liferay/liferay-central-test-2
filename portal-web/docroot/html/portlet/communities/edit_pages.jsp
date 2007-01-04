@@ -990,7 +990,7 @@ portletURL.setParameter("groupId", groupId);
 				}
 				%>
 
-				<%= LanguageUtil.get(pageContext, "the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website") %> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", "<a href=\"http://www.sitemap.org\" target=\"_blank\">http://www.sitemap.org</a>") %>
+				<%= LanguageUtil.get(pageContext, "the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website") %> <%= LanguageUtil.format(pageContext, "see-x-for-more-information", "<a href=\"http://www.sitemaps.org\" target=\"_blank\">http://www.sitemaps.org</a>") %>
 
 				<br><br>
 
