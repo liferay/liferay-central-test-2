@@ -9,7 +9,7 @@
 				FROM
 					DLFileEntry
 				WHERE
-					[$FOLDER_ID$]
+					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
 			(
@@ -18,7 +18,7 @@
 				FROM
 					DLFileShortcut
 				WHERE
-					[$FOLDER_ID$]
+					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 		]]>
 	</sql>
@@ -26,23 +26,27 @@
 		<![CDATA[
 			(
 				SELECT
-					folderId AS folderId, name AS name, 0 AS fileShortcutId
+					folderId AS folderId, name AS name, title AS title, 0 AS fileShortcutId
 				FROM
 					DLFileEntry
 				WHERE
-					[$FOLDER_ID$]
+					[$FILE_ENTRY_FOLDER_ID$]
 			)
 			UNION ALL
 			(
 				SELECT
-					toFolderId AS folderId, toName AS name, fileShortcutId AS fileShortcutId
+					toFolderId AS folderId, toName AS name, DLFileEntry.title AS title, fileShortcutId AS fileShortcutId
 				FROM
 					DLFileShortcut
+				INNER JOIN
+					DLFileEntry ON
+						(DLFileEntry.folderId = DLFileShortcut.toFolderId) AND
+						(DLFileEntry.name = DLFileShortcut.toName)
 				WHERE
-					[$FOLDER_ID$]
+					[$FILE_SHORTCUT_FOLDER_ID$]
 			)
 			ORDER BY
-				name ASC
+				title ASC
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder.countByFolderIds">

@@ -61,7 +61,11 @@ public class DLFileEntryAndShortcutFinder {
 			String sql = CustomSQLUtil.get(COUNT_BY_FOLDER_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$FOLDER_ID$]", _getFolderIds(folderIds));
+				sql, "[$FILE_ENTRY_FOLDER_ID$]",
+				_getFolderIds(folderIds, "DLFileEntry"));
+			sql = StringUtil.replace(
+				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
+				_getFolderIds(folderIds, "DLFileShortcut"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -116,7 +120,11 @@ public class DLFileEntryAndShortcutFinder {
 			String sql = CustomSQLUtil.get(FIND_BY_FOLDER_IDS);
 
 			sql = StringUtil.replace(
-				sql, "[$FOLDER_ID$]", _getFolderIds(folderIds));
+				sql, "[$FILE_ENTRY_FOLDER_ID$]",
+				_getFolderIds(folderIds, "DLFileEntry"));
+			sql = StringUtil.replace(
+				sql, "[$FILE_SHORTCUT_FOLDER_ID$]",
+				_getFolderIds(folderIds, "DLFileShortcut"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -124,6 +132,7 @@ public class DLFileEntryAndShortcutFinder {
 
 			q.addScalar("folderId", Hibernate.STRING);
 			q.addScalar("name", Hibernate.STRING);
+			q.addScalar("title", Hibernate.STRING);
 			q.addScalar("fileShortcutId", Hibernate.LONG);
 
 			QueryPos qPos = QueryPos.getInstance(q);
@@ -150,7 +159,8 @@ public class DLFileEntryAndShortcutFinder {
 
 				String folderId = (String)array[0];
 				String name = (String)array[1];
-				long fileShortcutId = ((Long)array[2]).longValue();
+				String title = (String)array[2];
+				long fileShortcutId = ((Long)array[3]).longValue();
 
 				Object obj = null;
 
@@ -175,11 +185,12 @@ public class DLFileEntryAndShortcutFinder {
 		}
 	}
 
-	private static String _getFolderIds(List folderIds) {
+	private static String _getFolderIds(List folderIds, String table) {
 		StringBuffer sb = new StringBuffer();
 
 		for (int i = 0; i < folderIds.size(); i++) {
-			sb.append("folderId = ? ");
+			sb.append(table);
+			sb.append(".folderId = ? ");
 
 			if ((i + 1) != folderIds.size()) {
 				sb.append("OR ");
