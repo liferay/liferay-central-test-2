@@ -6,7 +6,6 @@
 	<!-- Common -->
 
 	<definition name="portlet" path="/common/themes/portlet.jsp">
-		<put name="portlet_sub_nav" value="" />
 		<put name="portlet_content" value="" />
 		<put name="portlet_decorate" value="true" />
 		<put name="portlet_padding" value="true" />
@@ -72,9 +71,7 @@
 
 	<!-- Address Book -->
 
-	<definition name="portlet.address_book" extends="portlet">
-		<put name="portlet_sub_nav" value="/portlet/address_book/sub_nav.jsp" />
-	</definition>
+	<definition name="portlet.address_book" extends="portlet" />
 
 	<definition name="portlet.address_book.edit_contact" extends="portlet.address_book">
 		<put name="portlet_content" value="/portlet/address_book/edit_contact.jsp" />
