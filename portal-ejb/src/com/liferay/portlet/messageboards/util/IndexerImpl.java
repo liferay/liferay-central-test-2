@@ -52,7 +52,7 @@ public class IndexerImpl {
 	public static final String PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
 
 	public static void addMessage(
-			String companyId, String groupId, String categoryId,
+			String companyId, String groupId, String userName, String categoryId,
 			String threadId, String messageId, String title, String content)
 		throws IOException {
 
@@ -74,6 +74,7 @@ public class IndexerImpl {
 				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
 			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
+			doc.add(LuceneFields.getText(LuceneFields.USERNAME, userName));
 			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));
 			doc.add(LuceneFields.getText(LuceneFields.CONTENT, content));
 
@@ -146,7 +147,7 @@ public class IndexerImpl {
 	}
 
 	public static void updateMessage(
-			String companyId, String groupId, String categoryId,
+			String companyId, String groupId, String userName, String categoryId,
 			String threadId, String messageId, String title, String content)
 		throws IOException {
 
@@ -157,7 +158,7 @@ public class IndexerImpl {
 		}
 
 		addMessage(
-			companyId, groupId, categoryId, threadId, messageId, title,
+			companyId, groupId, userName, categoryId, threadId, messageId, title,
 			content);
 	}
 

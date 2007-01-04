@@ -332,6 +332,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					MBMessage message = (MBMessage)itr2.next();
 
 					String groupId = category.getGroupId();
+					String userName = message.getUserName();
 					String threadId = message.getThreadId();
 					String messageId = message.getMessageId();
 					String title = message.getSubject();
@@ -339,8 +340,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 					try {
 						IndexerImpl.addMessage(
-							companyId, groupId, categoryId, threadId, messageId,
-							title, content);
+							companyId, groupId, userName, categoryId, threadId, 
+							messageId, title, content);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + messageId, e1);
@@ -396,6 +397,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
+			LuceneUtil.addTerm(searchQuery, LuceneFields.USERNAME, keywords);
 
 			BooleanQuery fullQuery = new BooleanQuery();
 
@@ -553,9 +555,9 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 					if (!fromCategory.isDiscussion()) {
 						Indexer.updateMessage(
 							message.getCompanyId(), fromCategory.getGroupId(),
-							toCategoryId, message.getThreadId(),
-							message.getMessageId(), message.getSubject(),
-							message.getBody());
+							message.getUserName(), toCategoryId, 
+							message.getThreadId(), message.getMessageId(), 
+							message.getSubject(), message.getBody());
 					}
 				}
 				catch (IOException ioe) {
