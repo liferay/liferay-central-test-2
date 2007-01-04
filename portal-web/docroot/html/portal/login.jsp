@@ -51,8 +51,8 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 >
 	<liferay-ui:section>
 		<form action="<%= themeDisplay.getPathMain() %>/portal/login" method="post" name="fm1">
-		<input name="<%= Constants.CMD %>" type="hidden" value="<%= sectionName %>">
-		<input name="<%= sectionParam %>" type="hidden" value="<%= sectionName %>">
+		<input name="<%= Constants.CMD %>" type="hidden" value="already-registered">
+		<input name="<%= sectionParam %>" type="hidden" value="already-registered">
 
 		<c:if test="<%= sectionSelected.booleanValue() %>">
 			<c:if test='<%= SessionMessages.contains(request, "user_added") %>'>
@@ -115,7 +115,7 @@ PortletURL createAccountURL = themeDisplay.getURLCreateAccount();
 				<br><br>
 			</c:if>
 
-			<c:if test='<%= tabs1.equals("already-registered") && SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
+			<c:if test='<%= SessionErrors.contains(request, UserEmailAddressException.class.getName()) %>'>
 				<span class="portlet-msg-error" style="font-size: xx-small;">
 				<%= LanguageUtil.get(pageContext, "please-enter-a-valid-login") %>
 				</span>

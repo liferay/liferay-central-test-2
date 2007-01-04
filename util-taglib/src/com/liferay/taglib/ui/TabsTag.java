@@ -256,7 +256,10 @@ public class TabsTag extends TagSupport {
 	}
 
 	public boolean getSectionSelected() {
-		if ((_names.length > _namesPos) && (_names[_namesPos].equals(_value))) {
+		if ((_names.length == 0) ||
+			((_names.length > _namesPos) &&
+				(_names[_namesPos].equals(_value)))) {
+
 			return true;
 		}
 		else {
