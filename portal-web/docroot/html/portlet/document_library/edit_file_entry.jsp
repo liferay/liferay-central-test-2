@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
+String strutsAction = ParamUtil.getString(request, "struts_action");
+
 String tabs2 = ParamUtil.getString(request, "tabs2", "version-history");
 
 String redirect = ParamUtil.getString(request, "redirect");
@@ -56,7 +58,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
-portletURL.setParameter("struts_action", "/document_library/edit_file_entry");
+portletURL.setParameter("struts_action", strutsAction);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("folderId", folderId);
@@ -153,7 +155,7 @@ portletURL.setParameter("name", name);
 	</table>
 </c:if>
 
-<c:if test="<%= (fileEntry == null) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
+<c:if test='<%= strutsAction.equals("/document_library/edit_file_entry") && ((fileEntry == null) || DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE)) %>'>
 	<c:if test="<%= fileEntry != null %>">
 		<br>
 	</c:if>
@@ -218,7 +220,10 @@ portletURL.setParameter("name", name);
 			headerNames.add("version");
 			headerNames.add("date");
 			headerNames.add("size");
-			headerNames.add(StringPool.BLANK);
+
+			if (strutsAction.equals("/document_library/edit_file_entry")) {
+				headerNames.add(StringPool.BLANK);
+			}
 
 			searchContainer.setHeaderNames(headerNames);
 
@@ -250,7 +255,9 @@ portletURL.setParameter("name", name);
 
 				// Action
 
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+				if (strutsAction.equals("/document_library/edit_file_entry")) {
+					row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/document_library/file_version_action.jsp");
+				}
 
 				// Add result row
 

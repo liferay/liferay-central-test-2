@@ -42,6 +42,17 @@ else {
 
 <c:choose>
 	<c:when test="<%= fileEntry != null %>">
+		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewURL">
+				<portlet:param name="struts_action" value="/document_library/view_file_entry" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="folderId" value="<%= fileEntry.getFolderId() %>" />
+				<portlet:param name="name" value="<%= fileEntry.getName() %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="view" url="<%= viewURL %>" />
+		</c:if>
+
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -64,15 +75,6 @@ else {
 			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 		</c:if>
 
-		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.VIEW) %>">
-
-			<%
-			String downloadURL = themeDisplay.getPathMain() + "/document_library/get_file?folderId=" + fileEntry.getFolderId() + "&name=" + Http.encodeURL(fileEntry.getName());
-			%>
-
-			<liferay-ui:icon image="download" url="<%= downloadURL %>" />
-		</c:if>
-
 		<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.DELETE) %>">
 			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
@@ -86,6 +88,16 @@ else {
 		</c:if>
 	</c:when>
 	<c:otherwise>
+		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewShortcutURL">
+				<portlet:param name="struts_action" value="/document_library/view_file_shortcut" />
+				<portlet:param name="redirect" value="<%= currentURL %>" />
+				<portlet:param name="fileShortcutId" value="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="view" url="<%= viewShortcutURL %>" />
+		</c:if>
+
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.UPDATE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editShortcutURL">
 				<portlet:param name="struts_action" value="/document_library/edit_file_shortcut" />
@@ -105,15 +117,6 @@ else {
 			/>
 
 			<liferay-ui:icon image="permissions" url="<%= shortcutPermissionsURL %>" />
-		</c:if>
-
-		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
-
-			<%
-			String downloadShortcutURL = themeDisplay.getPathMain() + "/document_library/get_file?fileShortcutId=" + fileShortcut.getFileShortcutId();
-			%>
-
-			<liferay-ui:icon image="download" url="<%= downloadShortcutURL %>" />
 		</c:if>
 
 		<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.DELETE) %>">
