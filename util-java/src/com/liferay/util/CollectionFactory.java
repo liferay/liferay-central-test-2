@@ -45,11 +45,22 @@ import java.util.Set;
  */
 public class CollectionFactory {
 
-	public static final boolean TROVE = GetterUtil.getBoolean(
+	static boolean useTrove = GetterUtil.getBoolean(
 		SystemProperties.get("trove"), true);
 
+	static {
+		if (useTrove) {
+			try {
+				Class.forName("gnu.trove.THashMap");
+			}
+			catch (Exception e) {
+				useTrove = false;
+			}
+		}
+	}
+
 	public static Map getHashMap() {
-		if (TROVE) {
+		if (useTrove) {
 			return new THashMap();
 		}
 		else {
@@ -58,7 +69,7 @@ public class CollectionFactory {
 	}
 
 	public static Map getHashMap(int capacity) {
-		if (TROVE) {
+		if (useTrove) {
 			return new THashMap(capacity);
 		}
 		else {
@@ -67,7 +78,7 @@ public class CollectionFactory {
 	}
 
 	public static Set getHashSet() {
-		if (TROVE) {
+		if (useTrove) {
 			return new THashSet();
 		}
 		else {
@@ -76,7 +87,7 @@ public class CollectionFactory {
 	}
 
 	public static Set getHashSet(int capacity) {
-		if (TROVE) {
+		if (useTrove) {
 			return new THashSet(capacity);
 		}
 		else {
@@ -85,7 +96,7 @@ public class CollectionFactory {
 	}
 
 	public static List getLinkedList() {
-		if (TROVE) {
+		if (useTrove) {
 			return new TLinkedList();
 		}
 		else {

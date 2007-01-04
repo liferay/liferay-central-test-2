@@ -32,6 +32,7 @@ import java.io.InputStream;
 import java.net.URL;
 
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
@@ -156,8 +157,25 @@ public class SystemProperties {
 
 		//_props = CollectionFactory.getSyncHashMap();
 
-		_props = new SyncMap(
-			new THashMap(), new WriterPreferenceReadWriteLock());
+		boolean useTrove = false;
+
+		if (GetterUtil.getBoolean(System.getProperty("trove"), true)) {
+			try {
+				Class.forName("gnu.trove.THashMap");
+			}
+			catch (Exception e) {
+				useTrove = false;
+			}
+		}
+
+		if (useTrove) {
+			_props = new SyncMap(
+				new THashMap(), new WriterPreferenceReadWriteLock());
+		}
+		else {
+			_props = new SyncMap(
+				new HashMap(), new WriterPreferenceReadWriteLock());
+		}
 
 		// Use a fast synchronized hash map implementation instead of the slower
 		// java.util.Properties
