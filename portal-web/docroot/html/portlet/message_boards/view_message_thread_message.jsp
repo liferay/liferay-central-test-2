@@ -46,6 +46,12 @@
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br>
 
+								<c:if test="<%= MessagingUtil.isJabberEnabled() %>">
+									<div>
+										<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImage() %>/chat/user_offline.gif"></a>
+									</div>
+								</c:if>
+
 								<c:if test="<%= Validator.isNotNull(organization.getOrganizationId()) %>">
 									<%= LanguageUtil.get(pageContext, "organization") %>: <%= organization.getName() %>
 
