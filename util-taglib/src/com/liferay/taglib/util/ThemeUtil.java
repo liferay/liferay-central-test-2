@@ -24,6 +24,8 @@ package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.servlet.StringServletResponse;
@@ -40,6 +42,8 @@ import javax.servlet.jsp.PageContext;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.taglib.tiles.ComponentConstants;
+import org.apache.struts.tiles.ComponentContext;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -75,6 +79,18 @@ public class ThemeUtil {
 			ServletContext ctx, HttpServletRequest req, HttpServletResponse res,
 			String path, Theme theme)
 		throws Exception {
+
+		String tilesTitle = _getTilesVariables(req, "title");
+		String tilesContent = _getTilesVariables(req, "content");
+		boolean tilesSelectable = GetterUtil.getBoolean(
+			_getTilesVariables(req, "selectable"));
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		themeDisplay.setTilesTitle(tilesTitle);
+		themeDisplay.setTilesContent(tilesContent);
+		themeDisplay.setTilesSelectable(tilesSelectable);
 
 		if (theme.isWARFile()) {
 			ServletContext themeCtx = ctx.getContext(
@@ -172,6 +188,21 @@ public class ThemeUtil {
 		// Print output
 
 		pageContext.getOut().print(sw.toString());
+	}
+
+	private static String _getTilesVariables(
+		HttpServletRequest req, String attributeName) {
+
+		ComponentContext componentContext = (ComponentContext)req.getAttribute(
+			ComponentConstants.COMPONENT_CONTEXT);
+
+		String value = null;
+
+		if (componentContext != null) {
+			value = (String)componentContext.getAttribute(attributeName);
+		}
+
+		return value;
 	}
 
 	private static Log _log = LogFactory.getLog(ThemeUtil.class);

@@ -541,6 +541,30 @@ public class ThemeDisplay implements Serializable {
 		_urlSignOut = urlSignOut;
 	}
 
+	public String getTilesTitle() {
+		return _tilesTitle;
+	}
+
+	public void setTilesTitle(String tilesTitle) {
+		_tilesTitle = tilesTitle;
+	}
+
+	public String getTilesContent() {
+		return _tilesContent;
+	}
+
+	public void setTilesContent(String tilesContent) {
+		_tilesContent = tilesContent;
+	}
+
+	public boolean getTilesSelectable() {
+		return _tilesSelectable;
+	}
+
+	public void setTilesSelectable(boolean tilesSelectable) {
+		_tilesSelectable = tilesSelectable;
+	}
+
 	public PortletDisplay getPortletDisplay() {
 		return _portletDisplay;
 	}
@@ -606,6 +630,9 @@ public class ThemeDisplay implements Serializable {
 		_urlPortal = null;
 		_urlSignIn = null;
 		_urlSignOut = null;
+		_tilesTitle = null;
+		_tilesContent = null;
+		_tilesSelectable = false;
 		_portletDisplay.recycle();
 	}
 
@@ -665,6 +692,9 @@ public class ThemeDisplay implements Serializable {
 	private String _urlPortal = null;
 	private String _urlSignIn = null;
 	private String _urlSignOut = null;
+	private String _tilesTitle;
+	private String _tilesContent;
+	private boolean _tilesSelectable;
 	private PortletDisplay _portletDisplay = new PortletDisplay();
 
 }
