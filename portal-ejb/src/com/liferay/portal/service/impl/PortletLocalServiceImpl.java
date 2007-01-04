@@ -44,6 +44,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.SimpleCachePool;
 import com.liferay.util.Validator;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -505,6 +506,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			List servletURLPatterns)
 		throws DocumentException, IOException {
 
+		xml = XMLFormatter.fixProlog(xml);
+
 		Set portletIds = new HashSet();
 
 		if (xml == null) {
@@ -761,6 +764,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			String servletContextName, String xml)
 		throws DocumentException, IOException {
 
+		xml = XMLFormatter.fixProlog(xml);
+
 		PortletCategory portletCategory = new PortletCategory();
 
 		if (xml == null) {
@@ -828,6 +833,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	private Set _readLiferayPortletXML(
 			String servletContextName, String xml, Map portletsPool)
 		throws DocumentException, IOException {
+
+		xml = XMLFormatter.fixProlog(xml);
 
 		Set liferayPortletIds = new HashSet();
 
@@ -1043,6 +1050,8 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	}
 
 	private List _readWebXML(String xml) throws DocumentException, IOException {
+		xml = XMLFormatter.fixProlog(xml);
+
 		List servletURLPatterns = new ArrayList();
 
 		if (xml == null) {

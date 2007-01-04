@@ -48,6 +48,27 @@ public class XMLFormatter {
 
 	public static final String INDENT = "\t";
 
+	public static String fixProlog(String xml) {
+
+		// See LEP-1921
+
+		if (xml != null) {
+			char[] charArray = xml.toCharArray();
+
+			for (int i = 0; i < charArray.length; i++) {
+				if (charArray[i] == '<') {
+					if (i != 0) {
+						xml = xml.substring(i, xml.length());
+					}
+
+					break;
+				}
+			}
+		}
+
+		return xml;
+	}
+
 	public static String fromCompactSafe(String xml) {
 		return StringUtil.replace(xml, "[$NEW_LINE$]", "\n");
 	}
