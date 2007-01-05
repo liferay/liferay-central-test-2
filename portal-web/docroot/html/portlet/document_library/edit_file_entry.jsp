@@ -147,8 +147,8 @@ portletURL.setParameter("name", name);
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
-			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
+			<a href="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>" target="_blank">
+			<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathMain() %>/document_library/get_file?folderId=<%= folderId %>&name=<%= Http.encodeURL(name) %>
 			</a>
 		</td>
 	</tr>

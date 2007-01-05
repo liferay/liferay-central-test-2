@@ -96,8 +96,8 @@ String folderId = BeanParamUtil.getString(image, request, "folderId");
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<a href="<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>" target="_blank">
-			<%= Http.getProtocol(request) %>://<%= request.getServerName() %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>
+			<a href="<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>" target="_blank">
+			<%= PortalUtil.getPortalURL(request) %><%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= image.getImageId() %>
 			</a>
 		</td>
 	</tr>
