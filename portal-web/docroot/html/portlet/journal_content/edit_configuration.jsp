@@ -115,7 +115,19 @@ type = ParamUtil.getString(request, "type", type);
 	</td>
 </tr>
 </table>
-
+<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
+<tr>
+	<td>
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
+		<bean:define id="namespace"><portlet:namespace /></bean:define>
+		<liferay-ui:input-checkbox param="paginate" defaultValue="<%=paginate%>" onClick="<%=namespace + "saveArticles();"%>"/><label for="<portlet:namespace />paginate"><%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-articles-or-more")%></label>
+	</td>
+</tr>
+</table>
 </form>
 
 <br><div class="beta-separator"></div><br>

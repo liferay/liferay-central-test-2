@@ -1490,6 +1490,7 @@ page-url=ページのURL
 page=ページ
 pager=ポケベル
 pages=ページ
+paginate-if-there-are-two-articles-or-more=2 つの記事または多くがあったらページを付けなさい
 paint=ペンキ
 parent-category=親部門
 parent-folder=親ホールダー

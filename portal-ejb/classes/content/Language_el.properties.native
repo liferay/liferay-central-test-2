@@ -1491,6 +1491,7 @@ page-url=Σελίδα URL
 page=Σελίδα
 pager=Pager
 pages=Σελίδες
+paginate-if-there-are-two-articles-or-more=Σελιδοποιστε εάν υπάρχουν δύο άρθρα ή περισσότεροι
 paint=Χρώμα
 parent-category=Κατηγορία γονέα
 parent-folder=Φάκελλος γονέα

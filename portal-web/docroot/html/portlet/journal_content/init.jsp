@@ -50,6 +50,7 @@ if (Validator.isNotNull(portletResource)) {
 
 String groupId = prefs.getValue("group-id", portletGroupId);
 String[] articleIds = prefs.getValues("article-id", new String[0]);
+boolean paginate = GetterUtil.getBoolean(prefs.getValue("paginate","1"));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

@@ -1493,6 +1493,7 @@ page-url=頁URL
 page=頁
 pager=傳呼器
 pages=頁
+paginate-if-there-are-two-articles-or-more=上頁數如果有二篇文章或更多
 paint=油漆
 parent-category=父母類別
 parent-folder=父母文件夾

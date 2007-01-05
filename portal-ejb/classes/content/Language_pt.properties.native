@@ -1493,6 +1493,7 @@ page-url=URL Da Página
 page=Página
 pager=Pager
 pages=Páginas
+paginate-if-there-are-two-articles-or-more=Pagine se houver dois artigos ou mais
 paint=Pintura
 parent-category=Categoria Do Pai
 parent-folder=Dobrador Do Pai
