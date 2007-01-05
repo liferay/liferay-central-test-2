@@ -51,7 +51,21 @@ public interface LayoutTypePortlet extends LayoutType {
 	public String addPortletId(String userId, String portletId);
 
 	public String addPortletId(
+		String userId, String portletId, boolean checkPermission);
+
+	public String addPortletId(
 		String userId, String portletId, String columnId, int columnPos);
+
+	public String addPortletId(
+		String userId, String portletId, String columnId, int columnPos,
+		boolean checkPermission);
+
+	public void addPortletIds(
+		String userId, String[] portletIds, boolean checkPermission);
+
+	public void addPortletIds(
+		String userId, String[] portletIds, String columnId,
+		boolean checkPermission);
 
 	public List getPortlets() throws SystemException;
 

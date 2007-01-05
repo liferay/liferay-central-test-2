@@ -257,11 +257,24 @@ public class LayoutTypePortletImpl
 	// Modify portlets
 
 	public String addPortletId(String userId, String portletId) {
-		return addPortletId(userId, portletId, null, -1);
+		return addPortletId(userId, portletId, true);
+	}
+
+	public String addPortletId(
+		String userId, String portletId, boolean checkPermission) {
+
+		return addPortletId(userId, portletId, null, -1, checkPermission);
 	}
 
 	public String addPortletId(
 		String userId, String portletId, String columnId, int columnPos) {
+
+		return addPortletId(userId, portletId, columnId, columnPos, true);
+	}
+
+	public String addPortletId(
+		String userId, String portletId, String columnId, int columnPos,
+		boolean checkPermission) {
 
 		Portlet portlet = null;
 
@@ -269,7 +282,7 @@ public class LayoutTypePortletImpl
 			portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletId);
 
-			if (!portlet.hasAddPortletPermission(userId)) {
+			if (checkPermission && !portlet.hasAddPortletPermission(userId)) {
 				return null;
 			}
 		}
@@ -323,6 +336,27 @@ public class LayoutTypePortletImpl
 		}
 		else {
 			return null;
+		}
+	}
+
+	public void addPortletIds(
+		String userId, String[] portletIds, boolean checkPermission) {
+
+		for (int i = 0; i < portletIds.length; i++) {
+			String portletId = portletIds[i];
+
+			addPortletId(userId, portletId, checkPermission);
+		}
+	}
+
+	public void addPortletIds(
+		String userId, String[] portletIds, String columnId,
+		boolean checkPermission) {
+
+		for (int i = 0; i < portletIds.length; i++) {
+			String portletId = portletIds[i];
+
+			addPortletId(userId, portletId, columnId, -1, checkPermission);
 		}
 	}
 

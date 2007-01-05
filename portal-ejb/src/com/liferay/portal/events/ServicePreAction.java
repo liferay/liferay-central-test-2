@@ -551,9 +551,10 @@ public class ServicePreAction extends Action {
 			String portletIds = PropsUtil.get(
 				PropsUtil.DEFAULT_USER_LAYOUT_COLUMN + i);
 
-			if (portletIds != null) {
-				layoutTypePortlet.setPortletIds(columnId, portletIds);
-			}
+			String[] portletIdsArray = StringUtil.split(portletIds);
+
+			layoutTypePortlet.addPortletIds(
+				null, StringUtil.split(portletIds), columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(

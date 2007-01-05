@@ -69,6 +69,7 @@ import com.liferay.portlet.messageboards.service.MBStatsUserLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -454,9 +455,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			String portletIds = PropsUtil.get(
 				PropsUtil.DEFAULT_GUEST_LAYOUT_COLUMN + i);
 
-			if (portletIds != null) {
-				layoutTypePortlet.setPortletIds(columnId, portletIds);
-			}
+			layoutTypePortlet.addPortletIds(
+				null, StringUtil.split(portletIds), columnId, false);
 		}
 
 		LayoutLocalServiceUtil.updateLayout(
