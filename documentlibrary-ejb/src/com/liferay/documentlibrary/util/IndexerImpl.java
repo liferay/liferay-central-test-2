@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.util.GetterUtil;
@@ -144,9 +145,30 @@ public class IndexerImpl {
 
 			if (portletId.equals(PortletKeys.DOCUMENT_LIBRARY)) {
 				try {
-					DLFileEntry fileEntry =
-						DLFileEntryLocalServiceUtil.getFileEntry(
-							repositoryId, fileName);
+					DLFileEntry fileEntry = null;
+
+					for (int i = 0; i < 5; i++) {
+						try {
+							fileEntry =
+								DLFileEntryLocalServiceUtil.getFileEntry(
+									repositoryId, fileName);
+
+							break;
+						}
+						catch (NoSuchFileEntryException nsfe) {
+
+							// Indexing is spawned off to a queue. Try to get
+							// the file entry object after waiting for 1 second
+							// to fix a possible race condition.
+
+							try {
+								Thread.sleep(1000);
+							}
+							catch (InterruptedException ie) {
+								throw nsfe;
+							}
+						}
+					}
 
 					StringBuffer sb = new StringBuffer();
 
