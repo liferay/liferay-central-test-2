@@ -73,11 +73,6 @@
 		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>OpenSearchServlet</servlet-name>
-		<servlet-class>com.liferay.portlet.search.servlet.OpenSearchServlet</servlet-class>
-		<load-on-startup>9</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
 		<servlet-class>org.portletbridge.portlet.PortletBridgeServlet</servlet-class>
 		<init-param>
@@ -100,7 +95,7 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>10</load-on-startup>
+		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -121,10 +116,6 @@
 	<servlet-mapping>
 		<servlet-name>SitemapServlet</servlet-name>
 		<url-pattern>/sitemap.xml</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>OpenSearchServlet</servlet-name>
-		<url-pattern>/search/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PortletBridgeServlet</servlet-name>

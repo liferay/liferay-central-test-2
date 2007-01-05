@@ -145,7 +145,6 @@ public class VelocityVariables {
 		// Tiles attributes
 
 		_insertTilesVariables(vc, pageContext, "tilesTitle", "title");
-		_insertTilesVariables(vc, pageContext, "tilesSubNav", "sub_nav");
 		_insertTilesVariables(vc, pageContext, "tilesContent", "content");
 		_insertTilesVariables(vc, pageContext, "tilesSelectable", "selectable");
 
