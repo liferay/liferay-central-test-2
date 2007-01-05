@@ -73,7 +73,8 @@ public class SitemapServlet extends HttpServlet {
 		OutputStreamWriter out = new OutputStreamWriter(res.getOutputStream());
 
 		try {
-			String hostName = PortalUtil.getHost(req);
+			String host = PortalUtil.getHost(req);
+
 			String ownerId = req.getParameter("ownerId");
 
 			LayoutSet layoutSet = null;
@@ -83,15 +84,15 @@ public class SitemapServlet extends HttpServlet {
 			}
 			else {
 				layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(
-					_companyId, hostName);
+					_companyId, host);
 			}
 
-			if (Validator.isNull(hostName)) {
-				hostName = PortalUtil.getHost(req);
+			if (Validator.isNull(host)) {
+				host = PortalUtil.getHost(req);
 			}
 
 			String portalURL = PortalUtil.getPortalURL(
-				hostName, req.getServerPort(), req.isSecure());
+				host, req.getServerPort(), req.isSecure());
 
 			String mainPath = MainServlet.DEFAULT_MAIN_PATH;
 

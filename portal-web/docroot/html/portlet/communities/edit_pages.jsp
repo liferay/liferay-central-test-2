@@ -977,15 +977,15 @@ portletURL.setParameter("groupId", groupId);
 			<c:when test='<%= tabs3.equals("sitemap") %>'>
 
 				<%
-				String hostName = PortalUtil.getHost(request);
+				String host = PortalUtil.getHost(request);
 
-				String sitemapUrl = PortalUtil.getPortalURL(hostName, request.getServerPort(), request.isSecure()) + themeDisplay.getPathRoot() + "/sitemap.xml";
+				String sitemapUrl = PortalUtil.getPortalURL(host, request.getServerPort(), request.isSecure()) + themeDisplay.getPathRoot() + "/sitemap.xml";
 
 				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
 
 				String virtualHost = layoutSet.getVirtualHost();
 
-				if (!hostName.equals(virtualHost)) {
+				if (!host.equals(virtualHost)) {
 					sitemapUrl += "?ownerId=" + ownerId;
 				}
 				%>
