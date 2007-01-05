@@ -34,6 +34,7 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.DocUtil;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
 import java.util.ArrayList;
@@ -982,11 +983,19 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			return StringPool.BLANK;
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm a");
-
-		sdf.setTimeZone(timeZone);
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
 		return sdf.format(date);
+	}
+
+	protected Date formatDate(String date) throws ParseException {
+		if (date == null) {
+			return null;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+		return sdf.parse(date);
 	}
 
 	protected Map getActiveChildren(long instanceId) {
@@ -1053,6 +1062,15 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 		}
 		else if (type.equals(TaskFormElement.TYPE_DATE)) {
+			if (taskFormElement.isRequired()) {
+				try {
+					formatDate(value);
+				}
+				catch (ParseException pe) {
+					pe.printStackTrace();
+					error = "invalid-date";
+				}
+			}
 		}
 		else if (type.equals(TaskFormElement.TYPE_EMAIL)) {
 			if (taskFormElement.isRequired() && Validator.isNull(value)) {

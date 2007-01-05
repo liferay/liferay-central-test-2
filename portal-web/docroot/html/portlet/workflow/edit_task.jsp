@@ -37,8 +37,42 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 %>
 
 <script language="JavaScript">
+	function <portlet:namespace />getDate(displayName) {
+		eval("var month = (parseInt(document.<portlet:namespace />fm.<portlet:namespace />" + displayName + "Month.value) + 1);");
+		eval("var day = (parseInt(document.<portlet:namespace />fm.<portlet:namespace />" + displayName + "Day.value));");
+		eval("var year = (parseInt(document.<portlet:namespace />fm.<portlet:namespace />" + displayName + "Year.value));");
+
+		if (month < 10) {
+			month = "0" + month;
+		}
+
+		if (day < 10) {
+			day = "0" + day;
+		}
+
+		return month + "/" + day + "/" + year;
+	}
+
 	function <portlet:namespace />saveTask(taskTransition) {
 		document.<portlet:namespace />fm.<portlet:namespace />taskTransition.value = taskTransition;
+
+		<%
+		for (int i = 0; i < taskFormElements.size(); i++) {
+			WorkflowTaskFormElement taskFormElement = (WorkflowTaskFormElement)taskFormElements.get(i);
+
+			String type = taskFormElement.getType();
+			String displayName = taskFormElement.getDisplayName();
+
+			if (type.equals(WorkflowTaskFormElement.TYPE_DATE)) {
+		%>
+
+				document.<portlet:namespace />fm.<portlet:namespace /><%= displayName %>.value = <portlet:namespace />getDate("<%= displayName %>");
+
+		<%
+			}
+		}
+		%>
+
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
@@ -125,6 +159,8 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							Calendar cal = null;
 
 							if (Validator.isNotNull(value)) {
+								cal = new GregorianCalendar();
+
 								cal.setTime(WorkflowXMLUtil.parseDate(value));
 							}
 							%>
@@ -135,12 +171,14 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 								fieldParam="<%= displayName %>"
 								defaultValue="<%= cal %>"
 							/>
+
+							<input name="<portlet:namespace /><%= displayName %>" type="hidden" value="">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_EMAIL) || type.equals(WorkflowTaskFormElement.TYPE_NUMBER) || type.equals(WorkflowTaskFormElement.TYPE_PHONE) || type.equals(WorkflowTaskFormElement.TYPE_TEXT) %>">
-							<input class="form-text" name="<%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
+							<input class="form-text" name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<%= value %>">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_PASSWORD) %>">
-							<input class="form-text" name="<%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
+							<input class="form-text" name="<portlet:namespace /><%= displayName %>" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="password" value="<%= value %>">
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_RADIO) %>">
 
@@ -149,7 +187,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 								String curValue = (String)valueList.get(j);
 							%>
 
-								<input <%= value.equals(curValue) ? "checked" : "" %> name="<%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br>
+								<input <%= value.equals(curValue) ? "checked" : "" %> name="<portlet:namespace /><%= displayName %>" type="radio" value="<%= curValue %>"> <%= LanguageUtil.get(pageContext, curValue) %><br>
 
 							<%
 							}
@@ -157,7 +195,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_SELECT) %>">
-							<select name="<%= displayName %>">
+							<select name="<portlet:namespace /><%= displayName %>">
 
 								<%
 								for (int j = 0; j < valueList.size(); j++) {
@@ -173,7 +211,7 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 							</select>
 						</c:when>
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_TEXTAREA) %>">
-							<textarea class="form-text" name="<%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
+							<textarea class="form-text" name="<portlet:namespace /><%= displayName %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= value %></textarea>
 						</c:when>
 					</c:choose>
 				</c:when>

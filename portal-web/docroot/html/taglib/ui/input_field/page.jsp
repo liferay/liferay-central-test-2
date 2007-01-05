@@ -55,9 +55,13 @@ Map hints = ModelHintsUtil.getHints(model, field);
 		<c:when test='<%= type.equals("Date") %>'>
 
 			<%
+			if (fieldParam == null) {
+				fieldParam = field;
+			}
+
 			Calendar cal = (Calendar)defaultValue;
 
-			int month = ParamUtil.getInteger(request, field + "Month", -1);
+			int month = ParamUtil.getInteger(request, fieldParam + "Month", -1);
 
 			if ((month == -1) && (cal != null)) {
 				month = cal.get(Calendar.MONTH);
@@ -69,7 +73,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				monthNullable = GetterUtil.getBoolean((String)hints.get("month-nullable"), monthNullable);
 			}
 
-			int day = ParamUtil.getInteger(request, field + "Day", -1);
+			int day = ParamUtil.getInteger(request, fieldParam + "Day", -1);
 
 			if ((day == -1) && (cal != null)) {
 				day = cal.get(Calendar.DATE);
@@ -81,7 +85,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				dayNullable = GetterUtil.getBoolean((String)hints.get("day-nullable"), dayNullable);
 			}
 
-			int year = ParamUtil.getInteger(request, field + "Year", -1);
+			int year = ParamUtil.getInteger(request, fieldParam + "Year", -1);
 
 			if ((year == -1) && (cal != null)) {
 				year = cal.get(Calendar.YEAR);
@@ -115,19 +119,19 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				firstDayOfWeek = cal.getFirstDayOfWeek() - 1;
 			}
 
-			int hour = ParamUtil.getInteger(request, field + "Hour", -1);
+			int hour = ParamUtil.getInteger(request, fieldParam + "Hour", -1);
 
 			if ((hour == -1) && (cal != null)) {
 				hour = cal.get(Calendar.HOUR);
 			}
 
-			int minute = ParamUtil.getInteger(request, field + "Minute", -1);
+			int minute = ParamUtil.getInteger(request, fieldParam + "Minute", -1);
 
 			if ((minute == -1) && (cal != null)) {
 				minute = cal.get(Calendar.MINUTE);
 			}
 
-			int amPm = ParamUtil.getInteger(request, field + "AmPm", -1);
+			int amPm = ParamUtil.getInteger(request, fieldParam + "AmPm", -1);
 
 			if ((amPm == -1) && (cal != null)) {
 				amPm = cal.get(Calendar.AM_PM);
@@ -141,19 +145,19 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			%>
 
 			<liferay-ui:input-date
-				monthParam='<%= field + "Month" %>'
+				monthParam='<%= fieldParam + "Month" %>'
 				monthValue="<%= month %>"
 				monthNullable="<%= monthNullable %>"
-				dayParam='<%= field + "Day" %>'
+				dayParam='<%= fieldParam + "Day" %>'
 				dayValue="<%= day %>"
 				dayNullable="<%= dayNullable %>"
-				yearParam='<%= field + "Year" %>'
+				yearParam='<%= fieldParam + "Year" %>'
 				yearValue="<%= year %>"
 				yearNullable="<%= yearNullable %>"
 				yearRangeStart="<%= yearRangeStart %>"
 				yearRangeEnd="<%= yearRangeEnd %>"
 				firstDayOfWeek="<%= firstDayOfWeek %>"
-				imageInputId='<%= field + "ImageInputId" %>'
+				imageInputId='<%= fieldParam + "ImageInputId" %>'
 				disabled="<%= disabled %>"
 			/>
 
@@ -161,12 +165,12 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				&nbsp;
 
 				<liferay-ui:input-time
-					hourParam='<%= field + "Hour" %>'
+					hourParam='<%= fieldParam + "Hour" %>'
 					hourValue="<%= hour %>"
-					minuteParam='<%= field + "Minute" %>'
+					minuteParam='<%= fieldParam + "Minute" %>'
 					minuteValue="<%= minute %>"
 					minuteInterval="1"
-					amPmParam='<%= field + "AmPm" %>'
+					amPmParam='<%= fieldParam + "AmPm" %>'
 					amPmValue="<%= amPm %>"
 					disabled="<%= disabled %>"
 				/>

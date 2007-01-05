@@ -65,9 +65,9 @@ public class WorkflowXMLUtil {
 			return null;
 		}
 
-		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy h:mm a");
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
-		return sdf.parse(date);
+		return GetterUtil.getDate(date, sdf);
 	}
 
 	public static WorkflowDefinition parseDefinition(String xml)
