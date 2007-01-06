@@ -35,9 +35,8 @@ import java.rmi.RemoteException;
  *
  */
 public class PermissionServiceSoap {
-	public static void checkPermission(java.lang.String groupId,
-		java.lang.String name, java.lang.String primKey)
-		throws RemoteException {
+	public static void checkPermission(long groupId, java.lang.String name,
+		java.lang.String primKey) throws RemoteException {
 		try {
 			PermissionServiceUtil.checkPermission(groupId, name, primKey);
 		}
@@ -47,7 +46,7 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static boolean hasGroupPermission(java.lang.String groupId,
+	public static boolean hasGroupPermission(long groupId,
 		java.lang.String actionId, long resourceId) throws RemoteException {
 		try {
 			boolean returnValue = PermissionServiceUtil.hasGroupPermission(groupId,
@@ -62,8 +61,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static boolean hasUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String actionId,
-		long[] resourceIds,
+		long groupId, java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws RemoteException {
 		try {
@@ -78,7 +76,7 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void setGroupPermissions(java.lang.String groupId,
+	public static void setGroupPermissions(long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
@@ -92,9 +90,8 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setGroupPermissions(java.lang.String className,
-		java.lang.String classPK, java.lang.String groupId,
-		java.lang.String[] actionIds, long resourceId)
-		throws RemoteException {
+		java.lang.String classPK, long groupId, java.lang.String[] actionIds,
+		long resourceId) throws RemoteException {
 		try {
 			PermissionServiceUtil.setGroupPermissions(className, classPK,
 				groupId, actionIds, resourceId);
@@ -106,7 +103,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setOrgGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setOrgGroupPermissions(organizationId,
@@ -118,9 +115,8 @@ public class PermissionServiceSoap {
 		}
 	}
 
-	public static void setRolePermission(java.lang.String roleId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
+	public static void setRolePermission(java.lang.String roleId, long groupId,
+		java.lang.String name, java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws RemoteException {
 		try {
@@ -134,7 +130,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void setUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.setUserPermissions(userId, groupId,
@@ -147,10 +143,9 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermission(java.lang.String roleId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String primKey, java.lang.String actionId)
-		throws RemoteException {
+		long groupId, java.lang.String name, java.lang.String typeId,
+		java.lang.String scope, java.lang.String primKey,
+		java.lang.String actionId) throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetRolePermission(roleId, groupId, name,
 				typeId, scope, primKey, actionId);
@@ -162,9 +157,9 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetRolePermissions(java.lang.String roleId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String typeId, java.lang.String scope,
-		java.lang.String actionId) throws RemoteException {
+		long groupId, java.lang.String name, java.lang.String typeId,
+		java.lang.String scope, java.lang.String actionId)
+		throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetRolePermissions(roleId, groupId, name,
 				typeId, scope, actionId);
@@ -176,7 +171,7 @@ public class PermissionServiceSoap {
 	}
 
 	public static void unsetUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws RemoteException {
 		try {
 			PermissionServiceUtil.unsetUserPermissions(userId, groupId,

@@ -72,8 +72,8 @@ public class AccountPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		//String groupId = account.getGroupId();
-		String groupId = null;
+		//long groupId = account.getGroupId();
+		long groupId = 0;
 
 		return permissionChecker.hasPermission(
 			groupId, Account.class.getName(),

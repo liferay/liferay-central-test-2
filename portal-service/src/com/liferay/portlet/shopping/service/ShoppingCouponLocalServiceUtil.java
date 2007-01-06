@@ -56,7 +56,7 @@ public class ShoppingCouponLocalServiceUtil {
 		shoppingCouponLocalService.deleteCoupon(couponId);
 	}
 
-	public static void deleteCoupons(java.lang.String groupId)
+	public static void deleteCoupons(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 		shoppingCouponLocalService.deleteCoupons(groupId);
@@ -81,8 +81,8 @@ public class ShoppingCouponLocalServiceUtil {
 			active, discountType, andOperator, begin, end);
 	}
 
-	public static int searchCount(java.lang.String couponId,
-		java.lang.String groupId, java.lang.String companyId, boolean active,
+	public static int searchCount(java.lang.String couponId, long groupId,
+		java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();

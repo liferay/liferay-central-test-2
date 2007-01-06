@@ -52,14 +52,14 @@ public class DLFileRankLocalServiceImpl implements DLFileRankLocalService {
 		DLFileRankUtil.removeByF_N(folderId, name);
 	}
 
-	public List getFileRanks(String groupId, String userId)
+	public List getFileRanks(long groupId, String userId)
 		throws SystemException {
 
 		return DLFileRankFinder.findByG_U(groupId, userId);
 	}
 
 	public DLFileRank updateFileRank(
-			String groupId, String companyId, String userId,
+			long groupId, String companyId, String userId,
 			String folderId, String name)
 		throws PortalException, SystemException{
 

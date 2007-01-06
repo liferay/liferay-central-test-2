@@ -34,7 +34,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editeTemplateURL">
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= template.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 		<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 	</portlet:renderURL>
 
@@ -57,7 +57,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addArticleURL">
 			<portlet:param name="struts_action" value="/journal/edit_article" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="groupId" value="<%= template.getGroupId() %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 			<portlet:param name="structureId" value="<%= template.getStructureId() %>" />
 			<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 		</portlet:renderURL>
@@ -68,7 +68,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewArticlesURL">
 		<portlet:param name="struts_action" value="/journal/view" />
 		<portlet:param name="tabs1" value="articles" />
-		<portlet:param name="groupId" value="<%= template.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 		<portlet:param name="templateId" value="<%= template.getTemplateId() %>" />
 	</portlet:renderURL>
 
@@ -77,7 +77,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editStructureURL">
 		<portlet:param name="struts_action" value="/journal/edit_structure" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= template.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 		<portlet:param name="structureId" value="<%= template.getStructureId() %>" />
 	</portlet:renderURL>
 
@@ -89,7 +89,7 @@ JournalTemplate template = (JournalTemplate)row.getObject();
 		<portlet:param name="struts_action" value="/journal/edit_template" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= template.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" />
 		<portlet:param name="deleteTemplateIds" value="<%= template.getTemplateId() %>" />
 	</portlet:actionURL>
 

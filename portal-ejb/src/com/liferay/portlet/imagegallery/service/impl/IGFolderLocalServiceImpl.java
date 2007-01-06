@@ -86,7 +86,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
@@ -205,7 +205,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		IGFolderUtil.remove(folder.getFolderId());
 	}
 
-	public void deleteFolders(String groupId)
+	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = IGFolderUtil.findByGroupId(groupId).iterator();
@@ -223,31 +223,31 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		return IGFolderUtil.findByPrimaryKey(folderId);
 	}
 
-	public List getFolders(String groupId) throws SystemException {
+	public List getFolders(long groupId) throws SystemException {
 		return IGFolderUtil.findByGroupId(groupId);
 	}
 
-	public List getFolders(String groupId, String parentFolderId)
+	public List getFolders(long groupId, String parentFolderId)
 		throws SystemException {
 
 		return IGFolderUtil.findByG_P(groupId, parentFolderId);
 	}
 
 	public List getFolders(
-			String groupId, String parentFolderId, int begin, int end)
+			long groupId, String parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return IGFolderUtil.findByG_P(groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(String groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, String parentFolderId)
 		throws SystemException {
 
 		return IGFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
 	public void getSubfolderIds(
-			List folderIds, String groupId, String folderId)
+			List folderIds, long groupId, String folderId)
 		throws SystemException {
 
 		Iterator itr = IGFolderUtil.findByG_P(groupId, folderId).iterator();
@@ -294,7 +294,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 		return folder;
 	}
 
-	protected String getParentFolderId(String groupId, String parentFolderId)
+	protected String getParentFolderId(long groupId, String parentFolderId)
 		throws SystemException {
 
 		if (!parentFolderId.equals(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
@@ -302,7 +302,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!groupId.equals(parentFolder.getGroupId()))) {
+				(groupId != parentFolder.getGroupId())) {
 
 				parentFolderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
@@ -326,7 +326,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 				IGFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!folder.getGroupId().equals(parentFolder.getGroupId()))) {
+				(folder.getGroupId() != parentFolder.getGroupId())) {
 
 				return folder.getParentFolderId();
 			}

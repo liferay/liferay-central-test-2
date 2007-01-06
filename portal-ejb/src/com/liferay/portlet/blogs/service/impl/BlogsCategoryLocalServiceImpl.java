@@ -145,7 +145,7 @@ public class BlogsCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addResources(
-			category.getCompanyId(), null, category.getUserId(),
+			category.getCompanyId(), 0, category.getUserId(),
 			BlogsCategory.class.getName(), category.getPrimaryKey().toString(),
 			false, addCommunityPermissions, addGuestPermissions);
 	}
@@ -166,7 +166,7 @@ public class BlogsCategoryLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addModelResources(
-			category.getCompanyId(), null, category.getUserId(),
+			category.getCompanyId(), 0, category.getUserId(),
 			BlogsCategory.class.getName(), category.getPrimaryKey().toString(),
 			communityPermissions, guestPermissions);
 	}

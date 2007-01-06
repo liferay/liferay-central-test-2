@@ -48,7 +48,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String groupId = prefs.getValue("group-id", portletGroupId);
+long groupId = GetterUtil.getLong(prefs.getValue("group-id", portletGroupId.toString()));
 String[] articleIds = prefs.getValues("article-id", new String[0]);
 boolean paginate = GetterUtil.getBoolean(prefs.getValue("paginate","1"));
 

@@ -29,18 +29,16 @@ package com.liferay.portal.service;
  *
  */
 public interface ResourceLocalService {
-	public void addModelResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, long primKey,
+	public void addModelResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addModelResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
+	public void addModelResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name,
+		java.lang.String primKey, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -52,23 +50,22 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String name, boolean portletActions)
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, long primKey, boolean portletActions,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, java.lang.String primKey,
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name, long primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name,
+		java.lang.String primKey, boolean portletActions,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -109,6 +106,10 @@ public interface ResourceLocalService {
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
+	public void updatePrimKey(long resourceId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

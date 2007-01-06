@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -195,8 +196,7 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static void deleteStructure(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String structureId)
+		java.lang.String companyId, long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -206,12 +206,7 @@ public class JournalStructureServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = structureId;
 
 			if (structureId == null) {
@@ -244,8 +239,8 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure getStructure(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
+		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		java.lang.String structureId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -255,12 +250,7 @@ public class JournalStructureServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = structureId;
 
 			if (structureId == null) {
@@ -296,18 +286,13 @@ public class JournalStructureServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateStructure(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
+		HttpPrincipal httpPrincipal, long groupId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsd)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = structureId;
 
 			if (structureId == null) {

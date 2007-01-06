@@ -32,7 +32,6 @@ import com.liferay.portal.service.GroupServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -121,20 +120,20 @@ public class EditGroupAction extends PortletAction {
 	}
 
 	protected void deleteGroup(ActionRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		GroupServiceUtil.deleteGroup(groupId);
 	}
 
 	protected void updateGroup(ActionRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");
 		String type = ParamUtil.getString(req, "type");
 		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
 
-		if (Validator.isNull(groupId)) {
+		if (groupId <= 0) {
 
 			// Add group
 

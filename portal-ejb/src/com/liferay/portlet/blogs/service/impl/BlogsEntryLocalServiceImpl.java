@@ -128,7 +128,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		// Entry
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		categoryId = getCategoryId(user.getCompanyId(), categoryId);
 		Date now = new Date();
 
@@ -226,7 +226,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteEntries(String groupId)
+	public void deleteEntries(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = BlogsEntryUtil.findByGroupId(groupId).iterator();
@@ -297,18 +297,18 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 		return BlogsEntryUtil.findByPrimaryKey(entryId);
 	}
 
-	public List getGroupEntries(String groupId, int begin, int end)
+	public List getGroupEntries(long groupId, int begin, int end)
 		throws SystemException {
 
 		return BlogsEntryUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public int getGroupEntriesCount(String groupId) throws SystemException {
+	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return BlogsEntryUtil.countByGroupId(groupId);
 	}
 
 	public String getGroupEntriesRSS(
-			String groupId, int begin, int end, String type, double version,
+			long groupId, int begin, int end, String type, double version,
 			String url)
 		throws PortalException, SystemException {
 
@@ -379,7 +379,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			while (itr.hasNext()) {
 				BlogsEntry entry = (BlogsEntry)itr.next();
 
-				String groupId = entry.getGroupId();
+				long groupId = entry.getGroupId();
 				String userId = entry.getUserId();
 				String categoryId = entry.getCategoryId();
 				String entryId = entry.getEntryId();
@@ -405,7 +405,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 	}
 
 	public Hits search(
-			String companyId, String groupId, String userId,
+			String companyId, long groupId, String userId,
 			String[] categoryIds, String keywords)
 		throws SystemException {
 
@@ -421,7 +421,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 
-			if (Validator.isNotNull(groupId)) {
+			if (groupId >= 0) {
 				LuceneUtil.addRequiredTerm(
 					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}

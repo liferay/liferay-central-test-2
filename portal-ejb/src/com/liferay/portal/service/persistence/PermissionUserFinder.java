@@ -147,7 +147,7 @@ public class PermissionUserFinder {
 	}
 
 	public static int countByPermissionAndRole(
-			String companyId, String groupId, String name, String primKey,
+			String companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
 		throws SystemException {
@@ -218,17 +218,17 @@ public class PermissionUserFinder {
 
 			int count = countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ADMIN_ROLE), companyId,
-				null, name, primKey, actionId, firstName, middleName, lastName,
+				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_ADMIN);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_USER_PERMISSION), companyId,
-				null, name, primKey, actionId, firstName, middleName, lastName,
+				0, name, primKey, actionId, firstName, middleName, lastName,
 				emailAddress, andOperator, COUNT_USERS_TYPE_PERMISSION);
 
 			count += countUsers(
 				session, CustomSQLUtil.get(COUNT_BY_ORG_GROUP_PERMISSION),
-				companyId, null, name, primKey, actionId, firstName, middleName,
+				companyId, 0, name, primKey, actionId, firstName, middleName,
 				lastName, emailAddress, andOperator,
 				COUNT_USERS_TYPE_PERMISSION);
 
@@ -243,7 +243,7 @@ public class PermissionUserFinder {
 	}
 
 	public static int countUsers(
-			Session session, String sql, String companyId, String groupId,
+			Session session, String sql, String companyId, long groupId,
 			String name, String primKey, String actionId, String firstName,
 			String middleName, String lastName, String emailAddress,
 			boolean andOperator, int countUsersType)
@@ -298,7 +298,7 @@ public class PermissionUserFinder {
 	}
 
 	public static List findByPermissionAndRole(
-			String companyId, String groupId, String name, String primKey,
+			String companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
 			int begin, int end)

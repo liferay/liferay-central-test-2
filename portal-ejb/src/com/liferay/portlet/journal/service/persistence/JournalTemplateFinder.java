@@ -56,7 +56,7 @@ public class JournalTemplateFinder {
 		JournalTemplateFinder.class.getName() + ".findByC_G_T_S_N_D";
 
 	public static int countByC_G_T_S_N_D(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator)
 		throws SystemException {
@@ -143,7 +143,7 @@ public class JournalTemplateFinder {
 	}
 
 	public static List findByC_G_T_S_N_D(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)

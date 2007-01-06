@@ -68,7 +68,7 @@ public class UpgradeImageGallery extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_FOLDER);
 
-			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
+			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 

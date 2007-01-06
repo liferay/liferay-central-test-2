@@ -87,7 +87,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
@@ -206,7 +206,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		DLFolderUtil.remove(folder.getFolderId());
 	}
 
-	public void deleteFolders(String groupId)
+	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = DLFolderUtil.findByGroupId(groupId).iterator();
@@ -234,27 +234,27 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		return DLFolderUtil.findByCompanyId(companyId);
 	}
 
-	public List getFolders(String groupId, String parentFolderId)
+	public List getFolders(long groupId, String parentFolderId)
 		throws SystemException {
 
 		return DLFolderUtil.findByG_P(groupId, parentFolderId);
 	}
 
 	public List getFolders(
-			String groupId, String parentFolderId, int begin, int end)
+			long groupId, String parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return DLFolderUtil.findByG_P(groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(String groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, String parentFolderId)
 		throws SystemException {
 
 		return DLFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
 	public void getSubfolderIds(
-			List folderIds, String groupId, String folderId)
+			List folderIds, long groupId, String folderId)
 		throws SystemException {
 
 		Iterator itr = DLFolderUtil.findByG_P(groupId, folderId).iterator();
@@ -270,7 +270,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 	}
 
 	public Hits search(
-			String companyId, String groupId, String[] folderIds,
+			String companyId, long groupId, String[] folderIds,
 			String keywords)
 		throws PortalException, SystemException {
 
@@ -300,7 +300,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 		return folder;
 	}
 
-	protected String getParentFolderId(String groupId, String parentFolderId)
+	protected String getParentFolderId(long groupId, String parentFolderId)
 		throws SystemException {
 
 		if (!parentFolderId.equals(DLFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
@@ -308,7 +308,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!groupId.equals(parentFolder.getGroupId()))) {
+				(groupId != parentFolder.getGroupId())) {
 
 				parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
@@ -332,7 +332,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 				DLFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!folder.getGroupId().equals(parentFolder.getGroupId()))) {
+				(folder.getGroupId() != parentFolder.getGroupId())) {
 
 				return folder.getParentFolderId();
 			}

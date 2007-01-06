@@ -101,7 +101,7 @@ public class UpdatePageAction extends JSONAction {
 	}
 
 	protected String addPage(HttpServletRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "private");
 		String parentLayoutId = ParamUtil.getString(req, "parent");
 		String mainPath = ParamUtil.getString(req, "mainPath");

@@ -41,9 +41,9 @@ public interface SRProductEntryModel extends BaseModel {
 
 	public void setProductEntryId(long productEntryId);
 
-	public String getGroupId();
+	public long getGroupId();
 
-	public void setGroupId(String groupId);
+	public void setGroupId(long groupId);
 
 	public String getCompanyId();
 

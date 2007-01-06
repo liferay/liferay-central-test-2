@@ -82,11 +82,11 @@ public class SRFrameworkVersionSoap implements Serializable {
 		_frameworkVersionId = frameworkVersionId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -167,7 +167,7 @@ public class SRFrameworkVersionSoap implements Serializable {
 	}
 
 	private long _frameworkVersionId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

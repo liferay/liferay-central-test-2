@@ -70,7 +70,7 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId, nodeIds, keywords);
+Hits hits = WikiNodeLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), nodeIds, keywords);
 
 Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 int total = hits.getLength();

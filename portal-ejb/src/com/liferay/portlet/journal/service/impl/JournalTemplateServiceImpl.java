@@ -82,7 +82,7 @@ public class JournalTemplateServiceImpl
 	}
 
 	public void deleteTemplate(
-			String companyId, String groupId, String templateId)
+			String companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
@@ -94,7 +94,7 @@ public class JournalTemplateServiceImpl
 	}
 
 	public JournalTemplate getTemplate(
-			String companyId, String groupId, String templateId)
+			String companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplatePermission.check(
@@ -106,7 +106,7 @@ public class JournalTemplateServiceImpl
 	}
 
 	public JournalTemplate updateTemplate(
-			String groupId, String templateId, String structureId, String name,
+			long groupId, String templateId, String structureId, String name,
 			String description, String xsl, boolean formatXsl, String langType,
 			boolean smallImage, String smallImageURL, File smallFile)
 		throws PortalException, SystemException {

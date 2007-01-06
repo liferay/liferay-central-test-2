@@ -45,7 +45,7 @@ public class RoleServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, java.lang.String groupId)
+		java.lang.String companyId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();

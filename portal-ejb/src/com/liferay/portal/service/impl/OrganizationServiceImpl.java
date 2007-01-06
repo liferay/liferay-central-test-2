@@ -46,7 +46,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	implements OrganizationService {
 
 	public void addGroupOrganizations(
-			String groupId, String[] organizationIds)
+			long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -98,7 +98,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 		return OrganizationLocalServiceUtil.getUserOrganizations(userId);
 	}
 
-	public void setGroupOrganizations(String groupId, String[] organizationIds)
+	public void setGroupOrganizations(long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -109,7 +109,7 @@ public class OrganizationServiceImpl extends PrincipalBean
 	}
 
 	public void unsetGroupOrganizations(
-			String groupId, String[] organizationIds)
+			long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(

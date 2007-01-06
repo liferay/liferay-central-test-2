@@ -45,7 +45,7 @@ public interface ShoppingCouponLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteCoupons(java.lang.String groupId)
+	public void deleteCoupons(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCoupon getCoupon(
@@ -58,7 +58,7 @@ public interface ShoppingCouponLocalService {
 		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String couponId, java.lang.String groupId,
+	public int searchCount(java.lang.String couponId, long groupId,
 		java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException;

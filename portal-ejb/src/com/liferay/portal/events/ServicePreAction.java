@@ -324,7 +324,7 @@ public class ServicePreAction extends Action {
 				}
 			}
 
-			String portletGroupId = PortalUtil.getPortletGroupId(plid);
+			long portletGroupId = PortalUtil.getPortletGroupId(plid);
 
 			// Theme and color scheme
 
@@ -464,7 +464,8 @@ public class ServicePreAction extends Action {
 						pageSettingsURL.setParameter("tabs2", "public");
 					}
 
-					pageSettingsURL.setParameter("groupId", portletGroupId);
+					pageSettingsURL.setParameter(
+						"groupId", String.valueOf(portletGroupId));
 					pageSettingsURL.setParameter("selPlid", plid);
 
 					themeDisplay.setURLPageSettings(pageSettingsURL);
@@ -836,7 +837,7 @@ public class ServicePreAction extends Action {
 
 		// Users can only see their own private layouts
 
-		String groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 

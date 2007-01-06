@@ -53,7 +53,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 			getUserId(), null, null, name, description, type, friendlyURL);
 	}
 
-	public void addRoleGroups(String roleId, String[] groupIds)
+	public void addRoleGroups(String roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -61,13 +61,13 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.addRoleGroups(roleId, groupIds);
 	}
 
-	public void deleteGroup(String groupId)
+	public void deleteGroup(long groupId)
 		throws PortalException, SystemException {
 
 		GroupLocalServiceUtil.deleteGroup(groupId);
 	}
 
-	public Group getGroup(String groupId)
+	public Group getGroup(long groupId)
 		throws PortalException, SystemException {
 
 		return GroupLocalServiceUtil.getGroup(groupId);
@@ -91,13 +91,13 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		return GroupLocalServiceUtil.getUserGroupsGroups(userGroups);
 	}
 
-	public boolean hasUserGroup(String userId, String groupId)
+	public boolean hasUserGroup(String userId, long groupId)
 		throws SystemException {
 
 		return GroupLocalServiceUtil.hasUserGroup(userId, groupId);
 	}
 
-	public void setRoleGroups(String roleId, String[] groupIds)
+	public void setRoleGroups(String roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -105,7 +105,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 		GroupLocalServiceUtil.setRoleGroups(roleId, groupIds);
 	}
 
-	public void unsetRoleGroups(String roleId, String[] groupIds)
+	public void unsetRoleGroups(String roleId, long[] groupIds)
 		throws PortalException, SystemException {
 
 		RolePermission.check(getPermissionChecker(), roleId, ActionKeys.UPDATE);
@@ -114,7 +114,7 @@ public class GroupServiceImpl extends PrincipalBean implements GroupService {
 	}
 
 	public Group updateGroup(
-			String groupId, String name, String description, String type,
+			long groupId, String name, String description, String type,
 			String friendlyURL)
 		throws PortalException, SystemException {
 

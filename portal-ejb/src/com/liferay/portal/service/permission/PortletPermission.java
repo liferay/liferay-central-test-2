@@ -71,7 +71,7 @@ public class PortletPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		String groupId = null;
+		long groupId = 0;
 		String name = null;
 		String primKey = null;
 

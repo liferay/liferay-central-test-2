@@ -52,14 +52,14 @@ import com.liferay.util.StringUtil;
 public class PermissionServiceImpl
 	extends PrincipalBean implements PermissionService {
 
-	public void checkPermission(String groupId, String name, String primKey)
+	public void checkPermission(long groupId, String name, String primKey)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, name, primKey);
 	}
 
 	public boolean hasGroupPermission(
-			String groupId, String actionId, long resourceId)
+			long groupId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		return PermissionLocalServiceUtil.hasGroupPermission(
@@ -67,7 +67,7 @@ public class PermissionServiceImpl
 	}
 
 	public boolean hasUserPermissions(
-			String userId, String groupId, String actionId, long[] resourceIds,
+			String userId, long groupId, String actionId, long[] resourceIds,
 			PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
@@ -76,7 +76,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setGroupPermissions(
-			String groupId, String[] actionIds, long resourceId)
+			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		checkPermission(getPermissionChecker(), groupId, resourceId);
@@ -86,7 +86,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setGroupPermissions(
-			String className, String classPK, String groupId,
+			String className, String classPK, long groupId,
 			String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
@@ -97,7 +97,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setOrgGroupPermissions(
-			String organizationId, String groupId, String[] actionIds,
+			String organizationId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 
@@ -108,7 +108,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setRolePermission(
-			String roleId, String groupId, String name, String typeId,
+			String roleId, long groupId, String name, String typeId,
 			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -121,7 +121,7 @@ public class PermissionServiceImpl
 	}
 
 	public void setUserPermissions(
-			String userId, String groupId, String[] actionIds,
+			String userId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 
@@ -132,7 +132,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermission(
-			String roleId, String groupId, String name, String typeId,
+			String roleId, long groupId, String name, String typeId,
 			String scope, String primKey, String actionId)
 		throws PortalException, SystemException {
 
@@ -145,7 +145,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetRolePermissions(
-			String roleId, String groupId, String name, String typeId,
+			String roleId, long groupId, String name, String typeId,
 			String scope, String actionId)
 		throws PortalException, SystemException {
 
@@ -157,7 +157,7 @@ public class PermissionServiceImpl
 	}
 
 	public void unsetUserPermissions(
-			String userId, String groupId, String[] actionIds,
+			String userId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 
@@ -168,7 +168,7 @@ public class PermissionServiceImpl
 	}
 
 	protected void checkPermission(
-			PermissionChecker permissionChecker, String groupId,
+			PermissionChecker permissionChecker, long groupId,
 			long resourceId)
 		throws PortalException, SystemException {
 
@@ -180,18 +180,20 @@ public class PermissionServiceImpl
 	}
 
 	protected void checkPermission(
-			PermissionChecker permissionChecker, String groupId, String name,
+			PermissionChecker permissionChecker, long groupId, String name,
 			String primKey)
 		throws PortalException, SystemException {
 
 		if (name.equals(Group.class.getName())) {
 			GroupPermission.check(
-				permissionChecker, primKey, ActionKeys.PERMISSIONS);
+				permissionChecker, Long.parseLong(primKey),
+				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Layout.class.getName())) {
-			String layoutGroupId = StringUtil.split(primKey, ".")[1];
+			String layoutGroupIdStr = StringUtil.split(primKey, ".")[1];
 
-			layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
+			long layoutGroupId =
+				Long.parseLong(StringUtil.replace(layoutGroupIdStr, "}", ""));
 
 			GroupPermission.check(
 				permissionChecker, layoutGroupId, ActionKeys.MANAGE_LAYOUTS);

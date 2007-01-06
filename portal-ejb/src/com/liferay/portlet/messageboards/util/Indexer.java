@@ -46,7 +46,7 @@ import org.apache.lucene.queryParser.ParseException;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addMessage(
-			String companyId, String groupId, String userName,
+			String companyId, Long groupId, String userName,
 			String categoryId, String threadId, String messageId, String title,
 			String content)
 		throws IOException {
@@ -112,7 +112,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateMessage(
-			String companyId, String groupId, String userName,
+			String companyId, Long groupId, String userName,
 			String categoryId, String threadId, String messageId, String title,
 			String content)
 		throws IOException {

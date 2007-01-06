@@ -89,7 +89,7 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteFolders(java.lang.String groupId)
+	public void deleteFolders(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -106,25 +106,23 @@ public interface DLFolderLocalService {
 	public java.util.List getFolders(java.lang.String companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getFoldersCount(java.lang.String groupId,
-		java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public void getSubfolderIds(java.util.List folderIds,
-		java.lang.String groupId, java.lang.String folderId)
-		throws com.liferay.portal.SystemException;
+	public void getSubfolderIds(java.util.List folderIds, long groupId,
+		java.lang.String folderId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] folderIds, java.lang.String keywords)
+		java.lang.String companyId, long groupId, java.lang.String[] folderIds,
+		java.lang.String keywords)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

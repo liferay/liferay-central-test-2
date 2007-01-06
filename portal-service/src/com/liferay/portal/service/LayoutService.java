@@ -29,7 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public interface LayoutService {
-	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
+	public com.liferay.portal.model.Layout addLayout(long groupId,
 		boolean privateLayout, java.lang.String parentLayoutId,
 		java.lang.String name, java.lang.String title, java.lang.String type,
 		boolean hidden, java.lang.String friendlyURL)

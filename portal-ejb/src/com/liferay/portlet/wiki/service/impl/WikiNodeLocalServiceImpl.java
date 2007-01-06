@@ -98,7 +98,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		// Node
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		validate(name);
@@ -151,7 +151,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addResources(
-			node.getCompanyId(), node.getGroupId(), node.getUserId(),
+			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
 			WikiNode.class.getName(), node.getPrimaryKey().toString(), false,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -172,7 +172,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addModelResources(
-			node.getCompanyId(), node.getGroupId(), node.getUserId(),
+			node.getCompanyId(), node.getGroupId(),	node.getUserId(),
 			WikiNode.class.getName(), node.getPrimaryKey().toString(),
 			communityPermissions, guestPermissions);
 	}
@@ -216,7 +216,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		WikiNodeUtil.remove(node.getNodeId());
 	}
 
-	public void deleteNodes(String groupId)
+	public void deleteNodes(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = WikiNodeUtil.findByGroupId(groupId).iterator();
@@ -234,17 +234,17 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 		return WikiNodeUtil.findByPrimaryKey(nodeId);
 	}
 
-	public List getNodes(String groupId) throws SystemException {
+	public List getNodes(long groupId) throws SystemException {
 		return WikiNodeUtil.findByGroupId(groupId);
 	}
 
-	public List getNodes(String groupId, int begin, int end)
+	public List getNodes(long groupId, int begin, int end)
 		throws SystemException {
 
 		return WikiNodeUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public int getNodesCount(String groupId) throws SystemException {
+	public int getNodesCount(long groupId) throws SystemException {
 		return WikiNodeUtil.countByGroupId(groupId);
 	}
 
@@ -264,7 +264,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 				while (itr2.hasNext()) {
 					WikiPage page = (WikiPage)itr2.next();
 
-					String groupId = node.getGroupId();
+					long groupId = node.getGroupId();
 					String title = page.getTitle();
 					String content = page.getContent();
 
@@ -287,7 +287,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 	}
 
 	public Hits search(
-			String companyId, String groupId, String[] nodeIds, String keywords)
+			String companyId, long groupId, String[] nodeIds, String keywords)
 		throws SystemException {
 
 		try {
@@ -302,7 +302,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, String.valueOf(groupId));
 
 			if ((nodeIds != null) && (nodeIds.length > 0)) {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();

@@ -89,7 +89,7 @@ public class ShoppingCategoryLocalServiceImpl
 		// Category
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
@@ -215,19 +215,19 @@ public class ShoppingCategoryLocalServiceImpl
 		ShoppingCategoryUtil.remove(category.getCategoryId());
 	}
 
-	public List getCategories(String groupId) throws SystemException {
+	public List getCategories(long groupId) throws SystemException {
 		return ShoppingCategoryUtil.findByGroupId(groupId);
 	}
 
 	public List getCategories(
-			String groupId, String parentCategoryId, int begin, int end)
+			long groupId, String parentCategoryId, int begin, int end)
 		throws SystemException {
 
 		return ShoppingCategoryUtil.findByG_P(
 			groupId, parentCategoryId, begin, end);
 	}
 
-	public int getCategoriesCount(String groupId, String parentCategoryId)
+	public int getCategoriesCount(long groupId, String parentCategoryId)
 		throws SystemException {
 
 		return ShoppingCategoryUtil.countByG_P(groupId, parentCategoryId);
@@ -281,7 +281,7 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void getSubcategoryIds(
-			List categoryIds, String groupId, String categoryId)
+			List categoryIds, long groupId, String categoryId)
 		throws SystemException {
 
 		Iterator itr = ShoppingCategoryUtil.findByG_P(
@@ -333,7 +333,7 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	protected String getParentCategoryId(
-			String groupId, String parentCategoryId)
+			long groupId, String parentCategoryId)
 		throws SystemException {
 
 		if (!parentCategoryId.equals(
@@ -343,7 +343,7 @@ public class ShoppingCategoryLocalServiceImpl
 				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
-				(!groupId.equals(parentCategory.getGroupId()))) {
+				(groupId != parentCategory.getGroupId())) {
 
 				parentCategoryId =
 					ShoppingCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
@@ -371,7 +371,7 @@ public class ShoppingCategoryLocalServiceImpl
 				ShoppingCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
-				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
+				(category.getGroupId() != parentCategory.getGroupId())) {
 
 				return category.getParentCategoryId();
 			}

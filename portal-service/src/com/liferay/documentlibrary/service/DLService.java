@@ -40,7 +40,7 @@ public interface DLService {
 		throws PortalException, RemoteException, SystemException;
 
 	public void addFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
@@ -79,13 +79,13 @@ public interface DLService {
 	public void reIndex(String[] ids) throws RemoteException, SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, double versionNumber,
 			String sourceFileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException;
 
 	public void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String newRepositoryId, String fileName)
 		throws PortalException, RemoteException, SystemException;
 

@@ -234,14 +234,14 @@ public class BookmarksEntryLocalServiceImpl
 		return BookmarksEntryFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupEntries(String groupId, int begin, int end)
+	public List getGroupEntries(long groupId, int begin, int end)
 		throws SystemException {
 
 		return BookmarksEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupEntries(
-			String groupId, String userId, int begin, int end)
+			long groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -252,11 +252,11 @@ public class BookmarksEntryLocalServiceImpl
 		}
 	}
 
-	public int getGroupEntriesCount(String groupId) throws SystemException {
+	public int getGroupEntriesCount(long groupId) throws SystemException {
 		return BookmarksEntryFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupEntriesCount(String groupId, String userId)
+	public int getGroupEntriesCount(long groupId, String userId)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -316,7 +316,7 @@ public class BookmarksEntryLocalServiceImpl
 				folderId);
 
 			if ((newFolder == null) ||
-				(!oldFolder.getGroupId().equals(newFolder.getGroupId()))) {
+				(oldFolder.getGroupId() != newFolder.getGroupId())) {
 
 				folderId = entry.getFolderId();
 			}

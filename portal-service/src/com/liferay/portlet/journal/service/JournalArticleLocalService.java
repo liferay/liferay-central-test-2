@@ -84,9 +84,9 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addArticleResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addArticleResources(java.lang.String companyId, long groupId,
+		java.lang.String articleId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -96,9 +96,8 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addArticleResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.String[] communityPermissions,
+	public void addArticleResources(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -111,9 +110,9 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String userId, long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -121,13 +120,13 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void checkNewLine(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version)
+	public void checkNewLine(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticle(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+	public void deleteArticle(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -138,12 +137,12 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticles(java.lang.String groupId)
+	public void deleteArticles(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void expireArticle(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+	public void expireArticle(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -155,26 +154,24 @@ public interface JournalArticleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.String languageId,
+		long groupId, java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException, 
@@ -183,70 +180,68 @@ public interface JournalArticleLocalService {
 	public java.util.List getArticles()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticles(java.lang.String groupId)
+	public java.util.List getArticles(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticles(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List getArticles(java.lang.String groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List getArticles(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getArticlesCount(java.lang.String groupId)
+	public java.util.List getArticles(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, java.lang.Boolean approved)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		java.lang.Boolean approved)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public double getLatestVersion(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId)
+	public double getLatestVersion(java.lang.String companyId, long groupId,
+		java.lang.String articleId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public java.util.List getStructureArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getStructureArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, java.lang.String structureId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getStructureArticlesCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getTemplateArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getTemplateArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, java.lang.String templateId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getTemplateArticlesCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException;
 
-	public boolean isLatestVersion(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version)
+	public boolean isLatestVersion(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -254,64 +249,62 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version, java.lang.String languageId)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version, java.lang.String languageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type)
-		throws com.liferay.portal.SystemException;
+		java.lang.String companyId, long groupId, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String sortField) throws com.liferay.portal.SystemException;
-
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
+		java.lang.String companyId, long groupId, java.lang.String title,
 		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		java.lang.String type, java.lang.String sortField)
 		throws com.liferay.portal.SystemException;
 
-	public int searchCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator) throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String articleId, double version, boolean incrementVersion,
+	public java.util.List search(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
 		java.lang.String title, java.lang.String description,
 		java.lang.String content, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public int searchCount(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
+		java.lang.String userId, long groupId, java.lang.String articleId,
+		double version, boolean incrementVersion, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version, java.lang.String content)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version, java.lang.String content)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

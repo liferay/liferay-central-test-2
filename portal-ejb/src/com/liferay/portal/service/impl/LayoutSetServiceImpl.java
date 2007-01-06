@@ -44,7 +44,7 @@ public class LayoutSetServiceImpl
 			String ownerId, String themeId, String colorSchemeId)
 		throws PortalException, SystemException {
 
-        String groupId = LayoutImpl.getGroupId(ownerId);
+        long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
@@ -56,7 +56,7 @@ public class LayoutSetServiceImpl
     public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
         throws PortalException, SystemException {
 
-        String groupId = LayoutImpl.getGroupId(ownerId);
+        long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);

@@ -90,7 +90,7 @@
 		<td>
 			<select name="<portlet:namespace/>frameworkVersions" multiple="true">
 				<%
-					Iterator frameworkVersionsIt = SRFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId, true).iterator();
+					Iterator frameworkVersionsIt = SRFrameworkVersionServiceUtil.getFrameworkVersions(portletGroupId.longValue(), true).iterator();
 					while (frameworkVersionsIt.hasNext()) {
 						SRFrameworkVersion frameworkVersion = (SRFrameworkVersion) frameworkVersionsIt.next();
 				%>

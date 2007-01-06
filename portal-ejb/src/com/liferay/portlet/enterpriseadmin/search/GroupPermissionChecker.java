@@ -58,7 +58,7 @@ public class GroupPermissionChecker extends RowChecker {
 			return PermissionLocalServiceUtil.hasRolePermission(
 				_role.getRoleId(), group.getCompanyId(), _resourceName,
 				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-				group.getGroupId(), _actionId);
+				String.valueOf(group.getGroupId()), _actionId);
 		}
 		catch (Exception e){
 			_log.error(e);

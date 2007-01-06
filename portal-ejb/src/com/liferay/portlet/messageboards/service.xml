@@ -11,7 +11,7 @@
 
 		<!-- Group instance -->
 
-		<column name="groupId" type="String" />
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -160,7 +160,7 @@
 
 		<!-- PK fields -->
 
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="userId" type="String" primary="true" />
 
 		<!-- Other fields -->

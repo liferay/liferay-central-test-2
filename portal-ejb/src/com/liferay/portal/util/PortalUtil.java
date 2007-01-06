@@ -678,24 +678,29 @@ public class PortalUtil {
 		return new Object[] {layout, queryString};
 	}
 
-	public static String getPortletGroupId(String plid) {
+	public static long getPortletGroupId(String plid) {
 		String ownerId = LayoutImpl.getOwnerId(plid);
 
-		return GetterUtil.getString(
-			LayoutImpl.getGroupId(ownerId), GroupImpl.DEFAULT_PARENT_GROUP_ID);
+		long groupId = LayoutImpl.getGroupId(ownerId);
+
+		if (groupId <= 0) {
+			groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		}
+
+		return groupId;
 	}
 
-	public static String getPortletGroupId(HttpServletRequest req) {
+	public static long getPortletGroupId(HttpServletRequest req) {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		return getPortletGroupId(layout.getPlid());
 	}
 
-	public static String getPortletGroupId(ActionRequest req) {
+	public static long getPortletGroupId(ActionRequest req) {
 		return getPortletGroupId(getHttpServletRequest(req));
 	}
 
-	public static String getPortletGroupId(RenderRequest req) {
+	public static long getPortletGroupId(RenderRequest req) {
 		return getPortletGroupId(getHttpServletRequest(req));
 	}
 

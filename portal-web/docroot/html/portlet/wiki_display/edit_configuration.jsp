@@ -27,7 +27,7 @@
 <%
 nodeId = ParamUtil.getString(request, "nodeId", nodeId);
 
-List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId);
+List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">

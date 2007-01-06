@@ -87,18 +87,17 @@ public interface SRFrameworkVersionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
+	public java.util.List getFrameworkVersions(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List getFrameworkVersions(long groupId, boolean active,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
-		boolean active, int begin, int end)
+	public int getFrameworkVersionsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int getFrameworkVersionsCount(java.lang.String groupId)
+	public int getFrameworkVersionsCount(long groupId, boolean active)
 		throws com.liferay.portal.SystemException;
-
-	public int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active) throws com.liferay.portal.SystemException;
 
 	public java.util.List getProductVersionFrameworkVersions(
 		long productVersionId)

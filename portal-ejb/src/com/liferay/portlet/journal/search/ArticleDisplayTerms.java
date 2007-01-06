@@ -65,7 +65,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public ArticleDisplayTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getString(req, GROUP_ID);
+		groupId = ParamUtil.getLong(req, GROUP_ID);
 		articleId = ParamUtil.getString(req, ARTICLE_ID);
 		version = ParamUtil.getDouble(req, VERSION);
 		title = ParamUtil.getString(req, TITLE);
@@ -77,7 +77,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		status = ParamUtil.getString(req, STATUS);
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
@@ -138,7 +138,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 		this.status = status;
 	}
 
-	protected String groupId;
+	protected long groupId;
 	protected String articleId;
 	protected double version;
 	protected String title;

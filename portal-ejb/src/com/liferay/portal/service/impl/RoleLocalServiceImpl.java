@@ -82,7 +82,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		if (userId != null) {
 			ResourceLocalServiceUtil.addResources(
-				companyId, null, userId, Role.class.getName(),
+				companyId, 0, userId, Role.class.getName(),
 				role.getPrimaryKey().toString(), false, false, false);
 		}
 
@@ -129,10 +129,11 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		RoleUtil.remove(roleId);
 	}
 
-	public Role getGroupRole(String companyId, String groupId)
+	public Role getGroupRole(String companyId, long groupId)
 		throws PortalException, SystemException {
 
-		return RoleUtil.findByC_C_C(companyId, Group.class.getName(), groupId);
+		return RoleUtil.findByC_C_C(
+			companyId, Group.class.getName(), String.valueOf(groupId));
 	}
 
 	public Role getRole(String roleId) throws PortalException, SystemException {

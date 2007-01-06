@@ -89,7 +89,7 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteFolders(java.lang.String groupId)
+	public void deleteFolders(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -98,17 +98,15 @@ public interface BookmarksFolderLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getFoldersCount(java.lang.String groupId,
-		java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public void getSubfolderIds(java.util.List folderIds,
-		java.lang.String groupId, java.lang.String folderId)
-		throws com.liferay.portal.SystemException;
+	public void getSubfolderIds(java.util.List folderIds, long groupId,
+		java.lang.String folderId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder updateFolder(
 		java.lang.String folderId, java.lang.String parentFolderId,

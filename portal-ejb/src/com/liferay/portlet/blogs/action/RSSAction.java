@@ -75,7 +75,7 @@ public class RSSAction extends Action {
 		Company company = themeDisplay.getCompany();
 
 		String plid = ParamUtil.getString(req, "p_l_id");
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		String type = ParamUtil.getString(req, "type", RSSUtil.DEFAULT_TYPE);
 		double version = ParamUtil.getDouble(
 			req, "version", RSSUtil.DEFAULT_VERSION);

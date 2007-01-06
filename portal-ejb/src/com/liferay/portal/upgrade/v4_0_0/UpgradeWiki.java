@@ -68,15 +68,15 @@ public class UpgradeWiki extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_NODE);
 
-			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
+			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				String nodeId = rs.getString("nodeId");
-				String groupId = rs.getString("groupId");
+				long groupId = rs.getLong("groupId");
 
-				if (groupId.equals(GroupImpl.DEFAULT_PARENT_GROUP_ID)) {
+				if (groupId == GroupImpl.DEFAULT_PARENT_GROUP_ID) {
 					_log.warn(
 						"Skip node " + nodeId + " because it belongs to a " +
 							"personal page.");

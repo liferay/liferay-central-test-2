@@ -81,7 +81,7 @@ public class DLUtil {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		if ((fileEntry != null) && (folder == null)) {
 			folder = fileEntry.getFolder();
@@ -97,7 +97,7 @@ public class DLUtil {
 			String strutsAction = ParamUtil.getString(req, "struts_action");
 
 			foldersURL.setParameter("struts_action", strutsAction);
-			foldersURL.setParameter("groupId", groupId);
+			foldersURL.setParameter("groupId", String.valueOf(groupId));
 		}
 		else {
 			foldersURL.setWindowState(WindowState.MAXIMIZED);
@@ -126,7 +126,7 @@ public class DLUtil {
 						req, "struts_action");
 
 					portletURL.setParameter("struts_action", strutsAction);
-					portletURL.setParameter("groupId", groupId);
+					portletURL.setParameter("groupId", String.valueOf(groupId));
 					portletURL.setParameter("folderId", folder.getFolderId());
 				}
 				else {

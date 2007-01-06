@@ -42,9 +42,6 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser.userId"),
 			XSS_ALLOW_BY_MODEL);
@@ -63,19 +60,12 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		setUserId(pk.userId);
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -185,7 +175,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 		return getPrimaryKey().hashCode();
 	}
 
-	private String _groupId;
+	private long _groupId;
 	private String _userId;
 	private int _messageCount;
 	private Date _lastPostDate;

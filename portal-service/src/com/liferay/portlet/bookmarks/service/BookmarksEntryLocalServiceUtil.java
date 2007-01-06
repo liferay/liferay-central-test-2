@@ -165,14 +165,14 @@ public class BookmarksEntryLocalServiceUtil {
 		return bookmarksEntryLocalService.getFoldersEntriesCount(folderIds);
 	}
 
-	public static java.util.List getGroupEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getGroupEntries(long groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
 		return bookmarksEntryLocalService.getGroupEntries(groupId, begin, end);
 	}
 
-	public static java.util.List getGroupEntries(java.lang.String groupId,
+	public static java.util.List getGroupEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
@@ -181,15 +181,15 @@ public class BookmarksEntryLocalServiceUtil {
 			begin, end);
 	}
 
-	public static int getGroupEntriesCount(java.lang.String groupId)
+	public static int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
 		return bookmarksEntryLocalService.getGroupEntriesCount(groupId);
 	}
 
-	public static int getGroupEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public static int getGroupEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
 		return bookmarksEntryLocalService.getGroupEntriesCount(groupId, userId);

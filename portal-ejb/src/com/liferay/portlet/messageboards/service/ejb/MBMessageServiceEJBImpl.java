@@ -39,10 +39,9 @@ import javax.ejb.SessionContext;
  */
 public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 	public com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String threadId,
-		java.lang.String parentMessageId, java.lang.String subject,
-		java.lang.String body)
+		long groupId, java.lang.String className, java.lang.String classPK,
+		java.lang.String threadId, java.lang.String parentMessageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -169,7 +168,7 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 			priority, prefs, communityPermissions, guestPermissions);
 	}
 
-	public void deleteDiscussionMessage(java.lang.String groupId,
+	public void deleteDiscussionMessage(long groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
@@ -210,9 +209,9 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 	}
 
 	public com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
+		long groupId, java.lang.String className, java.lang.String classPK,
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

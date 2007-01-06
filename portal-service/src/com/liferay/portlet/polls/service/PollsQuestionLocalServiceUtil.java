@@ -137,7 +137,7 @@ public class PollsQuestionLocalServiceUtil {
 		pollsQuestionLocalService.deleteQuestion(question);
 	}
 
-	public static void deleteQuestions(java.lang.String groupId)
+	public static void deleteQuestions(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
@@ -153,21 +153,21 @@ public class PollsQuestionLocalServiceUtil {
 		return pollsQuestionLocalService.getQuestion(questionId);
 	}
 
-	public static java.util.List getQuestions(java.lang.String groupId)
+	public static java.util.List getQuestions(long groupId)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
 		return pollsQuestionLocalService.getQuestions(groupId);
 	}
 
-	public static java.util.List getQuestions(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getQuestions(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
 		return pollsQuestionLocalService.getQuestions(groupId, begin, end);
 	}
 
-	public static int getQuestionsCount(java.lang.String groupId)
+	public static int getQuestionsCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 

@@ -57,7 +57,7 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder getLatestOrder(
-		java.lang.String userId, java.lang.String groupId)
+		java.lang.String userId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
@@ -83,10 +83,10 @@ public class ShoppingOrderLocalServiceUtil {
 		return shoppingOrderLocalService.saveLatestOrder(cart);
 	}
 
-	public static java.util.List search(java.lang.String orderId,
-		java.lang.String groupId, java.lang.String companyId,
-		java.lang.String userId, java.lang.String billingFirstName,
-		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+	public static java.util.List search(java.lang.String orderId, long groupId,
+		java.lang.String companyId, java.lang.String userId,
+		java.lang.String billingFirstName, java.lang.String billingLastName,
+		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,
@@ -101,10 +101,10 @@ public class ShoppingOrderLocalServiceUtil {
 			ppPaymentStatus, andOperator, begin, end);
 	}
 
-	public static int searchCount(java.lang.String orderId,
-		java.lang.String groupId, java.lang.String companyId,
-		java.lang.String userId, java.lang.String billingFirstName,
-		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+	public static int searchCount(java.lang.String orderId, long groupId,
+		java.lang.String companyId, java.lang.String userId,
+		java.lang.String billingFirstName, java.lang.String billingLastName,
+		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator)
@@ -136,7 +136,7 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateLatestOrder(
-		java.lang.String userId, java.lang.String groupId,
+		java.lang.String userId, long groupId,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress, java.lang.String billingCompany,
 		java.lang.String billingStreet, java.lang.String billingCity,

@@ -61,7 +61,7 @@ public class JournalTemplateVelocityResourceListener
                 int z = source.indexOf(StringPool.SLASH, y + 1);
 
 				String companyId = source.substring(x + 1, y);
-                String groupId = source.substring(y + 1, z);
+                long groupId = Long.parseLong(source.substring(y + 1, z));
 				String templateId = source.substring(z + 1);
 
 				if (_log.isDebugEnabled()) {

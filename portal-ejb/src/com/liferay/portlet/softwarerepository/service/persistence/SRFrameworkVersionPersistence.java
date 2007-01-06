@@ -181,7 +181,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -190,14 +190,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("priority ASC").append(", ");
@@ -207,10 +200,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -222,12 +212,12 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -237,14 +227,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -260,10 +243,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -275,7 +255,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SRFrameworkVersion findByGroupId_First(String groupId,
+	public SRFrameworkVersion findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
@@ -293,7 +273,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SRFrameworkVersion findByGroupId_Last(String groupId,
+	public SRFrameworkVersion findByGroupId_Last(long groupId,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByGroupId(groupId);
@@ -313,7 +293,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 	}
 
 	public SRFrameworkVersion[] findByGroupId_PrevAndNext(
-		long frameworkVersionId, String groupId, OrderByComparator obc)
+		long frameworkVersionId, long groupId, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SRFrameworkVersion srFrameworkVersion = findByPrimaryKey(frameworkVersionId);
 		int count = countByGroupId(groupId);
@@ -325,14 +305,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -348,10 +321,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					srFrameworkVersion);
@@ -559,7 +529,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_A(String groupId, boolean active)
+	public List findByG_A(long groupId, boolean active)
 		throws SystemException {
 		Session session = null;
 
@@ -569,14 +539,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -588,11 +551,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, active);
 
 			return q.list();
@@ -605,12 +564,12 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_A(String groupId, boolean active, int begin, int end)
+	public List findByG_A(long groupId, boolean active, int begin, int end)
 		throws SystemException {
 		return findByG_A(groupId, active, begin, end, null);
 	}
 
-	public List findByG_A(String groupId, boolean active, int begin, int end,
+	public List findByG_A(long groupId, boolean active, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -620,14 +579,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -645,11 +597,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, active);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -662,7 +610,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SRFrameworkVersion findByG_A_First(String groupId, boolean active,
+	public SRFrameworkVersion findByG_A_First(long groupId, boolean active,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		List list = findByG_A(groupId, active, 0, 1, obc);
@@ -683,7 +631,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public SRFrameworkVersion findByG_A_Last(String groupId, boolean active,
+	public SRFrameworkVersion findByG_A_Last(long groupId, boolean active,
 		OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		int count = countByG_A(groupId, active);
@@ -706,7 +654,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 	}
 
 	public SRFrameworkVersion[] findByG_A_PrevAndNext(long frameworkVersionId,
-		String groupId, boolean active, OrderByComparator obc)
+		long groupId, boolean active, OrderByComparator obc)
 		throws NoSuchFrameworkVersionException, SystemException {
 		SRFrameworkVersion srFrameworkVersion = findByPrimaryKey(frameworkVersionId);
 		int count = countByG_A(groupId, active);
@@ -718,14 +666,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -743,11 +684,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -808,7 +745,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -826,7 +763,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_A(String groupId, boolean active)
+	public void removeByG_A(long groupId, boolean active)
 		throws SystemException {
 		Iterator itr = findByG_A(groupId, active).iterator();
 
@@ -844,7 +781,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -854,24 +791,14 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -942,7 +869,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_A(String groupId, boolean active)
+	public int countByG_A(long groupId, boolean active)
 		throws SystemException {
 		Session session = null;
 
@@ -953,14 +880,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("active_ = ?");
 			query.append(" ");
@@ -969,11 +889,7 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, active);
 
 			Iterator itr = q.list().iterator();

@@ -72,7 +72,7 @@ public class OrgGroupRoleImpl
 			while (itr.hasNext()) {
 				Group group = (Group)itr.next();
 
-				if (group.getGroupId().equals(getGroupId())) {
+				if (group.getGroupId() == getGroupId()) {
 					return true;
 				}
 			}

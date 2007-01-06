@@ -202,7 +202,7 @@ public class ShoppingOrderLocalServiceImpl
 		ShoppingOrderUtil.remove(order.getOrderId());
 	}
 
-	public ShoppingOrder getLatestOrder(String userId, String groupId)
+	public ShoppingOrder getLatestOrder(String userId, long groupId)
 		throws PortalException, SystemException {
 
 		List orders = ShoppingOrderUtil.findByG_U_PPPS(
@@ -357,7 +357,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public List search(
-			String orderId, String groupId, String companyId, String userId,
+			String orderId, long groupId, String companyId, String userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -374,7 +374,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public int searchCount(
-			String orderId, String groupId, String companyId, String userId,
+			String orderId, long groupId, String companyId, String userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -556,7 +556,7 @@ public class ShoppingOrderLocalServiceImpl
 	}
 
 	public ShoppingOrder updateLatestOrder(
-			String userId, String groupId, String billingFirstName,
+			String userId, long groupId, String billingFirstName,
 			String billingLastName, String billingEmailAddress,
 			String billingCompany, String billingStreet, String billingCity,
 			String billingState, String billingZip, String billingCountry,

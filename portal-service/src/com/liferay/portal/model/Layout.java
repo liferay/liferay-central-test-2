@@ -35,7 +35,7 @@ public interface Layout extends LayoutModel {
 
 	public com.liferay.portal.model.Group getGroup();
 
-	public java.lang.String getGroupId();
+	public long getGroupId();
 
 	public boolean isPrivateLayout();
 

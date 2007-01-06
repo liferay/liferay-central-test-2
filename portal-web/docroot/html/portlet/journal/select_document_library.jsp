@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-String groupId = ParamUtil.getString(request, "groupId");
+long groupId = ParamUtil.getLong(request, "groupId");
 
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 

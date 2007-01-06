@@ -109,7 +109,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle approveArticle(
-			String groupId, String articleId, double version, String plid,
+			long groupId, String articleId, double version, String plid,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
@@ -124,7 +124,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle getArticle(
-			String companyId, String groupId, String articleId, double version)
+			String companyId, long groupId, String articleId, double version)
 		throws PortalException, SystemException {
 
 		JournalArticlePermission.check(
@@ -136,7 +136,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public String getArticleContent(
-			String companyId, String groupId, String articleId,
+			String companyId, long groupId, String articleId,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -149,7 +149,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public String getArticleContent(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String languageId, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -162,7 +162,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public void deleteArticle(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
@@ -175,7 +175,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public void expireArticle(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String articleURL, PortletPreferences prefs)
 		throws PortalException, SystemException {
 
@@ -202,7 +202,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle removeArticleLocale(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String languageId)
 		throws PortalException, SystemException {
 
@@ -215,7 +215,7 @@ public class JournalArticleServiceImpl
 	}
 
 	public JournalArticle updateArticle(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			boolean incrementVersion, String title, String description,
 			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,

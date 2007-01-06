@@ -72,7 +72,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		}
 	}
 
-	private String[] _getLookAndFeelByGroupId(String groupId) throws Exception {
+	private String[] _getLookAndFeelByGroupId(long groupId) throws Exception {
 		String[] lookAndFeel = new String[2];
 
 		Connection con = null;
@@ -84,7 +84,7 @@ public class UpgradeLayout extends UpgradeProcess {
 
 			ps = con.prepareStatement(_GET_LOOK_AND_FEEL_BY_GROUP_ID);
 
-			ps.setString(1, groupId);
+			ps.setLong(1, groupId);
 
 			rs = ps.executeQuery();
 
@@ -263,11 +263,12 @@ public class UpgradeLayout extends UpgradeProcess {
 				int pos = oldLayoutId.indexOf(".");
 
 				if (pos != -1) {
-					String groupId = oldLayoutId.substring(0, pos);
+					Long groupId =
+						new Long(oldLayoutId.substring(0, pos));
 
 					if (!groupIds.contains(groupId)) {
 						String[] lookAndFeel =
-							_getLookAndFeelByGroupId(groupId);
+							_getLookAndFeelByGroupId(groupId.longValue());
 
 						LayoutSetLocalServiceUtil.addLayoutSet(
 							LayoutImpl.PRIVATE + groupId, companyId);
@@ -286,7 +287,8 @@ public class UpgradeLayout extends UpgradeProcess {
 
 					groupIds.add(groupId);
 
-					Group group = GroupLocalServiceUtil.getGroup(groupId);
+					Group group =
+						GroupLocalServiceUtil.getGroup(groupId.longValue());
 
 					if (group.getName().equals("Guest")) {
 						newOwnerId = LayoutImpl.PUBLIC + groupId;
@@ -312,7 +314,7 @@ public class UpgradeLayout extends UpgradeProcess {
 							userId, User.class.getName(), userId, null, null,
 							null, null);
 
-						String groupId = group.getGroupId();
+						long groupId = group.getGroupId();
 
 						String[] lookAndFeel = _getLookAndFeelByUserId(userId);
 

@@ -179,7 +179,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -188,14 +188,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentFolderId ASC").append(", ");
@@ -205,10 +198,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -220,12 +210,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -235,14 +225,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -258,10 +241,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -273,7 +253,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByGroupId_First(String groupId,
+	public BookmarksFolder findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -290,7 +270,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByGroupId_Last(String groupId,
+	public BookmarksFolder findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -309,7 +289,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 	}
 
 	public BookmarksFolder[] findByGroupId_PrevAndNext(String folderId,
-		String groupId, OrderByComparator obc)
+		long groupId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
 		int count = countByGroupId(groupId);
@@ -321,14 +301,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -344,10 +317,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					bookmarksFolder);
@@ -366,7 +336,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(String groupId, String parentFolderId)
+	public List findByG_P(long groupId, String parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -376,14 +346,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
@@ -402,10 +365,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentFolderId != null) {
 				q.setString(queryPos++, parentFolderId);
@@ -421,12 +381,12 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(String groupId, String parentFolderId, int begin,
+	public List findByG_P(long groupId, String parentFolderId, int begin,
 		int end) throws SystemException {
 		return findByG_P(groupId, parentFolderId, begin, end, null);
 	}
 
-	public List findByG_P(String groupId, String parentFolderId, int begin,
+	public List findByG_P(long groupId, String parentFolderId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -436,14 +396,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
@@ -468,10 +421,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentFolderId != null) {
 				q.setString(queryPos++, parentFolderId);
@@ -487,9 +437,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByG_P_First(String groupId,
-		String parentFolderId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
+	public BookmarksFolder findByG_P_First(long groupId, String parentFolderId,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
@@ -508,9 +457,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public BookmarksFolder findByG_P_Last(String groupId,
-		String parentFolderId, OrderByComparator obc)
-		throws NoSuchFolderException, SystemException {
+	public BookmarksFolder findByG_P_Last(long groupId, String parentFolderId,
+		OrderByComparator obc) throws NoSuchFolderException, SystemException {
 		int count = countByG_P(groupId, parentFolderId);
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
@@ -531,7 +479,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 	}
 
 	public BookmarksFolder[] findByG_P_PrevAndNext(String folderId,
-		String groupId, String parentFolderId, OrderByComparator obc)
+		long groupId, String parentFolderId, OrderByComparator obc)
 		throws NoSuchFolderException, SystemException {
 		BookmarksFolder bookmarksFolder = findByPrimaryKey(folderId);
 		int count = countByG_P(groupId, parentFolderId);
@@ -543,14 +491,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
@@ -575,10 +516,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentFolderId != null) {
 				q.setString(queryPos++, parentFolderId);
@@ -642,7 +580,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -651,7 +589,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_P(String groupId, String parentFolderId)
+	public void removeByG_P(long groupId, String parentFolderId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentFolderId).iterator();
 
@@ -669,7 +607,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -679,24 +617,14 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -718,7 +646,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_P(String groupId, String parentFolderId)
+	public int countByG_P(long groupId, String parentFolderId)
 		throws SystemException {
 		Session session = null;
 
@@ -729,14 +657,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentFolderId == null) {
@@ -752,10 +673,7 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentFolderId != null) {
 				q.setString(queryPos++, parentFolderId);

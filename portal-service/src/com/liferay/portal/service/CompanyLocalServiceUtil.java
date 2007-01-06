@@ -68,9 +68,9 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String portletId,
-		java.lang.String groupId, java.lang.String type,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, java.lang.String portletId, long groupId,
+		java.lang.String type, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
 		return companyLocalService.search(companyId, portletId, groupId, type,

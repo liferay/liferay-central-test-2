@@ -24,6 +24,7 @@ package com.liferay.util.dao;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.DateUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.Validator;
 
@@ -115,6 +116,10 @@ public class DAOParamUtil {
 		}
 
 		return value;
+	}
+
+	public static long getLong(ServletRequest req, String param) {
+		return GetterUtil.getLong(getString(req, param));
 	}
 
 	public static String getString(ServletRequest req, String param) {

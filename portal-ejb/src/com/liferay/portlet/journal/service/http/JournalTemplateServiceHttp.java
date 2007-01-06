@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -255,8 +256,7 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static void deleteTemplate(HttpPrincipal httpPrincipal,
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String templateId)
+		java.lang.String companyId, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -266,12 +266,7 @@ public class JournalTemplateServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = templateId;
 
 			if (templateId == null) {
@@ -304,8 +299,8 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+		HttpPrincipal httpPrincipal, java.lang.String companyId, long groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -315,12 +310,7 @@ public class JournalTemplateServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = templateId;
 
 			if (templateId == null) {
@@ -356,21 +346,15 @@ public class JournalTemplateServiceHttp {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
-		java.lang.String templateId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsl, boolean formatXsl, java.lang.String langType,
-		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId,
+		java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsl, boolean formatXsl,
+		java.lang.String langType, boolean smallImage,
+		java.lang.String smallImageURL, java.io.File smallFile)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = templateId;
 
 			if (templateId == null) {

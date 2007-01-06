@@ -151,40 +151,38 @@ public class PollsQuestionUtil {
 		return getPersistence().fetchByPrimaryKey(questionId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId)
+	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_First(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion findByGroupId_Last(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion[] findByGroupId_PrevAndNext(
-		java.lang.String questionId, java.lang.String groupId,
+		java.lang.String questionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.polls.NoSuchQuestionException {
@@ -208,7 +206,7 @@ public class PollsQuestionUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByGroupId(java.lang.String groupId)
+	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
@@ -217,7 +215,7 @@ public class PollsQuestionUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByGroupId(java.lang.String groupId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}

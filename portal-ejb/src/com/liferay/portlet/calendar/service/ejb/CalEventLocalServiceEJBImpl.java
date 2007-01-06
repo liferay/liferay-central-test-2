@@ -158,7 +158,7 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		CalEventLocalServiceFactory.getTxImpl().deleteEvent(event);
 	}
 
-	public void deleteEvents(java.lang.String groupId)
+	public void deleteEvents(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CalEventLocalServiceFactory.getTxImpl().deleteEvents(groupId);
@@ -171,42 +171,40 @@ public class CalEventLocalServiceEJBImpl implements CalEventLocalService,
 		return CalEventLocalServiceFactory.getTxImpl().getEvent(eventId);
 	}
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.lang.String type, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getEvents(long groupId, java.lang.String type,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, type,
 			begin, end);
 	}
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.util.Calendar cal) throws com.liferay.portal.SystemException {
+	public java.util.List getEvents(long groupId, java.util.Calendar cal)
+		throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, cal);
 	}
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.util.Calendar cal, java.lang.String type)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getEvents(long groupId, java.util.Calendar cal,
+		java.lang.String type) throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getEvents(groupId, cal,
 			type);
 	}
 
-	public int getEventsCount(java.lang.String groupId, java.lang.String type)
+	public int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getEventsCount(groupId,
 			type);
 	}
 
-	public java.util.List getRepeatingEvents(java.lang.String groupId)
+	public java.util.List getRepeatingEvents(long groupId)
 		throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().getRepeatingEvents(groupId);
 	}
 
-	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal)
+	public boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().hasEvents(groupId, cal);
 	}
 
-	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal,
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException {
 		return CalEventLocalServiceFactory.getTxImpl().hasEvents(groupId, cal,
 			type);

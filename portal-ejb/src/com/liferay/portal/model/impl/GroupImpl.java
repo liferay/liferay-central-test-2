@@ -36,7 +36,7 @@ import com.liferay.util.Validator;
  */
 public class GroupImpl extends GroupModelImpl implements Group {
 
-public static final String DEFAULT_PARENT_GROUP_ID = "-1";
+	public static final long DEFAULT_PARENT_GROUP_ID = -1;
 
 	public static final String GUEST = GroupNames.GUEST;
 

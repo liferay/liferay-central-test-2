@@ -121,9 +121,9 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addResources(
-			page.getCompanyId(), node.getGroupId(), page.getUserId(),
-			WikiPage.class.getName(), page.getResourcePK().toString(),
-			false, addCommunityPermissions, addGuestPermissions);
+			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
+			WikiPage.class.getName(), page.getResourcePK().toString(), false,
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public void addPageResources(
@@ -143,7 +143,7 @@ public class WikiPageLocalServiceImpl implements WikiPageLocalService {
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addModelResources(
-			page.getCompanyId(), node.getGroupId(), page.getUserId(),
+			page.getCompanyId(), node.getGroupId(),	page.getUserId(),
 			WikiPage.class.getName(), page.getResourcePK().toString(),
 			communityPermissions, guestPermissions);
 	}

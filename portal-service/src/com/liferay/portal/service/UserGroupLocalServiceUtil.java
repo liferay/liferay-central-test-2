@@ -29,7 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public class UserGroupLocalServiceUtil {
-	public static void addGroupUserGroups(java.lang.String groupId,
+	public static void addGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -81,7 +81,7 @@ public class UserGroupLocalServiceUtil {
 		return userGroupLocalService.getUserUserGroups(userId);
 	}
 
-	public static boolean hasGroupUserGroup(java.lang.String groupId,
+	public static boolean hasGroupUserGroup(long groupId,
 		java.lang.String userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -109,7 +109,7 @@ public class UserGroupLocalServiceUtil {
 			params);
 	}
 
-	public static void unsetGroupUserGroups(java.lang.String groupId,
+	public static void unsetGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -42,7 +42,6 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 
 import java.io.Serializable;
 
@@ -125,13 +124,13 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	public boolean hasPermission(
-		String groupId, String name, long primKey, String actionId) {
+		long groupId, String name, long primKey, String actionId) {
 
 		return hasPermission(groupId, name, String.valueOf(primKey), actionId);
 	}
 
 	public boolean hasPermission(
-		String groupId, String name, String primKey, String actionId) {
+		long groupId, String name, String primKey, String actionId) {
 
 		long start = 0;
 
@@ -153,7 +152,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				List userGroups = new ArrayList();
 				//List userGroups = UserUtil.getGroups(userId);
 
-				if (Validator.isNotNull(groupId)) {
+				if (groupId > 0) {
 					if (GroupServiceUtil.hasUserGroup(
 						user.getUserId(), groupId)) {
 
@@ -241,14 +240,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return resultsValue.booleanValue();
 	}
 
-	protected PermissionCheckerBag getBag(String groupId) {
-		groupId = GetterUtil.getString(groupId);
-
-		return (PermissionCheckerBag)bags.get(groupId);
+	protected PermissionCheckerBag getBag(long groupId) {
+		return (PermissionCheckerBag)bags.get(new Long(groupId));
 	}
 
 	protected String getResultsKey(
-		String groupId, String name, String primKey, String actionId) {
+		long groupId, String name, String primKey, String actionId) {
 
 		return user.getUserId() + RESULTS_SEPARATOR + groupId +
 			RESULTS_SEPARATOR + name + RESULTS_SEPARATOR + primKey +
@@ -256,7 +253,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean hasPermissionImpl(
-		String groupId, String name, String primKey, String actionId) {
+		long groupId, String name, String primKey, String actionId) {
 
 		try {
 			if (!signedIn) {
@@ -335,7 +332,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected boolean hasUserPermission(
-			String groupId, String name, String primKey, String actionId)
+			long groupId, String name, String primKey, String actionId)
 		throws Exception {
 
 		long start = 0;
@@ -380,10 +377,10 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		// Group
 
 		try {
-			if (groupId != null) {
+			if (groupId > 0) {
 				Resource resource = ResourceServiceUtil.getResource(
 					companyId, name, ResourceImpl.TYPE_CLASS,
-					ResourceImpl.SCOPE_GROUP, groupId);
+					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
 
 				resourceIds[1] = resource.getResourceId();
 			}
@@ -439,7 +436,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return value;
 	}
 
-	protected boolean isAdmin(String companyId, String groupId, String name)
+	protected boolean isAdmin(String companyId, long groupId, String name)
 		throws Exception {
 
 		PermissionCheckerBag bag = getBag(groupId);
@@ -464,7 +461,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected long logHasUserPermission(
-		String groupId, String name, String primKey, String actionId,
+		long groupId, String name, String primKey, String actionId,
 		long start, int block) {
 
 		if (!_log.isDebugEnabled()) {
@@ -481,10 +478,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return end;
 	}
 
-	protected void putBag(String groupId, PermissionCheckerBag bag) {
-		groupId = GetterUtil.getString(groupId);
-
-		bags.put(groupId, bag);
+	protected void putBag(long groupId, PermissionCheckerBag bag) {
+		bags.put(new Long(groupId), bag);
 	}
 
 	protected static final String RESULTS_SEPARATOR = "_RESULTS_SEPARATOR_";

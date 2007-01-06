@@ -41,7 +41,7 @@ import java.util.List;
  */
 public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 
-	public void deleteStatsUserByGroupId(String groupId)
+	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {
 
 		MBStatsUserUtil.removeByGroupId(groupId);
@@ -51,7 +51,7 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 		MBStatsUserUtil.removeByUserId(userId);
 	}
 
-	public MBStatsUser getStatsUser(String groupId, String userId)
+	public MBStatsUser getStatsUser(long groupId, String userId)
 		throws PortalException, SystemException {
 
 		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);
@@ -69,24 +69,24 @@ public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
 		return statsUser;
 	}
 
-	public List getStatsUsers(String groupId, int begin, int end)
+	public List getStatsUsers(long groupId, int begin, int end)
 		throws SystemException {
 
 		return MBStatsUserUtil.findByG_M(groupId, 0, begin, end);
 	}
 
-	public int getStatsUsersCount(String groupId) throws SystemException {
+	public int getStatsUsersCount(long groupId) throws SystemException {
 		return MBStatsUserUtil.countByG_M(groupId, 0);
 	}
 
-	public void updateStatsUser(String groupId, String userId)
+	public void updateStatsUser(long groupId, String userId)
 		throws PortalException, SystemException {
 
 		update(groupId, userId);
 		update(GroupImpl.DEFAULT_PARENT_GROUP_ID, userId);
 	}
 
-	protected void update(String groupId, String userId)
+	protected void update(long groupId, String userId)
 		throws PortalException, SystemException {
 
 		MBStatsUserPK statsUserPK = new MBStatsUserPK(groupId, userId);

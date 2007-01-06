@@ -66,7 +66,7 @@ public class UpgradePolls extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_QUESTION);
 
-			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
+			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 

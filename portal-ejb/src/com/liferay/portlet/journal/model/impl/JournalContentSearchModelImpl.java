@@ -55,9 +55,6 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.companyId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearchModel"));
 
@@ -161,19 +158,12 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -234,5 +224,5 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	private String _ownerId;
 	private String _articleId;
 	private String _companyId;
-	private String _groupId;
+	private long _groupId;
 }

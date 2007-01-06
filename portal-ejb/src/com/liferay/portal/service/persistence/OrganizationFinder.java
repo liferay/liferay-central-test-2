@@ -81,14 +81,16 @@ public class OrganizationFinder {
 
 		if (params != null) {
 			Long resourceId = (Long)params.get("permissionsResourceId");
-			String groupId = (String)params.get("permissionsGroupId");
+			Long groupId = (Long)params.get("permissionsGroupId");
 
-			if (Validator.isNotNull(groupId) && (resourceId != null)) {
+			if (Validator.isNotNull(groupId) &&
+					Validator.isNotNull(resourceId)) {
+
 				return _countByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, name, street, city, zip,
-					regionId, countryId, resourceId.longValue(), groupId,
-					andOperator);
+					regionId, countryId, resourceId.longValue(),
+					groupId.longValue(), andOperator);
 			}
 		}
 
@@ -172,14 +174,16 @@ public class OrganizationFinder {
 
 		if (params != null) {
 			Long resourceId = (Long)params.get("permissionsResourceId");
-			String groupId = (String)params.get("permissionsGroupId");
+			Long groupId = (Long)params.get("permissionsGroupId");
 
-			if (Validator.isNotNull(groupId) && (resourceId != null)) {
+			if (Validator.isNotNull(groupId) &&
+					Validator.isNotNull(resourceId)) {
+
 				return _findByPermissions(
 					companyId, parentOrganizationId,
 					parentOrganizationComparator, name, street, city, zip,
-					regionId, countryId, resourceId.longValue(), groupId,
-					andOperator, begin, end);
+					regionId, countryId, resourceId.longValue(),
+					groupId.longValue(), andOperator, begin, end);
 			}
 		}
 
@@ -258,7 +262,7 @@ public class OrganizationFinder {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			long resourceId, String groupId, boolean andOperator)
+			long resourceId, long groupId, boolean andOperator)
 		throws SystemException {
 
 		Session session = null;
@@ -355,7 +359,7 @@ public class OrganizationFinder {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			long resourceId, String groupId, boolean andOperator, int begin,
+			long resourceId, long groupId, boolean andOperator, int begin,
 			int end)
 		throws SystemException {
 

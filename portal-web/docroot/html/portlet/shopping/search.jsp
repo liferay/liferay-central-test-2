@@ -61,11 +61,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-int total = ShoppingItemLocalServiceUtil.searchCount(portletGroupId, categoryIdsArray, keywords);
+int total = ShoppingItemLocalServiceUtil.searchCount(portletGroupId.longValue(), categoryIdsArray, keywords);
 
 searchContainer.setTotal(total);
 
-List results = ShoppingItemLocalServiceUtil.search(portletGroupId, categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+List results = ShoppingItemLocalServiceUtil.search(portletGroupId.longValue(), categoryIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

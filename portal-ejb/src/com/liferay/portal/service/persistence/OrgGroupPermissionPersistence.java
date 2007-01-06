@@ -181,6 +181,153 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
+	public List findByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public OrgGroupPermission findByGroupId_First(long groupId,
+		OrderByComparator obc)
+		throws NoSuchOrgGroupPermissionException, SystemException {
+		List list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No OrgGroupPermission exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "groupId=";
+			msg += groupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchOrgGroupPermissionException(msg);
+		}
+		else {
+			return (OrgGroupPermission)list.get(0);
+		}
+	}
+
+	public OrgGroupPermission findByGroupId_Last(long groupId,
+		OrderByComparator obc)
+		throws NoSuchOrgGroupPermissionException, SystemException {
+		int count = countByGroupId(groupId);
+		List list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No OrgGroupPermission exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "groupId=";
+			msg += groupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchOrgGroupPermissionException(msg);
+		}
+		else {
+			return (OrgGroupPermission)list.get(0);
+		}
+	}
+
+	public OrgGroupPermission[] findByGroupId_PrevAndNext(
+		OrgGroupPermissionPK orgGroupPermissionPK, long groupId,
+		OrderByComparator obc)
+		throws NoSuchOrgGroupPermissionException, SystemException {
+		OrgGroupPermission orgGroupPermission = findByPrimaryKey(orgGroupPermissionPK);
+		int count = countByGroupId(groupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					orgGroupPermission);
+			OrgGroupPermission[] array = new OrgGroupPermissionImpl[3];
+			array[0] = (OrgGroupPermission)objArray[0];
+			array[1] = (OrgGroupPermission)objArray[1];
+			array[2] = (OrgGroupPermission)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByPermissionId(long permissionId) throws SystemException {
 		Session session = null;
 
@@ -363,6 +510,15 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByGroupId(long groupId) throws SystemException {
+		Iterator itr = findByGroupId(groupId).iterator();
+
+		while (itr.hasNext()) {
+			OrgGroupPermission orgGroupPermission = (OrgGroupPermission)itr.next();
+			remove(orgGroupPermission);
+		}
+	}
+
 	public void removeByPermissionId(long permissionId)
 		throws SystemException {
 		Iterator itr = findByPermissionId(permissionId).iterator();
@@ -378,6 +534,45 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 
 		while (itr.hasNext()) {
 			remove((OrgGroupPermission)itr.next());
+		}
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portal.model.OrgGroupPermission WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

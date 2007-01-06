@@ -174,7 +174,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -183,14 +183,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("startDate ASC").append(", ");
@@ -200,10 +193,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -215,12 +205,12 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -230,14 +220,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -253,10 +236,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -268,7 +248,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByGroupId_First(String groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -285,7 +265,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByGroupId_Last(String groupId, OrderByComparator obc)
+	public CalEvent findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -303,7 +283,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByGroupId_PrevAndNext(String eventId, String groupId,
+	public CalEvent[] findByGroupId_PrevAndNext(String eventId, long groupId,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
 		int count = countByGroupId(groupId);
@@ -315,14 +295,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,10 +311,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
 			CalEvent[] array = new CalEventImpl[3];
@@ -359,8 +329,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_T(String groupId, String type)
-		throws SystemException {
+	public List findByG_T(long groupId, String type) throws SystemException {
 		Session session = null;
 
 		try {
@@ -369,14 +338,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (type == null) {
@@ -395,10 +357,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (type != null) {
 				q.setString(queryPos++, type);
@@ -414,12 +373,12 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_T(String groupId, String type, int begin, int end)
+	public List findByG_T(long groupId, String type, int begin, int end)
 		throws SystemException {
 		return findByG_T(groupId, type, begin, end, null);
 	}
 
-	public List findByG_T(String groupId, String type, int begin, int end,
+	public List findByG_T(long groupId, String type, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -429,14 +388,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (type == null) {
@@ -461,10 +413,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (type != null) {
 				q.setString(queryPos++, type);
@@ -480,7 +429,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByG_T_First(String groupId, String type,
+	public CalEvent findByG_T_First(long groupId, String type,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List list = findByG_T(groupId, type, 0, 1, obc);
 
@@ -500,7 +449,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByG_T_Last(String groupId, String type,
+	public CalEvent findByG_T_Last(long groupId, String type,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_T(groupId, type);
 		List list = findByG_T(groupId, type, count - 1, count, obc);
@@ -521,7 +470,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByG_T_PrevAndNext(String eventId, String groupId,
+	public CalEvent[] findByG_T_PrevAndNext(String eventId, long groupId,
 		String type, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
@@ -534,14 +483,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (type == null) {
@@ -566,10 +508,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (type != null) {
 				q.setString(queryPos++, type);
@@ -591,7 +530,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_R(String groupId, boolean repeating)
+	public List findByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		Session session = null;
 
@@ -601,14 +540,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -620,11 +552,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, repeating);
 
 			return q.list();
@@ -637,13 +565,13 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_R(String groupId, boolean repeating, int begin, int end)
+	public List findByG_R(long groupId, boolean repeating, int begin, int end)
 		throws SystemException {
 		return findByG_R(groupId, repeating, begin, end, null);
 	}
 
-	public List findByG_R(String groupId, boolean repeating, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List findByG_R(long groupId, boolean repeating, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
 		try {
@@ -652,14 +580,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -677,11 +598,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, repeating);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
@@ -694,7 +611,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByG_R_First(String groupId, boolean repeating,
+	public CalEvent findByG_R_First(long groupId, boolean repeating,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		List list = findByG_R(groupId, repeating, 0, 1, obc);
 
@@ -714,7 +631,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent findByG_R_Last(String groupId, boolean repeating,
+	public CalEvent findByG_R_Last(long groupId, boolean repeating,
 		OrderByComparator obc) throws NoSuchEventException, SystemException {
 		int count = countByG_R(groupId, repeating);
 		List list = findByG_R(groupId, repeating, count - 1, count, obc);
@@ -735,7 +652,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public CalEvent[] findByG_R_PrevAndNext(String eventId, String groupId,
+	public CalEvent[] findByG_R_PrevAndNext(String eventId, long groupId,
 		boolean repeating, OrderByComparator obc)
 		throws NoSuchEventException, SystemException {
 		CalEvent calEvent = findByPrimaryKey(eventId);
@@ -748,14 +665,7 @@ public class CalEventPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -773,11 +683,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, repeating);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, calEvent);
@@ -836,7 +742,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -845,7 +751,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_T(String groupId, String type)
+	public void removeByG_T(long groupId, String type)
 		throws SystemException {
 		Iterator itr = findByG_T(groupId, type).iterator();
 
@@ -855,7 +761,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_R(String groupId, boolean repeating)
+	public void removeByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		Iterator itr = findByG_R(groupId, repeating).iterator();
 
@@ -873,7 +779,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -883,24 +789,14 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -922,8 +818,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_T(String groupId, String type)
-		throws SystemException {
+	public int countByG_T(long groupId, String type) throws SystemException {
 		Session session = null;
 
 		try {
@@ -933,14 +828,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (type == null) {
@@ -956,10 +844,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (type != null) {
 				q.setString(queryPos++, type);
@@ -985,7 +870,7 @@ public class CalEventPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_R(String groupId, boolean repeating)
+	public int countByG_R(long groupId, boolean repeating)
 		throws SystemException {
 		Session session = null;
 
@@ -996,14 +881,7 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.calendar.model.CalEvent WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 			query.append("repeating = ?");
 			query.append(" ");
@@ -1012,11 +890,7 @@ public class CalEventPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
-
+			q.setLong(queryPos++, groupId);
 			q.setBoolean(queryPos++, repeating);
 
 			Iterator itr = q.list().iterator();

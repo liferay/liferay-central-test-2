@@ -114,7 +114,7 @@ import org.dom4j.io.SAXReader;
 public class LayoutLocalServiceImpl implements LayoutLocalService {
 
 	public Layout addLayout(
-			String groupId, String userId, boolean privateLayout,
+			long groupId, String userId, boolean privateLayout,
 			String parentLayoutId, String name, String title, String type,
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
@@ -320,7 +320,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				layout, layout.getGroupId(), permissionsEl,
 				"community-actions");
 
-			if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
+			if (layout.getGroupId() != guestGroup.getGroupId()) {
 				exportLayoutPermissions(
 					layout, guestGroup.getGroupId(), permissionsEl,
 					"guest-actions");
@@ -346,9 +346,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 							portletId, layout, layout.getGroupId(), portletEl,
 							"community-actions");
 
-						if (!layout.getGroupId().equals(
-								guestGroup.getGroupId())) {
-
+						if (layout.getGroupId() != guestGroup.getGroupId()) {
 							exportPortletPermissions(
 								portletId, layout, guestGroup.getGroupId(),
 								portletEl, "guest-actions");
@@ -552,7 +550,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				layout, layout.getGroupId(), permissionsEl,
 				"community-actions");
 
-			if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
+			if (layout.getGroupId() != guestGroup.getGroupId()) {
 				importLayoutPermissions(
 					layout, guestGroup.getGroupId(), permissionsEl,
 					"guest-actions");
@@ -571,7 +569,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 					portletId, layout, layout.getGroupId(), portletEl,
 					"community-actions");
 
-				if (!layout.getGroupId().equals(guestGroup.getGroupId())) {
+				if (layout.getGroupId() != guestGroup.getGroupId()) {
 					importPortletPermissions(
 						portletId, layout, guestGroup.getGroupId(),
 						portletEl, "guest-actions");
@@ -770,7 +768,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	}
 
 	protected void exportLayoutPermissions(
-			Layout layout, String groupId, Element parentEl, String elName)
+			Layout layout, long groupId, Element parentEl, String elName)
 		throws PortalException, SystemException {
 
 		Element el = parentEl.addElement(elName);
@@ -872,7 +870,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	}
 
 	protected void exportPortletPermissions(
-			String portletId, Layout layout, String groupId, Element parentEl,
+			String portletId, Layout layout, long groupId, Element parentEl,
 			String elName)
 		throws PortalException, SystemException {
 
@@ -991,7 +989,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	}
 
 	protected void importLayoutPermissions(
-			Layout layout, String groupId, Element parentEl, String elName)
+			Layout layout, long groupId, Element parentEl, String elName)
 		throws PortalException, SystemException {
 
 		Element el = parentEl.element(elName);
@@ -1109,7 +1107,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 	}
 
 	protected void importPortletPermissions(
-			String portletId, Layout layout, String groupId, Element parentEl,
+			String portletId, Layout layout, long groupId, Element parentEl,
 			String elName)
 		throws PortalException, SystemException {
 

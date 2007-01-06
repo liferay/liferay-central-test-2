@@ -529,7 +529,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static List findByG_R(String groupId, long resourceId)
+	public static List findByG_R(long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -592,7 +592,7 @@ public class PermissionFinder {
 	}
 
 	public static List findByO_G_R(
-			String organizationId, String groupId, long resourceId)
+			String organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;

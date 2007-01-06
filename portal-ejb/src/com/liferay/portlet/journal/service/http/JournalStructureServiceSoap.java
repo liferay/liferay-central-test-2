@@ -75,8 +75,7 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static void deleteStructure(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
-		throws RemoteException {
+		long groupId, java.lang.String structureId) throws RemoteException {
 		try {
 			JournalStructureServiceUtil.deleteStructure(companyId, groupId,
 				structureId);
@@ -88,8 +87,8 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap getStructure(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String structureId) throws RemoteException {
+		java.lang.String companyId, long groupId, java.lang.String structureId)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.getStructure(companyId,
 					groupId, structureId);
@@ -103,9 +102,9 @@ public class JournalStructureServiceSoap {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructureSoap updateStructure(
-		java.lang.String groupId, java.lang.String structureId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String xsd) throws RemoteException {
+		long groupId, java.lang.String structureId, java.lang.String name,
+		java.lang.String description, java.lang.String xsd)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.journal.model.JournalStructure returnValue = JournalStructureServiceUtil.updateStructure(groupId,
 					structureId, name, description, xsd);

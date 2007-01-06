@@ -103,7 +103,7 @@ public class SRProductEntryLocalServiceImpl
 		// Product entry
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		long productEntryId = CounterLocalServiceUtil.increment(
@@ -255,26 +255,26 @@ public class SRProductEntryLocalServiceImpl
 		return SRProductEntryUtil.findByPrimaryKey(productEntryId);
 	}
 
-	public List getProductEntries(String groupId, int begin, int end)
+	public List getProductEntries(long groupId, int begin, int end)
 		throws SystemException {
 
 		return SRProductEntryUtil.findByGroupId(groupId, begin, end);
 	}
 
 	public List getProductEntries(
-			String groupId, String userId, int begin, int end)
+			long groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		return SRProductEntryUtil.findByG_U(groupId, userId, begin, end);
 	}
 
-	public int getProductEntriesCount(String groupId)
+	public int getProductEntriesCount(long groupId)
 		throws SystemException {
 
 		return SRProductEntryUtil.countByGroupId(groupId);
 	}
 
-	public int getProductEntriesCount(String groupId, String userId)
+	public int getProductEntriesCount(long groupId, String userId)
 		throws SystemException {
 
 		return SRProductEntryUtil.countByG_U(groupId, userId);
@@ -318,7 +318,7 @@ public class SRProductEntryLocalServiceImpl
 	}
 
 	public Hits search(
-			String companyId, String groupId, String type, String keywords)
+			String companyId, long groupId, String type, String keywords)
 		throws SystemException {
 
 		try {
@@ -333,7 +333,7 @@ public class SRProductEntryLocalServiceImpl
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, groupId);
+				contextQuery, LuceneFields.GROUP_ID, String.valueOf(groupId));
 
 			if (Validator.isNotNull(type)) {
 				LuceneUtil.addRequiredTerm(contextQuery, "type", type);

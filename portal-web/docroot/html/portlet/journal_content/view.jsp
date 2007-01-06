@@ -160,7 +160,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 						<liferay-portlet:param name="struts_action" value="/journal/edit_article" />
 						<liferay-portlet:param name="redirect" value="<%= currentURL %>" />
-						<liferay-portlet:param name="groupId" value="<%= article.getGroupId() %>" />
+						<liferay-portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
 						<liferay-portlet:param name="articleId" value="<%= article.getArticleId() %>" />
 						<liferay-portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
 					</liferay-portlet:renderURL>

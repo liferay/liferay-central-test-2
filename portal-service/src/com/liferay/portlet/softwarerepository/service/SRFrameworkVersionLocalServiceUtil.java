@@ -127,17 +127,16 @@ public class SRFrameworkVersionLocalServiceUtil {
 		return srFrameworkVersionLocalService.getFrameworkVersion(frameworkVersionId);
 	}
 
-	public static java.util.List getFrameworkVersions(
-		java.lang.String groupId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List getFrameworkVersions(long groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		SRFrameworkVersionLocalService srFrameworkVersionLocalService = SRFrameworkVersionLocalServiceFactory.getService();
 
 		return srFrameworkVersionLocalService.getFrameworkVersions(groupId,
 			begin, end);
 	}
 
-	public static java.util.List getFrameworkVersions(
-		java.lang.String groupId, boolean active, int begin, int end)
+	public static java.util.List getFrameworkVersions(long groupId,
+		boolean active, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SRFrameworkVersionLocalService srFrameworkVersionLocalService = SRFrameworkVersionLocalServiceFactory.getService();
 
@@ -145,15 +144,15 @@ public class SRFrameworkVersionLocalServiceUtil {
 			active, begin, end);
 	}
 
-	public static int getFrameworkVersionsCount(java.lang.String groupId)
+	public static int getFrameworkVersionsCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		SRFrameworkVersionLocalService srFrameworkVersionLocalService = SRFrameworkVersionLocalServiceFactory.getService();
 
 		return srFrameworkVersionLocalService.getFrameworkVersionsCount(groupId);
 	}
 
-	public static int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active) throws com.liferay.portal.SystemException {
+	public static int getFrameworkVersionsCount(long groupId, boolean active)
+		throws com.liferay.portal.SystemException {
 		SRFrameworkVersionLocalService srFrameworkVersionLocalService = SRFrameworkVersionLocalServiceFactory.getService();
 
 		return srFrameworkVersionLocalService.getFrameworkVersionsCount(groupId,

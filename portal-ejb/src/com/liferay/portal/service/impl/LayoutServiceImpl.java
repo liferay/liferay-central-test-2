@@ -42,7 +42,7 @@ import com.liferay.portal.service.permission.LayoutPermission;
 public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 	public Layout addLayout(
-			String groupId, boolean privateLayout, String parentLayoutId,
+			long groupId, boolean privateLayout, String parentLayoutId,
 			String name, String title, String type, boolean hidden,
 			String friendlyURL)
 		throws PortalException, SystemException {
@@ -58,7 +58,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 	public void deleteLayout(String layoutId, String ownerId)
 		throws PortalException, SystemException {
 
-		String groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
@@ -88,7 +88,7 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 			String ownerId, String parentLayoutId, String[] layoutIds)
 		throws PortalException, SystemException {
 
-		String groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		GroupPermission.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);

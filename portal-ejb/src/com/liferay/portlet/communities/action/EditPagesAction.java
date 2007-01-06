@@ -197,7 +197,7 @@ public class EditPagesAction extends PortletAction {
 
 		User user = themeDisplay.getUser();
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -297,7 +297,7 @@ public class EditPagesAction extends PortletAction {
 		String layoutId = ParamUtil.getString(req, "layoutId");
 		String ownerId = ParamUtil.getString(req, "ownerId");
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
@@ -444,7 +444,7 @@ public class EditPagesAction extends PortletAction {
 
 		// Public virtual host
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String publicOwnerId = LayoutImpl.PUBLIC + groupId;
 

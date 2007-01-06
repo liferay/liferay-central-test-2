@@ -56,11 +56,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId, folderId);
+int total = IGFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), folderId);
 
 searchContainer.setTotal(total);
 
-List results = IGFolderLocalServiceUtil.getFolders(portletGroupId, folderId, searchContainer.getStart(), searchContainer.getEnd());
+List results = IGFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), folderId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -95,7 +95,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subfolderIds.add(curFolder.getFolderId());
 
-	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId, curFolder.getFolderId());
+	IGFolderLocalServiceUtil.getSubfolderIds(subfolderIds, portletGroupId.longValue(), curFolder.getFolderId());
 
 	int foldersCount = subfolderIds.size() - 1;
 	int imagesCount = IGImageLocalServiceUtil.getFoldersImagesCount(subfolderIds);

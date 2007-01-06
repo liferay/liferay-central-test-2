@@ -80,7 +80,7 @@ public class ShoppingCouponLocalServiceImpl
 		// Coupon
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		couponId = couponId.trim().toUpperCase();
 
@@ -144,7 +144,7 @@ public class ShoppingCouponLocalServiceImpl
 		ShoppingCouponUtil.remove(couponId);
 	}
 
-	public void deleteCoupons(String groupId) throws SystemException {
+	public void deleteCoupons(long groupId) throws SystemException {
 		ShoppingCouponUtil.removeByGroupId(groupId);
 	}
 
@@ -161,7 +161,7 @@ public class ShoppingCouponLocalServiceImpl
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
 
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return ShoppingCouponFinder.findByC_G_C_A_DT(
 			couponId, groupId, companyId, active, discountType, andOperator,
@@ -169,7 +169,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	public int searchCount(
-			String couponId, String groupId, String companyId, boolean active,
+			String couponId, long groupId, String companyId, boolean active,
 			String discountType, boolean andOperator)
 		throws SystemException {
 
@@ -247,7 +247,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String groupId, String couponId,
+			String companyId, long groupId, String couponId,
 			boolean autoCouponId, String name, String description,
 			String limitCategories, String limitSkus)
 		throws PortalException, SystemException {
@@ -274,7 +274,7 @@ public class ShoppingCouponLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String groupId, String name, String description,
+			String companyId, long groupId, String name, String description,
 			String limitCategories, String limitSkus)
 		throws PortalException, SystemException {
 
@@ -296,7 +296,7 @@ public class ShoppingCouponLocalServiceImpl
 				ShoppingCategory category =
 					ShoppingCategoryUtil.findByPrimaryKey(categoryIds[i]);
 
-				if (!category.getGroupId().equals(groupId)) {
+				if (category.getGroupId() != groupId) {
 					invalidCategoryIds.add(categoryIds[i]);
 				}
 			}
@@ -327,7 +327,7 @@ public class ShoppingCouponLocalServiceImpl
 
 				ShoppingCategory category = item.getCategory();
 
-				if (!category.getGroupId().equals(groupId)) {
+				if (category.getGroupId() != groupId) {
 					invalidSkus.add(skus[i]);
 				}
 			}

@@ -37,7 +37,7 @@ String tabs1 = (String)objArray[1];
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 		<portlet:param name="struts_action" value="/communities/edit_community" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -47,7 +47,7 @@ String tabs1 = (String)objArray[1];
 	<liferay-security:permissionsURL
 		modelResource="<%= Group.class.getName() %>"
 		modelResourceDescription="<%= group.getName() %>"
-		resourcePrimKey="<%= group.getPrimaryKey().toString() %>"
+		resourcePrimKey="<%= String.valueOf(group.getPrimaryKey()) %>"
 		var="permissionsURL"
 	/>
 
@@ -58,7 +58,7 @@ String tabs1 = (String)objArray[1];
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="delegateURL">
 		<portlet:param name="struts_action" value="/communities/edit_user_permissions" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="delegate" url="<%= delegateURL %>" />
@@ -68,7 +68,7 @@ String tabs1 = (String)objArray[1];
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="pagesURL">
 		<portlet:param name="struts_action" value="/communities/edit_pages" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="pages" url="<%= pagesURL %>" />
@@ -78,7 +78,7 @@ String tabs1 = (String)objArray[1];
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="assign" url="<%= assignURL %>" />
@@ -91,7 +91,7 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 				<portlet:param name="removeUserIds" value="<%= user.getUserId() %>" />
 			</portlet:actionURL>
 
@@ -104,7 +104,7 @@ String tabs1 = (String)objArray[1];
 				<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 				<portlet:param name="<%= Constants.CMD %>" value="group_users" />
 				<portlet:param name="redirect" value="<%= currentURL %>" />
-				<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 				<portlet:param name="addUserIds" value="<%= user.getUserId() %>" />
 			</portlet:actionURL>
 
@@ -118,7 +118,7 @@ String tabs1 = (String)objArray[1];
 		<portlet:param name="struts_action" value="/communities/edit_community" />
 		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="groupId" value="<%= group.getGroupId() %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:actionURL>
 
 	<liferay-ui:icon-delete url="<%= deleteURL %>" />

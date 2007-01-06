@@ -55,7 +55,7 @@ public class OrganizationPermission {
 			(PermissionCheckerImpl)permissionChecker;
 
 		if (permissionChecker.hasPermission(
-				null, Organization.class.getName(), organizationId, actionId)) {
+				0, Organization.class.getName(), organizationId, actionId)) {
 
 			return true;
 		}

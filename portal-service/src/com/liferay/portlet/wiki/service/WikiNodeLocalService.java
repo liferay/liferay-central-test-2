@@ -83,7 +83,7 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteNodes(java.lang.String groupId)
+	public void deleteNodes(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -92,22 +92,21 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getNodes(java.lang.String groupId)
+	public java.util.List getNodes(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getNodes(java.lang.String groupId, int begin, int end)
+	public java.util.List getNodes(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getNodesCount(java.lang.String groupId)
+	public int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] nodeIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(
 		java.lang.String nodeId, java.lang.String name,

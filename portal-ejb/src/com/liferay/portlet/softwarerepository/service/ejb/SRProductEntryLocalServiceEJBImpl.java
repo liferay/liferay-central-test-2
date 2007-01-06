@@ -140,27 +140,27 @@ public class SRProductEntryLocalServiceEJBImpl
 		return SRProductEntryLocalServiceFactory.getTxImpl().getProductEntry(productEntryId);
 	}
 
-	public java.util.List getProductEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getProductEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl().getProductEntries(groupId,
 			begin, end);
 	}
 
-	public java.util.List getProductEntries(java.lang.String groupId,
+	public java.util.List getProductEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl().getProductEntries(groupId,
 			userId, begin, end);
 	}
 
-	public int getProductEntriesCount(java.lang.String groupId)
+	public int getProductEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl()
 												.getProductEntriesCount(groupId);
 	}
 
-	public int getProductEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public int getProductEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl()
 												.getProductEntriesCount(groupId,
 			userId);
@@ -172,9 +172,8 @@ public class SRProductEntryLocalServiceEJBImpl
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return SRProductEntryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, type, keywords);
 	}

@@ -35,8 +35,8 @@ import java.rmi.RemoteException;
  *
  */
 public class UserServiceSoap {
-	public static void addGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void addGroupUsers(long groupId, java.lang.String[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.addGroupUsers(groupId, userIds);
 		}
@@ -145,7 +145,7 @@ public class UserServiceSoap {
 	}
 
 	public static com.liferay.portal.model.UserSoap[] getGroupUsers(
-		java.lang.String groupId) throws RemoteException {
+		long groupId) throws RemoteException {
 		try {
 			java.util.List returnValue = UserServiceUtil.getGroupUsers(groupId);
 
@@ -198,8 +198,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static boolean hasGroupUser(java.lang.String groupId,
-		java.lang.String userId) throws RemoteException {
+	public static boolean hasGroupUser(long groupId, java.lang.String userId)
+		throws RemoteException {
 		try {
 			boolean returnValue = UserServiceUtil.hasGroupUser(groupId, userId);
 
@@ -224,8 +224,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void setGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void setGroupUsers(long groupId, java.lang.String[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.setGroupUsers(groupId, userIds);
 		}
@@ -257,8 +257,8 @@ public class UserServiceSoap {
 		}
 	}
 
-	public static void unsetGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds) throws RemoteException {
+	public static void unsetGroupUsers(long groupId, java.lang.String[] userIds)
+		throws RemoteException {
 		try {
 			UserServiceUtil.unsetGroupUsers(groupId, userIds);
 		}

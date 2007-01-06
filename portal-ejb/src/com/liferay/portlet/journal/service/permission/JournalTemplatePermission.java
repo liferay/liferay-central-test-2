@@ -39,7 +39,7 @@ public class JournalTemplatePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, String companyId,
-			String groupId, String templateId, String actionId)
+			long groupId, String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
@@ -61,7 +61,7 @@ public class JournalTemplatePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, String companyId,
-			String groupId, String templateId, String actionId)
+			long groupId, String templateId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalTemplate template =

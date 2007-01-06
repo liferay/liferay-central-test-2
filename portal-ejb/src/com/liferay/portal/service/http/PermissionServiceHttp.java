@@ -39,17 +39,11 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class PermissionServiceHttp {
 	public static void checkPermission(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey)
+		long groupId, java.lang.String name, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = name;
 
 			if (name == null) {
@@ -88,16 +82,11 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean hasGroupPermission(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String actionId, long resourceId)
+		long groupId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = actionId;
 
 			if (actionId == null) {
@@ -134,8 +123,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static boolean hasUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String actionId, long[] resourceIds,
+		java.lang.String userId, long groupId, java.lang.String actionId,
+		long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -146,12 +135,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionId;
 
 			if (actionId == null) {
@@ -202,16 +186,11 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setGroupPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = actionIds;
 
 			if (actionIds == null) {
@@ -245,8 +224,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setGroupPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		java.lang.String className, java.lang.String classPK, long groupId,
+		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -262,12 +241,7 @@ public class PermissionServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = groupId;
-
-			if (groupId == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj2 = new LongWrapper(groupId);
 			Object paramObj3 = actionIds;
 
 			if (actionIds == null) {
@@ -303,7 +277,7 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setOrgGroupPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String organizationId, java.lang.String groupId,
+		java.lang.String organizationId, long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -314,12 +288,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 
 			if (actionIds == null) {
@@ -353,8 +322,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String groupId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, long groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -365,12 +334,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -430,8 +394,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void setUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String[] actionIds, long resourceId)
+		java.lang.String userId, long groupId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -441,12 +405,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 
 			if (actionIds == null) {
@@ -480,8 +439,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetRolePermission(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String groupId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, long groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey, java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -492,12 +451,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -557,8 +511,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetRolePermissions(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String groupId,
-		java.lang.String name, java.lang.String typeId, java.lang.String scope,
+		java.lang.String roleId, long groupId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
 		java.lang.String actionId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
@@ -569,12 +523,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = name;
 
 			if (name == null) {
@@ -628,8 +577,8 @@ public class PermissionServiceHttp {
 	}
 
 	public static void unsetUserPermissions(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String[] actionIds, long resourceId)
+		java.lang.String userId, long groupId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -639,12 +588,7 @@ public class PermissionServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			Object paramObj2 = actionIds;
 
 			if (actionIds == null) {

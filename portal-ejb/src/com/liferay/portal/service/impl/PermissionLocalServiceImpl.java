@@ -151,14 +151,14 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return actions;
 	}
 
-	public List getGroupPermissions(String groupId, long resourceId)
+	public List getGroupPermissions(long groupId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByG_R(groupId, resourceId);
 	}
 
 	public List getOrgGroupPermissions(
-			String organizationId, String groupId, long resourceId)
+			String organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		return PermissionFinder.findByO_G_R(
@@ -188,7 +188,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public boolean hasGroupPermission(
-			String groupId, String actionId, long resourceId)
+			long groupId, String actionId, long resourceId)
 		throws PortalException, SystemException {
 
 		Permission permission = null;
@@ -281,7 +281,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public boolean hasUserPermissions(
-			String userId, String groupId, String actionId,
+			String userId, long groupId, String actionId,
 			long[] resourceIds, PermissionCheckerBag permissionCheckerBag)
 		throws PortalException, SystemException {
 
@@ -444,7 +444,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void setGroupPermissions(
-			String groupId, String[] actionIds, long resourceId)
+			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -465,11 +465,11 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void setGroupPermissions(
-			String className, String classPK, String groupId,
+			String className, String classPK, long groupId,
 			String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		String associatedGroupId = null;
+		long associatedGroupId = 0;
 
 		if (className.equals(Organization.class.getName())) {
 			Organization organization =
@@ -490,14 +490,14 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	public void setOrgGroupPermissions(
-			String organizationId, String groupId, String[] actionIds,
+			String organizationId, long groupId, String[] actionIds,
 			long resourceId)
 		throws PortalException, SystemException {
 
 		Organization organization =
 			OrganizationUtil.findByPrimaryKey(organizationId);
 
-		String orgGroupId = organization.getGroup().getGroupId();
+		long orgGroupId = organization.getGroup().getGroupId();
 
 		Iterator itr = PermissionUtil.findByResourceId(resourceId).iterator();
 

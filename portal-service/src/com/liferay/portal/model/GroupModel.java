@@ -31,13 +31,13 @@ import com.liferay.portal.model.BaseModel;
  *
  */
 public interface GroupModel extends BaseModel {
-	public String getPrimaryKey();
+	public long getPrimaryKey();
 
-	public void setPrimaryKey(String pk);
+	public void setPrimaryKey(long pk);
 
-	public String getGroupId();
+	public long getGroupId();
 
-	public void setGroupId(String groupId);
+	public void setGroupId(long groupId);
 
 	public String getCompanyId();
 
@@ -51,9 +51,9 @@ public interface GroupModel extends BaseModel {
 
 	public void setClassPK(String classPK);
 
-	public String getParentGroupId();
+	public long getParentGroupId();
 
-	public void setParentGroupId(String parentGroupId);
+	public void setParentGroupId(long parentGroupId);
 
 	public String getName();
 

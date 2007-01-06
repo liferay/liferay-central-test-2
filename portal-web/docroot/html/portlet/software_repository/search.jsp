@@ -51,7 +51,7 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-products-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = SRProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, type, keywords);
+Hits hits = SRProductEntryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), type, keywords);
 
 Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 

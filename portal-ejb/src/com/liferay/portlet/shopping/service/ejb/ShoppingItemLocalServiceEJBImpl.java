@@ -179,7 +179,7 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 											  .getCategoriesItemsCount(categoryIds);
 	}
 
-	public java.util.List getFeaturedItems(java.lang.String groupId,
+	public java.util.List getFeaturedItems(long groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().getFeaturedItems(groupId,
@@ -227,23 +227,22 @@ public class ShoppingItemLocalServiceEJBImpl implements ShoppingItemLocalService
 		return ShoppingItemLocalServiceFactory.getTxImpl().getItemsCount(categoryId);
 	}
 
-	public java.util.List getSaleItems(java.lang.String groupId,
+	public java.util.List getSaleItems(long groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().getSaleItems(groupId,
 			categoryId, numOfItems);
 	}
 
-	public java.util.List search(java.lang.String groupId,
-		java.lang.String[] categoryIds, java.lang.String keywords, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List search(long groupId, java.lang.String[] categoryIds,
+		java.lang.String keywords, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().search(groupId,
 			categoryIds, keywords, begin, end);
 	}
 
-	public int searchCount(java.lang.String groupId,
-		java.lang.String[] categoryIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+	public int searchCount(long groupId, java.lang.String[] categoryIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return ShoppingItemLocalServiceFactory.getTxImpl().searchCount(groupId,
 			categoryIds, keywords);
 	}

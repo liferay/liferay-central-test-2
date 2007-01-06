@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-String groupId = BeanParamUtil.getString(group, request, "groupId");
+long groupId = BeanParamUtil.getLong(group, request, "groupId");
 
 String type = BeanParamUtil.getString(group, request, "type");
 String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
@@ -45,7 +45,7 @@ String friendlyURL = BeanParamUtil.getString(group, request, "friendlyURL");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveGroup(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
 <input name="<portlet:namespace />friendlyURL" type="hidden" value="<%= friendlyURL %>">
 
 <liferay-ui:tabs names="community" />

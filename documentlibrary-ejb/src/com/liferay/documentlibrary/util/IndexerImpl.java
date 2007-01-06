@@ -64,7 +64,7 @@ import org.apache.lucene.index.Term;
 public class IndexerImpl {
 
 	public static void addFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, Long groupId,
 			String repositoryId, String fileName)
 		throws IOException {
 
@@ -139,7 +139,9 @@ public class IndexerImpl {
 				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
 			doc.add(
 				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, portletId));
-			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
+			doc.add(
+				LuceneFields.getKeyword(LuceneFields.GROUP_ID,
+					groupId.longValue()));
 
 			doc.add(LuceneFields.getFile(LuceneFields.CONTENT, is, fileExt));
 
@@ -260,7 +262,7 @@ public class IndexerImpl {
 						JCRConstants.NT_FILE)) {
 
 					addFile(
-						companyId, portletId, groupId, repositoryId,
+						companyId, portletId, new Long(groupId), repositoryId,
 						node.getName());
 				}
 			}
@@ -276,7 +278,7 @@ public class IndexerImpl {
 	}
 
 	public static void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, Long groupId,
 			String repositoryId, String fileName)
 		throws IOException {
 

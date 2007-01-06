@@ -61,7 +61,7 @@ public class UpgradeLayout extends UpgradeProcess {
 		}
 	}
 
-	private String _getCompanyIdByGroupId(String groupId) throws Exception {
+	private String _getCompanyIdByGroupId(long groupId) throws Exception {
 		String companyId = null;
 
 		Connection con = null;
@@ -73,7 +73,7 @@ public class UpgradeLayout extends UpgradeProcess {
 
 			ps = con.prepareStatement(_GET_COMPANY_ID_BY_GROUP_ID);
 
-			ps.setString(1, groupId);
+			ps.setLong(1, groupId);
 
 			rs = ps.executeQuery();
 
@@ -149,7 +149,7 @@ public class UpgradeLayout extends UpgradeProcess {
 				int pos = layoutId.indexOf(".");
 
 				if (pos != -1) {
-					String groupId = layoutId.substring(0, pos);
+					long groupId = Long.parseLong(layoutId.substring(0, pos));
 
 					companyId = _getCompanyIdByGroupId(groupId);
 				}

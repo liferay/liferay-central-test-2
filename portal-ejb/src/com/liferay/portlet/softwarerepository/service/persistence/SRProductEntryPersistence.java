@@ -195,7 +195,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -204,14 +204,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("modifiedDate DESC").append(", ");
@@ -221,10 +214,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -236,12 +226,12 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -251,14 +241,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -274,10 +257,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -289,7 +269,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SRProductEntry findByGroupId_First(String groupId,
+	public SRProductEntry findByGroupId_First(long groupId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
@@ -307,8 +287,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SRProductEntry findByGroupId_Last(String groupId,
-		OrderByComparator obc)
+	public SRProductEntry findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -327,7 +306,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 	}
 
 	public SRProductEntry[] findByGroupId_PrevAndNext(long productEntryId,
-		String groupId, OrderByComparator obc)
+		long groupId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SRProductEntry srProductEntry = findByPrimaryKey(productEntryId);
 		int count = countByGroupId(groupId);
@@ -339,14 +318,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -362,10 +334,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					srProductEntry);
@@ -573,7 +542,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_U(String groupId, String userId)
+	public List findByG_U(long groupId, String userId)
 		throws SystemException {
 		Session session = null;
 
@@ -583,14 +552,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (userId == null) {
@@ -609,10 +571,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (userId != null) {
 				q.setString(queryPos++, userId);
@@ -628,12 +587,12 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_U(String groupId, String userId, int begin, int end)
+	public List findByG_U(long groupId, String userId, int begin, int end)
 		throws SystemException {
 		return findByG_U(groupId, userId, begin, end, null);
 	}
 
-	public List findByG_U(String groupId, String userId, int begin, int end,
+	public List findByG_U(long groupId, String userId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -643,14 +602,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (userId == null) {
@@ -675,10 +627,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (userId != null) {
 				q.setString(queryPos++, userId);
@@ -694,7 +643,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SRProductEntry findByG_U_First(String groupId, String userId,
+	public SRProductEntry findByG_U_First(long groupId, String userId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		List list = findByG_U(groupId, userId, 0, 1, obc);
@@ -715,7 +664,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public SRProductEntry findByG_U_Last(String groupId, String userId,
+	public SRProductEntry findByG_U_Last(long groupId, String userId,
 		OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		int count = countByG_U(groupId, userId);
@@ -738,7 +687,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 	}
 
 	public SRProductEntry[] findByG_U_PrevAndNext(long productEntryId,
-		String groupId, String userId, OrderByComparator obc)
+		long groupId, String userId, OrderByComparator obc)
 		throws NoSuchProductEntryException, SystemException {
 		SRProductEntry srProductEntry = findByPrimaryKey(productEntryId);
 		int count = countByG_U(groupId, userId);
@@ -750,14 +699,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (userId == null) {
@@ -782,10 +724,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (userId != null) {
 				q.setString(queryPos++, userId);
@@ -849,7 +788,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -867,7 +806,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_U(String groupId, String userId)
+	public void removeByG_U(long groupId, String userId)
 		throws SystemException {
 		Iterator itr = findByG_U(groupId, userId).iterator();
 
@@ -885,7 +824,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -895,24 +834,14 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -983,7 +912,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_U(String groupId, String userId)
+	public int countByG_U(long groupId, String userId)
 		throws SystemException {
 		Session session = null;
 
@@ -994,14 +923,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (userId == null) {
@@ -1017,10 +939,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (userId != null) {
 				q.setString(queryPos++, userId);

@@ -58,7 +58,7 @@ if (layoutFamilySet.size() >= depth) {
 
 	Layout depthLevelLayout = layoutFamilyArray[layoutFamilyArray.length - depth];
 
-	String groupId = depthLevelLayout.getGroupId();
+	long groupId = depthLevelLayout.getGroupId();
 
 	StringBuffer sb = new StringBuffer();
 

@@ -49,7 +49,7 @@
 
 		<!-- Group instance -->
 
-		<column name="groupId" type="String" />
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 

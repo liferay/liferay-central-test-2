@@ -29,7 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public class OrganizationLocalServiceUtil {
-	public static void addGroupOrganizations(java.lang.String groupId,
+	public static void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -81,7 +81,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganization(organizationId);
 	}
 
-	public static java.util.List getGroupOrganizations(java.lang.String groupId)
+	public static java.util.List getGroupOrganizations(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
@@ -97,7 +97,7 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getUserOrganizations(userId);
 	}
 
-	public static boolean hasGroupOrganization(java.lang.String groupId,
+	public static boolean hasGroupOrganization(long groupId,
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -135,7 +135,7 @@ public class OrganizationLocalServiceUtil {
 			city, zip, regionId, countryId, params, andOperator);
 	}
 
-	public static void setGroupOrganizations(java.lang.String groupId,
+	public static void setGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -143,7 +143,7 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.setGroupOrganizations(groupId, organizationIds);
 	}
 
-	public static void unsetGroupOrganizations(java.lang.String groupId,
+	public static void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

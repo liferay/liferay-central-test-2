@@ -88,7 +88,7 @@ public class BookmarksFolderLocalServiceImpl
 		// Folder
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
@@ -207,7 +207,7 @@ public class BookmarksFolderLocalServiceImpl
 		BookmarksFolderUtil.remove(folder.getFolderId());
 	}
 
-	public void deleteFolders(String groupId)
+	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = BookmarksFolderUtil.findByGroupId(groupId).iterator();
@@ -226,21 +226,21 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public List getFolders(
-			String groupId, String parentFolderId, int begin, int end)
+			long groupId, String parentFolderId, int begin, int end)
 		throws SystemException {
 
 		return BookmarksFolderUtil.findByG_P(
 			groupId, parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(String groupId, String parentFolderId)
+	public int getFoldersCount(long groupId, String parentFolderId)
 		throws SystemException {
 
 		return BookmarksFolderUtil.countByG_P(groupId, parentFolderId);
 	}
 
 	public void getSubfolderIds(
-			List folderIds, String groupId, String folderId)
+			List folderIds, long groupId, String folderId)
 		throws SystemException {
 
 		Iterator itr = BookmarksFolderUtil.findByG_P(
@@ -289,7 +289,7 @@ public class BookmarksFolderLocalServiceImpl
 		return folder;
 	}
 
-	protected String getParentFolderId(String groupId, String parentFolderId)
+	protected String getParentFolderId(long groupId, String parentFolderId)
 		throws SystemException {
 
 		if (!parentFolderId.equals(
@@ -299,7 +299,7 @@ public class BookmarksFolderLocalServiceImpl
 				BookmarksFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!groupId.equals(parentFolder.getGroupId()))) {
+				(groupId !=parentFolder.getGroupId())) {
 
 				parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 			}
@@ -326,7 +326,7 @@ public class BookmarksFolderLocalServiceImpl
 				BookmarksFolderUtil.fetchByPrimaryKey(parentFolderId);
 
 			if ((parentFolder == null) ||
-				(!folder.getGroupId().equals(parentFolder.getGroupId()))) {
+				(folder.getGroupId() != parentFolder.getGroupId())) {
 
 				return folder.getParentFolderId();
 			}

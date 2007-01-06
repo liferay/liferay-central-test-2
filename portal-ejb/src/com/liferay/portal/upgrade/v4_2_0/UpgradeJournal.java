@@ -39,7 +39,6 @@ import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.util.GetterUtil;
-import com.liferay.util.Validator;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -97,10 +96,10 @@ public class UpgradeJournal extends UpgradeProcess {
 					String companyId = _extractValue(primKey, "companyId");
 					String articleId = _extractValue(primKey, "articleId");
 
-					String groupId = _findGroupId(
+					long groupId = _findGroupId(
 						_FIND_JOURNAL_ARTICLE_GROUP, companyId, articleId);
 
-					if (groupId != null) {
+					if (groupId > 0) {
 						double version = _extractDouble(primKey, "version");
 
 						JournalArticlePK pk = new JournalArticlePK(
@@ -136,11 +135,12 @@ public class UpgradeJournal extends UpgradeProcess {
 				PortletPreferencesSerializer.fromDefaultXML(
 					prefs.getPreferences());
 
-			String groupId = javaPrefs.getValue("group-id", StringPool.BLANK);
+			long groupId = GetterUtil.getLong(
+				javaPrefs.getValue("group-id", StringPool.BLANK));
 			String[] articleIds = javaPrefs.getValues(
 				"article-id", new String[0]);
 
-			if ((Validator.isNull(groupId)) && (articleIds != null) &&
+			if ((groupId <= 0) && (articleIds != null) &&
 				(articleIds.length > 0)) {
 
 				String articleId = articleIds[0];
@@ -149,12 +149,12 @@ public class UpgradeJournal extends UpgradeProcess {
 					_FIND_JOURNAL_ARTICLE_GROUP, layout.getCompanyId(),
 					articleId);
 
-				if (groupId != null) {
+				if (groupId > 0) {
 					_log.info(
 						"Upgrading portlet preferences " +
 							prefs.getPrimaryKey());
 
-					javaPrefs.setValue("group-id", groupId);
+					javaPrefs.setValue("group-id", String.valueOf(groupId));
 
 					PortletPreferencesLocalServiceUtil.updatePreferences(
 						prefs.getPrimaryKey(), javaPrefs);
@@ -194,10 +194,10 @@ public class UpgradeJournal extends UpgradeProcess {
 					String companyId = _extractValue(primKey, "companyId");
 					String structureId = _extractValue(primKey, "structureId");
 
-					String groupId = _findGroupId(
+					long groupId = _findGroupId(
 						_FIND_JOURNAL_STRUCTURE_GROUP, companyId, structureId);
 
-					if (groupId != null) {
+					if (groupId > 0) {
 						JournalStructurePK pk = new JournalStructurePK(
 							companyId, groupId, structureId);
 
@@ -240,10 +240,10 @@ public class UpgradeJournal extends UpgradeProcess {
 					String companyId = _extractValue(primKey, "companyId");
 					String templateId = _extractValue(primKey, "templateId");
 
-					String groupId = _findGroupId(
+					long groupId = _findGroupId(
 						_FIND_JOURNAL_TEMPLATE_GROUP, companyId, templateId);
 
-					if (groupId != null) {
+					if (groupId > 0) {
 						JournalTemplatePK pk = new JournalTemplatePK(
 							companyId, groupId, templateId);
 
@@ -279,7 +279,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		return primKey.substring(start + name.length() + 1, end);
 	}
 
-	private String _findGroupId(
+	private long _findGroupId(
 			String queryString, String companyId, String id)
 		throws Exception {
 
@@ -287,7 +287,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String groupId = null;
+		long groupId = 0;
 
 		try {
 			con = HibernateUtil.getConnection();
@@ -300,7 +300,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				groupId = rs.getString("groupId");
+				groupId = rs.getLong("groupId");
 			}
 		}
 		finally {

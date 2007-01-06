@@ -88,7 +88,7 @@ public class WorkflowDefinitionServiceImpl
 
 			String companyId = user.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM;
-			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
@@ -131,7 +131,7 @@ public class WorkflowDefinitionServiceImpl
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addResources(
-			user.getCompanyId(), null, user.getUserId(),
+			user.getCompanyId(), 0, user.getUserId(),
 			WorkflowDefinition.class.getName(), definitionId, false,
 			addCommunityPermissions, addGuestPermissions);
 	}
@@ -142,7 +142,7 @@ public class WorkflowDefinitionServiceImpl
 		throws PortalException, SystemException {
 
 		ResourceLocalServiceUtil.addModelResources(
-			user.getCompanyId(), null, user.getUserId(),
+			user.getCompanyId(), 0, user.getUserId(),
 			WorkflowDefinition.class.getName(), definitionId,
 			communityPermissions, guestPermissions);
 	}

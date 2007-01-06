@@ -71,7 +71,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		}
 	}
 
-	private String _findGroupId(
+	private long _findGroupId(
 			String queryString, String companyId, String id)
 		throws Exception {
 
@@ -79,7 +79,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		String groupId = null;
+		long groupId = 0;
 
 		try {
 			con = HibernateUtil.getConnection();
@@ -92,7 +92,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			if (rs.next()) {
-				groupId = rs.getString("groupId");
+				groupId = rs.getLong("groupId");
 			}
 		}
 		finally {
@@ -102,7 +102,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		return groupId;
 	}
 
-	private String _getNewArticleImageId(String oldImageId, String groupId)
+	private String _getNewArticleImageId(String oldImageId, long groupId)
 		throws Exception {
 
 		int x = oldImageId.indexOf(".journal.article.");
@@ -115,14 +115,14 @@ public class UpgradeJournal extends UpgradeProcess {
 		String articleId = oldImageId.substring(x, y);
 		String suffix = oldImageId.substring(y, oldImageId.length());
 
-		if (groupId == null) {
+		if (groupId <= 0) {
 			groupId = _findGroupId(
 				_FIND_JOURNAL_ARTICLE_GROUP, companyId, articleId);
 		}
 
 		String newImageId = null;
 
-		if (groupId != null) {
+		if (groupId > 0) {
 			newImageId =
 				companyId + ".journal.article." + groupId + "." + articleId +
 					suffix;
@@ -142,12 +142,12 @@ public class UpgradeJournal extends UpgradeProcess {
 		String templateId = oldImageId.substring(x, y);
 		String suffix = oldImageId.substring(y, oldImageId.length());
 
-		String groupId = _findGroupId(
+		long groupId = _findGroupId(
 			_FIND_JOURNAL_TEMPLATE_GROUP, companyId, templateId);
 
 		String newImageId = null;
 
-		if (groupId != null) {
+		if (groupId > 0) {
 			newImageId =
 				companyId + ".journal.template." + groupId + "." + templateId +
 					suffix;
@@ -156,7 +156,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		return newImageId;
 	}
 
-	private void _updateImageId(String groupId, Element root) throws Exception {
+	private void _updateImageId(long groupId, Element root) throws Exception {
 		Iterator itr1 = root.elements("dynamic-element").iterator();
 
 		while (itr1.hasNext()) {
@@ -226,7 +226,7 @@ public class UpgradeJournal extends UpgradeProcess {
 			Image image = (Image)itr.next();
 
 			String oldImageId = image.getImageId();
-			String newImageId = _getNewArticleImageId(oldImageId, null);
+			String newImageId = _getNewArticleImageId(oldImageId, 0);
 
 			if (newImageId != null) {
 				ImageLocalServiceUtil.updateImage(

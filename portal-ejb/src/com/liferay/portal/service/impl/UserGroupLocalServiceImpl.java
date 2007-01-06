@@ -55,7 +55,7 @@ import java.util.Map;
 public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
 	public void addGroupUserGroups(
-			String groupId, String[] userGroupIds)
+			long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addUserGroups(groupId, userGroupIds);
@@ -91,7 +91,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 		// Resources
 
 		ResourceLocalServiceUtil.addResources(
-			companyId, null, userId, UserGroup.class.getName(),
+			companyId, 0, userId, UserGroup.class.getName(),
 			userGroup.getPrimaryKey().toString(), false, false, false);
 
 		return userGroup;
@@ -142,7 +142,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 		return UserUtil.getUserGroups(userId);
 	}
 
-	public boolean hasGroupUserGroup(String groupId, String userGroupId)
+	public boolean hasGroupUserGroup(long groupId, String userGroupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.containsUserGroup(groupId, userGroupId);
@@ -165,7 +165,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 			companyId, name, description, params);
 	}
 
-	public void unsetGroupUserGroups(String groupId, String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeUserGroups(groupId, userGroupIds);

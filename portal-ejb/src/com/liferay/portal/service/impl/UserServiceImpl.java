@@ -53,7 +53,7 @@ import java.util.Locale;
  */
 public class UserServiceImpl extends PrincipalBean implements UserService {
 
-	public void addGroupUsers(String groupId, String[] userIds)
+	public void addGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
@@ -152,7 +152,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.deleteUser(userId);
 	}
 
-	public List getGroupUsers(String groupId)
+	public List getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.getGroupUsers(groupId);
@@ -185,7 +185,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return user;
 	}
 
-	public boolean hasGroupUser(String groupId, String userId)
+	public boolean hasGroupUser(long groupId, String userId)
 		throws PortalException, SystemException {
 
 		return UserLocalServiceUtil.hasGroupUser(groupId, userId);
@@ -197,7 +197,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		return UserLocalServiceUtil.hasRoleUser(roleId, userId);
 	}
 
-	public void setGroupUsers(String groupId, String[] userIds)
+	public void setGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -223,7 +223,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 		UserLocalServiceUtil.setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public void unsetGroupUsers(String groupId, String[] userIds)
+	public void unsetGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		if ((userIds != null) && (userIds.length > 0)) {
@@ -333,7 +333,7 @@ public class UserServiceImpl extends PrincipalBean implements UserService {
 			actionId);
 	}
 
-	protected void checkPermission(String groupId, String[] userIds)
+	protected void checkPermission(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		try {

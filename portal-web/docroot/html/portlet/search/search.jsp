@@ -76,7 +76,7 @@ for (int i = 0; i < results.getLength(); i++) {
 	if (portlet != null) {
 		String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
-		String groupId = (String)doc.get(LuceneFields.GROUP_ID);
+		long groupId = GetterUtil.getLong((String)doc.get(LuceneFields.GROUP_ID));
 
 		String title = null;
 		String content = null;

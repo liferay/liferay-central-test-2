@@ -44,9 +44,6 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_ORDERID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.orderId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -180,19 +177,12 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -1048,7 +1038,7 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	}
 
 	private String _orderId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

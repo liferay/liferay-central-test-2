@@ -62,7 +62,7 @@ import java.util.TreeMap;
  */
 public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 
-	public void deleteGroupCarts(String groupId) throws SystemException {
+	public void deleteGroupCarts(long groupId) throws SystemException {
 		ShoppingCartUtil.removeByGroupId(groupId);
 	}
 
@@ -76,7 +76,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 		return ShoppingCartUtil.findByPrimaryKey(cartId);
 	}
 
-	public Map getItems(String groupId, String itemIds)
+	public Map getItems(long groupId, String itemIds)
 		throws SystemException {
 
 		Map items = new TreeMap();
@@ -93,7 +93,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 
 				ShoppingCategory category = item.getCategory();
 
-				if (category.getGroupId().equals(groupId)) {
+				if (category.getGroupId() == groupId) {
 					ShoppingCartItem cartItem =
 						new ShoppingCartItemImpl(item, fields);
 
@@ -117,7 +117,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 	}
 
 	public ShoppingCart updateCart(
-			String userId, String groupId, String cartId, String itemIds,
+			String userId, long groupId, String cartId, String itemIds,
 			String couponIds, int altShipping, boolean insure)
 		throws PortalException, SystemException {
 
@@ -156,7 +156,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 				ShoppingCoupon coupon =
 					ShoppingCouponUtil.findByPrimaryKey(couponIdsArray[i]);
 
-				if (!coupon.getGroupId().equals(groupId)) {
+				if (coupon.getGroupId() != groupId) {
 					throw new NoSuchCouponException(couponIdsArray[i]);
 				}
 				else if (!coupon.isActive()) {
@@ -220,7 +220,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 		return cart;
 	}
 
-	protected String checkItemIds(String groupId, String itemIds) {
+	protected String checkItemIds(long groupId, String itemIds) {
 		String[] itemIdsArray = StringUtil.split(itemIds);
 
 		for (int i = 0; i < itemIdsArray.length; i++) {
@@ -233,7 +233,7 @@ public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
 
 				ShoppingCategory category = item.getCategory();
 
-				if (!category.getGroupId().equals(groupId)) {
+				if (category.getGroupId() != groupId) {
 					item = null;
 				}
 			}

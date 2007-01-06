@@ -320,11 +320,11 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 	public Hits search(String companyId, String keywords)
 		throws SystemException {
 
-		return search(companyId, null, null, null, keywords);
+		return search(companyId, null, 0, null, keywords);
 	}
 
 	public Hits search(
-			String companyId, String portletId, String groupId, String type,
+			String companyId, String portletId, long groupId, String type,
 			String keywords)
 		throws SystemException {
 
@@ -345,7 +345,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 					contextQuery, LuceneFields.PORTLET_ID, portletId);
 			}
 
-			if (Validator.isNotNull(groupId)) {
+			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
 					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}

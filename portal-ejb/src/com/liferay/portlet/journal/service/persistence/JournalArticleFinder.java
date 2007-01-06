@@ -59,7 +59,7 @@ public class JournalArticleFinder {
 			".findByC_G_A_V_T_D_C_T_S_T_D_A_E_R";
 
 	public static int countByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			String companyId, String groupId, String articleId, Double version,
+			String companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,
@@ -163,7 +163,7 @@ public class JournalArticleFinder {
 	}
 
 	public static List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
-			String companyId, String groupId, String articleId, Double version,
+			String companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
 			Date displayDateLT, Boolean approved, Boolean expired,

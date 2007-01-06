@@ -56,10 +56,10 @@ portletURL.setParameter("tabs1", tabs1);
 		int total = 0;
 
 		if (tabs1.equals("products")) {
-			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId);
+			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue());
 		}
 		else {
-			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId, user.getUserId());
+			total = SRProductEntryLocalServiceUtil.getProductEntriesCount(portletGroupId.longValue(), user.getUserId());
 		}
 
 		searchContainer.setTotal(total);
@@ -67,10 +67,10 @@ portletURL.setParameter("tabs1", tabs1);
 		List results = null;
 
 		if (tabs1.equals("products")) {
-			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 		}
 		else {
-			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
+			results = SRProductEntryLocalServiceUtil.getProductEntries(portletGroupId.longValue(), user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
 		}
 
 		searchContainer.setResults(results);
@@ -196,11 +196,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = SRFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(portletGroupId);
+		int total = SRFrameworkVersionLocalServiceUtil.getFrameworkVersionsCount(portletGroupId.longValue());
 
 		searchContainer.setTotal(total);
 
-		List results = SRFrameworkVersionLocalServiceUtil.getFrameworkVersions(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = SRFrameworkVersionLocalServiceUtil.getFrameworkVersions(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 

@@ -182,7 +182,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -191,14 +191,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("structureId ASC");
@@ -207,10 +200,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -222,12 +212,12 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -237,14 +227,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -259,10 +242,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -274,7 +254,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalStructure findByGroupId_First(String groupId,
+	public JournalStructure findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -291,7 +271,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public JournalStructure findByGroupId_Last(String groupId,
+	public JournalStructure findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -310,7 +290,7 @@ public class JournalStructurePersistence extends BasePersistence {
 	}
 
 	public JournalStructure[] findByGroupId_PrevAndNext(
-		JournalStructurePK journalStructurePK, String groupId,
+		JournalStructurePK journalStructurePK, long groupId,
 		OrderByComparator obc) throws NoSuchStructureException, SystemException {
 		JournalStructure journalStructure = findByPrimaryKey(journalStructurePK);
 		int count = countByGroupId(groupId);
@@ -322,14 +302,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -344,10 +317,7 @@ public class JournalStructurePersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalStructure);
@@ -406,7 +376,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -423,7 +393,7 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -433,24 +403,14 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 

@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -38,16 +39,11 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class UserGroupServiceHttp {
 	public static void addGroupUserGroups(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String[] userGroupIds)
+		long groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = userGroupIds;
 
 			if (userGroupIds == null) {
@@ -235,16 +231,11 @@ public class UserGroupServiceHttp {
 	}
 
 	public static void unsetGroupUserGroups(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String[] userGroupIds)
+		long groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = userGroupIds;
 
 			if (userGroupIds == null) {

@@ -112,7 +112,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteCategories(java.lang.String groupId)
+	public void deleteCategories(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().deleteCategories(groupId);
@@ -131,19 +131,19 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		MBCategoryLocalServiceFactory.getTxImpl().deleteCategory(category);
 	}
 
-	public java.util.List getCategories(java.lang.String groupId,
+	public java.util.List getCategories(long groupId,
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategories(groupId,
 			parentCategoryId, begin, end);
 	}
 
-	public int getCategoriesCount(java.lang.String groupId)
+	public int getCategoriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategoriesCount(groupId);
 	}
 
-	public int getCategoriesCount(java.lang.String groupId,
+	public int getCategoriesCount(long groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategoriesCount(groupId,
@@ -157,9 +157,8 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 		return MBCategoryLocalServiceFactory.getTxImpl().getCategory(categoryId);
 	}
 
-	public void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String groupId, java.lang.String categoryId)
-		throws com.liferay.portal.SystemException {
+	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
+		java.lang.String categoryId) throws com.liferay.portal.SystemException {
 		MBCategoryLocalServiceFactory.getTxImpl().getSubcategoryIds(categoryIds,
 			groupId, categoryId);
 	}
@@ -176,7 +175,7 @@ public class MBCategoryLocalServiceEJBImpl implements MBCategoryLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String companyId, long groupId,
 		java.lang.String[] categoryIds, java.lang.String threadId,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return MBCategoryLocalServiceFactory.getTxImpl().search(companyId,

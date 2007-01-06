@@ -101,7 +101,7 @@ public class MBMessageFinder {
 		}
 	}
 
-	public static int countByGroupId(String groupId) throws SystemException {
+	public static int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -139,7 +139,7 @@ public class MBMessageFinder {
 		}
 	}
 
-	public static List findByGroupId(String groupId, int begin, int end)
+	public static List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

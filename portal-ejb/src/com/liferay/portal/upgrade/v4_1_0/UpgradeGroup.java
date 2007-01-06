@@ -79,7 +79,7 @@ public class UpgradeGroup extends UpgradeProcess {
 			while (rs.next()) {
 				String roleId = rs.getString("roleId");
 				String companyId = rs.getString("companyId");
-				String groupId = rs.getString("classPK");
+				long groupId = rs.getLong("classPK");
 
 				List users = UserLocalServiceUtil.getRoleUsers(roleId);
 
@@ -89,7 +89,7 @@ public class UpgradeGroup extends UpgradeProcess {
 					Resource resource = ResourceLocalServiceUtil.addResource(
 						companyId, Group.class.getName(),
 						ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
-						groupId);
+						String.valueOf(groupId));
 
 					PermissionLocalServiceUtil.addUserPermissions(
 						user.getUserId(),

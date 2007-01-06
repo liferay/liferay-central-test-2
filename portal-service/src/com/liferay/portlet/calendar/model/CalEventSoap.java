@@ -92,11 +92,11 @@ public class CalEventSoap implements Serializable {
 		_eventId = eventId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -265,7 +265,7 @@ public class CalEventSoap implements Serializable {
 	}
 
 	private String _eventId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

@@ -116,7 +116,7 @@ public class JournalTemplateLocalServiceImpl
 
 		User user = UserUtil.findByPrimaryKey(userId);
 		templateId = templateId.trim().toUpperCase();
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		try {
@@ -197,7 +197,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -221,7 +221,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void addTemplateResources(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -244,7 +244,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void checkNewLine(
-			String companyId, String groupId, String templateId)
+			String companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		JournalTemplate template = JournalTemplateUtil.findByPrimaryKey(
@@ -265,7 +265,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public void deleteTemplate(
-			String companyId, String groupId, String templateId)
+			String companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		templateId = templateId.trim().toUpperCase();
@@ -303,14 +303,14 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public List getStructureTemplates(
-			String companyId, String groupId, String structureId)
+			String companyId, long groupId, String structureId)
 		throws SystemException {
 
 		return JournalTemplateUtil.findByC_G_S(companyId, groupId, structureId);
 	}
 
 	public List getStructureTemplates(
-			String companyId, String groupId, String structureId, int begin,
+			String companyId, long groupId, String structureId, int begin,
 			int end)
 		throws SystemException {
 
@@ -319,7 +319,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public int getStructureTemplatesCount(
-			String companyId, String groupId, String structureId)
+			String companyId, long groupId, String structureId)
 		throws SystemException {
 
 		return JournalTemplateUtil.countByC_G_S(
@@ -327,7 +327,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate getTemplate(
-			String companyId, String groupId, String templateId)
+			String companyId, long groupId, String templateId)
 		throws PortalException, SystemException {
 
 		templateId = templateId.trim().toUpperCase();
@@ -340,22 +340,22 @@ public class JournalTemplateLocalServiceImpl
 		return JournalTemplateUtil.findAll();
 	}
 
-	public List getTemplates(String groupId) throws SystemException {
+	public List getTemplates(long groupId) throws SystemException {
 		return JournalTemplateUtil.findByGroupId(groupId);
 	}
 
-	public List getTemplates(String groupId, int begin, int end)
+	public List getTemplates(long groupId, int begin, int end)
 		throws SystemException {
 
 		return JournalTemplateUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public int getTemplatesCount(String groupId) throws SystemException {
+	public int getTemplatesCount(long groupId) throws SystemException {
 		return JournalTemplateUtil.countByGroupId(groupId);
 	}
 
 	public List search(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -367,7 +367,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public int searchCount(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String structureId, String structureIdComparator, String name,
 			String description, boolean andOperator)
 		throws SystemException {
@@ -378,7 +378,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	public JournalTemplate updateTemplate(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			String structureId, String name, String description, String xsl,
 			boolean formatXsl, String langType, boolean smallImage,
 			String smallImageURL, File smallFile)
@@ -465,7 +465,7 @@ public class JournalTemplateLocalServiceImpl
 	}
 
 	protected void validate(
-			String companyId, String groupId, String templateId,
+			String companyId, long groupId, String templateId,
 			boolean autoTemplateId, String name, String description, String xsl,
 			boolean smallImage, String smallImageURL, File smallFile,
 			byte[] smallBytes)

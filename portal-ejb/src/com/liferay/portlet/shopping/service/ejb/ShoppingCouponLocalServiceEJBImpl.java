@@ -62,7 +62,7 @@ public class ShoppingCouponLocalServiceEJBImpl
 		ShoppingCouponLocalServiceFactory.getTxImpl().deleteCoupon(couponId);
 	}
 
-	public void deleteCoupons(java.lang.String groupId)
+	public void deleteCoupons(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalServiceFactory.getTxImpl().deleteCoupons(groupId);
 	}
@@ -82,7 +82,7 @@ public class ShoppingCouponLocalServiceEJBImpl
 			plid, companyId, active, discountType, andOperator, begin, end);
 	}
 
-	public int searchCount(java.lang.String couponId, java.lang.String groupId,
+	public int searchCount(java.lang.String couponId, long groupId,
 		java.lang.String companyId, boolean active,
 		java.lang.String discountType, boolean andOperator)
 		throws com.liferay.portal.SystemException {

@@ -151,66 +151,62 @@ public class CalEventUtil {
 		return getPersistence().fetchByPrimaryKey(eventId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId)
+	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByGroupId_First(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByGroupId_Last(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByGroupId_PrevAndNext(
-		java.lang.String eventId, java.lang.String groupId,
+		java.lang.String eventId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
 		return getPersistence().findByGroupId_PrevAndNext(eventId, groupId, obc);
 	}
 
-	public static java.util.List findByG_T(java.lang.String groupId,
-		java.lang.String type) throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_T(long groupId, java.lang.String type)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_T(groupId, type);
 	}
 
-	public static java.util.List findByG_T(java.lang.String groupId,
-		java.lang.String type, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_T(long groupId, java.lang.String type,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_T(groupId, type, begin, end);
 	}
 
-	public static java.util.List findByG_T(java.lang.String groupId,
-		java.lang.String type, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByG_T(long groupId, java.lang.String type,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_T(groupId, type, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByG_T_First(
-		java.lang.String groupId, java.lang.String type,
+		long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -218,7 +214,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByG_T_Last(
-		java.lang.String groupId, java.lang.String type,
+		long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -226,8 +222,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByG_T_PrevAndNext(
-		java.lang.String eventId, java.lang.String groupId,
-		java.lang.String type,
+		java.lang.String eventId, long groupId, java.lang.String type,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -235,26 +230,24 @@ public class CalEventUtil {
 			obc);
 	}
 
-	public static java.util.List findByG_R(java.lang.String groupId,
-		boolean repeating) throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_R(long groupId, boolean repeating)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_R(groupId, repeating);
 	}
 
-	public static java.util.List findByG_R(java.lang.String groupId,
-		boolean repeating, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_R(long groupId, boolean repeating,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_R(groupId, repeating, begin, end);
 	}
 
-	public static java.util.List findByG_R(java.lang.String groupId,
-		boolean repeating, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByG_R(long groupId, boolean repeating,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_R(groupId, repeating, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByG_R_First(
-		java.lang.String groupId, boolean repeating,
+		long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -262,7 +255,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent findByG_R_Last(
-		java.lang.String groupId, boolean repeating,
+		long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -270,7 +263,7 @@ public class CalEventUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent[] findByG_R_PrevAndNext(
-		java.lang.String eventId, java.lang.String groupId, boolean repeating,
+		java.lang.String eventId, long groupId, boolean repeating,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.calendar.NoSuchEventException {
@@ -294,17 +287,17 @@ public class CalEventUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByGroupId(java.lang.String groupId)
+	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
 
-	public static void removeByG_T(java.lang.String groupId,
-		java.lang.String type) throws com.liferay.portal.SystemException {
+	public static void removeByG_T(long groupId, java.lang.String type)
+		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_T(groupId, type);
 	}
 
-	public static void removeByG_R(java.lang.String groupId, boolean repeating)
+	public static void removeByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_R(groupId, repeating);
 	}
@@ -313,17 +306,17 @@ public class CalEventUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByGroupId(java.lang.String groupId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}
 
-	public static int countByG_T(java.lang.String groupId, java.lang.String type)
+	public static int countByG_T(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_T(groupId, type);
 	}
 
-	public static int countByG_R(java.lang.String groupId, boolean repeating)
+	public static int countByG_R(long groupId, boolean repeating)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_R(groupId, repeating);
 	}

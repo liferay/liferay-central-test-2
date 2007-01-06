@@ -146,7 +146,7 @@ for (int i = 0; i < 7; i++) {
 					<table border="0" cellpadding="4" cellspacing="0" width="100%">
 
 					<%
-					List events = CalEventLocalServiceUtil.getEvents(portletGroupId, cal, eventType);
+					List events = CalEventLocalServiceUtil.getEvents(portletGroupId.longValue(), cal, eventType);
 
 					for (int j = 0; j < events.size(); j++) {
 						CalEvent event = (CalEvent)events.get(j);

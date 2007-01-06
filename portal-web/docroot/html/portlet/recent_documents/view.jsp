@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/recent_documents/init.jsp" %>
 
 <%
-List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId, user.getUserId());
+List ranks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValue(), user.getUserId());
 %>
 
 <c:choose>

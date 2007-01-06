@@ -37,9 +37,8 @@ import javax.ejb.SessionContext;
  */
 public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 	SessionBean {
-	public void addModelResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, long primKey,
+	public void addModelResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
@@ -49,10 +48,9 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			guestPermissions);
 	}
 
-	public void addModelResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String[] communityPermissions,
+	public void addModelResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name,
+		java.lang.String primKey, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -71,18 +69,18 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			name, typeId, scope, primKey);
 	}
 
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String name, boolean portletActions)
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String name, boolean portletActions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().addResources(companyId,
 			groupId, name, portletActions);
 	}
 
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, long primKey, boolean portletActions,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name, long primKey,
+		boolean portletActions, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().addResources(companyId,
@@ -90,11 +88,10 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String userId,
-		java.lang.String name, java.lang.String primKey,
-		boolean portletActions, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public void addResources(java.lang.String companyId, long groupId,
+		java.lang.String userId, java.lang.String name,
+		java.lang.String primKey, boolean portletActions,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ResourceLocalServiceFactory.getTxImpl().addResources(companyId,
@@ -161,6 +158,13 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			com.liferay.portal.SystemException {
 		return ResourceLocalServiceFactory.getTxImpl().getResource(companyId,
 			name, typeId, scope, primKey);
+	}
+
+	public void updatePrimKey(long resourceId, java.lang.String primKey)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		ResourceLocalServiceFactory.getTxImpl().updatePrimKey(resourceId,
+			primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

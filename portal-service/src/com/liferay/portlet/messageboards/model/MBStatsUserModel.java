@@ -39,9 +39,9 @@ public interface MBStatsUserModel extends BaseModel {
 
 	public void setPrimaryKey(MBStatsUserPK pk);
 
-	public String getGroupId();
+	public long getGroupId();
 
-	public void setGroupId(String groupId);
+	public void setGroupId(long groupId);
 
 	public String getUserId();
 

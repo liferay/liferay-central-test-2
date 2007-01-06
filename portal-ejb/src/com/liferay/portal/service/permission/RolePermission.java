@@ -47,7 +47,7 @@ public class RolePermission {
 		PermissionChecker permissionChecker, String roleId, String actionId) {
 
 		return permissionChecker.hasPermission(
-			null, Role.class.getName(), roleId, actionId);
+			0, Role.class.getName(), roleId, actionId);
 	}
 
 }

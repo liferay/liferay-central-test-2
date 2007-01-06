@@ -40,9 +40,6 @@ public class SRFrameworkVersionModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion"),
 			XSS_ALLOW);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarerepository.model.SRFrameworkVersion.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -82,19 +79,12 @@ public class SRFrameworkVersionModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -309,7 +299,7 @@ public class SRFrameworkVersionModelImpl extends BaseModelImpl {
 	}
 
 	private long _frameworkVersionId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

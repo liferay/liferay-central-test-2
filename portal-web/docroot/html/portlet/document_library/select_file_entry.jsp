@@ -33,7 +33,7 @@ if (Validator.isNull(folderId)) {
 	folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 }
 
-String groupId = BeanParamUtil.getString(folder, request, "groupId");
+long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 %>
 
 <form method="post" name="<portlet:namespace />fm">
@@ -52,7 +52,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 portletURL.setParameter("struts_action", "/document_library/select_file_entry");
-portletURL.setParameter("groupId", groupId);
+portletURL.setParameter("groupId", String.valueOf(groupId));
 
 List headerNames = new ArrayList();
 
@@ -82,7 +82,7 @@ for (int i = 0; i < results.size(); i++) {
 	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/document_library/select_file_entry");
-	rowURL.setParameter("groupId", groupId);
+	rowURL.setParameter("groupId", String.valueOf(groupId));
 	rowURL.setParameter("folderId", curFolder.getFolderId());
 
 	// Name

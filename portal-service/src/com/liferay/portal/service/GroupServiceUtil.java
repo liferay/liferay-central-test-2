@@ -39,23 +39,21 @@ public class GroupServiceUtil {
 		return groupService.addGroup(name, description, type, friendlyURL);
 	}
 
-	public static void addRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.addRoleGroups(roleId, groupIds);
 	}
 
-	public static void deleteGroup(java.lang.String groupId)
+	public static void deleteGroup(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.deleteGroup(groupId);
 	}
 
-	public static com.liferay.portal.model.Group getGroup(
-		java.lang.String groupId)
+	public static com.liferay.portal.model.Group getGroup(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
@@ -89,34 +87,30 @@ public class GroupServiceUtil {
 		return groupService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId,
-		java.lang.String groupId)
+	public static boolean hasUserGroup(java.lang.String userId, long groupId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 
 		return groupService.hasUserGroup(userId, groupId);
 	}
 
-	public static void setRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.setRoleGroups(roleId, groupIds);
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();
 		groupService.unsetRoleGroups(roleId, groupIds);
 	}
 
-	public static com.liferay.portal.model.Group updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+	public static com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		GroupService groupService = GroupServiceFactory.getService();

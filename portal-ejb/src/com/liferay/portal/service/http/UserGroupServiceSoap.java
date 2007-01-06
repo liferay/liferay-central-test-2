@@ -35,7 +35,7 @@ import java.rmi.RemoteException;
  *
  */
 public class UserGroupServiceSoap {
-	public static void addGroupUserGroups(java.lang.String groupId,
+	public static void addGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds) throws RemoteException {
 		try {
 			UserGroupServiceUtil.addGroupUserGroups(groupId, userGroupIds);
@@ -98,7 +98,7 @@ public class UserGroupServiceSoap {
 		}
 	}
 
-	public static void unsetGroupUserGroups(java.lang.String groupId,
+	public static void unsetGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds) throws RemoteException {
 		try {
 			UserGroupServiceUtil.unsetGroupUserGroups(groupId, userGroupIds);

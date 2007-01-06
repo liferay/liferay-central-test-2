@@ -156,14 +156,14 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		return MBThreadFinder.countByCategoryIds(categoryIds);
 	}
 
-	public List getGroupThreads(String groupId, int begin, int end)
+	public List getGroupThreads(long groupId, int begin, int end)
 		throws SystemException {
 
 		return MBThreadFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupThreads(
-			String groupId, String userId, int begin, int end)
+			long groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -174,11 +174,11 @@ public class MBThreadLocalServiceImpl implements MBThreadLocalService {
 		}
 	}
 
-	public int getGroupThreadsCount(String groupId) throws SystemException {
+	public int getGroupThreadsCount(long groupId) throws SystemException {
 		return MBThreadFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupThreadsCount(String groupId, String userId)
+	public int getGroupThreadsCount(long groupId, String userId)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {

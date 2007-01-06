@@ -56,7 +56,7 @@ public class GetLatestArticleContentAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
-            String groupId = ParamUtil.getString(req, "groupId");
+            long groupId = ParamUtil.getLong(req, "groupId");
 		    String articleId = ParamUtil.getString(req, "articleId");
 
 			String languageId = LanguageUtil.getLanguageId(req);

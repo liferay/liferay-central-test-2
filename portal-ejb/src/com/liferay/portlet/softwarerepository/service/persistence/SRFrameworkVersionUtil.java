@@ -152,40 +152,38 @@ public class SRFrameworkVersionUtil {
 		return getPersistence().fetchByPrimaryKey(frameworkVersionId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId)
+	public static java.util.List findByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(java.lang.String groupId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion findByGroupId_First(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
 		return getPersistence().findByGroupId_First(groupId, obc);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion findByGroupId_Last(
-		java.lang.String groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
 		return getPersistence().findByGroupId_Last(groupId, obc);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion[] findByGroupId_PrevAndNext(
-		long frameworkVersionId, java.lang.String groupId,
+		long frameworkVersionId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
@@ -234,26 +232,24 @@ public class SRFrameworkVersionUtil {
 			companyId, obc);
 	}
 
-	public static java.util.List findByG_A(java.lang.String groupId,
-		boolean active) throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_A(long groupId, boolean active)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_A(groupId, active);
 	}
 
-	public static java.util.List findByG_A(java.lang.String groupId,
-		boolean active, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List findByG_A(long groupId, boolean active,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_A(groupId, active, begin, end);
 	}
 
-	public static java.util.List findByG_A(java.lang.String groupId,
-		boolean active, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List findByG_A(long groupId, boolean active,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_A(groupId, active, begin, end, obc);
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion findByG_A_First(
-		java.lang.String groupId, boolean active,
+		long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
@@ -261,7 +257,7 @@ public class SRFrameworkVersionUtil {
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion findByG_A_Last(
-		java.lang.String groupId, boolean active,
+		long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
@@ -269,7 +265,7 @@ public class SRFrameworkVersionUtil {
 	}
 
 	public static com.liferay.portlet.softwarerepository.model.SRFrameworkVersion[] findByG_A_PrevAndNext(
-		long frameworkVersionId, java.lang.String groupId, boolean active,
+		long frameworkVersionId, long groupId, boolean active,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portlet.softwarerepository.NoSuchFrameworkVersionException {
@@ -293,7 +289,7 @@ public class SRFrameworkVersionUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
-	public static void removeByGroupId(java.lang.String groupId)
+	public static void removeByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByGroupId(groupId);
 	}
@@ -303,7 +299,7 @@ public class SRFrameworkVersionUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
-	public static void removeByG_A(java.lang.String groupId, boolean active)
+	public static void removeByG_A(long groupId, boolean active)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByG_A(groupId, active);
 	}
@@ -312,7 +308,7 @@ public class SRFrameworkVersionUtil {
 		getPersistence().removeAll();
 	}
 
-	public static int countByGroupId(java.lang.String groupId)
+	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
 	}
@@ -322,7 +318,7 @@ public class SRFrameworkVersionUtil {
 		return getPersistence().countByCompanyId(companyId);
 	}
 
-	public static int countByG_A(java.lang.String groupId, boolean active)
+	public static int countByG_A(long groupId, boolean active)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_A(groupId, active);
 	}

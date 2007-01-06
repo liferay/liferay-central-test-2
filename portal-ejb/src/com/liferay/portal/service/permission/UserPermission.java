@@ -68,20 +68,20 @@ public class UserPermission {
 			return true;
 		}
 		else if (permissionChecker.hasPermission(
-					null, User.class.getName(), userId, actionId)) {
+					0, User.class.getName(), userId, actionId)) {
 
 			return true;
 		}
 		else if (Validator.isNotNull(organizationId) &&
 				 permissionChecker.hasPermission(
-					null, Organization.class.getName(), organizationId,
+					0, Organization.class.getName(), organizationId,
 					organizationActionId)) {
 
 			return true;
 		}
 		else if (Validator.isNotNull(locationId) &&
 				 permissionChecker.hasPermission(
-					null, "com.liferay.portal.model.Location", locationId,
+					0, "com.liferay.portal.model.Location", locationId,
 					organizationActionId)) {
 
 			return true;

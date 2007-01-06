@@ -68,14 +68,14 @@ public class UpgradeGroup extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String groupId = rs.getString("groupId");
+				long groupId = rs.getLong("groupId");
 
 				_log.info("Upgrading group " + groupId);
 
 				ps = con.prepareStatement(_UPGRADE_GROUP_2);
 
 				ps.setString(1, "Guest");
-				ps.setString(2, groupId);
+				ps.setLong(2, groupId);
 
 				ps.executeUpdate();
 			}

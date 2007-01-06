@@ -44,8 +44,14 @@ public class JournalContentSearchLocalServiceEJBImpl
 											   .checkContentSearches(companyId);
 	}
 
+	public void deleteArticleContentSearches()
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalServiceFactory.getTxImpl()
+											   .deleteArticleContentSearches();
+	}
+
 	public void deleteArticleContentSearches(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId)
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalServiceFactory.getTxImpl()
 											   .deleteArticleContentSearches(companyId,
@@ -66,23 +72,27 @@ public class JournalContentSearchLocalServiceEJBImpl
 	}
 
 	public java.util.List getArticleContentSearches(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
 													  .getArticleContentSearches(companyId,
 			groupId, articleId);
 	}
 
-	public java.util.List getLayoutIds(java.lang.String ownerId,
-		java.lang.String groupId, java.lang.String articleId)
+	public java.util.List getArticleContentSearches()
 		throws com.liferay.portal.SystemException {
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .getArticleContentSearches();
+	}
+
+	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl().getLayoutIds(ownerId,
 			groupId, articleId);
 	}
 
-	public int getLayoutIdsCount(java.lang.String ownerId,
-		java.lang.String groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException {
+	public int getLayoutIdsCount(java.lang.String ownerId, long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
 													  .getLayoutIdsCount(ownerId,
 			groupId, articleId);
@@ -90,8 +100,8 @@ public class JournalContentSearchLocalServiceEJBImpl
 
 	public com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
 		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId)
+		java.lang.String ownerId, java.lang.String companyId, long groupId,
+		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
@@ -101,8 +111,7 @@ public class JournalContentSearchLocalServiceEJBImpl
 
 	public java.util.List updateContentSearch(java.lang.String portletId,
 		java.lang.String layoutId, java.lang.String ownerId,
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] articleIds)
+		java.lang.String companyId, long groupId, java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()

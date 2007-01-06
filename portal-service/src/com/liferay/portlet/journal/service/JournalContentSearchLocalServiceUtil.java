@@ -36,9 +36,15 @@ public class JournalContentSearchLocalServiceUtil {
 		journalContentSearchLocalService.checkContentSearches(companyId);
 	}
 
+	public static void deleteArticleContentSearches()
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+		journalContentSearchLocalService.deleteArticleContentSearches();
+	}
+
 	public static void deleteArticleContentSearches(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 		journalContentSearchLocalService.deleteArticleContentSearches(companyId,
 			groupId, articleId);
@@ -58,16 +64,23 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	public static java.util.List getArticleContentSearches(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
 		return journalContentSearchLocalService.getArticleContentSearches(companyId,
 			groupId, articleId);
 	}
 
+	public static java.util.List getArticleContentSearches()
+		throws com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		return journalContentSearchLocalService.getArticleContentSearches();
+	}
+
 	public static java.util.List getLayoutIds(java.lang.String ownerId,
-		java.lang.String groupId, java.lang.String articleId)
+		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
@@ -75,9 +88,8 @@ public class JournalContentSearchLocalServiceUtil {
 			articleId);
 	}
 
-	public static int getLayoutIdsCount(java.lang.String ownerId,
-		java.lang.String groupId, java.lang.String articleId)
-		throws com.liferay.portal.SystemException {
+	public static int getLayoutIdsCount(java.lang.String ownerId, long groupId,
+		java.lang.String articleId) throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
 		return journalContentSearchLocalService.getLayoutIdsCount(ownerId,
@@ -86,8 +98,8 @@ public class JournalContentSearchLocalServiceUtil {
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateContentSearch(
 		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId)
+		java.lang.String ownerId, java.lang.String companyId, long groupId,
+		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
@@ -98,8 +110,8 @@ public class JournalContentSearchLocalServiceUtil {
 
 	public static java.util.List updateContentSearch(
 		java.lang.String portletId, java.lang.String layoutId,
-		java.lang.String ownerId, java.lang.String companyId,
-		java.lang.String groupId, java.lang.String[] articleIds)
+		java.lang.String ownerId, java.lang.String companyId, long groupId,
+		java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();

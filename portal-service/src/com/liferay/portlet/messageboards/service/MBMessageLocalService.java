@@ -185,10 +185,10 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupMessages(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List getGroupMessages(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public int getGroupMessagesCount(java.lang.String groupId)
+	public int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage getMessage(

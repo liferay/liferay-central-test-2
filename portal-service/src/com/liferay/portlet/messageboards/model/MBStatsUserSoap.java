@@ -70,11 +70,11 @@ public class MBStatsUserSoap implements Serializable {
 		setUserId(pk.userId);
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -102,7 +102,7 @@ public class MBStatsUserSoap implements Serializable {
 		_lastPostDate = lastPostDate;
 	}
 
-	private String _groupId;
+	private long _groupId;
 	private String _userId;
 	private int _messageCount;
 	private Date _lastPostDate;

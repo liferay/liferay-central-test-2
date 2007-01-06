@@ -62,7 +62,7 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-			String groupId = ParamUtil.getString(req, "groupId");
+            long groupId = ParamUtil.getLong(req, "groupId");
 			String type = ParamUtil.getString(req, "type");
 			String pageURL = ParamUtil.getString(req, "pageURL");
 			int pageDelta = ParamUtil.getInteger(req, "pageDelta");
@@ -78,7 +78,7 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("group-id", groupId);
+			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValue("type", type);
 			prefs.setValue("page-url", pageURL);
 			prefs.setValue("page-delta", String.valueOf(pageDelta));

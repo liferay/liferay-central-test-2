@@ -40,7 +40,7 @@
 							try {
 								User user2 = UserLocalServiceUtil.getUserById(message.getUserId());
 								Organization organization = user2.getOrganization();
-								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId, message.getUserId()).getMessageCount();
+								int posts = MBStatsUserLocalServiceUtil.getStatsUser(portletGroupId.longValue(), message.getUserId()).getMessageCount();
 								String rank = MBUtil.getUserRank(portletSetup, LocaleUtil.toLanguageId(locale), posts);
 							%>
 

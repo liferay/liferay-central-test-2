@@ -45,7 +45,7 @@ public class UserGroupServiceImpl extends PrincipalBean
 	implements UserGroupService {
 
 	public void addGroupUserGroups(
-			String groupId, String[] userGroupIds)
+			long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -93,7 +93,7 @@ public class UserGroupServiceImpl extends PrincipalBean
 	}
 
 	public void unsetGroupUserGroups(
-			String groupId, String[] userGroupIds)
+			long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(

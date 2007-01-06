@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.upgrade.v4_3_0.UpgradeAddress;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
+import com.liferay.portal.upgrade.v4_3_0.UpgradeGroup;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePermissions;
 import com.liferay.portal.upgrade.v4_3_0.UpgradePhone;
 import com.liferay.portal.upgrade.v4_3_0.UpgradeWebsite;
@@ -48,6 +49,10 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
+
+		// Make sure to upgrade the groups first
+
+		upgrade(new UpgradeGroup());
 
 		upgrade(new UpgradePermissions());
 		upgrade(new UpgradeAddress());

@@ -131,7 +131,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 						Group group = (Group)communities.get(i);
 					%>
 
-						<option <%= displayTerms.getGroupId().equals(group.getGroupId()) ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>
+						<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(group.getGroupId()) %>"><%= group.getName() %></option>
 
 					<%
 					}

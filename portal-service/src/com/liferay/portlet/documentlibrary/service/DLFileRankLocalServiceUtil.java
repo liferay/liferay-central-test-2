@@ -41,7 +41,7 @@ public class DLFileRankLocalServiceUtil {
 		dlFileRankLocalService.deleteFileRanks(folderId, name);
 	}
 
-	public static java.util.List getFileRanks(java.lang.String groupId,
+	public static java.util.List getFileRanks(long groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
@@ -49,9 +49,8 @@ public class DLFileRankLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
-		java.lang.String groupId, java.lang.String companyId,
-		java.lang.String userId, java.lang.String folderId,
-		java.lang.String name)
+		long groupId, java.lang.String companyId, java.lang.String userId,
+		java.lang.String folderId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();

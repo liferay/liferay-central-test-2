@@ -670,7 +670,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroup(long pk, String groupPK)
+	public boolean containsGroup(long pk, long groupPK)
 		throws SystemException {
 		try {
 			return containsGroup.contains(pk, groupPK);
@@ -689,7 +689,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(long pk, String groupPK)
+	public void addGroup(long pk, long groupPK)
 		throws NoSuchPermissionException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -711,7 +711,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(long pk, String[] groupPKs)
+	public void addGroups(long pk, long[] groupPKs)
 		throws NoSuchPermissionException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -748,7 +748,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(long pk, String groupPK)
+	public void removeGroup(long pk, long groupPK)
 		throws NoSuchPermissionException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -770,7 +770,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(long pk, String[] groupPKs)
+	public void removeGroups(long pk, long[] groupPKs)
 		throws NoSuchPermissionException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -797,7 +797,7 @@ public class PermissionPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(long pk, String[] groupPKs)
+	public void setGroups(long pk, long[] groupPKs)
 		throws NoSuchPermissionException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1326,7 +1326,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected ContainsGroup(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
 			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
@@ -1335,8 +1335,10 @@ public class PermissionPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(long permissionId, String groupId) {
-			List results = execute(new Object[] { new Long(permissionId), groupId });
+		protected boolean contains(long permissionId, long groupId) {
+			List results = execute(new Object[] {
+						new Long(permissionId), new Long(groupId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -1356,13 +1358,13 @@ public class PermissionPersistence extends BasePersistence {
 				"INSERT INTO Groups_Permissions (permissionId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void add(long permissionId, String groupId) {
+		protected void add(long permissionId, long groupId) {
 			if (!_persistence.containsGroup.contains(permissionId, groupId)) {
-				update(new Object[] { new Long(permissionId), groupId });
+				update(new Object[] { new Long(permissionId), new Long(groupId) });
 			}
 		}
 
@@ -1387,12 +1389,12 @@ public class PermissionPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?");
 			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void remove(long permissionId, String groupId) {
-			update(new Object[] { new Long(permissionId), groupId });
+		protected void remove(long permissionId, long groupId) {
+			update(new Object[] { new Long(permissionId), new Long(groupId) });
 		}
 	}
 

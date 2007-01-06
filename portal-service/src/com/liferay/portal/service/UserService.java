@@ -29,8 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public interface UserService {
-	public void addGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -77,7 +76,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public java.util.List getGroupUsers(java.lang.String groupId)
+	public java.util.List getGroupUsers(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -94,8 +93,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public boolean hasGroupUser(java.lang.String groupId,
-		java.lang.String userId)
+	public boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -103,8 +101,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void setGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -117,8 +114,7 @@ public interface UserService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

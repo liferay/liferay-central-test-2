@@ -37,8 +37,7 @@ import javax.ejb.SessionContext;
  *
  */
 public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
-	public void addGroupUserGroups(java.lang.String groupId,
-		java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -80,7 +79,7 @@ public class UserGroupServiceEJBImpl implements UserGroupService, SessionBean {
 		return UserGroupServiceFactory.getTxImpl().getUserUserGroups(userId);
 	}
 
-	public void unsetGroupUserGroups(java.lang.String groupId,
+	public void unsetGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

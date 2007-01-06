@@ -42,7 +42,7 @@ portletURL.setParameter("struts_action", "/communities/edit_community_assignment
 portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("groupId", group.getGroupId());
+portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 %>
 
 <script type="text/javascript">
@@ -76,7 +76,7 @@ portletURL.setParameter("groupId", group.getGroupId());
 <input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 <tr>
@@ -125,7 +125,7 @@ portletURL.setParameter("groupId", group.getGroupId());
 		Map userParams = new HashMap();
 
 		if (tabs2.equals("current")) {
-			userParams.put("usersGroups", group.getGroupId());
+			userParams.put("usersGroups", String.valueOf(group.getGroupId()));
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

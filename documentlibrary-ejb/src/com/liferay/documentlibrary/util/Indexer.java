@@ -44,7 +44,7 @@ import org.apache.commons.logging.LogFactory;
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, Long groupId,
 			String repositoryId, String fileName)
 		throws IOException {
 
@@ -90,7 +90,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, Long groupId,
 			String repositoryId, String fileName)
 		throws IOException {
 

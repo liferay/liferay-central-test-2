@@ -42,9 +42,6 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiNode.nodeId"),
 			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portlet.wiki.model.WikiNode.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiNode.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -91,19 +88,12 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -293,7 +283,7 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	}
 
 	private String _nodeId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

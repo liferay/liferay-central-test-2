@@ -36,7 +36,7 @@ List categoryIds = new ArrayList();
 
 categoryIds.add(categoryId);
 
-MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId, categoryId);
+MBCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), categoryId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -73,11 +73,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId, categoryId);
+		int total = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
 
 		searchContainer.setTotal(total);
 
-		List results = MBCategoryLocalServiceUtil.getCategories(portletGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -114,7 +114,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			sb.append("</a>");
 
-			List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId, curCategory.getCategoryId(), 0, 5);
+			List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 			if (subcategories.size() > 0) {
 				sb.append("<br>");
@@ -151,7 +151,7 @@ portletURL.setParameter("categoryId", categoryId);
 
 			subcategoryIds.add(curCategory.getCategoryId());
 
-			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId, curCategory.getCategoryId());
+			MBCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 
 			int categoriesCount = subcategoryIds.size() - 1;
 			int threadsCount = MBThreadLocalServiceUtil.getCategoriesThreadsCount(subcategoryIds);
@@ -398,11 +398,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId, groupThreadsUserId);
+		int total = MBThreadLocalServiceUtil.getGroupThreadsCount(portletGroupId.longValue(), groupThreadsUserId);
 
 		searchContainer.setTotal(total);
 
-		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId, groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = MBThreadLocalServiceUtil.getGroupThreads(portletGroupId.longValue(), groupThreadsUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 
@@ -513,9 +513,9 @@ portletURL.setParameter("categoryId", categoryId);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("general") %>'>
-				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId)) %><br>
-				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId)) %><br>
-				<%= LanguageUtil.get(pageContext, "num-of-participants") %>: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId)) %>
+				<%= LanguageUtil.get(pageContext, "num-of-categories") %>: <%= numberFormat.format(MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue())) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-posts") %>: <%= numberFormat.format(MBMessageLocalServiceUtil.getGroupMessagesCount(portletGroupId.longValue())) %><br>
+				<%= LanguageUtil.get(pageContext, "num-of-participants") %>: <%= numberFormat.format(MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue())) %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("top-posters") %>'>
 
@@ -529,11 +529,11 @@ portletURL.setParameter("categoryId", categoryId);
 
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId);
+				int total = MBStatsUserLocalServiceUtil.getStatsUsersCount(portletGroupId.longValue());
 
 				searchContainer.setTotal(total);
 
-				List results = MBStatsUserLocalServiceUtil.getStatsUsers(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+				List results = MBStatsUserLocalServiceUtil.getStatsUsers(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setResults(results);
 

@@ -128,8 +128,12 @@ public class JournalContentSearchLocalServiceImpl
 		}
 	}
 
+	public void deleteArticleContentSearches() throws SystemException {
+		JournalContentSearchUtil.removeAll();
+	}
+
 	public void deleteArticleContentSearches(
-			String companyId, String groupId, String articleId)
+			String companyId, long groupId, String articleId)
 		throws SystemException {
 
 		JournalContentSearchUtil.removeByC_G_A(companyId, groupId, articleId);
@@ -148,14 +152,18 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public List getArticleContentSearches(
-			String companyId, String groupId, String articleId)
+			String companyId, long groupId, String articleId)
 		throws SystemException {
 
 		return JournalContentSearchUtil.findByC_G_A(
 			companyId, groupId, articleId);
 	}
 
-	public List getLayoutIds(String ownerId, String groupId, String articleId)
+	public List getArticleContentSearches() throws SystemException {
+		return JournalContentSearchUtil.findAll();
+	}
+
+	public List getLayoutIds(String ownerId, long groupId, String articleId)
 		throws SystemException {
 
 		List layoutIds = new ArrayList();
@@ -174,7 +182,7 @@ public class JournalContentSearchLocalServiceImpl
 	}
 
 	public int getLayoutIdsCount(
-			String ownerId, String groupId, String articleId)
+			String ownerId, long groupId, String articleId)
 		throws SystemException {
 
 		return JournalContentSearchUtil.countByO_G_A(
@@ -183,7 +191,7 @@ public class JournalContentSearchLocalServiceImpl
 
 	public JournalContentSearch updateContentSearch(
 			String portletId, String layoutId, String ownerId, String companyId,
-			String groupId, String articleId)
+			long groupId, String articleId)
 		throws PortalException, SystemException {
 
 		JournalContentSearchPK pk = new JournalContentSearchPK(
@@ -208,7 +216,7 @@ public class JournalContentSearchLocalServiceImpl
 
 	public List updateContentSearch(
 			String portletId, String layoutId, String ownerId, String companyId,
-			String groupId, String[] articleIds)
+			long groupId, String[] articleIds)
 		throws PortalException, SystemException {
 
 		List contentSearches = new ArrayList();

@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -97,7 +98,7 @@ public class GroupServiceHttp {
 	}
 
 	public static void addRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] groupIds)
+		java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -110,7 +111,7 @@ public class GroupServiceHttp {
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
@@ -137,17 +138,11 @@ public class GroupServiceHttp {
 		}
 	}
 
-	public static void deleteGroup(HttpPrincipal httpPrincipal,
-		java.lang.String groupId)
+	public static void deleteGroup(HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"deleteGroup", new Object[] { paramObj0 });
 
@@ -173,16 +168,11 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group getGroup(
-		HttpPrincipal httpPrincipal, java.lang.String groupId)
+		HttpPrincipal httpPrincipal, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"getGroup", new Object[] { paramObj0 });
 			Object returnObj = null;
@@ -332,7 +322,7 @@ public class GroupServiceHttp {
 	}
 
 	public static boolean hasUserGroup(HttpPrincipal httpPrincipal,
-		java.lang.String userId, java.lang.String groupId)
+		java.lang.String userId, long groupId)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = userId;
@@ -341,12 +331,7 @@ public class GroupServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = groupId;
-
-			if (groupId == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj1 = new LongWrapper(groupId);
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
 					"hasUserGroup", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
@@ -371,7 +356,7 @@ public class GroupServiceHttp {
 	}
 
 	public static void setRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] groupIds)
+		java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -384,7 +369,7 @@ public class GroupServiceHttp {
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
@@ -412,7 +397,7 @@ public class GroupServiceHttp {
 	}
 
 	public static void unsetRoleGroups(HttpPrincipal httpPrincipal,
-		java.lang.String roleId, java.lang.String[] groupIds)
+		java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -425,7 +410,7 @@ public class GroupServiceHttp {
 			Object paramObj1 = groupIds;
 
 			if (groupIds == null) {
-				paramObj1 = new NullWrapper("[Ljava.lang.String;");
+				paramObj1 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(GroupServiceUtil.class.getName(),
@@ -453,18 +438,13 @@ public class GroupServiceHttp {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
-		java.lang.String name, java.lang.String description,
-		java.lang.String type, java.lang.String friendlyURL)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
+		java.lang.String description, java.lang.String type,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = name;
 
 			if (name == null) {

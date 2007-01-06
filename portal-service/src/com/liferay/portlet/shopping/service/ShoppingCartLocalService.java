@@ -29,7 +29,7 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public interface ShoppingCartLocalService {
-	public void deleteGroupCarts(java.lang.String groupId)
+	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteUserCarts(java.lang.String userId)
@@ -40,13 +40,13 @@ public interface ShoppingCartLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.Map getItems(java.lang.String groupId,
-		java.lang.String itemIds) throws com.liferay.portal.SystemException;
+	public java.util.Map getItems(long groupId, java.lang.String itemIds)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String cartId, java.lang.String itemIds,
-		java.lang.String couponIds, int altShipping, boolean insure)
+		java.lang.String userId, long groupId, java.lang.String cartId,
+		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
+		boolean insure)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -89,7 +89,7 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setParameter("struts_action", "/communities/edit_user_permissions");
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("groupId", group.getGroupId());
+portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
 portletURL.setParameter("editUserPermissions", String.valueOf(editUserPermissions));
@@ -103,7 +103,7 @@ breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
 breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
 breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("tabs2", tabs2);
-breadcrumbsURL.setParameter("groupId", group.getGroupId());
+breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
 
@@ -154,7 +154,7 @@ if (Validator.isNotNull(modelResource)) {
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />permissionsRedirect" type="hidden" value="">
 <input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>">
-<input name="<portlet:namespace />groupId" type="hidden" value='<%= group.getGroupId() %>'>
+<input name="<portlet:namespace />groupId" type="hidden" value='<%= String.valueOf(group.getGroupId()) %>'>
 <input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? String.valueOf(resource.getResourceId()) : "" %>'>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
@@ -388,7 +388,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				rowURL.setParameter("struts_action", "/communities/edit_user_permissions");
 				rowURL.setParameter("redirect", redirect);
-				rowURL.setParameter("groupId", group.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				rowURL.setParameter("portletResource", portletResource);
 				rowURL.setParameter("modelResource", curModelResource);
 
@@ -439,7 +439,7 @@ if (Validator.isNotNull(modelResource)) {
 
 			rowURL.setParameter("struts_action", "/communities/edit_user_permissions");
 			rowURL.setParameter("redirect", redirect);
-			rowURL.setParameter("groupId", group.getGroupId());
+			rowURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			rowURL.setParameter("portletResource", portlet.getPortletId());
 
 			// Name

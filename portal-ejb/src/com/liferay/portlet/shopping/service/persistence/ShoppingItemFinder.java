@@ -95,7 +95,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countByFeatured(String groupId, String[] categoryIds)
+	public static int countByFeatured(long groupId, String[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -167,7 +167,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static int countByKeywords(
-			String groupId, String[] categoryIds, String keywords)
+			long groupId, String[] categoryIds, String keywords)
 		throws SystemException {
 
 		Session session = null;
@@ -242,7 +242,7 @@ public class ShoppingItemFinder {
 		}
 	}
 
-	public static int countBySale(String groupId, String[] categoryIds)
+	public static int countBySale(long groupId, String[] categoryIds)
 		throws SystemException {
 
 		Session session = null;
@@ -314,7 +314,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByFeatured(
-			String groupId, String[] categoryIds, int numOfItems)
+			long groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countByFeatured = countByFeatured(groupId, categoryIds);
@@ -379,7 +379,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findByKeywords(
-			String groupId, String[] categoryIds, String keywords, int begin,
+			long groupId, String[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
 
@@ -446,7 +446,7 @@ public class ShoppingItemFinder {
 	}
 
 	public static List findBySale(
-			String groupId, String[] categoryIds, int numOfItems)
+			long groupId, String[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countBySale = countBySale(groupId, categoryIds);

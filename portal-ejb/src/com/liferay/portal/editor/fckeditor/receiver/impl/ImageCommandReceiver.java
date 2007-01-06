@@ -147,7 +147,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
-	private IGFolder _getFolder(String groupId, String folderName)
+	private IGFolder _getFolder(long groupId, String folderName)
 		throws Exception {
 
 		IGFolder folder = new IGFolderImpl();

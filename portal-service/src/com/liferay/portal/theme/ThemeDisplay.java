@@ -170,11 +170,11 @@ public class ThemeDisplay implements Serializable {
 		_layoutTypePortlet = layoutTypePortlet;
 	}
 
-	public String getPortletGroupId() {
+	public long getPortletGroupId() {
 		return _portletGroupId;
 	}
 
-	public void setPortletGroupId(String portletGroupId) {
+	public void setPortletGroupId(long portletGroupId) {
 		_portletGroupId = portletGroupId;
 	}
 
@@ -587,7 +587,7 @@ public class ThemeDisplay implements Serializable {
 		_layouts = null;
 		_plid = null;
 		_layoutTypePortlet = null;
-		_portletGroupId = null;
+		_portletGroupId = 0;
 		_signedIn = false;
 		_permissionChecker = null;
 		_locale = null;
@@ -649,7 +649,7 @@ public class ThemeDisplay implements Serializable {
 	private List _layouts;
 	private String _plid;
 	private LayoutTypePortlet _layoutTypePortlet;
-	private String _portletGroupId;
+	private long _portletGroupId;
 	private boolean _signedIn;
 	private PermissionChecker _permissionChecker;
 	private Locale _locale;

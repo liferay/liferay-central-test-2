@@ -37,7 +37,7 @@ import javax.ejb.SessionContext;
  */
 public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 	SessionBean {
-	public com.liferay.portal.model.Layout addLayout(java.lang.String groupId,
+	public com.liferay.portal.model.Layout addLayout(long groupId,
 		java.lang.String userId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,
 		java.lang.String title, java.lang.String type, boolean hidden,

@@ -535,6 +535,10 @@ public class StringUtil {
 		return (String[])nodeValues.toArray(new String[0]);
 	}
 
+	public static boolean[] split(String s, boolean x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
 	public static boolean[] split(String s, String delimiter, boolean x) {
 		String[] array = split(s, delimiter);
 		boolean[] newArray = new boolean[array.length];
@@ -552,6 +556,10 @@ public class StringUtil {
 		}
 
 		return newArray;
+	}
+
+	public static double[] split(String s, double x) {
+		return split(s, StringPool.COMMA, x);
 	}
 
 	public static double[] split(String s, String delimiter, double x) {
@@ -573,6 +581,10 @@ public class StringUtil {
 		return newArray;
 	}
 
+	public static float[] split(String s, float x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
 	public static float[] split(String s, String delimiter, float x) {
 		String[] array = split(s, delimiter);
 		float[] newArray = new float[array.length];
@@ -590,6 +602,10 @@ public class StringUtil {
 		}
 
 		return newArray;
+	}
+
+	public static int[] split(String s, int x) {
+		return split(s, StringPool.COMMA, x);
 	}
 
 	public static int[] split(String s, String delimiter, int x) {
@@ -611,6 +627,10 @@ public class StringUtil {
 		return newArray;
 	}
 
+	public static long[] split(String s, long x) {
+		return split(s, StringPool.COMMA, x);
+	}
+
 	public static long[] split(String s, String delimiter, long x) {
 		String[] array = split(s, delimiter);
 		long[] newArray = new long[array.length];
@@ -628,6 +648,10 @@ public class StringUtil {
 		}
 
 		return newArray;
+	}
+
+	public static short[] split(String s, short x) {
+		return split(s, StringPool.COMMA, x);
 	}
 
 	public static short[] split(String s, String delimiter, short x) {

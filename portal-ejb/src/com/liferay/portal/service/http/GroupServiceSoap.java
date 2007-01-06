@@ -51,8 +51,8 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void addRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds) throws RemoteException {
+	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
+		throws RemoteException {
 		try {
 			GroupServiceUtil.addRoleGroups(roleId, groupIds);
 		}
@@ -62,8 +62,7 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void deleteGroup(java.lang.String groupId)
-		throws RemoteException {
+	public static void deleteGroup(long groupId) throws RemoteException {
 		try {
 			GroupServiceUtil.deleteGroup(groupId);
 		}
@@ -73,8 +72,8 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupSoap getGroup(
-		java.lang.String groupId) throws RemoteException {
+	public static com.liferay.portal.model.GroupSoap getGroup(long groupId)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.getGroup(groupId);
 
@@ -127,8 +126,8 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId,
-		java.lang.String groupId) throws RemoteException {
+	public static boolean hasUserGroup(java.lang.String userId, long groupId)
+		throws RemoteException {
 		try {
 			boolean returnValue = GroupServiceUtil.hasUserGroup(userId, groupId);
 
@@ -140,8 +139,8 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void setRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds) throws RemoteException {
+	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
+		throws RemoteException {
 		try {
 			GroupServiceUtil.setRoleGroups(roleId, groupIds);
 		}
@@ -151,8 +150,8 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds) throws RemoteException {
+	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
+		throws RemoteException {
 		try {
 			GroupServiceUtil.unsetRoleGroups(roleId, groupIds);
 		}
@@ -162,10 +161,10 @@ public class GroupServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.GroupSoap updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL) throws RemoteException {
+	public static com.liferay.portal.model.GroupSoap updateGroup(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
+		throws RemoteException {
 		try {
 			com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 					name, description, type, friendlyURL);

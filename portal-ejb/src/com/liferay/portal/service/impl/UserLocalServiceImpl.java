@@ -130,7 +130,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserLocalServiceImpl implements UserLocalService {
 
-	public void addGroupUsers(String groupId, String[] userIds)
+	public void addGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addUsers(groupId, userIds);
@@ -275,7 +275,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 
 		ResourceLocalServiceUtil.addResources(
-			companyId, null, creatorUserId, User.class.getName(),
+			companyId, 0, creatorUserId, User.class.getName(),
 			user.getPrimaryKey().toString(), false, false, false);
 
 		// Mail
@@ -599,14 +599,14 @@ public class UserLocalServiceImpl implements UserLocalService {
 		return UserUtil.findByPrimaryKey(UserImpl.getDefaultUserId(companyId));
 	}
 
-	public List getGroupUsers(String groupId)
+	public List getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.getUsers(groupId);
 	}
 
 	public List getPermissionUsers(
-			String companyId, String groupId, String name, String primKey,
+			String companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
 			int begin, int end)
@@ -629,7 +629,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 	}
 
 	public int getPermissionUsersCount(
-			String companyId, String groupId, String name, String primKey,
+			String companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator)
 		throws PortalException, SystemException {
@@ -691,7 +691,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		return user.getUserId();
 	}
 
-	public boolean hasGroupUser(String groupId, String userId)
+	public boolean hasGroupUser(long groupId, String userId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.containsUser(groupId, userId);
@@ -849,7 +849,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		}
 	}
 
-	public void setGroupUsers(String groupId, String[] userIds)
+	public void setGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.setUsers(groupId, userIds);
@@ -867,7 +867,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 		UserGroupUtil.setUsers(userGroupId, userIds);
 	}
 
-	public void unsetGroupUsers(String groupId, String[] userIds)
+	public void unsetGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeUsers(groupId, userIds);

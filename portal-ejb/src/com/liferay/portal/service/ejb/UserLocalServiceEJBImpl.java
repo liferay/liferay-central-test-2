@@ -36,8 +36,7 @@ import javax.ejb.SessionContext;
  *
  */
 public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
-	public void addGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().addGroupUsers(groupId, userIds);
@@ -158,18 +157,17 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 		return UserLocalServiceFactory.getTxImpl().getDefaultUser(companyId);
 	}
 
-	public java.util.List getGroupUsers(java.lang.String groupId)
+	public java.util.List getGroupUsers(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getGroupUsers(groupId);
 	}
 
 	public java.util.List getPermissionUsers(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator, int begin, int end)
+		long groupId, java.lang.String name, java.lang.String primKey,
+		java.lang.String actionId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String emailAddress, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getPermissionUsers(companyId,
@@ -178,11 +176,10 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	}
 
 	public int getPermissionUsersCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator)
+		long groupId, java.lang.String name, java.lang.String primKey,
+		java.lang.String actionId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().getPermissionUsersCount(companyId,
@@ -225,8 +222,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			emailAddress);
 	}
 
-	public boolean hasGroupUser(java.lang.String groupId,
-		java.lang.String userId)
+	public boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().hasGroupUser(groupId, userId);
@@ -276,8 +272,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			emailAddress, remoteAddr, remoteHost, userAgent);
 	}
 
-	public void setGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().setGroupUsers(groupId, userIds);
@@ -297,8 +292,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 			userIds);
 	}
 
-	public void unsetGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalServiceFactory.getTxImpl().unsetGroupUsers(groupId, userIds);

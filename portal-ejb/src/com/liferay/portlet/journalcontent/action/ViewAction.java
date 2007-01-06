@@ -28,6 +28,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
+import com.liferay.util.GetterUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -58,7 +59,8 @@ public class ViewAction extends PortletAction {
 
 		String companyId = themeDisplay.getCompanyId();
 
-		String groupId = prefs.getValue("group-id", StringPool.BLANK);
+		long groupId =
+			GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
 		String[] articleIds = prefs.getValues("article-id", new String[0]);
 
 		String languageId = LanguageUtil.getLanguageId(req);

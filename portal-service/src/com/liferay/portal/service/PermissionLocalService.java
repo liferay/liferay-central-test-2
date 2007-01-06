@@ -47,12 +47,12 @@ public interface PermissionLocalService {
 	public java.util.List getActions(java.util.List permissions)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupPermissions(java.lang.String groupId,
-		long resourceId) throws com.liferay.portal.SystemException;
+	public java.util.List getGroupPermissions(long groupId, long resourceId)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getOrgGroupPermissions(
-		java.lang.String organizationId, java.lang.String groupId,
-		long resourceId) throws com.liferay.portal.SystemException;
+		java.lang.String organizationId, long groupId, long resourceId)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List getPermissions(java.lang.String companyId,
 		java.lang.String[] actionIds, long resourceId)
@@ -62,8 +62,8 @@ public interface PermissionLocalService {
 	public java.util.List getUserPermissions(java.lang.String userId,
 		long resourceId) throws com.liferay.portal.SystemException;
 
-	public boolean hasGroupPermission(java.lang.String groupId,
-		java.lang.String actionId, long resourceId)
+	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -86,9 +86,8 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserPermissions(java.lang.String userId,
-		java.lang.String groupId, java.lang.String actionId,
-		long[] resourceIds,
+	public boolean hasUserPermissions(java.lang.String userId, long groupId,
+		java.lang.String actionId, long[] resourceIds,
 		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -97,19 +96,19 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void setGroupPermissions(java.lang.String groupId,
-		java.lang.String[] actionIds, long resourceId)
+	public void setGroupPermissions(long groupId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void setGroupPermissions(java.lang.String className,
-		java.lang.String classPK, java.lang.String groupId,
-		java.lang.String[] actionIds, long resourceId)
+		java.lang.String classPK, long groupId, java.lang.String[] actionIds,
+		long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public void setOrgGroupPermissions(java.lang.String organizationId,
-		java.lang.String groupId, java.lang.String[] actionIds, long resourceId)
+		long groupId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

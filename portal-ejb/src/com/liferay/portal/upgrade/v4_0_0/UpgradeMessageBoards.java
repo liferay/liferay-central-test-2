@@ -139,12 +139,12 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_1);
 
-			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
+			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				String groupId = rs.getString("groupId");
+				long groupId = rs.getLong("groupId");
 				String userId = rs.getString("userId");
 
 				String plid = LayoutImpl.PUBLIC + groupId + ".1";
@@ -175,7 +175,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 	}
 
 	private void _upgradeCategory(
-			String groupId, String userId, String categoryId)
+			long groupId, String userId, String categoryId)
 		throws Exception {
 
 		Connection con = null;
@@ -187,7 +187,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_CATEGORY_2);
 
-			ps.setString(1, groupId);
+			ps.setLong(1, groupId);
 
 			rs = ps.executeQuery();
 
@@ -271,7 +271,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		throws Exception {
 
 		String portletId = CompanyImpl.SYSTEM;
-		String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = "/messageboards/" + topicId + "/" + messageId;
 

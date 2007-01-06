@@ -44,14 +44,14 @@ public class CalEventLocalUtil {
 
 	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
 
-	protected static void clearEventsPool(String key) {
-		key = _encodeKey(key);
+	protected static void clearEventsPool(long groupId) {
+		String key = _encodeKey(groupId);
 
 		_cache.flushEntry(key);
 	}
 
-	protected static Map getEventsPool(String key) {
-		key = _encodeKey(key);
+	protected static Map getEventsPool(long groupId) {
+		String key = _encodeKey(groupId);
 
 		Map eventsPool = null;
 
@@ -72,8 +72,8 @@ public class CalEventLocalUtil {
 		return eventsPool;
 	}
 
-	private static String _encodeKey(String key) {
-		return GROUP_NAME + StringPool.POUND + key;
+	private static String _encodeKey(long groupId) {
+		return GROUP_NAME + StringPool.POUND + groupId;
 	}
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();

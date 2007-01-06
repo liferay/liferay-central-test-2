@@ -99,7 +99,7 @@ public class PollsQuestionLocalServiceImpl
 		// Question
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		Date expirationDate = null;
@@ -235,7 +235,7 @@ public class PollsQuestionLocalServiceImpl
 		PollsQuestionUtil.remove(question.getQuestionId());
 	}
 
-	public void deleteQuestions(String groupId)
+	public void deleteQuestions(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = PollsQuestionUtil.findByGroupId(groupId).iterator();
@@ -253,17 +253,17 @@ public class PollsQuestionLocalServiceImpl
 		return PollsQuestionUtil.findByPrimaryKey(questionId);
 	}
 
-	public List getQuestions(String groupId) throws SystemException {
+	public List getQuestions(long groupId) throws SystemException {
 		return PollsQuestionUtil.findByGroupId(groupId);
 	}
 
-	public List getQuestions(String groupId, int begin, int end)
+	public List getQuestions(long groupId, int begin, int end)
 		throws SystemException {
 
 		return PollsQuestionUtil.findByGroupId(groupId, begin, end);
 	}
 
-	public int getQuestionsCount(String groupId) throws SystemException {
+	public int getQuestionsCount(long groupId) throws SystemException {
 		return PollsQuestionUtil.countByGroupId(groupId);
 	}
 

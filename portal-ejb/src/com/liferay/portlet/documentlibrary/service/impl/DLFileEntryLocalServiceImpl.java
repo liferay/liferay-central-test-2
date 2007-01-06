@@ -425,14 +425,14 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		return DLFileEntryFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupFileEntries(String groupId, int begin, int end)
+	public List getGroupFileEntries(long groupId, int begin, int end)
 		throws SystemException {
 
 		return DLFileEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupFileEntries(
-			String groupId, String userId, int begin, int end)
+			long groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -443,11 +443,11 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		}
 	}
 
-	public int getGroupFileEntriesCount(String groupId) throws SystemException {
+	public int getGroupFileEntriesCount(long groupId) throws SystemException {
 		return DLFileEntryFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupFileEntriesCount(String groupId, String userId)
+	public int getGroupFileEntriesCount(long groupId, String userId)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -487,7 +487,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		if (Validator.isNotNull(newFolderId) && !folderId.equals(newFolderId)) {
 			DLFolder newFolder = DLFolderUtil.findByPrimaryKey(newFolderId);
 
-			if (!folder.getGroupId().equals(newFolder.getGroupId())) {
+			if (folder.getGroupId() != newFolder.getGroupId()) {
 				throw new NoSuchFolderException();
 			}
 

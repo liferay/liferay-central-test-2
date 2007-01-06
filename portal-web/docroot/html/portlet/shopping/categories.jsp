@@ -29,7 +29,7 @@ String categoryId = BeanParamUtil.getString(category, request, "categoryId", Sho
 
 List categoryIds = new ArrayList();
 
-ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId, categoryId);
+ShoppingCategoryLocalServiceUtil.getSubcategoryIds(categoryIds, portletGroupId.longValue(), categoryId);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -60,11 +60,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, "cur1", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(portletGroupId, categoryId);
+int total = ShoppingCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), categoryId);
 
 searchContainer.setTotal(total);
 
-List results = ShoppingCategoryLocalServiceUtil.getCategories(portletGroupId, categoryId, searchContainer.getStart(), searchContainer.getEnd());
+List results = ShoppingCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), categoryId, searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 
@@ -103,7 +103,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	subcategoryIds.add(curCategory.getCategoryId());
 
-	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId, curCategory.getCategoryId());
+	ShoppingCategoryLocalServiceUtil.getSubcategoryIds(subcategoryIds, portletGroupId.longValue(), curCategory.getCategoryId());
 
 	int categoriesCount = subcategoryIds.size() - 1;
 	int itemsCount = ShoppingItemLocalServiceUtil.getCategoriesItemsCount(subcategoryIds);

@@ -8,7 +8,7 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="articleId" type="String" primary="true" />
 		<column name="version" type="double" primary="true" />
 
@@ -90,10 +90,13 @@
 		<!-- Audit fields -->
 
 		<column name="companyId" type="String" />
-		<column name="groupId" type="String" />
+		<column name="groupId" type="long" />
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="OwnerId" return-type="Collection">
 			<finder-column name="ownerId" />
 		</finder>
@@ -117,7 +120,7 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="structureId" type="String" primary="true" />
 
 		<!-- Audit fields -->
@@ -154,7 +157,7 @@
 		<!-- PK fields -->
 
 		<column name="companyId" type="String" primary="true" />
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="templateId" type="String" primary="true" />
 
 		<!-- Audit fields -->

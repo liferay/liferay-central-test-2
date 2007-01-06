@@ -46,16 +46,16 @@ portletURL.setParameter("categoryId", categoryId);
 <c:choose>
 	<c:when test='<%= tabs1.equals("entries") %>'>
 		<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/blogs/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= layout.getGroupId() %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(layout.getGroupId()) %>">
 
 		<%
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId);
+		int total = BlogsEntryLocalServiceUtil.getGroupEntriesCount(portletGroupId.longValue());
 
 		searchContainer.setTotal(total);
 
-		List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+		List results = BlogsEntryLocalServiceUtil.getGroupEntries(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
 		%>

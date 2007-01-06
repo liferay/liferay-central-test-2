@@ -35,11 +35,10 @@ import java.rmi.RemoteException;
  *
  */
 public class LayoutServiceSoap {
-	public static com.liferay.portal.model.LayoutSoap addLayout(
-		java.lang.String groupId, boolean privateLayout,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL) throws RemoteException {
+	public static com.liferay.portal.model.LayoutSoap addLayout(long groupId,
+		boolean privateLayout, java.lang.String parentLayoutId,
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL) throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.addLayout(groupId,
 					privateLayout, parentLayoutId, name, title, type, hidden,

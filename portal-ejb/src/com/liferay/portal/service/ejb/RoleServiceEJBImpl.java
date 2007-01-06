@@ -53,7 +53,7 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 	}
 
 	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, java.lang.String groupId)
+		java.lang.String companyId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

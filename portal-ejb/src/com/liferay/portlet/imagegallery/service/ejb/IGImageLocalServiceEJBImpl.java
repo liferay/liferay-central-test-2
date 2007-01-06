@@ -139,26 +139,25 @@ public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 		return IGImageLocalServiceFactory.getTxImpl().getFoldersImagesCount(folderIds);
 	}
 
-	public java.util.List getGroupImages(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupImages(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getGroupImages(groupId,
 			begin, end);
 	}
 
-	public java.util.List getGroupImages(java.lang.String groupId,
-		java.lang.String userId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getGroupImages(long groupId, java.lang.String userId,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getGroupImages(groupId,
 			userId, begin, end);
 	}
 
-	public int getGroupImagesCount(java.lang.String groupId)
+	public int getGroupImagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getGroupImagesCount(groupId);
 	}
 
-	public int getGroupImagesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public int getGroupImagesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return IGImageLocalServiceFactory.getTxImpl().getGroupImagesCount(groupId,
 			userId);
 	}

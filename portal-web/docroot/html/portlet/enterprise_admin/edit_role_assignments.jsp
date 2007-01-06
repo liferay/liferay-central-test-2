@@ -216,7 +216,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		for (int i = 0; i < results.size(); i++) {
 			Group group = (Group)results.get(i);
 
-			ResultRow row = new ResultRow(group, group.getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(group, String.valueOf(group.getPrimaryKey()), i);
 
 			// Name
 
@@ -303,7 +303,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		for (int i = 0; i < results.size(); i++) {
 			Organization organization = (Organization)results.get(i);
 
-			ResultRow row = new ResultRow(organization, organization.getGroup().getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(organization, String.valueOf(organization.getGroup().getPrimaryKey()), i);
 
 			// Name
 
@@ -384,7 +384,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		for (int i = 0; i < results.size(); i++) {
 			UserGroup userGroup = (UserGroup)results.get(i);
 
-			ResultRow row = new ResultRow(userGroup, userGroup.getGroup().getPrimaryKey().toString(), i);
+			ResultRow row = new ResultRow(userGroup, String.valueOf(userGroup.getGroup().getPrimaryKey()), i);
 
 			// Name
 

@@ -75,8 +75,8 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteTemplate(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+	public void deleteTemplate(java.lang.String companyId, long groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -85,8 +85,7 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String templateId)
+		java.lang.String companyId, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -96,7 +95,7 @@ public class JournalTemplateServiceEJBImpl implements JournalTemplateService,
 	}
 
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String groupId, java.lang.String templateId,
+		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean smallImage,

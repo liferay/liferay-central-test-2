@@ -81,7 +81,7 @@ public class SRFrameworkVersionLocalServiceImpl
 		// Framework version
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		long frameworkVersionId = CounterLocalServiceUtil.increment(
@@ -180,26 +180,26 @@ public class SRFrameworkVersionLocalServiceImpl
 		return SRFrameworkVersionUtil.findByPrimaryKey(frameworkVersionId);
 	}
 
-	public List getFrameworkVersions(String groupId, int begin, int end)
+	public List getFrameworkVersions(long groupId, int begin, int end)
 		throws SystemException {
 
 		return SRFrameworkVersionUtil.findByGroupId(groupId, begin, end);
 	}
 
 	public List getFrameworkVersions(
-			String groupId, boolean active, int begin, int end)
+			long groupId, boolean active, int begin, int end)
 		throws SystemException {
 
 		return SRFrameworkVersionUtil.findByG_A(groupId, active, begin, end);
 	}
 
-	public int getFrameworkVersionsCount(String groupId)
+	public int getFrameworkVersionsCount(long groupId)
 		throws SystemException {
 
 		return SRFrameworkVersionUtil.countByGroupId(groupId);
 	}
 
-	public int getFrameworkVersionsCount(String groupId, boolean active)
+	public int getFrameworkVersionsCount(long groupId, boolean active)
 		throws SystemException {
 
 		return SRFrameworkVersionUtil.countByG_A(groupId, active);

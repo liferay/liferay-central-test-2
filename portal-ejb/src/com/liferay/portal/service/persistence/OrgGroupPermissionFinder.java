@@ -47,7 +47,7 @@ public class OrgGroupPermissionFinder {
 		OrgGroupPermissionFinder.class.getName() + ".findByO_G_R";
 
 	public static void removeByO_G_R(
-			String organizatonId, String groupId, long resourceId)
+			String organizatonId, long groupId, long resourceId)
 		throws NoSuchOrgGroupPermissionException, SystemException {
 
 		Session session = null;

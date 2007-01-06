@@ -65,7 +65,7 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 	<%
 	CouponSearchTerms searchTerms = (CouponSearchTerms)searchContainer.getSearchTerms();
 
-	int total = ShoppingCouponLocalServiceUtil.searchCount(searchTerms.getCouponId(), portletGroupId, company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
+	int total = ShoppingCouponLocalServiceUtil.searchCount(searchTerms.getCouponId(), portletGroupId.longValue(), company.getCompanyId(), searchTerms.isActive(), searchTerms.getDiscountType(), searchTerms.isAndOperator());
 
 	searchContainer.setTotal(total);
 

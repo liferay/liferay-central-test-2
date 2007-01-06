@@ -42,11 +42,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = WikiNodeLocalServiceUtil.getNodesCount(portletGroupId);
+int total = WikiNodeLocalServiceUtil.getNodesCount(portletGroupId.longValue());
 
 searchContainer.setTotal(total);
 
-List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+List results = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

@@ -34,14 +34,13 @@ import java.io.Serializable;
  */
 public class JournalStructurePK implements Comparable, Serializable {
 	public String companyId;
-	public String groupId;
+	public long groupId;
 	public String structureId;
 
 	public JournalStructurePK() {
 	}
 
-	public JournalStructurePK(String companyId, String groupId,
-		String structureId) {
+	public JournalStructurePK(String companyId, long groupId, String structureId) {
 		this.companyId = companyId;
 		this.groupId = groupId;
 		this.structureId = structureId;
@@ -55,11 +54,11 @@ public class JournalStructurePK implements Comparable, Serializable {
 		this.companyId = companyId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -84,7 +83,15 @@ public class JournalStructurePK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = groupId.compareTo(pk.groupId);
+		if (groupId < pk.groupId) {
+			value = -1;
+		}
+		else if (groupId > pk.groupId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -113,7 +120,7 @@ public class JournalStructurePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((companyId.equals(pk.companyId)) && (groupId.equals(pk.groupId)) &&
+		if ((companyId.equals(pk.companyId)) && (groupId == pk.groupId) &&
 				(structureId.equals(pk.structureId))) {
 			return true;
 		}

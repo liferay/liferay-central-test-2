@@ -42,6 +42,7 @@ import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -103,10 +104,10 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
-			String articleGroupId = prefs.getValue(
-				"group-id", null);
+			long articleGroupId = GetterUtil.getLong(prefs.getValue(
+				"group-id", StringPool.BLANK));
 
-			if (articleGroupId == null) {
+			if (articleGroupId <= 0) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No group id found in preferences of portlet " +
@@ -136,7 +137,7 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
-			if (article.getGroupId().equals(context.getGroupId()) &&
+			if ((article.getGroupId() == context.getGroupId()) &&
 				!context.checkPrimaryKey(
 					JournalArticle.class, article.getPrimaryKey())) {
 
@@ -220,7 +221,7 @@ public class JournalContentPortletDataHandlerImpl
 			// Update the group-id in the display content to reference this
 			// group, since the article is now in this group.
 
-			prefs.setValue("group-id", context.getGroupId());
+			prefs.setValue("group-id", String.valueOf(context.getGroupId()));
 
 			return prefs;
 		}

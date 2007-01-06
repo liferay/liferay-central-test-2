@@ -160,7 +160,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		}
 	}
 
-	private DLFolder _getFolder(String groupId, String folderName)
+	private DLFolder _getFolder(long groupId, String folderName)
 		throws Exception {
 
 		DLFolder folder = new DLFolderImpl();

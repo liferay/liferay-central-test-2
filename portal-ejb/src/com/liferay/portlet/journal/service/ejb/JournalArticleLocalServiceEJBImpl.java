@@ -123,9 +123,9 @@ public class JournalArticleLocalServiceEJBImpl
 			guestPermissions);
 	}
 
-	public void addArticleResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public void addArticleResources(java.lang.String companyId, long groupId,
+		java.lang.String articleId, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalServiceFactory.getTxImpl().addArticleResources(companyId,
@@ -141,9 +141,8 @@ public class JournalArticleLocalServiceEJBImpl
 			addCommunityPermissions, addGuestPermissions);
 	}
 
-	public void addArticleResources(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.String[] communityPermissions,
+	public void addArticleResources(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -162,9 +161,9 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle approveArticle(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String articleId, double version,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String userId, long groupId, java.lang.String articleId,
+		double version, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().approveArticle(userId,
@@ -177,16 +176,16 @@ public class JournalArticleLocalServiceEJBImpl
 		JournalArticleLocalServiceFactory.getTxImpl().checkArticles();
 	}
 
-	public void checkNewLine(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version)
+	public void checkNewLine(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalServiceFactory.getTxImpl().checkNewLine(companyId,
 			groupId, articleId, version);
 	}
 
-	public void deleteArticle(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+	public void deleteArticle(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -203,14 +202,14 @@ public class JournalArticleLocalServiceEJBImpl
 			articleURL, prefs);
 	}
 
-	public void deleteArticles(java.lang.String groupId)
+	public void deleteArticles(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		JournalArticleLocalServiceFactory.getTxImpl().deleteArticles(groupId);
 	}
 
-	public void expireArticle(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+	public void expireArticle(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -228,8 +227,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticle(companyId,
@@ -237,8 +235,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticle(companyId,
@@ -246,8 +244,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.String languageId,
+		long groupId, java.lang.String articleId, java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -256,7 +253,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.lang.String getArticleContent(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version,
+		long groupId, java.lang.String articleId, double version,
 		java.lang.String languageId,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException, 
@@ -270,32 +267,31 @@ public class JournalArticleLocalServiceEJBImpl
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles();
 	}
 
-	public java.util.List getArticles(java.lang.String groupId)
+	public java.util.List getArticles(long groupId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles(groupId);
 	}
 
-	public java.util.List getArticles(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getArticles(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles(groupId,
 			begin, end);
 	}
 
-	public java.util.List getArticles(java.lang.String groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List getArticles(long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticles(groupId,
 			begin, end, obc);
 	}
 
-	public int getArticlesCount(java.lang.String groupId)
+	public int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getArticlesCount(groupId);
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getDisplayArticle(companyId,
@@ -303,8 +299,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId)
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getLatestArticle(companyId,
@@ -312,16 +307,16 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle getLatestArticle(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, java.lang.Boolean approved)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		java.lang.Boolean approved)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getLatestArticle(companyId,
 			groupId, articleId, approved);
 	}
 
-	public double getLatestVersion(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId)
+	public double getLatestVersion(java.lang.String companyId, long groupId,
+		java.lang.String articleId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().getLatestVersion(companyId,
@@ -329,7 +324,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List getStructureArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getStructureArticles(companyId,
@@ -337,8 +332,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List getStructureArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, java.lang.String structureId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getStructureArticles(companyId,
@@ -346,7 +341,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public int getStructureArticlesCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String structureId)
+		long groupId, java.lang.String structureId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getStructureArticlesCount(companyId,
@@ -354,7 +349,7 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List getTemplateArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getTemplateArticles(companyId,
@@ -362,8 +357,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public java.util.List getTemplateArticles(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		long groupId, java.lang.String templateId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getTemplateArticles(companyId,
@@ -371,15 +366,15 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public int getTemplateArticlesCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
 												.getTemplateArticlesCount(companyId,
 			groupId, templateId);
 	}
 
-	public boolean isLatestVersion(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId, double version)
+	public boolean isLatestVersion(java.lang.String companyId, long groupId,
+		java.lang.String articleId, double version)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().isLatestVersion(companyId,
@@ -392,8 +387,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle removeArticleLocale(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version, java.lang.String languageId)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version, java.lang.String languageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl()
@@ -402,32 +397,30 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type)
-		throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type) throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, title, description, content, type);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String sortField) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String sortField)
+		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, title, description, content, type, sortField);
 	}
 
-	public java.util.List search(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator, int begin, int end,
+	public java.util.List search(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().search(companyId,
@@ -436,15 +429,15 @@ public class JournalArticleLocalServiceEJBImpl
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public int searchCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String articleId,
-		java.lang.Double version, java.lang.String title,
-		java.lang.String description, java.lang.String content,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate,
-		boolean andOperator) throws com.liferay.portal.SystemException {
+	public int searchCount(java.lang.String companyId, long groupId,
+		java.lang.String articleId, java.lang.Double version,
+		java.lang.String title, java.lang.String description,
+		java.lang.String content, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, boolean andOperator)
+		throws com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().searchCount(companyId,
 			groupId, articleId, version, title, description, content, type,
 			structureId, templateId, displayDateGT, displayDateLT, approved,
@@ -452,18 +445,18 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateArticle(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String articleId, double version, boolean incrementVersion,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String structureId, java.lang.String templateId,
-		int displayDateMonth, int displayDateDay, int displayDateYear,
-		int displayDateHour, int displayDateMinute, int expirationDateMonth,
-		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, int reviewDateMonth,
-		int reviewDateDay, int reviewDateYear, int reviewDateHour,
-		int reviewDateMinute, boolean neverReview, java.util.Map images,
-		java.lang.String articleURL, javax.portlet.PortletPreferences prefs)
+		java.lang.String userId, long groupId, java.lang.String articleId,
+		double version, boolean incrementVersion, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
+		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
+		int reviewDateHour, int reviewDateMinute, boolean neverReview,
+		java.util.Map images, java.lang.String articleURL,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().updateArticle(userId,
@@ -478,8 +471,8 @@ public class JournalArticleLocalServiceEJBImpl
 	}
 
 	public com.liferay.portlet.journal.model.JournalArticle updateContent(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String articleId, double version, java.lang.String content)
+		java.lang.String companyId, long groupId, java.lang.String articleId,
+		double version, java.lang.String content)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return JournalArticleLocalServiceFactory.getTxImpl().updateContent(companyId,

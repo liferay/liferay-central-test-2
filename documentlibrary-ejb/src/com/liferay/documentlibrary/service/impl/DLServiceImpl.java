@@ -147,7 +147,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void addFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, byte[] byteArray)
 		throws PortalException, SystemException {
 
@@ -232,7 +232,8 @@ public class DLServiceImpl implements DLService {
 					version.getName(), Double.toString(DEFAULT_VERSION), false);
 
 				Indexer.addFile(
-					companyId, portletId, groupId, repositoryId, fileName);
+					companyId, portletId, new Long(groupId), repositoryId,
+					fileName);
 			}
 		}
 		catch (IOException ioe) {
@@ -479,7 +480,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, double versionNumber,
 			String sourceFileName, byte[] byteArray)
 		throws PortalException, SystemException {
@@ -546,7 +547,8 @@ public class DLServiceImpl implements DLService {
 				version.getName(), versionLabel, false);
 
 			Indexer.updateFile(
-				companyId, portletId, groupId, repositoryId, fileName);
+				companyId, portletId, new Long(groupId), repositoryId,
+				fileName);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -565,7 +567,7 @@ public class DLServiceImpl implements DLService {
 	}
 
 	public void updateFile(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String repositoryId, String newRepositoryId, String fileName)
 		throws PortalException, SystemException {
 
@@ -639,7 +641,8 @@ public class DLServiceImpl implements DLService {
 				}
 
 				Indexer.addFile(
-					companyId, portletId, groupId, newRepositoryId, fileName);
+					companyId, portletId, new Long(groupId), newRepositoryId,
+					fileName);
 			}
 		}
 		catch (IOException ioe) {

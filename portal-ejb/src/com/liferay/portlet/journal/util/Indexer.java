@@ -54,7 +54,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.JOURNAL;
 
 	public static void addArticle(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate)
 		throws IOException {
@@ -120,7 +120,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updateArticle(
-			String companyId, String groupId, String articleId, double version,
+			String companyId, long groupId, String articleId, double version,
 			String title, String description, String content, String type,
 			Date displayDate)
 		throws IOException {

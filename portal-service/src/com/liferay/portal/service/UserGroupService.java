@@ -29,8 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public interface UserGroupService {
-	public void addGroupUserGroups(java.lang.String groupId,
-		java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -52,7 +51,7 @@ public interface UserGroupService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void unsetGroupUserGroups(java.lang.String groupId,
+	public void unsetGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

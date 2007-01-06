@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -96,12 +97,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			boolean returnValue = false;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = true;
@@ -142,12 +143,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			boolean returnValue = false;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = true;
@@ -188,12 +189,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			boolean returnValue = false;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = false;
@@ -230,7 +231,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			addFolder(companyId, groupId, uri);
@@ -262,7 +263,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			addResource(
@@ -286,12 +287,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			Date returnValue = null;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = new Date();
@@ -323,12 +324,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			Date returnValue = null;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = new Date();
@@ -360,10 +361,10 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
-			if ((companyId != null) && (groupId == null)) {
+			if ((companyId != null) && (groupId <= 0)) {
 				Map groupParams = new HashMap();
 
 				groupParams.put("usersGroups", getUserId());
@@ -382,7 +383,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 
 				return childrenNames;
 			}
-			else if ((companyId != null) && (groupId != null)) {
+			else if ((companyId != null) && (groupId > 0)) {
 				return getObjects(companyId, groupId, uri);
 			}
 			else {
@@ -408,10 +409,10 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				return new ByteArrayInputStream(new byte[0]);
@@ -437,12 +438,12 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			long returnValue = 0;
 
-			if ((companyId == null) || (groupId == null) ||
+			if ((companyId == null) || (groupId <= 0) ||
 				(uri.equals(StringPool.SLASH))) {
 
 				returnValue = 0;
@@ -474,7 +475,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			String[] uriValues = getURIValues(uri);
 
 			String companyId = uriValues[0];
-			String groupId = uriValues[1];
+			long groupId = GetterUtil.getLong(uriValues[1]);
 			uri = uriValues[2];
 
 			deleteObject(companyId, groupId, uri);
@@ -492,7 +493,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 		//return _principal.getName();
 	}
 
-	protected String getPlid(String groupId) {
+	protected String getPlid(long groupId) {
 		return LayoutImpl.PUBLIC + groupId + ".1";
 	}
 
@@ -526,7 +527,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 		}
 
 		String companyId = null;
-		String groupId = null;
+		long groupId = 0;
 
 		if (!uri.equals(StringPool.SLASH)) {
 			pos = uri.indexOf(StringPool.SLASH, 1);
@@ -550,51 +551,51 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 		}
 
 		uriValues[0] = companyId;
-		uriValues[1] = groupId;
+		uriValues[1] = String.valueOf(groupId);
 		uriValues[2] = uri;
 
 		return uriValues;
 	}
 
 	protected abstract void addFolder(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract void addResource(
-			String companyId, String groupId, String uri, InputStream content,
+			String companyId, long groupId, String uri, InputStream content,
 			String contentType, String characterEncoding)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract void deleteObject(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract Date getCreateDate(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract Date getModifiedDate(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract String[] getObjects(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract InputStream getResource(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract long getResourceSize(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract boolean isAvailable(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	protected abstract boolean isFolder(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException;
 
 	private static Log _log = LogFactory.getLog(AbstractWebDAVStorage.class);

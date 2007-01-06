@@ -46,7 +46,7 @@ public interface JournalCreationStrategy {
 	 * @return		the author's user id, or null to use the original author
 	 */
 	public String getAuthorUserId(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -61,7 +61,7 @@ public interface JournalCreationStrategy {
 	 *				<code>getAuthorUserId()</code> does not return null
 	 */
 	public String getAuthorUserName(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -76,7 +76,7 @@ public interface JournalCreationStrategy {
 	 *				approved
 	 */
 	public String getApprovalUserId(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -91,7 +91,7 @@ public interface JournalCreationStrategy {
 	 *				<code>getApprovalUserId()</code> does not return null
 	 */
 	public String getApprovalUserName(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -106,7 +106,7 @@ public interface JournalCreationStrategy {
 	 *				specified journalObj
 	 */
 	public boolean addCommunityPermissions(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 	/**
@@ -121,7 +121,7 @@ public interface JournalCreationStrategy {
 	 *				specified journalObj
 	 */
 	public boolean addGuestPermissions(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception;
 
 }

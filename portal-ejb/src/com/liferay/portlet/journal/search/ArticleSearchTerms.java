@@ -41,7 +41,7 @@ public class ArticleSearchTerms extends ArticleDisplayTerms {
 	public ArticleSearchTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getString(
+		groupId = ParamUtil.getLong(
 			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
 		articleId = DAOParamUtil.getLike(req, ARTICLE_ID);
 		version = ParamUtil.getDouble(req, VERSION);

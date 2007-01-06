@@ -257,7 +257,7 @@
 
 		<!-- PK fields -->
 
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -267,7 +267,7 @@
 
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
-		<column name="parentGroupId" type="String" />
+		<column name="parentGroupId" type="long" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="type" type="String" />
@@ -399,7 +399,7 @@
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="String" />
+		<column name="groupId" type="long" />
 		<column name="userId" type="String" />
 		<column name="privateLayout" type="boolean" />
 		<column name="themeId" type="String" />
@@ -409,6 +409,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="C_V" return-type="LayoutSet">
 			<finder-column name="companyId" />
 			<finder-column name="virtualHost" />
@@ -490,11 +493,14 @@
 		<!-- PK fields -->
 
 		<column name="organizationId" type="String" primary="true" />
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="permissionId" type="long" primary="true" />
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="PermissionId" return-type="Collection">
 			<finder-column name="permissionId" />
 		</finder>
@@ -504,11 +510,14 @@
 		<!-- PK fields -->
 
 		<column name="organizationId" type="String" primary="true" />
-		<column name="groupId" type="String" primary="true" />
+		<column name="groupId" type="long" primary="true" />
 		<column name="roleId" type="String" primary="true" />
 
 		<!-- Finder methods -->
 
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
 		<finder name="RoleId" return-type="Collection">
 			<finder-column name="roleId" />
 		</finder>

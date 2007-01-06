@@ -71,11 +71,11 @@ searchContainer.setRowChecker(new RowChecker(renderResponse));
 		searchUserId = null;
 	}
 
-	int total = ShoppingOrderLocalServiceUtil.searchCount(searchTerms.getOrderId(), portletGroupId, company.getCompanyId(), searchUserId, searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
+	int total = ShoppingOrderLocalServiceUtil.searchCount(searchTerms.getOrderId(), portletGroupId.longValue(), company.getCompanyId(), searchUserId, searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator());
 
 	searchContainer.setTotal(total);
 
-	List results = ShoppingOrderLocalServiceUtil.search(searchTerms.getOrderId(), portletGroupId, company.getCompanyId(), searchUserId, searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+	List results = ShoppingOrderLocalServiceUtil.search(searchTerms.getOrderId(), portletGroupId.longValue(), company.getCompanyId(), searchUserId, searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getFirstName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.getStatus(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 	%>

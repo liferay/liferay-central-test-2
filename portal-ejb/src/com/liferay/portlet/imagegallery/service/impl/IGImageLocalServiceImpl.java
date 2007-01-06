@@ -251,14 +251,14 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 		return IGImageFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupImages(String groupId, int begin, int end)
+	public List getGroupImages(long groupId, int begin, int end)
 		throws SystemException {
 
 		return IGImageFinder.findByGroupId(groupId, begin, end);
 	}
 
 	public List getGroupImages(
-			String groupId, String userId, int begin, int end)
+			long groupId, String userId, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -269,11 +269,11 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 		}
 	}
 
-	public int getGroupImagesCount(String groupId) throws SystemException {
+	public int getGroupImagesCount(long groupId) throws SystemException {
 		return IGImageFinder.countByGroupId(groupId);
 	}
 
-	public int getGroupImagesCount(String groupId, String userId)
+	public int getGroupImagesCount(long groupId, String userId)
 		throws SystemException {
 
 		if (Validator.isNull(userId)) {
@@ -362,7 +362,7 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 			IGFolder newFolder = IGFolderUtil.fetchByPrimaryKey(folderId);
 
 			if ((newFolder == null) ||
-				(!oldFolder.getGroupId().equals(newFolder.getGroupId()))) {
+				(oldFolder.getGroupId() != newFolder.getGroupId())) {
 
 				folderId = image.getFolderId();
 			}

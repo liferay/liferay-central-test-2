@@ -37,8 +37,7 @@ import javax.ejb.SessionContext;
  */
 public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 	SessionBean {
-	public void addGroupUserGroups(java.lang.String groupId,
-		java.lang.String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserGroupLocalServiceFactory.getTxImpl().addGroupUserGroups(groupId,
@@ -81,8 +80,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 		return UserGroupLocalServiceFactory.getTxImpl().getUserUserGroups(userId);
 	}
 
-	public boolean hasGroupUserGroup(java.lang.String groupId,
-		java.lang.String userGroupId)
+	public boolean hasGroupUserGroup(long groupId, java.lang.String userGroupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return UserGroupLocalServiceFactory.getTxImpl().hasGroupUserGroup(groupId,
@@ -104,7 +102,7 @@ public class UserGroupLocalServiceEJBImpl implements UserGroupLocalService,
 			name, description, params);
 	}
 
-	public void unsetGroupUserGroups(java.lang.String groupId,
+	public void unsetGroupUserGroups(long groupId,
 		java.lang.String[] userGroupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

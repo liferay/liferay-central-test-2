@@ -457,7 +457,7 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			String companyId, String groupId, String templateId, Map tokens,
+			String companyId, long groupId, String templateId, Map tokens,
 			String languageId)
 		throws PortalException, SystemException {
 
@@ -466,7 +466,7 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			String companyId, String groupId, String templateId, Map tokens,
+			String companyId, long groupId, String templateId, Map tokens,
 			String languageId, boolean transform)
 		throws PortalException, SystemException {
 
@@ -517,7 +517,7 @@ public class JournalUtil {
 		return script;
 	}
 
-	public static Map getTokens(String groupId, ThemeDisplay themeDisplay) {
+	public static Map getTokens(long groupId, ThemeDisplay themeDisplay) {
 		Map tokens = CollectionFactory.getHashMap();
 
 		if (themeDisplay == null) {
@@ -527,7 +527,7 @@ public class JournalUtil {
 		Company company = themeDisplay.getCompany();
 
 		tokens.put("company_id", themeDisplay.getCompanyId());
-        tokens.put("group_id", groupId);
+        tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(

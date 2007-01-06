@@ -33,22 +33,22 @@ import java.io.Serializable;
  *
  */
 public class MBStatsUserPK implements Comparable, Serializable {
-	public String groupId;
+	public long groupId;
 	public String userId;
 
 	public MBStatsUserPK() {
 	}
 
-	public MBStatsUserPK(String groupId, String userId) {
+	public MBStatsUserPK(long groupId, String userId) {
 		this.groupId = groupId;
 		this.userId = userId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		this.groupId = groupId;
 	}
 
@@ -67,7 +67,16 @@ public class MBStatsUserPK implements Comparable, Serializable {
 
 		MBStatsUserPK pk = (MBStatsUserPK)obj;
 		int value = 0;
-		value = groupId.compareTo(pk.groupId);
+
+		if (groupId < pk.groupId) {
+			value = -1;
+		}
+		else if (groupId > pk.groupId) {
+			value = 1;
+		}
+		else {
+			value = 0;
+		}
 
 		if (value != 0) {
 			return value;
@@ -96,7 +105,7 @@ public class MBStatsUserPK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((groupId.equals(pk.groupId)) && (userId.equals(pk.userId))) {
+		if ((groupId == pk.groupId) && (userId.equals(pk.userId))) {
 			return true;
 		}
 		else {

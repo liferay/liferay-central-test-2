@@ -125,7 +125,7 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 		DLFolderLocalServiceFactory.getTxImpl().deleteFolder(folder);
 	}
 
-	public void deleteFolders(java.lang.String groupId)
+	public void deleteFolders(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		DLFolderLocalServiceFactory.getTxImpl().deleteFolders(groupId);
@@ -151,37 +151,35 @@ public class DLFolderLocalServiceEJBImpl implements DLFolderLocalService,
 		return DLFolderLocalServiceFactory.getTxImpl().getFolders(companyId);
 	}
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId);
 	}
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(java.lang.String groupId,
-		java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().getFoldersCount(groupId,
 			parentFolderId);
 	}
 
-	public void getSubfolderIds(java.util.List folderIds,
-		java.lang.String groupId, java.lang.String folderId)
-		throws com.liferay.portal.SystemException {
+	public void getSubfolderIds(java.util.List folderIds, long groupId,
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
 		DLFolderLocalServiceFactory.getTxImpl().getSubfolderIds(folderIds,
 			groupId, folderId);
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] folderIds, java.lang.String keywords)
+		java.lang.String companyId, long groupId, java.lang.String[] folderIds,
+		java.lang.String keywords)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return DLFolderLocalServiceFactory.getTxImpl().search(companyId,

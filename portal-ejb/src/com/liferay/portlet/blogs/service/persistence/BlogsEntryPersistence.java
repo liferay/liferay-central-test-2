@@ -176,7 +176,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -185,14 +185,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("displayDate DESC");
@@ -201,10 +194,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -216,12 +206,12 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -231,14 +221,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -253,10 +236,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -268,7 +248,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry findByGroupId_First(String groupId, OrderByComparator obc)
+	public BlogsEntry findByGroupId_First(long groupId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -285,7 +265,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry findByGroupId_Last(String groupId, OrderByComparator obc)
+	public BlogsEntry findByGroupId_Last(long groupId, OrderByComparator obc)
 		throws NoSuchEntryException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -303,9 +283,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public BlogsEntry[] findByGroupId_PrevAndNext(String entryId,
-		String groupId, OrderByComparator obc)
-		throws NoSuchEntryException, SystemException {
+	public BlogsEntry[] findByGroupId_PrevAndNext(String entryId, long groupId,
+		OrderByComparator obc) throws NoSuchEntryException, SystemException {
 		BlogsEntry blogsEntry = findByPrimaryKey(entryId);
 		int count = countByGroupId(groupId);
 		Session session = null;
@@ -316,14 +295,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -338,10 +310,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -767,7 +736,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -802,7 +771,7 @@ public class BlogsEntryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -812,24 +781,14 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.blogs.model.BlogsEntry WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 

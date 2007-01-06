@@ -1,3 +1,4 @@
+insert into Counter values ('com.liferay.counter.model.Counter', 1000);
 insert into Counter values ('com.liferay.portal.model.Address', 1000);
 insert into Counter values ('com.liferay.portal.model.EmailAddress', 1000);
 insert into Counter values ('com.liferay.portal.model.Group', 1000);

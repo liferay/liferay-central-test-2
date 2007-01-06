@@ -58,7 +58,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 
-	protected void addFolder(String companyId, String groupId, String uri)
+	protected void addFolder(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -84,7 +84,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 	}
 
 	protected void addResource(
-			String companyId, String groupId, String uri, InputStream content,
+			String companyId, long groupId, String uri, InputStream content,
 			String contentType, String characterEncoding)
 		throws IOException, PortalException, SystemException {
 
@@ -112,7 +112,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 			StringPool.BLANK, byteArray, true, true);
 	}
 
-	protected void deleteObject(String companyId, String groupId, String uri)
+	protected void deleteObject(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -146,7 +146,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 		}
 	}
 
-	protected Date getCreateDate(String companyId, String groupId, String uri)
+	protected Date getCreateDate(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -186,7 +186,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 		}
 	}
 
-	protected Date getModifiedDate(String companyId, String groupId, String uri)
+	protected Date getModifiedDate(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -227,7 +227,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 	}
 
 	protected String[] getObjects(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -274,7 +274,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 	}
 
 	protected InputStream getResource(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -299,7 +299,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 	}
 
 	protected long getResourceSize(
-			String companyId, String groupId, String uri)
+			String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -330,7 +330,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 		}
 	}
 
-	protected boolean isAvailable(String companyId, String groupId, String uri)
+	protected boolean isAvailable(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;
@@ -367,7 +367,7 @@ public class WebDAVStorageImpl extends AbstractWebDAVStorage {
 		}
 	}
 
-	protected boolean isFolder(String companyId, String groupId, String uri)
+	protected boolean isFolder(String companyId, long groupId, String uri)
 		throws IOException, PortalException, SystemException {
 
 		DLFolder parentFolder = null;

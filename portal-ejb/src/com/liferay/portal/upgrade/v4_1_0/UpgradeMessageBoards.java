@@ -162,7 +162,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		}
 
 		String portletId = CompanyImpl.SYSTEM;
-		String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 		String repositoryId = CompanyImpl.SYSTEM;
 		String dirName = "messageboards/" + threadId + "/" + newMessageId;
 
@@ -375,10 +375,10 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 					category = MBCategoryLocalServiceUtil.getSystemCategory();
 				}
 				else {
-					String groupId = null;
+					long groupId = 0;
 
 					try {
-						groupId = rs.getString("groupId");
+						groupId = rs.getLong("groupId");
 					}
 					catch (SQLException sqle) {
 					}
@@ -395,8 +395,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 						groupId = parentCategory.getGroupId();
 					}
 
-					if (Validator.isNotNull(groupId) &&
-						!groupId.equals(GroupImpl.DEFAULT_PARENT_GROUP_ID)) {
+					if ((groupId > 0) &&
+						(groupId != GroupImpl.DEFAULT_PARENT_GROUP_ID)) {
 
 						String plid = LayoutImpl.PUBLIC + groupId + ".1";
 						boolean addCommunityPermissions = true;

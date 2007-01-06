@@ -37,7 +37,7 @@ import javax.ejb.SessionContext;
  */
 public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 	SessionBean {
-	public void deleteStatsUserByGroupId(java.lang.String groupId)
+	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalServiceFactory.getTxImpl().deleteStatsUserByGroupId(groupId);
 	}
@@ -48,26 +48,25 @@ public class MBStatsUserLocalServiceEJBImpl implements MBStatsUserLocalService,
 	}
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		java.lang.String groupId, java.lang.String userId)
+		long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUser(groupId,
 			userId);
 	}
 
-	public java.util.List getStatsUsers(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getStatsUsers(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUsers(groupId,
 			begin, end);
 	}
 
-	public int getStatsUsersCount(java.lang.String groupId)
+	public int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return MBStatsUserLocalServiceFactory.getTxImpl().getStatsUsersCount(groupId);
 	}
 
-	public void updateStatsUser(java.lang.String groupId,
-		java.lang.String userId)
+	public void updateStatsUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalServiceFactory.getTxImpl().updateStatsUser(groupId,

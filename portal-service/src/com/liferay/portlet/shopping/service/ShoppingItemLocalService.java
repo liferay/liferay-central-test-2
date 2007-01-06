@@ -125,7 +125,7 @@ public interface ShoppingItemLocalService {
 	public int getCategoriesItemsCount(java.util.List categoryIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFeaturedItems(java.lang.String groupId,
+	public java.util.List getFeaturedItems(long groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException;
 
@@ -155,17 +155,16 @@ public interface ShoppingItemLocalService {
 	public int getItemsCount(java.lang.String categoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getSaleItems(java.lang.String groupId,
+	public java.util.List getSaleItems(long groupId,
 		java.lang.String categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(java.lang.String groupId,
-		java.lang.String[] categoryIds, java.lang.String keywords, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public int searchCount(java.lang.String groupId,
-		java.lang.String[] categoryIds, java.lang.String keywords)
+	public java.util.List search(long groupId, java.lang.String[] categoryIds,
+		java.lang.String keywords, int begin, int end)
 		throws com.liferay.portal.SystemException;
+
+	public int searchCount(long groupId, java.lang.String[] categoryIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem updateItem(
 		java.lang.String userId, java.lang.String itemId,

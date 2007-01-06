@@ -51,19 +51,18 @@ public interface JournalTemplateService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-	public void deleteTemplate(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException, java.rmi.RemoteException;
-
-	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String groupId,
+	public void deleteTemplate(java.lang.String companyId, long groupId,
 		java.lang.String templateId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
+		java.lang.String companyId, long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String groupId, java.lang.String templateId,
+		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean smallImage,

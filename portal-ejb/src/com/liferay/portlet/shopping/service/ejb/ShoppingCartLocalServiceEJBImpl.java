@@ -37,7 +37,7 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService,
 	SessionBean {
-	public void deleteGroupCarts(java.lang.String groupId)
+	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalServiceFactory.getTxImpl().deleteGroupCarts(groupId);
 	}
@@ -54,16 +54,16 @@ public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService
 		return ShoppingCartLocalServiceFactory.getTxImpl().getCart(cartId);
 	}
 
-	public java.util.Map getItems(java.lang.String groupId,
-		java.lang.String itemIds) throws com.liferay.portal.SystemException {
+	public java.util.Map getItems(long groupId, java.lang.String itemIds)
+		throws com.liferay.portal.SystemException {
 		return ShoppingCartLocalServiceFactory.getTxImpl().getItems(groupId,
 			itemIds);
 	}
 
 	public com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String cartId, java.lang.String itemIds,
-		java.lang.String couponIds, int altShipping, boolean insure)
+		java.lang.String userId, long groupId, java.lang.String cartId,
+		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
+		boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return ShoppingCartLocalServiceFactory.getTxImpl().updateCart(userId,

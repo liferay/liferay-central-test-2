@@ -64,6 +64,7 @@ create index IX_EC743CD0 on JournalArticle (companyId, groupId, templateId);
 create index IX_9356F865 on JournalArticle (groupId);
 
 create index IX_4D73E06F on JournalContentSearch (companyId, groupId, articleId);
+create index IX_972C13BA on JournalContentSearch (groupId);
 create index IX_ABEEA675 on JournalContentSearch (layoutId, ownerId);
 create index IX_F09DD5EE on JournalContentSearch (ownerId);
 create index IX_4A642025 on JournalContentSearch (ownerId, groupId, articleId);
@@ -78,6 +79,7 @@ create index IX_E230D266 on Layout (ownerId, friendlyURL);
 create index IX_9AF212B1 on Layout (ownerId, parentLayoutId);
 
 create index IX_A34FBC19 on LayoutSet (companyId, virtualHost);
+create index IX_A40B8BEC on LayoutSet (groupId);
 
 create index IX_2932DD37 on ListType (type_);
 
@@ -103,8 +105,10 @@ create index IX_847F92B5 on MBStatsUser (userId);
 
 create index IX_CB854772 on MBThread (categoryId);
 
+create index IX_A425F71A on OrgGroupPermission (groupId);
 create index IX_6C53DA4E on OrgGroupPermission (permissionId);
 
+create index IX_4A527DD3 on OrgGroupRole (groupId);
 create index IX_AB044D1C on OrgGroupRole (roleId);
 
 create index IX_6AF0D434 on OrgLabor (organizationId);

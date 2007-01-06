@@ -65,7 +65,7 @@ public class ShoppingPreferences {
 	};
 
 	public static ShoppingPreferences getInstance(
-			String companyId, String groupId)
+			String companyId, long groupId)
 		throws PortalException, SystemException {
 
 		return new ShoppingPreferences(companyId, groupId);
@@ -397,7 +397,7 @@ public class ShoppingPreferences {
 		_prefs.store();
 	}
 
-	protected ShoppingPreferences(String companyId, String groupId)
+	protected ShoppingPreferences(String companyId, long groupId)
 		throws PortalException, SystemException {
 
 		PortletPreferencesPK prefsPK = new PortletPreferencesPK(

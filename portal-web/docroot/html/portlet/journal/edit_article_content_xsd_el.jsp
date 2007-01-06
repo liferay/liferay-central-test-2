@@ -27,7 +27,7 @@
 <%
 String languageId = LanguageUtil.getLanguageId(request);
 
-String groupId = (String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID);
+long groupId = GetterUtil.getLong(request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
 Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 
@@ -158,11 +158,11 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 						</c:if>
 
 						<c:if test='<%= elType.equals("image_gallery") %>'>
-							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="<portlet:namespace />imageGalleryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content'; var imageGalleryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= groupId %>" /></portlet:renderURL>', 'imageGallery', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); imageGalleryWindow.focus();">
+							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="<portlet:namespace />imageGalleryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content'; var imageGalleryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_image_gallery" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'imageGallery', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); imageGalleryWindow.focus();">
 						</c:if>
 
 						<c:if test='<%= elType.equals("document_library") %>'>
-							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="<portlet:namespace />documentLibraryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content';  var documentLibraryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= groupId %>" /></portlet:renderURL>', 'documentLibrary', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); documentLibraryWindow.focus();">
+							<input class="form-text" id="<portlet:namespace />structure_el<%= count.getValue() %>_content" size="75" type="text" value="<%= elContent %>" onChange="<portlet:namespace />contentChanged();"> <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "select") %>" onClick="<portlet:namespace />documentLibraryInput = '<portlet:namespace />structure_el<%= count.getValue() %>_content';  var documentLibraryWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/journal/select_document_library" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /></portlet:renderURL>', 'documentLibrary', 'directories=no,height=640,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no,width=680'); void(''); documentLibraryWindow.focus();">
 						</c:if>
 
 						<c:if test='<%= elType.equals("boolean") %>'>

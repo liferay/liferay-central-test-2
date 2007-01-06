@@ -110,7 +110,7 @@ public class EditPermissionsAction extends PortletAction {
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 		String ownerId = LayoutImpl.getOwnerId(themeDisplay.getPlid());
-		String groupId = LayoutImpl.getGroupId(ownerId);
+		long groupId = LayoutImpl.getGroupId(ownerId);
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 		String modelResource = ParamUtil.getString(req, "modelResource");
@@ -152,7 +152,7 @@ public class EditPermissionsAction extends PortletAction {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 		long resourceId = ParamUtil.getLong(req, "resourceId");
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		String[] actionIds = StringUtil.split(
 			ParamUtil.getString(req, "groupIdActionIds"));
 

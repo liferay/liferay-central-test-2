@@ -29,7 +29,7 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBStatsUserLocalServiceUtil {
-	public static void deleteStatsUserByGroupId(java.lang.String groupId)
+	public static void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 		mbStatsUserLocalService.deleteStatsUserByGroupId(groupId);
@@ -42,7 +42,7 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		java.lang.String groupId, java.lang.String userId)
+		long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
@@ -50,22 +50,21 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.getStatsUser(groupId, userId);
 	}
 
-	public static java.util.List getStatsUsers(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getStatsUsers(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		return mbStatsUserLocalService.getStatsUsers(groupId, begin, end);
 	}
 
-	public static int getStatsUsersCount(java.lang.String groupId)
+	public static int getStatsUsersCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
 		return mbStatsUserLocalService.getStatsUsersCount(groupId);
 	}
 
-	public static void updateStatsUser(java.lang.String groupId,
-		java.lang.String userId)
+	public static void updateStatsUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();

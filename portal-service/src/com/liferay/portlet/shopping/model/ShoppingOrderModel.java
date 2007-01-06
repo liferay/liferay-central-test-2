@@ -41,9 +41,9 @@ public interface ShoppingOrderModel extends BaseModel {
 
 	public void setOrderId(String orderId);
 
-	public String getGroupId();
+	public long getGroupId();
 
-	public void setGroupId(String groupId);
+	public void setGroupId(long groupId);
 
 	public String getCompanyId();
 

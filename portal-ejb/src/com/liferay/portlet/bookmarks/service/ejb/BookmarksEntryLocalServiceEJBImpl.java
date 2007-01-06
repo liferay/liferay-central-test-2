@@ -156,27 +156,27 @@ public class BookmarksEntryLocalServiceEJBImpl
 												.getFoldersEntriesCount(folderIds);
 	}
 
-	public java.util.List getGroupEntries(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().getGroupEntries(groupId,
 			begin, end);
 	}
 
-	public java.util.List getGroupEntries(java.lang.String groupId,
+	public java.util.List getGroupEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl().getGroupEntries(groupId,
 			userId, begin, end);
 	}
 
-	public int getGroupEntriesCount(java.lang.String groupId)
+	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl()
 												.getGroupEntriesCount(groupId);
 	}
 
-	public int getGroupEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public int getGroupEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return BookmarksEntryLocalServiceFactory.getTxImpl()
 												.getGroupEntriesCount(groupId,
 			userId);

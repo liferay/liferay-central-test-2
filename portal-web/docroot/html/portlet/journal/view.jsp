@@ -152,7 +152,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_article");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", article.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				rowURL.setParameter("articleId", article.getArticleId());
 				rowURL.setParameter("version", String.valueOf(article.getVersion()));
 
@@ -253,7 +253,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_structure");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", structure.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(structure.getGroupId()));
 				rowURL.setParameter("structureId", structure.getStructureId());
 
 				// Structure id
@@ -348,7 +348,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				rowURL.setParameter("struts_action", "/journal/edit_template");
 				rowURL.setParameter("redirect", currentURL);
-				rowURL.setParameter("groupId", template.getGroupId());
+				rowURL.setParameter("groupId", String.valueOf(template.getGroupId()));
 				rowURL.setParameter("templateId", template.getTemplateId());
 
 				row.setParameter("rowHREF", rowURL.toString());
@@ -410,7 +410,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= article.getGroupId() %>" /><portlet:param name="articleId" value="<%= article.getArticleId() %>" /><portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" /></portlet:renderURL>"><%= article.getArticleId() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" /><portlet:param name="articleId" value="<%= article.getArticleId() %>" /><portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" /></portlet:renderURL>"><%= article.getArticleId() %></a>
 						</td>
 					</tr>
 
@@ -448,7 +448,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= structure.getGroupId() %>" /><portlet:param name="structureId" value="<%= structure.getStructureId() %>" /></portlet:renderURL>"><%= structure.getName() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(structure.getGroupId()) %>" /><portlet:param name="structureId" value="<%= structure.getStructureId() %>" /></portlet:renderURL>"><%= structure.getName() %></a>
 						</td>
 					</tr>
 
@@ -486,7 +486,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr class="<%= className %>" style="font-size: x-small;" onMouseEnter="this.className = '<%= classHoverName %>';" onMouseLeave="this.className = '<%= className %>';">
 						<td nowrap>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= template.getGroupId() %>" /><portlet:param name="templateId" value="<%= template.getTemplateId() %>" /></portlet:renderURL>"><%= template.getName() %></a>
+							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_template" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="groupId" value="<%= String.valueOf(template.getGroupId()) %>" /><portlet:param name="templateId" value="<%= template.getTemplateId() %>" /></portlet:renderURL>"><%= template.getName() %></a>
 						</td>
 					</tr>
 

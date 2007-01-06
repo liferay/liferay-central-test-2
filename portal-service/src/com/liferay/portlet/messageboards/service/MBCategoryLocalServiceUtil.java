@@ -114,7 +114,7 @@ public class MBCategoryLocalServiceUtil {
 			communityPermissions, guestPermissions);
 	}
 
-	public static void deleteCategories(java.lang.String groupId)
+	public static void deleteCategories(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -136,7 +136,7 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.deleteCategory(category);
 	}
 
-	public static java.util.List getCategories(java.lang.String groupId,
+	public static java.util.List getCategories(long groupId,
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -145,14 +145,14 @@ public class MBCategoryLocalServiceUtil {
 			begin, end);
 	}
 
-	public static int getCategoriesCount(java.lang.String groupId)
+	public static int getCategoriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 		return mbCategoryLocalService.getCategoriesCount(groupId);
 	}
 
-	public static int getCategoriesCount(java.lang.String groupId,
+	public static int getCategoriesCount(long groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -171,7 +171,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String groupId, java.lang.String categoryId)
+		long groupId, java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 		mbCategoryLocalService.getSubcategoryIds(categoryIds, groupId,
@@ -193,7 +193,7 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
+		java.lang.String companyId, long groupId,
 		java.lang.String[] categoryIds, java.lang.String threadId,
 		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();

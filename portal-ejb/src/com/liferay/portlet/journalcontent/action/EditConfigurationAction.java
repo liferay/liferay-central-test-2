@@ -76,7 +76,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			String companyId = themeDisplay.getCompanyId();
 
-			String groupId = ParamUtil.getString(req, "groupId");
+            long groupId = ParamUtil.getLong(req, "groupId");
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
@@ -117,7 +117,7 @@ public class EditConfigurationAction extends PortletAction {
 				PortletPreferencesFactory.getPortletSetup(
 					req, portletResource, true, true);
 
-			prefs.setValue("group-id", groupId);
+			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValues("article-id", articleIds);
 			prefs.setValue("paginate", paginate?"1":"0");
 

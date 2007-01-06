@@ -25,6 +25,7 @@ package com.liferay.portal.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -39,19 +40,14 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class LayoutServiceHttp {
 	public static com.liferay.portal.model.Layout addLayout(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
-		boolean privateLayout, java.lang.String parentLayoutId,
-		java.lang.String name, java.lang.String title, java.lang.String type,
-		boolean hidden, java.lang.String friendlyURL)
+		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
+		java.lang.String parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = new BooleanWrapper(privateLayout);
 			Object paramObj2 = parentLayoutId;
 

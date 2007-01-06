@@ -120,7 +120,7 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 			communityPermissions, guestPermissions);
 	}
 
-	public void deleteEntries(java.lang.String groupId)
+	public void deleteEntries(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalServiceFactory.getTxImpl().deleteEntries(groupId);
@@ -162,20 +162,19 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 		return BlogsEntryLocalServiceFactory.getTxImpl().getEntry(entryId);
 	}
 
-	public java.util.List getGroupEntries(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().getGroupEntries(groupId,
 			begin, end);
 	}
 
-	public int getGroupEntriesCount(java.lang.String groupId)
+	public int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().getGroupEntriesCount(groupId);
 	}
 
-	public java.lang.String getGroupEntriesRSS(java.lang.String groupId,
-		int begin, int end, java.lang.String type, double version,
-		java.lang.String url)
+	public java.lang.String getGroupEntriesRSS(long groupId, int begin,
+		int end, java.lang.String type, double version, java.lang.String url)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().getGroupEntriesRSS(groupId,
@@ -188,9 +187,9 @@ public class BlogsEntryLocalServiceEJBImpl implements BlogsEntryLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String userId, java.lang.String[] categoryIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String userId,
+		java.lang.String[] categoryIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		return BlogsEntryLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, userId, categoryIds, keywords);
 	}

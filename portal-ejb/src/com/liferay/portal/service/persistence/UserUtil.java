@@ -353,8 +353,8 @@ public class UserUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(java.lang.String pk,
-		java.lang.String groupPK) throws com.liferay.portal.SystemException {
+	public static boolean containsGroup(java.lang.String pk, long groupPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
 
@@ -363,7 +363,7 @@ public class UserUtil {
 		return getPersistence().containsGroups(pk);
 	}
 
-	public static void addGroup(java.lang.String pk, java.lang.String groupPK)
+	public static void addGroup(java.lang.String pk, long groupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserException {
@@ -378,8 +378,7 @@ public class UserUtil {
 		getPersistence().addGroup(pk, group);
 	}
 
-	public static void addGroups(java.lang.String pk,
-		java.lang.String[] groupPKs)
+	public static void addGroups(java.lang.String pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserException {
@@ -399,7 +398,7 @@ public class UserUtil {
 		getPersistence().clearGroups(pk);
 	}
 
-	public static void removeGroup(java.lang.String pk, java.lang.String groupPK)
+	public static void removeGroup(java.lang.String pk, long groupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserException {
@@ -414,8 +413,7 @@ public class UserUtil {
 		getPersistence().removeGroup(pk, group);
 	}
 
-	public static void removeGroups(java.lang.String pk,
-		java.lang.String[] groupPKs)
+	public static void removeGroups(java.lang.String pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserException {
@@ -429,8 +427,7 @@ public class UserUtil {
 		getPersistence().removeGroups(pk, groups);
 	}
 
-	public static void setGroups(java.lang.String pk,
-		java.lang.String[] groupPKs)
+	public static void setGroups(java.lang.String pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchUserException {

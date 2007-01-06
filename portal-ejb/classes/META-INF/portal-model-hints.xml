@@ -147,11 +147,11 @@
 		<field name="primary" type="boolean" />
 	</model>
 	<model name="com.liferay.portal.model.Group">
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
-		<field name="parentGroupId" type="String" />
+		<field name="parentGroupId" type="long" />
 		<field name="name" type="String">
 			<hint name="display-width">150</hint>
 		</field>
@@ -195,7 +195,7 @@
 	<model name="com.liferay.portal.model.LayoutSet">
 		<field name="ownerId" type="String" />
 		<field name="companyId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="userId" type="String" />
 		<field name="privateLayout" type="boolean" />
 		<field name="themeId" type="String" />
@@ -225,12 +225,12 @@
 	</model>
 	<model name="com.liferay.portal.model.OrgGroupPermission">
 		<field name="organizationId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="permissionId" type="long" />
 	</model>
 	<model name="com.liferay.portal.model.OrgGroupRole">
 		<field name="organizationId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="roleId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.OrgLabor">
@@ -445,7 +445,7 @@
 	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsEntry">
 		<field name="entryId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -476,7 +476,7 @@
 	</model>
 	<model name="com.liferay.portlet.bookmarks.model.BookmarksFolder">
 		<field name="folderId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="createDate" type="Date" />
@@ -489,7 +489,7 @@
 	</model>
 	<model name="com.liferay.portlet.calendar.model.CalEvent">
 		<field name="eventId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -573,7 +573,7 @@
 	</model>
 	<model name="com.liferay.portlet.documentlibrary.model.DLFolder">
 		<field name="folderId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -590,7 +590,7 @@
 	</model>
 	<model name="com.liferay.portlet.imagegallery.model.IGFolder">
 		<field name="folderId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="createDate" type="Date" />
@@ -617,7 +617,7 @@
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalArticle">
 		<field name="companyId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="articleId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
@@ -651,11 +651,11 @@
 		<field name="ownerId" type="String" />
 		<field name="articleId" type="String" />
 		<field name="companyId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalStructure">
 		<field name="companyId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="structureId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
@@ -673,7 +673,7 @@
 	</model>
 	<model name="com.liferay.portlet.journal.model.JournalTemplate">
 		<field name="companyId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="templateId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
@@ -695,7 +695,7 @@
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBCategory">
 		<field name="categoryId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -739,7 +739,7 @@
 		<field name="flag" type="String" />
 	</model>
 	<model name="com.liferay.portlet.messageboards.model.MBStatsUser">
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="userId" type="String" />
 		<field name="messageCount" type="int" />
 		<field name="lastPostDate" type="Date" />
@@ -762,7 +762,7 @@
 	</model>
 	<model name="com.liferay.portlet.polls.model.PollsQuestion">
 		<field name="questionId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -802,7 +802,7 @@
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingCart">
 		<field name="cartId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -819,7 +819,7 @@
 	</model>
 	<model name="com.liferay.portlet.shopping.model.ShoppingCategory">
 		<field name="categoryId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -835,7 +835,7 @@
 		<field name="couponId" type="String">
 			<hint name="upper-case">true</hint>
 		</field>
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -937,7 +937,7 @@
 			<hint name="display-width">150</hint>
 		</default-hints>
 		<field name="orderId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -1020,7 +1020,7 @@
 	</model>
 	<model name="com.liferay.portlet.softwarerepository.model.SRFrameworkVersion">
 		<field name="frameworkVersionId" type="long" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -1037,7 +1037,7 @@
 	</model>
 	<model name="com.liferay.portlet.softwarerepository.model.SRProductEntry">
 		<field name="productEntryId" type="long" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />
@@ -1082,7 +1082,7 @@
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
 		<field name="nodeId" type="String" />
-		<field name="groupId" type="String" />
+		<field name="groupId" type="long" />
 		<field name="companyId" type="String" />
 		<field name="userId" type="String" />
 		<field name="userName" type="String" />

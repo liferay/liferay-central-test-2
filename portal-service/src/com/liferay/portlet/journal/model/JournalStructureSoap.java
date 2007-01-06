@@ -85,11 +85,11 @@ public class JournalStructureSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -158,7 +158,7 @@ public class JournalStructureSoap implements Serializable {
 	}
 
 	private String _companyId;
-	private String _groupId;
+	private long _groupId;
 	private String _structureId;
 	private String _userId;
 	private String _userName;

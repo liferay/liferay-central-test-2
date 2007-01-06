@@ -145,18 +145,18 @@ public interface DLFileEntryLocalService {
 	public int getFoldersFileEntriesCount(java.util.List folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupFileEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List getGroupFileEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupFileEntries(java.lang.String groupId,
+	public java.util.List getGroupFileEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getGroupFileEntriesCount(java.lang.String groupId)
+	public int getGroupFileEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int getGroupFileEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException;
+	public int getGroupFileEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileEntry updateFileEntry(
 		java.lang.String userId, java.lang.String folderId,

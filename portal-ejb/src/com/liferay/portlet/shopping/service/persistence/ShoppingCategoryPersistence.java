@@ -181,7 +181,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId) throws SystemException {
+	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -190,14 +190,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 			query.append("ORDER BY ");
 			query.append("parentCategoryId ASC").append(", ");
@@ -207,10 +200,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return q.list();
 		}
@@ -222,12 +212,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByGroupId(String groupId, int begin, int end)
+	public List findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(String groupId, int begin, int end,
+	public List findByGroupId(long groupId, int begin, int end,
 		OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -237,14 +227,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -260,10 +243,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			return QueryUtil.list(q, getDialect(), begin, end);
 		}
@@ -275,7 +255,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingCategory findByGroupId_First(String groupId,
+	public ShoppingCategory findByGroupId_First(long groupId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
@@ -292,7 +272,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingCategory findByGroupId_Last(String groupId,
+	public ShoppingCategory findByGroupId_Last(long groupId,
 		OrderByComparator obc) throws NoSuchCategoryException, SystemException {
 		int count = countByGroupId(groupId);
 		List list = findByGroupId(groupId, count - 1, count, obc);
@@ -311,7 +291,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 	}
 
 	public ShoppingCategory[] findByGroupId_PrevAndNext(String categoryId,
-		String groupId, OrderByComparator obc)
+		long groupId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
 		int count = countByGroupId(groupId);
@@ -323,14 +303,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			if (obc != null) {
@@ -346,10 +319,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
@@ -368,7 +338,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(String groupId, String parentCategoryId)
+	public List findByG_P(long groupId, String parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -378,14 +348,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
@@ -404,10 +367,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentCategoryId != null) {
 				q.setString(queryPos++, parentCategoryId);
@@ -423,12 +383,12 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public List findByG_P(String groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, String parentCategoryId, int begin,
 		int end) throws SystemException {
 		return findByG_P(groupId, parentCategoryId, begin, end, null);
 	}
 
-	public List findByG_P(String groupId, String parentCategoryId, int begin,
+	public List findByG_P(long groupId, String parentCategoryId, int begin,
 		int end, OrderByComparator obc) throws SystemException {
 		Session session = null;
 
@@ -438,14 +398,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
@@ -470,10 +423,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentCategoryId != null) {
 				q.setString(queryPos++, parentCategoryId);
@@ -489,7 +439,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingCategory findByG_P_First(String groupId,
+	public ShoppingCategory findByG_P_First(long groupId,
 		String parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
@@ -510,7 +460,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public ShoppingCategory findByG_P_Last(String groupId,
+	public ShoppingCategory findByG_P_Last(long groupId,
 		String parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		int count = countByG_P(groupId, parentCategoryId);
@@ -533,7 +483,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 	}
 
 	public ShoppingCategory[] findByG_P_PrevAndNext(String categoryId,
-		String groupId, String parentCategoryId, OrderByComparator obc)
+		long groupId, String parentCategoryId, OrderByComparator obc)
 		throws NoSuchCategoryException, SystemException {
 		ShoppingCategory shoppingCategory = findByPrimaryKey(categoryId);
 		int count = countByG_P(groupId, parentCategoryId);
@@ -545,14 +495,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			StringBuffer query = new StringBuffer();
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
@@ -577,10 +520,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentCategoryId != null) {
 				q.setString(queryPos++, parentCategoryId);
@@ -644,7 +584,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByGroupId(String groupId) throws SystemException {
+	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
 		while (itr.hasNext()) {
@@ -653,7 +593,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeByG_P(String groupId, String parentCategoryId)
+	public void removeByG_P(long groupId, String parentCategoryId)
 		throws SystemException {
 		Iterator itr = findByG_P(groupId, parentCategoryId).iterator();
 
@@ -671,7 +611,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByGroupId(String groupId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -681,24 +621,14 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" ");
 
 			Query q = session.createQuery(query.toString());
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			Iterator itr = q.list().iterator();
 
@@ -720,7 +650,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		}
 	}
 
-	public int countByG_P(String groupId, String parentCategoryId)
+	public int countByG_P(long groupId, String parentCategoryId)
 		throws SystemException {
 		Session session = null;
 
@@ -731,14 +661,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append("SELECT COUNT(*) ");
 			query.append(
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory WHERE ");
-
-			if (groupId == null) {
-				query.append("groupId IS NULL");
-			}
-			else {
-				query.append("groupId = ?");
-			}
-
+			query.append("groupId = ?");
 			query.append(" AND ");
 
 			if (parentCategoryId == null) {
@@ -754,10 +677,7 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			q.setCacheable(true);
 
 			int queryPos = 0;
-
-			if (groupId != null) {
-				q.setString(queryPos++, groupId);
-			}
+			q.setLong(queryPos++, groupId);
 
 			if (parentCategoryId != null) {
 				q.setString(queryPos++, parentCategoryId);

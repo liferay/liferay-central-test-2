@@ -88,7 +88,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element root = doc.addElement("journal-data");
 
-			root.addAttribute("group-id", context.getGroupId());
+			root.addAttribute("group-id", String.valueOf(context.getGroupId()));
 
 			// Articles
 

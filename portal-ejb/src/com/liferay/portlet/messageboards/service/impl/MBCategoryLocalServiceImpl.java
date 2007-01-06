@@ -107,7 +107,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 		// Category
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		parentCategoryId = getParentCategoryId(groupId, parentCategoryId);
 		Date now = new Date();
 
@@ -192,7 +192,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 			guestPermissions);
 	}
 
-	public void deleteCategories(String groupId)
+	public void deleteCategories(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = MBCategoryUtil.findByGroupId(groupId).iterator();
@@ -256,17 +256,17 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	public List getCategories(
-			String groupId, String parentCategoryId, int begin, int end)
+			long groupId, String parentCategoryId, int begin, int end)
 		throws SystemException {
 
 		return MBCategoryUtil.findByG_P(groupId, parentCategoryId, begin, end);
 	}
 
-	public int getCategoriesCount(String groupId) throws SystemException {
+	public int getCategoriesCount(long groupId) throws SystemException {
 		return MBCategoryUtil.countByGroupId(groupId);
 	}
 
-	public int getCategoriesCount(String groupId, String parentCategoryId)
+	public int getCategoriesCount(long groupId, String parentCategoryId)
 		throws SystemException {
 
 		return MBCategoryUtil.countByG_P(groupId, parentCategoryId);
@@ -279,7 +279,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	public void getSubcategoryIds(
-			List categoryIds, String groupId, String categoryId)
+			List categoryIds, long groupId, String categoryId)
 		throws SystemException {
 
 		Iterator itr = MBCategoryUtil.findByG_P(groupId, categoryId).iterator();
@@ -331,7 +331,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				while (itr2.hasNext()) {
 					MBMessage message = (MBMessage)itr2.next();
 
-					String groupId = category.getGroupId();
+					long groupId = category.getGroupId();
 					String userName = message.getUserName();
 					String threadId = message.getThreadId();
 					String messageId = message.getMessageId();
@@ -340,8 +340,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 					try {
 						IndexerImpl.addMessage(
-							companyId, groupId, userName, categoryId, threadId,
-							messageId, title, content);
+							companyId, new Long(groupId), userName, categoryId,
+							threadId, messageId, title, content);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + messageId, e1);
@@ -358,7 +358,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	public Hits search(
-   			String companyId, String groupId, String[] categoryIds,
+   			String companyId, long groupId, String[] categoryIds,
 			String threadId, String keywords)
 		throws SystemException {
 
@@ -455,7 +455,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 	}
 
 	protected String getParentCategoryId(
-			String groupId, String parentCategoryId)
+			long groupId, String parentCategoryId)
 		throws SystemException {
 
 		if (!parentCategoryId.equals(
@@ -465,7 +465,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
-				(!groupId.equals(parentCategory.getGroupId()))) {
+				(groupId != parentCategory.getGroupId())) {
 
 				parentCategoryId = MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID;
 			}
@@ -492,7 +492,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				MBCategoryUtil.fetchByPrimaryKey(parentCategoryId);
 
 			if ((parentCategory == null) ||
-				(!category.getGroupId().equals(parentCategory.getGroupId()))) {
+				(category.getGroupId() != parentCategory.getGroupId())) {
 
 				return category.getParentCategoryId();
 			}
@@ -554,7 +554,8 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 				try {
 					if (!fromCategory.isDiscussion()) {
 						Indexer.updateMessage(
-							message.getCompanyId(), fromCategory.getGroupId(),
+							message.getCompanyId(),
+							new Long(fromCategory.getGroupId()),
 							message.getUserName(), toCategoryId,
 							message.getThreadId(), message.getMessageId(),
 							message.getSubject(), message.getBody());

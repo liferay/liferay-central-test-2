@@ -83,7 +83,7 @@ public class UpgradeBlogs extends UpgradeProcess {
 
 				ps = con.prepareStatement(_UPGRADE_ENTRY_2);
 
-				ps.setString(1, group.getGroupId());
+				ps.setLong(1, group.getGroupId());
 				ps.setString(2, entryId);
 
 				ps.executeUpdate();

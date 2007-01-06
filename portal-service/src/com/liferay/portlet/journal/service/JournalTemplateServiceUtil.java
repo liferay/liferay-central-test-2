@@ -65,8 +65,8 @@ public class JournalTemplateServiceUtil {
 			guestPermissions);
 	}
 
-	public static void deleteTemplate(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String templateId)
+	public static void deleteTemplate(java.lang.String companyId, long groupId,
+		java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
@@ -74,8 +74,7 @@ public class JournalTemplateServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String templateId)
+		java.lang.String companyId, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
@@ -84,7 +83,7 @@ public class JournalTemplateServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateTemplate(
-		java.lang.String groupId, java.lang.String templateId,
+		long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String name,
 		java.lang.String description, java.lang.String xsl, boolean formatXsl,
 		java.lang.String langType, boolean smallImage,

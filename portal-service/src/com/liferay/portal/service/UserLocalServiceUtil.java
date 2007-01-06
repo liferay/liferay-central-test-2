@@ -29,8 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public class UserLocalServiceUtil {
-	public static void addGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public static void addGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -170,7 +169,7 @@ public class UserLocalServiceUtil {
 		return userLocalService.getDefaultUser(companyId);
 	}
 
-	public static java.util.List getGroupUsers(java.lang.String groupId)
+	public static java.util.List getGroupUsers(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -179,11 +178,11 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List getPermissionUsers(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+		java.lang.String companyId, long groupId, java.lang.String name,
+		java.lang.String primKey, java.lang.String actionId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -194,11 +193,10 @@ public class UserLocalServiceUtil {
 	}
 
 	public static int getPermissionUsersCount(java.lang.String companyId,
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String primKey, java.lang.String actionId,
-		java.lang.String firstName, java.lang.String middleName,
-		java.lang.String lastName, java.lang.String emailAddress,
-		boolean andOperator)
+		long groupId, java.lang.String name, java.lang.String primKey,
+		java.lang.String actionId, java.lang.String firstName,
+		java.lang.String middleName, java.lang.String lastName,
+		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -252,8 +250,7 @@ public class UserLocalServiceUtil {
 		return userLocalService.getUserId(companyId, emailAddress);
 	}
 
-	public static boolean hasGroupUser(java.lang.String groupId,
-		java.lang.String userId)
+	public static boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -312,8 +309,7 @@ public class UserLocalServiceUtil {
 			remoteHost, userAgent);
 	}
 
-	public static void setGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public static void setGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
@@ -336,8 +332,7 @@ public class UserLocalServiceUtil {
 		userLocalService.setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public static void unsetGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public static void unsetGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();

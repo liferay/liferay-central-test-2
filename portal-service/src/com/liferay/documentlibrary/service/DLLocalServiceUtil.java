@@ -69,7 +69,7 @@ public class DLLocalServiceUtil {
 	}
 
 	public static Hits search(
-			String companyId, String portletId, String groupId,
+			String companyId, String portletId, long groupId,
 			String[] repositoryIds, String keywords)
 		throws SystemException {
 

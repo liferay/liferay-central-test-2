@@ -87,11 +87,11 @@ public class LayoutSetSoap implements Serializable {
 		_companyId = companyId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -149,7 +149,7 @@ public class LayoutSetSoap implements Serializable {
 
 	private String _ownerId;
 	private String _companyId;
-	private String _groupId;
+	private long _groupId;
 	private String _userId;
 	private boolean _privateLayout;
 	private String _themeId;

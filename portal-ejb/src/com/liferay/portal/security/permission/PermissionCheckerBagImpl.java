@@ -114,7 +114,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public boolean isCommunityAdmin(
-			String companyId, String groupId, String name)
+			String companyId, long groupId, String name)
 		throws Exception {
 
 		String key =
@@ -132,17 +132,17 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	protected boolean isCommunityAdminImpl(
-			String companyId, String groupId, String name)
+			String companyId, long groupId, String name)
 		throws PortalException, RemoteException, SystemException {
 
-		if (groupId == null) {
+		if (groupId <= 0) {
 			return false;
 		}
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
 				companyId, Group.class.getName(), ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_INDIVIDUAL, groupId);
+				ResourceImpl.SCOPE_INDIVIDUAL, String.valueOf(groupId));
 
 			if (PermissionLocalServiceUtil.hasUserPermission(
 					_userId, ActionKeys.ADMINISTRATE,

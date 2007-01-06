@@ -46,13 +46,13 @@ public class StructureDisplayTerms extends DisplayTerms {
 	public StructureDisplayTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getString(req, GROUP_ID);
+		groupId = ParamUtil.getLong(req, GROUP_ID);
 		structureId = ParamUtil.getString(req, STRUCTURE_ID);
 		name = ParamUtil.getString(req, NAME);
 		description = ParamUtil.getString(req, DESCRIPTION);
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return groupId;
 	}
 
@@ -68,7 +68,7 @@ public class StructureDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
-	protected String groupId;
+	protected long groupId;
 	protected String structureId;
 	protected String name;
 	protected String description;

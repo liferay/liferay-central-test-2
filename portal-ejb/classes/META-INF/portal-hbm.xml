@@ -134,13 +134,13 @@
 	</class>
 	<class name="com.liferay.portal.model.impl.GroupImpl" table="Group_">
 		<cache usage="read-write" />
-		<id name="groupId" type="java.lang.String">
+		<id name="groupId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="parentGroupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parentGroupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
@@ -179,7 +179,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
@@ -459,7 +459,7 @@
 		<id name="entryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -490,7 +490,7 @@
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
@@ -504,7 +504,7 @@
 		<id name="eventId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -587,7 +587,7 @@
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -603,7 +603,7 @@
 		<id name="folderId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
@@ -663,7 +663,7 @@
 			<key-property name="articleId" />
 		</composite-id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.journal.model.impl.JournalStructureImpl" table="JournalStructure">
 		<cache usage="read-write" />
@@ -704,7 +704,7 @@
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -788,7 +788,7 @@
 		<id name="questionId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -838,7 +838,7 @@
 		<id name="cartId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -854,7 +854,7 @@
 		<id name="categoryId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -869,7 +869,7 @@
 		<id name="couponId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -951,7 +951,7 @@
 		<id name="orderId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -1020,7 +1020,7 @@
 		<id name="nodeId" type="java.lang.String">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -1061,7 +1061,7 @@
 		<id name="frameworkVersionId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
@@ -1077,7 +1077,7 @@
 		<id name="productEntryId" type="long">
 			<generator class="assigned" />
 		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />

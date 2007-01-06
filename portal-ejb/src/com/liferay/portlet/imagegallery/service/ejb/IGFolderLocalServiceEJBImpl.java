@@ -125,7 +125,7 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 		IGFolderLocalServiceFactory.getTxImpl().deleteFolder(folder);
 	}
 
-	public void deleteFolders(java.lang.String groupId)
+	public void deleteFolders(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		IGFolderLocalServiceFactory.getTxImpl().deleteFolders(groupId);
@@ -138,35 +138,33 @@ public class IGFolderLocalServiceEJBImpl implements IGFolderLocalService,
 		return IGFolderLocalServiceFactory.getTxImpl().getFolder(folderId);
 	}
 
-	public java.util.List getFolders(java.lang.String groupId)
+	public java.util.List getFolders(long groupId)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId);
 	}
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId);
 	}
 
-	public java.util.List getFolders(java.lang.String groupId,
+	public java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFolders(groupId,
 			parentFolderId, begin, end);
 	}
 
-	public int getFoldersCount(java.lang.String groupId,
-		java.lang.String parentFolderId)
+	public int getFoldersCount(long groupId, java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return IGFolderLocalServiceFactory.getTxImpl().getFoldersCount(groupId,
 			parentFolderId);
 	}
 
-	public void getSubfolderIds(java.util.List folderIds,
-		java.lang.String groupId, java.lang.String folderId)
-		throws com.liferay.portal.SystemException {
+	public void getSubfolderIds(java.util.List folderIds, long groupId,
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
 		IGFolderLocalServiceFactory.getTxImpl().getSubfolderIds(folderIds,
 			groupId, folderId);
 	}

@@ -38,7 +38,7 @@ import javax.ejb.SessionContext;
  */
 public class OrganizationServiceEJBImpl implements OrganizationService,
 	SessionBean {
-	public void addGroupOrganizations(java.lang.String groupId,
+	public void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -83,7 +83,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 		return OrganizationServiceFactory.getTxImpl().getUserOrganizations(userId);
 	}
 
-	public void setGroupOrganizations(java.lang.String groupId,
+	public void setGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -92,7 +92,7 @@ public class OrganizationServiceEJBImpl implements OrganizationService,
 			organizationIds);
 	}
 
-	public void unsetGroupOrganizations(java.lang.String groupId,
+	public void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

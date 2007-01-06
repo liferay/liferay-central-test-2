@@ -38,6 +38,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
 import com.liferay.util.NullSafeProperties;
 import com.liferay.util.PropertiesUtil;
@@ -111,14 +112,15 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return null;
 	}
 
-	public static String getGroupId(String ownerId) {
+	public static long getGroupId(String ownerId) {
 		if ((ownerId != null) &&
 			(ownerId.startsWith(PRIVATE) || ownerId.startsWith(PUBLIC))) {
 
-			return ownerId.substring(PRIVATE.length(), ownerId.length());
+			return GetterUtil.getLong(
+				ownerId.substring(PRIVATE.length(), ownerId.length()));
 		}
 		else {
-			return null;
+			return 0;
 		}
 	}
 
@@ -215,7 +217,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
@@ -515,7 +517,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	private static Log _log = LogFactory.getLog(LayoutImpl.class);
 
 	private String _plid;
-	private String _groupId;
+	private long _groupId;
 	private boolean _privateLayout;
 	private Properties _typeSettingsProperties = null;
 

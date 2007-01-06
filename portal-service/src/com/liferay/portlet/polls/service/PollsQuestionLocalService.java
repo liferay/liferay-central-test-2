@@ -93,7 +93,7 @@ public interface PollsQuestionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteQuestions(java.lang.String groupId)
+	public void deleteQuestions(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -102,13 +102,13 @@ public interface PollsQuestionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getQuestions(java.lang.String groupId)
+	public java.util.List getQuestions(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getQuestions(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List getQuestions(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public int getQuestionsCount(java.lang.String groupId)
+	public int getQuestionsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsQuestion updateQuestion(

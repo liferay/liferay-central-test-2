@@ -28,7 +28,7 @@
 String articleId = layout.getTypeSettingsProperties().getProperty("article-id");
 String languageId = LanguageUtil.getLanguageId(request);
 
-String content = JournalContentUtil.getContent(company.getCompanyId(), portletGroupId, articleId, languageId, themeDisplay);
+String content = JournalContentUtil.getContent(company.getCompanyId(), portletGroupId.longValue(), articleId, languageId, themeDisplay);
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">

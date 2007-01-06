@@ -66,7 +66,7 @@ if (Validator.isNull(modelResource)) {
 }
 
 String ownerId = layout.getOwnerId();
-String groupId = layout.getGroupId();
+long groupId = layout.getGroupId();
 
 if (modelResource.equals(Layout.class.getName())) {
 	int x = resourcePrimKey.indexOf("ownerId=");
@@ -484,7 +484,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 				if (tabs3.equals("current")) {
 					organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-					organizationParams.put("permissionsGroupId", groupId);
+					organizationParams.put("permissionsGroupId", new Long(groupId));
 				}
 
 				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
@@ -851,7 +851,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 		}
 		%>
 
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
+		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
 		<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="">
 
 		<%

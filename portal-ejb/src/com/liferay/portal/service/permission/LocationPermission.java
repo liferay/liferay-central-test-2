@@ -59,7 +59,7 @@ public class LocationPermission {
 			(PermissionCheckerImpl)permissionChecker;
 
 		if (permissionChecker.hasPermission(
-				null, "com.liferay.portal.model.Location", locationId,
+				0, "com.liferay.portal.model.Location", locationId,
 				actionId)) {
 
 			return true;
@@ -83,7 +83,7 @@ public class LocationPermission {
 			String parentOrganizationId = location.getParentOrganizationId();
 
 			if (permissionChecker.hasPermission(
-					null, Organization.class.getName(), parentOrganizationId,
+					0, Organization.class.getName(), parentOrganizationId,
 					actionId)) {
 
 				return true;

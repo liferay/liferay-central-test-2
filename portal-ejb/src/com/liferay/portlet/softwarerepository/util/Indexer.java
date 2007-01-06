@@ -53,7 +53,7 @@ public class Indexer
 	public static final String PORTLET_ID = PortletKeys.SOFTWARE_REPOSITORY;
 
 	public static void addProductEntry(
-			String companyId, String groupId, String userId, String userName,
+			String companyId, long groupId, String userId, String userName,
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId)
@@ -116,7 +116,7 @@ public class Indexer
 	}
 
 	public static void updateProductEntry(
-			String companyId, String groupId, String userId, String userName,
+			String companyId, long groupId, String userId, String userName,
 			long productEntryId, String name, String type,
 			String shortDescription, String longDescription, String pageURL,
 			String repoGroupId, String repoArtifactId)

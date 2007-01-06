@@ -102,7 +102,7 @@ public class GetArticlesAction extends Action {
 		String companyId = PortalUtil.getCompanyId(req);
 		String articleId = null;
 		Double version = null;
-		String groupId = DAOParamUtil.getString(req, "groupId");
+		long groupId = DAOParamUtil.getLong(req, "groupId");
 		String title = null;
 		String description = null;
 		String content = null;

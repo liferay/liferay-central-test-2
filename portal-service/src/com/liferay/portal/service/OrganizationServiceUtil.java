@@ -29,7 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public class OrganizationServiceUtil {
-	public static void addGroupOrganizations(java.lang.String groupId,
+	public static void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -73,7 +73,7 @@ public class OrganizationServiceUtil {
 		return organizationService.getUserOrganizations(userId);
 	}
 
-	public static void setGroupOrganizations(java.lang.String groupId,
+	public static void setGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -81,7 +81,7 @@ public class OrganizationServiceUtil {
 		organizationService.setGroupOrganizations(groupId, organizationIds);
 	}
 
-	public static void unsetGroupOrganizations(java.lang.String groupId,
+	public static void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

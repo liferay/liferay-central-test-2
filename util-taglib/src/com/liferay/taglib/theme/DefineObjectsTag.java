@@ -66,7 +66,8 @@ public class DefineObjectsTag extends TagSupport {
 			}
 
 			pageContext.setAttribute(
-				"portletGroupId", themeDisplay.getPortletGroupId());
+				"portletGroupId",
+				new Long(themeDisplay.getPortletGroupId()));
 			pageContext.setAttribute(
 				"permissionChecker", themeDisplay.getPermissionChecker());
 			pageContext.setAttribute("locale", themeDisplay.getLocale());

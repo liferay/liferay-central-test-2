@@ -41,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
 	public String getAuthorUserId(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -55,7 +55,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getAuthorUserName(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -69,7 +69,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getApprovalUserName(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -83,7 +83,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public String getApprovalUserId(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		User user = getFirstUser(groupId);
@@ -97,23 +97,23 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	}
 
 	public boolean addCommunityPermissions(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		return true;
 	}
 
 	public boolean addGuestPermissions(
-			String companyId, String groupId, Object journalObj)
+			String companyId, long groupId, Object journalObj)
 		throws Exception {
 
 		return true;
 	}
 
-	protected synchronized User getFirstUser(String groupId) throws Exception {
+	protected synchronized User getFirstUser(long groupId) throws Exception {
 		User firstUser = null;
 
-		if (groupId.equals(_lastGroupId) &&
+		if ((groupId == _lastGroupId) &&
 			(_lastUserFound != null) && (_lastUserFound.get() != null)) {
 
 			firstUser = (User)_lastUserFound.get();
@@ -152,7 +152,7 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 	private static Log _log =
 		LogFactory.getLog(JournalCreationStrategyImpl.class);
 
-	private static String _lastGroupId = null;
+	private static long _lastGroupId = 0;
 	private static SoftReference _lastUserFound = null;
 
 }

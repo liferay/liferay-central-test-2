@@ -56,7 +56,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static final String PORTLET_ID = PortletKeys.WIKI;
 
 	public static void addPage(
-			String companyId, String groupId, String nodeId, String title,
+			String companyId, long groupId, String nodeId, String title,
 			String content)
 		throws IOException {
 
@@ -141,7 +141,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	}
 
 	public static void updatePage(
-			String companyId, String groupId, String nodeId, String title,
+			String companyId, long groupId, String nodeId, String title,
 			String content)
 		throws IOException {
 

@@ -37,9 +37,6 @@ import com.liferay.util.XSSUtil;
 public class GroupModelImpl extends BaseModelImpl {
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group"), XSS_ALLOW);
-	public static boolean XSS_ALLOW_GROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.groupId"),
-			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.companyId"),
 			XSS_ALLOW_BY_MODEL);
@@ -48,9 +45,6 @@ public class GroupModelImpl extends BaseModelImpl {
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_CLASSPK = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.classPK"),
-			XSS_ALLOW_BY_MODEL);
-	public static boolean XSS_ALLOW_PARENTGROUPID = GetterUtil.getBoolean(PropsUtil.get(
-				"xss.allow.com.liferay.portal.model.Group.parentGroupId"),
 			XSS_ALLOW_BY_MODEL);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Group.name"),
@@ -70,27 +64,20 @@ public class GroupModelImpl extends BaseModelImpl {
 	public GroupModelImpl() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _groupId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setGroupId(pk);
 	}
 
-	public String getGroupId() {
-		return GetterUtil.getString(_groupId);
+	public long getGroupId() {
+		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
-		if (((groupId == null) && (_groupId != null)) ||
-				((groupId != null) && (_groupId == null)) ||
-				((groupId != null) && (_groupId != null) &&
-				!groupId.equals(_groupId))) {
-			if (!XSS_ALLOW_GROUPID) {
-				groupId = XSSUtil.strip(groupId);
-			}
-
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
 			_groupId = groupId;
 		}
 	}
@@ -146,19 +133,12 @@ public class GroupModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getParentGroupId() {
-		return GetterUtil.getString(_parentGroupId);
+	public long getParentGroupId() {
+		return _parentGroupId;
 	}
 
-	public void setParentGroupId(String parentGroupId) {
-		if (((parentGroupId == null) && (_parentGroupId != null)) ||
-				((parentGroupId != null) && (_parentGroupId == null)) ||
-				((parentGroupId != null) && (_parentGroupId != null) &&
-				!parentGroupId.equals(_parentGroupId))) {
-			if (!XSS_ALLOW_PARENTGROUPID) {
-				parentGroupId = XSSUtil.strip(parentGroupId);
-			}
-
+	public void setParentGroupId(long parentGroupId) {
+		if (parentGroupId != _parentGroupId) {
 			_parentGroupId = parentGroupId;
 		}
 	}
@@ -274,9 +254,9 @@ public class GroupModelImpl extends BaseModelImpl {
 			return false;
 		}
 
-		String pk = group.getPrimaryKey();
+		long pk = group.getPrimaryKey();
 
-		if (getPrimaryKey().equals(pk)) {
+		if (getPrimaryKey() == pk) {
 			return true;
 		}
 		else {
@@ -285,14 +265,14 @@ public class GroupModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return getPrimaryKey().hashCode();
+		return (int)getPrimaryKey();
 	}
 
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _className;
 	private String _classPK;
-	private String _parentGroupId;
+	private long _parentGroupId;
 	private String _name;
 	private String _description;
 	private String _type;

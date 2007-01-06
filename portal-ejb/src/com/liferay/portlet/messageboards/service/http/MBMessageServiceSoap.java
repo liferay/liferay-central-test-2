@@ -37,10 +37,10 @@ import java.rmi.RemoteException;
  */
 public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addDiscussionMessage(
-		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String threadId,
-		java.lang.String parentMessageId, java.lang.String subject,
-		java.lang.String body) throws RemoteException {
+		long groupId, java.lang.String className, java.lang.String classPK,
+		java.lang.String threadId, java.lang.String parentMessageId,
+		java.lang.String subject, java.lang.String body)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addDiscussionMessage(groupId,
 					className, classPK, threadId, parentMessageId, subject, body);
@@ -127,7 +127,7 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static void deleteDiscussionMessage(java.lang.String groupId,
+	public static void deleteDiscussionMessage(long groupId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String messageId) throws RemoteException {
 		try {
@@ -187,10 +187,9 @@ public class MBMessageServiceSoap {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateDiscussionMessage(
-		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String messageId,
-		java.lang.String subject, java.lang.String body)
-		throws RemoteException {
+		long groupId, java.lang.String className, java.lang.String classPK,
+		java.lang.String messageId, java.lang.String subject,
+		java.lang.String body) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateDiscussionMessage(groupId,
 					className, classPK, messageId, subject, body);

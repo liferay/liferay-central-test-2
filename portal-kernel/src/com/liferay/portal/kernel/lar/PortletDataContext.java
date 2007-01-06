@@ -39,7 +39,7 @@ import java.util.Set;
  */
 public class PortletDataContext implements Serializable {
 
-	public PortletDataContext(String companyId, String groupId,
+	public PortletDataContext(String companyId, long groupId,
 							  Set primaryKeys) {
 
 		_companyId = companyId;
@@ -51,7 +51,7 @@ public class PortletDataContext implements Serializable {
 		return _companyId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
@@ -80,7 +80,7 @@ public class PortletDataContext implements Serializable {
 	}
 
 	private String _companyId;
-	private String _groupId;
+	private long _groupId;
 	private Set _primaryKeys;
 
 }

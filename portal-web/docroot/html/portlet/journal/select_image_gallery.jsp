@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-String groupId = ParamUtil.getString(request, "groupId");
+long groupId = ParamUtil.getLong(request, "groupId");
 
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 

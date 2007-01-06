@@ -42,8 +42,7 @@ public class GroupLocalServiceUtil {
 			description, type, friendlyURL);
 	}
 
-	public static void addRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -57,7 +56,7 @@ public class GroupLocalServiceUtil {
 		groupLocalService.checkSystemGroups(companyId);
 	}
 
-	public static void deleteGroup(java.lang.String groupId)
+	public static void deleteGroup(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -73,8 +72,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getFriendlyURLGroup(companyId, friendlyURL);
 	}
 
-	public static com.liferay.portal.model.Group getGroup(
-		java.lang.String groupId)
+	public static com.liferay.portal.model.Group getGroup(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -143,8 +141,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getUserGroupsGroups(userGroups);
 	}
 
-	public static boolean hasRoleGroup(java.lang.String roleId,
-		java.lang.String groupId)
+	public static boolean hasRoleGroup(java.lang.String roleId, long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
@@ -152,11 +149,19 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.hasRoleGroup(roleId, groupId);
 	}
 
-	public static boolean hasUserGroup(java.lang.String userId,
-		java.lang.String groupId) throws com.liferay.portal.SystemException {
+	public static boolean hasUserGroup(java.lang.String userId, long groupId)
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.hasUserGroup(userId, groupId);
+	}
+
+	public static java.util.Map renewGroupIds()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.renewGroupIds();
 	}
 
 	public static java.util.List search(java.lang.String companyId,
@@ -178,26 +183,23 @@ public class GroupLocalServiceUtil {
 			params);
 	}
 
-	public static void setRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 		groupLocalService.setRoleGroups(roleId, groupIds);
 	}
 
-	public static void unsetRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public static void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
-	public static com.liferay.portal.model.Group updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+	public static com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();

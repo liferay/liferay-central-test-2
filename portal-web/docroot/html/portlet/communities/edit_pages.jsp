@@ -32,7 +32,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-String groupId = group.getGroupId();
+long groupId = group.getGroupId();
 
 String selPlid = ParamUtil.getString(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 String layoutId = LayoutImpl.getLayoutId(selPlid);
@@ -100,7 +100,7 @@ portletURL.setParameter("struts_action", "/communities/edit_pages");
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("groupId", groupId);
+portletURL.setParameter("groupId", String.valueOf(groupId));
 %>
 
 <script type="text/javascript">
@@ -180,7 +180,7 @@ portletURL.setParameter("groupId", groupId);
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">

@@ -269,13 +269,13 @@ public class MBMessageLocalServiceEJBImpl implements MBMessageLocalService,
 			className, classPK);
 	}
 
-	public java.util.List getGroupMessages(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupMessages(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return MBMessageLocalServiceFactory.getTxImpl().getGroupMessages(groupId,
 			begin, end);
 	}
 
-	public int getGroupMessagesCount(java.lang.String groupId)
+	public int getGroupMessagesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return MBMessageLocalServiceFactory.getTxImpl().getGroupMessagesCount(groupId);
 	}

@@ -49,7 +49,7 @@ public class UserGroupPermission {
 		String actionId) {
 
 		return permissionChecker.hasPermission(
-			null, UserGroup.class.getName(), userGroupId, actionId);
+			0, UserGroup.class.getName(), userGroupId, actionId);
 	}
 
 }

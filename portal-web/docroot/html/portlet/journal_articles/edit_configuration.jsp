@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/journal_articles/init.jsp" %>
 
 <%
-groupId = ParamUtil.getString(request, "groupId", groupId);
+groupId = ParamUtil.getLong(request, "groupId", groupId);
 
 List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 %>
@@ -50,7 +50,7 @@ List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, nu
 				Group group = (Group)communities.get(i);
 			%>
 
-				<option <%= groupId.equals(group.getGroupId()) ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>
+				<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.getName() %></option>
 
 			<%
 			}

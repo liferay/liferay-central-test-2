@@ -59,7 +59,7 @@ import org.apache.commons.logging.LogFactory;
 public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 	public void addModelResources(
-			String companyId, String groupId, String userId, String name,
+			String companyId, long groupId, String userId, String name,
 			long primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -70,7 +70,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	public void addModelResources(
-			String companyId, String groupId, String userId, String name,
+			String companyId, long groupId, String userId, String name,
 			String primKey, String[] communityPermissions,
 			String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -90,14 +90,14 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		addResource(
 			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-			guestGroup.getGroupId());
+			String.valueOf(guestGroup.getGroupId()));
 
 		// Group
 
-		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
+		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
 			addResource(
 				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_GROUP, groupId);
+				ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
 		}
 
 		if (primKey != null) {
@@ -121,7 +121,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 			// Community permissions
 
-			if ((groupId != null) && communityPermissions != null) {
+			if ((groupId > 0) && communityPermissions != null) {
 				addModelPermissions(
 					groupId, resource.getResourceId(), communityPermissions);
 			}
@@ -134,9 +134,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				// community permissions and the given community is the guest
 				// community.
 
-				if ((groupId == null) ||
-					!guestGroup.getGroupId().equals(groupId)) {
-
+				if ((groupId <= 0) || (guestGroup.getGroupId() != groupId)) {
 					addModelPermissions(
 						guestGroup.getGroupId(), resource.getResourceId(),
 						guestPermissions);
@@ -171,7 +169,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	public void addResources(
-			String companyId, String groupId, String name,
+			String companyId, long groupId, String name,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -180,7 +178,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	public void addResources(
-			String companyId, String groupId, String userId, String name,
+			String companyId, long groupId, String userId, String name,
 			long primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -191,7 +189,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	public void addResources(
-			String companyId, String groupId, String userId, String name,
+			String companyId, long groupId, String userId, String name,
 			String primKey, boolean portletActions,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -221,16 +219,16 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		addResource(
 			companyId, name, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
-			guestGroup.getGroupId());
+			String.valueOf(guestGroup.getGroupId()));
 
 		start = logAddResources(name, primKey, start, 3);
 
 		// Group
 
-		if ((groupId != null) && !guestGroup.getGroupId().equals(groupId)) {
+		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
 			addResource(
 				companyId, name, ResourceImpl.TYPE_CLASS,
-				ResourceImpl.SCOPE_GROUP, groupId);
+				ResourceImpl.SCOPE_GROUP, String.valueOf(groupId));
 		}
 
 		start = logAddResources(name, primKey, start, 4);
@@ -262,7 +260,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 			// Community permissions
 
-			if ((groupId != null) && addCommunityPermissions) {
+			if ((groupId > 0) && addCommunityPermissions) {
 				addCommunityPermissions(
 					groupId, name, resource.getResourceId(), portletActions);
 			}
@@ -277,8 +275,8 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 				// community permissions and the given community is the guest
 				// community.
 
-				if ((groupId != null) && addCommunityPermissions) {
-					if (guestGroup.getGroupId().equals(groupId)) {
+				if ((groupId > 0) && addCommunityPermissions) {
+					if (guestGroup.getGroupId() == groupId) {
 						addGuestPermissions = false;
 					}
 				}
@@ -388,8 +386,18 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 			companyId, name, typeId, scope, primKey);
 	}
 
+	public void updatePrimKey(long resourceId, String primKey)
+		throws PortalException, SystemException {
+
+		Resource resource = ResourceUtil.findByPrimaryKey(resourceId);
+
+		resource.setPrimKey(primKey);
+
+		ResourceUtil.update(resource);
+	}
+
 	protected void addCommunityPermissions(
-			String groupId, String name, long resourceId,
+			long groupId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -431,7 +439,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected void addGuestPermissions(
-			String groupId, String name, long resourceId,
+			long groupId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
@@ -457,7 +465,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected void addModelPermissions(
-			String groupId, long resourceId, String[] actionIds)
+			long groupId, long resourceId, String[] actionIds)
 		throws PortalException, SystemException {
 
 		Group group = GroupUtil.findByPrimaryKey(groupId);
@@ -469,7 +477,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 	}
 
 	protected long logAddCommunityPermissions(
-		String groupId, String name, long resourceId, long start, int block) {
+		long groupId, String name, long resourceId, long start, int block) {
 
 		if (!_log.isDebugEnabled()) {
 			return 0;

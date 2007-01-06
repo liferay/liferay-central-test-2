@@ -52,7 +52,7 @@ public class CalEventFinder {
 		CalEventFinder.class.getName() + ".findByRemindBy";
 
 	public static List findByG_SD(
-			String groupId, Date startDateGT, Date startDateLT,
+			long groupId, Date startDateGT, Date startDateLT,
 			boolean timeZoneSensitive)
 		throws SystemException {
 

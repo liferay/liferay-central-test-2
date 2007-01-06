@@ -101,7 +101,7 @@
 <c:if test="<%= themeDisplay.isShowAddContentIcon() && selectable %>">
 <script type="text/javascript">
 	Navigation.init({
-			groupId: "<%= layout.getGroupId() %>",
+			groupId: "<%= String.valueOf(layout.getGroupId()) %>",
 			language: "<%= LanguageUtil.getLanguageId(request) %>",
 			layoutId: "<%= layout.getLayoutId() %>",
 			newPage: <%= newPage %>,

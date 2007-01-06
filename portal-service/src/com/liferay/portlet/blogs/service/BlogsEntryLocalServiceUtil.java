@@ -121,7 +121,7 @@ public class BlogsEntryLocalServiceUtil {
 			guestPermissions);
 	}
 
-	public static void deleteEntries(java.lang.String groupId)
+	public static void deleteEntries(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
@@ -173,23 +173,22 @@ public class BlogsEntryLocalServiceUtil {
 		return blogsEntryLocalService.getEntry(entryId);
 	}
 
-	public static java.util.List getGroupEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getGroupEntries(long groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.getGroupEntries(groupId, begin, end);
 	}
 
-	public static int getGroupEntriesCount(java.lang.String groupId)
+	public static int getGroupEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.getGroupEntriesCount(groupId);
 	}
 
-	public static java.lang.String getGroupEntriesRSS(
-		java.lang.String groupId, int begin, int end, java.lang.String type,
-		double version, java.lang.String url)
+	public static java.lang.String getGroupEntriesRSS(long groupId, int begin,
+		int end, java.lang.String type, double version, java.lang.String url)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
@@ -205,9 +204,9 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String userId, java.lang.String[] categoryIds,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String userId,
+		java.lang.String[] categoryIds, java.lang.String keywords)
+		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
 		return blogsEntryLocalService.search(companyId, groupId, userId,

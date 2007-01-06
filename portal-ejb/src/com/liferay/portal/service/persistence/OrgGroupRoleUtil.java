@@ -152,6 +152,45 @@ public class OrgGroupRoleUtil {
 		return getPersistence().fetchByPrimaryKey(orgGroupRolePK);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupRole findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupRole findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupRole[] findByGroupId_PrevAndNext(
+		com.liferay.portal.service.persistence.OrgGroupRolePK orgGroupRolePK,
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupRoleException {
+		return getPersistence().findByGroupId_PrevAndNext(orgGroupRolePK,
+			groupId, obc);
+	}
+
 	public static java.util.List findByRoleId(java.lang.String roleId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByRoleId(roleId);
@@ -210,6 +249,11 @@ public class OrgGroupRoleUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByRoleId(java.lang.String roleId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByRoleId(roleId);
@@ -217,6 +261,11 @@ public class OrgGroupRoleUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByRoleId(java.lang.String roleId)

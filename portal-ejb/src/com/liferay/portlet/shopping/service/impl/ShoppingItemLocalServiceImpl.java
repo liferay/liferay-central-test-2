@@ -514,7 +514,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 	}
 
 	public List getFeaturedItems(
-			String groupId, String categoryId, int numOfItems)
+			long groupId, String categoryId, int numOfItems)
 		throws SystemException {
 
 		List featuredItems = ShoppingItemFinder.findByFeatured(
@@ -580,7 +580,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 	}
 
 	public List getSaleItems(
-			String groupId, String categoryId, int numOfItems)
+			long groupId, String categoryId, int numOfItems)
 		throws SystemException {
 
 		List saleItems = ShoppingItemFinder.findBySale(
@@ -609,7 +609,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 	}
 
 	public List search(
-			String groupId, String[] categoryIds, String keywords, int begin,
+			long groupId, String[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
 
@@ -618,7 +618,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 	}
 
 	public int searchCount(
-			String groupId, String[] categoryIds, String keywords)
+			long groupId, String[] categoryIds, String keywords)
 		throws SystemException {
 
 		return ShoppingItemFinder.countByKeywords(
@@ -798,7 +798,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 				ShoppingCategoryUtil.fetchByPrimaryKey(categoryId);
 
 			if ((newCategory == null) ||
-				(!oldCategory.getGroupId().equals(newCategory.getGroupId()))) {
+				(oldCategory.getGroupId() != newCategory.getGroupId())) {
 
 				categoryId = item.getCategoryId();
 			}

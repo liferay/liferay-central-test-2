@@ -35,7 +35,7 @@ import java.rmi.RemoteException;
  *
  */
 public class OrganizationServiceSoap {
-	public static void addGroupOrganizations(java.lang.String groupId,
+	public static void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.addGroupOrganizations(groupId,
@@ -100,7 +100,7 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static void setGroupOrganizations(java.lang.String groupId,
+	public static void setGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.setGroupOrganizations(groupId,
@@ -112,7 +112,7 @@ public class OrganizationServiceSoap {
 		}
 	}
 
-	public static void unsetGroupOrganizations(java.lang.String groupId,
+	public static void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds) throws RemoteException {
 		try {
 			OrganizationServiceUtil.unsetGroupOrganizations(groupId,

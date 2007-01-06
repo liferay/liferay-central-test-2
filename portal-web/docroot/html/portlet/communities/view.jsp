@@ -94,7 +94,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 	for (int i = 0; i < results.size(); i++) {
 		Group group = (Group)results.get(i);
 
-		ResultRow row = new ResultRow(new Object[] {group, tabs1}, group.getPrimaryKey().toString(), i);
+		ResultRow row = new ResultRow(new Object[] {group, tabs1}, String.valueOf(group.getPrimaryKey()), i);
 
 		// Name
 

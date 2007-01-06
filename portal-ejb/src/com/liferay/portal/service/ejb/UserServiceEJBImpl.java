@@ -37,8 +37,7 @@ import javax.ejb.SessionContext;
  *
  */
 public class UserServiceEJBImpl implements UserService, SessionBean {
-	public void addGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void addGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -116,7 +115,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().deleteUser(userId);
 	}
 
-	public java.util.List getGroupUsers(java.lang.String groupId)
+	public java.util.List getGroupUsers(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -150,8 +149,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return UserServiceFactory.getTxImpl().getUserById(userId);
 	}
 
-	public boolean hasGroupUser(java.lang.String groupId,
-		java.lang.String userId)
+	public boolean hasGroupUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -167,8 +165,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		return UserServiceFactory.getTxImpl().hasRoleUser(roleId, userId);
 	}
 
-	public void setGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void setGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
@@ -190,8 +187,7 @@ public class UserServiceEJBImpl implements UserService, SessionBean {
 		UserServiceFactory.getTxImpl().setUserGroupUsers(userGroupId, userIds);
 	}
 
-	public void unsetGroupUsers(java.lang.String groupId,
-		java.lang.String[] userIds)
+	public void unsetGroupUsers(long groupId, java.lang.String[] userIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);

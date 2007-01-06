@@ -112,10 +112,10 @@ public class EditRoleAssignmentsAction extends PortletAction {
 	protected void updateRoleGroups(ActionRequest req) throws Exception {
 		String roleId = ParamUtil.getString(req, "roleId");
 
-		String[] addGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "addGroupIds"));
-		String[] removeGroupIds = StringUtil.split(
-			ParamUtil.getString(req, "removeGroupIds"));
+		long[] addGroupIds = StringUtil.split(
+			ParamUtil.getString(req, "addGroupIds"), 0L);
+		long[] removeGroupIds = StringUtil.split(
+			ParamUtil.getString(req, "removeGroupIds"), 0L);
 
 		GroupServiceUtil.addRoleGroups(roleId, addGroupIds);
 		GroupServiceUtil.unsetRoleGroups(roleId, removeGroupIds);

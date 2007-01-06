@@ -64,7 +64,7 @@ public class VerifyJournal extends VerifyProcess {
 			JournalStructure structure = (JournalStructure)structures.get(i);
 
 			ResourceLocalServiceUtil.addResources(
-				structure.getCompanyId(), null, null,
+				structure.getCompanyId(), 0, null,
 				JournalStructure.class.getName(),
 				structure.getPrimaryKey().toString(), false, true, true);
 		}
@@ -81,7 +81,7 @@ public class VerifyJournal extends VerifyProcess {
 			JournalTemplate template = (JournalTemplate)templates.get(i);
 
 			ResourceLocalServiceUtil.addResources(
-				template.getCompanyId(), null, null,
+				template.getCompanyId(), 0, null,
 				JournalTemplate.class.getName(),
 				template.getPrimaryKey().toString(), false, true, true);
 		}
@@ -98,7 +98,7 @@ public class VerifyJournal extends VerifyProcess {
 			JournalArticle article = (JournalArticle)articles.get(i);
 
 			ResourceLocalServiceUtil.addResources(
-				article.getCompanyId(), null, null,
+				article.getCompanyId(), 0, null,
 				JournalArticle.class.getName(),
 				article.getResourcePK().toString(), false, true, true);
 		}

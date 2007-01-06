@@ -54,7 +54,7 @@ public class ShoppingOrderFinder {
 		ShoppingOrderFinder.class.getName() + ".findByO_G_C_U_PPPS";
 
 	public static int countByO_G_C_U_PPPS(
-			String orderId, String groupId, String companyId, String userId,
+			String orderId, long groupId, String companyId, String userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,
@@ -128,7 +128,7 @@ public class ShoppingOrderFinder {
 	}
 
 	public static List findByO_G_C_U_PPPS(
-			String orderId, String groupId, String companyId, String userId,
+			String orderId, long groupId, String companyId, String userId,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
 			String shippingLastName, String shippingEmailAddress,

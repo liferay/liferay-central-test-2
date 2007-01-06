@@ -270,7 +270,7 @@ public class PermissionUtil {
 		return getPersistence().getGroupsSize(pk);
 	}
 
-	public static boolean containsGroup(long pk, java.lang.String groupPK)
+	public static boolean containsGroup(long pk, long groupPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().containsGroup(pk, groupPK);
 	}
@@ -280,7 +280,7 @@ public class PermissionUtil {
 		return getPersistence().containsGroups(pk);
 	}
 
-	public static void addGroup(long pk, java.lang.String groupPK)
+	public static void addGroup(long pk, long groupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -294,7 +294,7 @@ public class PermissionUtil {
 		getPersistence().addGroup(pk, group);
 	}
 
-	public static void addGroups(long pk, java.lang.String[] groupPKs)
+	public static void addGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -314,7 +314,7 @@ public class PermissionUtil {
 		getPersistence().clearGroups(pk);
 	}
 
-	public static void removeGroup(long pk, java.lang.String groupPK)
+	public static void removeGroup(long pk, long groupPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -328,7 +328,7 @@ public class PermissionUtil {
 		getPersistence().removeGroup(pk, group);
 	}
 
-	public static void removeGroups(long pk, java.lang.String[] groupPKs)
+	public static void removeGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchPermissionException {
@@ -342,7 +342,7 @@ public class PermissionUtil {
 		getPersistence().removeGroups(pk, groups);
 	}
 
-	public static void setGroups(long pk, java.lang.String[] groupPKs)
+	public static void setGroups(long pk, long[] groupPKs)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchGroupException, 
 			com.liferay.portal.NoSuchPermissionException {

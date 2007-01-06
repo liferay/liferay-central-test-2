@@ -36,8 +36,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void addRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public void addRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -45,7 +44,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteGroup(java.lang.String groupId)
+	public void deleteGroup(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -54,7 +53,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group getGroup(java.lang.String groupId)
+	public com.liferay.portal.model.Group getGroup(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -90,13 +89,16 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasRoleGroup(java.lang.String roleId,
-		java.lang.String groupId)
+	public boolean hasRoleGroup(java.lang.String roleId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public boolean hasUserGroup(java.lang.String userId,
-		java.lang.String groupId) throws com.liferay.portal.SystemException;
+	public boolean hasUserGroup(java.lang.String userId, long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.Map renewGroupIds()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
@@ -107,20 +109,17 @@ public interface GroupLocalService {
 		java.lang.String description, java.util.Map params)
 		throws com.liferay.portal.SystemException;
 
-	public void setRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public void setRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void unsetRoleGroups(java.lang.String roleId,
-		java.lang.String[] groupIds)
+	public void unsetRoleGroups(java.lang.String roleId, long[] groupIds)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.Group updateGroup(
-		java.lang.String groupId, java.lang.String name,
-		java.lang.String description, java.lang.String type,
-		java.lang.String friendlyURL)
+	public com.liferay.portal.model.Group updateGroup(long groupId,
+		java.lang.String name, java.lang.String description,
+		java.lang.String type, java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

@@ -63,19 +63,19 @@ public class GroupSoap implements Serializable {
 	public GroupSoap() {
 	}
 
-	public String getPrimaryKey() {
+	public long getPrimaryKey() {
 		return _groupId;
 	}
 
-	public void setPrimaryKey(String pk) {
+	public void setPrimaryKey(long pk) {
 		setGroupId(pk);
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -103,11 +103,11 @@ public class GroupSoap implements Serializable {
 		_classPK = classPK;
 	}
 
-	public String getParentGroupId() {
+	public long getParentGroupId() {
 		return _parentGroupId;
 	}
 
-	public void setParentGroupId(String parentGroupId) {
+	public void setParentGroupId(long parentGroupId) {
 		_parentGroupId = parentGroupId;
 	}
 
@@ -143,11 +143,11 @@ public class GroupSoap implements Serializable {
 		_friendlyURL = friendlyURL;
 	}
 
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _className;
 	private String _classPK;
-	private String _parentGroupId;
+	private long _parentGroupId;
 	private String _name;
 	private String _description;
 	private String _type;

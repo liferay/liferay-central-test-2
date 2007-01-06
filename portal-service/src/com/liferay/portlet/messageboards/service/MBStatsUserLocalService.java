@@ -29,25 +29,24 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public interface MBStatsUserLocalService {
-	public void deleteStatsUserByGroupId(java.lang.String groupId)
+	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 
 	public void deleteStatsUserByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser getStatsUser(
-		java.lang.String groupId, java.lang.String userId)
+		long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStatsUsers(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public int getStatsUsersCount(java.lang.String groupId)
+	public java.util.List getStatsUsers(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public void updateStatsUser(java.lang.String groupId,
-		java.lang.String userId)
+	public int getStatsUsersCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public void updateStatsUser(long groupId, java.lang.String userId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

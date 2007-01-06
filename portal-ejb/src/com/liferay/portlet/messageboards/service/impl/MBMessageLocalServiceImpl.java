@@ -311,7 +311,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		if (files.size() > 0) {
 			String companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM;
-			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
@@ -406,7 +406,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.addMessage(
-					message.getCompanyId(), category.getGroupId(),
+					message.getCompanyId(), new Long(category.getGroupId()),
 					user.getFullName(), category.getCategoryId(), threadId,
 					messageId, subject, body);
 			}
@@ -745,13 +745,13 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		return getMessageDisplay(message, userId);
 	}
 
-	public List getGroupMessages(String groupId, int begin, int end)
+	public List getGroupMessages(long groupId, int begin, int end)
 		throws SystemException {
 
 		return MBMessageFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public int getGroupMessagesCount(String groupId) throws SystemException {
+	public int getGroupMessagesCount(long groupId) throws SystemException {
 		return MBMessageFinder.countByGroupId(groupId);
 	}
 
@@ -923,7 +923,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		if (files.size() > 0) {
 			String companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM;
-			String groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
 			String repositoryId = CompanyImpl.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
@@ -1005,7 +1005,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				try {
 					if (!category.isDiscussion()) {
 						Indexer.updateMessage(
-							curMessage.getCompanyId(), category.getGroupId(),
+							curMessage.getCompanyId(),
+							new Long(category.getGroupId()),
 							curMessage.getUserName(), category.getCategoryId(),
 							curMessage.getThreadId(), curMessage.getMessageId(),
 							curMessage.getSubject(), curMessage.getBody());
@@ -1028,7 +1029,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		try {
 			if (!category.isDiscussion()) {
 				Indexer.updateMessage(
-					message.getCompanyId(), category.getGroupId(),
+					message.getCompanyId(), new Long(category.getGroupId()),
 					message.getUserName(), category.getCategoryId(),
 					message.getThreadId(), messageId, subject, body);
 			}
@@ -1158,7 +1159,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 				categoryId);
 
 			if ((newCategory == null) ||
-				(!oldCategory.getGroupId().equals(newCategory.getGroupId()))) {
+				(oldCategory.getGroupId() != newCategory.getGroupId())) {
 
 				categoryId = message.getCategoryId();
 			}

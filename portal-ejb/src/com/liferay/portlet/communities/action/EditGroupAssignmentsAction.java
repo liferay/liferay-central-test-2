@@ -113,7 +113,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 	protected void updateGroupOrganizations(ActionRequest req)
 		throws Exception {
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] addOrganizationIds = StringUtil.split(
 			ParamUtil.getString(req, "addOrganizationIds"));
@@ -129,7 +129,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 	protected void updateGroupUserGroups(ActionRequest req)
 		throws Exception {
 
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] addUserGroupIds = StringUtil.split(
 			ParamUtil.getString(req, "addUserGroupIds"));
@@ -141,7 +141,7 @@ public class EditGroupAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateGroupUsers(ActionRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] addUserIds = StringUtil.split(
 			ParamUtil.getString(req, "addUserIds"));

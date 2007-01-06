@@ -89,14 +89,14 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCategories(java.lang.String groupId)
+	public java.util.List getCategories(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getCategories(java.lang.String groupId,
+	public java.util.List getCategories(long groupId,
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getCategoriesCount(java.lang.String groupId,
+	public int getCategoriesCount(long groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
@@ -119,9 +119,8 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String groupId, java.lang.String categoryId)
-		throws com.liferay.portal.SystemException;
+	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
+		java.lang.String categoryId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		java.lang.String categoryId, java.lang.String parentCategoryId,

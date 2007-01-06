@@ -129,7 +129,7 @@ public class BookmarksFolderLocalServiceUtil {
 		bookmarksFolderLocalService.deleteFolder(folder);
 	}
 
-	public static void deleteFolders(java.lang.String groupId)
+	public static void deleteFolders(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
@@ -145,7 +145,7 @@ public class BookmarksFolderLocalServiceUtil {
 		return bookmarksFolderLocalService.getFolder(folderId);
 	}
 
-	public static java.util.List getFolders(java.lang.String groupId,
+	public static java.util.List getFolders(long groupId,
 		java.lang.String parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
@@ -154,7 +154,7 @@ public class BookmarksFolderLocalServiceUtil {
 			begin, end);
 	}
 
-	public static int getFoldersCount(java.lang.String groupId,
+	public static int getFoldersCount(long groupId,
 		java.lang.String parentFolderId)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
@@ -163,9 +163,8 @@ public class BookmarksFolderLocalServiceUtil {
 			parentFolderId);
 	}
 
-	public static void getSubfolderIds(java.util.List folderIds,
-		java.lang.String groupId, java.lang.String folderId)
-		throws com.liferay.portal.SystemException {
+	public static void getSubfolderIds(java.util.List folderIds, long groupId,
+		java.lang.String folderId) throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 		bookmarksFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);
 	}

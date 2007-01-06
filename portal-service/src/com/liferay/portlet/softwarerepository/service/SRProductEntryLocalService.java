@@ -99,26 +99,25 @@ public interface SRProductEntryLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProductEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List getProductEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntries(java.lang.String groupId,
+	public java.util.List getProductEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getProductEntriesCount(java.lang.String groupId)
+	public int getProductEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public int getProductEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException;
+	public int getProductEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException;
 
 	public void reIndex(java.lang.String[] ids)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException;
+		java.lang.String companyId, long groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry updateProductEntry(
 		long productEntryId, java.lang.String name, java.lang.String type,

@@ -36,7 +36,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 public class MBDiscussionPermission {
 
 	public static void check(
-			PermissionChecker permissionChecker, String groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String className, String classPK, String actionId)
 		throws PortalException, SystemException {
 
@@ -48,7 +48,7 @@ public class MBDiscussionPermission {
 	}
 
 	public static boolean contains(
-			PermissionChecker permissionChecker, String groupId,
+			PermissionChecker permissionChecker, long groupId,
 			String className, String classPK, String actionId)
 		throws PortalException, SystemException {
 

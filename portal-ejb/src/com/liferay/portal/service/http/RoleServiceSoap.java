@@ -60,8 +60,7 @@ public class RoleServiceSoap {
 	}
 
 	public static com.liferay.portal.model.RoleSoap getGroupRole(
-		java.lang.String companyId, java.lang.String groupId)
-		throws RemoteException {
+		java.lang.String companyId, long groupId) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.getGroupRole(companyId,
 					groupId);

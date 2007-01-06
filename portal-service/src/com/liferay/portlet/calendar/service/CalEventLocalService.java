@@ -108,7 +108,7 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEvents(java.lang.String groupId)
+	public void deleteEvents(long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
@@ -117,27 +117,25 @@ public interface CalEventLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.lang.String type, int begin, int end)
+	public java.util.List getEvents(long groupId, java.lang.String type,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List getEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.util.Calendar cal) throws com.liferay.portal.SystemException;
+	public java.util.List getEvents(long groupId, java.util.Calendar cal,
+		java.lang.String type) throws com.liferay.portal.SystemException;
 
-	public java.util.List getEvents(java.lang.String groupId,
-		java.util.Calendar cal, java.lang.String type)
+	public int getEventsCount(long groupId, java.lang.String type)
 		throws com.liferay.portal.SystemException;
 
-	public int getEventsCount(java.lang.String groupId, java.lang.String type)
+	public java.util.List getRepeatingEvents(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getRepeatingEvents(java.lang.String groupId)
+	public boolean hasEvents(long groupId, java.util.Calendar cal)
 		throws com.liferay.portal.SystemException;
 
-	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal)
-		throws com.liferay.portal.SystemException;
-
-	public boolean hasEvents(java.lang.String groupId, java.util.Calendar cal,
+	public boolean hasEvents(long groupId, java.util.Calendar cal,
 		java.lang.String type) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateEvent(

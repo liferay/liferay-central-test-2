@@ -43,11 +43,11 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-int total = PollsQuestionLocalServiceUtil.getQuestionsCount(portletGroupId);
+int total = PollsQuestionLocalServiceUtil.getQuestionsCount(portletGroupId.longValue());
 
 searchContainer.setTotal(total);
 
-List results = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId, searchContainer.getStart(), searchContainer.getEnd());
+List results = PollsQuestionLocalServiceUtil.getQuestions(portletGroupId.longValue(), searchContainer.getStart(), searchContainer.getEnd());
 
 searchContainer.setResults(results);
 

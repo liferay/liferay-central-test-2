@@ -1287,7 +1287,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public boolean containsGroup(String pk, String groupPK)
+	public boolean containsGroup(String pk, long groupPK)
 		throws SystemException {
 		try {
 			return containsGroup.contains(pk, groupPK);
@@ -1306,7 +1306,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroup(String pk, String groupPK)
+	public void addGroup(String pk, long groupPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1328,7 +1328,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void addGroups(String pk, String[] groupPKs)
+	public void addGroups(String pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1365,7 +1365,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroup(String pk, String groupPK)
+	public void removeGroup(String pk, long groupPK)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1387,7 +1387,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void removeGroups(String pk, String[] groupPKs)
+	public void removeGroups(String pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1414,7 +1414,7 @@ public class OrganizationPersistence extends BasePersistence {
 		}
 	}
 
-	public void setGroups(String pk, String[] groupPKs)
+	public void setGroups(String pk, long[] groupPKs)
 		throws NoSuchOrganizationException, 
 			com.liferay.portal.NoSuchGroupException, SystemException {
 		try {
@@ -1700,7 +1700,7 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ContainsGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
@@ -1709,8 +1709,10 @@ public class OrganizationPersistence extends BasePersistence {
 			return new Integer(rs.getInt("COUNT_VALUE"));
 		}
 
-		protected boolean contains(String organizationId, String groupId) {
-			List results = execute(new Object[] { organizationId, groupId });
+		protected boolean contains(String organizationId, long groupId) {
+			List results = execute(new Object[] {
+						organizationId, new Long(groupId)
+					});
 
 			if (results.size() > 0) {
 				Integer count = (Integer)results.get(0);
@@ -1730,13 +1732,13 @@ public class OrganizationPersistence extends BasePersistence {
 				"INSERT INTO Groups_Orgs (organizationId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void add(String organizationId, String groupId) {
+		protected void add(String organizationId, long groupId) {
 			if (!_persistence.containsGroup.contains(organizationId, groupId)) {
-				update(new Object[] { organizationId, groupId });
+				update(new Object[] { organizationId, new Long(groupId) });
 			}
 		}
 
@@ -1761,12 +1763,12 @@ public class OrganizationPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.VARCHAR));
+			declareParameter(new SqlParameter(Types.INTEGER));
 			compile();
 		}
 
-		protected void remove(String organizationId, String groupId) {
-			update(new Object[] { organizationId, groupId });
+		protected void remove(String organizationId, long groupId) {
+			update(new Object[] { organizationId, new Long(groupId) });
 		}
 	}
 

@@ -35,7 +35,7 @@ headerNames.add(StringPool.BLANK);
 searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("there-are-no-events-on-this-day");
 
-List results = CalEventLocalServiceUtil.getEvents(portletGroupId, selCal, eventType);
+List results = CalEventLocalServiceUtil.getEvents(portletGroupId.longValue(), selCal, eventType);
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {

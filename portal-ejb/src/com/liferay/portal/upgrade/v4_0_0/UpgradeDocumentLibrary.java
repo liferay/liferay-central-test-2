@@ -237,13 +237,13 @@ public class UpgradeDocumentLibrary extends UpgradeProcess {
 
 			ps = con.prepareStatement(_UPGRADE_FOLDER_1);
 
-			ps.setString(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
+			ps.setLong(1, GroupImpl.DEFAULT_PARENT_GROUP_ID);
 
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
 				String repositoryId = rs.getString("repositoryId");
-				String groupId = rs.getString("groupId");
+				long groupId = rs.getLong("groupId");
 				String companyId = rs.getString("companyId");
 				String userId = rs.getString("userId");
 				String name = _fixName(rs.getString("name"));

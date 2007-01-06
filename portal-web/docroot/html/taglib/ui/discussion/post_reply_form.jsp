@@ -65,7 +65,7 @@
 	</td>
 </tr>
 
-<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId, className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 	<tr id="<%= namespace %>editForm<%= i %>" style="display: none;">
 		<td>
 			<table border="0" cellpadding="0" cellspacing="0">
@@ -128,7 +128,7 @@
 					<a href="<%= topHREF %>"><%= LanguageUtil.get(pageContext, "top") %></a>
 				</td>
 
-				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId, className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.UPDATE_DISCUSSION) %>">
 
 					<%
 					editHREF = "javascript: document.getElementById('" + namespace + "editForm" + i + "').style.display = ''; void('');";
@@ -142,7 +142,7 @@
 					</td>
 				</c:if>
 
-				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId, className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
+				<c:if test="<%= MBDiscussionPermission.contains(permissionChecker, portletGroupId.longValue(), className, classPK, ActionKeys.DELETE_DISCUSSION) %>">
 
 					<%
 					deleteHREF = "javascript: " + namespace + "deleteMessage(" + i + ");";

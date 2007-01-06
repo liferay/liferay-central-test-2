@@ -39,7 +39,7 @@ public class TemplateSearchTerms extends TemplateDisplayTerms {
 	public TemplateSearchTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getString(
+		groupId = ParamUtil.getLong(
 			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
 		templateId = DAOParamUtil.getLike(req, TEMPLATE_ID);
 		structureId = DAOParamUtil.getString(req, STRUCTURE_ID);

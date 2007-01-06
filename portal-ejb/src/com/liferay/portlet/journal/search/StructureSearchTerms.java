@@ -39,7 +39,7 @@ public class StructureSearchTerms extends StructureDisplayTerms {
 	public StructureSearchTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getString(
+		groupId = ParamUtil.getLong(
 			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
 		structureId = DAOParamUtil.getLike(req, STRUCTURE_ID);
 		name = DAOParamUtil.getLike(req, NAME);

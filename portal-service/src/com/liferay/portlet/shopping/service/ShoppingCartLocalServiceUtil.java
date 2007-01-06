@@ -29,7 +29,7 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingCartLocalServiceUtil {
-	public static void deleteGroupCarts(java.lang.String groupId)
+	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 		shoppingCartLocalService.deleteGroupCarts(groupId);
@@ -50,17 +50,17 @@ public class ShoppingCartLocalServiceUtil {
 		return shoppingCartLocalService.getCart(cartId);
 	}
 
-	public static java.util.Map getItems(java.lang.String groupId,
-		java.lang.String itemIds) throws com.liferay.portal.SystemException {
+	public static java.util.Map getItems(long groupId, java.lang.String itemIds)
+		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
 		return shoppingCartLocalService.getItems(groupId, itemIds);
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCart updateCart(
-		java.lang.String userId, java.lang.String groupId,
-		java.lang.String cartId, java.lang.String itemIds,
-		java.lang.String couponIds, int altShipping, boolean insure)
+		java.lang.String userId, long groupId, java.lang.String cartId,
+		java.lang.String itemIds, java.lang.String couponIds, int altShipping,
+		boolean insure)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();

@@ -221,27 +221,27 @@ public class DLFileEntryLocalServiceEJBImpl implements DLFileEntryLocalService,
 											 .getFoldersFileEntriesCount(folderIds);
 	}
 
-	public java.util.List getGroupFileEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupFileEntries(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getGroupFileEntries(groupId,
 			begin, end);
 	}
 
-	public java.util.List getGroupFileEntries(java.lang.String groupId,
+	public java.util.List getGroupFileEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl().getGroupFileEntries(groupId,
 			userId, begin, end);
 	}
 
-	public int getGroupFileEntriesCount(java.lang.String groupId)
+	public int getGroupFileEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl()
 											 .getGroupFileEntriesCount(groupId);
 	}
 
-	public int getGroupFileEntriesCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public int getGroupFileEntriesCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return DLFileEntryLocalServiceFactory.getTxImpl()
 											 .getGroupFileEntriesCount(groupId,
 			userId);

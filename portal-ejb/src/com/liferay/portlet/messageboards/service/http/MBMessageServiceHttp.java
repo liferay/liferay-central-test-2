@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -41,19 +42,14 @@ import com.liferay.portlet.messageboards.service.MBMessageServiceUtil;
  */
 public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String threadId, java.lang.String parentMessageId,
-		java.lang.String subject, java.lang.String body)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		java.lang.String classPK, java.lang.String threadId,
+		java.lang.String parentMessageId, java.lang.String subject,
+		java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -784,17 +780,12 @@ public class MBMessageServiceHttp {
 	}
 
 	public static void deleteDiscussionMessage(HttpPrincipal httpPrincipal,
-		java.lang.String groupId, java.lang.String className,
-		java.lang.String classPK, java.lang.String messageId)
+		long groupId, java.lang.String className, java.lang.String classPK,
+		java.lang.String messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = className;
 
 			if (className == null) {
@@ -982,19 +973,13 @@ public class MBMessageServiceHttp {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateDiscussionMessage(
-		HttpPrincipal httpPrincipal, java.lang.String groupId,
-		java.lang.String className, java.lang.String classPK,
-		java.lang.String messageId, java.lang.String subject,
-		java.lang.String body)
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		java.lang.String classPK, java.lang.String messageId,
+		java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = groupId;
-
-			if (groupId == null) {
-				paramObj0 = new NullWrapper("java.lang.String");
-			}
-
+			Object paramObj0 = new LongWrapper(groupId);
 			Object paramObj1 = className;
 
 			if (className == null) {

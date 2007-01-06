@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.util.GetterUtil;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -52,7 +53,7 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences prefs = req.getPreferences();
 
-			String groupId = prefs.getValue("group-id", StringPool.BLANK);
+			long groupId = GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
 
 			GroupLocalServiceUtil.getGroup(groupId);
 

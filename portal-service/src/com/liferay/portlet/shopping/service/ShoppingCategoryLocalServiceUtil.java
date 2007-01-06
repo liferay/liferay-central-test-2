@@ -129,14 +129,14 @@ public class ShoppingCategoryLocalServiceUtil {
 		shoppingCategoryLocalService.deleteCategory(category);
 	}
 
-	public static java.util.List getCategories(java.lang.String groupId)
+	public static java.util.List getCategories(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
 		return shoppingCategoryLocalService.getCategories(groupId);
 	}
 
-	public static java.util.List getCategories(java.lang.String groupId,
+	public static java.util.List getCategories(long groupId,
 		java.lang.String parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
@@ -145,7 +145,7 @@ public class ShoppingCategoryLocalServiceUtil {
 			parentCategoryId, begin, end);
 	}
 
-	public static int getCategoriesCount(java.lang.String groupId,
+	public static int getCategoriesCount(long groupId,
 		java.lang.String parentCategoryId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
@@ -191,7 +191,7 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static void getSubcategoryIds(java.util.List categoryIds,
-		java.lang.String groupId, java.lang.String categoryId)
+		long groupId, java.lang.String categoryId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 		shoppingCategoryLocalService.getSubcategoryIds(categoryIds, groupId,

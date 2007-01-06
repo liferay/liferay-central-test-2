@@ -66,7 +66,7 @@ import java.util.Map;
 public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 
 	public void addGroupOrganizations(
-			String groupId, String[] organizationIds)
+			long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addOrganizations(groupId, organizationIds);
@@ -126,7 +126,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		}
 
 		ResourceLocalServiceUtil.addResources(
-			organization.getCompanyId(), null, userId, name,
+			organization.getCompanyId(), 0, userId, name,
 			organization.getPrimaryKey().toString(), false, false, false);
 	}
 
@@ -205,7 +205,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
-	public List getGroupOrganizations(String groupId)
+	public List getGroupOrganizations(long groupId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.getOrganizations(groupId);
@@ -217,7 +217,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		return UserUtil.getOrganizations(userId);
 	}
 
-	public boolean hasGroupOrganization(String groupId, String organizationId)
+	public boolean hasGroupOrganization(long groupId, String organizationId)
 		throws PortalException, SystemException {
 
 		return GroupUtil.containsOrganization(groupId, organizationId);
@@ -248,14 +248,14 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			street, city, zip, regionId, countryId, params, andOperator);
 	}
 
-	public void setGroupOrganizations(String groupId, String[] organizationIds)
+	public void setGroupOrganizations(long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.setOrganizations(groupId, organizationIds);
 	}
 
 	public void unsetGroupOrganizations(
-			String groupId, String[] organizationIds)
+			long groupId, String[] organizationIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.removeOrganizations(groupId, organizationIds);

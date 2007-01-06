@@ -132,29 +132,28 @@ public class SRFrameworkVersionLocalServiceEJBImpl
 													.getFrameworkVersion(frameworkVersionId);
 	}
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public java.util.List getFrameworkVersions(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return SRFrameworkVersionLocalServiceFactory.getTxImpl()
 													.getFrameworkVersions(groupId,
 			begin, end);
 	}
 
-	public java.util.List getFrameworkVersions(java.lang.String groupId,
-		boolean active, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public java.util.List getFrameworkVersions(long groupId, boolean active,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return SRFrameworkVersionLocalServiceFactory.getTxImpl()
 													.getFrameworkVersions(groupId,
 			active, begin, end);
 	}
 
-	public int getFrameworkVersionsCount(java.lang.String groupId)
+	public int getFrameworkVersionsCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return SRFrameworkVersionLocalServiceFactory.getTxImpl()
 													.getFrameworkVersionsCount(groupId);
 	}
 
-	public int getFrameworkVersionsCount(java.lang.String groupId,
-		boolean active) throws com.liferay.portal.SystemException {
+	public int getFrameworkVersionsCount(long groupId, boolean active)
+		throws com.liferay.portal.SystemException {
 		return SRFrameworkVersionLocalServiceFactory.getTxImpl()
 													.getFrameworkVersionsCount(groupId,
 			active);

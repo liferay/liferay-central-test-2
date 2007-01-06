@@ -123,7 +123,7 @@ public class WikiNodeLocalServiceUtil {
 		wikiNodeLocalService.deleteNode(node);
 	}
 
-	public static void deleteNodes(java.lang.String groupId)
+	public static void deleteNodes(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
@@ -139,21 +139,21 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.getNode(nodeId);
 	}
 
-	public static java.util.List getNodes(java.lang.String groupId)
+	public static java.util.List getNodes(long groupId)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		return wikiNodeLocalService.getNodes(groupId);
 	}
 
-	public static java.util.List getNodes(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getNodes(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		return wikiNodeLocalService.getNodes(groupId, begin, end);
 	}
 
-	public static int getNodesCount(java.lang.String groupId)
+	public static int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
@@ -167,9 +167,8 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] nodeIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		return wikiNodeLocalService.search(companyId, groupId, nodeIds, keywords);

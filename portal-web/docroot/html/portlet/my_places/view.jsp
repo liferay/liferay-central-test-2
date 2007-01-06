@@ -41,7 +41,7 @@
 	List titles = new ArrayList();
 
 	if ((userGroup != null) && user.hasPublicLayouts()) {
-		selectedPlace = !layout.isPrivateLayout() && layout.getGroupId().equals(userGroup.getGroupId());
+		selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == userGroup.getGroupId());
 		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "public") + ")";
 
 		if (selectedPlace) {
@@ -65,7 +65,7 @@
 	for (int i = 0; i < communities.size(); i++) {
 		Group community = (Group)communities.get(i);
 
-		selectedPlace = !layout.isPrivateLayout() && layout.getGroupId().equals(community.getGroupId());
+		selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
 		displayTitle =  community.getName() + " (" + LanguageUtil.get(pageContext, "public") + ")";
 
 		if (selectedPlace) {
@@ -80,7 +80,7 @@
 	}
 
 	if ((userGroup != null) && user.hasPrivateLayouts()) {
-		selectedPlace = layout.isPrivateLayout() && layout.getGroupId().equals(userGroup.getGroupId());
+		selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == userGroup.getGroupId());
 		displayTitle =  contact.getFullName() + " (" + LanguageUtil.get(pageContext, "private") + ")";
 
 		if (selectedPlace) {
@@ -101,7 +101,7 @@
 	for (int i = 0; i < communities.size(); i++) {
 		Group community = (Group)communities.get(i);
 
-		selectedPlace = layout.isPrivateLayout() && layout.getGroupId().equals(community.getGroupId());
+		selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == community.getGroupId());
 		displayTitle = community.getName() + " (" + LanguageUtil.get(pageContext, "private") + ")";
 
 		if (selectedPlace) {

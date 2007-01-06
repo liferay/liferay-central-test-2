@@ -49,7 +49,7 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Role getGroupRole(
-		java.lang.String companyId, java.lang.String groupId)
+		java.lang.String companyId, long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

@@ -41,9 +41,9 @@ public interface WikiNodeModel extends BaseModel {
 
 	public void setNodeId(String nodeId);
 
-	public String getGroupId();
+	public long getGroupId();
 
-	public void setGroupId(String groupId);
+	public void setGroupId(long groupId);
 
 	public String getCompanyId();
 

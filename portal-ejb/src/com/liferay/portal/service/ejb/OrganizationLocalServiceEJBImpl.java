@@ -37,7 +37,7 @@ import javax.ejb.SessionContext;
  */
 public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService,
 	SessionBean {
-	public void addGroupOrganizations(java.lang.String groupId,
+	public void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -83,7 +83,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return OrganizationLocalServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.util.List getGroupOrganizations(java.lang.String groupId)
+	public java.util.List getGroupOrganizations(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return OrganizationLocalServiceFactory.getTxImpl()
@@ -96,7 +96,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return OrganizationLocalServiceFactory.getTxImpl().getUserOrganizations(userId);
 	}
 
-	public boolean hasGroupOrganization(java.lang.String groupId,
+	public boolean hasGroupOrganization(long groupId,
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -128,7 +128,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			city, zip, regionId, countryId, params, andOperator);
 	}
 
-	public void setGroupOrganizations(java.lang.String groupId,
+	public void setGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -136,7 +136,7 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 			organizationIds);
 	}
 
-	public void unsetGroupOrganizations(java.lang.String groupId,
+	public void unsetGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

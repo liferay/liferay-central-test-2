@@ -41,7 +41,7 @@
 		tempCal.set(Calendar.DATE, i);
 		tempCal.set(Calendar.YEAR, selYear);
 
-		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId, tempCal, eventType);
+		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
 
 		if (hasEvents) {
 			data.add(new Integer(i));

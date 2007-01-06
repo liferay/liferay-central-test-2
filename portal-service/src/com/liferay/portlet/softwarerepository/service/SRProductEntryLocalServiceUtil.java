@@ -145,14 +145,14 @@ public class SRProductEntryLocalServiceUtil {
 		return srProductEntryLocalService.getProductEntry(productEntryId);
 	}
 
-	public static java.util.List getProductEntries(java.lang.String groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List getProductEntries(long groupId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
 		return srProductEntryLocalService.getProductEntries(groupId, begin, end);
 	}
 
-	public static java.util.List getProductEntries(java.lang.String groupId,
+	public static java.util.List getProductEntries(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
@@ -161,14 +161,14 @@ public class SRProductEntryLocalServiceUtil {
 			begin, end);
 	}
 
-	public static int getProductEntriesCount(java.lang.String groupId)
+	public static int getProductEntriesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
 		return srProductEntryLocalService.getProductEntriesCount(groupId);
 	}
 
-	public static int getProductEntriesCount(java.lang.String groupId,
+	public static int getProductEntriesCount(long groupId,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
@@ -182,9 +182,8 @@ public class SRProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String type, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String type,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		SRProductEntryLocalService srProductEntryLocalService = SRProductEntryLocalServiceFactory.getService();
 
 		return srProductEntryLocalService.search(companyId, groupId, type,

@@ -121,11 +121,11 @@ public class ShoppingOrderSoap implements Serializable {
 		_orderId = orderId;
 	}
 
-	public String getGroupId() {
+	public long getGroupId() {
 		return _groupId;
 	}
 
-	public void setGroupId(String groupId) {
+	public void setGroupId(long groupId) {
 		_groupId = groupId;
 	}
 
@@ -534,7 +534,7 @@ public class ShoppingOrderSoap implements Serializable {
 	}
 
 	private String _orderId;
-	private String _groupId;
+	private long _groupId;
 	private String _companyId;
 	private String _userId;
 	private String _userName;

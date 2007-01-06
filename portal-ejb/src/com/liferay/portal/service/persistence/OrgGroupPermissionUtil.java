@@ -153,6 +153,45 @@ public class OrgGroupPermissionUtil {
 		return getPersistence().fetchByPrimaryKey(orgGroupPermissionPK);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupPermission findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.OrgGroupPermission[] findByGroupId_PrevAndNext(
+		com.liferay.portal.service.persistence.OrgGroupPermissionPK orgGroupPermissionPK,
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchOrgGroupPermissionException {
+		return getPersistence().findByGroupId_PrevAndNext(orgGroupPermissionPK,
+			groupId, obc);
+	}
+
 	public static java.util.List findByPermissionId(long permissionId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByPermissionId(permissionId);
@@ -208,6 +247,11 @@ public class OrgGroupPermissionUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByPermissionId(long permissionId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByPermissionId(permissionId);
@@ -215,6 +259,11 @@ public class OrgGroupPermissionUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByPermissionId(long permissionId)

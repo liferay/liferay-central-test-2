@@ -29,6 +29,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -82,7 +83,7 @@ public class GroupFinder {
 	public static String JOIN_BY_USERS_GROUPS =
 		GroupFinder.class.getName() + ".joinByUsersGroups";
 
-	public static int countByG_U(String groupId, String userId)
+	public static int countByG_U(long groupId, String userId)
 		throws SystemException {
 
 		Map params1 = new HashMap();
@@ -320,7 +321,7 @@ public class GroupFinder {
 				q, HibernateUtil.getDialect(), begin, end);
 
 			while (itr.hasNext()) {
-				String groupId = (String)itr.next();
+				long groupId = GetterUtil.getLong((String)itr.next());
 
 				Group group = GroupUtil.findByPrimaryKey(groupId);
 
@@ -338,7 +339,7 @@ public class GroupFinder {
 	}
 
 	private static int _countByGroupId(
-			Session session, String groupId, Map params)
+			Session session, long groupId, Map params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);

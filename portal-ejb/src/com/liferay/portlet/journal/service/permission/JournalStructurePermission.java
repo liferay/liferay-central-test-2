@@ -39,7 +39,7 @@ public class JournalStructurePermission {
 
 	public static void check(
 			PermissionChecker permissionChecker, String companyId,
-			String groupId, String structureId, String actionId)
+			long groupId, String structureId, String actionId)
 		throws PortalException, SystemException {
 
 		if (!contains(
@@ -61,7 +61,7 @@ public class JournalStructurePermission {
 
 	public static boolean contains(
 			PermissionChecker permissionChecker, String companyId,
-			String groupId, String structureId, String actionId)
+			long groupId, String structureId, String actionId)
 		throws PortalException, SystemException {
 
 		JournalStructure structure =

@@ -118,6 +118,12 @@ public class LuceneUtil {
 	}
 
 	public static void addRequiredTerm(
+		BooleanQuery booleanQuery, String field, long number) {
+
+		addRequiredTerm(booleanQuery, field, String.valueOf(number));
+	}
+
+	public static void addRequiredTerm(
 		BooleanQuery booleanQuery, String field, String text) {
 
 		text = KeywordsUtil.escape(text);

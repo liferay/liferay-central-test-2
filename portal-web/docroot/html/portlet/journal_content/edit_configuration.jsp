@@ -40,7 +40,7 @@ try {
 catch (NoSuchArticleException nsae) {
 }
 
-groupId = ParamUtil.getString(request, "groupId", groupId);
+groupId = ParamUtil.getLong(request, "groupId", groupId);
 type = ParamUtil.getString(request, "type", type);
 %>
 
@@ -101,7 +101,7 @@ type = ParamUtil.getString(request, "type", type);
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
 
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
 <tr>
@@ -142,7 +142,7 @@ type = ParamUtil.getString(request, "type", type);
 DynamicRenderRequest dynamicRenderReq = new DynamicRenderRequest(renderRequest);
 
 dynamicRenderReq.setParameter("type", type);
-dynamicRenderReq.setParameter("groupId", groupId);
+dynamicRenderReq.setParameter("groupId", String.valueOf(groupId));
 
 ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 %>
@@ -151,7 +151,7 @@ ArticleSearch searchContainer = new ArticleSearch(dynamicRenderReq, portletURL);
 	page="/html/portlet/journal/article_search.jsp"
 	searchContainer="<%= searchContainer %>"
 >
-	<liferay-ui:param name="groupId" value="<%= groupId %>" />
+	<liferay-ui:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 	<liferay-ui:param name="type" value="<%= type %>" />
 </liferay-ui:search-form>
 

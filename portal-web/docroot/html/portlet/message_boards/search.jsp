@@ -68,7 +68,7 @@ headerNames.add("score");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-messages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId, categoryIdsArray, threadId, keywords);
+Hits hits = MBCategoryLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), categoryIdsArray, threadId, keywords);
 
 ThreadHits threadHits = new ThreadHits();
 

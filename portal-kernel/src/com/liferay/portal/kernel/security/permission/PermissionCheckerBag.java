@@ -49,7 +49,7 @@ public interface PermissionCheckerBag extends Serializable {
 	public boolean isCompanyAdmin(String companyId) throws Exception;
 
 	public boolean isCommunityAdmin(
-			String companyId, String groupId, String name)
+			String companyId, long groupId, String name)
 		throws Exception;
 
 }

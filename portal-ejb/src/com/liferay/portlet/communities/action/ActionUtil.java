@@ -27,7 +27,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.Validator;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
@@ -55,11 +54,11 @@ public class ActionUtil {
 	}
 
 	public static void getGroup(HttpServletRequest req) throws Exception {
-		String groupId = ParamUtil.getString(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		Group group = null;
 
-		if (Validator.isNotNull(groupId)) {
+		if (groupId > 0) {
 			group = GroupLocalServiceUtil.getGroup(groupId);
 		}
 

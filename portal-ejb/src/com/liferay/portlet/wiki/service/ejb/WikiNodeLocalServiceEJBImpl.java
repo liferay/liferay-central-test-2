@@ -117,7 +117,7 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		WikiNodeLocalServiceFactory.getTxImpl().deleteNode(node);
 	}
 
-	public void deleteNodes(java.lang.String groupId)
+	public void deleteNodes(long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		WikiNodeLocalServiceFactory.getTxImpl().deleteNodes(groupId);
@@ -130,18 +130,18 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 		return WikiNodeLocalServiceFactory.getTxImpl().getNode(nodeId);
 	}
 
-	public java.util.List getNodes(java.lang.String groupId)
+	public java.util.List getNodes(long groupId)
 		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().getNodes(groupId);
 	}
 
-	public java.util.List getNodes(java.lang.String groupId, int begin, int end)
+	public java.util.List getNodes(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().getNodes(groupId, begin,
 			end);
 	}
 
-	public int getNodesCount(java.lang.String groupId)
+	public int getNodesCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().getNodesCount(groupId);
 	}
@@ -152,9 +152,8 @@ public class WikiNodeLocalServiceEJBImpl implements WikiNodeLocalService,
 	}
 
 	public com.liferay.portal.kernel.search.Hits search(
-		java.lang.String companyId, java.lang.String groupId,
-		java.lang.String[] nodeIds, java.lang.String keywords)
-		throws com.liferay.portal.SystemException {
+		java.lang.String companyId, long groupId, java.lang.String[] nodeIds,
+		java.lang.String keywords) throws com.liferay.portal.SystemException {
 		return WikiNodeLocalServiceFactory.getTxImpl().search(companyId,
 			groupId, nodeIds, keywords);
 	}

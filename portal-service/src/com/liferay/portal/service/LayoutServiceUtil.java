@@ -29,11 +29,10 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutServiceUtil {
-	public static com.liferay.portal.model.Layout addLayout(
-		java.lang.String groupId, boolean privateLayout,
-		java.lang.String parentLayoutId, java.lang.String name,
-		java.lang.String title, java.lang.String type, boolean hidden,
-		java.lang.String friendlyURL)
+	public static com.liferay.portal.model.Layout addLayout(long groupId,
+		boolean privateLayout, java.lang.String parentLayoutId,
+		java.lang.String name, java.lang.String title, java.lang.String type,
+		boolean hidden, java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();

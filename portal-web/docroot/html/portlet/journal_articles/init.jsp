@@ -47,7 +47,7 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
 }
 
-String groupId = prefs.getValue("group-id", StringPool.BLANK);
+long groupId = GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
 String type = prefs.getValue("type", StringPool.BLANK);
 String pageURL = prefs.getValue("page-url", "maximized");
 int pageDelta = GetterUtil.getInteger(prefs.getValue("page-delta", StringPool.BLANK));

@@ -144,7 +144,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		// Event
 
 		User user = UserUtil.findByPrimaryKey(userId);
-		String groupId = PortalUtil.getPortletGroupId(plid);
+		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
 		Locale locale = null;
@@ -352,7 +352,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		CalEventUtil.remove(event.getEventId());
 	}
 
-	public void deleteEvents(String groupId)
+	public void deleteEvents(long groupId)
 		throws PortalException, SystemException {
 
 		Iterator itr = CalEventUtil.findByGroupId(groupId).iterator();
@@ -370,7 +370,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		return CalEventUtil.findByPrimaryKey(eventId);
 	}
 
-	public List getEvents(String groupId, String type, int begin, int end)
+	public List getEvents(long groupId, String type, int begin, int end)
 		throws SystemException {
 
 		if (Validator.isNull(type)) {
@@ -381,7 +381,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		}
 	}
 
-	public List getEvents(String groupId, Calendar cal) throws SystemException {
+	public List getEvents(long groupId, Calendar cal) throws SystemException {
 		Map eventsPool = CalEventLocalUtil.getEventsPool(groupId);
 
 		String key = CalUtil.toString(cal);
@@ -435,7 +435,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		return events;
 	}
 
-	public List getEvents(String groupId, Calendar cal, String type)
+	public List getEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
 		List events = getEvents(groupId, cal);
@@ -460,7 +460,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		}
 	}
 
-	public int getEventsCount(String groupId, String type)
+	public int getEventsCount(long groupId, String type)
 		throws SystemException {
 
 		if (Validator.isNull(type)) {
@@ -471,7 +471,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		}
 	}
 
-	public List getRepeatingEvents(String groupId) throws SystemException {
+	public List getRepeatingEvents(long groupId) throws SystemException {
 		Map eventsPool = CalEventLocalUtil.getEventsPool(groupId);
 
 		String key = "recurrence";
@@ -487,13 +487,13 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 		return events;
 	}
 
-	public boolean hasEvents(String groupId, Calendar cal)
+	public boolean hasEvents(long groupId, Calendar cal)
 		throws SystemException {
 
 		return hasEvents(groupId, cal, null);
 	}
 
-	public boolean hasEvents(String groupId, Calendar cal, String type)
+	public boolean hasEvents(long groupId, Calendar cal, String type)
 		throws SystemException {
 
 		if (getEvents(groupId, cal, type).size() > 0) {

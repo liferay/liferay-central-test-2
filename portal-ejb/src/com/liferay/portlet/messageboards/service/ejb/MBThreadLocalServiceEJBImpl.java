@@ -62,26 +62,26 @@ public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 										  .getCategoriesThreadsCount(categoryIds);
 	}
 
-	public java.util.List getGroupThreads(java.lang.String groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public java.util.List getGroupThreads(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreads(groupId,
 			begin, end);
 	}
 
-	public java.util.List getGroupThreads(java.lang.String groupId,
+	public java.util.List getGroupThreads(long groupId,
 		java.lang.String userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreads(groupId,
 			userId, begin, end);
 	}
 
-	public int getGroupThreadsCount(java.lang.String groupId)
+	public int getGroupThreadsCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreadsCount(groupId);
 	}
 
-	public int getGroupThreadsCount(java.lang.String groupId,
-		java.lang.String userId) throws com.liferay.portal.SystemException {
+	public int getGroupThreadsCount(long groupId, java.lang.String userId)
+		throws com.liferay.portal.SystemException {
 		return MBThreadLocalServiceFactory.getTxImpl().getGroupThreadsCount(groupId,
 			userId);
 	}

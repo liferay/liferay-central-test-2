@@ -94,7 +94,7 @@ double version = ParamUtil.getDouble(request, "version");
 				rowHREF = sb.toString();
 			}
 			else {
-				portletURL.setParameter("groupId", article.getGroupId());
+				portletURL.setParameter("groupId", String.valueOf(article.getGroupId()));
 				portletURL.setParameter("articleId", article.getArticleId());
 				portletURL.setParameter("version", String.valueOf(article.getVersion()));
 

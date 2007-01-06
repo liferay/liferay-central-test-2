@@ -53,7 +53,7 @@ public class GetStructureAction extends Action {
 
 		try {
 			String companyId = PortalUtil.getCompanyId(req);
-            String groupId = ParamUtil.getString(req, "groupId");
+            long groupId = ParamUtil.getLong(req, "groupId");
 			String structureId = ParamUtil.getString(req, "structureId");
 
 			JournalStructure structure =
