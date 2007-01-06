@@ -389,6 +389,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			orgGroupMap.put(
 				wrappedPermissionId,
 				OrgGroupPermissionUtil.findByPermissionId(permissionId));
+			OrgGroupPermissionUtil.removeByPermissionId(permissionId);
 
 			PermissionUtil.remove(permissionId);
 		}
