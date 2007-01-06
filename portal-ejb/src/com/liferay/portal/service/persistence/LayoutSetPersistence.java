@@ -174,6 +174,146 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
+	public List findByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
+	}
+
+	public List findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public LayoutSet findByGroupId_First(long groupId, OrderByComparator obc)
+		throws NoSuchLayoutSetException, SystemException {
+		List list = findByGroupId(groupId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No LayoutSet exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "groupId=";
+			msg += groupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchLayoutSetException(msg);
+		}
+		else {
+			return (LayoutSet)list.get(0);
+		}
+	}
+
+	public LayoutSet findByGroupId_Last(long groupId, OrderByComparator obc)
+		throws NoSuchLayoutSetException, SystemException {
+		int count = countByGroupId(groupId);
+		List list = findByGroupId(groupId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No LayoutSet exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "groupId=";
+			msg += groupId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchLayoutSetException(msg);
+		}
+		else {
+			return (LayoutSet)list.get(0);
+		}
+	}
+
+	public LayoutSet[] findByGroupId_PrevAndNext(String ownerId, long groupId,
+		OrderByComparator obc) throws NoSuchLayoutSetException, SystemException {
+		LayoutSet layoutSet = findByPrimaryKey(ownerId);
+		int count = countByGroupId(groupId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					layoutSet);
+			LayoutSet[] array = new LayoutSetImpl[3];
+			array[0] = (LayoutSet)objArray[0];
+			array[1] = (LayoutSet)objArray[1];
+			array[2] = (LayoutSet)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public LayoutSet findByC_V(String companyId, String virtualHost)
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = fetchByC_V(companyId, virtualHost);
@@ -292,6 +432,15 @@ public class LayoutSetPersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByGroupId(long groupId) throws SystemException {
+		Iterator itr = findByGroupId(groupId).iterator();
+
+		while (itr.hasNext()) {
+			LayoutSet layoutSet = (LayoutSet)itr.next();
+			remove(layoutSet);
+		}
+	}
+
 	public void removeByC_V(String companyId, String virtualHost)
 		throws NoSuchLayoutSetException, SystemException {
 		LayoutSet layoutSet = findByC_V(companyId, virtualHost);
@@ -303,6 +452,44 @@ public class LayoutSetPersistence extends BasePersistence {
 
 		while (itr.hasNext()) {
 			remove((LayoutSet)itr.next());
+		}
+	}
+
+	public int countByGroupId(long groupId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.LayoutSet WHERE ");
+			query.append("groupId = ?");
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+			q.setLong(queryPos++, groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
 		}
 	}
 

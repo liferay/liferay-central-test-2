@@ -53,7 +53,7 @@
 
 		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
 
-		Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, null, type, keywords);
+		Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), PortletKeys.JOURNAL, 0, type, keywords);
 
 		ContentHits contentHits = new ContentHits();
 

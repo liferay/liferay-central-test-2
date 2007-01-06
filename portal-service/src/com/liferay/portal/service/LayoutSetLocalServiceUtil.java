@@ -63,6 +63,14 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.getLayoutSet(companyId, virtualHost);
 	}
 
+	public static java.util.Map renewOwnerIds()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.renewOwnerIds();
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

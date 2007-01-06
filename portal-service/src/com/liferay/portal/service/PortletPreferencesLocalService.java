@@ -29,6 +29,9 @@ package com.liferay.portal.service;
  *
  */
 public interface PortletPreferencesLocalService {
+	public void deletePortletPreferences()
+		throws com.liferay.portal.SystemException;
+
 	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException;
 

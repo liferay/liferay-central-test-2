@@ -11,6 +11,9 @@ alter_column_type Contact_ prefixId INTEGER;
 alter_column_type Contact_ suffixId INTEGER;
 
 alter_column_type Counter currentId LONG;
+delete from Counter where name = 'com.liferay.portal.model.Address';
+delete from Counter where name = 'com.liferay.portal.model.EmailAddress';
+delete from Counter where name = 'com.liferay.portal.model.Group';
 
 alter_column_type DLFolder groupId LONG;
 

@@ -150,6 +150,44 @@ public class LayoutSetUtil {
 		return getPersistence().fetchByPrimaryKey(ownerId);
 	}
 
+	public static java.util.List findByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end);
+	}
+
+	public static java.util.List findByGroupId(long groupId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByGroupId(groupId, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.LayoutSet findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
+		return getPersistence().findByGroupId_First(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.LayoutSet findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
+		return getPersistence().findByGroupId_Last(groupId, obc);
+	}
+
+	public static com.liferay.portal.model.LayoutSet[] findByGroupId_PrevAndNext(
+		java.lang.String ownerId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.NoSuchLayoutSetException {
+		return getPersistence().findByGroupId_PrevAndNext(ownerId, groupId, obc);
+	}
+
 	public static com.liferay.portal.model.LayoutSet findByC_V(
 		java.lang.String companyId, java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
@@ -179,6 +217,11 @@ public class LayoutSetUtil {
 		return getPersistence().findAll(begin, end, obc);
 	}
 
+	public static void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByGroupId(groupId);
+	}
+
 	public static void removeByC_V(java.lang.String companyId,
 		java.lang.String virtualHost)
 		throws com.liferay.portal.SystemException, 
@@ -188,6 +231,11 @@ public class LayoutSetUtil {
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
+	}
+
+	public static int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByGroupId(groupId);
 	}
 
 	public static int countByC_V(java.lang.String companyId,

@@ -66,6 +66,12 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 			virtualHost);
 	}
 
+	public java.util.Map renewOwnerIds()
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutSetLocalServiceFactory.getTxImpl().renewOwnerIds();
+	}
+
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

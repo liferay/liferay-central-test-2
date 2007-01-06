@@ -29,6 +29,12 @@ package com.liferay.portal.service;
  *
  */
 public class PortletPreferencesLocalServiceUtil {
+	public static void deletePortletPreferences()
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+		portletPreferencesLocalService.deletePortletPreferences();
+	}
+
 	public static void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();

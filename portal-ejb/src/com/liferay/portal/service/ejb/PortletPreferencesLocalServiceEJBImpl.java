@@ -37,6 +37,12 @@ import javax.ejb.SessionContext;
  */
 public class PortletPreferencesLocalServiceEJBImpl
 	implements PortletPreferencesLocalService, SessionBean {
+	public void deletePortletPreferences()
+		throws com.liferay.portal.SystemException {
+		PortletPreferencesLocalServiceFactory.getTxImpl()
+											 .deletePortletPreferences();
+	}
+
 	public void deletePortletPreferences(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalServiceFactory.getTxImpl()
