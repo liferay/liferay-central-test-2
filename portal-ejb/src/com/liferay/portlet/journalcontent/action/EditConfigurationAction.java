@@ -80,8 +80,6 @@ public class EditConfigurationAction extends PortletAction {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			boolean paginate = ParamUtil.getBoolean(req, "paginate", false);
-
 			Map articleIdsMap = new TreeMap();
 
 			Enumeration enu = req.getParameterNames();
@@ -110,6 +108,8 @@ public class EditConfigurationAction extends PortletAction {
 			String[] articleIds =
 				(String[])articleIdsMap.values().toArray(new String[0]);
 
+			boolean paginate = ParamUtil.getBoolean(req, "paginate");
+
 			String portletResource = ParamUtil.getString(
 				req, "portletResource");
 
@@ -119,7 +119,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			prefs.setValue("group-id", String.valueOf(groupId));
 			prefs.setValues("article-id", articleIds);
-			prefs.setValue("paginate", paginate?"1":"0");
+			prefs.setValue("paginate", String.valueOf(paginate));
 
 			prefs.store();
 

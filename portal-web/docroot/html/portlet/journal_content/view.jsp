@@ -50,7 +50,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 		}
 		%>
 
-		<c:if test="<%= content.length > 1 && paginate %>">
+		<c:if test="<%= (content.length > 1) && paginate %>">
 			<div id="<portlet:namespace />paginator" style="padding: 10px 0px 10px 0px;">
 				<span class="font-small" id="<portlet:namespace />prev" style="cursor: pointer; float: left;" onClick="<portlet:namespace />prevPage();"></span>
 				<span class="font-small" id="<portlet:namespace />next" style="cursor: pointer; float: right;" onClick="<portlet:namespace />nextPage();"></span>
@@ -187,7 +187,7 @@ String[] content = (String[])request.getAttribute(WebKeys.JOURNAL_ARTICLE_CONTEN
 	</c:if>
 </c:if>
 
-<c:if test="<%= content.length > 1 %>">
+<c:if test="<%= (content.length > 1) && paginate %>">
 	<script type="text/javascript">
 		<portlet:namespace />updatePage();
 	</script>

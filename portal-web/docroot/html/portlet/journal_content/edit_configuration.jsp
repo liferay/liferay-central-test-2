@@ -52,6 +52,14 @@ type = ParamUtil.getString(request, "type", type);
 	function <portlet:namespace />addArticle(articleId, save) {
 		var table = document.getElementById("<portlet:namespace />articles");
 
+		if (<portlet:namespace />articleIndex == 0) {
+			var brRow = table.insertRow(table.rows.length);
+
+			var br = document.createElement("br");
+
+			brRow.insertCell(0).appendChild(br);
+		}
+
 		var newRow = table.insertRow(table.rows.length);
 
 		newRow.id = "<portlet:namespace />row" + <portlet:namespace />articleIndex;
@@ -89,6 +97,12 @@ type = ParamUtil.getString(request, "type", type);
 
 		document.getElementById("<portlet:namespace />articles").deleteRow(delRow.rowIndex);
 
+		<portlet:namespace />articleIndex--;
+
+		if (<portlet:namespace />articleIndex == 0) {
+			document.getElementById("<portlet:namespace />articles").deleteRow(1);
+		}
+
 		<portlet:namespace />saveArticles();
 	}
 
@@ -109,25 +123,12 @@ type = ParamUtil.getString(request, "type", type);
 		<%= LanguageUtil.get(pageContext, "displaying-article-pages") %>:
 	</td>
 </tr>
-<tr>
-	<td>
-		<br>
-	</td>
-</tr>
 </table>
-<table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
-<tr>
-	<td>
-		<br>
-	</td>
-</tr>
-<tr>
-	<td>
-		<bean:define id="namespace"><portlet:namespace /></bean:define>
-		<liferay-ui:input-checkbox param="paginate" defaultValue="<%=paginate%>" onClick="<%=namespace + "saveArticles();"%>"/><label for="<portlet:namespace />paginate"><%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-articles-or-more")%></label>
-	</td>
-</tr>
-</table>
+
+<br>
+
+<liferay-ui:input-checkbox param="paginate" defaultValue="<%= paginate %>" onClick="<%= renderResponse.getNamespace() + "saveArticles();" %>" /> <%= LanguageUtil.get(pageContext, "paginate-if-there-are-two-or-more-articles") %>
+
 </form>
 
 <br><div class="beta-separator"></div><br>
