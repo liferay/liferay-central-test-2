@@ -520,7 +520,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 									<c:choose>
 										<c:when test="<%= Validator.isNull(parentFriendlyURL) %>">
-											<a href="<%= portletURL.toString() %>"><%= LanguageUtil.get(pageContext, "you-must-first-enter-a-frienly-url-for-the-" + (portletName.equals(PortletKeys.COMMUNITIES) ? "community" : "user")) %></a>
+											<a href="<%= portletURL.toString() %>&tabs3=virtual-host"><%= LanguageUtil.get(pageContext, "you-must-first-enter-a-frienly-url-for-the-" + (portletName.equals(PortletKeys.COMMUNITIES) ? "community" : "user")) %></a>
 										</c:when>
 										<c:otherwise>
 											<%= Http.getProtocol(request) %>://<%= company.getPortalURL() %><%= privateLayout ? themeDisplay.getPathFriendlyURLPrivate() : themeDisplay.getPathFriendlyURLPublic() %><%= parentFriendlyURL %>
