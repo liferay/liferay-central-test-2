@@ -42,7 +42,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
-		
+
 		if (!layout.isHidden() && LayoutPermission.contains(permissionChecker, layout, ActionKeys.VIEW)) {
 			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 			String target = PortalUtil.getLayoutTarget(layout);
