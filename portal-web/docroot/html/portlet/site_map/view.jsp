@@ -36,12 +36,14 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 
 <%!
 private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuffer sb) throws Exception {
+	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+
 	sb.append("<ul style=\"padding-left: 25px\">");
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
-
-		if (!layout.isHidden()) {
+		
+		if (!layout.isHidden() && LayoutPermission.contains(permissionChecker, layout, ActionKeys.VIEW)) {
 			String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 			String target = PortalUtil.getLayoutTarget(layout);
 
