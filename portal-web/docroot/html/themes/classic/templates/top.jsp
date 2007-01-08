@@ -118,5 +118,10 @@
 				<td valign="top" width="100%">
 					<a href="<%= themeDisplay.getURLHome() %>"><img src="<%= themeDisplay.getCompanyLogo() %>"></a>
 				</td>
+				<c:if test="<%= !themeDisplay.isSignedIn() %>">
+					<td valign="top" align="right" width="100%">
+						<a href="<%= themeDisplay.getURLSignIn() %>"><bean:message key="sign-in" /></a>
+					</td>
+				</c:if>
 			</tr>
 			</table>
