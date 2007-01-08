@@ -66,7 +66,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		validate(null, companyId, name);
 
-		String roleId = Long.toString(CounterLocalServiceUtil.increment(
+		String roleId = String.valueOf(CounterLocalServiceUtil.increment(
 			Role.class.getName()));
 
 		Role role = RoleUtil.create(roleId);

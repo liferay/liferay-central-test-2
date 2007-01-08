@@ -112,7 +112,6 @@ public class ExportAction extends Action {
 				insertDataCMSContent(
 					cmsGroupId, zipWriter, journalContentSearches);
 				insertDataImage(zipWriter);
-				//insertDataShopping(zipWriter);
 
 				String fileName = "journal.zip";
 
@@ -548,83 +547,6 @@ public class ExportAction extends Action {
 
 		zipWriter.addEntry("portal-data-image.sql", sb);
 	}
-
-//	protected void insertDataShopping(ZipWriter zipWriter) throws Exception {
-//		StringBuffer sb = new StringBuffer();
-//
-//		Iterator itr = ShoppingCategoryLocalServiceUtil.getCategories(
-//			COMPANY_ID).iterator();
-//
-//		while (itr.hasNext()) {
-//			ShoppingCategory category = (ShoppingCategory)itr.next();
-//
-//			sb.append("insert into ShoppingCategory (");
-//			sb.append("categoryId, companyId, createDate, modifiedDate, ");
-//			sb.append("parentCategoryId, name");
-//			sb.append(") values (");
-//			addColumn(sb, category.getCategoryId());
-//			addColumn(sb, category.getCompanyId());
-//			addColumn(sb, category.getCreateDate());
-//			addColumn(sb, category.getModifiedDate());
-//			addColumn(sb, category.getParentCategoryId());
-//			addColumn(sb, category.getName());
-//			removeTrailingComma(sb);
-//			sb.append(");\n");
-//		}
-//
-//		sb.append("\n");
-//
-//		itr = ShoppingItemLocalServiceUtil.getItems(COMPANY_ID).iterator();
-//
-//		while (itr.hasNext()) {
-//			ShoppingItem item = (ShoppingItem)itr.next();
-//
-//			sb.append("insert into ShoppingItem (");
-//			sb.append("itemId, companyId, createDate, modifiedDate, ");
-//			sb.append("categoryId, sku, name, description, properties, ");
-//			sb.append("fields_, fieldsQuantities, minQuantity, maxQuantity, ");
-//			sb.append("price, discount, taxable, shipping, ");
-//			sb.append("useShippingFormula, requiresShipping, stockQuantity, ");
-//			sb.append("featured_, sale_, smallImage, smallImageURL, ");
-//			sb.append("mediumImage, mediumImageURL, largeImage, largeImageURL");
-//			sb.append(") values (");
-//			addColumn(sb, item.getItemId());
-//			addColumn(sb, item.getCompanyId());
-//			addColumn(sb, item.getCreateDate());
-//			addColumn(sb, item.getModifiedDate());
-//			addColumn(sb, item.getCategoryId());
-//			addColumn(sb, item.getSku());
-//			addColumn(sb, item.getName());
-//			addColumn(sb, item.getDescription());
-//			addColumn(sb, item.getProperties());
-//			addColumn(sb, item.getFields());
-//			addColumn(sb, item.getFieldsQuantities());
-//			addColumn(sb, item.getMinQuantity());
-//			addColumn(sb, item.getMaxQuantity());
-//			addColumn(sb, item.getPrice());
-//			addColumn(sb, item.getDiscount());
-//			addColumn(sb, item.getTaxable());
-//			addColumn(sb, item.getShipping());
-//			addColumn(sb, item.getUseShippingFormula());
-//			addColumn(sb, item.getRequiresShipping());
-//			addColumn(sb, item.getStockQuantity());
-//			addColumn(sb, item.getFeatured());
-//			addColumn(sb, item.getSale());
-//			addColumn(sb, item.getSmallImage());
-//			addColumn(sb, item.getSmallImageURL());
-//			addColumn(sb, item.getMediumImage());
-//			addColumn(sb, item.getMediumImageURL());
-//			//addColumn(sb, item.getLargeImage());
-//			addColumn(sb, false);
-//			addColumn(sb, item.getLargeImageURL());
-//			removeTrailingComma(sb);
-//			sb.append(");\n");
-//		}
-//
-//		removeTrailingNewLine(sb);
-//
-//		zipWriter.addEntry("portal-data-shopping.sql", sb);
-//	}
 
 	protected void removeTrailingComma(StringBuffer sb) {
 		sb.delete(sb.length() - 2, sb.length());

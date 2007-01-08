@@ -110,7 +110,7 @@ public class IGImageLocalServiceImpl implements IGImageLocalService {
 
 			validate(file, bytes);
 
-			String imageId = Long.toString(CounterLocalServiceUtil.increment(
+			String imageId = String.valueOf(CounterLocalServiceUtil.increment(
 				IGImage.class.getName() + "." + user.getCompanyId()));
 
 			IGImagePK pk = new IGImagePK(user.getCompanyId(), imageId);

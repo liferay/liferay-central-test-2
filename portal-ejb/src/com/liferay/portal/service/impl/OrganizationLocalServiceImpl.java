@@ -88,8 +88,8 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			user.getCompanyId(), parentOrganizationId, name, countryId,
 			statusId, location);
 
-		String organizationId = Long.toString(CounterLocalServiceUtil.increment(
-			Organization.class.getName()));
+		String organizationId = String.valueOf(
+			CounterLocalServiceUtil.increment(Organization.class.getName()));
 
 		Organization organization = OrganizationUtil.create(organizationId);
 

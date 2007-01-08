@@ -223,7 +223,7 @@ public class JournalArticleLocalServiceImpl
 			content, structureId, templateId);
 
 		if (autoArticleId) {
-			articleId = Long.toString(CounterLocalServiceUtil.increment(
+			articleId = String.valueOf(CounterLocalServiceUtil.increment(
 				JournalArticle.class.getName() + "." + user.getCompanyId()));
 		}
 

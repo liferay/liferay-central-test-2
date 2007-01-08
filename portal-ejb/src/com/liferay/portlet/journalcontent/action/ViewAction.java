@@ -59,8 +59,8 @@ public class ViewAction extends PortletAction {
 
 		String companyId = themeDisplay.getCompanyId();
 
-		long groupId =
-			GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
+		long groupId = GetterUtil.getLong(
+			prefs.getValue("group-id", StringPool.BLANK));
 		String[] articleIds = prefs.getValues("article-id", new String[0]);
 
 		String languageId = LanguageUtil.getLanguageId(req);

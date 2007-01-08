@@ -60,8 +60,8 @@ public class SubscriptionLocalServiceImpl implements SubscriptionLocalService {
 		User user = UserUtil.findByPrimaryKey(userId);
 		Date now = new Date();
 
-		String subscriptionId = Long.toString(CounterLocalServiceUtil.increment(
-			Subscription.class.getName()));
+		String subscriptionId = String.valueOf(
+			CounterLocalServiceUtil.increment(Subscription.class.getName()));
 
 		Subscription subscription = SubscriptionUtil.create(subscriptionId);
 

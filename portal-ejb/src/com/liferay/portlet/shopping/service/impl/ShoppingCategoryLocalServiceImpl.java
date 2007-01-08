@@ -95,7 +95,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		validate(name);
 
-		String categoryId = Long.toString(CounterLocalServiceUtil.increment(
+		String categoryId = String.valueOf(CounterLocalServiceUtil.increment(
 			ShoppingCategory.class.getName()));
 
 		ShoppingCategory category = ShoppingCategoryUtil.create(categoryId);

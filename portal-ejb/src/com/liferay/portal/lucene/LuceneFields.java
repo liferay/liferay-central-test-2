@@ -72,6 +72,10 @@ public class LuceneFields {
 		return getUID(portletId, String.valueOf(field1));
 	}
 
+	public static String getUID(String portletId, Long field1) {
+		return getUID(portletId, field1.longValue());
+	}
+
 	public static String getUID(String portletId, String field1) {
 		return getUID(portletId, field1, null);
 	}
@@ -146,6 +150,10 @@ public class LuceneFields {
 
 	public static Field getKeyword(String field, long keyword) {
 		return getKeyword(field, String.valueOf(keyword));
+	}
+
+	public static Field getKeyword(String field, Long keyword) {
+		return getKeyword(field, keyword.longValue());
 	}
 
 	public static Field getKeyword(String field, String keyword) {

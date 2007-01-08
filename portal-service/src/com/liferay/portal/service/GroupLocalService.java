@@ -96,10 +96,6 @@ public interface GroupLocalService {
 	public boolean hasUserGroup(java.lang.String userId, long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.Map renewGroupIds()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
 		java.util.Map params, int begin, int end)

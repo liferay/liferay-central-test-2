@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
@@ -67,7 +66,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			primary);
 
 		long phoneId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+			Phone.class.getName());
 
 		Phone phone = PhoneUtil.create(phoneId);
 
@@ -92,10 +91,6 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 		throws PortalException, SystemException {
 
 		PhoneUtil.remove(phoneId);
-	}
-
-	public void deletePhones() throws SystemException {
-		PhoneUtil.removeAll();
 	}
 
 	public void deletePhones(String companyId, String className, String classPK)

@@ -73,9 +73,7 @@ public class IndexerImpl {
 				LuceneFields.getKeyword(LuceneFields.COMPANY_ID, companyId));
 			doc.add(
 				LuceneFields.getKeyword(LuceneFields.PORTLET_ID, PORTLET_ID));
-			doc.add(
-				LuceneFields.getKeyword(LuceneFields.GROUP_ID,
-					groupId.longValue()));
+			doc.add(LuceneFields.getKeyword(LuceneFields.GROUP_ID, groupId));
 
 			doc.add(LuceneFields.getText(LuceneFields.USER_NAME, userName));
 			doc.add(LuceneFields.getText(LuceneFields.TITLE, title));

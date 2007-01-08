@@ -33,9 +33,6 @@ public interface JournalContentSearchLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteArticleContentSearches()
-		throws com.liferay.portal.SystemException;
-
 	public void deleteArticleContentSearches(java.lang.String companyId,
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
@@ -46,11 +43,11 @@ public interface JournalContentSearchLocalService {
 	public void deleteOwnerContentSearches(java.lang.String ownerId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticleContentSearches(
-		java.lang.String companyId, long groupId, java.lang.String articleId)
+	public java.util.List getArticleContentSearches()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticleContentSearches()
+	public java.util.List getArticleContentSearches(
+		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,

@@ -226,7 +226,7 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 				String threadId = rs.getString("threadId");
 				boolean attachments = rs.getBoolean("attachments");
 
-				String newMessageId = Long.toString(
+				String newMessageId = String.valueOf(
 					CounterServiceUtil.increment(MBMessage.class.getName()));
 
 				List files = _getFiles(

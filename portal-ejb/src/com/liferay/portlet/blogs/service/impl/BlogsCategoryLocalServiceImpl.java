@@ -95,7 +95,7 @@ public class BlogsCategoryLocalServiceImpl
 
 		validate(name);
 
-		String categoryId = Long.toString(CounterLocalServiceUtil.increment(
+		String categoryId = String.valueOf(CounterLocalServiceUtil.increment(
 			BlogsCategory.class.getName()));
 
 		BlogsCategory category = BlogsCategoryUtil.create(categoryId);

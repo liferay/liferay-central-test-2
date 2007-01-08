@@ -149,7 +149,7 @@ public class JournalTemplateLocalServiceImpl
 			description, xsl, smallImage, smallImageURL, smallFile, smallBytes);
 
 		if (autoTemplateId) {
-			templateId = Long.toString(CounterLocalServiceUtil.increment(
+			templateId = String.valueOf(CounterLocalServiceUtil.increment(
 				JournalTemplate.class.getName() + "." + user.getCompanyId()));
 		}
 

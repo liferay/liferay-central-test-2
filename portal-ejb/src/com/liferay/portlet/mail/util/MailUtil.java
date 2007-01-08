@@ -1413,7 +1413,7 @@ public class MailUtil {
 		Iterator msgItr = messages.iterator();
 
 		for (int i = 0; msgItr.hasNext(); i++) {
-			messageIds[i] = Long.parseLong((String)msgItr.next());
+			messageIds[i] = GetterUtil.getLong((String)msgItr.next());
 		}
 
 		return messageIds;

@@ -104,8 +104,8 @@ public class JournalContentPortletDataHandlerImpl
 				return StringPool.BLANK;
 			}
 
-			long articleGroupId = GetterUtil.getLong(prefs.getValue(
-				"group-id", StringPool.BLANK));
+			long articleGroupId = GetterUtil.getLong(
+				prefs.getValue("group-id", StringPool.BLANK));
 
 			if (articleGroupId <= 0) {
 				if (_log.isWarnEnabled()) {

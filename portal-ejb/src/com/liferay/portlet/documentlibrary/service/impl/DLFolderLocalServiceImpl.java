@@ -93,7 +93,7 @@ public class DLFolderLocalServiceImpl implements DLFolderLocalService {
 
 		validate(name);
 
-		String folderId = Long.toString(CounterLocalServiceUtil.increment(
+		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
 			DLFolder.class.getName()));
 
 		DLFolder folder = DLFolderUtil.create(folderId);

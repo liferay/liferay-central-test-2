@@ -92,7 +92,7 @@ public class IGFolderLocalServiceImpl implements IGFolderLocalService {
 
 		validate(name);
 
-		String folderId = Long.toString(CounterLocalServiceUtil.increment(
+		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
 			IGFolder.class.getName()));
 
 		IGFolder folder = IGFolderUtil.create(folderId);

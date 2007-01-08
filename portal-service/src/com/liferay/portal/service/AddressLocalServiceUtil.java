@@ -51,12 +51,6 @@ public class AddressLocalServiceUtil {
 		addressLocalService.deleteAddress(addressId);
 	}
 
-	public static void deleteAddresses()
-		throws com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-		addressLocalService.deleteAddresses();
-	}
-
 	public static void deleteAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

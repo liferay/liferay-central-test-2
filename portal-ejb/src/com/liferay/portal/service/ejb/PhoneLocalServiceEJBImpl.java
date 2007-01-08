@@ -52,10 +52,6 @@ public class PhoneLocalServiceEJBImpl implements PhoneLocalService, SessionBean 
 		PhoneLocalServiceFactory.getTxImpl().deletePhone(phoneId);
 	}
 
-	public void deletePhones() throws com.liferay.portal.SystemException {
-		PhoneLocalServiceFactory.getTxImpl().deletePhones();
-	}
-
 	public void deletePhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

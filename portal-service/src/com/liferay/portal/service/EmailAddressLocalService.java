@@ -40,10 +40,6 @@ public interface EmailAddressLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteEmailAddresses()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;

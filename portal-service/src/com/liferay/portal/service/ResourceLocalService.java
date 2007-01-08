@@ -89,8 +89,6 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteResources() throws com.liferay.portal.SystemException;
-
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -106,10 +104,6 @@ public interface ResourceLocalService {
 		java.lang.String companyId, java.lang.String name,
 		java.lang.String typeId, java.lang.String scope,
 		java.lang.String primKey)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
-	public void updatePrimKey(long resourceId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }

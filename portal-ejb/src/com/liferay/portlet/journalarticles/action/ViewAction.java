@@ -53,7 +53,8 @@ public class ViewAction extends PortletAction {
 		try {
 			PortletPreferences prefs = req.getPreferences();
 
-			long groupId = GetterUtil.getLong(prefs.getValue("group-id", StringPool.BLANK));
+			long groupId = GetterUtil.getLong(
+				prefs.getValue("group-id", StringPool.BLANK));
 
 			GroupLocalServiceUtil.getGroup(groupId);
 

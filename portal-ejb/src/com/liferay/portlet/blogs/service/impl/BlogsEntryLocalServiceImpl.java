@@ -139,7 +139,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 
 		validate(title, content);
 
-		String entryId = Long.toString(CounterLocalServiceUtil.increment(
+		String entryId = String.valueOf(CounterLocalServiceUtil.increment(
 			BlogsEntry.class.getName()));
 
 		BlogsEntry entry = BlogsEntryUtil.create(entryId);

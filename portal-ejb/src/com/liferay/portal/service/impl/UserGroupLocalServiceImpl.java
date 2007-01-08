@@ -69,7 +69,7 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
 		validate(null, companyId, name);
 
-		String userGroupId = Long.toString(CounterLocalServiceUtil.increment(
+		String userGroupId = String.valueOf(CounterLocalServiceUtil.increment(
 			UserGroup.class.getName()));
 
 		UserGroup userGroup = UserGroupUtil.create(userGroupId);

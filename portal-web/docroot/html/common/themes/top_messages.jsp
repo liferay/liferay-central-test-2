@@ -35,7 +35,7 @@
 
 					<%= LanguageUtil.get(pageContext, "maintenance-alert") %> &nbsp;&nbsp;&nbsp;<%= DateFormat.getTimeInstance(DateFormat.SHORT, locale).format(Time.getDate(new GregorianCalendar(timeZone))) %> <%= timeZone.getDisplayName(false, TimeZone.SHORT, locale) %><br><br>
 
-					<%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", Long.toString(ShutdownUtil.getInProcess() / Time.MINUTE), false) %>
+					<%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %>
 
 					</span></font>
 				</td>

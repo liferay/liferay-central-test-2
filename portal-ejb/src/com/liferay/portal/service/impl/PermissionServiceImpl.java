@@ -41,6 +41,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.permission.UserPermission;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 
 /**
@@ -186,14 +187,14 @@ public class PermissionServiceImpl
 
 		if (name.equals(Group.class.getName())) {
 			GroupPermission.check(
-				permissionChecker, Long.parseLong(primKey),
+				permissionChecker, GetterUtil.getLong(primKey),
 				ActionKeys.PERMISSIONS);
 		}
 		else if (name.equals(Layout.class.getName())) {
 			String layoutGroupIdStr = StringUtil.split(primKey, ".")[1];
 
-			long layoutGroupId =
-				Long.parseLong(StringUtil.replace(layoutGroupIdStr, "}", ""));
+			long layoutGroupId = GetterUtil.getLong(
+				StringUtil.replace(layoutGroupIdStr, "}", ""));
 
 			GroupPermission.check(
 				permissionChecker, layoutGroupId, ActionKeys.MANAGE_LAYOUTS);

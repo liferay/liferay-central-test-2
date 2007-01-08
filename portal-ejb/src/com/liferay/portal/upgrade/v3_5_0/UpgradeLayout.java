@@ -149,7 +149,8 @@ public class UpgradeLayout extends UpgradeProcess {
 				int pos = layoutId.indexOf(".");
 
 				if (pos != -1) {
-					long groupId = Long.parseLong(layoutId.substring(0, pos));
+					long groupId = GetterUtil.getLong(
+						layoutId.substring(0, pos));
 
 					companyId = _getCompanyIdByGroupId(groupId);
 				}

@@ -40,8 +40,6 @@ public interface WebsiteLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void deleteWebsites() throws com.liferay.portal.SystemException;
-
 	public void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;

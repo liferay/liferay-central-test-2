@@ -138,12 +138,6 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			groupId, actionId, resourceIds, permissionCheckerBag);
 	}
 
-	public void renewPermissionIds()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		PermissionLocalServiceFactory.getTxImpl().renewPermissionIds();
-	}
-
 	public void setGroupPermissions(long groupId, java.lang.String[] actionIds,
 		long resourceId)
 		throws com.liferay.portal.PortalException, 

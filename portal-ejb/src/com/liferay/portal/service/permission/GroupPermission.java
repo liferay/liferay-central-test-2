@@ -50,7 +50,7 @@ public class GroupPermission {
 		// Group id must be set so that users can modify their personal pages
 
 		return permissionChecker.hasPermission(
-			groupId, Group.class.getName(), String.valueOf(groupId), actionId);
+			groupId, Group.class.getName(), groupId, actionId);
 	}
 
 }

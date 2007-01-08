@@ -34,7 +34,7 @@ import com.liferay.portal.model.User;
 public class UserIdGenerator {
 
 	public String generate(String companyId) throws Exception {
-		return companyId + "." + Long.toString(
+		return companyId + "." + String.valueOf(
 			CounterLocalServiceUtil.increment(
 				User.class.getName() + "." + companyId));
 	}

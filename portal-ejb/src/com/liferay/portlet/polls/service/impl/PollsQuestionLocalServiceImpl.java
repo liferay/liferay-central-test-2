@@ -113,7 +113,7 @@ public class PollsQuestionLocalServiceImpl
 
 		validate(title, description, choices);
 
-		String questionId = Long.toString(CounterLocalServiceUtil.increment(
+		String questionId = String.valueOf(CounterLocalServiceUtil.increment(
 			PollsQuestion.class.getName()));
 
 		PollsQuestion question = PollsQuestionUtil.create(questionId);

@@ -44,12 +44,6 @@ public class JournalContentSearchLocalServiceEJBImpl
 											   .checkContentSearches(companyId);
 	}
 
-	public void deleteArticleContentSearches()
-		throws com.liferay.portal.SystemException {
-		JournalContentSearchLocalServiceFactory.getTxImpl()
-											   .deleteArticleContentSearches();
-	}
-
 	public void deleteArticleContentSearches(java.lang.String companyId,
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
@@ -71,18 +65,18 @@ public class JournalContentSearchLocalServiceEJBImpl
 											   .deleteOwnerContentSearches(ownerId);
 	}
 
+	public java.util.List getArticleContentSearches()
+		throws com.liferay.portal.SystemException {
+		return JournalContentSearchLocalServiceFactory.getTxImpl()
+													  .getArticleContentSearches();
+	}
+
 	public java.util.List getArticleContentSearches(
 		java.lang.String companyId, long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		return JournalContentSearchLocalServiceFactory.getTxImpl()
 													  .getArticleContentSearches(companyId,
 			groupId, articleId);
-	}
-
-	public java.util.List getArticleContentSearches()
-		throws com.liferay.portal.SystemException {
-		return JournalContentSearchLocalServiceFactory.getTxImpl()
-													  .getArticleContentSearches();
 	}
 
 	public java.util.List getLayoutIds(java.lang.String ownerId, long groupId,

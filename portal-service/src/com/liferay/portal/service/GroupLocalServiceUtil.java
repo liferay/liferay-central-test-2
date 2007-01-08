@@ -156,14 +156,6 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.hasUserGroup(userId, groupId);
 	}
 
-	public static java.util.Map renewGroupIds()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		return groupLocalService.renewGroupIds();
-	}
-
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
 		java.util.Map params, int begin, int end)

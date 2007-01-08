@@ -152,13 +152,6 @@ public class PermissionLocalServiceUtil {
 			actionId, resourceIds, permissionCheckerBag);
 	}
 
-	public static void renewPermissionIds()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
-		permissionLocalService.renewPermissionIds();
-	}
-
 	public static void setGroupPermissions(long groupId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 

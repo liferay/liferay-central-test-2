@@ -27,7 +27,7 @@
 <%
 String languageId = LanguageUtil.getLanguageId(request);
 
-long groupId = GetterUtil.getLong(request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
+long groupId = GetterUtil.getLong((String)request.getAttribute(WebKeys.JOURNAL_ARTICLE_GROUP_ID));
 
 Element el = (Element)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL);
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.util;
 
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 
 import java.io.StringReader;
@@ -58,7 +59,8 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 					templatePathIndex + _GET_TEMPLATE_PATH.length();
 
 				String companyId = (String)_tokens.get("company_id");
-		        long groupId = Long.parseLong((String)_tokens.get("group_id"));
+		        long groupId = GetterUtil.getLong(
+					(String)_tokens.get("group_id"));
 				String templateId =
 					href.substring(templateIdIndex, href.length());
 

@@ -53,12 +53,6 @@ public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService
 		EmailAddressLocalServiceFactory.getTxImpl().deleteEmailAddress(emailAddressId);
 	}
 
-	public void deleteEmailAddresses()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		EmailAddressLocalServiceFactory.getTxImpl().deleteEmailAddresses();
-	}
-
 	public void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

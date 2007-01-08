@@ -190,7 +190,7 @@ int tabIndex = 1;
 <input name="scroll" type="hidden" value="">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />structureId" type="hidden" value="<%= structureId %>">
 <input name="<portlet:namespace />move_up" type="hidden" value="">
 <input name="<portlet:namespace />move_depth" type="hidden" value="">

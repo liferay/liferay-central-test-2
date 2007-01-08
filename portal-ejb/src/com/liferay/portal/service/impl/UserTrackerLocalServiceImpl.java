@@ -56,7 +56,7 @@ public class UserTrackerLocalServiceImpl implements UserTrackerLocalService {
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED))) {
 
-			String userTrackerId = Long.toString(
+			String userTrackerId = String.valueOf(
 				CounterLocalServiceUtil.increment(UserTracker.class.getName()));
 
 			UserTracker userTracker = UserTrackerUtil.create(userTrackerId);
@@ -75,8 +75,9 @@ public class UserTrackerLocalServiceImpl implements UserTrackerLocalService {
 			while (itr.hasNext()) {
 				UserTrackerPath userTrackerPath = (UserTrackerPath)itr.next();
 
-				String pathId = Long.toString(CounterLocalServiceUtil.increment(
-					UserTrackerPath.class.getName()));
+				String pathId = String.valueOf(
+					CounterLocalServiceUtil.increment(
+						UserTrackerPath.class.getName()));
 
 				userTrackerPath.setUserTrackerPathId(pathId);
 				userTrackerPath.setUserTrackerId(userTrackerId);

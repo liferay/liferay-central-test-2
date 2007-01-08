@@ -362,6 +362,10 @@ public class DBBuilder {
 		}
 		else if (words.length == 4) {
 			nullable = "not null;";
+
+			if (words[3].endsWith(";")) {
+				words[3] = words[3].substring(0, words[3].length() - 1);
+			}
 		}
 
 		String[] template = {

@@ -341,20 +341,17 @@ public class FileUtil {
 	}
 
 	public static String read(File file) throws IOException {
-		StringBuffer sb = new StringBuffer();
+		FileInputStream fis = new FileInputStream(file);
 
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		byte[] bytes = new byte[fis.available()];
 
-		String line = null;
+		fis.read(bytes);
 
-		while ((line = br.readLine()) != null) {
-			sb.append(line);
-			sb.append('\n');
-		}
+		fis.close();
 
-		br.close();
+		String s = new String(bytes);
 
-		return sb.toString().trim();
+		return StringUtil.replace(s, "\r\n", "\n");
 	}
 
 	public static File[] sortFiles(File[] files) {

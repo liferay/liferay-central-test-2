@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -54,7 +55,7 @@ public class ContentHits extends HitsImpl {
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
 
-			long groupId = Long.parseLong((String)doc.get("groupId"));
+			long groupId = GetterUtil.getLong((String)doc.get("groupId"));
 			String articleId = doc.get("articleId");
 
 			if (JournalContentSearchLocalServiceUtil.getLayoutIdsCount(

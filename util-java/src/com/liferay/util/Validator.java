@@ -355,7 +355,7 @@ public class Validator {
 	}
 
 	public static boolean isNull(Long l) {
-		if (l == null || l.longValue() == 0) {
+		if ((l == null) || l.longValue() == 0) {
 			return true;
 		}
 		else {

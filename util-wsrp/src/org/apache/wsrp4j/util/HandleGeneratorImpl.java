@@ -74,7 +74,7 @@ public class HandleGeneratorImpl implements HandleGenerator {
 
 		StringBuffer handle = new StringBuffer(host);
 		handle.append("_");
-		handle.append(Long.toString(System.currentTimeMillis()));
+		handle.append(String.valueOf(System.currentTimeMillis()));
 		handle.append("_");
 		handle.append(Integer.toString(counter++));
 

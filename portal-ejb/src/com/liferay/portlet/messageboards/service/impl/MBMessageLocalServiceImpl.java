@@ -237,7 +237,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		validate(subject, body);
 
-		String messageId = Long.toString(CounterLocalServiceUtil.increment(
+		String messageId = String.valueOf(CounterLocalServiceUtil.increment(
 			MBMessage.class.getName()));
 
 		start = logAddMessage(messageId, start, 1);
@@ -269,7 +269,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 		if (thread == null ||
 			parentMessageId.equals(MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID)) {
 
-			threadId = Long.toString(CounterLocalServiceUtil.increment(
+			threadId = String.valueOf(CounterLocalServiceUtil.increment(
 				MBThread.class.getName()));
 
 			thread = MBThreadUtil.create(threadId);
@@ -729,7 +729,7 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 			message = MBMessageLocalServiceUtil.addDiscussionMessage(
 				userId, subject, body);
 
-			String discussionId = Long.toString(
+			String discussionId = String.valueOf(
 				CounterLocalServiceUtil.increment(
 					MBDiscussion.class.getName()));
 

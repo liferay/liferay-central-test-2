@@ -52,7 +52,7 @@ public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
 
 		validate(typeId);
 
-		String orgLaborId = Long.toString(CounterLocalServiceUtil.increment(
+		String orgLaborId = String.valueOf(CounterLocalServiceUtil.increment(
 			OrgLabor.class.getName()));
 
 		OrgLabor orgLabor = OrgLaborUtil.create(orgLaborId);

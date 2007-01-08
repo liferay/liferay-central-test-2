@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
@@ -55,10 +54,8 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -80,7 +77,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		if (permission == null) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Permission.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
@@ -361,88 +358,6 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		return false;
 	}
 
-	public void renewPermissionIds() throws PortalException, SystemException {
-
-		List permissions = PermissionUtil.findAll();
-
-		// Save old permissions and mappings
-
-		Map groupMap = new HashMap(permissions.size());
-		Map roleMap = new HashMap(permissions.size());
-		Map userMap = new HashMap(permissions.size());
-		Map orgGroupMap = new HashMap(permissions.size());
-
-		Iterator itr1 = permissions.iterator();
-
-		while (itr1.hasNext()) {
-			Permission permission = (Permission)itr1.next();
-
-			long permissionId = permission.getPermissionId();
-			Long wrappedPermissionId = new Long(permissionId);
-
-			groupMap.put(
-				wrappedPermissionId, PermissionUtil.getGroups(permissionId));
-			roleMap.put(
-				wrappedPermissionId, PermissionUtil.getRoles(permissionId));
-			userMap.put(
-				wrappedPermissionId, PermissionUtil.getUsers(permissionId));
-			orgGroupMap.put(
-				wrappedPermissionId,
-				OrgGroupPermissionUtil.findByPermissionId(permissionId));
-			OrgGroupPermissionUtil.removeByPermissionId(permissionId);
-
-			PermissionUtil.remove(permissionId);
-		}
-
-		// Insert new permissions and mappings
-
-		itr1 = permissions.iterator();
-
-		while (itr1.hasNext()) {
-			Permission permission = (Permission)itr1.next();
-
-			Long oldPermissionId = new Long(permission.getPermissionId());
-
-			long newPermissionId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
-
-			Permission newPermission = PermissionUtil.create(newPermissionId);
-
-			newPermission.setCompanyId(permission.getCompanyId());
-			newPermission.setActionId(permission.getActionId());
-			newPermission.setResourceId(permission.getResourceId());
-
-			PermissionUtil.update(newPermission);
-
-			PermissionUtil.addGroups(
-				newPermissionId, (List)groupMap.get(oldPermissionId));
-			PermissionUtil.addRoles(
-				newPermissionId, (List)roleMap.get(oldPermissionId));
-			PermissionUtil.addUsers(
-				newPermissionId, (List)userMap.get(oldPermissionId));
-
-			List orgGroupList = (List)orgGroupMap.get(oldPermissionId);
-
-			Iterator itr2 = orgGroupList.iterator();
-
-			while (itr2.hasNext()) {
-				OrgGroupPermission oldOrgGroupPermission =
-					(OrgGroupPermission)itr2.next();
-
-				OrgGroupPermission newOrgGroupPermission =
-					OrgGroupPermissionUtil.create(new OrgGroupPermissionPK());
-
-				newOrgGroupPermission.setOrganizationId(
-					oldOrgGroupPermission.getOrganizationId());
-				newOrgGroupPermission.setGroupId(
-					oldOrgGroupPermission.getGroupId());
-				newOrgGroupPermission.setPermissionId(newPermissionId);
-
-				OrgGroupPermissionUtil.update(newOrgGroupPermission);
-			}
-		}
-	}
-
 	public void setGroupPermissions(
 			long groupId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
@@ -562,7 +477,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		}
 		catch (NoSuchPermissionException nspe) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Permission.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 

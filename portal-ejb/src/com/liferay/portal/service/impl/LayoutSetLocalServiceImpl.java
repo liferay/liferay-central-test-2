@@ -34,7 +34,6 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalService;
-import com.liferay.portal.service.persistence.LayoutPK;
 import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -42,10 +41,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Validator;
 
-import java.util.HashMap;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="LayoutSetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -110,81 +106,6 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 
 		return LayoutSetFinder.findByC_V(companyId, virtualHost);
     }
-
-	public Map renewOwnerIds()
-		throws PortalException, SystemException {
-
-		// Fix LayoutSet
-
-		List layoutSets = LayoutSetUtil.findAll();
-
-		LayoutSetUtil.removeAll();
-
-		Map ownerIdMap = new HashMap(layoutSets.size());
-
-		Iterator itr = layoutSets.iterator();
-
-		while (itr.hasNext()) {
-			LayoutSet oldLayoutSet = (LayoutSet)itr.next();
-
-			String oldOwnerId = oldLayoutSet.getOwnerId();
-			String ownerId;
-
-			if (LayoutImpl.isPrivateLayout(oldOwnerId)) {
-				ownerId = LayoutImpl.PRIVATE + oldLayoutSet.getGroupId();
-			}
-			else {
-				ownerId = LayoutImpl.PUBLIC + oldLayoutSet.getGroupId();
-			}
-
-			ownerIdMap.put(oldOwnerId, ownerId);
-
-			LayoutSet layoutSet = LayoutSetUtil.create(ownerId);
-
-			layoutSet.setCompanyId(oldLayoutSet.getCompanyId());
-			layoutSet.setGroupId(oldLayoutSet.getGroupId());
-			layoutSet.setUserId(oldLayoutSet.getUserId());
-			layoutSet.setPrivateLayout(oldLayoutSet.getPrivateLayout());
-			layoutSet.setThemeId(oldLayoutSet.getThemeId());
-			layoutSet.setColorSchemeId(oldLayoutSet.getColorSchemeId());
-			layoutSet.setPageCount(oldLayoutSet.getPageCount());
-			layoutSet.setVirtualHost(oldLayoutSet.getVirtualHost());
-
-			LayoutSetUtil.update(layoutSet);
-		}
-
-		// Fix Layout
-
-		itr = LayoutUtil.findAll().iterator();
-
-		LayoutUtil.removeAll();
-
-		while (itr.hasNext()) {
-			Layout oldLayout = (Layout)itr.next();
-
-			String ownerId = (String)ownerIdMap.get(oldLayout.getOwnerId());
-
-			Layout layout =
-				LayoutUtil.create(
-					new LayoutPK(oldLayout.getLayoutId(), ownerId));
-
-			layout.setCompanyId(oldLayout.getCompanyId());
-			layout.setParentLayoutId(oldLayout.getParentLayoutId());
-			layout.setName(oldLayout.getName());
-			layout.setTitle(oldLayout.getTitle());
-			layout.setType(oldLayout.getType());
-			layout.setTypeSettings(oldLayout.getTypeSettings());
-			layout.setHidden(oldLayout.getHidden());
-			layout.setFriendlyURL(oldLayout.getFriendlyURL());
-			layout.setThemeId(oldLayout.getThemeId());
-			layout.setColorSchemeId(oldLayout.getColorSchemeId());
-			layout.setPriority(oldLayout.getPriority());
-
-			LayoutUtil.update(layout);
-		}
-
-		return ownerIdMap;
-	}
 
 	public LayoutSet updateLookAndFeel(
 			String ownerId, String themeId, String colorSchemeId)

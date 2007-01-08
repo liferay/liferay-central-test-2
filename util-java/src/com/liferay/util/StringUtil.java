@@ -696,24 +696,132 @@ public class StringUtil {
 		}
 	}
 
-	public static String trimLeading(String s) {
-		for (int i = 0; i < s.length(); i++) {
-			if (!Character.isWhitespace(s.charAt(i))) {
-				return s.substring(i, s.length());
+	public static String trim(String s) {
+		return trim(s, null);
+	}
+
+	public static String trim(String s, char c) {
+		return trim(s, new char[] {c});
+	}
+
+    public static String trim(String s, char[] exceptions) {
+		if (s == null) {
+			return null;
+		}
+
+		char[] charArray = s.toCharArray();
+
+		int len = charArray.length;
+
+		int x = 0;
+		int y = charArray.length;
+
+		for (int i = 0; i < len; i++) {
+			char c = charArray[i];
+
+			if (_isTrimable(c, exceptions)) {
+				x = i + 1;
+			}
+			else {
+				break;
 			}
 		}
 
-		return StringPool.BLANK;
+		for (int i = len - 1; i >= 0; i--) {
+			char c = charArray[i];
+
+			if (_isTrimable(c, exceptions)) {
+				y = i;
+			}
+			else {
+				break;
+			}
+		}
+
+		if ((x != 0) || (y != len)) {
+			return s.substring(x, y);
+		}
+		else {
+			return s;
+		}
+	}
+
+	public static String trimLeading(String s) {
+		return trimLeading(s, null);
+	}
+
+	public static String trimLeading(String s, char c) {
+		return trimLeading(s, new char[] {c});
+	}
+
+	public static String trimLeading(String s, char[] exceptions) {
+		if (s == null) {
+			return null;
+		}
+
+		char[] charArray = s.toCharArray();
+
+		int len = charArray.length;
+
+		int x = 0;
+		int y = charArray.length;
+
+		for (int i = 0; i < len; i++) {
+			char c = charArray[i];
+
+			if (_isTrimable(c, exceptions)) {
+				x = i + 1;
+			}
+			else {
+				break;
+			}
+		}
+
+		if ((x != 0) || (y != len)) {
+			return s.substring(x, y);
+		}
+		else {
+			return s;
+		}
 	}
 
 	public static String trimTrailing(String s) {
-		for (int i = s.length() - 1; i >= 0; i--) {
-			if (!Character.isWhitespace(s.charAt(i))) {
-				return s.substring(0, i + 1);
+		return trimTrailing(s, null);
+	}
+
+	public static String trimTrailing(String s, char c) {
+		return trimTrailing(s, new char[] {c});
+	}
+
+	public static String trimTrailing(String s, char[] exceptions) {
+		if (s == null) {
+			return null;
+		}
+
+		char[] charArray = s.toCharArray();
+
+		int len = charArray.length;
+
+		int x = 0;
+		int y = charArray.length;
+
+		for (int i = len - 1; i >= 0; i--) {
+			char c = charArray[i];
+
+			if (_isTrimable(c, exceptions)) {
+				y = i;
+			}
+			else {
+				break;
 			}
 		}
 
-		return StringPool.BLANK;
+		if ((x != 0) || (y != len)) {
+			return s.substring(x, y);
+		}
+		else {
+			return s;
+		}
 	}
 
 	public static String upperCase(String s) {
@@ -780,6 +888,18 @@ public class StringUtil {
 		}
 
 		return sb.toString();
+	}
+
+	private static boolean _isTrimable(char c, char[] exceptions) {
+		if ((exceptions != null) && (exceptions.length > 0)) {
+			for (int i = 0; i < exceptions.length; i++) {
+				if (c == exceptions[i]) {
+					return false;
+				}
+			}
+		}
+
+		return Character.isWhitespace(c);
 	}
 
 }

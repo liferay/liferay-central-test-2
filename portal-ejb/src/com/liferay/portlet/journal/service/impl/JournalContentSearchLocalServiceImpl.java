@@ -128,10 +128,6 @@ public class JournalContentSearchLocalServiceImpl
 		}
 	}
 
-	public void deleteArticleContentSearches() throws SystemException {
-		JournalContentSearchUtil.removeAll();
-	}
-
 	public void deleteArticleContentSearches(
 			String companyId, long groupId, String articleId)
 		throws SystemException {
@@ -151,16 +147,16 @@ public class JournalContentSearchLocalServiceImpl
 		JournalContentSearchUtil.removeByOwnerId(ownerId);
 	}
 
+	public List getArticleContentSearches() throws SystemException {
+		return JournalContentSearchUtil.findAll();
+	}
+
 	public List getArticleContentSearches(
 			String companyId, long groupId, String articleId)
 		throws SystemException {
 
 		return JournalContentSearchUtil.findByC_G_A(
 			companyId, groupId, articleId);
-	}
-
-	public List getArticleContentSearches() throws SystemException {
-		return JournalContentSearchUtil.findAll();
 	}
 
 	public List getLayoutIds(String ownerId, long groupId, String articleId)

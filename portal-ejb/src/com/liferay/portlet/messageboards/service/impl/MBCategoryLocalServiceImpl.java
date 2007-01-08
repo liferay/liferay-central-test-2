@@ -113,7 +113,7 @@ public class MBCategoryLocalServiceImpl implements MBCategoryLocalService {
 
 		validate(name);
 
-		String categoryId = Long.toString(CounterLocalServiceUtil.increment(
+		String categoryId = String.valueOf(CounterLocalServiceUtil.increment(
 			MBCategory.class.getName()));
 
 		MBCategory category = MBCategoryUtil.create(categoryId);

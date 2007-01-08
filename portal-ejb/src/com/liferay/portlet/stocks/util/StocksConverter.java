@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.stocks.model.Stocks;
 import com.liferay.util.ConverterException;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -67,7 +68,7 @@ public class StocksConverter implements WebCacheable {
 			st.nextToken();
 
 			try {
-				lastTrade = Double.parseDouble(
+				lastTrade = GetterUtil.getDouble(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setLastTrade(lastTrade);
@@ -82,7 +83,7 @@ public class StocksConverter implements WebCacheable {
 			st.nextToken();
 
 			try {
-				change = Double.parseDouble(
+				change = GetterUtil.getDouble(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setChange(change);
@@ -92,7 +93,7 @@ public class StocksConverter implements WebCacheable {
 			}
 
 			try {
-				open = Double.parseDouble(
+				open = GetterUtil.getDouble(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setOpen(open);
@@ -102,7 +103,7 @@ public class StocksConverter implements WebCacheable {
 			}
 
 			try {
-				dayHigh = Double.parseDouble(
+				dayHigh = GetterUtil.getDouble(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setDayHigh(dayHigh);
@@ -112,7 +113,7 @@ public class StocksConverter implements WebCacheable {
 			}
 
 			try {
-				dayLow = Double.parseDouble(
+				dayLow = GetterUtil.getDouble(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setDayLow(dayLow);
@@ -122,7 +123,7 @@ public class StocksConverter implements WebCacheable {
 			}
 
 			try {
-				volume = Long.parseLong(
+				volume = GetterUtil.getLong(
 					st.nextToken().replace('"', ' ').trim());
 
 				stocks.setVolume(volume);

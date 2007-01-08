@@ -827,4 +827,3 @@ TR.odd { background-color: <%= colorScheme.getPortletBg() %>; color: #000000; }
 .message-board-thread-body A {
     text-decoration: underline;
 }
-

@@ -48,11 +48,6 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.deletePhone(phoneId);
 	}
 
-	public static void deletePhones() throws com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-		phoneLocalService.deletePhones();
-	}
-
 	public static void deletePhones(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

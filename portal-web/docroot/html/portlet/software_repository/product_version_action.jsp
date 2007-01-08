@@ -43,7 +43,7 @@
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_product_version" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productVersionId" value="<%= Long.toString(productVersion.getProductVersionId()) %>" />
+	<portlet:param name="productVersionId" value="<%= String.valueOf(productVersion.getProductVersionId()) %>" />
 </portlet:renderURL>
 
 <liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -52,7 +52,7 @@
 	<portlet:param name="struts_action" value="/software_repository/edit_product_version" />
 	<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productVersionId" value="<%= Long.toString(productVersion.getProductVersionId()) %>" />
+	<portlet:param name="productVersionId" value="<%= String.valueOf(productVersion.getProductVersionId()) %>" />
 </portlet:actionURL>
 
 <liferay-ui:icon-delete url="<%= deleteURL %>" />

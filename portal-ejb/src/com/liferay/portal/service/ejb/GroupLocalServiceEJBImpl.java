@@ -138,12 +138,6 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 		return GroupLocalServiceFactory.getTxImpl().hasUserGroup(userId, groupId);
 	}
 
-	public java.util.Map renewGroupIds()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		return GroupLocalServiceFactory.getTxImpl().renewGroupIds();
-	}
-
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
 		java.util.Map params, int begin, int end)

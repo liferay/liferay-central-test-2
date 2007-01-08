@@ -152,20 +152,20 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
 <%--<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 	<portlet:param name="struts_action" value="/software_repository/view_product_entry" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editProductEntryURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_product_entry" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="addProductVersionURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_product_version" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
 	<portlet:param name="cmd" value="add" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL var="listURL">
@@ -180,7 +180,7 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 	<div class="ratings" style="display: inline; margin-bottom: 35px" align="left">
 		<liferay-ui:ratings
 			className="<%= SRProductEntry.class.getName() %>"
-			classPK="<%= Long.toString(productEntry.getPrimaryKey()) %>"
+			classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
 			url='<%= themeDisplay.getPathMain() + "/software_repository/rate_product_entry?productEntryId=" + productEntryId %>'
 		/>
 	</div>
@@ -288,7 +288,7 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 				<liferay-ui:discussion
 					formAction="<%= discussionURL %>"
 					className="<%= SRProductEntry.class.getName() %>"
-					classPK="<%= Long.toString(productEntry.getPrimaryKey()) %>"
+					classPK="<%= String.valueOf(productEntry.getPrimaryKey()) %>"
 					userId="<%= productEntry.getUserId() %>"
 					subject="<%= productEntry.getName() %>"
 					redirect="<%= currentURL %>"
@@ -309,7 +309,7 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 
 						ResultRow row = new ResultRow(
 							curProductVersion,
-							Long.toString(curProductVersion.getPrimaryKey()), i);
+							String.valueOf(curProductVersion.getPrimaryKey()), i);
 
 						PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -321,7 +321,7 @@ portletURL.setParameter("productEntryId", String.valueOf(productEntryId));
 								"/software_repository/view_product_version");
 						rowURL.setParameter(
 							"productVersionId",
-							Long.toString(curProductVersion.getProductVersionId()));
+							String.valueOf(curProductVersion.getProductVersionId()));
 
 						// Name and description
 

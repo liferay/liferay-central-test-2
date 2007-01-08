@@ -103,7 +103,7 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 
 		validate(name);
 
-		String nodeId = Long.toString(CounterLocalServiceUtil.increment(
+		String nodeId = String.valueOf(CounterLocalServiceUtil.increment(
 			WikiNode.class.getName()));
 
 		WikiNode node = WikiNodeUtil.create(nodeId);

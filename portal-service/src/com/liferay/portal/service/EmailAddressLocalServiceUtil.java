@@ -48,13 +48,6 @@ public class EmailAddressLocalServiceUtil {
 		emailAddressLocalService.deleteEmailAddress(emailAddressId);
 	}
 
-	public static void deleteEmailAddresses()
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-		emailAddressLocalService.deleteEmailAddresses();
-	}
-
 	public static void deleteEmailAddresses(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

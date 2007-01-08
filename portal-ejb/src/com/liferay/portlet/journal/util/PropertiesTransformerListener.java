@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.CollectionFactory;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -103,7 +104,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			newTokens.put("template_id", _GLOBAL_PROPERTIES);
 
 			String companyId = (String)tokens.get("company_id");
-	        long groupId = Long.parseLong((String)tokens.get("group_id"));
+	        long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 			String script = JournalUtil.getTemplateScript(
 				companyId, groupId, _GLOBAL_PROPERTIES, newTokens,

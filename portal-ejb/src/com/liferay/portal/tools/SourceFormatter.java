@@ -50,61 +50,8 @@ public class SourceFormatter {
 	public static void main(String[] args) {
 		SourceFormatter sf = new SourceFormatter();
 
-		sf.formatCVS();
 		sf.formatJava();
 		sf.formatJSP();
-	}
-
-	public void formatCVS() {
-		try {
-			String basedir = "../";
-
-			List list = new ArrayList();
-
-			DirectoryScanner ds = new DirectoryScanner();
-			ds.setIncludes(
-				new String[] {
-					"**\\.cvsignore"
-				});
-			ds.setBasedir(basedir);
-			ds.scan();
-
-			list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
-
-			String[] files = (String[])list.toArray(new String[list.size()]);
-
-			for (int i = 0; i < files.length; i++) {
-				File file = new File(basedir + files[i]);
-
-				List ignoreFiles = ListUtil.fromFile(file);
-
-				Collections.sort(ignoreFiles);
-
-				StringBuffer sb = new StringBuffer();
-
-				for (int j = 0; j < ignoreFiles.size(); j++) {
-					String ignoreFile = (String)ignoreFiles.get(j);
-
-					sb.append(ignoreFile);
-
-					if ((j + 1) != ignoreFiles.size()) {
-						sb.append("\n");
-					}
-				}
-
-				String content = FileUtil.read(file);
-				String newContent = sb.toString();
-
-				if ((newContent != null) && !content.equals(newContent)) {
-					FileUtil.write(file, newContent);
-
-					System.out.println(file.toString());
-				}
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	public void formatJava() {
@@ -571,6 +518,7 @@ public class SourceFormatter {
 		br.close();
 
 		String newContent = sb.toString();
+
 		if (newContent.endsWith("\n")) {
 			newContent = newContent.substring(0, newContent.length() -1);
 		}

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.velocity.VelocityResourceListener;
 
 import java.io.ByteArrayInputStream;
@@ -61,7 +62,7 @@ public class JournalTemplateVelocityResourceListener
                 int z = source.indexOf(StringPool.SLASH, y + 1);
 
 				String companyId = source.substring(x + 1, y);
-                long groupId = Long.parseLong(source.substring(y + 1, z));
+                long groupId = GetterUtil.getLong(source.substring(y + 1, z));
 				String templateId = source.substring(z + 1);
 
 				if (_log.isDebugEnabled()) {

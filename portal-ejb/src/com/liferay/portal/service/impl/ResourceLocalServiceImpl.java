@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -121,7 +120,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 			// Community permissions
 
-			if ((groupId > 0) && communityPermissions != null) {
+			if ((groupId > 0) && (communityPermissions != null)) {
 				addModelPermissions(
 					groupId, resource.getResourceId(), communityPermissions);
 			}
@@ -153,7 +152,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		if (resource == null) {
 			long resourceId = CounterLocalServiceUtil.increment(
-				Counter.class.getName());
+				Resource.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
 			resource.setCompanyId(companyId);
@@ -351,10 +350,6 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 		}
 	}
 
-	public void deleteResources() throws SystemException {
-		ResourceUtil.removeAll();
-	}
-
 	public void deleteResources(String name)
 		throws PortalException, SystemException {
 
@@ -384,16 +379,6 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		return ResourceUtil.findByC_N_T_S_P(
 			companyId, name, typeId, scope, primKey);
-	}
-
-	public void updatePrimKey(long resourceId, String primKey)
-		throws PortalException, SystemException {
-
-		Resource resource = ResourceUtil.findByPrimaryKey(resourceId);
-
-		resource.setPrimKey(primKey);
-
-		ResourceUtil.update(resource);
 	}
 
 	protected void addCommunityPermissions(

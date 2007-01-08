@@ -48,12 +48,6 @@ public class WebsiteLocalServiceUtil {
 		websiteLocalService.deleteWebsite(websiteId);
 	}
 
-	public static void deleteWebsites()
-		throws com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-		websiteLocalService.deleteWebsites();
-	}
-
 	public static void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

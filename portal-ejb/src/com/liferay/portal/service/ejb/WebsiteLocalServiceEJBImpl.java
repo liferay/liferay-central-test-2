@@ -53,10 +53,6 @@ public class WebsiteLocalServiceEJBImpl implements WebsiteLocalService,
 		WebsiteLocalServiceFactory.getTxImpl().deleteWebsite(websiteId);
 	}
 
-	public void deleteWebsites() throws com.liferay.portal.SystemException {
-		WebsiteLocalServiceFactory.getTxImpl().deleteWebsites();
-	}
-
 	public void deleteWebsites(java.lang.String companyId,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException {

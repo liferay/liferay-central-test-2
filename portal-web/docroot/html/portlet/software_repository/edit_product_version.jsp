@@ -37,7 +37,7 @@
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editProductEntryURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_product_entry" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <script type="text/javascript">
@@ -95,7 +95,7 @@
 						SRFrameworkVersion frameworkVersion = (SRFrameworkVersion) frameworkVersionsIt.next();
 				%>
 						<option <%= ((productVersion != null) && (productVersion.getFrameworkVersionIds().contains(new Long(frameworkVersion.getFrameworkVersionId())))) ? "selected" : "" %>
-							value="<%= Long.toString(frameworkVersion.getPrimaryKey()) %>"><%= frameworkVersion.getName() %></option>
+							value="<%= String.valueOf(frameworkVersion.getPrimaryKey()) %>"><%= frameworkVersion.getName() %></option>
 				<%
 					}
 				%>

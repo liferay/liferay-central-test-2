@@ -37,18 +37,18 @@
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
 	<portlet:param name="struts_action" value="/software_repository/view_product_entry" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editProductEntryURL">
 	<portlet:param name="struts_action" value="/software_repository/edit_product_entry" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 </portlet:renderURL>
 
 <portlet:renderURL var="viewProductEntryHistoryURL">
 	<portlet:param name="struts_action" value="/software_repository/view_product_entry" />
-	<portlet:param name="productEntryId" value="<%= Long.toString(productEntry.getProductEntryId()) %>" />
+	<portlet:param name="productEntryId" value="<%= String.valueOf(productEntry.getProductEntryId()) %>" />
 	<portlet:param name="tabs2" value="version-history" />
 </portlet:renderURL>
 <%

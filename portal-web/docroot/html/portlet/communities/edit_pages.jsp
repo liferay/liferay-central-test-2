@@ -180,7 +180,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 <input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= selPlid %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>">
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>">
 <input name="<portlet:namespace />ownerId" type="hidden" value="<%= ownerId %>">

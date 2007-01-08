@@ -191,7 +191,7 @@ public class CalEventLocalServiceImpl implements CalEventLocalService {
 			title, startDateMonth, startDateDay, startDateYear, endDateMonth,
 			endDateDay, endDateYear, durationHour, durationMinute, allDay);
 
-		String eventId = Long.toString(CounterLocalServiceUtil.increment(
+		String eventId = String.valueOf(CounterLocalServiceUtil.increment(
 			CalEvent.class.getName()));
 
 		CalEvent event = CalEventUtil.create(eventId);

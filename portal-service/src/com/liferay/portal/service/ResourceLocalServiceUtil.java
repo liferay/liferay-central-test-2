@@ -131,12 +131,6 @@ public class ResourceLocalServiceUtil {
 			primKey);
 	}
 
-	public static void deleteResources()
-		throws com.liferay.portal.SystemException {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-		resourceLocalService.deleteResources();
-	}
-
 	public static void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -169,12 +163,5 @@ public class ResourceLocalServiceUtil {
 
 		return resourceLocalService.getResource(companyId, name, typeId, scope,
 			primKey);
-	}
-
-	public static void updatePrimKey(long resourceId, java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-		resourceLocalService.updatePrimKey(resourceId, primKey);
 	}
 }

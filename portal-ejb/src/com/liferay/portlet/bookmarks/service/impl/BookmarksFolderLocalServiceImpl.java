@@ -94,7 +94,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		validate(name);
 
-		String folderId = Long.toString(CounterLocalServiceUtil.increment(
+		String folderId = String.valueOf(CounterLocalServiceUtil.increment(
 			BookmarksFolder.class.getName()));
 
 		BookmarksFolder folder = BookmarksFolderUtil.create(folderId);

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebCacheable;
 import com.liferay.portlet.currencyconverter.model.Currency;
 import com.liferay.util.ConverterException;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
 
@@ -77,7 +78,8 @@ public class CurrencyConverter implements WebCacheable {
 
 			st.nextToken();
 
-			rate = Double.parseDouble(st.nextToken().replace('"', ' ').trim());
+			rate = GetterUtil.getDouble(
+				st.nextToken().replace('"', ' ').trim());
 		}
 		catch (Exception e) {
 			throw new ConverterException(e);

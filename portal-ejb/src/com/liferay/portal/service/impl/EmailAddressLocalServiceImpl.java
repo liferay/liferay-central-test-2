@@ -22,7 +22,6 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.PortalException;
@@ -65,7 +64,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			primary);
 
 		long emailAddressId = CounterLocalServiceUtil.increment(
-			Counter.class.getName());
+			EmailAddress.class.getName());
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
 
@@ -89,12 +88,6 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 		throws PortalException, SystemException {
 
 		EmailAddressUtil.remove(emailAddressId);
-	}
-
-	public void deleteEmailAddresses()
-		throws PortalException, SystemException {
-
-		EmailAddressUtil.removeAll();
 	}
 
 	public void deleteEmailAddresses(

@@ -129,10 +129,6 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			typeId, scope, primKey);
 	}
 
-	public void deleteResources() throws com.liferay.portal.SystemException {
-		ResourceLocalServiceFactory.getTxImpl().deleteResources();
-	}
-
 	public void deleteResources(java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
@@ -158,13 +154,6 @@ public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 			com.liferay.portal.SystemException {
 		return ResourceLocalServiceFactory.getTxImpl().getResource(companyId,
 			name, typeId, scope, primKey);
-	}
-
-	public void updatePrimKey(long resourceId, java.lang.String primKey)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		ResourceLocalServiceFactory.getTxImpl().updatePrimKey(resourceId,
-			primKey);
 	}
 
 	public void ejbCreate() throws CreateException {

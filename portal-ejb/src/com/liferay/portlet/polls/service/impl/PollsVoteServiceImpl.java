@@ -54,7 +54,7 @@ public class PollsVoteServiceImpl extends PrincipalBean
 			userId = getUserId();
 		}
 		catch (PrincipalException pe) {
-			userId = Long.toString(CounterLocalServiceUtil.increment(
+			userId = String.valueOf(CounterLocalServiceUtil.increment(
 				PollsQuestion.class.getName() + ".anonymous"));
 		}
 

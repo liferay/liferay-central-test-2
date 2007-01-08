@@ -98,7 +98,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		validate(url);
 
-		String entryId = Long.toString(CounterLocalServiceUtil.increment(
+		String entryId = String.valueOf(CounterLocalServiceUtil.increment(
 			BookmarksEntry.class.getName()));
 
 		BookmarksEntry entry = BookmarksEntryUtil.create(entryId);

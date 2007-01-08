@@ -48,10 +48,6 @@ public interface LayoutSetLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.Map renewOwnerIds()
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
-
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

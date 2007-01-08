@@ -645,7 +645,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			extension = name.substring(pos + 1, name.length()).toLowerCase();
 		}
 
-		name = Long.toString(CounterLocalServiceUtil.increment(
+		name = String.valueOf(CounterLocalServiceUtil.increment(
 			DLFileEntry.class.getName()));
 
 		if (Validator.isNotNull(extension)) {

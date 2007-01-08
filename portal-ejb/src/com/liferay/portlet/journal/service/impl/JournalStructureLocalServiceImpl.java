@@ -127,7 +127,7 @@ public class JournalStructureLocalServiceImpl
 			description, xsd);
 
 		if (autoStructureId) {
-			structureId = Long.toString(CounterLocalServiceUtil.increment(
+			structureId = String.valueOf(CounterLocalServiceUtil.increment(
 				JournalStructure.class.getName() + "." + user.getCompanyId()));
 		}
 

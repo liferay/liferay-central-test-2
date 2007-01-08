@@ -206,6 +206,10 @@ public class DAOParamUtil {
 		return value;
 	}
 
+	public static long getLong(PortletRequest req, String param) {
+		return GetterUtil.getLong(getString(req, param));
+	}
+
 	public static String getString(PortletRequest req, String param) {
 		String value = ParamUtil.getString(req, param);
 

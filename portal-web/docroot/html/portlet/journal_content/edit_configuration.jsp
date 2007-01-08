@@ -115,7 +115,7 @@ type = ParamUtil.getString(request, "type", type);
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />pages">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>">
-<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(groupId) %>">
+<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>">
 
 <table cellpadding="0" cellspacing="0" border="0" id="<portlet:namespace />articles">
 <tr>

@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.TransformException;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
 import com.liferay.util.velocity.VelocityResourceListener;
 import com.liferay.util.xml.CDATAUtil;
@@ -80,7 +81,7 @@ public class JournalVmUtil {
 			}
 
 			String companyId = (String)tokens.get("company_id");
-            long groupId = Long.parseLong((String)tokens.get("group_id"));
+            long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 			context.put(
 				"journalTemplatesPath",

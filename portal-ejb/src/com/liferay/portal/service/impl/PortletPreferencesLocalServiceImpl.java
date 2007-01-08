@@ -49,10 +49,6 @@ import java.util.Map;
 public class PortletPreferencesLocalServiceImpl
 	implements PortletPreferencesLocalService {
 
-	public void deletePortletPreferences() throws SystemException {
-		PortletPreferencesUtil.removeAll();
-	}
-
 	public void deletePortletPreferences(String ownerId)
 		throws SystemException {
 

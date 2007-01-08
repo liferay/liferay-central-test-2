@@ -297,7 +297,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 			smallFile, smallBytes, mediumImage, mediumImageURL, mediumFile,
 			mediumBytes, largeImage, largeImageURL, largeFile, largeBytes);
 
-		String itemId = Long.toString(CounterLocalServiceUtil.increment(
+		String itemId = String.valueOf(CounterLocalServiceUtil.increment(
 			ShoppingItem.class.getName()));
 
 		ShoppingItem item = ShoppingItemUtil.create(itemId);
@@ -359,7 +359,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemFields.size(); i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = Long.toString(
+			String itemFieldId = String.valueOf(
 				CounterLocalServiceUtil.increment(
 					ShoppingItemField.class.getName()));
 
@@ -378,7 +378,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = Long.toString(
+			String itemPriceId = String.valueOf(
 				CounterLocalServiceUtil.increment(
 					ShoppingItemPrice.class.getName()));
 
@@ -716,7 +716,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemFields.size() && itemFields.size() > 0; i++) {
 			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
 
-			String itemFieldId = Long.toString(
+			String itemFieldId = String.valueOf(
 				CounterLocalServiceUtil.increment(
 					ShoppingItemField.class.getName()));
 
@@ -735,7 +735,7 @@ public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
 		for (int i = 0; i < itemPrices.size() && itemPrices.size() > 1; i++) {
 			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
 
-			String itemPriceId = Long.toString(
+			String itemPriceId = String.valueOf(
 				CounterLocalServiceUtil.increment(
 					ShoppingItemPrice.class.getName()));
 
