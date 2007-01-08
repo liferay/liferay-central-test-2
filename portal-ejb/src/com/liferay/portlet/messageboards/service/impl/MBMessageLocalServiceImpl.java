@@ -73,6 +73,7 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
+import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
 import com.liferay.portlet.messageboards.util.comparator.ThreadLastPostDateComparator;
 import com.liferay.util.GetterUtil;
@@ -699,7 +700,8 @@ public class MBMessageLocalServiceImpl implements MBMessageLocalService {
 
 		MBCategory category = MBCategoryUtil.findByPrimaryKey(categoryId);
 
-		List messages = MBMessageUtil.findByCategoryId(categoryId, begin, end);
+		List messages = MBMessageUtil.findByCategoryId(
+			categoryId, begin, end, new MessageCreateDateComparator(false));
 
 		return exportToRSS(
 			category.getName(), category.getDescription(), type, version,
