@@ -648,6 +648,7 @@ FONT.bg {
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
 		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-ml.png);
 	</c:if>
+	width: 18px;
 }
 
 .portlet-shadow-mr  {
@@ -657,6 +658,7 @@ FONT.bg {
 	<c:if test="<%= !BrowserSniffer.is_ie(request) %>">
 		background-image: url(<%= themeDisplay.getPathThemeImage() %>/shadow/shade-mr.png);
 	</c:if>
+	width: 18px;
 }
 
 .portlet-shadow-bl div {
