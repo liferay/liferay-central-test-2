@@ -72,6 +72,12 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
@@ -91,6 +97,12 @@ public class MBMessageServiceImpl
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
@@ -113,6 +125,12 @@ public class MBMessageServiceImpl
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
@@ -138,6 +156,12 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
@@ -160,6 +184,12 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
@@ -179,6 +209,12 @@ public class MBMessageServiceImpl
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
@@ -203,6 +239,12 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
 
 		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
@@ -224,6 +266,12 @@ public class MBMessageServiceImpl
 
 		MBCategoryPermission.check(
 			getPermissionChecker(), categoryId, ActionKeys.ADD_MESSAGE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
@@ -307,6 +355,12 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
 
 		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
+
+		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,
 				ActionKeys.UPDATE_THREAD_PRIORITY)) {
 
@@ -329,6 +383,12 @@ public class MBMessageServiceImpl
 
 		MBMessagePermission.check(
 			getPermissionChecker(), messageId, ActionKeys.UPDATE);
+
+		if (!MBCategoryPermission.contains(
+				getPermissionChecker(), categoryId, ActionKeys.ADD_FILE)) {
+
+			files.clear();
+		}
 
 		if (!MBCategoryPermission.contains(
 				getPermissionChecker(), categoryId,

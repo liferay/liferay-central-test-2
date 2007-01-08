@@ -25,6 +25,7 @@
 		</portlet-ref>
 		<supports>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>ADD_FILE</action-key>
 			<action-key>ADD_MESSAGE</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
@@ -34,6 +35,7 @@
 			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults>
+			<action-key>ADD_FILE</action-key>
 			<action-key>ADD_MESSAGE</action-key>
 			<action-key>SUBSCRIBE</action-key>
 			<action-key>VIEW</action-key>
@@ -43,6 +45,7 @@
 		</guest-defaults>
 		<guest-unsupported>
 			<action-key>ADD_CATEGORY</action-key>
+			<action-key>ADD_FILE</action-key>
 			<action-key>ADD_MESSAGE</action-key>
 			<action-key>SUBSCRIBE</action-key>
 			<action-key>UPDATE</action-key>

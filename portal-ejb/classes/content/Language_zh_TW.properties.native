@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=增加討論
 action.ADD_DOCUMENT=增加文件
 action.ADD_ENTRY=增加詞條
 action.ADD_EVENT=增加事件
+action.ADD_FILE=增加文件
 action.ADD_FOLDER=增加文件夾
 action.ADD_FRAMEWORK_VERSION=增加框架版本
 action.ADD_GROUP=增加小組

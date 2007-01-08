@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=면담을 추가하십시요
 action.ADD_DOCUMENT=문서를 추가하십시요
 action.ADD_ENTRY=입장을 추가하십시요
 action.ADD_EVENT=사건을 추가하십시요
+action.ADD_FILE=파일을 추가하십시요
 action.ADD_FOLDER=폴더를 추가하십시요
 action.ADD_FRAMEWORK_VERSION=기구 버전을 추가하십시요
 action.ADD_GROUP=그룹을 추가하십시요

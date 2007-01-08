@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=議論を加えなさい
 action.ADD_DOCUMENT=文書を加えなさい
 action.ADD_ENTRY=記入項目を加えなさい
 action.ADD_EVENT=でき事を加えなさい
+action.ADD_FILE=ファイルを加えなさい
 action.ADD_FOLDER=ホールダーを加えなさい
 action.ADD_FRAMEWORK_VERSION=フレームワーク版を加えなさい
 action.ADD_GROUP=グループを加えなさい

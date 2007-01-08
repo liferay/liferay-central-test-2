@@ -49,6 +49,8 @@ public class ActionKeys {
 
 	public static final String ADD_EVENT = "ADD_EVENT";
 
+	public static final String ADD_FILE = "ADD_FILE";
+
 	public static final String ADD_FOLDER = "ADD_FOLDER";
 
 	public static final String ADD_FRAMEWORK_VERSION = "ADD_FRAMEWORK_VERSION";

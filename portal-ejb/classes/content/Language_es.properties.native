@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=Añadir una discusión
 action.ADD_DOCUMENT=Añadir un documento
 action.ADD_ENTRY=Añadir una entrada
 action.ADD_EVENT=Añadir un evento
+action.ADD_FILE=Agregue El Archivo
 action.ADD_FOLDER=Añadir una carpeta
 action.ADD_FRAMEWORK_VERSION=Añadir versión del framework
 action.ADD_GROUP=Añadir un grupo

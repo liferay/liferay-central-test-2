@@ -168,6 +168,7 @@ action.ADD_DISCUSSION=Lisää keskustelu
 action.ADD_DOCUMENT=Lisää dokumentti
 action.ADD_ENTRY=Lisää merkintä
 action.ADD_EVENT=Lisää tapahtuma
+action.ADD_FILE=Lisää tiedosto
 action.ADD_FOLDER=Lisää kansio
 action.ADD_GROUP=Lisää ryhmä
 action.ADD_IMAGE=Lisää kuva

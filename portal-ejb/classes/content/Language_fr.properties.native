@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=Ajoutez La Discussion
 action.ADD_DOCUMENT=Ajoutez Le Document
 action.ADD_ENTRY=Ajoutez L'Entrée
 action.ADD_EVENT=Ajoutez L'Événement
+action.ADD_FILE=Ajoutez Le Dossier
 action.ADD_FOLDER=Ajoutez La Chemise
 action.ADD_FRAMEWORK_VERSION=Ajoutez La Version De Cadre
 action.ADD_GROUP=Ajoutez Le Groupe

@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=Diskussion hinzufügen
 action.ADD_DOCUMENT=Dokument hinzufügen
 action.ADD_ENTRY=Eintrag hinzufügen
 action.ADD_EVENT=Ereignis hinzufügen
+action.ADD_FILE=Addieren Sie Akte
 action.ADD_FOLDER=Ordner hinzufügen
 action.ADD_FRAMEWORK_VERSION=Addieren Sie Rahmen-Version
 action.ADD_GROUP=Gruppe hinzufügen

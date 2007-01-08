@@ -177,6 +177,7 @@ action.ADD_DISCUSSION=Προσθέστε τη συζήτηση
 action.ADD_DOCUMENT=Προσθέστε το έγγραφο
 action.ADD_ENTRY=Προσθέστε το λήμμα
 action.ADD_EVENT=Προσθέστε το γεγονός
+action.ADD_FILE=Προσθέστε το αρχείο
 action.ADD_FOLDER=Προσθέστε το φάκελλο
 action.ADD_FRAMEWORK_VERSION=Προσθέστε την έκδοση πλαισίου
 action.ADD_GROUP=Προσθέστε την ομάδα
