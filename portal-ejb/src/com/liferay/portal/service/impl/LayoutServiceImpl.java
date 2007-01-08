@@ -33,6 +33,8 @@ import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.permission.GroupPermission;
 import com.liferay.portal.service.permission.LayoutPermission;
 
+import java.io.File;
+
 /**
  * <a href="LayoutServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -82,6 +84,28 @@ public class LayoutServiceImpl extends PrincipalBean implements LayoutService {
 
 		return LayoutLocalServiceUtil.getLayouts(
 			companyId, portletId, prefsKey, prefsValue);
+	}
+
+	public byte[] exportLayouts(String ownerId)
+		throws PortalException, SystemException {
+
+		long groupId = LayoutImpl.getGroupId(ownerId);
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return LayoutLocalServiceUtil.exportLayouts(ownerId);
+	}
+
+	public void importLayouts(String ownerId, File file)
+		throws PortalException, SystemException {
+
+		long groupId = LayoutImpl.getGroupId(ownerId);
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		LayoutLocalServiceUtil.importLayouts(getUserId(), ownerId, file);
 	}
 
 	public void setLayouts(

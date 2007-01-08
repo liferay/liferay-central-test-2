@@ -94,6 +94,19 @@ public class LayoutServiceSoap {
 		}
 	}
 
+	public static byte[] exportLayouts(java.lang.String ownerId)
+		throws RemoteException {
+		try {
+			byte[] returnValue = LayoutServiceUtil.exportLayouts(ownerId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws RemoteException {

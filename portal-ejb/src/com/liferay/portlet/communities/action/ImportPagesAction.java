@@ -23,7 +23,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.LayoutImportException;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -61,8 +61,7 @@ public class ImportPagesAction extends EditPagesAction {
 			String ownerId = ParamUtil.getString(uploadReq, "ownerId");
 			File file = uploadReq.getFile("importFileName");
 
-			LayoutLocalServiceUtil.importLayouts(
-				req.getRemoteUser(), ownerId, file);
+			LayoutServiceUtil.importLayouts(ownerId, file);
 
 			SessionMessages.add(req, "request_processed");
 		}

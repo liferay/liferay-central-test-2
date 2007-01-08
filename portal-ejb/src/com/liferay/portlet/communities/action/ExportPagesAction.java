@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.util.ParamUtil;
@@ -55,7 +55,7 @@ public class ExportPagesAction extends PortletAction {
 		try {
 			String ownerId = ParamUtil.getString(req, "ownerId");
 			String fileName = ParamUtil.getString(req, "exportFileName");
-			byte[] byteArray = LayoutLocalServiceUtil.exportLayouts(ownerId);
+			byte[] byteArray = LayoutServiceUtil.exportLayouts(ownerId);
 
 			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();

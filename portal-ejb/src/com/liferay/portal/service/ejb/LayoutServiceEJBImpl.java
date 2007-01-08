@@ -77,6 +77,21 @@ public class LayoutServiceEJBImpl implements LayoutService, SessionBean {
 			portletId, prefsKey, prefsValue);
 	}
 
+	public byte[] exportLayouts(java.lang.String ownerId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return LayoutServiceFactory.getTxImpl().exportLayouts(ownerId);
+	}
+
+	public void importLayouts(java.lang.String ownerId, java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		LayoutServiceFactory.getTxImpl().importLayouts(ownerId, file);
+	}
+
 	public void setLayouts(java.lang.String ownerId,
 		java.lang.String parentLayoutId, java.lang.String[] layoutIds)
 		throws com.liferay.portal.PortalException, 

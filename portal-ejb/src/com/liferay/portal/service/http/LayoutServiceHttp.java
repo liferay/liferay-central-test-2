@@ -257,6 +257,85 @@ public class LayoutServiceHttp {
 		}
 	}
 
+	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
+		java.lang.String ownerId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = ownerId;
+
+			if (ownerId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"exportLayouts", new Object[] { paramObj0 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (byte[])returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static void importLayouts(HttpPrincipal httpPrincipal,
+		java.lang.String ownerId, java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = ownerId;
+
+			if (ownerId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = file;
+
+			if (file == null) {
+				paramObj1 = new NullWrapper("java.io.File");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"importLayouts", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void setLayouts(HttpPrincipal httpPrincipal,
 		java.lang.String ownerId, java.lang.String parentLayoutId,
 		java.lang.String[] layoutIds)
