@@ -44,10 +44,9 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.SimpleCachePool;
 import com.liferay.util.Validator;
-import com.liferay.util.xml.XMLFormatter;
+import com.liferay.util.xml.XMLSafeReader;
 
 import java.io.IOException;
-import java.io.StringReader;
 import java.io.StringWriter;
 
 import java.util.ArrayList;
@@ -126,7 +125,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 		String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
-
 			portlet = (Portlet)companyPortletsPool.get(portletId);
 		}
 		else {
@@ -506,8 +504,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			List servletURLPatterns)
 		throws DocumentException, IOException {
 
-		xml = XMLFormatter.fixProlog(xml);
-
 		Set portletIds = new HashSet();
 
 		if (xml == null) {
@@ -516,7 +512,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		SAXReader reader = SAXReaderFactory.getInstance(false);
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new XMLSafeReader(xml));
 
 		Element root = doc.getRootElement();
 
@@ -764,8 +760,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			String servletContextName, String xml)
 		throws DocumentException, IOException {
 
-		xml = XMLFormatter.fixProlog(xml);
-
 		PortletCategory portletCategory = new PortletCategory();
 
 		if (xml == null) {
@@ -775,7 +769,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new XMLSafeReader(xml));
 
 		Element root = doc.getRootElement();
 
@@ -834,8 +828,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 			String servletContextName, String xml, Map portletsPool)
 		throws DocumentException, IOException {
 
-		xml = XMLFormatter.fixProlog(xml);
-
 		Set liferayPortletIds = new HashSet();
 
 		if (xml == null) {
@@ -844,7 +836,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		SAXReader reader = SAXReaderFactory.getInstance();
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new XMLSafeReader(xml));
 
 		Element root = doc.getRootElement();
 
@@ -1050,8 +1042,6 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 	}
 
 	private List _readWebXML(String xml) throws DocumentException, IOException {
-		xml = XMLFormatter.fixProlog(xml);
-
 		List servletURLPatterns = new ArrayList();
 
 		if (xml == null) {
@@ -1060,7 +1050,7 @@ public class PortletLocalServiceImpl implements PortletLocalService {
 
 		SAXReader reader = SAXReaderFactory.getInstance(false);
 
-		Document doc = reader.read(new StringReader(xml));
+		Document doc = reader.read(new XMLSafeReader(xml));
 
 		Element root = doc.getRootElement();
 
