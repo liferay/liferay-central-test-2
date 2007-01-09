@@ -30,83 +30,75 @@ try {
 }
 catch (Exception e) {
 }
+
+if (Validator.isNull(title)) {
+	title = feed.getTitle();
+}
 %>
+
 
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<tr>
-			<td>
-				<b><a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>">
-				<%= feed.getTitle() %>
-				</a></b>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<br>
-			</td>
-		</tr>
-
-		<%
-		List entries = feed.getEntries();
-
-		for (int j = 0; j < entries.size(); j++) {
-			SyndEntry entry = (SyndEntry)entries.get(j);
-
-			SyndContent content = entry.getDescription();
-		%>
-
-			<tr>
-				<td>
-					<a href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br>
-
-					<span style="font-size: xx-small;">
-
-					<c:if test="<%= entry.getPublishedDate() != null %>">
-						<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br>
-					</c:if>
-
-					<%= content.getValue() %>
-
-					</span>
-				</td>
-			</tr>
-
-			<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
-				<tr>
-					<td>
-						<br>
-					</td>
-				</tr>
+		<div class="portlet-rss-header" style="font-weight: bold; background-color: <%= colorScheme.getPortletSectionHeaderBg() %>; padding: 2px 5px 2px 5px; cursor: default"
+			<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				 onclick="<portlet:namespace />rssAccordion.show(this)"
 			</c:if>
+		>
+			<%= title %>&nbsp;&nbsp;
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal">
+				more &raquo;
+			</a>
+		</div>
+		<div class="portlet-rss-content" style="overflow: hidden; <%= hide ? "height: 1px" : "" %>">
+			<div style="padding: 0 10px 0 10px">
+				<div style="font-size: 0; height: 10px;"></div>
+			<%
+			List entries = feed.getEntries();
 
-		<%
-			if ((j + 1) >= entriesPerFeed) {
-				break;
+			for (int j = 0; j < entries.size(); j++) {
+				SyndEntry entry = (SyndEntry)entries.get(j);
+
+				SyndContent content = entry.getDescription();
+			%>
+
+				<c:choose>
+					<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+							<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
+							<c:if test="<%= entry.getPublishedDate() != null %>">
+								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
+							</c:if>
+
+							<div class="font-small">
+								<%= content.getValue() %>
+							</div>
+
+							<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
+								<div style="font-size: 0; height: 10px;"></div>
+							</c:if>
+					</c:when>
+					<c:otherwise>
+						<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
+								<portlet:param name="struts_action" value="/rss/article" />
+								<portlet:param name="index" value="<%= j + "" %>" />
+								<portlet:param name="url" value="<%= url %>" />
+							</portlet:renderURL>"><%= entry.getTitle() %></a><br />
+					</c:otherwise>
+				</c:choose>
+
+				<%
+				if ((j + 1) >= entriesPerFeed) {
+					break;
+				}
 			}
-		}
-		%>
+			%>
+				<div style="font-size: 0; height: 10px;"></div>
+			</div>
+		</div>
 
 	</c:when>
 	<c:otherwise>
-		<tr>
-			<td>
-				<b><%= urls[i] %></b>
-
-				<br><br>
-
-				<span class="portlet-msg-error">
-				<%= LanguageUtil.format(pageContext, "cannot-be-found", urls[i], false) %>
-				</span>
-			</td>
-		</tr>
-
-		<c:if test="<%= (i + 1) < urls.length %>">
-			<tr>
-				<td>
-					<br>
-				</td>
-			</tr>
-		</c:if>
+		<div class="portlet-msg-error">
+			<%= LanguageUtil.format(pageContext, "cannot-be-found", urls[i], false) %>
+		</div>
 	</c:otherwise>
 </c:choose>

@@ -25,12 +25,12 @@
 <%@ include file="/html/portlet/rss/init.jsp" %>
 
 <%
+boolean hide = false;
+String title = "";
 String url = ParamUtil.getString(request, "url");
 
 SyndFeed feed = null;
 %>
-
-<table border="0" cellpadding="0" cellspacing="0">
 
 <c:choose>
 	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
@@ -47,15 +47,25 @@ SyndFeed feed = null;
 		<%
 		for (int i = 0; i < urls.length; i++) {
 			url = urls[i];
+
+			if (i < titles.length) {
+				title = titles[i];
+			}
+
+			if (i == 0) {
+				hide = false;
+			}
+			else {
+				hide = true;
+			}
 		%>
-
 			<%@ include file="/html/portlet/rss/feed.jsp" %>
-
 		<%
 		}
 		%>
 
+		<script type="text/javascript">
+			<portlet:namespace />rssAccordion = new Accordion($("p_p_id<portlet:namespace />"), "<portlet:namespace />rssAccordion");
+		</script>
 	</c:otherwise>
 </c:choose>
-
-</table>

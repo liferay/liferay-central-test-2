@@ -36,6 +36,7 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String[] urls = prefs.getValues("urls", new String[0]);
+String[] titles = prefs.getValues("titles", new String[0]);
 int entriesPerFeed = GetterUtil.getInteger(prefs.getValue("items-per-channel", StringPool.BLANK));
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

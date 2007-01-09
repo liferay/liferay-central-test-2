@@ -1,3 +1,73 @@
+var Accordion = Class.create();
+Accordion.prototype = {
+
+	initialize: function(container, varName) {
+		this.container = container;
+		this.contentList = null;
+		this.headerList = null;
+		this.speed = 15;
+		this.timer = null;
+		this.varName = varName;
+		this.headerList = null;
+		this.contentList = null;
+	},
+	
+	animate: function() {
+		var changed = false;
+		var speed = this.speed;
+		this.contentList.each(function(item) {
+			if (item.style.height == "") {
+				item.style.height = item.offsetHeight + "px";
+			}
+			if (item.expand) {
+				var div = item.getElementsByTagName("div")[0];
+				if (item.offsetHeight < div.offsetHeight) {
+					item.style.height = (parseInt(item.style.height) + speed) + "px";
+					changed = true;
+				}
+			}
+			else {
+				if (item.offsetHeight > speed) {
+					item.style.height = (parseInt(item.style.height) - speed) + "px";
+					changed = true;
+				}
+				else {
+					item.style.height = "1px";
+				}
+			}
+		});
+		
+		if (changed) {
+			this.timer = setTimeout(this.varName + ".animate()", 30);
+		}
+		else {
+			this.timer = 0;
+		}
+	},
+
+	show: function(obj) {
+		var self = this;
+		
+		if (this.headerList == null) {
+			this.headerList = document.getElementsByClassName("portlet-rss-header", this.container);
+			this.contentList = document.getElementsByClassName("portlet-rss-content", this.container);
+		}
+		
+		this.headerList.each(function(item, index) {
+			if (item == obj) {
+				self.contentList[index].expand = true;
+			}
+			else {
+				self.contentList[index].expand = false;
+			}
+		});
+		
+		if (!this.timer) {
+			this.timer = setTimeout(this.varName + ".animate()", 0);
+		}
+	}
+}
+		
 function changeBackground(path, extension) { 
 	var bodyWidth; 
 	if (is_safari) { 
@@ -299,15 +369,16 @@ var LiferayDock = {
 }
 
 var LayoutColumns = {
-	columns: new Array(),
+	arrow: null,
+	portletCount: 0,
+	current: null,
+	doAsUserId: "",
+	freeform: false,
 	highlight: "transparent",
 	layoutMaximized: "",
 	plid: "",
-	doAsUserId: "",
-	arrow: null,
 
 	displayArrow: function(mode, left, top) {
-
 		var arrow = LayoutColumns.arrow
 
 		if (!arrow) {
@@ -349,6 +420,19 @@ var LayoutColumns = {
 		}
 	},
 
+	findPosition: function(portlet) {
+		var boxes = document.getElementsByClassName("portlet-boundary", portlet.parentNode);
+		var position = -1;
+
+		boxes.each(function(item, index) {
+			if (item == portlet) {
+				position = index;
+			}
+		});
+
+		return position;
+	},
+
 	init: function(colArray) {
 		for (var i = 0; i < colArray.length; i++) {
 			var column =  $("layout-column_" + colArray[i]);
@@ -356,43 +440,139 @@ var LayoutColumns = {
 			if (column) {
 				column.columnId = colArray[i];
 
-				DropZone.add(column, {
-					accept: ["portlet-boundary"],
-					onDrop: LayoutColumns.onDrop,
-					onHoverOver: LayoutColumns.onHoverOver,
-					onHoverOut: function() {
-						LayoutColumns.displayArrow("none");
-					},
-					inheritParent: true
-					});
+				if (this.freeform) {
+					var boxes = document.getElementsByClassName("portlet-boundary", column);
 
-				LayoutColumns.columns.push(column, {onDrop:LayoutColumns.onDrop});
-
-				var boxes = document.getElementsByClassName("portlet-boundary", column);
-
-				boxes.each(function(item, index) {
-					if (!item.isStatic) {
+					boxes.each(function(item, index) {
 						LayoutColumns.initPortlet(item);
-					}
-				});
+					});
+				}
+				else {
+					DropZone.add(column, {
+						accept: ["portlet-boundary"],
+						onDrop: LayoutColumns.onDrop,
+						onHoverOver: LayoutColumns.onHoverOver,
+						onHoverOut: function() {
+							LayoutColumns.displayArrow("none");
+						},
+						inheritParent: true
+						});
+
+					var boxes = document.getElementsByClassName("portlet-boundary", column);
+
+					boxes.each(function(item, index) {
+						if (!item.isStatic) {
+							LayoutColumns.initPortlet(item);
+						}
+					});
+				}
 			}
 		}
 	},
 
 	initPortlet: function(portlet) {
 		portlet = $(portlet);
-
 		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
+		handle.style.cursor = "move";
 
-		if (handle) {
-			handle.style.cursor = "move";
+		if (this.freeform) {
+			portlet.style.position = "absolute";
+			Drag.makeDraggable(portlet, handle);
+			portlet.threshold = 5;
 
+			portlet.onDragStart = function() {
+				this.wasClicked = true;
+				this.style.zIndex = 99;
+			}
+			portlet.onDrag = function() {
+				this.wasClicked = false;
+			}
+			portlet.onDragEnd = function() {
+				if (!this.wasClicked) {
+					var left = parseInt(this.style.left);
+					var top = parseInt(this.style.top);
+	
+					left = Math.round(left/10) * 10;
+					top = Math.round(top/10) * 10;
+	
+					this.style.left = left + "px";
+					this.style.top = top + "px";
+					
+					LayoutColumns.moveToTop(this);
+					LayoutColumns.savePosition(this);
+				}
+				this.style.zIndex = "";
+			}
+
+			var contents = document.getElementsByClassName("portlet-container", portlet)[0]
+			contents.container = portlet;
+			
+			contents.onclick = function() {
+				if (LayoutColumns.current != this.container) {
+					LayoutColumns.moveToTop(this.container);
+					LayoutColumns.savePosition(this.container);
+					
+					LayoutColumns.current = this.container;
+				}
+			}
+
+			var resizeHandle = document.getElementsByClassName("portlet-resize-handle", portlet)[0];
+			var resizeBox = $("p_p_body_" + portlet.portletId)
+
+			var portletResize = Resize.createHandle(resizeHandle, null, function() {});
+			var minimized = resizeBox.style.height == "1px";
+			portletResize.addRule(new ResizeRule(resizeBox, Resize.HORIZONTAL, Resize.ADD));
+			portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
+
+			resizeHandle.container = portlet;
+
+			resizeHandle.onResizeStart = function() {
+				LayoutColumns.moveToTop(this.container);
+			}
+
+			resizeHandle.onResizeEnd = function() {
+				var portlet = this.container;
+				var resizeBox = $("p_p_body_" + portlet.portletId)
+				var height = parseInt(resizeBox.style.height);
+				var width = parseInt(resizeBox.style.width);
+
+				height = Math.round(height/10) * 10;
+				width = Math.round(width/10) * 10;
+
+				resizeBox.style.height = height + "px";
+				resizeBox.style.width = width + "px";
+				LayoutColumns.savePosition(portlet);
+			}
+
+			if (portlet.freeformStyles) {
+				Element.setStyle(portlet, portlet.freeformStyles.position)
+				Element.setStyle(resizeBox, portlet.freeformStyles.dimensions)
+				
+				if (minimized) {
+					resizeBox.style.height = "1px";
+				}
+			}
+			else {
+				portlet.style.top = (20 * this.portletCount) + "px";
+				portlet.style.left = (20 * this.portletCount++) + "px";
+				resizeBox.style.width = "300px";
+			}
+		}
+		else {
 			DragDrop.create(portlet, {
 				revert: true,
 				handle: handle,
 				ghosting: true,
 				highlightDropzones: LayoutColumns.highlight});
 		}
+	},
+
+	moveToTop: function(portlet) {
+		var container = portlet.parentNode;
+		portlet.oldPosition = this.findPosition(portlet);
+		
+		container.removeChild(portlet);
+		container.appendChild(portlet);
 	},
 
 	onDrop: function(item) {
@@ -523,6 +703,26 @@ var LayoutColumns = {
 
 				LayoutColumns.displayArrow("up", left, top);
 			}
+		}
+	},
+
+	savePosition : function(portlet) {
+		var resizeBox = $("p_p_body_" + portlet.portletId)
+		var newPosition = this.findPosition(portlet);
+		
+		if (newPosition != portlet.oldPosition) {
+			movePortlet(LayoutColumns.plid, portlet.portletId, portlet.parentNode.columnId, newPosition, LayoutColumns.doAsUserId);
+		}
+		
+		if (resizeBox) {
+			AjaxUtil.request(themeDisplay.getPathMain() + "/portal/update_layout?plid=" + LayoutColumns.plid +
+				"&height=" + resizeBox.offsetHeight + "px" +
+				"&width=" + resizeBox.offsetWidth + "px" +
+				"&top=" + portlet.style.top +
+				"&left=" + portlet.style.left +
+				"&p_p_id=" + portlet.portletId +
+				"&doAsUserId=" + LayoutColumns.doAsUserId +
+				"&cmd=drag");
 		}
 	}
 }
@@ -969,6 +1169,10 @@ var QuickEdit = {
 		item.editOptions = options;
 		item.onclick = function() { QuickEdit.edit(this); };
 		item.style.cursor = "text";
+
+		if (options.dragId) {
+			$(options.dragId).wasClicked = true;
+		}
 	},
 
 	edit: function(textObj) {
@@ -977,7 +1181,7 @@ var QuickEdit = {
 		var isTextarea = false;
 
 		if (opts.dragId) {
-			wasClicked = $(opts.dragId).wasClicked;
+			wasClicked = $(opts.dragId).wasClicked ? true : false;
 		}
 
 		if (opts.inputType && opts.inputType == "textarea") {

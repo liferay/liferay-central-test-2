@@ -25,7 +25,6 @@ package com.liferay.portlet.rss.action;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
-import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -62,11 +61,18 @@ public class EditPreferencesAction extends PortletAction {
 
 		PortletPreferences prefs = req.getPreferences();
 
-		String[] urls = StringUtil.split(
-			ParamUtil.getString(req, "urls"), "\n");
+		String[] urls = req.getParameterValues("url");
+		String[] titles = req.getParameterValues("title");
 		int entriesPerFeed = ParamUtil.getInteger(req, "entriesPerFeed", 4);
 
-		prefs.setValues("urls", urls);
+		if (urls != null && titles != null) {
+			prefs.setValues("urls", urls);
+			prefs.setValues("titles", titles);
+		}
+		else {
+			prefs.setValues("urls", new String[0]);
+			prefs.setValues("titles", new String[0]);
+		}
 		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
 
 		try {

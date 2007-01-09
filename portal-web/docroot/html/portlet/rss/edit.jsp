@@ -24,13 +24,20 @@
 
 <%@ include file="/html/portlet/rss/init.jsp" %>
 
-<%
-String urlsString = StringUtil.merge(urls, StringPool.NEW_LINE);
+<script type="text/javascript">
+AddRssRow = function (table) {
+	table.insertRow(table.rows.length);
+	var row = table.rows[table.rows.length - 1];
+	row.insertCell(0);
+	row.insertCell(1);
+	row.insertCell(2);
 
-urls = StringUtil.split(ParamUtil.getString(request, "urls", urlsString), StringPool.NEW_LINE);
-
-urlsString = StringUtil.merge(urls, StringPool.NEW_LINE);
-%>
+	row.cells[0].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />title\" />";
+	row.cells[1].innerHTML = "<input class=\"form-text\" name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
+	row.cells[2].innerHTML = "<a href=\"javascript:void(0)\" onclick=\"Element.remove(this.parentNode.parentNode)\"><img src=\"<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.gif\" /></a>";
+	table.appendChild(row);
+}
+</script>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/rss/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>">
@@ -58,13 +65,39 @@ urlsString = StringUtil.merge(urls, StringPool.NEW_LINE);
 
 </liferay-ui:error>
 
-<%= LanguageUtil.get(pageContext, "enter-one-url-per-line") %>
+<table cellpadding="2" cellspacing="0" border="0" style="margin: 15px 0 15px 0">
+	<tr>
+		<td>
+			<bean:message key="title" />
+		</td>
+		<td>
+			<bean:message key="url" />
+		</td>
+		<td>
+			<a href="javascript: void(0);" onclick="AddRssRow(this.parentNode.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImage() %>/common/add_location.gif" /></a>
+		</td>
+	</tr>
 
-<br><br>
+	<% for (int i = 0; i < urls.length; i++) {
+		String title = "";
+		if (i < titles.length) {
+			title = titles[i];
+		}
+		%>
+		<tr>
+			<td>
+				<input class="form-text" name="<portlet:namespace />title" value="<%= title %>" />
+			</td>
+			<td>
+				<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="<%= urls[i] %>" />
+			</td>
+			<td>
+				<a href="javascript:void(0)" onclick="Element.remove(this.parentNode.parentNode)"><img src="<%= themeDisplay.getPathThemeImage() %>/common/unsubscribe.gif" /></a>
+			</td>
+		</tr>
+	<% } %>
 
-<textarea class="form-text" name="<portlet:namespace />urls" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft"><%= urlsString %></textarea>
-
-<br><br>
+</table>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
