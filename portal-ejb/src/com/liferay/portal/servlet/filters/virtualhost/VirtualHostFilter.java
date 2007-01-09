@@ -32,6 +32,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
+import com.liferay.portal.servlet.MainServlet;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.GetterUtil;
@@ -139,14 +140,20 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (LayoutImpl.validateFriendlyURL(friendlyURL) > -1) {
+		if (friendlyURL.equals(_PATH_C_PORTAL_CSS_CACHED) ||
+			friendlyURL.equals(_PATH_C_PORTAL_JAVASCRIPT_CACHED) ||
+			friendlyURL.equals(_PATH_C_PORTAL_LAYOUT) ||
+			friendlyURL.equals(_PATH_C_PORTAL_RENDER_PORTLET) ||
+			friendlyURL.startsWith(_PATH_IMAGE)) {
+
 			return false;
 		}
 
-		try {
-			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
-		}
-		catch (LayoutFriendlyURLException lfurle) {
+		int code = LayoutImpl.validateFriendlyURL(friendlyURL);
+
+		if ((code > -1) &&
+			(code != LayoutFriendlyURLException.ENDS_WITH_SLASH)) {
+
 			return false;
 		}
 
@@ -168,6 +175,22 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
+
+	private static String _PATH_C = MainServlet.DEFAULT_MAIN_PATH;
+
+	private static String _PATH_C_PORTAL_CSS_CACHED =
+		_PATH_C + "/portal/css_cached";
+
+	private static String _PATH_C_PORTAL_JAVASCRIPT_CACHED =
+		_PATH_C + "/portal/javascript_cached";
+
+	private static String _PATH_C_PORTAL_LAYOUT =
+		_PATH_C + "/portal/layout";
+
+	private static String _PATH_C_PORTAL_RENDER_PORTLET =
+		_PATH_C + "/portal/render_portlet";
+
+	private static String _PATH_IMAGE = "/image/";
 
 	private ServletContext _ctx;
 	private String _companyId;

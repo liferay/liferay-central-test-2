@@ -658,6 +658,10 @@ public class PortalUtil {
 			FriendlyURLPortletPlugin portletPlugin =
 				(FriendlyURLPortletPlugin)InstancePool.get(className);
 
+			if (url.endsWith(StringPool.SLASH + portletPlugin.getMapping())) {
+				url += StringPool.SLASH;
+			}
+
 			int pos = url.indexOf(
 				StringPool.SLASH + portletPlugin.getMapping() +
 					StringPool.SLASH);
@@ -670,6 +674,12 @@ public class PortalUtil {
 
 				break;
 			}
+		}
+
+		friendlyURL = StringUtil.replace(friendlyURL, "//", StringPool.SLASH);
+
+		if (friendlyURL.endsWith(StringPool.SLASH)) {
+			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
 		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
