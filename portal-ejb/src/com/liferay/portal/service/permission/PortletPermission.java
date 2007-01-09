@@ -25,6 +25,7 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -96,6 +97,27 @@ public class PortletPermission {
 
 		return permissionChecker.hasPermission(
 			groupId, name, primKey, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, String plid, Portlet portlet,
+			String actionId)
+		throws PortalException, SystemException {
+
+		boolean value = contains(
+			permissionChecker, plid, portlet.getPortletId(), actionId);
+
+		if (value) {
+			return true;
+		}
+		else {
+			if (portlet.isSystem() && actionId.equals(ActionKeys.VIEW)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
 	}
 
 	public static String getPrimaryKey(String plid, String portletId) {

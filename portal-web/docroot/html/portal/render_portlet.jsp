@@ -87,7 +87,7 @@ catch (NoSuchResourceException nsre) {
 	}
 }
 
-boolean access = PortletPermission.contains(permissionChecker, plid, portletId, ActionKeys.VIEW);
+boolean access = PortletPermission.contains(permissionChecker, plid, portlet, ActionKeys.VIEW);
 
 boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
 boolean stateMin = layoutTypePortlet.hasStateMinPortletId(portletId);

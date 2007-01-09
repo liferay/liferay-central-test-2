@@ -541,8 +541,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 						themeDisplay.getPermissionChecker();
 
 					if (!PortletPermission.contains(
-							permissionChecker, layout.getPlid(),
-							portlet.getPortletId(), ActionKeys.VIEW)) {
+							permissionChecker, layout.getPlid(), portlet,
+							ActionKeys.VIEW)) {
 
 						throw new PrincipalException();
 					}
