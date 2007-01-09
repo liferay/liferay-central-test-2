@@ -27,6 +27,7 @@ import com.liferay.util.GetterUtil;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import java.util.regex.Pattern;
 
 import javax.mail.Address;
 import javax.mail.internet.AddressException;
@@ -145,17 +146,23 @@ public class MailMessage {
 
 		if (replaceLinks) {
 			for (int i = 0; i < _LINK_REGEXP.length; i++) {
-				body = body.replaceAll(_LINK_REGEXP[i], _LINK_REPLACEMENT[i]);
+				body = Pattern.compile(
+					_LINK_REGEXP[i], Pattern.CASE_INSENSITIVE).
+						matcher(body).replaceAll(_LINK_REPLACEMENT[i]);
 			}
 
+			String mailtoReplacement = "<a href=\"javascript: ";
+
 			if (popup) {
-				body = body.replaceAll(_MAILTO_REGEXP,
-					"<a href=\"javascript: opener.compose('$2')");
+				mailtoReplacement += "opener.compose('$2')";
 			}
 			else {
-				body = body.replaceAll(_MAILTO_REGEXP,
-					"<a href=\"javascript: parent.compose('$2')");
+				mailtoReplacement += "parent.compose('$2')";
 			}
+
+			body = Pattern.compile(
+				_MAILTO_REGEXP, Pattern.CASE_INSENSITIVE).
+					matcher(body).replaceAll(mailtoReplacement);
 		}
 
 		return body;
@@ -209,11 +216,11 @@ public class MailMessage {
 	}
 
 	private static final String[] _LINK_REGEXP = {
-		"([^]_a-z0-9-=\"'/])" +
+		"([^>]_a-z0-9-=\"'/])" +
 			"((https?|ftp|gopher|news|telnet)://|www\\.)" +
-			"([^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
-			"((\\.[^ \\r\\n\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
-		"<a href=\"www\\."
+			"([^\\s\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]*)" +
+			"((\\.[^\\s\\(\\)\\*\\^\\$!`\"'\\|\\[\\]\\{\\};<>\\.]+)*)",
+		"<a\\s+href=\"www\\."
 	};
 
 	private static String[] _LINK_REPLACEMENT = {
@@ -222,7 +229,7 @@ public class MailMessage {
 	};
 
 	private static String _MAILTO_REGEXP =
-		"(<a href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)";
+		"(<a\\s+href=\"mailto:\\s*)([\\w.-_]*@[\\w.-_]*)";
 
 	private long _messageId;
 	private Address _from;
