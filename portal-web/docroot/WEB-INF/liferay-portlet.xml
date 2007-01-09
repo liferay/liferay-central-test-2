@@ -54,6 +54,7 @@
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<maximize-edit>true</maximize-edit>
+		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>0</render-weight>
@@ -593,6 +594,7 @@
 		<struts-path>web_proxy</struts-path>
 		<configuration-path>/web_proxy/edit_configuration</configuration-path>
 		<restore-current-view>false</restore-current-view>
+		<instanceable>true</instanceable>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
