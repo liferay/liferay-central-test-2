@@ -184,6 +184,9 @@ public class EditFileEntryAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
 		String folderId = ParamUtil.getString(uploadReq, "folderId");
 		String newFolderId = ParamUtil.getString(uploadReq, "newFolderId");
 		String name = ParamUtil.getString(uploadReq, "name");
@@ -202,21 +205,18 @@ public class EditFileEntryAction extends PortletAction {
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		String userId = themeDisplay.getUserId();
-
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add file entry
+
 			DLFolderPermission.check(
-				themeDisplay.getPermissionChecker(), folderId, 
+				themeDisplay.getPermissionChecker(), folderId,
 				ActionKeys.ADD_DOCUMENT);
 
 			DLFileEntryLocalServiceUtil.addFileEntry(
-				userId, folderId, sourceFileName, title, description, 
-				extraSettings, file, communityPermissions, guestPermissions);
+				themeDisplay.getUserId(), folderId, sourceFileName, title,
+				description, extraSettings, file, communityPermissions,
+				guestPermissions);
 		}
 		else {
 
@@ -224,11 +224,11 @@ public class EditFileEntryAction extends PortletAction {
 
 			DLFileEntryPermission.check(
 				themeDisplay.getPermissionChecker(), folderId, name,
-				ActionKeys.VIEW);
+				ActionKeys.UPDATE);
 
 			DLFileEntryLocalServiceUtil.updateFileEntry(
-				userId, folderId, newFolderId, name, sourceFileName, title, 
-				description, extraSettings, file);
+				themeDisplay.getUserId(), folderId, newFolderId, name,
+				sourceFileName, title, description, extraSettings, file);
 		}
 	}
 

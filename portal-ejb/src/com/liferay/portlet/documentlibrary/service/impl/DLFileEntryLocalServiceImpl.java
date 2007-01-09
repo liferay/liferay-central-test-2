@@ -87,13 +87,13 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			String description, String extraSettings, File file,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
-	
+
 		return addFileEntry(
 			userId, folderId, name, title, description, extraSettings,
 			file, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
-	
+
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
 			String description, String extraSettings, byte[] byteArray,
@@ -105,15 +105,15 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			byteArray, new Boolean(addCommunityPermissions),
 			new Boolean(addGuestPermissions), null, null);
 	}
-	
+
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
 			String description, String extraSettings, File file,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
-		
+
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, file, 
+			userId, folderId, name, title, description, extraSettings, file,
 			null, null, communityPermissions, guestPermissions);
 	}
 
@@ -138,7 +138,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		if ((file == null) || (file.length() == 0)) {
 			throw new FileSizeException();
 		}
-		
+
 		InputStream is = null;
 
 		try {
@@ -147,13 +147,13 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
 		}
-		
+
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, is, 
-			file.length(), addCommunityPermissions, addGuestPermissions, 
+			userId, folderId, name, title, description, extraSettings, is,
+			file.length(), addCommunityPermissions, addGuestPermissions,
 			communityPermissions, guestPermissions);
 	}
-	
+
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
 			String description,	String extraSettings, byte[] byteArray,
@@ -164,16 +164,16 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		if ((byteArray == null) || (byteArray.length == 0)) {
 			throw new FileSizeException();
 		}
-		
-		InputStream is = 
+
+		InputStream is =
 			new BufferedInputStream(new ByteArrayInputStream(byteArray));
-		
+
 		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, is, 
-			byteArray.length, addCommunityPermissions, addGuestPermissions, 
+			userId, folderId, name, title, description, extraSettings, is,
+			byteArray.length, addCommunityPermissions, addGuestPermissions,
 			communityPermissions, guestPermissions);
 	}
-	
+
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,
 			String description,	String extraSettings, InputStream is, long size,
@@ -532,10 +532,11 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			String sourceFileName, String title, String description,
 			String extraSettings, File file)
 		throws PortalException, SystemException {
+
 		if ((file == null) || (file.length() == 0)) {
 			throw new FileSizeException();
 		}
-		
+
 		InputStream is = null;
 
 		try {
@@ -544,12 +545,12 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException();
 		}
-		
+
 		return updateFileEntry(
-			userId, folderId, newFolderId, name, sourceFileName, title, 
+			userId, folderId, newFolderId, name, sourceFileName, title,
 			description, extraSettings, is, file.length());
 	}
-	
+
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,
@@ -559,15 +560,15 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		if ((byteArray == null) || (byteArray.length == 0)) {
 			throw new FileSizeException();
 		}
-		
-		InputStream is = 
+
+		InputStream is =
 			new BufferedInputStream(new ByteArrayInputStream(byteArray));
-		
+
 		return updateFileEntry(
-			userId, folderId, newFolderId, name, sourceFileName, title, 
+			userId, folderId, newFolderId, name, sourceFileName, title,
 			description, extraSettings, is, byteArray.length);
 	}
-	
+
 	public DLFileEntry updateFileEntry(
 			String userId, String folderId, String newFolderId, String name,
 			String sourceFileName, String title, String description,

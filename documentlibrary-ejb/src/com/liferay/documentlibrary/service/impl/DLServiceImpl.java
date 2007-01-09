@@ -149,7 +149,7 @@ public class DLServiceImpl implements DLService {
 
 	public void addFile(
 		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, File file) 
+		String repositoryId, String fileName, File file)
 	throws PortalException, SystemException {
 
 		if ((FILE_MAX_SIZE > 0) &&
@@ -179,14 +179,14 @@ public class DLServiceImpl implements DLService {
 			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
 			throw new FileSizeException(fileName);
 		}
-		
-		InputStream is = 
+
+		InputStream is =
 			new BufferedInputStream(new ByteArrayInputStream(byteArray));
-		
+
 		DLLocalServiceUtil.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, is);
 	}
-	
+
 	public void deleteDirectory(
 			String companyId, String portletId, String repositoryId,
 			String dirName)
@@ -416,7 +416,7 @@ public class DLServiceImpl implements DLService {
 			throw new SystemException(se);
 		}
 	}
-	
+
 	public void updateFile(
 		String companyId, String portletId, long groupId,
 		String repositoryId, String fileName, double versionNumber,
@@ -438,7 +438,7 @@ public class DLServiceImpl implements DLService {
 		}
 
 		DLLocalServiceUtil.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, 
+			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, is);
 	}
 
@@ -452,12 +452,12 @@ public class DLServiceImpl implements DLService {
 			((byteArray == null) || (byteArray.length > FILE_MAX_SIZE))) {
 			throw new FileSizeException(fileName);
 		}
-		
-		InputStream is = 
+
+		InputStream is =
 			new BufferedInputStream(new ByteArrayInputStream(byteArray));
-		
+
 		DLLocalServiceUtil.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName, 
+			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, is);
 	}
 

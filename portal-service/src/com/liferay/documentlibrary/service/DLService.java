@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 
 import java.io.File;
+
 import java.rmi.RemoteException;
 
 /**
@@ -89,7 +90,7 @@ public interface DLService {
 			String repositoryId, String fileName, double versionNumber,
 			String sourceFileName, File file)
 		throws PortalException, RemoteException, SystemException;
-	
+
 	public void updateFile(
 			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, double versionNumber,

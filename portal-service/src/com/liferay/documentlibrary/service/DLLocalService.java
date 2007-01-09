@@ -35,6 +35,7 @@ import java.io.InputStream;
  *
  */
 public interface DLLocalService {
+
 	public void addFile(
 			String companyId, String portletId, long groupId,
 			String repositoryId, String fileName, InputStream is)

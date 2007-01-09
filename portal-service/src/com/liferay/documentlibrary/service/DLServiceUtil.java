@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 
 import java.io.File;
+
 import java.rmi.RemoteException;
 
 /**
@@ -46,27 +47,27 @@ public class DLServiceUtil {
 	}
 
 	public static void addFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, File file)
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, File file)
 		throws PortalException, RemoteException, SystemException {
-	
+
 		DLService dlService = DLServiceFactory.getService();
-	
+
 		dlService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, file);
 	}
 
 	public static void addFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, byte[] byteArray)
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, byte[] byteArray)
 		throws PortalException, RemoteException, SystemException {
-	
+
 		DLService dlService = DLServiceFactory.getService();
-	
+
 		dlService.addFile(
 			companyId, portletId, groupId, repositoryId, fileName, byteArray);
 	}
-	
+
 	public static void deleteDirectory(
 			String companyId, String portletId, String repositoryId,
 			String dirName)
@@ -145,26 +146,26 @@ public class DLServiceUtil {
 	}
 
 	public static void updateFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, double versionNumber,
-		String sourceFileName, File file)
-	throws PortalException, RemoteException, SystemException {
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, double versionNumber,
+			String sourceFileName, File file)
+		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
-		
+
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, file);
 	}
 
 	public static void updateFile(
-		String companyId, String portletId, long groupId,
-		String repositoryId, String fileName, double versionNumber,
-		String sourceFileName, byte[] byteArray)
-	throws PortalException, RemoteException, SystemException {
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, double versionNumber,
+			String sourceFileName, byte[] byteArray)
+		throws PortalException, RemoteException, SystemException {
 
 		DLService dlService = DLServiceFactory.getService();
-	
+
 		dlService.updateFile(
 			companyId, portletId, groupId, repositoryId, fileName,
 			versionNumber, sourceFileName, byteArray);
