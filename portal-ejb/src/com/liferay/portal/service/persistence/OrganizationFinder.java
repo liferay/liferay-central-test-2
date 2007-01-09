@@ -34,6 +34,7 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +72,7 @@ public class OrganizationFinder {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			Map params, boolean andOperator)
+			LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -164,7 +165,7 @@ public class OrganizationFinder {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			Map params, boolean andOperator, int begin, int end)
+			LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -457,7 +458,7 @@ public class OrganizationFinder {
 		}
 	}
 
-	private static String _getJoin(Map params) {
+	private static String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -507,7 +508,7 @@ public class OrganizationFinder {
 		return join;
 	}
 
-	private static String _getWhere(Map params) {
+	private static String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -557,7 +558,7 @@ public class OrganizationFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, Map params) {
+	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

@@ -140,14 +140,14 @@ public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean 
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.Map params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().search(companyId, name,
 			description, params, begin, end);
 	}
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
-		java.lang.String description, java.util.Map params)
+		java.lang.String description, java.util.LinkedHashMap params)
 		throws com.liferay.portal.SystemException {
 		return GroupLocalServiceFactory.getTxImpl().searchCount(companyId,
 			name, description, params);

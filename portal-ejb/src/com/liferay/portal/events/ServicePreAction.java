@@ -79,10 +79,9 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
-import java.util.Map;
 import java.util.TimeZone;
 
 import javax.portlet.PortletMode;
@@ -720,7 +719,7 @@ public class ServicePreAction extends Action {
 			// Check the user's communities
 
 			if (layout == null) {
-				Map groupParams = new HashMap();
+				LinkedHashMap groupParams = new LinkedHashMap();
 
 				groupParams.put("usersGroups", user.getUserId());
 

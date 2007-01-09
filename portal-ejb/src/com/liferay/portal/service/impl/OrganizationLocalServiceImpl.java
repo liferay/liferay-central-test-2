@@ -53,8 +53,8 @@ import com.liferay.util.Validator;
 
 import java.rmi.RemoteException;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="OrganizationLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -227,7 +227,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			Map params, boolean andOperator, int begin, int end)
+			LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws SystemException {
 
 		return OrganizationFinder.findByC_PO_N_S_C_Z_R_C(
@@ -240,7 +240,7 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 			String companyId, String parentOrganizationId,
 			String parentOrganizationComparator, String name, String street,
 			String city, String zip, String regionId, String countryId,
-			Map params, boolean andOperator)
+			LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
 		return OrganizationFinder.countByC_PO_N_S_C_Z_R_C(

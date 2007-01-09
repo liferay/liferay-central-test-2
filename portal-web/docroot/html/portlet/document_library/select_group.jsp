@@ -48,7 +48,7 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 <%
 GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-Map groupParams = new HashMap();
+LinkedHashMap groupParams = new LinkedHashMap();
 
 groupParams.put("usersGroups", user.getUserId());
 

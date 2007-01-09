@@ -36,9 +36,8 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
@@ -214,7 +213,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		root.appendChild(foldersEl);
 
 		if (arg.getCurrentFolder().equals("/")) {
-			Map groupParams = new HashMap();
+			LinkedHashMap groupParams = new LinkedHashMap();
 
 			groupParams.put("layoutSet", Boolean.FALSE);
 

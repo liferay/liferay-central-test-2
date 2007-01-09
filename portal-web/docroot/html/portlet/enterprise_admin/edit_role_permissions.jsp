@@ -193,7 +193,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				StringBuffer sb = new StringBuffer();
 
-				Map groupParams = new HashMap();
+				LinkedHashMap groupParams = new LinkedHashMap();
 
 				List rolePermissions = new ArrayList();
 
@@ -271,7 +271,7 @@ if (Validator.isNotNull(modelResource)) {
 		<%
 		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-		Map groupParams = new HashMap();
+		LinkedHashMap groupParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
 			List rolePermissions = new ArrayList();

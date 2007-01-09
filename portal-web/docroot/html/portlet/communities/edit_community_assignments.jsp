@@ -122,7 +122,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		Map userParams = new HashMap();
+		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
 			userParams.put("usersGroups", String.valueOf(group.getGroupId()));
@@ -207,7 +207,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		Map organizationParams = new HashMap();
+		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
 			organizationParams.put("organizationsGroups", group.getGroupId());
@@ -291,7 +291,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<%
 		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-		Map userGroupParams = new HashMap();
+		LinkedHashMap userGroupParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
 			userGroupParams.put("userGroupsGroups", group.getGroupId());

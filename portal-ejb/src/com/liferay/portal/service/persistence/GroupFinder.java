@@ -36,8 +36,8 @@ import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -86,15 +86,15 @@ public class GroupFinder {
 	public static int countByG_U(long groupId, String userId)
 		throws SystemException {
 
-		Map params1 = new HashMap();
+		LinkedHashMap params1 = new LinkedHashMap();
 
 		params1.put("usersGroups", userId);
 
-		Map params2 = new HashMap();
+		LinkedHashMap params2 = new LinkedHashMap();
 
 		params2.put("groupsOrgs", userId);
 
-		Map params3 = new HashMap();
+		LinkedHashMap params3 = new LinkedHashMap();
 
 		params3.put("groupsUserGroups", userId);
 
@@ -118,21 +118,22 @@ public class GroupFinder {
 	}
 
 	public static int countByC_N_D(
-			String companyId, String name, String description, Map params)
+			String companyId, String name, String description,
+			LinkedHashMap params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
 		if (params == null) {
-			params = new HashMap();
+			params = new LinkedHashMap();
 		}
 
 		String userId = (String)params.get("usersGroups");
 
-		Map params1 = params;
+		LinkedHashMap params1 = params;
 
-		Map params2 = new HashMap();
+		LinkedHashMap params2 = new LinkedHashMap();
 
 		params2.putAll(params1);
 
@@ -141,7 +142,7 @@ public class GroupFinder {
 			params2.put("groupsOrgs", userId);
 		}
 
-		Map params3 = new HashMap();
+		LinkedHashMap params3 = new LinkedHashMap();
 
 		params3.putAll(params1);
 
@@ -218,22 +219,22 @@ public class GroupFinder {
 	}
 
 	public static List findByC_N_D(
-			String companyId, String name, String description, Map params,
-			int begin, int end)
+			String companyId, String name, String description,
+			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
 		description = StringUtil.lowerCase(description);
 
 		if (params == null) {
-			params = new HashMap();
+			params = new LinkedHashMap();
 		}
 
 		String userId = (String)params.get("usersGroups");
 
-		Map params1 = params;
+		LinkedHashMap params1 = params;
 
-		Map params2 = new HashMap();
+		LinkedHashMap params2 = new LinkedHashMap();
 
 		params2.putAll(params1);
 
@@ -242,7 +243,7 @@ public class GroupFinder {
 			params2.put("groupsOrgs", userId);
 		}
 
-		Map params3 = new HashMap();
+		LinkedHashMap params3 = new LinkedHashMap();
 
 		params3.putAll(params1);
 
@@ -339,7 +340,7 @@ public class GroupFinder {
 	}
 
 	private static int _countByGroupId(
-			Session session, long groupId, Map params)
+			Session session, long groupId, LinkedHashMap params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_GROUP_ID);
@@ -373,7 +374,7 @@ public class GroupFinder {
 
 	private static int _countByC_N_D(
 			Session session, String companyId, String name, String description,
-			Map params)
+			LinkedHashMap params)
 		throws SystemException {
 
 		String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
@@ -409,7 +410,7 @@ public class GroupFinder {
 		return 0;
 	}
 
-	private static String _getJoin(Map params) {
+	private static String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -465,7 +466,7 @@ public class GroupFinder {
 		return join;
 	}
 
-	private static String _getWhere(Map params) {
+	private static String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -521,7 +522,7 @@ public class GroupFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, Map params) {
+	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

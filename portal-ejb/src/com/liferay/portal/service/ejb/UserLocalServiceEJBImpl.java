@@ -245,8 +245,8 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean active, java.util.Map params, boolean andSearch, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean active, java.util.LinkedHashMap params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().search(companyId, firstName,
 			middleName, lastName, emailAddress, active, params, andSearch,
@@ -256,7 +256,7 @@ public class UserLocalServiceEJBImpl implements UserLocalService, SessionBean {
 	public int searchCount(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean active, java.util.Map params, boolean andSearch)
+		boolean active, java.util.LinkedHashMap params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
 		return UserLocalServiceFactory.getTxImpl().searchCount(companyId,
 			firstName, middleName, lastName, emailAddress, active, params,

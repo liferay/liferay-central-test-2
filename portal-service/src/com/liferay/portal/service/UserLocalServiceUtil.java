@@ -279,8 +279,8 @@ public class UserLocalServiceUtil {
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean active, java.util.Map params, boolean andSearch, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		boolean active, java.util.LinkedHashMap params, boolean andSearch,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
@@ -291,7 +291,7 @@ public class UserLocalServiceUtil {
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, java.lang.String emailAddress,
-		boolean active, java.util.Map params, boolean andSearch)
+		boolean active, java.util.LinkedHashMap params, boolean andSearch)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 

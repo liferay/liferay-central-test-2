@@ -92,7 +92,7 @@ public class UserGroupLocalServiceUtil {
 
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.Map params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
@@ -102,7 +102,8 @@ public class UserGroupLocalServiceUtil {
 
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.Map params) throws com.liferay.portal.SystemException {
+		java.util.LinkedHashMap params)
+		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		return userGroupLocalService.searchCount(companyId, name, description,

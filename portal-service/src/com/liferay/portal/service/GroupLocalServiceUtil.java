@@ -158,7 +158,7 @@ public class GroupLocalServiceUtil {
 
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.Map params, int begin, int end)
+		java.util.LinkedHashMap params, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
@@ -168,7 +168,8 @@ public class GroupLocalServiceUtil {
 
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.util.Map params) throws com.liferay.portal.SystemException {
+		java.util.LinkedHashMap params)
+		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.searchCount(companyId, name, description,

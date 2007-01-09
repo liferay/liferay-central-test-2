@@ -206,7 +206,7 @@ if (Validator.isNotNull(modelResource)) {
 				<%
 				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-				Map userParams = new HashMap();
+				LinkedHashMap userParams = new LinkedHashMap();
 
 				if (tabs2.equals("current")) {
 					userParams.put("permission", String.valueOf(resource.getResourceId()));

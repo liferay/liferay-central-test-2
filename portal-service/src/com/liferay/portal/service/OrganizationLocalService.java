@@ -78,7 +78,7 @@ public interface OrganizationLocalService {
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.String regionId, java.lang.String countryId,
-		java.util.Map params, boolean andOperator, int begin, int end)
+		java.util.LinkedHashMap params, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId,
@@ -86,7 +86,7 @@ public interface OrganizationLocalService {
 		java.lang.String parentOrganizationComparator, java.lang.String name,
 		java.lang.String street, java.lang.String city, java.lang.String zip,
 		java.lang.String regionId, java.lang.String countryId,
-		java.util.Map params, boolean andOperator)
+		java.util.LinkedHashMap params, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
 	public void setGroupOrganizations(long groupId,

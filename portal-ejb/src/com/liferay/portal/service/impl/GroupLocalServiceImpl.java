@@ -74,8 +74,8 @@ import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -375,8 +375,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	}
 
 	public List search(
-			String companyId, String name, String description, Map params,
-			int begin, int end)
+			String companyId, String name, String description,
+			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
 		return GroupFinder.findByC_N_D(
@@ -384,7 +384,8 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description, Map params)
+			String companyId, String name, String description,
+			LinkedHashMap params)
 		throws SystemException {
 
 		return GroupFinder.countByC_N_D(companyId, name, description, params);

@@ -39,10 +39,9 @@ import java.io.InputStream;
 import java.security.Principal;
 
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Hashtable;
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 import net.sf.webdav.IWebdavStorage;
 
@@ -365,7 +364,7 @@ public abstract class AbstractWebDAVStorage implements IWebdavStorage {
 			uri = uriValues[2];
 
 			if ((companyId != null) && (groupId <= 0)) {
-				Map groupParams = new HashMap();
+				LinkedHashMap groupParams = new LinkedHashMap();
 
 				groupParams.put("usersGroups", getUserId());
 

@@ -89,7 +89,7 @@ searchContainer.setRowChecker(new UserUserGroupChecker(renderResponse, userGroup
 <%
 UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-Map userParams = new HashMap();
+LinkedHashMap userParams = new LinkedHashMap();
 
 if (tabs2.equals("current")) {
 	userParams.put("usersUserGroups", userGroup.getUserGroupId());

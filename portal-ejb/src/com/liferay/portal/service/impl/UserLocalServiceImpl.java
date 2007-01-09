@@ -113,6 +113,7 @@ import java.security.NoSuchAlgorithmException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
@@ -711,8 +712,9 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 	public List search(
 			String companyId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean active, Map params,
-			boolean andSearch, int begin, int end, OrderByComparator obc)
+			String lastName, String emailAddress, boolean active,
+			LinkedHashMap params, boolean andSearch, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return UserFinder.findByC_FN_MN_LN_EA_A(
@@ -722,8 +724,8 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 	public int searchCount(
 			String companyId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean active, Map params,
-			boolean andSearch)
+			String lastName, String emailAddress, boolean active,
+			LinkedHashMap params, boolean andSearch)
 		throws SystemException {
 
 		return UserFinder.countByC_FN_MN_LN_EA_A(

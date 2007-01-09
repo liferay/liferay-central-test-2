@@ -301,7 +301,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<%
 				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-				Map userParams = new HashMap();
+				LinkedHashMap userParams = new LinkedHashMap();
 
 				if (tabs3.equals("current")) {
 					userParams.put("permission", String.valueOf(resource.getResourceId()));
@@ -480,7 +480,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 					parentOrganizationComparator = StringPool.NOT_EQUAL;
 				}
 
-				Map organizationParams = new HashMap();
+				LinkedHashMap organizationParams = new LinkedHashMap();
 
 				if (tabs3.equals("current")) {
 					organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
@@ -711,7 +711,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 				<%
 				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-				Map userGroupParams = new HashMap();
+				LinkedHashMap userGroupParams = new LinkedHashMap();
 
 				if (tabs3.equals("current")) {
 					userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));

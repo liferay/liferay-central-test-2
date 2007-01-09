@@ -138,7 +138,7 @@ portletURL.setParameter("tabs1", tabs1);
 				}
 			}
 
-			Map userParams = new HashMap();
+			LinkedHashMap userParams = new LinkedHashMap();
 
 			userParams.put("usersOrgs", organizationId);
 

@@ -55,7 +55,7 @@
 		}
 	}
 
-	Map groupParams = new HashMap();
+	LinkedHashMap groupParams = new LinkedHashMap();
 
 	groupParams.put("usersGroups", user.getUserId());
 	groupParams.put("layoutSet", Boolean.FALSE);

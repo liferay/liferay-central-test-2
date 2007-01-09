@@ -108,7 +108,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		<%
 		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-		Map userParams = new HashMap();
+		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
 			userParams.put("usersRoles", role.getRoleId());
@@ -183,7 +183,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		<%
 		GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
 
-		Map groupParams = new HashMap();
+		LinkedHashMap groupParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
 			groupParams.put("groupsRoles", role.getRoleId());
@@ -265,7 +265,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
 
-		Map organizationParams = new HashMap();
+		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
 			organizationParams.put("organizationsRoles", role.getRoleId());
@@ -349,7 +349,7 @@ portletURL.setParameter("roleId", role.getRoleId());
 		<%
 		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-		Map userGroupParams = new HashMap();
+		LinkedHashMap userGroupParams = new LinkedHashMap();
 
 		if (tabs3.equals("current")) {
 			List userGroupsRoles = new ArrayList();

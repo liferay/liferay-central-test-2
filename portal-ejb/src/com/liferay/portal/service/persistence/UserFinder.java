@@ -34,6 +34,7 @@ import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -73,8 +74,8 @@ public class UserFinder {
 
 	public static int countByC_FN_MN_LN_EA_A(
 			String companyId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean active, Map params,
-			boolean andOperator)
+			String lastName, String emailAddress, boolean active,
+			LinkedHashMap params, boolean andOperator)
 		throws SystemException {
 
 		firstName = StringUtil.lowerCase(firstName);
@@ -135,8 +136,9 @@ public class UserFinder {
 
 	public static List findByC_FN_MN_LN_EA_A(
 			String companyId, String firstName, String middleName,
-			String lastName, String emailAddress, boolean active, Map params,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
+			String lastName, String emailAddress, boolean active,
+			LinkedHashMap params, boolean andOperator, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		firstName = StringUtil.lowerCase(firstName);
@@ -186,7 +188,7 @@ public class UserFinder {
 		}
 	}
 
-	private static String _getJoin(Map params) {
+	private static String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -239,7 +241,7 @@ public class UserFinder {
 		return join;
 	}
 
-	private static String _getWhere(Map params) {
+	private static String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -292,7 +294,7 @@ public class UserFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, Map params) {
+	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

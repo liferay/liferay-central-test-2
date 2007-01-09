@@ -35,6 +35,7 @@ import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -69,7 +70,8 @@ public class UserGroupFinder {
 		UserGroupFinder.class.getName() + ".joinByUserGroupsRoles";
 
 	public static int countByC_N_D(
-			String companyId, String name, String description, Map params)
+			String companyId, String name, String description,
+			LinkedHashMap params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -162,8 +164,8 @@ public class UserGroupFinder {
 	}
 
 	public static List findByC_N_D(
-			String companyId, String name, String description, Map params,
-			int begin, int end)
+			String companyId, String name, String description,
+			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -204,7 +206,7 @@ public class UserGroupFinder {
 		}
 	}
 
-	private static String _getJoin(Map params) {
+	private static String _getJoin(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -251,7 +253,7 @@ public class UserGroupFinder {
 		return join;
 	}
 
-	private static String _getWhere(Map params) {
+	private static String _getWhere(LinkedHashMap params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
@@ -298,7 +300,7 @@ public class UserGroupFinder {
 		return join;
 	}
 
-	private static void _setJoin(QueryPos qPos, Map params) {
+	private static void _setJoin(QueryPos qPos, LinkedHashMap params) {
 		if (params != null) {
 			Iterator itr = params.entrySet().iterator();
 

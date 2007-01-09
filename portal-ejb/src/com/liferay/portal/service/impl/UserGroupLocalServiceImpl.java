@@ -43,8 +43,8 @@ import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
 
+import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * <a href="UserGroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -149,8 +149,8 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 	}
 
 	public List search(
-			String companyId, String name, String description, Map params,
-			int begin, int end)
+			String companyId, String name, String description,
+			LinkedHashMap params, int begin, int end)
 		throws SystemException {
 
 		return UserGroupFinder.findByC_N_D(
@@ -158,7 +158,8 @@ public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 	}
 
 	public int searchCount(
-			String companyId, String name, String description, Map params)
+			String companyId, String name, String description,
+			LinkedHashMap params)
 		throws SystemException {
 
 		return UserGroupFinder.countByC_N_D(
