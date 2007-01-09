@@ -29,18 +29,25 @@ import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.lock.DuplicateLockException;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.Constants;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.form.FileEntryForm;
+import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.util.FileUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
+
+import java.io.File;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -188,28 +195,40 @@ public class EditFileEntryAction extends PortletAction {
 		String extraSettings = PropertiesUtil.toString(
 			fileEntryForm.getExtraSettingsProperties());
 
-		byte[] byteArray = FileUtil.getBytes(uploadReq.getFile("file"));
+		File file = uploadReq.getFile("file");
 
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");
 		String[] guestPermissions = req.getParameterValues(
 			"guestPermissions");
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		String userId = themeDisplay.getUserId();
+
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add file entry
+			DLFolderPermission.check(
+				themeDisplay.getPermissionChecker(), folderId, 
+				ActionKeys.ADD_DOCUMENT);
 
-			DLFileEntryServiceUtil.addFileEntry(
-				folderId, sourceFileName, title, description, extraSettings,
-				byteArray, communityPermissions, guestPermissions);
+			DLFileEntryLocalServiceUtil.addFileEntry(
+				userId, folderId, sourceFileName, title, description, 
+				extraSettings, file, communityPermissions, guestPermissions);
 		}
 		else {
 
 			// Update file entry
 
-			DLFileEntryServiceUtil.updateFileEntry(
-				folderId, newFolderId, name, sourceFileName, title, description,
-				extraSettings, byteArray);
+			DLFileEntryPermission.check(
+				themeDisplay.getPermissionChecker(), folderId, name,
+				ActionKeys.VIEW);
+
+			DLFileEntryLocalServiceUtil.updateFileEntry(
+				userId, folderId, newFolderId, name, sourceFileName, title, 
+				description, extraSettings, file);
 		}
 	}
 

@@ -22,26 +22,37 @@
 
 package com.liferay.documentlibrary.service.impl;
 
+import com.liferay.documentlibrary.DuplicateFileException;
+import com.liferay.documentlibrary.FileNameException;
+import com.liferay.documentlibrary.FileSizeException;
 import com.liferay.documentlibrary.NoSuchFileException;
+import com.liferay.documentlibrary.SourceFileNameException;
 import com.liferay.documentlibrary.service.DLLocalService;
 import com.liferay.documentlibrary.util.DLUtil;
+import com.liferay.documentlibrary.util.Indexer;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.jcr.JCRConstants;
 import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Calendar;
 
 import javax.jcr.Node;
+import javax.jcr.PathNotFoundException;
 import javax.jcr.Property;
 import javax.jcr.RepositoryException;
 import javax.jcr.Session;
+import javax.jcr.version.Version;
 
 import org.apache.lucene.index.Term;
 import org.apache.lucene.queryParser.ParseException;
@@ -57,6 +68,103 @@ import org.apache.lucene.search.TermQuery;
  *
  */
 public class DLLocalServiceImpl implements DLLocalService {
+
+	public static final double DEFAULT_VERSION = 1.0;
+
+	public void addFile(
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, InputStream is)
+		throws PortalException, SystemException {
+
+		if ((fileName.indexOf("\\\\") != -1) ||
+			(fileName.indexOf("//") != -1) ||
+			(fileName.indexOf(":") != -1) ||
+			(fileName.indexOf("*") != -1) ||
+			(fileName.indexOf("?") != -1) ||
+			(fileName.indexOf("\"") != -1) ||
+			(fileName.indexOf("<") != -1) ||
+			(fileName.indexOf(">") != -1) ||
+			(fileName.indexOf("|") != -1) ||
+			(fileName.indexOf("&") != -1) ||
+			(fileName.indexOf("[") != -1) ||
+			(fileName.indexOf("]") != -1) ||
+			(fileName.indexOf("'") != -1)) {
+	
+			throw new FileNameException(fileName);
+		}
+	
+		boolean validFileExtension = false;
+	
+		String[] fileExtensions =
+			PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
+	
+		for (int i = 0; i < fileExtensions.length; i++) {
+			if (StringPool.STAR.equals(fileExtensions[i]) ||
+				StringUtil.endsWith(fileName, fileExtensions[i])) {
+	
+				validFileExtension = true;
+	
+				break;
+			}
+		}
+	
+		if (!validFileExtension) {
+			throw new FileNameException(fileName);
+		}
+	
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
+		
+		Session session = null;
+	
+		try {
+			session = JCRFactoryUtil.createSession();
+	
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+	
+			if (repositoryNode.hasNode(fileName)) {
+				throw new DuplicateFileException(fileName);
+			}
+			else {
+				Node fileNode = repositoryNode.addNode(
+					fileName, JCRConstants.NT_FILE);
+	
+				Node contentNode = fileNode.addNode(
+					JCRConstants.JCR_CONTENT, JCRConstants.NT_RESOURCE);
+	
+				contentNode.addMixin(JCRConstants.MIX_VERSIONABLE);
+				contentNode.setProperty(
+					JCRConstants.JCR_MIME_TYPE, "text/plain");
+				contentNode.setProperty(JCRConstants.JCR_DATA, is);
+				contentNode.setProperty(
+					JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+	
+				session.save();
+	
+				Version version = contentNode.checkin();
+	
+				contentNode.getVersionHistory().addVersionLabel(
+					version.getName(), Double.toString(DEFAULT_VERSION), false);
+	
+				Indexer.addFile(
+					companyId, portletId, new Long(groupId), repositoryId,
+					fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
+		}
+	}
 
 	public InputStream getFileAsStream(
 			String companyId, String repositoryId, String fileName)
@@ -166,6 +274,85 @@ public class DLLocalServiceImpl implements DLLocalService {
 		}
 		catch (ParseException pe) {
 			throw new SystemException(pe);
+		}
+	}
+	
+	public void updateFile(
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, double versionNumber,
+			String sourceFileName, InputStream is)
+		throws PortalException, SystemException {
+	
+		String versionLabel = String.valueOf(versionNumber);
+	
+		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+	
+		if (pos != -1) {
+			String fileNameExtension =
+				fileName.substring(pos, fileName.length());
+	
+			pos = sourceFileName.lastIndexOf(StringPool.PERIOD);
+	
+			if (pos == -1) {
+				throw new SourceFileNameException(sourceFileName);
+			}
+			else {
+				String sourceFileNameExtension =
+					sourceFileName.substring(pos, sourceFileName.length());
+	
+				if (!fileNameExtension.equalsIgnoreCase(
+						sourceFileNameExtension)) {
+	
+					throw new SourceFileNameException(sourceFileName);
+				}
+			}
+		}
+	
+		if (is == null) {
+			throw new FileSizeException(fileName);
+		}
+	
+		Session session = null;
+	
+		try {
+			session = JCRFactoryUtil.createSession();
+	
+			Node rootNode = DLUtil.getRootNode(session, companyId);
+			Node repositoryNode = DLUtil.getFolderNode(rootNode, repositoryId);
+			Node fileNode = repositoryNode.getNode(fileName);
+			Node contentNode = fileNode.getNode(JCRConstants.JCR_CONTENT);
+	
+			contentNode.checkout();
+	
+			contentNode.setProperty(JCRConstants.JCR_MIME_TYPE, "text/plain");
+			contentNode.setProperty(JCRConstants.JCR_DATA, is);
+			contentNode.setProperty(
+				JCRConstants.JCR_LAST_MODIFIED, Calendar.getInstance());
+	
+			session.save();
+	
+			Version version = contentNode.checkin();
+	
+			contentNode.getVersionHistory().addVersionLabel(
+				version.getName(), versionLabel, false);
+	
+			Indexer.updateFile(
+				companyId, portletId, new Long(groupId), repositoryId,
+				fileName);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
+		catch (PathNotFoundException pnfe) {
+			throw new NoSuchFileException(fileName);
+		}
+		catch (RepositoryException re) {
+			throw new SystemException(re);
+		}
+		finally {
+			if (session != null) {
+				session.logout();
+			}
 		}
 	}
 

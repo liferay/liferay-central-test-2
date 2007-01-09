@@ -26,8 +26,11 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
@@ -35,6 +38,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
+import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.util.FileUtil;
 import com.liferay.util.Http;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -85,9 +89,17 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			DLFileEntryServiceUtil.addFileEntry(
-				folder.getFolderId(), fileName, fileName, StringPool.BLANK,
-				StringPool.BLANK, FileUtil.getBytes(file), true, true);
+			String userId = arg.getUserId();
+
+			String folderId = folder.getFolderId();
+			
+			DLFolderPermission.check(
+				PermissionThreadLocal.getPermissionChecker(), folderId, 
+				ActionKeys.ADD_DOCUMENT);
+
+			DLFileEntryLocalServiceUtil.addFileEntry(
+				userId, folderId, fileName, fileName, StringPool.BLANK, 
+				StringPool.BLANK, file, true, true);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

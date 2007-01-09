@@ -35,6 +35,16 @@ import java.io.InputStream;
  *
  */
 public class DLLocalServiceUtil {
+	public static void addFile(
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, InputStream is)
+		throws PortalException, SystemException {
+	
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+	
+		dlLocalService.addFile(
+			companyId, portletId, groupId, repositoryId, fileName, is);
+	}
 
 	public static InputStream getFileAsStream(
 			String companyId, String repositoryId, String fileName)
@@ -77,6 +87,19 @@ public class DLLocalServiceUtil {
 
 		return dlLocalService.search(
 			companyId, portletId, groupId, repositoryIds, keywords);
+	}
+
+	public static void updateFile(
+			String companyId, String portletId, long groupId,
+			String repositoryId, String fileName, double versionNumber,
+			String sourceFileName, InputStream is)
+		throws PortalException, SystemException {
+	
+		DLLocalService dlLocalService = DLLocalServiceFactory.getService();
+		
+		dlLocalService.updateFile(
+			companyId, portletId, groupId, repositoryId, fileName,
+			versionNumber, sourceFileName, is);
 	}
 
 }
