@@ -140,9 +140,12 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (friendlyURL.equals(_PATH_C_PORTAL_CSS_CACHED) ||
+		if (friendlyURL.equals(_PATH_C) ||
+			friendlyURL.equals(_PATH_C_PORTAL_CSS_CACHED) ||
 			friendlyURL.equals(_PATH_C_PORTAL_JAVASCRIPT_CACHED) ||
 			friendlyURL.equals(_PATH_C_PORTAL_LAYOUT) ||
+			friendlyURL.equals(_PATH_C_PORTAL_LOGIN) ||
+			friendlyURL.equals(_PATH_C_PORTAL_LOGOUT) ||
 			friendlyURL.equals(_PATH_C_PORTAL_RENDER_PORTLET) ||
 			friendlyURL.startsWith(_PATH_IMAGE)) {
 
@@ -186,6 +189,12 @@ public class VirtualHostFilter implements Filter {
 
 	private static String _PATH_C_PORTAL_LAYOUT =
 		_PATH_C + "/portal/layout";
+
+	private static String _PATH_C_PORTAL_LOGIN =
+		_PATH_C + "/portal/login";
+
+	private static String _PATH_C_PORTAL_LOGOUT =
+		_PATH_C + "/portal/logout";
 
 	private static String _PATH_C_PORTAL_RENDER_PORTLET =
 		_PATH_C + "/portal/render_portlet";
