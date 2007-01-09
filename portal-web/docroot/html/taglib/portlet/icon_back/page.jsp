@@ -25,5 +25,5 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <c:if test="<%= portletDisplay.isShowBackIcon() %>">
-	<liferay-ui:icon image="../portlet/back" message="back" url="<%= portletDisplay.getURLBack() %>" toolTip="false" />
+	<liferay-ui:icon image="../portlet/back" message="back" url="<%= portletDisplay.getURLBack() %>" toolTip="<%= false %>" />
 </c:if>
