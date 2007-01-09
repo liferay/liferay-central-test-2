@@ -123,8 +123,6 @@
 
 		<action path="/portal/flash" forward="/portal/flash.jsp" />
 
-		<action path="/portal/group_forward" type="com.liferay.portal.action.GroupForwardAction" />
-
 		<action path="/portal/j_login" forward="/portal/j_login.jsp" />
 
 		<action path="/portal/j_login_error" forward="portal.j_login_error" />

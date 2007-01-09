@@ -1,0 +1,17 @@
+/c
+/c/portal/change_password
+/c/portal/css_cached
+/c/portal/extend_session
+/c/portal/extend_session_confirm
+/c/portal/javascript_cached
+/c/portal/layout
+/c/portal/login
+/c/portal/logout
+/c/portal/render_portlet
+/c/portal/update_layout
+/c/portal/update_terms_of_use
+/c/portal/upload_progress_poller
+/c/chat/roster
+/c/layout_configuration/templates
+/c/layout_management/update_page
+/c/messaging/action

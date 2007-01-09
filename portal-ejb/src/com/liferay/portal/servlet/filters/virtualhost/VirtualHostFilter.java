@@ -32,14 +32,18 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.servlet.MainServlet;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
 
 import java.io.IOException;
+
+import java.util.Set;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -70,6 +74,18 @@ public class VirtualHostFilter implements Filter {
 		_ctx = config.getServletContext();
 
 		_companyId = _ctx.getInitParameter("company_id");
+
+		String[] ignorePaths = StringUtil.split(
+			ContentUtil.get(
+				"com/liferay/portal/servlet/filters/virtualhost/dependencies/" +
+					"ignore_paths.txt"),
+			"\n");
+
+		_ignorePaths = CollectionFactory.getHashSet(ignorePaths.length);
+
+		for (int i = 0; i < ignorePaths.length; i++) {
+			_ignorePaths.add(ignorePaths[i]);
+		}
 	}
 
 	public void doFilter(
@@ -140,13 +156,7 @@ public class VirtualHostFilter implements Filter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (friendlyURL.equals(_PATH_C) ||
-			friendlyURL.equals(_PATH_C_PORTAL_CSS_CACHED) ||
-			friendlyURL.equals(_PATH_C_PORTAL_JAVASCRIPT_CACHED) ||
-			friendlyURL.equals(_PATH_C_PORTAL_LAYOUT) ||
-			friendlyURL.equals(_PATH_C_PORTAL_LOGIN) ||
-			friendlyURL.equals(_PATH_C_PORTAL_LOGOUT) ||
-			friendlyURL.equals(_PATH_C_PORTAL_RENDER_PORTLET) ||
+		if (_ignorePaths.contains(friendlyURL) ||
 			friendlyURL.startsWith(_PATH_IMAGE)) {
 
 			return false;
@@ -179,29 +189,10 @@ public class VirtualHostFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
 
-	private static String _PATH_C = MainServlet.DEFAULT_MAIN_PATH;
-
-	private static String _PATH_C_PORTAL_CSS_CACHED =
-		_PATH_C + "/portal/css_cached";
-
-	private static String _PATH_C_PORTAL_JAVASCRIPT_CACHED =
-		_PATH_C + "/portal/javascript_cached";
-
-	private static String _PATH_C_PORTAL_LAYOUT =
-		_PATH_C + "/portal/layout";
-
-	private static String _PATH_C_PORTAL_LOGIN =
-		_PATH_C + "/portal/login";
-
-	private static String _PATH_C_PORTAL_LOGOUT =
-		_PATH_C + "/portal/logout";
-
-	private static String _PATH_C_PORTAL_RENDER_PORTLET =
-		_PATH_C + "/portal/render_portlet";
-
 	private static String _PATH_IMAGE = "/image/";
 
 	private ServletContext _ctx;
 	private String _companyId;
+	private Set _ignorePaths;
 
 }
