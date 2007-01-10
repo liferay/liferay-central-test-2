@@ -950,12 +950,12 @@
 
 	<definition name="portlet.rss" extends="portlet" />
 
-	<definition name="portlet.rss.edit" extends="portlet.rss">
-		<put name="portlet_content" value="/portlet/rss/edit.jsp" />
-	</definition>
-
 	<definition name="portlet.rss.article" extends="portlet.rss">
 		<put name="portlet_content" value="/portlet/rss/article.jsp" />
+	</definition>
+
+	<definition name="portlet.rss.edit" extends="portlet.rss">
+		<put name="portlet_content" value="/portlet/rss/edit.jsp" />
 	</definition>
 
 	<definition name="portlet.rss.view" extends="portlet.rss">

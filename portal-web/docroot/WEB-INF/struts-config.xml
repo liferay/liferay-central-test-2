@@ -1216,11 +1216,11 @@
 
 		<!-- RSS -->
 
+		<action path="/rss/article" forward="portlet.rss.article" />
+
 		<action path="/rss/edit" type="com.liferay.portlet.rss.action.EditPreferencesAction">
 			<forward name="portlet.rss.edit" path="portlet.rss.edit" />
 		</action>
-
-		<action path="/rss/article" forward="portlet.rss.article" />
 
 		<action path="/rss/view" forward="portlet.rss.view" />
 

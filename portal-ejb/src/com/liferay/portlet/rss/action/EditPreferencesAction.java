@@ -73,6 +73,7 @@ public class EditPreferencesAction extends PortletAction {
 			prefs.setValues("urls", new String[0]);
 			prefs.setValues("titles", new String[0]);
 		}
+
 		prefs.setValue("items-per-channel", String.valueOf(entriesPerFeed));
 
 		try {
