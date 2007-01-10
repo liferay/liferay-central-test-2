@@ -46,7 +46,7 @@
 
 								<img src="<%= themeDisplay.getPathImage() %>/user_portrait?img_id=<%= message.getUserId() %>" style="margin:10px 0px; width: 75%;"><br>
 
-								<c:if test="<%= MessagingUtil.isJabberEnabled() %>">
+								<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 									<div>
 										<a href="javascript: Messaging.chat({toId:'<%= message.getUserId() %>', toName:'<%= message.getUserName() %>'});"><img src="<%= themeDisplay.getPathThemeImage() %>/chat/user_offline.gif"></a>
 									</div>
