@@ -268,7 +268,7 @@ public class LanguageUtil {
 		return _instance._locales;
 	}
 
-    public static String getCharset(Locale locale) {
+	public static String getCharset(Locale locale) {
 		return _instance._getCharset(locale);
 	}
 
@@ -289,11 +289,11 @@ public class LanguageUtil {
 	}
 
 	public static String getLanguageId(HttpServletRequest req) {
-	    String languageId = ParamUtil.getString(req, "languageId");
+		String languageId = ParamUtil.getString(req, "languageId");
 
-	    if (Validator.isNotNull(languageId)) {
-	    	return languageId;
-	    }
+		if (Validator.isNotNull(languageId)) {
+			return languageId;
+		}
 
 		Locale locale =
 			(Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
@@ -381,11 +381,11 @@ public class LanguageUtil {
 		}
 	}
 
-    private String _getCharset(Locale locale) {
+	private String _getCharset(Locale locale) {
 		return DEFAULT_ENCODING;
 	}
 
-    private Locale _getLocale(String languageCode) {
+	private Locale _getLocale(String languageCode) {
 		return (Locale)_localesByLanguageCode.get(languageCode);
 	}
 

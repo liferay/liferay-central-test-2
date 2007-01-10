@@ -99,7 +99,7 @@ public class CompressionFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (useCompressionFilter && isCompress(httpReq) &&
+		if (useCompressionFilter && isCompress(httpReq) &&
 			!isInclude(httpReq) && BrowserSniffer.acceptsGzip(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 

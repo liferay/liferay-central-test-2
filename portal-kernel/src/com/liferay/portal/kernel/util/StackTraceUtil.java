@@ -34,7 +34,7 @@ import java.io.StringWriter;
  */
 public class StackTraceUtil {
 
-    public static String getStackTrace(Throwable t) {
+	public static String getStackTrace(Throwable t) {
 		String stackTrace = null;
 
 		PrintWriter printWriter = null;

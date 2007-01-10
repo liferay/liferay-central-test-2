@@ -47,39 +47,39 @@ import org.apache.struts.action.ActionMapping;
  */
 public class EditConfigurationAction extends PortletAction {
 
-    public void processAction(
-            ActionMapping mapping, ActionForm form, PortletConfig config,
-            ActionRequest req, ActionResponse res)
-        throws Exception {
+	public void processAction(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ActionRequest req, ActionResponse res)
+		throws Exception {
 
-        String cmd = ParamUtil.getString(req, Constants.CMD);
+		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-        if (!cmd.equals(Constants.UPDATE)) {
-            return;
-        }
+		if (!cmd.equals(Constants.UPDATE)) {
+			return;
+		}
 
-        String type = ParamUtil.getString(req, "type");
+		String type = ParamUtil.getString(req, "type");
 
-        String portletResource = ParamUtil.getString(req, "portletResource");
+		String portletResource = ParamUtil.getString(req, "portletResource");
 
-        PortletPreferences prefs =
-            PortletPreferencesFactory.getPortletSetup(
+		PortletPreferences prefs =
+			PortletPreferencesFactory.getPortletSetup(
 				req, portletResource, true, true);
 
-        prefs.setValue("type", type);
+		prefs.setValue("type", type);
 
-        prefs.store();
+		prefs.store();
 
-        SessionMessages.add(req, config.getPortletName() + ".doConfigure");
-    }
+		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+	}
 
-    public ActionForward render(
-            ActionMapping mapping, ActionForm form, PortletConfig config,
-            RenderRequest req, RenderResponse res)
-        throws Exception {
+	public ActionForward render(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			RenderRequest req, RenderResponse res)
+		throws Exception {
 
-        return mapping.findForward(
-            "portlet.journal_content_search.edit_configuration");
-    }
+		return mapping.findForward(
+			"portlet.journal_content_search.edit_configuration");
+	}
 
 }

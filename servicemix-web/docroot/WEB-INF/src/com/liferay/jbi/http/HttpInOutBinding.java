@@ -46,31 +46,31 @@ import javax.xml.transform.TransformerException;
 public class HttpInOutBinding
 	extends org.apache.servicemix.components.http.HttpInOutBinding {
 
-    public void processInOut(HttpServletRequest req, HttpServletResponse res)
+	public void processInOut(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, JBIException, ServletException {
 
-        InOut exchange = getExchangeFactory().createInOutExchange();
+		InOut exchange = getExchangeFactory().createInOutExchange();
 
 		NormalizedMessage in = exchange.createMessage();
 
-        try {
-            getMarshaler().toNMS(exchange, in, req);
+		try {
+			getMarshaler().toNMS(exchange, in, req);
 
-            Enumeration enu = req.getParameterNames();
+			Enumeration enu = req.getParameterNames();
 
 			while (enu.hasMoreElements()) {
-            	try {
-	                String name = (String)enu.nextElement();
+				try {
+					String name = (String)enu.nextElement();
 
 					String value = req.getParameter(name);
 
 					in.setProperty(name, value);
-            	}
+				}
 				catch (Exception e) {
-            	}
-            }
+				}
+			}
 
-            exchange.setInMessage(in);
+			exchange.setInMessage(in);
 
 			boolean result = getDeliveryChannel().sendSync(exchange);
 
@@ -91,15 +91,15 @@ public class HttpInOutBinding
 			done(exchange);
 
 			res.setStatus(HttpServletResponse.SC_OK);
-        }
-        catch (IOException ioe) {
-            fail(exchange, ioe);
-            outputException(res, ioe);
-        }
-        catch (TransformerException te) {
-            fail(exchange, te);
-            outputException(res, te);
-        }
-    }
+		}
+		catch (IOException ioe) {
+			fail(exchange, ioe);
+			outputException(res, ioe);
+		}
+		catch (TransformerException te) {
+			fail(exchange, te);
+			outputException(res, te);
+		}
+	}
 
 }

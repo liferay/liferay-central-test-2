@@ -247,7 +247,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		else {
 			return super.processActionPerform(req, res, action, form, mapping);
 		}
-    }
+	}
 
 	protected void processForwardConfig(
 			HttpServletRequest req, HttpServletResponse res,

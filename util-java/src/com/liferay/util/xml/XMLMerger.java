@@ -82,13 +82,13 @@ public class XMLMerger {
 	}
 
 	private void _addChildren(Element first, Collection childrenToJoin) {
-	    Collection clones = new Vector();
+		Collection clones = new Vector();
 
 		Iterator itr = childrenToJoin.iterator();
 
 		while (itr.hasNext()) {
-	        clones.add(((Element)itr.next()).clone());
-	    }
+			clones.add(((Element)itr.next()).clone());
+		}
 
 		first.elements().addAll(clones);
 	}
@@ -115,12 +115,12 @@ public class XMLMerger {
 		Iterator itr = list.iterator();
 
 		while (itr.hasNext()) {
-	        Element candidate = (Element)itr.next();
+			Element candidate = (Element)itr.next();
 
 			if (comparator.compare(example, candidate) == 0) {
-	            return candidate;
-	        }
-	    }
+				return candidate;
+			}
+		}
 
 		return example;
 	}

@@ -527,7 +527,7 @@ public class JournalUtil {
 		Company company = themeDisplay.getCompany();
 
 		tokens.put("company_id", themeDisplay.getCompanyId());
-        tokens.put("group_id", String.valueOf(groupId));
+		tokens.put("group_id", String.valueOf(groupId));
 		tokens.put("cms_url", themeDisplay.getPathRoot() + "/cms/servlet");
 		tokens.put("image_path", themeDisplay.getPathImage());
 		tokens.put(
@@ -853,8 +853,8 @@ public class JournalUtil {
 
 							if ((curEl.attributeValue("type").equals(
 									"image")) &&
-					            (!curContentLanguageId.equals(defaultLocale) &&
-					             !curContentLanguageId.equals(
+								(!curContentLanguageId.equals(defaultLocale) &&
+								 !curContentLanguageId.equals(
 									StringPool.BLANK))) {
 
 								ImageLocalUtil.remove(
@@ -867,7 +867,7 @@ public class JournalUtil {
 						curEl.content().add(newContentEl.createCopy());
 					}
 					else {
-				        boolean match = false;
+						boolean match = false;
 
 						for (int k = curDynamicContents.size() - 1; k >= 0 ;
 								k--) {
@@ -879,30 +879,30 @@ public class JournalUtil {
 								curContentEl.attributeValue(
 									"language-id", StringPool.BLANK);
 
-					        if ((newContentLanguageId.equals(
+							if ((newContentLanguageId.equals(
 									curContentLanguageId)) ||
-						        (newContentLanguageId.equals(defaultLocale) &&
-					             curContentLanguageId.equals(
+								(newContentLanguageId.equals(defaultLocale) &&
+								 curContentLanguageId.equals(
 									StringPool.BLANK))) {
 
-						        curContentEl.detach();
+								curContentEl.detach();
 
 								curEl.content().add(
 									k, newContentEl.createCopy());
 
 								match = true;
-					        }
+							}
 
-					        if (curContentLanguageId.equals(StringPool.BLANK)) {
-						        curContentEl.addAttribute(
+							if (curContentLanguageId.equals(StringPool.BLANK)) {
+								curContentEl.addAttribute(
 									"language-id", defaultLocale);
-					        }
-					    }
+							}
+						}
 
-					    if (!match) {
-						    curEl.content().add(newContentEl.createCopy());
-					    }
-				    }
+						if (!match) {
+							curEl.content().add(newContentEl.createCopy());
+						}
+					}
 				}
 				else {
 					xPathSelector = DocumentHelper.createXPath(elPath);

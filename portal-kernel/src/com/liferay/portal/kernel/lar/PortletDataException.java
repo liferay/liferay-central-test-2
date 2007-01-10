@@ -32,20 +32,20 @@ import com.liferay.portal.PortalException;
  */
 public class PortletDataException extends PortalException {
 
-    public PortletDataException() {
-        super();
-    }
+	public PortletDataException() {
+		super();
+	}
 
-    public PortletDataException(String msg) {
-        super(msg);
-    }
+	public PortletDataException(String msg) {
+		super(msg);
+	}
 
-    public PortletDataException(Throwable cause) {
-        super(cause);
-    }
+	public PortletDataException(Throwable cause) {
+		super(cause);
+	}
 
 	public PortletDataException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

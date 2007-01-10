@@ -59,7 +59,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 					templatePathIndex + _GET_TEMPLATE_PATH.length();
 
 				String companyId = (String)_tokens.get("company_id");
-		        long groupId = GetterUtil.getLong(
+				long groupId = GetterUtil.getLong(
 					(String)_tokens.get("group_id"));
 				String templateId =
 					href.substring(templateIdIndex, href.length());

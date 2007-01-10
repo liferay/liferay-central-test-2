@@ -32,20 +32,20 @@ import com.liferay.portal.PortalException;
  */
 public class MessageListenerException extends PortalException {
 
-    public MessageListenerException() {
-        super();
-    }
+	public MessageListenerException() {
+		super();
+	}
 
-    public MessageListenerException(String msg) {
-        super(msg);
-    }
+	public MessageListenerException(String msg) {
+		super(msg);
+	}
 
-    public MessageListenerException(Throwable cause) {
-        super(cause);
-    }
+	public MessageListenerException(Throwable cause) {
+		super(cause);
+	}
 
 	public MessageListenerException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

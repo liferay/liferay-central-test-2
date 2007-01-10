@@ -33,20 +33,20 @@ import com.liferay.portal.PortalException;
  */
 public class AutoDeployException extends PortalException {
 
-    public AutoDeployException() {
-        super();
-    }
+	public AutoDeployException() {
+		super();
+	}
 
-    public AutoDeployException(String msg) {
-        super(msg);
-    }
+	public AutoDeployException(String msg) {
+		super(msg);
+	}
 
-    public AutoDeployException(Throwable cause) {
-        super(cause);
-    }
+	public AutoDeployException(Throwable cause) {
+		super(cause);
+	}
 
 	public AutoDeployException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

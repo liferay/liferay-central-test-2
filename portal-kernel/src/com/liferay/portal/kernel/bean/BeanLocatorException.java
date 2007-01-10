@@ -30,20 +30,20 @@ package com.liferay.portal.kernel.bean;
  */
 public class BeanLocatorException extends RuntimeException {
 
-    public BeanLocatorException() {
-        super();
-    }
+	public BeanLocatorException() {
+		super();
+	}
 
-    public BeanLocatorException(String msg) {
-        super(msg);
-    }
+	public BeanLocatorException(String msg) {
+		super(msg);
+	}
 
-    public BeanLocatorException(Throwable cause) {
-        super(cause);
-    }
+	public BeanLocatorException(Throwable cause) {
+		super(cause);
+	}
 
 	public BeanLocatorException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

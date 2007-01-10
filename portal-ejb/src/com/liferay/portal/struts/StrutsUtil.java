@@ -174,7 +174,7 @@ public class StrutsUtil {
 			String attributeName = (String)itr.next();
 
 			req.setAttribute(attributeName, null);
-        }
+		}
 
 		Object moduleConfig = portletContext.getAttribute(Globals.MODULE_KEY);
 

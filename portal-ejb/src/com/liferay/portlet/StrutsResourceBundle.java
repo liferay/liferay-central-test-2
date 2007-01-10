@@ -57,8 +57,8 @@ public class StrutsResourceBundle extends ResourceBundle {
 	}
 
 	public Locale getLocale() {
-        return _locale;
-    }
+		return _locale;
+	}
 
 	protected Object handleGetObject(String key) {
 		Object obj = null;

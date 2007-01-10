@@ -50,8 +50,8 @@ public class PortletResourceBundle extends ResourceBundle {
 	}
 
 	public Locale getLocale() {
-        return _parentBundle.getLocale();
-    }
+		return _parentBundle.getLocale();
+	}
 
 	protected Object handleGetObject(String key) {
 		try {

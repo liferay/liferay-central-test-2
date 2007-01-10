@@ -35,7 +35,7 @@ import javax.ejb.EJBHome;
  */
 public interface MailServiceHome extends EJBHome {
 
-    public MailServiceEJB create()
-    	throws CreateException, RemoteException;
+	public MailServiceEJB create()
+		throws CreateException, RemoteException;
 
 }

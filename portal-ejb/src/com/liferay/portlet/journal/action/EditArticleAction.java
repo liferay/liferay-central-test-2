@@ -173,7 +173,7 @@ public class EditArticleAction extends PortletAction {
 	protected void approveArticle(ActionRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 		String articleId = ParamUtil.getString(req, "articleId");
 		double version = ParamUtil.getDouble(req, "version");
 
@@ -186,7 +186,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void deleteArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -208,7 +208,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void expireArticles(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] expireArticleIds = StringUtil.split(
 			ParamUtil.getString(req, "expireArticleIds"));
@@ -253,7 +253,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected void removeArticlesLocale(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] removeArticleLocaleIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteArticleIds"));
@@ -281,14 +281,14 @@ public class EditArticleAction extends PortletAction {
 
 		String plid = layout.getPlid();
 
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		if (groupId > 0) {
 			plid = LayoutImpl.PUBLIC + groupId + ".1";
 		}
-        else {
-            groupId = PortalUtil.getPortletGroupId(req);
-        }
+		else {
+			groupId = PortalUtil.getPortletGroupId(req);
+		}
 
 		String articleId = ParamUtil.getString(req, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(req, "autoArticleId");

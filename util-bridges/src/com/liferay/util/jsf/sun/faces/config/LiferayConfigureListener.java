@@ -46,7 +46,7 @@ public class LiferayConfigureListener extends ConfigureListener {
 		super.contextInitialized(sce);
 
 		ApplicationAssociate associate =
-		    ApplicationAssociate.getInstance(new ServletContextAdapter(sc));
+			ApplicationAssociate.getInstance(new ServletContextAdapter(sc));
 
 		if (associate != null) {
 			sc.setAttribute(ASSOCIATE_KEY, associate);

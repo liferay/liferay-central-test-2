@@ -188,11 +188,11 @@ public class InitAction extends SimpleAction {
 			"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
 			MultipleResourceLoader.class.getName());
 
-        props.setProperty(
+		props.setProperty(
 			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
 			"org.apache.velocity.runtime.log.SimpleLog4JLogSystem");
 
-        props.setProperty(
+		props.setProperty(
 			"runtime.log.logsystem.log4j.category", "org.apache.velocity");
 
 		Velocity.setExtendedProperties(props);

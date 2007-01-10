@@ -89,7 +89,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 				if (fileItem.isFormField()) {
 					fileItem.setString(req.getCharacterEncoding());
-	            }
+				}
 
 				LiferayFileItem[] fileItems =
 					(LiferayFileItem[])_params.get(fileItem.getFieldName());

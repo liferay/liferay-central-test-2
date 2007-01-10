@@ -203,7 +203,7 @@ public class Validator {
 
 		ea = ea.toLowerCase();
 
-        int at = ea.indexOf('@');
+		int at = ea.indexOf('@');
 
 		// Unix based email addresses cannot be longer than 24 characters.
 		// However, many Windows based email addresses can be longer than 24,
@@ -212,7 +212,7 @@ public class Validator {
 		//int maxEmailLength = 24;
 		int maxEmailLength = 96;
 
-        if ((at > maxEmailLength) || (at == -1) || (at == 0) ||
+		if ((at > maxEmailLength) || (at == -1) || (at == 0) ||
 			((at <= eaLength) && (at > eaLength - 5))) {
 
 			// 123456789012345678901234@joe.com
@@ -264,7 +264,7 @@ public class Validator {
 			return false;
 		}
 
-        char[] host = ea.substring(at + 1, ea.length()).toCharArray();
+		char[] host = ea.substring(at + 1, ea.length()).toCharArray();
 
 		for (int i = 0; i < host.length; i++) {
 			if ((!isChar(host[i])) &&
@@ -296,7 +296,7 @@ public class Validator {
 			return false;
 		}
 
-        return true;
+		return true;
 	}
 
 	public static boolean isEmailAddressSpecialChar(char c) {

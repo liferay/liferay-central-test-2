@@ -34,11 +34,12 @@ import java.util.HashMap;
  */
 public class LiferayRenderKitFactoryImpl extends RenderKitFactoryImpl {
 
-    public LiferayRenderKitFactoryImpl() {
-        super();
+	public LiferayRenderKitFactoryImpl() {
+		super();
 
 		renderKits = new HashMap();
-        super.addRenderKit(HTML_BASIC_RENDER_KIT, new LiferayRenderKitImpl());
-    }
+
+		addRenderKit(HTML_BASIC_RENDER_KIT, new LiferayRenderKitImpl());
+	}
 
 }

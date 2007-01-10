@@ -33,6 +33,6 @@ import javax.ejb.EJBLocalHome;
  */
 public interface CounterLocalServiceHome extends EJBLocalHome {
 
-    public CounterLocalServiceEJB create() throws CreateException;
+	public CounterLocalServiceEJB create() throws CreateException;
 
 }

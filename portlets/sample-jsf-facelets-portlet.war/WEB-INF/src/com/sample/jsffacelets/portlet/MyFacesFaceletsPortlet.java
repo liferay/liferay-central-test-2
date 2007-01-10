@@ -72,17 +72,17 @@ public class MyFacesFaceletsPortlet
 	}
 
 	protected void setDefaultView() throws UnavailableException {
-        defaultView = getPortletConfig().getInitParameter(DEFAULT_VIEW);
+		defaultView = getPortletConfig().getInitParameter(DEFAULT_VIEW);
 
 		if (defaultView == null) {
-        	defaultView = _viewPage;
-        }
+			defaultView = _viewPage;
+		}
 
 		if (defaultView == null) {
-            throw new UnavailableException(
+			throw new UnavailableException(
 				"Default JSF view is not specified in portlet.xml");
-        }
-    }
+		}
+	}
 
 	protected void doEdit(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {

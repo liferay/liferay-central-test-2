@@ -188,7 +188,7 @@ public class PropsUtil {
 
 	public static final String DEFAULT_COLOR_SCHEME_ID = "default.color.scheme.id";
 
-    public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
+	public static final String THEME_SYNC_ON_GROUP = "theme.sync.on.group";
 
 	// Request
 
@@ -236,9 +236,9 @@ public class PropsUtil {
 
 	public static final String LDAP_IMPORT_FACTORY_INITIAL = "ldap.import.factory.initial";
 
-    public static final String LDAP_IMPORT_BASE_PROVIDER_URL = "ldap.import.base.provider.url";
+	public static final String LDAP_IMPORT_BASE_PROVIDER_URL = "ldap.import.base.provider.url";
 
-    public static final String LDAP_IMPORT_BASE_DN = "ldap.import.base.dn";
+	public static final String LDAP_IMPORT_BASE_DN = "ldap.import.base.dn";
 
 	public static final String LDAP_IMPORT_SECURITY_PRINCIPAL = "ldap.import.security.principal";
 
@@ -264,9 +264,9 @@ public class PropsUtil {
 
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
-    public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
+	public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
 
-    public static final String AUTH_IMPL_LDAP_BASE_DN = "auth.impl.ldap.base.dn";
+	public static final String AUTH_IMPL_LDAP_BASE_DN = "auth.impl.ldap.base.dn";
 
 	public static final String AUTH_IMPL_LDAP_SECURITY_PRINCIPAL = "auth.impl.ldap.security.principal";
 
@@ -384,13 +384,13 @@ public class PropsUtil {
 
 	public static final String DEFAULT_ADMIN_PASSWORD = "default.admin.password";
 
-    public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
+	public static final String DEFAULT_ADMIN_EMAIL_ADDRESS_PREFIX = "default.admin.email.address.prefix";
 
-    public static final String DEFAULT_ADMIN_FIRST_NAME = "default.admin.first.name";
+	public static final String DEFAULT_ADMIN_FIRST_NAME = "default.admin.first.name";
 
-    public static final String DEFAULT_ADMIN_MIDDLE_NAME = "default.admin.middle.name";
+	public static final String DEFAULT_ADMIN_MIDDLE_NAME = "default.admin.middle.name";
 
-    public static final String DEFAULT_ADMIN_LAST_NAME = "default.admin.last.name";
+	public static final String DEFAULT_ADMIN_LAST_NAME = "default.admin.last.name";
 
 	// Layouts
 
@@ -598,15 +598,15 @@ public class PropsUtil {
 
 	// Admin Portlet
 
-    public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
+	public static final String ADMIN_DEFAULT_GROUP_NAMES = "admin.default.group.names";
 
 	public static final String ADMIN_DEFAULT_ROLE_NAMES = "admin.default.role.names";
 
-    public static final String ADMIN_DEFAULT_USER_GROUP_NAMES = "admin.default.user.group.names";
+	public static final String ADMIN_DEFAULT_USER_GROUP_NAMES = "admin.default.user.group.names";
 
-    public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
+	public static final String ADMIN_MAIL_HOST_NAMES = "admin.mail.host.names";
 
-    public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
+	public static final String ADMIN_RESERVED_EMAIL_ADDRESSES = "admin.reserved.email.addresses";
 
 	public static final String ADMIN_RESERVED_USER_IDS = "admin.reserved.user.ids";
 
@@ -614,15 +614,15 @@ public class PropsUtil {
 
 	public static final String ADMIN_EMAIL_FROM_ADDRESS = "admin.email.from.address";
 
-    public static final String ADMIN_EMAIL_USER_ADDED_ENABLED = "admin.email.user.added.enabled";
+	public static final String ADMIN_EMAIL_USER_ADDED_ENABLED = "admin.email.user.added.enabled";
 
-    public static final String ADMIN_EMAIL_USER_ADDED_SUBJECT = "admin.email.user.added.subject";
+	public static final String ADMIN_EMAIL_USER_ADDED_SUBJECT = "admin.email.user.added.subject";
 
 	public static final String ADMIN_EMAIL_USER_ADDED_BODY = "admin.email.user.added.body";
 
-    public static final String ADMIN_EMAIL_PASSWORD_SENT_ENABLED = "admin.email.password.sent.enabled";
+	public static final String ADMIN_EMAIL_PASSWORD_SENT_ENABLED = "admin.email.password.sent.enabled";
 
-    public static final String ADMIN_EMAIL_PASSWORD_SENT_SUBJECT = "admin.email.password.sent.subject";
+	public static final String ADMIN_EMAIL_PASSWORD_SENT_SUBJECT = "admin.email.password.sent.subject";
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_BODY = "admin.email.password.sent.body";
 
@@ -640,9 +640,9 @@ public class PropsUtil {
 
 	public static final String CALENDAR_EMAIL_FROM_ADDRESS = "calendar.email.from.address";
 
-    public static final String CALENDAR_EMAIL_EVENT_REMINDER_ENABLED = "calendar.email.event.reminder.enabled";
+	public static final String CALENDAR_EMAIL_EVENT_REMINDER_ENABLED = "calendar.email.event.reminder.enabled";
 
-    public static final String CALENDAR_EMAIL_EVENT_REMINDER_SUBJECT = "calendar.email.event.reminder.subject";
+	public static final String CALENDAR_EMAIL_EVENT_REMINDER_SUBJECT = "calendar.email.event.reminder.subject";
 
 	public static final String CALENDAR_EMAIL_EVENT_REMINDER_BODY = "calendar.email.event.reminder.body";
 
@@ -774,17 +774,17 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_ADDRESS = "message.boards.email.from.address";
 
-    public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED = "message.boards.email.message.added.enabled";
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED = "message.boards.email.message.added.enabled";
 
-    public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX = "message.boards.email.message.added.subject.prefix";
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX = "message.boards.email.message.added.subject.prefix";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY = "message.boards.email.message.added.body";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE = "message.boards.email.message.added.signature";
 
-    public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED = "message.boards.email.message.updated.enabled";
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED = "message.boards.email.message.updated.enabled";
 
-    public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX = "message.boards.email.message.updated.subject.prefix";
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX = "message.boards.email.message.updated.subject.prefix";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY = "message.boards.email.message.updated.body";
 

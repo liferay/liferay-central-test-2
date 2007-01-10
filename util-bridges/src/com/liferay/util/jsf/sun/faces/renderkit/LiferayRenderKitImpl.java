@@ -38,13 +38,13 @@ import javax.faces.context.ResponseWriter;
  */
 public class LiferayRenderKitImpl extends RenderKitImpl {
 
-    public ResponseWriter createResponseWriter(
+	public ResponseWriter createResponseWriter(
 		Writer writer, String contentTypeList, String characterEncoding) {
 
-    	WriterWrapper writerWrapper = new WriterWrapper(writer);
+		WriterWrapper writerWrapper = new WriterWrapper(writer);
 
-    	return super.createResponseWriter(
+		return super.createResponseWriter(
 			writerWrapper, contentTypeList, characterEncoding);
-    }
+	}
 
 }

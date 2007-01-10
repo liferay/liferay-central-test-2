@@ -59,10 +59,10 @@ public class JournalTemplateVelocityResourceListener
 			if (pos != -1) {
 				int x = source.indexOf(StringPool.SLASH, pos);
 				int y = source.indexOf(StringPool.SLASH, x + 1);
-                int z = source.indexOf(StringPool.SLASH, y + 1);
+				int z = source.indexOf(StringPool.SLASH, y + 1);
 
 				String companyId = source.substring(x + 1, y);
-                long groupId = GetterUtil.getLong(source.substring(y + 1, z));
+				long groupId = GetterUtil.getLong(source.substring(y + 1, z));
 				String templateId = source.substring(z + 1);
 
 				if (_log.isDebugEnabled()) {

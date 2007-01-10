@@ -35,6 +35,6 @@ import javax.ejb.EJBHome;
  */
 public interface LockServiceHome extends EJBHome {
 
-    public LockServiceEJB create() throws CreateException, RemoteException;
+	public LockServiceEJB create() throws CreateException, RemoteException;
 
 }

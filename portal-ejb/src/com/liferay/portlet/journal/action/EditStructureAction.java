@@ -144,7 +144,7 @@ public class EditStructureAction extends PortletAction {
 
 	protected void deleteStructures(ActionRequest req) throws Exception {
 		String companyId = PortalUtil.getCompanyId(req);
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] deleteStructureIds = StringUtil.split(
 			ParamUtil.getString(req, "deleteStructureIds"));
@@ -165,7 +165,7 @@ public class EditStructureAction extends PortletAction {
 		String structureId = ParamUtil.getString(req, "structureId");
 		boolean autoStructureId = ParamUtil.getBoolean(req, "autoStructureId");
 
-        long groupId = ParamUtil.getLong(req, "groupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");

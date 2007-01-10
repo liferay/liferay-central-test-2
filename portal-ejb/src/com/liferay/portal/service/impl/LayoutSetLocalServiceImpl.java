@@ -101,11 +101,11 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		return LayoutSetUtil.findByPrimaryKey(ownerId);
 	}
 
-    public LayoutSet getLayoutSet(String companyId, String virtualHost)
-        throws PortalException, SystemException {
+	public LayoutSet getLayoutSet(String companyId, String virtualHost)
+		throws PortalException, SystemException {
 
 		return LayoutSetFinder.findByC_V(companyId, virtualHost);
-    }
+	}
 
 	public LayoutSet updateLookAndFeel(
 			String ownerId, String themeId, String colorSchemeId)
@@ -118,24 +118,24 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 
 		LayoutSetUtil.update(layoutSet);
 
-        if (PrefsPropsUtil.getBoolean(PropsUtil.THEME_SYNC_ON_GROUP)) {
+		if (PrefsPropsUtil.getBoolean(PropsUtil.THEME_SYNC_ON_GROUP)) {
 			String otherOwnerId = null;
 
 			if (layoutSet.isPrivateLayout()) {
-                otherOwnerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
-            }
-            else {
-                otherOwnerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
-            }
+				otherOwnerId = LayoutImpl.PUBLIC + layoutSet.getGroupId();
+			}
+			else {
+				otherOwnerId = LayoutImpl.PRIVATE + layoutSet.getGroupId();
+			}
 
-            LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(
+			LayoutSet otherLayoutSet = LayoutSetUtil.findByPrimaryKey(
 				otherOwnerId);
 
-            otherLayoutSet.setThemeId(themeId);
-            otherLayoutSet.setColorSchemeId(colorSchemeId);
+			otherLayoutSet.setThemeId(themeId);
+			otherLayoutSet.setColorSchemeId(colorSchemeId);
 
-            LayoutSetUtil.update(otherLayoutSet);
-        }
+			LayoutSetUtil.update(otherLayoutSet);
+		}
 
 		return layoutSet;
 	}
@@ -154,12 +154,12 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		return layoutSet;
 	}
 
-    public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
-        throws PortalException, SystemException {
+	public LayoutSet updateVirtualHost(String ownerId, String virtualHost)
+		throws PortalException, SystemException {
 
-        LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
 
-        if (Validator.isNotNull(virtualHost)) {
+		if (Validator.isNotNull(virtualHost)) {
 			try {
 				LayoutSet virtualHostLayoutSet = getLayoutSet(
 					layoutSet.getCompanyId(), virtualHost);
@@ -170,13 +170,13 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 			}
 			catch (NoSuchLayoutSetException nslse) {
 			}
-        }
+		}
 
-        layoutSet.setVirtualHost(virtualHost);
+		layoutSet.setVirtualHost(virtualHost);
 
-        LayoutSetUtil.update(layoutSet);
+		LayoutSetUtil.update(layoutSet);
 
-        return layoutSet;
-    }
+		return layoutSet;
+	}
 
 }

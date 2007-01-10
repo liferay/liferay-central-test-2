@@ -230,9 +230,9 @@ public class Calculator extends Applet {
 		_inputLabel.setText(Float.toString(_value));
 	}
 
-    private Label _inputLabel;
-    private boolean _firstDigit = true;
-    private float _value = 0.0f;
-    private String _operator = "=";
+	private Label _inputLabel;
+	private boolean _firstDigit = true;
+	private float _value = 0.0f;
+	private String _operator = "=";
 
 }

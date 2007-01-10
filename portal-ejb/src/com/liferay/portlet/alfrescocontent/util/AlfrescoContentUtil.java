@@ -339,7 +339,7 @@ public class AlfrescoContentUtil {
 		return false;
 	}
 
-    public static String getEndpointAddress() {
+	public static String getEndpointAddress() {
 		String endPoint = PropsUtil.get(PropsUtil.ALFRESCO_CONTENT_SERVER_URL);
 
 		if (_log.isDebugEnabled()) {
@@ -349,10 +349,10 @@ public class AlfrescoContentUtil {
 		return endPoint;
 	}
 
-    private static final Pattern _PROXY_URL_PATTERN = Pattern.compile(
+	private static final Pattern _PROXY_URL_PATTERN = Pattern.compile(
 		"\"workspace://SpacesStore/([\\w\\-]*)\"");
 
-    private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
+	private static final Pattern _RESOURCE_URL_PATTERN = Pattern.compile(
 		"\"(?:\\.\\.)?(?:/\\.\\.)*(/download/direct/workspace/SpacesStore/[\\w\\-/\\.]*)\"");
 
 	private static final Store _SPACES_STORE =

@@ -37,7 +37,7 @@ import org.apache.tools.ant.DirectoryScanner;
  */
 public class UpgradeJSP {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
 			_renameTagLibaries();
 		}

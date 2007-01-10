@@ -653,7 +653,7 @@ public class RenderRequestImpl implements RenderRequest {
 		_plid = null;
 	}
 
-    private void _putNamespaceParams(
+	private void _putNamespaceParams(
 		HttpServletRequest req, String prefix, String plid,
 		Map renderParameters) {
 
@@ -664,17 +664,17 @@ public class RenderRequestImpl implements RenderRequest {
 		Enumeration names = req.getParameterNames();
 
 		while (names.hasMoreElements()) {
-            String key = (String)(names.nextElement());
+			String key = (String)(names.nextElement());
 
 			if (key.startsWith(prefix)) {
-                renderParameters.put(key, req.getParameterValues(key));
-            }
-        }
+				renderParameters.put(key, req.getParameterValues(key));
+			}
+		}
 
 		RenderParametersPool.put(req, plid, _portletName, renderParameters);
-    }
+	}
 
-    private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
+	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
 	private DynamicServletRequest _req;
 	private Portlet _portlet;

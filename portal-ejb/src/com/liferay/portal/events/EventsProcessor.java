@@ -47,45 +47,46 @@ import org.apache.commons.logging.LogFactory;
  */
 public class EventsProcessor {
 
-    public static void process(String[] classes) throws ActionException {
+	public static void process(String[] classes) throws ActionException {
 		_instance._process(classes, null, null, null, null, false);
 	}
 
-    public static void process(String[] classes, String[] ids)
-    	throws ActionException {
+	public static void process(String[] classes, String[] ids)
+		throws ActionException {
 
 		_instance._process(classes, ids, null, null, null, false);
 	}
 
-    public static void process(String[] classes, HttpSession ses)
-    	throws ActionException {
+	public static void process(String[] classes, HttpSession ses)
+		throws ActionException {
 
 		_instance._process(classes, null, null, null, ses, false);
 	}
 
-    public static void process(String[] classes, HttpServletRequest req,
-    						   HttpServletResponse res)
-    	throws ActionException {
+	public static void process(
+			String[] classes, HttpServletRequest req, HttpServletResponse res)
+		throws ActionException {
 
 		_instance._process(classes, null, req, res, null, false);
 	}
 
-    public static void process(String[] classes, boolean single)
-    	throws ActionException {
+	public static void process(String[] classes, boolean single)
+		throws ActionException {
 
 		_instance._process(classes, null, null, null, null, single);
 	}
 
-    public static void process(String[] classes, HttpSession ses,
-    						   boolean single)
-    	throws ActionException {
+	public static void process(
+			String[] classes, HttpSession ses, boolean single)
+		throws ActionException {
 
 		_instance._process(classes, null, null, null, ses, single);
 	}
 
-    public static void process(String[] classes, HttpServletRequest req,
-    						   HttpServletResponse res, boolean single)
-    	throws ActionException {
+	public static void process(
+			String[] classes, HttpServletRequest req, HttpServletResponse res,
+			boolean single)
+		throws ActionException {
 
 		_instance._process(classes, null, req, res, null, single);
 	}
@@ -94,10 +95,10 @@ public class EventsProcessor {
 		_processPool = CollectionFactory.getHashSet();
 	}
 
-    private void _process(String[] classes, String[] ids,
-    					  HttpServletRequest req, HttpServletResponse res,
-    					  HttpSession ses, boolean single)
-    	throws ActionException {
+	private void _process(
+			String[] classes, String[] ids, HttpServletRequest req,
+			HttpServletResponse res, HttpSession ses, boolean single)
+		throws ActionException {
 
 		if ((classes == null) || (classes.length == 0)) {
 			return;

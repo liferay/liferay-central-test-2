@@ -350,7 +350,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 				document.selection.createRange().pasteHTML(newHTML);
 			}
 			else {
-			    var html = document.getElementById("textArea").contentWindow.document.body.ownerDocument.createRange();
+				var html = document.getElementById("textArea").contentWindow.document.body.ownerDocument.createRange();
 				html.selectNodeContents(document.getElementById("textArea").contentWindow.document.body);
 				document.getElementById("textArea").contentWindow.document.body.innerHTML = html.toString() + newHTML;
 			}

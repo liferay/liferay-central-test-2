@@ -230,7 +230,7 @@ for (int i = 0; i < childNodes.length; i++) {
 
 	ResultRow row = new ResultRow(node, node.getId(), i);
 
-    NamedValue[] nodeNamedValues = resultSetRow.getColumns();
+	NamedValue[] nodeNamedValues = resultSetRow.getColumns();
 
 	StringBuffer sb = new StringBuffer();
 

@@ -77,8 +77,8 @@ public class PropertiesTransformerListener extends TransformerListener {
 	 * Replace the properties in a given string with their values fetched from
 	 * the template GLOBAL-PROPERTIES.
 	 *
-     * @param		s the given string
-     * @return		the processed string
+	 * @param		s the given string
+	 * @return		the processed string
 	 */
 	protected String replaceProperties(String s) {
 		Map tokens = getTokens();
@@ -104,7 +104,7 @@ public class PropertiesTransformerListener extends TransformerListener {
 			newTokens.put("template_id", _GLOBAL_PROPERTIES);
 
 			String companyId = (String)tokens.get("company_id");
-	        long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
+			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 			String script = JournalUtil.getTemplateScript(
 				companyId, groupId, _GLOBAL_PROPERTIES, newTokens,

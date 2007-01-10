@@ -62,7 +62,7 @@ public class EditConfigurationAction extends PortletAction {
 				return;
 			}
 
-            long groupId = ParamUtil.getLong(req, "groupId");
+			long groupId = ParamUtil.getLong(req, "groupId");
 			String type = ParamUtil.getString(req, "type");
 			String pageURL = ParamUtil.getString(req, "pageURL");
 			int pageDelta = ParamUtil.getInteger(req, "pageDelta");

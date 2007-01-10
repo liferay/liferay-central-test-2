@@ -96,24 +96,24 @@ public class LuceneUtil {
 			QueryParser queryParser = new QueryParser(
 				field, LuceneUtil.getAnalyzer());
 
-            try {
+			try {
 				Query query = queryParser.parse(text);
 
 				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
 			}
-            catch(ParseException pe) {
-                if (_log.isDebugEnabled()) {
-                    _log.debug(
+			catch(ParseException pe) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
 						"ParseException thrown, reverting to literal search",
 						pe);
-                }
+				}
 
-                text = KeywordsUtil.escape(text);
+				text = KeywordsUtil.escape(text);
 
-                Query query = queryParser.parse(text);
+				Query query = queryParser.parse(text);
 
-                booleanQuery.add(query, BooleanClause.Occur.SHOULD);
-            }
+				booleanQuery.add(query, BooleanClause.Occur.SHOULD);
+			}
 		}
 	}
 

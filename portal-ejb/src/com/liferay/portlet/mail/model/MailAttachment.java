@@ -30,41 +30,41 @@ package com.liferay.portlet.mail.model;
  */
 public class MailAttachment {
 
-    public String getFilename() {
-        return _filename;
-    }
+	public String getFilename() {
+		return _filename;
+	}
 
-    public void setFilename(String filename) {
-        _filename = filename;
-    }
+	public void setFilename(String filename) {
+		_filename = filename;
+	}
 
-    public byte[] getContent() {
-        return _content;
-    }
+	public byte[] getContent() {
+		return _content;
+	}
 
-    public void setContent(byte[] content) {
-        _content = content;
-    }
+	public void setContent(byte[] content) {
+		_content = content;
+	}
 
-    public String getContentType() {
-        return _contentType;
-    }
+	public String getContentType() {
+		return _contentType;
+	}
 
-    public void setContentType(String contentType) {
-        _contentType = contentType;
-    }
+	public void setContentType(String contentType) {
+		_contentType = contentType;
+	}
 
-    public String getContentId() {
-        return _contentId;
-    }
+	public String getContentId() {
+		return _contentId;
+	}
 
-    public void setContentId(String contentId) {
-    	_contentId = contentId;
-    }
+	public void setContentId(String contentId) {
+		_contentId = contentId;
+	}
 
-    private String _filename;
-    private byte[] _content;
-    private String _contentType;
-    private String _contentId;
+	private String _filename;
+	private byte[] _content;
+	private String _contentType;
+	private String _contentId;
 
 }

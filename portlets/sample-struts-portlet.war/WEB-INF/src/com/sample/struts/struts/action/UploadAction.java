@@ -63,14 +63,14 @@ public class UploadAction extends Action {
 		String itemName = "";
 
 		while (iter.hasNext()) {
-		    FileItem item = (FileItem) iter.next();
+			FileItem item = (FileItem) iter.next();
 
-		    if (!item.isFormField()) {
-		    	if (_log.isInfoEnabled()) {
+			if (!item.isFormField()) {
+				if (_log.isInfoEnabled()) {
 					_log.info("Field name " + item.getFieldName());
 				}
 
-		    	itemName = item.getName();
+				itemName = item.getName();
 
 				if (_log.isInfoEnabled()) {
 					_log.info("Name " + itemName);
@@ -78,7 +78,7 @@ public class UploadAction extends Action {
 					_log.info("In memory " + item.isInMemory());
 					_log.info("Size " + item.getSize());
 				}
-		    }
+			}
 		}
 
 		req.setAttribute("file_name", itemName);

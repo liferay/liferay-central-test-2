@@ -704,7 +704,7 @@ public class StringUtil {
 		return trim(s, new char[] {c});
 	}
 
-    public static String trim(String s, char[] exceptions) {
+	public static String trim(String s, char[] exceptions) {
 		if (s == null) {
 			return null;
 		}

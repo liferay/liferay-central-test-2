@@ -137,7 +137,7 @@ public class ListUtil {
 		return list;
 	}
 
-    public static List fromEnumeration(Enumeration enu) {
+	public static List fromEnumeration(Enumeration enu) {
 		List list = new ArrayList();
 
 		while (enu.hasMoreElements()) {
@@ -149,9 +149,9 @@ public class ListUtil {
 		return list;
 	}
 
-    public static List fromFile(String fileName) throws IOException {
-        return fromFile(new File(fileName));
-    }
+	public static List fromFile(String fileName) throws IOException {
+		return fromFile(new File(fileName));
+	}
 
 	public static List fromFile(File file) throws IOException {
 		List list = new ArrayList();

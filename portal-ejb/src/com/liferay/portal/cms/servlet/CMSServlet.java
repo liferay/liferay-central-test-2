@@ -85,7 +85,7 @@ public class CMSServlet extends HttpServlet {
 			return;
 		}
 
-        long groupId = _groupId;
+		long groupId = _groupId;
 
 		if (groupId <= 0) {
 			groupId = ParamUtil.getLong(req, "groupId");

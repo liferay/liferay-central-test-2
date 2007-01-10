@@ -32,20 +32,20 @@ import com.liferay.portal.PortalException;
  */
 public class WorkflowComponentException extends PortalException {
 
-    public WorkflowComponentException() {
-        super();
-    }
+	public WorkflowComponentException() {
+		super();
+	}
 
-    public WorkflowComponentException(String msg) {
-        super(msg);
-    }
+	public WorkflowComponentException(String msg) {
+		super(msg);
+	}
 
-    public WorkflowComponentException(Throwable cause) {
-        super(cause);
-    }
+	public WorkflowComponentException(Throwable cause) {
+		super(cause);
+	}
 
 	public WorkflowComponentException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

@@ -355,7 +355,7 @@ public class CompanyLocalServiceImpl implements CompanyLocalService {
 					contextQuery, LuceneFields.TYPE, type);
 			}
 
-            BooleanQuery searchQuery = new BooleanQuery();
+			BooleanQuery searchQuery = new BooleanQuery();
 
 			LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
 			LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);

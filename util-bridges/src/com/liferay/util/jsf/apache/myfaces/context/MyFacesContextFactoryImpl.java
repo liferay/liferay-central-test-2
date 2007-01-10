@@ -52,28 +52,28 @@ public class MyFacesContextFactoryImpl extends FacesContextFactory {
 			Lifecycle lifecycle)
 		throws FacesException {
 
-        if (context == null) {
-            throw new NullPointerException("context");
-        }
+		if (context == null) {
+			throw new NullPointerException("context");
+		}
 
-        if (request == null) {
-            throw new NullPointerException("request");
-        }
+		if (request == null) {
+			throw new NullPointerException("request");
+		}
 
-        if (response == null) {
-            throw new NullPointerException("response");
-        }
+		if (response == null) {
+			throw new NullPointerException("response");
+		}
 
-        if (lifecycle == null) {
-            throw new NullPointerException("lifecycle");
-        }
+		if (lifecycle == null) {
+			throw new NullPointerException("lifecycle");
+		}
 
-        if (context instanceof ServletContext) {
-            return new ServletFacesContextImpl(
-            	(ServletContext)context,
-                (ServletRequest)request,
-                (ServletResponse)response);
-        }
+		if (context instanceof ServletContext) {
+			return new ServletFacesContextImpl(
+				(ServletContext)context,
+				(ServletRequest)request,
+				(ServletResponse)response);
+		}
 
 		if (context instanceof PortletContext) {
 			return new MyFacesContextImpl(
@@ -81,8 +81,8 @@ public class MyFacesContextFactoryImpl extends FacesContextFactory {
 				(PortletResponse)response);
 		}
 
-        throw new FacesException("Unsupported context type " +
-        	context.getClass().getName());
+		throw new FacesException(
+			"Unsupported context type " + getClass().getName());
 	}
 
 }

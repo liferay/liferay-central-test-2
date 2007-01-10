@@ -82,7 +82,7 @@ public class ViewArticleContentAction extends Action {
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
 			String companyId = themeDisplay.getCompanyId();
-            long groupId = ParamUtil.getLong(req, "groupId");
+			long groupId = ParamUtil.getLong(req, "groupId");
 			String articleId = ParamUtil.getString(req, "articleId");
 			double version = ParamUtil.getDouble(
 				req, "version", JournalArticleImpl.DEFAULT_VERSION);

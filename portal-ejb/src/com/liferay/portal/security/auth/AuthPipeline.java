@@ -35,20 +35,20 @@ import java.util.Map;
  */
 public class AuthPipeline {
 
-    public static int authenticateByEmailAddress(
+	public static int authenticateByEmailAddress(
 			String[] classes, String companyId, String emailAddress,
 			String password, Map headerMap, Map parameterMap)
-    	throws AuthException {
+		throws AuthException {
 
 		return _authenticate(
 			classes, companyId, emailAddress, password, true, headerMap,
 			parameterMap);
 	}
 
-    public static int authenticateByUserId(
+	public static int authenticateByUserId(
 			String[] classes, String companyId, String userId, String password,
 			Map headerMap, Map parameterMap)
-    	throws AuthException {
+		throws AuthException {
 
 		return _authenticate(
 			classes, companyId, userId, password, false, headerMap,
@@ -89,10 +89,10 @@ public class AuthPipeline {
 		onFailureByUserId(classes, companyId, userId, headerMap, parameterMap);
 	}
 
-    private static int _authenticate(
+	private static int _authenticate(
 			String[] classes, String companyId, String login, String password,
 			boolean byEmailAddress, Map headerMap, Map parameterMap)
-    	throws AuthException {
+		throws AuthException {
 
 		if ((classes == null) || (classes.length == 0)) {
 			return 1;

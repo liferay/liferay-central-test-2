@@ -44,64 +44,64 @@ public class MailContent {
 		setHtmlBody(body);
 	}
 
-    public String getPlainBody() {
-    	return GetterUtil.getString(_plainBody);
-    }
+	public String getPlainBody() {
+		return GetterUtil.getString(_plainBody);
+	}
 
-    public void setPlainBody(String plainBody) {
-    	_plainBody = plainBody;
-    }
+	public void setPlainBody(String plainBody) {
+		_plainBody = plainBody;
+	}
 
-    public void appendPlainBody(String plainBody) {
-    	if (Validator.isNull(_plainBody)) {
-    		_plainBody = plainBody;
-    	}
-    	else {
-    		_plainBody += StringPool.NEW_LINE + StringPool.NEW_LINE + plainBody;
-    	}
-    }
+	public void appendPlainBody(String plainBody) {
+		if (Validator.isNull(_plainBody)) {
+			_plainBody = plainBody;
+		}
+		else {
+			_plainBody += StringPool.NEW_LINE + StringPool.NEW_LINE + plainBody;
+		}
+	}
 
-    public String getHtmlBody() {
-    	if (Validator.isNotNull(_htmlBody)) {
-        	return _htmlBody;
-    	}
-    	else {
-    		return "<PRE>" + GetterUtil.getString(_plainBody) + "</PRE>";
-    	}
-    }
+	public String getHtmlBody() {
+		if (Validator.isNotNull(_htmlBody)) {
+			return _htmlBody;
+		}
+		else {
+			return "<PRE>" + GetterUtil.getString(_plainBody) + "</PRE>";
+		}
+	}
 
-    public void setHtmlBody(String htmlBody) {
-    	_htmlBody = htmlBody;
-    }
+	public void setHtmlBody(String htmlBody) {
+		_htmlBody = htmlBody;
+	}
 
-    public void appendHtmlBody(String htmlBody) {
-    	if (Validator.isNull(_htmlBody)) {
-    		_htmlBody = htmlBody;
-    	}
-    	else {
-    		_htmlBody += "<HR/>" + htmlBody;
-    	}
-    }
+	public void appendHtmlBody(String htmlBody) {
+		if (Validator.isNull(_htmlBody)) {
+			_htmlBody = htmlBody;
+		}
+		else {
+			_htmlBody += "<HR/>" + htmlBody;
+		}
+	}
 
-    public List getSubContent() {
-    	return _subContent;
-    }
+	public List getSubContent() {
+		return _subContent;
+	}
 
-    public void appendSubContent(MailContent mc) {
-    	_subContent.add(mc);
-    }
+	public void appendSubContent(MailContent mc) {
+		_subContent.add(mc);
+	}
 
-    public String toString() {
-    	StringBuffer sb = new StringBuffer();
+	public String toString() {
+		StringBuffer sb = new StringBuffer();
 
-    	sb.append(getHtmlBody());
+		sb.append(getHtmlBody());
 
-    	for (int i = 0; i < _subContent.size(); i++) {
-    		sb.append("<HR/>" + _subContent.get(i).toString());
-    	}
+		for (int i = 0; i < _subContent.size(); i++) {
+			sb.append("<HR/>" + _subContent.get(i).toString());
+		}
 
-    	return sb.toString();
-    }
+		return sb.toString();
+	}
 
 	private String _plainBody;
 	private String _htmlBody;

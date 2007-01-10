@@ -76,7 +76,7 @@ public class EditConfigurationAction extends PortletAction {
 
 			String companyId = themeDisplay.getCompanyId();
 
-            long groupId = ParamUtil.getLong(req, "groupId");
+			long groupId = ParamUtil.getLong(req, "groupId");
 
 			String languageId = LanguageUtil.getLanguageId(req);
 

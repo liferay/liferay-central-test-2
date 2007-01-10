@@ -77,8 +77,8 @@ public class TokensTransformerListener extends TransformerListener {
 	/**
 	 * Replace the standard tokens in a given string with their values.
 	 *
-     * @param		s the given string
-     * @return		the processed string
+	 * @param		s the given string
+	 * @return		the processed string
 	 */
 	protected String replaceTokens(String s) {
 		Map tokens = getTokens();

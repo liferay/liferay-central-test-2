@@ -80,7 +80,7 @@ public class StripFilter implements Filter {
 
 		String completeURL = Http.getCompleteURL(httpReq);
 
-    	if (USE_STRIP_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
+		if (USE_STRIP_FILTER && isStrip(httpReq) && !isInclude(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
 			if (_log.isDebugEnabled()) {

@@ -210,7 +210,7 @@ public class Hangman extends Applet implements KeyListener {
 				String token = st.nextToken().trim();
 				for (int i = 0; i < token.length(); i++) {
 					char c = token.charAt(i);
-				    if ((c < 'a' || c > 'z') && c != ' ') {
+					if ((c < 'a' || c > 'z') && c != ' ') {
 						skip = true;
 						break;
 					}

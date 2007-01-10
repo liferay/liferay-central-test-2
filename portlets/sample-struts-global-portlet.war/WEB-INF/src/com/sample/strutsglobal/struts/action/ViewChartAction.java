@@ -122,7 +122,7 @@ public class ViewChartAction extends Action {
 			res.setContentType("image/jpeg");
 
 			OutputStream out = res.getOutputStream();
-        	ChartUtilities.writeChartAsJPEG(out, chart, 400, 400);
+			ChartUtilities.writeChartAsJPEG(out, chart, 400, 400);
 
 			return mapping.findForward("/common/null.jsp");
 		}

@@ -74,10 +74,10 @@ public abstract class AddBook
 
 	}
 
-    public IPage doCancel(IRequestCycle cycle) {
-    	View view = getView();
+	public IPage doCancel(IRequestCycle cycle) {
+		View view = getView();
 
-        return view;
-     }
+		return view;
+	}
 
 }

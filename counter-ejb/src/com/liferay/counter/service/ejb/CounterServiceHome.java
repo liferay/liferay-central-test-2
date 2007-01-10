@@ -35,6 +35,6 @@ import javax.ejb.EJBHome;
  */
 public interface CounterServiceHome extends EJBHome {
 
-    public CounterServiceEJB create() throws CreateException, RemoteException;
+	public CounterServiceEJB create() throws CreateException, RemoteException;
 
 }

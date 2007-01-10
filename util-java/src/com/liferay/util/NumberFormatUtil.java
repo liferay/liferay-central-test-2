@@ -32,8 +32,8 @@ import java.text.NumberFormat;
  */
 public final class NumberFormatUtil {
 
-    public static String format(NumberFormat nf,
-    							double number, double defaultValue) {
+	public static String format(
+		NumberFormat nf, double number, double defaultValue) {
 
 		if ((Double.isNaN(number)) || (Double.isInfinite(number))) {
 			return nf.format(defaultValue);
@@ -41,10 +41,10 @@ public final class NumberFormatUtil {
 		else {
 			return nf.format(number);
 		}
-    }
+	}
 
-    public static String format(NumberFormat nf,
-    							float number, float defaultValue) {
+	public static String format(
+		NumberFormat nf, float number, float defaultValue) {
 
 		if ((Float.isNaN(number)) || (Float.isInfinite(number))) {
 			return nf.format(defaultValue);
@@ -52,6 +52,6 @@ public final class NumberFormatUtil {
 		else {
 			return nf.format(number);
 		}
-    }
+	}
 
 }

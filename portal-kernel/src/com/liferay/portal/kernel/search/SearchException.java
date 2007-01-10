@@ -32,20 +32,20 @@ import com.liferay.portal.PortalException;
  */
 public class SearchException extends PortalException {
 
-    public SearchException() {
-        super();
-    }
+	public SearchException() {
+		super();
+	}
 
-    public SearchException(String msg) {
-        super(msg);
-    }
+	public SearchException(String msg) {
+		super(msg);
+	}
 
-    public SearchException(Throwable cause) {
-        super(cause);
-    }
+	public SearchException(Throwable cause) {
+		super(cause);
+	}
 
 	public SearchException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

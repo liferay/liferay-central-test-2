@@ -35,7 +35,7 @@ import org.apache.commons.fileupload.disk.DiskFileItemFactory;
  */
 public class LiferayFileItemFactory extends DiskFileItemFactory {
 
-    public static final int DEFAULT_SIZE = 0;
+	public static final int DEFAULT_SIZE = 0;
 
 	public LiferayFileItemFactory(File tempDir) {
 		_tempDir = tempDir;

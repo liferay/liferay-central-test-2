@@ -57,7 +57,7 @@ import org.jdom.input.*;
  */
 public class Test {
 
-    public static void main(String[] args) {
+	public static void main(String[] args) {
 		try {
 			Convention convention = Convention.getInstance();
 

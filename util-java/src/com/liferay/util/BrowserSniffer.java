@@ -37,8 +37,8 @@ public class BrowserSniffer {
 	public static boolean acceptsGzip(HttpServletRequest req) {
 		String acceptEncoding = req.getHeader(HttpHeaders.ACCEPT_ENCODING);
 
-    	if ((acceptEncoding != null) &&
-    		(acceptEncoding.indexOf(_GZIP) != -1)) {
+		if ((acceptEncoding != null) &&
+			(acceptEncoding.indexOf(_GZIP) != -1)) {
 
 			return true;
 		}

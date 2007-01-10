@@ -435,7 +435,7 @@ public class PortalUtil {
 		return href;
 	}
 
-    public static String getLayoutActualURL(
+	public static String getLayoutActualURL(
 			String ownerId, String mainPath, String friendlyURL)
 		throws PortalException, SystemException {
 

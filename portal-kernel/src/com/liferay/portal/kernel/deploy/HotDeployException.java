@@ -33,20 +33,20 @@ import com.liferay.portal.PortalException;
  */
 public class HotDeployException extends PortalException {
 
-    public HotDeployException() {
-        super();
-    }
+	public HotDeployException() {
+		super();
+	}
 
-    public HotDeployException(String msg) {
-        super(msg);
-    }
+	public HotDeployException(String msg) {
+		super(msg);
+	}
 
-    public HotDeployException(Throwable cause) {
-        super(cause);
-    }
+	public HotDeployException(Throwable cause) {
+		super(cause);
+	}
 
 	public HotDeployException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+		super(msg, cause);
+	}
 
 }

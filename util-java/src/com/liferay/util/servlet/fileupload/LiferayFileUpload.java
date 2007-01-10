@@ -58,7 +58,7 @@ public class LiferayFileUpload extends ServletFileUpload {
 		_ses = req.getSession();
 	}
 
-    public List parseRequest(HttpServletRequest req)
+	public List parseRequest(HttpServletRequest req)
 		throws FileUploadException {
 
 		_ses.removeAttribute(LiferayFileUpload.FILE_NAME);

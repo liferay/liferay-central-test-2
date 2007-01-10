@@ -30,20 +30,20 @@ package com.liferay.portal.kernel.exception;
  */
 public class NestableException extends Exception {
 
-    public NestableException() {
-        super();
-    }
+	public NestableException() {
+		super();
+	}
 
-    public NestableException(String msg) {
-        super(msg);
-    }
+	public NestableException(String msg) {
+		super(msg);
+	}
 
-    public NestableException(Throwable cause) {
+	public NestableException(Throwable cause) {
 		super(cause);
-    }
+	}
 
-    public NestableException(String msg, Throwable cause) {
-        super(msg, cause);
-    }
+	public NestableException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
 
 }

@@ -79,8 +79,8 @@ public class ContentTransformerListener extends TransformerListener {
 	 * Fill one article with content from another approved article. See the
 	 * article DOCUMENTATION-INSTALLATION-BORLAND for a sample use case.
 	 *
-     * @param		s the given string
-     * @return		the processed string
+	 * @param		s the given string
+	 * @return		the processed string
 	 */
 	protected String replaceContent(String xml) {
 		try {
@@ -105,7 +105,7 @@ public class ContentTransformerListener extends TransformerListener {
 		Map tokens = getTokens();
 
 		String companyId = (String)tokens.get("company_id");
-        long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
+		long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
 
 		Iterator itr = root.elements().iterator();
 
