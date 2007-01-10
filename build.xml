@@ -59,7 +59,7 @@
 		<ant dir="portlets" target="clean" inheritAll="false" />
 
 		<delete>
-			<fileset dir="." includes="*.ear,*.war,*.zip" />
+			<fileset dir="." includes="*.ear,*.jar,*.war,*.zip" />
 		</delete>
 
 		<delete includeemptydirs="true" failonerror="false">
