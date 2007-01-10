@@ -48,15 +48,15 @@ public class SendEmailActionHandler
 
 		TaskMgmtDefinition taskMgmtDefinition =
 			definition.getTaskMgmtDefinition();
-	    TaskMgmtInstance taskMgmtInstance =
+		TaskMgmtInstance taskMgmtInstance =
 			executionContext.getTaskMgmtInstance();
 
-	    Swimlane buyerSwimlane = taskMgmtDefinition.getSwimlane("buyer");
-	    SwimlaneInstance buyerSwimlaneInstance =
+		Swimlane buyerSwimlane = taskMgmtDefinition.getSwimlane("buyer");
+		SwimlaneInstance buyerSwimlaneInstance =
 			taskMgmtInstance.getInitializedSwimlaneInstance(
 				executionContext, buyerSwimlane);
 
-	    String userId = buyerSwimlaneInstance.getActorId();
+		String userId = buyerSwimlaneInstance.getActorId();
 
 		UserSoap user = getUserService().getUserById(userId);
 

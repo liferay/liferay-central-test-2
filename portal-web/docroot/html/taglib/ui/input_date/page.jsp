@@ -32,21 +32,21 @@ if (GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:di
 }
 
 String formName = namespace + request.getAttribute("liferay-ui:input-date:formName");
-String monthParam = namespace + request.getAttribute("liferay-ui:input-date:monthParam");
+String monthParam = JS.getSafeName(namespace + request.getAttribute("liferay-ui:input-date:monthParam"));
 int monthValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:monthValue"));
 boolean monthNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:monthNullable"));
-String dayParam = namespace + request.getAttribute("liferay-ui:input-date:dayParam");
+String dayParam = JS.getSafeName(namespace + request.getAttribute("liferay-ui:input-date:dayParam"));
 int dayValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:dayValue"));
 boolean dayNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:dayNullable"));
-String yearParam = namespace + request.getAttribute("liferay-ui:input-date:yearParam");
+String yearParam = JS.getSafeName(namespace + request.getAttribute("liferay-ui:input-date:yearParam"));
 int yearValue = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearValue"));
 boolean yearNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:yearNullable"));
 int yearRangeStart = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearRangeStart"));
 int yearRangeEnd = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:yearRangeEnd"));
-String monthAndYearParam = namespace + request.getAttribute("liferay-ui:input-date:monthAndYearParam");
+String monthAndYearParam = JS.getSafeName(namespace + request.getAttribute("liferay-ui:input-date:monthAndYearParam"));
 boolean monthAndYearNullable = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:monthAndYearNullable"));
 int firstDayOfWeek = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:input-date:firstDayOfWeek"));
-String imageInputId = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId"));
+String imageInputId = JS.getSafeName(GetterUtil.getString((String)request.getAttribute("liferay-ui:input-date:imageInputId")));
 boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:input-date:disabled"));
 
 if (Validator.isNull(imageInputId)) {

@@ -42,7 +42,7 @@ public class RemindActorActionHandler
 	extends DefaultHandler implements ActionHandler {
 
 	public void execute(ExecutionContext executionContext) throws Exception {
-	    TaskMgmtInstance taskMgmtInstance =
+		TaskMgmtInstance taskMgmtInstance =
 			executionContext.getTaskMgmtInstance();
 
 		SwimlaneInstance swimlaneInstance =

@@ -72,6 +72,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Http;
 import com.liferay.util.InstancePool;
+import com.liferay.util.JS;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringComparator;
 import com.liferay.util.StringUtil;
@@ -530,17 +531,7 @@ public class PortalUtil {
 	}
 
 	public static String getJsSafePortletName(String portletName) {
-		String jsSafePortletName =
-			StringUtil.replace(
-				portletName,
-				new String[] {
-					StringPool.SPACE, StringPool.DASH
-				},
-				new String[] {
-					StringPool.BLANK, StringPool.BLANK
-				});
-
-		return jsSafePortletName;
+		return JS.getSafeName(portletName);
 	}
 
 	public static Locale getLocale(HttpServletRequest req) {

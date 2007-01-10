@@ -70,6 +70,16 @@ public class WorkflowXMLUtil {
 		return GetterUtil.getDate(date, sdf);
 	}
 
+	public static Date parseDateTime(String date) throws ParseException {
+		if (Validator.isNull(date)) {
+			return null;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
+
+		return GetterUtil.getDate(date, sdf);
+	}
+
 	public static WorkflowDefinition parseDefinition(String xml)
 		throws DocumentException, ParseException {
 
@@ -154,8 +164,8 @@ public class WorkflowXMLUtil {
 		throws ParseException {
 
 		long instanceId = GetterUtil.getLong(el.elementText("instanceId"));
-		Date startDate = parseDate(el.elementText("startDate"));
-		Date endDate = parseDate(el.elementText("endDate"));
+		Date startDate = parseDateTime(el.elementText("startDate"));
+		Date endDate = parseDateTime(el.elementText("endDate"));
 		boolean ended = GetterUtil.getBoolean(el.elementText("ended"));
 
 		List definitions = parseDefinitions(el);
@@ -261,7 +271,7 @@ public class WorkflowXMLUtil {
 
 			throw de;
 		}
-    }
+	}
 
 	public static List parseTaskFormElements(Element root) {
 		List taskFormElements = new ArrayList();
@@ -327,9 +337,9 @@ public class WorkflowXMLUtil {
 
 			String name = el.elementText("name");
 			String assignedUserId = el.elementText("assignedUserId");
-			Date createDate = parseDate(el.elementText("createDate"));
-			Date startDate = parseDate(el.elementText("startDate"));
-			Date endDate = parseDate(el.elementText("endDate"));
+			Date createDate = parseDateTime(el.elementText("createDate"));
+			Date startDate = parseDateTime(el.elementText("startDate"));
+			Date endDate = parseDateTime(el.elementText("endDate"));
 
 			List instances = parseInstances(el);
 

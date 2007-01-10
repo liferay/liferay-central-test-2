@@ -28,6 +28,7 @@ import com.liferay.client.portal.model.UserSoap;
 import com.liferay.util.Validator;
 
 import org.jbpm.graph.exe.ExecutionContext;
+import org.jbpm.taskmgmt.def.AssignmentHandler;
 import org.jbpm.taskmgmt.exe.Assignable;
 
 /**
@@ -36,7 +37,8 @@ import org.jbpm.taskmgmt.exe.Assignable;
  * @author  Charles May
  *
  */
-public class IdentityAssignmentHandler extends DefaultHandler {
+public class IdentityAssignmentHandler
+	extends DefaultHandler implements AssignmentHandler {
 
 	public void assign(
 		Assignable assignable, ExecutionContext executionContext) {
@@ -47,7 +49,7 @@ public class IdentityAssignmentHandler extends DefaultHandler {
 					assignable.setActorId(id);
 				}
 				else {
-			        UserSoap user =
+					UserSoap user =
 						getUserService().getUserByEmailAddress(companyId, name);
 
 					assignable.setActorId(user.getUserId());
@@ -55,7 +57,7 @@ public class IdentityAssignmentHandler extends DefaultHandler {
 			}
 			else if (type.equals("group")) {
 				if (Validator.isNull(id)) {
-			        GroupSoap group =
+					GroupSoap group =
 						getGroupService().getGroup(companyId, name);
 
 					id = group.getGroupId();

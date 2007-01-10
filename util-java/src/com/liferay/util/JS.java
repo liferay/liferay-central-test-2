@@ -37,6 +37,20 @@ public class JS {
 
 	public static final String ENCODING = "UTF-8";
 
+	public static String getSafeName(String name) {
+		String safeName =
+			StringUtil.replace(
+				name,
+				new String[] {
+					StringPool.SPACE, StringPool.DASH
+				},
+				new String[] {
+					StringPool.BLANK, StringPool.BLANK
+				});
+
+		return safeName;
+	}
+
 	/**
 	 * @deprecated Use <code>encodeURIComponent</code>.
 	 */

@@ -63,7 +63,8 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 			String type = taskFormElement.getType();
 			String displayName = taskFormElement.getDisplayName();
 
-			if (type.equals(WorkflowTaskFormElement.TYPE_DATE)) {
+			if (type.equals(WorkflowTaskFormElement.TYPE_DATE) && taskFormElement.isWritable()) {
+				displayName = JS.getSafeName(displayName);
 		%>
 
 				document.<portlet:namespace />fm.<portlet:namespace /><%= displayName %>.value = <portlet:namespace />getDate("<%= displayName %>");
@@ -156,6 +157,8 @@ for (int i = 0; i < taskFormElements.size(); i++) {
 						<c:when test="<%= type.equals(WorkflowTaskFormElement.TYPE_DATE) %>">
 
 							<%
+							displayName = JS.getSafeName(displayName);
+
 							Calendar cal = null;
 
 							if (Validator.isNotNull(value)) {

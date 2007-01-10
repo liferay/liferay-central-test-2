@@ -30,7 +30,10 @@ import com.liferay.portal.kernel.jbi.WorkflowComponentException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
+import com.liferay.util.JS;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.DocUtil;
 
@@ -260,7 +263,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 
 		return result;
-    }
+	}
 
 	public String deploy(String xml) throws WorkflowComponentException {
 		ProcessDefinition definition = ProcessDefinition.parseXmlString(xml);
@@ -276,7 +279,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		sb.append("</result>");
 
 		return sb.toString();
-    }
+	}
 
 	public List getCurrentTasks(long instanceId, long tokenId)
 		throws WorkflowComponentException {
@@ -371,7 +374,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 
 		return definitions;
-    }
+	}
 
 	public String getDefinitionsXml(
 			long definitionId, String name, int begin, int end)
@@ -391,7 +394,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 
 		return doc.asXML();
-    }
+	}
 
 	public int getDefinitionsCount(long definitionId, String name)
 		throws WorkflowComponentException {
@@ -406,7 +409,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 
 		return count;
-    }
+	}
 
 	public String getDefinitionsCountXml(long definitionId, String name)
 		throws WorkflowComponentException {
@@ -414,7 +417,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		int count = getDefinitionsCount(definitionId, name);
 
 		return getCountXml(count);
-    }
+	}
 
 	public String getDefinitionXml(long definitionId)
 		throws WorkflowComponentException {
@@ -429,7 +432,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		createElement(definition, root);
 
 		return doc.asXML();
-    }
+	}
 
 	public List getInstances(
 			long definitionId, long instanceId, String definitionName,
@@ -498,7 +501,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			andOperator);
 
 		return getCountXml(count);
-    }
+	}
 
 	public String getInstancesXml(
 			long definitionId, long instanceId, String definitionName,
@@ -512,7 +515,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			startDateGT, startDateLT, endDateGT, endDateLT, hideEndedTasks,
 			andOperator, begin, end);
 
-		    Document doc = DocumentHelper.createDocument();
+			Document doc = DocumentHelper.createDocument();
 
 		Element root = doc.addElement("result");
 
@@ -643,7 +646,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			WorkflowUtil.initTasks(tasks);
 		}
 
-	    return tasks;
+		return tasks;
 	}
 
 	public int getUserTasksCount(
@@ -767,7 +770,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		createElement(instance, root, false);
 
 		return doc.asXML();
-    }
+	}
 
 	public Map updateTask(long taskId, String transition, Map parameterMap)
 		throws WorkflowComponentException {
@@ -792,7 +795,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		Map variables = new HashMap();
 		Map errors = new HashMap();
 
-	    Iterator itr = taskFormElements.iterator();
+		Iterator itr = taskFormElements.iterator();
 
 		while (itr.hasNext()) {
 			TaskFormElement taskFormElement = (TaskFormElement)itr.next();
@@ -801,6 +804,12 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 
 			if (taskFormElement.isWritable()) {
 				String value = getParamValue(parameterMap, name);
+
+				if (taskFormElement.getType().equals(
+						TaskFormElement.TYPE_DATE)) {
+
+					value = getParamValue(parameterMap, JS.getSafeName(name));
+				}
 
 				variables.put(taskFormElement.getVariableName(), value);
 
@@ -812,16 +821,16 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 		}
 
-	    task.addVariables(variables);
+		task.addVariables(variables);
 
-	    if (errors.size() == 0) {
+		if (errors.size() == 0) {
 			try {
 				task.end(transition);
 			}
 			catch (Exception e) {
 				_log.error("Task has already ended");
 			}
-	    }
+		}
 
 		ProcessInstance instance = task.getToken().getProcessInstance();
 
@@ -874,21 +883,21 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		Element el = root.addElement("instance");
 
 		DocUtil.add(el, "instanceId", instance.getId());
-		DocUtil.add(el, "startDate", formatDate(instance.getStart()));
-		DocUtil.add(el, "endDate", formatDate(instance.getEnd()));
+		DocUtil.add(el, "startDate", formatDateTime(instance.getStart()));
+		DocUtil.add(el, "endDate", formatDateTime(instance.getEnd()));
 
-        if (instance.hasEnded()) {
+		if (instance.hasEnded()) {
 			DocUtil.add(el, "ended", "true");
-        }
-        else {
+		}
+		else {
 			DocUtil.add(el, "ended", "false");
-        }
+		}
 
-        createElement(instance.getProcessDefinition(), el);
+		createElement(instance.getProcessDefinition(), el);
 
-        if (includeToken) {
+		if (includeToken) {
 			createElement(instance.getRootToken(), el, true);
-        }
+		}
 	}
 
 	protected void createElement(TaskInstance task, Element root)
@@ -899,11 +908,11 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		DocUtil.add(el, "taskId", task.getId());
 		DocUtil.add(el, "name", task.getName());
 		DocUtil.add(el, "assignedUserId", task.getActorId());
-		DocUtil.add(el, "createDate", formatDate(task.getCreate()));
-		DocUtil.add(el, "startDate", formatDate(task.getStart()));
-		DocUtil.add(el, "endDate", formatDate(task.getEnd()));
+		DocUtil.add(el, "createDate", formatDateTime(task.getCreate()));
+		DocUtil.add(el, "startDate", formatDateTime(task.getStart()));
+		DocUtil.add(el, "endDate", formatDateTime(task.getEnd()));
 
-        createElement(task.getToken().getProcessInstance(), el, false);
+		createElement(task.getToken().getProcessInstance(), el, false);
 	}
 
 	protected void createElement(
@@ -939,31 +948,31 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		DocUtil.add(tokenEl, "tokenId", token.getId());
 		DocUtil.add(tokenEl, "name", token.getNode().getName());
 
-        if (token.getNode().toString().startsWith("Join")) {
+		if (token.getNode().toString().startsWith("Join")) {
 			DocUtil.add(tokenEl, "type", "join");
-        }
+		}
 		else {
 			DocUtil.add(tokenEl, "type", "default");
-        }
+		}
 
-        List tasks = getCurrentTasks(
+		List tasks = getCurrentTasks(
 			token.getProcessInstance().getId(), token.getId());
 
 		if (tasks == null) {
-        	Element task = tokenEl.addElement("task");
+			Element task = tokenEl.addElement("task");
 
 			task.addElement("taskId").addText("null");
-        }
-        else {
-	        for (int i = 0; i < tasks.size(); i++) {
-	        	TaskInstance task = (TaskInstance)tasks.get(i);
+		}
+		else {
+			for (int i = 0; i < tasks.size(); i++) {
+				TaskInstance task = (TaskInstance)tasks.get(i);
 
 				createElement(task, tokenEl);
-	        }
-        }
+			}
+		}
 
-        if (checkChildren) {
-	        Map activeChildren = getActiveChildren(
+		if (checkChildren) {
+			Map activeChildren = getActiveChildren(
 				token.getProcessInstance().getId());
 
 			if (hasActiveChildren(activeChildren)) {
@@ -975,7 +984,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 					createElement(child, tokenEl, false);
 				}
 			}
-        }
+		}
 	}
 
 	protected String formatDate(Date date) {
@@ -994,6 +1003,26 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		}
 
 		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
+
+		return sdf.parse(date);
+	}
+
+	protected String formatDateTime(Date date) {
+		if (date == null) {
+			return StringPool.BLANK;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
+
+		return sdf.format(date);
+	}
+
+	protected Date formatDateTime(String date) throws ParseException {
+		if (date == null) {
+			return null;
+		}
+
+		SimpleDateFormat sdf = new SimpleDateFormat("MM/dd/yyyy hh:mm:ss aaa");
 
 		return sdf.parse(date);
 	}
@@ -1019,7 +1048,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 		sb.append("</result>");
 
 		return sb.toString();
-    }
+	}
 
 	protected String getParamValue(Map parameterMap, String name) {
 		String value = StringPool.BLANK;
@@ -1062,12 +1091,23 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 			}
 		}
 		else if (type.equals(TaskFormElement.TYPE_DATE)) {
+			value = getParamValue(parameterMap, JS.getSafeName(name));
+
 			if (taskFormElement.isRequired()) {
 				try {
 					formatDate(value);
+
+					String[] dateValues = StringUtil.split(value, "/");
+
+					int month = GetterUtil.getInteger(dateValues[0]) - 1;
+					int day = GetterUtil.getInteger(dateValues[1]);
+					int year = GetterUtil.getInteger(dateValues[2]);
+
+					if (!Validator.isDate(month, day, year)) {
+						error = "invalid-date";
+					}
 				}
-				catch (ParseException pe) {
-					pe.printStackTrace();
+				catch (Exception e) {
 					error = "invalid-date";
 				}
 			}
