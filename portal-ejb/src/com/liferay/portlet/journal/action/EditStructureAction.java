@@ -162,10 +162,10 @@ public class EditStructureAction extends PortletAction {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
+		long groupId = ParamUtil.getLong(req, "groupId");
+
 		String structureId = ParamUtil.getString(req, "structureId");
 		boolean autoStructureId = ParamUtil.getBoolean(req, "autoStructureId");
-
-		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String name = ParamUtil.getString(req, "name");
 		String description = ParamUtil.getString(req, "description");

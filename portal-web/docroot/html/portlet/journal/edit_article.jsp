@@ -504,46 +504,6 @@ if (GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMEN
 <liferay-ui:error exception="<%= DuplicateArticleIdException.class %>" message="please-enter-a-unique-id" />
 
 <table border="0" cellpadding="0" cellspacing="0">
-
-<c:if test='<%= (article == null) && (redirect.indexOf("p_p_id=" + PortletKeys.JOURNAL_CONTENT) != -1) %>'>
-	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "community") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td>
-
-			<%
-			List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-
-			if (layout.getGroup().isUser()) {
-				communities.add(user.getGroup());
-			}
-			%>
-
-			<select onChange="document.<portlet:namespace />fm.<portlet:namespace />groupId.value = this.value; submitForm(document.<portlet:namespace />fm);">
-
-				<%
-				for (int i = 0; i < communities.size(); i++) {
-					Group group = (Group)communities.get(i);
-				%>
-
-					<option <%= groupId == group.getGroupId() ? "selected" : "" %> value="<%= group.getGroupId() %>"><%= group.isUser() ? user.getFullName() : group.getName() %></option>
-
-				<%
-				}
-				%>
-
-			</select>
-		</td>
-	</tr>
-	<tr>
-		<td colspan="3">
-			<br>
-		</td>
-	</tr>
-</c:if>
-
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "id") %>

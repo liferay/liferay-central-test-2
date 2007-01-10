@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.action;
 
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -279,16 +278,7 @@ public class EditArticleAction extends PortletAction {
 
 		String companyId = PortalUtil.getCompanyId(req);
 
-		String plid = layout.getPlid();
-
 		long groupId = ParamUtil.getLong(req, "groupId");
-
-		if (groupId > 0) {
-			plid = LayoutImpl.PUBLIC + groupId + ".1";
-		}
-		else {
-			groupId = PortalUtil.getPortletGroupId(req);
-		}
 
 		String articleId = ParamUtil.getString(req, "articleId");
 		boolean autoArticleId = ParamUtil.getBoolean(req, "autoArticleId");
@@ -362,14 +352,15 @@ public class EditArticleAction extends PortletAction {
 			// Add article
 
 			article = JournalArticleServiceUtil.addArticle(
-				articleId, autoArticleId, plid, title, description, content,
-				type, structureId, templateId, displayDateMonth, displayDateDay,
-				displayDateYear, displayDateHour, displayDateMinute,
-				expirationDateMonth, expirationDateDay, expirationDateYear,
-				expirationDateHour, expirationDateMinute, neverExpire,
-				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-				reviewDateMinute, neverReview, images, articleURL,
-				req.getPreferences(), communityPermissions, guestPermissions);
+				articleId, autoArticleId, layout.getPlid(), title, description,
+				content, type, structureId, templateId, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
+				neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+				reviewDateHour, reviewDateMinute, neverReview, images,
+				articleURL, req.getPreferences(), communityPermissions,
+				guestPermissions);
 		}
 		else {
 
