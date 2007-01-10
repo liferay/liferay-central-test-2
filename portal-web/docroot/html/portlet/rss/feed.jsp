@@ -27,13 +27,14 @@ try {
 	ObjectValuePair ovp = RSSUtil.getFeed(url);
 
 	feed = (SyndFeed)ovp.getValue();
+
+	if (Validator.isNull(title)) {
+		title = feed.getTitle();
+	}
 }
 catch (Exception e) {
 }
 
-if (Validator.isNull(title)) {
-	title = feed.getTitle();
-}
 %>
 
 
