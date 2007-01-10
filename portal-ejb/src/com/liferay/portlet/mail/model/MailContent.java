@@ -75,9 +75,9 @@ public class MailContent {
 				body = StringUtil.replace(body, "\t", "    ");
 				body = StringUtil.replace(body, "  ", " &nbsp;");
 				body = StringUtil.replace(body, "\n", "<BR />");
-				body = 
-					"<div style=\"font-family: courier, monospace; font-size: 12\">" + 
-						body + "</div>";
+				body =
+					"<div style=\"font-family: courier, monospace; " +
+						"font-size: 12\">" + body + "</div>";
 			}
 
 			return body;
