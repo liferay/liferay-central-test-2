@@ -24,6 +24,8 @@ package com.liferay.portlet.mail.model;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Html;
+import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
@@ -66,7 +68,19 @@ public class MailContent {
 			return _htmlBody;
 		}
 		else {
-			return "<PRE>" + GetterUtil.getString(_plainBody) + "</PRE>";
+			String body = GetterUtil.getString(_plainBody);
+
+			if (Validator.isNotNull(body)) {
+				body = Html.escape(body, false);
+				body = StringUtil.replace(body, "\t", "    ");
+				body = StringUtil.replace(body, "  ", " &nbsp;");
+				body = StringUtil.replace(body, "\n", "<BR />");
+				body = 
+					"<div style=\"font-family: courier, monospace; font-size: 12\">" + 
+						body + "</div>";
+			}
+
+			return body;
 		}
 	}
 
