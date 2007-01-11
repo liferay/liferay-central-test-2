@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.search;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
 
@@ -65,7 +66,8 @@ public class ArticleDisplayTerms extends DisplayTerms {
 	public ArticleDisplayTerms(RenderRequest req) {
 		super(req);
 
-		groupId = ParamUtil.getLong(req, GROUP_ID);
+		groupId = ParamUtil.getLong(
+			req, GROUP_ID, PortalUtil.getPortletGroupId(req));
 		articleId = ParamUtil.getString(req, ARTICLE_ID);
 		version = ParamUtil.getDouble(req, VERSION);
 		title = ParamUtil.getString(req, TITLE);
