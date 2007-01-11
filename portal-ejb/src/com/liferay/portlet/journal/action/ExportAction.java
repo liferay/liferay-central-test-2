@@ -146,6 +146,26 @@ public class ExportAction extends Action {
 		sb.append(", ");
 	}
 
+	protected void addColumn(StringBuffer sb, float value) {
+		sb.append(value);
+		sb.append(", ");
+	}
+
+	protected void addColumn(StringBuffer sb, int value) {
+		sb.append(value);
+		sb.append(", ");
+	}
+
+	protected void addColumn(StringBuffer sb, long value) {
+		sb.append(value);
+		sb.append(", ");
+	}
+
+	protected void addColumn(StringBuffer sb, short value) {
+		sb.append(value);
+		sb.append(", ");
+	}
+
 	protected void addColumn(StringBuffer sb, Date value) {
 		addColumn(sb, value, true);
 	}
