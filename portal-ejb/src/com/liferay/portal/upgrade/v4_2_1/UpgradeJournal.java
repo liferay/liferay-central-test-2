@@ -44,6 +44,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
+import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
@@ -202,18 +203,29 @@ public class UpgradeJournal extends UpgradeProcess {
 			if (article.isTemplateDriven()) {
 				SAXReader reader = new SAXReader();
 
-				Document doc = reader.read(
-					new StringReader(article.getContent()));
+				try {
+					Document doc = reader.read(
+						new StringReader(article.getContent()));
 
-				Element root = doc.getRootElement();
+					Element root = doc.getRootElement();
 
-				_updateImageId(article.getGroupId(), root);
+					_updateImageId(article.getGroupId(), root);
 
-				String content = JournalUtil.formatXML(doc);
+					String content = JournalUtil.formatXML(doc);
 
-				JournalArticleLocalServiceUtil.updateContent(
-					article.getCompanyId(), article.getGroupId(),
-					article.getArticleId(), article.getVersion(), content);
+					JournalArticleLocalServiceUtil.updateContent(
+						article.getCompanyId(), article.getGroupId(),
+						article.getArticleId(), article.getVersion(), content);
+				}
+				catch (DocumentException de) {
+					_log.error(
+						de.getMessage() + "\n" +
+						"Unable to read article " +
+							article.getPrimaryKey() + " with content\n" +
+						article.getContent());
+
+					throw de;
+				}
 			}
 		}
 	}
