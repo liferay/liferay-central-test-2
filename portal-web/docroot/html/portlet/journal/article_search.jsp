@@ -117,6 +117,8 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 					<option <%= displayTerms.getStatus().equals("expired") ? "selected" : "" %> value="expired"><%= LanguageUtil.get(pageContext, "expired") %></option>
 					<option <%= displayTerms.getStatus().equals("review") ? "selected" : "" %> value="review"><%= LanguageUtil.get(pageContext, "review") %></option>
 				</select>
+
+				<input name="<portlet:namespace /><%= ArticleDisplayTerms.GROUP_ID %>" type="hidden" value="<%= portletGroupId %>">
 			</c:when>
 			<c:otherwise>
 
