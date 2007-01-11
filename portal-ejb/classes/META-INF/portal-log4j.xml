@@ -304,6 +304,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.journal.util.JournalUtil">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.mail">
 		<priority value="ERROR" />
 	</category>

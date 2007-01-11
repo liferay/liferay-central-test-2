@@ -25,6 +25,7 @@ package com.liferay.util;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -55,6 +56,10 @@ public class PropertiesUtil {
 	}
 
 	public static Properties fromMap(Map map) {
+		if (map instanceof Properties) {
+			return (Properties)map;
+		}
+
 		Properties p = new Properties();
 
 		Iterator itr = map.entrySet().iterator();
@@ -62,7 +67,12 @@ public class PropertiesUtil {
 		while (itr.hasNext()) {
 			Map.Entry entry = (Map.Entry)itr.next();
 
-			p.setProperty((String)entry.getKey(), (String)entry.getValue());
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			if (value != null) {
+				p.setProperty(key, value);
+			}
 		}
 
 		return p;
@@ -127,18 +137,25 @@ public class PropertiesUtil {
 		}
 	}
 
-	public static void list(Map map, PrintStream out) {
-		Properties props = new Properties();
+	public static String list(Map map) {
+		Properties props = fromMap(map);
 
-		props.putAll(map);
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		PrintStream ps = new PrintStream(baos);
+
+		props.list(ps);
+
+		return baos.toString();
+	}
+
+	public static void list(Map map, PrintStream out) {
+		Properties props = fromMap(map);
 
 		props.list(out);
 	}
 
 	public static void list(Map map, PrintWriter out) {
-		Properties props = new Properties();
-
-		props.putAll(map);
+		Properties props = fromMap(map);
 
 		props.list(out);
 	}

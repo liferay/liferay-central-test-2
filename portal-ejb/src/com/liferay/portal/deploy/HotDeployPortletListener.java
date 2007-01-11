@@ -57,9 +57,6 @@ import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -321,12 +318,10 @@ public class HotDeployPortletListener implements HotDeployListener {
 					StringUtil.read(portletClassLoader, portletPropsName));
 
 				if (_log.isDebugEnabled()) {
-					ByteArrayOutputStream baos = new ByteArrayOutputStream();
-					PrintStream ps = new PrintStream(baos);
+					String portletPropsString = PropertiesUtil.list(
+						portletProps);
 
-					portletProps.list(ps);
-
-					_log.debug(baos.toString());
+					_log.debug(portletPropsString);
 				}
 
 				processProperties(

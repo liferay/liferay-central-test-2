@@ -47,6 +47,7 @@ import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.LocaleUtil;
+import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLFormatter;
@@ -713,6 +714,14 @@ public class JournalUtil {
 
 		// Setup Listeners
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Language " + languageId);
+
+			String tokensString = PropertiesUtil.list(tokens);
+
+			_log.debug("Tokens\n" + tokensString);
+		}
+
 		List listenersList = new ArrayList();
 
 		String[] listeners = PropsUtil.getArray(
@@ -722,6 +731,10 @@ public class JournalUtil {
 			TransformerListener listener = null;
 
 			try {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Instantiate listener " + listeners[i]);
+				}
+
 				listener = (TransformerListener)Class.forName(
 					listeners[i]).newInstance();
 
@@ -731,7 +744,7 @@ public class JournalUtil {
 				listenersList.add(listener);
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 
 			// Modify XML
