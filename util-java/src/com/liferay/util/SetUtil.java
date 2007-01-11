@@ -20,64 +20,61 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.util;
 
-import com.liferay.util.CollectionFactory;
-import com.liferay.util.StringUtil;
+import com.liferay.portal.kernel.util.StringPool;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
 import java.io.IOException;
 
-import java.util.Map;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Set;
 
 /**
- * <a href="ContentUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="SetUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public class ContentUtil {
+public class SetUtil {
 
-	public static String get(String location) {
-		return _instance._get(location, false);
-	}
-
-	public static String get(String location, boolean all) {
-		return _instance._get(location, all);
-	}
-
-	private ContentUtil() {
-		_contentPool = CollectionFactory.getHashMap();
-	}
-
-	private String _get(String location, boolean all) {
-		String content = (String)_contentPool.get(location);
-
-		if (content == null) {
-			try {
-				content = StringUtil.read(
-					getClass().getClassLoader(), location, all);
-
-				_put(location, content);
-			}
-			catch (IOException ioe) {
-				_log.error(ioe, ioe);
-			}
+	public static Set fromArray(Object[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return CollectionFactory.getHashSet();
 		}
 
-		return content;
+		Set set = CollectionFactory.getHashSet(array.length);
+
+		for (int i = 0; i < array.length; i++) {
+			set.add(array[i]);
+		}
+
+		return set;
 	}
 
-	private void _put(String location, String content) {
-		_contentPool.put(location, content);
+	public static Set fromFile(String fileName) throws IOException {
+		return fromFile(new File(fileName));
 	}
 
-	private static Log _log = LogFactory.getLog(ContentUtil.class);
+	public static Set fromFile(File file) throws IOException {
+		Set set = CollectionFactory.getHashSet();
 
-	private static ContentUtil _instance = new ContentUtil();
+		BufferedReader br = new BufferedReader(new FileReader(file));
 
-	private Map _contentPool;
+		String s = StringPool.BLANK;
+
+		while ((s = br.readLine()) != null) {
+			set.add(s);
+		}
+
+		br.close();
+
+		return set;
+	}
+
+	public static Set fromString(String s) {
+		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
+	}
 
 }

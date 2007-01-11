@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -158,7 +160,7 @@ public class ListUtil {
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 
-		String s = "";
+		String s = StringPool.BLANK;
 
 		while ((s = br.readLine()) != null) {
 			list.add(s);
@@ -167,6 +169,10 @@ public class ListUtil {
 		br.close();
 
 		return list;
+	}
+
+	public static List fromString(String s) {
+		return fromArray(StringUtil.split(s, StringPool.NEW_LINE));
 	}
 
 	public static List subList(List list, int begin, int end) {

@@ -30,7 +30,10 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 
+import java.net.URL;
+
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -158,12 +161,12 @@ public class StringUtil {
 
 	public static String extractChars(String s) {
 		if (s == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
-		char[] c = s.toCharArray();
-
 		StringBuffer sb = new StringBuffer();
+
+		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Validator.isChar(c[i])) {
@@ -176,12 +179,12 @@ public class StringUtil {
 
 	public static String extractDigits(String s) {
 		if (s == null) {
-			return "";
+			return StringPool.BLANK;
 		}
 
-		char[] c = s.toCharArray();
-
 		StringBuffer sb = new StringBuffer();
+
+		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (Validator.isDigit(c[i])) {
@@ -313,13 +316,50 @@ public class StringUtil {
 	public static String read(ClassLoader classLoader, String name)
 		throws IOException {
 
-		return read(classLoader.getResourceAsStream(name));
+		return read(classLoader, name, false);
+	}
+
+	public static String read(ClassLoader classLoader, String name, boolean all)
+		throws IOException {
+
+		if (all) {
+			StringBuffer sb = new StringBuffer();
+
+			Enumeration enu = classLoader.getResources(name);
+
+			while (enu.hasMoreElements()) {
+				URL url = (URL)enu.nextElement();
+
+				InputStream is = url.openStream();
+
+				String s = read(is);
+
+				if (s != null) {
+					sb.append(s);
+					sb.append(StringPool.NEW_LINE);
+				}
+
+				is.close();
+			}
+
+			return sb.toString().trim();
+		}
+		else {
+			InputStream is = classLoader.getResourceAsStream(name);
+
+			String s = read(is);
+
+			is.close();
+
+			return s;
+		}
 	}
 
 	public static String read(InputStream is) throws IOException {
+		StringBuffer sb = new StringBuffer();
+
 		BufferedReader br = new BufferedReader(new InputStreamReader(is));
 
-		StringBuffer sb = new StringBuffer();
 		String line = null;
 
 		while ((line = br.readLine()) != null) {
@@ -375,9 +415,9 @@ public class StringUtil {
 			return null;
 		}
 
-		char[] c = s.toCharArray();
-
 		StringBuffer sb = new StringBuffer();
+
+		char[] c = s.toCharArray();
 
 		for (int i = 0; i < c.length; i++) {
 			if (c[i] == oldSub) {

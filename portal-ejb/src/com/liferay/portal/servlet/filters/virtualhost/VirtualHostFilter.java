@@ -35,8 +35,8 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.SetUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Validator;
@@ -70,22 +70,21 @@ public class VirtualHostFilter implements Filter {
 	public static final boolean USE_VIRTUAL_HOST_FILTER = GetterUtil.getBoolean(
 		SystemProperties.get(VirtualHostFilter.class.getName()), true);
 
+	public static final String IGNORE_HOSTS = GetterUtil.getString(
+		SystemProperties.get(VirtualHostFilter.class.getName() +
+			".ignore.hosts"));
+
+	public static final String IGNORE_PATHS = GetterUtil.getString(
+		SystemProperties.get(VirtualHostFilter.class.getName() +
+			".ignore.paths"));
+
 	public void init(FilterConfig config) throws ServletException {
 		_ctx = config.getServletContext();
 
 		_companyId = _ctx.getInitParameter("company_id");
-
-		String[] ignorePaths = StringUtil.split(
-			ContentUtil.get(
-				"com/liferay/portal/servlet/filters/virtualhost/dependencies/" +
-					"ignore_paths.txt"),
-			"\n");
-
-		_ignorePaths = CollectionFactory.getHashSet(ignorePaths.length);
-
-		for (int i = 0; i < ignorePaths.length; i++) {
-			_ignorePaths.add(ignorePaths[i]);
-		}
+		_ignoreHosts = SetUtil.fromArray(StringUtil.split(IGNORE_HOSTS));
+		_ignorePaths = SetUtil.fromString(ContentUtil.get(
+			_DEPENDENCIES_IGNORE_PATHS, true));
 	}
 
 	public void doFilter(
@@ -109,11 +108,19 @@ public class VirtualHostFilter implements Filter {
 
 		String friendlyURL = httpReq.getRequestURI().toLowerCase();
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Friendly URL " + friendlyURL);
+		}
+
 		String redirect = null;
 
 		if (USE_VIRTUAL_HOST_FILTER && isValidFriendlyURL(friendlyURL)) {
 			String host = PortalUtil.getHost(httpReq);
 			String mainPath = (String)_ctx.getAttribute(WebKeys.MAIN_PATH);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Host " + host);
+			}
 
 			try {
 				if (isValidHost(host)) {
@@ -177,6 +184,10 @@ public class VirtualHostFilter implements Filter {
 		throws PortalException, SystemException {
 
 		if (Validator.isNotNull(host)) {
+			if (_ignoreHosts.contains(host)) {
+				return false;
+			}
+
 			Company company = CompanyLocalServiceUtil.getCompany(_companyId);
 
 			if (company.getPortalURL().indexOf(host) == -1) {
@@ -189,10 +200,20 @@ public class VirtualHostFilter implements Filter {
 
 	private static Log _log = LogFactory.getLog(VirtualHostFilter.class);
 
+	private static String _DEPENDENCIES =
+		"com/liferay/portal/servlet/filters/virtualhost/dependencies/";
+
+	private static String _DEPENDENCIES_IGNORE_HOSTS =
+		_DEPENDENCIES + "ignore_hosts.txt";
+
+	private static String _DEPENDENCIES_IGNORE_PATHS =
+		_DEPENDENCIES + "ignore_paths.txt";
+
 	private static String _PATH_IMAGE = "/image/";
 
 	private ServletContext _ctx;
 	private String _companyId;
+	private Set _ignoreHosts;
 	private Set _ignorePaths;
 
 }
