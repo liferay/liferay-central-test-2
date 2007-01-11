@@ -204,7 +204,7 @@
 		<replace file="${app.server.pramati.dir}/server/bin/runliferay.bat">
 			<replacefilter
 				token="-server"
-				value="-Xmx512m -XX:MaxPermSize=128m -server"
+				value="-Xmx768m -XX:MaxPermSize=128m -server"
 			/>
 			<replacefilter
 				token="com.pramati.Server"
