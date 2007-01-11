@@ -80,7 +80,7 @@ public class BookmarksFolderPermission {
 				folderId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID)) {
 
 			return PortletPermission.contains(
-				permissionChecker, plid, PortletKeys.IMAGE_GALLERY, actionId);
+				permissionChecker, plid, PortletKeys.BOOKMARKS, actionId);
 		}
 		else {
 			return contains(permissionChecker, folderId, actionId);
