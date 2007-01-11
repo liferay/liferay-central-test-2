@@ -10,7 +10,7 @@ insert into Account_ (accountId, companyId, userId, userName, createDate, modifi
 ##
 
 insert into Group_ (groupId, companyId, parentGroupId, name, friendlyURL) values ('1', 'liferay.com', '-1', 'Guest', '/guest');
-insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.1', 'liferay.com', '1', '1', TRUE, 'classic', '02', 0.0);
+insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PRI.1', 'liferay.com', '1', '1', TRUE, 'classic', '01', 0.0);
 insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, themeId, colorSchemeId, pageCount) values ('PUB.1', 'liferay.com', '1', '1', FALSE, 'brochure', '01', 89.0);
 
 insert into Group_ (groupId, companyId, parentGroupId, name, friendlyURL) values ('3', 'liferay.com', '-1', 'Support', '');
