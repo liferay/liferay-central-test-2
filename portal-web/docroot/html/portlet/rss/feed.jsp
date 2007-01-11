@@ -80,7 +80,7 @@ catch (Exception e) {
 						<c:otherwise>
 							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
 									<portlet:param name="struts_action" value="/rss/article" />
-									<portlet:param name="index" value="<%= j + "" %>" />
+									<portlet:param name="index" value='<%= j + "" %>' />
 									<portlet:param name="url" value="<%= url %>" />
 								</portlet:renderURL>"><%= entry.getTitle() %></a><br />
 						</c:otherwise>
