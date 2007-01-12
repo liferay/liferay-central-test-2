@@ -147,7 +147,7 @@ public class Http {
 			return URLDecoder.decode(url, SystemProperties.get(FILE_ENCODING));
 		}
 		catch (UnsupportedEncodingException uee) {
-			uee.printStackTrace();
+			_log.error(uee, uee);
 
 			return StringPool.BLANK;
 		}
@@ -162,7 +162,7 @@ public class Http {
 			return URLEncoder.encode(url, SystemProperties.get(FILE_ENCODING));
 		}
 		catch (UnsupportedEncodingException uee) {
-			uee.printStackTrace();
+			_log.error(uee, uee);
 
 			return StringPool.BLANK;
 		}
@@ -555,7 +555,7 @@ public class Http {
 				}
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 		}
 	}
