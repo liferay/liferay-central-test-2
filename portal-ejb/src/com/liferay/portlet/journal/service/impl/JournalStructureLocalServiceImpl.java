@@ -60,6 +60,9 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -281,8 +284,30 @@ public class JournalStructureLocalServiceImpl
 
 		structureId = structureId.trim().toUpperCase();
 
-		return JournalStructureUtil.findByPrimaryKey(
-			new JournalStructurePK(companyId, groupId, structureId));
+		JournalStructurePK pk = new JournalStructurePK(
+			companyId, groupId, structureId);
+
+		if (groupId == 0) {
+			_log.error(
+				"No group id was passed for " + pk + ". Group id is required " +
+					"since 4.2.0. Please update all custom code and data " +
+						"that references structures without group id.");
+
+			List structures = JournalStructureUtil.findByC_S(
+				companyId, structureId);
+
+			if (structures.size() == 0) {
+				throw new NoSuchStructureException(
+					"No JournalStructure exists with the primary key " + pk);
+			}
+			else {
+				return (JournalStructure)structures.get(0);
+			}
+		}
+		else {
+			return JournalStructureUtil.findByPrimaryKey(
+				new JournalStructurePK(companyId, groupId, structureId));
+		}
 	}
 
 	public List getStructures() throws SystemException {
@@ -474,5 +499,8 @@ public class JournalStructureLocalServiceImpl
 			validate(el.elements(), elNames);
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(JournalStructureLocalServiceImpl.class);
 
 }

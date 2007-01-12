@@ -336,6 +336,239 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
+	public List findByC_S(String companyId, String structureId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (structureId == null) {
+				query.append("structureId IS NULL");
+			}
+			else {
+				query.append("structureId = ?");
+			}
+
+			query.append(" ");
+			query.append("ORDER BY ");
+			query.append("structureId ASC");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (structureId != null) {
+				q.setString(queryPos++, structureId);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByC_S(String companyId, String structureId, int begin,
+		int end) throws SystemException {
+		return findByC_S(companyId, structureId, begin, end, null);
+	}
+
+	public List findByC_S(String companyId, String structureId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (structureId == null) {
+				query.append("structureId IS NULL");
+			}
+			else {
+				query.append("structureId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("structureId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (structureId != null) {
+				q.setString(queryPos++, structureId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public JournalStructure findByC_S_First(String companyId,
+		String structureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		List list = findByC_S(companyId, structureId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No JournalStructure exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "structureId=";
+			msg += structureId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchStructureException(msg);
+		}
+		else {
+			return (JournalStructure)list.get(0);
+		}
+	}
+
+	public JournalStructure findByC_S_Last(String companyId,
+		String structureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		int count = countByC_S(companyId, structureId);
+		List list = findByC_S(companyId, structureId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No JournalStructure exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "companyId=";
+			msg += companyId;
+			msg += ", ";
+			msg += "structureId=";
+			msg += structureId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchStructureException(msg);
+		}
+		else {
+			return (JournalStructure)list.get(0);
+		}
+	}
+
+	public JournalStructure[] findByC_S_PrevAndNext(
+		JournalStructurePK journalStructurePK, String companyId,
+		String structureId, OrderByComparator obc)
+		throws NoSuchStructureException, SystemException {
+		JournalStructure journalStructure = findByPrimaryKey(journalStructurePK);
+		int count = countByC_S(companyId, structureId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (structureId == null) {
+				query.append("structureId IS NULL");
+			}
+			else {
+				query.append("structureId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+			else {
+				query.append("ORDER BY ");
+				query.append("structureId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (structureId != null) {
+				q.setString(queryPos++, structureId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					journalStructure);
+			JournalStructure[] array = new JournalStructureImpl[3];
+			array[0] = (JournalStructure)objArray[0];
+			array[1] = (JournalStructure)objArray[1];
+			array[2] = (JournalStructure)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -385,6 +618,16 @@ public class JournalStructurePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByC_S(String companyId, String structureId)
+		throws SystemException {
+		Iterator itr = findByC_S(companyId, structureId).iterator();
+
+		while (itr.hasNext()) {
+			JournalStructure journalStructure = (JournalStructure)itr.next();
+			remove(journalStructure);
+		}
+	}
+
 	public void removeAll() throws SystemException {
 		Iterator itr = findAll().iterator();
 
@@ -411,6 +654,69 @@ public class JournalStructurePersistence extends BasePersistence {
 
 			int queryPos = 0;
 			q.setLong(queryPos++, groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByC_S(String companyId, String structureId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append(
+				"FROM com.liferay.portlet.journal.model.JournalStructure WHERE ");
+
+			if (companyId == null) {
+				query.append("companyId IS NULL");
+			}
+			else {
+				query.append("companyId = ?");
+			}
+
+			query.append(" AND ");
+
+			if (structureId == null) {
+				query.append("structureId IS NULL");
+			}
+			else {
+				query.append("structureId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (companyId != null) {
+				q.setString(queryPos++, companyId);
+			}
+
+			if (structureId != null) {
+				q.setString(queryPos++, structureId);
+			}
 
 			Iterator itr = q.list().iterator();
 

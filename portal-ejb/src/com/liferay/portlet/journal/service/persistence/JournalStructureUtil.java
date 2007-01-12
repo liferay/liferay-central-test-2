@@ -192,6 +192,51 @@ public class JournalStructureUtil {
 			groupId, obc);
 	}
 
+	public static java.util.List findByC_S(java.lang.String companyId,
+		java.lang.String structureId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, structureId);
+	}
+
+	public static java.util.List findByC_S(java.lang.String companyId,
+		java.lang.String structureId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, structureId, begin, end);
+	}
+
+	public static java.util.List findByC_S(java.lang.String companyId,
+		java.lang.String structureId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_S(companyId, structureId, begin, end,
+			obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure findByC_S_First(
+		java.lang.String companyId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence().findByC_S_First(companyId, structureId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure findByC_S_Last(
+		java.lang.String companyId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence().findByC_S_Last(companyId, structureId, obc);
+	}
+
+	public static com.liferay.portlet.journal.model.JournalStructure[] findByC_S_PrevAndNext(
+		com.liferay.portlet.journal.service.persistence.JournalStructurePK journalStructurePK,
+		java.lang.String companyId, java.lang.String structureId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.journal.NoSuchStructureException {
+		return getPersistence().findByC_S_PrevAndNext(journalStructurePK,
+			companyId, structureId, obc);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
@@ -213,6 +258,11 @@ public class JournalStructureUtil {
 		getPersistence().removeByGroupId(groupId);
 	}
 
+	public static void removeByC_S(java.lang.String companyId,
+		java.lang.String structureId) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_S(companyId, structureId);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -220,6 +270,11 @@ public class JournalStructureUtil {
 	public static int countByGroupId(long groupId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByGroupId(groupId);
+	}
+
+	public static int countByC_S(java.lang.String companyId,
+		java.lang.String structureId) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_S(companyId, structureId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

@@ -69,9 +69,11 @@ create index IX_ABEEA675 on JournalContentSearch (layoutId, ownerId);
 create index IX_F09DD5EE on JournalContentSearch (ownerId);
 create index IX_4A642025 on JournalContentSearch (ownerId, groupId, articleId);
 
+create index IX_47EF5658 on JournalStructure (companyId, structureId);
 create index IX_B97F5608 on JournalStructure (groupId);
 
 create index IX_AB3E5F05 on JournalTemplate (companyId, groupId, structureId);
+create index IX_D7A3867A on JournalTemplate (companyId, templateId);
 create index IX_77923653 on JournalTemplate (groupId);
 
 create index IX_1A0B984E on Layout (ownerId);

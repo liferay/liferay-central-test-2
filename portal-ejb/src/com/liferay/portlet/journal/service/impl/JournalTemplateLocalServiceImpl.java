@@ -62,6 +62,9 @@ import java.io.IOException;
 import java.util.Date;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 import org.dom4j.DocumentException;
 
 /**
@@ -332,8 +335,30 @@ public class JournalTemplateLocalServiceImpl
 
 		templateId = templateId.trim().toUpperCase();
 
-		return JournalTemplateUtil.findByPrimaryKey(
-			new JournalTemplatePK(companyId, groupId, templateId));
+		JournalTemplatePK pk = new JournalTemplatePK(
+			companyId, groupId, templateId);
+
+		if (groupId == 0) {
+			_log.error(
+				"No group id was passed for " + pk + ". Group id is required " +
+					"since 4.2.0. Please update all custom code and data " +
+						"that references templates without group id.");
+
+			List templates = JournalTemplateUtil.findByC_T(
+				companyId, templateId);
+
+			if (templates.size() == 0) {
+				throw new NoSuchTemplateException(
+					"No JournalTemplate exists with the primary key " + pk);
+			}
+			else {
+				return (JournalTemplate)templates.get(0);
+			}
+		}
+		else {
+			return JournalTemplateUtil.findByPrimaryKey(
+				new JournalTemplatePK(companyId, groupId, templateId));
+		}
 	}
 
 	public List getTemplates() throws SystemException {
@@ -547,5 +572,8 @@ public class JournalTemplateLocalServiceImpl
 			}
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(JournalTemplateLocalServiceImpl.class);
 
 }
