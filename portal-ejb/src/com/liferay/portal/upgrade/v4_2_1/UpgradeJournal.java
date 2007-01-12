@@ -218,13 +218,23 @@ public class UpgradeJournal extends UpgradeProcess {
 						article.getArticleId(), article.getVersion(), content);
 				}
 				catch (DocumentException de) {
-					_log.error(
-						de.getMessage() + "\n" +
-						"Unable to read article " +
-							article.getPrimaryKey() + " with content\n" +
-						article.getContent());
 
-					throw de;
+					// This should only happen if there is an article with stale
+					// data
+
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Unable to read article " +
+								article.getPrimaryKey());
+					}
+
+					if (_log.isDebugEnabled()) {
+						_log.debug(
+							de.getMessage() + "\n" +
+							"Unable to read article " +
+								article.getPrimaryKey() + " with content\n" +
+							article.getContent());
+					}
 				}
 			}
 		}
