@@ -167,16 +167,20 @@ public class LoginAction extends Action {
 		}
 
 		if (authResult == Authenticator.SUCCESS) {
+			if (GetterUtil.getBoolean(PropsUtil.get(
+					PropsUtil.SESSION_ENABLE_PHISHING_PROTECTION))) {
 
-			// Invalidate the previous session to prevent phishing
+				// Invalidate the previous session to prevent phishing
 
-			LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
+				LastPath lastPath = (LastPath)ses.getAttribute(WebKeys.LAST_PATH);
 
-			ses.invalidate();
-			ses = req.getSession(true);
+				ses.invalidate();
 
-			if (lastPath != null) {
-				ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+				ses = req.getSession(true);
+
+				if (lastPath != null) {
+					ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+				}
 			}
 
 			// Set cookies

@@ -204,6 +204,8 @@ public class PropsUtil {
 
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";
 
+	public static final String SESSION_ENABLE_PHISHING_PROTECTION = "session.enable.phishing.protection";
+
 	public static final String SERVLET_SESSION_CREATE_EVENTS = "servlet.session.create.events";
 
 	public static final String SERVLET_SESSION_DESTROY_EVENTS = "servlet.session.destroy.events";
