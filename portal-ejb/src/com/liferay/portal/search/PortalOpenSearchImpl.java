@@ -20,24 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.search;
+package com.liferay.portal.search;
+
+import com.liferay.portal.kernel.search.OpenSearch;
+import com.liferay.portal.kernel.search.SearchException;
 
 import javax.servlet.http.HttpServletRequest;
 
 /**
- * <a href="OpenSearch.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
  *
  */
-public interface OpenSearch {
+public class PortalOpenSearchImpl implements OpenSearch {
 
 	public String search(HttpServletRequest req, String url)
-		throws SearchException;
+		throws SearchException {
+
+		return null;
+	}
 
 	public String search(
 			HttpServletRequest req, String keywords, int startPage,
 			int itemsPerPage)
-		throws SearchException;
+		throws SearchException {
+
+		return null;
+	}
 
 }

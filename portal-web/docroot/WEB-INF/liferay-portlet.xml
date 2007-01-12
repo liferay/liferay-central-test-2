@@ -29,6 +29,7 @@
 	<portlet>
 		<portlet-name>3</portlet-name>
 		<struts-path>search</struts-path>
+		<open-search-class>com.liferay.portal.search.PortalOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -784,6 +785,7 @@
 		<portlet-name>91</portlet-name>
 		<struts-path>alfresco_content</struts-path>
 		<configuration-path>/alfresco_content/edit_configuration</configuration-path>
+		<open-search-class>com.liferay.portlet.alfrescocontent.util.AlfrescoOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>

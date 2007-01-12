@@ -634,6 +634,18 @@ public class PropsUtil {
 
 	public static final String ALFRESCO_CONTENT_SERVER_URL = "alfresco.content.server.url";
 
+	public static final String ALFRESCO_OPEN_SEARCH_HOST = "alfresco.open.search.host";
+	
+	public static final String ALFRESCO_OPEN_SEARCH_PORT = "alfresco.open.search.port";
+	
+	public static final String ALFRESCO_OPEN_SEARCH_REALM = "alfresco.open.search.realm";
+	
+	public static final String ALFRESCO_OPEN_SEARCH_USERNAME = "alfresco.open.search.username";
+	
+	public static final String ALFRESCO_OPEN_SEARCH_PASSWORD = "alfresco.open.search.password";
+
+	public static final String ALFRESCO_OPEN_SEARCH_PATH = "alfresco.open.search.path";
+
 	// Calendar Portlet
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";
