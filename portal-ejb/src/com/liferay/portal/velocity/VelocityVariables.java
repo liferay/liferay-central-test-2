@@ -23,6 +23,7 @@
 package com.liferay.portal.velocity;
 
 import com.liferay.portal.language.LanguageUtil_IW;
+import com.liferay.portal.language.UnicodeLanguageUtil_IW;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil_IW;
@@ -38,6 +39,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.GetterUtil_IW;
 import com.liferay.util.StaticFieldGetter;
 import com.liferay.util.StringUtil_IW;
+import com.liferay.util.UnicodeFormatter_IW;
 import com.liferay.util.Validator;
 import com.liferay.util.velocity.VelocityResourceListener;
 
@@ -191,6 +193,7 @@ public class VelocityVariables {
 		// Language
 
 		vc.put("languageUtil", LanguageUtil_IW.getInstance());
+		vc.put("unicodeLanguageUtil", UnicodeLanguageUtil_IW.getInstance());
 
 		// Portal util
 
@@ -219,6 +222,10 @@ public class VelocityVariables {
 		// String util
 
 		vc.put("stringUtil", StringUtil_IW.getInstance());
+
+		// Unicode formatter
+
+		vc.put("unicodeFormatter", UnicodeFormatter_IW.getInstance());
 	}
 
 	private static void _insertTilesVariables(
