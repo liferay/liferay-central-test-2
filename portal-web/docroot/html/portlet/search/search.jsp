@@ -29,202 +29,204 @@ String defaultKeywords = LanguageUtil.get(pageContext, "search") + "...";
 String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
 String keywords = ParamUtil.getString(request, "keywords", defaultKeywords);
+
+String primarySearch = ParamUtil.getString(request, "primarySearch");
+
+if (Validator.isNotNull(primarySearch)) {
+	prefs.setValue(PortletKeys.SEARCH, "primary-search", primarySearch);
+}
+else {
+	primarySearch = prefs.getValue(PortletKeys.SEARCH, "primary-search", StringPool.BLANK);
+}
 %>
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
+<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
+
+<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
+
+<br><br>
+
 <%
-PortletURL portletURL = renderResponse.createRenderURL();
+List portlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
+Iterator itr = portlets.iterator();
 
-portletURL.setParameter("struts_action", "/search/search");
-portletURL.setParameter("keywords", keywords);
+while (itr.hasNext()) {
+	Portlet portlet = (Portlet)itr.next();
 
-List headerNames = new ArrayList();
+	if (Validator.isNull(portlet.getOpenSearchClass())) {
+		itr.remove();
+	}
+}
 
-headerNames.add("#");
-headerNames.add("summary");
-headerNames.add("score");
+if (Validator.isNotNull(primarySearch)) {
+	for (int i = 0; i < portlets.size(); i++) {
+		Portlet portlet = (Portlet)portlets.get(i);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-pages-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
-
-Hits hits = CompanyLocalServiceUtil.search(company.getCompanyId(), keywords);
-
-Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
-int total = hits.getLength();
-
-searchContainer.setTotal(total);
-
-List resultRows = searchContainer.getResultRows();
-
-for (int i = 0; i < results.getLength(); i++) {
-	Document doc = results.doc(i);
-
-	ResultRow row = new ResultRow(doc, String.valueOf(i), i);
-
-	// Position
-
-	row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
-
-	// Summary
-
-	String portletId = (String)doc.get(LuceneFields.PORTLET_ID);
-
-	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);
-
-	if (portlet != null) {
-		String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
-
-		long groupId = GetterUtil.getLong((String)doc.get(LuceneFields.GROUP_ID));
-
-		String title = null;
-		String content = null;
-
-		String portletLayoutId = null;
-
-		if (layout.isPrivateLayout()) {
-			portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
-		}
-		else {
-			portletLayoutId = LayoutImpl.PRIVATE + groupId + ".1";
-		}
-
-		PortletURL rowURL = new PortletURLImpl(request, portletId, portletLayoutId, false);
-
-		rowURL.setWindowState(WindowState.MAXIMIZED);
-		rowURL.setPortletMode(PortletMode.VIEW);
-
-		String url = rowURL.toString();
-
-		String[] urls = null;
-
-		if (Validator.isNotNull(portlet.getIndexerClass())) {
-			Indexer indexer = (Indexer)InstancePool.get(portlet.getIndexerClass());
-
-			DocumentSummary docSummary = indexer.getDocumentSummary(doc, rowURL);
-
-			title = docSummary.getTitle();
-			content = docSummary.getContent();
-			url = rowURL.toString();
-
-			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-				String articleId = doc.get("articleId");
-
-				List contentSearches = JournalContentSearchLocalServiceUtil.getArticleContentSearches(company.getCompanyId(), groupId, articleId);
-
-				if (contentSearches.size() > 0) {
-					List urlsList = new ArrayList();
-
-					for (int j = 0; j < contentSearches.size(); j++) {
-						JournalContentSearch contentSearch = (JournalContentSearch)contentSearches.get(j);
-
-						Layout contentSearchLayout = LayoutLocalServiceUtil.getLayout(contentSearch.getLayoutId(), contentSearch.getOwnerId());
-
-						String contentSearchUrl = PortalUtil.getLayoutURL(contentSearchLayout, themeDisplay);
-
-						urlsList.add(contentSearchUrl);
-
-						if (i == 0) {
-							url = contentSearchUrl;
-						}
-					}
-
-					if (urlsList.size() > 0) {
-						urls = (String[])urlsList.toArray(new String[0]);
-					}
-				}
-				else {
-					String version = doc.get("version");
-
-					StringBuffer sb = new StringBuffer();
-
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/journal_articles/view_article_content?articleId=");
-					sb.append(articleId);
-					sb.append("&version=");
-					sb.append(version);
-
-					url = sb.toString();
-				}
-			}
-		}
-		else {
-			title = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
-			content = LanguageUtil.format(pageContext, "portlet-x-does-not-have-an-indexer-class-configured", new Object[] {"<b>" + portletTitle + "</b>"});
-		}
-
-		StringBuffer sb = new StringBuffer();
-
-		sb.append("<a href=\"");
-		sb.append(url);
-		sb.append("\"");
-
-		if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-			sb.append(" target=\"_blank\"");
-		}
-
-		sb.append(">");
-		sb.append(portletTitle);
-		sb.append(" &raquo; ");
-		sb.append("<i>");
-		sb.append(title);
-		sb.append("</i>");
-		sb.append("<br><br>");
-		//sb.append("<span style=\"font-size: x-small;\">");
-		sb.append(content);
-		//sb.append("</span>");
-		sb.append("</a><br>");
-
-		if (urls != null) {
-			sb.append("<span style=\"font-size: xx-small;\">");
-
-			for (int j = 0; j < urls.length; j++) {
-				sb.append("<br>");
-				sb.append("<a href=\"");
-				sb.append(urls[j]);
-				sb.append("\">");
-				sb.append(Http.getProtocol(request));
-				sb.append("://");
-				sb.append(company.getPortalURL());
-				sb.append(StringUtil.shorten(urls[j], 100));
-				sb.append("</a>");
+		if (portlet.getOpenSearchClass().equals(primarySearch)) {
+			if (i != 0) {
+				portlets.remove(i);
+				portlets.add(0, portlet);
 			}
 
-			sb.append("</span>");
+			break;
 		}
-
-		row.addText(StringUtil.highlight(sb.toString(), keywords));
-
-		// Score
-
-		row.addText(String.valueOf(hits.score(i)));
-
-		// Add result row
-
-		resultRows.add(row);
 	}
 }
 %>
 
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<input class="form-text" name="<portlet:namespace />keywords" size="30" type="text" value="<%= keywords %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }">
 
-		<input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImage() %>/common/search.gif" title="<%= LanguageUtil.get(pageContext, "search") %>" type="image">
-	</td>
-	<td align="right">
-		<liferay-ui:search-speed searchContainer="<%= searchContainer %>" hits="<%= hits %>" />
-	</td>
-</tr>
+<%
+for (int i = 0; i < portlets.size(); i++) {
+	Portlet portlet = (Portlet)portlets.get(i);
+
+	OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
+
+	PortletURL portletURL = renderResponse.createRenderURL();
+
+	portletURL.setWindowState(WindowState.MAXIMIZED);
+
+	portletURL.setParameter("struts_action", "/search/search");
+	portletURL.setParameter("keywords", keywords);
+
+	List headerNames = new ArrayList();
+
+	headerNames.add("#");
+	headerNames.add("summary");
+	//headerNames.add("score");
+
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+
+	String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
+
+	List resultRows = new ArrayList();
+
+	try {
+		String xml = openSearch.search(request, keywords, searchContainer.getCurValue(), searchContainer.getDelta());
+
+		SAXReader reader = SAXReaderFactory.getInstance();
+
+		Document doc = reader.read(new StringReader(xml));
+
+		Element root = doc.getRootElement();
+
+		portletTitle = root.elementText("title");
+
+		List entries = root.elements("entry");
+
+		int total = GetterUtil.getInteger(root.elementText(OpenSearchUtil.getQName("totalResults", OpenSearchUtil.OS_NAMESPACE)));
+
+		searchContainer.setTotal(total);
+
+		resultRows = searchContainer.getResultRows();
+
+		for (int j = 0; j < entries.size(); j++) {
+			Element el = (Element)entries.get(j);
+
+			ResultRow row = new ResultRow(doc, String.valueOf(j), j);
+
+			// Position
+
+			row.addText(searchContainer.getStart() + j + 1 + StringPool.PERIOD);
+
+			// Summary
+
+			String entryTitle = el.elementText("title");
+			String entryHref = el.element("link").attributeValue("href");
+			String summary = el.elementText("summary");
+
+			StringBuffer sb = new StringBuffer();
+
+			sb.append("<a href=\"");
+			sb.append(entryHref);
+			sb.append("\"");
+
+			if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
+				sb.append(" target=\"_blank\"");
+			}
+
+			sb.append(">");
+			sb.append("<span style=\"font-size: x-small; font-style: italic;\">");
+			sb.append(entryTitle);
+			sb.append("</span><br>");
+			sb.append(summary);
+			sb.append("</a>");
+
+			row.addText(StringUtil.highlight(sb.toString(), keywords));
+
+			// Score
+
+			String score = el.elementText(OpenSearchUtil.getQName("score", OpenSearchUtil.RELEVANCE_NAMESPACE));
+
+			//row.addText(score);
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+	}
+	catch (Exception e) {
+		_log.error(portlet.getOpenSearchClass() + " " + e.getMessage());
+	}
+%>
+
+	<c:choose>
+		<c:when test="<%= (i == 0) && (portlets.size() == 1) %>">
+			<tr>
+				<td valign="top" width="100%">
+		</c:when>
+		<c:when test="<%= (i == 0) && (portlets.size() > 1) %>">
+			<tr>
+				<td valign="top" width="70%">
+		</c:when>
+		<c:when test="<%= i == 1 %>">
+			<td style="padding-left: 10px;"></td>
+			<td valign="top" width="30%">
+		</c:when>
+	</c:choose>
+
+	<c:if test="<%= i > 1 %>">
+		<br>
+	</c:if>
+
+	<div style="border: 1px solid <%= colorScheme.getPortletMenuBg() %>; font-size: x-small; font-weight: bold; margin-bottom: 1px; padding: 3px 5px;">
+		<%= portletTitle %>
+	</div>
+
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+	<c:choose>
+		<c:when test="<%= i == 0 %>">
+			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		</c:when>
+		<c:otherwise>
+			<br>
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
+		</c:otherwise>
+	</c:choose>
+
+	<c:choose>
+		<c:when test="<%= (i == 0) && (portlets.size() == 1) %>">
+			</td>
+		</c:when>
+		<c:when test="<%= (i == 0) && (portlets.size() > 1) %>">
+			</td>
+		</c:when>
+		<c:when test="<%= (i + 1) == portlets.size() %>">
+				</td>
+			</tr>
+		</c:when>
+	</c:choose>
+
+<%
+}
+%>
+
 </table>
-
-<br>
-
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
 </form>
 
@@ -233,3 +235,7 @@ for (int i = 0; i < results.getLength(); i++) {
 		document.<portlet:namespace />fm.<portlet:namespace />keywords.focus();
 	}
 </script>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.search.search.jsp");
+%>

@@ -634,6 +634,8 @@ public class PropsUtil {
 
 	public static final String ALFRESCO_CONTENT_SERVER_URL = "alfresco.content.server.url";
 
+	public static final String ALFRESCO_OPEN_SEARCH_PROTOCOL = "alfresco.open.search.protocol";
+
 	public static final String ALFRESCO_OPEN_SEARCH_HOST = "alfresco.open.search.host";
 	
 	public static final String ALFRESCO_OPEN_SEARCH_PORT = "alfresco.open.search.port";

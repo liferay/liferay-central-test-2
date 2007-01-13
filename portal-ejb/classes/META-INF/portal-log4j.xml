@@ -296,6 +296,10 @@
 		<priority value="WARN" />
 	</category>
 
+	<category name="com.liferay.portlet.alfrescocontent.util.AlfrescoOpenSearchImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portlet.journal">
 		<priority value="ERROR" />
 	</category>

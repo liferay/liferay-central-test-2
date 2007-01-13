@@ -30,7 +30,6 @@
 <%@ page import="com.liferay.portlet.journal.model.impl.JournalArticleImpl" %>
 <%@ page import="com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.journalcontentsearch.util.ContentHits" %>
-<%@ page import="com.liferay.util.InstancePool" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

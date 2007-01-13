@@ -155,7 +155,7 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 	<div style="clear: both;"></div>
 </div>
 
-<div class="portlet-section-header" style="border:1px solid <%= colorScheme.getPortletFontDim() %>; font-size: large; font-weight: normal; padding: 3px 5px;">
+<div class="portlet-section-header" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; font-size: large; font-weight: normal; padding: 3px 5px;">
 	<%= message.getSubject() %>
 </div>
 

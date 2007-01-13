@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Http;
 
 import java.io.IOException;
 
@@ -46,6 +47,9 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class AlfrescoOpenSearchImpl implements OpenSearch {
+
+	public static final String PROTOCOL = PropsUtil.get(
+		PropsUtil.ALFRESCO_OPEN_SEARCH_PROTOCOL);
 
 	public static final String HOST = PropsUtil.get(
 		PropsUtil.ALFRESCO_OPEN_SEARCH_HOST);
@@ -71,6 +75,10 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 	public String search(HttpServletRequest req, String url)
 		throws SearchException {
 
+		if (_log.isDebugEnabled()) {
+			_log.debug("Search with " + url);
+		}
+
 		String xml = StringPool.BLANK;
 
 		HttpClient client = new HttpClient();
@@ -89,7 +97,7 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 			xml = get.getResponseBodyAsString();
 		}
 		catch (IOException ioe) {
-			_log.error("Unable to connect to " + url, ioe);
+			_log.error("Unable to search with " + url, ioe);
 		}
 		finally {
 			get.releaseConnection();
@@ -104,8 +112,9 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 		throws SearchException {
 
 		String url =
-			SEARCH_URL + "?q=" + keywords + "&p=" + startPage + "&c=" +
-				itemsPerPage + "&guest=&format=atom";
+			PROTOCOL + "://" + SEARCH_URL + "?q=" + Http.encodeURL(keywords) +
+				"&p=" + startPage + "&c=" + itemsPerPage +
+					"&guest=&format=atom";
 
 		return search(req, url);
 	}

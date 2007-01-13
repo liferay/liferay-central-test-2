@@ -1396,6 +1396,7 @@ no-orders-were-found=次序未被发现。
 no-organizations-were-found=组织未被发现。
 no-pages-were-found-that-matched-the-keywords-x=找不到符合关键字的页面: {0}.
 no-products-were-found-that-matched-the-keywords-x=No products were found that matched the keywords: {0}.
+no-results-were-found-that-matched-the-keywords-x=No results were found that matched the keywords: {0}.
 no-roles-were-found=角色未被发现。
 no-structures-were-found-that-matches-the-id=找不到符合此编号的结构:
 no-structures-were-found=结构未被发现。

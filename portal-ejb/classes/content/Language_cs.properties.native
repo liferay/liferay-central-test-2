@@ -814,6 +814,7 @@ no-messages-found=Žádné zprávy.
 no-messages-were-found-that-matched-the-keywords-x=No messages were found that matched the keywords: {0}.
 no-pages-were-found-that-matched-the-keywords-x=No pages were found that matched the keywords: {0}.
 no-products-were-found-that-matched-the-keywords-x=No products were found that matched the keywords: {0}.
+no-results-were-found-that-matched-the-keywords-x=No results were found that matched the keywords: {0}.
 no-structures-were-found-that-matches-the-id=Nenalezeny žádné struktury pro ID:
 no-templates-were-found-that-matches-the-id=Nenalezeny žádné šablony pro ID:
 no-users-were-found=Žádní uživatelé.

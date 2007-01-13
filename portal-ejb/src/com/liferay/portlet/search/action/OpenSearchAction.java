@@ -22,10 +22,11 @@
 
 package com.liferay.portlet.search.action;
 
-import com.liferay.portal.model.Company;
-import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.kernel.search.OpenSearch;
+import com.liferay.portal.search.PortalOpenSearchImpl;
 import com.liferay.portal.util.Constants;
-import com.liferay.portal.util.WebKeys;
+import com.liferay.util.ParamUtil;
+import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +53,7 @@ public class OpenSearchAction extends Action {
 
 		try {
 			ServletResponseUtil.sendFile(
-				res, null, getRSS(req), Constants.TEXT_XML);
+				res, null, getXML(req), Constants.TEXT_XML);
 
 			return null;
 		}
@@ -63,15 +64,17 @@ public class OpenSearchAction extends Action {
 		}
 	}
 
-	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+	protected byte[] getXML(HttpServletRequest req) throws Exception {
+		String keywords = ParamUtil.getString(req, "keywords");
+		int startPage = ParamUtil.getInteger(req, "p", 1);
+		int itemsPerPage = ParamUtil.getInteger(
+			req, "c", SearchContainer.DEFAULT_DELTA);
 
-		Company company = themeDisplay.getCompany();
+		OpenSearch search = new PortalOpenSearchImpl();
 
-		String rss = "";
+		String xml = search.search(req, keywords, startPage, itemsPerPage);
 
-		return rss.getBytes();
+		return xml.getBytes();
 	}
 
 }
