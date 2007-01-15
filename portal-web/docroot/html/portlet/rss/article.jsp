@@ -47,7 +47,20 @@ catch (Exception e) {
 	if (index < entries.size()) {
 		SyndEntry entry = (SyndEntry)entries.get(index);
 
-		SyndContent content = entry.getDescription();
+		SyndContent description = entry.getDescription();
+		
+		String contentString = description.getValue();
+
+		SyndContent content = null;
+		
+		try {
+			content = (SyndContent)entry.getContents().get(0);
+		
+			if (Validator.isNotNull(content.getValue().trim())) {
+				contentString = content.getValue();
+			}
+		}
+		catch (Throwable t) {}
 	%>
 
 		<a class="font-large" style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
@@ -57,7 +70,7 @@ catch (Exception e) {
 		</c:if>
 
 		<div class="font-small">
-			<%= content.getValue() %>
+			<%= contentString %>
 		</div>
 
 	<%
