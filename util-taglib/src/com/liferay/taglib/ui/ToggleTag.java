@@ -22,20 +22,21 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.util.SessionClicks;
+import com.liferay.portal.kernel.util.BooleanWrapper;
+import com.liferay.portal.kernel.util.MethodInvoker;
+import com.liferay.portal.kernel.util.MethodWrapper;
+import com.liferay.portal.kernel.util.NullWrapper;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.PwdGenerator;
 import com.liferay.util.servlet.StringServletResponse;
 
-import java.io.IOException;
-
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.JspException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="ToggleTag.java.html"><b><i>View Source</i></b></a>
@@ -49,7 +50,7 @@ public class ToggleTag extends IncludeTag {
 			String id, String onImage, String offImage, boolean defaultOn,
 			String stateVar, ServletContext ctx, HttpServletRequest req,
 			HttpServletResponse res)
-		throws IOException, ServletException {
+		throws Exception {
 
 		doTag(_PAGE, id, onImage, offImage, defaultOn, stateVar, ctx, req, res);
 	}
@@ -58,49 +59,63 @@ public class ToggleTag extends IncludeTag {
 			String page, String id, String onImage, String offImage,
 			boolean defaultOn, String stateVar, ServletContext ctx,
 			HttpServletRequest req, HttpServletResponse res)
-		throws IOException, ServletException {
+		throws Exception {
 
-		String defaultStateValue = defaultOn ? StringPool.BLANK : "none";
-		String defaultImage = defaultOn ? onImage : offImage;
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
 
-		String clickValue = SessionClicks.get(req, id, null);
+		try {
+			Thread.currentThread().setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
 
-		if (defaultOn) {
-			if ((clickValue != null) && (clickValue.equals("none"))) {
-				defaultStateValue = "none";
-				defaultImage = offImage;
+			Object pageWrapper = page;
+
+			if (pageWrapper == null) {
+				pageWrapper = new NullWrapper(String.class.getName());
 			}
-			else {
-				defaultStateValue = "";
-				defaultImage = onImage;
+
+			Object idWrapper = id;
+
+			if (idWrapper == null) {
+				idWrapper = new NullWrapper(String.class.getName());
 			}
+
+			Object onImageWrapper = onImage;
+
+			if (onImageWrapper == null) {
+				onImageWrapper = new NullWrapper(String.class.getName());
+			}
+
+			Object offImageWrapper = offImage;
+
+			if (offImageWrapper == null) {
+				offImageWrapper = new NullWrapper(String.class.getName());
+			}
+
+			Object stateVarWrapper = stateVar;
+
+			if (stateVarWrapper == null) {
+				stateVarWrapper = new NullWrapper(String.class.getName());
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(
+				_TAG_CLASS, _TAG_DO_END_METHOD,
+				new Object[] {
+					pageWrapper, idWrapper, onImageWrapper, offImageWrapper,
+					new BooleanWrapper(defaultOn), stateVarWrapper, ctx, req,
+					res
+				});
+
+			MethodInvoker.invoke(methodWrapper);
 		}
-		else {
-			if ((clickValue == null) || (clickValue.equals("none"))) {
-				defaultStateValue = "none";
-				defaultImage = offImage;
-			}
-			else {
-				defaultStateValue = "";
-				defaultImage = onImage;
-			}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw e;
 		}
-
-		if (stateVar == null) {
-			stateVar = PwdGenerator.getPassword(PwdGenerator.KEY3, 8);
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
 		}
-
-		req.setAttribute("liferay-ui:toggle:id", id);
-		req.setAttribute("liferay-ui:toggle:onImage", onImage);
-		req.setAttribute("liferay-ui:toggle:offImage", offImage);
-		req.setAttribute("liferay-ui:toggle:stateVar", stateVar);
-		req.setAttribute(
-			"liferay-ui:toggle:defaultStateValue", defaultStateValue);
-		req.setAttribute("liferay-ui:toggle:defaultImage", defaultImage);
-
-		RequestDispatcher rd = ctx.getRequestDispatcher(page);
-
-		rd.include(req, res);
 	}
 
 	public int doEndTag() throws JspException {
@@ -145,7 +160,14 @@ public class ToggleTag extends IncludeTag {
 		return _PAGE;
 	}
 
+	private static final String _TAG_CLASS =
+		"com.liferay.portal.servlet.taglib.ui.ToggleTagUtil";
+
+	private static final String _TAG_DO_END_METHOD = "doEndTag";
+
 	private static final String _PAGE = "/html/taglib/ui/toggle/page.jsp";
+
+	private static Log _log = LogFactory.getLog(ToggleTag.class);
 
 	private String _id;
 	private String _onImage;

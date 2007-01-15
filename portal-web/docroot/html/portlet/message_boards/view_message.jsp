@@ -175,8 +175,6 @@ boolean threadView = ParamUtil.get(request, "threadView", true);
 		<div id="<portlet:namespace />messageScroll0" style="margin: 5px 0px 0px 0px;">
 			<liferay-ui:toggle
 				id="toggle_id_message_boards_view_message_thread"
-				onImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %>'
-				offImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %>'
 				defaultOn="true"
 			/>
 		</div>
