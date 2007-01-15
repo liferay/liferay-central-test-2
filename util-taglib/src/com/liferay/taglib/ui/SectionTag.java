@@ -24,13 +24,13 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.util.Validator;
 
 import javax.portlet.RenderResponse;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="SectionTag.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @author  Brian Wing Shun Chan
  *
  */
-public class SectionTag extends TagSupport {
+public class SectionTag extends ParamAncestorTagImpl {
 
 	public int doStartTag() throws JspException {
 		TabsTag tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);
@@ -83,7 +83,7 @@ public class SectionTag extends TagSupport {
 
 			if (!tabsTag.isRefresh() || sectionSelected.booleanValue()) {
 				if (!tabsTag.isRefresh()) {
-					pageContext.include(getStartPage());
+					include(getStartPage());
 				}
 
 				return EVAL_BODY_INCLUDE;
@@ -99,7 +99,7 @@ public class SectionTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.include(getEndPage());
+			include(getEndPage());
 
 			return EVAL_PAGE;
 		}

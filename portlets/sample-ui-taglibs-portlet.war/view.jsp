@@ -22,4 +22,19 @@
  */
 %>
 
-</div> <!-- HERE -->
+<%@ taglib uri="http://liferay.com/tld/ui" prefix="liferay-ui" %>
+
+<liferay-ui:tabs
+	names="One,Two,Three"
+	refresh="<%= false %>"
+>
+	<liferay-ui:section>
+		One body
+	</liferay-ui:section>
+	<liferay-ui:section>
+		Two body
+	</liferay-ui:section>
+	<liferay-ui:section>
+		Three body
+	</liferay-ui:section>
+</liferay-ui:tabs>

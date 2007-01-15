@@ -26,10 +26,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.StringServletResponse;
 
+import java.io.IOException;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -96,6 +100,18 @@ public class ParamAncestorTagImpl
 	public StringServletResponse getServletResponse() {
 		return new StringServletResponse(
 			(HttpServletResponse)pageContext.getResponse());
+	}
+
+	public void include(String path) throws IOException, ServletException {
+		ServletContext ctx = getServletContext();
+		HttpServletRequest req = getServletRequest();
+		StringServletResponse res = getServletResponse();
+
+		RequestDispatcher rd = ctx.getRequestDispatcher(path);
+
+		rd.include(req, res);
+
+		pageContext.getOut().print(res.getString());
 	}
 
 	private Map _params;

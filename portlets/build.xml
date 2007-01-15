@@ -1,59 +1,11 @@
 <?xml version="1.0"?>
 
-<project name="portlets" basedir="." default="deploy">
+<project name="portlets" basedir="." default="deploy" xmlns:antelope="antlib:ise.antelope.tasks">
 	<import file="../build-common.xml" />
 
 	<target name="clean">
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-dao-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-jsf-facelets-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-jsf-myfaces-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-jsf-sun-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-json-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-jsp-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-permissions-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-portal-client-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-portal-service-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-struts-global-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-struts-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-tapestry-portlet" />
-		</antcall>
-
-		<antcall target="clean-module">
-			<param name="module.name" value="sample-test-portlet" />
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="clean" />
 		</antcall>
 	</target>
 
@@ -68,56 +20,8 @@
 	</target>
 
 	<target name="compile">
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-dao-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-jsf-facelets-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-jsf-myfaces-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-jsf-sun-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-json-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-jsp-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-permissions-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-portal-client-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-portal-service-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-struts-global-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-struts-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-tapestry-portlet" />
-		</antcall>
-
-		<antcall target="compile-module">
-			<param name="module.name" value="sample-test-portlet" />
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="compile" />
 		</antcall>
 	</target>
 
@@ -155,62 +59,14 @@
 	</target>
 
 	<target name="war">
-		<antcall target="war-module">
-			<param name="module.name" value="sample-dao-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-jsf-facelets-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-jsf-myfaces-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-jsf-sun-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-json-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-jsp-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-permissions-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-portal-client-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-portal-service-portlet" />
+		<antcall target="loop-modules">
+			<param name="loop.modules.cmd" value="war" />
 		</antcall>
 
 		<copy
 			file="sample-spring-portlet.war"
 			tofile="../sample-spring-portlet-${lp.version.file.name}.war"
 		/>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-struts-global-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-struts-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-tapestry-portlet" />
-		</antcall>
-
-		<antcall target="war-module">
-			<param name="module.name" value="sample-test-portlet" />
-		</antcall>
 	</target>
 
 	<target name="war-alfresco">
@@ -327,5 +183,61 @@
 
 			<arg line="${deploy.specific.wars}" />
 		</java>
+	</target>
+
+	<target name="loop-modules">
+		<for param="module.name">
+			<path>
+				<dirset dir="." includes="*.war" />
+			</path>
+			<sequential>
+				<antelope:stringutil string="@{module.name}" property="module.name.beginindex">
+					<lastindexof string="${file.separator}" />
+				</antelope:stringutil>
+
+				<math
+					datatype="int"
+					operand1="${module.name.beginindex}"
+					operand2="1"
+					operation="+"
+					result="module.name.beginindex"
+				/>
+
+				<antelope:stringutil string="@{module.name}" property="module.name.endindex">
+					<lastindexof string=".war" />
+				</antelope:stringutil>
+
+				<antelope:stringutil string="@{module.name}" property="module.name">
+					<substring beginindex="${module.name.beginindex}" endindex="${module.name.endindex}" />
+				</antelope:stringutil>
+
+				<if>
+					<or>
+						<equals arg1="${deploy.specific.wars}" arg2="" />
+						<antelope:contains string="${deploy.specific.wars}" substring="${module.name}" />
+					</or>
+					<then>
+						<if>
+							<equals arg1="${loop.modules.cmd}" arg2="clean" />
+							<then>
+								<antcall target="clean-module" />
+							</then>
+							<elseif>
+								<equals arg1="${loop.modules.cmd}" arg2="compile" />
+								<then>
+									<antcall target="compile-module" />
+								</then>
+							</elseif>
+							<elseif>
+								<equals arg1="${loop.modules.cmd}" arg2="war" />
+								<then>
+									<antcall target="war-module" />
+								</then>
+							</elseif>
+						</if>
+					</then>
+				</if>
+			</sequential>
+		</for>
 	</target>
 </project>

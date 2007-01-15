@@ -23,13 +23,13 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.taglib.util.ParamAncestorTagImpl;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
-import javax.servlet.jsp.tagext.TagSupport;
 
 /**
  * <a href="TabsTag.java.html"><b><i>View Source</i></b></a>
@@ -37,11 +37,11 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @author  Brian Wing Shun Chan
  *
  */
-public class TabsTag extends TagSupport {
+public class TabsTag extends ParamAncestorTagImpl {
 
 	public int doStartTag() throws JspException {
 		try {
-			ServletRequest req = pageContext.getRequest();
+			ServletRequest req = getServletRequest();
 
 			req.setAttribute("liferay-ui:tabs:names", _names);
 
@@ -102,7 +102,7 @@ public class TabsTag extends TagSupport {
 			req.setAttribute(
 				"liferay-ui:tabs:refresh", String.valueOf(_refresh));
 
-			pageContext.include(getStartPage());
+			include(getStartPage());
 
 			return EVAL_BODY_INCLUDE;
 		}
@@ -113,7 +113,7 @@ public class TabsTag extends TagSupport {
 
 	public int doEndTag() throws JspException {
 		try {
-			pageContext.include(getEndPage());
+			include(getEndPage());
 
 			return EVAL_PAGE;
 		}

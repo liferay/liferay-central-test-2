@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-<project name="common">
+<project name="common" xmlns:antelope="antlib:ise.antelope.tasks">
 	<property name="project.dir" value=".." />
 
 	<property environment="env" />
@@ -43,6 +43,7 @@
 
 	<taskdef classpathref="lib.classpath" resource="net/sf/antcontrib/antcontrib.properties" />
 	<taskdef classpathref="lib.classpath" resource="axis-tasks.properties" />
+	<taskdef classpathref="lib.classpath" resource="ise/antelope/tasks/antlib.xml" uri="antlib:ise.antelope.tasks" />
 
 	<property name="java2html.dir" value="${project.dir}/api/${ant.project.name}" />
 	<property name="javadoc.dir" value="${project.dir}/api/${ant.project.name}" />

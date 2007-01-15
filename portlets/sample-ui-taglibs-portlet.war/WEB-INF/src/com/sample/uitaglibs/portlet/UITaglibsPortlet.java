@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,6 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-</div> <!-- HERE -->
+package com.sample.uitaglibs.portlet;
+
+import java.io.IOException;
+
+import javax.portlet.GenericPortlet;
+import javax.portlet.PortletException;
+import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.RenderRequest;
+import javax.portlet.RenderResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <a href="UITaglibsPortlet.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UITaglibsPortlet extends GenericPortlet {
+
+	public void doDispatch(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		PortletRequestDispatcher prd =
+			getPortletContext().getRequestDispatcher("/view.jsp");
+
+		if (prd == null) {
+			_log.error("/view.jsp is not a valid include");
+		}
+		else {
+			prd.include(req, res);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(UITaglibsPortlet.class);
+
+}
