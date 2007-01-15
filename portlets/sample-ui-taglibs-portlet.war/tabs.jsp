@@ -24,10 +24,46 @@
 
 <%@ include file="/init.jsp" %>
 
-This is the <b>Sample UI Taglibs Portlet</b>. This was made to showcase some of Liferay's UI taglibs.<br><br>
+Code:
 
-<a href="<portlet:renderURL><portlet:param name="jspPage" value="/calendar.jsp" /></portlet:renderURL>">liferay-ui:calendar</a><br><br>
+<br><br>
 
-<a href="<portlet:renderURL><portlet:param name="jspPage" value="/tabs.jsp" /></portlet:renderURL>">liferay-ui:tabs</a><br><br>
+<pre>&lt;liferay-ui:tabs
+    names="One,Two,Three"
+    refresh="&lt;%= false %&gt;"
+&gt;
+    &lt;liferay-ui:section&gt;
+        One body
+    &lt;/liferay-ui:section&gt;
+    &lt;liferay-ui:section&gt;
+        Two body
+    &lt;/liferay-ui:section&gt;
+    &lt;liferay-ui:section&gt;
+        Three body
+    &lt;/liferay-ui:section&gt;
+&lt;/liferay-ui:tabs&gt;</pre>
 
-<a href="<portlet:renderURL><portlet:param name="jspPage" value="/toggle.jsp" /></portlet:renderURL>">liferay-ui:toggle</a>
+<div class="beta-separator"></div><br>
+
+Result:
+
+<br><br>
+
+<liferay-ui:tabs
+	names="One,Two,Three"
+	refresh="<%= false %>"
+>
+	<liferay-ui:section>
+		One body
+	</liferay-ui:section>
+	<liferay-ui:section>
+		Two body
+	</liferay-ui:section>
+	<liferay-ui:section>
+		Three body
+	</liferay-ui:section>
+</liferay-ui:tabs>
+
+<br><div class="beta-separator"></div><br>
+
+&laquo; <a href="<portlet:renderURL />">Back</a>

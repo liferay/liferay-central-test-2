@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -19,52 +20,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.sample.uitaglibs.portlet;
+<%@ include file="/init.jsp" %>
 
-import com.liferay.util.ParamUtil;
+Code:
 
-import java.io.IOException;
+<br><br>
 
-import javax.portlet.GenericPortlet;
-import javax.portlet.PortletException;
-import javax.portlet.PortletRequestDispatcher;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+<pre>&lt;liferay-ui:calendar
+    month="&lt;%= Calendar.FEBRUARY %&gt;"
+    day="&lt;%= 14 %&gt;"
+    year="&lt;%= 2007 %&gt;"
+    headerPattern="MMMM"
+/&gt;</pre>
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+<div class="beta-separator"></div><br>
 
-/**
- * <a href="UITaglibsPortlet.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Brian Wing Shun Chan
- *
- */
-public class UITaglibsPortlet extends GenericPortlet {
+Result:
 
-	public void doDispatch(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
+<br><br>
 
-		String jspPage = ParamUtil.getString(req, "jspPage", "/view.jsp");
+<liferay-ui:calendar
+	month="<%= Calendar.FEBRUARY %>"
+	day="<%= 14 %>"
+	year="<%= 2007 %>"
+	headerPattern="MMMM"
+/>
 
-		include(jspPage, req, res);
-	}
+<br><div class="beta-separator"></div><br>
 
-	protected void include(String path, RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
-		PortletRequestDispatcher prd =
-			getPortletContext().getRequestDispatcher(path);
-
-		if (prd == null) {
-			_log.error(path + " is not a valid include");
-		}
-		else {
-			prd.include(req, res);
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(UITaglibsPortlet.class);
-
-}
+&laquo; <a href="<portlet:renderURL />">Back</a>

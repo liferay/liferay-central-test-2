@@ -23,6 +23,7 @@
 		<copy file="classes/META-INF/liferay-security.tld" todir="${project.dir}/portlets/sample-permissions-portlet.war/WEB-INF/tld" />
 		<copy file="classes/META-INF/liferay-theme.tld" todir="${project.dir}/portlets/sample-permissions-portlet.war/WEB-INF/tld" />
 
+		<copy file="classes/META-INF/liferay-theme.tld" todir="${project.dir}/portlets/sample-ui-taglibs-portlet.war/WEB-INF/tld" />
 		<copy file="classes/META-INF/liferay-ui.tld" todir="${project.dir}/portlets/sample-ui-taglibs-portlet.war/WEB-INF/tld" />
 	</target>
 
