@@ -28,11 +28,11 @@ Code:
 
 <br><br>
 
-<pre>&lt;liferay-ui:calendar
-    month="&lt;%= Calendar.FEBRUARY %&gt;"
-    day="&lt;%= 14 %&gt;"
-    year="&lt;%= 2007 %&gt;"
-    headerPattern="MMMM"
+<pre>&lt;liferay-ui:toggle
+    id="toggle_id_sample_ui_taglibs_test"
+    onImage='&lt;%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %&gt;'
+    offImage='&lt;%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %&gt;'
+    defaultOn="true"
 /&gt;</pre>
 
 <div class="beta-separator"></div><br>
@@ -41,12 +41,22 @@ Result:
 
 <br><br>
 
-<liferay-ui:calendar
-	month="<%= Calendar.FEBRUARY %>"
-	day="<%= 14 %>"
-	year="<%= 2007 %>"
-	headerPattern="MMMM"
-/>
+<div>
+	<liferay-ui:toggle
+		id="toggle_id_sample_ui_taglibs_test"
+		onImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_down.gif" %>'
+		offImage='<%= themeDisplay.getPathThemeImage() + "/arrows/01_right.gif" %>'
+		defaultOn="true"
+	/>
+</div>
+
+<div id="toggle_id_sample_ui_taglibs_test" style="display: <liferay-ui:toggle-value id="toggle_id_sample_ui_taglibs_test" />; padding-top: 10px;">
+	This content is toggable. The preference for this is persited based on the specified id. If the user is a guest, the preference is persisted for the session only. If the user is authenticated, the preference is persisted in the database for all future requests.
+
+	<br><br>
+
+	The attributes <i>onImage</i> and <i>offImage</i> are optional and default to the images in this sample. You can also customize the default images by replacing them in a custom theme.
+</div>
 
 <br><div class="beta-separator"></div><br>
 
