@@ -158,6 +158,8 @@ var LiferayDock = {
 
 	ORDER: [0,1,4,5,2,8,6,9,3,12,10,7,13,11,14,15],
 	FRAME_C: 0.08,
+	GRID: {HEIGHT: 4, WIDTH: 4},
+	ICON: {HEIGHT: 54, WIDTH: 54},
 
 	cached: null,
 	count: 0,
@@ -181,11 +183,11 @@ var LiferayDock = {
 		this.dockCoords[0] = new Array();
 		this.dockCoords[1] = new Array();
 
-		for (var i = 0; i < 4; i++) {
-			for (var j = 0; j < 4; j++) {
+		for (var i = 0; i < this.GRID.HEIGHT; i++) {
+			for (var j = 0; j < this.GRID.WIDTH; j++) {
 				var box = new Object();
-				var x = j * (-54);
-				var y = i * (54);
+				var x = j * (-this.ICON.WIDTH);
+				var y = i * (this.ICON.HEIGHT);
 				var h = Math.sqrt(x*x + y*y);
 
 				box.h = h;
@@ -198,7 +200,6 @@ var LiferayDock = {
 				}
 
 				constants.push(box);
-
 			}
 		}
 
@@ -226,10 +227,12 @@ var LiferayDock = {
 		});
 
 		var myPlaces = $("portal-dock-my-places");
-		myPlaces.getElementsByTagName("table")[0].onmouseover = function() {
-			MyPlaces.show();
-			this.onmouseover = function() {};
-		};
+		if (myPlaces) {
+			myPlaces.getElementsByTagName("table")[0].onmouseover = function() {
+				MyPlaces.show();
+				this.onmouseover = function() {};
+			};
+		}
 
 		this.cached = LiferayDockCached;
 	},
@@ -258,10 +261,7 @@ var LiferayDock = {
 
 	showObject: function(item, defaultTimeout) {
 		item = $(item);
-		var helpItems = new Array();
-		helpItems.push($("portal-dock-text"));
-		helpItems.push($("portal-dock-my-places"));
-		helpItems.push($("portal-dock-search"));
+		var helpItems = document.getElementsByClassName("portal-dock-help");
 
 		helpItems.each(function(helpItem){
 			if (item.id == helpItem.id) {

@@ -36,7 +36,7 @@
 				<div class="portal-dock-help" id="portal-dock-my-places" style="display: none">
 					<liferay-portlet:runtime portletName="<%= PortletKeys.MY_PLACES %>" />
 				</div>
-				<div clsss="portal-dock-help" id="portal-dock-search" style="display: none">
+				<div class="portal-dock-help" id="portal-dock-search" style="display: none">
 					<liferay-ui:journal-content-search />
 				</div>
 			</td>
