@@ -49,19 +49,27 @@ public class DefaultLandingPageAction extends Action {
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		try {
-			String path = PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
-			
-			LastPath lastPath = new LastPath(StringPool.BLANK, path, 
-				new HashMap());
+		String path = PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
 
-			HttpSession ses = req.getSession();
+		LastPath lastPath = new LastPath(
+			StringPool.BLANK, path, new HashMap());
 
-			ses.setAttribute(WebKeys.LAST_PATH, lastPath);
-		}
-		catch (Exception e) {
-			throw new ActionException(e);
-		}
+		HttpSession ses = req.getSession();
+
+		ses.setAttribute(WebKeys.LAST_PATH, lastPath);
+
+		// The commented code shows how you can programmaticaly set the user's
+		// landing page. You can modify this class to utilize a custom alogrithm
+		// for forwarding a user to his landing page. See the references to this
+		// class in portal.properties.
+
+		/*Map params = new HashMap();
+
+		params.put("p_l_id", new String[] {"PRI.1.1"});
+
+		LastPath lastPath = new LastPath("/c", "/portal/layout", params);
+
+		ses.setAttribute(WebKeys.LAST_PATH, lastPath);*/
 	}
 
 	private static Log _log = LogFactory.getLog(LoginPostAction.class);

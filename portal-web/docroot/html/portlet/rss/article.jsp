@@ -48,14 +48,14 @@ catch (Exception e) {
 		SyndEntry entry = (SyndEntry)entries.get(index);
 
 		SyndContent description = entry.getDescription();
-		
+
 		String contentString = description.getValue();
 
 		SyndContent content = null;
-		
+
 		try {
 			content = (SyndContent)entry.getContents().get(0);
-		
+
 			if (Validator.isNotNull(content.getValue().trim())) {
 				contentString = content.getValue();
 			}
