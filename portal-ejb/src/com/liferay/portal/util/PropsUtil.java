@@ -362,6 +362,10 @@ public class PropsUtil {
 
 	public static final String LOGOUT_EVENTS_POST = "logout.events.post";
 
+	// Default Landing Page
+
+	public static final String DEFAULT_LANDING_PAGE_PATH = "default.landing.page.path";
+
 	// Default Guest
 
 	public static final String DEFAULT_GUEST_LAYOUT_NAME = "default.guest.layout.name";

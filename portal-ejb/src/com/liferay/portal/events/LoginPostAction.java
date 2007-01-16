@@ -165,17 +165,6 @@ public class LoginPostAction extends Action {
 			// Reset the locale
 
 			ses.removeAttribute(Globals.LOCALE_KEY);
-
-			// To manually set a path for the user to forward to, edit
-			// portal.properties and set auth.forward.by.last.path to true.
-
-			/*Map params = new HashMap();
-
-			params.put("p_l_id", new String[] {"PRI.3.1"});
-
-			LastPath lastPath = new LastPath("/c", "/portal/layout", params);
-
-			ses.setAttribute(WebKeys.LAST_PATH, lastPath);*/
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
