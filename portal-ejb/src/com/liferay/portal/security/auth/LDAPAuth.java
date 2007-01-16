@@ -237,9 +237,7 @@ public class LDAPAuth implements Authenticator {
 			}
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn("Problem accessing LDAP server");
-			}
+			_log.error("Problem accessing LDAP server " + e.getMessage());
 
 			return _authenticateRequired(
 				companyId, userId, emailAddress, FAILURE);
