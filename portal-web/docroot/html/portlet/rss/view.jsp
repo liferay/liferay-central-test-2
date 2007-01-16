@@ -51,6 +51,9 @@ SyndFeed feed = null;
 			if (i < titles.length) {
 				title = titles[i];
 			}
+			else {
+				title = "";
+			}
 
 			if (i == 0) {
 				hide = false;

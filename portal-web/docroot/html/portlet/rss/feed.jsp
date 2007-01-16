@@ -39,7 +39,7 @@ catch (Exception e) {
 
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<div class="portlet-rss-header" style="font-weight: bold; background-color: <%= colorScheme.getPortletSectionHeaderBg() %>; padding: 2px 5px 2px 5px; cursor: default"
+		<div class="portlet-rss-header" style="font-weight: bold; background-color: <%= colorScheme.getPortletSectionSubheaderBg() %>; padding: 2px 5px 2px 5px; cursor: default"
 			<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
 				 onclick="<portlet:namespace />rssAccordion.show(this)"
 			</c:if>
@@ -52,6 +52,10 @@ catch (Exception e) {
 		<div class="portlet-rss-content" style="overflow: hidden; <%= hide ? "height: 1px" : "" %>">
 			<div style="padding: 0 10px 0 10px">
 				<div style="font-size: 0; height: 10px;"></div>
+
+				<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+					<ul>
+				</c:if>
 
 				<%
 				List entries = feed.getEntries();
@@ -78,11 +82,11 @@ catch (Exception e) {
 								</c:if>
 						</c:when>
 						<c:otherwise>
-							<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
+							<li style="line-height: 1.5"><a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
 									<portlet:param name="struts_action" value="/rss/article" />
 									<portlet:param name="index" value='<%= j + "" %>' />
 									<portlet:param name="url" value="<%= url %>" />
-								</portlet:renderURL>"><%= entry.getTitle() %></a><br />
+								</portlet:renderURL>"><%= entry.getTitle() %></a></li>
 						</c:otherwise>
 					</c:choose>
 
@@ -92,6 +96,11 @@ catch (Exception e) {
 					}
 				}
 				%>
+
+				<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+					</ul>
+				</c:if>
+
 				<div style="font-size: 0; height: 10px;"></div>
 			</div>
 		</div>

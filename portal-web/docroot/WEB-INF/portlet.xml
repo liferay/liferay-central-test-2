@@ -988,7 +988,7 @@
 		<portlet-preferences>
 			<preference>
 				<name>urls</name>
-				<value>http://www.liferay.com/cms-web/servlet/news-rss-feed?mimeType=application/rss+xml</value>
+				<value>http://www.liferay.com/cms-web/servlet/news-rss-feed?mimeType=application/rss+xml&amp;groupId=1</value>
 				<value>http://rss.news.yahoo.com/rss/tech</value>
 				<value>http://csmonitor.com/rss/scitech.rss</value>
 				<value>http://partners.userland.com/nytRss/technology.xml</value>
