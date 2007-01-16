@@ -209,10 +209,10 @@ if (Validator.isNotNull(modelResource)) {
 				LinkedHashMap userParams = new LinkedHashMap();
 
 				if (tabs2.equals("current")) {
-					userParams.put("permission", String.valueOf(resource.getResourceId()));
+					userParams.put("permission", new Long(resource.getResourceId()));
 				}
 				else if (tabs2.equals("available")) {
-					userParams.put("usersGroups", group.getGroupId());
+					userParams.put("usersGroups", new Long(group.getGroupId()));
 				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

@@ -301,10 +301,21 @@ public class UserFinder {
 			while (itr.hasNext()) {
 				Map.Entry entry = (Map.Entry)itr.next();
 
-				String value = (String)entry.getValue();
+				Object value = entry.getValue();
 
-				if (Validator.isNotNull(value)) {
-					qPos.add(value);
+				if (value instanceof Long) {
+					Long valueLong = (Long)value;
+
+					if (Validator.isNotNull(valueLong)) {
+						qPos.add(valueLong);
+					}
+				}
+				else if (value instanceof String) {
+					String valueString = (String)value;
+
+					if (Validator.isNotNull(valueString)) {
+						qPos.add(valueString);
+					}
 				}
 			}
 		}

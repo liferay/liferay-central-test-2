@@ -125,7 +125,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		LinkedHashMap userParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
-			userParams.put("usersGroups", String.valueOf(group.getGroupId()));
+			userParams.put("usersGroups", new Long(group.getGroupId()));
 		}
 
 		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
@@ -210,7 +210,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		LinkedHashMap organizationParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
-			organizationParams.put("organizationsGroups", group.getGroupId());
+			organizationParams.put("organizationsGroups", new Long(group.getGroupId()));
 		}
 
 		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
@@ -294,7 +294,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		LinkedHashMap userGroupParams = new LinkedHashMap();
 
 		if (tabs2.equals("current")) {
-			userGroupParams.put("userGroupsGroups", group.getGroupId());
+			userGroupParams.put("userGroupsGroups", new Long(group.getGroupId()));
 		}
 
 		int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);

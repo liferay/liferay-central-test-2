@@ -304,14 +304,14 @@ else if (modelResource.equals(Layout.class.getName())) {
 				LinkedHashMap userParams = new LinkedHashMap();
 
 				if (tabs3.equals("current")) {
-					userParams.put("permission", String.valueOf(resource.getResourceId()));
+					userParams.put("permission", new Long(resource.getResourceId()));
 				}
 				else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
 					String layoutGroupId = StringUtil.split(resourcePrimKey, ".")[1];
 
 					layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
 
-					userParams.put("usersGroups", layoutGroupId);
+					userParams.put("usersGroups", GetterUtil.getLong(layoutGroupId));
 				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
