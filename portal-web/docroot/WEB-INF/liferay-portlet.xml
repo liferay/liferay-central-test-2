@@ -114,6 +114,7 @@
 	<portlet>
 		<portlet-name>11</portlet-name>
 		<struts-path>directory</struts-path>
+		<open-search-class>com.liferay.portlet.directory.util.DirectoryOpenSearchImpl</open-search-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -325,6 +326,7 @@
 		<portlet-name>33</portlet-name>
 		<struts-path>blogs</struts-path>
 		<indexer-class>com.liferay.portlet.blogs.util.Indexer</indexer-class>
+		<open-search-class>com.liferay.portlet.blogs.util.BlogsOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
@@ -358,6 +360,7 @@
 		<portlet-name>36</portlet-name>
 		<struts-path>wiki</struts-path>
 		<indexer-class>com.liferay.portlet.wiki.util.Indexer</indexer-class>
+		<open-search-class>com.liferay.portlet.wiki.util.WikiOpenSearchImpl</open-search-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>

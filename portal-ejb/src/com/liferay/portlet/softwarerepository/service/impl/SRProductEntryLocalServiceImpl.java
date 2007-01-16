@@ -333,7 +333,7 @@ public class SRProductEntryLocalServiceImpl
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, String.valueOf(groupId));
+				contextQuery, LuceneFields.GROUP_ID, groupId);
 
 			if (Validator.isNotNull(type)) {
 				LuceneUtil.addRequiredTerm(contextQuery, "type", type);

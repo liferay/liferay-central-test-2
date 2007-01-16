@@ -20,26 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.search;
+package com.liferay.portlet.directory.util;
 
-import com.liferay.portal.kernel.search.Document;
-import com.liferay.portal.kernel.search.DocumentSummary;
-import com.liferay.portal.kernel.search.Hits;
-import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.model.User;
+import com.liferay.portal.search.BaseOpenSearchImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.InstancePool;
-import com.liferay.util.Validator;
+import com.liferay.portal.util.comparator.ContactLastNameComparator;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -47,20 +44,18 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.DateTools;
 
 import org.dom4j.Element;
 
 /**
- * <a href="PortalOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="DirectoryOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Charles May
  * @author  Brian Wing Shun Chan
  *
  */
-public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
+public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 
-	public static final String SEARCH_PATH = "/c/search/open_search";
+	public static final String SEARCH_PATH = "/c/directory/open_search";
 
 	public boolean isEnabled() {
 		return true;
@@ -84,78 +79,50 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			int itemsPerPage)
 		throws Exception {
 
+		String keywordsLike =
+			StringPool.PERCENT + keywords + StringPool.PERCENT;
+
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Hits hits = CompanyLocalServiceUtil.search(
-			themeDisplay.getCompanyId(), keywords);
+		int begin = (startPage * itemsPerPage) - itemsPerPage;
+		int end = startPage * itemsPerPage;
+
+		List results = UserLocalServiceUtil.search(
+			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
+			keywordsLike, keywordsLike, true, null, false, begin, end,
+			new ContactLastNameComparator(true));
+
+		int total = UserLocalServiceUtil.searchCount(
+			themeDisplay.getCompanyId(), keywordsLike, keywordsLike,
+			keywordsLike, keywordsLike, true, null, false);
 
 		Object[] values = addSearchResults(
-			keywords, startPage, itemsPerPage, hits,
-			"Liferay Portal Search: " + keywords, SEARCH_PATH, themeDisplay);
+			keywords, startPage, itemsPerPage, total, null,
+			"Liferay Directory Search: " + keywords, SEARCH_PATH, themeDisplay);
 
-		Hits results = (Hits)values[0];
 		org.dom4j.Document doc = (org.dom4j.Document)values[1];
 		Element root = (Element)values[2];
 
-		for (int i = 0; i < results.getLength(); i++) {
-			Document result = results.doc(i);
+		for (int i = 0; i < results.size(); i++) {
+			User user = (User)results.get(i);
 
-			String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+			String portletId = PortletKeys.DIRECTORY;
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				themeDisplay.getCompanyId(), portletId);
 
-			if (portlet == null) {
-				continue;
-			}
-
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, themeDisplay.getUser());
 
-			String groupId = (String)result.get(LuceneFields.GROUP_ID);
+			PortletURL portletURL = getPortletURL(req, portletId);
 
-			String title = StringPool.BLANK;
-
-			PortletURL portletURL = getPortletURL(req, portletId, groupId);
-
+			String title = user.getFullName();
 			String url = portletURL.toString();
-
-			Date modifedDate = DateTools.stringToDate(
-				(String)result.get(LuceneFields.MODIFIED));
-
-			String content = StringPool.BLANK;
-
-			if (Validator.isNotNull(portlet.getIndexerClass())) {
-				Indexer indexer = (Indexer)InstancePool.get(
-					portlet.getIndexerClass());
-
-				DocumentSummary docSummary =
-					indexer.getDocumentSummary(result, portletURL);
-
-				title = docSummary.getTitle();
-				url = portletURL.toString();
-				content = docSummary.getContent();
-
-				if (portlet.getPortletId().equals(PortletKeys.JOURNAL)) {
-					String articleId = result.get("articleId");
-					String version = result.get("version");
-
-					StringBuffer sb = new StringBuffer();
-
-					sb.append(themeDisplay.getPathMain());
-					sb.append("/journal/view_article_content?articleId=");
-					sb.append(articleId);
-					sb.append("&version=");
-					sb.append(version);
-					sb.append("&groupId=");
-					sb.append(groupId);
-
-					url = sb.toString();
-				}
-			}
-
-			double score = hits.score(i);
+			Date modifedDate = user.getModifiedDate();
+			String content =
+				user.getFullName() + " &lt;" + user.getEmailAddress() + "&gt;";
+			double score = 1.0;
 
 			addSearchResult(
 				root, portletTitle + " &raquo; " + title, url, modifedDate,
@@ -169,6 +136,6 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		return doc.asXML();
 	}
 
-	private static Log _log = LogFactory.getLog(PortalOpenSearchImpl.class);
+	private static Log _log = LogFactory.getLog(DirectoryOpenSearchImpl.class);
 
 }

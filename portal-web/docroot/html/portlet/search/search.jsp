@@ -59,6 +59,13 @@ while (itr.hasNext()) {
 	if (Validator.isNull(portlet.getOpenSearchClass())) {
 		itr.remove();
 	}
+	else {
+		OpenSearch openSearch = (OpenSearch)InstancePool.get(portlet.getOpenSearchClass());
+
+		if (!openSearch.isEnabled()) {
+			itr.remove();
+		}
+	}
 }
 
 if (Validator.isNotNull(primarySearch)) {
@@ -113,7 +120,7 @@ for (int i = 0; i < portlets.size(); i++) {
 
 		Element root = doc.getRootElement();
 
-		portletTitle = root.elementText("title");
+		//portletTitle = root.elementText("title");
 
 		List entries = root.elements("entry");
 
@@ -203,9 +210,9 @@ for (int i = 0; i < portlets.size(); i++) {
 			<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 		</c:when>
 		<c:otherwise>
-			<br>
-
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
+			<div style="padding-top: 5px;">
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= keywords %>" /></portlet:renderURL>"><%= LanguageUtil.get(pageContext, "more") %> &raquo;</a>
+			</div>
 		</c:otherwise>
 	</c:choose>
 

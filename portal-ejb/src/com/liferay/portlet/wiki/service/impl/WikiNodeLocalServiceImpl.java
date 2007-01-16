@@ -301,8 +301,11 @@ public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
 
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
-			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.GROUP_ID, String.valueOf(groupId));
+
+			if (groupId > 0) {
+				LuceneUtil.addRequiredTerm(
+					contextQuery, LuceneFields.GROUP_ID, groupId);
+			}
 
 			if ((nodeIds != null) && (nodeIds.length > 0)) {
 				BooleanQuery nodeIdsQuery = new BooleanQuery();

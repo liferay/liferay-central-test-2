@@ -25,8 +25,6 @@ package com.liferay.portlet.search.action;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.search.PortalOpenSearchImpl;
 import com.liferay.portal.util.Constants;
-import com.liferay.util.ParamUtil;
-import com.liferay.util.dao.search.SearchContainer;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,14 +63,9 @@ public class OpenSearchAction extends Action {
 	}
 
 	protected byte[] getXML(HttpServletRequest req) throws Exception {
-		String keywords = ParamUtil.getString(req, "keywords");
-		int startPage = ParamUtil.getInteger(req, "p", 1);
-		int itemsPerPage = ParamUtil.getInteger(
-			req, "c", SearchContainer.DEFAULT_DELTA);
-
 		OpenSearch search = new PortalOpenSearchImpl();
 
-		String xml = search.search(req, keywords, startPage, itemsPerPage);
+		String xml = search.search(req, req.getRequestURL().toString());
 
 		return xml.getBytes();
 	}

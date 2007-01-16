@@ -32,6 +32,8 @@ import javax.servlet.http.HttpServletRequest;
  */
 public interface OpenSearch {
 
+	public boolean isEnabled();
+
 	public String search(HttpServletRequest req, String url)
 		throws SearchException;
 

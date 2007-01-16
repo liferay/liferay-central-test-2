@@ -421,7 +421,7 @@ public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
 			LuceneUtil.addRequiredTerm(
 				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
 
-			if (groupId >= 0) {
+			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
 					contextQuery, LuceneFields.GROUP_ID, groupId);
 			}

@@ -44,9 +44,13 @@ import org.apache.commons.logging.LogFactory;
  * <a href="AlfrescoOpenSearchImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
 public class AlfrescoOpenSearchImpl implements OpenSearch {
+
+	public static final boolean ENABLED = GetterUtil.getBoolean(PropsUtil.get(
+		PropsUtil.ALFRESCO_OPEN_SEARCH_ENABLED));
 
 	public static final String PROTOCOL = PropsUtil.get(
 		PropsUtil.ALFRESCO_OPEN_SEARCH_PROTOCOL);
@@ -72,14 +76,26 @@ public class AlfrescoOpenSearchImpl implements OpenSearch {
 	public static final String SEARCH_URL =
 		HOST + StringPool.COLON + PORT + PATH;
 
+	public boolean isEnabled() {
+		return ENABLED;
+	}
+
 	public String search(HttpServletRequest req, String url)
 		throws SearchException {
+
+		String xml = StringPool.BLANK;
+
+		if (!ENABLED) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Search is disabled");
+			}
+
+			return xml;
+		}
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Search with " + url);
 		}
-
-		String xml = StringPool.BLANK;
 
 		HttpClient client = new HttpClient();
 

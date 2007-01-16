@@ -24,6 +24,10 @@ package com.liferay.portal.search;
 
 import com.liferay.util.Http;
 
+import java.text.SimpleDateFormat;
+
+import java.util.Date;
+
 import org.dom4j.Element;
 import org.dom4j.Namespace;
 import org.dom4j.QName;
@@ -32,11 +36,10 @@ import org.dom4j.QName;
  * <a href="OpenSearchUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Charles May
+ * @author  Brian Wing Shun Chan
  *
  */
 public class OpenSearchUtil {
-
-	public static final String SEARCH_PATH = "/c/search/open_search";
 
 	public static final int DEFAULT_NAMESPACE = 0;
 
@@ -47,23 +50,42 @@ public class OpenSearchUtil {
 	public static Element addElement(
 		Element el, String name, int namespaceType) {
 
-		return addElement(el, name, namespaceType, null);
+		return el.addElement(getQName(name, namespaceType));
 	}
 
 	public static Element addElement(
-		Element el, String name, int namespaceType, String text) {
+		Element el, String name, int namespaceType, Date value) {
+
+		SimpleDateFormat sdf = new SimpleDateFormat(
+			"yyyy-MM-dd'T'HH:mm:sszzz");
+
+		return addElement(el, name, namespaceType, sdf.format(value));
+	}
+
+	public static Element addElement(
+		Element el, String name, int namespaceType, double value) {
+
+		return addElement(el, name, namespaceType, String.valueOf(value));
+	}
+
+	public static Element addElement(
+		Element el, String name, int namespaceType, int value) {
+
+		return addElement(el, name, namespaceType, String.valueOf(value));
+	}
+
+	public static Element addElement(
+		Element el, String name, int namespaceType, String value) {
 
 		Element returnElement = el.addElement(getQName(name, namespaceType));
 
-		if (text != null) {
-			returnElement.addText(text);
-		}
+		returnElement.addText(value);
 
 		return returnElement;
 	}
 
 	public static void addLink(
-		Element root, String portalURL, String rel, String keywords, int page,
+		Element root, String searchURL, String rel, String keywords, int page,
 		int itemsPerPage) {
 
 		Element link = addElement(root, "link", DEFAULT_NAMESPACE);
@@ -71,8 +93,8 @@ public class OpenSearchUtil {
 		link.addAttribute("rel", rel);
 		link.addAttribute(
 			"href",
-			portalURL + SEARCH_PATH + "?keywords=" + Http.encodeURL(keywords) +
-				"&p=" + page + "&c=" + itemsPerPage + "&format=atom");
+			searchURL + "?keywords=" + Http.encodeURL(keywords) + "&p=" + page +
+				"&c=" + itemsPerPage + "&format=atom");
 		link.addAttribute("type", "application/atom+xml");
 	}
 
