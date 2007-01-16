@@ -105,7 +105,11 @@ for (int i = 0; i < portlets.size(); i++) {
 	headerNames.add("summary");
 	//headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + keywords + "</b>"));
+
+	if (i > 0) {
+		searchContainer.setDelta(5);
+	}
 
 	String portletTitle = PortalUtil.getPortletTitle(portlet, application, locale);
 
