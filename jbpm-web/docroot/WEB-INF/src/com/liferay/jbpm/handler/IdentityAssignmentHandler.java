@@ -25,6 +25,7 @@ package com.liferay.jbpm.handler;
 import com.liferay.client.portal.model.GroupSoap;
 import com.liferay.client.portal.model.RoleSoap;
 import com.liferay.client.portal.model.UserSoap;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import org.jbpm.graph.exe.ExecutionContext;
@@ -60,10 +61,11 @@ public class IdentityAssignmentHandler
 					GroupSoap group =
 						getGroupService().getGroup(companyId, name);
 
-					id = group.getGroupId();
+					id = String.valueOf(group.getGroupId());
 				}
 
-				UserSoap[] users = getUserService().getGroupUsers(id);
+				UserSoap[] users = getUserService().getGroupUsers(
+					GetterUtil.getLong(id));
 
 				String[] actorIds = new String[users.length];
 
