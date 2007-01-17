@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 
 import java.lang.ref.SoftReference;
 
@@ -33,13 +34,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
+ * Provides the strategy for creating new content when new Journal content is 
+ * imported into a Layout set from a LAR.  The default strategy implemented by
+ * this class is to return the first user in the database that is a member of the
+ * specified group as the author Id.  If the group contains no users, the original
+ * author will remain unchanged.
+ * <p>Content will be added as is (i.e. no transformations).
+ *   
  * <a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b></a>
+ * 
+ * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  *
  * @author  Joel Kozikowski
  *
  */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
+    public String getTransformedContent(
+            String companyId, long groupId, JournalArticle newArticle) 
+        throws Exception {
+        return null;
+    }
+    
 	public String getAuthorUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception {

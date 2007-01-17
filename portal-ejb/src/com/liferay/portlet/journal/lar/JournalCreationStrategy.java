@@ -22,19 +22,36 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portlet.journal.model.JournalArticle;
+
 /**
  * An interface defining how newly created content should be added to the
- * Journal when imported from a LAR file. A class implementing this inteface
+ * Journal when imported from a LAR file. A class implementing this interface
  * should be specified in <i>portal.properties</i> under the
  * <b>journal.lar.creation.strategy</b> property.
  *
  * <p><a href="JournalCreationStrategy.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Joel Kozikowski
- *
+ * 
  */
 public interface JournalCreationStrategy {
 
+    /**
+     * Gives the content creation strategy an opportunity to transform the content before the new
+     * article is saved to the database. Possible use cases include using Velocity to merge in
+     * community specific values into the text. Returns the new content to assign to the article. 
+     * If NULL is returned, the article content will be added unchanged.
+     * @param companyId The id of the company the group belongs to
+     * @param groupId The id of the group that the article is being added to
+     * @param newArticle The article being created. Current content can be retrieved with newArticle.getContent()
+     * @return the transformed content to save in the database (or null if the content should be added unchanged).
+     */
+    public String getTransformedContent(
+            String companyId, long groupId, JournalArticle newArticle) 
+        throws Exception;
+    
+    
 	/**
 	 * Returns the author's user id to assign to newly created content. If null
 	 * is returned, the original author of the exported content will be used.

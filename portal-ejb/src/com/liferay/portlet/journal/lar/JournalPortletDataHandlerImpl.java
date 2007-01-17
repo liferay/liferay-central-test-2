@@ -66,7 +66,8 @@ import org.dom4j.io.SAXReader;
  *
  * <p><a href="JournalPortletDataHandlerImpl.java.html"><b><i>View Source</i>
  *</b></a>
- *
+ * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
+ * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  * @author  Raymond Auge
  * @author  Joel Kozikowski
  * @author  Brian Wing Shun Chan
@@ -236,6 +237,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 						article.setApprovedByUserName(null);
 						article.setApproved(false);
 					}
+
+                    String newContent = creationStrategy.getTransformedContent(
+                            context.getCompanyId(), context.getGroupId(), article);
+                    if (newContent != null) {
+                        article.setContent(newContent);    
+                    }
 
 					article = JournalArticleUtil.update(article);
 
