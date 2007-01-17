@@ -70,9 +70,8 @@ if (selLayout == null) {
 	if (tabs3.equals("page")) {
 		tabs3 = "children";
 	}
-
-	if (tabs3.equals("sitemap") && ownerId.startsWith(LayoutImpl.PRIVATE)) {
-		tabs3 = "page";
+	else if (tabs3.equals("sitemap") && ownerId.startsWith(LayoutImpl.PRIVATE)) {
+		tabs3 = "children";
 	}
 }
 
