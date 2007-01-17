@@ -65,7 +65,10 @@ public class OpenSearchAction extends Action {
 	protected byte[] getXML(HttpServletRequest req) throws Exception {
 		OpenSearch search = new PortalOpenSearchImpl();
 
-		String xml = search.search(req, req.getRequestURL().toString());
+		String xml = search.search(
+			req,
+			req.getRequestURL().toString() + StringPool.QUESTION +
+				req.getQueryString());
 
 		return xml.getBytes();
 	}

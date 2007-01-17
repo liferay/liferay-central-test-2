@@ -62,10 +62,11 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		throws SearchException {
 
 		String keywords = GetterUtil.getString(
-			Http.getParameter(url, "keywords"));
-		int startPage = GetterUtil.getInteger(Http.getParameter(url, "p"), 1);
+			Http.getParameter(url, "keywords", false));
+		int startPage = GetterUtil.getInteger(
+			Http.getParameter(url, "p", false), 1);
 		int itemsPerPage = GetterUtil.getInteger(
-			Http.getParameter(url, "c"), SearchContainer.DEFAULT_DELTA);
+			Http.getParameter(url, "c", false), SearchContainer.DEFAULT_DELTA);
 
 		return search(req, keywords, startPage, itemsPerPage);
 	}
@@ -259,7 +260,7 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			root, "link", OpenSearchUtil.DEFAULT_NAMESPACE);
 
 		link.addAttribute("rel", "search");
-		link.addAttribute("href", searchPath + "/description.xml");
+		link.addAttribute("href", searchPath + "_description.xml");
 		link.addAttribute("type", "application/opensearchdescription+xml");
 
 		return new Object[] {hits, doc, root};

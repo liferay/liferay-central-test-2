@@ -84,6 +84,10 @@ if (Validator.isNotNull(primarySearch)) {
 }
 %>
 
+<input type="button" value="Add Liferay as a Search Provider" onClick='window.external.AddSearchProvider("http://localhost:8080/c/search/open_search_description.xml");'>
+
+<br><br>
+
 <table border="0" cellpadding="0" cellspacing="0" width="100%">
 
 <%
