@@ -45,6 +45,10 @@ public interface Layout extends LayoutModel {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public boolean hasAncestor(java.lang.String layoutId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public java.util.List getChildren()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
