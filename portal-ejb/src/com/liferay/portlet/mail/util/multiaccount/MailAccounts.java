@@ -24,10 +24,12 @@ package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.mail.AccountNotFoundException;
 import com.liferay.portlet.mail.MailAccountsException;
+import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -49,6 +51,9 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class MailAccounts {
+
+	public static final String ACCOUNT_FINDER_PASSWORD = PropsUtil.get(
+		PropsUtil.MAIL_ACCOUNT_FINDER_PASSWORD);
 
 	public static MailAccount getCurrentAccount(HttpServletRequest req)
 		throws MailAccountsException {
@@ -109,10 +114,15 @@ public class MailAccounts {
 		try {
 			user = PortalUtil.getUser(req);
 
-			password = PortalUtil.getUserPassword(ses);
+			if (Validator.isNull(ACCOUNT_FINDER_PASSWORD)) {
+				password = PortalUtil.getUserPassword(ses);
 
-			if (password == null) {
-				password = user.getPassword();
+				if (password == null) {
+					password = user.getPassword();
+				}
+			}
+			else {
+				password = ACCOUNT_FINDER_PASSWORD;
 			}
 
 			account = accountFinder.findAccount(user, password, accountName);
