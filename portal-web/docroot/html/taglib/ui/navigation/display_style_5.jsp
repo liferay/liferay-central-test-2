@@ -25,14 +25,6 @@
 <%@ include file="/html/taglib/ui/navigation/init.jsp" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactory.getPortletSetup(request, portletResource, true, true);
-}
-
 String rootLayoutId = layout.getAncestorLayoutId();
 int displayDepth = 0;
 
@@ -49,15 +41,18 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 
 <script type="text/javascript">
 	NavFlyout.initialize($("p_p_id<portlet:namespace />"));
+
 	$("p_p_id<portlet:namespace />").onclick = function() {
 		NavFlyout.initialize($("p_p_id<portlet:namespace />"));
 	}
+
 	NavFlyout.initToggle($("p_p_id<portlet:namespace />"), "<%= themeDisplay.getPathThemeImage() %>/arrows/02_plus.gif");
 </script>
 
 <%!
 private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringBuffer sb) throws Exception {
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
+
 	boolean openList = true;
 	boolean closeList = false;
 
@@ -84,11 +79,11 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			sb.append(layout.getName(themeDisplay.getLocale()));
 			sb.append("</a>");
 
-			if (curDepth > 1 && children > 0) {
+			if ((curDepth > 1) && (children > 0)) {
 				sb.append("&nbsp;&raquo;");
 			}
 
-			if ((displayDepth == 0) || (displayDepth > curDepth) && children > 0) {
+			if ((displayDepth == 0) || ((displayDepth > curDepth) && (children > 0))) {
 				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
 			}
 
