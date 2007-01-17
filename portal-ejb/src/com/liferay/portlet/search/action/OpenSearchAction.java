@@ -23,6 +23,7 @@
 package com.liferay.portlet.search.action;
 
 import com.liferay.portal.kernel.search.OpenSearch;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.search.PortalOpenSearchImpl;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.servlet.ServletResponseUtil;
