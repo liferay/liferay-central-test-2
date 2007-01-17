@@ -360,7 +360,8 @@ public class EditPagesAction extends PortletAction {
 								LayoutImpl.TYPE_PORTLET)) {
 
 							LayoutServiceUtil.updateLayout(
-								layoutId, ownerId, copyLayout.getTypeSettings());
+								layoutId, ownerId,
+								copyLayout.getTypeSettings());
 
 							copyPreferences(req, layout, copyLayout);
 						}

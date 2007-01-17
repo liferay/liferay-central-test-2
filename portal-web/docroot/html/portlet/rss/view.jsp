@@ -25,15 +25,15 @@
 <%@ include file="/html/portlet/rss/init.jsp" %>
 
 <%
-boolean hide = false;
-String title = "";
 String url = ParamUtil.getString(request, "url");
+String title = StringPool.BLANK;
+boolean hide = false;
 
-SyndFeed feed = null;
+WindowState windowState = renderRequest.getWindowState();
 %>
 
 <c:choose>
-	<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
+	<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) && Validator.isNotNull(url) %>">
 
 		<%
 		int i = 0;
@@ -52,7 +52,7 @@ SyndFeed feed = null;
 				title = titles[i];
 			}
 			else {
-				title = "";
+				title = StringPool.BLANK;
 			}
 
 			if (i == 0) {
@@ -62,7 +62,9 @@ SyndFeed feed = null;
 				hide = true;
 			}
 		%>
+
 			<%@ include file="/html/portlet/rss/feed.jsp" %>
+
 		<%
 		}
 		%>

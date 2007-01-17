@@ -23,6 +23,8 @@
 %>
 
 <%
+SyndFeed feed = null;
+
 try {
 	ObjectValuePair ovp = RSSUtil.getFeed(url);
 
@@ -36,24 +38,25 @@ catch (Exception e) {
 }
 %>
 
-
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<div class="portlet-rss-header" style="font-weight: bold; background-color: <%= colorScheme.getPortletSectionSubheaderBg() %>; padding: 2px 5px 2px 5px; cursor: default"
-			<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<div class="portlet-rss-header" style="background-color: <%= colorScheme.getPortletSectionSubheaderBg() %>; cursor: default; font-weight: bold; padding: 2px 5px 2px 5px;"
+			<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
 				 onclick="<portlet:namespace />rssAccordion.show(this)"
 			</c:if>
 		>
 			<%= title %>&nbsp;&nbsp;
-			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal">
-				more &raquo;
+
+			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal;">
+			<%= LanguageUtil.get(pageContext, "more") %> &raquo;
 			</a>
 		</div>
-		<div class="portlet-rss-content" style="overflow: hidden; <%= hide ? "height: 1px" : "" %>">
-			<div style="padding: 0 10px 0 10px">
-				<div style="font-size: 0; height: 10px;"></div>
 
-				<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+		<div class="portlet-rss-content" style="<%= hide ? "height: 1px;" : "" %> overflow: hidden;">
+			<div style="padding: 0 10px 0 10px;">
+				<div style="height: 10px; font-size: 0;"></div>
+
+				<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
 					<ul>
 				</c:if>
 
@@ -64,40 +67,43 @@ catch (Exception e) {
 					SyndEntry entry = (SyndEntry)entries.get(j);
 
 					SyndContent content = entry.getDescription();
-					%>
+				%>
 
 					<c:choose>
-						<c:when test="<%= renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
-								<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
-								<c:if test="<%= entry.getPublishedDate() != null %>">
-									<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
-								</c:if>
+						<c:when test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+							<a style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br>
 
-								<div class="font-small">
-									<%= content.getValue() %>
-								</div>
+							<c:if test="<%= entry.getPublishedDate() != null %>">
+								<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br>
+							</c:if>
 
-								<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
-									<div style="font-size: 0; height: 10px;"></div>
-								</c:if>
+							<div class="font-small">
+								<%= content.getValue() %>
+							</div>
+
+							<c:if test="<%= ((i + 1) < urls.length) || ((j + 1) < entriesPerFeed) %>">
+								<div style="font-size: 0; height: 10px;"></div>
+							</c:if>
 						</c:when>
 						<c:otherwise>
-							<li style="line-height: 1.5"><a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>">
-									<portlet:param name="struts_action" value="/rss/article" />
-									<portlet:param name="index" value='<%= j + "" %>' />
-									<portlet:param name="url" value="<%= url %>" />
-								</portlet:renderURL>"><%= entry.getTitle() %></a></li>
+							<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="articleURL">
+								<portlet:param name="struts_action" value="/rss/article" />
+								<portlet:param name="index" value="<%= String.valueOf(j) %>" />
+								<portlet:param name="url" value="<%= url %>" />
+							</portlet:renderURL>
+
+							<li style="line-height: 1.5;"><a href="<%= articleURL %>"><%= entry.getTitle() %></a></li>
 						</c:otherwise>
 					</c:choose>
 
-					<%
+				<%
 					if ((j + 1) >= entriesPerFeed) {
 						break;
 					}
 				}
 				%>
 
-				<c:if test="<%= !renderRequest.getWindowState().equals(WindowState.MAXIMIZED) %>">
+				<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
 					</ul>
 				</c:if>
 

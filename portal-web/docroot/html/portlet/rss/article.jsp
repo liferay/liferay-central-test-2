@@ -27,6 +27,7 @@
 <%
 String url = ParamUtil.getString(request, "url");
 int index = ParamUtil.getInteger(request, "index");
+
 SyndFeed feed = null;
 
 try {
@@ -38,43 +39,45 @@ catch (Exception e) {
 }
 %>
 
-
 <c:if test="<%= (url != null) && (feed != null) %>">
-	<div style="padding: 10px 10px 10px 10px">
-	<%
-	List entries = feed.getEntries();
+	<div style="padding: 10px 10px 10px 10px;">
 
-	if (index < entries.size()) {
-		SyndEntry entry = (SyndEntry)entries.get(index);
+		<%
+		List entries = feed.getEntries();
 
-		SyndContent description = entry.getDescription();
+		if (index < entries.size()) {
+			SyndEntry entry = (SyndEntry)entries.get(index);
 
-		String contentString = description.getValue();
+			SyndContent description = entry.getDescription();
 
-		SyndContent content = null;
+			String contentString = description.getValue();
 
-		try {
-			content = (SyndContent)entry.getContents().get(0);
+			SyndContent content = null;
 
-			if (Validator.isNotNull(content.getValue().trim())) {
-				contentString = content.getValue();
+			try {
+				content = (SyndContent)entry.getContents().get(0);
+
+				if (Validator.isNotNull(content.getValue().trim())) {
+					contentString = content.getValue();
+				}
 			}
+			catch (Throwable t) {
+			}
+		%>
+
+			<a class="font-large" href="<%= entry.getLink() %>" style="font-weight: bold;" target="_blank"><%= entry.getTitle() %></a><br>
+
+			<c:if test="<%= entry.getPublishedDate() != null %>">
+				<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br>
+			</c:if>
+
+			<div class="font-small">
+				<%= contentString %>
+			</div>
+
+		<%
 		}
-		catch (Throwable t) {}
-	%>
+		%>
 
-		<a class="font-large" style="font-weight: bold" href="<%= entry.getLink() %>" target="_blank"><%= entry.getTitle() %></a><br />
-
-		<c:if test="<%= entry.getPublishedDate() != null %>">
-			<%= dateFormatDateTime.format(entry.getPublishedDate()) %><br />
-		</c:if>
-
-		<div class="font-small">
-			<%= contentString %>
-		</div>
-
-	<%
-	}
-	%>
 	</div>
 </c:if>
