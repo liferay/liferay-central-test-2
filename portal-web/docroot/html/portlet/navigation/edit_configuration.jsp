@@ -65,7 +65,7 @@
 		<select name="<portlet:namespace />displayStyle">
 
 			<%
-			for (int i = 1; i <= 4; i++) {
+			for (int i = 1; i <= 5; i++) {
 			%>
 
 				<option <%= (displayStyle == i) ? "selected" : "" %> value="<%= i %>"><%= i %></option>

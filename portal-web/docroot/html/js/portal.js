@@ -727,6 +727,107 @@ var LayoutColumns = {
 	}
 }
 
+var NavFlyout = {
+	zIndex: 1,
+	initialize: function (nav) {
+		var navMapList = document.getElementsByClassName("portlet-nav-map-list", nav);
+
+		navMapList.each(function(item) {
+			if (!Element.hasClassName(item, "portlet-nav-map-level_1")
+				&& !Element.hasClassName(item, "portlet-nav-map-level_2")) {
+				
+				Element.setStyle(item, {
+					position: "absolute",
+					display: "none"
+				});
+			}
+		});
+		
+		document.getElementsByClassName("portlet-nav-map-list", nav).each(function(item){
+			$A(item.getElementsByTagName("a")).each(function(item2){
+				if (Element.hasClassName(item2.parentNode.parentNode, "portlet-nav-map-level_1")) {
+					item2.onmouseover = function() { NavFlyout.hide(this.parentNode); };
+				}
+				else {
+					item2.onmouseover = NavFlyout.onHoverOver;
+				}
+			});
+		});
+	},
+	
+	initToggle: function(nav, imgSrc) {
+		var navMapList = document.getElementsByClassName("portlet-nav-map-level_1", nav);
+		
+		navMapList.each(function(item){
+			$A(item.childNodes).each(function(item2){
+				if (item2.nodeName && item2.nodeName.toLowerCase() == "li") {
+					item2.onclick = NavFlyout.onToggle;
+					item2.style.backgroundImage = "url(" + imgSrc + ")";
+					item2.getElementsByTagName("a")[0].href = "javascript: void(0);";
+				}
+			});
+		});
+	},
+	
+	hide: function(listItem) {
+		NavFlyout.initialize(listItem.parentNode);
+	},
+	
+	onHoverOver: function() {
+		var listItem = this.parentNode;
+		var subMenus = $A(listItem.childNodes);
+		
+		// Hide all other submenus
+		if (Element.hasClassName(listItem.parentNode, "portlet-nav-map-level_2")) {
+			NavFlyout.hide(listItem.parentNode.parentNode.parentNode);
+		}
+		else {
+			NavFlyout.hide(listItem);
+		}
+
+		// Show current submenu
+		$A(listItem.childNodes).detect(function(item){
+			if (item.nodeName && item.nodeName.toLowerCase() == "ul") {
+			
+				Element.setStyle(item, {
+					display: "block",
+					top: "5px",
+					left: "100px"
+				});
+				item.style.display = "block";
+				return true;
+			}
+		});
+		
+		// Fix Z-Index
+		zItem = listItem;
+		while (zItem.nodeName.toLowerCase() != "div") {
+			if (zItem.nodeName.toLowerCase() == "li") {
+				zItem.style.zIndex = NavFlyout.zIndex;
+			}
+			zItem = zItem.parentNode;
+		}
+		
+		NavFlyout.zIndex++;
+	},
+	
+	onToggle: function() {
+		var subMenu = this.getElementsByTagName("ul")[0];
+
+		if (this.isShowing) {
+			subMenu.style.display = "none";
+			this.style.backgroundImage = this.style.backgroundImage.replace(/02_minus/, "02_plus");
+			this.isShowing = false;
+		}
+		else {
+			subMenu.style.display = "block";
+			subMenu.style.backgroundImage = "none";
+			this.style.backgroundImage = this.style.backgroundImage.replace(/02_plus/, "02_minus");
+			this.isShowing = true;
+		}
+	}
+}
+
 var Navigation = {
 
 	params: new Object(),
