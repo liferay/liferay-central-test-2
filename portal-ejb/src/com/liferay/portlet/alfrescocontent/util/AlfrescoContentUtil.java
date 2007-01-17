@@ -316,10 +316,10 @@ public class AlfrescoContentUtil {
 
 			HasPermissionsResult[] results =
 				accessControlService.hasPermissions(
-					predicate, new String[] {Constants.WRITE});
+					predicate, new String[] {action});
 
 			if ((results.length == 1) &&
-				(results[0].getPermission().equals(Constants.WRITE)) &&
+				(results[0].getPermission().equals(action)) &&
 				(results[0].getAccessStatus().equals(AccessStatus.acepted))) {
 
 				return true;
