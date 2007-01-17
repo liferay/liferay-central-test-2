@@ -39,7 +39,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DefaultLandingPage.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultLandingPageAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Young
  *

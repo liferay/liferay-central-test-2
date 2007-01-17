@@ -91,11 +91,11 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			if ((displayDepth == 0) || (displayDepth > curDepth) && children > 0) {
 				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
 			}
-			
+
 			sb.append("</li>");
 		}
 	}
-	
+
 	if (closeList) {
 		sb.append("</ul>");
 	}
