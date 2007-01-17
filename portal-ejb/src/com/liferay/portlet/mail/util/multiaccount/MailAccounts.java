@@ -108,7 +108,12 @@ public class MailAccounts {
 
 		try {
 			user = PortalUtil.getUser(req);
+
 			password = PortalUtil.getUserPassword(ses);
+
+			if (password == null) {
+				password = user.getPassword();
+			}
 
 			account = accountFinder.findAccount(user, password, accountName);
 		}
