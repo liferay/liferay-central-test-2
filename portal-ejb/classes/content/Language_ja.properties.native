@@ -2312,6 +2312,7 @@ url-tracker=Url 追跡者
 url=Url
 use-custom-title=使用習慣のタイトル
 use-default-values=使用省略時の値
+use-icon=使用アイコン
 use-large-image=使用大きい像
 use-medium-image=使用媒体の像
 use-shipping-formula=使用船積みの方式

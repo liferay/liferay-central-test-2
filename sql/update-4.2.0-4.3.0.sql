@@ -39,6 +39,8 @@ alter_column_type JournalStructure groupId LONG;
 
 alter_column_type JournalTemplate groupId LONG;
 
+alter table Layout add iconImage BOOLEAN;
+
 alter_column_type LayoutSet groupId LONG;
 
 alter_column_type ListType listTypeId INTEGER;

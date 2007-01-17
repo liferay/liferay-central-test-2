@@ -38,6 +38,21 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>layout-icon</name>
+		<tagclass>com.liferay.taglib.theme.LayoutIconTag</tagclass>
+		<bodycontent>JSP</bodycontent>
+		<attribute>
+			<name>page</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>layout</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>meta-tags</name>
 		<tagclass>com.liferay.taglib.theme.MetaTagsTag</tagclass>
 		<bodycontent>JSP</bodycontent>

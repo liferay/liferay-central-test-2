@@ -73,6 +73,15 @@ public interface LayoutService {
 
 	public com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public com.liferay.portal.model.Layout updateLayout(
+		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String typeSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;

@@ -140,6 +140,26 @@ public class LayoutServiceSoap {
 
 	public static com.liferay.portal.model.LayoutSoap updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
+		throws RemoteException {
+		try {
+			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,
+					ownerId, parentLayoutId, name, title, languageId, type,
+					hidden, friendlyURL, iconImage, iconBytes);
+
+			return com.liferay.portal.model.LayoutSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.LayoutSoap updateLayout(
+		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String typeSettings) throws RemoteException {
 		try {
 			com.liferay.portal.model.Layout returnValue = LayoutServiceUtil.updateLayout(layoutId,

@@ -250,6 +250,20 @@ public class LayoutModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getIconImage() {
+		return _iconImage;
+	}
+
+	public boolean isIconImage() {
+		return _iconImage;
+	}
+
+	public void setIconImage(boolean iconImage) {
+		if (iconImage != _iconImage) {
+			_iconImage = iconImage;
+		}
+	}
+
 	public String getThemeId() {
 		return GetterUtil.getString(_themeId);
 	}
@@ -306,6 +320,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 		clone.setTypeSettings(getTypeSettings());
 		clone.setHidden(getHidden());
 		clone.setFriendlyURL(getFriendlyURL());
+		clone.setIconImage(getIconImage());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
 		clone.setPriority(getPriority());
@@ -381,6 +396,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 	private String _typeSettings;
 	private boolean _hidden;
 	private String _friendlyURL;
+	private boolean _iconImage;
 	private String _themeId;
 	private String _colorSchemeId;
 	private int _priority;

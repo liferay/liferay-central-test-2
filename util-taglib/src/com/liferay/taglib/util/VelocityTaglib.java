@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.util;
 
+import com.liferay.portal.model.Layout;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.HeaderBarTag;
 import com.liferay.taglib.portletext.IconBackTag;
@@ -37,6 +38,7 @@ import com.liferay.taglib.portletext.RuntimeTag;
 import com.liferay.taglib.portletext.TitleTag;
 import com.liferay.taglib.security.DoAsURLTag;
 import com.liferay.taglib.security.PermissionsURLTag;
+import com.liferay.taglib.theme.LayoutIconTag;
 import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
 import com.liferay.taglib.ui.PngImageTag;
@@ -261,6 +263,14 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		JournalContentSearchTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String layoutIcon(Layout layout) throws Exception {
+		_res.recycle();
+
+		LayoutIconTag.doTag(layout, _ctx, _req, _res);
 
 		return _res.getString();
 	}

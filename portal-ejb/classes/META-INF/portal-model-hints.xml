@@ -188,6 +188,7 @@
 		</field>
 		<field name="hidden" type="boolean" />
 		<field name="friendlyURL" type="String" />
+		<field name="iconImage" type="boolean" />
 		<field name="themeId" type="String" />
 		<field name="colorSchemeId" type="String" />
 		<field name="priority" type="int" />

@@ -185,6 +185,16 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
+		// Layout Icon
+
+		if (path.startsWith("/layout_icon")) {
+			if (!imageId.equals(StringPool.BLANK) &&
+				!imageId.startsWith(_companyId + ".layout.")) {
+
+				imageId = _companyId + ".layout." + imageId;
+			}
+		}
+
 		// Shopping Item
 
 		else if (path.startsWith("/shopping/item")) {

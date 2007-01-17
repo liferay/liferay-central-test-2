@@ -367,6 +367,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
 	}
 
+	public String getIconImageId() {
+		return getCompanyId() + ".layout." + getPlid();
+	}
+
 	public LayoutSet getLayoutSet() {
 		LayoutSet layoutSet = null;
 

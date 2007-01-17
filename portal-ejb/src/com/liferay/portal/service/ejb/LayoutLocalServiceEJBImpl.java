@@ -146,6 +146,19 @@ public class LayoutLocalServiceEJBImpl implements LayoutLocalService,
 
 	public com.liferay.portal.model.Layout updateLayout(
 		java.lang.String layoutId, java.lang.String ownerId,
+		java.lang.String parentLayoutId, java.lang.String name,
+		java.lang.String title, java.lang.String languageId,
+		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
+		java.lang.Boolean iconImage, byte[] iconBytes)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return LayoutLocalServiceFactory.getTxImpl().updateLayout(layoutId,
+			ownerId, parentLayoutId, name, title, languageId, type, hidden,
+			friendlyURL, iconImage, iconBytes);
+	}
+
+	public com.liferay.portal.model.Layout updateLayout(
+		java.lang.String layoutId, java.lang.String ownerId,
 		java.lang.String typeSettings)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

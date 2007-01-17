@@ -57,10 +57,12 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.portlet.communities.form.PageForm;
+import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.util.List;
 import java.util.Properties;
@@ -292,23 +294,31 @@ public class EditPagesAction extends PortletAction {
 	protected void updateLayout(PageForm pageForm, ActionRequest req)
 		throws Exception {
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
 
-		String layoutId = ParamUtil.getString(req, "layoutId");
-		String ownerId = ParamUtil.getString(req, "ownerId");
+		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		String layoutId = ParamUtil.getString(uploadReq, "layoutId");
+		String ownerId = ParamUtil.getString(uploadReq, "ownerId");
 
-		String parentLayoutId = ParamUtil.getString(req, "parentLayoutId");
-		String name = ParamUtil.getString(req, "name");
-		String title = ParamUtil.getString(req, "title");
-		String languageId = ParamUtil.getString(req, "curLanguageId");
-		String type = ParamUtil.getString(req, "type");
-		boolean hidden = ParamUtil.getBoolean(req, "hidden");
-		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
+		long groupId = ParamUtil.getLong(uploadReq, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(
+			uploadReq, "privateLayout");
 
-		String copyLayoutId = ParamUtil.getString(req, "copyLayoutId");
+		String parentLayoutId = ParamUtil.getString(
+			uploadReq, "parentLayoutId");
+		String name = ParamUtil.getString(uploadReq, "name");
+		String title = ParamUtil.getString(uploadReq, "title");
+		String languageId = ParamUtil.getString(uploadReq, "curLanguageId");
+		String type = ParamUtil.getString(uploadReq, "type");
+		boolean hidden = ParamUtil.getBoolean(uploadReq, "hidden");
+		String friendlyURL = ParamUtil.getString(uploadReq, "friendlyURL");
+		boolean iconImage = ParamUtil.getBoolean(uploadReq, "iconImage");
+		byte[] iconBytes = FileUtil.getBytes(
+			uploadReq.getFile("iconFileName"));
+
+		String copyLayoutId = ParamUtil.getString(uploadReq, "copyLayoutId");
 
 		if (cmd.equals(Constants.ADD)) {
 
@@ -336,7 +346,7 @@ public class EditPagesAction extends PortletAction {
 
 			Layout layout = LayoutServiceUtil.updateLayout(
 				layoutId, ownerId, parentLayoutId, name, title, languageId,
-				type, hidden, friendlyURL);
+				type, hidden, friendlyURL, new Boolean(iconImage), iconBytes);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((Validator.isNotNull(copyLayoutId)) &&

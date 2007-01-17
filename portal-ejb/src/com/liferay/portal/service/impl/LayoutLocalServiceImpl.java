@@ -198,6 +198,10 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		JournalContentSearchLocalServiceUtil.deleteLayoutContentSearches(
 			layout.getLayoutId(), layout.getOwnerId());
 
+		// Icon
+
+		ImageLocalUtil.remove(layout.getIconImageId());
+
 		// Resources
 
 		Iterator itr = ResourceFinder.findByC_P(
@@ -671,6 +675,19 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			String friendlyURL)
 		throws PortalException, SystemException {
 
+		return updateLayout(
+			layoutId, ownerId, parentLayoutId, name, title, languageId, type,
+			hidden, friendlyURL, null, null);
+	}
+
+	public Layout updateLayout(
+			String layoutId, String ownerId, String parentLayoutId, String name,
+			String title, String languageId, String type, boolean hidden,
+			String friendlyURL, Boolean iconImage, byte[] iconBytes)
+		throws PortalException, SystemException {
+
+		// Layout
+
 		parentLayoutId = getParentLayoutId(ownerId, parentLayoutId);
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
@@ -693,7 +710,22 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		layout.setHidden(hidden);
 		layout.setFriendlyURL(friendlyURL);
 
+		if (iconImage != null) {
+			layout.setIconImage(iconImage.booleanValue());
+		}
+
 		LayoutUtil.update(layout);
+
+		// Icon
+
+		if (iconImage != null) {
+			if (!iconImage.booleanValue()) {
+				ImageLocalUtil.remove(layout.getIconImageId());
+			}
+			else if ((iconBytes != null) && (iconBytes.length > 0)) {
+				ImageLocalUtil.put(layout.getIconImageId(), iconBytes);
+			}
+		}
 
 		return layout;
 	}

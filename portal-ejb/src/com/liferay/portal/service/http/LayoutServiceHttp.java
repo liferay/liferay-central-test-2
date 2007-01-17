@@ -476,6 +476,109 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, java.lang.String layoutId,
+		java.lang.String ownerId, java.lang.String parentLayoutId,
+		java.lang.String name, java.lang.String title,
+		java.lang.String languageId, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, java.lang.Boolean iconImage,
+		byte[] iconBytes)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = layoutId;
+
+			if (layoutId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = ownerId;
+
+			if (ownerId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = parentLayoutId;
+
+			if (parentLayoutId == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = title;
+
+			if (title == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = languageId;
+
+			if (languageId == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = type;
+
+			if (type == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = new BooleanWrapper(hidden);
+			Object paramObj8 = friendlyURL;
+
+			if (friendlyURL == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = iconImage;
+
+			if (iconImage == null) {
+				paramObj9 = new NullWrapper("java.lang.Boolean");
+			}
+
+			Object paramObj10 = iconBytes;
+
+			if (iconBytes == null) {
+				paramObj10 = new NullWrapper("[B");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutServiceUtil.class.getName(),
+					"updateLayout",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
+						paramObj10
+					});
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portal.model.Layout)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static com.liferay.portal.model.Layout updateLayout(
+		HttpPrincipal httpPrincipal, java.lang.String layoutId,
 		java.lang.String ownerId, java.lang.String typeSettings)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {

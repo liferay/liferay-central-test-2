@@ -78,6 +78,12 @@ public interface LayoutModel extends BaseModel {
 
 	public void setFriendlyURL(String friendlyURL);
 
+	public boolean getIconImage();
+
+	public boolean isIconImage();
+
+	public void setIconImage(boolean iconImage);
+
 	public String getThemeId();
 
 	public void setThemeId(String themeId);

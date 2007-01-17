@@ -128,6 +128,8 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 	</c:if>
 
 	function <portlet:namespace />savePage() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+
 		<c:choose>
 			<c:when test='<%= tabs3.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
@@ -370,7 +372,6 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 				}
 
 				String type = BeanParamUtil.getString(selLayout, request, "type");
-				boolean hidden = BeanParamUtil.getBoolean(selLayout, request, "hidden");
 				String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 				%>
 
@@ -499,14 +500,11 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</td>
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<select name="<portlet:namespace />hidden">
-									<option <%= (hidden) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-									<option <%= (!hidden) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-								</select>
+								<liferay-ui:input-select param="hidden" defaultValue="<%= selLayout.isIconImage() %>" />
 							</td>
 						</tr>
 
-						<c:if test="<%= (selLayout != null) && PortalUtil.isLayoutFriendliable(selLayout) %>">
+						<c:if test="<%= PortalUtil.isLayoutFriendliable(selLayout) %>">
 							<tr>
 								<td>
 									<%= LanguageUtil.get(pageContext, "friendly-url") %>
@@ -532,28 +530,49 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</tr>
 						</c:if>
 
+						<tr>
+							<td colspan="3">
+								<br>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<%= LanguageUtil.get(pageContext, "icon") %>
+							</td>
+							<td style="padding-left: 10px;"></td>
+							<td>
+								<liferay-theme:layout-icon layout="<%= selLayout %>" />
+
+								<input class="form-text" name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.selectedIndex = 0;">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<%= LanguageUtil.get(pageContext, "use-icon") %>
+							</td>
+							<td style="padding-left: 10px;"></td>
+							<td>
+								<liferay-ui:input-select param="iconImage" defaultValue="<%= selLayout.isIconImage() %>" />
+							</td>
+						</tr>
 						</table>
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<br><div class="beta-separator"></div><br>
+					</td>
+				</tr>
+				<tr>
+					<td>
 
-				<c:if test="<%= selLayout != null %>">
-					<tr>
-						<td>
-							<br><div class="beta-separator"></div><br>
-						</td>
-					</tr>
-					<tr>
-						<td>
+						<%
+						request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
+						%>
 
-							<%
-							request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
-							%>
-
-							<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(selLayout) %>" />
-						</td>
-					</tr>
-				</c:if>
-
+						<liferay-util:include page="<%= Constants.TEXT_HTML_DIR + PortalUtil.getLayoutEditPage(selLayout) %>" />
+					</td>
+				</tr>
 				</table>
 
 				<br>
