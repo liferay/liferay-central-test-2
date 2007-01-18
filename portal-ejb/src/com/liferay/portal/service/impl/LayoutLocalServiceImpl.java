@@ -70,6 +70,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.servlet.FriendlyURLPortletPlugin;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -94,6 +95,7 @@ import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Properties;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -485,7 +487,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			header.attributeValue("build-number"));
 
 		if (buildNumber != importBuildNumber) {
-			throw new LayoutImportException();
+			throw new LayoutImportException("LAR build number (" + importBuildNumber + ") does not match system build number (" + buildNumber + ")");
 		}
 
 		// Look and feel
@@ -544,6 +546,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			layout.setColorSchemeId(colorSchemeId);
 			layout.setPriority(priority);
 
+            fixTypeSettings(layout);
+            
 			LayoutUtil.update(layout);
 
 			// Layout permissions
@@ -602,7 +606,30 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
-	public void setLayouts(
+	private void fixTypeSettings(Layout layout) {
+        if (layout.getType().equals(LayoutImpl.TYPE_URL)) {
+            Properties typeSettings = layout.getTypeSettingsProperties();
+            String url = typeSettings.getProperty("url");
+            if ( url != null && 
+                 (   url.startsWith(PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING)) ||
+                     url.startsWith(PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING))
+                 ) 
+               ) {
+                 int slash2 = url.indexOf("/", 1);
+                 if (slash2 > 0) {
+                     int slash3 = url.indexOf("/", slash2+1);
+                     if (slash3 > slash2) {
+                        String fixedUrl = url.substring(0, slash2) +
+                                          layout.getGroup().getFriendlyURL() +
+                                          url.substring(slash3);
+                        typeSettings.setProperty("url", fixedUrl);
+                     }
+                 }
+            }
+        }
+    }
+
+    public void setLayouts(
 			String ownerId, String parentLayoutId, String[] layoutIds)
 		throws PortalException, SystemException {
 
