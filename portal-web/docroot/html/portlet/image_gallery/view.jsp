@@ -92,7 +92,11 @@ portletURL.setParameter("folderId", folderId);
 
 			sb.append("<a href=\"");
 			sb.append(rowURL);
-			sb.append("\"><b>");
+			sb.append("\">");
+			sb.append("<img align=\"left\" border=\"0\" src=\"");
+			sb.append(themeDisplay.getPathThemeImage());
+			sb.append("/trees/folder.gif\">");
+			sb.append("<b>");
 			sb.append(curFolder.getName());
 			sb.append("</b>");
 

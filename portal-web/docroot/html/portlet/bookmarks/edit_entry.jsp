@@ -112,7 +112,7 @@ String folderId = BeanParamUtil.getString(entry, request, "folderId");
 </tr>
 <tr>
 	<td>
-		<%= LanguageUtil.get(pageContext, "comments") %>
+		<%= LanguageUtil.get(pageContext, "description") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
