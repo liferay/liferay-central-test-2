@@ -231,6 +231,10 @@
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="sv" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="tr" />
 		</antcall>
 

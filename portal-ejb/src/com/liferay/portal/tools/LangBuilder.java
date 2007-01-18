@@ -75,6 +75,7 @@ public class LangBuilder {
 			_createProps(content, "pt"); // Portuguese
 			_createProps(content, "ru"); // Russian
 			_createProps(content, "es"); // Spanish
+			_createProps(content, "sv"); // Swedish
 			_createProps(content, "tr"); // Turkish
 			_createProps(content, "vi"); // Vietnamese
 		}
@@ -236,11 +237,12 @@ public class LangBuilder {
 			translationId.equals("en_fi") ||
 			translationId.equals("en_hu") ||
 			translationId.equals("en_ru") ||
+			translationId.equals("en_sv") ||
 			translationId.equals("en_tr") ||
 			translationId.equals("en_vi")) {
 
 			// Automatic translator does not support Arabic, Catalan, Czech,
-			// Finnish, Hungarian, Russian, Turkish, or Vietnamese
+			// Finnish, Hungarian, Russian, Swedish, Turkish, or Vietnamese
 
 			return null;
 		}
