@@ -66,6 +66,13 @@ public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 			virtualHost);
 	}
 
+	public void updateLogo(java.lang.String ownerId, boolean logo,
+		java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutSetLocalServiceFactory.getTxImpl().updateLogo(ownerId, logo, file);
+	}
+
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

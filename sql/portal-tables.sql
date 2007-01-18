@@ -431,6 +431,7 @@ create table LayoutSet (
 	groupId LONG,
 	userId VARCHAR(75) not null,
 	privateLayout BOOLEAN,
+	logo BOOLEAN,
 	themeId VARCHAR(75) null,
 	colorSchemeId VARCHAR(75) null,
 	pageCount INTEGER,

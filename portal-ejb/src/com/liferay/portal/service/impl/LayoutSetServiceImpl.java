@@ -31,6 +31,8 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.permission.GroupPermission;
 
+import java.io.File;
+
 /**
  * <a href="LayoutSetServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -39,6 +41,17 @@ import com.liferay.portal.service.permission.GroupPermission;
  */
 public class LayoutSetServiceImpl
 	extends PrincipalBean implements LayoutSetService {
+
+	public void updateLogo(String ownerId, boolean logo, File file)
+		throws PortalException, SystemException {
+
+		long groupId = LayoutImpl.getGroupId(ownerId);
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		LayoutSetLocalServiceUtil.updateLogo(ownerId, logo, file);
+	}
 
 	public LayoutSet updateLookAndFeel(
 			String ownerId, String themeId, String colorSchemeId)

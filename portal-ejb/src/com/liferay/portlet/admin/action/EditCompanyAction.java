@@ -25,6 +25,7 @@ package com.liferay.portlet.admin.action;
 import com.liferay.portal.AccountNameException;
 import com.liferay.portal.CompanyHomeURLException;
 import com.liferay.portal.CompanyPortalURLException;
+import com.liferay.portal.model.Company;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -107,14 +108,20 @@ public class EditCompanyAction extends PortletAction {
 	}
 
 	protected void updateDisplay(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		Company company = PortalUtil.getCompany(req);
 
 		String languageId = ParamUtil.getString(req, "languageId");
 		String timeZoneId = ParamUtil.getString(req, "timeZoneId");
 		String resolution = ParamUtil.getString(req, "resolution");
+		boolean communityLogo = ParamUtil.getBoolean(req, "communityLogo");
 
 		CompanyServiceUtil.updateDisplay(
-			companyId, languageId, timeZoneId, resolution);
+			company.getCompanyId(), languageId, timeZoneId, resolution);
+
+		CompanyServiceUtil.updateSecurity(
+			company.getCompanyId(), company.getAuthType(),
+			company.isAutoLogin(), company.isSendPassword(),
+			company.isStrangers(), communityLogo);
 	}
 
 }

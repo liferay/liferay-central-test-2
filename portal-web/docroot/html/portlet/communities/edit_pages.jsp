@@ -61,7 +61,7 @@ if (selLayout != null) {
 	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
 		tabs3 = "page";
 	}
-	else if (tabs3.equals("import-export") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap"))) {
+	else if (tabs3.equals("logo") || tabs3.equals("import-export") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap"))) {
 		tabs3 = "page";
 	}
 }
@@ -148,6 +148,12 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
 		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />updateLogo() {
+		document.<portlet:namespace />fm.encoding = "multipart/form-data";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "logo";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -258,6 +264,10 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 			tabs3Names = StringUtil.replace(tabs3Names, "page,", StringPool.BLANK);
 
 			if (GroupPermission.contains(permissionChecker, groupId, ActionKeys.UPDATE)) {
+				if (company.isCommunityLogo()) {
+					tabs3Names += ",logo";
+				}
+
 				tabs3Names += ",import-export,virtual-host";
 
 				if (ownerId.startsWith(LayoutImpl.PUBLIC)) {
@@ -499,7 +509,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</td>
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<liferay-ui:input-select param="hidden" defaultValue="<%= selLayout.isIconImage() %>" />
+								<liferay-ui:input-checkbox param="hidden" defaultValue="<%= selLayout.isHidden() %>" />
 							</td>
 						</tr>
 
@@ -542,7 +552,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							<td>
 								<liferay-theme:layout-icon layout="<%= selLayout %>" />
 
-								<input class="form-text" name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.selectedIndex = 0;">
+								<input class="form-text" name="<portlet:namespace />iconFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />iconImage.value = true; document.<portlet:namespace />fm.<portlet:namespace />iconImageCheckbox.checked = true;">
 							</td>
 						</tr>
 						<tr>
@@ -551,7 +561,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 							</td>
 							<td style="padding-left: 10px;"></td>
 							<td>
-								<liferay-ui:input-select param="iconImage" defaultValue="<%= selLayout.isIconImage() %>" />
+								<liferay-ui:input-checkbox param="iconImage" defaultValue="<%= selLayout.isIconImage() %>" />
 							</td>
 						</tr>
 						</table>
@@ -684,10 +694,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<select name="<portlet:namespace />hidden">
-							<option <%= (hidden) ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "yes") %></option>
-							<option <%= (!hidden) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "no") %></option>
-						</select>
+						<liferay-ui:input-checkbox param="hidden" defaultValue="<%= hidden %>" />
 					</td>
 				</tr>
 				</table>
@@ -893,6 +900,48 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 					</td>
 				</tr>
 				</table>
+			</c:when>
+			<c:when test='<%= tabs3.equals("logo") %>'>
+				<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+
+				<%
+				LayoutSet layoutSet = LayoutSetLocalServiceUtil.getLayoutSet(ownerId);
+				%>
+
+				<%= LanguageUtil.get(pageContext, "upload-a-logo-for-the-" + (privateLayout ? "private" : "public") + "-pages-that-will-be-used-instead-of-the-default-enterprise-logo") %>
+
+				<br><br>
+
+				<c:if test="<%= layoutSet.isLogo() %>">
+					<img src="<%= themeDisplay.getPathImage() %>/layout_set_logo?img_id=<%= layoutSet.getOwnerId() %>">
+
+					<br><br>
+				</c:if>
+
+				<table border="0" cellpadding="0" cellspacing="0">
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "logo") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<input class="form-text" name="<portlet:namespace />logoFileName" size="30" type="file" onChange="document.<portlet:namespace />fm.<portlet:namespace />logo.value = true; document.<portlet:namespace />fm.<portlet:namespace />logoCheckbox.checked = true;">
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<%= LanguageUtil.get(pageContext, "use-logo") %>
+					</td>
+					<td style="padding-left: 10px;"></td>
+					<td>
+						<liferay-ui:input-checkbox param="logo" defaultValue="<%= layoutSet.isLogo() %>" />
+					</td>
+				</tr>
+				</table>
+
+				<br>
+
+				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />updateLogo();">
 			</c:when>
 			<c:when test='<%= tabs3.equals("import-export") %>'>
 				<liferay-ui:error exception="<%= LayoutImportException.class %>" message="an-unexpected-error-occurred-while-importing-your-file" />

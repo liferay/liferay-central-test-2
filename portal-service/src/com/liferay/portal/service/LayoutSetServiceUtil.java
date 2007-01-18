@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutSetServiceUtil {
+	public static void updateLogo(java.lang.String ownerId, boolean logo,
+		java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		LayoutSetService layoutSetService = LayoutSetServiceFactory.getService();
+		layoutSetService.updateLogo(ownerId, logo, file);
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

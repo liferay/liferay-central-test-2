@@ -29,6 +29,12 @@ package com.liferay.portal.model;
  *
  */
 public interface LayoutSet extends LayoutSetModel {
+	public java.lang.String getLogoImageId();
+
+	public java.lang.String getPngLogoImageId();
+
+	public java.lang.String getWbmpLogoImageId();
+
 	public com.liferay.portal.model.Theme getTheme()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

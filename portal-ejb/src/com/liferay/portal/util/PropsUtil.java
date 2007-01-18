@@ -140,6 +140,8 @@ public class PropsUtil {
 
 	public static final String COMPANY_SECURITY_STRANGERS = "company.security.strangers";
 
+	public static final String COMPANY_SECURITY_COMMUNITY_LOGO = "company.security.community.logo";
+
 	// Users
 
 	public static final String USERS_DELETE = "users.delete";

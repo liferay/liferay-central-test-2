@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.admin.action;
 
+import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.CompanyServiceUtil;
@@ -293,7 +294,7 @@ public class EditUsersAction extends PortletAction {
 	}
 
 	protected void updateSecurity(ActionRequest req) throws Exception {
-		String companyId = PortalUtil.getCompanyId(req);
+		Company company = PortalUtil.getCompany(req);
 
 		String authType = ParamUtil.getString(req, "authType");
 		boolean autoLogin = ParamUtil.getBoolean(req, "autoLogin");
@@ -301,7 +302,8 @@ public class EditUsersAction extends PortletAction {
 		boolean strangers = ParamUtil.getBoolean(req, "strangers");
 
 		CompanyServiceUtil.updateSecurity(
-			companyId, authType, autoLogin, sendPassword, strangers);
+			company.getCompanyId(), authType, autoLogin, sendPassword,
+			strangers, company.isCommunityLogo());
 	}
 
 	private static Log _log = LogFactory.getLog(EditUsersAction.class);

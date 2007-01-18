@@ -37,6 +37,14 @@ import javax.ejb.SessionContext;
  *
  */
 public class LayoutSetServiceEJBImpl implements LayoutSetService, SessionBean {
+	public void updateLogo(java.lang.String ownerId, boolean logo,
+		java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		LayoutSetServiceFactory.getTxImpl().updateLogo(ownerId, logo, file);
+	}
+
 	public com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

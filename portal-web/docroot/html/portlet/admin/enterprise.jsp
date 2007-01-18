@@ -213,7 +213,21 @@ User user2 = company.getDefaultUser();
 	<td align="center" valign="top">
 		<img src="<%= themeDisplay.getPathImage() %>/company_logo?img_id=<%= company.getCompanyId() %>"><br>
 
-		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a>
+		<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/edit_enterprise_logo" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>" style="font-size: xx-small;"><%= LanguageUtil.get(pageContext, "change") %></a><br>
+	</td>
+</tr>
+</table>
+
+<br>
+
+<table border="0" cellpadding="0" cellspacing="0">
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "allow-community-administrators-to-use-their-own-logo") %>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<liferay-ui:input-checkbox param="communityLogo" defaultValue="<%= company.isCommunityLogo() %>" />
 	</td>
 </tr>
 </table>

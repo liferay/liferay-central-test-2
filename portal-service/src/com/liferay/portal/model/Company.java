@@ -68,4 +68,8 @@ public interface Company extends CompanyModel {
 	public boolean isStrangers()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
+
+	public boolean isCommunityLogo()
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
 }

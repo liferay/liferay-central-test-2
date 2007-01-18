@@ -70,10 +70,10 @@ public class CompanyServiceSoap {
 
 	public static void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers) throws RemoteException {
+		boolean strangers, boolean communityLogo) throws RemoteException {
 		try {
 			CompanyServiceUtil.updateSecurity(companyId, authType, autoLogin,
-				sendPassword, strangers);
+				sendPassword, strangers, communityLogo);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

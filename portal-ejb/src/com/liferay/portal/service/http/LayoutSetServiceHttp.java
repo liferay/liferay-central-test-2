@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.security.auth.HttpPrincipal;
@@ -37,6 +38,49 @@ import com.liferay.portal.service.http.TunnelUtil;
  *
  */
 public class LayoutSetServiceHttp {
+	public static void updateLogo(HttpPrincipal httpPrincipal,
+		java.lang.String ownerId, boolean logo, java.io.File file)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = ownerId;
+
+			if (ownerId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = new BooleanWrapper(logo);
+			Object paramObj2 = file;
+
+			if (file == null) {
+				paramObj2 = new NullWrapper("java.io.File");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(LayoutSetServiceUtil.class.getName(),
+					"updateLogo",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		HttpPrincipal httpPrincipal, java.lang.String ownerId,
 		java.lang.String themeId, java.lang.String colorSchemeId)

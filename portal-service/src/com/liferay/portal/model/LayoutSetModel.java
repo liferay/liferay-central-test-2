@@ -57,6 +57,12 @@ public interface LayoutSetModel extends BaseModel {
 
 	public void setPrivateLayout(boolean privateLayout);
 
+	public boolean getLogo();
+
+	public boolean isLogo();
+
+	public void setLogo(boolean logo);
+
 	public String getThemeId();
 
 	public void setThemeId(String themeId);

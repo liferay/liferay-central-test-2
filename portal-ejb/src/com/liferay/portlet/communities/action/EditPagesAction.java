@@ -62,7 +62,10 @@ import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.UploadException;
 import com.liferay.util.servlet.UploadPortletRequest;
+
+import java.io.File;
 
 import java.util.List;
 import java.util.Properties;
@@ -115,6 +118,9 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("display_order")) {
 				updateDisplayOrder(req);
 			}
+			else if (cmd.equals("logo")) {
+				updateLogo(req);
+			}
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
@@ -140,7 +146,8 @@ public class EditPagesAction extends PortletAction {
 					 e instanceof LayoutParentLayoutIdException ||
 					 e instanceof LayoutSetVirtualHostException ||
 					 e instanceof LayoutTypeException ||
-					 e instanceof RequiredLayoutException) {
+					 e instanceof RequiredLayoutException ||
+					 e instanceof UploadException) {
 
 				if (e instanceof LayoutFriendlyURLException) {
 					SessionErrors.add(
@@ -417,6 +424,24 @@ public class EditPagesAction extends PortletAction {
 					layoutId, ownerId, layout.getTypeSettings());
 			}
 		}
+	}
+
+	protected void updateLogo(ActionRequest req) throws Exception {
+		UploadPortletRequest uploadReq =
+			PortalUtil.getUploadPortletRequest(req);
+
+		String ownerId = ParamUtil.getString(req, "ownerId");
+
+		boolean logo = ParamUtil.getBoolean(req, "logo");
+
+		File file = uploadReq.getFile("logoFileName");
+		byte[] bytes = FileUtil.getBytes(file);
+
+		if (logo && ((bytes == null) || (bytes.length == 0))) {
+			throw new UploadException();
+		}
+
+		LayoutSetServiceUtil.updateLogo(ownerId, logo, file);
 	}
 
 	protected void updateLookAndFeel(ActionRequest req) throws Exception {

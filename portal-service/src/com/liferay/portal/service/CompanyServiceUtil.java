@@ -64,11 +64,11 @@ public class CompanyServiceUtil {
 
 	public static void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers)
+		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		CompanyService companyService = CompanyServiceFactory.getService();
 		companyService.updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers);
+			sendPassword, strangers, communityLogo);
 	}
 }

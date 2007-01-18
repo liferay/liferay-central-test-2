@@ -145,6 +145,8 @@ public class ServicePreAction extends Action {
 			String companyLogo =
 				imagePath + "/company_logo?img_id=" + companyId;
 
+			String realCompanyLogo = companyLogo;
+
 			// User
 
 			User user = PortalUtil.getUser(req);
@@ -291,10 +293,24 @@ public class ServicePreAction extends Action {
 			Object[] viewableLayouts = getViewableLayouts(
 				layout, layouts, permissionChecker, req);
 
+			String layoutSetLogo = null;
+
 			layout = (Layout)viewableLayouts[0];
 			layouts = (List)viewableLayouts[1];
 
 			if (layout != null) {
+				if (company.isCommunityLogo()) {
+					LayoutSet layoutSet = layout.getLayoutSet();
+
+					if (layoutSet.isLogo()) {
+						layoutSetLogo =
+							imagePath + "/layout_set_logo?img_id=" +
+								layoutSet.getOwnerId();
+
+						companyLogo = layoutSetLogo;
+					}
+				}
+
 				plid = layout.getPlid();
 
 				layoutId = layout.getLayoutId();
@@ -366,9 +382,11 @@ public class ServicePreAction extends Action {
 
 			themeDisplay.setCompany(company);
 			themeDisplay.setCompanyLogo(companyLogo);
+			themeDisplay.setRealCompanyLogo(realCompanyLogo);
 			themeDisplay.setUser(user);
 			themeDisplay.setRealUser(realUser);
 			themeDisplay.setDoAsUserId(doAsUserId);
+			themeDisplay.setLayoutSetLogo(layoutSetLogo);
 			themeDisplay.setLayout(layout);
 			themeDisplay.setLayouts(layouts);
 			themeDisplay.setPlid(plid);

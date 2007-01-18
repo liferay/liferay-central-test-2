@@ -183,6 +183,7 @@
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="privateLayout" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="logo" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="themeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="colorSchemeId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="pageCount" type="com.liferay.util.dao.hibernate.IntegerType" />

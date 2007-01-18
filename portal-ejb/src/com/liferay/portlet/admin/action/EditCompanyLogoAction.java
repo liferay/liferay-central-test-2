@@ -57,7 +57,7 @@ public class EditCompanyLogoAction extends PortletAction {
 		throws Exception {
 
 		try {
-			uploadLogo(req);
+			updateLogo(req);
 
 			sendRedirect(req, res);
 		}
@@ -85,7 +85,7 @@ public class EditCompanyLogoAction extends PortletAction {
 			getForward(req, "portlet.admin.edit_enterprise_logo"));
 	}
 
-	protected void uploadLogo(ActionRequest req) throws Exception {
+	protected void updateLogo(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
 

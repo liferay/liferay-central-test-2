@@ -403,6 +403,7 @@
 		<column name="groupId" type="long" />
 		<column name="userId" type="String" />
 		<column name="privateLayout" type="boolean" />
+		<column name="logo" type="boolean" />
 		<column name="themeId" type="String" />
 		<column name="colorSchemeId" type="String" />
 		<column name="pageCount" type="int" />

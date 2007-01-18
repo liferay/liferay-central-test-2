@@ -162,6 +162,11 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 			getCompanyId(), PropsUtil.COMPANY_SECURITY_STRANGERS);
 	}
 
+	public boolean isCommunityLogo() throws PortalException, SystemException {
+		return PrefsPropsUtil.getBoolean(
+			getCompanyId(), PropsUtil.COMPANY_SECURITY_COMMUNITY_LOGO);
+	}
+
 	private static Log _log = LogFactory.getLog(CompanyImpl.class);
 
 	private Key _keyObj = null;

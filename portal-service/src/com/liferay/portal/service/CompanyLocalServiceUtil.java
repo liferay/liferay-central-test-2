@@ -112,11 +112,11 @@ public class CompanyLocalServiceUtil {
 
 	public static void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers)
+		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 		companyLocalService.updateSecurity(companyId, authType, autoLogin,
-			sendPassword, strangers);
+			sendPassword, strangers, communityLogo);
 	}
 }

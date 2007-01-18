@@ -79,6 +79,14 @@ public class ThemeDisplay implements Serializable {
 		_companyLogo = companyLogo;
 	}
 
+	public String getRealCompanyLogo() {
+		return _realCompanyLogo;
+	}
+
+	public void setRealCompanyLogo(String realCompanyLogo) {
+		_realCompanyLogo = realCompanyLogo;
+	}
+
 	public Account getAccount() {
 		return _account;
 	}
@@ -136,6 +144,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setContact(Contact contact) {
 		_contact = contact;
+	}
+
+	public String getLayoutSetLogo() {
+		return _layoutSetLogo;
+	}
+
+	public void setLayoutSetLogo(String layoutSetLogo) {
+		_layoutSetLogo = layoutSetLogo;
 	}
 
 	public Layout getLayout() {
@@ -580,9 +596,11 @@ public class ThemeDisplay implements Serializable {
 
 		_company = null;
 		_companyLogo = null;
+		_realCompanyLogo = null;
 		_user = null;
 		_realUser = null;
 		_doAsUserId = null;
+		_layoutSetLogo = null;
 		_layout = null;
 		_layouts = null;
 		_plid = null;
@@ -640,11 +658,13 @@ public class ThemeDisplay implements Serializable {
 
 	private Company _company;
 	private String _companyLogo;
+	private String _realCompanyLogo;
 	private Account _account;
 	private User _user;
 	private User _realUser;
 	private String _doAsUserId;
 	private Contact _contact;
+	private String _layoutSetLogo;
 	private Layout _layout;
 	private List _layouts;
 	private String _plid;

@@ -106,11 +106,11 @@ public class CompanyLocalServiceEJBImpl implements CompanyLocalService,
 
 	public void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers)
+		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		CompanyLocalServiceFactory.getTxImpl().updateSecurity(companyId,
-			authType, autoLogin, sendPassword, strangers);
+			authType, autoLogin, sendPassword, strangers, communityLogo);
 	}
 
 	public void ejbCreate() throws CreateException {

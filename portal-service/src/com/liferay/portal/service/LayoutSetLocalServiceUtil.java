@@ -63,6 +63,14 @@ public class LayoutSetLocalServiceUtil {
 		return layoutSetLocalService.getLayoutSet(companyId, virtualHost);
 	}
 
+	public static void updateLogo(java.lang.String ownerId, boolean logo,
+		java.io.File file)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+		layoutSetLocalService.updateLogo(ownerId, logo, file);
+	}
+
 	public static com.liferay.portal.model.LayoutSet updateLookAndFeel(
 		java.lang.String ownerId, java.lang.String themeId,
 		java.lang.String colorSchemeId)

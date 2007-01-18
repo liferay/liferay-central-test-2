@@ -126,7 +126,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Company Logo
+		// Company logo
 
 		if (path.startsWith("/company_logo")) {
 			if (ParamUtil.get(req, "png", false)) {
@@ -141,7 +141,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Image Gallery
+		// Image gallery
 
 		if (path.startsWith("/image_gallery")) {
 			if (!imageId.equals(StringPool.BLANK) &&
@@ -158,7 +158,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Journal Article
+		// Journal article
 
 		if (path.startsWith("/journal/article")) {
 			if (!imageId.equals(StringPool.BLANK) &&
@@ -174,7 +174,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Journal Template
+		// Journal template
 
 		if (path.startsWith("/journal/template")) {
 			if (!imageId.equals(StringPool.BLANK) &&
@@ -185,7 +185,7 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Layout Icon
+		// Layout icon
 
 		if (path.startsWith("/layout_icon")) {
 			if (!imageId.equals(StringPool.BLANK) &&
@@ -195,7 +195,28 @@ public class ImageServlet extends HttpServlet {
 			}
 		}
 
-		// Shopping Item
+		// Layout set logo
+
+		if (path.startsWith("/layout_set_logo")) {
+			if (!imageId.equals(StringPool.BLANK) &&
+				!imageId.startsWith(_companyId + ".layout_set.")) {
+
+				imageId = _companyId + ".layout_set." + imageId;
+			}
+
+			if (ParamUtil.get(req, "png", false)) {
+				imageId += ".png";
+
+				//res.setContentType("image/png");
+			}
+			else if (ParamUtil.get(req, "wbmp", false)) {
+				imageId += ".wbmp";
+
+				//res.setContentType("image/vnd.wap.wbmp");
+			}
+		}
+
+		// Shopping item
 
 		else if (path.startsWith("/shopping/item")) {
 			if (!imageId.equals(StringPool.BLANK) &&

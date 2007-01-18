@@ -144,6 +144,20 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public boolean getLogo() {
+		return _logo;
+	}
+
+	public boolean isLogo() {
+		return _logo;
+	}
+
+	public void setLogo(boolean logo) {
+		if (logo != _logo) {
+			_logo = logo;
+		}
+	}
+
 	public String getThemeId() {
 		return GetterUtil.getString(_themeId);
 	}
@@ -212,6 +226,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		clone.setGroupId(getGroupId());
 		clone.setUserId(getUserId());
 		clone.setPrivateLayout(getPrivateLayout());
+		clone.setLogo(getLogo());
 		clone.setThemeId(getThemeId());
 		clone.setColorSchemeId(getColorSchemeId());
 		clone.setPageCount(getPageCount());
@@ -264,6 +279,7 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	private long _groupId;
 	private String _userId;
 	private boolean _privateLayout;
+	private boolean _logo;
 	private String _themeId;
 	private String _colorSchemeId;
 	private int _pageCount;

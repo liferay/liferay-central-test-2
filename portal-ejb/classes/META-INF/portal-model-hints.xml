@@ -199,6 +199,7 @@
 		<field name="groupId" type="long" />
 		<field name="userId" type="String" />
 		<field name="privateLayout" type="boolean" />
+		<field name="logo" type="boolean" />
 		<field name="themeId" type="String" />
 		<field name="colorSchemeId" type="String" />
 		<field name="pageCount" type="int" />

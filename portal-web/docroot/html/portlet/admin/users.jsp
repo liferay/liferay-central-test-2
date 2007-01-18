@@ -190,7 +190,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<liferay-ui:input-select param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
+						<liferay-ui:input-checkbox param="autoLogin" defaultValue="<%= company.isAutoLogin() %>" />
 					</td>
 				</tr>
 				<tr>
@@ -199,7 +199,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<liferay-ui:input-select param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
+						<liferay-ui:input-checkbox param="sendPassword" defaultValue="<%= company.isSendPassword() %>" />
 					</td>
 				</tr>
 				<tr>
@@ -208,7 +208,7 @@
 					</td>
 					<td style="padding-left: 10px;"></td>
 					<td>
-						<liferay-ui:input-select param="strangers" defaultValue="<%= company.isStrangers() %>" />
+						<liferay-ui:input-checkbox param="strangers" defaultValue="<%= company.isStrangers() %>" />
 					</td>
 				</tr>
 				</table>

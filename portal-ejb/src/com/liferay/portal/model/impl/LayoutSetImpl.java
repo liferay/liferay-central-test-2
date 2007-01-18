@@ -40,6 +40,18 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	public LayoutSetImpl() {
 	}
 
+	public String getLogoImageId() {
+		return getCompanyId() + ".layout_set." + getOwnerId();
+	}
+
+	public String getPngLogoImageId() {
+		return getCompanyId() + ".layout_set." + getOwnerId() + ".png";
+	}
+
+	public String getWbmpLogoImageId() {
+		return getCompanyId() + ".layout_set." + getOwnerId() + ".wbmp";
+	}
+
 	public Theme getTheme() throws PortalException, SystemException {
 		return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId());
 	}

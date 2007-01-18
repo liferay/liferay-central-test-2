@@ -72,12 +72,12 @@ public class CompanyServiceEJBImpl implements CompanyService, SessionBean {
 
 	public void updateSecurity(java.lang.String companyId,
 		java.lang.String authType, boolean autoLogin, boolean sendPassword,
-		boolean strangers)
+		boolean strangers, boolean communityLogo)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 		CompanyServiceFactory.getTxImpl().updateSecurity(companyId, authType,
-			autoLogin, sendPassword, strangers);
+			autoLogin, sendPassword, strangers, communityLogo);
 	}
 
 	public void ejbCreate() throws CreateException {

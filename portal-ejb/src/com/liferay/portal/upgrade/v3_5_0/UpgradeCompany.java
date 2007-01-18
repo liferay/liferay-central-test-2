@@ -72,11 +72,13 @@ public class UpgradeCompany extends UpgradeProcess {
 				boolean autoLogin = rs.getBoolean("autoLogin");
 				boolean sendPassword = true;
 				boolean strangers = rs.getBoolean("strangers");
+				boolean communityLogo = true;
 
 				_log.info("Upgrading company " + companyId);
 
 				CompanyLocalServiceUtil.updateSecurity(
-					companyId, authType, autoLogin, sendPassword, strangers);
+					companyId, authType, autoLogin, sendPassword, strangers,
+					communityLogo);
 			}
 		}
 		finally {

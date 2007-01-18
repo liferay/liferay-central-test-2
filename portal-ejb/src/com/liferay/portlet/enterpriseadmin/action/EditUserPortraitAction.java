@@ -68,7 +68,7 @@ public class EditUserPortraitAction extends PortletAction {
 		throws Exception {
 
 		try {
-			uploadPortrait(req);
+			updatePortrait(req);
 
 			sendRedirect(req, res);
 		}
@@ -165,7 +165,7 @@ public class EditUserPortraitAction extends PortletAction {
 		}
 	}
 
-	protected void uploadPortrait(ActionRequest req) throws Exception {
+	protected void updatePortrait(ActionRequest req) throws Exception {
 
 		//_testRequest(req);
 

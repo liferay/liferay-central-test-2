@@ -39,9 +39,19 @@ import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.ImageUtil;
 import com.liferay.util.Validator;
 
+import java.awt.image.BufferedImage;
+
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
+
 import java.util.Iterator;
+
+import javax.imageio.ImageIO;
 
 /**
  * <a href="LayoutSetLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -75,9 +85,7 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 	public void deleteLayoutSet(String ownerId)
 		throws PortalException, SystemException {
 
-		// Layout set
-
-		LayoutSetUtil.remove(ownerId);
+		LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
 
 		// Layouts
 
@@ -93,6 +101,16 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 			catch (NoSuchLayoutException nsle) {
 			}
 		}
+
+		// Logo
+
+		ImageLocalUtil.remove(layoutSet.getLogoImageId());
+		ImageLocalUtil.remove(layoutSet.getPngLogoImageId());
+		ImageLocalUtil.remove(layoutSet.getWbmpLogoImageId());
+
+		// Layout set
+
+		LayoutSetUtil.remove(ownerId);
 	}
 
 	public LayoutSet getLayoutSet(String ownerId)
@@ -105,6 +123,61 @@ public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
 		throws PortalException, SystemException {
 
 		return LayoutSetFinder.findByC_V(companyId, virtualHost);
+	}
+
+	public void updateLogo(String ownerId, boolean logo, File file)
+		throws PortalException, SystemException {
+
+		try {
+
+			// Layout set
+
+			LayoutSet layoutSet = LayoutSetUtil.findByPrimaryKey(ownerId);
+
+			layoutSet.setLogo(logo);
+
+			LayoutSetUtil.update(layoutSet);
+
+			if (logo) {
+
+				// Logo
+
+				ImageLocalUtil.put(
+					layoutSet.getLogoImageId(), FileUtil.getBytes(file));
+
+				BufferedImage thumbnail = ImageUtil.scale(
+					ImageIO.read(file), .6);
+
+				// PNG logo
+
+				ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+				ImageIO.write(thumbnail, "png", baos);
+
+				ImageLocalUtil.put(
+					layoutSet.getPngLogoImageId(), baos.toByteArray());
+
+				// WBMP logo
+
+				baos = new ByteArrayOutputStream();
+
+				ImageUtil.encodeWBMP(thumbnail, baos);
+
+				ImageLocalUtil.put(
+					layoutSet.getWbmpLogoImageId(), baos.toByteArray());
+			}
+			else {
+				ImageLocalUtil.remove(layoutSet.getLogoImageId());
+				ImageLocalUtil.remove(layoutSet.getPngLogoImageId());
+				ImageLocalUtil.remove(layoutSet.getWbmpLogoImageId());
+			}
+		}
+		catch (InterruptedException ie) {
+			throw new SystemException(ie);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 	}
 
 	public LayoutSet updateLookAndFeel(
