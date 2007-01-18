@@ -38,9 +38,9 @@ public class UpgradeProcess_4_2_0 extends UpgradeProcess {
 
 	public int getThreshold() {
 
-		// Version 4.1.2 has build number 3102
+		// Version 4.1.3 has build number 3103
 
-		return 3102;
+		return 3103;
 	}
 
 	public void upgrade() throws UpgradeException {
