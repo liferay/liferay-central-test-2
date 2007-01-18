@@ -105,7 +105,7 @@ public class CompressionStream extends ServletOutputStream {
 			throw new IOException();
 		}
 
-		// See LEP-649
+		// LEP-649
 
 		//_checkBufferSize(1);
 
@@ -121,7 +121,7 @@ public class CompressionStream extends ServletOutputStream {
 			throw new IOException();
 		}
 
-		// See LEP-649
+		// LEP-649
 
 		//_checkBufferSize(len);
 

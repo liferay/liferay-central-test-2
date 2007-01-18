@@ -1586,7 +1586,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public Portlet getClonedInstance(String portletId) {
 		if (_clonedInstances == null) {
 
-			// See LEP-528
+			// LEP-528
 
 			return null;
 		}

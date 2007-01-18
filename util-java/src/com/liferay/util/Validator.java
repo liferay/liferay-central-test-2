@@ -301,7 +301,7 @@ public class Validator {
 
 	public static boolean isEmailAddressSpecialChar(char c) {
 
-		// See LEP-1445
+		// LEP-1445
 
 		for (int i = 0; i < _EMAIL_ADDRESS_SPECIAL_CHAR.length; i++) {
 			if (c == _EMAIL_ADDRESS_SPECIAL_CHAR[i]) {

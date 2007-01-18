@@ -199,7 +199,7 @@ public class EditPagesAction extends PortletAction {
 
 	protected void checkPermissions(PortletRequest req) throws Exception {
 
-		// See LEP-850
+		// LEP-850
 
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);

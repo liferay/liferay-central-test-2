@@ -106,7 +106,7 @@ public class RuntimeTag extends TagSupport {
 		}
 		else {
 
-			// See LEP-1023
+			// LEP-1023
 
 			//res.getOutputStream().print(renderPortletSB.toString());
 			res.getWriter().print(renderPortletSB.toString());

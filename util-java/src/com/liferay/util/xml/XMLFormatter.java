@@ -50,7 +50,7 @@ public class XMLFormatter {
 
 	public static String fixProlog(String xml) {
 
-		// See LEP-1921
+		// LEP-1921
 
 		if (xml != null) {
 			char[] charArray = xml.toCharArray();
