@@ -346,14 +346,6 @@
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.UserGroupRoleImpl" table="UserGroupRole">
-		<cache usage="read-write" />
-		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserGroupRolePK">
-			<key-property name="userId" />
-			<key-property name="roleId" />
-			<key-property name="groupId" />
-		</composite-id>
-	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
 		<id name="subscriptionId" type="java.lang.String">
@@ -404,6 +396,14 @@
 		<property name="parentUserGroupId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portal.model.impl.UserGroupRoleImpl" table="UserGroupRole">
+		<cache usage="read-write" />
+		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserGroupRolePK">
+			<key-property name="userId" />
+			<key-property name="roleId" />
+			<key-property name="groupId" />
+		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.UserIdMapperImpl" table="UserIdMapper">
 		<cache usage="read-write" />

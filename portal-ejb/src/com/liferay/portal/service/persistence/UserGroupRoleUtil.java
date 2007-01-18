@@ -39,12 +39,12 @@ import org.apache.commons.logging.LogFactory;
  */
 public class UserGroupRoleUtil {
 	public static com.liferay.portal.model.UserGroupRole create(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK) {
+		UserGroupRolePK userGroupRolePK) {
 		return getPersistence().create(userGroupRolePK);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole remove(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
 		ModelListener listener = _getListener();
@@ -140,14 +140,14 @@ public class UserGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole findByPrimaryKey(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
 		return getPersistence().findByPrimaryKey(userGroupRolePK);
 	}
 
 	public static com.liferay.portal.model.UserGroupRole fetchByPrimaryKey(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		UserGroupRolePK userGroupRolePK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().fetchByPrimaryKey(userGroupRolePK);
 	}
@@ -187,8 +187,7 @@ public class UserGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole[] findByU_G_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		java.lang.String userId, long groupId,
+		UserGroupRolePK userGroupRolePK, java.lang.String userId, long groupId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
@@ -227,8 +226,8 @@ public class UserGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole[] findByGroupId_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		UserGroupRolePK userGroupRolePK, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
 		return getPersistence().findByGroupId_PrevAndNext(userGroupRolePK,
@@ -268,8 +267,7 @@ public class UserGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole[] findByRoleId_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		java.lang.String roleId,
+		UserGroupRolePK userGroupRolePK, java.lang.String roleId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {
@@ -310,8 +308,7 @@ public class UserGroupRoleUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole[] findByUserId_PrevAndNext(
-		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK,
-		java.lang.String userId,
+		UserGroupRolePK userGroupRolePK, java.lang.String userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.NoSuchUserGroupRoleException {

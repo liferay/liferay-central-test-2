@@ -117,21 +117,6 @@ public class RoleServiceSoap {
 		}
 	}
 
-	public static com.liferay.portal.model.RoleSoap[] getUserRelatedGroupRoles(
-		java.lang.String userId, java.lang.String groupId)
-		throws RemoteException {
-		try {
-			java.util.List returnValue = RoleServiceUtil.getUserRelatedGroupRoles(userId,
-					groupId);
-
-			return com.liferay.portal.model.RoleSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portal.model.RoleSoap[] getUserRoles(
 		java.lang.String userId) throws RemoteException {
 		try {

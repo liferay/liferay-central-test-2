@@ -277,13 +277,6 @@
 			<timeout>3000</timeout>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/UserGroupRoleLocalServiceHome</local-jndi-name>
-			<cluster-home>false</cluster-home>
-			<cluster-object>false</cluster-object>
-			<timeout>3000</timeout>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/SubscriptionLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
@@ -314,6 +307,13 @@
 		<session>
 			<ejb-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portal_service_ejb_UserGroupServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/UserGroupRoleLocalServiceHome</local-jndi-name>
 			<cluster-home>false</cluster-home>
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>

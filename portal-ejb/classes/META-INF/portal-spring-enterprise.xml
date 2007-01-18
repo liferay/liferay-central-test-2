@@ -1380,46 +1380,6 @@
 			<ref bean="com.liferay.portal.service.persistence.RolePersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portal.service.UserGroupRoleLocalService</value>
-		</property>
-		<property name="jndiName">
-			<value>ejb/liferay/UserGroupRoleLocalServiceHome</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.professional" class="com.liferay.portal.service.impl.UserGroupRoleLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" class="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence" class="com.liferay.portal.service.persistence.UserGroupRolePersistence" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistence" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.SubscriptionLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portal.service.SubscriptionLocalService</value>
@@ -1592,6 +1552,46 @@
 	<bean id="com.liferay.portal.service.persistence.UserGroupUtil" class="com.liferay.portal.service.persistence.UserGroupUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.UserGroupPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portal.service.UserGroupRoleLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/UserGroupRoleLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.professional" class="com.liferay.portal.service.impl.UserGroupRoleLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" class="com.liferay.portal.service.UserGroupRoleLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.UserGroupRoleLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupRolePersistence" class="com.liferay.portal.service.persistence.UserGroupRolePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.persistence.UserGroupRoleUtil" class="com.liferay.portal.service.persistence.UserGroupRoleUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portal.service.persistence.UserGroupRolePersistence" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserIdMapperLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
