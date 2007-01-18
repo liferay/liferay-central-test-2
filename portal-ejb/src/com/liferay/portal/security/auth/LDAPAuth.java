@@ -214,16 +214,16 @@ public class LDAPAuth implements Authenticator {
 
 				Attribute userPassword = attrs.get("userPassword");
 
-				boolean authenticated = _authenticate(
+				boolean authenticated = authenticate(
 					ctx, env, binding, baseDN, userPassword,  password,
 					companyId, userId, emailAddress);
 
 				if (!authenticated) {
-					return _authenticateRequired(
+					return authenticateRequired(
 						companyId, userId, emailAddress, FAILURE);
 				}
 
-				_processUser(
+				processUser(
 					attrs, userMappings, companyId, emailAddress,  userId,
 					password);
 			}
@@ -232,21 +232,21 @@ public class LDAPAuth implements Authenticator {
 					_log.debug("Search filter did not return any results");
 				}
 
-				return _authenticateRequired(
+				return authenticateRequired(
 					companyId, userId, emailAddress, DNE);
 			}
 		}
 		catch (Exception e) {
 			_log.error("Problem accessing LDAP server " + e.getMessage());
 
-			return _authenticateRequired(
+			return authenticateRequired(
 				companyId, userId, emailAddress, FAILURE);
 		}
 
 		return SUCCESS;
 	}
 
-	private static boolean _authenticate(
+	protected boolean authenticate(
 			LdapContext ctx, Properties env, Binding binding, String baseDN,
 			Attribute userPassword, String password, String companyId,
 			String userId, String emailAddress)
@@ -300,7 +300,7 @@ public class LDAPAuth implements Authenticator {
 		return true;
 	}
 
-	private static int _authenticateRequired(
+	protected int authenticateRequired(
 			String companyId, String userId, String emailAddress,
 			int failureCode)
 		throws Exception {
@@ -315,7 +315,7 @@ public class LDAPAuth implements Authenticator {
 		}
 	}
 
-	private static void _processUser(
+	protected void processUser(
 			Attributes attrs, Properties userMappings, String companyId,
 			String emailAddress, String userId, String password)
 		throws Exception {
