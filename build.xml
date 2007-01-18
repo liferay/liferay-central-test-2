@@ -84,7 +84,7 @@
 				<delete failonerror="false">
 					<fileset
 						dir="${app.server.dir}/domains/domain1/config"
-						includes="${database.name}.*,jbpm.*"
+						includes="${database.name}.*"
 					/>
 				</delete>
 			</then>
@@ -97,13 +97,13 @@
 					<delete failonerror="false">
 						<fileset
 							dir="${app.server.bin.dir}/nt"
-							includes="${database.name}.*,jbpm.*"
+							includes="${database.name}.*"
 						/>
 					</delete>
 					<delete failonerror="false">
 						<fileset
 							dir="${app.server.bin.dir}/unix"
-							includes="${database.name}.*,jbpm.*"
+							includes="${database.name}.*"
 						/>
 					</delete>
 				</then>
@@ -112,7 +112,7 @@
 				<delete failonerror="false">
 					<fileset
 						dir="${app.server.bin.dir}"
-						includes="${database.name}.*,jbpm.*"
+						includes="${database.name}.*"
 					/>
 				</delete>
 			</else>

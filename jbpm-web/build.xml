@@ -10,9 +10,6 @@
 	<property name="war.file" value="${ant.project.name}" />
 
 	<target name="deploy">
-		<delete file="jbpm.properties" failonerror="false" />
-		<delete file="jbpm.script" failonerror="false" />
-
 		<java
 			classname="com.liferay.portal.tools.DBLoader"
 			classpathref="project.classpath"
@@ -22,49 +19,16 @@
 		>
 			<arg value="hypersonic" />
 			<arg value="jbpm" />
-			<arg value="docroot/WEB-INF/sql/hsqldb.create.jbpm.3.1.sql" />
+			<arg value="docroot/WEB-INF/sql/hsqldb.create.sql" />
 			<jvmarg value="-Dfile.encoding=UTF-8" />
 		</java>
 
-		<if>
-			<equals arg1="${app.server.type}" arg2="glassfish" />
-			<then>
-				<copy todir="${app.server.dir}/domains/domain1/config">
-					<fileset dir=".">
-						<include name="jbpm.properties" />
-						<include name="jbpm.script" />
-					</fileset>
-				</copy>
-			</then>
-			<elseif>
-				<or>
-					<equals arg1="${app.server.type}" arg2="jonas-jetty" />
-					<equals arg1="${app.server.type}" arg2="jonas-tomcat" />
-				</or>
-				<then>
-					<copy todir="${app.server.bin.dir}/nt">
-						<fileset dir=".">
-							<include name="jbpm.properties" />
-							<include name="jbpm.script" />
-						</fileset>
-					</copy>
-					<copy todir="${app.server.bin.dir}/unix">
-						<fileset dir=".">
-							<include name="jbpm.properties" />
-							<include name="jbpm.script" />
-						</fileset>
-					</copy>
-				</then>
-			</elseif>
-			<else>
-				<copy todir="${app.server.bin.dir}">
-					<fileset dir=".">
-						<include name="jbpm.properties" />
-						<include name="jbpm.script" />
-					</fileset>
-				</copy>
-			</else>
-		</if>
+		<move todir="docroot/WEB-INF/sql">
+			<fileset dir=".">
+				<include name="jbpm.properties" />
+				<include name="jbpm.script" />
+			</fileset>
+		</move>
 
 		<antcall target="build-common-web.deploy" />
 	</target>
