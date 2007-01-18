@@ -42,6 +42,8 @@ public class ResourceImpl extends ResourceModelImpl implements Resource {
 
 	public static final String SCOPE_GROUP = "group";
 
+	public static final String SCOPE_GROUP_TEMPLATE = "groupTemplate";
+
 	public static final String SCOPE_COMPANY = "company";
 
 	public ResourceImpl() {

@@ -24,6 +24,7 @@ package com.liferay.portal.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -39,7 +40,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
-		HttpPrincipal httpPrincipal, java.lang.String name)
+		HttpPrincipal httpPrincipal, java.lang.String name, int scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -49,8 +50,9 @@ public class RoleServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj1 = new IntegerWrapper(scope);
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
-					"addRole", new Object[] { paramObj0 });
+					"addRole", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {
@@ -253,6 +255,52 @@ public class RoleServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"getUserRelatedRoles", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
+	public static java.util.List getUserRelatedGroupRoles(
+		HttpPrincipal httpPrincipal, java.lang.String userId,
+		java.lang.String groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = userId;
+
+			if (userId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = groupId;
+
+			if (groupId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
+					"getUserRelatedGroupRoles",
+					new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;
 
 			try {

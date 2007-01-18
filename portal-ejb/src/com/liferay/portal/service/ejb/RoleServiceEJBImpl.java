@@ -37,12 +37,13 @@ import javax.ejb.SessionContext;
  *
  */
 public class RoleServiceEJBImpl implements RoleService, SessionBean {
-	public com.liferay.portal.model.Role addRole(java.lang.String name)
+	public com.liferay.portal.model.Role addRole(java.lang.String name,
+		int scope)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return RoleServiceFactory.getTxImpl().addRole(name);
+		return RoleServiceFactory.getTxImpl().addRole(name, scope);
 	}
 
 	public void deleteRole(java.lang.String roleId)
@@ -85,6 +86,16 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 		PrincipalSessionBean.setThreadValues(_sc);
 
 		return RoleServiceFactory.getTxImpl().getUserRelatedRoles(userId, groups);
+	}
+
+	public java.util.List getUserRelatedGroupRoles(java.lang.String userId,
+		java.lang.String groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return RoleServiceFactory.getTxImpl().getUserRelatedGroupRoles(userId,
+			groupId);
 	}
 
 	public java.util.List getUserRoles(java.lang.String userId)

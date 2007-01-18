@@ -48,8 +48,8 @@ import org.hibernate.Session;
  */
 public class RoleFinder {
 
-	public static String COUNT_BY_C_N_D =
-		RoleFinder.class.getName() + ".countByC_N_D";
+	public static String COUNT_BY_C_N_D_S =
+		RoleFinder.class.getName() + ".countByC_N_D_S";
 
 	public static String FIND_BY_C_N =
 		RoleFinder.class.getName() + ".findByC_N";
@@ -57,11 +57,14 @@ public class RoleFinder {
 	public static String FIND_BY_U_G =
 		RoleFinder.class.getName() + ".findByU_G";
 
-	public static String FIND_BY_C_N_D =
-		RoleFinder.class.getName() + ".findByC_N_D";
+	public static String FIND_BY_C_N_D_S =
+		RoleFinder.class.getName() + ".findByC_N_D_S";
 
-	public static int countByC_N_D(
-			String companyId, String name, String description)
+	public static String FIND_BY_GROUP_ROLES_U_G =
+		RoleFinder.class.getName() + ".findGroupRolesByU_G";
+
+	public static int countByC_N_D_S(
+			String companyId, String name, String description, String scope)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -72,7 +75,7 @@ public class RoleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_S);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -87,6 +90,8 @@ public class RoleFinder {
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
+			qPos.add(scope);
+			qPos.add(scope);
 
 			Iterator itr = q.list().iterator();
 
@@ -183,9 +188,40 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByC_N_D(
-			String companyId, String name, String description, int begin,
-			int end)
+	public static List findGroupRolesByU_G(String userId, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ROLES_U_G);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Role_", RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(groupId);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByC_N_D_S(
+			String companyId, String name, String description, String scope,
+			int begin, int end)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -196,7 +232,7 @@ public class RoleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_D);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_S);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -211,6 +247,8 @@ public class RoleFinder {
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
+			qPos.add(scope);
+			qPos.add(scope);
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

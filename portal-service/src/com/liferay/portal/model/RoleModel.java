@@ -43,6 +43,10 @@ public interface RoleModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
+	public int getScope();
+
+	public void setScope(int scope);
+
 	public String getClassName();
 
 	public void setClassName(String className);

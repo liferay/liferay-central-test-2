@@ -103,6 +103,16 @@ public class RoleModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public int getScope() {
+		return _scope;
+	}
+
+	public void setScope(int scope) {
+		if (scope != _scope) {
+			_scope = scope;
+		}
+	}
+
 	public String getClassName() {
 		return GetterUtil.getString(_className);
 	}
@@ -174,6 +184,7 @@ public class RoleModelImpl extends BaseModelImpl {
 		RoleImpl clone = new RoleImpl();
 		clone.setRoleId(getRoleId());
 		clone.setCompanyId(getCompanyId());
+		clone.setScope(getScope());
 		clone.setClassName(getClassName());
 		clone.setClassPK(getClassPK());
 		clone.setName(getName());
@@ -228,6 +239,7 @@ public class RoleModelImpl extends BaseModelImpl {
 
 	private String _roleId;
 	private String _companyId;
+	private int _scope;
 	private String _className;
 	private String _classPK;
 	private String _name;

@@ -1,5 +1,4 @@
 <?xml version="1.0"?>
-<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_2_0.dtd">
 
 <service-builder root-dir=".." package-path="com.liferay">
 	<portlet name="Portal" short-name="" />
@@ -194,7 +193,7 @@
 		<column name="createdByUserName" type="String" />
 		<column name="updatedOn" type="Date" />
 		<column name="updatedBy" type="String" />
-		
+
 		<!-- Other fields -->
 
 		<column name="className" type="String" />
@@ -610,7 +609,7 @@
 		<column name="groups" type="Collection" entity="Group" mapping-table="Groups_Permissions" />
 		<column name="roles" type="Collection" entity="Role" mapping-table="Roles_Permissions" />
 		<column name="users" type="Collection" entity="User" mapping-table="Users_Permissions" />
-		
+
 		<!-- Finder methods -->
 
 		<finder name="ResourceId" return-type="Collection">
@@ -827,6 +826,7 @@
 
 		<!-- Other fields -->
 
+		<column name="scope" type="int" />
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="name" type="String" />
@@ -1002,6 +1002,30 @@
 			<finder-column name="name" />
 		</finder>
 	</entity>
+	<entity name="UserGroupRole" local-service="true" remote-service="false">
+
+		<!-- PK fields -->
+
+		<column name="userId" type="String" primary="true"/>
+		<column name="roleId" type="String" primary="true"/>
+		<column name="groupId" type="long" primary="true"/>
+
+		<!-- Finder methods -->
+
+		<finder name="U_G" return-type="Collection">
+			<finder-column name="userId" />
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="RoleId" return-type="Collection">
+			<finder-column name="roleId" />
+		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
@@ -1141,7 +1165,7 @@
 		<exception>LayoutImport</exception>
 		<exception>LayoutName</exception>
 		<exception>LayoutParentLayoutId</exception>
-		<exception>LayoutPermission</exception>		
+		<exception>LayoutPermission</exception>
 		<exception>LayoutSetVirtualHost</exception>
 		<exception>LayoutType</exception>
 		<exception>NoteContent</exception>

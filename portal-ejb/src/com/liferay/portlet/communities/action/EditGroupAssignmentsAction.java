@@ -25,6 +25,7 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -67,6 +68,9 @@ public class EditGroupAssignmentsAction extends PortletAction {
 			}
 			else if (cmd.equals("group_users")) {
 				updateGroupUsers(req);
+			}
+			else if (cmd.equals("user_group_role")) {
+				updateUserGroupRole(req);
 			}
 
 			sendRedirect(req, res);
@@ -150,6 +154,21 @@ public class EditGroupAssignmentsAction extends PortletAction {
 
 		UserServiceUtil.addGroupUsers(groupId, addUserIds);
 		UserServiceUtil.unsetGroupUsers(groupId, removeUserIds);
+	}
+
+	protected void updateUserGroupRole(ActionRequest req) throws Exception {
+		String userId = ParamUtil.getString(req, "userId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		String[] addRoleIds = StringUtil.split(
+			ParamUtil.getString(req, "addRoleIds"));
+		String[] removeRoleIds = StringUtil.split(
+			ParamUtil.getString(req, "removeRoleIds"));
+
+		UserGroupRoleLocalServiceUtil.addGroupRoles(
+			userId, groupId, addRoleIds);
+		UserGroupRoleLocalServiceUtil.unsetGroupRoles(
+			userId, groupId, removeRoleIds);
 	}
 
 }

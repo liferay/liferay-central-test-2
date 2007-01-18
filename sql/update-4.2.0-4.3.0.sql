@@ -156,3 +156,13 @@ alter_column_type Website websiteId LONG;
 alter_column_type Website typeId INTEGER;
 
 alter_column_type WikiNode groupId LONG;
+
+alter table Role_ add scope INTEGER;
+update Role_ set scope = 0;
+
+create table UserGroupRole (
+	userId VARCHAR(75) not null,
+	roleId VARCHAR(75) not null,
+	groupId LONG,
+	primary key (userId, roleId, groupId)
+);

@@ -29,7 +29,8 @@ package com.liferay.portal.service;
  *
  */
 public interface RoleService {
-	public com.liferay.portal.model.Role addRole(java.lang.String name)
+	public com.liferay.portal.model.Role addRole(java.lang.String name,
+		int scope)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
@@ -53,6 +54,11 @@ public interface RoleService {
 
 	public java.util.List getUserRelatedRoles(java.lang.String userId,
 		java.util.List groups)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
+	public java.util.List getUserRelatedGroupRoles(java.lang.String userId,
+		java.lang.String groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

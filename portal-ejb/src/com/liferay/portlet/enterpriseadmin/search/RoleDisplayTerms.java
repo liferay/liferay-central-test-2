@@ -39,11 +39,14 @@ public class RoleDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
+	public static final String SCOPE = "scope";
+
 	public RoleDisplayTerms(RenderRequest req) {
 		super(req);
 
 		name = ParamUtil.getString(req, NAME);
 		description = ParamUtil.getString(req, DESCRIPTION);
+		scope = ParamUtil.getString(req, SCOPE);
 	}
 
 	public String getName() {
@@ -54,7 +57,12 @@ public class RoleDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
+	public String getScope() {
+		return scope;
+	}
+
 	protected String name;
 	protected String description;
+	protected String scope;
 
 }

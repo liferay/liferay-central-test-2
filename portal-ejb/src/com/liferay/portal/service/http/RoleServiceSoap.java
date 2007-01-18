@@ -36,9 +36,10 @@ import java.rmi.RemoteException;
  */
 public class RoleServiceSoap {
 	public static com.liferay.portal.model.RoleSoap addRole(
-		java.lang.String name) throws RemoteException {
+		java.lang.String name, int scope) throws RemoteException {
 		try {
-			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name);
+			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
+					scope);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}
@@ -107,6 +108,21 @@ public class RoleServiceSoap {
 		try {
 			java.util.List returnValue = RoleServiceUtil.getUserRelatedRoles(userId,
 					groups);
+
+			return com.liferay.portal.model.RoleSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portal.model.RoleSoap[] getUserRelatedGroupRoles(
+		java.lang.String userId, java.lang.String groupId)
+		throws RemoteException {
+		try {
+			java.util.List returnValue = RoleServiceUtil.getUserRelatedGroupRoles(userId,
+					groupId);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModels(returnValue);
 		}

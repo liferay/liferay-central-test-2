@@ -128,12 +128,13 @@ public class EditRoleAction extends PortletAction {
 		String roleId = ParamUtil.getString(req, "roleId");
 
 		String name = ParamUtil.getString(req, "name");
+		int scope = ParamUtil.getInteger(req, "scope");
 
 		if (cmd.equals(Constants.ADD)) {
 
 			// Add role
 
-			RoleServiceUtil.addRole(name);
+			RoleServiceUtil.addRole(name, scope);
 		}
 		else {
 

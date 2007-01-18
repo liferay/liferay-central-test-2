@@ -336,13 +336,13 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 1) {
 			return hasUserPermissions_1(
-				userId, actionId, resourceId, permissions, groups, start,
-				block);
+				userId, actionId, resourceId, permissions, groups, groupId,
+				start, block);
 		}
 		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 2) {
 			return hasUserPermissions_2(
-				userId, actionId, resourceId, permissions, groups, start,
-				block);
+				userId, actionId, resourceId, permissions, groups, groupId,
+				start, block);
 		}
 		else if (PermissionCheckerImpl.USER_CHECK_ALGORITHM == 3) {
 			return hasUserPermissions_3(
@@ -631,8 +631,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_1(
-			String userId, String actionId, long resourceId, List permissions,
-			List groups, long start, int block)
+		String userId, String actionId, long resourceId, List permissions,
+		List groups, long groupId, long start, int block)
 		throws PortalException, SystemException {
 
 		// Is the user connected to one of the permissions via group or
@@ -670,6 +670,16 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		start = logHasUserPermissions(
 			userId, actionId, resourceId, start, block++);
 
+		// Is the user connected to one of the permissions via user group roles?
+
+		if (PermissionFinder.countByUserGroupRole(
+				permissions, userId, groupId) > 0) {
+			return true;
+		}
+
+		start = logHasUserPermissions(
+			userId, actionId, resourceId, start, block++);
+
 		// Is the user directly connected to one of the permissions?
 
 		if (PermissionFinder.countByUsersPermissions(permissions, userId) > 0) {
@@ -683,15 +693,15 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_2(
-			String userId, String actionId, long resourceId, List permissions,
-			List groups, long start, int block)
+		String userId, String actionId, long resourceId, List permissions,
+		List groups, long groupId, long start, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
 		// and countByUsersPermissions in one method
 
 		if (PermissionFinder.containsPermissions_2(
-				permissions, userId, groups)) {
+				permissions, userId, groups, groupId)) {
 
 			return true;
 		}

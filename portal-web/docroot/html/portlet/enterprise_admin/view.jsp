@@ -548,6 +548,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		List headerNames = searchContainer.getHeaderNames();
 
+		headerNames.add(LanguageUtil.get(pageContext, "role-scope"));
 		headerNames.add(StringPool.BLANK);
 		%>
 
@@ -561,11 +562,11 @@ portletURL.setParameter("tabs1", tabs1);
 			<%
 			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription());
+			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getScope());
 
 			searchContainer.setTotal(total);
 
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchContainer.getStart(), searchContainer.getEnd());
+			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), searchTerms.getScope(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -579,7 +580,7 @@ portletURL.setParameter("tabs1", tabs1);
 			</c:if>
 
 			<%
-			List resultRows = searchContainer.getResultRows();
+				List resultRows = searchContainer.getResultRows();
 
 			for (int i = 0; i < results.size(); i++) {
 				Role role = (Role)results.get(i);
@@ -597,6 +598,7 @@ portletURL.setParameter("tabs1", tabs1);
 				// Name
 
 				row.addText(role.getName(), rowURL);
+				row.addText(LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.ENTERPRISE_SCOPE) ? "enterprise" :"community"), rowURL);
 
 				// Action
 

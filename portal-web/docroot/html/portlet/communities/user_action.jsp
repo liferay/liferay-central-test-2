@@ -1,3 +1,4 @@
+<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -19,49 +20,23 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+%>
 
-package com.liferay.portlet.enterpriseadmin.search;
+<%@ include file="/html/portlet/communities/init.jsp" %>
 
-import com.liferay.portal.model.Role;
-import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.util.dao.search.RowChecker;
+<%
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-import javax.portlet.RenderResponse;
+Object[] objArray = (Object[])row.getObject();
+User user2 = (User)objArray[0];
+Group group = (Group)objArray[1];
+%>
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+	<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
+	<portlet:param name="redirect" value="<%= currentURL %>" />
+	<portlet:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
+	<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
+</portlet:renderURL>
 
-/**
- * <a href="UserGroupRoleChecker.java.html"><b><i>View Source</i></b></a>
- *
- * @author  Charles May
- *
- */
-public class UserGroupRoleChecker extends RowChecker {
-
-	public UserGroupRoleChecker(RenderResponse res, Role role) {
-		super(res);
-
-		_role = role;
-	}
-
-	public boolean isChecked(Object obj) {
-		UserGroup userGroup = (UserGroup)obj;
-
-		try {
-			return GroupLocalServiceUtil.hasRoleGroup(
-				_role.getRoleId(), userGroup.getGroup().getGroupId());
-		}
-		catch (Exception e){
-			_log.error(e);
-
-			return false;
-		}
-	}
-
-	private static Log _log = LogFactory.getLog(UserGroupRoleChecker.class);
-
-	private Role _role;
-
-}
+<liferay-ui:icon image="assign" url="<%= assignURL %>" message="user-community-roles"/>

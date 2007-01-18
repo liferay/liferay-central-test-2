@@ -41,6 +41,10 @@ public class RoleImpl extends RoleModelImpl implements Role {
 
 	public static final String USER = RoleNames.USER;
 
+	public static final int COMMUNITY_SCOPE = 1;
+
+	public static final int ENTERPRISE_SCOPE = 0;
+
 	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
 
 	public RoleImpl() {

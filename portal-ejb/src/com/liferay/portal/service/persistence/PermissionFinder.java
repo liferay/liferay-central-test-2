@@ -62,6 +62,9 @@ public class PermissionFinder {
 	public static String COUNT_BY_USERS_ROLES =
 		PermissionFinder.class.getName() + ".countByUsersRoles";
 
+	public static String COUNT_BY_USER_GROUP_ROLE =
+		PermissionFinder.class.getName() + ".countByUserGroupRole";
+
 	public static String FIND_BY_A_R =
 		PermissionFinder.class.getName() + ".findByA_R";
 
@@ -78,7 +81,7 @@ public class PermissionFinder {
 		PermissionFinder.class.getName() + ".findByU_A_R";
 
 	public static boolean containsPermissions_2(
-			List permissions, String userId, List groups)
+		List permissions, String userId, List groups, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -133,6 +136,16 @@ public class PermissionFinder {
 				sql, "[$PERMISSION_IDS$]",
 				_getPermissionIds(permissions, "Users_Permissions"));
 
+			sql += "UNION ALL ";
+
+			sql += "(";
+			sql += CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
+			sql += ") ";
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Roles_Permissions"));
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.setCacheable(false);
@@ -150,6 +163,10 @@ public class PermissionFinder {
 
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
+			_setPermissionIds(qPos, permissions);
+			qPos.add(userId);
+
+			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
@@ -427,6 +444,53 @@ public class PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			_setPermissionIds(qPos, permissions);
+			qPos.add(userId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static int countByUserGroupRole(
+		List permissions, String userId, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Roles_Permissions"));
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 

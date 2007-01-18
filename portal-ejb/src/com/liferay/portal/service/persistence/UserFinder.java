@@ -69,6 +69,9 @@ public class UserFinder {
 	public static String JOIN_BY_USERS_ROLES =
 		UserFinder.class.getName() + ".joinByUsersRoles";
 
+	public static String JOIN_BY_USER_GROUP_ROLE =
+		UserFinder.class.getName() + ".joinByUserGroupRole";
+
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
 
@@ -226,6 +229,9 @@ public class UserFinder {
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
 		}
@@ -279,6 +285,9 @@ public class UserFinder {
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
 		}
@@ -315,6 +324,15 @@ public class UserFinder {
 
 					if (Validator.isNotNull(valueString)) {
 						qPos.add(valueString);
+					}
+				}
+				else if (value instanceof String[]) {
+					String[] valueArray = (String[]) value;
+
+					for (int i = 0; i < valueArray.length; i++) {
+						if (Validator.isNotNull(valueArray[i])) {
+							qPos.add(valueArray[i]);
+						}
 					}
 				}
 			}

@@ -39,6 +39,7 @@ public class RoleSearchTerms extends RoleDisplayTerms {
 
 		name = DAOParamUtil.getLike(req, NAME);
 		description = DAOParamUtil.getLike(req, DESCRIPTION);
+		scope = DAOParamUtil.getLike(req, SCOPE);
 	}
 
 }

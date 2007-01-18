@@ -33,14 +33,18 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalService;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,15 +55,15 @@ import java.util.List;
  */
 public class RoleLocalServiceImpl implements RoleLocalService {
 
-	public Role addRole(String userId, String companyId, String name)
+	public Role addRole(String userId, String companyId, String name, int scope)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, null, null);
+		return addRole(userId, companyId, name, scope, null, null);
 	}
 
 	public Role addRole(
-			String userId, String companyId, String name, String className,
-			String classPK)
+			String userId, String companyId, String name, int scope,
+			String className, String classPK)
 		throws PortalException, SystemException {
 
 		// Role
@@ -73,6 +77,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 
 		role.setCompanyId(companyId);
 		role.setName(name);
+		role.setScope(scope);
 		role.setClassName(className);
 		role.setClassPK(classPK);
 
@@ -99,7 +104,8 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				RoleFinder.findByC_N(companyId, systemRoles[i]);
 			}
 			catch (NoSuchRoleException nsre) {
-				addRole(null, companyId, systemRoles[i]);
+				addRole(
+					null, companyId, systemRoles[i], RoleImpl.ENTERPRISE_SCOPE);
 			}
 		}
 	}
@@ -122,6 +128,14 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				role.getCompanyId(), Role.class.getName(),
 				ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_INDIVIDUAL,
 				role.getPrimaryKey().toString());
+		}
+
+		if (role.getScope() == RoleImpl.COMMUNITY_SCOPE) {
+			// TODO: delete associated resources and permissions
+//			PermissionLocalServiceUtil.unsetRolePermissions(roleId, companyId, ResourceImpl.TYPE_CLASS,
+//						ResourceImpl.SCOPE_GROUP_TEMPLATE, "-1");
+
+			UserGroupRoleLocalServiceUtil.deleteByRoleId(role.getRoleId());
 		}
 
 		// Role
@@ -179,17 +193,19 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	}
 
 	public List search(
-			String companyId, String name, String description, int begin,
-			int end)
+			String companyId, String name, String description, String scope,
+			int begin, int end)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_D(companyId, name, description, begin, end);
+		return RoleFinder.findByC_N_D_S(companyId, name, description, scope,
+			begin, end);
 	}
 
-	public int searchCount(String companyId, String name, String description)
+	public int searchCount(
+		String companyId, String name, String description, String scope)
 		throws SystemException {
 
-		return RoleFinder.countByC_N_D(companyId, name, description);
+		return RoleFinder.countByC_N_D_S(companyId, name, description, scope);
 	}
 
 	public void setUserRoles(String userId, String[] roleIds)

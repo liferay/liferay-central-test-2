@@ -173,6 +173,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -417,6 +424,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -652,6 +666,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -898,6 +919,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -1133,6 +1161,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -1379,6 +1414,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -1614,6 +1656,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -1860,6 +1909,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -2104,6 +2160,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -2341,6 +2404,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -2576,6 +2646,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -2820,6 +2897,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -3134,6 +3218,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -3457,6 +3548,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -3692,6 +3790,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -3936,6 +4041,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -4189,6 +4301,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -4424,6 +4543,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -4670,6 +4796,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -4914,6 +5047,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -5149,6 +5289,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -5395,6 +5542,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -5630,6 +5784,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -5876,6 +6037,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -6113,6 +6281,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -6348,6 +6523,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -6594,6 +6776,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -6829,6 +7018,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -7075,6 +7271,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -7319,6 +7522,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -7554,6 +7764,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -7800,6 +8017,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -8035,6 +8259,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -8281,6 +8512,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -8518,6 +8756,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -8753,6 +8998,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -8999,6 +9251,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -9236,6 +9495,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -9309,6 +9575,257 @@
 			<home>com.liferay.portal.service.ejb.RoleServiceHome</home>
 			<remote>com.liferay.portal.service.ejb.RoleServiceEJB</remote>
 			<ejb-class>com.liferay.portal.service.ejb.RoleServiceEJBImpl</ejb-class>
+			<session-type>Stateless</session-type>
+			<transaction-type>Bean</transaction-type>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
+				<remote>com.liferay.counter.service.ejb.CounterServiceEJB</remote>
+				<ejb-link>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.documentlibrary.service.ejb.DLServiceHome</home>
+				<remote>com.liferay.documentlibrary.service.ejb.DLServiceEJB</remote>
+				<ejb-link>com_liferay_documentlibrary_service_ejb_DLServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_lock_service_ejb_LockServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.lock.service.ejb.LockServiceHome</home>
+				<remote>com.liferay.lock.service.ejb.LockServiceEJB</remote>
+				<ejb-link>com_liferay_lock_service_ejb_LockServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-ref>
+				<ejb-ref-name>com_liferay_mail_service_ejb_MailServiceEJB</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<home>com.liferay.mail.service.ejb.MailServiceHome</home>
+				<remote>com.liferay.mail.service.ejb.MailServiceEJB</remote>
+				<ejb-link>com_liferay_mail_service_ejb_MailServiceEJB</ejb-link>
+			</ejb-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/AccountLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.AccountLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.AccountLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_AccountLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/AddressLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.AddressLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.AddressLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_AddressLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CompanyLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.CompanyLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.CompanyLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_CompanyLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ContactLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.ContactLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ContactLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ContactLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/DataTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.DataTrackerLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.DataTrackerLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_DataTrackerLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/EmailAddressLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.EmailAddressLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.EmailAddressLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_EmailAddressLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/GroupLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.GroupLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.GroupLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_GroupLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ImageLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.ImageLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ImageLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ImageLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/LayoutLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.LayoutLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.LayoutLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_LayoutLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/LayoutSetLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.LayoutSetLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.LayoutSetLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_LayoutSetLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/OrganizationLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.OrganizationLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.OrganizationLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_OrganizationLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/OrgLaborLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.OrgLaborLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.OrgLaborLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_OrgLaborLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PasswordTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.PasswordTrackerLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.PasswordTrackerLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_PasswordTrackerLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PermissionLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.PermissionLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.PermissionLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_PermissionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PhoneLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.PhoneLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.PhoneLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_PhoneLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.PortletLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.PortletLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_PortletLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/PortletPreferencesLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.PortletPreferencesLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.PortletPreferencesLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_PortletPreferencesLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ReleaseLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.ReleaseLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ReleaseLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ReleaseLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/ResourceLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.ResourceLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.ResourceLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_ResourceLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/RoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.SubscriptionLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_SubscriptionLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserIdMapperLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserIdMapperLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserIdMapperLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserIdMapperLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserTrackerLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserTrackerLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserTrackerLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserTrackerLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserTrackerPathLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserTrackerPathLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserTrackerPathLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/WebsiteLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.WebsiteLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.WebsiteLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_WebsiteLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.counter.service.ejb.CounterLocalServiceHome</local-home>
+				<local>com.liferay.counter.service.ejb.CounterLocalServiceEJB</local>
+				<ejb-link>com_liferay_counter_service_ejb_CounterLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<resource-ref>
+				<res-ref-name>jdbc/LiferayPool</res-ref-name>
+				<res-type>javax.sql.DataSource</res-type>
+				<res-auth>Container</res-auth>
+				<res-sharing-scope>Shareable</res-sharing-scope>
+			</resource-ref>
+			<resource-ref>
+				<res-ref-name>mail/MailSession</res-ref-name>
+				<res-type>javax.mail.Session</res-type>
+				<res-auth>Container</res-auth>
+			</resource-ref>
+		</session>
+		<session>
+			<display-name>UserGroupRoleLocalServiceEJB</display-name>
+			<ejb-name>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-name>
+			<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+			<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+			<ejb-class>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJBImpl</ejb-class>
 			<session-type>Stateless</session-type>
 			<transaction-type>Bean</transaction-type>
 			<ejb-ref>
@@ -9724,6 +10241,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/UserLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.UserLocalServiceHome</local-home>
@@ -9987,6 +10511,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -10254,6 +10785,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -10498,6 +11036,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -10733,6 +11278,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -10979,6 +11531,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -11214,6 +11773,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -11453,6 +12019,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -11690,6 +12263,13 @@
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
 				<ejb-ref-type>Session</ejb-ref-type>
 				<local-home>com.liferay.portal.service.ejb.SubscriptionLocalServiceHome</local-home>
@@ -11925,6 +12505,13 @@
 				<local-home>com.liferay.portal.service.ejb.RoleLocalServiceHome</local-home>
 				<local>com.liferay.portal.service.ejb.RoleLocalServiceEJB</local>
 				<ejb-link>com_liferay_portal_service_ejb_RoleLocalServiceEJB</ejb-link>
+			</ejb-local-ref>
+			<ejb-local-ref>
+				<ejb-ref-name>ejb/liferay/UserGroupRoleLocalServiceHome</ejb-ref-name>
+				<ejb-ref-type>Session</ejb-ref-type>
+				<local-home>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceHome</local-home>
+				<local>com.liferay.portal.service.ejb.UserGroupRoleLocalServiceEJB</local>
+				<ejb-link>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-link>
 			</ejb-local-ref>
 			<ejb-local-ref>
 				<ejb-ref-name>ejb/liferay/SubscriptionLocalServiceHome</ejb-ref-name>
@@ -18310,6 +18897,10 @@
 			</method>
 			<method>
 				<ejb-name>com_liferay_portal_service_ejb_RoleServiceEJB</ejb-name>
+				<method-name>*</method-name>
+			</method>
+			<method>
+				<ejb-name>com_liferay_portal_service_ejb_UserGroupRoleLocalServiceEJB</ejb-name>
 				<method-name>*</method-name>
 			</method>
 			<method>

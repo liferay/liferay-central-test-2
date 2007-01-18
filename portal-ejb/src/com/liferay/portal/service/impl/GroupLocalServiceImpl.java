@@ -51,6 +51,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
@@ -208,6 +209,11 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 		}
 		catch (NoSuchRoleException nsre) {
 		}
+
+		// Group roles
+
+		UserGroupRoleLocalServiceUtil.deleteByGroupId(groupId);
+
 
 		// Blogs
 

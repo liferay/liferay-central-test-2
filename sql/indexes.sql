@@ -205,6 +205,11 @@ create index IX_524FEFCE on UserGroup (companyId);
 create index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);
 
+create index IX_1B988D7A on UserGroupRole (groupId);
+create index IX_887A2C95 on UserGroupRole (roleId);
+create index IX_887BE56A on UserGroupRole (userId);
+create index IX_4D040680 on UserGroupRole (userId, groupId);
+
 create index IX_E60EA987 on UserIdMapper (userId);
 
 create index IX_29BA1CF5 on UserTracker (companyId);

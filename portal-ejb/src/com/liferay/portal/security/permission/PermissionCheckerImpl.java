@@ -38,6 +38,7 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
@@ -188,6 +189,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 					roles = RoleServiceUtil.getUserRelatedRoles(
 							user.getUserId(), groups);
+					List groupRoles = UserGroupRoleLocalServiceUtil.getUserRelatedGroupRoles(
+							user.getUserId(), groupId);
+					roles.addAll(groupRoles);
 				}
 				else {
 					roles = new ArrayList();
@@ -352,7 +356,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		// Individual
 
-		long[] resourceIds = new long[3];
+		long[] resourceIds = new long[4];
 
 		try {
 			Resource resource = ResourceServiceUtil.getResource(
@@ -398,6 +402,30 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		start = logHasUserPermission(
 			groupId, name, primKey, actionId, start, 3);
 
+		// Group  Template
+
+		try {
+			if (groupId > 0) {
+				Resource resource = ResourceServiceUtil.getResource(
+					companyId, name, ResourceImpl.TYPE_CLASS,
+					ResourceImpl.SCOPE_GROUP_TEMPLATE, "-1");
+
+				resourceIds[2] = resource.getResourceId();
+			}
+		}
+		catch (NoSuchResourceException nsre) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Resource " + companyId + " " + name + " " +
+						ResourceImpl.TYPE_CLASS  + " " +
+							ResourceImpl.SCOPE_GROUP + " " + groupId +
+								" does not exist");
+			}
+		}
+
+		start = logHasUserPermission(
+			groupId, name, primKey, actionId, start, 3);
+
 		// Company
 
 		try {
@@ -405,7 +433,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				companyId, name, ResourceImpl.TYPE_CLASS,
 				ResourceImpl.SCOPE_COMPANY, companyId);
 
-			resourceIds[2] = resource.getResourceId();
+			resourceIds[3] = resource.getResourceId();
 		}
 		catch (NoSuchResourceException nsre) {
 			if (_log.isWarnEnabled()) {
