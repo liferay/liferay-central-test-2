@@ -34,6 +34,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.Encryptor;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.LDAPUtil;
 import com.liferay.util.PropertiesUtil;
 import com.liferay.util.StringUtil;
@@ -112,24 +113,11 @@ public class LDAPAuth implements Authenticator {
 			_log.debug("Authenticator is enabled");
 		}
 
-		// Always allow omniadmin
+		// Make exceptions for omniadmins so that if they break the LDAP
+		// configuration, they can still login to fix the problem
 
-		if (Validator.isNotNull(userId)) {
-			if (OmniadminUtil.isOmniadmin(userId)) {
-				return SUCCESS;
-			}
-		}
-		else if (Validator.isNotNull(emailAddress)) {
-			try {
-				User user = UserLocalServiceUtil.getUserByEmailAddress(
-					companyId, emailAddress);
-
-				if (OmniadminUtil.isOmniadmin(user.getUserId())) {
-					return SUCCESS;
-				}
-			}
-			catch (NoSuchUserException nsue) {
-			}
+		if (authenticateOmniadmin(companyId, emailAddress, userId) == SUCCESS) {
+			return SUCCESS;
 		}
 
 		Properties env = new Properties();
@@ -298,6 +286,37 @@ public class LDAPAuth implements Authenticator {
 		}
 
 		return true;
+	}
+
+	protected int authenticateOmniadmin(
+			String companyId, String emailAddress, String userId)
+		throws Exception {
+
+		// LEP-2036
+
+		if (GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {
+
+			if (Validator.isNotNull(userId)) {
+				if (OmniadminUtil.isOmniadmin(userId)) {
+					return SUCCESS;
+				}
+			}
+			else if (Validator.isNotNull(emailAddress)) {
+				try {
+					User user = UserLocalServiceUtil.getUserByEmailAddress(
+						companyId, emailAddress);
+
+					if (OmniadminUtil.isOmniadmin(user.getUserId())) {
+						return SUCCESS;
+					}
+				}
+				catch (NoSuchUserException nsue) {
+				}
+			}
+		}
+
+		return FAILURE;
 	}
 
 	protected int authenticateRequired(
