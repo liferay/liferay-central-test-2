@@ -34,28 +34,24 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * Provides the strategy for creating new content when new Journal content is 
- * imported into a Layout set from a LAR.  The default strategy implemented by
- * this class is to return the first user in the database that is a member of the
- * specified group as the author Id.  If the group contains no users, the original
- * author will remain unchanged.
+ * Provides the strategy for creating new content when new Journal content is
+ * imported into a layout set from a LAR. The default strategy implemented by
+ * this class is to return the first user in the database that is a member of
+ * the specified group as the author Id. If the group contains no users, the
+ * original author will remain unchanged.
+ *
  * <p>Content will be added as is (i.e. no transformations).
- *   
- * <a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b></a>
- * 
- * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
+ *
+ * <p><a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Joel Kozikowski
+ *
+ * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  *
  */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
-    public String getTransformedContent(
-            String companyId, long groupId, JournalArticle newArticle) 
-        throws Exception {
-        return null;
-    }
-    
 	public String getAuthorUserId(
 			String companyId, long groupId, Object journalObj)
 		throws Exception {
@@ -110,6 +106,13 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		else {
 			 return null;
 		}
+	}
+
+	public String getTransformedContent(
+			String companyId, long groupId, JournalArticle newArticle)
+		throws Exception {
+
+		return null;
 	}
 
 	public boolean addCommunityPermissions(

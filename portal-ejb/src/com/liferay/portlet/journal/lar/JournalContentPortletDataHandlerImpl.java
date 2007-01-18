@@ -79,11 +79,12 @@ import org.dom4j.io.SAXReader;
  *
  * <p><a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
  * </i></b></a>
+ *
+ * @author  Joel Kozikowski
+ *
  * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
  * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
-
- * @author  Joel Kozikowski
  *
  */
 public class JournalContentPortletDataHandlerImpl
@@ -313,9 +314,12 @@ public class JournalContentPortletDataHandlerImpl
 				article, addCommunityPermissions, addGuestPermissions);
 		}
 		else {
-            // TODO If the article already exists, it must either be merged w/ the object in the hibernate session 
-            // retrieved by fetch above, or not updated at all.
-//			JournalArticleUtil.update(article, true);
+
+			// TODO If the article already exists, it must either be merged with
+			// the object in the Hibernate session retrieved by fetch above, or
+			// not updated at all.
+
+			//JournalArticleUtil.update(article, true);
 		}
 
 		el = root.element(JournalStructureImpl.class.getName());
@@ -361,9 +365,12 @@ public class JournalContentPortletDataHandlerImpl
 					structure, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
-                // TODO If the structure already exists, it must either be merged w/ the object in the hibernate session 
-                // retrieved by fetch above, or not updated at all.
-//				JournalStructureUtil.update(structure, true);
+
+				// TODO If the structure already exists, it must either be
+				// merged with the object in the Hibernate session retrieved by
+				// fetch above, or not updated at all.
+
+				//JournalStructureUtil.update(structure, true);
 			}
 		}
 
@@ -408,9 +415,12 @@ public class JournalContentPortletDataHandlerImpl
 					template, addCommunityPermissions, addGuestPermissions);
 			}
 			else {
-                // TODO If the template already exists, it must either be merged w/ the object in the hibernate session 
-                // retrieved by fetch above, or not updated at all.
-//				JournalTemplateUtil.update(template, true);
+
+				// TODO If the template already exists, it must either be merged
+				// with the object in the Hibernate session retrieved by fetch
+				// above, or not updated at all.
+
+				//JournalTemplateUtil.update(template, true);
 			}
 		}
 	}
