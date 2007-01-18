@@ -145,7 +145,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			is = new BufferedInputStream(new FileInputStream(file));
 		}
 		catch (FileNotFoundException fnfe) {
-			throw new NoSuchFileException();
+			throw new FileSizeException();
 		}
 
 		return addFileEntry(
@@ -533,22 +533,22 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			String extraSettings, File file)
 		throws PortalException, SystemException {
 
-		if ((file == null) || (file.length() == 0)) {
-			throw new FileSizeException();
-		}
-
 		InputStream is = null;
+		long size = 0;
 
-		try {
-			is = new BufferedInputStream(new FileInputStream(file));
-		}
-		catch (FileNotFoundException fnfe) {
-			throw new NoSuchFileException();
+		if ((file != null) && (file.length() > 0)) {
+			try {
+				is = new BufferedInputStream(new FileInputStream(file));
+				size = file.length();
+			}
+			catch (FileNotFoundException fnfe) {
+				throw new NoSuchFileException();
+			}
 		}
 
 		return updateFileEntry(
 			userId, folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, is, file.length());
+			description, extraSettings, is, size);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -557,16 +557,17 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			String extraSettings, byte[] byteArray)
 		throws PortalException, SystemException {
 
-		if ((byteArray == null) || (byteArray.length == 0)) {
-			throw new FileSizeException();
-		}
+		InputStream is = null;
+		long size = 0;
 
-		InputStream is =
-			new BufferedInputStream(new ByteArrayInputStream(byteArray));
+		if ((byteArray != null) && (byteArray.length > 0)) {
+			is = new BufferedInputStream(new ByteArrayInputStream(byteArray));
+			size = byteArray.length;
+		}
 
 		return updateFileEntry(
 			userId, folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, is, byteArray.length);
+			description, extraSettings, is, size);
 	}
 
 	public DLFileEntry updateFileEntry(
