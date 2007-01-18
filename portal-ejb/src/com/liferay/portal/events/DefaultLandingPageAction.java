@@ -52,18 +52,20 @@ public class DefaultLandingPageAction extends Action {
 
 		String path = PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
 
-		_log.info(
-			PropsUtil.DEFAULT_LANDING_PAGE_PATH + StringPool.SPACE + path);
-		
+		if (_log.isInfoEnabled()) {
+			_log.info(
+				PropsUtil.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUALS + path);
+		}
+
 		if (Validator.isNotNull(path)) {
 			LastPath lastPath = new LastPath(
 				StringPool.BLANK, path, new HashMap());
-	
+
 			HttpSession ses = req.getSession();
-	
+
 			ses.setAttribute(WebKeys.LAST_PATH, lastPath);
 		}
-		
+
 		// The commented code shows how you can programmaticaly set the user's
 		// landing page. You can modify this class to utilize a custom alogrithm
 		// for forwarding a user to his landing page. See the references to this
