@@ -114,7 +114,7 @@ else {
 
 <c:choose>
 	<c:when test="<%= useEditorApplet %>">
-		<applet archive="editor-signed.jar" code="com.liferay.applets.editor.Editor" codebase="<%= themeDisplay.getPathApplet() %>" height="530" name="<portlet:namespace />editor" width="670" mayscript>
+		<applet archive="editor.jar" code="com.liferay.applets.editor.Editor" codebase="<%= themeDisplay.getPathApplet() %>" height="530" name="<portlet:namespace />editor" width="670" mayscript>
 			<param name="lexer" value="<%= langType %>" />
 		</applet>
 	</c:when>

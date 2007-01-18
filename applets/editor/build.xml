@@ -8,6 +8,10 @@
 	<property name="deploy.dir" value="${project.dir}/portal-web/docroot/applets" />
 	<property name="jar.file" value="${ant.project.name}" />
 
+	<target name="clean" depends="build-common-java.clean">
+		<delete file="${jar.file}-temp.jar" />
+	</target>
+
 	<target name="compile">
 
 		<!--
@@ -30,27 +34,32 @@
 	<target name="jar" depends="compile">
 		<jar
 			basedir="classes"
-			jarfile="${jar.file}.jar"
+			jarfile="${jar.file}-temp.jar"
 		/>
 
-		<antcall target="signjar" />
-	</target>
+		<if>
+			<not>
+				<equals arg1="${signjar.alias}" arg2="" />
+			</not>
+			<then>
 
-	<target name="signjar" if="signjar.alias">
+				<!--
+				To generate a key for a specified alias, type:
 
-		<!--
-		The SignJar task assumes you have already generated a valid alias. To
-		generate a key for a specified alias, type:
+				keytool -genkey -alias ${signjar.alias}
+				-->
 
-		keytool -genkey -alias ${signjar.alias}
-		-->
-
-		<signjar
-			jar="${jar.file}.jar"
-			alias="${signjar.alias}"
-			storepass="${signjar.password}"
-			signedjar="${ant.project.name}-signed.jar"
-		/>
+				<signjar
+					jar="${jar.file}-temp.jar"
+					alias="${signjar.alias}"
+					storepass="${signjar.password}"
+					signedjar="${ant.project.name}.jar"
+				/>
+			</then>
+			<else>
+				<copy file="${jar.file}-temp.jar" tofile="${jar.file}.jar" />
+			</else>
+		</if>
 	</target>
 
 	<target name="deploy" depends="jar">
@@ -58,13 +67,6 @@
 			file="${jar.file}.jar"
 			tofile="${deploy.dir}/${jar.file}.jar"
 			overwrite="true"
-		/>
-
-		<copy
-			file="${jar.file}-signed.jar"
-			tofile="${deploy.dir}/${jar.file}.jar"
-			overwrite="true"
-			failonerror="false"
 		/>
 	</target>
 
