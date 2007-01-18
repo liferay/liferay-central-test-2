@@ -487,7 +487,9 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			header.attributeValue("build-number"));
 
 		if (buildNumber != importBuildNumber) {
-			throw new LayoutImportException("LAR build number (" + importBuildNumber + ") does not match system build number (" + buildNumber + ")");
+			throw new LayoutImportException(
+				"LAR build number " + importBuildNumber + " does not match " +
+					"portal build number " + buildNumber);
 		}
 
 		// Look and feel
@@ -546,8 +548,8 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 			layout.setColorSchemeId(colorSchemeId);
 			layout.setPriority(priority);
 
-            fixTypeSettings(layout);
-            
+			fixTypeSettings(layout);
+
 			LayoutUtil.update(layout);
 
 			// Layout permissions
@@ -606,30 +608,7 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 		LayoutSetLocalServiceUtil.updatePageCount(ownerId);
 	}
 
-	private void fixTypeSettings(Layout layout) {
-        if (layout.getType().equals(LayoutImpl.TYPE_URL)) {
-            Properties typeSettings = layout.getTypeSettingsProperties();
-            String url = typeSettings.getProperty("url");
-            if ( url != null && 
-                 (   url.startsWith(PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING)) ||
-                     url.startsWith(PropsUtil.get(PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING))
-                 ) 
-               ) {
-                 int slash2 = url.indexOf("/", 1);
-                 if (slash2 > 0) {
-                     int slash3 = url.indexOf("/", slash2+1);
-                     if (slash3 > slash2) {
-                        String fixedUrl = url.substring(0, slash2) +
-                                          layout.getGroup().getFriendlyURL() +
-                                          url.substring(slash3);
-                        typeSettings.setProperty("url", fixedUrl);
-                     }
-                 }
-            }
-        }
-    }
-
-    public void setLayouts(
+	public void setLayouts(
 			String ownerId, String parentLayoutId, String[] layoutIds)
 		throws PortalException, SystemException {
 
@@ -990,6 +969,39 @@ public class LayoutLocalServiceImpl implements LayoutLocalService {
 				el.addAttribute("layout-id", layoutId);
 				el.addAttribute("owner-id", ownerId);
 				el.addElement("preferences").addCDATA(prefs.getPreferences());
+			}
+		}
+	}
+
+	protected void fixTypeSettings(Layout layout) {
+		if (layout.getType().equals(LayoutImpl.TYPE_URL)) {
+			Properties typeSettings = layout.getTypeSettingsProperties();
+
+			String url = GetterUtil.getString(typeSettings.getProperty("url"));
+
+			String friendlyURLPrivatePath = PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PRIVATE_SERVLET_MAPPING);
+			String friendlyURLPublicPath = PropsUtil.get(
+				PropsUtil.LAYOUT_FRIENDLY_URL_PUBLIC_SERVLET_MAPPING);
+
+			if (url.startsWith(friendlyURLPrivatePath) ||
+				url.startsWith(friendlyURLPublicPath)) {
+
+				int x = url.indexOf(StringPool.SLASH, 1);
+
+				if (x > 0) {
+					int y = url.indexOf(StringPool.SLASH, x + 1);
+
+					if (y > x) {
+						String fixedUrl = url.substring(0, x) +
+
+						layout.getGroup().getFriendlyURL() +
+
+						url.substring(y);
+
+						typeSettings.setProperty("url", fixedUrl);
+					}
+				}
 			}
 		}
 	}
