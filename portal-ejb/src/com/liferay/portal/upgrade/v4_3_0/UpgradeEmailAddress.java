@@ -36,6 +36,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
+
 import java.util.Date;
 
 import org.apache.commons.logging.Log;
@@ -64,10 +65,10 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		Connection con = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
-		
-		String tempFilename = 
+
+		String tempFilename =
 			"temp-db-EmailAddress-" + System.currentTimeMillis();
-		
+
 		try {
 			con = HibernateUtil.getConnection();
 
@@ -76,10 +77,9 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Long emailAddressId = 
-					new Long(CounterLocalServiceUtil.increment(
-						Counter.class.getName()));
-				
+				long emailAddressId = CounterLocalServiceUtil.increment(
+					Counter.class.getName());
+
 				String companyId = rs.getString("companyId");
 				String userId = rs.getString("userId");
 				String userName = rs.getString("userName");
@@ -91,9 +91,8 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 				Integer typeId = new Integer(rs.getInt("typeId"));
 				Boolean primary = getBoolean(rs, "primary_");
 
-				StringBuffer sb =
-					new StringBuffer(_INSERT_EMAIL_ADDRESS);
-				
+				StringBuffer sb = new StringBuffer(_INSERT_EMAIL_ADDRESS);
+
 				appendWrappedColumn(sb, emailAddressId);
 				appendWrappedColumn(sb, companyId);
 				appendWrappedColumn(sb, userId);
@@ -108,7 +107,7 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 				FileUtil.append(tempFilename, sb.toString());
 			}
-			
+
 			_log.info("EmailAddress table backed up to file " + tempFilename);
 		}
 		finally {
@@ -116,22 +115,22 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		}
 
 		Statement stmt = null;
-		
+
 		try {
 			con = HibernateUtil.getConnection();
 
 			stmt = con.createStatement();
-			
+
 			stmt.executeUpdate(_DELETE_EMAIL_ADDRESS);
-			
-			String[] sqlInserts = 
+
+			String[] sqlInserts =
 				StringUtil.split(
 					FileUtil.read(tempFilename), StringPool.NEW_LINE);
-			
+
 			for (int i = 0; i < sqlInserts.length; i++) {
 				stmt.executeUpdate(sqlInserts[i]);
 			}
-			
+
 			FileUtil.delete(tempFilename);
 
 			_log.info("EmailAddress table repopulated with data");
@@ -141,14 +140,14 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		}
 	}
 
-	private static String _SELECT_EMAIL_ADDRESS = 
-		"SELECT * FROM EmailAddress";
-	
-	private static String _DELETE_EMAIL_ADDRESS = 
+	private static String _DELETE_EMAIL_ADDRESS =
 		"DELETE FROM EmailAddress";
-	
+
 	private static String _INSERT_EMAIL_ADDRESS =
 		"INSERT INTO EmailAddress VALUES (";
+
+	private static String _SELECT_EMAIL_ADDRESS =
+		"SELECT * FROM EmailAddress";
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 

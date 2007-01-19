@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade;
 
+import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
 
 /**
  * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>

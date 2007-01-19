@@ -50,6 +50,39 @@ import java.util.Properties;
  */
 public class FileUtil {
 
+	public static void append(String fileName, String s) throws IOException {
+		append(new File(fileName), s);
+	}
+
+	public static void append(String fileName, String s, boolean lazy)
+		throws IOException {
+
+		append(new File(fileName), s, lazy);
+	}
+
+	public static void append(String pathName, String fileName, String s)
+		throws IOException {
+
+		append(new File(pathName, fileName), s);
+	}
+
+	public static void append(
+			String pathName, String fileName, String s, boolean lazy)
+		throws IOException {
+
+		append(new File(pathName, fileName), s, lazy);
+	}
+
+	public static void append(File file, String s) throws IOException {
+		append(file, s, false);
+	}
+
+	public static void append(File file, String s, boolean lazy)
+		throws IOException {
+
+		write(file, s, lazy, true);
+	}
+
 	public static void copyDirectory(
 		String sourceDirName, String destinationDirName) {
 
@@ -426,39 +459,6 @@ public class FileUtil {
 		catch (IOException ioe) {
 			return new Properties();
 		}
-	}
-
-	public static void append(String fileName, String s) throws IOException {
-		append(new File(fileName), s);
-	}
-
-	public static void append(String fileName, String s, boolean lazy)
-		throws IOException {
-
-		append(new File(fileName), s, lazy);
-	}
-
-	public static void append(String pathName, String fileName, String s)
-		throws IOException {
-
-		append(new File(pathName, fileName), s);
-	}
-
-	public static void append(
-			String pathName, String fileName, String s, boolean lazy)
-		throws IOException {
-
-		append(new File(pathName, fileName), s, lazy);
-	}
-
-	public static void append(File file, String s) throws IOException {
-		append(file, s, false);
-	}
-
-	public static void append(File file, String s, boolean lazy)
-		throws IOException {
-
-		write(file, s, lazy, true);
 	}
 
 	public static void write(String fileName, String s) throws IOException {

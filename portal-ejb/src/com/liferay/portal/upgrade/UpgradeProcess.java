@@ -22,10 +22,10 @@
 
 package com.liferay.portal.upgrade;
 
-import java.sql.ResultSet;
-
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+
+import java.sql.ResultSet;
 
 /**
  * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
@@ -55,11 +55,16 @@ public abstract class UpgradeProcess {
 		upgradeProgress.upgrade();
 	}
 
-	protected Boolean getBoolean(ResultSet rs, String name) throws Exception {
-		com.liferay.util.dao.hibernate.BooleanType bt = 
-			new com.liferay.util.dao.hibernate.BooleanType();
+	protected void appendWrappedColumn(StringBuffer sb, long col)
+		throws Exception {
 
-		return (Boolean)bt.nullSafeGet(rs, new String[] { name }, null);
+		appendWrappedColumn(sb, new Long(col), false);
+	}
+
+	protected void appendWrappedColumn(StringBuffer sb, long col, boolean last)
+		throws Exception {
+
+		appendWrappedColumn(sb, new Long(col), last);
 	}
 
 	protected void appendWrappedColumn(StringBuffer sb, Object col)
@@ -72,18 +77,19 @@ public abstract class UpgradeProcess {
 			StringBuffer sb, Object col, boolean last)
 		throws Exception {
 
-		String column;
+		String column = null;
 
 		if (col == null) {
 			column = "null";
 		}
 		else if (col instanceof Boolean) {
-			org.hibernate.type.BooleanType bt = 
+			org.hibernate.type.BooleanType booleanType =
 				new org.hibernate.type.BooleanType();
-			String str = 
-				bt.objectToSQLString(col, HibernateUtil.getDialect());
 
-			column = StringPool.APOSTROPHE + str + StringPool.APOSTROPHE;
+			String s = booleanType.objectToSQLString(
+				col, HibernateUtil.getDialect());
+
+			column = StringPool.APOSTROPHE + s + StringPool.APOSTROPHE;
 		}
 		else {
 			column = StringPool.APOSTROPHE + col + StringPool.APOSTROPHE;
@@ -97,6 +103,13 @@ public abstract class UpgradeProcess {
 		else {
 			sb.append(StringPool.COMMA + StringPool.SPACE);
 		}
+	}
+
+	protected Boolean getBoolean(ResultSet rs, String name) throws Exception {
+		com.liferay.util.dao.hibernate.BooleanType booleanType =
+			new com.liferay.util.dao.hibernate.BooleanType();
+
+		return (Boolean)booleanType.nullSafeGet(rs, new String[] {name}, null);
 	}
 
 }
