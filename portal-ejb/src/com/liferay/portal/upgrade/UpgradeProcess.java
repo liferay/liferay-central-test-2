@@ -22,6 +22,11 @@
 
 package com.liferay.portal.upgrade;
 
+import java.sql.ResultSet;
+
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+
 /**
  * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,6 +53,50 @@ public abstract class UpgradeProcess {
 		throws UpgradeException {
 
 		upgradeProgress.upgrade();
+	}
+
+	protected Boolean getBoolean(ResultSet rs, String name) throws Exception {
+		com.liferay.util.dao.hibernate.BooleanType bt = 
+			new com.liferay.util.dao.hibernate.BooleanType();
+
+		return (Boolean)bt.nullSafeGet(rs, new String[] { name }, null);
+	}
+
+	protected void appendWrappedColumn(StringBuffer sb, Object col)
+		throws Exception {
+
+		appendWrappedColumn(sb, col, false);
+	}
+
+	protected void appendWrappedColumn(
+			StringBuffer sb, Object col, boolean last)
+		throws Exception {
+
+		String column;
+
+		if (col == null) {
+			column = "null";
+		}
+		else if (col instanceof Boolean) {
+			org.hibernate.type.BooleanType bt = 
+				new org.hibernate.type.BooleanType();
+			String str = 
+				bt.objectToSQLString(col, HibernateUtil.getDialect());
+
+			column = StringPool.APOSTROPHE + str + StringPool.APOSTROPHE;
+		}
+		else {
+			column = StringPool.APOSTROPHE + col + StringPool.APOSTROPHE;
+		}
+
+		sb.append(column);
+
+		if (last) {
+			sb.append(")" + StringPool.NEW_LINE);
+		}
+		else {
+			sb.append(StringPool.COMMA + StringPool.SPACE);
+		}
 	}
 
 }

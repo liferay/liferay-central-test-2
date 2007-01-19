@@ -25,6 +25,8 @@ package com.liferay.portal.upgrade;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import com.liferay.portal.upgrade.v4_3_0.UpgradeEmailAddress;
+
 /**
  * <a href="UpgradeProcess_4_3_0.java.html"><b><i>View Source</i></b></a>
  *
@@ -42,6 +44,8 @@ public class UpgradeProcess_4_3_0 extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
+
+		upgrade(new UpgradeEmailAddress());
 	}
 
 	private static Log _log = LogFactory.getLog(UpgradeProcess_4_3_0.class);

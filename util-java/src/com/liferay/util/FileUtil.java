@@ -428,6 +428,39 @@ public class FileUtil {
 		}
 	}
 
+	public static void append(String fileName, String s) throws IOException {
+		append(new File(fileName), s);
+	}
+
+	public static void append(String fileName, String s, boolean lazy)
+		throws IOException {
+
+		append(new File(fileName), s, lazy);
+	}
+
+	public static void append(String pathName, String fileName, String s)
+		throws IOException {
+
+		append(new File(pathName, fileName), s);
+	}
+
+	public static void append(
+			String pathName, String fileName, String s, boolean lazy)
+		throws IOException {
+
+		append(new File(pathName, fileName), s, lazy);
+	}
+
+	public static void append(File file, String s) throws IOException {
+		append(file, s, false);
+	}
+
+	public static void append(File file, String s, boolean lazy)
+		throws IOException {
+
+		write(file, s, lazy, true);
+	}
+
 	public static void write(String fileName, String s) throws IOException {
 		write(new File(fileName), s);
 	}
@@ -458,6 +491,12 @@ public class FileUtil {
 	public static void write(File file, String s, boolean lazy)
 		throws IOException {
 
+		write(file, s, lazy, false);
+	}
+
+	public static void write(File file, String s, boolean lazy, boolean append)
+		throws IOException {
+
 		if (file.getParent() != null) {
 			mkdirs(file.getParent());
 		}
@@ -470,7 +509,7 @@ public class FileUtil {
 			}
 		}
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter(file));
+		BufferedWriter bw = new BufferedWriter(new FileWriter(file, append));
 
 		bw.flush();
 		bw.write(s);

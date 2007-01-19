@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.EmailAddressException;
 import com.liferay.portal.PortalException;
@@ -64,7 +65,7 @@ public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
 			primary);
 
 		long emailAddressId = CounterLocalServiceUtil.increment(
-			EmailAddress.class.getName());
+			Counter.class.getName());
 
 		EmailAddress emailAddress = EmailAddressUtil.create(emailAddressId);
 
