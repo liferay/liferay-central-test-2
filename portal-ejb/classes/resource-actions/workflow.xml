@@ -47,12 +47,16 @@
 			<portlet-name>93</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>MANAGE</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>SIGNAL</action-key>
 		</supports>
 		<community-defaults />
 		<guest-defaults />
-		<guest-unsupported />
+		<guest-unsupported>
+			<action-key>MANAGE</action-key>
+			<action-key>SIGNAL</action-key>
+		</guest-unsupported>
 	</model-resource>
 	<model-resource>
 		<model-name>com.liferay.portlet.workflow.model.WorkflowTask</model-name>
@@ -65,6 +69,8 @@
 		</supports>
 		<community-defaults />
 		<guest-defaults />
-		<guest-unsupported />
+		<guest-unsupported>
+			<action-key>MANAGE</action-key>
+		</guest-unsupported>
 	</model-resource>
 </resource-action-mapping>

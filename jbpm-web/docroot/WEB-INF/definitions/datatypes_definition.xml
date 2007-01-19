@@ -9,6 +9,7 @@
 			System.out.println("Entering node " + node.getName());
 		</script>
 	</event>
+
 	<event type="node-leave">
 		<script>
 			System.out.println("Leaving node " + node.getName());
@@ -39,6 +40,7 @@
 		</task>
 		<transition name="save" to="view-data" />
 	</start-state>
+
 	<task-node name="view-data">
 		<task swimlane="user">
 			<controller>
@@ -57,5 +59,6 @@
 		</task>
 		<transition name="finished" to="end" />
 	</task-node>
+
 	<end-state name="end" />
 </process-definition>

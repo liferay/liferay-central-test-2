@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.model.WorkflowTask;
 
 /**
@@ -59,8 +60,27 @@ public class WorkflowTaskPermission {
 			PermissionChecker permissionChecker, long taskId, String actionId)
 		throws PortalException, SystemException {
 
-		return permissionChecker.hasPermission(
-			0, WorkflowTask.class.getName(), taskId, actionId);
+		return contains(permissionChecker, taskId, 0, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long taskId, long instanceId,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (permissionChecker.hasPermission(
+				0, WorkflowTask.class.getName(), taskId, actionId)) {
+
+			return true;
+		}
+		else if (permissionChecker.hasPermission(
+					0, WorkflowInstance.class.getName(), instanceId,
+					actionId)) {
+
+			return true;
+		}
+
+		return false;
 	}
 
 	public static boolean contains(
@@ -68,7 +88,11 @@ public class WorkflowTaskPermission {
 			String actionId)
 		throws PortalException, SystemException {
 
-		return contains(permissionChecker, task.getTaskId(), actionId);
+		WorkflowInstance instance = task.getInstance();
+
+		return contains(
+			permissionChecker, task.getTaskId(), instance.getInstanceId(),
+			actionId);
 	}
 
 }

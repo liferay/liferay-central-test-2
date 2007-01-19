@@ -19,13 +19,15 @@
 	<!-- Swimlanes -->
 
 	<swimlane name="buyer" />
-		<swimlane name="salesman">
-			<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
+
+	<swimlane name="salesman">
+		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
 			<type>group</type>
 			<companyId>liferay.com</companyId>
 			<id>3</id>
 		</assignment>
 	</swimlane>
+
 	<swimlane name="accountant">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
 			<type>group</type>
@@ -33,6 +35,7 @@
 			<name>Support</name>
 		</assignment>
 	</swimlane>
+
 	<swimlane name="shipper">
 		<assignment class="com.liferay.jbpm.handler.IdentityAssignmentHandler" config-type="field">
 			<type>user</type>
@@ -51,6 +54,7 @@
 		</task>
 		<transition name="save" to="create-new-web-sale-order" />
 	</start-state>
+
 	<task-node name="create-new-web-sale-order">
 		<task swimlane="buyer">
 			<controller>
@@ -61,6 +65,7 @@
 		</task>
 		<transition name="submit" to="evaluate-web-order" />
 	</task-node>
+
 	<task-node name="evaluate-web-order">
 		<task swimlane="salesman">
 			<timer duedate="120 seconds" repeat="60 seconds">
@@ -78,6 +83,7 @@
 		<transition name="ok" to="perform-shipping-and-payment" />
 		<transition name="more-info-needed" to="fix-web-order-data" />
 	</task-node>
+
 	<task-node name="fix-web-order-data">
 		<task swimlane="buyer">
 			<controller>
@@ -89,10 +95,12 @@
 		</task>
 		<transition name="resubmit" to="evaluate-web-order" />
 	</task-node>
+
 	<fork name="perform-shipping-and-payment">
 		<transition name="payment" to="wait-for-money" />
 		<transition name="shipping" to="ship-item" />
 	</fork>
+
 	<task-node name="wait-for-money">
 		<task swimlane="accountant">
 			<controller>
@@ -104,10 +112,12 @@
 		</task>
 		<transition name="update" to="update-books" />
 	</task-node>
+
 	<node name="update-books">
 		<action class="com.liferay.jbpm.handler.UpdateBooksActionHandler" />
 		<transition to="completed-shipping-and-payment" />
 	</node>
+
 	<node name="ship-item">
 		<action class="com.liferay.jbpm.handler.ShipItemActionHandler">
 			<swimlane>shipper</swimlane>
@@ -115,12 +125,15 @@
 		</action>
 		<transition to="wait-for-shipment-to-be-delivered" />
 	</node>
+
 	<state name="wait-for-shipment-to-be-delivered">
 		<transition to="completed-shipping-and-payment" />
 	</state>
+
 	<join name="completed-shipping-and-payment">
 		<transition to="check-for-another-web-order" />
 	</join>
+
 	<task-node name="check-for-another-web-order">
 		<task swimlane="buyer">
 			<controller>
@@ -131,10 +144,12 @@
 			<action class="com.liferay.jbpm.handler.SendEmailActionHandler" />
 		</transition>
 	</task-node>
+
 	<decision name="evaluate-another-web-order">
 		<handler class="com.liferay.jbpm.handler.WebOrderDecisionHandler" />
 		<transition name="finished" to="end" />
 		<transition name="another" to="create-new-web-sale-order" />
 	</decision>
+
 	<end-state name="end" />
 </process-definition>
