@@ -5,11 +5,11 @@
 
 	<import file="build-common.xml" />
 
-    <target name="all">
-        <antcall target="clean" />
-        <antcall target="start" />
-        <antcall target="deploy" />
-    </target>
+	<target name="all">
+		<antcall target="clean" />
+		<antcall target="start" />
+		<antcall target="deploy" />
+	</target>
 
 	<target name="start">
 		<antcall target="compile" />
@@ -738,6 +738,7 @@ auto.deploy.dest.dir=../webapps</echo>
 			</not>
 			<then>
 				<mkdir dir="${lp.ext.dir}/ext-service" />
+
 				<copy todir="${lp.ext.dir}/ext-service" filtering="true">
 					<fileset dir="tools/ext_tmpl/ext-service" />
 				</copy>
