@@ -279,7 +279,7 @@ public class LDAPAuth implements Authenticator {
 			catch (Exception e) {
 				_log.error(
 					"Failed to bind to the LDAP server with " + userId +
-						" " + password, e);
+						" " + password + " " + e.getMessage());
 
 				return false;
 			}
