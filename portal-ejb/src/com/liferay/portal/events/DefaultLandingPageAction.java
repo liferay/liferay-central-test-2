@@ -54,7 +54,7 @@ public class DefaultLandingPageAction extends Action {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				PropsUtil.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUALS + path);
+				PropsUtil.DEFAULT_LANDING_PAGE_PATH + StringPool.EQUAL + path);
 		}
 
 		if (Validator.isNotNull(path)) {
