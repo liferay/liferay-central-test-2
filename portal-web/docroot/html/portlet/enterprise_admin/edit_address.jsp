@@ -49,7 +49,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_address" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveAddress(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>">
-<input name="<portlet:namespace />addressId" type="hidden" value="<%= String.valueOf(addressId) %>">
+<input name="<portlet:namespace />addressId" type="hidden" value="<%= addressId %>">
 <input name="<portlet:namespace />className" type="hidden" value="<%= className %>">
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>">
 
