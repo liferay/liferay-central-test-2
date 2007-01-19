@@ -372,6 +372,177 @@ public class UserGroupRolePersistence extends BasePersistence {
 		}
 	}
 
+	public List findByUserId(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			return q.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findByUserId(String userId, int begin, int end)
+		throws SystemException {
+		return findByUserId(userId, begin, end, null);
+	}
+
+	public List findByUserId(String userId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			return QueryUtil.list(q, getDialect(), begin, end);
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public UserGroupRole findByUserId_First(String userId, OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		List list = findByUserId(userId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroupRole exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "userId=";
+			msg += userId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupRoleException(msg);
+		}
+		else {
+			return (UserGroupRole)list.get(0);
+		}
+	}
+
+	public UserGroupRole findByUserId_Last(String userId, OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		int count = countByUserId(userId);
+		List list = findByUserId(userId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			String msg = "No UserGroupRole exists with the key ";
+			msg += StringPool.OPEN_CURLY_BRACE;
+			msg += "userId=";
+			msg += userId;
+			msg += StringPool.CLOSE_CURLY_BRACE;
+			throw new NoSuchUserGroupRoleException(msg);
+		}
+		else {
+			return (UserGroupRole)list.get(0);
+		}
+	}
+
+	public UserGroupRole[] findByUserId_PrevAndNext(
+		UserGroupRolePK userGroupRolePK, String userId, OrderByComparator obc)
+		throws NoSuchUserGroupRoleException, SystemException {
+		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
+		int count = countByUserId(userId);
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY " + obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					userGroupRole);
+			UserGroupRole[] array = new UserGroupRoleImpl[3];
+			array[0] = (UserGroupRole)objArray[0];
+			array[1] = (UserGroupRole)objArray[1];
+			array[2] = (UserGroupRole)objArray[2];
+
+			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List findByGroupId(long groupId) throws SystemException {
 		Session session = null;
 
@@ -684,177 +855,6 @@ public class UserGroupRolePersistence extends BasePersistence {
 		}
 	}
 
-	public List findByUserId(String userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			return q.list();
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List findByUserId(String userId, int begin, int end)
-		throws SystemException {
-		return findByUserId(userId, begin, end, null);
-	}
-
-	public List findByUserId(String userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			return QueryUtil.list(q, getDialect(), begin, end);
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public UserGroupRole findByUserId_First(String userId, OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		List list = findByUserId(userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
-		}
-		else {
-			return (UserGroupRole)list.get(0);
-		}
-	}
-
-	public UserGroupRole findByUserId_Last(String userId, OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		int count = countByUserId(userId);
-		List list = findByUserId(userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
-		}
-		else {
-			return (UserGroupRole)list.get(0);
-		}
-	}
-
-	public UserGroupRole[] findByUserId_PrevAndNext(
-		UserGroupRolePK userGroupRolePK, String userId, OrderByComparator obc)
-		throws NoSuchUserGroupRoleException, SystemException {
-		UserGroupRole userGroupRole = findByPrimaryKey(userGroupRolePK);
-		int count = countByUserId(userId);
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
-			}
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
-			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					userGroupRole);
-			UserGroupRole[] array = new UserGroupRoleImpl[3];
-			array[0] = (UserGroupRole)objArray[0];
-			array[1] = (UserGroupRole)objArray[1];
-			array[2] = (UserGroupRole)objArray[2];
-
-			return array;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List findAll() throws SystemException {
 		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 	}
@@ -900,6 +900,15 @@ public class UserGroupRolePersistence extends BasePersistence {
 		}
 	}
 
+	public void removeByUserId(String userId) throws SystemException {
+		Iterator itr = findByUserId(userId).iterator();
+
+		while (itr.hasNext()) {
+			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+			remove(userGroupRole);
+		}
+	}
+
 	public void removeByGroupId(long groupId) throws SystemException {
 		Iterator itr = findByGroupId(groupId).iterator();
 
@@ -911,15 +920,6 @@ public class UserGroupRolePersistence extends BasePersistence {
 
 	public void removeByRoleId(String roleId) throws SystemException {
 		Iterator itr = findByRoleId(roleId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-			remove(userGroupRole);
-		}
-	}
-
-	public void removeByUserId(String userId) throws SystemException {
-		Iterator itr = findByUserId(userId).iterator();
 
 		while (itr.hasNext()) {
 			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
@@ -967,6 +967,54 @@ public class UserGroupRolePersistence extends BasePersistence {
 			}
 
 			q.setLong(queryPos++, groupId);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public int countByUserId(String userId) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringBuffer query = new StringBuffer();
+			query.append("SELECT COUNT(*) ");
+			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
+
+			if (userId == null) {
+				query.append("userId IS NULL");
+			}
+			else {
+				query.append("userId = ?");
+			}
+
+			query.append(" ");
+
+			Query q = session.createQuery(query.toString());
+			q.setCacheable(true);
+
+			int queryPos = 0;
+
+			if (userId != null) {
+				q.setString(queryPos++, userId);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -1052,54 +1100,6 @@ public class UserGroupRolePersistence extends BasePersistence {
 
 			if (roleId != null) {
 				q.setString(queryPos++, roleId);
-			}
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (HibernateException he) {
-			throw new SystemException(he);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public int countByUserId(String userId) throws SystemException {
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringBuffer query = new StringBuffer();
-			query.append("SELECT COUNT(*) ");
-			query.append("FROM com.liferay.portal.model.UserGroupRole WHERE ");
-
-			if (userId == null) {
-				query.append("userId IS NULL");
-			}
-			else {
-				query.append("userId = ?");
-			}
-
-			query.append(" ");
-
-			Query q = session.createQuery(query.toString());
-			q.setCacheable(true);
-
-			int queryPos = 0;
-
-			if (userId != null) {
-				q.setString(queryPos++, userId);
 			}
 
 			Iterator itr = q.list().iterator();

@@ -43,10 +43,6 @@ public interface RoleModel extends BaseModel {
 
 	public void setCompanyId(String companyId);
 
-	public int getScope();
-
-	public void setScope(int scope);
-
 	public String getClassName();
 
 	public void setClassName(String className);
@@ -62,4 +58,8 @@ public interface RoleModel extends BaseModel {
 	public String getDescription();
 
 	public void setDescription(String description);
+
+	public int getScope();
+
+	public void setScope(int scope);
 }

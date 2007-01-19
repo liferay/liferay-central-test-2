@@ -26,96 +26,107 @@ import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.service.UserGroupRoleLocalService;
-import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
-
-import java.util.List;
 
 /**
  * <a href="UserGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Jorge Ferrer Zarzuela
+ * @author  Jorge Ferrer
  *
  */
 public class UserGroupRoleLocalServiceImpl
 	implements UserGroupRoleLocalService {
 
-	public void addGroupRoles(String userId, long groupId, String[]roleIds)
+	public void addUserGroupRoles(String userId, long groupId, String[] roleIds)
 		throws PortalException, SystemException {
+
 		for (int i = 0; i < roleIds.length; i++) {
 			String roleId = roleIds[i];
-			UserGroupRolePK pk = new UserGroupRolePK(userId, roleId, groupId);
+
+			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
+
 			if (UserGroupRoleUtil.fetchByPrimaryKey(pk) == null) {
 				UserGroupRoleUtil.update(UserGroupRoleUtil.create(pk));
 			}
 		}
 	}
 
-	public void addGroupRoleUsers(String roleId, long groupId, String[]userIds)
+	public void addUserGroupRoles(String[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
+
 		for (int i = 0; i < userIds.length; i++) {
 			String userId = userIds[i];
-			UserGroupRolePK pk = new UserGroupRolePK(userId, roleId, groupId);
+
+			UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
+
 			if (UserGroupRoleUtil.fetchByPrimaryKey(pk) == null) {
 				UserGroupRoleUtil.update(UserGroupRoleUtil.create(pk));
 			}
 		}
 	}
 
-	public List getUserRelatedGroupRoles(String userId, long groupId)
-		throws SystemException {
-		return RoleFinder.findGroupRolesByU_G(userId, groupId);
-	}
-
-	public boolean hasUserGroupRole (
-		String userId, String roleId, long groupId)
+	public void deleteUserGroupRoles(
+			String userId, long groupId, String[] roleIds)
 		throws PortalException, SystemException {
-		UserGroupRolePK pk = new UserGroupRolePK(userId, roleId, groupId);
-		return (UserGroupRoleUtil.fetchByPrimaryKey(pk) != null);
-	}
 
-	public void unsetGroupRoles(
-		String userId, long groupId, String[]roleIds)
-		throws PortalException, SystemException {
 		for (int i = 0; i < roleIds.length; i++) {
 			String roleId = roleIds[i];
+
 			try {
 				UserGroupRoleUtil.remove(
-					new UserGroupRolePK(userId, roleId, groupId));
-			} catch (NoSuchUserGroupRoleException e) {
-				// Ignore: assume it's already deleted
+					new UserGroupRolePK(userId, groupId, roleId));
+			}
+			catch (NoSuchUserGroupRoleException nsugre) {
 			}
 		}
 	}
 
-	public void unsetGroupRoleUsers(
-		String roleId, long groupId, String[]userIds)
+	public void deleteUserGroupRoles(
+			String[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
+
 		for (int i = 0; i < userIds.length; i++) {
 			String userId = userIds[i];
+
 			try {
 				UserGroupRoleUtil.remove(
-					new UserGroupRolePK(userId, roleId, groupId));
-			} catch (NoSuchUserGroupRoleException e) {
-				// Ignore: assume it's already deleted
+					new UserGroupRolePK(userId, groupId, roleId));
+			}
+			catch (NoSuchUserGroupRoleException nsugre) {
 			}
 		}
 	}
 
-	public void deleteByRoleId(String roleId)
+	public void deleteUserGroupRolesByGroupId(long groupId)
 		throws SystemException {
+
+		UserGroupRoleUtil.removeByGroupId(groupId);
+	}
+
+	public void deleteUserGroupRolesByRoleId(String roleId)
+		throws SystemException {
+
 		UserGroupRoleUtil.removeByRoleId(roleId);
 	}
 
-	public void deleteByUserId(String userId)
+	public void deleteUserGroupRolesByUserId(String userId)
 		throws SystemException {
+
 		UserGroupRoleUtil.removeByUserId(userId);
 	}
 
-	public void deleteByGroupId(long groupId)
-		throws SystemException {
-		UserGroupRoleUtil.removeByGroupId(groupId);
+	public boolean hasUserGroupRole(String userId, long groupId, String roleId)
+		throws PortalException, SystemException {
+
+		UserGroupRolePK pk = new UserGroupRolePK(userId, groupId, roleId);
+
+		if (UserGroupRoleUtil.fetchByPrimaryKey(pk) != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 }

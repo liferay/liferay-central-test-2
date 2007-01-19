@@ -178,9 +178,9 @@ if (Validator.isNotNull(modelResource)) {
 
 			ResultRow row = new ResultRow(actionId, actionId, i);
 
-			boolean hasCompanyScope = (role.getScope() == RoleImpl.ENTERPRISE_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupScope = (role.getScope() == RoleImpl.ENTERPRISE_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
-			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.COMMUNITY_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasCompanyScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.SCOPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 
 			row.addText(selResourceName);
 			row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
@@ -225,7 +225,7 @@ if (Validator.isNotNull(modelResource)) {
 				row.addText(sb.toString());
 			}
 
-			if (hasCompanyScope || hasGroupScope || hasGroupTemplateScope) {
+			if (hasCompanyScope || hasGroupTemplateScope || hasGroupScope) {
 				resultRows.add(row);
 			}
 		}
@@ -351,7 +351,7 @@ if (Validator.isNotNull(modelResource)) {
 			</th>
 			<td style="padding-left: 10px;"></td>
 			<th>
-				<%= LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.ENTERPRISE_SCOPE)?"apply-to":"") %>
+				<%= LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) ? "apply-to" : "") %>
 			</th>
 		</tr>
 
@@ -363,9 +363,9 @@ if (Validator.isNotNull(modelResource)) {
 		for (int i = 0; i < actions.size(); i++) {
 			String actionId = (String)actions.get(i);
 
-			boolean hasCompanyScope = (role.getScope() == RoleImpl.ENTERPRISE_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupScope = (role.getScope() == RoleImpl.ENTERPRISE_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
-			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.COMMUNITY_SCOPE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasCompanyScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.SCOPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 		%>
 
 			<tr>
@@ -374,19 +374,31 @@ if (Validator.isNotNull(modelResource)) {
 				</td>
 				<td style="padding-left: 10px;"></td>
 				<td>
-					<c:if test="<%= role.getScope() == RoleImpl.ENTERPRISE_SCOPE %>">
-						<select name="<portlet:namespace />scope<%= actionId %>">
-							<option value=""></option>
-								<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
+					<c:choose>
+						<c:when test="<%= role.getScope() == RoleImpl.SCOPE_ENTERPRISE %>">
+							<select name="<portlet:namespace />scope<%= actionId %>">
+								<option value=""></option>
+									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
 
-							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-								<option <%= (hasGroupScope)? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+									<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
+										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+									</c:if>
+							</select>
+						</c:when>
+						<c:when test="<%= role.getScope() == RoleImpl.SCOPE_COMMUNITY %>">
+							<liferay-ui:input-checkbox
+								param='<%= "scope" + actionId %>'
+								defaultValue="<%= hasGroupTemplateScope %>"
+								onClick='<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + actionId + "').value = (this.checked ? '" + ResourceImpl.SCOPE_GROUP + "' : '');" %>'
+							/>
+
+							<c:if test="<%= hasGroupTemplateScope %>">
+								<script type="text/javascript">
+									document.getElementById("<%= renderResponse.getNamespace() %>scope<%= actionId %>").value =	"<%= ResourceImpl.SCOPE_GROUP %>";
+								</script>
 							</c:if>
-						</select>
-					</c:if>
-					<c:if test="<%= role.getScope() == RoleImpl.COMMUNITY_SCOPE %>">
-						<liferay-ui:input-checkbox param='<%= "scope" + actionId%>' defaultValue="<%=hasGroupTemplateScope%>" onClick="<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + actionId + "').value = this.checked?'" + ResourceImpl.SCOPE_GROUP+ "':''; "%>"/>
-					</c:if>
+						</c:when>
+					</c:choose>
 				</td>
 			</tr>
 

@@ -36,4 +36,4 @@ boolean value = ParamUtil.getBoolean(request, param, defaultValue.booleanValue()
 
 <input id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" type="hidden" value="<%= value %>">
 
-<input id="<%= namespace %><%= param %>Checkbox" name="<%= namespace %><%= param %>Checkbox" <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> type="checkbox" onClick="document.getElementById('<%= namespace %><%= param %>').value = this.checked; <%= onClick %>">
+<input <%= value ? "checked" : "" %> <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= param %>Checkbox" name="<%= namespace %><%= param %>Checkbox" type="checkbox" onClick="document.getElementById('<%= namespace %><%= param %>').value = this.checked; <%= onClick %>">

@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,24 +19,44 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+package com.liferay.portal.service;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+/**
+ * <a href="UserGroupRoleServiceFactory.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class UserGroupRoleServiceFactory {
+	public static UserGroupRoleService getService() {
+		return _getFactory()._service;
+	}
 
-Object[] objArray = (Object[])row.getObject();
+	public static UserGroupRoleService getTxImpl() {
+		if (_txImpl == null) {
+			_txImpl = (UserGroupRoleService)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_TX_IMPL);
+		}
 
-User user2 = (User)objArray[0];
-Group group = (Group)objArray[1];
-%>
+		return _txImpl;
+	}
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
-	<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
-	<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-</portlet:renderURL>
+	public void setService(UserGroupRoleService service) {
+		_service = service;
+	}
 
-<liferay-ui:icon image="assign" url="<%= assignURL %>" message="user-community-roles" />
+	private static UserGroupRoleServiceFactory _getFactory() {
+		if (_factory == null) {
+			_factory = (UserGroupRoleServiceFactory)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_FACTORY);
+		}
+
+		return _factory;
+	}
+
+	private static final String _FACTORY = UserGroupRoleServiceFactory.class.getName();
+	private static final String _TX_IMPL = UserGroupRoleService.class.getName() +
+		".transaction";
+	private static UserGroupRoleServiceFactory _factory;
+	private static UserGroupRoleService _txImpl;
+	private UserGroupRoleService _service;
+}

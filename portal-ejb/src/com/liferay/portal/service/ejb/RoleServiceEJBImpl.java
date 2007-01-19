@@ -79,6 +79,15 @@ public class RoleServiceEJBImpl implements RoleService, SessionBean {
 		return RoleServiceFactory.getTxImpl().getRole(companyId, name);
 	}
 
+	public java.util.List getUserGroupRoles(java.lang.String userId,
+		long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return RoleServiceFactory.getTxImpl().getUserGroupRoles(userId, groupId);
+	}
+
 	public java.util.List getUserRelatedRoles(java.lang.String userId,
 		java.util.List groups)
 		throws com.liferay.portal.PortalException, 

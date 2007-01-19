@@ -27,6 +27,7 @@ import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
@@ -50,8 +51,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
@@ -196,8 +197,19 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		// Layout sets
 
-		LayoutSetLocalServiceUtil.deleteLayoutSet(LayoutImpl.PRIVATE + groupId);
-		LayoutSetLocalServiceUtil.deleteLayoutSet(LayoutImpl.PUBLIC + groupId);
+		try {
+			LayoutSetLocalServiceUtil.deleteLayoutSet(
+				LayoutImpl.PRIVATE + groupId);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+
+		try {
+			LayoutSetLocalServiceUtil.deleteLayoutSet(
+				LayoutImpl.PUBLIC + groupId);
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
 
 		// Role
 
@@ -212,8 +224,7 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 
 		// Group roles
 
-		UserGroupRoleLocalServiceUtil.deleteByGroupId(groupId);
-
+		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByGroupId(groupId);
 
 		// Blogs
 

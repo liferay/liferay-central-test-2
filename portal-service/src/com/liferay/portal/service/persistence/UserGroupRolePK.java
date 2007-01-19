@@ -34,16 +34,16 @@ import java.io.Serializable;
  */
 public class UserGroupRolePK implements Comparable, Serializable {
 	public String userId;
-	public String roleId;
 	public long groupId;
+	public String roleId;
 
 	public UserGroupRolePK() {
 	}
 
-	public UserGroupRolePK(String userId, String roleId, long groupId) {
+	public UserGroupRolePK(String userId, long groupId, String roleId) {
 		this.userId = userId;
-		this.roleId = roleId;
 		this.groupId = groupId;
+		this.roleId = roleId;
 	}
 
 	public String getUserId() {
@@ -54,20 +54,20 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		this.userId = userId;
 	}
 
-	public String getRoleId() {
-		return roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
-
 	public long getGroupId() {
 		return groupId;
 	}
 
 	public void setGroupId(long groupId) {
 		this.groupId = groupId;
+	}
+
+	public String getRoleId() {
+		return roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		this.roleId = roleId;
 	}
 
 	public int compareTo(Object obj) {
@@ -83,12 +83,6 @@ public class UserGroupRolePK implements Comparable, Serializable {
 			return value;
 		}
 
-		value = roleId.compareTo(pk.roleId);
-
-		if (value != 0) {
-			return value;
-		}
-
 		if (groupId < pk.groupId) {
 			value = -1;
 		}
@@ -98,6 +92,12 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		else {
 			value = 0;
 		}
+
+		if (value != 0) {
+			return value;
+		}
+
+		value = roleId.compareTo(pk.roleId);
 
 		if (value != 0) {
 			return value;
@@ -120,8 +120,8 @@ public class UserGroupRolePK implements Comparable, Serializable {
 			return false;
 		}
 
-		if ((userId.equals(pk.userId)) && (roleId.equals(pk.roleId)) &&
-				(groupId == pk.groupId)) {
+		if ((userId.equals(pk.userId)) && (groupId == pk.groupId) &&
+				(roleId.equals(pk.roleId))) {
 			return true;
 		}
 		else {
@@ -130,7 +130,7 @@ public class UserGroupRolePK implements Comparable, Serializable {
 	}
 
 	public int hashCode() {
-		return (userId + roleId + groupId).hashCode();
+		return (userId + groupId + roleId).hashCode();
 	}
 
 	public String toString() {
@@ -141,14 +141,14 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		sb.append(userId);
 		sb.append(StringPool.COMMA);
 		sb.append(StringPool.SPACE);
-		sb.append("roleId");
-		sb.append(StringPool.EQUAL);
-		sb.append(roleId);
-		sb.append(StringPool.COMMA);
-		sb.append(StringPool.SPACE);
 		sb.append("groupId");
 		sb.append(StringPool.EQUAL);
 		sb.append(groupId);
+		sb.append(StringPool.COMMA);
+		sb.append(StringPool.SPACE);
+		sb.append("roleId");
+		sb.append(StringPool.EQUAL);
+		sb.append(roleId);
 		sb.append(StringPool.CLOSE_CURLY_BRACE);
 
 		return sb.toString();

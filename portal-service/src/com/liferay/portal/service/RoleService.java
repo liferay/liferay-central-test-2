@@ -52,6 +52,11 @@ public interface RoleService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public java.util.List getUserGroupRoles(java.lang.String userId,
+		long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public java.util.List getUserRelatedRoles(java.lang.String userId,
 		java.util.List groups)
 		throws com.liferay.portal.SystemException, 

@@ -631,8 +631,8 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_1(
-		String userId, String actionId, long resourceId, List permissions,
-		List groups, long groupId, long start, int block)
+			String userId, String actionId, long resourceId, List permissions,
+			List groups, long groupId, long start, int block)
 		throws PortalException, SystemException {
 
 		// Is the user connected to one of the permissions via group or
@@ -674,6 +674,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 
 		if (PermissionFinder.countByUserGroupRole(
 				permissions, userId, groupId) > 0) {
+
 			return true;
 		}
 
@@ -693,12 +694,12 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 	}
 
 	protected boolean hasUserPermissions_2(
-		String userId, String actionId, long resourceId, List permissions,
-		List groups, long groupId, long start, int block)
+			String userId, String actionId, long resourceId, List permissions,
+			List groups, long groupId, long start, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
-		// and countByUsersPermissions in one method
+		// countByUserGroupRole, and countByUsersPermissions in one method
 
 		if (PermissionFinder.containsPermissions_2(
 				permissions, userId, groups, groupId)) {

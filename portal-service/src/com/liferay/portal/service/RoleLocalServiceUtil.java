@@ -91,10 +91,15 @@ public class RoleLocalServiceUtil {
 		return roleLocalService.getRole(companyId, name);
 	}
 
+	public static java.util.List getUserGroupRoles(java.lang.String userId,
+		long groupId) throws com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		return roleLocalService.getUserGroupRoles(userId, groupId);
+	}
+
 	public static java.util.List getUserRelatedRoles(java.lang.String userId,
-		java.util.List groups)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
+		java.util.List groups) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getUserRelatedRoles(userId, groups);

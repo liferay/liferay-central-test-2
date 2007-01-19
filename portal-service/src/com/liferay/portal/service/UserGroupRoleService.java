@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,24 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/communities/init.jsp" %>
+package com.liferay.portal.service;
 
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+/**
+ * <a href="UserGroupRoleService.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public interface UserGroupRoleService {
+	public void addUserGroupRoles(java.lang.String userId, long groupId,
+		java.lang.String[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-Object[] objArray = (Object[])row.getObject();
+	public void addUserGroupRoles(java.lang.String[] userIds, long groupId,
+		java.lang.String roleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-User user2 = (User)objArray[0];
-Group group = (Group)objArray[1];
-%>
+	public void deleteUserGroupRoles(java.lang.String userId, long groupId,
+		java.lang.String[] roleIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
-<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
-	<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
-	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
-	<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
-</portlet:renderURL>
-
-<liferay-ui:icon image="assign" url="<%= assignURL %>" message="user-community-roles" />
+	public void deleteUserGroupRoles(java.lang.String[] userIds, long groupId,
+		java.lang.String roleId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+}

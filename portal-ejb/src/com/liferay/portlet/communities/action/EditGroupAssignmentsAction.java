@@ -25,7 +25,7 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -165,9 +165,8 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		String[] removeRoleIds = StringUtil.split(
 			ParamUtil.getString(req, "removeRoleIds"));
 
-		UserGroupRoleLocalServiceUtil.addGroupRoles(
-			userId, groupId, addRoleIds);
-		UserGroupRoleLocalServiceUtil.unsetGroupRoles(
+		UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, addRoleIds);
+		UserGroupRoleServiceUtil.deleteUserGroupRoles(
 			userId, groupId, removeRoleIds);
 	}
 

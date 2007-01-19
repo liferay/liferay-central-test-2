@@ -71,6 +71,8 @@ alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;
 
+alter table Role_ add scope INTEGER;
+
 alter_column_type Roles_Permissions permissionId LONG;
 
 alter_column_type ShoppingCart groupId LONG;
@@ -148,6 +150,13 @@ create table SRProductVersion (
 	repoStoreArtifact BOOLEAN
 );
 
+create table UserGroupRole (
+	userId VARCHAR(75) not null,
+	groupId LONG,
+	roleId VARCHAR(75) not null,
+	primary key (userId, groupId, roleId)
+);
+
 alter_column_type Users_Groups groupId LONG;
 
 alter_column_type Users_Permissions permissionId LONG;
@@ -156,13 +165,3 @@ alter_column_type Website websiteId LONG;
 alter_column_type Website typeId INTEGER;
 
 alter_column_type WikiNode groupId LONG;
-
-alter table Role_ add scope INTEGER;
-update Role_ set scope = 0;
-
-create table UserGroupRole (
-	userId VARCHAR(75) not null,
-	roleId VARCHAR(75) not null,
-	groupId LONG,
-	primary key (userId, roleId, groupId)
-);

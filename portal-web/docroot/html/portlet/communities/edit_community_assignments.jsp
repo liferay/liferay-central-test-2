@@ -140,9 +140,9 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				LinkedHashMap userParams = new LinkedHashMap();
 
-		if (tabs2.equals("current")) {
-			userParams.put("usersGroups", new Long(group.getGroupId()));
-		}
+				if (tabs2.equals("current")) {
+					userParams.put("usersGroups", new Long(group.getGroupId()));
+				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 
@@ -164,6 +164,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 				headerNames.add("name");
 				headerNames.add("email-address");
+
 				if (tabs2.equals("current")) {
 					headerNames.add(StringPool.BLANK);
 				}
@@ -175,7 +176,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				for (int i = 0; i < results.size(); i++) {
 					User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(new Object[]{user2, group}, user2.getPrimaryKey().toString(), i);
+					ResultRow row = new ResultRow(new Object[] {user2, group}, user2.getPrimaryKey().toString(), i);
 
 					// Name and email address
 
@@ -199,7 +200,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />userId" type="hidden" value="<%=userId%>">
+				<input name="<portlet:namespace />userId" type="hidden" value="<%= userId %>">
 				<input name="<portlet:namespace />addRoleIds" type="hidden" value="">
 				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="">
 
@@ -208,12 +209,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<br><br>
 
 				<%
-					RoleSearch searchContainer =
-						new RoleSearch(renderRequest, portletURL);
-					searchContainer.setRowChecker(new UserGroupRoleByRoleChecker(renderResponse, selectedUser, group));
+				RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-					List headerNames = searchContainer.getHeaderNames();
+				searchContainer.setRowChecker(new UserGroupRoleByRoleChecker(renderResponse, selectedUser, group));
 
+				List headerNames = searchContainer.getHeaderNames();
 				%>
 
 				<liferay-ui:search-form
@@ -226,11 +226,11 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					<%
 					RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-					int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.toString(RoleImpl.COMMUNITY_SCOPE));
+					int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.toString(RoleImpl.SCOPE_COMMUNITY));
 
 					searchContainer.setTotal(total);
 
-					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.toString(RoleImpl.COMMUNITY_SCOPE), searchContainer.getStart(), searchContainer.getEnd());
+					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), Integer.toString(RoleImpl.SCOPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd());
 
 					searchContainer.setResults(results);
 
@@ -242,7 +242,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
 					updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
-
 					%>
 
 					<br><div class="beta-separator"></div><br>
@@ -252,7 +251,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					<br><br>
 
 					<%
-						List resultRows = searchContainer.getResultRows();
+					List resultRows = searchContainer.getResultRows();
 
 					for (int i = 0; i < results.size(); i++) {
 						Role role = (Role)results.get(i);
@@ -273,7 +272,6 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 					<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 				</c:if>
-
 			</c:otherwise>
 		</c:choose>
 	</c:when>

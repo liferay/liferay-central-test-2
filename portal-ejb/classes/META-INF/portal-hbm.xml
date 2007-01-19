@@ -340,11 +340,11 @@
 			<generator class="assigned" />
 		</id>
 		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="scope" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="scope" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
@@ -401,8 +401,8 @@
 		<cache usage="read-write" />
 		<composite-id name="primaryKey" class="com.liferay.portal.service.persistence.UserGroupRolePK">
 			<key-property name="userId" />
-			<key-property name="roleId" />
 			<key-property name="groupId" />
+			<key-property name="roleId" />
 		</composite-id>
 	</class>
 	<class name="com.liferay.portal.model.impl.UserIdMapperImpl" table="UserIdMapper">

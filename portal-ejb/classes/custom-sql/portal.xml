@@ -345,20 +345,6 @@
 				([$ROLE_IDS$])
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersPermissions">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				Permission_
-					INNER JOIN
-						Users_Permissions ON
-							(Users_Permissions.permissionId = Permission_.permissionId)
-			WHERE
-				([$PERMISSION_IDS$]) AND
-				(Users_Permissions.userId = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUserGroupRole">
 		<![CDATA[
 			SELECT
@@ -374,6 +360,20 @@
 			WHERE
 				([$PERMISSION_IDS$]) AND
 				(UserGroupRole.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersPermissions">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Permission_
+					INNER JOIN
+						Users_Permissions ON
+							(Users_Permissions.permissionId = Permission_.permissionId)
+			WHERE
+				([$PERMISSION_IDS$]) AND
+				(Users_Permissions.userId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.PermissionFinder.countByUsersRoles">
@@ -498,6 +498,21 @@
 				(lower(Role_.scope) LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByUserGroupRole">
+		<![CDATA[
+			(
+				SELECT
+					{Role_.*}
+				FROM
+					Role_
+				INNER JOIN
+					UserGroupRole ON
+						(UserGroupRole.roleId = Role_.roleId)
+				WHERE
+					(UserGroupRole.userId = ? and UserGroupRole.groupId = ?)
+			)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByC_N">
 		<![CDATA[
 			SELECT
@@ -533,21 +548,6 @@
 						(Groups_Roles.roleId = Role_.roleId)
 				WHERE
 					([$GROUP_IDS$])
-			)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.RoleFinder.findGroupRolesByU_G">
-		<![CDATA[
-			(
-				SELECT
-					{Role_.*}
-				FROM
-					Role_
-				INNER JOIN
-					UserGroupRole ON
-						(UserGroupRole.roleId = Role_.roleId)
-				WHERE
-					(UserGroupRole.userId = ? and UserGroupRole.groupId = ?)
 			)
 		]]>
 	</sql>
@@ -616,6 +616,27 @@
 				Contact_.lastName ASC
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByPermission">
+		<![CDATA[
+			INNER JOIN
+				Users_Permissions ON
+					(Users_Permissions.userId = User_.userId)
+			INNER JOIN
+				Permission_ ON
+					(Permission_.permissionId = Users_Permissions.permissionId)
+			WHERE
+				(Permission_.resourceId = ?)		
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUserGroupRole">
+		<![CDATA[
+			INNER JOIN
+				UserGroupRole ON
+					(UserGroupRole.userId = User_.userId)
+			WHERE
+				(UserGroupRole.groupId = ? and UserGroupRole.roleId = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersGroups">
 		<![CDATA[
 			INNER JOIN
@@ -632,18 +653,6 @@
 			WHERE
 				(Users_Orgs.organizationId = ?)
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByPermission">
-		<![CDATA[
-			INNER JOIN
-				Users_Permissions ON
-					(Users_Permissions.userId = User_.userId)
-			INNER JOIN
-				Permission_ ON
-					(Permission_.permissionId = Users_Permissions.permissionId)
-			WHERE
-				(Permission_.resourceId = ?)		
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersRoles">
 		<![CDATA[
 			INNER JOIN
@@ -651,15 +660,6 @@
 					(Users_Roles.userId = User_.userId)
 			WHERE
 				(Users_Roles.roleId = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUserGroupRole">
-		<![CDATA[
-			INNER JOIN
-				UserGroupRole ON
-					(UserGroupRole.userId = User_.userId)
-			WHERE
-				(UserGroupRole.roleId = ? and UserGroupRole.groupId = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByUsersUserGroups">

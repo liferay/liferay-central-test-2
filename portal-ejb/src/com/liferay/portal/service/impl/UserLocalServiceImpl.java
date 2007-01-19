@@ -73,9 +73,9 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -564,7 +564,7 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 		// Group roles
 
-		UserGroupRoleLocalServiceUtil.deleteByUserId(userId);
+		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByUserId(userId);
 
 		// User
 

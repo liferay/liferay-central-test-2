@@ -38,8 +38,7 @@ import org.apache.commons.logging.LogFactory;
  * @author  Charles May
  *
  */
-public class UserRoleGroupChecker
-	extends RowChecker {
+public class UserRoleGroupChecker extends RowChecker {
 
 	public UserRoleGroupChecker(RenderResponse res, Role role) {
 		super(res);

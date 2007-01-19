@@ -81,21 +81,22 @@ String roleId = BeanParamUtil.getString(role, request, "roleId");
 				<liferay-ui:input-field model="<%= Role.class %>" bean="<%= role %>" field="name" />
 			</td>
 		</tr>
-
 		<tr>
 			<td>
 				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "role-scope") %></font>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
-				<c:if test="<%= role == null %>">
-					<select name="<portlet:namespace/>scope">
-						<option value="<%=RoleImpl.ENTERPRISE_SCOPE%>"><%=LanguageUtil.get(pageContext, "enterprise")%></option>
-						<option value="<%=RoleImpl.COMMUNITY_SCOPE%>"><%=LanguageUtil.get(pageContext, "community")%></option>
-				</c:if>
-				<c:if test="<%= role != null %>">
-					<font class="portlet-font" style="font-size: x-small;"><%=LanguageUtil.get(pageContext, (role.getScope() == 0)?"enterprise":"community")%></font>
-				</c:if>
+				<c:choose>
+					<c:when test="<%= role == null %>">
+						<select name="<portlet:namespace/>scope">
+							<option value="<%= RoleImpl.SCOPE_ENTERPRISE %>"><%=LanguageUtil.get(pageContext, "enterprise")%></option>
+							<option value="<%= RoleImpl.SCOPE_COMMUNITY %>"><%=LanguageUtil.get(pageContext, "community")%></option>
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) ? "enterprise" : "community") %>
+					</c:otherwise>
+				</c:choose>
 			</td>
 		</tr>
 		</table>

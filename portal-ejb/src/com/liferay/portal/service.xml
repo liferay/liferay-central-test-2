@@ -1,4 +1,5 @@
 <?xml version="1.0"?>
+<!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_2_0.dtd">
 
 <service-builder root-dir=".." package-path="com.liferay">
 	<portlet name="Portal" short-name="" />
@@ -826,11 +827,11 @@
 
 		<!-- Other fields -->
 
-		<column name="scope" type="int" />
 		<column name="className" type="String" />
 		<column name="classPK" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
+		<column name="scope" type="int" />
 
 		<!-- Relationships -->
 
@@ -1002,13 +1003,13 @@
 			<finder-column name="name" />
 		</finder>
 	</entity>
-	<entity name="UserGroupRole" local-service="true" remote-service="false">
+	<entity name="UserGroupRole" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
 		<column name="userId" type="String" primary="true"/>
-		<column name="roleId" type="String" primary="true"/>
 		<column name="groupId" type="long" primary="true"/>
+		<column name="roleId" type="String" primary="true"/>
 
 		<!-- Finder methods -->
 
@@ -1016,14 +1017,14 @@
 			<finder-column name="userId" />
 			<finder-column name="groupId" />
 		</finder>
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
 		<finder name="GroupId" return-type="Collection">
 			<finder-column name="groupId" />
 		</finder>
 		<finder name="RoleId" return-type="Collection">
 			<finder-column name="roleId" />
-		</finder>
-		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
 		</finder>
 	</entity>
 	<entity name="UserIdMapper" local-service="true" remote-service="false">

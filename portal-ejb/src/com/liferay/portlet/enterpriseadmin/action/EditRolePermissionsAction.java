@@ -24,6 +24,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -158,18 +159,21 @@ public class EditRolePermissionsAction extends PortletAction {
 					actionId);
 			}
 			else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
-				if (role.getScope() == RoleImpl.COMMUNITY_SCOPE) {
+				if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
 						ResourceImpl.TYPE_CLASS,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE, "-1", actionId);
-				} else {
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						actionId);
+				}
+				else {
 					groupScopeActionIds.add(actionId);
 				}
 			}
 			else {
 
-				// Remove company and group permissions
+				// Remove company, group template, and group permissions
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
@@ -178,12 +182,12 @@ public class EditRolePermissionsAction extends PortletAction {
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE,
 					actionId);
 
 				PermissionServiceUtil.unsetRolePermissions(
 					roleId, themeDisplay.getPortletGroupId(), selResource,
-					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE,
+					ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP,
 					actionId);
 			}
 		}

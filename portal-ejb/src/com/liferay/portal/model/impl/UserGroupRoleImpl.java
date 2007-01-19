@@ -30,9 +30,10 @@ import com.liferay.portal.model.UserGroupRole;
  * @author  Brian Wing Shun Chan
  *
  */
-public class UserGroupRoleImpl extends UserGroupRoleModelImpl
-	implements UserGroupRole {
+public class UserGroupRoleImpl
+	extends UserGroupRoleModelImpl implements UserGroupRole {
+
 	public UserGroupRoleImpl() {
 	}
-	
+
 }

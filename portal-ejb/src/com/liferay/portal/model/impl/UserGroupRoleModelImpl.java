@@ -51,13 +51,13 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	}
 
 	public UserGroupRolePK getPrimaryKey() {
-		return new UserGroupRolePK(_userId, _roleId, _groupId);
+		return new UserGroupRolePK(_userId, _groupId, _roleId);
 	}
 
 	public void setPrimaryKey(UserGroupRolePK pk) {
 		setUserId(pk.userId);
-		setRoleId(pk.roleId);
 		setGroupId(pk.groupId);
+		setRoleId(pk.roleId);
 	}
 
 	public String getUserId() {
@@ -74,6 +74,16 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 			}
 
 			_userId = userId;
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
 		}
 	}
 
@@ -94,21 +104,11 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getGroupId() {
-		return _groupId;
-	}
-
-	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
-		}
-	}
-
 	public Object clone() {
 		UserGroupRoleImpl clone = new UserGroupRoleImpl();
 		clone.setUserId(getUserId());
-		clone.setRoleId(getRoleId());
 		clone.setGroupId(getGroupId());
+		clone.setRoleId(getRoleId());
 
 		return clone;
 	}
@@ -153,6 +153,6 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	}
 
 	private String _userId;
-	private String _roleId;
 	private long _groupId;
+	private String _roleId;
 }

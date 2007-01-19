@@ -336,7 +336,6 @@
 	<model name="com.liferay.portal.model.Role">
 		<field name="roleId" type="String" />
 		<field name="companyId" type="String" />
-		<field name="scope" type="int" />
 		<field name="className" type="String" />
 		<field name="classPK" type="String" />
 		<field name="name" type="String">
@@ -345,6 +344,7 @@
 		<field name="description" type="String">
 			<hint-collection name="TEXTAREA" />
 		</field>
+		<field name="scope" type="int" />
 	</model>
 	<model name="com.liferay.portal.model.Subscription">
 		<field name="subscriptionId" type="String" />
@@ -399,8 +399,8 @@
 	</model>
 	<model name="com.liferay.portal.model.UserGroupRole">
 		<field name="userId" type="String" />
-		<field name="roleId" type="String" />
 		<field name="groupId" type="long" />
+		<field name="roleId" type="String" />
 	</model>
 	<model name="com.liferay.portal.model.UserIdMapper">
 		<field name="userId" type="String" />

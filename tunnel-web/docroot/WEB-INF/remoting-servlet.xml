@@ -254,6 +254,18 @@
 		<property name="service" ref="com.liferay.portal.service.UserGroupService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupRoleService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupRoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupRoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupRoleService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupRoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupRoleService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_UserGroupRoleService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.UserGroupRoleService.professional" />
+		<property name="serviceInterface" value="com.liferay.portal.service.UserGroupRoleService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_WebsiteService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.WebsiteService.professional" />
 		<property name="serviceInterface" value="com.liferay.portal.service.WebsiteService" />

@@ -39,8 +39,8 @@ public class UserGroupRoleSoap implements Serializable {
 	public static UserGroupRoleSoap toSoapModel(UserGroupRole model) {
 		UserGroupRoleSoap soapModel = new UserGroupRoleSoap();
 		soapModel.setUserId(model.getUserId());
-		soapModel.setRoleId(model.getRoleId());
 		soapModel.setGroupId(model.getGroupId());
+		soapModel.setRoleId(model.getRoleId());
 
 		return soapModel;
 	}
@@ -60,13 +60,13 @@ public class UserGroupRoleSoap implements Serializable {
 	}
 
 	public UserGroupRolePK getPrimaryKey() {
-		return new UserGroupRolePK(_userId, _roleId, _groupId);
+		return new UserGroupRolePK(_userId, _groupId, _roleId);
 	}
 
 	public void setPrimaryKey(UserGroupRolePK pk) {
 		setUserId(pk.userId);
-		setRoleId(pk.roleId);
 		setGroupId(pk.groupId);
+		setRoleId(pk.roleId);
 	}
 
 	public String getUserId() {
@@ -77,14 +77,6 @@ public class UserGroupRoleSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getRoleId() {
-		return _roleId;
-	}
-
-	public void setRoleId(String roleId) {
-		_roleId = roleId;
-	}
-
 	public long getGroupId() {
 		return _groupId;
 	}
@@ -93,7 +85,15 @@ public class UserGroupRoleSoap implements Serializable {
 		_groupId = groupId;
 	}
 
+	public String getRoleId() {
+		return _roleId;
+	}
+
+	public void setRoleId(String roleId) {
+		_roleId = roleId;
+	}
+
 	private String _userId;
-	private String _roleId;
 	private long _groupId;
+	private String _roleId;
 }

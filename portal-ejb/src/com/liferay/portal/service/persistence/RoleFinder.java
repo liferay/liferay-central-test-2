@@ -51,6 +51,9 @@ public class RoleFinder {
 	public static String COUNT_BY_C_N_D_S =
 		RoleFinder.class.getName() + ".countByC_N_D_S";
 
+	public static String FIND_BY_USER_GROUP_ROLE =
+		RoleFinder.class.getName() + ".findByUserGroupRole";
+
 	public static String FIND_BY_C_N =
 		RoleFinder.class.getName() + ".findByC_N";
 
@@ -59,9 +62,6 @@ public class RoleFinder {
 
 	public static String FIND_BY_C_N_D_S =
 		RoleFinder.class.getName() + ".findByC_N_D_S";
-
-	public static String FIND_BY_GROUP_ROLES_U_G =
-		RoleFinder.class.getName() + ".findGroupRolesByU_G";
 
 	public static int countByC_N_D_S(
 			String companyId, String name, String description, String scope)
@@ -104,6 +104,37 @@ public class RoleFinder {
 			}
 
 			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public static List findByUserGroupRole(String userId, long groupId)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_USER_GROUP_ROLE);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.setCacheable(false);
+
+			q.addEntity("Role_", RoleImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(groupId);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -177,37 +208,6 @@ public class RoleFinder {
 
 			qPos.add(userId);
 			_setGroupIds(qPos, groups);
-
-			return q.list();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public static List findGroupRolesByU_G(String userId, long groupId)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_GROUP_ROLES_U_G);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.setCacheable(false);
-
-			q.addEntity("Role_", RoleImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(userId);
-			qPos.add(groupId);
 
 			return q.list();
 		}

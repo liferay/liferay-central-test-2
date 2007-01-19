@@ -34,16 +34,16 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UserRoleChecker.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupRoleByRoleChecker.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
  *
  */
-public class UserGroupRoleByRoleChecker
-	extends RowChecker {
+public class UserGroupRoleByRoleChecker extends RowChecker {
 
-	public UserGroupRoleByRoleChecker(
-		RenderResponse res, User user, Group group) {
+	public UserGroupRoleByRoleChecker(RenderResponse res, User user,
+									  Group group) {
+
 		super(res);
 
 		_user = user;
@@ -55,7 +55,7 @@ public class UserGroupRoleByRoleChecker
 
 		try {
 			return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				_user.getUserId(), role.getRoleId(), _group.getGroupId());
+				_user.getUserId(), _group.getGroupId(), role.getRoleId());
 		}
 		catch (Exception e){
 			_log.error(e);

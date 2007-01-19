@@ -56,14 +56,14 @@ public class PermissionFinder {
 	public static String COUNT_BY_ROLES_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByRolesPermissions";
 
+	public static String COUNT_BY_USER_GROUP_ROLE =
+		PermissionFinder.class.getName() + ".countByUserGroupRole";
+
 	public static String COUNT_BY_USERS_PERMISSIONS =
 		PermissionFinder.class.getName() + ".countByUsersPermissions";
 
 	public static String COUNT_BY_USERS_ROLES =
 		PermissionFinder.class.getName() + ".countByUsersRoles";
-
-	public static String COUNT_BY_USER_GROUP_ROLE =
-		PermissionFinder.class.getName() + ".countByUserGroupRole";
 
 	public static String FIND_BY_A_R =
 		PermissionFinder.class.getName() + ".findByA_R";
@@ -81,7 +81,7 @@ public class PermissionFinder {
 		PermissionFinder.class.getName() + ".findByU_A_R";
 
 	public static boolean containsPermissions_2(
-		List permissions, String userId, List groups, long groupId)
+			List permissions, String userId, List groups, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -129,22 +129,22 @@ public class PermissionFinder {
 			sql += "UNION ALL ";
 
 			sql += "(";
-			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
-			sql += ") ";
-
-			sql = StringUtil.replace(
-				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
-
-			sql += "UNION ALL ";
-
-			sql += "(";
 			sql += CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
 			sql += ") ";
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
 				_getPermissionIds(permissions, "Roles_Permissions"));
+
+			sql += "UNION ALL ";
+
+			sql += "(";
+			sql += CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
+			sql += ") ";
+
+			sql = StringUtil.replace(
+				sql, "[$PERMISSION_IDS$]",
+				_getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -163,10 +163,11 @@ public class PermissionFinder {
 
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
+
+			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
@@ -422,7 +423,8 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUsersPermissions(List permissions, String userId)
+	public static int countByUserGroupRole(
+			List permissions, String userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -430,11 +432,11 @@ public class PermissionFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
+			String sql = CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Users_Permissions"));
+				_getPermissionIds(permissions, "Roles_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -444,6 +446,7 @@ public class PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
+			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
@@ -467,8 +470,7 @@ public class PermissionFinder {
 		}
 	}
 
-	public static int countByUserGroupRole(
-		List permissions, String userId, long groupId)
+	public static int countByUsersPermissions(List permissions, String userId)
 		throws SystemException {
 
 		Session session = null;
@@ -476,11 +478,11 @@ public class PermissionFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_USER_GROUP_ROLE);
+			String sql = CustomSQLUtil.get(COUNT_BY_USERS_PERMISSIONS);
 
 			sql = StringUtil.replace(
 				sql, "[$PERMISSION_IDS$]",
-				_getPermissionIds(permissions, "Roles_Permissions"));
+				_getPermissionIds(permissions, "Users_Permissions"));
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -490,7 +492,6 @@ public class PermissionFinder {
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
-			qPos.add(groupId);
 			_setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 

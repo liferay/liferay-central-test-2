@@ -57,20 +57,20 @@ public class UserFinder {
 	public static String FIND_BY_C_FN_MN_LN_EA_A =
 		UserFinder.class.getName() + ".findByC_FN_MN_LN_EA_A";
 
+	public static String JOIN_BY_PERMISSION =
+		UserFinder.class.getName() + ".joinByPermission";
+
+	public static String JOIN_BY_USER_GROUP_ROLE =
+		UserFinder.class.getName() + ".joinByUserGroupRole";
+
 	public static String JOIN_BY_USERS_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersGroups";
 
 	public static String JOIN_BY_USERS_ORGS =
 		UserFinder.class.getName() + ".joinByUsersOrgs";
 
-	public static String JOIN_BY_PERMISSION =
-		UserFinder.class.getName() + ".joinByPermission";
-
 	public static String JOIN_BY_USERS_ROLES =
 		UserFinder.class.getName() + ".joinByUsersRoles";
-
-	public static String JOIN_BY_USER_GROUP_ROLE =
-		UserFinder.class.getName() + ".joinByUserGroupRole";
 
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
@@ -220,6 +220,9 @@ public class UserFinder {
 		if (key.equals("permission")) {
 			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
@@ -228,9 +231,6 @@ public class UserFinder {
 		}
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
-		}
-		else if (key.equals("userGroupRole")) {
-			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
@@ -276,6 +276,9 @@ public class UserFinder {
 		if (key.equals("permission")) {
 			join = CustomSQLUtil.get(JOIN_BY_PERMISSION);
 		}
+		else if (key.equals("userGroupRole")) {
+			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
+		}
 		else if (key.equals("usersGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_GROUPS);
 		}
@@ -284,9 +287,6 @@ public class UserFinder {
 		}
 		else if (key.equals("usersRoles")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_ROLES);
-		}
-		else if (key.equals("userGroupRole")) {
-			join = CustomSQLUtil.get(JOIN_BY_USER_GROUP_ROLE);
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);

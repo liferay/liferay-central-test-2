@@ -38,7 +38,6 @@ import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.ResourceServiceUtil;
 import com.liferay.portal.service.RoleServiceUtil;
-import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.CollectionFactory;
@@ -188,10 +187,12 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					(USER_CHECK_ALGORITHM == 4)) {
 
 					roles = RoleServiceUtil.getUserRelatedRoles(
-							user.getUserId(), groups);
-					List groupRoles = UserGroupRoleLocalServiceUtil.getUserRelatedGroupRoles(
-							user.getUserId(), groupId);
-					roles.addAll(groupRoles);
+						user.getUserId(), groups);
+
+					List userGroupRoles = RoleServiceUtil.getUserGroupRoles(
+						user.getUserId(), groupId);
+
+					roles.addAll(userGroupRoles);
 				}
 				else {
 					roles = new ArrayList();
@@ -402,13 +403,14 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		start = logHasUserPermission(
 			groupId, name, primKey, actionId, start, 3);
 
-		// Group  Template
+		// Group template
 
 		try {
 			if (groupId > 0) {
 				Resource resource = ResourceServiceUtil.getResource(
 					companyId, name, ResourceImpl.TYPE_CLASS,
-					ResourceImpl.SCOPE_GROUP_TEMPLATE, "-1");
+					ResourceImpl.SCOPE_GROUP_TEMPLATE,
+					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
 
 				resourceIds[2] = resource.getResourceId();
 			}
@@ -418,13 +420,14 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
 						ResourceImpl.TYPE_CLASS  + " " +
-							ResourceImpl.SCOPE_GROUP + " " + groupId +
-								" does not exist");
+							ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
+								GroupImpl.DEFAULT_PARENT_GROUP_ID +
+									" does not exist");
 			}
 		}
 
 		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 3);
+			groupId, name, primKey, actionId, start, 4);
 
 		// Company
 
@@ -446,7 +449,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 
 		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 4);
+			groupId, name, primKey, actionId, start, 5);
 
 		// Check if user has access to perform the action on the given
 		// resource scopes. The resources are scoped to check first for an
@@ -459,7 +462,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			user.getUserId(), groupId, actionId, resourceIds, bag);
 
 		start = logHasUserPermission(
-			groupId, name, primKey, actionId, start, 5);
+			groupId, name, primKey, actionId, start, 6);
 
 		return value;
 	}

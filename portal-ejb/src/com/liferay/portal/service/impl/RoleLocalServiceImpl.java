@@ -37,14 +37,12 @@ import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
-import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.Validator;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -76,10 +74,10 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		Role role = RoleUtil.create(roleId);
 
 		role.setCompanyId(companyId);
-		role.setName(name);
-		role.setScope(scope);
 		role.setClassName(className);
 		role.setClassPK(classPK);
+		role.setName(name);
+		role.setScope(scope);
 
 		RoleUtil.update(role);
 
@@ -105,7 +103,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(
-					null, companyId, systemRoles[i], RoleImpl.ENTERPRISE_SCOPE);
+					null, companyId, systemRoles[i], RoleImpl.SCOPE_ENTERPRISE);
 			}
 		}
 	}
@@ -130,12 +128,9 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				role.getPrimaryKey().toString());
 		}
 
-		if (role.getScope() == RoleImpl.COMMUNITY_SCOPE) {
-			// TODO: delete associated resources and permissions
-//			PermissionLocalServiceUtil.unsetRolePermissions(roleId, companyId, ResourceImpl.TYPE_CLASS,
-//						ResourceImpl.SCOPE_GROUP_TEMPLATE, "-1");
-
-			UserGroupRoleLocalServiceUtil.deleteByRoleId(role.getRoleId());
+		if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
+			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
+				role.getRoleId());
 		}
 
 		// Role
@@ -160,8 +155,14 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		return RoleFinder.findByC_N(companyId, name);
 	}
 
+	public List getUserGroupRoles(String userId, long groupId)
+		throws SystemException {
+
+		return RoleFinder.findByUserGroupRole(userId, groupId);
+	}
+
 	public List getUserRelatedRoles(String userId, List groups)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		return RoleFinder.findByU_G(userId, groups);
 	}
@@ -202,7 +203,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	}
 
 	public int searchCount(
-		String companyId, String name, String description, String scope)
+			String companyId, String name, String description, String scope)
 		throws SystemException {
 
 		return RoleFinder.countByC_N_D_S(companyId, name, description, scope);

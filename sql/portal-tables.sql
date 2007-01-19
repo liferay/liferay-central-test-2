@@ -681,11 +681,11 @@ create table Resource_ (
 create table Role_ (
 	roleId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,
-	scope INTEGER,
 	className VARCHAR(75) null,
 	classPK VARCHAR(75) null,
 	name VARCHAR(75) null,
-	description STRING null
+	description STRING null,
+	scope INTEGER
 );
 
 create table Roles_Permissions (
@@ -974,6 +974,13 @@ create table User_ (
 	active_ BOOLEAN
 );
 
+create table UserGroupRole (
+	userId VARCHAR(75) not null,
+	groupId LONG,
+	roleId VARCHAR(75) not null,
+	primary key (userId, groupId, roleId)
+);
+
 create table UserIdMapper (
 	userId VARCHAR(75) not null,
 	type_ VARCHAR(75) not null,
@@ -1004,13 +1011,6 @@ create table Users_Roles (
 	userId VARCHAR(75) not null,
 	roleId VARCHAR(75) not null,
 	primary key (userId, roleId)
-);
-
-create table UserGroupRole (
-	userId VARCHAR(75) not null,
-	roleId VARCHAR(75) not null,
-	groupId LONG,
-	primary key (userId, roleId, groupId)
 );
 
 create table Users_UserGroups (

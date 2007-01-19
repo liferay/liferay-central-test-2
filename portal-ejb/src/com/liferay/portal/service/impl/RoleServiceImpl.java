@@ -44,6 +44,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 
 	public Role addRole(String name, int scope)
 		throws PortalException, SystemException {
+
 		User user = getUser();
 
 		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
@@ -76,6 +77,12 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		throws PortalException, SystemException {
 
 		return RoleLocalServiceUtil.getRole(companyId, name);
+	}
+
+	public List getUserGroupRoles(String userId, long groupId)
+		throws PortalException, SystemException {
+
+		return RoleLocalServiceUtil.getUserGroupRoles(userId, groupId);
 	}
 
 	public List getUserRelatedRoles(String userId, List groups)

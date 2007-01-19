@@ -36,6 +36,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="autoLogin" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sendPassword" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="strangers" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="communityLogo" type="tns:boolean"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="updateCompany updateDisplay updateSecurity"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:CompanySoap" type="java:com.liferay.portal.model.CompanySoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>

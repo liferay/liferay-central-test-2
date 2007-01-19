@@ -40,11 +40,11 @@ public interface UserGroupRoleModel extends BaseModel {
 
 	public void setUserId(String userId);
 
-	public String getRoleId();
-
-	public void setRoleId(String roleId);
-
 	public long getGroupId();
 
 	public void setGroupId(long groupId);
+
+	public String getRoleId();
+
+	public void setRoleId(String roleId);
 }
