@@ -25,6 +25,7 @@ package com.liferay.portal.deploy;
 import com.liferay.portal.kernel.deploy.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.HotDeployException;
 import com.liferay.portal.kernel.deploy.HotDeployListener;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
@@ -125,8 +126,21 @@ public class HotDeployThemeListener implements HotDeployListener {
 
 			VelocityContextPool.remove(servletContextName);
 
-			LastModifiedCSS.clear();
-			LastModifiedJavaScript.clear();
+			// LEP-2057
+
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(
+					PortalClassLoaderUtil.getClassLoader());
+
+				LastModifiedCSS.clear();
+				LastModifiedJavaScript.clear();
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(contextClassLoader);
+			}
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
