@@ -23,9 +23,23 @@
 package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.util.DateUtil;
+import com.liferay.util.StringUtil;
+import com.liferay.util.dao.hibernate.BooleanType;
+import com.liferay.util.dao.hibernate.FloatType;
+import com.liferay.util.dao.hibernate.IntegerType;
+import com.liferay.util.dao.hibernate.LongType;
+import com.liferay.util.dao.hibernate.ShortType;
+import com.liferay.util.dao.hibernate.StringType;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Types;
+
+import java.text.DateFormat;
+
+import org.hibernate.usertype.UserType;
 
 /**
  * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
@@ -55,61 +69,139 @@ public abstract class UpgradeProcess {
 		upgradeProgress.upgrade();
 	}
 
-	protected void appendWrappedColumn(StringBuffer sb, long col)
+	protected void appendColumn(StringBuffer sb, Object value)
 		throws Exception {
 
-		appendWrappedColumn(sb, new Long(col), false);
+		appendColumn(sb, value, false);
 	}
 
-	protected void appendWrappedColumn(StringBuffer sb, long col, boolean last)
+	protected void appendColumn(StringBuffer sb, Object value, boolean last)
 		throws Exception {
 
-		appendWrappedColumn(sb, new Long(col), last);
-	}
-
-	protected void appendWrappedColumn(StringBuffer sb, Object col)
-		throws Exception {
-
-		appendWrappedColumn(sb, col, false);
-	}
-
-	protected void appendWrappedColumn(
-			StringBuffer sb, Object col, boolean last)
-		throws Exception {
-
-		String column = null;
-
-		if (col == null) {
-			column = "null";
+		if (value == null) {
+			throw new UpgradeException(
+				"NULLs should never be inserted into the database");
 		}
-		else if (col instanceof Boolean) {
-			org.hibernate.type.BooleanType booleanType =
-				new org.hibernate.type.BooleanType();
+		else if (value instanceof String) {
+			sb.append(
+				StringUtil.replace(
+					(String)value, StringPool.COMMA, _SAFE_COMMA_CHARACTER));
+		}
+		else if (value instanceof Date) {
+			DateFormat df = DateUtil.getISOFormat();
 
-			String s = booleanType.objectToSQLString(
-				col, HibernateUtil.getDialect());
-
-			column = StringPool.APOSTROPHE + s + StringPool.APOSTROPHE;
+			sb.append(df.format((Date)value));
 		}
 		else {
-			column = StringPool.APOSTROPHE + col + StringPool.APOSTROPHE;
+			sb.append(value);
 		}
-
-		sb.append(column);
 
 		if (last) {
-			sb.append(")" + StringPool.NEW_LINE);
+			sb.append(StringPool.NEW_LINE);
 		}
 		else {
-			sb.append(StringPool.COMMA + StringPool.SPACE);
+			sb.append(StringPool.COMMA);
 		}
 	}
 
-	protected Boolean getBoolean(ResultSet rs, String name) throws Exception {
-		com.liferay.util.dao.hibernate.BooleanType booleanType =
-			new com.liferay.util.dao.hibernate.BooleanType();
+	protected void appendColumn(
+			StringBuffer sb, ResultSet rs, String name, Integer type)
+		throws Exception {
 
-		return (Boolean)booleanType.nullSafeGet(rs, new String[] {name}, null);
+		appendColumn(sb, rs, name, type, false);
 	}
+
+	protected void appendColumn(
+			StringBuffer sb, ResultSet rs, String name, Integer type,
+			boolean last)
+		throws Exception {
+
+		Object value = null;
+
+		int t = type.intValue();
+
+		UserType userType = null;
+
+		if (t == Types.BIGINT) {
+			userType = new LongType();
+		}
+		else if (t == Types.BOOLEAN) {
+			userType = new BooleanType();
+		}
+		else if (t == Types.DATE) {
+			value = rs.getDate(name);
+
+			if (value == null) {
+				value = new Date(System.currentTimeMillis());
+			}
+		}
+		else if (t == Types.FLOAT) {
+			userType = new FloatType();
+		}
+		else if (t == Types.INTEGER) {
+			userType = new IntegerType();
+		}
+		else if (t == Types.SMALLINT) {
+			userType = new ShortType();
+		}
+		else if (t == Types.VARCHAR) {
+			StringType stringType = new StringType();
+
+			value = stringType.nullSafeGet(rs, name);
+		}
+		else {
+			throw new UpgradeException(
+				"Upgrade code using unsupported class type: " + type);
+		}
+
+		if (value == null) {
+			value = userType.nullSafeGet(rs, new String[] {name}, null);
+		}
+
+		appendColumn(sb, value, last);
+	}
+
+	protected void setColumn(
+			PreparedStatement ps, int index, Integer type, String value)
+		throws Exception {
+
+		int t = type.intValue();
+
+		if (t == Types.BIGINT) {
+			ps.setLong(index, Long.parseLong(value));
+		}
+		else if (t == Types.BOOLEAN) {
+			ps.setBoolean(index, Boolean.parseBoolean(value));
+		}
+		else if (t == Types.DATE) {
+			DateFormat df = DateUtil.getISOFormat();
+
+			ps.setDate(index, new java.sql.Date(df.parse(value).getTime()));
+		}
+		else if (t == Types.FLOAT) {
+			ps.setFloat(index, Float.parseFloat(value));
+		}
+		else if (t == Types.INTEGER) {
+			ps.setInt(index, Integer.parseInt(value));
+		}
+		else if (t == Types.SMALLINT) {
+			ps.setShort(index, Short.parseShort(value));
+		}
+		else if (t == Types.VARCHAR) {
+			value =
+				StringUtil.replace(
+					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
+
+			ps.setString(index, value);
+		}
+		else {
+			throw new UpgradeException(
+				"Upgrade code using unsupported class type: " + type);
+		}
+
+	}
+
+	private static final String _SAFE_COMMA_CHARACTER =
+		"_SAFE_COMMA_CHARACTER_";
 
 }

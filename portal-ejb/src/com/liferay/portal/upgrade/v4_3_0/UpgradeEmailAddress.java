@@ -24,7 +24,6 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -32,12 +31,14 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Statement;
-
-import java.util.Date;
+import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -77,33 +78,20 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
+				StringBuffer sb = new StringBuffer();
+
 				long emailAddressId = CounterLocalServiceUtil.increment(
 					Counter.class.getName());
 
-				String companyId = rs.getString("companyId");
-				String userId = rs.getString("userId");
-				String userName = rs.getString("userName");
-				Date createDate = rs.getDate("createDate");
-				Date modifiedDate = rs.getDate("modifiedDate");
-				String className = rs.getString("className");
-				String classPK = rs.getString("classPK");
-				String address = rs.getString("address");
-				Integer typeId = new Integer(rs.getInt("typeId"));
-				Boolean primary = getBoolean(rs, "primary_");
+				appendColumn(sb, new Long(emailAddressId));
 
-				StringBuffer sb = new StringBuffer(_INSERT_EMAIL_ADDRESS);
+				for (int i = 1; i < _COLUMNS.length; i++) {
+					boolean last = (i == _COLUMNS.length - 1);
 
-				appendWrappedColumn(sb, emailAddressId);
-				appendWrappedColumn(sb, companyId);
-				appendWrappedColumn(sb, userId);
-				appendWrappedColumn(sb, userName);
-				appendWrappedColumn(sb, createDate);
-				appendWrappedColumn(sb, modifiedDate);
-				appendWrappedColumn(sb, className);
-				appendWrappedColumn(sb, classPK);
-				appendWrappedColumn(sb, address);
-				appendWrappedColumn(sb, typeId);
-				appendWrappedColumn(sb, primary, true);
+					appendColumn(
+						sb, rs, (String)_COLUMNS[i][0], (Integer)_COLUMNS[i][1],
+						last);
+				}
 
 				FileUtil.append(tempFilename, sb.toString());
 			}
@@ -122,32 +110,69 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 			stmt = con.createStatement();
 
 			stmt.executeUpdate(_DELETE_EMAIL_ADDRESS);
-
-			String[] sqlInserts =
-				StringUtil.split(
-					FileUtil.read(tempFilename), StringPool.NEW_LINE);
-
-			for (int i = 0; i < sqlInserts.length; i++) {
-				stmt.executeUpdate(sqlInserts[i]);
-			}
-
-			FileUtil.delete(tempFilename);
-
-			_log.info("EmailAddress table repopulated with data");
 		}
 		finally {
 			DataAccess.cleanUp(con, stmt);
 		}
+
+		BufferedReader br =
+			new BufferedReader(new FileReader(tempFilename));
+
+		String line = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			while ((line = br.readLine()) != null) {
+				String[] values = StringUtil.split(line);
+
+				if (values.length != _COLUMNS.length) {
+					throw new UpgradeException(
+						"Columns differ between temp file and schema");
+				}
+
+				ps = con.prepareStatement(_INSERT_EMAIL_ADDRESS);
+
+				for (int i = 0; i < values.length; i++) {
+					setColumn(ps, i + 1, (Integer)_COLUMNS[i][1], values[i]);
+				}
+
+				ps.executeUpdate();
+
+				ps.close();
+			}
+		}
+		finally {
+			DataAccess.cleanUp(con, ps);
+		}
+
+		FileUtil.delete(tempFilename);
+
+		_log.info("EmailAddress table repopulated with data");
 	}
 
-	private static String _DELETE_EMAIL_ADDRESS =
+	private static final String _DELETE_EMAIL_ADDRESS =
 		"DELETE FROM EmailAddress";
 
-	private static String _INSERT_EMAIL_ADDRESS =
-		"INSERT INTO EmailAddress VALUES (";
+	private static final String _INSERT_EMAIL_ADDRESS =
+		"INSERT INTO EmailAddress VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
-	private static String _SELECT_EMAIL_ADDRESS =
+	private static final String _SELECT_EMAIL_ADDRESS =
 		"SELECT * FROM EmailAddress";
+
+	private static final Object[][] _COLUMNS = {
+		{ "emailAddressId", new Integer(Types.BIGINT) },
+		{ "companyId", new Integer(Types.VARCHAR) },
+		{ "userId", new Integer(Types.VARCHAR) },
+		{ "userName", new Integer(Types.VARCHAR) },
+		{ "createDate", new Integer(Types.DATE) },
+		{ "modifiedDate", new Integer(Types.DATE) },
+		{ "className", new Integer(Types.VARCHAR) },
+		{ "classPK", new Integer(Types.VARCHAR) },
+		{ "address", new Integer(Types.VARCHAR) },
+		{ "typeId", new Integer(Types.INTEGER) },
+		{ "primary_", new Integer(Types.BOOLEAN) }
+	};
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 

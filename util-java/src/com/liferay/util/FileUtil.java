@@ -46,6 +46,7 @@ import java.util.Properties;
  * <a href="FileUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Alexander Chow
  *
  */
 public class FileUtil {
@@ -54,33 +55,23 @@ public class FileUtil {
 		append(new File(fileName), s);
 	}
 
-	public static void append(String fileName, String s, boolean lazy)
-		throws IOException {
-
-		append(new File(fileName), s, lazy);
-	}
-
 	public static void append(String pathName, String fileName, String s)
 		throws IOException {
 
 		append(new File(pathName, fileName), s);
 	}
 
-	public static void append(
-			String pathName, String fileName, String s, boolean lazy)
-		throws IOException {
-
-		append(new File(pathName, fileName), s, lazy);
-	}
-
 	public static void append(File file, String s) throws IOException {
-		append(file, s, false);
-	}
+		if (file.getParent() != null) {
+			mkdirs(file.getParent());
+		}
 
-	public static void append(File file, String s, boolean lazy)
-		throws IOException {
+		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 
-		write(file, s, lazy, true);
+		bw.flush();
+		bw.write(s);
+
+		bw.close();
 	}
 
 	public static void copyDirectory(
