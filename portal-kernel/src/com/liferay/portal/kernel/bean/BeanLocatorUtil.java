@@ -41,18 +41,19 @@ public class BeanLocatorUtil {
 			throw new BeanLocatorException("BeanLocator has not been set");
 		}
 		else {
-			Thread thread = Thread.currentThread();
-			
-			ClassLoader cl = thread.getContextClassLoader();
-			
-			thread.setContextClassLoader(
-				PortalClassLoaderUtil.getClassLoader());
-			
-			Object bean = _beanLocator.locate(name);
-			
-			thread.setContextClassLoader(cl);
-			
-			return bean; 
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(
+					PortalClassLoaderUtil.getClassLoader());
+
+				return _beanLocator.locate(name);
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
 		}
 	}
 
