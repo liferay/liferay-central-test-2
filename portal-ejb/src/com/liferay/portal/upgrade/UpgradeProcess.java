@@ -130,7 +130,7 @@ public abstract class UpgradeProcess {
 		else if (t == Types.BOOLEAN) {
 			userType = new BooleanType();
 		}
-		else if (t == Types.DATE) {
+		else if (t == Types.TIMESTAMP) {
 			try {
 				value = rs.getObject(name);
 			}
@@ -177,7 +177,7 @@ public abstract class UpgradeProcess {
 		else if (t == Types.BOOLEAN) {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
-		else if (t == Types.DATE) {
+		else if (t == Types.TIMESTAMP) {
 			DateFormat df = DateUtil.getISOFormat();
 
 			ps.setTimestamp(
