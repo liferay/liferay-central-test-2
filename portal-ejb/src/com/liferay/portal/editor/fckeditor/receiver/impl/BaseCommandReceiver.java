@@ -311,7 +311,6 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		}
 	}
 
-	private static final Log _log =
-		LogFactory.getLog(BaseCommandReceiver.class);
+	private static Log _log = LogFactory.getLog(BaseCommandReceiver.class);
 
 }

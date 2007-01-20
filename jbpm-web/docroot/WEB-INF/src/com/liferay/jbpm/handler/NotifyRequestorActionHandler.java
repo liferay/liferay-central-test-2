@@ -80,7 +80,7 @@ public class NotifyRequestorActionHandler
 		executionContext.leaveNode();
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(NotifyRequestorActionHandler.class);
 
 }

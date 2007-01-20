@@ -44,7 +44,7 @@ public class UpdateBooksActionHandler implements ActionHandler {
 		executionContext.leaveNode();
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(UpdateBooksActionHandler.class);
 
 }

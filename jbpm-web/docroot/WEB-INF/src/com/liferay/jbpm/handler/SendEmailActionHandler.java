@@ -65,7 +65,7 @@ public class SendEmailActionHandler
 		}
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(SendEmailActionHandler.class);
 
 }

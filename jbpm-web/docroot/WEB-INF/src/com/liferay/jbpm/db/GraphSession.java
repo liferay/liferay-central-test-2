@@ -516,7 +516,7 @@ public class GraphSession extends org.jbpm.db.GraphSession {
 		}
 	}
 
-	private static final Log _log = LogFactoryUtil.getLog(GraphSession.class);
+	private static Log _log = LogFactoryUtil.getLog(GraphSession.class);
 
 	private String _userId;
 	private String _timeZoneId;

@@ -61,7 +61,7 @@ public class RemindActorActionHandler
 		}
 	}
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(RemindActorActionHandler.class);
 
 }

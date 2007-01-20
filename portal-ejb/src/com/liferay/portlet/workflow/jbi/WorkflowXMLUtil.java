@@ -406,6 +406,6 @@ public class WorkflowXMLUtil {
 		return tokens;
 	}
 
-	private static final Log _log = LogFactory.getLog(WorkflowXMLUtil.class);
+	private static Log _log = LogFactory.getLog(WorkflowXMLUtil.class);
 
 }

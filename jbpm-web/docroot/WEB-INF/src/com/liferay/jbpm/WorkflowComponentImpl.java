@@ -1176,7 +1176,7 @@ public class WorkflowComponentImpl implements WorkflowComponent {
 	protected GraphSession graphSession;
 	protected TaskMgmtSession taskMgmtSession;
 
-	private static final Log _log =
+	private static Log _log =
 		LogFactoryUtil.getLog(WorkflowComponentImpl.class);
 
 }
