@@ -24,6 +24,7 @@ package com.liferay.portal.upgrade;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.DateUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.hibernate.BooleanType;
 import com.liferay.util.dao.hibernate.FloatType;
@@ -168,10 +169,10 @@ public abstract class UpgradeProcess {
 		int t = type.intValue();
 
 		if (t == Types.BIGINT) {
-			ps.setLong(index, Long.parseLong(value));
+			ps.setLong(index, GetterUtil.getLong(value));
 		}
 		else if (t == Types.BOOLEAN) {
-			ps.setBoolean(index, Boolean.parseBoolean(value));
+			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
 		else if (t == Types.DATE) {
 			DateFormat df = DateUtil.getISOFormat();
@@ -179,13 +180,13 @@ public abstract class UpgradeProcess {
 			ps.setDate(index, new java.sql.Date(df.parse(value).getTime()));
 		}
 		else if (t == Types.FLOAT) {
-			ps.setFloat(index, Float.parseFloat(value));
+			ps.setFloat(index, GetterUtil.getFloat(value));
 		}
 		else if (t == Types.INTEGER) {
-			ps.setInt(index, Integer.parseInt(value));
+			ps.setInt(index, GetterUtil.getInteger(value));
 		}
 		else if (t == Types.SMALLINT) {
-			ps.setShort(index, Short.parseShort(value));
+			ps.setShort(index, GetterUtil.getShort(value));
 		}
 		else if (t == Types.VARCHAR) {
 			value =
@@ -196,7 +197,7 @@ public abstract class UpgradeProcess {
 		}
 		else {
 			throw new UpgradeException(
-				"Upgrade code using unsupported class type: " + type);
+				"Upgrade code using unsupported class type " + type);
 		}
 	}
 
