@@ -68,7 +68,6 @@ public class FileUtil {
 
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
 
-		bw.flush();
 		bw.write(s);
 
 		bw.close();
@@ -502,7 +501,6 @@ public class FileUtil {
 
 		BufferedWriter bw = new BufferedWriter(new FileWriter(file, append));
 
-		bw.flush();
 		bw.write(s);
 
 		bw.close();

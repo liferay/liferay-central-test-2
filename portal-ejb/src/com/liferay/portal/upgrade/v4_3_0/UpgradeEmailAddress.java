@@ -86,7 +86,11 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 				appendColumn(sb, new Long(emailAddressId));
 
 				for (int i = 1; i < _COLUMNS.length; i++) {
-					boolean last = (i == _COLUMNS.length - 1);
+					boolean last = false;
+					
+					if (i == _COLUMNS.length - 1) {
+						last = true;
+					}
 
 					appendColumn(
 						sb, rs, (String)_COLUMNS[i][0], (Integer)_COLUMNS[i][1],
@@ -161,17 +165,17 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		"SELECT * FROM EmailAddress";
 
 	private static final Object[][] _COLUMNS = {
-		{ "emailAddressId", new Integer(Types.BIGINT) },
-		{ "companyId", new Integer(Types.VARCHAR) },
-		{ "userId", new Integer(Types.VARCHAR) },
-		{ "userName", new Integer(Types.VARCHAR) },
-		{ "createDate", new Integer(Types.DATE) },
-		{ "modifiedDate", new Integer(Types.DATE) },
-		{ "className", new Integer(Types.VARCHAR) },
-		{ "classPK", new Integer(Types.VARCHAR) },
-		{ "address", new Integer(Types.VARCHAR) },
-		{ "typeId", new Integer(Types.INTEGER) },
-		{ "primary_", new Integer(Types.BOOLEAN) }
+		{"emailAddressId", new Integer(Types.BIGINT)},
+		{"companyId", new Integer(Types.VARCHAR)},
+		{"userId", new Integer(Types.VARCHAR)},
+		{"userName", new Integer(Types.VARCHAR)},
+		{"createDate", new Integer(Types.DATE)},
+		{"modifiedDate", new Integer(Types.DATE)},
+		{"className", new Integer(Types.VARCHAR)},
+		{"classPK", new Integer(Types.VARCHAR)},
+		{"address", new Integer(Types.VARCHAR)},
+		{"typeId", new Integer(Types.INTEGER)},
+		{"primary_", new Integer(Types.BOOLEAN)}
 	};
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);

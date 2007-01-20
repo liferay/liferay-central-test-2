@@ -80,7 +80,7 @@ public abstract class UpgradeProcess {
 
 		if (value == null) {
 			throw new UpgradeException(
-				"NULLs should never be inserted into the database");
+				"Nulls should never be inserted into the database");
 		}
 		else if (value instanceof String) {
 			sb.append(
@@ -151,7 +151,7 @@ public abstract class UpgradeProcess {
 		}
 		else {
 			throw new UpgradeException(
-				"Upgrade code using unsupported class type: " + type);
+				"Upgrade code using unsupported class type " + type);
 		}
 
 		if (value == null) {
@@ -198,7 +198,6 @@ public abstract class UpgradeProcess {
 			throw new UpgradeException(
 				"Upgrade code using unsupported class type: " + type);
 		}
-
 	}
 
 	private static final String _SAFE_COMMA_CHARACTER =
