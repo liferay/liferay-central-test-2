@@ -22,24 +22,11 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.counter.model.Counter;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.util.FileUtil;
-import com.liferay.util.StringUtil;
-import com.liferay.util.dao.DataAccess;
+import com.liferay.portal.upgrade.util.LongPKUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.UpgradeTable;
 
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.FileReader;
-import java.io.FileWriter;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.Statement;
 import java.sql.Types;
 
 import org.apache.commons.logging.Log;
@@ -65,113 +52,11 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 	}
 
 	private void _upgradeEmailAddress() throws Exception {
-		Connection con = null;
-		PreparedStatement ps = null;
-		ResultSet rs = null;
+		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
+			_TABLE_NAME, _COLUMNS);
 
-		String tempFilename =
-			"temp-db-EmailAddress-" + System.currentTimeMillis();
-
-		BufferedWriter bw =
-			new BufferedWriter(new FileWriter(tempFilename));
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			ps = con.prepareStatement(_SELECT_EMAIL_ADDRESS);
-
-			rs = ps.executeQuery();
-
-			while (rs.next()) {
-				StringBuffer sb = new StringBuffer();
-
-				long emailAddressId = CounterLocalServiceUtil.increment(
-					Counter.class.getName());
-
-				appendColumn(sb, new Long(emailAddressId));
-
-				for (int i = 1; i < _COLUMNS.length; i++) {
-					boolean last = false;
-
-					if (i == _COLUMNS.length - 1) {
-						last = true;
-					}
-
-					appendColumn(
-						sb, rs, (String)_COLUMNS[i][0], (Integer)_COLUMNS[i][1],
-						last);
-				}
-
-				bw.write(sb.toString());
-			}
-
-			_log.info("EmailAddress table backed up to file " + tempFilename);
-		}
-		finally {
-			DataAccess.cleanUp(con, ps, rs);
-
-			bw.close();
-		}
-
-		Statement stmt = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			stmt = con.createStatement();
-
-			stmt.executeUpdate(_DELETE_EMAIL_ADDRESS);
-		}
-		finally {
-			DataAccess.cleanUp(con, stmt);
-		}
-
-		BufferedReader br =
-			new BufferedReader(new FileReader(tempFilename));
-
-		String line = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			while ((line = br.readLine()) != null) {
-				String[] values = StringUtil.split(line);
-
-				if (values.length != _COLUMNS.length) {
-					throw new UpgradeException(
-						"Columns differ between temp file and schema");
-				}
-
-				ps = con.prepareStatement(_INSERT_EMAIL_ADDRESS);
-
-				for (int i = 0; i < values.length; i++) {
-					setColumn(ps, i + 1, (Integer)_COLUMNS[i][1], values[i]);
-				}
-
-				ps.executeUpdate();
-
-				ps.close();
-			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
-
-			br.close();
-		}
-
-		FileUtil.delete(tempFilename);
-
-		_log.info("EmailAddress table repopulated with data");
+		upgradeTable.updateTable();
 	}
-
-	private static final String _DELETE_EMAIL_ADDRESS =
-		"DELETE FROM EmailAddress";
-
-	private static final String _INSERT_EMAIL_ADDRESS =
-		"INSERT INTO EmailAddress VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-	private static final String _SELECT_EMAIL_ADDRESS =
-		"SELECT * FROM EmailAddress";
 
 	private static final Object[][] _COLUMNS = {
 		{"emailAddressId", new Integer(Types.BIGINT)},
@@ -186,6 +71,8 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		{"typeId", new Integer(Types.INTEGER)},
 		{"primary_", new Integer(Types.BOOLEAN)}
 	};
+
+	private static final String _TABLE_NAME = "EmailAddress";
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 

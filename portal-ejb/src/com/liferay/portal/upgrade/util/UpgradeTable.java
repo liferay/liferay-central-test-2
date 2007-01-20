@@ -20,35 +20,44 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.util;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
  * @author  Alexander Chow
+ * @author  Brian Wing Shun Chan
  *
  */
-public abstract class UpgradeProcess {
+public interface UpgradeTable {
 
-	public UpgradeProcess() {
-	}
+	public void appendColumn(StringBuffer sb, Object value) throws Exception;
 
-	public int getThreshold() {
+	public void appendColumn(StringBuffer sb, Object value, boolean last)
+		throws Exception;
 
-		// This upgrade process will only run if the build number is larger than
-		// the returned threshold value. Return 0 to always run this upgrade
-		// process.
+	public void appendColumn(
+			StringBuffer sb, ResultSet rs, String name, Integer type)
+		throws Exception;
 
-		return 0;
-	}
+	public void appendColumn(
+			StringBuffer sb, ResultSet rs, String name, Integer type,
+			boolean last)
+		throws Exception;
 
-	public abstract void upgrade() throws UpgradeException;
+	public String getDeleteSQL() throws Exception;
 
-	public void upgrade(UpgradeProcess upgradeProgress)
-		throws UpgradeException {
+	public String getInsertSQL() throws Exception;
 
-		upgradeProgress.upgrade();
-	}
+	public String getSelectSQL() throws Exception;
+
+	public void setColumn(
+			PreparedStatement ps, int index, Integer type, String value)
+		throws Exception;
+
+	public void updateTable() throws Exception;
 
 }

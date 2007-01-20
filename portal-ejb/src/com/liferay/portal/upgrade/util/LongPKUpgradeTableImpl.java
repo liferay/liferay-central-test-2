@@ -20,35 +20,47 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.upgrade;
+package com.liferay.portal.upgrade.util;
+
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+
+import java.sql.ResultSet;
 
 /**
- * <a href="UpgradeProcess.java.html"><b><i>View Source</i></b></a>
+ * <a href="LongPKUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
  * @author  Alexander Chow
+ * @author  Brian Wing Shun Chan
  *
  */
-public abstract class UpgradeProcess {
+public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 
-	public UpgradeProcess() {
+	public LongPKUpgradeTableImpl(String tableName, Object[][] columns) {
+		super(tableName, columns);
 	}
 
-	public int getThreshold() {
+	public String getExportedData(ResultSet rs) throws Exception {
+		StringBuffer sb = new StringBuffer();
 
-		// This upgrade process will only run if the build number is larger than
-		// the returned threshold value. Return 0 to always run this upgrade
-		// process.
+		Object[][] columns = getColumns();
 
-		return 0;
-	}
+		long id = CounterLocalServiceUtil.increment(Counter.class.getName());
 
-	public abstract void upgrade() throws UpgradeException;
+		appendColumn(sb, new Long(id));
 
-	public void upgrade(UpgradeProcess upgradeProgress)
-		throws UpgradeException {
+		for (int i = 1; i < columns.length; i++) {
+			boolean last = false;
 
-		upgradeProgress.upgrade();
+			if (i == columns.length - 1) {
+				last = true;
+			}
+
+			appendColumn(
+				sb, rs, (String)columns[i][0], (Integer)columns[i][1], last);
+		}
+
+		return sb.toString();
 	}
 
 }
