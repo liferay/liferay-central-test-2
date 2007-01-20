@@ -87,7 +87,7 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 				for (int i = 1; i < _COLUMNS.length; i++) {
 					boolean last = false;
-					
+
 					if (i == _COLUMNS.length - 1) {
 						last = true;
 					}
