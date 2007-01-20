@@ -31,14 +31,15 @@ import com.liferay.util.dao.hibernate.FloatType;
 import com.liferay.util.dao.hibernate.IntegerType;
 import com.liferay.util.dao.hibernate.LongType;
 import com.liferay.util.dao.hibernate.ShortType;
-import com.liferay.util.dao.hibernate.StringType;
 
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.Timestamp;
 import java.sql.Types;
 
 import java.text.DateFormat;
+
+import java.util.Date;
 
 import org.hibernate.usertype.UserType;
 
@@ -91,7 +92,7 @@ public abstract class UpgradeProcess {
 		else if (value instanceof Date) {
 			DateFormat df = DateUtil.getISOFormat();
 
-			sb.append(df.format((Date)value));
+			sb.append(df.format(value));
 		}
 		else {
 			sb.append(value);
@@ -130,10 +131,14 @@ public abstract class UpgradeProcess {
 			userType = new BooleanType();
 		}
 		else if (t == Types.DATE) {
-			value = rs.getDate(name);
+			try {
+				value = rs.getObject(name);
+			}
+			catch (Exception e) {
+			}
 
 			if (value == null) {
-				value = new Date(System.currentTimeMillis());
+				value = new Date();
 			}
 		}
 		else if (t == Types.FLOAT) {
@@ -146,16 +151,14 @@ public abstract class UpgradeProcess {
 			userType = new ShortType();
 		}
 		else if (t == Types.VARCHAR) {
-			StringType stringType = new StringType();
-
-			value = stringType.nullSafeGet(rs, name);
+			value = GetterUtil.getString(rs.getString(name));
 		}
 		else {
 			throw new UpgradeException(
 				"Upgrade code using unsupported class type " + type);
 		}
 
-		if (value == null) {
+		if (userType != null) {
 			value = userType.nullSafeGet(rs, new String[] {name}, null);
 		}
 
@@ -177,7 +180,8 @@ public abstract class UpgradeProcess {
 		else if (t == Types.DATE) {
 			DateFormat df = DateUtil.getISOFormat();
 
-			ps.setDate(index, new java.sql.Date(df.parse(value).getTime()));
+			ps.setTimestamp(
+				index, new Timestamp(df.parse(value).getTime()));
 		}
 		else if (t == Types.FLOAT) {
 			ps.setFloat(index, GetterUtil.getFloat(value));

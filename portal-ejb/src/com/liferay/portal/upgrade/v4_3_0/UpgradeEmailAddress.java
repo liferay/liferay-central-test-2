@@ -32,7 +32,9 @@ import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -70,6 +72,9 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		String tempFilename =
 			"temp-db-EmailAddress-" + System.currentTimeMillis();
 
+		BufferedWriter bw =
+			new BufferedWriter(new FileWriter(tempFilename));
+
 		try {
 			con = HibernateUtil.getConnection();
 
@@ -97,13 +102,15 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 						last);
 				}
 
-				FileUtil.append(tempFilename, sb.toString());
+				bw.write(sb.toString());
 			}
 
 			_log.info("EmailAddress table backed up to file " + tempFilename);
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);
+
+			bw.close();
 		}
 
 		Statement stmt = null;
@@ -148,6 +155,8 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 		}
 		finally {
 			DataAccess.cleanUp(con, ps);
+
+			br.close();
 		}
 
 		FileUtil.delete(tempFilename);
