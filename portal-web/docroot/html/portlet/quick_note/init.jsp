@@ -28,4 +28,5 @@
 PortletPreferences prefs = renderRequest.getPreferences();
 
 String data = prefs.getValue("data", LanguageUtil.get(pageContext, "click-to-edit-me"));
+String color = prefs.getValue("color", "#FFFFCC");
 %>

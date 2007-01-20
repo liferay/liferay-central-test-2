@@ -29,6 +29,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactory;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.Validator;
 
 import javax.portlet.PortletPreferences;
 
@@ -63,9 +64,16 @@ public class SaveAction extends JSONAction {
 		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
 			req, portletId, true, true);
 
+		String color = ParamUtil.getString(req, "color");
 		String data = ParamUtil.getString(req, "data");
 
-		prefs.setValue("data", data);
+		if (Validator.isNotNull(color)) {
+			prefs.setValue("color", color);
+		}
+
+		if (Validator.isNotNull(data)) {
+			prefs.setValue("data", data);
+		}
 
 		prefs.store();
 
