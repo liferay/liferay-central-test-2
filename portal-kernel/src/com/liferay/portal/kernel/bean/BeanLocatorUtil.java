@@ -24,6 +24,7 @@ package com.liferay.portal.kernel.bean;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 
 /**
  * <a href="BeanLocatorUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,7 +41,18 @@ public class BeanLocatorUtil {
 			throw new BeanLocatorException("BeanLocator has not been set");
 		}
 		else {
-			return _beanLocator.locate(name);
+			Thread thread = Thread.currentThread();
+			
+			ClassLoader cl = thread.getContextClassLoader();
+			
+			thread.setContextClassLoader(
+				PortalClassLoaderUtil.getClassLoader());
+			
+			Object bean = _beanLocator.locate(name);
+			
+			thread.setContextClassLoader(cl);
+			
+			return bean; 
 		}
 	}
 
