@@ -33,10 +33,10 @@
 	<td>
 
 		<%
-		String linkToPlid = selLayout.getTypeSettingsProperties().getProperty("linkToPlid", "");
+		String layoutPlid = selLayout.getTypeSettingsProperties().getProperty("layoutPlid", "");
 		%>
 
-		<select name="TypeSettingsProperties(linkToPlid)">
+		<select name="TypeSettingsProperties(layoutPlid)">
 			<option value=""></option>
 
 			<%
@@ -74,7 +74,7 @@
 				if (copiableLayout != null) {
 			%>
 
-					<option <%= linkToPlid.equals(copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
+					<option <%= layoutPlid.equals(copiableLayout.getPlid()) ? "selected" : "" %> value="<%= copiableLayout.getPlid() %>"><%= name %></option>
 
 			<%
 				}
