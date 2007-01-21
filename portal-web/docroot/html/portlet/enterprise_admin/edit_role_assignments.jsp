@@ -183,6 +183,11 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 					url="<%= portletURL.toString() %>"
 				/>
 
+				<% if (tabs3.equals("available") && (role.getScope() == RoleImpl.SCOPE_COMMUNITY)) { %>
+					<%= LanguageUtil.get(pageContext, "showing-members-of-the-community")%> : <%= roleGroup.getName() %>
+				 <% } %>
+				<br><br>
+
 				<%
 				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
@@ -206,10 +211,12 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 				if (tabs3.equals("current") && (role.getScope() == RoleImpl.SCOPE_ENTERPRISE)) {
 					userParams.put("usersRoles", role.getRoleId());
-				}
-				else if (tabs3.equals("current") && (role.getScope() == RoleImpl.SCOPE_COMMUNITY)) {
-					userParams.put("userGroupRole", new String[] {String.valueOf(roleGroupId), role.getRoleId()});
-				}
+				} else if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
+					userParams.put("usersGroups", new Long(roleGroup.getGroupId()));
+					if (tabs3.equals("current")) {
+						userParams.put("userGroupRole", new String[]{role.getRoleId(), Long.toString(roleGroup.getGroupId())});
+					}
+				 }
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
 

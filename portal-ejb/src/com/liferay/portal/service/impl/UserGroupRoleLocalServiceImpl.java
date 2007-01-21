@@ -116,6 +116,14 @@ public class UserGroupRoleLocalServiceImpl
 		UserGroupRoleUtil.removeByUserId(userId);
 	}
 
+	public void deleteUserGroupRolesByU_G(String[] userIds, long groupId)
+		throws SystemException {
+		for (int i = 0; i < userIds.length; i++) {
+			String userId = userIds[i];
+			UserGroupRoleUtil.removeByU_G(userId, groupId);
+		}
+	}
+
 	public boolean hasUserGroupRole(String userId, long groupId, String roleId)
 		throws PortalException, SystemException {
 
