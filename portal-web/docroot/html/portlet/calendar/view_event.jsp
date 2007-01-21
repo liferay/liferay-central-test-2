@@ -179,6 +179,7 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	<liferay-util:param name="tabs1" value="events" />
 </liferay-util:include>
 
+<div class="vevent">
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
@@ -209,15 +210,21 @@ if ((event.getRepeating()) && (recurrence != null)) {
 
 		<c:choose>
 			<c:when test="<%= allDay %>">
-				<%= LanguageUtil.get(pageContext, "all-day") %>:
+				<abbr class="duration" title="P1D">
+					<%= LanguageUtil.get(pageContext, "all-day") %>:
+				</abbr>
 			</c:when>
 			<c:otherwise>
 				<c:choose>
 					<c:when test="<%= event.isTimeZoneSensitive() %>">
-						<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
+						<abbr class="dtstart" title="<%= dateFormatIso8601.format(Time.getDate(event.getStartDate(), timeZone)) %>">
+							<%= dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) %>
+						</abbr>
 					</c:when>
 					<c:otherwise>
-						<%= dateFormatTime.format(event.getStartDate()) %>
+						<abbr class="dtstart" title="<%= dateFormatIso8601.format(event.getStartDate()) %>">
+							<%= dateFormatTime.format(event.getStartDate()) %>
+						</abbr>
 					</c:otherwise>
 				</c:choose>
 
@@ -254,7 +261,9 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= event.getTitle() %>
+		<span class="summary">
+			<%= event.getTitle() %>
+		</span>
 	</td>
 </tr>
 <tr>
@@ -272,7 +281,9 @@ if ((event.getRepeating()) && (recurrence != null)) {
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= LanguageUtil.get(pageContext, event.getType()) %>
+		<span class="categories">
+			<%= LanguageUtil.get(pageContext, event.getType()) %>
+		</span>
 	</td>
 </tr>
 <tr>
@@ -302,19 +313,22 @@ if ((event.getRepeating()) && (recurrence != null)) {
 <c:if test="<%= (recurrenceType == Recurrence.WEEKLY) %>">
 	<tr>
 		<td>
-			<%= LanguageUtil.get(pageContext, "repeat-weekly") %>:
+				<%= LanguageUtil.get(pageContext, "repeat-weekly") %>:
+			</abbr>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<%= LanguageUtil.get(pageContext, "recur-every") %> <%= dailyInterval %> <%= LanguageUtil.get(pageContext, "weeks-on") %>
+			<abbr class="rrule" title="FREQ=WEEKLY">
+				<%= LanguageUtil.get(pageContext, "recur-every") %> <%= dailyInterval %> <%= LanguageUtil.get(pageContext, "weeks-on") %>
 
-			<%= weeklyPosSu ? (days[0] + ",") : "" %>
-			<%= weeklyPosMo ? (days[1] + ",") : "" %>
-			<%= weeklyPosTu ? (days[2] + ",") : "" %>
-			<%= weeklyPosWe ? (days[3] + ",") : "" %>
-			<%= weeklyPosTh ? (days[4] + ",") : "" %>
-			<%= weeklyPosFr ? (days[5] + ",") : "" %>
-			<%= weeklyPosSa ? days[6] : "" %>
+				<%= weeklyPosSu ? (days[0] + ",") : "" %>
+				<%= weeklyPosMo ? (days[1] + ",") : "" %>
+				<%= weeklyPosTu ? (days[2] + ",") : "" %>
+				<%= weeklyPosWe ? (days[3] + ",") : "" %>
+				<%= weeklyPosTh ? (days[4] + ",") : "" %>
+				<%= weeklyPosFr ? (days[5] + ",") : "" %>
+				<%= weeklyPosSa ? days[6] : "" %>
+			</abbr>
 		</td>
 	</tr>
 </c:if>
@@ -362,31 +376,33 @@ if ((event.getRepeating()) && (recurrence != null)) {
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
-			<c:if test="<%= (yearlyType == 0) %>">
-				<%= LanguageUtil.get(pageContext, "every") %> <%= months[yearlyMonth0] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval0 %> <%= LanguageUtil.get(pageContext, "year-s") %>
-			</c:if>
+			<abbr class="rrule" title="FREQ=YEARLY">
+				<c:if test="<%= (yearlyType == 0) %>">
+					<%= LanguageUtil.get(pageContext, "every") %> <%= months[yearlyMonth0] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval0 %> <%= LanguageUtil.get(pageContext, "year-s") %>
+				</c:if>
 
-			<c:if test="<%= (yearlyType == 1) %>">
-				<%= LanguageUtil.get(pageContext, "the") %>
+				<c:if test="<%= (yearlyType == 1) %>">
+					<%= LanguageUtil.get(pageContext, "the") %>
 
-				<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
-				<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
-				<%= (yearlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
-				<%= (yearlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
-				<%= (yearlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
+					<%= (yearlyPos == 1) ? LanguageUtil.get(pageContext, "first") : "" %>
+					<%= (yearlyPos == 2) ? LanguageUtil.get(pageContext, "second") : "" %>
+					<%= (yearlyPos == 3) ? LanguageUtil.get(pageContext, "third") : "" %>
+					<%= (yearlyPos == 4) ? LanguageUtil.get(pageContext, "fourth") : "" %>
+					<%= (yearlyPos == -1) ? LanguageUtil.get(pageContext, "last") : "" %>
 
-				<%= (yearlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
-				<%= (yearlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
-				<%= (yearlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
-				<%= (yearlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
-				<%= (yearlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
-				<%= (yearlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
-				<%= (yearlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
-				<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
-				<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
+					<%= (yearlyDay1 == Calendar.MONDAY) ? LanguageUtil.get(pageContext, "weekday") : "" %>
+					<%= (yearlyDay1 == Calendar.SATURDAY) ? LanguageUtil.get(pageContext, "weekend-day") : "" %>
+					<%= (yearlyDay1 == Calendar.SUNDAY) ? days[0] : "" %>
+					<%= (yearlyDay1 == Calendar.MONDAY) ? days[1] : "" %>
+					<%= (yearlyDay1 == Calendar.TUESDAY) ? days[2] : "" %>
+					<%= (yearlyDay1 == Calendar.WEDNESDAY) ? days[3] : "" %>
+					<%= (yearlyDay1 == Calendar.THURSDAY) ? days[4] : "" %>
+					<%= (yearlyDay1 == Calendar.FRIDAY) ? days[5] : "" %>
+					<%= (yearlyDay1 == Calendar.SATURDAY) ? days[6] : "" %>
 
-				<%= LanguageUtil.get(pageContext, "of") %> <%= months[yearlyMonth1] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval1 %> <%= LanguageUtil.get(pageContext, "year-s") %>
-			</c:if>
+					<%= LanguageUtil.get(pageContext, "of") %> <%= months[yearlyMonth1] %> <%= LanguageUtil.get(pageContext, "of-every") %> <%= yearlyInterval1 %> <%= LanguageUtil.get(pageContext, "year-s") %>
+				</c:if>
+			</abbr>
 		</td>
 	</tr>
 </c:if>

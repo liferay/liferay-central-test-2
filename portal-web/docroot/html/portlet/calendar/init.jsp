@@ -91,4 +91,6 @@ String[] days = CalendarUtil.getDays(locale);
 DateFormat dateFormatDate = DateFormats.getDate(locale);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale);
 DateFormat dateFormatTime = DateFormats.getTime(locale);
+
+DateFormat dateFormatIso8601 = DateFormats.getIso8601DateTime(locale);
 %>
