@@ -60,6 +60,22 @@ public class LiferayWindowState extends WindowState {
 		}
 	}
 
+	public static boolean isWindowStateIgnored(
+			WindowState oldWindowState, WindowState newWindowState) {
+		// Changes to EXCLUSIVE are always done
+		if (LiferayWindowState.EXCLUSIVE.equals(newWindowState)) {
+			return false;
+		}
+
+		// Some window states are automatically preserved
+		if (LiferayWindowState.POP_UP.equals(oldWindowState)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public LiferayWindowState(String name) {
 		super(name);
 	}

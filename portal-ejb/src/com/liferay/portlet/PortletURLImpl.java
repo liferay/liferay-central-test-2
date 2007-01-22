@@ -111,13 +111,16 @@ public class PortletURLImpl implements PortletURL, Serializable {
 		if (_portletReq != null) {
 			if (!_portletReq.isWindowStateAllowed(windowState)) {
 				throw new WindowStateException(
-					windowState.toString(), windowState);
+					"" + windowState, windowState);
 			}
 		}
 
-		_windowState = windowState;
+		if (!LiferayWindowState.isWindowStateIgnored(
+				getWindowState(), windowState)) {
+			_windowState = windowState;
+		}
 
-		// Clear cache
+		// Clear cache                          v
 
 		_toString = null;
 	}
