@@ -71,7 +71,8 @@ alter table Release_ add verified BOOLEAN;
 
 alter_column_type Resource_ resourceId LONG;
 
-alter table Role_ add scope INTEGER;
+alter table Role_ add type_ INTEGER;
+update Role_ SET type_ = 1;
 
 alter_column_type Roles_Permissions permissionId LONG;
 

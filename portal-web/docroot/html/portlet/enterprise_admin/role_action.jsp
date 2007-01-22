@@ -57,16 +57,16 @@ Role role = (Role)row.getObject();
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="delegate" url="<%= editRolePermissionsURL %>" />
+	<liferay-ui:icon image="delegate" message="define-permissions" url="<%= editRolePermissionsURL %>" />
 </c:if>
 
-<c:if test="<%= RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">
+<c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUsersURL">
 		<portlet:param name="struts_action" value="/enterprise_admin/edit_role_assignments" />
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" url="<%= assignUsersURL %>" />
+	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignUsersURL %>" />
 </c:if>
 
 <c:if test="<%= !PortalUtil.isSystemRole(role.getName()) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.DELETE) %>">

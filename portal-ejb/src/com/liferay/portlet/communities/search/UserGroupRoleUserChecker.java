@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.enterpriseadmin.search;
+package com.liferay.portlet.communities.search;
 
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
@@ -34,28 +34,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UserGroupRoleByRoleChecker.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupRoleUserChecker.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Jorge Ferrer
  *
  */
-public class UserGroupRoleByRoleChecker extends RowChecker {
+public class UserGroupRoleUserChecker extends RowChecker {
 
-	public UserGroupRoleByRoleChecker(RenderResponse res, User user,
-									  Group group) {
+	public UserGroupRoleUserChecker(RenderResponse res, Group group,
+									Role role) {
 
 		super(res);
 
-		_user = user;
 		_group = group;
+		_role = role;
 	}
 
 	public boolean isChecked(Object obj) {
-		Role role = (Role)obj;
+		User user = (User)obj;
 
 		try {
 			return UserGroupRoleLocalServiceUtil.hasUserGroupRole(
-				_user.getUserId(), _group.getGroupId(), role.getRoleId());
+				user.getUserId(), _group.getGroupId(), _role.getRoleId());
 		}
 		catch (Exception e){
 			_log.error(e);
@@ -64,10 +64,9 @@ public class UserGroupRoleByRoleChecker extends RowChecker {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(
-		UserGroupRoleByRoleChecker.class);
+	private static Log _log = LogFactory.getLog(UserGroupRoleUserChecker.class);
 
-	private User _user;
+	private Role _role;
 	private Group _group;
 
 }

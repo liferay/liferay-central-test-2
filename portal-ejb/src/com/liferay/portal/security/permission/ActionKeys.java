@@ -115,6 +115,8 @@ public class ActionKeys {
 
 	public static final String EXPIRE = "EXPIRE";
 
+	public static final String GUEST_PREFERENCES = "GUEST_PREFERENCES";
+
 	public static final String HELP = "HELP";
 
 	public static final String IMPERSONATE = "IMPERSONATE";

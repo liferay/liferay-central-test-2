@@ -98,6 +98,16 @@ public class UserGroupRoleLocalServiceImpl
 		}
 	}
 
+	public void deleteUserGroupRoles(String[] userIds, long groupId)
+		throws SystemException {
+
+		for (int i = 0; i < userIds.length; i++) {
+			String userId = userIds[i];
+
+			UserGroupRoleUtil.removeByU_G(userId, groupId);
+		}
+	}
+
 	public void deleteUserGroupRolesByGroupId(long groupId)
 		throws SystemException {
 
@@ -114,14 +124,6 @@ public class UserGroupRoleLocalServiceImpl
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByUserId(userId);
-	}
-
-	public void deleteUserGroupRolesByU_G(String[] userIds, long groupId)
-		throws SystemException {
-		for (int i = 0; i < userIds.length; i++) {
-			String userId = userIds[i];
-			UserGroupRoleUtil.removeByU_G(userId, groupId);
-		}
 	}
 
 	public boolean hasUserGroupRole(String userId, long groupId, String roleId)

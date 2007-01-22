@@ -876,8 +876,9 @@ public class UserLocalServiceImpl implements UserLocalService {
 
 	public void unsetGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByU_G(
-				userIds, groupId);
+
+		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(userIds, groupId);
+
 		GroupUtil.removeUsers(groupId, userIds);
 	}
 

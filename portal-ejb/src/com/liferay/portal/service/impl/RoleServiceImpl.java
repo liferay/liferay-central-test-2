@@ -42,7 +42,7 @@ import java.util.List;
  */
 public class RoleServiceImpl extends PrincipalBean implements RoleService {
 
-	public Role addRole(String name, int scope)
+	public Role addRole(String name, int type)
 		throws PortalException, SystemException {
 
 		User user = getUser();
@@ -50,7 +50,7 @@ public class RoleServiceImpl extends PrincipalBean implements RoleService {
 		PortalPermission.check(getPermissionChecker(), ActionKeys.ADD_ROLE);
 
 		return RoleLocalServiceUtil.addRole(
-			user.getUserId(), user.getCompanyId(), name, scope);
+			user.getUserId(), user.getCompanyId(), name, type);
 	}
 
 	public void deleteRole(String roleId)

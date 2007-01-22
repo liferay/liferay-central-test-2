@@ -57,7 +57,7 @@ public class RoleSearch extends SearchContainer {
 		iteratorURL.setParameter(
 			RoleDisplayTerms.DESCRIPTION, displayTerms.getDescription());
 		iteratorURL.setParameter(
-			RoleDisplayTerms.SCOPE, displayTerms.getScope());
+			RoleDisplayTerms.TYPE, String.valueOf(displayTerms.getType()));
 	}
 
 }

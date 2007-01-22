@@ -37,6 +37,7 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 String modelResource = ParamUtil.getString(request, "modelResource");
 
 String portletResourceName = null;
+
 if (Validator.isNotNull(portletResource)) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
@@ -100,12 +101,16 @@ PortletURL breadcrumbsURL = renderResponse.createRenderURL();
 
 breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
 
-breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
+breadcrumbsURL.setParameter("struts_action", "/communities/view");
 breadcrumbsURL.setParameter("redirect", redirect);
 breadcrumbsURL.setParameter("tabs2", tabs2);
 breadcrumbsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
-String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
+String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "communities") + "</a> &raquo; ";
+
+breadcrumbsURL.setParameter("struts_action", "/communities/edit_user_permissions");
+
+breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + group.getName() + "</a>";
 
 if (Validator.isNotNull(portletResource)) {
 	breadcrumbsURL.setParameter("portletResource", portletResource);
@@ -157,18 +162,9 @@ if (Validator.isNotNull(modelResource)) {
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= group.getGroupId() %>">
 <input name="<portlet:namespace />resourceId" type="hidden" value='<%= (resource != null) ? String.valueOf(resource.getResourceId()) : "" %>'>
 
-<table border="0" cellpadding="0" cellspacing="0" width="100%">
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "delegate-permissions-for-community") %>: <%= breadcrumbs %>
-	</td>
-	<td align="right">
-		&laquo; <a href="<%= redirect %>"><%= LanguageUtil.get(pageContext, "back") %></a>
-	</td>
-</tr>
-</table>
+Assign permissions to users.
 
-<br>
+<br><br>
 
 <c:choose>
 	<c:when test="<%= editUserPermissions %>">
@@ -186,6 +182,25 @@ if (Validator.isNotNull(modelResource)) {
 
 		<c:choose>
 			<c:when test="<%= userIdsArray.length == 0 %>">
+				<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+					Step 3 of 3: Assign the user with the permissions for the
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(modelResource) %>">
+							<i><%= modelResourceName %></i> resource.
+						</c:when>
+						<c:otherwise>
+							<i><%= portletResourceName %></i> portlet.
+						</c:otherwise>
+					</c:choose>
+				</div>
+
+				<br>
+
+				<%= breadcrumbs %>
+
+				<br><br>
+
 				<liferay-ui:tabs
 					names="current,available"
 					param="tabs2"
@@ -339,7 +354,17 @@ if (Validator.isNotNull(modelResource)) {
 	</c:when>
 	<c:when test="<%= Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource) %>">
 		<c:if test="<%= Validator.isNull(modelResource) %>">
-			<%= LanguageUtil.format(pageContext, "proceed-to-the-next-step-to-delegate-permissions-to-the-x-portlet-itself", portletResourceName) %>
+			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+				Step 2 of 3: Choose a resource or proceed to the next step.
+			</div>
+
+			<br>
+
+			<%= breadcrumbs %>
+
+			<br><br>
+
+			Proceed to the next step to assign users with permissions to the <%= portletResourceName %> portlet itself.
 
 			<br><br>
 
@@ -360,7 +385,7 @@ if (Validator.isNotNull(modelResource)) {
 
 			<liferay-ui:tabs names="resources" />
 
-			<%= LanguageUtil.format(pageContext, "delegate-permissions-to-a-resource-that-belongs-to-the-x-portlet", portletResourceName) %>
+			Assign users with permissions to a resource that belongs to the <%= portletResourceName %> portlet.
 
 			<br><br>
 
@@ -406,6 +431,15 @@ if (Validator.isNotNull(modelResource)) {
 		</c:if>
 	</c:when>
 	<c:otherwise>
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			Step 1 of 3: Choose a portlet.
+		</div>
+
+		<br>
+
+		<%= breadcrumbs %>
+
+		<br><br>
 
 		<%
 		List headerNames = new ArrayList();

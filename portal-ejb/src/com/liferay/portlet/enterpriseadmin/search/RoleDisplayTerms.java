@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.search.DisplayTerms;
 
@@ -39,14 +40,14 @@ public class RoleDisplayTerms extends DisplayTerms {
 
 	public static final String DESCRIPTION = "description";
 
-	public static final String SCOPE = "scope";
+	public static final String TYPE = "type";
 
 	public RoleDisplayTerms(RenderRequest req) {
 		super(req);
 
 		name = ParamUtil.getString(req, NAME);
 		description = ParamUtil.getString(req, DESCRIPTION);
-		scope = ParamUtil.getString(req, SCOPE);
+		type = ParamUtil.getInteger(req, TYPE);
 	}
 
 	public String getName() {
@@ -57,12 +58,21 @@ public class RoleDisplayTerms extends DisplayTerms {
 		return description;
 	}
 
-	public String getScope() {
-		return scope;
+	public int getType() {
+		return type;
+	}
+
+	public String getTypeString() {
+		if (type != 0) {
+			return String.valueOf(type);
+		}
+		else {
+			return StringPool.BLANK;
+		}
 	}
 
 	protected String name;
 	protected String description;
-	protected String scope;
+	protected int type;
 
 }

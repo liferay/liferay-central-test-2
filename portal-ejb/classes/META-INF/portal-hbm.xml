@@ -344,7 +344,7 @@
 		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="scope" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />

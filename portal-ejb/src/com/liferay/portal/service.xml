@@ -831,7 +831,7 @@
 		<column name="classPK" type="String" />
 		<column name="name" type="String" />
 		<column name="description" type="String" />
-		<column name="scope" type="int" />
+		<column name="type" type="int" />
 
 		<!-- Relationships -->
 

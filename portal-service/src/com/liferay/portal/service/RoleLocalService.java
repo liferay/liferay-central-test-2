@@ -30,12 +30,12 @@ package com.liferay.portal.service;
  */
 public interface RoleLocalService {
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name, int scope)
+		java.lang.String companyId, java.lang.String name, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name, int scope,
+		java.lang.String companyId, java.lang.String name, int type,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
@@ -84,11 +84,11 @@ public interface RoleLocalService {
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String scope, int begin, int end)
+		java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
-		java.lang.String description, java.lang.String scope)
+		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)

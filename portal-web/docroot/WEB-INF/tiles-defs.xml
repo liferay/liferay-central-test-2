@@ -278,6 +278,10 @@
 		<put name="portlet_content" value="/portlet/communities/edit_user_permissions.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.error" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/error.jsp" />
 	</definition>

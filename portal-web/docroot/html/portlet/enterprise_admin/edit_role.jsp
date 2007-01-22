@@ -83,18 +83,18 @@ String roleId = BeanParamUtil.getString(role, request, "roleId");
 		</tr>
 		<tr>
 			<td>
-				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "role-scope") %></font>
+				<font class="portlet-font" style="font-size: x-small;"><%= LanguageUtil.get(pageContext, "type") %></font>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
 				<c:choose>
 					<c:when test="<%= role == null %>">
-						<select name="<portlet:namespace/>scope">
-							<option value="<%= RoleImpl.SCOPE_ENTERPRISE %>"><%=LanguageUtil.get(pageContext, "enterprise")%></option>
-							<option value="<%= RoleImpl.SCOPE_COMMUNITY %>"><%=LanguageUtil.get(pageContext, "community")%></option>
+						<select name="<portlet:namespace/>type">
+							<option value="<%= RoleImpl.TYPE_REGULAR %>"><%=LanguageUtil.get(pageContext, "regular")%></option>
+							<option value="<%= RoleImpl.TYPE_COMMUNITY_TEMPLATE %>"><%=LanguageUtil.get(pageContext, "community-template")%></option>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) ? "enterprise" : "community") %>
+						<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community-template") %>
 					</c:otherwise>
 				</c:choose>
 			</td>

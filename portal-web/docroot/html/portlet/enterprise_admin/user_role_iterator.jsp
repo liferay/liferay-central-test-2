@@ -28,6 +28,7 @@ SearchContainer searchContainer = new SearchContainer();
 List headerNames = new ArrayList();
 
 headerNames.add("name");
+headerNames.add("type");
 headerNames.add(StringPool.BLANK);
 
 searchContainer.setHeaderNames(headerNames);
@@ -43,6 +44,10 @@ for (int i = 0; i < results.size(); i++) {
 	// Name
 
 	row.addText(role.getName());
+
+	// Type
+
+	row.addText(LanguageUtil.get(pageContext, "regular"));
 
 	// Action
 

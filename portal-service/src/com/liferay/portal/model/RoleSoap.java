@@ -42,7 +42,7 @@ public class RoleSoap implements Serializable {
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
-		soapModel.setScope(model.getScope());
+		soapModel.setType(model.getType());
 
 		return soapModel;
 	}
@@ -117,12 +117,12 @@ public class RoleSoap implements Serializable {
 		_description = description;
 	}
 
-	public int getScope() {
-		return _scope;
+	public int getType() {
+		return _type;
 	}
 
-	public void setScope(int scope) {
-		_scope = scope;
+	public void setType(int type) {
+		_type = type;
 	}
 
 	private String _roleId;
@@ -131,5 +131,5 @@ public class RoleSoap implements Serializable {
 	private String _classPK;
 	private String _name;
 	private String _description;
-	private int _scope;
+	private int _type;
 }

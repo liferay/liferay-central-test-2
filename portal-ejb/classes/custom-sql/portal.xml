@@ -483,7 +483,7 @@
 				(Resource_.primKey LIKE ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_S">
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.countByC_N_D_T">
 		<![CDATA[
 			SELECT
 				COUNT(DISTINCT roleId) AS COUNT_VALUE
@@ -494,8 +494,7 @@
 				(Role_.className IS NULL OR Role_.className = '') AND
 				(Role_.classPK IS NULL OR Role_.classPK = '') AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.scope) LIKE ? OR ? IS NULL)
+				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByUserGroupRole">
@@ -551,7 +550,7 @@
 			)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByC_N_D_S">
+	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByC_N_D_T">
 		<![CDATA[
 			SELECT
 				{Role_.*}
@@ -562,8 +561,7 @@
 				(Role_.className IS NULL OR Role_.className = '') AND
 				(Role_.classPK IS NULL OR Role_.classPK = '') AND
 				(lower(Role_.name) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.description) LIKE ? OR ? IS NULL) AND
-				(lower(Role_.scope) LIKE ? OR ? IS NULL)
+				(lower(Role_.description) LIKE ? OR ? IS NULL) AND (Role_.type_ = ?)
 			ORDER BY
 				Role_.name ASC
 		]]>

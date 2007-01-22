@@ -20,17 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.enterpriseadmin.action;
+package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.DuplicateRoleException;
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchRoleException;
-import com.liferay.portal.RequiredRoleException;
-import com.liferay.portal.RoleNameException;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.RoleServiceUtil;
+import com.liferay.portal.service.UserGroupRoleServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -44,12 +43,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditRoleAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditUserRolesAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
+ * @author  Charles May
  *
  */
-public class EditRoleAction extends PortletAction {
+public class EditUserRolesAction extends PortletAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -59,11 +58,8 @@ public class EditRoleAction extends PortletAction {
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
-			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateRole(req);
-			}
-			else if (cmd.equals(Constants.DELETE)) {
-				deleteRole(req);
+			if (cmd.equals("user_group_role_users")) {
+				updateUserGroupRoleUsers(req);
 			}
 
 			sendRedirect(req, res);
@@ -72,18 +68,7 @@ public class EditRoleAction extends PortletAction {
 			if (e instanceof PrincipalException) {
 				SessionErrors.add(req, e.getClass().getName());
 
-				setForward(req, "portlet.enterprise_admin.error");
-			}
-			else if (e instanceof DuplicateRoleException ||
-					 e instanceof NoSuchRoleException ||
-					 e instanceof RequiredRoleException ||
-					 e instanceof RoleNameException) {
-
-				SessionErrors.add(req, e.getClass().getName());
-
-				if (cmd.equals(Constants.DELETE)) {
-					res.sendRedirect(ParamUtil.getString(req, "redirect"));
-				}
+				setForward(req, "portlet.communities.error");
 			}
 			else {
 				throw e;
@@ -97,15 +82,17 @@ public class EditRoleAction extends PortletAction {
 		throws Exception {
 
 		try {
+			ActionUtil.getGroup(req);
 			ActionUtil.getRole(req);
 		}
 		catch (Exception e) {
-			if (e instanceof NoSuchRoleException ||
+			if (e instanceof NoSuchGroupException ||
+				e instanceof NoSuchRoleException ||
 				e instanceof PrincipalException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 
-				return mapping.findForward("portlet.enterprise_admin.error");
+				return mapping.findForward("portlet.communities.error");
 			}
 			else {
 				throw e;
@@ -113,35 +100,23 @@ public class EditRoleAction extends PortletAction {
 		}
 
 		return mapping.findForward(
-			getForward(req, "portlet.enterprise_admin.edit_role"));
+			getForward(req, "portlet.communities.edit_user_roles"));
 	}
 
-	protected void deleteRole(ActionRequest req) throws Exception {
+	protected void updateUserGroupRoleUsers(ActionRequest req)
+		throws Exception {
+
+		long groupId = ParamUtil.getLong(req, "groupId");
 		String roleId = ParamUtil.getString(req, "roleId");
 
-		RoleServiceUtil.deleteRole(roleId);
-	}
+		String[] addUserIds = StringUtil.split(
+			ParamUtil.getString(req, "addUserIds"));
+		String[] removeUserIds = StringUtil.split(
+			ParamUtil.getString(req, "removeUserIds"));
 
-	protected void updateRole(ActionRequest req) throws Exception {
-		String cmd = ParamUtil.getString(req, Constants.CMD);
-
-		String roleId = ParamUtil.getString(req, "roleId");
-
-		String name = ParamUtil.getString(req, "name");
-		int type = ParamUtil.getInteger(req, "type");
-
-		if (cmd.equals(Constants.ADD)) {
-
-			// Add role
-
-			RoleServiceUtil.addRole(name, type);
-		}
-		else {
-
-			// Update role
-
-			RoleServiceUtil.updateRole(roleId, name);
-		}
+		UserGroupRoleServiceUtil.addUserGroupRoles(addUserIds, groupId, roleId);
+		UserGroupRoleServiceUtil.deleteUserGroupRoles(
+			removeUserIds, groupId, roleId);
 	}
 
 }

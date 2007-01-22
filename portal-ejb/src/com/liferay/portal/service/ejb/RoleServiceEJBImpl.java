@@ -37,13 +37,12 @@ import javax.ejb.SessionContext;
  *
  */
 public class RoleServiceEJBImpl implements RoleService, SessionBean {
-	public com.liferay.portal.model.Role addRole(java.lang.String name,
-		int scope)
+	public com.liferay.portal.model.Role addRole(java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PrincipalSessionBean.setThreadValues(_sc);
 
-		return RoleServiceFactory.getTxImpl().addRole(name, scope);
+		return RoleServiceFactory.getTxImpl().addRole(name, type);
 	}
 
 	public void deleteRole(java.lang.String roleId)

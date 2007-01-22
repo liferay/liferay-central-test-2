@@ -48,8 +48,8 @@ import org.hibernate.Session;
  */
 public class RoleFinder {
 
-	public static String COUNT_BY_C_N_D_S =
-		RoleFinder.class.getName() + ".countByC_N_D_S";
+	public static String COUNT_BY_C_N_D_T =
+		RoleFinder.class.getName() + ".countByC_N_D_T";
 
 	public static String FIND_BY_USER_GROUP_ROLE =
 		RoleFinder.class.getName() + ".findByUserGroupRole";
@@ -60,11 +60,11 @@ public class RoleFinder {
 	public static String FIND_BY_U_G =
 		RoleFinder.class.getName() + ".findByU_G";
 
-	public static String FIND_BY_C_N_D_S =
-		RoleFinder.class.getName() + ".findByC_N_D_S";
+	public static String FIND_BY_C_N_D_T =
+		RoleFinder.class.getName() + ".findByC_N_D_T";
 
-	public static int countByC_N_D_S(
-			String companyId, String name, String description, String scope)
+	public static int countByC_N_D_T(
+			String companyId, String name, String description, Integer type)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -75,7 +75,11 @@ public class RoleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_S);
+			String sql = CustomSQLUtil.get(COUNT_BY_C_N_D_T);
+
+			if (type == null) {
+				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -90,8 +94,10 @@ public class RoleFinder {
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
-			qPos.add(scope);
-			qPos.add(scope);
+
+			if (type != null) {
+				qPos.add(type);
+			}
 
 			Iterator itr = q.list().iterator();
 
@@ -219,8 +225,8 @@ public class RoleFinder {
 		}
 	}
 
-	public static List findByC_N_D_S(
-			String companyId, String name, String description, String scope,
+	public static List findByC_N_D_T(
+			String companyId, String name, String description, Integer type,
 			int begin, int end)
 		throws SystemException {
 
@@ -232,7 +238,11 @@ public class RoleFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_S);
+			String sql = CustomSQLUtil.get(FIND_BY_C_N_D_T);
+
+			if (type == null) {
+				sql = StringUtil.replace(sql, "AND (Role_.type_ = ?)", "");
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -247,8 +257,10 @@ public class RoleFinder {
 			qPos.add(name);
 			qPos.add(description);
 			qPos.add(description);
-			qPos.add(scope);
-			qPos.add(scope);
+
+			if (type != null) {
+				qPos.add(type);
+			}
 
 			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
 		}

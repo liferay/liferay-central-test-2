@@ -59,7 +59,7 @@ public interface RoleModel extends BaseModel {
 
 	public void setDescription(String description);
 
-	public int getScope();
+	public int getType();
 
-	public void setScope(int scope);
+	public void setType(int type);
 }

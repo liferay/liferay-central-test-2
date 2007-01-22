@@ -40,7 +40,7 @@ import com.liferay.portal.service.http.TunnelUtil;
  */
 public class RoleServiceHttp {
 	public static com.liferay.portal.model.Role addRole(
-		HttpPrincipal httpPrincipal, java.lang.String name, int scope)
+		HttpPrincipal httpPrincipal, java.lang.String name, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException {
 		try {
@@ -50,7 +50,7 @@ public class RoleServiceHttp {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj1 = new IntegerWrapper(scope);
+			Object paramObj1 = new IntegerWrapper(type);
 			MethodWrapper methodWrapper = new MethodWrapper(RoleServiceUtil.class.getName(),
 					"addRole", new Object[] { paramObj0, paramObj1 });
 			Object returnObj = null;

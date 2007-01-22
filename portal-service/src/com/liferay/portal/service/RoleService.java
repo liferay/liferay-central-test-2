@@ -29,8 +29,7 @@ package com.liferay.portal.service;
  *
  */
 public interface RoleService {
-	public com.liferay.portal.model.Role addRole(java.lang.String name,
-		int scope)
+	public com.liferay.portal.model.Role addRole(java.lang.String name, int type)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 

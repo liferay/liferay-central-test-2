@@ -92,10 +92,10 @@ insert into LayoutSet (ownerId, companyId, groupId, userId, privateLayout, theme
 ## Roles
 ##
 
-insert into Role_ (roleId, companyId, name) values ('1', 'liferay.com', 'Administrator');
-insert into Role_ (roleId, companyId, name) values ('2', 'liferay.com', 'Guest');
-insert into Role_ (roleId, companyId, name) values ('3', 'liferay.com', 'Power User');
-insert into Role_ (roleId, companyId, name) values ('4', 'liferay.com', 'User');
+insert into Role_ (roleId, companyId, name, type_) values ('1', 'liferay.com', 'Administrator', 1);
+insert into Role_ (roleId, companyId, name, type_) values ('2', 'liferay.com', 'Guest', 1);
+insert into Role_ (roleId, companyId, name, type_) values ('3', 'liferay.com', 'Power User', 1);
+insert into Role_ (roleId, companyId, name, type_) values ('4', 'liferay.com', 'User', 1);
 
 ##
 ## User (default)

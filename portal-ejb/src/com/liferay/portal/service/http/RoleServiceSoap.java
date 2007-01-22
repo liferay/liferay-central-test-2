@@ -36,10 +36,10 @@ import java.rmi.RemoteException;
  */
 public class RoleServiceSoap {
 	public static com.liferay.portal.model.RoleSoap addRole(
-		java.lang.String name, int scope) throws RemoteException {
+		java.lang.String name, int type) throws RemoteException {
 		try {
 			com.liferay.portal.model.Role returnValue = RoleServiceUtil.addRole(name,
-					scope);
+					type);
 
 			return com.liferay.portal.model.RoleSoap.toSoapModel(returnValue);
 		}

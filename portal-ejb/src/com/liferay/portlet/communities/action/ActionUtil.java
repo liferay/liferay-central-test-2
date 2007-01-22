@@ -39,7 +39,8 @@ import javax.servlet.http.HttpServletRequest;
  * @author  Brian Wing Shun Chan
  *
  */
-public class ActionUtil {
+public class ActionUtil
+	extends com.liferay.portlet.enterpriseadmin.action.ActionUtil {
 
 	public static void getGroup(ActionRequest req) throws Exception {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);

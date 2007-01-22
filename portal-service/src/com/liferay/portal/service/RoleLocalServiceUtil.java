@@ -31,23 +31,23 @@ package com.liferay.portal.service;
 public class RoleLocalServiceUtil {
 	public static com.liferay.portal.model.Role addRole(
 		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, int scope)
+		java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.addRole(userId, companyId, name, scope);
+		return roleLocalService.addRole(userId, companyId, name, type);
 	}
 
 	public static com.liferay.portal.model.Role addRole(
 		java.lang.String userId, java.lang.String companyId,
-		java.lang.String name, int scope, java.lang.String className,
+		java.lang.String name, int type, java.lang.String className,
 		java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.addRole(userId, companyId, name, scope,
+		return roleLocalService.addRole(userId, companyId, name, type,
 			className, classPK);
 	}
 
@@ -133,20 +133,20 @@ public class RoleLocalServiceUtil {
 
 	public static java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String scope, int begin, int end)
+		java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.search(companyId, name, description, scope,
+		return roleLocalService.search(companyId, name, description, type,
 			begin, end);
 	}
 
 	public static int searchCount(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String scope) throws com.liferay.portal.SystemException {
+		java.lang.Integer type) throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.searchCount(companyId, name, description, scope);
+		return roleLocalService.searchCount(companyId, name, description, type);
 	}
 
 	public static void setUserRoles(java.lang.String userId,

@@ -30,15 +30,7 @@ String tabs3 = ParamUtil.getString(request, "tabs3", "current");
 
 String cur = ParamUtil.getString(request, "cur");
 
-Role role = (Role) request.getAttribute(WebKeys.ROLE);
-
-Group roleGroup = null;
-
-long roleGroupId = ParamUtil.getLong(request, "roleGroupId");
-
-if (roleGroupId > 0) {
-	roleGroup = GroupLocalServiceUtil.getGroup(roleGroupId);
-}
+Role role = (Role)request.getAttribute(WebKeys.ROLE);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -49,7 +41,6 @@ portletURL.setParameter("tabs1", tabs1);
 portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("tabs3", tabs3);
 portletURL.setParameter("roleId", role.getRoleId());
-portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 %>
 
 <script type="text/javascript">
@@ -62,7 +53,7 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 	}
 
 	function <portlet:namespace />updateRoleUsers(redirect) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = '<%= (roleGroupId <= 0) ? "role_users" : "user_group_role" %>';
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_users";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
 		document.<portlet:namespace />fm.<portlet:namespace />addUserIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		document.<portlet:namespace />fm.<portlet:namespace />removeUserIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
@@ -86,14 +77,102 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 <br><br>
 
+<liferay-ui:tabs
+	names="users,communities,organizations,locations,user-groups"
+	param="tabs2"
+	url="<%= portletURL.toString() %>"
+/>
+
 <c:choose>
-	<c:when test="<%= (role.getScope() == RoleImpl.SCOPE_COMMUNITY) && (roleGroupId <= 0) %>">
-		<%= LanguageUtil.get(pageContext, "step") %> 1: <%= LanguageUtil.get(pageContext, "choose-a-community") %>
+	<c:when test='<%= tabs2.equals("users") %>'>
+		<input name="<portlet:namespace />addUserIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+
+		<liferay-ui:tabs
+			names="current,available"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<%
+		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+
+		searchContainer.setRowChecker(new UserRoleChecker(renderResponse, role));
+		%>
+
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
+
+		<%
+		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+
+		LinkedHashMap userParams = new LinkedHashMap();
+
+		if (tabs3.equals("current")) {
+			userParams.put("usersRoles", role.getRoleId());
+		}
+
+		int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+
+		searchContainer.setTotal(total);
+
+		List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+
+		searchContainer.setResults(results);
+		%>
+
+		<br><div class="beta-separator"></div><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 		<br><br>
 
 		<%
+		List headerNames = new ArrayList();
+
+		headerNames.add("name");
+		headerNames.add("email-address");
+
+		searchContainer.setHeaderNames(headerNames);
+
+		List resultRows = searchContainer.getResultRows();
+
+		for (int i = 0; i < results.size(); i++) {
+			User user2 = (User)results.get(i);
+
+			ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+
+			// Name and email address
+
+			row.addText(user2.getFullName());
+			row.addText(user2.getEmailAddress());
+
+			// Add result row
+
+			resultRows.add(row);
+		}
+		%>
+
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test='<%= tabs2.equals("communities") %>'>
+		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
+
+		<liferay-ui:tabs
+			names="current,available"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
+
+		<%
 		GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
+
+		searchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
 		%>
 
 		<liferay-ui:search-form
@@ -106,6 +185,10 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 		LinkedHashMap groupParams = new LinkedHashMap();
 
+		if (tabs3.equals("current")) {
+			groupParams.put("groupsRoles", role.getRoleId());
+		}
+
 		int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
 
 		searchContainer.setTotal(total);
@@ -117,7 +200,17 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 		<br><div class="beta-separator"></div><br>
 
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+
+		<br><br>
+
 		<%
+		List headerNames = new ArrayList();
+
+		headerNames.add("name");
+
+		searchContainer.setHeaderNames(headerNames);
+
 		List resultRows = searchContainer.getResultRows();
 
 		for (int i = 0; i < results.size(); i++) {
@@ -125,17 +218,9 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 			ResultRow row = new ResultRow(group, String.valueOf(group.getPrimaryKey()), i);
 
-			PortletURL rowURL = renderResponse.createRenderURL();
-
-			rowURL.setWindowState(WindowState.MAXIMIZED);
-
-			rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_assignments");
-			rowURL.setParameter("roleId", role.getRoleId());
-			rowURL.setParameter("roleGroupId", String.valueOf(group.getGroupId()));
-
 			// Name
 
-			row.addText(group.getName(), rowURL);
+			row.addText(group.getName());
 
 			// Add result row
 
@@ -147,441 +232,174 @@ portletURL.setParameter("roleGroupId", String.valueOf(roleGroupId));
 
 		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</c:when>
-	<c:otherwise>
-		<c:if test="<%= (role.getScope() == RoleImpl.SCOPE_COMMUNITY) %>">
-			<%= LanguageUtil.get(pageContext, "step") %> 2: <%= LanguageUtil.get(pageContext, "choose-users-for-community") %> <%= roleGroup.getName() %>
-
-			<br><br>
-		</c:if>
-
-		<%
-		String tabs2Names = null;
-
-		if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
-			tabs2Names = "users";
-		}
-		else {
-			tabs2Names = "users,communities,organizations,locations,user-groups";
-		}
-		%>
+	<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
+		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
 
 		<liferay-ui:tabs
-			names="<%= tabs2Names %>"
-			param="tabs2"
+			names="current,available"
+			param="tabs3"
 			url="<%= portletURL.toString() %>"
 		/>
 
-		<c:choose>
-			<c:when test='<%= tabs2.equals("users") %>'>
-				<input name="<portlet:namespace />roleGroupId" type="hidden" value="<%= roleGroupId %>">
-				<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+		<%
+		OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
 
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+		searchContainer.setRowChecker(new OrganizationRoleChecker(renderResponse, role));
+		%>
 
-				<% if (tabs3.equals("available") && (role.getScope() == RoleImpl.SCOPE_COMMUNITY)) { %>
-					<%= LanguageUtil.get(pageContext, "showing-members-of-the-community")%> : <%= roleGroup.getName() %>
-				 <% } %>
-				<br><br>
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/organization_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-				<%
-				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+		<%
+		boolean rootOrganization = tabs2.equals("organizations");
 
-				if (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) {
-					searchContainer.setRowChecker(new UserRoleChecker(renderResponse, role));
-				}
-				else {
-					searchContainer.setRowChecker(new UserGroupRoleByUserChecker(renderResponse, role, roleGroup));
-				}
-				%>
+		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+		String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+		String parentOrganizationComparator = StringPool.EQUAL;
 
-				<%
-				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+		if (!rootOrganization) {
+			parentOrganizationComparator = StringPool.NOT_EQUAL;
+		}
 
-				LinkedHashMap userParams = new LinkedHashMap();
+		LinkedHashMap organizationParams = new LinkedHashMap();
 
-				if (tabs3.equals("current") && (role.getScope() == RoleImpl.SCOPE_ENTERPRISE)) {
-					userParams.put("usersRoles", role.getRoleId());
-				} else if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
-					userParams.put("usersGroups", new Long(roleGroup.getGroupId()));
-					if (tabs3.equals("current")) {
-						userParams.put("userGroupRole", new String[]{role.getRoleId(), Long.toString(roleGroup.getGroupId())});
-					}
-				 }
+		if (tabs3.equals("current")) {
+			organizationParams.put("organizationsRoles", role.getRoleId());
+		}
 
-				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+		int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
 
-				searchContainer.setTotal(total);
+		searchContainer.setTotal(total);
 
-				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+		List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-				searchContainer.setResults(results);
-				%>
+		searchContainer.setResults(results);
+		%>
 
-				<br><div class="beta-separator"></div><br>
+		<br><div class="beta-separator"></div><br>
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-				<br><br>
+		<br><br>
 
-				<%
-				List headerNames = new ArrayList();
+		<%
+		List headerNames = new ArrayList();
 
-				headerNames.add("name");
-				headerNames.add("email-address");
+		headerNames.add("name");
+		headerNames.add("city");
 
-				searchContainer.setHeaderNames(headerNames);
+		searchContainer.setHeaderNames(headerNames);
 
-				List resultRows = searchContainer.getResultRows();
+		if (!rootOrganization) {
+			searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
+		}
 
-				for (int i = 0; i < results.size(); i++) {
-					User user2 = (User)results.get(i);
+		List resultRows = searchContainer.getResultRows();
 
-					ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+		for (int i = 0; i < results.size(); i++) {
+			Organization organization = (Organization)results.get(i);
 
-					// Name and email address
+			ResultRow row = new ResultRow(organization, String.valueOf(organization.getGroup().getPrimaryKey()), i);
 
-					row.addText(user2.getFullName());
-					row.addText(user2.getEmailAddress());
+			// Name
 
-					// Add result row
+			row.addText(organization.getName());
 
-					resultRows.add(row);
-				}
-				%>
+			// Address
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			Address address = organization.getAddress();
 
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("users-group") %>'>
-				<input name="<portlet:namespace />roleGroupId" type="hidden" value="<%= roleGroupId %>">
-				<input name="<portlet:namespace />addUserIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
+			row.addText(address.getCity());
 
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+			// Add result row
 
-				<%
-				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+			resultRows.add(row);
+		}
+		%>
 
-				searchContainer.setRowChecker(new UserGroupRoleByUserChecker(renderResponse, role, roleGroup));
-				%>
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
+	<c:when test='<%= tabs2.equals("user-groups") %>'>
+		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
+		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
 
-				<%
-				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+		<liferay-ui:tabs
+			names="current,available"
+			param="tabs3"
+			url="<%= portletURL.toString() %>"
+		/>
 
-				LinkedHashMap userParams = new LinkedHashMap();
+		<%
+		UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
 
-				if (tabs3.equals("current")) {
-					userParams.put("userGroupRole", new String[] {String.valueOf(roleGroupId), role.getRoleId()});
-				}
+		searchContainer.setRowChecker(new UserGroupRoleChecker(renderResponse, role));
+		%>
 
-				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());
+		<liferay-ui:search-form
+			page="/html/portlet/enterprise_admin/user_group_search.jsp"
+			searchContainer="<%= searchContainer %>"
+		/>
 
-				searchContainer.setTotal(total);
+		<%
+		UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
 
-				List results = UserLocalServiceUtil.search(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd(), new ContactLastNameComparator(true));
+		LinkedHashMap userGroupParams = new LinkedHashMap();
 
-				searchContainer.setResults(results);
-				%>
+		if (tabs3.equals("current")) {
+			List userGroupsRoles = new ArrayList();
 
-				<br><div class="beta-separator"></div><br>
+			userGroupParams.put("userGroupsRoles", role.getRoleId());
+		}
 
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleUsers('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+		int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
 
-				<br><br>
+		searchContainer.setTotal(total);
 
-				<%
-				List headerNames = new ArrayList();
+		List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
 
-				headerNames.add("name");
-				headerNames.add("email-address");
+		searchContainer.setResults(results);
+		%>
 
-				searchContainer.setHeaderNames(headerNames);
+		<br><div class="beta-separator"></div><br>
 
-				List resultRows = searchContainer.getResultRows();
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
-				for (int i = 0; i < results.size(); i++) {
-					User user2 = (User)results.get(i);
+		<br><br>
 
-					ResultRow row = new ResultRow(user2, user2.getPrimaryKey().toString(), i);
+		<%
+		List headerNames = new ArrayList();
 
-					// Name and email address
+		headerNames.add("name");
 
-					row.addText(user2.getFullName());
-					row.addText(user2.getEmailAddress());
+		searchContainer.setHeaderNames(headerNames);
 
-					// Add result row
+		List resultRows = searchContainer.getResultRows();
 
-					resultRows.add(row);
-				}
-				%>
+		for (int i = 0; i < results.size(); i++) {
+			UserGroup userGroup = (UserGroup)results.get(i);
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			ResultRow row = new ResultRow(userGroup, String.valueOf(userGroup.getGroup().getPrimaryKey()), i);
 
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("communities") %>'>
-				<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
+			// Name
 
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+			row.addText(userGroup.getName());
 
-				<%
-				GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
+			// Add result row
 
-				searchContainer.setRowChecker(new GroupRoleChecker(renderResponse, role));
-				%>
+			resultRows.add(row);
+		}
+		%>
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/group_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-				<%
-				GroupSearchTerms searchTerms = (GroupSearchTerms)searchContainer.getSearchTerms();
-
-				LinkedHashMap groupParams = new LinkedHashMap();
-
-				if (tabs3.equals("current")) {
-					groupParams.put("groupsRoles", role.getRoleId());
-				}
-
-				int total = GroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams);
-
-				searchContainer.setTotal(total);
-
-				List results = GroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), groupParams, searchContainer.getStart(), searchContainer.getEnd());
-
-				searchContainer.setResults(results);
-				%>
-
-				<br><div class="beta-separator"></div><br>
-
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
-
-				<br><br>
-
-				<%
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Group group = (Group)results.get(i);
-
-					ResultRow row = new ResultRow(group, String.valueOf(group.getPrimaryKey()), i);
-
-					// Name
-
-					row.addText(group.getName());
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("organizations") || tabs2.equals("locations") %>'>
-				<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
-
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
-
-				<%
-				OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
-
-				searchContainer.setRowChecker(new OrganizationRoleChecker(renderResponse, role));
-				%>
-
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/organization_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
-
-				<%
-				boolean rootOrganization = tabs2.equals("organizations");
-
-				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-
-				String parentOrganizationId = OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
-				String parentOrganizationComparator = StringPool.EQUAL;
-
-				if (!rootOrganization) {
-					parentOrganizationComparator = StringPool.NOT_EQUAL;
-				}
-
-				LinkedHashMap organizationParams = new LinkedHashMap();
-
-				if (tabs3.equals("current")) {
-					organizationParams.put("organizationsRoles", role.getRoleId());
-				}
-
-				int total = OrganizationLocalServiceUtil.searchCount(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator());
-
-				searchContainer.setTotal(total);
-
-				List results = OrganizationLocalServiceUtil.search(company.getCompanyId(), parentOrganizationId, parentOrganizationComparator, searchTerms.getName(), searchTerms.getStreet(), searchTerms.getCity(), searchTerms.getZip(), searchTerms.getRegionId(), searchTerms.getCountryId(), organizationParams, searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
-
-				searchContainer.setResults(results);
-				%>
-
-				<br><div class="beta-separator"></div><br>
-
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
-
-				<br><br>
-
-				<%
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-				headerNames.add("city");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				if (!rootOrganization) {
-					searchContainer.setEmptyResultsMessage(OrganizationSearch.EMPTY_RESULTS_MESSAGE_2);
-				}
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Organization organization = (Organization)results.get(i);
-
-					ResultRow row = new ResultRow(organization, String.valueOf(organization.getGroup().getPrimaryKey()), i);
-
-					// Name
-
-					row.addText(organization.getName());
-
-					// Address
-
-					Address address = organization.getAddress();
-
-					row.addText(address.getCity());
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:when test='<%= tabs2.equals("user-groups") %>'>
-				<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
-				<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
-
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
-
-				<%
-				UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
-
-				searchContainer.setRowChecker(new UserRoleGroupChecker(renderResponse, role));
-				%>
-
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_group_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
-
-				<%
-				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
-
-				LinkedHashMap userGroupParams = new LinkedHashMap();
-
-				if (tabs3.equals("current")) {
-					List userGroupsRoles = new ArrayList();
-
-					userGroupParams.put("userGroupsRoles", role.getRoleId());
-				}
-
-				int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
-
-				searchContainer.setTotal(total);
-
-				List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd());
-
-				searchContainer.setResults(results);
-				%>
-
-				<br><div class="beta-separator"></div><br>
-
-				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateRoleGroups('<%= portletURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
-
-				<br><br>
-
-				<%
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					UserGroup userGroup = (UserGroup)results.get(i);
-
-					ResultRow row = new ResultRow(userGroup, String.valueOf(userGroup.getGroup().getPrimaryKey()), i);
-
-					// Name
-
-					row.addText(userGroup.getName());
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-			</c:when>
-		</c:choose>
-	</c:otherwise>
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</c:when>
 </c:choose>
 
 </form>

@@ -311,7 +311,7 @@ else if (modelResource.equals(Layout.class.getName())) {
 
 					layoutGroupId = StringUtil.replace(layoutGroupId, "}", "");
 
-					userParams.put("usersGroups", GetterUtil.getLong(layoutGroupId));
+					userParams.put("usersGroups", new Long(GetterUtil.getLong(layoutGroupId)));
 				}
 
 				int total = UserLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isActive(), userParams, searchTerms.isAndOperator());

@@ -35,33 +35,10 @@ import java.rmi.RemoteException;
  *
  */
 public class UserGroupRoleServiceSoap {
-	public static void addUserGroupRoles(java.lang.String userId, long groupId,
-		java.lang.String[] roleIds) throws RemoteException {
-		try {
-			UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, roleIds);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void addUserGroupRoles(java.lang.String[] userIds,
 		long groupId, java.lang.String roleId) throws RemoteException {
 		try {
 			UserGroupRoleServiceUtil.addUserGroupRoles(userIds, groupId, roleId);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteUserGroupRoles(java.lang.String userId,
-		long groupId, java.lang.String[] roleIds) throws RemoteException {
-		try {
-			UserGroupRoleServiceUtil.deleteUserGroupRoles(userId, groupId,
-				roleIds);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

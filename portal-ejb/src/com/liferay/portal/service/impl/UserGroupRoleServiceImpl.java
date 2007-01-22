@@ -24,8 +24,10 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleService;
+import com.liferay.portal.service.permission.GroupPermission;
 
 /**
  * <a href="UserGroupRoleServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -36,31 +38,22 @@ import com.liferay.portal.service.UserGroupRoleService;
 public class UserGroupRoleServiceImpl
 	extends PrincipalBean implements UserGroupRoleService {
 
-	public void addUserGroupRoles(String userId, long groupId, String[] roleIds)
-		throws PortalException, SystemException {
-
-		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
-			userId, groupId, roleIds);
-	}
-
 	public void addUserGroupRoles(String[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.PERMISSIONS);
 
 		UserGroupRoleLocalServiceUtil.addUserGroupRoles(
 			userIds, groupId, roleId);
 	}
 
 	public void deleteUserGroupRoles(
-			String userId, long groupId, String[] roleIds)
-		throws PortalException, SystemException {
-
-		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(
-			userId, groupId, roleIds);
-	}
-
-	public void deleteUserGroupRoles(
 			String[] userIds, long groupId, String roleId)
 		throws PortalException, SystemException {
+
+		GroupPermission.check(
+			getPermissionChecker(), groupId, ActionKeys.PERMISSIONS);
 
 		UserGroupRoleLocalServiceUtil.deleteUserGroupRoles(
 			userIds, groupId, roleId);

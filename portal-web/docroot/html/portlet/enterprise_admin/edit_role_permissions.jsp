@@ -45,6 +45,12 @@ if (Validator.isNotNull(portletResource)) {
 
 String modelResourceName = ResourceActionsUtil.getModelResource(pageContext, modelResource);
 
+List modelResources = null;
+
+if (Validator.isNotNull(portletResource) && Validator.isNull(modelResource)) {
+	modelResources = ResourceActionsUtil.getPortletModelResources(portletResource);
+}
+
 String selResource = modelResource;
 String selResourceName = modelResourceName;
 
@@ -67,6 +73,14 @@ portletURL.setParameter("tabs2", tabs2);
 portletURL.setParameter("roleId", role.getRoleId());
 portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("modelResource", modelResource);
+
+boolean editPortletPermissions = ParamUtil.getBoolean(request, "editPortletPermissions");
+
+if ((modelResources != null) && (modelResources.size() == 0)) {
+	editPortletPermissions = true;
+}
+
+int totalSteps = (role.getType() == RoleImpl.TYPE_REGULAR) ? 5 : 4;
 
 // Breadcrumbs
 
@@ -146,12 +160,89 @@ if (Validator.isNotNull(modelResource)) {
 </liferay-util:include>
 
 <c:choose>
-	<c:when test="<%= groupScopePos == -1 %>">
-		<%= breadcrumbs %>
+	<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+		Define permissions for this <b>Regular</b> role. Configure what this role has permission to do.
+
+		<liferay-ui:toggle
+			id="toggle_id_enterprise_admin_edit_role_permissions"
+			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			defaultOn="false"
+		/>
 
 		<br><br>
 
-		<%= LanguageUtil.format(pageContext, "you-have-successfully-updated-role-x-with-the-following-permissions", "<b>" + role.getName() + "</b>") %>
+		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
+			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+				This is a <i>Regular</i> role. That means this role can be associated directly with users, communities, organizations, locations, or user groups.
+
+				<br><br>
+
+				To define what this role has permission to do, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
+
+				<br><br>
+
+				Once you choose the portlet or resource, configure the actions that this role has and the scope of the actions.
+
+				<br><br>
+
+				For example, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Enterprise</i> scope. This means anyone associated with this role can delete all Message Boards Categories.
+
+				<br><br>
+
+				Or, you can give this role the <i>Delete</i> action on the <i>Category</i> resource with the <i>Communities</i> scope. You must then choose a list of communities. This means anyone associated with this role can delete Message Boards Categories in the selected communities.
+			</div>
+
+			<br>
+		</div>
+	</c:when>
+	<c:otherwise>
+		Define permissions for this <b>Community Template</b> role. Configure what this role has permission to do.
+
+		<liferay-ui:toggle
+			id="toggle_id_enterprise_admin_edit_role_permissions"
+			onImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			offImage='<%= themeDisplay.getPathThemeImage() + "/common/help.gif" %>'
+			defaultOn="false"
+		/>
+
+		<br><br>
+
+		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
+			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+				This is a <i>Community Template</i> role. That means this role is only valid for a user in a given community. A user can have one set of Community Template roles in one community, and another set of Community Template roles in another community.
+
+				<br><br>
+
+				To define what this role has permission to do, you must first choose a portlet or a resource. A resource is a type of object that belongs to a portlet. For example, <i>Category</i> is a resource that belongs to the <i>Message Boards</i> portlet.
+
+				<br><br>
+
+				Once you choose the portlet or resource, configure the actions that this role has.
+
+				<br><br>
+
+				You must then go to the Communities portlet to associate different users with the appropriate Community Template roles.
+
+				<br><br>
+
+				For example, you may have a role called <i>Message Boards Moderator</i>. You give this role the <i>Delete</i> action on the <i>Category</i> resource. A user can then have this role for community X and not have this role for community Y. That means this user can delete Message Boards Categories for community X but not for community Y.
+			</div>
+
+			<br>
+		</div>
+	</c:otherwise>
+</c:choose>
+
+<c:choose>
+	<c:when test="<%= groupScopePos == -1 %>">
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			Step <%= totalSteps %> of <%= totalSteps %>: You have successfully updated the <i><%= role.getName() %></i> role with the following permissions. You can repeat this process by clicking on the breadcrumbs below.
+		</div>
+
+		<br>
+
+		<%= breadcrumbs %>
 
 		<br><br>
 
@@ -162,8 +253,11 @@ if (Validator.isNotNull(modelResource)) {
 
 		headerNames.add("resource");
 		headerNames.add("action");
-		headerNames.add("apply-to");
-		headerNames.add("communities");
+
+		if ((role.getType() == RoleImpl.TYPE_REGULAR)) {
+			headerNames.add("scope");
+			headerNames.add("communities");
+		}
 
 		searchContainer.setHeaderNames(headerNames);
 
@@ -178,9 +272,9 @@ if (Validator.isNotNull(modelResource)) {
 
 			ResultRow row = new ResultRow(actionId, actionId, i);
 
-			boolean hasCompanyScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.SCOPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 
 			row.addText(selResourceName);
 			row.addText(ResourceActionsUtil.getAction(pageContext, actionId));
@@ -190,8 +284,6 @@ if (Validator.isNotNull(modelResource)) {
 				row.addText(LanguageUtil.get(pageContext, "not-available"));
 			}
 			else if (hasGroupTemplateScope) {
-				row.addText(LanguageUtil.get(pageContext, "community"));
-				row.addText(LanguageUtil.get(pageContext, "communities-to-which-the-role-is-assigned"));
 			}
 			else if (hasGroupScope) {
 				row.addText(LanguageUtil.get(pageContext, "community"));
@@ -241,10 +333,6 @@ if (Validator.isNotNull(modelResource)) {
 		<input name="<portlet:namespace />addGroupIds" type="hidden" value="">
 		<input name="<portlet:namespace />removeGroupIds" type="hidden" value="">
 
-		<%= breadcrumbs %>
-
-		<br><br>
-
 		<%
 		String actionId = groupScopeActionIdsArray[groupScopePos];
 
@@ -252,7 +340,22 @@ if (Validator.isNotNull(modelResource)) {
 		portletURL.setParameter("groupScopeActionIds", groupScopeActionIds);
 		%>
 
-		<%= LanguageUtil.format(pageContext, "select-communities-associated-with-the-action-x", "<b>" + ResourceActionsUtil.getAction(pageContext, actionId) + "</b>") %>
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			Step 4 of <%= totalSteps %>: Select the communities where this role can perform the <i><%= ResourceActionsUtil.getAction(pageContext, actionId) %></i> action on the
+
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(modelResource) %>">
+					<i><%= modelResourceName %></i> resource.
+				</c:when>
+				<c:otherwise>
+					<i><%= portletResourceName %></i> portlet.
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+		<br>
+
+		<%= breadcrumbs %>
 
 		<br><br>
 
@@ -339,7 +442,53 @@ if (Validator.isNotNull(modelResource)) {
 		</tr>
 		</table>
 	</c:when>
-	<c:when test="<%= Validator.isNotNull(portletResource) || Validator.isNotNull(modelResource) %>">
+	<c:when test="<%= editPortletPermissions || Validator.isNotNull(modelResource) %>">
+
+		<%
+		List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+
+		Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
+		%>
+
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			<c:choose>
+				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
+					Step 3 of <%= totalSteps %>: Select the scope of the action that this role can perform for the
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(modelResource) %>">
+							<i><%= modelResourceName %></i> resource.
+						</c:when>
+						<c:otherwise>
+							<i><%= portletResourceName %></i> portlet.
+						</c:otherwise>
+					</c:choose>
+
+					<c:if test="<%= actions.size() > 0 %>">
+						You can choose more than one.
+					</c:if>
+				</c:when>
+				<c:otherwise>
+					Step 3 of <%= totalSteps %>: Select the action that this role can perform for the
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(modelResource) %>">
+							<i><%= modelResourceName %></i> resource.
+						</c:when>
+						<c:otherwise>
+							<i><%= portletResourceName %></i> portlet.
+						</c:otherwise>
+					</c:choose>
+
+					<c:if test="<%= actions.size() > 0 %>">
+						You can choose more than one.
+					</c:if>
+				</c:otherwise>
+			</c:choose>
+		</div>
+
+		<br>
+
 		<%= breadcrumbs %>
 
 		<br><br>
@@ -351,21 +500,17 @@ if (Validator.isNotNull(modelResource)) {
 			</th>
 			<td style="padding-left: 10px;"></td>
 			<th>
-				<%= LanguageUtil.get(pageContext, (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) ? "apply-to" : "") %>
+				<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "scope" : "") %>
 			</th>
 		</tr>
 
 		<%
-		List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-
-		Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
-
 		for (int i = 0; i < actions.size(); i++) {
 			String actionId = (String)actions.get(i);
 
-			boolean hasCompanyScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getScope() == RoleImpl.SCOPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getScope() == RoleImpl.SCOPE_ENTERPRISE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 		%>
 
 			<tr>
@@ -375,17 +520,17 @@ if (Validator.isNotNull(modelResource)) {
 				<td style="padding-left: 10px;"></td>
 				<td>
 					<c:choose>
-						<c:when test="<%= role.getScope() == RoleImpl.SCOPE_ENTERPRISE %>">
+						<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
 							<select name="<portlet:namespace />scope<%= actionId %>">
 								<option value=""></option>
 									<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><%= LanguageUtil.get(pageContext, "enterprise") %></option>
 
 									<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "community") %></option>
+										<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><%= LanguageUtil.get(pageContext, "communities") %></option>
 									</c:if>
 							</select>
 						</c:when>
-						<c:when test="<%= role.getScope() == RoleImpl.SCOPE_COMMUNITY %>">
+						<c:when test="<%= role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE %>">
 							<liferay-ui:input-checkbox
 								param='<%= "scope" + actionId %>'
 								defaultValue="<%= hasGroupTemplateScope %>"
@@ -411,57 +556,71 @@ if (Validator.isNotNull(modelResource)) {
 		<br>
 
 		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="<portlet:namespace />updateActions();">
+	</c:when>
+	<c:when test="<%= Validator.isNotNull(portletResource) %>">
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			Step 2 of <%= totalSteps %>: Choose a resource or proceed to the next step.
+		</div>
 
-		<c:if test="<%= Validator.isNull(modelResource) %>">
+		<br>
+
+		<%= breadcrumbs %>
+
+		<br><br>
+
+		Proceed to the next step to define permissions to the <%= portletResourceName %> portlet itself.
+
+		<br><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "next") %>' onClick="self.location = '<%= portletURL.toString() %>&editPortletPermissions=1';">
+
+		<c:if test="<%= modelResources.size() > 0 %>">
+			<br><br>
+
+			<liferay-ui:tabs names="resources" />
+
+			Define permissions to a resource that belongs to the <%= portletResourceName %> portlet.
+
+			<br><br>
 
 			<%
-			List modelResources = ResourceActionsUtil.getPortletModelResources(portletResource);
+			SearchContainer searchContainer = new SearchContainer();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("name");
+
+			searchContainer.setHeaderNames(headerNames);
+
+			Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < modelResources.size(); i++) {
+				String curModelResource = (String)modelResources.get(i);
+
+				ResultRow row = new ResultRow(curModelResource, curModelResource, i);
+
+				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
+
+				rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
+				rowURL.setParameter("roleId", role.getRoleId());
+				rowURL.setParameter("portletResource", portletResource);
+				rowURL.setParameter("modelResource", curModelResource);
+
+				// Name
+
+				row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource), rowURL);
+
+				// Add result row
+
+				resultRows.add(row);
+			}
 			%>
 
-			<c:if test="<%= modelResources.size() > 0 %>">
-				<br><br>
-
-				<liferay-ui:tabs names="resources" />
-
-				<%
-				SearchContainer searchContainer = new SearchContainer();
-
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				Collections.sort(modelResources, new ModelResourceComparator(company.getCompanyId(), locale));
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < modelResources.size(); i++) {
-					String curModelResource = (String)modelResources.get(i);
-
-					ResultRow row = new ResultRow(curModelResource, curModelResource, i);
-
-					PortletURL rowURL = renderResponse.createRenderURL();
-
-					rowURL.setWindowState(WindowState.MAXIMIZED);
-
-					rowURL.setParameter("struts_action", "/enterprise_admin/edit_role_permissions");
-					rowURL.setParameter("roleId", role.getRoleId());
-					rowURL.setParameter("portletResource", portletResource);
-					rowURL.setParameter("modelResource", curModelResource);
-
-					// Name
-
-					row.addText(ResourceActionsUtil.getModelResource(pageContext, curModelResource), rowURL);
-
-					// Add result row
-
-					resultRows.add(row);
-				}
-				%>
-
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:if>
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 		</c:if>
 	</c:when>
 	<c:otherwise>
@@ -509,6 +668,12 @@ if (Validator.isNotNull(modelResource)) {
 			resultRows.add(row);
 		}
 		%>
+
+		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
+			Step 1 of <%= totalSteps %>: Choose a portlet.
+		</div>
+
+		<br>
 
 		<%= breadcrumbs %>
 

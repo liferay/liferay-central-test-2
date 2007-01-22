@@ -53,14 +53,14 @@ import java.util.List;
  */
 public class RoleLocalServiceImpl implements RoleLocalService {
 
-	public Role addRole(String userId, String companyId, String name, int scope)
+	public Role addRole(String userId, String companyId, String name, int type)
 		throws PortalException, SystemException {
 
-		return addRole(userId, companyId, name, scope, null, null);
+		return addRole(userId, companyId, name, type, null, null);
 	}
 
 	public Role addRole(
-			String userId, String companyId, String name, int scope,
+			String userId, String companyId, String name, int type,
 			String className, String classPK)
 		throws PortalException, SystemException {
 
@@ -77,7 +77,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 		role.setClassName(className);
 		role.setClassPK(classPK);
 		role.setName(name);
-		role.setScope(scope);
+		role.setType(type);
 
 		RoleUtil.update(role);
 
@@ -103,7 +103,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 			}
 			catch (NoSuchRoleException nsre) {
 				addRole(
-					null, companyId, systemRoles[i], RoleImpl.SCOPE_ENTERPRISE);
+					null, companyId, systemRoles[i], RoleImpl.TYPE_REGULAR);
 			}
 		}
 	}
@@ -128,7 +128,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				role.getPrimaryKey().toString());
 		}
 
-		if (role.getScope() == RoleImpl.SCOPE_COMMUNITY) {
+		if (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) {
 			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
 		}
@@ -194,19 +194,19 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	}
 
 	public List search(
-			String companyId, String name, String description, String scope,
+			String companyId, String name, String description, Integer type,
 			int begin, int end)
 		throws SystemException {
 
-		return RoleFinder.findByC_N_D_S(companyId, name, description, scope,
+		return RoleFinder.findByC_N_D_T(companyId, name, description, type,
 			begin, end);
 	}
 
 	public int searchCount(
-			String companyId, String name, String description, String scope)
+			String companyId, String name, String description, Integer type)
 		throws SystemException {
 
-		return RoleFinder.countByC_N_D_S(companyId, name, description, scope);
+		return RoleFinder.countByC_N_D_T(companyId, name, description, type);
 	}
 
 	public void setUserRoles(String userId, String[] roleIds)

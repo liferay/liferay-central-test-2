@@ -685,7 +685,7 @@ create table Role_ (
 	classPK VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
-	scope INTEGER
+	type_ INTEGER
 );
 
 create table Roles_Permissions (

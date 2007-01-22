@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.enterpriseadmin.search;
 
+import com.liferay.util.ParamUtil;
 import com.liferay.util.dao.DAOParamUtil;
 
 import javax.portlet.RenderRequest;
@@ -39,7 +40,16 @@ public class RoleSearchTerms extends RoleDisplayTerms {
 
 		name = DAOParamUtil.getLike(req, NAME);
 		description = DAOParamUtil.getLike(req, DESCRIPTION);
-		scope = DAOParamUtil.getLike(req, SCOPE);
+		type = ParamUtil.getInteger(req, TYPE);
+	}
+
+	public Integer getTypeObj() {
+		if (type == 0) {
+			return null;
+		}
+		else {
+			return new Integer(type);
+		}
 	}
 
 }

@@ -37,20 +37,20 @@ import javax.ejb.SessionContext;
  */
 public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name, int scope)
+		java.lang.String companyId, java.lang.String name, int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
-			name, scope);
+			name, type);
 	}
 
 	public com.liferay.portal.model.Role addRole(java.lang.String userId,
-		java.lang.String companyId, java.lang.String name, int scope,
+		java.lang.String companyId, java.lang.String name, int type,
 		java.lang.String className, java.lang.String classPK)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().addRole(userId, companyId,
-			name, scope, className, classPK);
+			name, type, className, classPK);
 	}
 
 	public void checkSystemRoles(java.lang.String companyId)
@@ -122,17 +122,17 @@ public class RoleLocalServiceEJBImpl implements RoleLocalService, SessionBean {
 
 	public java.util.List search(java.lang.String companyId,
 		java.lang.String name, java.lang.String description,
-		java.lang.String scope, int begin, int end)
+		java.lang.Integer type, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().search(companyId, name,
-			description, scope, begin, end);
+			description, type, begin, end);
 	}
 
 	public int searchCount(java.lang.String companyId, java.lang.String name,
-		java.lang.String description, java.lang.String scope)
+		java.lang.String description, java.lang.Integer type)
 		throws com.liferay.portal.SystemException {
 		return RoleLocalServiceFactory.getTxImpl().searchCount(companyId, name,
-			description, scope);
+			description, type);
 	}
 
 	public void setUserRoles(java.lang.String userId, java.lang.String[] roleIds)

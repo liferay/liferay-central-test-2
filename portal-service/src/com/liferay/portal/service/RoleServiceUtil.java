@@ -30,12 +30,12 @@ package com.liferay.portal.service;
  */
 public class RoleServiceUtil {
 	public static com.liferay.portal.model.Role addRole(java.lang.String name,
-		int scope)
+		int type)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		RoleService roleService = RoleServiceFactory.getService();
 
-		return roleService.addRole(name, scope);
+		return roleService.addRole(name, type);
 	}
 
 	public static void deleteRole(java.lang.String roleId)

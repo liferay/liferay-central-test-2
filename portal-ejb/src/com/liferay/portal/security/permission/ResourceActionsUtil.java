@@ -409,6 +409,9 @@ public class ResourceActionsUtil {
 							if (actionId.equalsIgnoreCase("edit")) {
 								actions.add(ActionKeys.PREFERENCES);
 							}
+							else if (actionId.equalsIgnoreCase("edit_guest")) {
+								actions.add(ActionKeys.GUEST_PREFERENCES);
+							}
 							else {
 								actions.add(actionId.toUpperCase());
 							}
