@@ -23,7 +23,6 @@
 package com.liferay.portal.util;
 
 import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 
 import java.util.Locale;
 import java.util.TimeZone;
@@ -36,8 +35,6 @@ import java.util.TimeZone;
  */
 public class DateFormats {
 
-	public static final String iso8601Pattern = "yyyy-MM-dd'T'HH:mm:ssZ";
-	
 	public static DateFormat getDate(Locale locale) {
 		return getDate(locale, null);
 	}
@@ -81,19 +78,4 @@ public class DateFormats {
 		return df;
 	}
 
-	public static DateFormat getIso8601DateTime(Locale locale) {
-		return getIso8601DateTime(locale, null);
-	}
-
-	public static DateFormat getIso8601DateTime(
-		Locale locale, TimeZone timeZone) {
-
-		DateFormat df = new SimpleDateFormat(iso8601Pattern);
-		
-		if (timeZone != null) {
-			df.setTimeZone(timeZone);
-		}
-		
-		return df;
-	}
 }

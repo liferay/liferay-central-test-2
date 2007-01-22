@@ -130,6 +130,7 @@
 <%@ page import="com.liferay.util.BrowserSniffer" %>
 <%@ page import="com.liferay.util.CollectionFactory" %>
 <%@ page import="com.liferay.util.CreditCard" %>
+<%@ page import="com.liferay.util.DateUtil" %>
 <%@ page import="com.liferay.util.FileUtil" %>
 <%@ page import="com.liferay.util.GetterUtil" %>
 <%@ page import="com.liferay.util.Html" %>

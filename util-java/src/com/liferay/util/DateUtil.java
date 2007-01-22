@@ -38,6 +38,8 @@ import java.util.TimeZone;
  */
 public class DateUtil {
 
+	public static final String ISO_8601_PATTERN = "yyyy-MM-dd'T'HH:mm:ssZ";
+
 	public static int compareTo(Date date1, Date date2) {
 
 		// Workaround for bug in JDK 1.5.x. This bug is fixed in JDK 1.5.07. See
@@ -98,6 +100,10 @@ public class DateUtil {
 		}
 
 		return new SimpleDateFormat(pattern);
+	}
+
+	public static DateFormat getISO8601Format() {
+		return new SimpleDateFormat(ISO_8601_PATTERN);
 	}
 
 	public static DateFormat getUTCFormat() {
