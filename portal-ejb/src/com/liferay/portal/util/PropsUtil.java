@@ -868,6 +868,10 @@ public class PropsUtil {
 		return _getInstance().get(key);
 	}
 
+	public static String get(String companyId, String key) {
+		return _getInstance(companyId).get(key);
+	}
+
 	public static void set(String key, String value) {
 		_getInstance().set(key, value);
 	}
@@ -887,6 +891,10 @@ public class PropsUtil {
 	private static ExtPropertiesLoader _getInstance() {
 		String companyId = CompanyThreadLocal.getCompanyId();
 
+		return _getInstance(companyId);
+	}
+
+	private static ExtPropertiesLoader _getInstance(String companyId) {
 		if (companyId != null) {
 			return ExtPropertiesLoader.getInstance(
 				PropsFiles.PORTAL, companyId);

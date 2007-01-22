@@ -156,6 +156,8 @@ public class MainServlet extends ActionServlet {
 
 			ctx.setAttribute(WebKeys.COMPANY_ID, _companyId);
 
+			CompanyThreadLocal.setCompanyId(_companyId);
+
 			// Paths
 
 			if (_log.isDebugEnabled()) {
@@ -300,7 +302,7 @@ public class MainServlet extends ActionServlet {
 			}
 
 			if (GetterUtil.getBoolean(PropsUtil.get(
-					PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
+					null, PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {
 
 				try {
 					JournalContentSearchLocalServiceUtil.checkContentSearches(
@@ -950,15 +952,16 @@ public class MainServlet extends ActionServlet {
 			PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
 
 		Element sessionConfig = root.element("session-config");
-
+System.out.println("### here 1 " + timeout + " " + sessionConfig);
 		if (sessionConfig != null) {
 			String sessionTimeout =
 				sessionConfig.elementText("session-timeout");
-
+System.out.println("### here 2 " + sessionTimeout);
 			timeout = GetterUtil.getInteger(sessionTimeout, timeout);
 		}
-
+System.out.println("### here 3 " + timeout);
 		PropsUtil.set(PropsUtil.SESSION_TIMEOUT, Integer.toString(timeout));
+	System.out.println("### here 4 " + PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =
