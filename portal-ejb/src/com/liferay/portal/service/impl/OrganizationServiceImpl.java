@@ -92,6 +92,12 @@ public class OrganizationServiceImpl extends PrincipalBean
 		return OrganizationLocalServiceUtil.getOrganization(organizationId);
 	}
 
+	public String getOrganizationId(String companyId, String name)
+		throws PortalException, SystemException {
+
+		return OrganizationLocalServiceUtil.getOrganizationId(companyId, name);
+	}
+
 	public List getUserOrganizations(String userId)
 		throws PortalException, SystemException {
 

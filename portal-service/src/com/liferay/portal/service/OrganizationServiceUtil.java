@@ -65,6 +65,15 @@ public class OrganizationServiceUtil {
 		return organizationService.getOrganization(organizationId);
 	}
 
+	public static java.lang.String getOrganizationId(
+		java.lang.String companyId, java.lang.String name)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		OrganizationService organizationService = OrganizationServiceFactory.getService();
+
+		return organizationService.getOrganizationId(companyId, name);
+	}
+
 	public static java.util.List getUserOrganizations(java.lang.String userId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

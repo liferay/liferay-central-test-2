@@ -199,16 +199,30 @@ public class OrganizationLocalServiceImpl implements OrganizationLocalService {
 		OrganizationUtil.remove(organization.getOrganizationId());
 	}
 
+	public List getGroupOrganizations(long groupId)
+		throws PortalException, SystemException {
+
+		return GroupUtil.getOrganizations(groupId);
+	}
+
 	public Organization getOrganization(String organizationId)
 		throws PortalException, SystemException {
 
 		return OrganizationUtil.findByPrimaryKey(organizationId);
 	}
 
-	public List getGroupOrganizations(long groupId)
+	public String getOrganizationId(String companyId, String name)
 		throws PortalException, SystemException {
 
-		return GroupUtil.getOrganizations(groupId);
+		try {
+			Organization organization = OrganizationUtil.findByC_N(
+				companyId, name);
+
+			return organization.getOrganizationId();
+		}
+		catch (NoSuchOrganizationException nsoge) {
+			return null;
+		}
 	}
 
 	public List getUserOrganizations(String userId)

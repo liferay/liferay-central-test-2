@@ -55,12 +55,17 @@ public interface OrganizationLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public java.util.List getGroupOrganizations(long groupId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupOrganizations(long groupId)
+	public java.lang.String getOrganizationId(java.lang.String companyId,
+		java.lang.String name)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 

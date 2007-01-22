@@ -76,6 +76,13 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		OrganizationLocalServiceFactory.getTxImpl().deleteOrganization(organization);
 	}
 
+	public java.util.List getGroupOrganizations(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		return OrganizationLocalServiceFactory.getTxImpl()
+											  .getGroupOrganizations(groupId);
+	}
+
 	public com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
@@ -83,11 +90,12 @@ public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService
 		return OrganizationLocalServiceFactory.getTxImpl().getOrganization(organizationId);
 	}
 
-	public java.util.List getGroupOrganizations(long groupId)
+	public java.lang.String getOrganizationId(java.lang.String companyId,
+		java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return OrganizationLocalServiceFactory.getTxImpl()
-											  .getGroupOrganizations(groupId);
+		return OrganizationLocalServiceFactory.getTxImpl().getOrganizationId(companyId,
+			name);
 	}
 
 	public java.util.List getUserOrganizations(java.lang.String userId)

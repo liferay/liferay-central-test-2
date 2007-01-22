@@ -72,6 +72,14 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.deleteOrganization(organization);
 	}
 
+	public static java.util.List getGroupOrganizations(long groupId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getGroupOrganizations(groupId);
+	}
+
 	public static com.liferay.portal.model.Organization getOrganization(
 		java.lang.String organizationId)
 		throws com.liferay.portal.PortalException, 
@@ -81,12 +89,13 @@ public class OrganizationLocalServiceUtil {
 		return organizationLocalService.getOrganization(organizationId);
 	}
 
-	public static java.util.List getGroupOrganizations(long groupId)
+	public static java.lang.String getOrganizationId(
+		java.lang.String companyId, java.lang.String name)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
-		return organizationLocalService.getGroupOrganizations(groupId);
+		return organizationLocalService.getOrganizationId(companyId, name);
 	}
 
 	public static java.util.List getUserOrganizations(java.lang.String userId)
