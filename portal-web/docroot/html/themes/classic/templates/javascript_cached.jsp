@@ -29,7 +29,7 @@ LayoutColumns.highlight = "<%= colorScheme.getBodyBg() %>";
 if (!is_ie) {
 	Event.addHandler(window, "onscroll", function() {
 		if (document.body.scrollHeight) {
-			$("layout-outer-side-decoration").style.height = (document.body.scrollHeight) + "px";
+			document.getElementById("layout-outer-side-decoration").style.height = (document.body.scrollHeight) + "px";
 		}
 	});
 }

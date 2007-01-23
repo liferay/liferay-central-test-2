@@ -69,7 +69,7 @@
 
 				<div class="portal-dock-box"
 					 onclick=""
-					 onmouseover="LiferayDock.showObject('portal-dock-search', 10); $('portal-dock-search').getElementsByTagName('input')[0].focus()">
+					 onmouseover="LiferayDock.showObject('portal-dock-search', 10); document.getElementById('portal-dock-search').getElementsByTagName('input')[0].focus()">
 					 <liferay-ui:png-image image='<%= themeDisplay.getPathThemeImage() + "/dock/icons_nav_search.png" %>' height="50" width="50" />
 				</div>
 
