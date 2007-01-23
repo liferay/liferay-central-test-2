@@ -71,7 +71,7 @@ public class LiferayWindowState extends WindowState {
 
 		// Some window states are automatically preserved
 
-		if (oldWindowState.equals(LiferayWindowState.POP_UP))) {
+		if (oldWindowState.equals(LiferayWindowState.POP_UP)) {
 			return false;
 		}
 		else {
