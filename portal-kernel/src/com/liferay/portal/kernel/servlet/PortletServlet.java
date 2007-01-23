@@ -95,7 +95,7 @@ public class PortletServlet extends HttpServlet {
 			}
 		}
 		catch (PortletException pe) {
-			_log.error(pe);
+			_log.error(pe, pe);
 
 			throw new ServletException(pe);
 		}

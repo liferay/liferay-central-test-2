@@ -57,7 +57,7 @@ public abstract class PortalServletContextListenerWrapper
 			_servletContextListener.contextInitialized(_sce);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(

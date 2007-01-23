@@ -62,7 +62,7 @@ public class PortalServletWrapper
 			_servlet.init(_config);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 		finally {
 			Thread.currentThread().setContextClassLoader(contextClassLoader);
