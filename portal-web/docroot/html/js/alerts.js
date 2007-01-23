@@ -214,7 +214,7 @@ var Alerts = {
 		Alerts.messageArray.push(wrapper);
 		
 		Alerts.resize();
-		Event.observe(window, "resize", Alerts.resize)
+		_$J(window).resize(Alerts.resize);
 		
 		if (noCenter) {
 			Alerts.center();
@@ -223,7 +223,7 @@ var Alerts = {
 			Alerts.center(msgHeight, msgWidth);
 		}
 
-		Event.observe(window, "resize", Alerts.center)
+		_$J(window).resize(Alerts.center);
 		
 		body.appendChild(wrapper);
 		window.focus();
@@ -325,10 +325,10 @@ var Alerts = {
     resizeIframe: function(options) {
     	if (Alerts.message && options) {
     		var iframe = Alerts.message.getElementsByTagName("iframe")[0];
-			var loading = document.getElementsByClassName("portlet-loading", Alerts.message);
+			var loading = _$J.getOne(".portlet-loading", Alerts.message);
 			
-			if (loading.length > 0) {
-				loading[0].parentNode.removeChild(loading[0]);
+			if (loading) {
+				loading.parentNode.removeChild(loading);
 			}
     		
     		if (iframe) {

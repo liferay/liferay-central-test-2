@@ -129,7 +129,7 @@ var AjaxUtil = {
 	},
 	
 	update : function(url, id, options) {
-		var element = $(id);
+		var element = _$J.idObject(id);
 
 		if (element) {
 			if (options == null) {
@@ -177,7 +177,7 @@ var AjaxUtil = {
 
 var ReverseAjax = {
 	initialize: function() {
-		Event.observe(window, "unload", function() {ReverseAjax.release();});
+		_$J(window).unload(ReverseAjax.release);
 		ReverseAjax.request();
 	},
 	

@@ -20,6 +20,52 @@
  * SOFTWARE.
  */
 
+// Reassign jQuery object to custom alias
+$ = null;
+_$J = jQuery;
+
+jQuery.idObject = function(id) {
+	if (typeof id == "object") {
+		return (id);
+	}
+	else if (typeof id == "string") {
+		id = id.replace(/^#/,"");
+		return (document.getElementById(id));
+	}
+}
+
+jQuery.getOne = function(s, context) {
+	var rt;
+
+	if (typeof s == "object") {
+		rt = s;
+	}
+	else if (typeof s == "string") {
+		if (s.search(/^[#.]/) == -1) {
+			s = "#" + s;
+		}
+
+		if (context == null) {
+			rt = jQuery(s);
+		}
+		else {
+			rt = jQuery(s, context);
+		}
+		rt = (rt.length == 0 ? null : rt.get(0))
+	}
+
+	return rt;
+}
+
+var Liferay = function(id) {
+	if (typeof id == "object") {
+		return (id);
+	}
+	else if (typeof id == "string") {
+		return document.getElementById(id);
+	}
+};
+
 var submitCountdown = 0;
 
 function check(form, name, checked) {
@@ -182,10 +228,11 @@ function disableEsc() {
 	}
 }
 
-if (!Element) Element = new Object();
+Element = new Object();
 
 Element.disable = function(element) {
-	element = $(element);
+	element = _$J.idObject(element);
+
 	var items = element.getElementsByTagName("*");
 
 	for (var i = 0; i < items.length; i++) {
@@ -226,8 +273,13 @@ Element.changeOpacity = function(object, opacity) {
 	object.style.filter = "alpha(opacity=" + opacity + ")";
 }
 
+Element.remove = function(id) {
+	var obj = jQuery.getOne(id);
 
-if (!Event) Event = new Object();
+	obj.parentNode.removeChild(obj);
+}
+
+Event = new Object();
 
 Event.addHandler = function(obj, type, func) {
 	if (type.indexOf("on") != 0) {
@@ -689,7 +741,7 @@ function setSelectedValue(col, value) {
 function setSelectVisibility(mode, obj) {
 	if (is_ie) {
 		if (obj) {
-			obj = $(obj);
+			obj = jQuery.idObject(obj);
 		}
 		else {
 			obj = document.getElementsByTagName("body")[0];
@@ -729,7 +781,7 @@ function slideMinimize(id, height, speed) {
 		setTimeout("slideMinimize(\"" + id + "\"," + height + "," + speed + ")", 10);
 	}
 	else {
-		obj.style.display = "none";
+		obj.style.height = "1px";
 	}
 }
 

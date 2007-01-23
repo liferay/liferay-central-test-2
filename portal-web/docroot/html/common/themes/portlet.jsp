@@ -314,6 +314,10 @@ if (urlBack != null) {
 							<c:if test="<%= portletDisplay.isShowCloseIcon() %>">
 								- <a href="<%= portletDisplay.getURLClose() %>"><bean:message key="close" /></a>
 							</c:if>
+							
+							<c:if test="<%= portletDisplay.isShowBackIcon() %>">
+								- <a href="<%= portletDisplay.getURLBack() %>"><bean:message key="back" /></a>
+							</c:if>
 						</div>
 					</c:if>
 

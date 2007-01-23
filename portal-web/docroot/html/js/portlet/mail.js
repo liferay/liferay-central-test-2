@@ -85,11 +85,11 @@ var Mail = {
 			
 			if (Mail.isMoveAllowed(folderItem.folder.id)) {
 				if (coord.inside(folderItem.nwOffset, folderItem.seOffset)) {
-						Element.addClassName(folderItem, Mail.selectedClassName);
+						_$J(folderItem).addClass(Mail.selectedClassName);
 						foundInside = true;
 				}
 				else {
-					Element.removeClassName(folderItem, Mail.selectedClassName);
+					_$J(folderItem).removeClass(Mail.selectedClassName);
 				}
 			}
 		}
@@ -405,7 +405,7 @@ var Mail = {
 			if (folder.id == Mail.currentFolderId) {
 				/* Previous folder ID was set */
 				selectedFolder = folder;
-				Element.addClassName(folderItem, Mail.selectedClassName);
+				_$J(folderItem).addClass(Mail.selectedClassName);
 			}
 			
 			if (i == Mail.DEFAULT_FOLDERS.length - 1) {
@@ -1173,11 +1173,11 @@ var Mail = {
 				continue;
 			}
 			else if (Mail.currentFolderId == folderItem.folder.id) {
-				Element.addClassName(folderItem, Mail.selectedClassName);
+				_$J(folderItem).addClass(Mail.selectedClassName);
 				Mail.currentFolder.li = folderItem;
 			}
 			else {
-				Element.removeClassName(folderItem, Mail.selectedClassName);
+				_$J(folderItem).removeClass(Mail.selectedClassName);
 			}
 		}
 
@@ -1249,10 +1249,10 @@ var Mail = {
 		var row = msObj.row;
 		for (var i = 0; i < row.length; i++) {
 			if (setOff) {
-				Element.removeClassName(row[i], Mail.selectedClassName);
+				_$J(row[i]).removeClass(Mail.selectedClassName);
 			}
 			else {
-				Element.addClassName(row[i], Mail.selectedClassName);
+				_$J(row[i]).addClass(Mail.selectedClassName);
 			}
 		}
 	},

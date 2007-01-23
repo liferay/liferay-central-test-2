@@ -57,6 +57,7 @@
 		with the ant build-javascript task.
 		--%>
 
+		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js" type="text/javascript"></script>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
@@ -64,8 +65,9 @@
 		</c:if>
 	</c:when>
 	<c:otherwise>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/prototype.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/json.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/class.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/cookie.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/util.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portal.js" type="text/javascript"></script>
@@ -130,18 +132,18 @@
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			Event.observe(window, "load", function() {
+			_$J(function() {
 				Messaging.init("<%= request.getRemoteUser() %>");
 			});
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
 			if (!is_safari) {
-				Event.observe(window, "load", function() {
+				_$J(function() {
 					setTimeout("ReverseAjax.initialize()", 2000);
 				});
 
-				Event.addHandler(window, "unload", function() {
+				_$J(window).unload(function() {
 					ReverseAjax.release();
 				});
 			}
@@ -152,9 +154,15 @@
 		%>
 
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
-			Event.observe(window, "load", function() { $("<%= scroll %>").scrollIntoView(); });
+			_$J(function() { document.getElementById("<%= scroll %>").scrollIntoView(); });
 		</c:if>
 	</c:if>
+
+	<%--
+	<c:if test="<%= themeDisplay.isFreeformLayout() %>">
+		LayoutColumns.freeform = true;
+	</c:if>
+	--%>
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

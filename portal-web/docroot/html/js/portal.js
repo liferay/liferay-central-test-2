@@ -49,19 +49,19 @@ Accordion.prototype = {
 		var self = this;
 		
 		if (this.headerList == null) {
-			this.headerList = document.getElementsByClassName("portlet-rss-header", this.container);
-			this.contentList = document.getElementsByClassName("portlet-rss-content", this.container);
+			this.headerList = _$P(".portlet-rss-header");
+			this.contentList = _$P(".portlet-rss-content");
 		}
-		
-		this.headerList.each(function(item, index) {
-			if (item == obj) {
-				self.contentList[index].expand = true;
+
+		this.headerList.each(function(i) {
+			if (this == obj) {
+				self.contentList[i].expand = true;
 			}
 			else {
-				self.contentList[index].expand = false;
+				self.contentList[i].expand = false;
 			}
 		});
-		
+
 		if (!this.timer) {
 			this.timer = setTimeout(this.varName + ".animate()", 0);
 		}
@@ -92,7 +92,7 @@ function changeBackground(path, extension) {
 
 var DragLink = {
 	create: function(item, dragId) {
-		item.dragId = $(dragId);
+		item.dragId = _$J.idObject(dragId);
 		item.clickLink = item.href;
 		item.href = "javascript:void(0)";
 		item.onclick = DragLink.onLinkClick;
@@ -174,7 +174,7 @@ var LiferayDock = {
 	dockCoords: new Array(),
 
 	debug: function() {
-		$("dock_debug").innerHTML = this.dockCoords.toSource();
+		document.getElementById("dock_debug").innerHTML = this.dockCoords.toSource();
 	},
 
 	initialize: function(defaultText) {
@@ -209,30 +209,27 @@ var LiferayDock = {
 		}
 
 		var self = this;
-		var dock = $("portal-dock");
-		var dockIcons = document.getElementsByClassName("portal-dock-box", dock);
+		var dock = _$J("#portal-dock");
+		var dockIcons = _$J(".portal-dock-box", dock);
 		var size = dockIcons.length;
 
 		this.dock = dock;
 		this.dockIcons = dockIcons;
 		this.constants = constants;
 		this.defaultText = defaultText || "";
-		dock.onmouseover = this.expand.bindAsEventListener(this);
-		dock.onmouseout = this.collapse.bindAsEventListener(this);
 
-		dockIcons.each(function(item, index) {
-			item.onmouseout = self.collapse.bindAsEventListener(self);
-			item.constants = self.constants[self.ORDER[index]];
-			item.style.zIndex = size - index;
+		dock.bind("mouseover", {self: self}, this.expand);
+		dock.bind("mouseout", {self: self}, this.collapse);
+
+		dockIcons.each(function(index) {
+			_$J(this).bind("mouseout", {self: self}, self.collapse);
+			this.constants = self.constants[self.ORDER[index]];
+			this.style.zIndex = size - index;
 		});
 
-		var myPlaces = $("portal-dock-my-places");
-		if (myPlaces) {
-			myPlaces.getElementsByTagName("table")[0].onmouseover = function() {
-				MyPlaces.show();
-				this.onmouseover = function() {};
-			};
-		}
+		var myPlaces = _$J(".portal-dock-my-places:first")
+				.find("table:first")
+				.unbind("mouseover");
 
 		this.cached = LiferayDockCached;
 	},
@@ -252,7 +249,7 @@ var LiferayDock = {
 	},
 
 	showText: function(text, defaultTimeout) {
-		var textBox = $("portal-dock-text");
+		var textBox = document.getElementById("portal-dock-text");
 		this.showObject(textBox);
 		textBox.innerHTML = text;
 
@@ -260,15 +257,13 @@ var LiferayDock = {
 	},
 
 	showObject: function(item, defaultTimeout) {
-		item = $(item);
-		var helpItems = document.getElementsByClassName("portal-dock-help");
-
-		helpItems.each(function(helpItem){
-			if (item.id == helpItem.id) {
-				helpItem.style.display = "";
+		item = _$J.idObject(item);
+		_$J(".portal-dock-help").each(function(){
+			if (item.id == this.id) {
+				this.style.display = "";
 			}
 			else {
-				helpItem.style.display = "none";
+				this.style.display = "none";
 			}
 		});
 
@@ -282,20 +277,24 @@ var LiferayDock = {
 		this.defaultTimeout = (defaultTimeout || 0) * 1000;
 	},
 
-	collapse: function() {
-		if (this.modeTimer) {
-			clearTimeout(this.modeTimer);
+	collapse: function(event) {
+		var self = event.data.self;
+
+		if (self.modeTimer) {
+			clearTimeout(self.modeTimer);
 		}
 
-		this.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.COLLAPSE)", 200);
+		self.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.COLLAPSE)", 200);
 	},
 
 	expand: function(event) {
-		if (this.modeTimer) {
-			clearTimeout(this.modeTimer);
+		var self = event.data.self;
+
+		if (self.modeTimer) {
+			clearTimeout(self.modeTimer);
 		}
 
-		this.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.EXPAND)", 100);
+		self.modeTimer = setTimeout("LiferayDock.setMode(LiferayDock.MODE.EXPAND)", 100);
 	},
 
 	animate: function(obj) {
@@ -304,7 +303,8 @@ var LiferayDock = {
 		var updated = false;
 		var cached = this.cached;
 
-		this.dockIcons.each(function(item, index) {
+		this.dockIcons.each(function(index) {
+			var item = this;
 			if (item.constants.h) {
 				if (count <= item.constants.lastFrame) {
 					if (!cached) {
@@ -421,12 +421,11 @@ var LayoutColumns = {
 	},
 
 	findPosition: function(portlet) {
-		var boxes = document.getElementsByClassName("portlet-boundary", portlet.parentNode);
 		var position = -1;
 
-		boxes.each(function(item, index) {
-			if (item == portlet) {
-				position = index;
+		_$J(".portlet-boundary", portlet.parentNode).each(function(i) {
+			if (this == portlet) {
+				position = i;
 			}
 		});
 
@@ -435,16 +434,14 @@ var LayoutColumns = {
 
 	init: function(colArray) {
 		for (var i = 0; i < colArray.length; i++) {
-			var column =  $("layout-column_" + colArray[i]);
+			var column = _$J.idObject("#layout-column_" + colArray[i]);
 
 			if (column) {
 				column.columnId = colArray[i];
 
 				if (this.freeform) {
-					var boxes = document.getElementsByClassName("portlet-boundary", column);
-
-					boxes.each(function(item, index) {
-						LayoutColumns.initPortlet(item);
+					var boxes = _$J(".portlet-boundary", column).each(function() {
+						LayoutColumns.initPortlet(this);
 					});
 				}
 				else {
@@ -458,11 +455,9 @@ var LayoutColumns = {
 						inheritParent: true
 						});
 
-					var boxes = document.getElementsByClassName("portlet-boundary", column);
-
-					boxes.each(function(item, index) {
-						if (!item.isStatic) {
-							LayoutColumns.initPortlet(item);
+					var boxes = _$J(".portlet-boundary", column).each(function() {
+						if (!this.isStatic) {
+							LayoutColumns.initPortlet(this);
 						}
 					});
 				}
@@ -471,8 +466,10 @@ var LayoutColumns = {
 	},
 
 	initPortlet: function(portlet) {
-		portlet = $(portlet);
-		var handle = document.getElementsByClassName("portlet-header-bar", portlet)[0] || document.getElementsByClassName("portlet-title-default", portlet)[0];
+		portlet = _$J.idObject(portlet);
+
+		var handle = _$J(".portlet-header-bar, .portlet-title-default", portlet).get(0);
+
 		handle.style.cursor = "move";
 
 		if (this.freeform) {
@@ -504,9 +501,9 @@ var LayoutColumns = {
 				this.style.zIndex = "";
 			}
 
-			var contents = document.getElementsByClassName("portlet-container", portlet)[0]
+			var contents = _$J(".portlet-container", portlet).get(0);
 			contents.container = portlet;
-			
+
 			contents.onclick = function() {
 				if (LayoutColumns.current != this.container) {
 					LayoutColumns.moveToTop(this.container);
@@ -516,46 +513,50 @@ var LayoutColumns = {
 				}
 			}
 
-			var resizeHandle = document.getElementsByClassName("portlet-resize-handle", portlet)[0];
-			var resizeBox = $("p_p_body_" + portlet.portletId)
+			var resizeHandleList = _$J(".portlet-resize-handle", portlet).get(0);
 
-			var portletResize = Resize.createHandle(resizeHandle, null, function() {});
-			var minimized = resizeBox.style.height == "1px";
-			portletResize.addRule(new ResizeRule(resizeBox, Resize.HORIZONTAL, Resize.ADD));
-			portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
-
-			resizeHandle.container = portlet;
-
-			resizeHandle.onResizeStart = function() {
-				LayoutColumns.moveToTop(this.container);
-			}
-
-			resizeHandle.onResizeEnd = function() {
-				var portlet = this.container;
-				var resizeBox = $("p_p_body_" + portlet.portletId)
-				var height = parseInt(resizeBox.style.height);
-				var width = parseInt(resizeBox.style.width);
-
-				height = Math.round(height/10) * 10;
-				width = Math.round(width/10) * 10;
-
-				resizeBox.style.height = height + "px";
-				resizeBox.style.width = width + "px";
-				LayoutColumns.savePosition(portlet);
-			}
-
-			if (portlet.freeformStyles) {
-				Element.setStyle(portlet, portlet.freeformStyles.position)
-				Element.setStyle(resizeBox, portlet.freeformStyles.dimensions)
-				
-				if (minimized) {
-					resizeBox.style.height = "1px";
+			if (resizeHandleList.length > 0) {
+				var resizeHandle = resizeHandleList[0];
+				var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
+	
+				var portletResize = Resize.createHandle(resizeHandle, null, function() {});
+				var minimized = resizeBox.style.height == "1px";
+				portletResize.addRule(new ResizeRule(resizeBox, Resize.HORIZONTAL, Resize.ADD));
+				portletResize.addRule(new ResizeRule(resizeBox, Resize.VERTICAL, Resize.ADD));
+	
+				resizeHandle.container = portlet;
+	
+				resizeHandle.onResizeStart = function() {
+					LayoutColumns.moveToTop(this.container);
 				}
-			}
-			else {
-				portlet.style.top = (20 * this.portletCount) + "px";
-				portlet.style.left = (20 * this.portletCount++) + "px";
-				resizeBox.style.width = "300px";
+	
+				resizeHandle.onResizeEnd = function() {
+					var portlet = this.container;
+					var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
+					var height = parseInt(resizeBox.style.height);
+					var width = parseInt(resizeBox.style.width);
+	
+					height = Math.round(height/10) * 10;
+					width = Math.round(width/10) * 10;
+	
+					resizeBox.style.height = height + "px";
+					resizeBox.style.width = width + "px";
+					LayoutColumns.savePosition(portlet);
+				}
+	
+				if (portlet.freeformStyles) {
+					_$J(portlet).css(portlet.freeformStyles.position);
+					_$J(resizeBox).css(portlet.freeformStyles.dimensions);
+					
+					if (minimized) {
+						resizeBox.style.height = "1px";
+					}
+				}
+				else {
+					portlet.style.top = (20 * this.portletCount) + "px";
+					portlet.style.left = (20 * this.portletCount++) + "px";
+					resizeBox.style.width = "300px";
+				}
 			}
 		}
 		else {
@@ -578,30 +579,26 @@ var LayoutColumns = {
 	onDrop: function(item) {
 		var dropOptions = this;
 		var container = dropOptions.dropItem;
-		var childList = container.childNodes;
 		var insertBox = null;
 
 		item.dragOptions.clone.isStatic = "yes";
 
-		for (var i = 0; i < childList.length; i++){
-			var box = childList[i];
+		_$J(".portlet-boundary", container).each(function(i) {
+			var box = this;
+			if (!box.isStatic) {
+				var nwOffset = Coordinates.northwestOffset(box, true);
+				var midY = nwOffset.y + (box.offsetHeight / 2);
 
-			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
-				if (!box.isStatic) {
-					var nwOffset = Coordinates.northwestOffset(box, true);
-					var midY = nwOffset.y + (box.offsetHeight / 2);
-
-					if (mousePos.y < midY) {
-						insertBox = box;
-						break;
-					}
-				}
-				else if (box.isStatic.match("end")) {
+				if (mousePos.y < midY) {
 					insertBox = box;
-					break;
+					return false;
 				}
 			}
-		}
+			else if (box.isStatic.match("end")) {
+				insertBox = box;
+				return false;
+			}
+		});
 
 		Element.remove(item);
 		container.insertBefore(item, insertBox);
@@ -616,17 +613,15 @@ var LayoutColumns = {
 		// Find new position
 		var newPosition = 0;
 
-		for (var i = 0; i < childList.length; i++){
-			var box = childList[i];
-			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
-				if (!box.isStatic) {
-					if (box == item) {
-						break;
-					}
-					newPosition++;
+		_$J(".portlet-boundary", container).each(function(i) {
+			var box = this;
+			if (!box.isStatic) {
+				if (box == item) {
+					return false;
 				}
+				newPosition++;
 			}
-		}
+		});
 
 		LayoutColumns.displayArrow("none");
 
@@ -636,40 +631,37 @@ var LayoutColumns = {
 	onHoverOver: function(item) {
 		var dropOptions = this;
 		var container = dropOptions.dropItem;
-		var childList = container.childNodes;
 		var insertBox = null;
 		var bottom = true;
 		var inside;
 		var lastBox;
 
-		for (var i = 0; i < childList.length; i++){
-			var box = childList[i];
+		_$J(".portlet-boundary", container).each(function() {
+			var box = this;
 
-			if (box.className && Element.hasClassName(box, "portlet-boundary")) {
-				if (!box.isStatic) {
-					lastBox = box;
-					inside = mousePos.insideObject(box, true);
+			if (!box.isStatic) {
+				lastBox = box;
+				inside = mousePos.insideObject(box, true);
 
-					if (inside) {
-						var midY = box.offsetHeight / 2;
+				if (inside) {
+					var midY = box.offsetHeight / 2;
 
-						if (inside.y <= midY || box == item.dragOptions.clone) {
-							bottom = false;
-						}
-						else {
-							bottom = true;
-						}
-
-						insertBox = box;
-						break;
+					if (inside.y <= midY || box == item.dragOptions.clone) {
+						bottom = false;
 					}
-				}
-				else if (box.isStatic.match("end")) {
+					else {
+						bottom = true;
+					}
+
 					insertBox = box;
-					break;
+					return false;
 				}
 			}
-		}
+			else if (box.isStatic.match("end")) {
+				insertBox = box;
+				return false;
+			}
+		});
 
 		var top;
 		var left;
@@ -707,7 +699,7 @@ var LayoutColumns = {
 	},
 
 	savePosition : function(portlet) {
-		var resizeBox = $("p_p_body_" + portlet.portletId)
+		var resizeBox = document.getElementById("p_p_body_" + portlet.portletId);
 		var newPosition = this.findPosition(portlet);
 		
 		if (newPosition != portlet.oldPosition) {
@@ -730,43 +722,30 @@ var LayoutColumns = {
 var NavFlyout = {
 	zIndex: 1,
 	initialize: function (nav) {
-		var navMapList = document.getElementsByClassName("portlet-nav-map-list", nav);
+		var nav = _$J.idObject(nav);
+		var navMapList = _$J("portlet-nav-map-list", nav);
 
-		navMapList.each(function(item) {
-			if (!Element.hasClassName(item, "portlet-nav-map-level_1")
-				&& !Element.hasClassName(item, "portlet-nav-map-level_2")) {
-				
-				Element.setStyle(item, {
-					position: "absolute",
-					display: "none"
-				});
-			}
-		});
+		navMapList.not(".portlet-nav-map-level_1, .portlet-nav-map-level_2")
+			.css({position: "absolute", display: "none"});
 		
-		document.getElementsByClassName("portlet-nav-map-list", nav).each(function(item){
-			$A(item.getElementsByTagName("a")).each(function(item2){
-				if (Element.hasClassName(item2.parentNode.parentNode, "portlet-nav-map-level_1")) {
-					item2.onmouseover = function() { NavFlyout.hide(this.parentNode); };
+		_$J(".portlet-nav-map-list a", nav).each(function(){
+			var item = _$J(this.parentNode.parentNode);
+				if (item.is(".portlet-nav-map-level_1")) {
+					item.mouseover(function() {
+						NavFlyout.hide(this.parentNode);
+					});
 				}
 				else {
-					item2.onmouseover = NavFlyout.onHoverOver;
+					item.mouseover(NavFlyout.onHoverOver);
 				}
-			});
 		});
 	},
 	
 	initToggle: function(nav, imgSrc) {
-		var navMapList = document.getElementsByClassName("portlet-nav-map-level_1", nav);
-		
-		navMapList.each(function(item){
-			$A(item.childNodes).each(function(item2){
-				if (item2.nodeName && item2.nodeName.toLowerCase() == "li") {
-					item2.onclick = NavFlyout.onToggle;
-					item2.style.backgroundImage = "url(" + imgSrc + ")";
-					item2.getElementsByTagName("a")[0].href = "javascript: void(0);";
-				}
-			});
-		});
+		var nav = _$J.idObject(nav);
+		var navMapList = _$J(".portlet-nav-map-level_1 > li", nav);
+		navMapList.click(NavFlyout.onToggle);
+		navMapList.css({ backgroundImage: "url(" + imgSrc + ")" });
 	},
 	
 	hide: function(listItem) {
@@ -775,10 +754,9 @@ var NavFlyout = {
 	
 	onHoverOver: function() {
 		var listItem = this.parentNode;
-		var subMenus = $A(listItem.childNodes);
 		
 		// Hide all other submenus
-		if (Element.hasClassName(listItem.parentNode, "portlet-nav-map-level_2")) {
+		if (_$J(listItem.parentNode).is(".portlet-nav-map-level_2")) {
 			NavFlyout.hide(listItem.parentNode.parentNode.parentNode);
 		}
 		else {
@@ -786,19 +764,13 @@ var NavFlyout = {
 		}
 
 		// Show current submenu
-		$A(listItem.childNodes).detect(function(item){
-			if (item.nodeName && item.nodeName.toLowerCase() == "ul") {
+		_$J(listItem.childNodes).filter("ul")
+			.css({
+				display: "block",
+				top: "5px",
+				left: "100px"
+			});
 			
-				Element.setStyle(item, {
-					display: "block",
-					top: "5px",
-					left: "100px"
-				});
-				item.style.display = "block";
-				return true;
-			}
-		});
-		
 		// Fix Z-Index
 		zItem = listItem;
 		while (zItem.nodeName.toLowerCase() != "div") {
@@ -812,7 +784,7 @@ var NavFlyout = {
 	},
 	
 	onToggle: function() {
-		var subMenu = this.getElementsByTagName("ul")[0];
+		var subMenu = _$J("ul:first", this).get(0);
 
 		if (this.isShowing) {
 			subMenu.style.display = "none";
@@ -852,8 +824,8 @@ var Navigation = {
 	},
 
 	removePage: function() {
-		var tab = $("layout-tab-selected");
-		var tabText = $("layout-tab-text-edit").innerHTML;
+		var tab = _$J("#layout-tab-selected").get(0);
+		var tabText = _$J("#layout-tab-text-edit").get(0).innerHTML;
 		var params = Navigation.params;
 
 		if (confirm("Remove " + tabText + "\"?")) {
@@ -899,15 +871,14 @@ var Navigation = {
 					parent.className = "layout-tab-text-editing";
 
 					input.style.width = (textWidth + 20) + "px";
-					Element.addClassName(input, "layout-tab-input");
+					_$J(input).addClass("layout-tab-input");
 
 					parent.insertBefore(delLink, input);
 				},
 			onComplete:
 				function(newTextObj, oldText) {
 					var parent = newTextObj.parentNode;
-					var delLinks = document.getElementsByClassName("layout-tab-close", parent);
-					var delLink = delLinks[delLinks.length - 1];
+					var delLink = _$J(".layout-tab-close:last", parent).get(0);
 					var newText = newTextObj.innerHTML;
 
 					parent.className = "layout-tab-text";
@@ -934,8 +905,8 @@ var Navigation = {
 			onDrop: Navigation.onDrop
 			});
 
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
-		tabs.each(function(item, index) {
+		_$J("#layout-nav-container .layout-tab").each(function(i) {
+			var item = this;
 			var link = item.getElementsByTagName("a");
 			if (link.length > 0) {
 				link[0].style.cursor = "pointer";
@@ -946,7 +917,7 @@ var Navigation = {
 					revert: true
 				});
 
-			item.layoutId = Navigation.params.layoutIds[index];
+			item.layoutId = Navigation.params.layoutIds[i];
 			item.style.cursor = "move";
 
 			var links = item.getElementsByTagName("a");
@@ -956,14 +927,14 @@ var Navigation = {
 		});
 
 		if (Navigation.params.newPage) {
-			var opts =  $("layout-tab-text-edit").editOptions;
-			$(opts.dragId).wasClicked = true;
-			QuickEdit.edit($("layout-tab-text-edit"));
+			var opts =  _$J("#layout-tab-text-edit").get(0).editOptions;
+			_$J("#" + opts.dragId).get(0).wasClicked = true;
+			QuickEdit.edit(_$J("#layout-tab-text-edit").get(0));
 		}
 	},
 
 	move: function(obj, from, to) {
-		var tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
+		var tabs = _$J("#layout-nav-container .layout-tab").get();
 		var selectedTab = obj;
 		var nav = document.getElementById("layout-nav-container");
 		var target;
@@ -975,7 +946,7 @@ var Navigation = {
 		}
 		else {
 			if (to == tabs.length - 1) {
-				target = $("layout-tab-add");
+				target = _$J("#layout-tab-add").get(0);
 			}
 			else {
 				target = tabs[to + 1];
@@ -993,25 +964,24 @@ var Navigation = {
 
 		clone.layoutId = item.layoutId;
 
-		var tabs = document.getElementsByClassName("layout-tab", "layout-nav-container");
+		_$J("#layout-nav-container .layout-tab").each(function(index) {
+			var tab = this;
+			if (tab == clone) {
+				fromIndex = index;
+			}
 
-		tabs.each(function(tab, index) {
-				if (tab == clone) {
-					fromIndex = index;
-				}
-
-				if (mousePos.insideObject(tab, true)) {
-					if (tab != clone) {
-						if (tab != Navigation.lastMoved) {
-							toIndex = index;
-							Navigation.lastMoved = tab;
-						}
-					}
-					else {
-						Navigation.lastMoved = null;
+			if (mousePos.insideObject(tab, true)) {
+				if (tab != clone) {
+					if (tab != Navigation.lastMoved) {
+						toIndex = index;
+						Navigation.lastMoved = tab;
 					}
 				}
-			});
+				else {
+					Navigation.lastMoved = null;
+				}
+			}
+		});
 
 		if (fromIndex >= 0 && toIndex >= 0) {
 			Navigation.move(clone, fromIndex, toIndex);
@@ -1019,11 +989,11 @@ var Navigation = {
 	},
 
 	onDrop: function(item) {
-		tabs = document.getElementsByClassName("layout-tab", $("layout-nav-container"));
 		var reordered = new Array();
-		for (var i = 0; i < tabs.length; i++) {
-			reordered[i] = tabs[i].layoutId;
-		}
+		tabs = _$J("#layout-nav-container .layout-tab").each(function(i) {
+			reordered[i] = this.layoutId;
+		});
+
 		Navigation.reordered = reordered;
 		if (Navigation.reordered) {
 			var reordered = Navigation.reordered;
@@ -1102,7 +1072,7 @@ var PortletHeaderBar = {
 
 	init : function (bar) {
 		if (!bar.iconBar) {
-			bar.iconBar = document.getElementsByClassName("portlet-small-icon-bar", bar)[0];
+			bar.iconBar = _$J(".portlet-small-icon-bar:first", bar).get(0);
 		}
 
 		if (!bar.iconList) {
@@ -1169,11 +1139,11 @@ PhotoSlider.prototype = {
 		this.timer = 0;
 		this.start = 0;
 
-		this.photos = $(photos);
+		this.photos = _$J.idObject(photos);
 		this.photos.style.position = "relative";
 		this.photos.style.left = "0px";
 
-		this.slidingWindow = $(slidingWindow);
+		this.slidingWindow = _J$.idObject(slidingWindow);
 		this.windowWidth = windowWidth;
 		this.totalPages = totalPages;
 		this.varName = varName;
@@ -1266,13 +1236,13 @@ var QuickEdit = {
 		 * onComplete: (function) executes after editing is done
 		 */
 
-		var item = $(id);
+		var item = document.getElementById(id);
 		item.editOptions = options;
 		item.onclick = function() { QuickEdit.edit(this); };
 		item.style.cursor = "text";
 
 		if (options.dragId) {
-			$(options.dragId).wasClicked = true;
+			_$J.idObject(options.dragId).wasClicked = true;
 		}
 	},
 
@@ -1282,7 +1252,7 @@ var QuickEdit = {
 		var isTextarea = false;
 
 		if (opts.dragId) {
-			wasClicked = $(opts.dragId).wasClicked ? true : false;
+			wasClicked = _$J.idObject(opts.dragId).wasClicked ? true : false;
 		}
 
 		if (opts.inputType && opts.inputType == "textarea") {
@@ -1332,7 +1302,7 @@ var QuickEdit = {
 			QuickEdit.inputList.add(input);
 
 			if (opts.dragId) {
-				$(opts.dragId).disableDrag = true;
+				_$J.idObject(opts.dragId).disableDrag = true;
 			}
 
 			textObj.editing = true;
@@ -1360,7 +1330,7 @@ var QuickEdit = {
 			textObj.editing = false;
 
 			if (opts.dragId) {
-				$(opts.dragId).disableDrag = false;
+				_$J.idObject(opts.dragId).disableDrag = false;
 			}
 
 			if (opts.fixParent) {
@@ -1372,32 +1342,34 @@ var QuickEdit = {
 	}
 }
 
-var StarRating = Class.create();
-StarRating.prototype = {
-	initialize: function(item, options) {
-	/* OPTIONS
-	 * displayOnly: (boolean) non-modifiable display
-	 * onComplete: (function) executes when rating is selected
-	 * rating: rating to initialize to
-	 */
-		this.options = options || new Object();
-		this.rating = this.options.rating || 0;
-		item = $(item);
-		this.stars = $A(item.getElementsByTagName("img"));
-		var self = this
-
-		if (!this.options.displayOnly) {
-			item.onmouseout = this.onHoverOut.bindAsEventListener(this);
-			this.stars.each(function(image, index) {
-				image.index = index + 1;
-				image.onclick = self.onClick.bindAsEventListener(self);
-				image.onmouseover = self.onHoverOver.bindAsEventListener(self);
-			})
+var StarRating = new Class({
+	initialize: function(id, options) {
+		/* OPTIONS
+		 * displayOnly: (boolean) non-modifiable display
+		 * onComplete: (function) executes when rating is selected
+		 * rating: rating to initialize to
+		 */
+			this.options = options || new Object();
+			this.rating = this.options.rating || 0;
+			var item = _$J("#" + id);
+			this.stars = item.find("img");
+			var self = this;
+	
+			if (!this.options.displayOnly) {
+				item.bind("mouseout",  {self: this}, this.onHoverOut);
+				
+				this.stars.each(function(index) {
+					this.index = index + 1;
+					_$J(this).bind("click", {self: self}, self.onClick)
+						   .bind("mouseover", {self: self}, self.onHoverOver);
+				})
+			}
+	
+			this.display(this.rating, "rating");
 		}
+	});
 
-		this.display(this.rating, "rating");
-	},
-
+StarRating.implement({
 	display: function(rating, mode) {
 		var self = this;
 		rating = rating == null ? this.rating : rating;
@@ -1405,7 +1377,8 @@ StarRating.prototype = {
 		var whole = Math.floor(rating);
 		var fraction = rating - whole;
 
-		this.stars.each(function(image, index) {
+		this.stars.each(function(index) {
+			image = this;
 			if (index < whole) {
 				if (mode == "hover") {
 					image.src = image.src.replace(/\bstar_.*\./, "star_hover.");
@@ -1433,31 +1406,31 @@ StarRating.prototype = {
 	},
 
 	onHoverOver: function(event) {
-		var target = Event.element(event);
-		this.display(target.index, "hover");
+		event.data.self.display(this.index, "hover");
 	},
 	onHoverOut: function(event) {
-		this.display();
+		event.data.self.display();
 	},
 	onClick: function(event) {
-		var target = Event.element(event);
+		var target = this;
 		var newRating = target.index;
-		this.rating = newRating;
+		var self = event.data.self;
+		self.rating = newRating;
 
-		if (this.options.onComplete) {
-			this.options.onComplete(newRating);
+		if (self.options.onComplete) {
+			self.options.onComplete(newRating);
 		}
 
-		this.display(newRating);
+		self.display(newRating);
 	}
-}
+});
 
 var ToolTip = {
 	current: null,
 	opacity: 100,
 
 	show: function(event, obj, text) {
-		event = event || window.event;
+		mousePos.update(event);
 		var target = obj;
 		var tip = ToolTip.current;
 
@@ -1472,25 +1445,17 @@ var ToolTip = {
 			ToolTip.current = tip;
 		}
 
-		/*
-		ToolTip.opacity = 100;
-		Element.changeOpacity(tip, 100);
-		*/
 		tip.innerHTML = text;
 		tip.style.display = "";
 
-		tip.style.top = (Event.pointerY(event) - 15) + "px";
-		tip.style.left = (Event.pointerX(event) + 15) + "px";
+		tip.style.top = (mousePos.y - 15) + "px";
+		tip.style.left = (mousePos.x + 15) + "px";
 	},
 
 	hide: function(event) {
 		if (ToolTip.current) {
 			ToolTip.current.style.display = "none";
 		}
-		/*
-		ToolTip.opacity = 99;
-		ToolTip.timeout = setTimeout("ToolTip.fadeOut()", 250);
-		*/
 	},
 
 	fadeOut: function() {

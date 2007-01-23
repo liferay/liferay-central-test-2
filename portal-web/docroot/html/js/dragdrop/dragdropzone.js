@@ -28,7 +28,7 @@ var DropZone = {
 
 		DropZone.checkInit();
 
-		var item = $(itemId);
+		var item = _$J.idObject(itemId);
 		
 		if (item) {
 			item.dropOptions = dropOptions || new Object();
@@ -76,8 +76,7 @@ var DragDrop = {
 			var accepts = dropOptions.accept;
 
 			for (var i = 0; i < accepts.length; i++) {
-				var re = new RegExp("\\b" + accepts[i] + "\\b");
-				if (Element.hasClassName(item, accepts[i])) {
+				if (_$J(item).is("." + accepts[i])) {
 					rt = true;
 					break;
 				}
@@ -146,7 +145,7 @@ var DragDrop = {
 			opts.scrollOffset = new Coordinate(0,0);
 
 			if (opts.container) {
-				var container = $(opts.container);
+				var container = _$J.idObject(opts.container);
 
 				opts.scrollOffset.x = container.scrollLeft;
 				opts.scrollOffset.y = container.scrollTop;
@@ -188,7 +187,8 @@ var DragDrop = {
 
 			var dropList = DropZone.dropList;
 			
-			dropList.each(function(item) {
+			_$J(dropList).each(function(i) {
+				var item = this;
 				if (item.dropOptions.inheritParent) {
 					item.style.height = item.parentNode.offsetHeight;
 				}
@@ -244,7 +244,7 @@ var DragDrop = {
 	
 			if (cur != last) {
 				if (last) {
-					Element.removeClassName(last, last.dropOptions.hoverclass);
+					_$J(last).removeClass(last.dropOptions.hoverclass);
 	
 					if (typeof(last.dropOptions.onHoverOut) != "undefined") {
 						last.dropOptions.onHoverOut(item);
@@ -253,7 +253,7 @@ var DragDrop = {
 				if (cur) {
 					if (cur.dropOptions.hoverclass && cur != item &&
 						DragDrop.accepts(item, cur)) {
-						Element.addClassName(cur, cur.dropOptions.hoverclass);
+						_$J(cur).addClass(cur.dropOptions.hoverclass);
 					}
 	
 				}
@@ -276,7 +276,7 @@ var DragDrop = {
 				if (DragDrop.accepts(item, dropItem)) {
 					dropOptions.onDrop(item, nwPosition, sePosition, nwOffset, seOffset);
 					dropItem.className = dropOptions.origClassName;
-					Element.removeClassName(dropItem, dropItem.dropOptions.hoverclass);
+					_$J(dropItem).removeClass(dropItem.dropOptions.hoverclass);
 				}
 			}
 			else if (opts.forceDrop && DragDrop.lastOnDrop) {
@@ -318,13 +318,14 @@ var DragDrop = {
 			}
 			
 			// restore original options (if changed)
-			DropZone.dropList.each(function(item) {
+			_$J(DropZone.dropList).each(function(i) {
+					var item = this;
 					item.style.backgroundColor = "transparent";
 					
 					if (item.dropOptions.inheritParent) {
 						item.style.height = "";
 				}
-				});
+			});
 				
 			opts.revert = opts.origRevert;
 			item.initialized = false;
