@@ -56,7 +56,7 @@ public class PortalFilterWrapper implements Filter, PortalInitable {
 			_filter.init(_config);
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
