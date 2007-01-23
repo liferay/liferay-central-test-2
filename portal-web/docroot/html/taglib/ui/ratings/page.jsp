@@ -86,8 +86,8 @@ RatingsStats stats = RatingsStatsLocalServiceUtil.getStats(className, classPK);
 					onComplete: function(xmlHttpReq) {
 						var res = $J(xmlHttpReq.responseText);
 
-						$("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
-						$("<%= randomNamespace %>averageRating").onmousemove = function(event) {
+						document.getElementById("<%= randomNamespace %>totalEntries").innerHTML = res.totalEntries;
+						document.getElementById("<%= randomNamespace %>averageRating").onmousemove = function(event) {
 							ToolTip.show(event, this, res.averageScore.toFixed(1) + ' Stars');
 						};
 

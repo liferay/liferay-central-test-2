@@ -40,13 +40,13 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sb);
 </div>
 
 <script type="text/javascript">
-	NavFlyout.initialize($("p_p_id<portlet:namespace />"));
+	NavFlyout.initialize("p_p_id<portlet:namespace />");
 
-	$("p_p_id<portlet:namespace />").onclick = function() {
-		NavFlyout.initialize($("p_p_id<portlet:namespace />"));
+	document.getElementById("p_p_id<portlet:namespace />").onclick = function() {
+		NavFlyout.initialize("p_p_id<portlet:namespace />");
 	}
 
-	NavFlyout.initToggle($("p_p_id<portlet:namespace />"), "<%= themeDisplay.getPathThemeImage() %>/arrows/02_plus.gif");
+	NavFlyout.initToggle("p_p_id<portlet:namespace />", "<%= themeDisplay.getPathThemeImage() %>/arrows/02_plus.gif");
 </script>
 
 <%!
@@ -83,7 +83,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 				sb.append("&nbsp;&raquo;");
 			}
 
-			if ((displayDepth == 0) || ((displayDepth > curDepth) && (children > 0))) {
+			if ((displayDepth == 0 || displayDepth > curDepth) && children > 0) {
 				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
 			}
 

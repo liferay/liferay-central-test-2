@@ -30,6 +30,25 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
+
+/*
+boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
+boolean showMoveIcon = !stateMax;
+if (!themeDisplay.isSignedIn() ||
+	!LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
+	showMoveIcon = false;
+}
+if (!layoutTypePortlet.hasPortletId(portletId)) {
+
+	showMoveIcon = false;
+	}
+if (portlet.isStatic()) {
+	showMoveIcon = false;
+}
+if (denyAccess) {
+	showMoveIcon = false;
+}
+*/
 %>
 
 <c:choose>
@@ -79,48 +98,39 @@ Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUM
 				portletDiv.parentNode.removeChild(portletDiv);
 			};
 
-			function <%= portletDisplay.getNamespace() %>loadPortlet() {
-				var path = "<%= themeDisplay.getPathMain() %>/portal/render_portlet";
-				var queryString = "p_l_id=<%= plid %>&p_p_id=<%= portlet.getPortletId() %>&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=<%= columnId %>&p_p_col_pos=<%= columnPos %>&p_p_col_count=<%= columnCount %>";
+			<%
+			String doAsUserId = themeDisplay.getDoAsUserId();
+			StringBuffer url = new StringBuffer();
 
-				<%
-				String doAsUserId = themeDisplay.getDoAsUserId();
+			url.append(themeDisplay.getPathMain() + "/portal/render_portlet"
+				+ "?p_l_id=" + plid + "&p_p_id=" + portlet.getPortletId() 
+				+ "&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=" + columnId 
+				+ "&p_p_col_pos=" + columnPos + "&p_p_col_count=" + columnCount);
 
-				if (Validator.isNotNull(doAsUserId)) {
-				%>
+			if (Validator.isNotNull(doAsUserId)) {
+				url.append("&doAsUserId=" + Http.encodeURL(doAsUserId));
+			}
 
-					queryString += "&doAsUserId=<%= Http.encodeURL(doAsUserId) %>";
+			String ppid = ParamUtil.getString(request, "p_p_id");
 
-				<%
-				}
+			if (ppid.equals(portlet.getPortletId())) {
+				Enumeration enu = request.getParameterNames();
 
-				String ppid = ParamUtil.getString(request, "p_p_id");
+				while (enu.hasMoreElements()) {
+					String name = (String)enu.nextElement();
 
-				if (ppid.equals(portlet.getPortletId())) {
-					Enumeration enu = request.getParameterNames();
+					if (!PortalUtil.isReservedParameter(name)) {
+						String[] values = request.getParameterValues(name);
 
-					while (enu.hasMoreElements()) {
-						String name = (String)enu.nextElement();
-
-						if (!PortalUtil.isReservedParameter(name)) {
-							String[] values = request.getParameterValues(name);
-
-							for (int i = 0; i < values.length; i++) {
-				%>
-
-								queryString += "&<%= name %>=<%= values[i] %>";
-
-				<%
-							}
+						for (int i = 0; i < values.length; i++) {
+							url.append("&" + name + "=" + values[i]);
 						}
 					}
 				}
-				%>
-
-				loadPage(path, queryString, <%= portletDisplay.getNamespace() %>returnPortlet);
 			}
+			%>
 
-			<%= portletDisplay.getNamespace() %>loadPortlet();
+			AjaxUtil.request("<%= url.toString() %>", {onComplete: <%= portletDisplay.getNamespace() %>returnPortlet});
 		</script>
 	</c:otherwise>
 </c:choose>

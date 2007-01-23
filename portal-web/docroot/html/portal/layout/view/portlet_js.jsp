@@ -79,12 +79,12 @@ function addPortletHTML(html, container, placeHolder) {
 	}
 
 	var addDiv = document.createElement("div");
-	var loadingDiv = document.getElementsByClassName("portlet-loading", container)[0];
+	var loadingDiv = _$J(".portlet-loading:first", container).get(0);
 
 	addDiv.style.display = "none";
 	addDiv.innerHTML = html;
 
-	var portletBound = document.getElementsByClassName("portlet-boundary", addDiv)[0];
+	var portletBound = _$J(".portlet-boundary:first", addDiv).get(0);
 
 	portletBound.parentNode.removeChild(portletBound);
 

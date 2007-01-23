@@ -147,14 +147,14 @@
 
 			show: function() {
 				if (!MyPlaces.showing) {
-					$("layout-my-places-menu").style.display = "";
+					document.getElementById("layout-my-places-menu").style.display = "";
 					setTimeout("document.onclick = function() { MyPlaces.hide(); }", 0);
 					MyPlaces.showing = true;
 				}
 			},
 
 			hide: function() {
-				$("layout-my-places-menu").style.display = "none";
+				document.getElementById("layout-my-places-menu").style.display = "none";
 				MyPlaces.showing = false;
 				document.onclick = function() {};
 			}

@@ -29,6 +29,8 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 
 String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
+PortletPreferences portletSetup = PortletPreferencesFactory.getPortletSetup(request, portletId, true, true);
+String freeformStyles = portletSetup.getValue("portlet-freeform-styles", null);
 
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
@@ -454,10 +456,13 @@ if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 %>
 
 	<script type="text/javascript">
-		$("p_p_id<%= portletDisplay.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+		<c:if test="<%= Validator.isNotNull(freeformStyles) %>">
+			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").freeformStyles = $J('<%= freeformStyles %>');
+		</c:if>
 
-		<c:if test='<%= !staticVar.equals("no") %>'>
-			$("p_p_id<%= portletDisplay.getNamespace() %>").isStatic = "<%= staticVar %>";
+		<c:if test="<%= !staticVar.equals("no") %>">
+			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
 		</c:if>
 	</script>
 

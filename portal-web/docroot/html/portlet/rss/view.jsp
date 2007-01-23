@@ -70,7 +70,7 @@ WindowState windowState = renderRequest.getWindowState();
 		%>
 
 		<script type="text/javascript">
-			<portlet:namespace />rssAccordion = new Accordion($("p_p_id<portlet:namespace />"), "<portlet:namespace />rssAccordion");
+			<portlet:namespace />rssAccordion = new Accordion("p_p_id<portlet:namespace />", "<portlet:namespace />rssAccordion");
 		</script>
 	</c:otherwise>
 </c:choose>
