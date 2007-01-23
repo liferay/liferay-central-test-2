@@ -144,12 +144,12 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					StringBuffer sb = new StringBuffer();
 
 					sb.append(themeDisplay.getPathMain());
-					sb.append("/journal/view_article_content?articleId=");
+					sb.append("/journal/view_article_content?groupId=");
+					sb.append(groupId);
+					sb.append("&articleId=");
 					sb.append(articleId);
 					sb.append("&version=");
 					sb.append(version);
-					sb.append("&groupId=");
-					sb.append(groupId);
 
 					url = sb.toString();
 				}

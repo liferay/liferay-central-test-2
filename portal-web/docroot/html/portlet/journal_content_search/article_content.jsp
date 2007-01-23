@@ -31,13 +31,13 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 
 Document doc = (Document)row.getObject();
 
-String content = (String)doc.get(LuceneFields.CONTENT);
+String content = doc.get(LuceneFields.CONTENT);
 
 content = StringUtil.shorten(content, 200);
 content = StringUtil.highlight(content, keywords);
 
-long groupId = GetterUtil.getLong((String)doc.get("groupId"));
-String articleId = (String)doc.get("articleId");
+long groupId = portletGroupId;
+String articleId = doc.get("articleId");
 
 String hitOwnerId = layout.getOwnerId();
 
