@@ -59,7 +59,7 @@ function addPortlet(plid, portletId, doAsUserId) {
 		loadingDiv.className = "portlet-loading";
 
 		container.appendChild(loadingDiv);
-		
+
 		var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>";
 
 		AjaxUtil.request(queryString, {
@@ -97,7 +97,7 @@ function addPortletHTML(html, container, placeHolder) {
 	portletBound.portletId = portletId;
 
 	container.insertBefore(portletBound, placeHolder);
-	
+
 	placeHolder.parentNode.removeChild(placeHolder);
 
 	executeLoadedScript(addDiv);
