@@ -129,7 +129,7 @@ var AjaxUtil = {
 	},
 	
 	update : function(url, id, options) {
-		var element = _$J.idObject(id);
+		var element = _$J.getOne(id);
 
 		if (element) {
 			if (options == null) {

@@ -437,12 +437,10 @@ if (portlet.isActive() && access) {
 </c:if>
 
 <%
+String staticVar = "yes";
+
 if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
-	String staticVar = "no";
-
 	if (portlet.isStatic() || !portletDisplay.isShowMoveIcon()) {
-		staticVar = "yes";
-
 		if (portlet.isStaticStart()) {
 			staticVar = "start";
 		}
@@ -451,19 +449,21 @@ if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
 			staticVar = "end";
 		}
 	}
+	else {
+		staticVar = "no";
+	}
+}
 %>
 
-	<script type="text/javascript">
-		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+<script type="text/javascript">
+	document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
 
-		<c:if test='<%= !staticVar.equals("no") %>'>
-			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
-		</c:if>
-	</script>
+	<c:if test='<%= !staticVar.equals("no") %>'>
+		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+	</c:if>
+</script>
 
 <%
-}
-
 RenderRequestFactory.recycle(renderRequestImpl);
 RenderResponseFactory.recycle(renderResponseImpl);
 %>

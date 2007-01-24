@@ -92,7 +92,7 @@ function changeBackground(path, extension) {
 
 var DragLink = {
 	create: function(item, dragId) {
-		item.dragId = _$J.idObject(dragId);
+		item.dragId = _$J.getOne(dragId);
 		item.clickLink = item.href;
 		item.href = "javascript:void(0)";
 		item.onclick = DragLink.onLinkClick;
@@ -257,7 +257,7 @@ var LiferayDock = {
 	},
 
 	showObject: function(item, defaultTimeout) {
-		item = _$J.idObject(item);
+		item = _$J.getOne(item);
 		_$J(".portal-dock-help").each(function(){
 			if (item.id == this.id) {
 				this.style.display = "";
@@ -434,7 +434,7 @@ var LayoutColumns = {
 
 	init: function(colArray) {
 		for (var i = 0; i < colArray.length; i++) {
-			var column = _$J.idObject("#layout-column_" + colArray[i]);
+			var column = _$J.getOne("#layout-column_" + colArray[i]);
 
 			if (column) {
 				column.columnId = colArray[i];
@@ -466,7 +466,7 @@ var LayoutColumns = {
 	},
 
 	initPortlet: function(portlet) {
-		portlet = _$J.idObject(portlet);
+		portlet = _$J.getOne(portlet);
 
 		var handle = _$J(".portlet-header-bar, .portlet-title-default", portlet).get(0);
 
@@ -722,7 +722,7 @@ var LayoutColumns = {
 var NavFlyout = {
 	zIndex: 1,
 	initialize: function (nav) {
-		var nav = _$J.idObject(nav);
+		var nav = _$J.getOne(nav);
 		var navMapList = _$J("portlet-nav-map-list", nav);
 
 		navMapList.not(".portlet-nav-map-level_1, .portlet-nav-map-level_2")
@@ -742,7 +742,7 @@ var NavFlyout = {
 	},
 	
 	initToggle: function(nav, imgSrc) {
-		var nav = _$J.idObject(nav);
+		var nav = _$J.getOne(nav);
 		var navMapList = _$J(".portlet-nav-map-level_1 > li", nav);
 		navMapList.click(NavFlyout.onToggle);
 		navMapList.css({ backgroundImage: "url(" + imgSrc + ")" });
@@ -1139,11 +1139,11 @@ PhotoSlider.prototype = {
 		this.timer = 0;
 		this.start = 0;
 
-		this.photos = _$J.idObject(photos);
+		this.photos = _$J.getOne(photos);
 		this.photos.style.position = "relative";
 		this.photos.style.left = "0px";
 
-		this.slidingWindow = _J$.idObject(slidingWindow);
+		this.slidingWindow = _J$.getOne(slidingWindow);
 		this.windowWidth = windowWidth;
 		this.totalPages = totalPages;
 		this.varName = varName;
@@ -1242,7 +1242,7 @@ var QuickEdit = {
 		item.style.cursor = "text";
 
 		if (options.dragId) {
-			_$J.idObject(options.dragId).wasClicked = true;
+			_$J.getOne(options.dragId).wasClicked = true;
 		}
 	},
 
@@ -1252,7 +1252,7 @@ var QuickEdit = {
 		var isTextarea = false;
 
 		if (opts.dragId) {
-			wasClicked = _$J.idObject(opts.dragId).wasClicked ? true : false;
+			wasClicked = _$J.getOne(opts.dragId).wasClicked ? true : false;
 		}
 
 		if (opts.inputType && opts.inputType == "textarea") {
@@ -1302,7 +1302,7 @@ var QuickEdit = {
 			QuickEdit.inputList.add(input);
 
 			if (opts.dragId) {
-				_$J.idObject(opts.dragId).disableDrag = true;
+				_$J.getOne(opts.dragId).disableDrag = true;
 			}
 
 			textObj.editing = true;
@@ -1330,7 +1330,7 @@ var QuickEdit = {
 			textObj.editing = false;
 
 			if (opts.dragId) {
-				_$J.idObject(opts.dragId).disableDrag = false;
+				_$J.getOne(opts.dragId).disableDrag = false;
 			}
 
 			if (opts.fixParent) {

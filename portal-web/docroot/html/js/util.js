@@ -20,19 +20,9 @@
  * SOFTWARE.
  */
 
-// Reassign jQuery object to custom alias
+// Re-assign jQuery default alias to custom alias
 $ = null;
 _$J = jQuery;
-
-jQuery.idObject = function(id) {
-	if (typeof id == "object") {
-		return (id);
-	}
-	else if (typeof id == "string") {
-		id = id.replace(/^#/,"");
-		return (document.getElementById(id));
-	}
-}
 
 jQuery.getOne = function(s, context) {
 	var rt;
@@ -56,15 +46,6 @@ jQuery.getOne = function(s, context) {
 
 	return rt;
 }
-
-var Liferay = function(id) {
-	if (typeof id == "object") {
-		return (id);
-	}
-	else if (typeof id == "string") {
-		return document.getElementById(id);
-	}
-};
 
 var submitCountdown = 0;
 
@@ -231,7 +212,7 @@ function disableEsc() {
 Element = new Object();
 
 Element.disable = function(element) {
-	element = _$J.idObject(element);
+	element = _$J.getOne(element);
 
 	var items = element.getElementsByTagName("*");
 
@@ -741,7 +722,7 @@ function setSelectedValue(col, value) {
 function setSelectVisibility(mode, obj) {
 	if (is_ie) {
 		if (obj) {
-			obj = jQuery.idObject(obj);
+			obj = jQuery.getOne(obj);
 		}
 		else {
 			obj = document.getElementsByTagName("body")[0];

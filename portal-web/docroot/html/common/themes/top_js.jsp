@@ -142,10 +142,6 @@
 				_$J(function() {
 					setTimeout("ReverseAjax.initialize()", 2000);
 				});
-
-				_$J(window).unload(function() {
-					ReverseAjax.release();
-				});
 			}
 		</c:if>
 

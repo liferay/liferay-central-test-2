@@ -28,7 +28,7 @@ var DropZone = {
 
 		DropZone.checkInit();
 
-		var item = _$J.idObject(itemId);
+		var item = _$J.getOne(itemId);
 		
 		if (item) {
 			item.dropOptions = dropOptions || new Object();
@@ -145,7 +145,7 @@ var DragDrop = {
 			opts.scrollOffset = new Coordinate(0,0);
 
 			if (opts.container) {
-				var container = _$J.idObject(opts.container);
+				var container = _$J.getOne(opts.container);
 
 				opts.scrollOffset.x = container.scrollLeft;
 				opts.scrollOffset.y = container.scrollTop;

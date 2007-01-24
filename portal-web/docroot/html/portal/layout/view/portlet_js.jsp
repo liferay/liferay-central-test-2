@@ -49,8 +49,6 @@ function addPortlet(plid, portletId, doAsUserId) {
 		self.location = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
 	}
 	else {
-		loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>", addPortletReturn);
-
 		var loadingDiv = document.createElement("div");
 		var container = document.getElementById("layout-column_column-1");
 
@@ -60,16 +58,20 @@ function addPortlet(plid, portletId, doAsUserId) {
 
 		loadingDiv.className = "portlet-loading";
 
-		container.insertBefore(loadingDiv, null);
-	}
-}
+		container.appendChild(loadingDiv);
+		
+		var queryString = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=<%= Constants.ADD %>";
 
-function addPortletReturn(xmlHttpReq) {
-	var container = document.getElementById("layout-column_column-1");
-	var portletId = addPortletHTML(xmlHttpReq.responseText, container, null);
+		AjaxUtil.request(queryString, {
+			onComplete: function(xmlHttpReq){
+				var container = document.getElementById("layout-column_column-1");
+				var portletId = addPortletHTML(xmlHttpReq.responseText, container, loadingDiv);
 
-	if (window.location.hash) {
-		window.location.hash = "p_" + portletId;
+				if (window.location.hash) {
+					window.location.hash = "p_" + portletId;
+				}
+			}
+		});
 	}
 }
 
@@ -79,7 +81,6 @@ function addPortletHTML(html, container, placeHolder) {
 	}
 
 	var addDiv = document.createElement("div");
-	var loadingDiv = _$J(".portlet-loading:first", container).get(0);
 
 	addDiv.style.display = "none";
 	addDiv.innerHTML = html;
@@ -95,11 +96,9 @@ function addPortletHTML(html, container, placeHolder) {
 
 	portletBound.portletId = portletId;
 
-	if (loadingDiv) {
-		container.removeChild(loadingDiv);
-	}
-
 	container.insertBefore(portletBound, placeHolder);
+	
+	placeHolder.parentNode.removeChild(placeHolder);
 
 	executeLoadedScript(addDiv);
 	executeLoadedScript(portletBound);
