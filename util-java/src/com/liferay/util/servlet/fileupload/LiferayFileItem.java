@@ -22,6 +22,8 @@
 
 package com.liferay.util.servlet.fileupload;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.File;
 
 import org.apache.commons.fileupload.disk.DiskFileItem;
@@ -31,9 +33,12 @@ import org.apache.commons.fileupload.disk.DiskFileItem;
  *
  * @author  Brian Wing Shun Chan
  * @author  Zongliang Li
+ * @author  Harry Mark
  *
  */
 public class LiferayFileItem extends DiskFileItem {
+
+	public static final long SIZE_THRESHOLD = 32768;
 
 	public LiferayFileItem(String fieldName, String contentType,
 						   boolean isFormField, String fileName,
@@ -85,6 +90,13 @@ public class LiferayFileItem extends DiskFileItem {
 	}
 
 	public String getString() {
+
+		// Prevent serialization of uploaded content
+
+		if (getSize() > SIZE_THRESHOLD) {
+			return StringPool.BLANK;
+		}
+
 		if (_encodedString == null) {
 			return super.getString();
 		}

@@ -62,6 +62,7 @@ import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import java.rmi.RemoteException;
@@ -78,6 +79,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="DLFileEntryLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Harry Mark
  *
  */
 public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
@@ -143,15 +145,25 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 
 		try {
 			is = new BufferedInputStream(new FileInputStream(file));
+
+			return addFileEntry(
+				userId, folderId, name, title, description, extraSettings, is,
+				file.length(), addCommunityPermissions, addGuestPermissions,
+				communityPermissions, guestPermissions);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new FileSizeException();
 		}
-
-		return addFileEntry(
-			userId, folderId, name, title, description, extraSettings, is,
-			file.length(), addCommunityPermissions, addGuestPermissions,
-			communityPermissions, guestPermissions);
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public DLFileEntry addFileEntry(
@@ -165,8 +177,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 			throw new FileSizeException();
 		}
 
-		InputStream is =
-			new BufferedInputStream(new ByteArrayInputStream(byteArray));
+		InputStream is = new ByteArrayInputStream(byteArray);
 
 		return addFileEntry(
 			userId, folderId, name, title, description, extraSettings, is,
@@ -534,21 +545,32 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		throws PortalException, SystemException {
 
 		InputStream is = null;
-		long size = 0;
 
-		if ((file != null) && (file.length() > 0)) {
-			try {
+		try {
+			long size = 0;
+
+			if ((file != null) && (file.length() > 0)) {
 				is = new BufferedInputStream(new FileInputStream(file));
 				size = file.length();
 			}
-			catch (FileNotFoundException fnfe) {
-				throw new NoSuchFileException();
+
+			return updateFileEntry(
+				userId, folderId, newFolderId, name, sourceFileName, title,
+				description, extraSettings, is, size);
+		}
+		catch (FileNotFoundException fnfe) {
+			throw new NoSuchFileException();
+		}
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
 			}
 		}
-
-		return updateFileEntry(
-			userId, folderId, newFolderId, name, sourceFileName, title,
-			description, extraSettings, is, size);
 	}
 
 	public DLFileEntry updateFileEntry(
@@ -561,7 +583,7 @@ public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
 		long size = 0;
 
 		if ((byteArray != null) && (byteArray.length > 0)) {
-			is = new BufferedInputStream(new ByteArrayInputStream(byteArray));
+			is = new ByteArrayInputStream(byteArray);
 			size = byteArray.length;
 		}
 

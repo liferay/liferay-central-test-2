@@ -41,6 +41,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author  Brian Myunghun Kim
  * @author  Brian Wing Shun Chan
+ * @author  Harry Mark
  *
  */
 public class LiferayInputStream extends ServletInputStreamWrapper {
@@ -62,15 +63,20 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			_totalRead = _totalSize;
 		}
 
-		float percent = _totalRead / _totalSize;
+		int percent = (_totalRead * 100) / _totalSize;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
 		}
 
-		_ses.setAttribute(LiferayFileUpload.PERCENT, new Float(percent));
-
 		_cachedBytes.write(b, off, bytesRead);
+
+		Integer curPercent = (Integer)_ses.getAttribute(
+			LiferayFileUpload.PERCENT);
+
+		if ((curPercent == null) || (percent - curPercent.intValue() >= 1)) {
+			_ses.setAttribute(LiferayFileUpload.PERCENT, new Integer(percent));
+		}
 
 		return bytesRead;
 	}
@@ -83,7 +89,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	private static Log _log = LogFactory.getLog(LiferayInputStream.class);
 
 	private HttpSession _ses;
-	private float _totalRead;
+	private int _totalRead;
 	private int _totalSize;
 	private ByteArrayOutputStream _cachedBytes = new ByteArrayOutputStream();
 

@@ -29,13 +29,13 @@ String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
 String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME));
 
-Float percent = (Float)session.getAttribute(LiferayFileUpload.PERCENT);
+Integer percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT);
 
 if (percent == null) {
-	percent = new Float(1);
+	percent = new Integer(100);
 }
 
-if (percent.floatValue() >= 1) {
+if (percent.floatValue() >= 100) {
 	session.removeAttribute(LiferayFileUpload.FILE_NAME);
 	session.removeAttribute(LiferayFileUpload.PERCENT);
 }
@@ -46,9 +46,9 @@ if (percent.floatValue() >= 1) {
 <body>
 
 <script type="text/javascript">
-	parent.<%= uploadProgressId %>.updateBar(<%= (int)(percent.floatValue() * 100) %>, "<%= fileName %>");
+	parent.<%= uploadProgressId %>.updateBar(<%= percent.intValue() %>, "<%= fileName %>");
 
-	<c:if test="<%= percent.floatValue() < 1 %>">
+	<c:if test="<%= percent.intValue() < 100 %>">
 		setTimeout("window.location.reload();", 1000);
 	</c:if>
 </script>

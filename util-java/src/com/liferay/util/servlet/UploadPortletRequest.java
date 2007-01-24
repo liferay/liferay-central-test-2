@@ -37,6 +37,7 @@ import javax.servlet.http.HttpServletRequestWrapper;
  * <a href="UploadPortletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Brian Wing Shun Chan
+ * @author  Harry Mark
  *
  */
 public class UploadPortletRequest extends HttpServletRequestWrapper {
@@ -140,6 +141,10 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 		}
 
 		return parameterValues;
+	}
+
+	public void cleanUp() {
+		_req.cleanUp();
 	}
 
 	private UploadServletRequest _req;

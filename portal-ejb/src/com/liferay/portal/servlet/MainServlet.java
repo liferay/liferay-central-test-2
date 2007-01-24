@@ -726,10 +726,14 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Content type " + contentType);
 		}
 
+		UploadServletRequest uploadReq = null;
+
 		if ((contentType != null) &&
 			(contentType.startsWith(Constants.MULTIPART_FORM_DATA))) {
 
-			req = new UploadServletRequest(req);
+			uploadReq = new UploadServletRequest(req);
+
+			req = uploadReq;
 		}
 		else if (ParamUtil.get(req, WebKeys.ENCRYPT, false)) {
 			try {
@@ -890,6 +894,10 @@ public class MainServlet extends ActionServlet {
 			res.addHeader(
 				_LIFERAY_PORTAL_REQUEST_HEADER, ReleaseInfo.getReleaseInfo());
 
+			if (uploadReq != null) {
+				uploadReq.cleanUp();
+			}
+
 			// Clear the company id associated with this thread
 
 			CompanyThreadLocal.setCompanyId(null);
@@ -952,16 +960,15 @@ public class MainServlet extends ActionServlet {
 			PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
 
 		Element sessionConfig = root.element("session-config");
-System.out.println("### here 1 " + timeout + " " + sessionConfig);
+
 		if (sessionConfig != null) {
 			String sessionTimeout =
 				sessionConfig.elementText("session-timeout");
-System.out.println("### here 2 " + sessionTimeout);
+
 			timeout = GetterUtil.getInteger(sessionTimeout, timeout);
 		}
-System.out.println("### here 3 " + timeout);
+
 		PropsUtil.set(PropsUtil.SESSION_TIMEOUT, Integer.toString(timeout));
-	System.out.println("### here 4 " + PropsUtil.get(PropsUtil.SESSION_TIMEOUT));
 	}
 
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =

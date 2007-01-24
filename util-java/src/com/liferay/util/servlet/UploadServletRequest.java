@@ -53,6 +53,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
  *
  * @author  Brian Wing Shun Chan
  * @author  Zongliang Li
+ * @author  Harry Mark
  *
  */
 public class UploadServletRequest extends HttpServletRequestWrapper {
@@ -252,6 +253,20 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 	public Map getMultipartParameterMap() {
 		return _params;
+	}
+
+	public void cleanUp() {
+		if ((_params != null) && !_params.isEmpty()) {
+			Iterator itr = _params.values().iterator();
+
+			while (itr.hasNext()) {
+				LiferayFileItem[] fileItems = (LiferayFileItem[])itr.next();
+
+				for (int i = 0; i < fileItems.length; i++) {
+					fileItems[i].delete();
+				}
+			}
+		}
 	}
 
 	private LiferayServletRequest _lsr;

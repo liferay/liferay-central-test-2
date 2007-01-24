@@ -161,13 +161,23 @@ public class DLServiceImpl implements DLService {
 
 		try {
 			is = new BufferedInputStream(new FileInputStream(file));
+
+			DLLocalServiceUtil.addFile(
+				companyId, portletId, groupId, repositoryId, fileName, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
 		}
-
-		DLLocalServiceUtil.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, is);
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void addFile(
@@ -180,11 +190,20 @@ public class DLServiceImpl implements DLService {
 			throw new FileSizeException(fileName);
 		}
 
-		InputStream is =
-			new BufferedInputStream(new ByteArrayInputStream(byteArray));
+		InputStream is = new ByteArrayInputStream(byteArray);
 
-		DLLocalServiceUtil.addFile(
-			companyId, portletId, groupId, repositoryId, fileName, is);
+		try {
+			DLLocalServiceUtil.addFile(
+				companyId, portletId, groupId, repositoryId, fileName, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void deleteDirectory(
@@ -432,14 +451,24 @@ public class DLServiceImpl implements DLService {
 
 		try {
 			is = new BufferedInputStream(new FileInputStream(file));
+
+			DLLocalServiceUtil.updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, sourceFileName, is);
 		}
 		catch (FileNotFoundException fnfe) {
 			throw new NoSuchFileException(fileName);
 		}
-
-		DLLocalServiceUtil.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, is);
+		finally {
+			try {
+				if (is != null) {
+					is.close();
+				}
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void updateFile(
@@ -453,12 +482,21 @@ public class DLServiceImpl implements DLService {
 			throw new FileSizeException(fileName);
 		}
 
-		InputStream is =
-			new BufferedInputStream(new ByteArrayInputStream(byteArray));
+		InputStream is = new ByteArrayInputStream(byteArray);
 
-		DLLocalServiceUtil.updateFile(
-			companyId, portletId, groupId, repositoryId, fileName,
-			versionNumber, sourceFileName, is);
+		try {
+			DLLocalServiceUtil.updateFile(
+				companyId, portletId, groupId, repositoryId, fileName,
+				versionNumber, sourceFileName, is);
+		}
+		finally {
+			try {
+				is.close();
+			}
+			catch (IOException ioe) {
+				_log.error(ioe);
+			}
+		}
 	}
 
 	public void updateFile(
