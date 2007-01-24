@@ -158,12 +158,6 @@
 		</c:if>
 	</c:if>
 
-	<%--
-	<c:if test="<%= themeDisplay.isFreeformLayout() %>">
-		LayoutColumns.freeform = true;
-	</c:if>
-	--%>
-
 	<%@ include file="/html/js/log/log.jsp" %>
 
 	<liferay-theme:include page="javascript.jsp" />

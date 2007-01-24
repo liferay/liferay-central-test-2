@@ -83,7 +83,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 				sb.append("&nbsp;&raquo;");
 			}
 
-			if ((displayDepth == 0 || displayDepth > curDepth) && children > 0) {
+			if (((displayDepth == 0) || (displayDepth > curDepth)) && (children > 0)) {
 				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sb);
 			}
 

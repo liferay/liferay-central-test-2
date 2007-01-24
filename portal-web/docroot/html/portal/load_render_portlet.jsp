@@ -30,25 +30,6 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
-
-/*
-boolean stateMax = layoutTypePortlet.hasStateMaxPortletId(portletId);
-boolean showMoveIcon = !stateMax;
-if (!themeDisplay.isSignedIn() ||
-	!LayoutPermission.contains(permissionChecker, layout, ActionKeys.UPDATE)) {
-	showMoveIcon = false;
-}
-if (!layoutTypePortlet.hasPortletId(portletId)) {
-
-	showMoveIcon = false;
-	}
-if (portlet.isStatic()) {
-	showMoveIcon = false;
-}
-if (denyAccess) {
-	showMoveIcon = false;
-}
-*/
 %>
 
 <c:choose>
@@ -100,15 +81,25 @@ if (denyAccess) {
 
 			<%
 			String doAsUserId = themeDisplay.getDoAsUserId();
+
 			StringBuffer url = new StringBuffer();
 
-			url.append(themeDisplay.getPathMain() + "/portal/render_portlet"
-				+ "?p_l_id=" + plid + "&p_p_id=" + portlet.getPortletId() 
-				+ "&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=" + columnId 
-				+ "&p_p_col_pos=" + columnPos + "&p_p_col_count=" + columnCount);
+			url.append(themeDisplay.getPathMain());
+			url.append("/portal/render_portlet");
+			url.append("?p_l_id=");
+			url.append(plid);
+			url.append("&p_p_id=");
+			url.append(portlet.getPortletId());
+			url.append("&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");
+			url.append(columnId);
+			url.append("&p_p_col_pos=");
+			url.append(columnPos);
+			url.append("&p_p_col_count=");
+			url.append(columnCount);
 
 			if (Validator.isNotNull(doAsUserId)) {
-				url.append("&doAsUserId=" + Http.encodeURL(doAsUserId));
+				url.append("&doAsUserId=");
+				url.append(Http.encodeURL(doAsUserId));
 			}
 
 			String ppid = ParamUtil.getString(request, "p_p_id");
@@ -123,7 +114,10 @@ if (denyAccess) {
 						String[] values = request.getParameterValues(name);
 
 						for (int i = 0; i < values.length; i++) {
-							url.append("&" + name + "=" + values[i]);
+							url.append("&");
+							url.append(name);
+							url.append("=");
+							url.append(values[i]);
 						}
 					}
 				}
