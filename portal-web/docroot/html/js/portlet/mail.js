@@ -48,6 +48,8 @@ var Mail = {
 	lastSelected : null,
 	mailObject : null,
 	messageTimer : null,
+	previewLast: -1,
+	previewHeight: 0,
 	searchResults : false,
 	searchCount : 0,
 	selectedArray : null,
@@ -629,9 +631,10 @@ var Mail = {
 		
 		previewPane.onselectstart = function() {return false;} // ie
 		previewPane.onmousedown = function() {this.focus(); return false;} // mozilla
+		previewPane.onscroll = Mail.onPreviewScroll;
 
 		/* Memory cleanup */
-		Event.addHandler(window, "onunload", Mail.clearPreview);
+		_$J(window).unload(Mail.clearPreview);
 		
 		Mail.getFolders();
 	},
@@ -867,7 +870,7 @@ var Mail = {
 			clearTimeout(this.scrollTimer);
 		}
 		
-		this.scrollTimer = setTimeout("Mail.getPreviewSection()", 500);
+		this.scrollTimer = setTimeout("Mail.renderPreviewSection()", 500);
 	},
 	
 	onSortClick : function() {
@@ -1036,14 +1039,10 @@ var Mail = {
 		return popup;
 	},
 	
-	renderPreviewSection : function(count) {
+	renderPreviewSection : function() {
 		var mailObject = Mail.mailObject;
 		var totalMsgs = mailObject.headers.length;
 		
-		if (count == null) {
-			count = 0;
-		}
-
 		var msgsState = document.getElementById("portlet-mail-msgs-state");
 		var msgsSender = document.getElementById("portlet-mail-msgs-from");
 		var msgsSubject = document.getElementById("portlet-mail-msgs-subject");
@@ -1052,14 +1051,18 @@ var Mail = {
 		var summaryList = Mail.summaryList;
 		
 		var SECTION_SIZE = 25;
-		var begin = Math.pow(count, 3);
-		if (count == 0) {
-			count++;
-		}
-		var end = Math.pow(count + 1, 3) - 1;
+		var begin = Mail.previewLast + 1;
+		var end = 25;
 
-		if (end > (totalMsgs - 1)) {
-			end = totalMsgs - 1;
+		if (Mail.previewHeight) {
+			var previewPane = document.getElementById("portlet-mail-msgs-preview-pane");
+			end = Math.ceil(previewPane.scrollTop / Mail.previewHeight) + 25;
+			if (end > (totalMsgs - 1)) {
+				end = totalMsgs - 1;
+			}
+			if (end <= Mail.previewLast) {
+				return;
+			}
 		}
 
 		for (var i = begin; i <= end; i++) { 
@@ -1121,12 +1124,15 @@ var Mail = {
 		
 		if (end < (totalMsgs - 1)) {
 			var rowHeight = summaryList.head.head.offsetHeight;
+			Mail.previewHeight = rowHeight;
 			msgsSender.style.height = (totalMsgs * rowHeight) + "px";
-			setTimeout("Mail.renderPreviewSection(" + (count + 1) + ")", 1);
+			//setTimeout("Mail.renderPreviewSection(" + (count + 1) + ")", 1);
 		}
 		else {
 			msgsSender.style.height = "auto";
 		}
+		
+		Mail.previewLast = end;
 	},
 
 	scrollToSelected : function() {
