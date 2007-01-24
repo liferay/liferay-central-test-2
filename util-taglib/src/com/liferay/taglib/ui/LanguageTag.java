@@ -23,8 +23,16 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
+import com.liferay.util.servlet.StringServletResponse;
 
-import javax.servlet.ServletRequest;
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.jsp.JspException;
 
 /**
  * <a href="LanguageTag.java.html"><b><i>View Source</i></b></a>
@@ -42,16 +50,55 @@ public class LanguageTag extends IncludeTag {
 
 	public static final int SELECT_BOX = 3;
 
-	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+	public static void doTag(
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
 
-		req.setAttribute("liferay-ui:language:formName", _formName);
-		req.setAttribute("liferay-ui:language:formAction", _formAction);
-		req.setAttribute("liferay-ui:language:name", _name);
+		doTag(
+			_PAGE, _FORM_NAME, _FORM_ACTION, _NAME, _DISPLAY_STYLE, ctx, req,
+			res);
+	}
+
+	public static void doTag(
+			String formName, String formAction, String name, int displayStyle,
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
+		throws IOException, ServletException {
+
+		doTag(_PAGE, formName, formAction, name, displayStyle, ctx, req, res);
+	}
+
+	public static void doTag(
+			String page, String formName, String formAction, String name,
+			int displayStyle, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
+		throws IOException, ServletException {
+
+		req.setAttribute("liferay-ui:language:formName", formName);
+		req.setAttribute("liferay-ui:language:formAction", formAction);
+		req.setAttribute("liferay-ui:language:name", name);
 		req.setAttribute(
-			"liferay-ui:language:displayStyle", String.valueOf(_displayStyle));
+			"liferay-ui:language:displayStyle", String.valueOf(displayStyle));
 
-		return EVAL_BODY_BUFFERED;
+		RequestDispatcher rd = ctx.getRequestDispatcher(page);
+
+		rd.include(req, res);
+	}
+
+	public int doStartTag() throws JspException {
+		try {
+			ServletContext ctx = getServletContext();
+			HttpServletRequest req = getServletRequest();
+			StringServletResponse res = getServletResponse();
+
+			doTag(_formName, _formAction, _name, _displayStyle, ctx, req, res);
+
+			pageContext.getOut().print(res.getString());
+
+			return EVAL_BODY_BUFFERED;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
 	}
 
 	public void setFormName(String formName) {
@@ -76,9 +123,17 @@ public class LanguageTag extends IncludeTag {
 
 	private static final String _PAGE = "/html/taglib/ui/language/page.jsp";
 
-	private String _formName = "fm";
-	private String _formAction;
-	private String _name = "languageId";
-	private int _displayStyle;
+	private static final String _FORM_NAME = "fm";
+
+	private static final String _FORM_ACTION = null;
+
+	private static final String _NAME = "languageId";
+
+	private static final int _DISPLAY_STYLE = 0;
+
+	private String _formName = _FORM_NAME;
+	private String _formAction = _FORM_ACTION;
+	private String _name = _NAME;
+	private int _displayStyle = _DISPLAY_STYLE;
 
 }

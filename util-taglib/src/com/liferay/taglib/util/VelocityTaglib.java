@@ -41,6 +41,7 @@ import com.liferay.taglib.security.PermissionsURLTag;
 import com.liferay.taglib.theme.LayoutIconTag;
 import com.liferay.taglib.theme.MetaTagsTag;
 import com.liferay.taglib.ui.JournalContentSearchTag;
+import com.liferay.taglib.ui.LanguageTag;
 import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.ToggleTag;
@@ -263,6 +264,39 @@ public class VelocityTaglib {
 		_res.recycle();
 
 		JournalContentSearchTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String language() throws Exception {
+		_res.recycle();
+
+		LanguageTag.doTag(_ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String language(
+			String formName, String formAction, String name, int displayStyle)
+		throws Exception {
+
+		_res.recycle();
+
+		LanguageTag.doTag(
+			formName, formAction, name, displayStyle, _ctx, _req, _res);
+
+		return _res.getString();
+	}
+
+	public String language(
+			String page, String formName, String formAction, String name,
+			int displayStyle)
+		throws Exception {
+
+		_res.recycle();
+
+		LanguageTag.doTag(
+			page, formName, formAction, name, displayStyle, _ctx, _req, _res);
 
 		return _res.getString();
 	}
