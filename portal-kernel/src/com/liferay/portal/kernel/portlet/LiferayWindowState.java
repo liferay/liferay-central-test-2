@@ -66,14 +66,16 @@ public class LiferayWindowState extends WindowState {
 		// Changes to EXCLUSIVE are always preserved
 
 		if ((newWindowState != null) &&
-				newWindowState.equals(LiferayWindowState.EXCLUSIVE)) {
+			(newWindowState.equals(LiferayWindowState.EXCLUSIVE))) {
+
 			return true;
 		}
 
 		// Some window states are automatically preserved
 
 		if ((oldWindowState != null) &&
-				oldWindowState.equals(LiferayWindowState.POP_UP)) {
+			(oldWindowState.equals(LiferayWindowState.POP_UP))) {
+
 			return false;
 		}
 		else {
