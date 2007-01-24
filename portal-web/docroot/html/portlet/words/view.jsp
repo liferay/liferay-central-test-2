@@ -38,7 +38,7 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 
 <input class="form-text" name="<portlet:namespace />word" type="text" value="<%= word %>">
 
-<select option="<portlet:namespace />scramble">
+<select name="<portlet:namespace />scramble">
 	<option <%= scramble ? "selected" : "" %> value="1"><%= LanguageUtil.get(pageContext, "scramble") %></option>
 	<option <%= !scramble ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "unscramble") %></option>
 </select>
