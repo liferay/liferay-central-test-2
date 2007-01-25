@@ -128,7 +128,7 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 				role.getPrimaryKey().toString());
 		}
 
-		if (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) {
+		if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
 			UserGroupRoleLocalServiceUtil.deleteUserGroupRolesByRoleId(
 				role.getRoleId());
 		}

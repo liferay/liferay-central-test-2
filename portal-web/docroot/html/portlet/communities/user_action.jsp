@@ -40,4 +40,4 @@ Group group = (Group)objArray[1];
 	<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 </portlet:renderURL>
 
-<liferay-ui:icon image="assign" url="<%= assignURL %>" message="user-community-roles" />
+<liferay-ui:icon image="delegate" url="<%= assignURL %>" message="user-community-roles" />

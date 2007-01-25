@@ -29,6 +29,8 @@ import com.liferay.portal.service.UserGroupRoleLocalService;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
 
+import java.util.List;
+
 /**
  * <a href="UserGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -124,6 +126,12 @@ public class UserGroupRoleLocalServiceImpl
 		throws SystemException {
 
 		UserGroupRoleUtil.removeByUserId(userId);
+	}
+
+	public List findUserGroupRoles(String userId, long groupId)
+			throws PortalException, SystemException {
+
+		return UserGroupRoleUtil.findByU_G(userId, groupId);
 	}
 
 	public boolean hasUserGroupRole(String userId, long groupId, String roleId)

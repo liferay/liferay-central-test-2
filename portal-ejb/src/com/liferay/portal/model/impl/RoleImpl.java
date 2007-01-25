@@ -43,7 +43,7 @@ public class RoleImpl extends RoleModelImpl implements Role {
 
 	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
 
-	public static final int TYPE_COMMUNITY_TEMPLATE = 2;
+	public static final int TYPE_COMMUNITY = 2;
 
 	public static final int TYPE_REGULAR = 1;
 

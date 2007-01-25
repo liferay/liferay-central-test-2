@@ -273,7 +273,7 @@ if (Validator.isNotNull(modelResource)) {
 			ResultRow row = new ResultRow(actionId, actionId, i);
 
 			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 
 			row.addText(selResourceName);
@@ -509,7 +509,7 @@ if (Validator.isNotNull(modelResource)) {
 			String actionId = (String)actions.get(i);
 
 			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupTemplateScope = (role.getType() == RoleImpl.TYPE_COMMUNITY) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
 			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), selResource, ResourceImpl.TYPE_CLASS, ResourceImpl.SCOPE_GROUP, actionId);
 		%>
 
@@ -530,7 +530,7 @@ if (Validator.isNotNull(modelResource)) {
 									</c:if>
 							</select>
 						</c:when>
-						<c:when test="<%= role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE %>">
+						<c:when test="<%= role.getType() == RoleImpl.TYPE_COMMUNITY %>">
 							<liferay-ui:input-checkbox
 								param='<%= "scope" + actionId %>'
 								defaultValue="<%= hasGroupTemplateScope %>"

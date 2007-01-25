@@ -72,7 +72,9 @@ String tabs1 = (String)objArray[1];
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="delegate" message="assign-user-roles" url="<%= assignUserRolesURL %>" />
+</c:if>
 
+<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignUserPermissionsURL">
 		<portlet:param name="struts_action" value="/communities/edit_user_permissions" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -80,9 +82,7 @@ String tabs1 = (String)objArray[1];
 	</portlet:renderURL>
 
 	<liferay-ui:icon image="delegate" message="assign-user-permissions" url="<%= assignUserPermissionsURL %>" />
-</c:if>
 
-<c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />

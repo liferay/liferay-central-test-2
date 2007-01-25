@@ -91,10 +91,10 @@ String roleId = BeanParamUtil.getString(role, request, "roleId");
 					<c:when test="<%= role == null %>">
 						<select name="<portlet:namespace/>type">
 							<option value="<%= RoleImpl.TYPE_REGULAR %>"><%=LanguageUtil.get(pageContext, "regular")%></option>
-							<option value="<%= RoleImpl.TYPE_COMMUNITY_TEMPLATE %>"><%=LanguageUtil.get(pageContext, "community-template")%></option>
+							<option value="<%= RoleImpl.TYPE_COMMUNITY %>"><%=LanguageUtil.get(pageContext, "community")%></option>
 					</c:when>
 					<c:otherwise>
-						<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community-template") %>
+						<%= LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community") %>
 					</c:otherwise>
 				</c:choose>
 			</td>

@@ -126,11 +126,11 @@ Assign Community Template roles to users.
 			<%
 			RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY_TEMPLATE));
+			int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY));
 
 			searchContainer.setTotal(total);
 
-			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY_TEMPLATE), searchContainer.getStart(), searchContainer.getEnd());
+			List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(RoleImpl.TYPE_COMMUNITY), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
 			%>
@@ -160,7 +160,7 @@ Assign Community Template roles to users.
 
 				// Type
 
-				row.addText(LanguageUtil.get(pageContext, (curRole.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community-template"), rowURL);
+				row.addText(LanguageUtil.get(pageContext, (curRole.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community"), rowURL);
 
 				// Add result row
 

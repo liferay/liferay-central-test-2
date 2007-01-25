@@ -601,7 +601,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Type
 
-				row.addText(LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community-template"), rowURL);
+				row.addText(LanguageUtil.get(pageContext, (role.getType() == RoleImpl.TYPE_REGULAR) ? "regular" : "community"), rowURL);
 
 				// Action
 

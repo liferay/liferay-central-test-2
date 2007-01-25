@@ -159,7 +159,7 @@ public class EditRolePermissionsAction extends PortletAction {
 					actionId);
 			}
 			else if (scope.equals(ResourceImpl.SCOPE_GROUP)) {
-				if (role.getType() == RoleImpl.TYPE_COMMUNITY_TEMPLATE) {
+				if (role.getType() == RoleImpl.TYPE_COMMUNITY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
 						ResourceImpl.TYPE_CLASS,

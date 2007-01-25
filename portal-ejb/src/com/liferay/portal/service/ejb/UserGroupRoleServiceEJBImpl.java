@@ -38,6 +38,15 @@ import javax.ejb.SessionContext;
  */
 public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 	SessionBean {
+	public void addUserGroupRoles(java.lang.String userId, long groupId,
+		java.lang.String[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		UserGroupRoleServiceFactory.getTxImpl().addUserGroupRoles(userId,
+			groupId, roleIds);
+	}
+
 	public void addUserGroupRoles(java.lang.String[] userIds, long groupId,
 		java.lang.String roleId)
 		throws com.liferay.portal.PortalException, 
@@ -45,6 +54,15 @@ public class UserGroupRoleServiceEJBImpl implements UserGroupRoleService,
 		PrincipalSessionBean.setThreadValues(_sc);
 		UserGroupRoleServiceFactory.getTxImpl().addUserGroupRoles(userIds,
 			groupId, roleId);
+	}
+
+	public void deleteUserGroupRoles(java.lang.String userId, long groupId,
+		java.lang.String[] roleIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+		UserGroupRoleServiceFactory.getTxImpl().deleteUserGroupRoles(userId,
+			groupId, roleIds);
 	}
 
 	public void deleteUserGroupRoles(java.lang.String[] userIds, long groupId,
