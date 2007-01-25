@@ -61,7 +61,7 @@
 		function <portlet:namespace />changeColor(elem) {
 			var color = elem.style.backgroundColor;
 
-			$("<portlet:namespace />pad").style.backgroundColor = color;
+			_$J("#<portlet:namespace />pad").get(0).style.backgroundColor = color;
 
 			var url =
 				"<%= themeDisplay.getPathMain() %>/quick_note/save?" +
