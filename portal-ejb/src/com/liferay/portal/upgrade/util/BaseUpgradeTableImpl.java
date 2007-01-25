@@ -51,6 +51,8 @@ import java.sql.Types;
 import java.text.DateFormat;
 
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -69,6 +71,7 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 	public BaseUpgradeTableImpl(String tableName, Object[][] columns) {
 		_tableName = tableName;
 		_columns = columns;
+		_pkMap = new HashMap();
 	}
 
 	public String getTableName() {
@@ -126,51 +129,13 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 			boolean last)
 		throws Exception {
 
-		Object value = null;
-
-		int t = type.intValue();
-
-		UserType userType = null;
-
-		if (t == Types.BIGINT) {
-			userType = new LongType();
-		}
-		else if (t == Types.BOOLEAN) {
-			userType = new BooleanType();
-		}
-		else if (t == Types.TIMESTAMP) {
-			try {
-				value = rs.getObject(name);
-			}
-			catch (Exception e) {
-			}
-
-			if (value == null) {
-				value = new Date();
-			}
-		}
-		else if (t == Types.FLOAT) {
-			userType = new FloatType();
-		}
-		else if (t == Types.INTEGER) {
-			userType = new IntegerType();
-		}
-		else if (t == Types.SMALLINT) {
-			userType = new ShortType();
-		}
-		else if (t == Types.VARCHAR) {
-			value = GetterUtil.getString(rs.getString(name));
-		}
-		else {
-			throw new UpgradeException(
-				"Upgrade code using unsupported class type " + type);
-		}
-
-		if (userType != null) {
-			value = userType.nullSafeGet(rs, new String[] {name}, null);
-		}
+		Object value = getValue(rs, name, type);
 
 		appendColumn(sb, value, last);
+	}
+
+	public void appendPKMap(Object oldPK, Object newPK) {
+		_pkMap.put(oldPK, newPK);
 	}
 
 	public String getDeleteSQL() throws Exception {
@@ -222,6 +187,59 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		return sql;
 	}
 
+	public Map getPKMap() {
+		return _pkMap;
+	}
+
+	public Object getValue(ResultSet rs, String name, Integer type)
+		throws Exception {
+
+		Object value = null;
+
+		int t = type.intValue();
+
+		UserType userType = null;
+
+		if (t == Types.BIGINT) {
+			userType = new LongType();
+		}
+		else if (t == Types.BOOLEAN) {
+			userType = new BooleanType();
+		}
+		else if (t == Types.TIMESTAMP) {
+			try {
+				value = rs.getObject(name);
+			}
+			catch (Exception e) {
+			}
+
+			if (value == null) {
+				value = new Date();
+			}
+		}
+		else if (t == Types.FLOAT) {
+			userType = new FloatType();
+		}
+		else if (t == Types.INTEGER) {
+			userType = new IntegerType();
+		}
+		else if (t == Types.SMALLINT) {
+			userType = new ShortType();
+		}
+		else if (t == Types.VARCHAR) {
+			value = GetterUtil.getString(rs.getString(name));
+		}
+		else {
+			throw new UpgradeException(
+				"Upgrade code using unsupported class type " + type);
+		}
+
+		if (userType != null) {
+			value = userType.nullSafeGet(rs, new String[] {name}, null);
+		}
+		return value;
+	}
+
 	public void setColumn(
 			PreparedStatement ps, int index, Integer type, String value)
 		throws Exception {
@@ -267,6 +285,8 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
+		boolean hasContents = false;
+
 		String tempFilename =
 			"temp-db-" + _tableName + "-" + System.currentTimeMillis();
 
@@ -283,6 +303,8 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 
 			while (rs.next()) {
 				bw.write(getExportedData(rs));
+
+				hasContents = true;
 			}
 
 			_log.info(_tableName + " table backed up to file " + tempFilename);
@@ -293,51 +315,55 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 			bw.close();
 		}
 
-		Statement stmt = null;
+		if (hasContents) {
+			Statement stmt = null;
 
-		try {
-			con = HibernateUtil.getConnection();
+			try {
+				con = HibernateUtil.getConnection();
 
-			stmt = con.createStatement();
+				stmt = con.createStatement();
 
-			stmt.executeUpdate(getDeleteSQL());
-		}
-		finally {
-			DataAccess.cleanUp(con, stmt);
-		}
-
-		String insertSQL = getInsertSQL();
-
-		BufferedReader br = new BufferedReader(new FileReader(tempFilename));
-
-		String line = null;
-
-		try {
-			con = HibernateUtil.getConnection();
-
-			while ((line = br.readLine()) != null) {
-				String[] values = StringUtil.split(line);
-
-				if (values.length != _columns.length) {
-					throw new UpgradeException(
-						"Columns differ between temp file and schema");
-				}
-
-				ps = con.prepareStatement(insertSQL);
-
-				for (int i = 0; i < values.length; i++) {
-					setColumn(ps, i + 1, (Integer)_columns[i][1], values[i]);
-				}
-
-				ps.executeUpdate();
-
-				ps.close();
+				stmt.executeUpdate(getDeleteSQL());
 			}
-		}
-		finally {
-			DataAccess.cleanUp(con, ps);
+			finally {
+				DataAccess.cleanUp(con, stmt);
+			}
 
-			br.close();
+			String insertSQL = getInsertSQL();
+
+			BufferedReader br =
+				new BufferedReader(new FileReader(tempFilename));
+
+			String line = null;
+
+			try {
+				con = HibernateUtil.getConnection();
+
+				while ((line = br.readLine()) != null) {
+					String[] values = StringUtil.split(line);
+
+					if (values.length != _columns.length) {
+						throw new UpgradeException(
+							"Columns differ between temp file and schema");
+					}
+
+					ps = con.prepareStatement(insertSQL);
+
+					for (int i = 0; i < values.length; i++) {
+						setColumn(
+							ps, i + 1, (Integer)_columns[i][1], values[i]);
+					}
+
+					ps.executeUpdate();
+
+					ps.close();
+				}
+			}
+			finally {
+				DataAccess.cleanUp(con, ps);
+
+				br.close();
+			}
 		}
 
 		FileUtil.delete(tempFilename);
@@ -352,5 +378,6 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 
 	private String _tableName;
 	private Object[][] _columns;
+	private Map _pkMap;
 
 }

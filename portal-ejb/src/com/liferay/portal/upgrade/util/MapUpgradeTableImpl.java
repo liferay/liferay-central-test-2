@@ -22,33 +22,36 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.counter.model.Counter;
-import com.liferay.counter.service.CounterLocalServiceUtil;
-
 import java.sql.ResultSet;
 
+import java.util.Map;
+
 /**
- * This implementation handles a simple upgrade of a table with a primary key of
- * type long.  It simply reads and reinserts all of the table's entries.
+ * This implementation handles a simple upgrade of any mapping table.  It reads
+ * and reinserts all of the table's entries with one ID remapped.
  *
- * <a href="LongPKUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="MapUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
- * @author  Brian Wing Shun Chan
  *
  */
-public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
+public class MapUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 	/**
 	 * Constructor.
 	 *
-	 * @param tableName	Name of table to upgrade
+	 * @param tableName	Name of mapping table to upgrade
 	 * @param columns	Columns specified by {name,sql.Type} pairs.  Order does
-	 * not matter with the exception that the first entry should be the primary
-	 * key.
+	 * not matter with the exception that the first entry should be the ID that
+	 * needs to be updated.
+	 * @param idMap		ID mapping between the old and new.
 	 */
-	public LongPKUpgradeTableImpl(String tableName, Object[][] columns) {
+	public MapUpgradeTableImpl(
+			String tableName, Object[][] columns, Map idMap) {
+
 		super(tableName, columns);
+
+		_idMap = idMap;
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {
@@ -56,12 +59,10 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 		Object[][] columns = getColumns();
 
-		Long id = new Long(
-			CounterLocalServiceUtil.increment(Counter.class.getName()));
+		Object value =
+			getValue(rs,  (String)columns[0][0], (Integer)columns[0][1]);
 
-		appendPKMap(new Long(rs.getLong((String)columns[0][0])), id);
-
-		appendColumn(sb, id);
+		appendColumn(sb, _idMap.get(value));
 
 		for (int i = 1; i < columns.length; i++) {
 			boolean last = false;
@@ -76,5 +77,7 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 		return sb.toString();
 	}
+
+	private Map _idMap;
 
 }

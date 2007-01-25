@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
@@ -152,7 +153,7 @@ public class ResourceLocalServiceImpl implements ResourceLocalService {
 
 		if (resource == null) {
 			long resourceId = CounterLocalServiceUtil.increment(
-				Resource.class.getName());
+				Counter.class.getName());
 
 			resource = ResourceUtil.create(resourceId);
 			resource.setCompanyId(companyId);

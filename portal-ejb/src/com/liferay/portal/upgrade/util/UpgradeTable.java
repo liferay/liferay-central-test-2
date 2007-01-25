@@ -25,6 +25,8 @@ package com.liferay.portal.upgrade.util;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
+import java.util.Map;
+
 /**
  * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
  *
@@ -48,11 +50,15 @@ public interface UpgradeTable {
 			boolean last)
 		throws Exception;
 
+	public void appendPKMap(Object oldPK, Object newPK);
+
 	public String getDeleteSQL() throws Exception;
 
 	public String getInsertSQL() throws Exception;
 
 	public String getSelectSQL() throws Exception;
+
+	public Map getPKMap();
 
 	public void setColumn(
 			PreparedStatement ps, int index, Integer type, String value)

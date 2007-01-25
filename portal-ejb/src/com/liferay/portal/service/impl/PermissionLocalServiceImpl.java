@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.NoSuchPermissionException;
 import com.liferay.portal.NoSuchResourceException;
@@ -477,7 +478,7 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 		}
 		catch (NoSuchPermissionException nspe) {
 			long permissionId =	CounterLocalServiceUtil.increment(
-				Permission.class.getName());
+				Counter.class.getName());
 
 			permission = PermissionUtil.create(permissionId);
 
