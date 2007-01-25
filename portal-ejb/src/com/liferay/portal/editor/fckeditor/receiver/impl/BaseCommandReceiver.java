@@ -26,6 +26,7 @@ import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.editor.fckeditor.receiver.CommandReceiver;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
@@ -168,7 +169,24 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				arg, fileName, fileItem.getStoreLocation(), extension);
 		}
 		catch (FCKException fcke) {
-			_writeUploadResponse("203", res);
+			Throwable cause = fcke.getCause();
+
+			returnValue = "205";
+
+			if (cause != null) {
+				String causeString = GetterUtil.getString(cause.toString());
+
+				if ((causeString.indexOf("NoSuchFolderException") != -1) ||
+					(causeString.indexOf("NoSuchGroupException") != -1)) {
+
+					returnValue = "203";
+				}
+				else if (causeString.indexOf("ImageNameException") != -1) {
+					returnValue = "204";
+				}
+			}
+
+			_writeUploadResponse(returnValue, res);
 
 			throw fcke;
 		}
@@ -255,7 +273,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 			DOMSource source = new DOMSource(doc);
 
-			if (_log.isDebugEnabled()){
+			if (_log.isDebugEnabled()) {
 				StreamResult result = new StreamResult(System.out);
 
 				transformer.transform(source, result);
@@ -273,7 +291,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			out.flush();
 			out.close();
 		}
-		catch (Exception e){
+		catch (Exception e) {
 			throw new FCKException(e);
 		}
 	}

@@ -28,7 +28,7 @@ function SetCurrentFolder( resourceType, folderPath )
 	var sUrl = oConnector.ConnectorUrl + 'Command=FileUpload' ;
 	sUrl += '&Type=' + resourceType ;
 	sUrl += '&CurrentFolder=' + escape( folderPath ) ;
-	
+
 	document.getElementById('frmUpload').action = sUrl ;
 }
 
@@ -81,7 +81,11 @@ function OnUploadCompleted( errorNumber, data )
 		// Liferay
 
 		case 203 :
-			alert( 'You cannot upload into the root folder' ) ;
+			alert( 'You cannot upload into the root folder or community folders.  Files can only be uploaded into user created folders.' ) ;
+			break ;
+
+		case 204 :
+			alert( 'Invalid file extension, make sure that you are uploading the correct file type.' ) ;
 			break ;
 
 		default :
