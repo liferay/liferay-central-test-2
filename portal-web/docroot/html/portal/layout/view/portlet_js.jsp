@@ -163,14 +163,14 @@ function minimizePortlet(plid, portletId, restore, doAsUserId) {
 
 			loadPage("<%= themeDisplay.getPathMain() %>/portal/update_layout", "p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize");
 
-			slideMaximize("p_p_body_" + portletId, 1, 20);
+			Liferay.Util.slideMaximize("p_p_body_" + portletId, 1, 20);
 		}
 		else {
 			var portletEl = document.getElementById("p_p_body_" + portletId);
 
 			portletEl.style.overflow = "hidden";
 
-			slideMinimize("p_p_body_" + portletId, portletEl.offsetHeight, 20);
+			Liferay.Util.slideMinimize("p_p_body_" + portletId, portletEl.offsetHeight, 20);
 
 			var buttonsEl = document.getElementById("p_p_body_" + portletId + "_min_buttons");
 

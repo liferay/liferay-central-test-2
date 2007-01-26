@@ -122,8 +122,8 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 			parent.Alerts.resizeIframe({height: box.scrollHeight});
 		}
 
-		Event.addHandler(window, "onload", <portlet:namespace />resizeParent);
-		Event.addHandler(document, "onclick", <portlet:namespace />resizeParent);
+		_$J(document).ready(<portlet:namespace />resizeParent);
+		_$J(document).click(<portlet:namespace />resizeParent);
 	</c:if>
 
 	function <portlet:namespace />savePage() {
@@ -147,7 +147,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 
 	function <portlet:namespace />updateDisplayOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "display_order";
-		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
+		document.<portlet:namespace />fm.<portlet:namespace />layoutIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -163,7 +163,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
 
 		if (themeRadio.length) {
-			themeRadio[getSelectedIndex(themeRadio)].value = themeId;
+			themeRadio[Liferay.Util.getSelectedIndex(themeRadio)].value = themeId;
 		}
 		else {
 			themeRadio.value = themeId;
@@ -172,7 +172,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 		var colorSchemeRadio = document.<portlet:namespace />fm.<portlet:namespace />colorSchemeId;
 
 		if (colorSchemeRadio.length) {
-			colorSchemeRadio[getSelectedIndex(colorSchemeRadio)].value = colorSchemeId;
+			colorSchemeRadio[Liferay.Util.getSelectedIndex(colorSchemeRadio)].value = colorSchemeId;
 		}
 		else {
 			colorSchemeRadio.value = colorSchemeId;
@@ -764,9 +764,9 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 						</td>
 						<td style="padding-left: 10px;"></td>
 						<td valign="top">
-							<a href="javascript: reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_up.gif" vspace="2" width="16"></a><br>
-							<a href="javascript: reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_down.gif" vspace="2" width="16"></a><br>
-							<a href="javascript: removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_x.gif" vspace="2" width="16"></a><br>
+							<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_up.gif" vspace="2" width="16"></a><br>
+							<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_down.gif" vspace="2" width="16"></a><br>
+							<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />layoutIdsBox);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_x.gif" vspace="2" width="16"></a><br>
 						</td>
 					</tr>
 					</table>

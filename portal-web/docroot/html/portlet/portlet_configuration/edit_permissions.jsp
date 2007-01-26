@@ -110,14 +110,14 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			parent.Alerts.resizeIframe({height: box.scrollHeight});
 		}
 
-		Event.addHandler(window, "onload", <portlet:namespace />resizeParent);
-		Event.addHandler(document, "onclick", <portlet:namespace />resizeParent);
+		_$J(document).ready(<portlet:namespace />resizeParent);
+		_$J(document).click(<portlet:namespace />resizeParent);
 	</c:if>
 
 	function <portlet:namespace />saveGroupPermissions() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "group_permissions";
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= portletURL.toString() %>";
-		document.<portlet:namespace />fm.<portlet:namespace />groupIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		document.<portlet:namespace />fm.<portlet:namespace />groupIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
@@ -140,7 +140,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveOrganizationPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />organizationIds=" + organizationIds + "&<portlet:namespace />organizationIdsPos=" + organizationIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = organizationIds;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIdsPosValue.value = organizationIdsPosValue;
-		document.<portlet:namespace />fm.<portlet:namespace />organizationIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		document.<portlet:namespace />fm.<portlet:namespace />organizationIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
@@ -163,7 +163,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroupIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdsPosValue.value = userGroupIdsPosValue;
-		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
@@ -186,22 +186,22 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
-		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= windowState.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateOrganizationPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />updateUserGroupPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 
 	function <portlet:namespace />updateUserPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>

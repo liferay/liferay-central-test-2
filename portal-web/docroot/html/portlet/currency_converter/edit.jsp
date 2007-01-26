@@ -73,6 +73,6 @@ Collections.sort(rightList, new KeyValuePairComparator(false, true));
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />symbols.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions); submitForm(document.<portlet:namespace />fm);">
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />symbols.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions); submitForm(document.<portlet:namespace />fm);">
 
 </form>

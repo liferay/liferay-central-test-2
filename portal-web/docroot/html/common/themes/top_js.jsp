@@ -57,7 +57,6 @@
 		with the ant build-javascript task.
 		--%>
 
-		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/everything.js" type="text/javascript"></script>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.JAVASCRIPT_LOG_ENABLED)) %>">
@@ -66,10 +65,11 @@
 	</c:when>
 	<c:otherwise>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/jquery.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/class.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/cookie.js" type="text/javascript"></script>
+
+		<script src="<%= themeDisplay.getPathJavaScript() %>/class.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/sniffer.js" type="text/javascript"></script>
-		<script src="<%= themeDisplay.getPathJavaScript() %>/util.js" type="text/javascript"></script>
+		<script src="<%= themeDisplay.getPathJavaScript() %>/liferay.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/portal.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/ajax.js" type="text/javascript"></script>
 		<script src="<%= themeDisplay.getPathJavaScript() %>/alerts.js" type="text/javascript"></script>

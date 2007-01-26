@@ -145,12 +145,12 @@ if (Validator.isNotNull(modelResource)) {
 		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
-		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
+		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_user_permissions" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />updateUserPermissions() {
-		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>

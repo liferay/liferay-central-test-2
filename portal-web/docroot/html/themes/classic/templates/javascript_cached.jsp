@@ -27,7 +27,7 @@
 LayoutColumns.highlight = "<%= colorScheme.getBodyBg() %>";
 
 if (!is_ie) {
-	Event.addHandler(window, "onscroll", function() {
+	_$J(window).scroll(function() {
 		if (document.body.scrollHeight) {
 			document.getElementById("layout-outer-side-decoration").style.height = (document.body.scrollHeight) + "px";
 		}

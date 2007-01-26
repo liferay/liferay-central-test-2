@@ -245,24 +245,24 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 		<select name="<portlet:namespace />type"
 			onChange="
 				if (this[this.selectedIndex].value == 0) {
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, lengthArray);
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, lengthArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, lengthArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, lengthArray);
 				}
 				else if (this[this.selectedIndex].value == 1) {
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, areaArray);
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, areaArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, areaArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, areaArray);
 				}
 				else if (this[this.selectedIndex].value == 2) {
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, volumeArray);
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, volumeArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, volumeArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, volumeArray);
 				}
 				else if (this[this.selectedIndex].value == 3) {
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, massArray);
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, massArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, massArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, massArray);
 				}
 				else if (this[this.selectedIndex].value == 4) {
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, temperatureArray);
-					setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, temperatureArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />fromId, temperatureArray);
+					Liferay.Util.setBox(document.<portlet:namespace />fm.<portlet:namespace />toId, temperatureArray);
 				}"
 		>
 			<option <%= (type == 0) ? "selected" : "" %> value="0"><%= LanguageUtil.get(pageContext, "length") %></option>

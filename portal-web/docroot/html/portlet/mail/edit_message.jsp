@@ -67,7 +67,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 		newRow.id = "<portlet:namespace />file" + <portlet:namespace />fileIndex;
 
 		if (remoteFile == null) {
-			var browser = document.createInputElement("<portlet:namespace />attachment" + <portlet:namespace />fileIndex);
+			var browser = Liferay.Util.createInputElement("<portlet:namespace />attachment" + <portlet:namespace />fileIndex);
 
 			browser.type = "file";
 			browser.size = "30";
@@ -86,7 +86,7 @@ List attachments = (List)request.getAttribute(WebKeys.MAIL_MESSAGE_ATTACHMENTS);
 			newRow.insertCell(2).appendChild(del);
 		}
 		else {
-			var checkbox = document.createInputElement("<portlet:namespace />remoteAttachment" + remoteFile);
+			var checkbox = Liferay.Util.createInputElement("<portlet:namespace />remoteAttachment" + remoteFile);
 
 			checkbox.type = "checkbox";
 			checkbox.checked = true;

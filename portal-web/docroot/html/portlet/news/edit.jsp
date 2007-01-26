@@ -148,7 +148,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<br>
 
-				<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);">
+				<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);">
 
 				<input class="portlet-form-button" type="button" value="<bean:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';">
 			</c:otherwise>
@@ -191,9 +191,9 @@ portletURL.setParameter("tabs1", tabs1);
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td valign="top">
-				<a href="javascript: reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_up.gif" vspace="2" width="16"></a><br>
-				<a href="javascript: reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_down.gif" vspace="2" width="16"></a><br>
-				<a href="javascript: removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_x.gif" vspace="2" width="16"></a><br>
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_up.gif" vspace="2" width="16"></a><br>
+				<a href="javascript: Liferay.Util.reorder(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_down.gif" vspace="2" width="16"></a><br>
+				<a href="javascript: Liferay.Util.removeItem(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImage() %>/arrows/02_x.gif" vspace="2" width="16"></a><br>
 			</td>
 		</tr>
 		</table>
@@ -226,7 +226,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);">
+		<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />feeds_sel); submitForm(document.<portlet:namespace />fm);">
 	</c:when>
 </c:choose>
 

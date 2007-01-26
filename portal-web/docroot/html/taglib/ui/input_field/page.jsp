@@ -233,10 +233,10 @@ Map hints = ModelHintsUtil.getHints(model, field);
 					}
 					%>
 
-					<input class="form-text" <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="checkMaxLength(this, <%= maxLength %>);">
+					<input class="form-text" <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="width: <%= displayWidth %>px; <%= upperCase ? "text-transform: uppercase;" : "" %>" type="text" value="<%= value %>" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);">
 				</c:when>
 				<c:otherwise>
-					<textarea class="form-text" <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="height: <%= displayHeight %>px; width: <%= displayWidth %>px;" wrap="soft" onKeyDown="<%= checkTab ? "checkTab(this); " : "" %> disableEsc();" onKeyPress="checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
+					<textarea class="form-text" <%= disabled ? "disabled" : "" %> id="<%= fieldParam %>" name="<%= fieldParam %>" style="height: <%= displayHeight %>px; width: <%= displayWidth %>px;" wrap="soft" onKeyDown="<%= checkTab ? "Liferay.Util.checkTab(this); " : "" %> disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, <%= maxLength %>);"><%= value %></textarea>
 				</c:otherwise>
 			</c:choose>
 		</c:when>

@@ -56,8 +56,8 @@ String key = PropsUtil.get(PropsUtil.GOOGLE_MAPS_LICENSE);
 				}
 			}
 
-			Event.addHandler(window, "onload", <portlet:namespace />load);
-			Event.addHandler(window, "onunload", GUnload);
+			_$J(document).ready(<portlet:namespace />load);
+			_$J(window).unload(GUnload);
 
 			function <portlet:namespace />getAddress(address) {
 				<portlet:namespace />geocoder.getLatLng(

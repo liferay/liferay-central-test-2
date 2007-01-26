@@ -105,7 +105,7 @@ boolean useEditorApplet = editorType.equals("applet");
 		</applet>
 	</c:when>
 	<c:otherwise>
-		<textarea class="form-text" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px" wrap="off" onKeyDown="checkTab(this); disableEsc();"></textarea>
+		<textarea class="form-text" id="<portlet:namespace />xsdContent" name="<portlet:namespace />xsdContent" style="font-family: 'Courier New', courier, monospace; font-size: 12; width: 100%; height: 540px" wrap="off" onKeyDown="Liferay.Util.checkTab(this); disableEsc();"></textarea>
 	</c:otherwise>
 </c:choose>
 
@@ -114,7 +114,7 @@ boolean useEditorApplet = editorType.equals("applet");
 <input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update") %>' onClick="<portlet:namespace />updateStructureXsd();">
 
 <c:if test="<%= !useEditorApplet %>">
-	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select-and-copy") %>' onClick="selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);">
+	<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "select-and-copy") %>' onClick="Liferay.Util.selectAndCopy(document.<portlet:namespace />fm.<portlet:namespace />xsdContent);">
 </c:if>
 
 <input class="portlet-form-button" type="button" value="<%= LanguageUtil.get(pageContext, "cancel") %>" onClick="self.close();">

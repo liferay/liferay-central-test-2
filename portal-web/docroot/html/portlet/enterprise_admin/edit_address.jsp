@@ -226,7 +226,7 @@ int typeId = BeanParamUtil.getInteger(address, request, "typeId");
 	document.<portlet:namespace />fm.<portlet:namespace />street1.focus();
 
 	function <portlet:namespace />selectCountryPost() {
-		setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
+		Liferay.Util.setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
 	}
 
 	DynamicSelect.create(

@@ -200,7 +200,7 @@ int statusId = BeanParamUtil.getInteger(organization, request, "statusId");
 	document.<portlet:namespace />fm.<portlet:namespace />name.focus();
 
 	function <portlet:namespace />selectCountryPost() {
-		setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
+		Liferay.Util.setSelectedValue(document.<portlet:namespace />fm.<portlet:namespace />regionId, "<%= regionId %>");
 	}
 
 	DynamicSelect.create(

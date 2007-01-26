@@ -225,7 +225,7 @@ if (fileEntry == null) {
 <script type="text/javascript">
 	document.<portlet:namespace />fm.<portlet:namespace />file.focus();
 
-	Event.addHandler(window, "onload", function() {
+	_$J(document).ready(function() {
 		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 	});
 </script>

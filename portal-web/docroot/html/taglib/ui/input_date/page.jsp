@@ -117,15 +117,15 @@ else {
 		if (cal.dateClicked) {
 			<c:choose>
 				<c:when test="<%= monthAndYearParam.equals(namespace) %>">
-					setSelectedValue(document.<%= formName %>.<%= monthParam %>, cal.date.getMonth());
-					setSelectedValue(document.<%= formName %>.<%= yearParam %>, cal.date.getFullYear());
+					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= monthParam %>, cal.date.getMonth());
+					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= yearParam %>, cal.date.getFullYear());
 				</c:when>
 				<c:otherwise>
-					setSelectedValue(document.<%= formName %>.<%= monthAndYearParam %>, cal.date.getMonth() + "_" + cal.date.getFullYear());
+					Liferay.Util.setSelectedValue(document.<%= formName %>.<%= monthAndYearParam %>, cal.date.getMonth() + "_" + cal.date.getFullYear());
 				</c:otherwise>
 			</c:choose>
 
-			setSelectedValue(document.<%= formName %>.<%= dayParam %>, cal.date.getDate());
+			Liferay.Util.setSelectedValue(document.<%= formName %>.<%= dayParam %>, cal.date.getDate());
 
 			cal.callCloseHandler();
 		}

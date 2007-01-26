@@ -186,7 +186,7 @@ boolean showEditGuestIcon = false;
 boolean showHelpIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), PortletMode.HELP);
 boolean showMaxIcon = true;
 boolean showMinIcon = true;
-boolean showMoveIcon = !stateMax;
+boolean showMoveIcon = !stateMax && !themeDisplay.isStateExclusive();
 boolean showPrintIcon = portlet.hasPortletMode(renderResponseImpl.getContentType(), LiferayPortletMode.PRINT);
 
 if (!portletId.equals(PortletKeys.PORTLET_CONFIGURATION)) {
@@ -439,18 +439,16 @@ if (portlet.isActive() && access) {
 <%
 String staticVar = "yes";
 
-if (themeDisplay.isSignedIn() && !themeDisplay.isStateExclusive()) {
-	if (portlet.isStatic() || !portletDisplay.isShowMoveIcon()) {
-		if (portlet.isStaticStart()) {
-			staticVar = "start";
-		}
-
-		if (portlet.isStaticEnd()) {
-			staticVar = "end";
-		}
+if (portletDisplay.isShowMoveIcon()) {
+	staticVar = "no";
+}
+else {
+	if (portlet.isStaticStart()) {
+		staticVar = "start";
 	}
-	else {
-		staticVar = "no";
+
+	if (portlet.isStaticEnd()) {
+		staticVar = "end";
 	}
 }
 %>
