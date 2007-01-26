@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.AddressCityException;
 import com.liferay.portal.AddressStreetException;
@@ -67,7 +68,7 @@ public class AddressLocalServiceImpl implements AddressLocalService {
 			regionId, countryId, typeId, mailing, primary);
 
 		long addressId = CounterLocalServiceUtil.increment(
-			Address.class.getName());
+			Counter.class.getName());
 
 		Address address = AddressUtil.create(addressId);
 
