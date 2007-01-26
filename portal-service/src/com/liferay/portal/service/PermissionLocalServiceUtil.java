@@ -230,10 +230,10 @@ public class PermissionLocalServiceUtil {
 			resourceId);
 	}
 
-	public static void updateResourceId(long oldResourceId, long newResourceId)
+	public static void updateResourceIds(java.util.Map resourceIdMap)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
-		permissionLocalService.updateResourceId(oldResourceId, newResourceId);
+		permissionLocalService.updateResourceIds(resourceIdMap);
 	}
 }

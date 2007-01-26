@@ -32,7 +32,6 @@ import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import java.sql.Types;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -104,15 +103,7 @@ public class UpgradePermissions extends UpgradeProcess {
 
 		Map resourceIdMap = upgradeTable.getPKMap();
 
-		Iterator itr = resourceIdMap.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Long oldId = (Long)itr.next();
-			Long newId = (Long)resourceIdMap.get(oldId);
-
-			PermissionLocalServiceUtil.updateResourceId(
-				oldId.longValue(), newId.longValue());
-		}
+		PermissionLocalServiceUtil.updateResourceIds(resourceIdMap);
 	}
 
 	private static final String _TABLE_PERMISSION = "Permission_";

@@ -139,7 +139,7 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
-	public void updateResourceId(long oldResourceId, long newResourceId)
+	public void updateResourceIds(java.util.Map resourceIdMap)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 }
