@@ -35,7 +35,8 @@ import java.util.Map;
  * @author  Alexander Chow
  *
  */
-public class MapUpgradeTableImpl extends BaseUpgradeTableImpl {
+public class MapUpgradeTableImpl
+	extends BaseUpgradeTableImpl implements UpgradeTable {
 
 	/**
 	 * Constructor.

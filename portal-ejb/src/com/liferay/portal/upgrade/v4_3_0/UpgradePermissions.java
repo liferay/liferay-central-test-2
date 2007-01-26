@@ -27,6 +27,7 @@ import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.LongPKUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.MapUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.PKUpgradeTable;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import java.sql.Types;
@@ -61,7 +62,7 @@ public class UpgradePermissions extends UpgradeProcess {
 
 		// Handle permissions table
 
-		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
+		PKUpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
 			_TABLE_PERMISSION, _COLUMNS_PERMISSION, true);
 
 		upgradeTable.updateTable();
@@ -96,7 +97,7 @@ public class UpgradePermissions extends UpgradeProcess {
 	}
 
 	private void _upgradeResource() throws Exception {
-		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
+		PKUpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
 			_TABLE_RESOURCE, _COLUMNS_RESOURCE, true);
 
 		upgradeTable.updateTable();

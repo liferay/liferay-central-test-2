@@ -51,8 +51,6 @@ import java.sql.Types;
 import java.text.DateFormat;
 
 import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -66,12 +64,11 @@ import org.hibernate.usertype.UserType;
  * @author  Brian Wing Shun Chan
  *
  */
-public abstract class BaseUpgradeTableImpl implements UpgradeTable {
+public abstract class BaseUpgradeTableImpl {
 
 	public BaseUpgradeTableImpl(String tableName, Object[][] columns) {
 		_tableName = tableName;
 		_columns = columns;
-		_pkMap = new HashMap();
 	}
 
 	public String getTableName() {
@@ -134,10 +131,6 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		appendColumn(sb, value, last);
 	}
 
-	public void appendPKMap(Object oldPK, Object newPK) {
-		_pkMap.put(oldPK, newPK);
-	}
-
 	public String getDeleteSQL() throws Exception {
 		return "DELETE FROM " + _tableName;
 	}
@@ -185,10 +178,6 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		}
 
 		return sql;
-	}
-
-	public Map getPKMap() {
-		return _pkMap;
 	}
 
 	public Object getValue(ResultSet rs, String name, Integer type)
@@ -379,6 +368,5 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 
 	private String _tableName;
 	private Object[][] _columns;
-	private Map _pkMap;
 
 }

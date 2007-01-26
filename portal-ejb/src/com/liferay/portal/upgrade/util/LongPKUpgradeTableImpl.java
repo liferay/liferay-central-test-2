@@ -24,8 +24,12 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
 
 import java.sql.ResultSet;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * This implementation handles a simple upgrade of a table with a primary key of
@@ -37,7 +41,8 @@ import java.sql.ResultSet;
  * @author  Brian Wing Shun Chan
  *
  */
-public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
+public class LongPKUpgradeTableImpl
+	extends BaseUpgradeTableImpl implements PKUpgradeTable{
 
 	/**
 	 * Constructor.
@@ -50,7 +55,7 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 	public LongPKUpgradeTableImpl(String tableName, Object[][] columns) {
 		super(tableName, columns);
 
-		_usePKMap = false;
+		_pkMap = null;
 	}
 
 	/**
@@ -67,7 +72,11 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 		super(tableName, columns);
 
-		_usePKMap = usePKMap;
+		_pkMap = new HashMap();
+	}
+
+	public void appendPKMap(Object oldPK, Object newPK) {
+		_pkMap.put(oldPK, newPK);
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {
@@ -78,7 +87,7 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 		Long id = new Long(
 			CounterLocalServiceUtil.increment(Counter.class.getName()));
 
-		if (_usePKMap) {
+		if (_pkMap != null) {
 			appendPKMap(new Long(rs.getLong((String)columns[0][0])), id);
 		}
 
@@ -98,6 +107,16 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 		return sb.toString();
 	}
 
-	private boolean _usePKMap;
+	public Map getPKMap() throws Exception {
+		if (_pkMap == null) {
+			throw new UpgradeException(
+				LongPKUpgradeTableImpl.class.getName() +
+				" was instantiated without the usePKMap flag set to true");
+		}
+
+		return _pkMap;
+	}
+
+	private Map _pkMap;
 
 }

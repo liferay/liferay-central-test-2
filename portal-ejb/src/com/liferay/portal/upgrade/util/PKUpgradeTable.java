@@ -22,42 +22,18 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Map;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="PKUpgradeTable.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
- * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeTable {
+public interface PKUpgradeTable extends UpgradeTable {
 
-	public void appendColumn(StringBuffer sb, Object value) throws Exception;
+	public void appendPKMap(Object oldPK, Object newPK);
 
-	public void appendColumn(StringBuffer sb, Object value, boolean last)
-		throws Exception;
-
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type)
-		throws Exception;
-
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type,
-			boolean last)
-		throws Exception;
-
-	public String getDeleteSQL() throws Exception;
-
-	public String getInsertSQL() throws Exception;
-
-	public String getSelectSQL() throws Exception;
-
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception;
-
-	public void updateTable() throws Exception;
+	public Map getPKMap() throws Exception;
 
 }
