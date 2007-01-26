@@ -114,18 +114,45 @@
 <br><br>
 
 <liferay-ui:tabs
-	names="hot-deploy"
+	names="hot-deploy,remote-deploy"
 	param="tabs2"
-/>
+	url="<%= portletURL.toString() %>"/>
 
-<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+<c:choose>
+	<c:when test='<%=tabs2.equals("remote-deploy")%>'>
+		<%
+		PortletURL searchPluginsURL = renderResponse.createRenderURL();
 
-<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-hot-deploy-a-layout-template,-portlet,-or-theme") %>
+		searchPluginsURL.setWindowState(WindowState.MAXIMIZED);
 
-<br><br>
+		searchPluginsURL.setParameter("redirect", currentURL);
+		searchPluginsURL.setParameter("struts_action", "/admin/plugins");
 
-<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+		%>
+		<%= LanguageUtil.get(pageContext, "specify-a-URL-for-a-remote-layout-template,-portlet,-or-theme") %>
 
-<br><br>
+		<br><br>
 
-<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('hotDeploy');">
+		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+		<liferay-ui:icon image="search" url="<%= searchPluginsURL.toString() %>" /><nobr/><a href="<%=searchPluginsURL.toString()%>"><%=LanguageUtil.get(pageContext, "search")%></a>
+
+		<br><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('remoteDeploy');">
+
+
+	</c:when>
+	<c:otherwise>
+		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+
+		<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-hot-deploy-a-layout-template,-portlet,-or-theme") %>
+
+		<br><br>
+
+		<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
+
+		<br><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('hotDeploy');">
+	</c:otherwise>
+</c:choose>

@@ -225,6 +225,10 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
+		<action path="/admin/plugins" forward="portlet.admin.plugins" />
+
+		<action path="/admin/view_plugin" forward="portlet.admin.view_plugin" />
+
 		<action path="/admin/view" forward="portlet.admin.view" />
 
 		<!-- Alfresco Content -->

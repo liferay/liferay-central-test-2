@@ -113,6 +113,14 @@
 		<put name="portlet_content" value="/portlet/admin/error.jsp" />
 	</definition>
 
+	<definition name="portlet.admin.view_plugin" extends="portlet.admin">
+		<put name="portlet_content" value="/portlet/admin/view_plugin.jsp" />
+	</definition>
+
+	<definition name="portlet.admin.plugins" extends="portlet.admin">
+		<put name="portlet_content" value="/portlet/admin/plugins.jsp" />
+	</definition>
+
 	<definition name="portlet.admin.view" extends="portlet.admin">
 		<put name="portlet_content" value="/portlet/admin/view.jsp" />
 	</definition>

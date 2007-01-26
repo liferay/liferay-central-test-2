@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,62 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.kernel.plugin;
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Plugin" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
+import java.util.List;
 
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
+/**
+ * <a href="Plugin.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Jorge Ferrer
+ *
+ */
+public interface Plugin {
+	String getArtifactURL();
+
+	String getAuthor();
+
+	void setAuthor(String author);
+
+	String getLongDescription();
+
+	void setLongDescription(String longDescription);
+
+	String getName();
+
+	void setName(String name);
+
+	String getModuleId();
+
+	void setModuleId(String moduleId);
+
+	List getLicenses();
+
+	void setLicenses(List licenses);
+
+	List getLiferayVersions();
+
+	void setLiferayVersions(List liferayVersions);
+
+	String getPageURL();
+
+	void setPageURL(String pageURL);
+
+	String getRepositoryURL();
+
+	void setRepositoryURL(String repositoryURL);
+
+	String getShortDescription();
+
+	void setShortDescription(String shortDescription);
+
+	List getTags();
+
+	void setTags(List tags);
+
+	String getType();
+
+	void setType(String type);
+
+}

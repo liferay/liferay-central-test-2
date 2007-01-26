@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,23 +19,40 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/init.jsp" %>
+package com.liferay.portal.plugin;
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Plugin" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
+import com.liferay.portal.kernel.plugin.Plugin;
 
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
-<%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-%>
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
+
+/**
+ * <a href="PluginsCache.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class PluginRepository {
+
+	public void addPlugin(Plugin plugin) {
+		_plugins.add(plugin);
+		_tags.addAll(plugin.getTags());
+		_moduleIdIndex.put(plugin.getModuleId(), plugin);
+	}
+
+	public Plugin findPlugin(String moduleId) {
+		return (Plugin) _moduleIdIndex.get(moduleId);
+	}
+
+	public List getPlugins() {
+		return _plugins;
+	}
+
+	private Map _moduleIdIndex = new HashMap();
+	private List _plugins = new ArrayList();
+	private Set _tags = new TreeSet();
+}

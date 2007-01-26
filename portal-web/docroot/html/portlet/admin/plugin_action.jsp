@@ -22,21 +22,20 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/admin/init.jsp" %>
 
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Plugin" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+	ResultRow row = (ResultRow) request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
+	Plugin plugin = (Plugin)row.getObject();
+
+	PortletURL rowURL = renderResponse.createRenderURL();
+
+	rowURL.setWindowState(WindowState.MAXIMIZED);
+
+	rowURL.setParameter("struts_action", "/admin/view_plugin");
+	rowURL.setParameter("redirect", currentURL);
+	rowURL.setParameter("moduleId", plugin.getModuleId());
+	rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
 %>
+
+<liferay-ui:icon image="view" url='<%= rowURL.toString()%>' />

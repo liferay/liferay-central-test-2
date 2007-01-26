@@ -55,6 +55,10 @@ import com.liferay.util.servlet.UploadException;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+import java.io.IOException;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import java.util.ArrayList;
 import java.util.Enumeration;
@@ -73,6 +77,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.httpclient.HttpClient;
+import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.log4j.Level;
@@ -127,6 +133,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("precompile")) {
 			precompile(req, res);
+		}
+		else if (cmd.equals("remoteDeploy")) {
+			remoteDeploy(req);
 		}
 		else if (cmd.equals("shutdown")) {
 			shutdown(req);
@@ -356,6 +365,44 @@ public class EditServerAction extends PortletAction {
 			catch (Exception e) {
 				_log.debug(e, e);
 			}
+		}
+	}
+
+	protected void remoteDeploy(ActionRequest req) throws Exception {
+		String url = ParamUtil.getString(req, "url");
+
+		try {
+			URL urlObj = new URL(url);
+			HttpClient client = new HttpClient();
+			GetMethod getFile = new GetMethod(urlObj.toString());
+			int responseCode = client.executeMethod(getFile);
+			if (responseCode != 200) {
+				SessionErrors.add(
+						req, "errorResponseFromServer",
+						new Object[]{Integer.toString(responseCode)});
+				return;
+			}
+			byte[] bytes = getFile.getResponseBody();
+
+			getFile.releaseConnection();
+
+			String fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+			if ((bytes != null) && (bytes.length > 0)) {
+				String destination =
+						PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) +
+								StringPool.SLASH + fileName;
+
+				FileUtil.write(destination, bytes);
+			}
+			else {
+				SessionErrors.add(req, UploadException.class.getName());
+			}
+		}
+		catch (MalformedURLException mue) {
+			SessionErrors.add(req, "invalidUrl", url); // Inform user of bad URL
+		}
+		catch (IOException ioe) {
+			SessionErrors.add(req, "errorConnectingToServer", ioe);
 		}
 	}
 

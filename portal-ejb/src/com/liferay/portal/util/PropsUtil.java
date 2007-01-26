@@ -92,6 +92,10 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
 
+	// Plugins
+
+	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
+
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";
