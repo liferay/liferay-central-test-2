@@ -118,7 +118,8 @@ public class Editor extends JApplet {
 	private JButton _cut = createButton("cut", "Cut", "Ctrl-X");
 	private JButton _copy = createButton("copy", "Copy", "Ctrl-C");
 	private JButton _paste = createButton("paste", "Paste", "Ctrl-V");
-	private JButton _selAll = createButton("select_all", "Select All",  "Ctrl-A");
+	private JButton _selAll =
+		createButton("select_all", "Select All",  "Ctrl-A");
 
 	private JTextField _findField = new JTextField();
 	private JLabel _findLabel = new JLabel("Find:");
@@ -348,8 +349,8 @@ public class Editor extends JApplet {
 	}
 
 	/**
-	 * Sets each button to the same width.  This should only be done to buttons with
-	 * static lengths.
+	 * Sets each button to the same width.  This should only be done to buttons
+	 * with static lengths.
 	 *
 	 * @param buttons The buttons to compare and resize
 	 */
@@ -371,12 +372,14 @@ public class Editor extends JApplet {
 	/**
 	 * Build a button with a specified icon.
 	 *
-	 * @param iconName The prefix to an icon name (e.g. "myimg" for "myimg-1.gif").
+	 * @param iconName The prefix to an icon name (e.g. "img" for "img-1.gif").
 	 * @param alt Alternative text description for the icon.
 	 * @param keystroke Key combination for invoking the button
 	 * @return Generated button.
 	 */
-	private JButton createButton(String iconName, String alt, String keystroke) {
+	private JButton createButton(
+			String iconName, String alt, String keystroke) {
+
 		ImageIcon regIcon = createAppletIcon(iconName + "-1.gif");
 		ImageIcon ovrIcon = createAppletIcon(iconName + "-2.gif");
 		JButton button = null;
@@ -420,7 +423,8 @@ public class Editor extends JApplet {
 				System.err.println("Empty file: " + path);
 			}
 			else {
-				icon = new ImageIcon(Toolkit.getDefaultToolkit().createImage(buf));
+				icon =
+					new ImageIcon(Toolkit.getDefaultToolkit().createImage(buf));
 			}
 		} else {
 			System.err.println("Couldn't find file: " + path);
@@ -482,7 +486,8 @@ public class Editor extends JApplet {
 	}
 
 	/**
-	 * Cut the highlighted selection in the text pane and puts it in the clipboard.
+	 * Cut the highlighted selection in the text pane and puts it in the
+	 * clipboard.
 	 */
 	private void cut() {
 		if (_textPane.getSelectedText() != null) {
@@ -495,7 +500,8 @@ public class Editor extends JApplet {
 	}
 
 	/**
-	 * Copy the highlighted selection in the text pane and puts it in the clipboard.
+	 * Copy the highlighted selection in the text pane and puts it in the
+	 * clipboard.
 	 */
 	private void copy() {
 		if (_textPane.getSelectedText() != null) {
@@ -566,7 +572,8 @@ public class Editor extends JApplet {
 	/**
 	 * Search the main text document for a given text.
 	 *
-	 * @param atomicCall Whether this method is used once or multiple times in a row
+	 * @param atomicCall Whether this method is used once or multiple times in a
+	 * row
 	 * @param direction Direction of search
 	 * @return Whether or not the text was found
 	 */
@@ -585,22 +592,30 @@ public class Editor extends JApplet {
 
 			// perform search
 			int index = -1;
+
 			if (direction == SEARCH_BWD) {
 				int last = _textPane.getCaretPosition() - searchText.length();
-				if (last < 0)
+
+				if (last < 0) {
 					last = text.length() - 1;
+				}
+
 				index = text.substring(0, last).lastIndexOf(searchText);
+
 				if (index == -1) {
 					index = text.lastIndexOf(searchText);
 				}
 			}
 			else {
 				int start = _textPane.getCaretPosition();
-				if (direction == SEARCH_HERE && _textPane.getSelectedText() != null)
-				{
+
+				if (direction == SEARCH_HERE &&
+						_textPane.getSelectedText() != null) {
 					start = _textPane.getSelectionStart();
 				}
+
 				index = text.indexOf(searchText, start);
+
 				if (index == -1) {
 					index = text.indexOf(searchText);
 				}
@@ -642,7 +657,7 @@ public class Editor extends JApplet {
 		boolean foundSome = false;
 		String replaceText = getText(_replaceField.getDocument());
 
-		// The do-while loop allows this method to be used to replace and replaceAll
+		// The loop allows this method to be used to replace and replaceAll
 		do {
 			found = find(false, SEARCH_HERE);
 			if (found) {
@@ -682,7 +697,7 @@ public class Editor extends JApplet {
 				int alpha = findPosition(dirtBeg, tokens);
 
 				// Alpha can only be -1 if something was lopped off the end.  If
-				// that were the case, there would not be anything to color anyhow.
+				// that were the case, there would not be anything to color.
 				if (alpha != -1 && tokens.size() != 0) {
 					int newIdx = alpha;
 					int oldIdx = alpha;
@@ -693,7 +708,8 @@ public class Editor extends JApplet {
 					}
 					else {
 						// something was removed; "_lastTokens" is longer
-						oldIdx = findPosition(dirtBeg - dirtOffset - 1, _lastTokens);
+						oldIdx =
+							findPosition(dirtBeg - dirtOffset - 1, _lastTokens);
 					}
 
 					int omega;
@@ -703,10 +719,8 @@ public class Editor extends JApplet {
 					}
 					else {
 						// let's find the right end
-						omega = newIdx;
-						for ( ;
-							newIdx < tokens.size() && oldIdx < _lastTokens.size();
-							++oldIdx, ++newIdx) {
+						for (omega = newIdx; newIdx < tokens.size() &&
+							oldIdx < _lastTokens.size(); ++oldIdx, ++newIdx) {
 
 							Token newTok = (Token) tokens.get(newIdx);
 							Token oldTok = (Token) _lastTokens.get(oldIdx);
@@ -716,8 +730,9 @@ public class Editor extends JApplet {
 						}
 					}
 
-					// Just broaden the scope a little.  Really a hack to make sure
-					// anything contained in the <script> tag gets colored properly.
+					// Just broaden the scope a little.  Really a hack to make
+					// sure anything contained in the <script> tag gets colored
+					// properly.
 					if (alpha > 0) {
 						--alpha;
 					}
@@ -762,8 +777,8 @@ public class Editor extends JApplet {
 	}
 
 	/**
-	 * Investigates the tokens list and colors only those that have been determined
-	 * to be dirty.
+	 * Investigates the tokens list and colors only those that have been
+	 * determined to be dirty.
 	 */
 	private void colorDirtyTokens() {
 		for (int ii = 0; ii < _lastTokens.size(); ++ii) {
@@ -864,7 +879,9 @@ public class Editor extends JApplet {
 			return getText(offset, this.getLength() - offset);
 		}
 
-		public void setCharacterAttributes(int offset, int length, AttributeSet s) {
+		public void setCharacterAttributes(
+				int offset, int length, AttributeSet s) {
+
 			setCharacterAttributes(offset, length, s, true);
 		}
 	}
@@ -874,8 +891,8 @@ public class Editor extends JApplet {
 	 */
 	private class EditorKeyListener implements KeyListener {
 		public void keyPressed(KeyEvent e) {
-			// Does not do check for the Macintosh platform to conform to its look
-			// and feel because Safari intercepts any common key combinations.
+			// Does not do check for the Macintosh platform to conform to its
+			// look and feel because Safari intercepts common key combinations.
 			if (e.isControlDown()) {
 				switch (e.getKeyCode()) {
 				case KeyEvent.VK_A:

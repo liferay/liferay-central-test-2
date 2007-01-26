@@ -82,13 +82,15 @@ public abstract class Lexer {
 	 *
 	 * @param str 	String to parse
 	 * @param idx 	Index to start searching string
-	 * @param left 	Index must point to part of string that has this left bracket
+	 * @param left 	Index must point to part of string that has this left
+	 * bracket
 	 * @param right	The right bracket to search for
 	 * @param style	Style to place in returned token
 	 * @return Token generated from the search
 	 */
-	protected Token getBracketed(String str, int start, String left, String right,
-		SimpleAttributeSet style) {
+	protected Token getBracketed(
+			String str, int start, String left, String right,
+			SimpleAttributeSet style) {
 
 		int beg = start;
 		int end = str.indexOf(right, start + left.length());

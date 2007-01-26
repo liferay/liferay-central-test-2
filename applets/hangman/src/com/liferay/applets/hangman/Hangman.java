@@ -92,8 +92,9 @@ public class Hangman extends Applet implements KeyListener {
 			g.setColor(Color.RED);
 			g.setFont(_wrongFont);
 			g.drawChars(
-				_wrongGuess.toUpperCase().toCharArray(), 0, _wrongGuess.length(),
-				HANG_WIDTH * 2, _wrongMetrics.getHeight() + 1);
+				_wrongGuess.toUpperCase().toCharArray(), 0,
+				_wrongGuess.length(), HANG_WIDTH * 2,
+				_wrongMetrics.getHeight() + 1);
 		}
 
 		// blank lines and correct letters
@@ -105,7 +106,8 @@ public class Hangman extends Applet implements KeyListener {
 			if (wordChars[i] != ' ') {
 				g.drawLine(
 					HANG_WIDTH * 2 + 2 * i * width + 1, HANG_HEIGHT * 2 + 1,
-					HANG_WIDTH * 2 + 2 * (i+1) * width - 1, HANG_HEIGHT * 2 + 1);
+					HANG_WIDTH * 2 + 2 * (i+1) * width - 1,
+					HANG_HEIGHT * 2 + 1);
 
 				if (_gameOver() || _rightGuess.indexOf(wordChars[i]) != -1) {
 					g.drawChars(

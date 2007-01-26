@@ -88,7 +88,8 @@ public class XmlLexer extends Lexer {
 				_tokens.add(new Token(beg, end, STYLE_TEXT));
 			}
 			else if (substr.startsWith("<!--")) {
-				_tokens.add(getBracketed(str, ii, "<!--", "-->", STYLE_COMMENT));
+				_tokens.add(
+					getBracketed(str, ii, "<!--", "-->", STYLE_COMMENT));
 			}
 			else if (isScriptTag(substr)) {
 				List nest = new ArrayList();
