@@ -27,10 +27,30 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-PortletURL portletURL = renderResponse.createRenderURL();
+String currentTag = ParamUtil.getString(renderRequest, "tag");
+String currentType = ParamUtil.getString(renderRequest, "type");
+String currentRepositoryURL = ParamUtil.getString(renderRequest, "repositoryURL");
 
-portletURL.setWindowState(WindowState.MAXIMIZED);
-portletURL.setParameter("struts_action", "/admin/view_plugin");
+
+PortletURL viewPluginURL = renderResponse.createRenderURL();
+
+viewPluginURL.setWindowState(WindowState.MAXIMIZED);
+viewPluginURL.setParameter("struts_action", "/admin/view_plugin");
+
+	
+PortletURL searchURL = renderResponse.createRenderURL();
+
+searchURL.setWindowState(WindowState.MAXIMIZED);
+searchURL.setParameter("struts_action", "/admin/plugins");
+searchURL.setParameter("redirect", currentURL);
+
+
+PortletURL refreshRepositoryURL = renderResponse.createActionURL();
+
+refreshRepositoryURL.setWindowState(WindowState.MAXIMIZED);
+refreshRepositoryURL.setParameter("struts_action", "/admin/edit_server");
+refreshRepositoryURL.setParameter("cmd", "refreshRepository");
+refreshRepositoryURL.setParameter("redirect", currentURL);
 
 %>
 
@@ -43,6 +63,66 @@ try {
 <%= LanguageUtil.get(pageContext, "list-of-available-plugins") %>
 <br><br>
 
+<form action="<%=searchURL.toString()%>" method="post">
+	<div style="float: left; padding-right: 5px;">
+		<%= LanguageUtil.get(pageContext, "type") %><br />
+		<select name="<portlet:namespace/>type">
+			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+			<%
+				String[] types = PluginUtil.getSupportedTypes();
+				for (int i = 0; i < types.length; i++) {
+					String type = types[i];
+			%>
+				<option value="<%=type%>" <%= (type.equals(currentType))?"selected":"" %>><%= LanguageUtil.get(pageContext, type) %></option>
+			<%
+				}
+			%>
+		</select>
+
+	</div>
+
+	<div style="float: left; padding-right: 5px;">
+		<%= LanguageUtil.get(pageContext, "tag") %><br />
+		<select name="<portlet:namespace/>tag">
+			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+			<%
+				Collection tags = PluginUtil.getAvailableTags();
+				for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
+					String tag = (String) iterator.next();
+			%>
+				<option value="<%=tag%>" <%= (tag.equals(currentTag))?"selected":"" %>><%= tag %></option>
+			<%
+				}
+			%>
+		</select>
+	</div>
+
+	<div style="float: left; padding-right: 5px;">
+		<%= LanguageUtil.get(pageContext, "repository") %><br />
+		<select name="<portlet:namespace/>repositoryURL">
+			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+			<%
+				String[] repositoryURLs = PluginUtil.getRepositoryURLs();
+				for (int i = 0; i < repositoryURLs.length; i++) {
+					String repositoryURL = repositoryURLs[i];
+			%>
+				<option value="<%=repositoryURL%>" <%= (repositoryURL.equals(currentRepositoryURL))?"selected":"" %>><%= repositoryURL %></option>
+			<%
+				}
+			%>
+		</select>
+	</div>
+	<table border="0" cellpadding="0" cellspacing="0" style="clear: both; margin-top: 5px;">
+	<tr>
+		<td>
+			<input class="portlet-form-button" type="submit" value="<%=LanguageUtil.get(pageContext, "search")%>">
+		</td>
+	</tr>
+	</table>
+</form>
+
+<br><div class="beta-separator" style="clear: both"></div><br>
+
 <%
 	List headerNames = new ArrayList();
 
@@ -51,9 +131,9 @@ try {
 	headerNames.add("tags");
 	headerNames.add(StringPool.BLANK);
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, viewPluginURL, headerNames, null);
 
-	List results = PluginUtil.getAllPlugins();
+	List results = PluginUtil.search(currentType, currentTag, currentRepositoryURL);
 	int total = results.size();
 
 	searchContainer.setTotal(total);
@@ -94,18 +174,18 @@ try {
 
 		rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
 
-		StringBuffer tags = new StringBuffer();
+		StringBuffer pluginTags = new StringBuffer();
 		Iterator itr = plugin.getTags().iterator();
 
 		while (itr.hasNext()) {
 			String tag = (String) itr.next();
-			tags.append(tag);
+			pluginTags.append(tag);
 			if (itr.hasNext()) {
-				tags.append(StringPool.COMMA + StringPool.SPACE);
+				pluginTags.append(StringPool.COMMA + StringPool.SPACE);
 			}
 		}
 
-		rowTextEntry.setName(tags.toString());
+		rowTextEntry.setName(pluginTags.toString());
 
 		row.addText(rowTextEntry);
 
@@ -123,6 +203,15 @@ try {
 
 <liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
+<br><div class="beta-separator" style="clear: both"></div><br>
+
+<%=LanguageUtil.get(pageContext, "plugin-list-obtained-from-remote-repositories-on-date")%>: <%= dateFormatDateTime.format(PluginUtil.getLastUpdateDate())%>
+<br><br>
+<form action="<%=refreshRepositoryURL.toString()%>" method="post">
+	<input class="portlet-form-button" type="submit" value="<%=LanguageUtil.get(pageContext, "reload")%>">
+</form>
+
+
 <%
 }
 catch (RuntimeException e) {
@@ -132,3 +221,4 @@ catch (RuntimeException e) {
 <%
 }
 %>
+

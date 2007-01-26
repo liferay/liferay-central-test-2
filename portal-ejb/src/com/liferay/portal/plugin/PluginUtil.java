@@ -28,29 +28,29 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
 import com.liferay.util.xml.XMLSafeReader;
-
-import java.io.IOException;
-
-import java.net.MalformedURLException;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
-
 import org.apache.commons.httpclient.HttpClient;
 import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
+
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.SortedSet;
+import java.util.TreeSet;
+import java.util.Date;
 
 /**
  * <a href="PluginUtil.java.html"><b><i>View Source</i></b></a>
@@ -59,19 +59,12 @@ import org.dom4j.io.SAXReader;
  */
 public class PluginUtil {
 
-	public static List getAllPlugins() {
+	public static Collection getAvailableTags() {
+		return _availableTagsCache;
+	}
 
-		SortedSet plugins = new TreeSet();
-		String[] pluginRepositories = getRepositoryURLs();
-
-		for (int i = 0; i < pluginRepositories.length; i++) {
-			String pluginRepository = pluginRepositories[i];
-			PluginRepository pluginsCache = getRepository(
-					pluginRepository);
-			plugins.addAll(pluginsCache.getPlugins());
-		}
-
-		return new ArrayList(plugins);
+	public static Date getLastUpdateDate() {
+		return _lastUpdateDate;
 	}
 
 	public static Plugin getPluginById(String moduleId, String repositoryURL)
@@ -93,6 +86,55 @@ public class PluginUtil {
 			return repository;
 		}
 
+		return _loadRepository(repositoryURL);
+	}
+
+	public static String[] getSupportedTypes() {
+		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+	}
+
+	public static List search(
+			String type, String tags, String repositoryURL) {
+
+		SortedSet plugins = new TreeSet();
+		String[] repositoryURLs;
+		if (Validator.isNull(repositoryURL)) {
+			repositoryURLs = getRepositoryURLs();
+		}
+		else {
+			repositoryURLs = new String[] {repositoryURL};
+		}
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			String repositoryURL2 = repositoryURLs[i];
+			try {
+				PluginRepository repository = getRepository(repositoryURL2);
+				plugins.addAll(repository.search(type, tags));
+			}
+			catch(RuntimeException e) {
+				_log.info("Error loading repository " + repositoryURL, e);
+			}
+		}
+
+		return new ArrayList(plugins);
+	}
+
+	public static void reloadRepositories() {
+		String[] repositoryURLs = getRepositoryURLs();
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			String repositoryURL = repositoryURLs[i];
+			try {
+				_loadRepository(repositoryURL);
+			}
+			catch(RuntimeException e) {
+				_log.info("Error loading repository " + repositoryURL, e);
+			}
+		}
+	}
+
+	private static PluginRepository _loadRepository(String repositoryURL) {
+		PluginRepository repository;
 		String pluginsXmlURL = repositoryURL + StringPool.SLASH +
 				_PLUGINS_XML_FILENAME;
 
@@ -116,6 +158,9 @@ public class PluginUtil {
 				repository =
 						_parsePluginsXml(new String(bytes), repositoryURL);
 
+				_repositoryCache.put(repositoryURL, repository);
+				_availableTagsCache.addAll(repository.getTags());
+				_lastUpdateDate = new Date();
 				return repository;
 			}
 			else {
@@ -171,8 +216,9 @@ public class PluginUtil {
 			List liferayVersions = _readElementList(
 					pluginElm.element("liferay-versions"), "liferay-version");
 			if (!_isCurrentVersionSupported(liferayVersions)) {
-				break;
+				continue;
 			}
+			plugin.setLiferayVersions(liferayVersions);
 
 			plugin.setRepositoryURL(repositoryURL);
 			plugin.setTags(liferayVersions);
@@ -249,24 +295,11 @@ public class PluginUtil {
 		return result;
 	}
 
-	private static Plugin getSamplePlugin(String pluginRepository) {
-		Plugin p = new PluginImpl();
-		p.setRepositoryURL(pluginRepository);
-		p.setModuleId("liferay-samples/sample-struts-portlet/4.2.1/war");
-		p.setName("Sample Struts portlet");
-		p.setType("portlet");
-		p.setAuthor("Jorge");
-		p.setShortDescription("bla bla bla");
-		p.setPageURL("http://www.liferay.com");
-
-		List licenses = new ArrayList();
-		licenses.add("MIT");
-		p.setLicenses(licenses);
-		return p;
-	}
-
 	private static final String _PLUGINS_XML_FILENAME = "liferay-plugins.xml";
 
 	private static Log _log = LogFactory.getLog(PluginUtil.class);
+
 	private static Map _repositoryCache = new HashMap();
+	private static Date _lastUpdateDate = null;
+	private static Set _availableTagsCache = new TreeSet();
 }

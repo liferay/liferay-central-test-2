@@ -42,6 +42,7 @@ import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebCachePool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
@@ -133,6 +134,9 @@ public class EditServerAction extends PortletAction {
 		}
 		else if (cmd.equals("precompile")) {
 			precompile(req, res);
+		}
+		else if (cmd.equals("refreshRepository")) {
+			refreshRepository(req);
 		}
 		else if (cmd.equals("remoteDeploy")) {
 			remoteDeploy(req);
@@ -366,6 +370,10 @@ public class EditServerAction extends PortletAction {
 				_log.debug(e, e);
 			}
 		}
+	}
+
+	protected void refreshRepository(ActionRequest req) throws Exception {
+		PluginUtil.reloadRepositories();
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {

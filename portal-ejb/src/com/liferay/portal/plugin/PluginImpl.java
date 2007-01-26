@@ -29,6 +29,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.StringTokenizer;
 
+import org.apache.commons.lang.builder.EqualsBuilder;
+import org.apache.commons.lang.builder.HashCodeBuilder;
+
 /**
  * <a href="PluginImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -145,7 +148,16 @@ public class PluginImpl implements Plugin, Comparable {
 
 		Plugin p = (Plugin) o;
 
-		return p.getModuleId().equals(getModuleId());
+		return new EqualsBuilder()
+				.append(getModuleId(), p.getModuleId())
+				.append(getRepositoryURL(), p.getRepositoryURL())
+				.isEquals();
+	}
+
+
+	public int hashCode() {
+		return new HashCodeBuilder().append(getModuleId())
+				.append(getRepositoryURL()).hashCode();
 	}
 
 	public int compareTo(Object o) {
@@ -156,7 +168,7 @@ public class PluginImpl implements Plugin, Comparable {
 
 		Plugin p = (Plugin) o;
 
-		return p.getName().compareTo(getName());
+		return getName().compareTo(p.getName());
 	}
 
 	private String _author;

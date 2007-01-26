@@ -96,6 +96,8 @@ public class PropsUtil {
 
 	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
 
+	public static final String PLUGIN_TYPES = "plugin.types";
+
 	// Resource Actions
 
 	public static final String RESOURCE_ACTIONS_CONFIGS = "resource.actions.configs";

@@ -115,6 +115,28 @@
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "supported-liferay-versions") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+
+		<%
+		Iterator itr3 = plugin.getLiferayVersions().iterator();
+
+		while (itr3.hasNext()) {
+			String liferayVersion = (String)itr3.next();
+		%>
+
+			<%= liferayVersion %><c:if test="<%= itr3.hasNext() %>">, </c:if>
+
+		<%
+		}
+		%>
+
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "page-url") %>:
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -131,6 +153,7 @@
 		<%= plugin.getShortDescription() %>
 	</td>
 </tr>
+<% if (Validator.isNotNull(plugin.getLongDescription())) { %>
 <tr>
 	<td>
 		<%= LanguageUtil.get(pageContext, "long-description") %>:
@@ -140,6 +163,7 @@
 		<%= plugin.getLongDescription() %>
 	</td>
 </tr>
+<% } %>
 <tr>
 	<td>
 		&nbsp;

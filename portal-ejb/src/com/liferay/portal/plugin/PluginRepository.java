@@ -23,6 +23,7 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.Plugin;
+import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -30,6 +31,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
+import java.util.Collection;
+import java.util.Iterator;
 
 /**
  * <a href="PluginsCache.java.html"><b><i>View Source</i></b></a>
@@ -39,17 +42,40 @@ import java.util.TreeSet;
 public class PluginRepository {
 
 	public void addPlugin(Plugin plugin) {
+
 		_plugins.add(plugin);
 		_tags.addAll(plugin.getTags());
 		_moduleIdIndex.put(plugin.getModuleId(), plugin);
 	}
 
 	public Plugin findPlugin(String moduleId) {
+
 		return (Plugin) _moduleIdIndex.get(moduleId);
 	}
 
 	public List getPlugins() {
+
 		return _plugins;
+	}
+
+	public Set getTags() {
+
+		return _tags;
+	}
+
+	public Collection search(String type, String tag) {
+
+		List result = new ArrayList();
+
+		for (Iterator iterator = _plugins.iterator(); iterator.hasNext();) {
+			Plugin plugin = (Plugin) iterator.next();
+			if ((Validator.isNull(type) || type.equals(plugin.getType()))
+				&& (Validator.isNull(tag) || plugin.getTags().contains(tag))){
+				result.add(plugin);
+			}
+		}
+
+		return result;
 	}
 
 	private Map _moduleIdIndex = new HashMap();
