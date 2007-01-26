@@ -393,31 +393,31 @@
 	</target>
 
 	<target name="build-javascript">
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="false"
-		>
-			<arg value="${javascript.files}" />
-			<arg value="docroot/html/js/everything.js" />
-			<arg value="true" />
-		</java>
 
-		<delete file="JavaScriptBuilder.temp" />
+		<!--
+		http://dean.edwards.name/download/#packer
+		http://homepages.nildram.co.uk/~9jack9/download/packer.wsh.zip
+		-->
 
-		<java
-			classname="com.liferay.portal.tools.JavaScriptBuilder"
-			classpathref="project.classpath"
-			fork="true"
-			newenvironment="false"
-		>
-			<arg value="log/log4javascript.js" />
-			<arg value="docroot/html/js/log.js" />
-			<arg value="true" />
-		</java>
+		<delete file="everything.js.temp" />
 
-		<delete file="JavaScriptBuilder.temp" />
+		<for list="${javascript.files}" param="js.file">
+			<sequential>
+				<concat destfile="everything.js.temp" append="yes">
+					<fileset dir="docroot/html/js/" includes="@{js.file}" />
+				</concat>
+			</sequential>
+		</for>
+
+		<exec executable="cmd">
+			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf everything.js.temp > docroot/html/js/everything.js" />
+		</exec>
+
+		<delete file="everything.js.temp" />
+
+		<exec executable="cmd">
+			<arg line="/c CScript /nologo ${project.dir}/tools/pack.wsf docroot/html/js/log/log4javascript.js > docroot/html/js/log.js" />
+		</exec>
 	</target>
 
 	<target name="build-website">
