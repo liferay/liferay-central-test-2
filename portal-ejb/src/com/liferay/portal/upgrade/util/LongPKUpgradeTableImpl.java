@@ -46,10 +46,24 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 	 * @param	columns Columns specified by {name, sql.Type} pairs. Order does
 	 *			not matter with the exception that the first entry should be the
 	 *			primary key.
+	 */
+	public LongPKUpgradeTableImpl(String tableName, Object[][] columns) {
+		super(tableName, columns);
+
+		_usePKMap = false;
+	}
+
+	/**
+	 * Constructor.
+	 *
+	 * @param	tableName name of table to upgrade
+	 * @param	columns Columns specified by {name, sql.Type} pairs. Order does
+	 *			not matter with the exception that the first entry should be the
+	 *			primary key.
 	 * @param	usePKMap boolean value for whether or not to update the pk map
 	 */
-	public LongPKUpgradeTableImpl(String tableName, Object[][] columns,
-								  boolean usePKMap) {
+	public LongPKUpgradeTableImpl(
+			String tableName, Object[][] columns, boolean usePKMap) {
 
 		super(tableName, columns);
 
