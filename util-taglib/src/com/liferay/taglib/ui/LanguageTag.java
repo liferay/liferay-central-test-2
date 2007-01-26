@@ -84,7 +84,7 @@ public class LanguageTag extends IncludeTag {
 		rd.include(req, res);
 	}
 
-	public int doStartTag() throws JspException {
+	public int doEndTag() throws JspException {
 		try {
 			ServletContext ctx = getServletContext();
 			HttpServletRequest req = getServletRequest();
@@ -94,7 +94,7 @@ public class LanguageTag extends IncludeTag {
 
 			pageContext.getOut().print(res.getString());
 
-			return EVAL_BODY_BUFFERED;
+			return EVAL_PAGE;
 		}
 		catch (Exception e) {
 			throw new JspException(e);
