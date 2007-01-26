@@ -1275,7 +1275,7 @@ var QuickEdit = {
 			}
 
 			input.className = "portlet-form-input-field";
-			input.value = toText(textObj.innerHTML);
+			input.value = encodeURIComponent(textObj.innerHTML);
 			input.textObj = textObj;
 			input.onmouseover = function() {
 				document.onclick = function() {};
@@ -1283,11 +1283,11 @@ var QuickEdit = {
 			input.onmouseout = function() {
 				document.onclick = function() {QuickEdit.inputList.each(QuickEdit.onDone)};
 			}
-			input.onkeydown = function(event) {
-				if (!isTextarea && Event.enterPressed(event)) {
+			_$J(input).bind("keydown", function(event) {
+				if (!isTextarea && event.keyCode == 13) {
 					QuickEdit.inputList.each(QuickEdit.onDone);
 				}
-			}
+			});
 
 			var textWidth = textObj.offsetWidth;
 			var textHeight = textObj.offsetHeight;
@@ -1315,7 +1315,7 @@ var QuickEdit = {
 
 			var textObj = input.textObj;
 			var textDiv = textObj.parentNode;
-			var newText = toHTML(input.value);
+			var newText = decodeURIComponent(input.value);
 			var oldText = textObj.innerHTML;
 			var opts = textObj.editOptions;
 

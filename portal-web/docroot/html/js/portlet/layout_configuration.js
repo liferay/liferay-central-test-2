@@ -155,7 +155,7 @@ var LayoutConfiguration = {
 			}
 		}
 		else {
-			if (toggleByObject(pane, true)) {
+			if (Liferay.Util.toggle(pane, true)) {
 				image.src = imagePath + "/arrows/01_down.gif";
 			}
 			else {

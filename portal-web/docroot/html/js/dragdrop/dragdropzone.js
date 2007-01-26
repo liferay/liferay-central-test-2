@@ -135,7 +135,7 @@ var DragDrop = {
 			//var itemNw = Coordinates.northwestOffset(item, true);
 			
 			if (is_ie) {
-				setSelectVisibility("hidden");
+				Liferay.Util.setSelectVisibility("hidden");
 			}
 
 			opts.origWidth = item.style.width;
@@ -314,7 +314,7 @@ var DragDrop = {
 			opts.scrollOffset = new Coordinate(0,0);
 			
 			if (is_ie) {
-				setSelectVisibility("visible");
+				Liferay.Util.setSelectVisibility("visible");
 			}
 			
 			// restore original options (if changed)

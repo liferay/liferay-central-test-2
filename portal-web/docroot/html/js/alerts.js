@@ -38,7 +38,7 @@ var Alerts = {
 			}
 			else {
 				background.parentNode.removeChild(background);
-				setSelectVisibility("visible", Alerts.message);
+				Liferay.Util.setSelectVisibility("visible", Alerts.message);
 				Alerts.background = null;
 			}
 		}
@@ -114,18 +114,15 @@ var Alerts = {
 			if (Alerts.messageArray.length > 0) {
 				Alerts.message = Alerts.messageArray[Alerts.messageArray.length - 1];
 				Alerts.message.style.zIndex = ZINDEX.ALERT + 1;
-				setSelectVisibility("visible", Alerts.message);
+				Liferay.Util.setSelectVisibility("visible", Alerts.message);
 				background = wrapper.background;
 			}
 			else {
 				Alerts.message = null;
-				//setSelectVisibility("visible");
 				background = Alerts.background;
 			}
 			
 			if (background) {
-				//body.removeChild(background);
-				//Alerts.background = null;
 				Alerts.bgFadeOut(Alerts.OPACITY, Alerts.STEPS);
 			}
 			
@@ -200,15 +197,15 @@ var Alerts = {
 			body.appendChild(background);
 			Alerts.bgFadeIn(Alerts.OPACITY, Alerts.STEPS);
 		}
-		setSelectVisibility("hidden");
+		Liferay.Util.setSelectVisibility("hidden");
 		
 		if (Alerts.messageArray.length > 0) {
 			var lastMsg = Alerts.messageArray[Alerts.messageArray.length - 1];
 			lastMsg.style.zIndex = ZINDEX.ALERT - 1;
-			setSelectVisibility("hidden", lastMsg);
+			Liferay.Util.setSelectVisibility("hidden", lastMsg);
 		}
 
-		setSelectVisibility("visibile", message);
+		Liferay.Util.setSelectVisibility("visibile", message);
 		
 		Alerts.message = message;
 		Alerts.messageArray.push(wrapper);

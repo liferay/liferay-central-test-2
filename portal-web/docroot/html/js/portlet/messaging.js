@@ -145,7 +145,7 @@ var Messaging = {
 		
 		this.mainDiv = mainDiv;
 
-		var msgJSON = Cookie.read(this.userId + "_chats");
+		var msgJSON = _$J.cookie(this.userId + "_chats");
 		
 		if (msgJSON) {
 			var chatArray = $J(msgJSON);
@@ -216,8 +216,8 @@ var Messaging = {
 			}
 		})
 		jsonString += "]";
-		
-		Cookie.create(this.userId + "_chats", jsonString, 99);
+
+		_$J.cookie(this.userId + "_chats", jsonString);
 	},
 
 	sendChat : function(obj, e) {

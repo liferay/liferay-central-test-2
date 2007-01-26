@@ -185,7 +185,7 @@ List invalidWords = WordsUtil.checkSpelling(text);
 
 			textArea.window.scrollTo(testX, testY);
 
-			eval("setBox(document.fm.suggestions, suggestions_" + invalidWordsCur + ");");
+			eval("Liferay.Util.setBox(document.fm.suggestions, suggestions_" + invalidWordsCur + ");");
 			document.fm.change_to.value = document.fm.suggestions[document.fm.suggestions.selectedIndex].text;
 		}
 
