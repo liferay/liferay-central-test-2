@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PhoneNumberException;
 import com.liferay.portal.PortalException;
@@ -66,7 +67,7 @@ public class PhoneLocalServiceImpl implements PhoneLocalService {
 			primary);
 
 		long phoneId = CounterLocalServiceUtil.increment(
-			Phone.class.getName());
+			Counter.class.getName());
 
 		Phone phone = PhoneUtil.create(phoneId);
 
