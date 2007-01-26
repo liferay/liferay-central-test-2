@@ -79,7 +79,7 @@ public class RowChecker {
 			sb.append("<input name=\"");
 			sb.append(_allRowsId);
 			sb.append("\" type=\"checkbox\" ");
-			sb.append("onClick=\"checkAll(");
+			sb.append("onClick=\"Liferay.Util.checkAll(");
 			sb.append(_formName);
 			sb.append(", '");
 			sb.append(_rowId);
@@ -106,7 +106,7 @@ public class RowChecker {
 		sb.append("\" ");
 
 		if (Validator.isNotNull(_allRowsId)) {
-			sb.append("onClick=\"checkAllBox(");
+			sb.append("onClick=\"Liferay.Util.checkAllBox(");
 			sb.append(_formName);
 			sb.append(", '");
 			sb.append(_rowId);
