@@ -57,7 +57,7 @@ Role role = (Role)row.getObject();
 		<portlet:param name="roleId" value="<%= role.getRoleId() %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="delegate" message="define-permissions" url="<%= editRolePermissionsURL %>" />
+	<liferay-ui:icon image="define_permissions" url="<%= editRolePermissionsURL %>" />
 </c:if>
 
 <c:if test="<%= (role.getType() == RoleImpl.TYPE_REGULAR) && RolePermission.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_USERS) %>">

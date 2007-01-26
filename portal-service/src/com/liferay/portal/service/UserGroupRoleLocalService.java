@@ -61,7 +61,7 @@ public interface UserGroupRoleLocalService {
 	public void deleteUserGroupRolesByUserId(java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findUserGroupRoles(java.lang.String userId,
+	public java.util.List getUserGroupRoles(java.lang.String userId,
 		long groupId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

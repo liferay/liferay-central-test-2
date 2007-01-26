@@ -128,8 +128,8 @@ public class UserGroupRoleLocalServiceImpl
 		UserGroupRoleUtil.removeByUserId(userId);
 	}
 
-	public List findUserGroupRoles(String userId, long groupId)
-			throws PortalException, SystemException {
+	public List getUserGroupRoles(String userId, long groupId)
+		throws PortalException, SystemException {
 
 		return UserGroupRoleUtil.findByU_G(userId, groupId);
 	}

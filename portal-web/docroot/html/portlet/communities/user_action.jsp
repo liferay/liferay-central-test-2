@@ -25,6 +25,8 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 Object[] objArray = (Object[])row.getObject();
@@ -36,8 +38,8 @@ Group group = (Group)objArray[1];
 <portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 	<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 	<portlet:param name="redirect" value="<%= currentURL %>" />
-	<portlet:param name="userId" value="<%= String.valueOf(user2.getUserId()) %>" />
+	<portlet:param name="p_u_i_d" value="<%= String.valueOf(user2.getUserId()) %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 </portlet:renderURL>
 
-<liferay-ui:icon image="delegate" url="<%= assignURL %>" message="user-community-roles" />
+<liferay-ui:icon image="assign_user_roles" url="<%= assignURL %>" />

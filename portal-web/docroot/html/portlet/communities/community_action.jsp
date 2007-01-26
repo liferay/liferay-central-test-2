@@ -71,7 +71,7 @@ String tabs1 = (String)objArray[1];
 		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="delegate" message="assign-user-roles" url="<%= assignUserRolesURL %>" />
+	<liferay-ui:icon image="assign_user_roles" url="<%= assignUserRolesURL %>" />
 </c:if>
 
 <c:if test="<%= GroupPermission.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_USERS) %>">
@@ -81,15 +81,15 @@ String tabs1 = (String)objArray[1];
 		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="delegate" message="assign-user-permissions" url="<%= assignUserPermissionsURL %>" />
+	<liferay-ui:icon image="assign_user_permissions" url="<%= assignUserPermissionsURL %>" />
 
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignMembersURL">
 		<portlet:param name="struts_action" value="/communities/edit_community_assignments" />
 		<portlet:param name="redirect" value="<%= currentURL %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(group.getGroupId()) %>" />
 	</portlet:renderURL>
 
-	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignURL %>" />
+	<liferay-ui:icon image="assign" message="assign-members" url="<%= assignMembersURL %>" />
 </c:if>
 
 <c:choose>

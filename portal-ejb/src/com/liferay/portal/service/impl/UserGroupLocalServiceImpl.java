@@ -54,8 +54,7 @@ import java.util.List;
  */
 public class UserGroupLocalServiceImpl implements UserGroupLocalService {
 
-	public void addGroupUserGroups(
-			long groupId, String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupUtil.addUserGroups(groupId, userGroupIds);

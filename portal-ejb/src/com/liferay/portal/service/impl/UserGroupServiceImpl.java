@@ -41,11 +41,10 @@ import java.util.List;
  * @author  Charles May
  *
  */
-public class UserGroupServiceImpl extends PrincipalBean
-	implements UserGroupService {
+public class UserGroupServiceImpl
+	extends PrincipalBean implements UserGroupService {
 
-	public void addGroupUserGroups(
-			long groupId, String[] userGroupIds)
+	public void addGroupUserGroups(long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(
@@ -55,8 +54,7 @@ public class UserGroupServiceImpl extends PrincipalBean
 			groupId, userGroupIds);
 	}
 
-	public UserGroup addUserGroup(
-			String name, String description)
+	public UserGroup addUserGroup(String name, String description)
 		throws PortalException, SystemException {
 
 		PortalPermission.check(
@@ -92,8 +90,7 @@ public class UserGroupServiceImpl extends PrincipalBean
 		return UserGroupLocalServiceUtil.getUserUserGroups(userId);
 	}
 
-	public void unsetGroupUserGroups(
-			long groupId, String[] userGroupIds)
+	public void unsetGroupUserGroups(long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {
 
 		GroupPermission.check(

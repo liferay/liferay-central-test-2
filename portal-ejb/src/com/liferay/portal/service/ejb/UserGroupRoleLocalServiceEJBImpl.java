@@ -93,11 +93,11 @@ public class UserGroupRoleLocalServiceEJBImpl
 										.deleteUserGroupRolesByUserId(userId);
 	}
 
-	public java.util.List findUserGroupRoles(java.lang.String userId,
+	public java.util.List getUserGroupRoles(java.lang.String userId,
 		long groupId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {
-		return UserGroupRoleLocalServiceFactory.getTxImpl().findUserGroupRoles(userId,
+		return UserGroupRoleLocalServiceFactory.getTxImpl().getUserGroupRoles(userId,
 			groupId);
 	}
 

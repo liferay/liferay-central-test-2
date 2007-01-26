@@ -34,11 +34,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
-String userId = ParamUtil.getString(request, "userId");
-User selectedUser = null;
-if (Validator.isNotNull(userId)) {
-	selectedUser = UserLocalServiceUtil.getUserById(userId);
-}
+User selectedUser = PortalUtil.getSelectedUser(request);
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -79,8 +75,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 	function <portlet:namespace />updateUserGroupRole(redirect) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_role";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = redirect;
-		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />addRoleIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		document.<portlet:namespace />fm.<portlet:namespace />removeRoleIds.value = Liferay.Util.listUncheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_community_assignments" /></portlet:actionURL>");
 	}
 </script>
@@ -114,7 +110,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 <c:choose>
 	<c:when test='<%= tabs1.equals("users") %>'>
 		<c:choose>
-			<c:when test='<%= Validator.isNull(userId) %>'>
+			<c:when test="<%= selectedUser == null %>">
 				<input name="<portlet:namespace />addUserIds" type="hidden" value="">
 				<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
 
@@ -184,23 +180,29 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					row.addText(user2.getFullName());
 					row.addText(user2.getEmailAddress());
 
-					// Action
+					// Community roles and action
 
 					if (tabs2.equals("current")) {
-						List userGroupRoles = UserGroupRoleLocalServiceUtil.findUserGroupRoles(user2.getUserId(), group.getGroupId());
+						List userGroupRoles = UserGroupRoleLocalServiceUtil.getUserGroupRoles(user2.getUserId(), group.getGroupId());
 
 						Iterator itr = userGroupRoles.iterator();
+
 						StringBuffer roleNames = new StringBuffer();
+
 						while (itr.hasNext()) {
 							UserGroupRole userGroupRole = (UserGroupRole)itr.next();
+
 							Role role = RoleLocalServiceUtil.getRole(userGroupRole.getRoleId());
+
 							roleNames.append(role.getName());
+
 							if (itr.hasNext()) {
 								roleNames.append(StringPool.COMMA + StringPool.SPACE);
 							}
 						}
 
 						row.addText(roleNames.toString());
+
 						row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/communities/user_action.jsp");
 					}
 
@@ -215,7 +217,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 				<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 			</c:when>
 			<c:otherwise>
-				<input name="<portlet:namespace />userId" type="hidden" value="<%= userId %>">
+				<input name="<portlet:namespace />p_u_i_d" type="hidden" value="<%= selectedUser.getUserId() %>">
 				<input name="<portlet:namespace />addRoleIds" type="hidden" value="">
 				<input name="<portlet:namespace />removeRoleIds" type="hidden" value="">
 
@@ -256,12 +258,13 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					updateRoleAssignmentsURL.setParameter("struts_action", "/communities/edit_community_assignments");
 					updateRoleAssignmentsURL.setParameter("tabs1", tabs1);
 					updateRoleAssignmentsURL.setParameter("tabs2", tabs2);
+					updateRoleAssignmentsURL.setParameter("redirect", Http.decodeURL(Http.getParameter(redirect, renderResponse.getNamespace() + "redirect", false)));
 					updateRoleAssignmentsURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 					%>
 
 					<br><div class="beta-separator"></div><br>
 
-					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-role-assignments") %>' onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
+					<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "update-associations") %>' onClick="<portlet:namespace />updateUserGroupRole('<%= updateRoleAssignmentsURL.toString() %>&<portlet:namespace />cur=<%= cur %>');">
 
 					<br><br>
 

@@ -23,6 +23,7 @@
 package com.liferay.portlet.communities.action;
 
 import com.liferay.portal.NoSuchGroupException;
+import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.service.UserGroupRoleServiceUtil;
@@ -30,6 +31,7 @@ import com.liferay.portal.service.UserGroupServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -157,7 +159,12 @@ public class EditGroupAssignmentsAction extends PortletAction {
 	}
 
 	protected void updateUserGroupRole(ActionRequest req) throws Exception {
-		String userId = ParamUtil.getString(req, "userId");
+		User user = PortalUtil.getSelectedUser(req);
+
+		if (user == null) {
+			return;
+		}
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		String[] addRoleIds = StringUtil.split(
@@ -165,9 +172,10 @@ public class EditGroupAssignmentsAction extends PortletAction {
 		String[] removeRoleIds = StringUtil.split(
 			ParamUtil.getString(req, "removeRoleIds"));
 
-		UserGroupRoleServiceUtil.addUserGroupRoles(userId, groupId, addRoleIds);
+		UserGroupRoleServiceUtil.addUserGroupRoles(
+			user.getUserId(), groupId, addRoleIds);
 		UserGroupRoleServiceUtil.deleteUserGroupRoles(
-			userId, groupId, removeRoleIds);
+			user.getUserId(), groupId, removeRoleIds);
 	}
 
 }

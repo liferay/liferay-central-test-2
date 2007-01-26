@@ -47,13 +47,15 @@ public class UserGroupChecker extends RowChecker {
 	}
 
 	public boolean isChecked(Object obj) {
-		User user;
+		User user = null;
+
 		if (obj instanceof User) {
 			user = (User)obj;
 		}
 		else if (obj instanceof Object[]) {
-			user = (User) ((Object[]) obj)[0];
-		} else {
+			user = (User)((Object[])obj)[0];
+		}
+		else {
 			throw new IllegalArgumentException(obj + " is not a User");
 		}
 
