@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
@@ -65,7 +66,7 @@ public class WebsiteLocalServiceImpl implements WebsiteLocalService {
 			primary);
 
 		long websiteId = CounterLocalServiceUtil.increment(
-			Website.class.getName());
+			Counter.class.getName());
 
 		Website website = WebsiteUtil.create(websiteId);
 
