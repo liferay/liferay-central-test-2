@@ -26,7 +26,7 @@ import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.LongPKUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.MapUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.SwapColumnUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.PKUpgradeTable;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
@@ -70,25 +70,25 @@ public class UpgradePermissions extends UpgradeProcess {
 
 		// Handle mapping tables
 
-		UpgradeTable groupMap = new MapUpgradeTableImpl(
+		UpgradeTable groupMap = new SwapColumnUpgradeTableImpl(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUP_PERMISSIONS,
 			permissionIdMap);
 
 		groupMap.updateTable();
 
-		UpgradeTable roleMap = new MapUpgradeTableImpl(
+		UpgradeTable roleMap = new SwapColumnUpgradeTableImpl(
 			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
 			permissionIdMap);
 
 		roleMap.updateTable();
 
-		UpgradeTable userMap = new MapUpgradeTableImpl(
+		UpgradeTable userMap = new SwapColumnUpgradeTableImpl(
 			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
 			permissionIdMap);
 
 		userMap.updateTable();
 
-		UpgradeTable orgGroupMap = new MapUpgradeTableImpl(
+		UpgradeTable orgGroupMap = new SwapColumnUpgradeTableImpl(
 			_TABLE_ORG_GROUP_PERMISSION, _COLUMNS_ORG_GROUP_PERMISSION,
 			permissionIdMap);
 
