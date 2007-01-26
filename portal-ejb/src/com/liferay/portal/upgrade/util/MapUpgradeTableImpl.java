@@ -28,9 +28,9 @@ import java.util.Map;
 
 /**
  * This implementation handles a simple upgrade of any mapping table.  It reads
- * and reinserts all of the table's entries with one ID remapped.
+ * and reinserts all of the table's entries with one id remapped.
  *
- * <a href="MapUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
+ * <p><a href="MapUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
@@ -40,14 +40,14 @@ public class MapUpgradeTableImpl extends BaseUpgradeTableImpl {
 	/**
 	 * Constructor.
 	 *
-	 * @param tableName	Name of mapping table to upgrade
-	 * @param columns	Columns specified by {name,sql.Type} pairs.  Order does
-	 * not matter with the exception that the first entry should be the ID that
-	 * needs to be updated.
-	 * @param idMap		ID mapping between the old and new.
+	 * @param	tableName name of table to upgrade
+	 * @param	columns Columns specified by {name, sql.Type} pairs. Order does
+	 *			not matter with the exception that the first entry should be the
+	 *			primary key.
+	 * @param	idMap id mapping between the old and new
 	 */
-	public MapUpgradeTableImpl(
-			String tableName, Object[][] columns, Map idMap) {
+	public MapUpgradeTableImpl(String tableName, Object[][] columns,
+							   Map idMap) {
 
 		super(tableName, columns);
 
@@ -59,8 +59,8 @@ public class MapUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 		Object[][] columns = getColumns();
 
-		Object value =
-			getValue(rs,  (String)columns[0][0], (Integer)columns[0][1]);
+		Object value = getValue(
+			rs, (String)columns[0][0], (Integer)columns[0][1]);
 
 		appendColumn(sb, _idMap.get(value));
 

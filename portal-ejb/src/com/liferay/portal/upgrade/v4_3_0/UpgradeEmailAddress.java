@@ -53,7 +53,7 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 	private void _upgradeEmailAddress() throws Exception {
 		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_NAME, _COLUMNS);
+			_TABLE_NAME, _COLUMNS, false);
 
 		upgradeTable.updateTable();
 	}

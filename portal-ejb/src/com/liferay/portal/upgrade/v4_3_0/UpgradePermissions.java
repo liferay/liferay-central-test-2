@@ -62,7 +62,7 @@ public class UpgradePermissions extends UpgradeProcess {
 		// Handle permissions table
 
 		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_PERMISSION, _COLUMNS_PERMISSION);
+			_TABLE_PERMISSION, _COLUMNS_PERMISSION, true);
 
 		upgradeTable.updateTable();
 
@@ -93,12 +93,11 @@ public class UpgradePermissions extends UpgradeProcess {
 			permissionIdMap);
 
 		orgGroupMap.updateTable();
-
 	}
 
 	private void _upgradeResource() throws Exception {
 		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_RESOURCE, _COLUMNS_RESOURCE);
+			_TABLE_RESOURCE, _COLUMNS_RESOURCE, true);
 
 		upgradeTable.updateTable();
 

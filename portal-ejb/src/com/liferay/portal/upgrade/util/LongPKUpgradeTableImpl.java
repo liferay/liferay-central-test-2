@@ -31,7 +31,7 @@ import java.sql.ResultSet;
  * This implementation handles a simple upgrade of a table with a primary key of
  * type long.  It simply reads and reinserts all of the table's entries.
  *
- * <a href="LongPKUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
+ * <p><a href="LongPKUpgradeTableImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
@@ -42,13 +42,18 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 	/**
 	 * Constructor.
 	 *
-	 * @param tableName	Name of table to upgrade
-	 * @param columns	Columns specified by {name,sql.Type} pairs.  Order does
-	 * not matter with the exception that the first entry should be the primary
-	 * key.
+	 * @param	tableName name of table to upgrade
+	 * @param	columns Columns specified by {name, sql.Type} pairs. Order does
+	 *			not matter with the exception that the first entry should be the
+	 *			primary key.
+	 * @param	usePKMap boolean value for whether or not to update the pk map
 	 */
-	public LongPKUpgradeTableImpl(String tableName, Object[][] columns) {
+	public LongPKUpgradeTableImpl(String tableName, Object[][] columns,
+								  boolean usePKMap) {
+
 		super(tableName, columns);
+
+		_usePKMap = usePKMap;
 	}
 
 	public String getExportedData(ResultSet rs) throws Exception {
@@ -59,7 +64,9 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 		Long id = new Long(
 			CounterLocalServiceUtil.increment(Counter.class.getName()));
 
-		appendPKMap(new Long(rs.getLong((String)columns[0][0])), id);
+		if (_usePKMap) {
+			appendPKMap(new Long(rs.getLong((String)columns[0][0])), id);
+		}
 
 		appendColumn(sb, id);
 
@@ -76,5 +83,7 @@ public class LongPKUpgradeTableImpl extends BaseUpgradeTableImpl {
 
 		return sb.toString();
 	}
+
+	private boolean _usePKMap;
 
 }

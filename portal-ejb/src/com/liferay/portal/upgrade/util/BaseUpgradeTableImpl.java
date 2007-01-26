@@ -237,6 +237,7 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		if (userType != null) {
 			value = userType.nullSafeGet(rs, new String[] {name}, null);
 		}
+
 		return value;
 	}
 
@@ -285,7 +286,7 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
-		boolean hasContents = false;
+		boolean isEmpty = true;
 
 		String tempFilename =
 			"temp-db-" + _tableName + "-" + System.currentTimeMillis();
@@ -304,7 +305,7 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 			while (rs.next()) {
 				bw.write(getExportedData(rs));
 
-				hasContents = true;
+				isEmpty = false;
 			}
 
 			_log.info(_tableName + " table backed up to file " + tempFilename);
@@ -315,7 +316,7 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 			bw.close();
 		}
 
-		if (hasContents) {
+		if (!isEmpty) {
 			Statement stmt = null;
 
 			try {
@@ -331,8 +332,8 @@ public abstract class BaseUpgradeTableImpl implements UpgradeTable {
 
 			String insertSQL = getInsertSQL();
 
-			BufferedReader br =
-				new BufferedReader(new FileReader(tempFilename));
+			BufferedReader br = new BufferedReader(
+				new FileReader(tempFilename));
 
 			String line = null;
 
