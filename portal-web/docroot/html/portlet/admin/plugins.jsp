@@ -37,7 +37,7 @@ PortletURL viewPluginURL = renderResponse.createRenderURL();
 viewPluginURL.setWindowState(WindowState.MAXIMIZED);
 viewPluginURL.setParameter("struts_action", "/admin/view_plugin");
 
-	
+
 PortletURL searchURL = renderResponse.createRenderURL();
 
 searchURL.setWindowState(WindowState.MAXIMIZED);
@@ -221,4 +221,3 @@ catch (RuntimeException e) {
 <%
 }
 %>
-

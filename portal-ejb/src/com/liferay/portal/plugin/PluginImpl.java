@@ -154,7 +154,6 @@ public class PluginImpl implements Plugin, Comparable {
 				.isEquals();
 	}
 
-
 	public int hashCode() {
 		return new HashCodeBuilder().append(getModuleId())
 				.append(getRepositoryURL()).hashCode();

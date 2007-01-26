@@ -26,13 +26,13 @@ import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.Collection;
-import java.util.Iterator;
 
 /**
  * <a href="PluginsCache.java.html"><b><i>View Source</i></b></a>
