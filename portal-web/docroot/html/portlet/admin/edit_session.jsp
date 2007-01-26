@@ -152,7 +152,7 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />accessedUrls'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 						</span>
 					</td>
 				</tr>
@@ -205,7 +205,7 @@ UserTracker userTracker = (UserTracker)currentUsers.get(userTrackerId);
 					</td>
 					<td align="right" class="beta-gradient">
 						<span style="font-size: xx-small;">
-						[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+						[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />sessionAttributes'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 						</span>
 					</td>
 				</tr>

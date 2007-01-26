@@ -143,7 +143,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />tasks'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -212,7 +212,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />logLevels'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -306,7 +306,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />systemProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
@@ -369,7 +369,7 @@
 						</td>
 						<td align="right" class="beta-gradient">
 							<span style="font-size: xx-small;">
-							[<a href="javascript: void(0);" onClick="toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
+							[<a href="javascript: void(0);" onClick="Liferay.Util.toggleByIdSpan(this, '<portlet:namespace />portalProperties'); self.focus();"><span><%= LanguageUtil.get(pageContext, "show") %></span><span style="display: none;"><%= LanguageUtil.get(pageContext, "hide") %></span></a>]
 							</span>
 						</td>
 					</tr>
