@@ -1,73 +1,3 @@
-var Accordion = Class.create();
-Accordion.prototype = {
-
-	initialize: function(container, varName) {
-		this.container = container;
-		this.contentList = null;
-		this.headerList = null;
-		this.speed = 15;
-		this.timer = null;
-		this.varName = varName;
-		this.headerList = null;
-		this.contentList = null;
-	},
-	
-	animate: function() {
-		var changed = false;
-		var speed = this.speed;
-		this.contentList.each(function(item) {
-			if (item.style.height == "") {
-				item.style.height = item.offsetHeight + "px";
-			}
-			if (item.expand) {
-				var div = item.getElementsByTagName("div")[0];
-				if (item.offsetHeight < div.offsetHeight) {
-					item.style.height = (parseInt(item.style.height) + speed) + "px";
-					changed = true;
-				}
-			}
-			else {
-				if (item.offsetHeight > speed) {
-					item.style.height = (parseInt(item.style.height) - speed) + "px";
-					changed = true;
-				}
-				else {
-					item.style.height = "1px";
-				}
-			}
-		});
-		
-		if (changed) {
-			this.timer = setTimeout(this.varName + ".animate()", 30);
-		}
-		else {
-			this.timer = 0;
-		}
-	},
-
-	show: function(obj) {
-		var self = this;
-		
-		if (this.headerList == null) {
-			this.headerList = _$P(".portlet-rss-header");
-			this.contentList = _$P(".portlet-rss-content");
-		}
-
-		this.headerList.each(function(i) {
-			if (this == obj) {
-				self.contentList[i].expand = true;
-			}
-			else {
-				self.contentList[i].expand = false;
-			}
-		});
-
-		if (!this.timer) {
-			this.timer = setTimeout(this.varName + ".animate()", 0);
-		}
-	}
-}
-		
 function changeBackground(path, extension) { 
 	var bodyWidth; 
 	if (is_safari) { 
@@ -1275,7 +1205,7 @@ var QuickEdit = {
 			}
 
 			input.className = "portlet-form-input-field";
-			input.value = encodeURIComponent(textObj.innerHTML);
+			input.value = textObj.innerHTML;
 			input.textObj = textObj;
 			input.onmouseover = function() {
 				document.onclick = function() {};
@@ -1315,7 +1245,7 @@ var QuickEdit = {
 
 			var textObj = input.textObj;
 			var textDiv = textObj.parentNode;
-			var newText = decodeURIComponent(input.value);
+			var newText = input.value;
 			var oldText = textObj.innerHTML;
 			var opts = textObj.editOptions;
 
