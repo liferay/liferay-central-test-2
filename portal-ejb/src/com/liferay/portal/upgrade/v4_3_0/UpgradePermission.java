@@ -65,6 +65,8 @@ public class UpgradePermission extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_RESOURCE, _COLUMNS_RESOURCE, longPKUpgradeColumn);
 
+		upgradeTable.updateTable();
+
 		Map resourcePKMap = longPKUpgradeColumn.getPKMap();
 
 		// Permissions
