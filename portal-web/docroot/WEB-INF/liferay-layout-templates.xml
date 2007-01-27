@@ -13,6 +13,10 @@
 		</layout-template>
 	</standard>
 	<custom>
+		<layout-template id="freeform" name="Freeform">
+			<template-path>/html/layouttpl/custom/freeform.tpl</template-path>
+			<thumbnail-path>/html/layouttpl/custom/freeform</thumbnail-path>
+		</layout-template>
 		<layout-template id="1_column" name="1 Column">
 			<template-path>/html/layouttpl/custom/1_column.tpl</template-path>
 			<thumbnail-path>/html/layouttpl/custom/1_column</thumbnail-path>

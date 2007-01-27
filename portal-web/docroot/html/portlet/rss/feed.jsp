@@ -40,11 +40,7 @@ catch (Exception e) {
 
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
-		<div class="portlet-rss-header" style="background-color: <%= colorScheme.getPortletSectionSubheaderBg() %>; cursor: default; font-weight: bold; padding: 2px 5px 2px 5px;"
-			<c:if test="<%= !windowState.equals(WindowState.MAXIMIZED) %>">
-				 onclick="<portlet:namespace />rssAccordion.show(this)"
-			</c:if>
-		>
+		<div class="portlet-rss-header" style="background-color: <%= colorScheme.getPortletSectionSubheaderBg() %>; cursor: default; font-weight: bold; padding: 2px 5px 2px 5px; margin-top: 2px;">
 			<%= title %>&nbsp;&nbsp;
 
 			<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/rss/view" /><portlet:param name="url" value="<%= url %>" /></portlet:renderURL>" style="font-weight: normal;">
@@ -52,7 +48,7 @@ catch (Exception e) {
 			</a>
 		</div>
 
-		<div class="portlet-rss-content" style="<%= hide ? "height: 1px;" : "" %> overflow: hidden;">
+		<div class="portlet-rss-content" style="<%= hide ? "display: none" : "" %>">
 			<div style="padding: 0 10px 0 10px;">
 				<div style="height: 10px; font-size: 0;"></div>
 

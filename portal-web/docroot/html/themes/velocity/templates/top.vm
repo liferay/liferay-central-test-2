@@ -58,7 +58,7 @@
 				</div>
 				
 				<div id="layout-global-search">
-					$taglibLiferay.search()
+					$taglibLiferay.journalContentSearch()
 										
 					#if ($themeDisplay.isSignedIn())
 						<div id="layout_nav_menu_list">

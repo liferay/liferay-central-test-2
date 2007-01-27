@@ -58,28 +58,28 @@ function Coordinate(x, y) {
 
 Coordinate.prototype.toString = function() {
 	return "(" + this.x + "," + this.y + ")";
-}
+};
 
 Coordinate.prototype.plus = function(that) {
 	return new Coordinate(this.x + that.x, this.y + that.y);
-}
+};
 
 Coordinate.prototype.minus = function(that) {
 	return new Coordinate(this.x - that.x, this.y - that.y);
-}
+};
 
 Coordinate.prototype.distance = function(that) {
 	var deltaX = this.x - that.x;
 	var deltaY = this.y - that.y;
 
 	return Math.sqrt(Math.pow(deltaX, 2) + Math.pow(deltaY, 2));
-}
+};
 
 Coordinate.prototype.max = function(that) {
 	var x = Math.max(this.x, that.x);
 	var y = Math.max(this.y, that.y);
 	return new Coordinate(x, y);
-}
+};
 
 Coordinate.prototype.constrain = function(min, max) {
 	if (min.x > max.x || min.y > max.y) return this;
@@ -93,19 +93,19 @@ Coordinate.prototype.constrain = function(min, max) {
 	if (max.y != null) y = Math.min(y, max.y);
 
 	return new Coordinate(x, y);
-}
+};
 
 Coordinate.prototype.reposition = function(element) {
 	element.style["top"] = this.y + "px";
 	element.style["left"] = this.x + "px";
-}
+};
 
 Coordinate.prototype.equals = function(that) {
 	if (this == that) return true;
 	if (!that || that == null) return false;
 
 	return this.x == that.x && this.y == that.y;
-}
+};
 
 // returns true of this point is inside specified box
 Coordinate.prototype.inside = function(northwest, southeast) {
@@ -117,12 +117,12 @@ Coordinate.prototype.inside = function(northwest, southeast) {
 	else {
 		return false;
 	}
-}
+};
 
 Coordinate.prototype.insideObject = function(obj, recurse) {
 	var nwOffset = Coordinates.northwestOffset(obj, recurse);
 	var seOffset = nwOffset.plus(new Coordinate(obj.offsetWidth, obj.offsetHeight));
-	var rt = null
+	var rt = null;
 	
 	if (this.inside(nwOffset, seOffset)) {
 		rt = this.minus(nwOffset);
@@ -131,7 +131,7 @@ Coordinate.prototype.insideObject = function(obj, recurse) {
 	}
 	
 	return rt;
-}
+};
 
 // getMousePos(event) has been depricated.  Use mousePos.update(event) instead.
 function getMousePos(event) {
@@ -165,7 +165,7 @@ MousePos.prototype.update = function(event) {
 		this.y = 0;
 
 	return event;
-}
+};
 
 // Track mouse's absolute position (counting scrollbars)
 var mousePos = new MousePos(0,0);

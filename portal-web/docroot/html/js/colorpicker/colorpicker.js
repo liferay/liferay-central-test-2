@@ -36,7 +36,7 @@ function ColorPicker (src, func) {
 		if (func != null) {
 			func();
 		}
-	}
+	};
 	
 	this.toggle = function (obj) {
 		if (cp.style.display == "none") {

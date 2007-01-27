@@ -44,7 +44,7 @@ jQuery.getOne = function(s, context) {
 	}
 
 	return rt;
-}
+};
 
 var Liferay = new Object();
 
@@ -601,7 +601,7 @@ Element.disable = function(element) {
 
 		item.style.cursor = "default";
 	}
-}
+};
 
 Element.changeOpacity = function(object, opacity) {
 	opacity = (opacity >= 100) ? 99.999 : opacity;
@@ -611,13 +611,13 @@ Element.changeOpacity = function(object, opacity) {
 	object.style.MozOpacity = (opacity / 100);
 	object.style.KhtmlOpacity = (opacity / 100);
 	object.style.filter = "alpha(opacity=" + opacity + ")";
-}
+};
 
 Element.remove = function(id) {
 	var obj = jQuery.getOne(id);
 
 	obj.parentNode.removeChild(obj);
-}
+};
 
 function LinkedList() {
 	this.head = null;
@@ -638,7 +638,7 @@ LinkedList.prototype.add = function(obj) {
 		obj.listInfo.prev = this.tail;
 		this.tail = obj;
 	}
-}
+};
 
 LinkedList.prototype.remove = function(obj) {
 	if (this.head) {
@@ -658,7 +658,7 @@ LinkedList.prototype.remove = function(obj) {
 			this.tail = prev;
 		}
 	}
-}
+};
 
 LinkedList.prototype.each = function(func) {
 	var cur = this.head;
@@ -676,11 +676,11 @@ LinkedList.prototype.each = function(func) {
 	}
 
 	return count;
-}
+};
 
 LinkedList.prototype.size = function() {
 	return this.each();
-}
+};
 
 // String functions
 
@@ -774,19 +774,18 @@ var Viewport = {
 	
 	scroll: function() {
 		var x,y;
-		if (self.pageYOffset) // all except Explorer
-		{
+		if (self.pageYOffset) {
+			// all except Explorer
 			x = self.pageXOffset;
 			y = self.pageYOffset;
 		}
-		else if (document.documentElement && document.documentElement.scrollTop)
+		else if (document.documentElement && document.documentElement.scrollTop) {
 			// Explorer 6 Strict
-		{
 			x = document.documentElement.scrollLeft;
 			y = document.documentElement.scrollTop;
 		}
-		else if (document.body) // all other Explorers
-		{
+		else if (document.body) {
+			// all other Explorers
 			x = document.body.scrollLeft;
 			y = document.body.scrollTop;
 		}
@@ -797,7 +796,7 @@ var Viewport = {
 	page: function() {
 		var x,y;
 		var test1 = document.body.scrollHeight;
-		var test2 = document.body.offsetHeight
+		var test2 = document.body.offsetHeight;
 		if (test1 > test2) // all but Explorer Mac
 		{
 			x = document.body.scrollWidth;
@@ -812,7 +811,7 @@ var Viewport = {
 
 		return (new Coordinate(x,y));
 	}
-}
+};
 
 String.prototype.trim = jQuery.trim;
 
@@ -821,4 +820,4 @@ var ZINDEX = {
 	CHAT_BOX: 11,
 	DRAG_ITEM: 10,
 	DRAG_ARROW: 9
-}
+};

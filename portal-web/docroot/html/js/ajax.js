@@ -49,7 +49,7 @@ function AjaxRequest(url, options) {
 				catch(e) {
 				}
 			}
-		}
+		};
 
 	var send = function(url) {
 		var urlArray = url.split("?");
@@ -73,7 +73,7 @@ function AjaxRequest(url, options) {
 		}
 		catch (e) {
 		}
-	}
+	};
 	
 	send(url);
 
@@ -145,7 +145,7 @@ var AjaxUtil = {
 				if (origOnComplete) {
 					origOnComplete();
 				}
-			}
+			};
 			
 			AjaxUtil.request(url, options);
 		}
@@ -173,7 +173,7 @@ var AjaxUtil = {
 			}
 		}
 	}
-}
+};
 
 var ReverseAjax = {
 	initialize: function() {
@@ -210,7 +210,7 @@ var ReverseAjax = {
 	release : function() {
 		AjaxUtil.request(themeDisplay.getPathMain() + "/portal/reverse_ajax?release=1", {reverseAjax:true});
 	}
-}
+};
 
 function $J(JSONText) {
 	return eval("(" + JSONText + ")");

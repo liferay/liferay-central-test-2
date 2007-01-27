@@ -38,7 +38,7 @@ var DragLink = {
 			}
 		}
 	}
-}
+};
 
 var DynamicSelect = {
 	create : function(url, source, target, callback, query) {
@@ -78,7 +78,7 @@ var DynamicSelect = {
 			callback();
 		}
 	}
-}
+};
 
 var LiferayDock = {
 	MODE: {
@@ -296,7 +296,7 @@ var LiferayDock = {
 			this.timer = 0;
 		}
 	}
-}
+};
 
 var LayoutColumns = {
 	arrow: null,
@@ -309,7 +309,7 @@ var LayoutColumns = {
 	plid: "",
 
 	displayArrow: function(mode, left, top) {
-		var arrow = LayoutColumns.arrow
+		var arrow = LayoutColumns.arrow;
 
 		if (!arrow) {
 			arrow = new Object();
@@ -410,10 +410,10 @@ var LayoutColumns = {
 			portlet.onDragStart = function() {
 				this.wasClicked = true;
 				this.style.zIndex = 99;
-			}
+			};
 			portlet.onDrag = function() {
 				this.wasClicked = false;
-			}
+			};
 			portlet.onDragEnd = function() {
 				if (!this.wasClicked) {
 					var left = parseInt(this.style.left);
@@ -429,7 +429,7 @@ var LayoutColumns = {
 					LayoutColumns.savePosition(this);
 				}
 				this.style.zIndex = "";
-			}
+			};
 
 			var contents = _$J(".portlet-container", portlet).get(0);
 			contents.container = portlet;
@@ -441,7 +441,7 @@ var LayoutColumns = {
 					
 					LayoutColumns.current = this.container;
 				}
-			}
+			};
 
 			var resizeHandleList = _$J(".portlet-resize-handle", portlet).get(0);
 
@@ -458,7 +458,7 @@ var LayoutColumns = {
 	
 				resizeHandle.onResizeStart = function() {
 					LayoutColumns.moveToTop(this.container);
-				}
+				};
 	
 				resizeHandle.onResizeEnd = function() {
 					var portlet = this.container;
@@ -472,7 +472,7 @@ var LayoutColumns = {
 					resizeBox.style.height = height + "px";
 					resizeBox.style.width = width + "px";
 					LayoutColumns.savePosition(portlet);
-				}
+				};
 	
 				if (portlet.freeformStyles) {
 					_$J(portlet).css(portlet.freeformStyles.position);
@@ -647,7 +647,7 @@ var LayoutColumns = {
 				"&cmd=drag");
 		}
 	}
-}
+};
 
 var NavFlyout = {
 	zIndex: 1,
@@ -728,7 +728,7 @@ var NavFlyout = {
 			this.isShowing = true;
 		}
 	}
-}
+};
 
 var Navigation = {
 
@@ -936,7 +936,7 @@ var Navigation = {
 			AjaxUtil.request(url);
 		}
 	}
-}
+};
 
 var PortletHeaderBar = {
 
@@ -1057,7 +1057,7 @@ var PortletHeaderBar = {
 			bar.timerIn = setTimeout("PortletHeaderBar.fadeIn(\"" + id + "\")", 150);
 		}
 	}
-}
+};
 
 var PhotoSlider = Class.create();
 PhotoSlider.prototype = {
@@ -1082,7 +1082,7 @@ PhotoSlider.prototype = {
 	animate: function() {
 		if (this.count <= this.TOTAL_FRAMES) {
 			var ratio = this.count / this.TOTAL_FRAMES;
-			var ratio2 = Math.sin(ratio * (Math.PI/2))
+			var ratio2 = Math.sin(ratio * (Math.PI/2));
 			var delta = -(this.page * this.windowWidth) - this.start;
 
 			this.photos.style.left = this.start + (delta * ratio2);
@@ -1111,7 +1111,7 @@ PhotoSlider.prototype = {
 		this.start = parseInt(this.photos.style.left);
 
 		if (this.page < (this.totalPages - 1)) {
-			this.page++
+			this.page++;
 			this.count = 0;
 
 			if (!this.timer) {
@@ -1119,7 +1119,7 @@ PhotoSlider.prototype = {
 			}
 		}
 	}
-}
+};
 
 var Tabs = {
 
@@ -1152,7 +1152,7 @@ var Tabs = {
 			}
 		}
 	}
-}
+};
 
 var QuickEdit = {
 	inputList: new LinkedList(),
@@ -1209,10 +1209,10 @@ var QuickEdit = {
 			input.textObj = textObj;
 			input.onmouseover = function() {
 				document.onclick = function() {};
-			}
+			};
 			input.onmouseout = function() {
 				document.onclick = function() {QuickEdit.inputList.each(QuickEdit.onDone)};
-			}
+			};
 			_$J(input).bind("keydown", function(event) {
 				if (!isTextarea && event.keyCode == 13) {
 					QuickEdit.inputList.each(QuickEdit.onDone);
@@ -1270,7 +1270,7 @@ var QuickEdit = {
 			QuickEdit.inputList.remove(input);
 		}
 	}
-}
+};
 
 var StarRating = new Class({
 	initialize: function(id, options) {
@@ -1407,6 +1407,6 @@ var ToolTip = {
 			}
 		}
 	}
-}
+};
 
 var LiferayDockCached = [[[],[[-0,0],[-26,0],[-46,0],[-57,0],[-57,0]],[[-0,0],[-0,26],[-0,46],[-0,57],[-0,57]],[[-0,0],[-18,18],[-35,35],[-48,48],[-56,56],[-58,58],[-55,55]],[[-0,0],[-26,0],[-51,0],[-74,0],[-92,0],[-106,0],[-114,0],[-117,0],[-113,0]],[[-0,0],[-0,26],[-0,51],[-0,74],[-0,92],[-0,106],[-0,114],[-0,117],[-0,113]],[[-0,0],[-24,12],[-46,23],[-67,33],[-85,42],[-99,50],[-110,55],[-116,58],[-117,58],[-113,57]],[[-0,0],[-12,24],[-23,46],[-33,67],[-42,85],[-50,99],[-55,110],[-58,116],[-58,117],[-57,113]],[[-0,0],[-26,0],[-52,0],[-77,0],[-100,0],[-120,0],[-138,0],[-153,0],[-164,0],[-172,0],[-175,0],[-175,0],[-170,0]],[[-0,0],[-0,26],[-0,52],[-0,77],[-0,100],[-0,120],[-0,138],[-0,153],[-0,164],[-0,172],[-0,175],[-0,175],[-0,170]],[[-0,0],[-19,19],[-37,37],[-54,54],[-70,70],[-84,84],[-96,96],[-105,105],[-112,112],[-116,116],[-117,117],[-115,115],[-110,110]],[[-0,0],[-25,8],[-50,17],[-73,24],[-95,32],[-115,38],[-133,44],[-148,49],[-160,53],[-169,56],[-174,58],[-175,58],[-173,58],[-168,56]],[[-0,0],[-8,25],[-17,50],[-24,73],[-32,95],[-38,115],[-44,133],[-49,148],[-53,160],[-56,169],[-58,174],[-58,175],[-58,173],[-56,168]],[[-0,0],[-22,15],[-44,29],[-65,43],[-85,56],[-103,69],[-120,80],[-135,90],[-148,99],[-159,106],[-167,111],[-172,115],[-175,117],[-175,117],[-172,115],[-166,111]],[[-0,0],[-15,22],[-29,44],[-43,65],[-56,85],[-69,103],[-80,120],[-90,135],[-99,148],[-106,159],[-111,167],[-115,172],[-117,175],[-117,175],[-115,172],[-111,166]],[[-0,0],[-19,19],[-37,37],[-55,55],[-73,73],[-89,89],[-105,105],[-120,120],[-133,133],[-144,144],[-154,154],[-162,162],[-168,168],[-173,173],[-175,175],[-175,175],[-174,174],[-170,170],[-164,164]]],[[],[[-0,0],[-4,0],[-14,0],[-29,0],[-48,0]],[[-0,0],[-0,4],[-0,14],[-0,29],[-0,48]],[[-0,0],[-2,2],[-7,7],[-15,15],[-26,26],[-39,39],[-52,52]],[[-0,0],[-2,0],[-7,0],[-16,0],[-27,0],[-42,0],[-58,0],[-76,0],[-95,0]],[[-0,0],[-0,2],[-0,7],[-0,16],[-0,27],[-0,42],[-0,58],[-0,76],[-0,95]],[[-0,0],[-1,1],[-6,3],[-13,6],[-22,11],[-34,17],[-47,24],[-63,31],[-79,40],[-96,48]],[[-0,0],[-1,1],[-3,6],[-6,13],[-11,22],[-17,34],[-24,47],[-31,63],[-40,79],[-48,96]],[[-0,0],[-1,0],[-5,0],[-11,0],[-19,0],[-29,0],[-41,0],[-55,0],[-70,0],[-87,0],[-105,0],[-124,0],[-143,0]],[[-0,0],[-0,1],[-0,5],[-0,11],[-0,19],[-0,29],[-0,41],[-0,55],[-0,70],[-0,87],[-0,105],[-0,124],[-0,143]],[[-0,0],[-1,1],[-4,4],[-8,8],[-14,14],[-22,22],[-31,31],[-41,41],[-52,52],[-65,65],[-78,78],[-91,91],[-105,105]],[[-0,0],[-1,0],[-4,1],[-10,3],[-17,6],[-26,9],[-37,12],[-50,17],[-64,21],[-79,26],[-96,32],[-113,38],[-131,44],[-150,50]],[[-0,0],[-0,1],[-1,4],[-3,10],[-6,17],[-9,26],[-12,37],[-17,50],[-21,64],[-26,79],[-32,96],[-38,113],[-44,131],[-50,150]],[[-0,0],[-1,1],[-3,2],[-7,5],[-13,9],[-20,13],[-29,19],[-39,26],[-50,33],[-62,42],[-76,50],[-90,60],[-105,70],[-120,80],[-136,91],[-153,102]],[[-0,0],[-1,1],[-2,3],[-5,7],[-9,13],[-13,20],[-19,29],[-26,39],[-33,50],[-42,62],[-50,76],[-60,90],[-70,105],[-80,120],[-91,136],[-102,153]],[[-0,0],[-1,1],[-2,2],[-5,5],[-9,9],[-15,15],[-21,21],[-28,28],[-37,37],[-46,46],[-56,56],[-67,67],[-78,78],[-91,91],[-103,103],[-116,116],[-130,130],[-144,144],[-157,157]]]];

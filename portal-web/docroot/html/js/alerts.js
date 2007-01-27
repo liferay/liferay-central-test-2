@@ -9,7 +9,7 @@ var Alerts = {
 
 	bgFadeIn: function(max, steps, opacity) {
 		var background = Alerts.background;
-		var delta = max/steps
+		var delta = max/steps;
 		
 		if (opacity == null) {
 			opacity = delta;
@@ -25,7 +25,7 @@ var Alerts = {
 	bgFadeOut: function(max, steps, opacity) {
 		var background = Alerts.background;
 		if (background) {
-			var delta = max/steps
+			var delta = max/steps;
 			
 			if (opacity == null) {
 				opacity = max - delta;
@@ -352,4 +352,4 @@ var Alerts = {
     		}
     	}
     }
-}
+};

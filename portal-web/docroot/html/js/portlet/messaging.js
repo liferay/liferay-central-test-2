@@ -214,7 +214,7 @@ var Messaging = {
 			if (i < chatList.length - 1) {
 				jsonString += ",";
 			}
-		})
+		});
 		jsonString += "]";
 
 		_$J.cookie(this.userId + "_chats", jsonString);
@@ -280,7 +280,7 @@ var Messaging = {
 			Messaging.error();
 		}
 	}
-}
+};
 
 var MessagingRoster = {
 	highlightColor : "",
@@ -459,4 +459,4 @@ var MessagingRoster = {
 			emailDiv.style.display = "none";
 		}
 	}
-}
+};

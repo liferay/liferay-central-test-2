@@ -70,7 +70,12 @@ WindowState windowState = renderRequest.getWindowState();
 		%>
 
 		<script type="text/javascript">
-			<portlet:namespace />rssAccordion = new Accordion("p_p_id<portlet:namespace />", "<portlet:namespace />rssAccordion");
+			_$J("#p_p_id<portlet:namespace />").Accordion({
+				headerSelector: '.portlet-rss-header',
+				panelSelector: '.portlet-rss-content',
+				panelHeight: _$J("#p_p_id<portlet:namespace /> .portlet-rss-content:first").height(),
+				speed: 300
+			});
 		</script>
 	</c:otherwise>
 </c:choose>

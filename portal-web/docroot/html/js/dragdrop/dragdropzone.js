@@ -56,7 +56,7 @@ var DropZone = {
 			this.dropList = this.layerArray[layer];
 		}
 	}
-}
+};
 
 var DragDrop = {
 	clone : null,
@@ -336,4 +336,4 @@ var DragDrop = {
 			item.wasClicked = true;
 		}
 	}
-}
+};
