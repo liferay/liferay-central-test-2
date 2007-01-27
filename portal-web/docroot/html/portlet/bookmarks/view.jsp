@@ -245,6 +245,7 @@ portletURL.setParameter("folderId", folderId);
 				resultRows.add(row);
 			}
 			%>
+
 			<c:if test="<%= BookmarksFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_ENTRY) %>">
 				<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "add-entry") %>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= folderId %>" /></portlet:renderURL>';"><br>
 

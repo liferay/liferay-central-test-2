@@ -53,12 +53,6 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 		_totalSize = req.getContentLength();
 	}
 
-//	public LiferayInputStream(HttpSession ses, InputStream is, int size) {
-//		super(is);
-//		_ses = ses;
-//		_totalSize = size;
-//	}
-
 	public int read(byte[] b, int off, int len) throws IOException {
 		int bytesRead = super.read(b, off, len);
 

@@ -31,50 +31,51 @@ import java.util.List;
  *
  */
 public interface Plugin {
-	String getArtifactURL();
 
-	String getAuthor();
+	public String getArtifactURL();
 
-	void setAuthor(String author);
+	public String getAuthor();
 
-	String getLongDescription();
+	public void setAuthor(String author);
 
-	void setLongDescription(String longDescription);
+	public String getLongDescription();
 
-	String getName();
+	public void setLongDescription(String longDescription);
 
-	void setName(String name);
+	public String getName();
 
-	String getModuleId();
+	public void setName(String name);
 
-	void setModuleId(String moduleId);
+	public String getModuleId();
 
-	List getLicenses();
+	public void setModuleId(String moduleId);
 
-	void setLicenses(List licenses);
+	public List getLicenses();
 
-	List getLiferayVersions();
+	public void setLicenses(List licenses);
 
-	void setLiferayVersions(List liferayVersions);
+	public List getLiferayVersions();
 
-	String getPageURL();
+	public void setLiferayVersions(List liferayVersions);
 
-	void setPageURL(String pageURL);
+	public String getPageURL();
 
-	String getRepositoryURL();
+	public void setPageURL(String pageURL);
 
-	void setRepositoryURL(String repositoryURL);
+	public String getRepositoryURL();
 
-	String getShortDescription();
+	public void setRepositoryURL(String repositoryURL);
 
-	void setShortDescription(String shortDescription);
+	public String getShortDescription();
 
-	List getTags();
+	public void setShortDescription(String shortDescription);
 
-	void setTags(List tags);
+	public List getTags();
 
-	String getType();
+	public void setTags(List tags);
 
-	void setType(String type);
+	public String getType();
+
+	public void setType(String type);
 
 }

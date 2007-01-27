@@ -92,7 +92,7 @@ public class PropsUtil {
 
 	public static final String AUTO_DEPLOY_TOMCAT_LIB_DIR = "auto.deploy.tomcat.lib.dir";
 
-	// Plugins
+	// Plugin
 
 	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
 
