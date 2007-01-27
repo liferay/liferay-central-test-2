@@ -81,10 +81,6 @@ public abstract class BaseUpgradeTableImpl {
 
 	public abstract String getExportedData(ResultSet rs) throws Exception;
 
-	public void appendColumn(StringBuffer sb, Object value) throws Exception {
-		appendColumn(sb, value, false);
-	}
-
 	public void appendColumn(StringBuffer sb, Object value, boolean last)
 		throws Exception {
 
@@ -112,13 +108,6 @@ public abstract class BaseUpgradeTableImpl {
 		else {
 			sb.append(StringPool.COMMA);
 		}
-	}
-
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type)
-		throws Exception {
-
-		appendColumn(sb, rs, name, type, false);
 	}
 
 	public void appendColumn(

@@ -138,8 +138,4 @@ public interface PermissionLocalService {
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
-
-	public void updateResourceIds(java.util.Map resourceIdMap)
-		throws com.liferay.portal.SystemException, 
-			com.liferay.portal.PortalException;
 }

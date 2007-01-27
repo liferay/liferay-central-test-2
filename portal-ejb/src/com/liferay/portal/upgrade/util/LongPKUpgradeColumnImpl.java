@@ -22,36 +22,53 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.counter.model.Counter;
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.upgrade.UpgradeException;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="LongPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeTable {
+public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public void appendColumn(StringBuffer sb, Object value, boolean last)
-		throws Exception;
+	public LongPKUpgradeColumnImpl() {
+		this(0, false);
+	}
 
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type,
-			boolean last)
-		throws Exception;
+	public LongPKUpgradeColumnImpl(int pos, boolean trackPKs) {
+		super(pos);
 
-	public String getDeleteSQL() throws Exception;
+		_pkMap = new HashMap();
+		_trackPKs = trackPKs;
+	}
 
-	public String getInsertSQL() throws Exception;
+	public Object getNewValue(Object oldValue) throws UpgradeException {
+		try {
+			Long newValue = new Long(
+				CounterLocalServiceUtil.increment(Counter.class.getName()));
 
-	public String getSelectSQL() throws Exception;
+			if (_trackPKs) {
+				_pkMap.put(oldValue, newValue);
+			}
 
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception;
+			return newValue;
+		}
+		catch (Exception e) {
+			throw new UpgradeException(e);
+		}
+	}
 
-	public void updateTable() throws Exception;
+	public Map getPKMap() {
+		return _pkMap;
+	}
+
+	private Map _pkMap;
+	private boolean _trackPKs;
 
 }

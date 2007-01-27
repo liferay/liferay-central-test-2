@@ -22,12 +22,11 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.LongPKUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.SwapColumnUpgradeTableImpl;
-import com.liferay.portal.upgrade.util.PKUpgradeTable;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
+import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import java.sql.Types;
@@ -38,19 +37,18 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="UpgradePermissions.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradePermission.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Alexander Chow
  *
  */
-public class UpgradePermissions extends UpgradeProcess {
+public class UpgradePermission extends UpgradeProcess {
 
 	public void upgrade() throws UpgradeException {
 		_log.info("Upgrading");
 
 		try {
 			_upgradePermission();
-			_upgradeResource();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
@@ -59,51 +57,59 @@ public class UpgradePermissions extends UpgradeProcess {
 
 	private void _upgradePermission() throws Exception {
 
-		// Handle permissions table
+		// Resource
 
-		PKUpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_PERMISSION, _COLUMNS_PERMISSION, true);
+		LongPKUpgradeColumnImpl longPKUpgradeColumn =
+			new LongPKUpgradeColumnImpl(0, true);
+
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_RESOURCE, _COLUMNS_RESOURCE, longPKUpgradeColumn);
+
+		Map resourcePKMap = longPKUpgradeColumn.getPKMap();
+
+		// Permissions
+
+		longPKUpgradeColumn = new LongPKUpgradeColumnImpl(0, true);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_PERMISSION, _COLUMNS_PERMISSION, longPKUpgradeColumn,
+			new SwapUpgradeColumnImpl("resourceId", resourcePKMap));
 
 		upgradeTable.updateTable();
 
-		Map permissionIdMap = upgradeTable.getPKMap();
+		Map permissionPKMap = longPKUpgradeColumn.getPKMap();
 
-		// Handle mapping tables
+		// Groups_Permissions
 
-		UpgradeTable groupMap = new SwapColumnUpgradeTableImpl(
+		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUP_PERMISSIONS,
-			permissionIdMap);
-
-		groupMap.updateTable();
-
-		UpgradeTable roleMap = new SwapColumnUpgradeTableImpl(
-			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
-			permissionIdMap);
-
-		roleMap.updateTable();
-
-		UpgradeTable userMap = new SwapColumnUpgradeTableImpl(
-			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
-			permissionIdMap);
-
-		userMap.updateTable();
-
-		UpgradeTable orgGroupMap = new SwapColumnUpgradeTableImpl(
-			_TABLE_ORG_GROUP_PERMISSION, _COLUMNS_ORG_GROUP_PERMISSION,
-			permissionIdMap);
-
-		orgGroupMap.updateTable();
-	}
-
-	private void _upgradeResource() throws Exception {
-		PKUpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_RESOURCE, _COLUMNS_RESOURCE, true);
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
 
 		upgradeTable.updateTable();
 
-		Map resourceIdMap = upgradeTable.getPKMap();
+		// Roles_Permissions
 
-		PermissionLocalServiceUtil.updateResourceIds(resourceIdMap);
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+
+		upgradeTable.updateTable();
+
+		// Users_Permissions
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+
+		upgradeTable.updateTable();
+
+		// OrgGroupPermission
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_ORG_GROUP_PERMISSION, _COLUMNS_ORG_GROUP_PERMISSION,
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+
+		upgradeTable.updateTable();
 	}
 
 	private static final String _TABLE_PERMISSION = "Permission_";
@@ -139,26 +145,26 @@ public class UpgradePermissions extends UpgradeProcess {
 	};
 
 	private static final Object[][] _COLUMNS_GROUP_PERMISSIONS = {
-		{"permissionId", new Integer(Types.BIGINT)},
-		{"groupId", new Integer(Types.BIGINT)}
+		{"groupId", new Integer(Types.BIGINT)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
 	private static final Object[][] _COLUMNS_ROLES_PERMISSIONS = {
-		{"permissionId", new Integer(Types.BIGINT)},
-		{"roleId", new Integer(Types.VARCHAR)}
+		{"roleId", new Integer(Types.VARCHAR)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
 	private static final Object[][] _COLUMNS_USERS_PERMISSIONS = {
-		{"permissionId", new Integer(Types.BIGINT)},
-		{"userId", new Integer(Types.VARCHAR)}
+		{"userId", new Integer(Types.VARCHAR)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
 	private static final Object[][] _COLUMNS_ORG_GROUP_PERMISSION = {
-		{"permissionId", new Integer(Types.BIGINT)},
 		{"organizationId", new Integer(Types.VARCHAR)},
-		{"groupId", new Integer(Types.BIGINT)}
+		{"groupId", new Integer(Types.BIGINT)},
+		{"permissionId", new Integer(Types.BIGINT)}
 	};
 
-	private static Log _log = LogFactory.getLog(UpgradePermissions.class);
+	private static Log _log = LogFactory.getLog(UpgradePermission.class);
 
 }

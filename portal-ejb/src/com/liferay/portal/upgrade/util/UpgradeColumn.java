@@ -22,36 +22,18 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.upgrade.UpgradeException;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeTable {
+public interface UpgradeColumn {
 
-	public void appendColumn(StringBuffer sb, Object value, boolean last)
-		throws Exception;
+	public boolean isApplicable(int pos, String name);
 
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type,
-			boolean last)
-		throws Exception;
-
-	public String getDeleteSQL() throws Exception;
-
-	public String getInsertSQL() throws Exception;
-
-	public String getSelectSQL() throws Exception;
-
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception;
-
-	public void updateTable() throws Exception;
+	public Object getNewValue(Object oldValue) throws UpgradeException;
 
 }

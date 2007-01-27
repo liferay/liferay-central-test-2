@@ -209,12 +209,6 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			actionIds, resourceId);
 	}
 
-	public void updateResourceIds(java.util.Map resourceIdMap)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		PermissionLocalServiceFactory.getTxImpl().updateResourceIds(resourceIdMap);
-	}
-
 	public void ejbCreate() throws CreateException {
 	}
 

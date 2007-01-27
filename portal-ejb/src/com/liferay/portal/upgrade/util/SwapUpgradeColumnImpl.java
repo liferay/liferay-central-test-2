@@ -22,36 +22,34 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import com.liferay.portal.upgrade.UpgradeException;
+
+import java.util.Map;
 
 /**
- * <a href="UpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="SwapUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeTable {
+public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public void appendColumn(StringBuffer sb, Object value, boolean last)
-		throws Exception;
+	public SwapUpgradeColumnImpl(int pos, Map columnMap) {
+		super(pos);
 
-	public void appendColumn(
-			StringBuffer sb, ResultSet rs, String name, Integer type,
-			boolean last)
-		throws Exception;
+		_columnMap = columnMap;
+	}
 
-	public String getDeleteSQL() throws Exception;
+	public SwapUpgradeColumnImpl(String name, Map columnMap) {
+		super(name);
 
-	public String getInsertSQL() throws Exception;
+		_columnMap = columnMap;
+	}
 
-	public String getSelectSQL() throws Exception;
+	public Object getNewValue(Object oldValue) throws UpgradeException {
+		return _columnMap.get(oldValue);
+	}
 
-	public void setColumn(
-			PreparedStatement ps, int index, Integer type, String value)
-		throws Exception;
-
-	public void updateTable() throws Exception;
+	private Map _columnMap;
 
 }

@@ -22,18 +22,46 @@
 
 package com.liferay.portal.upgrade.util;
 
-import java.util.Map;
+import com.liferay.portal.upgrade.UpgradeException;
 
 /**
- * <a href="PKUpgradeTable.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Alexander Chow
+ * @author  Brian Wing Shun Chan
  *
  */
-public interface PKUpgradeTable extends UpgradeTable {
+public abstract class BaseUpgradeColumnImpl implements UpgradeColumn {
 
-	public void appendPKMap(Object oldPK, Object newPK);
+	public BaseUpgradeColumnImpl(int pos) {
+		_pos = pos;
+	}
 
-	public Map getPKMap() throws Exception;
+	public BaseUpgradeColumnImpl(String name) {
+		_name = name;
+	}
+
+	public boolean isApplicable(int pos, String name) {
+		if (_pos != -1) {
+			if (_pos == pos) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+		else {
+			if (_name.equals(name)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
+	}
+
+	public abstract Object getNewValue(Object oldValue) throws UpgradeException;
+
+	private int _pos = -1;
+	private String _name;
 
 }

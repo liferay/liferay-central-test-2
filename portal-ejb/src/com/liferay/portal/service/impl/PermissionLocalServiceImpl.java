@@ -57,7 +57,6 @@ import com.liferay.util.Validator;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -559,29 +558,6 @@ public class PermissionLocalServiceImpl implements PermissionLocalService {
 			userId, actionIds, resourceId);
 
 		UserUtil.removePermissions(userId, permissions);
-	}
-
-	public void updateResourceIds(Map resourceIdMap)
-		throws PortalException, SystemException {
-
-		Iterator itr = resourceIdMap.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Long oldResourceId = (Long)itr.next();
-			long newResourceId =
-				((Long)resourceIdMap.get(oldResourceId)).longValue();
-
-			List permissions =
-				PermissionUtil.findByResourceId(oldResourceId.longValue());
-
-			for (int i = 0; i < permissions.size(); i++) {
-				Permission permission = (Permission)permissions.get(i);
-
-				permission.setResourceId(newResourceId);
-
-				PermissionUtil.update(permission);
-			}
-		}
 	}
 
 	protected boolean checkOrgGroupPermission(

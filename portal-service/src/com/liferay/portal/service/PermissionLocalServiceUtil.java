@@ -229,11 +229,4 @@ public class PermissionLocalServiceUtil {
 		permissionLocalService.unsetUserPermissions(userId, actionIds,
 			resourceId);
 	}
-
-	public static void updateResourceIds(java.util.Map resourceIdMap)
-		throws com.liferay.portal.PortalException, 
-			com.liferay.portal.SystemException {
-		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
-		permissionLocalService.updateResourceIds(resourceIdMap);
-	}
 }

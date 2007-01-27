@@ -24,7 +24,8 @@ package com.liferay.portal.upgrade.v4_3_0;
 
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
-import com.liferay.portal.upgrade.util.LongPKUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
+import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 
 import java.sql.Types;
@@ -52,8 +53,8 @@ public class UpgradeAddress extends UpgradeProcess {
 	}
 
 	private void _upgradeAddress() throws Exception {
-		UpgradeTable upgradeTable = new LongPKUpgradeTableImpl(
-			_TABLE_NAME, _COLUMNS);
+		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
+			_TABLE_NAME, _COLUMNS, new LongPKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}
