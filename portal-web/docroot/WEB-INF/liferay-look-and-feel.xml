@@ -360,7 +360,6 @@
 		<templates-path>/html/themes/exodus/templates</templates-path>
 		<images-path>/html/themes/exodus/images</images-path>
 		<template-extension>jsp</template-extension>
-		<enable-freeform-layout>true</enable-freeform-layout>
 		<color-scheme id="01" name="Midnight">
 			<![CDATA[
 				body-bg=#f5f5f5
