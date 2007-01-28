@@ -22,10 +22,6 @@
 
 package com.liferay.portal.upgrade.util;
 
-import com.liferay.portal.upgrade.UpgradeException;
-
-import java.util.Map;
-
 /**
  * <a href="SwapUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -34,22 +30,22 @@ import java.util.Map;
  */
 public class SwapUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
-	public SwapUpgradeColumnImpl(int pos, Map columnMap) {
+	public SwapUpgradeColumnImpl(int pos, ValueMapper valueMapper) {
 		super(pos);
 
-		_columnMap = columnMap;
+		_valueMapper = valueMapper;
 	}
 
-	public SwapUpgradeColumnImpl(String name, Map columnMap) {
+	public SwapUpgradeColumnImpl(String name, ValueMapper valueMapper) {
 		super(name);
 
-		_columnMap = columnMap;
+		_valueMapper = valueMapper;
 	}
 
-	public Object getNewValue(Object oldValue) throws UpgradeException {
-		return _columnMap.get(oldValue);
+	public Object getNewValue(Object oldValue) throws Exception {
+		return _valueMapper.getNewValue(oldValue);
 	}
 
-	private Map _columnMap;
+	private ValueMapper _valueMapper;
 
 }

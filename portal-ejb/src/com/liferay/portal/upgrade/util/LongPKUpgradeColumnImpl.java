@@ -24,10 +24,6 @@ package com.liferay.portal.upgrade.util;
 
 import com.liferay.counter.model.Counter;
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.upgrade.UpgradeException;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * <a href="LongPKUpgradeColumnImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,34 +37,32 @@ public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		this(0, false);
 	}
 
-	public LongPKUpgradeColumnImpl(int pos, boolean trackPKs) {
+	public LongPKUpgradeColumnImpl(int pos, boolean trackValues) {
 		super(pos);
 
-		_pkMap = new HashMap();
-		_trackPKs = trackPKs;
-	}
+		_trackValues = trackValues;
 
-	public Object getNewValue(Object oldValue) throws UpgradeException {
-		try {
-			Long newValue = new Long(
-				CounterLocalServiceUtil.increment(Counter.class.getName()));
-
-			if (_trackPKs) {
-				_pkMap.put(oldValue, newValue);
-			}
-
-			return newValue;
-		}
-		catch (Exception e) {
-			throw new UpgradeException(e);
+		if (_trackValues) {
+			_valueMapper = new MemoryValueMapper();
 		}
 	}
 
-	public Map getPKMap() {
-		return _pkMap;
+	public Object getNewValue(Object oldValue) throws Exception {
+		Long newValue = new Long(
+			CounterLocalServiceUtil.increment(Counter.class.getName()));
+
+		if (_trackValues) {
+			_valueMapper.mapValue(oldValue, newValue);
+		}
+
+		return newValue;
 	}
 
-	private Map _pkMap;
-	private boolean _trackPKs;
+	public ValueMapper getValueMapper() {
+		return _valueMapper;
+	}
+
+	private boolean _trackValues;
+	private ValueMapper _valueMapper;
 
 }

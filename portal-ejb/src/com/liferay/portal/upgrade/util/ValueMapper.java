@@ -23,15 +23,16 @@
 package com.liferay.portal.upgrade.util;
 
 /**
- * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
+ * <a href="ValueMapper.java.html"><b><i>View Source</i></b></a>
  *
+ * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeColumn {
-
-	public boolean isApplicable(int pos, String name);
+public interface ValueMapper {
 
 	public Object getNewValue(Object oldValue) throws Exception;
+
+	public void mapValue(Object oldValue, Object newValue) throws Exception;
 
 }

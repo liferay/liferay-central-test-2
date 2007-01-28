@@ -25,6 +25,7 @@ package com.liferay.portal.upgrade.util;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.DateUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
@@ -318,6 +319,8 @@ public abstract class BaseUpgradeTableImpl {
 			try {
 				con = HibernateUtil.getConnection();
 
+				int count = 0;
+
 				while ((line = br.readLine()) != null) {
 					String[] values = StringUtil.split(line);
 
@@ -326,14 +329,31 @@ public abstract class BaseUpgradeTableImpl {
 							"Columns differ between temp file and schema");
 					}
 
-					ps = con.prepareStatement(insertSQL);
+					if (count == 0) {
+						ps = con.prepareStatement(insertSQL);
+					}
 
 					for (int i = 0; i < values.length; i++) {
 						setColumn(
 							ps, i + 1, (Integer)_columns[i][1], values[i]);
 					}
 
-					ps.executeUpdate();
+					ps.addBatch();
+
+					if (count == _BATCH_SIZE) {
+						ps.executeBatch();
+
+						ps.close();
+
+						count = 0;
+					}
+					else {
+						count++;
+					}
+				}
+
+				if (count != 0) {
+					ps.executeBatch();
 
 					ps.close();
 				}
@@ -349,6 +369,9 @@ public abstract class BaseUpgradeTableImpl {
 
 		_log.info(_tableName + " table repopulated with data");
 	}
+
+	private static final int _BATCH_SIZE = GetterUtil.getInteger(
+		PropsUtil.get("hibernate.jdbc.batch_size"));
 
 	private static final String _SAFE_COMMA_CHARACTER =
 		"_SAFE_COMMA_CHARACTER_";

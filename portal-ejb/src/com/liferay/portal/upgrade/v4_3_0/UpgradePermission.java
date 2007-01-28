@@ -28,10 +28,9 @@ import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.SwapUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
+import com.liferay.portal.upgrade.util.ValueMapper;
 
 import java.sql.Types;
-
-import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -67,7 +66,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable.updateTable();
 
-		Map resourcePKMap = longPKUpgradeColumn.getPKMap();
+		ValueMapper resourcePKMapper = longPKUpgradeColumn.getValueMapper();
 
 		// Permissions
 
@@ -75,17 +74,17 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_PERMISSION, _COLUMNS_PERMISSION, longPKUpgradeColumn,
-			new SwapUpgradeColumnImpl("resourceId", resourcePKMap));
+			new SwapUpgradeColumnImpl("resourceId", resourcePKMapper));
 
 		upgradeTable.updateTable();
 
-		Map permissionPKMap = longPKUpgradeColumn.getPKMap();
+		ValueMapper permissionPKMapper = longPKUpgradeColumn.getValueMapper();
 
 		// Groups_Permissions
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_GROUPS_PERMISSIONS, _COLUMNS_GROUP_PERMISSIONS,
-			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMapper));
 
 		upgradeTable.updateTable();
 
@@ -93,7 +92,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_ROLES_PERMISSIONS, _COLUMNS_ROLES_PERMISSIONS,
-			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMapper));
 
 		upgradeTable.updateTable();
 
@@ -101,7 +100,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_USERS_PERMISSIONS, _COLUMNS_USERS_PERMISSIONS,
-			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMapper));
 
 		upgradeTable.updateTable();
 
@@ -109,7 +108,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 		upgradeTable = new DefaultUpgradeTableImpl(
 			_TABLE_ORG_GROUP_PERMISSION, _COLUMNS_ORG_GROUP_PERMISSION,
-			new SwapUpgradeColumnImpl("permissionId", permissionPKMap));
+			new SwapUpgradeColumnImpl("permissionId", permissionPKMapper));
 
 		upgradeTable.updateTable();
 	}

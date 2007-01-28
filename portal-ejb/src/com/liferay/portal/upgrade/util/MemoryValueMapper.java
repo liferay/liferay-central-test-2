@@ -22,16 +22,30 @@
 
 package com.liferay.portal.upgrade.util;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
- * <a href="UpgradeColumn.java.html"><b><i>View Source</i></b></a>
+ * <a href="MemoryValueMapper.java.html"><b><i>View Source</i></b></a>
  *
+ * @author  Alexander Chow
  * @author  Brian Wing Shun Chan
  *
  */
-public interface UpgradeColumn {
+public class MemoryValueMapper implements ValueMapper {
 
-	public boolean isApplicable(int pos, String name);
+	public MemoryValueMapper() {
+		_map = new HashMap();
+	}
 
-	public Object getNewValue(Object oldValue) throws Exception;
+	public Object getNewValue(Object oldValue) throws Exception {
+		return _map.get(oldValue);
+	}
+
+	public void mapValue(Object oldValue, Object newValue) throws Exception {
+		_map.put(oldValue, newValue);
+	}
+
+	private Map _map;
 
 }
