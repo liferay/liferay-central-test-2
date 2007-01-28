@@ -40,6 +40,6 @@
 		<tr>
 			<td class="portlet-shadow-ml"><div></div></td>
 			<td class="portlet-container" width="100%">
-	
+
 			<div id="p_p_body_<%= portletDisplay.getId() %>" style="overflow: hidden; <%= (portletDisplay.isStateMin()) ? "height: 1px;" : "" %>">
     		    <div class="slide-maximize-reference">

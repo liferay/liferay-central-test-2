@@ -29,12 +29,12 @@ LayoutColumns.highlight = "<%= colorScheme.getBodyBg() %>";
 function resizeWallpaper() {
 	var bg = _$J.getOne("background-wallpaper");
 	var box = _$J.getOne("background-wallpaper-container");
-	
+
 	if (bg && box) {
 	    if (!is_safari) {
 	    	var scrollHeight = document.body.scrollHeight;
 	    	var clientHeight = document.body.clientHeight;
-	        	
+
 	        box.style.height = (scrollHeight > clientHeight ? scrollHeight : clientHeight) + "px";
 	        box.style.width = "100%";
 	    }
@@ -42,10 +42,10 @@ function resizeWallpaper() {
 	        box.style.height = document.body.offsetHeight + "px";
 	        box.style.width = document.body.offsetWidth + "px";
 	    }
-	    
+
 		var pageRatio = box.offsetWidth / box.offsetHeight;
 		var ratio = 1;
-		
+
 		if (pageRatio > ratio) {
 			bg.style.height = "";
 			bg.style.width = box.offsetWidth + "px";
