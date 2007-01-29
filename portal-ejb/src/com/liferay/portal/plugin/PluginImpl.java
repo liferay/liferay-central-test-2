@@ -24,6 +24,7 @@ package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -39,33 +40,12 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PluginImpl implements Plugin, Comparable {
 
-	public String getArtifactURL() {
-		StringTokenizer st = new StringTokenizer(
-				getModuleId(), StringPool.SLASH);
-		String groupId = st.nextToken();
-		String artifactId = st.nextToken();
-		String version = st.nextToken();
-		String type = st.nextToken();
-		return getRepositoryURL() + StringPool.SLASH + groupId +
-				StringPool.SLASH + artifactId + StringPool.SLASH + version +
-				StringPool.SLASH + artifactId +	StringPool.DASH + version +
-				StringPool.PERIOD + type;
+	public String getModuleId() {
+		return _moduleId;
 	}
 
-	public String getAuthor() {
-		return _author;
-	}
-
-	public void setAuthor(String author) {
-		_author = author;
-	}
-
-	public String getLongDescription() {
-		return _longDescription;
-	}
-
-	public void setLongDescription(String longDescription) {
-		_longDescription = longDescription;
+	public void setModuleId(String moduleId) {
+		_moduleId = moduleId;
 	}
 
 	public String getName() {
@@ -76,12 +56,28 @@ public class PluginImpl implements Plugin, Comparable {
 		_name = name;
 	}
 
-	public String getModuleId() {
-		return _moduleId;
+	public String getAuthor() {
+		return _author;
 	}
 
-	public void setModuleId(String moduleId) {
-		_moduleId = moduleId;
+	public void setAuthor(String author) {
+		_author = author;
+	}
+
+	public String getType() {
+		return _type;
+	}
+
+	public void setType(String type) {
+		_type = type;
+	}
+
+	public List getTags() {
+		return _tags;
+	}
+
+	public void setTags(List tags) {
+		_tags = tags;
 	}
 
 	public List getLicenses() {
@@ -100,6 +96,30 @@ public class PluginImpl implements Plugin, Comparable {
 		_liferayVersions = liferayVersions;
 	}
 
+	public String getShortDescription() {
+		return _shortDescription;
+	}
+
+	public void setShortDescription(String shortDescription) {
+		_shortDescription = shortDescription;
+	}
+
+	public String getLongDescription() {
+		return _longDescription;
+	}
+
+	public void setLongDescription(String longDescription) {
+		_longDescription = longDescription;
+	}
+
+	public List getScreenshotURLs() {
+		return _screenshotURLs;
+	}
+
+	public void setScreenshotURLs(List screenshotURLs) {
+		_screenshotURLs = screenshotURLs;
+	}
+
 	public String getPageURL() {
 		return _pageURL;
 	}
@@ -116,28 +136,42 @@ public class PluginImpl implements Plugin, Comparable {
 		_repositoryURL = repositoryURL;
 	}
 
-	public String getShortDescription() {
-		return _shortDescription;
+	public String getRecommendedWARName() {
+		return _recommendedWARName;
 	}
 
-	public void setShortDescription(String shortDescription) {
-		_shortDescription = shortDescription;
+	public void setRecommendedWARName(String recommendedWARName) {
+		_recommendedWARName = recommendedWARName;
 	}
 
-	public List getTags() {
-		return _tags;
+	public String getArtifactURL() {
+		StringTokenizer st = new StringTokenizer(
+				getModuleId(), StringPool.SLASH);
+		String groupId = st.nextToken();
+		String artifactId = st.nextToken();
+		String version = st.nextToken();
+		String type = st.nextToken();
+		return getRepositoryURL() + StringPool.SLASH + groupId +
+				StringPool.SLASH + artifactId + StringPool.SLASH + version +
+				StringPool.SLASH + artifactId +	StringPool.DASH + version +
+				StringPool.PERIOD + type;
 	}
 
-	public void setTags(List tags) {
-		_tags = tags;
-	}
+	public String getWARName() {
 
-	public String getType() {
-		return _type;
-	}
+		String name = getRecommendedWARName();
 
-	public void setType(String type) {
-		_type = type;
+		if (Validator.isNull(name)) {
+			StringTokenizer st = new StringTokenizer(
+					getModuleId(), StringPool.SLASH);
+			String groupId = st.nextToken();
+			String artifactId = st.nextToken();
+			String version = st.nextToken();
+			String type = st.nextToken();
+			return artifactId + StringPool.PERIOD + type;
+		}
+
+		return name;
 	}
 
 	public boolean equals(Object o) {
@@ -170,16 +204,18 @@ public class PluginImpl implements Plugin, Comparable {
 		return getName().compareTo(p.getName());
 	}
 
-	private String _author;
-	private String _name;
 	private String _moduleId;
-	private String _longDescription;
+	private String _name;
+	private String _author;
+	private String _type;
+	private List   _tags = new ArrayList();
 	private List   _licenses = new ArrayList();
 	private List   _liferayVersions  = new ArrayList();
+	private String _shortDescription;
+	private String _longDescription;
 	private String _pageURL;
 	private String _repositoryURL;
-	private String _shortDescription;
-	private List   _tags = new ArrayList();
-	private String _type;
+	private String _recommendedWARName;
+	private List _screenshotURLs = new ArrayList();
 
 }

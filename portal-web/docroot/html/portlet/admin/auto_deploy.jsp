@@ -133,8 +133,13 @@
 
 		<br><br>
 
+		<%= LanguageUtil.get(pageContext, "url") %><br>
 		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
 		<liferay-ui:icon image="search" url="<%= searchPluginsURL.toString() %>" /><nobr/><a href="<%=searchPluginsURL.toString()%>"><%=LanguageUtil.get(pageContext, "search")%></a>
+
+		<br><br>
+		<%= LanguageUtil.get(pageContext, "deployment-file-name") %><br>
+		<input class="form-text" name="<portlet:namespace />recommendedWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
 
 		<br><br>
 

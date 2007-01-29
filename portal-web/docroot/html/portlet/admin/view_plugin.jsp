@@ -25,23 +25,34 @@
 <%@ include file="/html/portlet/admin/init.jsp" %>
 
 <%
-	String redirect = ParamUtil.getString(request, "redirect");
+String redirect = ParamUtil.getString(request, "redirect");
 
-	String moduleId = ParamUtil.getString(request, "moduleId");
+String moduleId = ParamUtil.getString(request, "moduleId");
 
-	String repositoryURL = ParamUtil.getString(request, "repositoryURL");
+String repositoryURL = ParamUtil.getString(request, "repositoryURL");
 
-	Plugin plugin = PluginUtil.getPluginById(moduleId, repositoryURL);
+Plugin plugin = PluginUtil.getPluginById(moduleId, repositoryURL);
 
-	PortletURL installURL = renderResponse.createActionURL();
+PortletURL installURL = renderResponse.createActionURL();
 
-	installURL.setWindowState(WindowState.MAXIMIZED);
-	installURL.setParameter("struts_action", "/admin/edit_server");
-	installURL.setParameter("cmd", "remoteDeploy");
-	installURL.setParameter("url", plugin.getArtifactURL());
-	installURL.setParameter("redirect", currentURL.toString());
+installURL.setWindowState(WindowState.MAXIMIZED);
+installURL.setParameter("struts_action", "/admin/edit_server");
+installURL.setParameter("cmd", "remoteDeploy");
+installURL.setParameter("url", plugin.getArtifactURL());
+installURL.setParameter("redirect", currentURL.toString());
 
+String id = "pluginInstaller" + System.currentTimeMillis();
 %>
+
+<style type="text/css">
+	a.thumbnail img {
+		border: 1px solid grey;
+		padding: 5px;
+		margin: 5px;
+		background-color: #eee;
+		width: 120px;
+	}
+</style>
 
 <liferay-ui:tabs names="remote-deploy" backURL="<%=redirect%>"/>
 
@@ -58,6 +69,15 @@
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= plugin.getName() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "author") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= LanguageUtil.get(pageContext, plugin.getAuthor()) %>
 	</td>
 </tr>
 <tr>
@@ -153,17 +173,45 @@
 		<%= plugin.getShortDescription() %>
 	</td>
 </tr>
+<% if ((plugin.getScreenshotURLs() != null) && !plugin.getScreenshotURLs().isEmpty()) { %>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "screenshots") %>:
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td valign="top">
+			<%
+			Iterator itr4 = plugin.getScreenshotURLs().iterator();
+
+			while (itr4.hasNext()) {
+				String screenshotURL = (String)itr4.next();
+			%>
+
+				<a href="<%= screenshotURL %>" class="thumbnail">
+					<img alt="Thumbnail" src="<%= screenshotURL %>" align="left"/>
+				</a>
+			<%
+			}
+			%>
+		</td>
+	</tr>
+<% } %>
 <% if (Validator.isNotNull(plugin.getLongDescription())) { %>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "long-description") %>:
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+			<%= plugin.getLongDescription() %>
+		</td>
+	</tr>
+<% } %>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "long-description") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<%= plugin.getLongDescription() %>
+	<td colspan="2">
+		&nbsp;
 	</td>
 </tr>
-<% } %>
 <tr>
 	<td>
 		&nbsp;
@@ -171,8 +219,37 @@
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<form action="<%=installURL.toString()%>" method="post">
-			<input type="submit" value="<%=LanguageUtil.get(pageContext, "install")%>">
+			<input type="hidden" name="<portlet:namespace/>progressId" value="<%=id%>"/>
+			<input type="submit" value="<%=LanguageUtil.get(pageContext, "install")%>" onclick='<%= id%>.startProgress()'>
 		</form>
 	</td>
 </tr>
 </table>
+
+
+
+<script src="<%= themeDisplay.getPathJavaScript() %>/upload_progress.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+	var <%= id %> = new UploadProgress("<%= id %>", "<%= Http.encodeURL(redirect) %>");
+</script>
+
+<iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
+
+<div id="<%= id %>-bar-div" style="text-align: center; display: none;">
+	<br>
+	<%=LanguageUtil.get(pageContext, "downloading")%>...
+	<br>
+	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.gif) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
+		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.gif) scroll no-repeat top left;">
+			<div style="height: 23px; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_right.gif) scroll no-repeat top right;">
+				<div id="<%= id %>-bar" style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_middle.gif) scroll repeat-x top left; overflow: hidden; width: 0;">
+					<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_left.gif) scroll no-repeat top left;">
+						<div class="font-small" style="font-weight: bold; height: 23px; padding-top: 3px; text-align: center; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_right.gif) scroll no-repeat top right;">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>

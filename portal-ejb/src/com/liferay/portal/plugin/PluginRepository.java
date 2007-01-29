@@ -35,7 +35,7 @@ import java.util.Set;
 import java.util.TreeSet;
 
 /**
- * <a href="PluginsCache.java.html"><b><i>View Source</i></b></a>
+ * <a href="PluginRepository.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  */
@@ -43,12 +43,19 @@ public class PluginRepository {
 
 	public void addPlugin(Plugin plugin) {
 
+		_artifactURLIndex.put(plugin.getArtifactURL(), plugin);
+		_moduleIdIndex.put(plugin.getModuleId(), plugin);
+
 		_plugins.add(plugin);
 		_tags.addAll(plugin.getTags());
-		_moduleIdIndex.put(plugin.getModuleId(), plugin);
 	}
 
-	public Plugin findPlugin(String moduleId) {
+	public Plugin findPluginByArtifactURL(String artifactURL) {
+
+		return (Plugin) _artifactURLIndex.get(artifactURL);
+	}
+
+	public Plugin findPluginByModuleId(String moduleId) {
 
 		return (Plugin) _moduleIdIndex.get(moduleId);
 	}
@@ -78,6 +85,7 @@ public class PluginRepository {
 		return result;
 	}
 
+	private Map _artifactURLIndex = new HashMap();
 	private Map _moduleIdIndex = new HashMap();
 	private List _plugins = new ArrayList();
 	private Set _tags = new TreeSet();

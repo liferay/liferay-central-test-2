@@ -42,7 +42,7 @@ PortletURL searchURL = renderResponse.createRenderURL();
 
 searchURL.setWindowState(WindowState.MAXIMIZED);
 searchURL.setParameter("struts_action", "/admin/plugins");
-searchURL.setParameter("redirect", currentURL);
+searchURL.setParameter("redirect", redirect);
 
 
 PortletURL refreshRepositoryURL = renderResponse.createActionURL();
@@ -126,7 +126,7 @@ try {
 <%
 	List headerNames = new ArrayList();
 
-	headerNames.add("application");
+	headerNames.add("plugin-name");
 	headerNames.add("type");
 	headerNames.add("tags");
 	headerNames.add(StringPool.BLANK);
@@ -156,17 +156,26 @@ try {
 		rowURL.setParameter("moduleId", plugin.getModuleId());
 		rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, plugin.getName(), rowURL.toString(), null, plugin.getShortDescription());
+		// Name and short description
 
-		// Name
+		StringBuffer sb = new StringBuffer();
 
-		row.addText(rowTextEntry);
+		sb.append("<b>");
+		sb.append(plugin.getName());
+		sb.append("</b>");
+
+		if (Validator.isNotNull(plugin.getShortDescription())) {
+			sb.append("<br>");
+			sb.append("<span style=\"font-size: xx-small;\">");
+			sb.append(plugin.getShortDescription());
+			sb.append("</span>");
+		}
+
+		row.addText(sb.toString(), rowURL);
 
 		// Type
 
-		rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
-
-		rowTextEntry.setName(plugin.getType());
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, plugin.getType(), null, null, null);
 
 		row.addText(rowTextEntry);
 

@@ -74,7 +74,23 @@ public class PluginUtil {
 	public static Plugin getPluginById(String moduleId, String repositoryURL)
 			throws DocumentException, IOException {
 
-		return getRepository(repositoryURL).findPlugin(moduleId);
+		return getRepository(repositoryURL).findPluginByModuleId(moduleId);
+	}
+
+	public static Plugin getPluginByURL(String url) {
+		String[] repositoryURLs = getRepositoryURLs();
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			String repositoryURL = repositoryURLs[i];
+			try {
+				PluginRepository repo =  getRepository(repositoryURL);
+				return repo.findPluginByArtifactURL(url);
+			}
+			catch(RuntimeException e) {
+				_log.info("Error loading repository " + repositoryURL, e);
+			}
+		}
+		return null;
 	}
 
 	public static String[] getRepositoryURLs() {
@@ -168,6 +184,7 @@ public class PluginUtil {
 				return repository;
 			}
 			else {
+				_lastUpdateDate = new Date();
 
 				throw new RuntimeException("Download error");
 			}
@@ -222,17 +239,17 @@ public class PluginUtil {
 			if (!_isCurrentVersionSupported(liferayVersions)) {
 				continue;
 			}
-			plugin.setLiferayVersions(liferayVersions);
-
 			plugin.setRepositoryURL(repositoryURL);
-			plugin.setTags(liferayVersions);
-
 			plugin.setName(GetterUtil.getString(
 					pluginElm.elementText("name"), plugin.getName()));
 			plugin.setModuleId(GetterUtil.getString(
 					pluginElm.elementText("module-id"), plugin.getModuleId()));
+			plugin.setRecommendedWARName(GetterUtil.getString(
+					pluginElm.elementText("recommended-war-name"),
+					plugin.getRecommendedWARName()));
 			plugin.setType(GetterUtil.getString(
 					pluginElm.elementText("type"), plugin.getType()));
+			plugin.setTags(_readElementList(pluginElm.element("tags"), "tag"));
 			plugin.setShortDescription(GetterUtil.getString(
 					pluginElm.elementText("short-description"),
 					plugin.getShortDescription()));
@@ -241,13 +258,14 @@ public class PluginUtil {
 					plugin.getLongDescription()));
 			plugin.setPageURL(GetterUtil.getString(
 					pluginElm.elementText("page-url"), plugin.getPageURL()));
+			plugin.setScreenshotURLs(_readElementList(
+					pluginElm.element("screenshots"), "screenshot-url"));
 			plugin.setAuthor(GetterUtil.getString(
 					pluginElm.elementText("author"), plugin.getAuthor()));
 
-			plugin.setTags(_readElementList(pluginElm.element("tags"), "tag"));
-
 			plugin.setLicenses(_readElementList(
 					pluginElm.element("licenses"), "license"));
+			plugin.setLiferayVersions(liferayVersions);
 
 			plugins.addPlugin(plugin);
 		}

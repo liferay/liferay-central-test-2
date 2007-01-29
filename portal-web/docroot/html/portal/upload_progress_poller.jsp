@@ -27,17 +27,24 @@
 <%
 String uploadProgressId = ParamUtil.getString(request, "uploadProgressId");
 
-String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME));
+String fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME + uploadProgressId));
+if (fileName == null) {
+	fileName = GetterUtil.getString((String)session.getAttribute(LiferayFileUpload.FILE_NAME));
+}
 
-Integer percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT);
-
+Integer percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT + uploadProgressId);
+if (percent == null) {
+	percent = (Integer)session.getAttribute(LiferayFileUpload.PERCENT);
+}
 if (percent == null) {
 	percent = new Integer(100);
 }
 
 if (percent.floatValue() >= 100) {
 	session.removeAttribute(LiferayFileUpload.FILE_NAME);
+	session.removeAttribute(LiferayFileUpload.FILE_NAME + uploadProgressId);
 	session.removeAttribute(LiferayFileUpload.PERCENT);
+	session.removeAttribute(LiferayFileUpload.PERCENT + uploadProgressId);
 }
 %>
 

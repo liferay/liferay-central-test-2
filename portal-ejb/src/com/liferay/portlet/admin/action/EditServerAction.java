@@ -27,6 +27,7 @@ import com.liferay.portal.deploy.AutoDeployPortletListener;
 import com.liferay.portal.deploy.AutoDeployThemeListener;
 import com.liferay.portal.kernel.deploy.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.AutoDeployUtil;
+import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
@@ -48,6 +49,7 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ParamUtil;
+import com.liferay.util.ProgressInputStream;
 import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.NullServletResponse;
@@ -377,28 +379,53 @@ public class EditServerAction extends PortletAction {
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {
+
 		String url = ParamUtil.getString(req, "url");
+		String preferredWARName = ParamUtil.getString(req, "preferredWARName");
+		String progressId = ParamUtil.getString(req, "progressId");
+
+		URL urlObj = new URL(url);
+		GetMethod getFileMethod = new GetMethod(urlObj.toString());
 
 		try {
-			URL urlObj = new URL(url);
-			HttpClient client = new HttpClient();
-			GetMethod getFile = new GetMethod(urlObj.toString());
-			int responseCode = client.executeMethod(getFile);
+			int responseCode = _client.executeMethod(getFileMethod);
 			if (responseCode != 200) {
 				SessionErrors.add(
 						req, "errorResponseFromServer",
 						new Object[]{Integer.toString(responseCode)});
 				return;
 			}
-			byte[] bytes = getFile.getResponseBody();
 
-			getFile.releaseConnection();
+			long contentLength = getFileMethod.getResponseContentLength();
 
-			String fileName = url.substring(url.lastIndexOf(StringPool.SLASH) + 1);
+			ProgressInputStream pis = new ProgressInputStream(
+					req, getFileMethod.getResponseBodyAsStream(),
+					contentLength, progressId);
+
+			byte[] bytes;
+			try {
+				bytes = pis.readAll();
+			} finally {
+				pis.clearProgress();
+			}
+
+			getFileMethod.releaseConnection();
+			_log.info("Downloaded plugin from " + urlObj + " (" + bytes.length +
+					" bytes)");
+
+			String fileName = url.substring(
+					url.lastIndexOf(StringPool.SLASH) + 1);
+
+			String destFileName = null;
+
+			destFileName = _getDestFileName(
+					preferredWARName, url, fileName);
+
 			if ((bytes != null) && (bytes.length > 0)) {
 				String destination =
-						PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) +
-								StringPool.SLASH + fileName;
+						PrefsPropsUtil.getString(
+								PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) +
+								StringPool.SLASH + destFileName;
 
 				FileUtil.write(destination, bytes);
 			}
@@ -407,12 +434,15 @@ public class EditServerAction extends PortletAction {
 			}
 		}
 		catch (MalformedURLException mue) {
+			getFileMethod.releaseConnection();
 			SessionErrors.add(req, "invalidUrl", url); // Inform user of bad URL
 		}
 		catch (IOException ioe) {
+			getFileMethod.releaseConnection();
 			SessionErrors.add(req, "errorConnectingToServer", ioe);
 		}
-	}
+
+}
 
 	protected void shutdown(ActionRequest req) throws Exception {
 		long minutes = ParamUtil.getInteger(req, "minutes") * Time.MINUTE;
@@ -445,6 +475,29 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
+	private String _getDestFileName(
+			String preferredWARName, String url, String fileName) {
+		String destFileName = null;
+
+		if (Validator.isNull(destFileName)) {
+			destFileName = preferredWARName;
+		}
+
+		if (Validator.isNull(destFileName)) {
+			Plugin plugin = PluginUtil.getPluginByURL(url);
+			if (plugin != null) {
+				destFileName = plugin.getWARName();
+			}
+		}
+
+		if (Validator.isNull(destFileName)) {
+			destFileName = fileName;
+		}
+		return destFileName;
+	}
+
 	private static Log _log = LogFactory.getLog(EditServerAction.class);
+
+	private static HttpClient _client = new HttpClient();
 
 }

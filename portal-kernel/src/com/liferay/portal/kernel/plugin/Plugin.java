@@ -31,24 +31,25 @@ import java.util.List;
  *
  */
 public interface Plugin {
+	public String getModuleId();
 
-	public String getArtifactURL();
-
-	public String getAuthor();
-
-	public void setAuthor(String author);
-
-	public String getLongDescription();
-
-	public void setLongDescription(String longDescription);
+	public void setModuleId(String moduleId);
 
 	public String getName();
 
 	public void setName(String name);
 
-	public String getModuleId();
+	public String getAuthor();
 
-	public void setModuleId(String moduleId);
+	public void setAuthor(String author);
+
+	public String getType();
+
+	public void setType(String type);
+
+	public List getTags();
+
+	public void setTags(List tags);
 
 	public List getLicenses();
 
@@ -58,6 +59,18 @@ public interface Plugin {
 
 	public void setLiferayVersions(List liferayVersions);
 
+	public String getShortDescription();
+
+	public void setShortDescription(String shortDescription);
+
+	public String getLongDescription();
+
+	public void setLongDescription(String longDescription);
+
+	public void setScreenshotURLs(List screenshotURLs);
+
+	public List getScreenshotURLs();
+
 	public String getPageURL();
 
 	public void setPageURL(String pageURL);
@@ -66,16 +79,12 @@ public interface Plugin {
 
 	public void setRepositoryURL(String repositoryURL);
 
-	public String getShortDescription();
+	public String getRecommendedWARName();
 
-	public void setShortDescription(String shortDescription);
+	public void setRecommendedWARName(String recommendedWARName);
 
-	public List getTags();
+	public String getArtifactURL();
 
-	public void setTags(List tags);
-
-	public String getType();
-
-	public void setType(String type);
+	public String getWARName();
 
 }
