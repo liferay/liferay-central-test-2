@@ -34,6 +34,7 @@ String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_S
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
+Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
 String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
 
@@ -44,8 +45,6 @@ try {
 }
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;
-
-	Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
 	if ((renderPortletResource != null) && renderPortletResource.booleanValue()) {
 		addDefaultResource = true;
@@ -451,15 +450,21 @@ else {
 		staticVar = "end";
 	}
 }
+
+boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 %>
 
-<script type="text/javascript">
-	document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
-
-	<c:if test='<%= !staticVar.equals("no") %>'>
-		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
-	</c:if>
-</script>
+<c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
+	<script type="text/javascript">
+		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+	
+		<c:if test="<%= !staticVar.equals("no") %>">
+			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+		</c:if>
+	
+		Liferay.Portlet.process("<%= portletDisplay.getId() %>");
+	</script>
+</c:if>
 
 <%
 RenderRequestFactory.recycle(renderRequestImpl);

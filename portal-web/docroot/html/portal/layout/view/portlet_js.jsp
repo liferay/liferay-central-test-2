@@ -107,6 +107,8 @@ function addPortletHTML(html, container, placeHolder) {
 		LayoutColumns.initPortlet(portletBound);
 	}
 
+	Liferay.Portlet.process(portletId);
+
 	return portletId;
 }
 

@@ -133,16 +133,12 @@
 
 	<c:if test="<%= !themeDisplay.isStatePopUp() %>">
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			_$J(function() {
-				Messaging.init("<%= request.getRemoteUser() %>");
-			});
+			_$J(document).ready(function() { Messaging.init("<%= request.getRemoteUser() %>"); });
 		</c:if>
 
 		<c:if test="<%= GetterUtil.getBoolean(PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED)) && themeDisplay.isSignedIn()%>">
 			if (!is_safari) {
-				_$J(function() {
-					setTimeout("ReverseAjax.initialize()", 2000);
-				});
+				_$J(document).ready(function() { setTimeout("ReverseAjax.initialize()", 2000); });
 			}
 		</c:if>
 
@@ -151,9 +147,21 @@
 		%>
 
 		<c:if test="<%= Validator.isNotNull(scroll) %>">
-			_$J(function() { document.getElementById("<%= scroll %>").scrollIntoView(); });
+			_$J(document).last(function() { document.getElementById("<%= scroll %>").scrollIntoView(); });
 		</c:if>
 	</c:if>
+	
+	Liferay.Portlet.count = <%= layoutTypePortlet.getPortletIds().size() %>;
+	Liferay.Portlet.list = {<%
+		List portletIds = layoutTypePortlet.getPortletIds();
+
+		for (int i = 0; i < portletIds.size(); i++) {
+			out.print("\"" + portletIds.get(i) + "\":1");
+			if (i < portletIds.size() - 1) {
+				out.print(",");
+			}
+		}
+	%>};
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

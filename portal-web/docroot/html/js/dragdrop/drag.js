@@ -19,6 +19,8 @@
 var Drag = {
 	group : null,
 	isDragging : false,
+	scrollDirection: "",
+	scrollTimer: 0,
 
 	makeDraggable : function(group, handle) {
 	    if (handle == null)
@@ -73,6 +75,41 @@ var Drag = {
 		this.maxX = sePosition.x;
 		this.maxY = sePosition.y;
 	},
+
+    scroll : function() {
+        var nwPosition;
+        var group = Drag.group;
+        var setTimer = false;
+        var scrollSpeed = 20;
+        var scrollTop = Viewport.scroll().y;
+
+        if (Drag.scrollDirection == "down") {
+            nwPosition = Coordinates.northwestPosition(group);
+            nwPosition.y += scrollSpeed;
+            nwPosition.reposition(group);
+            window.scrollTo(0, scrollTop + scrollSpeed);
+            setTimer = true;
+        }
+        else if (Drag.scrollDirection == "up" && scrollTop > 0) {
+            nwPosition = Coordinates.northwestPosition(group);
+            nwPosition.y -= scrollSpeed;
+            nwPosition.reposition(group);
+            window.scrollTo(0, scrollTop - scrollSpeed);
+            setTimer = true;
+        }
+        else {
+            setTimer = false;
+        }
+
+        if (setTimer) {
+            Drag.scrollTimer = setTimeout("Drag.scroll()", 30);
+        }
+        else {
+            clearTimeout(Drag.scrollTimer);
+            Drag.scrollDirection = "";
+            Drag.scrollTimer = 0;
+        }
+    },
 
 	setDragHandle : function(handle) {
 		if (handle && handle != null) 
@@ -192,7 +229,7 @@ var Drag = {
 		//Drag.showStatus(mouse, nwPosition, sePosition, nwOffset, seOffset);
 
 		// Automatically scroll the page it drags near the top or bottom
-		var scrollZone = 20;
+		var scrollZone = 30;
 		var scrollSpeed = 5;
 		var scrollTop = Viewport.scroll().y;
 		var pageHeight = Viewport.page().y;
@@ -201,13 +238,19 @@ var Drag = {
 		if ((scrollTop + clientHeight + 2 * scrollZone) < pageHeight
 				&& mousePos.y > (scrollTop + clientHeight - scrollZone)) {
 				
-			window.scroll(0, scrollTop + scrollSpeed);
-			nwPosition.y += scrollSpeed;
+            if (Drag.scrollDirection != "down"){
+                Drag.scrollDirection = "down";
+                Drag.scroll();
+            }
 		}
-		if (scrollTop > 0 && mousePos.y < (scrollTop + scrollZone)) {
-		
-			window.scroll(0, scrollTop - scrollSpeed);
-			nwPosition.y -= scrollSpeed;
+		else if (scrollTop > 0 && mousePos.y < (scrollTop + scrollZone)) {
+            if (Drag.scrollDirection != "up"){
+                Drag.scrollDirection = "up";
+                Drag.scroll();
+            }
+		}
+		else {
+            Drag.scrollDirection = "";
 		}
 		
 		var adjusted = mouse.constrain(group.mouseMin, group.mouseMax);

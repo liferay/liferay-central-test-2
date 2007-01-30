@@ -48,6 +48,72 @@ jQuery.getOne = function(s, context) {
 
 var Liferay = new Object();
 
+
+/**************************
+ * Liferay Portlet Library
+ **************************/
+
+Liferay.Portlet = {
+	count: 0,
+	fn: new Object(),
+	fnAll: new Array(),
+	fnLast: new Array(),
+	list: new Object(),
+
+	process: function(id) {
+
+		if (this.list[id]) {
+			this.list[id] = 0;
+
+			if (this.fn[id]) {
+				for (var i = 0; i < this.fn[id].length; i++) {
+					this.fn[id][i]();
+				}
+				this.fn[id] = new Array();
+			}
+	
+			for (var i = 0; i < this.fnAll.length; i++) {
+				this.fnAll[i](id);
+			}
+		}
+
+		var count = 0;
+
+		for (var i in this.list) {
+			count += this.list[i];
+		}
+
+		if (count <= 0) {
+			for (var i = 0; i < this.fnLast.length; i++) {
+				this.fnLast[i](id);
+			}
+			this.fnLast = new Array();
+		}
+	},
+
+	ready: function(arg1, arg2) {
+		if (typeof arg1 == "function") {
+			this.fnAll.push(arg1);
+		}
+		else if (typeof arg1 == "string" && typeof arg2 == "function") {
+			if (!this.fn[arg1]) {
+				this.fn[arg1] = new Array();
+			}
+
+			this.fn[arg1].push(arg2);
+		}
+	},
+
+	last: function(arg1) {
+		this.fnLast.push(arg1);
+	}
+};
+
+
+/**************************
+ * Liferay Util Library
+ **************************/
+ 
 Liferay.Util = {
 	submitCountdown: 0,
 
