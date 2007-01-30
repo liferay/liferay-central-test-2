@@ -67,7 +67,7 @@ Liferay.Portlet = {
 
 			if (this.fn[id]) {
 				for (var i = 0; i < this.fn[id].length; i++) {
-					this.fn[id][i]();
+					this.fn[id][i](id);
 				}
 				this.fn[id] = new Array();
 			}
