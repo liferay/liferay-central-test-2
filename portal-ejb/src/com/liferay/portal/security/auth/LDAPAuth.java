@@ -62,6 +62,11 @@ import javax.naming.ldap.LdapContext;
  */
 public class LDAPAuth implements Authenticator {
 
+	public static final String AUTH_METHOD_BIND = "bind";
+
+	public static final String AUTH_METHOD_PASSWORD_COMPARE = 
+		"password-compare";
+	
 	public int authenticateByEmailAddress(
 			String companyId, String emailAddress, String password,
 			Map headerMap, Map parameterMap)
@@ -240,34 +245,16 @@ public class LDAPAuth implements Authenticator {
 			String userId, String emailAddress)
 		throws Exception {
 
+		boolean authenticated = false;
+		
 		// Check passwords by either doing a comparison between the passwords or
 		// by binding to the LDAP server
 
-		if (userPassword != null) {
-			String ldapPassword = new String((byte[])userPassword.get());
-
-			String encryptedPassword = password;
-
-			String algorithm = PrefsPropsUtil.getString(
-				companyId,
-				PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
-
-			if (Validator.isNotNull(algorithm)) {
-				encryptedPassword =
-					"{" + algorithm + "}" +
-						Encryptor.digest(algorithm, password);
-			}
-
-			if (!ldapPassword.equals(encryptedPassword)) {
-				_log.error(
-					"LDAP password " + ldapPassword +
-						" does not match with given password " +
-							encryptedPassword + " for user id " + userId);
-
-				return false;
-			}
-		}
-		else {
+		String authMethod = PrefsPropsUtil.getString(
+			companyId,
+			PropsUtil.AUTH_IMPL_LDAP_AUTH_METHOD);
+		
+		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
 				String userDN = binding.getName() + StringPool.COMMA + baseDN;
 
@@ -275,24 +262,55 @@ public class LDAPAuth implements Authenticator {
 				env.put(Context.SECURITY_CREDENTIALS, password);
 
 				ctx = new InitialLdapContext(env, null);
+
+				authenticated = true;					
 			}
 			catch (Exception e) {
 				_log.error(
 					"Failed to bind to the LDAP server with " + userId +
 						" " + password + " " + e.getMessage());
 
-				return false;
-			}
+				authenticated = false;
+			}			
 		}
+		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
+			if (userPassword != null) {
+				String ldapPassword = new String((byte[])userPassword.get());
 
-		return true;
+				String encryptedPassword = password;
+
+				String algorithm = PrefsPropsUtil.getString(
+					companyId,
+					PropsUtil.AUTH_IMPL_LDAP_PASSWORD_ENCRYPTION_ALGORITHM);
+
+				if (Validator.isNotNull(algorithm)) {
+					encryptedPassword =
+						"{" + algorithm + "}" +
+							Encryptor.digest(algorithm, password);
+				}
+
+				if (ldapPassword.equals(encryptedPassword)) {
+					authenticated = true;					
+				}
+				else {
+					authenticated = false;
+
+					_log.error(
+						"LDAP password " + ldapPassword +
+							" does not match with given password " +
+								encryptedPassword + " for user id " + userId);
+				}
+			}			
+		}
+		
+		return authenticated;
 	}
 
 	protected int authenticateOmniadmin(
 			String companyId, String emailAddress, String userId)
 		throws Exception {
 
-		// LEP-2036
+		// Only allow Omniadmin if Liferay password checking is enabled
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {

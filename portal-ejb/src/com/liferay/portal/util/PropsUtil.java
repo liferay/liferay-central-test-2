@@ -272,6 +272,8 @@ public class PropsUtil {
 
 	public static final String AUTH_IMPL_LDAP_REQUIRED = "auth.impl.ldap.required";
 
+	public static final String AUTH_IMPL_LDAP_AUTH_METHOD = "auth.impl.ldap.method";
+	
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
 	public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
