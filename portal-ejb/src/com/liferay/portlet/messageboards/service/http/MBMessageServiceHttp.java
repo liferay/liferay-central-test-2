@@ -902,6 +902,51 @@ public class MBMessageServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		HttpPrincipal httpPrincipal, java.lang.String messageId,
+		java.lang.String userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = messageId;
+
+			if (messageId == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = userId;
+
+			if (userId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
+					"getMessageDisplay", new Object[] { paramObj0, paramObj1 });
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.messageboards.model.MBMessageDisplay)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+			throw se;
+		}
+	}
+
 	public static void subscribeMessage(HttpPrincipal httpPrincipal,
 		java.lang.String messageId)
 		throws com.liferay.portal.SystemException, 

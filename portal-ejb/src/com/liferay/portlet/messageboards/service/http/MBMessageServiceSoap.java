@@ -164,6 +164,21 @@ public class MBMessageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		java.lang.String messageId, java.lang.String userId)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue =
+				MBMessageServiceUtil.getMessageDisplay(messageId, userId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void subscribeMessage(java.lang.String messageId)
 		throws RemoteException {
 		try {

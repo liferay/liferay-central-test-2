@@ -182,6 +182,15 @@ public class MBMessageServiceUtil {
 		return mbMessageService.getMessage(messageId);
 	}
 
+	public static com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		java.lang.String messageId, java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
+
+		return mbMessageService.getMessageDisplay(messageId, userId);
+	}
+
 	public static void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

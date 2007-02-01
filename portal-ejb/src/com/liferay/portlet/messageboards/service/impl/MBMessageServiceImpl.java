@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageDisplay;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
@@ -313,6 +314,15 @@ public class MBMessageServiceImpl
 			getPermissionChecker(), messageId, ActionKeys.VIEW);
 
 		return MBMessageLocalServiceUtil.getMessage(messageId);
+	}
+
+	public MBMessageDisplay getMessageDisplay(String messageId, String userId)
+		throws PortalException, SystemException {
+
+		MBMessagePermission.check(
+			getPermissionChecker(), messageId, ActionKeys.VIEW);
+
+		return MBMessageLocalServiceUtil.getMessageDisplay(messageId, userId);
 	}
 
 	public void subscribeMessage(String messageId)

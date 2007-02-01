@@ -194,6 +194,16 @@ public class MBMessageServiceEJBImpl implements MBMessageService, SessionBean {
 		return MBMessageServiceFactory.getTxImpl().getMessage(messageId);
 	}
 
+	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		java.lang.String messageId, java.lang.String userId)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		PrincipalSessionBean.setThreadValues(_sc);
+
+		return MBMessageServiceFactory.getTxImpl().getMessageDisplay(messageId,
+			userId);
+	}
+
 	public void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

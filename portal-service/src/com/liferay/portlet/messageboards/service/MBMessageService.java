@@ -121,6 +121,11 @@ public interface MBMessageService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
+	public com.liferay.portlet.messageboards.model.MBMessageDisplay getMessageDisplay(
+		java.lang.String messageId, java.lang.String userId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
+
 	public void subscribeMessage(java.lang.String messageId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException, java.rmi.RemoteException;
