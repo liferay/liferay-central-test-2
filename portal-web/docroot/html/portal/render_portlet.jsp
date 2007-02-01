@@ -30,13 +30,15 @@ Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
 String portletId = portlet.getPortletId();
 String rootPortletId = portlet.getRootPortletId();
 
+String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
+
 String queryString = (String)request.getAttribute(WebKeys.RENDER_PORTLET_QUERY_STRING);
 String columnId = (String)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_ID);
 Integer columnPos = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_POS);
 Integer columnCount = (Integer)request.getAttribute(WebKeys.RENDER_PORTLET_COLUMN_COUNT);
 Boolean renderPortletResource = (Boolean)request.getAttribute(WebKeys.RENDER_PORTLET_RESOURCE);
 
-String portletPrimaryKey = PortletPermission.getPrimaryKey(plid, portletId);
+boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 
 boolean denyAccess = false;
 
@@ -46,7 +48,7 @@ try {
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;
 
-	if ((renderPortletResource != null) && renderPortletResource.booleanValue()) {
+	if (runtimePortlet) {
 		addDefaultResource = true;
 	}
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
@@ -450,8 +452,6 @@ else {
 		staticVar = "end";
 	}
 }
-
-boolean runtimePortlet = (renderPortletResource != null) && renderPortletResource.booleanValue();
 %>
 
 <c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">

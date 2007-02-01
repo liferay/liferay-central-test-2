@@ -29,7 +29,8 @@ import javax.naming.directory.DirContext;
 import javax.naming.directory.ModificationItem;
 
 /**
- * <a href="LDAPAttributesModificationsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="LDAPAttributesModificationsTest.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author  Jerry Niu
  *

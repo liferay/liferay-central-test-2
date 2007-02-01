@@ -251,8 +251,7 @@ public class LDAPAuth implements Authenticator {
 		// by binding to the LDAP server
 
 		String authMethod = PrefsPropsUtil.getString(
-			companyId,
-			PropsUtil.AUTH_IMPL_LDAP_AUTH_METHOD);
+			companyId, PropsUtil.AUTH_IMPL_LDAP_AUTH_METHOD);
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
@@ -310,7 +309,7 @@ public class LDAPAuth implements Authenticator {
 			String companyId, String emailAddress, String userId)
 		throws Exception {
 
-		// Only allow Omniadmin if Liferay password checking is enabled
+		// Only allow omniadmin if Liferay password checking is enabled
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK))) {

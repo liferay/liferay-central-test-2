@@ -47,7 +47,6 @@ else {
 
 if (!themeDisplay.isStateExclusive()) {
 	List columns = layoutTypePortlet.getLayoutTemplate().getColumns();
-	List portletIds = layoutTypePortlet.getPortletIds();
 %>
 
 	<script type="text/javascript">

@@ -277,7 +277,7 @@ public class PropsUtil {
 	public static final String AUTH_IMPL_LDAP_REQUIRED = "auth.impl.ldap.required";
 
 	public static final String AUTH_IMPL_LDAP_AUTH_METHOD = "auth.impl.ldap.method";
-	
+
 	public static final String AUTH_IMPL_LDAP_FACTORY_INITIAL = "auth.impl.ldap.factory.initial";
 
 	public static final String AUTH_IMPL_LDAP_BASE_PROVIDER_URL = "auth.impl.ldap.base.provider.url";
@@ -591,7 +591,7 @@ public class PropsUtil {
 	// Reverse AJAX
 
 	public static final String REVERSE_AJAX_ENABLED = "reverse.ajax.enabled";
-	
+
 	public static final String REVERSE_AJAX_HEARTBEAT = "reverse.ajax.heartbeat";
 
 	// SMTP
@@ -657,13 +657,13 @@ public class PropsUtil {
 	public static final String ALFRESCO_OPEN_SEARCH_PROTOCOL = "alfresco.open.search.protocol";
 
 	public static final String ALFRESCO_OPEN_SEARCH_HOST = "alfresco.open.search.host";
-	
+
 	public static final String ALFRESCO_OPEN_SEARCH_PORT = "alfresco.open.search.port";
-	
+
 	public static final String ALFRESCO_OPEN_SEARCH_REALM = "alfresco.open.search.realm";
-	
+
 	public static final String ALFRESCO_OPEN_SEARCH_USERNAME = "alfresco.open.search.username";
-	
+
 	public static final String ALFRESCO_OPEN_SEARCH_PASSWORD = "alfresco.open.search.password";
 
 	public static final String ALFRESCO_OPEN_SEARCH_PATH = "alfresco.open.search.path";

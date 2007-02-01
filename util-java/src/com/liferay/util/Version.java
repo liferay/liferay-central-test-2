@@ -184,4 +184,3 @@ public class Version implements Comparable {
 	private static final String SEPARATOR = ".";
 
 }
-
