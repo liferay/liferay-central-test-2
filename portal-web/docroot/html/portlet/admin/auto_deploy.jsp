@@ -22,6 +22,9 @@
  */
 %>
 
+<%
+String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
+%>
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
@@ -104,6 +107,18 @@
 		</td>
 	</tr>
 </c:if>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "plugin-repositories") %> <br>
+		<font size="-1">(<%= LanguageUtil.get(pageContext, "enter-one-repository-URL-per-line") %>)</font>
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+        <textarea class="form-text" name="<portlet:namespace />pluginRepositories" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
+		<br>
+		<%@ include file="/html/portlet/admin/repository_report.jsp" %>
+	</td>
+</tr>
 
 </table>
 
@@ -143,8 +158,13 @@
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('remoteDeploy');">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<%= uploadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy');">
 
+		<liferay-ui:upload-progress
+			id="<%= uploadProgressId %>"
+			message="downloading"
+			redirect="<%= currentURL %>"
+		/>
 
 	</c:when>
 	<c:otherwise>
@@ -158,6 +178,6 @@
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<portlet:namespace />saveServer('hotDeploy');">
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<%= uploadProgressId%>.startProgress(); <portlet:namespace />saveServer('hotDeploy');">
 	</c:otherwise>
 </c:choose>

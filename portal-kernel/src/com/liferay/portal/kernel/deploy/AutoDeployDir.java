@@ -77,7 +77,10 @@ public class AutoDeployDir {
 		if (!_deployDir.exists()) {
 			_log.warn("Creating missing directory " + _deployDir);
 
-			_deployDir.mkdirs();
+			boolean created = _deployDir.mkdirs();
+			if (!created) {
+				_log.warn("Directory " + _deployDir + " could not be created");
+			}
 		}
 
 		if (_interval > 0) {

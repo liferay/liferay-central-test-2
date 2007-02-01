@@ -64,9 +64,9 @@ public class LDAPAuth implements Authenticator {
 
 	public static final String AUTH_METHOD_BIND = "bind";
 
-	public static final String AUTH_METHOD_PASSWORD_COMPARE = 
+	public static final String AUTH_METHOD_PASSWORD_COMPARE =
 		"password-compare";
-	
+
 	public int authenticateByEmailAddress(
 			String companyId, String emailAddress, String password,
 			Map headerMap, Map parameterMap)
@@ -246,14 +246,14 @@ public class LDAPAuth implements Authenticator {
 		throws Exception {
 
 		boolean authenticated = false;
-		
+
 		// Check passwords by either doing a comparison between the passwords or
 		// by binding to the LDAP server
 
 		String authMethod = PrefsPropsUtil.getString(
 			companyId,
 			PropsUtil.AUTH_IMPL_LDAP_AUTH_METHOD);
-		
+
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
 				String userDN = binding.getName() + StringPool.COMMA + baseDN;
@@ -263,7 +263,7 @@ public class LDAPAuth implements Authenticator {
 
 				ctx = new InitialLdapContext(env, null);
 
-				authenticated = true;					
+				authenticated = true;
 			}
 			catch (Exception e) {
 				_log.error(
@@ -271,7 +271,7 @@ public class LDAPAuth implements Authenticator {
 						" " + password + " " + e.getMessage());
 
 				authenticated = false;
-			}			
+			}
 		}
 		else if (authMethod.equals(AUTH_METHOD_PASSWORD_COMPARE)) {
 			if (userPassword != null) {
@@ -290,7 +290,7 @@ public class LDAPAuth implements Authenticator {
 				}
 
 				if (ldapPassword.equals(encryptedPassword)) {
-					authenticated = true;					
+					authenticated = true;
 				}
 				else {
 					authenticated = false;
@@ -300,9 +300,9 @@ public class LDAPAuth implements Authenticator {
 							" does not match with given password " +
 								encryptedPassword + " for user id " + userId);
 				}
-			}			
+			}
 		}
-		
+
 		return authenticated;
 	}
 

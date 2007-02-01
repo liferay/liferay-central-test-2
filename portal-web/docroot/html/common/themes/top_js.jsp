@@ -150,7 +150,7 @@
 			_$J(document).last(function() { document.getElementById("<%= scroll %>").scrollIntoView(); });
 		</c:if>
 	</c:if>
-	
+
 	Liferay.Portlet.count = <%= layoutTypePortlet.getPortletIds().size() %>;
 	Liferay.Portlet.list = {<%
 		List portletIds = layoutTypePortlet.getPortletIds();

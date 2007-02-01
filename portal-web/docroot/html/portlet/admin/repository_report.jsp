@@ -21,26 +21,32 @@
  * SOFTWARE.
  */
 %>
-
-<%@ include file="/html/portlet/init.jsp" %>
-
-<%@ page import="com.liferay.portal.AccountNameException" %>
-<%@ page import="com.liferay.portal.CompanyHomeURLException" %>
-<%@ page import="com.liferay.portal.CompanyPortalURLException" %>
-<%@ page import="com.liferay.portal.events.StartupAction" %>
-<%@ page import="com.liferay.portal.kernel.plugin.Plugin" %>
-<%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
-<%@ page import="com.liferay.portal.util.comparator.UserTrackerModifiedDateComparator" %>
-<%@ page import="com.liferay.portlet.admin.util.OmniadminUtil" %>
-<%@ page import="com.liferay.portal.plugin.PluginException" %>
-<%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
-
-<%@ page import="org.apache.log4j.Level" %>
-<%@ page import="org.apache.log4j.Logger" %>
-<%@ page import="org.apache.log4j.LogManager" %>
+<% if (repositoryReport != null) { %>
+	<table border="0">
 <%
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
-RepositoryReport repositoryReport = (RepositoryReport) renderRequest.getPortletSession().getAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
-
+	Iterator it = repositoryReport.getRepositoryURLs().iterator();
+		while (it.hasNext()) {
+			String repositoryURL = (String) it.next();
+			Object status = repositoryReport.getState(repositoryURL);
 %>
+	<tr>
+		<th align="left"><%= repositoryURL%></th>
+		<td>
+<%
+			if (status == RepositoryReport.SUCCESS) {
+%>
+				<span style="color: green"><%= LanguageUtil.get(pageContext, "success")%></span>
+<%
+			} else {
+%>
+				<abbr style="color: red" title="<%= "" + status %>"><%= LanguageUtil.get(pageContext, "error")%></abbr>
+<%
+			}
+%>
+		</td>
+	</tr>
+<%
+		}
+%>
+	</table>
+<% } %>

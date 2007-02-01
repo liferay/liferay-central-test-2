@@ -31,7 +31,9 @@ import com.liferay.portal.kernel.plugin.Plugin;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
+import com.liferay.portal.plugin.PluginException;
 import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.plugin.RepositoryReport;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.spring.hibernate.CacheRegistry;
 import com.liferay.portal.struts.PortletAction;
@@ -48,6 +50,7 @@ import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.ProgressInputStream;
 import com.liferay.util.Time;
@@ -58,6 +61,7 @@ import com.liferay.util.servlet.UploadException;
 import com.liferay.util.servlet.UploadPortletRequest;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 
 import java.net.MalformedURLException;
@@ -137,8 +141,8 @@ public class EditServerAction extends PortletAction {
 		else if (cmd.equals("precompile")) {
 			precompile(req, res);
 		}
-		else if (cmd.equals("refreshRepository")) {
-			refreshRepository(req);
+		else if (cmd.equals("reloadRepositories")) {
+			reloadRepositories(req);
 		}
 		else if (cmd.equals("remoteDeploy")) {
 			remoteDeploy(req);
@@ -160,6 +164,8 @@ public class EditServerAction extends PortletAction {
 		long interval = ParamUtil.getLong(req, "interval");
 		boolean unpackWar = ParamUtil.getBoolean(req, "unpackWar");
 		String tomcatLibDir = ParamUtil.getString(req, "tomcatLibDir");
+		String pluginRepositories =
+				ParamUtil.getString(req, "pluginRepositories");
 
 		PortletPreferences prefs = PrefsPropsUtil.getPreferences();
 
@@ -175,7 +181,16 @@ public class EditServerAction extends PortletAction {
 			prefs.setValue(PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR, tomcatLibDir);
 		}
 
+		String oldPluginRepositories =
+				PrefsPropsUtil.getString(PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+		prefs.setValue(
+			PropsUtil.PLUGIN_REPOSITORIES, pluginRepositories);
+
 		prefs.store();
+
+		if (!pluginRepositories.equals(oldPluginRepositories)) {
+			reloadRepositories(req);
+		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Unregistering auto deploy directories");
@@ -374,14 +389,17 @@ public class EditServerAction extends PortletAction {
 		}
 	}
 
-	protected void refreshRepository(ActionRequest req) throws Exception {
-		PluginUtil.reloadRepositories();
+	protected void reloadRepositories(ActionRequest req) throws Exception {
+		RepositoryReport report = PluginUtil.reloadRepositories();
+		req.getPortletSession().setAttribute(
+				WebKeys.PLUGIN_REPOSITORY_REPORT, report);
 	}
 
 	protected void remoteDeploy(ActionRequest req) throws Exception {
 
 		String url = ParamUtil.getString(req, "url");
-		String preferredWARName = ParamUtil.getString(req, "preferredWARName");
+		String recommendedWARName =
+				ParamUtil.getString(req, "recommendedWARName");
 		String progressId = ParamUtil.getString(req, "progressId");
 
 		URL urlObj = new URL(url);
@@ -398,36 +416,47 @@ public class EditServerAction extends PortletAction {
 
 			long contentLength = getFileMethod.getResponseContentLength();
 
+			String fileName = url.substring(
+					url.lastIndexOf(StringPool.SLASH) + 1);
+
+			String destFileName = _getDestFileName(
+					recommendedWARName, url, fileName);
+
 			ProgressInputStream pis = new ProgressInputStream(
 					req, getFileMethod.getResponseBodyAsStream(),
 					contentLength, progressId);
 
-			byte[] bytes;
+			String deployDir = PrefsPropsUtil.getString(
+					PropsUtil.AUTO_DEPLOY_DEPLOY_DIR);
+			String tmpFilePath = deployDir + StringPool.SLASH + _DOWNLOAD_DIR +
+					StringPool.SLASH + destFileName;
+			File tmpFile = new File(tmpFilePath);
+			if (!tmpFile.getParentFile().exists()) {
+				tmpFile.getParentFile().mkdirs();
+			}
+
+			FileOutputStream fos = new FileOutputStream(tmpFile);
 			try {
-				bytes = pis.readAll();
+				pis.readAll(fos);
+				_log.info("Downloaded plugin from " + urlObj + " (" +
+						pis.getTotalRead() + " bytes)");
 			} finally {
 				pis.clearProgress();
 			}
 
 			getFileMethod.releaseConnection();
-			_log.info("Downloaded plugin from " + urlObj + " (" + bytes.length +
-					" bytes)");
 
-			String fileName = url.substring(
-					url.lastIndexOf(StringPool.SLASH) + 1);
+			if (pis.getTotalRead() > 0) {
+				String destination = PrefsPropsUtil.getString(
+						PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) + StringPool.SLASH +
+						destFileName;
 
-			String destFileName = null;
-
-			destFileName = _getDestFileName(
-					preferredWARName, url, fileName);
-
-			if ((bytes != null) && (bytes.length > 0)) {
-				String destination =
-						PrefsPropsUtil.getString(
-								PropsUtil.AUTO_DEPLOY_DEPLOY_DIR) +
-								StringPool.SLASH + destFileName;
-
-				FileUtil.write(destination, bytes);
+				File destinationFile = new File(destination);
+				boolean moved = FileUtil.move(tmpFile, destinationFile);
+				if (!moved) {
+					FileUtil.copyFile(tmpFile, destinationFile);
+					FileUtil.delete(tmpFile);
+				}
 			}
 			else {
 				SessionErrors.add(req, UploadException.class.getName());
@@ -476,11 +505,12 @@ public class EditServerAction extends PortletAction {
 	}
 
 	private String _getDestFileName(
-			String preferredWARName, String url, String fileName) {
+			String recommendedWARName, String url, String fileName)
+			throws PluginException {
 		String destFileName = null;
 
 		if (Validator.isNull(destFileName)) {
-			destFileName = preferredWARName;
+			destFileName = recommendedWARName;
 		}
 
 		if (Validator.isNull(destFileName)) {
@@ -499,5 +529,15 @@ public class EditServerAction extends PortletAction {
 	private static Log _log = LogFactory.getLog(EditServerAction.class);
 
 	private static HttpClient _client = new HttpClient();
+
+	private static final String _DOWNLOAD_DIR = "download";
+
+	static {
+		int timeout = GetterUtil.getInteger(
+				PropsUtil.get(PropsUtil.PLUGIN_TIMEOUT_ARTIFACT));
+		_client.getHttpConnectionManager().getParams().
+				setConnectionTimeout(timeout);
+
+	}
 
 }

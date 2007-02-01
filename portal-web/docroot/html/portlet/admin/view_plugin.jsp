@@ -41,12 +41,12 @@ installURL.setParameter("cmd", "remoteDeploy");
 installURL.setParameter("url", plugin.getArtifactURL());
 installURL.setParameter("redirect", currentURL.toString());
 
-String id = "pluginInstaller" + System.currentTimeMillis();
+String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
 %>
 
 <style type="text/css">
 	a.thumbnail img {
-		border: 1px solid grey;
+		border: 1px solid gray;
 		padding: 5px;
 		margin: 5px;
 		background-color: #eee;
@@ -60,7 +60,6 @@ String id = "pluginInstaller" + System.currentTimeMillis();
 <liferay-ui:error key="errorResponseFromServer" message="error-response-form-server"/>
 <liferay-ui:error key="errorConnectingToServer" message="error-connecting-to-server"/>
 
-<!-- moduleId: <%= moduleId%> -->
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
 	<td>
@@ -69,6 +68,15 @@ String id = "pluginInstaller" + System.currentTimeMillis();
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<%= plugin.getName() %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "version") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<%= plugin.getVersion() %>
 	</td>
 </tr>
 <tr>
@@ -166,6 +174,24 @@ String id = "pluginInstaller" + System.currentTimeMillis();
 </tr>
 <tr>
 	<td>
+		<%= LanguageUtil.get(pageContext, "plugin-url") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<a href="<%= plugin.getArtifactURL() %>"><%= StringUtil.shorten(plugin.getArtifactURL(), 80) %></a>
+	</td>
+</tr>
+<tr>
+	<td>
+		<%= LanguageUtil.get(pageContext, "repository") %>:
+	</td>
+	<td style="padding-left: 10px;"></td>
+	<td>
+		<a href="<%= plugin.getRepositoryURL() %>"><%= plugin.getRepositoryURL() %></a>
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>:
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -219,37 +245,14 @@ String id = "pluginInstaller" + System.currentTimeMillis();
 	<td style="padding-left: 10px;"></td>
 	<td>
 		<form action="<%=installURL.toString()%>" method="post">
-			<input type="hidden" name="<portlet:namespace/>progressId" value="<%=id%>"/>
-			<input type="submit" value="<%=LanguageUtil.get(pageContext, "install")%>" onclick='<%= id%>.startProgress()'>
+			<input type="hidden" name="<portlet:namespace/>progressId" value="<%=uploadProgressId%>"/>
+			<input type="submit" value="<%=LanguageUtil.get(pageContext, "install")%>" onclick='<%= uploadProgressId%>.startProgress()'>
 		</form>
 	</td>
 </tr>
 </table>
-
-
-
-<script src="<%= themeDisplay.getPathJavaScript() %>/upload_progress.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-	var <%= id %> = new UploadProgress("<%= id %>", "<%= Http.encodeURL(redirect) %>");
-</script>
-
-<iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
-
-<div id="<%= id %>-bar-div" style="text-align: center; display: none;">
-	<br>
-	<%=LanguageUtil.get(pageContext, "downloading")%>...
-	<br>
-	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.gif) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
-		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.gif) scroll no-repeat top left;">
-			<div style="height: 23px; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_right.gif) scroll no-repeat top right;">
-				<div id="<%= id %>-bar" style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_middle.gif) scroll repeat-x top left; overflow: hidden; width: 0;">
-					<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_left.gif) scroll no-repeat top left;">
-						<div class="font-small" style="font-weight: bold; height: 23px; padding-top: 3px; text-align: center; background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/complete_right.gif) scroll no-repeat top right;">
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
+<liferay-ui:upload-progress
+	id="<%= uploadProgressId %>"
+	message="downloading"
+	redirect="<%= redirect %>"
+/>

@@ -33,8 +33,6 @@ import java.util.List;
 public interface Plugin {
 	public String getModuleId();
 
-	public void setModuleId(String moduleId);
-
 	public String getName();
 
 	public void setName(String name);
@@ -86,5 +84,9 @@ public interface Plugin {
 	public String getArtifactURL();
 
 	public String getWARName();
+
+	String getVersion();
+
+	boolean isLaterVersionThan(Plugin previous);
 
 }

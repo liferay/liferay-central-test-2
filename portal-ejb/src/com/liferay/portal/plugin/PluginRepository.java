@@ -89,4 +89,5 @@ public class PluginRepository {
 	private Map _moduleIdIndex = new HashMap();
 	private List _plugins = new ArrayList();
 	private Set _tags = new TreeSet();
+
 }

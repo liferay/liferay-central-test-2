@@ -31,7 +31,6 @@ String currentTag = ParamUtil.getString(renderRequest, "tag");
 String currentType = ParamUtil.getString(renderRequest, "type");
 String currentRepositoryURL = ParamUtil.getString(renderRequest, "repositoryURL");
 
-
 PortletURL viewPluginURL = renderResponse.createRenderURL();
 
 viewPluginURL.setWindowState(WindowState.MAXIMIZED);
@@ -45,12 +44,12 @@ searchURL.setParameter("struts_action", "/admin/plugins");
 searchURL.setParameter("redirect", redirect);
 
 
-PortletURL refreshRepositoryURL = renderResponse.createActionURL();
+PortletURL reloadRepositoriesURL = renderResponse.createActionURL();
 
-refreshRepositoryURL.setWindowState(WindowState.MAXIMIZED);
-refreshRepositoryURL.setParameter("struts_action", "/admin/edit_server");
-refreshRepositoryURL.setParameter("cmd", "refreshRepository");
-refreshRepositoryURL.setParameter("redirect", currentURL);
+reloadRepositoriesURL.setWindowState(WindowState.MAXIMIZED);
+reloadRepositoriesURL.setParameter("struts_action", "/admin/edit_server");
+reloadRepositoriesURL.setParameter("cmd", "reloadRepositories");
+reloadRepositoriesURL.setParameter("redirect", currentURL);
 
 %>
 
@@ -162,7 +161,8 @@ try {
 
 		sb.append("<b>");
 		sb.append(plugin.getName());
-		sb.append("</b>");
+		sb.append("</b> ");
+		sb.append(plugin.getVersion());
 
 		if (Validator.isNotNull(plugin.getShortDescription())) {
 			sb.append("<br>");
@@ -214,16 +214,23 @@ try {
 
 <br><div class="beta-separator" style="clear: both"></div><br>
 
-<%=LanguageUtil.get(pageContext, "plugin-list-obtained-from-remote-repositories-on-date")%>: <%= dateFormatDateTime.format(PluginUtil.getLastUpdateDate())%>
-<br><br>
-<form action="<%=refreshRepositoryURL.toString()%>" method="post">
+<% if (Validator.isNotNull("" + PluginUtil.getLastUpdateDate())) { %>
+	<%=LanguageUtil.get(pageContext, "plugin-list-obtained-from-remote-repositories-on-date")%>: <%= dateFormatDateTime.format(PluginUtil.getLastUpdateDate())%>
+<% } %>
+<br>
+
+<%@ include file="/html/portlet/admin/repository_report.jsp" %>
+
+<br>
+
+<form action="<%=reloadRepositoriesURL.toString()%>" method="post">
 	<input class="portlet-form-button" type="submit" value="<%=LanguageUtil.get(pageContext, "reload")%>">
 </form>
 
 
 <%
 }
-catch (RuntimeException e) {
+catch (PluginException e) {
 	e.printStackTrace();
 %>
 	<span class="error"><%= LanguageUtil.get(pageContext, "error-obtaining-available-plugins") %></span>

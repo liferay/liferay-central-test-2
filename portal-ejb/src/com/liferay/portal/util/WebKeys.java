@@ -215,6 +215,8 @@ public class WebKeys {
 
 	public static final String PHONE = "PHONE";
 
+	public static final String PLUGIN_REPOSITORY_REPORT = "PLUGIN_REPOSITORY_REPORT";
+
 	public static final String POLLS_QUESTION = "POLLS_QUESTION";
 
 	public static final String PORTAL_PREFERENCES = "PORTAL_PREFERENCES";

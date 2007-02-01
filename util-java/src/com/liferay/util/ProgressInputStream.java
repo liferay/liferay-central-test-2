@@ -24,9 +24,9 @@ package com.liferay.util;
 
 import com.liferay.util.servlet.fileupload.LiferayFileUpload;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStream;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.PortletSession;
@@ -46,12 +46,18 @@ public class ProgressInputStream extends InputStream {
 			ActionRequest req, InputStream is, long totalSize,
 			String progressId)
 			throws IOException {
+
 		_is = is;
 		_progressId = progressId;
 
 		_ses = req.getPortletSession();
 		_totalSize = totalSize;
 
+		initProgress();
+	}
+
+	public long getTotalRead() {
+		return _totalRead;
 	}
 
 	public int available() throws IOException {
@@ -64,6 +70,12 @@ public class ProgressInputStream extends InputStream {
 
 	public void close() throws IOException {
 		_is.close();
+	}
+
+	public void initProgress() {
+		_ses.setAttribute(
+				_getPercentAttributeName(), new Integer(0),
+				PortletSession.APPLICATION_SCOPE);
 	}
 
 	public void mark(int readlimit) {
@@ -101,17 +113,14 @@ public class ProgressInputStream extends InputStream {
 		return bytesRead;
 	}
 
-	public byte[] readAll() throws IOException{
-		ByteArrayOutputStream outstream = new ByteArrayOutputStream(
-				_totalSize > 0 ? (int) _totalSize:_DEFAULT_INITIAL_BUFFER_SIZE);
-
+	public void readAll(OutputStream outstream)
+			throws IOException {
 		byte[] buffer = new byte[_DEFAULT_INITIAL_BUFFER_SIZE];
 		int len;
 		while ((len = read(buffer)) > 0) {
 			outstream.write(buffer, 0, len);
 		}
 		outstream.close();
-		return outstream.toByteArray();
 	}
 
 	private String _getPercentAttributeName() {

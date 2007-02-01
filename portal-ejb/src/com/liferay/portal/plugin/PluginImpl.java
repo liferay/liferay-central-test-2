@@ -23,12 +23,10 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.plugin.Plugin;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Validator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.StringTokenizer;
 
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
@@ -40,12 +38,12 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  */
 public class PluginImpl implements Plugin, Comparable {
 
-	public String getModuleId() {
-		return _moduleId;
+	public PluginImpl(String moduleId) {
+		_moduleId = new ModuleId(moduleId);
 	}
 
-	public void setModuleId(String moduleId) {
-		_moduleId = moduleId;
+	public String getModuleId() {
+		return _moduleId.toString();
 	}
 
 	public String getName() {
@@ -54,6 +52,15 @@ public class PluginImpl implements Plugin, Comparable {
 
 	public void setName(String name) {
 		_name = name;
+	}
+
+	public String getVersion() {
+		return _moduleId.getVersion();
+	}
+
+	public boolean isLaterVersionThan(Plugin previous) {
+		return _moduleId.isLaterVersionThan(
+				previous.getVersion());
 	}
 
 	public String getAuthor() {
@@ -145,30 +152,14 @@ public class PluginImpl implements Plugin, Comparable {
 	}
 
 	public String getArtifactURL() {
-		StringTokenizer st = new StringTokenizer(
-				getModuleId(), StringPool.SLASH);
-		String groupId = st.nextToken();
-		String artifactId = st.nextToken();
-		String version = st.nextToken();
-		String type = st.nextToken();
-		return getRepositoryURL() + StringPool.SLASH + groupId +
-				StringPool.SLASH + artifactId + StringPool.SLASH + version +
-				StringPool.SLASH + artifactId +	StringPool.DASH + version +
-				StringPool.PERIOD + type;
+		return getRepositoryURL() + _moduleId.getArtifactPath();
 	}
 
 	public String getWARName() {
-
 		String name = getRecommendedWARName();
 
 		if (Validator.isNull(name)) {
-			StringTokenizer st = new StringTokenizer(
-					getModuleId(), StringPool.SLASH);
-			String groupId = st.nextToken();
-			String artifactId = st.nextToken();
-			String version = st.nextToken();
-			String type = st.nextToken();
-			return artifactId + StringPool.PERIOD + type;
+			name = _moduleId.getArtifactWARName();
 		}
 
 		return name;
@@ -204,7 +195,7 @@ public class PluginImpl implements Plugin, Comparable {
 		return getName().compareTo(p.getName());
 	}
 
-	private String _moduleId;
+	private ModuleId _moduleId;
 	private String _name;
 	private String _author;
 	private String _type;

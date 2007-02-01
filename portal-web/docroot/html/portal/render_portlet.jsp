@@ -457,11 +457,11 @@ boolean runtimePortlet = (renderPortletResource != null) && renderPortletResourc
 <c:if test="<%= !themeDisplay.isStateExclusive() && !runtimePortlet %>">
 	<script type="text/javascript">
 		document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
-	
-		<c:if test="<%= !staticVar.equals("no") %>">
+
+		<c:if test='<%= !staticVar.equals("no") %>'>
 			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
 		</c:if>
-	
+
 		Liferay.Portlet.process("<%= portletDisplay.getId() %>");
 	</script>
 </c:if>
