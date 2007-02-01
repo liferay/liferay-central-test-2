@@ -152,17 +152,24 @@
 		</c:if>
 	</c:if>
 
-	Liferay.Portlet.count = <%= layoutTypePortlet.getPortletIds().size() %>;
-	Liferay.Portlet.list = {<%
-		List portletIds = layoutTypePortlet.getPortletIds();
-
-		for (int i = 0; i < portletIds.size(); i++) {
-			out.print("\"" + portletIds.get(i) + "\":1");
-			if (i < portletIds.size() - 1) {
-				out.print(",");
-			}
-		}
-	%>};
+	<c:choose>
+		<c:when test="<%= layoutTypePortlet.getPortletIds().size() > 0 && !layoutTypePortlet.hasStateMax() %>">
+			Liferay.Portlet.count = <%= layoutTypePortlet.getPortletIds().size() %>;
+			Liferay.Portlet.list = {<%
+				List portletIds = layoutTypePortlet.getPortletIds();
+		
+				for (int i = 0; i < portletIds.size(); i++) {
+					out.print("\"" + portletIds.get(i) + "\":1");
+					if (i < portletIds.size() - 1) {
+						out.print(",");
+					}
+				}
+			%>};
+		</c:when>
+		<c:otherwise>
+			_$J(document).ready(function(){Liferay.Portlet.processLast();});
+		</c:otherwise>
+	</c:choose>
 
 	<%@ include file="/html/js/log/log.jsp" %>
 

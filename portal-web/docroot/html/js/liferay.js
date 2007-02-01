@@ -40,19 +40,25 @@ Liferay.Portlet = {
 
 	process: function(id) {
 
-		if (this.list[id]) {
+		if (this.list[id] == 1) {
 			this.list[id] = 0;
 
 			if (this.fn[id]) {
 				for (var i = 0; i < this.fn[id].length; i++) {
-					this.fn[id][i](id);
+					this.fn[id][i](id, _$J("#p_p_id_" + id + "_"));
 				}
 				this.fn[id] = new Array();
 			}
-	
-			for (var i = 0; i < this.fnAll.length; i++) {
-				this.fnAll[i](id);
-			}
+			
+			this.processAll(id);
+		}
+		else if (this.list[id] == 0) {
+			// Already processed. Do nothing.
+		}
+		else {
+			// New portlet. Process and mark.
+			this.list[id] = 0;
+			this.processAll(id);
 		}
 
 		var count = 0;
@@ -62,11 +68,21 @@ Liferay.Portlet = {
 		}
 
 		if (count <= 0) {
-			for (var i = 0; i < this.fnLast.length; i++) {
-				this.fnLast[i](id);
-			}
-			this.fnLast = new Array();
+			this.processLast(id);
 		}
+	},
+	
+	processAll: function(id) {
+		for (var i = 0; i < this.fnAll.length; i++) {
+			this.fnAll[i](id, _$J("#p_p_id_" + id + "_"));
+		}
+	},
+
+	processLast: function(id) {
+		for (var i = 0; i < this.fnLast.length; i++) {
+			this.fnLast[i](id);
+		}
+		this.fnLast = new Array();
 	},
 
 	ready: function(arg1, arg2) {
@@ -85,6 +101,10 @@ Liferay.Portlet = {
 	last: function(arg1) {
 		this.fnLast.push(arg1);
 	}
+};
+
+jQuery.fn.last = function(fn) {
+	Liferay.Portlet.last(fn);
 };
 
 
