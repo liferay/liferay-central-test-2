@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TagsEntry
+			WHERE
+				(TagsEntry.companyId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByC_N">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			WHERE
+				(TagsEntry.companyId = ?) AND
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.countByCompanyId">
+		<![CDATA[
+			SELECT
+				COUNT(DISTINCT TagsProperty.key_) AS COUNT_VALUE
+			FROM
+				TagsProperty
+			WHERE
+				(TagsProperty.companyId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder.findByCompanyId">
+		<![CDATA[
+			SELECT
+				DISTINCT TagsProperty.key_ AS propertyKey
+			FROM
+				TagsProperty
+			WHERE
+				(TagsProperty.companyId = ?)
+		]]>
+	</sql>
+</custom-sql>

@@ -73,6 +73,7 @@ public class TunnelUtil {
 
 			if ((ioeMessage != null) &&
 					(ioeMessage.indexOf("HTTP response code: 401") != -1)) {
+
 				throw new PrincipalException(ioeMessage);
 			}
 			else {

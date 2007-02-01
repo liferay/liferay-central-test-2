@@ -1119,4 +1119,61 @@
 		<property name="directDownloadURL" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="repoStoreArtifact" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portlet.tags.model.impl.TagsAssetImpl" table="TagsAsset">
+		<cache usage="read-write" />
+		<id name="assetId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="className" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="startDate" />
+		<property name="endDate" />
+		<property name="publishDate" />
+		<property name="expirationDate" />
+		<property name="mimeType" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="height" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="width" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.tags.model.impl.TagsEntryImpl" table="TagsEntry">
+		<cache usage="read-write" />
+		<id name="entryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.tags.model.impl.TagsPropertyImpl" table="TagsProperty">
+		<cache usage="read-write" />
+		<id name="propertyId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="entryId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="key" column="key_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="value" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.tags.model.impl.TagsSourceImpl" table="TagsSource">
+		<cache usage="read-write" />
+		<id name="sourceId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="parentSourceId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="acronym" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 </hibernate-mapping>

@@ -201,6 +201,15 @@ create index IX_E00DE435 on Subscription (companyId, className, classPK);
 create index IX_FC7B066F on Subscription (companyId, userId, className, classPK);
 create index IX_54243AFD on Subscription (userId);
 
+create index IX_5018A7B on TagsAsset (companyId, className, classPK);
+
+create index IX_10563688 on TagsEntry (companyId, name);
+
+create index IX_C134234 on TagsProperty (companyId);
+create index IX_EB974D08 on TagsProperty (companyId, key_);
+create index IX_5200A629 on TagsProperty (entryId);
+create index IX_F505253D on TagsProperty (entryId, key_);
+
 create index IX_524FEFCE on UserGroup (companyId);
 create index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);

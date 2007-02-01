@@ -941,6 +941,61 @@ create table Subscription (
 	frequency VARCHAR(75) null
 );
 
+create table TagsAsset (
+	assetId LONG primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	className VARCHAR(75) null,
+	classPK VARCHAR(75) null,
+	startDate DATE null,
+	endDate DATE null,
+	publishDate DATE null,
+	expirationDate DATE null,
+	mimeType VARCHAR(75) null,
+	title VARCHAR(75) null,
+	url VARCHAR(75) null,
+	height INTEGER,
+	width INTEGER
+);
+
+create table TagsAssets_TagsEntries (
+	assetId LONG,
+	entryId LONG,
+	primary key (assetId, entryId)
+);
+
+create table TagsEntry (
+	entryId LONG primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null
+);
+
+create table TagsProperty (
+	propertyId LONG primary key,
+	companyId VARCHAR(75) not null,
+	userId VARCHAR(75) not null,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	entryId LONG,
+	key_ VARCHAR(75) null,
+	value VARCHAR(75) null
+);
+
+create table TagsSource (
+	sourceId LONG primary key,
+	parentSourceId LONG,
+	name VARCHAR(75) null,
+	acronym VARCHAR(75) null
+);
+
 create table UserGroup (
 	userGroupId VARCHAR(75) not null primary key,
 	companyId VARCHAR(75) not null,

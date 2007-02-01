@@ -3301,4 +3301,208 @@
 			<ref bean="com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionPersistence" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsAssetLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetService.professional" class="com.liferay.portlet.tags.service.impl.TagsAssetServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsAssetService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsAssetServiceFactory" class="com.liferay.portlet.tags.service.TagsAssetServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsAssetService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" class="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" class="com.liferay.portlet.tags.service.persistence.TagsAssetUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsAssetPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryService.professional" class="com.liferay.portlet.tags.service.impl.TagsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsEntryServiceFactory" class="com.liferay.portlet.tags.service.TagsEntryServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsEntryService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" class="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" class="com.liferay.portlet.tags.service.persistence.TagsEntryUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsEntryPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsPropertyLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.professional" class="com.liferay.portlet.tags.service.impl.TagsPropertyServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" class="com.liferay.portlet.tags.service.TagsPropertyServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsPropertyService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" class="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" class="com.liferay.portlet.tags.service.persistence.TagsPropertyUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.professional" class="com.liferay.portlet.tags.service.impl.TagsSourceLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceService.professional" class="com.liferay.portlet.tags.service.impl.TagsSourceServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.tags.service.TagsSourceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.TagsSourceServiceFactory" class="com.liferay.portlet.tags.service.TagsSourceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.tags.service.TagsSourceService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" class="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" />
+		</property>
+	</bean>
 </beans>

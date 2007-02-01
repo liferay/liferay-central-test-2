@@ -7,6 +7,7 @@
 		<portlet id="40" />
 		<portlet id="79" />
 		<portlet id="80" />
+		<portlet id="99" />
 	</category>
 	<category name="category.cms">
 		<category name="category.alfresco">

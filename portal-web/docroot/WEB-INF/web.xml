@@ -790,6 +790,34 @@
 		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.tags.service.ejb.TagsAssetServiceHome</home>
+		<remote>com.liferay.portlet.tags.service.ejb.TagsAssetServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.tags.service.ejb.TagsEntryServiceHome</home>
+		<remote>com.liferay.portlet.tags.service.ejb.TagsEntryServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.tags.service.ejb.TagsPropertyServiceHome</home>
+		<remote>com.liferay.portlet.tags.service.ejb.TagsPropertyServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.tags.service.ejb.TagsSourceServiceHome</home>
+		<remote>com.liferay.portlet.tags.service.ejb.TagsSourceServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.counter.service.ejb.CounterServiceHome</home>
@@ -1292,6 +1320,34 @@
 		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceHome</local-home>
 		<local>com.liferay.portlet.softwarerepository.service.ejb.SRProductVersionLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/TagsAssetLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceHome</local-home>
+		<local>com.liferay.portlet.tags.service.ejb.TagsAssetLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/TagsEntryLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.tags.service.ejb.TagsEntryLocalServiceHome</local-home>
+		<local>com.liferay.portlet.tags.service.ejb.TagsEntryLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsEntryLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/TagsPropertyLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.tags.service.ejb.TagsPropertyLocalServiceHome</local-home>
+		<local>com.liferay.portlet.tags.service.ejb.TagsPropertyLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsPropertyLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/TagsSourceLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceHome</local-home>
+		<local>com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsSourceLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>

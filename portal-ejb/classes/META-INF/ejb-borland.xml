@@ -495,6 +495,38 @@
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_softwarerepository_service_ejb_SRProductVersionServiceEJB</bean-home-name>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/TagsAssetLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsEntryLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/TagsEntryLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsPropertyLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/TagsPropertyLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/TagsSourceLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</bean-home-name>
+		</session>
 	</enterprise-beans>
 	<property>
 		<prop-name>ejb.default_transaction_attribute</prop-name>

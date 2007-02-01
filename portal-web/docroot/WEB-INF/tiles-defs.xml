@@ -1086,6 +1086,14 @@
 		<put name="portlet_content" value="/portlet/stocks/view.jsp" />
 	</definition>
 
+	<!-- Tags Admin -->
+
+	<definition name="portlet.tags_admin" extends="portlet" />
+
+	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
+		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
+	</definition>
+
 	<!-- Weather -->
 
 	<definition name="portlet.weather" extends="portlet" />

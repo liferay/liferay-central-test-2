@@ -77,17 +77,23 @@ import org.dom4j.io.SAXReader;
 public class ServiceBuilder {
 
 	public static void main(String[] args) {
-		if (args.length == 6) {
+		if (args.length == 8) {
 			new ServiceBuilder(
-				args[0], args[1], args[2], args[3], args[4], args[5],
-				StringPool.BLANK);
-		}
-		else if (args.length == 7) {
-			new ServiceBuilder(
-				args[0], args[1], args[2], args[3], args[4], args[5], args[6]);
+				args[0], args[1], args[2], args[3], args[4], args[5], args[6],
+				args[7]);
 		}
 		else {
-			throw new IllegalArgumentException();
+			System.out.println(
+				"Please pass in the correct number of parameters. Sample " +
+					"parameters are:\n" +
+				"\tservice.xml\n" +
+				"\tclasses/META-INF/portal-hbm.xml\n" +
+				"\tclasses/META-INF/portal-model-hints.xml\n" +
+				"\tclasses/META-INF/portal-spring-enterprise.xml\n" +
+				"\tclasses/META-INF/portal-spring-professional.xml\n" +
+				"\tcom.liferay.portal.kernel.bean.BeanLocatorUtil\n" +
+				"\t../portal-service/src\n" +
+				"\t../portal-web/docroot/html/js/liferay_services.js");
 		}
 	}
 
@@ -196,6 +202,7 @@ public class ServiceBuilder {
 			"java.util.Date",
 			"java.util.HashSet",
 			"java.util.Iterator",
+			"java.util.List",
 			"java.util.Properties",
 			"java.util.Set",
 			"javax.sql.DataSource",
@@ -205,6 +212,8 @@ public class ServiceBuilder {
 			"org.hibernate.ObjectNotFoundException",
 			"org.hibernate.Query",
 			"org.hibernate.SQLQuery",
+			"org.json.JSONArray",
+			"org.json.JSONObject",
 			"org.springframework.dao.DataAccessException",
 			"org.springframework.jdbc.core.SqlParameter",
 			"org.springframework.jdbc.object.MappingSqlQuery",
@@ -324,18 +333,20 @@ public class ServiceBuilder {
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springEntFileName,
 						  String springProFileName,
-						  String beanLocatorUtilClassName, String serviceDir) {
+						  String beanLocatorUtilClassName, String serviceDir,
+						  String jsonFileName) {
 
 		new ServiceBuilder(
 			fileName, hbmFileName, modelHintsFileName, springEntFileName,
-			springProFileName, beanLocatorUtilClassName, serviceDir, true);
+			springProFileName, beanLocatorUtilClassName, serviceDir,
+			jsonFileName, true);
 	}
 
 	public ServiceBuilder(String fileName, String hbmFileName,
 						  String modelHintsFileName, String springEntFileName,
 						  String springProFileName,
 						  String beanLocatorUtilClassName, String serviceDir,
-						  boolean build) {
+						  String jsonFileName, boolean build) {
 
 		try {
 			_badTableNames = ServiceBuilder.getBadTableNames();
@@ -379,6 +390,8 @@ public class ServiceBuilder {
 						StringUtil.replace(packagePath, ".", "/") + "/" +
 							_portletPackageName;
 			}
+
+			_jsonFileName = jsonFileName;
 
 			_packagePath = packagePath + "." + _portletPackageName;
 
@@ -680,6 +693,7 @@ public class ServiceBuilder {
 							_createServiceUtil(entity, _REMOTE);
 
 							_createServiceHttp(entity);
+							_createServiceJSON(entity);
 							_createServiceSoap(entity);
 						}
 					}
@@ -687,6 +701,7 @@ public class ServiceBuilder {
 
 				_createEJBXML();
 				_createHBMXML();
+				_createJSONJS();
 				_createModelHintsXML();
 				_createSpringXML(true);
 				_createSpringXML(false);
@@ -738,7 +753,7 @@ public class ServiceBuilder {
 			ServiceBuilder serviceBuilder = new ServiceBuilder(
 				refFileName, _hbmFileName, _modelHintsFileName,
 				_springEntFileName, _springProFileName,
-				_beanLocatorUtilClassName, _serviceDir, false);
+				_beanLocatorUtilClassName, _serviceDir, _jsonFileName, false);
 
 			Entity entity = serviceBuilder.getEntity(refEntity);
 
@@ -1536,6 +1551,102 @@ public class ServiceBuilder {
 			newContent =
 				newContent.substring(0, firstClass) + sb.toString() +
 				newContent.substring(lastClass, newContent.length());
+		}
+
+		if (!oldContent.equals(newContent)) {
+			FileUtil.write(xmlFile, newContent);
+		}
+	}
+
+	private void _createJSONJS() throws IOException {
+		StringBuffer sb = new StringBuffer();
+
+		if (_ejbList.size() > 0) {
+			sb.append("Liferay.Service." + _portletShortName + " = {\n");
+			sb.append("\tservicePackage: \"" + _packagePath + ".service.http.\"\n");
+			sb.append("};\n\n");
+		}
+
+		for (int i = 0; i < _ejbList.size(); i++) {
+			Entity entity = (Entity)_ejbList.get(i);
+
+			if (entity.hasRemoteService()) {
+				JavaClass javaClass = _getJavaClass(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
+
+				JavaMethod[] methods = javaClass.getMethods();
+
+				Set jsonMethods = new LinkedHashSet();
+
+				for (int j = 0; j < methods.length; j++) {
+					JavaMethod javaMethod = methods[j];
+
+					String methodName = javaMethod.getName();
+
+					if (javaMethod.isPublic()) {
+						jsonMethods.add(methodName);
+					}
+				}
+
+				if (jsonMethods.size() > 0) {
+					sb.append("Liferay.Service.Tags." + entity.getName() + " = {\n");
+					sb.append("\tserviceClassName: Liferay.Service." + _portletShortName + ".servicePackage + \"" + entity.getName() + "\" + Liferay.Service.classNameSuffix,\n\n");
+
+					Iterator itr = jsonMethods.iterator();
+
+					while (itr.hasNext()) {
+						String methodName = (String)itr.next();
+
+						sb.append("\t" + methodName + ": function(params, callback) {\n");
+						sb.append("\t\tparams.serviceParameters = Liferay.Service.getParameters(params);\n");
+						sb.append("\t\tparams.serviceClassName = this.serviceClassName;\n");
+						sb.append("\t\tparams.serviceMethodName = \"" + methodName + "\";\n\n");
+						sb.append("\t\t_$J.getJSON(Liferay.Service.url, params, callback);\n");
+						sb.append("\t}");
+
+						if (itr.hasNext()) {
+							sb.append(",\n");
+						}
+
+						sb.append("\n");
+					}
+
+					sb.append("};\n\n");
+				}
+			}
+		}
+
+		File xmlFile = new File(_jsonFileName);
+
+		if (!xmlFile.exists()) {
+			String content = "";
+
+			FileUtil.write(xmlFile, content);
+		}
+
+		String oldContent = FileUtil.read(xmlFile);
+		String newContent = new String(oldContent);
+
+		int oldBegin = oldContent.indexOf(
+			"Liferay.Service." + _portletShortName);
+
+		int oldEnd = oldContent.lastIndexOf(
+			"Liferay.Service." + _portletShortName);
+		oldEnd = oldContent.indexOf("};", oldEnd);
+
+		int newBegin = newContent.indexOf(
+			"Liferay.Service." + _portletShortName);
+
+		int newEnd = newContent.lastIndexOf(
+			"Liferay.Service." + _portletShortName);
+		newEnd = newContent.indexOf("};", newEnd);
+
+		if (newBegin == -1) {
+			newContent = oldContent + "\n\n" + sb.toString().trim();
+		}
+		else {
+			newContent =
+				newContent.substring(0, oldBegin) + sb.toString().trim() +
+				newContent.substring(oldEnd + 2, newContent.length());
 		}
 
 		if (!oldContent.equals(newContent)) {
@@ -4673,6 +4784,207 @@ public class ServiceBuilder {
 		}
 	}
 
+	private void _createServiceJSON(Entity entity) throws IOException {
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
+
+		JavaMethod[] methods = javaClass.getMethods();
+
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".service.http;");
+
+		// Imports
+
+		if (_hasSoapMethods(javaClass)) {
+			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
+		}
+
+		sb.append("import com.liferay.portal.kernel.log.Log;");
+		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
+		sb.append("import java.rmi.RemoteException;");
+		sb.append("import java.util.List;");
+		sb.append("import org.json.JSONArray;");
+		sb.append("import org.json.JSONObject;");
+		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+
+		// Class declaration
+
+		sb.append("public class " + entity.getName() + "ServiceJSON {");
+
+		// Methods
+
+		for (int i = 0; i < methods.length; i++) {
+			JavaMethod javaMethod = methods[i];
+
+			String methodName = javaMethod.getName();
+
+			if (!javaMethod.isConstructor() && javaMethod.isPublic() && _isCustomMethod(javaMethod) && _isSoapMethod(javaMethod)) {
+				String returnValueName = javaMethod.getReturns().getValue();
+				String returnValueDimension = _getDimensions(javaMethod.getReturns());
+
+				String extendedModelName = _packagePath + ".model." + entity.getName();
+				String soapModelName = "JSONObject";
+
+				sb.append("public static ");
+
+				if (returnValueName.equals(extendedModelName)) {
+					sb.append(soapModelName + returnValueDimension);
+				}
+				else if (returnValueName.equals("java.util.List")) {
+					if (entity.hasColumns()) {
+						sb.append("JSONArray");
+					}
+					else {
+						sb.append("java.util.List");
+					}
+				}
+				else {
+					sb.append(returnValueName + returnValueDimension);
+				}
+
+				sb.append(" " + methodName + "(");
+
+				JavaParameter[] parameters = javaMethod.getParameters();
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					String parameterTypeName = javaParameter.getType().getValue() + _getDimensions(javaParameter.getType());
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						parameterTypeName = "String";
+					}
+
+					sb.append(parameterTypeName + " " + javaParameter.getName());
+
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(")");
+
+				Type[] thrownExceptions = javaMethod.getExceptions();
+
+				Set newExceptions = new LinkedHashSet();
+
+				for (int j = 0; j < thrownExceptions.length; j++) {
+					Type thrownException = thrownExceptions[j];
+
+					newExceptions.add(thrownException.getValue());
+				}
+
+				newExceptions.add("java.rmi.RemoteException");
+
+				if (newExceptions.size() > 0) {
+					sb.append(" throws ");
+
+					Iterator itr = newExceptions.iterator();
+
+					while (itr.hasNext()) {
+						sb.append(itr.next());
+
+						if (itr.hasNext()) {
+							sb.append(", ");
+						}
+					}
+				}
+
+				sb.append("{");
+
+				if (!returnValueName.equals("void")) {
+					sb.append(returnValueName + returnValueDimension + " returnValue = ");
+				}
+
+				sb.append(entity.getName() + "ServiceUtil." + methodName + "(");
+
+				for (int j = 0; j < parameters.length; j++) {
+					JavaParameter javaParameter = parameters[j];
+
+					String parameterTypeName =
+						javaParameter.getType().getValue() +
+							_getDimensions(javaParameter.getType());
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						sb.append("new java.util.Locale(");
+					}
+
+					sb.append(javaParameter.getName());
+
+					if (parameterTypeName.equals("java.util.Locale")) {
+						sb.append(")");
+					}
+
+					if ((j + 1) != parameters.length) {
+						sb.append(", ");
+					}
+				}
+
+				sb.append(");");
+
+				if (!returnValueName.equals("void")) {
+					if (returnValueName.equals(extendedModelName)) {
+						sb.append("return _toJSONObject(returnValue);");
+					}
+					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
+						sb.append("return _toJSONArray(returnValue);");
+					}
+					else {
+						sb.append("return returnValue;");
+					}
+				}
+
+				sb.append("}");
+			}
+		}
+
+		List regularColList = entity.getRegularColList();
+
+		sb.append("private static JSONObject _toJSONObject(" + entity.getName() + " model) {");
+		sb.append("JSONObject jsonObj = new JSONObject();");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			if (col.isPrimitiveType()) {
+				sb.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "());");
+			}
+			else {
+				sb.append("jsonObj.put(\"" + col.getName() + "\", model.get" + col.getMethodName() + "().toString());");
+			}
+		}
+
+		sb.append("return jsonObj;");
+		sb.append("}");
+
+		sb.append("private static JSONArray _toJSONArray(List models) {");
+		sb.append("JSONArray jsonArray = new JSONArray();");
+		sb.append("for (int i = 0; i < models.size(); i++) {");
+		sb.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
+		sb.append("jsonArray.put(_toJSONObject(model));");
+		sb.append("}");
+		sb.append("return jsonArray;");
+		sb.append("}");
+
+		// Fields
+
+		if (sb.indexOf("_log.") != -1) {
+			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceJSON.class);");
+		}
+
+		// Class close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
+
+		writeFile(ejbFile, sb.toString());
+	}
+
 	private void _createServiceSoap(Entity entity) throws IOException {
 		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + "ServiceImpl.java");
 
@@ -5594,9 +5906,11 @@ public class ServiceBuilder {
 
 	private String _getNoSuchEntityException(Entity entity) {
 		String noSuchEntityException = entity.getName();
+
 		if (Validator.isNull(entity.getPortletShortName()) || noSuchEntityException.startsWith(entity.getPortletShortName())) {
 			noSuchEntityException = noSuchEntityException.substring(entity.getPortletShortName().length(), noSuchEntityException.length());
 		}
+
 		noSuchEntityException = "NoSuch" + noSuchEntityException;
 
 		return noSuchEntityException;
@@ -5784,6 +6098,7 @@ public class ServiceBuilder {
 	private String _springProFileName;
 	private String _beanLocatorUtilClassName;
 	private String _serviceDir;
+	private String _jsonFileName;
 	private String _portalRoot;
 	private String _portletName;
 	private String _portletShortName;

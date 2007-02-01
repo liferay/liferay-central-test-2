@@ -133,6 +133,8 @@
 
 		<action path="/portal/json_regions" type="com.liferay.portal.action.JSONRegionsAction" />
 
+		<action path="/portal/json_service" type="com.liferay.portal.action.JSONServiceAction" />
+
 		<action path="/portal/layout" type="com.liferay.portal.action.LayoutAction">
 			<forward name="portal.layout" path="portal.layout" />
 		</action>
@@ -1331,6 +1333,14 @@
 		</action>
 
 		<action path="/stocks/view" forward="portlet.stocks.view" />
+
+		<!-- Tags Admin -->
+
+		<action path="/tags_admin/edit_entry" type="com.liferay.portlet.tagsadmin.action.EditEntryAction" />
+
+		<action path="/tags_admin/edit_property" type="com.liferay.portlet.tagsadmin.action.EditPropertyAction" />
+
+		<action path="/tags_admin/view" forward="portlet.tags_admin.view" />
 
 		<!-- Weather -->
 

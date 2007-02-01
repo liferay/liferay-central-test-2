@@ -864,5 +864,61 @@
 			<cluster-object>false</cluster-object>
 			<timeout>3000</timeout>
 		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/TagsAssetLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_tags_service_ejb_TagsAssetServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsEntryLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/TagsEntryLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_tags_service_ejb_TagsEntryServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsPropertyLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/TagsPropertyLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_tags_service_ejb_TagsPropertyServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/TagsSourceLocalServiceHome</local-jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</jndi-name>
+			<cluster-home>false</cluster-home>
+			<cluster-object>false</cluster-object>
+			<timeout>3000</timeout>
+		</session>
 	</enterprise-beans>
 </jrun-ejb-jar>

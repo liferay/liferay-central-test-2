@@ -94,10 +94,10 @@ public class MethodInvoker {
 			}
 		}
 
-		Object objClass = contextClassLoader.loadClass(className);
+		Object classObj = contextClassLoader.loadClass(className);
 
 		if (newInstance) {
-			objClass = ((Class)objClass).newInstance();
+			classObj = ((Class)classObj).newInstance();
 		}
 
 		Method method = null;
@@ -110,7 +110,7 @@ public class MethodInvoker {
 			method = MethodCache.get(methodKey);
 		}
 		catch (NoSuchMethodException nsme) {
-			Method[] methods = objClass.getClass().getMethods();
+			Method[] methods = classObj.getClass().getMethods();
 
 			for (int i = 0; i < methods.length; i++) {
 				Class[] methodParameterTypes = methods[i].getParameterTypes();
@@ -147,7 +147,7 @@ public class MethodInvoker {
 		Object returnObj = null;
 
 		if (method != null) {
-			returnObj = method.invoke(objClass, args);
+			returnObj = method.invoke(classObj, args);
 		}
 
 		return returnObj;

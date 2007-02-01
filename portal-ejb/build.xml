@@ -7,9 +7,6 @@
 	<property name="service.file" value="service.xml" />
 
 	<target name="compile">
-        <antcall target="compile-common" />
-        <antcall target="build-common-java.compile" />
-
 		<copy todir="classes/com/liferay/portal/definitions">
 			<fileset dir="${project.dir}/definitions" />
 		</copy>
@@ -25,6 +22,9 @@
 				<include name="**/service.xml" />
 			</fileset>
 		</copy>
+
+		<antcall target="compile-common" />
+        <antcall target="build-common-java.compile" />
 	</target>
 
 	<target name="compile-common">
@@ -290,6 +290,7 @@
 			<arg value="classes/META-INF/portal-spring-professional.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/portal-service/src" />
+			<arg value="${project.dir}/portal-web/docroot/html/js/service.js" />
 		</java>
 
 		<delete file="ServiceBuilder.temp" />
@@ -371,6 +372,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-tags">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/portlet/tags/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-test">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/test/service.xml" />
@@ -401,6 +408,7 @@
 		<antcall target="build-service-portlet-ratings" />
 		<antcall target="build-service-portlet-shopping" />
 		<antcall target="build-service-portlet-softwarerepository" />
+		<antcall target="build-service-portlet-tags" />
 		<antcall target="build-service-portlet-wiki" />
 		<antcall target="build-service-portlet-workflow" />
 	</target>
@@ -506,6 +514,12 @@
 		</antcall>
 	</target>
 
+	<target name="build-wsdd-portlet-tags">
+		<antcall target="build-wsdd">
+			<param name="service.file" value="src/com/liferay/portlet/tags/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-wsdd-portlet-test">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/test/service.xml" />
@@ -536,6 +550,7 @@
 		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
 		<antcall target="build-wsdd-portlet-softwarerepository" />
+		<antcall target="build-wsdd-portlet-tags" />
 		<antcall target="build-wsdd-portlet-wiki" />
 		<antcall target="build-wsdd-portlet-workflow" />
 	</target>

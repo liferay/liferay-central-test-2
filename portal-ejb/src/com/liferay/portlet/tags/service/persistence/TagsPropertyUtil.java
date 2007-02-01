@@ -1,0 +1,394 @@
+/**
+ * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.tags.service.persistence;
+
+import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.util.PropsUtil;
+
+import com.liferay.util.GetterUtil;
+import com.liferay.util.Validator;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+/**
+ * <a href="TagsPropertyUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author  Brian Wing Shun Chan
+ *
+ */
+public class TagsPropertyUtil {
+	public static com.liferay.portlet.tags.model.TagsProperty create(
+		long propertyId) {
+		return getPersistence().create(propertyId);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty remove(
+		long propertyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(findByPrimaryKey(propertyId));
+		}
+
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty = getPersistence()
+																	   .remove(propertyId);
+
+		if (listener != null) {
+			listener.onAfterRemove(tagsProperty);
+		}
+
+		return tagsProperty;
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty remove(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(tagsProperty);
+		}
+
+		tagsProperty = getPersistence().remove(tagsProperty);
+
+		if (listener != null) {
+			listener.onAfterRemove(tagsProperty);
+		}
+
+		return tagsProperty;
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty update(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
+		throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = tagsProperty.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(tagsProperty);
+			}
+			else {
+				listener.onBeforeUpdate(tagsProperty);
+			}
+		}
+
+		tagsProperty = getPersistence().update(tagsProperty);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(tagsProperty);
+			}
+			else {
+				listener.onAfterUpdate(tagsProperty);
+			}
+		}
+
+		return tagsProperty;
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty update(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty,
+		boolean saveOrUpdate) throws com.liferay.portal.SystemException {
+		ModelListener listener = _getListener();
+		boolean isNew = tagsProperty.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(tagsProperty);
+			}
+			else {
+				listener.onBeforeUpdate(tagsProperty);
+			}
+		}
+
+		tagsProperty = getPersistence().update(tagsProperty, saveOrUpdate);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(tagsProperty);
+			}
+			else {
+				listener.onAfterUpdate(tagsProperty);
+			}
+		}
+
+		return tagsProperty;
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByPrimaryKey(
+		long propertyId)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByPrimaryKey(propertyId);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty fetchByPrimaryKey(
+		long propertyId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(propertyId);
+	}
+
+	public static java.util.List findByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
+	}
+
+	public static java.util.List findByCompanyId(java.lang.String companyId,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByCompanyId_First(
+		java.lang.String companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByCompanyId_Last(
+		java.lang.String companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty[] findByCompanyId_PrevAndNext(
+		long propertyId, java.lang.String companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByCompanyId_PrevAndNext(propertyId,
+			companyId, obc);
+	}
+
+	public static java.util.List findByEntryId(long entryId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEntryId(entryId);
+	}
+
+	public static java.util.List findByEntryId(long entryId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEntryId(entryId, begin, end);
+	}
+
+	public static java.util.List findByEntryId(long entryId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEntryId(entryId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByEntryId_First(
+		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByEntryId_First(entryId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByEntryId_Last(
+		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByEntryId_Last(entryId, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty[] findByEntryId_PrevAndNext(
+		long propertyId, long entryId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByEntryId_PrevAndNext(propertyId, entryId,
+			obc);
+	}
+
+	public static java.util.List findByC_K(java.lang.String companyId,
+		java.lang.String key) throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_K(companyId, key);
+	}
+
+	public static java.util.List findByC_K(java.lang.String companyId,
+		java.lang.String key, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_K(companyId, key, begin, end);
+	}
+
+	public static java.util.List findByC_K(java.lang.String companyId,
+		java.lang.String key, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByC_K(companyId, key, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByC_K_First(
+		java.lang.String companyId, java.lang.String key,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByC_K_First(companyId, key, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByC_K_Last(
+		java.lang.String companyId, java.lang.String key,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByC_K_Last(companyId, key, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty[] findByC_K_PrevAndNext(
+		long propertyId, java.lang.String companyId, java.lang.String key,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByC_K_PrevAndNext(propertyId, companyId,
+			key, obc);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty findByE_K(
+		long entryId, java.lang.String key)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		return getPersistence().findByE_K(entryId, key);
+	}
+
+	public static com.liferay.portlet.tags.model.TagsProperty fetchByE_K(
+		long entryId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByE_K(entryId, key);
+	}
+
+	public static java.util.List findAll()
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll();
+	}
+
+	public static java.util.List findAll(int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end);
+	}
+
+	public static java.util.List findAll(int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end, obc);
+	}
+
+	public static void removeByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	public static void removeByEntryId(long entryId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByEntryId(entryId);
+	}
+
+	public static void removeByC_K(java.lang.String companyId,
+		java.lang.String key) throws com.liferay.portal.SystemException {
+		getPersistence().removeByC_K(companyId, key);
+	}
+
+	public static void removeByE_K(long entryId, java.lang.String key)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portlet.tags.NoSuchPropertyException {
+		getPersistence().removeByE_K(entryId, key);
+	}
+
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
+	public static int countByCompanyId(java.lang.String companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByEntryId(long entryId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByEntryId(entryId);
+	}
+
+	public static int countByC_K(java.lang.String companyId,
+		java.lang.String key) throws com.liferay.portal.SystemException {
+		return getPersistence().countByC_K(companyId, key);
+	}
+
+	public static int countByE_K(long entryId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByE_K(entryId, key);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
+	}
+
+	public static void initDao() {
+		getPersistence().initDao();
+	}
+
+	public static TagsPropertyPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(TagsPropertyPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static TagsPropertyUtil _getUtil() {
+		if (_util == null) {
+			_util = (TagsPropertyUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _UTIL = TagsPropertyUtil.class.getName();
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.tags.model.TagsProperty"));
+	private static Log _log = LogFactory.getLog(TagsPropertyUtil.class);
+	private static TagsPropertyUtil _util;
+	private TagsPropertyPersistence _persistence;
+}

@@ -53,6 +53,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="TunnelServlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author  Michael Weisser
+ * @author  Brian Wing Shun Chan
  *
  */
 public class TunnelServlet extends HttpServlet {
