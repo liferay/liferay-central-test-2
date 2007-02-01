@@ -22,13 +22,6 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portlet.tags.model.TagsSource;
-
-import org.json.JSONArray;
-import org.json.JSONObject;
-
-import java.util.List;
-
 /**
  * <a href="TagsSourceServiceJSON.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,24 +29,4 @@ import java.util.List;
  *
  */
 public class TagsSourceServiceJSON {
-	private static JSONObject _toJSONObject(TagsSource model) {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("sourceId", model.getSourceId());
-		jsonObj.put("parentSourceId", model.getParentSourceId());
-		jsonObj.put("name", model.getName().toString());
-		jsonObj.put("acronym", model.getAcronym().toString());
-
-		return jsonObj;
-	}
-
-	private static JSONArray _toJSONArray(List models) {
-		JSONArray jsonArray = new JSONArray();
-
-		for (int i = 0; i < models.size(); i++) {
-			TagsSource model = (TagsSource)models.get(i);
-			jsonArray.put(_toJSONObject(model));
-		}
-
-		return jsonArray;
-	}
 }

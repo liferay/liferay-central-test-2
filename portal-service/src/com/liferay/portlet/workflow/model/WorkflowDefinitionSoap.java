@@ -36,6 +36,7 @@ public class WorkflowDefinitionSoap extends WorkflowDefinition {
 	public static WorkflowDefinitionSoap toSoapModel(WorkflowDefinition model) {
 		WorkflowDefinitionSoap soapModel = new WorkflowDefinitionSoap();
 
+		soapModel.setDefinitionId(model.getDefinitionId());
 		soapModel.setName(model.getName());
 		soapModel.setType(model.getType());
 		soapModel.setVersion(model.getVersion());

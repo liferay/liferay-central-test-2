@@ -22,13 +22,10 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsPropertyServiceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * <a href="TagsPropertyServiceJSON.java.html"><b><i>View Source</i></b></a>
@@ -44,7 +41,7 @@ public class TagsPropertyServiceJSON {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(entryId,
 				key, value);
 
-		return _toJSONObject(returnValue);
+		return TagsPropertyJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject addProperty(java.lang.String userId,
@@ -54,7 +51,7 @@ public class TagsPropertyServiceJSON {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.addProperty(userId,
 				entryName, key, value);
 
-		return _toJSONObject(returnValue);
+		return TagsPropertyJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static void deleteProperty(long propertyId)
@@ -67,7 +64,7 @@ public class TagsPropertyServiceJSON {
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsPropertyServiceUtil.getProperties(entryId);
 
-		return _toJSONArray(returnValue);
+		return TagsPropertyJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray getPropertyValues(java.lang.String companyId,
@@ -76,7 +73,7 @@ public class TagsPropertyServiceJSON {
 		java.util.List returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
 				key);
 
-		return _toJSONArray(returnValue);
+		return TagsPropertyJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject updateProperty(long propertyId,
@@ -86,32 +83,6 @@ public class TagsPropertyServiceJSON {
 		com.liferay.portlet.tags.model.TagsProperty returnValue = TagsPropertyServiceUtil.updateProperty(propertyId,
 				key, value);
 
-		return _toJSONObject(returnValue);
-	}
-
-	private static JSONObject _toJSONObject(TagsProperty model) {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("propertyId", model.getPropertyId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("key", model.getKey().toString());
-		jsonObj.put("value", model.getValue().toString());
-
-		return jsonObj;
-	}
-
-	private static JSONArray _toJSONArray(List models) {
-		JSONArray jsonArray = new JSONArray();
-
-		for (int i = 0; i < models.size(); i++) {
-			TagsProperty model = (TagsProperty)models.get(i);
-			jsonArray.put(_toJSONObject(model));
-		}
-
-		return jsonArray;
+		return TagsPropertyJSONSerializer.toJSONObject(returnValue);
 	}
 }

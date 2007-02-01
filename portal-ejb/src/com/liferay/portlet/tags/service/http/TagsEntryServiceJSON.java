@@ -22,13 +22,10 @@
 
 package com.liferay.portlet.tags.service.http;
 
-import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryServiceUtil;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
-
-import java.util.List;
 
 /**
  * <a href="TagsEntryServiceJSON.java.html"><b><i>View Source</i></b></a>
@@ -42,7 +39,7 @@ public class TagsEntryServiceJSON {
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.addEntry(name);
 
-		return _toJSONObject(returnValue);
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static void deleteEntry(long entryId)
@@ -56,7 +53,7 @@ public class TagsEntryServiceJSON {
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		java.util.List returnValue = TagsEntryServiceUtil.search(companyId, name);
 
-		return _toJSONArray(returnValue);
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONArray search(java.lang.String companyId,
@@ -65,7 +62,7 @@ public class TagsEntryServiceJSON {
 		java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
 				name, begin, end);
 
-		return _toJSONArray(returnValue);
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static int searchCount(java.lang.String companyId,
@@ -82,7 +79,7 @@ public class TagsEntryServiceJSON {
 		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
 				name);
 
-		return _toJSONObject(returnValue);
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject updateEntry(long entryId, java.lang.String name,
@@ -92,30 +89,6 @@ public class TagsEntryServiceJSON {
 		com.liferay.portlet.tags.model.TagsEntry returnValue = TagsEntryServiceUtil.updateEntry(entryId,
 				name, properties);
 
-		return _toJSONObject(returnValue);
-	}
-
-	private static JSONObject _toJSONObject(TagsEntry model) {
-		JSONObject jsonObj = new JSONObject();
-		jsonObj.put("entryId", model.getEntryId());
-		jsonObj.put("companyId", model.getCompanyId().toString());
-		jsonObj.put("userId", model.getUserId().toString());
-		jsonObj.put("userName", model.getUserName().toString());
-		jsonObj.put("createDate", model.getCreateDate().toString());
-		jsonObj.put("modifiedDate", model.getModifiedDate().toString());
-		jsonObj.put("name", model.getName().toString());
-
-		return jsonObj;
-	}
-
-	private static JSONArray _toJSONArray(List models) {
-		JSONArray jsonArray = new JSONArray();
-
-		for (int i = 0; i < models.size(); i++) {
-			TagsEntry model = (TagsEntry)models.get(i);
-			jsonArray.put(_toJSONObject(model));
-		}
-
-		return jsonArray;
+		return TagsEntryJSONSerializer.toJSONObject(returnValue);
 	}
 }

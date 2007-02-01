@@ -752,62 +752,6 @@
 			<cache-size>20</cache-size>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/WikiNodeLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-name>
-			<local-jndi-name>ejb/liferay/WikiPageLocalServiceHome</local-jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
-			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</jndi-name>
-			<clustered>true</clustered>
-			<pool-size>20</pool-size>
-			<cache-size>20</cache-size>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
 			<local-jndi-name>ejb/liferay/SRLicenseLocalServiceHome</local-jndi-name>
 			<clustered>true</clustered>
@@ -915,6 +859,62 @@
 		<session>
 			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-name>
 			<jndi-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/WikiNodeLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-name>
+			<local-jndi-name>ejb/liferay/WikiPageLocalServiceHome</local-jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</jndi-name>
+			<clustered>true</clustered>
+			<pool-size>20</pool-size>
+			<cache-size>20</cache-size>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
+			<jndi-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</jndi-name>
 			<clustered>true</clustered>
 			<pool-size>20</pool-size>
 			<cache-size>20</cache-size>

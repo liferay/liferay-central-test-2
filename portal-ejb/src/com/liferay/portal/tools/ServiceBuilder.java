@@ -694,6 +694,11 @@ public class ServiceBuilder {
 
 							_createServiceHttp(entity);
 							_createServiceJSON(entity);
+
+							if (entity.hasColumns()) {
+								_createServiceJSONSerializer(entity);
+							}
+
 							_createServiceSoap(entity);
 						}
 					}
@@ -1588,7 +1593,7 @@ public class ServiceBuilder {
 				}
 
 				if (jsonMethods.size() > 0) {
-					sb.append("Liferay.Service.Tags." + entity.getName() + " = {\n");
+					sb.append("Liferay.Service." + _portletShortName + "." + entity.getName() + " = {\n");
 					sb.append("\tserviceClassName: Liferay.Service." + _portletShortName + ".servicePackage + \"" + entity.getName() + "\" + Liferay.Service.classNameSuffix,\n\n");
 
 					Iterator itr = jsonMethods.iterator();
@@ -2294,6 +2299,9 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sb.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
+		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sb.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 		sb.append("import com.liferay.portal.PortalException;");
 		sb.append("import com.liferay.portal.SystemException;");
 		sb.append("import com.liferay.portal.kernel.util.OrderByComparator;");
@@ -2325,9 +2333,6 @@ public class ServiceBuilder {
 		sb.append("import org.springframework.jdbc.core.SqlParameter;");
 		sb.append("import org.springframework.jdbc.object.MappingSqlQuery;");
 		sb.append("import org.springframework.jdbc.object.SqlUpdate;");
-		sb.append("import " + _packagePath + "." + _getNoSuchEntityException(entity) + "Exception;");
-		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
-		sb.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 
 		// Class declaration
 
@@ -4761,11 +4766,11 @@ public class ServiceBuilder {
 
 		// Imports
 
+		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
+
 		if (sessionType == _REMOTE) {
 			sb.append("import com.liferay.portal.service.impl.PrincipalBean;");
 		}
-
-		sb.append("import " + _packagePath + ".service." + entity.getName() + _getSessionTypeName(sessionType) + "Service;");
 
 		// Class declaration
 
@@ -4801,13 +4806,8 @@ public class ServiceBuilder {
 			sb.append("import " + _packagePath + ".service." + entity.getName() + "ServiceUtil;");
 		}
 
-		sb.append("import com.liferay.portal.kernel.log.Log;");
-		sb.append("import com.liferay.portal.kernel.log.LogFactoryUtil;");
-		sb.append("import java.rmi.RemoteException;");
-		sb.append("import java.util.List;");
 		sb.append("import org.json.JSONArray;");
 		sb.append("import org.json.JSONObject;");
-		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
 
 		// Class declaration
 
@@ -4926,10 +4926,10 @@ public class ServiceBuilder {
 
 				if (!returnValueName.equals("void")) {
 					if (returnValueName.equals(extendedModelName)) {
-						sb.append("return _toJSONObject(returnValue);");
+						sb.append("return " + entity.getName() + "JSONSerializer.toJSONObject(returnValue);");
 					}
 					else if (entity.hasColumns() && returnValueName.equals("java.util.List")) {
-						sb.append("return _toJSONArray(returnValue);");
+						sb.append("return " + entity.getName() + "JSONSerializer.toJSONArray(returnValue);");
 					}
 					else {
 						sb.append("return returnValue;");
@@ -4940,9 +4940,46 @@ public class ServiceBuilder {
 			}
 		}
 
+		// Fields
+
+		if (sb.indexOf("_log.") != -1) {
+			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceJSON.class);");
+		}
+
+		// Class close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
+
+		writeFile(ejbFile, sb.toString());
+	}
+
+	private void _createServiceJSONSerializer(Entity entity) throws IOException {
 		List regularColList = entity.getRegularColList();
 
-		sb.append("private static JSONObject _toJSONObject(" + entity.getName() + " model) {");
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".service.http;");
+
+		// Imports
+
+		sb.append("import " + _packagePath + ".model." + entity.getName() + ";");
+		sb.append("import java.util.List;");
+		sb.append("import org.json.JSONArray;");
+		sb.append("import org.json.JSONObject;");
+
+		// Class declaration
+
+		sb.append("public class " + entity.getName() + "JSONSerializer {");
+
+		// Methods
+
+		sb.append("public static JSONObject toJSONObject(" + entity.getName() + " model) {");
 		sb.append("JSONObject jsonObj = new JSONObject();");
 
 		for (int i = 0; i < regularColList.size(); i++) {
@@ -4959,20 +4996,14 @@ public class ServiceBuilder {
 		sb.append("return jsonObj;");
 		sb.append("}");
 
-		sb.append("private static JSONArray _toJSONArray(List models) {");
+		sb.append("public static JSONArray toJSONArray(List models) {");
 		sb.append("JSONArray jsonArray = new JSONArray();");
 		sb.append("for (int i = 0; i < models.size(); i++) {");
 		sb.append(entity.getName() + " model = (" + entity.getName() + ")models.get(i);");
-		sb.append("jsonArray.put(_toJSONObject(model));");
+		sb.append("jsonArray.put(toJSONObject(model));");
 		sb.append("}");
 		sb.append("return jsonArray;");
 		sb.append("}");
-
-		// Fields
-
-		if (sb.indexOf("_log.") != -1) {
-			sb.append("private static Log _log = LogFactoryUtil.getLog(" + entity.getName() + "ServiceJSON.class);");
-		}
 
 		// Class close brace
 
@@ -4980,7 +5011,7 @@ public class ServiceBuilder {
 
 		// Write file
 
-		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "ServiceJSON.java");
+		File ejbFile = new File(_outputPath + "/service/http/" + entity.getName() + "JSONSerializer.java");
 
 		writeFile(ejbFile, sb.toString());
 	}

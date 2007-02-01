@@ -530,48 +530,6 @@
 		<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.wiki.service.ejb.WikiNodeServiceHome</home>
-		<remote>com.liferay.portlet.wiki.service.ejb.WikiNodeServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.wiki.service.ejb.WikiPageServiceHome</home>
-		<remote>com.liferay.portlet.wiki.service.ejb.WikiPageServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceHome</home>
-		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.workflow.service.ejb.WorkflowDefinitionServiceHome</home>
-		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowDefinitionServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.workflow.service.ejb.WorkflowInstanceServiceHome</home>
-		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowInstanceServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
-		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<home>com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceHome</home>
-		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceEJB</remote>
-		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-link>
-	</ejb-ref>
-	<ejb-ref>
 		<ejb-ref-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseServiceEJB</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseServiceHome</home>
@@ -626,6 +584,48 @@
 		<home>com.liferay.portlet.tags.service.ejb.TagsSourceServiceHome</home>
 		<remote>com.liferay.portlet.tags.service.ejb.TagsSourceServiceEJB</remote>
 		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.wiki.service.ejb.WikiNodeServiceHome</home>
+		<remote>com.liferay.portlet.wiki.service.ejb.WikiNodeServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.wiki.service.ejb.WikiPageServiceHome</home>
+		<remote>com.liferay.portlet.wiki.service.ejb.WikiPageServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceHome</home>
+		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowComponentServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.workflow.service.ejb.WorkflowDefinitionServiceHome</home>
+		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowDefinitionServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.workflow.service.ejb.WorkflowInstanceServiceHome</home>
+		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowInstanceServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-link>
+	</ejb-ref>
+	<ejb-ref>
+		<ejb-ref-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<home>com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceHome</home>
+		<remote>com.liferay.portlet.workflow.service.ejb.WorkflowTaskServiceEJB</remote>
+		<ejb-link>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-link>
 	</ejb-ref>
 	<ejb-ref>
 		<ejb-ref-name>com_liferay_counter_service_ejb_CounterServiceEJB</ejb-ref-name>
@@ -1090,20 +1090,6 @@
 		<ejb-link>com_liferay_portlet_shopping_service_ejb_ShoppingOrderItemLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceHome</local-home>
-		<local>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
-		<ejb-ref-name>ejb/liferay/WikiPageLocalServiceHome</ejb-ref-name>
-		<ejb-ref-type>Session</ejb-ref-type>
-		<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
-		<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
-		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
-	</ejb-local-ref>
-	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/SRLicenseLocalServiceHome</ejb-ref-name>
 		<ejb-ref-type>Session</ejb-ref-type>
 		<local-home>com.liferay.portlet.softwarerepository.service.ejb.SRLicenseLocalServiceHome</local-home>
@@ -1158,6 +1144,20 @@
 		<local-home>com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceHome</local-home>
 		<local>com.liferay.portlet.tags.service.ejb.TagsSourceLocalServiceEJB</local>
 		<ejb-link>com_liferay_portlet_tags_service_ejb_TagsSourceLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/WikiNodeLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceHome</local-home>
+		<local>com.liferay.portlet.wiki.service.ejb.WikiNodeLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-link>
+	</ejb-local-ref>
+	<ejb-local-ref>
+		<ejb-ref-name>ejb/liferay/WikiPageLocalServiceHome</ejb-ref-name>
+		<ejb-ref-type>Session</ejb-ref-type>
+		<local-home>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceHome</local-home>
+		<local>com.liferay.portlet.wiki.service.ejb.WikiPageLocalServiceEJB</local>
+		<ejb-link>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-link>
 	</ejb-local-ref>
 	<ejb-local-ref>
 		<ejb-ref-name>ejb/liferay/CounterLocalServiceHome</ejb-ref-name>

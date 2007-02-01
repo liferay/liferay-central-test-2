@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portlet_Tags_TagsAssetService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.tags.portlet.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="TagsAssetServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="http://model.tags.portlet.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portlet_Tags_TagsAssetService"/>
+		<parameter name="className" value="com.liferay.portlet.tags.service.http.TagsAssetServiceSoap"/>
+		<parameter name="wsdlPortType" value="TagsAssetServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" name="deleteAsset" qname="operNS:deleteAsset" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="assetId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.tags.portlet.liferay.com" xmlns:rtns="http://model.tags.portlet.liferay.com" name="getAsset" qname="operNS:getAsset" returnQName="getAssetReturn" returnType="rtns:TagsAssetSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="assetId" type="tns:long"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="deleteAsset getAsset"/>
+		<typeMapping xmlns:ns="http://model.tags.portlet.liferay.com" qname="ns:TagsAssetSoap" type="java:com.liferay.portlet.tags.model.TagsAssetSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+	</service>
+</deployment>

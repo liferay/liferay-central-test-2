@@ -542,78 +542,6 @@
 		<property name="service" ref="com.liferay.portlet.shopping.service.ShoppingOrderService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.shopping.service.ShoppingOrderService" />
 	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
-	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
-	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
-	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
-	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
-	</bean>
-	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
-	</bean>
-	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
-		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
-	</bean>
 	<bean name="/com_liferay_portlet_softwarerepository_service_spring_SRLicenseService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.softwarerepository.service.SRLicenseService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.softwarerepository.service.SRLicenseService" />
@@ -709,5 +637,77 @@
 	<bean name="/com_liferay_portlet_tags_service_spring_TagsSourceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
 		<property name="service" ref="com.liferay.portlet.tags.service.TagsSourceService.professional" />
 		<property name="serviceInterface" value="com.liferay.portlet.tags.service.TagsSourceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiNodeService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiNodeService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_wiki_service_spring_WikiPageService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.wiki.service.WikiPageService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.wiki.service.WikiPageService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowComponentService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowComponentService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowDefinitionService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowDefinitionService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowInstanceService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowInstanceService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
+	</bean>
+	<bean name="/com_liferay_portlet_workflow_service_spring_WorkflowTaskService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
+		<property name="serviceInterface" value="com.liferay.portlet.workflow.service.WorkflowTaskService" />
 	</bean>
 </beans>

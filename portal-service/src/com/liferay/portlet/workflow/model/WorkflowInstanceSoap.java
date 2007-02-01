@@ -36,6 +36,7 @@ public class WorkflowInstanceSoap extends WorkflowInstance {
 	public static WorkflowInstanceSoap toSoapModel(WorkflowInstance model) {
 		WorkflowInstanceSoap soapModel = new WorkflowInstanceSoap();
 
+		soapModel.setInstanceId(model.getInstanceId());
 		soapModel.setStartDate(model.getStartDate());
 		soapModel.setEndDate(model.getEndDate());
 		soapModel.setEnded(model.isEnded());

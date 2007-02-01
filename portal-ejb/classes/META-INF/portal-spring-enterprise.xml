@@ -3775,248 +3775,6 @@
 			<ref bean="com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPersistence" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.wiki.service.WikiNodeLocalService</value>
-		</property>
-		<property name="jndiName">
-			<value>ejb/liferay/WikiNodeLocalServiceHome</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.wiki.service.WikiNodeService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.wiki.service.WikiPageLocalService</value>
-		</property>
-		<property name="jndiName">
-			<value>ejb/liferay/WikiPageLocalServiceHome</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.wiki.service.WikiPageService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.wiki.service.WikiPageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.workflow.service.WorkflowComponentService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowComponentServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.workflow.service.WorkflowDefinitionService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowDefinitionServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.workflow.service.WorkflowInstanceService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowInstanceServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
-		<property name="businessInterface">
-			<value>com.liferay.portlet.workflow.service.WorkflowTaskService</value>
-		</property>
-		<property name="jndiName">
-			<value>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</value>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowTaskServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="*">PROPAGATION_REQUIRED</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.enterprise" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portlet.softwarerepository.service.SRLicenseLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
 		<property name="businessInterface">
 			<value>com.liferay.portlet.softwarerepository.service.SRLicenseLocalService</value>
@@ -4551,6 +4309,248 @@
 	<bean id="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" class="com.liferay.portlet.tags.service.persistence.TagsSourceUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.tags.service.persistence.TagsSourcePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.wiki.service.WikiNodeLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/WikiNodeLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.wiki.service.WikiNodeService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.professional" class="com.liferay.portlet.wiki.service.impl.WikiNodeServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" class="com.liferay.portlet.wiki.service.WikiNodeServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiNodeService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" class="com.liferay.portlet.wiki.service.persistence.WikiNodeUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiNodePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.enterprise" class="com.liferay.portal.spring.ejb.LocalSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.wiki.service.WikiPageLocalService</value>
+		</property>
+		<property name="jndiName">
+			<value>ejb/liferay/WikiPageLocalServiceHome</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageLocalService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.wiki.service.WikiPageService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.professional" class="com.liferay.portlet.wiki.service.impl.WikiPageServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.wiki.service.WikiPageService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.WikiPageServiceFactory" class="com.liferay.portlet.wiki.service.WikiPageServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.wiki.service.WikiPageService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" class="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" class="com.liferay.portlet.wiki.service.persistence.WikiPageUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.wiki.service.persistence.WikiPagePersistence" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.workflow.service.WorkflowComponentService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowComponentServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowComponentServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowComponentService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.workflow.service.WorkflowDefinitionService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowDefinitionServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowDefinitionServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowDefinitionService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.workflow.service.WorkflowInstanceService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowInstanceServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowInstanceServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowInstanceService.enterprise" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.enterprise" class="com.liferay.portal.spring.ejb.RemoteSessionFactoryBean" lazy-init="true">
+		<property name="businessInterface">
+			<value>com.liferay.portlet.workflow.service.WorkflowTaskService</value>
+		</property>
+		<property name="jndiName">
+			<value>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</value>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" class="com.liferay.portlet.workflow.service.impl.WorkflowTaskServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.professional" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="*">PROPAGATION_REQUIRED</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.enterprise" />
 		</property>
 	</bean>
 </beans>

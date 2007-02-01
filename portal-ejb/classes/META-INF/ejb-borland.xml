@@ -432,38 +432,6 @@
 			<bean-local-home-name>ejb/liferay/ShoppingOrderItemLocalServiceHome</bean-local-home-name>
 		</session>
 		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/WikiNodeLocalServiceHome</bean-local-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</bean-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-name>
-			<bean-local-home-name>ejb/liferay/WikiPageLocalServiceHome</bean-local-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</bean-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</bean-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</bean-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</bean-home-name>
-		</session>
-		<session>
-			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
-			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</bean-home-name>
-		</session>
-		<session>
 			<ejb-name>com_liferay_portlet_softwarerepository_service_ejb_SRLicenseLocalServiceEJB</ejb-name>
 			<bean-local-home-name>ejb/liferay/SRLicenseLocalServiceHome</bean-local-home-name>
 		</session>
@@ -526,6 +494,38 @@
 		<session>
 			<ejb-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</ejb-name>
 			<bean-home-name>com_liferay_portlet_tags_service_ejb_TagsSourceServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/WikiNodeLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_wiki_service_ejb_WikiNodeServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageLocalServiceEJB</ejb-name>
+			<bean-local-home-name>ejb/liferay/WikiPageLocalServiceHome</bean-local-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_wiki_service_ejb_WikiPageServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowComponentServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowDefinitionServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowInstanceServiceEJB</bean-home-name>
+		</session>
+		<session>
+			<ejb-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</ejb-name>
+			<bean-home-name>com_liferay_portlet_workflow_service_ejb_WorkflowTaskServiceEJB</bean-home-name>
 		</session>
 	</enterprise-beans>
 	<property>

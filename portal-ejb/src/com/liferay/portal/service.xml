@@ -2,7 +2,7 @@
 <!DOCTYPE service-builder PUBLIC "-//Liferay//DTD Service Builder 4.2.0//EN" "http://www.liferay.com/dtd/liferay-service-builder_4_2_0.dtd">
 
 <service-builder root-dir=".." package-path="com.liferay">
-	<portlet name="Portal" short-name="" />
+	<portlet name="Portal" short-name="Portal" />
 	<entity name="Account" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
