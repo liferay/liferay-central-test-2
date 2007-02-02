@@ -41,6 +41,7 @@ import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
+import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -185,6 +186,24 @@ public abstract class BaseUpgradeTableImpl {
 		else if (t == Types.BOOLEAN) {
 			userType = new BooleanType();
 		}
+		else if (t == Types.CLOB) {
+			BufferedReader br =
+				new BufferedReader(rs.getClob(name).getCharacterStream());
+
+			StringBuffer sb = new StringBuffer();
+
+			String line = null;
+
+			while ((line = br.readLine()) != null) {
+				sb.append(line + StringPool.NEW_LINE);
+			}
+
+			if (sb.length() > 0) {
+				sb.deleteCharAt(sb.length() - 1);
+			}
+
+			value = sb.toString();
+		}
 		else if (t == Types.TIMESTAMP) {
 			try {
 				value = rs.getObject(name);
@@ -231,6 +250,11 @@ public abstract class BaseUpgradeTableImpl {
 		}
 		else if (t == Types.BOOLEAN) {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
+		}
+		else if (t == Types.CLOB) {
+			StringReader reader = new StringReader(value);
+
+			ps.setCharacterStream(index, reader, value.length());
 		}
 		else if (t == Types.TIMESTAMP) {
 			DateFormat df = DateUtil.getISOFormat();
@@ -319,6 +343,12 @@ public abstract class BaseUpgradeTableImpl {
 			try {
 				con = HibernateUtil.getConnection();
 
+				boolean useBatch = con.getMetaData().supportsBatchUpdates();
+
+				if (!useBatch) {
+					_log.info("Database does not support batch updates");
+				}
+
 				int count = 0;
 
 				while ((line = br.readLine()) != null) {
@@ -338,21 +368,28 @@ public abstract class BaseUpgradeTableImpl {
 							ps, i + 1, (Integer)_columns[i][1], values[i]);
 					}
 
-					ps.addBatch();
+					if (useBatch) {
+						ps.addBatch();
 
-					if (count == _BATCH_SIZE) {
-						ps.executeBatch();
+						if (count == _BATCH_SIZE) {
+							ps.executeBatch();
 
-						ps.close();
+							ps.close();
 
-						count = 0;
+							count = 0;
+						}
+						else {
+							count++;
+						}
 					}
 					else {
-						count++;
+						ps.executeUpdate();
+
+						ps.close();
 					}
 				}
 
-				if (count != 0) {
+				if (useBatch && count != 0) {
 					ps.executeBatch();
 
 					ps.close();
