@@ -30,6 +30,8 @@ import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,13 @@ import java.util.Date;
  *
  */
 public class MBStatsUserModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "MBStatsUser";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "messageCount", new Integer(Types.INTEGER) },
+			{ "lastPostDate", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			XSS_ALLOW);

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,25 @@ import java.util.Date;
  *
  */
 public class AccountModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Account_";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "accountId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "parentAccountId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "legalName", new Integer(Types.VARCHAR) },
+			{ "legalId", new Integer(Types.VARCHAR) },
+			{ "legalType", new Integer(Types.VARCHAR) },
+			{ "sicCode", new Integer(Types.VARCHAR) },
+			{ "tickerSymbol", new Integer(Types.VARCHAR) },
+			{ "industry", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "size_", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Account"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_ACCOUNTID = GetterUtil.getBoolean(PropsUtil.get(

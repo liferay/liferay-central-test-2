@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,13 @@ import java.util.Date;
  *
  */
 public class PasswordTrackerModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "PasswordTracker";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "passwordTrackerId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "password_", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PasswordTracker"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PASSWORDTRACKERID = GetterUtil.getBoolean(PropsUtil.get(

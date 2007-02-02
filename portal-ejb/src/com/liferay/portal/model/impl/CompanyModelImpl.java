@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="CompanyModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,14 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class CompanyModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Company";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "key_", new Integer(Types.VARCHAR) },
+			{ "portalURL", new Integer(Types.VARCHAR) },
+			{ "homeURL", new Integer(Types.VARCHAR) },
+			{ "mx", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Company"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(

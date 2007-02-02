@@ -30,6 +30,8 @@ import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="PollsChoiceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +39,12 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PollsChoiceModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "PollsChoice";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "questionId", new Integer(Types.VARCHAR) },
+			{ "choiceId", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsChoice"),
 			XSS_ALLOW);

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,26 @@ import java.util.Date;
  *
  */
 public class TagsAssetModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "TagsAsset";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "assetId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "startDate", new Integer(Types.VARCHAR) },
+			{ "endDate", new Integer(Types.VARCHAR) },
+			{ "publishDate", new Integer(Types.VARCHAR) },
+			{ "expirationDate", new Integer(Types.VARCHAR) },
+			{ "mimeType", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "url", new Integer(Types.VARCHAR) },
+			{ "height", new Integer(Types.INTEGER) },
+			{ "width", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsAsset"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(

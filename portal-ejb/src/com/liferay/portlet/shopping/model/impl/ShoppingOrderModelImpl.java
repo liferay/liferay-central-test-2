@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,59 @@ import java.util.Date;
  *
  */
 public class ShoppingOrderModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ShoppingOrder";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "orderId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "tax", new Integer(Types.DOUBLE) },
+			{ "shipping", new Integer(Types.DOUBLE) },
+			{ "altShipping", new Integer(Types.VARCHAR) },
+			{ "requiresShipping", new Integer(Types.BOOLEAN) },
+			{ "insure", new Integer(Types.BOOLEAN) },
+			{ "insurance", new Integer(Types.DOUBLE) },
+			{ "couponIds", new Integer(Types.VARCHAR) },
+			{ "couponDiscount", new Integer(Types.DOUBLE) },
+			{ "billingFirstName", new Integer(Types.VARCHAR) },
+			{ "billingLastName", new Integer(Types.VARCHAR) },
+			{ "billingEmailAddress", new Integer(Types.VARCHAR) },
+			{ "billingCompany", new Integer(Types.VARCHAR) },
+			{ "billingStreet", new Integer(Types.VARCHAR) },
+			{ "billingCity", new Integer(Types.VARCHAR) },
+			{ "billingState", new Integer(Types.VARCHAR) },
+			{ "billingZip", new Integer(Types.VARCHAR) },
+			{ "billingCountry", new Integer(Types.VARCHAR) },
+			{ "billingPhone", new Integer(Types.VARCHAR) },
+			{ "shipToBilling", new Integer(Types.BOOLEAN) },
+			{ "shippingFirstName", new Integer(Types.VARCHAR) },
+			{ "shippingLastName", new Integer(Types.VARCHAR) },
+			{ "shippingEmailAddress", new Integer(Types.VARCHAR) },
+			{ "shippingCompany", new Integer(Types.VARCHAR) },
+			{ "shippingStreet", new Integer(Types.VARCHAR) },
+			{ "shippingCity", new Integer(Types.VARCHAR) },
+			{ "shippingState", new Integer(Types.VARCHAR) },
+			{ "shippingZip", new Integer(Types.VARCHAR) },
+			{ "shippingCountry", new Integer(Types.VARCHAR) },
+			{ "shippingPhone", new Integer(Types.VARCHAR) },
+			{ "ccName", new Integer(Types.VARCHAR) },
+			{ "ccType", new Integer(Types.VARCHAR) },
+			{ "ccNumber", new Integer(Types.VARCHAR) },
+			{ "ccExpMonth", new Integer(Types.INTEGER) },
+			{ "ccExpYear", new Integer(Types.INTEGER) },
+			{ "ccVerNumber", new Integer(Types.VARCHAR) },
+			{ "comments", new Integer(Types.VARCHAR) },
+			{ "ppTxnId", new Integer(Types.VARCHAR) },
+			{ "ppPaymentStatus", new Integer(Types.VARCHAR) },
+			{ "ppPaymentGross", new Integer(Types.DOUBLE) },
+			{ "ppReceiverEmail", new Integer(Types.VARCHAR) },
+			{ "ppPayerEmail", new Integer(Types.VARCHAR) },
+			{ "sendOrderEmail", new Integer(Types.BOOLEAN) },
+			{ "sendShippingEmail", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			XSS_ALLOW);

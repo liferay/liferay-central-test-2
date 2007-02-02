@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="LayoutSetModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,19 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class LayoutSetModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "LayoutSet";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "privateLayout", new Integer(Types.BOOLEAN) },
+			{ "logo", new Integer(Types.BOOLEAN) },
+			{ "themeId", new Integer(Types.VARCHAR) },
+			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "pageCount", new Integer(Types.INTEGER) },
+			{ "virtualHost", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.LayoutSet"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_OWNERID = GetterUtil.getBoolean(PropsUtil.get(

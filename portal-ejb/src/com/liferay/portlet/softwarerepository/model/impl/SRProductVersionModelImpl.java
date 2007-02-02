@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,21 @@ import java.util.Date;
  *
  */
 public class SRProductVersionModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "SRProductVersion";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "productVersionId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "productEntryId", new Integer(Types.BIGINT) },
+			{ "version", new Integer(Types.VARCHAR) },
+			{ "changeLog", new Integer(Types.VARCHAR) },
+			{ "downloadPageURL", new Integer(Types.VARCHAR) },
+			{ "directDownloadURL", new Integer(Types.VARCHAR) },
+			{ "repoStoreArtifact", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarerepository.model.SRProductVersion"),
 			XSS_ALLOW);

@@ -22,13 +22,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.AddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,33 +53,11 @@ public class UpgradeAddress extends UpgradeProcess {
 
 	private void _upgradeAddress() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_NAME, _COLUMNS, new LongPKUpgradeColumnImpl());
+			AddressImpl.TABLE_NAME, AddressImpl.TABLE_COLUMNS,
+			new LongPKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}
-
-	private static final Object[][] _COLUMNS = {
-		{"addressId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
-		{"userId", new Integer(Types.VARCHAR)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"className", new Integer(Types.VARCHAR)},
-		{"classPK", new Integer(Types.VARCHAR)},
-		{"street1", new Integer(Types.VARCHAR)},
-		{"street2", new Integer(Types.VARCHAR)},
-		{"street3", new Integer(Types.VARCHAR)},
-		{"city", new Integer(Types.VARCHAR)},
-		{"zip", new Integer(Types.VARCHAR)},
-		{"regionId", new Integer(Types.VARCHAR)},
-		{"countryId", new Integer(Types.VARCHAR)},
-		{"typeId", new Integer(Types.INTEGER)},
-		{"mailing", new Integer(Types.BOOLEAN)},
-		{"primary_", new Integer(Types.BOOLEAN)}
-	};
-
-	private static final String _TABLE_NAME = "Address";
 
 	private static Log _log = LogFactory.getLog(UpgradeAddress.class);
 

@@ -30,6 +30,8 @@ import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,19 @@ import java.util.Date;
  *
  */
 public class WikiPageModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "WikiPage";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "nodeId", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "content", new Integer(Types.VARCHAR) },
+			{ "format", new Integer(Types.VARCHAR) },
+			{ "head", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.wiki.model.WikiPage"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_NODEID = GetterUtil.getBoolean(PropsUtil.get(

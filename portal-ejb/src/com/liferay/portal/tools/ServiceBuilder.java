@@ -1859,6 +1859,7 @@ public class ServiceBuilder {
 		sb.append("import com.liferay.util.DateUtil;");
 		sb.append("import com.liferay.util.GetterUtil;");
 		sb.append("import com.liferay.util.XSSUtil;");
+		sb.append("import java.sql.Types;");
 		sb.append("import java.util.Date;");
 
 		// Class declaration
@@ -1866,6 +1867,28 @@ public class ServiceBuilder {
 		sb.append("public class " + entity.getName() + "ModelImpl extends BaseModelImpl {");
 
 		// Fields
+
+		sb.append("public static String TABLE_NAME = \"" + entity.getTable() + "\";");
+
+		sb.append("public static Object[][] TABLE_COLUMNS = {");
+
+		for (int i = 0; i < regularColList.size(); i++) {
+			EntityColumn col = (EntityColumn)regularColList.get(i);
+
+			String sqlParameterType = "VARCHAR";
+
+			if (col.isPrimitiveType()) {
+				sqlParameterType = _getPrimitiveSqlType(col.getType()).toUpperCase();
+			}
+
+			sb.append("{\"" + col.getDBName() + "\", new Integer(Types." + sqlParameterType + ")}");
+
+			if ((i + 1) < regularColList.size()) {
+				sb.append(",");
+			}
+		}
+
+		sb.append("};");
 
 		sb.append("public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(\"xss.allow." + _packagePath + ".model." + entity.getName() + "\"), XSS_ALLOW);");
 
@@ -5985,7 +6008,7 @@ public class ServiceBuilder {
 			return "INTEGER";
 		}
 		else if (type.equals("long")) {
-			return "INTEGER";
+			return "BIGINT";
 		}
 		else if (type.equals("short")) {
 			return "INTEGER";

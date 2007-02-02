@@ -30,6 +30,8 @@ import com.liferay.portlet.imagegallery.service.persistence.IGImagePK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,19 @@ import java.util.Date;
  *
  */
 public class IGImageModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "IGImage";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "imageId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "height", new Integer(Types.INTEGER) },
+			{ "width", new Integer(Types.INTEGER) },
+			{ "size_", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.imagegallery.model.IGImage"),
 			XSS_ALLOW);

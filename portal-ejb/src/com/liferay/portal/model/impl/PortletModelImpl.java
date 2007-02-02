@@ -29,6 +29,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="PortletModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,6 +38,13 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class PortletModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Portlet";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "portletId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "roles", new Integer(Types.VARCHAR) },
+			{ "active_", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Portlet"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_PORTLETID = GetterUtil.getBoolean(PropsUtil.get(

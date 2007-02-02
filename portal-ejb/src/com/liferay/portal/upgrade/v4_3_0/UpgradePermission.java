@@ -22,6 +22,8 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.PermissionImpl;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
@@ -62,7 +64,8 @@ public class UpgradePermission extends UpgradeProcess {
 			new LongPKUpgradeColumnImpl(0, true);
 
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_RESOURCE, _COLUMNS_RESOURCE, longPKUpgradeColumn);
+			ResourceImpl.TABLE_NAME, ResourceImpl.TABLE_COLUMNS,
+			longPKUpgradeColumn);
 
 		upgradeTable.updateTable();
 
@@ -73,7 +76,8 @@ public class UpgradePermission extends UpgradeProcess {
 		longPKUpgradeColumn = new LongPKUpgradeColumnImpl(0, true);
 
 		upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_PERMISSION, _COLUMNS_PERMISSION, longPKUpgradeColumn,
+			PermissionImpl.TABLE_NAME, PermissionImpl.TABLE_COLUMNS,
+			longPKUpgradeColumn,
 			new SwapUpgradeColumnImpl("resourceId", resourcePKMapper));
 
 		upgradeTable.updateTable();
@@ -113,10 +117,6 @@ public class UpgradePermission extends UpgradeProcess {
 		upgradeTable.updateTable();
 	}
 
-	private static final String _TABLE_PERMISSION = "Permission_";
-
-	private static final String _TABLE_RESOURCE = "Resource_";
-
 	private static final String _TABLE_GROUPS_PERMISSIONS =
 		"Groups_Permissions";
 
@@ -128,22 +128,6 @@ public class UpgradePermission extends UpgradeProcess {
 
 	private static final String _TABLE_ORG_GROUP_PERMISSION =
 		"OrgGroupPermission";
-
-	private static final Object[][] _COLUMNS_PERMISSION = {
-		{"permissionId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
-		{"actionId", new Integer(Types.VARCHAR)},
-		{"resourceId", new Integer(Types.BIGINT)}
-	};
-
-	private static final Object[][] _COLUMNS_RESOURCE = {
-		{"resourceId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
-		{"name", new Integer(Types.VARCHAR)},
-		{"typeId", new Integer(Types.VARCHAR)},
-		{"scope", new Integer(Types.VARCHAR)},
-		{"primKey", new Integer(Types.VARCHAR)}
-	};
 
 	private static final Object[][] _COLUMNS_GROUP_PERMISSIONS = {
 		{"groupId", new Integer(Types.BIGINT)},

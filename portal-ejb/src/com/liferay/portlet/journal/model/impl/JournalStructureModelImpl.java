@@ -30,6 +30,8 @@ import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,19 @@ import java.util.Date;
  *
  */
 public class JournalStructureModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "JournalStructure";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "structureId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "xsd", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalStructure"),
 			XSS_ALLOW);

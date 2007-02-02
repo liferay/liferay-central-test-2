@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="UserGroupModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,14 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class UserGroupModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "UserGroup";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "userGroupId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "parentUserGroupId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserGroup"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERGROUPID = GetterUtil.getBoolean(PropsUtil.get(

@@ -30,6 +30,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,17 @@ import java.util.Date;
  *
  */
 public class DLFileVersionModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "DLFileVersion";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "size_", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			XSS_ALLOW);

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="MBDiscussionModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,13 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class MBDiscussionModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "MBDiscussion";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "discussionId", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "threadId", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			XSS_ALLOW);

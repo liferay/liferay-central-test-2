@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="RoleModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,16 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class RoleModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Role_";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "roleId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Role"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_ROLEID = GetterUtil.getBoolean(PropsUtil.get(

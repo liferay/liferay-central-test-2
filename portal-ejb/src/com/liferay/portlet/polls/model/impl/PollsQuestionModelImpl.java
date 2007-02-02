@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,20 @@ import java.util.Date;
  *
  */
 public class PollsQuestionModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "PollsQuestion";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "questionId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "expirationDate", new Integer(Types.VARCHAR) },
+			{ "lastVoteDate", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),
 			XSS_ALLOW);

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,18 @@ import java.util.Date;
  *
  */
 public class RatingsEntryModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "RatingsEntry";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "entryId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "score", new Integer(Types.DOUBLE) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.ratings.model.RatingsEntry"),
 			XSS_ALLOW);

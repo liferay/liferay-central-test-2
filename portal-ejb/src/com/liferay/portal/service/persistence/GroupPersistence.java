@@ -1979,7 +1979,7 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsOrganization extends MappingSqlQuery {
 		protected ContainsOrganization(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSORGANIZATION);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2011,7 +2011,7 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_Orgs (groupId, organizationId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2030,7 +2030,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearOrganizations(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2043,7 +2043,7 @@ public class GroupPersistence extends BasePersistence {
 		protected RemoveOrganization(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE groupId = ? AND organizationId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2056,8 +2056,8 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsPermission extends MappingSqlQuery {
 		protected ContainsPermission(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2088,8 +2088,8 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_Permissions (groupId, permissionId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2106,7 +2106,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearPermissions(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2119,8 +2119,8 @@ public class GroupPersistence extends BasePersistence {
 		protected RemovePermission(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE groupId = ? AND permissionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2132,7 +2132,7 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2162,7 +2162,7 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_Roles (groupId, roleId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2180,7 +2180,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearRoles(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2193,7 +2193,7 @@ public class GroupPersistence extends BasePersistence {
 		protected RemoveRole(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE groupId = ? AND roleId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2206,7 +2206,7 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsUserGroup extends MappingSqlQuery {
 		protected ContainsUserGroup(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSERGROUP);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2236,7 +2236,7 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_UserGroups (groupId, userGroupId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2254,7 +2254,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearUserGroups(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_UserGroups WHERE groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2267,7 +2267,7 @@ public class GroupPersistence extends BasePersistence {
 		protected RemoveUserGroup(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_UserGroups WHERE groupId = ? AND userGroupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2280,7 +2280,7 @@ public class GroupPersistence extends BasePersistence {
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(GroupPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2310,7 +2310,7 @@ public class GroupPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Groups (groupId, userId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -2328,7 +2328,7 @@ public class GroupPersistence extends BasePersistence {
 		protected ClearUsers(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -2341,7 +2341,7 @@ public class GroupPersistence extends BasePersistence {
 		protected RemoveUser(GroupPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Groups WHERE groupId = ? AND userId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}

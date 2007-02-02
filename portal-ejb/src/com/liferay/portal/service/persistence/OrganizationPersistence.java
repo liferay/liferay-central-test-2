@@ -1700,7 +1700,7 @@ public class OrganizationPersistence extends BasePersistence {
 		protected ContainsGroup(OrganizationPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1732,7 +1732,7 @@ public class OrganizationPersistence extends BasePersistence {
 				"INSERT INTO Groups_Orgs (organizationId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1763,7 +1763,7 @@ public class OrganizationPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Orgs WHERE organizationId = ? AND groupId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 

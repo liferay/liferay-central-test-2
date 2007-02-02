@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="ListTypeModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,12 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class ListTypeModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ListType";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "listTypeId", new Integer(Types.INTEGER) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.ListType"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_NAME = GetterUtil.getBoolean(PropsUtil.get(

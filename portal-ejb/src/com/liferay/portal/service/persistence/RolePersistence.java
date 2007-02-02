@@ -1569,7 +1569,7 @@ public class RolePersistence extends BasePersistence {
 		protected ContainsGroup(RolePersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1599,7 +1599,7 @@ public class RolePersistence extends BasePersistence {
 				"INSERT INTO Groups_Roles (roleId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1630,7 +1630,7 @@ public class RolePersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Roles WHERE roleId = ? AND groupId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1643,7 +1643,7 @@ public class RolePersistence extends BasePersistence {
 		protected ContainsPermission(RolePersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSPERMISSION);
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1673,7 +1673,7 @@ public class RolePersistence extends BasePersistence {
 				"INSERT INTO Roles_Permissions (roleId, permissionId) VALUES (?, ?)");
 			_persistence = persistence;
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1704,7 +1704,7 @@ public class RolePersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE roleId = ? AND permissionId = ?");
 			declareParameter(new SqlParameter(Types.VARCHAR));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 

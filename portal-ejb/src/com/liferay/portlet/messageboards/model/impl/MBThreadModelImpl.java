@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,18 @@ import java.util.Date;
  *
  */
 public class MBThreadModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "MBThread";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "threadId", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "topicId", new Integer(Types.VARCHAR) },
+			{ "rootMessageId", new Integer(Types.VARCHAR) },
+			{ "messageCount", new Integer(Types.INTEGER) },
+			{ "viewCount", new Integer(Types.INTEGER) },
+			{ "lastPostByUserId", new Integer(Types.VARCHAR) },
+			{ "lastPostDate", new Integer(Types.VARCHAR) },
+			{ "priority", new Integer(Types.DOUBLE) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBThread"),
 			XSS_ALLOW);

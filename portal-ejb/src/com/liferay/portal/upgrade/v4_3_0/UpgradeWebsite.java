@@ -22,13 +22,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -45,35 +44,20 @@ public class UpgradeWebsite extends UpgradeProcess {
 		_log.info("Upgrading");
 
 		try {
-			_upgradeEmailAddress();
+			_upgradeWebsite();
 		}
 		catch (Exception e) {
 			throw new UpgradeException(e);
 		}
 	}
 
-	private void _upgradeEmailAddress() throws Exception {
+	private void _upgradeWebsite() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_NAME, _COLUMNS, new LongPKUpgradeColumnImpl());
+			WebsiteImpl.TABLE_NAME, WebsiteImpl.TABLE_COLUMNS,
+			new LongPKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}
-
-	private static final Object[][] _COLUMNS = {
-		{"websiteId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
-		{"userId", new Integer(Types.VARCHAR)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"className", new Integer(Types.VARCHAR)},
-		{"classPK", new Integer(Types.VARCHAR)},
-		{"url", new Integer(Types.VARCHAR)},
-		{"typeId", new Integer(Types.INTEGER)},
-		{"primary_", new Integer(Types.BOOLEAN)}
-	};
-
-	private static final String _TABLE_NAME = "Website";
 
 	private static Log _log = LogFactory.getLog(UpgradeWebsite.class);
 

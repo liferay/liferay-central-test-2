@@ -1265,8 +1265,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 	protected class ContainsSRLicense extends MappingSqlQuery {
 		protected ContainsSRLicense(SRProductEntryPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSSRLICENSE);
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1297,8 +1297,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO SRLicenses_SRProductEntries (productEntryId, licenseId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1318,7 +1318,7 @@ public class SRProductEntryPersistence extends BasePersistence {
 		protected ClearSRLicenses(SRProductEntryPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM SRLicenses_SRProductEntries WHERE productEntryId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1331,8 +1331,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 		protected RemoveSRLicense(SRProductEntryPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM SRLicenses_SRProductEntries WHERE productEntryId = ? AND licenseId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 

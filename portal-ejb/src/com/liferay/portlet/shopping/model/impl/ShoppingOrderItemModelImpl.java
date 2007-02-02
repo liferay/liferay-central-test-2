@@ -30,6 +30,8 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,18 @@ import java.util.Date;
  *
  */
 public class ShoppingOrderItemModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ShoppingOrderItem";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "orderId", new Integer(Types.VARCHAR) },
+			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "sku", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "properties", new Integer(Types.VARCHAR) },
+			{ "price", new Integer(Types.DOUBLE) },
+			{ "quantity", new Integer(Types.INTEGER) },
+			{ "shippedDate", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),
 			XSS_ALLOW);

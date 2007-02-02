@@ -30,6 +30,8 @@ import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,31 @@ import java.util.Date;
  *
  */
 public class JournalArticleModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "JournalArticle";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "articleId", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "content", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "structureId", new Integer(Types.VARCHAR) },
+			{ "templateId", new Integer(Types.VARCHAR) },
+			{ "displayDate", new Integer(Types.VARCHAR) },
+			{ "approved", new Integer(Types.BOOLEAN) },
+			{ "approvedByUserId", new Integer(Types.VARCHAR) },
+			{ "approvedByUserName", new Integer(Types.VARCHAR) },
+			{ "approvedDate", new Integer(Types.VARCHAR) },
+			{ "expired", new Integer(Types.BOOLEAN) },
+			{ "expirationDate", new Integer(Types.VARCHAR) },
+			{ "reviewDate", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalArticle"),
 			XSS_ALLOW);

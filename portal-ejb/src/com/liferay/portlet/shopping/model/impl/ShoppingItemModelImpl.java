@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,39 @@ import java.util.Date;
  *
  */
 public class ShoppingItemModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ShoppingItem";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "sku", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "properties", new Integer(Types.VARCHAR) },
+			{ "fields_", new Integer(Types.BOOLEAN) },
+			{ "fieldsQuantities", new Integer(Types.VARCHAR) },
+			{ "minQuantity", new Integer(Types.INTEGER) },
+			{ "maxQuantity", new Integer(Types.INTEGER) },
+			{ "price", new Integer(Types.DOUBLE) },
+			{ "discount", new Integer(Types.DOUBLE) },
+			{ "taxable", new Integer(Types.BOOLEAN) },
+			{ "shipping", new Integer(Types.DOUBLE) },
+			{ "useShippingFormula", new Integer(Types.BOOLEAN) },
+			{ "requiresShipping", new Integer(Types.BOOLEAN) },
+			{ "stockQuantity", new Integer(Types.INTEGER) },
+			{ "featured_", new Integer(Types.BOOLEAN) },
+			{ "sale_", new Integer(Types.BOOLEAN) },
+			{ "smallImage", new Integer(Types.BOOLEAN) },
+			{ "smallImageURL", new Integer(Types.VARCHAR) },
+			{ "mediumImage", new Integer(Types.BOOLEAN) },
+			{ "mediumImageURL", new Integer(Types.VARCHAR) },
+			{ "largeImage", new Integer(Types.BOOLEAN) },
+			{ "largeImageURL", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItem"),
 			XSS_ALLOW);

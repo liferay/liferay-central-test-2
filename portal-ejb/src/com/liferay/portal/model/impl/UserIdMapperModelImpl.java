@@ -29,6 +29,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="UserIdMapperModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,6 +38,13 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class UserIdMapperModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "UserIdMapper";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "externalUserId", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserIdMapper"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(

@@ -1325,8 +1325,8 @@ public class PermissionPersistence extends BasePersistence {
 	protected class ContainsGroup extends MappingSqlQuery {
 		protected ContainsGroup(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSGROUP);
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1357,8 +1357,8 @@ public class PermissionPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Groups_Permissions (permissionId, groupId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1375,7 +1375,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearGroups(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1388,8 +1388,8 @@ public class PermissionPersistence extends BasePersistence {
 		protected RemoveGroup(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1401,7 +1401,7 @@ public class PermissionPersistence extends BasePersistence {
 	protected class ContainsRole extends MappingSqlQuery {
 		protected ContainsRole(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSROLE);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1431,7 +1431,7 @@ public class PermissionPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Roles_Permissions (permissionId, roleId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1449,7 +1449,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearRoles(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1462,7 +1462,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected RemoveRole(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Roles_Permissions WHERE permissionId = ? AND roleId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1475,7 +1475,7 @@ public class PermissionPersistence extends BasePersistence {
 	protected class ContainsUser extends MappingSqlQuery {
 		protected ContainsUser(PermissionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSUSER);
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1505,7 +1505,7 @@ public class PermissionPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO Users_Permissions (permissionId, userId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}
@@ -1523,7 +1523,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected ClearUsers(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -1536,7 +1536,7 @@ public class PermissionPersistence extends BasePersistence {
 		protected RemoveUser(PermissionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM Users_Permissions WHERE permissionId = ? AND userId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			declareParameter(new SqlParameter(Types.VARCHAR));
 			compile();
 		}

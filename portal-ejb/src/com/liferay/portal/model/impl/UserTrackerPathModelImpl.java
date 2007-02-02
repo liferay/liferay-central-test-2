@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,13 @@ import java.util.Date;
  *
  */
 public class UserTrackerPathModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "UserTrackerPath";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "userTrackerPathId", new Integer(Types.VARCHAR) },
+			{ "userTrackerId", new Integer(Types.VARCHAR) },
+			{ "path", new Integer(Types.VARCHAR) },
+			{ "pathDate", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERTRACKERPATHID = GetterUtil.getBoolean(PropsUtil.get(

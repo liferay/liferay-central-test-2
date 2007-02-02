@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="CountryModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,16 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class CountryModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Country";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "countryId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "a2", new Integer(Types.VARCHAR) },
+			{ "a3", new Integer(Types.VARCHAR) },
+			{ "number_", new Integer(Types.VARCHAR) },
+			{ "idd_", new Integer(Types.VARCHAR) },
+			{ "active_", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Country"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_COUNTRYID = GetterUtil.getBoolean(PropsUtil.get(

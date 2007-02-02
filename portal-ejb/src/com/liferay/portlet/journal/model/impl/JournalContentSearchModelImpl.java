@@ -30,6 +30,8 @@ import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="JournalContentSearchModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +39,15 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class JournalContentSearchModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "JournalContentSearch";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "portletId", new Integer(Types.VARCHAR) },
+			{ "layoutId", new Integer(Types.VARCHAR) },
+			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "articleId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.journal.model.JournalContentSearch"),
 			XSS_ALLOW);

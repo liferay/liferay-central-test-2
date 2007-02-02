@@ -29,6 +29,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="LayoutModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -36,6 +38,23 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class LayoutModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Layout";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "layoutId", new Integer(Types.VARCHAR) },
+			{ "ownerId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "parentLayoutId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "type_", new Integer(Types.VARCHAR) },
+			{ "typeSettings", new Integer(Types.VARCHAR) },
+			{ "hidden_", new Integer(Types.BOOLEAN) },
+			{ "friendlyURL", new Integer(Types.VARCHAR) },
+			{ "iconImage", new Integer(Types.BOOLEAN) },
+			{ "themeId", new Integer(Types.VARCHAR) },
+			{ "colorSchemeId", new Integer(Types.VARCHAR) },
+			{ "priority", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Layout"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_LAYOUTID = GetterUtil.getBoolean(PropsUtil.get(

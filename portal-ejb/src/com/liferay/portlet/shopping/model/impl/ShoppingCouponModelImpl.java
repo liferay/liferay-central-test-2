@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,26 @@ import java.util.Date;
  *
  */
 public class ShoppingCouponModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ShoppingCoupon";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "couponId", new Integer(Types.VARCHAR) },
+			{ "groupId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "startDate", new Integer(Types.VARCHAR) },
+			{ "endDate", new Integer(Types.VARCHAR) },
+			{ "active_", new Integer(Types.BOOLEAN) },
+			{ "limitCategories", new Integer(Types.VARCHAR) },
+			{ "limitSkus", new Integer(Types.VARCHAR) },
+			{ "minOrder", new Integer(Types.DOUBLE) },
+			{ "discount", new Integer(Types.DOUBLE) },
+			{ "discountType", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			XSS_ALLOW);

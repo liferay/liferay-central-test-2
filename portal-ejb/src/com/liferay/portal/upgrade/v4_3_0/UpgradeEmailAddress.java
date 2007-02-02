@@ -22,13 +22,12 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
+import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.LongPKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-
-import java.sql.Types;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -54,26 +53,11 @@ public class UpgradeEmailAddress extends UpgradeProcess {
 
 	private void _upgradeEmailAddress() throws Exception {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
-			_TABLE_NAME, _COLUMNS, new LongPKUpgradeColumnImpl());
+			EmailAddressImpl.TABLE_NAME, EmailAddressImpl.TABLE_COLUMNS,
+			new LongPKUpgradeColumnImpl());
 
 		upgradeTable.updateTable();
 	}
-
-	private static final Object[][] _COLUMNS = {
-		{"emailAddressId", new Integer(Types.BIGINT)},
-		{"companyId", new Integer(Types.VARCHAR)},
-		{"userId", new Integer(Types.VARCHAR)},
-		{"userName", new Integer(Types.VARCHAR)},
-		{"createDate", new Integer(Types.TIMESTAMP)},
-		{"modifiedDate", new Integer(Types.TIMESTAMP)},
-		{"className", new Integer(Types.VARCHAR)},
-		{"classPK", new Integer(Types.VARCHAR)},
-		{"address", new Integer(Types.VARCHAR)},
-		{"typeId", new Integer(Types.INTEGER)},
-		{"primary_", new Integer(Types.BOOLEAN)}
-	};
-
-	private static final String _TABLE_NAME = "EmailAddress";
 
 	private static Log _log = LogFactory.getLog(UpgradeEmailAddress.class);
 

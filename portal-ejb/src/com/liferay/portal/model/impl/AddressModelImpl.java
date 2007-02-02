@@ -29,6 +29,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -38,6 +40,27 @@ import java.util.Date;
  *
  */
 public class AddressModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Address";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "addressId", new Integer(Types.BIGINT) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "street1", new Integer(Types.VARCHAR) },
+			{ "street2", new Integer(Types.VARCHAR) },
+			{ "street3", new Integer(Types.VARCHAR) },
+			{ "city", new Integer(Types.VARCHAR) },
+			{ "zip", new Integer(Types.VARCHAR) },
+			{ "regionId", new Integer(Types.VARCHAR) },
+			{ "countryId", new Integer(Types.VARCHAR) },
+			{ "typeId", new Integer(Types.INTEGER) },
+			{ "mailing", new Integer(Types.BOOLEAN) },
+			{ "primary_", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Address"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_COMPANYID = GetterUtil.getBoolean(PropsUtil.get(

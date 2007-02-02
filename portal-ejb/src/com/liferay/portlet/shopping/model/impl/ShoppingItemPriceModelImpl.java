@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="ShoppingItemPriceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,19 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class ShoppingItemPriceModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "ShoppingItemPrice";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "itemPriceId", new Integer(Types.VARCHAR) },
+			{ "itemId", new Integer(Types.VARCHAR) },
+			{ "minQuantity", new Integer(Types.INTEGER) },
+			{ "maxQuantity", new Integer(Types.INTEGER) },
+			{ "price", new Integer(Types.DOUBLE) },
+			{ "discount", new Integer(Types.DOUBLE) },
+			{ "taxable", new Integer(Types.BOOLEAN) },
+			{ "shipping", new Integer(Types.DOUBLE) },
+			{ "useShippingFormula", new Integer(Types.BOOLEAN) },
+			{ "status", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			XSS_ALLOW);

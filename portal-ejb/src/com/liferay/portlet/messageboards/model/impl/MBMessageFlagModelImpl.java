@@ -30,6 +30,8 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="MBMessageFlagModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -37,6 +39,13 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class MBMessageFlagModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "MBMessageFlag";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "topicId", new Integer(Types.VARCHAR) },
+			{ "messageId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "flag", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessageFlag"),
 			XSS_ALLOW);

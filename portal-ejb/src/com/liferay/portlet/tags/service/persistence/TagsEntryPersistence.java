@@ -672,8 +672,8 @@ public class TagsEntryPersistence extends BasePersistence {
 	protected class ContainsTagsAsset extends MappingSqlQuery {
 		protected ContainsTagsAsset(TagsEntryPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSTAGSASSET);
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -704,8 +704,8 @@ public class TagsEntryPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO TagsAssets_TagsEntries (entryId, assetId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -722,7 +722,7 @@ public class TagsEntryPersistence extends BasePersistence {
 		protected ClearTagsAssets(TagsEntryPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM TagsAssets_TagsEntries WHERE entryId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -735,8 +735,8 @@ public class TagsEntryPersistence extends BasePersistence {
 		protected RemoveTagsAsset(TagsEntryPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM TagsAssets_TagsEntries WHERE entryId = ? AND assetId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 

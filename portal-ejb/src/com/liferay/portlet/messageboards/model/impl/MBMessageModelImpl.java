@@ -31,6 +31,8 @@ import com.liferay.util.DateUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -40,6 +42,23 @@ import java.util.Date;
  *
  */
 public class MBMessageModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "MBMessage";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "topicId", new Integer(Types.VARCHAR) },
+			{ "messageId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "categoryId", new Integer(Types.VARCHAR) },
+			{ "threadId", new Integer(Types.VARCHAR) },
+			{ "parentMessageId", new Integer(Types.VARCHAR) },
+			{ "subject", new Integer(Types.VARCHAR) },
+			{ "body", new Integer(Types.VARCHAR) },
+			{ "attachments", new Integer(Types.BOOLEAN) },
+			{ "anonymous", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBMessage"),
 			XSS_ALLOW);

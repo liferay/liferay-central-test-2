@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="SRLicenseModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,15 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class SRLicenseModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "SRLicense";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "licenseId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "url", new Integer(Types.VARCHAR) },
+			{ "openSource", new Integer(Types.BOOLEAN) },
+			{ "active_", new Integer(Types.BOOLEAN) },
+			{ "recommended", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.softwarerepository.model.SRLicense"),
 			XSS_ALLOW);

@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="OrgLaborModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,26 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class OrgLaborModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "OrgLabor";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "orgLaborId", new Integer(Types.VARCHAR) },
+			{ "organizationId", new Integer(Types.VARCHAR) },
+			{ "typeId", new Integer(Types.INTEGER) },
+			{ "sunOpen", new Integer(Types.INTEGER) },
+			{ "sunClose", new Integer(Types.INTEGER) },
+			{ "monOpen", new Integer(Types.INTEGER) },
+			{ "monClose", new Integer(Types.INTEGER) },
+			{ "tueOpen", new Integer(Types.INTEGER) },
+			{ "tueClose", new Integer(Types.INTEGER) },
+			{ "wedOpen", new Integer(Types.INTEGER) },
+			{ "wedClose", new Integer(Types.INTEGER) },
+			{ "thuOpen", new Integer(Types.INTEGER) },
+			{ "thuClose", new Integer(Types.INTEGER) },
+			{ "friOpen", new Integer(Types.INTEGER) },
+			{ "friClose", new Integer(Types.INTEGER) },
+			{ "satOpen", new Integer(Types.INTEGER) },
+			{ "satClose", new Integer(Types.INTEGER) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.OrgLabor"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_ORGLABORID = GetterUtil.getBoolean(PropsUtil.get(

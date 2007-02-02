@@ -30,6 +30,8 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -39,6 +41,24 @@ import java.util.Date;
  *
  */
 public class DLFileEntryModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "DLFileEntry";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "folderId", new Integer(Types.VARCHAR) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "userName", new Integer(Types.VARCHAR) },
+			{ "versionUserId", new Integer(Types.VARCHAR) },
+			{ "versionUserName", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "title", new Integer(Types.VARCHAR) },
+			{ "description", new Integer(Types.VARCHAR) },
+			{ "version", new Integer(Types.DOUBLE) },
+			{ "size_", new Integer(Types.INTEGER) },
+			{ "readCount", new Integer(Types.INTEGER) },
+			{ "extraSettings", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			XSS_ALLOW);

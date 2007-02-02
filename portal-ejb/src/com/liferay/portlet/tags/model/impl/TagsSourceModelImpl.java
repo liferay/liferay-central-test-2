@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 /**
  * <a href="TagsSourceModelImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,6 +37,13 @@ import com.liferay.util.XSSUtil;
  *
  */
 public class TagsSourceModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "TagsSource";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "sourceId", new Integer(Types.BIGINT) },
+			{ "parentSourceId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) },
+			{ "acronym", new Integer(Types.VARCHAR) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.tags.model.TagsSource"),
 			XSS_ALLOW);

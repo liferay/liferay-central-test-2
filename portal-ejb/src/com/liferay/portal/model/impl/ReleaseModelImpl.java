@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,15 @@ import java.util.Date;
  *
  */
 public class ReleaseModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "Release_";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "releaseId", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "buildNumber", new Integer(Types.INTEGER) },
+			{ "buildDate", new Integer(Types.VARCHAR) },
+			{ "verified", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.Release"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_RELEASEID = GetterUtil.getBoolean(PropsUtil.get(

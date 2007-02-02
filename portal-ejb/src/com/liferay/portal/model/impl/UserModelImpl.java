@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,31 @@ import java.util.Date;
  *
  */
 public class UserModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "User_";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "userId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "contactId", new Integer(Types.VARCHAR) },
+			{ "password_", new Integer(Types.VARCHAR) },
+			{ "passwordEncrypted", new Integer(Types.BOOLEAN) },
+			{ "passwordExpirationDate", new Integer(Types.VARCHAR) },
+			{ "passwordReset", new Integer(Types.BOOLEAN) },
+			{ "emailAddress", new Integer(Types.VARCHAR) },
+			{ "languageId", new Integer(Types.VARCHAR) },
+			{ "timeZoneId", new Integer(Types.VARCHAR) },
+			{ "greeting", new Integer(Types.VARCHAR) },
+			{ "resolution", new Integer(Types.VARCHAR) },
+			{ "comments", new Integer(Types.VARCHAR) },
+			{ "loginDate", new Integer(Types.VARCHAR) },
+			{ "loginIP", new Integer(Types.VARCHAR) },
+			{ "lastLoginDate", new Integer(Types.VARCHAR) },
+			{ "lastLoginIP", new Integer(Types.VARCHAR) },
+			{ "failedLoginAttempts", new Integer(Types.INTEGER) },
+			{ "agreedToTermsOfUse", new Integer(Types.BOOLEAN) },
+			{ "active_", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.User"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_USERID = GetterUtil.getBoolean(PropsUtil.get(

@@ -758,8 +758,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 		protected ContainsSRFrameworkVersion(
 			SRProductVersionPersistence persistence) {
 			super(persistence.getDataSource(), _SQL_CONTAINSSRFRAMEWORKVERSION);
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -791,8 +791,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 			super(persistence.getDataSource(),
 				"INSERT INTO SRFrameworkVersions_SRProductVersions (productVersionId, frameworkVersionId) VALUES (?, ?)");
 			_persistence = persistence;
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -813,7 +813,7 @@ public class SRProductVersionPersistence extends BasePersistence {
 			SRProductVersionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM SRFrameworkVersions_SRProductVersions WHERE productVersionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 
@@ -827,8 +827,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 			SRProductVersionPersistence persistence) {
 			super(persistence.getDataSource(),
 				"DELETE FROM SRFrameworkVersions_SRProductVersions WHERE productVersionId = ? AND frameworkVersionId = ?");
-			declareParameter(new SqlParameter(Types.INTEGER));
-			declareParameter(new SqlParameter(Types.INTEGER));
+			declareParameter(new SqlParameter(Types.BIGINT));
+			declareParameter(new SqlParameter(Types.BIGINT));
 			compile();
 		}
 

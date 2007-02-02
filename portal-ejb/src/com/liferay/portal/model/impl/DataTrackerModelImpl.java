@@ -28,6 +28,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.XSSUtil;
 
+import java.sql.Types;
+
 import java.util.Date;
 
 /**
@@ -37,6 +39,19 @@ import java.util.Date;
  *
  */
 public class DataTrackerModelImpl extends BaseModelImpl {
+	public static String TABLE_NAME = "DataTracker";
+	public static Object[][] TABLE_COLUMNS = {
+			{ "dataTrackerId", new Integer(Types.VARCHAR) },
+			{ "companyId", new Integer(Types.VARCHAR) },
+			{ "createdOn", new Integer(Types.VARCHAR) },
+			{ "createdByUserId", new Integer(Types.VARCHAR) },
+			{ "createdByUserName", new Integer(Types.VARCHAR) },
+			{ "updatedOn", new Integer(Types.VARCHAR) },
+			{ "updatedBy", new Integer(Types.VARCHAR) },
+			{ "className", new Integer(Types.VARCHAR) },
+			{ "classPK", new Integer(Types.VARCHAR) },
+			{ "active_", new Integer(Types.BOOLEAN) }
+		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.DataTracker"), XSS_ALLOW);
 	public static boolean XSS_ALLOW_DATATRACKERID = GetterUtil.getBoolean(PropsUtil.get(
