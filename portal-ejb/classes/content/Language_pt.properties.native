@@ -626,6 +626,7 @@ city=Cidade
 class=Classe
 classic-wiki=Wiki Clássico
 clear-all=Cancele Tudo
+clear-cache=Esconderijo Desobstruído
 clear-content-cached-across-the-cluster=Índice desobstruído cached através do conjunto.
 clear-content-cached-by-this-vm=Índice desobstruído cached por este VM.
 clear-the-database-cache=Cancele o esconderijo da base de dados.

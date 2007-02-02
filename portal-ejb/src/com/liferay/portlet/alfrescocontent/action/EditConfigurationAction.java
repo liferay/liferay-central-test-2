@@ -25,6 +25,7 @@ package com.liferay.portlet.alfrescocontent.action;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.Constants;
 import com.liferay.portlet.PortletPreferencesFactory;
+import com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil;
 import com.liferay.util.ParamUtil;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -55,26 +56,27 @@ public class EditConfigurationAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		if (!cmd.equals(Constants.UPDATE)) {
-			return;
+		if (cmd.equals(Constants.UPDATE)) {
+			String userId = ParamUtil.getString(req, "userId");
+			String password = ParamUtil.getString(req, "password");
+			String uuid = ParamUtil.getString(req, "uuid");
+			boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
+
+			String portletResource = ParamUtil.getString(req, "portletResource");
+
+			PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
+				req, portletResource, true, true);
+
+			prefs.setValue("user-id", userId);
+			prefs.setValue("password", password);
+			prefs.setValue("uuid", uuid);
+			prefs.setValue("maximize-links", String.valueOf(maximizeLinks));
+
+			prefs.store();
 		}
-
-		String userId = ParamUtil.getString(req, "userId");
-		String password = ParamUtil.getString(req, "password");
-		String uuid = ParamUtil.getString(req, "uuid");
-		boolean maximizeLinks = ParamUtil.getBoolean(req, "maximizeLinks");
-
-		String portletResource = ParamUtil.getString(req, "portletResource");
-
-		PortletPreferences prefs = PortletPreferencesFactory.getPortletSetup(
-			req, portletResource, true, true);
-
-		prefs.setValue("user-id", userId);
-		prefs.setValue("password", password);
-		prefs.setValue("uuid", uuid);
-		prefs.setValue("maximize-links", String.valueOf(maximizeLinks));
-
-		prefs.store();
+		else if (cmd.equals("clearCache")) {
+			AlfrescoContentCacheUtil.clearCache();
+		}
 
 		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}

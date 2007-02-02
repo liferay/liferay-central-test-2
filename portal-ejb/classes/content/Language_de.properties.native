@@ -626,6 +626,7 @@ city=Stadt
 class=Klasse
 classic-wiki=Klassisches Wiki
 clear-all=Alle Entfernen
+clear-cache=Freier Pufferspeicher
 clear-content-cached-across-the-cluster=Lösche Inhalt im Cluster.
 clear-content-cached-by-this-vm=Lösche Inhalt in dieser VM.
 clear-the-database-cache=Lösche den Datenbank Cache.

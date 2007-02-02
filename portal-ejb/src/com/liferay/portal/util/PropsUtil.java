@@ -648,9 +648,11 @@ public class PropsUtil {
 
 	// Alfresco Portlet
 
-	public static final String ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE = "alfresco.content.one.step.edit.sso.simulate";
-
 	public static final String ALFRESCO_CONTENT_SERVER_URL = "alfresco.content.server.url";
+
+	public static final String ALFRESCO_CONTENT_CACHE_REFRESH_TIME = "alfresco.content.cache.refresh.time";
+
+	public static final String ALFRESCO_CONTENT_ONE_STEP_EDIT_SSO_SIMULATE = "alfresco.content.one.step.edit.sso.simulate";
 
 	public static final String ALFRESCO_OPEN_SEARCH_ENABLED = "alfresco.open.search.enabled";
 

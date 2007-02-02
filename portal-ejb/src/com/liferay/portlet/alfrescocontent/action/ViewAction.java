@@ -25,7 +25,7 @@ package com.liferay.portlet.alfrescocontent.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.alfrescocontent.util.AlfrescoContentUtil;
+import com.liferay.portlet.alfrescocontent.util.AlfrescoContentCacheUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.ParamUtil;
 
@@ -70,7 +70,7 @@ public class ViewAction extends PortletAction {
 		String content = null;
 
 		try {
-			content = AlfrescoContentUtil.getContent(
+			content = AlfrescoContentCacheUtil.getContent(
 				userId, password, uuid, path, maximizeLinks, res);
 		}
 		catch (Exception e) {

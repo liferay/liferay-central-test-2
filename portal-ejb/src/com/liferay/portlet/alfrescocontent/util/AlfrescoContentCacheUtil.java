@@ -20,60 +20,63 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.cms.servlet;
+package com.liferay.portlet.alfrescocontent.util;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ClusterPool;
-import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.CachePolicy;
+import com.liferay.util.GetterUtil;
 import com.liferay.util.Validator;
 
 import com.opensymphony.oscache.base.NeedsRefreshException;
 import com.opensymphony.oscache.general.GeneralCacheAdministrator;
 
+import javax.portlet.RenderResponse;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CMSServletUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="AlfrescoContentCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
- * @author  Raymond Auge
+ * @author  Jerry Niu
  *
  */
-public class CMSServletUtil {
+public class AlfrescoContentCacheUtil {
 
-	public static final String GROUP_NAME = CMSServletUtil.class.getName();
+	public static final String GROUP_NAME =
+		AlfrescoContentCacheUtil.class.getName();
 
-	public static final String[] GROUP_NAME_ARRAY = new String[] {GROUP_NAME};
+	public static final String[] GROUP_NAME_ARRAY = new String[]{GROUP_NAME};
 
-	public static String LANGUAGE = "_LANGUAGE_";
+	public static final long REFRESH_TIME = GetterUtil.getLong(
+		PropsUtil.ALFRESCO_CONTENT_CACHE_REFRESH_TIME);
 
 	public static void clearCache() {
 		_cache.flushGroup(GROUP_NAME);
 	}
 
 	public static String getContent(
-		String companyId, long groupId, String articleId, String languageId,
-		ThemeDisplay themeDisplay) {
+			String userId, String password, String uuid, String path,
+			boolean maximizeLinks, RenderResponse res)
+		throws Exception {
 
 		String content = null;
 
-		if (Validator.isNull(articleId)) {
+		if (Validator.isNull(uuid)) {
 			return null;
 		}
 
-		articleId = articleId.trim().toUpperCase();
-
-		String key = _encodeKey(articleId + LANGUAGE + languageId);
+		String key = _encodeKey(uuid);
 
 		try {
-			content = (String)_cache.getFromCache(key);
+			content = (String) _cache.getFromCache(key);
 		}
 		catch (NeedsRefreshException nre) {
 			try {
-				content = JournalArticleLocalServiceUtil.getArticleContent(
-					companyId, groupId, articleId, languageId, themeDisplay);
+				content = AlfrescoContentUtil.getContent(
+					userId, password, uuid, path, maximizeLinks, res);
 			}
 			catch (Exception e) {
 				if (_log.isWarnEnabled()) {
@@ -82,7 +85,9 @@ public class CMSServletUtil {
 			}
 
 			if (content != null) {
-				_cache.putInCache(key, content, GROUP_NAME_ARRAY);
+				_cache.putInCache(
+					key, content, GROUP_NAME_ARRAY,
+					new CachePolicy(REFRESH_TIME));
 			}
 		}
 		finally {
@@ -98,7 +103,7 @@ public class CMSServletUtil {
 		return GROUP_NAME + StringPool.POUND + key;
 	}
 
-	private static Log _log = LogFactory.getLog(CMSServletUtil.class);
+	private static Log _log = LogFactory.getLog(AlfrescoContentCacheUtil.class);
 
 	private static GeneralCacheAdministrator _cache = ClusterPool.getCache();
 

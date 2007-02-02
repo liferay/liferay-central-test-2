@@ -626,6 +626,7 @@ city=도시
 class=종류
 classic-wiki=고전적인 Wiki
 clear-all=모두를 맑게하십시요
+clear-cache=명확한 시렁
 clear-content-cached-across-the-cluster=송이저 쪽에에 숨기는 명확한 내용.
 clear-content-cached-by-this-vm=이VM에의해 숨기는 명확한 내용.
 clear-the-database-cache=데이타베이스 시렁을 맑게하십시요.

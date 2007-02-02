@@ -79,7 +79,9 @@ catch (Exception e) {
 
 <br>
 
-<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm1);"><br>
+<input class="portlet-form-button" type="button" value="<bean:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm1);">
+
+<input class="portlet-form-button" type="button" value="<bean:message key="clear-cache" />" onClick="document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = 'clearCache'; submitForm(document.<portlet:namespace />fm1);"><br>
 
 <%
 String cmd = ParamUtil.getString(request, Constants.CMD);

@@ -626,6 +626,7 @@ city=城市
 class=類
 classic-wiki=舊式Wiki
 clear-all=清除所有
+clear-cache=清楚的貯藏所
 clear-content-cached-across-the-cluster=清楚的內容被貯藏橫跨群。
 clear-content-cached-by-this-vm=清楚的內容由這VM 貯藏。
 clear-the-database-cache=清除資料庫高速緩存。

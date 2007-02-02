@@ -626,6 +626,7 @@ city=Πόλη
 class=Μάθημα
 classic-wiki=Κλασσικό Wiki
 clear-all=Καθαρισμός Όλων
+clear-cache=Σαφής κρύπτη
 clear-content-cached-across-the-cluster=Περιεχόμενο που εναποθηκεύεται σαφές σε ολόκληρη τη συστάδα.
 clear-content-cached-by-this-vm=Περιεχόμενο που εναποθηκεύεται σαφές από αυτό το VM.
 clear-the-database-cache=Καθαρίστε την κρύπτη βάσεων δεδομένων.
