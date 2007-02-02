@@ -187,8 +187,8 @@ public abstract class BaseUpgradeTableImpl {
 			userType = new BooleanType();
 		}
 		else if (t == Types.CLOB) {
-			BufferedReader br =
-				new BufferedReader(rs.getClob(name).getCharacterStream());
+			BufferedReader br = new BufferedReader(
+				rs.getClob(name).getCharacterStream());
 
 			StringBuffer sb = new StringBuffer();
 
@@ -389,10 +389,12 @@ public abstract class BaseUpgradeTableImpl {
 					}
 				}
 
-				if (useBatch && count != 0) {
-					ps.executeBatch();
+				if (useBatch) {
+					if (count != 0) {
+						ps.executeBatch();
 
-					ps.close();
+						ps.close();
+					}
 				}
 			}
 			finally {
