@@ -32,7 +32,7 @@
 
 	rowURL.setWindowState(WindowState.MAXIMIZED);
 
-	rowURL.setParameter("struts_action", "/admin/view_plugin");
+	rowURL.setParameter("struts_action", "/admin/view");
 	rowURL.setParameter("redirect", currentURL);
 	rowURL.setParameter("moduleId", plugin.getModuleId());
 	rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());

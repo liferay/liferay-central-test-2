@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
  *
@@ -20,33 +19,42 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
-<% if (repositoryReport != null) { %>
-	<table border="0">
-<%
-	Iterator it = repositoryReport.getRepositoryURLs().iterator();
-		while (it.hasNext()) {
-			String repositoryURL2 = (String) it.next();
-			Object status = repositoryReport.getState(repositoryURL2);
-%>
-	<tr>
-		<th align="left"><%= repositoryURL2%></th>
-		<td>
-<%
-			if (status == RepositoryReport.SUCCESS) {
-%>
-				<span style="color: green"><%= LanguageUtil.get(pageContext, "success")%></span>
-<%
-			} else {
-%>
-				<abbr style="color: red" title="<%= "" + status %>"><%= LanguageUtil.get(pageContext, "error")%></abbr>
-<%
-			}
-%>
-		</td>
-	</tr>
-<%
-		}
-%>
-	</table>
-<% } %>
+
+package com.liferay.util;
+
+/**
+ * <a href="License.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Jorge Ferrer
+ */
+public class License {
+
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
+	public boolean isOsiApproved() {
+		return _osiApproved;
+	}
+
+	public void setOsiApproved(boolean osiApproved) {
+		_osiApproved = osiApproved;
+	}
+
+	public String getUrl() {
+		return _url;
+	}
+
+	public void setUrl(String url) {
+		_url = url;
+	}
+
+	private String _name;
+	private boolean _osiApproved;
+	private String _url;
+
+}

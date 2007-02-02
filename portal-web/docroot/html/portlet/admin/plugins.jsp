@@ -22,26 +22,27 @@
  */
 %>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
-
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
 String currentTag = ParamUtil.getString(renderRequest, "tag");
 String currentType = ParamUtil.getString(renderRequest, "type");
-String currentRepositoryURL = ParamUtil.getString(renderRequest, "repositoryURL");
 
 PortletURL viewPluginURL = renderResponse.createRenderURL();
 
 viewPluginURL.setWindowState(WindowState.MAXIMIZED);
-viewPluginURL.setParameter("struts_action", "/admin/view_plugin");
+viewPluginURL.setParameter("struts_action", "/admin/view");
+viewPluginURL.setParameter("tabs1", tabs1);
+viewPluginURL.setParameter("tabs2", tabs2);
 
 
 PortletURL searchURL = renderResponse.createRenderURL();
 
 searchURL.setWindowState(WindowState.MAXIMIZED);
-searchURL.setParameter("struts_action", "/admin/plugins");
+searchURL.setParameter("struts_action", "/admin/view");
 searchURL.setParameter("redirect", redirect);
+searchURL.setParameter("tabs1", tabs1);
+searchURL.setParameter("tabs2", tabs2);
 
 
 PortletURL reloadRepositoriesURL = renderResponse.createActionURL();
@@ -50,10 +51,10 @@ reloadRepositoriesURL.setWindowState(WindowState.MAXIMIZED);
 reloadRepositoriesURL.setParameter("struts_action", "/admin/edit_server");
 reloadRepositoriesURL.setParameter("cmd", "reloadRepositories");
 reloadRepositoriesURL.setParameter("redirect", currentURL);
+reloadRepositoriesURL.setParameter("tabs1", tabs1);
+reloadRepositoriesURL.setParameter("tabs2", tabs2);
 
 %>
-
-<liferay-ui:tabs names="remote-deploy" backURL="<%=redirect%>"/>
 
 <%
 try {
@@ -103,9 +104,9 @@ try {
 			<%
 				String[] repositoryURLs = PluginUtil.getRepositoryURLs();
 				for (int i = 0; i < repositoryURLs.length; i++) {
-					String repositoryURL = repositoryURLs[i];
+					String repositoryURL2 = repositoryURLs[i];
 			%>
-				<option value="<%=repositoryURL%>" <%= (repositoryURL.equals(currentRepositoryURL))?"selected":"" %>><%= repositoryURL %></option>
+				<option value="<%=repositoryURL2%>" <%= (repositoryURL2.equals(repositoryURL))?"selected":"" %>><%= repositoryURL2 %></option>
 			<%
 				}
 			%>
@@ -132,7 +133,7 @@ try {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, viewPluginURL, headerNames, null);
 
-	List results = PluginUtil.search(currentType, currentTag, currentRepositoryURL);
+	List results = PluginUtil.search(currentType, currentTag, repositoryURL);
 	int total = results.size();
 
 	searchContainer.setTotal(total);
@@ -150,10 +151,12 @@ try {
 
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
-		rowURL.setParameter("struts_action", "/admin/view_plugin");
+		rowURL.setParameter("struts_action", "/admin/view");
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("moduleId", plugin.getModuleId());
 		rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
+		rowURL.setParameter("tabs1", tabs1);
+		rowURL.setParameter("tabs2", tabs2);
 
 		// Name and short description
 

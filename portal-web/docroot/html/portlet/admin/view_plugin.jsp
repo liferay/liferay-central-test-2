@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portal.language.LanguageUtil" %>
 <%
 /**
  * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
@@ -22,14 +23,8 @@
  */
 %>
 
-<%@ include file="/html/portlet/admin/init.jsp" %>
-
 <%
 String redirect = ParamUtil.getString(request, "redirect");
-
-String moduleId = ParamUtil.getString(request, "moduleId");
-
-String repositoryURL = ParamUtil.getString(request, "repositoryURL");
 
 Plugin plugin = PluginUtil.getPluginById(moduleId, repositoryURL);
 
@@ -38,10 +33,25 @@ PortletURL installURL = renderResponse.createActionURL();
 installURL.setWindowState(WindowState.MAXIMIZED);
 installURL.setParameter("struts_action", "/admin/edit_server");
 installURL.setParameter("cmd", "remoteDeploy");
-installURL.setParameter("url", plugin.getArtifactURL());
 installURL.setParameter("redirect", currentURL.toString());
 
-String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
+// Breadcrumbs
+
+PortletURL breadcrumbsURL = renderResponse.createRenderURL();
+
+breadcrumbsURL.setWindowState(WindowState.MAXIMIZED);
+
+breadcrumbsURL.setParameter("struts_action", "/admin/view");
+breadcrumbsURL.setParameter("tabs1", tabs1);
+breadcrumbsURL.setParameter("tabs2", tabs2);
+
+String breadcrumbs = "<a href=\"" + breadcrumbsURL.toString() + "\">" + LanguageUtil.get(pageContext, "repositories") + "</a> &raquo; ";
+
+breadcrumbsURL.setParameter("moduleId", moduleId);
+breadcrumbsURL.setParameter("repositoryURL", repositoryURL);
+
+breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName() + "</a>";
+
 %>
 
 <style type="text/css">
@@ -54,11 +64,14 @@ String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
 	}
 </style>
 
-<liferay-ui:tabs names="remote-deploy" backURL="<%=redirect%>"/>
+<%=breadcrumbs%>
+
+<br><br>
 
 <liferay-ui:error key="invalidUrl" message="invalid-url"/>
-<liferay-ui:error key="errorResponseFromServer" message="error-response-form-server"/>
+<liferay-ui:error key="errorResponseFromServer" message="error-response-from-the-server"/>
 <liferay-ui:error key="errorConnectingToServer" message="error-connecting-to-server"/>
+<liferay-ui:success key="pluginDownloaded" message="the-plugin-has-been-downloaded-and-is-being-installed"/>
 
 <table border="0" cellpadding="0" cellspacing="0">
 <tr>
@@ -130,10 +143,20 @@ String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
 		Iterator itr2 = plugin.getLicenses().iterator();
 
 		while (itr2.hasNext()) {
-			String license = (String)itr2.next();
+			License license = (License)itr2.next();
 		%>
+		    <% if (Validator.isNotNull(license.getUrl())) { %>
+				<a href="<%= license.getUrl()%>">
+			<% } %>
+			<%= license.getName() %>
+			<% if (Validator.isNotNull(license.getUrl())) { %>
+			</a>
+			<% } %>
+			<% if (license.isOsiApproved()) { %>
+				(<%= LanguageUtil.get(pageContext, "open-source")%>)
+			<% } %>
 
-			<%= license %><c:if test="<%= itr2.hasNext() %>">, </c:if>
+			<c:if test="<%= itr2.hasNext() %>">, </c:if>
 
 		<%
 		}
@@ -244,15 +267,13 @@ String uploadProgressId = "pluginInstaller" + System.currentTimeMillis();
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<form action="<%=installURL.toString()%>" method="post">
-			<input type="hidden" name="<portlet:namespace/>progressId" value="<%=uploadProgressId%>"/>
-			<input type="submit" value="<%=LanguageUtil.get(pageContext, "install")%>" onclick='<%= uploadProgressId%>.startProgress()'>
-		</form>
+		<input type="hidden" name="<portlet:namespace/>url" value="<%=plugin.getArtifactURL()%>">
+		<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "deploy")%>' onclick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%=downloadProgressId%>', '<%=currentURL%>');">
 	</td>
 </tr>
 </table>
 <liferay-ui:upload-progress
-	id="<%= uploadProgressId %>"
+	id="<%= downloadProgressId %>"
 	message="downloading"
-	redirect="<%= redirect %>"
+	redirect="<%= currentURL %>"
 />

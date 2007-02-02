@@ -58,6 +58,8 @@ public interface Constants {
 
 	public static final String PREVIEW = "preview";
 
+	public static final String PROGRESS_ID = "progressId";
+
 	public static final String REJECT = "reject";
 
 	public static final String RESET = "reset";

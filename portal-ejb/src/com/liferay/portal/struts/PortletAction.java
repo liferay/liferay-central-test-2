@@ -177,7 +177,9 @@ public class PortletAction extends Action {
 			ActionRequest req, ActionResponse res, String redirect)
 		throws IOException {
 
-		SessionMessages.add(req, "request_processed");
+		if (SessionErrors.isEmpty(req)) {
+			SessionMessages.add(req, "request_processed");
+		}
 
 		if (redirect == null) {
 			redirect = ParamUtil.getString(req, "redirect");

@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portal.plugin.PluginException" %>
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
 <%@ page import="com.liferay.portal.plugin.RepositoryReport" %>
+<%@ page import="com.liferay.util.License" %>
 
 <%@ page import="org.apache.log4j.Level" %>
 <%@ page import="org.apache.log4j.Logger" %>

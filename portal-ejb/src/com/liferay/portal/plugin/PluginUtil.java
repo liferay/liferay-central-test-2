@@ -30,6 +30,7 @@ import com.liferay.portal.util.ReleaseInfo;
 import com.liferay.portal.util.SAXReaderFactory;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.Html;
+import com.liferay.util.License;
 import com.liferay.util.Validator;
 import com.liferay.util.Version;
 import com.liferay.util.XSSUtil;
@@ -57,6 +58,7 @@ import org.apache.commons.httpclient.methods.GetMethod;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.dom4j.Attribute;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
@@ -280,7 +282,7 @@ public class PluginUtil {
 			Plugin plugin = new PluginImpl(
 					GetterUtil.getString(pluginElm.elementText("module-id")));
 
-			List liferayVersions = _readElementList(
+			List liferayVersions = _readList(
 					pluginElm.element("liferay-versions"), "liferay-version");
 			String type = GetterUtil.getString(pluginElm.elementText("type"));
 
@@ -293,12 +295,12 @@ public class PluginUtil {
 			plugin.setAuthor(_readText(pluginElm.elementText("author")));
 			plugin.setType(type);
 			plugin.setLicenses(
-					_readElementList(pluginElm.element("licenses"), "license"));
+					_readLicenseList(pluginElm.element("licenses"), "license"));
 			plugin.setLiferayVersions(liferayVersions);
 
 			if (pluginElm.element("tags") != null) {
 				plugin.setTags(
-						_readElementList(pluginElm.element("tags"), "tag"));
+						_readList(pluginElm.element("tags"), "tag"));
 			}
 			plugin.setShortDescription(
 					_readText(pluginElm.elementText("short-description")));
@@ -310,7 +312,8 @@ public class PluginUtil {
 					_readText(pluginElm.elementText("recommended-war-name")));
 
 			if (pluginElm.element("screenshots") != null) {
-				plugin.setScreenshotURLs(_readElementList(
+				plugin.setScreenshotURLs(
+						_readList(
 						pluginElm.element("screenshots"), "screenshot-url"));
 			}
 
@@ -344,7 +347,7 @@ public class PluginUtil {
 		return Html.stripHtml(GetterUtil.getString(text));
 	}
 
-	private static List _readElementList(Element parent, String childTagName) {
+	private static List _readList(Element parent, String childTagName) {
 
 		List result = new ArrayList();
 
@@ -357,6 +360,35 @@ public class PluginUtil {
 		}
 
 		return result;
+	}
+
+	private static List _readLicenseList(Element parent, String childTagName) {
+
+		List result = new ArrayList();
+
+		Iterator itr2 = parent.elements(childTagName).iterator();
+
+		while (itr2.hasNext()) {
+			Element tagEl = (Element)itr2.next();
+			License license = new License();
+			license.setName(tagEl.getText());
+
+			Attribute osiApproved = tagEl.attribute("osi-approved");
+			if (osiApproved != null) {
+				license.setOsiApproved(
+						GetterUtil.getBoolean(osiApproved.getText()));
+			}
+
+			Attribute url = tagEl.attribute("url");
+			if (url != null) {
+				license.setUrl(url.getText());
+			}
+
+			result.add(license);
+		}
+
+		return result;
+
 	}
 
 	private static final String _PLUGINS_XML_FILENAME = "liferay-plugins.xml";

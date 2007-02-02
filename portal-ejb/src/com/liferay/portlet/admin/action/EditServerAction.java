@@ -57,6 +57,7 @@ import com.liferay.util.Time;
 import com.liferay.util.Validator;
 import com.liferay.util.servlet.NullServletResponse;
 import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadException;
 import com.liferay.util.servlet.UploadPortletRequest;
 
@@ -243,9 +244,15 @@ public class EditServerAction extends PortletAction {
 	protected void hotDeploy(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
 			PortalUtil.getUploadPortletRequest(req);
+		String recommendedWARName =
+				ParamUtil.getString(req, "recommendedWARName");
 
 		File file = uploadReq.getFile("file");
-		String fileName = uploadReq.getFileName("file");
+		String fileName = recommendedWARName;
+		if (Validator.isNull(fileName)) {
+			fileName = uploadReq.getFileName("file");
+		}
+
 		byte[] bytes = FileUtil.getBytes(file);
 
 		if ((bytes != null) && (bytes.length > 0)) {
@@ -255,6 +262,7 @@ public class EditServerAction extends PortletAction {
 					StringPool.SLASH + fileName;
 
 			FileUtil.copyFile(source, destination);
+			SessionMessages.add(req, "pluginUploaded");
 		}
 		else {
 			SessionErrors.add(req, UploadException.class.getName());
@@ -400,7 +408,7 @@ public class EditServerAction extends PortletAction {
 		String url = ParamUtil.getString(req, "url");
 		String recommendedWARName =
 				ParamUtil.getString(req, "recommendedWARName");
-		String progressId = ParamUtil.getString(req, "progressId");
+		String progressId = ParamUtil.getString(req, Constants.PROGRESS_ID);
 
 		URL urlObj = new URL(url);
 		GetMethod getFileMethod = new GetMethod(urlObj.toString());
@@ -453,10 +461,13 @@ public class EditServerAction extends PortletAction {
 
 				File destinationFile = new File(destination);
 				boolean moved = FileUtil.move(tmpFile, destinationFile);
+
 				if (!moved) {
 					FileUtil.copyFile(tmpFile, destinationFile);
 					FileUtil.delete(tmpFile);
 				}
+
+				SessionMessages.add(req, "pluginDownloaded");
 			}
 			else {
 				SessionErrors.add(req, UploadException.class.getName());
