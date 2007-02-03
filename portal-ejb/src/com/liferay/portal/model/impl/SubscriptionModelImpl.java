@@ -45,8 +45,8 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },
 			{ "frequency", new Integer(Types.VARCHAR) }

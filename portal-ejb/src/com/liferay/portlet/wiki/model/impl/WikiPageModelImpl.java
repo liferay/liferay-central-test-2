@@ -49,8 +49,8 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "content", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "content", new Integer(Types.CLOB) },
 			{ "format", new Integer(Types.VARCHAR) },
 			{ "head", new Integer(Types.BOOLEAN) }
 		};

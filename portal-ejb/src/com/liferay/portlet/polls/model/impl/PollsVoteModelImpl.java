@@ -46,7 +46,7 @@ public class PollsVoteModelImpl extends BaseModelImpl {
 			{ "questionId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "choiceId", new Integer(Types.VARCHAR) },
-			{ "voteDate", new Integer(Types.VARCHAR) }
+			{ "voteDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsVote"),

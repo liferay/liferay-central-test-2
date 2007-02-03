@@ -50,14 +50,14 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 			{ "userName", new Integer(Types.VARCHAR) },
 			{ "versionUserId", new Integer(Types.VARCHAR) },
 			{ "versionUserName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
 			{ "version", new Integer(Types.DOUBLE) },
 			{ "size_", new Integer(Types.INTEGER) },
 			{ "readCount", new Integer(Types.INTEGER) },
-			{ "extraSettings", new Integer(Types.VARCHAR) }
+			{ "extraSettings", new Integer(Types.CLOB) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileEntry"),

@@ -46,7 +46,7 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 			{ "groupId", new Integer(Types.BIGINT) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "messageCount", new Integer(Types.INTEGER) },
-			{ "lastPostDate", new Integer(Types.VARCHAR) }
+			{ "lastPostDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.messageboards.model.MBStatsUser"),

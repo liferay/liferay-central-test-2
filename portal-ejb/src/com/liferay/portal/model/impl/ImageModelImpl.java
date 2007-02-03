@@ -42,8 +42,8 @@ public class ImageModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Image";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "imageId", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
-			{ "text_", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
+			{ "text_", new Integer(Types.CLOB) },
 			{ "type_", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(

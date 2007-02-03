@@ -51,7 +51,7 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 			{ "properties", new Integer(Types.VARCHAR) },
 			{ "price", new Integer(Types.DOUBLE) },
 			{ "quantity", new Integer(Types.INTEGER) },
-			{ "shippedDate", new Integer(Types.VARCHAR) }
+			{ "shippedDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.shopping.model.ShoppingOrderItem"),

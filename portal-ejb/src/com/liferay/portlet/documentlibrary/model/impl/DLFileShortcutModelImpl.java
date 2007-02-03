@@ -45,8 +45,8 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "folderId", new Integer(Types.VARCHAR) },
 			{ "toFolderId", new Integer(Types.VARCHAR) },
 			{ "toName", new Integer(Types.VARCHAR) }

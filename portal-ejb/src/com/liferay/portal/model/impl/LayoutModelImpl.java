@@ -47,7 +47,7 @@ public class LayoutModelImpl extends BaseModelImpl {
 			{ "name", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "type_", new Integer(Types.VARCHAR) },
-			{ "typeSettings", new Integer(Types.VARCHAR) },
+			{ "typeSettings", new Integer(Types.CLOB) },
 			{ "hidden_", new Integer(Types.BOOLEAN) },
 			{ "friendlyURL", new Integer(Types.VARCHAR) },
 			{ "iconImage", new Integer(Types.BOOLEAN) },

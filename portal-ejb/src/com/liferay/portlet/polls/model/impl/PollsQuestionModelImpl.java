@@ -47,12 +47,12 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "title", new Integer(Types.VARCHAR) },
 			{ "description", new Integer(Types.VARCHAR) },
-			{ "expirationDate", new Integer(Types.VARCHAR) },
-			{ "lastVoteDate", new Integer(Types.VARCHAR) }
+			{ "expirationDate", new Integer(Types.TIMESTAMP) },
+			{ "lastVoteDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.polls.model.PollsQuestion"),

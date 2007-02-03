@@ -45,8 +45,8 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "entryId", new Integer(Types.BIGINT) },
 			{ "key_", new Integer(Types.VARCHAR) },
 			{ "value", new Integer(Types.VARCHAR) }

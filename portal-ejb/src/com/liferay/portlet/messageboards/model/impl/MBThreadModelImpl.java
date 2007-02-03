@@ -49,7 +49,7 @@ public class MBThreadModelImpl extends BaseModelImpl {
 			{ "messageCount", new Integer(Types.INTEGER) },
 			{ "viewCount", new Integer(Types.INTEGER) },
 			{ "lastPostByUserId", new Integer(Types.VARCHAR) },
-			{ "lastPostDate", new Integer(Types.VARCHAR) },
+			{ "lastPostDate", new Integer(Types.TIMESTAMP) },
 			{ "priority", new Integer(Types.DOUBLE) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(

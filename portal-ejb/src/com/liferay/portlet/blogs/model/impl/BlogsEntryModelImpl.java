@@ -47,12 +47,12 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "categoryId", new Integer(Types.VARCHAR) },
 			{ "title", new Integer(Types.VARCHAR) },
-			{ "content", new Integer(Types.VARCHAR) },
-			{ "displayDate", new Integer(Types.VARCHAR) }
+			{ "content", new Integer(Types.CLOB) },
+			{ "displayDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.blogs.model.BlogsEntry"),

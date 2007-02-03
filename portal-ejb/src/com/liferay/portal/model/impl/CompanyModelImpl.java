@@ -40,7 +40,7 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Company";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "key_", new Integer(Types.VARCHAR) },
+			{ "key_", new Integer(Types.CLOB) },
 			{ "portalURL", new Integer(Types.VARCHAR) },
 			{ "homeURL", new Integer(Types.VARCHAR) },
 			{ "mx", new Integer(Types.VARCHAR) }

@@ -44,7 +44,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 			{ "userTrackerPathId", new Integer(Types.VARCHAR) },
 			{ "userTrackerId", new Integer(Types.VARCHAR) },
 			{ "path", new Integer(Types.VARCHAR) },
-			{ "pathDate", new Integer(Types.VARCHAR) }
+			{ "pathDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.UserTrackerPath"), XSS_ALLOW);

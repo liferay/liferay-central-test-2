@@ -48,7 +48,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "folderId", new Integer(Types.VARCHAR) },
 			{ "name", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) }
+			{ "createDate", new Integer(Types.TIMESTAMP) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portlet.documentlibrary.model.DLFileRank"),

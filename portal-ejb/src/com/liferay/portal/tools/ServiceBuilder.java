@@ -1875,13 +1875,9 @@ public class ServiceBuilder {
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = (EntityColumn)regularColList.get(i);
 
-			String sqlParameterType = "VARCHAR";
+			String sqlType = _getSqlType(_packagePath + ".model." + entity.getName(), col.getName(), col.getType());
 
-			if (col.isPrimitiveType()) {
-				sqlParameterType = _getPrimitiveSqlType(col.getType()).toUpperCase();
-			}
-
-			sb.append("{\"" + col.getDBName() + "\", new Integer(Types." + sqlParameterType + ")}");
+			sb.append("{\"" + col.getDBName() + "\", new Integer(Types." + sqlType + ")}");
 
 			if ((i + 1) < regularColList.size()) {
 				sb.append(",");
@@ -3819,11 +3815,7 @@ public class ServiceBuilder {
 
 				Entity tempEntity = getEntity(col.getEJBName());
 
-				String entitySqlParameterType = "VARCHAR";
-
-				if (entity.hasPrimitivePK()) {
-					entitySqlParameterType = _getPrimitiveSqlType(entity.getPKClassName()).toUpperCase();
-				}
+				String entitySqlType = _getSqlType(_packagePath + ".model." + entity.getName(), entity.getPKVarName(), entity.getPKClassName());
 
 				String pkVarNameWrapper = pkVarName;
 
@@ -3831,11 +3823,7 @@ public class ServiceBuilder {
 					pkVarNameWrapper = "new " + _getPrimitiveObj(entity.getPKClassName()) + "(" + pkVarName + ")";
 				}
 
-				String tempEntitySqlParameterType = "VARCHAR";
-
-				if (tempEntity.hasPrimitivePK()) {
-					tempEntitySqlParameterType = _getPrimitiveSqlType(tempEntity.getPKClassName()).toUpperCase();
-				}
+				String tempEntitySqlType = _getSqlType(tempEntity.getPackagePath() + ".model." + entity.getName(), tempEntity.getPKVarName(), tempEntity.getPKClassName());
 
 				String tempEntityPkVarNameWrapper = tempEntity.getPKVarName();
 
@@ -3848,8 +3836,8 @@ public class ServiceBuilder {
 				sb.append("protected class Contains" + tempEntity.getName() + " extends MappingSqlQuery {");
 				sb.append("protected Contains" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 				sb.append("super(persistence.getDataSource(), _SQL_CONTAINS" + tempEntity.getName().toUpperCase() + ");");
-				sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
-				sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
+				sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+				sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 				sb.append("compile();");
 				sb.append("}");
 				sb.append("protected Object mapRow(ResultSet rs, int rowNumber) throws SQLException {");
@@ -3875,8 +3863,8 @@ public class ServiceBuilder {
 					sb.append("protected Add" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"INSERT INTO " + col.getMappingTable() + " (" + pkVarName + ", " + tempEntity.getPKVarName() + ") VALUES (?, ?)\");");
 					sb.append("_persistence = persistence;");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
-					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void add(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
@@ -3892,7 +3880,7 @@ public class ServiceBuilder {
 					sb.append("protected class Clear" + tempEntity.getNames() + " extends SqlUpdate {");
 					sb.append("protected Clear" + tempEntity.getNames() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void clear(" + pkClassName + " " + pkVarName + ") {");
@@ -3905,8 +3893,8 @@ public class ServiceBuilder {
 					sb.append("protected class Remove" + tempEntity.getName() + " extends SqlUpdate {");
 					sb.append("protected Remove" + tempEntity.getName() + "(" + entity.getName() + "Persistence persistence) {");
 					sb.append("super(persistence.getDataSource(), \"DELETE FROM " + col.getMappingTable() + " WHERE " + pkVarName + " = ? AND " + tempEntity.getPKVarName() + " = ?\");");
-					sb.append("declareParameter(new SqlParameter(Types." + entitySqlParameterType + "));");
-					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlParameterType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + entitySqlType + "));");
+					sb.append("declareParameter(new SqlParameter(Types." + tempEntitySqlType + "));");
 					sb.append("compile();");
 					sb.append("}");
 					sb.append("protected void remove(" + pkClassName + " " + pkVarName + ", " + tempEntity.getPKClassName() + " " + tempEntity.getPKVarName() + ") {");
@@ -5994,7 +5982,16 @@ public class ServiceBuilder {
 		}
 	}
 
-	private String _getPrimitiveSqlType(String type) {
+	private String _getSessionTypeName(int sessionType) {
+		if (sessionType == _LOCAL) {
+			return "Local";
+		}
+		else {
+			return "";
+		}
+	}
+
+	private String _getSqlType(String model, String field, String type) {
 		if (type.equals("boolean")) {
 			return "BOOLEAN";
 		}
@@ -6013,17 +6010,25 @@ public class ServiceBuilder {
 		else if (type.equals("short")) {
 			return "INTEGER";
 		}
+		else if (type.equals("Date")) {
+			return "TIMESTAMP";
+		}
+		else if (type.equals("String")) {
+			Map hints = ModelHintsUtil.getHints(model, field);
+
+			if (hints != null) {
+				int maxLength = GetterUtil.getInteger(
+					(String)hints.get("max-length"));
+
+				if (maxLength == 2000000) {
+					return "CLOB";
+				}
+			}
+
+			return "VARCHAR";
+		}
 		else {
 			return null;
-		}
-	}
-
-	private String _getSessionTypeName(int sessionType) {
-		if (sessionType == _LOCAL) {
-			return "Local";
-		}
-		else {
-			return "";
 		}
 	}
 

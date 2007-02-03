@@ -43,7 +43,7 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 			{ "portletId", new Integer(Types.VARCHAR) },
 			{ "layoutId", new Integer(Types.VARCHAR) },
 			{ "ownerId", new Integer(Types.VARCHAR) },
-			{ "preferences", new Integer(Types.VARCHAR) }
+			{ "preferences", new Integer(Types.CLOB) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(
 				"xss.allow.com.liferay.portal.model.PortletPreferences"),

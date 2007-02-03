@@ -44,7 +44,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "passwordTrackerId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
 			{ "password_", new Integer(Types.VARCHAR) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(

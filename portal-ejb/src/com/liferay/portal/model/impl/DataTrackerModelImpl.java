@@ -43,10 +43,10 @@ public class DataTrackerModelImpl extends BaseModelImpl {
 	public static Object[][] TABLE_COLUMNS = {
 			{ "dataTrackerId", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.VARCHAR) },
-			{ "createdOn", new Integer(Types.VARCHAR) },
+			{ "createdOn", new Integer(Types.TIMESTAMP) },
 			{ "createdByUserId", new Integer(Types.VARCHAR) },
 			{ "createdByUserName", new Integer(Types.VARCHAR) },
-			{ "updatedOn", new Integer(Types.VARCHAR) },
+			{ "updatedOn", new Integer(Types.TIMESTAMP) },
 			{ "updatedBy", new Integer(Types.VARCHAR) },
 			{ "className", new Integer(Types.VARCHAR) },
 			{ "classPK", new Integer(Types.VARCHAR) },

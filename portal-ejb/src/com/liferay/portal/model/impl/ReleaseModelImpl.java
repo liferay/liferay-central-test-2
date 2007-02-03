@@ -42,10 +42,10 @@ public class ReleaseModelImpl extends BaseModelImpl {
 	public static String TABLE_NAME = "Release_";
 	public static Object[][] TABLE_COLUMNS = {
 			{ "releaseId", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "buildNumber", new Integer(Types.INTEGER) },
-			{ "buildDate", new Integer(Types.VARCHAR) },
+			{ "buildDate", new Integer(Types.TIMESTAMP) },
 			{ "verified", new Integer(Types.BOOLEAN) }
 		};
 	public static boolean XSS_ALLOW_BY_MODEL = GetterUtil.getBoolean(PropsUtil.get(

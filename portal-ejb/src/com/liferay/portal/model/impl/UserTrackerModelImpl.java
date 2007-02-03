@@ -44,7 +44,7 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			{ "userTrackerId", new Integer(Types.VARCHAR) },
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "remoteAddr", new Integer(Types.VARCHAR) },
 			{ "remoteHost", new Integer(Types.VARCHAR) },
 			{ "userAgent", new Integer(Types.VARCHAR) }

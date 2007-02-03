@@ -49,13 +49,13 @@ public class MBMessageModelImpl extends BaseModelImpl {
 			{ "companyId", new Integer(Types.VARCHAR) },
 			{ "userId", new Integer(Types.VARCHAR) },
 			{ "userName", new Integer(Types.VARCHAR) },
-			{ "createDate", new Integer(Types.VARCHAR) },
-			{ "modifiedDate", new Integer(Types.VARCHAR) },
+			{ "createDate", new Integer(Types.TIMESTAMP) },
+			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			{ "categoryId", new Integer(Types.VARCHAR) },
 			{ "threadId", new Integer(Types.VARCHAR) },
 			{ "parentMessageId", new Integer(Types.VARCHAR) },
 			{ "subject", new Integer(Types.VARCHAR) },
-			{ "body", new Integer(Types.VARCHAR) },
+			{ "body", new Integer(Types.CLOB) },
 			{ "attachments", new Integer(Types.BOOLEAN) },
 			{ "anonymous", new Integer(Types.BOOLEAN) }
 		};
