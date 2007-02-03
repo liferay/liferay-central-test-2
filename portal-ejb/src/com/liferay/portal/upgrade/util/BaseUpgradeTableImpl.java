@@ -32,6 +32,7 @@ import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.dao.hibernate.BooleanType;
+import com.liferay.util.dao.hibernate.DoubleType;
 import com.liferay.util.dao.hibernate.FloatType;
 import com.liferay.util.dao.hibernate.IntegerType;
 import com.liferay.util.dao.hibernate.LongType;
@@ -91,10 +92,14 @@ public abstract class BaseUpgradeTableImpl {
 			throw new UpgradeException(
 				"Nulls should never be inserted into the database");
 		}
-		else if (value instanceof String) {
-			sb.append(
-				StringUtil.replace(
-					(String)value, StringPool.COMMA, _SAFE_COMMA_CHARACTER));
+		else if (value instanceof Clob || value instanceof String) {
+			value = StringUtil.replace(
+				(String)value, StringPool.COMMA, _SAFE_COMMA_CHARACTER);
+
+			value = StringUtil.replace(
+				(String)value, StringPool.NEW_LINE, _SAFE_NEWLINE_CHARACTER);
+			
+			sb.append(value);
 		}
 		else if (value instanceof Date) {
 			DateFormat df = DateUtil.getISOFormat();
@@ -211,6 +216,18 @@ public abstract class BaseUpgradeTableImpl {
 				value = sb.toString();
 			}
 		}
+		else if (t == Types.DOUBLE) {
+			userType = new DoubleType();
+		}
+		else if (t == Types.FLOAT) {
+			userType = new FloatType();
+		}
+		else if (t == Types.INTEGER) {
+			userType = new IntegerType();
+		}
+		else if (t == Types.SMALLINT) {
+			userType = new ShortType();
+		}
 		else if (t == Types.TIMESTAMP) {
 			try {
 				value = rs.getObject(name);
@@ -221,15 +238,6 @@ public abstract class BaseUpgradeTableImpl {
 			if (value == null) {
 				value = new Date();
 			}
-		}
-		else if (t == Types.FLOAT) {
-			userType = new FloatType();
-		}
-		else if (t == Types.INTEGER) {
-			userType = new IntegerType();
-		}
-		else if (t == Types.SMALLINT) {
-			userType = new ShortType();
 		}
 		else if (t == Types.VARCHAR) {
 			value = GetterUtil.getString(rs.getString(name));
@@ -263,15 +271,16 @@ public abstract class BaseUpgradeTableImpl {
 				StringUtil.replace(
 					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
 
+			value =
+				StringUtil.replace(
+					value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
+
 			StringReader reader = new StringReader(value);
 
 			ps.setCharacterStream(index, reader, value.length());
 		}
-		else if (t == Types.TIMESTAMP) {
-			DateFormat df = DateUtil.getISOFormat();
-
-			ps.setTimestamp(
-				index, new Timestamp(df.parse(value).getTime()));
+		else if (t == Types.DOUBLE) {
+			ps.setDouble(index, GetterUtil.getDouble(value));
 		}
 		else if (t == Types.FLOAT) {
 			ps.setFloat(index, GetterUtil.getFloat(value));
@@ -282,10 +291,20 @@ public abstract class BaseUpgradeTableImpl {
 		else if (t == Types.SMALLINT) {
 			ps.setShort(index, GetterUtil.getShort(value));
 		}
+		else if (t == Types.TIMESTAMP) {
+			DateFormat df = DateUtil.getISOFormat();
+
+			ps.setTimestamp(
+				index, new Timestamp(df.parse(value).getTime()));
+		}
 		else if (t == Types.VARCHAR) {
 			value =
 				StringUtil.replace(
 					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
+
+			value =
+				StringUtil.replace(
+					value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
 
 			ps.setString(index, value);
 		}
@@ -425,6 +444,9 @@ public abstract class BaseUpgradeTableImpl {
 
 	private static final String _SAFE_COMMA_CHARACTER =
 		"_SAFE_COMMA_CHARACTER_";
+
+	private static final String _SAFE_NEWLINE_CHARACTER =
+		"_SAFE_NEWLINE_CHARACTER_";
 
 	private static Log _log = LogFactory.getLog(BaseUpgradeTableImpl.class);
 
