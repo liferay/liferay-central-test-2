@@ -37,7 +37,7 @@ import java.util.Calendar;
 /**
  * <a href="DayAndPosition.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Jonathan Lennox
+ * @author Jonathan Lennox
  *
  * @deprecated this class has been repackaged at
  * <code>com.liferay.portal.kernel.cal</code>.

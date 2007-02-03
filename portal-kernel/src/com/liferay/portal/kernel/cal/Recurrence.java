@@ -40,7 +40,7 @@ import java.util.TimeZone;
 /**
  * <a href="Recurrence.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Jonathan Lennox
+ * @author Jonathan Lennox
  *
  */
 public class Recurrence implements Serializable {

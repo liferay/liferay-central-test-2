@@ -37,7 +37,7 @@ import java.util.Calendar;
 /**
  * <a href="DayAndPosition.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Jonathan Lennox
+ * @author Jonathan Lennox
  *
  */
 public class DayAndPosition implements Cloneable, Serializable {
