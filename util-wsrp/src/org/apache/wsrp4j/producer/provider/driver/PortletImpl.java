@@ -32,7 +32,7 @@ import org.apache.wsrp4j.producer.provider.ProducerOfferedPortlet;
  * <p>Implements the Serializable interface to enable serialization, e.g. to
  * an XML-file.</p>
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @see     ProducerOfferedPortlet  
  */

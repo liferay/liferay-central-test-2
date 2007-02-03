@@ -38,7 +38,7 @@ import com.liferay.util.SystemProperties;
  * This class implements the URLRewriter-interface providing a method
  * to rewrite urls (Consumer URL Rewriting).
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  * @author Richard Jacob
  */
 public class URLRewriterImpl implements URLRewriter {

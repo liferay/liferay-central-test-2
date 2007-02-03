@@ -27,7 +27,7 @@ import oasis.names.tc.wsrp.v1.types.RegistrationData;
  * This interface provides access to Registration-objects.
  * Provides setters and getters.
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface Registration {
 

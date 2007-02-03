@@ -26,7 +26,7 @@ package org.apache.wsrp4j.consumer;
  * that are willing to properly write URLs for a Consumer. (With templates the Consumer
  * indicates how it needs URLs formatted in order to process them properly.)</p> 
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @version 1.1
  */

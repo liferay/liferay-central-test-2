@@ -29,7 +29,7 @@ import org.apache.wsrp4j.util.StateChangedServiceImpl;
  * This class contains the userid and the UserContext together for 
  * Castor persistence support. 
  * 
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  */
 public class UserImpl extends StateChangedServiceImpl implements User {
 

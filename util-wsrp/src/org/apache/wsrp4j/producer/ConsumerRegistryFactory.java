@@ -26,7 +26,7 @@ import org.apache.wsrp4j.producer.provider.Provider;
 /**
  * This class provides an interface to any ConsumerRegistry.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface ConsumerRegistryFactory {
 

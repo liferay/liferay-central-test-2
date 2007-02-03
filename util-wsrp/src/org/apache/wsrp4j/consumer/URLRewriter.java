@@ -23,7 +23,7 @@ package org.apache.wsrp4j.consumer;
 /**
  * <p>This interface provides a method performing Consumer URLRewriting.</p>
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @version 1.1
  */

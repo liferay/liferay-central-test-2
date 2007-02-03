@@ -23,7 +23,7 @@ package org.apache.wsrp4j.producer.provider;
 /**
  * <p>This class provides the ProviderFactory-interface.</p>
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface ProviderFactory {
 

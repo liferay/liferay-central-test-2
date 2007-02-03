@@ -32,7 +32,7 @@ import org.apache.wsrp4j.exception.WSRPException;
  * portlet pool has to remove the affected entries by calling the provided
  * remove-methods.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *                                                                          
  * @version 1.1
  *

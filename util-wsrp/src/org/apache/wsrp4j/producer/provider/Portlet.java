@@ -23,7 +23,7 @@ package org.apache.wsrp4j.producer.provider;
 /**
  * Provides an interface to a class encapsulating Portlet-objects.
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface Portlet extends Cloneable {
 

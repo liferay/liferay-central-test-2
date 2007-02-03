@@ -26,7 +26,7 @@ import java.util.Random;
 /**
  * This class implements the HandleGenerator interface.
  * 
- * @author  Stephan Laertz
+ * @author Stephan Laertz
  *
  * @version 1.1
  * 

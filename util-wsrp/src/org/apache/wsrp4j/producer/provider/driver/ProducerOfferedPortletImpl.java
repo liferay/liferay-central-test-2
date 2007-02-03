@@ -30,7 +30,7 @@ import org.apache.wsrp4j.producer.provider.ProducerOfferedPortlet;
  * <p>This class implements the ProducerOfferedPortlet interface encapsulating
  * ProducerOfferedPortlet-objects. Provides setters and getters.</p>
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @see     ProducerOfferedPortlet  
  */

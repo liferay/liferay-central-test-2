@@ -22,7 +22,7 @@ package org.apache.wsrp4j.util;
 
 /**
  * 
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  *
  * @version 1.0
  */

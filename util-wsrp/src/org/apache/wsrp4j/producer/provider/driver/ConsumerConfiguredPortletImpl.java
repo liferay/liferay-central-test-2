@@ -26,7 +26,7 @@ import org.apache.wsrp4j.producer.provider.ConsumerConfiguredPortlet;
  * This class implements the ConsumerConfiguredPortlet interface. It also
  * extends the PortletImpl class.
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @see     ConsumerConfiguredPortlet, PortletImpl
  */

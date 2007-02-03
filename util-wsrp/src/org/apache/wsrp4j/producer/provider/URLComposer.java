@@ -34,8 +34,8 @@ import oasis.names.tc.wsrp.v1.types.UserContext;
  *       templates delivered by the Consumer.</li>
  * </p> 
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
- * @author  <a href="mailto:stephan.laertz@de.ibm.com">Stephan Laertz</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stephan.laertz@de.ibm.com">Stephan Laertz</a>
  */
 public interface URLComposer {
 

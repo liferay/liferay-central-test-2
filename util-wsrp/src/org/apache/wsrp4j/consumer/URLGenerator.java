@@ -26,7 +26,7 @@ import java.util.Map;
  * This interface provides methods to query the consumer's urls. 
  * These methods could be used to implement consumer url rewriting.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  **/
 public interface URLGenerator {
 

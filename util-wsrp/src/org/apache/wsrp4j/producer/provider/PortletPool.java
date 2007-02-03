@@ -31,7 +31,7 @@ import org.apache.wsrp4j.exception.WSRPException;
  * implemented by a container associating portlet handles with portlet-objects.
  * </p>
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface PortletPool {
 

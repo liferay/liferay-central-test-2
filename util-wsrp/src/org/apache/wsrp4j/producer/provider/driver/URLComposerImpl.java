@@ -45,7 +45,7 @@ import org.apache.wsrp4j.util.Constants;
  *   <li>Methods defining complete URLs or namespaced tokens according to the
  *       templates delivered by the Consumer.</li></p> 
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public class URLComposerImpl implements URLComposer {
 	// the provider implementation

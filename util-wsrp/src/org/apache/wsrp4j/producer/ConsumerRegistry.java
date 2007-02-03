@@ -31,7 +31,7 @@ import org.apache.wsrp4j.exception.WSRPException;
  * keeps all Consumer registrations with this Producer. All registrations are
  * identified by a registration handle.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  */
 public interface ConsumerRegistry {
 

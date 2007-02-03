@@ -33,8 +33,8 @@ import org.apache.wsrp4j.producer.provider.PortletRegistrationFilterWriter;
  * This class implements the interfaces PortletRegistrationFilter and
  * PortletRegistrationFilterWriter.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  */
 public class PortletRegistrationFilterImpl implements
 		PortletRegistrationFilter, PortletRegistrationFilterWriter {

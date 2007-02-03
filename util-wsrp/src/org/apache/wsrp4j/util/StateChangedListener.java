@@ -23,7 +23,7 @@ package org.apache.wsrp4j.util;
 /**
  * This class defines the StateChangedListener Interface. 
  * 
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  * 
  * @see StateChangedEvent
  * 

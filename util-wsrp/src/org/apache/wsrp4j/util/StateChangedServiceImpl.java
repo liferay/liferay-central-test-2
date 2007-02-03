@@ -27,7 +27,7 @@ import java.util.Iterator;
  * This class implements the StateChangedService interface and is
  * the parent of all classes with StateChangeService functionality.
  * 
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  *
  * @version 1.0
  */

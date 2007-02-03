@@ -26,7 +26,7 @@ import java.util.Iterator;
  * Provides an interface to a class encapsulating a ProducerOfferedPortlet-
  * object.
  * 
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @see     Portlet
  */

@@ -26,7 +26,7 @@ import java.util.Iterator;
  * This interface provides methods to inspect portlets that are
  * accessible by a certain consumer.
  *
- * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  *
  * @version 1.1
  *

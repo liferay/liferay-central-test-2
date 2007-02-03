@@ -25,7 +25,7 @@ package org.apache.wsrp4j.producer.provider;
  * ConsumerConfiguredPortlet-object. It extends the
  * ProducerOfferedPortlet-interface.
  * 
- * @author   <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
+ * @author  <a href="mailto:stefan.behl@de.ibm.com">Stefan Behl</a>
  * 
  * @see Portlet 
  */

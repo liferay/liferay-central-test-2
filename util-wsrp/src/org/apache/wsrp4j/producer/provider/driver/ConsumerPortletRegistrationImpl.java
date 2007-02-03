@@ -27,7 +27,7 @@ import java.util.HashSet;
  * This class collects the porlet handles for a registered consumer and 
  * is used for persistence purpose.
  *
- * @author  <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
+ * @author <a href="mailto:Ralf.Altrichter@de.ibm.com">Ralf Altrichter</a>
  *
  * @version 1.0
  */
