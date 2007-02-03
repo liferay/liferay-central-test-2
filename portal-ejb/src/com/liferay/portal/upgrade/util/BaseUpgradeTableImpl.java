@@ -98,7 +98,7 @@ public abstract class BaseUpgradeTableImpl {
 
 			value = StringUtil.replace(
 				(String)value, StringPool.NEW_LINE, _SAFE_NEWLINE_CHARACTER);
-			
+
 			sb.append(value);
 		}
 		else if (value instanceof Date) {
@@ -193,13 +193,13 @@ public abstract class BaseUpgradeTableImpl {
 		}
 		else if (t == Types.CLOB) {
 			Clob clob = rs.getClob(name);
-			
+
 			if (clob == null) {
 				value = StringPool.BLANK;
 			}
 			else {
-				BufferedReader br =
-					new BufferedReader(clob.getCharacterStream());
+				BufferedReader br = new BufferedReader(
+					clob.getCharacterStream());
 
 				StringBuffer sb = new StringBuffer();
 
@@ -267,13 +267,11 @@ public abstract class BaseUpgradeTableImpl {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
 		else if (t == Types.CLOB) {
-			value =
-				StringUtil.replace(
-					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
+			value = StringUtil.replace(
+				value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
 
-			value =
-				StringUtil.replace(
-					value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
+			value = StringUtil.replace(
+				value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
 
 			StringReader reader = new StringReader(value);
 
