@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -45,7 +45,7 @@ import org.apache.commons.logging.LogFactory;
  * <p><a href="JournalCreationStrategyImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author  Joel Kozikowski
+ * @author Joel Kozikowski
  *
  * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
  *

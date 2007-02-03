@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -72,9 +72,9 @@ import org.apache.struts.Globals;
 /**
  * <a href="RenderRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
- * @author  Brian Myunghun Kim
- * @author  Sergey Ponomarev
+ * @author Brian Wing Shun Chan
+ * @author Brian Myunghun Kim
+ * @author Sergey Ponomarev
  *
  */
 public class RenderRequestImpl implements RenderRequest {

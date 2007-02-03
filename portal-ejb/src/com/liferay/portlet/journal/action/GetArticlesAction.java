@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -70,8 +70,8 @@ import org.dom4j.io.SAXReader;
 /**
  * <a href="GetArticlesAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Raymond Auge
- * @author  Brian Wing Shun Chan
+ * @author Raymond Auge
+ * @author Brian Wing Shun Chan
  *
  */
 public class GetArticlesAction extends Action {

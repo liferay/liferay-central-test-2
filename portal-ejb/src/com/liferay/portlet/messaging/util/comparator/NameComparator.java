@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -29,7 +29,7 @@ import org.jivesoftware.smack.RosterEntry;
 /**
  * <a href="NameComparator.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Ming-Gih Lam
+ * @author Ming-Gih Lam
  *
  */
 public class NameComparator implements Comparator {

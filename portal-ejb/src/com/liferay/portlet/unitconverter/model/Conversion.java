@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -25,7 +25,7 @@ package com.liferay.portlet.unitconverter.model;
 /**
  * <a href="Conversion.java.html"><b><i>View Source</i></b></a>
  *
- * @author  James Lefeu
+ * @author James Lefeu
  *
  */
 public class Conversion {
