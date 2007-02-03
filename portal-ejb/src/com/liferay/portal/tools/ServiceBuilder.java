@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2000-2006 Liferay, Inc. All rights reserved.
+ * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
@@ -69,9 +69,9 @@ import org.dom4j.io.SAXReader;
 /**
  * <a href="ServiceBuilder.java.html"><b><i>View Source</i></b></a>
  *
- * @author  Brian Wing Shun Chan
- * @author  Charles May
- * @author  Alexander Chow
+ * @author Brian Wing Shun Chan
+ * @author Charles May
+ * @author Alexander Chow
  *
  */
 public class ServiceBuilder {
@@ -1241,7 +1241,7 @@ public class ServiceBuilder {
 				sb.append("/**\n");
 				sb.append(" * <a href=\"" + exception + "Exception.java.html\"><b><i>View Source</i></b></a>\n");
 				sb.append(" *\n");
-				sb.append(" * @author  Brian Wing Shun Chan\n");
+				sb.append(" * @author Brian Wing Shun Chan\n");
 				sb.append(" *\n");
 				sb.append(" */\n");
 			}
