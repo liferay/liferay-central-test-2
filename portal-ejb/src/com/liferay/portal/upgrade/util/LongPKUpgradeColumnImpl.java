@@ -47,6 +47,16 @@ public class LongPKUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 		}
 	}
 
+	public LongPKUpgradeColumnImpl(String name, boolean trackValues) {
+		super(name);
+
+		_trackValues = trackValues;
+
+		if (_trackValues) {
+			_valueMapper = new MemoryValueMapper();
+		}
+	}
+
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long newValue = new Long(
 			CounterLocalServiceUtil.increment(Counter.class.getName()));

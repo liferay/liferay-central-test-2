@@ -43,6 +43,7 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.StringReader;
 
+import java.sql.Clob;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -104,11 +105,10 @@ public abstract class BaseUpgradeTableImpl {
 			sb.append(value);
 		}
 
+		sb.append(StringPool.COMMA);
+
 		if (last) {
 			sb.append(StringPool.NEW_LINE);
-		}
-		else {
-			sb.append(StringPool.COMMA);
 		}
 	}
 
@@ -187,22 +187,29 @@ public abstract class BaseUpgradeTableImpl {
 			userType = new BooleanType();
 		}
 		else if (t == Types.CLOB) {
-			BufferedReader br = new BufferedReader(
-				rs.getClob(name).getCharacterStream());
-
-			StringBuffer sb = new StringBuffer();
-
-			String line = null;
-
-			while ((line = br.readLine()) != null) {
-				sb.append(line + StringPool.NEW_LINE);
+			Clob clob = rs.getClob(name);
+			
+			if (clob == null) {
+				value = StringPool.BLANK;
 			}
+			else {
+				BufferedReader br =
+					new BufferedReader(clob.getCharacterStream());
 
-			if (sb.length() > 0) {
-				sb.deleteCharAt(sb.length() - 1);
+				StringBuffer sb = new StringBuffer();
+
+				String line = null;
+
+				while ((line = br.readLine()) != null) {
+					sb.append(line + StringPool.NEW_LINE);
+				}
+
+				if (sb.length() > 0) {
+					sb.deleteCharAt(sb.length() - 1);
+				}
+
+				value = sb.toString();
 			}
-
-			value = sb.toString();
 		}
 		else if (t == Types.TIMESTAMP) {
 			try {
@@ -252,6 +259,10 @@ public abstract class BaseUpgradeTableImpl {
 			ps.setBoolean(index, GetterUtil.getBoolean(value));
 		}
 		else if (t == Types.CLOB) {
+			value =
+				StringUtil.replace(
+					value, _SAFE_COMMA_CHARACTER, StringPool.COMMA);
+
 			StringReader reader = new StringReader(value);
 
 			ps.setCharacterStream(index, reader, value.length());
@@ -363,7 +374,7 @@ public abstract class BaseUpgradeTableImpl {
 						ps = con.prepareStatement(insertSQL);
 					}
 
-					for (int i = 0; i < values.length; i++) {
+					for (int i = 0; i < _columns.length; i++) {
 						setColumn(
 							ps, i + 1, (Integer)_columns[i][1], values[i]);
 					}
