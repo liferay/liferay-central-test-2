@@ -45,6 +45,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -140,8 +141,17 @@ public class GroupLocalServiceImpl implements GroupLocalService {
 			// Resources
 
 			ResourceLocalServiceUtil.addResources(
-				group.getCompanyId(), 0, userId, Group.class.getName(),
+				group.getCompanyId(), 0, null, Group.class.getName(),
 				group.getPrimaryKey(), false, false, false);
+
+			// Default community roles
+
+			Role communityAdministratorRole =
+				RoleLocalServiceUtil.getRole(
+					group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userId, groupId,
+				new String[]{communityAdministratorRole.getRoleId()});
 
 			// User
 

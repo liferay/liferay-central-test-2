@@ -170,6 +170,8 @@ public class PropsUtil {
 
 	public static final String SYSTEM_ROLES = "system.roles";
 
+	public static final String SYSTEM_COMMUNITY_ROLES = "system.community.roles";
+
 	public static final String OMNIADMIN_USERS = "omniadmin.users";
 
 	public static final String UNIVERSAL_PERSONALIZATION = "universal.personalization";

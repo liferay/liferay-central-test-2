@@ -796,6 +796,10 @@ public class PortalUtil {
 		return _instance._getSystemGroups();
 	}
 
+	public static String[] getSystemCommunityRoles() {
+		return _instance._getSystemCommunityRoles();
+	}
+
 	public static String[] getSystemRoles() {
 		return _instance._getSystemRoles();
 	}
@@ -1438,7 +1442,7 @@ public class PortalUtil {
 
 		Arrays.sort(_sortedSystemGroups, new StringComparator());
 
-		// Roles
+		// Regular Roles
 
 		String customSystemRoles[] = PropsUtil.getArray(PropsUtil.SYSTEM_ROLES);
 
@@ -1465,6 +1469,39 @@ public class PortalUtil {
 
 		Arrays.sort(_sortedSystemRoles, new StringComparator());
 
+		// Community Roles
+
+		String customSystemCommunityRoles[] =
+				PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
+
+		if (customSystemCommunityRoles == null ||
+				customSystemCommunityRoles.length == 0) {
+			_allSystemCommunityRoles = RoleImpl.SYSTEM_COMMUNITY_ROLES;
+		}
+		else {
+			_allSystemCommunityRoles = new String[
+				RoleImpl.SYSTEM_COMMUNITY_ROLES.length +
+						customSystemCommunityRoles.length];
+
+			System.arraycopy(
+				RoleImpl.SYSTEM_COMMUNITY_ROLES, 0, _allSystemCommunityRoles, 0,
+				RoleImpl.SYSTEM_COMMUNITY_ROLES.length);
+
+			System.arraycopy(
+				customSystemCommunityRoles, 0, _allSystemRoles,
+				RoleImpl.SYSTEM_COMMUNITY_ROLES.length,
+				customSystemCommunityRoles.length);
+		}
+
+		_sortedSystemCommunityRoles =
+				new String[_allSystemCommunityRoles.length];
+
+		System.arraycopy(
+			_allSystemCommunityRoles, 0, _sortedSystemCommunityRoles, 0,
+				_allSystemCommunityRoles.length);
+
+		Arrays.sort(_sortedSystemCommunityRoles, new StringComparator());
+
 		// Reserved parameter names
 
 		_reservedParams = CollectionFactory.getHashSet();
@@ -1482,6 +1519,10 @@ public class PortalUtil {
 
 	private String[] _getSystemGroups() {
 		return _allSystemGroups;
+	}
+
+	private String[] _getSystemCommunityRoles() {
+		return _allSystemCommunityRoles;
 	}
 
 	private String[] _getSystemRoles() {
@@ -1513,10 +1554,13 @@ public class PortalUtil {
 
 		roleName = roleName.trim();
 
-		int pos = Arrays.binarySearch(
+		int pos1 = Arrays.binarySearch(
 			_sortedSystemRoles, roleName, new StringComparator());
 
-		if (pos >= 0) {
+		int pos2 = Arrays.binarySearch(
+			_sortedSystemCommunityRoles, roleName, new StringComparator());
+
+		if ((pos1 >= 0) || (pos2 >= 0)) {
 			return true;
 		}
 		else {
@@ -1529,8 +1573,10 @@ public class PortalUtil {
 	private static PortalUtil _instance = new PortalUtil();
 
 	private String[] _allSystemGroups;
+	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemRoles;
 	private String[] _sortedSystemGroups;
+	private String[] _sortedSystemCommunityRoles;
 	private String[] _sortedSystemRoles;
 	private Set _reservedParams;
 

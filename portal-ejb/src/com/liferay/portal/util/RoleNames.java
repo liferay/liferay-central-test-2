@@ -38,8 +38,18 @@ public class RoleNames {
 
 	public static final String USER = "User";
 
+	public static final String COMMUNITY_OWNER = "Community Owner";
+
+	public static final String COMMUNITY_ADMINISTRATOR =
+			"Community Administrator";
+
+	public static final String COMMUNITY_MEMBER = "Community Member";
+
 	public static final String[] SYSTEM_ROLES = {
 		ADMINISTRATOR, GUEST, POWER_USER, USER
 	};
 
+	public static final String[] SYSTEM_COMMUNITY_ROLES = {
+		COMMUNITY_OWNER, COMMUNITY_ADMINISTRATOR, COMMUNITY_MEMBER
+	};
 }

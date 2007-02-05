@@ -32,8 +32,12 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
+import com.liferay.portal.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
@@ -95,6 +99,8 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 	public void checkSystemRoles(String companyId)
 		throws PortalException, SystemException {
 
+		// Regular Roles
+
 		String[] systemRoles = PortalUtil.getSystemRoles();
 
 		for (int i = 0; i < systemRoles.length; i++) {
@@ -104,6 +110,62 @@ public class RoleLocalServiceImpl implements RoleLocalService {
 			catch (NoSuchRoleException nsre) {
 				addRole(
 					null, companyId, systemRoles[i], RoleImpl.TYPE_REGULAR);
+			}
+		}
+
+		// Community Roles
+
+		String[] systemCommunityRoles = PortalUtil.getSystemCommunityRoles();
+
+		for (int i = 0; i < systemCommunityRoles.length; i++) {
+			try {
+				RoleFinder.findByC_N(companyId, systemCommunityRoles[i]);
+			}
+			catch (NoSuchRoleException nsre) {
+				Role role = addRole(
+					null, companyId, systemCommunityRoles[i],
+					RoleImpl.TYPE_COMMUNITY);
+
+				if (systemCommunityRoles[i].equals(RoleImpl.COMMUNITY_OWNER)) {
+					List actions = ResourceActionsUtil.
+						getModelResourceActions(Group.class.getName());
+					for (int j = 0; j < actions.size(); j++) {
+						String action = (String) actions.get(j);
+						PermissionLocalServiceUtil.setRolePermission(
+							role.getRoleId(), role.getCompanyId(),
+							Group.class.getName(), ResourceImpl.TYPE_CLASS,
+							ResourceImpl.SCOPE_GROUP_TEMPLATE,
+							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+							action); //ActionKeys.ADMINISTRATE
+					}
+				}
+				else if (
+					systemCommunityRoles[i].equals(RoleImpl.COMMUNITY_MEMBER)) {
+
+				}
+				else if (
+					systemCommunityRoles[i].equals(
+						RoleImpl.COMMUNITY_ADMINISTRATOR)) {
+
+					PermissionLocalServiceUtil.setRolePermission(
+						role.getRoleId(), role.getCompanyId(),
+						Group.class.getName(), ResourceImpl.TYPE_CLASS,
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						ActionKeys.ASSIGN_USERS);
+					PermissionLocalServiceUtil.setRolePermission(
+						role.getRoleId(), role.getCompanyId(),
+						Group.class.getName(), ResourceImpl.TYPE_CLASS,
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						ActionKeys.MANAGE_LAYOUTS);
+					PermissionLocalServiceUtil.setRolePermission(
+						role.getRoleId(), role.getCompanyId(),
+						Group.class.getName(), ResourceImpl.TYPE_CLASS,
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						ActionKeys.UPDATE);
+				}
 			}
 		}
 	}

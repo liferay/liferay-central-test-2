@@ -60,6 +60,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
@@ -73,6 +74,7 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PasswordTrackerLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
 import com.liferay.portal.service.UserLocalService;
@@ -136,6 +138,22 @@ public class UserLocalServiceImpl implements UserLocalService {
 		throws PortalException, SystemException {
 
 		GroupUtil.addUsers(groupId, userIds);
+
+		// Default community roles
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		Role communityAdministratorRole =
+			RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleImpl.COMMUNITY_MEMBER);
+
+		for (int i = 0; i < userIds.length; i++) {
+			String userId = userIds[i];
+
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userId, groupId,
+				new String[]{communityAdministratorRole.getRoleId()});
+		}
+
 	}
 
 	public void addRoleUsers(String roleId, String[] userIds)
