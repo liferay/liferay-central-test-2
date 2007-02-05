@@ -31,6 +31,8 @@ import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 
+import com.liferay.util.dao.DynamicQuery;
+import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -253,6 +255,45 @@ public class RatingsStatsPersistence extends BasePersistence {
 			RatingsStats ratingsStats = (RatingsStats)list.get(0);
 
 			return ratingsStats;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			return query.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+			query.setLimit(begin, end);
+
+			return query.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

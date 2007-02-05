@@ -31,6 +31,8 @@ import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 
+import com.liferay.util.dao.DynamicQuery;
+import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -1208,6 +1210,45 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			array[2] = (JournalContentSearch)objArray[2];
 
 			return array;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			return query.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+			query.setLimit(begin, end);
+
+			return query.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

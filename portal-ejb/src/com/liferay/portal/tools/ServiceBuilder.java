@@ -2327,6 +2327,8 @@ public class ServiceBuilder {
 		sb.append("import com.liferay.portal.kernel.util.StringPool;");
 		sb.append("import com.liferay.portal.service.persistence.BasePersistence;");
 		sb.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
+		sb.append("import com.liferay.util.dao.DynamicQuery;");
+		sb.append("import com.liferay.util.dao.DynamicQueryInitializer;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sb.append("import java.sql.ResultSet;");
@@ -3208,6 +3210,37 @@ public class ServiceBuilder {
 				sb.append("}");
 			}
 		}
+
+		sb.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
+		sb.append("Session session = null;");
+		sb.append("try {");
+		sb.append("session = openSession();");
+		sb.append("DynamicQuery query = queryInitializer.initialize(session);");
+		sb.append("return query.list();");
+		sb.append("}");
+		sb.append("catch (HibernateException he) {");
+		sb.append("throw new SystemException(he);");
+		sb.append("}");
+		sb.append("finally {");
+		sb.append("closeSession(session);");
+		sb.append("}");
+		sb.append("}");
+
+		sb.append("public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
+		sb.append("Session session = null;");
+		sb.append("try {");
+		sb.append("session = openSession();");
+		sb.append("DynamicQuery query = queryInitializer.initialize(session);");
+		sb.append("query.setLimit(begin, end);");
+		sb.append("return query.list();");
+		sb.append("}");
+		sb.append("catch (HibernateException he) {");
+		sb.append("throw new SystemException(he);");
+		sb.append("}");
+		sb.append("finally {");
+		sb.append("closeSession(session);");
+		sb.append("}");
+		sb.append("}");
 
 		sb.append("public List findAll() throws SystemException {");
 		sb.append("return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);");

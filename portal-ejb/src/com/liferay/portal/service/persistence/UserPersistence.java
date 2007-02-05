@@ -31,6 +31,8 @@ import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 
+import com.liferay.util.dao.DynamicQuery;
+import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -731,6 +733,45 @@ public class UserPersistence extends BasePersistence {
 			User user = (User)list.get(0);
 
 			return user;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			return query.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+			query.setLimit(begin, end);
+
+			return query.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

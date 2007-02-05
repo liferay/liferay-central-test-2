@@ -32,6 +32,8 @@ import com.liferay.portlet.tags.NoSuchEntryException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 
+import com.liferay.util.dao.DynamicQuery;
+import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -266,6 +268,45 @@ public class TagsEntryPersistence extends BasePersistence {
 			TagsEntry tagsEntry = (TagsEntry)list.get(0);
 
 			return tagsEntry;
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			return query.list();
+		}
+		catch (HibernateException he) {
+			throw new SystemException(he);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List findWithDynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+			query.setLimit(begin, end);
+
+			return query.list();
 		}
 		catch (HibernateException he) {
 			throw new SystemException(he);

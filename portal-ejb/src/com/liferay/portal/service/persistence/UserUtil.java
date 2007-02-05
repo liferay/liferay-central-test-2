@@ -259,6 +259,19 @@ public class UserUtil {
 		return getPersistence().fetchByC_EA(companyId, emailAddress);
 	}
 
+	public static java.util.List findWithDynamicQuery(
+		com.liferay.util.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List findWithDynamicQuery(
+		com.liferay.util.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static java.util.List findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
