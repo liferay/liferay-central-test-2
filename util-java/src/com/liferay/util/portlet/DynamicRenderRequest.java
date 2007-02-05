@@ -22,6 +22,8 @@
 
 package com.liferay.util.portlet;
 
+import com.liferay.util.ArrayUtil;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -95,12 +97,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 						String[] newValues =
 							new String[oldValues.length + curValues.length];
 
-						System.arraycopy(
-							oldValues, 0, newValues, 0, oldValues.length);
-
-						System.arraycopy(
-							curValues, 0, newValues, oldValues.length,
-							curValues.length);
+						ArrayUtil.combine(oldValues, curValues, newValues);
 
 						_params.put(name, newValues);
 					}

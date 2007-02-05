@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.mail.MailEngine;
 
 import javax.jms.Message;
@@ -100,10 +101,7 @@ public class MailConsumer implements MessageListener {
 				InternetAddress[] allBCC = new InternetAddress[
 					bcc.length + auditTrail.length];
 
-				System.arraycopy(bcc, 0, allBCC, 0, bcc.length);
-
-				System.arraycopy(
-					auditTrail, 0, allBCC, bcc.length, auditTrail.length);
+				ArrayUtil.combine(bcc, auditTrail, allBCC);
 
 				mailMessage.setBCC(allBCC);
 			}

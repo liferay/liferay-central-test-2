@@ -67,6 +67,7 @@ import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.wsrp.URLGeneratorImpl;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Encryptor;
 import com.liferay.util.GetterUtil;
@@ -1418,20 +1419,15 @@ public class PortalUtil {
 		String customSystemGroups[] =
 			PropsUtil.getArray(PropsUtil.SYSTEM_GROUPS);
 
-		if (customSystemGroups == null || customSystemGroups.length == 0) {
+		if ((customSystemGroups == null) || (customSystemGroups.length == 0)) {
 			_allSystemGroups = GroupImpl.SYSTEM_GROUPS;
 		}
 		else {
 			_allSystemGroups = new String[
 				GroupImpl.SYSTEM_GROUPS.length + customSystemGroups.length];
 
-			System.arraycopy(
-				GroupImpl.SYSTEM_GROUPS, 0, _allSystemGroups, 0,
-				GroupImpl.SYSTEM_GROUPS.length);
-
-			System.arraycopy(
-				customSystemGroups, 0, _allSystemGroups,
-				GroupImpl.SYSTEM_GROUPS.length, customSystemGroups.length);
+			ArrayUtil.combine(
+				GroupImpl.SYSTEM_GROUPS, customSystemGroups, _allSystemGroups);
 		}
 
 		_sortedSystemGroups = new String[_allSystemGroups.length];
@@ -1446,20 +1442,15 @@ public class PortalUtil {
 
 		String customSystemRoles[] = PropsUtil.getArray(PropsUtil.SYSTEM_ROLES);
 
-		if (customSystemRoles == null || customSystemRoles.length == 0) {
+		if ((customSystemRoles == null) || (customSystemRoles.length == 0)) {
 			_allSystemRoles = RoleImpl.SYSTEM_ROLES;
 		}
 		else {
 			_allSystemRoles = new String[
 				RoleImpl.SYSTEM_ROLES.length + customSystemRoles.length];
 
-			System.arraycopy(
-				RoleImpl.SYSTEM_ROLES, 0, _allSystemRoles, 0,
-				RoleImpl.SYSTEM_ROLES.length);
-
-			System.arraycopy(
-				customSystemRoles, 0, _allSystemRoles,
-				RoleImpl.SYSTEM_ROLES.length, customSystemRoles.length);
+			ArrayUtil.combine(
+				RoleImpl.SYSTEM_ROLES, customSystemRoles, _allSystemRoles);
 		}
 
 		_sortedSystemRoles = new String[_allSystemRoles.length];
@@ -1474,8 +1465,9 @@ public class PortalUtil {
 		String customSystemCommunityRoles[] =
 				PropsUtil.getArray(PropsUtil.SYSTEM_COMMUNITY_ROLES);
 
-		if (customSystemCommunityRoles == null ||
-				customSystemCommunityRoles.length == 0) {
+		if ((customSystemCommunityRoles == null) ||
+				(customSystemCommunityRoles.length == 0)) {
+
 			_allSystemCommunityRoles = RoleImpl.SYSTEM_COMMUNITY_ROLES;
 		}
 		else {
@@ -1483,18 +1475,13 @@ public class PortalUtil {
 				RoleImpl.SYSTEM_COMMUNITY_ROLES.length +
 						customSystemCommunityRoles.length];
 
-			System.arraycopy(
-				RoleImpl.SYSTEM_COMMUNITY_ROLES, 0, _allSystemCommunityRoles, 0,
-				RoleImpl.SYSTEM_COMMUNITY_ROLES.length);
-
-			System.arraycopy(
-				customSystemCommunityRoles, 0, _allSystemRoles,
-				RoleImpl.SYSTEM_COMMUNITY_ROLES.length,
-				customSystemCommunityRoles.length);
+			ArrayUtil.combine(
+				RoleImpl.SYSTEM_COMMUNITY_ROLES, customSystemCommunityRoles,
+				_allSystemCommunityRoles);
 		}
 
 		_sortedSystemCommunityRoles =
-				new String[_allSystemCommunityRoles.length];
+			new String[_allSystemCommunityRoles.length];
 
 		System.arraycopy(
 			_allSystemCommunityRoles, 0, _sortedSystemCommunityRoles, 0,

@@ -28,6 +28,7 @@ import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.StringUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
 
@@ -174,12 +175,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 							String[] newValues =
 								new String[values.length + oldValues.length];
 
-							System.arraycopy(
-								values, 0, newValues, 0, values.length);
-
-							System.arraycopy(
-								oldValues, 0, newValues, values.length,
-								oldValues.length);
+							ArrayUtil.combine(values, oldValues, newValues);
 
 							dynamicReq.setParameterValues(name, newValues);
 						}

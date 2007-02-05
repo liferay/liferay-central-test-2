@@ -36,6 +36,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.GetterUtil;
@@ -190,12 +191,10 @@ public class PortletURLImpl implements PortletURL, Serializable {
 
 		if (append && _params.containsKey(name)) {
 			String[] oldValues = (String[])_params.get(name);
+
 			String[] newValues = new String[oldValues.length + values.length];
 
-			System.arraycopy(oldValues, 0, newValues, 0, oldValues.length);
-
-			System.arraycopy(
-				values, 0, newValues, oldValues.length, values.length);
+			ArrayUtil.combine(oldValues, values, newValues);
 
 			_params.put(name, newValues);
 		}
