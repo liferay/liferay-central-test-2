@@ -73,28 +73,19 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 <liferay-ui:error key="errorConnectingToServer" message="error-connecting-to-server"/>
 <liferay-ui:success key="pluginDownloaded" message="the-plugin-has-been-downloaded-and-is-being-installed"/>
 
-<table border="0" cellpadding="0" cellspacing="0">
+<table border="0" cellpadding="3" cellspacing="0">
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "name") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
-		<%= plugin.getName() %>
+		<b><a href="<%= plugin.getPageURL() %>"><%= plugin.getName() %></a></b> (v<%= plugin.getVersion() %>) <a href="<%= plugin.getArtifactURL() %>">[<%= LanguageUtil.get(pageContext, "download") %>]</a>
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "version") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<%= plugin.getVersion() %>
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "author") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "author") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -102,8 +93,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "type") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -111,8 +102,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "tags") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -133,8 +124,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "licenses") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "licenses") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -165,8 +156,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "supported-liferay-versions") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "supported-liferay-versions") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -187,26 +178,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "page-url") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<a href="<%= plugin.getPageURL() %>"><%= plugin.getPageURL() %></a>
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "plugin-url") %>:
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<a href="<%= plugin.getArtifactURL() %>"><%= StringUtil.shorten(plugin.getArtifactURL(), 80) %></a>
-	</td>
-</tr>
-<tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "repository") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "repository") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -214,8 +187,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td>
-		<%= LanguageUtil.get(pageContext, "short-description") %>:
+	<td align="right">
+		<%= LanguageUtil.get(pageContext, "short-description") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -224,8 +197,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 </tr>
 <% if ((plugin.getScreenshotURLs() != null) && !plugin.getScreenshotURLs().isEmpty()) { %>
 	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "screenshots") %>:
+		<td align="right" valign="top">
+			<%= LanguageUtil.get(pageContext, "screenshots") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td valign="top">
@@ -247,8 +220,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 <% } %>
 <% if (Validator.isNotNull(plugin.getLongDescription())) { %>
 	<tr>
-		<td>
-			<%= LanguageUtil.get(pageContext, "long-description") %>:
+		<td align="right" valign="top">
+			<%= LanguageUtil.get(pageContext, "long-description") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
 		<td>
