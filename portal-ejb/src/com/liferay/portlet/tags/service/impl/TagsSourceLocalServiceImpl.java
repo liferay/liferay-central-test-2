@@ -22,7 +22,7 @@
 
 package com.liferay.portlet.tags.service.impl;
 
-import com.liferay.portlet.tags.service.TagsSourceLocalService;
+import com.liferay.portlet.tags.service.base.TagsSourceLocalServiceBaseImpl;
 
 /**
  * <a href="TagsSourceLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -30,5 +30,5 @@ import com.liferay.portlet.tags.service.TagsSourceLocalService;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsSourceLocalServiceImpl implements TagsSourceLocalService {
+public class TagsSourceLocalServiceImpl extends TagsSourceLocalServiceBaseImpl {
 }

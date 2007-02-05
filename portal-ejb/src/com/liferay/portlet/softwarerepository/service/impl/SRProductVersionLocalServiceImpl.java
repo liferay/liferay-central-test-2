@@ -32,7 +32,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.softwarerepository.NoSuchProductEntryException;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
 import com.liferay.portlet.softwarerepository.model.SRProductVersion;
-import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalService;
+import com.liferay.portlet.softwarerepository.service.base.SRProductVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionUtil;
 
@@ -49,7 +49,7 @@ import java.util.List;
  *
  */
 public class SRProductVersionLocalServiceImpl
-	implements SRProductVersionLocalService {
+	extends SRProductVersionLocalServiceBaseImpl {
 
 	public SRProductVersion addProductVersion(
 			String userId, long productEntryId, String version,

@@ -30,8 +30,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.EmailAddressLocalService;
 import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.base.EmailAddressLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
@@ -50,7 +50,8 @@ import java.util.List;
  * @author Alexander Chow
  *
  */
-public class EmailAddressLocalServiceImpl implements EmailAddressLocalService {
+public class EmailAddressLocalServiceImpl
+	extends EmailAddressLocalServiceBaseImpl {
 
 	public EmailAddress addEmailAddress(
 			String userId, String className, String classPK,

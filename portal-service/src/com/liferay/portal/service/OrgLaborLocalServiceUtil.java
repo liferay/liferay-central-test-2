@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class OrgLaborLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
 		java.lang.String organizationId, int typeId, int sunOpen, int sunClose,
 		int monOpen, int monClose, int tueOpen, int tueClose, int wedOpen,

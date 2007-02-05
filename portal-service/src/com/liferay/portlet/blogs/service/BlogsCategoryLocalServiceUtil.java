@@ -29,6 +29,23 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public class BlogsCategoryLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		BlogsCategoryLocalService blogsCategoryLocalService = BlogsCategoryLocalServiceFactory.getService();
+
+		return blogsCategoryLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		java.lang.String userId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,

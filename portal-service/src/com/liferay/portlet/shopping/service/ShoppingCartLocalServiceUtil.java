@@ -29,6 +29,23 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingCartLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		return shoppingCartLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
+
+		return shoppingCartLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();

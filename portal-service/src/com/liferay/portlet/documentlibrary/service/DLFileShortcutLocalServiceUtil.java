@@ -29,6 +29,23 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileShortcutLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		return dlFileShortcutLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String toFolderId, java.lang.String toName,

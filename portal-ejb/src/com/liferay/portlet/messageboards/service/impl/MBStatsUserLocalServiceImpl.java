@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portlet.messageboards.model.MBStatsUser;
-import com.liferay.portlet.messageboards.service.MBStatsUserLocalService;
+import com.liferay.portlet.messageboards.service.base.MBStatsUserLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserPK;
 import com.liferay.portlet.messageboards.service.persistence.MBStatsUserUtil;
 
@@ -39,7 +39,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBStatsUserLocalServiceImpl implements MBStatsUserLocalService {
+public class MBStatsUserLocalServiceImpl
+	extends MBStatsUserLocalServiceBaseImpl {
 
 	public void deleteStatsUserByGroupId(long groupId)
 		throws SystemException {

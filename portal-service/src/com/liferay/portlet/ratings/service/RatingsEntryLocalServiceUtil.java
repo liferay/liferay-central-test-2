@@ -29,6 +29,23 @@ package com.liferay.portlet.ratings.service;
  *
  */
 public class RatingsEntryLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		return ratingsEntryLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)

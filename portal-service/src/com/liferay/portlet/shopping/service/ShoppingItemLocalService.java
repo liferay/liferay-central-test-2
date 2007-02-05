@@ -29,6 +29,14 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public interface ShoppingItemLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void addBookItems(java.lang.String userId,
 		java.lang.String categoryId, java.lang.String[] isbns)
 		throws com.liferay.portal.SystemException, 

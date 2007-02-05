@@ -26,7 +26,7 @@ import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.softwarerepository.model.SRLicense;
-import com.liferay.portlet.softwarerepository.service.SRLicenseLocalService;
+import com.liferay.portlet.softwarerepository.service.base.SRLicenseLocalServiceBaseImpl;
 import com.liferay.portlet.softwarerepository.service.persistence.SRLicenseUtil;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil;
 
@@ -39,7 +39,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class SRLicenseLocalServiceImpl implements SRLicenseLocalService {
+public class SRLicenseLocalServiceImpl extends SRLicenseLocalServiceBaseImpl {
 
 	public SRLicense addLicense(
 			String name, String url, boolean openSource, boolean active,

@@ -40,6 +40,15 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static void combine(
+		Object[] array1, Object[] array2, Object[] combinedArray) {
+
+		System.arraycopy(array1, 0, combinedArray, 0, array1.length);
+
+		System.arraycopy(
+			array2, 0, combinedArray, array1.length, array2.length);
+	}
+
 	public static boolean contains(Object[] array, Object obj) {
 		if (array == null) {
 			return false;

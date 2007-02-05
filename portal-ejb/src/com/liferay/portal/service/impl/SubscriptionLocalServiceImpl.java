@@ -29,7 +29,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.SubscriptionImpl;
-import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.base.SubscriptionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -43,7 +43,8 @@ import java.util.List;
  * @author Charles May
  *
  */
-public class SubscriptionLocalServiceImpl implements SubscriptionLocalService {
+public class SubscriptionLocalServiceImpl
+	extends SubscriptionLocalServiceBaseImpl {
 
 	public Subscription addSubscription(
 			String userId, String className, String classPK)

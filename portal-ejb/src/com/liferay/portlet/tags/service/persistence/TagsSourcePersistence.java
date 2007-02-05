@@ -23,6 +23,8 @@
 package com.liferay.portlet.tags.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQuery;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.service.persistence.BasePersistence;
 
@@ -30,8 +32,6 @@ import com.liferay.portlet.tags.NoSuchSourceException;
 import com.liferay.portlet.tags.model.TagsSource;
 import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
 
-import com.liferay.util.dao.DynamicQuery;
-import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;

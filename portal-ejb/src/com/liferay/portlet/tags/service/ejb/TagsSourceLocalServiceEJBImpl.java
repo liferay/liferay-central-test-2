@@ -23,6 +23,7 @@
 package com.liferay.portlet.tags.service.ejb;
 
 import com.liferay.portlet.tags.service.TagsSourceLocalService;
+import com.liferay.portlet.tags.service.TagsSourceLocalServiceFactory;
 
 import javax.ejb.CreateException;
 import javax.ejb.SessionBean;
@@ -36,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class TagsSourceLocalServiceEJBImpl implements TagsSourceLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return TagsSourceLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return TagsSourceLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void ejbCreate() throws CreateException {
 	}
 

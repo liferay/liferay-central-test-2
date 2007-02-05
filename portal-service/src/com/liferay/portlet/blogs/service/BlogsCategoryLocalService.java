@@ -29,6 +29,14 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public interface BlogsCategoryLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsCategory addCategory(
 		java.lang.String userId, java.lang.String parentCategoryId,
 		java.lang.String name, java.lang.String description,

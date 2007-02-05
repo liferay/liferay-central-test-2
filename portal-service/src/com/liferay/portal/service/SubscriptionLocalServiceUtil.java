@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class SubscriptionLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		SubscriptionLocalService subscriptionLocalService = SubscriptionLocalServiceFactory.getService();
+
+		return subscriptionLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portal.model.Subscription addSubscription(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)

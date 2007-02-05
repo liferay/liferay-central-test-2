@@ -23,7 +23,7 @@
 package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.documentlibrary.service.DLFileVersionLocalService;
+import com.liferay.portlet.documentlibrary.service.base.DLFileVersionLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionUtil;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  *
  */
 public class DLFileVersionLocalServiceImpl
-	implements DLFileVersionLocalService {
+	extends DLFileVersionLocalServiceBaseImpl {
 
 	public List getFileVersions(String folderId, String name)
 		throws SystemException {

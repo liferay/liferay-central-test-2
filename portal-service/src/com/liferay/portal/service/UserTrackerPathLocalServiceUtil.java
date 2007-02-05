@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class UserTrackerPathLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		return userTrackerPathLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		return userTrackerPathLocalService.dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public static java.util.List getUserTrackerPaths(
 		java.lang.String userTrackerId, int begin, int end)
 		throws com.liferay.portal.SystemException {

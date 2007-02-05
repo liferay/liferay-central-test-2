@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class JournalArticleLocalServiceEJBImpl
 	implements JournalArticleLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return JournalArticleLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return JournalArticleLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String userId, java.lang.String articleId,
 		boolean autoArticleId, java.lang.String plid, java.lang.String title,

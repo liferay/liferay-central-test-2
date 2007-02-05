@@ -29,6 +29,14 @@ package com.liferay.portlet.blogs.service;
  *
  */
 public interface BlogsEntryLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.blogs.model.BlogsEntry addEntry(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String categoryId, java.lang.String title,

@@ -20,16 +20,31 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao;
+package com.liferay.portlet.messageboards.service.base;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+
+import com.liferay.portlet.messageboards.service.MBThreadLocalService;
+import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+
+import java.util.List;
 
 /**
- * <a href="DynamicQueryInitializer.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBThreadLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQueryInitializer {
+public abstract class MBThreadLocalServiceBaseImpl
+	implements MBThreadLocalService {
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		return MBThreadUtil.findWithDynamicQuery(queryInitializer);
+	}
 
-	public DynamicQuery initialize(Object obj);
-
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		return MBThreadUtil.findWithDynamicQuery(queryInitializer, begin, end);
+	}
 }

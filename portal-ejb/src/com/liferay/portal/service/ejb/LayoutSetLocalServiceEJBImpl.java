@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class LayoutSetLocalServiceEJBImpl implements LayoutSetLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return LayoutSetLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return LayoutSetLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portal.model.LayoutSet addLayoutSet(
 		java.lang.String ownerId, java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 

@@ -29,6 +29,23 @@ package com.liferay.portlet.journal.service;
  *
  */
 public class JournalArticleLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String userId, java.lang.String articleId,
 		boolean autoArticleId, java.lang.String plid, java.lang.String title,

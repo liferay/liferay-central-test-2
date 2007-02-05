@@ -28,7 +28,7 @@ import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchVoteException;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.PollsVote;
-import com.liferay.portlet.polls.service.PollsVoteLocalService;
+import com.liferay.portlet.polls.service.base.PollsVoteLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoicePK;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
@@ -43,7 +43,7 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsVoteLocalServiceImpl implements PollsVoteLocalService {
+public class PollsVoteLocalServiceImpl extends PollsVoteLocalServiceBaseImpl {
 
 	public PollsVote addVote(String userId, String questionId, String choiceId)
 		throws PortalException, SystemException {

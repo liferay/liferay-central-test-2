@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class OrganizationLocalServiceEJBImpl implements OrganizationLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return OrganizationLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return OrganizationLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 

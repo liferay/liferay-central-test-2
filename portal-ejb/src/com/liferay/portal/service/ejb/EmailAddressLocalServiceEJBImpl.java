@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class EmailAddressLocalServiceEJBImpl implements EmailAddressLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return EmailAddressLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return EmailAddressLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String address, int typeId,

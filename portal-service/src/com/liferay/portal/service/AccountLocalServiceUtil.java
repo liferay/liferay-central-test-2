@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class AccountLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
+
+		return accountLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.Account getAccount(
 		java.lang.String accountId)
 		throws com.liferay.portal.PortalException, 

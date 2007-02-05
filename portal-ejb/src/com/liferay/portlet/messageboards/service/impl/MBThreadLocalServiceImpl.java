@@ -32,7 +32,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.portlet.messageboards.service.MBThreadLocalService;
+import com.liferay.portlet.messageboards.service.base.MBThreadLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePK;
@@ -59,7 +59,7 @@ import org.apache.lucene.queryParser.ParseException;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBThreadLocalServiceImpl implements MBThreadLocalService {
+public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 	public void deleteThread(String threadId)
 		throws PortalException, SystemException {

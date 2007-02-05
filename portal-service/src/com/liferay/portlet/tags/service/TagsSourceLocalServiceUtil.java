@@ -29,4 +29,19 @@ package com.liferay.portlet.tags.service;
  *
  */
 public class TagsSourceLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		return tagsSourceLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
 }

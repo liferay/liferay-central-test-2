@@ -23,7 +23,7 @@
 package com.liferay.portal.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.UserTrackerPathLocalService;
+import com.liferay.portal.service.base.UserTrackerPathLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  *
  */
 public class UserTrackerPathLocalServiceImpl
-	implements UserTrackerPathLocalService {
+	extends UserTrackerPathLocalServiceBaseImpl {
 
 	public List getUserTrackerPaths(String userTrackerId, int begin, int end)
 		throws SystemException {

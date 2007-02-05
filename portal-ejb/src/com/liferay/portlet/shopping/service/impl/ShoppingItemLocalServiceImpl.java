@@ -50,7 +50,7 @@ import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
-import com.liferay.portlet.shopping.service.ShoppingItemLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFieldUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemFinder;
@@ -81,7 +81,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingItemLocalServiceImpl implements ShoppingItemLocalService {
+public class ShoppingItemLocalServiceImpl
+	extends ShoppingItemLocalServiceBaseImpl {
 
 	public void addBookItems(
 			String userId, String categoryId, String[] isbns)

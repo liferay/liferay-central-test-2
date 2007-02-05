@@ -29,6 +29,22 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBMessageLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBMessage addDiscussionMessage(
 		java.lang.String userId, java.lang.String subject, java.lang.String body)
 		throws com.liferay.portal.PortalException, 

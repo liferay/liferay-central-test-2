@@ -20,20 +20,29 @@
  * SOFTWARE.
  */
 
-package com.liferay.util.dao;
+package com.liferay.portal.service.base;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.WebsiteLocalService;
+import com.liferay.portal.service.persistence.WebsiteUtil;
 
 import java.util.List;
 
 /**
- * <a href="DynamicQuery.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebsiteLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface DynamicQuery {
+public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService {
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer)
+		throws SystemException {
+		return WebsiteUtil.findWithDynamicQuery(queryInitializer);
+	}
 
-	public List list();
-
-	public void setLimit(int begin, int end);
-
+	public List dynamicQuery(DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws SystemException {
+		return WebsiteUtil.findWithDynamicQuery(queryInitializer, begin, end);
+	}
 }

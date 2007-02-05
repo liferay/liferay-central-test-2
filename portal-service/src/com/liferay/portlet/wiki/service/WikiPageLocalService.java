@@ -29,6 +29,14 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public interface WikiPageLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String userId, java.lang.String nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException, 

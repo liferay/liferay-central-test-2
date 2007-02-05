@@ -29,6 +29,22 @@ package com.liferay.portlet.softwarerepository.service;
  *
  */
 public class SRLicenseLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		SRLicenseLocalService srLicenseLocalService = SRLicenseLocalServiceFactory.getService();
+
+		return srLicenseLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		SRLicenseLocalService srLicenseLocalService = SRLicenseLocalServiceFactory.getService();
+
+		return srLicenseLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.softwarerepository.model.SRLicense addLicense(
 		java.lang.String name, java.lang.String url, boolean openSource,
 		boolean active, boolean recommended)

@@ -29,6 +29,22 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public class IGImageLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String description, java.io.File file,

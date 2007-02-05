@@ -29,6 +29,23 @@ package com.liferay.portlet.bookmarks.service;
  *
  */
 public class BookmarksEntryLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		return bookmarksEntryLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addEntry(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String name, java.lang.String url, java.lang.String comments,

@@ -53,12 +53,12 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalService;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
 import com.liferay.portal.service.permission.PortletPermission;
 import com.liferay.portal.service.persistence.LayoutFinder;
 import com.liferay.portal.service.persistence.LayoutPK;
@@ -113,7 +113,7 @@ import org.dom4j.io.SAXReader;
  * @author Joel Kozikowski
  *
  */
-public class LayoutLocalServiceImpl implements LayoutLocalService {
+public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout addLayout(
 			long groupId, String userId, boolean privateLayout,

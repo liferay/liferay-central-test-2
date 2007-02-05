@@ -77,7 +77,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserIdMapperLocalServiceUtil;
-import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -132,7 +132,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserLocalServiceImpl implements UserLocalService {
+public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void addGroupUsers(long groupId, String[] userIds)
 		throws PortalException, SystemException {

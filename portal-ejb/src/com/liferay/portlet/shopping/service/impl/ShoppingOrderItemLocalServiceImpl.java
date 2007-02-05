@@ -23,7 +23,7 @@
 package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingOrderItemLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemUtil;
 
 import java.util.List;
@@ -36,7 +36,7 @@ import java.util.List;
  *
  */
 public class ShoppingOrderItemLocalServiceImpl
-	implements ShoppingOrderItemLocalService {
+	extends ShoppingOrderItemLocalServiceBaseImpl {
 
 	public List getOrderItems(String orderId) throws SystemException {
 		return ShoppingOrderItemUtil.findByOrderId(orderId);

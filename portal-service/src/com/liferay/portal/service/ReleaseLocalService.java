@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface ReleaseLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -33,7 +33,7 @@ import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.LayoutSetLocalService;
+import com.liferay.portal.service.base.LayoutSetLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.LayoutSetFinder;
 import com.liferay.portal.service.persistence.LayoutSetUtil;
 import com.liferay.portal.service.persistence.LayoutUtil;
@@ -59,7 +59,7 @@ import javax.imageio.ImageIO;
  * @author Brian Wing Shun Chan
  *
  */
-public class LayoutSetLocalServiceImpl implements LayoutSetLocalService {
+public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 	public LayoutSet addLayoutSet(String ownerId, String companyId)
 		throws PortalException, SystemException {

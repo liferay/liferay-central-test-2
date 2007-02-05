@@ -36,7 +36,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
-import com.liferay.portal.service.ResourceLocalService;
+import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionUtil;
 import com.liferay.portal.service.persistence.PermissionUtil;
@@ -56,7 +56,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Wilson S. Man
  *
  */
-public class ResourceLocalServiceImpl implements ResourceLocalService {
+public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 	public void addModelResources(
 			String companyId, long groupId, String userId, String name,

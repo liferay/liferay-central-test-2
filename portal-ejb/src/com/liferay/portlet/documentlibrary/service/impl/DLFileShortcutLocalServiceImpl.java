@@ -36,7 +36,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalService;
+import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
 
@@ -51,7 +51,7 @@ import java.util.Iterator;
  *
  */
 public class DLFileShortcutLocalServiceImpl
-	implements DLFileShortcutLocalService {
+	extends DLFileShortcutLocalServiceBaseImpl {
 
 	public DLFileShortcut addFileShortcut(
 			String userId, String folderId, String toFolderId, String toName,

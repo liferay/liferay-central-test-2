@@ -34,8 +34,8 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarerepository.model.SRProductEntry;
-import com.liferay.portlet.softwarerepository.service.SRProductEntryLocalService;
 import com.liferay.portlet.softwarerepository.service.SRProductVersionLocalServiceUtil;
+import com.liferay.portlet.softwarerepository.service.base.SRProductEntryLocalServiceBaseImpl;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductEntryUtil;
 import com.liferay.portlet.softwarerepository.util.Indexer;
 import com.liferay.util.Validator;
@@ -63,7 +63,7 @@ import org.apache.lucene.search.Searcher;
  *
  */
 public class SRProductEntryLocalServiceImpl
-	implements SRProductEntryLocalService {
+	extends SRProductEntryLocalServiceBaseImpl {
 
 	public SRProductEntry addProductEntry(
 			String userId, String plid, String name, String type,

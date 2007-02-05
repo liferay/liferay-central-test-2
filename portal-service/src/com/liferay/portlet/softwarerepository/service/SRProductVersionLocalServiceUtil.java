@@ -29,6 +29,23 @@ package com.liferay.portlet.softwarerepository.service;
  *
  */
 public class SRProductVersionLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+
+		return srProductVersionLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		SRProductVersionLocalService srProductVersionLocalService = SRProductVersionLocalServiceFactory.getService();
+
+		return srProductVersionLocalService.dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public static com.liferay.portlet.softwarerepository.model.SRProductVersion addProductVersion(
 		java.lang.String userId, long productEntryId, java.lang.String version,
 		java.lang.String changeLog, java.lang.String downloadPageURL,

@@ -43,10 +43,10 @@ import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.AccountUtil;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.ContactUtil;
@@ -90,7 +90,7 @@ import org.apache.lucene.search.Searcher;
  * @author Brian Wing Shun Chan
  *
  */
-public class CompanyLocalServiceImpl implements CompanyLocalService {
+public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 	public void checkCompany(String companyId)
 		throws PortalException, SystemException {

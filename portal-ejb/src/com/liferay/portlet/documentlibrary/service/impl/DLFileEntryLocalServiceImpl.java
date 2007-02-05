@@ -42,9 +42,9 @@ import com.liferay.portlet.documentlibrary.model.DLFileVersion;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFileShortcutLocalServiceUtil;
+import com.liferay.portlet.documentlibrary.service.base.DLFileEntryLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryAndShortcutFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPK;
@@ -82,7 +82,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Harry Mark
  *
  */
-public class DLFileEntryLocalServiceImpl implements DLFileEntryLocalService {
+public class DLFileEntryLocalServiceImpl
+	extends DLFileEntryLocalServiceBaseImpl {
 
 	public DLFileEntry addFileEntry(
 			String userId, String folderId, String name, String title,

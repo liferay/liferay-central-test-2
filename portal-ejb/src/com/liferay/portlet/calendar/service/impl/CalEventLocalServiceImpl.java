@@ -52,7 +52,7 @@ import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
-import com.liferay.portlet.calendar.service.CalEventLocalService;
+import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventUtil;
 import com.liferay.portlet.calendar.util.CalUtil;
@@ -87,7 +87,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class CalEventLocalServiceImpl implements CalEventLocalService {
+public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 	public CalEvent addEvent(
 			String userId, String plid, String title, String description,

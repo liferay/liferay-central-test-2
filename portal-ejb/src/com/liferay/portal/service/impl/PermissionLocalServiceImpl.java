@@ -39,8 +39,8 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
-import com.liferay.portal.service.PermissionLocalService;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.service.base.PermissionLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrgGroupPermissionFinder;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
@@ -68,7 +68,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class PermissionLocalServiceImpl implements PermissionLocalService {
+public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 	public Permission addPermission(
 			String companyId, String actionId, long resourceId)

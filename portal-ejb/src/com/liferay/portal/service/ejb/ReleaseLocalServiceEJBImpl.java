@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class ReleaseLocalServiceEJBImpl implements ReleaseLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return ReleaseLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return ReleaseLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portal.model.Release getRelease()
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

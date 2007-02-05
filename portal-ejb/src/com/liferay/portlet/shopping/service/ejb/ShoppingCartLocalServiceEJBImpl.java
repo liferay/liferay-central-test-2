@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingCartLocalServiceEJBImpl implements ShoppingCartLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return ShoppingCartLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return ShoppingCartLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void deleteGroupCarts(long groupId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalServiceFactory.getTxImpl().deleteGroupCarts(groupId);

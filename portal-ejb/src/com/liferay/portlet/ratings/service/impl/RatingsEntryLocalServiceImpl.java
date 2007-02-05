@@ -30,8 +30,8 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.ratings.NoSuchEntryException;
 import com.liferay.portlet.ratings.model.RatingsEntry;
 import com.liferay.portlet.ratings.model.RatingsStats;
-import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceUtil;
+import com.liferay.portlet.ratings.service.base.RatingsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
@@ -44,7 +44,8 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public class RatingsEntryLocalServiceImpl implements RatingsEntryLocalService {
+public class RatingsEntryLocalServiceImpl
+	extends RatingsEntryLocalServiceBaseImpl {
 
 	public RatingsEntry getEntry(
 			String userId, String className, String classPK)

@@ -28,7 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.OrgLabor;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.ListTypeServiceUtil;
-import com.liferay.portal.service.OrgLaborLocalService;
+import com.liferay.portal.service.base.OrgLaborLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.OrgLaborUtil;
 
 import java.rmi.RemoteException;
@@ -41,7 +41,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgLaborLocalServiceImpl implements OrgLaborLocalService {
+public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 
 	public OrgLabor addOrgLabor(
 			String organizationId, int typeId, int sunOpen, int sunClose,

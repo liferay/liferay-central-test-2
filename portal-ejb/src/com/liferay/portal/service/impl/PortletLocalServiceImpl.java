@@ -30,7 +30,7 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.service.PortletLocalService;
+import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPK;
 import com.liferay.portal.service.persistence.PortletUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -77,7 +77,7 @@ import org.dom4j.io.XMLWriter;
  * @author Raymond Auge
  *
  */
-public class PortletLocalServiceImpl implements PortletLocalService {
+public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public PortletCategory getEARDisplay(String xml) throws SystemException {
 		try {

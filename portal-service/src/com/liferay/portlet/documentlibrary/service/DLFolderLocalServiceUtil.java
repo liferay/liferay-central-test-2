@@ -29,6 +29,22 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFolderLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		return dlFolderLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addFolder(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String parentFolderId, java.lang.String name,

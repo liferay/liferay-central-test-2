@@ -24,14 +24,14 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.NoSuchUserTrackerPathException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQuery;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.persistence.BasePersistence;
 
-import com.liferay.util.dao.DynamicQuery;
-import com.liferay.util.dao.DynamicQueryInitializer;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;

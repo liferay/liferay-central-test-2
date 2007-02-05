@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class UserGroupRoleLocalServiceEJBImpl
 	implements UserGroupRoleLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return UserGroupRoleLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return UserGroupRoleLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void addUserGroupRoles(java.lang.String userId, long groupId,
 		java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 

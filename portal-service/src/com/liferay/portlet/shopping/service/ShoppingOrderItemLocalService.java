@@ -29,6 +29,14 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public interface ShoppingOrderItemLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public java.util.List getOrderItems(java.lang.String orderId)
 		throws com.liferay.portal.SystemException;
 }

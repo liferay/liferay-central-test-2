@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchUserIdMapperException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.UserIdMapper;
-import com.liferay.portal.service.UserIdMapperLocalService;
+import com.liferay.portal.service.base.UserIdMapperLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserIdMapperPK;
 import com.liferay.portal.service.persistence.UserIdMapperUtil;
 
@@ -39,7 +39,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserIdMapperLocalServiceImpl implements UserIdMapperLocalService {
+public class UserIdMapperLocalServiceImpl
+	extends UserIdMapperLocalServiceBaseImpl {
 
 	public void deleteUserIdMappers(String userId) throws SystemException {
 		UserIdMapperUtil.removeByUserId(userId);

@@ -39,8 +39,8 @@ import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalService;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
+import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.RoleFinder;
 import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -55,7 +55,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class RoleLocalServiceImpl implements RoleLocalService {
+public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 
 	public Role addRole(String userId, String companyId, String name, int type)
 		throws PortalException, SystemException {

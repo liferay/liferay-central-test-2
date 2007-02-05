@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class UserGroupRoleLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static void addUserGroupRoles(java.lang.String userId, long groupId,
 		java.lang.String[] roleIds)
 		throws com.liferay.portal.PortalException, 

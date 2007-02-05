@@ -30,7 +30,7 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.softwarerepository.model.SRFrameworkVersion;
-import com.liferay.portlet.softwarerepository.service.SRFrameworkVersionLocalService;
+import com.liferay.portlet.softwarerepository.service.base.SRFrameworkVersionLocalServiceBaseImpl;
 import com.liferay.portlet.softwarerepository.service.persistence.SRFrameworkVersionUtil;
 import com.liferay.portlet.softwarerepository.service.persistence.SRProductVersionUtil;
 
@@ -46,7 +46,7 @@ import java.util.List;
  *
  */
 public class SRFrameworkVersionLocalServiceImpl
-	implements SRFrameworkVersionLocalService {
+	extends SRFrameworkVersionLocalServiceBaseImpl {
 
 	public SRFrameworkVersion addFrameworkVersion(
 			String userId, String plid, String name, String url, boolean active,

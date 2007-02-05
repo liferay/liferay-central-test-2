@@ -43,7 +43,7 @@ import com.liferay.portlet.shopping.NoSuchItemException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
-import com.liferay.portlet.shopping.service.ShoppingCouponLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingCouponLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
@@ -64,7 +64,7 @@ import java.util.List;
  *
  */
 public class ShoppingCouponLocalServiceImpl
-	implements ShoppingCouponLocalService {
+	extends ShoppingCouponLocalServiceBaseImpl {
 
 	public ShoppingCoupon addCoupon(
 			String userId, String plid, String couponId, boolean autoCouponId,

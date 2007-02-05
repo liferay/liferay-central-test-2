@@ -29,6 +29,23 @@ package com.liferay.portlet.shopping.service;
  *
  */
 public class ShoppingCouponLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		return shoppingCouponLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addCoupon(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String couponId, boolean autoCouponId, java.lang.String name,

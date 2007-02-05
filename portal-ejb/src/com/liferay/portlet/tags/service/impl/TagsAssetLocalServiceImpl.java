@@ -25,7 +25,7 @@ package com.liferay.portlet.tags.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.service.TagsAssetLocalService;
+import com.liferay.portlet.tags.service.base.TagsAssetLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 
 /**
@@ -34,7 +34,7 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsAssetLocalServiceImpl implements TagsAssetLocalService {
+public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 	public void deleteAsset(long assetId)
 		throws PortalException, SystemException {

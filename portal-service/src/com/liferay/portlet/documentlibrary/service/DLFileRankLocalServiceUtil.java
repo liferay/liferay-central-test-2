@@ -29,6 +29,22 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileRankLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static void deleteFileRanks(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();

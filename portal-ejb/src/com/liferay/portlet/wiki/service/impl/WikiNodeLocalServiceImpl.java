@@ -36,8 +36,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
+import com.liferay.portlet.wiki.service.base.WikiNodeLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageUtil;
 import com.liferay.portlet.wiki.util.Indexer;
@@ -66,7 +66,7 @@ import org.apache.lucene.search.TermQuery;
  * @author Charles May
  *
  */
-public class WikiNodeLocalServiceImpl implements WikiNodeLocalService {
+public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 	public WikiNode addNode(
 			String userId, String plid, String name, String description,

@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class PermissionLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.Permission addPermission(
 		java.lang.String companyId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.PortalException, 

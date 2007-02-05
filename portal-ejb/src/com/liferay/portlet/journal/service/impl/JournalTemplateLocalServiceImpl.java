@@ -45,7 +45,7 @@ import com.liferay.portlet.journal.TemplateSmallImageSizeException;
 import com.liferay.portlet.journal.TemplateXslException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
-import com.liferay.portlet.journal.service.JournalTemplateLocalService;
+import com.liferay.portlet.journal.service.base.JournalTemplateLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateFinder;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePK;
@@ -75,7 +75,7 @@ import org.dom4j.DocumentException;
  *
  */
 public class JournalTemplateLocalServiceImpl
-	implements JournalTemplateLocalService {
+	extends JournalTemplateLocalServiceBaseImpl {
 
 	public JournalTemplate addTemplate(
 			String userId, String templateId, boolean autoTemplateId,

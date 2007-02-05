@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class PollsVoteLocalServiceEJBImpl implements PollsVoteLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return PollsVoteLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return PollsVoteLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(
 		java.lang.String userId, java.lang.String questionId,
 		java.lang.String choiceId)

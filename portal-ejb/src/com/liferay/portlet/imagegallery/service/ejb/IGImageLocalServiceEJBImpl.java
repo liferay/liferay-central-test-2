@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class IGImageLocalServiceEJBImpl implements IGImageLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return IGImageLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return IGImageLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String description, java.io.File file,

@@ -33,7 +33,7 @@ import com.liferay.portlet.blogs.CategoryNameException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
-import com.liferay.portlet.blogs.service.BlogsCategoryLocalService;
+import com.liferay.portlet.blogs.service.base.BlogsCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.blogs.util.Indexer;
@@ -56,7 +56,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class BlogsCategoryLocalServiceImpl
-	implements BlogsCategoryLocalService {
+	extends BlogsCategoryLocalServiceBaseImpl {
 
 	public BlogsCategory addCategory(
 			String userId, String parentCategoryId, String name,

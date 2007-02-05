@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class ImageLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		return imageLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static void deleteImage(java.lang.String imageId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

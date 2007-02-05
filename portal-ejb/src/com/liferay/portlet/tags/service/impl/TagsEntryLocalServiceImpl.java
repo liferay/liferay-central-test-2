@@ -33,8 +33,8 @@ import com.liferay.portlet.tags.DuplicateEntryException;
 import com.liferay.portlet.tags.EntryNameException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.service.TagsEntryLocalService;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
+import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsEntryFinder;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
@@ -54,7 +54,7 @@ import java.util.Set;
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsEntryLocalServiceImpl implements TagsEntryLocalService {
+public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 	public TagsEntry addEntry(String userId, String name)
 		throws PortalException, SystemException {

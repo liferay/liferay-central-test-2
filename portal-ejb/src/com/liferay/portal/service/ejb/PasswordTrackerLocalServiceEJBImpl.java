@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class PasswordTrackerLocalServiceEJBImpl
 	implements PasswordTrackerLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return PasswordTrackerLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return PasswordTrackerLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalServiceFactory.getTxImpl().deletePasswordTrackers(userId);

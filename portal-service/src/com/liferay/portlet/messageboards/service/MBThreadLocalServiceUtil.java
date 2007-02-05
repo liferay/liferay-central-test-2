@@ -29,6 +29,22 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBThreadLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static void deleteThread(java.lang.String threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

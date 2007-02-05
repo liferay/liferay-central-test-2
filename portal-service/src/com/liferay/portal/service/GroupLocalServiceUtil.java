@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class GroupLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.Group addGroup(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,

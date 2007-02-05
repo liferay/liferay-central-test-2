@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.util.SAXReaderFactory;
+import com.liferay.util.ArrayUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.GetterUtil;
 import com.liferay.util.StringUtil;
@@ -674,6 +675,7 @@ public class ServiceBuilder {
 						}
 
 						if (entity.hasLocalService()) {
+							_createServiceBaseImpl(entity);
 							_createServiceImpl(entity, _LOCAL);
 							_createService(entity, _LOCAL);
 							_createServiceEJB(entity, _LOCAL);
@@ -2323,12 +2325,12 @@ public class ServiceBuilder {
 		sb.append("import " + _packagePath + ".model.impl." + entity.getName() + "Impl;");
 		sb.append("import com.liferay.portal.PortalException;");
 		sb.append("import com.liferay.portal.SystemException;");
+		sb.append("import com.liferay.portal.kernel.dao.DynamicQuery;");
+		sb.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
 		sb.append("import com.liferay.portal.kernel.util.OrderByComparator;");
 		sb.append("import com.liferay.portal.kernel.util.StringPool;");
 		sb.append("import com.liferay.portal.service.persistence.BasePersistence;");
 		sb.append("import com.liferay.portal.spring.hibernate.HibernateUtil;");
-		sb.append("import com.liferay.util.dao.DynamicQuery;");
-		sb.append("import com.liferay.util.dao.DynamicQueryInitializer;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryPos;");
 		sb.append("import com.liferay.util.dao.hibernate.QueryUtil;");
 		sb.append("import java.sql.ResultSet;");
@@ -4206,6 +4208,20 @@ public class ServiceBuilder {
 
 		JavaMethod[] methods = javaClass.getMethods();
 
+		if (sessionType == _LOCAL) {
+			if (javaClass.getSuperClass().getValue().endsWith(entity.getName() + "LocalServiceBaseImpl")) {
+				JavaClass parentJavaClass = _getJavaClass(_outputPath + "/service/base/" + entity.getName() + "LocalServiceBaseImpl.java");
+
+				JavaMethod[] parentMethods = parentJavaClass.getMethods();
+
+				JavaMethod[] allMethods = new JavaMethod[parentMethods.length + methods.length];
+
+				ArrayUtil.combine(parentMethods, methods, allMethods);
+
+				methods = allMethods;
+			}
+		}
+
 		StringBuffer sb = new StringBuffer();
 
 		// Package
@@ -4289,6 +4305,46 @@ public class ServiceBuilder {
 
 			ejbFile.delete();
 		}
+	}
+
+	private void _createServiceBaseImpl(Entity entity) throws IOException {
+		StringBuffer sb = new StringBuffer();
+
+		// Package
+
+		sb.append("package " + _packagePath + ".service.base;");
+
+		// Imports
+
+		sb.append("import " + _packagePath + ".service." + entity.getName() + "LocalService;");
+		sb.append("import " + _packagePath + ".service.persistence." + entity.getName() + "Util;");
+		sb.append("import com.liferay.portal.SystemException;");
+		sb.append("import com.liferay.portal.kernel.dao.DynamicQueryInitializer;");
+		sb.append("import java.util.List;");
+
+		// Class declaration
+
+		sb.append("public abstract class " + entity.getName() + "LocalServiceBaseImpl implements " + entity.getName() + "LocalService {");
+
+		// Methods
+
+		sb.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {");
+		sb.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer);");
+		sb.append("}");
+
+		sb.append("public List dynamicQuery(DynamicQueryInitializer queryInitializer, int begin, int end) throws SystemException {");
+		sb.append("return " + entity.getName() + "Util.findWithDynamicQuery(queryInitializer, begin, end);");
+		sb.append("}");
+
+		// Class close brace
+
+		sb.append("}");
+
+		// Write file
+
+		File ejbFile = new File(_outputPath + "/service/base/" + entity.getName() + "LocalServiceBaseImpl.java");
+
+		writeFile(ejbFile, sb.toString());
 	}
 
 	private void _createServiceEJB(Entity entity, int sessionType) throws IOException {
@@ -4815,10 +4871,18 @@ public class ServiceBuilder {
 		if (sessionType == _REMOTE) {
 			sb.append("import com.liferay.portal.service.impl.PrincipalBean;");
 		}
+		else {
+			sb.append("import " + _packagePath + ".service.base." + entity.getName() + "LocalServiceBaseImpl;");
+		}
 
 		// Class declaration
 
-		sb.append("public class " + entity.getName() + _getSessionTypeName(sessionType) + "ServiceImpl " + (sessionType == _REMOTE ? "extends PrincipalBean " : "") + "implements " + entity.getName() + _getSessionTypeName(sessionType) + "Service {");
+		if (sessionType == _REMOTE) {
+			sb.append("public class " + entity.getName() + "ServiceImpl extends PrincipalBean implements " + entity.getName() + "Service {");
+		}
+		else {
+			sb.append("public class " + entity.getName() + "LocalServiceImpl extends " + entity.getName() + "LocalServiceBaseImpl {");
+		}
 
 		// Class close brace
 
@@ -6115,6 +6179,9 @@ public class ServiceBuilder {
 			methodName.equals("notify") ||
 			methodName.equals("notifyAll")) {
 
+			return false;
+		}
+		else if (methodName.equals("getPermissionChecker")) {
 			return false;
 		}
 		else if (methodName.equals("getUser") &&

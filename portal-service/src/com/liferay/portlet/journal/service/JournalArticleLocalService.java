@@ -29,6 +29,14 @@ package com.liferay.portlet.journal.service;
  *
  */
 public interface JournalArticleLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle addArticle(
 		java.lang.String userId, java.lang.String articleId,
 		boolean autoArticleId, java.lang.String plid, java.lang.String title,

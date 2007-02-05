@@ -36,7 +36,7 @@ import com.liferay.portlet.polls.QuestionExpirationDateException;
 import com.liferay.portlet.polls.QuestionTitleException;
 import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.service.PollsQuestionLocalService;
+import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
@@ -54,7 +54,7 @@ import java.util.List;
  *
  */
 public class PollsQuestionLocalServiceImpl
-	implements PollsQuestionLocalService {
+	extends PollsQuestionLocalServiceBaseImpl {
 
 	public PollsQuestion addQuestion(
 			String userId, String plid, String title, String description,

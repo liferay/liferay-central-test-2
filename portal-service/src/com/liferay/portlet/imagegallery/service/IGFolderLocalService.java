@@ -29,6 +29,14 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public interface IGFolderLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String parentFolderId, java.lang.String name,

@@ -29,6 +29,22 @@ package com.liferay.portlet.calendar.service;
  *
  */
 public class CalEventLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		return calEventLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.calendar.model.CalEvent addEvent(
 		java.lang.String userId, java.lang.String plid, java.lang.String title,
 		java.lang.String description, int startDateMonth, int startDateDay,

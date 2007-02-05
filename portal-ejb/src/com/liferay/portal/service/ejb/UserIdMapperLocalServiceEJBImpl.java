@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class UserIdMapperLocalServiceEJBImpl implements UserIdMapperLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return UserIdMapperLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return UserIdMapperLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void deleteUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalServiceFactory.getTxImpl().deleteUserIdMappers(userId);

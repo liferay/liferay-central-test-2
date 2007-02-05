@@ -61,8 +61,8 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
+import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.portlet.journal.service.persistence.JournalArticlePK;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
@@ -117,7 +117,7 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class JournalArticleLocalServiceImpl
-	implements JournalArticleLocalService {
+	extends JournalArticleLocalServiceBaseImpl {
 
 	public JournalArticle addArticle(
 			String userId, String articleId, boolean autoArticleId,

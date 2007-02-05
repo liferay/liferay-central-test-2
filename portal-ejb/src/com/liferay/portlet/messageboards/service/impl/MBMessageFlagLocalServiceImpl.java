@@ -27,7 +27,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
-import com.liferay.portlet.messageboards.service.MBMessageFlagLocalService;
+import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagPK;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 
@@ -42,7 +42,7 @@ import java.util.List;
  *
  */
 public class MBMessageFlagLocalServiceImpl
-	implements MBMessageFlagLocalService {
+	extends MBMessageFlagLocalServiceBaseImpl {
 
 	public void addReadFlags(List messages, String userId)
 		throws SystemException {

@@ -39,7 +39,7 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCartItemImpl;
-import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingCartLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCouponUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
@@ -60,7 +60,8 @@ import java.util.TreeMap;
  * @author Brian Wing Shun Chan
  *
  */
-public class ShoppingCartLocalServiceImpl implements ShoppingCartLocalService {
+public class ShoppingCartLocalServiceImpl
+	extends ShoppingCartLocalServiceBaseImpl {
 
 	public void deleteGroupCarts(long groupId) throws SystemException {
 		ShoppingCartUtil.removeByGroupId(groupId);

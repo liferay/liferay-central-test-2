@@ -29,6 +29,14 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public interface DLFileShortcutLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.documentlibrary.model.DLFileShortcut addFileShortcut(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String toFolderId, java.lang.String toName,

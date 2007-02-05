@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class OrganizationLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.PortalException, 

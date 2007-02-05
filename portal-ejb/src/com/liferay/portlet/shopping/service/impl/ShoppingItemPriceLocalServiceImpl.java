@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
-import com.liferay.portlet.shopping.service.ShoppingItemPriceLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingItemPriceLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemPriceUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 
@@ -43,7 +43,7 @@ import java.util.List;
  *
  */
 public class ShoppingItemPriceLocalServiceImpl
-	implements ShoppingItemPriceLocalService {
+	extends ShoppingItemPriceLocalServiceBaseImpl {
 
 	public List getItemPrices(String itemId)
 		throws PortalException, SystemException {

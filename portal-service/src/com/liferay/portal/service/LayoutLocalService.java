@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface LayoutLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Layout addLayout(long groupId,
 		java.lang.String userId, boolean privateLayout,
 		java.lang.String parentLayoutId, java.lang.String name,

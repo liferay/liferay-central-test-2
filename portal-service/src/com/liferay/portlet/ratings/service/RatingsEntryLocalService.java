@@ -29,6 +29,14 @@ package com.liferay.portlet.ratings.service;
  *
  */
 public interface RatingsEntryLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.ratings.model.RatingsEntry getEntry(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK)

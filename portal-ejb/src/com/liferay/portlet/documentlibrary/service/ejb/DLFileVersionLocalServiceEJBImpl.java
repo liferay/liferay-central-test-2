@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class DLFileVersionLocalServiceEJBImpl
 	implements DLFileVersionLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return DLFileVersionLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return DLFileVersionLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public java.util.List getFileVersions(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		return DLFileVersionLocalServiceFactory.getTxImpl().getFileVersions(folderId,

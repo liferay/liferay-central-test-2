@@ -29,6 +29,23 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBMessageFlagLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		return mbMessageFlagLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static void addReadFlags(java.util.List messages,
 		java.lang.String userId) throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();

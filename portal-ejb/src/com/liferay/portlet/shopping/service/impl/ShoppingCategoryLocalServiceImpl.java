@@ -34,8 +34,8 @@ import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
-import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
+import com.liferay.portlet.shopping.service.base.ShoppingCategoryLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCategoryUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.util.Validator;
@@ -54,7 +54,7 @@ import java.util.List;
  *
  */
 public class ShoppingCategoryLocalServiceImpl
-	implements ShoppingCategoryLocalService {
+	extends ShoppingCategoryLocalServiceBaseImpl {
 
 	public ShoppingCategory addCategory(
 			String userId, String plid, String parentCategoryId, String name,

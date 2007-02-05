@@ -29,6 +29,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public interface MBMessageFlagLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void addReadFlags(java.util.List messages, java.lang.String userId)
 		throws com.liferay.portal.SystemException;
 

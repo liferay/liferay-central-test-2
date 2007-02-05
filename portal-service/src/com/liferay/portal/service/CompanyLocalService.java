@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface CompanyLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void checkCompany(java.lang.String companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

@@ -29,6 +29,14 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public interface MBStatsUserLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

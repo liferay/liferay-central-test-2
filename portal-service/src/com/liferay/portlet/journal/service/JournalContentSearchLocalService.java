@@ -29,6 +29,14 @@ package com.liferay.portlet.journal.service;
  *
  */
 public interface JournalContentSearchLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void checkContentSearches(java.lang.String companyId)
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;

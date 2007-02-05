@@ -23,7 +23,7 @@
 package com.liferay.portlet.polls.service.impl;
 
 import com.liferay.portal.SystemException;
-import com.liferay.portlet.polls.service.PollsChoiceLocalService;
+import com.liferay.portlet.polls.service.base.PollsChoiceLocalServiceBaseImpl;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 
 import java.util.List;
@@ -34,7 +34,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class PollsChoiceLocalServiceImpl implements PollsChoiceLocalService {
+public class PollsChoiceLocalServiceImpl
+	extends PollsChoiceLocalServiceBaseImpl {
 
 	public List getChoices(String questionId) throws SystemException {
 		return PollsChoiceUtil.findByQuestionId(questionId);

@@ -34,8 +34,8 @@ import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
-import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderUtil;
 import com.liferay.portlet.imagegallery.service.persistence.IGImageUtil;
 import com.liferay.util.Validator;
@@ -51,7 +51,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class IGFolderLocalServiceImpl implements IGFolderLocalService {
+public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 	public IGFolder addFolder(
 			String userId, String plid, String parentFolderId, String name,

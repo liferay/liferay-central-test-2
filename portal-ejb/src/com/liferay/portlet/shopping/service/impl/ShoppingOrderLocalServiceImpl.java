@@ -67,7 +67,7 @@ import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.service.ShoppingItemFieldLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingOrderItemLocalServiceUtil;
-import com.liferay.portlet.shopping.service.ShoppingOrderLocalService;
+import com.liferay.portlet.shopping.service.base.ShoppingOrderLocalServiceBaseImpl;
 import com.liferay.portlet.shopping.service.persistence.ShoppingItemUtil;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderFinder;
 import com.liferay.portlet.shopping.service.persistence.ShoppingOrderItemPK;
@@ -101,7 +101,7 @@ import javax.mail.internet.InternetAddress;
  *
  */
 public class ShoppingOrderLocalServiceImpl
-	implements ShoppingOrderLocalService {
+	extends ShoppingOrderLocalServiceBaseImpl {
 
 	public void completeOrder(
 			String orderId, String ppTxnId, String ppPaymentStatus,

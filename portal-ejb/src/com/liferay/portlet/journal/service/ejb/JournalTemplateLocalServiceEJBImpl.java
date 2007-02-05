@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class JournalTemplateLocalServiceEJBImpl
 	implements JournalTemplateLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return JournalTemplateLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return JournalTemplateLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portlet.journal.model.JournalTemplate addTemplate(
 		java.lang.String userId, java.lang.String templateId,
 		boolean autoTemplateId, java.lang.String plid,

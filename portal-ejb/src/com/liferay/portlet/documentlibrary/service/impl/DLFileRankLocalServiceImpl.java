@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.documentlibrary.NoSuchFileRankException;
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
+import com.liferay.portlet.documentlibrary.service.base.DLFileRankLocalServiceBaseImpl;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPK;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
@@ -40,7 +40,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class DLFileRankLocalServiceImpl implements DLFileRankLocalService {
+public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 
 	public void deleteFileRanks(String userId) throws SystemException {
 		DLFileRankUtil.removeByUserId(userId);

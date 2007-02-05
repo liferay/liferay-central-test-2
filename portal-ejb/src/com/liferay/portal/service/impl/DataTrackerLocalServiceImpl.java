@@ -22,7 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
-import com.liferay.portal.service.DataTrackerLocalService;
+import com.liferay.portal.service.base.DataTrackerLocalServiceBaseImpl;
 
 /**
  * <a href="DataTrackerLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -30,5 +30,6 @@ import com.liferay.portal.service.DataTrackerLocalService;
  * @author Brian Wing Shun Chan
  *
  */
-public class DataTrackerLocalServiceImpl implements DataTrackerLocalService {
+public class DataTrackerLocalServiceImpl
+	extends DataTrackerLocalServiceBaseImpl {
 }

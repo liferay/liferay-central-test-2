@@ -38,7 +38,7 @@ import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.NoSuchContentSearchException;
 import com.liferay.portlet.journal.model.JournalContentSearch;
-import com.liferay.portlet.journal.service.JournalContentSearchLocalService;
+import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPK;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
 import com.liferay.util.Validator;
@@ -58,7 +58,7 @@ import javax.portlet.PortletPreferences;
  *
  */
 public class JournalContentSearchLocalServiceImpl
-	implements JournalContentSearchLocalService {
+	extends JournalContentSearchLocalServiceBaseImpl {
 
 	public void checkContentSearches(String companyId)
 		throws PortalException, SystemException {

@@ -32,8 +32,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
-import com.liferay.portal.service.AddressLocalService;
 import com.liferay.portal.service.ListTypeServiceUtil;
+import com.liferay.portal.service.base.AddressLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.AddressUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
@@ -51,7 +51,7 @@ import java.util.List;
  * @author Alexander Chow
  *
  */
-public class AddressLocalServiceImpl implements AddressLocalService {
+public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 	public Address addAddress(
 			String userId, String className, String classPK, String street1,

@@ -29,6 +29,22 @@ package com.liferay.portlet.messageboards.service;
  *
  */
 public class MBCategoryLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portlet.messageboards.model.MBCategory addCategory(
 		java.lang.String userId, java.lang.String plid,
 		java.lang.String parentCategoryId, java.lang.String name,

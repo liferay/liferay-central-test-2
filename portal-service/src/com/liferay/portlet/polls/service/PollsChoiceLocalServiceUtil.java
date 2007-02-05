@@ -29,6 +29,22 @@ package com.liferay.portlet.polls.service;
  *
  */
 public class PollsChoiceLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
+
+		return pollsChoiceLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static java.util.List getChoices(java.lang.String questionId)
 		throws com.liferay.portal.SystemException {
 		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();

@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.service.AddressLocalServiceUtil;
-import com.liferay.portal.service.ContactLocalService;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
+import com.liferay.portal.service.base.ContactLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ContactUtil;
 
 /**
@@ -38,7 +38,7 @@ import com.liferay.portal.service.persistence.ContactUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class ContactLocalServiceImpl implements ContactLocalService {
+public class ContactLocalServiceImpl extends ContactLocalServiceBaseImpl {
 
 	public Contact getContact(String contactId)
 		throws PortalException, SystemException {

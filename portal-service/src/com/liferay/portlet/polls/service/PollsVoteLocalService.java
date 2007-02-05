@@ -29,6 +29,14 @@ package com.liferay.portlet.polls.service;
  *
  */
 public interface PollsVoteLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.polls.model.PollsVote addVote(
 		java.lang.String userId, java.lang.String questionId,
 		java.lang.String choiceId)

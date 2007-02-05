@@ -31,7 +31,7 @@ import com.liferay.portal.model.Phone;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.ListTypeServiceUtil;
-import com.liferay.portal.service.PhoneLocalService;
+import com.liferay.portal.service.base.PhoneLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.util.Validator;
@@ -49,7 +49,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class PhoneLocalServiceImpl implements PhoneLocalService {
+public class PhoneLocalServiceImpl extends PhoneLocalServiceBaseImpl {
 
 	public Phone addPhone(
 			String userId, String className, String classPK, String number,

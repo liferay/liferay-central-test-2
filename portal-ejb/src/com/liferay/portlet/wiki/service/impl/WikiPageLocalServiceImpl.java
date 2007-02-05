@@ -34,7 +34,7 @@ import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
-import com.liferay.portlet.wiki.service.WikiPageLocalService;
+import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.persistence.WikiNodeUtil;
 import com.liferay.portlet.wiki.service.persistence.WikiPageFinder;
 import com.liferay.portlet.wiki.service.persistence.WikiPagePK;
@@ -70,7 +70,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiPageLocalServiceImpl implements WikiPageLocalService {
+public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage addPage(String userId, String nodeId, String title)
 		throws PortalException, SystemException {

@@ -41,7 +41,7 @@ import com.liferay.portlet.journal.StructureNameException;
 import com.liferay.portlet.journal.StructureXsdException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
-import com.liferay.portlet.journal.service.JournalStructureLocalService;
+import com.liferay.portlet.journal.service.base.JournalStructureLocalServiceBaseImpl;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureFinder;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePK;
@@ -76,7 +76,7 @@ import org.dom4j.io.SAXReader;
  *
  */
 public class JournalStructureLocalServiceImpl
-	implements JournalStructureLocalService {
+	extends JournalStructureLocalServiceBaseImpl {
 
 	public JournalStructure addStructure(
 			String userId, String structureId, boolean autoStructureId,

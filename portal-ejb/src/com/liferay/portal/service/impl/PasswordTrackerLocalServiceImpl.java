@@ -28,7 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.pwd.PwdEncryptor;
-import com.liferay.portal.service.PasswordTrackerLocalService;
+import com.liferay.portal.service.base.PasswordTrackerLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PasswordTrackerUtil;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -46,7 +46,7 @@ import java.util.Iterator;
  *
  */
 public class PasswordTrackerLocalServiceImpl
-	implements PasswordTrackerLocalService {
+	extends PasswordTrackerLocalServiceBaseImpl {
 
 	public void deletePasswordTrackers(String userId) throws SystemException {
 		PasswordTrackerUtil.removeByUserId(userId);

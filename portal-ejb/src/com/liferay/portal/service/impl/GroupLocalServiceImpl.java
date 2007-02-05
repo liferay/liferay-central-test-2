@@ -47,13 +47,13 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
-import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.ResourceUtil;
@@ -90,7 +90,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Alexander Chow
  *
  */
-public class GroupLocalServiceImpl implements GroupLocalService {
+public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 	public Group addGroup(
 			String userId, String className, String classPK, String name,

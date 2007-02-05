@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class CompanyLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		return companyLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static void checkCompany(java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -153,13 +153,13 @@ public class DataTrackerUtil {
 	}
 
 	public static java.util.List findWithDynamicQuery(
-		com.liferay.util.dao.DynamicQueryInitializer queryInitializer)
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
 	public static java.util.List findWithDynamicQuery(
-		com.liferay.util.dao.DynamicQueryInitializer queryInitializer,
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer, begin,
 			end);

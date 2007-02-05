@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class UserIdMapperLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static void deleteUserIdMappers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();

@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class SRProductEntryLocalServiceEJBImpl
 	implements SRProductEntryLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return SRProductEntryLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return SRProductEntryLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portlet.softwarerepository.model.SRProductEntry addProductEntry(
 		java.lang.String userId, java.lang.String plid, java.lang.String name,
 		java.lang.String type, java.lang.String shortDescription,

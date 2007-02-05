@@ -27,7 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.ratings.NoSuchStatsException;
 import com.liferay.portlet.ratings.model.RatingsStats;
-import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.base.RatingsStatsLocalServiceBaseImpl;
 import com.liferay.portlet.ratings.service.persistence.RatingsEntryUtil;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 
@@ -41,7 +41,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class RatingsStatsLocalServiceImpl implements RatingsStatsLocalService {
+public class RatingsStatsLocalServiceImpl
+	extends RatingsStatsLocalServiceBaseImpl {
 
 	public void deleteStats(String className, String classPK)
 		throws PortalException, SystemException {

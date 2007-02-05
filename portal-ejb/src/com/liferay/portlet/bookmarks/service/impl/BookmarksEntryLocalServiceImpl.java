@@ -32,7 +32,7 @@ import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
+import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class BookmarksEntryLocalServiceImpl
-	implements BookmarksEntryLocalService {
+	extends BookmarksEntryLocalServiceBaseImpl {
 
 	public BookmarksEntry addEntry(
 			String userId, String folderId, String name, String url,

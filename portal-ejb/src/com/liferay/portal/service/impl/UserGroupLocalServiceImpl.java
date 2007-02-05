@@ -36,7 +36,7 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
-import com.liferay.portal.service.UserGroupLocalService;
+import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupUtil;
@@ -52,7 +52,7 @@ import java.util.List;
  * @author Charles May
  *
  */
-public class UserGroupLocalServiceImpl implements UserGroupLocalService {
+public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 	public void addGroupUserGroups(long groupId, String[] userGroupIds)
 		throws PortalException, SystemException {

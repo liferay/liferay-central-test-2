@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class MBMessageFlagLocalServiceEJBImpl
 	implements MBMessageFlagLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return MBMessageFlagLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return MBMessageFlagLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void addReadFlags(java.util.List messages, java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalServiceFactory.getTxImpl().addReadFlags(messages,

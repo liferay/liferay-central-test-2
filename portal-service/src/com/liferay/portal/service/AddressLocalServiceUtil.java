@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class AddressLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		return addressLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.Address addAddress(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String street1,

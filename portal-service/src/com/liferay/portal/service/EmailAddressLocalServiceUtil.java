@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class EmailAddressLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
 		java.lang.String userId, java.lang.String className,
 		java.lang.String classPK, java.lang.String address, int typeId,

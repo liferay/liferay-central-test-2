@@ -35,7 +35,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalService;
+import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryUtil;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderUtil;
 import com.liferay.util.Validator;
@@ -53,7 +53,7 @@ import java.util.List;
  *
  */
 public class BookmarksFolderLocalServiceImpl
-	implements BookmarksFolderLocalService {
+	extends BookmarksFolderLocalServiceBaseImpl {
 
 	public BookmarksFolder addFolder(
 			String userId, String plid, String parentFolderId, String name,

@@ -29,6 +29,23 @@ package com.liferay.portlet.documentlibrary.service;
  *
  */
 public class DLFileVersionLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		return dlFileVersionLocalService.dynamicQuery(queryInitializer, begin,
+			end);
+	}
+
 	public static java.util.List getFileVersions(java.lang.String folderId,
 		java.lang.String name) throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();

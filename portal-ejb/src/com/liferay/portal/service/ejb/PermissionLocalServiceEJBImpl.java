@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return PermissionLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portal.model.Permission addPermission(
 		java.lang.String companyId, java.lang.String actionId, long resourceId)
 		throws com.liferay.portal.PortalException, 

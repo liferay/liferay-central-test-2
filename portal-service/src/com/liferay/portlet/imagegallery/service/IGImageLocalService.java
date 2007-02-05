@@ -29,6 +29,14 @@ package com.liferay.portlet.imagegallery.service;
  *
  */
 public interface IGImageLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String userId, java.lang.String folderId,
 		java.lang.String description, java.io.File file,

@@ -36,6 +36,19 @@ import javax.ejb.SessionContext;
  *
  */
 public class GroupLocalServiceEJBImpl implements GroupLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return GroupLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return GroupLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public com.liferay.portal.model.Group addGroup(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description,

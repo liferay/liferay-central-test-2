@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface PhoneLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Phone addPhone(java.lang.String userId,
 		java.lang.String className, java.lang.String classPK,
 		java.lang.String number, java.lang.String extension, int typeId,

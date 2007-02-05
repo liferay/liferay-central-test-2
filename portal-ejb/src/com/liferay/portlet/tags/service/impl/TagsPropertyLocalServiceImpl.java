@@ -32,7 +32,7 @@ import com.liferay.portlet.tags.PropertyKeyException;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
-import com.liferay.portlet.tags.service.TagsPropertyLocalService;
+import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder;
 import com.liferay.portlet.tags.service.persistence.TagsPropertyUtil;
 import com.liferay.util.Validator;
@@ -42,12 +42,14 @@ import java.util.Iterator;
 import java.util.List;
 
 /**
- * <a href="TagsPropertyLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="TagsPropertyLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class TagsPropertyLocalServiceImpl implements TagsPropertyLocalService {
+public class TagsPropertyLocalServiceImpl
+	extends TagsPropertyLocalServiceBaseImpl {
 
 	public TagsProperty addProperty(
 			String userId, long entryId, String key, String value)

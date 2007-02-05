@@ -29,6 +29,14 @@ package com.liferay.portal.service;
  *
  */
 public interface OrganizationLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public void addGroupOrganizations(long groupId,
 		java.lang.String[] organizationIds)
 		throws com.liferay.portal.SystemException, 

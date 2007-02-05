@@ -29,6 +29,23 @@ package com.liferay.portal.service;
  *
  */
 public class PasswordTrackerLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		return passwordTrackerLocalService.dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public static void deletePasswordTrackers(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();

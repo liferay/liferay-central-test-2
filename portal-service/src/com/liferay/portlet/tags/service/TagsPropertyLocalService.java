@@ -29,6 +29,14 @@ package com.liferay.portlet.tags.service;
  *
  */
 public interface TagsPropertyLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.tags.model.TagsProperty addProperty(
 		java.lang.String userId, long entryId, java.lang.String key,
 		java.lang.String value)

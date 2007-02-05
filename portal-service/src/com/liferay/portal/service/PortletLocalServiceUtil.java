@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class PortletLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		return portletLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.PortletCategory getEARDisplay(
 		java.lang.String xml) throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();

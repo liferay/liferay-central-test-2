@@ -44,7 +44,7 @@ import com.liferay.portlet.blogs.NoSuchCategoryException;
 import com.liferay.portlet.blogs.model.BlogsCategory;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsCategoryImpl;
-import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
+import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.service.persistence.BlogsCategoryUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
@@ -88,7 +88,7 @@ import org.apache.lucene.search.TermQuery;
  * @author Wilson S. Man
  *
  */
-public class BlogsEntryLocalServiceImpl implements BlogsEntryLocalService {
+public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 	public BlogsEntry addEntry(
 			String userId, String plid, String categoryId, String title,

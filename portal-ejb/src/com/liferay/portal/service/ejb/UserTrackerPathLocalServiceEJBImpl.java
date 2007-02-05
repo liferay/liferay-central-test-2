@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class UserTrackerPathLocalServiceEJBImpl
 	implements UserTrackerPathLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return UserTrackerPathLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return UserTrackerPathLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public java.util.List getUserTrackerPaths(java.lang.String userTrackerId,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return UserTrackerPathLocalServiceFactory.getTxImpl()

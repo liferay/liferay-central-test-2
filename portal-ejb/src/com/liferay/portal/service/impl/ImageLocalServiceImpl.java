@@ -26,7 +26,7 @@ import com.liferay.portal.NoSuchImageException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.ImageLocalService;
+import com.liferay.portal.service.base.ImageLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ImageFinder;
 import com.liferay.portal.service.persistence.ImageUtil;
 
@@ -40,7 +40,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageLocalServiceImpl implements ImageLocalService {
+public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 
 	public void deleteImage(String imageId)
 		throws PortalException, SystemException {

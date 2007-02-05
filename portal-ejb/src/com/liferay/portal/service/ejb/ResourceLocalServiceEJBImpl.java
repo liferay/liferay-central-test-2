@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class ResourceLocalServiceEJBImpl implements ResourceLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return ResourceLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return ResourceLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void addModelResources(java.lang.String companyId, long groupId,
 		java.lang.String userId, java.lang.String name, long primKey,
 		java.lang.String[] communityPermissions,

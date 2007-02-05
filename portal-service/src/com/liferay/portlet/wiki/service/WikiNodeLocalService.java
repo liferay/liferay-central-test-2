@@ -29,6 +29,14 @@ package com.liferay.portlet.wiki.service;
  *
  */
 public interface WikiNodeLocalService {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.wiki.model.WikiNode addNode(
 		java.lang.String userId, java.lang.String plid, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

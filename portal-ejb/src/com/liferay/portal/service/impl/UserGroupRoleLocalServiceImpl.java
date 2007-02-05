@@ -25,20 +25,21 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.service.UserGroupRoleLocalService;
+import com.liferay.portal.service.base.UserGroupRoleLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
 
 import java.util.List;
 
 /**
- * <a href="UserGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="UserGroupRoleLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Jorge Ferrer
  *
  */
 public class UserGroupRoleLocalServiceImpl
-	implements UserGroupRoleLocalService {
+	extends UserGroupRoleLocalServiceBaseImpl {
 
 	public void addUserGroupRoles(String userId, long groupId, String[] roleIds)
 		throws PortalException, SystemException {

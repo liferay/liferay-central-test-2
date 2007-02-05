@@ -25,7 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.service.AccountLocalService;
+import com.liferay.portal.service.base.AccountLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.AccountUtil;
 
 /**
@@ -34,7 +34,7 @@ import com.liferay.portal.service.persistence.AccountUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class AccountLocalServiceImpl implements AccountLocalService {
+public class AccountLocalServiceImpl extends AccountLocalServiceBaseImpl {
 
 	public Account getAccount(String accountId)
 		throws PortalException, SystemException {

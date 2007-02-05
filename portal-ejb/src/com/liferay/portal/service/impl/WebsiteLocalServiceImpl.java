@@ -31,7 +31,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.service.ListTypeServiceUtil;
-import com.liferay.portal.service.WebsiteLocalService;
+import com.liferay.portal.service.base.WebsiteLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 import com.liferay.util.Validator;
@@ -51,7 +51,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class WebsiteLocalServiceImpl implements WebsiteLocalService {
+public class WebsiteLocalServiceImpl extends WebsiteLocalServiceBaseImpl {
 
 	public Website addWebsite(
 			String userId, String className, String classPK, String url,

@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class ShoppingOrderItemLocalServiceEJBImpl
 	implements ShoppingOrderItemLocalService, SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return ShoppingOrderItemLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return ShoppingOrderItemLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public java.util.List getOrderItems(java.lang.String orderId)
 		throws com.liferay.portal.SystemException {
 		return ShoppingOrderItemLocalServiceFactory.getTxImpl().getOrderItems(orderId);

@@ -29,6 +29,22 @@ package com.liferay.portal.service;
  *
  */
 public class LayoutSetLocalServiceUtil {
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.dynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		return layoutSetLocalService.dynamicQuery(queryInitializer, begin, end);
+	}
+
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
 		java.lang.String ownerId, java.lang.String companyId)
 		throws com.liferay.portal.PortalException, 

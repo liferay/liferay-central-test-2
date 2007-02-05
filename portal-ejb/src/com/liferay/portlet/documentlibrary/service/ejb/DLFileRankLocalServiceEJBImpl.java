@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class DLFileRankLocalServiceEJBImpl implements DLFileRankLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return DLFileRankLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return DLFileRankLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void deleteFileRanks(java.lang.String userId)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalServiceFactory.getTxImpl().deleteFileRanks(userId);

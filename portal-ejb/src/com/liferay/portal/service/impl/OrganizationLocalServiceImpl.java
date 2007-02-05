@@ -41,10 +41,10 @@ import com.liferay.portal.service.CountryServiceUtil;
 import com.liferay.portal.service.EmailAddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.ListTypeServiceUtil;
-import com.liferay.portal.service.OrganizationLocalService;
 import com.liferay.portal.service.PhoneLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.WebsiteLocalServiceUtil;
+import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.GroupUtil;
 import com.liferay.portal.service.persistence.OrganizationFinder;
 import com.liferay.portal.service.persistence.OrganizationUtil;
@@ -63,7 +63,8 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrganizationLocalServiceImpl implements OrganizationLocalService {
+public class OrganizationLocalServiceImpl
+	extends OrganizationLocalServiceBaseImpl {
 
 	public void addGroupOrganizations(
 			long groupId, String[] organizationIds)

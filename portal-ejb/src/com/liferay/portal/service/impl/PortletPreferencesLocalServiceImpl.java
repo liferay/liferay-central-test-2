@@ -29,7 +29,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesPK;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
@@ -47,7 +47,7 @@ import java.util.Map;
  *
  */
 public class PortletPreferencesLocalServiceImpl
-	implements PortletPreferencesLocalService {
+	extends PortletPreferencesLocalServiceBaseImpl {
 
 	public void deletePortletPreferences(String ownerId)
 		throws SystemException {

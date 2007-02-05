@@ -37,6 +37,19 @@ import javax.ejb.SessionContext;
  */
 public class MBThreadLocalServiceEJBImpl implements MBThreadLocalService,
 	SessionBean {
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return MBThreadLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer);
+	}
+
+	public java.util.List dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return MBThreadLocalServiceFactory.getTxImpl().dynamicQuery(queryInitializer,
+			begin, end);
+	}
+
 	public void deleteThread(java.lang.String threadId)
 		throws com.liferay.portal.PortalException, 
 			com.liferay.portal.SystemException {

@@ -27,7 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.model.impl.ReleaseImpl;
-import com.liferay.portal.service.ReleaseLocalService;
+import com.liferay.portal.service.base.ReleaseLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.ReleaseUtil;
 import com.liferay.portal.util.ReleaseInfo;
 
@@ -39,7 +39,7 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public class ReleaseLocalServiceImpl implements ReleaseLocalService {
+public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 
 	public Release getRelease() throws PortalException, SystemException {
 		Release release = null;
