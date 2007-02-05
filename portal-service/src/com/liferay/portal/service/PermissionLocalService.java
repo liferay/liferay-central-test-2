@@ -123,6 +123,13 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException, 
 			com.liferay.portal.PortalException;
 
+	public void setRolePermissions(java.lang.String roleId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, java.lang.String[] actionIds)
+		throws com.liferay.portal.SystemException, 
+			com.liferay.portal.PortalException;
+
 	public void setUserPermissions(java.lang.String userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException, 

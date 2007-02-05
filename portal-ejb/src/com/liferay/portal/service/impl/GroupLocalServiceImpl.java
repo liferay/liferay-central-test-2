@@ -144,14 +144,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 				group.getCompanyId(), 0, null, Group.class.getName(),
 				group.getPrimaryKey(), false, false, false);
 
-			// Default community roles
+			// Community roles
 
-			Role communityAdministratorRole =
-				RoleLocalServiceUtil.getRole(
-					group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+			Role role = RoleLocalServiceUtil.getRole(
+				group.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
-			UserGroupRoleLocalServiceUtil.addUserGroupRoles(userId, groupId,
-				new String[]{communityAdministratorRole.getRoleId()});
+			UserGroupRoleLocalServiceUtil.addUserGroupRoles(
+				userId, groupId, new String[] {role.getRoleId()});
 
 			// User
 

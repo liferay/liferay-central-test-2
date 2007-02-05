@@ -186,6 +186,16 @@ public class PermissionLocalServiceEJBImpl implements PermissionLocalService,
 			companyId, name, typeId, scope, primKey, actionId);
 	}
 
+	public void setRolePermissions(java.lang.String roleId,
+		java.lang.String companyId, java.lang.String name,
+		java.lang.String typeId, java.lang.String scope,
+		java.lang.String primKey, java.lang.String[] actionIds)
+		throws com.liferay.portal.PortalException, 
+			com.liferay.portal.SystemException {
+		PermissionLocalServiceFactory.getTxImpl().setRolePermissions(roleId,
+			companyId, name, typeId, scope, primKey, actionIds);
+	}
+
 	public void setUserPermissions(java.lang.String userId,
 		java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException, 

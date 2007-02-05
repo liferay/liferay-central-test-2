@@ -41,17 +41,17 @@ public class RoleImpl extends RoleModelImpl implements Role {
 
 	public static final String USER = RoleNames.USER;
 
-	public static final String COMMUNITY_OWNER = RoleNames.COMMUNITY_OWNER;
+	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
 
 	public static final String COMMUNITY_ADMINISTRATOR =
-			RoleNames.COMMUNITY_ADMINISTRATOR;
+		RoleNames.COMMUNITY_ADMINISTRATOR;
 
 	public static final String COMMUNITY_MEMBER = RoleNames.COMMUNITY_MEMBER;
 
-	public static final String[] SYSTEM_ROLES = RoleNames.SYSTEM_ROLES;
+	public static final String COMMUNITY_OWNER = RoleNames.COMMUNITY_OWNER;
 
 	public static final String[] SYSTEM_COMMUNITY_ROLES =
-			RoleNames.SYSTEM_COMMUNITY_ROLES;
+		RoleNames.SYSTEM_COMMUNITY_ROLES;
 
 	public static final int TYPE_COMMUNITY = 2;
 

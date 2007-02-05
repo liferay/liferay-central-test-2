@@ -492,6 +492,19 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		RoleUtil.addPermission(roleId, permission);
 	}
 
+	public void setRolePermissions(
+			String roleId, String companyId, String name, String typeId,
+			String scope, String primKey, String[] actionIds)
+		throws PortalException, SystemException {
+
+		for (int i = 0; i < actionIds.length; i++) {
+			String actionId = actionIds[i];
+
+			setRolePermission(
+				roleId, companyId, name, typeId, scope, primKey, actionId);
+		}
+	}
+
 	public void setUserPermissions(
 			String userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {

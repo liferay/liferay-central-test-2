@@ -88,7 +88,7 @@ if (role != null) {
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>">
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>">
 
-Assign Community Template roles to users.
+Assign Community roles to users.
 
 <br><br>
 
@@ -178,7 +178,7 @@ Assign Community Template roles to users.
 		<input name="<portlet:namespace />removeUserIds" type="hidden" value="">
 
 		<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-			Step 2 of 2: Assign Community Template roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= group.getName() %></i> community.
+			Step 2 of 2: Assign Community roles to users. <i>Current</i> signifies current users associated with the <i><%= role.getName() %></i> role. <i>Available</i> signifies all users associated with the <i><%= group.getName() %></i> community.
 		</div>
 
 		<br>

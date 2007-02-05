@@ -99,7 +99,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 	public void checkSystemRoles(String companyId)
 		throws PortalException, SystemException {
 
-		// Regular Roles
+		// Regular roles
 
 		String[] systemRoles = PortalUtil.getSystemRoles();
 
@@ -113,7 +113,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 			}
 		}
 
-		// Community Roles
+		// Community roles
 
 		String[] systemCommunityRoles = PortalUtil.getSystemCommunityRoles();
 
@@ -127,44 +127,30 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 					RoleImpl.TYPE_COMMUNITY);
 
 				if (systemCommunityRoles[i].equals(RoleImpl.COMMUNITY_OWNER)) {
-					List actions = ResourceActionsUtil.
-						getModelResourceActions(Group.class.getName());
-					for (int j = 0; j < actions.size(); j++) {
-						String action = (String) actions.get(j);
-						PermissionLocalServiceUtil.setRolePermission(
-							role.getRoleId(), role.getCompanyId(),
-							Group.class.getName(), ResourceImpl.TYPE_CLASS,
-							ResourceImpl.SCOPE_GROUP_TEMPLATE,
-							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-							action); //ActionKeys.ADMINISTRATE
-					}
-				}
-				else if (
-					systemCommunityRoles[i].equals(RoleImpl.COMMUNITY_MEMBER)) {
+					List actions = ResourceActionsUtil.getModelResourceActions(
+						Group.class.getName());
 
+					PermissionLocalServiceUtil.setRolePermissions(
+						role.getRoleId(), role.getCompanyId(),
+						Group.class.getName(), ResourceImpl.TYPE_CLASS,
+						ResourceImpl.SCOPE_GROUP_TEMPLATE,
+						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
+						(String[])actions.toArray(new String[0]));
 				}
-				else if (
-					systemCommunityRoles[i].equals(
-						RoleImpl.COMMUNITY_ADMINISTRATOR)) {
+				else if (systemCommunityRoles[i].equals(
+							RoleImpl.COMMUNITY_ADMINISTRATOR)) {
 
-					PermissionLocalServiceUtil.setRolePermission(
+					String[] actionIds = new String[] {
+						ActionKeys.ASSIGN_USERS, ActionKeys.MANAGE_LAYOUTS,
+						ActionKeys.UPDATE
+					};
+
+					PermissionLocalServiceUtil.setRolePermissions(
 						role.getRoleId(), role.getCompanyId(),
 						Group.class.getName(), ResourceImpl.TYPE_CLASS,
 						ResourceImpl.SCOPE_GROUP_TEMPLATE,
 						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						ActionKeys.ASSIGN_USERS);
-					PermissionLocalServiceUtil.setRolePermission(
-						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(), ResourceImpl.TYPE_CLASS,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						ActionKeys.MANAGE_LAYOUTS);
-					PermissionLocalServiceUtil.setRolePermission(
-						role.getRoleId(), role.getCompanyId(),
-						Group.class.getName(), ResourceImpl.TYPE_CLASS,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE,
-						String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
-						ActionKeys.UPDATE);
+						actionIds);
 				}
 			}
 		}

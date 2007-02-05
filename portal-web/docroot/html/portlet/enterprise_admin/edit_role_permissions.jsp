@@ -197,7 +197,7 @@ if (Validator.isNotNull(modelResource)) {
 		</div>
 	</c:when>
 	<c:otherwise>
-		Define permissions for this <b>Community Template</b> role. Configure what this role has permission to do.
+		Define permissions for this <b>Community</b> role. Configure what this role has permission to do.
 
 		<liferay-ui:toggle
 			id="toggle_id_enterprise_admin_edit_role_permissions"
@@ -210,7 +210,7 @@ if (Validator.isNotNull(modelResource)) {
 
 		<div id="toggle_id_enterprise_admin_edit_role_permissions" style="display: <liferay-ui:toggle-value id="toggle_id_enterprise_admin_edit_role_permissions" />;">
 			<div class="portlet-section-body" style="border: 1px solid <%= colorScheme.getPortletFontDim() %>; padding: 5px;">
-				This is a <i>Community Template</i> role. That means this role is only valid for a user in a given community. A user can have one set of Community Template roles in one community, and another set of Community Template roles in another community.
+				This is a <i>Community</i> role. That means this role is only valid for a user in a given community. A user can have one set of Community roles in one community, and another set of Community roles in another community.
 
 				<br><br>
 
@@ -222,7 +222,7 @@ if (Validator.isNotNull(modelResource)) {
 
 				<br><br>
 
-				You must then go to the Communities portlet to associate different users with the appropriate Community Template roles.
+				You must then go to the Communities portlet to associate different users with the appropriate Community roles.
 
 				<br><br>
 

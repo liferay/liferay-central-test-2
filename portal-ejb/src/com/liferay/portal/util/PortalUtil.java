@@ -1541,18 +1541,22 @@ public class PortalUtil {
 
 		roleName = roleName.trim();
 
-		int pos1 = Arrays.binarySearch(
+		int pos = Arrays.binarySearch(
 			_sortedSystemRoles, roleName, new StringComparator());
 
-		int pos2 = Arrays.binarySearch(
-			_sortedSystemCommunityRoles, roleName, new StringComparator());
-
-		if ((pos1 >= 0) || (pos2 >= 0)) {
+		if (pos >= 0) {
 			return true;
 		}
 		else {
-			return false;
+			pos = Arrays.binarySearch(
+				_sortedSystemCommunityRoles, roleName, new StringComparator());
+
+			if (pos >= 0) {
+				return true;
+			}
 		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactory.getLog(PortalUtil.class);
