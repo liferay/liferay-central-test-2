@@ -27,8 +27,8 @@
 <%
 String id = (String)request.getAttribute("liferay-ui:upload-progress:id");
 String iframeSrc = (String)request.getAttribute("liferay-ui:upload-progress:iframe-src");
-String message = (String)request.getAttribute("liferay-ui:upload-progress:message");
 String redirect = (String)request.getAttribute("liferay-ui:upload-progress:redirect");
+String message = (String)request.getAttribute("liferay-ui:upload-progress:message");
 %>
 
 <script src="<%= themeDisplay.getPathJavaScript() %>/upload_progress.js" type="text/javascript"></script>
@@ -37,19 +37,18 @@ String redirect = (String)request.getAttribute("liferay-ui:upload-progress:redir
 	var <%= id %> = new UploadProgress("<%= id %>", "<%= Http.encodeURL(redirect) %>");
 </script>
 
-<% if (Validator.isNotNull(iframeSrc)) { %>
+<c:if test="<%= Validator.isNotNull(iframeSrc) %>">
 	<iframe frameborder="0" id="<%= id %>-iframe" src="<%= iframeSrc %>" style="width: 100%;"></iframe>
-<% } %>
+</c:if>
 
 <iframe frameborder="0" id="<%= id %>-poller" src="" style="width: 0; height: 0;"></iframe>
 
 <div id="<%= id %>-bar-div" style="text-align: center; display: none;">
 	<br>
 
-	<% if (Validator.isNotNull(message)) { %>
-		<%=LanguageUtil.get(pageContext, message)%>...
-		<br>
-	<% } %>
+	<c:if test="<%= Validator.isNotNull(message) %>">
+		<%= LanguageUtil.get(pageContext, message) %>...<br>
+	</c:if>
 
 	<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_middle.gif) scroll repeat-x top left; margin: auto; text-align: left; width: 80%;">
 		<div style="background: url(<%= themeDisplay.getPathThemeImage() %>/progress_bar/incomplete_left.gif) scroll no-repeat top left;">

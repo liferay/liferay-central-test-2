@@ -40,8 +40,8 @@
 <%@ page import="org.apache.log4j.Level" %>
 <%@ page import="org.apache.log4j.Logger" %>
 <%@ page import="org.apache.log4j.LogManager" %>
+
 <%
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 RepositoryReport repositoryReport = (RepositoryReport) renderRequest.getPortletSession().getAttribute(WebKeys.PLUGIN_REPOSITORY_REPORT);
-
 %>

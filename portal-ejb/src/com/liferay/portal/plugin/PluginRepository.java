@@ -51,11 +51,11 @@ public class PluginRepository {
 	}
 
 	public Plugin findPluginByArtifactURL(String artifactURL) {
-		return (Plugin) _artifactURLIndex.get(artifactURL);
+		return (Plugin)_artifactURLIndex.get(artifactURL);
 	}
 
 	public Plugin findPluginByModuleId(String moduleId) {
-		return (Plugin) _moduleIdIndex.get(moduleId);
+		return (Plugin)_moduleIdIndex.get(moduleId);
 	}
 
 	public List getPlugins() {

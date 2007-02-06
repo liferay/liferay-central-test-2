@@ -22,17 +22,21 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.util.StringTokenizer;
 
 /**
  * <a href="Version.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class Version implements Comparable {
 
-	public Version(
-			String major, String minor, String bugFix, String buildNumber) {
+	public Version(String major, String minor, String bugFix,
+				   String buildNumber) {
+
 		_major = major;
 		_minor = minor;
 		_bugFix = bugFix;
@@ -40,7 +44,7 @@ public class Version implements Comparable {
 	}
 
 	public Version(String version) {
-		StringTokenizer st = new StringTokenizer(version, SEPARATOR);
+		StringTokenizer st = new StringTokenizer(version, _SEPARATOR);
 
 		_major = st.nextToken();
 
@@ -56,8 +60,9 @@ public class Version implements Comparable {
 
 		while (st.hasMoreTokens()) {
 			buildNumber.append(st.nextToken());
+
 			if (st.hasMoreTokens()) {
-				buildNumber.append(SEPARATOR);
+				buildNumber.append(_SEPARATOR);
 			}
 		}
 
@@ -83,7 +88,8 @@ public class Version implements Comparable {
 	public boolean isLaterVersionThan(String version) {
 		if (compareTo(new Version(version)) > 0) {
 			return true;
-		} else {
+		}
+		else {
 			return false;
 		}
 	}
@@ -104,8 +110,9 @@ public class Version implements Comparable {
 				}
 
 				if (getBugFix().equals(version.getBugFix())) {
-					if ((getBuildNumber().equals("*")) ||
-							getBuildNumber().equals(version.getBuildNumber())) {
+					if (getBuildNumber().equals("*") ||
+						getBuildNumber().equals(version.getBuildNumber())) {
+
 						return true;
 					}
 				}
@@ -116,71 +123,75 @@ public class Version implements Comparable {
 	}
 
 	public String toString() {
-		StringBuffer result = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
-		result.append(_major);
+		sb.append(_major);
 
 		if (Validator.isNotNull(_minor)) {
-			result.append(SEPARATOR);
-			result.append(_minor);
+			sb.append(_SEPARATOR);
+			sb.append(_minor);
 
 			if (Validator.isNotNull(_bugFix)) {
-				result.append(SEPARATOR);
-				result.append(_bugFix);
+				sb.append(_SEPARATOR);
+				sb.append(_bugFix);
 
 				if (Validator.isNotNull(_buildNumber)) {
-					result.append(SEPARATOR);
-					result.append(_buildNumber);
+					sb.append(_SEPARATOR);
+					sb.append(_buildNumber);
 				}
 			}
 		}
 
-		return result.toString();
+		return sb.toString();
 	}
 
-	public int compareTo(Object o) {
-		if ((o == null) || (!(o instanceof Version))) {
+	public int compareTo(Object obj) {
+		if ((obj == null) || (!(obj instanceof Version))) {
 			return -1;
 		}
 
-		Version pv = (Version) o;
+		Version version = (Version)obj;
 
-		int result = _major.compareTo(pv.getMajor());
+		int result = _major.compareTo(version.getMajor());
+
 		if (result != 0) {
 			return result;
 		}
 
-		result = _minor.compareTo(pv.getMinor());
+		result = _minor.compareTo(version.getMinor());
+
 		if (result != 0) {
 			return result;
 		}
 
-		result = _bugFix.compareTo(pv.getBugFix());
+		result = _bugFix.compareTo(version.getBugFix());
+
 		if (result != 0) {
 			return result;
 		}
 
-		return _buildNumber.compareTo(pv.getBuildNumber());
+		return _buildNumber.compareTo(version.getBuildNumber());
 	}
 
-	public boolean equals(Object o) {
-		if ((o == null) || (!(o instanceof Version))) {
+	public boolean equals(Object obj) {
+		if ((obj == null) || (!(obj instanceof Version))) {
 			return false;
 		}
 
-		Version pv = (Version) o;
-		return toString().equals(pv.toString());
+		Version version = (Version)obj;
+
+		return toString().equals(version.toString());
 	}
 
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
+	private static final String _SEPARATOR = StringPool.PERIOD;
+
 	private String _major;
 	private String _minor;
 	private String _bugFix;
 	private String _buildNumber;
-
-	private static final String SEPARATOR = ".";
 
 }

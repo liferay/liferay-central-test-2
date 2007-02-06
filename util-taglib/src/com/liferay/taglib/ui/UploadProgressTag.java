@@ -40,8 +40,8 @@ public class UploadProgressTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:upload-progress:id", _id);
 		req.setAttribute("liferay-ui:upload-progress:iframe-src", _iframeSrc);
-		req.setAttribute("liferay-ui:upload-progress:message", _message);
 		req.setAttribute("liferay-ui:upload-progress:redirect", _redirect);
+		req.setAttribute("liferay-ui:upload-progress:message", _message);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -54,12 +54,12 @@ public class UploadProgressTag extends IncludeTag {
 		_iframeSrc = iframeSrc;
 	}
 
-	public void setMessage(String message) {
-		this._message = message;
-	}
-
 	public void setRedirect(String redirect) {
 		_redirect = redirect;
+	}
+
+	public void setMessage(String message) {
+		_message = message;
 	}
 
 	protected String getDefaultPage() {
@@ -71,7 +71,7 @@ public class UploadProgressTag extends IncludeTag {
 
 	private String _id;
 	private String _iframeSrc;
-	private String _message;
 	private String _redirect;
+	private String _message;
 
 }

@@ -125,6 +125,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Plugins 4.3.0//EN",
+			"liferay-plugins_4_3_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Portlet Application 4.0.0//EN",
 			"liferay-portlet-app_4_0_0.dtd"
 		),
@@ -152,11 +157,6 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		new KeyValuePair(
 			"-//Liferay//DTD Service Builder 4.2.0//EN",
 			"liferay-service-builder_4_2_0.dtd"
-		),
-
-		new KeyValuePair(
-			"-//Liferay//DTD Liferay Plugins 4.3.0//EN",
-			"liferay-plugins_4_3_0.dtd"
 		),
 
 		new KeyValuePair(
