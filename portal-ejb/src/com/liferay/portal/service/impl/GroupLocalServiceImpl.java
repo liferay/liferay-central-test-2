@@ -27,7 +27,7 @@ import com.liferay.portal.DuplicateGroupException;
 import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
-import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
@@ -210,14 +210,14 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			LayoutSetLocalServiceUtil.deleteLayoutSet(
 				LayoutImpl.PRIVATE + groupId);
 		}
-		catch (NoSuchLayoutException nsle) {
+		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		try {
 			LayoutSetLocalServiceUtil.deleteLayoutSet(
 				LayoutImpl.PUBLIC + groupId);
 		}
-		catch (NoSuchLayoutException nsle) {
+		catch (NoSuchLayoutSetException nslse) {
 		}
 
 		// Role
