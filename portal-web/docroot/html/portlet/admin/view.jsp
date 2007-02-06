@@ -49,6 +49,7 @@ portletURL.setParameter("tabs3", tabs3);
 		if (cmd == "hotDeploy") {
 			document.<portlet:namespace />fm.encoding = "multipart/form-data";
 		}
+
 		if (progressId) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.PROGRESS_ID %>.value = progressId;
 		}
@@ -120,10 +121,10 @@ portletURL.setParameter("tabs3", tabs3);
 <input name="<portlet:namespace />redirect" type="hidden" value="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/admin/view" /><portlet:param name="tabs1" value="<%= tabs1 %>" /><portlet:param name="tabs2" value="<%= tabs2 %>" /><portlet:param name="tabs3" value="<%= tabs3 %>" /></portlet:renderURL>">
 
 <%
-String tabsNames = "server,deploy-plugins,enterprise,portlets,users";
+String tabsNames = "server,install-plugins,enterprise,portlets,users";
 
 if (!OmniadminUtil.isOmniadmin(user.getUserId())) {
-	tabsNames = StringUtil.replace(tabsNames, "auto-deploy,", "");
+	tabsNames = StringUtil.replace(tabsNames, "install-plugins,", "");
 }
 %>
 
@@ -133,8 +134,8 @@ if (!OmniadminUtil.isOmniadmin(user.getUserId())) {
 />
 
 <c:choose>
-	<c:when test='<%= tabs1.equals("deploy-plugins") && OmniadminUtil.isOmniadmin(user.getUserId()) %>'>
-		<%@ include file="/html/portlet/admin/auto_deploy.jsp" %>
+	<c:when test='<%= tabs1.equals("install-plugins") && OmniadminUtil.isOmniadmin(user.getUserId()) %>'>
+		<%@ include file="/html/portlet/admin/install_plugins.jsp" %>
 	</c:when>
 	<c:when test='<%= tabs1.equals("enterprise") %>'>
 		<%@ include file="/html/portlet/admin/enterprise.jsp" %>

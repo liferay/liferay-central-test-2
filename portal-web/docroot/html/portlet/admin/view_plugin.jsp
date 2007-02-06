@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portal.language.LanguageUtil" %>
 <%
 /**
  * Copyright (c) 2000-2007 Liferay, Inc. All rights reserved.
@@ -51,31 +50,21 @@ breadcrumbsURL.setParameter("moduleId", moduleId);
 breadcrumbsURL.setParameter("repositoryURL", repositoryURL);
 
 breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName() + "</a>";
-
 %>
 
-<style type="text/css">
-	a.thumbnail img {
-		border: 1px solid gray;
-		padding: 5px;
-		margin: 5px;
-		background-color: #eee;
-		width: 120px;
-	}
-</style>
-
-<%=breadcrumbs%>
+<%= breadcrumbs %>
 
 <br><br>
 
-<liferay-ui:error key="invalidUrl" message="invalid-url"/>
-<liferay-ui:error key="errorResponseFromServer" message="error-response-from-the-server"/>
-<liferay-ui:error key="errorConnectingToServer" message="error-connecting-to-server"/>
-<liferay-ui:success key="pluginDownloaded" message="the-plugin-has-been-downloaded-and-is-being-installed"/>
+<liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />
+
+<liferay-ui:error key="errorConnectingToServer" message="an-unexpected-error-occurred-while-connecting-to-the-repository" />
+<liferay-ui:error key="errorResponseFromServer" message="connecting-to-the-repository-returned-an-error" />
+<liferay-ui:error key="invalidUrl" message="plugin-does-not-have-a-valid-url" />
 
 <table border="0" cellpadding="3" cellspacing="0">
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "name") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -84,7 +73,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "author") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -93,7 +82,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "type") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -102,7 +91,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "tags") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -124,30 +113,34 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "licenses") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
 
 		<%
-		Iterator itr2 = plugin.getLicenses().iterator();
+		itr = plugin.getLicenses().iterator();
 
-		while (itr2.hasNext()) {
-			License license = (License)itr2.next();
+		while (itr.hasNext()) {
+			License license = (License)itr.next();
 		%>
-		    <% if (Validator.isNotNull(license.getUrl())) { %>
-				<a href="<%= license.getUrl()%>">
-			<% } %>
-			<%= license.getName() %>
-			<% if (Validator.isNotNull(license.getUrl())) { %>
-			</a>
-			<% } %>
-			<% if (license.isOsiApproved()) { %>
-				(<%= LanguageUtil.get(pageContext, "open-source")%>)
-			<% } %>
 
-			<c:if test="<%= itr2.hasNext() %>">, </c:if>
+			<c:if test="<%= Validator.isNotNull(license.getUrl()) %>">
+				<a href="<%= license.getUrl()%>">
+			</c:if>
+
+			<%= license.getName() %>
+
+			<c:if test="<%= Validator.isNotNull(license.getUrl()) %>">
+				</a>
+			</c:if>
+
+			<c:if test="<%= license.isOsiApproved() %>">
+				(<%= LanguageUtil.get(pageContext, "open-source")%>)
+			</c:if>
+
+			<c:if test="<%= itr.hasNext() %>">, </c:if>
 
 		<%
 		}
@@ -156,8 +149,8 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
-		<%= LanguageUtil.get(pageContext, "supported-liferay-versions") %>
+	<td>
+		<%= LanguageUtil.get(pageContext, "liferay-versions") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
 	<td>
@@ -178,7 +171,7 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td>
 		<%= LanguageUtil.get(pageContext, "repository") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -187,7 +180,12 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 	</td>
 </tr>
 <tr>
-	<td align="right">
+	<td colspan="3">
+		<br>
+	</td>
+</tr>
+<tr>
+	<td>
 		<%= LanguageUtil.get(pageContext, "short-description") %>
 	</td>
 	<td style="padding-left: 10px;"></td>
@@ -195,32 +193,10 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 		<%= plugin.getShortDescription() %>
 	</td>
 </tr>
-<% if ((plugin.getScreenshotURLs() != null) && !plugin.getScreenshotURLs().isEmpty()) { %>
-	<tr>
-		<td align="right" valign="top">
-			<%= LanguageUtil.get(pageContext, "screenshots") %>
-		</td>
-		<td style="padding-left: 10px;"></td>
-		<td valign="top">
-			<%
-			Iterator itr4 = plugin.getScreenshotURLs().iterator();
 
-			while (itr4.hasNext()) {
-				String screenshotURL = (String)itr4.next();
-			%>
-
-				<a href="<%= screenshotURL %>" class="thumbnail">
-					<img alt="Thumbnail" src="<%= screenshotURL %>" align="left"/>
-				</a>
-			<%
-			}
-			%>
-		</td>
-	</tr>
-<% } %>
-<% if (Validator.isNotNull(plugin.getLongDescription())) { %>
+<c:if test="<%= Validator.isNotNull(plugin.getLongDescription()) %>">
 	<tr>
-		<td align="right" valign="top">
+		<td>
 			<%= LanguageUtil.get(pageContext, "long-description") %>
 		</td>
 		<td style="padding-left: 10px;"></td>
@@ -228,23 +204,50 @@ breadcrumbs += "<a href=\"" + breadcrumbsURL.toString() + "\">" + plugin.getName
 			<%= plugin.getLongDescription() %>
 		</td>
 	</tr>
-<% } %>
-<tr>
-	<td colspan="2">
-		&nbsp;
-	</td>
-</tr>
-<tr>
-	<td>
-		&nbsp;
-	</td>
-	<td style="padding-left: 10px;"></td>
-	<td>
-		<input type="hidden" name="<portlet:namespace/>url" value="<%=plugin.getArtifactURL()%>">
-		<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "deploy")%>' onclick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%=downloadProgressId%>', '<%=currentURL%>');">
-	</td>
-</tr>
+</c:if>
+
+<%
+List screenshotURLs = plugin.getScreenshotURLs();
+%>
+
+<c:if test="<%= (screenshotURLs != null) && !screenshotURLs.isEmpty() %>">
+	<tr>
+		<td colspan="3">
+			<br>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<%= LanguageUtil.get(pageContext, "screenshots") %>
+		</td>
+		<td style="padding-left: 10px;"></td>
+		<td>
+
+			<%
+			itr = screenshotURLs.iterator();
+
+			while (itr.hasNext()) {
+				String screenshotURL = (String)itr.next();
+			%>
+
+				<a href="<%= screenshotURL %>"><img align="left" src="<%= screenshotURL %>" width="120"></a>
+
+			<%
+			}
+			%>
+
+		</td>
+	</tr>
+</c:if>
+
 </table>
+
+<br>
+
+<input type="hidden" name="<portlet:namespace/>url" value="<%= plugin.getArtifactURL() %>">
+
+<input class="portlet-form-button" type="button" value='<%=LanguageUtil.get(pageContext, "install")%>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%= downloadProgressId %>', '<%= currentURL %>');">
+
 <liferay-ui:upload-progress
 	id="<%= downloadProgressId %>"
 	message="downloading"

@@ -27,31 +27,37 @@ String downloadProgressId = "downloadPlugin" + System.currentTimeMillis();
 String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
 %>
 
-<input type="hidden" name="<portlet:namespace/>progressId" value=""/>
+<input type="hidden" name="<portlet:namespace/>progressId" value="">
 
 <liferay-ui:tabs
-	names="repositories,direct-deploy,configuration"
+	names="repositories,direct-install,configuration"
 	param="tabs2"
-	url="<%= portletURL.toString() %>"/>
+	url="<%= portletURL.toString() %>"
+/>
 
 <c:choose>
-	<c:when test='<%=tabs2.equals("direct-deploy")%>'>
-		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
-		<liferay-ui:success key="pluginUploaded" message="the-plugin-has-been-uploaded-and-is-being-installed"/>
+	<c:when test='<%=tabs2.equals("direct-install")%>'>
+		<liferay-ui:success key="pluginUploaded" message="the-plugin-was-uploaded-successfully-and-is-now-being-installed" />
 
-		<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-hot-deploy-a-layout-template,-portlet,-or-theme") %>
+		<liferay-ui:error exception="<%= UploadException.class %>" message="an-unexpected-error-occurred-while-uploading-your-file" />
+
+		<%= LanguageUtil.get(pageContext, "upload-a-war-file-to-install-a-layout-template,-portlet,-or-theme") %>
 
 		<br><br>
 
 		<input class="form-text" name="<portlet:namespace />file" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" type="file">
 
 		<br><br>
-		<%= LanguageUtil.get(pageContext, "deployment-file-name") %><br>
-		<input class="form-text" name="<portlet:namespace />recommendedWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+
+		<%= LanguageUtil.get(pageContext, "specify-an-optional-plugin-file-name") %>
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<%= uploadProgressId%>.startProgress(); <portlet:namespace />saveServer('hotDeploy', '<%=uploadProgressId%>');">
+		<input class="form-text" name="<portlet:namespace />localDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+
+		<br><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= uploadProgressId %>.startProgress(); <portlet:namespace />saveServer('localDeploy', '<%= uploadProgressId %>');">
 
 		<liferay-ui:upload-progress
 			id="<%= uploadProgressId %>"
@@ -61,22 +67,29 @@ String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
 
 		<br><br><div class="beta-separator" style="clear: both"></div><br>
 
-		<liferay-ui:success key="pluginDownloaded" message="the-plugin-has-been-downloaded-and-is-being-installed"/>
+		<liferay-ui:success key="pluginDownloaded" message="the-plugin-was-downloaded-successfully-and-is-now-being-installed" />
 
 		<%= LanguageUtil.get(pageContext, "specify-a-URL-for-a-remote-layout-template,-portlet,-or-theme") %>
 
-		<br><br>
-
-		<%= LanguageUtil.get(pageContext, "url") %><br>
-		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
-
-		<br><br>
-		<%= LanguageUtil.get(pageContext, "deployment-file-name") %><br>
-		<input class="form-text" name="<portlet:namespace />recommendedWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;">
+		<%= LanguageUtil.format(pageContext, "for-example-x", "<i>http://easynews.dl.sourceforge.net/sourceforge/lportal/sample-jsp-portlet-" + ReleaseInfo.getVersion() + ".war</i>") %>
 
 		<br><br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "deploy") %>' onClick="<%= downloadProgressId%>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%=downloadProgressId%>');">
+		<input class="form-text" name="<portlet:namespace />url" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
+
+		<br><br>
+
+		<%= LanguageUtil.get(pageContext, "specify-an-optional-plugin-file-name") %>
+
+		<%= LanguageUtil.format(pageContext, "for-example-x", "<i>sample-jsp-portlet.war</i>") %>
+
+		<br><br>
+
+		<input class="form-text" name="<portlet:namespace />remoteDeployWARName" style="width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;" value="">
+
+		<br><br>
+
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "install") %>' onClick="<%= downloadProgressId %>.startProgress(); <portlet:namespace />saveServer('remoteDeploy', '<%= downloadProgressId %>');">
 
 		<liferay-ui:upload-progress
 			id="<%= downloadProgressId %>"
@@ -158,6 +171,11 @@ String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
 
 		<c:if test="<%= ServerDetector.isTomcat() %>">
 			<tr>
+				<td colspan="3">
+					<br>
+				</td>
+			</tr>
+			<tr>
 				<td>
 					<%= LanguageUtil.get(pageContext, "tomcat-lib-dir") %>
 				</td>
@@ -167,42 +185,45 @@ String uploadProgressId = "uploadPlugin" + System.currentTimeMillis();
 				</td>
 			</tr>
 		</c:if>
+
+		<tr>
+			<td colspan="3">
+				<br>
+			</td>
+		</tr>
 		<tr>
 			<td>
-				<%= LanguageUtil.get(pageContext, "plugin-repositories") %> <br>
-				<font size="-1">(<%= LanguageUtil.get(pageContext, "enter-one-repository-URL-per-line") %>)</font>
+				<%= LanguageUtil.get(pageContext, "plugin-repositories") %><br>
+
+				<span style="font-size: xx-small;">(<%= LanguageUtil.get(pageContext, "enter-one-url-per-line") %>)</span>
 			</td>
 			<td style="padding-left: 10px;"></td>
 			<td>
 				<textarea class="form-text" name="<portlet:namespace />pluginRepositories" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: 400px;" wrap="soft"><%= PrefsPropsUtil.getString(PropsUtil.PLUGIN_REPOSITORIES) %></textarea>
-				<br>
+
 				<%@ include file="/html/portlet/admin/repository_report.jsp" %>
 			</td>
 		</tr>
-
 		</table>
 
 		<br>
 
-		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('autoDeploy', '<%=downloadProgressId%>');">
-
-		<br><br>
-
+		<input class="portlet-form-button" type="button" value='<%= LanguageUtil.get(pageContext, "save") %>' onClick="<portlet:namespace />saveServer('deployConfiguration', '<%= downloadProgressId %>');">
 	</c:when>
 	<c:otherwise>
+
 		<%
 		String moduleId = ParamUtil.getString(request, "moduleId");
 		String repositoryURL = ParamUtil.getString(request, "repositoryURL");
+		%>
 
-		if (Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL)) {
-		%>
-			<%@ include file="/html/portlet/admin/view_plugin.jsp" %>
-		<%
-		} else {
-		%>
-			<%@ include file="/html/portlet/admin/plugins.jsp" %>
-		<%
-		}
-		%>
+		<c:choose>
+			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">
+				<%@ include file="/html/portlet/admin/view_plugin.jsp" %>
+			</c:when>
+			<c:otherwise>
+				<%@ include file="/html/portlet/admin/plugins.jsp" %>
+			</c:otherwise>
+		</c:choose>
 	</c:otherwise>
 </c:choose>

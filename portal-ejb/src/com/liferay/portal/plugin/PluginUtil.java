@@ -98,20 +98,11 @@ public class PluginUtil {
 				return repository.findPluginByArtifactURL(url);
 			}
 			catch (PluginException pe) {
-				_log.info("Error loading repository " + repositoryURL, pe);
+				_log.error("Unable to load repository " + repositoryURL, pe);
 			}
 		}
 
 		return null;
-	}
-
-	public static String[] getRepositoryURLs() throws PluginException {
-		try {
-			return PrefsPropsUtil.getStringArray(PropsUtil.PLUGIN_REPOSITORIES);
-		}
-		catch (Exception e) {
-			throw new PluginException("Could not read repository list", e);
-		}
 	}
 
 	public static PluginRepository getRepository(String repositoryURL)
@@ -127,8 +118,45 @@ public class PluginUtil {
 		return _loadRepository(repositoryURL);
 	}
 
+	public static String[] getRepositoryURLs() throws PluginException {
+		try {
+			return PrefsPropsUtil.getStringArray(PropsUtil.PLUGIN_REPOSITORIES);
+		}
+		catch (Exception e) {
+			throw new PluginException("Unable to read repository list", e);
+		}
+	}
+
 	public static String[] getSupportedTypes() {
 		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
+	}
+
+	public static RepositoryReport reloadRepositories() throws PluginException {
+		if (_log.isInfoEnabled()) {
+			_log.info("Reloading repositories");
+		}
+
+		RepositoryReport report = new RepositoryReport();
+
+		String[] repositoryURLs = getRepositoryURLs();
+
+		for (int i = 0; i < repositoryURLs.length; i++) {
+			String repositoryURL = repositoryURLs[i];
+
+			try {
+				_loadRepository(repositoryURL);
+
+				report.addSuccess(repositoryURL);
+			}
+			catch(PluginException pe) {
+				report.addError(repositoryURL, pe);
+
+				_log.error(
+					"Unable to load repository " + repositoryURL + " " +
+						pe.toString());
+			}
+		}
+		return report;
 	}
 
 	public static List search(String type, String tags, String repositoryURL)
@@ -171,35 +199,11 @@ public class PluginUtil {
 				}
 			}
 			catch(PluginException pe) {
-				_log.info("Error loading repository " + repositoryURL, pe);
+				_log.error("Unable to load repository " + repositoryURL, pe);
 			}
 		}
 
 		return new ArrayList(plugins.keySet());
-	}
-
-	public static RepositoryReport reloadRepositories() throws PluginException {
-		RepositoryReport report = new RepositoryReport();
-
-		String[] repositoryURLs = getRepositoryURLs();
-
-		for (int i = 0; i < repositoryURLs.length; i++) {
-			String repositoryURL = repositoryURLs[i];
-
-			try {
-				_loadRepository(repositoryURL);
-
-				report.addSuccess(repositoryURL);
-			}
-			catch(PluginException pe) {
-				report.addError(repositoryURL, pe);
-
-				_log.info(
-					"Error loading repository " + repositoryURL + " " +
-						pe.toString());
-			}
-		}
-		return report;
 	}
 
 	private static PluginRepository _loadRepository(String repositoryURL)
@@ -225,7 +229,7 @@ public class PluginUtil {
 
 			if (responseCode != 200) {
 				throw new PluginException(
-					"Cannot download file " + pluginsXmlURL +
+					"Unable to download file " + pluginsXmlURL +
 						" because of response code " + responseCode);
 			}
 
@@ -257,13 +261,13 @@ public class PluginUtil {
 			_repositoryCache.remove(repositoryURL);
 
 			throw new PluginException(
-				"Error communicating with repository " + repositoryURL, ioe);
+				"Unable to communicate with repository " + repositoryURL, ioe);
 		}
 		catch (DocumentException de) {
 			_repositoryCache.remove(repositoryURL);
 
 			throw new PluginException(
-				"Error parsing plugin list for repository " + repositoryURL,
+				"Unable to parse plugin list for repository " + repositoryURL,
 				de);
 		}
 	}

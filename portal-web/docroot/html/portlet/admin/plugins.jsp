@@ -25,8 +25,16 @@
 <%
 String redirect = ParamUtil.getString(request, "redirect");
 
-String currentTag = ParamUtil.getString(renderRequest, "tag");
-String currentType = ParamUtil.getString(renderRequest, "type");
+String tag = ParamUtil.getString(renderRequest, "tag");
+String type = ParamUtil.getString(renderRequest, "type");
+
+PortletURL searchURL = renderResponse.createRenderURL();
+
+searchURL.setWindowState(WindowState.MAXIMIZED);
+searchURL.setParameter("struts_action", "/admin/view");
+searchURL.setParameter("tabs1", tabs1);
+searchURL.setParameter("tabs2", tabs2);
+searchURL.setParameter("redirect", redirect);
 
 PortletURL viewPluginURL = renderResponse.createRenderURL();
 
@@ -35,95 +43,106 @@ viewPluginURL.setParameter("struts_action", "/admin/view");
 viewPluginURL.setParameter("tabs1", tabs1);
 viewPluginURL.setParameter("tabs2", tabs2);
 
-
-PortletURL searchURL = renderResponse.createRenderURL();
-
-searchURL.setWindowState(WindowState.MAXIMIZED);
-searchURL.setParameter("struts_action", "/admin/view");
-searchURL.setParameter("redirect", redirect);
-searchURL.setParameter("tabs1", tabs1);
-searchURL.setParameter("tabs2", tabs2);
-
-
 PortletURL reloadRepositoriesURL = renderResponse.createActionURL();
 
 reloadRepositoriesURL.setWindowState(WindowState.MAXIMIZED);
 reloadRepositoriesURL.setParameter("struts_action", "/admin/edit_server");
-reloadRepositoriesURL.setParameter("cmd", "reloadRepositories");
-reloadRepositoriesURL.setParameter("redirect", currentURL);
 reloadRepositoriesURL.setParameter("tabs1", tabs1);
 reloadRepositoriesURL.setParameter("tabs2", tabs2);
+reloadRepositoriesURL.setParameter("cmd", "reloadRepositories");
+reloadRepositoriesURL.setParameter("redirect", currentURL);
 
-%>
-
-<%
 try {
 %>
 
-<%= LanguageUtil.get(pageContext, "list-of-available-plugins") %>
-<br><br>
+	<form action="<%= searchURL.toString() %>" method="post">
 
-<form action="<%=searchURL.toString()%>" method="post">
-	<div style="float: left; padding-right: 5px;">
-		<%= LanguageUtil.get(pageContext, "type") %><br />
-		<select name="<portlet:namespace/>type">
-			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
-			<%
-				String[] types = PluginUtil.getSupportedTypes();
-				for (int i = 0; i < types.length; i++) {
-					String type = types[i];
-			%>
-				<option value="<%=type%>" <%= (type.equals(currentType))?"selected":"" %>><%= LanguageUtil.get(pageContext, type) %></option>
-			<%
-				}
-			%>
-		</select>
-
-	</div>
-
-	<div style="float: left; padding-right: 5px;">
-		<%= LanguageUtil.get(pageContext, "tag") %><br />
-		<select name="<portlet:namespace/>tag">
-			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
-			<%
-				Collection tags = PluginUtil.getAvailableTags();
-				for (Iterator iterator = tags.iterator(); iterator.hasNext();) {
-					String tag = (String) iterator.next();
-			%>
-				<option value="<%=tag%>" <%= (tag.equals(currentTag))?"selected":"" %>><%= tag %></option>
-			<%
-				}
-			%>
-		</select>
-	</div>
-
-	<div style="float: left; padding-right: 5px;">
-		<%= LanguageUtil.get(pageContext, "repository") %><br />
-		<select name="<portlet:namespace/>repositoryURL">
-			<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
-			<%
-				String[] repositoryURLs = PluginUtil.getRepositoryURLs();
-				for (int i = 0; i < repositoryURLs.length; i++) {
-					String repositoryURL2 = repositoryURLs[i];
-			%>
-				<option value="<%=repositoryURL2%>" <%= (repositoryURL2.equals(repositoryURL))?"selected":"" %>><%= repositoryURL2 %></option>
-			<%
-				}
-			%>
-		</select>
-	</div>
-	<table border="0" cellpadding="0" cellspacing="0" style="clear: both; margin-top: 5px;">
+	<table border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td>
-			<input class="portlet-form-button" type="submit" value="<%=LanguageUtil.get(pageContext, "search")%>">
+			<%= LanguageUtil.get(pageContext, "type") %>
+		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<%= LanguageUtil.get(pageContext, "tag") %>
+		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<%= LanguageUtil.get(pageContext, "repository") %>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<select name="<portlet:namespace/>type">
+				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+
+				<%
+				String[] types = PluginUtil.getSupportedTypes();
+
+				for (int i = 0; i < types.length; i++) {
+					String curType = types[i];
+				%>
+
+					<option <%= (type.equals(curType)) ? "selected" : "" %> value="<%= curType %>"><%= LanguageUtil.get(pageContext, curType) %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<select name="<portlet:namespace/>tag">
+				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+
+				<%
+				Iterator itr = PluginUtil.getAvailableTags().iterator();
+
+				while (itr.hasNext()) {
+					String curTag = (String)itr.next();
+				%>
+
+					<option <%= (tag.equals(curTag)) ? "selected": "" %> value="<%= curTag %>"><%= curTag %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+		<td style="padding-left: 5px;"></td>
+		<td>
+			<select name="<portlet:namespace/>repositoryURL">
+				<option value=""><%= LanguageUtil.get(pageContext, "all") %></option>
+
+				<%
+				String[] repositoryURLs = PluginUtil.getRepositoryURLs();
+
+				for (int i = 0; i < repositoryURLs.length; i++) {
+					String curRepositoryURL = repositoryURLs[i];
+				%>
+
+					<option <%= (repositoryURL.equals(curRepositoryURL)) ? "selected" : "" %> value="<%= curRepositoryURL %>"><%= curRepositoryURL %></option>
+
+				<%
+				}
+				%>
+
+			</select>
 		</td>
 	</tr>
 	</table>
-</form>
 
-<br><div class="beta-separator" style="clear: both"></div><br>
+	<br>
 
-<%
+	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "search") %>">
+
+	</form>
+
+	<br><div class="beta-separator" style="clear: both;"></div><br>
+
+	<%
 	List headerNames = new ArrayList();
 
 	headerNames.add("plugin-name");
@@ -133,10 +152,13 @@ try {
 
 	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, viewPluginURL, headerNames, null);
 
-	List results = PluginUtil.search(currentType, currentTag, repositoryURL);
-	int total = results.size();
+	List plugins = PluginUtil.search(type, tag, repositoryURL);
+
+	int total = plugins.size();
 
 	searchContainer.setTotal(total);
+
+	List results = ListUtil.subList(plugins, searchContainer.getStart(), searchContainer.getEnd());
 
 	searchContainer.setResults(results);
 
@@ -152,11 +174,11 @@ try {
 		rowURL.setWindowState(WindowState.MAXIMIZED);
 
 		rowURL.setParameter("struts_action", "/admin/view");
+		rowURL.setParameter("tabs1", tabs1);
+		rowURL.setParameter("tabs2", tabs2);
 		rowURL.setParameter("redirect", currentURL);
 		rowURL.setParameter("moduleId", plugin.getModuleId());
 		rowURL.setParameter("repositoryURL", plugin.getRepositoryURL());
-		rowURL.setParameter("tabs1", tabs1);
-		rowURL.setParameter("tabs2", tabs2);
 
 		// Name and short description
 
@@ -178,26 +200,29 @@ try {
 
 		// Type
 
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, plugin.getType(), null, null, null);
+		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, LanguageUtil.get(pageContext, plugin.getType()), null, null, null);
 
 		row.addText(rowTextEntry);
 
 		// Tags
 
-		rowTextEntry = (TextSearchEntry) rowTextEntry.clone();
+		rowTextEntry = (TextSearchEntry)rowTextEntry.clone();
 
-		StringBuffer pluginTags = new StringBuffer();
-		Iterator itr = plugin.getTags().iterator();
+		sb = new StringBuffer();
+
+		itr = plugin.getTags().iterator();
 
 		while (itr.hasNext()) {
-			String tag = (String) itr.next();
-			pluginTags.append(tag);
+			String curTag = (String)itr.next();
+
+			sb.append(curTag);
+
 			if (itr.hasNext()) {
-				pluginTags.append(StringPool.COMMA + StringPool.SPACE);
+				sb.append(StringPool.COMMA + StringPool.SPACE);
 			}
 		}
 
-		rowTextEntry.setName(pluginTags.toString());
+		rowTextEntry.setName(sb.toString());
 
 		row.addText(rowTextEntry);
 
@@ -209,34 +234,40 @@ try {
 
 		resultRows.add(row);
 	}
-%>
+	%>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 
-<br><div class="beta-separator" style="clear: both"></div><br>
+	<c:if test="<%= PluginUtil.getLastUpdateDate() != null %>">
+		<br>
 
-<% if (Validator.isNotNull("" + PluginUtil.getLastUpdateDate())) { %>
-	<%=LanguageUtil.get(pageContext, "plugin-list-obtained-from-remote-repositories-on-date")%>: <%= dateFormatDateTime.format(PluginUtil.getLastUpdateDate())%>
-<% } %>
-<br>
+		<%= LanguageUtil.format(pageContext, "list-of-plugins-was-last-refreshed-on-x", dateFormatDateTime.format(PluginUtil.getLastUpdateDate())) %><br>
+	</c:if>
 
-<%@ include file="/html/portlet/admin/repository_report.jsp" %>
+	<%@ include file="/html/portlet/admin/repository_report.jsp" %>
 
-<br>
+	<br>
 
-<form action="<%=reloadRepositoriesURL.toString()%>" method="post">
-	<input class="portlet-form-button" type="submit" value="<%=LanguageUtil.get(pageContext, "reload")%>">
-</form>
+	<form action="<%= reloadRepositoriesURL.toString() %>" method="post">
 
+	<input class="portlet-form-button" type="submit" value="<%= LanguageUtil.get(pageContext, "refresh") %>">
+
+	</form>
 
 <%
 }
 catch (PluginException e) {
-	e.printStackTrace();
+	_log.error(e, e);
 %>
+
 	<span class="error"><%= LanguageUtil.get(pageContext, "error-obtaining-available-plugins") %></span>
+
 <%
 }
+%>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.admin.plugins.jsp");
 %>
