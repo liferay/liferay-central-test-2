@@ -31,6 +31,7 @@ import java.util.List;
  *
  */
 public interface Plugin {
+
 	public String getModuleId();
 
 	public String getName();
@@ -85,8 +86,8 @@ public interface Plugin {
 
 	public String getWARName();
 
-	String getVersion();
+	public String getVersion();
 
-	boolean isLaterVersionThan(Plugin previous);
+	public boolean isLaterVersionThan(Plugin previous);
 
 }

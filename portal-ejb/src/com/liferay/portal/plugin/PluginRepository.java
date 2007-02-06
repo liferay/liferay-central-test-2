@@ -38,11 +38,11 @@ import java.util.TreeSet;
  * <a href="PluginRepository.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class PluginRepository {
 
 	public void addPlugin(Plugin plugin) {
-
 		_artifactURLIndex.put(plugin.getArtifactURL(), plugin);
 		_moduleIdIndex.put(plugin.getModuleId(), plugin);
 
@@ -51,33 +51,32 @@ public class PluginRepository {
 	}
 
 	public Plugin findPluginByArtifactURL(String artifactURL) {
-
 		return (Plugin) _artifactURLIndex.get(artifactURL);
 	}
 
 	public Plugin findPluginByModuleId(String moduleId) {
-
 		return (Plugin) _moduleIdIndex.get(moduleId);
 	}
 
 	public List getPlugins() {
-
 		return _plugins;
 	}
 
 	public Set getTags() {
-
 		return _tags;
 	}
 
 	public Collection search(String type, String tag) {
-
 		List result = new ArrayList();
 
-		for (Iterator iterator = _plugins.iterator(); iterator.hasNext();) {
-			Plugin plugin = (Plugin) iterator.next();
-			if ((Validator.isNull(type) || type.equals(plugin.getType()))
-				&& (Validator.isNull(tag) || plugin.getTags().contains(tag))){
+		Iterator itr = _plugins.iterator();
+
+		while (itr.hasNext()) {
+			Plugin plugin = (Plugin)itr.next();
+
+			if ((Validator.isNull(type) || type.equals(plugin.getType())) &&
+				(Validator.isNull(tag) || plugin.getTags().contains(tag))){
+
 				result.add(plugin);
 			}
 		}

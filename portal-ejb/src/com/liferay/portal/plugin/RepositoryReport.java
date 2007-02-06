@@ -33,8 +33,10 @@ import java.util.TreeMap;
  * <a href="RepositoryReport.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class RepositoryReport {
+
 	public static final String SUCCESS = "success";
 
 	public void addSuccess(String repositoryURL) {
@@ -42,22 +44,23 @@ public class RepositoryReport {
 	}
 
 	public void addError(String repositoryURL, PluginException pe) {
-		StringBuffer message = new StringBuffer();
+		StringBuffer sb = new StringBuffer();
 
 		if (Validator.isNotNull(pe.getMessage())) {
-			message.append(pe.getMessage());
+			sb.append(pe.getMessage());
 		}
 
-		if ((pe.getCause() != null)
-				&& Validator.isNull(pe.getCause().getMessage())) {
-			message.append(pe.getCause().getMessage());
+		if ((pe.getCause() != null) &&
+			Validator.isNull(pe.getCause().getMessage())) {
+
+			sb.append(pe.getCause().getMessage());
 		}
 
-		if (message.length() == 0) {
-			message.append(pe.toString());
+		if (sb.length() == 0) {
+			sb.append(pe.toString());
 		}
 
-		_reportMap.put(repositoryURL, message.toString());
+		_reportMap.put(repositoryURL, sb.toString());
 	}
 
 	public Set getRepositoryURLs() {
@@ -70,12 +73,17 @@ public class RepositoryReport {
 
 	public String toString() {
 		StringBuffer sb = new StringBuffer();
-		Iterator it = getRepositoryURLs().iterator();
-		while (it.hasNext()) {
-			String repositoryURL = (String) it.next();
-			sb.append(repositoryURL).append(": ");
-			sb.append("" + _reportMap.get(repositoryURL));
+
+		Iterator itr = getRepositoryURLs().iterator();
+
+		while (itr.hasNext()) {
+			String repositoryURL = (String)itr.next();
+
+			sb.append(repositoryURL);
+			sb.append(": ");
+			sb.append(_reportMap.get(repositoryURL));
 		}
+
 		return sb.toString();
 	}
 

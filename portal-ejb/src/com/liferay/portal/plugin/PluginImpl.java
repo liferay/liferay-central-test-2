@@ -35,8 +35,9 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
  * <a href="PluginImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
-public class PluginImpl implements Plugin, Comparable {
+public class PluginImpl implements Comparable, Plugin {
 
 	public PluginImpl(String moduleId) {
 		_moduleId = new ModuleId(moduleId);
@@ -58,9 +59,8 @@ public class PluginImpl implements Plugin, Comparable {
 		return _moduleId.getVersion();
 	}
 
-	public boolean isLaterVersionThan(Plugin previous) {
-		return _moduleId.isLaterVersionThan(
-				previous.getVersion());
+	public boolean isLaterVersionThan(Plugin plugin) {
+		return _moduleId.isLaterVersionThan(plugin.getVersion());
 	}
 
 	public String getAuthor() {
@@ -165,48 +165,52 @@ public class PluginImpl implements Plugin, Comparable {
 		return name;
 	}
 
-	public boolean equals(Object o) {
-
-		if (!(o instanceof Plugin)) {
-			return false;
-		}
-
-		Plugin p = (Plugin) o;
-
-		return new EqualsBuilder()
-				.append(getModuleId(), p.getModuleId())
-				.append(getRepositoryURL(), p.getRepositoryURL())
-				.isEquals();
-	}
-
-	public int hashCode() {
-		return new HashCodeBuilder().append(getModuleId())
-				.append(getRepositoryURL()).hashCode();
-	}
-
-	public int compareTo(Object o) {
-
-		if (!(o instanceof Plugin)) {
+	public int compareTo(Object obj) {
+		if (!(obj instanceof Plugin)) {
 			return -1;
 		}
 
-		Plugin p = (Plugin) o;
+		Plugin plugin = (Plugin)obj;
 
-		return getName().compareTo(p.getName());
+		return getName().compareTo(plugin.getName());
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof Plugin)) {
+			return false;
+		}
+
+		Plugin plugin = (Plugin)obj;
+
+		EqualsBuilder equalsBuilder = new EqualsBuilder();
+
+		equalsBuilder.append(getModuleId(), plugin.getModuleId());
+		equalsBuilder.append(getRepositoryURL(), plugin.getRepositoryURL());
+
+		return equalsBuilder.isEquals();
+	}
+
+	public int hashCode() {
+		HashCodeBuilder hashCodeBuilder = new HashCodeBuilder();
+
+		hashCodeBuilder.append(getModuleId());
+		hashCodeBuilder.append(getRepositoryURL());
+
+		return hashCodeBuilder.hashCode();
 	}
 
 	private ModuleId _moduleId;
 	private String _name;
 	private String _author;
 	private String _type;
-	private List   _tags = new ArrayList();
-	private List   _licenses = new ArrayList();
-	private List   _liferayVersions  = new ArrayList();
+	private List _tags = new ArrayList();
+	private List _licenses = new ArrayList();
+	private List _liferayVersions = new ArrayList();
 	private String _shortDescription;
 	private String _longDescription;
+	private List _screenshotURLs = new ArrayList();
 	private String _pageURL;
 	private String _repositoryURL;
 	private String _recommendedWARName;
-	private List _screenshotURLs = new ArrayList();
 
 }

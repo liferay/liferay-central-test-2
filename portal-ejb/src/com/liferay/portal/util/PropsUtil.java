@@ -94,13 +94,13 @@ public class PropsUtil {
 
 	// Plugin
 
+	public static final String PLUGIN_TYPES = "plugin.types";
+
 	public static final String PLUGIN_REPOSITORIES = "plugin.repositories";
 
 	public static final String PLUGIN_TIMEOUT_ARTIFACT = "plugin.timeout.artifact";
 
 	public static final String PLUGIN_TIMEOUT_LIST = "plugin.timeout.list";
-
-	public static final String PLUGIN_TYPES = "plugin.types";
 
 	// Resource Actions
 

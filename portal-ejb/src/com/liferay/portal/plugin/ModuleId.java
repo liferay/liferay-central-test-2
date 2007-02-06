@@ -31,11 +31,13 @@ import java.util.StringTokenizer;
  * <a href="ModuleId.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class ModuleId {
 
 	public ModuleId(String moduleId) {
 		StringTokenizer st = new StringTokenizer(moduleId, StringPool.SLASH);
+
 		_groupId = st.nextToken();
 		_artifactId = st.nextToken();
 		_pluginVersion = new Version(st.nextToken());
@@ -60,36 +62,36 @@ public class ModuleId {
 
 	public String getArtifactPath() {
 		return StringPool.SLASH + _groupId + StringPool.SLASH + _artifactId +
-				StringPool.SLASH + _pluginVersion + StringPool.SLASH +
+			StringPool.SLASH + _pluginVersion + StringPool.SLASH +
 				getArtifactWARName();
 	}
 
 	public String getArtifactWARName() {
-		return  _artifactId + StringPool.DASH + _pluginVersion +
-				StringPool.PERIOD + _type;
+		return _artifactId + StringPool.DASH + _pluginVersion +
+			StringPool.PERIOD + _type;
 	}
 
-	public String toString() {
-		return _groupId + StringPool.SLASH + _artifactId + StringPool.SLASH
-				+ _pluginVersion + StringPool.SLASH + _type;
+	public boolean isLaterVersionThan(String version) {
+		return _pluginVersion.isLaterVersionThan(version);
+	}
+
+	public boolean equals(Object obj) {
+		if (!(obj instanceof ModuleId)) {
+			return false;
+		}
+
+		ModuleId moduleId = (ModuleId)obj;
+
+		return toString().equals(moduleId.toString());
 	}
 
 	public int hashCode() {
 		return toString().hashCode();
 	}
 
-	public boolean equals(Object o) {
-		if (!(o instanceof ModuleId)) {
-			return false;
-		}
-
-		ModuleId m = (ModuleId) o;
-
-		return toString().equals(m.toString());
-	}
-
-	public boolean isLaterVersionThan(String version) {
-		return _pluginVersion.isLaterVersionThan(version);
+	public String toString() {
+		return _groupId + StringPool.SLASH + _artifactId + StringPool.SLASH +
+			_pluginVersion + StringPool.SLASH + _type;
 	}
 
 	private String _artifactId;

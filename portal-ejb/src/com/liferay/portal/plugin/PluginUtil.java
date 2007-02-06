@@ -68,6 +68,7 @@ import org.dom4j.io.SAXReader;
  * <a href="PluginUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class PluginUtil {
 
@@ -80,7 +81,7 @@ public class PluginUtil {
 	}
 
 	public static Plugin getPluginById(String moduleId, String repositoryURL)
-			throws DocumentException, IOException, PluginException {
+		throws DocumentException, IOException, PluginException {
 
 		return getRepository(repositoryURL).findPluginByModuleId(moduleId);
 	}
@@ -90,19 +91,21 @@ public class PluginUtil {
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			String repositoryURL = repositoryURLs[i];
+
 			try {
-				PluginRepository repo =  getRepository(repositoryURL);
-				return repo.findPluginByArtifactURL(url);
+				PluginRepository repository =  getRepository(repositoryURL);
+
+				return repository.findPluginByArtifactURL(url);
 			}
-			catch(PluginException e) {
-				_log.info("Error loading repository " + repositoryURL, e);
+			catch (PluginException pe) {
+				_log.info("Error loading repository " + repositoryURL, pe);
 			}
 		}
+
 		return null;
 	}
 
-	public static String[] getRepositoryURLs()
-			throws PluginException {
+	public static String[] getRepositoryURLs() throws PluginException {
 		try {
 			return PrefsPropsUtil.getStringArray(PropsUtil.PLUGIN_REPOSITORIES);
 		}
@@ -112,10 +115,10 @@ public class PluginUtil {
 	}
 
 	public static PluginRepository getRepository(String repositoryURL)
-			throws PluginException {
+		throws PluginException {
 
 		PluginRepository repository =
-				(PluginRepository)_repositoryCache.get(repositoryURL);
+			(PluginRepository)_repositoryCache.get(repositoryURL);
 
 		if (repository != null) {
 			return repository;
@@ -128,12 +131,13 @@ public class PluginUtil {
 		return PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
 	}
 
-	public static List search(
-			String type, String tags, String repositoryURL)
-			throws PluginException {
+	public static List search(String type, String tags, String repositoryURL)
+		throws PluginException {
 
 		SortedMap plugins = new TreeMap();
-		String[] repositoryURLs;
+
+		String[] repositoryURLs = null;
+
 		if (Validator.isNull(repositoryURL)) {
 			repositoryURLs = getRepositoryURLs();
 		}
@@ -142,27 +146,32 @@ public class PluginUtil {
 		}
 
 		for (int i = 0; i < repositoryURLs.length; i++) {
-			String repositoryURL2 = repositoryURLs[i];
 			try {
-				PluginRepository repository = getRepository(repositoryURL2);
+				PluginRepository repository = getRepository(repositoryURLs[i]);
+
 				Collection repoPlugins = repository.search(type, tags);
-				for (Iterator iterator = repoPlugins.iterator();
-					 iterator.hasNext();) {
+
+				Iterator itr = repoPlugins.iterator();
+
+				while (itr.hasNext()) {
+					Plugin plugin = (Plugin)itr.next();
 
 					// If the plugin was in another repository keep the
 					// latest version
 
-					Plugin plugin = (Plugin) iterator.next();
-					Plugin previous = (Plugin) plugins.get(plugin);
+					Plugin previous = (Plugin)plugins.get(plugin);
+
 					if ((previous != null) &&
-							plugin.isLaterVersionThan(previous)) {
+						plugin.isLaterVersionThan(previous)) {
+
 						plugins.remove(previous);
 					}
+
 					plugins.put(plugin, plugin);
 				}
 			}
-			catch(PluginException e) {
-				_log.info("Error loading repository " + repositoryURL, e);
+			catch(PluginException pe) {
+				_log.info("Error loading repository " + repositoryURL, pe);
 			}
 		}
 
@@ -170,17 +179,23 @@ public class PluginUtil {
 	}
 
 	public static RepositoryReport reloadRepositories() throws PluginException {
-		String[] repositoryURLs = getRepositoryURLs();
 		RepositoryReport report = new RepositoryReport();
+
+		String[] repositoryURLs = getRepositoryURLs();
+
 		for (int i = 0; i < repositoryURLs.length; i++) {
 			String repositoryURL = repositoryURLs[i];
+
 			try {
 				_loadRepository(repositoryURL);
+
 				report.addSuccess(repositoryURL);
 			}
 			catch(PluginException pe) {
 				report.addError(repositoryURL, pe);
-				_log.info("Error loading repository " + repositoryURL + ": " +
+
+				_log.info(
+					"Error loading repository " + repositoryURL + " " +
 						pe.toString());
 			}
 		}
@@ -188,26 +203,30 @@ public class PluginUtil {
 	}
 
 	private static PluginRepository _loadRepository(String repositoryURL)
-			throws PluginException {
-		PluginRepository repository;
-		String pluginsXmlURL = repositoryURL + StringPool.SLASH +
-				_PLUGINS_XML_FILENAME;
+		throws PluginException {
+
+		PluginRepository repository = null;
+
+		String pluginsXmlURL =
+			repositoryURL + StringPool.SLASH + _PLUGINS_XML_FILENAME;
 
 		try {
 			HttpClient client = new HttpClient();
 
 			int timeout = GetterUtil.getInteger(
-					PropsUtil.get(PropsUtil.PLUGIN_TIMEOUT_LIST));
-			client.getHttpConnectionManager().getParams().
-					setConnectionTimeout(timeout);
+				PropsUtil.get(PropsUtil.PLUGIN_TIMEOUT_LIST));
+
+			client.getHttpConnectionManager().getParams().setConnectionTimeout(
+				timeout);
+
 			GetMethod getFile = new GetMethod(pluginsXmlURL);
 
 			int responseCode = client.executeMethod(getFile);
 
 			if (responseCode != 200) {
 				throw new PluginException(
-						"Cannot download file: " + pluginsXmlURL + ". Response"
-								+ " code: " + responseCode);
+					"Cannot download file " + pluginsXmlURL +
+						" because of response code " + responseCode);
 			}
 
 			byte[] bytes = getFile.getResponseBody();
@@ -215,46 +234,49 @@ public class PluginUtil {
 			getFile.releaseConnection();
 
 			if ((bytes != null) && (bytes.length > 0)) {
-
-				repository =
-						_parsePluginsXml(new String(bytes), repositoryURL);
+				repository = _parsePluginsXml(new String(bytes), repositoryURL);
 
 				_repositoryCache.put(repositoryURL, repository);
 				_availableTagsCache.addAll(repository.getTags());
 				_lastUpdateDate = new Date();
+
 				return repository;
 			}
 			else {
 				_lastUpdateDate = new Date();
 
-				throw new PluginException("Download error");
+				throw new PluginException("Download returned 0 bytes");
 			}
 		}
 		catch (MalformedURLException mue) {
 			_repositoryCache.remove(repositoryURL);
 
-			throw new PluginException("Invalid URL:" + pluginsXmlURL, mue);
+			throw new PluginException("Invalid URL " + pluginsXmlURL, mue);
 		}
 		catch (IOException ioe) {
 			_repositoryCache.remove(repositoryURL);
 
-			throw new PluginException("Communication error with repository " +
-					repositoryURL, ioe);
+			throw new PluginException(
+				"Error communicating with repository " + repositoryURL, ioe);
 		}
 		catch (DocumentException de) {
 			_repositoryCache.remove(repositoryURL);
 
-			throw new PluginException("Parse error of plugin list for " +
-					"repository " + repositoryURL, de);
+			throw new PluginException(
+				"Error parsing plugin list for repository " + repositoryURL,
+				de);
 		}
 	}
 
 	private static PluginRepository _parsePluginsXml(
 			String xml, String repositoryURL)
-			throws DocumentException, IOException {
+		throws DocumentException, IOException {
+
 		List supportedPluginTypes = Arrays.asList(getSupportedTypes());
 
-		_log.debug("Plugins: " + xml);
+		if (_log.isDebugEnabled()) {
+			_log.debug("Plugins " + xml);
+		}
 
 		PluginRepository plugins = new PluginRepository();
 
@@ -268,54 +290,48 @@ public class PluginUtil {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr1 = root.elements().iterator();
+		Iterator itr = root.elements().iterator();
 
-		while (itr1.hasNext()) {
-			Element pluginElm = (Element)itr1.next();
+		while (itr.hasNext()) {
+			Element pluginEl = (Element)itr.next();
 
-			String pluginName = pluginElm.elementText("name");
+			String name = pluginEl.elementText("name");
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Reading plugin definition " + pluginName);
+				_log.debug("Reading plugin definition " + name);
 			}
 
 			Plugin plugin = new PluginImpl(
-					GetterUtil.getString(pluginElm.elementText("module-id")));
+				GetterUtil.getString(pluginEl.elementText("module-id")));
 
 			List liferayVersions = _readList(
-					pluginElm.element("liferay-versions"), "liferay-version");
-			String type = GetterUtil.getString(pluginElm.elementText("type"));
+				pluginEl.element("liferay-versions"), "liferay-version");
+
+			String type = GetterUtil.getString(pluginEl.elementText("type"));
 
 			if (!_isCurrentVersionSupported(liferayVersions) ||
-					!supportedPluginTypes.contains(type)) {
+				!supportedPluginTypes.contains(type)) {
+
 				continue;
 			}
 
-			plugin.setName(_readText(pluginElm.elementText("name")));
-			plugin.setAuthor(_readText(pluginElm.elementText("author")));
+			plugin.setName(_readText(name));
+			plugin.setAuthor(_readText(pluginEl.elementText("author")));
 			plugin.setType(type);
 			plugin.setLicenses(
-					_readLicenseList(pluginElm.element("licenses"), "license"));
+				_readLicenseList(pluginEl.element("licenses"), "license"));
 			plugin.setLiferayVersions(liferayVersions);
-
-			if (pluginElm.element("tags") != null) {
-				plugin.setTags(
-						_readList(pluginElm.element("tags"), "tag"));
-			}
+			plugin.setTags(_readList(pluginEl.element("tags"), "tag"));
 			plugin.setShortDescription(
-					_readText(pluginElm.elementText("short-description")));
+				_readText(pluginEl.elementText("short-description")));
 			plugin.setLongDescription(
-					_readHtml(pluginElm.elementText("long-description")));
-			plugin.setPageURL(_readText(pluginElm.elementText("page-url")));
+				_readHtml(pluginEl.elementText("long-description")));
+			plugin.setScreenshotURLs(
+				_readList(pluginEl.element("screenshots"), "screenshot-url"));
+			plugin.setPageURL(_readText(pluginEl.elementText("page-url")));
 			plugin.setRepositoryURL(repositoryURL);
 			plugin.setRecommendedWARName(
-					_readText(pluginElm.elementText("recommended-war-name")));
-
-			if (pluginElm.element("screenshots") != null) {
-				plugin.setScreenshotURLs(
-						_readList(
-						pluginElm.element("screenshots"), "screenshot-url"));
-			}
+				_readText(pluginEl.elementText("recommended-war-name")));
 
 			plugins.addPlugin(plugin);
 		}
@@ -324,14 +340,12 @@ public class PluginUtil {
 	}
 
 	private static boolean _isCurrentVersionSupported(List versions) {
-
 		for (int i = 0; i < versions.size(); i++) {
+			Version supportedVersion = new Version((String)versions.get(i));
 
-			Version supportedVersion = new Version((String) versions.get(i));
 			Version currentVersion = new Version(ReleaseInfo.getVersion());
 
-			boolean supported = supportedVersion.includes(currentVersion);
-			if (supported) {
+			if (supportedVersion.includes(currentVersion)) {
 				return true;
 			}
 		}
@@ -343,43 +357,27 @@ public class PluginUtil {
 		return XSSUtil.strip(GetterUtil.getString(text));
 	}
 
-	private static String _readText(String text) {
-		return Html.stripHtml(GetterUtil.getString(text));
-	}
-
-	private static List _readList(Element parent, String childTagName) {
-
-		List result = new ArrayList();
-
-		Iterator itr2 = parent.elements(childTagName).iterator();
-
-		while (itr2.hasNext()) {
-			Element tagEl = (Element)itr2.next();
-
-			result.add(tagEl.getText());
-		}
-
-		return result;
-	}
-
 	private static List _readLicenseList(Element parent, String childTagName) {
-
 		List result = new ArrayList();
 
-		Iterator itr2 = parent.elements(childTagName).iterator();
+		Iterator itr = parent.elements(childTagName).iterator();
 
-		while (itr2.hasNext()) {
-			Element tagEl = (Element)itr2.next();
+		while (itr.hasNext()) {
+			Element tagEl = (Element)itr.next();
+
 			License license = new License();
+
 			license.setName(tagEl.getText());
 
 			Attribute osiApproved = tagEl.attribute("osi-approved");
+
 			if (osiApproved != null) {
 				license.setOsiApproved(
-						GetterUtil.getBoolean(osiApproved.getText()));
+					GetterUtil.getBoolean(osiApproved.getText()));
 			}
 
 			Attribute url = tagEl.attribute("url");
+
 			if (url != null) {
 				license.setUrl(url.getText());
 			}
@@ -388,7 +386,26 @@ public class PluginUtil {
 		}
 
 		return result;
+	}
 
+	private static List _readList(Element parent, String childTagName) {
+		List result = new ArrayList();
+
+		if (parent != null) {
+			Iterator itr = parent.elements(childTagName).iterator();
+
+			while (itr.hasNext()) {
+				Element tagEl = (Element)itr.next();
+
+				result.add(tagEl.getText());
+			}
+		}
+
+		return result;
+	}
+
+	private static String _readText(String text) {
+		return Html.stripHtml(GetterUtil.getString(text));
 	}
 
 	private static final String _PLUGINS_XML_FILENAME = "liferay-plugins.xml";
@@ -396,7 +413,7 @@ public class PluginUtil {
 	private static Log _log = LogFactory.getLog(PluginUtil.class);
 
 	private static Map _repositoryCache = new HashMap();
-	private static Date _lastUpdateDate = null;
 	private static Set _availableTagsCache = new TreeSet();
+	private static Date _lastUpdateDate = null;
 
 }
