@@ -205,7 +205,7 @@ var Alerts = {
 			Liferay.Util.setSelectVisibility("hidden", lastMsg);
 		}
 
-		Liferay.Util.setSelectVisibility("visibile", message);
+		Liferay.Util.setSelectVisibility("visible", message);
 		
 		Alerts.message = message;
 		Alerts.messageArray.push(wrapper);
