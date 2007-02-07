@@ -65,19 +65,28 @@ public class StringUtil {
 		}
 
 		if (allowDuplicates || !contains(s, add, delimiter)) {
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(s);
+
 			if (Validator.isNull(s) || s.endsWith(delimiter)) {
-				s += add + delimiter;
+				sb.append(add);
+				sb.append(delimiter);
 			}
 			else {
-				s += delimiter + add + delimiter;
+				sb.append(delimiter);
+				sb.append(add);
+				sb.append(delimiter);
 			}
+
+			s = sb.toString();
 		}
 
 		return s;
 	}
 
 	public static String bytesToHexString(byte[] bytes) {
-		StringBuffer sb = new StringBuffer(bytes.length);
+		StringBuffer sb = new StringBuffer(bytes.length * 2);
 
 		for (int i = 0; i < bytes.length; i++) {
 			String hex = Integer.toHexString(
@@ -102,14 +111,36 @@ public class StringUtil {
 			return false;
 		}
 
+		StringBuffer sb = null;
+
 		if (!s.endsWith(delimiter)) {
-			s += delimiter;
+			sb = new StringBuffer();
+
+			sb.append(s);
+			sb.append(delimiter);
+
+			s = sb.toString();
 		}
 
-		int pos = s.indexOf(delimiter + text + delimiter);
+		sb = new StringBuffer();
+
+		sb.append(delimiter);
+		sb.append(text);
+		sb.append(delimiter);
+
+		String dtd = sb.toString();
+
+		int pos = s.indexOf(dtd);
 
 		if (pos == -1) {
-			if (s.startsWith(text + delimiter)) {
+			sb = new StringBuffer();
+
+			sb.append(text);
+			sb.append(delimiter);
+
+			String td = sb.toString();
+
+			if (s.startsWith(td)) {
 				return true;
 			}
 
@@ -130,6 +161,7 @@ public class StringUtil {
 
 		while (pos != -1) {
 			pos = s.indexOf(text, pos + text.length());
+
 			count++;
 		}
 
@@ -284,7 +316,8 @@ public class StringUtil {
 	}
 
 	public static String merge(List list, String delimiter) {
-		return merge((String[])list.toArray(new String[0]), delimiter);
+		return merge((String[])list.toArray(
+			new String[list.size()]), delimiter);
 	}
 
 	public static String merge(String[] array) {
@@ -384,11 +417,26 @@ public class StringUtil {
 			s += delimiter;
 		}
 
+		StringBuffer sb = new StringBuffer();
+
+		sb.append(delimiter);
+		sb.append(remove);
+		sb.append(delimiter);
+
+		String drd = sb.toString();
+
+		sb = new StringBuffer();
+
+		sb.append(remove);
+		sb.append(delimiter);
+
+		String rd = sb.toString();
+
 		while (contains(s, remove, delimiter)) {
-			int pos = s.indexOf(delimiter + remove + delimiter);
+			int pos = s.indexOf(drd);
 
 			if (pos == -1) {
-				if (s.startsWith(remove + delimiter)) {
+				if (s.startsWith(rd)) {
 					int x = remove.length() + delimiter.length();
 					int y = s.length();
 
@@ -399,7 +447,12 @@ public class StringUtil {
 				int x = pos + remove.length() + delimiter.length();
 				int y = s.length();
 
-				s = s.substring(0, pos) + s.substring(x, y);
+				sb = new StringBuffer();
+
+				sb.append(s.substring(0, pos));
+				sb.append(s.substring(x, y));
+
+				s =  sb.toString();
 			}
 		}
 
@@ -517,7 +570,12 @@ public class StringUtil {
 				}
 			}
 
-			s = s.substring(0, length) + suffix;
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(s.substring(0, length));
+			sb.append(suffix);
+
+			s =  sb.toString();
 		}
 
 		return s;
@@ -535,7 +593,12 @@ public class StringUtil {
 		s = s.trim();
 
 		if (!s.endsWith(delimiter)) {
-			s += delimiter;
+			StringBuffer sb = new StringBuffer();
+
+			sb.append(s);
+			sb.append(delimiter);
+
+			s = sb.toString();
 		}
 
 		if (s.equals(delimiter)) {
@@ -565,14 +628,14 @@ public class StringUtil {
 			int pos = s.indexOf(delimiter, offset);
 
 			while (pos != -1) {
-				nodeValues.add(s.substring(offset, pos));
+				nodeValues.add(new String(s.substring(offset, pos)));
 
 				offset = pos + delimiter.length();
 				pos = s.indexOf(delimiter, offset);
 			}
 		}
 
-		return (String[])nodeValues.toArray(new String[0]);
+		return (String[])nodeValues.toArray(new String[nodeValues.size()]);
 	}
 
 	public static boolean[] split(String s, boolean x) {
