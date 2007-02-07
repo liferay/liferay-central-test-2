@@ -241,7 +241,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -266,12 +267,13 @@ public class PermissionPersistence extends BasePersistence {
 		List list = findByResourceId(resourceId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Permission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "resourceId=";
-			msg += resourceId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Permission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("resourceId=");
+			msg.append(resourceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
 			return (Permission)list.get(0);
@@ -285,12 +287,13 @@ public class PermissionPersistence extends BasePersistence {
 		List list = findByResourceId(resourceId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Permission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "resourceId=";
-			msg += resourceId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Permission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("resourceId=");
+			msg.append(resourceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPermissionException(msg.toString());
 		}
 		else {
 			return (Permission)list.get(0);
@@ -313,7 +316,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -344,20 +348,21 @@ public class PermissionPersistence extends BasePersistence {
 		Permission permission = fetchByA_R(actionId, resourceId);
 
 		if (permission == null) {
-			String msg = "No Permission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "actionId=";
-			msg += actionId;
-			msg += ", ";
-			msg += "resourceId=";
-			msg += resourceId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Permission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("actionId=");
+			msg.append(actionId);
+			msg.append(", ");
+			msg.append("resourceId=");
+			msg.append(resourceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchPermissionException(msg);
+			throw new NoSuchPermissionException(msg.toString());
 		}
 
 		return permission;
@@ -471,7 +476,8 @@ public class PermissionPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Permission ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -651,16 +657,19 @@ public class PermissionPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETGROUPS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETGROUPS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "Group_.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("Group_.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Group_", com.liferay.portal.model.impl.GroupImpl.class);
@@ -886,16 +895,19 @@ public class PermissionPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETROLES;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETROLES);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "Role_.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("Role_.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
@@ -1121,12 +1133,15 @@ public class PermissionPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETUSERS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETUSERS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);

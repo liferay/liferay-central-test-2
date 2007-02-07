@@ -244,7 +244,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByNodeId(nodeId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -295,12 +297,13 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByNodeId(nodeId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -330,7 +333,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -453,7 +457,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -490,15 +495,16 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T(nodeId, title, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "title=";
-			msg += title;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("title=");
+			msg.append(title);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -511,15 +517,16 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T(nodeId, title, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "title=";
-			msg += title;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("title=");
+			msg.append(title);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -558,7 +565,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -669,7 +677,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -704,15 +713,16 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_H(nodeId, head, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "head=";
-			msg += head;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("head=");
+			msg.append(head);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -725,15 +735,16 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_H(nodeId, head, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "head=";
-			msg += head;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("head=");
+			msg.append(head);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -765,7 +776,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -896,7 +908,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -936,18 +949,19 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T_H(nodeId, title, head, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "title=";
-			msg += title;
-			msg += ", ";
-			msg += "head=";
-			msg += head;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("title=");
+			msg.append(title);
+			msg.append(", ");
+			msg.append("head=");
+			msg.append(head);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -960,18 +974,19 @@ public class WikiPagePersistence extends BasePersistence {
 		List list = findByN_T_H(nodeId, title, head, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No WikiPage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "nodeId=";
-			msg += nodeId;
-			msg += ", ";
-			msg += "title=";
-			msg += title;
-			msg += ", ";
-			msg += "head=";
-			msg += head;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No WikiPage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("nodeId=");
+			msg.append(nodeId);
+			msg.append(", ");
+			msg.append("title=");
+			msg.append(title);
+			msg.append(", ");
+			msg.append("head=");
+			msg.append(head);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPageException(msg.toString());
 		}
 		else {
 			return (WikiPage)list.get(0);
@@ -1012,7 +1027,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1110,7 +1126,8 @@ public class WikiPagePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.wiki.model.WikiPage ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

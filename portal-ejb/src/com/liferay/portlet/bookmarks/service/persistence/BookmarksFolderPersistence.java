@@ -231,7 +231,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -260,12 +261,13 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (BookmarksFolder)list.get(0);
@@ -278,12 +280,13 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (BookmarksFolder)list.get(0);
@@ -307,7 +310,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -411,7 +415,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -444,15 +449,16 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentFolderId=";
-			msg += parentFolderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (BookmarksFolder)list.get(0);
@@ -465,15 +471,16 @@ public class BookmarksFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentFolderId=";
-			msg += parentFolderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (BookmarksFolder)list.get(0);
@@ -506,7 +513,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -600,7 +608,8 @@ public class BookmarksFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksFolder ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

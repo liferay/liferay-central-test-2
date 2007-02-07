@@ -246,7 +246,8 @@ public class PollsChoicePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class PollsChoicePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsChoice exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchChoiceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsChoice exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchChoiceException(msg.toString());
 		}
 		else {
 			return (PollsChoice)list.get(0);
@@ -295,12 +297,13 @@ public class PollsChoicePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsChoice exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchChoiceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsChoice exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchChoiceException(msg.toString());
 		}
 		else {
 			return (PollsChoice)list.get(0);
@@ -331,7 +334,8 @@ public class PollsChoicePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -422,7 +426,8 @@ public class PollsChoicePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.polls.model.PollsChoice ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

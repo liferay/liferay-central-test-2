@@ -241,7 +241,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -269,12 +270,13 @@ public class UserTrackerPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
 			return (UserTracker)list.get(0);
@@ -288,12 +290,13 @@ public class UserTrackerPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
 			return (UserTracker)list.get(0);
@@ -323,7 +326,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -414,7 +418,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -441,12 +446,13 @@ public class UserTrackerPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
 			return (UserTracker)list.get(0);
@@ -459,12 +465,13 @@ public class UserTrackerPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserTrackerException(msg.toString());
 		}
 		else {
 			return (UserTracker)list.get(0);
@@ -494,7 +501,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -581,7 +589,8 @@ public class UserTrackerPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.UserTracker ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

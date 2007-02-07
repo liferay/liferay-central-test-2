@@ -222,7 +222,8 @@ public class CountryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -250,12 +251,13 @@ public class CountryPersistence extends BasePersistence {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Country exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCountryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Country exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
 			return (Country)list.get(0);
@@ -268,12 +270,13 @@ public class CountryPersistence extends BasePersistence {
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Country exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCountryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Country exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCountryException(msg.toString());
 		}
 		else {
 			return (Country)list.get(0);
@@ -295,7 +298,8 @@ public class CountryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -382,7 +386,8 @@ public class CountryPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Country ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

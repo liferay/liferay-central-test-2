@@ -235,7 +235,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -260,12 +261,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -279,12 +281,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -309,7 +312,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -399,7 +403,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -427,12 +432,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -446,12 +452,13 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -483,7 +490,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -599,7 +607,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -631,15 +640,16 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByL_O(layoutId, ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += ", ";
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -653,15 +663,16 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByL_O(layoutId, ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += ", ";
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -702,7 +713,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -828,7 +840,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -862,18 +875,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByO_G_A(ownerId, groupId, articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "articleId=";
-			msg += articleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -888,18 +902,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "articleId=";
-			msg += articleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -942,7 +957,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1070,7 +1086,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1104,18 +1121,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 		List list = findByC_G_A(companyId, groupId, articleId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "articleId=";
-			msg += articleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -1130,18 +1148,19 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalContentSearch exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "articleId=";
-			msg += articleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchContentSearchException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalContentSearch exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("articleId=");
+			msg.append(articleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchContentSearchException(msg.toString());
 		}
 		else {
 			return (JournalContentSearch)list.get(0);
@@ -1184,7 +1203,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1278,7 +1298,8 @@ public class JournalContentSearchPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.journal.model.JournalContentSearch ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

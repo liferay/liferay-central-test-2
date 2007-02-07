@@ -233,7 +233,8 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -262,12 +263,13 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (ShoppingCategory)list.get(0);
@@ -280,12 +282,13 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (ShoppingCategory)list.get(0);
@@ -309,7 +312,8 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -413,7 +417,8 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -447,15 +452,16 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentCategoryId=";
-			msg += parentCategoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentCategoryId=");
+			msg.append(parentCategoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (ShoppingCategory)list.get(0);
@@ -469,15 +475,16 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentCategoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentCategoryId=";
-			msg += parentCategoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentCategoryId=");
+			msg.append(parentCategoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (ShoppingCategory)list.get(0);
@@ -510,7 +517,8 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -604,7 +612,8 @@ public class ShoppingCategoryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingCategory ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

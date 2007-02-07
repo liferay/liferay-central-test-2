@@ -232,7 +232,8 @@ public class ReleasePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Release ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

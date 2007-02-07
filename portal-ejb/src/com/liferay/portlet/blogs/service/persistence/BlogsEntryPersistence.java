@@ -227,7 +227,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -255,12 +256,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -273,12 +275,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -301,7 +304,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -397,7 +401,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -428,12 +433,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -446,12 +452,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -482,7 +489,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -581,7 +589,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -612,12 +621,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -630,12 +640,13 @@ public class BlogsEntryPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BlogsEntry)list.get(0);
@@ -666,7 +677,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -757,7 +769,8 @@ public class BlogsEntryPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.blogs.model.BlogsEntry ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

@@ -185,20 +185,21 @@ public class RatingsStatsPersistence extends BasePersistence {
 		RatingsStats ratingsStats = fetchByC_C(className, classPK);
 
 		if (ratingsStats == null) {
-			String msg = "No RatingsStats exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No RatingsStats exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchStatsException(msg);
+			throw new NoSuchStatsException(msg.toString());
 		}
 
 		return ratingsStats;
@@ -322,7 +323,8 @@ public class RatingsStatsPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.ratings.model.RatingsStats ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

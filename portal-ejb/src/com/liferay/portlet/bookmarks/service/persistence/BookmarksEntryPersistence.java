@@ -246,7 +246,8 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -278,12 +279,13 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BookmarksEntry)list.get(0);
@@ -296,12 +298,13 @@ public class BookmarksEntryPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BookmarksEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BookmarksEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (BookmarksEntry)list.get(0);
@@ -332,7 +335,8 @@ public class BookmarksEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -425,7 +429,8 @@ public class BookmarksEntryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.bookmarks.model.BookmarksEntry ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

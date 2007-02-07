@@ -242,7 +242,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -269,12 +270,13 @@ public class PollsVotePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsVote exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchVoteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
 			return (PollsVote)list.get(0);
@@ -287,12 +289,13 @@ public class PollsVotePersistence extends BasePersistence {
 		List list = findByQuestionId(questionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsVote exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchVoteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
 			return (PollsVote)list.get(0);
@@ -323,7 +326,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -439,7 +443,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -470,15 +475,16 @@ public class PollsVotePersistence extends BasePersistence {
 		List list = findByQ_C(questionId, choiceId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsVote exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += ", ";
-			msg += "choiceId=";
-			msg += choiceId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchVoteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(", ");
+			msg.append("choiceId=");
+			msg.append(choiceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
 			return (PollsVote)list.get(0);
@@ -491,15 +497,16 @@ public class PollsVotePersistence extends BasePersistence {
 		List list = findByQ_C(questionId, choiceId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PollsVote exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "questionId=";
-			msg += questionId;
-			msg += ", ";
-			msg += "choiceId=";
-			msg += choiceId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchVoteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PollsVote exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("questionId=");
+			msg.append(questionId);
+			msg.append(", ");
+			msg.append("choiceId=");
+			msg.append(choiceId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchVoteException(msg.toString());
 		}
 		else {
 			return (PollsVote)list.get(0);
@@ -539,7 +546,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -630,7 +638,8 @@ public class PollsVotePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.polls.model.PollsVote ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

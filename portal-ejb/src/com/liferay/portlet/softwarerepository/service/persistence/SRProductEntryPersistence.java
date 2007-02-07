@@ -247,7 +247,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -295,12 +297,13 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -324,7 +327,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -422,7 +426,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -455,12 +460,13 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -474,12 +480,13 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -510,7 +517,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -617,7 +625,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -651,15 +660,16 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByG_U(groupId, userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -673,15 +683,16 @@ public class SRProductEntryPersistence extends BasePersistence {
 		List list = findByG_U(groupId, userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductEntryException(msg.toString());
 		}
 		else {
 			return (SRProductEntry)list.get(0);
@@ -714,7 +725,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -808,7 +820,8 @@ public class SRProductEntryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductEntry ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1057,16 +1070,19 @@ public class SRProductEntryPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETSRLICENSES;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETSRLICENSES);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "SRLicense.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("SRLicense.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("SRLicense",

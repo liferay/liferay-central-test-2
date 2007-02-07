@@ -226,7 +226,8 @@ public class ShoppingCartPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -250,12 +251,13 @@ public class ShoppingCartPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCart exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCartException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCart exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCartException(msg.toString());
 		}
 		else {
 			return (ShoppingCart)list.get(0);
@@ -268,12 +270,13 @@ public class ShoppingCartPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCart exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCartException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCart exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCartException(msg.toString());
 		}
 		else {
 			return (ShoppingCart)list.get(0);
@@ -297,7 +300,8 @@ public class ShoppingCartPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -387,7 +391,8 @@ public class ShoppingCartPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -414,12 +419,13 @@ public class ShoppingCartPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCart exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCartException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCart exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCartException(msg.toString());
 		}
 		else {
 			return (ShoppingCart)list.get(0);
@@ -432,12 +438,13 @@ public class ShoppingCartPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingCart exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCartException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingCart exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCartException(msg.toString());
 		}
 		else {
 			return (ShoppingCart)list.get(0);
@@ -468,7 +475,8 @@ public class ShoppingCartPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -556,7 +564,8 @@ public class ShoppingCartPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingCart ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

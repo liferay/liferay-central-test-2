@@ -255,7 +255,8 @@ public class UserGroupPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -286,12 +287,13 @@ public class UserGroupPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroup exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroup exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupException(msg.toString());
 		}
 		else {
 			return (UserGroup)list.get(0);
@@ -304,12 +306,13 @@ public class UserGroupPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroup exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroup exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupException(msg.toString());
 		}
 		else {
 			return (UserGroup)list.get(0);
@@ -339,7 +342,8 @@ public class UserGroupPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -459,7 +463,8 @@ public class UserGroupPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -495,15 +500,16 @@ public class UserGroupPersistence extends BasePersistence {
 		List list = findByC_P(companyId, parentUserGroupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroup exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "parentUserGroupId=";
-			msg += parentUserGroupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroup exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("parentUserGroupId=");
+			msg.append(parentUserGroupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupException(msg.toString());
 		}
 		else {
 			return (UserGroup)list.get(0);
@@ -517,15 +523,16 @@ public class UserGroupPersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroup exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "parentUserGroupId=";
-			msg += parentUserGroupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroup exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("parentUserGroupId=");
+			msg.append(parentUserGroupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupException(msg.toString());
 		}
 		else {
 			return (UserGroup)list.get(0);
@@ -564,7 +571,8 @@ public class UserGroupPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -606,20 +614,21 @@ public class UserGroupPersistence extends BasePersistence {
 		UserGroup userGroup = fetchByC_N(companyId, name);
 
 		if (userGroup == null) {
-			String msg = "No UserGroup exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroup exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchUserGroupException(msg);
+			throw new NoSuchUserGroupException(msg.toString());
 		}
 
 		return userGroup;
@@ -744,7 +753,8 @@ public class UserGroupPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.UserGroup ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1019,12 +1029,15 @@ public class UserGroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETUSERS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETUSERS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);

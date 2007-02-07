@@ -233,7 +233,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -261,12 +262,13 @@ public class JournalStructurePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalStructure exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStructureException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalStructure exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
 			return (JournalStructure)list.get(0);
@@ -279,12 +281,13 @@ public class JournalStructurePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalStructure exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStructureException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalStructure exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
 			return (JournalStructure)list.get(0);
@@ -308,7 +311,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -427,7 +431,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -463,15 +468,16 @@ public class JournalStructurePersistence extends BasePersistence {
 		List list = findByC_S(companyId, structureId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalStructure exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "structureId=";
-			msg += structureId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStructureException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalStructure exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("structureId=");
+			msg.append(structureId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
 			return (JournalStructure)list.get(0);
@@ -485,15 +491,16 @@ public class JournalStructurePersistence extends BasePersistence {
 		List list = findByC_S(companyId, structureId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No JournalStructure exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "structureId=";
-			msg += structureId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStructureException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No JournalStructure exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("structureId=");
+			msg.append(structureId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStructureException(msg.toString());
 		}
 		else {
 			return (JournalStructure)list.get(0);
@@ -534,7 +541,8 @@ public class JournalStructurePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -630,7 +638,8 @@ public class JournalStructurePersistence extends BasePersistence {
 				"FROM com.liferay.portlet.journal.model.JournalStructure ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

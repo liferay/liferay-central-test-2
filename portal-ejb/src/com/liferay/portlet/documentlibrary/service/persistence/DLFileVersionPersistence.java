@@ -273,7 +273,8 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -311,15 +312,16 @@ public class DLFileVersionPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
 			return (DLFileVersion)list.get(0);
@@ -333,15 +335,16 @@ public class DLFileVersionPersistence extends BasePersistence {
 		List list = findByF_N(folderId, name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileVersionException(msg.toString());
 		}
 		else {
 			return (DLFileVersion)list.get(0);
@@ -382,7 +385,8 @@ public class DLFileVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -480,7 +484,8 @@ public class DLFileVersionPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileVersion ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

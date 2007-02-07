@@ -248,7 +248,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class SRProductVersionPersistence extends BasePersistence {
 		List list = findByProductEntryId(productEntryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "productEntryId=";
-			msg += productEntryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("productEntryId=");
+			msg.append(productEntryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductVersionException(msg.toString());
 		}
 		else {
 			return (SRProductVersion)list.get(0);
@@ -296,12 +298,13 @@ public class SRProductVersionPersistence extends BasePersistence {
 		List list = findByProductEntryId(productEntryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRProductVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "productEntryId=";
-			msg += productEntryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchProductVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRProductVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("productEntryId=");
+			msg.append(productEntryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchProductVersionException(msg.toString());
 		}
 		else {
 			return (SRProductVersion)list.get(0);
@@ -325,7 +328,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -414,7 +418,8 @@ public class SRProductVersionPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.softwarerepository.model.SRProductVersion ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -544,18 +549,21 @@ public class SRProductVersionPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETSRFRAMEWORKVERSIONS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETSRFRAMEWORKVERSIONS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "SRFrameworkVersion.priority ASC";
-				sql += ", ";
-				sql += "SRFrameworkVersion.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("SRFrameworkVersion.priority ASC");
+				sb.append(", ");
+				sb.append("SRFrameworkVersion.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("SRFrameworkVersion",

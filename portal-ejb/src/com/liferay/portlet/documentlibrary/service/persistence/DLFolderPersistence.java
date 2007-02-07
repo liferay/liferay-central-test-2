@@ -228,7 +228,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -257,12 +258,13 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -275,12 +277,13 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -303,7 +306,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -400,7 +404,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -432,12 +437,13 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -450,12 +456,13 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -486,7 +493,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -592,7 +600,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -625,15 +634,16 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentFolderId=";
-			msg += parentFolderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -646,15 +656,16 @@ public class DLFolderPersistence extends BasePersistence {
 		List list = findByG_P(groupId, parentFolderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "parentFolderId=";
-			msg += parentFolderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFolderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFolderException(msg.toString());
 		}
 		else {
 			return (DLFolder)list.get(0);
@@ -687,7 +698,8 @@ public class DLFolderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -726,20 +738,21 @@ public class DLFolderPersistence extends BasePersistence {
 		DLFolder dlFolder = fetchByP_N(parentFolderId, name);
 
 		if (dlFolder == null) {
-			String msg = "No DLFolder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "parentFolderId=";
-			msg += parentFolderId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFolder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("parentFolderId=");
+			msg.append(parentFolderId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchFolderException(msg);
+			throw new NoSuchFolderException(msg.toString());
 		}
 
 		return dlFolder;
@@ -867,7 +880,8 @@ public class DLFolderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFolder ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

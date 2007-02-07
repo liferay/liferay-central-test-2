@@ -239,7 +239,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -271,12 +272,13 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Layout exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
 			return (Layout)list.get(0);
@@ -289,12 +291,13 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Layout exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
 			return (Layout)list.get(0);
@@ -324,7 +327,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -445,7 +449,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -481,15 +486,16 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByO_P(ownerId, parentLayoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Layout exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += ", ";
-			msg += "parentLayoutId=";
-			msg += parentLayoutId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("parentLayoutId=");
+			msg.append(parentLayoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
 			return (Layout)list.get(0);
@@ -502,15 +508,16 @@ public class LayoutPersistence extends BasePersistence {
 		List list = findByO_P(ownerId, parentLayoutId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Layout exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += ", ";
-			msg += "parentLayoutId=";
-			msg += parentLayoutId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("parentLayoutId=");
+			msg.append(parentLayoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutException(msg.toString());
 		}
 		else {
 			return (Layout)list.get(0);
@@ -549,7 +556,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -591,20 +599,21 @@ public class LayoutPersistence extends BasePersistence {
 		Layout layout = fetchByO_F(ownerId, friendlyURL);
 
 		if (layout == null) {
-			String msg = "No Layout exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += ", ";
-			msg += "friendlyURL=";
-			msg += friendlyURL;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Layout exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(", ");
+			msg.append("friendlyURL=");
+			msg.append(friendlyURL);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchLayoutException(msg);
+			throw new NoSuchLayoutException(msg.toString());
 		}
 
 		return layout;
@@ -730,7 +739,8 @@ public class LayoutPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Layout ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

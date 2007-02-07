@@ -267,7 +267,8 @@ public class RatingsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -298,15 +299,16 @@ public class RatingsEntryPersistence extends BasePersistence {
 		List list = findByC_C(className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No RatingsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No RatingsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (RatingsEntry)list.get(0);
@@ -319,15 +321,16 @@ public class RatingsEntryPersistence extends BasePersistence {
 		List list = findByC_C(className, classPK, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No RatingsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No RatingsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEntryException(msg.toString());
 		}
 		else {
 			return (RatingsEntry)list.get(0);
@@ -367,7 +370,8 @@ public class RatingsEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -405,23 +409,24 @@ public class RatingsEntryPersistence extends BasePersistence {
 		RatingsEntry ratingsEntry = fetchByU_C_C(userId, className, classPK);
 
 		if (ratingsEntry == null) {
-			String msg = "No RatingsEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No RatingsEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchEntryException(msg);
+			throw new NoSuchEntryException(msg.toString());
 		}
 
 		return ratingsEntry;
@@ -558,7 +563,8 @@ public class RatingsEntryPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.ratings.model.RatingsEntry ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

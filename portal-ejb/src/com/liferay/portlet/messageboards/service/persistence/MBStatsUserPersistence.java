@@ -229,7 +229,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -257,12 +258,13 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -275,12 +277,13 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -304,7 +307,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -400,7 +404,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -431,12 +436,13 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -449,12 +455,13 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -485,7 +492,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -573,7 +581,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -602,15 +611,16 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByG_M(groupId, messageCount, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "messageCount=";
-			msg += messageCount;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("messageCount=");
+			msg.append(messageCount);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -623,15 +633,16 @@ public class MBStatsUserPersistence extends BasePersistence {
 		List list = findByG_M(groupId, messageCount, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBStatsUser exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "messageCount=";
-			msg += messageCount;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchStatsUserException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBStatsUser exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("messageCount=");
+			msg.append(messageCount);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchStatsUserException(msg.toString());
 		}
 		else {
 			return (MBStatsUser)list.get(0);
@@ -657,7 +668,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -747,7 +759,8 @@ public class MBStatsUserPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBStatsUser ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

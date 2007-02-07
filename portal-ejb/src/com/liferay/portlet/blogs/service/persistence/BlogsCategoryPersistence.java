@@ -248,7 +248,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -279,12 +280,13 @@ public class BlogsCategoryPersistence extends BasePersistence {
 		List list = findByParentCategoryId(parentCategoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "parentCategoryId=";
-			msg += parentCategoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("parentCategoryId=");
+			msg.append(parentCategoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (BlogsCategory)list.get(0);
@@ -298,12 +300,13 @@ public class BlogsCategoryPersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			String msg = "No BlogsCategory exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "parentCategoryId=";
-			msg += parentCategoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchCategoryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No BlogsCategory exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("parentCategoryId=");
+			msg.append(parentCategoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchCategoryException(msg.toString());
 		}
 		else {
 			return (BlogsCategory)list.get(0);
@@ -334,7 +337,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -425,7 +429,8 @@ public class BlogsCategoryPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.blogs.model.BlogsCategory ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

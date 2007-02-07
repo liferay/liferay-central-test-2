@@ -245,7 +245,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -295,12 +297,13 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -331,7 +334,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -432,7 +436,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -464,12 +469,13 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByThreadId(threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "threadId=";
-			msg += threadId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -482,12 +488,13 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByThreadId(threadId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "threadId=";
-			msg += threadId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -518,7 +525,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -642,7 +650,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -678,15 +687,16 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByC_T(categoryId, threadId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += ", ";
-			msg += "threadId=";
-			msg += threadId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(", ");
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -699,15 +709,16 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByC_T(categoryId, threadId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += ", ";
-			msg += "threadId=";
-			msg += threadId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(", ");
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -747,7 +758,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -875,7 +887,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -911,15 +924,16 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByT_P(threadId, parentMessageId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "threadId=";
-			msg += threadId;
-			msg += ", ";
-			msg += "parentMessageId=";
-			msg += parentMessageId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(", ");
+			msg.append("parentMessageId=");
+			msg.append(parentMessageId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -932,15 +946,16 @@ public class MBMessagePersistence extends BasePersistence {
 		List list = findByT_P(threadId, parentMessageId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessage exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "threadId=";
-			msg += threadId;
-			msg += ", ";
-			msg += "parentMessageId=";
-			msg += parentMessageId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessage exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("threadId=");
+			msg.append(threadId);
+			msg.append(", ");
+			msg.append("parentMessageId=");
+			msg.append(parentMessageId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageException(msg.toString());
 		}
 		else {
 			return (MBMessage)list.get(0);
@@ -980,7 +995,8 @@ public class MBMessagePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1077,7 +1093,8 @@ public class MBMessagePersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBMessage ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

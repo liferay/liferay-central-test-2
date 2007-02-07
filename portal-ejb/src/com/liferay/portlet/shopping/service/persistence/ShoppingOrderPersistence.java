@@ -274,7 +274,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -311,18 +312,19 @@ public class ShoppingOrderPersistence extends BasePersistence {
 		List list = findByG_U_PPPS(groupId, userId, ppPaymentStatus, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingOrder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += ", ";
-			msg += "ppPaymentStatus=";
-			msg += ppPaymentStatus;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingOrder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("ppPaymentStatus=");
+			msg.append(ppPaymentStatus);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
 			return (ShoppingOrder)list.get(0);
@@ -337,18 +339,19 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingOrder exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += ", ";
-			msg += "ppPaymentStatus=";
-			msg += ppPaymentStatus;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrderException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingOrder exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("ppPaymentStatus=");
+			msg.append(ppPaymentStatus);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrderException(msg.toString());
 		}
 		else {
 			return (ShoppingOrder)list.get(0);
@@ -390,7 +393,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -487,7 +491,8 @@ public class ShoppingOrderPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingOrder ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

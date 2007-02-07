@@ -258,7 +258,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -289,12 +290,13 @@ public class ShoppingItemPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingItem exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchItemException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingItem exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchItemException(msg.toString());
 		}
 		else {
 			return (ShoppingItem)list.get(0);
@@ -307,12 +309,13 @@ public class ShoppingItemPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingItem exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchItemException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingItem exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchItemException(msg.toString());
 		}
 		else {
 			return (ShoppingItem)list.get(0);
@@ -343,7 +346,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -381,20 +385,21 @@ public class ShoppingItemPersistence extends BasePersistence {
 		ShoppingItem shoppingItem = fetchByC_S(companyId, sku);
 
 		if (shoppingItem == null) {
-			String msg = "No ShoppingItem exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "sku=";
-			msg += sku;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingItem exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("sku=");
+			msg.append(sku);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchItemException(msg);
+			throw new NoSuchItemException(msg.toString());
 		}
 
 		return shoppingItem;
@@ -521,7 +526,8 @@ public class ShoppingItemPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingItem ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -726,18 +732,21 @@ public class ShoppingItemPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETSHOPPINGITEMPRICES;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETSHOPPINGITEMPRICES);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "ShoppingItemPrice.itemId ASC";
-				sql += ", ";
-				sql += "ShoppingItemPrice.itemPriceId ASC";
+				sb.append("ORDER BY ");
+				sb.append("ShoppingItemPrice.itemId ASC");
+				sb.append(", ");
+				sb.append("ShoppingItemPrice.itemPriceId ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("ShoppingItemPrice",

@@ -247,7 +247,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -279,12 +280,13 @@ public class DLFileEntryPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
 			return (DLFileEntry)list.get(0);
@@ -297,12 +299,13 @@ public class DLFileEntryPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileEntry exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileEntryException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileEntry exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileEntryException(msg.toString());
 		}
 		else {
 			return (DLFileEntry)list.get(0);
@@ -333,7 +336,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -426,7 +430,8 @@ public class DLFileEntryPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileEntry ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

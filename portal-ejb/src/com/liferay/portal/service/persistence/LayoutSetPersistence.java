@@ -221,7 +221,8 @@ public class LayoutSetPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -245,12 +246,13 @@ public class LayoutSetPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No LayoutSet exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutSetException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No LayoutSet exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutSetException(msg.toString());
 		}
 		else {
 			return (LayoutSet)list.get(0);
@@ -263,12 +265,13 @@ public class LayoutSetPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No LayoutSet exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLayoutSetException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No LayoutSet exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLayoutSetException(msg.toString());
 		}
 		else {
 			return (LayoutSet)list.get(0);
@@ -290,7 +293,8 @@ public class LayoutSetPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -321,20 +325,21 @@ public class LayoutSetPersistence extends BasePersistence {
 		LayoutSet layoutSet = fetchByC_V(companyId, virtualHost);
 
 		if (layoutSet == null) {
-			String msg = "No LayoutSet exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "virtualHost=";
-			msg += virtualHost;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No LayoutSet exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("virtualHost=");
+			msg.append(virtualHost);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchLayoutSetException(msg);
+			throw new NoSuchLayoutSetException(msg.toString());
 		}
 
 		return layoutSet;
@@ -457,7 +462,8 @@ public class LayoutSetPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.LayoutSet ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

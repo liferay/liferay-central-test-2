@@ -239,7 +239,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -270,12 +271,13 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -288,12 +290,13 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -323,7 +326,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -419,7 +423,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -450,12 +455,13 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -468,12 +474,13 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -502,7 +509,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -621,7 +629,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -656,15 +665,16 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C(companyId, className, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -677,15 +687,16 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C(companyId, className, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -724,7 +735,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -869,7 +881,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -909,18 +922,19 @@ public class WebsitePersistence extends BasePersistence {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -935,18 +949,19 @@ public class WebsitePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -994,7 +1009,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1152,7 +1168,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1195,21 +1212,22 @@ public class WebsitePersistence extends BasePersistence {
 				obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += ", ";
-			msg += "primary=";
-			msg += primary;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(", ");
+			msg.append("primary=");
+			msg.append(primary);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -1224,21 +1242,22 @@ public class WebsitePersistence extends BasePersistence {
 				count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Website exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += ", ";
-			msg += "primary=";
-			msg += primary;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchWebsiteException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Website exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(", ");
+			msg.append("primary=");
+			msg.append(primary);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchWebsiteException(msg.toString());
 		}
 		else {
 			return (Website)list.get(0);
@@ -1288,7 +1307,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -1388,7 +1408,8 @@ public class WebsitePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Website ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

@@ -230,7 +230,8 @@ public class ImagePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Image ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

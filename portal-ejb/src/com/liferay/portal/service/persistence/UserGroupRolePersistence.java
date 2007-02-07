@@ -250,7 +250,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -280,15 +281,16 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByU_G(userId, groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -302,15 +304,16 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByU_G(userId, groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += ", ";
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(", ");
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -343,7 +346,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -436,7 +440,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -463,12 +468,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -481,12 +487,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -516,7 +523,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -590,7 +598,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -614,12 +623,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -632,12 +642,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -660,7 +671,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -748,7 +760,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -775,12 +788,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByRoleId(roleId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "roleId=";
-			msg += roleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("roleId=");
+			msg.append(roleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -793,12 +807,13 @@ public class UserGroupRolePersistence extends BasePersistence {
 		List list = findByRoleId(roleId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No UserGroupRole exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "roleId=";
-			msg += roleId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchUserGroupRoleException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No UserGroupRole exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("roleId=");
+			msg.append(roleId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchUserGroupRoleException(msg.toString());
 		}
 		else {
 			return (UserGroupRole)list.get(0);
@@ -828,7 +843,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -915,7 +931,8 @@ public class UserGroupRolePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.UserGroupRole ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

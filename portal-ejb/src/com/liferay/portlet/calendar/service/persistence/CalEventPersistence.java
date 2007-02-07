@@ -226,7 +226,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -255,12 +256,13 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -273,12 +275,13 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -301,7 +304,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -403,7 +407,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -436,15 +441,16 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByG_T(groupId, type, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "type=";
-			msg += type;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("type=");
+			msg.append(type);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -457,15 +463,16 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByG_T(groupId, type, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "type=";
-			msg += type;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("type=");
+			msg.append(type);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -498,7 +505,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -588,7 +596,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -618,15 +627,16 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByG_R(groupId, repeating, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "repeating=";
-			msg += repeating;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("repeating=");
+			msg.append(repeating);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -639,15 +649,16 @@ public class CalEventPersistence extends BasePersistence {
 		List list = findByG_R(groupId, repeating, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No CalEvent exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "repeating=";
-			msg += repeating;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchEventException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No CalEvent exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("repeating=");
+			msg.append(repeating);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchEventException(msg.toString());
 		}
 		else {
 			return (CalEvent)list.get(0);
@@ -673,7 +684,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -762,7 +774,8 @@ public class CalEventPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.calendar.model.CalEvent ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

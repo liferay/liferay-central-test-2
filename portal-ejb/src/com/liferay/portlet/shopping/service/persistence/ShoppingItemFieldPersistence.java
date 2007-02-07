@@ -250,7 +250,8 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -282,12 +283,13 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		List list = findByItemId(itemId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingItemField exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "itemId=";
-			msg += itemId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchItemFieldException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingItemField exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("itemId=");
+			msg.append(itemId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchItemFieldException(msg.toString());
 		}
 		else {
 			return (ShoppingItemField)list.get(0);
@@ -300,12 +302,13 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 		List list = findByItemId(itemId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ShoppingItemField exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "itemId=";
-			msg += itemId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchItemFieldException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ShoppingItemField exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("itemId=");
+			msg.append(itemId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchItemFieldException(msg.toString());
 		}
 		else {
 			return (ShoppingItemField)list.get(0);
@@ -336,7 +339,8 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -429,7 +433,8 @@ public class ShoppingItemFieldPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.shopping.model.ShoppingItemField ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

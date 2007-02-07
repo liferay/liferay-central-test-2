@@ -236,7 +236,8 @@ public class TagsSourcePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.tags.model.TagsSource ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

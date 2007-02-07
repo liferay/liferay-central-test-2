@@ -246,7 +246,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -274,12 +275,13 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByTopicId(topicId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -293,12 +295,13 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByTopicId(topicId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -329,7 +332,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -422,7 +426,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -449,12 +454,13 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -467,12 +473,13 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -503,7 +510,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -619,7 +627,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -651,15 +660,16 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByT_M(topicId, messageId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += ", ";
-			msg += "messageId=";
-			msg += messageId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(", ");
+			msg.append("messageId=");
+			msg.append(messageId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -673,15 +683,16 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByT_M(topicId, messageId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += ", ";
-			msg += "messageId=";
-			msg += messageId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(", ");
+			msg.append("messageId=");
+			msg.append(messageId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -722,7 +733,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -842,7 +854,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -874,15 +887,16 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByT_U(topicId, userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -896,15 +910,16 @@ public class MBMessageFlagPersistence extends BasePersistence {
 		List list = findByT_U(topicId, userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBMessageFlag exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "topicId=";
-			msg += topicId;
-			msg += ", ";
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchMessageFlagException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBMessageFlag exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("topicId=");
+			msg.append(topicId);
+			msg.append(", ");
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchMessageFlagException(msg.toString());
 		}
 		else {
 			return (MBMessageFlag)list.get(0);
@@ -945,7 +960,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1037,7 +1053,8 @@ public class MBMessageFlagPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBMessageFlag ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

@@ -239,7 +239,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -266,12 +267,13 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -284,12 +286,13 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -319,7 +322,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -409,7 +413,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -436,12 +441,13 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByName(name, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -454,12 +460,13 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByName(name, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -488,7 +495,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -646,7 +654,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -686,21 +695,22 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByC_N_T_S(companyId, name, typeId, scope, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += ", ";
-			msg += "typeId=";
-			msg += typeId;
-			msg += ", ";
-			msg += "scope=";
-			msg += scope;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(", ");
+			msg.append("typeId=");
+			msg.append(typeId);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -715,21 +725,22 @@ public class ResourcePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += ", ";
-			msg += "typeId=";
-			msg += typeId;
-			msg += ", ";
-			msg += "scope=";
-			msg += scope;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(", ");
+			msg.append("typeId=");
+			msg.append(typeId);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -786,7 +797,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -956,7 +968,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -996,21 +1009,22 @@ public class ResourcePersistence extends BasePersistence {
 		List list = findByC_T_S_P(companyId, typeId, scope, primKey, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "typeId=";
-			msg += typeId;
-			msg += ", ";
-			msg += "scope=";
-			msg += scope;
-			msg += ", ";
-			msg += "primKey=";
-			msg += primKey;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("typeId=");
+			msg.append(typeId);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(", ");
+			msg.append("primKey=");
+			msg.append(primKey);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -1025,21 +1039,22 @@ public class ResourcePersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "typeId=";
-			msg += typeId;
-			msg += ", ";
-			msg += "scope=";
-			msg += scope;
-			msg += ", ";
-			msg += "primKey=";
-			msg += primKey;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchResourceException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("typeId=");
+			msg.append(typeId);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(", ");
+			msg.append("primKey=");
+			msg.append(primKey);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchResourceException(msg.toString());
 		}
 		else {
 			return (Resource)list.get(0);
@@ -1096,7 +1111,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -1143,29 +1159,30 @@ public class ResourcePersistence extends BasePersistence {
 				primKey);
 
 		if (resource == null) {
-			String msg = "No Resource exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += ", ";
-			msg += "typeId=";
-			msg += typeId;
-			msg += ", ";
-			msg += "scope=";
-			msg += scope;
-			msg += ", ";
-			msg += "primKey=";
-			msg += primKey;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Resource exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(", ");
+			msg.append("typeId=");
+			msg.append(typeId);
+			msg.append(", ");
+			msg.append("scope=");
+			msg.append(scope);
+			msg.append(", ");
+			msg.append("primKey=");
+			msg.append(primKey);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchResourceException(msg);
+			throw new NoSuchResourceException(msg.toString());
 		}
 
 		return resource;
@@ -1327,7 +1344,8 @@ public class ResourcePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Resource ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

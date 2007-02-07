@@ -186,20 +186,21 @@ public class MBDiscussionPersistence extends BasePersistence {
 		MBDiscussion mbDiscussion = fetchByC_C(className, classPK);
 
 		if (mbDiscussion == null) {
-			String msg = "No MBDiscussion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBDiscussion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchDiscussionException(msg);
+			throw new NoSuchDiscussionException(msg.toString());
 		}
 
 		return mbDiscussion;
@@ -324,7 +325,8 @@ public class MBDiscussionPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBDiscussion ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

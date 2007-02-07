@@ -245,7 +245,8 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -277,12 +278,13 @@ public class MBThreadPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBThread exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchThreadException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBThread exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
 			return (MBThread)list.get(0);
@@ -295,12 +297,13 @@ public class MBThreadPersistence extends BasePersistence {
 		List list = findByCategoryId(categoryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No MBThread exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "categoryId=";
-			msg += categoryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchThreadException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No MBThread exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("categoryId=");
+			msg.append(categoryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchThreadException(msg.toString());
 		}
 		else {
 			return (MBThread)list.get(0);
@@ -331,7 +334,8 @@ public class MBThreadPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -423,7 +427,8 @@ public class MBThreadPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.messageboards.model.MBThread ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

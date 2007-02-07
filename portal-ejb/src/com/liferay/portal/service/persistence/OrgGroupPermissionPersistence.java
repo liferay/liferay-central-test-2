@@ -230,7 +230,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -255,12 +256,13 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No OrgGroupPermission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrgGroupPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No OrgGroupPermission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
 			return (OrgGroupPermission)list.get(0);
@@ -274,12 +276,13 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No OrgGroupPermission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrgGroupPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No OrgGroupPermission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
 			return (OrgGroupPermission)list.get(0);
@@ -304,7 +307,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -377,7 +381,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -402,12 +407,13 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		List list = findByPermissionId(permissionId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No OrgGroupPermission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "permissionId=";
-			msg += permissionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrgGroupPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No OrgGroupPermission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("permissionId=");
+			msg.append(permissionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
 			return (OrgGroupPermission)list.get(0);
@@ -421,12 +427,13 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 		List list = findByPermissionId(permissionId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No OrgGroupPermission exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "permissionId=";
-			msg += permissionId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchOrgGroupPermissionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No OrgGroupPermission exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("permissionId=");
+			msg.append(permissionId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchOrgGroupPermissionException(msg.toString());
 		}
 		else {
 			return (OrgGroupPermission)list.get(0);
@@ -451,7 +458,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -535,7 +543,8 @@ public class OrgGroupPermissionPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.OrgGroupPermission ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

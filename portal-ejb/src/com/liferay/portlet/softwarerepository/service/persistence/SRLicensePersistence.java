@@ -228,7 +228,8 @@ public class SRLicensePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -256,12 +257,13 @@ public class SRLicensePersistence extends BasePersistence {
 		List list = findByActive(active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRLicense exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLicenseException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRLicense exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
 			return (SRLicense)list.get(0);
@@ -274,12 +276,13 @@ public class SRLicensePersistence extends BasePersistence {
 		List list = findByActive(active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRLicense exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLicenseException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRLicense exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
 			return (SRLicense)list.get(0);
@@ -302,7 +305,8 @@ public class SRLicensePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -387,7 +391,8 @@ public class SRLicensePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -416,15 +421,16 @@ public class SRLicensePersistence extends BasePersistence {
 		List list = findByA_R(active, recommended, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRLicense exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += ", ";
-			msg += "recommended=";
-			msg += recommended;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLicenseException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRLicense exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(", ");
+			msg.append("recommended=");
+			msg.append(recommended);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
 			return (SRLicense)list.get(0);
@@ -437,15 +443,16 @@ public class SRLicensePersistence extends BasePersistence {
 		List list = findByA_R(active, recommended, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRLicense exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "active=";
-			msg += active;
-			msg += ", ";
-			msg += "recommended=";
-			msg += recommended;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchLicenseException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRLicense exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("active=");
+			msg.append(active);
+			msg.append(", ");
+			msg.append("recommended=");
+			msg.append(recommended);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchLicenseException(msg.toString());
 		}
 		else {
 			return (SRLicense)list.get(0);
@@ -471,7 +478,8 @@ public class SRLicensePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -561,7 +569,8 @@ public class SRLicensePersistence extends BasePersistence {
 				"FROM com.liferay.portlet.softwarerepository.model.SRLicense ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

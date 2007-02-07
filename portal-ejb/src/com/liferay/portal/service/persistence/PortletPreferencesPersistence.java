@@ -247,7 +247,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -275,12 +276,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByPortletId(portletId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "portletId=";
-			msg += portletId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("portletId=");
+			msg.append(portletId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -294,12 +296,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByPortletId(portletId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "portletId=";
-			msg += portletId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("portletId=");
+			msg.append(portletId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -331,7 +334,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -424,7 +428,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -452,12 +457,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByLayoutId(layoutId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -471,12 +477,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByLayoutId(layoutId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -508,7 +515,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -601,7 +609,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -629,12 +638,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -648,12 +658,13 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByOwnerId(ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -685,7 +696,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -801,7 +813,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -833,15 +846,16 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByL_O(layoutId, ownerId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += ", ";
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -855,15 +869,16 @@ public class PortletPreferencesPersistence extends BasePersistence {
 		List list = findByL_O(layoutId, ownerId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PortletPreferences exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "layoutId=";
-			msg += layoutId;
-			msg += ", ";
-			msg += "ownerId=";
-			msg += ownerId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPortletPreferencesException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PortletPreferences exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("layoutId=");
+			msg.append(layoutId);
+			msg.append(", ");
+			msg.append("ownerId=");
+			msg.append(ownerId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPortletPreferencesException(msg.toString());
 		}
 		else {
 			return (PortletPreferences)list.get(0);
@@ -904,7 +919,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -995,7 +1011,8 @@ public class PortletPreferencesPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.PortletPreferences ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

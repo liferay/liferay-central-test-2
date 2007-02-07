@@ -240,7 +240,8 @@ public class ListTypePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -271,12 +272,13 @@ public class ListTypePersistence extends BasePersistence {
 		List list = findByType(type, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ListType exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "type=";
-			msg += type;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchListTypeException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ListType exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("type=");
+			msg.append(type);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
 			return (ListType)list.get(0);
@@ -289,12 +291,13 @@ public class ListTypePersistence extends BasePersistence {
 		List list = findByType(type, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No ListType exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "type=";
-			msg += type;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchListTypeException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No ListType exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("type=");
+			msg.append(type);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchListTypeException(msg.toString());
 		}
 		else {
 			return (ListType)list.get(0);
@@ -323,7 +326,8 @@ public class ListTypePersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -413,7 +417,8 @@ public class ListTypePersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.ListType ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

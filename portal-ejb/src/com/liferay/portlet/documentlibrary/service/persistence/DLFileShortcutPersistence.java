@@ -246,7 +246,8 @@ public class DLFileShortcutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -274,12 +275,13 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileShortcut exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileShortcutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
 			return (DLFileShortcut)list.get(0);
@@ -293,12 +295,13 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		List list = findByFolderId(folderId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileShortcut exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "folderId=";
-			msg += folderId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileShortcutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("folderId=");
+			msg.append(folderId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
 			return (DLFileShortcut)list.get(0);
@@ -329,7 +332,8 @@ public class DLFileShortcutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -445,7 +449,8 @@ public class DLFileShortcutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -477,15 +482,16 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		List list = findByTF_TN(toFolderId, toName, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileShortcut exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "toFolderId=";
-			msg += toFolderId;
-			msg += ", ";
-			msg += "toName=";
-			msg += toName;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileShortcutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("toFolderId=");
+			msg.append(toFolderId);
+			msg.append(", ");
+			msg.append("toName=");
+			msg.append(toName);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
 			return (DLFileShortcut)list.get(0);
@@ -499,15 +505,16 @@ public class DLFileShortcutPersistence extends BasePersistence {
 		List list = findByTF_TN(toFolderId, toName, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No DLFileShortcut exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "toFolderId=";
-			msg += toFolderId;
-			msg += ", ";
-			msg += "toName=";
-			msg += toName;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFileShortcutException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No DLFileShortcut exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("toFolderId=");
+			msg.append(toFolderId);
+			msg.append(", ");
+			msg.append("toName=");
+			msg.append(toName);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFileShortcutException(msg.toString());
 		}
 		else {
 			return (DLFileShortcut)list.get(0);
@@ -547,7 +554,8 @@ public class DLFileShortcutPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -639,7 +647,8 @@ public class DLFileShortcutPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.documentlibrary.model.DLFileShortcut ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());

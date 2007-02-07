@@ -299,7 +299,8 @@ public class TagsAssetPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -335,18 +336,19 @@ public class TagsAssetPersistence extends BasePersistence {
 		List list = findByC_C_C(companyId, className, classPK, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsAsset exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchAssetException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsAsset exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchAssetException(msg.toString());
 		}
 		else {
 			return (TagsAsset)list.get(0);
@@ -361,18 +363,19 @@ public class TagsAssetPersistence extends BasePersistence {
 				count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsAsset exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchAssetException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsAsset exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchAssetException(msg.toString());
 		}
 		else {
 			return (TagsAsset)list.get(0);
@@ -420,7 +423,8 @@ public class TagsAssetPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -515,7 +519,8 @@ public class TagsAssetPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.tags.model.TagsAsset ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 
 			Query q = session.createQuery(query.toString());
@@ -674,16 +679,19 @@ public class TagsAssetPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETTAGSENTRYS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETTAGSENTRYS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "TagsEntry.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("TagsEntry.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("TagsEntry",

@@ -197,20 +197,21 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_N(companyId, name);
 
 		if (group == null) {
-			String msg = "No Group exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "name=";
-			msg += name;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Group exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("name=");
+			msg.append(name);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchGroupException(msg);
+			throw new NoSuchGroupException(msg.toString());
 		}
 
 		return group;
@@ -282,20 +283,21 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_F(companyId, friendlyURL);
 
 		if (group == null) {
-			String msg = "No Group exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "friendlyURL=";
-			msg += friendlyURL;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Group exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("friendlyURL=");
+			msg.append(friendlyURL);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchGroupException(msg);
+			throw new NoSuchGroupException(msg.toString());
 		}
 
 		return group;
@@ -367,23 +369,24 @@ public class GroupPersistence extends BasePersistence {
 		Group group = fetchByC_C_C(companyId, className, classPK);
 
 		if (group == null) {
-			String msg = "No Group exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "className=";
-			msg += className;
-			msg += ", ";
-			msg += "classPK=";
-			msg += classPK;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No Group exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("className=");
+			msg.append(className);
+			msg.append(", ");
+			msg.append("classPK=");
+			msg.append(classPK);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchGroupException(msg);
+			throw new NoSuchGroupException(msg.toString());
 		}
 
 		return group;
@@ -521,7 +524,8 @@ public class GroupPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.Group ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -816,16 +820,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETORGANIZATIONS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETORGANIZATIONS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "Organization_.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("Organization_.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Organization_",
@@ -1054,12 +1061,15 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETPERMISSIONS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETPERMISSIONS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Permission_",
@@ -1287,16 +1297,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETROLES;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETROLES);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "Role_.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("Role_.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("Role_", com.liferay.portal.model.impl.RoleImpl.class);
@@ -1522,16 +1535,19 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETUSERGROUPS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETUSERGROUPS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 			else {
-				sql += "ORDER BY ";
-				sql += "UserGroup.name ASC";
+				sb.append("ORDER BY ");
+				sb.append("UserGroup.name ASC");
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("UserGroup",
@@ -1759,12 +1775,15 @@ public class GroupPersistence extends BasePersistence {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = _SQL_GETUSERS;
+			StringBuffer sb = new StringBuffer();
+			sb.append(_SQL_GETUSERS);
 
 			if (obc != null) {
-				sql += ("ORDER BY " + obc.getOrderBy());
+				sb.append("ORDER BY ");
+				sb.append(obc.getOrderBy());
 			}
 
+			String sql = sb.toString();
 			SQLQuery q = session.createSQLQuery(sql);
 			q.setCacheable(false);
 			q.addEntity("User_", com.liferay.portal.model.impl.UserImpl.class);

@@ -247,7 +247,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -278,12 +279,13 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -296,12 +298,13 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -332,7 +335,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -414,7 +418,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -442,12 +447,13 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "entryId=";
-			msg += entryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("entryId=");
+			msg.append(entryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -460,12 +466,13 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByEntryId(entryId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "entryId=";
-			msg += entryId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("entryId=");
+			msg.append(entryId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -489,7 +496,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -608,7 +616,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -643,15 +652,16 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByC_K(companyId, key, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "key=";
-			msg += key;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("key=");
+			msg.append(key);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -664,15 +674,16 @@ public class TagsPropertyPersistence extends BasePersistence {
 		List list = findByC_K(companyId, key, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += ", ";
-			msg += "key=";
-			msg += key;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPropertyException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(", ");
+			msg.append("key=");
+			msg.append(key);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 		else {
 			return (TagsProperty)list.get(0);
@@ -712,7 +723,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -754,20 +766,21 @@ public class TagsPropertyPersistence extends BasePersistence {
 		TagsProperty tagsProperty = fetchByE_K(entryId, key);
 
 		if (tagsProperty == null) {
-			String msg = "No TagsProperty exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "entryId=";
-			msg += entryId;
-			msg += ", ";
-			msg += "key=";
-			msg += key;
-			msg += StringPool.CLOSE_CURLY_BRACE;
+			StringBuffer msg = new StringBuffer();
+			msg.append("No TagsProperty exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("entryId=");
+			msg.append(entryId);
+			msg.append(", ");
+			msg.append("key=");
+			msg.append(key);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
 			if (_log.isWarnEnabled()) {
-				_log.warn(msg);
+				_log.warn(msg.toString());
 			}
 
-			throw new NoSuchPropertyException(msg);
+			throw new NoSuchPropertyException(msg.toString());
 		}
 
 		return tagsProperty;
@@ -883,7 +896,8 @@ public class TagsPropertyPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portlet.tags.model.TagsProperty ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

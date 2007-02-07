@@ -233,7 +233,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -263,12 +264,13 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -282,12 +284,13 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -311,7 +314,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -409,7 +413,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -442,12 +447,13 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -461,12 +467,13 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByCompanyId(companyId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "companyId=";
-			msg += companyId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("companyId=");
+			msg.append(companyId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -497,7 +504,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -587,7 +595,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -618,15 +627,16 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByG_A(groupId, active, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -640,15 +650,16 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 		List list = findByG_A(groupId, active, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No SRFrameworkVersion exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "groupId=";
-			msg += groupId;
-			msg += ", ";
-			msg += "active=";
-			msg += active;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchFrameworkVersionException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No SRFrameworkVersion exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("groupId=");
+			msg.append(groupId);
+			msg.append(", ");
+			msg.append("active=");
+			msg.append(active);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchFrameworkVersionException(msg.toString());
 		}
 		else {
 			return (SRFrameworkVersion)list.get(0);
@@ -674,7 +685,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -765,7 +777,8 @@ public class SRFrameworkVersionPersistence extends BasePersistence {
 				"FROM com.liferay.portlet.softwarerepository.model.SRFrameworkVersion ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");

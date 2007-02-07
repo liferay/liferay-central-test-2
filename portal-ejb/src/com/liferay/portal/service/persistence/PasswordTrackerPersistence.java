@@ -246,7 +246,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -279,12 +280,13 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		List list = findByUserId(userId, 0, 1, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PasswordTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPasswordTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PasswordTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
 			return (PasswordTracker)list.get(0);
@@ -298,12 +300,13 @@ public class PasswordTrackerPersistence extends BasePersistence {
 		List list = findByUserId(userId, count - 1, count, obc);
 
 		if (list.size() == 0) {
-			String msg = "No PasswordTracker exists with the key ";
-			msg += StringPool.OPEN_CURLY_BRACE;
-			msg += "userId=";
-			msg += userId;
-			msg += StringPool.CLOSE_CURLY_BRACE;
-			throw new NoSuchPasswordTrackerException(msg);
+			StringBuffer msg = new StringBuffer();
+			msg.append("No PasswordTracker exists with the key ");
+			msg.append(StringPool.OPEN_CURLY_BRACE);
+			msg.append("userId=");
+			msg.append(userId);
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+			throw new NoSuchPasswordTrackerException(msg.toString());
 		}
 		else {
 			return (PasswordTracker)list.get(0);
@@ -333,7 +336,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			query.append(" ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
@@ -425,7 +429,8 @@ public class PasswordTrackerPersistence extends BasePersistence {
 			query.append("FROM com.liferay.portal.model.PasswordTracker ");
 
 			if (obc != null) {
-				query.append("ORDER BY " + obc.getOrderBy());
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
 			}
 			else {
 				query.append("ORDER BY ");
