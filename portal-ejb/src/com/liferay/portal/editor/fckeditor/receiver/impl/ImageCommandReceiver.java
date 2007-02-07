@@ -39,6 +39,7 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.File;
 
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -186,11 +187,16 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		root.appendChild(foldersEl);
 
 		if (arg.getCurrentFolder().equals("/")) {
-			List groups = GroupLocalServiceUtil.search(arg.getCompanyId(),
-				null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+			LinkedHashMap groupParams = new LinkedHashMap();
+
+			groupParams.put("usersGroups", arg.getUserId());
+
+			List groups = GroupLocalServiceUtil.search(
+				arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
+				QueryUtil.ALL_POS);
 
 			for (int i = 0; i < groups.size(); ++i) {
-				Group group = (Group) groups.get(i);
+				Group group = (Group)groups.get(i);
 
 				Element folderEl = doc.createElement("Folder");
 
